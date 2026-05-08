@@ -26,14 +26,14 @@
 
 #include "entities/charentity.h"
 #include "entities/npcentity.h"
-#include "los/zone_los.h"
 #include "lua_baseentity.h"
-#include "navmesh.h"
+#include "map/navmesh/navmesh.h"
 #include "trigger_area.h"
 #include "utils/mobutils.h"
 #include "zone.h"
 #include "zone_entities.h"
-#include "zone_mesh.h"
+
+#include <map/ximesh/ximesh.h>
 
 CLuaZone::CLuaZone(CZone* PZone)
 : m_pLuaZone(PZone)
@@ -209,10 +209,32 @@ uint32 CLuaZone::getUptime()
 
 void CLuaZone::reloadNavmesh()
 {
-    if (m_pLuaZone->m_navMesh)
-    {
-        m_pLuaZone->m_navMesh->reload();
-    }
+    m_pLuaZone->RebuildNavMesh();
+}
+
+void CLuaZone::rebuildNavmesh(const sol::table& table)
+{
+    NavMeshConfig config;
+
+    config.cellSize                     = table.get_or("cellSize", config.cellSize);
+    config.cellHeight                   = table.get_or("cellHeight", config.cellHeight);
+    config.walkableSlopeAngle           = table.get_or("walkableSlopeAngle", config.walkableSlopeAngle);
+    config.agentHeight                  = table.get_or("agentHeight", config.agentHeight);
+    config.agentRadius                  = table.get_or("agentRadius", config.agentRadius);
+    config.agentMaxClimb                = table.get_or("agentMaxClimb", config.agentMaxClimb);
+    config.maxEdgeLen                   = table.get_or("maxEdgeLen", config.maxEdgeLen);
+    config.maxSimplificationError       = table.get_or("maxSimplificationError", config.maxSimplificationError);
+    config.minRegionArea                = table.get_or("minRegionArea", config.minRegionArea);
+    config.mergeRegionArea              = table.get_or("mergeRegionArea", config.mergeRegionArea);
+    config.maxVertsPerPoly              = table.get_or("maxVertsPerPoly", config.maxVertsPerPoly);
+    config.detailSampleDist             = table.get_or("detailSampleDist", config.detailSampleDist);
+    config.detailSampleMaxError         = table.get_or("detailSampleMaxError", config.detailSampleMaxError);
+    config.tileSize                     = table.get_or("tileSize", config.tileSize);
+    config.filterLowHangingObstacles    = table.get_or("filterLowHangingObstacles", config.filterLowHangingObstacles);
+    config.filterLedgeSpans             = table.get_or("filterLedgeSpans", config.filterLedgeSpans);
+    config.filterWalkableLowHeightSpans = table.get_or("filterWalkableLowHeightSpans", config.filterWalkableLowHeightSpans);
+
+    m_pLuaZone->RebuildNavMesh(config);
 }
 
 bool CLuaZone::isNavigablePoint(const sol::table& point)
@@ -228,14 +250,7 @@ bool CLuaZone::isNavigablePoint(const sol::table& point)
     };
     // clang-format on
 
-    if (m_pLuaZone->m_navMesh)
-    {
-        return m_pLuaZone->m_navMesh->validPosition(position);
-    }
-    else // No navmesh, just nod and smile
-    {
-        return true;
-    }
+    return m_pLuaZone->navMesh()->validPosition(position);
 }
 
 auto CLuaZone::insertDynamicEntity(sol::table table) -> CBaseEntity*
@@ -329,15 +344,10 @@ sol::table CLuaZone::queryEntitiesByName(const std::string& name)
 
 auto CLuaZone::getTerrainType(const sol::table& position) -> TerrainType
 {
-    if (auto mesh = m_pLuaZone->zoneMesh())
-    {
-        return (*mesh)->getTerrainAt(
-            position["x"].get_or<float>(0),
-            position["y"].get_or<float>(0),
-            position["z"].get_or<float>(0));
-    }
-
-    return TerrainType::None;
+    return m_pLuaZone->xiMesh()->getTerrainAt(
+        position["x"].get_or<float>(0),
+        position["y"].get_or<float>(0),
+        position["z"].get_or<float>(0));
 }
 
 /************************************************************************
@@ -348,15 +358,10 @@ auto CLuaZone::getTerrainType(const sol::table& position) -> TerrainType
 
 auto CLuaZone::getFloorId(const sol::table& position) -> uint8
 {
-    if (auto mesh = m_pLuaZone->zoneMesh())
-    {
-        return (*mesh)->getFloorId(
-            position["x"].get_or<float>(0),
-            position["y"].get_or<float>(0),
-            position["z"].get_or<float>(0));
-    }
-
-    return 0;
+    return m_pLuaZone->xiMesh()->getFloorId(
+        position["x"].get_or<float>(0),
+        position["y"].get_or<float>(0),
+        position["z"].get_or<float>(0));
 }
 
 //======================================================//
@@ -386,6 +391,7 @@ void CLuaZone::Register()
     SOL_REGISTER("getWeather", CLuaZone::getWeather);
     SOL_REGISTER("getUptime", CLuaZone::getUptime);
     SOL_REGISTER("reloadNavmesh", CLuaZone::reloadNavmesh);
+    SOL_REGISTER("rebuildNavmesh", CLuaZone::rebuildNavmesh);
     SOL_REGISTER("isNavigablePoint", CLuaZone::isNavigablePoint);
     SOL_REGISTER("getTerrainType", CLuaZone::getTerrainType);
     SOL_REGISTER("getFloorId", CLuaZone::getFloorId);

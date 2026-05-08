@@ -99,7 +99,7 @@ quest.sections =
 
                 [355] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:tradeComplete()
+                        player:confirmTrade()
                         -- Note: Message display for gil reward is handled by the event
                         player:addGil(900)
                         player:setLocalVar('Quest[2][17]mustZone', 1)

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Hard Slash
 -- Family: Humanoid Great Sword Weaponskill
--- Description: Delivers a single-hit attack.
+-- Description: Delivers a single-hit attack. Damage varies with TP.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,7 +15,8 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     params.baseDamage     = mob:getWeaponDmg()
     params.numHits        = 1
-    params.fTP            = { 3.0, 3.0, 3.0 } -- TODO: Capture fTPs
+    params.fTP            = { 1.5, 1.75, 2.0 }
+    -- params.str_wSC     = 0.3 -- TODO: Capture if mobskill weaponskills have wSC.
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.SLASHING
     params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1

@@ -123,16 +123,17 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
             return;
         }
 
-        CItem* PItem = itemutils::GetItem(PBazaarItem);
+        auto PItemOwn = xi::items::clone(*PBazaarItem);
+        PItemOwn->setCharPrice(0);
+        PItemOwn->setQuantity(this->BuyNum);
+        PItemOwn->setSubType(ITEM_UNLOCKED);
 
-        PItem->setCharPrice(0);
-        PItem->setQuantity(this->BuyNum);
-        PItem->setSubType(ITEM_UNLOCKED);
-
-        if (charutils::AddItem(PChar, LOC_INVENTORY, PItem) == ERROR_SLOTID)
+        const uint8 newSlotID = charutils::AddItem(PChar, LOC_INVENTORY, std::move(PItemOwn));
+        if (newSlotID == ERROR_SLOTID)
         {
             return;
         }
+        CItem* PItem = PBuyerInventory->GetItem(newSlotID);
 
         if (settings::get<bool>("map.AUDIT_PLAYER_BAZAAR"))
         {

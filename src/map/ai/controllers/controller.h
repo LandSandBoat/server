@@ -47,6 +47,7 @@ public:
     virtual bool ChangeTarget(uint16 targid);
     virtual bool Disengage();
     virtual bool WeaponSkill(uint16 targid, uint16 wsid);
+    virtual bool RangedAttack(uint16 targid);
     virtual bool Ability(uint16 targid, uint16 abilityid)
     {
         return false;
@@ -54,6 +55,8 @@ public:
 
     bool IsAutoAttackEnabled() const;
     void SetAutoAttackEnabled(bool);
+    bool IsRangedAttackEnabled() const;
+    void SetRangedAttackEnabled(bool);
     bool IsWeaponSkillEnabled() const;
     void SetWeaponSkillEnabled(bool);
     bool IsMagicCastingEnabled() const;
@@ -65,6 +68,7 @@ protected:
     timer::time_point m_Tick;
     CBattleEntity*    POwner;
     bool              m_AutoAttackEnabled{ true };
+    bool              m_RangedAttackEnabled{ false };
     bool              m_WeaponSkillEnabled{ true };
     bool              m_MagicCastingEnabled{ true };
 };

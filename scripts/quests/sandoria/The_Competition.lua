@@ -87,7 +87,7 @@ quest.sections =
                     -- NPC cycles dialogue
                     if cycle == 0 then
                         player:setLocalVar('Cycle', 1)
-                        return quest:event(309, 0, 0, fishCount)
+                        return quest:event(309, 1, 0, fishCount)
                     elseif cycle == 1 then
                         player:setLocalVar('Cycle', 0)
                         return quest:event(310)
@@ -156,7 +156,7 @@ quest.sections =
                     -- NPC cycles dialogue
                     if cycle == 0 then
                         player:setLocalVar('Cycle', 1)
-                        return quest:event(309, 0, 0, fishCount)
+                        return quest:event(309, 1, 0, fishCount)
                     elseif cycle == 1 then
                         player:setLocalVar('Cycle', 0)
                         return quest:event(310)

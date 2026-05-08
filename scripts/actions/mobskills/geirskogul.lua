@@ -1,7 +1,7 @@
 -----------------------------------
 -- Geirskogul
 -- Family: Humanoid Polearm Weaponskill
--- Description: Gae Assail/Gungnir: Shock Spikes.
+-- Description: Grants Shock Spikes.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,7 +15,8 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     params.baseDamage     = mob:getWeaponDmg()
     params.numHits        = 1
-    params.fTP            = { 2.5, 2.5, 2.5 } -- TODO: Capture fTPs
+    params.fTP            = { 3.0, 3.0, 3.0 }
+    -- params.agi_wSC     = 0.6 -- TODO: Capture if mobskill weaponskills have wSC.
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.PIERCING
     params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
@@ -24,6 +25,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+        mob:addStatusEffect(xi.effect.SHOCK_SPIKES, { power = 10, duration = math.floor(20 * skill:getTP() / 1000), origin = mob })
     end
 
     return info.damage

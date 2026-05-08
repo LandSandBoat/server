@@ -99,6 +99,8 @@ quest.sections =
                     quest:setVar(player, 'Prog', 2)
                 end,
             },
+
+            ['Solitary_Ant'] = quest:event(2):replaceDefault(),
         },
 
         [xi.zone.VUNKERL_INLET_S] =

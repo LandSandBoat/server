@@ -24,8 +24,15 @@
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
+#include "common/types/badge.h"
 
 #include "map/enums/item_flag.h"
+#include "map/enums/item_state.h"
+
+namespace xi::items::detail
+{
+struct ItemAccess;
+} // namespace xi::items::detail
 
 // The main type of item m_type
 enum ITEM_TYPE
@@ -55,6 +62,9 @@ class CItem
 {
 public:
     CItem(uint16 id);
+    CItem(const CItem& other);
+    auto operator=(const CItem&) -> CItem& = delete;
+
     virtual ~CItem();
 
     uint16 getID() const;
@@ -91,17 +101,17 @@ public:
     void setSlotID(uint8 SlotID);
     void setSent(bool sent);
 
-    const std::string& getName();
+    const std::string& getName() const;
     void               setName(const std::string& name);
 
-    const std::string& getSender();
+    const std::string& getSender() const;
     void               setSender(const std::string& sender);
 
-    const std::string& getReceiver();
+    const std::string& getReceiver() const;
     void               setReceiver(const std::string& receiver);
 
-    virtual const std::string getSignature();
-    virtual void              setSignature(const std::string& signature);
+    virtual auto getSignature() const -> const std::string;
+    virtual void setSignature(const std::string& signature);
 
     auto isDirty() const -> bool;
     void setDirty(bool dirty);
@@ -109,6 +119,10 @@ public:
     bool isSoultrapper() const;
 
     bool isMannequin() const;
+
+    auto state() const -> ItemState;
+    void setState(ItemState newState, xi::Badge<xi::items::detail::ItemAccess>);
+    auto isBusy() const -> bool;
 
     static constexpr uint32_t extra_size = 0x18;
     uint8                     m_extra[extra_size]{};
@@ -152,6 +166,8 @@ private:
     std::string m_name;
     std::string m_send;
     std::string m_recv;
+
+    ItemState state_{ ItemState::Free };
 };
 
 #endif

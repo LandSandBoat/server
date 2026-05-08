@@ -330,7 +330,7 @@ auto isRightRecipe(CCharEntity* PChar) -> bool
         }
 
         // Check if recipe result is rare and player already owns a copy.
-        const CItem* PItem = itemutils::GetItemPointer(recipe.Result);
+        const CItem* PItem = xi::items::lookup(recipe.Result);
         if (PItem && PItem->hasFlag(ItemFlag::Rare) && charutils::HasItem(PChar, recipe.Result))
         {
             PChar->pushPacket<GP_SERV_COMMAND_COMBINE_ANS>(PChar, SynthesisResult::CancelRareItem);
@@ -579,9 +579,16 @@ auto calculateSynthResult(CCharEntity* PChar) -> uint8
         return SYNTHESIS_SUCCESS;
     }
 
+    // Early return: T0 cannot upgrade HQ.
+    if (finalHQTier <= 1)
+    {
+        return SYNTHESIS_HQ;
+    }
+
     // Calculate HQ2 and HQ3 upgrades.
-    uint8 upgradeHQ = 0;
-    for (uint8 tries = 0; tries < 2; ++tries)
+    uint8 allowedUpgrades = (finalHQTier == 2 ? 1 : 2);
+    uint8 upgradeHQ       = 0;
+    for (uint8 tries = 0; tries < allowedUpgrades; ++tries)
     {
         if (xirand::GetRandomNumber(0.0f, 100.f) <= 25.0f) // 25% Chance to upgrade HQ
         {

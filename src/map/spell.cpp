@@ -142,7 +142,7 @@ bool CSpell::isBuff() const
 
 bool CSpell::tookEffect() const
 {
-    return !(m_message == MsgBasic::MagicNoEffect || m_message == MsgBasic::MagicResistedTarget || m_message == MsgBasic::TargetNoEffect || m_message == MsgBasic::MagicResisted);
+    return !(m_message == MsgBasic::MagicNoEffect || m_message == MsgBasic::MagicResistedTarget || m_message == MsgBasic::TargetNoEffect || m_message == MsgBasic::MagicResisted || m_message == MsgBasic::MagicCompleteResist || m_message == MsgBasic::MagicFail);
 }
 
 bool CSpell::hasMPCost()

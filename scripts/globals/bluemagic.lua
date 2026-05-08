@@ -361,8 +361,8 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
 
     finaldmg = math.floor(finaldmg * xi.combat.damage.calculateDamageAdjustment(target, true, false, false, false))
 
-    if finaldmg <= 0 then
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+    if hitslanded == 0 then
+        spell:setMsg(xi.msg.basic.MAGIC_FAIL)
     end
 
     return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params, trickAttackTarget)

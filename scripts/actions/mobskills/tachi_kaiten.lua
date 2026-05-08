@@ -1,7 +1,7 @@
 -----------------------------------
--- Tachi:Kaiten
+-- Tachi: Kaiten
 -- Family: Humanoid Great Katana Weaponskill
--- Description: Amanomurakumo/Totsukanotsurugi: Temporarily increases amount of TP stored with each hit.
+-- Description: Delivers a single-hit attack.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,7 +15,8 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     params.baseDamage     = mob:getWeaponDmg()
     params.numHits        = 1
-    params.fTP            = { 2.5, 2.5, 2.5 } -- TODO: Capture fTPs
+    params.fTP            = { 3.0, 3.0, 3.0 }
+    -- params.str_wSC     = 0.6 -- TODO: Capture if mobskill weaponskills have wSC.
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.SLASHING
     params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1

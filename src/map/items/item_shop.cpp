@@ -32,6 +32,15 @@ CItemShop::CItemShop(uint16 id)
 
 CItemShop::~CItemShop() = default;
 
+CItemShop::CItemShop(const CItemShop& other)
+: CItem(other)
+, m_MinPrice(other.m_MinPrice)
+, m_MaxPrice(other.m_MaxPrice)
+, m_DailyIncrease(other.m_DailyIncrease)
+, m_InitialQuantity(other.m_InitialQuantity)
+{
+}
+
 uint32 CItemShop::getMinPrice() const
 {
     return m_MinPrice;

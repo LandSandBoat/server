@@ -32,6 +32,8 @@ struct MapSession;
 class MapSessionContainer
 {
 public:
+    explicit MapSessionContainer(Scheduler& scheduler);
+
     auto createSession(IPP ipp) -> MapSession*;
     auto createPendingSession(uint32 charId) -> MapSession*;
 
@@ -51,6 +53,7 @@ public:
     void destroyPendingSession(uint32 charId);
 
 private:
+    Scheduler&                                    scheduler_;
     std::map<IPP, std::unique_ptr<MapSession>>    sessions_;         // Confirmed sessions mapped by IP
     std::map<uint32, std::unique_ptr<MapSession>> pending_sessions_; // Pending sessions notified via IPC that a character may be arriving
 };

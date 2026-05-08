@@ -117,9 +117,6 @@ INSERT INTO `mob_pool_mods` VALUES (1234,4,4,1); -- SIGHT_RANGE: 4
 -- Exoplates
 INSERT INTO `mob_pool_mods` VALUES (1270,39,-1,1); -- SHARE_POS: -1
 
--- Fafnir
-INSERT INTO `mob_pool_mods` VALUES (1280,368,70,0); -- REGAIN: 70
-
 -- Faust
 INSERT INTO `mob_pool_mods` VALUES (1306,4,30,1); -- SIGHT_RANGE: 30
 

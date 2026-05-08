@@ -77,6 +77,7 @@ end
 entity.onMobSpawn = function(mob)
     mob:setMobSkillAttack(0)
     mob:setAnimationSub(0)
+    mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_TURN))
 
     -- Level 90 + 2 + 53 = 145 Base Weapon Damage
     mob:setMod(xi.mod.UDMGRANGE, -5000)

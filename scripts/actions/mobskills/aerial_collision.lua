@@ -31,7 +31,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         -- -38% ~ -50% defense. Decays every 2 ticks by 10% -> 6% -> 6% -> 4% -> 4% -> 4% and then wears off. Lower durations just end without decaying fully.
         local power = 50 - math.min(10, 5 * math.floor((skill:getTP() - 1000) / 1000))
 
-        xi.mobskills.mobStatusEffectMove(mob, target, skill, xi.effect.DEFENSE_DOWN, power, 0, math.random(45, 75))
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DEFENSE_DOWN, power, 0, math.random(45, 75))
     end
 
     return info.damage

@@ -39,7 +39,7 @@ xi = xi or {}
 xi.chocoboRaising = xi.chocoboRaising or {}
 xi.chocoboRaising.chocoState = xi.chocoboRaising.chocoState or {}
 
--- local debug = utils.getDebugPlayerPrinter(xi.settings.main.DEBUG_CHOCOBO_RAISING)
+local debug = utils.getDebugPlayerPrinter(xi.settings.main.DEBUG_CHOCOBO_RAISING)
 
 -----------------------------------
 -- Settings
@@ -108,7 +108,7 @@ xi.chocoboRaising.onTradeVCSTrainer = function(player, npc, trade)
         return
     end
 
-    xi.chocoboRaising.startCutscene(player, npc, trade)
+    xi.chocoboRaising.onTrade(player, npc, trade)
 end
 
 xi.chocoboRaising.onTriggerVCSTrainer = function(player, npc)
@@ -118,7 +118,7 @@ xi.chocoboRaising.onTriggerVCSTrainer = function(player, npc)
         return
     end
 
-    xi.chocoboRaising.startCutscene(player, npc, nil)
+    xi.chocoboRaising.onTrigger(player, npc)
 end
 
 xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
@@ -138,6 +138,8 @@ xi.chocoboRaising.onEventFinishVCSTrainer = function(player, csid, option, npc)
     local tradeCsid  = xi.chocoboRaising.csidTable[player:getZoneID()][3]
     local chocoState = xi.chocoboRaising.chocoState[player:getID()]
 
+    debug(string.format('onEventFinishVCSTrainer: csid: %i, option: %i', csid, option))
+
     if csid == tradeCsid and option == 252 then
         -- TODO: Validate this! Really validate this!
         --     : It has to be the same egg item as was traded at the start of the CS!
@@ -150,15 +152,22 @@ xi.chocoboRaising.onEventFinishVCSTrainer = function(player, csid, option, npc)
         if player:setChocoboRaisingInfo(newChoco) then
             player:confirmTrade()
         end
-    elseif csid == mainCsid and option == 215 then
+    elseif csid == mainCsid then
         if chocoState == nil then
-            print('ERROR! onEventFinishVCSTrainer \'chocoState\' is nil!')
+            if option == 215 then
+                print('ERROR! onEventFinishVCSTrainer \'chocoState\' is nil!')
+            end
 
             return
         end
 
-        xi.chocoboRaising.updateChocoState(player, chocoState)
+        if chocoState.retiring then
+            -- TODO: Hand over VCS registration card
+            -- TODO: Hand over Color VCS plaque
+            player:deleteRaisedChocobo()
+            xi.chocoboRaising.chocoState[player:getID()] = nil
+        else
+            xi.chocoboRaising.updateChocoState(player, chocoState)
+        end
     end
-
-    -- TODO: Hand out cards and plaques etc.
 end

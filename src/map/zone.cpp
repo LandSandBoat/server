@@ -40,22 +40,22 @@ constexpr std::uint16_t WeatherCycle = 2160;
 #include "common/vana_time.h"
 
 #include <cstring>
+#include <filesystem>
 
 #include "battlefield.h"
 #include "enums/loot_recast.h"
 #include "ipc_client.h"
 #include "latent_effect_container.h"
-#include "los/zone_los.h"
+#include "map/navmesh/navmesh.h"
+#include "map/navmesh/navmesh_builder.h"
 #include "map_engine.h"
 #include "monstrosity.h"
-#include "navmesh.h"
 #include "party.h"
 #include "recast_container.h"
 #include "spawn_handler.h"
 #include "status_effect_container.h"
 #include "treasure_pool.h"
 #include "zone_entities.h"
-#include "zone_mesh.h"
 
 #include "entities/npcentity.h"
 #include "entities/petentity.h"
@@ -66,9 +66,13 @@ constexpr std::uint16_t WeatherCycle = 2160;
 #include "utils/charutils.h"
 #include "utils/moduleutils.h"
 
+#include <map/ximesh/ximesh.h>
+
 CZone::CZone(Scheduler& scheduler, MapConfig config, ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction)
 : scheduler_(scheduler)
 , config_(config)
+, navMesh_{ std::make_unique<NullNavMesh>() }
+, xiMesh_{ std::make_unique<NullXiMesh>() }
 , m_zoneID(ZoneID)
 , m_zoneType(ZONE_TYPE::UNKNOWN)
 , m_regionID(RegionID)
@@ -77,9 +81,6 @@ CZone::CZone(Scheduler& scheduler, MapConfig config, ZONEID ZoneID, REGION_TYPE 
 , m_WeatherChangeTime(0)
 {
     TracyZoneScoped;
-
-    m_useNavMesh = false;
-    std::ignore  = m_useNavMesh;
 
     m_TreasurePool       = nullptr;
     m_BattlefieldHandler = nullptr;
@@ -257,23 +258,23 @@ const QueryByNameResult_t& CZone::queryEntitiesByName(const std::string& pattern
     std::vector<CBaseEntity*> entities;
 
     // TODO: Make work for instances
-    // clang-format off
-    ForEachNpc([&](CNpcEntity* PNpc)
-    {
-        if (matches(PNpc->getName(), pattern))
+    ForEachNpc(
+        [&](CNpcEntity* PNpc)
         {
-            entities.emplace_back(PNpc);
-        }
-    });
+            if (matches(PNpc->getName(), pattern))
+            {
+                entities.emplace_back(PNpc);
+            }
+        });
 
-    ForEachMob([&](CMobEntity* PMob)
-    {
-        if (matches(PMob->getName(), pattern))
+    ForEachMob(
+        [&](CMobEntity* PMob)
         {
-            entities.emplace_back(PMob);
-        }
-     });
-    // clang-format on
+            if (matches(PMob->getName(), pattern))
+            {
+                entities.emplace_back(PMob);
+            }
+        });
 
     m_queryByNameResults[pattern] = std::move(entities);
     return m_queryByNameResults[pattern];
@@ -464,44 +465,64 @@ void CZone::LoadZoneSettings()
     }
 }
 
-void CZone::LoadNavMesh()
+auto CZone::LoadNavMesh() -> Task<void>
 {
-    TracyZoneScoped;
+    auto       navMesh = std::make_unique<CNavMesh>(static_cast<uint16>(GetID()));
+    const auto file    = fmt::format("navmeshes/{}.nav", getName());
 
-    if (m_navMesh == nullptr)
+    if (!config_.rebuildNavmeshes && navMesh->load(file))
     {
-        m_navMesh = std::make_unique<CNavMesh>(static_cast<uint16>(GetID()));
+        navMesh_ = std::move(navMesh);
+        co_return;
     }
 
-    char file[255];
-    std::memset(file, 0, sizeof(file));
-    snprintf(file, sizeof(file), "navmeshes/%s.nav", getName().c_str());
+    NavMeshBuilder builder(*xiMesh_);
 
-    if (!m_navMesh->load(file))
+    auto* dtNavMesh = co_await builder.buildAsync(scheduler_, getName(), static_cast<uint16>(GetID()), NavMeshConfig{});
+    if (dtNavMesh && navMesh->installNavMesh(dtNavMesh))
     {
-        DebugNavmesh("CZone::LoadNavMesh: Cannot load navmesh file (%s)", file);
-        m_navMesh = nullptr;
+        navMesh->save(file);
+        navMesh_ = std::move(navMesh);
+        co_return;
     }
+
+    DebugNavmesh("CZone::LoadNavMesh: Build failed for zone (%s)", getName().c_str());
 }
 
-auto CZone::zoneMesh() const -> Maybe<CZoneMesh*>
+void CZone::RebuildNavMesh(const NavMeshConfig& config)
 {
-    if (zoneMesh_ && zoneMesh_->isLoaded())
-    {
-        return zoneMesh_.get();
-    }
+    const auto  zoneName  = getName();
+    const auto  zoneID    = static_cast<uint16>(GetID());
+    const auto* xiMeshPtr = xiMesh_.get();
 
-    return std::nullopt;
+    scheduler_.postToMainThread(
+        [this, zoneName, zoneID, config, xiMeshPtr]() -> Task<void>
+        {
+            NavMeshBuilder builder(*xiMeshPtr);
+
+            auto* dtNavMesh = co_await builder.buildAsync(scheduler_, zoneName, zoneID, config);
+            auto  navMesh   = std::make_unique<CNavMesh>(zoneID);
+            if (dtNavMesh && navMesh->installNavMesh(dtNavMesh))
+            {
+                navMesh->save(fmt::format("navmeshes/{}.nav", zoneName));
+                navMesh_ = std::move(navMesh);
+            }
+        });
 }
 
-void CZone::LoadZoneMesh()
+auto CZone::navMesh() const -> INavMesh*
+{
+    return navMesh_.get();
+}
+
+auto CZone::xiMesh() const -> IXiMesh*
+{
+    return xiMesh_.get();
+}
+
+void CZone::LoadXiMesh()
 {
     TracyZoneScoped;
-
-    if (zoneMesh_ == nullptr)
-    {
-        zoneMesh_ = std::make_unique<CZoneMesh>();
-    }
 
     // TODO: Align ximesh filenames with zone_settings names so this isn't needed.
     auto meshName = std::string(getName());
@@ -537,38 +558,25 @@ void CZone::LoadZoneMesh()
         meshName = "Ship_bound_for_Mhaura_ID-228";
     }
 
-    // Maquette_Abdhaljs-Legion_A -> Maquette_Abdhaljs-Legion
-    // Maquette_Abdhaljs-Legion_B -> Maquette_Abdhaljs-Legion
+    // Maquette_Abdhaljs-Legion_A -> Maquette_Abdhaljs-LegionA
+    // Maquette_Abdhaljs-Legion_B -> Maquette_Abdhaljs-LegionB
     if (meshName.starts_with("Maquette_Abdhaljs-Legion_"))
     {
-        meshName = "Maquette_Abdhaljs-Legion";
+        meshName.erase(meshName.size() - 2, 1);
     }
 
     const auto file = fmt::format("ximeshes/{}.ximesh", meshName);
-    if (!zoneMesh_->load(file))
+    if (std::filesystem::exists(file))
     {
-        DebugNavmesh("CZone::LoadZoneMesh: Cannot load zone mesh (%s)", file.c_str());
-        zoneMesh_ = nullptr;
+        try
+        {
+            xiMesh_ = std::make_unique<XiMesh>(file);
+        }
+        catch (const std::exception& e)
+        {
+            ShowErrorFmt("CZone::LoadXiMesh: Failed to load '{}': {}", file, e.what());
+        }
     }
-}
-
-void CZone::LoadZoneLos()
-{
-    TracyZoneScoped;
-
-    if (GetTypeMask() & ZONE_TYPE::CITY || (m_miscMask & MISC_LOS_OFF))
-    {
-        // Skip cities and zones with line of sight turned off
-        return;
-    }
-
-    if (lineOfSight)
-    {
-        // Clean up previous object if one exists.
-        lineOfSight = nullptr;
-    }
-
-    lineOfSight = ZoneLos::Load((uint16)GetID(), fmt::sprintf("losmeshes/%s.obj", getName()));
 }
 
 void CZone::InsertMOB(CBaseEntity* PMob)

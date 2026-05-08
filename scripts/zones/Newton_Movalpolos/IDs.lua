@@ -32,6 +32,10 @@ zones[xi.zone.NEWTON_MOVALPOLOS] =
         MIMIC                 = GetFirstID('Mimic'),
         BUGBEAR_MATMAN        = GetFirstID('Bugbear_Matman'),
         GOBLIN_COLLECTOR      = GetFirstID('Goblin_Collector'),
+        GOBLIN_SWORDSMAN      = GetTableOfIDs('Goblin_Swordsman'),
+        MOBLIN_AIDMAN         = GetTableOfIDs('Moblin_Aidman'),
+        MOBLIN_ENGINEMAN      = GetTableOfIDs('Moblin_Engineman'),
+        MOBLIN_TOPSMAN        = GetTableOfIDs('Moblin_Topsman'),
     },
     npc =
     {

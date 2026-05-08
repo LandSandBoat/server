@@ -117,7 +117,7 @@ entity.onMobFight = function(mob, target)
             end)
 
         elseif flarePhase < 9 then
-            mob:messageText(mob, ID.text.BAHAMUT_TAUNT + 2)
+            mob:messageText(mob, ID.text.BAHAMUT_TAUNT + (math.random(0, 1) == 0 and 2 or 14))
             mob:setLocalVar('messagePlayed', 2)
 
         elseif flarePhase == 9 then

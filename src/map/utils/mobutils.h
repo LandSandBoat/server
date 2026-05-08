@@ -58,7 +58,6 @@ void SetupRoaming(CMobEntity* PMob);
 void SetupDynamisMob(CMobEntity* PMob);
 void SetupBattlefieldMob(CMobEntity* PMob);
 void SetupEventMob(CMobEntity* PMob);
-void SetupNMMob(CMobEntity* PMob);
 void SetupDungeonInstanceMob(CMobEntity* PMob);
 void SetupPetSkills(CMobEntity* PMob);
 

@@ -97,6 +97,28 @@ CPMAddPackage(
 ) # defines: fast_obj
 
 CPMAddPackage(
+    NAME earcut_hpp
+    GITHUB_REPOSITORY mapbox/earcut.hpp
+    GIT_TAG v2.2.4
+    DOWNLOAD_ONLY ON
+) # defines: earcut_hpp
+if(earcut_hpp_ADDED) # header-only
+    add_library(earcut_hpp INTERFACE)
+    target_include_directories(earcut_hpp SYSTEM INTERFACE ${earcut_hpp_SOURCE_DIR}/include/)
+endif()
+
+CPMAddPackage(
+    NAME rapidyaml
+    GITHUB_REPOSITORY biojppm/rapidyaml
+    GIT_TAG v0.12.0
+    SYSTEM ON
+    OPTIONS
+        "RYML_BUILD_TOOLS OFF"
+        "RYML_BUILD_API OFF"
+        "RYML_INSTALL OFF"
+) # defines: ryml
+
+CPMAddPackage(
     NAME argparse
     GITHUB_REPOSITORY p-ranav/argparse
     GIT_TAG d924b84eba1f0f0adf38b20b7b4829f6f65b6570
@@ -296,6 +318,8 @@ set(MAP_ONLY_EXTERNAL_LIBS
     RecastNavigation::Recast
     RecastNavigation::Detour
     fast_obj
+    earcut_hpp
+    ryml
     zlibstatic
 )
 

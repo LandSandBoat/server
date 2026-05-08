@@ -65,9 +65,12 @@ entity.spawnPoints =
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
+    mob:setMobMod(xi.mobMod.GIL_MAX, -1) -- Does not drop gil.
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
-    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 48) -- 140 total weapon damage
-    mob:setMod(xi.mod.ATT, 435)
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 50) -- 142 total weapon damage
+    mob:setMod(xi.mod.REGAIN, 100) -- Ability every 30 seconds below 25% HP
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
+    mob:setMod(xi.mod.ATT, 489) -- 550 Total Attack
     mob:setMod(xi.mod.REGEN, 20) -- 1% every 90s
 
     -- Despawn the ???

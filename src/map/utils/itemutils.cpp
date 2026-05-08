@@ -42,15 +42,18 @@
 #include "lua/luautils.h"
 #include "packets/c2s/0x02b_translate.h"
 
-std::array<CItem*, MAX_ITEMID>      g_pItemList; // global array of pointers to game items
+namespace
+{
+std::array<std::unique_ptr<CItem>, MAX_ITEMID> itemTemplates;
+std::unique_ptr<CItemWeapon>                   unarmedItem;
+std::unique_ptr<CItemWeapon>                   unarmedH2HItem;
+} // namespace
+
 std::array<DropList_t*, MAX_DROPID> g_pDropList; // global array of monster droplist items
 std::array<LootList_t*, MAX_LOOTID> g_pLootList; // global array of BCNM lootlist items
 
 // Translation lookup: language -> (name -> {item id, translated name})
 std::map<GP_CLI_COMMAND_TRANSLATE_INDEX, std::unordered_map<std::string, std::pair<uint16, std::string>>> g_TranslateMap;
-
-CItemWeapon* PUnarmedItem;
-CItemWeapon* PUnarmedH2HItem;
 
 DropItem_t::DropItem_t(uint8 DropType, uint16 ItemID, uint16 DropRate)
 : DropType(DropType)
@@ -111,171 +114,94 @@ void LootContainer::ForEachItem(const std::function<void(const DropItem_t&)>& fu
     }
 }
 
-/************************************************************************
- *                                                                       *
- *  Actually methods of working with a global collection of items        *
- *                                                                       *
- ************************************************************************/
-
-namespace itemutils
+namespace xi::items
 {
 
-/************************************************************************
- *                                                                       *
- *  Create an empty instance of the item by ID (private method)          *
- *                                                                       *
- ************************************************************************/
-
-CItem* CreateItem(const uint16 itemId, const ItemType itemType)
+auto lookup(const uint16 itemId) -> const CItem*
 {
-    switch (itemType)
+    if (itemId >= MAX_ITEMID)
     {
-        case ItemType::General:
-            return new CItemGeneral(itemId);
-        case ItemType::Linkshell:
-            return new CItemLinkshell(itemId);
-        case ItemType::Furnishing:
-            return new CItemFurnishing(itemId);
-        case ItemType::Puppet:
-            return new CItemPuppet(itemId);
-        case ItemType::Usable:
-            return new CItemUsable(itemId);
-        case ItemType::Equipment:
-            return new CItemEquipment(itemId);
-        case ItemType::Weapon:
-            return new CItemWeapon(itemId);
-        case ItemType::Currency:
-            return new CItemCurrency(itemId);
-        default:
-        {
-            ShowErrorFmt("CreateItem({}): Unknown item type {}", itemId, static_cast<uint8>(itemType));
-            return new CItemGeneral(itemId);
-        }
-    }
-}
-
-/************************************************************************
- *                                                                       *
- *  Create a new copy of the item ID                                     *
- *                                                                       *
- ************************************************************************/
-
-CItem* GetItem(const uint16 ItemID)
-{
-    if (ItemID == 0xFFFF)
-    {
-        return new CItemCurrency(ItemID);
-    }
-
-    if (ItemID < MAX_ITEMID && g_pItemList[ItemID] != nullptr)
-    {
-        return GetItem(g_pItemList[ItemID]);
-    }
-
-    return nullptr;
-}
-
-/************************************************************************
- *                                                                       *
- *  Create a copy of the item                                            *
- *                                                                       *
- ************************************************************************/
-
-CItem* GetItem(CItem* PItem)
-{
-    if (PItem == nullptr)
-    {
-        ShowWarning("CItem::GetItem() - PItem is null.");
+        ShowWarning("xi::items::lookup: itemId %u too big", itemId);
         return nullptr;
     }
 
-    if (PItem->isType(ITEM_WEAPON))
+    return itemTemplates[itemId].get();
+}
+
+auto clone(const CItem& source) -> std::unique_ptr<CItem>
+{
+    if (source.isType(ITEM_WEAPON))
     {
-        return new CItemWeapon(*static_cast<CItemWeapon*>(PItem));
+        return std::make_unique<CItemWeapon>(static_cast<const CItemWeapon&>(source));
     }
 
-    if (PItem->isType(ITEM_EQUIPMENT))
+    if (source.isType(ITEM_EQUIPMENT))
     {
-        return new CItemEquipment(*static_cast<CItemEquipment*>(PItem));
+        return std::make_unique<CItemEquipment>(static_cast<const CItemEquipment&>(source));
     }
 
-    if (PItem->isType(ITEM_USABLE))
+    if (source.isType(ITEM_USABLE))
     {
-        return new CItemUsable(*static_cast<CItemUsable*>(PItem));
+        return std::make_unique<CItemUsable>(static_cast<const CItemUsable&>(source));
     }
 
-    if (PItem->isType(ITEM_LINKSHELL))
+    if (source.isType(ITEM_LINKSHELL))
     {
-        return new CItemLinkshell(*static_cast<CItemLinkshell*>(PItem));
+        return std::make_unique<CItemLinkshell>(static_cast<const CItemLinkshell&>(source));
     }
 
-    if (PItem->isType(ITEM_FURNISHING))
+    if (source.isType(ITEM_FURNISHING))
     {
-        return new CItemFurnishing(*static_cast<CItemFurnishing*>(PItem));
+        return std::make_unique<CItemFurnishing>(static_cast<const CItemFurnishing&>(source));
     }
 
-    if (PItem->isType(ITEM_PUPPET))
+    if (source.isType(ITEM_PUPPET))
     {
-        return new CItemPuppet(*static_cast<CItemPuppet*>(PItem));
+        return std::make_unique<CItemPuppet>(static_cast<const CItemPuppet&>(source));
     }
 
-    if (PItem->isType(ITEM_GENERAL))
+    if (source.isType(ITEM_GENERAL))
     {
-        return new CItemGeneral(*static_cast<CItemGeneral*>(PItem));
+        return std::make_unique<CItemGeneral>(static_cast<const CItemGeneral&>(source));
     }
 
-    if (PItem->isType(ITEM_CURRENCY))
+    if (source.isType(ITEM_CURRENCY))
     {
-        return new CItemCurrency(*static_cast<CItemCurrency*>(PItem));
+        return std::make_unique<CItemCurrency>(static_cast<const CItemCurrency&>(source));
     }
 
     return nullptr;
 }
 
-/************************************************************************
- *                                                                       *
- *  Get a pointer to an item (read-only)                                 *
- *                                                                       *
- ************************************************************************/
-
-CItem* GetItemPointer(uint16 ItemID)
+auto spawn(uint16 itemId) -> std::unique_ptr<CItem>
 {
-    if (ItemID < MAX_ITEMID)
+    if (itemId == 0xFFFF)
     {
-        // False positive: this is CItem*, so it's OK
-        // cppcheck-suppress CastIntegerToAddressAtReturn
-        return g_pItemList[ItemID];
+        return std::make_unique<CItemCurrency>(itemId);
     }
-    ShowWarning("ItemID %u too big", ItemID);
+
+    if (const CItem* tpl = lookup(itemId))
+    {
+        return clone(*tpl);
+    }
+
     return nullptr;
 }
 
-/************************************************************************
- *                                                                       *
- *  True if pointer points to a read-only g_pItemList array item         *
- *                                                                       *
- ************************************************************************/
-
-bool IsItemPointer(CItem* item)
+auto unarmed() -> CItemWeapon*
 {
-    return g_pItemList[item->getID()] == item;
+    return unarmedItem.get();
 }
 
-CItemWeapon* GetUnarmedItem()
+auto unarmedH2H() -> CItemWeapon*
 {
-    return PUnarmedItem;
+    return unarmedH2HItem.get();
 }
 
-CItemWeapon* GetUnarmedH2HItem()
-{
-    return PUnarmedH2HItem;
-}
+} // namespace xi::items
 
-/************************************************************************
- *                                                                       *
- *  Get the monsters item drop list                                      *
- *                                                                       *
- ************************************************************************/
+namespace itemutils
+{
 
 DropList_t* GetDropList(uint16 DropID)
 {
@@ -297,6 +223,33 @@ DropList_t* GetDropList(uint16 DropID)
 
 void LoadItemList()
 {
+    // Bootstrap item templates from DB
+    auto buildFromType = [](uint16 itemId, ItemType itemType) -> std::unique_ptr<CItem>
+    {
+        switch (itemType)
+        {
+            case ItemType::General:
+                return std::make_unique<CItemGeneral>(itemId);
+            case ItemType::Linkshell:
+                return std::make_unique<CItemLinkshell>(itemId);
+            case ItemType::Furnishing:
+                return std::make_unique<CItemFurnishing>(itemId);
+            case ItemType::Puppet:
+                return std::make_unique<CItemPuppet>(itemId);
+            case ItemType::Usable:
+                return std::make_unique<CItemUsable>(itemId);
+            case ItemType::Equipment:
+                return std::make_unique<CItemEquipment>(itemId);
+            case ItemType::Weapon:
+                return std::make_unique<CItemWeapon>(itemId);
+            case ItemType::Currency:
+                return std::make_unique<CItemCurrency>(itemId);
+            default:
+                ShowErrorFmt("LoadItemList({}): Unknown item type {}", itemId, static_cast<uint8>(itemType));
+                return std::make_unique<CItemGeneral>(itemId);
+        }
+    };
+
     auto rset = db::preparedStmt("SELECT "
                                  "b.itemId,b.name,b.sortname,b.name_jp,b.type,b.stackSize,b.flags,"
                                  "b.aH,b.BaseSell,b.subid,"
@@ -320,7 +273,8 @@ void LoadItemList()
                                  MAX_ITEMID);
     FOR_DB_MULTIPLE_RESULTS(rset)
     {
-        CItem* PItem = CreateItem(rset->get<uint16>("itemId"), rset->get<ItemType>("type"));
+        auto   tplOwn = buildFromType(rset->get<uint16>("itemId"), rset->get<ItemType>("type"));
+        CItem* PItem  = tplOwn.get();
 
         if (PItem != nullptr)
         {
@@ -390,7 +344,7 @@ void LoadItemList()
                 static_cast<CItemWeapon*>(PItem)->setILvlParry(rset->get<uint16>("ilvl_parry"));
                 static_cast<CItemWeapon*>(PItem)->setILvlMacc(rset->get<uint16>("ilvl_macc"));
                 static_cast<CItemWeapon*>(PItem)->setBaseDelay(rset->get<uint16>("delay"));
-                static_cast<CItemWeapon*>(PItem)->setDelay((rset->get<uint16>("delay") * 1000) / 60);
+                static_cast<CItemWeapon*>(PItem)->setDelay(rset->get<uint16>("delay"));
                 static_cast<CItemWeapon*>(PItem)->setDamage(rset->get<uint16>("dmg"));
                 static_cast<CItemWeapon*>(PItem)->setDmgType(rset->get<DAMAGE_TYPE>("dmgType"));
                 static_cast<CItemWeapon*>(PItem)->setMaxHit(rset->get<uint8>("hit"));
@@ -434,7 +388,7 @@ void LoadItemList()
                 PFurnishing->setPlacement(rset->get<FurnishingPlacement>("furn_placement"));
             }
 
-            g_pItemList[PItem->getID()] = PItem;
+            itemTemplates[PItem->getID()] = std::move(tplOwn);
 
             // Build translation maps. English uses sortname (the short display name) with spaces to match what the client sends.
             // Apply lowercase and replace underscores with spaces.
@@ -469,9 +423,9 @@ void LoadItemList()
         const auto modID  = rset->get<Mod>("modId");
         const auto value  = rset->get<int16>("value");
 
-        if ((g_pItemList[ItemID] != nullptr) && g_pItemList[ItemID]->isType(ITEM_EQUIPMENT))
+        if (auto* tpl = itemTemplates[ItemID].get(); tpl != nullptr && tpl->isType(ITEM_EQUIPMENT))
         {
-            static_cast<CItemEquipment*>(g_pItemList[ItemID])->addModifier(CModifier(modID, value));
+            static_cast<CItemEquipment*>(tpl)->addModifier(CModifier(modID, value));
         }
     }
 
@@ -486,9 +440,9 @@ void LoadItemList()
         const auto value   = rset->get<int16>("value");
         const auto petType = rset->get<PetModType>("petType");
 
-        if ((g_pItemList[ItemID]) && g_pItemList[ItemID]->isType(ITEM_EQUIPMENT))
+        if (auto* tpl = itemTemplates[ItemID].get(); tpl != nullptr && tpl->isType(ITEM_EQUIPMENT))
         {
-            static_cast<CItemEquipment*>(g_pItemList[ItemID])->addPetModifier(CPetModifier(modID, petType, value));
+            static_cast<CItemEquipment*>(tpl)->addPetModifier(CPetModifier(modID, petType, value));
         }
     }
 
@@ -504,9 +458,9 @@ void LoadItemList()
         const auto latentId    = rset->get<LATENT>("latentId");
         const auto latentParam = rset->get<uint16>("latentParam");
 
-        if ((g_pItemList[ItemID] != nullptr) && g_pItemList[ItemID]->isType(ITEM_EQUIPMENT))
+        if (auto* tpl = itemTemplates[ItemID].get(); tpl != nullptr && tpl->isType(ITEM_EQUIPMENT))
         {
-            static_cast<CItemEquipment*>(g_pItemList[ItemID])->addLatent(latentId, latentParam, modID, value);
+            static_cast<CItemEquipment*>(tpl)->addLatent(latentId, latentParam, modID, value);
         }
     }
 }
@@ -560,17 +514,6 @@ void LoadDropList()
 
 /************************************************************************
  *                                                                       *
- *  Handles loot from NPCs that drop things into                         *
- *  the loot pool instead of adding them directly to the inventory       *
- *                                                                       *
- ************************************************************************/
-
-void LoadLootList()
-{
-}
-
-/************************************************************************
- *                                                                       *
  *  Initialization of the  game objects                                  *
  *                                                                       *
  ************************************************************************/
@@ -580,19 +523,16 @@ void Initialize()
     TracyZoneScoped;
     LoadItemList();
     LoadDropList();
-    LoadLootList();
 
-    PUnarmedItem = new CItemWeapon(0);
+    unarmedItem = std::make_unique<CItemWeapon>(0);
+    unarmedItem->setDmgType(DAMAGE_TYPE::NONE);
+    unarmedItem->setSkillType(SKILL_NONE);
+    unarmedItem->setDamage(3);
 
-    PUnarmedItem->setDmgType(DAMAGE_TYPE::NONE);
-    PUnarmedItem->setSkillType(SKILL_NONE);
-    PUnarmedItem->setDamage(3);
-
-    PUnarmedH2HItem = new CItemWeapon(0);
-
-    PUnarmedH2HItem->setDmgType(DAMAGE_TYPE::HTH);
-    PUnarmedH2HItem->setSkillType(SKILL_HAND_TO_HAND);
-    PUnarmedH2HItem->setDamage(0);
+    unarmedH2HItem = std::make_unique<CItemWeapon>(0);
+    unarmedH2HItem->setDmgType(DAMAGE_TYPE::HTH);
+    unarmedH2HItem->setSkillType(SKILL_HAND_TO_HAND);
+    unarmedH2HItem->setDamage(0);
 
     // load magian trial data AFTER items
     auto registerTrialListeners = lua["xi"]["magian"]["registerTrialListeners"];
@@ -613,11 +553,12 @@ void Initialize()
 
 void FreeItemList()
 {
-    for (int32 ItemID = 0; ItemID < MAX_ITEMID; ++ItemID)
+    for (auto& tpl : itemTemplates)
     {
-        destroy(g_pItemList[ItemID]);
-        g_pItemList[ItemID] = nullptr;
+        tpl.reset();
     }
+    unarmedItem.reset();
+    unarmedH2HItem.reset();
 
     for (int32 DropID = 0; DropID < MAX_DROPID; ++DropID)
     {

@@ -31,10 +31,11 @@ class CItemUsable : public CItem
 {
 public:
     CItemUsable(uint16);
+    CItemUsable(const CItemUsable& other);
     virtual ~CItemUsable();
 
     timer::duration   getUseDelay() const;
-    uint8             getCurrentCharges();
+    auto              getCurrentCharges() const -> uint8;
     uint8             getMaxCharges() const;
     auto              getAnimationID() const -> ActionAnimation;
     timer::duration   getAnimationTime() const;

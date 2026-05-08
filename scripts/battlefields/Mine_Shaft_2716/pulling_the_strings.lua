@@ -12,7 +12,6 @@ local content = Battlefield:new({
     maxPlayers       = 1,
     levelCap         = 60,
     allowSubjob      = false,
-    experimental     = true,
     timeLimit        = utils.minutes(15),
     index            = 3,
     entryNpc         = '_0d0',
@@ -76,6 +75,7 @@ content.groups =
                 mineshaftID.mob.MOBLIN_FANTOCCINIMAN + 14,
             },
         },
+        superlinkGroup = 1,
     },
 
     {
@@ -93,7 +93,7 @@ content.groups =
                 mineshaftID.mob.MOBLIN_FANTOCCINIMAN + 16,
             },
         },
-
+        superlinkGroup = 1,
         allDeath = utils.bind(content.handleAllMonstersDefeated, content),
     },
 
@@ -121,6 +121,7 @@ content.groups =
                 mineshaftID.mob.MOBLIN_FANTOCCINIMAN + 20, -- Automaton
             },
         },
+        superlinkGroup = 1,
         spawned = false,
     },
 }
@@ -151,18 +152,20 @@ local lootTables =
 }
 
 local function getLootPool(battlefield)
-    -- Get loot table based on job. PUP gets a chance to drop an additional attachment.
-    local key           = battlefield:getLocalVar('initiatorJob')
-    local lootPool      = lootTables[key]
-    local bonusLootPool = nil
+    -- Get loot table based on job. PUP gets two chances to drop an additional attachment.
+    local key            = battlefield:getLocalVar('initiatorJob')
+    local lootPool       = lootTables[key]
+    local bonusLootPools = {}
 
     if type(lootPool) == 'table' then
         lootPool = utils.randomEntry(lootPool)
-        -- 20 percent chance to drop an additional attachment if the initiator is a PUP.
-        if key == xi.job.PUP and math.random(1, 100) <= 20 then
-            local bonusAttachment = lootTables[key]
-            if type(bonusAttachment) == 'table' then
-                bonusLootPool = utils.randomEntry(bonusAttachment)
+        -- Two independent 20 percent chances to drop additional attachments if the initiator is a PUP.
+        local bonusAttachment = lootTables[key]
+        if key == xi.job.PUP and type(bonusAttachment) == 'table' then
+            for _ = 1, 2 do
+                if math.random(1, 100) <= 20 then
+                    table.insert(bonusLootPools, utils.randomEntry(bonusAttachment))
+                end
             end
         end
     end
@@ -181,7 +184,7 @@ local function getLootPool(battlefield)
         },
     }
 
-    if bonusLootPool then
+    for _, bonusLootPool in ipairs(bonusLootPools) do
         table.insert(lootTable,
         {
             { itemId = bonusLootPool,                     weight = 10000 },

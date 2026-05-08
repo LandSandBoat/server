@@ -1,7 +1,7 @@
 -----------------------------------
--- Power slash
+-- Power Slash
 -- Family: Humanoid Great Sword Weaponskill
--- Description: Delivers a powerful strike to a single target.
+-- Description: Delivers a single-hit attack. Chance of critical varies with TP.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,10 +15,14 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     params.baseDamage     = mob:getWeaponDmg()
     params.numHits        = 1
-    params.fTP            = { 3.0, 3.0, 3.0 } -- TODO: Capture fTPs
+    params.fTP            = { 1.0, 1.0, 1.0 }
+    -- params.str_wSC     = 0.2 -- TODO: Capture if mobskill weaponskills have wSC.
+    -- params.vit_wSC     = 0.2 -- TODO: Capture if mobskill weaponskills have wSC.
     params.attackType     = xi.attackType.PHYSICAL
-    params.damageType     = xi.damageType.BLUNT
+    params.damageType     = xi.damageType.SLASHING
     params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    params.canCrit        = true
+    params.criticalChance = { 0.2, 0.4, 0.6 }
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 

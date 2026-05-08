@@ -1,7 +1,7 @@
 -----------------------------------
 -- Final Heaven
 -- Family: Humanoid Hand to Hand Weaponskill
--- Description: Caestus/Spharai: Temporarily enhances Subtle Blow effect
+-- Description: Delivers a twofold attack. Caestus/Spharai: Subtle Blow +10.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -14,11 +14,12 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
     params.baseDamage     = mob:getWeaponDmg()
-    params.numHits        = 1
-    params.fTP            = { 2.5, 2.5, 2.5 } -- TODO: Capture fTPs
+    params.numHits        = 2
+    params.fTP            = { 3.0, 3.0, 3.0 }
+    --params.vit_wSC      = 0.6 -- TODO: Capture if mobskill weaponskills have wSC.
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.HTH
-    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1 -- TODO: Capture shadowBehavior
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_2
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 

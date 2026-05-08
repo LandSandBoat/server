@@ -26,6 +26,7 @@
 #include <cstring>
 
 #include "enums/item_lockflg.h"
+#include "items/item_access.h"
 #include "packets/basic.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
@@ -151,8 +152,6 @@ CCharEntity::CCharEntity()
     m_RecycleBin = std::make_unique<CItemContainer>(LOC_RECYCLEBIN);
 
     keys = {};
-    std::memset(&equip, 0, sizeof(equip));
-    std::memset(&equipLoc, 0, sizeof(equipLoc));
 
     m_SpellList.reset();
     std::memset(&m_LearnedAbilities, 0, sizeof(m_LearnedAbilities));
@@ -936,16 +935,74 @@ timer::duration CCharEntity::GetPlayTime(bool needUpdate)
 
 auto CCharEntity::getEquip(const SLOTTYPE slot) const -> CItemEquipment*
 {
-    const uint8     loc  = equip[slot];
-    const uint8     est  = equipLoc[slot];
-    CItemEquipment* item = nullptr;
-
-    if (loc != 0)
+    if (slot >= EquipSlotCount)
     {
-        item = static_cast<CItemEquipment*>(getStorage(est)->GetItem(loc));
+        ShowWarningFmt("getEquip: slot {} out of range", slot);
+        return nullptr;
     }
 
-    return item;
+    return static_cast<CItemEquipment*>(equipped_[slot]);
+}
+
+auto CCharEntity::equipLocation(const uint8 equipSlot) const -> std::optional<ItemLocation>
+{
+    if (equipSlot >= EquipSlotCount)
+    {
+        ShowWarningFmt("equipLocation: slot {} out of range", equipSlot);
+        return std::nullopt;
+    }
+
+    if (!equipped_[equipSlot])
+    {
+        return std::nullopt;
+    }
+
+    return ItemLocation{
+        static_cast<CONTAINER_ID>(equipped_[equipSlot]->getLocationID()),
+        equipped_[equipSlot]->getSlotID(),
+    };
+}
+
+auto CCharEntity::bindEquip(const uint8 equipSlot, CItem* item) -> bool
+{
+    if (equipSlot >= EquipSlotCount)
+    {
+        ShowWarningFmt("bindEquip: slot {} out of range", equipSlot);
+        return false;
+    }
+
+    if (!item)
+    {
+        ShowWarningFmt("bindEquip: null item for slot {}", equipSlot);
+        return false;
+    }
+
+    if (!xi::items::mark(item, ItemState::Equipped))
+    {
+        return false;
+    }
+
+    clearEquip(equipSlot);
+    equipped_[equipSlot] = item;
+    return true;
+}
+
+void CCharEntity::clearEquip(const uint8 equipSlot)
+{
+    if (equipSlot >= EquipSlotCount)
+    {
+        return;
+    }
+
+    if (auto* item = equipped_[equipSlot]; item != nullptr)
+    {
+        if (!xi::items::mark(item, ItemState::Free))
+        {
+            return;
+        }
+
+        equipped_[equipSlot] = nullptr;
+    }
 }
 
 void CCharEntity::ReloadPartyInc()
@@ -1677,6 +1734,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
     }
 
     PLatentEffectContainer->CheckLatentsWS(false);
+    this->processActionEffectFlags(action);
 }
 
 void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
@@ -1972,6 +2030,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         StatusEffectContainer->DelStatusEffect(PAbility->getPostActionEffectCleanup());
 
         charutils::ApplyAbilityRecast(this, PAbility, charge, baseChargeTime, action.recast);
+        this->processActionEffectFlags(action);
     }
     else if (errMsg)
     {
@@ -2044,13 +2103,13 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
             hitCount = PAmmo->getQuantity();
         }
     }
-    else if (this->StatusEffectContainer->HasStatusEffect(EFFECT_DOUBLE_SHOT) && xirand::GetRandomNumber(100) < (40 + this->getMod(Mod::DOUBLE_SHOT_RATE)))
-    {
-        hitCount = 2;
-    }
-    else if (this->StatusEffectContainer->HasStatusEffect(EFFECT_TRIPLE_SHOT) && xirand::GetRandomNumber(100) < (40 + this->getMod(Mod::TRIPLE_SHOT_RATE)))
+    else if (this->StatusEffectContainer->HasStatusEffect(EFFECT_TRIPLE_SHOT) && xirand::GetRandomNumber(100) < this->getMod(Mod::TRIPLE_SHOT_RATE))
     {
         hitCount = 3;
+    }
+    else if (this->StatusEffectContainer->HasStatusEffect(EFFECT_DOUBLE_SHOT) && xirand::GetRandomNumber(100) < this->getMod(Mod::DOUBLE_SHOT_RATE))
+    {
+        hitCount = 2;
     }
 
     // loop for barrage hits, if a miss occurs, the loop will end
@@ -2335,6 +2394,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         // Camouflage not up, so remove all detectable status effects
         StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
     }
+    this->processActionEffectFlags(action);
 }
 
 bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
@@ -2474,7 +2534,7 @@ void CCharEntity::OnRaise()
         if (expLost != 0)
         {
             uint16 xpReturned = (uint16)(ceil(expLost * ratioReturned));
-            charutils::AddExperiencePoints(true, this, this, xpReturned);
+            charutils::AddExperiencePoints(true, false, false, this, this, xpReturned);
 
             charutils::SetCharVar(this, "expLost", 0);
         }
@@ -2536,6 +2596,8 @@ auto CCharEntity::OnItemFinish(CItemState& state, action_t& action) -> bool
         actionResult.resolution       = ActionResolution::Hit;
         actionResult.animation        = PItem->getAnimationID();
 
+        // TODO: guard charutils::UpdateItem against InTransaction items so a
+        // Lua delItem inside OnItemUse can't decrement out-of-tx.
         int32 value = luautils::OnItemUse(this, PTargetFound, PItem, action);
 
         actionResult.param = value;
@@ -2589,11 +2651,9 @@ auto CCharEntity::OnItemFinish(CItemState& state, action_t& action) -> bool
         return false;
     }
 
-    // Consumable items
-    PItem->setSubType(ITEM_UNLOCKED);
-    const bool willBeDestroyed = PItem->getQuantity() == 1;
-    charutils::UpdateItem(this, PItem->getLocationID(), PItem->getSlotID(), -1, true);
-    return willBeDestroyed;
+    // Consumable items: signal CItemState::FinishItem to commit the ItemUseTransaction
+    // TODO: Some non-equipment items should not be consumed on use
+    return true;
 }
 
 CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg)

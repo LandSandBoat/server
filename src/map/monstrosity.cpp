@@ -224,45 +224,65 @@ void monstrosity::WriteMonstrosityData(CCharEntity* PChar)
         return;
     }
 
-    const char* query = "REPLACE INTO char_monstrosity SET "
-                        "charid = ?, "
-                        "current_monstrosity_id = ?, "
-                        "current_monstrosity_species = ?, "
-                        "current_monstrosity_name_prefix_1 = ?, "
-                        "current_monstrosity_name_prefix_2 = ?, "
-                        "current_exp = ?, "
-                        "equip = ?, "
-                        "levels = ?, "
-                        "instincts = ?, "
-                        "variants = ?, "
-                        "belligerency = ?, "
-                        "entry_x = ?, "
-                        "entry_y = ?, "
-                        "entry_z = ?, "
-                        "entry_rot = ?, "
-                        "entry_zone_id = ?, "
-                        "entry_mjob = ?, "
-                        "entry_sjob = ?";
+    const char* query =
+        "INSERT INTO char_monstrosity SET "
+        "charid = ?, "
+        "current_monstrosity_id = ?, "
+        "current_monstrosity_species = ?, "
+        "current_monstrosity_name_prefix_1 = ?, "
+        "current_monstrosity_name_prefix_2 = ?, "
+        "current_exp = ?, "
+        "equip = ?, "
+        "levels = ?, "
+        "instincts = ?, "
+        "variants = ?, "
+        "belligerency = ?, "
+        "entry_x = ?, "
+        "entry_y = ?, "
+        "entry_z = ?, "
+        "entry_rot = ?, "
+        "entry_zone_id = ?, "
+        "entry_mjob = ?, "
+        "entry_sjob = ? "
+        "ON DUPLICATE KEY UPDATE "
+        "current_monstrosity_id = VALUES(current_monstrosity_id), "
+        "current_monstrosity_species = VALUES(current_monstrosity_species), "
+        "current_monstrosity_name_prefix_1 = VALUES(current_monstrosity_name_prefix_1), "
+        "current_monstrosity_name_prefix_2 = VALUES(current_monstrosity_name_prefix_2), "
+        "current_exp = VALUES(current_exp), "
+        "equip = VALUES(equip), "
+        "levels = VALUES(levels), "
+        "instincts = VALUES(instincts), "
+        "variants = VALUES(variants), "
+        "belligerency = VALUES(belligerency), "
+        "entry_x = VALUES(entry_x), "
+        "entry_y = VALUES(entry_y), "
+        "entry_z = VALUES(entry_z), "
+        "entry_rot = VALUES(entry_rot), "
+        "entry_zone_id = VALUES(entry_zone_id), "
+        "entry_mjob = VALUES(entry_mjob), "
+        "entry_sjob = VALUES(entry_sjob)";
 
-    db::preparedStmt(query,
-                     PChar->id,
-                     PChar->m_PMonstrosity->MonstrosityId,
-                     PChar->m_PMonstrosity->Species,
-                     PChar->m_PMonstrosity->NamePrefix1,
-                     PChar->m_PMonstrosity->NamePrefix2,
-                     PChar->m_PMonstrosity->CurrentExp,
-                     PChar->m_PMonstrosity->EquippedInstincts,
-                     PChar->m_PMonstrosity->levels,
-                     PChar->m_PMonstrosity->instincts,
-                     PChar->m_PMonstrosity->variants,
-                     static_cast<uint8>(PChar->m_PMonstrosity->Belligerency),
-                     PChar->m_PMonstrosity->EntryPos.x,
-                     PChar->m_PMonstrosity->EntryPos.y,
-                     PChar->m_PMonstrosity->EntryPos.z,
-                     PChar->m_PMonstrosity->EntryPos.rotation,
-                     PChar->m_PMonstrosity->EntryZoneId,
-                     PChar->m_PMonstrosity->EntryMainJob,
-                     PChar->m_PMonstrosity->EntrySubJob);
+    db::preparedStmt(
+        query,
+        PChar->id,
+        PChar->m_PMonstrosity->MonstrosityId,
+        PChar->m_PMonstrosity->Species,
+        PChar->m_PMonstrosity->NamePrefix1,
+        PChar->m_PMonstrosity->NamePrefix2,
+        PChar->m_PMonstrosity->CurrentExp,
+        PChar->m_PMonstrosity->EquippedInstincts,
+        PChar->m_PMonstrosity->levels,
+        PChar->m_PMonstrosity->instincts,
+        PChar->m_PMonstrosity->variants,
+        static_cast<uint8>(PChar->m_PMonstrosity->Belligerency),
+        PChar->m_PMonstrosity->EntryPos.x,
+        PChar->m_PMonstrosity->EntryPos.y,
+        PChar->m_PMonstrosity->EntryPos.z,
+        PChar->m_PMonstrosity->EntryPos.rotation,
+        PChar->m_PMonstrosity->EntryZoneId,
+        PChar->m_PMonstrosity->EntryMainJob,
+        PChar->m_PMonstrosity->EntrySubJob);
 }
 
 void monstrosity::TryPopulateMonstrosityData(CCharEntity* PChar)

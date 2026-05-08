@@ -20,22 +20,22 @@ xi.mix.growingBomb.onMobMobskillChoose = function(mob, target)
     {
         [0] = function() -- Small
             table.insert(skillList, xi.mobSkill.BERSERK_BOMB_BIG)
-            table.insert(skillList, xi.mobSkill.VULCANIAN_IMPACT)
+            table.insert(skillList, xi.mobSkill.VULCANIAN_IMPACT_2)
         end,
 
         [1] = function() -- Medium
-            table.insert(skillList, xi.mobSkill.VULCANIAN_IMPACT)
+            table.insert(skillList, xi.mobSkill.VULCANIAN_IMPACT_2)
             table.insert(skillList, xi.mobSkill.HELLSTORM)
         end,
 
         [2] = function() -- Large
             table.insert(skillList, xi.mobSkill.HELLSTORM)
-            table.insert(skillList, xi.mobSkill.HEAT_WAVE)
+            table.insert(skillList, xi.mobSkill.HEAT_WAVE_2)
         end,
 
         [3] = function() -- Giant
             table.insert(skillList, xi.mobSkill.HELLSTORM)
-            table.insert(skillList, xi.mobSkill.HEAT_WAVE)
+            table.insert(skillList, xi.mobSkill.HEAT_WAVE_2)
 
             -- If the mob is NOT a notorious monster, it can use Self-Destruct (Friars Lantern)
             if not mob:isMobType(xi.mobType.NOTORIOUS) then

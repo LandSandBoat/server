@@ -11,6 +11,7 @@ return {
     ['Jijiroon']          = { event = 1 },
     ['Jojoroon']          = { event = 271 },
     ['Kyokyoroon']        = { event = 263 },
+    ['Leleroon']          = { event = 264 },
     ['Loloroon']          = { event = 269 },
     ['Mumuroon']          = { event = 262 },
     ['Paparoon']          = { event = 26 },

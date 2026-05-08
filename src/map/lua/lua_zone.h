@@ -63,6 +63,7 @@ public:
     auto        getWeather() const -> Weather;
     uint32      getUptime();
     void        reloadNavmesh();
+    void        rebuildNavmesh(const sol::table& table);
     bool        isNavigablePoint(const sol::table& position);
     auto        getTerrainType(const sol::table& position) -> TerrainType;
     auto        getFloorId(const sol::table& position) -> uint8;

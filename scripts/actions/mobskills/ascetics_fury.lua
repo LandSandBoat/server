@@ -1,7 +1,7 @@
 -----------------------------------
 -- Ascetics Fury
 -- Family: Humanoid Hand to Hand Weaponskill
--- Description: Hand To Hand Weapon Skill
+-- Description: Delivers a twofold attack. Chance of critical hit varies with TP.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -13,14 +13,17 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    params.baseDamage     = mob:getWeaponDmg()
-    params.numHits        = 1
-    params.fTP            = { 2.6, 2.6, 2.6 } -- TODO: Capture fTPs
-    params.attackType     = xi.attackType.PHYSICAL
-    params.damageType     = xi.damageType.HTH
-    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1 -- TODO: Capture shadowBehavior
-    params.canCrit        = true
-    params.criticalChance = { 0.1, 0.3, 0.5 } -- TODO: Capture actual crit rate
+    params.baseDamage       = mob:getWeaponDmg()
+    params.numHits          = 2
+    params.fTP              = { 1.0, 1.0, 1.0 }
+    params.attackMultiplier = { 1.5, 1.5, 1.5 }
+    --params.str_wSC        = 0.5 -- TODO: Capture if mobskill weaponskills have wSC.
+    --params.vit_wSC        = 0.5 -- TODO: Capture if mobskill weaponskills have wSC.
+    params.attackType       = xi.attackType.PHYSICAL
+    params.damageType       = xi.damageType.HTH
+    params.shadowBehavior   = xi.mobskills.shadowBehavior.NUMSHADOWS_2
+    params.canCrit          = true
+    params.criticalChance   = { 0.1, 0.2, 0.4 }
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 

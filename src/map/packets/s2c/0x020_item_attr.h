@@ -26,6 +26,7 @@
 enum class ItemLockFlg : uint8_t;
 enum CONTAINER_ID : uint8;
 class CItem;
+struct ItemLocation;
 
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x0020
 // This packet is sent by the server to populate an items full information.
@@ -47,4 +48,5 @@ public:
     // It then sends a "set old slot to empty" and when it does so, it leaks the old extdata
     // We emulate this here with a non-null `staleItem` pointer to the old item
     GP_SERV_COMMAND_ITEM_ATTR(CItem* PItem, const CONTAINER_ID locationId, const uint8_t slotId, CItem* staleItem = nullptr);
+    GP_SERV_COMMAND_ITEM_ATTR(CItem* PItem, const ItemLocation& loc, CItem* staleItem = nullptr);
 };

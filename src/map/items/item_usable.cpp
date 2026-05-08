@@ -42,6 +42,21 @@ CItemUsable::CItemUsable(uint16 id)
     m_AoE         = 0;
 }
 
+CItemUsable::CItemUsable(const CItemUsable& other)
+: CItem(other)
+, m_UseDelay(other.m_UseDelay)
+, m_MaxCharges(other.m_MaxCharges)
+, m_Animation(other.m_Animation)
+, m_AnimationTime(other.m_AnimationTime)
+, m_ActivationTime(other.m_ActivationTime)
+, m_ValidTarget(other.m_ValidTarget)
+, m_ReuseDelay(other.m_ReuseDelay)
+, m_AssignTime(other.m_AssignTime)
+, m_LastUseTime(other.m_LastUseTime)
+, m_AoE(other.m_AoE)
+{
+}
+
 CItemUsable::~CItemUsable() = default;
 
 void CItemUsable::setUseDelay(timer::duration UseDelay)
@@ -85,7 +100,7 @@ void CItemUsable::setCurrentCharges(uint8 CurrCharges)
     this->exdata<Exdata::ItemTimerInfo>().RemainingCharges = std::clamp<uint8>(CurrCharges, 0, m_MaxCharges);
 }
 
-uint8 CItemUsable::getCurrentCharges()
+auto CItemUsable::getCurrentCharges() const -> uint8
 {
     return this->exdata<Exdata::ItemTimerInfo>().RemainingCharges;
 }

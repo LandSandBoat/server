@@ -89,7 +89,7 @@ void Initialize()
 
         FOR_DB_MULTIPLE_RESULTS(rset)
         {
-            auto* PItem = new CItemShop(rset->get<uint32>("itemid"));
+            auto PItem = std::make_unique<CItemShop>(rset->get<uint32>("itemid"));
 
             PItem->setMinPrice(rset->get<uint32>("min_price"));
             PItem->setMaxPrice(rset->get<uint32>("max_price"));
@@ -99,9 +99,9 @@ void Initialize()
             PItem->setFlag(rset->get<ItemFlag>("flags"));
 
             PItem->setQuantity(PItem->IsDailyIncrease() ? PItem->getInitialQuantity() : 0);
-            PItem->setBasePrice(getItemDynamicBasePrice(PItem));
+            PItem->setBasePrice(getItemDynamicBasePrice(PItem.get()));
 
-            PGuildShop->InsertItem(PItem);
+            PGuildShop->InsertItem(std::move(PItem));
         }
     }
 

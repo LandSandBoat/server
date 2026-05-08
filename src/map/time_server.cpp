@@ -173,7 +173,7 @@ auto time_server(Scheduler& scheduler, MapConfig config) -> Task<void>
 
     CTriggerHandler::getInstance()->triggerTimer();
     CTransportHandler::getInstance()->TransportTimer();
-    instanceutils::CheckInstance();
+    co_await instanceutils::CheckInstance(scheduler, config);
     co_await zoneutils::ProcessLoadQueue(scheduler, config);
     luautils::OnTimeServerTick();
     luautils::TryReloadFilewatchList();

@@ -33,6 +33,7 @@ zones[xi.zone.RANGUEMONT_PASS] =
     mob =
     {
         GLOOM_EYE    = GetFirstID('Gloom_Eye'),
+        HYAKUME      = GetFirstID('Hyakume'),
         TAISAIJIN_PH =
         {
             17457213, -- -18.325 1.830 -114.932

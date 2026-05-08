@@ -1,7 +1,7 @@
 -----------------------------------
 -- Freeze Rush
 -- Family: Bomb (Snoll)
--- Description: Makes an icy charge at a single target.
+-- Description: Deals Ice damage to a single target.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -13,16 +13,14 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    params.baseDamage     = mob:getWeaponDmg()
-    params.numHits        = 1
-    params.fTP            = { 2.0, 2.0, 2.0 }
-    params.attackType     = xi.attackType.PHYSICAL
-    params.damageType     = xi.damageType.SLASHING
-    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    params.baseDamage     = mob:getMainLvl() + 2
+    params.fTP            = { 2.0, 2.0, 2.0 } -- TODO: Capture fTP scaling @ 2k/3k
+    params.element        = xi.element.ICE
+    params.attackType     = xi.attackType.MAGICAL
+    params.damageType     = xi.damageType.ICE
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
 
-    -- TODO: Get captures for this skill to determine if physical or magical
-
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)

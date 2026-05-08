@@ -1,13 +1,12 @@
 -----------------------------------
 -- Judgment
 -- Family: Humanoid Club Weaponskill
--- Description: Delivers a single-hit attack. Damage varies with TP.
+-- Description: Damage varies with TP.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    mob:messageBasic(xi.msg.basic.READIES_WS, 0, 167)
     return 0
 end
 
@@ -16,7 +15,9 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     params.baseDamage     = mob:getWeaponDmg()
     params.numHits        = 1
-    params.fTP            = { 3.0, 3.0, 3.0 } -- TODO: Capture fTPs
+    params.fTP            = { 2.0, 2.5, 4.0 }
+    -- params.str_wSC     = 0.32 -- TODO: Capture if mobskill weaponskills have wSC.
+    -- params.mnd_wSC     = 0.32 -- TODO: Capture if mobskill weaponskills have wSC.
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.BLUNT
     params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1

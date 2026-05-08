@@ -57,12 +57,11 @@
 #include "items.h"
 #include "items/item_weapon.h"
 #include "job_points.h"
-#include "los/zone_los.h"
+#include "map/navmesh/navmesh.h"
 #include "map_engine.h"
 #include "mob_modifier.h"
 #include "mobskill.h"
 #include "modifier.h"
-#include "navmesh.h"
 #include "notoriety_container.h"
 #include "packets/pet_sync.h"
 #include "packets/s2c/0x029_battle_message.h"
@@ -79,6 +78,8 @@
 #include "utils/petutils.h"
 #include "weapon_skill.h"
 #include "zoneutils.h"
+
+#include <map/ximesh/ximesh.h>
 
 /************************************************************************
  *                                                                       *
@@ -629,7 +630,7 @@ int32 CalculateEnspellDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender,
             runeDPS = PWeapon->getDPS();
         }
 
-        if (PAttacker->m_dualWield)
+        if (PAttacker->IsDualWielding())
         {
             runeDPS /= 2; // DPS is divided evenly between hands derived from mainhand only
         }
@@ -1783,6 +1784,111 @@ int16 CalculateBaseTP(CBattleEntity* PEntity, int32 delay)
     return baseTPReturn;
 }
 
+auto GetBaseDelay(CBattleEntity* PEntity) -> uint16
+{
+    CCharEntity* PCharEntity = dynamic_cast<CCharEntity*>(PEntity);
+    CMobEntity*  PMobEntity  = dynamic_cast<CMobEntity*>(PEntity);
+    uint16       baseDelay   = 480; // h2h "unequipped" base delay
+
+    if (PCharEntity)
+    {
+        CItemWeapon* PMainWeapon = dynamic_cast<CItemWeapon*>(PCharEntity->getEquip(SLOT_MAIN));
+        CItemWeapon* PSubWeapon  = dynamic_cast<CItemWeapon*>(PCharEntity->getEquip(SLOT_SUB));
+
+        if (PMainWeapon)
+        {
+            if (PMainWeapon->getSkillType() == SKILLTYPE::SKILL_HAND_TO_HAND)
+            {
+                baseDelay = PMainWeapon->getBaseDelay(); // h2h items include 480 base delay
+            }
+            else
+            {
+                baseDelay = PMainWeapon->getBaseDelay();
+                if (PSubWeapon)
+                {
+                    baseDelay += PSubWeapon->getBaseDelay();
+                }
+            }
+        }
+    }
+    else if (PMobEntity)
+    {
+        CItemWeapon* PWeapon = dynamic_cast<CItemWeapon*>(PMobEntity->m_Weapons[SLOT_MAIN]);
+        if (PWeapon)
+        {
+            baseDelay = PWeapon->getBaseDelay(); // there is some precision loss that results in delays of 319.98 instead of 320, etc, so round to nearest.
+        }
+    }
+
+    return baseDelay;
+}
+
+auto GetBaseRangedDelay(CBattleEntity* PEntity) -> uint16
+{
+    CCharEntity* PCharEntity = dynamic_cast<CCharEntity*>(PEntity);
+    CMobEntity*  PMobEntity  = dynamic_cast<CMobEntity*>(PEntity);
+
+    uint16 baseDelay = 0;
+
+    if (PCharEntity)
+    {
+        CItemWeapon* PRangedWeapon = dynamic_cast<CItemWeapon*>(PCharEntity->getEquip(SLOT_RANGED));
+        CItemWeapon* PAmmo         = dynamic_cast<CItemWeapon*>(PCharEntity->getEquip(SLOT_AMMO));
+
+        if (PRangedWeapon && PRangedWeapon->isRanged())
+        {
+            if (PRangedWeapon->isThrowing()) // Throwing, like Chakram/Boomerang in ranged slot
+            {
+                baseDelay = PRangedWeapon->getBaseDelay();
+            }
+            else if (PAmmo) // Bow/gun etc, but only valid if Ammo is equipped.
+            {
+                baseDelay = PRangedWeapon->getBaseDelay() + PAmmo->getBaseDelay();
+            }
+        }
+        else if (PAmmo && PAmmo->isRanged()) // Throwing, Pebble/Shuriken in ammo slot
+        {
+            baseDelay = PAmmo->getBaseDelay();
+        }
+    }
+    else if (PMobEntity)
+    {
+        CItemWeapon* PWeapon = dynamic_cast<CItemWeapon*>(PMobEntity->m_Weapons[SLOT_MAIN]);
+        if (PWeapon)
+        {
+            baseDelay = PWeapon->getBaseDelay(); // there is some precision loss that results in delays of 319.98 instead of 320, etc, so round to nearest.
+        }
+    }
+
+    return baseDelay;
+}
+
+auto CalculateTPFromDamageDealt(CBattleEntity* PAttacker, bool isZanshin) -> int32
+{
+    if (PAttacker == nullptr)
+    {
+        ShowWarning("battleutils::CalculateTPFromDamageDealt() - PAttacker was null.");
+        return 0;
+    }
+
+    int32 tpReturn = luautils::callGlobal<int32>("xi.combat.tp.getSingleMeleeHitTPReturn", PAttacker, isZanshin);
+
+    return tpReturn;
+}
+
+auto CalculateTPFromDamageTaken(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 damage, uint16 delay) -> int32
+{
+    if (PAttacker == nullptr || PDefender == nullptr)
+    {
+        ShowWarning("battleutils::CalculateTPFromDamageTaken() - PAttacker or PDefender was null.");
+        return 0;
+    }
+
+    int32 tpReturn = luautils::callGlobal<int32>("xi.combat.tp.calculateTPGainOnPhysicalDamage", PAttacker, PDefender, damage, delay);
+
+    return tpReturn;
+}
+
 bool TryInterruptSpell(CBattleEntity* PAttacker, CBattleEntity* PDefender, CSpell* PSpell)
 {
     // Exceptions.
@@ -2156,97 +2262,36 @@ int32 TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHY
             PDefender->TryHitInterrupt(PAttacker);
         }
 
-        int16 baseTp = 0;
-
-        if ((slot == SLOT_RANGED || slot == SLOT_AMMO) && PAttacker->objtype == TYPE_PC)
-        {
-            int32 delay = PAttacker->GetRangedWeaponDelay(true);
-
-            baseTp = CalculateBaseTP(PAttacker, delay * 120 / 1000);
-        }
-        else
-        {
-            int32 delay      = PAttacker->GetWeaponDelay(true);
-            auto* sub_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_SUB]);
-
-            if (sub_weapon && sub_weapon->getDmgType() > DAMAGE_TYPE::NONE && sub_weapon->getDmgType() < DAMAGE_TYPE::HTH &&
-                weapon && weapon->getSkillType() != SKILL_HAND_TO_HAND)
-            {
-                delay = delay / 2;
-            }
-
-            float ratio = 1.0f;
-
-            if (weapon && weapon->getSkillType() == SKILL_HAND_TO_HAND)
-            {
-                ratio = 2.0f;
-            }
-
-            baseTp = CalculateBaseTP(PAttacker, delay * 60.0f / 1000.0f / ratio);
-        }
-
         if (giveTPtoAttacker)
         {
-            if (PAttacker->objtype == TYPE_PC && physicalAttackType == PHYSICAL_ATTACK_TYPE::ZANSHIN)
-            {
-                baseTp += ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_IKISHOTEN, (CCharEntity*)PAttacker);
-            }
+            bool isZanshin = physicalAttackType == PHYSICAL_ATTACK_TYPE::ZANSHIN;
 
-            PAttacker->addTP(
-                (int16)(tpMultiplier * (baseTp * (1.0f + 0.01f * (float)((PAttacker->getMod(Mod::STORETP) + getStoreTPbonusFromMerit(PAttacker)))))));
+            int16 attackerTPReturn = CalculateTPFromDamageDealt(PAttacker, isZanshin);
+
+            PAttacker->addTP((int16)(tpMultiplier * attackerTPReturn));
         }
 
         if (giveTPtoVictim)
         {
-            uint32 sBlowMerit = 0;
-            if (CCharEntity* PChar = dynamic_cast<CCharEntity*>(PAttacker))
-            {
-                sBlowMerit = PChar->PMeritPoints->GetMeritValue(MERIT_TYPE::MERIT_SUBTLE_BLOW_EFFECT, PChar);
-            }
+            int32 delay = 0;
 
-            // Check for Tandem Blow bonus while pet+master are fighting same target
-            int32 tandemBlowBonus = 0;
-            if (petutils::IsTandemActive(PAttacker))
+            if (isRanged && PAttacker->objtype == TYPE_PC)
             {
-                if (PAttacker->PMaster && PAttacker->PMaster->objtype == TYPE_PC)
-                {
-                    tandemBlowBonus = PAttacker->PMaster->getMod(Mod::TANDEM_BLOW_POWER);
-                }
-                else
-                {
-                    tandemBlowBonus = PAttacker->getMod(Mod::TANDEM_BLOW_POWER);
-                }
-            }
-
-            // account for attacker's subtle blow which reduces the baseTP gain for the defender
-            float sBlow1    = std::clamp((float)(PAttacker->getMod(Mod::SUBTLE_BLOW) + sBlowMerit), -50.0f, 50.0f);
-            float sBlow2    = std::clamp((float)(PAttacker->getMod(Mod::SUBTLE_BLOW_II) + tandemBlowBonus), -50.0f, 50.0f);
-            float sBlowMult = ((100.0f - std::clamp(sBlow1 + sBlow2, -75.0f, 75.0f)) / 100.0f);
-
-            // mobs hit get basetp+30 whereas pcs hit get basetp/3
-            if (PDefender->objtype == TYPE_PC || (PDefender->objtype == TYPE_PET && PDefender->PMaster && PDefender->PMaster->objtype == TYPE_PC))
-            {
-                PDefender->addTP(
-                    (int16)(tpMultiplier * ((baseTp / 3) * sBlowMult *
-                                            (1.0f + 0.01f * (float)((PDefender->getMod(Mod::STORETP) +
-                                                                     getStoreTPbonusFromMerit(PAttacker))))))); // yup store tp counts on hits taken too!
+                delay = GetBaseRangedDelay(PAttacker);
             }
             else
             {
-                PDefender->addTP((uint16)(tpMultiplier *
-                                          ((baseTp + 30) * sBlowMult *
-                                           (1.0f + 0.01f * (float)PDefender->getMod(Mod::STORETP))))); // subtle blow also reduces the "+30" on mob tp gain
+                delay = GetBaseDelay(PAttacker);
             }
+
+            int16 defenderTPReturn = CalculateTPFromDamageTaken(PAttacker, PDefender, damage, delay);
+
+            PDefender->addTP((int16)(tpMultiplier * defenderTPReturn));
         }
     }
     else if (PDefender->objtype == TYPE_MOB)
     {
         ((CMobEntity*)PDefender)->PEnmityContainer->UpdateEnmityFromDamage(PAttacker, 0);
-    }
-
-    if (PAttacker->objtype == TYPE_PC && !isRanged && !isCounter)
-    {
-        PAttacker->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_ATTACK);
     }
 
     return damage;
@@ -2260,8 +2305,7 @@ int32 TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHY
 
 int32 TakeWeaponskillDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType, uint8 slot, bool primary, float tpMultiplier, uint16 bonusTP, float targetTPMultiplier)
 {
-    auto* weapon   = GetEntityWeapon(PAttacker, (SLOTTYPE)slot);
-    bool  isRanged = (slot == SLOT_AMMO || slot == SLOT_RANGED);
+    bool isRanged = (slot == SLOT_AMMO || slot == SLOT_RANGED);
 
     if (attackType == ATTACK_TYPE::PHYSICAL &&
         PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_DEFENSE_BOOST) &&
@@ -2347,89 +2391,34 @@ int32 TakeWeaponskillDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, 
 
         int16 baseTp = 0;
 
-        if (isRanged)
-        {
-            int32 delay = PAttacker->GetRangedWeaponDelay(true);
-            baseTp      = CalculateBaseTP(PAttacker, (delay * 120) / 1000);
-        }
-        else
-        {
-            int32 delay = PAttacker->GetWeaponDelay(true);
-
-            auto* sub_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_SUB]);
-
-            if (sub_weapon && sub_weapon->getDmgType() > DAMAGE_TYPE::NONE && sub_weapon->getDmgType() < DAMAGE_TYPE::HTH &&
-                weapon->getSkillType() != SKILL_HAND_TO_HAND)
-            {
-                delay /= 2;
-            }
-
-            float ratio = 1.0f;
-
-            if (weapon && weapon->getSkillType() == SKILL_HAND_TO_HAND)
-            {
-                ratio = 2.0f;
-            }
-
-            baseTp = CalculateBaseTP(PAttacker, delay * 60 / 1000 / ratio);
-        }
-
-        // add tp to attacker
+        // Add tp to attacker
         if (primary)
         // Calculate TP Return from WS
         {
-            standbyTp = bonusTP + ((int16)((tpMultiplier * baseTp) *
-                                           (1.0f + 0.01f * (float)((PAttacker->getMod(Mod::STORETP) + getStoreTPbonusFromMerit(PAttacker))))));
+            int16 baseTp = CalculateTPFromDamageDealt(PAttacker, false);
+
+            standbyTp = bonusTP + (int16)((tpMultiplier * baseTp));
         }
 
-        uint32 sBlowMerit = 0;
-        if (CCharEntity* PChar = dynamic_cast<CCharEntity*>(PAttacker))
-        {
-            sBlowMerit = PChar->PMeritPoints->GetMeritValue(MERIT_TYPE::MERIT_SUBTLE_BLOW_EFFECT, PChar);
-        }
+        // Add TP to defender
+        int32 delay = 0;
 
-        // Check for Tandem Blow bonus while pet+master are fighting same target
-        int32 tandemBlowBonus = 0;
-        if (petutils::IsTandemActive(PAttacker))
+        if (isRanged)
         {
-            if (PAttacker->PMaster && PAttacker->PMaster->objtype == TYPE_PC)
-            {
-                tandemBlowBonus = PAttacker->PMaster->getMod(Mod::TANDEM_BLOW_POWER);
-            }
-            else
-            {
-                tandemBlowBonus = PAttacker->getMod(Mod::TANDEM_BLOW_POWER);
-            }
-        }
-
-        // account for attacker's subtle blow which reduces the baseTP gain for the defender
-        float sBlow1    = std::clamp((float)(PAttacker->getMod(Mod::SUBTLE_BLOW) + sBlowMerit), -50.0f, 50.0f);
-        float sBlow2    = std::clamp((float)(PAttacker->getMod(Mod::SUBTLE_BLOW_II) + tandemBlowBonus), -50.0f, 50.0f);
-        float sBlowMult = (100.0f - std::clamp(sBlow1 + sBlow2, -75.0f, 75.0f)) / 100.0f;
-
-        // mobs hit get basetp+30 whereas pcs hit get basetp/3
-        if (PDefender->objtype == TYPE_PC)
-        {
-            PDefender->addTP((int16)(tpMultiplier * targetTPMultiplier *
-                                     ((baseTp / 3) * sBlowMult *
-                                      (1.0f + 0.01f * (float)((PDefender->getMod(Mod::STORETP) +
-                                                               getStoreTPbonusFromMerit(PAttacker))))))); // yup store tp counts on hits taken too!
+            delay = GetBaseRangedDelay(PAttacker);
         }
         else
         {
-            PDefender->addTP((int16)(tpMultiplier * targetTPMultiplier *
-                                     ((baseTp + 30) * sBlowMult *
-                                      (1.0f + 0.01f * (float)PDefender->getMod(Mod::STORETP))))); // subtle blow also reduces the "+30" on mob tp gain
+            delay = GetBaseDelay(PAttacker);
         }
+
+        baseTp = CalculateTPFromDamageTaken(PAttacker, PDefender, damage, delay);
+
+        PDefender->addTP((int16)(tpMultiplier * targetTPMultiplier * baseTp));
     }
     else if (PDefender->objtype == TYPE_MOB)
     {
         ((CMobEntity*)PDefender)->PEnmityContainer->UpdateEnmityFromDamage(PAttacker, 0);
-    }
-
-    if (!isRanged)
-    {
-        PAttacker->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_ATTACK);
     }
 
     // Apply TP
@@ -4298,13 +4287,7 @@ int32 getOverWhelmDamageBonus(CBattleEntity* PAttacker, CBattleEntity* PDefender
     return damage;
 }
 
-/************************************************************************
- *                                                                       *
- *  Calculate/Handle Barrage shot count                                  *
- *                                                                       *
- ************************************************************************/
-
-uint8 getBarrageShotCount(CCharEntity* PChar)
+uint8 getBarrageShotCount(CBattleEntity* PBattleEntity)
 {
     /*
     Ranger level 30, four shots.
@@ -4314,29 +4297,9 @@ uint8 getBarrageShotCount(CCharEntity* PChar)
     Ranger level 99, eight shots.
     */
 
-    // only archery + marksmanship can use barrage
-    CItemWeapon* PItem = (CItemWeapon*)PChar->getEquip(SLOT_RANGED);
-
-    if (PItem && PItem->getSkillType() != 25 && PItem->getSkillType() != 26)
-    {
-        return 0;
-    }
-
-    uint8 lvl       = PChar->jobs.job[JOB_RNG]; // Get Ranger level of char
-    uint8 shotCount = 0;                        // the total number of extra hits
-
-    if (PChar->GetSJob() == JOB_RNG)
-    { // if rng is sub then use the sub level
-        lvl = PChar->GetSLevel();
-    }
-
-    // Hunters bracers+1 will add an extra shot
-    CItemEquipment* PItemHands = PChar->getEquip(SLOT_HANDS);
-
-    if (PItemHands && PItemHands->getID() == 14900)
-    {
-        shotCount++;
-    }
+    // TODO: verify all RNG trusts that use Barrage have RNG main job
+    uint16 lvl       = PBattleEntity->GetMJob() == JOB_RNG ? PBattleEntity->GetMLevel() : PBattleEntity->GetSLevel();
+    uint8  shotCount = 0;
 
     if (lvl < 30)
     {
@@ -4344,33 +4307,48 @@ uint8 getBarrageShotCount(CCharEntity* PChar)
     }
     else if (lvl < 50)
     {
-        shotCount += 3;
+        shotCount = 3;
     }
     else if (lvl < 75)
     {
-        shotCount += 4;
+        shotCount = 4;
     }
     else if (lvl < 90)
     {
-        shotCount += 5;
+        shotCount = 5;
     }
     else if (lvl < 99)
     {
-        shotCount += 6;
+        shotCount = 6;
     }
     else
     {
-        shotCount += 7;
+        shotCount = 7;
     }
 
-    shotCount += PChar->getMod(Mod::BARRAGE_COUNT);
+    shotCount += PBattleEntity->getMod(Mod::BARRAGE_COUNT);
 
-    // make sure we have enough ammo for all these shots
-    CItemWeapon* PAmmo = (CItemWeapon*)PChar->getEquip(SLOT_AMMO);
-
-    if (PAmmo && PAmmo->getQuantity() < shotCount)
+    // only archery + marksmanship can use barrage
+    if (PBattleEntity->objtype == TYPE_PC)
     {
-        shotCount = PAmmo->getQuantity() - 1;
+        if (auto* PChar = dynamic_cast<CCharEntity*>(PBattleEntity); PChar)
+        {
+            CItemWeapon* PItem = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED));
+
+            if (PItem && PItem->getSkillType() != SKILL_ARCHERY && PItem->getSkillType() != SKILL_MARKSMANSHIP)
+            {
+                return 0;
+            }
+
+            // make sure we have enough ammo for all these shots
+            CItemWeapon* PAmmo = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
+
+            // TODO: Check if this should be here. Recycle can proc and potentially allow more shots to land
+            if (PAmmo && PAmmo->getQuantity() < shotCount + 1u) // This function is additive to the first shot. So one ammo is already consumed before we get here
+            {
+                shotCount = PAmmo->getQuantity() - 1;
+            }
+        }
     }
 
     return shotCount;
@@ -5285,24 +5263,19 @@ void DrawIn(CBattleEntity* PTarget, const position_t pos, const float offset, co
         return;
     }
 
-    // Make sure we can raycast to that position
-    // from the position's "eyeline" to the ground where we want to draw players in to
-    if (PTarget->loc.zone->lineOfSight)
+    // If geometry blocks the path from the source eyeline to the draw-in point, abort the
+    // draw-in - navmesh snapToValidPosition below will handle snapping to a valid position.
+    constexpr float ENTITY_HEIGHT = 2.0f;
+
+    const auto src = Vector3{ pos.x, pos.y - ENTITY_HEIGHT, pos.z };
+    const auto dst = Vector3{ nearEntity.x, nearEntity.y, nearEntity.z };
+    if (PTarget->loc.zone->xiMesh()->rayIntersect(src, dst))
     {
-        const auto entityHeight = 2.0f;
-        const auto posEyeline   = position_t{ pos.x, pos.y - entityHeight, pos.z, 0, 0 };
-        if (const auto optHit = PTarget->loc.zone->lineOfSight->Raycast(posEyeline, nearEntity))
-        {
-            auto hit   = *optHit;
-            nearEntity = { hit.x, hit.y, hit.z, 0, 0 };
-        }
+        return;
     }
 
     // Snap nearEntity to a guaranteed valid position
-    if (PTarget->loc.zone->m_navMesh)
-    {
-        PTarget->loc.zone->m_navMesh->snapToValidPosition(nearEntity);
-    }
+    PTarget->loc.zone->navMesh()->snapToValidPosition(nearEntity);
 
     // Move the target a little higher, just in case
     nearEntity.y -= 1.0f;
@@ -6216,8 +6189,9 @@ bool RemoveAmmo(CCharEntity* PChar, int quantity)
     {
         if ((PItem->getQuantity() - quantity) < 1)
         {
-            uint8 slot = PChar->equip[SLOT_AMMO];
-            uint8 loc  = PChar->equipLoc[SLOT_AMMO];
+            auto  eloc = PChar->equipLocation(SLOT_AMMO);
+            uint8 slot = eloc ? eloc->Slot : 0;
+            uint8 loc  = eloc ? static_cast<uint8>(eloc->Container) : 0;
             charutils::UnequipItem(PChar, SLOT_AMMO);
             PChar->RequestPersist(CHAR_PERSIST::EQUIP);
             charutils::UpdateItem(PChar, loc, slot, -quantity);
@@ -6226,7 +6200,8 @@ bool RemoveAmmo(CCharEntity* PChar, int quantity)
         }
         else
         {
-            charutils::UpdateItem(PChar, PChar->equipLoc[SLOT_AMMO], PChar->equip[SLOT_AMMO], -quantity);
+            auto ammoLoc = PChar->equipLocation(SLOT_AMMO);
+            charutils::UpdateItem(PChar, static_cast<uint8>(ammoLoc->Container), ammoLoc->Slot, -quantity);
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
             return false;
         }

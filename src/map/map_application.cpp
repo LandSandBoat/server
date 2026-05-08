@@ -51,6 +51,11 @@ auto appConfig() -> ApplicationConfig
             .description = "Load zones on demand. For development only.",
             .type        = ArgumentType::Flag,
         },
+        ArgumentDefinition{
+            .name        = "--rebuild-navmeshes",
+            .description = "Force rebuild all navmeshes from ximesh on startup.",
+            .type        = ArgumentType::Flag,
+        },
     };
 
     return ApplicationConfig{
@@ -77,9 +82,10 @@ MapApplication::MapApplication(const int argc, char** argv)
         port = std::stoi(*maybePort);
     }
 
-    engineConfig_.lazyZones = args().get<bool>("--lazy");
-    engineConfig_.inCI      = Application::isRunningInCI();
-    engineConfig_.ipp       = IPP(ip, port);
+    engineConfig_.ipp              = IPP(ip, port);
+    engineConfig_.inCI             = Application::isRunningInCI();
+    engineConfig_.lazyZones        = args().get<bool>("--lazy");
+    engineConfig_.rebuildNavmeshes = args().get<bool>("--rebuild-navmeshes");
 }
 
 MapApplication::~MapApplication()

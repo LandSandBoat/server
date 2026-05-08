@@ -28,6 +28,11 @@ CItemFlowerpot::CItemFlowerpot(uint16 id)
 {
 }
 
+CItemFlowerpot::CItemFlowerpot(const CItemFlowerpot& other)
+: CItemFurnishing(other)
+{
+}
+
 CItemFlowerpot::~CItemFlowerpot() = default;
 
 void CItemFlowerpot::cleanPot()

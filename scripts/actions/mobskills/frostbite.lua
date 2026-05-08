@@ -1,7 +1,7 @@
 -----------------------------------
 -- Frostbite
 -- Family: Humanoid Greatsword Weaponskill
--- Description: Delivers an Ice elemental attack.
+-- Description: Delivers an ice elemental attack. Damage varies with TP.
 -----------------------------------
 
 ---@type TMobSkill
@@ -14,12 +14,17 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    params.baseDamage     = mob:getMainLvl() + 2
-    params.fTP            = { 4, 4, 4 } -- TODO: Capture fTP scaling
-    params.element        = xi.element.ICE
-    params.attackType     = xi.attackType.MAGICAL
-    params.damageType     = xi.damageType.ICE
-    params.shadowBehavior = xi.mobskills.shadowBehavior.WIPE_SHADOWS -- TODO: Capture shadowBehavior
+    params.baseDamage       = mob:getMainLvl() + 2
+    params.fTP              = { 1.0, 2.0, 2.5 }
+    -- params.str_wSC       = 0.2 -- TODO: Capture if mobskill weaponskills have wSC.
+    -- params.int_wSC       = 0.2 -- TODO: Capture if mobskill weaponskills have wSC.
+    params.element          = xi.element.ICE
+    params.attackType       = xi.attackType.MAGICAL
+    params.damageType       = xi.damageType.ICE
+    params.shadowBehavior   = xi.mobskills.shadowBehavior.WIPE_SHADOWS
+    params.dStatMultiplier  = 1
+    params.dStatAttackerMod = xi.mod.INT
+    params.dStatDefenderMod = xi.mod.INT
 
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 

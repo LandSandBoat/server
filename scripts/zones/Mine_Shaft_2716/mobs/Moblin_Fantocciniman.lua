@@ -9,6 +9,11 @@ local entity = {}
 local ID = zones[xi.zone.MINE_SHAFT_2716]
 -----------------------------------
 
+-- TODO: Possible rolls are weighted?
+
+-----------------------------------
+--- Marionette Dice Table
+-----------------------------------
 local marionetteDice =
 {
     -- Main target: Player.
@@ -28,6 +33,33 @@ local marionetteDice =
     [12] = xi.mobSkill.MARIONETTE_DICE_12, -- Restore MP to Fantoccini
     [13] = xi.mobSkill.MARIONETTE_DICE_14, -- Fantoccini uses 2-hour ability
 }
+
+-----------------------------------
+-- Function to get the possible rolls based off the initiators job. If they are not a spell caster, mana rolls get excluded.
+-----------------------------------
+local function getPossibleRolls(mob)
+    local battlefield = mob:getBattlefield()
+
+    if not battlefield then
+        return
+    end
+
+    local initiatorJob = battlefield:getLocalVar('initiatorJob')
+    local possibleRolls = { 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13 }
+
+    if
+        initiatorJob == xi.job.WHM or
+        initiatorJob == xi.job.BLM or
+        initiatorJob == xi.job.RDM or
+        initiatorJob == xi.job.SMN or
+        initiatorJob == xi.job.BLU
+    then
+        table.insert(possibleRolls, 2)
+        table.insert(possibleRolls, 12)
+    end
+
+    return possibleRolls
+end
 
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.SILENCE)
@@ -52,10 +84,19 @@ end
 entity.onMobFight = function(mob, target)
     local currentTime = GetSystemTime()
 
+    -----------------------------------
+    -- Marionette Dice Roll - Fetches possible rolls based off job and chooses one at random every 25-30 seconds.
+    -----------------------------------
     if currentTime >= mob:getLocalVar('marionetteDiceTime') then
         mob:messageText(mob, ID.text.HO_HO + 2) -- Roly-poly, roly-poly♪
 
-        local randomRoll = math.random(1, #marionetteDice)
+        local possibleRolls = getPossibleRolls(mob)
+
+        if not possibleRolls then
+            return
+        end
+
+        local randomRoll = possibleRolls[math.random(1, #possibleRolls)]
         if randomRoll >= 7 then
             local fantoccini = GetMobByID(mob:getID() + 2)
             if fantoccini and fantoccini:isAlive() then
@@ -72,7 +113,10 @@ entity.onMobFight = function(mob, target)
         return
     end
 
-    if mob:getHPP() < 100 then
+    -----------------------------------
+    -- If the moblin is attacked and goes below 95% HP, attack the player. (They can still be enfeebled without this triggering)
+    -----------------------------------
+    if mob:getHPP() < 95 then
         mob:messageText(mob, ID.text.HO_HO + 11) -- Ow-ow, ow-ow! You make me mad now!
         mob:setLocalVar('moblinAttacked', 1)
         mob:setAutoAttackEnabled(true)
@@ -84,7 +128,9 @@ end
 entity.onMobWeaponSkill = function(mob, target, skill, action)
     local skillUsed = skill:getID()
 
+    -----------------------------------
     -- If the skill used is not Marionette Dice, return.
+    -----------------------------------
     if
         skillUsed < xi.mobSkill.MARIONETTE_DICE_2 or
         skillUsed > xi.mobSkill.MARIONETTE_DICE_15
@@ -92,8 +138,10 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
         return
     end
 
+    -----------------------------------
     -- If the Marionette Dice is good for the moblin, play emote 3, if its good for the player, play 1.
     -- We use a 5 second timer to delay the emote usage and to emulate the look of retail. 5 seconds looks excellent.
+    -----------------------------------
     if
         skillUsed >= xi.mobSkill.MARIONETTE_DICE_7 and
         skillUsed < xi.mobSkill.MARIONETTE_DICE_15

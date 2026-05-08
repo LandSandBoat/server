@@ -1,9 +1,9 @@
 -----------------------------------
 -- Sidewinder
 -- Family: Humanoid Archery Weaponskill
--- Delivers an inaccurate attack that deals quintuple damage. Accuracy varies with TP.
+-- Description: Delivers an inaccurate attack that deals quintuple damage. Accuracy varies with TP.
 -- Reverberation/Transfixtion/Detonation skillchain properties
--- Notes: Used by Semih Lafihna
+-- NOTES: Used by Semih Lafihna
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,15 +15,20 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    params.baseDamage     = mob:getWeaponDmg()
-    params.numHits        = 1
-    params.fTP            = { 5.0, 5.0, 5.0 }
-    params.attackType     = xi.attackType.PHYSICAL
-    params.damageType     = xi.damageType.PIERCING
-    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
-    -- TODO: Accuracy modifier
+    params.baseDamage       = mob:getWeaponDmg()
+    params.numHits          = 1
+    params.fTP              = { 5.0, 5.0, 5.0 }
+    -- params.str_wSC       = 0.16 -- TODO: Capture if mobskill weaponskills have wSC.
+    -- params.agi_wSC       = 0.25 -- TODO: Capture if mobskill weaponskills have wSC.
+    params.skipParry        = true
+    params.skipGuard        = true
+    params.skipBlock        = true
+    params.accuracyModifier = { -50, 0, 0 }
+    params.attackType       = xi.attackType.RANGED
+    params.damageType       = xi.damageType.PIERCING
+    params.shadowBehavior   = xi.mobskills.shadowBehavior.NUMSHADOWS_1
 
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
+    local info = xi.mobskills.mobRangedMove(mob, target, skill, action, params)
 
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)

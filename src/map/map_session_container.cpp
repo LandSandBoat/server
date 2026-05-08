@@ -26,12 +26,18 @@
 #include "status_effect_container.h"
 
 #include "common/database.h"
+#include "common/scheduler.h"
 #include "common/xi.h"
 
 #include "entities/charentity.h"
 
 #include "utils/charutils.h"
 #include "utils/petutils.h"
+
+MapSessionContainer::MapSessionContainer(Scheduler& scheduler)
+: scheduler_(scheduler)
+{
+}
 
 auto MapSessionContainer::createSession(IPP ipp) -> MapSession*
 {
@@ -55,6 +61,7 @@ auto MapSessionContainer::createSession(IPP ipp) -> MapSession*
 
     auto map_session_data = std::make_unique<MapSession>();
 
+    map_session_data->scheduler   = &scheduler_;
     map_session_data->last_update = timer::now();
     map_session_data->client_ipp  = ipp;
 
@@ -78,6 +85,7 @@ auto MapSessionContainer::createPendingSession(uint32 charId) -> MapSession*
 
     auto map_session_data = std::make_unique<MapSession>();
 
+    map_session_data->scheduler   = &scheduler_;
     map_session_data->last_update = timer::now(); // This may need adjustment if sessions feel like they take too long to free
     map_session_data->charID      = charId;
 

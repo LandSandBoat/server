@@ -630,6 +630,8 @@ xi.effect =
     HAUNT                    = 631,
     BLACK_SANCTUS            = 632,
     ANIMATED                 = 633,
+    SERPENTS_GUILE           = 634,
+    RESOLVED                 = 635,
 
     -- Effect icons in packet can go from 0-767, so no custom effects should go in that range.
 

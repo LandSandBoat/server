@@ -29,6 +29,7 @@
 #include "action/interrupts.h"
 #include "enums/item_lockflg.h"
 #include "item_container.h"
+#include "items/transactions/item_use.h"
 #include "status_effect_container.h"
 #include "universal_container.h"
 
@@ -118,6 +119,7 @@ CItemState::CItemState(CCharEntity* PEntity, const uint16 targid, const uint8 lo
     m_PEntity->UContainer->SetType(UCONTAINER_USEITEM);
     m_PEntity->UContainer->SetItem(0, m_PItem);
 
+    tx_             = ItemUseTransaction::start(m_PEntity, m_PItem);
     m_startPos      = m_PEntity->loc.p;
     m_castTime      = m_PItem->getActivationTime();
     m_animationTime = m_PItem->getAnimationTime();
@@ -147,6 +149,8 @@ CItemState::CItemState(CCharEntity* PEntity, const uint16 targid, const uint8 lo
     m_PEntity->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(m_PItem, ItemLockFlg::NoSelect);
     m_PEntity->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(m_PEntity);
 }
+
+CItemState::~CItemState() = default;
 
 void CItemState::UpdateTarget(CBaseEntity* target)
 {
@@ -209,6 +213,7 @@ auto CItemState::Update(const timer::time_point tick) -> bool
             // Only send packet if action was populated (e.g. interrupts return early)
             if (!action.targets.empty())
             {
+                m_PEntity->processActionEffectFlags(action);
                 m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
             }
         }
@@ -235,6 +240,15 @@ auto CItemState::Update(const timer::time_point tick) -> bool
 void CItemState::Cleanup(timer::time_point tick)
 {
     m_PEntity->UContainer->Clean();
+
+    // Clear InTransaction before the ITEM_LIST packet below.
+    if (m_interrupted || !IsCompleted())
+    {
+        if (tx_)
+        {
+            tx_->rollback();
+        }
+    }
 
     if (m_PItem && (m_interrupted || !IsCompleted()) && !m_PItem->isType(ITEM_EQUIPMENT))
     {
@@ -330,7 +344,23 @@ void CItemState::InterruptItem(action_t& action)
 
 auto CItemState::FinishItem(action_t& action) -> bool
 {
-    return m_PEntity->OnItemFinish(*this, action);
+    // OnItemFinish returns true to signal the tx should commit (consumable),
+    // false for equipment / rejected use.
+    const bool shouldCommit = m_PEntity->OnItemFinish(*this, action);
+    if (!shouldCommit || !tx_)
+    {
+        return false;
+    }
+
+    const bool willBeDestroyed = m_PItem != nullptr && m_PItem->getQuantity() == 1;
+    if (!tx_->commit())
+    {
+        ShowWarningFmt("CItemState: ItemUseTransaction commit failed for item {}",
+                       m_PItem ? m_PItem->getID() : 0);
+        return false;
+    }
+
+    return willBeDestroyed;
 }
 
 auto CItemState::HasMoved() const -> bool

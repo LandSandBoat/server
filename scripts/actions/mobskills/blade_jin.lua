@@ -1,14 +1,12 @@
 -----------------------------------
 -- Blade: Jin
 -- Family: Humanoid Katana Weaponskill
--- Description: Delivers a 3 hit attack.
+-- Description: Delivers a threefold attack. Chance of critical hit varies with TP.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    mob:messageBasic(xi.msg.basic.READIES_WS, 0, 134)
-
     return 0
 end
 
@@ -17,12 +15,14 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     params.baseDamage     = mob:getWeaponDmg()
     params.numHits        = 3
-    params.fTP            = { 2.0, 2.0, 2.0 } -- TODO: Capture fTPs
+    params.fTP            = { 1.0, 1.0, 1.0 }
+    -- params.str_wSC     = 0.3 -- TODO: Capture if mobskill weaponskills have wSC.
+    -- params.dex_wSC     = 0.3 -- TODO: Capture if mobskill weaponskills have wSC.
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.SLASHING
     params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3
-    -- params.canCrit        = true -- TODO: Capture if mobskill crits or not.
-    -- params.criticalChance = { 1.0, 1.0, 1.0 } -- TODO: Capture crit rate
+    params.canCrit        = true
+    params.criticalChance = { 0.1, 0.3, 0.5 }
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 

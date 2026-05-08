@@ -1,7 +1,7 @@
 -----------------------------------
 -- Combo
 -- Family: Humanoid Hand to Hand Weaponskill
--- Description: Delivers a 3 hit attack
+-- Description: Delivers a three-fold attack. Damage varies with TP.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,7 +15,9 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     params.baseDamage     = mob:getWeaponDmg()
     params.numHits        = 3
-    params.fTP            = { 1.0, 1.0, 1.0 }
+    params.fTP            = { 1.0, 1.5, 2.0 }
+    --params.str_wSC      = 0.2 -- TODO: Capture if mobskill weaponskills have wSC.
+    --params.dex_wSC      = 0.2 -- TODO: Capture if mobskill weaponskills have wSC.
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.HTH
     params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3

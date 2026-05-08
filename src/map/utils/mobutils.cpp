@@ -26,6 +26,7 @@
 #include "common/utils.h"
 
 #include "action/action.h"
+#include "ai/ai_container.h"
 #include "battlefield.h"
 #include "battleutils.h"
 #include "grades.h"
@@ -846,15 +847,6 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
         ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->resetDelay();
     }
 
-    // Deprecate MOBMOD_DUAL_WIELD later, replace if check with value from DB
-    if (PMob->getMobMod(MOBMOD_DUAL_WIELD))
-    {
-        PMob->m_dualWield = true;
-        // if mob is going to dualWield then need to have sub slot
-        // assume it is the same damage as the main slot
-        static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_SUB])->setDamage(GetWeaponDamage(PMob, SLOT_MAIN));
-    }
-
     uint16 fSTR = GetBaseToRank(PMob->strRank, mLvl);
     uint16 fDEX = GetBaseToRank(PMob->dexRank, mLvl);
     uint16 fVIT = GetBaseToRank(PMob->vitRank, mLvl);
@@ -1007,6 +999,12 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
     }
 
     SetupJob(PMob);
+
+    // If a mob is going to dual wield, then it needs to have a sub slot.
+    // Assume it is the same damage as the main slot.
+    // Ordering matters. This has to come after SetupJob
+    static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_SUB])->setDamage(PMob->IsDualWielding() ? GetWeaponDamage(PMob, SLOT_MAIN) : 0);
+
     SetupRoaming(PMob);
 
     // All beastmen drop gil
@@ -1029,7 +1027,7 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
 
     if (PMob->m_Type & MOBTYPE_NOTORIOUS)
     {
-        SetupNMMob(PMob);
+        PMob->setMobMod(MOBMOD_NO_DESPAWN, 1);
     }
 
     if (zoneType & ZONE_TYPE::INSTANCED)
@@ -1062,6 +1060,15 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
     {
         ShowError("mobutils::CalculateMobStats Mob (%s, %d, %d) has no detection methods!", PMob->getName(), PMob->id, PMob->m_Family);
     }
+}
+
+void SetupRangedAttack(CMobEntity* PMob)
+{
+    PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 0); // Need to remove the base ranged attack
+    PMob->defaultMobMod(MOBMOD_RANGED_ATTACK_RANGE, 14);
+    PMob->PAI->GetController()->SetRangedAttackEnabled(true);
+
+    static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_RANGED])->setBaseDelay(300);
 }
 
 void SetupJob(CMobEntity* PMob)
@@ -1166,6 +1173,18 @@ void SetupJob(CMobEntity* PMob)
             {
                 PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1388);
             }
+            else if (PMob->m_Family == 202) // Quadav
+            {
+                PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1123); // Quadav
+            }
+            else if (PMob->m_Family == 169) // Kindred
+            {
+                PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1152); // Hecatomb Wave
+            }
+            else if ((PMob->m_Family == 115) || (PMob->m_Family == 360)) // Fomor Ranged use player ranged attack
+            {
+                SetupRangedAttack(PMob);
+            }
             else
             {
                 // All other rangers
@@ -1182,6 +1201,19 @@ void SetupJob(CMobEntity* PMob)
                 // aern
                 PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1388);
                 PMob->defaultMobMod(MOBMOD_SPECIAL_COOL, 12);
+            }
+            else if (PMob->m_Family == 202) // Quadav
+            {
+                PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1123); // Quadav
+            }
+            else if (PMob->m_Family == 169) // Kindred
+            {
+                PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1152); // Hecatomb Wave
+            }
+            else if ((PMob->m_Family == 115) || (PMob->m_Family == 360)) // Fomor Ranged use player ranged attack
+            {
+                PMob->setMobMod(MOBMOD_DUAL_WIELD, 1);
+                SetupRangedAttack(PMob);
             }
             else if (PMob->m_Family != 335) // exclude NIN Maat
             {
@@ -1353,33 +1385,6 @@ void SetupEventMob(CMobEntity* PMob)
     PMob->m_maxRoamDistance = 0.5f; // always go back to spawn
 
     PMob->setMobMod(MOBMOD_NO_DESPAWN, 1);
-}
-
-void SetupNMMob(CMobEntity* PMob)
-{
-    JOBTYPE mJob = PMob->GetMJob();
-    uint8   mLvl = PMob->GetMLevel();
-
-    PMob->setMobMod(MOBMOD_NO_DESPAWN, 1);
-
-    // NMs cure earlier
-    PMob->defaultMobMod(MOBMOD_HP_HEAL_CHANCE, 50);
-    PMob->defaultMobMod(MOBMOD_HEAL_CHANCE, 40);
-
-    // give a gil bonus if accurate value was not set
-    if (PMob->getMobMod(MOBMOD_GIL_MAX) == 0)
-    {
-        PMob->defaultMobMod(MOBMOD_GIL_BONUS, 100);
-    }
-
-    if (mLvl >= 25)
-    {
-        if (mJob == JOB_WHM)
-        {
-            // whm nms have stronger regen effect
-            PMob->addModifier(Mod::REGEN, mLvl / 4);
-        }
-    }
 }
 
 void SetupDungeonInstanceMob(CMobEntity* PMob)
@@ -1760,8 +1765,8 @@ auto InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* instance) -> CMob
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setMaxHit(1);
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setSkillType(rset->get<uint8>("cmbSkill"));
         PMob->m_dmgMult = rset->get<uint16>("cmbDmgMult");
-        static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDelay((rset->get<uint16>("cmbDelay") * 1000) / 60);
-        static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((rset->get<uint16>("cmbDelay") * 1000) / 60);
+        static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDelay(rset->get<uint16>("cmbDelay"));
+        static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setBaseDelay(rset->get<uint16>("cmbDelay"));
 
         PMob->m_Behavior  = rset->get<uint16>("behavior");
         PMob->m_Link      = rset->get<uint8>("links");
@@ -1930,8 +1935,8 @@ auto InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZone
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setMaxHit(1);
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setSkillType(rset->get<uint8>("cmbSkill"));
         PMob->m_dmgMult = rset->get<uint16>("cmbDmgMult");
-        static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDelay((rset->get<uint16>("cmbDelay") * 1000) / 60);
-        static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((rset->get<uint16>("cmbDelay") * 1000) / 60);
+        static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDelay(rset->get<uint16>("cmbDelay"));
+        static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setBaseDelay(rset->get<uint16>("cmbDelay"));
 
         PMob->m_Behavior  = rset->get<uint16>("behavior");
         PMob->m_Link      = rset->get<uint8>("links");

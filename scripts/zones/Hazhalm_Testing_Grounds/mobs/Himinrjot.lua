@@ -23,7 +23,7 @@ end
 
 entity.onMobSpawn = function(mob)
     -- Snort about every 5 seconds
-    mob:setDelay(2000)
+    mob:setDelay(300)
 end
 
 return entity

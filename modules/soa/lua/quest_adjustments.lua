@@ -6,13 +6,13 @@ require('modules/module_utils')
 require('scripts/globals/interaction/interaction_global')
 -----------------------------------
 local m = Module:new('chocobos_wounds_era_wait')
------------------------------------
--- Reverts "Chocobo's Wounds" Feeding Timers To 1 Game Day
--- Source: https://forum.square-enix.com/ffxi/threads/46068-Feb-19-2015-%28JST%29-Version-Update
------------------------------------
 m:addOverride('xi.server.onServerStart', function()
     super()
 
+    -----------------------------------
+    -- Reverts "Chocobo's Wounds" Feeding Timers To 1 Game Day
+    -- Source: https://forum.square-enix.com/ffxi/threads/46068-Feb-19-2015-%28JST%29-Version-Update
+    -----------------------------------
     xi.module.modifyInteractionEntry('scripts/quests/jeuno/Chocobos_Wounds', function(quest)
         -- Override trade function timer with VanadielUniqueDay instead of GetSystemTime +45
         quest.sections[2][xi.zone.UPPER_JEUNO]['Chocobo'].onTrade = function(player, npc, trade)
@@ -76,7 +76,14 @@ m:addOverride('xi.server.onServerStart', function()
             player:confirmTrade()
         end
     end)
+
+    -----------------------------------
+    -- A Hard Day's Knight: Removes the ability to obtain the Temple Knight Key
+    -- Source: https://forum.square-enix.com/ffxi/threads/40059
+    -----------------------------------
+    xi.module.modifyInteractionEntry('scripts/quests/otherAreas/A_Hard_Days_Knight', function(quest)
+        table.remove(quest.sections, 3)
+    end)
 end)
 
--- The final event [64] does not need to set a new timer as the quest is already complete at that point
 return m

@@ -276,60 +276,25 @@ uint32 packBitsBE(uint8* target, uint64 value, int32 bitOffset, uint8 lengthInBi
 
 uint32 packBitsBE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset, uint8 lengthInBit)
 {
-    byteOffset += (bitOffset >> 3); // correct bitOffsets>=8
+    byteOffset += (bitOffset >> 3);
     bitOffset %= 8;
 
-    uint64 bitmask = 0xFFFFFFFFFFFFFFFFLL; // Generate bitmask
+    uint64 bitmask = 0xFFFFFFFFFFFFFFFFLL;
 
     bitmask >>= (64 - lengthInBit);
     bitmask <<= bitOffset;
 
-    value <<= bitOffset; // shift value
+    value <<= bitOffset;
     value &= bitmask;
 
-    bitmask ^= 0xFFFFFFFFFFFFFFFFLL; // invert bitmask
+    bitmask ^= 0xFFFFFFFFFFFFFFFFLL;
 
-    if ((lengthInBit + bitOffset) <= 8) // write shifted value to target
-    {
-        uint8* dataPointer = &target[byteOffset];
-
-        uint8 bitmaskUC = (uint8)bitmask;
-        uint8 valueUC   = (uint8)value;
-
-        *dataPointer &= bitmaskUC;
-        *dataPointer |= valueUC;
-    }
-    else if ((lengthInBit + bitOffset) <= 16)
-    {
-        uint16* dataPointer = (uint16*)&target[byteOffset];
-
-        uint16 bitmaskUC = (uint16)bitmask;
-        uint16 valueUC   = (uint16)value;
-
-        *dataPointer &= bitmaskUC;
-        *dataPointer |= valueUC;
-    }
-    else if ((lengthInBit + bitOffset) <= 32)
-    {
-        uint32* dataPointer = (uint32*)&target[byteOffset];
-
-        uint32 bitmaskUC = (uint32)bitmask;
-        uint32 valueUC   = (uint32)value;
-
-        *dataPointer &= bitmaskUC;
-        *dataPointer |= valueUC;
-    }
-    else if ((lengthInBit + bitOffset) <= 64)
-    {
-        uint64* dataPointer = (uint64*)&target[byteOffset];
-
-        *dataPointer &= bitmask;
-        *dataPointer |= value;
-    }
-    else
-    {
-        ShowError("Pack Bits Error: packBitsBE(...) not implemented for targetsizes above 64 bits. Targetsize: %d", (lengthInBit + bitOffset));
-    }
+    uint8  actualBytes = (bitOffset + lengthInBit + 7) / 8;
+    uint64 data        = 0;
+    std::memcpy(&data, &target[byteOffset], actualBytes);
+    data &= bitmask;
+    data |= value;
+    std::memcpy(&target[byteOffset], &data, actualBytes);
     return ((byteOffset << 3) + bitOffset + lengthInBit);
 }
 
@@ -350,29 +315,30 @@ uint64 unpackBitsBE(uint8* target, int32 byteOffset, int32 bitOffset, uint8 leng
 
     uint64 retVal = 0;
 
-    if ((lengthInBit + bitOffset) <= 8)
-    {
-        uint8* dataPointer = &target[byteOffset];
+    uint8 actualBytes = (bitOffset + lengthInBit + 7) / 8;
 
-        retVal = ((*dataPointer) & (uint8)bitmask) >> bitOffset;
+    if (actualBytes == 1)
+    {
+        uint8 data = target[byteOffset];
+        retVal     = (data & (uint8)bitmask) >> bitOffset;
     }
-    else if ((lengthInBit + bitOffset) <= 16)
+    else if (actualBytes <= 2)
     {
-        uint16* dataPointer = (uint16*)&target[byteOffset];
-
-        retVal = ((*dataPointer) & (uint16)bitmask) >> bitOffset;
+        uint16 data = 0;
+        std::memcpy(&data, &target[byteOffset], actualBytes);
+        retVal = (data & (uint16)bitmask) >> bitOffset;
     }
-    else if ((lengthInBit + bitOffset) <= 32)
+    else if (actualBytes <= 4)
     {
-        uint32* dataPointer = (uint32*)&target[byteOffset];
-
-        retVal = ((*dataPointer) & (uint32)bitmask) >> bitOffset;
+        uint32 data = 0;
+        std::memcpy(&data, &target[byteOffset], actualBytes);
+        retVal = (data & (uint32)bitmask) >> bitOffset;
     }
-    else if ((lengthInBit + bitOffset) <= 64)
+    else if (actualBytes <= 8)
     {
-        uint64* dataPointer = (uint64*)&target[byteOffset];
-
-        retVal = ((*dataPointer) & bitmask) >> bitOffset;
+        uint64 data = 0;
+        std::memcpy(&data, &target[byteOffset], actualBytes);
+        retVal = (data & bitmask) >> bitOffset;
     }
     else
     {
@@ -389,10 +355,10 @@ uint32 packBitsLE(uint8* target, uint64 value, int32 bitOffset, uint8 lengthInBi
 
 uint32 packBitsLE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset, uint8 lengthInBit)
 {
-    byteOffset += (bitOffset >> 3); // correct bitOffsets >= 8
+    byteOffset += (bitOffset >> 3);
     bitOffset %= 8;
 
-    uint8 bytesNeeded = 0; // calculate how many bytes are needed
+    uint8 bytesNeeded = 0;
     if ((bitOffset + lengthInBit) <= 8)
     {
         bytesNeeded = 1;
@@ -415,20 +381,21 @@ uint32 packBitsLE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset
         return 0;
     }
 
-    uint8* modifiedTarget = new uint8[bytesNeeded]; // convert byteOrder to Big Endian
+    uint8  actualBytes    = (bitOffset + lengthInBit + 7) / 8;
+    uint8* modifiedTarget = new uint8[bytesNeeded];
+    std::memset(modifiedTarget, 0, bytesNeeded);
 
-    for (uint8 curByte = 0; curByte < bytesNeeded; ++curByte)
+    for (uint8 curByte = 0; curByte < actualBytes; ++curByte)
     {
-        modifiedTarget[curByte] = target[byteOffset + (bytesNeeded - 1) - curByte];
+        modifiedTarget[bytesNeeded - 1 - curByte] = target[byteOffset + curByte];
     }
 
-    int32 newBitOffset = (bytesNeeded << 3) - (bitOffset + lengthInBit); // calculate new bitOffset
+    int32 newBitOffset = (bytesNeeded << 3) - (bitOffset + lengthInBit);
+    packBitsBE(&modifiedTarget[0], value, 0, newBitOffset, lengthInBit);
 
-    packBitsBE(&modifiedTarget[0], value, 0, newBitOffset, lengthInBit); // write data to modified array
-
-    for (uint8 curByte = 0; curByte < bytesNeeded; ++curByte) // copy back to target
+    for (uint8 curByte = 0; curByte < actualBytes; ++curByte)
     {
-        target[byteOffset + (bytesNeeded - 1) - curByte] = modifiedTarget[curByte];
+        target[byteOffset + curByte] = modifiedTarget[bytesNeeded - 1 - curByte];
     }
 
     {
@@ -471,13 +438,16 @@ uint64 unpackBitsLE(const uint8* target, int32 byteOffset, int32 bitOffset, uint
         return 0;
     }
 
+    uint8 actualBytes = (bitOffset + lengthInBit + 7) / 8;
+
     uint64 retVal = 0;
 
     uint8* modifiedTarget = new uint8[bytesNeeded];
+    std::memset(modifiedTarget, 0, bytesNeeded);
 
-    for (uint8 curByte = 0; curByte < bytesNeeded; ++curByte)
+    for (uint8 curByte = 0; curByte < actualBytes; ++curByte)
     {
-        modifiedTarget[curByte] = target[byteOffset + (bytesNeeded - 1) - curByte];
+        modifiedTarget[bytesNeeded - 1 - curByte] = target[byteOffset + curByte];
     }
     if (bytesNeeded == 1)
     {
@@ -499,9 +469,10 @@ uint64 unpackBitsLE(const uint8* target, int32 byteOffset, int32 bitOffset, uint
 void EncodeStringLinkshell(const std::string& signature, char* target)
 {
     uint8 encodedSignature[LinkshellStringLength] = {};
-    uint8 chars                                   = 0;
-    uint8 leftover                                = 0;
-    auto  length                                  = std::min<size_t>(20u, signature.size());
+
+    uint8 chars    = 0;
+    uint8 leftover = 0;
+    auto  length   = std::min<size_t>(20u, signature.size());
 
     for (std::size_t currChar = 0; currChar < length; ++currChar)
     {
@@ -532,7 +503,8 @@ void EncodeStringLinkshell(const std::string& signature, char* target)
 void DecodeStringLinkshell(const std::string& signature, char* target)
 {
     char decodedSignature[21] = {};
-    auto length               = std::min<size_t>(20u, (signature.size() * 8) / 6);
+
+    auto length = std::min<size_t>(20u, (signature.size() * 8) / 6);
 
     for (std::size_t currChar = 0; currChar < length; ++currChar)
     {
@@ -573,7 +545,8 @@ void DecodeStringLinkshell(const std::string& signature, char* target)
 std::string EncodeStringSignature(const std::string& signature, char* target)
 {
     uint8 encodedSignature[SignatureStringLength] = {};
-    auto  length                                  = std::min<size_t>(15u, signature.size());
+
+    auto length = std::min<size_t>(15u, signature.size());
 
     for (std::size_t currChar = 0; currChar < length; ++currChar)
     {
@@ -599,6 +572,7 @@ std::string EncodeStringSignature(const std::string& signature, char* target)
 void DecodeStringSignature(const std::string& signature, char* target)
 {
     char decodedSignature[PacketNameLength + 1] = {};
+
     for (uint8 currChar = 0; currChar < PacketNameLength; ++currChar)
     {
         char tempChar = unpackBitsLE((uint8*)signature.c_str(), currChar * 6, 6);

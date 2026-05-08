@@ -1,27 +1,27 @@
 -----------------------------------
 -- Rampage
 -- Family: Humanoid Axe Weaponskill
--- Description: Delivers a five-hit attack. Chance of critical varies with TP.
+-- Description: Delivers a fivefold attack. Chance of critical hit varies with TP.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    mob:messageBasic(xi.msg.basic.READIES_WS, 0, 684 + 256)
     return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    params.baseDamage     = mob:getWeaponDmg()
-    params.numHits        = 5
-    params.fTP            = { 1.5, 1.5, 1.5 } -- TODO: Capture fTPs
-    params.attackType     = xi.attackType.PHYSICAL
-    params.damageType     = xi.damageType.BLUNT
-    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_5
-    params.canCrit        = true
-    params.criticalChance = { 0.10, 0.20, 0.25 } -- TODO: Capture crit rate
+    params.baseDamage        = mob:getWeaponDmg()
+    params.numHits           = 5
+    params.fTP               = { 0.5, 0.5, 0.5 }
+    -- params.str_wSC        = 0.3 -- TODO: Capture if mobskill weaponskills have wSC.
+    params.canCrit           = true
+    params.criticalChance    = { 0.10, 0.30, 0.50 }
+    params.attackType        = xi.attackType.PHYSICAL
+    params.damageType        = xi.damageType.SLASHING
+    params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_5
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 

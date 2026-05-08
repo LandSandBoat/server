@@ -1,7 +1,7 @@
 -----------------------------------
 -- Victory Smite
 -- Family: Humanoid Hand to Hand Weaponskill
--- Description: Delivers a fourfold attack.
+-- Description: Delivers a fourfold attack. Chance of critical hit varies with TP.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,12 +15,13 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     params.baseDamage     = mob:getWeaponDmg()
     params.numHits        = 4
-    params.fTP            = { 2.25, 2.25, 2.25 } -- TODO: Capture fTPs
+    params.fTP            = { 2.25, 2.25, 2.25 }
+    --params.str_wSC      = 0.6 -- TODO: Capture if mobskill weaponskills have wSC.
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.HTH
     params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_4
-    -- params.canCrit        = true
-    -- params.criticalChance = { 0.0, 0.0, 0.0 } -- TODO: Capture crit rate
+    params.canCrit        = true
+    params.criticalChance = { 0.1, 0.25, 0.45 }
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 

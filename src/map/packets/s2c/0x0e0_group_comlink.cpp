@@ -30,12 +30,20 @@ GP_SERV_COMMAND_GROUP_COMLINK::GP_SERV_COMMAND_GROUP_COMLINK(const CCharEntity* 
     packet.LinkshellNum = linkshellNumber;
     if (linkshellNumber == 1)
     {
-        packet.ItemIndex = PChar->equip[SLOT_LINK1];
-        packet.Category  = PChar->equipLoc[SLOT_LINK1];
+        auto eloc = PChar->equipLocation(SLOT_LINK1);
+        if (eloc)
+        {
+            packet.ItemIndex = eloc->Slot;
+            packet.Category  = static_cast<uint8>(eloc->Container);
+        }
     }
     else
     {
-        packet.ItemIndex = PChar->equip[SLOT_LINK2];
-        packet.Category  = PChar->equipLoc[SLOT_LINK2];
+        auto eloc = PChar->equipLocation(SLOT_LINK2);
+        if (eloc)
+        {
+            packet.ItemIndex = eloc->Slot;
+            packet.Category  = static_cast<uint8>(eloc->Container);
+        }
     }
 }

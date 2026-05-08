@@ -178,6 +178,10 @@ int32 GetEnmityModCure(int16 level);
 bool  isValidSelfTargetWeaponskill(int wsid);
 bool  CanUseWeaponskill(CCharEntity* PChar, CWeaponSkill* PSkill);
 int16 CalculateBaseTP(CBattleEntity* PEntity, int32 delay);
+auto  GetBaseDelay(CBattleEntity* PEntity) -> uint16;       // get base delay of entity, melee only
+auto  GetBaseRangedDelay(CBattleEntity* PEntity) -> uint16; // get base delay of entity, ranged only
+auto  CalculateTPFromDamageDealt(CBattleEntity* PAttacker, bool isZanshin) -> int32;
+auto  CalculateTPFromDamageTaken(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 damage, uint16 delay) -> int32;
 void  GenerateCureEnmity(CBattleEntity* PSource, CBattleEntity* PTarget, int32 amount, int32 fixedCE = 0, int32 fixedVE = 0);
 void  GenerateInRangeEnmity(CBattleEntity* PSource, int32 CE, int32 VE);
 void  handleKillshotEnmity(CBattleEntity* PAttacker, CBattleEntity* PTarget);
@@ -200,7 +204,7 @@ uint16 doConsumeManaEffect(CCharEntity* m_PChar);
 int32  getOverWhelmDamageBonus(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 damage);
 
 void  TransferEnmity(CBattleEntity* PHateReceiver, CBattleEntity* PHateGiver, CMobEntity* PMob, uint8 percentToTransfer);
-uint8 getBarrageShotCount(CCharEntity* PChar);
+uint8 getBarrageShotCount(CBattleEntity* PBattleEntity);
 uint8 getStoreTPbonusFromMerit(CBattleEntity* PEntity);
 
 void ClaimMob(CBattleEntity* PDefender, CBattleEntity* PAttacker, bool passing = false);

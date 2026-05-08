@@ -8,30 +8,17 @@ xi.chocoboRaising = xi.chocoboRaising or {}
 
 local debug = utils.getDebugPlayerPrinter(xi.settings.main.DEBUG_CHOCOBO_RAISING)
 
-local compareTables = function(t1, t2)
+local arraysEqual = function(t1, t2)
     if
-        not t1 or
-        not t2
+        type(t1) ~= 'table' or
+        type(t2) ~= 'table' or
+        #t1 ~= #t2
     then
         return false
     end
 
-    if type(t1) ~= 'table' then
-        return false
-    end
-
-    if type(t2) ~= 'table' then
-        return false
-    end
-
-    if #t1 ~= #t2 then
-        return false
-    end
-
-    for idx, val1 in pairs(t1) do
-        local val2 = t2[idx]
-
-        if val1 ~= val2 then
+    for i = 1, #t1 do
+        if t1[i] ~= t2[i] then
             return false
         end
     end
@@ -40,62 +27,66 @@ local compareTables = function(t1, t2)
 end
 
 xi.chocoboRaising.condenseEvents = function(events)
-    local cutEvent = function(t, eStart, eEnd, csList)
-        table.insert(t, { eStart, eEnd, csList })
-    end
-
-    local condensedEvents     = {}
-    local currentStartDay     = nil
-    local currentEndDay       = nil
-    local currentEventCSTable = nil
+    local condensedEvents = {}
+    local currentSpan     = nil
 
     debug('Raw Events')
     for _, entry in ipairs(events) do
         local eventDay    = entry[1]
         local eventCSList = entry[2]
 
-        debug('Day', eventDay, ':', eventCSList[1])
+        debug('  Day', eventDay, ':', eventCSList[1])
 
-        if not currentEventCSTable then
-            -- Start first span
-            currentStartDay     = eventDay
-            currentEndDay       = eventDay
-            currentEventCSTable = {}
+        if
+            currentSpan and
+            eventDay == currentSpan[2]
+        then
             for _, cs in ipairs(eventCSList) do
-                table.insert(currentEventCSTable, cs)
-            end
-        elseif eventDay == currentEndDay then
-            -- Additional event on the same day, append to current span
-            for _, cs in ipairs(eventCSList) do
-                table.insert(currentEventCSTable, cs)
+                table.insert(currentSpan[3], cs)
             end
         elseif
-            eventDay == currentEndDay + 1 and
-            compareTables(eventCSList, currentEventCSTable)
+            currentSpan and
+            eventDay == currentSpan[2] + 1 and
+            arraysEqual(eventCSList, currentSpan[3])
         then
-            -- Next day, but same exact CS table. Extend the span.
-            currentEndDay = eventDay
+            currentSpan[2] = eventDay
         else
-            -- Span broken: cut it and start a new one
-            cutEvent(condensedEvents, currentStartDay, currentEndDay, currentEventCSTable)
-
-            currentStartDay     = eventDay
-            currentEndDay       = eventDay
-            currentEventCSTable = {}
-            for _, cs in ipairs(eventCSList) do
-                table.insert(currentEventCSTable, cs)
+            if currentSpan then
+                table.insert(condensedEvents, currentSpan)
             end
+
+            currentSpan = { eventDay, eventDay, {} }
+
+            for _, cs in ipairs(eventCSList) do
+                table.insert(currentSpan[3], cs)
+            end
+        end
+
+        local foundRetirement = false
+        for _, cs in ipairs(eventCSList) do
+            if cs == xi.chocoboRaising.cutscenes.ADULT_3_TO_ADULT_4 then
+                foundRetirement = true
+                break
+            end
+        end
+
+        if foundRetirement then
+            break
         end
     end
 
-    -- Final 'cut'
-    if currentEventCSTable then
-        cutEvent(condensedEvents, currentStartDay, currentEndDay, currentEventCSTable)
+    if currentSpan then
+        table.insert(condensedEvents, currentSpan)
     end
 
     debug('Condensed Events & Spans')
     for _, entry in ipairs(condensedEvents) do
-        debug('Days', entry[1], 'to', entry[2], ':', entry[3][1])
+        local csList = entry[3]
+        if #csList > 1 then
+            debug('  Days', entry[1], 'to', entry[2], ':', tostring(csList[1]) .. string.format(' (+%d events)', #csList - 1))
+        else
+            debug('  Days', entry[1], 'to', entry[2], ':', csList[1])
+        end
     end
 
     return condensedEvents

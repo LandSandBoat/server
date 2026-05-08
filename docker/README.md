@@ -2,10 +2,10 @@
 
 ## Meshes
 
-`losmeshes` and `navmeshes` are included in a separate image. You can load these into a volume with the following command:
+`navmeshes` are included in a separate image. You can load these into a volume with the following command:
 
 ```sh
-docker run --rm -v losmeshes:/losmeshes -v navmeshes:/navmeshes ghcr.io/landsandboat/ximeshes:latest
+docker run --rm -v navmeshes:/navmeshes ghcr.io/landsandboat/ximeshes:latest
 ```
 Once the volumes are created, you can delete the image.
 
@@ -47,7 +47,6 @@ docker run --name some-lsb-server \
 -p 54002:54002 \
 -p 54230:54230 \
 -p 54231:54231 \
--v losmeshes:/server/losmeshes \
 -v navmeshes:/server/navmeshes \
 -it ghcr.io/landsandboat/server:latest
 ```
@@ -114,7 +113,6 @@ x-common: &common
     XI_NETWORK_SQL_HOST: database
     # XI_{file}_{setting}: value
   volumes:
-    - losmeshes:/server/losmeshes
     - navmeshes:/server/navmeshes
     # - ./config.yaml:/server/tools/config.yaml
     # - ./map.lua:/server/settings/map.lua
@@ -201,8 +199,6 @@ services:
 
 volumes:
   database:
-  losmeshes:
-    external: true
   navmeshes:
     external: true
 ```

@@ -10,17 +10,12 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local effectparams =
+    local effectTable =
     {
-        effectId = xi.effect.SLOW,
-        power    = 3000,
-        duration = 90,
-        tier     = 8, -- https://wiki.ffo.jp/html/4125.html
+        [1] = { effectId = xi.effect.SLOW, power = 3000, duration = 90, tier = 8, },
     }
 
-    xi.combat.action.executeMobskillStatusEffect(mob, target, skill, effectparams, true)
-
-    return xi.effect.SLOW
+    return xi.combat.action.executeMobskillStatusEffect(mob, target, skill, effectTable, {})
 end
 
 return mobskillObject

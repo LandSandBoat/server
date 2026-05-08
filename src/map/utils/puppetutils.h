@@ -30,8 +30,8 @@ namespace puppetutils
 void LoadAutomaton(CCharEntity* PChar);
 void SaveAttachments(CCharEntity* PChar);
 void SaveAutomaton(CCharEntity* PChar);
-auto UnlockAttachment(CCharEntity* PChar, CItem* PItem) -> bool;
-auto HasAttachment(const CCharEntity* PChar, CItem* PItem) -> bool;
+auto UnlockAttachment(CCharEntity* PChar, const CItem* PItem) -> bool;
+auto HasAttachment(const CCharEntity* PChar, const CItem* PItem) -> bool;
 void setAttachment(CCharEntity* PChar, uint8 slotId, uint8 attachment);
 void setFrame(CCharEntity* PChar, AutomatonFrame frame);
 void setHead(CCharEntity* PChar, AutomatonHead head);

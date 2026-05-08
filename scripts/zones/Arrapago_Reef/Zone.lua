@@ -19,12 +19,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(-456, -3, -405, 64)
     end
 
-    if
-        prevZone == xi.zone.THE_ASHU_TALIF and
-        player:getCharVar('AgainstAllOdds') == 3
-    then
-        cs = 238
-    elseif prevZone == xi.zone.ILRUSI_ATOLL then
+    if prevZone == xi.zone.ILRUSI_ATOLL then
         player:setPos(26, -7, 606, 222)
     end
 
@@ -37,12 +32,6 @@ zoneObject.afterZoneIn = function(player)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    if
-        player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) == xi.questStatus.QUEST_ACCEPTED and
-        player:getCharVar('AgainstAllOdds') == 1
-    then
-        player:startEvent(237)
-    end
 end
 
 zoneObject.onGameDay = function()
@@ -57,12 +46,6 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
         player:setPos(0, 0, 0, 0, 55)
     elseif csid == 222 then -- Enter instance: Black coffin
         player:setPos(0, 0, 0, 0, 60)
-    elseif csid == 237 then
-        player:startEvent(240)
-    elseif csid == 238 then
-        npcUtil.completeQuest(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS, { item = 15266, var = 'AgainstAllOdds' })
-    elseif csid == 240 then
-        player:setCharVar('AgainstAllOdds', 2)
     end
 end
 

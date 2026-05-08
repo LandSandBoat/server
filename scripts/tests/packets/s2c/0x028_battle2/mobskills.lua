@@ -392,7 +392,7 @@ local packets =
     {
         test = function(player)
             local mob = player.entities:moveTo('Clipper')
-            mob:useMobAbility(xi.mobSkill.BIG_SCISSORS, player, 10)
+            mob:useMobAbility(xi.mobSkill.BIG_SCISSORS_1, player, 10)
             xi.test.world:tickEntity(mob)
             mob:setHP(0)              -- Kill mob while in "ready" state
             xi.test.world:skipTime(3) -- Process death and interrupt

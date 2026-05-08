@@ -107,3 +107,45 @@ end
 ---@return nil
 function CClientEntityPairActions:skillchain(target, ...)
 end
+
+---Move an item between containers or split a stack
+---@param srcContainer xi.inventoryLocation Source container
+---@param srcSlot integer Source slot index
+---@param dstContainer xi.inventoryLocation Destination container
+---@param quantity integer Quantity to move
+---@param dstSlot? integer Destination slot (omit for first free)
+---@return nil
+function CClientEntityPairActions:moveItem(srcContainer, srcSlot, dstContainer, quantity, dstSlot)
+end
+
+---Sort a container, merging partial stacks
+---@param container xi.inventoryLocation Container to sort
+---@return nil
+function CClientEntityPairActions:sortContainer(container)
+end
+
+---Drop an item (sends to recycle bin if enabled)
+---@param container xi.inventoryLocation Source container
+---@param slot integer Slot index
+---@param quantity integer Quantity to drop
+---@return nil
+function CClientEntityPairActions:dropItem(container, slot, quantity)
+end
+
+---@class LockstyleItem
+---@field itemId integer Item ID
+---@field slot xi.slot Equipment slot
+
+---Set lockstyle mode, optionally with item overrides
+---@param mode integer Lockstyle mode (0=disable, 3=set, 4=enable)
+---@param items? LockstyleItem[] Items to apply
+---@return nil
+function CClientEntityPairActions:setLockstyle(mode, items)
+end
+
+---Start a synthesis. Inventory slots are resolved automatically.
+---@param crystal xi.item Crystal item ID
+---@param ingredients xi.item[] Ingredient item IDs (1..8)
+---@return nil
+function CClientEntityPairActions:craft(crystal, ingredients)
+end

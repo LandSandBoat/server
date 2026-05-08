@@ -2,6 +2,8 @@
 -- Area: Labyrinth of Onzozo
 --   NM: Peg Powler
 -----------------------------------
+local ID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 
@@ -57,6 +59,11 @@ entity.spawnPoints =
     { x = -113.402, y =  5.154, z =  16.410 },
     { x =  -62.300, y =  5.386, z =  76.543 },
     { x =  -61.656, y =  5.255, z =  58.971 }
+}
+
+entity.phList =
+{
+    [ID.mob.PEG_POWLER - 1] = ID.mob.PEG_POWLER, -- 106.015 -13.864 5 (retail approx area)
 }
 
 entity.onMobInitialize = function(mob)

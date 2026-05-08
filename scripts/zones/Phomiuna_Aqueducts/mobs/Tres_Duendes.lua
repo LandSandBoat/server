@@ -30,9 +30,9 @@ entity.onMobFight = function(mob, target)
 
         local formConfigs =
         {
-            vertical   = { bonus =  0,  delay = 4750, animSub = 15, tripleAtk = 100 }, -- 100% Triple Attack
-            horizontal = { bonus = 22,  delay = 4600, animSub = 14, tripleAtk = 0   }, -- Slow delay, Strong mob weapon bonus (level * 1.5)
-            normal     = { bonus =  0,  delay = 2400, animSub = 13, tripleAtk = 0   }, -- Normal bats
+            vertical   = { bonus =  0,  delay = 475,  animSub = 15, tripleAtk = 100 }, -- 100% Triple Attack
+            horizontal = { bonus = 22,  delay = 460,  animSub = 14, tripleAtk = 0   }, -- Slow delay, Strong mob weapon bonus (level * 1.5)
+            normal     = { bonus =  0,  delay = 240,  animSub = 13, tripleAtk = 0   }, -- Normal bats
         }
 
         local selectedForm
@@ -78,7 +78,7 @@ entity.onMobDisengage = function(mob)
     -- Reset to normal form with normal mode stats
     mob:setAnimationSub(13)
     mob:setMobMod(xi.mobMod.WEAPON_BONUS, 0)
-    mob:setDelay(2400)
+    mob:setDelay(240)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 0)
 end
 

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Crescent Moon
--- Family: Avatar (Fenrir)
--- Description: Delivers a powerful strike to a single target.
+-- Family: Humanoid Great Sword Weaponskill
+-- Description: Delivers a single-hit attack. Damage varies with TP.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,9 +15,10 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     params.baseDamage     = mob:getWeaponDmg()
     params.numHits        = 1
-    params.fTP            = { 3.0, 3.0, 3.0 }
+    params.fTP            = { 1.0, 1.75, 2.5 }
+    -- params.str_wSC     = 0.35 -- TODO: Capture if mobskill weaponskills have wSC.
     params.attackType     = xi.attackType.PHYSICAL
-    params.damageType     = xi.damageType.BLUNT
+    params.damageType     = xi.damageType.SLASHING
     params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)

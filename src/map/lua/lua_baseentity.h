@@ -160,6 +160,9 @@ public:
     // int32 LimitDistance(lua_Stat* L);    // limits the current path distance to given max distance
     void setCarefulPathing(bool careful);
 
+    bool canSee(const CLuaBaseEntity* PTarget);
+    bool inWater();
+
     void openDoor(const sol::object& seconds);
     void closeDoor(const sol::object& seconds);
     void setElevator(uint8 id, uint32 lowerDoor, uint32 upperDoor, uint32 elevatorId, bool reversed);
@@ -652,8 +655,8 @@ public:
     bool   isDualWielding();
     bool   isUsingH2H();
     uint16 getBaseWeaponDelay(uint16 slot); // get base delay of weapon
-    uint16 getBaseDelay();                  // get base delay of entity, melee only
-    uint16 getBaseRangedDelay();            // get base delay of entity, ranged only
+    auto   getBaseDelay() -> uint16;        // get base delay of entity, melee only
+    auto   getBaseRangedDelay() -> uint16;  // get base delay of entity, ranged only
 
     float checkLiementAbsorb(uint16 damageType); // return 1.0 if did not absorb, return >= -1.0 if did absorb
 
@@ -819,7 +822,7 @@ public:
     auto getActiveManeuverCount() const -> uint8;
     void removeOldestManeuver() const;
     void removeAllManeuvers() const;
-    auto getAttachment(uint8 slotId) const -> CItem*;
+    auto getAttachment(uint8 slotId) const -> const CItem*;
     auto getAttachments() const -> sol::table;
     void setAttachment(uint8 attachmentItemID, uint8 slotID) const;
     void updateAttachments() const;
@@ -881,6 +884,8 @@ public:
     auto hasSpellList() const -> bool;
     void setSpellList(uint16 spellListId) const;
     void setAutoAttackEnabled(bool state);   // halts/resumes auto attack of entity
+    void setRangedAttackEnabled(bool state); // halts/resumes ranged auto attack of entity
+    bool isRangedAttackEnabled();            // returns whether ranged auto attack is enabled
     void setMagicCastingEnabled(bool state); // halt/resumes casting magic
     void setMobAbilityEnabled(bool state);   // halt/resumes mob skills
     void setMobSkillAttack(int16 listId);    // enable/disable using mobskills as regular attacks

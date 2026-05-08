@@ -98,6 +98,25 @@ CItemEquipment::CItemEquipment(uint16 id)
     m_superiorLevel    = 0;
 }
 
+CItemEquipment::CItemEquipment(const CItemEquipment& other)
+: CItemUsable(other)
+, modList(other.modList)
+, petModList(other.petModList)
+, latentList(other.latentList)
+, m_reqLvl(other.m_reqLvl)
+, m_iLvl(other.m_iLvl)
+, m_jobs(other.m_jobs)
+, m_modelID(other.m_modelID)
+, m_scriptType(other.m_scriptType)
+, m_shieldSize(other.m_shieldSize)
+, m_absorption(other.m_absorption)
+, m_equipSlotID(other.m_equipSlotID)
+, m_removeSlotID(other.m_removeSlotID)
+, m_removeSlotLookID(other.m_removeSlotLookID)
+, m_superiorLevel(other.m_superiorLevel)
+{
+}
+
 CItemEquipment::~CItemEquipment()
 {
 }
@@ -376,7 +395,7 @@ void CItemEquipment::setTrialNumber(uint16 trial)
     trialData.TrialId = trial;
 }
 
-uint16 CItemEquipment::getTrialNumber()
+auto CItemEquipment::getTrialNumber() const -> uint16
 {
     return this->exdata<Exdata::AugmentTrial>().TrialId;
 }
@@ -476,7 +495,7 @@ void CItemEquipment::SetAugmentMod(uint16 type, uint8 value)
     }
 }
 
-uint16 CItemEquipment::getAugment(uint8 slot)
+auto CItemEquipment::getAugment(uint8 slot) const -> uint16
 {
     auto&  augData = this->exdata<Exdata::AugmentStandard>();
     uint16 result  = 0;

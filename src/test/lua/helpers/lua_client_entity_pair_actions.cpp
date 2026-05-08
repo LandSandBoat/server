@@ -36,10 +36,15 @@
 #include "map/enums/party_kind.h"
 #include "map/lua/lua_baseentity.h"
 #include "map/packets/c2s/0x01a_action.h"
+#include "map/packets/c2s/0x028_item_dump.h"
+#include "map/packets/c2s/0x029_item_move.h"
 #include "map/packets/c2s/0x036_item_transfer.h"
 #include "map/packets/c2s/0x037_item_use.h"
+#include "map/packets/c2s/0x03a_item_stack.h"
+#include "map/packets/c2s/0x053_lockstyle.h"
 #include "map/packets/c2s/0x06e_group_solicit_req.h"
 #include "map/packets/c2s/0x074_group_solicit_res.h"
+#include "map/packets/c2s/0x096_combine_ask.h"
 #include "map/spell.h"
 #include "map/status_effect_container.h"
 #include "packets/c2s/0x015_pos.h"
@@ -505,6 +510,123 @@ void CLuaClientEntityPairActions::skillchain(CLuaBaseEntity* target, sol::variad
     }
 }
 
+void CLuaClientEntityPairActions::moveItem(const uint8 srcContainer, const uint8 srcSlot, const uint8 dstContainer, const uint32 quantity, const sol::optional<uint8> dstSlot) const
+{
+    const auto packet = parent_->packets().createPacket<GP_CLI_COMMAND_ITEM_MOVE>();
+    auto*      p      = packet->as<GP_CLI_COMMAND_ITEM_MOVE>();
+    p->ItemNum        = quantity;
+    p->Category1      = srcContainer;
+    p->Category2      = dstContainer;
+    p->ItemIndex1     = srcSlot;
+    p->ItemIndex2     = dstSlot.value_or(0xFF);
+
+    parent_->packets().sendBasicPacket(*packet);
+}
+
+void CLuaClientEntityPairActions::sortContainer(const uint8 container) const
+{
+    const auto packet = parent_->packets().createPacket<GP_CLI_COMMAND_ITEM_STACK>();
+    auto*      p      = packet->as<GP_CLI_COMMAND_ITEM_STACK>();
+    p->Category       = container;
+
+    parent_->packets().sendBasicPacket(*packet);
+}
+
+void CLuaClientEntityPairActions::dropItem(const uint8 container, const uint8 slot, const uint32 quantity) const
+{
+    const auto packet = parent_->packets().createPacket<GP_CLI_COMMAND_ITEM_DUMP>();
+    auto*      p      = packet->as<GP_CLI_COMMAND_ITEM_DUMP>();
+    p->ItemNum        = quantity;
+    p->Category       = container;
+    p->ItemIndex      = slot;
+
+    parent_->packets().sendBasicPacket(*packet);
+}
+
+void CLuaClientEntityPairActions::setLockstyle(const uint8 mode, sol::optional<sol::table> items) const
+{
+    const auto packet = parent_->packets().createPacket<GP_CLI_COMMAND_LOCKSTYLE>();
+    auto*      p      = packet->as<GP_CLI_COMMAND_LOCKSTYLE>();
+    p->Mode           = mode;
+    p->Count          = 0;
+
+    if (items.has_value())
+    {
+        uint8 idx = 0;
+        for (const auto& [key, val] : items.value())
+        {
+            if (!val.is<sol::table>() || idx >= 16)
+            {
+                break;
+            }
+
+            auto entry              = val.as<sol::table>();
+            p->Items[idx].ItemNo    = entry.get_or<uint16_t>("itemId", 0);
+            p->Items[idx].EquipKind = entry.get_or<uint8_t>("slot", 0);
+            p->Items[idx].ItemIndex = 0;
+            p->Items[idx].Category  = 0;
+            ++idx;
+        }
+        p->Count = idx;
+    }
+
+    parent_->packets().sendBasicPacket(*packet);
+}
+
+/************************************************************************
+ *  Function: craft()
+ *  Purpose : Emits packet to start a synthesis with the given crystal +
+ *            ingredient item IDs (looked up in the player's inventory).
+ *  Example : player.actions:craft(xi.item.FIRE_CRYSTAL, { xi.item.SAND, xi.item.SAND })
+ *  Notes   : Tick time forward to complete the synth.
+ ************************************************************************/
+
+void CLuaClientEntityPairActions::craft(const uint16 crystalItemId, const sol::table& ingredients) const
+{
+    const auto crystalSlot = parent_->getItemInvSlot(crystalItemId, 1);
+    if (!crystalSlot.has_value())
+    {
+        TestError("craft: crystal {} not in inventory", crystalItemId);
+        return;
+    }
+
+    const size_t ingredientCount = ingredients.size();
+    if (ingredientCount == 0 || ingredientCount > 8)
+    {
+        TestError("craft: ingredient count must be 1..8 (got {})", ingredientCount);
+        return;
+    }
+
+    const auto packet = parent_->packets().createPacket<GP_CLI_COMMAND_COMBINE_ASK>();
+    auto*      p      = packet->as<GP_CLI_COMMAND_COMBINE_ASK>();
+    p->Crystal        = crystalItemId;
+    p->CrystalIdx     = crystalSlot.value();
+    p->Items          = static_cast<uint8>(ingredientCount);
+
+    uint8 idx = 0;
+    for (const auto& [_key, val] : ingredients)
+    {
+        if (idx >= 8 || !val.is<uint16>())
+        {
+            break;
+        }
+
+        const uint16 ingredientId = val.as<uint16>();
+        const auto   invSlot      = parent_->getItemInvSlot(ingredientId, 1);
+        if (!invSlot.has_value())
+        {
+            TestError("craft: ingredient {} not in inventory", ingredientId);
+            return;
+        }
+
+        p->ItemNo[idx]  = ingredientId;
+        p->TableNo[idx] = invSlot.value();
+        ++idx;
+    }
+
+    parent_->packets().sendBasicPacket(*packet);
+}
+
 void CLuaClientEntityPairActions::Register()
 {
     SOL_USERTYPE("CClientEntityPairActions", CLuaClientEntityPairActions);
@@ -523,4 +645,9 @@ void CLuaClientEntityPairActions::Register()
     SOL_REGISTER("acceptRaise", CLuaClientEntityPairActions::acceptRaise);
     SOL_REGISTER("engage", CLuaClientEntityPairActions::engage);
     SOL_REGISTER("skillchain", CLuaClientEntityPairActions::skillchain);
+    SOL_REGISTER("moveItem", CLuaClientEntityPairActions::moveItem);
+    SOL_REGISTER("sortContainer", CLuaClientEntityPairActions::sortContainer);
+    SOL_REGISTER("dropItem", CLuaClientEntityPairActions::dropItem);
+    SOL_REGISTER("setLockstyle", CLuaClientEntityPairActions::setLockstyle);
+    SOL_REGISTER("craft", CLuaClientEntityPairActions::craft);
 }

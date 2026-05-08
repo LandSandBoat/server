@@ -41,10 +41,10 @@ GP_SERV_COMMAND_EQUIPSET_VALID::GP_SERV_COMMAND_EQUIPSET_VALID(const CCharEntity
 {
     auto& packet = this->data();
 
-    CItemEquipment* equipSet[16]         = {};
-    uint8           equipSetBag[16]      = {};
-    uint8           equipSetBagIndex[16] = {};
-    bool            equipSetDisabled[16] = {};
+    const CItemEquipment* equipSet[16]         = {};
+    uint8                 equipSetBag[16]      = {};
+    uint8                 equipSetBagIndex[16] = {};
+    bool                  equipSetDisabled[16] = {};
 
     const uint8  equippedIndex       = data.EquipKind;                // Where packet claims the new item is going
     const bool   newItemSlotDisabled = data.ItemChange.RemoveItemFlg; // single bit, indicates this slot is intentionally disabled
@@ -63,7 +63,7 @@ GP_SERV_COMMAND_EQUIPSET_VALID::GP_SERV_COMMAND_EQUIPSET_VALID(const CCharEntity
         // Retail doesn't do strict checking on items already in the set
         // This is probably due to the fact you can move items later
         // The actual equip command should handle erroneous input and/or missing items
-        auto* PItem = dynamic_cast<CItemEquipment*>(itemutils::GetItemPointer(itemID));
+        auto* PItem = xi::items::lookup<CItemEquipment>(itemID);
 
         equipSet[i]         = PItem;
         equipSetBag[i]      = bag;
@@ -101,10 +101,10 @@ GP_SERV_COMMAND_EQUIPSET_VALID::GP_SERV_COMMAND_EQUIPSET_VALID(const CCharEntity
             }
         }
 
-        const CItemWeapon* PWeapon = dynamic_cast<CItemWeapon*>(equipSet[SLOT_MAIN]);
-        const CItemWeapon* PSub    = dynamic_cast<CItemWeapon*>(equipSet[SLOT_SUB]);
-        const CItemWeapon* PRanged = dynamic_cast<CItemWeapon*>(equipSet[SLOT_RANGED]);
-        const CItemWeapon* PAmmo   = dynamic_cast<CItemWeapon*>(equipSet[SLOT_AMMO]);
+        const CItemWeapon* PWeapon = dynamic_cast<const CItemWeapon*>(equipSet[SLOT_MAIN]);
+        const CItemWeapon* PSub    = dynamic_cast<const CItemWeapon*>(equipSet[SLOT_SUB]);
+        const CItemWeapon* PRanged = dynamic_cast<const CItemWeapon*>(equipSet[SLOT_RANGED]);
+        const CItemWeapon* PAmmo   = dynamic_cast<const CItemWeapon*>(equipSet[SLOT_AMMO]);
 
         if (const CItemWeapon* newItemWeapon = dynamic_cast<CItemWeapon*>(newItem))
         {

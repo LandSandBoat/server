@@ -67,7 +67,7 @@ zones[xi.zone.WEST_SARUTABARUTA] =
     mob =
     {
         NUNYENUNC   = GetFirstID('Nunyenunc'),
-        TOM_TIT_TAT = GetFirstID('Tom_Tit_Tat'),
+        TOM_TIT_TAT = GetTableOfIDs('Tom_Tit_Tat'),
         VOIDWALKER  =
         {
             [xi.keyItem.CLEAR_ABYSSITE] =

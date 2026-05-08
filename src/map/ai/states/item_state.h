@@ -23,9 +23,12 @@
 
 #include "state.h"
 
+#include <memory>
+
 class CBattleEntity;
 class CCharEntity;
 class CItemUsable;
+class ItemUseTransaction;
 
 struct action_t;
 
@@ -33,6 +36,7 @@ class CItemState : public CState
 {
 public:
     CItemState(CCharEntity* PEntity, uint16 targid, uint8 loc, uint8 slotid);
+    ~CItemState() override;
     void UpdateTarget(CBaseEntity* target) override;
     void UpdateTarget(uint16 targid) override;
     auto Update(timer::time_point tick) -> bool override;
@@ -58,13 +62,14 @@ public:
 protected:
     bool HasMoved() const;
 
-    CCharEntity*    m_PEntity;
-    CItemUsable*    m_PItem;
-    uint8           m_location;
-    uint8           m_slot;
-    timer::duration m_castTime{};
-    timer::duration m_animationTime{};
-    position_t      m_startPos;
-    bool            m_interrupted{ false };
-    bool            m_interruptable{ true };
+    CCharEntity*                        m_PEntity;
+    CItemUsable*                        m_PItem;
+    uint8                               m_location;
+    uint8                               m_slot;
+    timer::duration                     m_castTime{};
+    timer::duration                     m_animationTime{};
+    position_t                          m_startPos;
+    bool                                m_interrupted{ false };
+    bool                                m_interruptable{ true };
+    std::unique_ptr<ItemUseTransaction> tx_;
 };

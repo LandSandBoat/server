@@ -91,7 +91,6 @@ jobs:
             --user root \
             --network ${{ job.services.database.network }} \
             --mount type=bind,src=./navmeshes,dst=/server/navmeshes \
-            --mount type=bind,src=./losmeshes,dst=/server/losmeshes \
             --mount type=bind,src=./ximeshes,dst=/server/ximeshes \
             --mount type=bind,src=./modules,dst=/server/modules \
             --mount type=bind,src=.,dst=/server/log \

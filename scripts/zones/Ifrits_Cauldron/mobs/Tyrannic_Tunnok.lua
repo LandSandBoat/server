@@ -33,7 +33,7 @@ end
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 
-    mob:setMod(xi.mod.STORETP, 60)
+    mob:setMod(xi.mod.STORETP, 90) -- 7 hits to 1k
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)

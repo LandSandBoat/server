@@ -1007,6 +1007,14 @@ end
 xi.magian.onMobDeath = function(mob, player, optParams, trialTable)
     local relevantTrials = {}
 
+    if not player then
+        return
+    end
+
+    if not trialTable then
+        return
+    end
+
     for equipSlot = xi.slot.MAIN, xi.slot.FEET do
         local itemObj = player:getEquippedItem(equipSlot)
 

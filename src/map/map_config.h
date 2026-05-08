@@ -30,6 +30,7 @@ struct MapConfig final
     bool isTestServer{ false };      // Disables watchdog and certain recurring tasks when ticks are externally managed.
     bool lazyZones{ false };         // Load zones when first accessed
     bool controlledWeather{ false }; // Disables automated weather
+    bool rebuildNavmeshes{ false };  // Force rebuild all navmeshes from ximesh on startup
 };
 
 static_assert(std::is_standard_layout_v<MapConfig>, "MapConfig must be standard-layout");

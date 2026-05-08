@@ -51,6 +51,7 @@ zones[xi.zone.BALGAS_DAIS] =
     {
         ATORI_TUTORI            = GetFirstID('Atori-Tutori_qm'),
         BUU_XOLO_THE_BLOODFACED = GetFirstID('Buu_Xolo_the_Bloodfaced'),
+        DROMICEIOMIMUS          = GetFirstID('Dromiceiomimus'),
         DVOROVOI                = GetFirstID('Dvorovoi'),
         GILAGOGE_TLUGVI         = GetFirstID('Gilagoge_Tlugvi'),
         KING_OF_BATONS          = GetFirstID('King_of_Batons'),

@@ -18,10 +18,10 @@ local forms =
 local formConfig =
 {
 -- [form]          = { mobskill, 2-hour, castingEnabled, damageMultiplier, delay, tripleAttack, attBonus, evaBonus, defBonus, defMultiplier }
-    [forms.BALL  ] = { xi.mobSkill.HEXIDISCS,            xi.mobSkill.MANAFONT_1,       true,  2200, 100, 0,  0,  0,  0, 1 },
-    [forms.HUMAN ] = { xi.mobSkill.VORPAL_BLADE_GHRAH,   xi.mobSkill.INVINCIBLE_1,     false, 2200, 100, 0,  0,  0, 60, 1 },
-    [forms.SPIDER] = { xi.mobSkill.SICKLE_SLASH,         xi.mobSkill.MIGHTY_STRIKES_1, false, 2700, 200, 0, 11,  0, 11, 2 },
-    [forms.BIRD  ] = { xi.mobSkill.DAMNATION_DIVE_GHRAH, xi.mobSkill.PERFECT_DODGE_1,  false, 1600, 100, 5,  0, 48,  0, 1 },
+    [forms.BALL  ] = { xi.mobSkill.HEXIDISCS,            xi.mobSkill.MANAFONT_1,       true,  220, 100, 0,  0,  0,  0, 1 },
+    [forms.HUMAN ] = { xi.mobSkill.VORPAL_BLADE_GHRAH,   xi.mobSkill.INVINCIBLE_1,     false, 220, 100, 0,  0,  0, 60, 1 },
+    [forms.SPIDER] = { xi.mobSkill.SICKLE_SLASH,         xi.mobSkill.MIGHTY_STRIKES_1, false, 270, 200, 0, 11,  0, 11, 2 },
+    [forms.BIRD  ] = { xi.mobSkill.DAMNATION_DIVE_GHRAH, xi.mobSkill.PERFECT_DODGE_1,  false, 160, 100, 5,  0, 48,  0, 1 },
 }
 
 local function setupForm(mob, chosenForm)

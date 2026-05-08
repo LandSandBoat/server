@@ -1,5 +1,4 @@
------------------------------------
--- COR AF2: Against All Odds
+-- COR AF3: Against All Odds
 -- !instance 6001
 -----------------------------------
 local ID = zones[xi.zone.THE_ASHU_TALIF]
@@ -14,7 +13,8 @@ local mobTable =
 
 instanceObject.registryRequirements = function(player)
     return player:hasKeyItem(xi.ki.LIFE_FLOAT) and
-        player:getCharVar('AgainstAllOdds') == 2
+        player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) == xi.questStatus.QUEST_ACCEPTED and
+        xi.quest.getVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS, 'Prog') == 1
 end
 
 instanceObject.entryRequirements = function(player)
@@ -59,9 +59,12 @@ end
 instanceObject.onInstanceComplete = function(instance)
     local chars = instance:getChars()
     for i, v in pairs(chars) do
-        if v:getCharVar('AgainstAllOdds') == 2 then
-            v:setCharVar('AgainstAllOdds', 3)
-            v:setCharVar('AgainstAllOddsTimer', 0)
+        if
+            v:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) == xi.questStatus.QUEST_ACCEPTED and
+            xi.quest.getVar(v, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS, 'Prog') == 1
+        then
+            xi.quest.setVar(v, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS, 'Prog', 2)
+            xi.quest.setVar(v, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS, 'Wait', 0)
         end
 
         v:startEvent(102)

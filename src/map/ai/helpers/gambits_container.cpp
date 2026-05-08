@@ -1364,17 +1364,37 @@ bool CGambitsContainer::TryTrustSkill()
                 return true;
                 break;
             }
+            case G_TP_TRIGGER::RANDOM:
+            {
+                bool result = false;
+                // clang-format off
+                if (tp_value <= 1000) // If the value provided by the script is missing or too low
+                {
+                    tp_value = 1000; // Apply the minimum TP Hold Threshold
+                }
+                if (POwner->health.tp >= tp_value && xirand::GetRandomNumber<uint16>(10000) < tp_value)
+                {
+                    result = true;
+                }
+                // clang-format on
+                return result;
+                break;
+            }
             case G_TP_TRIGGER::OPENER:
             {
                 bool result = false;
                 // clang-format off
-                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                {
+                    if (tp_value <= 1000) // If the value provided by the script is missing or too low
                     {
-                        if (PMember->health.tp >= 1000 && PMember != POwner)
-                        {
-                            result = true;
-                        }
-                    });
+                        tp_value = 1000; // Apply the minimum TP Hold Threshold
+                    }
+                    if (PMember->health.tp >= tp_value && PMember != POwner)
+                    {
+                        result = true;
+                    }
+                });
                 // clang-format on
                 return result;
                 break;

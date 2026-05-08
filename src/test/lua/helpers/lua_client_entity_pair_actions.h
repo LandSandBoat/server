@@ -51,6 +51,12 @@ public:
     void engage(CLuaBaseEntity* mob) const;
     void skillchain(CLuaBaseEntity* target, sol::variadic_args weaponskillIds) const;
 
+    void moveItem(uint8 srcContainer, uint8 srcSlot, uint8 dstContainer, uint32 quantity, sol::optional<uint8> dstSlot) const;
+    void sortContainer(uint8 container) const;
+    void dropItem(uint8 container, uint8 slot, uint32 quantity) const;
+    void setLockstyle(uint8 mode, sol::optional<sol::table> items) const;
+    void craft(uint16 crystalItemId, const sol::table& ingredients) const;
+
     static void Register();
 
 private:

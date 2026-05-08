@@ -17,6 +17,7 @@ return {
     ['Damami-Karumi']    = { event = 575 },
     ['Dienger']          = { event = 815 },
     ['Diroku-Oroku']     = { event = 420 },
+    ['Door_House']       = { messageSpecial = ID.text.DOOR_FIRMLY_SHUT },
     ['Eight_of_Hearts']  = { event = 276 },
     ['Enrefort']         = { event = 601 },
     ['Foi-Mui']          = { event = 430 },

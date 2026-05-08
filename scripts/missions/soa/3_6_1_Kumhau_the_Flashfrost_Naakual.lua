@@ -87,7 +87,7 @@ mission.sections =
             {
                 [27] = function(player, csid, option, npc)
                     mission:setVar(player, 'Status', 2)
-                    player:setPos(344.003, 40.676, -381.140, 12, xi.zone.KAMIHR_DRIFTS)
+                    player:setPos(-344.003, 40.676, -381.140, 12, xi.zone.KAMIHR_DRIFTS)
                 end,
             },
         },

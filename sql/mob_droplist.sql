@@ -1063,10 +1063,11 @@ INSERT INTO `mob_droplist` VALUES (121,0,0,1000,643,@VRARE);     -- Chunk Of Iro
 INSERT INTO `mob_droplist` VALUES (121,2,0,1000,749,0);          -- Mythril Beastcoin (Steal)
 INSERT INTO `mob_droplist` VALUES (121,4,0,1000,643,0);          -- Chunk Of Iron Ore (Despoil)
 
+-- 122 Available
+
 -- ZoneID: 114 - Antican Faber
 INSERT INTO `mob_droplist` VALUES (123,0,0,1000,16995,@COMMON);  -- Piece Of Rotten Meat (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (123,0,0,1000,1121,@UNCOMMON); -- Antican Robe (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (123,0,0,1000,17320,@RARE);    -- Iron Arrow (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (123,0,0,1000,640,@VRARE);     -- Chunk Of Copper Ore (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (123,2,0,1000,750,0);          -- Silver Beastcoin (Steal)
 INSERT INTO `mob_droplist` VALUES (123,4,0,1000,643,0);          -- Chunk Of Iron Ore (Despoil)
@@ -1074,7 +1075,6 @@ INSERT INTO `mob_droplist` VALUES (123,4,0,1000,643,0);          -- Chunk Of Iro
 -- ZoneID: 114 - Antican Funditor
 INSERT INTO `mob_droplist` VALUES (123,0,0,1000,16995,@COMMON);  -- Piece Of Rotten Meat (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (123,0,0,1000,1121,@UNCOMMON); -- Antican Robe (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (123,0,0,1000,17320,@RARE);    -- Iron Arrow (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (123,0,0,1000,640,@VRARE);     -- Chunk Of Copper Ore (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (123,2,0,1000,750,0);          -- Silver Beastcoin (Steal)
 INSERT INTO `mob_droplist` VALUES (123,4,0,1000,643,0);          -- Chunk Of Iron Ore (Despoil)
@@ -1822,11 +1822,11 @@ INSERT INTO `mob_droplist` VALUES (194,1,2,@UNCOMMON,3171,250);   -- Tantra Seal
 
 -- ZoneID: 187 - Avatar Icon
 -- ZoneID: 187 - Avatar Icon
--- INSERT INTO `mob_droplist` VALUES (195,0,0,1000,1474,@UNCOMMON); -- Infinity Core (Uncommon, 10%)
--- INSERT INTO `mob_droplist` VALUES (195,0,0,1000,749,@VRARE);     -- Mythril Beastcoin (Very Rare, 1%)
--- INSERT INTO `mob_droplist` VALUES (195,0,0,1000,1470,@VRARE);    -- Sparkling Stone (Very Rare, 1%)
--- INSERT INTO `mob_droplist` VALUES (195,0,0,1000,748,@VRARE);     -- Gold Beastcoin (Very Rare, 1%)
--- INSERT INTO `mob_droplist` VALUES (195,0,0,1000,1449,@VRARE);    -- Tukuku Whiteshell (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (195,0,0,1000,1474,@UNCOMMON); -- Infinity Core (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (195,0,0,1000,749,@VRARE);     -- Mythril Beastcoin (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (195,0,0,1000,1470,@VRARE);    -- Sparkling Stone (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (195,0,0,1000,748,@VRARE);     -- Gold Beastcoin (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (195,0,0,1000,1449,@VRARE);    -- Tukuku Whiteshell (Very Rare, 1%)
 
 -- ZoneID: 253 - Awahondo -- TODO: Abyssea NM
 INSERT INTO `mob_droplist` VALUES (196,0,0,1000,19137,@COMMON);   -- Angr Harpe (Common, 15%)
@@ -12423,8 +12423,8 @@ INSERT INTO `mob_droplist` VALUES (1497,0,0,1000,19044,@COMMON); -- Disciple Gri
 
 -- 1498-1501 Available
 
--- ZoneID: 132 - La Theine Liege -- TODO: Abyssea NM
--- INSERT INTO `mob_droplist` VALUES (1502,0,0,1000,11562,@COMMON);  -- Sharpeye Mantle (Common, 15%)
+-- ZoneID: 132 - La Theine Liege -- TODO: Abyssea NM, figure out the rest of the drops. Sharpeye Mantle is also guessed.
+INSERT INTO `mob_droplist` VALUES (1502,0,0,1000,11562,@COMMON);  -- Sharpeye Mantle (Common, 15%)
 
 -- ZoneID:  84 - La Velue
 INSERT INTO `mob_droplist` VALUES (1503,0,0,1000,18445,@COMMON); -- Amakura (Common, 15%)

@@ -23,6 +23,8 @@
 
 #include "common/cbasetypes.h"
 
+#include <memory>
+
 #include "entities/charentity.h"
 #include "items/item_equipment.h"
 #include "zone.h"
@@ -102,7 +104,7 @@ void DelExperiencePoints(CCharEntity* PChar, float retainpct, uint16 forcedXpLos
 void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob);
 void DistributeGil(CCharEntity* PChar, CMobEntity* PMob);
 void DistributeItem(CCharEntity* PChar, CBaseEntity* PEntity, uint16 itemid, uint16 droprate);
-void AddExperiencePoints(bool expFromRaise, CCharEntity* PChar, CBaseEntity* PMob, uint32 exp, EMobDifficulty mobCheck = EMobDifficulty::TooWeak, bool isexpchain = false);
+void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScripts, CCharEntity* PChar, CBaseEntity* PMob, uint32 exp, EMobDifficulty mobCheck = EMobDifficulty::TooWeak, bool isexpchain = false);
 
 uint16 AddCapacityBonus(CCharEntity* PChar, uint16 capacityPoints);
 void   AddCapacityPoints(CCharEntity* PChar, CBaseEntity* PMob, uint32 capacityPoints, int16 levelDiff = 0, bool isCapacityChain = false);
@@ -123,7 +125,7 @@ bool CanTrade(CCharEntity* PChar, CCharEntity* PTarget);
 void   CheckWeaponSkill(CCharEntity* PChar, uint8 skill);
 bool   HasItem(CCharEntity* PChar, uint16 ItemID);
 uint32 getItemCount(CCharEntity* PChar, uint16 ItemID);
-uint8  AddItem(CCharEntity* PChar, uint8 LocationID, CItem* PItem, bool silence = false);
+auto   AddItem(CCharEntity* PChar, uint8 LocationID, std::unique_ptr<CItem> PItem, bool silence = false) -> uint8;
 uint8  AddItem(CCharEntity* PChar, uint8 LocationID, uint16 itemID, uint32 quantity = 1, bool silence = false);
 uint8  MoveItem(CCharEntity* PChar, uint8 LocationID, uint8 SlotID, uint8 NewSlotID);
 uint32 UpdateItem(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quantity, bool force = false);

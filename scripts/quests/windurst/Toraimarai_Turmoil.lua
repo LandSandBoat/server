@@ -13,10 +13,10 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.TORAIMARAI_TU
 
 quest.reward =
 {
-    gil  = 4500,
-    fame = 100,
+    gil      = 4500,
+    fame     = 100,
     fameArea = xi.fameArea.WINDURST,
-    title = xi.title.CERTIFIED_RHINOSTERY_VENTURER,
+    title    = xi.title.CERTIFIED_RHINOSTERY_VENTURER,
 }
 
 quest.sections =
@@ -46,7 +46,7 @@ quest.sections =
     },
 
     {
-        --initial completion
+        -- Initial completion
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED
         end,
@@ -55,21 +55,18 @@ quest.sections =
         {
             ['Ohbiru-Dohbiru'] =
             {
-                onTrigger = quest:event(786, 4500, xi.keyItem.RHINOSTERY_CERTIFICATE, xi.item.STARMITE_SHELL), -- Reminder text.
-
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, { { xi.item.STARMITE_SHELL, 3 } }) then
                         return quest:progressEvent(791)
                     end
                 end,
-            },
 
-            ['Leepe-Hoppe'] =
-            {
                 onTrigger = function(player, npc)
-                    return quest:event(790, 0, xi.ki.RHINOSTERY_CERTIFICATE)
+                    return quest:event(786, 4500, xi.keyItem.RHINOSTERY_CERTIFICATE, xi.item.STARMITE_SHELL) -- Reminder text.
                 end,
             },
+
+            ['Leepe-Hoppe'] = quest:event(790, 0, xi.ki.RHINOSTERY_CERTIFICATE),
 
             onEventFinish =
             {
@@ -83,24 +80,14 @@ quest.sections =
 
         [xi.zone.WINDURST_WALLS] =
         {
-            ['Polikal-Ramikal'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:event(391)
-                end,
-            },
+            ['Polikal-Ramikal'] = quest:event(391),
 
-            ['Yoran-Oran'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:event(392)
-                end,
-            },
+            ['Yoran-Oran'] = quest:event(392),
         },
     },
 
     {
-        --repeat completion
+        -- Repeat completion
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_COMPLETED
         end,
@@ -109,11 +96,20 @@ quest.sections =
         {
             ['Ohbiru-Dohbiru'] =
             {
-                onTrigger = quest:event(795, 4500, 0, xi.item.STARMITE_SHELL), -- repeat dialog
-
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.item.STARMITE_SHELL, 3 } }) then
+                    if
+                        quest:getVar(player, 'Prog') == 1 and
+                        npcUtil.tradeHasExactly(trade, { { xi.item.STARMITE_SHELL, 3 } })
+                    then
                         return quest:progressEvent(791)
+                    end
+                end,
+
+                onTrigger = function(player, npc)
+                    if quest:getVar(player, 'Prog') == 1 then
+                        return quest:event(786, 4500, xi.keyItem.RHINOSTERY_CERTIFICATE, xi.item.STARMITE_SHELL) -- Reminder text.
+                    else
+                        return quest:event(795, 4500, 0, xi.item.STARMITE_SHELL) -- Repeat dialog.
                     end
                 end,
             },
@@ -121,12 +117,18 @@ quest.sections =
             onEventFinish =
             {
                 [791] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    if quest:getVar(player, 'Prog') == 1 then
+                        quest:setVar(player, 'Prog', 0)
+                        player:confirmTrade()
+                        player:addFame(xi.fameArea.WINDURST, 50)
+                        npcUtil.giveCurrency(player, 'gil', 4500)
+                    end
+                end,
 
-                    --From previous implementation, award 100 fame on first completion,
-                    -- and 50 fame for any subsequent trade.
-                    player:addFame(xi.fameArea.WINDURST, 50)
-                    npcUtil.giveCurrency(player, 'gil', 4500)
+                [795] = function(player, csid, option, npc)
+                    if option == 1 then
+                        quest:setVar(player, 'Prog', 1)
+                    end
                 end,
             },
         },

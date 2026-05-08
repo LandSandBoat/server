@@ -22,6 +22,7 @@
 #include "0x020_item_attr.h"
 
 #include "common/vana_time.h"
+#include "entities/charentity.h"
 #include "enums/item_lockflg.h"
 #include "items/item_linkshell.h"
 #include "utils/itemutils.h"
@@ -117,4 +118,9 @@ GP_SERV_COMMAND_ITEM_ATTR::GP_SERV_COMMAND_ITEM_ATTR(CItem* PItem, const CONTAIN
     {
         std::memcpy(packet.Attr, staleItem->m_extra, sizeof(staleItem->m_extra));
     }
+}
+
+GP_SERV_COMMAND_ITEM_ATTR::GP_SERV_COMMAND_ITEM_ATTR(CItem* PItem, const ItemLocation& loc, CItem* staleItem)
+: GP_SERV_COMMAND_ITEM_ATTR(PItem, loc.Container, loc.Slot, staleItem)
+{
 }

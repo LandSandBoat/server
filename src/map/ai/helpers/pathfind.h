@@ -100,7 +100,6 @@ public:
 
     // clear current path
     void Clear();
-    bool isNavMeshEnabled();
 
     bool ValidPosition(const position_t& pos);
 

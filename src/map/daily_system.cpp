@@ -86,7 +86,7 @@ uint16 SelectItem(CCharEntity* player, uint8 dial)
     uint16 selection = xirand::GetRandomElement(dialItems.get());
 
     // Check if Rare item is already owned and substitute with Goblin trash item.
-    if (itemutils::GetItem(selection)->hasFlag(ItemFlag::Rare) && charutils::HasItem(player, selection))
+    if (xi::items::lookup(selection)->hasFlag(ItemFlag::Rare) && charutils::HasItem(player, selection))
     {
         dialItems = gobbieJunk;
         selection = xirand::GetRandomElement(dialItems.get());

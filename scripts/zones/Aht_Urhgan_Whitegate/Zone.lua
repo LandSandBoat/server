@@ -60,16 +60,6 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
             end
         end,
 
-        [5] = function() -- AH mission
-            if
-                player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == xi.questStatus.QUEST_COMPLETED and
-                player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) == xi.questStatus.QUEST_AVAILABLE and
-                player:getMainJob() == xi.job.COR and
-                player:getMainLvl() >= xi.settings.main.AF3_QUEST_LEVEL
-            then
-                player:startEvent(797)
-            end
-        end,
     }
 end
 
@@ -116,11 +106,6 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
     elseif csid == 526 then
         player:setCharVar('gotitallCS', 6)
         player:setPos(60, 0, -71, 38)
-    elseif csid == 797 then
-        player:setCharVar('AgainstAllOdds', 1)                                          -- Set For Corsair BCNM
-        player:addQuest(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) -- Start of af 3 not completed yet
-        npcUtil.giveKeyItem(player, xi.ki.LIFE_FLOAT)
-        player:setCharVar('AgainstAllOddsTimer', JstMidnight())
     end
 end
 

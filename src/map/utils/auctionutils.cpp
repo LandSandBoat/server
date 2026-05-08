@@ -233,7 +233,7 @@ auto auctionutils::PurchasingItems(CCharEntity* PChar, GP_AUC_PARAM_BID param) -
     }
     else
     {
-        const CItem* PItem = itemutils::GetItemPointer(param.ItemNo);
+        const CItem* PItem = xi::items::lookup(param.ItemNo);
 
         if (PItem != nullptr)
         {
@@ -310,7 +310,7 @@ void auctionutils::CancelSale(CCharEntity* PChar, int8_t AucWorkIndex)
                                                    canceledItem.price);
                 if (rset && rset->rowsAffected())
                 {
-                    if (const CItem* PDelItem = itemutils::GetItemPointer(canceledItem.itemid))
+                    if (const CItem* PDelItem = xi::items::lookup(canceledItem.itemid))
                     {
                         if (charutils::AddItem(PChar, LOC_INVENTORY, canceledItem.itemid, (canceledItem.stack != 0 ? PDelItem->getStackSize() : 1), true) != ERROR_SLOTID)
                         {

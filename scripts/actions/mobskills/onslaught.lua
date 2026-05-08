@@ -1,7 +1,7 @@
 -----------------------------------
 -- Onslaught
 -- Family: Humanoid Axe Weaponskill
--- Description: Lowers target's accuracy. Guttler/Ogre Killer: Temporarily increases Attack.
+-- Description: Lowers target's accuracy.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,7 +15,8 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     params.baseDamage     = mob:getWeaponDmg()
     params.numHits        = 1
-    params.fTP            = { 2.5, 2.5, 2.5 } -- TODO: Capture fTPs
+    params.fTP            = { 2.75, 2.75, 2.75 }
+    -- params.dex_wSC     = 0.6 -- TODO: Capture if mobskill weaponskills have wSC.
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.SLASHING
     params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
@@ -25,7 +26,6 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
-        -- TODO: Capture power/duration
         xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ACCURACY_DOWN, 30, 0, 60)
     end
 

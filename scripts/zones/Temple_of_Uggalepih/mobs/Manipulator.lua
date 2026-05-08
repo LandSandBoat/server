@@ -76,7 +76,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MAX, 6000)
 
     mob:addListener('ITEM_STOLEN', 'DOLL_GIZMO_STOLEN', function(mobArg, player, itemId)
-        mobArg:setDelay(2400)
+        mobArg:setDelay(240)
     end)
 end
 
@@ -87,7 +87,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.IMPACT_SDT, -5000)
     mob:setMod(xi.mod.HTH_SDT, -5000)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
-    mob:setDelay(2250)
+    mob:setDelay(225)
 
     mob:pathThrough(pathNodes, xi.path.flag.PATROL)
 end

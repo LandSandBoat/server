@@ -34,9 +34,11 @@
 #include "common/mmo.h"
 #include "common/xi.h"
 
+#include <array>
 #include <bitset>
 #include <deque>
 #include <map>
+#include <optional>
 #include <set>
 #include <unordered_map>
 #include <unordered_set>
@@ -276,6 +278,14 @@ class CItemUsable;
 typedef std::map<uint32, CBaseEntity*> SpawnIDList_t;
 typedef std::vector<EntityID_t>        BazaarList_t;
 
+struct ItemLocation
+{
+    CONTAINER_ID Container{};
+    uint8        Slot{};
+};
+
+constexpr uint8 EquipSlotCount = 18;
+
 class CCharEntity : public CBattleEntity
 {
 public:
@@ -317,12 +327,14 @@ public:
     expChain_t      expChain{};
     search_t        search{};              // Data and comment displayed in the search box
     bazaar_t        bazaar{};              // All the data you need to run bazaar
-    uint16          m_EquipFlag{};         // Current events handled by the equipment (later it will be packed into a structure, along with equip[])
+    uint16          m_EquipFlag{};         // Current events handled by the equipment
     uint16          m_EquipBlock{};        // Locked equipment slots
     uint16          m_StatsDebilitation{}; // Debilitation arrows
-    uint8           equip[18]{};           // SlotID where equipment is
-    uint8           equipLoc[18]{};        // ContainerID where equipment is
     uint16          styleItems[16]{};      // Item IDs for items that are style locked.
+
+    auto bindEquip(uint8 equipSlot, CItem* item) -> bool;
+    void clearEquip(uint8 equipSlot);
+    auto equipLocation(uint8 equipSlot) const -> std::optional<ItemLocation>;
 
     uint8            m_ZonesVisitedList[38]{}; // List of zones visited by the character
     xi::bitset<1024> m_SpellList{};            // List of learned spells
@@ -681,6 +693,8 @@ protected:
     void TrackArrowUsageForScavenge(CItemWeapon* PAmmo);
 
 private:
+    std::array<CItem*, EquipSlotCount> equipped_{};
+
     // Lazily initialized AMAN data
     Maybe<CAMANContainer> m_AMAN;
     GMCallContainer       gmCallContainer_;

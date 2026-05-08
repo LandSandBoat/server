@@ -1,7 +1,7 @@
 -----------------------------------
 -- Gate of Tartarus
 -- Family: Humanoid Staff Weaponskill
--- Description: Lowers target's attack. Claustrum/Thyrus: Refresh
+-- Description: Lowers target's attack.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,7 +15,8 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     params.baseDamage     = mob:getWeaponDmg()
     params.numHits        = 1
-    params.fTP            = { 2.5, 2.5, 2.5 } -- TODO: Capture fTPs
+    params.fTP            = { 3.0, 3.0, 3.0 }
+    -- params.int_wSC     = 0.8 -- TODO: Capture if mobskill weaponskills have wSC.
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.BLUNT
     params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
@@ -25,7 +26,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ATTACK_DOWN, 20, 0, 60)
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ATTACK_DOWN, 18.75, 0, 120)
     end
 
     return info.damage

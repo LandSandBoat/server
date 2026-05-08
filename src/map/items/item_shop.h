@@ -29,7 +29,9 @@
 class CItemShop : public CItem
 {
 public:
-    CItemShop(uint16 id);
+    CItemShop(uint16);
+
+    CItemShop(const CItemShop& other);
     virtual ~CItemShop();
 
     uint32 getMinPrice() const;

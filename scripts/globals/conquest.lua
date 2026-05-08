@@ -784,7 +784,7 @@ local overseerInvNation =
         [32898] = { rank =  9, cp = 48000, lvl = 71, item = xi.item.RESERVE_CAPTAINS_MACE,          place = 2 },
         [32899] = { rank =  9, cp = 48000, lvl = 71, item = xi.item.RESERVE_CAPTAINS_LANCE,         place = 1 },
         [32912] = { rank = 10, cp = 56000, lvl =  1, item = xi.item.KINGDOM_AKETON,                 place = 1 },
-        [32932] = {            cp =  5000, lvl =  1, item = xi.item.KINGDOM_SIGNET_STAFF           },
+        [32932] = { rank = 10, cp =  5000, lvl =  1, item = xi.item.KINGDOM_SIGNET_STAFF           },
         [32940] = { rank = 10, cp = 10000, lvl =  1, item = xi.item.IMPERIAL_CHAIR_SET             },
     },
 
@@ -842,7 +842,7 @@ local overseerInvNation =
         [32898] = { rank =  9, cp = 48000, lvl = 71, item = xi.item.SENIOR_GOLD_MUSKETEERS_AXE,       place = 2 },
         [32899] = { rank =  9, cp = 48000, lvl = 71, item = xi.item.SENIOR_GOLD_MUSKETEERS_SCIMITAR,  place = 1 },
         [32912] = { rank = 10, cp = 56000, lvl =  1, item = xi.item.REPUBLIC_AKETON,                  place = 1 },
-        [32932] = {            cp =  5000, lvl =  1, item = xi.item.REPUBLIC_SIGNET_STAFF            },
+        [32932] = { rank = 10, cp =  5000, lvl =  1, item = xi.item.REPUBLIC_SIGNET_STAFF            },
         [32940] = { rank = 10, cp = 10000, lvl =  1, item = xi.item.DECORATIVE_CHAIR_SET             },
     },
 
@@ -904,7 +904,7 @@ local overseerInvNation =
         [32898] = { rank =  9, cp = 48000, lvl = 71, item = xi.item.MASTER_CASTERS_BAGHNAKHS,     place = 2 },
         [32899] = { rank =  9, cp = 48000, lvl = 71, item = xi.item.MASTER_CASTERS_KNIFE,         place = 1 },
         [32912] = { rank = 10, cp = 56000, lvl =  1, item = xi.item.FEDERATION_AKETON,            place = 1 },
-        [32932] = {            cp =  5000, lvl =  1, item = xi.item.FEDERATION_SIGNET_STAFF      },
+        [32932] = { rank = 10, cp =  5000, lvl =  1, item = xi.item.FEDERATION_SIGNET_STAFF      },
         [32940] = { rank = 10, cp = 10000, lvl =  1, item = xi.item.ORNATE_STOOL_SET             },
     },
 }

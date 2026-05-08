@@ -18,14 +18,14 @@ effectObject.onEffectGain = function(target, effect)
 
         -- Handle Attack & Critical Hit Rate bonuses
         effectArg:setPower(mainPower)
-        effectArg:setMod(xi.mod.ATT, 2 * mainPower)
-        effectArg:setMod(xi.mod.CRITHITRATE, mainPower)
+        effectArg:addMod(xi.mod.ATT, 2)
+        effectArg:addMod(xi.mod.CRITHITRATE, 1)
 
         -- Handle Critical Hit Damage & Accuracy bonuses
         local subPower = effectArg:getSubPower() -- Subpower tracks if user had effect augment, and what quality, when effect was applied.
         if subPower ~= 0 then
-            effectArg:setMod(xi.mod.ACC, 2 * mainPower)
-            effectArg:setMod(xi.mod.CRIT_DMG_INCREASE, math.floor(subPower / 2) * mainPower)
+            effectArg:addMod(xi.mod.ACC, 2)
+            effectArg:addMod(xi.mod.CRIT_DMG_INCREASE, math.floor(subPower / 2))
         end
     end)
 
@@ -35,12 +35,16 @@ effectObject.onEffectGain = function(target, effect)
             return
         end
 
+        local power = effectArg:getPower()
         effectArg:setPower(0)
+        effectArg:delMod(xi.mod.ATT, 2 * power)
+        effectArg:delMod(xi.mod.CRITHITRATE, power)
 
-        effectArg:setMod(xi.mod.ATT, 0)
-        effectArg:setMod(xi.mod.CRITHITRATE, 0)
-        effectArg:setMod(xi.mod.ACC, 0)
-        effectArg:setMod(xi.mod.CRIT_DMG_INCREASE, 0)
+        local subPower = effectArg:getSubPower() -- Subpower tracks if user had effect augment, and what quality, when effect was applied.
+        if subPower ~= 0 then
+            effectArg:delMod(xi.mod.ACC, 2 * power)
+            effectArg:delMod(xi.mod.CRIT_DMG_INCREASE, math.floor(subPower / 2) * power)
+        end
     end)
 end
 

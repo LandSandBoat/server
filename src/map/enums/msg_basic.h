@@ -99,6 +99,7 @@ enum class MsgBasic : uint16_t
     SkillRecoversHP                 = 103, // The <player> uses .. <target> recovers .. HP.
     IsIntimidated                   = 106, // The <player> is intimidated by <target>'s presence.
     UsesAbilityTakesDamage          = 110, // <user> uses <ability>. <target> takes <amount> points of damage.
+    MagicFail                       = 114, // <caster> casts <spell> on <target>, but the spell fails to take effect
     UsesAbilityFortifiedUndead      = 131, // <user> uses <ability>. <target> is fortified against undead.
     SpikesEffectHPDrain             = 132, // <target>'s spikes drain <number> HP from the <attacker>.
     UsesAbilityFortifiedArcana      = 134, // <user> uses <ability>. <target> is fortified against arcana.
@@ -250,6 +251,7 @@ enum class MsgBasic : uint16_t
     PerfectCounterMiss              = 592, // <player> attempts to counter <target>'s attack, but misses.
     TreasureHunterUp                = 603, // Additional effect: Treasure Hunter effectiveness against <target> increases to ..
     CounterAbsorbedDmg              = 606, // The <target> absorbs <player>'s counter. The <target> recovers .. HP.
+    MagicCompleteResist             = 655, // <caster> casts <spell>. <target> completely resists the spell.
     SameEffectLuopan                = 660, // The same effect is already active on that luopan!
     LuopanAlreadyPlaced             = 661, // <player> has already placed a luopan. Unable to use ability.
     RequireLuopan                   = 662, // This action requires a luopan.

@@ -192,21 +192,21 @@ auto MapEngine::init() -> Task<void>
     synergyutils::LoadSynergyRecipes();
     CItemEquipment::LoadAugmentData(); // TODO: Move to itemutils
 
-    if (!std::filesystem::exists("./navmeshes/") || std::filesystem::is_empty("./navmeshes/"))
+    if (!std::filesystem::exists("./ximeshes/") || std::filesystem::is_empty("./ximeshes/"))
     {
-        ShowInfo("./navmeshes/ directory isn't present or is empty");
+        ShowError("./ximeshes/ directory isn't present or is empty");
     }
 
-    if (!std::filesystem::exists("./losmeshes/") || std::filesystem::is_empty("./losmeshes/"))
+    if (!std::filesystem::exists("./navmeshes/") || std::filesystem::is_empty("./navmeshes/"))
     {
-        ShowInfo("./losmeshes/ directory isn't present or is empty");
+        ShowWarning("./navmeshes/ directory isn't present or is empty");
     }
 
     co_await zoneutils::Initialize(scheduler_, config_);
+    instanceutils::Initialize(config_);
 
     if (!config_.lazyZones)
     {
-        instanceutils::LoadInstanceList(mapIPP);
         CTransportHandler::getInstance()->InitializeTransport(mapIPP);
     }
 

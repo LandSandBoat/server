@@ -30,6 +30,8 @@ class CItemCurrency : public CItem
 {
 public:
     CItemCurrency(uint16);
+
+    CItemCurrency(const CItemCurrency& other);
     virtual ~CItemCurrency();
 
 private:

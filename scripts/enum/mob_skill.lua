@@ -3,8 +3,22 @@ xi = xi or {}
 ---@enum xi.mobSkill
 xi.mobSkill =
 {
-    SHADOWSTITCH                  =   18,
+    COMBO_1                       =    1,
+    SHOULDER_TACKLE_1             =    2,
+    ONE_INCH_PUNCH_1              =    3,
+    BACKHAND_BLOW_1               =    4,
+    RAGING_FISTS_1                =    5,
+    SPINNING_ATTACK_1             =    6,
+    HOWLING_FIST_1                =    7,
+    DRAGON_KICK_1                 =    8,
 
+    WASP_STING_1                  =   16,
+    VIPER_BITE                    =   17,
+    SHADOWSTITCH                  =   18,
+    GUST_SLASH                    =   19,
+    CYCLONE                       =   20,
+    ENERGY_STEAL                  =   21,
+    ENERGY_DRAIN                  =   22,
     DANCING_EDGE                  =   23,
     SHARK_BITE                    =   24,
     EVISCERATION                  =   25,
@@ -31,27 +45,76 @@ xi.mobSkill =
 
     DIMIDIATION_1                 =   61,
 
+    RAGING_AXE                    =   64,
+    SMASH_AXE                     =   65,
+    GALE_AXE                      =   66,
+    AVALANCHE_AXE                 =   67,
+    SPINNING_AXE                  =   68,
+    RAMPAGE_1                     =   69,
+
+    STURMWIND                     =   82,
+    ARMOR_BREAK                   =   83,
+    WEAPON_BREAK                  =   85,
+    RAGING_RUSH                   =   86,
+
+    SLICE                         =   96,
+    DARK_HARVEST                  =   97,
+    SHADOW_OF_DEATH               =   98,
+    NIGHTMARE_SCYTHE              =   99,
+    SPINNING_SCYTHE_1             =  100,
     VORPAL_SCYTHE                 =  101,
     GUILLOTINE_1                  =  102,
 
     SPIRAL_HELL                   =  104,
 
+    DOUBLE_THRUST                 =  112,
+    THUNDER_THRUST                =  113,
     RAIDEN_THRUST_1               =  114,
-
+    LEG_SWEEP                     =  115,
     PENTA_THRUST                  =  116,
-
+    VORPAL_THRUST                 =  117,
     SKEWER                        =  118,
     WHEELING_THRUST               =  119,
     IMPULSE_DRIVE                 =  120,
 
+    BLADE_RIN                     =  128,
+    BLADE_RETSU                   =  129,
+    BLADE_TEKI                    =  130,
+    BLADE_TO                      =  131,
+    BLADE_CHI                     =  132,
+    BLADE_EI                      =  133,
+    BLADE_JIN                     =  134,
+
+    TACHI_ENPI                    =  144,
+    TACHI_HOBAKU                  =  145,
+    TACHI_GOTEN_1                 =  146,
+    TACHI_KAGERO                  =  147,
+    TACHI_JINPU                   =  148,
+    TACHI_KOKI                    =  149,
+    TACHI_YUKIKAZE_1              =  150,
+
     SHINING_STRIKE_1              =  160,
     SERAPH_STRIKE_1               =  161,
     BRAINSHAKER_1                 =  162,
-
-    SKULLBREAKER_1               =   165,
-    TRUE_STRIKE_1                =   166,
+    STARLIGHT                     =  163,
+    MOONLIGHT                     =  164,
+    SKULLBREAKER_1                =  165,
+    TRUE_STRIKE_1                 =  166,
 
     RANDGRITH_1                   =  170,
+
+    HEAVY_SWING                   =  176,
+    ROCK_CRUSHER                  =  177,
+    EARTH_CRUSHER                 =  178,
+    STARBURST                     =  179,
+    SUNBURST                      =  180,
+    SHELL_CRUSHER                 =  181,
+    FULL_SWING                    =  182,
+
+    FLAMING_ARROW                 =  192,
+    PIERCING_ARROW                =  193,
+    DULLING_ARROW                 =  194,
+    SIDEWINDER_1                  =  196,
 
     HOT_SHOT_1                    =  208,
     SPLIT_SHOT_1                  =  209,
@@ -128,6 +191,8 @@ xi.mobSkill =
     LEAFSTORM                     =  331,
     ENTANGLE                      =  332,
 
+    VULCANIAN_IMPACT_1            =  342, -- COP Bombs
+
     VELOCIOUS_BLADE               =  347, -- Mammet-800
 
     DEATH_SCISSORS                =  353,
@@ -148,6 +213,12 @@ xi.mobSkill =
     PLAGUE_BREATH_1               =  371,
     INFRASONICS_1                 =  372,
     SECRETION_1                   =  373,
+
+    FOUL_BREATH_1                 =  376,
+    FROST_BREATH_1                =  377,
+    THUNDERBOLT_RAPTOR            =  378,
+
+    SCYTHE_TAIL_1                 =  380,
 
     TAIL_ROLL                     =  382,
     TUSK                          =  383,
@@ -183,9 +254,13 @@ xi.mobSkill =
     CATHARSIS                     =  440,
     MICROQUAKE                    =  441, -- Mammet-800
 
-    BIG_SCISSORS                  =  444,
+    BUBBLE_SHOWER_1               =  442,
+    BUBBLE_CURTAIN_1              =  443,
+    BIG_SCISSORS_1                =  444,
+    SCISSOR_GUARD_1               =  445,
 
     PERCUSSIVE_FOIN               =  447, -- Mammet-800
+    METALLIC_BODY_1               =  448,
 
     GRAVITY_WHEEL                 =  457, -- Mammet-800
 
@@ -229,9 +304,15 @@ xi.mobSkill =
     SELF_DESTRUCT_BOMB            =  509,
     BERSERK_BOMB                  =  510,
     SELF_DESTRUCT_BOMB_321        =  511,
+    HEAT_WAVE_1                   =  512, -- COP Bombs
 
     SMITE_OF_RAGE                 =  513,
     WHIRL_OF_RAGE                 =  514,
+
+    BERSERK_SNOLL                 =  526, -- Snoll
+    FREEZE_RUSH_1                 =  527, -- Snoll
+    COLD_WAVE_1                   =  528, -- Snoll
+    HYPOTHERMAL_COMBUSTION_1      =  529, -- Snoll
 
     DANSE_MACABRE                 =  533,
     KARTSTRAHL                    =  534,
@@ -276,8 +357,8 @@ xi.mobSkill =
     BOMB_TOSS_1                   =  591,
 
     BERSERK_BOMB_BIG              =  593, -- Big Bomb / Friars Lantern
-    VULCANIAN_IMPACT              =  594, -- Big Bomb / Friars Lantern
-    HEAT_WAVE                     =  595, -- Big Bomb / Friars Lantern
+    VULCANIAN_IMPACT_2            =  594, -- Big Bomb / Friars Lantern
+    HEAT_WAVE_2                   =  595, -- Big Bomb / Friars Lantern
     HELLSTORM                     =  596, -- Big Bomb / Friars Lantern
     SELF_DESTRUCT_BOMB_BIG        =  597, -- Big Bomb / Friars Lantern
 
@@ -287,7 +368,7 @@ xi.mobSkill =
     HYPOTHERMAL_COMBUSTION_2      =  602, -- Snoll Tzar
     COUNTERSTANCE_1               =  603, -- Geush Urvan
 
-    SHOULDER_TACKLE_1             =  606,
+    SHOULDER_TACKLE_2             =  606,
     SLAM_DUNK_1                   =  607,
 
     NETHER_BLAST_1                =  610,
@@ -331,14 +412,17 @@ xi.mobSkill =
     GIGA_SLASH                    =  672,
     DARK_NOVA                     =  673,
 
-    CRYSTAL_RAIN                  =  678,
-    CRYSTAL_WEAPON_FIRE           =  679, -- Zipacna Weapon Start
-
-    CRYSTAL_WEAPON_WATER          =  682, -- Zipacna Weapon End
+    ICE_BREAK_1                   =  676,
+    THUNDER_BREAK_1               =  677,
+    CRYSTAL_RAIN_1                =  678,
+    CRYSTAL_WEAPON_FIRE_1         =  679,
+    CRYSTAL_WEAPON_STONE_1        =  680,
+    CRYSTAL_WEAPON_WATER_1        =  681,
+    CRYSTAL_WEAPON_WIND_1         =  682,
 
     MIGHTY_STRIKES_1              =  688,
-    BENEDICTION_1                 =  689, -- Season's Greetings KSNM 30 (Gilagoge Tlugvi)
-    HUNDRED_FISTS_1               =  690, -- Season's Greetings KSNM 30 (Goga Tlugvi)
+    BENEDICTION_1                 =  689,
+    HUNDRED_FISTS_1               =  690,
     MANAFONT_1                    =  691,
     CHAINSPELL_1                  =  692,
     PERFECT_DODGE_1               =  693,
@@ -413,22 +497,58 @@ xi.mobSkill =
     MOONLIT_CHARGE                =  831,
     CRESCENT_FANG                 =  832,
     LUNAR_CRY                     =  833,
-
+    ECLIPTIC_GROWL                =  834,
     LUNAR_ROAR                    =  835,
     ECLIPSE_BITE                  =  836,
-
+    ECLIPTIC_HOWL                 =  837,
     HOWLING_MOON_1                =  838, -- Unknown usage.
     HOWLING_MOON_2                =  839, -- Confirmed usage: "The Moonlit Path" bcnm (Fenrir).
+    PUNCH                         =  840,
+    FIRE_II                       =  841,
+    BURNING_STRIKE                =  842,
+    DOUBLE_PUNCH                  =  843,
+    CRIMSON_HOWL                  =  844,
+    FIRE_IV                       =  845,
 
     INFERNO_1                     =  848, -- Confirmed usage: "Trial by Fire" bcnm. Regular avatar-type mobs (Ifrit).
+    ROCK_THROW                    =  849,
+    STONE_II                      =  850,
+    ROCK_BUSTER                   =  851,
+    MEGALITH_THROW                =  852,
+    EARTHEN_WARD                  =  853,
+    STONE_IV                      =  854,
 
     EARTHEN_FURY_1                =  857, -- Confirmed usage: "Trial by Earth" bcnm. Regular avatar-type mobs (Titan).
+    BARRACUDA_DIVE                =  858,
+    WATER_II                      =  859,
+    TAIL_WHIP                     =  860,
+    SPRING_WATER                  =  861,
+    SLOWGA                        =  862,
+    WATER_IV                      =  863,
 
     TIDAL_WAVE_1                  =  866, -- Confirmed usage: "Trial by Water" bcnm. Regular avatar-type mobs (Leviathan).
+    CLAW                          =  867,
+    AERO_II                       =  868,
+    WHISPERING_WIND               =  869,
+    HASTEGA                       =  870,
+    AERIAL_ARMOR                  =  871,
+    AERO_IV                       =  872,
 
     AERIAL_BLAST_1                =  875, -- Confirmed usage: "Trial by Wind" bcnm. Regular avatar-type mobs (Garuda).
+    AXE_KICK                      =  876,
+    BLIZZARD_II                   =  877,
+    FROST_ARMOR                   =  878,
+    SLEEPGA                       =  879,
+    DOUBLE_SLAP                   =  880,
+    BLIZZARD_IV                   =  881,
 
     DIAMOND_DUST_1                =  884, -- Confirmed usage: "Trial by Ice" bcnm. Regular avatar-type mobs (Shiva).
+    SHOCK_STRIKE                  =  885,
+    THUNDER_II                    =  886,
+    ROLLING_THUNDER               =  887,
+    THUNDERSPARK                  =  888,
+    LIGHTNING_ARMOR               =  889,
+    THUNDER_IV                    =  890,
 
     JUDGMENT_BOLT_1               =  893, -- Confirmed usage: "Trial by Lightning" bcnm. Regular avatar-type mobs (Ramuh).
 
@@ -442,6 +562,11 @@ xi.mobSkill =
     PET_SAND_BREATH               =  903,
     PET_LIGHTNING_BREATH          =  904,
     PET_HYDRO_BREATH              =  905,
+    HEALING_RUBY                  =  906,
+    POISON_NAILS                  =  907,
+    SHINING_RUBY                  =  908,
+    GLITTERING_RUBY               =  909,
+    METEORITE                     =  910,
 
     SEARING_LIGHT_1               =  912, -- Confirmed usage: Regular avatar-type mobs (Carbuncle).
     INFERNO_2                     =  913, -- Confirmed usage: Untargetable avatar astral flow. (Ex. Kirin) (Ifrit model avatar)
@@ -530,6 +655,12 @@ xi.mobSkill =
 
     FRYPAN_1                      = 1081,
     SMOKEBOMB_1                   = 1082,
+    SMOKEBOMB_2                   = 1083,
+    CRISPY_CANDLE_1               = 1084,
+    CRISPY_CANDLE_2               = 1085,
+    PARALYSIS_SHOWER_1            = 1086,
+    PARALYSIS_SHOWER_2            = 1087,
+    GOBLIN_RUSH_2                 = 1088,
 
     -- EES_?                         = 1091,
 
@@ -732,6 +863,17 @@ xi.mobSkill =
     MARIONETTE_DICE_12            = 1425,
 
     MARIONETTE_DICE_14            = 1427,
+    WARCRY                        = 1428,
+    COUNTERSTANCE_4               = 1429,
+    STEAL                         = 1430,
+    SHIELD_BASH_1                 = 1431,
+    WEAPON_BASH                   = 1432,
+
+    SIC                           = 1433,
+    BARRAGE                       = 1434,
+
+    MEDITATE                      = 1436,
+    BLOOD_PACT                    = 1438,
 
     ACTINIC_BURST                 = 1441,
 
@@ -831,13 +973,18 @@ xi.mobSkill =
 
     FORCEFUL_BLOW                 = 1731, -- Used with Mamool's weapons break.
 
+    FIRESPIT                      = 1733,
+
     LAVA_SPIT                     = 1785,
 
     GATES_OF_HADES                = 1790,
 
     VAMPIRIC_ROOT                 = 1793,
 
-    XENOGLOSSIA                   = 1823, -- Unique entry.
+    BOILING_POINT                 = 1822,
+    XENOGLOSSIA                   = 1823,
+    AMORPHIC_SPIKES               = 1824,
+    AMORPHIC_SCYTHE               = 1825,
 
     PYRIC_BLAST                   = 1828,
     PYRIC_BULWARK                 = 1829,
@@ -866,6 +1013,15 @@ xi.mobSkill =
     WARP_OUT_GESSHO               = 1938,
     WARP_IN_GESSHO                = 1939,
 
+    CHIMERA_RIPPER                = 1940,
+    STRING_CLIPPER                = 1941,
+    ARCUBALLISTA                  = 1942,
+    SLAPSTICK                     = 1943,
+    SHIELD_BASH_AUTOMATON         = 1944, -- Used by the trust Mnejing but may also be used by mobs.
+    PROVOKE_AUTOMATON             = 1945, -- Used by the trust Mnejing but may also be used by mobs.
+    FLASHBULB_AUTOMATON           = 1947, -- Used by the trust Mnejing but may also be used by mobs.
+    DISRUPTOR_AUTOMATON           = 2747, -- Used by the trust Mnejing but may also be used by mobs.
+
     RANGED_ATTACK_15              = 1949,
 
     WATER_BOMB                    = 1959,
@@ -878,6 +1034,12 @@ xi.mobSkill =
 
     BOREAS_MANTLE                 = 1980, -- Unique entry.
 
+    FIRE_MANEUVER                 = 1992,
+    ICE_MANEUVER                  = 1993,
+    WIND_MANEUVER                 = 1994,
+    EARTH_MANEUVER                = 1995,
+    THUNDER_MANEUVER              = 1996,
+    WATER_MANEUVER                = 1997,
     HANE_FUBUKI                   = 1998,
     HIDEN_SOKYAKU                 = 1999,
     SHIKO_NO_MITATE               = 2000,
@@ -887,7 +1049,7 @@ xi.mobSkill =
     REWARD                        = 2005,
     AZURE_LORE_RAUBAHN            = 2006,
     WILD_CARD_QULTADA             = 2007,
-    -- OVERDRIVE                     = 2008,
+    OVERDRIVE_SHAMARHAAN          = 2008,
     FIRE_SHOT                     = 2009,
     ICE_SHOT                      = 2010,
     WIND_SHOT                     = 2011,
@@ -898,6 +1060,9 @@ xi.mobSkill =
     DARK_SHOT                     = 2016,
 
     -- HUNDRED_FISTS                 = 2020,
+
+    DAZE                          = 2066,
+    KNOCKOUT                      = 2067,
 
     -- MIJIN_GAKURE                  = 2105,
 
@@ -1006,7 +1171,12 @@ xi.mobSkill =
 
     ARROGANCE_INCARNATE_1         = 3178,
 
+    ROYAL_BASH_TRUST              = 3193, -- Trion Trust
+    ROYAL_SAVIOR_TRUST            = 3194, -- Trion Trust
+
     LIGHT_BLADE_2                 = 3214,
+
+    VICTORY_BEACON_TRUST          = 3237, -- Rughadjeen Trust
 
     SHIBARAKU_TRUST               = 3257, -- Gessho Trust
     SHIKO_NO_MITATE_TRUST         = 3258, -- Gessho Trust

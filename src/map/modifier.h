@@ -319,7 +319,7 @@ enum class Mod
     ENFEEBLING_MAGIC_RECAST = 1184, // Recast delay (percent, usually negative)
     ENHANCING_MAGIC_RECAST  = 1185, // Recast delay (percent, usually negative)
     DELAY                   = 171,  // Increase/Decrease Delay
-    RANGED_DELAY            = 172,  // Increase/Decrease Ranged Delay
+    RANGED_DELAY            = 172,  // Increase/Decrease Ranged Delay. This is in-game delay not milliseconds
     MARTIAL_ARTS            = 173,  // The integer amount of delay to reduce from H2H weapons' base delay. (TRAIT)
     SKILLCHAINBONUS         = 174,  // Damage bonus applied to skill chain damage.  Modifier from effects/traits
     SKILLCHAINDMG           = 175,  // Damage bonus applied to skill chain damage.  Modifier from gear (multiplicative after effect/traits)

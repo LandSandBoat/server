@@ -10,7 +10,6 @@ local content = Battlefield:new({
     zoneId           = xi.zone.NAVUKGO_EXECUTION_CHAMBER,
     battlefieldId    = xi.battlefield.id.HAPPY_CASTER,
     maxPlayers       = 6,
-    levelCap         = 75,
     timeLimit        = utils.minutes(30),
     index            = 1,
     entryNpc         = '_1s0',

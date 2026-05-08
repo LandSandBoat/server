@@ -57,7 +57,7 @@ CWeaponSkillState::CWeaponSkillState(CBattleEntity* PEntity, uint16 targid, uint
         }
     }
 
-    if (!m_PEntity->CanSeeTarget(PTarget, false))
+    if (!m_PEntity->CanSeeTarget(PTarget))
     {
         throw CStateInitException(std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget, 0, 0, MsgBasic::CannotPerformAction));
     }

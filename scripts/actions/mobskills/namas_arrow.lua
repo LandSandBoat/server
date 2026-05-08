@@ -1,7 +1,7 @@
 -----------------------------------
 -- Namas Arrow
 -- Family: Humanoid Archery Weaponskill
--- Description: Yoichinoyumi/Futatokoroto: Temporarily improves Ranged Accuracy
+-- Description: Delivers a single-hit attack.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -13,15 +13,18 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    params.baseDamage     = mob:getWeaponDmg()
-    params.numHits        = 1
-    params.fTP            = { 2.5, 2.5, 2.5 } -- TODO: Capture fTPs
-    params.attackType     = xi.attackType.PHYSICAL
-    params.damageType     = xi.damageType.PIERCING
-    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
-    params.skipParry      = true
-    params.skipGuard      = true
-    params.skipBlock      = true
+    params.baseDamage       = mob:getWeaponDmg()
+    params.numHits          = 1
+    params.fTP              = { 2.75, 2.75, 2.75 }
+    -- params.str_wSC       = 0.4 -- TODO: Capture if mobskill weaponskills have wSC.
+    -- params.agi_wSC       = 0.4 -- TODO: Capture if mobskill weaponskills have wSC.
+    params.skipParry        = true
+    params.skipGuard        = true
+    params.skipBlock        = true
+    params.accuracyModifier = { 100, 100, 100 }
+    params.attackType       = xi.attackType.RANGED
+    params.damageType       = xi.damageType.PIERCING
+    params.shadowBehavior   = xi.mobskills.shadowBehavior.NUMSHADOWS_1
 
     local info = xi.mobskills.mobRangedMove(mob, target, skill, action, params)
 

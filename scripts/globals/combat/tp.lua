@@ -17,8 +17,25 @@ xi.combat.tp = xi.combat.tp or {}
 --- @return integer
 xi.combat.tp.calculateTPReturn = function(gainee, delay)
     local tpReturn = 0
+    local isCharmedPCPet = false
 
-    if gainee and gainee:getObjType() ~= xi.objType.MOB then -- Pets and PCs have been observed to use this formula
+    -- Charmed pets controlled by the player are not caught by isPet() and are considered mobs still.
+    -- However once charmed, they convert to use the PC delay formula.
+    if
+        gainee:getObjType() == xi.objType.MOB and
+        gainee:getMaster() ~= nil and
+        gainee:getMaster():isPC() and
+        gainee:isCharmed()
+    then
+        isCharmedPCPet = true
+    end
+
+    if
+        gainee and
+        gainee:getObjType() ~= xi.objType.MOB or
+        isCharmedPCPet
+
+    then -- Pets and PCs have been observed to use this formula
         if delay > 900 then
             tpReturn = 173 + (delay - 900) * 28 / 360
         elseif delay > 720 then
@@ -57,7 +74,7 @@ xi.combat.tp.getModifiedDelayAndCanZanshin = function(actor, delay)
     if actor:isDualWielding() then -- NOTE: this 'isDualWielding' may trip on non-PCs even if they are 'using h2h'. If this is rectified in core in the future this should fall through correctly.
         modifiedDelay = (delay * (100 - actor:getMod(xi.mod.DUAL_WIELD)) / 100) / 2
     elseif actor:isUsingH2H() then
-        if actor:getObjType() == xi.objType.PC then            -- handle h2h with > 1 swing only on PC
+        if actor:getObjType() == xi.objType.PC then -- handle h2h with > 1 swing only on PC
             if
                 actor:getEquippedItem(xi.slot.SUB) ~= nil or   -- equipped shield = one swing
                 actor:getSkillRank(xi.skill.HAND_TO_HAND) == 0 -- zero h2h rank skill = one swing
@@ -67,6 +84,8 @@ xi.combat.tp.getModifiedDelayAndCanZanshin = function(actor, delay)
             else
                 modifiedDelay = math.max((delay - actor:getMod(xi.mod.MARTIAL_ARTS)) / 2, 48) -- min delay of 96 total so 96/2 per fist, https://www.bg-wiki.com/ffxi/Attack_Speed
             end
+        elseif actor:getObjType() == xi.objType.MOB then
+            modifiedDelay = math.max(delay / 2, 48) -- Mobs are not affected at all by Martial Arts.
         else
             -- TODO: handle the corner case where a PC-like entity is using h2h but is only hitting with one 'fist'. Perhaps they have a shield with no main weapon.
             -- elseif actor:getAutoAttackHits() > 1
@@ -139,7 +158,6 @@ xi.combat.tp.getSingleWeaponTPReturn = function(actor, slot)
     return math.floor(tpReturn * storeTPModifier)
 end
 
--- UNUSED.
 -- Returns a single ranged hit's TP return
 xi.combat.tp.getSingleRangedHitTPReturn = function(actor)
     if actor:hasStatusEffect(xi.effect.MEIKYO_SHISUI) then

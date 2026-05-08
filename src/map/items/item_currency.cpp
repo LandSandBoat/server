@@ -29,3 +29,8 @@ CItemCurrency::CItemCurrency(uint16 id)
 }
 
 CItemCurrency::~CItemCurrency() = default;
+
+CItemCurrency::CItemCurrency(const CItemCurrency& other)
+: CItem(other)
+{
+}

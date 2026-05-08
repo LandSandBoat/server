@@ -84,6 +84,7 @@ class CItemFlowerpot : public CItemFurnishing
 {
 public:
     CItemFlowerpot(uint16 id);
+    CItemFlowerpot(const CItemFlowerpot& other);
     virtual ~CItemFlowerpot();
 
     void cleanPot();

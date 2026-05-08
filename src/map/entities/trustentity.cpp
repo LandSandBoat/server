@@ -168,13 +168,19 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
     bool  hitOccured   = false; // track if player hit mob at all
     bool  isBarrage    = StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE, 0);
 
-    /*
-    // if barrage is detected, getBarrageShotCount also checks for ammo count
-    if (!ammoThrowing && !rangedThrowing && isBarrage)
+    // Barrage does not stack with Double/Triple Shot.
+    if (isBarrage)
     {
         hitCount += battleutils::getBarrageShotCount(this);
     }
-    */
+    else if (this->StatusEffectContainer->HasStatusEffect(EFFECT_TRIPLE_SHOT) && xirand::GetRandomNumber(100) < this->getMod(Mod::TRIPLE_SHOT_RATE))
+    {
+        hitCount = 3;
+    }
+    else if (this->StatusEffectContainer->HasStatusEffect(EFFECT_DOUBLE_SHOT) && xirand::GetRandomNumber(100) < this->getMod(Mod::DOUBLE_SHOT_RATE))
+    {
+        hitCount = 2;
+    }
 
     // loop for barrage hits, if a miss occurs, the loop will end
     // TODO: do trusts need barrage racc & ratt bonus mods?
@@ -314,6 +320,7 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
     // battleutils::RemoveAmmo(this, ammoConsumed);
     // only remove detectables
     StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+    this->processActionEffectFlags(action);
 }
 
 bool CTrustEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
@@ -467,4 +474,6 @@ void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& act
     {
         ActionInterrupts::WeaponSkillOutOfRange(this, PBattleTarget);
     }
+
+    this->processActionEffectFlags(action);
 }

@@ -51,6 +51,29 @@ CItem::CItem(uint16 id)
     std::memset(m_extra, 0, sizeof(m_extra));
 }
 
+CItem::CItem(const CItem& other)
+: m_id(other.m_id)
+, m_subid(other.m_subid)
+, m_type(other.m_type)
+, m_subtype(other.m_subtype)
+, m_quantity(other.m_quantity)
+, m_reserve(other.m_reserve)
+, m_stackSize(other.m_stackSize)
+, m_BasePrice(other.m_BasePrice)
+, m_CharPrice(other.m_CharPrice)
+, m_ahCat(other.m_ahCat)
+, m_flag(other.m_flag)
+, m_slotID(other.m_slotID)
+, m_locationID(other.m_locationID)
+, m_sent(other.m_sent)
+, dirty_(other.dirty_)
+, m_name(other.m_name)
+, m_send(other.m_send)
+, m_recv(other.m_recv)
+{
+    std::memcpy(m_extra, other.m_extra, sizeof(m_extra));
+}
+
 CItem::~CItem() = default;
 
 /************************************************************************
@@ -259,7 +282,7 @@ uint32 CItem::getCharPrice() const
  *                                                                       *
  ************************************************************************/
 
-const std::string& CItem::getName()
+const std::string& CItem::getName() const
 {
     return m_name;
 }
@@ -275,7 +298,7 @@ void CItem::setName(const std::string& name)
  *                                                                       *
  ************************************************************************/
 
-const std::string& CItem::getSender()
+const std::string& CItem::getSender() const
 {
     return m_send;
 }
@@ -291,7 +314,7 @@ void CItem::setSender(const std::string& sender)
  *                                                                       *
  ************************************************************************/
 
-const std::string& CItem::getReceiver()
+const std::string& CItem::getReceiver() const
 {
     return m_recv;
 }
@@ -307,7 +330,7 @@ void CItem::setReceiver(const std::string& receiver)
  *                                                                       *
  ************************************************************************/
 
-const std::string CItem::getSignature()
+auto CItem::getSignature() const -> const std::string
 {
     return Exdata::decodeSignature(this->exdata<Exdata::AugmentStandard>().Signature);
 }
@@ -397,4 +420,19 @@ bool CItem::isSoultrapper() const
 bool CItem::isMannequin() const
 {
     return m_id >= 256 && m_id <= 263;
+}
+
+auto CItem::state() const -> ItemState
+{
+    return state_;
+}
+
+void CItem::setState(const ItemState newState, xi::Badge<xi::items::detail::ItemAccess>)
+{
+    state_ = newState;
+}
+
+auto CItem::isBusy() const -> bool
+{
+    return state_ != ItemState::Free;
 }

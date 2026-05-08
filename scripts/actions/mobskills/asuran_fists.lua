@@ -18,12 +18,15 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    params.baseDamage     = mob:getWeaponDmg()
-    params.numHits        = 8
-    params.fTP            = { 0.8, 0.8, 0.8 }
-    params.attackType     = xi.attackType.PHYSICAL
-    params.damageType     = xi.damageType.HTH
-    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_8
+    params.baseDamage       = mob:getWeaponDmg()
+    params.numHits          = 8
+    params.fTP              = { 1.0, 1.0, 1.0 }
+    --params.str_wSC        = 0.1 -- TODO: Capture if mobskill weaponskills have wSC.
+    --params.vit_wSC        = 0.1 -- TODO: Capture if mobskill weaponskills have wSC.
+    params.accuracyModifier = { 0, 30, 60 }
+    params.attackType       = xi.attackType.PHYSICAL
+    params.damageType       = xi.damageType.HTH
+    params.shadowBehavior   = xi.mobskills.shadowBehavior.NUMSHADOWS_8
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 

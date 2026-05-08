@@ -87,6 +87,15 @@ bool CController::WeaponSkill(uint16 targid, uint16 wsid)
     return false;
 }
 
+bool CController::RangedAttack(uint16 targid)
+{
+    if (POwner)
+    {
+        return POwner->PAI->Internal_RangedAttack(targid);
+    }
+    return false;
+}
+
 bool CController::IsAutoAttackEnabled() const
 {
     return m_AutoAttackEnabled;
@@ -95,6 +104,16 @@ bool CController::IsAutoAttackEnabled() const
 void CController::SetAutoAttackEnabled(bool enabled)
 {
     m_AutoAttackEnabled = enabled;
+}
+
+bool CController::IsRangedAttackEnabled() const
+{
+    return m_RangedAttackEnabled;
+}
+
+void CController::SetRangedAttackEnabled(bool enabled)
+{
+    m_RangedAttackEnabled = enabled;
 }
 
 bool CController::IsWeaponSkillEnabled() const

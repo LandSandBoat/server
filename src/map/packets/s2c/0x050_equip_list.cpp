@@ -21,6 +21,8 @@
 
 #include "0x050_equip_list.h"
 
+#include "entities/charentity.h"
+
 GP_SERV_COMMAND_EQUIP_LIST::GP_SERV_COMMAND_EQUIP_LIST(const uint8 slotId, const SLOTTYPE equipSlot, const CONTAINER_ID containerId)
 {
     auto& packet = this->data();
@@ -28,4 +30,13 @@ GP_SERV_COMMAND_EQUIP_LIST::GP_SERV_COMMAND_EQUIP_LIST(const uint8 slotId, const
     packet.PropertyItemIndex = slotId;
     packet.EquipKind         = equipSlot;
     packet.Category          = containerId;
+}
+
+GP_SERV_COMMAND_EQUIP_LIST::GP_SERV_COMMAND_EQUIP_LIST(const ItemLocation& loc, const SLOTTYPE equipSlot)
+{
+    auto& packet = this->data();
+
+    packet.PropertyItemIndex = loc.Slot;
+    packet.EquipKind         = equipSlot;
+    packet.Category          = loc.Container;
 }

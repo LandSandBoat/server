@@ -1424,7 +1424,7 @@ INSERT INTO `augments` VALUES (1150,0,0,0,0,0);
 INSERT INTO `augments` VALUES (1151,0,0,0,0,0);
 -- End unused block
 
-INSERT INTO `augments` VALUES (1152,0,1,10,0,0); -- DEF +10
+INSERT INTO `augments` VALUES (1152,10,1,1,0,0); -- DEF +10 (increases by 10)
 INSERT INTO `augments` VALUES (1153,0,68,3,0,0); -- Evasion +3
 INSERT INTO `augments` VALUES (1154,0,31,3,0,0); -- Mag. Evasion +3
 INSERT INTO `augments` VALUES (1155,200,161,-1,0,0); -- Physical Damage Taken -2%

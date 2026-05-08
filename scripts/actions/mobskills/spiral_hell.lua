@@ -1,7 +1,7 @@
 -----------------------------------
 -- Spiral Hell
 -- Family: Humanoid Scythe Weaponskill
--- Description: Delivers a single-hit attack
+-- Description: Damage varies with TP.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,9 +15,11 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     params.baseDamage     = mob:getWeaponDmg()
     params.numHits        = 1
-    params.fTP            = { 1.25, 1.25, 1.25 } -- TODO: Capture fTPs
+    params.fTP            = { 1.375, 1.875, 3.625 }
+    -- params.str_wSC     = 0.5 -- TODO: Capture if mobskill weaponskills have wSC.
+    -- params.int_wSC     = 0.5 -- TODO: Capture if mobskill weaponskills have wSC.
     params.attackType     = xi.attackType.PHYSICAL
-    params.damageType     = xi.damageType.BLUNT
+    params.damageType     = xi.damageType.SLASHING
     params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)

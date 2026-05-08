@@ -44,7 +44,7 @@ public:
     virtual bool WeaponSkill(uint16 targid, uint16 wsid) override;
 
     virtual bool Ability(uint16 targid, uint16 abilityid) override;
-    virtual bool RangedAttack(uint16 targid);
+    virtual bool RangedAttack(uint16 targid) override;
     virtual bool UseItem(uint16 targid, uint8 loc, uint8 slotid);
 
     timer::time_point getLastAttackTime();

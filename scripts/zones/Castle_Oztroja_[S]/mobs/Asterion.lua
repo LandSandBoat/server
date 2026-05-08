@@ -22,7 +22,7 @@ entity.onMobFight = function(mob, target)
 
     -- As it gets low, its attack speed increases to near perma-hundred fists.
     -- hundred fists is 1700 delay. this formula will range between 4500 and 1700.
-    mob:setDelay(1700 + hpp * 28)
+    mob:setDelay(170 + hpp * 2.8)
 
     -- Favors Back Swish when higher HP and at around 50% it starts using Mow and Mortal Ray.
     if hpp < 50 then

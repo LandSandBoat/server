@@ -42,6 +42,7 @@ class CItemLinkshell : public CItem
 {
 public:
     CItemLinkshell(uint16);
+    CItemLinkshell(const CItemLinkshell& other);
     virtual ~CItemLinkshell();
 
     uint32            GetLSID();
@@ -50,11 +51,9 @@ public:
     uint16            GetLSRawColor();
     void              SetLSID(uint32 lsid);
     void              SetLSColor(uint16 color);
-    const std::string getSignature() override;
+    auto              getSignature() const -> const std::string override;
     void              setSignature(const std::string& signature) override;
     void              SetLSType(LSTYPE value);
-
-private:
 };
 
 #endif

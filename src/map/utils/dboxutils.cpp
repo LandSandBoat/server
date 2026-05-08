@@ -71,7 +71,7 @@ void dboxutils::SendOldItems(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo)
         {
             while (rset->next())
             {
-                CItem* PItem = itemutils::GetItem(rset->get<uint16>("itemid"));
+                CItem* PItem = xi::items::spawn(rset->get<uint16>("itemid")).release();
                 if (PItem != nullptr)
                 {
                     PItem->setSubID(rset->get<uint16>("itemsubid"));
@@ -158,7 +158,7 @@ void dboxutils::AddItemsToBeSent(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
                 }
             }
 
-            CItem* PUBoxItem = itemutils::GetItem(PItem->getID());
+            CItem* PUBoxItem = xi::items::spawn(PItem->getID()).release();
             if (PUBoxItem == nullptr)
             {
                 ShowErrorFmt("DBOX: PUBoxItem was null (player: {}, item: {})", PChar->getName(), PItem->getID());
@@ -405,7 +405,7 @@ void dboxutils::SendNewItems(Scheduler& scheduler, CCharEntity* PChar, GP_CLI_CO
                                                PChar->id);
             FOR_DB_SINGLE_RESULT(rset)
             {
-                if (CItem* PItem = itemutils::GetItem(rset->get<uint32>("itemid")))
+                if (CItem* PItem = xi::items::spawn(rset->get<uint32>("itemid")).release())
                 {
                     PItem->setSubID(rset->get<uint16>("itemsubid"));
                     PItem->setQuantity(rset->get<uint32>("quantity"));
@@ -648,7 +648,7 @@ void dboxutils::TakeItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
                                                                    PChar->id, PostWorkNo, BoxNo);
                 if (rset && rset->rowsAffected())
                 {
-                    if (charutils::AddItem(PChar, LOC_INVENTORY, itemutils::GetItem(PItem), true) != ERROR_SLOTID)
+                    if (charutils::AddItem(PChar, LOC_INVENTORY, xi::items::clone(*PItem), true) != ERROR_SLOTID)
                     {
                         return;
                     }
@@ -660,7 +660,7 @@ void dboxutils::TakeItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
                                                                                    PChar->id, PostWorkNo, BoxNo);
                 if (rset && rset->rowsAffected())
                 {
-                    if (charutils::AddItem(PChar, LOC_INVENTORY, itemutils::GetItem(PItem), true) != ERROR_SLOTID)
+                    if (charutils::AddItem(PChar, LOC_INVENTORY, xi::items::clone(*PItem), true) != ERROR_SLOTID)
                     {
                         return;
                     }

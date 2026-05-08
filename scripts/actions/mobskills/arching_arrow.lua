@@ -2,9 +2,8 @@
 -- Arching Arrow
 -- Family: Humanoid Archery Weaponskill
 -- Description: Delivers a single-hit attack. Chance of critical varies with TP.
--- Modifiers: STR:20%; AGI:50%
--- Darkness/Gravitation skillchain properties, AoE damage
--- Notes: Used by Trust: Semih Lafihna
+-- Darkness/Gravitation skillchain properties.
+-- NOTES: Used by Semih Lafihna
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -18,13 +17,16 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     params.baseDamage     = mob:getWeaponDmg()
     params.numHits        = 1
-    params.fTP            = { 3.5, 3.5, 3.5 } -- TODO: Capture fTPs
-    params.attackType     = xi.attackType.PHYSICAL
-    params.damageType     = xi.damageType.PIERCING
-    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1 -- TODO: Capture shadowBehavior
+    params.fTP            = { 3.5, 3.5, 3.5 }
+    -- params.str_wSC     = 0.16 -- TODO: Capture if mobskill weaponskills have wSC.
+    -- params.agi_wSC     = 0.25 -- TODO: Capture if mobskill weaponskills have wSC.
     params.skipParry      = true
     params.skipGuard      = true
     params.skipBlock      = true
+    params.criticalChance = { 0.1, 0.3, 0.5 }
+    params.attackType     = xi.attackType.RANGED
+    params.damageType     = xi.damageType.PIERCING
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
 
     local info = xi.mobskills.mobRangedMove(mob, target, skill, action, params)
 

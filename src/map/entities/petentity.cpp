@@ -70,7 +70,7 @@ CPetEntity::~CPetEntity()
     TracyZoneScoped;
 }
 
-PET_TYPE CPetEntity::getPetType()
+PET_TYPE CPetEntity::getPetType() const
 {
     return m_PetType;
 }
@@ -85,7 +85,7 @@ void CPetEntity::setSpawnLevel(uint8 level)
     m_spawnLevel = level;
 }
 
-bool CPetEntity::isBstPet()
+bool CPetEntity::isBstPet() const
 {
     return getPetType() == PET_TYPE::JUG_PET || objtype == TYPE_MOB;
 }
@@ -351,6 +351,8 @@ void CPetEntity::OnAbility(CAbilityState& state, action_t& action)
     {
         ActionInterrupts::AbilityInterrupt(this);
     }
+
+    this->processActionEffectFlags(action);
 }
 
 bool CPetEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
@@ -591,11 +593,6 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
             }
         }
 
-        if (PSkill->getValidTargets() & TARGET_ENEMY)
-        {
-            PTargetFound->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
-        }
-
         if (PTargetFound->isDead())
         {
             battleutils::ClaimMob(PTargetFound, this);
@@ -620,4 +617,6 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
         }
         battleutils::DirtyExp(PTarget, this);
     }
+
+    this->processActionEffectFlags(action);
 }

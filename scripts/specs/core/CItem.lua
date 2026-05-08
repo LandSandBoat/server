@@ -71,6 +71,11 @@ end
 function CItem:isSubType(subtype)
 end
 
+---@nodiscard
+---@return xi.itemState
+function CItem:state()
+end
+
 ---@param reserved integer
 ---@return nil
 function CItem:setReservedValue(reserved)

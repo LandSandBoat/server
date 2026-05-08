@@ -105,6 +105,7 @@ class CItemFurnishing : public CItem
 {
 public:
     CItemFurnishing(uint16);
+    CItemFurnishing(const CItemFurnishing& other);
     virtual ~CItemFurnishing();
 
     uint8  getStorage() const;
@@ -115,7 +116,7 @@ public:
     auto   height() const -> uint16;
     auto   placement() const -> FurnishingPlacement;
 
-    bool  isInstalled();
+    auto  isInstalled() const -> bool;
     uint8 getCol();
     uint8 getRow();
     uint8 getLevel();
@@ -145,7 +146,7 @@ public:
     void setOn2ndFloor(bool on2ndFloor);
     bool getOn2ndFloor();
 
-    auto getSignature() -> const std::string override;
+    auto getSignature() const -> const std::string override;
     void setSignature(const std::string& signature) override;
 
     bool isGardeningPot() const;

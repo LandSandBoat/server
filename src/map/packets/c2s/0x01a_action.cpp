@@ -156,7 +156,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
     {
         for (uint8 equipSlotID = 0; equipSlotID < 16; ++equipSlotID)
         {
-            if (PChar->equip[equipSlotID] != 0)
+            if (PChar->getEquip(static_cast<SLOTTYPE>(equipSlotID)))
             {
                 PChar->PLatentEffectContainer->CheckLatentsEquip(equipSlotID);
             }

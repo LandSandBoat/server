@@ -101,4 +101,7 @@ xi.mobMod =
     AVATAR_ASTRAL_DELAY    = 90, -- Number of milliseconds to delay AF after avatar spawn
     H2H_SINGLE_SWING       = 91, -- Mob will have only one swing per attack even as MNK with H2H skill
     AOE_HIT_ALL            = 92, -- Mob AoE can hit any player regardless of enmity
+    RANGED_ATTACK_RANGE    = 93, -- Max range for ranged auto attacks. Mob will move closer if target is beyond this range.
+    FOLLOW_LEASH_RANGE     = 94, -- Distance the leader can walk before their followers start moving. Applied to followers.
+    FOLLOW_STOP_RANGE      = 95, -- Distance the followers attempt to stop at once their leader stops moving. Applied to followers.
 }

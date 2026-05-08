@@ -54,6 +54,15 @@ void InventorySyncState::queueEquipChange(CONTAINER_ID container, uint8 containe
     dirtyContainers_.insert(equipping ? container : static_cast<CONTAINER_ID>(item->getLocationID()));
 }
 
+void InventorySyncState::removeEquipChange(const CItem* item)
+{
+    std::erase_if(pendingEquipChanges_,
+                  [&](const equip_change_t& x)
+                  {
+                      return x.item == item;
+                  });
+}
+
 void InventorySyncState::clearEquipChanges()
 {
     pendingEquipChanges_.clear();

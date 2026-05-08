@@ -100,7 +100,15 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN, { chance = 65, duration = math.random(4, 8) })
+    local pTable =
+    {
+        chance   = 65,
+        effectId = xi.effect.STUN,
+        element  = xi.element.THUNDER,
+        duration = math.random(4, 8),
+    }
+
+    return xi.combat.action.executeAddEffectEnfeeblement(mob, target, pTable)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

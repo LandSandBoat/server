@@ -240,7 +240,7 @@ struct Pet_t
 
     Pet_t()
     : PetID(0)
-    , EcoSystem(ECOSYSTEM::ECO_ERROR)
+    , EcoSystem(ECOSYSTEM::UNCLASSIFIED)
     , minLevel(-1)
     , maxLevel(99)
     , name_prefix(0)

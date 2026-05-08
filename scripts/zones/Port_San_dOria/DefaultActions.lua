@@ -38,6 +38,7 @@ return {
     ['Phersula']     = { event = 775 },
     ['Portaure']     = { event = 650 },
     ['Prietta']      = { event = 596 },
+    ['Raqtibahl']    = { event = 759 },
     ['Rielle']       = { event = 564 },
     ['Sheridan']     = { event = 572 },
     ['Solgierte']    = { event = 567 },

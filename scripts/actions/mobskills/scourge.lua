@@ -1,7 +1,7 @@
 -----------------------------------
 -- Scourge
 -- Family: Humanoid Great Sword Weaponskill
--- Description: Ragnarok/Valhalla: Temporarily improves critical hit rate.
+-- Description: Valhalla/Ragnarok: Additional Effect: temporarily improves Critical Hit Rate.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,7 +15,9 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     params.baseDamage     = mob:getWeaponDmg()
     params.numHits        = 1
-    params.fTP            = { 2.5, 2.5, 2.5 } -- TODO: Capture fTPs
+    params.fTP            = { 3.0, 3.0, 3.0 }
+    -- params.mnd_wSC     = 0.4 -- TODO: Capture if mobskill weaponskills have wSC.
+    -- params.chr_wSC     = 0.4 -- TODO: Capture if mobskill weaponskills have wSC.
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.SLASHING
     params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1

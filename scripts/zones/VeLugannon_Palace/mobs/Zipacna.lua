@@ -334,9 +334,9 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     local roll = math.random(1, 100)
 
     if roll <= 30 then
-        return xi.mobSkill.CRYSTAL_RAIN
+        return xi.mobSkill.CRYSTAL_RAIN_1
     elseif roll <= 60 then
-        local weaponEle = math.random(xi.mobSkill.CRYSTAL_WEAPON_FIRE, xi.mobSkill.CRYSTAL_WEAPON_WATER)
+        local weaponEle = math.random(xi.mobSkill.CRYSTAL_WEAPON_FIRE_1, xi.mobSkill.CRYSTAL_WEAPON_WATER_1)
         return weaponEle
     end
 end

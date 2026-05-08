@@ -21,7 +21,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- pet must be an avatar, and active
     if
         not pet or
-        pet:getEcosystem() ~= 5 or
+        pet:getEcosystem() ~= xi.ecosystem.ELEMENTAL or
         petInactive(pet)
     then
         return 1

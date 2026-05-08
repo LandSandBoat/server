@@ -54,15 +54,18 @@ const auto createLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshe
 
     if (linkshellId != 0)
     {
-        destroy(PItemLinkshell);
-        PItemLinkshell = static_cast<CItemLinkshell*>(itemutils::GetItem(ITEMID::LINKSHELL));
-        if (PItemLinkshell == nullptr)
+        PChar->getStorage(data.Category)->RemoveItem(data.ItemIndex);
+        PItemLinkshell = nullptr;
+
+        auto PItem = xi::items::spawn(ITEMID::LINKSHELL);
+        if (PItem == nullptr)
         {
             return;
         }
 
+        PItemLinkshell = static_cast<CItemLinkshell*>(PItem.get());
         PItemLinkshell->setQuantity(1);
-        PChar->getStorage(data.Category)->InsertItem(PItemLinkshell, data.ItemIndex);
+        PChar->getStorage(data.Category)->InsertItem(std::move(PItem), data.ItemIndex);
         PItemLinkshell->SetLSID(linkshellId);
         PItemLinkshell->SetLSType(LSTYPE_LINKSHELL);
         PItemLinkshell->setSignature(DecodedName);
@@ -139,8 +142,13 @@ const auto equipLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshel
     // Now equip the new linkshell
     linkshell::AddOnlineMember(PChar, PItemLinkshell, data.LinkshellId);
     PItemLinkshell->setSubType(ITEM_LOCKED);
-    PChar->equip[SLOT_BACK + data.LinkshellId]    = data.ItemIndex;
-    PChar->equipLoc[SLOT_BACK + data.LinkshellId] = data.Category;
+    if (!PChar->bindEquip(SLOT_BACK + data.LinkshellId, PItemLinkshell))
+    {
+        linkshell::DelOnlineMember(PChar, PItemLinkshell);
+        PItemLinkshell->setSubType(ITEM_UNLOCKED);
+        return;
+    }
+
     if (data.LinkshellId == 1)
     {
         PChar->updatemask |= UPDATE_HP;
@@ -158,8 +166,7 @@ const auto unequipLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinksh
 {
     linkshell::DelOnlineMember(PChar, PItemLinkshell);
     PItemLinkshell->setSubType(ITEM_UNLOCKED);
-    PChar->equip[SLOT_BACK + data.LinkshellId]    = 0;
-    PChar->equipLoc[SLOT_BACK + data.LinkshellId] = 0;
+    PChar->clearEquip(SLOT_BACK + data.LinkshellId);
     if (data.LinkshellId == 1)
     {
         PChar->updatemask |= UPDATE_HP;

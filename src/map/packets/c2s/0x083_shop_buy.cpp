@@ -49,7 +49,7 @@ void GP_CLI_COMMAND_SHOP_BUY::process(MapSession* PSession, CCharEntity* PChar) 
     const uint16 itemId = PChar->Container->getItemID(this->ShopItemIndex);
     const uint32 price  = PChar->Container->getQuantity(this->ShopItemIndex); // We used the "quantity" to store the item's sale price
 
-    const CItem* PItem = itemutils::GetItemPointer(itemId);
+    const CItem* PItem = xi::items::lookup(itemId);
     if (!PItem)
     {
         ShowWarning("User '%s' attempting to buy an invalid item from vendor!", PChar->getName());

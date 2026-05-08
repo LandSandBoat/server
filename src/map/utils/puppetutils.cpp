@@ -224,7 +224,7 @@ void SaveAutomaton(CCharEntity* PChar)
     }
 }
 
-auto UnlockAttachment(CCharEntity* PChar, CItem* PItem) -> bool
+auto UnlockAttachment(CCharEntity* PChar, const CItem* PItem) -> bool
 {
     const uint16 id = PItem->getID();
 
@@ -233,7 +233,7 @@ auto UnlockAttachment(CCharEntity* PChar, CItem* PItem) -> bool
         return false;
     }
 
-    const uint8 slot = static_cast<CItemPuppet*>(PItem)->getEquipSlot();
+    const uint8 slot = static_cast<const CItemPuppet*>(PItem)->getEquipSlot();
     if (slot == ITEM_PUPPET_ATTACHMENT)
     {
         if (addBit(id & 0xFF, reinterpret_cast<uint8*>(PChar->m_unlockedAttachments.attachments), sizeof(PChar->m_unlockedAttachments.attachments)))
@@ -267,7 +267,7 @@ auto UnlockAttachment(CCharEntity* PChar, CItem* PItem) -> bool
     return false;
 }
 
-auto HasAttachment(const CCharEntity* PChar, CItem* PItem) -> bool
+auto HasAttachment(const CCharEntity* PChar, const CItem* PItem) -> bool
 {
     const uint16 id = PItem->getID();
     if (!PItem->isType(ITEM_PUPPET))
@@ -275,7 +275,7 @@ auto HasAttachment(const CCharEntity* PChar, CItem* PItem) -> bool
         return false;
     }
 
-    const uint8 slot = static_cast<CItemPuppet*>(PItem)->getEquipSlot();
+    const uint8 slot = static_cast<const CItemPuppet*>(PItem)->getEquipSlot();
 
     // Note: getEquipSlot() returns ITEM_PUPPET_EQUIPSLOT values (1-based from DB),
     // not AutomatonSlot packet indices (0-based).
@@ -294,7 +294,7 @@ auto HasAttachment(const CCharEntity* PChar, CItem* PItem) -> bool
 
 void setAttachment(CCharEntity* PChar, uint8 slotId, uint8 attachment)
 {
-    auto* PAttachment = static_cast<CItemPuppet*>(itemutils::GetItemPointer(0x2100 + attachment));
+    auto* PAttachment = xi::items::lookup<CItemPuppet>(0x2100 + attachment);
     if (attachment != 0)
     {
         if (PAttachment && !HasAttachment(PChar, PAttachment))
@@ -357,7 +357,7 @@ void setAttachment(CCharEntity* PChar, uint8 slotId, uint8 attachment)
 
         if (attachment != 0)
         {
-            PAttachment = static_cast<CItemPuppet*>(itemutils::GetItemPointer(0x2100 + attachment));
+            PAttachment = xi::items::lookup<CItemPuppet>(0x2100 + attachment);
 
             if (PAttachment && PAttachment->getEquipSlot() == ITEM_PUPPET_ATTACHMENT)
             {
@@ -383,7 +383,7 @@ void setFrame(CCharEntity* PChar, AutomatonFrame frame)
 
     if (static_cast<uint8>(PChar->getAutomatonFrame()) != 0)
     {
-        const auto* POldFrame = static_cast<CItemPuppet*>(itemutils::GetItemPointer(0x2000 + static_cast<uint8>(PChar->getAutomatonFrame())));
+        const auto* POldFrame = xi::items::lookup<CItemPuppet>(0x2000 + static_cast<uint8>(PChar->getAutomatonFrame()));
         if (POldFrame == nullptr || POldFrame->getEquipSlot() != ITEM_PUPPET_FRAME)
         {
             return;
@@ -395,7 +395,7 @@ void setFrame(CCharEntity* PChar, AutomatonFrame frame)
     }
 
     // Check if they actually have the frame
-    auto* PFrame = static_cast<CItemPuppet*>(itemutils::GetItemPointer(0x2000 + static_cast<uint8>(frame)));
+    auto* PFrame = xi::items::lookup<CItemPuppet>(0x2000 + static_cast<uint8>(frame));
     if (PFrame == nullptr || PFrame->getEquipSlot() != ITEM_PUPPET_FRAME || (frame != AutomatonFrame::Harlequin && !HasAttachment(PChar, PFrame)))
     {
         return;
@@ -426,7 +426,7 @@ void setHead(CCharEntity* PChar, AutomatonHead head)
 
     if (static_cast<uint8>(PChar->getAutomatonHead()) != 0)
     {
-        const auto* POldHead = static_cast<CItemPuppet*>(itemutils::GetItemPointer(0x2000 + static_cast<uint8>(PChar->getAutomatonHead())));
+        const auto* POldHead = xi::items::lookup<CItemPuppet>(0x2000 + static_cast<uint8>(PChar->getAutomatonHead()));
         if (POldHead == nullptr || POldHead->getEquipSlot() != ITEM_PUPPET_HEAD)
         {
             return;
@@ -438,7 +438,7 @@ void setHead(CCharEntity* PChar, AutomatonHead head)
     }
 
     // Check if they actually have the head
-    auto* PHead = static_cast<CItemPuppet*>(itemutils::GetItemPointer(0x2000 + static_cast<uint8>(head)));
+    auto* PHead = xi::items::lookup<CItemPuppet>(0x2000 + static_cast<uint8>(head));
     if (PHead == nullptr || PHead->getEquipSlot() != ITEM_PUPPET_HEAD || (head != AutomatonHead::Harlequin && !HasAttachment(PChar, PHead)))
     {
         return;
@@ -664,7 +664,7 @@ void CheckAttachmentsForManeuver(const CCharEntity* PChar, const EFFECT maneuver
         {
             if (PAutomaton->getAttachment(i) != 0)
             {
-                auto* PAttachment = static_cast<CItemPuppet*>(itemutils::GetItemPointer(0x2100 + PAutomaton->getAttachment(i)));
+                auto* PAttachment = xi::items::lookup<CItemPuppet>(0x2100 + PAutomaton->getAttachment(i));
 
                 if (PAttachment && (PAttachment->getElementSlots() >> (element * 4)) & 0xF)
                 {
@@ -690,7 +690,7 @@ void EquipAttachments(CAutomatonEntity* PAutomaton)
         {
             if (PAutomaton->getAttachment(i) != 0)
             {
-                auto* PAttachment = static_cast<CItemPuppet*>(itemutils::GetItemPointer(0x2100 + PAutomaton->getAttachment(i)));
+                auto* PAttachment = xi::items::lookup<CItemPuppet>(0x2100 + PAutomaton->getAttachment(i));
                 if (PAttachment)
                 {
                     luautils::OnAttachmentEquip(PAutomaton, PAttachment);
@@ -709,7 +709,7 @@ void UpdateAttachments(const CCharEntity* PChar)
         {
             if (PAutomaton->getAttachment(i) != 0)
             {
-                auto* PAttachment = static_cast<CItemPuppet*>(itemutils::GetItemPointer(0x2100 + PAutomaton->getAttachment(i)));
+                auto* PAttachment = xi::items::lookup<CItemPuppet>(0x2100 + PAutomaton->getAttachment(i));
 
                 if (PAttachment)
                 {
@@ -740,7 +740,7 @@ void PreLevelRestriction(const CCharEntity* PChar)
 
             if (attachment != 0)
             {
-                CItemPuppet* PAttachment = dynamic_cast<CItemPuppet*>(itemutils::GetItemPointer(0x2100 + attachment));
+                const auto* PAttachment = xi::items::lookup<CItemPuppet>(0x2100 + attachment);
 
                 if (PAttachment)
                 {
@@ -764,7 +764,7 @@ void PostLevelRestriction(const CCharEntity* PChar)
             const uint8 attachment = PAutomaton->getAttachment(i);
             if (attachment != 0)
             {
-                auto* PAttachment = dynamic_cast<CItemPuppet*>(itemutils::GetItemPointer(0x2100 + attachment));
+                auto* PAttachment = xi::items::lookup<CItemPuppet>(0x2100 + attachment);
                 if (PAttachment)
                 {
                     // Attachment scripts may have custom equip logic that needs to be computed against the LvRestricted puppet stats

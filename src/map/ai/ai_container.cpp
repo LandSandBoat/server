@@ -139,10 +139,9 @@ bool CAIContainer::Ability(uint16 targid, uint16 abilityid)
 
 bool CAIContainer::RangedAttack(uint16 targid)
 {
-    auto* PlayerController = dynamic_cast<CPlayerController*>(Controller.get());
-    if (PlayerController)
+    if (Controller)
     {
-        return PlayerController->RangedAttack(targid);
+        return Controller->RangedAttack(targid);
     }
     return false;
 }

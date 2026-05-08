@@ -2048,7 +2048,7 @@ INSERT INTO `item_latents` VALUES (16735,20,-10,47,0);
 INSERT INTO `item_latents` VALUES (16756,68,20,31,0);    -- Windsdays: Evasion+20
 
 -- Goshisho's Scythe
-INSERT INTO `item_latents` VALUES (16792,25,7,59,19);    -- Vs. undead: Accuracy+7
+INSERT INTO `item_latents` VALUES (16792,25,7,59,18);    -- Vs. undead: Accuracy+7
 
 -- Scythe Of Trials
 INSERT INTO `item_latents` VALUES (16793,2,-20,47,0);
@@ -2083,7 +2083,7 @@ INSERT INTO `item_latents` VALUES (16911,287,1,0,82);    -- DMG 29~40, increases
 INSERT INTO `item_latents` VALUES (16911,287,1,0,92);    -- DMG 29~40, increases as HP% decreases
 
 -- Kitsutsuki
-INSERT INTO `item_latents` VALUES (16912,165,5,59,17);   -- Vs. plantoids: Critical hit rate +5%
+INSERT INTO `item_latents` VALUES (16912,165,5,59,16);   -- Vs. plantoids: Critical hit rate +5%
 
 -- Hocho
 INSERT INTO `item_latents` VALUES (16924,135,3,40,0);    -- Cooking +3 in Main hand
@@ -2104,7 +2104,7 @@ INSERT INTO `item_latents` VALUES (16953,25,7,44,0);  -- Citizens of San d'Oria:
 INSERT INTO `item_latents` VALUES (16968,165,7,59,3);    -- Vs. arcana: Critical hit rate +7%
 
 -- Onikiri
-INSERT INTO `item_latents` VALUES (16969,165,5,59,9);    -- Vs. demons: Critical hit rate +5%
+INSERT INTO `item_latents` VALUES (16969,165,5,59,8);    -- Vs. demons: Critical hit rate +5%
 
 -- Onimaru
 INSERT INTO `item_latents` VALUES (16976,23,18,6,1000);  -- Attack+18 while TP <100%
@@ -2144,8 +2144,8 @@ INSERT INTO `item_latents` VALUES (17204,287,10,31,0);   -- DMG+10 on Windsday
 INSERT INTO `item_latents` VALUES (17207,287,13,47,0);   -- DMG+13 when broken (500 WS points)
 
 -- Hamayumi
-INSERT INTO `item_latents` VALUES (17208,26,10,59,12);   -- Vs. Empty: Ranged Accuracy+10
-INSERT INTO `item_latents` VALUES (17208,66,10,59,12);   -- Vs. Empty: Ranged Attack+10%
+INSERT INTO `item_latents` VALUES (17208,26,10,59,11);   -- Vs. Empty: Ranged Accuracy+10
+INSERT INTO `item_latents` VALUES (17208,66,10,59,11);   -- Vs. Empty: Ranged Attack+10%
 
 -- Selene's Bow
 INSERT INTO `item_latents` VALUES (17212,24,5,37,4);     -- Full moon
@@ -2379,7 +2379,7 @@ INSERT INTO `item_latents` VALUES (17741,25,5,6,1000);   -- Accuracy+5 while TP 
 INSERT INTO `item_latents` VALUES (17741,287,6,6,1000);  -- DMG+6 while TP <100%
 
 -- Koggelmander
-INSERT INTO `item_latents` VALUES (17759,165,7,59,20);   -- Vs. vermin: Critical hit rate +7%
+INSERT INTO `item_latents` VALUES (17759,165,7,59,19);   -- Vs. vermin: Critical hit rate +7%
 
 -- Oberon's Rapier
 INSERT INTO `item_latents` VALUES (17761,287,6,40,0);    -- DMG+6 in Main hand
@@ -2417,7 +2417,7 @@ INSERT INTO `item_latents` VALUES (17793,141,6,47,0);    -- Crit Rate +6% (for t
 INSERT INTO `item_latents` VALUES (17793,287,13,47,0);   -- DMG+13 when broken (500 WS points)
 
 -- Ushikirimaru
-INSERT INTO `item_latents` VALUES (17804,25,7,59,6);     -- Vs. beasts: Accuracy+7
+INSERT INTO `item_latents` VALUES (17804,25,7,59,5);     -- Vs. beasts: Accuracy+7
 
 -- Futsuno Mitama
 INSERT INTO `item_latents` VALUES (17810,8,8,6,1);       -- Latent effect: STR+8
@@ -2491,7 +2491,7 @@ INSERT INTO `item_latents` VALUES (17952,287,2,16,6);    -- DMG: 43~51, increase
 INSERT INTO `item_latents` VALUES (17963,8,5,13,267); -- Allied Tags: STR +5
 
 -- Barkborer
-INSERT INTO `item_latents` VALUES (17964,165,7,59,17);   -- Vs. plantoid: Critical hit rate +7%
+INSERT INTO `item_latents` VALUES (17964,165,7,59,16);   -- Vs. plantoid: Critical hit rate +7%
 
 -- Erlking's Tabar
 INSERT INTO `item_latents` VALUES (17966,287,4,40,0);    -- DMG+4 in Main hand
@@ -2883,7 +2883,7 @@ INSERT INTO `item_latents` VALUES (18434,73,2,58,0);     -- Store TP +2 in Assau
 INSERT INTO `item_latents` VALUES (18434,287,3,58,0);    -- DMG+3 in Assault
 
 -- Kumokirimaru
-INSERT INTO `item_latents` VALUES (18438,165,8,59,20);   -- Vs. vermin: Critical hit rate +8%
+INSERT INTO `item_latents` VALUES (18438,165,8,59,19);   -- Vs. vermin: Critical hit rate +8%
 
 -- Amakura
 INSERT INTO `item_latents` VALUES (18445,73,10,0,50);    -- "Store TP"+10 when HP <50%
@@ -2906,7 +2906,7 @@ INSERT INTO `item_latents` VALUES (18498,978,2,13,267); -- Allied Tags: Occasion
 INSERT INTO `item_latents` VALUES (18502,128,1,24,49);   -- Woodworking +1 if skill level < 40
 
 -- Eventreuse
-INSERT INTO `item_latents` VALUES (18504,165,7,59,17);   -- Vs. plantoid: Critical hit rate +7%
+INSERT INTO `item_latents` VALUES (18504,165,7,59,16);   -- Vs. plantoid: Critical hit rate +7%
 
 -- Lyft Voulge
 INSERT INTO `item_latents` VALUES (18508,8,1,16,3);      -- STR +1~4,party size 3+. Effect strengthens with more members
@@ -2945,6 +2945,19 @@ INSERT INTO `item_latents` VALUES (18683,287,2,58,0);    -- DMG+2 in Assault
 INSERT INTO `item_latents` VALUES (18684,24,10,58,0);    -- Ranged Attack +10 in Assault
 INSERT INTO `item_latents` VALUES (18684,287,2,58,0);    -- DMG+2 in Assault
 
+-- Lamiabane
+INSERT INTO `item_latents` VALUES (18693, 28, 2, 23, 54); -- +2 Magic Attack Bonus in Arrapago Reef
+INSERT INTO `item_latents` VALUES (18693, 28, 2, 23, 62); -- +2 Magic Attack Bonus in Halvung
+INSERT INTO `item_latents` VALUES (18693, 28, 2, 23, 65); -- +2 Magic Attack Bonus in Mamook
+
+-- Snakeeye
+INSERT INTO `item_latents` VALUES (18708,8,5,13,3);    -- +5 STR while Poisoned
+INSERT INTO `item_latents` VALUES (18708,404,20,13,3); -- -20 HP/tick while Poisoned
+
+-- Snakeeye +1
+INSERT INTO `item_latents` VALUES (18709,8,6,13,3);    -- +6 STR while Poisoned
+INSERT INTO `item_latents` VALUES (18709,404,20,13,3); -- -20 HP/tick while Poisoned
+
 -- Perdu Bow
 INSERT INTO `item_latents` VALUES (18717,24,10,6,1000);  -- Ranged Attack+10 while TP <100%,changed to value on bg since it is different value than ffxicyclopedia
 INSERT INTO `item_latents` VALUES (18717,26,5,6,1000);   -- Ranged Accuracy+5 while TP <100%
@@ -2977,7 +2990,7 @@ INSERT INTO `item_latents` VALUES (18758,9,3,37,4);      -- Full moon DEX+3
 INSERT INTO `item_latents` VALUES (18763,131,1,24,52); -- Clothcraft +1 if skill level < 40
 
 -- Birdbanes
-INSERT INTO `item_latents` VALUES (18767,25,3,59,8);     -- Vs. birds: Accuracy+3
+INSERT INTO `item_latents` VALUES (18767,25,3,59,7);     -- Vs. birds: Accuracy+3
 
 -- Poppet Katars
 INSERT INTO `item_latents` VALUES (18768,23,12,9,4);     -- Latent: Attack +12 when automaton is active
@@ -3009,7 +3022,7 @@ INSERT INTO `item_latents` VALUES (18855,129,1,24,50); -- Smithing +1 if skill l
 -- Kerykeion
 INSERT INTO `item_latents` VALUES (18859,370,3,0,50);    -- Regen+3 when HP <51%
 
-INSERT INTO `item_latents` VALUES (18865,165,7,59,20);   -- Zonure - Vs. vermin: Critical hit rate +7%
+INSERT INTO `item_latents` VALUES (18865,165,7,59,19);   -- Zonure - Vs. vermin: Critical hit rate +7%
 INSERT INTO `item_latents` VALUES (18870,287,3,40,0);    -- Dweomer Maul DMG+3 in Main hand
 
 -- Hannibal's Sword
@@ -3093,7 +3106,7 @@ INSERT INTO `item_latents` VALUES (19108,287,5,0,75);    -- DNG:36 when HP <=75%
 INSERT INTO `item_latents` VALUES (19110,132,1,24,53); -- Leathercraft +1 if skill level < 40
 
 -- Ermine's Tail
-INSERT INTO `item_latents` VALUES (19113,165,7,59,14);   -- Vs. lizards: Critical hit rate +7%
+INSERT INTO `item_latents` VALUES (19113,165,7,59,13);   -- Vs. lizards: Critical hit rate +7%
 
 -- Fane Baselard
 INSERT INTO `item_latents` VALUES (19115,287,5,40,0);    -- Fane Baselard DMG+5 in Main hand
@@ -3125,7 +3138,7 @@ INSERT INTO `item_latents` VALUES (19155,165,15,13,267); -- Allied Tags: Critica
 INSERT INTO `item_latents` VALUES (19155,421,5,13,267);  -- TODO: Verification needed. Allied Tags: Critical Hit Damage +5
 
 -- Scheherazade
-INSERT INTO `item_latents` VALUES (19158,165,7,59,14);   -- Vs. lizards: Critical hit rate +7%
+INSERT INTO `item_latents` VALUES (19158,165,7,59,13);   -- Vs. lizards: Critical hit rate +7%
 
 -- Lyft Claymore
 INSERT INTO `item_latents` VALUES (19161,8,1,16,3);      -- STR +1~4,party size 3+. Effect strengthens with more members
@@ -3153,7 +3166,7 @@ INSERT INTO `item_latents` VALUES (19234,11,1,16,5);     -- AGI +1~4,party size 
 INSERT INTO `item_latents` VALUES (19234,11,1,16,6);     -- AGI +1~4,party size 3+. Effect strengthens with more members
 
 -- Onishibari
-INSERT INTO `item_latents` VALUES (19273,165,7,59,6);    -- Vs. beasts: Critical hit rate +7%
+INSERT INTO `item_latents` VALUES (19273,165,7,59,5);    -- Vs. beasts: Critical hit rate +7%
 
 -- Trainee Burin
 INSERT INTO `item_latents` VALUES (19274,130,1,24,51);   -- Goldsmithing +1 if skill level < 40

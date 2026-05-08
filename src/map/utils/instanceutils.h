@@ -24,6 +24,11 @@
 #include "common/cbasetypes.h"
 #include "common/database.h"
 #include "common/ipp.h"
+#include "common/scheduler.h"
+
+#include "map_config.h"
+
+#include <set>
 
 class CInstanceLoader;
 class CCharEntity;
@@ -66,11 +71,21 @@ struct InstanceData_t
 
 namespace instanceutils
 {
+namespace detail
+{
 
-void LoadInstanceList(IPP mapIPP);
-void CheckInstance(); // Called at the end of every tick by time_server
-void LoadInstance(uint32 instanceid, CCharEntity* PRequester);
+struct LazyLoadState
+{
+    bool             enabled{ false };
+    std::set<uint16> managedInstances{};
+};
+
+} // namespace detail
+
+auto Initialize(MapConfig config) -> void;
+auto CheckInstance(Scheduler& scheduler, MapConfig config) -> Task<void>; // Called at the end of every tick by time_server
+auto LoadInstance(uint32 instanceid, CCharEntity* PRequester) -> void;
 auto GetInstanceData(uint32 instanceid) -> InstanceData_t;
-bool IsValidInstanceID(uint32 instanceid);
+auto IsValidInstanceID(uint32 instanceid) -> bool;
 
 }; // namespace instanceutils

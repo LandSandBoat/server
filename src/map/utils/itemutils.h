@@ -21,13 +21,35 @@
 
 #pragma once
 
+#include <memory>
 #include <optional>
+#include <type_traits>
 #include <vector>
 
 #include "items/item.h"
 #include "items/item_currency.h"
 #include "items/item_weapon.h"
 #include "packets/c2s/0x02b_translate.h"
+
+namespace xi::items
+{
+
+auto lookup(uint16 itemId) -> const CItem*;
+
+template <typename T>
+auto lookup(const uint16 itemId) -> const T*
+{
+    static_assert(std::is_base_of_v<CItem, T>, "T must derive from CItem");
+    return dynamic_cast<const T*>(lookup(itemId));
+}
+
+auto spawn(uint16 itemId) -> std::unique_ptr<CItem>;
+auto clone(const CItem& source) -> std::unique_ptr<CItem>;
+
+auto unarmed() -> CItemWeapon*;
+auto unarmedH2H() -> CItemWeapon*;
+
+} // namespace xi::items
 
 #define MAX_ITEMID        32768
 #define MAX_DROPID        5000
@@ -100,14 +122,6 @@ namespace itemutils
 
 void Initialize();
 void FreeItemList();
-
-CItem* GetItem(CItem* PItem);
-CItem* GetItem(uint16 ItemID);
-CItem* GetItemPointer(uint16 ItemID);
-bool   IsItemPointer(CItem* item);
-
-CItemWeapon* GetUnarmedItem();
-CItemWeapon* GetUnarmedH2HItem();
 
 DropList_t* GetDropList(uint16 DropID);
 

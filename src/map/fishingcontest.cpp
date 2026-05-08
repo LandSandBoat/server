@@ -446,26 +446,64 @@ bool WriteContestEntryData(FishingContestEntry* entry)
         return false;
     }
 
-    // Update the DB with the current contest entries
-    const auto rset = db::preparedStmt("REPLACE INTO `fishing_contest_entries` "
-                                       "(charid, mjob, sjob, mlevel, slevel, race, allegiance, fishRank, score, submitTime, contestRank, share) "
-                                       "SELECT charid, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? "
-                                       "FROM chars WHERE charname = ?",
-                                       entry->mjob,
-                                       entry->sjob,
-                                       entry->mlvl,
-                                       entry->slvl,
-                                       entry->race,
-                                       entry->allegiance,
-                                       entry->fishRank,
-                                       entry->score,
-                                       entry->submitTime,
-                                       entry->contestRank,
-                                       entry->share,
-                                       entry->name);
+    const auto maybeCharId = [&]() -> Maybe<uint32>
+    {
+        const auto rset = db::preparedStmt("SELECT charid FROM chars WHERE charname = ?", entry->name);
+        FOR_DB_SINGLE_RESULT(rset)
+        {
+            return rset->get<uint32>("charid");
+        }
+        return std::nullopt;
+    }();
+    if (!maybeCharId)
+    {
+        ShowErrorFmt("Failed to look up {}", entry->name);
+        return false;
+    }
+    const auto charid = *maybeCharId;
+
+    const auto rset = db::preparedStmt(
+        "INSERT INTO fishing_contest_entries SET "
+        "charid = ?, "
+        "mjob = ?, "
+        "sjob = ?, "
+        "mlevel = ?, "
+        "slevel = ?, "
+        "race = ?, "
+        "allegiance = ?, "
+        "fishRank = ?, "
+        "score = ?, "
+        "submitTime = ?, "
+        "contestRank = ?, "
+        "share = ? "
+        "ON DUPLICATE KEY UPDATE "
+        "mjob = VALUES(mjob), "
+        "sjob = VALUES(sjob), "
+        "mlevel = VALUES(mlevel), "
+        "slevel = VALUES(slevel), "
+        "race = VALUES(race), "
+        "allegiance = VALUES(allegiance), "
+        "fishRank = VALUES(fishRank), "
+        "score = VALUES(score), "
+        "submitTime = VALUES(submitTime), "
+        "contestRank = VALUES(contestRank), "
+        "share = VALUES(share)",
+        charid,
+        entry->mjob,
+        entry->sjob,
+        entry->mlvl,
+        entry->slvl,
+        entry->race,
+        entry->allegiance,
+        entry->fishRank,
+        entry->score,
+        entry->submitTime,
+        entry->contestRank,
+        entry->share);
+
     if (!rset)
     {
-        ShowDebug("Error writing fishing contest data to database.");
+        ShowErrorFmt("Error writing fishing contest data to database {} ({}).", entry->name, charid);
         return false;
     }
 

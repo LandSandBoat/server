@@ -102,7 +102,6 @@ services:
       XI_NETWORK_SQL_HOST: database
       XI_NETWORK_SQL_PORT: 3306
     volumes:
-      - losmeshes:/server/losmeshes
       - navmeshes:/server/navmeshes
       - ${LOCAL_WORKSPACE_FOLDER:-./}/log:/server/log
     depends_on:
@@ -117,7 +116,6 @@ services:
       XI_NETWORK_SQL_HOST: database
       XI_NETWORK_SQL_PORT: 3306
     volumes:
-      - losmeshes:/server/losmeshes
       - navmeshes:/server/navmeshes
       - ${LOCAL_WORKSPACE_FOLDER:-./}/log:/server/log
     depends_on:
@@ -192,7 +190,6 @@ services:
     ports:
       - "54230:54230/udp"
     volumes:
-      - losmeshes:/server/losmeshes
       - navmeshes:/server/navmeshes
       - ${LOCAL_WORKSPACE_FOLDER:-./}/log:/server/log
     depends_on:
@@ -207,7 +204,5 @@ services:
         condition: service_started
 
 volumes:
-  losmeshes:
-    external: true
   navmeshes:
     external: true

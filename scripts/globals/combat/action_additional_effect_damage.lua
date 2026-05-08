@@ -34,6 +34,9 @@ local function validateParameters(actor, target, fedData)
     -- Chance.
     params.chance          = fedData.chance or 100 -- Default: Always proc.
 
+    -- Limit undead
+    params.limitUndead     = fedData.limitUndead or false -- Default: Works on undead.
+
     -- Action properties.
     params.attackType      = fedData.attackType or xi.attackType.SPECIAL   -- Physical, Magical, Ranged, Breath or Special.
     params.physicalElement = fedData.physicalElement or xi.damageType.NONE -- None, H2H, Slashing, Piercing or Blunt.
@@ -47,6 +50,13 @@ local function validateParameters(actor, target, fedData)
     -- Multiplier properties.
     params.canMAB          = fedData.canMAB or false
     params.canResist       = fedData.canResist or false
+    params.lowestResist    = fedData.lowestResist or 0.125
+    params.canResistExtra  = fedData.canResistExtra or false
+
+    -- Drain properties.
+    params.drainHP         = fedData.drainHP or false
+    params.drainMP         = fedData.drainMP or false
+    params.drainTP         = fedData.drainTP or false
 
     -- Animations and messaging.
     params.animation       = fedData.animation or defaultsTable[params.magicalElement][1]
@@ -100,6 +110,11 @@ xi.combat.action.executeAddEffectDamage = function(actor, target, fedData)
         return 0, 0, 0
     end
 
+    -- Early return: Limit undead.
+    if params.limitUndead and params.aeTarget:isUndead() then
+        return 0, 0, 0
+    end
+
     -- Additional variables.
     local isPhysical = params.attackType == xi.attackType.PHYSICAL or false
     local isMagical  = params.attackType == xi.attackType.MAGICAL or false
@@ -122,7 +137,12 @@ xi.combat.action.executeAddEffectDamage = function(actor, target, fedData)
     -- Calculate optional multipliers.
     local multiplierMagicDiff          = params.canMAB and xi.spells.damage.calculateMagicBonusDiff(actor, params.aeTarget, 0, 0, params.magicalElement, 0) or 1
     local multiplierResist             = params.canResist and xi.combat.magicHitRate.calculateResistRate(actor, params.aeTarget, 0, 0, xi.skillRank.A_PLUS, params.magicalElement, params.actorStat, 0, 0) or 1
-    local multiplierForcedResistTier   = params.canResist and xi.spells.damage.calculateAdditionalResistTier(actor, params.aeTarget, params.magicalElement) or 1
+    local multiplierForcedResistTier   = params.canResistExtra and xi.spells.damage.calculateAdditionalResistTier(actor, params.aeTarget, params.magicalElement) or 1
+
+    -- Early return: Resist state is too low. Auto-fail.
+    if multiplierResist < params.lowestResist then
+        return 0, 0, 0
+    end
 
     -- Calculate final damage.
     damage = math.floor(damage * multiplierAbsorption)
@@ -144,21 +164,37 @@ xi.combat.action.executeAddEffectDamage = function(actor, target, fedData)
         damage = utils.clamp(utils.handleStoneskin(params.aeTarget, damage), 0, 99999)
     end
 
-    -- Apply damage or healing on target.
-    if damage > 0 then
-        local actionDamageType = params.physicalElement > 0 and params.physicalElement or xi.damageType.ELEMENTAL + params.magicalElement
-
-        params.aeTarget:takeDamage(damage, actor, params.attackType, actionDamageType)
-    elseif damage < 0 then
-        params.aeTarget:addHP(-damage)
+    -- Drain HP, MP or TP
+    if params.drainHP then
+        damage               = utils.clamp(damage, 0, params.aeTarget:getHP())
+        params.messageDamage = xi.msg.basic.ADD_EFFECT_HP_DRAIN
+        actor:addHP(damage)
     end
 
-    -- Return animation displayed, message in chat log and the number that the message should display (if any).
-    if damage > 0 then
-        return params.animation, params.messageDamage, damage
-    elseif damage < 0 then
-        return params.animation, params.messageHeal, -damage
-    else
+    if params.drainMP then
+        damage               = utils.clamp(damage, 0, params.aeTarget:getMP())
+        params.messageDamage = xi.msg.basic.ADD_EFFECT_MP_DRAIN
+        actor:addMP(damage)
+    end
+
+    if params.drainTP then
+        damage               = utils.clamp(damage, 0, params.aeTarget:getTP())
+        params.messageDamage = xi.msg.basic.ADD_EFFECT_TP_DRAIN
+        actor:addTP(damage)
+    end
+
+    -- No damage, no proc.
+    if damage == 0 then
         return 0, 0, 0
     end
+
+    if damage < 0  then
+        params.aeTarget:addHP(-damage) -- Heal target.
+        return params.animation, params.messageHeal, -damage
+    end
+
+    local actionDamageType = params.physicalElement > 0 and params.physicalElement or xi.damageType.ELEMENTAL + params.magicalElement
+    params.aeTarget:takeDamage(damage, actor, params.attackType, actionDamageType)
+
+    return params.animation, params.messageDamage, damage
 end

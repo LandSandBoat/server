@@ -51,14 +51,17 @@ quest.sections =
             ['Mishhar'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 0 then
+                    local questProgress = quest:getVar(player, 'Prog')
+                    if questProgress == 0 then
                         return quest:event(587)
-                    elseif quest:getVar(player, 'Prog') == 1 then
+                    elseif questProgress == 1 then
                         return quest:progressEvent(575)
-                    elseif quest:getVar(player, 'Prog') == 2 then
+                    elseif questProgress == 2 then
                         return quest:event(588)
-                    elseif quest:getVar(player, 'Prog') == 3 then
+                    elseif questProgress == 3 then
                         return quest:progressEvent(576)
+                    elseif questProgress == 4 then
+                        return quest:progressEvent(589)
                     end
                 end,
             },
@@ -70,6 +73,15 @@ quest.sections =
                 end,
 
                 [576] = function(player, csid, option, npc)
+                    if quest:complete(player) then
+                        player:needToZone(true)
+                        player:setVar('Quest[6][30]Stage', JstMidnight())
+                    else
+                        quest:setVar(player, 'Prog', 4)
+                    end
+                end,
+
+                [589] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:needToZone(true)
                         player:setVar('Quest[6][30]Stage', JstMidnight())

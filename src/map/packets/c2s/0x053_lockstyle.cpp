@@ -49,6 +49,8 @@ auto GP_CLI_COMMAND_LOCKSTYLE::validate(MapSession* PSession, const CCharEntity*
 
 void GP_CLI_COMMAND_LOCKSTYLE::process(MapSession* PSession, CCharEntity* PChar) const
 {
+    bool hasH2HInMainSlot = false;
+
     switch (static_cast<GP_CLI_COMMAND_LOCKSTYLE_MODE>(this->Mode))
     {
         case GP_CLI_COMMAND_LOCKSTYLE_MODE::Disable:
@@ -89,7 +91,7 @@ void GP_CLI_COMMAND_LOCKSTYLE::process(MapSession* PSession, CCharEntity* PChar)
                     continue;
                 }
 
-                const auto* PItem = dynamic_cast<CItemEquipment*>(itemutils::GetItemPointer(itemId));
+                const auto* PItem = xi::items::lookup<CItemEquipment>(itemId);
                 if (!PItem || !(PItem->isType(ITEM_WEAPON) || PItem->isType(ITEM_EQUIPMENT)))
                 {
                     itemId = 0;
@@ -100,12 +102,23 @@ void GP_CLI_COMMAND_LOCKSTYLE::process(MapSession* PSession, CCharEntity* PChar)
                 }
 
                 PChar->styleItems[item.EquipKind] = itemId;
+
+                if (i == SLOT_MAIN)
+                {
+                    if (const CItemWeapon* PItemWeapon = dynamic_cast<const CItemWeapon*>(PItem); PItemWeapon)
+                    {
+                        if (PItemWeapon->isHandToHand())
+                        {
+                            hasH2HInMainSlot = true;
+                        }
+                    }
+                }
             }
 
             // Check if we need to remove conflicting slots. Essentially, packet injection shenanigan detector.
             for (int i = 0; i < 10; i++)
             {
-                if (const auto* PItemEquipment = dynamic_cast<CItemEquipment*>(itemutils::GetItemPointer(PChar->styleItems[i])))
+                if (const auto* PItemEquipment = xi::items::lookup<CItemEquipment>(PChar->styleItems[i]))
                 {
                     const auto removeSlotID = PItemEquipment->getRemoveSlotId();
 
@@ -126,8 +139,15 @@ void GP_CLI_COMMAND_LOCKSTYLE::process(MapSession* PSession, CCharEntity* PChar)
 
                 switch (i)
                 {
-                    case SLOT_MAIN:
                     case SLOT_SUB:
+                        // Don't update the style of sub if main already assigned one (from being a h2h weapon)
+                        if (hasH2HInMainSlot)
+                        {
+                            continue;
+                        }
+                        charutils::UpdateWeaponStyle(PChar, i, PItem);
+                        break;
+                    case SLOT_MAIN:
                     case SLOT_RANGED:
                     case SLOT_AMMO:
                         charutils::UpdateWeaponStyle(PChar, i, PItem);
@@ -138,6 +158,8 @@ void GP_CLI_COMMAND_LOCKSTYLE::process(MapSession* PSession, CCharEntity* PChar)
                     case SLOT_LEGS:
                     case SLOT_FEET:
                         charutils::UpdateArmorStyle(PChar, i);
+                        break;
+                    default:
                         break;
                 }
             }

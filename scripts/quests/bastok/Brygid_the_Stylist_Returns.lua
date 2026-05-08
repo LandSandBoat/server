@@ -188,7 +188,8 @@ quest.sections =
             onEventFinish =
             {
                 [382] = function(player, csid, option, npc)
-                    if option ~= 99 then
+                    -- Limit the response value to the valid range to prevent client lock-up when this value is re-processed
+                    if optionToItems[option] then
                         quest:setVar(player, 'Option', option)
                     end
                 end,

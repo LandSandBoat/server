@@ -177,10 +177,11 @@ public:
     virtual void OnMobSkillFinished(CMobSkillState&, action_t&) override;
     virtual void OnEngage(CAttackState&) override;
 
-    virtual bool OnAttack(CAttackState&, action_t&) override;
-    virtual bool CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) override;
-    virtual void OnCastFinished(CMagicState&, action_t&) override;
-    virtual void OnCastInterrupted(CMagicState&, action_t&, MsgBasic msg, bool blockedCast) override;
+    virtual float GetRangedAttackRange() override;
+    virtual bool  OnAttack(CAttackState&, action_t&) override;
+    virtual bool  CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) override;
+    virtual void  OnCastFinished(CMagicState&, action_t&) override;
+    virtual void  OnCastInterrupted(CMagicState&, action_t&, MsgBasic msg, bool blockedCast) override;
 
     virtual void OnDisengage(CAttackState&) override;
     virtual void OnDeathTimer() override;

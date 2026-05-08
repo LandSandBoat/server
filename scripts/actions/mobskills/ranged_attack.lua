@@ -32,6 +32,18 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     -- TODO: Fomor type mobs that should use the player style ranged attacks are currently use this script.
     --       Their ranged attacks can crit.
 
+    -- TODO: When Humanoid style ranged attacks are implemented, this should probably be moved to that script.
+    if mob:hasStatusEffect(xi.effect.BARRAGE) then
+        local barrage = mob:getStatusEffect(xi.effect.BARRAGE)
+
+        if barrage then
+            params.numHits         = barrage:getPower()
+            params.terminateOnMiss = true
+        end
+
+        mob:delStatusEffect(xi.effect.BARRAGE)
+    end
+
     local info = xi.mobskills.mobRangedMove(mob, target, skill, action, params)
 
     if xi.mobskills.processDamage(mob, target, skill, action, info) then

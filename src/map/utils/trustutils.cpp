@@ -393,8 +393,8 @@ auto LoadTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntity*
         mainWeapon->setSkillType(trustData->cmbSkill);
 
         mainWeapon->setDamage(finalDamage);
-        mainWeapon->setDelay((trustData->cmbDelay * 1000) / 60);
-        mainWeapon->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+        mainWeapon->setDelay(trustData->cmbDelay);
+        mainWeapon->setBaseDelay(trustData->cmbDelay);
 
         // Compute DPS so rune/enchantment calculations that rely on getDPS() return meaningful values for trusts.
         // Use damage per second: damage / (delay_seconds). Delay is stored in ms.
@@ -408,8 +408,8 @@ auto LoadTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntity*
     if (auto* subWeapon = dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_SUB]))
     {
         subWeapon->setDamage(finalDamage);
-        subWeapon->setDelay((trustData->cmbDelay * 1000) / 60);
-        subWeapon->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+        subWeapon->setDelay(trustData->cmbDelay);
+        subWeapon->setBaseDelay(trustData->cmbDelay);
 
         if (subWeapon->getDelay() > 0)
         {
@@ -421,8 +421,8 @@ auto LoadTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntity*
     if (auto* rangedWeapon = dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_RANGED]))
     {
         rangedWeapon->setDamage(finalDamage);
-        rangedWeapon->setDelay((trustData->cmbDelay * 1000) / 60);
-        rangedWeapon->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+        rangedWeapon->setDelay(trustData->cmbDelay);
+        rangedWeapon->setBaseDelay(trustData->cmbDelay);
 
         if (rangedWeapon->getDelay() > 0)
         {
@@ -434,8 +434,8 @@ auto LoadTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntity*
     if (auto* ammoWeapon = dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_AMMO]))
     {
         ammoWeapon->setDamage(finalDamage);
-        ammoWeapon->setDelay((trustData->cmbDelay * 1000) / 60);
-        ammoWeapon->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+        ammoWeapon->setDelay(trustData->cmbDelay);
+        ammoWeapon->setBaseDelay(trustData->cmbDelay);
 
         if (ammoWeapon->getDelay() > 0)
         {

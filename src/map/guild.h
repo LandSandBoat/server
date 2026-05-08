@@ -35,11 +35,11 @@ class CCharEntity;
 
 struct GPItem_t
 {
-    CItem* item;
-    uint16 maxpoints;
-    uint16 points;
+    const CItem* item;
+    uint16       maxpoints;
+    uint16       points;
 
-    GPItem_t(CItem* _item, uint16 _maxpoints, uint16 _points)
+    GPItem_t(const CItem* _item, uint16 _maxpoints, uint16 _points)
     : item(_item)
     , maxpoints(_maxpoints)
     , points(_points)

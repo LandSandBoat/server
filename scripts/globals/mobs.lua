@@ -16,13 +16,13 @@ end
 -- placeholder / lottery NMs
 -----------------------------------
 
--- is a lottery NM already spawned or primed to pop?
-local function lotteryPrimed(phList, nmId)
+-- is a lottery NM in the table already spawned or primed to pop?
+local function lotteryPrimed(phList)
     local nm
 
     for k, v in pairs(phList) do
         nm = GetMobByID(v)
-        if v == nmId and nm ~= nil and (nm:isSpawned() or nm:getRespawnTime() ~= 0) then
+        if nm ~= nil and (nm:isSpawned() or nm:getRespawnTime() ~= 0) then
             return true
         end
     end
@@ -100,11 +100,12 @@ xi.mob.phOnDespawn = function(ph, phNmId, chance, cooldown, params)
         params.doNotEnablePhSpawn = true    Don't enable ph respawns after NM is killed (for chained ph systems like steelfleece)
     ]]
 
-    local phId = ph:getID()
-    local nmId = nil
-    local nm = nil
-    local phList = nil
+    local phId         = ph:getID()
+    local nmId         = nil
+    local nm           = nil
+    local phList       = nil
     local mobEntityObj = getMobLuaPathObject(GetMobByID(phNmId))
+
     if mobEntityObj then
         phList = mobEntityObj.phList
         nmId   = phList and phList[phId]
@@ -150,7 +151,7 @@ xi.mob.phOnDespawn = function(ph, phNmId, chance, cooldown, params)
 
     if
         GetSystemTime() <= pop or
-        lotteryPrimed(phList, nmId) or
+        lotteryPrimed(phList) or
         math.random(1, 1000) > chance
     then
         return false

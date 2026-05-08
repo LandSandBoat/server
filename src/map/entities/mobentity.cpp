@@ -161,10 +161,10 @@ CMobEntity::CMobEntity()
     PEnmityContainer     = new CEnmityContainer(this);
     SpellContainer       = new CMobSpellContainer(this);
 
-    m_Weapons[SLOT_MAIN]   = new CItemWeapon(0);
-    m_Weapons[SLOT_SUB]    = new CItemWeapon(0);
-    m_Weapons[SLOT_RANGED] = new CItemWeapon(0);
-    m_Weapons[SLOT_AMMO]   = new CItemWeapon(0);
+    m_Weapons[SLOT_MAIN]   = std::make_unique<CItemWeapon>(0).release();
+    m_Weapons[SLOT_SUB]    = std::make_unique<CItemWeapon>(0).release();
+    m_Weapons[SLOT_RANGED] = std::make_unique<CItemWeapon>(0).release();
+    m_Weapons[SLOT_AMMO]   = std::make_unique<CItemWeapon>(0).release();
 
     PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CMobController>(this), std::make_unique<CTargetFind>(this));
 }
@@ -610,6 +610,14 @@ float CMobEntity::GetRoamDistance()
 float CMobEntity::GetRoamRate()
 {
     return (float)getMobMod(MOBMOD_ROAM_RATE) / 10.0f;
+}
+
+float CMobEntity::GetRangedAttackRange()
+{
+    // Defaulted range is 14 as observed on all retail fomor.
+    // In the case this changes for other ranger/ninja types use mobmod
+    const int16 rangedAttackRange = getMobMod(MOBMOD_RANGED_ATTACK_RANGE);
+    return rangedAttackRange > 0 ? static_cast<float>(rangedAttackRange) : 14.0f;
 }
 
 bool CMobEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)

@@ -37,6 +37,8 @@ class CItemPuppet : public CItem
 {
 public:
     CItemPuppet(uint16);
+
+    CItemPuppet(const CItemPuppet& other);
     virtual ~CItemPuppet();
 
     uint8  getEquipSlot() const;

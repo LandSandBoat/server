@@ -1,27 +1,27 @@
 -----------------------------------
 -- Raging Rush
 -- Family: Humanoid Great Axe Weaponskill
--- Description: Delivers a threefold attack.
+-- Description: Delivers a threefold attack. Chance of critical hit varies with TP.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    mob:messageBasic(xi.msg.basic.READIES_WS, 0, 86)
-
     return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    params.baseDamage     = mob:getWeaponDmg()
-    params.numHits        = 3
-    params.fTP            = { 2.0, 2.0, 2.0 } -- TODO: Capture fTPs
-    params.attackType     = xi.attackType.PHYSICAL
-    params.damageType     = xi.damageType.SLASHING
-    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3
-    -- TODO: Possible accuracy modifier
+    params.baseDamage        = mob:getWeaponDmg()
+    params.numHits           = 3
+    params.fTP               = { 1.0, 1.0, 1.0 }
+    -- params.str_wSC        = 0.35 -- TODO: Capture if mobskill weaponskills have wSC.
+    params.attackType        = xi.attackType.PHYSICAL
+    params.damageType        = xi.damageType.SLASHING
+    params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_3
+    params.canCrit           = true
+    params.criticalChance    = { 0.1, 0.3, 0.5 }
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 

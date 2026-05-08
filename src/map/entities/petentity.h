@@ -52,13 +52,13 @@ public:
     CPetEntity(PET_TYPE petType);
     ~CPetEntity();
 
-    PET_TYPE          getPetType();
+    PET_TYPE          getPetType() const;
     uint8             getSpawnLevel();
     void              setSpawnLevel(uint8 level);
     timer::time_point getJugSpawnTime();                       // initial spawn time of this pet if it's a jug pet
     timer::duration   getJugDuration();                        // duration of this jug pet in seconds
     void              setJugDuration(timer::duration seconds); // sets the duration of this jug pet in seconds
-    bool              isBstPet();
+    bool              isBstPet() const;
     uint32            m_PetID;
     const std::string GetScriptName();
     WYVERN_TYPE       getWyvernType();

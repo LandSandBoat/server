@@ -25,6 +25,7 @@
 
 enum SLOTTYPE : uint8;
 enum CONTAINER_ID : uint8;
+struct ItemLocation;
 
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x0050
 // This packet is sent by the server when a piece of equipment is equipped or unequipped by the player.
@@ -40,4 +41,5 @@ public:
     };
 
     GP_SERV_COMMAND_EQUIP_LIST(uint8_t slotId, SLOTTYPE equipSlot, CONTAINER_ID containerId);
+    GP_SERV_COMMAND_EQUIP_LIST(const ItemLocation& loc, SLOTTYPE equipSlot);
 };

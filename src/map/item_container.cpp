@@ -21,8 +21,6 @@
 
 #include "common/logging.h"
 
-#include <cstring>
-
 #include "item_container.h"
 #include "utils/itemutils.h"
 
@@ -34,16 +32,9 @@ CItemContainer::CItemContainer(uint16 LocationID)
 , m_size(0)
 , m_count(0)
 {
-    std::memset(m_ItemList, 0, sizeof(m_ItemList));
 }
 
-CItemContainer::~CItemContainer()
-{
-    for (uint8 SlotID = 0; SlotID <= m_size; ++SlotID)
-    {
-        destroy(m_ItemList[SlotID]);
-    }
-}
+CItemContainer::~CItemContainer() = default;
 
 uint16 CItemContainer::GetID() const
 {
@@ -121,7 +112,7 @@ uint8 CItemContainer::AddSize(int8 size)
     return -1;
 }
 
-uint8 CItemContainer::InsertItem(CItem* PItem)
+auto CItemContainer::InsertItem(std::unique_ptr<CItem> PItem) -> uint8
 {
     if (PItem == nullptr)
     {
@@ -138,55 +129,85 @@ uint8 CItemContainer::InsertItem(CItem* PItem)
             PItem->setSlotID(SlotID);
             PItem->setLocationID((uint8)m_id);
 
-            m_ItemList[SlotID] = PItem;
+            m_ItemList[SlotID] = std::move(PItem);
             return SlotID;
         }
     }
     ShowDebug("ItemContainer: Container is full");
-
-    // destroy(PItem); //TODO: what if the item is a valid item??
     return ERROR_SLOTID;
 }
 
 /************************************************************************
  *                                                                       *
- *  Add an item to the specified cell. nullptr removes an item           *
+ *  Add an item to the specified cell.                                   *
  *                                                                       *
  ************************************************************************/
 
-uint8 CItemContainer::InsertItem(CItem* PItem, uint8 SlotID)
+auto CItemContainer::InsertItem(std::unique_ptr<CItem> PItem, uint8 SlotID) -> uint8
 {
-    if (SlotID <= m_size)
+    if (SlotID > m_size)
     {
-        if (PItem != nullptr)
-        {
-            PItem->setSlotID(SlotID);
-            PItem->setLocationID((uint8)m_id);
-
-            if (m_ItemList[SlotID] == nullptr && SlotID != 0)
-            {
-                m_count++;
-            }
-        }
-        else if (m_ItemList[SlotID] != nullptr && SlotID != 0)
-        {
-            m_count--;
-        }
-
-        m_ItemList[SlotID] = PItem;
-        return SlotID;
+        ShowDebug("ItemContainer: SlotID %i is out of range", SlotID);
+        return ERROR_SLOTID;
     }
-    ShowDebug("ItemContainer: SlotID %i is out of range", SlotID);
 
-    destroy(PItem);
-    return ERROR_SLOTID;
+    PItem->setSlotID(SlotID);
+    PItem->setLocationID((uint8)m_id);
+
+    if (m_ItemList[SlotID] == nullptr && SlotID != 0)
+    {
+        m_count++;
+    }
+
+    m_ItemList[SlotID] = std::move(PItem);
+    return SlotID;
 }
 
-CItem* CItemContainer::GetItem(uint8 slotID) const
+auto CItemContainer::RemoveItem(uint8 SlotID) -> std::unique_ptr<CItem>
+{
+    if (SlotID > m_size)
+    {
+        return nullptr;
+    }
+
+    if (m_ItemList[SlotID] != nullptr && SlotID != 0)
+    {
+        m_count--;
+    }
+
+    return std::move(m_ItemList[SlotID]);
+}
+
+auto CItemContainer::MoveItemTo(uint8 fromSlot, CItemContainer& dst, std::optional<uint8> dstSlot) -> uint8
+{
+    if (dstSlot.has_value())
+    {
+        if (*dstSlot > dst.m_size || dst.m_ItemList[*dstSlot] != nullptr)
+        {
+            return ERROR_SLOTID;
+        }
+    }
+    else if (dst.GetFreeSlotsCount() == 0)
+    {
+        return ERROR_SLOTID;
+    }
+
+    auto PItem = RemoveItem(fromSlot);
+    if (PItem == nullptr)
+    {
+        return ERROR_SLOTID;
+    }
+
+    return dstSlot.has_value()
+               ? dst.InsertItem(std::move(PItem), *dstSlot)
+               : dst.InsertItem(std::move(PItem));
+}
+
+auto CItemContainer::GetItem(uint8 slotID) const -> CItem*
 {
     if (slotID <= m_size)
     {
-        return m_ItemList[slotID];
+        return m_ItemList[slotID].get();
     }
 
     return nullptr;
@@ -237,7 +258,6 @@ void CItemContainer::Clear()
 {
     for (uint8 SlotID = 0; SlotID <= m_size; ++SlotID)
     {
-        destroy(m_ItemList[SlotID]);
-        m_ItemList[SlotID] = nullptr;
+        m_ItemList[SlotID].reset();
     }
 }

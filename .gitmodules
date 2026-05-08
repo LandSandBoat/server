@@ -1,9 +1,6 @@
 [submodule "navmeshes"]
     path = navmeshes
     url = https://github.com/LandSandBoat/xiNavmeshes.git
-[submodule "losmeshes"]
-    path = losmeshes
-    url = https://github.com/LandSandBoat/losmeshes.git
 [submodule "ximeshes"]
     path = ximeshes
     url = https://github.com/InoUno/ximeshes.git

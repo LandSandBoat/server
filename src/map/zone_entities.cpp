@@ -31,7 +31,6 @@
 #include "status_effect_container.h"
 #include "trade_container.h"
 #include "treasure_pool.h"
-#include "zone_mesh.h"
 
 #include "ai/ai_container.h"
 #include "ai/controllers/mob_controller.h"
@@ -57,10 +56,13 @@
 #include "utils/synthutils.h"
 #include "utils/zoneutils.h"
 
+#include <map/ximesh/ximesh.h>
+
 namespace
 {
 
 constexpr auto DYNAMIC_ENTITY_TARGID_RANGE_START      = 0x700;
+constexpr auto DYNAMIC_ENTITY_TARGID_RANGE_MAX        = 0x8FF;
 constexpr auto ENTITY_RENDER_DISTANCE                 = 50.0f;
 constexpr auto ENTITY_VERTICAL_RENDER_DISTANCE        = 20.0f;
 constexpr auto VERTICAL_RENDER_DISTANCE_OFFSET        = 0.5f;
@@ -595,10 +597,10 @@ void CZoneEntities::AssignDynamicTargIDandLongID(CBaseEntity* PEntity)
     // Step targid up linearly from 0x700 one by one to 0x8FF unless that ID is already occupied.
     uint16 targid = m_nextDynamicTargID;
 
-    // Wrap around 0x8FF to 0x700
-    if (targid > 0x8FF)
+    // Wrap around DYNAMIC_ENTITY_TARGID_RANGE_MAX (0x8FF) to DYNAMIC_ENTITY_TARGID_RANGE_START (0x700)
+    if (targid > DYNAMIC_ENTITY_TARGID_RANGE_MAX)
     {
-        targid = 0x700;
+        targid = DYNAMIC_ENTITY_TARGID_RANGE_START;
     }
 
     uint16 counter = 0;
@@ -608,10 +610,10 @@ void CZoneEntities::AssignDynamicTargIDandLongID(CBaseEntity* PEntity)
     {
         ++targid;
 
-        // Wrap around 0x8FF to 0x700
-        if (targid > 0x8FF)
+        // Wrap around DYNAMIC_ENTITY_TARGID_RANGE_MAX (0x8FF) to DYNAMIC_ENTITY_TARGID_RANGE_START (0x700)
+        if (targid > DYNAMIC_ENTITY_TARGID_RANGE_MAX)
         {
-            targid = 0x700;
+            targid = DYNAMIC_ENTITY_TARGID_RANGE_START;
         }
 
         if (counter > 0x1FF)
@@ -1579,19 +1581,13 @@ void CZoneEntities::WideScan(CCharEntity* PChar, uint16 radius)
 {
     TracyZoneScoped;
 
-    const auto  maybeZoneMesh = m_zone->zoneMesh();
-    const auto& charPos       = PChar->loc.p;
-    const auto  charFloor     = maybeZoneMesh ? (*maybeZoneMesh)->getFloorId(charPos.x, charPos.y, charPos.z) : uint8{ 0 };
+    const auto& charPos   = PChar->loc.p;
+    const auto  charFloor = m_zone->xiMesh()->getFloorId(charPos.x, charPos.y, charPos.z);
 
     auto isSameFloor = [&](const CBaseEntity* PEntity) -> bool
     {
-        if (!maybeZoneMesh)
-        {
-            return true;
-        }
-
         const auto& pos = PEntity->loc.p;
-        return (*maybeZoneMesh)->getFloorId(pos.x, pos.y, pos.z) == charFloor;
+        return m_zone->xiMesh()->getFloorId(pos.x, pos.y, pos.z) == charFloor;
     };
 
     PChar->pushPacket<GP_SERV_COMMAND_TRACKING_STATE>(GP_TRACKING_STATE::ListStart);

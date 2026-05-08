@@ -73,7 +73,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CROP::process(MapSession* PSession, CCharEntity
             uint16 resultID                   = 0;
             uint8  totalQuantity              = 0;
             std::tie(resultID, totalQuantity) = gardenutils::CalculateResults(PChar, PItem);
-            const uint8 stackSize             = itemutils::GetItemPointer(resultID)->getStackSize();
+            const uint8 stackSize             = xi::items::lookup(resultID)->getStackSize();
             const uint8 requiredSlots         = (uint8)ceil(float(totalQuantity) / stackSize);
             const uint8 totalFreeSlots        = PChar->getStorage(LOC_MOGSAFE)->GetFreeSlotsCount() + PChar->getStorage(LOC_MOGSAFE2)->GetFreeSlotsCount();
             if (requiredSlots > totalFreeSlots || totalQuantity == 0)

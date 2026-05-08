@@ -1,8 +1,7 @@
 -----------------------------------
 -- Spinning Attack
--- Family: Magic Pot
--- Description: Spins into targets in a fan-shaped area of effect. Additional Effect: Knockback
--- TODO: Make lua file: "spinning_attack_magic_pot" and "spinning_attack_hth"
+-- Family: Humanoid Hand to Hand Weaponskill
+-- Description: Delivers a twofold area attack. TODO : Radius varies with TP.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,11 +14,12 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
     params.baseDamage     = mob:getWeaponDmg()
-    params.numHits        = 1
-    params.fTP            = { 1.5, 1.5, 1.5 }
+    params.numHits        = 2
+    params.fTP            = { 1.0, 1.0, 1.0 }
+    --params.str_wSC      = 0.35 -- TODO: Capture if mobskill weaponskills have wSC.
     params.attackType     = xi.attackType.PHYSICAL
-    params.damageType     = xi.damageType.BLUNT
-    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- TODO: Capture fTPs
+    params.damageType     = xi.damageType.HTH
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_2
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 

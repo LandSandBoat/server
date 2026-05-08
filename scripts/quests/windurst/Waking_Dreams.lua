@@ -106,6 +106,7 @@ quest.sections =
                     if quest:complete(player) then
                         player:delKeyItem(xi.ki.WHISPER_OF_DREAMS)
                         player:setCharVar('Darkness_Named_date', JstMidnight())
+                        quest:setMustZone(player)
                     end
                 end,
             },
@@ -115,7 +116,8 @@ quest.sections =
     -- Section 3: Quest completed (repeats)
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED and
+                not quest:getMustZone(player)
         end,
 
         [xi.zone.WINDURST_WATERS] =

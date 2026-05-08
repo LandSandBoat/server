@@ -580,8 +580,8 @@ void LoadAutomatonStats(CCharEntity* PMaster, CPetEntity* PPet, Pet_t* petStats,
         PPet->look.size     = MODEL_AUTOMATON;
 
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setSkillType(SKILL_AUTOMATON_MELEE);
-        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (petStats->cmbDelay / 60.0f)))); // every pet should use this eventually
-        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay((uint16)(floor(1000.0f * (petStats->cmbDelay / 60.0f))));
+        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay(petStats->cmbDelay); // every pet should use this eventually
+        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay(petStats->cmbDelay);
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage((PPet->GetSkill(SKILL_AUTOMATON_MELEE) / 9) * 2 + 3);
 
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setSkillType(SKILL_AUTOMATON_RANGED);
@@ -830,11 +830,11 @@ void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
     {
         PPet->setModifier(Mod::MATT, 20);
     }
-    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (320.0f / 60.0f))));
+    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay(320);
 
     if (petID == PETID_FENRIR)
     {
-        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0 * (280.0f / 60.0f))));
+        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay(280);
     }
 
     // In a 2014 update SE updated Avatar base damage
@@ -846,7 +846,7 @@ void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
     }
 
     static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage(weaponDamage);
-    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay((uint16)(floor(1000.0f * (PPetData->cmbDelay / 60.0f))));
+    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay(PPetData->cmbDelay);
     // Set B+ weapon skill (assumed capped for level derp)
     // attack is madly high for avatars (roughly x2)
     PPet->setModifier(Mod::ATT, 2 * battleutils::GetMaxSkill(SKILL_CLUB, JOB_WHM, mLvl > 99 ? 99 : mLvl));
@@ -923,9 +923,9 @@ void CalculateWyvernStats(CBattleEntity* PMaster, CPetEntity* PPet)
 
     PPet->SetMLevel(mLvl + iLvl + PMaster->getMod(Mod::WYVERN_LVL_BONUS));
 
-    LoadAvatarStats(PMaster, PPet);                                                                               // follows PC calcs (w/o SJ)
-    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (320.0f / 60.0f)))); // 320 delay
-    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay((uint16)(floor(1000.0f * (320.0f / 60.0f))));
+    LoadAvatarStats(PMaster, PPet);                                       // follows PC calcs (w/o SJ)
+    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay(320); // 320 delay
+    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay(320);
     static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage((uint16)(floor(mLvl / 2) + 3));
     // Set A+ weapon skill
     PPet->setModifier(Mod::ATT, battleutils::GetMaxSkill(SKILL_GREAT_AXE, JOB_WAR, mLvl > 99 ? 99 : mLvl));
@@ -985,8 +985,8 @@ void CalculateJugPetStats(CBattleEntity* PMaster, CPetEntity* PPet)
 
     auto* PPetData = *maybePetData;
 
-    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (240.0f / 60.0f))));
-    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay((uint16)(floor(1000.0f * (240.0f / 60.0f))));
+    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay(240);
+    static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay(240);
     // Get the Jug pet cap level
     uint8 highestLvl = PPetData->maxLevel;
 
@@ -1267,7 +1267,7 @@ void SpawnMobPet(CBattleEntity* PMaster, uint32 PetID)
         PMaster->StatusEffectContainer->CopyConfrontationEffect(PPet);
 
         // TODO: Lets not do this here.
-        if (PPet->m_EcoSystem == ECOSYSTEM::AVATAR || PPet->m_EcoSystem == ECOSYSTEM::ELEMENTAL)
+        if (PPet->m_EcoSystem == ECOSYSTEM::ELEMENTAL)
         {
             // assuming elemental spawn
             PPet->setModifier(Mod::DMGPHYS, -5000); //-50% PDT

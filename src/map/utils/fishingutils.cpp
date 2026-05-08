@@ -1485,7 +1485,7 @@ int32 CatchFish(CCharEntity* PChar, uint16 FishID, BigFish bigFish, uint16 lengt
 
     if (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0)
     {
-        CItemFish* Fish = GetFish(FishID);
+        auto Fish = GetFish(FishID);
 
         if (Fish == nullptr)
         {
@@ -1503,7 +1503,7 @@ int32 CatchFish(CCharEntity* PChar, uint16 FishID, BigFish bigFish, uint16 lengt
         }
 
         Fish->setQuantity(Count);
-        charutils::AddItem(PChar, LOC_INVENTORY, Fish);
+        charutils::AddItem(PChar, LOC_INVENTORY, std::move(Fish));
 
         if (Count > 1)
         {
@@ -1532,9 +1532,7 @@ int32 CatchItem(CCharEntity* PChar, uint16 ItemID, uint8 Count = 1)
 
     if (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0)
     {
-        CItem* Item = itemutils::GetItem(ItemID);
-
-        if (Item == nullptr)
+        if (xi::items::lookup(ItemID) == nullptr)
         {
             ShowError("Invalid ItemID %i for fished item", ItemID);
             PChar->animation = ANIMATION_FISHING_STOP;
@@ -2932,14 +2930,13 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
     }
 }
 
-CItemFish* GetFish(uint16 itemid)
+auto GetFish(uint16 itemid) -> std::unique_ptr<CItemFish>
 {
-    CItem* PItem = itemutils::GetItemPointer(itemid);
+    const CItem* PItem = xi::items::lookup(itemid);
 
     if (PItem && FishList[itemid])
     {
-        // CItemFish constructor uses `const CItem&` input so this is ok
-        return new CItemFish(*PItem);
+        return std::make_unique<CItemFish>(*PItem);
     }
     return nullptr;
 }

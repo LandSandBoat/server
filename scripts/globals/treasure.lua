@@ -1722,6 +1722,7 @@ ID.text.CHEST_UNLOCKED + 7 : The chest appears to be locked. If only you had %, 
 xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
     -- Treasure data.
     local zoneId        = player:getZoneID()
+    local playerLevel   = player:getMainLvl()
     local ID            = zones[zoneId]
     local containerType = npcTable[npc:getName()]
 
@@ -1785,13 +1786,23 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
     -----------------------------------
     -- Handle failure states.
     -----------------------------------
-    local randomRoll  = math.random(1, 100)
-    local outcome     = 0
-    local outcomeRate = 0
+    local outcome      = 0
+    local outcomeRate  = 0
+    local levelPenalty = keyUsed == keyType.ZONE_KEY and 0 or utils.clamp(5 * (treasureLevel - playerLevel), 0, thiefKeyInfo[keyUsed][containerType][1])
+
+    -- Build result distribution rate table.
+    local rateTable =
+    {
+        [1] = thiefKeyInfo[keyUsed][containerType][1] - levelPenalty,
+        [2] = thiefKeyInfo[keyUsed][containerType][2] + levelPenalty,
+        [3] = thiefKeyInfo[keyUsed][containerType][3],
+        [4] = thiefKeyInfo[keyUsed][containerType][4],
+    }
 
     for i = 1, 4 do
-        outcomeRate = outcomeRate + thiefKeyInfo[keyUsed][containerType][i]
-        if randomRoll <= outcomeRate then
+        outcomeRate = outcomeRate + rateTable[i]
+
+        if math.random(1, 100) <= outcomeRate then
             outcome = i
             break
         end
@@ -1818,7 +1829,7 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
         kneelBeforeChest(player, npc)
 
         player:timer(2000, function(playerEntity)
-            local weaknessDuration = 5 + player:getMainLvl() - treasureLevel
+            local weaknessDuration = 5 + playerLevel - treasureLevel
             weaknessDuration       = math.floor(weaknessDuration / 5)
             weaknessDuration       = utils.clamp(weaknessDuration, 5, 60) * 60 -- Clamp and convert to seconds.
 

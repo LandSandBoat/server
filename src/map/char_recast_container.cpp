@@ -53,11 +53,19 @@ void CCharRecastContainer::Add(RECASTTYPE type, const Recast id, timer::duration
 
     if (type == RECAST_ABILITY)
     {
-        db::preparedStmt("REPLACE INTO char_recast VALUES (?, ?, ?, ?)",
-                         m_PChar->id,
-                         recast->ID,
-                         earth_time::timestamp(timer::to_utc(recast->TimeStamp)),
-                         static_cast<uint32>(timer::count_seconds(recast->RecastTime)));
+        db::preparedStmt(
+            "INSERT INTO char_recast SET "
+            "charid = ?, "
+            "id = ?, "
+            "time = ?, "
+            "recast = ? "
+            "ON DUPLICATE KEY UPDATE "
+            "time = VALUES(time), "
+            "recast = VALUES(recast)",
+            m_PChar->id,
+            recast->ID,
+            earth_time::timestamp(timer::to_utc(recast->TimeStamp)),
+            static_cast<uint32>(timer::count_seconds(recast->RecastTime)));
     }
 }
 

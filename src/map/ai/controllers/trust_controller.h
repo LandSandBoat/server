@@ -48,7 +48,7 @@ public:
     bool Ability(uint16 targid, uint16 abilityid) override;
     bool Cast(uint16 targid, SpellID spellid) override;
 
-    bool RangedAttack(uint16 targid);
+    bool RangedAttack(uint16 targid) override;
 
     static constexpr float RoamDistance    = { 2.0f };
     static constexpr float SpawnDistance   = { 3.0f };

@@ -17,7 +17,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     params.baseDamage     = skill:getMobHP()
     params.fTP            = { 0.40, 0.40, 0.40 }
     params.element        = xi.element.FIRE
-    params.attackType     = xi.attackType.MAGICAL
+    params.attackType     = xi.attackType.BREATH
     params.damageType     = xi.damageType.FIRE
     params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
 
