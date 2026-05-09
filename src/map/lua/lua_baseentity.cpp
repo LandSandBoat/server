@@ -5281,19 +5281,32 @@ bool CLuaBaseEntity::hasSlotEquipped(uint8 slot)
 
 int8 CLuaBaseEntity::getShieldSize()
 {
-    // TODO: Why is TYPE_PET being checked below, when we only act on TYPE_PC?
-    if (m_PBaseEntity->objtype != TYPE_PC && m_PBaseEntity->objtype != TYPE_PET)
+    int8 shieldSize = 0;
+
+    switch (m_PBaseEntity->objtype)
     {
-        ShowWarning("Entity is not a Player or Pet type (%s).", m_PBaseEntity->getName());
-        return 0;
+        case TYPE_PC:
+        {
+            shieldSize = static_cast<CCharEntity*>(m_PBaseEntity)->getShieldSize();
+            break;
+        }
+        case TYPE_TRUST:
+        {
+            constexpr int8 defaultTrustShieldSize = 3;
+            const int16    shieldMobModValue      = static_cast<CMobEntity*>(m_PBaseEntity)->getMobMod(MOBMOD_SHIELD_SIZE_TRUST);
+            const int8     trustShieldSize        = static_cast<int8>(shieldMobModValue);
+
+            shieldSize = trustShieldSize > 0 ? trustShieldSize : defaultTrustShieldSize;
+            break;
+        }
+        default:
+        {
+            ShowWarning("Entity is not a Player or Trust (%s).", m_PBaseEntity->getName());
+            shieldSize = 0;
+        }
     }
 
-    if (m_PBaseEntity->objtype == TYPE_PC)
-    {
-        return static_cast<CCharEntity*>(m_PBaseEntity)->getShieldSize();
-    }
-
-    return 0;
+    return shieldSize;
 }
 
 /************************************************************************
