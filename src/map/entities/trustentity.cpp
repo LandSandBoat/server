@@ -119,6 +119,14 @@ void CTrustEntity::Spawn()
     // we need to skip CMobEntity's spawn because it calculates stats (and our stats are already calculated)
     CBattleEntity::Spawn();
     luautils::OnMobSpawn(this);
+
+    // Recompute derived HP/MP after spawn-time modifiers (e.g. HPP/MPP)
+    // and force current HP/MP to max so trusts start in a fully synchronized state.
+    UpdateHealth();
+    health.hp = GetMaxHP();
+    health.mp = GetMaxMP();
+    updatemask |= UPDATE_HP;
+
     static_cast<CCharEntity*>(PMaster)->pushPacket<CEntitySetNamePacket>(this);
 }
 
