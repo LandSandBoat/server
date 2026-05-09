@@ -21,8 +21,21 @@ g_mixins.families.puk = function(mob)
             [xi.day.DARKSDAY    ] = xi.damageType.DARK,
         }
 
-        -- If the element corresponding to the elemental day of the in-game Vana'diel week is used on a Puk, it will get 100% TP instantly.
+        -- Day element damage gives TP.
         if damageType == elementTable[VanadielDayOfTheWeek()] then
+            puk:addTP(1000)
+        end
+    end)
+
+    mob:addListener('MAGIC_TAKE', 'PUK_MAGIC_TAKE', function(puk, caster, spell)
+        -- On Windsday, wind damage spells grant TP (excluding dot).
+        if
+            VanadielDayOfTheWeek() == xi.day.WINDSDAY and
+            spell:getElement() == xi.element.WIND and
+            spell:getSkillType() == xi.skill.ELEMENTAL_MAGIC and
+            spell:getSpellFamily() ~= xi.magic.spellFamily.ELE_DOT and
+            puk:getMod(xi.mod.WIND_ABSORB) > 0
+        then
             puk:addTP(1000)
         end
     end)
