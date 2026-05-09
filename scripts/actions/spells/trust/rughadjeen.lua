@@ -27,15 +27,17 @@ spellObject.onMobSpawn = function(mob)
         [xi.magic.spell.MIHLI_ALIAPOH] = xi.trust.messageOffset.TEAMWORK_5
     })
 
-    mob:addMod(xi.mod.HPP, 20)
-    mob:addMod(xi.mod.MPP, 20)
-    mob:addMod(xi.mod.FASTCAST, 30)
-    mob:addMod(xi.mod.CURE_POTENCY_RCVD, 30)
-    mob:addMod(xi.mod.DMG, -500)
-    mob:addMod(xi.mod.TRIPLE_ATTACK, 3)
+    mob:addMod(xi.mod.FASTCAST, 30)          -- Has fastcast around 30%
+    mob:addMod(xi.mod.CURE_POTENCY_RCVD, 30) -- Cure Potency Received +30%
+    mob:addMod(xi.mod.TRIPLE_ATTACK, 3)      -- 3% triple attack rat
+    mob:addMod(xi.mod.DMG, -500)             -- Damage Taken -5%
+    mob:addMod(xi.mod.HPP, 20)               -- HP+20%
+    mob:addMod(xi.mod.MPP, 20)               -- HP+20%
+
+    local lvl = mob:getMainLvl()
 
     -- Algol Additional Effect: Fire DMG, procs around 33%, dmg seems to be around 30 at lvl 99 from testing.
-    local potency =  utils.clamp(math.floor(mob:getMainLvl() * 0.26), 3, 30)
+    local potency =  utils.clamp(math.floor(lvl * 0.26), 3, 30)
     mob:addMod(xi.mod.ENSPELL, xi.element.FIRE)
     mob:addMod(xi.mod.ENSPELL_DMG, potency)
     mob:addMod(xi.mod.ENSPELL_CHANCE, 33)
@@ -80,16 +82,30 @@ spellObject.onMobSpawn = function(mob)
         end
     end)
 
-    mob:addGambit(ai.t.SELF,       { ai.c.NOT_STATUS,       xi.effect.SENTINEL      }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.SENTINEL             })
-    mob:addGambit(ai.t.TARGET,     { ai.c.NOT_STATUS,       xi.effect.FLASH         }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.FLASH       })
-    mob:addGambit(ai.t.SELF,       { ai.c.NOT_STATUS,       xi.effect.DIVINE_EMBLEM }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.DIVINE_EMBLEM        })
-    mob:addGambit(ai.t.TARGET,     { ai.c.NOT_SC_AVAILABLE, 0                       }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.HOLY        })
-    mob:addGambit(ai.t.PARTY,      { ai.c.STATUS,           xi.effect.SLEEP_I       }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURE        })
-    mob:addGambit(ai.t.PARTY,      { ai.c.STATUS,           xi.effect.SLEEP_II      }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURE        })
-    mob:addGambit(ai.t.PARTY,      { ai.c.HPP_LT,           75                      }, { ai.r.MA, ai.s.HIGHEST,  xi.magic.spellFamily.CURE  })
-    mob:addGambit(ai.t.TARGET,     { ai.c.IS_ECOSYSTEM,     xi.ecosystem.UNDEAD     }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.HOLY_CIRCLE          })
-    mob:addGambit(ai.t.SELF,       { ai.c.MPP_LT,           50                      }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.CHIVALRY             })
-    mob:addGambit(ai.t.PARTY_DEAD, { ai.c.MPP_GTE,          200                     }, { ai.r.MA, ai.s.HIGHEST,  xi.magic.spellFamily.RAISE })
+    if lvl >= 5 then
+        mob:addGambit(ai.t.TARGET, { ai.c.IS_ECOSYSTEM, xi.ecosystem.UNDEAD }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.HOLY_CIRCLE })
+    end
+
+    if lvl >= 30 then
+        mob:addGambit(ai.t.SELF, { ai.c.NOT_STATUS, xi.effect.SENTINEL }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.SENTINEL })
+    end
+
+    if lvl >= 50 then
+        mob:addGambit(ai.t.SELF, { { ai.c.MPP_LT, 50 }, { ai.c.TP_GTE, 1000 } }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.CHIVALRY })
+    end
+
+    if lvl >= 75 then
+        mob:addGambit(ai.t.TARGET, { ai.c.NOT_STATUS, xi.effect.FLASH }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.DIVINE_EMBLEM })
+    end
+
+    mob:addGambit(ai.t.TARGET,     { ai.c.NOT_STATUS,   xi.effect.FLASH     }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.FLASH       })
+    mob:addGambit(ai.t.PARTY,      { ai.c.HPP_LT,       75                  }, { ai.r.MA, ai.s.HIGHEST,  xi.magic.spellFamily.CURE  })
+    mob:addGambit(ai.t.PARTY_DEAD, { ai.c.MPP_GTE,      200                 }, { ai.r.MA, ai.s.HIGHEST,  xi.magic.spellFamily.RAISE })
+    mob:addGambit(ai.t.TARGET,     { ai.c.IS_ECOSYSTEM, xi.ecosystem.UNDEAD }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.HOLY        })
+    mob:addGambit(ai.t.PARTY,      { ai.l.OR(
+                                   { ai.c.STATUS, xi.effect.SLEEP_I         },
+                                   { ai.c.STATUS, xi.effect.SLEEP_II        },
+                                   { ai.c.STATUS, xi.effect.LULLABY })      }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURE        })
 
     mob:setTrustTPSkillSettings(ai.tp.ASAP, ai.s.RANDOM, 1000)
 

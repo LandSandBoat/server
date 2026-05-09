@@ -1,5 +1,18 @@
 -----------------------------------
 -- Trust: August
+-- Possesses HP+10%
+-- Uses Divine Emblem to enhance Holy II.
+-- August's attacks are not affected by Sambas.
+-- August wears the Founder's Gear and has accordingly all Killer Effects and high resistance to Terror.
+-- August can switch weapons at will while auto attacking and performing weapon skills, it is unknown if this changes his damage type or is merely cosmetic.
+-- August is considered to be wielding a Great Sword for the purposes of Damage Limit+ and Inundation.
+-- Uses weapon skills at 1000 TP and does not try to skillchain.
+-- Daybreak (~3 min cooldown, ~1 min 30 sec duration)
+-- When August's HP drops below a certain threshold (~66%), he uses Daybreak if it's available which partially restores some HP and MP, resets his TP, and activates an aura with wings of light
+-- Daybreak is a -50% PDT effect, full Erase, Stats boost, Regen, and Store TP
+-- During Daybreak, August's next weapon skill will be Fulminous Fury or Noble Frenzy, followed by No Quarter
+-- Daybreak is removed after the use of No Quarter.
+-- Daybreak's cooldown starts when No Quarter is used.
 -----------------------------------
 ---@type TSpellTrust
 local spellObject = {}
@@ -19,6 +32,9 @@ spellObject.onMobSpawn = function(mob)
         [xi.magic.spell.ROSULATIA] = xi.trust.messageOffset.TEAMWORK_3,
         [xi.magic.spell.MORIMAR]   = xi.trust.messageOffset.TEAMWORK_4,
     })
+
+    mob:setMobMod(xi.mobMod.CAN_SHIELD_BLOCK, 1)
+    mob:setMobMod(xi.mobMod.CAN_PARRY, 3)
 
     local killerEffects =
     {
@@ -57,11 +73,11 @@ spellObject.onMobSpawn = function(mob)
     end
 
     mob:setMod(xi.mod.SHIELD_MASTERY_TP, shieldMasteryPower)
-    mob:addMod(xi.mod.DMG, -10)
-    mob:addMod(xi.mod.UFASTCAST, 50) -- August casts stupid fast
-    mob:setMod(xi.mod.SHIELDBLOCKRATE, xi.trust.modGrowthValMax(mob, 35)) -- around 35% max block rate at 99 from testing
-    mob:addMod(xi.mod.HPP, 10)
-    mob:addMod(xi.mod.ENMITY, 25)
+    mob:setMod(xi.mod.SHIELDBLOCKRATE, 35) -- around 35% max block rate at 99 from testing
+    mob:addMod(xi.mod.UFASTCAST, 50)       -- August casts stupid fast
+    mob:addMod(xi.mod.DMG, -1000)          -- Damage Taken -10%
+    mob:addMod(xi.mod.ENMITY, 25)          -- Enmity+
+    mob:addMod(xi.mod.HPP, 10)             -- HP+10%
 
     -- Founders gear mods: August gets all effects from founders gear
     -- see xi.trust.modGrowthVal in trust.lua for current curve value
@@ -75,9 +91,6 @@ spellObject.onMobSpawn = function(mob)
     mob:addMod(xi.mod.MEVA, xi.trust.modGrowthValMax(mob, 299))           -- Founders gear: MEVA + 299
     mob:addMod(xi.mod.MATT, xi.trust.modGrowthValMax(mob, 60))            -- Founders gear: MATT + 60
     -- there is a few more, but these make the most sense for now.
-
-    mob:setMobMod(xi.mobMod.CAN_SHIELD_BLOCK, 1)
-    mob:setMobMod(xi.mobMod.CAN_PARRY, 3)
 
     mob:setAnimationSub(0) -- this is probably not needed but its here because August's daybreak status is tested against it.
 
@@ -101,25 +114,35 @@ spellObject.onMobSpawn = function(mob)
         end
     end)
 
-    -----------------------------------
-    -- Gambits
-    -----------------------------------
+    if lvl >= 10 then
+        mob:addGambit(ai.t.TARGET, { ai.c.ALWAYS, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.PROVOKE })
+    end
 
-    mob:addGambit(ai.t.TARGET,                     { ai.c.NOT_STATUS,         xi.effect.FLASH         }, { ai.r.MA, ai.s.SPECIFIC,    xi.magic.spell.FLASH      })
-    mob:addGambit(ai.t.SELF,                       { ai.c.NOT_HAS_TOP_ENMITY, 0                       }, { ai.r.JA, ai.s.SPECIFIC,    xi.ja.PROVOKE             })
-    mob:addGambit(ai.t.SELF,                       { ai.c.HPP_LT,             75                      }, { ai.r.MA, ai.s.HIGHEST,     xi.magic.spellFamily.CURE })
-    mob:addGambit(ai.t.SELF,                       { ai.c.NOT_STATUS,         xi.effect.SENTINEL      }, { ai.r.JA, ai.s.SPECIFIC,    xi.ja.SENTINEL            })
-    mob:addGambit(ai.t.SELF,                       { ai.c.NOT_STATUS,         xi.effect.REPRISAL      }, { ai.r.MA, ai.s.SPECIFIC,    xi.magic.spell.REPRISAL   })
-    mob:addGambit(ai.t.PARTY,                      { ai.c.HPP_LT,             50                      }, { ai.r.MA, ai.s.HIGHEST,     xi.magic.spellFamily.CURE })
-    mob:addGambit(ai.t.SELF,                       { ai.c.NOT_STATUS,         xi.effect.PALISADE      }, { ai.r.JA, ai.s.SPECIFIC,    xi.ja.PALISADE            })
+    if lvl >= 30 then
+        mob:addGambit(ai.t.SELF, { ai.c.NOT_STATUS, xi.effect.SENTINEL }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.SENTINEL })
+    end
 
-    -- Only uses Divine Emblen and Holy when daybreak active (subAnimation 5)
-    mob:addGambit(ai.t.SELF, {
-        { ai.c.SUB_ANIMATION,      5                       },
-        { ai.c.NOT_STATUS,         xi.effect.DIVINE_EMBLEM },                                         }, { ai.r.JA, ai.s.SPECIFIC,    xi.ja.DIVINE_EMBLEM       })
+    if lvl >= 95 then
+        mob:addGambit(ai.t.SELF, { ai.c.NOT_STATUS, xi.effect.PALISADE }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.PALISADE })
+    end
+
+    if lvl >= 75 then
+        -- Only uses Divine Emblen and Holy when daybreak active (subAnimation 5)
+        mob:addGambit(ai.t.SELF, { { ai.c.SUB_ANIMATION, 5 }, { ai.c.NOT_STATUS, xi.effect.DIVINE_EMBLEM }, }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.DIVINE_EMBLEM })
+    end
+
+    mob:addGambit(ai.t.TARGET, { ai.c.NOT_STATUS, xi.effect.FLASH    }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.FLASH      })
+    mob:addGambit(ai.t.SELF,   { ai.c.HPP_LT,     75                 }, { ai.r.MA, ai.s.HIGHEST,  xi.magic.spellFamily.CURE })
+    mob:addGambit(ai.t.SELF,   { ai.c.NOT_STATUS, xi.effect.REPRISAL }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.REPRISAL   })
+    mob:addGambit(ai.t.PARTY,  { ai.c.HPP_LT,     50                 }, { ai.r.MA, ai.s.HIGHEST,  xi.magic.spellFamily.CURE })
+    mob:addGambit(ai.t.PARTY,  { ai.l.OR(
+                               { ai.c.STATUS, xi.effect.SLEEP_I      },
+                               { ai.c.STATUS, xi.effect.SLEEP_II     },
+                               { ai.c.STATUS, xi.effect.LULLABY })   }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURE       })
+
     mob:addGambit(ai.t.TRIGGER_SELF_ACTION_TARGET, {
-        { ai.c.SUB_ANIMATION,      5                       },
-        { ai.c.STATUS,             xi.effect.DIVINE_EMBLEM },                                         }, { ai.r.MA, ai.s.HIGHEST,     xi.magic.spellFamily.HOLY })
+                                                   { ai.c.SUB_ANIMATION,      5                       },
+                                                   { ai.c.STATUS,             xi.effect.DIVINE_EMBLEM }, }, { ai.r.MA, ai.s.HIGHEST,  xi.magic.spellFamily.HOLY })
 
     mob:setMobSkillAttack(1197)
 

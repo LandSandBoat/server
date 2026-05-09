@@ -1,5 +1,12 @@
 -----------------------------------
 -- Trust: AAEV
+-- Possesses Fast Cast, Cure Potency Bonus+50%, Damage Taken-10%, HP+20%, MP+50%, Converts 5% of Damage Taken to MP.
+-- Lacks Provoke; however, AAEV's additional Fast Cast trait reduces the recast time on Flash and Reprisal for solid enmity control.
+-- AAEV has improved Shield stats compared to other trusts, implied by the [Nov 2021 Patch Notes]. This would also make her Reprisal better.
+-- Ark Angel Elvaan doesn't use any WHM-only abilities or spells, but /WHM has Auto-Regen and Magic Defense Bonus, making her a good physical/magical hybrid tank.
+-- Uses Rampart when her target is under the effects of Chainspell, Manafont, or Astral Flow.
+-- Uses Shield Strike to interrupt enemies casting high tier spells.
+-- Holds up to 2000 TP to try to close skillchains.
 -----------------------------------
 ---@type TSpellTrust
 local spellObject = {}
@@ -19,6 +26,7 @@ spellObject.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.CAN_PARRY, 3)
 
     local lvl = mob:getMainLvl()
+    local lastSynergyBonus = 0
     local shieldMasteryPower = 0
 
     if lvl >= 96 then
@@ -32,13 +40,13 @@ spellObject.onMobSpawn = function(mob)
     end
 
     mob:setMod(xi.mod.SHIELD_MASTERY_TP, shieldMasteryPower)
-    mob:setMod(xi.mod.SHIELDBLOCKRATE, 45) -- 45% base block rate
-    mob:addMod(xi.mod.FASTCAST, 30)
-    mob:addMod(xi.mod.CURE_POTENCY, 50)
-    mob:addMod(xi.mod.DMG, -10)
-    mob:addMod(xi.mod.HPP, 20)
-    mob:addMod(xi.mod.ABSORB_PHYSDMG_TO_MP, 5)
-    local lastSynergyBonus = 0
+    mob:setMod(xi.mod.SHIELDBLOCKRATE, 45)     -- 45% base block rate at 99 from testing without reprisal on
+    mob:addMod(xi.mod.FASTCAST, 30)            -- Has fastcast around 30%
+    mob:addMod(xi.mod.CURE_POTENCY, 50)        -- Cure Potency Bonus+50%
+    mob:addMod(xi.mod.ENMITY, 25)              -- Enmity+
+    mob:addMod(xi.mod.DMG, -1000)              -- Damage Taken -10%
+    mob:addMod(xi.mod.HPP, 20)                 -- HP+20%
+    mob:addMod(xi.mod.ABSORB_PHYSDMG_TO_MP, 5) -- Converts DMG to MP 5%
 
     -- Dynamic modifier that checks party member list on tick to apply
     mob:addListener('COMBAT_TICK', 'AAEV_CTICK', function(mobArg)
@@ -75,40 +83,55 @@ spellObject.onMobSpawn = function(mob)
             mobArg:delMod(xi.mod.MEVA, lastSynergyBonus)
             -- Add the new bonus
             mobArg:addMod(xi.mod.MEVA, targetBonus)
-
             -- Update lastSynergyBonus
             lastSynergyBonus = targetBonus
         end
     end)
 
-    -----------------------------------
-    -- Gambits
-    -----------------------------------
-    -- 1 condition
-    mob:addGambit(ai.t.TARGET,  { ai.c.NOT_STATUS,         xi.effect.FLASH         }, { ai.r.MA, ai.s.SPECIFIC,        xi.magic.spell.FLASH      })
-    mob:addGambit(ai.t.SELF,    { ai.c.HPP_LT,             75                      }, { ai.r.MA, ai.s.HIGHEST,         xi.magic.spellFamily.CURE })
-    mob:addGambit(ai.t.PARTY,   { ai.c.HPP_LT,             50                      }, { ai.r.MA, ai.s.HIGHEST,         xi.magic.spellFamily.CURE })
-    mob:addGambit(ai.t.TARGET,  { ai.c.CASTING_ELE_MA_AOE, 0                       }, { ai.r.MS, ai.s.SPECIFIC,        3714                      }) -- Shield Strike
-    mob:addGambit(ai.t.TARGET,  { ai.c.STATUS,             xi.effect.MANAFONT      }, { ai.r.JA, ai.s.SPECIFIC,        xi.ja.RAMPART             })
-    mob:addGambit(ai.t.TARGET,  { ai.c.STATUS,             xi.effect.CHAINSPELL    }, { ai.r.JA, ai.s.SPECIFIC,        xi.ja.RAMPART             })
-    mob:addGambit(ai.t.TARGET,  { ai.c.STATUS,             xi.effect.ASTRAL_FLOW   }, { ai.r.JA, ai.s.SPECIFIC,        xi.ja.RAMPART             })
-    mob:addGambit(ai.t.SELF,    { ai.c.NOT_STATUS,         xi.effect.PHALANX       }, { ai.r.MA, ai.s.SPECIFIC,        xi.magic.spell.PHALANX    })
-    mob:addGambit(ai.t.SELF,    { ai.c.NOT_STATUS,         xi.effect.REPRISAL      }, { ai.r.MA, ai.s.SPECIFIC,        xi.magic.spell.REPRISAL   })
-    mob:addGambit(ai.t.SELF,    { ai.c.NOT_STATUS,         xi.effect.SENTINEL      }, { ai.r.JA, ai.s.SPECIFIC,        xi.ja.SENTINEL            })
-    mob:addGambit(ai.t.SELF,    { ai.c.NOT_STATUS,         xi.effect.ENLIGHT       }, { ai.r.MA, ai.s.SPECIFIC,        xi.magic.spell.ENLIGHT    })
-    mob:addGambit(ai.t.SELF,    { ai.c.NOT_STATUS,         xi.effect.DIVINE_EMBLEM }, { ai.r.JA, ai.s.SPECIFIC,        xi.ja.DIVINE_EMBLEM       })
-    mob:addGambit(ai.t.SELF,    { ai.c.NOT_STATUS,         xi.effect.PALISADE      }, { ai.r.JA, ai.s.SPECIFIC,        xi.ja.PALISADE            })
+    if lvl >= 15 then
+        mob:addGambit(ai.t.TARGET, { ai.c.CASTING_ELE_MA_AOE, 0 }, { ai.r.MS, ai.s.SPECIFIC, xi.mobSkill.SHIELD_STRIKE_TRUST })
+    end
 
-    -- 2 conditions
-    mob:addGambit(ai.t.SELF,    { { ai.c.MPP_LT,           25                      }, { ai.c.TP_GTE,           1000 }, }, { ai.r.JA, ai.s.SPECIFIC,        xi.ja.CHIVALRY })
+    if lvl >= 30 then
+        mob:addGambit(ai.t.SELF, { ai.c.NOT_STATUS, xi.effect.SENTINEL }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.SENTINEL })
+    end
+
+    if lvl >= 50 then
+        mob:addGambit(ai.t.SELF, { { ai.c.MPP_LT, 50 }, { ai.c.TP_GTE, 1000 } }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.CHIVALRY })
+    end
+
+    if lvl >= 62 then
+        mob:addGambit(ai.t.TARGET, { ai.c.STATUS, xi.effect.MANAFONT    }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.RAMPART })
+        mob:addGambit(ai.t.TARGET, { ai.c.STATUS, xi.effect.CHAINSPELL  }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.RAMPART })
+        mob:addGambit(ai.t.TARGET, { ai.c.STATUS, xi.effect.ASTRAL_FLOW }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.RAMPART })
+    end
+
+    if lvl >= 75 then
+        mob:addGambit(ai.t.TARGET, { ai.c.NOT_STATUS, xi.effect.FLASH }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.DIVINE_EMBLEM })
+    end
+
+    if lvl >= 95 then
+        mob:addGambit(ai.t.SELF, { ai.c.NOT_STATUS, xi.effect.PALISADE }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.PALISADE })
+    end
+
+    mob:addGambit(ai.t.TARGET, { ai.c.NOT_STATUS, xi.effect.FLASH    }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.FLASH      })
+    mob:addGambit(ai.t.SELF,   { ai.c.HPP_LT,     75                 }, { ai.r.MA, ai.s.HIGHEST,  xi.magic.spellFamily.CURE })
+    mob:addGambit(ai.t.PARTY,  { ai.c.HPP_LT,     50                 }, { ai.r.MA, ai.s.HIGHEST,  xi.magic.spellFamily.CURE })
+    mob:addGambit(ai.t.SELF,   { ai.c.NOT_STATUS, xi.effect.ENLIGHT  }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.ENLIGHT    })
+    mob:addGambit(ai.t.SELF,   { ai.c.NOT_STATUS, xi.effect.PHALANX  }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.PHALANX    })
+    mob:addGambit(ai.t.SELF,   { ai.c.NOT_STATUS, xi.effect.REPRISAL }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.REPRISAL   })
+    mob:addGambit(ai.t.PARTY,  { ai.l.OR(
+                               { ai.c.STATUS, xi.effect.SLEEP_I      },
+                               { ai.c.STATUS, xi.effect.SLEEP_II     },
+                               { ai.c.STATUS, xi.effect.LULLABY })   }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURE       })
 
     mob:setTrustTPSkillSettings(ai.tp.CLOSER_UNTIL_TP, ai.s.RANDOM, 2000)
 
     mob:addListener('WEAPONSKILL_USE', 'AAEV_WEAPONSKILL_USE', function(mobArg, target, skill, tp, action)
         local skillId = skill:getID()
-        if skillId == xi.mobSkill.ARROGANCE_INCARNATE_2 then
+        if skillId == xi.mobSkill.ARROGANCE_INCARNATE_TRUST then
             xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)
-        elseif skillId == xi.mobSkill.DOMINION_SLASH_2 then
+        elseif skillId == xi.mobSkill.DOMINION_SLASH_TRUST then
             xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_2)
         end
     end)

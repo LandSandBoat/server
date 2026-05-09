@@ -1,5 +1,10 @@
 -----------------------------------
 -- Trust: Trion
+-- Royal Bash is stronger than a normal Shield Bash. 
+-- Royal Saviour is a secondary, stronger version of Sentinel. Trion alternates between this and the normal version of Sentinel.
+-- Trion tries to interrupt TP-abilities with Royal Bash.
+-- Uses TP randomly and does not try to skillchain.
+-- With his two defensive TP moves, he's not likely to interrupt skillchains much.
 -----------------------------------
 ---@type TSpellTrust
 local spellObject = {}
@@ -22,16 +27,46 @@ spellObject.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.CAN_SHIELD_BLOCK, 1)
     mob:setMobMod(xi.mobMod.CAN_PARRY, 3)
 
-    mob:addMod(xi.mod.HPP, 10)
-    mob:addMod(xi.mod.MPP, 10)
-    mob:addMod(xi.mod.FASTCAST, 30)
-    mob:addMod(xi.mod.DMG, -1000)
-    mob:addMod(xi.mod.ENMITY, 25)
+    local lvl = mob:getMainLvl()
+    local shieldMasteryPower = 0
 
-    mob:addGambit(ai.t.SELF,   { ai.c.NOT_HAS_TOP_ENMITY, 0                  }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.PROVOKE                  })
-    mob:addGambit(ai.t.TARGET, { ai.c.NOT_STATUS,         xi.effect.FLASH    }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.FLASH           })
-    mob:addGambit(ai.t.SELF,   { ai.c.NOT_STATUS,         xi.effect.SENTINEL }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.SENTINEL                 })
-    mob:addGambit(ai.t.PARTY,  { ai.c.HPP_LT,             75                 }, { ai.r.MA, ai.s.HIGHEST,  xi.magic.spellFamily.CURE      })
+    if lvl >= 96 then
+        shieldMasteryPower = 40
+    elseif lvl >= 75 then
+        shieldMasteryPower = 30
+    elseif lvl >= 50 then
+        shieldMasteryPower = 20
+    elseif lvl >= 25 then
+        shieldMasteryPower = 10
+    end
+
+    mob:setMod(xi.mod.SHIELD_MASTERY_TP, shieldMasteryPower)
+    mob:setMod(xi.mod.SHIELDBLOCKRATE, 35) -- Around 35% block rate at 99 from testing
+    mob:addMod(xi.mod.SPELLINTERRUPT, 30)  -- Spell interruption rate decrease
+    mob:addMod(xi.mod.FASTCAST, 30)        -- Has fastcast around 30%
+    mob:addMod(xi.mod.ENMITY, 15)          -- Enmity+
+    mob:addMod(xi.mod.DMG, -500)           -- Damage Taken -5%
+    mob:addMod(xi.mod.HPP, 10)             -- HP+10%
+    mob:addMod(xi.mod.MPP, 10)             -- MP+10%
+
+    if lvl >= 5 then
+        mob:addGambit(ai.t.SELF, { ai.c.ALWAYS, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.PROVOKE })
+    end
+
+    if lvl >= 15 then
+        mob:addGambit(ai.t.TARGET, { ai.l.OR(
+                                   { ai.c.CASTING_MA, 0 },
+                                   { ai.c.READYING_JA, 0 },
+                                   { ai.c.READYING_MS, 0 },
+                                   { ai.c.READYING_WS, 0 }) }, { ai.r.MS, ai.s.SPECIFIC, xi.mobSkill.ROYAL_BASH_TRUST }, 60)
+    end
+
+    if lvl >= 30 then
+        mob:addGambit(ai.t.SELF, { ai.c.NOT_STATUS, xi.effect.SENTINEL }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.SENTINEL })
+    end
+
+    mob:addGambit(ai.t.TARGET, { ai.c.NOT_STATUS, xi.effect.FLASH }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.FLASH      })
+    mob:addGambit(ai.t.PARTY,  { ai.c.HPP_LT,     75              }, { ai.r.MA, ai.s.HIGHEST,  xi.magic.spellFamily.CURE })
 
     mob:setTrustTPSkillSettings(ai.tp.RANDOM, ai.s.RANDOM, 1500)
 

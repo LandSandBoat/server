@@ -17,9 +17,12 @@ spellObject.onMobSpawn = function(mob)
 
     mob:setMobMod(xi.mobMod.CAN_SHIELD_BLOCK, 1)
     mob:setMobMod(xi.mobMod.CAN_PARRY, 3)
+
     mob:setMod(xi.mod.SHIELD_MASTERY_TP, 40) -- Possesses Barrier Module (Increased Shield Mastery)
-    mob:setMod(xi.mod.SHIELDBLOCKRATE, 45) -- Possesses Barrier Module (Increased Block Chance, 45% base block rate from testing)
-    mob:addMod(xi.mod.DMG, -375) -- Passive -37.5% Damage Taken Reduction.
+    mob:setMod(xi.mod.SHIELDBLOCKRATE, 45)   -- Possesses Barrier Module (Increased Block Chance, 45% base block rate from testing)
+    mob:addMod(xi.mod.ENMITY, 15)            -- Enmity+
+    mob:addMod(xi.mod.DMG, -375)             -- Passive -37.5% Damage Taken Reduction.
+    mob:addMod(xi.mod.HPP, 20)               -- HP+20%
 
     local lastSynergyBonus = 0
 
@@ -47,8 +50,8 @@ spellObject.onMobSpawn = function(mob)
 
     mob:addGambit(ai.t.TARGET, { ai.c.ALWAYS,      0                        }, { ai.r.MS, ai.s.SPECIFIC, xi.mobSkill.PROVOKE_AUTOMATON     }, 30)
     mob:addGambit(ai.t.TARGET, { ai.c.NOT_STATUS,  xi.effect.FLASH          }, { ai.r.MS, ai.s.SPECIFIC, xi.mobSkill.FLASHBULB_AUTOMATON   }, 45)
-    mob:addGambit(ai.t.TARGET, { ai.c.READYING_MS, 0                        }, { ai.r.MS, ai.s.SPECIFIC, xi.mobSkill.SHIELD_BASH_AUTOMATON }, 60)
-    mob:addGambit(ai.t.TARGET, { ai.c.READYING_WS, 0                        }, { ai.r.MS, ai.s.SPECIFIC, xi.mobSkill.SHIELD_BASH_AUTOMATON }, 60)
+    mob:addGambit(ai.t.TARGET, { ai.c.READYING_MS, 0                        }, { ai.r.MS, ai.s.SPECIFIC, xi.mobSkill.SHIELD_BASH_AUTOMATON }, 30)
+    mob:addGambit(ai.t.TARGET, { ai.c.READYING_WS, 0                        }, { ai.r.MS, ai.s.SPECIFIC, xi.mobSkill.SHIELD_BASH_AUTOMATON }, 30)
     mob:addGambit(ai.t.TARGET, { ai.c.STATUS_FLAG, xi.effectFlag.DISPELABLE }, { ai.r.MS, ai.s.SPECIFIC, xi.mobSkill.DISRUPTOR_AUTOMATON   }, 15)
 
     mob:setTrustTPSkillSettings(ai.tp.CLOSER_UNTIL_TP, ai.s.RANDOM, 1500)

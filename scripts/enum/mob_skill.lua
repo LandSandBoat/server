@@ -1223,9 +1223,9 @@ xi.mobSkill =
 
     CROSS_REAVER_3                = 3706, -- Ark Angel HM Trust
 
-    ARROGANCE_INCARNATE_2         = 3710, -- Ark Angel EV Trust
-
-    DOMINION_SLASH_2              = 3712, -- Ark Angel EV Trust
+    ARROGANCE_INCARNATE_TRUST     = 3710, -- Ark Angel EV Trust
+    DOMINION_SLASH_TRUST          = 3712, -- Ark Angel EV Trust
+    SHIELD_STRIKE_TRUST           = 3714, -- Ark Angel EV Trust
 
     ARROGANCE_INCARNATE_3         = 3728,
 
