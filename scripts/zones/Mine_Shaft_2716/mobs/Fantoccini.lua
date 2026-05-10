@@ -13,7 +13,7 @@ local jobTable =
     {
         modelId    = 1209,
         hp         = 3750,
-        delay      = 300,
+        delay      = 240,
         skillList  =
         {
             xi.mobSkill.RAGING_AXE,
@@ -54,7 +54,7 @@ local jobTable =
     {
         modelId   = 1214,
         hp        = 2750,
-        delay     = 300,
+        delay     = 240,
         skillList =
         {
             xi.mobSkill.SHINING_STRIKE_1,
@@ -82,7 +82,7 @@ local jobTable =
     {
         modelId   = 1215,
         hp        = 4000,
-        delay     = 300,
+        delay     = 240,
         skillList =
         {
             xi.mobSkill.SHINING_STRIKE_1,
@@ -109,7 +109,7 @@ local jobTable =
     {
         modelId   = 1216,
         hp        = 3500,
-        delay     = 300,
+        delay     = 240,
         skillList =
         {
             xi.mobSkill.FAST_BLADE_1,
@@ -143,7 +143,7 @@ local jobTable =
     {
         modelId    = 1218,
         hp         = 2750,
-        delay      = 300,
+        delay      = 240,
         skillList  =
         {
             xi.mobSkill.WASP_STING_1,
@@ -163,7 +163,7 @@ local jobTable =
     {
         modelId     = 1219,
         hp          = 2750,
-        delay       = 300,
+        delay       = 240,
         shieldBlock = true,
         skillList   =
         {
@@ -177,17 +177,22 @@ local jobTable =
             xi.mobSkill.SPIRITS_WITHIN_1,
             xi.mobSkill.VORPAL_BLADE_1,
         },
+        spellList  =
+        {
+            xi.magic.spell.FLASH
+        },
         jobAbility  = { xi.mobSkill.SHIELD_BASH_1 },
         twoHour     = xi.mobSkill.INVINCIBLE_1,
         isPetJob    = false,
-        logicType   = 1,
+        logicType   = 3,
     },
 
     [xi.job.DRK] =
     {
         modelId    = 1220,
         hp         = 3250,
-        delay      = 590,
+        delay      = 580,
+        baseDmg    = 150,
         skillList  =
         {
             xi.mobSkill.SLICE,
@@ -208,7 +213,7 @@ local jobTable =
     {
         modelId    = 1224,
         hp         = 3750,
-        delay      = 300,
+        delay      = 240,
         skillList  =
         {
             xi.mobSkill.RAGING_AXE,
@@ -221,7 +226,7 @@ local jobTable =
         jobAbility = { xi.mobSkill.SIC },
         twoHour    = xi.mobSkill.FAMILIAR_1,
         isPetJob   = true,
-        logicType  = 3,
+        logicType  = 4,
 
         pet =
         {
@@ -242,7 +247,7 @@ local jobTable =
     {
         modelId   = 1227,
         hp        = 3000,
-        delay     = 300,
+        delay     = 240,
         skillList =
         {
             xi.mobSkill.WASP_STING_1,
@@ -270,7 +275,7 @@ local jobTable =
     {
         modelId      = 1228,
         hp           = 4500,
-        delay        = 300,
+        delay        = 240,
         rangedAttack = 14,
         skillList    =
         {
@@ -280,7 +285,7 @@ local jobTable =
             xi.mobSkill.SIDEWINDER_1,
         },
         jobAbility   = { xi.mobSkill.BARRAGE },
-        twoHour      = xi.mobSkill.EES_MAAT,
+        twoHour      = xi.mobSkill.EAGLE_EYE_SHOT_HUMANOID,
         isPetJob     = false,
         logicType    = 1,
     },
@@ -290,6 +295,7 @@ local jobTable =
         modelId    = 1229,
         hp         = 3750,
         delay      = 580,
+        baseDmg    = 150,
         skillList  =
         {
             xi.mobSkill.TACHI_ENPI,
@@ -346,6 +352,7 @@ local jobTable =
         modelId    = 1234,
         hp         = 3750,
         delay      = 580,
+        baseDmg    = 150,
         skillList  =
         {
             xi.mobSkill.DOUBLE_THRUST,
@@ -393,7 +400,7 @@ local jobTable =
         jobAbility = { xi.mobSkill.BLOOD_PACT },
         twoHour    = xi.mobSkill.ASTRAL_FLOW_1,
         isPetJob   = true,
-        logicType  = 3,
+        logicType  = 4,
 
         pet =
         {
@@ -414,7 +421,7 @@ local jobTable =
     {
         modelId   = 1396,
         hp        = 3250,
-        delay     = 300,
+        delay     = 240,
         skillList =
         {
             xi.mobSkill.FAST_BLADE_1,
@@ -436,7 +443,7 @@ local jobTable =
     {
         modelId      = 1397,
         hp           = 3750,
-        delay        = 300,
+        delay        = 240,
         rangedAttack = 14,
         skillList    =
         {
@@ -456,7 +463,7 @@ local jobTable =
         },
         twoHour      = xi.mobSkill.WILD_CARD,
         isPetJob     = false,
-        logicType    = 4,
+        logicType    = 5,
     },
 
     [xi.job.PUP] =
@@ -483,7 +490,7 @@ local jobTable =
         },
         twoHour    = xi.mobSkill.OVERDRIVE,
         isPetJob   = true,
-        logicType  = 3,
+        logicType  = 4,
         pet =
         {
             offset = 4,
@@ -523,10 +530,6 @@ entity.onMobSpawn = function(mob)
     end
 
     mob:setLocalVar('initiatorJob', initiatorJob) -- Store as local variable so battlefield only needs to be fetched on spawn.
-    mob:setMobMod(xi.mobMod.CAN_PARRY, 1)
-    mob:setMobMod(xi.mobMod.DUAL_WIELD, jobInfo.dualWield and 1 or 0)
-    mob:setMobMod(xi.mobMod.CAN_SHIELD_BLOCK, jobInfo.shieldBlock and 1 or 0)
-
     mob:changeJob(initiatorJob)
     mob:setDelay(jobInfo.delay)
     mob:setModelId(jobInfo.modelId)
@@ -535,12 +538,17 @@ entity.onMobSpawn = function(mob)
     mob:setAutoAttackEnabled(true)
     mob:setRangedAttackEnabled(false)
 
+    mob:setMobMod(xi.mobMod.CAN_PARRY, 1)
+    mob:setMobMod(xi.mobMod.DUAL_WIELD, jobInfo.dualWield and 1 or 0)
+    mob:setMobMod(xi.mobMod.CAN_SHIELD_BLOCK, jobInfo.shieldBlock and 1 or 0)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, jobInfo.baseDmg or 100)
+
     if
         initiatorJob == xi.job.RNG or
         initiatorJob == xi.job.COR
     then
         mob:setRangedAttackEnabled(true)
-        mob:setMobMod(xi.mobMod.RANGED_ATTACK_RANGE, jobInfo.rangedAttack)
+        mob:setMobMod(xi.mobMod.SPECIAL_SKILL, 0)
     end
 
     mob:setMaxHP(jobInfo.hp or mob:getMaxHP())
@@ -643,13 +651,14 @@ entity.onMobFight = function(mob, target)
     switch(logicType): caseof
     {
         -----------------------------------
-        -- Logic Type 1 : WAR, MNK, DRK, PLD, SAM, DRG
+        -- Logic Type 1 : WAR, MNK, DRK, SAM, DRG, RNG
         -----------------------------------
         [1] = function()
             if diceRoll == 7 then
                 if #jobAbility > 0 then
                     mob:useMobAbility(jobAbility[math.random(1, #jobAbility)])
                 end
+
             elseif diceRoll == 14 then
                 if initiatorJob == xi.job.DRG then
                     local petData = jobInfo.pet
@@ -679,9 +688,25 @@ entity.onMobFight = function(mob, target)
         end,
 
         -----------------------------------
-        -- Logic Type 3 : BST, SMN, PUP
+        -- Logic Type 3 : PLD
         -----------------------------------
         [3] = function()
+            if diceRoll == 7 then
+                if math.random(0, 1) == 0 then
+                    mob:useMobAbility(jobAbility[math.random(1, #jobAbility)])
+                else
+                    mob:setMagicCastingEnabled(true)
+                end
+
+            elseif diceRoll == 14 then
+                mob:useMobAbility(jobInfo.twoHour)
+            end
+        end,
+
+        -----------------------------------
+        -- Logic Type 4 : BST, SMN, PUP
+        -----------------------------------
+        [4] = function()
             local petData     = jobInfo.pet
             local petId       = mob:getID() + petData.offset
             local pet         = GetMobByID(petId)
@@ -715,9 +740,9 @@ entity.onMobFight = function(mob, target)
         end,
 
         -----------------------------------
-        -- Logic Type 4 : COR
+        -- Logic Type 5 : COR
         -----------------------------------
-        [4] = function()
+        [5] = function()
             if diceRoll == 7 then
                 mob:useJobAbility(jobAbility[math.random(1, #jobAbility)], mob)
                 -- TODO: Don't use a timer, add actual double up logic. Double ups each roll once.
@@ -761,6 +786,7 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
     end
 
     if
+        skillUsed ~= xi.mobSkill.RANGED_ATTACK_1 and
         skillUsed ~= xi.mobSkill.MEDITATE and
         skillUsed ~= xi.mobSkill.WILD_CARD and
         not mob:hasStatusEffect(xi.effect.MEIKYO_SHISUI)

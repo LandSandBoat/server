@@ -22,6 +22,7 @@
 #ifndef _CBLUESPELL_H
 #define _CBLUESPELL_H
 
+#include "enums/action/knockback.h"
 #include "spell.h"
 
 class CBlueSpell : public CSpell
@@ -39,6 +40,7 @@ public:
     uint8  getPrimarySkillchain() const;
     uint8  getSecondarySkillchain() const;
     uint8  getTertiarySkillchain() const;
+    auto   getKnockback() const -> Knockback;
 
     void setMonsterSkillId(uint16 skillid);
     void setSetPoints(uint8 setpoints);
@@ -48,19 +50,21 @@ public:
     void setPrimarySkillchain(uint8 sc);
     void setSecondarySkillchain(uint8 sc);
     void setTertiarySkillchain(uint8 sc);
+    void setKnockback(Knockback kb);
     void addModifier(CModifier modifier);
 
     std::vector<CModifier> modList; // modifiers added when blue spell is equipped
 
 private:
-    uint16 m_monsterSkillId{}; // matching skill for a blue spell
-    uint8  m_setPoints{};
-    uint8  m_ecosystem{};
-    uint8  m_traitCategory{};
-    uint8  m_traitWeight{};
-    uint8  m_PrimarySkillchain{};
-    uint8  m_SecondarySkillchain{};
-    uint8  m_TertiarySkillchain{};
+    uint16    m_monsterSkillId{}; // matching skill for a blue spell
+    uint8     m_setPoints{};
+    uint8     m_ecosystem{};
+    uint8     m_traitCategory{};
+    uint8     m_traitWeight{};
+    uint8     m_PrimarySkillchain{};
+    uint8     m_SecondarySkillchain{};
+    uint8     m_TertiarySkillchain{};
+    Knockback knockback_{ Knockback::None };
 };
 
 #endif

@@ -5,6 +5,9 @@
 ---@type TMobEntity
 local entity = {}
 
+-- TODO: Add elemental randomization back once core code supports it.
+
+--[[
 entity.onMobSpawn = function(mob)
     local possibleTypes =
     {
@@ -15,5 +18,6 @@ entity.onMobSpawn = function(mob)
 
     xi.pets.summon.setupSummon(mob, possibleTypes)
 end
+]]
 
 return entity

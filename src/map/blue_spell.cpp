@@ -113,6 +113,16 @@ void CBlueSpell::setTertiarySkillchain(uint8 sc)
     m_TertiarySkillchain = sc;
 }
 
+auto CBlueSpell::getKnockback() const -> Knockback
+{
+    return knockback_;
+}
+
+void CBlueSpell::setKnockback(const Knockback kb)
+{
+    knockback_ = kb;
+}
+
 void CBlueSpell::addModifier(CModifier modifier)
 {
     modList.emplace_back(modifier);

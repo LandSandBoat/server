@@ -10,6 +10,11 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.CHARMABLE, 1)
 end
 
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.STANDBACK_COOL, 0)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 27)
+end
+
 entity.onMobSpellChoose = function(mob, target, spellId)
     local spellList =
     {

@@ -42,7 +42,6 @@ public:
     void FadeOut() override;
     void Die() override;
     void Spawn() override;
-    void OnRangedAttack(CRangeState&, action_t&) override;
     bool ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) override;
     void OnDespawn(CDespawnState&) override;
 

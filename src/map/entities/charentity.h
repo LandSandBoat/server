@@ -288,6 +288,8 @@ constexpr uint8 EquipSlotCount = 18;
 
 class CCharEntity : public CBattleEntity
 {
+    friend class CBattleEntity;
+
 public:
     uint32 accid{}; // Account ID associated with the character.
 
@@ -664,7 +666,6 @@ public:
     virtual void           OnCastInterrupted(CMagicState&, action_t&, MsgBasic msg, bool blockedCast) override;
     virtual void           OnWeaponSkillFinished(CWeaponSkillState&, action_t&) override;
     virtual void           OnAbility(CAbilityState&, action_t&) override;
-    virtual void           OnRangedAttack(CRangeState&, action_t&) override;
     virtual void           OnDeathTimer() override;
     virtual void           OnRaise() override;
 

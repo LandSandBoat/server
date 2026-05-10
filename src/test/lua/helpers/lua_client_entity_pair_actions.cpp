@@ -45,6 +45,7 @@
 #include "map/packets/c2s/0x06e_group_solicit_req.h"
 #include "map/packets/c2s/0x074_group_solicit_res.h"
 #include "map/packets/c2s/0x096_combine_ask.h"
+#include "map/packets/c2s/0x102_extended_job.h"
 #include "map/spell.h"
 #include "map/status_effect_container.h"
 #include "packets/c2s/0x015_pos.h"
@@ -98,6 +99,36 @@ void CLuaClientEntityPairActions::useSpell(CLuaBaseEntity* target, const SpellID
     actionPacket->CastMagic.SpellId = static_cast<uint32_t>(spellId);
 
     parent_->packets().sendBasicPacket(*packet);
+}
+
+/************************************************************************
+ *  Function: setBlueSpells()
+ *  Purpose : Populates the player's BLU spell page from a list of spell IDs.
+ *  Example : player.actions:setBlueSpells({ xi.magic.spell.HEAVY_STRIKE })
+ ************************************************************************/
+
+void CLuaClientEntityPairActions::setBlueSpells(const sol::table& spellIds) const
+{
+    uint8 slot = 0;
+
+    for (auto& kv : spellIds)
+    {
+        if (slot >= 20)
+        {
+            break;
+        }
+
+        const auto spellId                   = kv.second.as<uint16>();
+        const auto offsettedId               = static_cast<uint8>(spellId - 0x200);
+        const auto packet                    = parent_->packets().createPacket<GP_CLI_COMMAND_EXTENDED_JOB>();
+        auto*      bluPacket                 = packet->as<GP_CLI_COMMAND_EXTENDED_JOB>();
+        bluPacket->Data.bluData.JobIndex     = JOB_BLU;
+        bluPacket->Data.bluData.SpellId      = offsettedId;
+        bluPacket->Data.bluData.Spells[slot] = offsettedId;
+
+        parent_->packets().sendBasicPacket(*packet);
+        ++slot;
+    }
 }
 
 /************************************************************************
@@ -632,6 +663,7 @@ void CLuaClientEntityPairActions::Register()
     SOL_USERTYPE("CClientEntityPairActions", CLuaClientEntityPairActions);
     SOL_REGISTER("move", CLuaClientEntityPairActions::move);
     SOL_REGISTER("useSpell", CLuaClientEntityPairActions::useSpell);
+    SOL_REGISTER("setBlueSpells", CLuaClientEntityPairActions::setBlueSpells);
     SOL_REGISTER("useWeaponskill", CLuaClientEntityPairActions::useWeaponskill);
     SOL_REGISTER("useAbility", CLuaClientEntityPairActions::useAbility);
     SOL_REGISTER("changeTarget", CLuaClientEntityPairActions::changeTarget);

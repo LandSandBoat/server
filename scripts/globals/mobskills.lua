@@ -1694,15 +1694,6 @@ xi.mobskills.unequipRandomSlots = function(target, numberToUnequip)
 end
 
 ---@param target CBaseEntity
----@param attacker CBaseEntity
----@param skill CMobSkill
----@param action CAction
----@return xi.action.knockback
-xi.mobskills.calculateKnockback = function(target, attacker, skill, action)
-    return utils.clamp(skill:getKnockback() - target:getMod(xi.mod.KNOCKBACK_REDUCTION), xi.action.knockback.NONE, xi.action.knockback.LEVEL7)
-end
-
----@param target CBaseEntity
 ---@param skill CMobSkill|CPetSkill
 ---@param params table
 ---@param shadowsToRemove xi.mobskills.shadowBehavior | integer

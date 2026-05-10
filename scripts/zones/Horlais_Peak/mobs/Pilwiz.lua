@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 27)
     mob:setMod(xi.mod.SILENCE_MEVA, 75)
     mob:setMod(xi.mod.SLEEP_MEVA, 50)
 end

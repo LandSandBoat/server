@@ -211,6 +211,9 @@ xi.settings.map =
     -- Adjust the recast time for abilities. Acts as a multiplier, so default is 1
     ABILITY_RECAST_MULTIPLIER = 1.0,
 
+    -- Maximum spell recast reduction percentage. Current retail is 80. Older eras used 50.
+    SPELL_RECAST_REDUCTION_CAP = 80,
+
     -- Enable/disable shared blood pact timer
     BLOOD_PACT_SHARED_TIMER = false,
 

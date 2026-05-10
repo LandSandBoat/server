@@ -167,7 +167,7 @@ auto CTrustController::DoCombatTick(timer::time_point tick) -> Task<void>
             float currentDistanceToTarget = distance(PTrust->loc.p, PTarget->loc.p);
             float currentDistanceToMaster = distance(PTrust->loc.p, PMaster->loc.p);
 
-            if (currentDistanceToTarget > WarpDistance)
+            if (!PMaster->PAI->IsEngaged() && currentDistanceToTarget > WarpDistance)
             {
                 PTrust->PAI->PathFind->WarpTo(PTarget->loc.p);
             }

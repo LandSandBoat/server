@@ -209,6 +209,118 @@ local packets =
             },
         },
     },
+    ['Head Butt'] =
+    {
+        test = function(player, mob)
+            player:changeJob(xi.job.BLU)
+            player:setLevel(99)
+            player:setSkillLevel(xi.skill.BLUE_MAGIC, 424)
+            player:addSpell(xi.magic.spell.HEAD_BUTT)
+            player.actions:setBlueSpells({ xi.magic.spell.HEAD_BUTT })
+            player:resetRecasts()
+            stub('xi.combat.physicalHitRate.getPhysicalHitRate', 1)
+            mob:updateClaim(player)
+            mob:setMaxHP(1)
+            mob:setHP(1)
+            player.actions:useSpell(mob, xi.magic.spell.HEAD_BUTT)
+            xi.test.world:skipTime(10)
+        end,
+
+        expected =
+        {
+            m_uID   = ph.TEST_CHAR,
+            trg_sum = 1,
+            res_sum = 0,
+            cmd_no  = xi.action.category.MAGIC_FINISH,
+            cmd_arg = xi.magic.spell.HEAD_BUTT,
+            info    = ph.IGNORE,
+            target  =
+            {
+                {
+                    m_uID      = ph.TEST_MOB,
+                    result_sum = 1,
+                    result     =
+                    {
+                        {
+                            miss          = xi.action.resolution.HIT,
+                            kind          = 0,
+                            sub_kind      = 665,
+                            info          = xi.action.info.DEFEATED,
+                            scale         = 7, -- This is heavy hit distortion (2 bits) + knockback 1 (3 bits)
+                            value         = ph.IGNORE,
+                            message       = xi.msg.basic.MAGIC_DMG,
+                            bit           = 0,
+                            has_proc      = false,
+                            proc_kind     = 0,
+                            proc_info     = 0,
+                            proc_value    = 0,
+                            proc_message  = 0,
+                            has_react     = false,
+                            react_kind    = 0,
+                            react_info    = 0,
+                            react_value   = 0,
+                            react_message = 0,
+                        },
+                    },
+                },
+            },
+        },
+    },
+    ['Regurgitation'] =
+    {
+        test = function(player, mob)
+            player:changeJob(xi.job.BLU)
+            player:setLevel(99)
+            player:setSkillLevel(xi.skill.BLUE_MAGIC, 424)
+            player:addSpell(xi.magic.spell.REGURGITATION)
+            player.actions:setBlueSpells({ xi.magic.spell.REGURGITATION })
+            player:resetRecasts()
+            mob:setUnkillable(true)
+            player.actions:useSpell(mob, xi.magic.spell.REGURGITATION)
+            xi.test.world:skipTime(10)
+            mob:setUnkillable(false)
+        end,
+
+        expected =
+        {
+            m_uID   = ph.TEST_CHAR,
+            trg_sum = 1,
+            res_sum = 0,
+            cmd_no  = xi.action.category.MAGIC_FINISH,
+            cmd_arg = xi.magic.spell.REGURGITATION,
+            info    = ph.IGNORE,
+            target  =
+            {
+                {
+                    m_uID      = ph.TEST_MOB,
+                    result_sum = 1,
+                    result     =
+                    {
+                        {
+                            miss          = xi.action.resolution.HIT,
+                            kind          = 0,
+                            sub_kind      = 770,
+                            info          = 0,
+                            scale         = 12, -- This is knockback 3 (3 bits), with no hit distortion
+                            value         = ph.IGNORE,
+                            message       = xi.msg.basic.MAGIC_DMG,
+                            bit           = 0,
+                            has_proc      = false,
+                            proc_kind     = 0,
+                            proc_info     = 0,
+                            proc_value    = 0,
+                            proc_message  = 0,
+                            has_react     = false,
+                            react_kind    = 0,
+                            react_info    = 0,
+                            react_value   = 0,
+                            react_message = 0,
+                        },
+                    },
+                },
+            },
+        },
+    },
     ['Paralyzed'] =
     {
         test = function(player, mob)

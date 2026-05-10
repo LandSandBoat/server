@@ -30,6 +30,7 @@
 #include "ai/states/weaponskill_state.h"
 #include "enmity_container.h"
 #include "mobskill.h"
+#include "notoriety_container.h"
 #include "spell.h"
 #include "utils/battleutils.h"
 #include "utils/trustutils.h"
@@ -814,8 +815,11 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
 
                 if (action.select == G_SELECT::SPECIFIC)
                 {
-                    controller->Ability(target->targid, PAbility->getID());
-                    executedAnyAction = true;
+                    if (target != nullptr)
+                    {
+                        controller->Ability(target->targid, PAbility->getID());
+                        executedAnyAction = true;
+                    }
                 }
 
                 if (action.select == G_SELECT::BEST_SAMBA)
@@ -1012,6 +1016,12 @@ bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, Predica
                 predicateResults.push_back(!triggerTarget->StatusEffectContainer->HasStatusEffect(static_cast<EFFECT>(predicate.condition_arg)));
                 continue;
             }
+            case G_CONDITION::JA_ON_COOLDOWN:
+            {
+                auto* PAbility = ability::GetAbility(static_cast<ABILITY>(predicate.condition_arg));
+                predicateResults.push_back(PAbility->getRecastTime() > 0s);
+                continue;
+            }
             case G_CONDITION::LVL_LT:
             {
                 predicateResults.push_back(triggerTarget->GetMLevel() < predicate.condition_arg);
@@ -1206,6 +1216,22 @@ bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, Predica
                 predicateResults.push_back(triggerTarget->PAI->IsCurrentState<CMagicState>());
                 continue;
             }
+            case G_CONDITION::CASTING_DEBUFF:
+            {
+                // Check if the target is currently casting a debuff magic spell
+                bool isDebuff = false;
+                if (triggerTarget->PAI->IsCurrentState<CMagicState>())
+                {
+                    auto spell = static_cast<CMagicState*>(triggerTarget->PAI->GetCurrentState())->GetSpell();
+
+                    if (spell->isDebuff())
+                    {
+                        isDebuff = true;
+                    }
+                }
+                predicateResults.push_back(isDebuff);
+                continue;
+            }
             case G_CONDITION::CASTING_ELE_MA_AOE:
             {
                 bool isAOE = false;
@@ -1304,6 +1330,68 @@ bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, Predica
             case G_CONDITION::SUB_ANIMATION:
             {
                 predicateResults.push_back(triggerTarget->animationsub == predicate.condition_arg);
+                continue;
+            }
+            case G_CONDITION::VAL_URIEL_CHECK:
+            {
+                bool  canUseUriel = false;
+                auto* PMaster     = dynamic_cast<CCharEntity*>(POwner->PMaster);
+                auto* PMob        = dynamic_cast<CMobEntity*>(PMaster->GetBattleTarget());
+
+                if (PMob != nullptr && PMob->PEnmityContainer != nullptr)
+                {
+                    bool masterHasEnmity         = PMob->PEnmityContainer->HasID(PMaster->id);
+                    bool valHasEnmity            = PMob->PEnmityContainer->HasID(POwner->id);
+                    bool valHasTopEnmity         = (controller->GetTopEnmity()) ? controller->GetTopEnmity()->targid == POwner->targid : false;
+                    bool masterHasOffTargetAggro = false;
+
+                    if (PMaster->PNotorietyContainer != nullptr && PMaster->PNotorietyContainer->hasEnmity())
+                    {
+                        for (auto it = PMaster->PNotorietyContainer->begin(); it != PMaster->PNotorietyContainer->end(); ++it)
+                        {
+                            if (masterHasOffTargetAggro)
+                            {
+                                break;
+                            }
+
+                            auto* PZoneMob = dynamic_cast<CMobEntity*>(*it);
+                            if (!PZoneMob || !PZoneMob->isAlive())
+                            {
+                                continue;
+                            }
+
+                            if (distance(POwner->loc.p, PZoneMob->loc.p) > 10.0f)
+                            {
+                                continue;
+                            }
+
+                            const bool targetingMaster        = (PZoneMob->GetBattleTargetID() == PMaster->targid);
+                            const bool isMastersCurrentTarget = (PZoneMob->id == PMob->id);
+                            const bool hostile                = (PZoneMob->allegiance != PMaster->allegiance);
+
+                            if (targetingMaster && !isMastersCurrentTarget && hostile)
+                            {
+                                masterHasOffTargetAggro = true;
+                            }
+                        }
+                    }
+
+                    if ((masterHasEnmity && !valHasTopEnmity) || masterHasOffTargetAggro)
+                    {
+                        auto   timeNow          = std::chrono::system_clock::now();
+                        uint32 lastUrielTime    = POwner->GetLocalVar("[Gambit]LastUrielTime");
+                        auto   distanceToTarget = distance(POwner->loc.p, PMob->loc.p);
+
+                        auto lastTimePoint = std::chrono::time_point<std::chrono::system_clock>(std::chrono::seconds(lastUrielTime));
+                        auto timeDiff      = timeNow - lastTimePoint;
+                        bool longCooldown  = (timeDiff >= std::chrono::seconds(30)); // Standard Cooldown
+                        bool shortCooldown = (timeDiff >= std::chrono::seconds(5));  // New Target Cooldown
+
+                        canUseUriel = (distanceToTarget <= 10.0f) &&
+                                      ((valHasEnmity && longCooldown) || (!valHasEnmity && shortCooldown) || (masterHasOffTargetAggro && longCooldown));
+                    }
+                }
+                predicateResults.push_back(canUseUriel);
                 continue;
             }
             default:

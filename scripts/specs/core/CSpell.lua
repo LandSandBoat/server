@@ -14,6 +14,11 @@ end
 function CSpell:setModifier(modifier)
 end
 
+---@param isCritical boolean
+---@return nil
+function CSpell:setCritical(isCritical)
+end
+
 ---@param aoe integer
 ---@return nil
 function CSpell:setAoE(aoe)
@@ -123,4 +128,14 @@ end
 ---@nodiscard
 ---@return integer
 function CSpell:getPrimaryTargetID()
+end
+
+---@nodiscard
+---@return xi.action.knockback
+function CSpell:getKnockback()
+end
+
+---@nodiscard
+---@return boolean
+function CSpell:isCritical()
 end

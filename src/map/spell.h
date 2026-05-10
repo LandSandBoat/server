@@ -1114,6 +1114,8 @@ public:
     void setMagicBurstMessage(MsgBasic message);
     auto getModifier() const -> ActionModifier;
     void setModifier(ActionModifier modifier); // set Spell modifier message, MUST reset the modifier on use otherwise it will be stale
+    auto isCritical() const -> bool;
+    void setCritical(bool isCritical);
     void setPrimaryTargetID(uint32);
 
     void setCE(int32 ce);
@@ -1156,6 +1158,7 @@ private:
     MsgBasic                       m_message{};                       // message id
     MsgBasic                       m_MagicBurstMessage{};             // Message used for magic bursts.
     ActionModifier                 m_MessageModifier{};               // Message modifier, "Cover!", "Resist!" or "Immunobreak!"
+    bool                           critical_{};                       // transient critical hit flag for action packets
     int32                          m_CE{};                            // cumulative enmity of spell
     int32                          m_VE{};                            // volatile enmity of spell
     std::string                    m_name;                            // spell name

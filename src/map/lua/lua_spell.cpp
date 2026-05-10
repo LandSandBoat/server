@@ -22,8 +22,9 @@
 #include "common/logging.h"
 
 #include "lua_spell.h"
+
+#include "blue_spell.h"
 #include "spell.h"
-#include "utils/battleutils.h"
 
 /************************************************************************
  *                                                                        *
@@ -54,6 +55,11 @@ void CLuaSpell::setMsg(MsgBasic messageID)
 void CLuaSpell::setModifier(const ActionModifier modifier) const
 {
     m_PLuaSpell->setModifier(modifier);
+}
+
+void CLuaSpell::setCritical(const bool isCritical) const
+{
+    m_PLuaSpell->setCritical(isCritical);
 }
 
 void CLuaSpell::setAoE(uint8 aoe)
@@ -94,6 +100,21 @@ void CLuaSpell::setCastTime(uint32 casttime)
 uint32 CLuaSpell::getPrimaryTargetID()
 {
     return m_PLuaSpell->getPrimaryTargetID();
+}
+
+auto CLuaSpell::getKnockback() const -> Knockback
+{
+    if (auto* PBlueSpell = dynamic_cast<CBlueSpell*>(m_PLuaSpell))
+    {
+        return PBlueSpell->getKnockback();
+    }
+
+    return Knockback::None;
+}
+
+auto CLuaSpell::isCritical() const -> bool
+{
+    return m_PLuaSpell->isCritical();
 }
 
 bool CLuaSpell::canTargetEnemy()
@@ -173,6 +194,7 @@ void CLuaSpell::Register()
     SOL_USERTYPE("CSpell", CLuaSpell);
     SOL_REGISTER("setMsg", CLuaSpell::setMsg);
     SOL_REGISTER("setModifier", CLuaSpell::setModifier);
+    SOL_REGISTER("setCritical", CLuaSpell::setCritical);
     SOL_REGISTER("setAoE", CLuaSpell::setAoE);
     SOL_REGISTER("setFlag", CLuaSpell::setFlag);
     SOL_REGISTER("setRadius", CLuaSpell::setRadius);
@@ -194,6 +216,8 @@ void CLuaSpell::Register()
     SOL_REGISTER("getLevel", CLuaSpell::getLevel);
     SOL_REGISTER("getCastTime", CLuaSpell::getCastTime);
     SOL_REGISTER("getPrimaryTargetID", CLuaSpell::getPrimaryTargetID);
+    SOL_REGISTER("getKnockback", CLuaSpell::getKnockback);
+    SOL_REGISTER("isCritical", CLuaSpell::isCritical);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaSpell& spell)

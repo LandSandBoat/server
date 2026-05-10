@@ -27,7 +27,7 @@ quest.sections =
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
                 [5] = function(player, region)
                     return quest:progressEvent(797)
@@ -88,7 +88,7 @@ quest.sections =
                 end,
             },
 
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
                 [1] = function(player, region)
                     if quest:getVar(player, 'Prog') == 0 then

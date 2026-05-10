@@ -223,6 +223,8 @@ end
 
 -- Get the damage for a physical Blue Magic spell
 xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
+    spell:setCritical(false)
+
     -----------------------
     -- Get final D value --
     -----------------------
@@ -299,6 +301,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     local hitsdone          = 0
     local hitslanded        = 0
     local finaldmg          = 0
+    local anyCrit           = false
     local sneakIsApplicable = false
     local trickAttackTarget = nil
 
@@ -328,12 +331,12 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
             local pdif = math.random(cratio[1] * 1000, cratio[2] * 1000)
             pdif       = pdif / 1000
 
-            if
-                sneakIsApplicable or
-                math.random() < params.critchance
-            then
+            local isCritical = sneakIsApplicable or math.random() < params.critchance
+            if isCritical then
                 pdif = pdif + 1
             end
+
+            anyCrit = anyCrit or isCritical
 
             -- Add it to our final damage
             if hitsdone == 0 then
@@ -365,6 +368,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
         spell:setMsg(xi.msg.basic.MAGIC_FAIL)
     end
 
+    spell:setCritical(anyCrit)
     return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params, trickAttackTarget)
 end
 

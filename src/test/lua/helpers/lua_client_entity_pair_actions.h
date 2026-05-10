@@ -37,6 +37,7 @@ public:
 
     void move(float x, float y, float z, sol::optional<uint8_t> rot) const;
     void useSpell(CLuaBaseEntity* target, SpellID spellId) const;
+    void setBlueSpells(const sol::table& spellIds) const;
     void useWeaponskill(CLuaBaseEntity* target, uint16 wsId) const;
     void useAbility(CLuaBaseEntity* target, ABILITY abilityId) const;
     void changeTarget(CLuaBaseEntity* target) const;

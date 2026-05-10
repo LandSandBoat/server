@@ -20,6 +20,12 @@ end
 function CClientEntityPairActions:useSpell(target, spellId)
 end
 
+---Populate the player's BLU spell page from a list of spell IDs
+---@param spellIds xi.magic.spell[] List of BLU spell IDs to set
+---@return nil
+function CClientEntityPairActions:setBlueSpells(spellIds)
+end
+
 ---Use a weaponskill on a target
 ---@param target CBaseEntity Target entity
 ---@param wsId xi.weaponskill Weaponskill ID

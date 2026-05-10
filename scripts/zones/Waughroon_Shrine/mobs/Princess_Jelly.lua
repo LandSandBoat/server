@@ -3,12 +3,12 @@
 -- Mob: Princess Jelly
 -- BCNM: Royal Jelly
 -----------------------------------
-local waughroonID = zones[xi.zone.WAUGHROON_SHRINE]
+local ID = zones[xi.zone.WAUGHROON_SHRINE]
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
 
-local centers =
+local battlefieldCenters =
 {
     { -177.5,  60, -142 },
     {   22.5,   0,   18 },
@@ -30,6 +30,11 @@ entity.onMobSpawn = function(mob)
     if not battlefield then
         return
     end
+
+    mob:setLocalVar('reachedCenter', 0)
+    battlefield:setLocalVar('jelliesInCenter', 0)
+    battlefield:setLocalVar('jelliesAlive', 8)
+    battlefield:setLocalVar('queenSpawned', 0)
 
     local elementBitmask = battlefield:getLocalVar('elementChosen')
 
@@ -56,136 +61,126 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.data.element.getElementalAbsorptionModifier(chosenElement), 1000)
 end
 
-local function getQueenJellyID(bfNum)
-    return waughroonID.mob.QUEEN_JELLY + (bfNum - 1) * 10
-end
-
-local function getDistanceFromCenter(bfNum, mob)
+-----------------------------------
+-- Returns the distance of the mob from the center of the battlefield.
+-----------------------------------
+local function getDistanceFromCenter(battlefieldArea, mob)
     local pos = mob:getPos()
 
-    local difX = pos.x - centers[bfNum][1]
-    local difY = pos.y - centers[bfNum][2]
-    local difZ = pos.z - centers[bfNum][3]
+    local difX = pos.x - battlefieldCenters[battlefieldArea][1]
+    local difY = pos.y - battlefieldCenters[battlefieldArea][2]
+    local difZ = pos.z - battlefieldCenters[battlefieldArea][3]
 
     return math.sqrt(math.pow(difX, 2) + math.pow(difY, 2) + math.pow(difZ, 2))
 end
 
-local function allJellysInCenter(bfNum, zone)
-    local totalMobsAlive = 0
-    local totalInCenter = 0
-    for i = 1, 8 do
-        local princess = GetMobByID(getQueenJellyID(bfNum) + i)
-        if getDistanceFromCenter(bfNum, princess) <= 0.5 then
-            totalInCenter = totalInCenter + 1
-        end
+entity.onMobFight = function(mob, target)
+    local battlefield = mob:getBattlefield()
 
-        if princess and princess:isAlive() then
-            totalMobsAlive = totalMobsAlive + 1
-        end
+    if not battlefield then
+        return
     end
 
-    if totalMobsAlive == 0 then
-        -- Win condition
-        return false
+    local battlefieldArea = battlefield:getArea()
+    local jelliesInCenter = battlefield:getLocalVar('jelliesInCenter')
+    local jelliesAlive    = battlefield:getLocalVar('jelliesAlive')
+
+    if not battlefieldArea then
+        return
     end
 
-    return totalMobsAlive == totalInCenter
-end
+    local battlefieldCenter = battlefieldCenters[battlefieldArea]
 
-local function princessesTotalHP(bfNum, zone)
-    local totalHP = 0
+    if not battlefieldCenter then
+        return
+    end
 
-    for i = 1, 8 do
-        local princess = GetMobByID(getQueenJellyID(bfNum) + i)
-        if princess and princess:isAlive() then
-            totalHP = totalHP + princess:getHP()
+    -- On first combat tick, begin pathing to the center
+    if not mob:isFollowingPath() then
+        mob:pathThrough(battlefieldCenter, xi.path.flag.SCRIPT)
+    end
+
+    -- Jellies become invulnerable in the center
+    if
+        getDistanceFromCenter(battlefieldArea, mob) <= 0.2 and
+        mob:getLocalVar('reachedCenter') == 0
+    then
+        mob:setMod(xi.mod.UDMGPHYS, -10000)
+        mob:setMod(xi.mod.UDMGRANGE, -10000)
+        mob:setMod(xi.mod.UDMGMAGIC, -10000)
+        mob:setMod(xi.mod.UDMGBREATH, -10000)
+        mob:setLocalVar('reachedCenter', 1)
+        jelliesInCenter = jelliesInCenter + 1
+        battlefield:setLocalVar('jelliesInCenter', jelliesInCenter)
+    end
+
+    -- If the amount of Princess Jellies alive doesn't equal the amount in center, return.
+    if
+        jelliesAlive == 0 or
+        jelliesAlive ~= jelliesInCenter
+    then
+        return
+    end
+
+    -- If we make it here, spawn the Queen Jelly
+    if battlefield:getLocalVar('queenSpawned') == 0 then
+        battlefield:setLocalVar('queenSpawned', 1)
+        local queenHP      = 0
+        local queenJellyID = ID.mob.QUEEN_JELLY + (battlefieldArea - 1) * 10
+        local queenJelly   = GetMobByID(queenJellyID)
+
+        if not queenJelly then
+            return
         end
-    end
-
-    return totalHP
-end
-
-local function spawnQueenJelly(bfNum, target, zone)
-    local queen = GetMobByID(getQueenJellyID(bfNum))
-
-    if queen and not queen:isSpawned() then
-        SpawnMob(queen:getID())
-        queen:setMaxHP(princessesTotalHP(bfNum, zone))
-        queen:setHP(princessesTotalHP(bfNum, zone))
-        queen:setPos(centers[bfNum][1], centers[bfNum][2], centers[bfNum][3], 0)
-        queen:setLocalVar('target', target:getID())
 
         for i = 1, 8 do
-            DespawnMob(queen:getID() + i)
+            local princessJelly = GetMobByID(queenJellyID + i)
+
+            if not princessJelly then
+                return
+            end
+
+            if princessJelly:isAlive() then
+                queenHP = queenHP + princessJelly:getHP()
+                DespawnMob(princessJelly:getID())
+            end
         end
+
+        SpawnMob(queenJellyID)
+        queenJelly:setMaxHP(queenHP)
+        queenJelly:setHP(queenJelly:getMaxHP())
     end
 end
 
-entity.onMobSpellChoose = function(mob, target, spellId)
-    local spellTable =
-    {
-        [xi.element.FIRE   ] = { xi.magic.spell.BIND, xi.magic.spell.BURN,  xi.magic.spell.FIRE     },
-        [xi.element.ICE    ] = { xi.magic.spell.BIND, xi.magic.spell.FROST, xi.magic.spell.BLIZZARD },
-        [xi.element.WIND   ] = { xi.magic.spell.BIND, xi.magic.spell.CHOKE, xi.magic.spell.AERO     },
-        [xi.element.EARTH  ] = { xi.magic.spell.BIND, xi.magic.spell.RASP , xi.magic.spell.STONE    },
-        [xi.element.THUNDER] = { xi.magic.spell.BIND, xi.magic.spell.SHOCK, xi.magic.spell.THUNDER  },
-        [xi.element.WATER  ] = { xi.magic.spell.BIND, xi.magic.spell.DROWN, xi.magic.spell.WATER    },
-        [xi.element.LIGHT  ] = { xi.magic.spell.BIND, xi.magic.spell.DIA,   xi.magic.spell.BANISH   },
-        [xi.element.DARK   ] = { xi.magic.spell.BIND, xi.magic.spell.BIO,   xi.magic.spell.DRAIN    },
-    }
+local spellTable =
+{
+    [xi.element.FIRE   ] = { xi.magic.spell.BIND, xi.magic.spell.BURN,  xi.magic.spell.FIRE     },
+    [xi.element.ICE    ] = { xi.magic.spell.BIND, xi.magic.spell.FROST, xi.magic.spell.BLIZZARD },
+    [xi.element.WIND   ] = { xi.magic.spell.BIND, xi.magic.spell.CHOKE, xi.magic.spell.AERO     },
+    [xi.element.EARTH  ] = { xi.magic.spell.BIND, xi.magic.spell.RASP , xi.magic.spell.STONE    },
+    [xi.element.THUNDER] = { xi.magic.spell.BIND, xi.magic.spell.SHOCK, xi.magic.spell.THUNDER  },
+    [xi.element.WATER  ] = { xi.magic.spell.BIND, xi.magic.spell.DROWN, xi.magic.spell.WATER    },
+    [xi.element.LIGHT  ] = { xi.magic.spell.BIND, xi.magic.spell.DIA,   xi.magic.spell.BANISH   },
+    [xi.element.DARK   ] = { xi.magic.spell.BIND, xi.magic.spell.BIO,   xi.magic.spell.DRAIN    },
+}
 
-    local list      = mob:getLocalVar('mobElement')
-    list            = list > 0 and list or 1
-    local spellList = spellTable[list]
+entity.onMobSpellChoose = function(mob, target, spellId)
+    local mobElement = mob:getLocalVar('mobElement')
+    local spellList  = spellTable[mobElement] or spellTable[xi.element.FIRE]
 
     return spellList[math.random(1, #spellList)]
 end
 
-entity.onMobFight = function(mob, target)
-    local bfNum = mob:getBattlefield():getArea()
-    local queen = GetMobByID(getQueenJellyID(bfNum))
-    local center = centers[bfNum]
-
-    mob:pathThrough(center, xi.path.flag.SCRIPT)
-
-    -- Jellies become invulnerable in the center
-    if getDistanceFromCenter(bfNum, mob) <= 0.2 then
-        mob:setMod(xi.mod.UDMGPHYS, -10000)
-        mob:setMod(xi.mod.UDMGMAGIC, -10000)
-    end
-
-    -- When all the jellies are in the center, spawn the queen
-    if getDistanceFromCenter(bfNum, mob) <= 0.2 then
-        if
-            queen and
-            not queen:isSpawned() and
-            allJellysInCenter(bfNum, mob:getZone())
-        then
-            spawnQueenJelly(bfNum, target, mob:getZone())
-        end
-    end
-
-    if mob:checkDistance(target) >= 20 then
-        mob:setMagicCastingEnabled(false)
-    else
-        mob:setMagicCastingEnabled(true)
-    end
-end
-
-entity.onMobEngage = function(mob, target)
-    -- battlefield has superlink
-end
-
 entity.onMobDeath = function(mob, player, optParams)
-    local bfNum = mob:getBattlefield():getArea()
-    local queen = GetMobByID(getQueenJellyID(bfNum))
+    if optParams.isKiller or optParams.noKiller then
+        local battlefield = mob:getBattlefield()
 
-    if
-        queen and
-        not queen:isSpawned() and
-        allJellysInCenter(bfNum, mob:getZone())
-    then
-        spawnQueenJelly(bfNum, player, mob:getZone())
+        if not battlefield then
+            return
+        end
+
+        local jelliesAlive = battlefield:getLocalVar('jelliesAlive')
+        battlefield:setLocalVar('jelliesAlive', jelliesAlive - 1)
     end
 end
 

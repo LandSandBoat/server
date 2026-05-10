@@ -52021,7 +52021,7 @@ INSERT INTO `mob_spawn_points` VALUES (17367170,0,'Flesh_Eater','Flesh Eater',23
 INSERT INTO `mob_spawn_points` VALUES (17367171,0,'Flesh_Eater','Flesh Eater',23,38,40,228.647,-60.452,131.708,128);
 
 -- Royal Jelly
-INSERT INTO `mob_spawn_points` VALUES (17367173,0,'Queen_Jelly','Queen Jelly',24,41,41,-172.000,60.000,-142.000,125);
+INSERT INTO `mob_spawn_points` VALUES (17367173,0,'Queen_Jelly','Queen Jelly',24,41,41,-177.500,60.000,-142.000,125);
 INSERT INTO `mob_spawn_points` VALUES (17367174,0,'Princess_Jelly','Princess Jelly',25,35,35,-193.000,58.000,-130.000,20);
 INSERT INTO `mob_spawn_points` VALUES (17367175,0,'Princess_Jelly','Princess Jelly',25,35,35,-183.000,58.000,-125.000,40);
 INSERT INTO `mob_spawn_points` VALUES (17367176,0,'Princess_Jelly','Princess Jelly',25,35,35,-172.000,58.000,-124.000,65);
@@ -52030,7 +52030,7 @@ INSERT INTO `mob_spawn_points` VALUES (17367178,0,'Princess_Jelly','Princess Jel
 INSERT INTO `mob_spawn_points` VALUES (17367179,0,'Princess_Jelly','Princess Jelly',25,35,35,-183.000,58.000,-159.000,205);
 INSERT INTO `mob_spawn_points` VALUES (17367180,0,'Princess_Jelly','Princess Jelly',25,35,35,-172.000,58.000,-159.000,180);
 INSERT INTO `mob_spawn_points` VALUES (17367181,0,'Princess_Jelly','Princess Jelly',25,35,35,-160.000,58.000,-154.000,155);
-INSERT INTO `mob_spawn_points` VALUES (17367183,0,'Queen_Jelly','Queen Jelly',24,41,41,28.274,0.000,17.964,125);
+INSERT INTO `mob_spawn_points` VALUES (17367183,0,'Queen_Jelly','Queen Jelly',24,41,41,22.500,0.000,18.000,125);
 INSERT INTO `mob_spawn_points` VALUES (17367184,0,'Princess_Jelly','Princess Jelly',25,35,35,7.274,-2.000,29.964,20);
 INSERT INTO `mob_spawn_points` VALUES (17367185,0,'Princess_Jelly','Princess Jelly',25,35,35,17.274,-2.000,34.964,40);
 INSERT INTO `mob_spawn_points` VALUES (17367186,0,'Princess_Jelly','Princess Jelly',25,35,35,28.274,-2.000,35.964,65);
@@ -52039,7 +52039,7 @@ INSERT INTO `mob_spawn_points` VALUES (17367188,0,'Princess_Jelly','Princess Jel
 INSERT INTO `mob_spawn_points` VALUES (17367189,0,'Princess_Jelly','Princess Jelly',25,35,35,17.274,-2.000,0.964,205);
 INSERT INTO `mob_spawn_points` VALUES (17367190,0,'Princess_Jelly','Princess Jelly',25,35,35,28.274,-2.000,0.964,180);
 INSERT INTO `mob_spawn_points` VALUES (17367191,0,'Princess_Jelly','Princess Jelly',25,35,35,40.274,-2.000,5.964,155);
-INSERT INTO `mob_spawn_points` VALUES (17367193,0,'Queen_Jelly','Queen Jelly',24,41,41,228.224,-60.000,137.946,125);
+INSERT INTO `mob_spawn_points` VALUES (17367193,0,'Queen_Jelly','Queen Jelly',24,41,41,222.500,-60.000,138.000,125);
 INSERT INTO `mob_spawn_points` VALUES (17367194,0,'Princess_Jelly','Princess Jelly',25,35,35,207.224,-62.000,149.946,20);
 INSERT INTO `mob_spawn_points` VALUES (17367195,0,'Princess_Jelly','Princess Jelly',25,35,35,217.224,-62.000,154.946,40);
 INSERT INTO `mob_spawn_points` VALUES (17367196,0,'Princess_Jelly','Princess Jelly',25,35,35,228.224,-62.000,155.946,65);

@@ -23,6 +23,7 @@
 #define _LUASPELL_H
 
 #include "common/cbasetypes.h"
+#include "enums/action/knockback.h"
 #include "luautils.h"
 
 class CSpell;
@@ -42,6 +43,7 @@ public:
 
     void   setMsg(MsgBasic messageID);
     void   setModifier(ActionModifier modifier) const;
+    void   setCritical(bool isCritical) const;
     void   setAoE(uint8 aoe);
     void   setFlag(uint8 flags);
     void   setRadius(float radius);
@@ -64,6 +66,8 @@ public:
     uint8  getLevel(JOBTYPE jobId);
     uint32 getCastTime();
     uint32 getPrimaryTargetID();
+    auto   getKnockback() const -> Knockback;
+    auto   isCritical() const -> bool;
 
     bool operator==(const CLuaSpell& other) const
     {
