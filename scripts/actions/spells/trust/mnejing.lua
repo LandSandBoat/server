@@ -18,11 +18,11 @@ spellObject.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.CAN_SHIELD_BLOCK, 1)
     mob:setMobMod(xi.mobMod.CAN_PARRY, 3)
 
-    mob:setMod(xi.mod.SHIELD_MASTERY_TP, 40) -- Possesses Barrier Module (Increased Shield Mastery)
-    mob:setMod(xi.mod.SHIELDBLOCKRATE, 45)   -- Possesses Barrier Module (Increased Block Chance, 45% base block rate from testing)
-    mob:addMod(xi.mod.ENMITY, 15)            -- Enmity+
-    mob:addMod(xi.mod.DMG, -375)             -- Passive -37.5% Damage Taken Reduction.
-    mob:addMod(xi.mod.HPP, 20)               -- HP+20%
+    mob:setMod(xi.mod.SHIELD_MASTERY_TP, 40)
+    mob:setMod(xi.mod.SHIELDBLOCKRATE, 45)
+    mob:addMod(xi.mod.ENMITY, 15)
+    mob:addMod(xi.mod.DMG, -375) -- Passive -37.5% Damage Taken Reduction.
+    mob:addMod(xi.mod.HPP, 20)
 
     local lastSynergyBonus = 0
 

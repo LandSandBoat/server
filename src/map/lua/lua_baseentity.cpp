@@ -5287,17 +5287,11 @@ int8 CLuaBaseEntity::getShieldSize()
     {
         case TYPE_PC:
         {
-            shieldSize = static_cast<CCharEntity*>(m_PBaseEntity)->getShieldSize();
-            break;
+            return static_cast<CCharEntity*>(m_PBaseEntity)->getShieldSize();
         }
         case TYPE_TRUST:
         {
-            constexpr int8 defaultTrustShieldSize = 3;
-            const int16    shieldMobModValue      = static_cast<CMobEntity*>(m_PBaseEntity)->getMobMod(MOBMOD_SHIELD_SIZE_TRUST);
-            const int8     trustShieldSize        = static_cast<int8>(shieldMobModValue);
-
-            shieldSize = trustShieldSize > 0 ? trustShieldSize : defaultTrustShieldSize;
-            break;
+            return static_cast<CTrustEntity*>(m_PBaseEntity)->getShieldSize();
         }
         default:
         {

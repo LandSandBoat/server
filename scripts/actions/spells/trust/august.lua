@@ -73,11 +73,11 @@ spellObject.onMobSpawn = function(mob)
     end
 
     mob:setMod(xi.mod.SHIELD_MASTERY_TP, shieldMasteryPower)
-    mob:setMod(xi.mod.SHIELDBLOCKRATE, 35) -- around 35% max block rate at 99 from testing
-    mob:addMod(xi.mod.UFASTCAST, 50)       -- August casts stupid fast
-    mob:addMod(xi.mod.DMG, -1000)          -- Damage Taken -10%
-    mob:addMod(xi.mod.ENMITY, 25)          -- Enmity+
-    mob:addMod(xi.mod.HPP, 10)             -- HP+10%
+    mob:setMod(xi.mod.SHIELDBLOCKRATE, 35)
+    mob:addMod(xi.mod.UFASTCAST, 50)
+    mob:addMod(xi.mod.DMG, -1000) -- Damage Taken -10%
+    mob:addMod(xi.mod.ENMITY, 25)
+    mob:addMod(xi.mod.HPP, 10)
 
     -- Founders gear mods: August gets all effects from founders gear
     -- see xi.trust.modGrowthVal in trust.lua for current curve value

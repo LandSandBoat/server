@@ -40,13 +40,13 @@ spellObject.onMobSpawn = function(mob)
     end
 
     mob:setMod(xi.mod.SHIELD_MASTERY_TP, shieldMasteryPower)
-    mob:setMod(xi.mod.SHIELDBLOCKRATE, 45)     -- 45% base block rate at 99 from testing without reprisal on
-    mob:addMod(xi.mod.FASTCAST, 30)            -- Has fastcast around 30%
-    mob:addMod(xi.mod.CURE_POTENCY, 50)        -- Cure Potency Bonus+50%
-    mob:addMod(xi.mod.ENMITY, 25)              -- Enmity+
-    mob:addMod(xi.mod.DMG, -1000)              -- Damage Taken -10%
-    mob:addMod(xi.mod.HPP, 20)                 -- HP+20%
-    mob:addMod(xi.mod.ABSORB_PHYSDMG_TO_MP, 5) -- Converts DMG to MP 5%
+    mob:setMod(xi.mod.SHIELDBLOCKRATE, 45)
+    mob:addMod(xi.mod.FASTCAST, 30)
+    mob:addMod(xi.mod.CURE_POTENCY, 50)
+    mob:addMod(xi.mod.ENMITY, 25)
+    mob:addMod(xi.mod.DMG, -1000) -- Damage Taken -10%
+    mob:addMod(xi.mod.HPP, 20)
+    mob:addMod(xi.mod.ABSORB_PHYSDMG_TO_MP, 5)
 
     -- Dynamic modifier that checks party member list on tick to apply
     mob:addListener('COMBAT_TICK', 'AAEV_CTICK', function(mobArg)

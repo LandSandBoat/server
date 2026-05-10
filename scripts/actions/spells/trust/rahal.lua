@@ -28,9 +28,9 @@ spellObject.onMobSpawn = function(mob)
     })
 
     -- Dragon Killer handled in mob_pool_mods
-    mob:addMod(xi.mod.ENMITY, 10) -- Enmity+
-    mob:addMod(xi.mod.DMG, -500)  -- Damage Taken -5%
-    mob:addMod(xi.mod.HPP, 10)    -- HP+10%
+    mob:addMod(xi.mod.ENMITY, 10)
+    mob:addMod(xi.mod.DMG, -500) -- Damage Taken -5%
+    mob:addMod(xi.mod.HPP, 10)
 
     local lvl = mob:getMainLvl()
 

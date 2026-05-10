@@ -41,13 +41,13 @@ spellObject.onMobSpawn = function(mob)
     end
 
     mob:setMod(xi.mod.SHIELD_MASTERY_TP, shieldMasteryPower)
-    mob:setMod(xi.mod.SHIELDBLOCKRATE, 35) -- Around 35% block rate at 99 from testing
-    mob:addMod(xi.mod.SPELLINTERRUPT, 30)  -- Spell interruption rate decrease
-    mob:addMod(xi.mod.FASTCAST, 30)        -- Has fastcast around 30%
-    mob:addMod(xi.mod.ENMITY, 15)          -- Enmity+
-    mob:addMod(xi.mod.DMG, -500)           -- Damage Taken -5%
-    mob:addMod(xi.mod.HPP, 10)             -- HP+10%
-    mob:addMod(xi.mod.MPP, 10)             -- MP+10%
+    mob:setMod(xi.mod.SHIELDBLOCKRATE, 35)
+    mob:addMod(xi.mod.SPELLINTERRUPT, 30)
+    mob:addMod(xi.mod.FASTCAST, 30)
+    mob:addMod(xi.mod.ENMITY, 15)
+    mob:addMod(xi.mod.DMG, -500) -- Damage Taken -5%
+    mob:addMod(xi.mod.HPP, 10)
+    mob:addMod(xi.mod.MPP, 10)
 
     if lvl >= 5 then
         mob:addGambit(ai.t.SELF, { ai.c.ALWAYS, 0 }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.PROVOKE })

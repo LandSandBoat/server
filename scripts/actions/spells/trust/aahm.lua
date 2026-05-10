@@ -2,7 +2,7 @@
 -- Trust: AAHM
 -- Possesses HP+20%
 -- Possesses an Utsusemi +1 trait which grants AA HM an extra shadow.
--- f there is a Tank in the party, behaves as a damage dealer: Uses Innin, Berserk.
+-- If there is a Tank in the party, behaves as a damage dealer: Uses Innin, Berserk.
 -- If there are no other tanks in the party, behaves as a tank: Uses Yonin, Warcry.
 -- Uses Provoke in both situations in order to be sub tank.
 -- Casts debuffs when does not have hate.
@@ -24,12 +24,12 @@ spellObject.onMobSpawn = function(mob)
 
     mob:addMobMod(xi.mobMod.CAN_PARRY, 3)
 
-    mob:addMod(xi.mod.UTSUSEMI_BONUS, 1) -- Utsusemi +1 trait which grants AAHM an extra shadow.
-    mob:addMod(xi.mod.FASTCAST, 30)      -- Has fastcast around 30%
-    mob:addMod(xi.mod.ENMITY, 15)        -- Enmity+
-    mob:addMod(xi.mod.DUAL_WIELD, 10)    -- Dual Wield +10
-    mob:addMod(xi.mod.DMG, -500)         -- Damage Taken -5%
-    mob:addMod(xi.mod.HPP, 20)           -- HP+20%
+    mob:addMod(xi.mod.UTSUSEMI_BONUS, 1)
+    mob:addMod(xi.mod.FASTCAST, 30)
+    mob:addMod(xi.mod.ENMITY, 15)
+    mob:addMod(xi.mod.DUAL_WIELD, 10)
+    mob:addMod(xi.mod.DMG, -500) -- Damage Taken -5%
+    mob:addMod(xi.mod.HPP, 20)
 
     local lvl = mob:getMainLvl()
     local lastSynergyBonus = 0

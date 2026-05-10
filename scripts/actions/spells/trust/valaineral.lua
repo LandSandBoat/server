@@ -37,15 +37,15 @@ spellObject.onMobSpawn = function(mob)
     end
 
     mob:setMod(xi.mod.SHIELD_MASTERY_TP, shieldMasteryPower)
-    mob:setMod(xi.mod.SHIELDBLOCKRATE, 35) -- Around 35% block rate at 99 from testing without reprisal on
-    mob:addMod(xi.mod.SPELLINTERRUPT, 30)  -- Spell interruption rate decrease
-    mob:addMod(xi.mod.CURE_POTENCY, 50)    -- Cure Potency Bonus+50%
-    mob:addMod(xi.mod.FASTCAST, 30)        -- Has fastcast around 30%
-    mob:addMod(xi.mod.REFRESH, 2)          -- PLD auto refresh +2mp a tick Refresh+
-    mob:addMod(xi.mod.ENMITY, 25)          -- Enmity+
-    mob:addMod(xi.mod.DMG, -800)           -- Damage Taken -8%
-    mob:addMod(xi.mod.HPP, 10)             -- HP+10%
-    mob:addMod(xi.mod.MPP, 20)             -- MP+20%
+    mob:setMod(xi.mod.SHIELDBLOCKRATE, 35)
+    mob:addMod(xi.mod.SPELLINTERRUPT, 30)
+    mob:addMod(xi.mod.CURE_POTENCY, 50)
+    mob:addMod(xi.mod.FASTCAST, 30)
+    mob:addMod(xi.mod.REFRESH, 2)
+    mob:addMod(xi.mod.ENMITY, 25)
+    mob:addMod(xi.mod.DMG, -800) -- Damage Taken -8%
+    mob:addMod(xi.mod.HPP, 10)
+    mob:addMod(xi.mod.MPP, 20)
 
     if lvl >= 1 then
         mob:addGambit(ai.t.TARGET, { ai.c.VAL_URIEL_CHECK, 0 }, { ai.r.MS, ai.s.SPECIFIC, xi.mobSkill.URIEL_BLADE_1 })
