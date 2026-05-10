@@ -36,6 +36,7 @@
 #include "enmity_container.h"
 #include "mob_spell_container.h"
 #include "mob_spell_list.h"
+#include "mob_modifier.h"
 #include "packets/entity_set_name.h"
 #include "packets/entity_update.h"
 #include "packets/s2c/0x029_battle_message.h"
@@ -66,6 +67,12 @@ CTrustEntity::CTrustEntity(CCharEntity* PChar)
 CTrustEntity::~CTrustEntity()
 {
     TracyZoneScoped;
+}
+
+auto CTrustEntity::getShieldSize() -> int8
+{
+    const auto shieldSizeMod = static_cast<int8>(getMobMod(MOBMOD_TRUST_SHIELD_SIZE));
+    return shieldSizeMod > 0 ? shieldSizeMod : m_defaultShieldSize;
 }
 
 void CTrustEntity::PostTick()
