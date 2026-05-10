@@ -85,9 +85,10 @@ spellObject.onMobSpawn = function(mob)
     mob:addGambit(ai.t.SELF,   { { ai.c.NOT_STATUS,       xi.effect.REGEN     }, { ai.c.HPP_LT,             75 }, }, { ai.r.MA, ai.s.HIGHEST,         xi.magic.spellFamily.REGEN })
     mob:addGambit(ai.t.SELF,   { { ai.c.NOT_STATUS,       xi.effect.REFRESH   }, { ai.c.MPP_LT,             75 }, }, { ai.r.MA, ai.s.SPECIFIC,        xi.magic.spell.REFRESH     })
 
-    mob:addGambit(ai.t.SELF,   { { ai.c.NOT_STATUS,       xi.effect.STONESKIN },
-                                 { ai.c.HPP_LT,           75                  },
-                                 { ai.c.MPP_GTE,          50                  }, },{ ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.STONESKIN })
+    mob:addGambit(ai.t.SELF, {
+        { ai.c.NOT_STATUS, xi.effect.STONESKIN },
+        { ai.c.HPP_LT, 75 },
+        { ai.c.MPP_GTE, 50 }, }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.STONESKIN })
 
     mob:setTrustTPSkillSettings(ai.tp.CLOSER_UNTIL_TP, ai.s.HIGHEST, 3000)
 

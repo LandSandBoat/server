@@ -40,10 +40,10 @@ spellObject.onMobSpawn = function(mob)
 
     if lvl >= 15 then
         mob:addGambit(ai.t.TARGET, { ai.l.OR(
-                                   { ai.c.CASTING_MA, 0 },
-                                   { ai.c.READYING_JA, 0 },
-                                   { ai.c.READYING_MS, 0 },
-                                   { ai.c.READYING_WS, 0 }) }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.SHIELD_BASH })
+            { ai.c.CASTING_MA, 0 },
+            { ai.c.READYING_JA, 0 },
+            { ai.c.READYING_MS, 0 },
+            { ai.c.READYING_WS, 0 }) }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.SHIELD_BASH })
     end
 
     if lvl >= 30 then
@@ -55,12 +55,11 @@ spellObject.onMobSpawn = function(mob)
     mob:addGambit(ai.t.SELF,   { ai.c.NOT_STATUS, xi.effect.ENLIGHT }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.ENLIGHT })
     mob:addGambit(ai.t.SELF,   { ai.c.NOT_STATUS, xi.effect.PHALANX }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.PHALANX })
     mob:addGambit(ai.t.TARGET, { ai.c.ALWAYS,     xi.effect.FLASH   }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.FLASH        })
-    mob:addGambit(ai.t.PARTY,  { ai.l.OR(
-                               { ai.c.STATUS, xi.effect.SLEEP_I     },
-                               { ai.c.STATUS, xi.effect.SLEEP_II    },
-                               { ai.c.STATUS, xi.effect.LULLABY })  }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURE         })
 
-
+    mob:addGambit(ai.t.PARTY, { ai.l.OR(
+        { ai.c.STATUS, xi.effect.SLEEP_I },
+        { ai.c.STATUS, xi.effect.SLEEP_II },
+        { ai.c.STATUS, xi.effect.LULLABY }) }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURE })
 
     mob:setTrustTPSkillSettings(ai.tp.CLOSER_UNTIL_TP, ai.s.HIGHEST, 2500)
 end

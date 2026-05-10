@@ -1,6 +1,6 @@
 -----------------------------------
 -- Trust: Trion
--- Royal Bash is stronger than a normal Shield Bash. 
+-- Royal Bash is stronger than a normal Shield Bash.
 -- Royal Saviour is a secondary, stronger version of Sentinel. Trion alternates between this and the normal version of Sentinel.
 -- Trion tries to interrupt TP-abilities with Royal Bash.
 -- Uses TP randomly and does not try to skillchain.
@@ -55,10 +55,10 @@ spellObject.onMobSpawn = function(mob)
 
     if lvl >= 15 then
         mob:addGambit(ai.t.TARGET, { ai.l.OR(
-                                   { ai.c.CASTING_MA, 0 },
-                                   { ai.c.READYING_JA, 0 },
-                                   { ai.c.READYING_MS, 0 },
-                                   { ai.c.READYING_WS, 0 }) }, { ai.r.MS, ai.s.SPECIFIC, xi.mobSkill.ROYAL_BASH_TRUST }, 60)
+            { ai.c.CASTING_MA, 0 },
+            { ai.c.READYING_JA, 0 },
+            { ai.c.READYING_MS, 0 },
+            { ai.c.READYING_WS, 0 }) }, { ai.r.MS, ai.s.SPECIFIC, xi.mobSkill.ROYAL_BASH_TRUST }, 60)
     end
 
     if lvl >= 30 then

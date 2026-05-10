@@ -102,10 +102,11 @@ spellObject.onMobSpawn = function(mob)
     mob:addGambit(ai.t.PARTY,      { ai.c.HPP_LT,       75                  }, { ai.r.MA, ai.s.HIGHEST,  xi.magic.spellFamily.CURE  })
     mob:addGambit(ai.t.PARTY_DEAD, { ai.c.MPP_GTE,      200                 }, { ai.r.MA, ai.s.HIGHEST,  xi.magic.spellFamily.RAISE })
     mob:addGambit(ai.t.TARGET,     { ai.c.IS_ECOSYSTEM, xi.ecosystem.UNDEAD }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.HOLY        })
-    mob:addGambit(ai.t.PARTY,      { ai.l.OR(
-                                   { ai.c.STATUS, xi.effect.SLEEP_I         },
-                                   { ai.c.STATUS, xi.effect.SLEEP_II        },
-                                   { ai.c.STATUS, xi.effect.LULLABY })      }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURE        })
+
+    mob:addGambit(ai.t.PARTY, { ai.l.OR(
+        { ai.c.STATUS, xi.effect.SLEEP_I },
+        { ai.c.STATUS, xi.effect.SLEEP_II },
+        { ai.c.STATUS, xi.effect.LULLABY }) }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURE })
 
     mob:setTrustTPSkillSettings(ai.tp.ASAP, ai.s.RANDOM, 1000)
 
