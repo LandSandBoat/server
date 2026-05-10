@@ -9476,7 +9476,7 @@ INSERT INTO `mob_groups` VALUES (5,980,127,'Demonic_Weapon',300,0,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (6,2442,127,'Lost_Soul_blm',300,1,1541,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (7,2585,127,'Master_Coeurl',900,0,1640,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (8,407,127,'Bhuta',300,1,264,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (9,387,127,'Behemoth',0,128,251,60000,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (9,387,127,'Behemoth',0,128,251,65000,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (10,2255,127,'King_Behemoth',0,128,1450,75000,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (11,3135,127,'Picklix_Longindex',0,128,0,9400,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (12,2767,127,'Moxnix_Nightgoggle',0,128,0,8700,0,0,NULL);
