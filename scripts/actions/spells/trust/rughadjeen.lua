@@ -27,12 +27,12 @@ spellObject.onMobSpawn = function(mob)
         [xi.magic.spell.MIHLI_ALIAPOH] = xi.trust.messageOffset.TEAMWORK_5
     })
 
-    mob:addMod(xi.mod.FASTCAST, 30)          -- Has fastcast around 30%
-    mob:addMod(xi.mod.CURE_POTENCY_RCVD, 30) -- Cure Potency Received +30%
-    mob:addMod(xi.mod.TRIPLE_ATTACK, 3)      -- 3% triple attack rat
-    mob:addMod(xi.mod.DMG, -500)             -- Damage Taken -5%
-    mob:addMod(xi.mod.HPP, 20)               -- HP+20%
-    mob:addMod(xi.mod.MPP, 20)               -- HP+20%
+    mob:addMod(xi.mod.FASTCAST, 30)
+    mob:addMod(xi.mod.CURE_POTENCY_RCVD, 30)
+    mob:addMod(xi.mod.TRIPLE_ATTACK, 3)
+    mob:addMod(xi.mod.DMG, -500) -- Damage Taken -5%
+    mob:addMod(xi.mod.HPP, 20)
+    mob:addMod(xi.mod.MPP, 20)
 
     local lvl = mob:getMainLvl()
 
@@ -102,11 +102,7 @@ spellObject.onMobSpawn = function(mob)
     mob:addGambit(ai.t.PARTY,      { ai.c.HPP_LT,       75                  }, { ai.r.MA, ai.s.HIGHEST,  xi.magic.spellFamily.CURE  })
     mob:addGambit(ai.t.PARTY_DEAD, { ai.c.MPP_GTE,      200                 }, { ai.r.MA, ai.s.HIGHEST,  xi.magic.spellFamily.RAISE })
     mob:addGambit(ai.t.TARGET,     { ai.c.IS_ECOSYSTEM, xi.ecosystem.UNDEAD }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.HOLY        })
-
-    mob:addGambit(ai.t.PARTY, { ai.l.OR(
-        { ai.c.STATUS, xi.effect.SLEEP_I },
-        { ai.c.STATUS, xi.effect.SLEEP_II },
-        { ai.c.STATUS, xi.effect.LULLABY }) }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURE })
+    mob:addGambit(ai.t.PARTY,      { ai.c.STATUS,       xi.effect.SLEEP_I   }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURE        })
 
     mob:setTrustTPSkillSettings(ai.tp.ASAP, ai.s.RANDOM, 1000)
 

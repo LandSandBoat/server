@@ -27,8 +27,8 @@ spellObject.onMobSpawn = function(mob)
     mob:addMod(xi.mod.DOUBLE_ATTACK, xi.trust.modGrowthValMax(mob, 15))
     mob:addMod(xi.mod.ACC, xi.trust.modGrowthValMax(mob, 200))
     mob:addMod(xi.mod.EVA, xi.trust.modGrowthValMax(mob, 125))
-    mob:addMod(xi.mod.FASTCAST, 30) -- Has fastcast around 30%
-    mob:addMod(xi.mod.ENMITY, 10)   -- Enmity+
+    mob:addMod(xi.mod.FASTCAST, 30)
+    mob:addMod(xi.mod.ENMITY, 10)
 
     local lvl = mob:getMainLvl()
 

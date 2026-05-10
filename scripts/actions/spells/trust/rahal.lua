@@ -55,11 +55,7 @@ spellObject.onMobSpawn = function(mob)
     mob:addGambit(ai.t.SELF,   { ai.c.NOT_STATUS, xi.effect.ENLIGHT }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.ENLIGHT })
     mob:addGambit(ai.t.SELF,   { ai.c.NOT_STATUS, xi.effect.PHALANX }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.PHALANX })
     mob:addGambit(ai.t.TARGET, { ai.c.ALWAYS,     xi.effect.FLASH   }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.FLASH        })
-
-    mob:addGambit(ai.t.PARTY, { ai.l.OR(
-        { ai.c.STATUS, xi.effect.SLEEP_I },
-        { ai.c.STATUS, xi.effect.SLEEP_II },
-        { ai.c.STATUS, xi.effect.LULLABY }) }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURE })
+    mob:addGambit(ai.t.PARTY,  { ai.c.STATUS,     xi.effect.SLEEP_I }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURE         })
 
     mob:setTrustTPSkillSettings(ai.tp.CLOSER_UNTIL_TP, ai.s.HIGHEST, 2500)
 end

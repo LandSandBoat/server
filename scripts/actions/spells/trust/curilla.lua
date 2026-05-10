@@ -51,14 +51,14 @@ spellObject.onMobSpawn = function(mob)
     end
 
     mob:setMod(xi.mod.SHIELD_MASTERY_TP, shieldMasteryPower)
-    mob:addMod(xi.mod.ENHANCES_GUARDIAN, 30) -- Sentinel lasts around 30sec longer from testing
-    mob:setMod(xi.mod.SHIELDBLOCKRATE, 25)   -- around 25% max block rate at 99 from testing
-    mob:addMod(xi.mod.CURE_CAST_TIME, 50)    -- Cure Casting Time Down roughly 50% from testing
-    mob:addMod(xi.mod.CURE_POTENCY, 25)      -- Cure Potency Bonus+25%
-    mob:addMod(xi.mod.ENMITY, 15)            -- Enmity+
-    mob:addMod(xi.mod.DMG, -500)             -- Damage Taken -5%
-    mob:addMod(xi.mod.HPP, 10)               -- HP+10%
-    mob:addMod(xi.mod.MPP, 30)               -- MP+30%
+    mob:addMod(xi.mod.ENHANCES_GUARDIAN, 30)
+    mob:setMod(xi.mod.SHIELDBLOCKRATE, 25)
+    mob:addMod(xi.mod.CURE_CAST_TIME, 50)
+    mob:addMod(xi.mod.CURE_POTENCY, 25)
+    mob:addMod(xi.mod.ENMITY, 15)
+    mob:addMod(xi.mod.DMG, -500) -- Damage Taken -5%
+    mob:addMod(xi.mod.HPP, 10)
+    mob:addMod(xi.mod.MPP, 30)
 
     if lvl >= 30 then
         mob:addGambit(ai.t.SELF, { ai.c.NOT_STATUS, xi.effect.SENTINEL }, { ai.r.JA, ai.s.SPECIFIC, xi.ja.SENTINEL })
