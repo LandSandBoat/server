@@ -55,6 +55,6 @@ UPDATE `abilities` SET `recastTime` = 10 WHERE `name` = 'stay';
 UPDATE `abilities` SET `recastTime` = 10 WHERE `name` = 'leave';
 
 -- Heel/Stay/Leave: Remove shared recast
-UPDATE `abilities` set `recastId` = 0 Where `name` = 'heel';
-UPDATE `abilities` set `recastId` = 0 Where `name` = 'leave';
-UPDATE `abilities` set `recastId` = 0 Where `name` = 'stay';
+UPDATE `abilities` set `recastId` = 152 WHERE `name` = 'heel';
+UPDATE `abilities` set `recastId` = 153 WHERE `name` = 'leave';
+UPDATE `abilities` set `recastId` = 154 WHERE `name` = 'stay';
