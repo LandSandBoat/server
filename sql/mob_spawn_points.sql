@@ -12328,7 +12328,10 @@ INSERT INTO `mob_spawn_points` VALUES (16990483,0,'Locus_Colibri','Locus Colibri
 INSERT INTO `mob_spawn_points` VALUES (16990484,0,'Locus_Colibri','Locus Colibri',52,133,135,-571.000,-9.000,-16.000,43);
 INSERT INTO `mob_spawn_points` VALUES (16990485,0,'Locus_Colibri','Locus Colibri',52,133,135,-578.000,-8.000,-6.000,28);
 INSERT INTO `mob_spawn_points` VALUES (16990486,0,'Locus_Colibri','Locus Colibri',52,133,135,-579.000,-8.000,-6.000,191);
-INSERT INTO `mob_spawn_points` VALUES (16990487,0,'Locus_Colibri','Locus Colibri',52,133,135,-539.000,-11.000,-89.000,191); -- TODO: This ID is a placeholder to prevent startup errors, not present in captures.
+INSERT INTO `mob_spawn_points` VALUES (16990487,0,'Locus_Colibri','Locus Colibri',52,133,135,-539.000,-11.000,-89.000,191);
+INSERT INTO `mob_spawn_points` VALUES (16990488,0,'Locus_Colibri','Locus Colibri',52,133,135,-602.161,-4.637,-3.299,127);
+INSERT INTO `mob_spawn_points` VALUES (16990489,0,'Locus_Colibri','Locus Colibri',52,133,135,-595.038,-4.813,3.993,233);
+INSERT INTO `mob_spawn_points` VALUES (16990490,0,'Locus_Wivre','Locus Wivre',53,135,137,-602.114,-4.580,-4.361,160);
 INSERT INTO `mob_spawn_points` VALUES (16990491,0,'Locus_Colibri','Locus Colibri',52,133,135,-593.000,-5.000,-33.000,221);
 INSERT INTO `mob_spawn_points` VALUES (16990492,0,'Locus_Colibri','Locus Colibri',52,133,135,-597.000,-4.000,-17.000,226);
 INSERT INTO `mob_spawn_points` VALUES (16990493,0,'Locus_Colibri','Locus Colibri',52,133,135,-594.000,-5.000,-13.000,16);
