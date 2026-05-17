@@ -7589,7 +7589,8 @@ INSERT INTO `mob_pools` VALUES (7494,'Omega_Forerunner','Omega_Forerunner',477,0
 INSERT INTO `mob_pools` VALUES (7495,'Omegas_Bit','Omegas_Bit',74,0x0000320000000000000000000000000000000000,1,1,1,240,100,0,0,0,0,2,0,0,0,0,0,0,0,1,0,0,0,NULL,NULL);
 INSERT INTO `mob_pools` VALUES (7496,'Temenos_Euvhi','Temenos_Euvhi',321,0x00000E0200000000000000000000000000000000,1,1,1,240,100,0,0,0,0,0,0,0,116,129,0,0,0,0,0,0,0,0,10);
 INSERT INTO `mob_pools` VALUES (7497,'Temenos_Ghrah','Temenos_Ghrah',328,0x00008A0400000000000000000000000000000000,1,1,1,240,100,0,0,0,0,0,0,2,278,665,2,0,0,0,0,0,0,0,32);
--- Next fresh block: 7498.
+INSERT INTO `mob_pools` VALUES (7498,'Flan_Princess','Flan_Princess',5,0x0000070700000000000000000000000000000000,4,4,12,240,100,0,1,1,1,16,0,0,0,0,0,0,0,0,0,112,112,NULL,NULL); -- Capture needed
+-- Next fresh block: 7499.
 
 -- Jug pet pools (skipped to allow keeping them sequential)
 INSERT INTO `mob_pools` VALUES (7500,'Pet_Sweet_Caroline','Pet_Sweet_Caroline',350,0x00008E0B00000000000000000000000000000000,2,2,1,480,100,0,0,0,0,8,0,32,605,129,0,0,0,0,0,766,178,0,12);

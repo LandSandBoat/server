@@ -14340,6 +14340,13 @@ INSERT INTO `mob_spawn_points` VALUES (17023026,0,'Windjammer_Imp','Windjammer I
 INSERT INTO `mob_spawn_points` VALUES (17023027,0,'Windjammer_Imp','Windjammer Imp',0,0,0,0.000,0.000,0.000,0);
 INSERT INTO `mob_spawn_points` VALUES (17023028,0,'Bubbly','Bubbly',0,0,0,0.000,0.000,0.000,0);
 INSERT INTO `mob_spawn_points` VALUES (17023029,0,'Cutthroat_Kabsalah','Cutthroat Kabsalah',0,0,0,0.000,0.000,0.000,0);
+-- Peach Power
+INSERT INTO `mob_spawn_points` VALUES (17023032,0,'Flan_Princess','Flan Princess',2027,139,139,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17023033,0,'Flan_Princess','Flan Princess',2027,139,139,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17023034,0,'Flan_Princess','Flan Princess',2027,139,139,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17023035,0,'Flan_Princess','Flan Princess',2027,139,139,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17023036,0,'Flan_Princess','Flan Princess',2027,139,139,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17023037,0,'Flan_Princess','Flan Princess',2027,139,139,0.000,0.000,0.000,0);
 
 -- -----------------------------------------------------------
 -- Mount Zhayolm (Zone 61)
