@@ -14392,6 +14392,7 @@ INSERT INTO `mob_groups` VALUES (51,913,254,'Dark_Elemental',0,128,0,0,0,0,NULL)
 -- ------------------------------------------------------------
 
 INSERT INTO `mob_groups` VALUES (1,3604,255,'Shinryu',0,128,2238,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (2,3687,255,'Shinryu_Star',0,128,2238,0,0,0,NULL);
 
 -- ------------------------------------------------------------
 -- Rala_Waterways (Zone 258)

@@ -76262,6 +76262,10 @@ INSERT INTO `mob_spawn_points` VALUES (17818077,0,'Dark_Elemental','Dark Element
 INSERT INTO `mob_spawn_points` VALUES (17821697,0,'Shinryu','Shinryu',1,90,92,-477.491,-0.500,515.330,43);
 INSERT INTO `mob_spawn_points` VALUES (17821698,0,'Shinryu','Shinryu',1,90,92,519.000,-500.000,519.000,249);
 INSERT INTO `mob_spawn_points` VALUES (17821699,0,'Shinryu','Shinryu',1,90,92,-479.000,-1000.000,-471.000,65);
+-- The Wyrm God ★
+INSERT INTO `mob_spawn_points` VALUES (17821700,0,'Shinryu','Shinryu',2,139,139,-477.341,-0.500,510.673,63);
+INSERT INTO `mob_spawn_points` VALUES (17821701,0,'Shinryu','Shinryu',2,139,139,520.000,-500.500,520.000,64);
+INSERT INTO `mob_spawn_points` VALUES (17821702,0,'Shinryu','Shinryu',2,139,139,-477.922,-1000.500,-484.836,60);
 
 -- ------------------------------------------------------------
 -- Rala Waterways (Zone 258)
