@@ -12,7 +12,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.BONNACON, 5, math.random(3600, 86400)) -- 1 to 24 hours
+    xi.mob.phOnDespawn(mob, ID.mob.BONNACON, 5, 3600) -- 1 hour
 end
 
 return entity
