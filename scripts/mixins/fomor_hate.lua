@@ -18,7 +18,7 @@ g_mixins.fomor_hate = function(fomorMob)
 
                     -- if not a fomor then decrease hate instead of increase
                     -- Note cannot use negatives in fomorHateAdj because local vars can only be positive
-                    if mob:getFamily() ~= xi.mobFamily.FOMOR then
+                    if mob:getSuperFamily() ~= xi.mobSuperFamily.FOMOR then
                         adj = -adj
                     end
 

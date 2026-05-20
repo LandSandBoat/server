@@ -16,12 +16,12 @@ entity.onTrade = function(player, npc, trade)
     then
         if
             npcUtil.tradeHasExactly(trade, xi.item.CLUMP_OF_BLUE_PONDWEED) and
-            npcUtil.popFromQM(player, npc, ID.mob.ADAMANTOISE)
+            npcUtil.popFromQM(player, npc, ID.mob.ADAMANTOISE, { hide = 30 })
         then
             player:confirmTrade()
         elseif
             npcUtil.tradeHasExactly(trade, xi.item.CLUMP_OF_RED_PONDWEED) and
-            npcUtil.popFromQM(player, npc, ID.mob.ASPIDOCHELONE)
+            npcUtil.popFromQM(player, npc, ID.mob.ASPIDOCHELONE, { hide = 30 })
         then
             player:confirmTrade()
         end

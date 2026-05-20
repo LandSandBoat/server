@@ -444,20 +444,20 @@ describe('Exdata', function()
 
         item:setExData(
             {
-                signature   = 'Goblin_Bounty_Hunter',
-                zoneId      = xi.zone.QUFIM_ISLAND,
-                familyId    = xi.mobFamily.GOBLIN,
-                poolId      = xi.mobPool.BUGBEAR_MATMAN,
-                level       = 12,
-                feralSkill  = xi.pankration.feralSkill.MAIN_JOB_WARRIOR,
-                feralPoints = 50,
-                quality     = 42,
+                signature     = 'Goblin_Bounty_Hunter',
+                zoneId        = xi.zone.QUFIM_ISLAND,
+                superFamilyId = xi.mobSuperFamily.GOBLIN,
+                poolId        = xi.mobPool.BUGBEAR_MATMAN,
+                level         = 12,
+                feralSkill    = xi.pankration.feralSkill.MAIN_JOB_WARRIOR,
+                feralPoints   = 50,
+                quality       = 42,
             })
 
         local ex = item:getExData()
         assert(ex.signature == 'GoblinBountyH')
         assert(ex.zoneId == xi.zone.QUFIM_ISLAND)
-        assert(ex.familyId == xi.mobFamily.GOBLIN)
+        assert(ex.superFamilyId == xi.mobSuperFamily.GOBLIN)
         assert(ex.poolId == xi.mobPool.BUGBEAR_MATMAN)
         assert(ex.level == 12)
         assert(ex.feralSkill == xi.pankration.feralSkill.MAIN_JOB_WARRIOR)

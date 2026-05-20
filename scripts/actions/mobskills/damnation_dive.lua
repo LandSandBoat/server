@@ -14,7 +14,7 @@ local mobskillObject = {}
 -----------------------------------
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if
-        mob:getFamily() == xi.mobFamily.GHRAH and -- TODO: Split this off into its own mobskill script.
+        mob:getSuperFamily() == xi.mobSuperFamily.GHRAH and -- TODO: Split this off into its own mobskill script.
         mob:getAnimationSub() ~= 3
     then
         return 1

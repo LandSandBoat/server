@@ -1,13 +1,11 @@
 -----------------------------------
 -- Bone Crusher
--- Description: Delivers a threefold attack. Additional Effect: Stun.
 -----------------------------------
 ---@type TAbilityAutomaton
 local abilityObject = {}
 
 abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
     local master = automaton:getMaster()
-
     if not master then
         return
     end
@@ -16,48 +14,40 @@ abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
 end
 
 abilityObject.onAutomatonAbility = function(target, automaton, skill, master, action)
-    local params = {}
-
-    params.baseDamage     = automaton:getWeaponDmg()
-    params.numHits        = 3
-    params.fTP            = { 1.5, 1.5, 1.5 }
-    params.vit_wSC        = 0.60
-    params.attackType     = xi.attackType.PHYSICAL
-    params.damageType     = xi.damageType.BLUNT
-    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3
+    local params =
+    {
+        numHits = 3,
+        atkmulti = 1,
+        weaponType = xi.skill.CLUB,
+        ftpMod = { 1.5, 1.5, 1.5 },
+        vit_wsc = 0.6,
+    }
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.fTP = { 2.66, 2.66, 2.66 }
+        params.ftpMod = { 2.66, 2.66, 2.66 }
 
         if target:isUndead() then
-            params.fTP = { 3.66, 3.66, 3.66 }
+            params.ftpMod = { 3.66, 3.66, 3.66 }
         end
     else
         if target:isUndead() then
-            params.fTP = { 2.5, 2.5, 2.5 }
+            params.ftpMod = { 2.0, 2.0, 2.0 }
         end
     end
 
-    -- Flame Holder Adjustment
-    local flameHolderfTP = automaton:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE) / 100
-    if flameHolderfTP > 0 then
-        params.fTP =
-        {
-            params.fTP[1] * flameHolderfTP,
-            params.fTP[2] * flameHolderfTP,
-            params.fTP[3] * flameHolderfTP,
-        }
+    local damage = xi.autows.doAutoPhysicalWeaponskill(automaton, target, 0, skill:getTP(), true, action, false, params, skill)
+
+    if damage > 0 then
+        local chance = 0.033 * skill:getTP()
+        if
+            not target:hasStatusEffect(xi.effect.STUN) and
+            chance >= math.random() * 100
+        then
+            target:addStatusEffect(xi.effect.STUN, { power = 1, duration = 4, origin = automaton })
+        end
     end
 
-    local info = xi.mobskills.mobPhysicalMove(automaton, target, skill, action, params)
-
-    if xi.mobskills.processDamage(automaton, target, skill, action, info) then
-        target:takeDamage(info.damage, automaton, info.attackType, info.damageType)
-
-        xi.mobskills.mobStatusEffectMove(automaton, target, xi.effect.STUN, 1, 0, 4)
-    end
-
-    return info.damage
+    return damage
 end
 
 return abilityObject

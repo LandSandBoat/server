@@ -14,7 +14,7 @@ xi.znm = xi.znm or {}
 xi.znm.SOULTRAPPER_SUCCESS     = 70   -- Base success rate (%)
 xi.znm.SOULPLATE_HPP_MULT      = 1.5  -- Zeni multiplier for low hp %
 xi.znm.SOULPLATE_ECOSYSTEM     = 25   -- Sanraku subject of interest ecosystem bonus
-xi.znm.SOULPLATE_INTEREST      = 40   -- Sanraku subject of interest family bonus
+xi.znm.SOULPLATE_INTEREST      = 40   -- Sanraku subject of interest superFamily bonus
 xi.znm.SOULPLATE_FAUNA         = 50   -- Sanraku recommended fauna bonus
 xi.znm.SOULPLATE_NM_MULT       = 1.5  -- Generic NM multiplier
 xi.znm.SOULPLATE_HNM_MULT      = 1.75 -- HNM multiplier
@@ -46,69 +46,69 @@ xi.znm.ZNM_POP_COSTS =
 --- 61 "Subjects of Interest", 54 "Recommended Fauna"
 -----------------------------------
 xi.znm.SANRAKUS_INTEREST =
-{ -- [interest ID] = {family ID, ecoSystem, optional Name},
-  -- TODO: Verify family IDs. Note: "ecoSystem" is the family IDs of secondary interest targets.
-    [1]  = { family = 113, ecoSystem = { 48, 108, 113, 124, 130, 142, 160, 169, 170 } },                                       -- Pugil, Aquans
-    [2]  = { family = 130, ecoSystem = { 48, 108, 113, 124, 130, 142, 160, 169, 170 } },                                       -- Sea Monk
-    [3]  = { family = 108, ecoSystem = { 48, 108, 113, 124, 130, 142, 160, 169, 170 } },                                       -- Verified Orobon
-    [4]  = { family = 148, ecoSystem = { 42, 65, 82, 95, 127, 132, 148, 161 } },                                               -- Worm, Amorph
-    [5]  = { family = 95, ecoSystem = { 42, 65, 82, 95, 127, 132, 148, 161 } },                                                -- Leech, Amorph
-    [6]  = { family = 42, ecoSystem = { 42, 65, 82, 95, 127, 132, 148, 161 } },                                                -- Slime, Amorph
-    [7]  = { family = 65, ecoSystem = { 42, 65, 82, 95, 127, 132, 148, 161 } },                                                -- Flan, Amorph
-    [8]  = { family = 32, ecoSystem = { 1, 6, 29, 32, 37, 53, 79, 91, 97, 102, 134, 159, 164, 168, 183, 194, } },              -- Bomb, Arcana
-    [9]  = { family = 194, ecoSystem = { 1, 6, 29, 32, 37, 53, 79, 91, 97, 102, 134, 159, 164, 168, 183, 194, } },             -- Cluster Bomb, Arcana
-    [10] = { family = 28, ecoSystem = { 28, 46, 47, 54, 56, 68, 84, 86, 91, 109, 118, 143, 154, 167, 186 } },                  -- Ghost, Undead
-    [11] = { family = 91, ecoSystem = { 28, 46, 47, 54, 56, 68, 84, 86, 91, 109, 118, 143, 154, 167, 186 } },                  -- Skeleton, Undead
-    [12] = { family = 54, ecoSystem = { 28, 46, 47, 54, 56, 68, 84, 86, 91, 109, 118, 143, 154, 167, 186 } },                  -- Doomed, Undead
-    [13] = { family = 40, ecoSystem = { 9, 26, 27, 40, 52, 63, 66, 75, 93, 129, 135, 144, 155, 156, 157, 173, 196 } },         -- Chigoe, Vermin
-    [14] = { family = 135, ecoSystem = { 9, 26, 27, 40, 52, 63, 66, 75, 93, 129, 135, 144, 155, 156, 157, 173, 196 } },        -- Spider, Vermin
-    [15] = { family = 26, ecoSystem = { 9, 26, 27, 40, 52, 63, 66, 75, 93, 129, 135, 144, 155, 156, 157, 173, 196 } },         -- Verified Bee, Vermin
-    [16] = { family = 63, ecoSystem = { 9, 26, 27, 40, 52, 63, 66, 75, 93, 129, 135, 144, 155, 156, 157, 173, 196 } },         -- Verified Crawler, Vermin
-    [17] = { family = 196, ecoSystem = { 9, 26, 27, 40, 52, 63, 66, 75, 93, 129, 135, 144, 155, 156, 157, 173, 196 } },        -- Wamoura Larvae, Vermin
-    [18] = { family = 66, ecoSystem = { 9, 26, 27, 40, 52, 63, 66, 75, 93, 129, 135, 144, 155, 156, 157, 173, 196 } },         -- Fly, Vermin
-    [19] = { family = 52, ecoSystem = { 9, 26, 27, 40, 52, 63, 66, 75, 93, 129, 135, 144, 155, 156, 157, 173, 196 } },         -- Verified Diremite, Vermin
-    [20] = { family = 129, ecoSystem = { 9, 26, 27, 40, 52, 63, 66, 75, 93, 129, 135, 144, 155, 156, 157, 173, 196 } },        -- Scorpion, Vermin
-    [21] = { family = 144, ecoSystem = { 9, 26, 27, 40, 52, 63, 66, 75, 93, 129, 135, 144, 155, 156, 157, 173, 196 } },        -- Wamoura, Vermin
-    [22] = { family = 89, ecoSystem = { 4, 57, 58, 70, 78, 89, 92, 133, 135, 182, 189, 190 } },                                -- Imp, Demon
-    [23] = { family = 114, ecoSystem = { 55, 78, 88, 109, 114, 149, 184, 192 } },                                              -- Puk, Dragon
-    [24] = { family = 109, ecoSystem = { 55, 78, 88, 109, 114, 149, 184, 192 } },                                              -- Wyvern, Dragon
-    [25] = { family = 55, ecoSystem = { 55, 78, 88, 109, 114, 149, 184, 192 } },                                               -- Dragon, Dragon
-    [26] = { family = 25, ecoSystem = { 6, 10, 25, 31, 43, 45, 73, 83, 171, 177, 185, 197 } },                                 -- Bat, Bird
-    [27] = { family = 197, ecoSystem = { 6, 10, 25, 31, 43, 45, 73, 83, 171, 177, 185, 197 } },                                -- Bat Trio, Bird
-    [28] = { family = 45, ecoSystem = { 6, 10, 25, 31, 43, 45, 73, 83, 171, 177, 185, 197 } },                                 -- Colibri, Bird
-    [29] = { family = 31, ecoSystem = { 6, 10, 25, 31, 43, 45, 73, 83, 171, 177, 185, 197 } },                                 -- Bird, Bird
-    [30] = { family = 10, ecoSystem = { 6, 10, 25, 31, 43, 45, 73, 83, 171, 177, 185, 197 } },                                 -- Apkallu, Bird
-    [31] = { family = 43, ecoSystem = { 6, 10, 25, 31, 43, 45, 73, 83, 171, 177, 185, 197 } },                                 -- Cockatrice, Bird
-    [32] = { family = 90, ecoSystem = { 27, 28, 33, 38, 44, 51, 90, 100, 101, 106, 119, 121, 137, 174, 175, 176 } },           -- Sheep, Beast
-    [33] = { family = 137, ecoSystem = { 27, 28, 33, 38, 44, 51, 90, 100, 101, 106, 119, 121, 137, 174, 175, 176 } },          -- Tiger, Beast
-    [34] = { family = 101, ecoSystem = { 27, 28, 33, 38, 44, 51, 90, 100, 101, 106, 119, 121, 137, 174, 175, 176 } },          -- Marid, Beast
-    [35] = { family = 121, ecoSystem = { 27, 28, 33, 38, 44, 51, 90, 100, 101, 106, 119, 121, 137, 174, 175, 176 } },          -- Ram, Beast
-    [36] = { family = 128, ecoSystem = { 67, 69, 80, 99, 104, 120, 125, 128, 139, 172, 179, 180, 181 } },                      -- Verified Sapling, Plantoid
-    [37] = { family = 67, ecoSystem = { 67, 69, 80, 99, 104, 120, 125, 128, 139, 172, 179, 180, 181 } },                       -- Flytrap, Plantoid
-    [38] = { family = 69, ecoSystem = { 67, 69, 80, 99, 104, 120, 125, 128, 139, 172, 179, 180, 181 } },                       -- Funguar, Plantoid
-    [39] = { family = 139, ecoSystem = { 67, 69, 80, 99, 104, 120, 125, 128, 139, 172, 179, 180, 181 } },                      -- Treant, Plantoid
-    [40] = { family = 104, ecoSystem = { 67, 69, 80, 99, 104, 120, 125, 128, 139, 172, 179, 180, 181 } },                      -- Verified Morbol, Plantoid
-    [41] = { family = 60, ecoSystem = { 2, 34, 60, 61, 109, 123, 147, 163, 178 } },                                            -- Lizard, Lizard
-    [42] = { family = 123, ecoSystem = { 2, 34, 60, 61, 109, 123, 147, 163, 178 } },                                           -- Raptor, Lizard
-    [43] = { family = 34, ecoSystem = { 2, 34, 60, 61, 109, 123, 147, 163, 178 } },                                            -- Bugard, Lizard
-    [44] = { family = 147, ecoSystem = { 2, 34, 60, 61, 109, 123, 147, 163, 178 } },                                           -- Verified Wivre, Lizard
-    [45] = { family = 62, ecoSystem = { 11, 62, 87 }, name = 'FireElemental' },                                                -- Fire Elemental, Elemental
-    [46] = { family = 62, ecoSystem = { 11, 62, 87 }, name = 'IceElemental' },                                                 -- Ice Elemental, Elemental
-    [47] = { family = 62, ecoSystem = { 11, 62, 87 }, name = 'AirElemental' },                                                 -- Air Elemental, Elemental
-    [48] = { family = 62, ecoSystem = { 11, 62, 87 }, name = 'EarthElemental' },                                               -- Earth Elemental, Elemental
-    [49] = { family = 62, ecoSystem = { 11, 62, 87 }, name = 'ThunderElement`' },                                              -- Thunder Elemental, Elemental
-    [50] = { family = 62, ecoSystem = { 11, 62, 87 }, name = 'WaterElemental' },                                               -- Water Elemental, Elemental
-    [51] = { family = 62, ecoSystem = { 11, 62, 87 }, name = 'DarkElemental' },                                                -- Verified Dark Elemental, Elemental
-    [52] = { family = 195, ecoSystem = { 8, 35, 74, 76, 77, 94, 98, 107, 112, 115, 116, 126, 138, 140, 151, 158, 193, 195 } }, -- Moblin, Beastman
-    [53] = { family = 112, ecoSystem = { 8, 35, 74, 76, 77, 94, 98, 107, 112, 115, 116, 126, 138, 140, 151, 158, 193, 195 } }, -- Poroggo, Beastmen
-    [54] = { family = 126, ecoSystem = { 8, 35, 74, 76, 77, 94, 98, 107, 112, 115, 116, 126, 138, 140, 151, 158, 193, 195 } }, -- Sahagin, Beastmen
-    [55] = { family = 98, ecoSystem = { 8, 35, 74, 76, 77, 94, 98, 107, 112, 115, 116, 126, 138, 140, 151, 158, 193, 195 } },  -- Mamool Ja, Beastmen
-    [56] = { family = 94, ecoSystem = { 8, 35, 74, 76, 77, 94, 98, 107, 112, 115, 116, 126, 138, 140, 151, 158, 193, 195 } },  -- Lamiae, Beastmen
-    [57] = { family = 193, ecoSystem = { 8, 35, 74, 76, 77, 94, 98, 107, 112, 115, 116, 126, 138, 140, 151, 158, 193, 195 } }, -- Merrow, Beastmen
-    [58] = { family = 115, ecoSystem = { 8, 35, 74, 76, 77, 94, 98, 107, 112, 115, 116, 126, 138, 140, 151, 158, 193, 195 } }, -- Qiqirn, beastmen
-    [59] = { family = 140, ecoSystem = { 8, 35, 74, 76, 77, 94, 98, 107, 112, 115, 116, 126, 138, 140, 151, 158, 193, 195 } }, -- Verified Troll, Beastmen
-    [60] = { family = 118, ecoSystem = { 28, 46, 47, 54, 56, 68, 84, 86, 91, 109, 118, 143, 154, 167, 186 } },                 -- Qutrub, Undead
-    [61] = { family = 133, ecoSystem = { 4, 57, 58, 70, 78, 89, 92, 133, 135, 182, 189, 190 } },                               -- Soulflayer, Demon
+{ -- [interest ID] = {superFamily ID, ecoSystem, optional Name},
+  -- TODO: Verify superFamily IDs. Note: "ecoSystem" is the superFamily IDs of secondary interest targets.
+    [1]  = { superFamily = 113, ecoSystem = { 48, 108, 113, 124, 130, 142, 160, 169, 170 } },                                       -- Pugil, Aquans
+    [2]  = { superFamily = 130, ecoSystem = { 48, 108, 113, 124, 130, 142, 160, 169, 170 } },                                       -- Sea Monk
+    [3]  = { superFamily = 108, ecoSystem = { 48, 108, 113, 124, 130, 142, 160, 169, 170 } },                                       -- Verified Orobon
+    [4]  = { superFamily = 148, ecoSystem = { 42, 65, 82, 95, 127, 132, 148, 161 } },                                               -- Worm, Amorph
+    [5]  = { superFamily = 95, ecoSystem = { 42, 65, 82, 95, 127, 132, 148, 161 } },                                                -- Leech, Amorph
+    [6]  = { superFamily = 42, ecoSystem = { 42, 65, 82, 95, 127, 132, 148, 161 } },                                                -- Slime, Amorph
+    [7]  = { superFamily = 65, ecoSystem = { 42, 65, 82, 95, 127, 132, 148, 161 } },                                                -- Flan, Amorph
+    [8]  = { superFamily = 32, ecoSystem = { 1, 6, 29, 32, 37, 53, 79, 91, 97, 102, 134, 159, 164, 168, 183, 194, } },              -- Bomb, Arcana
+    [9]  = { superFamily = 194, ecoSystem = { 1, 6, 29, 32, 37, 53, 79, 91, 97, 102, 134, 159, 164, 168, 183, 194, } },             -- Cluster Bomb, Arcana
+    [10] = { superFamily = 28, ecoSystem = { 28, 46, 47, 54, 56, 68, 84, 86, 91, 109, 118, 143, 154, 167, 186 } },                  -- Ghost, Undead
+    [11] = { superFamily = 91, ecoSystem = { 28, 46, 47, 54, 56, 68, 84, 86, 91, 109, 118, 143, 154, 167, 186 } },                  -- Skeleton, Undead
+    [12] = { superFamily = 54, ecoSystem = { 28, 46, 47, 54, 56, 68, 84, 86, 91, 109, 118, 143, 154, 167, 186 } },                  -- Doomed, Undead
+    [13] = { superFamily = 40, ecoSystem = { 9, 26, 27, 40, 52, 63, 66, 75, 93, 129, 135, 144, 155, 156, 157, 173, 196 } },         -- Chigoe, Vermin
+    [14] = { superFamily = 135, ecoSystem = { 9, 26, 27, 40, 52, 63, 66, 75, 93, 129, 135, 144, 155, 156, 157, 173, 196 } },        -- Spider, Vermin
+    [15] = { superFamily = 26, ecoSystem = { 9, 26, 27, 40, 52, 63, 66, 75, 93, 129, 135, 144, 155, 156, 157, 173, 196 } },         -- Verified Bee, Vermin
+    [16] = { superFamily = 63, ecoSystem = { 9, 26, 27, 40, 52, 63, 66, 75, 93, 129, 135, 144, 155, 156, 157, 173, 196 } },         -- Verified Crawler, Vermin
+    [17] = { superFamily = 196, ecoSystem = { 9, 26, 27, 40, 52, 63, 66, 75, 93, 129, 135, 144, 155, 156, 157, 173, 196 } },        -- Wamoura Larvae, Vermin
+    [18] = { superFamily = 66, ecoSystem = { 9, 26, 27, 40, 52, 63, 66, 75, 93, 129, 135, 144, 155, 156, 157, 173, 196 } },         -- Fly, Vermin
+    [19] = { superFamily = 52, ecoSystem = { 9, 26, 27, 40, 52, 63, 66, 75, 93, 129, 135, 144, 155, 156, 157, 173, 196 } },         -- Verified Diremite, Vermin
+    [20] = { superFamily = 129, ecoSystem = { 9, 26, 27, 40, 52, 63, 66, 75, 93, 129, 135, 144, 155, 156, 157, 173, 196 } },        -- Scorpion, Vermin
+    [21] = { superFamily = 144, ecoSystem = { 9, 26, 27, 40, 52, 63, 66, 75, 93, 129, 135, 144, 155, 156, 157, 173, 196 } },        -- Wamoura, Vermin
+    [22] = { superFamily = 89, ecoSystem = { 4, 57, 58, 70, 78, 89, 92, 133, 135, 182, 189, 190 } },                                -- Imp, Demon
+    [23] = { superFamily = 114, ecoSystem = { 55, 78, 88, 109, 114, 149, 184, 192 } },                                              -- Puk, Dragon
+    [24] = { superFamily = 109, ecoSystem = { 55, 78, 88, 109, 114, 149, 184, 192 } },                                              -- Wyvern, Dragon
+    [25] = { superFamily = 55, ecoSystem = { 55, 78, 88, 109, 114, 149, 184, 192 } },                                               -- Dragon, Dragon
+    [26] = { superFamily = 25, ecoSystem = { 6, 10, 25, 31, 43, 45, 73, 83, 171, 177, 185, 197 } },                                 -- Bat, Bird
+    [27] = { superFamily = 197, ecoSystem = { 6, 10, 25, 31, 43, 45, 73, 83, 171, 177, 185, 197 } },                                -- Bat Trio, Bird
+    [28] = { superFamily = 45, ecoSystem = { 6, 10, 25, 31, 43, 45, 73, 83, 171, 177, 185, 197 } },                                 -- Colibri, Bird
+    [29] = { superFamily = 31, ecoSystem = { 6, 10, 25, 31, 43, 45, 73, 83, 171, 177, 185, 197 } },                                 -- Bird, Bird
+    [30] = { superFamily = 10, ecoSystem = { 6, 10, 25, 31, 43, 45, 73, 83, 171, 177, 185, 197 } },                                 -- Apkallu, Bird
+    [31] = { superFamily = 43, ecoSystem = { 6, 10, 25, 31, 43, 45, 73, 83, 171, 177, 185, 197 } },                                 -- Cockatrice, Bird
+    [32] = { superFamily = 90, ecoSystem = { 27, 28, 33, 38, 44, 51, 90, 100, 101, 106, 119, 121, 137, 174, 175, 176 } },           -- Sheep, Beast
+    [33] = { superFamily = 137, ecoSystem = { 27, 28, 33, 38, 44, 51, 90, 100, 101, 106, 119, 121, 137, 174, 175, 176 } },          -- Tiger, Beast
+    [34] = { superFamily = 101, ecoSystem = { 27, 28, 33, 38, 44, 51, 90, 100, 101, 106, 119, 121, 137, 174, 175, 176 } },          -- Marid, Beast
+    [35] = { superFamily = 121, ecoSystem = { 27, 28, 33, 38, 44, 51, 90, 100, 101, 106, 119, 121, 137, 174, 175, 176 } },          -- Ram, Beast
+    [36] = { superFamily = 128, ecoSystem = { 67, 69, 80, 99, 104, 120, 125, 128, 139, 172, 179, 180, 181 } },                      -- Verified Sapling, Plantoid
+    [37] = { superFamily = 67, ecoSystem = { 67, 69, 80, 99, 104, 120, 125, 128, 139, 172, 179, 180, 181 } },                       -- Flytrap, Plantoid
+    [38] = { superFamily = 69, ecoSystem = { 67, 69, 80, 99, 104, 120, 125, 128, 139, 172, 179, 180, 181 } },                       -- Funguar, Plantoid
+    [39] = { superFamily = 139, ecoSystem = { 67, 69, 80, 99, 104, 120, 125, 128, 139, 172, 179, 180, 181 } },                      -- Treant, Plantoid
+    [40] = { superFamily = 104, ecoSystem = { 67, 69, 80, 99, 104, 120, 125, 128, 139, 172, 179, 180, 181 } },                      -- Verified Morbol, Plantoid
+    [41] = { superFamily = 60, ecoSystem = { 2, 34, 60, 61, 109, 123, 147, 163, 178 } },                                            -- Lizard, Lizard
+    [42] = { superFamily = 123, ecoSystem = { 2, 34, 60, 61, 109, 123, 147, 163, 178 } },                                           -- Raptor, Lizard
+    [43] = { superFamily = 34, ecoSystem = { 2, 34, 60, 61, 109, 123, 147, 163, 178 } },                                            -- Bugard, Lizard
+    [44] = { superFamily = 147, ecoSystem = { 2, 34, 60, 61, 109, 123, 147, 163, 178 } },                                           -- Verified Wivre, Lizard
+    [45] = { superFamily = 62, ecoSystem = { 11, 62, 87 }, name = 'FireElemental' },                                                -- Fire Elemental, Elemental
+    [46] = { superFamily = 62, ecoSystem = { 11, 62, 87 }, name = 'IceElemental' },                                                 -- Ice Elemental, Elemental
+    [47] = { superFamily = 62, ecoSystem = { 11, 62, 87 }, name = 'AirElemental' },                                                 -- Air Elemental, Elemental
+    [48] = { superFamily = 62, ecoSystem = { 11, 62, 87 }, name = 'EarthElemental' },                                               -- Earth Elemental, Elemental
+    [49] = { superFamily = 62, ecoSystem = { 11, 62, 87 }, name = 'ThunderElement`' },                                              -- Thunder Elemental, Elemental
+    [50] = { superFamily = 62, ecoSystem = { 11, 62, 87 }, name = 'WaterElemental' },                                               -- Water Elemental, Elemental
+    [51] = { superFamily = 62, ecoSystem = { 11, 62, 87 }, name = 'DarkElemental' },                                                -- Verified Dark Elemental, Elemental
+    [52] = { superFamily = 195, ecoSystem = { 8, 35, 74, 76, 77, 94, 98, 107, 112, 115, 116, 126, 138, 140, 151, 158, 193, 195 } }, -- Moblin, Beastman
+    [53] = { superFamily = 112, ecoSystem = { 8, 35, 74, 76, 77, 94, 98, 107, 112, 115, 116, 126, 138, 140, 151, 158, 193, 195 } }, -- Poroggo, Beastmen
+    [54] = { superFamily = 126, ecoSystem = { 8, 35, 74, 76, 77, 94, 98, 107, 112, 115, 116, 126, 138, 140, 151, 158, 193, 195 } }, -- Sahagin, Beastmen
+    [55] = { superFamily = 98, ecoSystem = { 8, 35, 74, 76, 77, 94, 98, 107, 112, 115, 116, 126, 138, 140, 151, 158, 193, 195 } },  -- Mamool Ja, Beastmen
+    [56] = { superFamily = 94, ecoSystem = { 8, 35, 74, 76, 77, 94, 98, 107, 112, 115, 116, 126, 138, 140, 151, 158, 193, 195 } },  -- Lamiae, Beastmen
+    [57] = { superFamily = 193, ecoSystem = { 8, 35, 74, 76, 77, 94, 98, 107, 112, 115, 116, 126, 138, 140, 151, 158, 193, 195 } }, -- Merrow, Beastmen
+    [58] = { superFamily = 115, ecoSystem = { 8, 35, 74, 76, 77, 94, 98, 107, 112, 115, 116, 126, 138, 140, 151, 158, 193, 195 } }, -- Qiqirn, beastmen
+    [59] = { superFamily = 140, ecoSystem = { 8, 35, 74, 76, 77, 94, 98, 107, 112, 115, 116, 126, 138, 140, 151, 158, 193, 195 } }, -- Verified Troll, Beastmen
+    [60] = { superFamily = 118, ecoSystem = { 28, 46, 47, 54, 56, 68, 84, 86, 91, 109, 118, 143, 154, 167, 186 } },                 -- Qutrub, Undead
+    [61] = { superFamily = 133, ecoSystem = { 4, 57, 58, 70, 78, 89, 92, 133, 135, 182, 189, 190 } },                               -- Soulflayer, Demon
 }
 
 xi.znm.SANRAKUS_FAUNA =

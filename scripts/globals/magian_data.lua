@@ -224,9 +224,9 @@ xi.magian.trials =
             itemId = xi.item.ATHAME,
         },
 
-        textOffset  = 69,
-        mobFamily   = set{ xi.mobFamily.HIPPOGRYPH },
-        numRequired = 300,
+        textOffset     = 69,
+        mobSuperFamily = set{ xi.mobSuperFamily.HIPPOGRYPH },
+        numRequired    = 300,
 
         rewardItem =
         {
@@ -375,7 +375,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.SIMIAN_FISTS,
+            itemId = xi.item.SIMIAN_FISTS,
             itemAugments =
             {
                 [1] = { 25, 4 }, -- Attack+5
@@ -417,7 +417,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.MANTIS,
+            itemId = xi.item.MANTIS,
             itemAugments =
             {
                 [1] = { 25, 2 }, -- Attack+3
@@ -442,7 +442,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.MANTIS,
+            itemId = xi.item.MANTIS,
             itemAugments =
             {
                 [1] = { 25, 4 }, -- Attack+5
@@ -492,7 +492,7 @@ xi.magian.trials =
 
         rewardItem =
         {
-            itemId       = xi.item.MANTIS,
+            itemId = xi.item.MANTIS,
             itemAugments =
             {
                 [1] = { 45, 6 }, -- DMG:+7
@@ -508,11 +508,11 @@ xi.magian.trials =
             itemId = xi.item.PUGILISTS,
         },
 
-        textOffset  = 99,
-        dayWeather  = xi.magianElement.ANY,
-        defeatMob   = true,
-        mobFamily   = set{ xi.mobFamily.SKELETON },
-        numRequired = 50,
+        textOffset     = 99,
+        dayWeather     = xi.magianElement.ANY,
+        defeatMob      = true,
+        mobSuperFamily = set{ xi.mobSuperFamily.SKELETON },
+        numRequired    = 50,
 
         rewardItem =
         {

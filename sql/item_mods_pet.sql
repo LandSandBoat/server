@@ -128,7 +128,7 @@ INSERT INTO `item_mods_pet` VALUES (11297,5,24,7); -- Stormwaker - MP: 24
 INSERT INTO `item_mods_pet` VALUES (11298,25,10,3); -- Automaton - ACC: 10
 
 -- Pantin Tobe +1
-INSERT INTO `item_mods_pet` VALUES (11299,25,12,3); -- Automaton - ACC: 12
+INSERT INTO `item_mods_pet` VALUES (11299,25,10,3); -- Automaton - ACC: 10
 
 -- Aegas Doublet
 INSERT INTO `item_mods_pet` VALUES (11338,25,3,0);  -- All Pets - ACC: 3

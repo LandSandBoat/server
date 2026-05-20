@@ -28,9 +28,9 @@ g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
 
     local familyCurrency =
     {
-        [xi.mobFamily.ORC   ] = xi.item.ORDELLE_BRONZEPIECE, -- Orc
-        [xi.mobFamily.QUADAV] = xi.item.ONE_BYNE_BILL,       -- Quadav
-        [xi.mobFamily.YAGUDO] = xi.item.TUKUKU_WHITESHELL,   -- Yagudo
+        [xi.mobSuperFamily.ORC   ] = xi.item.ORDELLE_BRONZEPIECE, -- Orc
+        [xi.mobSuperFamily.QUADAV] = xi.item.ONE_BYNE_BILL,       -- Quadav
+        [xi.mobSuperFamily.YAGUDO] = xi.item.TUKUKU_WHITESHELL,   -- Yagudo
     }
 
     -- With Treasure Hunter on every procced monster, you can expect approximately 1.7 coins per kill on average.
@@ -81,7 +81,7 @@ g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
         end
 
         local th            = thCurrency[math.min(mob:getTHlevel(), 4)]
-        local currency      = familyCurrency[mob:getFamily()] or xi.item.TUKUKU_WHITESHELL + math.random(0, 2) * 3
+        local currency      = familyCurrency[mob:getSuperFamily()] or xi.item.TUKUKU_WHITESHELL + math.random(0, 2) * 3
         local singleChance  = mob:getMainLvl() > 90 and math.floor(th.single * 1.5) or th.single
         local hundredChance = th.hundred
 

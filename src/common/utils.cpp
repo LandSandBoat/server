@@ -649,7 +649,7 @@ void PackSoultrapperName(std::string name, uint8* output)
 // Based on client logic for rendering plates names.
 auto UnpackSoultrapperName(const uint8* input) -> std::string
 {
-    constexpr uint8 bufSize = 14; // Retail is 18, but they never use the whole thing. Last 4 bytes repurposed as ZoneId/FamilyID in LSB.
+    constexpr uint8 bufSize = 14; // Retail is 18, but they never use the whole thing. Last 4 bytes repurposed as ZoneId/SuperFamilyId in LSB.
     std::string     output;
     uint8           bitsLeft = 0;
     uint8           byte     = 0;

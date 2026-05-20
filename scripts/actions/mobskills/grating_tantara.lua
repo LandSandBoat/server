@@ -12,7 +12,7 @@ local mobskillObject = {}
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if
         mob:getAnimationSub() == 5 and
-        mob:getFamily() == xi.mobFamily.IMP
+        mob:getSuperFamily() == xi.mobSuperFamily.IMP
     then -- Imps without horn
         return 1
     else

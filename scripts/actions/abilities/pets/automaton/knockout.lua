@@ -10,7 +10,6 @@ local abilityObject = {}
 
 abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
     local master = automaton:getMaster()
-
     if not master then
         return
     end
@@ -19,41 +18,30 @@ abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
 end
 
 abilityObject.onAutomatonAbility = function(target, automaton, skill, master, action)
-    local params = {}
-
-    params.numHits          = 1
-    params.fTP              = { 4.0, 4.5, 5.0 }
-    params.agi_wSC          = 0.85
-    params.accuracyModifier = { 50, 50, 50 }
-    params.attackType       = xi.attackType.PHYSICAL
-    params.damageType       = xi.damageType.BLUNT
-    params.shadowBehavior   = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    local params      = {}
+    params.numHits    = 1
+    params.weaponType = xi.skill.CLUB
+    params.ftpMod     = { 4.0, 4.5, 5.0 }
+    params.agi_wsc    = 0.85
+    params.accBonus   = 50
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.agi_wSC = 1.0
-        params.fTP     = { 6.0, 8.5, 11.0 }
+        params.agi_wsc = 1.0
+        params.ftpMod = { 6.0, 8.5, 11.0 }
     end
 
-    -- Flame Holder Adjustment
-    local flameHolderfTP = automaton:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE) / 100
-    if flameHolderfTP > 0 then
-        params.fTP =
-        {
-            params.fTP[1] * flameHolderfTP,
-            params.fTP[2] * flameHolderfTP,
-            params.fTP[3] * flameHolderfTP,
-        }
-    end
+    local damage = xi.autows.doAutoPhysicalWeaponskill(automaton, target, 0, skill:getTP(), true, action, false, params, skill)
 
-    local info = xi.mobskills.mobPhysicalMove(automaton, target, skill, action, params)
+    -- Handle status effect
+    local effectId      = xi.effect.EVASION_DOWN
+    local actionElement = xi.element.WIND
+    local skillType     = xi.skill.AUTOMATON_MELEE
+    local power         = 20
+    local resist        = xi.combat.magicHitRate.calculateResistRate(automaton, target, 0, skillType, 0, actionElement, 0, effectId, 0)
+    local duration      = math.floor(30 * resist)
+    xi.weaponskills.handleWeaponskillEffect(automaton, target, effectId, actionElement, damage, power, duration)
 
-    if xi.mobskills.processDamage(automaton, target, skill, action, info) then
-        target:takeDamage(info.damage, automaton, info.attackType, info.damageType)
-
-        xi.mobskills.mobStatusEffectMove(automaton, target, xi.effect.EVASION_DOWN, 20, 0, 30)
-    end
-
-    return info.damage
+    return damage
 end
 
 return abilityObject

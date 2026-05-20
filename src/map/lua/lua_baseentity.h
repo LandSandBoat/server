@@ -845,7 +845,7 @@ public:
     // Mob Entity-Specific
     void   setMobLevel(uint8 level, sol::optional<bool> recover);
     uint8  getEcosystem();
-    uint16 getFamily();
+    uint16 getSuperFamily();
     uint16 getSpecies();
     auto   isMobType(uint8 mobType) const -> bool; // True if mob is of type passed to function
     bool   isUndead();

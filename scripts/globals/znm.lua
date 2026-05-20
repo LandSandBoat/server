@@ -89,13 +89,13 @@ end
 
 -- Main interest objective
 
-xi.znm.isCurrentFamily = function(plateData)
-    local family          = plateData.familyId
+xi.znm.isCurrentSuperFamily = function(plateData)
+    local superFamily     = plateData.superFamilyId
     local currectInterest = xi.znm.getSanrakusInterest()
     local interestRow     = xi.znm.SANRAKUS_INTEREST[currectInterest]
 
-    if family == interestRow.family then
-        -- Handle elementals as all have same family
+    if superFamily == interestRow.superFamily then
+        -- Handle elementals as all have same superFamily
         if currectInterest >= 45 and currectInterest <= 51 then
             if plateData.signature ~= interestRow.name then
                 return false
@@ -110,11 +110,11 @@ end
 
 -- Secondary interest objective
 xi.znm.isCurrentEcosystem = function(plateData)
-    local family          = plateData.familyId
+    local superFamily     = plateData.superFamilyId
     local currectInterest = xi.znm.getSanrakusInterest()
     local interestRow     = xi.znm.SANRAKUS_INTEREST[currectInterest]
 
-    if utils.contains(family, interestRow.ecoSystem) then
+    if utils.contains(superFamily, interestRow.ecoSystem) then
         return true
     end
 
@@ -129,9 +129,9 @@ xi.znm.calculatePlateZeni = function(player, plateData)
     if xi.znm.isCurrentFauna(plateData) then
         zeni = zeni + xi.znm.SOULPLATE_FAUNA
         bonus = 'Fauna'
-    elseif xi.znm.isCurrentFamily(plateData) then
+    elseif xi.znm.isCurrentSuperFamily(plateData) then
         zeni = zeni + xi.znm.SOULPLATE_INTEREST
-        bonus = 'family'
+        bonus = 'superFamily'
     elseif xi.znm.isCurrentEcosystem(plateData) then
         zeni = zeni + xi.znm.SOULPLATE_ECOSYSTEM
         bonus = 'ecoSystem'
@@ -226,14 +226,14 @@ xi.znm.soultrapper.onItemUse = function(target, player, item)
         local plate = player:addItem({ id = xi.item.SOUL_PLATE, silent = true })
         if plate then
             plate:setExData({
-                signature   = target:getName(),
-                zoneId      = target:getZoneID(),
-                familyId    = target:getFamily(),
-                poolId      = target:getPool(),
-                level       = target:getMainLvl(),
-                quality     = quality,
-                feralSkill  = skillIndex,
-                feralPoints = skillEntry.fp,
+                signature     = target:getName(),
+                zoneId        = target:getZoneID(),
+                superFamilyId = target:getSuperFamily(),
+                poolId        = target:getPool(),
+                level         = target:getMainLvl(),
+                quality       = quality,
+                feralSkill    = skillIndex,
+                feralPoints   = skillEntry.fp,
             })
         end
 

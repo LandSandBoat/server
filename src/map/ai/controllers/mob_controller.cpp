@@ -255,7 +255,7 @@ void CMobController::TryLink()
             // Handle the case where a mob doesn't link with its own family but has a sublink
             // This is needed because the sublink will cause like family members to be in the same
             // party so that they are linked with sublinked families.
-            if (!PMob->ShouldForceLink() && !PMob->m_Link && PMob->m_Family == PPartyMember->m_Family)
+            if (!PMob->ShouldForceLink() && !PMob->m_Link && PMob->m_SuperFamily == PPartyMember->m_SuperFamily)
             {
                 continue;
             }
@@ -1470,7 +1470,7 @@ auto CMobController::CanAggroTarget(CBattleEntity* PTarget) const -> bool
         }
 
         // Do not aggro if a normal CoP Fomor and the player has low enough fomor hate
-        if (PMob->m_Family == 172 && !(PMob->m_Type & MOBTYPE_NOTORIOUS) &&
+        if (PMob->m_SuperFamily == 172 && !(PMob->m_Type & MOBTYPE_NOTORIOUS) &&
             (PMob->getZone() >= ZONE_LUFAISE_MEADOWS && PMob->getZone() <= ZONE_SACRARIUM) &&
             PTarget->objtype == TYPE_PC)
         {

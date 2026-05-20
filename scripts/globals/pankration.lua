@@ -7,75 +7,94 @@ xi = xi or {}
 xi.pankration = xi.pankration or {}
 
 -- https://www.bg-wiki.com/ffxi/Category:Pankration#Prohibited_Monsters
--- Uses xi.mobFamily IDs (checked against mob:getFamily())
--- This table looks unused but update with new families anyway.
+-- IDs from mob_family_system.sql
+-- We only store the family, not the ecosystem, so we have to lookup
+-- based on that
 xi.pankration.prohibitedFamilies =
 set{
     -- All Beastmen
-    xi.mobFamily.ANTICA,
-    xi.mobFamily.BUGBEAR,
-    xi.mobFamily.GIGAS,
-    xi.mobFamily.GOBLIN,
-    xi.mobFamily.LAMIAE,
-    xi.mobFamily.MAMOOL_JA,
-    xi.mobFamily.ORC,
-    xi.mobFamily.ORCISH_WARMACHINE,
-    xi.mobFamily.POROGGO,
-    xi.mobFamily.QIQIRN,
-    xi.mobFamily.QUADAV,
-    xi.mobFamily.SAHAGIN,
-    xi.mobFamily.TONBERRY,
-    xi.mobFamily.TROLL,
-    xi.mobFamily.YAGUDO,
+    25, -- Antica
+    59, -- Bugbear
+    126, -- Gigas
+    127,
+    128,
+    129,
+    130,
+    133, -- Goblin
+    171, -- Lamiae
+    176, -- Mamool Ja
+    177,
+    189, -- Orc
+    190, -- Orcish Warmachine
+    196, -- Poroggo
+    199, -- Qiqirn
+    200, -- Quadav
+    201,
+    202,
+    213, -- Sahagin
+    243, -- Tonberries
+    244,
+    246, -- Troll
+    270, -- Yagudo
 
     -- All Empty
-    xi.mobFamily.CRAVER,
-    xi.mobFamily.GORGER,
-    xi.mobFamily.RECEPTACLE,
-    xi.mobFamily.SEETHER,
-    xi.mobFamily.THINKER,
-    xi.mobFamily.WANDERER,
-    xi.mobFamily.WEEPER,
+    78, -- Craver
+    137, -- Gorgers
+    138,
+    181, -- Receptacle
+    220, -- Seether
+    241, -- Thinker
+    255, -- Wanderer
+    256, -- Weeper
 
     -- All Luminians
-    xi.mobFamily.AERN,
-    xi.mobFamily.EUVHI,
-    xi.mobFamily.HPEMDE,
-    xi.mobFamily.PHUABO,
-    xi.mobFamily.XZOMIT,
-    xi.mobFamily.YOVRA,
+    3, -- Aern
+    109, -- Euvhi
+    144, -- Hpemde
+    194, -- Phuabo
+    269, -- Xzomit
+    271, -- Yorva
 
     -- All Luminions
-    xi.mobFamily.GHRAH,
-    xi.mobFamily.ZDEI,
+    122, 123, 124, -- Ghrah
+    272, -- Zdei
 
     -- Avatar
-    xi.mobFamily.AVATAR,
+    34, -- Carbuncle
+    35, -- Diabolos
+    37, -- Garuda
+    38, -- Ifrit
+    40, -- Leviathan
+    43, -- Ramuh
+    44, -- Shiva
+    45, -- Titan
 
     -- Biotechnological Weapons
-    xi.mobFamily.OMEGA,
-    xi.mobFamily.ULTIMA,
+    54, -- Omega & Ultima
 
-    xi.mobFamily.ADAMANTOISE,
-    xi.mobFamily.AUTOMATON,
-    xi.mobFamily.BEHEMOTH,
-    xi.mobFamily.CARDIAN,
-    xi.mobFamily.CERBERUS,
+    2, -- Adamantoise
+    28, 29, -- Automations
+    30, 31,
+    51, -- Behemoth
+    61, -- Cardian
+    62, -- Cerberus
 
-    xi.mobFamily.DEMON,
-    xi.mobFamily.DVERGR,
+    -- Demon
+    -- Devrgr
 
-    xi.mobFamily.FOMOR,
-    xi.mobFamily.HIPPOGRYPH,
-    xi.mobFamily.HYDRA,
+    115, 359, 360, -- Fomor
+    140, 141, -- Hippogryph
+    163, 164, -- Hydra
 
-    -- xi.mobFamily.KHIMAIRA,
+    -- Khamaira
 
-    xi.mobFamily.WYVERN_PET,
-    xi.mobFamily.URAGNITE,
-    xi.mobFamily.VAMPYR,
+    193, -- Pet Wyvern
+    251, -- Uragnite
+    252, -- Vampyr
 
-    xi.mobFamily.WYRM,
+    259, 260, 261, -- Wyrms
+    262, 263, 264,
+    391, 392, 393,
 }
 
 xi.pankration.getRandomFeralSkill = function(mob)

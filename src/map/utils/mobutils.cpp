@@ -1157,11 +1157,11 @@ void SetupJob(CMobEntity* PMob)
             }
             break;
         case JOB_RNG:
-            if (PMob->m_Family == 57) // Gigas
+            if (PMob->m_SuperFamily == 57) // Gigas
             {
                 PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 658); // Catapult only used while at range
             }
-            else if (PMob->m_Family == 72) // Trolls
+            else if (PMob->m_SuperFamily == 72) // Trolls
             {
                 PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1747); // Zarraqa only used while at range
                 PMob->defaultMobMod(MOBMOD_STANDBACK_COOL, 0);
@@ -1169,19 +1169,19 @@ void SetupJob(CMobEntity* PMob)
                 PMob->defaultMobMod(MOBMOD_HP_STANDBACK, 70);
                 break;
             }
-            else if (PMob->m_Family == 131) // Aern
+            else if (PMob->m_SuperFamily == 131) // Aern
             {
                 PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1388);
             }
-            else if (PMob->m_Family == 67) // Quadav
+            else if (PMob->m_SuperFamily == 67) // Quadav
             {
                 PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1123); // Quadav
             }
-            else if (PMob->m_Family == 88) // Demon
+            else if (PMob->m_SuperFamily == 88) // Demon
             {
                 PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1152); // Hecatomb Wave
             }
-            else if (PMob->m_Family == 172) // Fomor Ranged use player ranged attack
+            else if (PMob->m_SuperFamily == 172) // Fomor Ranged use player ranged attack
             {
                 SetupRangedAttack(PMob);
             }
@@ -1196,25 +1196,25 @@ void SetupJob(CMobEntity* PMob)
             PMob->defaultMobMod(MOBMOD_HP_STANDBACK, 70);
             break;
         case JOB_NIN:
-            if (PMob->m_Family == 131) // Aern
+            if (PMob->m_SuperFamily == 131) // Aern
             {
                 PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1388);
                 PMob->defaultMobMod(MOBMOD_SPECIAL_COOL, 12);
             }
-            else if (PMob->m_Family == 67) // Quadav
+            else if (PMob->m_SuperFamily == 67) // Quadav
             {
                 PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1123); // Quadav
             }
-            else if (PMob->m_Family == 88) // Demon
+            else if (PMob->m_SuperFamily == 88) // Demon
             {
                 PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1152); // Hecatomb Wave
             }
-            else if (PMob->m_Family == 172) // Fomor Ranged use player ranged attack
+            else if (PMob->m_SuperFamily == 172) // Fomor Ranged use player ranged attack
             {
                 PMob->setMobMod(MOBMOD_DUAL_WIELD, 1);
                 SetupRangedAttack(PMob);
             }
-            else if (PMob->m_Family != 119) // exclude NIN Maat
+            else if (PMob->m_SuperFamily != 119) // exclude NIN Maat
             {
                 PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 272);
                 PMob->defaultMobMod(MOBMOD_SPECIAL_COOL, 12);
@@ -1725,14 +1725,14 @@ auto InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* instance) -> CMob
                                        "paralyze_res_rank, bind_res_rank, silence_res_rank, slow_res_rank, poison_res_rank, light_sleep_res_rank, dark_sleep_res_rank, blind_res_rank, "
                                        "Element, "
                                        "mob_pools.speciesid, name_prefix, entityFlags, animationsub, "
-                                       "(mob_species_system.HP / 100) AS hp_scale, (mob_species_system.MP / 100) AS mp_scale, hasSpellScript, spellList, "
+                                       "(mob_family_system.HP / 100) AS hp_scale, (mob_family_system.MP / 100) AS mp_scale, hasSpellScript, spellList, "
                                        "mob_groups.poolid, allegiance, namevis, aggro, "
-                                       "mob_pools.skill_list_id, mob_pools.true_detection, mob_species_system.detects, "
+                                       "mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, "
                                        "mob_pools.modelSize, mob_pools.modelHitboxSize "
                                        "FROM mob_groups INNER JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid "
                                        "INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
                                        "INNER JOIN mob_resistances ON mob_pools.resist_id = mob_resistances.resist_id "
-                                       "INNER JOIN mob_species_system ON mob_pools.speciesid = mob_species_system.speciesID "
+                                       "INNER JOIN mob_family_system ON mob_pools.speciesid = mob_family_system.speciesID "
                                        "WHERE mob_groups.groupid = ? AND mob_groups.zoneid = ?",
                                        groupid,
                                        zoneID);
@@ -1902,13 +1902,13 @@ auto InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZone
                                        "ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, "
                                        "water_res_rank, light_res_rank, dark_res_rank, Element, "
                                        "mob_pools.speciesid, name_prefix, entityFlags, animationsub, "
-                                       "(mob_species_system.HP / 100) AS hp_scale, (mob_species_system.MP / 100) AS mp_scale, hasSpellScript, spellList, "
+                                       "(mob_family_system.HP / 100) AS hp_scale, (mob_family_system.MP / 100) AS mp_scale, hasSpellScript, spellList, "
                                        "mob_groups.poolid, allegiance, namevis, aggro, "
                                        "mob_pools.modelSize, mob_pools.modelHitboxSize, "
-                                       "mob_pools.skill_list_id, mob_pools.true_detection, mob_species_system.detects "
+                                       "mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects "
                                        "FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
                                        "INNER JOIN mob_resistances ON mob_pools.resist_id = mob_resistances.resist_id "
-                                       "INNER JOIN mob_species_system ON mob_pools.speciesid = mob_species_system.speciesID "
+                                       "INNER JOIN mob_family_system ON mob_pools.speciesid = mob_family_system.speciesID "
                                        "WHERE mob_groups.groupid = ? AND mob_groups.zoneid = ?",
                                        groupid,
                                        groupZoneId);

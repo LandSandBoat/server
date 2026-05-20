@@ -30,7 +30,7 @@ struct SoulPlate
 {
     uint8_t  Signature[14]; // Retail: 18 bytes
     uint16_t ZoneId;        // Retail: does not exist
-    uint16_t FamilyId;      // Retail: does not exist
+    uint16_t SuperFamilyId; // Retail: does not exist
     uint16_t PoolId;        // Retail: Stores ID similar to pool IDs in LSB
     uint32_t Level : 7;
     uint32_t FeralSkill : 12;

@@ -144,7 +144,7 @@ xi.nyzul.removePathos = function(instance)
     if instance:getLocalVar('floorPathos') > 0 then
         for i = 1, #xi.nyzul.pathos do
             if utils.mask.getBit(instance:getLocalVar('floorPathos'), i) then
-                local removeMessage = xi.nyzul.pathos[i].textId
+                local removeMessage = xi.nyzul.pathos[i].ID
                 local chars         = instance:getChars()
 
                 for _, players in pairs(chars) do

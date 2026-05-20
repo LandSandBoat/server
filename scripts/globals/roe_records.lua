@@ -7470,7 +7470,7 @@ xi.roe.records =
     { -- Vanquish Rabbits (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.RABBIT }, mobXP = true, unityLeader = xi.unityLeader.PIEUJE },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.RABBIT }, mobXP = true, unityLeader = xi.unityLeader.PIEUJE },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -7518,7 +7518,7 @@ xi.roe.records =
     { -- Vanquish Bats (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.BAT }, mobXP = true, unityLeader = xi.unityLeader.PIEUJE },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.BAT }, mobXP = true, unityLeader = xi.unityLeader.PIEUJE },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -7557,7 +7557,7 @@ xi.roe.records =
     { -- Vanquish Treants (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.TREANT }, mobXP = true, unityLeader = xi.unityLeader.PIEUJE },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.TREANT }, mobXP = true, unityLeader = xi.unityLeader.PIEUJE },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -7606,7 +7606,7 @@ xi.roe.records =
       -- TODO: Does this include Clusters, Djinn, Snolls?
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.BOMB }, mobXP = true, unityLeader = xi.unityLeader.PIEUJE },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.BOMB }, mobXP = true, unityLeader = xi.unityLeader.PIEUJE },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -7654,7 +7654,7 @@ xi.roe.records =
     { -- Vanquish Worms (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.WORM }, mobXP = true, unityLeader = xi.unityLeader.AYAME },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.WORM }, mobXP = true, unityLeader = xi.unityLeader.AYAME },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -7703,7 +7703,7 @@ xi.roe.records =
       -- TODO: Does this include Ziz?
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.COCKATRICE }, mobXP = true, unityLeader = xi.unityLeader.AYAME },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.COCKATRICE }, mobXP = true, unityLeader = xi.unityLeader.AYAME },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -7743,7 +7743,7 @@ xi.roe.records =
       -- TODO: Does this include Ice Lizards?
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.LIZARD }, mobXP = true, unityLeader = xi.unityLeader.AYAME },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.LIZARD }, mobXP = true, unityLeader = xi.unityLeader.AYAME },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -7791,7 +7791,7 @@ xi.roe.records =
     { -- Vanquish Crabs (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.CRAB }, mobXP = true, unityLeader = xi.unityLeader.AYAME },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.CRAB }, mobXP = true, unityLeader = xi.unityLeader.AYAME },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -7839,7 +7839,7 @@ xi.roe.records =
     { -- Vanquish Sea Monks (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.SEA_MONK }, mobXP = true, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.SEA_MONK }, mobXP = true, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -7887,7 +7887,7 @@ xi.roe.records =
     { -- Vanquish Funguars (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.FUNGUAR }, mobXP = true, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.FUNGUAR }, mobXP = true, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -7926,7 +7926,7 @@ xi.roe.records =
     { -- Vanquish Flies (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.FLY }, mobXP = true, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.FLY }, mobXP = true, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -7974,7 +7974,7 @@ xi.roe.records =
     { -- Vanquish Raptors (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.RAPTOR }, mobXP = true, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.RAPTOR }, mobXP = true, unityLeader = xi.unityLeader.INVINCIBLE_SHIELD },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -8022,7 +8022,7 @@ xi.roe.records =
     { -- Vanquish Bees (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.BEE }, mobXP = true, unityLeader = xi.unityLeader.APURURU },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.BEE }, mobXP = true, unityLeader = xi.unityLeader.APURURU },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -8070,7 +8070,7 @@ xi.roe.records =
     { -- Vanquish Crawlers (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.CRAWLER }, mobXP = true, unityLeader = xi.unityLeader.APURURU },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.CRAWLER }, mobXP = true, unityLeader = xi.unityLeader.APURURU },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -8109,7 +8109,7 @@ xi.roe.records =
     { -- Vanquish Ghosts (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.GHOST }, mobXP = true, unityLeader = xi.unityLeader.APURURU },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.GHOST }, mobXP = true, unityLeader = xi.unityLeader.APURURU },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -8157,7 +8157,7 @@ xi.roe.records =
     { -- Vanquish Mandragoras (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.MANDRAGORA }, mobXP = true, unityLeader = xi.unityLeader.APURURU },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.MANDRAGORA }, mobXP = true, unityLeader = xi.unityLeader.APURURU },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -8205,7 +8205,7 @@ xi.roe.records =
     { -- Vanquish Leeches (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.LEECH }, mobXP = true, unityLeader = xi.unityLeader.MAAT },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.LEECH }, mobXP = true, unityLeader = xi.unityLeader.MAAT },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -8253,7 +8253,7 @@ xi.roe.records =
     { -- Vanquish Spiders (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.SPIDER }, mobXP = true, unityLeader = xi.unityLeader.MAAT },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.SPIDER }, mobXP = true, unityLeader = xi.unityLeader.MAAT },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -8292,7 +8292,7 @@ xi.roe.records =
     { -- Vanquish Wyverns (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.WYVERN }, mobXP = true, unityLeader = xi.unityLeader.MAAT },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.WYVERN }, mobXP = true, unityLeader = xi.unityLeader.MAAT },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -8340,7 +8340,7 @@ xi.roe.records =
     { -- Vanquish Hecteyes (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.HECTEYES }, mobXP = true, unityLeader = xi.unityLeader.MAAT },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.HECTEYES }, mobXP = true, unityLeader = xi.unityLeader.MAAT },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -8388,7 +8388,7 @@ xi.roe.records =
     { -- Vanquish Hounds (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.HOUND }, mobXP = true, unityLeader = xi.unityLeader.ALDO },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.HOUND }, mobXP = true, unityLeader = xi.unityLeader.ALDO },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -8436,7 +8436,7 @@ xi.roe.records =
     { -- Vanquish Dolls (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.DOLL }, mobXP = true, unityLeader = xi.unityLeader.ALDO },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.DOLL }, mobXP = true, unityLeader = xi.unityLeader.ALDO },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -8476,7 +8476,7 @@ xi.roe.records =
       -- TODO: Does this include clots?
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.SLIME }, mobXP = true, unityLeader = xi.unityLeader.ALDO },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.SLIME }, mobXP = true, unityLeader = xi.unityLeader.ALDO },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -8524,7 +8524,7 @@ xi.roe.records =
     { -- Vanquish Crow-Type Birds (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.BIRD }, mobXP = true, unityLeader = xi.unityLeader.ALDO },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.BIRD }, mobXP = true, unityLeader = xi.unityLeader.ALDO },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -8572,7 +8572,7 @@ xi.roe.records =
     { -- Vanquish Sheep (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.SHEEP }, mobXP = true, unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.SHEEP }, mobXP = true, unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -8620,7 +8620,7 @@ xi.roe.records =
     { -- Vanquish Scorpions (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.SCORPION }, mobXP = true, unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.SCORPION }, mobXP = true, unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -8659,7 +8659,7 @@ xi.roe.records =
     { -- Vanquish Opo-Opos (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.OPO_OPO }, mobXP = true, unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.OPO_OPO }, mobXP = true, unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -8707,7 +8707,7 @@ xi.roe.records =
     { -- Vanquish Tigers (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.TIGER }, mobXP = true, unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.TIGER }, mobXP = true, unityLeader = xi.unityLeader.JAKOH_WAHCONDALO },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -8755,7 +8755,7 @@ xi.roe.records =
     { -- Vanquish Evil Weapons (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.EVIL_WEAPON }, mobXP = true, unityLeader = xi.unityLeader.NAJA_SALAHEEM },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.EVIL_WEAPON }, mobXP = true, unityLeader = xi.unityLeader.NAJA_SALAHEEM },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -8803,7 +8803,7 @@ xi.roe.records =
     { -- Vanquish Puks (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.PUK }, mobXP = true, unityLeader = xi.unityLeader.NAJA_SALAHEEM },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.PUK }, mobXP = true, unityLeader = xi.unityLeader.NAJA_SALAHEEM },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -8843,7 +8843,7 @@ xi.roe.records =
       -- TODO: Does this include hybrid elementals?
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.ELEMENTAL }, mobXP = true, unityLeader = xi.unityLeader.NAJA_SALAHEEM },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.ELEMENTAL }, mobXP = true, unityLeader = xi.unityLeader.NAJA_SALAHEEM },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -8891,7 +8891,7 @@ xi.roe.records =
     { -- Vanquish Dhalmel (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.DHALMEL }, mobXP = true, unityLeader = xi.unityLeader.NAJA_SALAHEEM },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.DHALMEL }, mobXP = true, unityLeader = xi.unityLeader.NAJA_SALAHEEM },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -8939,7 +8939,7 @@ xi.roe.records =
     { -- Vanquish Pugils (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.PUGIL }, mobXP = true, unityLeader = xi.unityLeader.FLAVIRIA },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.PUGIL }, mobXP = true, unityLeader = xi.unityLeader.FLAVIRIA },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -8987,7 +8987,7 @@ xi.roe.records =
     { -- Vanquish Beetles (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.BEETLE }, mobXP = true, unityLeader = xi.unityLeader.FLAVIRIA },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.BEETLE }, mobXP = true, unityLeader = xi.unityLeader.FLAVIRIA },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -9026,7 +9026,7 @@ xi.roe.records =
     { -- Vanquish Goobbues (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.GOOBBUE }, mobXP = true, unityLeader = xi.unityLeader.FLAVIRIA },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.GOOBBUE }, mobXP = true, unityLeader = xi.unityLeader.FLAVIRIA },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -9075,7 +9075,7 @@ xi.roe.records =
       -- TODO: Does this include Draugr?
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.SKELETON }, mobXP = true, unityLeader = xi.unityLeader.FLAVIRIA },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.SKELETON }, mobXP = true, unityLeader = xi.unityLeader.FLAVIRIA },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -9123,7 +9123,7 @@ xi.roe.records =
     { -- Vanquish Efts (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.EFT }, mobXP = true, unityLeader = xi.unityLeader.YORAN_ORAN },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.EFT }, mobXP = true, unityLeader = xi.unityLeader.YORAN_ORAN },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -9171,7 +9171,7 @@ xi.roe.records =
     { -- Vanquish Antica (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.ANTICA }, mobXP = true, unityLeader = xi.unityLeader.YORAN_ORAN },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.ANTICA }, mobXP = true, unityLeader = xi.unityLeader.YORAN_ORAN },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -9210,7 +9210,7 @@ xi.roe.records =
     { -- Vanquish Coeurls (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.COEURL }, mobXP = true, unityLeader = xi.unityLeader.YORAN_ORAN },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.COEURL }, mobXP = true, unityLeader = xi.unityLeader.YORAN_ORAN },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -9258,7 +9258,7 @@ xi.roe.records =
     { -- Vanquish Dullahan (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.DULLAHAN }, mobXP = true, unityLeader = xi.unityLeader.YORAN_ORAN },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.DULLAHAN }, mobXP = true, unityLeader = xi.unityLeader.YORAN_ORAN },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -9307,7 +9307,7 @@ xi.roe.records =
     { -- Vanquish Acuex (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set{ xi.mobFamily.ACUEX }, mobXP = true, unityLeader = xi.unityLeader.SYLVIE },
+        reqs = { mobSuperFamily = set{ xi.mobSuperFamily.ACUEX }, mobXP = true, unityLeader = xi.unityLeader.SYLVIE },
         flags = set{ 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -9395,7 +9395,7 @@ xi.roe.records =
     { -- Vanquish Velkk (UC)
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.VELKK }, mobXP = true, unityLeader = xi.unityLeader.SYLVIE },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.VELKK }, mobXP = true, unityLeader = xi.unityLeader.SYLVIE },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },
@@ -9444,7 +9444,7 @@ xi.roe.records =
       -- TODO: Does this include Fluturini?
         trigger = xi.roeTrigger.DEFEAT_MOB,
         goal = 10,
-        reqs = { mobFamily = set { xi.mobFamily.TWITHERYM }, mobXP = true, unityLeader = xi.unityLeader.SYLVIE },
+        reqs = { mobSuperFamily = set { xi.mobSuperFamily.TWITHERYM }, mobXP = true, unityLeader = xi.unityLeader.SYLVIE },
         flags = set { 'unity' },
         reward = { sparks = 100, exp = 500, accolades = 500 },
     },

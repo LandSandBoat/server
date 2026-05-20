@@ -10,7 +10,6 @@ local abilityObject = {}
 
 abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
     local master = automaton:getMaster()
-
     if not master then
         return
     end
@@ -19,42 +18,24 @@ abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
 end
 
 abilityObject.onAutomatonAbility = function(target, automaton, skill, master, action)
-    local params = {}
-
-    params.numHits          = 3
-    params.fTP              = { 1.0, 1.0, 1.0 }
-    params.str_wSC          = 0.20
-    params.dex_wSC          = 0.20
-    params.accuracyModifier = { 0, 30, 50 }
-    params.attackType       = xi.attackType.PHYSICAL
-    params.damageType       = xi.damageType.BLUNT
-    params.shadowBehavior   = xi.mobskills.shadowBehavior.NUMSHADOWS_3
+    local params      = {}
+    params.numHits    = 3
+    params.weaponType = xi.skill.CLUB
+    params.ftpMod     = { 1.0, 1.0, 1.0 }
+    params.str_wsc    = 0.2
+    params.dex_wsc    = 0.2
+    params.accBonus   = math.floor(xi.weaponskills.fTP(skill:getTP(), { 0, 30, 50 }))
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.fTP              = { 2.66, 2.66, 2.66 }
-        params.str_wSC          = 0.30
-        params.dex_wSC          = 0.30
-        params.accuracyModifier = { 0, 40, 80 }
+        params.ftpMod   = { 2.66, 2.66, 2.66 }
+        params.str_wsc    = 0.3
+        params.dex_wsc    = 0.3
+        params.accBonus = math.floor(xi.weaponskills.fTP(skill:getTP(), { 0, 40, 80 }))
     end
 
-    -- Flame Holder Adjustment
-    local flameHolderfTP = automaton:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE) / 100
-    if flameHolderfTP > 0 then
-        params.fTP =
-        {
-            params.fTP[1] * flameHolderfTP,
-            params.fTP[2] * flameHolderfTP,
-            params.fTP[3] * flameHolderfTP,
-        }
-    end
+    local damage = xi.autows.doAutoPhysicalWeaponskill(automaton, target, 0, skill:getTP(), true, action, false, params, skill)
 
-    local info = xi.mobskills.mobPhysicalMove(automaton, target, skill, action, params)
-
-    if xi.mobskills.processDamage(automaton, target, skill, action, info) then
-        target:takeDamage(info.damage, automaton, info.attackType, info.damageType)
-    end
-
-    return info.damage
+    return damage
 end
 
 return abilityObject

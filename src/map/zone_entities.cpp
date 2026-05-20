@@ -393,7 +393,7 @@ void CZoneEntities::FindPartyForMob(CBaseEntity* PEntity)
             }
             else
             {
-                match = (PCurrentMob->m_Link && PCurrentMob->m_Family == PMob->m_Family) ||
+                match = (PCurrentMob->m_Link && PCurrentMob->m_SuperFamily == PMob->m_SuperFamily) ||
                         (sublink && sublink == PCurrentMob->getMobMod(MOBMOD_SUBLINK));
             }
 

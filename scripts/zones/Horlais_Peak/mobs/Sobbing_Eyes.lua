@@ -52,15 +52,13 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
 end
 
 entity.onMobSpellChoose = function(mob, target, spellId)
-    local spellList = {}
-
-    if mob:checkDistance(target) > 4 then
-        table.insert(spellList, xi.magic.spell.BINDGA)
-        table.insert(spellList, xi.magic.spell.BREAKGA)
-    else
-        table.insert(spellList, xi.magic.spell.FIRAGA)
-        table.insert(spellList, xi.magic.spell.STUN)
-    end
+    local spellList =
+    {
+        xi.magic.spell.FIRAGA,
+        xi.magic.spell.BINDGA,
+        xi.magic.spell.BREAKGA,
+        xi.magic.spell.STUN,
+    }
 
     return spellList[math.random(1, #spellList)]
 end

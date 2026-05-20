@@ -111,14 +111,14 @@
 ---@field signature?          string                             # 12 characters
 
 ---@class ExdataSoulPlate
----@field signature?   string                                  # 14 characters mob name
----@field zoneId?      xi.zone
----@field familyId?    xi.mobFamily
----@field poolId?      xi.mobPool
----@field level?       integer
----@field feralSkill?  xi.pankration.feralSkill
----@field feralPoints? integer
----@field quality?     integer                                 # Zeni score based on distance, facing, HP%, claim [0-63]
+---@field signature?     string                                  # 14 characters mob name
+---@field zoneId?        xi.zone
+---@field superFamilyId? xi.mobSuperFamily
+---@field poolId?        xi.mobPool
+---@field level?         integer
+---@field feralSkill?    xi.pankration.feralSkill
+---@field feralPoints?   integer
+---@field quality?       integer                                 # Zeni score based on distance, facing, HP%, claim [0-63]
 
 ---@class ExdataFeralSkillSlot
 ---@field skillId? xi.pankration.feralSkill|integer

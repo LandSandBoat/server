@@ -898,8 +898,8 @@ local trialConditions =
         return not trialData.mobSpecies or trialData.mobSpecies[mob:getSpecies()]
     end,
 
-    ['mobFamily'] = function(trialData, player, mob, paramTable)
-        return not trialData.mobFamily or trialData.mobFamily[mob:getFamily()]
+    ['mobSuperFamily'] = function(trialData, player, mob, paramTable)
+        return not trialData.mobSuperFamily or trialData.mobSuperFamily[mob:getSuperFamily()]
     end,
 
     ['useWeaponskill'] = function(trialData, player, mob, paramTable)

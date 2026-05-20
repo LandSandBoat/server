@@ -3666,7 +3666,7 @@ end
 
 ---@nodiscard
 ---@return integer
-function CBaseEntity:getFamily()
+function CBaseEntity:getSuperFamily()
 end
 
 ---@nodiscard

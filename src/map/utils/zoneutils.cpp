@@ -420,17 +420,17 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                                            "magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, "
                                            "fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, "
                                            "paralyze_res_rank, bind_res_rank, silence_res_rank, slow_res_rank, poison_res_rank, light_sleep_res_rank, dark_sleep_res_rank, blind_res_rank, "
-                                           "Element, mob_pools.speciesid, mob_species_system.familyID, name_prefix, entityFlags, animationsub, "
-                                           "(mob_species_system.HP / 100), (mob_species_system.MP / 100), spellList, mob_groups.poolid, "
-                                           "allegiance, namevis, aggro, roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_species_system.detects, "
-                                           "mob_species_system.charmable, mob_groups.content_tag, "
+                                           "Element, mob_pools.speciesid, mob_family_system.superFamilyID, name_prefix, entityFlags, animationsub, "
+                                           "(mob_family_system.HP / 100), (mob_family_system.MP / 100), spellList, mob_groups.poolid, "
+                                           "allegiance, namevis, aggro, roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, "
+                                           "mob_family_system.charmable, mob_groups.content_tag, "
                                            "mob_pools.modelSize, mob_pools.modelHitboxSize, "
                                            "mob_spawn_slots.spawnslotid, mob_spawn_slots.chance "
                                            "FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
                                            "INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id "
                                            "INNER JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid "
                                            "LEFT JOIN mob_spawn_slots ON (mob_spawn_slots.spawnslotid = mob_spawn_points.spawnslotid AND mob_spawn_slots.zoneid = mob_groups.zoneid) "
-                                           "INNER JOIN mob_species_system ON mob_pools.speciesid = mob_species_system.speciesID "
+                                           "INNER JOIN mob_family_system ON mob_pools.speciesid = mob_family_system.speciesID "
                                            "INNER JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid "
                                            "WHERE NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0) "
                                            "AND mob_groups.zoneid = ((mobid >> 12) & 0xFFF) "
@@ -555,7 +555,7 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
 
                                     PMob->m_Element     = rset->get<uint8>("Element");
                                     PMob->m_Species     = rset->get<uint16>("speciesid");
-                                    PMob->m_Family      = rset->get<uint16>("familyID");
+                                    PMob->m_SuperFamily = rset->get<uint16>("superFamilyID");
                                     PMob->m_name_prefix = rset->get<uint8>("name_prefix");
                                     PMob->m_flags       = rset->get<uint32>("entityFlags");
 
@@ -581,8 +581,8 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                                     }
 
                                     // Setup HP / MP Stat Percentage Boost
-                                    PMob->HPscale = rset->get<float>("(mob_species_system.HP / 100)");
-                                    PMob->MPscale = rset->get<float>("(mob_species_system.MP / 100)");
+                                    PMob->HPscale = rset->get<float>("(mob_family_system.HP / 100)");
+                                    PMob->MPscale = rset->get<float>("(mob_family_system.MP / 100)");
 
                                     PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(rset->get<uint16>("spellList"));
 

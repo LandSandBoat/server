@@ -30,8 +30,8 @@ local checks =
         return (params.mob and self.reqs.mobSpecies[params.mob:getSpecies()]) and true or false
     end,
 
-    mobFamily = function(self, player, params) -- Mob super family in set
-        return (params.mob and self.reqs.mobFamily[params.mob:getFamily()]) and true or false
+    mobSuperFamily = function(self, player, params) -- Mob super family in set
+        return (params.mob and self.reqs.mobSuperFamily[params.mob:getSuperFamily()]) and true or false
     end,
 
     mobSystem = function(self, player, params) -- Mob system in set

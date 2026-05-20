@@ -1,13 +1,11 @@
 -----------------------------------
 -- Cannibal Blade
--- Description: Delivers a single hit attack. Additional Effect: Convert damage dealt to HP.
 -----------------------------------
 ---@type TAbilityAutomaton
 local abilityObject = {}
 
 abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
     local master = automaton:getMaster()
-
     if not master then
         return
     end
@@ -16,46 +14,43 @@ abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
 end
 
 abilityObject.onAutomatonAbility = function(target, automaton, skill, master, action)
-    local params = {}
-
-    params.baseDamage         = (math.floor(automaton:getSkillLevel(xi.skill.AUTOMATON_MELEE) / 9 * 11))
-    params.numHits            = 1
-    params.fTP                = { 1.0, 1.15, 1.3 }
-    params.skipPDIF           = true
-    params.guaranteedFirstHit = true
-    params.attackType         = xi.attackType.PHYSICAL
-    params.damageType         = xi.damageType.SLASHING
-    params.shadowBehavior     = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    local params =
+    {
+        numHits = 1,
+        atkmulti = 20.0,
+        accBonus = 1000,
+        weaponDamage = automaton:getSkillLevel(xi.skill.AUTOMATON_MELEE),
+        weaponType = xi.skill.SWORD,
+        ftpMod = { 0.25, 0.4, 0.6 },
+        ignoredDefense = { 0.5, 0.5, 0.5 },
+    }
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.baseDamage = automaton:getWeaponDmg()
-        params.fTP        = { 16.0, 23.5, 31.5 }
-        params.mnd_wSC    = 1.0
+        params.weaponDamage = nil
+        params.ftpMod = { 16.0, 23.5, 31.5 }
+        params.mnd_wsc = 1.0
     end
 
-    -- Flame Holder Adjustment
-    local flameHolderfTP = automaton:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE) / 100
-    if flameHolderfTP > 0 then
-        params.fTP =
-        {
-            params.fTP[1] * flameHolderfTP,
-            params.fTP[2] * flameHolderfTP,
-            params.fTP[3] * flameHolderfTP,
-        }
+    if automaton:checkDistance(target) > 7 then
+        if params.weaponDamage then
+            params.weaponDamage = params.weaponDamage / 4
+        else
+            params.ftpMod[1] = params.ftpMod[1] / 4
+            params.ftpMod[2] = params.ftpMod[2] / 4
+            params.ftpMod[3] = params.ftpMod[3] / 4
+        end
     end
 
-    local info = xi.mobskills.mobPhysicalMove(automaton, target, skill, action, params)
+    local damage = xi.autows.doAutoPhysicalWeaponskill(automaton, target, 0, skill:getTP(), true, action, false, params, skill)
 
-    if xi.mobskills.processDamage(automaton, target, skill, action, info) then
-        target:takeDamage(info.damage, automaton, info.attackType, info.damageType)
-
+    if damage > 0 then
         if not target:isUndead() then
-            automaton:addHP(info.damage)
+            automaton:addHP(damage)
             skill:setMsg(xi.msg.basic.SKILL_DRAIN_HP)
         end
     end
 
-    return info.damage
+    return damage
 end
 
 return abilityObject

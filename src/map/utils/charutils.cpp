@@ -8263,13 +8263,6 @@ void ApplyAbilityRecast(CCharEntity* PChar, const CAbility* PAbility, const Char
         PChar->PRecastContainer->Add(RECAST_ABILITY, (recastId == Recast::BloodPactRage ? Recast::BloodPactWard : Recast::BloodPactRage), recastTime);
     }
 
-    // Yonin (recastId 146) and Innin share a server-side timer via the SQL recastId update.
-    // Also add Innin's original client-facing recast ID (147) so the client greys out Innin.
-    if (recastId == static_cast<Recast>(146))
-    {
-        PChar->PRecastContainer->Add(RECAST_ABILITY, static_cast<Recast>(147), recastTime);
-    }
-
     PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
 }
 

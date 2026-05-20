@@ -23,14 +23,14 @@
 
 void Exdata::SoulPlate::toTable(sol::table& table) const
 {
-    table["signature"]   = UnpackSoultrapperName(this->Signature);
-    table["zoneId"]      = this->ZoneId;
-    table["familyId"]    = this->FamilyId;
-    table["poolId"]      = this->PoolId;
-    table["level"]       = this->Level;
-    table["feralSkill"]  = this->FeralSkill;
-    table["feralPoints"] = this->FeralPoints;
-    table["quality"]     = this->Quality;
+    table["signature"]     = UnpackSoultrapperName(this->Signature);
+    table["zoneId"]        = this->ZoneId;
+    table["superFamilyId"] = this->SuperFamilyId;
+    table["poolId"]        = this->PoolId;
+    table["level"]         = this->Level;
+    table["feralSkill"]    = this->FeralSkill;
+    table["feralPoints"]   = this->FeralPoints;
+    table["quality"]       = this->Quality;
 }
 
 void Exdata::SoulPlate::fromTable(const sol::table& data)
@@ -41,11 +41,11 @@ void Exdata::SoulPlate::fromTable(const sol::table& data)
         PackSoultrapperName(*sig, this->Signature);
     }
 
-    this->ZoneId      = Exdata::get_or<uint16_t>(data, "zoneId", this->ZoneId);
-    this->FamilyId    = Exdata::get_or<uint16_t>(data, "familyId", this->FamilyId);
-    this->PoolId      = Exdata::get_or<uint16_t>(data, "poolId", this->PoolId);
-    this->Level       = Exdata::get_or<uint32_t>(data, "level", this->Level);
-    this->FeralSkill  = Exdata::get_or<uint32_t>(data, "feralSkill", this->FeralSkill);
-    this->FeralPoints = Exdata::get_or<uint32_t>(data, "feralPoints", this->FeralPoints);
-    this->Quality     = Exdata::get_or<uint32_t>(data, "quality", this->Quality);
+    this->ZoneId        = Exdata::get_or<uint16_t>(data, "zoneId", this->ZoneId);
+    this->SuperFamilyId = Exdata::get_or<uint16_t>(data, "superFamilyId", this->SuperFamilyId);
+    this->PoolId        = Exdata::get_or<uint16_t>(data, "poolId", this->PoolId);
+    this->Level         = Exdata::get_or<uint32_t>(data, "level", this->Level);
+    this->FeralSkill    = Exdata::get_or<uint32_t>(data, "feralSkill", this->FeralSkill);
+    this->FeralPoints   = Exdata::get_or<uint32_t>(data, "feralPoints", this->FeralPoints);
+    this->Quality       = Exdata::get_or<uint32_t>(data, "quality", this->Quality);
 }

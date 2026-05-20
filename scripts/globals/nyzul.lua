@@ -330,7 +330,7 @@ xi.nyzul.spawnChest = function(mob, player)
     -- NM chest spawn.
     if
         mobID >= ID.mob.NM_OFFSET and
-        mobID < ID.mob.GEAR_OFFSET
+        mobID <= ID.mob.TAISAIJIN
     then
         xi.nyzul.vigilWeaponDrop(player, mob)
 

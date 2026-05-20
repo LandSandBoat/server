@@ -5,11 +5,10 @@
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
-    local power = effect:getPower()
-    effect:addMod(xi.mod.ATTP, power)
-    effect:addMod(xi.mod.DEFP, power)
-    effect:addMod(xi.mod.MATT, power)
-    effect:addMod(xi.mod.MEVA, power)
+    effect:addMod(xi.mod.ATTP, 25)
+    effect:addMod(xi.mod.DMGMAGIC, -500)
+    effect:addMod(xi.mod.DMGPHYS, -5000)
+    effect:addMod(xi.mod.EVA, 378)
     -- The following only applies to Nidhogg.  If this buff is to be used anywhere else, a check on mob name (NOT ID) would be a good choice
     target:setAnimationSub(2)
 end

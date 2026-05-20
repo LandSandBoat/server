@@ -123,7 +123,6 @@ local attachmentModifiers =
     ['dynamo']              = { { xi.mod.CRITHITRATE,                 {     3,     5,     7,     9 }, true  }, },
     ['dynamo_ii']           = { { xi.mod.CRITHITRATE,                 {     5,    10,    15,    20 }, true  }, },
     ['dynamo_iii']          = { { xi.mod.CRITHITRATE,                 {    10,    15,    25,    35 }, true  }, },
-    ['flame_holder']        = { { xi.mod.WEAPONSKILL_DAMAGE_BASE,     {   125,   200,   275,   350 }, true  }, },
     ['equalizer']           = { { xi.mod.AUTO_EQUALIZER,              {    10,    25,    50,    75 }, true  }, },
     ['galvanizer']          = { { xi.mod.COUNTER,                     {    10,    20,    35,    50 }, true  }, },
     ['hammermill']          = { { xi.mod.SHIELD_BASH,                 {    15,    25,    50,   100 }, true  },
@@ -230,10 +229,6 @@ local function getRefreshModValue(pet, attachmentName, numManeuvers)
     local petMaxMP = pet:getMaxMP()
 
     return regenRefreshFormulas[attachmentName][1][numManeuvers + 1] + petMaxMP * (regenRefreshFormulas[attachmentName][2][numManeuvers + 1] / 100)
-end
-
-xi.automaton.getRangedBaseDamage = function(automaton)
-    return automaton:getRangedDmg() * (1 + automaton:getMod(xi.mod.AUTO_RANGED_DAMAGEP) / 100)
 end
 
 local function isOpticFiber(attachmentName)

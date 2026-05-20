@@ -370,7 +370,7 @@ instanceObject.onTrack = function(instance)
                         mob:showText(mob, ID.text.EXCALIACE_CRAB2)
                         break
                     else
-                        if enemys:getFamily() == xi.mobFamily.CRAB then -- crab
+                        if enemys:getSuperFamily() == xi.mobSuperFamily.CRAB then -- crab
                             if pathProgressMask == 7 then
                                 mob:setLocalVar('pathPoint', 38)
                             elseif pathProgressMask == 3 then
@@ -383,11 +383,11 @@ instanceObject.onTrack = function(instance)
                             mob:showText(mob, ID.text.EXCALIACE_CRAB1)
                             mob:setBaseSpeed(60)
                             break
-                        elseif enemys:getFamily() == xi.mobFamily.PUGIL then -- pugil
+                        elseif enemys:getSuperFamily() == xi.mobSuperFamily.PUGIL then -- pugil
                             mob:setBaseSpeed(75)
                             mob:showText(mob, ID.text.EXCALIACE_DEBAUCHER1)
                             break
-                        elseif enemys:getFamily() == xi.mobFamily.DOOMED then -- doomed
+                        elseif enemys:getSuperFamily() == xi.mobSuperFamily.DOOMED then -- doomed
                             mob:setBaseSpeed(100)
                             mob:showText(mob, ID.text.EXCALIACE_DEBAUCHER2)
                             break
