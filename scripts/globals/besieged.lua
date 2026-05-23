@@ -279,3 +279,33 @@ xi.besieged.hasAssaultOrders = function(player)
 
     return event, keyitem
 end
+
+-----------------------------------
+-- Besieged mobs lifecycle
+-----------------------------------
+xi.besieged.onMobInitialize = function(mob)
+end
+
+xi.besieged.onMobSpawn = function(mob)
+end
+
+xi.besieged.onMobDeath = function(mob, player, optParams)
+end
+
+xi.besieged.onMobDespawn = function(mob)
+end
+
+-----------------------------------
+-- Besieged ally lifecycle
+-----------------------------------
+xi.besieged.onAllyInitialize = function(mob)
+end
+
+xi.besieged.onAllySpawn = function(mob)
+end
+
+xi.besieged.onAllyDeath = function(mob, player, optParams)
+end
+
+xi.besieged.onAllyDespawn = function(mob)
+end
