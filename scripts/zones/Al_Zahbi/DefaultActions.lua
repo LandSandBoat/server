@@ -2,6 +2,7 @@ local ID = zones[xi.zone.AL_ZAHBI]
 
 return {
     ['550']           = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
+    ['_1c5']          = { messageSpecial = ID.text.GATE_FIRMLY_CLOSED },
     ['Banjanu']       = { event = 262 },
     ['Biyaada']       = { event = 250 },
     ['Bjibar']        = { event = 263 },
@@ -30,6 +31,7 @@ return {
     ['Talruf']        = { event = 243 },
     ['Truffle']       = { event = 240 },
     ['Ugahar']        = { event = 238 },
+    ['Yayaroon']      = { messageSpecial = ID.text.YAYAROON_DIALOG },
     ['Zazarg']        = { event = 268 },
     ['Zwiyaam']       = { event = 247 },
 }
