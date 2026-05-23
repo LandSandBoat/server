@@ -21,6 +21,7 @@ zones[xi.zone.AL_ZAHBI] =
         HOMEPOINT_SET                 = 7553, -- Home point set!
         IMAGE_SUPPORT_ACTIVE          = 7576, -- You have to wait a bit longer before asking for synthesis image support again.
         IMAGE_SUPPORT                 = 7578, -- Your [fishing/woodworking/smithing/goldsmithing/clothcraft/leatherworking/bonecraft/alchemy/cooking] skills went up [a little/ever so slightly/ever so slightly].
+        GATE_FIRMLY_CLOSED            = 7595, -- The gate is firmly closed...
         KAHAHHOBICHAI_SHOP_DIALOG     = 7637, -- Step rrright up to Kahah Hobichai's Blades! We've got everything your battle-thirrrsty heart desires!
         ALLARD_SHOP_DIALOG            = 7643, -- Hey, how ya doin'? Welcome to the armor shop of the Ulthalam Parade's leading star--Allard, in the flesh!
         ZAFIF_SHOP_DIALOG             = 7649, -- Welcome... I'm Zafif, and this is my magic shop... I hope you can find something of use here.
@@ -31,6 +32,7 @@ zones[xi.zone.AL_ZAHBI] =
         NDEGO_SHOP_DIALOG             = 7865, -- The Blacksmiths' Guild thanks you for your business!
         BORNAHN_SHOP_DIALOG           = 7867, -- Welcome! We have all your goldsmithing needs right here!
         TATEN_BILTEN_SHOP_DIALOG      = 7869, -- Weave something beautiful with the materials you buy here, okay?
+        YAYAROON_DIALOG               = 7871, -- Yayaroon is meeercenary! Nice meet yooo. Three cheeeers for clink clink!
         CHOCOBO_HAPPY                 = 7872, -- The chocobo appears to be extremely happy.
         SANCTION                      = 7997, -- You have received the Empire's Sanction.
     },
