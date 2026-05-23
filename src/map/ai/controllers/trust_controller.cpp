@@ -50,6 +50,7 @@ enum TRUST_MOVEMENT_TYPE : int8
     //     : Will set the combat distance the trust tries to stick to to 20'
     // NOTE: If a Trust doesn't immediately sprint to a certain distance at the start of battle, it's probably NO_MOVE or MELEE.
     NO_MOVE    = -1, // Will stand still providing they're within casting distance of their master and target when the fight starts. Otherwise will reposition to be within 9.0' of both
+    NON_COMBAT = -2, // Will follow the master if first trust in party and will follow the trust in front if lower in the list.
     MELEE      = 0,  // Default: will continually reposition to stay within melee range of the target
     MID_RANGE  = 6,  // Will path at the start of battle to 6' away from the target, and try to stay at that distance
     LONG_RANGE = 12, // Will path at the start of battle to 12' away from the target, and try to stay at that distance
@@ -92,17 +93,26 @@ auto CTrustController::Tick(timer::time_point tick) -> Task<void>
 
     m_Tick = tick;
 
-    if (!POwner->PMaster)
+    auto* PTrust = static_cast<CTrustEntity*>(POwner);
+
+    if (!PTrust->PMaster)
     {
         co_return;
     }
 
-    if (POwner->PMaster->isCharmed)
+    if (PTrust->PMaster->isCharmed)
     {
         this->Despawn();
+        co_return;
     }
 
-    if (POwner->PAI->IsEngaged())
+    const bool nonCombatFollowTrust = PTrust->getMobMod(MOBMOD_TRUST_DISTANCE) == TRUST_MOVEMENT_TYPE::NON_COMBAT;
+
+    if (PTrust->PMaster->PAI->IsEngaged() && nonCombatFollowTrust)
+    {
+        co_await DoNonCombatTick(tick);
+    }
+    else if (POwner->PAI->IsEngaged())
     {
         co_await DoCombatTick(tick);
     }
@@ -190,6 +200,11 @@ auto CTrustController::DoCombatTick(timer::time_point tick) -> Task<void>
                     }
                     break;
                 }
+                case TRUST_MOVEMENT_TYPE::NON_COMBAT:
+                {
+                    // Non-combat followers should not use target-distance positioning.
+                    break;
+                }
                 case TRUST_MOVEMENT_TYPE::MELEE:
                 {
                     std::unique_ptr<CBasicPacket> err;
@@ -238,6 +253,100 @@ auto CTrustController::DoCombatTick(timer::time_point tick) -> Task<void>
     }
 }
 
+auto CTrustController::DoNonCombatTick(timer::time_point tick) -> Task<void>
+{
+    TracyZoneScoped;
+
+    auto* PTrust  = static_cast<CTrustEntity*>(POwner);
+    auto* PMaster = static_cast<CCharEntity*>(POwner->PMaster);
+
+    if (!PMaster)
+    {
+        co_return;
+    }
+
+    // Keep COMBAT_TICK target valid for listeners/gambits.
+    PTarget = PMaster->GetBattleTarget();
+
+    // Non-combat trust follow order:
+    // - first trust follows master
+    // - others follow the trust directly in front of them
+    uint8 currentPartyPos = GetPartyPosition();
+
+    CBattleEntity* PFollowTarget = PMaster;
+    if (currentPartyPos > 0 && static_cast<size_t>(currentPartyPos - 1) < PMaster->PTrusts.size())
+    {
+        if (auto* PLeadTrust = PMaster->PTrusts.at(currentPartyPos - 1); PLeadTrust && PLeadTrust != PTrust)
+        {
+            PFollowTarget = PLeadTrust;
+        }
+    }
+
+    // First trust keeps a bit more space from master.
+    constexpr float FirstTrustFollowDistance = 3.0f; // tune as needed
+    const float     desiredFollowDistance    = (currentPartyPos == 0) ? FirstTrustFollowDistance : RoamDistance;
+
+    float currentDistance = distance(PTrust->loc.p, PFollowTarget->loc.p);
+
+    // Simple declump so non-combat trusts don't stack on each other.
+    for (auto* POtherTrust : PMaster->PTrusts)
+    {
+        if (POtherTrust != PTrust &&
+            distance(POtherTrust->loc.p, PTrust->loc.p) < 1.0f &&
+            !PTrust->PAI->PathFind->IsFollowingPath())
+        {
+            auto diff_angle = worldAngle(PTrust->loc.p, POtherTrust->loc.p) + 64;
+            auto amount     = (currentPartyPos % 2) ? 1.0f : -1.0f;
+
+            position_t new_pos = {
+                PTrust->loc.p.x - (cosf(rotationToRadian(diff_angle)) * amount),
+                POtherTrust->loc.p.y,
+                PTrust->loc.p.z + (sinf(rotationToRadian(diff_angle)) * amount),
+                0,
+                0,
+            };
+
+            if (PTrust->PAI->PathFind->ValidPosition(new_pos) &&
+                PTrust->PAI->PathFind->PathAround(new_pos, desiredFollowDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+            {
+                PTrust->PAI->PathFind->FollowPath(m_Tick);
+            }
+            break;
+        }
+    }
+
+    if (currentDistance > WarpDistance)
+    {
+        PTrust->PAI->PathFind->WarpTo(PFollowTarget->loc.p);
+    }
+    else if (currentDistance > desiredFollowDistance)
+    {
+        if (currentDistance < desiredFollowDistance * 3.0f &&
+            PTrust->PAI->PathFind->PathAround(PFollowTarget->loc.p, desiredFollowDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+        {
+            PTrust->PAI->PathFind->FollowPath(m_Tick);
+        }
+        else if (PTrust->GetSpeed() > 0)
+        {
+            PTrust->PAI->PathFind->StepTo(PFollowTarget->loc.p, true);
+        }
+    }
+
+    if (PTrust->PAI->PathFind->IsFollowingPath())
+    {
+        PTrust->PAI->PathFind->FollowPath(m_Tick);
+    }
+
+    // Keep gambits active in combat, but only while stationary.
+    if (PMaster->PAI->IsEngaged() && !PTrust->PAI->PathFind->IsFollowingPath())
+    {
+        co_await m_GambitsContainer->Tick(tick);
+        PTrust->PAI->EventHandler.triggerListener("COMBAT_TICK", PTrust, PMaster, PTarget);
+    }
+
+    co_return;
+}
+
 auto CTrustController::DoRoamTick(timer::time_point tick) -> Task<void>
 {
     TracyZoneScoped;
@@ -265,7 +374,9 @@ auto CTrustController::DoRoamTick(timer::time_point tick) -> Task<void>
         }
     }
 
-    if (PMaster->PAI->IsEngaged() && trustEngageCondition)
+    const uint16 modelID_Cornelia = 3119; // Cornielia does not have an Attack Schedule so do not engage.
+
+    if (PMaster->PAI->IsEngaged() && trustEngageCondition && POwner->GetModelId() != modelID_Cornelia)
     {
         POwner->PAI->Internal_Engage(PMaster->GetBattleTargetID());
     }
@@ -274,45 +385,50 @@ auto CTrustController::DoRoamTick(timer::time_point tick) -> Task<void>
     CBattleEntity* PFollowTarget   = (GetPartyPosition() > 0) ? (CBattleEntity*)PMaster->PTrusts.at(currentPartyPos - 1) : POwner->PMaster;
     float          currentDistance = distance(POwner->loc.p, PFollowTarget->loc.p);
 
-    for (auto* POtherTrust : PMaster->PTrusts)
-    {
-        if (POtherTrust != POwner && distance(POtherTrust->loc.p, POwner->loc.p) < 1.0f && !POwner->PAI->PathFind->IsFollowingPath())
-        {
-            auto diff_angle = worldAngle(POwner->loc.p, POtherTrust->loc.p) + 64;
-            auto amount     = (currentPartyPos % 2) ? 1.0f : -1.0f;
+    // Formation following thresholds (in yalms)
+    // First trust follows master more closely than other trusts follow each other
+    bool isFirstTrust = (currentPartyPos == 0);
 
-            // clang-format off
-            position_t new_pos =
-            {
-                   POwner->loc.p.x - (cosf(rotationToRadian(diff_angle)) * amount),
-                   POtherTrust->loc.p.y,
-                   POwner->loc.p.z + (sinf(rotationToRadian(diff_angle)) * amount),
-                   0,
-                   0,
-            };
-            // clang-format on
+    float declumpDistance = isFirstTrust ? 1.0f : 1.5f; // Too close, need to move away
+    float followMax       = isFirstTrust ? 2.0f : 3.5f; // Maximum follow distance before moving closer
+    float followTarget    = isFirstTrust ? 1.5f : 3.0f; // Ideal follow distance
 
-            if (POwner->PAI->PathFind->ValidPosition(new_pos) && POwner->PAI->PathFind->PathAround(new_pos, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
-            {
-                POwner->PAI->PathFind->FollowPath(m_Tick);
-            }
-            break;
-        }
-    }
-
-    if (currentDistance > WarpDistance)
+    // Handle formation movement based on distance thresholds
+    if (currentDistance < declumpDistance)
     {
-        POwner->PAI->PathFind->WarpTo(PFollowTarget->loc.p);
-    }
-    else if (currentDistance > RoamDistance)
-    {
-        if (currentDistance < RoamDistance * 3.0f && POwner->PAI->PathFind->PathAround(PFollowTarget->loc.p, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+        // Too close to follow target - push away to maintain formation spacing
+        if (PFollowTarget && POwner->PAI->PathFind->PathAround(PFollowTarget->loc.p, followTarget + 0.5f, PATHFLAG_RUN | PATHFLAG_WALLHACK))
         {
             POwner->PAI->PathFind->FollowPath(m_Tick);
         }
-        else if (POwner->GetSpeed() > 0)
+    }
+    else if (currentDistance > followMax)
+    {
+        // Too far from follow target - move closer to maintain formation
+        if (currentDistance > WarpDistance)
         {
-            POwner->PAI->PathFind->StepTo(PFollowTarget->loc.p, true);
+            // Warp if extremely too far
+            POwner->PAI->PathFind->WarpTo(PFollowTarget->loc.p);
+        }
+        else
+        {
+            // Path or step closer to follow target
+            if (currentDistance < RoamDistance * 3.0f && POwner->PAI->PathFind->PathAround(PFollowTarget->loc.p, followTarget, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+            {
+                POwner->PAI->PathFind->FollowPath(m_Tick);
+            }
+            else if (POwner->GetSpeed() > 0)
+            {
+                POwner->PAI->PathFind->StepTo(PFollowTarget->loc.p, true);
+            }
+        }
+    }
+    else
+    {
+        // In formation range - stop pathfinding to prevent circling
+        if (POwner->PAI->PathFind->IsFollowingPath())
+        {
+            POwner->PAI->PathFind->Clear();
         }
     }
 

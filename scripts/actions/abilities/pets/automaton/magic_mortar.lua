@@ -1,6 +1,7 @@
 -----------------------------------
 -- Magic Mortar
 -- Description: Damage varies with Automaton HP.
+-- https://wiki.ffo.jp/html/14821.html
 -----------------------------------
 ---@type TAbilityAutomaton
 local abilityObject = {}
@@ -26,20 +27,18 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.fTP = { 1.5, 1.75, 2.5 }
+        local additiveDamage = automaton:getSkillLevel(xi.skill.AUTOMATON_MELEE)
+
+        params.additiveDamage = { additiveDamage, additiveDamage, additiveDamage }
+        params.fTP = { 0.50, 0.75, 1.50 }
     end
 
-    -- Flame Holder multiplies the base damage of Magic Mortar.
-    local flameHolderModifier = 1.0 + automaton:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE) / 1000
+    -- Flame Holder multiplies the base damage of Magic Mortar. Gives a 25% boost at 3 Fire Maneuvers.
+    local flameHolderModifier = 1.0 + (automaton:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE) - 100) / 1000
 
     if flameHolderModifier > 1.0 then
         params.baseDamage = math.floor(params.baseDamage * flameHolderModifier)
     end
-
-    -- A flat amount of damage is added to Magic Mortar based on the automatons skill level, not multiplied by Flame Holder.
-    local automatonSkill  = automaton:getSkillLevel(xi.skill.AUTOMATON_MELEE)
-
-    params.baseDamage = params.baseDamage + automatonSkill
 
     local info = xi.mobskills.mobMagicalMove(automaton, target, skill, action, params)
 

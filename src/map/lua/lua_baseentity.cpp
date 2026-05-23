@@ -13706,6 +13706,7 @@ auto CLuaBaseEntity::addStatusEffect(const EFFECT effectId, sol::table params) c
     const auto icon            = params["icon"].get_or(static_cast<uint16>(effectId));
     const auto subType         = params["subType"].get_or(0u);
     const auto subPower        = static_cast<uint16>(params["subPower"].get_or(0.0));
+    const auto subIcon         = params["subIcon"].get_or(0u);
     const auto tier            = params["tier"].get_or<uint16>(0);
     const auto flag            = params["flag"].get_or(0u);
     const auto sourceType      = params["sourceType"].get_or<uint16>(0);
@@ -13720,6 +13721,7 @@ auto CLuaBaseEntity::addStatusEffect(const EFFECT effectId, sol::table params) c
         std::chrono::milliseconds(static_cast<uint64>(duration * 1000)),
         subType,
         subPower,
+        subIcon,
         tier,
         flag);
 

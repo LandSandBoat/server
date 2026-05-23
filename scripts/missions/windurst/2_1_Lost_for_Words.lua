@@ -254,7 +254,7 @@ mission.sections =
 
         [xi.zone.INNER_HORUTOTO_RUINS] =
         {
-            ['_5ca'] = mission:progressEvent(46),
+            ['_5ca'] = mission:progressCutscene(46),
 
             onEventFinish =
             {

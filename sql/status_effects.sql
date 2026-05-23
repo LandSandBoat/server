@@ -728,6 +728,13 @@ INSERT INTO `status_effects` VALUES (801,'meditate',@FLAG_DEATH | @FLAG_ON_ZONE,
 INSERT INTO `status_effects` VALUES (802,'elemental_resistance_down',@FLAG_DEATH | @FLAG_ON_ZONE | @FLAG_NO_LOSS_MESSAGE | @FLAG_NO_CANCEL,0,0,0,0,0,0,0,0,NULL);
 INSERT INTO `status_effects` VALUES (803,'full_speed_ahead',@FLAG_ON_ZONE | @FLAG_NO_LOSS_MESSAGE,0,0,0,0,0,0,0,0,NULL);
 INSERT INTO `status_effects` VALUES (805,'tomahawk',@FLAG_DEATH | @FLAG_NO_LOSS_MESSAGE,0,0,0,0,0,0,0,0,NULL);
+INSERT INTO `status_effects` VALUES (807,'trust_aura_chr',@FLAG_DEATH | @FLAG_NO_CANCEL | @FLAG_HIDE_TIMER,0,0,0,0,0,0,0,0,NULL);
+INSERT INTO `status_effects` VALUES (808,'trust_aura_haste',@FLAG_DEATH | @FLAG_NO_CANCEL | @FLAG_HIDE_TIMER,0,0,0,0,0,0,0,0,NULL);
+INSERT INTO `status_effects` VALUES (809,'trust_aura_exp',@FLAG_DEATH | @FLAG_NO_CANCEL,0,0,0,0,0,0,0,0,NULL);
+INSERT INTO `status_effects` VALUES (810,'trust_aura_acc',@FLAG_DEATH | @FLAG_NO_CANCEL | @FLAG_HIDE_TIMER,0,0,0,0,0,0,0,0,NULL);
+INSERT INTO `status_effects` VALUES (811,'trust_aura_refresh',@FLAG_DEATH | @FLAG_NO_CANCEL | @FLAG_HIDE_TIMER,0,0,0,0,0,0,0,0,NULL);
+INSERT INTO `status_effects` VALUES (812,'trust_aura_regen',@FLAG_DEATH | @FLAG_NO_CANCEL | @FLAG_HIDE_TIMER,0,0,0,0,0,0,0,0,NULL);
+INSERT INTO `status_effects` VALUES (813,'trust_aura_magic_attack',@FLAG_DEATH | @FLAG_NO_CANCEL | @FLAG_HIDE_TIMER,0,0,0,0,0,0,0,0,NULL);
 
 /*!40000 ALTER TABLE `status_effects` ENABLE KEYS */;
 UNLOCK TABLES;

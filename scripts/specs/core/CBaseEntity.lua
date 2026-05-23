@@ -2889,6 +2889,7 @@ end
 ---@field icon xi.effect? Defaults to effectId if not set
 ---@field subType integer?
 ---@field subPower number?
+---@field subIcon? xi.effect? Defaults to effectId if not set
 ---@field tier integer?
 ---@field flag xi.effectFlag?
 ---@field sourceType xi.effectSourceType?

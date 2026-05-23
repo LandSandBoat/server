@@ -96,18 +96,20 @@ ai.condition =
     SUB_ANIMATION      = 36,
     JA_ON_COOLDOWN     = 37,
     VAL_URIEL_CHECK    = 38,
+    TIMER              = 39, -- argument in seconds
 }
 ai.c = ai.condition
 
 -- Reaction
 ai.reaction =
 {
-    ATTACK  = 0,
-    RATTACK = 1,
-    MA      = 2,
-    JA      = 3,
-    WS      = 4,
-    MS      = 5,
+    ATTACK      = 0,
+    RATTACK     = 1,
+    MA          = 2,
+    JA          = 3,
+    WS          = 4,
+    MS          = 5,
+    ANIM_STRING = 6,
 }
 ai.r = ai.reaction
 
@@ -133,6 +135,7 @@ ai.select =
     HELIX_MOB_WEAKNESS  = 16,
     DEF_BAR_ELEMENT     = 17,
     RUNE_DAY            = 18,
+    RANDOM_ANIMATION    = 19,
 }
 ai.s = ai.select
 

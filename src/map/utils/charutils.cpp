@@ -1033,6 +1033,28 @@ void LoadSpells(CCharEntity* PChar)
             }
         }
     }
+
+    // Handle trust spells that are enabled via settings.
+    bool hasTrustPermit =
+        charutils::hasKeyItem(PChar, KeyItem::WINDURST_TRUST_PERMIT) ||
+        charutils::hasKeyItem(PChar, KeyItem::BASTOK_TRUST_PERMIT) ||
+        charutils::hasKeyItem(PChar, KeyItem::SAN_DORIA_TRUST_PERMIT);
+
+    if (hasTrustPermit)
+    {
+        static const std::unordered_map<uint8, uint16> trustSpells = {
+            { 1, 1002 }, // Cornelia
+            { 2, 1003 }, // Matsui-P
+        }; // This can be expanded if more trust spells are added as settings options.
+
+        uint8 trustSetting = settings::get<uint8>("main.ENABLE_LIMITED_TIME_TRUST");
+
+        auto it = trustSpells.find(trustSetting);
+        if (it != trustSpells.end())
+        {
+            PChar->m_SpellList.set(it->second);
+        }
+    }
 }
 
 /************************************************************************

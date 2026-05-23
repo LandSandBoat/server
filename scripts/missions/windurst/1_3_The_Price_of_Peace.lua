@@ -177,8 +177,8 @@ mission.sections =
 
         [xi.zone.GIDDEUS] =
         {
-            ['Ghoo_Pakya'] = mission:progressEvent(49),
-            ['Laa_Mozi']   = mission:progressEvent(45),
+            ['Ghoo_Pakya'] = mission:progressCutscene(49),
+            ['Laa_Mozi']   = mission:progressCutscene(45),
 
             onEventFinish =
             {

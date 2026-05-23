@@ -48,6 +48,7 @@ public:
     auto   getOriginID() -> uint32;
     uint16 getPower();
     uint16 getSubPower();
+    uint16 getSubIcon();
     uint16 getTier();
     uint32 getDuration();
     uint32 getStartTime();
@@ -62,6 +63,7 @@ public:
     auto setOriginID(uint32 originid) -> void;
     void setPower(uint16 power);
     void setSubPower(uint16 subpower);
+    void setSubIcon(uint16 subIcon);
     void setTier(uint16 tier);
     void setDuration(uint32 duration);
     void setTick(uint32 tick);

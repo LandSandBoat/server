@@ -1876,13 +1876,12 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
 
     CBattleEntity* PEntity    = m_POwner;
     AURA_TARGET    auraTarget = static_cast<AURA_TARGET>(PStatusEffect->GetTier());
+    float          aura_range = 6.0f + (PEntity->getMod(Mod::AURA_SIZE) / 100.0f); // Adding to this mod should be the value you want * 100
 
     if (PEntity->objtype == TYPE_PET || PEntity->objtype == TYPE_TRUST)
     {
         PEntity = PEntity->PMaster;
     }
-
-    float aura_range = 6.0f + (PEntity->getMod(Mod::AURA_SIZE) / 100.0f); // Adding to this mod should be the value you want * 100
 
     if (PEntity->objtype == TYPE_PC)
     {
@@ -1918,8 +1917,10 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                     }
                     else
                     {
+                        uint16 icon = PStatusEffect->GetSubIcon() > 0 ? PStatusEffect->GetSubIcon() : PStatusEffect->GetSubID();
+
                         PEffect = new CStatusEffect(static_cast<EFFECT>(PStatusEffect->GetSubID()), // Effect ID
-                                                    PStatusEffect->GetSubID(),                      // Effect Icon (Associated with ID)
+                                                    icon,                                           // Effect Icon
                                                     PStatusEffect->GetSubPower(),                   // Power
                                                     3s,                                              // Tick
                                                     4s);                                             // Duration
@@ -1960,8 +1961,10 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                     }
                     else
                     {
+                        uint16 icon = PStatusEffect->GetSubIcon() > 0 ? PStatusEffect->GetSubIcon() : PStatusEffect->GetSubID();
+
                         PEffect = new CStatusEffect(static_cast<EFFECT>(PStatusEffect->GetSubID()), // Effect ID
-                                                    PStatusEffect->GetSubID(),                      // Effect Icon (Associated with ID)
+                                                    icon,                                           // Effect Icon
                                                     PStatusEffect->GetSubPower(),                   // Power
                                                     3s,                                             // Tick
                                                     4s);                                            // Duration
@@ -2005,8 +2008,10 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                     }
                     else
                     {
+                        uint16 icon = PStatusEffect->GetSubIcon() > 0 ? PStatusEffect->GetSubIcon() : PStatusEffect->GetSubID();
+
                         PEffect = new CStatusEffect(static_cast<EFFECT>(PStatusEffect->GetSubID()), // Effect ID
-                                                    PStatusEffect->GetSubID(),                      // Effect Icon (Associated with ID)
+                                                    icon,                                           // Effect Icon
                                                     PStatusEffect->GetSubPower(),                   // Power
                                                     3s,                                              // Tick
                                                     4s);                                             // Duration
@@ -2050,8 +2055,10 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                     }
                     else
                     {
+                        uint16 icon = PStatusEffect->GetSubIcon() > 0 ? PStatusEffect->GetSubIcon() : PStatusEffect->GetSubID();
+
                         PEffect = new CStatusEffect(static_cast<EFFECT>(PStatusEffect->GetSubID()), // Effect ID
-                                                    PStatusEffect->GetSubID(),                      // Effect Icon (Associated with ID)
+                                                    icon,                                           // Effect Icon
                                                     PStatusEffect->GetSubPower(),                   // Power
                                                     3s,                                             // Tick
                                                     4s);                                            // Duration

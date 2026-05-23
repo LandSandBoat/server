@@ -50,7 +50,7 @@ public:
 
     bool RangedAttack(uint16 targid) override;
 
-    static constexpr float RoamDistance    = { 2.0f };
+    static constexpr float RoamDistance    = { 3.0f };
     static constexpr float SpawnDistance   = { 3.0f };
     static constexpr float CastingDistance = { 15.0f };
     static constexpr float WarpDistance    = { 30.0f };
@@ -64,7 +64,7 @@ public:
 private:
     auto DoCombatTick(timer::time_point tick) -> Task<void> override;
     auto DoRoamTick(timer::time_point tick) -> Task<void> override;
-
+    auto DoNonCombatTick(timer::time_point tick) -> Task<void>;
     void Declump(CCharEntity* PMaster, CBattleEntity* PTarget);
     void PathOutToDistance(CBattleEntity* PTarget, float amount);
 

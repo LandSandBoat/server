@@ -27,12 +27,13 @@
 #include "status_effect_container.h"
 #include <utility>
 
-CStatusEffect::CStatusEffect(EFFECT id, uint16 icon, uint16 power, timer::duration tick, timer::duration duration, uint32 subid, uint16 subPower, uint16 tier, uint32 flags, uint16 sourceType, uint32 sourceTypeParam, uint32 originID)
+CStatusEffect::CStatusEffect(EFFECT id, uint16 icon, uint16 power, timer::duration tick, timer::duration duration, uint32 subid, uint16 subPower, uint16 subIcon, uint16 tier, uint32 flags, uint16 sourceType, uint32 sourceTypeParam, uint32 originID)
 : m_StatusID(id)
 , m_SubID(subid)
 , m_Icon(icon)
 , m_Power(power)
 , m_SubPower(subPower)
+, m_SubIcon(subIcon)
 , m_Tier(tier)
 , m_Flags(flags)
 , m_OriginID(originID)
@@ -114,6 +115,11 @@ uint16 CStatusEffect::GetSubPower() const
     return m_SubPower;
 }
 
+uint16 CStatusEffect::GetSubIcon() const
+{
+    return m_SubIcon;
+}
+
 uint16 CStatusEffect::GetTier() const
 {
     return m_Tier;
@@ -177,6 +183,17 @@ void CStatusEffect::SetIcon(uint16 Icon)
     }
 
     m_Icon = Icon;
+    m_POwner->StatusEffectContainer->UpdateStatusIcons();
+}
+
+void CStatusEffect::SetSubIcon(uint16 subIcon)
+{
+    if (m_POwner == nullptr)
+    {
+        ShowWarning("m_POwner was null.");
+        return;
+    }
+    m_SubIcon = subIcon;
     m_POwner->StatusEffectContainer->UpdateStatusIcons();
 }
 

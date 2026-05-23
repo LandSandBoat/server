@@ -159,6 +159,20 @@ void CLuaStatusEffect::setSubPower(uint16 subpower)
     m_PLuaStatusEffect->SetSubPower(subpower);
 }
 
+/************************************************************************
+ *                                                                      *
+ * Sets the icon used by the sub effect of auras etc                    *
+ * Will default to the main icon if not set                             *
+ *                                                                      *
+ ************************************************************************/
+
+void CLuaStatusEffect::setSubIcon(uint16 subIcon)
+{
+    m_PLuaStatusEffect->SetSubIcon(subIcon);
+}
+
+//======================================================//
+
 void CLuaStatusEffect::setTier(uint16 tier)
 {
     m_PLuaStatusEffect->SetTier(tier);
@@ -236,6 +250,11 @@ uint16 CLuaStatusEffect::getIcon()
     return m_PLuaStatusEffect->GetIcon();
 }
 
+uint16 CLuaStatusEffect::getSubIcon()
+{
+    return m_PLuaStatusEffect->GetSubIcon();
+}
+
 uint16 CLuaStatusEffect::getSourceType()
 {
     return m_PLuaStatusEffect->GetSourceType();
@@ -276,6 +295,7 @@ void CLuaStatusEffect::Register()
     SOL_REGISTER("addMod", CLuaStatusEffect::addMod);
     SOL_REGISTER("getSubPower", CLuaStatusEffect::getSubPower);
     SOL_REGISTER("setSubPower", CLuaStatusEffect::setSubPower);
+    SOL_REGISTER("setSubIcon", CLuaStatusEffect::setSubIcon);
     SOL_REGISTER("getTier", CLuaStatusEffect::getTier);
     SOL_REGISTER("setTier", CLuaStatusEffect::setTier);
     SOL_REGISTER("getTick", CLuaStatusEffect::getTick);
@@ -287,6 +307,7 @@ void CLuaStatusEffect::Register()
     SOL_REGISTER("delEffectFlag", CLuaStatusEffect::delEffectFlag);
     SOL_REGISTER("hasEffectFlag", CLuaStatusEffect::hasEffectFlag);
     SOL_REGISTER("getIcon", CLuaStatusEffect::getIcon);
+    SOL_REGISTER("getSubIcon", CLuaStatusEffect::getSubIcon);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaStatusEffect& effect)

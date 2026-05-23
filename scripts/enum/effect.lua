@@ -680,7 +680,17 @@ xi.effect =
     TOMAHAWK                 = 805, -- Silent status effect inflicted by a Warrior using the "Tomahawk" job ability
     NUKE_WALL                = 806, -- Custom effect for NM type mobs only.
 
+    -- TRUST Aura Effects
+    TRUST_AURA_CHR           = 807, -- CHR Aura, +9.7% Defense Bonus, +5 Magic Defense Bonus and +5 CHR at lv. 99, stacks with player Indi/Geo CHR.
+    TRUST_AURA_HASTE         = 808, -- HASTE Aura, Haste +20%, Accuracy +30, Ranged Accuracy +30 and Magic Accuracy +30 at lvl 99, stacks with player Indi/Geo HASTE.
+    TRUST_AURA_EXP           = 809, -- EXP Aura, +20% dedication effect for Experience Points and Capacity Points, stacks with other forms of dedication.
+    TRUST_AURA_ACC           = 810, -- ACC Aura, Accuracy+24, Ranged accuracy+24, and DEX+5 at lvl 99, stacks with player Indi/Geo PRECISION.
+    TRUST_AURA_REFRESH       = 811, -- REFRESH Aura, 3 MP/tick at lvl 99 stacks with player Indi/Geo REFRESH, also grants an increase to magical skill gain rate.
+    TRUST_AURA_REGEN         = 812, -- REGEN Aura, 6 HP/tick at lvl 99 stacks with player Indi/Geo REGEN. also grants an increase to physical combat skill gain rate.
+    TRUST_AURA_MAGIC_ATTACK  = 813, -- MATT Aura, Magic Attack Boost +19 and +19 Magic Accuracy boost at lvl 99, stacks with player Indi/Geo ACUMEN.
+    -- End of Trust Aura Effects
+
     -- 789
-    -- 807-1022
+    -- 813-1022
     -- PLACEHOLDER           = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
 }

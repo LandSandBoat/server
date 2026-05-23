@@ -752,11 +752,21 @@ enum EFFECT : uint16
     EFFECT_TOMAHAWK            = 805, // Silent status effect inflicted by a Warrior using the "Tomahawk" job ability
     EFFECT_NUKE_WALL           = 806, // Custom effect for NM type mobs only. Applied by elemental magic damage sources
 
+    // TRUST Aura Effects
+    EFFECT_TRUST_AURA_CHR          = 807, // CHR Aura, + 9.7 % Defense Bonus, + 5 Magic Defense Bonus and +5 CHR at lv.99, stacks with player Indi / Geo CHR.
+    EFFECT_TRUST_AURA_HASTE        = 808, // HASTE Aura, Haste + 20 %, Accuracy + 30, Ranged Accuracy + 30 and Magic Accuracy + 30 at lvl 99, stacks with player Indi / Geo HASTE.
+    EFFECT_TRUST_AURA_EXP          = 809, // EXP Aura, +20% dedication effect for Experience Points and Capacity Points, stacks with other forms of dedication.
+    EFFECT_TRUST_AURA_ACC          = 810, // ACC Aura, Accuracy + 24, Ranged accuracy + 24, and DEX + 5 at lvl 99, stacks with player Indi / Geo PRECISION.
+    EFFECT_TRUST_AURA_REFRESH      = 811, // REFRESH Aura, 3 MP / tick at lvl 99 stacks with player Indi / Geo REFRESH, also grants an increase to magical skill gain rate.
+    EFFECT_TRUST_AURA_REGEN        = 812, // REGEN Aura, 6 HP / tick at lvl 99 stacks with player Indi / Geo REGEN.also grants an increase to physical combat skill gain rate.
+    EFFECT_TRUST_AURA_MAGIC_ATTACK = 813, // MATT Aura, Magic Attack Boost + 19 and +19 Magic Accuracy boost at lvl 99, stacks with player Indi / Geo ACUMEN.
+    // End of Trust Aura Effects
+
     // 789
-    // 807-1022
+    // 813-1022
     // EFFECT_PLACEHOLDER           = 1023 // The client dat file seems to have only this many "slots", results of exceeding that are untested.
 };
-#define MAX_EFFECTID 807 // 768 real + 39 custom
+#define MAX_EFFECTID 814 // 768 real + 46 custom
 DECLARE_FORMAT_AS_UNDERLYING(EFFECT);
 
 /************************************************************************
@@ -791,6 +801,7 @@ public:
     uint16 GetIcon() const;
     uint16 GetPower() const;
     uint16 GetSubPower() const;
+    uint16 GetSubIcon() const;
     uint16 GetTier() const;
     uint32 GetEffectFlags() const;
     uint16 GetEffectType() const;
@@ -812,6 +823,7 @@ public:
     auto SetSource(uint16 sourceType, uint32 sourceTypeParam) -> void;
     void SetPower(uint16 Power);
     void SetSubPower(uint16 subPower);
+    void SetSubIcon(uint16 subIcon);
     void SetTier(uint16 tier);
     void SetDuration(timer::duration Duration);
     void SetOwner(CBattleEntity* Owner);
@@ -831,7 +843,7 @@ public:
     std::vector<CModifier> modList; // List of modifiers
     bool                   deleted{ false };
 
-    CStatusEffect(EFFECT id, uint16 icon, uint16 power, timer::duration tick, timer::duration duration, uint32 subid = 0, uint16 subPower = 0, uint16 tier = 0, uint32 flags = 0, uint16 sourceType = EffectSourceType::SOURCE_NONE, uint32 sourceTypeParam = 0, uint32 originID = 0);
+    CStatusEffect(EFFECT id, uint16 icon, uint16 power, timer::duration tick, timer::duration duration, uint32 subid = 0, uint16 subPower = 0, uint16 subIcon = 0, uint16 tier = 0, uint32 flags = 0, uint16 sourceType = EffectSourceType::SOURCE_NONE, uint32 sourceTypeParam = 0, uint32 originID = 0);
 
     ~CStatusEffect();
 
@@ -843,6 +855,7 @@ private:
     uint16 m_Icon{ 0 };               // Effect icon
     uint16 m_Power{ 0 };              // Strength of effect
     uint16 m_SubPower{ 0 };           // Secondary power of the effect
+    uint16 m_SubIcon{ 0 };            // Secondary icon for the sub effect (used for things like setting an Aura sub effect icon)
     uint16 m_Tier{ 0 };               // Tier of the effect
     uint32 m_Flags{ 0 };              // Effect flags (conditions for its disappearance)
     uint32 m_OriginID{ 0 };           // The effect's origin ID. (This is usually the ID of the entity that created the effect)

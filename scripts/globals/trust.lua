@@ -18,6 +18,7 @@ xi.trust.movementType =
     --     : Will set the combat distance the trust tries to stick to to 20'
     -- NOTE: If a Trust doesn't immediately sprint to a certain distance at the start of battle, it's probably NO_MOVE or MELEE.
     NO_MOVE    = -1, -- Will stand still providing they're within casting distance of their master and target when the fight starts. Otherwise will reposition to be within 9.0' of both
+    NON_COMBAT = -2, -- Will follow the master if first trust in party and will follow the trust in front if lower in the list.
     MELEE      = 0,  -- Default: will continually reposition to stay within melee range of the target
     MID_RANGE  = 6,  -- Will path at the start of battle to 6' away from the target, and try to stay at that distance
     LONG_RANGE = 12, -- Will path at the start of battle to 12' away from the target, and try to stay at that distance
@@ -172,6 +173,8 @@ local poolIDToMessagePageOffset =
     [5997] = 110, -- Iroha
     [5998] = 118, -- Ygnas
     [5999] = 120, -- Monberaux
+    [6002] = 119, -- Cornelia
+    [6003] = 121, -- Matsui-P
     [6004] = 52,  -- Excenmille [S]
     [6005] = 63,  -- Ayame UC
     [6006] = 64,  -- Maat UC
@@ -413,13 +416,32 @@ end
 -- 1.2     13                56                       99
 -- 1.0     10                50                       99
 -- NOTE: This does take into account iLevel, iLevel is different and trust get much more of an aggressive curve.
-xi.trust.modGrowthValMax = function(mob, maxVal)
+xi.trust.modGrowthValMax = function(mob, maxVal, optionalCurve)
     local lvl   = math.max(mob:getMainLvl(), 1) -- Ensure lvl is at least 1
-    local curve = 1.5 -- Gentle curve: starts increasing around lvl 20, this needs testing more, but seems to work well at this value.
+    local curve = optionalCurve or 1.5  -- Gentle curve: starts increasing around lvl 20, this needs testing more, but seems to work well at this value.
     local progress = (lvl - 1) / 98 -- Normalize level to 0.0 - 1.0 range (98 is the span between 1 and 99)
     local exponentGrowth = math.pow(progress, curve)
+    local val = math.floor(maxVal * exponentGrowth)
 
-    return math.floor(maxVal * exponentGrowth)
+    return math.max(val, 1)
+end
+
+-- Work out the value of aura power for passive trust, default is 1.0 (linear curve)
+xi.trust.auraValue = function(lvl, maxVal, optionalCurve)
+    local bonus = 0
+    local trustLevel = math.max(lvl, 1) -- Ensure lvl is at least 1
+
+    if trustLevel > 99 then
+        bonus = trustLevel - 99
+        trustLevel = 99
+    end
+
+    local curve = optionalCurve or 1.0  -- linear curve
+    local progress = (trustLevel - 1) / 98 -- Normalize level to 0.0 - 1.0 range (98 is the span between 1 and 99)
+    local exponentGrowth = math.pow(progress, curve)
+    local val = math.floor(maxVal * exponentGrowth)
+
+    return math.max(val + bonus, 1)
 end
 
 -- pageOffset is: (summon_message_id - 1) / 100

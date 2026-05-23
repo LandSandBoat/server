@@ -2206,7 +2206,7 @@ INSERT INTO `item_basic` VALUES (2212,0,'gunpowder_swathe','gpwdr._swathe','帯�
 INSERT INTO `item_basic` VALUES (2213,0,'handful_of_pine_nuts','pine_nuts','パインナッツ',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@INGREDIENTS,3);
 INSERT INTO `item_basic` VALUES (2214,0,'bag_of_imperial_rice','imperial_rice','アルザビライス',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@INGREDIENTS,15);
 INSERT INTO `item_basic` VALUES (2215,0,'bag_of_cornstarch','cornstarch','コーンスターチ',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@INGREDIENTS,20);
-INSERT INTO `item_basic` VALUES (2216,0,'lamp_marimo','lamp_marimo','ランプマリモ',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@FISH,786);
+INSERT INTO `item_basic` VALUES (2216,0,'lamp_marimo','lamp_marimo','ランプマリモ',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@FISH,31);
 INSERT INTO `item_basic` VALUES (2217,0,'lightning_band','lightning_band','雷輪',@GENERAL_TYPE,1,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (2218,0,'lamian_claw_key','lamian_claw_key','ラミアの爪のカギ',@GENERAL_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (2219,0,'lamian_fang_key','lamian_fang_key','ラミアの牙のカギ',@GENERAL_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);

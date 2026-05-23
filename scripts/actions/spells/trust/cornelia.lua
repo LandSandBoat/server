@@ -1,5 +1,5 @@
 -----------------------------------
--- Trust: Brygid
+-- Trust: Cornelia
 -----------------------------------
 ---@type TSpellTrust
 local spellObject = {}
@@ -24,16 +24,16 @@ spellObject.onMobSpawn = function(mob)
         power = 6,
         origin = mob,
         tick = 3,
-        subType = xi.effect.TRUST_AURA_CHR,
+        subType = xi.effect.TRUST_AURA_HASTE,
         subPower = mob:getMainLvl(),
-        subIcon = xi.effect.GEO_CHR_BOOST,
+        subIcon = xi.effect.GEO_HASTE,
         tier = xi.auraTarget.ALLIES,
         flag = xi.effectFlag.AURA
     }
 
     mob:addStatusEffect(xi.effect.COLURE_ACTIVE, effectParams)
 
-    mob:addGambit(ai.t.SELF, { { ai.c.TIMER, 5 }, { ai.c.RANDOM, 45 } }, { ai.r.ANIM_STRING, ai.s.RANDOM_ANIMATION, 3 })
+    mob:addGambit(ai.t.SELF, { { ai.c.TIMER, 5 }, { ai.c.RANDOM, 45 } }, { ai.r.ANIM_STRING, ai.s.RANDOM_ANIMATION, 4 })
 
     mob:setAutoAttackEnabled(false)
 end

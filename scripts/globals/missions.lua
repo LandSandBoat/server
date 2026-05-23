@@ -782,13 +782,13 @@ xi.mission.getMissionRankPoints = function(player, missionID)
     return false
 end
 
--- Tables identifying the nature of a mission by nation (0 = Not Repeatable, 1 = Repeatable, 2 = Do Not Add)
+-- Tables identifying the nature of a mission by nation (0 = Not Repeatable, 1 = Repeatable, 2 = Do Not Add, 3 = Required + Repeatable)
 -- Certain missions do not apply to the gate guard, such as Rank 4; Do Not Add is used for this.
 -- For 3 Nations missions (ID#5) sub-missions are not included in this mask.
 local missionType =
 {
     -- Required Rank             :   1  1  1  2  2  2  2  2  2  2  3  3  3  4  5  5  6  6  7  7  8  8  9  9
-    [xi.mission.log_id.SANDORIA] = { 1, 1, 1, 0, 1, 0, 2, 2, 2, 2, 1, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    [xi.mission.log_id.SANDORIA] = { 1, 3, 1, 0, 1, 0, 2, 2, 2, 2, 3, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     [xi.mission.log_id.BASTOK]   = { 2, 0, 1, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     [xi.mission.log_id.WINDURST] = { 2, 0, 0, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 }
@@ -840,14 +840,20 @@ xi.mission.getMissionMask = function(player)
             )
         then
             if v == 0 then
-                if
-                    not player:hasCompletedMission(nation, missionId)
-                then
+                if not player:hasCompletedMission(nation, missionId) then
                     firstMission = utils.mask.setBit(firstMission, missionId, true)
                     lastRequiredMission = missionId
                 end
             elseif v == 1 then
                 repeatMission = utils.mask.setBit(repeatMission, missionId, true)
+            elseif v == 3 then
+                if not player:hasCompletedMission(nation, missionId) then
+                    firstMission = utils.mask.setBit(firstMission, missionId, true)
+                else
+                    repeatMission = utils.mask.setBit(repeatMission, missionId, true)
+                end
+
+                lastRequiredMission = missionId
             end
         else
             break

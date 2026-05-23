@@ -51,11 +51,11 @@ end
 
 local examineGizmo = function(player, gizmoIndex, successCS, failCS)
     if mission:getVar(player, 'RandomGizmo') == gizmoIndex then
-        return mission:progressEvent(successCS)
+        return mission:progressCutscene(successCS)
     else
         if not mission:isVarBitsSet(player, 'GizmoExamined', gizmoIndex) then
             mission:setVarBit(player, 'GizmoExamined', gizmoIndex)
-            return mission:progressEvent(failCS)
+            return mission:progressCutscene(failCS)
         else
             return mission:messageSpecial(innerHorutotoRuinsID.text.EXAMINED_RECEPTACLE)
         end
@@ -203,7 +203,7 @@ mission.sections =
         [xi.zone.INNER_HORUTOTO_RUINS] =
         {
             -- Gate: Magical Gizmo
-            ['_5c5'] = mission:progressEvent(42),
+            ['_5c5'] = mission:progressCutscene(42),
 
             onEventFinish =
             {
