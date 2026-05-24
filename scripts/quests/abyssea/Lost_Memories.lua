@@ -44,7 +44,7 @@ quest.sections =
                     return quest:event(165)
                 end,
             },
-            
+
             onEventFinish =
             {
                 [165] = function(player, csid, option, npc)
@@ -55,7 +55,7 @@ quest.sections =
             },
         },
     },
-    
+
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED
@@ -68,14 +68,14 @@ quest.sections =
                 onTrigger = function(player, npc)
                     return quest:event(163)
                 end,
-                
+
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHas(trade, { { xi.item.LAMBENT_SCALE, 2 } }) then
                         return quest:event(164)
                     end
                 end,
             },
-            
+
             onEventFinish =
             {
                 [164] = function(player, csid, option, npc)

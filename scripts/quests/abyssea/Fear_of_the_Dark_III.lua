@@ -27,7 +27,7 @@ quest.sections =
                     return quest:event(161)
                 end,
             },
-            
+
             onEventFinish =
             {
                 [161] = function(player, csid, option, npc)
@@ -38,7 +38,7 @@ quest.sections =
             },
         },
     },
-    
+
     {
         check = function(player, status, vars)
             return status ~= xi.questStatus.QUEST_AVAILABLE
@@ -51,14 +51,14 @@ quest.sections =
                 onTrigger = function(player, npc)
                     return quest:event(159)
                 end,
-                
+
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHas(trade, { { xi.item.CLIONID_WING, 3 } }) then
                         return quest:event(160)
                     end
                 end,
             },
-            
+
             onEventFinish =
             {
                 [160] = function(player, csid, option, npc)

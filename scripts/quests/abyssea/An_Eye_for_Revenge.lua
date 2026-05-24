@@ -45,7 +45,7 @@ quest.sections =
                     return quest:event(190)
                 end,
             },
-            
+
             onEventFinish =
             {
                 [190] = function(player, csid, option, npc)
@@ -54,7 +54,7 @@ quest.sections =
             },
         },
     },
-    
+
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED
@@ -72,7 +72,7 @@ quest.sections =
                     end
                 end,
             },
-            
+
             ['Lugarhoo'] =
             {
                 onMobDeath = function(mob, player, optParams)
@@ -81,7 +81,7 @@ quest.sections =
                     end
                 end,
             },
-            
+
             onEventFinish =
             {
                 [192] = function(player, csid, option, npc)
