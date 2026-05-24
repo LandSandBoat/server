@@ -227,6 +227,7 @@ player_data = [
     "fishing_contest_entries.sql",
     "help_desk.sql",
     "ip_exceptions.sql",
+    "linkshell_concierge.sql",
     "linkshells.sql",
     "server_variables.sql",
     "unity_system.sql",

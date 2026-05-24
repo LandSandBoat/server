@@ -139,6 +139,12 @@ void CTrustEntity::Spawn()
 
 bool CTrustEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 {
+    // Passive GEO trusts like Sakura etc are basically walking indicolures and cant be targeted
+    if (m_isPassiveTrust)
+    {
+        return false;
+    }
+
     if (PInitiator->objtype == TYPE_TRUST && PMaster == PInitiator->PMaster)
     {
         return true;
@@ -290,4 +296,15 @@ void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& act
     }
 
     this->processActionEffectFlags(action);
+}
+
+bool CTrustEntity::GetUntargetable() const
+{
+    // Passive GEO trusts like Sakura etc are basically walking indicolures and cant be targeted
+    if (m_isPassiveTrust)
+    {
+        return true;
+    }
+
+    return CMobEntity::GetUntargetable();
 }

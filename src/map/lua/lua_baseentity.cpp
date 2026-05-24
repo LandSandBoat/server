@@ -128,6 +128,8 @@
 #include "packets/s2c/0x03a_magicschedulor.h"
 #include "packets/s2c/0x03c_shop_list.h"
 #include "packets/s2c/0x03e_shop_open.h"
+#include "packets/s2c/0x048_link_concierge_header.h"
+#include "packets/s2c/0x048_link_concierge_record.h"
 #include "packets/s2c/0x04c_auc.h"
 #include "packets/s2c/0x050_equip_list.h"
 #include "packets/s2c/0x051_grap_list.h"
@@ -1045,6 +1047,78 @@ void CLuaBaseEntity::sendDebugPacket(const sol::table& packetData)
             packet->ref<uint8>(i) = packetData.get<uint8>(i + 1); // Lua is 1-indexed
         }
         PChar->pushPacket(std::move(packet));
+    }
+}
+
+/************************************************************************
+ *  Function: sendLinkshellConcierge()
+ *  Purpose : Emit the 5-packet linkshell-concierge burst to this player.
+ *  Example : player:sendLinkshellConcierge({
+ *                yourSlot   = 13,    -- nil if player has no active listing
+ *                postedDays = 22,    -- days since your listing was posted
+ *                slots = {           -- keyed by concierge slot index 0..15
+ *                    [0]  = { groupId=47134, groupKey=0xCA2B, color=0xF55F,
+ *                             flag=3, name="GobTrain",
+ *                             lang=1, membersGoal=8, activeTier=2,
+ *                             characteristics=0x33CF },
+ *                    [13] = { ... },
+ *                },
+ *            })
+ ************************************************************************/
+void CLuaBaseEntity::sendLinkshellConcierge(const sol::table& data) const
+{
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (!PChar)
+    {
+        return;
+    }
+
+    const auto           yourSlotRaw = data.get<sol::optional<uint8>>("yourSlot");
+    std::optional<uint8> yourSlot;
+    if (yourSlotRaw)
+    {
+        yourSlot = *yourSlotRaw;
+    }
+
+    PChar->pushPacket<GP_SERV_COMMAND_LINK_CONCIERGE::HEADER>(
+        yourSlot,
+        data.get_or<uint16>("postedDays", 0));
+
+    const auto slots = data.get<sol::optional<sol::table>>("slots");
+
+    for (uint8 pktIdx = 0; pktIdx < 4; ++pktIdx)
+    {
+        std::array<GP_SERV_COMMAND_LINK_CONCIERGE::SlotInput, 4> entries{};
+
+        for (uint8 entry = 0; entry < 4; ++entry)
+        {
+            const uint8 slotId = pktIdx * 4 + entry;
+
+            sol::optional<sol::table> slot;
+            if (slots)
+            {
+                slot = slots->get<sol::optional<sol::table>>(slotId);
+            }
+
+            if (!slot)
+            {
+                continue;
+            }
+
+            entries[entry].filled          = true;
+            entries[entry].slotIndex       = slotId;
+            entries[entry].groupId         = slot->get_or<uint32>("groupId", 0);
+            entries[entry].groupKey        = slot->get_or<uint16>("groupKey", 0);
+            entries[entry].color           = slot->get_or<uint16>("color", 0);
+            entries[entry].flag            = slot->get_or<uint8>("flag", 0);
+            entries[entry].name            = slot->get_or<std::string>("name", "");
+            entries[entry].lang            = slot->get_or<uint8>("lang", 0);
+            entries[entry].membersGoal     = slot->get_or<uint8>("membersGoal", 0);
+            entries[entry].activeTier      = slot->get_or<uint8>("activeTier", 0);
+            entries[entry].characteristics = slot->get_or<uint16>("characteristics", 0);
+        }
+
+        PChar->pushPacket<GP_SERV_COMMAND_LINK_CONCIERGE::RECORD>(entries);
     }
 }
 
@@ -4169,7 +4243,7 @@ auto CLuaBaseEntity::getEquippedItem(uint8 slot) -> CItem*
 {
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        if (slot > 15)
+        if (slot > SLOT_LINK2)
         {
             ShowWarning("Invalid slot passed to function.");
             return nullptr;
@@ -19917,6 +19991,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("entityVisualPacket", CLuaBaseEntity::entityVisualPacket);
     SOL_REGISTER("entityAnimationPacket", CLuaBaseEntity::entityAnimationPacket);
     SOL_REGISTER("sendDebugPacket", CLuaBaseEntity::sendDebugPacket);
+    SOL_REGISTER("sendLinkshellConcierge", CLuaBaseEntity::sendLinkshellConcierge);
 
     SOL_REGISTER("startEvent", CLuaBaseEntity::startEvent);
     SOL_REGISTER("startCutscene", CLuaBaseEntity::startCutscene);

@@ -1088,6 +1088,27 @@ end
 function CBaseEntity:addLinkpearl(lsname, equip)
 end
 
+---@class LinkshellConciergeSlot
+---@field groupId integer
+---@field groupKey integer
+---@field color integer
+---@field flag integer
+---@field name string
+---@field lang integer
+---@field membersGoal integer
+---@field activeTier integer
+---@field characteristics integer
+
+---@class LinkshellConciergeView
+---@field yourSlot integer?
+---@field postedDays integer?
+---@field slots table<integer, LinkshellConciergeSlot>?
+
+---@param data LinkshellConciergeView
+---@return nil
+function CBaseEntity:sendLinkshellConcierge(data)
+end
+
 ---@nodiscard
 ---@param locationID integer
 ---@return integer

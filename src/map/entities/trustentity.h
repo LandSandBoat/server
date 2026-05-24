@@ -51,8 +51,11 @@ public:
     void OnMobSkillFinished(CMobSkillState& state, action_t& action) override;
     void OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action) override;
 
+    bool GetUntargetable() const override;
+
     uint32 m_TrustID{};
-    bool   isReleased = false; // Track trust releasing (see c2s 0x01A action)
+    bool   isReleased       = false; // Track trust releasing (see c2s 0x01A action)
+    bool   m_isPassiveTrust = false;
 
 private:
     static constexpr int8 m_defaultShieldSize = 3;

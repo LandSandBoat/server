@@ -244,9 +244,10 @@ end
 -- Mob calculation: https://docs.google.com/spreadsheets/d/1YBoveP-weMdidrirY-vPDzHyxbEI2ryECINlfCnFkLI/edit?gid=224123492#gid=224123492&range=C50
 xi.combat.physical.calculateMeleeStatFactor = function(actor, target)
     local fSTR = 0 -- The variable we want to calculate.
+    local mLvl = actor:getMainLvl()
 
     -- Early return: Mobs at or under lvl 1.
-    if actor:isMob() and actor:getMainLvl() <= 1 then
+    if actor:isMob() and mLvl <= 1 then
         return 1
     end
 
@@ -255,8 +256,36 @@ xi.combat.physical.calculateMeleeStatFactor = function(actor, target)
 
     -- Pets and Mobs.
     if actor:isMob() or actor:isPet() then
-        fSTR = math.floor((statDiff + 4) / 4)
-        fSTR = utils.clamp(fSTR, -20, 24)
+        if statDiff >= 36 then
+            fSTR = (statDiff - 4) / 4
+        elseif statDiff >= 26 then
+            fSTR = (statDiff - 3) / 4
+        elseif statDiff >= 17 then
+            fSTR = (statDiff - 2) / 4
+        elseif statDiff >= 4 then
+            fSTR = (statDiff - 1) / 4
+        elseif statDiff >= -8 then
+            fSTR = statDiff / 4
+        elseif statDiff >= -13 then
+            fSTR = (statDiff + 1) / 4
+        elseif statDiff >= -19 then
+            fSTR = (statDiff + 3) / 4
+        elseif statDiff >= -32 then
+            fSTR = (statDiff + 4) / 4
+        elseif statDiff >= -42 then
+            fSTR = (statDiff + 5) / 4
+        elseif statDiff >= -54 then
+            fSTR = (statDiff + 6) / 4
+        elseif statDiff >= -67 then
+            fSTR = (statDiff + 7) / 4
+        elseif statDiff >= -76 then
+            fSTR = (statDiff + 8) / 4
+        else -- <= -77
+            fSTR = (statDiff + 9) / 4
+        end
+
+        fSTR = math.floor(fSTR)
+        fSTR = utils.clamp(fSTR, math.floor(mLvl / 5) - 1, math.floor(mLvl / 5) + 5)
 
         return fSTR
     end
@@ -305,9 +334,10 @@ end
 -- Gobli Wiki: https://w-atwiki-jp.translate.goog/studiogobli/pages/14.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp
 xi.combat.physical.calculateRangedStatFactor = function(actor, target)
     local fSTR = 0 -- The variable we want to calculate.
+    local mLvl = actor:getMainLvl()
 
     -- Early return: Mobs at or under lvl 1.
-    if actor:isMob() and actor:getMainLvl() <= 1 then
+    if actor:isMob() and mLvl <= 1 then
         return 1
     end
 
@@ -316,8 +346,34 @@ xi.combat.physical.calculateRangedStatFactor = function(actor, target)
 
     -- Pets and Mobs.
     if actor:isMob() or actor:isPet() then
-        fSTR = math.floor((statDiff + 4) / 2)
-        fSTR = utils.clamp(fSTR, -20, 24)
+        if statDiff >= 36 then
+            fSTR = (statDiff - 4) / 2
+        elseif statDiff >= 26 then
+            fSTR = (statDiff - 3) / 2
+        elseif statDiff >= 15 then
+            fSTR = (statDiff - 2) / 2
+        elseif statDiff >= 4 then
+            fSTR = (statDiff - 1) / 2
+        elseif statDiff >= -8 then
+            fSTR = statDiff / 2
+        elseif statDiff >= -16 then
+            fSTR = (statDiff + 1) / 2
+        elseif statDiff >= -31 then
+            fSTR = (statDiff + 1) / 2
+        elseif statDiff >= -42 then
+            fSTR = (statDiff + 3) / 2
+        elseif statDiff >= -53 then
+            fSTR = (statDiff + 3) / 2
+        elseif statDiff >= -64 then
+            fSTR = (statDiff + 5) / 2
+        elseif statDiff >= -76 then
+            fSTR = (statDiff + 6) / 2
+        else -- <= -77
+            fSTR = (statDiff + 7) / 2
+        end
+
+        fSTR = math.floor(fSTR)
+        fSTR = utils.clamp(fSTR, math.floor((mLvl / 5 - 1) * 2), math.floor((mLvl / 5 + 5) * 2))
 
         return fSTR
     end

@@ -43,6 +43,11 @@ zones[xi.zone.WINDURST_WALLS] =
         OBTAINED_GUILD_POINTS          = 9662,  -- Obtained: <number> guild points.
         TEAR_IN_FABRIC_OF_SPACE        = 10875, -- There appears to be a tear in the fabric of space...
         UNABLE_RACE_CHANGE             = 11512, -- You were unable to use the specified appearance for your character.
+        LINK_CONCIERGE_GOODBYE         = 11255, -- It was my pleasure to meet with you this fine day. May you encounter many friendly faces throughout your travels.
+        LINK_CONCIERGE_ONE_PER_DAY     = 11259, -- In the interest of fairness, I am unable to distribute multiple linkpearls to someone on the same day. Please come back tomorrow.
+        LINK_CONCIERGE_REGISTERED      = 11316, -- Your registration is officially complete.
+        LINK_CONCIERGE_REGISTERED_2    = 11317, -- May your journeys lead you to many as-yet-unmet friends, and may the bonds you forge last a lifetime.
+        LINK_CONCIERGE_LS_TAKEN        = 11318, -- Another member of that linkshell currently has an active registration. Please wait until that registration expires and try again.
     },
     mob =
     {

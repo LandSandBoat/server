@@ -1,7 +1,7 @@
 /*
 ===========================================================================
 
-  Copyright (c) 2025 LandSandBoat Dev Teams
+  Copyright (c) 2026 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,20 +19,29 @@
 ===========================================================================
 */
 
-#pragma once
+#include "0x048_link_concierge_header.h"
 
-#include "base.h"
+#include <fmt/format.h>
 
-// https://github.com/atom0s/XiPackets/tree/main/world/server/0x0048
-// This packet is sent by the server when the client is interacting with a linkshell concierge NPC.
-class GP_SERV_COMMAND_LINK_CONCIERGE final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_LINK_CONCIERGE, GP_SERV_COMMAND_LINK_CONCIERGE>
+GP_SERV_COMMAND_LINK_CONCIERGE::HEADER::HEADER(const std::optional<uint8> yourSlot, uint16 daysSincePost)
 {
-public:
-    struct PacketData
-    {
-        uint8_t data[124]; // PS2: (New; did not exist.)
-    };
+    auto& packet = this->data();
 
-    // TODO: Unimplemented
-    GP_SERV_COMMAND_LINK_CONCIERGE() = default;
-};
+    packet.Sentinel[0] = 0xFE;
+    packet.Sentinel[1] = 0xFE;
+    packet.Sentinel[2] = 0xFE;
+    packet.Sentinel[3] = 0xFE;
+
+    if (yourSlot)
+    {
+        packet.SlotIndex   = *yourSlot;
+        packet.ListingFlag = 0xFFFF;
+        packet.Registered  = 1;
+    }
+
+    if (daysSincePost > 0)
+    {
+        const auto str = fmt::format("{}d", daysSincePost);
+        std::memcpy(packet.PostedDays, str.data(), std::min<std::size_t>(str.size(), sizeof(packet.PostedDays)));
+    }
+}

@@ -88,6 +88,11 @@ zones[xi.zone.BASTOK_MINES] =
         CHOCOBO_FEEDING_ITEM           = 13959, -- #: %
         COMMON_SENSE_SURVIVAL          = 16064, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         TEAR_IN_FABRIC_OF_SPACE        = 16666, -- There appears to be a tear in the fabric of space...
+        LINK_CONCIERGE_GOODBYE         = 16961, -- It was my pleasure to meet with you this fine day. May you encounter many friendly faces throughout your travels.
+        LINK_CONCIERGE_ONE_PER_DAY     = 16965, -- In the interest of fairness, I am unable to distribute multiple linkpearls to someone on the same day. Please come back tomorrow.
+        LINK_CONCIERGE_REGISTERED      = 17022, -- Your registration is officially complete.
+        LINK_CONCIERGE_REGISTERED_2    = 17023, -- May your journeys lead you to many as-yet-unmet friends, and may the bonds you forge last a lifetime.
+        LINK_CONCIERGE_LS_TAKEN        = 17024, -- Another member of that linkshell currently has an active registration. Please wait until that registration expires and try again.
     },
     mob =
     {

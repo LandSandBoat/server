@@ -131,6 +131,11 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         RETRIEVE_DIALOG_ID            = 18179, -- You retrieve <item> from the porter moogle's care.
         COMMON_SENSE_SURVIVAL         = 18525, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         MAP_MARKER_TUTORIAL           = 18647, -- Selecting Map from the main menu opens the map of the area in which you currently reside. Select Markers and press the right arrow key to see all the markers placed on your map.
+        LINK_CONCIERGE_GOODBYE        = 19287, -- It was my pleasure to meet with you this fine day. May you encounter many friendly faces throughout your travels.
+        LINK_CONCIERGE_ONE_PER_DAY    = 19291, -- In the interest of fairness, I am unable to distribute multiple linkpearls to someone on the same day. Please come back tomorrow.
+        LINK_CONCIERGE_REGISTERED     = 19348, -- Your registration is officially complete.
+        LINK_CONCIERGE_REGISTERED_2   = 19349, -- May your journeys lead you to many as-yet-unmet friends, and may the bonds you forge last a lifetime.
+        LINK_CONCIERGE_LS_TAKEN       = 19350, -- Another member of that linkshell currently has an active registration. Please wait until that registration expires and try again.
     },
     mob =
     {

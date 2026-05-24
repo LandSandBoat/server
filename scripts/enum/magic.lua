@@ -1199,6 +1199,8 @@ xi.magic.spell =
     YGNAS                 =  998,
     MONBERAUX             =  999,
 
+    CORNELIA              = 1002,
+    MATSUI_P              = 1003,
     EXCENMILLE_S          = 1004,
     AYAME_UC              = 1005,
     MAAT_UC               = 1006,

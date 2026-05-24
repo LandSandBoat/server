@@ -22,6 +22,8 @@ xi.slot =
     RING1  = 13,
     RING2  = 14,
     BACK   = 15,
+    LINK1  = 16,
+    LINK2  = 17,
 }
 
 xi.MAX_SLOTID  = 15

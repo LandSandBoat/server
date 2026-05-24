@@ -13,7 +13,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.NOCUOUS_WEAPON, 5, 3600) -- 1 hour
+    xi.mob.phOnDespawn(mob, ID.mob.NOCUOUS_WEAPON, 10, 1, {}) -- True Lottery
 end
 
 return entity

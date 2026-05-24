@@ -54,9 +54,21 @@ void BuildTrustData(uint32 TrustID);
 auto LoadTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntity*;
 void LoadTrustStatsAndSkills(CTrustEntity* PTrust);
 
+// List of trusts that are essentially walking GEO bubbles that should not be targetable
+static std::unordered_set<SpellID> passiveTrustIDs = {
+    SpellID::Sakura,
+    SpellID::Moogle,
+    SpellID::Star_Sibyl,
+    SpellID::Kuyin_Hathdenna,
+    SpellID::Brygid,
+    SpellID::Kupofried,
+    SpellID::Cornelia,
+};
+
 struct TrustData
 {
     uint32      trustID{};
+    bool        isPassiveTrust{};
     uint32      pool{};
     look_t      look;        // appearance data
     std::string name;        // script name string
@@ -252,6 +264,11 @@ void BuildTrustData(uint32 TrustID)
 
             data->trustID = TrustID;
 
+            if (passiveTrustIDs.contains(static_cast<SpellID>(data->trustID)))
+            {
+                data->isPassiveTrust = true;
+            }
+
             data->pool        = rset->get<uint32>("poolid");
             data->name        = rset->get<std::string>("name");
             data->packet_name = rset->get<std::string>("packet_name");
@@ -363,11 +380,12 @@ auto LoadTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntity*
     PTrust->baseSpeed      = trustData->baseSpeed;
     PTrust->animationSpeed = trustData->animationSpeed;
     PTrust->UpdateSpeed();
-    PTrust->m_TrustID       = trustData->trustID;
-    PTrust->status          = STATUS_TYPE::NORMAL;
-    PTrust->modelSize       = trustData->modelSize;
-    PTrust->modelHitboxSize = trustData->modelHitboxSize;
-    PTrust->m_EcoSystem     = trustData->EcoSystem;
+    PTrust->m_TrustID        = trustData->trustID;
+    PTrust->m_isPassiveTrust = trustData->isPassiveTrust;
+    PTrust->status           = STATUS_TYPE::NORMAL;
+    PTrust->modelSize        = trustData->modelSize;
+    PTrust->modelHitboxSize  = trustData->modelHitboxSize;
+    PTrust->m_EcoSystem      = trustData->EcoSystem;
 
     PTrust->SetMJob(trustData->mJob);
     PTrust->SetSJob(trustData->sJob);

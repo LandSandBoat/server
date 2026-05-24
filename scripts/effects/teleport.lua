@@ -11,6 +11,11 @@ effectObject.onEffectTick = function(target, effect)
 end
 
 effectObject.onEffectLose = function(target, effect)
+    -- Prevents others from teleporting the target out of an event.
+    if target:isInEvent() and effect:getOriginID() ~= target:getID() then
+        return
+    end
+
     local destination = effect:getPower()
 
     if target:isMob() then
