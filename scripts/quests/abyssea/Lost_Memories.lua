@@ -4,6 +4,8 @@
 -- !addquest 8 9
 -- Halver : !pos: 600 40 -515 132
 -----------------------------------
+local ID = zones[xi.zone.ABYSSEA_LA_THEINE]
+-----------------------------------
 
 local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.LOST_MEMORIES)
 
@@ -80,12 +82,9 @@ quest.sections =
             {
                 [164] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    --TODO cruor not implemented in npc_utils & quest rewards
-                    --TODO remove system messages after Abyssea messages are fixed
                     --TODO add repeat quest functionality?
                     player:addCurrency('cruor', 480)
-                    player:printToPlayer('You received 480 cruor')
-                    player:printToPlayer('You received a Vial of Lambent Potion')
+                    player:messageSpecial(ID.text.CRUOR_TOTAL, 480, player:getCurrency('cruor'))
                     quest:complete(player)
                 end,
             },

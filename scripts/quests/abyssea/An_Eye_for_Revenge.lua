@@ -4,6 +4,8 @@
 -- !addquest 8 3
 -- Curilla : !pos: -467.7 -3.5 -769.5 132
 -----------------------------------
+local ID = zones[xi.zone.ABYSSEA_LA_THEINE]
+-----------------------------------
 
 local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.AN_EYE_FOR_REVENGE)
 
@@ -78,6 +80,7 @@ quest.sections =
                 onMobDeath = function(mob, player, optParams)
                     if not player:hasKeyItem(xi.ki.LUGARHOOS_EYEBALL) then
                         player:addKeyItem(xi.ki.LUGARHOOS_EYEBALL)
+                        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LUGARHOOS_EYEBALL)
                     end
                 end,
             },
@@ -86,10 +89,8 @@ quest.sections =
             {
                 [192] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.LUGARHOOS_EYEBALL)
-                    --TODO cruor not implemented in npc_utils & quest rewards
                     player:addCurrency('cruor', 800)
-                    player:printToPlayer('You received 800 cruor')
-                    player:printToPlayer('You received the Scarlet Abyssite of Furtherance')
+                    player:messageSpecial(ID.text.CRUOR_TOTAL, 800, player:getCurrency('cruor'))
                     quest:complete(player)
                 end,
             },
