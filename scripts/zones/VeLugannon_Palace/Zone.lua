@@ -1,12 +1,21 @@
 -----------------------------------
 -- Zone: VeLugannon_Palace (177)
 -----------------------------------
+local ID = zones[xi.zone.VELUGANNON_PALACE]
+-----------------------------------
 ---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.treasure.initZone(zone)
     SetServerVariable('[POP]SteamCleaner', 0) -- should 'reset' on server repop
+
+    local curtanaQm = GetNPCByID(ID.npc.QM1)
+
+    -- Move Curtana to random position on zone load
+    if curtanaQm then
+        curtanaQm:setPos(unpack(ID.positions.curtana[math.random(1, #ID.positions.curtana)]))
+    end
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
