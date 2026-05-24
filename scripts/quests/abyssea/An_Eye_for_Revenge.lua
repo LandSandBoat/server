@@ -77,7 +77,7 @@ quest.sections =
             {
                 onMobDeath = function(mob, player, optParams)
                     if not player:hasKeyItem(xi.ki.LUGARHOOS_EYEBALL) then
-                        npcUtil.giveKeyItem(xi.ki.LUGARHOOS_EYEBALL)
+                        player:addKeyItem(xi.ki.LUGARHOOS_EYEBALL)
                     end
                 end,
             },
