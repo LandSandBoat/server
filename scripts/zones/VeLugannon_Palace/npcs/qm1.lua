@@ -19,6 +19,8 @@ entity.onTrigger = function(player, npc)
         hideTime = 60 * 60 * math.random(2, 3)
     else
         player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.CURTANA) -- Curtana
+
+        return
     end
 
     local curtanaPos =
