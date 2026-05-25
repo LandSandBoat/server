@@ -72579,6 +72579,12 @@ INSERT INTO `mob_spawn_points` VALUES (17629654,0,'Peon_Pounder','Peon Pounder',
 INSERT INTO `mob_spawn_points` VALUES (17629655,0,'Centurio_XX-I','Centurio XX-I',44,99,99,810.733,1.389,-566.859,0);
 INSERT INTO `mob_spawn_points` VALUES (17629656,0,'Centurio_XX-I','Centurio XX-I',44,99,99,778.500,1.527,-657.380,0);
 INSERT INTO `mob_spawn_points` VALUES (17629657,0,'Centurio_XX-I','Centurio XX-I',44,99,99,822.080,-8.500,-382.989,251);
+INSERT INTO `mob_spawn_points` VALUES (17629658,0,'Spelunking_Sabotender','Spelunking Sabotender',29,62,68,-535.550,-0.500,-421.370,142);
+INSERT INTO `mob_spawn_points` VALUES (17629659,0,'Spelunking_Sabotender','Spelunking Sabotender',29,62,68,-537.010,-0.500,-421.600,58);
+INSERT INTO `mob_spawn_points` VALUES (17629660,0,'Sand_Tarantula','Sand Tarantula',30,65,69,-536.630,-0.500,-418.220,17);
+INSERT INTO `mob_spawn_points` VALUES (17629661,0,'Sand_Tarantula','Sand Tarantula',30,65,69,-532.410,-0.500,-417.830,119);
+INSERT INTO `mob_spawn_points` VALUES (17629662,0,'Sand_Lizard','Sand Lizard',16,56,59,-536.640,-0.500,-421.020,37);
+INSERT INTO `mob_spawn_points` VALUES (17629663,0,'Sand_Lizard','Sand Lizard',16,56,59,-536.470,-0.500,-423.440,150);
 
 -- ------------------------------------------------------------
 -- Cloister of Tremors (Zone 209)
