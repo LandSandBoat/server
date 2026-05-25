@@ -15564,6 +15564,14 @@ INSERT INTO `mob_groups` VALUES (5,0,277,'Rancibus',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (6,0,277,'Palloritus',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (7,0,277,'Perfidien',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (8,0,277,'Plouton',0,128,0,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (9,7607,277,'August_OB',0,128,0,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (10,7600,277,'Bztavian_OB',0,128,0,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (11,7601,277,'Rockfin_OB',0,128,0,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (12,7602,277,'Gabbrath_OB',0,128,0,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (13,7603,277,'Yggdreant_OB',0,128,0,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (14,7604,277,'Waktza_OB',0,128,0,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (15,7605,277,'Cehuetzi_OB',0,128,0,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (16,7606,277,'Teodor_OB',0,128,0,0,0,0,NULL);
 
 -- --------------------------------------------------------------
 -- Walk_of_Echoes_[P2] (Zone 279)

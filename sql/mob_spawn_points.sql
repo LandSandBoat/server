@@ -84325,6 +84325,47 @@ INSERT INTO `mob_spawn_points` VALUES (17911880,0,'Plouton','Plouton',8,0,0,0.00
 INSERT INTO `mob_spawn_points` VALUES (17911881,0,'Plouton','Plouton',8,0,0,0.000,0.000,0.000,0);
 INSERT INTO `mob_spawn_points` VALUES (17911882,0,'Plouton','Plouton',8,0,0,0.000,0.000,0.000,0);
 INSERT INTO `mob_spawn_points` VALUES (17911883,0,'Plouton','Plouton',8,0,0,0.000,0.000,0.000,0);
+-- ★Oathsworn Blade★
+INSERT INTO `mob_spawn_points` VALUES (17911884,0,'August_OB','August',9,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911885,0,'Bztavian_OB','Bztavian',10,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911886,0,'Rockfin_OB','Rockfin',11,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911887,0,'Gabbrath_OB','Gabbrath',12,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911888,0,'Yggdreant_OB','Yggdreant',13,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911889,0,'Waktza_OB','Waktza',14,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911890,0,'Cehuetzi_OB','Cehuetzi',15,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911891,0,'Teodor_OB','Teodor',16,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911892,0,'August_OB','August',9,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911893,0,'Bztavian_OB','Bztavian',10,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911894,0,'Rockfin_OB','Rockfin',11,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911895,0,'Gabbrath_OB','Gabbrath',12,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911896,0,'Yggdreant_OB','Yggdreant',13,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911897,0,'Waktza_OB','Waktza',14,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911898,0,'Cehuetzi_OB','Cehuetzi',15,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911899,0,'Teodor_OB','Teodor',16,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911900,0,'August_OB','August',9,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911901,0,'Bztavian_OB','Bztavian',10,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911902,0,'Rockfin_OB','Rockfin',11,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911903,0,'Gabbrath_OB','Gabbrath',12,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911904,0,'Yggdreant_OB','Yggdreant',13,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911905,0,'Waktza_OB','Waktza',14,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911906,0,'Cehuetzi_OB','Cehuetzi',15,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911907,0,'Teodor_OB','Teodor',16,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911908,0,'August_OB','August',9,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911909,0,'Bztavian_OB','Bztavian',10,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911910,0,'Rockfin_OB','Rockfin',11,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911911,0,'Gabbrath_OB','Gabbrath',12,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911912,0,'Yggdreant_OB','Yggdreant',13,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911913,0,'Waktza_OB','Waktza',14,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911914,0,'Cehuetzi_OB','Cehuetzi',15,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911915,0,'Teodor_OB','Teodor',16,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911916,0,'August_OB','August',9,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911917,0,'Bztavian_OB','Bztavian',10,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911918,0,'Rockfin_OB','Rockfin',11,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911919,0,'Gabbrath_OB','Gabbrath',12,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911920,0,'Yggdreant_OB','Yggdreant',13,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911921,0,'Waktza_OB','Waktza',14,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911922,0,'Cehuetzi_OB','Cehuetzi',15,0,0,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17911923,0,'Teodor_OB','Teodor',16,0,0,0.000,0.000,0.000,0);
 
 -- --------------------------------------------------------------
 -- Walk of Echoes P2 (Zone 279)
