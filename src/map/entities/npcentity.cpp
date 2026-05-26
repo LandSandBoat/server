@@ -50,7 +50,6 @@ CNpcEntity::CNpcEntity()
 CNpcEntity::~CNpcEntity()
 {
     TracyZoneScoped;
-
 }
 
 uint32 CNpcEntity::getEntityFlags() const

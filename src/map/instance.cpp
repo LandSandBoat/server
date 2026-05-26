@@ -47,7 +47,6 @@ CInstance::CInstance(Scheduler& scheduler, MapConfig config, CZone* zone, uint32
 CInstance::~CInstance()
 {
     TracyZoneScoped;
-
 }
 
 uint16 CInstance::GetID() const

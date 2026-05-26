@@ -108,7 +108,6 @@ CBattleEntity::CBattleEntity()
 CBattleEntity::~CBattleEntity()
 {
     TracyZoneScoped;
-
 }
 
 bool CBattleEntity::IsDualWielding()
@@ -2331,7 +2330,6 @@ void CBattleEntity::processActionEffectFlags(const action_t& action) const
 void CBattleEntity::OnDeathTimer()
 {
     TracyZoneScoped;
-
 }
 
 void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)

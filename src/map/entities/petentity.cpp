@@ -69,7 +69,6 @@ CPetEntity::CPetEntity(PET_TYPE petType)
 CPetEntity::~CPetEntity()
 {
     TracyZoneScoped;
-
 }
 
 PET_TYPE CPetEntity::getPetType() const

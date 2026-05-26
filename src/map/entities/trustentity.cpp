@@ -67,7 +67,6 @@ CTrustEntity::CTrustEntity(CCharEntity* PChar)
 CTrustEntity::~CTrustEntity()
 {
     TracyZoneScoped;
-
 }
 
 auto CTrustEntity::getShieldSize() -> int8

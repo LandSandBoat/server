@@ -53,7 +53,7 @@ def tracy_missing_blank_line(lines, i):
     if i + 1 >= len(lines):
         return False
     next_line = lines[i + 1].strip()
-    return next_line != "" and not next_line.startswith("Tracy")
+    return next_line != "" and next_line != "}" and not next_line.startswith("Tracy")
 
 
 def check(name):

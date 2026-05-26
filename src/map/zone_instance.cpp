@@ -32,13 +32,11 @@ CZoneInstance::CZoneInstance(Scheduler& scheduler, MapConfig config, ZONEID Zone
 : CZone(scheduler, config, ZoneID, RegionID, ContinentID, levelRestriction)
 {
     TracyZoneScoped;
-
 }
 
 CZoneInstance::~CZoneInstance()
 {
     TracyZoneScoped;
-
 }
 
 CCharEntity* CZoneInstance::GetCharByName(const std::string& name)

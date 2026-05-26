@@ -46,7 +46,6 @@ CAutomatonEntity::CAutomatonEntity()
 CAutomatonEntity::~CAutomatonEntity()
 {
     TracyZoneScoped;
-
 }
 
 auto CAutomatonEntity::getFrame() const -> AutomatonFrame
