@@ -33,6 +33,7 @@ namespace jailutils
 auto InPrison(const CCharEntity* PChar) -> bool
 {
     TracyZoneScoped;
+
     return PChar->m_GMlevel == 0 && PChar->getZone() == ZONE_MORDION_GAOL;
 }
 

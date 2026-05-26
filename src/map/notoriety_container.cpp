@@ -32,18 +32,21 @@ CNotorietyContainer::CNotorietyContainer(CBattleEntity* owner)
 std::set<CBattleEntity*>::iterator CNotorietyContainer::begin()
 {
     TracyZoneScoped;
+
     return m_Lookup.begin();
 }
 
 std::set<CBattleEntity*>::iterator CNotorietyContainer::end()
 {
     TracyZoneScoped;
+
     return m_Lookup.end();
 }
 
 void CNotorietyContainer::add(CBattleEntity* entity)
 {
     TracyZoneScoped;
+
     if (m_POwner && entity && entity->allegiance != m_POwner->allegiance)
     {
         m_Lookup.insert(entity);
@@ -53,6 +56,7 @@ void CNotorietyContainer::add(CBattleEntity* entity)
 void CNotorietyContainer::remove(CBattleEntity* entity)
 {
     TracyZoneScoped;
+
     if (m_POwner && entity)
     {
         auto entity_itr = m_Lookup.find(entity);
@@ -66,6 +70,7 @@ void CNotorietyContainer::remove(CBattleEntity* entity)
 bool CNotorietyContainer::hasEnmity()
 {
     TracyZoneScoped;
+
     // Make sure the container is up to date before reporting
     if (m_POwner && !m_Lookup.empty())
     {
@@ -95,5 +100,6 @@ bool CNotorietyContainer::hasEnmity()
 std::size_t CNotorietyContainer::size()
 {
     TracyZoneScoped;
+
     return m_Lookup.size();
 }

@@ -55,6 +55,7 @@ CPetEntity::CPetEntity(PET_TYPE petType)
 , m_jugDuration(timer::duration{})
 {
     TracyZoneScoped;
+
     objtype                     = TYPE_PET;
     m_EcoSystem                 = ECOSYSTEM::UNCLASSIFIED;
     allegiance                  = ALLEGIANCE_TYPE::PLAYER;
@@ -68,6 +69,7 @@ CPetEntity::CPetEntity(PET_TYPE petType)
 CPetEntity::~CPetEntity()
 {
     TracyZoneScoped;
+
 }
 
 PET_TYPE CPetEntity::getPetType() const
@@ -384,6 +386,7 @@ bool CPetEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>
 void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
 {
     TracyZoneScoped;
+
     auto* PSkill  = state.GetPetSkill();
     auto* PTarget = dynamic_cast<CBattleEntity*>(state.GetTarget());
 

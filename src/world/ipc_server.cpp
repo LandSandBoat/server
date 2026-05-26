@@ -48,6 +48,7 @@ IPCServer::IPCServer(WorldEngine& worldServer)
 , zmqRouterWrapper_(getZMQEndpointString())
 {
     TracyZoneScoped;
+
 }
 
 //

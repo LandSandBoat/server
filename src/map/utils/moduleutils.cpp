@@ -58,6 +58,7 @@ void RegisterCPPModule(CPPModule* ptr)
 void OnInit()
 {
     TracyZoneScoped;
+
     for (auto* module : cppModules())
     {
         module->OnInit();
@@ -67,6 +68,7 @@ void OnInit()
 void OnZoneTick(CZone* PZone)
 {
     TracyZoneScoped;
+
     for (auto* module : cppModules())
     {
         module->OnZoneTick(PZone);
@@ -76,6 +78,7 @@ void OnZoneTick(CZone* PZone)
 void OnTimeServerTick()
 {
     TracyZoneScoped;
+
     for (auto* module : cppModules())
     {
         module->OnTimeServerTick();
@@ -85,6 +88,7 @@ void OnTimeServerTick()
 void OnCharZoneIn(CCharEntity* PChar)
 {
     TracyZoneScoped;
+
     for (auto* module : cppModules())
     {
         module->OnCharZoneIn(PChar);
@@ -94,6 +98,7 @@ void OnCharZoneIn(CCharEntity* PChar)
 void OnCharZoneOut(CCharEntity* PChar)
 {
     TracyZoneScoped;
+
     for (auto* module : cppModules())
     {
         module->OnCharZoneOut(PChar);
@@ -103,6 +108,7 @@ void OnCharZoneOut(CCharEntity* PChar)
 void OnPushPacket(CCharEntity* PChar, const std::unique_ptr<CBasicPacket>& packet)
 {
     TracyZoneScoped;
+
     for (auto* module : cppModules())
     {
         module->OnPushPacket(PChar, packet);

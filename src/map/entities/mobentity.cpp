@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -153,6 +153,7 @@ CMobEntity::CMobEntity()
 , m_IsPathingHome(false)
 {
     TracyZoneScoped;
+
     objtype     = ENTITYTYPE::TYPE_MOB;
     allegiance  = ALLEGIANCE_TYPE::MOB;
     m_EcoSystem = ECOSYSTEM::UNCLASSIFIED;
@@ -172,6 +173,7 @@ CMobEntity::CMobEntity()
 CMobEntity::~CMobEntity()
 {
     TracyZoneScoped;
+
     destroy(m_Weapons[SLOT_MAIN]);
     destroy(m_Weapons[SLOT_SUB]);
     destroy(m_Weapons[SLOT_RANGED]);
@@ -381,6 +383,7 @@ void CMobEntity::TapDeaggroTime()
 bool CMobEntity::CanLink(position_t* pos, int16 superLink)
 {
     TracyZoneScoped;
+
     // handle super linking
     if (superLink && getMobMod(MOBMOD_SUPERLINK) == superLink)
     {
@@ -585,6 +588,7 @@ bool CMobEntity::GetUntargetable() const
 void CMobEntity::PostTick()
 {
     TracyZoneScoped;
+
     CBattleEntity::PostTick();
     timer::time_point now = timer::now();
     if (loc.zone && updatemask && now > m_nextUpdateTimer)
@@ -728,6 +732,7 @@ void CMobEntity::Spawn()
 void CMobEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action)
 {
     TracyZoneScoped;
+
     CBattleEntity::OnWeaponSkillFinished(state, action);
 
     TapDeaggroTime();
@@ -745,6 +750,7 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 void CMobEntity::DistributeRewards()
 {
     TracyZoneScoped;
+
     CCharEntity* PChar = (CCharEntity*)GetEntity(m_OwnerID.targid, TYPE_PC);
 
     if (PChar != nullptr && PChar->id == m_OwnerID.id)
@@ -905,6 +911,7 @@ auto CMobEntity::GetEligibleGeodes() const -> std::vector<uint16>
 void CMobEntity::DropItems(CCharEntity* PChar)
 {
     TracyZoneScoped;
+
     // Adds an item to the treasure pool. Treasure pool will automatically kick out items if the pool is full (prioritizing non rare non ex items)
     auto AddItemToPool = [this, PChar](uint16 ItemID)
     {
@@ -1146,6 +1153,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
 bool CMobEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg)
 {
     TracyZoneScoped;
+
     auto skill_list_id{ getMobMod(MOBMOD_ATTACK_SKILL_LIST) };
     if (skill_list_id)
     {
@@ -1176,6 +1184,7 @@ bool CMobEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>
 void CMobEntity::OnEngage(CAttackState& state)
 {
     TracyZoneScoped;
+
     CBattleEntity::OnEngage(state);
     luautils::OnMobEngage(this, state.GetTarget());
     unsigned int range = this->getMobMod(MOBMOD_ALLI_HATE);
@@ -1214,6 +1223,7 @@ void CMobEntity::OnEngage(CAttackState& state)
 void CMobEntity::FadeOut()
 {
     TracyZoneScoped;
+
     CBaseEntity::FadeOut();
     PEnmityContainer->Clear();
 }
@@ -1221,6 +1231,7 @@ void CMobEntity::FadeOut()
 void CMobEntity::OnDeathTimer()
 {
     TracyZoneScoped;
+
     if (!(m_Behavior & BEHAVIOR_RAISABLE))
     {
         PAI->Despawn();
@@ -1230,6 +1241,7 @@ void CMobEntity::OnDeathTimer()
 void CMobEntity::OnDespawn(CDespawnState& /*unused*/)
 {
     TracyZoneScoped;
+
     FadeOut();
 
     luautils::OnMobDespawn(this);
@@ -1286,6 +1298,7 @@ void CMobEntity::Die()
 void CMobEntity::OnDisengage(CAttackState& state)
 {
     TracyZoneScoped;
+
     PAI->PathFind->Clear();
     PEnmityContainer->Clear();
 
@@ -1306,6 +1319,7 @@ void CMobEntity::OnDisengage(CAttackState& state)
 void CMobEntity::OnCastFinished(CMagicState& state, action_t& action)
 {
     TracyZoneScoped;
+
     CBattleEntity::OnCastFinished(state, action);
 
     CMobController* mobController = dynamic_cast<CMobController*>(PAI->GetController());
@@ -1320,6 +1334,7 @@ void CMobEntity::OnCastFinished(CMagicState& state, action_t& action)
 void CMobEntity::OnCastInterrupted(CMagicState& state, action_t& action, MsgBasic msg, bool blockedCast)
 {
     TracyZoneScoped;
+
     CBattleEntity::OnCastInterrupted(state, action, msg, blockedCast);
 
     CMobController* mobController = dynamic_cast<CMobController*>(PAI->GetController());
@@ -1332,6 +1347,7 @@ void CMobEntity::OnCastInterrupted(CMagicState& state, action_t& action, MsgBasi
 bool CMobEntity::OnAttack(CAttackState& state, action_t& action)
 {
     TracyZoneScoped;
+
     TapDeaggroTime();
 
     if (getMobMod(MOBMOD_ATTACK_SKILL_LIST))

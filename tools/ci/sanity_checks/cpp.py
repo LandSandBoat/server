@@ -47,11 +47,21 @@ def contains_undocumented_listener(line):
     return False
 
 
+def tracy_missing_blank_line(lines, i):
+    if lines[i].strip() != "TracyZoneScoped;":
+        return False
+    if i + 1 >= len(lines):
+        return False
+    next_line = lines[i + 1].strip()
+    return next_line != "" and not next_line.startswith("Tracy")
+
+
 def check(name):
     if os.path.isfile(name):
         with open(name) as f:
             counter = 0
-            for line in f.readlines():
+            lines = f.readlines()
+            for line in lines:
                 counter = counter + 1
                 if contains_delete(line):
                     print(
@@ -66,6 +76,11 @@ def check(name):
                 if contains_undocumented_listener(line):
                     print(
                         f"#### Found undocumented listener. Please document this in AI_Events.txt.\n> {name}:{counter}"
+                    )
+                    print(f"```cpp\n{line}\n```\n")
+                if tracy_missing_blank_line(lines, counter - 1):
+                    print(
+                        f"#### TracyZoneScoped; must be followed by a blank line.\n> {name}:{counter}"
                     )
                     print(f"```cpp\n{line}\n```\n")
 

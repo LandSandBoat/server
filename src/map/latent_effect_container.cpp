@@ -415,6 +415,7 @@ void CLatentEffectContainer::CheckLatentsDay()
 void CLatentEffectContainer::CheckLatentsMoonPhase()
 {
     TracyZoneScoped;
+
     ProcessLatentEffects(
         [this](CLatentEffect& latentEffect)
         {
@@ -466,6 +467,7 @@ void CLatentEffectContainer::CheckLatentsWeekDay()
 void CLatentEffectContainer::CheckLatentsHours()
 {
     TracyZoneScoped;
+
     ProcessLatentEffects(
         [this](CLatentEffect& latentEffect)
         {
@@ -767,6 +769,7 @@ void CLatentEffectContainer::ProcessLatentEffects(const std::function<bool(CLate
 bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bool isDuringWs)
 {
     TracyZoneScoped;
+
     // Our default case un-finds our latent prevent us from toggling a latent we don't have programmed
     auto expression  = false;
     auto latentFound = true;

@@ -563,6 +563,7 @@ void init(IPP mapIPP, bool isRunningInCI)
     std::vector<std::string> GetContainerFilenamesList()
     {
         TracyZoneScoped;
+
         std::vector<std::string> outVec;
 
         // Scrape for files of the form:
@@ -1445,18 +1446,21 @@ CBaseEntity* GetEntityByID(uint32 entityid, const sol::object& instanceObj, cons
 void WeekUpdateConquest(uint8 updateType)
 {
     TracyZoneScoped;
+
     conquest::UpdateConquestGM(static_cast<ConquestUpdate>(updateType));
 }
 
 uint8 GetRegionOwner(uint8 type)
 {
     TracyZoneScoped;
+
     return conquest::GetRegionOwner(static_cast<REGION_TYPE>(type));
 }
 
 uint8 GetRegionInfluence(uint8 type)
 {
     TracyZoneScoped;
+
     return conquest::GetInfluenceGraphics(static_cast<REGION_TYPE>(type));
 }
 
@@ -1485,12 +1489,14 @@ uint8 GetNationRank(uint8 nation)
 uint8 GetConquestBalance()
 {
     TracyZoneScoped;
+
     return conquest::GetBalance();
 }
 
 bool IsConquestAlliance()
 {
     TracyZoneScoped;
+
     return conquest::IsAlliance();
 }
 
@@ -1579,18 +1585,21 @@ uint32 VanadielMonth()
 uint32 VanadielUniqueDay()
 {
     TracyZoneScoped;
+
     return vanadiel_time::count_days(vanadiel_time::now().time_since_epoch());
 }
 
 uint32 VanadielDayOfTheYear()
 {
     TracyZoneScoped;
+
     return vanadiel_time::get_yearday();
 }
 
 uint32 VanadielDayOfTheMonth()
 {
     TracyZoneScoped;
+
     return vanadiel_time::get_monthday();
 }
 
@@ -1606,18 +1615,21 @@ uint32 VanadielDayOfTheMonth()
 uint32 VanadielDayOfTheWeek()
 {
     TracyZoneScoped;
+
     return vanadiel_time::get_weekday();
 }
 
 uint32 VanadielHour()
 {
     TracyZoneScoped;
+
     return vanadiel_time::get_hour();
 }
 
 uint32 VanadielMinute()
 {
     TracyZoneScoped;
+
     return vanadiel_time::get_minute();
 }
 
@@ -1633,6 +1645,7 @@ uint32 VanadielMinute()
 uint8 VanadielDayElement()
 {
     TracyZoneScoped;
+
     return static_cast<uint8>(battleutils::GetDayElement());
 }
 
@@ -1644,6 +1657,7 @@ uint8 VanadielDayElement()
 uint32 GetSystemTime()
 {
     TracyZoneScoped;
+
     return earth_time::timestamp();
 }
 
@@ -1748,6 +1762,7 @@ void DecrementLinkshellConciergeMembersGoal(uint16 zoneId, uint32 linkshellid)
 uint32 JstMidnight()
 {
     TracyZoneScoped;
+
     auto jstMidnight = earth_time::jst::get_next_midnight();
     return earth_time::timestamp(jstMidnight);
 }
@@ -1755,12 +1770,14 @@ uint32 JstMidnight()
 uint32 JstDayOfTheYear()
 {
     TracyZoneScoped;
+
     return earth_time::jst::get_yearday();
 }
 
 uint32 JstDayOfTheMonth()
 {
     TracyZoneScoped;
+
     return earth_time::jst::get_monthday();
 }
 
@@ -1773,24 +1790,28 @@ uint32 JstDayOfTheMonth()
 uint32 JstDayOfTheWeek()
 {
     TracyZoneScoped;
+
     return earth_time::jst::get_weekday();
 }
 
 int32 JstYear()
 {
     TracyZoneScoped;
+
     return earth_time::jst::get_year();
 }
 
 uint32 JstMonth()
 {
     TracyZoneScoped;
+
     return earth_time::jst::get_month();
 }
 
 uint32 JstHour()
 {
     TracyZoneScoped;
+
     return earth_time::jst::get_hour();
 }
 
@@ -1803,6 +1824,7 @@ uint32 JstHour()
 uint32 NextGameTime(uint32 intervalSeconds)
 {
     TracyZoneScoped;
+
     uint32 vanaTimestamp = earth_time::vanadiel_timestamp();
     uint32 secondsMod    = vanaTimestamp % intervalSeconds;
     auto   nextInterval  = std::chrono::seconds(vanaTimestamp - secondsMod + intervalSeconds);
@@ -1815,6 +1837,7 @@ uint32 NextGameTime(uint32 intervalSeconds)
 uint32 NextJstWeek()
 {
     TracyZoneScoped;
+
     return earth_time::timestamp(earth_time::get_next_game_week());
 }
 
@@ -1823,30 +1846,35 @@ uint32 NextJstWeek()
 uint32 VanadielMoonPhase()
 {
     TracyZoneScoped;
+
     return vanadiel_time::moon::get_phase();
 }
 
 uint8 VanadielMoonDirection()
 {
     TracyZoneScoped;
+
     return vanadiel_time::moon::get_direction();
 }
 
 uint8 VanadielRSERace()
 {
     TracyZoneScoped;
+
     return vanadiel_time::rse::get_race();
 }
 
 uint8 VanadielRSELocation()
 {
     TracyZoneScoped;
+
     return vanadiel_time::rse::get_location();
 }
 
 void SetTimeOffset(const int32 offset)
 {
     TracyZoneScoped;
+
     earth_time::reset_offset();
     earth_time::add_offset(std::chrono::seconds(offset));
 }
@@ -1995,6 +2023,7 @@ bool PlayerHasValidSession(uint32 playerId)
 void SendToJailOffline(uint32 playerId, int8 cellId, float posX, float posY, float posZ, uint8 rot)
 {
     TracyZoneScoped;
+
     charutils::PersistCharVar(playerId, "inJail", cellId);
     db::preparedStmt("UPDATE chars SET pos_x = ?, pos_y = ?, pos_z = ?, pos_rot = ?, pos_zone = ?, moghouse = 0 WHERE charid = ?",
                      posX,
@@ -2008,6 +2037,7 @@ void SendToJailOffline(uint32 playerId, int8 cellId, float posX, float posY, flo
 void DrawIn(CLuaBaseEntity* PLuaBaseEntity, const sol::table& table, float offset, float degrees)
 {
     TracyZoneScoped;
+
     if (auto* PBattleEntity = dynamic_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity()))
     {
         position_t pos;
@@ -2028,6 +2058,7 @@ void DrawIn(CLuaBaseEntity* PLuaBaseEntity, const sol::table& table, float offse
 int32 GetTextIDVariable(uint16 ZoneID, const char* variable)
 {
     TracyZoneScoped;
+
     return lua["zones"][ZoneID]["text"][variable].get_or(0);
 }
 
@@ -3527,6 +3558,7 @@ void OnMobDisengage(CBaseEntity* PMob)
 void OnMobFollow(CBaseEntity* PMob, CBaseEntity* PTarget)
 {
     TracyZoneScoped;
+
     if (PTarget == nullptr || PMob == nullptr)
     {
         return;
@@ -3549,6 +3581,7 @@ void OnMobFollow(CBaseEntity* PMob, CBaseEntity* PTarget)
 void OnMobUnfollow(CBaseEntity* PMob, CBaseEntity* PTarget)
 {
     TracyZoneScoped;
+
     if (PTarget == nullptr || PMob == nullptr)
     {
         return;
@@ -4623,6 +4656,7 @@ bool OnCanUseSpell(CBattleEntity* PChar, CSpell* PSpell) // triggers when CanUse
 void Terminate()
 {
     TracyZoneScoped;
+
     // clang-format off
         zoneutils::ForEachZone([](CZone* PZone)
         {
@@ -4881,6 +4915,7 @@ void OnInstanceComplete(CInstance* PInstance)
 void StartElevator(uint32 ElevatorID)
 {
     TracyZoneScoped;
+
     CTransportHandler::getInstance()->startElevator(ElevatorID);
 }
 
@@ -4888,6 +4923,7 @@ void StartElevator(uint32 ElevatorID)
 int16 GetElevatorState(uint8 id) // Returns -1 if elevator is not found. Otherwise, returns the uint8 state.
 {
     TracyZoneScoped;
+
     Elevator_t* elevator = CTransportHandler::getInstance()->getElevator(id);
 
     if (elevator)
@@ -5444,6 +5480,7 @@ void OnFurnitureRemoved(CCharEntity* PChar, CItemFurnishing* PItem)
 uint16 SelectDailyItem(CLuaBaseEntity* PLuaBaseEntity, uint8 dial)
 {
     TracyZoneScoped;
+
     CCharEntity* player = dynamic_cast<CCharEntity*>(PLuaBaseEntity->GetBaseEntity());
     return daily::SelectItem(player, dial);
 }

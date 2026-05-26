@@ -60,6 +60,7 @@ CInstanceLoader::CInstanceLoader(uint32 instanceid, CCharEntity* PRequester)
 CInstanceLoader::~CInstanceLoader()
 {
     TracyZoneScoped;
+
 }
 
 CInstance* CInstanceLoader::LoadInstance() const

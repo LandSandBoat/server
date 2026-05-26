@@ -76,6 +76,7 @@ IPCClient::IPCClient(MapNetworking& networking)
 , zmqDealerWrapper_(getZMQEndpointString(), getZMQRoutingId())
 {
     TracyZoneScoped;
+
 }
 
 auto IPCClient::getZMQEndpointString() -> std::string
@@ -796,16 +797,19 @@ void IPCClient::handleMessage_ConquestEvent(const IPP& ipp, const ipc::ConquestE
 void IPCClient::handleMessage_BesiegedEvent(const IPP& ipp, const ipc::BesiegedEvent& message)
 {
     TracyZoneScoped;
+
 }
 
 void IPCClient::handleMessage_CampaignEvent(const IPP& ipp, const ipc::CampaignEvent& message)
 {
     TracyZoneScoped;
+
 }
 
 void IPCClient::handleMessage_ColonizationEvent(const IPP& ipp, const ipc::ColonizationEvent& message)
 {
     TracyZoneScoped;
+
 }
 
 void IPCClient::handleMessage_EntityInformationRequest(const IPP& ipp, const ipc::EntityInformationRequest& message)
@@ -974,6 +978,7 @@ void IPCClient::handleMessage_AssistChannelEvent(const IPP& ipp, const ipc::Assi
 void IPCClient::handleMessage_GMCallRequest(const IPP& ipp, const ipc::GMCallRequest& message)
 {
     TracyZoneScoped;
+
 }
 
 void IPCClient::handleMessage_GMCallResponse(const IPP& ipp, const ipc::GMCallResponse& message)

@@ -87,6 +87,7 @@ void Initialize()
 void UpdateGardening(CCharEntity* PChar, SendPacket sendPacket)
 {
     TracyZoneScoped;
+
     uint32 vanatime = earth_time::vanadiel_timestamp();
     for (auto containerID : { LOC_MOGSAFE, LOC_MOGSAFE2 })
     {

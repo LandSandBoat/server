@@ -39,12 +39,14 @@ CAutomatonEntity::CAutomatonEntity()
 : CPetEntity(PET_TYPE::AUTOMATON)
 {
     TracyZoneScoped;
+
     PAI->SetController(nullptr);
 }
 
 CAutomatonEntity::~CAutomatonEntity()
 {
     TracyZoneScoped;
+
 }
 
 auto CAutomatonEntity::getFrame() const -> AutomatonFrame

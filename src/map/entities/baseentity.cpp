@@ -56,6 +56,7 @@ CBaseEntity::CBaseEntity()
 , m_nextUpdateTimer(timer::now())
 {
     TracyZoneScoped;
+
     speed          = baseSpeed;
     animationSpeed = static_cast<uint8>(std::clamp<float>((baseSpeed / settings::get<float>("map.ANIMATION_SPEED_DIVISOR")), std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max()));
 }
@@ -63,6 +64,7 @@ CBaseEntity::CBaseEntity()
 CBaseEntity::~CBaseEntity()
 {
     TracyZoneScoped;
+
     if (PBattlefield)
     {
         PBattlefield->RemoveEntity(this, BATTLEFIELD_LEAVE_CODE_WARPDC);

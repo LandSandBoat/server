@@ -55,6 +55,7 @@ CBattlefieldHandler::~CBattlefieldHandler() = default;
 void CBattlefieldHandler::HandleBattlefields(timer::time_point tick)
 {
     TracyZoneScoped;
+
     for (auto& [area, PBattlefield] : m_Battlefields)
     {
         if (!PBattlefield->CanCleanup())
@@ -101,6 +102,7 @@ void CBattlefieldHandler::HandleBattlefields(timer::time_point tick)
 uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const BattlefieldRegistration& registration)
 {
     TracyZoneScoped;
+
     if (PChar->PBattlefield != nullptr || m_Battlefields.size() >= m_MaxBattlefields)
     {
         return BATTLEFIELD_RETURN_CODE_WAIT;

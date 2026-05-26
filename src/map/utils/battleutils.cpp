@@ -3992,6 +3992,7 @@ inline bool areInLine(uint8 firstEntityWorldAngle, CBattleEntity* anchorEntity, 
 CBattleEntity* getAvailableTrickAttackChar(CBattleEntity* taUser, CBattleEntity* PMob)
 {
     TracyZoneScoped;
+
     if (!taUser->StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK))
     {
         return nullptr;

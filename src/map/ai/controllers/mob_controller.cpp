@@ -89,6 +89,7 @@ auto CMobController::Tick(const timer::time_point tick) -> Task<void>
 auto CMobController::TryDeaggro() -> bool
 {
     TracyZoneScoped;
+
     if (PTarget == nullptr && (PMob->PEnmityContainer != nullptr && PMob->PEnmityContainer->GetHighestEnmity() == nullptr))
     {
         return true;
@@ -125,6 +126,7 @@ auto CMobController::TryDeaggro() -> bool
 auto CMobController::CanPursueTarget(const CBattleEntity* PTarget) const -> bool
 {
     TracyZoneScoped;
+
     if (PMob->getMobMod(MOBMOD_DETECTION) & DETECT_SCENT)
     {
         // if mob is in water it will instant deaggro if target cannot be detected
@@ -140,6 +142,7 @@ auto CMobController::CanPursueTarget(const CBattleEntity* PTarget) const -> bool
 auto CMobController::CheckHide(const CBattleEntity* PTarget) const -> bool
 {
     TracyZoneScoped;
+
     if (PTarget && PTarget->GetMJob() == JOB_THF && PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE))
     {
         return !CanPursueTarget(PTarget) && !PMob->m_TrueDetection && !(PMob->getMobMod(MOBMOD_DETECTION) & DETECT_HEARING);
@@ -150,6 +153,7 @@ auto CMobController::CheckHide(const CBattleEntity* PTarget) const -> bool
 auto CMobController::CheckLock(CBattleEntity* PTarget) const -> bool
 {
     TracyZoneScoped;
+
     if (PTarget)
     {
         if (PTarget->objtype == TYPE_PC)
@@ -186,6 +190,7 @@ auto CMobController::CheckLock(CBattleEntity* PTarget) const -> bool
 auto CMobController::CheckDetection(CBattleEntity* PTarget) -> bool
 {
     TracyZoneScoped;
+
     if (CanPursueTarget(PTarget) || CanDetectTarget(PTarget) ||
         PMob->StatusEffectContainer->HasStatusEffect({ EFFECT_BIND, EFFECT_SLEEP, EFFECT_SLEEP_II, EFFECT_LULLABY, EFFECT_PETRIFICATION }))
     {
@@ -199,6 +204,7 @@ auto CMobController::CheckDetection(CBattleEntity* PTarget) -> bool
 void CMobController::TryLink()
 {
     TracyZoneScoped;
+
     if (PTarget == nullptr)
     {
         return;
@@ -286,6 +292,7 @@ void CMobController::TryLink()
 auto CMobController::CanDetectTarget(CBattleEntity* PTarget, const bool forceSight) const -> bool
 {
     TracyZoneScoped;
+
     if (!PTarget || PTarget->isDead() || PTarget->isMounted())
     {
         return false;
@@ -436,6 +443,7 @@ auto CMobController::MobSkill(int listId) -> bool
 auto CMobController::TrySpecialSkill() -> bool
 {
     TracyZoneScoped;
+
     // get my special skill
     CMobSkill*     PSpecialSkill  = battleutils::GetMobSkill(PMob->getMobMod(MOBMOD_SPECIAL_SKILL));
     CBattleEntity* PAbilityTarget = nullptr;
@@ -494,6 +502,7 @@ auto CMobController::TrySpecialSkill() -> bool
 auto CMobController::TryCastSpell() -> bool
 {
     TracyZoneScoped;
+
     if (!CanCastSpells(IgnoreRecastsAndCosts::No))
     {
         return false; // Can't cast spells.
@@ -592,6 +601,7 @@ auto CMobController::TryCastSpell() -> bool
 auto CMobController::CanCastSpells(IgnoreRecastsAndCosts ignoreRecastsAndCosts) -> bool
 {
     TracyZoneScoped;
+
     if (!PMob->SpellContainer->HasSpells())
     {
         return false;
@@ -628,6 +638,7 @@ auto CMobController::CanCastSpells(IgnoreRecastsAndCosts ignoreRecastsAndCosts) 
 void CMobController::CastSpell(SpellID spellid)
 {
     TracyZoneScoped;
+
     const CSpell* PSpell = spell::GetSpell(spellid);
     if (PSpell == nullptr)
     {
@@ -793,6 +804,7 @@ void CMobController::FaceTarget(const uint16 targid) const
 void CMobController::Move()
 {
     TracyZoneScoped;
+
     if (!PMob->PAI->CanFollowPath())
     {
         return;
@@ -964,6 +976,7 @@ void CMobController::Move()
 void CMobController::HandleEnmity()
 {
     TracyZoneScoped;
+
     PMob->PEnmityContainer->DecayEnmity();
     auto* PHighestEnmityTarget{ PMob->PEnmityContainer->GetHighestEnmity() };
 
@@ -1283,6 +1296,7 @@ void CMobController::Wait(timer::duration _duration)
 void CMobController::FollowRoamPath()
 {
     TracyZoneScoped;
+
     if (PMob->PAI->CanFollowPath())
     {
         PMob->PAI->PathFind->FollowPath(m_Tick);
@@ -1342,6 +1356,7 @@ void CMobController::FollowRoamPath()
 void CMobController::Despawn()
 {
     TracyZoneScoped;
+
     if (PMob)
     {
         PMob->PAI->Internal_Despawn();
@@ -1351,6 +1366,7 @@ void CMobController::Despawn()
 void CMobController::Reset()
 {
     TracyZoneScoped;
+
     // Wait a little before roaming / casting spell / spawning pet
     m_LastActionTime = m_Tick - std::chrono::seconds(xirand::GetRandomNumber(PMob->getMobMod(MOBMOD_ROAM_COOL)));
 
@@ -1365,6 +1381,7 @@ void CMobController::Reset()
 auto CMobController::MobSkill(const uint16 targid, uint16 wsid, Maybe<timer::duration> castTimeOverride) -> bool
 {
     TracyZoneScoped;
+
     if (POwner)
     {
         FaceTarget(targid);
@@ -1378,6 +1395,7 @@ auto CMobController::MobSkill(const uint16 targid, uint16 wsid, Maybe<timer::dur
 auto CMobController::Disengage() -> bool
 {
     TracyZoneScoped;
+
     // this will let me decide to walk home or despawn
     m_LastActionTime = m_Tick - std::chrono::seconds(PMob->getMobMod(MOBMOD_ROAM_COOL)) + 10s;
     PMob->m_neutral  = true;
@@ -1405,6 +1423,7 @@ auto CMobController::Disengage() -> bool
 auto CMobController::Engage(const uint16 targid) -> bool
 {
     TracyZoneScoped;
+
     auto ret = CController::Engage(targid);
     if (ret)
     {
@@ -1510,6 +1529,7 @@ void CMobController::TapDeclaimTime()
 auto CMobController::Cast(const uint16 targid, const SpellID spellid) -> bool
 {
     TracyZoneScoped;
+
     FaceTarget(targid);
     return CController::Cast(targid, spellid);
 }
@@ -1609,6 +1629,7 @@ auto CMobController::CanMoveForward(const float currentDistance) -> bool
 auto CMobController::IsSpecialSkillReady(const float currentDistance) const -> bool
 {
     TracyZoneScoped;
+
     if (PMob->getMobMod(MOBMOD_SPECIAL_SKILL) == 0)
     {
         return false;

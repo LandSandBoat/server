@@ -97,6 +97,7 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
     }
 
     TracyZoneScoped;
+
     m_findFlags   = findFlags;
     m_targetFlags = targetFlags;
     m_radius      = radius;
@@ -304,6 +305,7 @@ void CTargetFind::addAllInMobList(CBattleEntity* PTarget, bool withPet)
 void CTargetFind::addAllInZone(CBattleEntity* PTarget, bool withPet)
 {
     TracyZoneScoped;
+
     // clang-format off
     zoneutils::GetZone(PTarget->getZone())->ForEachCharInstance(PTarget, [&](CCharEntity* PChar)
     {
