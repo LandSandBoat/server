@@ -256,16 +256,17 @@ xi.action.react =
 -- Enums for AI actions.
 xi.action.type =
 {
-    NONE                  =  0,
-    DAMAGE_TARGET         =  1, -- No condition.
-    DAMAGE_FORCE_SELF     =  2, -- No condition.
-    HEALING_TARGET        =  3, -- HP Thresshold.
-    HEALING_FORCE_SELF    =  4, -- HP Thresshold. Force caster to be the main target.
-    HEALING_EFFECT        =  5, -- Status effect on self or ally present.
-    ENHANCING_TARGET      =  6, -- Status effect on self or ally not present.
-    ENHANCING_FORCE_SELF  =  7, -- Status effect on self or ally not present. Force caster to be the main target.
-    ENFEEBLING_TARGET     =  8, -- Status effect on target or other enemy not present.
-    ENFEEBLING_FORCE_SELF =  9, -- Status effect on target or other enemy not present. Force caster to be the main target.
-    DRAIN_HP              = 10, -- Enemy not undead. HP Thresshold optional.
-    DRAIN_MP              = 11, -- Enemy not undead. Enemy has MP. MP thresshold optional.
+    NONE                      =  0,
+    DAMAGE_TARGET             =  1,
+    DAMAGE_FORCE_SELF         =  2,
+    HEALING_TARGET            =  3,
+    HEALING_FORCE_SELF        =  4,
+    HEALING_EFFECT            =  5,
+    HEALING_EFFECT_FORCE_SELF =  6,
+    ENHANCING_TARGET          =  7,
+    ENHANCING_FORCE_SELF      =  8,
+    ENFEEBLING_TARGET         =  9,
+    ENFEEBLING_FORCE_SELF     = 10,
+    DISPEL                    = 11,
+    SUMMONING                 = 12,
 }

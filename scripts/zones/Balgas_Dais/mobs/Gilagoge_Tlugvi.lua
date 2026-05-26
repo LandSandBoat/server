@@ -86,35 +86,35 @@ end
 entity.onMobSpellChoose = function(mob, target, spellId)
     local spellList =
     {
-        [ 1] = { xi.magic.spell.BANISH_III,  target, false, xi.action.type.DAMAGE_TARGET,      nil,                 0, 100 },
-        [ 2] = { xi.magic.spell.BANISHGA_II, target, false, xi.action.type.DAMAGE_TARGET,      nil,                 0, 100 },
-        [ 3] = { xi.magic.spell.HOLY,        target, false, xi.action.type.DAMAGE_TARGET,      nil,                 0, 100 },
-        [ 4] = { xi.magic.spell.CURE_V,      mob,    true,  xi.action.type.HEALING_TARGET,     33,                  0, 100 },
-        [ 5] = { xi.magic.spell.CURAGA_II,   mob,    true,  xi.action.type.HEALING_FORCE_SELF, 33,                  0, 100 },
-        [ 6] = { xi.magic.spell.BLINDNA,     mob,    true,  xi.action.type.HEALING_EFFECT,     xi.effect.BLINDNESS, 0, 100 },
-        [ 7] = { xi.magic.spell.PARALYNA,    mob,    true,  xi.action.type.HEALING_EFFECT,     xi.effect.PARALYSIS, 0, 100 },
-        [ 8] = { xi.magic.spell.POISONA,     mob,    true,  xi.action.type.HEALING_EFFECT,     xi.effect.POISON,    0, 100 },
-        [ 9] = { xi.magic.spell.SILENA,      mob,    true,  xi.action.type.HEALING_EFFECT,     xi.effect.SILENCE,   0, 100 },
-        [10] = { xi.magic.spell.VIRUNA,      mob,    true,  xi.action.type.HEALING_EFFECT,     xi.effect.DISEASE,   0, 100 },
-        [11] = { xi.magic.spell.VIRUNA,      mob,    true,  xi.action.type.HEALING_EFFECT,     xi.effect.PLAGUE,    0, 100 },
-        [12] = { xi.magic.spell.AQUAVEIL,    mob,    false, xi.action.type.ENHANCING_TARGET,   xi.effect.AQUAVEIL,  0, 100 },
-        [13] = { xi.magic.spell.BLINK,       mob,    false, xi.action.type.ENHANCING_TARGET,   xi.effect.BLINK,     0, 100 },
-        [14] = { xi.magic.spell.PROTECT_IV,  mob,    true,  xi.action.type.ENHANCING_TARGET,   xi.effect.PROTECT,   0,  25 },
-        [15] = { xi.magic.spell.SHELL_IV,    mob,    true,  xi.action.type.ENHANCING_TARGET,   xi.effect.SHELL,     0,  25 },
-        [16] = { xi.magic.spell.DIA_II,      target, false, xi.action.type.ENFEEBLING_TARGET,  xi.effect.DIA,       3,  50 },
-        [17] = { xi.magic.spell.DIAGA_II,    target, false, xi.action.type.ENFEEBLING_TARGET,  xi.effect.DIA,       3,  50 },
-        [18] = { xi.magic.spell.PARALYZE,    target, false, xi.action.type.ENFEEBLING_TARGET,  xi.effect.PARALYSIS, 0, 100 },
-        [19] = { xi.magic.spell.SILENCE,     target, false, xi.action.type.ENFEEBLING_TARGET,  xi.effect.SILENCE,   0, 100 },
+        [ 1] = { spellId = xi.magic.spell.BANISH_III              },
+        [ 2] = { spellId = xi.magic.spell.BANISHGA_II             },
+        [ 3] = { spellId = xi.magic.spell.HOLY                    },
+        [ 4] = { spellId = xi.magic.spell.CURE_V,     hp = 33     },
+        [ 5] = { spellId = xi.magic.spell.CURAGA_II,  hp = 33     },
+        [ 6] = { spellId = xi.magic.spell.BLINDNA                 },
+        [ 7] = { spellId = xi.magic.spell.PARALYNA                },
+        [ 8] = { spellId = xi.magic.spell.POISONA                 },
+        [ 9] = { spellId = xi.magic.spell.SILENA                  },
+        [10] = { spellId = xi.magic.spell.VIRUNA                  },
+        [11] = { spellId = xi.magic.spell.VIRUNA                  },
+        [12] = { spellId = xi.magic.spell.AQUAVEIL                },
+        [13] = { spellId = xi.magic.spell.BLINK                   },
+        [14] = { spellId = xi.magic.spell.PROTECT_IV, weight = 25 },
+        [15] = { spellId = xi.magic.spell.SHELL_IV,   weight = 25 },
+        [16] = { spellId = xi.magic.spell.DIA_II,     weight = 50 },
+        [17] = { spellId = xi.magic.spell.DIAGA_II,   weight = 50 },
+        [18] = { spellId = xi.magic.spell.PARALYZE                },
+        [19] = { spellId = xi.magic.spell.SILENCE                 },
     }
 
-    local groupTable =
+    local allyList =
     {
         GetMobByID(mob:getID() + 1), -- Goga Tlugvi       (MNK) "Summer Tree"
         GetMobByID(mob:getID() + 2), -- Ulagohvsdi Tlugvi (NIN) "Autumn Tree"
         GetMobByID(mob:getID() + 3), -- Gola Tlugvi       (DRK) "Winter Tree"
     }
 
-    return xi.combat.behavior.chooseAction(mob, target, groupTable, spellList)
+    return xi.combat.behavior.chooseSpell(mob, target, spellList, allyList, nil)
 end
 
 return entity

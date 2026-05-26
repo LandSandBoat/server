@@ -24,44 +24,46 @@ local pTable =
 {
     -- [Spell ID                         ] = { Effect,          Tier, Base,  Cap, Dur, Modifier               },
     -- Requiem: https://www.bg-wiki.com/ffxi/Category:Requiem
-    [xi.magic.spell.FOE_REQUIEM          ] = { xi.effect.REQUIEM,  1,    1,  300,  64, xi.mod.REQUIEM_EFFECT  },
-    [xi.magic.spell.FOE_REQUIEM_II       ] = { xi.effect.REQUIEM,  2,    2,  300,  80, xi.mod.REQUIEM_EFFECT  },
-    [xi.magic.spell.FOE_REQUIEM_III      ] = { xi.effect.REQUIEM,  3,    3,  300,  96, xi.mod.REQUIEM_EFFECT  },
-    [xi.magic.spell.FOE_REQUIEM_IV       ] = { xi.effect.REQUIEM,  4,    4,  300, 112, xi.mod.REQUIEM_EFFECT  },
-    [xi.magic.spell.FOE_REQUIEM_V        ] = { xi.effect.REQUIEM,  5,    5,  300, 128, xi.mod.REQUIEM_EFFECT  },
-    [xi.magic.spell.FOE_REQUIEM_VI       ] = { xi.effect.REQUIEM,  6,    6,  300, 144, xi.mod.REQUIEM_EFFECT  },
-    [xi.magic.spell.FOE_REQUIEM_VII      ] = { xi.effect.REQUIEM,  7,    8,  300, 160, xi.mod.REQUIEM_EFFECT  },
+    [xi.magic.spell.FOE_REQUIEM          ] = { xi.effect.REQUIEM,  1,     2,  300,  64, xi.mod.REQUIEM_EFFECT  },
+    [xi.magic.spell.FOE_REQUIEM_II       ] = { xi.effect.REQUIEM,  2,     3,  300,  80, xi.mod.REQUIEM_EFFECT  },
+    [xi.magic.spell.FOE_REQUIEM_III      ] = { xi.effect.REQUIEM,  3,     4,  300,  96, xi.mod.REQUIEM_EFFECT  },
+    [xi.magic.spell.FOE_REQUIEM_IV       ] = { xi.effect.REQUIEM,  4,     5,  300, 112, xi.mod.REQUIEM_EFFECT  },
+    [xi.magic.spell.FOE_REQUIEM_V        ] = { xi.effect.REQUIEM,  5,     6,  300, 128, xi.mod.REQUIEM_EFFECT  },
+    [xi.magic.spell.FOE_REQUIEM_VI       ] = { xi.effect.REQUIEM,  6,     7,  300, 144, xi.mod.REQUIEM_EFFECT  },
+    [xi.magic.spell.FOE_REQUIEM_VII      ] = { xi.effect.REQUIEM,  7,     8,  300, 160, xi.mod.REQUIEM_EFFECT  },
+    [xi.magic.spell.FOE_REQUIEM_VIII     ] = { xi.effect.REQUIEM,  8,     9,  300, 180, xi.mod.REQUIEM_EFFECT  },
     -- Lullaby: https://www.bg-wiki.com/ffxi/Category:Lullaby
-    [xi.magic.spell.FOE_LULLABY          ] = { xi.effect.SLEEP_I,  1,    1,    1,  30, xi.mod.LULLABY_EFFECT  },
-    [xi.magic.spell.FOE_LULLABY_II       ] = { xi.effect.SLEEP_I,  1,    1,    1,  60, xi.mod.LULLABY_EFFECT  },
-    [xi.magic.spell.HORDE_LULLABY        ] = { xi.effect.SLEEP_I,  1,    1,    1,  30, xi.mod.LULLABY_EFFECT  },
-    [xi.magic.spell.HORDE_LULLABY_II     ] = { xi.effect.SLEEP_I,  1,    1,    1,  60, xi.mod.LULLABY_EFFECT  },
+    [xi.magic.spell.FOE_LULLABY          ] = { xi.effect.SLEEP_I,  1,     1,    1,  30, xi.mod.LULLABY_EFFECT  },
+    [xi.magic.spell.FOE_LULLABY_II       ] = { xi.effect.SLEEP_I,  1,     1,    1,  60, xi.mod.LULLABY_EFFECT  },
+    [xi.magic.spell.HORDE_LULLABY        ] = { xi.effect.SLEEP_I,  1,     1,    1,  30, xi.mod.LULLABY_EFFECT  },
+    [xi.magic.spell.HORDE_LULLABY_II     ] = { xi.effect.SLEEP_I,  1,     1,    1,  60, xi.mod.LULLABY_EFFECT  },
     -- Finale: https://www.bg-wiki.com/ffxi/Category:Finale
-    [xi.magic.spell.MAGIC_FINALE         ] = { xi.effect.NONE,     1,    1,    1,   0, xi.mod.FINALE_EFFECT   },
+    [xi.magic.spell.MAGIC_FINALE         ] = { xi.effect.NONE,     1,     1,     1,   0, xi.mod.FINALE_EFFECT   },
     -- Elegy: https://www.bg-wiki.com/ffxi/Category:Elegy
-    [xi.magic.spell.BATTLEFIELD_ELEGY    ] = { xi.effect.ELEGY,    1, 2500, 5000, 120, xi.mod.ELEGY_EFFECT    },
-    [xi.magic.spell.CARNAGE_ELEGY        ] = { xi.effect.ELEGY,    1, 5000, 5000, 180, xi.mod.ELEGY_EFFECT    },
+    [xi.magic.spell.BATTLEFIELD_ELEGY    ] = { xi.effect.ELEGY,    1,  2500,  5000, 120, xi.mod.ELEGY_EFFECT    },
+    [xi.magic.spell.CARNAGE_ELEGY        ] = { xi.effect.ELEGY,    2,  5000,  5000, 180, xi.mod.ELEGY_EFFECT    },
+    [xi.magic.spell.MASSACRE_ELEGY       ] = { xi.effect.ELEGY,    3, 10000, 10000, 240, xi.mod.ELEGY_EFFECT    }, -- Mob only.
     -- Threnody: https://www.bg-wiki.com/ffxi/Category:Threnody
-    [xi.magic.spell.FIRE_THRENODY        ] = { xi.effect.THRENODY, 1,   50,   95,  60, xi.mod.THRENODY_EFFECT },
-    [xi.magic.spell.ICE_THRENODY         ] = { xi.effect.THRENODY, 1,   50,   95,  60, xi.mod.THRENODY_EFFECT },
-    [xi.magic.spell.WIND_THRENODY        ] = { xi.effect.THRENODY, 1,   50,   95,  60, xi.mod.THRENODY_EFFECT },
-    [xi.magic.spell.EARTH_THRENODY       ] = { xi.effect.THRENODY, 1,   50,   95,  60, xi.mod.THRENODY_EFFECT },
-    [xi.magic.spell.LIGHTNING_THRENODY   ] = { xi.effect.THRENODY, 1,   50,   95,  60, xi.mod.THRENODY_EFFECT },
-    [xi.magic.spell.WATER_THRENODY       ] = { xi.effect.THRENODY, 1,   50,   95,  60, xi.mod.THRENODY_EFFECT },
-    [xi.magic.spell.LIGHT_THRENODY       ] = { xi.effect.THRENODY, 1,   50,   95,  60, xi.mod.THRENODY_EFFECT },
-    [xi.magic.spell.DARK_THRENODY        ] = { xi.effect.THRENODY, 1,   50,   95,  60, xi.mod.THRENODY_EFFECT },
-    [xi.magic.spell.FIRE_THRENODY_II     ] = { xi.effect.THRENODY, 2,  160,  205,  90, xi.mod.THRENODY_EFFECT },
-    [xi.magic.spell.ICE_THRENODY_II      ] = { xi.effect.THRENODY, 2,  160,  205,  90, xi.mod.THRENODY_EFFECT },
-    [xi.magic.spell.WIND_THRENODY_II     ] = { xi.effect.THRENODY, 2,  160,  205,  90, xi.mod.THRENODY_EFFECT },
-    [xi.magic.spell.EARTH_THRENODY_II    ] = { xi.effect.THRENODY, 2,  160,  205,  90, xi.mod.THRENODY_EFFECT },
-    [xi.magic.spell.LIGHTNING_THRENODY_II] = { xi.effect.THRENODY, 2,  160,  205,  90, xi.mod.THRENODY_EFFECT },
-    [xi.magic.spell.WATER_THRENODY_II    ] = { xi.effect.THRENODY, 2,  160,  205,  90, xi.mod.THRENODY_EFFECT },
-    [xi.magic.spell.LIGHT_THRENODY_II    ] = { xi.effect.THRENODY, 2,  160,  205,  90, xi.mod.THRENODY_EFFECT },
-    [xi.magic.spell.DARK_THRENODY_II     ] = { xi.effect.THRENODY, 2,  160,  205,  90, xi.mod.THRENODY_EFFECT },
+    [xi.magic.spell.FIRE_THRENODY        ] = { xi.effect.THRENODY, 1,    50,    95,  60, xi.mod.THRENODY_EFFECT },
+    [xi.magic.spell.ICE_THRENODY         ] = { xi.effect.THRENODY, 1,    50,    95,  60, xi.mod.THRENODY_EFFECT },
+    [xi.magic.spell.WIND_THRENODY        ] = { xi.effect.THRENODY, 1,    50,    95,  60, xi.mod.THRENODY_EFFECT },
+    [xi.magic.spell.EARTH_THRENODY       ] = { xi.effect.THRENODY, 1,    50,    95,  60, xi.mod.THRENODY_EFFECT },
+    [xi.magic.spell.LIGHTNING_THRENODY   ] = { xi.effect.THRENODY, 1,    50,    95,  60, xi.mod.THRENODY_EFFECT },
+    [xi.magic.spell.WATER_THRENODY       ] = { xi.effect.THRENODY, 1,    50,    95,  60, xi.mod.THRENODY_EFFECT },
+    [xi.magic.spell.LIGHT_THRENODY       ] = { xi.effect.THRENODY, 1,    50,    95,  60, xi.mod.THRENODY_EFFECT },
+    [xi.magic.spell.DARK_THRENODY        ] = { xi.effect.THRENODY, 1,    50,    95,  60, xi.mod.THRENODY_EFFECT },
+    [xi.magic.spell.FIRE_THRENODY_II     ] = { xi.effect.THRENODY, 2,   160,   205,  90, xi.mod.THRENODY_EFFECT },
+    [xi.magic.spell.ICE_THRENODY_II      ] = { xi.effect.THRENODY, 2,   160,   205,  90, xi.mod.THRENODY_EFFECT },
+    [xi.magic.spell.WIND_THRENODY_II     ] = { xi.effect.THRENODY, 2,   160,   205,  90, xi.mod.THRENODY_EFFECT },
+    [xi.magic.spell.EARTH_THRENODY_II    ] = { xi.effect.THRENODY, 2,   160,   205,  90, xi.mod.THRENODY_EFFECT },
+    [xi.magic.spell.LIGHTNING_THRENODY_II] = { xi.effect.THRENODY, 2,   160,   205,  90, xi.mod.THRENODY_EFFECT },
+    [xi.magic.spell.WATER_THRENODY_II    ] = { xi.effect.THRENODY, 2,   160,   205,  90, xi.mod.THRENODY_EFFECT },
+    [xi.magic.spell.LIGHT_THRENODY_II    ] = { xi.effect.THRENODY, 2,   160,   205,  90, xi.mod.THRENODY_EFFECT },
+    [xi.magic.spell.DARK_THRENODY_II     ] = { xi.effect.THRENODY, 2,   160,   205,  90, xi.mod.THRENODY_EFFECT },
     -- Virelai: https://www.bg-wiki.com/ffxi/Category:Virelai
-    [xi.magic.spell.MAIDENS_VIRELAI      ] = { xi.effect.CHARM_I,  1,    0,    0,  30, xi.mod.VIRELAI_EFFECT  },
+    [xi.magic.spell.MAIDENS_VIRELAI      ] = { xi.effect.CHARM_I,  1,     0,     0,  30, xi.mod.VIRELAI_EFFECT  },
     -- Nocturne: https://www.bg-wiki.com/ffxi/Category:Nocturne
-    [xi.magic.spell.PINING_NOCTURNE      ] = { xi.effect.NOCTURNE, 1,   15,   25, 120, 0                      },
+    [xi.magic.spell.PINING_NOCTURNE      ] = { xi.effect.NOCTURNE, 1,    15,    25, 120, 0                      },
 }
 
 -----------------------------------
@@ -94,11 +96,11 @@ xi.spells.enfeebling.calculateSongPower = function(caster, spellEffect, basePowe
         if caster:hasStatusEffect(xi.effect.SOUL_VOICE) then
             power = power * 2
         elseif marcatoEffect ~= nil then
-            power = power * (1 + (marcatoEffect:getPower() / 100))
+            power = power * (1 + marcatoEffect:getPower() / 100)
         end
     end
 
-    return power
+    return math.floor(power)
 end
 
 -----------------------------------

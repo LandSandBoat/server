@@ -1,5 +1,5 @@
 -----------------------------------
--- xi.effect.VOIDSTORM
+-- xi.effect.VOIDSTORM_II
 -----------------------------------
 ---@type TEffect
 local effectObject = {}

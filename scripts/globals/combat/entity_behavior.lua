@@ -1,9 +1,12 @@
 -----------------------------------
 -- Global file for globably/commonly used entity behavior/patterns.
 -----------------------------------
+require('scripts/globals/combat/entity_behavior_data')
+-----------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.behavior = xi.combat.behavior or {}
+-----------------------------------
 
 xi.combat.behavior.isEntityBusy = function(actor)
     -- Check poses (actions).
@@ -57,244 +60,244 @@ xi.combat.behavior.enableAllActions = function(actor)
     actor:setMobAbilityEnabled(true)
 end
 
-xi.combat.behavior.chooseAction = function(actor, mainTarget, optionalTargets, actionTable)
+-----------------------------------
+-- Action choose functions.
+-----------------------------------
+local function validateParameters(fedParameters)
+    local params = {}
+
+    -- Common parmeters.
+    params.spellId             = utils.defaultIfNil(fedParameters.spellId, 0)
+    params.category            = utils.defaultIfNil(xi.combat.behavior.spellData[params.spellId][1], xi.action.type.NONE)
+    params.isSelfTarget        = utils.defaultIfNil(xi.combat.behavior.spellData[params.spellId][2], false)
+    params.distance            = utils.defaultIfNil(fedParameters.distance, 8)
+    params.weight              = utils.defaultIfNil(fedParameters.weight, 100)
+
+    -- Effect parameters.
+    params.healsEffectId       = utils.defaultIfNil(fedParameters.healsEffectId, xi.combat.behavior.spellData[params.spellId][3])
+    params.appliesEffectId     = utils.defaultIfNil(fedParameters.appliesEffectId, xi.combat.behavior.spellData[params.spellId][4])
+    params.effectTier          = utils.defaultIfNil(fedParameters.effectTier, xi.combat.behavior.spellData[params.spellId][5])
+
+    -- Evaluation conditions.
+    params.evaluateAlive       = utils.defaultIfNil(fedParameters.evaluateAlive, true)
+    params.evaluateUndead      = utils.defaultIfNil(fedParameters.evaluateUndead, false)
+    params.evaluateEntityPets  = utils.defaultIfNil(fedParameters.evaluateEntityPets, false)
+    params.evaluateDispel      = utils.defaultIfNil(fedParameters.evaluateDispel, false)
+    params.evaluateErase       = utils.defaultIfNil(fedParameters.evaluateErase, false)
+    params.evaluateAllyTargets = utils.defaultIfNil(fedParameters.evaluateAllyTargets, xi.combat.behavior.spellData[params.spellId][6])
+    params.evaluateFoeTargets  = utils.defaultIfNil(fedParameters.evaluateFoeTargets, xi.combat.behavior.spellData[params.spellId][7])
+    params.evaluateHPP         = utils.defaultIfNil(fedParameters.hpp, 100) -- Target HPP must be this % or lower.
+    params.evaluateMP          = utils.defaultIfNil(fedParameters.mp, 0)    -- Target MPP must be this % or higher.
+    params.evaluateTP          = utils.defaultIfNil(fedParameters.tp, 0)    -- Target TP must be this value or higher.
+
+    return params
+end
+
+local function judgeEntity(actor, entity, params, validTargets, targetAmount)
+    -- Early return: Target entity doesn't exist.
+    if not entity then
+        return validTargets, targetAmount
+    end
+
+    -- Early return: Target is not supposed to be targetable.
+    if entity:getUntargetable() then
+        return validTargets, targetAmount
+    end
+
+    -- Early return: Target needs to be alivwe and isn't.
+    if params.evaluateAlive and not entity:isAlive() then
+        return validTargets, targetAmount
+    end
+
+    -- Early return: Target is too far from caster.
+    if entity:checkDistance(actor) > params.distance then
+        return validTargets, targetAmount
+    end
+
+    -- Early return: Target doesn't have enough HP to be casted.
+    if entity:getHPP() > params.evaluateHPP then
+        return validTargets, targetAmount
+    end
+
+    -- Early return: Target doesn't have enough MP to be casted.
+    if entity:getMP() < params.evaluateMP then
+        return validTargets, targetAmount
+    end
+
+    -- Early return: Target doesn't have enough TP to be casted.
+    if entity:getTP() < params.evaluateTP then
+        return validTargets, targetAmount
+    end
+
+    -- Early return: Erase-type spell.
+    if params.evaluateErase then
+        if not entity:hasStatusEffectByFlag(xi.effectFlag.ERASABLE) then
+            return validTargets, targetAmount
+        end
+    end
+
+    -- Early return: Dispel-type spell.
+    if params.evaluateDispel then
+        if not entity:hasStatusEffectByFlag(xi.effectFlag.DISPELABLE) then
+            return validTargets, targetAmount
+        end
+    end
+
+    -- Early return: Spell heals status and target doesn't have said status.
+    if params.healsEffectId then
+        if not entity:hasStatusEffect(params.healsEffectId) then
+            return validTargets, targetAmount
+        end
+    end
+
+    -- Spell adds status to target.
+    if params.appliesEffectId then
+        if entity:hasStatusEffect(params.appliesEffectId) then
+            return validTargets, targetAmount
+        end
+
+       -- Early return: Effect wouldn't be applied.
+        if xi.data.statusEffect.isEffectNullified(entity, params.appliesEffectId, params.effectTier) then
+            return validTargets, targetAmount
+        end
+
+        -- Special condition: Silence
+        if params.appliesEffectId == xi.effect.SILENCE then
+            if not xi.data.job.isInnateCaster(entity) then
+                return validTargets, targetAmount
+            end
+
+        -- Special condition: Elemental DoT incompatibilities. This will ensure we only cast stackable effects.
+        elseif
+            params.appliesEffectId == xi.effect.BURN or
+            params.appliesEffectId == xi.effect.CHOKE or
+            params.appliesEffectId == xi.effect.DROWN or
+            params.appliesEffectId == xi.effect.FROST or
+            params.appliesEffectId == xi.effect.RASP or
+            params.appliesEffectId == xi.effect.SHOCK
+        then
+            if entity:hasStatusEffect(xi.data.statusEffect.getEffectToRemove(params.appliesEffectId)) then
+                return validTargets, targetAmount
+            end
+
+            if entity:hasStatusEffect(xi.data.statusEffect.getNullificatingEffect(params.appliesEffectId)) then
+                return validTargets, targetAmount
+            end
+        end
+    end
+
+    table.insert(validTargets, { entity })
+
+    return validTargets, targetAmount + 1
+end
+
+local function handleActionList(actor, mainTarget, params, allyEntityTable, foeEntityTable, isForcedOnSelf)
+    local validTargets = {} -- Table with all possible targets of this action.
+    local targetAmount = 0  -- Number of possible targets.
+
+    -- Check and add main target into the list.
+    validTargets, targetAmount = judgeEntity(actor, mainTarget, params, validTargets, targetAmount)
+
+    -- Check optional targets in ally list.
+    if allyEntityTable and params.evaluateAllyTargets then
+        for _, targetEntity in pairs(allyEntityTable) do
+            validTargets, targetAmount = judgeEntity(actor, targetEntity, params, validTargets, targetAmount)
+
+            if params.includePet then
+                local petEntity = targetEntity:getPet()
+                if petEntity then
+                    validTargets, targetAmount = judgeEntity(actor, petEntity, params, validTargets, targetAmount)
+                end
+            end
+        end
+    end
+
+    -- Check optional targets in foe list.
+    if foeEntityTable and params.evaluateFoeTargets then
+        for _, targetEntity in pairs(foeEntityTable) do
+            validTargets, targetAmount = judgeEntity(actor, targetEntity, params, validTargets, targetAmount)
+
+            if params.includePet then
+                local petEntity = targetEntity:getPet()
+                if petEntity then
+                    validTargets, targetAmount = judgeEntity(actor, petEntity, params, validTargets, targetAmount)
+                end
+            end
+        end
+    end
+
+    -- Add all valid entries to the action list.
+    local actionList = {}
+    if targetAmount > 0 then
+        for _, validEntity in pairs(validTargets) do
+            local targetEntity = isForcedOnSelf and actor or validEntity
+            table.insert(actionList, { params.spellId, targetEntity, params.weight / targetAmount })
+        end
+    end
+
+    return actionList
+end
+
+xi.combat.behavior.chooseSpell = function(actor, target, actionTable, allyEntityTable, foeEntityTable)
     local actionList = {}
 
     -- Build new table with actions that meet the conditions.
     for entry = 1, #actionTable do
-        local actionId          = actionTable[entry][1]        -- The ID of the action.
-        local actionTarget      = actionTable[entry][2]        -- The main target of the action.
-        local actionAllowAllies = actionTable[entry][3]        -- Boolean. Determine if we check "optionalTargets" tables for the condition. NOTE: Needs condition.
-        local actionType        = actionTable[entry][4]        -- Determines the condition type.
-        local actionCondition   = actionTable[entry][5]        -- The condition. (HP/MP under threshold, effect present.)
-        local effectTier        = actionTable[entry][6] or 0   -- Currently used only for effect tiers.
-        local actionWeight      = actionTable[entry][7] or 100 -- How likely it will be for the action to be chosen.
+        local params     = validateParameters(actionTable[entry])
+        local mainTarget = params.isPositive and actor or target
 
-        switch (actionType): caseof
+        switch (params.category): caseof
         {
             [xi.action.type.NONE] = function()
-                table.insert(actionList, { actionId, actionTarget, actionWeight })
             end,
 
             [xi.action.type.DAMAGE_TARGET] = function()
-                table.insert(actionList, { actionId, actionTarget, actionWeight })
+                actionList = handleActionList(actor, mainTarget, params, allyEntityTable, foeEntityTable, false)
             end,
 
             [xi.action.type.DAMAGE_FORCE_SELF] = function()
-                table.insert(actionList, { actionId, actor, actionWeight })
+                actionList = handleActionList(actor, mainTarget, params, allyEntityTable, foeEntityTable, true)
             end,
 
             [xi.action.type.HEALING_TARGET] = function()
-                -- Check self.
-                if actor:getHPP() <= actionCondition then
-                    table.insert(actionList, { actionId, actor, actionWeight })
-                end
-
-                -- Check allies.
-                if actionAllowAllies and optionalTargets then
-                    for _, allyEntity in pairs(optionalTargets) do
-                        if
-                            allyEntity and
-                            allyEntity:isAlive() and
-                            allyEntity:checkDistance(actor) <= 8 and
-                            allyEntity:getHPP() <= actionCondition
-                        then
-                            table.insert(actionList, { actionId, allyEntity, actionWeight })
-                        end
-                    end
-                end
+                actionList = handleActionList(actor, mainTarget, params, allyEntityTable, foeEntityTable, false)
             end,
 
             -- For Self-targeted AoE cures.
             [xi.action.type.HEALING_FORCE_SELF] = function()
-                -- Check self.
-                if actor:getHPP() <= actionCondition then
-                    table.insert(actionList, { actionId, actor, actionWeight })
-
-                -- Check allies.
-                else
-                    if actionAllowAllies and optionalTargets then
-                        for _, allyEntity in pairs(optionalTargets) do
-                            if
-                                allyEntity and
-                                allyEntity:isAlive() and
-                                allyEntity:checkDistance(actor) <= 8 and
-                                allyEntity:getHPP() <= actionCondition
-                            then
-                                table.insert(actionList, { actionId, actor, actionWeight })
-                                break
-                            end
-                        end
-                    end
-                end
+                actionList = handleActionList(actor, mainTarget, params, allyEntityTable, foeEntityTable, true)
             end,
 
             [xi.action.type.HEALING_EFFECT] = function()
-                -- Check self.
-                if actor:hasStatusEffect(actionCondition) then
-                    table.insert(actionList, { actionId, actor, actionWeight })
-                end
+                actionList = handleActionList(actor, mainTarget, params, allyEntityTable, foeEntityTable, false)
+            end,
 
-                -- Check allies.
-                if actionAllowAllies and optionalTargets then
-                    for _, allyEntity in pairs(optionalTargets) do
-                        if
-                            allyEntity and
-                            allyEntity:isAlive() and
-                            allyEntity:checkDistance(actor) <= 8 and
-                            allyEntity:hasStatusEffect(actionCondition)
-                        then
-                            table.insert(actionList, { actionId, allyEntity, actionWeight })
-                        end
-                    end
-                end
+            [xi.action.type.HEALING_EFFECT_FORCE_SELF] = function()
+                actionList = handleActionList(actor, mainTarget, params, allyEntityTable, foeEntityTable, true)
             end,
 
             [xi.action.type.ENHANCING_TARGET] = function()
-                -- Check self.
-                if
-                    not actor:hasStatusEffect(actionCondition) and
-                    not xi.data.statusEffect.isEffectNullified(actor, actionCondition, effectTier)
-                then
-                    table.insert(actionList, { actionId, actor, actionWeight })
-                end
-
-                -- Check allies.
-                if actionAllowAllies and optionalTargets then
-                    for _, allyEntity in pairs(optionalTargets) do
-                        if
-                            allyEntity and
-                            allyEntity:isAlive() and
-                            allyEntity:checkDistance(actor) <= 8 and
-                            not allyEntity:hasStatusEffect(actionCondition) and
-                            not xi.data.statusEffect.isEffectNullified(allyEntity, actionCondition, effectTier)
-                        then
-                            table.insert(actionList, { actionId, allyEntity, actionWeight })
-                        end
-                    end
-                end
+                actionList = handleActionList(actor, mainTarget, params, allyEntityTable, foeEntityTable, false)
             end,
 
             -- For Self-targeted AoE enhancements.
             [xi.action.type.ENHANCING_FORCE_SELF] = function()
-                -- Check self.
-                if
-                    not actor:hasStatusEffect(actionCondition) and
-                    not xi.data.statusEffect.isEffectNullified(actor, actionCondition, effectTier)
-                then
-                    table.insert(actionList, { actionId, actor, actionWeight })
-
-                -- Check allies.
-                else
-                    if actionAllowAllies and optionalTargets then
-                        for _, allyEntity in pairs(optionalTargets) do
-                            if
-                                allyEntity and
-                                allyEntity:isAlive() and
-                                allyEntity:checkDistance(actor) <= 8 and
-                                not allyEntity:hasStatusEffect(actionCondition) and
-                                not xi.data.statusEffect.isEffectNullified(allyEntity, actionCondition, effectTier)
-                            then
-                                table.insert(actionList, { actionId, actor, actionWeight })
-                                break
-                            end
-                        end
-                    end
-                end
+                actionList = handleActionList(actor, mainTarget, params, allyEntityTable, foeEntityTable, true)
             end,
 
             [xi.action.type.ENFEEBLING_TARGET] = function()
-                if
-                    not actionTarget:hasStatusEffect(actionCondition) and
-                    not xi.data.statusEffect.isEffectNullified(actionTarget, actionCondition, effectTier)
-                then
-                    -- Special condition: Silence
-                    if actionCondition == xi.effect.SILENCE then
-                        if xi.data.job.isInnateCaster(actionTarget) then
-                            table.insert(actionList, { actionId, actionTarget, actionWeight })
-                        end
-
-                    -- Special condition: Elemental DoT incompatibilities. This will ensure we only cast stackable effects.
-                    elseif
-                        actionCondition == xi.effect.BURN or
-                        actionCondition == xi.effect.CHOKE or
-                        actionCondition == xi.effect.DROWN or
-                        actionCondition == xi.effect.FROST or
-                        actionCondition == xi.effect.RASP or
-                        actionCondition == xi.effect.SHOCK
-                    then
-                        if
-                            not actionTarget:hasStatusEffect(xi.data.statusEffect.getEffectToRemove(actionCondition)) and
-                            not actionTarget:hasStatusEffect(xi.data.statusEffect.getNullificatingEffect(actionCondition))
-                        then
-                            table.insert(actionList, { actionId, actionTarget, actionWeight })
-                        end
-
-                    -- No special conditions.
-                    else
-                        table.insert(actionList, { actionId, actionTarget, actionWeight })
-                    end
-                end
+                actionList = handleActionList(actor, mainTarget, params, allyEntityTable, foeEntityTable, false)
             end,
 
             -- For self-targeted AoE enfeeblements. Use with care.
             [xi.action.type.ENFEEBLING_FORCE_SELF] = function()
-                if
-                    not actionTarget:hasStatusEffect(actionCondition) and
-                    not xi.data.statusEffect.isEffectNullified(actionTarget, actionCondition, effectTier)
-                then
-                    -- Special condition: Silence
-                    if actionCondition == xi.effect.SILENCE then
-                        if xi.data.job.isInnateCaster(actionTarget) then
-                            table.insert(actionList, { actionId, actor, actionWeight })
-                        end
-
-                    -- Special condition: Elemental DoT incompatibilities. This will ensure we only cast stackable effects.
-                    elseif
-                        actionCondition == xi.effect.BURN or
-                        actionCondition == xi.effect.CHOKE or
-                        actionCondition == xi.effect.DROWN or
-                        actionCondition == xi.effect.FROST or
-                        actionCondition == xi.effect.RASP or
-                        actionCondition == xi.effect.SHOCK
-                    then
-                        if
-                            not actionTarget:hasStatusEffect(xi.data.statusEffect.getEffectToRemove(actionCondition)) and
-                            not actionTarget:hasStatusEffect(xi.data.statusEffect.getNullificatingEffect(actionCondition))
-                        then
-                            table.insert(actionList, { actionId, actor, actionWeight })
-                        end
-
-                    -- No special conditions.
-                    else
-                        table.insert(actionList, { actionId, actor, actionWeight })
-                    end
-                end
+                actionList = handleActionList(actor, mainTarget, params, allyEntityTable, foeEntityTable, true)
             end,
 
-            [xi.action.type.DRAIN_HP] = function()
-                if not actionTarget:isUndead() then
-                    if
-                        actionCondition == nil or
-                        (actionCondition and actor:getHPP() <= actionCondition)
-                    then
-                        table.insert(actionList, { actionId, actionTarget, actionWeight })
-                    end
-                end
+            [xi.action.type.DISPEL] = function()
             end,
 
-            [xi.action.type.DRAIN_MP] = function()
-                if
-                    not actionTarget:isUndead() and
-                    actionTarget:getMP() > 0
-                then
-                    if
-                        actionCondition == nil or
-                        (actionCondition and actor:getMPP() <= actionCondition)
-                    then
-                        table.insert(actionList, { actionId, actionTarget, actionWeight })
-                    end
-                end
+            [xi.action.type.SUMMONING] = function()
             end,
         }
     end

@@ -40,20 +40,20 @@ end
 entity.onMobSpellChoose = function(mob, target, spellId)
     local spellList =
     {
-        [1] = { xi.magic.spell.BANISH_II,  target, false, xi.action.type.DAMAGE_TARGET,     nil,               0, 100 },
-        [2] = { xi.magic.spell.FLASH,      target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.FLASH,   0, 100 },
-        [3] = { xi.magic.spell.PROTECT_IV, mob,    true,  xi.action.type.ENHANCING_TARGET,  xi.effect.PROTECT, 0,  25 },
-        [4] = { xi.magic.spell.SHELL_III,  mob,    true,  xi.action.type.ENHANCING_TARGET,  xi.effect.SHELL,   0,  25 },
-        [5] = { xi.magic.spell.CURE_IV,    mob,    true,  xi.action.type.HEALING_TARGET,    33,                0, 100 },
+        [1] = { spellId = xi.magic.spell.BANISH_II           },
+        [2] = { spellId = xi.magic.spell.FLASH               },
+        [3] = { spellId = xi.magic.spell.PROTECT_IV          },
+        [4] = { spellId = xi.magic.spell.SHELL_III           },
+        [5] = { spellId = xi.magic.spell.CURE_IV,   hpp = 33 },
     }
 
-    local groupTable =
+    local allyList =
     {
         GetMobByID(mob:getID() + 2), -- Queen of Cups
         GetMobByID(mob:getID() + 3), -- Queen of Batons
     }
 
-    return xi.combat.behavior.chooseAction(mob, target, groupTable, spellList)
+    return xi.combat.behavior.chooseSpell(mob, target, spellList, allyList, nil)
 end
 
 return entity

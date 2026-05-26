@@ -1,5 +1,5 @@
 -----------------------------------
--- Spell: Reraise 3
+-- Spell: Thunderstorm II
 -----------------------------------
 ---@type TSpell
 local spellObject = {}
@@ -9,9 +9,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    target:addStatusEffect(xi.effect.RERAISE, { power = 3, duration = 3600, tier = 3, origin = caster })
-
-    return xi.effect.RERAISE
+    return xi.spells.enhancing.useEnhancingSpell(caster, target, spell)
 end
 
 return spellObject

@@ -80,19 +80,20 @@ end
 entity.onMobSpellChoose = function(mob, target, spellId)
     local spellList =
     {
-        [ 1] = { xi.magic.spell.DRAIN,        target, false, xi.action.type.DRAIN_HP,          nil,                0, 100 },
-        [ 2] = { xi.magic.spell.ASPIR,        target, false, xi.action.type.DRAIN_MP,          nil,                0, 100 },
-        [ 3] = { xi.magic.spell.STUN,         mob,    false, xi.action.type.ENFEEBLING_EFFECT, xi.effect.STUN,     0, 100 },
-        [ 4] = { xi.magic.spell.ABSORB_TP,    mob,    false, xi.action.type.ENFEEBLING_EFFECT, nil,                0, 100 },
-        [ 5] = { xi.magic.spell.ABSORB_STR,   mob,    false, xi.action.type.ENFEEBLING_EFFECT, xi.effect.STR_DOWN, 0, 100 },
-        [ 6] = { xi.magic.spell.ABSORB_DEX,   mob,    false, xi.action.type.ENFEEBLING_EFFECT, xi.effect.DEX_DOWN, 0, 100 },
-        [ 7] = { xi.magic.spell.ABSORB_VIT,   mob,    false, xi.action.type.ENFEEBLING_EFFECT, xi.effect.VIT_DOWN, 0, 100 },
-        [ 8] = { xi.magic.spell.ABSORB_AGI,   mob,    false, xi.action.type.ENFEEBLING_EFFECT, xi.effect.AGI_DOWN, 0, 100 },
-        [ 9] = { xi.magic.spell.ABSORB_INT,   mob,    false, xi.action.type.ENFEEBLING_EFFECT, xi.effect.INT_DOWN, 0, 100 },
-        [10] = { xi.magic.spell.ABSORB_MND,   mob,    false, xi.action.type.ENFEEBLING_EFFECT, xi.effect.MND_DOWN, 0, 100 },
-        [11] = { xi.magic.spell.ABSORB_CHR,   mob,    false, xi.action.type.ENFEEBLING_EFFECT, xi.effect.CHR_DOWN, 0, 100 },
+        [ 1] = { spellId = xi.magic.spell.DRAIN,              evaluateUndead = true },
+        [ 2] = { spellId = xi.magic.spell.ASPIR,     mp = 1,  evaluateUndead = true },
+        [ 3] = { spellId = xi.magic.spell.STUN                                      },
+        [ 4] = { spellId = xi.magic.spell.ABSORB_TP, tp = 500                       },
+        [ 5] = { spellId = xi.magic.spell.ABSORB_STR                                },
+        [ 6] = { spellId = xi.magic.spell.ABSORB_DEX                                },
+        [ 7] = { spellId = xi.magic.spell.ABSORB_VIT                                },
+        [ 8] = { spellId = xi.magic.spell.ABSORB_AGI                                },
+        [ 9] = { spellId = xi.magic.spell.ABSORB_INT                                },
+        [10] = { spellId = xi.magic.spell.ABSORB_MND                                },
+        [11] = { spellId = xi.magic.spell.ABSORB_CHR                                },
     }
-    return xi.combat.behavior.chooseAction(mob, target, nil, spellList)
+
+    return xi.combat.behavior.chooseSpell(mob, target, spellList, nil, nil)
 end
 
 return entity

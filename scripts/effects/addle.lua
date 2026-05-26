@@ -5,8 +5,10 @@
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
-    effect:addMod(xi.mod.FASTCAST, -effect:getPower()) -- Yes we are subtracting in addMod()
-    effect:addMod(xi.mod.MACC, -effect:getSubPower()) -- This is intentional
+    local power    = effect:getPower()
+    local subpower = math.floor(power / 2)
+    effect:addMod(xi.mod.MACC, -power)
+    effect:addMod(xi.mod.FASTCAST, -subpower)
 
     -- Immunobreak reset.
     target:setMod(xi.mod.ADDLE_IMMUNOBREAK, 0)
