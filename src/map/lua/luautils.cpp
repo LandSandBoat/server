@@ -777,6 +777,14 @@ void init(IPP mapIPP, bool isRunningInCI)
             return;
         }
 
+        // Completely ignore specs, they're for the linter, not for runtime.
+        // (BAD THINGS HAPPEN IF YOU RELOAD SPEC FILES AT RUNTIME!)
+        if (parts.size() >= 2 && parts[0] == "scripts" && parts[1] == "specs")
+        {
+            ShowInfo("[FileWatcher] Skipping reload of spec file: %s", filename);
+            return;
+        }
+
         auto it = std::find(parts.begin(), parts.end(), "scripts");
         if (it == parts.end())
         {
