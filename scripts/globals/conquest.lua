@@ -6,7 +6,6 @@ require('scripts/globals/garrison')
 require('scripts/globals/teleports')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/expeditionary_force')
 -----------------------------------
 xi = xi or {}
 xi.conquest = xi.conquest or {}
@@ -24,32 +23,156 @@ local conquestConstants =
 
 -----------------------------------
 -- (LOCAL) expeditionary forces
--- Unused. Data now lives in expeditionary_force_data.lua and logic in expeditionary_force.lua.
 -----------------------------------
---[[
+local expeditionaryForceEnabled = true
+
+-- TODO: Do I need zone?
 local exForceMenuData =
 {
-    0x20006, ZULK_EF, 103, 0x000040, 20, xi.ki.ZULKHEIM_EF_INSIGNIA,
-    0x20007, NORV_EF, 104, 0x000080, 25, xi.ki.NORVALLEN_EF_INSIGNIA,
-    0x20009, DERF_EF, 109, 0x000200, 25, xi.ki.DERFLAND_EF_INSIGNIA,
-    0x2000B, KOLS_EF, 118, 0x000800, 20, xi.ki.KOLSHUSHU_EF_INSIGNIA,
-    0x2000C, ARAG_EF, 119, 0x001000, 25, xi.ki.ARAGONEU_EF_INSIGNIA,
-    0x2000D, FAUR_EF, 111, 0x002000, 35, xi.ki.FAUREGANDI_EF_INSIGNIA,
-    0x2000E, VALD_EF, 112, 0x004000, 40, xi.ki.VALDEAUNIA_EF_INSIGNIA,
-    0x2000F, QUFI_EF, 126, 0x008000, 25, xi.ki.QUFIM_EF_INSIGNIA,
-    0x20010, LITE_EF, 121, 0x010000, 35, xi.ki.LITELOR_EF_INSIGNIA,
-    0x20011, KUZO_EF, 114, 0x020000, 40, xi.ki.KUZOTZ_EF_INSIGNIA,
-    0x20012, VOLL_EF, 113, 0x040000, 65, xi.ki.VOLLBOW_EF_INSIGNIA,
-    0x20013, ELLO_EF, 123, 0x080000, 35, xi.ki.ELSHIMO_LOWLANDS_EF_INSIGNIA,
-    0x20014, ELUP_EF, 124, 0x100000, 45, xi.ki.ELSHIMO_UPLANDS_EF_INSIGNIA
+    [xi.region.ZULKHEIM]        = { option = 0x20006, zone = xi.zone.VALKURM_DUNES,          menuBit = 0x000040, lvl = 20, ki = xi.ki.ZULKHEIM_EF_INSIGNIA        },
+    [xi.region.NORVALLEN]       = { option = 0x20007, zone = xi.zone.JUGNER_FOREST,          menuBit = 0x000080, lvl = 25, ki = xi.ki.NORVALLEN_EF_INSIGNIA       },
+    [xi.region.DERFLAND]        = { option = 0x20009, zone = xi.zone.PASHHOW_MARSHLANDS,     menuBit = 0x000200, lvl = 25, ki = xi.ki.DERFLAND_EF_INSIGNIA        },
+    [xi.region.KOLSHUSHU]       = { option = 0x2000B, zone = xi.zone.BUBURIMU_PENINSULA,     menuBit = 0x000800, lvl = 20, ki = xi.ki.KOLSHUSHU_EF_INSIGNIA       },
+    [xi.region.ARAGONEU]        = { option = 0x2000C, zone = xi.zone.MERIPHATAUD_MOUNTAINS,  menuBit = 0x001000, lvl = 25, ki = xi.ki.ARAGONEU_EF_INSIGNIA        },
+    [xi.region.FAUREGANDI]      = { option = 0x2000D, zone = xi.zone.BEAUCEDINE_GLACIER,     menuBit = 0x002000, lvl = 35, ki = xi.ki.FAUREGANDI_EF_INSIGNIA      },
+    [xi.region.VALDEAUNIA]      = { option = 0x2000E, zone = xi.zone.XARCABARD,              menuBit = 0x004000, lvl = 40, ki = xi.ki.VALDEAUNIA_EF_INSIGNIA      },
+    [xi.region.QUFIMISLAND]     = { option = 0x2000F, zone = xi.zone.QUFIM_ISLAND,           menuBit = 0x008000, lvl = 25, ki = xi.ki.QUFIM_EF_INSIGNIA           },
+    [xi.region.LITELOR]         = { option = 0x20010, zone = xi.zone.THE_SANCTUARY_OF_ZITAH, menuBit = 0x010000, lvl = 35, ki = xi.ki.LITELOR_EF_INSIGNIA         },
+    [xi.region.KUZOTZ]          = { option = 0x20011, zone = xi.zone.EASTERN_ALTEPA_DESERT,  menuBit = 0x020000, lvl = 40, ki = xi.ki.KUZOTZ_EF_INSIGNIA          },
+    [xi.region.VOLLBOW]         = { option = 0x20012, zone = xi.zone.CAPE_TERIGGAN,          menuBit = 0x040000, lvl = 65, ki = xi.ki.VOLLBOW_EF_INSIGNIA         },
+    [xi.region.ELSHIMO_LOWLANDS]= { option = 0x20013, zone = xi.zone.YUHTUNGA_JUNGLE,        menuBit = 0x080000, lvl = 35, ki = xi.ki.ELSHIMO_LOWLANDS_EF_INSIGNIA},
+    [xi.region.ELSHIMO_UPLANDS] = { option = 0x20014, zone = xi.zone.YHOATOR_JUNGLE,         menuBit = 0x100000, lvl = 45, ki = xi.ki.ELSHIMO_UPLANDS_EF_INSIGNIA },
 }
-]]--
-local function getExForceAvailable(player, guardNation)
-    return xi.expeditionaryForce.getMenuBitmask(player, guardNation)
+
+local exForceGateGlyphTable =
+{
+    -- [overseerNpcName] = glyphItemId
+    ['Crying_Wind_IM']   = xi.item.BASTOK_MINES_GLYPH,
+    ['Rabid_Wolf_IM']    = xi.item.BASTOK_MARKETS_GLYPH,
+    ['Flying_Axe_IM']    = xi.item.PORT_BASTOK_GLYPH,
+    ['Achantere_TK']     = xi.item.NORTH_SANDORIA_GLYPH,
+    ['Aravoge_TK']       = xi.item.WEST_SANDORIA_GLYPH,
+    ['Arpevion_TK']      = xi.item.EAST_SANDORIA_GLYPH,
+    ['Harara_WW']        = xi.item.WINDURST_WOODS_GLYPH,
+    ['Milma-Hapilma_WW'] = xi.item.PORT_WINDURST_GLYPH,
+    ['Puroiko-Maiko_WW'] = xi.item.WINDURST_WATERS_GLYPH,
+}
+
+local exForceNumberRequiredTable = 
+{
+    -- [Standing] = partySize
+    [0] = 4, -- No standing
+    [1] = 6,
+    [2] = 5,
+    [3] = 4,
+}
+
+-- Helper to parse region out of the exForceMenu data
+local function getExForceRegion(option)
+    for regionId, data in pairs(exForceMenuData) do
+        if data.option == option then
+            return regionId
+        end
+    end
 end
 
+-- Validate the sign-up party. 
+-- Returns the overseer result code for the first failed check (1-4), or nil if every check passes.
+local function exForceValidateSignup(player, guardNation, minLevel, numRequired)
+    -- Get all party members currently in zone for the check
+    local zoneId = player:getZoneID()
+    local inZone = {}
+    for _, member in pairs(player:getParty()) do
+        if member:getZoneID() == zoneId then
+            table.insert(inZone, member)
+        end
+    end
+
+    -- 1: not enough members present in the overseer's zone
+    if #inZone < numRequired then
+        return 1
+    end
+
+    -- 2: a party member is not a citizen of the overseer's nation
+    for _, member in ipairs(inZone) do
+        if member:getNation() ~= guardNation then
+            return 2
+        end
+    end
+
+    -- 3: a member is below the Conquest rank requirement
+    for _, member in ipairs(inZone) do
+        if member:getRank(guardNation) < 3 then
+            return 3
+        end
+    end
+
+    -- 4: a member is below the region's minimum level
+    for _, member in ipairs(inZone) do
+        if member:getMainLvl() < minLevel then
+            return 4
+        end
+    end
+
+    return 0
+end
+
+-- Bitmask of every region this player can sign up for. 0 = the EF menu does not appear.
+-- Oddly enough, even if you have the key item for a region, you can sign up again.
+-- TODO: I got help with the mask. I don't fully understand yet.
+local function getExForceAvailable(player, npc, guardNation)
+    if not expeditionaryForceEnabled then
+        return 0
+    end
+
+    -- Only one of the nine gate guards can trigger this
+    if exForceGateGlyphTable[npc:getName()] == nil then
+        return 0
+    end
+
+    if player:getNation() ~= guardNation then
+        return 0
+    end
+
+    local mask = 0
+
+    for regionId, data in pairs(exForceMenuData) do
+        local owner = GetRegionOwner(regionId)
+
+        if
+            owner ~= guardNation and
+            not xi.conquest.areAllies(guardNation, owner) and
+            player:hasVisitedZone(data.zone)
+        then
+            mask = bit.bor(mask, data.menuBit)
+        end
+    end
+
+    return mask
+end
+
+-- TODO: I got help with the mask. I don't fully understand yet.
 local function getExForceReward(player, guardNation)
-    return xi.expeditionaryForce.getRewardArg(player, guardNation)
+    if not expeditionaryForceEnabled or
+        player:getNation() ~= guardNation
+    then
+        return 0
+    end
+
+    local badge = player:getStatusEffect(xi.effect.EF_BADGE)
+    if badge == nil then
+        return 0
+    end
+
+    local region = exForceMenuData[badge:getPower()]
+    if region == nil then
+        return 0
+    end
+
+    -- regionRow 6-20 = eventOption (0x20006-0x20014) minus the 0x20000 base.
+    local regionRow = region.option - 0x20000
+
+    return 0x80000000 + bit.lshift(regionRow, 5)
 end
 
 -----------------------------------
@@ -1209,7 +1332,7 @@ xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, gu
     -- CITY AND FOREIGN OVERSEERS
     elseif guardType <= xi.conquest.guard.FOREIGN then
         local a1 = getArg1(player, guardNation, guardType)
-        local a2 = getExForceAvailable(player, guardNation)
+        local a2 = getExForceAvailable(player, npc, guardNation)
         local a3 = conquestRanking()
         local a4 = suppliesAvailableBitmask(player, guardNation)
         local a5 = player:getTeleport(guardNation)
@@ -1233,17 +1356,36 @@ end
 xi.conquest.overseerOnEventUpdate = function(player, csid, option, guardNation)
     local pNation = player:getNation()
 
-    if xi.expeditionaryForce.overseerOnEventUpdate(player, csid, option, guardNation) then
-        return
-    end
-
     if guardNation == xi.nation.OTHER then
         guardNation = pNation
     end
 
     local stock = getStock(player, guardNation, option)
 
-    if stock ~= nil then
+    -- EXPEDITIONARY FORCE - Region select
+    if 
+        option >= 131078 and
+        option <= 131092
+    then
+        local regionId       = getExForceRegion(option)
+        local numberRequired = exForceNumberRequiredTable[ GetNationRank( guardNation ) ]
+        local minLevel       = exForceMenuData[ regionId ].lvl
+        local failCode       = exForceValidateSignup(player, guardNation, minLevel, numberRequired)
+        
+        -- One or more party members are below the minimum required level
+        if failCode == 4 then
+            player:updateEvent(4, 0, 0, 0, 0, 0, minLevel)
+        
+        -- All other fail codes
+        elseif failCode ~= 0 then
+            player:updateEvent(failCode)
+        
+        -- Badge granted in overseerOnEventFinish
+        else
+            player:updateEvent(5)
+        end
+
+    elseif stock ~= nil then
         local pRank = GetNationRank(pNation)
         local u1    = 2 -- default: player is correct job and level to equip item
         local u2    = 0 -- default: player has enough CP for item
@@ -1354,10 +1496,6 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
         return
     end
 
-    if xi.expeditionaryForce.overseerOnEventFinish(player, csid, option, guardNation) then
-        return
-    end
-
     -- SIGNET
     if option == 1 then
         local duration = (pRank + GetNationRank(pNation) + 3) * 3600
@@ -1449,6 +1587,45 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
                 player:setTitle(titlesGranted[pNation][stock.rank])
             end
         end
+    
+    -- EXPEDITIONARY FORCE - Region Selected
+    elseif 
+        option >= 131078 and
+        option <= 131092
+    then
+        local regionId = getExForceRegion(option)
+        player:addStatusEffect(xi.effect.EF_BADGE, { power = regionId, origin = player, flag = xi.effectFlag.ON_ZONE })
+
+    -- EXPEDITIONARY FORCE - Teleport
+    elseif option == 5 then
+        local badge    = player:getStatusEffect(xi.effect.EF_BADGE)
+        local regionId = badge:getPower()
+
+        -- Replace badge with glyph
+        player:delStatusEffect(xi.effect.EF_BADGE)
+        npcUtil.giveKeyItem(player, exForceMenuData[regionId].ki) -- TODO: Is this a temporary key item?
+        npcUtil.giveItem(player, exForceGateGlyphTable[player:getEventTarget():getName()]) -- TODO: This feels wrong
+
+        -- Bestow Signet
+        -- TODO: Do I split off the code above?
+        local duration = (pRank + GetNationRank(pNation) + 3) * 3600
+        player:delStatusEffectsByFlag(xi.effectFlag.INFLUENCE, true)
+        player:addStatusEffect(xi.effect.SIGNET, { duration = duration, origin = player })
+        player:messageSpecial(mOffset + 1) -- 'You've received your nation's Signet!'
+        -- TODO: Are there any other messages?
+
+        -- Outpost warp player
+        player:addStatusEffect(xi.effect.TELEPORT, {
+            power    = xi.teleport.id.OUTPOST,
+            duration = 1,
+            origin   = player,
+            icon     = 0,
+            subPower = regionId,
+        })
+
+    -- EXPEDITIONARY FORCE - Quit
+    elseif option == 8 then
+        player:delStatusEffect(xi.effect.EF_BADGE)
     end
 end
 
