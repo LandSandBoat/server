@@ -1,13 +1,11 @@
 -----------------------------------
 require('scripts/events/handler')
-require('scripts/globals/expeditionary_force_battle')
 -----------------------------------
 xi = xi or {}
 xi.server = xi.server or {}
 
 xi.server.onServerStart = function()
     xi.events.handler.checkSeasonalEvents()
-    xi.expeditionaryForce.onServerStart()
 end
 
 xi.server.onJSTMidnight = function()
