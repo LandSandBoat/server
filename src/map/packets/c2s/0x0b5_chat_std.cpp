@@ -122,7 +122,9 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
     if (firstChar == '!' && !jailutils::InPrison(PChar))
     {
         // TODO: Don't pass around Scheduler& through PSession
-        if (CCommandHandler::call(*PSession->scheduler, lua, PChar, rawMessageWithoutFirstChar) == 0 || PChar->m_GMlevel > 0)
+        auto& scheduler = *PSession->scheduler;
+        if (CCommandHandler::call(scheduler, lua, PChar, rawMessageWithoutFirstChar) == CommandResult::Success ||
+            PChar->m_GMlevel > 0)
         {
             // A command was handled OR a GM may have mistyped.
             return;

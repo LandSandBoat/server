@@ -21,274 +21,175 @@
 
 #include "command_handler.h"
 
-#include "autotranslate.h"
 #include "common/database.h"
 #include "common/utils.h"
+
+#include "autotranslate.h"
+
 #include "entities/charentity.h"
+
 #include "lua/lua_baseentity.h"
 #include "lua/luautils.h"
 
+#include <algorithm>
+#include <charconv>
 #include <iostream>
-#include <sstream>
 #include <string>
+#include <string_view>
 #include <unordered_map>
 #include <variant>
 #include <vector>
 
-// NOTE: Auto-translate blocks are dealt with as a string of bytes
 using CommandArg = std::variant<bool, int, double, std::string>;
 
-// The below section is a proposed rewrite of commandhandler.
-// It can automatically deduce the types of strings that are passed to it.
-//
-// Test strings:
-// bools: true True false False TRUE FALSE
-// ints: 0 1 0x01 0xFF
-// floats: 1.2 .1 1.4f
-// strings: naked_string \"a string\" \'a string\' \"embedded \'string 1\'\" \'embedded \"string 2\"\'
-//
-// The issue with this, is that there is no easy way to interpret the entire string as one long string
-// without surrounding it with quotes. If this can be nicely handled then the below code is ready
-// to go!
-
-/*
-CommandArg deduceArgType(std::string& str)
-{
-    // Look for auto-translate byte blocks
-    if (str.length() == 6 &&
-        str.front() == -3 &&
-        str.back() == -3)
-    {
-        // Return as-is, no need to further checks or transformations
-        return str;
-    }
-
-    try
-    {
-        float d = std::stof(str);
-        float intpart;
-        if (std::modf(d, &intpart) == 0.0)
-        {
-            return static_cast<int>(intpart);
-        }
-        else
-        {
-            // float
-            return d;
-        }
-    }
-    catch (std::exception&)
-    {
-        // Must be a string of some kind
-    }
-
-    // bools
-    std::string lower = "";
-    for (auto& ch : str)
-    {
-        lower += std::tolower(ch);
-    }
-
-    if (lower == "true") { return true; }
-    if (lower == "false") { return false; }
-
-    // string
-    return str;
-}
-
-std::vector<CommandArg> splitToArgs(std::string const& input)
-{
-    std::string str = trim(input);
-
-    std::vector<CommandArg> args;
-    char currentClosure = '\0';
-    std::string buffer = "";
-    for (auto ch : str)
-    {
-        // Open "" string
-        if (currentClosure == '\0' && ch == '\"')
-        {
-            currentClosure = '\"';
-        }
-        // Open '' string
-        else if (currentClosure == '\0' && ch == '\'')
-        {
-            currentClosure = '\'';
-        }
-        // Close "" string
-        else if (currentClosure == '\"' && ch == '\"')
-        {
-            currentClosure = '\0';
-        }
-        // Close '' string
-        else if (currentClosure == '\'' && ch == '\'')
-        {
-            currentClosure = '\0';
-        }
-        // Encountered unescaped space, submit buffer
-        else if (ch == ' ' && currentClosure == '\0')
-        {
-            args.emplace_back(deduceArgType(buffer));
-            buffer = "";
-        }
-        // Add to buffer
-        else
-        {
-            buffer += ch;
-        }
-    }
-
-    // Reached the end, try to submit the end of the buffer
-    args.emplace_back(deduceArgType(buffer));
-
-    return args;
-}
-*/
-
-int32 CCommandHandler::call(Scheduler& scheduler, sol::state& lua, CCharEntity* PChar, const std::string& commandline)
+auto CCommandHandler::call(Scheduler& scheduler, sol::state& lua, CCharEntity* const PChar, const std::string& commandline) -> CommandResult
 {
     TracyZoneScoped;
-
-    // TODO: stringstreams are slow. Replace with something else.
-    std::istringstream clstream(commandline);
-    std::string        cmdname;
-
-    clstream >> cmdname;
 
     if (!PChar)
     {
         ShowError("cmdhandler::call: nullptr character attempted to use command");
-        return -1;
+        return CommandResult::Failure;
     }
 
-    if (cmdname.empty())
+    constexpr auto trimLeft = [](std::string_view& sv)
+    {
+        sv.remove_prefix(std::min(sv.find_first_not_of(" \t"), sv.size()));
+    };
+
+    constexpr auto popToken = [](std::string_view& sv) -> std::string_view
+    {
+        const auto end   = sv.find_first_of(" \t");
+        const auto token = sv.substr(0, end);
+
+        sv.remove_prefix(end != std::string_view::npos ? end + 1 : sv.size());
+
+        return token;
+    };
+
+    auto cmdView = std::string_view(commandline);
+    trimLeft(cmdView);
+
+    if (cmdView.empty())
     {
         ShowError("cmdhandler::call: function name was empty");
-        return -1;
+        return CommandResult::Failure;
     }
+
+    const auto cmdName = std::string(popToken(cmdView));
 
     TracyZoneString(PChar->name);
     TracyZoneString(commandline);
 
-    auto commandObj = lua["xi"]["commands"][cmdname];
-    if (!commandObj.valid())
+    const auto maybeCommand = lua["xi"]["commands"][cmdName].get<sol::optional<sol::table>>();
+    if (!maybeCommand)
     {
-        ShowError("cmdhandler::call: Function does not exist (%s)", cmdname);
-        return -1;
+        ShowError("cmdhandler::call: Function does not exist (%s)", cmdName.c_str());
+        return CommandResult::Failure;
+    }
+    const auto& commandTable = *maybeCommand;
+
+    const auto maybeCmdProp = commandTable.get<sol::optional<sol::table>>("cmdprops");
+    if (!maybeCmdProp)
+    {
+        ShowError("cmdhandler::call: (%s): Undefined 'cmdprops' table", cmdName.c_str());
+        return CommandResult::Failure;
+    }
+    const auto& cmdprops = *maybeCmdProp;
+
+    const auto maybePerm   = cmdprops.get<sol::optional<int8>>("permission");
+    const auto maybeParams = cmdprops.get<sol::optional<std::string>>("parameters");
+    if (!maybePerm || !maybeParams)
+    {
+        ShowError("cmdhandler::call: (%s): Invalid or missing permission/parameters in cmdprops", cmdName.c_str());
+        return CommandResult::Failure;
     }
 
-    sol::table commandTable = commandObj;
+    const auto& permission = *maybePerm;
+    const auto& parameters = *maybeParams;
 
-    if (!commandTable["cmdprops"].valid())
-    {
-        ShowError("cmdhandler::call: (%s): Undefined 'cmdprops' table", cmdname);
-        return -1;
-    }
-
-    if (!commandTable["cmdprops"]["permission"].valid())
-    {
-        ShowError("cmdhandler::call: (%s): Invalid or no permission field set in cmdprops", cmdname);
-        return -1;
-    }
-
-    if (!commandTable["cmdprops"]["parameters"].valid())
-    {
-        ShowError("cmdhandler::call: (%s): Invalid or no parameters field set in cmdprops", cmdname);
-        return -1;
-    }
-
-    int8        permission = commandTable["cmdprops"]["permission"];
-    std::string parameters = commandTable["cmdprops"]["parameters"];
-
-    // Ensure this user can use this command
     if (permission > PChar->m_GMlevel)
     {
-        ShowWarning("cmdhandler::call: Character %s attempting to use higher permission command %s", PChar->name, cmdname);
-        return -1;
+        ShowWarning("cmdhandler::call: Character %s attempting to use higher permission command %s", PChar->name.c_str(), cmdName.c_str());
+        return CommandResult::Failure;
     }
-    else
-    {
-        if (settings::get<uint8>("map.AUDIT_GM_CMD") <= permission && settings::get<uint8>("map.AUDIT_GM_CMD") > 0)
-        {
-            std::string name       = PChar->name;
-            std::string cmdlinestr = autotranslate::replaceBytes(commandline);
 
-            scheduler.postToWorkerThread(
-                [name, cmdname, cmdlinestr]()
+    const auto auditLevel = settings::get<uint8>("map.AUDIT_GM_CMD");
+    if (auditLevel <= permission && auditLevel > 0)
+    {
+        scheduler.postToWorkerThread(
+            [name = PChar->name, cmd = cmdName, cmdlinestr = autotranslate::replaceBytes(commandline)]() mutable
+            {
+                const auto query = "INSERT into audit_gm (date_time, gm_name, command, full_string) VALUES(CURRENT_TIMESTAMP(3), ?, ?, ?)";
+                if (!db::preparedStmt(query, db::escapeString(name), db::escapeString(cmd), db::escapeString(cmdlinestr)))
                 {
-                    const auto query = "INSERT into audit_gm (date_time, gm_name, command, full_string) VALUES(CURRENT_TIMESTAMP(3), ?, ?, ?)";
-                    if (!db::preparedStmt(query, db::escapeString(name), db::escapeString(cmdname), db::escapeString(cmdlinestr)))
-                    {
-                        ShowError("cmdhandler::call: Failed to log GM command.");
-                    }
-                });
-        }
-    }
-
-    // Ensure the onTrigger function exists for this command
-    sol::function onTrigger = commandTable["onTrigger"];
-    if (!onTrigger.valid())
-    {
-        ShowError("cmdhandler::call: (%s) missing onTrigger function", cmdname);
-        return -1;
-    }
-
-    std::vector<CommandArg> args;
-
-    // Prepare parameters
-    std::string param;
-    auto        parameter = parameters.cbegin();
-
-    // Parse and push parameters based on symbol string
-    while (parameter != parameters.cend() && !clstream.eof())
-    {
-        clstream >> param;
-
-        switch (*parameter)
-        {
-            case 'b':
-                args.emplace_back(std::string(commandline));
-                break;
-
-            case 's':
-                if (parameters.size() == 1)
-                {
-                    std::string str = param;
-                    while (!clstream.eof())
-                    {
-                        clstream >> param;
-                        str += " " + param;
-                    }
-                    args.emplace_back(str);
-                    break;
+                    ShowError("cmdhandler::call: Failed to log GM command.");
                 }
-                args.emplace_back(param);
-                break;
-
-            case 'i':
-                args.emplace_back(atoi(param.c_str()));
-                break;
-
-            case 'd':
-                args.emplace_back(atof(param.c_str()));
-                break;
-
-            default:
-                ShowError("cmdhandler::call: (%s) undefined type for param: symbol: %s", cmdname.c_str(), *parameter);
-                break;
-        }
-
-        ++parameter;
+            });
     }
 
-    // Call the function
-    auto result = onTrigger(PChar, sol::as_args(args));
+    const auto maybeOnTrigger = commandTable.get<sol::optional<sol::function>>("onTrigger");
+    if (!maybeOnTrigger)
+    {
+        ShowError("cmdhandler::call: (%s) missing onTrigger function", cmdName.c_str());
+        return CommandResult::Failure;
+    }
+    const auto& onTrigger = *maybeOnTrigger;
+
+    auto args = std::vector<CommandArg>{};
+    args.reserve(parameters.size());
+
+    for (const auto paramType : parameters)
+    {
+        if (paramType == 'b')
+        {
+            args.emplace_back(commandline);
+            continue;
+        }
+
+        trimLeft(cmdView);
+        if (cmdView.empty())
+        {
+            break;
+        }
+
+        if (paramType == 's')
+        {
+            if (parameters.size() == 1)
+            {
+                args.emplace_back(std::string(cmdView));
+                cmdView = {};
+                break;
+            }
+            args.emplace_back(std::string(popToken(cmdView)));
+        }
+        else if (paramType == 'i')
+        {
+            auto       val   = 0;
+            const auto token = popToken(cmdView);
+            std::from_chars(token.data(), token.data() + token.size(), val);
+            args.emplace_back(val);
+        }
+        else if (paramType == 'd')
+        {
+            auto       val   = 0.0;
+            const auto token = popToken(cmdView);
+            std::from_chars(token.data(), token.data() + token.size(), val);
+            args.emplace_back(val);
+        }
+        else
+        {
+            ShowError("cmdhandler::call: (%s) undefined type for param: symbol: %c", cmdName.c_str(), paramType);
+        }
+    }
+
+    const auto result = onTrigger(PChar, sol::as_args(args));
     if (!result.valid())
     {
-        sol::error err = result;
-        ShowError("cmdhandler::call: (%s) error: %s", cmdname.c_str(), err.what());
-        return -1;
+        const sol::error err = result;
+        ShowError("cmdhandler::call: (%s) error: %s", cmdName.c_str(), err.what());
+        return CommandResult::Failure;
     }
 
-    return 0;
+    return CommandResult::Success;
 }
