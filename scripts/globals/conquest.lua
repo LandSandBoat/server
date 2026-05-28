@@ -6,6 +6,7 @@ require('scripts/globals/garrison')
 require('scripts/globals/teleports')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
+require('scripts/globals/expeditionary_force')
 -----------------------------------
 xi = xi or {}
 xi.conquest = xi.conquest or {}
@@ -23,7 +24,7 @@ local conquestConstants =
 
 -----------------------------------
 -- (LOCAL) expeditionary forces
--- TODO: implement this menu
+-- Unused. Data now lives in expeditionary_force_data.lua and logic in expeditionary_force.lua.
 -----------------------------------
 --[[
 local exForceMenuData =
@@ -44,11 +45,11 @@ local exForceMenuData =
 }
 ]]--
 local function getExForceAvailable(player, guardNation)
-    return 0
+    return xi.expeditionaryForce.getMenuBitmask(player, guardNation)
 end
 
 local function getExForceReward(player, guardNation)
-    return 0
+    return xi.expeditionaryForce.getRewardArg(player, guardNation)
 end
 
 -----------------------------------
@@ -1232,6 +1233,10 @@ end
 xi.conquest.overseerOnEventUpdate = function(player, csid, option, guardNation)
     local pNation = player:getNation()
 
+    if xi.expeditionaryForce.overseerOnEventUpdate(player, csid, option, guardNation) then
+        return
+    end
+
     if guardNation == xi.nation.OTHER then
         guardNation = pNation
     end
@@ -1346,6 +1351,10 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
     local mOffset  = zones[player:getZoneID()].text.CONQUEST
 
     if xi.garrison.onEventFinish(player, csid, option, guardNation, guardType, guardRegion) then
+        return
+    end
+
+    if xi.expeditionaryForce.overseerOnEventFinish(player, csid, option, guardNation) then
         return
     end
 
