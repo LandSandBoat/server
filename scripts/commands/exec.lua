@@ -17,44 +17,56 @@ local function error(player, msg)
 end
 
 commandObj.onTrigger = function(player, str)
-    -- Ensure a command was given..
-    if str == nil or string.len(str) == 0 then
+    if
+        not str or
+        str == ''
+    then
         error(player, 'You must enter a string to execute.')
         return
     end
 
-    -- For safety measures we will nuke the os table..
-    local oldOs = os
+    --
+    -- Set up a safe environment for us to execute the incoming Lua string in
+    --
 
-    -- TODO: Intential assignment to remove access to os during calls
-    ---@diagnostic disable-next-line: assign-type-mismatch
-    os = nil
+    -- Capture things from the current or global scope we might want in the sandbox.
+    local safeEnv =
+    {
+        player = player,
+        target = player:getCursorTarget()
+    }
 
-    -- Define 'player' and 'target' inside the string for use by the caller
-    local definePlayer = 'local player = GetPlayerByName(\'' .. player:getName() .. '\'); '
-    local defineTarget = 'local target = player:getCursorTarget(); '
+    setmetatable(safeEnv, {
+        __index = function(_, key)
+            -- Block the use of powerful libraries
+            if
+                key == 'os' or
+                key == 'io' or
+                key == 'debug' or
+                key == 'require'
+            then
+                player:printToPlayer('Trying to access forbidden global!')
+                return nil
+            end
 
-    -- Ensure the command compiles / is valid..
-    local scriptObj, err0 = loadstring(definePlayer .. defineTarget .. str)
-    if scriptObj == nil then
-        player:printToPlayer('Failed to load the given string.')
-
-        if err0 then
-            player:printToPlayer(err0)
+            -- Otherwise, let them through
+            return _G[key]
         end
+    })
 
-        os = oldOs
+    local scriptObj, compileErr = loadstring(str)
+    if not scriptObj then
+        player:printToPlayer(fmt('Failed to load string: {}', tostring(compileErr)))
         return
     end
 
-    -- Execute the string..
-    local successfullyExecuted, errorMessage = pcall(scriptObj)
-    if not successfullyExecuted then
-        player:printToPlayer('Error calling: ' .. str .. '\n' .. errorMessage)
-    end
+    -- Bind the sandboxed environment to the compiled function.
+    setfenv(scriptObj, safeEnv)
 
-    -- Restore the os table..
-    os = oldOs
+    local success, execErr = pcall(scriptObj)
+    if not success then
+        player:printToPlayer(fmt('Error executing: {}', tostring(execErr)))
+    end
 end
 
 return commandObj
