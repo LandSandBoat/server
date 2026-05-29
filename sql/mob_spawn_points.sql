@@ -44878,6 +44878,8 @@ INSERT INTO `mob_spawn_points` VALUES (17261004,0,'Bogy','Bogy',15,24,25,415.000
 INSERT INTO `mob_spawn_points` VALUES (17261005,0,'Bogy','Bogy',15,24,25,362.000,15.000,170.000,97);
 INSERT INTO `mob_spawn_points` VALUES (17261006,0,'Water_Elemental','Water Elemental',23,28,30,440.067,19.499,133.811,46);
 INSERT INTO `mob_spawn_points` VALUES (17261007,0,'Goblin_Digger','Goblin Digger',27,20,21,220.690,-9.785,103.254,91);
+
+-- Expeditionary Force
 INSERT INTO `mob_spawn_points` VALUES (17261008,0,'Hobgoblin_Warrior','Hobgoblin Warrior',28,30,35,0.000,0.000,0.000,0);
 INSERT INTO `mob_spawn_points` VALUES (17261009,0,'Hobgoblin_White_Mage','Hobgoblin White Mage',29,30,35,0.000,0.000,0.000,0);
 INSERT INTO `mob_spawn_points` VALUES (17261010,0,'Hobgoblin_Black_Mage','Hobgoblin Black Mage',30,30,35,0.000,0.000,0.000,0);

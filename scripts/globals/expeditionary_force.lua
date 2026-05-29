@@ -1,296 +1,624 @@
 -----------------------------------
 -- Expeditionary Force - Sign-up & overseer integration
 -----------------------------------
-require('scripts/globals/expeditionary_force_data')
-require('scripts/globals/expeditionary_force_battle')
 require('scripts/globals/npc_util')
-require('scripts/globals/teleports')
 -----------------------------------
 xi = xi or {}
 xi.expeditionaryForce = xi.expeditionaryForce or {}
+-----------------------------------
+-- Data
+-----------------------------------
+-- Runtime state. One record per EF zone, built lazily on the first banner click.
+-- If you modify this file during runtime, you must relaunch map as zoneData is erased.
+local expForceZoneData = {}
 
--- Required fields for a region.
-local requiredRegionFields = { 'eventOption', 'menuBit', 'zoneId', 'insignia', 'minLevel', 'levelCap' }
+-----------------------------------
+-- Enums
+-----------------------------------
+local bannerState = 
+{ 
+    IDLE    = 0,
+    ACTIVE  = 1,
+    CLEARED = 2,
+    HIDDEN  = 3,
+}
 
--- A region is active if global-enabled, region-enabled, and all required data exists.
-xi.expeditionaryForce.isRegionActive = function(regionId)
-    if not xi.expeditionaryForce.enabled then
-        return false
+
+-----------------------------------
+-- Tables
+-----------------------------------
+
+local levelTable =
+{
+    -- [zoneId] = level_cap
+    [xi.zone.BEAUCEDINE_GLACIER    ] = 40,
+    [xi.zone.BUBURIMU_PENINSULA    ] = 30,
+    [xi.zone.CAPE_TERIGGAN         ] = 99, -- Uncapped
+    [xi.zone.EASTERN_ALTEPA_DESERT ] = 50,
+    [xi.zone.JUGNER_FOREST         ] = 30,
+    [xi.zone.MERIPHATAUD_MOUNTAINS ] = 30,
+    [xi.zone.PASHHOW_MARSHLANDS    ] = 30,
+    [xi.zone.QUFIM_ISLAND          ] = 30,
+    [xi.zone.THE_SANCTUARY_OF_ZITAH] = 40,
+    [xi.zone.VALKURM_DUNES         ] = 30,
+    [xi.zone.XARCABARD             ] = 50,
+    [xi.zone.YHOATOR_JUNGLE        ] = 50,
+    [xi.zone.YUHTUNGA_JUNGLE       ] = 40,
+}
+
+local posBannerTable =
+{
+    [xi.zone.BEAUCEDINE_GLACIER] =
+    {
+        -- { x, y, z, rot }
+        {},
+        {},
+        {},
+        {},
+        {},
+    },
+
+    [xi.zone.BUBURIMU_PENINSULA] =
+    {
+        { 315.895, 361.453, -0.025,  17 },
+        { 527.885, -40.241,  0.486, 157 },
+        {},
+        {},
+        {},
+    },
+
+    [xi.zone.CAPE_TERIGGAN] =
+    {
+        {},
+        {},
+        {},
+        {},
+        {},
+    },
+
+    [xi.zone.EASTERN_ALTEPA_DESERT] =
+    {
+        {},
+        {},
+        {},
+        {},
+        {},
+    },
+
+    [xi.zone.JUGNER_FOREST] =
+    {
+        {},
+        {},
+        {},
+        {},
+        {},
+    },
+
+    [xi.zone.MERIPHATAUD_MOUNTAINS] =
+    {
+        {},
+        {},
+        {},
+        {},
+        {},
+    },
+
+    [xi.zone.PASHHOW_MARSHLANDS] =
+    {
+        {},
+        {},
+        {},
+        {},
+        {},
+    },
+
+    [xi.zone.QUFIM_ISLAND] =
+    {
+        {},
+        {},
+        {},
+        {},
+        {},
+    },
+
+    [xi.zone.THE_SANCTUARY_OF_ZITAH] =
+    {
+        {},
+        {},
+        {},
+        {},
+        {},
+    },
+
+    [xi.zone.VALKURM_DUNES] =
+    {
+        {},
+        {},
+        {},
+        {},
+        {},
+    },
+
+    [xi.zone.XARCABARD] =
+    {
+        {},
+        {},
+        {},
+        {},
+        {},
+    },
+
+    [xi.zone.YHOATOR_JUNGLE] =
+    {
+        {},
+        {},
+        {},
+        {},
+        {},
+    },
+
+    [xi.zone.YUHTUNGA_JUNGLE] =
+    {
+        {},
+        {},
+        {},
+        {},
+        {},
+    },
+}
+
+-- CP awarded on collection, by count of participated regions the nation controls. Tiers 1-8 based on Wiki.
+-- The data appears to follow a cubic, but then 13 would be 27,175 CP. This seems abnormal.
+-- TODO: Update 9-13. Wiki only holds information up to 8 regions. Though, I do question the validity of 8.
+local cpRewardTable =
+{
+    -- [regionsControlled] = cp
+    [0]  = 0,
+    [1]  = 3000,
+    [2]  = 4200,
+    [3]  = 4800,
+    [4]  = 5160,
+    [5]  = 5430,
+    [6]  = 5700,
+    [7]  = 6105,
+    [8]  = 7320,
+    [9]  = 7320,
+    [10] = 7320,
+    [11] = 7320,
+    [12] = 7320,
+    [13] = 7320,
+}
+
+
+-- Fill out by mob species.
+local nmPoolTable =
+{
+    [xi.zone.BEAUCEDINE_GLACIER] =
+    {
+
+    },
+
+    [xi.zone.BUBURIMU_PENINSULA] =
+    {
+        { -- Hobgoblin
+            zones[xi.zone.BUBURIMU_PENINSULA].mob.HOBGOBLIN_BEASTMASTER,
+            zones[xi.zone.BUBURIMU_PENINSULA].mob.HOBGOBLIN_BLACK_MAGE,
+            zones[xi.zone.BUBURIMU_PENINSULA].mob.HOBGOBLIN_DARK_KNIGHT,
+            zones[xi.zone.BUBURIMU_PENINSULA].mob.HOBGOBLIN_RANGER,
+            zones[xi.zone.BUBURIMU_PENINSULA].mob.HOBGOBLIN_RED_MAGE,
+            zones[xi.zone.BUBURIMU_PENINSULA].mob.HOBGOBLIN_THIEF,
+            zones[xi.zone.BUBURIMU_PENINSULA].mob.HOBGOBLIN_WARRIOR,
+            zones[xi.zone.BUBURIMU_PENINSULA].mob.HOBGOBLIN_WHITE_MAGE,
+        },
+
+        { -- Theoyaguda
+            zones[xi.zone.BUBURIMU_PENINSULA].mob.THEOYAGUDO_BARD,
+            zones[xi.zone.BUBURIMU_PENINSULA].mob.THEOYAGUDO_BLACK_MAGE,
+            zones[xi.zone.BUBURIMU_PENINSULA].mob.THEOYAGUDO_MONK,
+            zones[xi.zone.BUBURIMU_PENINSULA].mob.THEOYAGUDO_NINJA,
+            zones[xi.zone.BUBURIMU_PENINSULA].mob.THEOYAGUDO_SAMURAI,
+            zones[xi.zone.BUBURIMU_PENINSULA].mob.THEOYAGUDO_SUMMONER,
+            zones[xi.zone.BUBURIMU_PENINSULA].mob.THEOYAGUDO_WHITE_MAGE,
+        },
+    },
+
+    [xi.zone.CAPE_TERIGGAN] =
+    {
+
+    },
+
+    [xi.zone.EASTERN_ALTEPA_DESERT] =
+    {
+
+    },
+
+    [xi.zone.JUGNER_FOREST] =
+    {
+
+    },
+
+    [xi.zone.MERIPHATAUD_MOUNTAINS] =
+    {
+
+    },
+
+    [xi.zone.PASHHOW_MARSHLANDS] =
+    {
+
+    },
+
+    [xi.zone.QUFIM_ISLAND] =
+    {
+
+    },
+
+    [xi.zone.THE_SANCTUARY_OF_ZITAH] =
+    {
+
+    },
+
+    [xi.zone.VALKURM_DUNES] =
+    {
+
+    },
+
+    [xi.zone.XARCABARD] =
+    {
+
+    },
+
+    [xi.zone.YHOATOR_JUNGLE] =
+    {
+
+    },
+
+    [xi.zone.YUHTUNGA_JUNGLE] =
+    {
+
+    },
+}
+
+
+local regionKITable =
+{
+    [xi.region.ARAGONEU]         = xi.ki.ARAGONEU_EF_INSIGNIA,
+    [xi.region.DERFLAND]         = xi.ki.DERFLAND_EF_INSIGNIA,
+    [xi.region.ELSHIMO_LOWLANDS] = xi.ki.ELSHIMO_LOWLANDS_EF_INSIGNIA,
+    [xi.region.ELSHIMO_UPLANDS]  = xi.ki.ELSHIMO_UPLANDS_EF_INSIGNIA,
+    [xi.region.FAUREGANDI]       = xi.ki.FAUREGANDI_EF_INSIGNIA,
+    [xi.region.KOLSHUSHU]        = xi.ki.KOLSHUSHU_EF_INSIGNIA,
+    [xi.region.KUZOTZ]           = xi.ki.KUZOTZ_EF_INSIGNIA,
+    [xi.region.LITELOR]          = xi.ki.LITELOR_EF_INSIGNIA,
+    [xi.region.NORVALLEN]        = xi.ki.NORVALLEN_EF_INSIGNIA,
+    [xi.region.QUFIMISLAND]      = xi.ki.QUFIM_EF_INSIGNIA,
+    [xi.region.VALDEAUNIA]       = xi.ki.VALDEAUNIA_EF_INSIGNIA,
+    [xi.region.VOLLBOW]          = xi.ki.VOLLBOW_EF_INSIGNIA,
+    [xi.region.ZULKHEIM]         = xi.ki.ZULKHEIM_EF_INSIGNIA,
+}
+
+-----------------------------------
+-- Local functions
+-----------------------------------
+-- TODO: No XP from mobs.
+-- TODO: What happens if level synched and then trip this?
+-- Apply the EF level restriction to one player.
+-- ON_ZONE makes it wear when the player zones out.
+-- CONFRONTATION hard-gates the NMs to capped players.
+local function addLevelRestriction(player, levelCap)
+    local cap = levelCap
+    if levelCap == 99 then
+        cap = xi.settings.main.MAX_LEVEL
     end
 
-    local region = xi.expeditionaryForce.regions[regionId]
-    if region == nil or not region.enabled then
-        return false
+    local config = xi.expeditionaryForce.config
+    local flags = 0
+    
+    if config.capWearsOnZone then
+        flags = flags + xi.effectFlag.ON_ZONE
+    end
+    
+    if config.capUsesConfrontation then
+        flags = flags + xi.effectFlag.CONFRONTATION
     end
 
-    for _, field in ipairs(requiredRegionFields) do
-        if region[field] == nil then
-            printf('[ExpeditionaryForce] Region %d enabled but missing field "%s".', regionId, field)
-            return false
-        end
-    end
-
-    if region.bannerSpawns == nil or #region.bannerSpawns == 0 then
-        printf('[ExpeditionaryForce] Region %d enabled but bannerSpawns is empty.', regionId)
-        return false
-    end
-
-    return true
+    player:addStatusEffect(xi.effect.LEVEL_RESTRICTION,
+        { power = cap, duration = config.capLingerTime, origin = player, flag = flags })
 end
 
--- Check if the player can sign up for the region.
-xi.expeditionaryForce.isRegionAvailableToPlayer = function(player, regionId)
-    if not xi.expeditionaryForce.isRegionActive(regionId) then
-        return false
-    end
-
-    local region  = xi.expeditionaryForce.regions[regionId]
-    local pNation = player:getNation()
-
-    -- Region must not be owned by the player's nation or a Conquest ally.
-    local owner = GetRegionOwner(regionId)
-    if owner == pNation or xi.conquest.areAllies(pNation, owner) then
-        return false
-    end
-
-    if not player:hasVisitedZone(region.zoneId) then
-        return false
-    end
-
-    return true
-end
-
--- Bitmask of every region this player can sign up for. 0 = the EF menu does not appear.
--- Resolve gate glyph in commit.
--- Oddly enough, even if you have the key item for a region, you can sign up again.
-xi.expeditionaryForce.getMenuBitmask = function(player, guardNation)
-    if
-        not xi.expeditionaryForce.enabled or
-        player:getNation() ~= guardNation
-    then
-        return 0
-    end
-
-    local mask = 0
-    for regionId, region in pairs(xi.expeditionaryForce.regions) do
-        if
-            region.enabled and
-            xi.expeditionaryForce.isRegionAvailableToPlayer(player, regionId)
-        then
-            mask = bit.bor(mask, region.menuBit)
-        end
-    end
-
-    return mask
-end
-
--- TODO: Pending reward for overseer. This is all just a guess.... please do not read this...
-xi.expeditionaryForce.getRewardArg = function(player, guardNation)
-    if
-        not xi.expeditionaryForce.enabled or
-        player:getNation() ~= guardNation
-    then
-        return 0
-    end
-
-    local badge = player:getStatusEffect(xi.effect.EF_BADGE)
-    if badge == nil then
-        return 0
-    end
-
-    local region = xi.expeditionaryForce.regions[badge:getPower()]
-    if region == nil or region.eventOption == nil then
-        return 0
-    end
-
-    -- regionRow 6-20 = eventOption (0x20006-0x20014) minus the 0x20000 base.
-    local regionRow = region.eventOption - 0x20000
-
-    -- Numeric add
-    return 0x80000000 + bit.lshift(regionRow, 5)
-end
-
--- Map an overseer menu option back to its region id.
-local function regionFromEventOption(option)
-    for regionId, region in pairs(xi.expeditionaryForce.regions) do
-        if region.eventOption == option then
-            return regionId
-        end
-    end
-
-    -- Catch if no mapping exists. This should never occur if data is correct.
-    return nil
-end
-
--- Minimum qualifying party members needed in zone.
-xi.expeditionaryForce.getRequiredPartySize = function(player)
-    local place = GetNationRank(player:getNation())                  -- 0 = no standing, else 1/2/3
-    return xi.expeditionaryForce.config.partySizeByPlace[place] or 4 -- Default to 4
-end
-
-local function grantGateGlyph(player)
-    local npc = player:getEventTarget()
-    if npc == nil then
+-- Add the CONFRONTATION to the NMs. The level restriction already won't apply to mobs. I just need the CONFRONTATION flag and matching power.
+local function addConfrontationGate(mob, levelCap)
+    if not xi.expeditionaryForce.config.capUsesConfrontation then
         return
     end
 
-    local glyphId = xi.expeditionaryForce.gateGlyphs[npc:getName()]
-    if glyphId == nil then
+    local cap = levelCap
+    if levelCap == 99 then
+        cap = xi.settings.main.MAX_LEVEL
+    end
+
+    mob:addStatusEffect(xi.effect.LEVEL_RESTRICTION,
+        { power = cap, duration = xi.expeditionaryForce.config.capLingerTime,
+          origin = mob, flag = xi.effectFlag.CONFRONTATION })
+end
+
+
+-- Pick up to 4 mob ids from a pool.
+local function pickFour(pool)
+    local family = pool[math.random(#pool)]
+
+    local pickFrom = {}
+    for i, id in ipairs(family) do
+        pickFrom[i] = id
+    end
+
+    local result = {}
+    for _ = 1, 4 do
+        if #pickFrom == 0 then
+            break
+        end
+        local idx = math.random(#pickFrom)
+        table.insert(result, pickFrom[idx])
+        table.remove(pickFrom, idx)
+    end
+
+    return result
+end
+
+-- TODO: REWORK THIS!
+local function spawnNMs()
+
+    local zone       = npc:getZone()
+    local bx, by, bz = npc:getXPos(), npc:getYPos(), npc:getZPos()
+    local brot       = npc:getRotPos()
+    local offsets    = { { 2, 0 }, { -2, 0 }, { 0, 2 }, { 0, -2 } }
+    local spawnIndex = 1
+    for _, mobName in ipairs(pickFour(region.nmPool)) do
+        local entities = zone:queryEntitiesByName(mobName)
+        local mobID = zone:GetFirstID??
+        if entity == nil then
+            printf('[ExpeditionaryForce] No entity "%s" in zone %d; skipping.', mobName, zone:getID())
+        else
+            local mobId = entity:getID()
+            local mob   = SpawnMob(mobId)
+
+            if mob ~= nil then
+                local off = offsets[spawnIndex] or { 0, 0 }
+                mob:setSpawn(bx + off[1], by, bz + off[2], brot)
+                mob:setPos(bx + off[1], by, bz + off[2], brot)
+                addConfrontationGate(mob, region.levelCap)
+                mob:updateClaim(player)
+                spawnIndex = spawnIndex + 1
+                table.insert(zoneData.nms, mobId)
+
+            end
+        end
+end
+
+local function hideBanner(zoneId, banner)
+    local zoneData = expForceZoneData[zoneId]
+
+    -- Make the banner disappear
+    banner:setStatus(xi.status.DISAPPEAR)
+
+    -- Clean up data and set HIDDEN state
+    zoneData.nms             = {}
+    zoneData.gone            = {}
+    zoneData.creditNation    = nil
+    zoneData.creditedPlayers = {}
+    zoneData.state           = xi.expeditionaryForce.bannerState.HIDDEN
+
+    -- Respawn the banner
+    local zone = GetZone(zoneId)
+    xi.expeditionaryForce.initZone(zone)
+end
+
+-- Safety check every 30s while banner is active. Catches the case where a DESPAWN listener misses.
+local function watchDog(npc)
+    local zoneId   = npc:getZoneID()
+    local zoneData = expForceZoneData[zoneId]
+
+    -- Only continue running if the state is ACTIVE
+    if zoneData.state ~= bannerState.ACTIVE then
         return
     end
 
-    for _, ownGlyph in ipairs(xi.expeditionaryForce.gateGlyphsByNation[player:getNation()] or {}) do
-        if player:hasItem(ownGlyph) then
-            return
+    -- Any NM still in the world (alive or corpse)?
+    local anyPresent = false
+    for _, mobId in ipairs(zoneData.nms) do
+        local mob = GetMobByID(mobId)
+        if mob ~= nil and mob:isSpawned() then
+            anyPresent = true
+            break
         end
     end
 
-    npcUtil.giveItem(player, glyphId)
-end
+    -- None are present but we never entered 
+    if not anyPresent then
+        zoneData.state = bannerState.CLEARED
 
--- Teleport the player to the EF target zone. It's just like outpost warp.
-local function teleportToRegion(player, regionId)
-    player:addStatusEffect(xi.effect.TELEPORT, {
-        power    = xi.teleport.id.OUTPOST,
-        duration = 1,
-        origin   = player,
-        icon     = 0,
-        subPower = regionId,
-    })
-end
-
--- Trade EF badge for insignia and gate glyph, and warp.
-local handleCommit = function(player)
-    local badge = player:getStatusEffect(xi.effect.EF_BADGE)
-    if badge == nil then
-        return
-    end
-
-    local regionId = badge:getPower()
-    local region   = xi.expeditionaryForce.regions[regionId]
-    if region == nil then
-        return
-    end
-
-    -- Replace badge with glyph
-    -- TODO: Verify this is giving the Temporary Key Item in game
-    player:delStatusEffect(xi.effect.EF_BADGE)
-    npcUtil.giveKeyItem(player, region.insignia) -- Already has a check to not double give the item
-    grantGateGlyph(player)
-
-    -- Bestow Signet
-    local pNation  = player:getNation()
-    local duration = (player:getRank(pNation) + GetNationRank(pNation) + 3) * 3600
-    local mOffset  = zones[player:getZoneID()].text.CONQUEST
-    player:delStatusEffectsByFlag(xi.effectFlag.INFLUENCE, true)
-    player:addStatusEffect(xi.effect.SIGNET, { duration = duration, origin = player })
-    player:messageSpecial(mOffset + 1) -- 'You've received your nation's Signet!'
-    -- TODO: Need to say "You are now taking part in your nation's conquest campaign!"
-
-    teleportToRegion(player, regionId)
-end
-
--- Validate the sign-up party. 
--- Returns the overseer result code for the first failed check (1-4), or nil if every check passes.
-local function validateSignupParty(player, guardNation, region, required)
-    local zoneId = player:getZoneID()
-    local inZone = {}
-    for _, member in pairs(player:getParty()) do
-        if member:getZoneID() == zoneId then
-            table.insert(inZone, member)
-        end
-    end
-
-    -- 1: not enough members present in the overseer's zone
-    if #inZone < required then
-        return 1
-    end
-
-    -- 2: a member is not a citizen of the overseer's nation
-    for _, member in ipairs(inZone) do
-        if member:getNation() ~= guardNation then
-            return 2
-        end
-    end
-
-    -- 3: a member is below the Conquest rank requirement
-    for _, member in ipairs(inZone) do
-        if member:getRank(guardNation) < xi.expeditionaryForce.config.minRank then
-            return 3
-        end
-    end
-
-    -- 4: a member is below the region's minimum level
-    for _, member in ipairs(inZone) do
-        if member:getMainLvl() < region.minLevel then
-            return 4
-        end
-    end
-
-    return nil
-end
-
--- Overseer EF menu dispatch (event update). 
--- Validates the party and tells the cutscene which result message to show. 
--- The badge is granted in overseerOnEventFinish, after the cutscene animation. 
--- Result codes -> params[0] of updateEvent:
---   1 = not enough members / not all in the overseer's zone
---   2 = a member is not a citizen of the overseer's nation
---   3 = a member is below Conquest rank 3
---   4 = a member is below the region's min level (level passed as updateEvent arg 7)
---   5 = success (cutscene plays the animation, then overseerOnEventFinish fires)
-xi.expeditionaryForce.overseerOnEventUpdate = function(player, csid, option, guardNation)
-    -- Quick quit
-    if option < 0x20006 or option > 0x20014 then
-        return false
-    end
-
-    local regionId = regionFromEventOption(option)
-    if regionId == nil then
-        return false
-    end
-
-    local region   = xi.expeditionaryForce.regions[regionId]
-    local required = xi.expeditionaryForce.getRequiredPartySize(player)
-    local failCode = validateSignupParty(player, guardNation, region, required)
-
-    if failCode == 4 then
-        player:updateEvent(4, 0, 0, 0, 0, 0, region.minLevel)
-    elseif failCode ~= nil then
-        player:updateEvent(failCode)
+        -- The banner will disappear after 30 seconds.
+        npc:timer( 30 * 1000, hideBanner(zoneId, npc))
+    
+    -- Check again in 30 seconds
     else
-        player:updateEvent(5) -- Badge granted in overseerOnEventFinish
+        npc:timer(30 * 1000, function(npcArg)
+            watchDog(npcArg)
+        end)
     end
-
-    return true
 end
 
-xi.expeditionaryForce.overseerOnEventFinish = function(player, csid, option, guardNation)
-    -- Region codes
-    if option >= 0x20006 and option <= 0x20014 then
-        local regionId = regionFromEventOption(option)
-        if regionId == nil then
-            return false
+-----------------------------------
+-- Public functions
+-----------------------------------
+
+xi.expeditionaryForce.initZone = function(zone)
+    local zoneId = zone:getID()
+    local ID     = zones[zoneId]
+
+    -- Set the banner to a random position and set the status to normal
+    local banner = GetNPCByID(ID.npc.BEASTMENS_BANNER)
+    local pos = posBannerTable[zoneId][math.random(#posBannerTable[zoneId])] -- TODO: when table is filled out, this can just be 5
+    banner:setPos(pos[1], pos[2], pos[3], pos[4])
+    banner:setStatus(xi.status.NORMAL) -- forces visible even if the SQL ships hidden
+end
+
+
+xi.expeditionaryForce.onBannerTrigger = function(player, npc)
+    local zoneId   = npc:getZoneID()
+    local ID       = zones[zoneId]
+
+    -- Get data for the zone
+    local zodeData = expForceZoneData[zoneId]
+    
+    -- Data does not exist yet
+    if zoneData == nil then
+        zoneData =
+        {
+            state           = bannerState.IDLE,
+            nms             = {},
+            creditNation    = nil,
+            creditedPlayers = {},
+            chainCount      = 0,
+            lastKillTime    = 0,
+        }
+        
+        expForceZoneData[zoneId] = zoneData
+    end
+
+    -- Handle all states of the Beastmen's Banner
+    -- The flow of Expeditionary Force goes from IDLE to ACTIVE to CLEARED to HIDDEN then back to IDLE
+    -- IDLE
+    if zoneData.state = bannerState.IDLE then
+        local region = npc:getCurrentRegion()
+
+        -- Find out if a player in the party has level sync already
+        local partyMemberCapped = false
+        for _, member in pairs(player:getParty()) do
+            if member:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
+                partyMemberCapped = true
+            end
         end
 
-        if not player:hasStatusEffect(xi.effect.EF_BADGE) then
-            player:addStatusEffect(xi.effect.EF_BADGE, { power = regionId, origin = player, flag = xi.effectFlag.ON_ZONE })
+        -- If the player does have the regions insignia (only gate)
+        if 
+            player:hasKeyItem(regionKITable[region]) and
+            not partyMemberCapped
+        then
+            -- Credit nation is based on the player who clicked the banner
+            zoneData.creditNation    = player:getNation()
+            zoneData.creditedPlayers = {}
+            zoneData.nms             = {}
+            zoneData.gone            = {}
+
+            -- Level cap every party member in zone
+            -- Get members in-range
+            -- TODO: Verify 50 yalms for in-range
+            for _, member in pairs(player:getParty()) do
+                if member:getZoneID() == zoneId then
+                    -- Add level restriction if in zone
+                    addLevelRestriction(member, levelTable[zoneId])
+
+                    -- Update credited players within 50 yalms
+                    if member:checkDistance(npc) <= 50 then
+                        zoneData.creditedPlayers[member:getID()] = true
+                    end
+                end
+            end
+            
+            -- Spawn 4 NMs at the banner
+            spawnNMs()
+
+            -- Launch Watch Dog function
+            watchDog(npc)
+
+        -- If the player does not have the regions insignia, just send a message.
+        else
+            player:messageSpecial(ID.text.BEASTMEN_BANNER) -- There is a beastmen's banner.      
         end
+    end -- End IDLE
 
-        return true
+    -- ACTIVE: Mobs exist
+    elseif zoneData.state = bannerState.ACTIVE then
+        -- Reject players who are level synched already
+        if member:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then 
+            -- TODO: Do we play a message?
+            player:messageSpecial(ID.text.BEASTMEN_BANNER) -- There is a beastmen's banner.      
+
+        -- Anyone not level restricted can click to get level restriction. No checks.
+        else
+            addLevelRestriction(player, levelTable[zoneId])
+        end
+    
+    -- CLEARED: All mobs despawned
+    elseif zoneData.state = bannerState.CLEARED then
+        -- Remove clicker's level cap
+        player:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
     end
 
-    -- Badge holder confirmed the teleport branch.
-    if option == 5 and player:hasStatusEffect(xi.effect.EF_BADGE) then
-        handleCommit(player)
-        return true
+    -- HIDDEN: Banner is invisible and not clickable
+end
+
+
+-- Called from mob lua files
+xi.expiditionaryForce.onMobDeath = function(mob)
+    -- AWARD INFLUENCE
+    -- Check for a chain
+    local now = GetSystemTime()
+
+    -- Increment chain
+    if now - zoneData.lastKillTime <= 900 then -- Chain timeout in seconds TODO: Verify time
+        zoneData.chainCount = zoneData.chainCount + 1
+    
+    -- Reset chain
+    else
+        zoneData.chainCount = 1
     end
 
-    -- Player confirmed the quit branch.
-    if option == 8 and player:hasStatusEffect(xi.effect.EF_BADGE) then
-        player:delStatusEffect(xi.effect.EF_BADGE)
-        return true
-    end
+    -- Set timer for next chain count
+    zoneData.lastKillTime = now
 
-    return false
+    -- Give influence
+    -- TODO: IMPLEMENT
+
+    -- Send message
+    -- TODO: IMPLEMENT
+
+    -- AWARD TITLES
+    -- Only award to credited players that are still in the zone
+    for playerId in pairs(zoneData.creditedPlayers) do
+        local p = GetPlayerByID(playerId)
+        if p ~= nil and p:getZoneID() == zoneId then
+            p:setTitle(xi.title.EXPEDITIONARY_TROOPER)
+        end
+    end
+end
+
+-- Mark a mob as despawned. When all NMs are accounted for, transition to CLEARED.
+xi.expeditionaryForce.onMobDespawn = function(mob)
+    local zoneId   = mob:getZoneID()
+    local zoneData = expForceZoneData[zoneId]
+
+    -- Add the mob to the gone list
+    zoneData.gone[mobId] = true
+
+    -- Figure out if number of mobs gone equials the number spawned
+    -- Battle is cleared
+    if #zoneData.gone >= #zoneData.nms then
+        zoneData.state = bannerState.CLEARED
+
+        -- The banner will disappear after 30 seconds.
+        local ID = zones[zoneId]
+        local banner = ID.npc.BEASTMENS_BANNER
+        banner:timer( 30 * 1000, hideBanner(zoneId, banner))
+    end
+end
+
+
+
+-- Award influence for opening a chest/coffer with the region's insignia.
+-- Caller checks the insignia and resolves the regionId.
+-- TODO: Real formula. Placeholder constant.
+-- TODO: Wire to player:gainInfluencePoints once binding lands.
+xi.expeditionaryForce.awardChestInfluence = function(player, regionId)
+    -- TODO: Give influence
 end
