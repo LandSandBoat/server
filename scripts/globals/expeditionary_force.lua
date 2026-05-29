@@ -1,5 +1,5 @@
 -----------------------------------
--- Expeditionary Force - Sign-up & overseer integration
+-- Expeditionary Force
 -----------------------------------
 require('scripts/globals/npc_util')
 -----------------------------------
@@ -299,8 +299,6 @@ local regionKITable =
 -----------------------------------
 -- Local functions
 -----------------------------------
--- TODO: No XP from mobs.
--- TODO: What happens if level synched and then trip this?
 -- Apply the EF level restriction to one player.
 -- ON_ZONE makes it wear when the player zones out.
 -- CONFRONTATION hard-gates the NMs to capped players.
@@ -310,90 +308,68 @@ local function addLevelRestriction(player, levelCap)
         cap = xi.settings.main.MAX_LEVEL
     end
 
-    local config = xi.expeditionaryForce.config
-    local flags = 0
-    
-    if config.capWearsOnZone then
-        flags = flags + xi.effectFlag.ON_ZONE
-    end
-    
-    if config.capUsesConfrontation then
-        flags = flags + xi.effectFlag.CONFRONTATION
-    end
-
-    player:addStatusEffect(xi.effect.LEVEL_RESTRICTION,
-        { power = cap, duration = config.capLingerTime, origin = player, flag = flags })
+    player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, {
+        power    = cap,
+        duration = 900, -- 15 min if not removed at the banner or zone
+        origin   = player,
+        flag     = xi.effectFlag.ON_ZONE + xi.effectFlag.CONFRONTATION,
+    })
 end
 
 -- Add the CONFRONTATION to the NMs. The level restriction already won't apply to mobs. I just need the CONFRONTATION flag and matching power.
 local function addConfrontationGate(mob, levelCap)
-    if not xi.expeditionaryForce.config.capUsesConfrontation then
-        return
-    end
-
     local cap = levelCap
     if levelCap == 99 then
         cap = xi.settings.main.MAX_LEVEL
     end
 
-    mob:addStatusEffect(xi.effect.LEVEL_RESTRICTION,
-        { power = cap, duration = xi.expeditionaryForce.config.capLingerTime,
-          origin = mob, flag = xi.effectFlag.CONFRONTATION })
+    mob:addStatusEffect(xi.effect.LEVEL_RESTRICTION, {
+        power    = cap,
+        duration = 900,
+        origin   = mob,
+        flag     = xi.effectFlag.CONFRONTATION,
+    })
 end
 
 
--- Pick up to 4 mob ids from a pool.
-local function pickFour(pool)
-    local family = pool[math.random(#pool)]
+-- Spawn 4 NMs at the banner
+local function spawnBattleNMs(player, banner, zoneData)
+    local zoneId   = banner:getZoneID()
+    local levelCap = levelTable[zoneId]
+    local pool     = nmPoolTable[zoneId]
+    local family   = pool[math.random(#pool)]
+    local offsets  = { { 2, 0 }, { -2, 0 }, { 0, 2 }, { 0, -2 } }
 
-    local pickFrom = {}
-    for i, id in ipairs(family) do
-        pickFrom[i] = id
+    local candidates = {}
+    for _, mobId in ipairs(family) do
+        table.insert(candidates, mobId)
     end
 
-    local result = {}
-    for _ = 1, 4 do
-        if #pickFrom == 0 then
+    local bx, by, bz = banner:getXPos(), banner:getYPos(), banner:getZPos()
+    local brot       = banner:getRotPos()
+
+    for i = 1, 4 do
+        if #candidates == 0 then
             break
         end
-        local idx = math.random(#pickFrom)
-        table.insert(result, pickFrom[idx])
-        table.remove(pickFrom, idx)
-    end
 
-    return result
-end
+        local pick  = math.random(#candidates)
+        local mobId = candidates[pick]
+        table.remove(candidates, pick)
 
--- TODO: REWORK THIS!
-local function spawnNMs()
-
-    local zone       = npc:getZone()
-    local bx, by, bz = npc:getXPos(), npc:getYPos(), npc:getZPos()
-    local brot       = npc:getRotPos()
-    local offsets    = { { 2, 0 }, { -2, 0 }, { 0, 2 }, { 0, -2 } }
-    local spawnIndex = 1
-    for _, mobName in ipairs(pickFour(region.nmPool)) do
-        local entities = zone:queryEntitiesByName(mobName)
-        local mobID = zone:GetFirstID??
-        if entity == nil then
-            printf('[ExpeditionaryForce] No entity "%s" in zone %d; skipping.', mobName, zone:getID())
-        else
-            local mobId = entity:getID()
-            local mob   = SpawnMob(mobId)
-
-            if mob ~= nil then
-                local off = offsets[spawnIndex] or { 0, 0 }
-                mob:setSpawn(bx + off[1], by, bz + off[2], brot)
-                mob:setPos(bx + off[1], by, bz + off[2], brot)
-                addConfrontationGate(mob, region.levelCap)
-                mob:updateClaim(player)
-                spawnIndex = spawnIndex + 1
-                table.insert(zoneData.nms, mobId)
-
-            end
+        local mob = SpawnMob(mobId)
+        if mob ~= nil then
+            local off = offsets[i]
+            mob:setSpawn(bx + off[1], by, bz + off[2], brot)
+            mob:setPos(bx + off[1], by, bz + off[2], brot)
+            addConfrontationGate(mob, levelCap)
+            mob:updateClaim(player)
+            table.insert(zoneData.nms, mobId)
         end
+    end
 end
 
+-- CLEARED -> HIDDEN
 local function hideBanner(zoneId, banner)
     local zoneData = expForceZoneData[zoneId]
 
@@ -405,11 +381,12 @@ local function hideBanner(zoneId, banner)
     zoneData.gone            = {}
     zoneData.creditNation    = nil
     zoneData.creditedPlayers = {}
-    zoneData.state           = xi.expeditionaryForce.bannerState.HIDDEN
+    zoneData.state           = bannerState.HIDDEN
 
     -- Respawn the banner
-    local zone = GetZone(zoneId)
-    xi.expeditionaryForce.initZone(zone)
+    banner:timer(5 * 60 * 1000, function(npcArg)
+        xi.expeditionaryForce.initZone(npcArg:getZone())
+    end)
 end
 
 -- Safety check every 30s while banner is active. Catches the case where a DESPAWN listener misses.
@@ -432,13 +409,15 @@ local function watchDog(npc)
         end
     end
 
-    -- None are present but we never entered 
+    -- None are present but we never entered
     if not anyPresent then
         zoneData.state = bannerState.CLEARED
 
         -- The banner will disappear after 30 seconds.
-        npc:timer( 30 * 1000, hideBanner(zoneId, npc))
-    
+        npc:timer(30 * 1000, function(npcArg)
+            hideBanner(npcArg:getZoneID(), npcArg)
+        end)
+
     -- Check again in 30 seconds
     else
         npc:timer(30 * 1000, function(npcArg)
@@ -460,6 +439,12 @@ xi.expeditionaryForce.initZone = function(zone)
     local pos = posBannerTable[zoneId][math.random(#posBannerTable[zoneId])] -- TODO: when table is filled out, this can just be 5
     banner:setPos(pos[1], pos[2], pos[3], pos[4])
     banner:setStatus(xi.status.NORMAL) -- forces visible even if the SQL ships hidden
+
+    -- Reset to IDLE on respawn
+    local zoneData = expForceZoneData[zoneId]
+    if zoneData ~= nil then
+        zoneData.state = bannerState.IDLE
+    end
 end
 
 
@@ -468,27 +453,27 @@ xi.expeditionaryForce.onBannerTrigger = function(player, npc)
     local ID       = zones[zoneId]
 
     -- Get data for the zone
-    local zodeData = expForceZoneData[zoneId]
-    
+    local zoneData = expForceZoneData[zoneId]
+
     -- Data does not exist yet
     if zoneData == nil then
         zoneData =
         {
             state           = bannerState.IDLE,
             nms             = {},
+            gone            = {},
             creditNation    = nil,
             creditedPlayers = {},
             chainCount      = 0,
             lastKillTime    = 0,
         }
-        
         expForceZoneData[zoneId] = zoneData
     end
 
     -- Handle all states of the Beastmen's Banner
     -- The flow of Expeditionary Force goes from IDLE to ACTIVE to CLEARED to HIDDEN then back to IDLE
     -- IDLE
-    if zoneData.state = bannerState.IDLE then
+    if zoneData.state == bannerState.IDLE then
         local region = npc:getCurrentRegion()
 
         -- Find out if a player in the party has level sync already
@@ -496,11 +481,12 @@ xi.expeditionaryForce.onBannerTrigger = function(player, npc)
         for _, member in pairs(player:getParty()) do
             if member:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
                 partyMemberCapped = true
+                break -- No need to keep checking
             end
         end
 
         -- If the player does have the regions insignia (only gate)
-        if 
+        if
             player:hasKeyItem(regionKITable[region]) and
             not partyMemberCapped
         then
@@ -512,7 +498,6 @@ xi.expeditionaryForce.onBannerTrigger = function(player, npc)
 
             -- Level cap every party member in zone
             -- Get members in-range
-            -- TODO: Verify 50 yalms for in-range
             for _, member in pairs(player:getParty()) do
                 if member:getZoneID() == zoneId then
                     -- Add level restriction if in zone
@@ -524,33 +509,28 @@ xi.expeditionaryForce.onBannerTrigger = function(player, npc)
                     end
                 end
             end
-            
+
             -- Spawn 4 NMs at the banner
-            spawnNMs()
+            spawnBattleNMs(player, npc, zoneData)
+            zoneData.state = bannerState.ACTIVE
 
             -- Launch Watch Dog function
             watchDog(npc)
 
         -- If the player does not have the regions insignia, just send a message.
         else
-            player:messageSpecial(ID.text.BEASTMEN_BANNER) -- There is a beastmen's banner.      
+            player:messageSpecial(ID.text.BEASTMEN_BANNER) -- There is a beastmen's banner.
         end
-    end -- End IDLE
 
     -- ACTIVE: Mobs exist
-    elseif zoneData.state = bannerState.ACTIVE then
-        -- Reject players who are level synched already
-        if member:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then 
-            -- TODO: Do we play a message?
-            player:messageSpecial(ID.text.BEASTMEN_BANNER) -- There is a beastmen's banner.      
-
+    elseif zoneData.state == bannerState.ACTIVE then
         -- Anyone not level restricted can click to get level restriction. No checks.
-        else
+        if not player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
             addLevelRestriction(player, levelTable[zoneId])
         end
-    
+
     -- CLEARED: All mobs despawned
-    elseif zoneData.state = bannerState.CLEARED then
+    elseif zoneData.state == bannerState.CLEARED then
         -- Remove clicker's level cap
         player:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
     end
@@ -560,7 +540,10 @@ end
 
 
 -- Called from mob lua files
-xi.expiditionaryForce.onMobDeath = function(mob)
+xi.expeditionaryForce.onMobDeath = function(mob)
+    local zoneId   = mob:getZoneID()
+    local zoneData = expForceZoneData[zoneId]
+
     -- AWARD INFLUENCE
     -- Check for a chain
     local now = GetSystemTime()
@@ -568,7 +551,7 @@ xi.expiditionaryForce.onMobDeath = function(mob)
     -- Increment chain
     if now - zoneData.lastKillTime <= 900 then -- Chain timeout in seconds TODO: Verify time
         zoneData.chainCount = zoneData.chainCount + 1
-    
+
     -- Reset chain
     else
         zoneData.chainCount = 1
@@ -599,17 +582,24 @@ xi.expeditionaryForce.onMobDespawn = function(mob)
     local zoneData = expForceZoneData[zoneId]
 
     -- Add the mob to the gone list
-    zoneData.gone[mobId] = true
+    zoneData.gone[mob:getID()] = true
+
+    local goneCount = 0
+    for _ in pairs(zoneData.gone) do
+        goneCount = goneCount + 1
+    end
 
     -- Figure out if number of mobs gone equials the number spawned
     -- Battle is cleared
-    if #zoneData.gone >= #zoneData.nms then
+    if goneCount >= #zoneData.nms then
         zoneData.state = bannerState.CLEARED
 
         -- The banner will disappear after 30 seconds.
-        local ID = zones[zoneId]
-        local banner = ID.npc.BEASTMENS_BANNER
-        banner:timer( 30 * 1000, hideBanner(zoneId, banner))
+        local ID     = zones[zoneId]
+        local banner = GetNPCByID(ID.npc.BEASTMENS_BANNER)
+        banner:timer(30 * 1000, function(npcArg)
+            hideBanner(npcArg:getZoneID(), npcArg)
+        end)
     end
 end
 
