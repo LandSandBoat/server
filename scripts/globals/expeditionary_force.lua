@@ -60,11 +60,11 @@ local posBannerTable =
 
     [xi.zone.BUBURIMU_PENINSULA] =
     {
-        { 315.895, 361.453, -0.025,  17 },
-        { 527.885, -40.241,  0.486, 157 },
-        {},
-        {},
-        {},
+        {  315.895,  361.453,  -0.025,  17 },
+        {  527.885,  -40.241,   0.486, 157 },
+        { -132.589, -314.261,  20.000, 230 },
+        { -446.510, -282.799,  -8.799, 240 },
+        {  101.491,  199.798, -23.090, 218 },
     },
 
     [xi.zone.CAPE_TERIGGAN] =
@@ -476,11 +476,11 @@ xi.expeditionaryForce.onBannerTrigger = function(player, npc)
     if zoneData.state == bannerState.IDLE then
         local region = npc:getCurrentRegion()
 
-        -- Find out if a player in the party has level sync already
-        local partyMemberCapped = false
-        for _, member in pairs(player:getParty()) do
-            if member:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
-                partyMemberCapped = true
+        -- Find out if an alliance member in the zone has level sync already
+        local allianceMemberCapped = false
+        for _, member in pairs(player:getAlliance()) do
+            if member:getZoneID() == zoneId and member:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
+                allianceMemberCapped = true
                 break -- No need to keep checking
             end
         end
@@ -488,7 +488,7 @@ xi.expeditionaryForce.onBannerTrigger = function(player, npc)
         -- If the player does have the regions insignia (only gate)
         if
             player:hasKeyItem(regionKITable[region]) and
-            not partyMemberCapped
+            not allianceMemberCapped
         then
             -- Credit nation is based on the player who clicked the banner
             zoneData.creditNation    = player:getNation()
@@ -496,12 +496,15 @@ xi.expeditionaryForce.onBannerTrigger = function(player, npc)
             zoneData.nms             = {}
             zoneData.gone            = {}
 
-            -- Level cap every party member in zone
+            -- Level cap every alliance member in zone
             -- Get members in-range
-            for _, member in pairs(player:getParty()) do
+            for _, member in pairs(player:getAlliance()) do
                 if member:getZoneID() == zoneId then
                     -- Add level restriction if in zone
                     addLevelRestriction(member, levelTable[zoneId])
+
+                    -- Display banner message
+                    member:messageSpecial(ID.text.BEASTMEN_BANNER_CURSE) -- There was a curse on the beastmen's banner!
 
                     -- Update credited players within 50 yalms
                     if member:checkDistance(npc) <= 50 then
@@ -524,15 +527,28 @@ xi.expeditionaryForce.onBannerTrigger = function(player, npc)
 
     -- ACTIVE: Mobs exist
     elseif zoneData.state == bannerState.ACTIVE then
-        -- Anyone not level restricted can click to get level restriction. No checks.
-        if not player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
-            addLevelRestriction(player, levelTable[zoneId])
+        -- Remove level restriction if it exists.
+        if player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
+            player:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
         end
+
+        -- Anyone not level restricted can click to get level restriction. No checks.
+        addLevelRestriction(player, levelTable[zoneId])
+
+        -- Display banner message
+        player:messageSpecial(ID.text.BEASTMEN_BANNER_CURSE) -- There was a curse on the beastmen's banner!
 
     -- CLEARED: All mobs despawned
     elseif zoneData.state == bannerState.CLEARED then
-        -- Remove clicker's level cap
-        player:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
+        -- Remove clicker's level cap 
+        if player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
+            player:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
+            player:messageSpecial(ID.text.BEASTMEN_BANNER_LIFTED) -- The curse of the beastmen's banner has been lifted!
+        
+        -- Default banner text.
+        else
+            player:messageSpecial(ID.text.BEASTMEN_BANNER) -- There is a beastmen's banner.
+        end
     end
 
     -- HIDDEN: Banner is invisible and not clickable
