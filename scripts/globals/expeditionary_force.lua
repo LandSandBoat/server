@@ -299,6 +299,7 @@ local regionKITable =
 -----------------------------------
 -- Local functions
 -----------------------------------
+
 -- Apply the EF level restriction to one player.
 -- ON_ZONE makes it wear when the player zones out.
 -- CONFRONTATION hard-gates the NMs to capped players.
@@ -369,7 +370,7 @@ local function spawnBattleNMs(player, banner, zoneData)
     end
 end
 
--- CLEARED -> HIDDEN
+-- CLEARED -> HIDDEN. This is called from a 30-second timer callback.
 local function hideBanner(zoneId, banner)
     local zoneData = expForceZoneData[zoneId]
 
@@ -380,7 +381,6 @@ local function hideBanner(zoneId, banner)
     zoneData.nms             = {}
     zoneData.gone            = {}
     zoneData.creditNation    = nil
-    zoneData.creditedPlayers = {}
     zoneData.state           = bannerState.HIDDEN
 
     -- Respawn the banner
@@ -463,7 +463,6 @@ xi.expeditionaryForce.onBannerTrigger = function(player, npc)
             nms             = {},
             gone            = {},
             creditNation    = nil,
-            creditedPlayers = {},
             chainCount      = 0,
             lastKillTime    = 0,
         }
@@ -492,7 +491,6 @@ xi.expeditionaryForce.onBannerTrigger = function(player, npc)
         then
             -- Credit nation is based on the player who clicked the banner
             zoneData.creditNation    = player:getNation()
-            zoneData.creditedPlayers = {}
             zoneData.nms             = {}
             zoneData.gone            = {}
 
@@ -505,11 +503,6 @@ xi.expeditionaryForce.onBannerTrigger = function(player, npc)
 
                     -- Display banner message
                     member:messageSpecial(ID.text.BEASTMEN_BANNER_CURSE) -- There was a curse on the beastmen's banner!
-
-                    -- Update credited players within 50 yalms
-                    if member:checkDistance(npc) <= 50 then
-                        zoneData.creditedPlayers[member:getID()] = true
-                    end
                 end
             end
 
@@ -517,7 +510,7 @@ xi.expeditionaryForce.onBannerTrigger = function(player, npc)
             spawnBattleNMs(player, npc, zoneData)
             zoneData.state = bannerState.ACTIVE
 
-            -- Launch Watch Dog function
+            -- Launch Watch Dog function: this will catch if an NM's despawn doesn't trigger.
             watchDog(npc)
 
         -- If the player does not have the regions insignia, just send a message.
@@ -556,8 +549,9 @@ end
 
 
 -- Called from mob lua files
-xi.expeditionaryForce.onMobDeath = function(mob)
+xi.expeditionaryForce.onMobDeath = function(mob, player)
     local zoneId   = mob:getZoneID()
+    local ID       = zones[zoneId]
     local zoneData = expForceZoneData[zoneId]
 
     -- AWARD INFLUENCE
@@ -579,15 +573,37 @@ xi.expeditionaryForce.onMobDeath = function(mob)
     -- Give influence
     -- TODO: IMPLEMENT
 
-    -- Send message
-    -- TODO: IMPLEMENT
+    -- AWARD TITLES AND MESSAGES
+    local region = mob:getCurrentRegion()
+    for _, member in pairs(player:getAlliance()) do
+        local memberNation = member:getNation()
 
-    -- AWARD TITLES
-    -- Only award to credited players that are still in the zone
-    for playerId in pairs(zoneData.creditedPlayers) do
-        local p = GetPlayerByID(playerId)
-        if p ~= nil and p:getZoneID() == zoneId then
-            p:setTitle(xi.title.EXPEDITIONARY_TROOPER)
+        -- Only apply to the alliance members within 50 yalms
+        if member:checkDistance(mob) <= 50 then
+
+            -- Only give title to a member with the KI and in the correct nation
+            -- TODO: Verify you have to have the KI
+            if 
+                memberNation == zoneData.creditNation and
+                member:hasKeyItem(regionKITable[region])
+            then
+                member:setTitle(xi.title.EXPEDITIONARY_TROOPER)
+            end
+
+            -- Send messages to everyone in the alliance within the 50 yalm distance
+            -- TODO: Check if the message goes to just alliance or everyone
+            if memberNation == xi.nation.SANDORIA then
+                member:messageText(member, ID.text.EXP_FORCE_KILL_SANDORIA, 5) -- 5 = Grey: messageText event
+                member:messageSpecial(ID.text.REGION_POINTS_SANDORIA) -- showText event
+
+            elseif memberNation == xi.nation.BASTOK then
+                member:messageText(member, ID.text.EXP_FORCE_KILL_BASTOK, 5) -- 5 = Grey: messageText event
+                member:messageSpecial(ID.text.REGION_POINTS_BASTOK) -- showText event
+
+            elseif memberNation == xi.nation.WINDURST then
+                member:messageText(member, ID.text.EXP_FORCE_KILL_WINDURST, 5) -- 5 = Grey: messageText event
+                member:messageSpecial(ID.text.REGION_POINTS_WINDURST) -- showText event
+            end
         end
     end
 end

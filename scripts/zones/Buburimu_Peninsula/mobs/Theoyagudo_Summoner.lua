@@ -17,7 +17,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    xi.expeditionaryForce.onMobDeath(mob)
+    xi.expeditionaryForce.onMobDeath(mob, player)
 end
 
 entity.onMobDespawn = function(mob)
