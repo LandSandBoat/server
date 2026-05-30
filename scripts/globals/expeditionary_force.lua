@@ -426,6 +426,10 @@ local function watchDog(npc)
     end
 end
 
+local function recordParticipation(player, regionId)
+    -- TODO: IMPLEMENT
+end
+
 -----------------------------------
 -- Public functions
 -----------------------------------
@@ -641,6 +645,25 @@ end
 -- Caller checks the insignia and resolves the regionId.
 -- TODO: Real formula. Placeholder constant.
 -- TODO: Wire to player:gainInfluencePoints once binding lands.
-xi.expeditionaryForce.awardChestInfluence = function(player, regionId)
-    -- TODO: Give influence
+xi.expeditionaryForce.onChestOpen = function(player)
+    local regionId = player:getCurrentRegion()
+    local insignia = regionKITable[regionId]
+
+    -- Only give influence if this is a EF region and the player has the KI
+    if
+        insignia ~= nil or
+        not player:hasKeyItem(insignia)
+    then
+        
+        -- Influence gained ranges from about 2.5 % - 0.5 % per chest
+        -- Since LSB uses linear scale, give about 1 % influence each chest
+        -- TODO: Modify to scaling in the future
+        -- TODO: Have them gain 50 influence
+        
+        -- Display message
+        -- TODO: Get Zone ID
+        -- TODO: Add messages to zone
+
+        recordParticipation(player, regionId)
+    end
 end
