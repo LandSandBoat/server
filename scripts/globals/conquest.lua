@@ -6,6 +6,7 @@ require('scripts/globals/garrison')
 require('scripts/globals/teleports')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
+require('scripts/globals/expeditionary_force') -- TODO: Remove this after EF feature is fully implemented
 -----------------------------------
 xi = xi or {}
 xi.conquest = xi.conquest or {}
@@ -24,7 +25,6 @@ local conquestConstants =
 -----------------------------------
 -- (LOCAL) expeditionary forces
 -----------------------------------
-local expeditionaryForceEnabled = true
 
 -- TODO: Do I need zone?
 local exForceMenuData =
@@ -118,10 +118,9 @@ local function exForceValidateSignup(player, guardNation, minLevel, numRequired)
 end
 
 -- Bitmask of every region this player can sign up for. 0 = the EF menu does not appear.
--- Oddly enough, even if you have the key item for a region, you can sign up again.
--- TODO: I got help with the mask. I don't fully understand yet.
 local function getExForceAvailable(player, npc, guardNation)
-    if not expeditionaryForceEnabled then
+    -- TODO: Delete this check when feature is fully implemented
+    if not xi.expeditionaryForce.enabled then
         return 0
     end
 
@@ -136,13 +135,20 @@ local function getExForceAvailable(player, npc, guardNation)
 
     local mask = 0
 
+    -- Setup the bit mask for all the available regions 
+    -- The bit masks are stored in the exForceMenuData.
     for regionId, data in pairs(exForceMenuData) do
         local owner = GetRegionOwner(regionId)
 
+        -- Region is available if:
+        --  The player's nation does not own the region.
+        --  The player's ally does not own the region.
+        --  The player has visited the region's outpost.
         if
             owner ~= guardNation and
             not xi.conquest.areAllies(guardNation, owner) and
-            player:hasVisitedZone(data.zone)
+            player:hasVisitedZone(data.zone) and
+            xi.expeditionaryForce.enabledTable[data.zone] -- TODO: Remove this after all zones have been implemented
         then
             mask = bit.bor(mask, data.menuBit)
         end
@@ -151,27 +157,28 @@ local function getExForceAvailable(player, npc, guardNation)
     return mask
 end
 
--- TODO: I got help with the mask. I don't fully understand yet.
+-- This is to display 
 local function getExForceReward(player, guardNation)
-    if not expeditionaryForceEnabled or
-        player:getNation() ~= guardNation
-    then
+    -- This is to catch instances where the player gets the badge and goes to a guard at another nation's embassy.
+    if player:getNation() ~= guardNation then
         return 0
     end
 
+    -- Only show menu if the player has the EF badge
     local badge = player:getStatusEffect(xi.effect.EF_BADGE)
     if badge == nil then
         return 0
     end
 
+
     local region = exForceMenuData[badge:getPower()]
+    -- This is a guard. The starter regions exist in the client but were never implemented into Retail.
     if region == nil then
         return 0
     end
 
     -- regionRow 6-20 = eventOption (0x20006-0x20014) minus the 0x20000 base.
     local regionRow = region.option - 0x20000
-
     return 0x80000000 + bit.lshift(regionRow, 5)
 end
 
@@ -1605,6 +1612,7 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
         player:delStatusEffect(xi.effect.EF_BADGE)
         npcUtil.giveKeyItem(player, exForceMenuData[regionId].ki) -- TODO: Is this a temporary key item?
         npcUtil.giveItem(player, exForceGateGlyphTable[player:getEventTarget():getName()]) -- TODO: This feels wrong
+        -- TODO: Check if a player already has a KI, if new text is displayed. 
 
         -- Bestow Signet
         -- TODO: Do I split off the code above?
@@ -1622,6 +1630,8 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
             icon     = 0,
             subPower = regionId,
         })
+
+        -- TODO: Check if text is broadcasted to the zone (or area)
 
     -- EXPEDITIONARY FORCE - Quit
     elseif option == 8 then

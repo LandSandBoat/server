@@ -5,6 +5,33 @@ require('scripts/globals/npc_util')
 -----------------------------------
 xi = xi or {}
 xi.expeditionaryForce = xi.expeditionaryForce or {}
+
+-----------------------------------
+-- Feature Enable
+-----------------------------------
+-- This is temporary and only used to slowly enable zones as data is filled in.
+-- This is accessed only by conquest.lua
+-- TODO: Remove these checks after all zones have been implemented
+
+xi.expeditionaryForce.enabled = true
+
+xi.expeditionaryForce.enabledTable =
+{
+    [xi.zone.BEAUCEDINE_GLACIER    ] = false,
+    [xi.zone.BUBURIMU_PENINSULA    ] = true,
+    [xi.zone.CAPE_TERIGGAN         ] = false,
+    [xi.zone.EASTERN_ALTEPA_DESERT ] = false,
+    [xi.zone.JUGNER_FOREST         ] = false,
+    [xi.zone.MERIPHATAUD_MOUNTAINS ] = false,
+    [xi.zone.PASHHOW_MARSHLANDS    ] = false,
+    [xi.zone.QUFIM_ISLAND          ] = false,
+    [xi.zone.THE_SANCTUARY_OF_ZITAH] = false,
+    [xi.zone.VALKURM_DUNES         ] = false,
+    [xi.zone.XARCABARD             ] = false,
+    [xi.zone.YHOATOR_JUNGLE        ] = false,
+    [xi.zone.YUHTUNGA_JUNGLE       ] = false,
+}
+
 -----------------------------------
 -- Data
 -----------------------------------
