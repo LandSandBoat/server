@@ -36,7 +36,7 @@ xi.expeditionaryForce.enabledTable =
 -- Data
 -----------------------------------
 -- Runtime state. One record per EF zone, built lazily on the first banner click.
--- If you modify this file during runtime, you must relaunch map as zoneData is erased.
+-- If you modify this file during runtime, you must relaunch map as expForceZoneData is erased.
 local expForceZoneData = {}
 
 -----------------------------------
@@ -684,6 +684,7 @@ xi.expeditionaryForce.onChestOpen = function(player)
         
         -- Influence gained ranges from about 2.5 % - 0.5 % per chest
         -- Since LSB uses linear scale, give about 1 % influence each chest
+        -- 1 % influence is equvalent to 667 xp in unowned region.
         -- TODO: Modify to scaling in the future
         -- TODO: Have them gain 50 influence
         

@@ -1607,11 +1607,12 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
     elseif option == 5 then
         local badge    = player:getStatusEffect(xi.effect.EF_BADGE)
         local regionId = badge:getPower()
+        local overseer = player:getEventTarget()
 
         -- Replace badge with glyph
         player:delStatusEffect(xi.effect.EF_BADGE)
         npcUtil.giveKeyItem(player, exForceMenuData[regionId].ki) -- TODO: Is this a temporary key item?
-        npcUtil.giveItem(player, exForceGateGlyphTable[player:getEventTarget():getName()]) -- TODO: This feels wrong
+        npcUtil.giveItem(player, exForceGateGlyphTable[overseer:getName()])
         -- TODO: Check if a player already has a KI, if new text is displayed. 
 
         -- Bestow Signet
