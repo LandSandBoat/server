@@ -1,4 +1,5 @@
 require('scripts/globals/combat/magic_hit_rate')
+require('scripts/globals/combat/magic_interrupt')
 require('scripts/globals/jobpoints')
 require('scripts/globals/spells/damage_spell')
 -----------------------------------
