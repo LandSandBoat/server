@@ -228,6 +228,7 @@ uint8 GetRegionOwner(uint8 type);
 uint8 GetRegionInfluence(uint8 type); // Return influence graphics
 uint8 GetNationRank(uint8 nation);
 uint8 GetConquestBalance();
+void  AddConquestInfluence(int32 amount, uint8 nation, uint8 region); // Add influence to a nation in a region
 bool  IsConquestAlliance();
 void  SetRegionalConquestOverseers(uint8 regionID); // Update NPC Conquest Guard
 void  SendLuaFuncStringToZone(uint16 requestingZoneId, uint16 executorZoneId, const std::string& str);

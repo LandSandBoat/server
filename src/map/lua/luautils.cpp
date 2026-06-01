@@ -270,6 +270,7 @@ void init(IPP mapIPP, bool isRunningInCI)
     lua.set_function("GetNationRank", &luautils::GetNationRank);
     lua.set_function("GetConquestBalance", &luautils::GetConquestBalance);
     lua.set_function("IsConquestAlliance", &luautils::IsConquestAlliance);
+    lua.set_function("AddConquestInfluence", &luautils::AddConquestInfluence);
     lua.set_function("SpawnMob", &luautils::SpawnMob);
     lua.set_function("DespawnMob", &luautils::DespawnMob);
     lua.set_function("GetPlayerByName", &luautils::GetPlayerByName);
@@ -1524,6 +1525,25 @@ uint8 GetConquestBalance()
     TracyZoneScoped;
 
     return conquest::GetBalance();
+}
+
+void AddConquestInfluence(int32 amount, uint8 nation, uint8 region)
+{
+    TracyZoneScoped;
+
+    if (nation > NATION_BEASTMEN)
+    {
+        ShowError("Lua::AddConquestInfluence: invalid nation %d (expected 0-3).", nation);
+        return;
+    }
+
+    if (amount <= 0)
+    {
+        ShowWarning("Lua::AddConquestInfluence: non-positive amount %d ignored.", amount);
+        return;
+    }
+
+    conquest::AddInfluencePoints(amount, nation, static_cast<REGION_TYPE>(region));
 }
 
 bool IsConquestAlliance()
