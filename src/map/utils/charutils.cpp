@@ -998,7 +998,7 @@ void LoadSpells(CCharEntity* PChar)
 
     // Compile a list of all enabled expansions
     std::vector<std::string> enabledExpansions;
-    for (const auto& expansion : { "COP", "TOAU", "WOTG", "ACP", "AMK", "ASA", "ABYSSEA", "SOA", "ROV", "TVR", "VOIDWATCH" })
+    for (const auto& expansion : { "ROTZ", "COP", "TOAU", "WOTG", "ACP", "AMK", "ASA", "ABYSSEA", "SOA", "ROV", "TVR", "VOIDWATCH" })
     {
         if (luautils::IsContentEnabled(expansion))
         {
