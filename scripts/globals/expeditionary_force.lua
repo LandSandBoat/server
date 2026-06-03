@@ -123,20 +123,20 @@ local posBannerTable =
 
     [xi.zone.MERIPHATAUD_MOUNTAINS] =
     {
-        {},
-        {},
-        {},
-        {},
-        {},
+        {  592.850, -518.802, -16.741, 227 }, -- K-11
+        {  342.918,  529.219,  -1.109, 226 }, -- I-5
+        { -536.930,  338.845,   4.317, 200 }, -- D-6
+        { -559.025,   47.233, -16.761,  72 }, -- D-8
+        -- Cannot find the 5th after 17 spawns. They may have gotten rid of it for the rift.
     },
 
     [xi.zone.PASHHOW_MARSHLANDS] =
     {
-        { -172.764,  93.640, 25.125, 154 }, -- G-8
-        {  261.910, 211.070, 24.213,  85 }, -- J-7
-        { 140.080, -411.951, 23.971, 112 }, -- I-11
-        {},
-        {},
+        { -172.764,   93.640, 25.125, 154 }, -- G-8
+        {  261.910,  211.070, 24.213,  85 }, -- J-7
+        {  140.080, -411.951, 23.971, 112 }, -- I-11
+        { -447.851, -219.899, 24.305, 113 }, -- E-10
+        { -460.959,  469.851, 24.203, 223 }, -- E-5
     },
 
     [xi.zone.QUFIM_ISLAND] =
@@ -150,11 +150,11 @@ local posBannerTable =
 
     [xi.zone.THE_SANCTUARY_OF_ZITAH] =
     {
-        {},
-        {},
-        {},
-        {},
-        {},
+        {  643.619, -176.843,  0.842, 128 }, -- L-10
+        {  174.336, -413.606, -1.015,  59 }, -- I-11
+        { -512.058,  253.275, -0.975,  37 }, -- E-7
+        {  429.298, -604.489,  0.084, 231 }, -- J-12
+        { -399.822, -168.998,  0.162, 174 }, -- E-10
     },
 
     [xi.zone.VALKURM_DUNES] =
@@ -186,11 +186,11 @@ local posBannerTable =
 
     [xi.zone.YUHTUNGA_JUNGLE] =
     {
-        {},
-        {},
-        {},
-        {},
-        {},
+        { 381.229, 148.721, 3.908, 115 }, -- K-8
+        { -63.927, -126.052, -0.042, 153 }, -- H-9
+        { 102.301, 442.978, 0.600, 17}, -- I-6
+        { -305.061, -438.904, 16.186, 132 }, -- G-11
+        { -647.367, 42.053, 0.000, 28 }, -- E-8
     },
 }
 
@@ -203,17 +203,17 @@ local cpRewardTable =
     [0]  = 0,
     [1]  = 3000,
     [2]  = 4200,
-    [3]  = 4800,
+    [3]  = 4680, -- +480 per region https://ffxiclopedia.fandom.com/wiki/Talk:Expeditionary_Force
     [4]  = 5160,
-    [5]  = 5430,
-    [6]  = 5700,
-    [7]  = 6105,
-    [8]  = 7320,
-    [9]  = 7320,
-    [10] = 7320,
-    [11] = 7320,
-    [12] = 7320,
-    [13] = 7320,
+    [5]  = 5640,
+    [6]  = 6120,
+    [7]  = 6600,
+    [8]  = 7080,
+    [9]  = 7560,
+    [10] = 8040,
+    [11] = 8520,
+    [12] = 9000,
+    [13] = 9480,
 }
 
 
@@ -397,7 +397,7 @@ local function spawnBattleNMs(player, banner, zoneData)
     end
 end
 
--- CLEARED -> HIDDEN. This is called from a 30-second timer callback.
+-- CLEARED -> HIDDEN. This is called from a 60-second timer callback.
 local function hideBanner(zoneId, banner)
     local zoneData = expForceZoneData[zoneId]
 
@@ -467,7 +467,7 @@ xi.expeditionaryForce.initZone = function(zone)
 
     -- Set the banner to a random position and set the status to normal
     local banner = GetNPCByID(ID.npc.BEASTMENS_BANNER)
-    local pos = posBannerTable[zoneId][math.random(#posBannerTable[zoneId])] -- TODO: when table is filled out, this can just be 5
+    local pos = posBannerTable[zoneId][math.random(#posBannerTable[zoneId])]
     banner:setPos(pos[1], pos[2], pos[3], pos[4])
     banner:setStatus(xi.status.NORMAL) -- forces visible even if the SQL ships hidden
 
@@ -594,7 +594,8 @@ xi.expeditionaryForce.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller then
 
         -- AWARD INFLUENCE
-        AddConquestInfluence(50, creditNation, mob:getCurrentRegion()) -- TODO: verify influence amount
+        -- https://bluebell.exblog.jp/1747138/ - Suggests 900 points
+        AddConquestInfluence(900, creditNation, mob:getCurrentRegion()) -- TODO: verify influence amount
 
         -- SEND ZONE MESSAGE
         for _, person in pairs(mob:getZone():getPlayers()) do
@@ -650,10 +651,10 @@ xi.expeditionaryForce.onMobDespawn = function(mob)
     if goneCount >= #zoneData.nms then
         zoneData.state = bannerState.CLEARED
 
-        -- The banner will disappear after 30 seconds.
+        -- The banner will disappear after 60 seconds.
         local ID     = zones[zoneId]
         local banner = GetNPCByID(ID.npc.BEASTMENS_BANNER)
-        banner:timer(30 * 1000, function(npcArg)
+        banner:timer(60 * 1000, function(npcArg)
             hideBanner(npcArg:getZoneID(), npcArg)
         end)
     end
