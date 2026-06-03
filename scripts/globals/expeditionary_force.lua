@@ -78,11 +78,11 @@ local posBannerTable =
     [xi.zone.BEAUCEDINE_GLACIER] =
     {
         -- { x, y, z, rot }
-        {},
-        {},
-        {},
-        {},
-        {},
+        {  193.614, -35.663,  -0.307, 255 }, -- I-8
+        {   20.169, 180.063, -80.061, 224 }, -- H-7
+        {  255.402, 382.940,   0.072, 110 }, -- J-6
+        { -326.264, 140.523, -99.694, 220 }, -- F-7
+        { -173.299, 150.200, -81.847, 246 }, -- G-7
     },
 
     [xi.zone.BUBURIMU_PENINSULA] =
@@ -96,11 +96,11 @@ local posBannerTable =
 
     [xi.zone.CAPE_TERIGGAN] =
     {
-        {},
-        {},
-        {},
-        {},
-        {},
+        {  126.583, -117.367, -0.194,  75 }, -- I-9
+        { -213.169,  254.085, -3.320, 181 }, -- G-6
+        {  251.977,   50.698,  5.241, 128 }, -- J-8
+        {  -29.071,  224.300, -9.694,  46 }, -- H-7
+        {  162.059,  250.538, -0.740, 139 }, -- I-6
     },
 
     [xi.zone.EASTERN_ALTEPA_DESERT] =
@@ -132,9 +132,9 @@ local posBannerTable =
 
     [xi.zone.PASHHOW_MARSHLANDS] =
     {
-        {},
-        {},
-        {},
+        { -172.764,  93.640, 25.125, 154 }, -- G-8
+        {  261.910, 211.070, 24.213,  85 }, -- J-7
+        { 140.080, -411.951, 23.971, 112 }, -- I-11
         {},
         {},
     },
@@ -159,20 +159,20 @@ local posBannerTable =
 
     [xi.zone.VALKURM_DUNES] =
     {
-        {},
-        {},
-        {},
-        {},
-        {},
+        { -352.679,  327.661,  -8.856,  18 },
+        { -116.204, -113.608,   4.000, 160 },
+        { -522.404,  113.667,  -8.175, 141 },
+        {  643.175,    8.854,  -0.592,  10 },
+        {  478.713,  365.873, -16.140,  28 }, -- J-6
     },
 
     [xi.zone.XARCABARD] =
     {
-        {},
-        {},
-        {},
-        {},
-        {},
+        {   32.788, -205.200, -24.162,   6 }, -- G-9
+        {   47.461,   66.281, -36.500, 201 }, -- G-7
+        { -160.590,  -87.061, -24.169, 174 }, -- F-8
+        {  320.399,  167.796,  -8.190,  52 }, -- I-6
+        {  153.000,   23.500, -36.438,  16 }, -- H-7
     },
 
     [xi.zone.YHOATOR_JUNGLE] =
@@ -494,8 +494,6 @@ xi.expeditionaryForce.onBannerTrigger = function(player, npc)
             nms             = {},
             gone            = {},
             creditNation    = nil,
-            chainCount      = 0,
-            lastKillTime    = 0,
         }
         expForceZoneData[zoneId] = zoneData
     end
@@ -579,64 +577,59 @@ xi.expeditionaryForce.onBannerTrigger = function(player, npc)
 end
 
 
--- Called from mob lua files
-xi.expeditionaryForce.onMobDeath = function(mob, player)
+-- Called from mob lua files. Fires once per alliance member in zone.
+xi.expeditionaryForce.onMobDeath = function(mob, player, optParams)
+
+    -- This should never happen as pets are attributed to owner, but just in case pet kills during player zone.
+    if not player then
+        return
+    end
+    
     local zoneId   = mob:getZoneID()
     local ID       = zones[zoneId]
     local zoneData = expForceZoneData[zoneId]
+    local creditNation = zoneData.creditNation
 
-    -- AWARD INFLUENCE
-    -- Check for a chain
-    local now = GetSystemTime()
+    -- These occur once per kill.
+    if optParams.isKiller then
 
-    -- Increment chain
-    if now - zoneData.lastKillTime <= 900 then -- Chain timeout in seconds TODO: Verify time
-        zoneData.chainCount = zoneData.chainCount + 1
+        -- AWARD INFLUENCE
+        AddConquestInfluence(50, creditNation, mob:getCurrentRegion()) -- TODO: verify influence amount
 
-    -- Reset chain
-    else
-        zoneData.chainCount = 1
-    end
+        -- SEND ZONE MESSAGE
+        for _, person in pairs(mob:getZone():getPlayers()) do
+            if creditNation == xi.nation.SANDORIA then
+                person:messageText(person, ID.text.EXP_FORCE_KILL_SANDORIA, 5) -- 5 = Grey: messageText event
 
-    -- Set timer for next chain count
-    zoneData.lastKillTime = now
+            elseif creditNation == xi.nation.BASTOK then
+                person:messageText(person, ID.text.EXP_FORCE_KILL_BASTOK, 5) -- 5 = Grey: messageText event
 
-    -- Give influence
-    -- TODO: IMPLEMENT
-
-    -- AWARD TITLES AND MESSAGES
-    local region = mob:getCurrentRegion()
-    for _, member in pairs(player:getAlliance()) do
-        local memberNation = member:getNation()
-
-        -- Only apply to the alliance members within 50 yalms
-        if member:checkDistance(mob) <= 50 then
-
-            -- Only give title to a member with the KI and in the correct nation
-            -- TODO: Verify you have to have the KI
-            if 
-                memberNation == zoneData.creditNation and
-                member:hasKeyItem(regionKITable[region])
-            then
-                member:setTitle(xi.title.EXPEDITIONARY_TROOPER)
-            end
-
-            -- Send messages to everyone in the alliance within the 50 yalm distance
-            -- TODO: Check if the message goes to just alliance or everyone
-            if memberNation == xi.nation.SANDORIA then
-                member:messageText(member, ID.text.EXP_FORCE_KILL_SANDORIA, 5) -- 5 = Grey: messageText event
-                member:messageSpecial(ID.text.REGION_POINTS_SANDORIA) -- showText event
-
-            elseif memberNation == xi.nation.BASTOK then
-                member:messageText(member, ID.text.EXP_FORCE_KILL_BASTOK, 5) -- 5 = Grey: messageText event
-                member:messageSpecial(ID.text.REGION_POINTS_BASTOK) -- showText event
-
-            elseif memberNation == xi.nation.WINDURST then
-                member:messageText(member, ID.text.EXP_FORCE_KILL_WINDURST, 5) -- 5 = Grey: messageText event
-                member:messageSpecial(ID.text.REGION_POINTS_WINDURST) -- showText event
+            elseif creditNation == xi.nation.WINDURST then
+                person:messageText(person, ID.text.EXP_FORCE_KILL_WINDURST, 5) -- 5 = Grey: messageText event
             end
         end
+        
+
     end
+
+    -- AWARD TITLE
+    -- Give title to everyone in the alliance regardless of nation or KI
+    if player:checkDistance(mob) <= 50 then -- TODO: Check distance
+        player.addTitle(xi.title.EXPEDITIONARY_TROOPER)
+    end
+
+    -- MESSAGE
+    -- "x's region points have increased"
+    if creditNation == xi.nation.SANDORIA then
+        player:messageSpecial(ID.text.REGION_POINTS_SANDORIA) -- showText event
+
+    elseif creditNation == xi.nation.BASTOK then
+        player:messageSpecial(ID.text.REGION_POINTS_BASTOK)   -- showText event
+
+    elseif creditNation == xi.nation.WINDURST then
+        player:messageSpecial(ID.text.REGION_POINTS_WINDURST) -- showText event
+    end
+
 end
 
 -- Mark a mob as despawned. When all NMs are accounted for, transition to CLEARED.

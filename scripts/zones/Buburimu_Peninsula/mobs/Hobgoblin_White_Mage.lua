@@ -8,12 +8,8 @@ mixins = { require('scripts/mixins/job_special') }
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.EXP_BONUS, -100)
-end
-
 entity.onMobDeath = function(mob, player, optParams)
-    xi.expeditionaryForce.onMobDeath(mob, player)
+    xi.expeditionaryForce.onMobDeath(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)

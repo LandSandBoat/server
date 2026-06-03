@@ -12,12 +12,8 @@ entity.onMobInitialize = function(mob)
     xi.pet.setMobPet(mob, 1, 'Yagudos_Elemental')
 end
 
-entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.EXP_BONUS, -100)
-end
-
 entity.onMobDeath = function(mob, player, optParams)
-    xi.expeditionaryForce.onMobDeath(mob, player)
+    xi.expeditionaryForce.onMobDeath(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
