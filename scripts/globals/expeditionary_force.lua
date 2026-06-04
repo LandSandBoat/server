@@ -127,7 +127,7 @@ local posBannerTable =
         {  342.918,  529.219,  -1.109, 226 }, -- I-5
         { -536.930,  338.845,   4.317, 200 }, -- D-6
         { -559.025,   47.233, -16.761,  72 }, -- D-8
-        -- Cannot find the 5th after 17 spawns. They may have gotten rid of it for the rift.
+        {  199.396, -527.072,  -0.723, 169 }, -- H-11
     },
 
     [xi.zone.PASHHOW_MARSHLANDS] =
@@ -177,11 +177,11 @@ local posBannerTable =
 
     [xi.zone.YHOATOR_JUNGLE] =
     {
-        {},
-        {},
-        {},
-        {},
-        {},
+        {  366.014, -394.801, -0.176,  96 }, -- J-10
+        {  -54.134, -405.397,  0.344, 199 }, -- H-10
+        { -289.835, -357.025,  0.000,   5 }, -- F-10
+        { -196.704, -149.953,  0.000,  75 }, -- G-9
+        { -176.760, 26.774, 0.162, 40}, -- G-8
     },
 
     [xi.zone.YUHTUNGA_JUNGLE] =
@@ -361,6 +361,8 @@ end
 
 
 -- Spawn 4 NMs at the banner
+-- TODO: It appears mobs in older zones are at a random 0 - 360 from the banner. Newer zones use 0 - 180 equally spaced. Distance is from 2.5 - 7 yalms with preference towards 3 - 4 yalms.
+-- TODO: It's possible that only certain mob groups spawn at specific banners. To capture this would take about 40+ hours.
 local function spawnBattleNMs(player, banner, zoneData)
     local zoneId   = banner:getZoneID()
     local levelCap = levelTable[zoneId]
@@ -440,8 +442,8 @@ local function watchDog(npc)
     if not anyPresent then
         zoneData.state = bannerState.CLEARED
 
-        -- The banner will disappear after 30 seconds.
-        npc:timer(30 * 1000, function(npcArg)
+        -- The banner will disappear after 60 seconds.
+        npc:timer(60 * 1000, function(npcArg)
             hideBanner(npcArg:getZoneID(), npcArg)
         end)
 
@@ -461,42 +463,61 @@ end
 -- Public functions
 -----------------------------------
 
+-- This code runs whenever the zone is initialized as well as every time the Expeditionary Force has been reset.
 xi.expeditionaryForce.initZone = function(zone)
     local zoneId = zone:getID()
     local ID     = zones[zoneId]
 
+    -- Build the zone's runtime record
+    local zoneData = expForceZoneData[zoneId]
+    if zoneData == nil then
+        zoneData =
+        {
+            state              = bannerState.IDLE,
+            nms                = {},
+            gone               = {},
+            creditNation       = nil,
+            lastBannerPosIndex = nil,
+        }
+        expForceZoneData[zoneId] = zoneData
+    end
+
     -- Set the banner to a random position and set the status to normal
-    local banner = GetNPCByID(ID.npc.BEASTMENS_BANNER)
-    local pos = posBannerTable[zoneId][math.random(#posBannerTable[zoneId])]
+    local banner       = GetNPCByID(ID.npc.BEASTMENS_BANNER)
+    local positions    = posBannerTable[zoneId]
+    local lastPosIndex = zoneData.lastBannerPosIndex
+    local posIndex
+
+    -- When the zone loads, there are no previous positions so we can pick from any of the available options.
+    if lastPosIndex == nil then
+        posIndex = math.random(#positions)
+    
+    -- We will just roll 1 less number. If we happen to land on the last index, we just select the last value in the position table.
+    -- Note: If you only have one banner position, this will break! This should never happen as all zones have more than 1 position.
+    else
+        posIndex = math.random(#positions - 1)
+        if posIndex == lastPosIndex then
+            posIndex = #positions
+        end
+    end
+
+    local pos = positions[posIndex]
     banner:setPos(pos[1], pos[2], pos[3], pos[4])
     banner:setStatus(xi.status.NORMAL) -- forces visible even if the SQL ships hidden
 
+    -- Store the position index for later to make sure the banner does not spawn in the same place twice
+    zoneData.lastBannerPosIndex = posIndex
+
     -- Reset to IDLE on respawn
-    local zoneData = expForceZoneData[zoneId]
-    if zoneData ~= nil then
-        zoneData.state = bannerState.IDLE
-    end
+    zoneData.state = bannerState.IDLE
 end
 
 
 xi.expeditionaryForce.onBannerTrigger = function(player, npc)
     local zoneId   = npc:getZoneID()
     local ID       = zones[zoneId]
-
-    -- Get data for the zone
     local zoneData = expForceZoneData[zoneId]
 
-    -- Data does not exist yet
-    if zoneData == nil then
-        zoneData =
-        {
-            state           = bannerState.IDLE,
-            nms             = {},
-            gone            = {},
-            creditNation    = nil,
-        }
-        expForceZoneData[zoneId] = zoneData
-    end
 
     -- Handle all states of the Beastmen's Banner
     -- The flow of Expeditionary Force goes from IDLE to ACTIVE to CLEARED to HIDDEN then back to IDLE
@@ -616,7 +637,7 @@ xi.expeditionaryForce.onMobDeath = function(mob, player, optParams)
     -- AWARD TITLE
     -- Give title to everyone in the alliance regardless of nation or KI
     if player:checkDistance(mob) <= 50 then -- TODO: Check distance
-        player.addTitle(xi.title.EXPEDITIONARY_TROOPER)
+        player:addTitle(xi.title.EXPEDITIONARY_TROOPER)
     end
 
     -- MESSAGE

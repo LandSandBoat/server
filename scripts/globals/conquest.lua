@@ -58,6 +58,14 @@ local exForceGateGlyphTable =
     ['Puroiko-Maiko_WW'] = xi.item.WINDURST_WATERS_GLYPH,
 }
 
+local exForceCityGlyphTable =
+{
+    -- [nation] = that nation's three glyphs
+    [xi.nation.SANDORIA] = { xi.item.NORTH_SANDORIA_GLYPH, xi.item.WEST_SANDORIA_GLYPH, xi.item.EAST_SANDORIA_GLYPH },
+    [xi.nation.BASTOK]   = { xi.item.BASTOK_MINES_GLYPH, xi.item.BASTOK_MARKETS_GLYPH, xi.item.PORT_BASTOK_GLYPH },
+    [xi.nation.WINDURST] = { xi.item.WINDURST_WOODS_GLYPH, xi.item.PORT_WINDURST_GLYPH, xi.item.WINDURST_WATERS_GLYPH },
+}
+
 local exForceNumberRequiredTable = 
 {
     -- [Standing] = partySize
@@ -1612,7 +1620,17 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
         -- Replace badge with glyph
         player:delStatusEffect(xi.effect.EF_BADGE)
         npcUtil.giveKeyItem(player, exForceMenuData[regionId].ki) -- TODO: Is this a temporary key item?
-        npcUtil.giveItem(player, exForceGateGlyphTable[overseer:getName()])
+
+        -- If you have a glyph from the city, you cannot get a second one.
+        local cityGlyphs = exForceCityGlyphTable[pNation]
+        if 
+            not player:hasItem(cityGlyphs[1]) and
+            not player:hasItem(cityGlyphs[2]) and
+            not player:hasItem(cityGlyphs[3])
+        then
+            npcUtil.giveItem(player, exForceGateGlyphTable[overseer:getName()])
+        end
+      
         -- TODO: Check if a player already has a KI, if new text is displayed. 
 
         -- Bestow Signet
@@ -1631,8 +1649,6 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
             icon     = 0,
             subPower = regionId,
         })
-
-        -- TODO: Check if text is broadcasted to the zone (or area)
 
     -- EXPEDITIONARY FORCE - Quit
     elseif option == 8 then
