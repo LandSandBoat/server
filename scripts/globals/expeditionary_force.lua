@@ -89,9 +89,9 @@ local bannerTable =
     [xi.zone.BEAUCEDINE_GLACIER] =
     {
         -- position = { x, y, z, rot }
-        { position = {  193.614, -35.663,  -0.307, 255 }, mobFamily = mobFamilies.GIGAS }, -- I-8
-        { position = {   20.169, 180.063, -80.061, 224 }, mobFamily = mobFamilies.GIGAS }, -- H-7
-        { position = { -326.264, 140.523, -99.694, 220 }, mobFamily = mobFamilies.GIGAS }, -- F-7
+        { position = {  193.614, -35.663,  -0.307, 255 }, mobFamily = mobFamilies.GIGAS },     -- I-8
+        { position = {   20.169, 180.063, -80.061, 224 }, mobFamily = mobFamilies.GIGAS },     -- H-7
+        { position = { -326.264, 140.523, -99.694, 220 }, mobFamily = mobFamilies.GIGAS },     -- F-7
         { position = {  255.402, 382.940,   0.072, 110 }, mobFamily = mobFamilies.HOBGOBLIN }, -- J-6
         { position = { -173.299, 150.200, -81.847, 246 }, mobFamily = mobFamilies.HOBGOBLIN }, -- G-7
     },
@@ -134,8 +134,8 @@ local bannerTable =
 
     [xi.zone.MERIPHATAUD_MOUNTAINS] =
     {
-        { position = {  199.396, -527.072,  -0.723, 169 }, mobFamily = mobFamilies.HOBGOBLIN }, -- H-11
-        { position = {  342.918,  529.219,  -1.109, 226 }, mobFamily = mobFamilies.HOBGOBLIN }, -- I-5
+        { position = {  199.396, -527.072,  -0.723, 169 }, mobFamily = mobFamilies.HOBGOBLIN },  -- H-11
+        { position = {  342.918,  529.219,  -1.109, 226 }, mobFamily = mobFamilies.HOBGOBLIN },  -- I-5
         { position = {  592.850, -518.802, -16.741, 227 }, mobFamily = mobFamilies.THEOYAGUDO }, -- K-11
         { position = { -536.930,  338.845,   4.317, 200 }, mobFamily = mobFamilies.THEOYAGUDO }, -- D-6
         { position = { -559.025,   47.233, -16.761,  72 }, mobFamily = mobFamilies.THEOYAGUDO }, -- D-8
@@ -143,8 +143,8 @@ local bannerTable =
 
     [xi.zone.PASHHOW_MARSHLANDS] =
     {
-        { position = { -172.764,   93.640, 25.125, 154 }, mobFamily = mobFamilies.HOBGOBLIN }, -- G-8
-        { position = {  261.910,  211.070, 24.213,  85 }, mobFamily = mobFamilies.HOBGOBLIN }, -- J-7
+        { position = { -172.764,   93.640, 25.125, 154 }, mobFamily = mobFamilies.HOBGOBLIN },  -- G-8
+        { position = {  261.910,  211.070, 24.213,  85 }, mobFamily = mobFamilies.HOBGOBLIN },  -- J-7
         { position = {  140.080, -411.951, 23.971, 112 }, mobFamily = mobFamilies.METAQUADAV }, -- I-11
         { position = { -447.851, -219.899, 24.305, 113 }, mobFamily = mobFamilies.METAQUADAV }, -- E-10
         { position = { -460.959,  469.851, 24.203, 223 }, mobFamily = mobFamilies.METAQUADAV }, -- E-5
@@ -179,17 +179,17 @@ local bannerTable =
 
     [xi.zone.XARCABARD] =
     {
-        { position = {   32.788, -205.200, -24.162,   6 }, mobFamily = mobFamilies.GIGAS }, -- G-9
-        { position = { -160.590,  -87.061, -24.169, 174 }, mobFamily = mobFamilies.GIGAS }, -- F-8
-        { position = {  153.000,   23.500, -36.438,  16 }, mobFamily = mobFamilies.GIGAS }, -- H-7
+        { position = {   32.788, -205.200, -24.162,   6 }, mobFamily = mobFamilies.GIGAS },     -- G-9
+        { position = { -160.590,  -87.061, -24.169, 174 }, mobFamily = mobFamilies.GIGAS },     -- F-8
+        { position = {  153.000,   23.500, -36.438,  16 }, mobFamily = mobFamilies.GIGAS },     -- H-7
         { position = {   47.461,   66.281, -36.500, 201 }, mobFamily = mobFamilies.HOBGOBLIN }, -- G-7
         { position = {  320.399,  167.796,  -8.190,  52 }, mobFamily = mobFamilies.HOBGOBLIN }, -- I-6
     },
 
     [xi.zone.YHOATOR_JUNGLE] =
     {
-        { position = {  -54.134, -405.397,  0.344, 199 }, mobFamily = mobFamilies.HOBGOBLIN }, -- H-10
-        { position = { -196.704, -149.953,  0.000,  75 }, mobFamily = mobFamilies.HOBGOBLIN }, -- G-9
+        { position = {  -54.134, -405.397,  0.344, 199 }, mobFamily = mobFamilies.HOBGOBLIN },   -- H-10
+        { position = { -196.704, -149.953,  0.000,  75 }, mobFamily = mobFamilies.HOBGOBLIN },   -- G-9
         { position = { -289.835, -357.025,  0.000,   5 }, mobFamily = mobFamilies.NOCTONBERRY }, -- F-10
         { position = {  366.014, -394.801, -0.176,  96 }, mobFamily = mobFamilies.NOCTONBERRY }, -- J-10
         { position = { -176.760,   26.774,  0.162,  40 }, mobFamily = mobFamilies.NOCTONBERRY }, -- G-8
@@ -200,8 +200,8 @@ local bannerTable =
         { position = {  -63.927, -126.052, -0.042, 153 }, mobFamily = mobFamilies.DEMISAHAGIN }, -- H-9
         { position = {  102.301,  442.978,  0.600,  17 }, mobFamily = mobFamilies.DEMISAHAGIN }, -- I-6
         { position = { -305.061, -438.904, 16.186, 132 }, mobFamily = mobFamilies.DEMISAHAGIN }, -- G-11
-        { position = {  381.229,  148.721,  3.908, 115 }, mobFamily = mobFamilies.HOBGOBLIN }, -- K-8
-        { position = { -647.367,   42.053,  0.000,  28 }, mobFamily = mobFamilies.HOBGOBLIN }, -- E-8
+        { position = {  381.229,  148.721,  3.908, 115 }, mobFamily = mobFamilies.HOBGOBLIN },   -- K-8
+        { position = { -647.367,   42.053,  0.000,  28 }, mobFamily = mobFamilies.HOBGOBLIN },   -- E-8
     },
 }
 
@@ -384,11 +384,9 @@ local function spawnBattleNMs(player, banner, zoneData)
     local mobFamily  = bannerInfo.mobFamily
     local zoneNMPool = nmPoolTable[zoneId]
     local nmPool     = zoneNMPool[mobFamily]
-    local offsets    = { { 2, 0 }, { -2, 0 }, { 0, 2 }, { 0, -2 } }
 
     local bannerPosition = bannerInfo.position
     local bx, by, bz     = bannerPosition[1], bannerPosition[2], bannerPosition[3]
-    local brot           = bannerPosition[4]
 
     -- Create a new table with the pool shuffled
     local candidates = utils.shuffle(nmPool)
@@ -396,19 +394,34 @@ local function spawnBattleNMs(player, banner, zoneData)
     for i = 1, 4 do
         local mobId = candidates[i]
         -- Catch case when pool has fewer than 4 mobs
+        -- TODO: Remove this when feature is fully implemented
         if mobId == nil then
             break
         end
 
-        local mob = SpawnMob(mobId)
-        if mob ~= nil then
-            local off = offsets[i]
-            mob:setSpawn(bx + off[1], by, bz + off[2], brot)
-            mob:setPos(bx + off[1], by, bz + off[2], brot)
-            addConfrontationGate(mob, levelCap)
-            mob:updateClaim(player)
-            table.insert(zoneData.nms, mobId)
+        -- Spawn is a normal distribution with a mean of 3.5 and standard deviation of 1.5.
+        -- The spawn distance is also restricted to [2.0, 7.5]. This is based on 234 samples.
+        local distance = utils.randomNormal(3.5, 1.5, 2.0, 7.5)
+
+        -- Scatter around the banner in random direction.
+        local angle = math.random() * 2 * math.pi                      -- 0 to 360 degrees
+        local pos   = GetFurthestValidPosition(banner, distance, angle) -- Drops mob on valid ground and snaps closer if terrain blocks the distance.
+
+        local mob = GetMobByID(mobId)
+
+        if pos ~= nil then
+            mob:setSpawn(pos.x, pos.y, pos.z, 0)
+
+        -- Account for weird situation where the GetFurthestValidPosition can't find any position due to navmesh
+        else
+            mob:setSpawn(bx, by, bz, 0)
         end
+
+        mob:spawn()
+        mob:lookAt(player:getPos()) -- face whoever triggered the banner
+        addConfrontationGate(mob, levelCap)
+        mob:updateClaim(player)
+        table.insert(zoneData.nms, mobId)
     end
 end
 
