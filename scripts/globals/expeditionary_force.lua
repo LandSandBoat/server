@@ -50,6 +50,17 @@ local bannerState =
     HIDDEN  = 3,
 }
 
+local mobFamilies = 
+{
+    DEMISAHAGIN = 0,
+    GIGAS = 1,
+    HALFORC = 2,
+    HOBGOBLIN = 3,
+    METAQUADAV = 4,
+    NOCTONBERRY = 5,
+    THEOYAGUDO = 6,
+}
+
 
 -----------------------------------
 -- Tables
@@ -73,34 +84,35 @@ local levelTable =
     [xi.zone.YUHTUNGA_JUNGLE       ] = 40,
 }
 
-local posBannerTable =
+local bannerTable =
 {
     [xi.zone.BEAUCEDINE_GLACIER] =
     {
         -- { x, y, z, rot }
-        {  193.614, -35.663,  -0.307, 255 }, -- I-8
-        {   20.169, 180.063, -80.061, 224 }, -- H-7
-        {  255.402, 382.940,   0.072, 110 }, -- J-6
-        { -326.264, 140.523, -99.694, 220 }, -- F-7
-        { -173.299, 150.200, -81.847, 246 }, -- G-7
+        { position = {  193.614, -35.663,  -0.307, 255 }, mobFamily = mobFamilies.GIGAS }, -- I-8 (Gigas)
+        {   20.169, 180.063, -80.061, 224 }, -- H-7 (Gigas)
+        { -326.264, 140.523, -99.694, 220 }, -- F-7 (Gigas)
+        {  255.402, 382.940,   0.072, 110 }, -- J-6 (Hobgoblin)
+        { -173.299, 150.200, -81.847, 246 }, -- G-7 (Hobgoblin)
     },
 
     [xi.zone.BUBURIMU_PENINSULA] =
     {
-        {  315.895,  361.453,  -0.025,  17 },
-        {  527.885,  -40.241,   0.486, 157 },
-        { -132.589, -314.261,  20.000, 230 },
-        { -446.510, -282.799,  -8.799, 240 },
-        {  101.491,  199.798, -23.090, 218 },
+        {  101.491,  199.798, -23.090, 218 }, -- (Hobgoblin)
+        {  527.885,  -40.241,   0.486, 157 }, -- (Hobgoblin)
+        {  315.895,  361.453,  -0.025,  17 }, -- (Theoyagudo)
+        { -132.589, -314.261,  20.000, 230 }, -- (Theoyagudo)
+        { -446.510, -282.799,  -8.799, 240 }, -- (Theoyagudo)
+
     },
 
     [xi.zone.CAPE_TERIGGAN] =
     {
-        {  126.583, -117.367, -0.194,  75 }, -- I-9
-        { -213.169,  254.085, -3.320, 181 }, -- G-6
-        {  251.977,   50.698,  5.241, 128 }, -- J-8
-        {  -29.071,  224.300, -9.694,  46 }, -- H-7
-        {  162.059,  250.538, -0.740, 139 }, -- I-6
+        {  126.583, -117.367, -0.194,  75 }, -- I-9 (Hobgoblin)
+        { -213.169,  254.085, -3.320, 181 }, -- G-6 (Hobgoblin)
+        {  251.977,   50.698,  5.241, 128 }, -- J-8 (Hobgoblin)
+        {  -29.071,  224.300, -9.694,  46 }, -- H-7 (Hobgoblin)
+        {  162.059,  250.538, -0.740, 139 }, -- I-6 (Hobgoblin)
     },
 
     [xi.zone.EASTERN_ALTEPA_DESERT] =
@@ -123,20 +135,20 @@ local posBannerTable =
 
     [xi.zone.MERIPHATAUD_MOUNTAINS] =
     {
-        {  592.850, -518.802, -16.741, 227 }, -- K-11
-        {  342.918,  529.219,  -1.109, 226 }, -- I-5
-        { -536.930,  338.845,   4.317, 200 }, -- D-6
-        { -559.025,   47.233, -16.761,  72 }, -- D-8
-        {  199.396, -527.072,  -0.723, 169 }, -- H-11
+        {  199.396, -527.072,  -0.723, 169 }, -- H-11 (Hobgoblin)
+        {  342.918,  529.219,  -1.109, 226 }, -- I-5  (Hobgoblin)
+        {  592.850, -518.802, -16.741, 227 }, -- K-11 (Theoyagudo)
+        { -536.930,  338.845,   4.317, 200 }, -- D-6  (Theoyagudo)
+        { -559.025,   47.233, -16.761,  72 }, -- D-8  (Theoyagudo)
     },
 
     [xi.zone.PASHHOW_MARSHLANDS] =
     {
-        { -172.764,   93.640, 25.125, 154 }, -- G-8
-        {  261.910,  211.070, 24.213,  85 }, -- J-7
-        {  140.080, -411.951, 23.971, 112 }, -- I-11
-        { -447.851, -219.899, 24.305, 113 }, -- E-10
-        { -460.959,  469.851, 24.203, 223 }, -- E-5
+        { -172.764,   93.640, 25.125, 154 }, -- G-8  (Hobgoblin)
+        {  261.910,  211.070, 24.213,  85 }, -- J-7  (Hobgoblin)
+        {  140.080, -411.951, 23.971, 112 }, -- I-11 (Metaquadav)
+        { -447.851, -219.899, 24.305, 113 }, -- E-10 (Metaquadav)
+        { -460.959,  469.851, 24.203, 223 }, -- E-5  (Metaquadav)
     },
 
     [xi.zone.QUFIM_ISLAND] =
@@ -150,60 +162,61 @@ local posBannerTable =
 
     [xi.zone.THE_SANCTUARY_OF_ZITAH] =
     {
-        {  643.619, -176.843,  0.842, 128 }, -- L-10
-        {  174.336, -413.606, -1.015,  59 }, -- I-11
-        { -512.058,  253.275, -0.975,  37 }, -- E-7
-        {  429.298, -604.489,  0.084, 231 }, -- J-12
-        { -399.822, -168.998,  0.162, 174 }, -- E-10
+        {  643.619, -176.843,  0.842, 128 }, -- L-10 (Hobgoblin)
+        {  174.336, -413.606, -1.015,  59 }, -- I-11 (Hobgoblin)
+        { -512.058,  253.275, -0.975,  37 }, -- E-7  (Hobgoblin)
+        {  429.298, -604.489,  0.084, 231 }, -- J-12 (Hobgoblin)
+        { -399.822, -168.998,  0.162, 174 }, -- E-10 (Hobgoblin)
     },
 
     [xi.zone.VALKURM_DUNES] =
     {
-        { -352.679,  327.661,  -8.856,  18 },
-        { -116.204, -113.608,   4.000, 160 },
-        { -522.404,  113.667,  -8.175, 141 },
-        {  643.175,    8.854,  -0.592,  10 },
-        {  478.713,  365.873, -16.140,  28 }, -- J-6
+        { -522.404,  113.667,  -8.175, 141 }, --     (Halforc)
+        {  643.175,    8.854,  -0.592,  10 }, --     (Halforc)
+        {  478.713,  365.873, -16.140,  28 }, -- J-6 (Hobgoblin)
+        { -352.679,  327.661,  -8.856,  18 }, --     (Metaquadav)
+        { -116.204, -113.608,   4.000, 160 }, --     (Metaquadav)
     },
 
     [xi.zone.XARCABARD] =
     {
-        {   32.788, -205.200, -24.162,   6 }, -- G-9
-        {   47.461,   66.281, -36.500, 201 }, -- G-7
-        { -160.590,  -87.061, -24.169, 174 }, -- F-8
-        {  320.399,  167.796,  -8.190,  52 }, -- I-6
-        {  153.000,   23.500, -36.438,  16 }, -- H-7
+        {   32.788, -205.200, -24.162,   6 }, -- G-9 (Gigas)
+        { -160.590,  -87.061, -24.169, 174 }, -- F-8 (Gigas)
+        {  153.000,   23.500, -36.438,  16 }, -- H-7 (Gigas)
+        {   47.461,   66.281, -36.500, 201 }, -- G-7 (Hobgoblin)
+        {  320.399,  167.796,  -8.190,  52 }, -- I-6 (Hobgoblin)
     },
 
     [xi.zone.YHOATOR_JUNGLE] =
     {
-        {  366.014, -394.801, -0.176,  96 }, -- J-10
-        {  -54.134, -405.397,  0.344, 199 }, -- H-10
-        { -289.835, -357.025,  0.000,   5 }, -- F-10
-        { -196.704, -149.953,  0.000,  75 }, -- G-9
-        { -176.760, 26.774, 0.162, 40}, -- G-8
+
+        {  -54.134, -405.397,  0.344, 199 }, -- H-10 (Hobgoblin)
+        { -196.704, -149.953,  0.000,  75 }, -- G-9  (Hobgoblin)
+        { -289.835, -357.025,  0.000,   5 }, -- F-10 (Noctonberry)
+        {  366.014, -394.801, -0.176,  96 }, -- J-10 (Noctonberry)
+        { -176.760,   26.774,  0.162,  40 }, -- G-8  (Noctonberry)
     },
 
     [xi.zone.YUHTUNGA_JUNGLE] =
     {
-        { 381.229, 148.721, 3.908, 115 }, -- K-8
-        { -63.927, -126.052, -0.042, 153 }, -- H-9
-        { 102.301, 442.978, 0.600, 17}, -- I-6
-        { -305.061, -438.904, 16.186, 132 }, -- G-11
-        { -647.367, 42.053, 0.000, 28 }, -- E-8
+        {  -63.927, -126.052, -0.042, 153 }, -- H-9  (Demisahagin)
+        {  102.301,  442.978,  0.600,  17 }, -- I-6  (Demisahagin)
+        { -305.061, -438.904, 16.186, 132 }, -- G-11 (Demisahagin)
+        {  381.229,  148.721,  3.908, 115 }, -- K-8  (Hobgoblin)
+        { -647.367,   42.053,  0.000,  28 }, -- E-8  (Hobgoblin)
     },
 }
 
--- CP awarded on collection, by count of participated regions the nation controls. Tiers 1-8 based on Wiki.
--- The data appears to follow a cubic, but then 13 would be 27,175 CP. This seems abnormal.
--- TODO: Update 9-13. Wiki only holds information up to 8 regions. Though, I do question the validity of 8.
+-- CP awarded on collection, by count of participated regions the nation controls. 
+-- When looking at the wiki, the data appears to follow a cubic. Extrapolating that would put 13 to be 27,175 CP.
+-- Instead the data from https://ffxiclopedia.fandom.com/wiki/Talk:Expeditionary_Force is used as it is more conservative.
 local cpRewardTable =
 {
     -- [regionsControlled] = cp
     [0]  = 0,
     [1]  = 3000,
     [2]  = 4200,
-    [3]  = 4680, -- +480 per region https://ffxiclopedia.fandom.com/wiki/Talk:Expeditionary_Force
+    [3]  = 4680, -- +480 per region
     [4]  = 5160,
     [5]  = 5640,
     [6]  = 6120,
@@ -227,7 +240,8 @@ local nmPoolTable =
 
     [xi.zone.BUBURIMU_PENINSULA] =
     {
-        { -- Hobgoblin
+        [mobFamilies.HOBGOBLIN] = 
+        {
             zones[xi.zone.BUBURIMU_PENINSULA].mob.HOBGOBLIN_BEASTMASTER,
             zones[xi.zone.BUBURIMU_PENINSULA].mob.HOBGOBLIN_BLACK_MAGE,
             zones[xi.zone.BUBURIMU_PENINSULA].mob.HOBGOBLIN_DARK_KNIGHT,
@@ -238,7 +252,8 @@ local nmPoolTable =
             zones[xi.zone.BUBURIMU_PENINSULA].mob.HOBGOBLIN_WHITE_MAGE,
         },
 
-        { -- Theoyaguda
+        [mobFamilies.THEOYAGUDO] = 
+        {
             zones[xi.zone.BUBURIMU_PENINSULA].mob.THEOYAGUDO_BARD,
             zones[xi.zone.BUBURIMU_PENINSULA].mob.THEOYAGUDO_BLACK_MAGE,
             zones[xi.zone.BUBURIMU_PENINSULA].mob.THEOYAGUDO_MONK,
