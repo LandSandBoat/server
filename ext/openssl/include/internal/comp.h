@@ -9,4 +9,7 @@
 
 #include <openssl/comp.h>
 
+/*
+ * Cleanup function for zlib compression resources.
+ */
 void ossl_comp_zlib_cleanup(void);
