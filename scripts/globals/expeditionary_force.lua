@@ -89,29 +89,29 @@ local bannerTable =
     [xi.zone.BEAUCEDINE_GLACIER] =
     {
         -- position = { x, y, z, rot }
-        { position = {  193.614, -35.663,  -0.307, 255 }, mobFamily = mobFamilies.GIGAS },     -- I-8
-        { position = {   20.169, 180.063, -80.061, 224 }, mobFamily = mobFamilies.GIGAS },     -- H-7
-        { position = { -326.264, 140.523, -99.694, 220 }, mobFamily = mobFamilies.GIGAS },     -- F-7
-        { position = {  255.402, 382.940,   0.072, 110 }, mobFamily = mobFamilies.HOBGOBLIN }, -- J-6
-        { position = { -173.299, 150.200, -81.847, 246 }, mobFamily = mobFamilies.HOBGOBLIN }, -- G-7
+        { position = {  193.614,   -0.307,  -35.663, 255 }, mobFamily = mobFamilies.GIGAS },     -- I-8
+        { position = {   20.169,  -80.061,  180.063, 224 }, mobFamily = mobFamilies.GIGAS },     -- H-7
+        { position = { -326.264,  -99.694,  140.523, 220 }, mobFamily = mobFamilies.GIGAS },     -- F-7
+        { position = {  255.402,    0.072,  382.940, 110 }, mobFamily = mobFamilies.HOBGOBLIN }, -- J-6
+        { position = { -173.299,  -81.847,  150.200, 246 }, mobFamily = mobFamilies.HOBGOBLIN }, -- G-7
     },
 
     [xi.zone.BUBURIMU_PENINSULA] =
     {
-        { position = {  101.491,  199.798, -23.090, 218 }, mobFamily = mobFamilies.HOBGOBLIN },
-        { position = {  527.885,  -40.241,   0.486, 157 }, mobFamily = mobFamilies.HOBGOBLIN },
-        { position = {  315.895,  361.453,  -0.025,  17 }, mobFamily = mobFamilies.THEOYAGUDO },
-        { position = { -132.589, -314.261,  20.000, 230 }, mobFamily = mobFamilies.THEOYAGUDO },
-        { position = { -446.510, -282.799,  -8.799, 240 }, mobFamily = mobFamilies.THEOYAGUDO },
+        { position = {  101.491,  -23.090,  199.798, 218 }, mobFamily = mobFamilies.HOBGOBLIN },
+        { position = {  527.885,    0.486,  -40.241, 157 }, mobFamily = mobFamilies.HOBGOBLIN },
+        { position = {  315.895,   -0.025,  361.453,  17 }, mobFamily = mobFamilies.THEOYAGUDO },
+        { position = { -132.589,   20.000, -314.261, 230 }, mobFamily = mobFamilies.THEOYAGUDO },
+        { position = { -446.510,   -8.799, -282.799, 240 }, mobFamily = mobFamilies.THEOYAGUDO },
     },
 
     [xi.zone.CAPE_TERIGGAN] =
     {
-        { position = {  126.583, -117.367, -0.194,  75 }, mobFamily = mobFamilies.HOBGOBLIN }, -- I-9
-        { position = { -213.169,  254.085, -3.320, 181 }, mobFamily = mobFamilies.HOBGOBLIN }, -- G-6
-        { position = {  251.977,   50.698,  5.241, 128 }, mobFamily = mobFamilies.HOBGOBLIN }, -- J-8
-        { position = {  -29.071,  224.300, -9.694,  46 }, mobFamily = mobFamilies.HOBGOBLIN }, -- H-7
-        { position = {  162.059,  250.538, -0.740, 139 }, mobFamily = mobFamilies.HOBGOBLIN }, -- I-6
+        { position = {  126.583,   -0.194, -117.367,  75 }, mobFamily = mobFamilies.HOBGOBLIN }, -- I-9
+        { position = { -213.169,   -3.320,  254.085, 181 }, mobFamily = mobFamilies.HOBGOBLIN }, -- G-6
+        { position = {  251.977,    5.241,   50.698, 128 }, mobFamily = mobFamilies.HOBGOBLIN }, -- J-8
+        { position = {  -29.071,   -9.694,  224.300,  46 }, mobFamily = mobFamilies.HOBGOBLIN }, -- H-7
+        { position = {  162.059,   -0.740,  250.538, 139 }, mobFamily = mobFamilies.HOBGOBLIN }, -- I-6
     },
 
     [xi.zone.EASTERN_ALTEPA_DESERT] =
@@ -134,20 +134,20 @@ local bannerTable =
 
     [xi.zone.MERIPHATAUD_MOUNTAINS] =
     {
-        { position = {  199.396, -527.072,  -0.723, 169 }, mobFamily = mobFamilies.HOBGOBLIN },  -- H-11
-        { position = {  342.918,  529.219,  -1.109, 226 }, mobFamily = mobFamilies.HOBGOBLIN },  -- I-5
-        { position = {  592.850, -518.802, -16.741, 227 }, mobFamily = mobFamilies.THEOYAGUDO }, -- K-11
-        { position = { -536.930,  338.845,   4.317, 200 }, mobFamily = mobFamilies.THEOYAGUDO }, -- D-6
-        { position = { -559.025,   47.233, -16.761,  72 }, mobFamily = mobFamilies.THEOYAGUDO }, -- D-8
+        { position = {  199.396,   -0.723, -527.072, 169 }, mobFamily = mobFamilies.HOBGOBLIN },  -- H-11
+        { position = {  342.918,   -1.109,  529.219, 226 }, mobFamily = mobFamilies.HOBGOBLIN },  -- I-5
+        { position = {  592.850,  -16.741, -518.802, 227 }, mobFamily = mobFamilies.THEOYAGUDO }, -- K-11
+        { position = { -536.930,    4.317,  338.845, 200 }, mobFamily = mobFamilies.THEOYAGUDO }, -- D-6
+        { position = { -559.025,  -16.761,   47.233,  72 }, mobFamily = mobFamilies.THEOYAGUDO }, -- D-8
     },
 
     [xi.zone.PASHHOW_MARSHLANDS] =
     {
-        { position = { -172.764,   93.640, 25.125, 154 }, mobFamily = mobFamilies.HOBGOBLIN },  -- G-8
-        { position = {  261.910,  211.070, 24.213,  85 }, mobFamily = mobFamilies.HOBGOBLIN },  -- J-7
-        { position = {  140.080, -411.951, 23.971, 112 }, mobFamily = mobFamilies.METAQUADAV }, -- I-11
-        { position = { -447.851, -219.899, 24.305, 113 }, mobFamily = mobFamilies.METAQUADAV }, -- E-10
-        { position = { -460.959,  469.851, 24.203, 223 }, mobFamily = mobFamilies.METAQUADAV }, -- E-5
+        { position = { -172.764,   25.125,   93.640, 154 }, mobFamily = mobFamilies.HOBGOBLIN },  -- G-8
+        { position = {  261.910,   24.213,  211.070,  85 }, mobFamily = mobFamilies.HOBGOBLIN },  -- J-7
+        { position = {  140.080,   23.971, -411.951, 112 }, mobFamily = mobFamilies.METAQUADAV }, -- I-11
+        { position = { -447.851,   24.305, -219.899, 113 }, mobFamily = mobFamilies.METAQUADAV }, -- E-10
+        { position = { -460.959,   24.203,  469.851, 223 }, mobFamily = mobFamilies.METAQUADAV }, -- E-5
     },
 
     [xi.zone.QUFIM_ISLAND] =
@@ -161,47 +161,47 @@ local bannerTable =
 
     [xi.zone.THE_SANCTUARY_OF_ZITAH] =
     {
-        { position = {  643.619, -176.843,  0.842, 128 }, mobFamily = mobFamilies.HOBGOBLIN }, -- L-10
-        { position = {  174.336, -413.606, -1.015,  59 }, mobFamily = mobFamilies.HOBGOBLIN }, -- I-11
-        { position = { -512.058,  253.275, -0.975,  37 }, mobFamily = mobFamilies.HOBGOBLIN }, -- E-7
-        { position = {  429.298, -604.489,  0.084, 231 }, mobFamily = mobFamilies.HOBGOBLIN }, -- J-12
-        { position = { -399.822, -168.998,  0.162, 174 }, mobFamily = mobFamilies.HOBGOBLIN }, -- E-10
+        { position = {  643.619,    0.842, -176.843, 128 }, mobFamily = mobFamilies.HOBGOBLIN }, -- L-10
+        { position = {  174.336,   -1.015, -413.606,  59 }, mobFamily = mobFamilies.HOBGOBLIN }, -- I-11
+        { position = { -512.058,   -0.975,  253.275,  37 }, mobFamily = mobFamilies.HOBGOBLIN }, -- E-7
+        { position = {  429.298,    0.084, -604.489, 231 }, mobFamily = mobFamilies.HOBGOBLIN }, -- J-12
+        { position = { -399.822,    0.162, -168.998, 174 }, mobFamily = mobFamilies.HOBGOBLIN }, -- E-10
     },
 
     [xi.zone.VALKURM_DUNES] =
     {
-        { position = { -522.404,  113.667,  -8.175, 141 }, mobFamily = mobFamilies.HALFORC },
-        { position = {  643.175,    8.854,  -0.592,  10 }, mobFamily = mobFamilies.HALFORC },
-        { position = {  478.713,  365.873, -16.140,  28 }, mobFamily = mobFamilies.HOBGOBLIN }, -- J-6
-        { position = { -352.679,  327.661,  -8.856,  18 }, mobFamily = mobFamilies.METAQUADAV },
-        { position = { -116.204, -113.608,   4.000, 160 }, mobFamily = mobFamilies.METAQUADAV },
+        { position = { -522.404,   -8.175,  113.667, 141 }, mobFamily = mobFamilies.HALFORC },
+        { position = {  643.175,   -0.592,    8.854,  10 }, mobFamily = mobFamilies.HALFORC },
+        { position = {  478.713,  -16.140,  365.873,  28 }, mobFamily = mobFamilies.HOBGOBLIN }, -- J-6
+        { position = { -352.679,   -8.856,  327.661,  18 }, mobFamily = mobFamilies.METAQUADAV },
+        { position = { -116.204,    4.000, -113.608, 160 }, mobFamily = mobFamilies.METAQUADAV },
     },
 
     [xi.zone.XARCABARD] =
     {
-        { position = {   32.788, -205.200, -24.162,   6 }, mobFamily = mobFamilies.GIGAS },     -- G-9
-        { position = { -160.590,  -87.061, -24.169, 174 }, mobFamily = mobFamilies.GIGAS },     -- F-8
-        { position = {  153.000,   23.500, -36.438,  16 }, mobFamily = mobFamilies.GIGAS },     -- H-7
-        { position = {   47.461,   66.281, -36.500, 201 }, mobFamily = mobFamilies.HOBGOBLIN }, -- G-7
-        { position = {  320.399,  167.796,  -8.190,  52 }, mobFamily = mobFamilies.HOBGOBLIN }, -- I-6
+        { position = {   32.788,  -24.162, -205.200,   6 }, mobFamily = mobFamilies.GIGAS },     -- G-9
+        { position = { -160.590,  -24.169,  -87.061, 174 }, mobFamily = mobFamilies.GIGAS },     -- F-8
+        { position = {  153.000,  -36.438,   23.500,  16 }, mobFamily = mobFamilies.GIGAS },     -- H-7
+        { position = {   47.461,  -36.500,   66.281, 201 }, mobFamily = mobFamilies.HOBGOBLIN }, -- G-7
+        { position = {  320.399,   -8.190,  167.796,  52 }, mobFamily = mobFamilies.HOBGOBLIN }, -- I-6
     },
 
     [xi.zone.YHOATOR_JUNGLE] =
     {
-        { position = {  -54.134, -405.397,  0.344, 199 }, mobFamily = mobFamilies.HOBGOBLIN },   -- H-10
-        { position = { -196.704, -149.953,  0.000,  75 }, mobFamily = mobFamilies.HOBGOBLIN },   -- G-9
-        { position = { -289.835, -357.025,  0.000,   5 }, mobFamily = mobFamilies.NOCTONBERRY }, -- F-10
-        { position = {  366.014, -394.801, -0.176,  96 }, mobFamily = mobFamilies.NOCTONBERRY }, -- J-10
-        { position = { -176.760,   26.774,  0.162,  40 }, mobFamily = mobFamilies.NOCTONBERRY }, -- G-8
+        { position = {  -54.134,    0.344, -405.397, 199 }, mobFamily = mobFamilies.HOBGOBLIN },   -- H-10
+        { position = { -196.704,    0.000, -149.953,  75 }, mobFamily = mobFamilies.HOBGOBLIN },   -- G-9
+        { position = { -289.835,    0.000, -357.025,   5 }, mobFamily = mobFamilies.NOCTONBERRY }, -- F-10
+        { position = {  366.014,   -0.176, -394.801,  96 }, mobFamily = mobFamilies.NOCTONBERRY }, -- J-10
+        { position = { -176.760,    0.162,   26.774,  40 }, mobFamily = mobFamilies.NOCTONBERRY }, -- G-8
     },
 
     [xi.zone.YUHTUNGA_JUNGLE] =
     {
-        { position = {  -63.927, -126.052, -0.042, 153 }, mobFamily = mobFamilies.DEMISAHAGIN }, -- H-9
-        { position = {  102.301,  442.978,  0.600,  17 }, mobFamily = mobFamilies.DEMISAHAGIN }, -- I-6
-        { position = { -305.061, -438.904, 16.186, 132 }, mobFamily = mobFamilies.DEMISAHAGIN }, -- G-11
-        { position = {  381.229,  148.721,  3.908, 115 }, mobFamily = mobFamilies.HOBGOBLIN },   -- K-8
-        { position = { -647.367,   42.053,  0.000,  28 }, mobFamily = mobFamilies.HOBGOBLIN },   -- E-8
+        { position = {  -63.927,   -0.042, -126.052, 153 }, mobFamily = mobFamilies.DEMISAHAGIN }, -- H-9
+        { position = {  102.301,    0.600,  442.978,  17 }, mobFamily = mobFamilies.DEMISAHAGIN }, -- I-6
+        { position = { -305.061,   16.186, -438.904, 132 }, mobFamily = mobFamilies.DEMISAHAGIN }, -- G-11
+        { position = {  381.229,    3.908,  148.721, 115 }, mobFamily = mobFamilies.HOBGOBLIN },   -- K-8
+        { position = { -647.367,    0.000,   42.053,  28 }, mobFamily = mobFamilies.HOBGOBLIN },   -- E-8
     },
 }
 
