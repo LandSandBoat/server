@@ -11,7 +11,7 @@ local entity = {}
 
 entity.phList =
 {
-    [ID.mob.DA_DHA_HUNDREDMASK - 1] = ID.mob.DA_DHA_HUNDREDMASK,
+    [ID.mob.DA_DHA_HUNDREDMASK - 1] = ID.mob.DA_DHA_HUNDREDMASK, -- Confirmed on retail
 }
 
 entity.onMobDeath = function(mob, player, optParams)
