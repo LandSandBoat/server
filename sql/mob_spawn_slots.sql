@@ -38,6 +38,23 @@ INSERT INTO `mob_spawn_slots` VALUES (2,24,0);
 INSERT INTO `mob_spawn_slots` VALUES (2,25,0);
 INSERT INTO `mob_spawn_slots` VALUES (2,26,0);
 
+-- Uleguerand Range
+INSERT INTO `mob_spawn_slots` VALUES (5,1,0);
+INSERT INTO `mob_spawn_slots` VALUES (5,2,0);
+INSERT INTO `mob_spawn_slots` VALUES (5,3,0);
+INSERT INTO `mob_spawn_slots` VALUES (5,4,0);
+INSERT INTO `mob_spawn_slots` VALUES (5,6,0);
+INSERT INTO `mob_spawn_slots` VALUES (5,7,0);
+INSERT INTO `mob_spawn_slots` VALUES (5,8,0);
+INSERT INTO `mob_spawn_slots` VALUES (5,9,0);
+INSERT INTO `mob_spawn_slots` VALUES (5,10,0);
+INSERT INTO `mob_spawn_slots` VALUES (5,11,0);
+INSERT INTO `mob_spawn_slots` VALUES (5,12,0);
+INSERT INTO `mob_spawn_slots` VALUES (5,13,0);
+INSERT INTO `mob_spawn_slots` VALUES (5,14,0);
+INSERT INTO `mob_spawn_slots` VALUES (5,15,0);
+INSERT INTO `mob_spawn_slots` VALUES (5,16,0);
+
 -- Psoxja
 INSERT INTO `mob_spawn_slots` VALUES (9,1,0);
 INSERT INTO `mob_spawn_slots` VALUES (9,2,0);
