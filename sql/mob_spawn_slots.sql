@@ -83,6 +83,22 @@ INSERT INTO `mob_spawn_slots` VALUES (11,9,0);
 INSERT INTO `mob_spawn_slots` VALUES (11,10,0);
 INSERT INTO `mob_spawn_slots` VALUES (11,11,0);
 
+-- Newton Movalpolos
+INSERT INTO `mob_spawn_slots` VALUES (12,1,0);
+INSERT INTO `mob_spawn_slots` VALUES (12,2,0);
+INSERT INTO `mob_spawn_slots` VALUES (12,3,0);
+INSERT INTO `mob_spawn_slots` VALUES (12,4,0);
+INSERT INTO `mob_spawn_slots` VALUES (12,5,0);
+INSERT INTO `mob_spawn_slots` VALUES (12,6,0);
+INSERT INTO `mob_spawn_slots` VALUES (12,7,0);
+INSERT INTO `mob_spawn_slots` VALUES (12,8,0);
+INSERT INTO `mob_spawn_slots` VALUES (12,9,0);
+INSERT INTO `mob_spawn_slots` VALUES (12,10,0);
+INSERT INTO `mob_spawn_slots` VALUES (12,11,0);
+INSERT INTO `mob_spawn_slots` VALUES (12,12,0);
+INSERT INTO `mob_spawn_slots` VALUES (12,13,0);
+INSERT INTO `mob_spawn_slots` VALUES (12,14,0);
+
 -- Promyvion - Dem
 INSERT INTO `mob_spawn_slots` VALUES (18,1,0);
 INSERT INTO `mob_spawn_slots` VALUES (18,2,0);
