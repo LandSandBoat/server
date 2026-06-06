@@ -75,6 +75,28 @@ local exForceNumberRequiredTable =
     [3] = 4,
 }
 
+-- CP awarded on collection, by count of participated regions the nation controls. 
+-- When looking at the wiki, the data appears to follow a cubic. Extrapolating that would put 13 to be 27,175 CP.
+-- Instead the data from https://ffxiclopedia.fandom.com/wiki/Talk:Expeditionary_Force is used as it is more conservative.
+local exForceCPRewardTable =
+{
+    -- [regionsControlled] = cp
+    [0]  = 0,
+    [1]  = 3000,
+    [2]  = 4200,
+    [3]  = 4680, -- +480 per region
+    [4]  = 5160,
+    [5]  = 5640,
+    [6]  = 6120,
+    [7]  = 6600,
+    [8]  = 7080,
+    [9]  = 7560,
+    [10] = 8040,
+    [11] = 8520,
+    [12] = 9000,
+    [13] = 9480,
+}
+
 -- Helper to parse region out of the exForceMenu data
 local function getExForceRegion(option)
     for regionId, data in pairs(exForceMenuData) do
@@ -166,7 +188,7 @@ local function getExForceAvailable(player, npc, guardNation)
 end
 
 -- This is to display 
-local function getExForceReward(player, guardNation)
+local function getExForceTravel(player, guardNation)
     -- This is to catch instances where the player gets the badge and goes to a guard at another nation's embassy.
     if player:getNation() ~= guardNation then
         return 0
@@ -188,6 +210,48 @@ local function getExForceReward(player, guardNation)
     -- regionRow 6-20 = eventOption (0x20006-0x20014) minus the 0x20000 base.
     local regionRow = region.option - 0x20000
     return 0x80000000 + bit.lshift(regionRow, 5)
+end
+
+local function collectExForceReward(player, guard)
+    local stamp = player:getCharVar('[ExpForce]NextConquestTally')
+    if stamp == 0 or stamp >= NextConquestTally() then
+        return
+    end
+
+    -- Pay CP only if still the nation you signed up as; a swap forfeits it.
+    if player:getCharVar('[ExpForce]Nation') == player:getNation() then
+        local participation = player:getCharVar('[ExpForce]Participation')
+        local controlled    = 0
+
+        for regionId in pairs(exForceMenuData) do
+            if
+                bit.band(participation, bit.lshift(1, regionId)) ~= 0 and
+                GetRegionOwner(regionId) == player:getNation()
+            then
+                controlled = controlled + 1
+            end
+        end
+
+        local cp = exForceCPRewardTable[controlled]
+        player:addCP(cp)
+        -- TODO: Display CP message
+
+    else
+
+        -- TODO: Do a nation swap check
+    end
+
+    -- Show the message and remove each spent insignia.
+    for _, data in pairs(exForceMenuData) do
+        if player:hasKeyItem(data.ki) then
+            player:showText(guard, 12055, data.ki) -- TODO: Update with correct message variable
+            player:delKeyItem(data.ki)
+        end
+    end
+
+    player:setCharVar('[ExpForce]Participation', 0)
+    player:setCharVar('[ExpForce]NextConquestTally', 0)
+    player:setCharVar('[ExpForce]Nation', 0)
 end
 
 -----------------------------------
@@ -1322,6 +1386,14 @@ xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, gu
         return
     end
 
+    -- EXPEDITIONARY FORCE: Collect expired insignia and give awards
+    if
+        pNation == guardNation and
+        guardType <= xi.conquest.guard.FOREIGN
+    then
+        collectExForceReward(player, npc)
+    end
+
     -- SUPPLY RUNS
     if
         pNation == guardNation and
@@ -1353,7 +1425,7 @@ xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, gu
         local a5 = player:getTeleport(guardNation)
         local a6 = getArg6(player)
         local a7 = player:getCP()
-        local a8 = getExForceReward(player, guardNation)
+        local a8 = getExForceTravel(player, guardNation)
 
         player:startEvent(guardEvent, a1, a2, a3, a4, a5, a6, a7, a8)
 
@@ -1619,7 +1691,16 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
 
         -- Replace badge with glyph
         player:delStatusEffect(xi.effect.EF_BADGE)
-        npcUtil.giveKeyItem(player, exForceMenuData[regionId].ki) -- TODO: Is this a temporary key item?
+        npcUtil.giveKeyItem(player, exForceMenuData[regionId].ki)
+
+        -- Only stamp when starting a fresh batch in case of a tally that lands mid-menu.
+        if player:getCharVar('[ExpForce]NextConquestTally') == 0 then
+            -- Needed to know when the key item expires. Okay to overwrite as cleanup occurs when initiating conversation.
+            player:setCharVar('[ExpForce]NextConquestTally', NextConquestTally())
+
+            -- Mark the nation the KI is affiliated with. Necessary for when a nation swap occurs
+            player:setCharVar('[ExpForce]Nation', player:getNation())
+        end
 
         -- If you have a glyph from the city, you cannot get a second one.
         local cityGlyphs = exForceCityGlyphTable[pNation]

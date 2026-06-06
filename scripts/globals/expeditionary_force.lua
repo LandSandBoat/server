@@ -205,28 +205,6 @@ local bannerTable =
     },
 }
 
--- CP awarded on collection, by count of participated regions the nation controls. 
--- When looking at the wiki, the data appears to follow a cubic. Extrapolating that would put 13 to be 27,175 CP.
--- Instead the data from https://ffxiclopedia.fandom.com/wiki/Talk:Expeditionary_Force is used as it is more conservative.
-local cpRewardTable =
-{
-    -- [regionsControlled] = cp
-    [0]  = 0,
-    [1]  = 3000,
-    [2]  = 4200,
-    [3]  = 4680, -- +480 per region
-    [4]  = 5160,
-    [5]  = 5640,
-    [6]  = 6120,
-    [7]  = 6600,
-    [8]  = 7080,
-    [9]  = 7560,
-    [10] = 8040,
-    [11] = 8520,
-    [12] = 9000,
-    [13] = 9480,
-}
-
 
 -- Fill out by mob species.
 local nmPoolTable =
@@ -481,13 +459,17 @@ local function watchDog(npc)
     end
 end
 
+-- Log EF participation for a region by setting its bit.
 local function recordParticipation(player, regionId)
-    -- TODO: IMPLEMENT
+    local participation = player:getCharVar('[ExpForce]Participation')
+    player:setCharVar('[ExpForce]Participation', bit.bor(participation, bit.lshift(1, regionId)))
 end
 
 -----------------------------------
 -- Public functions
 -----------------------------------
+
+
 
 -- This code runs whenever the zone is initialized as well as every time the Expeditionary Force has been reset.
 xi.expeditionaryForce.initZone = function(zone)
@@ -660,10 +642,16 @@ xi.expeditionaryForce.onMobDeath = function(mob, player, optParams)
 
     end
 
-    -- AWARD TITLE
-    -- Give title to everyone in the alliance regardless of nation or KI
+    -- AWARD TITLE AND PARTICIPATION
     if player:checkDistance(mob) <= 50 then -- TODO: Check distance
+        -- Award all alliance members title
         player:addTitle(xi.title.EXPEDITIONARY_TROOPER)
+
+        -- Mark all alliance members participating in Expeditionary Force with participation
+        local regionId = mob:getCurrentRegion()
+        if player:hasKeyItem(regionKITable[regionId]) then
+            recordParticipation(player, regionId)
+        end
     end
 
     -- MESSAGE
@@ -719,13 +707,15 @@ xi.expeditionaryForce.onChestOpen = function(player)
 
     -- Only give influence if this is a EF region and the player has the KI
     if
-        insignia ~= nil or
-        not player:hasKeyItem(insignia)
+        insignia ~= nil and
+        player:hasKeyItem(insignia)
     then
         
         -- Influence gained ranges from about 2.5 % - 0.5 % per chest
         -- Since LSB uses linear scale, give about 1 % influence each chest
         -- 1 % influence is equvalent to 667 xp in unowned region.
+
+        -- Leveled from 7 - 34 and got about a 1 % swing. Opened a coffer and got a 2 % swing.
         -- TODO: Modify to scaling in the future
         -- TODO: Have them gain 50 influence
         
