@@ -122,6 +122,12 @@ INSERT INTO `mob_spawn_slots` VALUES (18,17,0);
 INSERT INTO `mob_spawn_slots` VALUES (54,1,0);
 INSERT INTO `mob_spawn_slots` VALUES (54,2,0);
 
+-- Mamook
+INSERT INTO `mob_spawn_slots` VALUES (65,1,0);
+INSERT INTO `mob_spawn_slots` VALUES (65,2,0);
+INSERT INTO `mob_spawn_slots` VALUES (65,3,0);
+INSERT INTO `mob_spawn_slots` VALUES (65,4,0);
+
 -- East Ronfaure
 INSERT INTO `mob_spawn_slots` VALUES (101,1,0);
 INSERT INTO `mob_spawn_slots` VALUES (101,2,0);
