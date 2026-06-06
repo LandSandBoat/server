@@ -345,6 +345,24 @@ INSERT INTO `mob_spawn_slots` VALUES (111,14,0);
 INSERT INTO `mob_spawn_slots` VALUES (111,15,0);
 INSERT INTO `mob_spawn_slots` VALUES (111,16,0);
 
+-- Xarcabard
+INSERT INTO `mob_spawn_slots` VALUES (112,1,0);
+INSERT INTO `mob_spawn_slots` VALUES (112,2,0);
+INSERT INTO `mob_spawn_slots` VALUES (112,3,0);
+INSERT INTO `mob_spawn_slots` VALUES (112,4,0);
+INSERT INTO `mob_spawn_slots` VALUES (112,5,0);
+INSERT INTO `mob_spawn_slots` VALUES (112,6,0);
+INSERT INTO `mob_spawn_slots` VALUES (112,7,0);
+INSERT INTO `mob_spawn_slots` VALUES (112,8,0);
+INSERT INTO `mob_spawn_slots` VALUES (112,9,0);
+INSERT INTO `mob_spawn_slots` VALUES (112,10,0);
+INSERT INTO `mob_spawn_slots` VALUES (112,11,0);
+INSERT INTO `mob_spawn_slots` VALUES (112,12,0);
+INSERT INTO `mob_spawn_slots` VALUES (112,13,0);
+INSERT INTO `mob_spawn_slots` VALUES (112,14,0);
+INSERT INTO `mob_spawn_slots` VALUES (112,15,0);
+INSERT INTO `mob_spawn_slots` VALUES (112,16,0);
+
 -- Cape Teriggan
 INSERT INTO `mob_spawn_slots` VALUES (113,1,0);
 INSERT INTO `mob_spawn_slots` VALUES (113,2,0);
