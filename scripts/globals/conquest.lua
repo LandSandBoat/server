@@ -26,7 +26,7 @@ local conquestConstants =
 -- (LOCAL) expeditionary forces
 -----------------------------------
 
--- TODO: Do I need zone?
+-- Keep in this order as it is necessary to mimic retail during the removal of the key items.
 local exForceMenuData =
 {
     [xi.region.ZULKHEIM]        = { option = 0x20006, zone = xi.zone.VALKURM_DUNES,          menuBit = 0x000040, lvl = 20, ki = xi.ki.ZULKHEIM_EF_INSIGNIA        },
@@ -76,14 +76,14 @@ local exForceNumberRequiredTable =
 }
 
 -- CP awarded on collection, by count of participated regions the nation controls. 
--- When looking at the wiki, the data appears to follow a cubic. Extrapolating that would put 13 to be 27,175 CP.
+-- When looking at the wiki, the data appears to follow a cubic. Extrapolating that would put 13 to be 27,175 CP. This seems unrealistic.
 -- Instead the data from https://ffxiclopedia.fandom.com/wiki/Talk:Expeditionary_Force is used as it is more conservative.
 local exForceCPRewardTable =
 {
     -- [regionsControlled] = cp
     [0]  = 0,
-    [1]  = 3000,
-    [2]  = 4200,
+    [1]  = 3000, -- Verified in capture
+    [2]  = 4200, -- Verified in capture
     [3]  = 4680, -- +480 per region
     [4]  = 5160,
     [5]  = 5640,

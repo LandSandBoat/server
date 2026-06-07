@@ -736,11 +736,9 @@ xi.expeditionaryForce.onMobDespawn = function(mob)
 end
 
 
-
 -- Award influence for opening a chest/coffer with the region's insignia.
 -- Caller checks the insignia and resolves the regionId.
--- TODO: Real formula. Placeholder constant.
--- TODO: Wire to player:gainInfluencePoints once binding lands.
+-- TODO: This is only wired to give influence when a non-quest item and non-map key item is obtained. Double check this.
 xi.expeditionaryForce.onChestOpen = function(player)
     local regionId = player:getCurrentRegion()
     local insignia = regionKITable[regionId]
@@ -750,18 +748,25 @@ xi.expeditionaryForce.onChestOpen = function(player)
         insignia ~= nil and
         expForceAvailableToPlayer(player, regionId)
     then
-        
-        -- Influence gained ranges from about 2.5 % - 0.5 % per chest
-        -- Since LSB uses linear scale, give about 1 % influence each chest
-        -- 1 % influence is equvalent to 667 xp in unowned region.
 
+        -- Influence gained ranges from about 2.5 % - 0.5 % per chest
         -- Leveled from 7 - 34 and got about a 1 % swing. Opened a coffer and got a 2 % swing.
         -- TODO: Modify to scaling in the future
-        -- TODO: Have them gain 50 influence
-        
-        -- Display message
-        -- TODO: Get Zone ID
-        -- TODO: Add messages to zone
+        player:gainInfluencePoints(450)
+
+        -- Nation flavor text
+        local ID           = zones[player:getZoneID()]
+        local playerNation = player:getNation()
+
+        if playerNation == xi.nation.SANDORIA then
+            player:messageSpecial(ID.text.EXP_FORCE_KILL_SANDORIA)
+
+        elseif playerNation == xi.nation.BASTOK then
+            player:messageSpecial(ID.text.EXP_FORCE_CHEST_BASTOK)
+
+        elseif playerNation == xi.nation.WINDURST then
+            player:messageSpecial(ID.text.EXP_FORCE_CHEST_WINDURST)
+        end
 
         recordParticipation(player, regionId)
     end

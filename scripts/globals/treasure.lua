@@ -2004,6 +2004,9 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
         reward = itemId
     end
 
+    -- Award Expeditionary Force credit when a chest or coffer gives loot/gil
+    xi.expeditionaryForce.onChestOpen(player)
+
     -- Handle illusion timers.
     if containerType == treasureType.CHEST then
         npc:setLocalVar('illusionCooldown', GetSystemTime() + math.random(xi.settings.main.CHEST_MIN_ILLUSION_TIME, xi.settings.main.CHEST_MAX_ILLUSION_TIME))
