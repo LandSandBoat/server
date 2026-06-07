@@ -352,8 +352,7 @@ end
 
 
 -- Spawn 4 NMs at the banner
--- TODO: It appears mobs in older zones are at a random 0 - 360 from the banner. Newer zones use 0 - 180 equally spaced. Distance is from 2.5 - 7 yalms with preference towards 3 - 4 yalms.
--- TODO: It's possible that only certain mob groups spawn at specific banners. To capture this would take about 40+ hours.
+-- TODO: It appears mobs in older zones are at a random 0 - 360 from the banner. Newer zones use 0 - 180 equally spaced. Distance is from 2.5 - 7 yalms with preference towards 3.5 yalms.
 local function spawnBattleNMs(player, banner, zoneData)
     local zoneId     = banner:getZoneID()
     local levelCap   = levelTable[zoneId]
@@ -419,7 +418,7 @@ local function hideBanner(zoneId, banner)
     zoneData.creditNation = nil
     zoneData.state        = bannerState.HIDDEN
 
-    -- Respawn the banner
+    -- Respawn the banner in 5 minutes
     banner:timer(5 * 60 * 1000, function(npcArg)
         xi.expeditionaryForce.initZone(npcArg:getZone())
     end)
@@ -468,7 +467,8 @@ local function recordParticipation(player, regionId)
     player:setCharVar('[ExpForce]Participation', bit.bor(participation, bit.lshift(1, regionId)))
 end
 
--- Mark a mob as gone. When all NMs are accounted for, transition to CLEARED.
+-- Mark a mob as gone. When all NMs are accounted for, transition to CLEARED. 
+-- This fires during onDeath and onDespawn as the flag needs to update on the death of the last mob or despawn of the last mob if the mob is not killed.
 local function removeNMFromList(mob)
     local zoneId = mob:getZoneID()
     local zoneData = expForceZoneData[zoneId]
@@ -497,6 +497,7 @@ end
 
 -- This checks if the expeditionary force is allowed to be spawned. 
 -- A player must have the KI and the region must not be owned by the player's nation or ally.
+-- All checks are necessary just in case the player is holding the key item after tally update.
 local function expForceAvailableToPlayer(player, region)
     local ownerNation  = GetRegionOwner(region)
     local playerNation = player:getNation()
@@ -534,6 +535,7 @@ xi.expeditionaryForce.initZone = function(zone)
 
     -- Build the zone's runtime record
     local zoneData = expForceZoneData[zoneId]
+    -- This branch is for when the zone is initialized
     if zoneData == nil then
         zoneData =
         {
@@ -577,26 +579,25 @@ xi.expeditionaryForce.initZone = function(zone)
 
     local pos = bannerOptions[newBannerIndex].position
     banner:setPos(pos[1], pos[2], pos[3], pos[4])
-    banner:setStatus(xi.status.NORMAL) -- forces visible even if the SQL ships hidden
+    banner:setStatus(xi.status.NORMAL) -- forces visible
 
     -- Store the position index for later to make sure the banner does not spawn in the same place twice
     zoneData.bannerIndex = newBannerIndex
 end
 
 
+-- Handle all states of the Beastmen's Banner
+-- The flow of Expeditionary Force goes from IDLE to ACTIVE to CLEARED to HIDDEN then back to IDLE
 xi.expeditionaryForce.onBannerTrigger = function(player, npc)
     local zoneId   = npc:getZoneID()
     local ID       = zones[zoneId]
     local zoneData = expForceZoneData[zoneId]
 
-
-    -- Handle all states of the Beastmen's Banner
-    -- The flow of Expeditionary Force goes from IDLE to ACTIVE to CLEARED to HIDDEN then back to IDLE
     -- IDLE
     if zoneData.state == bannerState.IDLE then
         local region = npc:getCurrentRegion()
 
-        -- Find out if an alliance member in the zone has level sync already
+        -- Find out if an alliance member in the zone has level sync already. If so, they can not activate the flag.
         local allianceMemberCapped = false
         for _, member in pairs(player:getAlliance()) do
             if member:getZoneID() == zoneId and member:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
@@ -605,12 +606,12 @@ xi.expeditionaryForce.onBannerTrigger = function(player, npc)
             end
         end
 
-        -- If the player does have the regions insignia (only gate)
+        -- Gate is if no alliance member is level synched, player has key item, nation does not hold the region, nation's ally does not hold the region.
         if
             expForceAvailableToPlayer(player, region) and
             not allianceMemberCapped
         then
-            -- Credit nation is based on the player who clicked the banner
+            -- Credit nation is based on the player who clicked the banner, not the player who killed the nm.
             zoneData.creditNation = player:getNation()
 
             -- Level cap every alliance member in zone
@@ -620,7 +621,7 @@ xi.expeditionaryForce.onBannerTrigger = function(player, npc)
                     -- Add level restriction if in zone
                     addLevelRestriction(member, levelTable[zoneId])
 
-                    -- Display banner message
+                    -- Display banner message to all members
                     member:messageSpecial(ID.text.BEASTMEN_BANNER_CURSE) -- There was a curse on the beastmen's banner!
                 end
             end
@@ -632,7 +633,7 @@ xi.expeditionaryForce.onBannerTrigger = function(player, npc)
             -- Launch Watch Dog function: this will catch if an NM's despawn doesn't trigger.
             watchDog(npc)
 
-        -- If the player does not have the regions insignia, just send a message.
+        -- If the player is ineligable to initiate, just send a message.
         else
             player:messageSpecial(ID.text.BEASTMEN_BANNER) -- There is a beastmen's banner.
         end
@@ -656,7 +657,7 @@ xi.expeditionaryForce.onBannerTrigger = function(player, npc)
         if player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
             player:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
             player:messageSpecial(ID.text.BEASTMEN_BANNER_LIFTED) -- The curse of the beastmen's banner has been lifted!
-        
+
         -- Default banner text.
         else
             player:messageSpecial(ID.text.BEASTMEN_BANNER) -- There is a beastmen's banner.
@@ -686,6 +687,7 @@ xi.expeditionaryForce.onMobDeath = function(mob, player, optParams)
 
         -- AWARD INFLUENCE
         -- https://bluebell.exblog.jp/1747138/ - Suggests 900 points
+        -- TODO: Justify
         AddConquestInfluence(900, creditNation, mob:getCurrentRegion()) -- TODO: verify influence amount
 
         -- SEND ZONE MESSAGE
@@ -700,12 +702,11 @@ xi.expeditionaryForce.onMobDeath = function(mob, player, optParams)
                 person:messageText(person, ID.text.EXP_FORCE_KILL_WINDURST, 5) -- 5 = Grey: messageText event
             end
         end
-        
-
     end
 
     -- AWARD TITLE AND PARTICIPATION
-    if player:checkDistance(mob) <= 50 then -- TODO: Check distance
+    -- You don't need to be participating in Expeditionary Force or even be the right level to get the title.
+    if player:checkDistance(mob) <= 50 then -- TODO: Verify that there is a distance based restriction. Set it to standard xp restriction.
         -- Award all alliance members title
         player:addTitle(xi.title.EXPEDITIONARY_TROOPER)
 
@@ -727,14 +728,12 @@ xi.expeditionaryForce.onMobDeath = function(mob, player, optParams)
     elseif creditNation == xi.nation.WINDURST then
         player:messageSpecial(ID.text.REGION_POINTS_WINDURST) -- showText event
     end
-
 end
 
 -- Fires on despawn. This is for if mobs despawn naturally without death. 3 minute depsawn timer.
 xi.expeditionaryForce.onMobDespawn = function(mob)
     removeNMFromList(mob)
 end
-
 
 -- Award influence for opening a chest/coffer with the region's insignia.
 -- Caller checks the insignia and resolves the regionId.
@@ -743,7 +742,7 @@ xi.expeditionaryForce.onChestOpen = function(player)
     local regionId = player:getCurrentRegion()
     local insignia = regionKITable[regionId]
 
-    -- Only give influence if this is a EF region and the player has the KI
+    -- Only give influence if this is a EF region, the player has the KI, and the player's nation or allied nation does not control the region.
     if
         insignia ~= nil and
         expForceAvailableToPlayer(player, regionId)

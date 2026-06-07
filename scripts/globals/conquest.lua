@@ -155,7 +155,7 @@ local function getExForceAvailable(player, npc, guardNation)
     end
 
     -- Only one of the nine gate guards can trigger this
-    if 
+    if
         exForceGateGlyphTable[npc:getName()] == nil or
         player:getNation() ~= guardNation
     then
@@ -186,7 +186,7 @@ local function getExForceAvailable(player, npc, guardNation)
     return mask
 end
 
--- This is to display 
+-- This is to display the warp information after getting the badge, quitting EF, or giving the CP reward.
 local function getExForceReward(player, guardNation)
     -- This is to catch instances where the player gets the badge and goes to a guard at another nation's embassy.
     if player:getNation() ~= guardNation then
@@ -205,7 +205,7 @@ local function getExForceReward(player, guardNation)
     end
 
     local region = exForceMenuData[badge:getPower()]
-    -- This is a guard. The starter regions exist in the client but were never implemented into Retail.
+    -- This is a guard. The starter regions exist in the client but were removed from Retail.
     if region == nil then
         return 0
     end
@@ -215,6 +215,7 @@ local function getExForceReward(player, guardNation)
     return 0x80000000 + bit.lshift(regionRow, 5)
 end
 
+-- Check if we are in the next tally and remove insignia and calculate CP reward
 local function collectExForceInsignia(player, guard)
     local stamp = player:getCharVar('[ExpForce]NextConquestTally')
     if stamp == 0 or stamp >= NextConquestTally() then
@@ -230,7 +231,7 @@ local function collectExForceInsignia(player, guard)
         end
     end
 
-    -- Calculate the CP owed
+    -- Calculate the CP reward
     local participation = player:getCharVar('[ExpForce]Participation')
     local controlled    = 0
 
@@ -1381,6 +1382,7 @@ xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, gu
     end
 
     -- EXPEDITIONARY FORCE: Collect expired insignia and give awards
+    -- Any of the 3 gate guards or the embassy guards for the player's nation.
     if
         pNation == guardNation and
         guardType <= xi.conquest.guard.FOREIGN
@@ -1444,23 +1446,23 @@ xi.conquest.overseerOnEventUpdate = function(player, csid, option, guardNation)
     local stock = getStock(player, guardNation, option)
 
     -- EXPEDITIONARY FORCE - Region select
-    if 
+    if
         option >= 131078 and
         option <= 131092
     then
         local regionId       = getExForceRegion(option)
-        local numberRequired = exForceNumberRequiredTable[ GetNationRank( guardNation ) ]
-        local minLevel       = exForceMenuData[ regionId ].lvl
+        local numberRequired = exForceNumberRequiredTable[GetNationRank(guardNation)]
+        local minLevel       = exForceMenuData[regionId].lvl
         local failCode       = exForceValidateSignup(player, guardNation, minLevel, numberRequired)
-        
+
         -- One or more party members are below the minimum required level
         if failCode == 4 then
             player:updateEvent(4, 0, 0, 0, 0, 0, minLevel)
-        
+
         -- All other fail codes
         elseif failCode ~= 0 then
             player:updateEvent(failCode)
-        
+
         -- Badge granted in overseerOnEventFinish
         else
             player:updateEvent(5)
@@ -1678,14 +1680,11 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
         player:addStatusEffect(xi.effect.EF_BADGE, { power = regionId, origin = player, flag = xi.effectFlag.ON_ZONE })
 
     -- EXPEDITIONARY FORCE - Teleport
+    -- Order is: Signet, Remove badge, Obtain KI, obtain Glyph. 
     elseif option == 5 then
         local badge    = player:getStatusEffect(xi.effect.EF_BADGE)
         local regionId = badge:getPower()
         local overseer = player:getEventTarget()
-
-        -- Replace badge with glyph
-        player:delStatusEffect(xi.effect.EF_BADGE)
-        npcUtil.giveKeyItem(player, exForceMenuData[regionId].ki)
 
         -- Only stamp when starting a fresh batch in case of a tally that lands mid-menu.
         if player:getCharVar('[ExpForce]NextConquestTally') == 0 then
@@ -1693,25 +1692,26 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
             player:setCharVar('[ExpForce]NextConquestTally', NextConquestTally())
         end
 
+        -- Bestow Signet
+        -- TODO: Do I split off the code above into a function since it is a repeat?
+        local duration = (pRank + GetNationRank(pNation) + 3) * 3600
+        player:delStatusEffectsByFlag(xi.effectFlag.INFLUENCE, true)
+        player:addStatusEffect(xi.effect.SIGNET, { duration = duration, origin = player })
+        player:messageSpecial(mOffset + 1) -- 'You've received your nation's Signet!'
+
+        -- Replace badge with key item
+        player:delStatusEffect(xi.effect.EF_BADGE)
+        npcUtil.giveKeyItem(player, exForceMenuData[regionId].ki)
+
         -- If you have a glyph from the city, you cannot get a second one.
         local cityGlyphs = exForceCityGlyphTable[pNation]
-        if 
+        if
             not player:hasItem(cityGlyphs[1]) and
             not player:hasItem(cityGlyphs[2]) and
             not player:hasItem(cityGlyphs[3])
         then
             npcUtil.giveItem(player, exForceGateGlyphTable[overseer:getName()])
         end
-      
-        -- TODO: Check if a player already has a KI, if new text is displayed. 
-
-        -- Bestow Signet
-        -- TODO: Do I split off the code above?
-        local duration = (pRank + GetNationRank(pNation) + 3) * 3600
-        player:delStatusEffectsByFlag(xi.effectFlag.INFLUENCE, true)
-        player:addStatusEffect(xi.effect.SIGNET, { duration = duration, origin = player })
-        player:messageSpecial(mOffset + 1) -- 'You've received your nation's Signet!'
-        -- TODO: Are there any other messages?
 
         -- Outpost warp player
         player:addStatusEffect(xi.effect.TELEPORT, {
