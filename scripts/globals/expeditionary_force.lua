@@ -59,6 +59,7 @@ local mobFamilies =
     METAQUADAV  = 4,
     NOCTONBERRY = 5,
     THEOYAGUDO  = 6,
+    CONTANTICAN = 7,
 }
 
 
@@ -116,11 +117,12 @@ local bannerTable =
 
     [xi.zone.EASTERN_ALTEPA_DESERT] =
     {
-        {},
-        {},
-        {},
-        {},
-        {},
+        { position = {  -63.319, -10.629,  408.180,  77 }, mobFamily = mobFamilies.CONTANTICAN }, -- G-5
+        { position = {  463.219, -10.608,  248.849, 212 }, mobFamily = mobFamilies.CONTANTICAN }, -- J-6
+        { position = {  329.054,   6.684, -330.958, 201 }, mobFamily = mobFamilies.CONTANTICAN }, -- J-10
+        { position = { -332.218,  -1.203,  126.229,  60 }, mobFamily = mobFamilies.HOBGOBLIN },   -- E-7
+        { position = {   27.934, -10.019,  398.640, 126 }, mobFamily = mobFamilies.HOBGOBLIN },   -- H-6
+
     },
 
     [xi.zone.JUGNER_FOREST] =

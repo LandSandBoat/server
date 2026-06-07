@@ -1677,6 +1677,7 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
         option <= 131092
     then
         local regionId = getExForceRegion(option)
+        player:delStatusEffect(xi.effect.EF_BADGE) -- We can get here if we already have the badge. No need for check as delStatusEffect covers it.
         player:addStatusEffect(xi.effect.EF_BADGE, { power = regionId, origin = player, flag = xi.effectFlag.ON_ZONE })
 
     -- EXPEDITIONARY FORCE - Teleport
