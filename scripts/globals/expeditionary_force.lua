@@ -400,6 +400,8 @@ local function spawnBattleNMs(player, banner, zoneData)
         addConfrontationGate(mob, levelCap)
         mob:updateClaim(player)
         table.insert(zoneData.nms, mobId)
+
+        zoneData.numAlive = zoneData.numAlive + 1
     end
 end
 
@@ -413,6 +415,7 @@ local function hideBanner(zoneId, banner)
     -- Clean up data and set HIDDEN state
     zoneData.nms             = {}
     zoneData.gone            = {}
+    zoneData.numAlive        = 0
     zoneData.creditNation    = nil
     zoneData.state           = bannerState.HIDDEN
 
@@ -465,11 +468,36 @@ local function recordParticipation(player, regionId)
     player:setCharVar('[ExpForce]Participation', bit.bor(participation, bit.lshift(1, regionId)))
 end
 
+-- Mark a mob as gone. When all NMs are accounted for, transition to CLEARED.
+local function removeNMFromList(mob)
+    local zoneId = mob:getZoneID()
+    local zoneData = expForceZoneData[zoneId]
+
+    local mobId = mob:getID()
+    
+    -- Check if mob is already in list
+    if not zoneData.gone[mobId] then
+        -- Add the mob to the gone list
+        zoneData.gone[mobId] = true
+        zoneData.numAlive    = zoneData.numAlive - 1
+
+        -- Battle is cleared
+        if zoneData.numAlive <= 0 then
+            zoneData.state = bannerState.CLEARED
+
+            -- The banner will disappear after 60 seconds.
+            local ID     = zones[zoneId]
+            local banner = GetNPCByID(ID.npc.BEASTMENS_BANNER)
+            banner:timer(60 * 1000, function(npcArg)
+                hideBanner(npcArg:getZoneID(), npcArg)
+            end)
+        end
+    end
+end
+
 -----------------------------------
 -- Public functions
 -----------------------------------
-
-
 
 -- This code runs whenever the zone is initialized as well as every time the Expeditionary Force has been reset.
 xi.expeditionaryForce.initZone = function(zone)
@@ -484,11 +512,21 @@ xi.expeditionaryForce.initZone = function(zone)
             state        = bannerState.IDLE,
             nms          = {},
             gone         = {},
+            numAlive     = 0,
             creditNation = nil,
             bannerIndex  = nil,
         }
         expForceZoneData[zoneId] = zoneData
+
+    -- This branch runs when respawning a banner
+    else
+        zoneData.state        = bannerState.IDLE
+        zoneData.nms          = {}
+        zoneData.gone         = {}
+        zoneData.numAlive     = 0
+        zoneData.creditNation = nil
     end
+        
 
     -- Set the banner to a random position and set the status to normal
     local banner           = GetNPCByID(ID.npc.BEASTMENS_BANNER)
@@ -515,9 +553,6 @@ xi.expeditionaryForce.initZone = function(zone)
 
     -- Store the position index for later to make sure the banner does not spawn in the same place twice
     zoneData.bannerIndex = newBannerIndex
-
-    -- Reset to IDLE on respawn
-    zoneData.state = bannerState.IDLE
 end
 
 
@@ -548,9 +583,7 @@ xi.expeditionaryForce.onBannerTrigger = function(player, npc)
             not allianceMemberCapped
         then
             -- Credit nation is based on the player who clicked the banner
-            zoneData.creditNation    = player:getNation()
-            zoneData.nms             = {}
-            zoneData.gone            = {}
+            zoneData.creditNation = player:getNation()
 
             -- Level cap every alliance member in zone
             -- Get members in-range
@@ -621,6 +654,7 @@ xi.expeditionaryForce.onMobDeath = function(mob, player, optParams)
 
     -- These occur once per kill.
     if optParams.isKiller then
+        removeNMFromList(mob)
 
         -- AWARD INFLUENCE
         -- https://bluebell.exblog.jp/1747138/ - Suggests 900 points
@@ -668,31 +702,9 @@ xi.expeditionaryForce.onMobDeath = function(mob, player, optParams)
 
 end
 
--- Mark a mob as despawned. When all NMs are accounted for, transition to CLEARED.
+-- Fires on despawn. This is for if mobs despawn naturally without death. 3 minute depsawn timer.
 xi.expeditionaryForce.onMobDespawn = function(mob)
-    local zoneId   = mob:getZoneID()
-    local zoneData = expForceZoneData[zoneId]
-
-    -- Add the mob to the gone list
-    zoneData.gone[mob:getID()] = true
-
-    local goneCount = 0
-    for _ in pairs(zoneData.gone) do
-        goneCount = goneCount + 1
-    end
-
-    -- Figure out if number of mobs gone equials the number spawned
-    -- Battle is cleared
-    if goneCount >= #zoneData.nms then
-        zoneData.state = bannerState.CLEARED
-
-        -- The banner will disappear after 60 seconds.
-        local ID     = zones[zoneId]
-        local banner = GetNPCByID(ID.npc.BEASTMENS_BANNER)
-        banner:timer(60 * 1000, function(npcArg)
-            hideBanner(npcArg:getZoneID(), npcArg)
-        end)
-    end
+    removeNMFromList(mob)
 end
 
 
