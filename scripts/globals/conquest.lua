@@ -155,11 +155,10 @@ local function getExForceAvailable(player, npc, guardNation)
     end
 
     -- Only one of the nine gate guards can trigger this
-    if exForceGateGlyphTable[npc:getName()] == nil then
-        return 0
-    end
-
-    if player:getNation() ~= guardNation then
+    if 
+        exForceGateGlyphTable[npc:getName()] == nil or
+        player:getNation() ~= guardNation
+    then
         return 0
     end
 
@@ -188,7 +187,7 @@ local function getExForceAvailable(player, npc, guardNation)
 end
 
 -- This is to display 
-local function getExForceTravel(player, guardNation)
+local function getExForceReward(player, guardNation)
     -- This is to catch instances where the player gets the badge and goes to a guard at another nation's embassy.
     if player:getNation() ~= guardNation then
         return 0
@@ -197,9 +196,13 @@ local function getExForceTravel(player, guardNation)
     -- Only show menu if the player has the EF badge
     local badge = player:getStatusEffect(xi.effect.EF_BADGE)
     if badge == nil then
+        -- A paid reward is stashed and waiting
+        if player:getCharVar('[ExpForce]AwardCP') > 0 then
+            return 0x400
+        end
+
         return 0
     end
-
 
     local region = exForceMenuData[badge:getPower()]
     -- This is a guard. The starter regions exist in the client but were never implemented into Retail.
@@ -212,46 +215,37 @@ local function getExForceTravel(player, guardNation)
     return 0x80000000 + bit.lshift(regionRow, 5)
 end
 
-local function collectExForceReward(player, guard)
+local function collectExForceInsignia(player, guard)
     local stamp = player:getCharVar('[ExpForce]NextConquestTally')
     if stamp == 0 or stamp >= NextConquestTally() then
         return
     end
 
-    -- Pay CP only if still the nation you signed up as; a swap forfeits it.
-    if player:getCharVar('[ExpForce]Nation') == player:getNation() then
-        local participation = player:getCharVar('[ExpForce]Participation')
-        local controlled    = 0
-
-        for regionId in pairs(exForceMenuData) do
-            if
-                bit.band(participation, bit.lshift(1, regionId)) ~= 0 and
-                GetRegionOwner(regionId) == player:getNation()
-            then
-                controlled = controlled + 1
-            end
-        end
-
-        local cp = exForceCPRewardTable[controlled]
-        player:addCP(cp)
-        -- TODO: Display CP message
-
-    else
-
-        -- TODO: Do a nation swap check
-    end
-
-    -- Show the message and remove each spent insignia.
+    -- Dispose of every expired insignia on the way in (paid and unpaid both do this).
+    local mOffset = zones[player:getZoneID()].text.CONQUEST
     for _, data in pairs(exForceMenuData) do
         if player:hasKeyItem(data.ki) then
-            player:showText(guard, 12055, data.ki) -- TODO: Update with correct message variable
+            player:showText(guard, mOffset + 121, data.ki)
             player:delKeyItem(data.ki)
         end
     end
 
+    -- Calculate the CP owed
+    local participation = player:getCharVar('[ExpForce]Participation')
+    local controlled    = 0
+
+    for regionId in pairs(exForceMenuData) do
+        if
+            bit.band(participation, bit.lshift(1, regionId)) ~= 0 and
+            GetRegionOwner(regionId) == player:getNation()
+        then
+            controlled = controlled + 1
+        end
+    end
+
+    player:setCharVar('[ExpForce]AwardCP', exForceCPRewardTable[controlled])
     player:setCharVar('[ExpForce]Participation', 0)
     player:setCharVar('[ExpForce]NextConquestTally', 0)
-    player:setCharVar('[ExpForce]Nation', 0)
 end
 
 -----------------------------------
@@ -1391,7 +1385,7 @@ xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, gu
         pNation == guardNation and
         guardType <= xi.conquest.guard.FOREIGN
     then
-        collectExForceReward(player, npc)
+        collectExForceInsignia(player, npc)
     end
 
     -- SUPPLY RUNS
@@ -1425,7 +1419,7 @@ xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, gu
         local a5 = player:getTeleport(guardNation)
         local a6 = getArg6(player)
         local a7 = player:getCP()
-        local a8 = getExForceTravel(player, guardNation)
+        local a8 = getExForceReward(player, guardNation)
 
         player:startEvent(guardEvent, a1, a2, a3, a4, a5, a6, a7, a8)
 
@@ -1697,9 +1691,6 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
         if player:getCharVar('[ExpForce]NextConquestTally') == 0 then
             -- Needed to know when the key item expires. Okay to overwrite as cleanup occurs when initiating conversation.
             player:setCharVar('[ExpForce]NextConquestTally', NextConquestTally())
-
-            -- Mark the nation the KI is affiliated with. Necessary for when a nation swap occurs
-            player:setCharVar('[ExpForce]Nation', player:getNation())
         end
 
         -- If you have a glyph from the city, you cannot get a second one.
@@ -1730,6 +1721,13 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
             icon     = 0,
             subPower = regionId,
         })
+
+    -- EXPEDITIONARY FORCE - Grant CP
+    elseif option == 7 then
+        local cp = player:getCharVar('[ExpForce]AwardCP')
+        player:addCP(cp)
+        player:messageSpecial(mOffset + 122, cp) -- "You received x conquest points!"
+        player:setCharVar('[ExpForce]AwardCP', 0)
 
     -- EXPEDITIONARY FORCE - Quit
     elseif option == 8 then

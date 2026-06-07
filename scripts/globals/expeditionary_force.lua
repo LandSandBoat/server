@@ -35,8 +35,8 @@ xi.expeditionaryForce.enabledTable =
 -----------------------------------
 -- Data
 -----------------------------------
--- Runtime state. One record per EF zone, built lazily on the first banner click.
--- If you modify this file during runtime, you must relaunch map as expForceZoneData is erased.
+-- Runtime state. One record per EF zone, built lazily on zone initialize..
+-- If you modify this lua file during runtime, you must relaunch map as expForceZoneData is erased.
 local expForceZoneData = {}
 
 -----------------------------------
@@ -53,12 +53,12 @@ local bannerState =
 local mobFamilies = 
 {
     DEMISAHAGIN = 0,
-    GIGAS = 1,
-    HALFORC = 2,
-    HOBGOBLIN = 3,
-    METAQUADAV = 4,
+    GIGAS       = 1,
+    HALFORC     = 2,
+    HOBGOBLIN   = 3,
+    METAQUADAV  = 4,
     NOCTONBERRY = 5,
-    THEOYAGUDO = 6,
+    THEOYAGUDO  = 6,
 }
 
 
@@ -382,7 +382,7 @@ local function spawnBattleNMs(player, banner, zoneData)
         local distance = utils.randomNormal(3.5, 1.5, 2.0, 7.5)
 
         -- Scatter around the banner in random direction.
-        local angle = math.random() * 2 * math.pi                      -- 0 to 360 degrees
+        local angle = math.random() * 2 * math.pi                       -- 0 to 360 degrees
         local pos   = GetFurthestValidPosition(banner, distance, angle) -- Drops mob on valid ground and snaps closer if terrain blocks the distance.
 
         local mob = GetMobByID(mobId)
@@ -413,11 +413,11 @@ local function hideBanner(zoneId, banner)
     banner:setStatus(xi.status.DISAPPEAR)
 
     -- Clean up data and set HIDDEN state
-    zoneData.nms             = {}
-    zoneData.gone            = {}
-    zoneData.numAlive        = 0
-    zoneData.creditNation    = nil
-    zoneData.state           = bannerState.HIDDEN
+    zoneData.nms          = {}
+    zoneData.gone         = {}
+    zoneData.numAlive     = 0
+    zoneData.creditNation = nil
+    zoneData.state        = bannerState.HIDDEN
 
     -- Respawn the banner
     banner:timer(5 * 60 * 1000, function(npcArg)
@@ -493,6 +493,34 @@ local function removeNMFromList(mob)
             end)
         end
     end
+end
+
+-- This checks if the expeditionary force is allowed to be spawned. 
+-- A player must have the KI and the region must not be owned by the player's nation or ally.
+local function expForceAvailableToPlayer(player, region)
+    local ownerNation  = GetRegionOwner(region)
+    local playerNation = player:getNation()
+
+    return
+        player:hasKeyItem(regionKITable[region]) and
+        ownerNation ~= playerNation and
+        not xi.conquest.areAllies(playerNation, ownerNation)
+end
+
+-- Dispose of every Expeditionary Force insignia the player is holding.
+-- Called on a nation change, since insignias are tied to the player's old allegiance.
+-- Returns true if at least one insignia was removed.
+xi.expeditionaryForce.disposeInsigniaNationSwap = function(player)
+    local removed = false
+
+    for _, ki in pairs(regionKITable) do
+        if player:hasKeyItem(ki) then
+            player:delKeyItem(ki)
+            removed = true
+        end
+    end
+
+    return removed
 end
 
 -----------------------------------
@@ -579,7 +607,7 @@ xi.expeditionaryForce.onBannerTrigger = function(player, npc)
 
         -- If the player does have the regions insignia (only gate)
         if
-            player:hasKeyItem(regionKITable[region]) and
+            expForceAvailableToPlayer(player, region) and
             not allianceMemberCapped
         then
             -- Credit nation is based on the player who clicked the banner
@@ -720,7 +748,7 @@ xi.expeditionaryForce.onChestOpen = function(player)
     -- Only give influence if this is a EF region and the player has the KI
     if
         insignia ~= nil and
-        player:hasKeyItem(insignia)
+        expForceAvailableToPlayer(player, regionId)
     then
         
         -- Influence gained ranges from about 2.5 % - 0.5 % per chest

@@ -56,6 +56,12 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setNation(newNation)
         player:setGil(player:getGil() - cost)
         player:setRankPoints(0)
+
+        -- Remove Expeditionary Force insignias
+        if xi.expeditionaryForce.disposeInsigniaNationSwap(player) then
+            local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
+            player:showText(npc, ID.text.INVALID_ENSIGNIAS)
+        end
     end
 end
 
