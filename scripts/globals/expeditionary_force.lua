@@ -17,40 +17,46 @@ xi.expeditionaryForce.enabled = true
 
 xi.expeditionaryForce.enabledTable =
 {
-    [xi.zone.BEAUCEDINE_GLACIER    ] = false,
-    [xi.zone.BUBURIMU_PENINSULA    ] = true,
-    [xi.zone.CAPE_TERIGGAN         ] = false,
-    [xi.zone.EASTERN_ALTEPA_DESERT ] = false,
-    [xi.zone.JUGNER_FOREST         ] = false,
-    [xi.zone.MERIPHATAUD_MOUNTAINS ] = false,
-    [xi.zone.PASHHOW_MARSHLANDS    ] = false,
-    [xi.zone.QUFIM_ISLAND          ] = false,
+    [xi.zone.BEAUCEDINE_GLACIER]     = false,
+    [xi.zone.BUBURIMU_PENINSULA]     = true,
+    [xi.zone.CAPE_TERIGGAN]          = false,
+    [xi.zone.EASTERN_ALTEPA_DESERT]  = false,
+    [xi.zone.JUGNER_FOREST]          = false,
+    [xi.zone.MERIPHATAUD_MOUNTAINS]  = false,
+    [xi.zone.PASHHOW_MARSHLANDS]     = false,
+    [xi.zone.QUFIM_ISLAND]           = false,
     [xi.zone.THE_SANCTUARY_OF_ZITAH] = false,
-    [xi.zone.VALKURM_DUNES         ] = false,
-    [xi.zone.XARCABARD             ] = false,
-    [xi.zone.YHOATOR_JUNGLE        ] = false,
-    [xi.zone.YUHTUNGA_JUNGLE       ] = false,
+    [xi.zone.VALKURM_DUNES]          = false,
+    [xi.zone.XARCABARD]              = false,
+    [xi.zone.YHOATOR_JUNGLE]         = false,
+    [xi.zone.YUHTUNGA_JUNGLE]        = false,
 }
+
+-----------------------------------
+-- Retail differences
+-----------------------------------
+-- Mob Behavior: On retail, mobs can aggro players who are not able to enage them.
+-- Mob Behavior: On retail, mobs do not wander once they get back to their spawns after deaggroing.
 
 -----------------------------------
 -- Data
 -----------------------------------
--- Runtime state. One record per EF zone, built lazily on zone initialize..
+-- Runtime state. One record per EF zone, built lazily on zone initialize.
 -- If you modify this lua file during runtime, you must relaunch map as expForceZoneData is erased.
 local expForceZoneData = {}
 
 -----------------------------------
 -- Enums
 -----------------------------------
-local bannerState = 
-{ 
+local bannerState =
+{
     IDLE    = 0,
     ACTIVE  = 1,
     CLEARED = 2,
     HIDDEN  = 3,
 }
 
-local mobFamilies = 
+local mobFamilies =
 {
     DEMISAHAGIN = 0,
     GIGAS       = 1,
@@ -62,7 +68,6 @@ local mobFamilies =
     CONTANTICAN = 7,
 }
 
-
 -----------------------------------
 -- Tables
 -----------------------------------
@@ -70,19 +75,19 @@ local mobFamilies =
 local levelTable =
 {
     -- [zoneId] = level_cap
-    [xi.zone.BEAUCEDINE_GLACIER    ] = 40,
-    [xi.zone.BUBURIMU_PENINSULA    ] = 30,
-    [xi.zone.CAPE_TERIGGAN         ] = 99, -- Uncapped
-    [xi.zone.EASTERN_ALTEPA_DESERT ] = 50,
-    [xi.zone.JUGNER_FOREST         ] = 30,
-    [xi.zone.MERIPHATAUD_MOUNTAINS ] = 30,
-    [xi.zone.PASHHOW_MARSHLANDS    ] = 30,
-    [xi.zone.QUFIM_ISLAND          ] = 30,
+    [xi.zone.BEAUCEDINE_GLACIER]     = 40,
+    [xi.zone.BUBURIMU_PENINSULA]     = 30,
+    [xi.zone.CAPE_TERIGGAN]          = 99, -- Uncapped
+    [xi.zone.EASTERN_ALTEPA_DESERT]  = 50,
+    [xi.zone.JUGNER_FOREST]          = 30,
+    [xi.zone.MERIPHATAUD_MOUNTAINS]  = 30,
+    [xi.zone.PASHHOW_MARSHLANDS]     = 30,
+    [xi.zone.QUFIM_ISLAND]           = 30,
     [xi.zone.THE_SANCTUARY_OF_ZITAH] = 40,
-    [xi.zone.VALKURM_DUNES         ] = 30,
-    [xi.zone.XARCABARD             ] = 50,
-    [xi.zone.YHOATOR_JUNGLE        ] = 50,
-    [xi.zone.YUHTUNGA_JUNGLE       ] = 40,
+    [xi.zone.VALKURM_DUNES]          = 30,
+    [xi.zone.XARCABARD]              = 50,
+    [xi.zone.YHOATOR_JUNGLE]         = 50,
+    [xi.zone.YUHTUNGA_JUNGLE]        = 40,
 }
 
 local bannerTable =
@@ -347,7 +352,6 @@ local function addConfrontationGate(mob, levelCap)
 
     mob:addStatusEffect(xi.effect.LEVEL_RESTRICTION, {
         power    = cap,
-        duration = 900,
         origin   = mob,
         flag     = xi.effectFlag.CONFRONTATION,
     })
@@ -558,8 +562,7 @@ xi.expeditionaryForce.initZone = function(zone)
         zoneData.gone         = {}
         zoneData.numAlive     = 0
         zoneData.creditNation = nil
-    end
-        
+    end   
 
     -- Set the banner to a random position and set the status to normal
     local banner           = GetNPCByID(ID.npc.BEASTMENS_BANNER)
@@ -570,7 +573,7 @@ xi.expeditionaryForce.initZone = function(zone)
     -- When the zone loads, there are no previous positions so we can pick from any of the available options.
     if lastBannerIndex == nil then
         newBannerIndex = math.random(#bannerOptions)
-    
+
     -- We will just roll 1 less number. If we happen to land on the last index, we just select the last value in the position table.
     -- Note: If you only have one banner position, this will break! This should never happen as all zones have more than 1 position.
     else
