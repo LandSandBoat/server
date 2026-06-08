@@ -4751,6 +4751,26 @@ uint32 GetExpNEXTLevel(uint8 charlvl)
 
 /************************************************************************
  *                                                                       *
+ *  Level used to calculate EXP.                                         *
+ *                                                                       *
+ ************************************************************************/
+
+uint8 GetExpLevel(CBattleEntity* PMember)
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(PMember))
+    {
+        CStatusEffect* PRestriction = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_RESTRICTION);
+        if (PRestriction && PRestriction->HasEffectFlag(EFFECTFLAG_EXP_FROM_ACTUAL_LEVEL))
+        {
+            return PChar->jobs.job[PChar->GetMJob()];
+        }
+    }
+
+    return PMember->GetMLevel();
+}
+
+/************************************************************************
+ *                                                                       *
  *  Distributes gil to party members.                                    *
  *                                                                       *
  ************************************************************************/
@@ -4916,7 +4936,7 @@ void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
 
     uint8       pcinzone = 0;
     uint8       minlevel = 0;
-    uint8       maxlevel = PChar->GetMLevel();
+    uint8       maxlevel = GetExpLevel(PChar);
     REGION_TYPE region   = PChar->loc.zone->GetRegionID();
 
     if (PChar->PParty)
@@ -4952,13 +4972,14 @@ void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
                 {
                     maxlevel = PMember->PPet->GetMLevel();
                 }
-                if (PMember->GetMLevel() > maxlevel)
+                const uint8 memberExpLevel = GetExpLevel(PMember);
+                if (memberExpLevel > maxlevel)
                 {
-                    maxlevel = PMember->GetMLevel();
+                    maxlevel = memberExpLevel;
                 }
-                else if (PMember->GetMLevel() < minlevel)
+                else if (memberExpLevel < minlevel)
                 {
-                    minlevel = PMember->GetMLevel();
+                    minlevel = memberExpLevel;
                 }
                 pcinzone++;
             }
@@ -4982,7 +5003,7 @@ void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
             bool chainactive = false;
 
             const int16 moblevel    = PMob->GetMLevel() + PMob->getMod(Mod::EXP_LVL_MOD);
-            const uint8 memberlevel = PMember->GetMLevel();
+            const uint8 memberlevel = GetExpLevel(PMember);
 
             EMobDifficulty mobCheck = CheckMob(maxlevel, PMob);
             float          exp      = static_cast<float>(GetBaseExp(maxlevel, moblevel));
@@ -5028,11 +5049,11 @@ void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
                     }
 
                     // Per monster caps pulled from: https://ffxiclopedia.fandom.com/wiki/Experience_Points
-                    if (PMember->GetMLevel() <= 50)
+                    if (memberlevel <= 50)
                     {
                         exp = std::fmin(exp, 400.0f);
                     }
-                    else if (PMember->GetMLevel() <= 60)
+                    else if (memberlevel <= 60)
                     {
                         exp = std::fmin(exp, 500.0f);
                     }
@@ -5073,27 +5094,27 @@ void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
                         }
                         else
                         {
-                            if (PMember->GetMLevel() <= 10)
+                            if (memberlevel <= 10)
                             {
                                 PMember->expChain.chainTime = timer::now() + 50s;
                             }
-                            else if (PMember->GetMLevel() <= 20)
+                            else if (memberlevel <= 20)
                             {
                                 PMember->expChain.chainTime = timer::now() + 100s;
                             }
-                            else if (PMember->GetMLevel() <= 30)
+                            else if (memberlevel <= 30)
                             {
                                 PMember->expChain.chainTime = timer::now() + 150s;
                             }
-                            else if (PMember->GetMLevel() <= 40)
+                            else if (memberlevel <= 40)
                             {
                                 PMember->expChain.chainTime = timer::now() + 200s;
                             }
-                            else if (PMember->GetMLevel() <= 50)
+                            else if (memberlevel <= 50)
                             {
                                 PMember->expChain.chainTime = timer::now() + 250s;
                             }
-                            else if (PMember->GetMLevel() <= 60)
+                            else if (memberlevel <= 60)
                             {
                                 PMember->expChain.chainTime = timer::now() + 300s;
                             }
@@ -5104,7 +5125,7 @@ void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
                             PMember->expChain.chainNumber = 1;
                         }
 
-                        if (chainactive && PMember->GetMLevel() <= 10)
+                        if (chainactive && memberlevel <= 10)
                         {
                             switch (PMember->expChain.chainNumber)
                             {
@@ -5131,7 +5152,7 @@ void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
                                     break;
                             }
                         }
-                        else if (chainactive && PMember->GetMLevel() <= 20)
+                        else if (chainactive && memberlevel <= 20)
                         {
                             switch (PMember->expChain.chainNumber)
                             {
@@ -5158,7 +5179,7 @@ void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
                                     break;
                             }
                         }
-                        else if (chainactive && PMember->GetMLevel() <= 30)
+                        else if (chainactive && memberlevel <= 30)
                         {
                             switch (PMember->expChain.chainNumber)
                             {
@@ -5185,7 +5206,7 @@ void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
                                     break;
                             }
                         }
-                        else if (chainactive && PMember->GetMLevel() <= 40)
+                        else if (chainactive && memberlevel <= 40)
                         {
                             switch (PMember->expChain.chainNumber)
                             {
@@ -5212,7 +5233,7 @@ void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
                                     break;
                             }
                         }
-                        else if (chainactive && PMember->GetMLevel() <= 50)
+                        else if (chainactive && memberlevel <= 50)
                         {
                             switch (PMember->expChain.chainNumber)
                             {
@@ -5239,7 +5260,7 @@ void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
                                     break;
                             }
                         }
-                        else if (chainactive && PMember->GetMLevel() <= 60)
+                        else if (chainactive && memberlevel <= 60)
                         {
                             switch (PMember->expChain.chainNumber)
                             {

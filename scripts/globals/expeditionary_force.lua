@@ -127,7 +127,7 @@ local bannerTable =
 
     [xi.zone.JUGNER_FOREST] =
     {
-        {},
+        { position = {  279.408, -15.592, -547.181, 176 }, mobFamily = mobFamilies.HALFORC },   -- J-11
         {},
         {},
         {},
@@ -333,7 +333,7 @@ local function addLevelRestriction(player, levelCap)
         power    = cap,
         duration = 900, -- 15 min if not removed at the banner or zone
         origin   = player,
-        flag     = xi.effectFlag.ON_ZONE + xi.effectFlag.CONFRONTATION,
+        flag     = xi.effectFlag.ON_ZONE + xi.effectFlag.CONFRONTATION + xi.effectFlag.EXP_FROM_ACTUAL_LEVEL,
     })
 end
 
