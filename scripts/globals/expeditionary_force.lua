@@ -128,10 +128,10 @@ local bannerTable =
     [xi.zone.JUGNER_FOREST] =
     {
         { position = {  279.408, -15.592, -547.181, 176 }, mobFamily = mobFamilies.HALFORC },   -- J-11
-        {},
-        {},
-        {},
-        {},
+        { position = { -159.588,   0.647,  386.042,  17 }, mobFamily = mobFamilies.HALFORC },   -- G-6
+        { position = {    3.419, -16.000, -642.232,   7 }, mobFamily = mobFamilies.HALFORC },   -- H-12
+        { position = {  448.240,   0.212, -157.228, 225 }, mobFamily = mobFamilies.HOBGOBLIN }, -- K-9
+        { position = {  600.809,   0.873,  217.453, 130 }, mobFamily = mobFamilies.HOBGOBLIN }, -- L-7
     },
 
     [xi.zone.MERIPHATAUD_MOUNTAINS] =
@@ -323,6 +323,7 @@ local regionKITable =
 -- Apply the EF level restriction to one player.
 -- ON_ZONE makes it wear when the player zones out.
 -- CONFRONTATION hard-gates the NMs to capped players.
+-- EXP_FROM_ACTUAL_LEVEL makes it so xp rate is applied to your actual level, not your restricted level.
 local function addLevelRestriction(player, levelCap)
     local cap = levelCap
     if levelCap == 99 then
