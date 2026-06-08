@@ -1,0 +1,14 @@
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+SET FOREIGN_KEY_CHECKS=0;
+
+DROP TABLE IF EXISTS `site_profile_settings`;
+CREATE TABLE `site_profile_settings` (
+  `discord_id`    varchar(32) NOT NULL,
+  `show_avatar`   tinyint(1) NOT NULL DEFAULT 1,
+  `show_username` tinyint(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`discord_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
