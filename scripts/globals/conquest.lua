@@ -6,7 +6,7 @@ require('scripts/globals/garrison')
 require('scripts/globals/teleports')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/expeditionary_force') -- TODO: Remove this after EF feature is fully implemented
+require('scripts/globals/expeditionary_force')
 -----------------------------------
 xi = xi or {}
 xi.conquest = xi.conquest or {}

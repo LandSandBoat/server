@@ -33,10 +33,17 @@ xi.expeditionaryForce.enabledTable =
 }
 
 -----------------------------------
--- Retail differences
+-- Retail differences and unknowns
 -----------------------------------
 -- Mob Behavior: On retail, mobs can aggro players who are not able to enage them.
 -- Mob Behavior: On retail, mobs do not wander once they get back to their spawns after deaggroing.
+-- Was unable to verify behavrior with two groups from different nations in the same zone so relied on Wiki.
+-- Mobs in older zones spawn at a random 0 - 360 degrees from the banner. Newer zones use 0 - 180 degrees equally spaced. I used 0 - 360 degrees for all zones.
+-- Was unable to verify if giving a title had a distance restriction. Set this to a standard exp distance.
+-- Was unable to verify the conditionas that participation recording occured.
+-- For treasure opening, was unable to verify if non-treasure (like maps or quest items) also awarded influence. Opted to not include those to be conservative.
+-- CP rewards in conquest.lua were verified for 0 - 2 regions, but external references were used for 3 - 13 regions.
+-- Glyph positions for Bastok have been confirmed. The other 6 glyphs were estimated at 3.5 yalms in front of the gate guards.
 
 -----------------------------------
 -- Data
@@ -67,6 +74,37 @@ local mobFamilies =
     THEOYAGUDO  = 6,
     CONTANTICAN = 7,
 }
+
+-----------------------------------
+-- Influence Gains and Justifications
+-----------------------------------
+-- Influence is gained per mob kill (4 per banner) as well as when opening a treasure chest or coffer.
+
+-- MOB KILL JUSTIFICATION
+-- External Research: https://bluebell.exblog.jp/1747138/ - Suggests 900 points
+--
+-- Comparison to XP Parties:
+-- Killing 4 mobs in EF and getting to the next banner takes about 15 minutes. Let's compare this to 
+-- If a party of 6 kills a mob worth 200 xp in an unowned region, they get 90 influence. (200 xp * 6 players * 0.15 / 2 = 90)
+-- Kills occur for an ideal party around 40 - 60 seconds per kill cadence. Let's assume 50.
+-- In 15 minutes, influence gained is 90 influence * 900 seconds / 40 seconds per kill = 2025 influence.
+-- For Expeditionary Force to be equivalent to an exp party, it would have to award about 2025 / 4 = 506.25 influence per kill.
+--
+-- Retail Research:
+-- When looking at percentage increase (which is hard to control for), we saw an increase between 4% to 1% to EF kill. This varied depending on the current influence.
+-- For example: Influence started at 4%, and then increased per kill to: 8, 11, 14, 16, 18, 19, 21, 22, 23, 24, 25, 25%.
+-- Another Example: Influence started at 31% and then increased per kill to: 31, 32, 33, 33, 34, 35, 35, 36, 36%.
+-- Conversely, when leveling, percentage increase went up slowly. I was able to increase from 26% to 27% in about 30 minutes. 
+-- It did seem like influence increased based on era xp rates, and not WotG or newer exp rates.
+--
+-- Conclusion: 900 does not seem that far off to the correct influence amount per kill. It is a substantial chunk of influence with each kill.
+-- The only reward from EF is the CP you get if you take the zone. The influence gain needs to be better than if you went and had
+-- an exp party in the zone. 
+
+-- TREASURE OPENING JUSTIFICATION
+-- On one test, influence started at 16%, then increased to 18, 20, 22, 24, 26, 27, 28, 28, 29%.
+-- On another test, I leveled from 7 - 34 and got about a 1 % swing. Opened a coffer and got a 2 % swing.
+-- I suspect that one chest/coffer opening is equal to an EF Mob kill.
 
 -----------------------------------
 -- Tables
@@ -359,7 +397,6 @@ end
 
 
 -- Spawn 4 NMs at the banner
--- TODO: It appears mobs in older zones are at a random 0 - 360 from the banner. Newer zones use 0 - 180 equally spaced. Distance is from 2.5 - 7 yalms with preference towards 3.5 yalms.
 local function spawnBattleNMs(player, banner, zoneData)
     local zoneId     = banner:getZoneID()
     local levelCap   = levelTable[zoneId]
@@ -451,7 +488,7 @@ local function watchDog(npc)
         end
     end
 
-    -- None are present but we never entered
+    -- None are present but we never ended
     if not anyPresent then
         zoneData.state = bannerState.CLEARED
 
@@ -460,9 +497,9 @@ local function watchDog(npc)
             hideBanner(npcArg:getZoneID(), npcArg)
         end)
 
-    -- Check again in 30 seconds
+    -- Check again in 60 seconds
     else
-        npc:timer(30 * 1000, function(npcArg)
+        npc:timer(60 * 1000, function(npcArg)
             watchDog(npcArg)
         end)
     end
@@ -481,7 +518,7 @@ local function removeNMFromList(mob)
     local zoneData = expForceZoneData[zoneId]
 
     local mobId = mob:getID()
-    
+
     -- Check if mob is already in list
     if not zoneData.gone[mobId] then
         -- Add the mob to the gone list
@@ -515,22 +552,6 @@ local function expForceAvailableToPlayer(player, region)
         not xi.conquest.areAllies(playerNation, ownerNation)
 end
 
--- Dispose of every Expeditionary Force insignia the player is holding.
--- Called on a nation change, since insignias are tied to the player's old allegiance.
--- Returns true if at least one insignia was removed.
-xi.expeditionaryForce.disposeInsigniaNationSwap = function(player)
-    local removed = false
-
-    for _, ki in pairs(regionKITable) do
-        if player:hasKeyItem(ki) then
-            player:delKeyItem(ki)
-            removed = true
-        end
-    end
-
-    return removed
-end
-
 -----------------------------------
 -- Public functions
 -----------------------------------
@@ -562,7 +583,7 @@ xi.expeditionaryForce.initZone = function(zone)
         zoneData.gone         = {}
         zoneData.numAlive     = 0
         zoneData.creditNation = nil
-    end   
+    end
 
     -- Set the banner to a random position and set the status to normal
     local banner           = GetNPCByID(ID.npc.BEASTMENS_BANNER)
@@ -574,8 +595,8 @@ xi.expeditionaryForce.initZone = function(zone)
     if lastBannerIndex == nil then
         newBannerIndex = math.random(#bannerOptions)
 
-    -- We will just roll 1 less number. If we happen to land on the last index, we just select the last value in the position table.
-    -- Note: If you only have one banner position, this will break! This should never happen as all zones have more than 1 position.
+    -- We will just roll 1 less number. If we happen to land on the previous index, we just select the last value in the position table.
+    -- Note: If you only have one banner position, this will break! This should never happen as all zones have more than 1 banner position.
     else
         newBannerIndex = math.random(#bannerOptions - 1)
         if newBannerIndex == lastBannerIndex then
@@ -587,7 +608,7 @@ xi.expeditionaryForce.initZone = function(zone)
     banner:setPos(pos[1], pos[2], pos[3], pos[4])
     banner:setStatus(xi.status.NORMAL) -- forces visible
 
-    -- Store the position index for later to make sure the banner does not spawn in the same place twice
+    -- Store the position index for later to make sure the banner does not spawn in the same place twice in a row
     zoneData.bannerIndex = newBannerIndex
 end
 
@@ -627,7 +648,7 @@ xi.expeditionaryForce.onBannerTrigger = function(player, npc)
                     -- Add level restriction if in zone
                     addLevelRestriction(member, levelTable[zoneId])
 
-                    -- Display banner message to all members
+                    -- Display banner message to all members who have been level restricted
                     member:messageSpecial(ID.text.BEASTMEN_BANNER_CURSE) -- There was a curse on the beastmen's banner!
                 end
             end
@@ -681,7 +702,7 @@ xi.expeditionaryForce.onMobDeath = function(mob, player, optParams)
     if not player then
         return
     end
-    
+
     local zoneId   = mob:getZoneID()
     local ID       = zones[zoneId]
     local zoneData = expForceZoneData[zoneId]
@@ -692,9 +713,7 @@ xi.expeditionaryForce.onMobDeath = function(mob, player, optParams)
         removeNMFromList(mob)
 
         -- AWARD INFLUENCE
-        -- https://bluebell.exblog.jp/1747138/ - Suggests 900 points
-        -- TODO: Justify
-        AddConquestInfluence(900, creditNation, mob:getCurrentRegion()) -- TODO: verify influence amount
+        AddConquestInfluence(xi.settings.main.EXP_FORCE_MOBKILL_INFLUENCE, creditNation, mob:getCurrentRegion())
 
         -- SEND ZONE MESSAGE
         for _, person in pairs(mob:getZone():getPlayers()) do
@@ -717,6 +736,7 @@ xi.expeditionaryForce.onMobDeath = function(mob, player, optParams)
         player:addTitle(xi.title.EXPEDITIONARY_TROOPER)
 
         -- Mark all alliance members participating in Expeditionary Force with participation
+        -- TODO: Verify what conditions require recording participation.
         local regionId = mob:getCurrentRegion()
         if player:hasKeyItem(regionKITable[regionId]) then
             recordParticipation(player, regionId)
@@ -754,10 +774,7 @@ xi.expeditionaryForce.onChestOpen = function(player)
         expForceAvailableToPlayer(player, regionId)
     then
 
-        -- Influence gained ranges from about 2.5 % - 0.5 % per chest
-        -- Leveled from 7 - 34 and got about a 1 % swing. Opened a coffer and got a 2 % swing.
-        -- TODO: Modify to scaling in the future
-        player:gainInfluencePoints(450)
+        player:gainInfluencePoints(xi.settings.main.EXP_FORCE_TREASURE_INFLUENCE)
 
         -- Nation flavor text
         local ID           = zones[player:getZoneID()]
@@ -775,4 +792,20 @@ xi.expeditionaryForce.onChestOpen = function(player)
 
         recordParticipation(player, regionId)
     end
+end
+
+-- Dispose of every Expeditionary Force insignia the player is holding.
+-- Called on a nation change, since insignias are tied to the player's old allegiance.
+-- Returns true if at least one insignia was removed.
+xi.expeditionaryForce.disposeInsigniaNationSwap = function(player)
+    local removed = false
+
+    for _, ki in pairs(regionKITable) do
+        if player:hasKeyItem(ki) then
+            player:delKeyItem(ki)
+            removed = true
+        end
+    end
+
+    return removed
 end
