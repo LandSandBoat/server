@@ -738,7 +738,10 @@ xi.expeditionaryForce.onMobDeath = function(mob, player, optParams)
         -- Mark all alliance members participating in Expeditionary Force with participation
         -- TODO: Verify what conditions require recording participation.
         local regionId = mob:getCurrentRegion()
-        if player:hasKeyItem(regionKITable[regionId]) then
+        if
+            player:hasKeyItem(regionKITable[regionId]) and
+            player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION)
+        then
             recordParticipation(player, regionId)
         end
     end

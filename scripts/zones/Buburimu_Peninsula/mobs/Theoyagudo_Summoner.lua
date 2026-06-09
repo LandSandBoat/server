@@ -11,6 +11,7 @@ local entity = {}
 entity.onMobInitialize = function(mob)
     xi.pet.setMobPet(mob, 1, 'Yagudos_Elemental')
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180) -- 3 minute idle despawn
+    mob:setMobMod(xi.mobMod.ASTRAL_PET_OFFSET, 2)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
