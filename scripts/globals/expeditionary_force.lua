@@ -44,36 +44,7 @@ xi.expeditionaryForce.enabledTable =
 -- For treasure opening, was unable to verify if non-treasure (like maps or quest items) also awarded influence. Opted to not include those to be conservative.
 -- CP rewards in conquest.lua were verified for 0 - 2 regions, but external references were used for 3 - 13 regions.
 -- Glyph positions for Bastok have been confirmed. The other 6 glyphs were estimated at 3.5 yalms in front of the gate guards.
-
------------------------------------
--- Data
------------------------------------
--- Runtime state. One record per EF zone, built lazily on zone initialize.
--- If you modify this lua file during runtime, you must relaunch map as expForceZoneData is erased.
-local expForceZoneData = {}
-
------------------------------------
--- Enums
------------------------------------
-local bannerState =
-{
-    IDLE    = 0,
-    ACTIVE  = 1,
-    CLEARED = 2,
-    HIDDEN  = 3,
-}
-
-local mobFamilies =
-{
-    DEMISAHAGIN = 0,
-    GIGAS       = 1,
-    HALFORC     = 2,
-    HOBGOBLIN   = 3,
-    METAQUADAV  = 4,
-    NOCTONBERRY = 5,
-    THEOYAGUDO  = 6,
-    CONTANTICAN = 7,
-}
+-- The order of how text appears in the log for treasure opening is technically wrong. The influence message should appear after the loot message.
 
 -----------------------------------
 -- Influence Gains and Justifications
@@ -105,6 +76,37 @@ local mobFamilies =
 -- On one test, influence started at 16%, then increased to 18, 20, 22, 24, 26, 27, 28, 28, 29%.
 -- On another test, I leveled from 7 - 34 and got about a 1 % swing. Opened a coffer and got a 2 % swing.
 -- I suspect that one chest/coffer opening is equal to an EF Mob kill.
+
+-----------------------------------
+-- Data
+-----------------------------------
+-- Runtime state. One record per EF zone, built lazily on zone initialize.
+-- If you modify this lua file during runtime, you must relaunch map as expForceZoneData is erased.
+local expForceZoneData = {}
+
+-----------------------------------
+-- Enums
+-----------------------------------
+local bannerState =
+{
+    IDLE    = 0,
+    ACTIVE  = 1,
+    CLEARED = 2,
+    HIDDEN  = 3,
+}
+
+local mobFamilies =
+{
+    DEMISAHAGIN = 0,
+    GIGAS       = 1,
+    HALFORC     = 2,
+    HOBGOBLIN   = 3,
+    METAQUADAV  = 4,
+    NOCTONBERRY = 5,
+    THEOYAGUDO  = 6,
+    CONTANTICAN = 7,
+}
+
 
 -----------------------------------
 -- Tables
@@ -784,7 +786,7 @@ xi.expeditionaryForce.onChestOpen = function(player)
         local playerNation = player:getNation()
 
         if playerNation == xi.nation.SANDORIA then
-            player:messageSpecial(ID.text.EXP_FORCE_KILL_SANDORIA)
+            player:messageSpecial(ID.text.EXP_FORCE_CHEST_SANDORIA)
 
         elseif playerNation == xi.nation.BASTOK then
             player:messageSpecial(ID.text.EXP_FORCE_CHEST_BASTOK)

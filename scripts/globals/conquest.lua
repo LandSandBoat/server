@@ -226,7 +226,7 @@ local function collectExForceInsignia(player, guard)
     local mOffset = zones[player:getZoneID()].text.CONQUEST
     for _, data in pairs(exForceMenuData) do
         if player:hasKeyItem(data.ki) then
-            player:showText(guard, mOffset + 121, data.ki)
+            player:messageSpecial(mOffset + 121, data.ki)
             player:delKeyItem(data.ki)
         end
     end
@@ -1670,7 +1670,7 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
                 player:setTitle(titlesGranted[pNation][stock.rank])
             end
         end
-    
+
     -- EXPEDITIONARY FORCE - Region Selected
     elseif 
         option >= 131078 and
@@ -1727,7 +1727,8 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
     elseif option == 7 then
         local cp = player:getCharVar('[ExpForce]AwardCP')
         player:addCP(cp)
-        player:messageSpecial(mOffset + 122, cp) -- "You received x conquest points!"
+        player:messageSpecial(mOffset + 124, 0, cp) -- "You received x conquest points!"
+        player:messageSpecial(mOffset + 122)     -- "Your invalid insignias have been disposed of.""
         player:setCharVar('[ExpForce]AwardCP', 0)
 
     -- EXPEDITIONARY FORCE - Quit
