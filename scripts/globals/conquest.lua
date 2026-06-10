@@ -216,7 +216,7 @@ local function getExForceReward(player, guardNation)
 end
 
 -- Check if we are in the next tally and remove insignia and calculate CP reward
-local function collectExForceInsignia(player, guard)
+local function collectExForceInsignia(player)
     local stamp = player:getCharVar('[ExpForce]NextConquestTally')
     if stamp == 0 or stamp >= NextConquestTally() then
         return
@@ -1387,7 +1387,7 @@ xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, gu
         pNation == guardNation and
         guardType <= xi.conquest.guard.FOREIGN
     then
-        collectExForceInsignia(player, npc)
+        collectExForceInsignia(player)
     end
 
     -- SUPPLY RUNS

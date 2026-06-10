@@ -45,6 +45,7 @@ xi.expeditionaryForce.enabledTable =
 -- CP rewards in conquest.lua were verified for 0 - 2 regions, but external references were used for 3 - 13 regions.
 -- Glyph positions for Bastok have been confirmed. The other 6 glyphs were estimated at 3.5 yalms in front of the gate guards.
 -- The order of how text appears in the log for treasure opening is technically wrong. The influence message should appear after the loot message.
+-- Mobs do not use confrontation on retail. The way it works is only level synched players can engage the mobs. Mobs can engage anyone. Other mobs can engage level synched players.
 
 -----------------------------------
 -- Influence Gains and Justifications
@@ -57,16 +58,15 @@ xi.expeditionaryForce.enabledTable =
 -- Comparison to XP Parties:
 -- Killing 4 mobs in EF and getting to the next banner takes about 15 minutes. Let's compare this to 
 -- If a party of 6 kills a mob worth 200 xp in an unowned region, they get 90 influence. (200 xp * 6 players * 0.15 / 2 = 90)
--- Kills occur for an ideal party around 40 - 60 seconds per kill cadence. Let's assume 50.
--- In 15 minutes, influence gained is 90 influence * 900 seconds / 40 seconds per kill = 2025 influence.
--- For Expeditionary Force to be equivalent to an exp party, it would have to award about 2025 / 4 = 506.25 influence per kill.
+-- Kills occur for an ideal party around 40 - 60 seconds per kill cadence. Let's assume 60.
+-- In 15 minutes, influence gained is 90 influence * 900 seconds / 60 seconds per kill = 1350 influence.
+-- For Expeditionary Force to be equivalent to an exp party, it would have to award about 1350 / 4 = 337.5 influence per kill.
+-- If we were to assume the lower end of 40 seconds, it comes out to 506.25 influence per kill.
 --
 -- Retail Research:
 -- When looking at percentage increase (which is hard to control for), we saw an increase between 4% to 1% to EF kill. This varied depending on the current influence.
 -- For example: Influence started at 4%, and then increased per kill to: 8, 11, 14, 16, 18, 19, 21, 22, 23, 24, 25, 25%.
 -- Another Example: Influence started at 31% and then increased per kill to: 31, 32, 33, 33, 34, 35, 35, 36, 36%.
--- Conversely, when leveling, percentage increase went up slowly. I was able to increase from 26% to 27% in about 30 minutes. 
--- It did seem like influence increased based on era xp rates, and not WotG or newer exp rates.
 --
 -- Conclusion: 900 does not seem that far off to the correct influence amount per kill. It is a substantial chunk of influence with each kill.
 -- The only reward from EF is the CP you get if you take the zone. The influence gain needs to be better than if you went and had
