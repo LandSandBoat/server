@@ -56,6 +56,15 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setNation(newNation)
         player:setGil(player:getGil() - cost)
         player:setRankPoints(0)
+
+        -- Remove Expeditionary Force insignias
+        if xi.expeditionaryForce.disposeInsigniaNationSwap(player) then
+            local ID = zones[xi.zone.METALWORKS]
+            player:messageSpecial(ID.text.INVALID_ENSIGNIAS)
+            player:setCharVar('[ExpForce]Participation', 0)
+            player:setCharVar('[ExpForce]NextConquestTally', 0)
+            player:setCharVar('[ExpForce]AwardCP', 0)
+        end
     end
 end
 

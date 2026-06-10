@@ -211,6 +211,10 @@ xi.settings.main =
     GARRISON_NATION_BYPASS = false, -- Set to true to bypass the nation requirement.
     GARRISON_RANK          = 2,     -- Set to minumum Nation Rank to start Garrison (default: 2).
 
+    -- EXPEDITIONARY FORCE SETTINGS
+    EXP_FORCE_MOBKILL_INFLUENCE  = 700,
+    EXP_FORCE_TREASURE_INFLUENCE = 700,
+
     -- DYNAMIS SETTINGS
     BETWEEN_2DYNA_WAIT_TIME     = 24,       -- Hours before player can re-enter Dynamis. Default is 1 Earthday (24 hours).
     DYNA_MIDNIGHT_RESET         = true,     -- If true, makes the wait time count by number of server midnights instead of full 24 hour intervals
