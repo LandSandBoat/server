@@ -493,6 +493,7 @@ public:
     int32 getCP(); // Conquest points, not to be confused with Capacity Points
     void  addCP(int32 cp);
     void  delCP(int32 cp);
+    void  gainInfluencePoints(int32 points);
 
     int32 getSeals(uint8 sealType);
     void  addSeals(int32 points, uint8 sealType);

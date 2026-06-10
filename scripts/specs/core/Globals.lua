@@ -71,6 +71,12 @@ end
 function GetRegionOwner(type)
 end
 
+---@param amount integer
+---@param nation integer
+---@param region integer
+function AddConquestInfluence(amount, nation, region)
+end
+
 ---@nodiscard
 ---@param type integer
 ---@return integer
