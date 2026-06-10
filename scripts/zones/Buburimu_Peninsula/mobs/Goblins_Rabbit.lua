@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Buburimu Peninsula
---  Mob: Yagudo's Avatar
------------------------------------
-mixins = { require('scripts/mixins/families/avatar') }
+--  Mob: Goblin's Rabbit
 -----------------------------------
 ---@type TMobEntity
 local entity = {}

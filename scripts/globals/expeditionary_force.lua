@@ -812,3 +812,8 @@ xi.expeditionaryForce.disposeInsigniaNationSwap = function(player)
 
     return removed
 end
+
+-- Pets called mid-fight (call beast, astral flow) miss the gate at spawn. Need to apply manually.
+xi.expeditionaryForce.gatePet = function(mob)
+    addConfrontationGate(mob, levelTable[mob:getZoneID()])
+end
