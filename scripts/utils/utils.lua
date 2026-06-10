@@ -283,6 +283,50 @@ function utils.clamp(input, minValue, maxValue)
     return input
 end
 
+-- Generates a number from a normal distribution. If lower and/or upper is defined, then the number is resampled
+-- up to 5 total times to follow the normal distribution.
+-- Note: When using limits, make sure most samples will fall in your bounds to limit redraws.
+-- Examples:
+-- utils.randomNormal(3.5, 1.5, 2, 7) : Mean of 3.5, standard deviation of 1.5, 2 lower limit, 7 upper limit.
+-- utils.randomNormal(3.5, 1.5) : Mean of 3.5, standard deviation of 1.5, no lower or upper limit.
+-- utils.randomNormal(3.5, 1.5, 0) : Mean of 3.5, standard deviation of 1.5, 0 lower limit, no upper limit.
+-- utils.randomNormal(3.5, 1.5, nil, 7) : Mean of 3.5, standard deviation of 1.5, no lower limit, 7 upper limit.
+---@nodiscard
+---@param mean number
+---@param stddev number
+---@param lower number? Optional lower bound; draws below it are rejected.
+---@param upper number? Optional upper bound; draws above it are rejected.
+---@return number
+function utils.randomNormal(mean, stddev, lower, upper)
+    local value = 0
+
+    -- Try up to 5 draws, rejecting any that land outside the optional bounds.
+    for _ = 1, 5 do
+        -- Box-Muller equation to create a normal distribution from two uniform distributions.
+        -- 1 - math.random() gives (0, 1], so math.log never sees 0.
+        local u1 = 1 - math.random()
+        local u2 = math.random()
+        value = mean + stddev * math.sqrt(-2 * math.log(u1)) * math.cos(2 * math.pi * u2)
+
+        local belowLower = lower and value < lower
+        local aboveUpper = upper and value > upper
+        if not belowLower and not aboveUpper then
+            return value
+        end
+    end
+
+    -- All 5 draws missed. Clamp.
+    if lower and value < lower then
+        return lower
+    end
+
+    if upper and value > upper then
+        return upper
+    end
+
+    return value
+end
+
 --  Returns a table containing all the elements in the specified range.
 --  Source: https://github.com/mebens/range
 ---@nodiscard
