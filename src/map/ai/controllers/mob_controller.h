@@ -23,6 +23,9 @@
 
 #include "controller.h"
 
+#include "common/types/cached.h"
+#include "common/types/maybe.h"
+
 enum class FollowType : uint8
 {
     None,
@@ -65,7 +68,7 @@ protected:
 
     virtual void TryLink();
     auto         CanDetectTarget(CBattleEntity* PTarget, bool forceSight = false) const -> bool;
-    auto         CanPursueTarget(const CBattleEntity* PTarget) const -> bool;
+    auto         CanTrackByScent(const CBattleEntity* PTarget) const -> bool;
     auto         CheckLock(CBattleEntity* PTarget) const -> bool;
     auto         CheckDetection(CBattleEntity* PTarget) -> bool;
     virtual auto CanCastSpells(IgnoreRecastsAndCosts ignoreRecastsAndCosts) -> bool;
@@ -73,13 +76,28 @@ protected:
     virtual void Move();
 
     virtual auto DoCombatTick(timer::time_point tick) -> Task<void>;
-    void         FaceTarget(uint16 targid = 0) const;
+    void         LookAtTarget(uint16 targid = 0) const;
     virtual void HandleEnmity();
 
     virtual auto DoRoamTick(timer::time_point tick) -> Task<void>;
-    void         Wait(timer::duration _duration);
+    void         Wait(timer::duration duration);
     void         FollowRoamPath();
-    auto         CanMoveForward(float currentDistance) -> bool;
+    auto         ShouldCloseToTarget(float currentDistance) -> bool;
+
+    // Per-tick line-of-sight cache. CanSeeTarget() is a navmesh raycast and several call sites
+    // in a single Move() tick may need the answer (in-range face check, ShouldCloseToTarget's
+    // standback / lost-LOS branches, the needNewPath check). Wrapping the cache *together with*
+    // its target in a Maybe lets us wipe both at once whenever the target swaps - we never serve
+    // a cached raycast for the wrong target. The whole thing is also reset at the start of each
+    // Tick() so cached values are never staler than one frame.
+    struct TargetLOSCache
+    {
+        CBattleEntity* target;
+        Cached<bool>   canSeeTarget;
+    };
+    Maybe<TargetLOSCache> targetLosCache_;
+
+    auto CanSeeTargetCached() -> bool;
     auto         IsSpecialSkillReady(float currentDistance) const -> bool;
     auto         IsSpellReady(const float& currentDistance, const float& meleeRange) const -> bool;
 
@@ -87,7 +105,8 @@ protected:
 
     static constexpr float FollowRoamDistance{ 4.0f };
     static constexpr float FollowRunAwayDistance{ 4.0f };
-    CBaseEntity*           PFollowTarget{ nullptr };
+
+    CBaseEntity* PFollowTarget{ nullptr };
 
 private:
     CMobEntity* const PMob;
@@ -106,4 +125,22 @@ private:
     bool              m_firstSpell{ true };
     timer::time_point m_LastRoamScript{ timer::time_point::min() };
     uint16_t          m_tpThreshold{ 1000 };
+
+    // Re-path thrashing guard: when a mob is stuck at the navmesh boundary (path finished but
+    // target is still out of attack range), rate-limit PathInRange calls so we don't hammer
+    // findPath. Allow an immediate re-path when the target moves significantly.
+    // After 2 consecutive cooldown-triggered re-paths that don't progress, teleport the mob
+    // to the target so players can't exploit unreachable terrain for free wins.
+    timer::time_point rePathCooldownEnd_{ timer::time_point::min() };
+    position_t        lastRePathTarget_{};
+    uint8_t           stuckRePathCount_{ 0 };
+
+    // In-range LOS probe cache. When a mob is settled in melee range, the directness probe
+    // (PathInRange + IsPathDirect) is only re-run when the target entity changes or either
+    // party has moved enough that the result could differ. Avoids a navmesh query every tick
+    // for every engaged melee mob standing next to their target.
+    CBattleEntity* lastDirectProbeTarget_{ nullptr };
+    position_t     lastDirectProbePos_{};
+    position_t     lastDirectProbeTargetPos_{};
+    bool           lastDirectProbeWasDirect_{ true };
 };

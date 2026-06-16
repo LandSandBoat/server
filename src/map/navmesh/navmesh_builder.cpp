@@ -24,7 +24,7 @@
 #include "common/logging.h"
 #include "common/timer.h"
 
-#include <map/ximesh/iximesh.h>
+#include <map/ximesh/ximesh.h>
 
 #include <DetourNavMesh.h>
 #include <DetourNavMeshBuilder.h>
@@ -61,7 +61,7 @@ auto transform(const std::array<float, 9>& rot, const std::array<float, 3>& tran
 
 } // namespace
 
-NavMeshBuilder::NavMeshBuilder(const IXiMesh& xiMesh)
+NavMeshBuilder::NavMeshBuilder(const XiMesh& xiMesh)
 : xiMesh_(&xiMesh)
 , gridWidth_(xiMesh.gridWidth())
 , gridHeight_(xiMesh.gridHeight())

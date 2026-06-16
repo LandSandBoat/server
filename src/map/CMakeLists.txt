@@ -116,12 +116,14 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/modifier.h
     ${CMAKE_CURRENT_SOURCE_DIR}/monstrosity.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/monstrosity.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/navmesh/inavmesh.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/navmesh/navmesh.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/navmesh/detour_navmesh.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/navmesh/detour_navmesh.h
     ${CMAKE_CURRENT_SOURCE_DIR}/navmesh/navmesh.h
     ${CMAKE_CURRENT_SOURCE_DIR}/navmesh/navmesh_builder.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/navmesh/navmesh_builder.h
     ${CMAKE_CURRENT_SOURCE_DIR}/navmesh/navmesh_config.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/navmesh/null_navmesh.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/navmesh/null_navmesh.h
     ${CMAKE_CURRENT_SOURCE_DIR}/nominate_manager.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/nominate_manager.h
     ${CMAKE_CURRENT_SOURCE_DIR}/notoriety_container.cpp
@@ -168,9 +170,12 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/weapon_skill.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ximesh/transformation_matrix.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ximesh/vector3.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ximesh/null_ximesh.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/ximesh/null_ximesh.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ximesh/ximesh_structs.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/ximesh/ximesh.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/ximesh/ximesh.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ximesh/ximesh_impl.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/ximesh/ximesh_impl.h
     ${CMAKE_CURRENT_SOURCE_DIR}/zone_entities.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/zone_entities.h
     ${CMAKE_CURRENT_SOURCE_DIR}/zone_instance.cpp

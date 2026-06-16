@@ -35,14 +35,14 @@ local msgOffsets =
 -- Skillchain execution logic for 2 shikarees (Y and X only)
 local skillchainData =
 {
-    -- Shikaree X initiated: X Evisceration → Y Vorpal Scythe
+    -- Shikaree X initiated: X Evisceration -> Y Vorpal Scythe
     [ID.mob.SHIKAREE_X_ROS_TWT] =
     {
         { mobId = ID.mob.SHIKAREE_X_ROS_TWT, skill = xi.mobSkill.EVISCERATION  },
         { mobId = ID.mob.SHIKAREE_Y_ROS_TWT, skill = xi.mobSkill.VORPAL_SCYTHE },
     },
 
-    -- Shikaree Y initiated: Y Spiral Hell → X Shadowstitch
+    -- Shikaree Y initiated: Y Spiral Hell -> X Shadowstitch
     [ID.mob.SHIKAREE_Y_ROS_TWT] =
     {
         { mobId = ID.mob.SHIKAREE_Y_ROS_TWT, skill = xi.mobSkill.SPIRAL_HELL  },

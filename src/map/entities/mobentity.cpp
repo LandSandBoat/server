@@ -1154,6 +1154,14 @@ bool CMobEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>
 {
     TracyZoneScoped;
 
+    // If the navmesh path to the target is much longer than the straight-line distance
+    // (e.g. across a thin gap we can see but can't walk across), refuse the attack until
+    // we've actually walked the detour.
+    if (PAI->PathFind && PAI->PathFind->IsFollowingPath() && !PAI->PathFind->IsPathDirect())
+    {
+        return false;
+    }
+
     auto skill_list_id{ getMobMod(MOBMOD_ATTACK_SKILL_LIST) };
     if (skill_list_id)
     {

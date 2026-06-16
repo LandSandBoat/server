@@ -31,14 +31,14 @@
 
 #include "battlefield_handler.h"
 #include "campaign_handler.h"
-#include "map/navmesh/inavmesh.h"
-#include "map/navmesh/navmesh_config.h"
 #include "map_config.h"
 #include "packets/basic.h"
 #include "spawn_slot.h"
 #include "trigger_area.h"
 
-#include <map/ximesh/iximesh.h>
+#include <map/navmesh/navmesh.h>
+#include <map/navmesh/navmesh_config.h>
+#include <map/ximesh/ximesh.h>
 
 #include <list>
 #include <map>
@@ -50,8 +50,6 @@
 //
 
 enum class Weather : uint16_t;
-class XiMesh;
-class CNavMesh;
 class SpawnHandler;
 
 enum ZONEID : uint16
@@ -684,8 +682,8 @@ public:
 
     timer::time_point m_LoadedAt; // The time the zone was loaded
 
-    auto navMesh() const -> INavMesh*;
-    auto xiMesh() const -> IXiMesh*;
+    auto navMesh() const -> NavMesh*;
+    auto xiMesh() const -> XiMesh*;
 
     auto LoadNavMesh() -> Task<void>;
     void RebuildNavMesh(const NavMeshConfig& config = {});
@@ -709,8 +707,8 @@ protected:
     std::unordered_map<std::string, uint32> localVars_;
 
 private:
-    std::unique_ptr<INavMesh> navMesh_;
-    std::unique_ptr<IXiMesh>  xiMesh_;
+    std::unique_ptr<NavMesh> navMesh_;
+    std::unique_ptr<XiMesh>  xiMesh_;
 
     ZONEID         m_zoneID;
     ZONE_TYPE      m_zoneType;

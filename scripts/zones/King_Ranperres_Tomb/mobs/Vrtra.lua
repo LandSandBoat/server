@@ -88,7 +88,6 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.TERROR)
     mob:setMobMod(xi.mobMod.AOE_HIT_ALL, 1)
 
-    mob:setCarefulPathing(true)
     mob:setRespawnTime(math.random(144, 240) * 1800) -- 3 to 5 days in 30 minute windows
 end
 

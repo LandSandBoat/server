@@ -29,7 +29,7 @@ local function getFleePosition(mob, target)
         end
     end
 
-    -- Pass 3: cornered escape — any direction, tiny step just to unstick
+    -- Pass 3: cornered escape - any direction, tiny step just to unstick
     for _ = 1, 12 do
         local pos = GetFurthestValidPosition(mob, math.random(2, 8), math.random() * 2 * math.pi)
         if pos then

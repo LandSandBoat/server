@@ -4,7 +4,7 @@
 * This post was written by hand, zhuzhed up by AI, and then manually proofread, fact-checked, and
 polished by hand, exactly how it should be.
 
-Even with careful oversight, I still had to alter the tone, correct statements, remove ligatures,
+Even with careful oversight, I still had to alter the tone, correct statements, remove ligatures (→, etc.),
 remove outright lies and hallucinations, replace the telltale "em dashes"'s that AI is so fond
 of (—), etc.
 

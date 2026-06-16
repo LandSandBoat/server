@@ -40,7 +40,7 @@ class HEADER final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_LINK_CONCI
 public:
     struct PacketData
     {
-        uint8_t  Sentinel[4]; // FEFEFEFE — identifies header packet
+        uint8_t  Sentinel[4]; // FEFEFEFE - identifies header packet
         uint16_t SlotIndex;   // Player own LS slot in the 16-slot table
         uint16_t ListingFlag; // 0xFFFF when registered
         uint8_t  padding00[16];

@@ -32,7 +32,7 @@
 
 struct rcConfig;
 
-class IXiMesh;
+class XiMesh;
 class dtNavMesh;
 
 constexpr auto FloatMax    = std::numeric_limits<float>::max();
@@ -68,7 +68,7 @@ struct TileResult
 class NavMeshBuilder
 {
 public:
-    explicit NavMeshBuilder(const IXiMesh& xiMesh);
+    explicit NavMeshBuilder(const XiMesh& xiMesh);
 
     void getWorldBounds(float* bmin, float* bmax) const;
     void gatherTrianglesInAABB(const float* bmin, const float* bmax, GatheredMesh& out) const;
@@ -84,11 +84,11 @@ private:
         bool               flipWinding{};
     };
 
-    const IXiMesh* xiMesh_{};
-    uint16         gridWidth_{};
-    uint16         gridHeight_{};
-    float          worldBmin_[3]{ FloatMax, FloatMax, FloatMax };
-    float          worldBmax_[3]{ FloatLowest, FloatLowest, FloatLowest };
+    const XiMesh* xiMesh_{};
+    uint16        gridWidth_{};
+    uint16        gridHeight_{};
+    float         worldBmin_[3]{ FloatMax, FloatMax, FloatMax };
+    float         worldBmax_[3]{ FloatLowest, FloatLowest, FloatLowest };
 
     std::unordered_map<uint32, PreTransformedBlock> preTransformed_;
 };

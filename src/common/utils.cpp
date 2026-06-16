@@ -233,6 +233,29 @@ position_t nearPosition(const position_t& A, float offset, float radian)
     return B;
 }
 
+auto sidestepPosition(const position_t& from, const position_t& referencePoint, float offset) -> position_t
+{
+    // worldAngle + 64 (a quarter-turn in the game's 0..255 rotation byte) gives a vector
+    // perpendicular to "from -> referencePoint", which is what we want for shuffling aside.
+    const auto perpendicularAngle = worldAngle(from, referencePoint) + 64;
+    const auto radians            = rotationToRadian(perpendicularAngle);
+
+    return position_t{
+        from.x - std::cosf(radians) * offset,
+        referencePoint.y,
+        from.z + std::sinf(radians) * offset,
+        0,
+        0,
+    };
+}
+
+auto isNear(const position_t& a, const position_t& b) -> bool
+{
+    // Below this, positions are effectively co-located and a path query would be trivial/empty.
+    constexpr float kNearThreshold = 1.0f;
+    return distance(a, b) < kNearThreshold;
+}
+
 /************************************************************************
  *                                                                       *
  *  Methods for working with bit arrays.                                 *

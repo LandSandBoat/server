@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "ximesh.h"
+#include "ximesh_impl.h"
 
 #include <common/logging.h>
 #include <common/tracy.h>
@@ -132,8 +132,8 @@ auto vertexAt(const MeshBlock& block, const uint16 vertexIdx) -> Vector3
     return Vector3{ v[0], v[1], v[2] };
 }
 
-// Möller–Trumbore ray/triangle intersection.
-auto rayIntersectTriangle(const Vector3& v1, const Vector3& v2, const Vector3& v3, const Vector3& rayOrigin, const Vector3& rayVector) -> std::optional<Vector3>
+// Moller-Trumbore ray/triangle intersection.
+auto rayIntersectTriangle(const Vector3& v1, const Vector3& v2, const Vector3& v3, const Vector3& rayOrigin, const Vector3& rayVector) -> Maybe<Vector3>
 {
     constexpr float EPSILON = 0.0000001f;
 
@@ -176,7 +176,7 @@ auto rayIntersectTriangle(const Vector3& v1, const Vector3& v2, const Vector3& v
 
 } // namespace
 
-XiMesh::XiMesh(const std::string& filename)
+XiMeshImpl::XiMeshImpl(const std::string& filename)
 {
     if (!load(filename))
     {
@@ -184,7 +184,7 @@ XiMesh::XiMesh(const std::string& filename)
     }
 }
 
-auto XiMesh::load(const std::string& filename) -> bool
+auto XiMeshImpl::load(const std::string& filename) -> bool
 {
     TracyZoneScoped;
 
@@ -202,7 +202,7 @@ auto XiMesh::load(const std::string& filename) -> bool
     file.read(reinterpret_cast<char*>(rawData.data()), fileSize);
     if (file.fail())
     {
-        ShowErrorFmt("XiMesh::load: Failed to read file ({})", filename);
+        ShowErrorFmt("XiMeshImpl::load: Failed to read file ({})", filename);
         return false;
     }
 
@@ -210,7 +210,7 @@ auto XiMesh::load(const std::string& filename) -> bool
     const auto decompressed = zlibDecompress(rawData);
     if (decompressed.empty())
     {
-        ShowErrorFmt("XiMesh::load: zlib decompression failed ({})", filename);
+        ShowErrorFmt("XiMeshImpl::load: zlib decompression failed ({})", filename);
         return false;
     }
 
@@ -219,14 +219,14 @@ auto XiMesh::load(const std::string& filename) -> bool
     // Step 3. Load in the header containing the size of the grid and prepare final vector
     if (buf.size() < sizeof(XimeshHeader))
     {
-        ShowErrorFmt("XiMesh::load: File too small ({})", filename);
+        ShowErrorFmt("XiMeshImpl::load: File too small ({})", filename);
         return false;
     }
 
     std::memcpy(&header_, buf.data(), sizeof(XimeshHeader));
     if (header_.gridWidth == 0 || header_.gridHeight == 0)
     {
-        ShowErrorFmt("XiMesh::load: Invalid grid {}x{} ({})", header_.gridWidth, header_.gridHeight, filename);
+        ShowErrorFmt("XiMeshImpl::load: Invalid grid {}x{} ({})", header_.gridWidth, header_.gridHeight, filename);
         return false;
     }
 
@@ -250,7 +250,7 @@ auto XiMesh::load(const std::string& filename) -> bool
     std::unordered_map<uint32, uint16> blockCache;
     std::unordered_map<uint32, uint16> placeCache;
 
-    auto getOrParseBlock = [&](const uint32 fileOffset) -> std::optional<uint16>
+    auto getOrParseBlock = [&](const uint32 fileOffset) -> Maybe<uint16>
     {
         auto [it, inserted] = blockCache.try_emplace(fileOffset, static_cast<uint16>(blocks_.size()));
         if (!inserted)
@@ -277,7 +277,7 @@ auto XiMesh::load(const std::string& filename) -> bool
             indexOffset + indexBytes > buf.size() ||
             metaOffset + metaBytes > buf.size())
         {
-            ShowErrorFmt("XiMesh: Block OOB at offset 0x{:X} (bufSize={})", fileOffset, buf.size());
+            ShowErrorFmt("XiMeshImpl: Block OOB at offset 0x{:X} (bufSize={})", fileOffset, buf.size());
             return std::nullopt;
         }
 
@@ -294,7 +294,7 @@ auto XiMesh::load(const std::string& filename) -> bool
         return it->second;
     };
 
-    auto getOrParsePlacement = [&](const uint32 fileOffset) -> std::optional<uint16>
+    auto getOrParsePlacement = [&](const uint32 fileOffset) -> Maybe<uint16>
     {
         auto [it, inserted] = placeCache.try_emplace(fileOffset, static_cast<uint16>(placements_.size()));
         if (!inserted)
@@ -311,7 +311,7 @@ auto XiMesh::load(const std::string& filename) -> bool
         constexpr size_t TRANSFORM_BYTES = sizeof(placement.rotation) + sizeof(placement.translation);
         if (fileOffset + 4 + TRANSFORM_BYTES > buf.size())
         {
-            ShowErrorFmt("XiMesh: Placement OOB at offset 0x{:X} (bufSize={})", fileOffset, buf.size());
+            ShowErrorFmt("XiMeshImpl: Placement OOB at offset 0x{:X} (bufSize={})", fileOffset, buf.size());
             return std::nullopt;
         }
 
@@ -348,7 +348,7 @@ auto XiMesh::load(const std::string& filename) -> bool
             const auto placementIdx = getOrParsePlacement(rawEntry.placementOffset);
             if (!blockIdx || !placementIdx)
             {
-                ShowErrorFmt("XiMesh::load: Corrupt block/placement data ({})", filename);
+                ShowErrorFmt("XiMeshImpl::load: Corrupt block/placement data ({})", filename);
                 return false;
             }
 
@@ -406,7 +406,7 @@ auto XiMesh::load(const std::string& filename) -> bool
 }
 
 // World position to cell grid index. Each cell covers 4x4 world units.
-auto XiMesh::worldToCell(const float x, const float z) const -> std::pair<int, int>
+auto XiMeshImpl::worldToCell(const float x, const float z) const -> std::pair<int, int>
 {
     return {
         static_cast<int>(std::floor(x / CELL_SIZE)) + header_.gridWidth / 2,
@@ -415,14 +415,14 @@ auto XiMesh::worldToCell(const float x, const float z) const -> std::pair<int, i
 }
 
 // Returns the triangle under (x, z) closest above y.
-auto XiMesh::query(const float x, const float y, const float z) const -> std::optional<CellHit>
+auto XiMeshImpl::query(const float x, const float y, const float z) const -> Maybe<CellHit>
 {
     TracyZoneScoped;
 
     const auto [cx, cz]    = worldToCell(x, z);
     const std::array point = { x, 0.0f, z };
 
-    auto searchCell = [&](const int cellX, const int cellZ) -> std::optional<CellHit>
+    auto searchCell = [&](const int cellX, const int cellZ) -> Maybe<CellHit>
     {
         if (cellX < 0 || cellX >= header_.gridWidth || cellZ < 0 || cellZ >= header_.gridHeight)
         {
@@ -435,7 +435,7 @@ auto XiMesh::query(const float x, const float y, const float z) const -> std::op
             return std::nullopt;
         }
 
-        std::optional<CellHit> best;
+        Maybe<CellHit> best;
         for (uint16 ref = 0; ref < cell.count; ++ref)
         {
             constexpr float EPSILON              = 0.01f;
@@ -490,7 +490,7 @@ auto XiMesh::query(const float x, const float y, const float z) const -> std::op
     }
 
     // Miss, check neighbors
-    std::optional<CellHit> best;
+    Maybe<CellHit> best;
     for (int dz = -1; dz <= 1; ++dz)
     {
         for (int dx = -1; dx <= 1; ++dx)
@@ -513,7 +513,7 @@ auto XiMesh::query(const float x, const float y, const float z) const -> std::op
     return best;
 }
 
-auto XiMesh::getTerrainAt(const float x, const float y, const float z) const -> TerrainType
+auto XiMeshImpl::getTerrainAt(const float x, const float y, const float z) const -> TerrainType
 {
     TracyZoneScoped;
 
@@ -525,7 +525,7 @@ auto XiMesh::getTerrainAt(const float x, const float y, const float z) const -> 
     return TerrainType::None;
 }
 
-auto XiMesh::getFloorId(const float x, const float y, const float z) const -> uint8
+auto XiMeshImpl::getFloorId(const float x, const float y, const float z) const -> uint8
 {
     TracyZoneScoped;
 
@@ -537,37 +537,37 @@ auto XiMesh::getFloorId(const float x, const float y, const float z) const -> ui
     return 0;
 }
 
-auto XiMesh::blocks() const -> const std::vector<MeshBlock>&
+auto XiMeshImpl::blocks() const -> const std::vector<MeshBlock>&
 {
     return blocks_;
 }
 
-auto XiMesh::placements() const -> const std::vector<MeshPlacement>&
+auto XiMeshImpl::placements() const -> const std::vector<MeshPlacement>&
 {
     return placements_;
 }
 
-auto XiMesh::entries() const -> const std::vector<CellEntry>&
+auto XiMeshImpl::entries() const -> const std::vector<CellEntry>&
 {
     return entries_;
 }
 
-auto XiMesh::cells() const -> const std::vector<CellSpan>&
+auto XiMeshImpl::cells() const -> const std::vector<CellSpan>&
 {
     return cells_;
 }
 
-auto XiMesh::gridWidth() const -> uint16
+auto XiMeshImpl::gridWidth() const -> uint16
 {
     return header_.gridWidth;
 }
 
-auto XiMesh::gridHeight() const -> uint16
+auto XiMeshImpl::gridHeight() const -> uint16
 {
     return header_.gridHeight;
 }
 
-auto XiMesh::rayIntersect(const Vector3& start, const Vector3& end, const IgnoreTransparentBarriers ignoreTransparentBarriers) const -> bool
+auto XiMeshImpl::rayIntersect(const Vector3& start, const Vector3& end, const IgnoreTransparentBarriers ignoreTransparentBarriers) const -> bool
 {
     TracyZoneScoped;
 
@@ -694,7 +694,7 @@ auto XiMesh::rayIntersect(const Vector3& start, const Vector3& end, const Ignore
     return false;
 }
 
-auto XiMesh::getPositionInfo(const Vector3& position, const YOffsets yOffsets, const IgnoreTransparentBarriers ignoreTransparentBarriers) const -> std::optional<RayHitInfo>
+auto XiMeshImpl::getPositionInfo(const Vector3& position, const YOffsets yOffsets, const IgnoreTransparentBarriers ignoreTransparentBarriers) const -> Maybe<RayHitInfo>
 {
     TracyZoneScoped;
 
@@ -712,7 +712,7 @@ auto XiMesh::getPositionInfo(const Vector3& position, const YOffsets yOffsets, c
     const auto col1 = std::max<int32>(0, col - cellSearchDiff);
     const auto col2 = std::min<int32>(header_.gridWidth - 1, col + cellSearchDiff);
 
-    std::optional<RayHitInfo> closestHit;
+    Maybe<RayHitInfo> closestHit;
 
     for (int32 r = row1; r <= row2; ++r)
     {
@@ -726,7 +726,7 @@ auto XiMesh::getPositionInfo(const Vector3& position, const YOffsets yOffsets, c
     return closestHit;
 }
 
-auto XiMesh::rayIntersectCell(const Vector3& start, const Vector3& end, const YRange yRange, const uint32 cellIdx, const IgnoreTransparentBarriers ignoreTransparentBarriers) const -> bool
+auto XiMeshImpl::rayIntersectCell(const Vector3& start, const Vector3& end, const YRange yRange, const uint32 cellIdx, const IgnoreTransparentBarriers ignoreTransparentBarriers) const -> bool
 {
     if (cellIdx >= cells_.size())
     {
@@ -803,7 +803,7 @@ auto XiMesh::rayIntersectCell(const Vector3& start, const Vector3& end, const YR
     return false;
 }
 
-auto XiMesh::rayIntersectCellHitInfo(const Vector3& start, const Vector3& end, const YRange yRange, const uint32 cellIdx, const IgnoreTransparentBarriers ignoreTransparentBarriers, std::optional<RayHitInfo>& closestHit) const -> void
+auto XiMeshImpl::rayIntersectCellHitInfo(const Vector3& start, const Vector3& end, const YRange yRange, const uint32 cellIdx, const IgnoreTransparentBarriers ignoreTransparentBarriers, Maybe<RayHitInfo>& closestHit) const -> void
 {
     if (cellIdx >= cells_.size())
     {
