@@ -16629,8 +16629,11 @@ INSERT INTO `mob_droplist` VALUES (2011,4,0,1000,2014,0);        -- Vial Of Bird
 -- ZoneID:   5 - Polar Hare
 -- ZoneID:   5 - Variable Hare
 INSERT INTO `mob_droplist` VALUES (2012,0,0,1000,4358,@COMMON);  -- Slice Of Hare Meat (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2012,0,0,1000,4358,@RARE); 	 -- Slice Of Hare Meat (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (2012,0,0,1000,856,@UNCOMMON); -- Rabbit Hide (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2012,0,0,1000,856,@VRARE); 	 -- Rabbit Hide (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2012,0,0,1000,4382,@RARE);    -- Frost Turnip (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2012,0,0,1000,4382,@VRARE);   -- Frost Turnip (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2012,2,0,1000,4382,0);        -- Frost Turnip (Steal)
 INSERT INTO `mob_droplist` VALUES (2012,4,0,1000,856,0);         -- Rabbit Hide (Despoil)
 INSERT INTO `mob_droplist` VALUES (2012,4,0,1000,4358,0);        -- Slice Of Hare Meat (Despoil)
