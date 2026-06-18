@@ -1,15 +1,15 @@
 -----------------------------------
--- Universal Goblin Footprint NPC
+-- Area: Caedarva Mire
+--  NPC: Mentor Moogle
 -----------------------------------
-require('modules/custom/lua/gobhook')
+require('modules/custom/lua/mentor')
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:getVar('gobquest') == 1 then
-        xi.mafia.gobhook(player, npc)
-    end
+    xi.mentor.clickMoogle(player, npc)
+    xi.mentor.openShop(player, npc)
 end
 
 return entity

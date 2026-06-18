@@ -45,13 +45,13 @@ xi.settings.login =
     CHAINS_OF_PROMATHIA     = true,
     TREASURES_OF_AHT_URGHAN = true,
     WINGS_OF_THE_GODDESS    = true,
-    A_CRYSTALLINE_PROPHECY  = true,
-    A_MOOGLE_KUPOD_ETAT     = true,
-    A_SHANTOTTO_ASCENSION   = true,
-    VISIONS_OF_ABYSSEA      = true,
-    SCARS_OF_ABYSSEA        = true,
-    HEROES_OF_ABYSSEA       = true,
-    SEEKERS_OF_ADOULIN      = true,
+    A_CRYSTALLINE_PROPHECY  = false,
+    A_MOOGLE_KUPOD_ETAT     = false,
+    A_SHANTOTTO_ASCENSION   = false,
+    VISIONS_OF_ABYSSEA      = false,
+    SCARS_OF_ABYSSEA        = false,
+    HEROES_OF_ABYSSEA       = false,
+    SEEKERS_OF_ADOULIN      = false,
 
     -- Feature display on client's login screen. This does NOT effect in game content whatsoever!
     -- Mog wardrobes are per character, so anything custom will not be able to reflect per-account login screen.
