@@ -13,11 +13,11 @@ xi.einherjar.settings =
     -- Minimum level required to reserve and enter Einherjar
     EINHERJAR_LEVEL_MIN = xi.settings.main.EINHERJAR_LEVEL_MIN or 60,
 
-    -- Smoldering lamp cost from Kilusha. Cost with ROV KI is fixed at 1000g.
-    SMOLDERING_LAMP_BASE_COST = xi.settings.main.SMOLDERING_LAMP_BASE_COST or 60000,
+    -- Smoldering lamp cost from Kilusha. Cost with ROV KI is fixed at 1000g. Default is 60000.
+    SMOLDERING_LAMP_BASE_COST = xi.settings.main.SMOLDERING_LAMP_BASE_COST or 10000,
 
-    -- How long before a player can reenter Einherjar, in hours. Reentry with ROV KI is fixed at 1 hour.
-    EINHERJAR_REENTRY_TIME = xi.settings.main.EINHERJAR_REENTRY_TIME or 20,
+    -- How long before a player can reenter Einherjar, in hours. Reentry with ROV KI is fixed at 1 hour. Default is 20 hours.
+    EINHERJAR_REENTRY_TIME = xi.settings.main.EINHERJAR_REENTRY_TIME or 0,
 
     -- How long before all players are expelled from the chamber when wiped, in minutes.
     EINHERJAR_KO_EXPEL_TIME = xi.settings.main.EINHERJAR_KO_EXPEL_TIME or 3,

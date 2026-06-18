@@ -38,3 +38,22 @@
 
 custom/commands/
 custom/lua/test_npcs_in_gm_home.lua
+custom/lua/Fail_Badge_Quest.lua
+custom/lua/nmhunt.lua
+custom/lua/era_npc.lua
+custom/lua/gobhook.lua
+custom/lua/mentor.lua
+custom/lua/gobbiebag_wardrobe_unlocks.lua
+custom/lua/homepoint_crystal_exchange.lua
+custom/lua/elemental_grip_trade.lua
+custom/lua/chatoyant_staff_trade.lua
+custom/lua/era_custom_trades.lua
+custom/sql/ffera_custom_npcs.sql
+custom/sql/era_mob_adjustments.sql
+custom/sql/mount_everywhere.sql
+custom/sql/era_custom_synths.sql
+custom/sql/AH_adjustments.sql
+custom/sql/era_custom_drops.sql
+custom/sql/era_merits.sql
+custom/sql/era_custom_equipment.sql
+wotg/sql/2007_exp_tables.sql

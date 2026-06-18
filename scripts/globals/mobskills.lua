@@ -1259,6 +1259,7 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, action, skillParams)
     damage = math.floor(damage * absorbDamage)
     damage = math.floor(damage * magicBurst)
     damage = math.floor(damage * magicBurstBonus)
+    damage = math.floor(damage * xi.spells.damage.calculateCircleDmgMultiplier(mob, target))
 
     -- If we absorbed, then return early as the rest is not needed.
     if absorbDamage < 0  then

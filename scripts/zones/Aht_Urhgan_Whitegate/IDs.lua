@@ -100,7 +100,9 @@ zones[xi.zone.AHT_URHGAN_WHITEGATE] =
     },
     npc =
     {
-        SANRAKU = GetFirstID('Sanraku'),
+        SANRAKU              = GetFirstID('Sanraku'),
+        FERRY_GUARD_OFFSET   = GetFirstID('Burnished_Bones'),
+        FERRY_BLOCKER_OFFSET = GetFirstID('_1eb'),
     },
 }
 

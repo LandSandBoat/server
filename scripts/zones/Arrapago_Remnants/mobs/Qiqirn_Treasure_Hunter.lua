@@ -50,7 +50,7 @@ entity.onMobFight = function(mob, target)
             mob:setLocalVar('popTime', GetSystemTime())
             mobPet:setStatus(xi.status.UPDATE)
             mobPet:timer(1000, function(mobArg)
-                mobArg:useMobAbility(1838)
+                mobArg:useMobAbility(xi.mobSkill.MINE_BLAST, target)
             end)
 
             mobPet:timer(4000, function(mobArg)

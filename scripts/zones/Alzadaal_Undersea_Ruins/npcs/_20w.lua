@@ -3,32 +3,15 @@
 -- Door: Gilded Gateway (Bhaflau)
 -- !pos 620 -2 -202 72
 -----------------------------------
-local ID = zones[xi.zone.ALZADAAL_UNDERSEA_RUINS]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
---    if not xi.instance.onTrigger(player, npc, xi.zone.BHAFLAU_REMNANTS) then
-        player:messageSpecial(ID.text.NOTHING_HAPPENS)
---    end
+    xi.salvage.onTrigger(player, npc, xi.zone.BHAFLAU_REMNANTS)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
-    for _, players in pairs(player:getAlliance()) do
-        if players:checkImbuedItems() then
-            if players:getID() == player:getID() then
-                player:messageText(player, ID.text.IMBUED_ITEM, false)
-            else
-                player:messageText(player, ID.text.MEMBER_IMBUED_ITEM, false)
-            end
-
-            player:instanceEntry(npc, 1)
-            return
-        end
-    end
-
-    xi.instance.onEventUpdate(player, csid, option, npc)
+    xi.salvage.onEventUpdate(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

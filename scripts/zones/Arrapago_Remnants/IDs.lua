@@ -17,9 +17,11 @@ zones[xi.zone.ARRAPAGO_REMNANTS] =
         ITEMS_OBTAINED                = 6403, -- You obtain <number> <item>!
         CARRIED_OVER_POINTS           = 7005, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7006, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
+        -- TEMP_ITEM                     = 7062, -- Obtained temporary item: <item>!
         LOGIN_NUMBER                  = 7007, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7027, -- Your party is unable to participate because certain members' levels are restricted.
         CELL_OFFSET                   = 7231, -- Main Weapon/Sub-Weapon restriction removed.
+        -- HAVE_TEMP_ITEM                = 7250, -- You already have that temporary item.me).
         SALVAGE_START                 = 7254, -- You feel an incredible pressure bearing down on you. This area appears to be blanketed in some sort of intense psionic field...
         TIME_TO_COMPLETE              = 7461, -- You have <number> [minute/minutes] (Earth time) to complete this mission.
         MISSION_FAILED                = 7462, -- The mission has failed. Leaving area.
@@ -28,6 +30,8 @@ zones[xi.zone.ARRAPAGO_REMNANTS] =
         PARTY_FALLEN                  = 7469, -- All party members have fallen in battle. Mission failure in <number> [minute/minutes].
         DOOR_IS_SEALED                = 7480, -- The door is sealed...
         DOOR_IS_SEALED_MYSTERIOUS     = 7483, -- The door is sealed by some mysterious force...
+        -- SOCKET_TRIGGER                = 7483, -- You hear a ragged sighing from beneath the floor...
+        -- SLOT_TRIGGER                  = 7484, -- You hear a scuttering sound from beneath the floor...
     },
     mob =
     {
@@ -98,18 +102,23 @@ zones[xi.zone.ARRAPAGO_REMNANTS] =
 
         [4] =
         {
-            [1] =
+            [1] = -- Floor 4 S
             {
                 mobs_start = 17080477,
-                mobs_end   = 17080489,
+                mobs_end   = 17080494,
+                rampart1   = 17080489,
                 rampart2   = 17080492,
+                pugil1     = 17080534,
+                pugil2     = 17080535,
             },
 
-            [2] =
+            [2] = -- Floor 4 N
             {
                 mobs_start = 17080497,
-                mobs_end   = 17080509,
+                mobs_end   = 17080511,
+                rampart1   = 17080509,
                 rampart2   = 17080512,
+                malboro    = 17080513,
             },
 
             treasure_hunter1 = 17080514,
@@ -120,7 +129,7 @@ zones[xi.zone.ARRAPAGO_REMNANTS] =
 
         [5] =
         {
-            [1] =
+            [1] = -- 5th Floor S
             {
                 [1] =
                 {
@@ -142,10 +151,14 @@ zones[xi.zone.ARRAPAGO_REMNANTS] =
 
                 astrologer = 17080520,
                 rampart1   = 17080523,
-                rampart2   = 17080533,
+                manta1     = 17080524,
+                manta2     = 17080525,
+                rampart2   = 17080530,
+                rampart3   = 17080533,
+                orobon     = 17080536,
                 chariot    = 17080537,
             },
-            [2] =
+            [2] = -- 5th Floor N
             {
                 [1] =
                 {
@@ -167,6 +180,13 @@ zones[xi.zone.ARRAPAGO_REMNANTS] =
 
                 astrologer = 17080542,
                 rampart1   = 17080545,
+                mourioche1 = 17080546,
+                mourioche2 = 17080547,
+                mourioche3 = 17080548,
+                rampart2   = 17080553,
+                goobbue1   = 17080554,
+                rampart3   = 17080555,
+                goobbue2   = 17080556,
                 chariot    = 17080558,
             },
         },
@@ -181,7 +201,11 @@ zones[xi.zone.ARRAPAGO_REMNANTS] =
 
             rampart1 = 17080559,
             rampart2 = 17080570,
+            treant1  = 17080571,
+            treant2  = 17080572,
             rampart3 = 17080577,
+            sapling  = 17080578,
+            korrigan = 17080582,
             rampart4 = 17080581,
             treasure_hunter1 = 17080573,
             qiqirn_mine_1    = 17080574,
@@ -200,6 +224,14 @@ zones[xi.zone.ARRAPAGO_REMNANTS] =
 
     npc =
     {
+        [0] =
+        {
+            TEMP_ITEMS_BOX =
+            {
+                17080587, 17080588, 17080589, 17080590, 17080591,
+                17080592, 17080593, 17080594, 17080595,
+            },
+        },
         [1] =
         {
             [1] =
@@ -366,7 +398,22 @@ zones[xi.zone.ARRAPAGO_REMNANTS] =
 
         [5] =
         {
-            [2] = -- 4th Floor S Treasure Hunter
+            [2] = -- 4th Floor N Treasure Hunter
+            {
+                route =
+                {
+                    -300, 0, -473,
+                    -301, 0, -499,
+                    -333, 0, -500,
+                    -301, 0, -499,
+                    -301, 0, -469,
+                    -301, 0, -499,
+                    -333, 0, -500,
+                    -301, 0, -499,
+                },
+            },
+
+            [3] = -- 4th Floor S Treasure Hunter
             {
                 route =
                 {
@@ -377,20 +424,6 @@ zones[xi.zone.ARRAPAGO_REMNANTS] =
                     -377, 0, -579,
                     -340, 0, -580,
                     -377, 0, -579,
-                },
-            },
-
-            [3] = -- 4th Floor N Treasure Hunter
-            {
-                route =
-                {
-                    -301, 0, -499,
-                    -339, 0, -500,
-                    -301, 0, -499,
-                    -298, 0, -472,
-                    -301, 0, -499,
-                    -339, 0, -500,
-                    -301, 0, -499,
                 },
             },
         },
