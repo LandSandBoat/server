@@ -18673,7 +18673,7 @@ INSERT INTO `mob_spawn_points` VALUES (17080463,0,'Gespenst','Gespenst',18,75,76
 INSERT INTO `mob_spawn_points` VALUES (17080464,0,'Gespenst','Gespenst',18,75,76,410.290,-4.111,501.713,81);
 INSERT INTO `mob_spawn_points` VALUES (17080465,0,'Merrow_Icedancer','Merrow Icedancer',13,75,76,374.050,-4.032,551.450,223);
 INSERT INTO `mob_spawn_points` VALUES (17080466,0,'Merrow_Icedancer','Merrow Icedancer',13,75,76,388.110,-4.032,568.280,79);
-INSERT INTO `mob_spawn_points` VALUES (17080467,0,'Gespenst','Gespenst',18,75,76,367.800,-4.039,567.085,68);7080523,0
+INSERT INTO `mob_spawn_points` VALUES (17080467,0,'Gespenst','Gespenst',18,75,76,367.800,-4.039,567.085,68);
 INSERT INTO `mob_spawn_points` VALUES (17080468,0,'Gespenst','Gespenst',18,75,76,367.230,-4.039,546.591,109);
 INSERT INTO `mob_spawn_points` VALUES (17080469,0,'Deviate_Bhoot','Deviate Bhoot',23,78,78,328.200,-4.080,547.421,89);
 INSERT INTO `mob_spawn_points` VALUES (17080470,0,'Gespenst','Gespenst',18,75,76,344.710,-4.071,550.132,234);
