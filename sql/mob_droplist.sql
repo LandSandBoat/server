@@ -1441,7 +1441,7 @@ INSERT INTO `mob_droplist` VALUES (153,0,0,1000,1693,@VCOMMON); -- Cyan Chip (Ve
 -- ZoneID:  76 - Archaic Gears
 INSERT INTO `mob_droplist` VALUES (154,0,0,1000,2488,@UNCOMMON); -- Piece Of Alexandrite (Uncommon, 10%)
 
--- ZoneID:  74 - Archaic Gear -- TODO: Salvage
+-- ZoneID:  74 - Archaic Gear
 INSERT INTO `mob_droplist` VALUES (155,0,0,1000,5373,800);       -- Duplicatus Cell (80.0%)
 INSERT INTO `mob_droplist` VALUES (155,0,0,1000,5369,680);       -- Stratus Cell (68.0%)
 INSERT INTO `mob_droplist` VALUES (155,0,0,1000,2488,@UNCOMMON); -- Piece Of Alexandrite (Uncommon, 10%)
@@ -1463,7 +1463,7 @@ INSERT INTO `mob_droplist` VALUES (156,0,0,1000,16091,@RARE);  -- Freya's Mask (
 INSERT INTO `mob_droplist` VALUES (157,0,0,1000,2375,@UNCOMMON); -- Zhayolm Card (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (157,0,0,1000,2488,@UNCOMMON); -- Piece Of Alexandrite (Uncommon, 10%)
 
--- ZoneID:  74 - Archaic Gears -- TODO: Salvage
+-- ZoneID:  74 - Archaic Gears
 INSERT INTO `mob_droplist` VALUES (158,0,0,1000,2376,@UNCOMMON);  -- Arrapago Card (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (158,0,0,1000,2488,@UNCOMMON);  -- Piece Of Alexandrite (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (158,0,0,1000,5367,@UNCOMMON);  -- Cumulus Cell (Uncommon, 10%)
@@ -1491,7 +1491,7 @@ INSERT INTO `mob_droplist` VALUES (159,1,1,@VRARE,16097,200);    -- Anu's Tiara 
 -- ZoneID:  65 - Archaic Mirror
 INSERT INTO `mob_droplist` VALUES (160,0,0,1000,2174,@ALWAYS); -- Archaic Mirror (Always, 100%)
 
--- ZoneID:  74 - Archaic Rampart -- TODO: Salvage
+-- ZoneID:  74 - Archaic Rampart
 INSERT INTO `mob_droplist` VALUES (161,0,0,1000,2376,@UNCOMMON); -- Arrapago Card (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (161,0,0,1000,2488,@UNCOMMON); -- Piece Of Alexandrite (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (161,0,0,1000,5368,@UNCOMMON); -- Radiatus Cell (Uncommon, 10%)
@@ -1580,7 +1580,6 @@ INSERT INTO `mob_droplist` VALUES (171,1,2,@ALWAYS,14971,166);    -- Tsukikazu G
 INSERT INTO `mob_droplist` VALUES (171,1,2,@ALWAYS,15631,166);    -- Freyrs Trousers (Group 2, Always, 100%)
 INSERT INTO `mob_droplist` VALUES (171,1,2,@ALWAYS,15713,166);    -- Phoboss Sabatons (Group 2, Always, 100%)
 INSERT INTO `mob_droplist` VALUES (171,0,0,1000,5736,@UNCOMMON);  -- Linen Coin Purse (Uncommon, 10%)
-
 -- 172-173 Available
 
 -- ZoneID:  51 - Red Smoocher
@@ -16743,10 +16742,8 @@ INSERT INTO `mob_droplist` VALUES (2028,0,0,1000,1723,@VCOMMON); -- White Memosp
 INSERT INTO `mob_droplist` VALUES (2028,0,0,1000,1761,@VCOMMON); -- Recollection Of Anxiety (Very Common, 24%)
 
 -- ZoneID:  74 - Psycheflayer
-INSERT INTO `mob_droplist` VALUES (2029,0,0,1000,16103,140);      -- Machas Crown (14.0%)
 INSERT INTO `mob_droplist` VALUES (2029,0,0,1000,5374,@UNCOMMON); -- Opacus Cell (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2029,0,0,1000,5375,@UNCOMMON); -- Praecipitatio Cell (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2029,0,0,1000,5735,@UNCOMMON); -- Cotton Coin Purse (Uncommon, 10%)
 
 -- ZoneID:  54 - Soulflayer
 -- ZoneID:  77 - Psycheflayer
@@ -28877,6 +28874,20 @@ INSERT INTO `mob_droplist` VALUES (3409,0,0,1000,5384,@ALWAYS); -- Spissatus Cel
 INSERT INTO `mob_droplist` VALUES (3409,0,0,1000,5384,@ALWAYS); -- Spissatus Cell (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (3409,0,0,1000,5384,@ALWAYS); -- Spissatus Cell (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (3409,0,0,1000,5384,@ALWAYS); -- Spissatus Cell (Very Common, 24%)
+
+-- ZoneID:  74 - Deviate Bhoot NM
+INSERT INTO `mob_droplist` VALUES (3422,0,0,1000,5374,@UNCOMMON); -- Opacus Cell (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3422,0,0,1000,16087,@RARE); -- Deimos's Mask (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (3422,0,0,1000,5735,500); -- Cotton Coin Purse (50%)
+INSERT INTO `mob_droplist` VALUES (3422,0,0,1000,5378,@UNCOMMON); -- Congestus Cell (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3422,0,0,1000,5378,@UNCOMMON); -- Congestus Cell (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3422,0,0,1000,5375,@UNCOMMON); -- Praecipitatio Cell (Uncommon, 10%)
+
+-- ZoneID:  74 - Psycheflayer NM
+INSERT INTO `mob_droplist` VALUES (3423,0,0,1000,5735,500); -- Cotton Coin Purse (50%)
+INSERT INTO `mob_droplist` VALUES (3423,0,0,1000,16103,@COMMON); -- Macha's Crown (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (3423,0,0,1000,5374,@UNCOMMON); -- Opacus Cell (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3422,0,0,1000,5375,@UNCOMMON); -- Praecipitatio Cell (Uncommon, 10%)
 
 -- ZoneID:  78 - Dark Elemental
 -- ZoneID:  78 - Rotting Huskarl

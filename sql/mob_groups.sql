@@ -3812,14 +3812,14 @@ INSERT INTO `mob_groups` VALUES (16,2619,74,'Merrow_Chantress',0,128,1659,0,0,0,
 INSERT INTO `mob_groups` VALUES (17,5192,74,'Reserve_Draugar_thf',0,128,2089,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (18,1505,74,'Gespenst',0,128,949,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (19,3246,74,'Qiqirn_Astrologer',0,128,2052,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (20,3215,74,'Psycheflayer',0,128,2029,14000,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (20,3215,74,'Psycheflayer',0,128,2029,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (21,3267,74,'Qiqirn_Treasure_Hunter',0,128,2053,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (22,3258,74,'Qiqirn_Mine',0,128,0,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (23,1015,74,'Deviate_Bhoot',0,128,641,14000,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (23,1015,74,'Deviate_Bhoot',0,128,641,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (24,218,74,'Archaic_Gear',0,128,155,0,0,0,NULL);
--- zone 74 group 25: free
+INSERT INTO `mob_groups` VALUES (25,9201,74,'Psycheflayer_NM',0,128,3423,12000,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (26,2890,74,'Nipper',0,128,1817,0,0,0,NULL);
--- zone 74 group 27: free
+INSERT INTO `mob_groups` VALUES (27,9200,74,'Deviate_Bhoot_NM',0,128,3422,14000,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (28,2653,74,'Migrant_Russula',0,128,1671,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (29,978,74,'Demonic_Rose',0,128,608,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (30,1018,74,'Devil_Manta',0,128,643,0,0,0,NULL);

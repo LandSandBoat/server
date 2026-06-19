@@ -47,6 +47,7 @@ zones[xi.zone.PHOMIUNA_AQUEDUCTS] =
     },
     npc =
     {
+        OIL_LAMP_OFFSET       = GetFirstID('_0rn'), -- Oil Lamp
         LADDER_KNOCKING       = GetTableOfIDs('Wooden_Ladder')[4], -- 4th Wooden Ladder on the list
         QM_TAVNAZIAN_COOKBOOK = GetFirstID('qm_tavnazian_cookbook'),
     },

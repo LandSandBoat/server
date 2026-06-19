@@ -87,10 +87,10 @@ INSERT INTO `instance_list` VALUES (6001,'against_all_odds',60,54,NULL,30,-9.000
 INSERT INTO `instance_list` VALUES (6300,'excavation_duty',63,61,NULL,30,124.999,-39.309,19.999,0,NULL,NULL,NULL,NULL);
 INSERT INTO `instance_list` VALUES (6301,'lebros_supplies',63,61,NULL,30,-333.000,-9.921,-259.999,255,NULL,NULL,NULL,NULL);
 INSERT INTO `instance_list` VALUES (6302,'troll_fugitives',63,61,NULL,30,-459.912,-9.860,342.319,0,NULL,NULL,NULL,NULL);
--- INSERT INTO `instance_list` VALUES (6303,'evade_and_escape',63,61,30,0.000,0.000,0.000,0,NULL,NULL,NULL,NULL);
--- INSERT INTO `instance_list` VALUES (6304,'siegemaster_assassination',63,61,30,0.000,0.000,0.000,0,NULL,NULL,NULL,NULL);
+INSERT INTO `instance_list` VALUES (6303,'evade_and_escape',63,61,NULL,30,302.000,-29.400,192.000,0,NULL,NULL,NULL,NULL);
+INSERT INTO `instance_list` VALUES (6304,'siegemaster_assassination',63,61,NULL,30,0.000,-50.000,-319.999,0,NULL,NULL,NULL,NULL);
 -- INSERT INTO `instance_list` VALUES (6305,'apkallu_breeding',63,61,15,0.000,0.000,0.000,0,NULL,NULL,NULL,NULL);
--- INSERT INTO `instance_list` VALUES (6306,'wamoura_farm_raid',63,61,30,540.977,-39.976,220.919,128,NULL,NULL,NULL,NULL);
+INSERT INTO `instance_list` VALUES (6306,'wamoura_farm_raid',63,61,NULL,30,540.977,-39.976,220.919,128,NULL,NULL,NULL,NULL);
 -- INSERT INTO `instance_list` VALUES (6307,'egg_conservation',63,61,30,0.000,0.000,0.000,0,NULL,NULL,NULL,NULL);
 -- INSERT INTO `instance_list` VALUES (6308,'operation:black_pearl',63,61,30,0.000,0.000,0.000,0,NULL,NULL,NULL,NULL);
 -- INSERT INTO `instance_list` VALUES (6309,'better_than_one',63,61,30,0.000,0.000,0.000,0,NULL,NULL,NULL,NULL);

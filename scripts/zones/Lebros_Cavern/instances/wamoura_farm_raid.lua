@@ -5,6 +5,21 @@ local ID = zones[xi.zone.LEBROS_CAVERN]
 -----------------------------------
 local instanceObject = {}
 
+instanceObject.registryRequirements = function(player)
+    return player:hasKeyItem(xi.ki.LEBROS_ASSAULT_ORDERS) and
+        player:getCurrentAssault() == xi.assault.mission.WAMOURA_FARM_RAID and
+        player:getCharVar('assaultEntered') == 0 and
+        player:hasKeyItem(xi.ki.ASSAULT_ARMBAND) and
+        player:getMainLvl() > 50
+end
+
+instanceObject.entryRequirements = function(player)
+    return player:hasKeyItem(xi.ki.LEBROS_ASSAULT_ORDERS) and
+        player:getCurrentAssault() == xi.assault.mission.WAMOURA_FARM_RAID and
+        player:getCharVar('assaultEntered') == 0 and
+        player:getMainLvl() > 50
+end
+
 instanceObject.afterInstanceRegister = function(player)
     local instance = player:getInstance()
     player:messageSpecial(ID.text.ASSAULT_27_START, 27)
@@ -12,16 +27,14 @@ instanceObject.afterInstanceRegister = function(player)
 end
 
 instanceObject.onInstanceCreated = function(instance)
-    for i, v in pairs(ID.mob[27]) do
-        SpawnMob(v, instance)
-    end
+--    for i, v in pairs(ID.mob[27]) do
+--        SpawnMob(v, instance)
+--    end
 end
 
 instanceObject.onInstanceCreatedCallback = function(player, instance)
-    if instance then
-        player:setInstance(instance)
-        player:setPos(0, 0, 0, 0, instance:getZone():getID())
-    end
+    xi.assault.onInstanceCreatedCallback(player, instance)
+    xi.instance.onInstanceCreatedCallback(player, instance)
 end
 
 instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
@@ -29,12 +42,7 @@ instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
 end
 
 instanceObject.onInstanceFailure = function(instance)
-    local chars = instance:getChars()
-
-    for i, v in pairs(chars) do
-        v:messageSpecial(ID.text.MISSION_FAILED, 10, 10)
-        v:startEvent(102)
-    end
+    xi.assault.onInstanceFailure(instance)
 end
 
 instanceObject.onInstanceProgressUpdate = function(instance, progress)
@@ -44,24 +52,7 @@ instanceObject.onInstanceProgressUpdate = function(instance, progress)
 end
 
 instanceObject.onInstanceComplete = function(instance)
-    local chars = instance:getChars()
-
-    for i, v in pairs(chars) do
-        v:messageSpecial(ID.text.RUNE_UNLOCKED, 7, 8)
-    end
-
-    local rune = GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance)
-    local box = GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance)
-
-    if rune then
-        rune:setPos(414.29, -40.64, 301.523, 247)
-        rune:setStatus(xi.status.NORMAL)
-    end
-
-    if box then
-        box:setPos(410.41, -41.12, 300.743, 243)
-        box:setStatus(xi.status.NORMAL)
-    end
+    xi.assault.onInstanceComplete(instance, 5, 10)
 end
 
 instanceObject.onEventUpdate = function(player, csid, option, npc)

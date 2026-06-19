@@ -24,6 +24,7 @@ zones[xi.zone.HALL_OF_THE_GODS] =
     },
     npc =
     {
+        CERMET_GATE = GetFirstID('_6z0'),
     },
 }
 

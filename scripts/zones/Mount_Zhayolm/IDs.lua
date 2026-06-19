@@ -64,6 +64,7 @@ zones[xi.zone.MOUNT_ZHAYOLM] =
     {
         HOOFPRINT = GetFirstID('Warhorse_Hoofprint'),
         MINING    = GetTableOfIDs('Mining_Point'),
+        BAPOKK    = GetFirstID('Bapokk'),
     },
 }
 

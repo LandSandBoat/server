@@ -119,6 +119,17 @@ def main():
     function_names.append("onAssaultFail")
     function_names.append("onInstanceProgressUpdate")
     function_names.append("onInstanceComplete")
+    function_names.append("getIsActive")
+    function_names.append("getStartTime")
+    function_names.append("getEndTime")
+    function_names.append("checkActive")
+    function_names.append("addInteractions")
+    function_names.append("setStartFunction")
+    function_names.append("setEndFunction")
+    function_names.append("setServerTickFunction")
+    function_names.append("serverTickFunc")
+    function_names.append("write")
+    function_names.append("close")
 
     # root_dir needs a trailing slash (i.e. /root/dir/)
     for filename in glob.iglob("./scripts/" + "**/*.lua", recursive=True):

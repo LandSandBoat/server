@@ -37,6 +37,7 @@ zones[xi.zone.TORAIMARAI_CANAL] =
         MAGIC_SLUDGE      = GetFirstID('Magic_Sludge'),
         HINGE_OILS_OFFSET = GetFirstID('Hinge_Oil'),
         MIMIC             = GetFirstID('Mimic'),
+        ONI_CARCASS       = GetFirstID('Oni_Carcass'),
     },
     npc =
     {

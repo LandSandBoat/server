@@ -47,6 +47,7 @@ zones[xi.zone.KING_RANPERRES_TOMB] =
         CORRUPTED_SOFFEIL     = GetFirstID('Corrupted_Soffeil'),
         CORRUPTED_ULBRIG      = GetFirstID('Corrupted_Ulbrig'),
         ANKOU                 = GetFirstID('Ankou'),
+        CEMETERY_CHERRY       = GetFirstID('Cemetery_Cherry'),
     },
     npc =
     {

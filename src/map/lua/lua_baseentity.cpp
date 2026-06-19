@@ -18017,6 +18017,26 @@ auto CLuaBaseEntity::getRespawnTime() const -> uint32
 }
 
 /************************************************************************
+ *  Function: getSpawnType()
+ *  Purpose : Returns the mob's spawn type (e.g. NORMAL, SCRIPTED, etc.)
+ *  Example : if (mob:getSpawnType() == xi.spawnType.NORMAL)
+ *  Notes   : Used in events/mob_hunt.lua
+ ************************************************************************/
+
+auto CLuaBaseEntity::getSpawnType() const -> uint16
+{
+    if (m_PBaseEntity->objtype != TYPE_MOB)
+    {
+        ShowWarning("Attempting to get spawn type for invalid entity type (%s).", m_PBaseEntity->getName());
+        return 0;
+    }
+
+    const auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
+
+    return static_cast<uint16>(PMob->m_SpawnType);
+}
+
+/************************************************************************
  *  Function: setRespawnTime()
  *  Purpose : Setting the respawn time for a Mob
  *  Example : mob:setRespawnTime(math.random(3600, 7200))
@@ -21000,6 +21020,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getSpawnPos", CLuaBaseEntity::getSpawnPos);
     SOL_REGISTER("setSpawn", CLuaBaseEntity::setSpawn);
     SOL_REGISTER("getRespawnTime", CLuaBaseEntity::getRespawnTime);
+    SOL_REGISTER("getSpawnType", CLuaBaseEntity::getSpawnType);
     SOL_REGISTER("setRespawnTime", CLuaBaseEntity::setRespawnTime);
 
     SOL_REGISTER("instantiateMob", CLuaBaseEntity::instantiateMob);

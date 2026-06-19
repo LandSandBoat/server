@@ -47,8 +47,10 @@ zones[xi.zone.KAZHAM] =
     },
     npc =
     {
-        MAGRIFFON = GetFirstID('Magriffon'),
-        TIELLEQUE = GetFirstID('Tielleque'),
+        MAGRIFFON              = GetFirstID('Magriffon'),
+        TIELLEQUE              = GetFirstID('Tielleque'),
+        AIRSHIP_GUARD_OFFSET   = GetFirstID('Flame_Walker'),
+        AIRSHIP_BLOCKER_OFFSET = GetFirstID('_6ya'),
     },
 }
 

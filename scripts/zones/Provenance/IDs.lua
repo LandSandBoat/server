@@ -20,9 +20,11 @@ zones[xi.zone.PROVENANCE] =
     },
     mob =
     {
+        PROVENANCE_WATCHER = 17686529,
     },
     npc =
     {
+        GRUMBLIX = 17686620,
     },
 }
 

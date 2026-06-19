@@ -29,6 +29,10 @@
 #include "mob_spell_list.h"
 #include "spell.h"
 
+#include "entities/charentity.h"
+#include "items/item_equipment.h"
+#include "utils/battleutils.h"
+
 #include "enums/four_cc.h"
 #include "map_engine.h"
 #include "status_effect_container.h"
@@ -707,6 +711,21 @@ bool CanUseSpell(CBattleEntity* PCaster, CSpell* spell)
             else if (luautils::OnCanUseSpell(PCaster, spell))
             {
                 return true;
+            }
+
+            // Check if any equipped item grants this spell via ADDS_SPELL
+            {
+                CCharEntity* PChar = static_cast<CCharEntity*>(PCaster);
+                for (int i = 0; i < 16; ++i)
+                {
+                    if (auto* PItem = static_cast<CItemEquipment*>(PChar->getEquip(static_cast<SLOTTYPE>(i))))
+                    {
+                        if (battleutils::GetScaledItemModifier(PChar, PItem, Mod::ADDS_SPELL) == static_cast<uint16>(spell->getID()))
+                        {
+                            return true;
+                        }
+                    }
+                }
             }
             [[fallthrough]];
         case TYPE_FELLOW:

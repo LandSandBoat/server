@@ -326,6 +326,42 @@ INSERT INTO `instance_entities` VALUES (6302,17035514);
 INSERT INTO `instance_entities` VALUES (6302,17035519);
 INSERT INTO `instance_entities` VALUES (6302,17035522);
 
+-- Evade and Escape
+-- mobs
+INSERT INTO `instance_entities` VALUES (6303, 17035325);
+INSERT INTO `instance_entities` VALUES (6303, 17035326);
+INSERT INTO `instance_entities` VALUES (6303, 17035327);
+-- npcs
+INSERT INTO `instance_entities` VALUES (6303, 17035478);
+INSERT INTO `instance_entities` VALUES (6303, 17035479);
+INSERT INTO `instance_entities` VALUES (6303, 17035481);
+INSERT INTO `instance_entities` VALUES (6303, 17035482);
+INSERT INTO `instance_entities` VALUES (6303, 17035483);
+INSERT INTO `instance_entities` VALUES (6303, 17035552);
+INSERT INTO `instance_entities` VALUES (6303, 17035553);
+INSERT INTO `instance_entities` VALUES (6303, 17035554);
+INSERT INTO `instance_entities` VALUES (6303, 17035555);
+INSERT INTO `instance_entities` VALUES (6303, 17035556);
+INSERT INTO `instance_entities` VALUES (6303, 17035557);
+INSERT INTO `instance_entities` VALUES (6303, 17035558);
+INSERT INTO `instance_entities` VALUES (6303, 17035559);
+INSERT INTO `instance_entities` VALUES (6303, 17035560);
+INSERT INTO `instance_entities` VALUES (6303, 17035561);
+
+-- Siegemaster Assassination
+-- mobs
+INSERT INTO `instance_entities` VALUES (6304, 17035328);
+INSERT INTO `instance_entities` VALUES (6304, 17035329);
+INSERT INTO `instance_entities` VALUES (6304, 17035330);
+INSERT INTO `instance_entities` VALUES (6304, 17035331);
+INSERT INTO `instance_entities` VALUES (6304, 17035332);
+INSERT INTO `instance_entities` VALUES (6304, 17035333);
+INSERT INTO `instance_entities` VALUES (6304, 17035334);
+INSERT INTO `instance_entities` VALUES (6304, 17035335);
+-- npcs
+INSERT INTO `instance_entities` VALUES (6304, 17035478);
+INSERT INTO `instance_entities` VALUES (6304, 17035479);
+
 -- Wamoura Farm Raid
 -- mobs
 INSERT INTO `instance_entities` VALUES (6306,17035359);
@@ -1910,6 +1946,7 @@ INSERT INTO `instance_entities` VALUES (7600,17089416);
 INSERT INTO `instance_entities` VALUES (7600,17089417);
 INSERT INTO `instance_entities` VALUES (7600,17089418);
 INSERT INTO `instance_entities` VALUES (7600,17089419);
+INSERT INTO `instance_entities` VALUES (7600,17089420);
 INSERT INTO `instance_entities` VALUES (7600,17089421);
 
 -- ------------------------------------------------------------

@@ -71,9 +71,10 @@ zones[xi.zone.LOWER_JEUNO] =
     },
     npc =
     {
-        VHANA_EHGAKLYWHA  = GetFirstID('Vhana_Ehgaklywha'),
-        STREETLAMP_OFFSET = GetFirstID('_l00'),
-        ZAUKO             = GetFirstID('Zauko'),
+        VHANA_EHGAKLYWHA     = GetFirstID('Vhana_Ehgaklywha'),
+        STREETLAMP_OFFSET    = GetFirstID('_l00'),
+        ZAUKO                = GetFirstID('Zauko'),
+        TENSHODO_LOCKED_DOOR = GetFirstID('_6tc'),
     },
 }
 

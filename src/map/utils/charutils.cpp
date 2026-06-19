@@ -4371,7 +4371,23 @@ void delKeyItem(CCharEntity* PChar, KeyItem keyItemId)
 
 int32 hasSpell(CCharEntity* PChar, uint16 SpellID)
 {
-    return PChar->m_SpellList[SpellID];
+    if (PChar->m_SpellList[SpellID])
+    {
+        return 1;
+    }
+
+    for (int i = 0; i < 16; ++i)
+    {
+        if (auto* PItem = static_cast<CItemEquipment*>(PChar->getEquip(static_cast<SLOTTYPE>(i))))
+        {
+            if (battleutils::GetScaledItemModifier(PChar, PItem, Mod::ADDS_SPELL) == SpellID)
+            {
+                return 1;
+            }
+        }
+    }
+
+    return 0;
 }
 
 int32 addSpell(CCharEntity* PChar, uint16 spellID)
@@ -4977,6 +4993,46 @@ void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
             if (!PMember || PMember->isDead())
             {
                 return;
+            }
+
+            // Custom Era Code
+            if (PMob->m_Type & MOBTYPE_NOTORIOUS)
+            {
+                uint32 nmHuntCheck = charutils::GetCharVar(PMember, "NMHuntTarget");
+
+                if (PMob->id == nmHuntCheck)
+                {
+                    charutils::SetCharVar(PMember, "NMHuntClear", 1);
+
+                    if (lua["xi"]["nmHunt"]["checkKill"].valid())
+                    {
+                        auto checkKill = lua["xi"]["nmHunt"]["checkKill"];
+                        checkKill(PMember);
+                    }
+                }
+
+                uint32 mafiaCheck = charutils::GetCharVar(PMember, "MafiaCurrentMob");
+
+                if (PMob->id == mafiaCheck)
+                {
+                    charutils::SetCharVar(PMember, "MafiaHuntKilled", 1);
+
+                    if (lua["xi"]["mafia"]["checkKill"].valid())
+                    {
+                        auto checkKill = lua["xi"]["mafia"]["checkKill"];
+                        checkKill(PMember);
+                    }
+                }
+            }
+
+            // Custom Era Code - Zeni on kill in Sanction zones
+            if (PMember->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Sanction) &&
+                region >= REGION_TYPE::WEST_AHT_URHGAN &&
+                region <= REGION_TYPE::ALZADAAL &&
+                pcinzone <= 6 &&
+                PMob->GetMLevel() > 40)
+            {
+                charutils::AddPoints(PMember, "zeni_point", static_cast<uint32>(PMob->GetMLevel() - 40));
             }
 
             bool chainactive = false;
@@ -5635,7 +5691,14 @@ void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScr
     // Scripts have their own settings in main.lua settings. This is for exp from combat.
     if (!expFromRaise && !fromScripts)
     {
-        exp = (uint32)(exp * settings::get<float>("map.EXP_RATE"));
+        if (PChar->getCharVar("MentorFlag") == 1)
+        {
+            exp = (uint32)(exp * settings::get<float>("map.MENTOR_EXP_RATE"));
+        }
+        else
+        {
+            exp = (uint32)(exp * settings::get<float>("map.EXP_RATE"));
+        }
     }
     uint16 currentExp  = PChar->jobs.exp[PChar->GetMJob()];
     bool   onLimitMode = false;
@@ -5724,6 +5787,28 @@ void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScr
         if (PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Sanction) && (region >= REGION_TYPE::WEST_AHT_URHGAN && region <= REGION_TYPE::ALZADAAL))
         {
             charutils::AddPoints(PChar, "imperial_standing", (int32)(exp * 0.1f));
+            PChar->pushPacket<GP_SERV_COMMAND_CONQUEST>(PChar);
+        }
+        
+        // Custom Era Code - Allied Notes Sigil zones
+        if (PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Sigil) &&
+            (region >= REGION_TYPE::RONFAURE_FRONT && region <= REGION_TYPE::VALDEAUNIA_FRONT))
+        {
+            charutils::AddPoints(PChar, "allied_notes", (int32)(exp * 0.25f));
+            PChar->pushPacket<GP_SERV_COMMAND_CONQUEST>(PChar);
+        }
+
+        // Custom Era Code - Cruor
+        if (region != REGION_TYPE::DYNAMIS && region != REGION_TYPE::LIMBUS && region != REGION_TYPE::ALZADAAL)
+        {
+            float cruorrate = 0.015f;
+
+            if (PChar->getCharVar("MentorFlag") == 1)
+            {
+                cruorrate *= settings::get<float>("map.EXP_RATE");
+            }
+
+            charutils::AddPoints(PChar, "cruor", (int32)(exp * cruorrate));
             PChar->pushPacket<GP_SERV_COMMAND_CONQUEST>(PChar);
         }
 

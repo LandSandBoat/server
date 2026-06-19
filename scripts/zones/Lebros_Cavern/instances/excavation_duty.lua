@@ -20,20 +20,20 @@ instanceObject.entryRequirements = function(player)
         player:getMainLvl() > 50
 end
 
-instanceObject.onInstanceCreated = function(instance)
-end
-
-instanceObject.onInstanceCreatedCallback = function(player, instance)
-    xi.assault.onInstanceCreatedCallback(player, instance)
-    xi.instance.onInstanceCreatedCallback(player, instance)
-end
-
 instanceObject.afterInstanceRegister = function(player)
     local instance = player:getInstance()
 
     xi.assault.afterInstanceRegister(player, xi.item.CAGE_OF_ZHAYOLM_FIREFLIES)
     GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setPos(49.999, -40.837, 96.999, 0)
     GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setPos(50.000, -40.070, 99.999, 0)
+end
+
+instanceObject.onInstanceCreated = function(instance)
+end
+
+instanceObject.onInstanceCreatedCallback = function(player, instance)
+    xi.assault.onInstanceCreatedCallback(player, instance)
+    xi.instance.onInstanceCreatedCallback(player, instance)
 end
 
 instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
@@ -52,6 +52,9 @@ end
 
 instanceObject.onInstanceComplete = function(instance)
     xi.assault.onInstanceComplete(instance, 5, 10)
+end
+
+instanceObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 instanceObject.onEventFinish = function(player, csid, option, npc)

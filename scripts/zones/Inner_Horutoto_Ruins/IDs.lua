@@ -38,6 +38,7 @@ zones[xi.zone.INNER_HORUTOTO_RUINS] =
         SLENDLIX_SPINDLETHUMB = GetFirstID('Slendlix_Spindlethumb'),
         NOCUOUS_WEAPON        = GetFirstID('Nocuous_Weapon'),
         MAGICKED_BONES        = GetFirstID('Magicked_Bones'),
+        MALTHA                = GetFirstID('Maltha'),
         --[[
             -2    Goblin Thug
             -1    Goblin Weaver

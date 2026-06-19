@@ -813,6 +813,7 @@ int32 CalculateEnspellDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender,
 
     damage = (int32)(damage * resist);
     damage = (int32)(damage * dBonus);
+    damage = CircleDmgAdjust(PAttacker, PDefender, damage);
     damage = MagicDmgTaken(PDefender, damage, (ELEMENT)(element));
 
     if (damage > 0)
@@ -935,6 +936,7 @@ auto HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, acti
         int32 spikesDamage = CalculateSpikeDamage(PAttacker, PDefender, Action, static_cast<uint16>(abs(damage)));
         if (spikesDamage > 0)
         {
+            spikesDamage = CircleDmgAdjust(PDefender, PAttacker, spikesDamage);
             spikesDamage = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
             spikesDamage = HandleOneForAll(PAttacker, spikesDamage);
             spikesDamage = HandleStoneskin(PAttacker, spikesDamage);
@@ -1136,6 +1138,7 @@ auto HandleSpikesEquip(CBattleEntity* PAttacker, CBattleEntity* PDefender, actio
             int32 spikesDamage = CalculateSpikeDamage(PAttacker, PDefender, Action, damage - xirand::GetRandomNumber<uint16>(ratio) + xirand::GetRandomNumber<uint16>(ratio));
             if (spikesDamage > 0)
             {
+                spikesDamage = CircleDmgAdjust(PDefender, PAttacker, spikesDamage);
                 spikesDamage = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
                 spikesDamage = HandleOneForAll(PAttacker, spikesDamage);
                 spikesDamage = HandleStoneskin(PAttacker, spikesDamage);
@@ -2000,6 +2003,10 @@ auto TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHYS
     int32          baseDamage = damage;
     ATTACK_TYPE    attackType = ATTACK_TYPE::PHYSICAL;
     xi::DamageType damageType = xi::DamageType::None;
+
+    // Circles apply bonus damage & defense which stacks with all other bonuses
+    damage = CircleDmgAdjust(PAttacker, PDefender, damage);
+
     if (PAttacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::FormlessStrikes) && !isCounter)
     {
         attackType        = ATTACK_TYPE::SPECIAL;
@@ -2317,6 +2324,8 @@ auto TakeWeaponskillDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, i
     {
         damage = getOverWhelmDamageBonus(PAttacker, PDefender, damage);
     }
+
+    damage = CircleDmgAdjust(PAttacker, PDefender, damage);
 
     HandleAfflatusMiseryDamage(PDefender, damage);
     damage = std::clamp(damage, -99999, 99999);
@@ -4753,6 +4762,116 @@ auto RangedDmgTaken(CBattleEntity* PDefender, int32 damage, xi::DamageType damag
     }
 
     damage = CheckAndApplyDamageCap(damage, PDefender);
+
+    return damage;
+}
+
+int32 CircleDmgAdjust(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 damage)
+{
+    // adjusts damage dealt based on the attacker/defender ecosystem, if attacker and/or
+    // defender has warding, ancient, arcane, or holy circle active
+    // https://wiki.ffo.jp/html/12868.html
+    // https://wiki.ffo.jp/html/5386.html
+
+    if (PAttacker == nullptr || PDefender == nullptr)
+    {
+        return damage;
+    }
+
+    int16 damageReduction = 0;
+    int16 damageBonus     = 0;
+
+    switch (PAttacker->m_EcoSystem)
+    {
+        case ECOSYSTEM::ARCANA:
+            damageReduction = PDefender->getMod(Mod::ARCANE_CIRCLE_DMG_BONUS);
+            break;
+        case ECOSYSTEM::DEMON:
+            damageReduction = PDefender->getMod(Mod::WARDING_CIRCLE_DMG_BONUS);
+            break;
+        case ECOSYSTEM::DRAGON:
+            damageReduction = PDefender->getMod(Mod::ANCIENT_CIRCLE_DMG_BONUS);
+            break;
+        case ECOSYSTEM::UNDEAD:
+            damageReduction = PDefender->getMod(Mod::HOLY_CIRCLE_DMG_BONUS);
+            break;
+        case ECOSYSTEM::BEAST:
+            damageReduction = PDefender->getMod(Mod::BEAST_KILLER_DMG_BONUS);
+            break;
+        case ECOSYSTEM::LIZARD:
+            damageReduction = PDefender->getMod(Mod::LIZARD_KILLER_DMG_BONUS);
+            break;
+        case ECOSYSTEM::PLANTOID:
+            damageReduction = PDefender->getMod(Mod::PLANTOID_KILLER_DMG_BONUS);
+            break;
+        case ECOSYSTEM::BIRD:
+            damageReduction = PDefender->getMod(Mod::BIRD_KILLER_DMG_BONUS);
+            break;
+        case ECOSYSTEM::AMORPH:
+            damageReduction = PDefender->getMod(Mod::AMORPH_KILLER_DMG_BONUS);
+            break;
+        case ECOSYSTEM::AQUAN:
+            damageReduction = PDefender->getMod(Mod::AQUAN_KILLER_DMG_BONUS);
+            break;
+        case ECOSYSTEM::VERMIN:
+            damageReduction = PDefender->getMod(Mod::VERMIN_KILLER_DMG_BONUS);
+            break;
+        default:
+            break;
+    }
+
+    // Reduce effect if attacker is an NM
+    if (PAttacker->objtype == TYPE_MOB && static_cast<CMobEntity*>(PAttacker)->m_Type & MOBTYPE_NOTORIOUS)
+    {
+        damageReduction = (int32)floor(damageReduction * 2 / 3);
+    }
+
+    switch (PDefender->m_EcoSystem)
+    {
+        case ECOSYSTEM::ARCANA:
+            damageBonus = PAttacker->getMod(Mod::ARCANE_CIRCLE_DMG_BONUS);
+            break;
+        case ECOSYSTEM::DEMON:
+            damageBonus = PAttacker->getMod(Mod::WARDING_CIRCLE_DMG_BONUS);
+            break;
+        case ECOSYSTEM::DRAGON:
+            damageBonus = PAttacker->getMod(Mod::ANCIENT_CIRCLE_DMG_BONUS);
+            break;
+        case ECOSYSTEM::UNDEAD:
+            damageBonus = PAttacker->getMod(Mod::HOLY_CIRCLE_DMG_BONUS);
+            break;
+        case ECOSYSTEM::BEAST:
+            damageBonus = PAttacker->getMod(Mod::BEAST_KILLER_DMG_BONUS);
+            break;
+        case ECOSYSTEM::LIZARD:
+            damageBonus = PAttacker->getMod(Mod::LIZARD_KILLER_DMG_BONUS);
+            break;
+        case ECOSYSTEM::PLANTOID:
+            damageBonus = PAttacker->getMod(Mod::PLANTOID_KILLER_DMG_BONUS);
+            break;
+        case ECOSYSTEM::BIRD:
+            damageBonus = PAttacker->getMod(Mod::BIRD_KILLER_DMG_BONUS);
+            break;
+        case ECOSYSTEM::AMORPH:
+            damageBonus = PAttacker->getMod(Mod::AMORPH_KILLER_DMG_BONUS);
+            break;
+        case ECOSYSTEM::AQUAN:
+            damageBonus = PAttacker->getMod(Mod::AQUAN_KILLER_DMG_BONUS);
+            break;
+        case ECOSYSTEM::VERMIN:
+            damageBonus = PAttacker->getMod(Mod::VERMIN_KILLER_DMG_BONUS);
+            break;
+        default:
+            break;
+    }
+
+    // Reduce effect if target is an NM
+    if (PDefender->objtype == TYPE_MOB && static_cast<CMobEntity*>(PDefender)->m_Type & MOBTYPE_NOTORIOUS)
+    {
+        damageBonus = (int32)floor(damageBonus * 2 / 3);
+    }
+
+    damage = (int32)(damage * (1 + damageBonus / 100.f) * (1 - damageReduction / 100.f));
 
     return damage;
 }

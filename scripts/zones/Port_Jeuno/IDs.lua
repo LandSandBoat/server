@@ -62,6 +62,7 @@ zones[xi.zone.PORT_JEUNO] =
     },
     npc =
     {
+        AIRSHIP_DOOR_OFFSET = GetFirstID('_6u1'),
     },
 }
 
