@@ -10,19 +10,20 @@ effectObject.onEffectGain = function(target, effect)
     local ecosystemCorrelationMap =
     {
         -- Pet Ecosystem(subPower), Corresponding killer modifier
-        [xi.ecosystem.AMORPH]   = xi.mod.BIRD_KILLER,
-        [xi.ecosystem.AQUAN]    = xi.mod.AMORPH_KILLER,
-        [xi.ecosystem.BEAST]    = xi.mod.LIZARD_KILLER,
-        [xi.ecosystem.BIRD]     = xi.mod.AQUAN_KILLER,
-        [xi.ecosystem.LIZARD]   = xi.mod.VERMIN_KILLER,
-        [xi.ecosystem.PLANTOID] = xi.mod.BEAST_KILLER,
-        [xi.ecosystem.VERMIN]   = xi.mod.PLANTOID_KILLER,
+        [xi.ecosystem.AMORPH]   = { intimidate = xi.mod.BIRD_KILLER,     damage = xi.mod.BIRD_KILLER_DMG_BONUS },
+        [xi.ecosystem.AQUAN]    = { intimidate = xi.mod.AMORPH_KILLER,   damage = xi.mod.AMORPH_KILLER_DMG_BONUS },
+        [xi.ecosystem.BEAST]    = { intimidate = xi.mod.LIZARD_KILLER,   damage = xi.mod.LIZARD_KILLER_DMG_BONUS },
+        [xi.ecosystem.BIRD]     = { intimidate = xi.mod.AQUAN_KILLER,    damage = xi.mod.AQUAN_KILLER_DMG_BONUS },
+        [xi.ecosystem.LIZARD]   = { intimidate = xi.mod.VERMIN_KILLER,   damage = xi.mod.VERMIN_KILLER_DMG_BONUS },
+        [xi.ecosystem.PLANTOID] = { intimidate = xi.mod.BEAST_KILLER,    damage = xi.mod.BEAST_KILLER_DMG_BONUS },
+        [xi.ecosystem.VERMIN]   = { intimidate = xi.mod.PLANTOID_KILLER, damage = xi.mod.PLANTOID_KILLER_DMG_BONUS },
     }
 
     local mod = ecosystemCorrelationMap[effect:getSubPower()]
 
     if mod then
-        effect:addMod(mod, effect:getPower())
+        effect:addMod(mod.intimidate, effect:getPower())
+        effect:addMod(mod.damage, effect:getPower())
     end
 end
 

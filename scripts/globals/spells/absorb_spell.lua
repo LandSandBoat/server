@@ -138,6 +138,8 @@ xi.spells.absorb.doDrainingSpell = function(caster, target, spell)
         netherVoidMultiplier = 1 + caster:getStatusEffect(xi.effect.NETHER_VOID):getPower() / 100
     end
 
+    local circleDmgMultiplier    = xi.spells.damage.calculateCircleDmgMultiplier(caster, target)
+
     -- Operations.
     finalDamage = math.floor(baseDamage * resistTier)
     finalDamage = math.floor(finalDamage * additionalResistTier)
@@ -148,6 +150,7 @@ xi.spells.absorb.doDrainingSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * absorbMultiplier)
     finalDamage = math.floor(finalDamage * liberatorMultiplier)
     finalDamage = math.floor(finalDamage * netherVoidMultiplier)
+    finalDamage = math.floor(finalDamage * circleDmgMultiplier)
 
     -- Final operations.
     if modAbsorbed == xi.mod.HP then

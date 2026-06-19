@@ -8,16 +8,17 @@ mixins = { require('scripts/mixins/job_special') }
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobEngage = function(mob, target)
+entity.onMobSpawn = function(mob)
     local maxHP = mob:getHP()
-    local bonus = math.random(2, 6)
-    mob:setHP(maxHP / (8 / bonus))
+    local hpAdjust = math.random(25, 75)
+    mob:setHP(maxHP * (hpAdjust / 100))
+    mob:setMobMod(xi.mobMod.NO_REST, 1)
+end
+
+entity.onMobEngage = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-end
-
-entity.onMobDespawn = function(mob)
     local instance = mob:getInstance()
     if not instance then
         return

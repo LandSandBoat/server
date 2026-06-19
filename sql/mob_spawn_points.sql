@@ -15355,19 +15355,19 @@ INSERT INTO `mob_spawn_points` VALUES (17035323,0,'Broken_Troll_Soldier','Broken
 INSERT INTO `mob_spawn_points` VALUES (17035324,0,'Broken_Troll_Soldier','Broken Troll Soldier',8,77,80,-253.900,-24.060,212.110,218);
 
 -- Evade and Escape
-INSERT INTO `mob_spawn_points` VALUES (17035325,0,'Dahak','Dahak',10,75,75,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17035326,0,'Dahak','Dahak',10,75,75,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17035327,0,'Dahak','Dahak',10,75,75,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17035325,0,'Dahak','Dahak',10,75,75,411.000,-50.860, 21.000,126);
+INSERT INTO `mob_spawn_points` VALUES (17035326,0,'Dahak','Dahak',10,75,75,239.000,-30.000,100.000,253);
+INSERT INTO `mob_spawn_points` VALUES (17035327,0,'Dahak','Dahak',10,75,75,193.000,-28.350,-58.000,5);
 
 -- Siegemaster Assassination
-INSERT INTO `mob_spawn_points` VALUES (17035328,0,'Old_Troll','Old Troll',11,75,75,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17035329,0,'Old_Troll','Old Troll',11,75,75,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17035330,0,'Old_Troll','Old Troll',11,75,75,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17035331,0,'Old_Troll','Old Troll',11,75,75,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17035332,0,'Old_Troll','Old Troll',11,75,75,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17035333,0,'Old_Troll','Old Troll',11,75,75,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17035334,0,'Old_Troll','Old Troll',11,75,75,0.000,0.000,0.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17035335,0,'Old_Troll','Old Troll',11,75,75,0.000,0.000,0.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17035328,0,'Old_Troll','Old Troll',11,75,75,77.010,-50.432,-410.766,34);
+INSERT INTO `mob_spawn_points` VALUES (17035329,0,'Old_Troll','Old Troll',11,75,75,81.123,-50.470,-392.813,95);
+INSERT INTO `mob_spawn_points` VALUES (17035330,0,'Old_Troll','Old Troll',11,75,75,75.703,-50.261,-365.458,247);
+INSERT INTO `mob_spawn_points` VALUES (17035331,0,'Old_Troll','Old Troll',11,75,75,88.865,-50.134,-365.466,113);
+INSERT INTO `mob_spawn_points` VALUES (17035332,0,'Old_Troll','Old Troll',11,75,75,74.201,-50.013,-388.797,162);
+INSERT INTO `mob_spawn_points` VALUES (17035333,0,'Old_Troll','Old Troll',11,75,75,88.350,-50.172,-400.810,228);
+INSERT INTO `mob_spawn_points` VALUES (17035334,0,'Old_Troll','Old Troll',11,75,75,100.192,-49.195,-385.073,75);
+INSERT INTO `mob_spawn_points` VALUES (17035335,0,'Old_Troll','Old Troll',11,75,75,102.077,-49.244,-384.449,10);
 
 -- Apkallu Breeding
 -- ids 17035336 to 17035351 (Lebros Apkallu) are NPCs
@@ -18673,7 +18673,7 @@ INSERT INTO `mob_spawn_points` VALUES (17080463,0,'Gespenst','Gespenst',18,75,76
 INSERT INTO `mob_spawn_points` VALUES (17080464,0,'Gespenst','Gespenst',18,75,76,410.290,-4.111,501.713,81);
 INSERT INTO `mob_spawn_points` VALUES (17080465,0,'Merrow_Icedancer','Merrow Icedancer',13,75,76,374.050,-4.032,551.450,223);
 INSERT INTO `mob_spawn_points` VALUES (17080466,0,'Merrow_Icedancer','Merrow Icedancer',13,75,76,388.110,-4.032,568.280,79);
-INSERT INTO `mob_spawn_points` VALUES (17080467,0,'Gespenst','Gespenst',18,75,76,367.800,-4.039,567.085,68);
+INSERT INTO `mob_spawn_points` VALUES (17080467,0,'Gespenst','Gespenst',18,75,76,367.800,-4.039,567.085,68);7080523,0
 INSERT INTO `mob_spawn_points` VALUES (17080468,0,'Gespenst','Gespenst',18,75,76,367.230,-4.039,546.591,109);
 INSERT INTO `mob_spawn_points` VALUES (17080469,0,'Deviate_Bhoot','Deviate Bhoot',23,78,78,328.200,-4.080,547.421,89);
 INSERT INTO `mob_spawn_points` VALUES (17080470,0,'Gespenst','Gespenst',18,75,76,344.710,-4.071,550.132,234);
@@ -18688,22 +18688,22 @@ INSERT INTO `mob_spawn_points` VALUES (17080478,0,'Psycheflayer','Psycheflayer',
 INSERT INTO `mob_spawn_points` VALUES (17080479,0,'Psycheflayer','Psycheflayer',20,78,78,-340.700,-4.185,-674.420,10);
 INSERT INTO `mob_spawn_points` VALUES (17080480,0,'Psycheflayer','Psycheflayer',20,78,78,-367.000,-4.232,-687.110,248);
 INSERT INTO `mob_spawn_points` VALUES (17080481,0,'Psycheflayer','Psycheflayer',20,78,78,-313.600,-4.123,-667.410,235);
-INSERT INTO `mob_spawn_points` VALUES (17080482,0,'Psycheflayer','Psycheflayer',20,78,78,-368.100,-4.080,-680.170,140);
+INSERT INTO `mob_spawn_points` VALUES (17080482,0,'Psycheflayer_NM','Psycheflayer',25,80,80,-368.100,-4.080,-680.170,140);
 INSERT INTO `mob_spawn_points` VALUES (17080483,0,'Archaic_Gear','Archaic Gear',24,73,74,-293.000,-0.171,-533.360,39);
 INSERT INTO `mob_spawn_points` VALUES (17080484,0,'Archaic_Gear','Archaic Gear',24,73,74,-305.300,0.014,-525.630,253);
 INSERT INTO `mob_spawn_points` VALUES (17080485,0,'Archaic_Gear','Archaic Gear',24,73,74,-292.000,-0.026,-541.420,99);
 INSERT INTO `mob_spawn_points` VALUES (17080486,0,'Archaic_Gear','Archaic Gear',24,73,74,-248.800,-0.006,-544.810,140);
 INSERT INTO `mob_spawn_points` VALUES (17080487,0,'Archaic_Gear','Archaic Gear',24,73,74,-249.000,-0.021,-537.010,175);
 INSERT INTO `mob_spawn_points` VALUES (17080488,0,'Archaic_Gear','Archaic Gear',24,73,74,-250.000,-0.500,-540.000,128);
-INSERT INTO `mob_spawn_points` VALUES (17080489,0,'Archaic_Rampart_1','Archaic Rampart',1,73,74,-240.000,-0.500,-525.000,64);
+INSERT INTO `mob_spawn_points` VALUES (17080489,0,'Archaic_Rampart','Archaic Rampart',1,73,74,-240.000,-0.500,-525.000,64);
 INSERT INTO `mob_spawn_points` VALUES (17080490,0,'Nipper','Nipper',26,75,76,-228.800,-0.018,-537.260,45);
 INSERT INTO `mob_spawn_points` VALUES (17080491,0,'Nipper','Nipper',26,75,76,-229.800,-0.018,-538.260,45);
-INSERT INTO `mob_spawn_points` VALUES (17080492,0,'Archaic_Rampart_2','Archaic Rampart',1,73,74,-240.000,-0.500,-555.000,192);
+INSERT INTO `mob_spawn_points` VALUES (17080492,0,'Archaic_Rampart','Archaic Rampart',1,73,74,-240.000,-0.500,-555.000,192);
 INSERT INTO `mob_spawn_points` VALUES (17080493,0,'Nipper','Nipper',26,75,76,-236.000,-0.101,-541.750,198);
 INSERT INTO `mob_spawn_points` VALUES (17080494,0,'Nipper','Nipper',26,75,76,-240.100,-0.492,-551.800,167);
 INSERT INTO `mob_spawn_points` VALUES (17080495,0,'Qiqirn_Treasure_Hunter','Qiqirn Treasure Hunter',21,73,75,-393.100,-0.449,-615.880,0);
 INSERT INTO `mob_spawn_points` VALUES (17080496,0,'Qiqirn_Mine','Qiqirn Mine',22,75,75,-384.700,-1.500,-619.190,206);
-INSERT INTO `mob_spawn_points` VALUES (17080497,0,'Deviate_Bhoot','Deviate Bhoot',23,78,78,-334.700,3.848,-394.830,235);
+INSERT INTO `mob_spawn_points` VALUES (17080497,0,'Deviate_Bhoot_NM','Deviate Bhoot',27,80,80,-334.700,3.848,-394.830,235);
 INSERT INTO `mob_spawn_points` VALUES (17080498,0,'Deviate_Bhoot','Deviate Bhoot',23,78,78,-339.300,3.869,-400.490,123);
 INSERT INTO `mob_spawn_points` VALUES (17080499,0,'Deviate_Bhoot','Deviate Bhoot',23,78,78,-329.300,3.776,-410.190,152);
 INSERT INTO `mob_spawn_points` VALUES (17080500,0,'Deviate_Bhoot','Deviate Bhoot',23,78,78,-309.000,3.831,-399.200,75);
@@ -18715,10 +18715,10 @@ INSERT INTO `mob_spawn_points` VALUES (17080505,0,'Archaic_Gear','Archaic Gear',
 INSERT INTO `mob_spawn_points` VALUES (17080506,0,'Archaic_Gear','Archaic Gear',24,73,74,-440.000,-0.002,-537.160,206);
 INSERT INTO `mob_spawn_points` VALUES (17080507,0,'Archaic_Gear','Archaic Gear',24,73,74,-439.700,-0.001,-539.180,48);
 INSERT INTO `mob_spawn_points` VALUES (17080508,0,'Archaic_Gear','Archaic Gear',24,73,74,-426.000,-0.500,-540.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17080509,0,'Archaic_Rampart_2','Archaic Rampart',1,73,74,-440.000,-0.500,-525.000,64);
+INSERT INTO `mob_spawn_points` VALUES (17080509,0,'Archaic_Rampart','Archaic Rampart',1,73,74,-440.000,-0.500,-525.000,64);
 INSERT INTO `mob_spawn_points` VALUES (17080510,0,'Migrant_Russula','Migrant Russula',28,68,69,-439.200,-0.030,-546.610,44);
 INSERT INTO `mob_spawn_points` VALUES (17080511,0,'Migrant_Russula','Migrant Russula',28,68,69,-428.900,-0.061,-533.590,19);
-INSERT INTO `mob_spawn_points` VALUES (17080512,0,'Archaic_Rampart_1','Archaic Rampart',1,73,74,-440.000,-0.500,-555.000,192);
+INSERT INTO `mob_spawn_points` VALUES (17080512,0,'Archaic_Rampart','Archaic Rampart',1,73,74,-440.000,-0.500,-555.000,192);
 INSERT INTO `mob_spawn_points` VALUES (17080513,0,'Demonic_Rose','Demonic Rose',29,73,75,-439.000,-0.500,-554.000,192);
 INSERT INTO `mob_spawn_points` VALUES (17080514,0,'Qiqirn_Treasure_Hunter','Qiqirn Treasure Hunter',21,73,75,-297.700,-0.449,-471.440,0);
 INSERT INTO `mob_spawn_points` VALUES (17080515,0,'Qiqirn_Mine','Qiqirn Mine',22,75,75,-299.900,-0.500,-472.390,66);
@@ -18729,17 +18729,17 @@ INSERT INTO `mob_spawn_points` VALUES (17080519,0,'Archaic_Gear','Archaic Gear',
 INSERT INTO `mob_spawn_points` VALUES (17080520,0,'Qiqirn_Astrologer','Qiqirn Astrologer',19,77,78,-346.600,4.013,-134.190,245);
 INSERT INTO `mob_spawn_points` VALUES (17080521,0,'Archaic_Gear','Archaic Gear',24,73,74,-298.300,0.002,-182.490,2);
 INSERT INTO `mob_spawn_points` VALUES (17080522,0,'Archaic_Gear','Archaic Gear',24,73,74,-292.300,0.021,-181.770,118);
-INSERT INTO `mob_spawn_points` VALUES (17080523,0,'Archaic_Rampart_2','Archaic Rampart',1,73,74,-290.000,-0.500,-180.000,128);
+INSERT INTO `mob_spawn_points` VALUES (17080523,0,'Archaic_Rampart','Archaic Rampart',1,73,74,-290.000,-0.500,-180.000,128);
 INSERT INTO `mob_spawn_points` VALUES (17080524,0,'Devil_Manta','Devil Manta',30,70,73,-289.000,0.001,-179.000,128);
 INSERT INTO `mob_spawn_points` VALUES (17080525,0,'Devil_Manta','Devil Manta',30,70,73,-289.000,0.001,-179.000,128);
 INSERT INTO `mob_spawn_points` VALUES (17080526,0,'Archaic_Gear','Archaic Gear',24,73,74,-263.000,0.001,-122.390,12);
 INSERT INTO `mob_spawn_points` VALUES (17080527,0,'Archaic_Gears','Archaic Gears',31,74,75,-257.100,0.001,-118.890,138);
 INSERT INTO `mob_spawn_points` VALUES (17080528,0,'Archaic_Gear','Archaic Gear',24,73,74,-245.400,0.001,-79.817,17);
 INSERT INTO `mob_spawn_points` VALUES (17080529,0,'Archaic_Gears','Archaic Gears',31,74,75,-287.100,0.001,-79.470,90);
-INSERT INTO `mob_spawn_points` VALUES (17080530,0,'Archaic_Rampart_2','Archaic Rampart',1,73,74,-233.000,-0.449,-100.000,128);
+INSERT INTO `mob_spawn_points` VALUES (17080530,0,'Archaic_Rampart','Archaic Rampart',1,73,74,-233.000,-0.449,-100.000,128);
 INSERT INTO `mob_spawn_points` VALUES (17080531,0,'Devil_Manta','Devil Manta',30,70,73,-232.000,-0.500,-99.000,128);
 INSERT INTO `mob_spawn_points` VALUES (17080532,0,'Devil_Manta','Devil Manta',30,70,73,-232.000,-0.500,-99.000,128);
-INSERT INTO `mob_spawn_points` VALUES (17080533,0,'Archaic_Rampart_3','Archaic Rampart',1,73,74,-293.000,-0.500,-100.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17080533,0,'Archaic_Rampart','Archaic Rampart',1,73,74,-293.000,-0.500,-100.000,0);
 INSERT INTO `mob_spawn_points` VALUES (17080534,0,'Demonic_Pugil','Demonic Pugil',33,73,75,-292.000,-0.500,-99.000,0);
 INSERT INTO `mob_spawn_points` VALUES (17080535,0,'Demonic_Pugil','Demonic Pugil',33,73,75,-292.000,-0.500,-99.000,0);
 INSERT INTO `mob_spawn_points` VALUES (17080536,0,'Orobon','Orobon',34,68,69,-292.000,-0.500,-99.000,0);
@@ -18751,7 +18751,7 @@ INSERT INTO `mob_spawn_points` VALUES (17080541,0,'Archaic_Gear','Archaic Gear',
 INSERT INTO `mob_spawn_points` VALUES (17080542,0,'Qiqirn_Astrologer','Qiqirn Astrologer',19,77,78,-342.600,-4.500,-57.333,0);
 INSERT INTO `mob_spawn_points` VALUES (17080543,0,'Archaic_Gear','Archaic Gear',24,73,74,-375.300,0.005,-14.420,27);
 INSERT INTO `mob_spawn_points` VALUES (17080544,0,'Archaic_Gear','Archaic Gear',24,73,74,-365.600,0.021,-12.710,199);
-INSERT INTO `mob_spawn_points` VALUES (17080545,0,'Archaic_Rampart_3','Archaic Rampart',1,73,74,-393.000,-0.500,-20.000,128);
+INSERT INTO `mob_spawn_points` VALUES (17080545,0,'Archaic_Rampart','Archaic Rampart',1,73,74,-393.000,-0.500,-20.000,128);
 INSERT INTO `mob_spawn_points` VALUES (17080546,0,'Mourioche','Mourioche',36,68,69,-392.000,-0.500,-19.000,128);
 INSERT INTO `mob_spawn_points` VALUES (17080547,0,'Mourioche','Mourioche',36,68,69,-392.000,-0.500,-19.000,128);
 INSERT INTO `mob_spawn_points` VALUES (17080548,0,'Mourioche','Mourioche',36,68,69,-392.000,-0.500,-19.000,128);
@@ -18759,13 +18759,13 @@ INSERT INTO `mob_spawn_points` VALUES (17080549,0,'Archaic_Gear','Archaic Gear',
 INSERT INTO `mob_spawn_points` VALUES (17080550,0,'Archaic_Gears','Archaic Gears',31,74,75,-415.200,0.001,-73.176,156);
 INSERT INTO `mob_spawn_points` VALUES (17080551,0,'Archaic_Gear','Archaic Gear',24,73,74,-409.700,0.001,-119.670,33);
 INSERT INTO `mob_spawn_points` VALUES (17080552,0,'Archaic_Gears','Archaic Gears',31,74,75,-400.100,0.001,-119.610,19);
-INSERT INTO `mob_spawn_points` VALUES (17080553,0,'Archaic_Rampart_1','Archaic Rampart',1,73,74,-445.000,-0.449,-100.000,0);
+INSERT INTO `mob_spawn_points` VALUES (17080553,0,'Archaic_Rampart','Archaic Rampart',1,73,74,-445.000,-0.449,-100.000,0);
 INSERT INTO `mob_spawn_points` VALUES (17080554,0,'Goobbue_Wanderer','Goobbue Wanderer',37,70,73,-444.000,-0.449,-99.000,0);
-INSERT INTO `mob_spawn_points` VALUES (17080555,0,'Archaic_Rampart_2','Archaic Rampart',1,73,74,-387.000,-0.500,-100.000,128);
+INSERT INTO `mob_spawn_points` VALUES (17080555,0,'Archaic_Rampart','Archaic Rampart',1,73,74,-387.000,-0.500,-100.000,128);
 INSERT INTO `mob_spawn_points` VALUES (17080556,0,'Goobbue_Wanderer','Goobbue Wanderer',37,70,73,-386.000,-0.449,-99.000,0);
 INSERT INTO `mob_spawn_points` VALUES (17080557,0,'Goobbue_Wanderer','Goobbue Wanderer',37,70,73,-386.000,-0.449,-99.000,0);
 INSERT INTO `mob_spawn_points` VALUES (17080558,0,'Archaic_Chariot','Archaic Chariot',35,77,78,-419.000,-0.006,-84.586,199);
-INSERT INTO `mob_spawn_points` VALUES (17080559,0,'Archaic_Rampart_2','Archaic Rampart',1,73,74,-340.000,-0.500,253.000,64);
+INSERT INTO `mob_spawn_points` VALUES (17080559,0,'Archaic_Rampart','Archaic Rampart',1,73,74,-340.000,-0.500,253.000,64);
 INSERT INTO `mob_spawn_points` VALUES (17080560,0,'Seasonal_Treant','Seasonal Treant',38,68,69,-419.000,0.500,235.000,64);
 INSERT INTO `mob_spawn_points` VALUES (17080561,0,'Seasonal_Treant','Seasonal Treant',38,68,69,-419.000,0.500,235.000,64);
 INSERT INTO `mob_spawn_points` VALUES (17080562,0,'Archaic_Gears','Archaic Gears',31,74,75,-316.000,-0.472,235.759,192);
@@ -18776,18 +18776,18 @@ INSERT INTO `mob_spawn_points` VALUES (17080566,0,'Archaic_Gears','Archaic Gears
 INSERT INTO `mob_spawn_points` VALUES (17080567,0,'Archaic_Gear','Archaic Gear',24,73,74,-322.500,-0.469,218.257,3);
 INSERT INTO `mob_spawn_points` VALUES (17080568,0,'Archaic_Gear','Archaic Gear',24,73,74,-311.200,-0.432,182.477,109);
 INSERT INTO `mob_spawn_points` VALUES (17080569,0,'Archaic_Gears','Archaic Gears',31,74,75,-316.800,-0.075,166.942,243);
-INSERT INTO `mob_spawn_points` VALUES (17080570,0,'Archaic_Rampart_2','Archaic Rampart',1,73,74,-340.000,-0.449,180.000,192);
+INSERT INTO `mob_spawn_points` VALUES (17080570,0,'Archaic_Rampart','Archaic Rampart',1,73,74,-340.000,-0.449,180.000,192);
 INSERT INTO `mob_spawn_points` VALUES (17080571,0,'Seasonal_Treant','Seasonal Treant',38,68,69,-258.000,0.500,194.000,64);
 INSERT INTO `mob_spawn_points` VALUES (17080572,0,'Seasonal_Treant','Seasonal Treant',38,68,69,-258.000,0.500,194.000,64);
 INSERT INTO `mob_spawn_points` VALUES (17080573,0,'Qiqirn_Treasure_Hunter','Qiqirn Treasure Hunter',21,73,75,-337.600,-0.508,226.486,102);
 INSERT INTO `mob_spawn_points` VALUES (17080574,0,'Qiqirn_Mine','Qiqirn Mine',22,75,75,-371.100,-0.500,219.212,4);
 INSERT INTO `mob_spawn_points` VALUES (17080575,0,'Qiqirn_Treasure_Hunter','Qiqirn Treasure Hunter',21,73,75,-333.900,-0.685,219.697,216);
 INSERT INTO `mob_spawn_points` VALUES (17080576,0,'Qiqirn_Mine','Qiqirn Mine',22,75,75,-333.900,-0.773,219.697,216);
-INSERT INTO `mob_spawn_points` VALUES (17080577,0,'Archaic_Rampart_3','Archaic Rampart',1,73,74,-429.000,-0.500,220.000,4);
+INSERT INTO `mob_spawn_points` VALUES (17080577,0,'Archaic_Rampart','Archaic Rampart',1,73,74,-429.000,-0.500,220.000,4);
 INSERT INTO `mob_spawn_points` VALUES (17080578,0,'Staggering_Sapling','Staggering Sapling',39,68,69,-420.300,-0.094,211.843,27);
 INSERT INTO `mob_spawn_points` VALUES (17080579,0,'Staggering_Sapling','Staggering Sapling',39,68,69,-420.300,-0.094,211.843,27);
 INSERT INTO `mob_spawn_points` VALUES (17080580,0,'Staggering_Sapling','Staggering Sapling',39,68,69,-426.000,-0.500,220.000,75);
-INSERT INTO `mob_spawn_points` VALUES (17080581,0,'Archaic_Rampart_3','Archaic Rampart',1,73,74,-251.000,-0.500,180.000,128);
+INSERT INTO `mob_spawn_points` VALUES (17080581,0,'Archaic_Rampart','Archaic Rampart',1,73,74,-251.000,-0.500,180.000,128);
 INSERT INTO `mob_spawn_points` VALUES (17080582,0,'Korrigan','Korrigan',40,68,69,-246.400,-0.093,171.893,51);
 INSERT INTO `mob_spawn_points` VALUES (17080583,0,'Korrigan','Korrigan',40,68,69,-246.400,-0.093,171.893,51);
 INSERT INTO `mob_spawn_points` VALUES (17080584,0,'Korrigan','Korrigan',40,68,69,-246.400,-0.093,171.893,51);

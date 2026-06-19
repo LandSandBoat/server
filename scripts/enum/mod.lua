@@ -347,6 +347,15 @@ xi.mod =
     LUMINIAN_KILLER                 = 237,
     LUMINION_KILLER                 = 238,
 
+    -- Killer Instinct Damage Bonus and Reduced Damage Taken
+    VERMIN_KILLER_DMG_BONUS         = 1206,
+    BIRD_KILLER_DMG_BONUS           = 1207,
+    AMORPH_KILLER_DMG_BONUS         = 1208,
+    LIZARD_KILLER_DMG_BONUS         = 1209,
+    AQUAN_KILLER_DMG_BONUS          = 1210,
+    PLANTOID_KILLER_DMG_BONUS       = 1211,
+    BEAST_KILLER_DMG_BONUS          = 1212,
+
     -- Status effect Job trait resistance modifiers.
     SLEEPRES                        = 240,
     POISONRES                       = 241,
@@ -1013,6 +1022,12 @@ xi.mod =
     ANCIENT_CIRCLE_POTENCY          = 1142, -- Increases the potency of the Ancient Circle effect (e.g. mod value 2 = +2% Dragon Killer)
     WARDING_CIRCLE_POTENCY          = 1143, -- Increases the potency of the Warding Circle effect (e.g. mod value 2 = +2% Demon Killer)
 
+    -- Circle Abilities Bonus Damage and Reduced Damage Taken
+    WARDING_CIRCLE_DMG_BONUS        = 1202,
+    ANCIENT_CIRCLE_DMG_BONUS        = 1203,
+    HOLY_CIRCLE_DMG_BONUS           = 1204,
+    ARCANE_CIRCLE_DMG_BONUS         = 1205,
+
     -- Other
     CURE2MP_PERCENT                 = 860, -- Converts % of "Cure" amount to MP
     DIVINE_BENISON                  = 910, -- Adds fast cast and enmity reduction to -Na spells (includes Erase). Enmity reduction is half of the fast cast amount
@@ -1110,6 +1125,9 @@ xi.mod =
     REWARD_RECAST = 1152, -- TODO: Reduces Reward recast time (seconds)
 
     KNOCKBACK_REDUCTION = 1172, -- Reduces distance knocked back
+
+    -- Era Custom:
+    ADDS_SPELL = 1213,
 
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 

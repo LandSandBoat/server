@@ -25,6 +25,14 @@ function CZone:resetLocalVars()
 end
 
 ---@return nil
+function CZone:increaseStayAwakeCounter()
+end
+
+---@return nil
+function CZone:decreaseStayAwakeCounter()
+end
+
+---@return nil
 function CZone:registerCuboidTriggerArea(triggerAreaID, xMin, yMin, zMin, xMax, yMax, zMax)
 end
 

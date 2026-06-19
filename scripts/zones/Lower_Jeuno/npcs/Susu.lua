@@ -40,14 +40,14 @@ entity.onTrigger = function(player, npc)
         { xi.item.SCROLL_OF_FLARE,         71250 },
         { xi.item.SCROLL_OF_FREEZE,        52500 },
         { xi.item.SCROLL_OF_BURST,         63750 },
-        { xi.item.SCROLL_OF_QUAKE_II,     119180 },
-        { xi.item.SCROLL_OF_FLOOD_II,     119180 },
-        { xi.item.SCROLL_OF_TORNADO_II,   119180 },
-        { xi.item.SCROLL_OF_FLARE_II,     119180 },
-        { xi.item.SCROLL_OF_FREEZE_II,    119180 },
-        { xi.item.SCROLL_OF_BURST_II,     119180 },
-        { xi.item.SCROLL_OF_BIO_III,      139125 },
-        { xi.item.SCROLL_OF_BLIND_II,     139125 },
+        -- { xi.item.SCROLL_OF_QUAKE_II,     119180 },
+        -- { xi.item.SCROLL_OF_FLOOD_II,     119180 },
+        -- { xi.item.SCROLL_OF_TORNADO_II,   119180 },
+        -- { xi.item.SCROLL_OF_FLARE_II,     119180 },
+        -- { xi.item.SCROLL_OF_FREEZE_II,    119180 },
+        -- { xi.item.SCROLL_OF_BURST_II,     119180 },
+        -- { xi.item.SCROLL_OF_BIO_III,      139125 },
+        -- { xi.item.SCROLL_OF_BLIND_II,     139125 },
     }
 
     player:showText(npc, zones[xi.zone.LOWER_JEUNO].text.WAAG_DEEG_SHOP_DIALOG)

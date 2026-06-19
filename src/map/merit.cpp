@@ -29,8 +29,8 @@
 
 // clang-format off
 static uint8 upgrade[10][45] = {
-    { 1, 2, 3, 4, 5, 5, 5, 5, 5, 7, 7, 7, 9, 9, 9 },           // HP-MP
-    { 3, 6, 9, 9, 9, 12, 12, 12, 12, 15, 15, 15, 15, 18, 18 }, // Attributes
+    { 1, 2, 3, 4, 5, 5, 5, 5, 5, 7 },                          // HP-MP
+    { 3, 6, 9, 9, 9, 12, 12, 12, 12, 15 },                     // Attributes
     { 1, 2, 3, 3, 3, 3, 3, 3 },                                // Combat Skills
     { 1, 2, 3, 3, 3, 3, 3, 3 },                                // Defensive Skills
     { 1, 2, 3, 3, 3, 3, 3, 3 },                                // Magic Skills
@@ -76,8 +76,8 @@ struct MeritCategoryInfo_t
 
 // clang-format off
 static const MeritCategoryInfo_t meritCatInfo[] = {
-    { 3, 75, 0 },   // MCATEGORY_HP_MP       catNumber 00 (HP 15, MP 15, Max_merits 45)
-    { 7, 105, 1 },  // MCATEGORY_ATTRIBUTES  catNumber 01
+    { 3, 45, 0 },   // MCATEGORY_HP_MP       catNumber 00 (HP 15, MP 15, Max_merits 45)
+    { 7, 70, 1 },   // MCATEGORY_ATTRIBUTES  catNumber 01
     { 19, 152, 2 }, // MCATEGORY_COMBAT      catNumber 02
     { 14, 112, 4 }, // MCATEGORY_MAGIC       catNumber 03
     { 5, 10, 5 },   // MCATEGORY_OTHERS      catNumber 04

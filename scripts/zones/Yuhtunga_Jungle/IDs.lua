@@ -65,6 +65,7 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
         ROSE_GARDEN          = GetFirstID('Rose_Garden'),
         SIREN                = GetFirstID('Siren'),
         VOLUPTUOUS_VILMA     = GetFirstID('Voluptuous_Vilma'),
+        TURTLERIDER          = GetFirstID('Meww_the_Turtlerider'),
     },
     npc =
     {

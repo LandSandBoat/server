@@ -34,7 +34,8 @@ zones[xi.zone.ZERUHN_MINES] =
     },
     npc =
     {
-        MINING = GetTableOfIDs('Mining_Point'),
+        MINING    = GetTableOfIDs('Mining_Point'),
+        LASTHENES = GetFirstID('Lasthenes'),
     },
 }
 

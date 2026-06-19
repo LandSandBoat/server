@@ -2,7 +2,7 @@ local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 
 return {
     ['Ahaadah']            = { event = 870 },
-    ['Amajal']             = { event = 675 },
+    -- ['Amajal']             = { event = 675 },
     ['Arzizah']            = { event = 246 },
     ['Balakaf']            = { event = 515 },
     ['Bujahwa']            = { event = 683 },

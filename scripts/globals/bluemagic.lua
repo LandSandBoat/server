@@ -504,6 +504,7 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateEbullienceMultiplier(caster, spellGroup))
     finalDamage = math.floor(finalDamage * xi.combat.damage.calculateDamageAdjustment(target, false, true, false, false))
     finalDamage = math.floor(finalDamage * xi.settings.main.BLUE_POWER)
+    finalDamage = math.floor(finalDamage * xi.spells.damage.calculateCircleDmgMultiplier(caster, target))
 
     -- MP drain
     if mpDrain then
@@ -576,7 +577,8 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
     local ninFutaeBonus               = xi.spells.damage.calculateNinFutaeBonus(caster, xi.skill.BLUE_MAGIC)
     local ninjutsuMultiplier          = xi.spells.damage.calculateNinjutsuMultiplier(caster, target, xi.skill.BLUE_MAGIC)
     local scarletDeliriumMultiplier   = xi.combat.damage.scarletDeliriumMultiplier(caster)
-    local areaOfEffectResistance      = xi.spells.damage.calculateAreaOfEffectResistance(target, spell)
+    local areaOfEffectResistance      = xi.spells.damage.calculateAreaOfEffectResistance(target, spell)v
+    local circleDmgMultiplier         = xi.spells.damage.calculateCircleDmgMultiplier(caster, target)
 
     dmg = math.floor(dmg * correlationMultiplier)
     dmg = math.floor(dmg * breathSDT)
@@ -596,6 +598,7 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
     dmg = math.floor(dmg * scarletDeliriumMultiplier)
     dmg = math.floor(dmg * areaOfEffectResistance)
     dmg = math.floor(dmg * calculateNukeWallFactor(target, spellElement, dmg))
+    dmg = math.floor(dmg * circleDmgMultiplier)
 
     -- Handle Magic Absorb message and HP recovery.
     if dmg < 0 then
@@ -635,6 +638,7 @@ end
 -- Apply spell damage
 xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params, trickAttackTarget)
     dmg                 = math.floor(dmg * xi.settings.main.BLUE_POWER)
+    dmg                 = math.floor(dmg * xi.spells.damage.calculateCircleDmgMultiplier(caster, target))
     local attackType    = params.attackType or xi.attackType.NONE
     local damageType    = params.damageType or xi.damageType.NONE
     local tpHits        = params.tphitslanded or 0

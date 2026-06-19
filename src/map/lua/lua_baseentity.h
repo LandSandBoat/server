@@ -875,6 +875,7 @@ public:
     auto getSpawnPos() -> sol::table;
     void setSpawn(float x, float y, float z, const sol::object& rot);
     auto getRespawnTime() const -> uint32;
+    auto getSpawnType() const -> uint16;
     void setRespawnTime(uint32 seconds) const;
 
     void instantiateMob(uint32 groupID);

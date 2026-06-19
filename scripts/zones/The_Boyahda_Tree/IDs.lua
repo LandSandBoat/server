@@ -41,6 +41,7 @@ zones[xi.zone.THE_BOYAHDA_TREE] =
         AGAS              = GetFirstID('Agas'),
         AQUARIUS          = GetFirstID('Aquarius'),
         BEET_LEAFHOPPER   = GetFirstID('Beet_Leafhopper'),
+        ANCIENT_GOOBBUE   = GetFirstID('Ancient_Goobbue'),
         ELLYLLON          = GetFirstID('Ellyllon'),
         FAFNIR            = GetFirstID('Fafnir'),
         LESHONKI          = GetFirstID('Leshonki'),

@@ -37,7 +37,7 @@ entity.onMobDisengage = function(mob)
         mob:pathThrough(ID.points[stage][prog - 1].point5, 9)
         mob:setLocalVar('run', 6)
     elseif run == 6 then
-        mob:pathThrough(ID.points[stage][prog - 1].point6, 9)
+        mob:pathThrough(ID.points[stage][prog - 1].point6, 11)
         mob:setLocalVar('run', 7)
     end
 end
@@ -66,15 +66,30 @@ entity.onMobFight = function(mob, target)
                 elseif mob:getLocalVar('run') <= 6 then
                     mob:setLocalVar('runTime', GetSystemTime())
                     entity.onMobDisengage(mob)
-                elseif mob:getLocalVar('run') == 7 then
-                    DespawnMob(ID.mob[stage - 1][prog - 1].astrologer, instance)
                 end
             end
         end
     end
+
+    if
+        mob:getLocalVar('run') == 7 and
+        mob:atPoint(ID.points[stage][prog - 1].point6)
+    then
+        mob:setLocalVar('run', 8)
+        mob:setAutoAttackEnabled(false)
+        mob:clearActionQueue()
+        mob:castSpell(xi.magic.spell.WARP, mob)
+        mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+        mob:timer(5000, function(mobArg)
+            DespawnMob(mobArg:getID(), instance)
+        end)
+    end
 end
 
 entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller then
+        xi.salvage.spawnTempChest(mob, {}, true)
+    end
 end
 
 entity.onMobDespawn = function(mob)

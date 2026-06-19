@@ -6,6 +6,7 @@ local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
     effect:addMod(xi.mod.DRAGON_KILLER, effect:getPower())
+    effect:addMod(xi.mod.ANCIENT_CIRCLE_DMG_BONUS, effect:getPower())
 end
 
 effectObject.onEffectTick = function(target, effect)

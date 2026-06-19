@@ -93,15 +93,15 @@ xi.instance.lookup =
     [xi.zone.LEBROS_CAVERN] =
     {
         { 6300, { 203, 21, -4, 0, 50, 0, 1 }, { 203, 4 }, { 208, 0 } }, -- Assault: Excavation Duty
-        -- Assault: Lebros Supplies
-        -- Assault: Troll Fugitives
-        -- Assault: Evade and Escape
-        -- Assault: Siegemaster Assassination
-        -- Assault: Apkallu Breeding
-        -- Assault: Wamoura Farm Raid
-        -- Assault: Egg Conservation
-        -- Assault: Operation: Black Pearl
-        -- Assault: Better Than One
+        { 6301, { 203, 22, -4, 0, 60, 0, 1 }, { 203, 4 }, { 208, 0 } }, -- Assault: Lebros Supplies
+        { 6302, { 203, 23, -4, 0, 70, 0, 1 }, { 205, 4 }, { 208, 2 } }, -- Assault: Troll Fugitives
+        { 6303, { 203, 24, -4, 0, 70, 0, 1 }, { 203, 4 }, { 208, 0 } }, -- Assault: Evade and Escape
+        { 6304, { 203, 25, -4, 0, 70, 0, 1 }, { 203, 4 }, { 208, 0 } }, -- Assault: Siegemaster Assassination
+        -- { 6305, { 203, 26, -1, 0, 60, 2, 1 }, { 203, 4 }, { 208, 0 } }, -- Assault: Apkallu Breeding
+        -- { 6306, { 203, 27, -4, 0, 70, 0, 1 }, { 203, 4 }, { 208, 0 } }, -- Assault: Wamoura Farm Raid
+        -- { 6307, { 203, 28, -1, 0, 70, 2, 1 }, { 203, 4 }, { 208, 0 } }, -- Assault: Egg Conservation
+        -- { 6308, { 203, 29, -1, 0, 70, 2, 1 }, { 203, 4 }, { 208, 0 } }, -- Assault: Operation: Black Pearl
+        -- { 6309, { 203, 30, -1, 0, 70, 2, 1 }, { 203, 4 }, { 208, 0 } }, -- Assault: Better Than One
     },
 
     [xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =

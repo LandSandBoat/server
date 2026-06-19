@@ -258,6 +258,16 @@ auto CLuaZone::insertDynamicEntity(sol::table table) -> CBaseEntity*
     return luautils::GenerateDynamicEntity(m_pLuaZone, nullptr, std::move(table));
 }
 
+void CLuaZone::increaseStayAwakeCounter()
+{
+    m_pLuaZone->increaseStayAwakeCounter();
+}
+
+void CLuaZone::decreaseStayAwakeCounter()
+{
+    m_pLuaZone->decreaseStayAwakeCounter();
+}
+
 /************************************************************************
  *  Function: SetSoloBattleMusic(253)
  *  Purpose : Set Solo Battle music for zone
@@ -396,6 +406,8 @@ void CLuaZone::Register()
     SOL_REGISTER("getTerrainType", CLuaZone::getTerrainType);
     SOL_REGISTER("getFloorId", CLuaZone::getFloorId);
     SOL_REGISTER("insertDynamicEntity", CLuaZone::insertDynamicEntity);
+    SOL_REGISTER("increaseStayAwakeCounter", CLuaZone::increaseStayAwakeCounter);
+    SOL_REGISTER("decreaseStayAwakeCounter", CLuaZone::decreaseStayAwakeCounter);
 
     SOL_REGISTER("getSoloBattleMusic", CLuaZone::getSoloBattleMusic);
     SOL_REGISTER("getPartyBattleMusic", CLuaZone::getPartyBattleMusic);

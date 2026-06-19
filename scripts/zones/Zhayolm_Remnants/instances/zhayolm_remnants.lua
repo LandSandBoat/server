@@ -224,14 +224,12 @@ end
 
 local instanceObject = {}
 
--- Requirements for the first player registering the instance
 instanceObject.registryRequirements = function(player)
-    return player:getMainLvl() >= 65 and player:hasKeyItem(xi.ki.REMNANTS_PERMIT)
+    return xi.salvage.registryRequirements(player)
 end
 
--- Requirements for further players entering an already-registered instance
 instanceObject.entryRequirements = function(player)
-    return player:getMainLvl() >= 65 and player:hasKeyItem(xi.ki.REMNANTS_PERMIT)
+    return xi.salvage.entryRequirements(player)
 end
 
 -- Called on the instance once it is created and ready
@@ -249,9 +247,8 @@ instanceObject.onInstanceCreatedCallback = function(player, instance)
     xi.instance.onInstanceCreatedCallback(player, instance)
 end
 
--- When the player zones into the instance
 instanceObject.afterInstanceRegister = function(player)
-    xi.salvage.instanceRegister(player, xi.item.CAGE_OF_Z_REMNANTS_FIREFLIES)
+    xi.salvage.afterInstanceRegister(player, xi.item.CAGE_OF_Z_REMNANTS_FIREFLIES)
 end
 
 -- Instance 'tick'

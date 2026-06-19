@@ -29,6 +29,8 @@ zones[xi.zone.MONASTIC_CAVERN] =
     mob =
     {
         ORCISH_OVERLORD               = GetTableOfIDs('Orcish_Overlord')[1], -- NM
+        ORCISH_HEXSPINNER             = GetFirstID('Orcish_Hexspinner'),
+        OVERLORD_BAKGODEK             = GetFirstID('Overlord_Bakgodek'),
         UNDERSTANDING_OVERLORD_OFFSET = GetTableOfIDs('Orcish_Overlord')[2], -- Quest NM
         BUGABOO                       = GetFirstID('Bugaboo'),
         MIMIC                         = GetFirstID('Mimic'),

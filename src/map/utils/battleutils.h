@@ -214,6 +214,7 @@ void RelinquishClaim(CCharEntity* PDefender);
 auto  MagicDmgTaken(CBattleEntity* PDefender, int32 damage, ELEMENT element) -> int32;
 auto  PhysicalDmgTaken(CBattleEntity* PDefender, int32 damage, xi::DamageType damageType, bool IsCovered = false) -> int32;
 auto  RangedDmgTaken(CBattleEntity* PDefender, int32 damage, xi::DamageType damageType, bool IsCovered = false) -> int32;
+int32 CircleDmgAdjust(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 damage);
 int32 CheckAndApplyDamageCap(int32 damage, CBattleEntity* PDefender);
 
 void HandleIssekiganEnmityBonus(CBattleEntity* PDefender, CBattleEntity* PAttacker);

@@ -8272,6 +8272,10 @@ INSERT INTO `mob_pools` VALUES (8165,'Triboulex','Triboulex',0,0x000000000000000
 INSERT INTO `mob_pools` VALUES (8166,'Zisurru','Zisurru',0,0x0000000000000000000000000000000000000000,1,1,1,240,100,0,1,1,1,16,0,0,0,3,0,0,0,0,0,0,0,NULL,NULL);                                 -- Capture needed
 INSERT INTO `mob_pools` VALUES (8167,'Clavauert_B_Chanoix','Clavauert B Chanoix',0,0x0000000000000000000000000000000000000000,1,1,1,240,100,0,0,0,0,0,0,32,0,3,0,0,0,0,0,0,0,NULL,NULL);         -- Capture needed
 
+-- Arrapago Remnants
+INSERT INTO `mob_pools` VALUES (9200,'Deviate_Bhoot_NM','Deviate_Bhoot',52,0x0000710100000000000000000000000000000000,4,4,12,240,100,0,1,0,1,2,0,0,0,133,0,0,28,0,0,52,52,2,6);
+INSERT INTO `mob_pools` VALUES (9201,'Psycheflayer_NM','Psycheflayer',233,0x0000EF0600000000000000000000000000000000,4,4,7,240,100,0,1,1,0,2,0,0,0,133,12,0,28,0,0,233,233,2,15);
+
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date

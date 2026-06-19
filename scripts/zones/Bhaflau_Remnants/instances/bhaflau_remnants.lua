@@ -90,14 +90,12 @@ local mobTable =
 
 local instanceObject = {}
 
--- Requirements for the first player registering the instance
 instanceObject.registryRequirements = function(player)
-    return player:getMainLvl() >= 65 and player:hasKeyItem(xi.ki.REMNANTS_PERMIT)
+    return xi.salvage.registryRequirements(player)
 end
 
--- Requirements for further players entering an already-registered instance
 instanceObject.entryRequirements = function(player)
-    return player:getMainLvl() >= 65 and player:hasKeyItem(xi.ki.REMNANTS_PERMIT)
+    return xi.salvage.entryRequirements(player)
 end
 
 -- Called on the instance once it is created and ready
@@ -112,19 +110,8 @@ instanceObject.onInstanceCreatedCallback = function(player, instance)
     xi.instance.onInstanceCreatedCallback(player, instance)
 end
 
--- When the player zones into the instance
 instanceObject.afterInstanceRegister = function(player)
-    for i = xi.slot.MAIN, xi.slot.BACK do
-        player:unequipItem(i)
-    end
-
-    player:addStatusEffect(xi.effect.ENCUMBRANCE_I, { power = 0xFFFF, duration = 6000, origin = player })
-    player:addStatusEffect(xi.effect.OBLIVISCENCE, { power = 1, duration = 6000, origin = player })
-    player:addStatusEffect(xi.effect.OMERTA, { power = 0x3F, duration = 6000, origin = player })
-    player:addStatusEffect(xi.effect.IMPAIRMENT, { power = 3, duration = 6000, origin = player })
-    player:addStatusEffect(xi.effect.DEBILITATION, { power = 0x1FF, duration = 6000, origin = player })
-    player:addTempItem(xi.item.CAGE_OF_B_REMNANTS_FIREFLIES)
-    player:delKeyItem(xi.ki.REMNANTS_PERMIT)
+    xi.salvage.afterInstanceRegister(player, xi.item.CAGE_OF_B_REMNANTS_FIREFLIES)
 end
 
 -- Instance 'tick'

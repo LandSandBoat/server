@@ -630,6 +630,9 @@ public:
     virtual void DecreaseZoneCounter(CCharEntity* PChar); // Remove a character from the zone
     virtual void IncreaseZoneCounter(CCharEntity* PChar); // Add a character to the zone
 
+    void increaseStayAwakeCounter();
+    void decreaseStayAwakeCounter();
+
     virtual void InsertNPC(CBaseEntity* PNpc);
     virtual void InsertMOB(CBaseEntity* PMob);
     virtual void InsertPET(CBaseEntity* PPet);
@@ -683,6 +686,8 @@ public:
     std::map<uint32_t, std::unique_ptr<SpawnSlot>> m_spawnSlots; // add unique slots to zone
 
     timer::time_point m_LoadedAt; // The time the zone was loaded
+
+    uint32 m_stayAwakeCounter{ 0 };
 
     auto navMesh() const -> INavMesh*;
     auto xiMesh() const -> IXiMesh*;

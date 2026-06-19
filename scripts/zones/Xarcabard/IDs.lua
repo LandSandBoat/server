@@ -68,6 +68,8 @@ zones[xi.zone.XARCABARD] =
         KOENIGSTIGER     = GetFirstID('Koenigstiger'),
         SHADOW_EYE       = GetFirstID('Shadow_Eye'),
         TIMEWORN_WARRIOR = GetFirstID('Timeworn_Warrior'),
+        BIAST            = GetFirstID('Biast'),
+
         VOIDWALKER       =
         {
             [xi.keyItem.CLEAR_ABYSSITE] =

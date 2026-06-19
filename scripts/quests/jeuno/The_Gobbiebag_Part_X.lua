@@ -1,7 +1,7 @@
 -----------------------------------
 -- The Gobbiebag Part X
 -----------------------------------
---  Log ID: 3, Quest ID: 27
+--  Log ID: 3, Quest ID: 124
 --  NPC: Bluffnix:  !pos -43 6 -115 245
 -----------------------------------
 require('scripts/quests/jeuno/helpers')

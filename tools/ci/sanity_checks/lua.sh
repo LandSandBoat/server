@@ -78,6 +78,7 @@ global_objects=(
     BattlefieldQuest
     Limbus
     SeasonalEvent
+    ScheduledEvent
     InstanceAssault
 
     onBattlefieldHandlerInitialize

@@ -13,26 +13,43 @@ xi.jeuno.helpers.GobbiebagQuest = {}
 setmetatable(xi.jeuno.helpers.GobbiebagQuest, { __index = Quest })
 xi.jeuno.helpers.GobbiebagQuest.__index = xi.jeuno.helpers.GobbiebagQuest
 
+-- ERA CUSTOM: Wardrobe config for Gobbiebag quests
+local wardrobeConfig =
+{
+    [xi.quest.id.jeuno.THE_GOBBIEBAG_PART_I]     = { container = xi.inv.WARDROBE4, startSize = 0,  wardrobeNum = 4 },
+    [xi.quest.id.jeuno.THE_GOBBIEBAG_PART_II]    = { container = xi.inv.WARDROBE4, startSize = 40, wardrobeNum = 4 },
+    [xi.quest.id.jeuno.THE_GOBBIEBAG_PART_III]   = { container = xi.inv.WARDROBE5, startSize = 0,  wardrobeNum = 5 },
+    [xi.quest.id.jeuno.THE_GOBBIEBAG_PART_IV]    = { container = xi.inv.WARDROBE5, startSize = 40, wardrobeNum = 5 },
+    [xi.quest.id.jeuno.THE_GOBBIEBAG_PART_V]     = { container = xi.inv.WARDROBE6, startSize = 0,  wardrobeNum = 6 },
+    [xi.quest.id.jeuno.THE_GOBBIEBAG_PART_VI]    = { container = xi.inv.WARDROBE6, startSize = 40, wardrobeNum = 6 },
+    [xi.quest.id.jeuno.THE_GOBBIEBAG_PART_VII]   = { container = xi.inv.WARDROBE7, startSize = 0,  wardrobeNum = 7 },
+    [xi.quest.id.jeuno.THE_GOBBIEBAG_PART_VIII]  = { container = xi.inv.WARDROBE7, startSize = 40, wardrobeNum = 7 },
+    [xi.quest.id.jeuno.THE_GOBBIEBAG_PART_IX]    = { container = xi.inv.WARDROBE8, startSize = 0,  wardrobeNum = 8 },
+    [xi.quest.id.jeuno.THE_GOBBIEBAG_PART_X]     = { container = xi.inv.WARDROBE8, startSize = 40, wardrobeNum = 8 },
+}
+
 function xi.jeuno.helpers.GobbiebagQuest:new(params)
     local quest = Quest:new(xi.questLog.JEUNO, params.questId)
 
     quest.reward = params.reward
 
-    local bagIncrease = 5
+    local wConfig = wardrobeConfig[params.questId]
+    local bagIncrease = 40
+    local container = wConfig.container
+    local startSize = wConfig.startSize
 
-    -- If quest is available or accepted, the correct dialogue ID is the expected pre quest inventory size offset by 1
+    -- Dialogue IDs use params.startInventorySize for correct NPC text
     local getPendingDialogueId = function(player)
-        return (player:getContainerSize(xi.inv.INVENTORY) + 1)
+        return params.startInventorySize + 1
     end
 
-    -- If quest is completed, the correct dialogue ID is the expected post quest inventory size offset by 1
-    local getCompleteDiaglogueId = function(player)
-        return (player:getContainerSize(xi.inv.INVENTORY) + bagIncrease + 1)
+    local getCompleteDialogueId = function(player)
+        return params.startInventorySize + 5 + 1
     end
 
     local getReqsMet = function(player)
         return  player:getFameLevel(xi.fameArea.JEUNO) >= params.fame and
-                player:getContainerSize(xi.inv.INVENTORY) == params.startInventorySize and
+                player:getContainerSize(container) == startSize and
                 (params.prerequisite == nil or player:hasCompletedQuest(xi.questLog.JEUNO, params.prerequisite))
     end
 
@@ -65,7 +82,7 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
 
         {
             check = function(player, status, vars)
-                return status == xi.questStatus.QUEST_ACCEPTED and getReqsMet(player)
+                return status == xi.questStatus.QUEST_ACCEPTED
             end,
 
             [xi.zone.LOWER_JEUNO] =
@@ -75,9 +92,9 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
                     onTrade = function(player, npc, trade)
                         if
                             npcUtil.tradeHasExactly(trade, params.tradeItems) or
-                            npcUtil.tradeHasExactly(trade, params.tradeStew)
+                            (params.tradeStew and npcUtil.tradeHasExactly(trade, params.tradeStew))
                         then
-                            return quest:progressEvent(73, getCompleteDiaglogueId(player))
+                            return quest:progressEvent(73, getCompleteDialogueId(player))
                         else
                             return quest:progressEvent(43, getPendingDialogueId(player), xi.questStatus.QUEST_ACCEPTED, 1)
                         end
@@ -92,11 +109,13 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
                 {
                     [73] = function(player, csid, option, npc)
                         if quest:complete(player) then
-                            player:changeContainerSize(xi.inv.INVENTORY, bagIncrease)
+                            player:changeContainerSize(container, bagIncrease)
 
-                            if player:getContainerSize(xi.inv.MOGSATCHEL) > 0 then
-                                player:changeContainerSize(xi.inv.MOGSATCHEL, bagIncrease)
-                            end
+                            player:printToPlayer(
+                                string.format('Mog Wardrobe %d expanded to %d slots!', wConfig.wardrobeNum, startSize + bagIncrease),
+                                xi.msg.channel.SYSTEM_3,
+                                ''
+                            )
 
                             player:messageSpecial(params.message)
                             player:confirmTrade()

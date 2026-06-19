@@ -69,11 +69,11 @@ xi.einherjar.getChamber = function(id)
 end
 
 -- Create a new chamber instance
-xi.einherjar.createNewChamber = function(chamberId, leader)
+xi.einherjar.createNewChamber = function(chamberId, leader, delaySpawn)
     log(chamberId, 'Creating chamber ' .. chamberId)
     local newInstance = xi.einherjar.new(chamberId, leader)
     chambersInstances[chamberId] = newInstance
-    if newInstance then
+    if newInstance and not delaySpawn then
         xi.einherjar.cycleWave(newInstance)
     end
 

@@ -938,6 +938,51 @@ xi.spells.damage.calculateNullification = function(target, element, isMagic, isB
     return 1
 end
 
+xi.spells.damage.calculateCircleDmgMultiplier = function(caster, target)
+    -- Modifies damage based on the attacker/defender ecosystem, if attacker and/or
+    -- defender has warding, ancient, arcane, or holy circle active
+    -- https://wiki.ffo.jp/html/12868.html
+
+    local ecoTable =
+    {
+        [xi.ecosystem.ARCANA]   = xi.mod.ARCANE_CIRCLE_DMG_BONUS,
+        [xi.ecosystem.DEMON ]   = xi.mod.WARDING_CIRCLE_DMG_BONUS,
+        [xi.ecosystem.DRAGON]   = xi.mod.ANCIENT_CIRCLE_DMG_BONUS,
+        [xi.ecosystem.UNDEAD]   = xi.mod.HOLY_CIRCLE_DMG_BONUS,
+        [xi.ecosystem.AMORPH]   = xi.mod.AMORPH_KILLER_DMG_BONUS,
+        [xi.ecosystem.AQUAN]    = xi.mod.AQUAN_KILLER_DMG_BONUS,
+        [xi.ecosystem.BEAST]    = xi.mod.BEAST_KILLER_DMG_BONUS,
+        [xi.ecosystem.BIRD]     = xi.mod.BIRD_KILLER_DMG_BONUS,
+        [xi.ecosystem.LIZARD]   = xi.mod.LIZARD_KILLER_DMG_BONUS,
+        [xi.ecosystem.PLANTOID] = xi.mod.PLANTOID_KILLER_DMG_BONUS,
+        [xi.ecosystem.VERMIN]   = xi.mod.VERMIN_KILLER_DMG_BONUS,
+    }
+
+    -- Handle both cases separately. It's possible, however unlikely, that both target and
+    -- caster have a circle ability up which counters the other entity's ecosystem
+    local casterWeakCircle = ecoTable[caster:getEcosystem()]
+    local targetWeakCircle = ecoTable[target:getEcosystem()]
+    local damageReduction = 0
+    local damageBonus     = 0
+
+    if casterWeakCircle then
+        damageReduction = target:getMod(casterWeakCircle)
+        if caster:isNM() then
+            damageReduction = math.floor(damageReduction * 2 / 3)
+        end
+    end
+
+    if targetWeakCircle then
+        damageBonus = caster:getMod(targetWeakCircle)
+        if target:isNM() then
+            damageBonus = math.floor(damageBonus * 2 / 3)
+        end
+    end
+
+    return (1 + damageBonus / 100) * (1 - damageReduction / 100)
+end
+
+
 xi.spells.damage.calculateIfMagicBurst = function(target, spellElement, skillchainCount)
     local magicBurst = 1 -- The variable we want to calculate
 
@@ -1146,6 +1191,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local helixMeritMultiplier      = xi.spells.damage.calculateHelixMeritMultiplier(caster, spellId)
     local areaOfEffectResistance    = xi.spells.damage.calculateAreaOfEffectResistance(target, spell)
     local actionTypeMultiplier      = xi.spells.damage.calculateSpellActionTypeMultiplier(caster)
+    local circleDmgMultiplier       = xi.spells.damage.calculateCircleDmgMultiplier(caster, target)
 
     -- Calculate finalDamage. It MUST be floored after EACH multiplication.
     finalDamage = math.floor(spellDamage * multipleTargetReduction)
@@ -1175,6 +1221,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * absorb)
     finalDamage = math.floor(finalDamage * magicBurst)
     finalDamage = math.floor(finalDamage * magicBurstBonus)
+    finalDamage = math.floor(finalDamage * circleDmgMultiplier)
 
     -- Handle "Nuke Wall". It must be handled after all previous calculations, but before clamp.
     local nukeWallFactor = calculateNukeWallFactor(target, spellElement, finalDamage)

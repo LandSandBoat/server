@@ -348,58 +348,52 @@ auto GetWeatherModifier(const CCharEntity* PChar) -> float
     return weatherMod;
 }
 
-uint16 CalculateStamina(int skill, uint8 count)
+uint16 CalculateStamina(uint8 fishingSkill, int catchSkill, uint8 count)
 {
+    int32 baseDiff = catchSkill - fishingSkill;
+    int32 stamina  = (15 * baseDiff * baseDiff) + (catchSkill * 100);
+
+    // Apply count multiplier for multi-hook
     float multiplier = 1.0f + (0.1f * (count - 1));
-    int   modSkill   = (int)std::floor(multiplier * skill);
 
-    return (uint16)std::floor(xirand::GetRandomNumber(95, 105) * ((modSkill + 36) / 2));
+    return (uint16)std::floor(stamina * multiplier);
 }
 
-uint16 CalculateAttack(Legendary legendary, uint8 difficulty, rod_t* rod)
+uint16 CalculateAttack(uint8 fishingSkill, Legendary legendary, uint8 difficulty, rod_t* rod)
 {
-    uint8 bonusAdd = (legendary) ? rod->lgdBonusAtk : 0;
-
-    return (uint16)std::floor(difficulty * (((static_cast<float>(rod->fishAttack) + bonusAdd) / 100.0f)) * 20.0f);
+    // ERA: just (skill / 10) + 100
+    return (uint16)(fishingSkill + 100);
 }
 
-uint16 CalculateHeal(Legendary legendary, uint8 difficulty, rod_t* rod)
+
+uint16 CalculateHeal(uint8 fishingSkill, Legendary legendary, uint8 difficulty, rod_t* rod)
 {
-    uint16 attack = CalculateAttack(legendary, difficulty, rod);
-
-    return (uint16)std::floor((static_cast<float>(attack) / 20.0f) * (static_cast<float>(rod->fishRecovery) / 100.0f)) * 10.0f;
+    // ERA: fixed at 140
+    return 140;
 }
+
 
 uint8 CalculateRegen(uint8 fishingSkill, rod_t* rod, FISHINGCATCHTYPE catchType, uint8 sizeType, uint8 catchSkill, Legendary legendaryCatch, IsNM NM)
 {
-    uint8 regen     = 128;
-    uint8 drainDiff = 12;
-    uint8 regenDiff = 24;
-    uint8 regenMod  = 0;
+    uint8 regen     = 0;
+    uint8 regenMod  = 10;
+    uint8 drainDiff = 10;
+    uint8 regenDiff = 10;
 
-    if (rod->rodID == EBISU)
+    // ERA: absDiff formula
+    if (catchSkill > fishingSkill)
     {
-        regenMod = 11;
+        regen = (uint8)(128 + ((catchSkill - fishingSkill) / 4));
     }
-
-    // +1 for large fish/items/mobs if not using Ebisu
-    regen += (sizeType > FISHINGSIZETYPE_SMALL && rod->rodID != EBISU) ? 1 : 0;
-
-    // legendary rod bonuses
-    if (rod->rodID == LU_SHANG || rod->rodID == EBISU || rod->rodID == LU_SHANG_1 || rod->rodID == EBISU_1)
+    else
     {
-        if (legendaryCatch)
-        {
-            regen -= (rod->rodID == LU_SHANG || rod->rodID == LU_SHANG_1) ? 1 : 2;
-        }
-
-        regen -= (catchType == FISHINGCATCHTYPE_MOB) ? 3 : 0;
+        regen = (uint8)((128 - (fishingSkill - catchSkill)) / 4);
     }
 
     // skill bonus/penalty
     if (catchType <= FISHINGCATCHTYPE_MOB && !NM)
     {
-        if (catchSkill <= (fishingSkill + regenMod - drainDiff))
+        if (catchSkill <= (fishingSkill + (int16)regenMod - (int16)drainDiff))
         {
             float divMod = 1.5f;
 
@@ -413,10 +407,10 @@ uint8 CalculateRegen(uint8 fishingSkill, rod_t* rod, FISHINGCATCHTYPE catchType,
                 divMod = 1.3f;
             }
 
-            regen -= std::min<uint8>((1 + (uint8)std::floor(((fishingSkill + regenMod) - drainDiff - catchSkill) / divMod)), regen);
+            regen -= (uint8)std::min<uint16>((uint16)(1 + std::floor(((fishingSkill + (int16)regenMod) - (int16)drainDiff - catchSkill) / divMod)), (uint16)regen);
         }
 
-        if (catchType < FISHINGCATCHTYPE_ITEM && catchSkill - regenMod >= (fishingSkill + regenDiff))
+        if (catchType < FISHINGCATCHTYPE_ITEM && (int16)catchSkill - (int16)regenMod >= (int16)fishingSkill + (int16)regenDiff)
         {
             float multMod = 0.5f;
 
@@ -430,7 +424,7 @@ uint8 CalculateRegen(uint8 fishingSkill, rod_t* rod, FISHINGCATCHTYPE catchType,
                 multMod = 0.4f;
             }
 
-            regen += (1 + (uint8)std::floor((catchSkill - regenMod - (fishingSkill + regenDiff)) * multMod));
+            regen += (uint8)(1 + std::floor((catchSkill - regenMod - (fishingSkill + regenDiff)) * multMod));
         }
     }
 
@@ -438,7 +432,7 @@ uint8 CalculateRegen(uint8 fishingSkill, rod_t* rod, FISHINGCATCHTYPE catchType,
     {
         if (fishingSkill > catchSkill)
         {
-            regen -= (uint8)std::floor((fishingSkill - catchSkill) / 5);
+            regen -= (uint8)std::floor((fishingSkill - catchSkill) / 5.0f);
         }
     }
 
@@ -2513,12 +2507,12 @@ fishresponse_t* FishingCheck(CCharEntity* PChar, uint8 fishingSkill, rod_t* rod,
             response->count = 1;
         }
 
-        response->stamina   = CalculateStamina(FishSelection->maxSkill, response->count);
+        response->stamina   = CalculateStamina(fishingSkill, FishSelection->maxSkill, response->count);
         response->delay     = CalculateDelay(PChar, FishSelection->baseDelay, FishSelection->sizeType, rod, response->count);
         response->regen     = CalculateRegen(fishingSkill, rod, (FISHINGCATCHTYPE)response->catchtype, FishSelection->sizeType, FishSelection->maxSkill, Legendary{ FishSelection->legendary }, IsNM::No);
         response->response  = CalculateMovement(PChar, FishSelection->baseMove, FishSelection->sizeType, rod, response->count);
-        response->attackdmg = CalculateAttack(FishSelection->legendary ? Legendary::Yes : Legendary::No, FishSelection->difficulty, rod);
-        response->heal      = CalculateHeal(FishSelection->legendary ? Legendary::Yes : Legendary::No, FishSelection->difficulty, rod);
+        response->attackdmg = CalculateAttack(fishingSkill, FishSelection->legendary ? Legendary::Yes : Legendary::No, FishSelection->difficulty, rod);
+        response->heal      = CalculateHeal(fishingSkill, FishSelection->legendary ? Legendary::Yes : Legendary::No, FishSelection->difficulty, rod);
         response->timelimit = CalculateHookTime(PChar, FishSelection->legendary ? Legendary::Yes : Legendary::No, FishSelection->legendary_flags, FishSelection->sizeType, rod, bait);
         response->sense     = CalculateFishSense(PChar, response, fishingSkill, (FISHINGCATCHTYPE)response->catchtype, FishSelection->sizeType, FishSelection->maxSkill, FishSelection->legendary ? Legendary::Yes : Legendary::No, FishSelection->minLength, FishSelection->maxLength, FishSelection->ranking, rod);
         response->hooksense = FishSelection->sizeType == FISHINGSIZETYPE_SMALL ? FISHINGHOOKSENSETYPE_SMALL : FISHINGHOOKSENSETYPE_LARGE;
@@ -2562,12 +2556,12 @@ fishresponse_t* FishingCheck(CCharEntity* PChar, uint8 fishingSkill, rod_t* rod,
         response->catchsizeType   = ItemSelection->sizeType;
         response->legendary       = 0;
         response->count           = 1;
-        response->stamina         = CalculateStamina(ItemSelection->maxSkill, 1);
+        response->stamina         = CalculateStamina(fishingSkill, -14, 1);
         response->delay           = CalculateDelay(PChar, ItemSelection->baseDelay, ItemSelection->sizeType, rod, 1);
         response->regen           = CalculateRegen(fishingSkill, rod, (FISHINGCATCHTYPE)response->catchtype, ItemSelection->sizeType, ItemSelection->maxSkill, Legendary::No, IsNM::No);
         response->response        = CalculateMovement(PChar, ItemSelection->baseMove, ItemSelection->sizeType, rod, 1);
-        response->attackdmg       = CalculateAttack(ItemSelection->legendary ? Legendary::Yes : Legendary::No, ItemSelection->difficulty, rod);
-        response->heal            = CalculateHeal(ItemSelection->legendary ? Legendary::Yes : Legendary::No, ItemSelection->difficulty, rod);
+        response->attackdmg       = CalculateAttack(fishingSkill, Legendary::No, 16, rod);
+        response->heal            = CalculateHeal(fishingSkill, Legendary::No, 16, rod);
         response->timelimit       = CalculateHookTime(PChar, ItemSelection->legendary ? Legendary::Yes : Legendary::No, ItemSelection->legendary_flags, ItemSelection->sizeType, rod, bait);
         response->sense           = CalculateFishSense(PChar, response, fishingSkill, (FISHINGCATCHTYPE)response->catchtype, ItemSelection->sizeType, ItemSelection->maxSkill, Legendary::No, ItemSelection->minLength, ItemSelection->maxLength, ItemSelection->ranking, rod);
         response->hooksense       = ItemSelection->sizeType == FISHINGSIZETYPE_SMALL ? FISHINGHOOKSENSETYPE_SMALL : FISHINGHOOKSENSETYPE_LARGE;
@@ -2590,12 +2584,12 @@ fishresponse_t* FishingCheck(CCharEntity* PChar, uint8 fishingSkill, rod_t* rod,
             response->catchsizeType       = FISHINGSIZETYPE_LARGE;
             response->legendary           = 0;
             response->count               = 1;
-            response->stamina             = CalculateStamina(MobSelection->level, 1);
+            response->stamina             = CalculateStamina(fishingSkill, MobSelection->level, 1);
             response->delay               = CalculateDelay(PChar, MobSelection->baseDelay, response->catchsizeType, rod, 1);
             response->regen               = CalculateRegen(fishingSkill, rod, (FISHINGCATCHTYPE)response->catchtype, response->catchsizeType, MobSelection->level, Legendary::No, IsNM{ MobSelection->nm });
             response->response            = CalculateMovement(PChar, MobSelection->baseMove, response->catchsizeType, rod, 1);
-            response->attackdmg           = CalculateAttack(Legendary::No, MobSelection->difficulty, rod);
-            response->heal                = CalculateHeal(Legendary::No, MobSelection->difficulty, rod);
+            response->attackdmg           = CalculateAttack(fishingSkill, Legendary::No, MobSelection->difficulty, rod);
+            response->heal                = CalculateHeal(fishingSkill, Legendary::No, MobSelection->difficulty, rod);
             response->timelimit           = CalculateHookTime(PChar, Legendary::No, 0, response->catchsizeType, rod, bait);
             response->sense               = CalculateFishSense(PChar, response, fishingSkill, FISHINGCATCHTYPE_MOB, FISHINGSIZETYPE_LARGE, MobSelection->level, Legendary::No, MobSelection->minLength, MobSelection->maxLength, MobSelection->ranking, rod);
             response->hooksense           = FISHINGHOOKSENSETYPE_LARGE;
@@ -2623,12 +2617,12 @@ fishresponse_t* FishingCheck(CCharEntity* PChar, uint8 fishingSkill, rod_t* rod,
         response->catchsizeType   = FISHINGSIZETYPE_LARGE;
         response->legendary       = 0;
         response->count           = 1;
-        response->stamina         = CalculateStamina(-14, 1);
+        response->stamina         = CalculateStamina(fishingSkill, -14, 1);
         response->delay           = CalculateDelay(PChar, 10, response->catchsizeType, rod, 1);
         response->regen           = CalculateRegen(fishingSkill, rod, (FISHINGCATCHTYPE)response->catchtype, response->catchsizeType, 1, Legendary::No, IsNM::No);
         response->response        = CalculateMovement(PChar, 15, response->catchsizeType, rod, 1);
-        response->attackdmg       = CalculateAttack(Legendary::No, 16, rod);
-        response->heal            = CalculateHeal(Legendary::No, 16, rod);
+        response->attackdmg       = CalculateAttack(fishingSkill, Legendary::No, 16, rod);
+        response->heal            = CalculateHeal(fishingSkill, Legendary::No, 16, rod);
         response->timelimit       = CalculateHookTime(PChar, Legendary::No, 0, response->catchsizeType, rod, bait);
         response->sense           = CalculateFishSense(PChar, response, fishingSkill, FISHINGCATCHTYPE_CHEST, FISHINGSIZETYPE_LARGE, 1, Legendary::No, 1, 1, 1, rod);
         response->angle           = ChestAngle;
