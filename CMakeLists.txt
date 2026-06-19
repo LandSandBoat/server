@@ -2,7 +2,12 @@ cmake_minimum_required(VERSION 3.25)
 
 # https://cmake.org/cmake/help/latest/variable/CMAKE_MSVC_DEBUG_INFORMATION_FORMAT.html
 cmake_policy(SET CMP0141 NEW)
-set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT Embedded)
+# Embedded (/Z7) writes debug info into every .obj, which all get archived into
+# xi_map_lib.lib. Combined with /GL (LTCG) this pushed the static library past the
+# 4 GB COFF image-size limit (LNK1248). Use ProgramDatabase (/Zi) for non-Debug
+# builds so debug info lands in a separate .pdb instead, keeping the .lib small
+# while preserving symbols. (/FS is already set, so /Zi is safe with /MP.)
+set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<CONFIG:Debug>,Embedded,ProgramDatabase>")
 
 project(server C CXX)
 
