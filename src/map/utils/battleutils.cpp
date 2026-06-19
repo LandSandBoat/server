@@ -4783,37 +4783,37 @@ int32 CircleDmgAdjust(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 
 
     switch (PAttacker->m_EcoSystem)
     {
-        case ECOSYSTEM::ARCANA:
+        case xi::Ecosystem::Arcana:
             damageReduction = PDefender->getMod(Mod::ARCANE_CIRCLE_DMG_BONUS);
             break;
-        case ECOSYSTEM::DEMON:
+        case xi::Ecosystem::Demon:
             damageReduction = PDefender->getMod(Mod::WARDING_CIRCLE_DMG_BONUS);
             break;
-        case ECOSYSTEM::DRAGON:
+        case xi::Ecosystem::Dragon:
             damageReduction = PDefender->getMod(Mod::ANCIENT_CIRCLE_DMG_BONUS);
             break;
-        case ECOSYSTEM::UNDEAD:
+        case xi::Ecosystem::Undead:
             damageReduction = PDefender->getMod(Mod::HOLY_CIRCLE_DMG_BONUS);
             break;
-        case ECOSYSTEM::BEAST:
+        case xi::Ecosystem::Beast:
             damageReduction = PDefender->getMod(Mod::BEAST_KILLER_DMG_BONUS);
             break;
-        case ECOSYSTEM::LIZARD:
+        case xi::Ecosystem::Lizard:
             damageReduction = PDefender->getMod(Mod::LIZARD_KILLER_DMG_BONUS);
             break;
-        case ECOSYSTEM::PLANTOID:
+        case xi::Ecosystem::Plantoid:
             damageReduction = PDefender->getMod(Mod::PLANTOID_KILLER_DMG_BONUS);
             break;
-        case ECOSYSTEM::BIRD:
+        case xi::Ecosystem::Bird:
             damageReduction = PDefender->getMod(Mod::BIRD_KILLER_DMG_BONUS);
             break;
-        case ECOSYSTEM::AMORPH:
+        case xi::Ecosystem::Amorph:
             damageReduction = PDefender->getMod(Mod::AMORPH_KILLER_DMG_BONUS);
             break;
-        case ECOSYSTEM::AQUAN:
+        case xi::Ecosystem::Aquan:
             damageReduction = PDefender->getMod(Mod::AQUAN_KILLER_DMG_BONUS);
             break;
-        case ECOSYSTEM::VERMIN:
+        case xi::Ecosystem::Vermin:
             damageReduction = PDefender->getMod(Mod::VERMIN_KILLER_DMG_BONUS);
             break;
         default:
@@ -4828,37 +4828,37 @@ int32 CircleDmgAdjust(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 
 
     switch (PDefender->m_EcoSystem)
     {
-        case ECOSYSTEM::ARCANA:
+        case xi::Ecosystem::Arcana:
             damageBonus = PAttacker->getMod(Mod::ARCANE_CIRCLE_DMG_BONUS);
             break;
-        case ECOSYSTEM::DEMON:
+        case xi::Ecosystem::Demon:
             damageBonus = PAttacker->getMod(Mod::WARDING_CIRCLE_DMG_BONUS);
             break;
-        case ECOSYSTEM::DRAGON:
+        case xi::Ecosystem::Dragon:
             damageBonus = PAttacker->getMod(Mod::ANCIENT_CIRCLE_DMG_BONUS);
             break;
-        case ECOSYSTEM::UNDEAD:
+        case xi::Ecosystem::Undead:
             damageBonus = PAttacker->getMod(Mod::HOLY_CIRCLE_DMG_BONUS);
             break;
-        case ECOSYSTEM::BEAST:
+        case xi::Ecosystem::Beast:
             damageBonus = PAttacker->getMod(Mod::BEAST_KILLER_DMG_BONUS);
             break;
-        case ECOSYSTEM::LIZARD:
+        case xi::Ecosystem::Lizard:
             damageBonus = PAttacker->getMod(Mod::LIZARD_KILLER_DMG_BONUS);
             break;
-        case ECOSYSTEM::PLANTOID:
+        case xi::Ecosystem::Plantoid:
             damageBonus = PAttacker->getMod(Mod::PLANTOID_KILLER_DMG_BONUS);
             break;
-        case ECOSYSTEM::BIRD:
+        case xi::Ecosystem::Bird:
             damageBonus = PAttacker->getMod(Mod::BIRD_KILLER_DMG_BONUS);
             break;
-        case ECOSYSTEM::AMORPH:
+        case xi::Ecosystem::Amorph:
             damageBonus = PAttacker->getMod(Mod::AMORPH_KILLER_DMG_BONUS);
             break;
-        case ECOSYSTEM::AQUAN:
+        case xi::Ecosystem::Aquan:
             damageBonus = PAttacker->getMod(Mod::AQUAN_KILLER_DMG_BONUS);
             break;
-        case ECOSYSTEM::VERMIN:
+        case xi::Ecosystem::Vermin:
             damageBonus = PAttacker->getMod(Mod::VERMIN_KILLER_DMG_BONUS);
             break;
         default:
