@@ -67045,8 +67045,8 @@ INSERT INTO `mob_spawn_points` VALUES (17502485,32,'Detector','Detector',2,72,74
 INSERT INTO `mob_spawn_points` VALUES (17502486,0,'Caretaker','Caretaker',3,76,79,-16.124,-0.326,416.174,25);
 INSERT INTO `mob_spawn_points` VALUES (17502487,32,'Detector','Detector',2,72,74,50.151,-0.119,419.640,127);
 INSERT INTO `mob_spawn_points` VALUES (17502488,0,'Caretaker','Caretaker',3,76,79,50.151,-0.119,419.640,127);
-INSERT INTO `mob_spawn_points` VALUES (17502489,0,'Fire_Elemental','Fire Elemental',12,79,81,68.145,-0.156,419.087,127);
-INSERT INTO `mob_spawn_points` VALUES (17502490,0,'Fire_Elemental','Fire Elemental',12,79,81,64.604,-0.157,420.568,127);
+INSERT INTO `mob_spawn_points` VALUES (17502489,0,'Fire_Elemental','Fire Elemental',12,79,80,68.145,-0.156,419.087,127);
+INSERT INTO `mob_spawn_points` VALUES (17502490,0,'Fire_Elemental','Fire Elemental',12,79,80,64.604,-0.157,420.568,127);
 INSERT INTO `mob_spawn_points` VALUES (17502491,0,'Detector','Detector',2,72,74,60.548,-0.173,443.991,71);
 INSERT INTO `mob_spawn_points` VALUES (17502492,0,'Caretaker','Caretaker',3,76,79,60.548,-0.173,443.991,71);
 INSERT INTO `mob_spawn_points` VALUES (17502493,0,'Enkidu','Enkidu',10,77,80,124.206,-1.045,442.473,127);
@@ -67078,8 +67078,8 @@ INSERT INTO `mob_spawn_points` VALUES (17502518,0,'Enkidu','Enkidu',10,77,80,-11
 INSERT INTO `mob_spawn_points` VALUES (17502519,0,'Enkidu','Enkidu',10,77,80,-125.799,16.108,403.270,55);
 INSERT INTO `mob_spawn_points` VALUES (17502520,36,'Enkidu','Enkidu',10,77,80,-120.728,16.242,404.489,26);
 INSERT INTO `mob_spawn_points` VALUES (17502521,0,'Enkidu','Enkidu',10,77,80,-173.117,15.684,422.770,127);
-INSERT INTO `mob_spawn_points` VALUES (17502522,0,'Fire_Elemental','Fire Elemental',12,79,81,225.701,15.676,411.091,127);
-INSERT INTO `mob_spawn_points` VALUES (17502523,0,'Fire_Elemental','Fire Elemental',12,79,81,217.230,15.676,422.294,127);
+INSERT INTO `mob_spawn_points` VALUES (17502522,0,'Fire_Elemental','Fire Elemental',12,79,80,225.701,15.676,411.091,127);
+INSERT INTO `mob_spawn_points` VALUES (17502523,0,'Fire_Elemental','Fire Elemental',12,79,80,217.230,15.676,422.294,127);
 INSERT INTO `mob_spawn_points` VALUES (17502524,37,'Enkidu','Enkidu',10,77,80,194.244,15.711,368.082,33);
 INSERT INTO `mob_spawn_points` VALUES (17502525,38,'Enkidu','Enkidu',10,77,80,171.232,15.765,367.796,127);
 INSERT INTO `mob_spawn_points` VALUES (17502526,37,'Enkidu','Enkidu',10,77,80,147.592,15.711,368.503,96);
