@@ -497,6 +497,8 @@ xi.mobSkill =
     EARTH_BREATH_1                =  808,
     AQUA_BREATH_1                 =  809,
 
+    ACID_SPRAY                    =  811,
+
     DISPELLING_WIND               =  813,
     DEADLY_DRIVE                  =  814,
     WIND_WALL                     =  815,

@@ -3393,7 +3393,7 @@ INSERT INTO `mob_skill_lists` VALUES ('NM_Rocs',1004,926); -- Stormwind
 INSERT INTO `mob_skill_lists` VALUES ('Nargun',1005,677); -- Thunder Break
 INSERT INTO `mob_skill_lists` VALUES ('Ignamoth',1006,1952);
 INSERT INTO `mob_skill_lists` VALUES ('Ignamoth',1006,1956);
-INSERT INTO `mob_skill_lists` VALUES ('Ankabut',1007,704);
+-- SPARE ID: 1006
 INSERT INTO `mob_skill_lists` VALUES ('White_Coney',1008,323); -- only Wild Carrot
 INSERT INTO `mob_skill_lists` VALUES ('Ophiotaurus',1009,2922); -- Soulshattering Roar
 INSERT INTO `mob_skill_lists` VALUES ('Ophiotaurus',1009,2923); -- Calcifying Claw
