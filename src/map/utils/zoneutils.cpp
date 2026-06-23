@@ -844,7 +844,7 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<xi::ZoneId>& zoneIds, c
                 [&PZone](CMobEntity* PMob)
                 {
                     // Check if mob is spawnable via lottery
-                    if (PMob->m_SpawnType == SPAWNTYPE_LOTTERY)
+                    if (PMob->m_SpawnType == xi::SpawnType::Lottery)
                     {
                         auto zone = PMob->loc.zone->getName();
                         auto name = PMob->getName();
