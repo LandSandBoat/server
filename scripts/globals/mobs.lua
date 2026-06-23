@@ -45,7 +45,11 @@ local function getMobLuaPathObject(mob)
         return nil
     end
 
-    return xi.zones[mob:getZoneName()].mobs[mob:getName()]
+    if xi.zones[mob:getZoneName()].mobs then
+        return xi.zones[mob:getZoneName()].mobs[mob:getName()]
+    end
+
+    return nil
 end
 
 -- - mobParam can either be a mobid or a mob entity object
