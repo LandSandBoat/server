@@ -450,6 +450,12 @@ auto CMobController::MobSkill(int listId) -> bool
 
     auto* PMobSkill{ battleutils::GetMobSkill(chosenSkillId) };
 
+    if (!PMobSkill)
+    {
+        ShowErrorFmt("CMobController::MobSkill -> ({}, ID {}) tried to use non-existent skill ID {}", PMob->getName(), PMob->id, chosenSkillId);
+        return false;
+    }
+
     if (PMobSkill->getValidTargets() & TARGET_ENEMY) // enemy
     {
         PActionTarget = PTarget;
