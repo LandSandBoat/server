@@ -260,31 +260,15 @@ void auth_session::read_func()
                                  "WHERE a.charid IN (SELECT charid FROM chars WHERE accid = ?)",
                                  accountID);
             }
-            // TODO: Lock out same account logging in multiple times. Can check data/view session existence on same IP/account?
-            // Not a real problem because the account is locked out when a character is logged in.
-
-            /*
-            const auto rset = db::preparedStmt("SELECT charid "
-                    "FROM accounts_sessions "
-                    "WHERE accid = ? LIMIT 1", accountID);
-            if (rset && rset->rowsCount() != 0 && rset->next())
+            // Retail behavior: if this account already has an active session, kick the old
+            // session and allow the new login to proceed. The map server's stale-session
+            // cleanup will handle disconnecting the old client.
+            const auto sessionCheck = db::preparedStmt("SELECT charid FROM accounts_sessions WHERE accid = ? LIMIT 1", accountID);
+            if (sessionCheck && sessionCheck->rowsCount() != 0)
             {
-                // TODO: kick player out of map server if already logged in
-                // uint32 charid = rset->get<uint32>("charid");
-
-                // This error message doesn't work when sent this way. Unknown how to transmit "1039" error message to a client already logged in.
-                // session_t& authenticatedSession = get_authenticated_session(socket_, session.sentAccountID);
-                // if (auto data = authenticatedSession.buffer_.data()session)
-                // {
-                //  generateErrorMessage(data->buffer_.data(), 139);
-                //  data->do_write(0x24);
-                //  return;
-                //}
-                ref<uint8>(buffer_.data(), 0) = LOGIN_ERROR_ALREADY_LOGGED_IN;
-                do_write(1);
-                return;
+                ShowInfoFmt("login_parse: account {} logging in from {}, clearing existing session", accountID, ipAddress);
+                db::preparedStmt("DELETE FROM accounts_sessions WHERE accid = ?", accountID);
             }
-            */
 
             // Success
             unsigned char hash[16];
