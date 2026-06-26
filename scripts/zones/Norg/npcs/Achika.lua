@@ -8,7 +8,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:sendGuild(60421, 9, 23, 7) then
+    if xi.guildShops.onTrigger(player, npc) then
         player:showText(npc, zones[xi.zone.NORG].text.ACHIKA_SHOP_DIALOG)
     end
 end

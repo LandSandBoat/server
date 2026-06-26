@@ -23,6 +23,44 @@ xi.data = xi.data or {}
 ---@type table<string, GuildShop>
 xi.data.guildShops =
 {
+    ['Achika'] =
+    {
+        hours = { 9, 23 },
+        stock =
+        {
+            { id = xi.item.HACHIMAKI,         initial = 36, maxStock = 60, targetStock = 45, buyMax = 4125,   restockRate = 3 },
+            { id = xi.item.COTTON_HACHIMAKI,  initial = 36, maxStock = 60, targetStock = 45, buyMax = 24420,  restockRate = 3 },
+            { id = xi.item.SOIL_HACHIMAKI,    initial = 36, maxStock = 60, targetStock = 45, buyMax = 66960,  restockRate = 3 },
+            { id = xi.item.SHINOBI_HACHIGANE, initial = 0,  maxStock = 60, targetStock = 45, buyMax = 240460, restockRate = 0 },  -- targetStock assumed
+            { id = xi.item.ZUNARI_KABUTO,     initial = 0,  maxStock = 60, targetStock = 45, buyMax = 180200, restockRate = 0 },  -- targetStock assumed
+            { id = xi.item.NODOWA,            initial = 0,  maxStock = 60, targetStock = 45, buyMax = 149710, restockRate = 0 },  -- targetStock assumed
+            { id = xi.item.DARKSTEEL_NODOWA,  initial = 0,  maxStock = 60, targetStock = 45, buyMax = 285000, restockRate = 0 },  -- targetStock assumed
+            { id = xi.item.KENPOGI,           initial = 36, maxStock = 60, targetStock = 45, buyMax = 6225,   restockRate = 3 },
+            { id = xi.item.COTTON_DOGI,       initial = 36, maxStock = 60, targetStock = 45, buyMax = 36800,  restockRate = 3 },
+            { id = xi.item.JUJITSU_GI,        initial = 0,  maxStock = 60, targetStock = 45, buyMax = 283500, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SOIL_GI,           initial = 36, maxStock = 60, targetStock = 45, buyMax = 99000,  restockRate = 3 },
+            { id = xi.item.SHINOBI_GI,        initial = 0,  maxStock = 60, targetStock = 45, buyMax = 363000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.HARA_ATE,          initial = 0,  maxStock = 60, targetStock = 45, buyMax = 330000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.TEKKO,             initial = 36, maxStock = 60, targetStock = 45, buyMax = 3425,   restockRate = 3 },
+            { id = xi.item.COTTON_TEKKO,      initial = 36, maxStock = 60, targetStock = 45, buyMax = 20250,  restockRate = 3 },
+            { id = xi.item.SOIL_TEKKO,        initial = 36, maxStock = 60, targetStock = 45, buyMax = 55440,  restockRate = 3 },
+            { id = xi.item.SHINOBI_TEKKO,     initial = 0,  maxStock = 60, targetStock = 45, buyMax = 199650, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.KOTE,              initial = 0,  maxStock = 60, targetStock = 45, buyMax = 181500, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SITABAKI,          initial = 36, maxStock = 60, targetStock = 45, buyMax = 4975,   restockRate = 3 },
+            { id = xi.item.COTTON_SITABAKI,   initial = 36, maxStock = 60, targetStock = 45, buyMax = 29490,  restockRate = 3 },
+            { id = xi.item.SOIL_SITABAKI,     initial = 36, maxStock = 60, targetStock = 45, buyMax = 80640,  restockRate = 3 },
+            { id = xi.item.SHINOBI_HAKAMA,    initial = 0,  maxStock = 60, targetStock = 45, buyMax = 294525, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.HAIDATE,           initial = 0,  maxStock = 60, targetStock = 45, buyMax = 217600, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.KYAHAN,            initial = 36, maxStock = 60, targetStock = 45, buyMax = 3175,   restockRate = 3 },
+            { id = xi.item.COTTON_KYAHAN,     initial = 36, maxStock = 60, targetStock = 45, buyMax = 18870,  restockRate = 3 },
+            { id = xi.item.SOIL_KYAHAN,       initial = 36, maxStock = 60, targetStock = 45, buyMax = 82620,  restockRate = 3 },
+            { id = xi.item.HEKO_OBI,          initial = 0,  maxStock = 60, targetStock = 45, buyMax = 2475,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SILVER_OBI,        initial = 0,  maxStock = 60, targetStock = 45, buyMax = 18390,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.GOLD_OBI,          initial = 0,  maxStock = 60, targetStock = 45, buyMax = 58880,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BROCADE_OBI,       initial = 0,  maxStock = 60, targetStock = 45, buyMax = 132000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.RAINBOW_OBI,       initial = 0,  maxStock = 60, targetStock = 45, buyMax = 268800, restockRate = 0 }, -- targetStock assumed
+        },
+    },
     ['Amulya'] =
     {
         hours = { 8, 23 },
