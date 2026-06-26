@@ -671,7 +671,7 @@ INSERT INTO `item_basic` VALUES (653,0,'mythril_ingot','mythril_ingot','ミス�
 INSERT INTO `item_basic` VALUES (654,0,'darksteel_ingot','darksteel_ingot','ダークインゴット',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@SMITHING,2375);
 INSERT INTO `item_basic` VALUES (655,0,'adaman_ingot','adaman_ingot','アダマンインゴット',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@SMITHING,3625);
 INSERT INTO `item_basic` VALUES (656,0,'beastcoin','beastcoin','獣人貨',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@BEAST_MADE,10);
-INSERT INTO `item_basic` VALUES (657,0,'lump_of_tama-hagane','tama-hagane','玉鋼',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@SMITHING,904);
+INSERT INTO `item_basic` VALUES (657,0,'lump_of_tama-hagane','tama-hagane','玉鋼',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@SMITHING,1000);
 INSERT INTO `item_basic` VALUES (658,0,'damascus_ingot','damascus_ingot','ダマスクインゴット',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@SMITHING,10000);
 INSERT INTO `item_basic` VALUES (659,0,'tin_ingot','tin_ingot','ティンインゴット',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@SMITHING,45);
 INSERT INTO `item_basic` VALUES (660,0,'bronze_sheet','bronze_sheet','ブロンズ板',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@SMITHING,23);
@@ -1146,7 +1146,7 @@ INSERT INTO `item_basic` VALUES (1151,0,'lump_of_oriental_steel','oriental_steel
 INSERT INTO `item_basic` VALUES (1152,0,'lump_of_bomb_steel','bomb_steel','ボムの卸し鉄',@GENERAL_TYPE,1,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (1153,0,'sacred_branch','sacred_branch','聖地の木の枝',@GENERAL_TYPE,1,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (1154,0,'three-leaf_mandragora_bud','3leaf_mandra_bud','マンドラゴラの三葉',@GENERAL_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,1);
-INSERT INTO `item_basic` VALUES (1155,0,'handful_of_iron_sand','iron_sand','砂鉄',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@SMITHING,79);
+INSERT INTO `item_basic` VALUES (1155,0,'handful_of_iron_sand','iron_sand','砂鉄',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@SMITHING,86);
 INSERT INTO `item_basic` VALUES (1156,0,'crawler_calculus','crawler_calculus','クロウラーの石',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@MISC,3);
 INSERT INTO `item_basic` VALUES (1157,0,'handful_of_the_sands_of_silence','sands_of_silence','静かなる砂',@GENERAL_TYPE,1,@FLAG_MYSTERY_BOX,@MISC,18);
 INSERT INTO `item_basic` VALUES (1158,0,'wandering_bulb','wandering_bulb','迷える球根',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@MISC,21);

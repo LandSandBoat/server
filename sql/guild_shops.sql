@@ -1227,35 +1227,6 @@ INSERT INTO `guild_shops` VALUES (60423,17320,7,26,60,10,20);         -- iron_ar
 INSERT INTO `guild_shops` VALUES (60423,17322,81,330,60,10,20);       -- fire_arrow
 INSERT INTO `guild_shops` VALUES (60423,17340,58,436,60,10,10);       -- bullet
 
--- Vuliaie (Norg) Tenshodo Merchant
-INSERT INTO `guild_shops` VALUES (60424,704,96,673,240,75,50);       -- bamboo_stick
-INSERT INTO `guild_shops` VALUES (60424,915,2700,16120,60,33,18);    -- jar_of_toad_oil
-INSERT INTO `guild_shops` VALUES (60424,1134,810,5140,60,48,10);     -- sheet_of_bast_parchment
-INSERT INTO `guild_shops` VALUES (60424,829,35070,102480,60,0,0);    -- square_of_silk_cloth
-INSERT INTO `guild_shops` VALUES (60424,1155,436,2400,240,33,190);   -- handful_of_iron_sand
-INSERT INTO `guild_shops` VALUES (60424,657,4690,30520,120,33,80);   -- lump_of_tama_hagane
-INSERT INTO `guild_shops` VALUES (60424,1415,55147,232354,60,33,16); -- pot_of_urushi
-INSERT INTO `guild_shops` VALUES (60424,1161,30,187,240,10,80);      -- uchitake
-INSERT INTO `guild_shops` VALUES (60424,1164,30,187,240,10,80);      -- tsurara
-INSERT INTO `guild_shops` VALUES (60424,1167,30,187,240,10,80);      -- kawahori_ogi
-INSERT INTO `guild_shops` VALUES (60424,1170,30,187,240,10,80);      -- makibishi
-INSERT INTO `guild_shops` VALUES (60424,1173,30,187,240,10,80);      -- hiraishin
-INSERT INTO `guild_shops` VALUES (60424,1176,30,187,240,10,80);      -- mizu_deppo
--- INSERT INTO `guild_shops` VALUES (60424,1179,66,174,60,0,0);      -- shihei TODO: missing min_price and max_price
--- INSERT INTO `guild_shops` VALUES (60424,1182,66,174,60,0,0);      -- jusatsu TODO: missing min_price and max_price
--- INSERT INTO `guild_shops` VALUES (60424,1185,66,174,60,0,0);      -- kaginawa TODO: missing min_price and max_price
--- INSERT INTO `guild_shops` VALUES (60424,1188,66,174,60,0,0);      -- sairui_ran TODO: missing min_price and max_price
--- INSERT INTO `guild_shops` VALUES (60424,1191,66,174,60,0,0);      -- kodoku TODO: missing min_price and max_price
--- INSERT INTO `guild_shops` VALUES (60424,1194,66,174,60,0,0);      -- shinobi_tabi TODO: missing min_price and max_price
-INSERT INTO `guild_shops` VALUES (60424,1472,369,1476,200,48,150);   -- gardenia_seed
-INSERT INTO `guild_shops` VALUES (60424,1554,431,1522,240,48,170);   -- onz_of_turmeric
-INSERT INTO `guild_shops` VALUES (60424,1555,1061,5325,240,48,170);  -- onz_of_coriander
-INSERT INTO `guild_shops` VALUES (60424,1590,536,5836,240,48,170);   -- sprig_of_holy_basil
-INSERT INTO `guild_shops` VALUES (60424,1475,411,4985,120,48,110);   -- onz_of_curry_powder
-INSERT INTO `guild_shops` VALUES (60424,5164,1945,10899,200,48,150); -- jar_of_ground_wasabi
-INSERT INTO `guild_shops` VALUES (60424,1652,150,704,200,48,150);    -- bottle_of_rice_vinegar
-INSERT INTO `guild_shops` VALUES (60424,5235,187,1350,200,48,150);   -- head_of_napa
-
 -- Wahraga / Gathweeda (Alchemy Guild) Aht Urhgan Whitegate
 INSERT INTO `guild_shops` VALUES (60425,912,192,360,240,0,0);        -- beehive_chip
 -- INSERT INTO `guild_shops` VALUES (60425,913,192,360,240,0,0);        -- lump_of_beeswax TODO: missing min_price and max_price
