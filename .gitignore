@@ -192,6 +192,7 @@ Makefile
 **/CMakeFiles
 cmake_install.cmake
 /cmake-**/**
+.cpm-cache/
 
 # ignore servers
 *-server

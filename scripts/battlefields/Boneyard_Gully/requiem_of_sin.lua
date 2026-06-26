@@ -66,20 +66,20 @@ local skillchainData =
     -- Shikaree X initiated
     [ID.mob.SHIKAREE_X_ROS_TWT] =
     {
-        -- All shikaree are alive: X Evisceration → Y Vorpal Scythe → Z Impulse Drive
+        -- All shikaree are alive: X Evisceration -> Y Vorpal Scythe -> Z Impulse Drive
         [allAlive] =
         {
             { mobId = ID.mob.SHIKAREE_X_ROS_TWT, skill = xi.mobSkill.EVISCERATION  },
             { mobId = ID.mob.SHIKAREE_Y_ROS_TWT, skill = xi.mobSkill.VORPAL_SCYTHE },
             { mobId = ID.mob.SHIKAREE_Z_ROS, skill = xi.mobSkill.IMPULSE_DRIVE },
         },
-        -- Shikaree X and Y are alive: X Evisceration → Y Vorpal Scythe
+        -- Shikaree X and Y are alive: X Evisceration -> Y Vorpal Scythe
         [ID.mob.SHIKAREE_Y_ROS_TWT] =
         {
             { mobId = ID.mob.SHIKAREE_X_ROS_TWT, skill = xi.mobSkill.EVISCERATION  },
             { mobId = ID.mob.SHIKAREE_Y_ROS_TWT, skill = xi.mobSkill.VORPAL_SCYTHE },
         },
-        -- Shikaree X and Z are alive: X Dancing Edge → Z Penta Thrust
+        -- Shikaree X and Z are alive: X Dancing Edge -> Z Penta Thrust
         [ID.mob.SHIKAREE_Z_ROS] =
         {
             { mobId = ID.mob.SHIKAREE_X_ROS_TWT, skill = xi.mobSkill.DANCING_EDGE },
@@ -90,20 +90,20 @@ local skillchainData =
     -- Shikaree Y initiated
     [ID.mob.SHIKAREE_Y_ROS_TWT] =
     {
-        -- All shikaree are alive: Y Guillotine → X Shadowstitch → Z Wheeling Thrust
+        -- All shikaree are alive: Y Guillotine -> X Shadowstitch -> Z Wheeling Thrust
         [allAlive] =
         {
             { mobId = ID.mob.SHIKAREE_Y_ROS_TWT, skill = xi.mobSkill.GUILLOTINE_1    },
             { mobId = ID.mob.SHIKAREE_X_ROS_TWT, skill = xi.mobSkill.SHADOWSTITCH    },
             { mobId = ID.mob.SHIKAREE_Z_ROS, skill = xi.mobSkill.WHEELING_THRUST },
         },
-        -- Shikaree Y and X are alive: Y Spiral Hell → X Shadowstitch
+        -- Shikaree Y and X are alive: Y Spiral Hell -> X Shadowstitch
         [ID.mob.SHIKAREE_X_ROS_TWT] =
         {
             { mobId = ID.mob.SHIKAREE_Y_ROS_TWT, skill = xi.mobSkill.SPIRAL_HELL  },
             { mobId = ID.mob.SHIKAREE_X_ROS_TWT, skill = xi.mobSkill.SHADOWSTITCH },
         },
-        -- Shikaree Y and Z are alive: Y Spiral Hell → Z Impulse Drive
+        -- Shikaree Y and Z are alive: Y Spiral Hell -> Z Impulse Drive
         [ID.mob.SHIKAREE_Z_ROS] =
         {
             { mobId = ID.mob.SHIKAREE_Y_ROS_TWT, skill = xi.mobSkill.SPIRAL_HELL   },
@@ -114,20 +114,20 @@ local skillchainData =
     -- Shikaree Z initiated
     [ID.mob.SHIKAREE_Z_ROS] =
     {
-        -- All shikaree are alive: Z Skewer → Y Spiral Hell → X Evisceration
+        -- All shikaree are alive: Z Skewer -> Y Spiral Hell -> X Evisceration
         [allAlive] =
         {
             { mobId = ID.mob.SHIKAREE_Z_ROS, skill = xi.mobSkill.SKEWER       },
             { mobId = ID.mob.SHIKAREE_Y_ROS_TWT, skill = xi.mobSkill.SPIRAL_HELL  },
             { mobId = ID.mob.SHIKAREE_X_ROS_TWT, skill = xi.mobSkill.EVISCERATION },
         },
-        -- Shikaree Z and X are alive: Z Wheeling Thrust → X Shark Bite
+        -- Shikaree Z and X are alive: Z Wheeling Thrust -> X Shark Bite
         [ID.mob.SHIKAREE_X_ROS_TWT] =
         {
             { mobId = ID.mob.SHIKAREE_Z_ROS, skill = xi.mobSkill.WHEELING_THRUST },
             { mobId = ID.mob.SHIKAREE_X_ROS_TWT, skill = xi.mobSkill.SHARK_BITE      },
         },
-        -- Shikaree Z and Y are alive: Z Skewer → Y Spiral Hell
+        -- Shikaree Z and Y are alive: Z Skewer -> Y Spiral Hell
         [ID.mob.SHIKAREE_Y_ROS_TWT] =
         {
             { mobId = ID.mob.SHIKAREE_Z_ROS, skill = xi.mobSkill.SKEWER      },

@@ -23,6 +23,9 @@
 
 #include "controller.h"
 
+#include "common/types/cached.h"
+#include "common/types/maybe.h"
+
 enum class FollowType : uint8
 {
     None,
@@ -63,7 +66,7 @@ protected:
     virtual auto TryDeaggro() -> bool;
     virtual void TryLink();
     auto         CanDetectTarget(CBattleEntity* PTarget, bool forceSight = false) const -> bool;
-    auto         CanPursueTarget(const CBattleEntity* PTarget) const -> bool;
+    auto         CanTrackByScent(const CBattleEntity* PTarget) const -> bool;
     auto         CheckLock(CBattleEntity* PTarget) const -> bool;
     auto         CheckDetection(CBattleEntity* PTarget) -> bool;
     virtual auto CanCastSpells(IgnoreRecastsAndCosts ignoreRecastsAndCosts) -> bool;
@@ -74,11 +77,22 @@ protected:
     void         FaceTarget(const EntityId& target = {}) const;
     virtual void HandleEnmity();
     virtual auto DoRoamTick(timer::time_point tick) -> Task<void>;
-    void         Wait(timer::duration _duration);
+    void         Wait(timer::duration duration);
     void         FollowRoamPath();
-    auto         CanMoveForward(float currentDistance) -> bool;
-    auto         IsSpecialSkillReady(float currentDistance) const -> bool;
-    auto         IsSpellReady(const float& currentDistance, const float& meleeRange) const -> bool;
+    auto         ShouldCloseToTarget(float currentDistance) -> bool;
+
+    // Per-tick cache for the CanSeeTarget() raycast, wrapped with its target so both are wiped together.
+    struct TargetLOSCache
+    {
+        EntityId     target;
+        Cached<bool> canSeeTarget;
+    };
+
+    Maybe<TargetLOSCache> targetLosCache_;
+
+    auto CanSeeTargetCached() -> bool;
+    auto IsSpecialSkillReady(float currentDistance) const -> bool;
+    auto IsSpellReady(const float& currentDistance, const float& meleeRange) const -> bool;
 
     auto target() const -> EntityId;
     void setTarget(CBaseEntity* PTarget);
@@ -110,4 +124,21 @@ private:
 
     // TryLink()'s party-link scan is hot; run it only every other combat tick.
     bool linkScanThisTick_{ false };
+
+    // Rate-limits PathTo so a mob stuck at the navmesh boundary does not hammer findPath.
+    // After 2 re-paths that fail to close range the mob teleports to the target, so unreachable terrain is not a free win.
+    // Lost sight runs on its own shorter leash, since standing still cannot restore line of sight.
+    static constexpr auto kRePathCooldown          = std::chrono::seconds{ 2 };
+    static constexpr auto kLostSightRePathCooldown = std::chrono::milliseconds{ 250 };
+
+    timer::time_point rePathCooldownEnd_{ timer::time_point::min() };
+    timer::time_point lostSightRePathCooldownEnd_{ timer::time_point::min() };
+    position_t        lastRePathTarget_{};
+    uint8_t           stuckRePathCount_{ 0 };
+
+    // Directness probe cache, re-run only when the target or either position changes; an EntityId because it outlives the tick.
+    EntityId   lastDirectProbeTarget_{};
+    position_t lastDirectProbePos_{};
+    position_t lastDirectProbeTargetPos_{};
+    bool       lastDirectProbeWasDirect_{ true };
 };

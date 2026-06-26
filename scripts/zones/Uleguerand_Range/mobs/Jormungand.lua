@@ -87,7 +87,6 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.GRAVITY)
     mob:addImmunity(xi.immunity.TERROR)
 
-    mob:setCarefulPathing(true)
     mob:setMobMod(xi.mobMod.AOE_HIT_ALL, 1)
 
     xi.mob.updateNMSpawnPoint(mob)

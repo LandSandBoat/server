@@ -85,9 +85,9 @@ xi.data.maze.runeShapeData =
     [xi.maze.runeShape.PLUS]   = { 0x4E40, 0x4E40, 0x4E40, 0x4E40 },
 }
 
--- Rune item → shape and element mapping.
+-- Rune item -> shape and element mapping.
 -- Source: Item DAT offset 0x14-0x15
---   byte[0x15] & 0xF = shape index, byte[0x14] & 0xF = element (0-7 → xi.element + 1, 0xF → NONE).
+--   byte[0x15] & 0xF = shape index, byte[0x14] & 0xF = element (0-7 -> xi.element + 1, 0xF -> NONE).
 ---@type table<xi.maze.rune, { shape: xi.maze.runeShape, element: xi.element }>
 xi.data.maze.runeInfo =
 {

@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -21,5 +21,14 @@
 
 #pragma once
 
-// Umbrella header for convenience
-#include "pathfind/pathfind.h"
+enum PATHFLAG
+{
+    PATHFLAG_NONE     = 0x00,
+    PATHFLAG_RUN      = 0x01, // run at double speed
+    PATHFLAG_WALLHACK = 0x02, // DEPRECATED - do not use. Kept so the 0x02 bit isn't silently reused.
+    PATHFLAG_REVERSE  = 0x04, // reverse the point order
+    PATHFLAG_SCRIPT   = 0x08, // don't overwrite before completion (except by another SCRIPT path)
+    PATHFLAG_SLIDE    = 0x10, // slide to end point if close enough (unused in C++, reserved for Lua)
+    PATHFLAG_PATROL   = 0x20, // loop the path continuously while roaming
+    PATHFLAG_COORDS   = 0x40, // walk through to end; do not repeat
+};

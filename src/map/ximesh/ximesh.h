@@ -21,49 +21,29 @@
 
 #pragma once
 
-#include "map/ximesh/iximesh.h"
-#include "map/ximesh/transformation_matrix.h"
+#include "common/cbasetypes.h"
+#include "map/ximesh/ximesh_structs.h"
 
-#include <string>
+#include <common/types/maybe.h>
+#include <vector>
 
-class XiMesh final : public IXiMesh
+using IgnoreTransparentBarriers = xi::Flag<struct IgnoreTransparentBarriersTag>;
+
+class XiMesh
 {
 public:
-    explicit XiMesh(const std::string& filename);
-    ~XiMesh() override = default;
+    virtual ~XiMesh() = default;
 
-    DISALLOW_COPY_AND_MOVE(XiMesh);
+    virtual auto query(float x, float y, float z) const -> Maybe<CellHit>                                                                                                                     = 0;
+    virtual auto getTerrainAt(float x, float y, float z) const -> TerrainType                                                                                                                 = 0;
+    virtual auto getFloorId(float x, float y, float z) const -> uint8                                                                                                                         = 0;
+    virtual auto rayIntersect(const Vector3& start, const Vector3& end, IgnoreTransparentBarriers ignoreTransparentBarriers = IgnoreTransparentBarriers::Yes) const -> bool                   = 0;
+    virtual auto getPositionInfo(const Vector3& position, YOffsets yOffsets, IgnoreTransparentBarriers ignoreTransparentBarriers = IgnoreTransparentBarriers::Yes) const -> Maybe<RayHitInfo> = 0;
 
-    auto query(float x, float y, float z) const -> Maybe<CellHit> override;
-    auto getTerrainAt(float x, float y, float z) const -> TerrainType override;
-    auto getFloorId(float x, float y, float z) const -> uint8 override;
-
-    auto rayIntersect(const Vector3& start, const Vector3& end, IgnoreTransparentBarriers ignoreTransparentBarriers = IgnoreTransparentBarriers::Yes) const -> bool override;
-    auto getPositionInfo(const Vector3& position, YOffsets yOffsets, IgnoreTransparentBarriers ignoreTransparentBarriers = IgnoreTransparentBarriers::Yes) const -> Maybe<RayHitInfo> override;
-
-    auto blocks() const -> const std::vector<MeshBlock>& override;
-    auto placements() const -> const std::vector<MeshPlacement>& override;
-    auto entries() const -> const std::vector<CellEntry>& override;
-    auto cells() const -> const std::vector<CellSpan>& override;
-    auto gridWidth() const -> uint16 override;
-    auto gridHeight() const -> uint16 override;
-
-private:
-    auto load(const std::string& filename) -> bool;
-
-    auto worldToCell(float x, float z) const -> std::pair<int, int>;
-
-    auto rayIntersectCell(const Vector3& start, const Vector3& end, YRange yRange, uint32 cellIdx, IgnoreTransparentBarriers ignoreTransparentBarriers) const -> bool;
-    auto rayIntersectCellHitInfo(const Vector3& start, const Vector3& end, YRange yRange, uint32 cellIdx, IgnoreTransparentBarriers ignoreTransparentBarriers, Maybe<RayHitInfo>& closestHit) const -> void;
-
-    XimeshHeader header_{};
-
-    std::vector<MeshBlock>     blocks_;
-    std::vector<MeshPlacement> placements_;
-    std::vector<CellEntry>     entries_;
-    std::vector<CellSpan>      cells_;
-
-    std::vector<TransformationMatrix> w2os_;
-    std::vector<bool>                 placementFlips_;
-    std::vector<YRange>               cellRanges_;
+    virtual auto blocks() const -> const std::vector<MeshBlock>&         = 0;
+    virtual auto placements() const -> const std::vector<MeshPlacement>& = 0;
+    virtual auto entries() const -> const std::vector<CellEntry>&        = 0;
+    virtual auto cells() const -> const std::vector<CellSpan>&           = 0;
+    virtual auto gridWidth() const -> uint16                             = 0;
+    virtual auto gridHeight() const -> uint16                            = 0;
 };

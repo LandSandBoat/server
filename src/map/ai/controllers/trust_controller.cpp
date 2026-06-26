@@ -210,7 +210,7 @@ auto CTrustController::DoCombatTick(timer::time_point tick) -> Task<void>
                         if (currentDistanceToTarget > RoamDistance)
                         {
                             if (currentDistanceToTarget < RoamDistance * 3.0f &&
-                                PTrust->PAI->PathFind->PathAround(PTarget->loc.p, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+                                PTrust->PAI->PathFind->PathAround(PTarget->loc.p, RoamDistance, PATHFLAG_RUN))
                             {
                                 PTrust->PAI->PathFind->FollowPath(m_Tick);
                             }
@@ -295,19 +295,12 @@ auto CTrustController::DoNonCombatTick(const timer::time_point tick) -> Task<voi
             distance(POtherTrust->loc.p, PTrust->loc.p) < 1.0f &&
             !PTrust->PAI->PathFind->IsFollowingPath())
         {
-            auto diff_angle = worldAngle(PTrust->loc.p, POtherTrust->loc.p) + 64;
-            auto amount     = (currentPartyPos % 2) ? 1.0f : -1.0f;
-
-            position_t new_pos = {
-                PTrust->loc.p.x - (cosf(rotationToRadian(diff_angle)) * amount),
-                POtherTrust->loc.p.y,
-                PTrust->loc.p.z + (sinf(rotationToRadian(diff_angle)) * amount),
-                0,
-                0,
-            };
+            // Sidestep the trust we are stacked on, with odd/even party slots taking opposite sides.
+            const float amount  = (currentPartyPos % 2) ? 1.0f : -1.0f;
+            const auto  new_pos = sidestepPosition(PTrust->loc.p, POtherTrust->loc.p, amount);
 
             if (PTrust->PAI->PathFind->ValidPosition(new_pos) &&
-                PTrust->PAI->PathFind->PathAround(new_pos, desiredFollowDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+                PTrust->PAI->PathFind->PathAround(new_pos, desiredFollowDistance, PATHFLAG_RUN))
             {
                 PTrust->PAI->PathFind->FollowPath(m_Tick);
             }
@@ -322,7 +315,7 @@ auto CTrustController::DoNonCombatTick(const timer::time_point tick) -> Task<voi
     else if (currentDistance > desiredFollowDistance)
     {
         if (currentDistance < desiredFollowDistance * 3.0f &&
-            PTrust->PAI->PathFind->PathAround(PFollowTarget->loc.p, desiredFollowDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+            PTrust->PAI->PathFind->PathAround(PFollowTarget->loc.p, desiredFollowDistance, PATHFLAG_RUN))
         {
             PTrust->PAI->PathFind->FollowPath(m_Tick);
         }
@@ -397,7 +390,7 @@ auto CTrustController::DoRoamTick(timer::time_point tick) -> Task<void>
     if (currentDistance < declumpDistance)
     {
         // Too close to follow target - push away to maintain formation spacing
-        if (PFollowTarget && POwner->PAI->PathFind->PathAround(PFollowTarget->loc.p, followTarget + 0.5f, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+        if (PFollowTarget && POwner->PAI->PathFind->PathAround(PFollowTarget->loc.p, followTarget + 0.5f, PATHFLAG_RUN))
         {
             POwner->PAI->PathFind->FollowPath(m_Tick);
         }
@@ -413,7 +406,7 @@ auto CTrustController::DoRoamTick(timer::time_point tick) -> Task<void>
         else
         {
             // Path or step closer to follow target
-            if (currentDistance < RoamDistance * 3.0f && POwner->PAI->PathFind->PathAround(PFollowTarget->loc.p, followTarget, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+            if (currentDistance < RoamDistance * 3.0f && POwner->PAI->PathFind->PathAround(PFollowTarget->loc.p, followTarget, PATHFLAG_RUN))
             {
                 POwner->PAI->PathFind->FollowPath(m_Tick);
             }
@@ -458,28 +451,20 @@ void CTrustController::Declump(const CCharEntity* PMaster, const CBattleEntity* 
     const uint8 currentPartyPos = GetPartyPosition();
     for (const auto* POtherTrust : PMaster->PTrusts)
     {
-        if (POtherTrust != POwner && !POtherTrust->PAI->PathFind->IsFollowingPath() && distance(POtherTrust->loc.p, POwner->loc.p) < 1.5f)
+        if (POtherTrust == POwner || POtherTrust->PAI->PathFind->IsFollowingPath() || distance(POtherTrust->loc.p, POwner->loc.p) >= 1.5f)
         {
-            const auto diffAngle  = worldAngle(POwner->loc.p, PTarget->loc.p) + 64;
-            const auto moveAmount = xirand::GetRandomNumber(0.0f, 1.5f) * ((currentPartyPos % 2) ? 1.0f : -1.0f);
-
-            // clang-format off
-            const position_t newPos =
-            {
-                POwner->loc.p.x - (cosf(rotationToRadian(diffAngle)) * moveAmount),
-                PTarget->loc.p.y,
-                POwner->loc.p.z + (sinf(rotationToRadian(diffAngle)) * moveAmount),
-                0,
-                0,
-            };
-            // clang-format on
-
-            if (POwner->PAI->PathFind->ValidPosition(newPos))
-            {
-                POwner->PAI->PathFind->PathTo(newPos, PATHFLAG_RUN | PATHFLAG_WALLHACK);
-            }
-            break;
+            continue;
         }
+
+        // Sidestep relative to the shared target so trusts spread around the enemy rather than away from each other.
+        const float moveAmount = xirand::GetRandomNumber(0.0f, 1.5f) * ((currentPartyPos % 2) ? 1.0f : -1.0f);
+        const auto  newPos     = sidestepPosition(POwner->loc.p, PTarget->loc.p, moveAmount);
+
+        if (POwner->PAI->PathFind->ValidPosition(newPos))
+        {
+            POwner->PAI->PathFind->PathTo(newPos, PATHFLAG_RUN);
+        }
+        break;
     }
 }
 
@@ -537,7 +522,7 @@ void CTrustController::PathOutToDistance(const CBattleEntity* PTarget, const flo
     // Get somewhat close to the target destination
     if (distance(POwner->loc.p, target_position) > 2.0f && m_failedRepositionAttempts < 3)
     {
-        POwner->PAI->PathFind->PathTo(target_position, PATHFLAG_RUN | PATHFLAG_WALLHACK);
+        POwner->PAI->PathFind->PathTo(target_position, PATHFLAG_RUN);
     }
     else
     {

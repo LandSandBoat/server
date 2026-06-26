@@ -550,15 +550,11 @@ end
 function CBaseEntity:LimitDistance()
 end
 
----@param careful boolean
----@return nil
-function CBaseEntity:setCarefulPathing(careful)
-end
-
 ---@nodiscard
 ---@param target CBaseEntity
+---@param ignoreInvisibleBoundaries boolean?
 ---@return boolean
-function CBaseEntity:canSee(target)
+function CBaseEntity:canSee(target, ignoreInvisibleBoundaries)
 end
 
 ---@nodiscard

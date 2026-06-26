@@ -446,10 +446,6 @@ xi.dynamis.zoneOnInitialize = function(zone)
             SpawnMob(spawnId)
         end
     end
-
-    for _, mob in pairs(zone:getMobs()) do
-        mob:setCarefulPathing(true)
-    end
 end
 
 xi.dynamis.zoneOnZoneIn = function(player, prevZone)

@@ -5421,17 +5421,16 @@ sol::table GetFurthestValidPosition(CLuaBaseEntity* fromTarget, float distance, 
     CBaseEntity* entity = fromTarget->GetBaseEntity();
     position_t   pos    = nearPosition(entity->loc.p, distance, theta);
 
-    float validPos[3];
-    bool  success = entity->loc.zone->navMesh()->findFurthestValidPoint(entity->loc.p, pos, validPos);
-    if (!success)
+    const auto validPos = entity->loc.zone->navMesh()->findFurthestValidPoint(entity->loc.p, pos);
+    if (!validPos)
     {
         return sol::lua_nil;
     }
 
     sol::table outPos = lua.create_table();
-    outPos["x"]       = validPos[0];
-    outPos["y"]       = validPos[1];
-    outPos["z"]       = validPos[2];
+    outPos["x"]       = validPos->x;
+    outPos["y"]       = validPos->y;
+    outPos["z"]       = validPos->z;
 
     return outPos;
 }

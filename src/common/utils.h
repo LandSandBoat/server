@@ -132,6 +132,11 @@ auto       toEntitysLeft(const position_t& A, const position_t& B, uint8 coneAng
 auto       toEntitysRight(const position_t& A, const position_t& B, uint8 coneAngle) -> bool; // true if A is to the right side of B within coneAngle degrees (from perspective of B)
 position_t nearPosition(const position_t& A, float offset, float radian);                     // Returns a position near the given position
 
+auto sidestepPosition(const position_t& from, const position_t& referencePoint, float offset) -> position_t;
+
+// True when two positions are within ~1 yalm, i.e. effectively co-located.
+auto isNear(const position_t& a, const position_t& b) -> bool;
+
 int32 hasBit(uint16 value, const uint8* BitArray, uint32 size); // Check for the presence of a bit in the array
 int32 addBit(uint16 value, uint8* BitArray, uint32 size);       // Adds a bit to the array
 int32 delBit(uint16 value, uint8* BitArray, uint32 size);       // Deletes a bit from the array

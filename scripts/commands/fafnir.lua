@@ -41,18 +41,18 @@ commandObj.onTrigger = function(player)
         -- packetName = 'Fake Fafnir',
 
         -- Set the position using in-game x, y and z
-        x = player:getXPos(),
-        y = player:getYPos(),
-        z = player:getZPos(),
+        x        = player:getXPos(),
+        y        = player:getYPos(),
+        z        = player:getZPos(),
         rotation = player:getRotPos(),
 
         -- Fafnir's entry in mob_groups:
         -- INSERT INTO `mob_groups` VALUES (5, 1280, 154, 'Fafnir', 0, 128, 805, 70000, 0, 90, 90, 0)
         --                       groupId ---^        ^--- groupZoneId
-        groupId = 5,
+        groupId     = 5,
         groupZoneId = 154,
-        minLevel = 90,
-        maxLevel = 90,
+        minLevel    = 90,
+        maxLevel    = 90,
         -- You can provide an onMobDeath function if you want: if you don't
         -- add one, an empty one will be inserted for you behind the scenes.
         onMobDeath = function(mob, playerArg, optParams)
@@ -82,6 +82,7 @@ commandObj.onTrigger = function(player)
     mob:setSpawn(player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos())
     mob:setDropID(0) -- No loot!
     mob:setMobMod(xi.mobMod.NO_DROPS, 1)
+    mob:setMobMod(xi.mobMod.NO_DESPAWN, 1)
     mob:spawn()
 
     player:printToPlayer(string.format('Spawning Fafnir (Lv: %i, HP: %i)\n%s', mob:getMainLvl(), mob:getMaxHP(), mob))

@@ -63,7 +63,6 @@ entity.onMobInitialize = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
     mob:setRespawnTime(math.randomInt(259200, 432000))
 
-    mob:setCarefulPathing(true)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.SILENCE)

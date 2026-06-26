@@ -17,7 +17,7 @@ g_mixins.families.chariot = function(chariotMob)
         local time = GetSystemTime()
 
         if time >= mob:getLocalVar('turnTime') then
-            -- mob:face() -- We lack a lua function for c++ FaceTarget. TODO: code it.
+            -- mob:face() -- We lack a lua function for c++ LookAtTarget. TODO: code it.
 
             mob:setLocalVar('turnTime', time + math.randomInt(10, 30))
         end

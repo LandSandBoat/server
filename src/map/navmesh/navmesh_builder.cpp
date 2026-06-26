@@ -24,7 +24,7 @@
 #include "common/logging.h"
 #include "common/timer.h"
 
-#include <map/ximesh/iximesh.h>
+#include <map/ximesh/ximesh.h>
 
 #include <DetourCommon.h>
 #include <DetourNavMesh.h>
@@ -434,7 +434,7 @@ auto buildOffMeshConnections(const rcPolyMesh& pmesh, const rcPolyMeshDetail& dm
 
 } // namespace
 
-NavMeshBuilder::NavMeshBuilder(const IXiMesh& xiMesh)
+NavMeshBuilder::NavMeshBuilder(const XiMesh& xiMesh)
 : xiMesh_(&xiMesh)
 , gridWidth_(xiMesh.gridWidth())
 , gridHeight_(xiMesh.gridHeight())
