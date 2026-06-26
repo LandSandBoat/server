@@ -131,6 +131,33 @@ xi.data.guildShops =
             { id = xi.item.BLACK_CHIP,  initial = 150, maxStock = 200, targetStock = 150, buyMax = 140000, restockRate = 50, noSell = true },
         },
     },
+    ['Chiyo'] =
+    {
+        hours = { 9, 23 },
+        stock =
+        {
+            { id = xi.item.SCROLL_OF_ABSORB_STR,    initial = 0,  maxStock = 60, targetStock = 45, buyMax = 105000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCROLL_OF_ABSORB_DEX,    initial = 0,  maxStock = 60, targetStock = 45, buyMax = 105000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCROLL_OF_ABSORB_VIT,    initial = 0,  maxStock = 60, targetStock = 45, buyMax = 105000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCROLL_OF_ABSORB_AGI,    initial = 0,  maxStock = 60, targetStock = 45, buyMax = 105000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCROLL_OF_ABSORB_INT,    initial = 0,  maxStock = 60, targetStock = 45, buyMax = 105000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCROLL_OF_ABSORB_MND,    initial = 30, maxStock = 60, targetStock = 45, buyMax = 105000, restockRate = 5 },
+            { id = xi.item.SCROLL_OF_ABSORB_CHR,    initial = 30, maxStock = 60, targetStock = 45, buyMax = 105000, restockRate = 5 },
+            { id = xi.item.SCROLL_OF_KATON_ICHI,    initial = 30, maxStock = 60, targetStock = 45, buyMax = 11655,  restockRate = 5 },
+            { id = xi.item.SCROLL_OF_HYOTON_ICHI,   initial = 30, maxStock = 60, targetStock = 45, buyMax = 11655,  restockRate = 5 },
+            { id = xi.item.SCROLL_OF_HUTON_ICHI,    initial = 30, maxStock = 60, targetStock = 45, buyMax = 11655,  restockRate = 5 },
+            { id = xi.item.SCROLL_OF_DOTON_ICHI,    initial = 30, maxStock = 60, targetStock = 45, buyMax = 11655,  restockRate = 5 },
+            { id = xi.item.SCROLL_OF_RAITON_ICHI,   initial = 30, maxStock = 60, targetStock = 45, buyMax = 11655,  restockRate = 5 },
+            { id = xi.item.SCROLL_OF_SUITON_ICHI,   initial = 30, maxStock = 60, targetStock = 45, buyMax = 11655,  restockRate = 5 },
+            { id = xi.item.SCROLL_OF_UTSUSEMI_ICHI, initial = 0,  maxStock = 60, targetStock = 45, buyMax = 14240,  restockRate = 0 },
+            { id = xi.item.SCROLL_OF_JUBAKU_ICHI,   initial = 0,  maxStock = 60, targetStock = 45, buyMax = 14240,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCROLL_OF_HOJO_ICHI,     initial = 0,  maxStock = 60, targetStock = 45, buyMax = 14240,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCROLL_OF_KURAYAMI_ICHI, initial = 0,  maxStock = 60, targetStock = 45, buyMax = 14240,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCROLL_OF_DOKUMORI_ICHI, initial = 0,  maxStock = 60, targetStock = 45, buyMax = 14240,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCROLL_OF_TONKO_ICHI,    initial = 0,  maxStock = 60, targetStock = 45, buyMax = 14240,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCROLL_OF_MONOMI_ICHI,   initial = 0,  maxStock = 60, targetStock = 45, buyMax = 14240,  restockRate = 0 }, -- targetStock assumed
+        },
+    },
     ['Gaudylox'] =
     {
         hours = { 11, 22 },
