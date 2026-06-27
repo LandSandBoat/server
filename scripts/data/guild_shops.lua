@@ -220,6 +220,57 @@ xi.data.guildShops =
             { id = xi.item.PENDANT_COMPASS, initial = 150, maxStock = 200, targetStock = 150, buyMax = 375,  restockRate = 0, priceFloor = 0, noSell = true },
         },
     },
+    ['Jabbar'] =
+    {
+        hours = { 1, 23 },
+        stock =
+        {
+            { id = xi.item.BAMBOO_STICK,            initial = 50,  maxStock = 60,  targetStock = 50,  buyMax = 719,    restockRate = 10 },
+            { id = xi.item.JAR_OF_TOAD_OIL,         initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 18000,  restockRate = 0 },
+            { id = xi.item.SHEET_OF_BAST_PARCHMENT, initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 5400,   restockRate = 0 },
+            { id = xi.item.SQUARE_OF_SILK_CLOTH,    initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 105000, restockRate = 0 },
+            { id = xi.item.LUMP_OF_TAMA_HAGANE,     initial = 15,  maxStock = 60,  targetStock = 15,  buyMax = 35000,  restockRate = 0 },
+            { id = xi.item.UCHITAKE,                initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 200,    restockRate = 0 },
+            { id = xi.item.TSURARA,                 initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 200,    restockRate = 0 },
+            { id = xi.item.KAWAHORI_OGI,            initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 200,    restockRate = 0 },
+            { id = xi.item.MAKIBISHI,               initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 200,    restockRate = 0 },
+            { id = xi.item.HIRAISHIN,               initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 200,    restockRate = 0 },
+            { id = xi.item.MIZU_DEPPO,              initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 200,    restockRate = 0 },
+            { id = xi.item.SHIHEI,                  initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 625,    restockRate = 0 },
+            { id = xi.item.JUSATSU,                 initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 625,    restockRate = 0 },
+            { id = xi.item.KAGINAWA,                initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 625,    restockRate = 0 },
+            { id = xi.item.SAIRUI_RAN,              initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 625,    restockRate = 0 },
+            { id = xi.item.KODOKU,                  initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 625,    restockRate = 0 },
+            { id = xi.item.SHINOBI_TABI,            initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 625,    restockRate = 0 },
+            { id = xi.item.SCROLL_OF_KATON_ICHI,    initial = 16,  maxStock = 60,  targetStock = 50,  buyMax = 11655,  restockRate = 3 },
+            { id = xi.item.SCROLL_OF_HYOTON_ICHI,   initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 11655,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCROLL_OF_HUTON_ICHI,    initial = 16,  maxStock = 60,  targetStock = 50,  buyMax = 11655,  restockRate = 3 },
+            { id = xi.item.SCROLL_OF_DOTON_ICHI,    initial = 16,  maxStock = 60,  targetStock = 50,  buyMax = 11655,  restockRate = 3 },
+            { id = xi.item.SCROLL_OF_RAITON_ICHI,   initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 11655,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCROLL_OF_SUITON_ICHI,   initial = 16,  maxStock = 60,  targetStock = 50,  buyMax = 11655,  restockRate = 3 },
+            { id = xi.item.SCROLL_OF_UTSUSEMI_ICHI, initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 14245,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCROLL_OF_JUBAKU_ICHI,   initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 14245,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCROLL_OF_HOJO_ICHI,     initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 14245,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCROLL_OF_KURAYAMI_ICHI, initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 14245,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCROLL_OF_DOKUMORI_ICHI, initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 14245,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCROLL_OF_TONKO_ICHI,    initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 14245,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCROLL_OF_ABSORB_STR,    initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 105000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCROLL_OF_ABSORB_DEX,    initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 105000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCROLL_OF_ABSORB_VIT,    initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 105000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCROLL_OF_ABSORB_AGI,    initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 105000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCROLL_OF_ABSORB_INT,    initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 105000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCROLL_OF_ABSORB_MND,    initial = 16,  maxStock = 60,  targetStock = 50,  buyMax = 105000, restockRate = 2 },
+            { id = xi.item.SCROLL_OF_ABSORB_CHR,    initial = 16,  maxStock = 60,  targetStock = 50,  buyMax = 105000, restockRate = 2 },
+            { id = xi.item.ONZ_OF_TURMERIC,         initial = 35,  maxStock = 60,  targetStock = 50,  buyMax = 3225,   restockRate = 15 },
+            { id = xi.item.ONZ_OF_CORIANDER,        initial = 35,  maxStock = 60,  targetStock = 50,  buyMax = 7925,   restockRate = 15 },
+            { id = xi.item.SPRIG_OF_HOLY_BASIL,     initial = 35,  maxStock = 60,  targetStock = 50,  buyMax = 4000,   restockRate = 15 },
+            { id = xi.item.ONZ_OF_CURRY_POWDER,     initial = 18,  maxStock = 30,  targetStock = 25,  buyMax = 1456,   restockRate = 7,   priceFloor = 55 },
+            { id = xi.item.JAR_OF_GROUND_WASABI,    initial = 90,  maxStock = 150, targetStock = 120, buyMax = 12974,  restockRate = 20,  priceFloor = 150 },
+            { id = xi.item.BOTTLE_OF_RICE_VINEGAR,  initial = 90,  maxStock = 150, targetStock = 120, buyMax = 1000,   restockRate = 20,  priceFloor = 150 },
+            { id = xi.item.CLUMP_OF_SHUNGIKU,       initial = 120, maxStock = 150, targetStock = 120, buyMax = 1400,   restockRate = 100, priceFloor = 150 },
+            { id = xi.item.SCROLL_OF_MONOMI_ICHI,   initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 47950,  restockRate = 0 }, -- targetStock assumed
+        },
+    },
     ['Jirokichi'] =
     {
         hours = { 9, 23 },

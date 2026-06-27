@@ -3295,6 +3295,7 @@ xi.item =
     PLATE_OF_HOMEMADE_RISOTTO           = 5229,
     SPRIG_OF_CIBOL                      = 5234,
     HEAD_OF_NAPA                        = 5235,
+    CLUMP_OF_SHUNGIKU                   = 5236,
     BUNDLE_OF_SHIRATAKI                 = 5237,
     HERMES_QUENCHER                     = 5253,
     FIRE_FEATHER                        = 5256,
