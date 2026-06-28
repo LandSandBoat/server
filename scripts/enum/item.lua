@@ -1525,6 +1525,7 @@ xi.item =
     HALVUNG_BRASS_KEY                   = 2223,
     MAMOOL_JA_COLLAR                    = 2227,
     CHUNK_OF_LUMINIUM_ORE               = 2228,
+    VIAL_OF_CHIMERA_BLOOD               = 2229,
     LAMBENT_FIRE_CELL                   = 2230,
     LAMBENT_WATER_CELL                  = 2231,
     LAMBENT_EARTH_CELL                  = 2232,
