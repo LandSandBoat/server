@@ -25,6 +25,8 @@
 #include "common/utils.h"
 #include "otp_helpers.h"
 
+#include <tuple>
+
 #include <bcrypt/BCrypt.hpp>
 
 #include <nlohmann/json.hpp>
@@ -152,6 +154,7 @@ void auth_session::read_func()
     std::string            updated_password    = loginHelpers::jsonGet<std::string>(jsonBuffer, "new_password").value_or("");
     std::string            otp                 = loginHelpers::jsonGet<std::string>(jsonBuffer, "otp").value_or("");
     std::string            trust_token         = loginHelpers::jsonGet<std::string>(jsonBuffer, "trust_token").value_or("");
+    std::string            login_token         = loginHelpers::jsonGet<std::string>(jsonBuffer, "login_token").value_or("");
     bool                   trust_this_computer = loginHelpers::jsonGet<bool>(jsonBuffer, "trust_this_computer").value_or(false);
     std::array<uint8_t, 3> version             = loginHelpers::jsonGet<uint8, 3>(jsonBuffer, "version").value_or(std::array<uint8_t, 3>{ 0, 0, 0 });
 
@@ -165,17 +168,22 @@ void auth_session::read_func()
 
     DebugSockets(fmt::format("auth code: {} from {}", code, ipAddress));
 
-    // data checks
-    if (loginHelpers::isStringMalformed(username, 16))
+    // data checks. A launch-token login identifies the account by the token alone
+    // and carries no username/password, so skip those checks when one is present
+    // (isStringMalformed rejects empty strings).
+    if (login_token.empty())
     {
-        ShowWarningFmt("login_parse: malformed username from {}", ipAddress);
-        return;
-    }
+        if (loginHelpers::isStringMalformed(username, 16))
+        {
+            ShowWarningFmt("login_parse: malformed username from {}", ipAddress);
+            return;
+        }
 
-    if (loginHelpers::isStringMalformed(password, 32))
-    {
-        ShowWarningFmt("login_parse: malformed password from {}", ipAddress);
-        return;
+        if (loginHelpers::isStringMalformed(password, 32))
+        {
+            ShowWarningFmt("login_parse: malformed password from {}", ipAddress);
+            return;
+        }
     }
 
     switch (static_cast<login_cmd>(code))
@@ -189,17 +197,39 @@ void auth_session::read_func()
         {
             DebugSockets(fmt::format("LOGIN_ATTEMPT from {}", ipAddress));
 
-            // Look up and validate account password
-            auto accountInfo = validatePassword(username, password);
-            if (!accountInfo)
+            uint32 accountID = 0;
+            uint32 status    = 0;
+
+            // Launch-token boot (Discord-login launcher path): a single-use,
+            // short-TTL token minted by the Phoenix auth service stands in for
+            // BOTH password and OTP. The Phoenix session already enforced auth
+            // (incl. 2FA) before minting, so we skip validatePassword and the OTP
+            // block entirely. Consuming the token is single-use.
+            const bool viaLaunchToken = !login_token.empty();
+            if (viaLaunchToken)
             {
-                sendLoginResult(login_result::LOGIN_ERROR);
-                return;
+                auto launchInfo = otpHelpers::validateAndConsumeLaunchToken(login_token);
+                if (!launchInfo)
+                {
+                    sendLoginResult(login_result::LOGIN_ERROR_LAUNCH_TOKEN_INVALID);
+                    return;
+                }
+                std::tie(accountID, status) = *launchInfo;
+            }
+            else
+            {
+                // Look up and validate account password
+                auto accountInfo = validatePassword(username, password);
+                if (!accountInfo)
+                {
+                    sendLoginResult(login_result::LOGIN_ERROR);
+                    return;
+                }
+                std::tie(accountID, status) = *accountInfo;
             }
 
-            auto [accountID, status] = *accountInfo;
-
-            // Reject banned/non-normal accounts before processing OTP or trust tokens
+            // Reject banned/non-normal accounts before processing OTP or trust tokens.
+            // Runs on BOTH the password and launch-token paths.
             if (!(status & ACCOUNT_STATUS_CODE::NORMAL))
             {
                 // Purge any lingering trust tokens for banned accounts
@@ -213,7 +243,8 @@ void auth_session::read_func()
 
             bool otpVerified = false;
 
-            if (otpHelpers::doesAccountNeedOTP(accountID, "TOTP"))
+            // Launch tokens already satisfied 2FA at mint time — skip the OTP block.
+            if (!viaLaunchToken && otpHelpers::doesAccountNeedOTP(accountID, "TOTP"))
             {
                 bool trustedByToken = false;
 

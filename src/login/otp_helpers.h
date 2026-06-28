@@ -354,4 +354,50 @@ inline void removeAllTrustTokens(uint32 accid)
     db::preparedStmt("DELETE FROM accounts_trust_tokens WHERE accid = ?", accid);
 }
 
+// Launch tokens: a single-use, short-TTL credential minted by the Phoenix auth
+// service for an already-authenticated session (Discord or email/pw). Unlike a
+// trust token (which only bypasses the OTP second factor), a launch token stands
+// in for BOTH password and OTP at boot — justified because the Phoenix session
+// already enforced auth (incl. 2FA) before minting. Same 64-hex-char format and
+// SHA-256-at-rest hashing as trust tokens; the auth service inserts the hash into
+// accounts_login_tokens and xi_connect consumes it here.
+//
+// Returns (accid, account status) iff the token is valid AND we are the caller
+// that consumed it (single-use: the DELETE must affect exactly one row). The
+// status is returned so the caller can run the normal ban/NORMAL check.
+inline Maybe<std::pair<uint32, uint32>> validateAndConsumeLaunchToken(const std::string& token)
+{
+    if (!isValidTrustTokenFormat(token)) // 64 hex chars — same format as trust tokens
+    {
+        return std::nullopt;
+    }
+
+    const auto hashed = hashTrustToken(token); // SHA-256 hex — same at-rest hashing
+
+    // Resolve accid + account status for a still-valid token.
+    const auto sel = db::preparedStmt(
+        "SELECT lt.accid AS accid, a.status AS status "
+        "FROM accounts_login_tokens lt "
+        "JOIN accounts a ON a.id = lt.accid "
+        "WHERE lt.token = ? AND lt.expires > NOW()",
+        hashed);
+    if (!sel || sel->rowsCount() == 0 || !sel->next())
+    {
+        return std::nullopt;
+    }
+
+    const uint32 accid  = sel->get<uint32>("accid");
+    const uint32 status = sel->get<uint32>("status");
+
+    // Consume atomically — single-use. Only the caller whose DELETE actually
+    // removes the row (rowsAffected == 1) wins; a concurrent replay removes 0.
+    const auto del = db::preparedStmt("DELETE FROM accounts_login_tokens WHERE token = ? AND expires > NOW()", hashed);
+    if (!del || del->rowsAffected() != 1)
+    {
+        return std::nullopt;
+    }
+
+    return std::make_pair(accid, status);
+}
+
 } // namespace otpHelpers

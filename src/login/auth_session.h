@@ -63,8 +63,9 @@ enum class login_result : uint8_t
     LOGIN_ERROR_VERSION_UNSUPPORTED = 0x0B,
     LOGIN_SUCCESS_CREATE_TOTP       = 0x10,
     LOGIN_SUCCESS_VERIFY_TOTP       = 0x11,
-    LOGIN_SUCCESS_REMOVE_TOTP       = 0x12,
-    LOGIN_ERROR_TRUST_TOKEN_INVALID = 0x13,
+    LOGIN_SUCCESS_REMOVE_TOTP        = 0x12,
+    LOGIN_ERROR_TRUST_TOKEN_INVALID  = 0x13,
+    LOGIN_ERROR_LAUNCH_TOKEN_INVALID = 0x14,
 };
 
 constexpr std::array<uint8, 3> SupportedXiloaderVersion = { 2, 1, 0 };
