@@ -196,6 +196,91 @@ xi.data.guildShops =
             { id = xi.item.SCROLL_OF_MONOMI_ICHI,   initial = 0,  maxStock = 60, targetStock = 45, buyMax = 14240,  restockRate = 0 }, -- targetStock assumed
         },
     },
+    ['Doggomehr'] =
+    {
+        hours = { 8, 23 },
+        stock =
+        {
+            { id = xi.item.CHUNK_OF_TIN_ORE,         initial = 180, maxStock = 240, targetStock = 180, buyMax = 200,    restockRate = 60 },
+            { id = xi.item.CHUNK_OF_IRON_ORE,        initial = 144, maxStock = 240, targetStock = 180, buyMax = 4500,   restockRate = 60 },
+            { id = xi.item.CHUNK_OF_MYTHRIL_ORE,     initial = 0,   maxStock = 240, targetStock = 180, buyMax = 10000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BRONZE_INGOT,             initial = 36,  maxStock = 240, targetStock = 180, buyMax = 380,    restockRate = 12 },
+            { id = xi.item.IRON_INGOT,               initial = 36,  maxStock = 240, targetStock = 180, buyMax = 18000,  restockRate = 12 },
+            { id = xi.item.STEEL_INGOT,              initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 26250,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.MYTHRIL_INGOT,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 50000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.LUMP_OF_TAMA_HAGANE,      initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 35000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BRONZE_SHEET,             initial = 36,  maxStock = 240, targetStock = 180, buyMax = 460,    restockRate = 12 },
+            { id = xi.item.IRON_SHEET,               initial = 36,  maxStock = 240, targetStock = 180, buyMax = 27000,  restockRate = 12 },
+            { id = xi.item.MYTHRIL_SHEET,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 60000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.DARKSTEEL_SHEET,          initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 171000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.STEEL_SHEET,              initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 42000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.HANDFUL_OF_BRONZE_SCALES, initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 540,    restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.HANDFUL_OF_IRON_SCALES,   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 31500,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.HANDFUL_OF_STEEL_SCALES,  initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 49500,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.IRON_CHAIN,               initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 31500,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.DARKSTEEL_CHAIN,          initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 199500, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.HANDFUL_OF_IRON_SAND,     initial = 0,   maxStock = 240, targetStock = 180, buyMax = 2370,   restockRate = 0, priceFloor = 270 }, -- targetStock assumed
+            { id = xi.item.KITE_SHIELD,              initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 61200,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.IRON_MASK,                initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 51300,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.FACEGUARD,                initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 7250,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.CHAINMAIL,                initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 79200,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCALE_MAIL,               initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 11150,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.CHAIN_MITTENS,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 42300,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCALE_FINGER_GAUNTLETS,   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 5950,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.CHAIN_HOSE,               initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 63000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCALE_CUISSES,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 8950,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.GREAVES,                  initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 38700,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCALE_GREAVES,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 5425,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.IRON_SCALE_MAIL,          initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 208980, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.STEEL_SCALE_MAIL,         initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 378400, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.IRON_VISOR,               initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 136080, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.STEEL_VISOR,              initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 246400, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.IRON_FINGER_GAUNTLETS,    initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 111780, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.STEEL_FINGER_GAUNTLETS,   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 202400, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.IRON_GREAVES,             initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 102060, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.STEEL_GREAVES,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 179025, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.IRON_CUISSES,             initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 186300, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.STEEL_CUISSES,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 351900, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.KATARS,                   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 77440,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.CLAWS,                    initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 63840,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.MYTHRIL_CLAWS,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 148800, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.DARKSTEEL_CLAWS,          initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 259200, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BRONZE_DAGGER,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 780,    restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.DAGGER,                   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 10150,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.MYTHRIL_DAGGER,           initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 42930,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BASELARD,                 initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 23940,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.KRIS,                     initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 60480,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.FLEURET,                  initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 74480,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.XIPHOS,                   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 3360,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.GLADIUS,                  initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 94080,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BRONZE_SWORD,             initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 1340,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.IRON_SWORD,               initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 39600,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.MYTHRIL_SWORD,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 172000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.DARKSTEEL_SWORD,          initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 451500, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BROADSWORD,               initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 117040, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SPATHA,                   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 9300,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.LONGSWORD,                initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 46080,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.KNIGHTS_SWORD,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 426250, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.HUNTING_SWORD,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 198720, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.CLAYMORE,                 initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 13600,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.MYTHRIL_CLAYMORE,         initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 210000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.DARKSTEEL_CLAYMORE,       initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 598500, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.TWO_HANDED_SWORD,         initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 69630,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.GREATSWORD,               initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 337900, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.WAR_PICK,                 initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 121800, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.MYTHRIL_PICK,             initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 443700, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BRONZE_ZAGHNAL,           initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 1720,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.ZAGHNAL,                  initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 62700,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCYTHE,                   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 52980,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.MYTHRIL_SCYTHE,           initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 310500, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BRONZE_MACE,              initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 940,    restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.MACE,                     initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 24240,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.MYTHRIL_MACE,             initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 90240,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BRONZE_ROD,               initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 500,    restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.ROD,                      initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 13260,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.MYTHRIL_ROD,              initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 31280,  restockRate = 0 }, -- targetStock assumed
+        },
+    },
     ['Gaudylox'] =
     {
         hours = { 11, 22 },
