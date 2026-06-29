@@ -848,6 +848,90 @@ xi.data.guildShops =
             { id = xi.item.HIMANTES,                      initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 79800,  restockRate = 0 }, -- targetStock assumed
         },
     },
+    ['Kuzah_Hpirohpon'] =
+    {
+        hours = { 6, 21 },
+        stock =
+        {
+            { id = xi.item.SPOOL_OF_SILK_THREAD,    initial = 8,   maxStock = 30,  targetStock = 15,  buyMax = 3719,   restockRate = 1 },
+            { id = xi.item.SPOOL_OF_GRASS_THREAD,   initial = 180, maxStock = 240, targetStock = 180, buyMax = 300,    restockRate = 30 },
+            { id = xi.item.SPOOL_OF_COTTON_THREAD,  initial = 132, maxStock = 240, targetStock = 132, buyMax = 800,    restockRate = 6 },
+            { id = xi.item.SPOOL_OF_LINEN_THREAD,   initial = 102, maxStock = 180, targetStock = 135, buyMax = 5000,   restockRate = 6 },
+            { id = xi.item.SPOOL_OF_WOOL_THREAD,    initial = 66,  maxStock = 120, targetStock = 90,  buyMax = 18000,  restockRate = 3 },
+            { id = xi.item.SPOOL_OF_RAINBOW_THREAD, initial = 0,   maxStock = 10,  targetStock = 7,   buyMax = 277200, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SPOOL_OF_SILVER_THREAD,  initial = 6,   maxStock = 30,  targetStock = 13,  buyMax = 4412,   restockRate = 1 },
+            { id = xi.item.SPOOL_OF_GOLD_THREAD,    initial = 5,   maxStock = 10,  targetStock = 7,   buyMax = 114000, restockRate = 1 },
+            { id = xi.item.SQUARE_OF_GRASS_CLOTH,   initial = 36,  maxStock = 240, targetStock = 180, buyMax = 1600,   restockRate = 12 },
+            { id = xi.item.SQUARE_OF_COTTON_CLOTH,  initial = 36,  maxStock = 240, targetStock = 180, buyMax = 3200,   restockRate = 12 },
+            { id = xi.item.SQUARE_OF_LINEN_CLOTH,   initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 15000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SQUARE_OF_WOOL_CLOTH,    initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 54000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SQUARE_OF_VELVET_CLOTH,  initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 79750,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SQUARE_OF_SILK_CLOTH,    initial = 0,   maxStock = 240, targetStock = 180, buyMax = 105000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SQUARE_OF_RAINBOW_CLOTH, initial = 0,   maxStock = 240, targetStock = 180, buyMax = 567675, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.CLUMP_OF_SHEEP_WOOL,     initial = 180, maxStock = 240, targetStock = 180, buyMax = 4500,   restockRate = 30 },
+            { id = xi.item.BALL_OF_SARUTA_COTTON,   initial = 2,   maxStock = 240, targetStock = 18,  buyMax = 200,    restockRate = 1 },
+            { id = xi.item.FLAX_FLOWER,             initial = 180, maxStock = 240, targetStock = 180, buyMax = 1250,   restockRate = 30 },
+            { id = xi.item.SPIDER_WEB,              initial = 0,   maxStock = 240, targetStock = 180, buyMax = 30738,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.PIECE_OF_CRAWLER_COCOON, initial = 60,  maxStock = 240, targetStock = 140, buyMax = 930,    restockRate = 10 },
+            { id = xi.item.YAGUDO_FEATHER,          initial = 0,   maxStock = 240, targetStock = 180, buyMax = 200,    restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.GIANT_BIRD_FEATHER,      initial = 0,   maxStock = 240, targetStock = 180, buyMax = 4590,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BIRD_FEATHER,            initial = 0,   maxStock = 240, targetStock = 180, buyMax = 40,     restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.HEADGEAR,                initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 9800,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.COTTON_HEADGEAR,         initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 44590,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.RED_CAP,                 initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 100000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.WOOL_CAP,                initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 196348, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.WOOL_HAT,                initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 60690,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.VELVET_HAT,              initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 128520, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.COTTON_HEADBAND,         initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 10500,  restockRate = 0 }, -- buyMax borrowed from Taten; targetStock assumed
+            { id = xi.item.FLAX_HEADBAND,           initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 80000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.DOUBLET,                 initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 13684,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.COTTON_DOUBLET,          initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 68640,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.GAMBISON,                initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 162500, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.WOOL_GAMBISON,           initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 343200, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.ROBE,                    initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 1200,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.LINEN_ROBE,              initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 15425,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.WOOL_ROBE,               initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 90440,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.VELVET_ROBE,             initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 191520, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.TUNIC,                   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 7000,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BLACK_TUNIC,             initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 51780,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.CLOAK,                   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 166060, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.GLOVES,                  initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 7575,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.COTTON_GLOVES,           initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 37200,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BRACERS,                 initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 50400,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.WOOL_BRACERS,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 0,      restockRate = 0 }, -- buyMax provisional; targetStock assumed
+            { id = xi.item.CUFFS,                   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 660,    restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.LINEN_CUFFS,             initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 8725,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.WOOL_CUFFS,              initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 51170,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.VELVET_CUFFS,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 108360, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.MITTS,                   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 3275,   restockRate = 0 }, -- buyMax borrowed from Taten; targetStock assumed
+            { id = xi.item.LINEN_MITTS,             initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 78659,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BLACK_MITTS,             initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 216750, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BRAIS,                   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 10550,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.COTTON_BRAIS,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 54000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.HOSE,                    initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 122500, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.WOOL_HOSE,               initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 288000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SLOPS,                   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 959,    restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.LINEN_SLOPS,             initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 12600,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.WOOL_SLOPS,              initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 73780,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.VELVET_SLOPS,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 156240, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SLACKS,                  initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 4675,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BLACK_SLACKS,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 34500,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.LINEN_SLACKS,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 113160, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.GAITERS,                 initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 7050,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.COTTON_GAITERS,          initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 36050,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SOCKS,                   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 80000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.WOOL_SOCKS,              initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 176000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.FEATHER_COLLAR,          initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 2075,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.HEMP_GORGET,             initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 5400,   restockRate = 0 },  -- targetStock assumed
+            { id = xi.item.WING_EARRING,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 48000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCARLET_RIBBON,          initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 6250,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BLACK_CAPE,              initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 55440,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.CAPE,                    initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 2125,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.COTTON_CAPE,             initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 15180,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.RED_CAPE,                initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 108900, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.LINEN_DOUBLET,           initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 137940, restockRate = 0 }, -- targetStock assumed
+        },
+    },
     ['Maymunah'] =
     {
         hours = { 8, 23 },
@@ -1093,7 +1177,7 @@ xi.data.guildShops =
             { id = xi.item.FANG_NECKLACE,     initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 19034,  restockRate = 0 }, -- targetStock assumed
             { id = xi.item.BEETLE_GORGET,     initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 22400,  restockRate = 0 }, -- targetStock assumed
             { id = xi.item.CARAPACE_GORGET,   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 115500, restockRate = 0 }, -- targetStock assumed
-            { id = xi.item.SHELL_EARRING,     initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 3770,      restockRate = 0 },  -- targetStock assumed
+            { id = xi.item.SHELL_EARRING,     initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 3770,   restockRate = 0 }, -- targetStock assumed
             { id = xi.item.BONE_EARRING,      initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 9060,   restockRate = 0 }, -- targetStock assumed
             { id = xi.item.BEETLE_EARRING,    initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 17670,  restockRate = 0 }, -- targetStock assumed
             { id = xi.item.TORTOISE_EARRING,  initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 87500,  restockRate = 0 }, -- targetStock assumed
@@ -1213,6 +1297,126 @@ xi.data.guildShops =
             { id = xi.item.GOLD_OBI,          initial = 0,  maxStock = 30, targetStock = 25, buyMax = 58880,   restockRate = 0 }, -- targetStock assumed
             { id = xi.item.BROCADE_OBI,       initial = 0,  maxStock = 30, targetStock = 25, buyMax = 132000,  restockRate = 0 }, -- targetStock assumed
             { id = xi.item.RAINBOW_OBI,       initial = 0,  maxStock = 30, targetStock = 25, buyMax = 268800,  restockRate = 0 }, -- targetStock assumed
+        },
+    },
+    ['Taten-Bilten'] =
+    {
+        hours = { 6, 21 },
+        stock =
+        {
+            { id = xi.item.SPOOL_OF_SILK_THREAD,    initial = 8,   maxStock = 30,  targetStock = 20,  buyMax = 3719,   restockRate = 1 },
+            { id = xi.item.SPOOL_OF_GRASS_THREAD,   initial = 180, maxStock = 240, targetStock = 180, buyMax = 300,    restockRate = 30 },
+            { id = xi.item.SPOOL_OF_COTTON_THREAD,  initial = 132, maxStock = 240, targetStock = 180, buyMax = 800,    restockRate = 6 },
+            { id = xi.item.SPOOL_OF_LINEN_THREAD,   initial = 102, maxStock = 180, targetStock = 135, buyMax = 5000,   restockRate = 6 },
+            { id = xi.item.SPOOL_OF_RAINBOW_THREAD, initial = 0,   maxStock = 10,  targetStock = 7,   buyMax = 277200, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SPOOL_OF_SILVER_THREAD,  initial = 6,   maxStock = 30,  targetStock = 25,  buyMax = 4412,   restockRate = 1 },
+            { id = xi.item.SPOOL_OF_GOLD_THREAD,    initial = 5,   maxStock = 10,  targetStock = 7,   buyMax = 114000, restockRate = 1 },
+            { id = xi.item.SQUARE_OF_GRASS_CLOTH,   initial = 36,  maxStock = 240, targetStock = 180, buyMax = 1600,   restockRate = 12 },
+            { id = xi.item.SQUARE_OF_COTTON_CLOTH,  initial = 36,  maxStock = 240, targetStock = 180, buyMax = 3200,   restockRate = 12 },
+            { id = xi.item.SQUARE_OF_LINEN_CLOTH,   initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 15000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SQUARE_OF_VELVET_CLOTH,  initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 79750,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SQUARE_OF_SILK_CLOTH,    initial = 0,   maxStock = 240, targetStock = 180, buyMax = 105000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SQUARE_OF_RAINBOW_CLOTH, initial = 0,   maxStock = 240, targetStock = 180, buyMax = 567675, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.CLUMP_OF_SHEEP_WOOL,     initial = 180, maxStock = 240, targetStock = 180, buyMax = 4500,   restockRate = 30 },
+            { id = xi.item.CLUMP_OF_MOKO_GRASS,     initial = 180, maxStock = 240, targetStock = 180, buyMax = 100,    restockRate = 60 },
+            { id = xi.item.BALL_OF_SARUTA_COTTON,   initial = 2,   maxStock = 240, targetStock = 97,  buyMax = 200,    restockRate = 1 },
+            { id = xi.item.FLAX_FLOWER,             initial = 180, maxStock = 240, targetStock = 180, buyMax = 1250,   restockRate = 30 },
+            { id = xi.item.SPIDER_WEB,              initial = 0,   maxStock = 240, targetStock = 180, buyMax = 33396,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.PIECE_OF_CRAWLER_COCOON, initial = 60,  maxStock = 240, targetStock = 180, buyMax = 930,    restockRate = 10 },
+            { id = xi.item.GIANT_BIRD_FEATHER,      initial = 0,   maxStock = 240, targetStock = 180, buyMax = 4590,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SPINDLE,                 initial = 180, maxStock = 240, targetStock = 180, buyMax = 500,    restockRate = 60 },
+            { id = xi.item.SPOOL_OF_ZEPHYR_THREAD,  initial = 180, maxStock = 240, targetStock = 180, buyMax = 500,    restockRate = 60 },
+            { id = xi.item.PUK_WING,                initial = 0,   maxStock = 240, targetStock = 180, buyMax = 4590,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.APKALLU_FEATHER,         initial = 0,   maxStock = 240, targetStock = 180, buyMax = 4590,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.COLIBRI_FEATHER,         initial = 0,   maxStock = 240, targetStock = 180, buyMax = 4590,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.WAMOURA_COCOON,          initial = 66,  maxStock = 120, targetStock = 66,  buyMax = 780,    restockRate = 3 },
+            { id = xi.item.SPOOL_OF_KARAKUL_THREAD, initial = 66,  maxStock = 120, targetStock = 90,  buyMax = 18000,  restockRate = 3 },
+            { id = xi.item.SQUARE_OF_KARAKUL_CLOTH, initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 54900,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SQUARE_OF_WAMOURA_CLOTH, initial = 0,   maxStock = 240, targetStock = 180, buyMax = 114135, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.HEADGEAR,                initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 9800,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.COTTON_HEADGEAR,         initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 44590,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.RED_CAP,                 initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 100000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.WOOL_CAP,                initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 196350, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.WOOL_HAT,                initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 60690,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.VELVET_HAT,              initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 128520, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.COTTON_HEADBAND,         initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 10500,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.FLAX_HEADBAND,           initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 80000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.DOUBLET,                 initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 13684,  restockRate = 0 }, -- buyMax borrowed from Kuzah; targetStock assumed
+            { id = xi.item.COTTON_DOUBLET,          initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 68640,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.GAMBISON,                initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 162500, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.WOOL_GAMBISON,           initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 343200, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.ROBE,                    initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 1200,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.LINEN_ROBE,              initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 15425,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.WOOL_ROBE,               initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 90440,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.VELVET_ROBE,             initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 191520, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.TUNIC,                   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 7000,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BLACK_TUNIC,             initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 51780,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.CLOAK,                   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 166060, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.GLOVES,                  initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 7575,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.COTTON_GLOVES,           initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 37200,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BRACERS,                 initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 50400,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.WOOL_BRACERS,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 0,      restockRate = 0 }, -- buyMax provisional; targetStock assumed
+            { id = xi.item.CUFFS,                   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 660,    restockRate = 0 }, -- buyMax borrowed from Kuzah; targetStock assumed
+            { id = xi.item.LINEN_CUFFS,             initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 8725,   restockRate = 0 }, -- buyMax borrowed from Kuzah; targetStock assumed
+            { id = xi.item.WOOL_CUFFS,              initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 51170,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.VELVET_CUFFS,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 108360, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.MITTS,                   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 3275,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.LINEN_MITTS,             initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 78660,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BLACK_MITTS,             initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 216750, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BRAIS,                   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 10550,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.COTTON_BRAIS,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 54000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.HOSE,                    initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 122500, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.WOOL_HOSE,               initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 288000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SLOPS,                   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 959,    restockRate = 0 }, -- buyMax borrowed from Kuzah; targetStock assumed
+            { id = xi.item.LINEN_SLOPS,             initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 12600,  restockRate = 0 }, -- buyMax borrowed from Kuzah; targetStock assumed
+            { id = xi.item.WOOL_SLOPS,              initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 73780,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.VELVET_SLOPS,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 156240, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SLACKS,                  initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 4675,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BLACK_SLACKS,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 34500,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.LINEN_SLACKS,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 113160, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.GAITERS,                 initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 7050,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.COTTON_GAITERS,          initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 36050,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SOCKS,                   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 80000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.WOOL_SOCKS,              initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 176000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.FEATHER_COLLAR,          initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 2075,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.HEMP_GORGET,             initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 5400,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.WING_EARRING,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 48000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SCARLET_RIBBON,          initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 6250,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BLACK_CAPE,              initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 55440,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.CAPE,                    initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 2125,   restockRate = 0 }, -- buyMax borrowed from Kuzah; targetStock assumed
+            { id = xi.item.COTTON_CAPE,             initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 15180,  restockRate = 0 }, -- buyMax borrowed from Kuzah; targetStock assumed
+            { id = xi.item.RED_CAPE,                initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 108900, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.LINEN_DOUBLET,           initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 137940, restockRate = 0 }, -- targetStock assumed
+        },
+    },
+    ['Tilala'] =
+    {
+        hours = { 6, 21 },
+        stock =
+        {
+            { id = xi.item.SPOOL_OF_SILK_THREAD,    initial = 4,  maxStock = 120, targetStock = 24,  buyMax = 4060,   restockRate = 4 },
+            { id = xi.item.SPOOL_OF_GRASS_THREAD,   initial = 30, maxStock = 240, targetStock = 180, buyMax = 300,    restockRate = 30 },
+            { id = xi.item.SPOOL_OF_COTTON_THREAD,  initial = 15, maxStock = 240, targetStock = 180, buyMax = 800,    restockRate = 15 },
+            { id = xi.item.SPOOL_OF_LINEN_THREAD,   initial = 9,  maxStock = 240, targetStock = 135, buyMax = 4873,   restockRate = 9 },
+            { id = xi.item.SPOOL_OF_WOOL_THREAD,    initial = 6,  maxStock = 240, targetStock = 90,  buyMax = 17250,  restockRate = 6 },
+            { id = xi.item.SPOOL_OF_RAINBOW_THREAD, initial = 0,  maxStock = 120, targetStock = 90,  buyMax = 277200, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SPOOL_OF_SILVER_THREAD,  initial = 2,  maxStock = 120, targetStock = 110, buyMax = 5000,   restockRate = 2 },
+            { id = xi.item.SPOOL_OF_GOLD_THREAD,    initial = 1,  maxStock = 120, targetStock = 110, buyMax = 114000, restockRate = 1 },
+            { id = xi.item.SQUARE_OF_GRASS_CLOTH,   initial = 12, maxStock = 240, targetStock = 180, buyMax = 1600,   restockRate = 12 },
+            { id = xi.item.SQUARE_OF_COTTON_CLOTH,  initial = 12, maxStock = 240, targetStock = 180, buyMax = 3200,   restockRate = 12 },
+            { id = xi.item.SQUARE_OF_LINEN_CLOTH,   initial = 0,  maxStock = 240, targetStock = 180, buyMax = 15000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SQUARE_OF_WOOL_CLOTH,    initial = 0,  maxStock = 240, targetStock = 180, buyMax = 54000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SQUARE_OF_VELVET_CLOTH,  initial = 0,  maxStock = 160, targetStock = 120, buyMax = 79750,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SQUARE_OF_SILK_CLOTH,    initial = 0,  maxStock = 160, targetStock = 120, buyMax = 105000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SQUARE_OF_RAINBOW_CLOTH, initial = 0,  maxStock = 160, targetStock = 120, buyMax = 567675, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.CLUMP_OF_SHEEP_WOOL,     initial = 12, maxStock = 240, targetStock = 180, buyMax = 4500,   restockRate = 12 },
+            { id = xi.item.BALL_OF_SARUTA_COTTON,   initial = 0,  maxStock = 240, targetStock = 180, buyMax = 200,    restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.FLAX_FLOWER,             initial = 15, maxStock = 240, targetStock = 180, buyMax = 1250,   restockRate = 15 },
+            { id = xi.item.SPIDER_WEB,              initial = 0,  maxStock = 60,  targetStock = 45,  buyMax = 36300,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.PIECE_OF_CRAWLER_COCOON, initial = 0,  maxStock = 60,  targetStock = 45,  buyMax = 930,    restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.YAGUDO_FEATHER,          initial = 0,  maxStock = 240, targetStock = 180, buyMax = 200,    restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.GIANT_BIRD_FEATHER,      initial = 0,  maxStock = 240, targetStock = 180, buyMax = 4590,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BIRD_FEATHER,            initial = 0,  maxStock = 240, targetStock = 180, buyMax = 40,     restockRate = 0 }, -- targetStock assumed
         },
     },
     ['Tsutsuroon'] =

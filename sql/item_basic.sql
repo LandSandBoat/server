@@ -842,7 +842,7 @@ INSERT INTO `item_basic` VALUES (824,0,'square_of_grass_cloth','grass_cloth','�
 INSERT INTO `item_basic` VALUES (825,0,'square_of_cotton_cloth','cotton_cloth','木綿布',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@CLOTHCRAFT,160);
 INSERT INTO `item_basic` VALUES (826,0,'square_of_linen_cloth','linen_cloth','亜麻布',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@CLOTHCRAFT,600);
 INSERT INTO `item_basic` VALUES (827,0,'square_of_wool_cloth','wool_cloth','毛織物',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@CLOTHCRAFT,1800);
-INSERT INTO `item_basic` VALUES (828,0,'square_of_velvet_cloth','velvet_cloth','ビロード',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@CLOTHCRAFT,561);
+INSERT INTO `item_basic` VALUES (828,0,'square_of_velvet_cloth','velvet_cloth','ビロード',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@CLOTHCRAFT,550);
 INSERT INTO `item_basic` VALUES (829,0,'square_of_silk_cloth','silk_cloth','絹布',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@CLOTHCRAFT,1050);
 INSERT INTO `item_basic` VALUES (830,0,'square_of_rainbow_cloth','rainbow_cloth','虹布',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@CLOTHCRAFT,3915);
 INSERT INTO `item_basic` VALUES (831,0,'square_of_shining_cloth','shining_cloth','光布',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@CLOTHCRAFT,9750);
@@ -2141,7 +2141,7 @@ INSERT INTO `item_basic` VALUES (2146,0,'merrow_scale','merrow_scale','メロー
 INSERT INTO `item_basic` VALUES (2147,0,'marid_tusk','marid_tusk','マーリドの牙',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@BONECRAFT,742);
 INSERT INTO `item_basic` VALUES (2148,0,'puk_wing','puk_wing','プークの翅',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@CLOTHCRAFT,153);
 INSERT INTO `item_basic` VALUES (2149,0,'apkallu_feather','apkallu_feather','アプカルの羽根',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@CLOTHCRAFT,153);
-INSERT INTO `item_basic` VALUES (2150,0,'colibri_feather','colibri_feather','コリブリの尾羽根',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@CLOTHCRAFT,148);
+INSERT INTO `item_basic` VALUES (2150,0,'colibri_feather','colibri_feather','コリブリの尾羽根',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@CLOTHCRAFT,153);
 INSERT INTO `item_basic` VALUES (2151,0,'marid_hide','marid_hide','マーリドの毛皮',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@LEATHERCRAFT,1900);
 INSERT INTO `item_basic` VALUES (2152,0,'square_of_marid_leather','marid_leather','マーリドのなめし革',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@LEATHERCRAFT,1900);
 INSERT INTO `item_basic` VALUES (2153,0,'qiqirn_sandbag','qiqirn_sandbag','キキルンの砂袋',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX | @FLAG_NOSALE,@BEAST_MADE,0);
@@ -10189,7 +10189,7 @@ INSERT INTO `item_basic` VALUES (12461,0,'scorpion_helm_+1','scorpion_helm_+1','
 INSERT INTO `item_basic` VALUES (12462,0,'tora_hachimaki','tora_hachimaki','虎皮の鉢巻',@EQUIPMENT_TYPE,1,@FLAG_CANEQUIP,@HEAD,2334);
 INSERT INTO `item_basic` VALUES (12463,0,'bronze_cap_+1','bronze_cap_+1','ブロンズキャップ+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,50);
 INSERT INTO `item_basic` VALUES (12464,0,'headgear','headgear','ヘッドギア',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,70);
-INSERT INTO `item_basic` VALUES (12465,0,'cotton_headgear','cotton_headgear','コットンヘッドギア',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,349);
+INSERT INTO `item_basic` VALUES (12465,0,'cotton_headgear','cotton_headgear','コットンヘッドギア',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,343);
 INSERT INTO `item_basic` VALUES (12466,0,'red_cap','red_cap','レッドキャップ',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,1250);
 INSERT INTO `item_basic` VALUES (12467,0,'wool_cap','wool_cap','ウールキャップ',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,1155);
 INSERT INTO `item_basic` VALUES (12468,0,'green_beret','green_beret','グリーンベレー',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,3055);
@@ -10211,7 +10211,7 @@ INSERT INTO `item_basic` VALUES (12483,0,'aristocrats_crown','aristocrats_crown'
 INSERT INTO `item_basic` VALUES (12484,0,'mercenarys_hachimaki','mrc._hachimaki','傭兵の鉢巻',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANEQUIP,@HEAD,1038);
 INSERT INTO `item_basic` VALUES (12485,0,'fungus_hat','fungus_hat','ファンガスハット',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANEQUIP | @FLAG_RARE,@HEAD,510);
 INSERT INTO `item_basic` VALUES (12486,0,'emperor_hairpin','emperor_hairpin','皇帝羽虫の髪飾り',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANEQUIP | @FLAG_RARE,@HEAD,750);
-INSERT INTO `item_basic` VALUES (12487,0,'faceguard_+1','faceguard_+1','フェイスガード+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,370);
+INSERT INTO `item_basic` VALUES (12487,0,'faceguard_+1','faceguard_+1','フェイスガード+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,342);
 INSERT INTO `item_basic` VALUES (12488,0,'ost_cerveliere','ost_cerveliere','オストセルヴリエル',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (12489,0,'pixie_hairpin','pixie_hairpin','妖蟲の髪飾り',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANEQUIP,@HEAD,0);
 INSERT INTO `item_basic` VALUES (12490,0,'yasha_jinpachi','yasha_jinpachi','夜叉陣鉢',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,4144);
@@ -10222,8 +10222,8 @@ INSERT INTO `item_basic` VALUES (12494,0,'gold_hairpin','gold_hairpin','金の�
 INSERT INTO `item_basic` VALUES (12495,0,'silver_hairpin','silver_hairpin','銀の髪飾り',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,351);
 INSERT INTO `item_basic` VALUES (12496,0,'copper_hairpin','copper_hairpin','銅の髪飾り',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,37);
 INSERT INTO `item_basic` VALUES (12497,0,'brass_hairpin','brass_hairpin','黄銅の髪飾り',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,259);
-INSERT INTO `item_basic` VALUES (12498,0,'cotton_headband','cotton_headband','木綿のヘッドバンド',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,382);
-INSERT INTO `item_basic` VALUES (12499,0,'flax_headband','flax_headband','亜麻のヘッドバンド',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,794);
+INSERT INTO `item_basic` VALUES (12498,0,'cotton_headband','cotton_headband','木綿のヘッドバンド',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,210);
+INSERT INTO `item_basic` VALUES (12499,0,'flax_headband','flax_headband','亜麻のヘッドバンド',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,800);
 INSERT INTO `item_basic` VALUES (12500,0,'travelers_hat','travelers_hat','旅人の帽子',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANEQUIP,@HEAD,88);
 INSERT INTO `item_basic` VALUES (12501,0,'monks_headgear','monks_headgear','モンクヘッドギア',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANEQUIP,@HEAD,321);
 INSERT INTO `item_basic` VALUES (12502,0,'compound_eye_circlet','cmp._eye_circlet','蟲眼のサークレット',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANEQUIP,@HEAD,183);
@@ -10259,7 +10259,7 @@ INSERT INTO `item_basic` VALUES (12531,0,'silver_hairpin_+1','silver_hairpin_+1'
 INSERT INTO `item_basic` VALUES (12532,0,'brass_mask_+1','brass_mask_+1','ブラスマスク+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,1000);
 INSERT INTO `item_basic` VALUES (12533,0,'silver_mask_+1','silver_mask_+1','シルバーマスク+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,3615);
 INSERT INTO `item_basic` VALUES (12534,0,'hachimaki_+1','hachimaki_+1','鉢巻+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,200);
-INSERT INTO `item_basic` VALUES (12535,0,'great_headgear','great_headgear','グレートヘッドギア',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,1342);
+INSERT INTO `item_basic` VALUES (12535,0,'great_headgear','great_headgear','グレートヘッドギア',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,372);
 INSERT INTO `item_basic` VALUES (12536,0,'erudites_headband','erd._headband','英知のヘッドバンド',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,510);
 INSERT INTO `item_basic` VALUES (12537,0,'cotton_hachimaki_+1','ctn._hachimaki_+1','木綿の鉢巻+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,988);
 INSERT INTO `item_basic` VALUES (12538,0,'red_cap_+1','red_cap_+1','レッドキャップ+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,1570);
@@ -10317,7 +10317,7 @@ INSERT INTO `item_basic` VALUES (12589,0,'scorpion_breastplate_+1','scp._brstpla
 INSERT INTO `item_basic` VALUES (12590,0,'power_gi','power_gi','力だすき',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANEQUIP,@BODY,746);
 INSERT INTO `item_basic` VALUES (12591,0,'doublet_+1','doublet_+1','ダブレット+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,148);
 INSERT INTO `item_basic` VALUES (12592,0,'doublet','doublet','ダブレット',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,119);
-INSERT INTO `item_basic` VALUES (12593,0,'cotton_doublet','cotton_doublet','コットンダブレット',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,3800);
+INSERT INTO `item_basic` VALUES (12593,0,'cotton_doublet','cotton_doublet','コットンダブレット',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,858);
 INSERT INTO `item_basic` VALUES (12594,0,'gambison','gambison','ガンビスン',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,2500);
 INSERT INTO `item_basic` VALUES (12595,0,'wool_gambison','wool_gambison','ウールガンビスン',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,6240);
 INSERT INTO `item_basic` VALUES (12596,0,'battle_jupon','battle_jupon','バトルジュポン',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,10739);
@@ -10326,14 +10326,14 @@ INSERT INTO `item_basic` VALUES (12598,0,'mercenary_captains_doublet','mrc.cpt._
 INSERT INTO `item_basic` VALUES (12599,0,'leather_vest_+1','leather_vest_+1','レザーベスト+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,210);
 INSERT INTO `item_basic` VALUES (12600,0,'robe','robe','ローブ',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,60);
 INSERT INTO `item_basic` VALUES (12601,0,'linen_robe','linen_robe','リネンローブ',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,617);
-INSERT INTO `item_basic` VALUES (12602,0,'wool_robe','wool_robe','ウールローブ',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,4626);
+INSERT INTO `item_basic` VALUES (12602,0,'wool_robe','wool_robe','ウールローブ',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,2584);
 INSERT INTO `item_basic` VALUES (12603,0,'velvet_robe','velvet_robe','ビロードローブ',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,4256);
 INSERT INTO `item_basic` VALUES (12604,0,'silk_coat','silk_coat','シルクコート',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,7030);
 INSERT INTO `item_basic` VALUES (12605,0,'nobles_tunic','nobles_tunic','ノーブルチュニック',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,10077);
 INSERT INTO `item_basic` VALUES (12606,0,'tactician_magicians_coat','tct.mgc._coat','連邦軍師制式コート',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANEQUIP,@BODY,6460);
 INSERT INTO `item_basic` VALUES (12607,0,'bronze_harness_+1','bronze_harness_+1','ブロンズハーネス+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,64);
 INSERT INTO `item_basic` VALUES (12608,0,'tunic','tunic','チュニック',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,280);
-INSERT INTO `item_basic` VALUES (12609,0,'black_tunic','black_tunic','ブラックチュニック',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,1622);
+INSERT INTO `item_basic` VALUES (12609,0,'black_tunic','black_tunic','ブラックチュニック',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,1726);
 INSERT INTO `item_basic` VALUES (12610,0,'cloak','cloak','クローク',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,1748);
 INSERT INTO `item_basic` VALUES (12611,0,'white_cloak','white_cloak','ホワイトクローク',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,7650);
 INSERT INTO `item_basic` VALUES (12612,0,'silk_cloak','silk_cloak','シルククローク',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,6375);
@@ -10350,7 +10350,7 @@ INSERT INTO `item_basic` VALUES (12622,0,'juogi_+1','juogi_+1','十王着改',@E
 INSERT INTO `item_basic` VALUES (12623,0,'yhel_jacket_+1','yhel_jacket_+1','イエルジャケット+1',@EQUIPMENT_TYPE,1,@FLAG_CANEQUIP,@BODY,0);
 INSERT INTO `item_basic` VALUES (12624,0,'cotton_dogi_+1','cotton_dogi_+1','木綿の道着+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,587);
 INSERT INTO `item_basic` VALUES (12625,0,'gambison_+1','gambison_+1','ガンビスン+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,7435); -- TODO: Verify BaseSell
-INSERT INTO `item_basic` VALUES (12626,0,'linen_robe_+1','linen_robe_+1','リネンローブ+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,630);
+INSERT INTO `item_basic` VALUES (12626,0,'linen_robe_+1','linen_robe_+1','リネンローブ+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,617);
 INSERT INTO `item_basic` VALUES (12627,0,'wool_robe_+1','wool_robe_+1','ウールローブ+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,5782);
 INSERT INTO `item_basic` VALUES (12628,0,'battle_jupon_+1','battle_jupon_+1','バトルジュポン+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BODY,13423);
 INSERT INTO `item_basic` VALUES (12629,0,'legionnaires_harness','lgn._harness','共和軍団兵制式帯鎧',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANEQUIP,@BODY,433);
@@ -10454,7 +10454,7 @@ INSERT INTO `item_basic` VALUES (12726,0,'mercenary_captains_gloves','mrc.cpt._g
 INSERT INTO `item_basic` VALUES (12727,0,'engineers_gloves','engineers_gloves','機工士の軍手',@EQUIPMENT_TYPE,1,@FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NODELIVERY | @FLAG_EX,@NONE,3117);
 INSERT INTO `item_basic` VALUES (12728,0,'cuffs','cuffs','カフス',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HANDS,33);
 INSERT INTO `item_basic` VALUES (12729,0,'linen_cuffs','linen_cuffs','リネンカフス',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HANDS,349);
-INSERT INTO `item_basic` VALUES (12730,0,'wool_cuffs','wool_cuffs','ウールカフス',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HANDS,1498);
+INSERT INTO `item_basic` VALUES (12730,0,'wool_cuffs','wool_cuffs','ウールカフス',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HANDS,1462);
 INSERT INTO `item_basic` VALUES (12731,0,'velvet_cuffs','velvet_cuffs','ビロードカフス',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HANDS,2408);
 INSERT INTO `item_basic` VALUES (12732,0,'silk_cuffs','silk_cuffs','シルクカフス',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HANDS,3627);
 INSERT INTO `item_basic` VALUES (12733,0,'nobles_mitts','nobles_mitts','ノーブルミトン',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HANDS,5590);
@@ -10462,7 +10462,7 @@ INSERT INTO `item_basic` VALUES (12734,0,'tactician_magicians_cuffs','tct.mgc._c
 INSERT INTO `item_basic` VALUES (12736,0,'mitts','mitts','ミトン',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HANDS,131);
 INSERT INTO `item_basic` VALUES (12737,0,'white_mitts','white_mitts','ホワイトミトン',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HANDS,805);
 INSERT INTO `item_basic` VALUES (12738,0,'linen_mitts','linen_mitts','リネンミトン',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HANDS,828);
-INSERT INTO `item_basic` VALUES (12739,0,'black_mitts','black_mitts','ブラックミトン',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HANDS,2720);
+INSERT INTO `item_basic` VALUES (12739,0,'black_mitts','black_mitts','ブラックミトン',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HANDS,2550);
 INSERT INTO `item_basic` VALUES (12740,0,'silk_mitts','silk_mitts','シルクミトン',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HANDS,4830);
 INSERT INTO `item_basic` VALUES (12741,0,'ludic_mitts','ludic_mitts','ルーディックミトン',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (12742,0,'rune_bangles','rune_bangles','ルーンバングル',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANEQUIP,@HANDS,6579);
@@ -10571,7 +10571,7 @@ INSERT INTO `item_basic` VALUES (12844,0,'shinobi_hakama','shinobi_hakama','忍�
 INSERT INTO `item_basic` VALUES (12846,0,'wukongs_hakama','wukongs_hakama','悟空筒袴',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANEQUIP,@LEGS,0);
 INSERT INTO `item_basic` VALUES (12847,0,'yasha_hakama','yasha_hakama','夜叉筒袴',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,5512);
 INSERT INTO `item_basic` VALUES (12848,0,'brais','brais','ブレー',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,211);
-INSERT INTO `item_basic` VALUES (12849,0,'cotton_brais','cotton_brais','コットンブレー',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,406);
+INSERT INTO `item_basic` VALUES (12849,0,'cotton_brais','cotton_brais','コットンブレー',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,400);
 INSERT INTO `item_basic` VALUES (12850,0,'hose','hose','ホーズ',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,1750);
 INSERT INTO `item_basic` VALUES (12851,0,'wool_hose','wool_hose','ウールホーズ',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,4800);
 INSERT INTO `item_basic` VALUES (12852,0,'battle_hose','battle_hose','バトルホーズ',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,3680);
@@ -10580,14 +10580,14 @@ INSERT INTO `item_basic` VALUES (12854,0,'mercenary_captains_hose','mrc.cpt._hos
 INSERT INTO `item_basic` VALUES (12855,0,'mercenarys_sitabaki','mrc._sitabaki','傭兵の下ばき',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANEQUIP,@LEGS,1254);
 INSERT INTO `item_basic` VALUES (12856,0,'slops','slops','スロップス',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,48);
 INSERT INTO `item_basic` VALUES (12857,0,'linen_slops','linen_slops','リネンスロップス',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,473);
-INSERT INTO `item_basic` VALUES (12858,0,'wool_slops','wool_slops','ウールスロップス',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,2076);
+INSERT INTO `item_basic` VALUES (12858,0,'wool_slops','wool_slops','ウールスロップス',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,2108);
 INSERT INTO `item_basic` VALUES (12859,0,'velvet_slops','velvet_slops','ビロードスロップス',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,3472);
 INSERT INTO `item_basic` VALUES (12860,0,'silk_slops','silk_slops','シルクスロップス',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,5174);
 INSERT INTO `item_basic` VALUES (12861,0,'nobles_slacks','nobles_slacks','ノーブルズボン',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,7200);
 INSERT INTO `item_basic` VALUES (12862,0,'tactician_magicians_slops','tct.mgc._slops','連邦軍師制式下衣',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANEQUIP,@LEGS,5362);
 INSERT INTO `item_basic` VALUES (12863,0,'solid_cuisses','solid_cuisses','ソリッドクウィス',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,976);
 INSERT INTO `item_basic` VALUES (12864,0,'slacks','slacks','ズボン',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,187);
-INSERT INTO `item_basic` VALUES (12865,0,'black_slacks','black_slacks','ブラックズボン',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,1125);
+INSERT INTO `item_basic` VALUES (12865,0,'black_slacks','black_slacks','ブラックズボン',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,1150);
 INSERT INTO `item_basic` VALUES (12866,0,'linen_slacks','linen_slacks','リネンズボン',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,1886);
 INSERT INTO `item_basic` VALUES (12867,0,'white_slacks','white_slacks','ホワイトズボン',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,5100);
 INSERT INTO `item_basic` VALUES (12868,0,'silk_slacks','silk_slacks','シルクズボン',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,7200);
@@ -10617,11 +10617,11 @@ INSERT INTO `item_basic` VALUES (12892,0,'brass_subligar_+1','brass_subligar_+1'
 INSERT INTO `item_basic` VALUES (12893,0,'brass_cuisses_+1','brass_cuisses_+1','ブラスクウィス+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,978);
 INSERT INTO `item_basic` VALUES (12894,0,'silver_hose_+1','silver_hose_+1','シルバーホーズ+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,4462);
 INSERT INTO `item_basic` VALUES (12895,0,'breeches_+1','breeches_+1','ブリーチズ+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,6562);
-INSERT INTO `item_basic` VALUES (12896,0,'brais_+1','brais_+1','ブレー+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,395);
+INSERT INTO `item_basic` VALUES (12896,0,'brais_+1','brais_+1','ブレー+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,282);
 INSERT INTO `item_basic` VALUES (12897,0,'slops_+1','slops_+1','スロップス+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,55);
 INSERT INTO `item_basic` VALUES (12898,0,'slacks_+1','slacks_+1','ズボン+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,233);
 INSERT INTO `item_basic` VALUES (12899,0,'sitabaki_+1','sitabaki_+1','下ばき+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,235);
-INSERT INTO `item_basic` VALUES (12900,0,'great_brais','great_brais','グレートブレー',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,2245);
+INSERT INTO `item_basic` VALUES (12900,0,'great_brais','great_brais','グレートブレー',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,429);
 INSERT INTO `item_basic` VALUES (12901,0,'linen_slops_+1','linen_slops_+1','リネンスロップス+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,598);
 INSERT INTO `item_basic` VALUES (12902,0,'cotton_sitabaki_+1','ctn._sitabaki_+1','木綿の下ばき+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,1243);
 INSERT INTO `item_basic` VALUES (12903,0,'hose_+1','hose_+1','ホーズ+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@LEGS,4392);
@@ -10698,9 +10698,9 @@ INSERT INTO `item_basic` VALUES (12973,0,'mannequin_pumps','mannequin_pumps','�
 INSERT INTO `item_basic` VALUES (12974,0,'sune-ate','sune-ate','脛当',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@FEET,3225);
 INSERT INTO `item_basic` VALUES (12975,0,'mercenarys_kyahan','mrc._kyahan','傭兵の脚絆',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANEQUIP,@FEET,1316);
 INSERT INTO `item_basic` VALUES (12976,0,'gaiters','gaiters','ゲートル',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@FEET,282);
-INSERT INTO `item_basic` VALUES (12977,0,'cotton_gaiters','cotton_gaiters','コットンゲートル',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@FEET,1513);
+INSERT INTO `item_basic` VALUES (12977,0,'cotton_gaiters','cotton_gaiters','コットンゲートル',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@FEET,515);
 INSERT INTO `item_basic` VALUES (12978,0,'socks','socks','ソックス',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@FEET,2000);
-INSERT INTO `item_basic` VALUES (12979,0,'wool_socks','wool_socks','ウールソックス',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@FEET,3159);
+INSERT INTO `item_basic` VALUES (12979,0,'wool_socks','wool_socks','ウールソックス',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@FEET,3200);
 INSERT INTO `item_basic` VALUES (12980,0,'battle_boots','battle_boots','バトルブーツ',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@FEET,3883);
 INSERT INTO `item_basic` VALUES (12981,0,'war_boots','war_boots','ウォーブーツ',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@FEET,4607);
 INSERT INTO `item_basic` VALUES (12982,0,'mercenary_captains_gaiters','mrc.cpt._gaiters','傭兵隊長の脚絆',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANEQUIP,@FEET,1520);
@@ -11298,7 +11298,7 @@ INSERT INTO `item_basic` VALUES (13573,0,'searing_cape','searing_cape','シア�
 INSERT INTO `item_basic` VALUES (13574,0,'black_ribbon','black_ribbon','ブラックリボン',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANEQUIP,@HEAD,4085);
 INSERT INTO `item_basic` VALUES (13575,0,'ram_mantle_+1','ram_mantle_+1','ラムマント+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BACK,1091);
 INSERT INTO `item_basic` VALUES (13576,0,'night_cape','night_cape','ナイトケープ',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANEQUIP | @FLAG_RARE,@BACK,1353);
-INSERT INTO `item_basic` VALUES (13577,0,'black_cape','black_cape','ブラックケープ',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BACK,1313);
+INSERT INTO `item_basic` VALUES (13577,0,'black_cape','black_cape','ブラックケープ',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BACK,1386);
 INSERT INTO `item_basic` VALUES (13578,0,'blue_cape','blue_cape','ブルーケープ',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BACK,4039);
 INSERT INTO `item_basic` VALUES (13579,0,'jesters_cape','jesters_cape','ジェスターケープ',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BACK,3217);
 INSERT INTO `item_basic` VALUES (13580,0,'royal_army_mantle','ryl._army_mantle','王国軍マント',@EQUIPMENT_TYPE,1,@FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NODELIVERY | @FLAG_EX,@NONE,3600);
@@ -11326,7 +11326,7 @@ INSERT INTO `item_basic` VALUES (13601,0,'cotton_cape_+1','cotton_cape_+1','コ�
 INSERT INTO `item_basic` VALUES (13602,0,'feral_mantle','feral_mantle','フェラルマント',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BACK,8421);
 INSERT INTO `item_basic` VALUES (13603,0,'torama_mantle','torama_mantle','トラママント',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BACK,9210);
 INSERT INTO `item_basic` VALUES (13604,0,'behemoth_mantle_+1','behem._mantle_+1','ベヒモスマント+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BACK,9868);
-INSERT INTO `item_basic` VALUES (13605,0,'cape_+1','cape_+1','ケープ+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BACK,106);
+INSERT INTO `item_basic` VALUES (13605,0,'cape_+1','cape_+1','ケープ+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BACK,111);
 INSERT INTO `item_basic` VALUES (13606,0,'judges_cape','judges_cape','ジャッジケープ',@EQUIPMENT_TYPE,1,@FLAG_GM_ONLY | @FLAG_CANEQUIP,@NONE,131);
 INSERT INTO `item_basic` VALUES (13607,0,'mist_silk_cape','mist_silk_cape','ミストシルクケープ',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANEQUIP | @FLAG_RARE,@BACK,270);
 INSERT INTO `item_basic` VALUES (13608,0,'lizard_mantle_+1','lizard_mantle_+1','リザードマント+1',@EQUIPMENT_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@BACK,95);
