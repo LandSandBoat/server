@@ -349,6 +349,7 @@ xi.item =
     DIVINE_LOG                          = 722,
     PIECE_OF_DIVINE_LUMBER              = 723,
     DOGWOOD_LOG                         = 727,
+    PIECE_OF_DOGWOOD_LUMBER             = 728,
     BLOODWOOD_LOG                       = 729,
     PIECE_OF_BLOODWOOD_LUMBER           = 730,
     AQUILARIA_LOG                       = 731,
