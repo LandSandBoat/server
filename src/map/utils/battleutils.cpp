@@ -3463,28 +3463,28 @@ auto GetSkillChainEffect(const CBattleEntity* PDefender, uint8 primary, uint8 se
 // This whole thing need re-evaluated
 // TODO: move skillchains to lua
 // This is horrible...
-int16 GetSkillchainMinimumResistance(SKILLCHAIN_ELEMENT element, CBattleEntity* PDefender, ELEMENT& appliedEle)
+int16 GetSkillchainMinimumResistanceRank(SKILLCHAIN_ELEMENT element, CBattleEntity* PDefender, ELEMENT& appliedEle)
 {
     static const Mod resistances[][4] = {
-        { Mod::NONE, Mod::NONE, Mod::NONE, Mod::NONE },        // SC_NONE
-        { Mod::LIGHT_SDT, Mod::NONE, Mod::NONE, Mod::NONE },   // SC_TRANSFIXION
-        { Mod::DARK_SDT, Mod::NONE, Mod::NONE, Mod::NONE },    // SC_COMPRESSION
-        { Mod::FIRE_SDT, Mod::NONE, Mod::NONE, Mod::NONE },    // SC_LIQUEFACTION
-        { Mod::EARTH_SDT, Mod::NONE, Mod::NONE, Mod::NONE },   // SC_SCISSION
-        { Mod::WATER_SDT, Mod::NONE, Mod::NONE, Mod::NONE },   // SC_REVERBERATION
-        { Mod::WIND_SDT, Mod::NONE, Mod::NONE, Mod::NONE },    // SC_DETONATION
-        { Mod::ICE_SDT, Mod::NONE, Mod::NONE, Mod::NONE },     // SC_INDURATION
-        { Mod::THUNDER_SDT, Mod::NONE, Mod::NONE, Mod::NONE }, // SC_IMPACTION
+        { Mod::NONE, Mod::NONE, Mod::NONE, Mod::NONE },             // SC_NONE
+        { Mod::LIGHT_RES_RANK, Mod::NONE, Mod::NONE, Mod::NONE },   // SC_TRANSFIXION
+        { Mod::DARK_RES_RANK, Mod::NONE, Mod::NONE, Mod::NONE },    // SC_COMPRESSION
+        { Mod::FIRE_RES_RANK, Mod::NONE, Mod::NONE, Mod::NONE },    // SC_LIQUEFACTION
+        { Mod::EARTH_RES_RANK, Mod::NONE, Mod::NONE, Mod::NONE },   // SC_SCISSION
+        { Mod::WATER_RES_RANK, Mod::NONE, Mod::NONE, Mod::NONE },   // SC_REVERBERATION
+        { Mod::WIND_RES_RANK, Mod::NONE, Mod::NONE, Mod::NONE },    // SC_DETONATION
+        { Mod::ICE_RES_RANK, Mod::NONE, Mod::NONE, Mod::NONE },     // SC_INDURATION
+        { Mod::THUNDER_RES_RANK, Mod::NONE, Mod::NONE, Mod::NONE }, // SC_IMPACTION
 
-        { Mod::EARTH_SDT, Mod::DARK_SDT, Mod::NONE, Mod::NONE },   // SC_GRAVITATION
-        { Mod::ICE_SDT, Mod::WATER_SDT, Mod::NONE, Mod::NONE },    // SC_DISTORTION
-        { Mod::FIRE_SDT, Mod::LIGHT_SDT, Mod::NONE, Mod::NONE },   // SC_FUSION
-        { Mod::WIND_SDT, Mod::THUNDER_SDT, Mod::NONE, Mod::NONE }, // SC_FRAGMENTATION
+        { Mod::EARTH_RES_RANK, Mod::DARK_RES_RANK, Mod::NONE, Mod::NONE },   // SC_GRAVITATION
+        { Mod::ICE_RES_RANK, Mod::WATER_RES_RANK, Mod::NONE, Mod::NONE },    // SC_DISTORTION
+        { Mod::FIRE_RES_RANK, Mod::LIGHT_RES_RANK, Mod::NONE, Mod::NONE },   // SC_FUSION
+        { Mod::WIND_RES_RANK, Mod::THUNDER_RES_RANK, Mod::NONE, Mod::NONE }, // SC_FRAGMENTATION
 
-        { Mod::FIRE_SDT, Mod::WIND_SDT, Mod::THUNDER_SDT, Mod::LIGHT_SDT }, // SC_LIGHT
-        { Mod::ICE_SDT, Mod::EARTH_SDT, Mod::WATER_SDT, Mod::DARK_SDT },    // SC_DARKNESS
-        { Mod::FIRE_SDT, Mod::WIND_SDT, Mod::THUNDER_SDT, Mod::LIGHT_SDT }, // SC_LIGHT
-        { Mod::ICE_SDT, Mod::EARTH_SDT, Mod::WATER_SDT, Mod::DARK_SDT },    // SC_DARKNESS_II
+        { Mod::FIRE_RES_RANK, Mod::WIND_RES_RANK, Mod::THUNDER_RES_RANK, Mod::LIGHT_RES_RANK }, // SC_LIGHT
+        { Mod::ICE_RES_RANK, Mod::EARTH_RES_RANK, Mod::WATER_RES_RANK, Mod::DARK_RES_RANK },    // SC_DARKNESS
+        { Mod::FIRE_RES_RANK, Mod::WIND_RES_RANK, Mod::THUNDER_RES_RANK, Mod::LIGHT_RES_RANK }, // SC_LIGHT
+        { Mod::ICE_RES_RANK, Mod::EARTH_RES_RANK, Mod::WATER_RES_RANK, Mod::DARK_RES_RANK },    // SC_DARKNESS_II
     };
 
     auto resRankToAbsorbMod = [](const Mod resistanceRank) -> Mod
@@ -3667,6 +3667,25 @@ Mod GetResistanceRankModFromElement(ELEMENT& element)
     return elementToMod.at(element);
 }
 
+// 11 to -3
+std::unordered_map<uint16, float> resistanceRankMultiplier = {
+    { -3, 1.50f },
+    { -2, 1.30f },
+    { -1, 1.15f },
+    { 0, 1.00f },
+    { 1, 0.85f },
+    { 2, 0.70f },
+    { 3, 0.60f },
+    { 4, 0.50f },
+    { 5, 0.40f },
+    { 6, 0.30f },
+    { 7, 0.25f },
+    { 8, 0.20f },
+    { 9, 0.15f },
+    { 10, 0.10f },
+    { 11, 0.05f },
+};
+
 auto TakeSkillchainDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 lastSkillDamage, CBattleEntity* taChar) -> int32
 {
     if (PAttacker == nullptr || PDefender == nullptr)
@@ -3684,11 +3703,11 @@ auto TakeSkillchainDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, in
     }
 
     // Determine the skill chain level and elemental resistance.
-    SKILLCHAIN_ELEMENT skillchain = (SKILLCHAIN_ELEMENT)PEffect->GetPower();
-    uint16             chainLevel = PEffect->GetTier();
-    uint16             chainCount = PEffect->GetSubPower();
-    ELEMENT            appliedEle = ELEMENT_NONE;
-    int16              resistance = GetSkillchainMinimumResistance(skillchain, PDefender, appliedEle);
+    SKILLCHAIN_ELEMENT skillchain     = static_cast<SKILLCHAIN_ELEMENT>(PEffect->GetPower());
+    uint16             chainLevel     = PEffect->GetTier();
+    uint16             chainCount     = PEffect->GetSubPower();
+    ELEMENT            appliedEle     = ELEMENT_NONE;
+    int16              resistanceRank = GetSkillchainMinimumResistanceRank(skillchain, PDefender, appliedEle);
 
     if (chainLevel <= 0 || chainLevel > 4 || chainCount <= 0 || chainCount > 5)
     {
@@ -3698,19 +3717,22 @@ auto TakeSkillchainDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, in
 
     // Skill chain damage = (Closing Damage)
     //                      × (Skill chain Level/Number from Table)
-    //                      × (1 + Skill chain Bonus ÷ 100)
+    //                      × (1 + Skill chain Bonus ÷ 100) + MAGIC_DAMAGE mod
     //                      × (1 + Skill chain Damage + %/100)
-    //            TODO:     × (1 + Day/Weather bonuses)
-    //            TODO:     × (1 + Staff Affinity)
+    //                      × (1 + Day/Weather bonuses)
+    //                      × (1 + Staff Affinity)
 
     const auto closingDamage      = static_cast<float>(abs(lastSkillDamage));
     const auto skillchainLevel    = g_SkillChainDamageModifiers[chainLevel][chainCount] / 1000.0f;
     const auto skillchainBonus    = (100.0f + PAttacker->getMod(Mod::SKILLCHAINBONUS)) / 100.0f;
     const auto skillchainDmgBonus = (10000.0f + PAttacker->getMod(Mod::SKILLCHAINDMG)) / 10000.0f;
-    const auto dayWeatherBonus    = 1.0f; // TODO: Implement day/weather bonuses
-    const auto staffAffinity      = 1.0f; // TODO: Implement staff affinity
 
-    int32 damage = std::floor(closingDamage * skillchainLevel * skillchainBonus * skillchainDmgBonus * dayWeatherBonus * staffAffinity);
+    int32 damage = closingDamage;
+
+    damage = std::floor(damage * skillchainLevel);
+    damage = std::floor(damage * skillchainBonus) + PAttacker->getMod(Mod::MAGIC_DAMAGE);
+    damage = std::floor(damage * skillchainDmgBonus);
+    damage = luautils::callGlobal<int32>("xi.combat.damage.skillchainMagicMultipliers", damage, PAttacker, PDefender, static_cast<int32>(appliedEle)); // Call out to lua for our Day/Weather/etc functions
 
     auto* PChar = dynamic_cast<CCharEntity*>(PAttacker);
     if (PChar && PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Innin) && behind(PChar->loc.p, PDefender->loc.p, 64))
@@ -3724,9 +3746,9 @@ auto TakeSkillchainDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, in
         PDefender->setModifier(Mod::SENGIKORI_SC_DMG_DEBUFF, 0); // Consume the effect
     }
 
-    float damageReductionMult = (10000.0f + static_cast<float>(resistance)) / 10000.0f;
+    float damageMult = resistanceRankMultiplier[std::clamp<int16>(resistanceRank, -3, 11)];
 
-    damage = std::floor(static_cast<float>(damage) * damageReductionMult);
+    damage = std::floor(static_cast<float>(damage) * damageMult);
     damage = MagicDmgTaken(PDefender, damage, appliedEle);
     if (damage > 0)
     {

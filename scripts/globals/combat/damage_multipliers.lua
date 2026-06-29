@@ -116,3 +116,14 @@ xi.combat.damage.steamJacketMultiplier = function(target, magicalElement)
 
     return 1 - steamJacketModifierValue / 100
 end
+
+-- Handles skillchain magic damage multipliers, called from C++ (battleutils::TakeSkillchainDamage)
+xi.combat.damage.skillchainMagicMultipliers = function(damage, attacker, target, magicalElement)
+    local dayWeatherMult = xi.spells.damage.calculateDayAndWeather(attacker, magicalElement, false)
+    local staffMult      = xi.spells.damage.calculateElementalStaffBonus(attacker, magicalElement)
+
+    damage = math.floor(damage * dayWeatherMult)
+    damage = math.floor(damage * staffMult)
+
+    return damage
+end
