@@ -10,7 +10,7 @@ local ID = zones[xi.zone.WINDURST_WOODS]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:sendGuild(514, 8, 23, 3) then
+    if xi.guildShops.onTrigger(player, npc) then
         player:showText(npc, ID.text.SHIH_TAYUUN_DIALOG)
     end
 end
