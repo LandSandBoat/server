@@ -2,8 +2,6 @@
 -- Area: La Theine Plateau
 --  Mob: Lumbering Lambert
 -----------------------------------
-require('scripts/quests/tutorial')
------------------------------------
 local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 -----------------------------------
 ---@type TMobEntity
@@ -35,7 +33,6 @@ entity.spawnPoints =
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 156)
-    xi.tutorial.onMobDeath(player)
     xi.magian.onMobDeath(mob, player, optParams, set{ 579 })
 end
 

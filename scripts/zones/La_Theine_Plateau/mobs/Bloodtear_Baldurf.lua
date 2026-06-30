@@ -7,7 +7,6 @@ mixins =
     require('scripts/mixins/job_special'),
     require('scripts/mixins/draw_in'),
 }
-require('scripts/quests/tutorial')
 -----------------------------------
 local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 -----------------------------------
@@ -58,7 +57,6 @@ end
 entity.onMobDeath = function(mob, player, optParams)
     if player then
         player:addTitle(xi.title.THE_HORNSPLITTER)
-        xi.tutorial.onMobDeath(player)
     end
 end
 
