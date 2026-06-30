@@ -72,6 +72,13 @@ xi.survivalGuide.onTrigger = function(player)
                 param = bit.bor(param, 0x2000)
             end
 
+            -- Hide the free tutorial teleport option unless the tutorial objective is active.
+            -- Bit 0x4000 suppresses the option; it is absent only when TutorialProgress is 11 or 12.
+            local tutorialStage = player:getCharVar('TutorialProgress')
+            if tutorialStage ~= 13 then
+                param = bit.bor(param, 0x4000)
+            end
+
             local g1, g2, g3, g4 = unpack(player:getTeleportTable(xi.teleport.type.SURVIVAL))
 
             -- param 1 = Does nothing.
@@ -157,12 +164,18 @@ xi.survivalGuide.onEventFinish = function(player, eventId, option, npc)
                 local teleportCostGil  = 1000
                 local teleportCostTabs = 50
                 local canTeleport      = false
+				local tutorialStage    = player:getCharVar('TutorialProgress')
 
                 -- When all mog tablets are found, survival guides are free.
                 local allMogTabletsFound = false -- TODO: Implement mog tablets and fetch if they are all found here.
                 if allMogTabletsFound then
                     teleportCostGil  = 0
                     teleportCostTabs = 0
+				
+				-- Free teleport during tutorial survival guide objective.
+				elseif tutorialStage == 13 then
+					teleportCostGil  = 0
+					teleportCostTabs = 0
 
                 -- If the player has the "Rhapsody in White" KI, the cost is 10% of original gil or 20% of original tabs.
                 elseif player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
@@ -186,6 +199,9 @@ xi.survivalGuide.onEventFinish = function(player, eventId, option, npc)
 
                 if canTeleport then
                     player:setPos(guide.posX, guide.posY, guide.posZ, guide.posRot, guide.zoneId)
+					if tutorialStage == 13 then
+						player:setCharVar('TutorialProgress', 14)	-- Prevents infinite free teleports by not finishing tutorial.
+					end
                 end
             end
         end
