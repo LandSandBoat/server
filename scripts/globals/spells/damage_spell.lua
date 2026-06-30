@@ -429,6 +429,9 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
     -- Bonus to spell base damage from gear.
     baseSpellDamageBonus = baseSpellDamageBonus + caster:getMod(xi.mod.MAGIC_DAMAGE)
 
+    -- Cascade (BLM): flat magic damage bonus to the next elemental spell, consumed on use.
+    baseSpellDamageBonus = baseSpellDamageBonus + xi.job_utils.black_mage.tryConsumeCascade(caster, skillType)
+
     -----------------------------------
     -- STEP 4: Spell Damage
     -----------------------------------
