@@ -10,7 +10,7 @@ local ID = zones[xi.zone.PORT_WINDURST]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:sendGuild(517, 3, 18, 5) then
+    if xi.guildShops.onTrigger(player, npc) then
         player:showText(npc, ID.text.BABUBU_SHOP_DIALOG)
     end
 end

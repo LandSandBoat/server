@@ -10,7 +10,7 @@ local ID = zones[xi.zone.SILVER_SEA_ROUTE_TO_AL_ZAHBI]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:sendGuild(525, 1, 23, 5) then
+    if xi.guildShops.onTrigger(player, npc) then
         player:showText(npc, ID.text.YAHLIQ_SHOP_DIALOG)
     end
 end

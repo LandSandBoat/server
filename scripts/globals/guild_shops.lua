@@ -70,7 +70,8 @@ end
 -- (multiple merchant NPCs that draw from one guild stock pool).
 local canonicalShop = function(npc)
     local name = npc:getName()
-    return (xi.data.guildShopAliases and xi.data.guildShopAliases[name]) or name
+    local cfg  = xi.data.guildShops[name]
+    return (cfg and cfg.sharedStock) or name
 end
 
 local shopFor = function(npc)

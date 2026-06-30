@@ -117,8 +117,7 @@ describe('Guild shop shared stock', function()
         xi.test.world:setVanaTime(8, 0)
     end)
 
-    -- Wahraga and Gathweeda are two merchant NPCs that share one Alchemists' Guild stock pool
-    -- (Gathweeda is aliased to Wahraga in xi.data.guildShopAliases).
+    -- Wahraga and Gathweeda share one Alchemists Guild stock pool
     it('Gathweeda draws from the same stock pool as Wahraga', function()
         local item = xi.item.VIAL_OF_MERCURY
 
