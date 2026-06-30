@@ -4,7 +4,6 @@
 -- Note: PH for Steelfleece, spawned by Tremor Ram
 -----------------------------------
 local ID = zones[xi.zone.KONSCHTAT_HIGHLANDS]
-require('scripts/quests/tutorial')
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
@@ -23,7 +22,6 @@ entity.spawnPoints =
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 205)
-    xi.tutorial.onMobDeath(player)
 end
 
 entity.onMobDespawn = function(mob)

@@ -2,8 +2,6 @@
 -- Area: Konschtat Highlands
 --   NM: Stray Mary
 -----------------------------------
-require('scripts/quests/tutorial')
------------------------------------
 local ID = zones[xi.zone.KONSCHTAT_HIGHLANDS]
 -----------------------------------
 ---@type TMobEntity
@@ -24,7 +22,6 @@ entity.onMobDeath = function(mob, player, optParams)
     if player then
         player:addTitle(xi.title.MARYS_GUIDE)
         xi.hunts.checkHunt(mob, player, 203)
-        xi.tutorial.onMobDeath(player)
         xi.magian.onMobDeath(mob, player, optParams, set{ 710 })
     end
 end

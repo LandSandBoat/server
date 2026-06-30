@@ -2,8 +2,6 @@
 -- Area: Konschtat Highlands
 --   NM: Highlander Lizard
 -----------------------------------
-require('scripts/quests/tutorial')
------------------------------------
 ---@type TMobEntity
 local entity = {}
 
@@ -33,7 +31,6 @@ entity.onMobDeath = function(mob, player, optParams)
     -- I think he still counts the FoV pages? Most NM's do not though.
     xi.regime.checkRegime(player, mob, 20, 2, xi.regime.type.FIELDS)
     xi.regime.checkRegime(player, mob, 82, 2, xi.regime.type.FIELDS)
-    xi.tutorial.onMobDeath(player)
 end
 
 entity.onMobDespawn = function(mob)

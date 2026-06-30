@@ -2,8 +2,6 @@
 -- Area: Konschtat Highlands
 --   NM: Haty
 -----------------------------------
-require('scripts/quests/tutorial')
------------------------------------
 ---@type TMobEntity
 local entity = {}
 
@@ -16,10 +14,6 @@ entity.onMobRoam = function(mob)
     then
         DespawnMob(mob:getID())
     end
-end
-
-entity.onMobDeath = function(mob, player, optParams)
-    xi.tutorial.onMobDeath(player)
 end
 
 entity.onMobDespawn = function(mob)
