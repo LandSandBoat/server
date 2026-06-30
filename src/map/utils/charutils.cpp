@@ -28,6 +28,9 @@
 
 #include <array>
 #include <chrono>
+#include <mutex>
+#include <unordered_map>
+#include <vector>
 
 #include "lua/luautils.h"
 
@@ -62,6 +65,7 @@
 #include "ability.h"
 #include "alliance.h"
 #include "conquest_system.h"
+#include "enmity_container.h"
 #include "grades.h"
 #include "ipc_client.h"
 #include "item_container.h"
@@ -71,6 +75,7 @@
 #include "map_networking.h"
 #include "mob_modifier.h"
 #include "nominate_manager.h"
+#include "notoriety_container.h"
 #include "recast_container.h"
 #include "roe.h"
 #include "spell.h"
@@ -8136,6 +8141,137 @@ void removeCharFromZone(CCharEntity* PChar)
     charutils::SaveLastLogout(PChar);
 
     PChar->status = STATUS_TYPE::DISAPPEAR;
+}
+
+// --- Duplicate-login enmity persistence (anti-exploit) -----------------------
+//
+// When a second session takes over an account (retail "new login wins"), the
+// character currently in the world is evicted by the IPC handlers in
+// ipc_client.cpp. Without extra handling that eviction also drops the character
+// out of every mob's enmity list, so a player could open a second client
+// mid-fight to instantly shed all hate and escape death.
+//
+// To block that exploit while preserving the legitimate "sleep a mob then log
+// out to shed enmity" mechanic, we snapshot the mobs' hate (CE/VE) at eviction
+// time and re-apply it the next time the character zones in. A normal logout
+// never goes through the duplicate-login eviction path, so it still sheds
+// enmity exactly as on retail.
+// -----------------------------------------------------------------------------
+namespace
+{
+    struct CapturedEnmity_t
+    {
+        uint32 mobId;
+        int32  CE;
+        int32  VE;
+    };
+
+    struct CapturedEnmityRecord_t
+    {
+        timer::time_point             capturedAt;
+        std::vector<CapturedEnmity_t> entries;
+    };
+
+    // Keyed by charid. Holds enmity snapshots taken when a character is evicted
+    // by a duplicate (second session) login, to be restored on its next zone-in.
+    std::unordered_map<uint32, CapturedEnmityRecord_t> g_duplicateLoginEnmity;
+    std::mutex                                         g_duplicateLoginEnmityMutex;
+
+    // How long a captured snapshot stays valid. After this a relog is treated as
+    // a normal return (mobs would have reset/deaggroed on their own by then).
+    constexpr auto kDuplicateLoginEnmityTTL = std::chrono::seconds(180);
+} // namespace
+
+void captureDuplicateLoginEnmity(CCharEntity* PChar)
+{
+    if (PChar == nullptr || PChar->PNotorietyContainer == nullptr)
+    {
+        return;
+    }
+
+    std::vector<CapturedEnmity_t> entries;
+
+    // PNotorietyContainer is the list of mobs that currently hold enmity on PChar.
+    for (auto* PEntity : *PChar->PNotorietyContainer)
+    {
+        auto* PMob = dynamic_cast<CMobEntity*>(PEntity);
+        if (PMob == nullptr || PMob->PEnmityContainer == nullptr)
+        {
+            continue;
+        }
+
+        const int32 CE = PMob->PEnmityContainer->GetCE(PChar);
+        const int32 VE = PMob->PEnmityContainer->GetVE(PChar);
+
+        if (CE > 0 || VE > 0)
+        {
+            entries.push_back({ PMob->id, CE, VE });
+        }
+    }
+
+    if (entries.empty())
+    {
+        return;
+    }
+
+    const std::size_t count = entries.size();
+
+    {
+        std::lock_guard<std::mutex> lock(g_duplicateLoginEnmityMutex);
+        g_duplicateLoginEnmity[PChar->id] = { timer::now(), std::move(entries) };
+    }
+
+    ShowInfoFmt("captureDuplicateLoginEnmity: stored {} enmity entr(y/ies) for charid {}", count, PChar->id);
+}
+
+void restoreDuplicateLoginEnmity(CCharEntity* PChar)
+{
+    if (PChar == nullptr)
+    {
+        return;
+    }
+
+    CapturedEnmityRecord_t record;
+    {
+        std::lock_guard<std::mutex> lock(g_duplicateLoginEnmityMutex);
+        auto                        it = g_duplicateLoginEnmity.find(PChar->id);
+        if (it == g_duplicateLoginEnmity.end())
+        {
+            return;
+        }
+        record = std::move(it->second);
+        g_duplicateLoginEnmity.erase(it);
+    }
+
+    if (timer::now() > record.capturedAt + kDuplicateLoginEnmityTTL)
+    {
+        return;
+    }
+
+    uint32 restored = 0;
+    for (const auto& entry : record.entries)
+    {
+        auto* PMob = dynamic_cast<CMobEntity*>(zoneutils::GetEntity(entry.mobId, TYPE_MOB));
+        if (PMob == nullptr || PMob->PEnmityContainer == nullptr || PMob->isDead())
+        {
+            continue;
+        }
+
+        // Mob must still share the character's zone (it could have been killed and
+        // respawned elsewhere, or the character could have zoned out before relog).
+        if (PMob->getZone() != PChar->getZone())
+        {
+            continue;
+        }
+
+        PMob->PEnmityContainer->UpdateEnmity(PChar, entry.CE, entry.VE);
+        ++restored;
+    }
+
+    if (restored > 0)
+    {
+        ShowInfoFmt("restoreDuplicateLoginEnmity: re-applied enmity from {} mob(s) onto charid {}", restored, PChar->id);
+    }
 }
 
 void updateSession(MapSession* PSession, CCharEntity* PChar, CZone* currentZone)

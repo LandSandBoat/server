@@ -306,6 +306,14 @@ void forceSynthCritFail(const std::string& sourceFunction, CCharEntity* PChar);
 
 void removeCharFromZone(CCharEntity* PChar);
 
+// Duplicate-login (second session) anti-exploit: capture the mobs' hate on a
+// character right before it is evicted by a duplicate login, then restore that
+// hate when the character next zones in. This stops players using a second
+// session to instantly shed enmity, while leaving the normal logout-to-shed
+// behaviour (e.g. sleep a mob then log out) completely unaffected.
+void captureDuplicateLoginEnmity(CCharEntity* PChar);
+void restoreDuplicateLoginEnmity(CCharEntity* PChar);
+
 void updateSession(MapSession* PSession, CCharEntity* PChar, CZone* currentZone);
 void loadDeathTimestamp(CCharEntity* PChar);
 void loadZoningFlag(CCharEntity* PChar);

@@ -51,6 +51,7 @@
 
 #include "utils/charutils.h"
 #include "utils/jailutils.h"
+#include "utils/petutils.h"
 #include "utils/serverutils.h"
 #include "utils/zoneutils.h"
 
@@ -153,52 +154,34 @@ void IPCClient::handleMessage_AccountLogin(const IPP& ipp, const ipc::AccountLog
 
     if (auto session = networking_.sessions().getSessionByAccountId(message.accountId))
     {
-        // Extreme overkill but...
-        // Scramble key so server rejects input
-        for (uint32_t& i : session->blowfish.key)
+        if (session->PChar)
         {
-            i = xirand::GetRandomNumber<uint32_t>(std::numeric_limits<uint32_t>::max());
-        }
+            ShowInfoFmt("handleMessage_AccountLogin: evicting session for account {} (duplicate login)", message.accountId);
 
-        for (uint32_t& i : session->prev_blowfish.key)
-        {
-            i = xirand::GetRandomNumber<uint32_t>(std::numeric_limits<uint32_t>::max());
-        }
-
-        for (uint32_t& i : session->blowfish.P)
-        {
-            i = xirand::GetRandomNumber<uint32_t>(std::numeric_limits<uint32_t>::max());
-        }
-
-        for (uint32_t& i : session->prev_blowfish.P)
-        {
-            i = xirand::GetRandomNumber<uint32_t>(std::numeric_limits<uint32_t>::max());
-        }
-
-        for (uint8_t& i : session->blowfish.hash)
-        {
-            // uniform_int_distribution doesnt like uint8_t, so do some workaround
-            i = static_cast<uint8_t>(xirand::GetRandomNumber<uint16_t>(std::numeric_limits<uint16_t>::max()) % 255);
-        }
-
-        for (uint8_t& i : session->prev_blowfish.hash)
-        {
-            // uniform_int_distribution doesnt like uint8_t, so do some workaround
-            i = static_cast<uint8_t>(xirand::GetRandomNumber<uint16_t>(std::numeric_limits<uint16_t>::max()) % 255);
-        }
-
-        for (int i = 0; i < 4; i++)
-        {
-            for (uint32_t& x : session->blowfish.S[i])
+            // If the character is in combat, snapshot the mobs' hate before
+            // evicting so it can be restored when they next zone in. This stops a
+            // second session being used to instantly shed enmity, while leaving
+            // the normal logout-to-shed behaviour untouched.
+            if (session->PChar->hasEnmityEXPENSIVE())
             {
-                x = xirand::GetRandomNumber<uint32_t>(std::numeric_limits<uint32_t>::max());
+                charutils::captureDuplicateLoginEnmity(session->PChar.get());
             }
 
-            for (uint32_t& x : session->prev_blowfish.S[i])
+            session->PChar->StatusEffectContainer->SaveStatusEffects(true);
+            charutils::SaveCharPosition(session->PChar.get());
+
+            if (session->PChar->PPet != nullptr && session->PChar->PPet->objtype == TYPE_MOB)
             {
-                x = xirand::GetRandomNumber<uint32_t>(std::numeric_limits<uint32_t>::max());
+                petutils::DespawnPet(session->PChar.get());
             }
+
+            session->PChar->status = STATUS_TYPE::SHUTDOWN;
+            charutils::removeCharFromZone(session->PChar.get());
+            session->shuttingDown = 0; // Prevent destroySession from deleting the new accounts_sessions row
+            session->PChar.reset();
         }
+
+        networking_.sessions().destroySession(session);
     }
 }
 
@@ -208,9 +191,46 @@ void IPCClient::handleMessage_CharZone(const IPP& ipp, const ipc::CharZone& mess
 
     auto session = networking_.sessions().getSessionByCharId(message.charId);
 
-    if (session) // Update in case of edge case
+    if (session)
     {
-        session->last_update = timer::now();
+        if (session->PChar)
+        {
+            // Active character in this session means a duplicate login —
+            // the old client is still in the world. Evict it (retail: new login wins).
+            ShowInfoFmt("handleMessage_CharZone: evicting active session for charid {} (duplicate login)", message.charId);
+
+            // Snapshot combat enmity (if any) so it can be restored when the
+            // character zones back in — a second session can't be used to shed hate.
+            if (session->PChar->hasEnmityEXPENSIVE())
+            {
+                charutils::captureDuplicateLoginEnmity(session->PChar.get());
+            }
+
+            session->PChar->StatusEffectContainer->SaveStatusEffects(true);
+            charutils::SaveCharPosition(session->PChar.get());
+
+            if (session->PChar->PPet != nullptr && session->PChar->PPet->objtype == TYPE_MOB)
+            {
+                petutils::DespawnPet(session->PChar.get());
+            }
+
+            session->PChar->status = STATUS_TYPE::SHUTDOWN;
+            charutils::removeCharFromZone(session->PChar.get());
+            // removeCharFromZone sets shuttingDown=1 for SHUTDOWN status, which
+            // would cause destroySession to DELETE the accounts_sessions row.
+            // That row now belongs to the new session, so prevent the deletion.
+            session->shuttingDown = 0;
+            session->PChar.reset();
+
+            networking_.sessions().destroySession(session);
+
+            networking_.sessions().createPendingSession(message.charId);
+        }
+        else
+        {
+            // PChar is null — normal zoning (session waiting for client reconnect)
+            session->last_update = timer::now();
+        }
     }
     else
     {
