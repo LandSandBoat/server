@@ -404,7 +404,6 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
         -- BLM Job Point: With Manawell mDMG +1
         if caster:hasStatusEffect(xi.effect.MANAWELL) then
             baseSpellDamageBonus = baseSpellDamageBonus + caster:getJobPointLevel(xi.jp.MANAWELL_EFFECT)
-            caster:delStatusEffectSilent(xi.effect.MANAWELL)
         end
 
         -- BLM Job Point: Magic Damage Bonus
@@ -428,6 +427,14 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
 
     -- Bonus to spell base damage from gear.
     baseSpellDamageBonus = baseSpellDamageBonus + caster:getMod(xi.mod.MAGIC_DAMAGE)
+
+    -- Bonus to spell base damage from Cascade effect.
+    if
+        skillType == xi.skill.ELEMENTAL_MAGIC and
+        caster:hasStatusEffect(xi.effect.CASCADE)
+    then
+        baseSpellDamageBonus = baseSpellDamageBonus + math.floor(caster:getTP() / 10)
+    end
 
     -----------------------------------
     -- STEP 4: Spell Damage
