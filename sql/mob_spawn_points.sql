@@ -5927,7 +5927,7 @@ INSERT INTO `mob_spawn_points` VALUES (16891944,6,'Utukku','Utukku',7,55,55,0.00
 INSERT INTO `mob_spawn_points` VALUES (16891945,7,'Utukku','Utukku',7,55,55,-114.945,-0.500,-10.143,75);
 INSERT INTO `mob_spawn_points` VALUES (16891946,7,'Utukku','Utukku',7,55,55,0.000,0.000,0.000,0);
 INSERT INTO `mob_spawn_points` VALUES (16891947,7,'Utukku','Utukku',7,55,55,-7.951,-0.600,-13.817,254);
-INSERT INTO `mob_spawn_points` VALUES (16891948,0,'Elel','Elel',8,56,58,-46.558,-0.600,-24.327,198);
+INSERT INTO `mob_spawn_points` VALUES (16891948,0,'Elel','Elel',8,60,60,-46.558,-0.600,-24.327,198);
 INSERT INTO `mob_spawn_points` VALUES (16891949,8,'Stegotaur','Stegotaur',3,47,49,-60.798,-0.606,46.926,188);
 INSERT INTO `mob_spawn_points` VALUES (16891950,8,'Stegotaur','Stegotaur',3,47,49,-60.765,-0.347,-53.644,187);
 INSERT INTO `mob_spawn_points` VALUES (16891951,0,'Fomor_Ranger','Fomor Ranger',42,54,56,-2.495,-0.604,60.168,128);
@@ -6047,13 +6047,13 @@ INSERT INTO `mob_spawn_points` VALUES (16892064,0,'Dark_Elemental','Dark Element
 INSERT INTO `mob_spawn_points` VALUES (16892065,0,'Air_Elemental','Air Elemental',32,60,60,181.121,-5.005,-63.754,55);
 INSERT INTO `mob_spawn_points` VALUES (16892066,0,'Thunder_Elemental','Thunder Elemental',33,60,60,177.191,-4.284,-59.907,139);
 INSERT INTO `mob_spawn_points` VALUES (16892067,0,'Dark_Elemental','Dark Elemental',34,60,60,181.080,-5.008,-62.147,192);
-INSERT INTO `mob_spawn_points` VALUES (16892068,0,'Balor','Balor',35,59,59,32.129,-2.500,117.292,196);
-INSERT INTO `mob_spawn_points` VALUES (16892069,0,'Luaith','Luaith',36,59,59,69.000,-2.500,116.000,65);
-INSERT INTO `mob_spawn_points` VALUES (16892070,0,'Lobais','Lobais',37,59,59,109.000,-2.500,116.000,103);
-INSERT INTO `mob_spawn_points` VALUES (16892071,0,'Fomors_Elemental','Fomor\'s Elemental',22,49,51,1.000,1.000,1.000,102);
+INSERT INTO `mob_spawn_points` VALUES (16892068,0,'Balor','Balor',35,57,58,32.129,-2.500,117.292,196);
+INSERT INTO `mob_spawn_points` VALUES (16892069,0,'Luaith','Luaith',36,57,58,69.000,-2.500,116.000,65);
+INSERT INTO `mob_spawn_points` VALUES (16892070,0,'Lobais','Lobais',37,57,58,109.000,-2.500,116.000,103);
+INSERT INTO `mob_spawn_points` VALUES (16892071,0,'Fomors_Elemental_Lobais','Fomor\'s Elemental',43,53,53,1.000,1.000,1.000,102);
 INSERT INTO `mob_spawn_points` VALUES (16892072,0,'Fomors_Avatar','Fomor\'s Avatar',38,49,51,102.910,-2.500,90.210,131);
-INSERT INTO `mob_spawn_points` VALUES (16892073,0,'Caithleann','Caithleann',39,59,59,11.000,-2.500,-115.000,2);
-INSERT INTO `mob_spawn_points` VALUES (16892074,0,'Indich','Indich',40,59,59,50.000,-2.250,-115.000,238);
+INSERT INTO `mob_spawn_points` VALUES (16892073,0,'Caithleann','Caithleann',39,57,58,11.000,-2.500,-115.000,2);
+INSERT INTO `mob_spawn_points` VALUES (16892074,0,'Indich','Indich',40,57,58,50.000,-2.250,-115.000,238);
 INSERT INTO `mob_spawn_points` VALUES (16892075,0,'Aqueduct_Spider','Aqueduct Spider',41,84,86,-172.143,-7.947,-18.455,18);
 INSERT INTO `mob_spawn_points` VALUES (16892076,0,'Aqueduct_Spider','Aqueduct Spider',41,84,86,-176.226,-8.599,-20.349,218);
 INSERT INTO `mob_spawn_points` VALUES (16892077,0,'Aqueduct_Spider','Aqueduct Spider',41,84,86,-185.510,-8.599,-20.465,164);

@@ -1130,7 +1130,7 @@ INSERT INTO `mob_groups` VALUES (4,2770,28,'Mummy',960,0,1754,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (5,2407,28,'Lich',960,0,958,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (6,476,28,'Blubber_Eyes',960,0,315,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (7,4112,28,'Utukku',960,0,2528,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (8,1196,28,'Elel',0,128,757,6000,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (8,1196,28,'Elel',0,128,757,6500,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (9,1388,28,'Fomor_Ranger',960,0,874,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (10,1386,28,'Fomor_Ninja',960,0,871,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (11,1380,28,'Fomor_Bard',960,0,857,0,0,0,NULL);
@@ -1160,6 +1160,7 @@ INSERT INTO `mob_groups` VALUES (34,913,28,'Dark_Elemental',960,4,568,0,0,0,NULL
 INSERT INTO `mob_groups` VALUES (35,333,28,'Balor',0,128,218,6300,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (36,2444,28,'Luaith',0,128,218,6400,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (37,2427,28,'Lobais',0,128,218,6100,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (43,1395,28,'Fomors_Elemental_Lobais',0,128,0,790,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (38,1392,28,'Fomors_Avatar',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (39,608,28,'Caithleann',0,128,218,6200,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (40,2074,28,'Indich',0,128,218,6500,0,0,NULL);
