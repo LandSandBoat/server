@@ -62,4 +62,20 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
     end
 end
 
+entity.onMobSpellChoose = function(mob, target)
+    local spellList =
+    {
+        [1] = { xi.magic.spell.SLOWGA,    target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.SLOW,      3, 100 },
+        [2] = { xi.magic.spell.SILENCEGA, target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.SILENCE,   0, 100 },
+        [3] = { xi.magic.spell.PARALYGA,  target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.PARALYSIS, 0, 100 },
+        [4] = { xi.magic.spell.GRAVIGA,   target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.WEIGHT,    0, 100 },
+    }
+
+    if target:hasStatusEffectByFlag(xi.effectFlag.DISPELABLE) then
+        table.insert(spellList, #spellList + 1, { xi.magic.spell.DISPELGA, target, false, xi.action.type.NONE, nil, 100 })
+    end
+
+    return xi.combat.behavior.chooseAction(mob, target, nil, spellList)
+end
+
 return entity
