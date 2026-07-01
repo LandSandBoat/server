@@ -429,8 +429,9 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
     -- Bonus to spell base damage from gear.
     baseSpellDamageBonus = baseSpellDamageBonus + caster:getMod(xi.mod.MAGIC_DAMAGE)
 
-    -- Cascade (BLM): flat magic damage bonus to the next elemental spell, consumed on use.
-    baseSpellDamageBonus = baseSpellDamageBonus + xi.job_utils.black_mage.tryConsumeCascade(caster, skillType)
+    -- Cascade (BLM): add the captured Magic Damage bonus to the next elemental spell. The buff is
+    -- consumed separately in useDamageSpell, after every AoE target has been damaged.
+    baseSpellDamageBonus = baseSpellDamageBonus + xi.job_utils.black_mage.getCascadeMagicDamage(caster, skillType)
 
     -----------------------------------
     -- STEP 4: Spell Damage
@@ -1131,6 +1132,10 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local helixMeritMultiplier        = xi.spells.damage.calculateHelixMeritMultiplier(caster, spellId)
     local areaOfEffectResistance      = xi.spells.damage.calculateAreaOfEffectResistance(target, spell)
     local actionTypeMultiplier        = xi.spells.damage.calculateSpellActionTypeMultiplier(caster)
+
+    -- Cascade (BLM): consume the buff once this elemental spell resolves. Deferred to a timer so it
+    -- runs after every AoE target has been damaged (see tryConsumeCascade).
+    xi.job_utils.black_mage.tryConsumeCascade(caster, skillType)
 
     -- Calculate finalDamage. It MUST be floored after EACH multiplication.
     finalDamage = math.floor(spellDamage * multipleTargetReduction)
