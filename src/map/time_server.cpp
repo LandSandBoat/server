@@ -152,7 +152,6 @@ auto time_server(Scheduler& scheduler, MapConfig config) -> Task<void>
                         });
                 });
 
-            guildutils::UpdateGuildsStock();
             zoneutils::SavePlayTime();
         }
 

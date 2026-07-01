@@ -496,7 +496,6 @@ public:
     CLatentEffectContainer* PLatentEffectContainer;
     bool                    retriggerLatents; // used to retrigger all latent effects if some event requires them to be retriggered
 
-    CItemContainer* PGuildShop;
     EntityID_t      guildShopNpc_{}; // Lua-driven guild shop NPC the PC last opened
     CItemContainer* getStorage(uint8 locationId) const;
 

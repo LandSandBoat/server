@@ -156,24 +156,6 @@ with os.scandir(from_server_path("scripts/zones")) as iterator:
                         if npc.is_file():
                             process_npc(npc.path)
 
-# process guild_shops.sql for item ids and min_price
-sql_line = "INSERT INTO `guild_shops` VALUES"
-with open(from_server_path("sql/guild_shops.sql"), mode="r", errors="ignore") as guilds:
-    for line in guilds:
-        split = process_matches(sql_line, line)
-        if len(split) != 0:
-            item_id = split[1].strip()
-            min_price = split[2].strip()
-            max_price = split[3].strip()
-
-            log(
-                f"Found guild item {item_id} with min price {min_price} and max price {max_price}"
-            )
-            if item_id in sql_items and int(sql_items[item_id]) > int(min_price):
-                errors.append(
-                    f"Found guild item {item_id} with min price {min_price} which is lower than sell price {sql_items[item_id]} for guild shop {split[0].strip()}."
-                )
-
 for error in errors:
     print(error)
 if len(errors) > 0:

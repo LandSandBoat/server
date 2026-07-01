@@ -30,49 +30,35 @@ auto GP_CLI_COMMAND_GUILD_BUYLIST::validate(MapSession* PSession, const CCharEnt
 {
     return PacketValidator(PChar)
         .blockedBy({ BlockedState::InEvent })
-        .custom([&](PacketValidator& v)
-                {
-                    if (PChar->PGuildShop == nullptr && PChar->guildShopNpc_.id == 0)
-                    {
-                        v.mustNotEqual(PChar->PGuildShop, nullptr, "Character does not have a guild shop");
-                    }
-                });
+        .mustNotEqual(PChar->guildShopNpc_.id, 0, "Character does not have a guild shop");
 }
 
 void GP_CLI_COMMAND_GUILD_BUYLIST::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    if (PChar->guildShopNpc_.id != 0)
+    if (auto* PNpc = zoneutils::GetEntity(PChar->guildShopNpc_.id, TYPE_NPC))
     {
-        if (auto* PNpc = zoneutils::GetEntity(PChar->guildShopNpc_.id, TYPE_NPC))
+        const auto items = luautils::callGlobal<sol::table>("xi.guildShops.onBuyList", PChar, PNpc);
+
+        std::vector<GP_GUILD_ITEM> list;
+        list.reserve(items.size());
+        for (std::size_t i = 1; i <= items.size(); ++i)
         {
-            const auto items = luautils::callGlobal<sol::table>("xi.guildShops.onBuyList", PChar, PNpc);
-
-            std::vector<GP_GUILD_ITEM> list;
-            list.reserve(items.size());
-            for (std::size_t i = 1; i <= items.size(); ++i)
+            const sol::object obj = items[i];
+            if (!obj.is<sol::table>())
             {
-                const sol::object obj = items[i];
-                if (!obj.is<sol::table>())
-                {
-                    continue;
-                }
-
-                const auto    entry = obj.as<sol::table>();
-                GP_GUILD_ITEM gpItem{
-                    .ItemNo = entry.get_or("id", static_cast<uint16>(0)),
-                    .Count  = entry.get_or("count", static_cast<uint8>(0)),
-                    .Max    = entry.get_or("max", static_cast<uint8>(0)),
-                    .Price  = entry.get_or("price", static_cast<int32>(0)),
-                };
-                list.push_back(gpItem);
+                continue;
             }
 
-            PChar->pushPacket<GP_SERV_COMMAND_GUILD_BUYLIST>(PChar, list);
+            const auto    entry = obj.as<sol::table>();
+            GP_GUILD_ITEM gpItem{
+                .ItemNo = entry.get_or("id", static_cast<uint16>(0)),
+                .Count  = entry.get_or("count", static_cast<uint8>(0)),
+                .Max    = entry.get_or("max", static_cast<uint8>(0)),
+                .Price  = entry.get_or("price", static_cast<int32>(0)),
+            };
+            list.push_back(gpItem);
         }
 
-        return;
+        PChar->pushPacket<GP_SERV_COMMAND_GUILD_BUYLIST>(PChar, list);
     }
-
-    // Fallback to legacy Guild Shops
-    PChar->pushPacket<GP_SERV_COMMAND_GUILD_BUYLIST>(PChar, PChar->PGuildShop);
 }

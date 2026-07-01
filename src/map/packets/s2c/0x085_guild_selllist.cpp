@@ -23,63 +23,6 @@
 
 #include "entities/char_entity.h"
 #include "item_container.h"
-#include "items/item_shop.h"
-
-#include <cstring>
-
-GP_SERV_COMMAND_GUILD_SELLLIST::GP_SERV_COMMAND_GUILD_SELLLIST(CCharEntity* PChar, const CItemContainer* PGuild)
-{
-    if (PChar == nullptr || PGuild == nullptr)
-    {
-        ShowError("GP_SERV_COMMAND_GUILD_SELLLIST - PChar or PGuild was null.");
-        return;
-    }
-
-    auto& packet = this->data();
-
-    uint8 ItemCount   = 0;
-    uint8 PacketCount = 0;
-
-    for (uint8 SlotID = 1; SlotID <= PGuild->GetSize(); ++SlotID)
-    {
-        auto* PItem = static_cast<CItemShop*>(PGuild->GetItem(SlotID));
-
-        if (PItem == nullptr)
-        {
-            ShowError("GP_SERV_COMMAND_GUILD_SELLLIST - PItem was null for SlotID: %d", SlotID);
-            return;
-        }
-
-        if (PItem->hasFlag(ItemFlag::NoSale))
-        {
-            // Skip items that cannot be sold to NPCs
-            continue;
-        }
-
-        if (ItemCount == 30)
-        {
-            packet.Count = ItemCount;
-            packet.Stat  = (PacketCount == 0 ? 0x40 : PacketCount);
-
-            PChar->pushPacket(this->copy());
-
-            ItemCount = 0;
-            PacketCount++;
-
-            std::memset(&packet, 0, sizeof(PacketData));
-        }
-
-        packet.List[ItemCount].ItemNo = PItem->getID();
-        packet.List[ItemCount].Count  = PItem->getQuantity();
-        packet.List[ItemCount].Max    = PItem->getStackSize();
-        packet.List[ItemCount].Price  = PItem->getSellPrice();
-
-        ItemCount++;
-    }
-
-    packet.Count = ItemCount;
-    packet.Stat  = PacketCount + 0x80;
-}
 
 GP_SERV_COMMAND_GUILD_SELLLIST::GP_SERV_COMMAND_GUILD_SELLLIST(CCharEntity* PChar, const std::vector<GP_GUILD_ITEM>& items)
 {
