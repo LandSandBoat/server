@@ -26,8 +26,8 @@
 // https://github.com/atom0s/XiPackets/tree/main/world/client/0x00B6
 // This packet is sent by the client when sending tells to another player.
 GP_CLI_PACKET_VLA(GP_CLI_COMMAND_CHAT_NAME, Mes,
-                  uint8_t unknown00;
-                  uint8_t unknown01;
-                  uint8_t sName[15];
-                  uint8_t Mes[128]; // Variable length
+                  uint8_t unknown04; // PS2: Dammy
+                  uint8_t unknown05; // PS2: (New; did not exist.)
+                  uint8_t sName[15]; // PS2: sName
+                  uint8_t Mes[128];  // PS2: Mes (Variable length)
 );
