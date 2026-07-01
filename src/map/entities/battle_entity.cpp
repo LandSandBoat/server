@@ -2690,6 +2690,13 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
 
     StatusEffectContainer->DelStatusEffectsByFlag(xi::StatusEffectFlag::MagicEnd);
 
+    // Remove Cascade effect and consume TP.
+    if (PSpell->getSkillType() == SKILL_ELEMENTAL_MAGIC && StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Cascade))
+    {
+        StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Cascade);
+        this->health.tp = 0;
+    }
+
     PRecastContainer->Add(RECAST_MAGIC, static_cast<Recast>(PSpell->getID()), action.recast);
 }
 

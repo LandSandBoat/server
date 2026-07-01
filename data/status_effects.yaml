@@ -2184,6 +2184,7 @@ status_effects:
     id: 229
     flags:
       - death
+      - magic_end
       - on_zone
       - on_jobchange
 
