@@ -107,3 +107,30 @@ describe('Guild shop buying', function()
         assert(offeredStock(offered) == stock, 'stock changed on reject')
     end)
 end)
+
+describe('Guild shop shared stock', function()
+    ---@type CClientEntityPair
+    local player
+
+    before_each(function()
+        player = xi.test.world:spawnPlayer({ zone = xi.zone.AHT_URHGAN_WHITEGATE })
+        xi.test.world:setVanaTime(8, 0)
+    end)
+
+    -- Wahraga and Gathweeda share one Alchemists Guild stock pool
+    it('Gathweeda draws from the same stock pool as Wahraga', function()
+        local item = xi.item.VIAL_OF_MERCURY
+
+        player.entities:gotoAndTrigger('Wahraga')
+        player:setGil(10000000)
+        local wahragaStock = player.actions:guildBuyList()[item].count
+
+        player.actions:guildBuy(item, 1) -- buy one from Wahraga
+
+        player.entities:gotoAndTrigger('Gathweeda')
+        local gathweedaStock = player.actions:guildBuyList()[item].count
+
+        assert(gathweedaStock == wahragaStock - 1,
+            string.format('stock not shared: Wahraga %d, Gathweeda %d', wahragaStock, gathweedaStock))
+    end)
+end)

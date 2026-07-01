@@ -10,7 +10,7 @@ local ID = zones[xi.zone.OPEN_SEA_ROUTE_TO_MHAURA]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:sendGuild(523, 1, 23, 5) then
+    if xi.guildShops.onTrigger(player, npc) then
         player:showText(npc, ID.text.PASHI_MACCALEH_SHOP_DIALOG)
     end
 end

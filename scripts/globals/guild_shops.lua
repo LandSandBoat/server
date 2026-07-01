@@ -4,7 +4,7 @@
 
 xi = xi or {}
 xi.guildShops = xi.guildShops or {}
-xi.guildShops.state = xi.guildShops.state or {} -- In-memory shop state, keyed by NPC name.
+xi.guildShops.state = xi.guildShops.state or {} -- In-memory shop state, keyed by canonical NPC name.
 
 --- Buy-curve divisor for an item.
 local priceFloorOf = function(cfg)
@@ -66,8 +66,16 @@ local shopConfig = function(shop, itemId)
     end
 end
 
+-- Resolve an NPC to its Shop Name
+-- Some NPCs share stock
+local canonicalShop = function(npc)
+    local name = npc:getName()
+    local cfg  = xi.data.guildShops[name]
+    return (cfg and cfg.sharedStock) or name
+end
+
 local shopFor = function(npc)
-    return xi.data.guildShops[npc:getName()]
+    return xi.data.guildShops[canonicalShop(npc)]
 end
 
 ---A rejected result: zeroed itemNo/count with a Trade reason code.
@@ -78,7 +86,7 @@ end
 ---Rolls the shop to the current day: restock/trim each item to targetStock, lock prices.
 ---Mutates only once per Vanaday
 local rollShopDay = function(npc, shop)
-    local state = getShopState(npc:getName())
+    local state = getShopState(canonicalShop(npc))
     local today = VanadielUniqueDay()
     if state.lastRoll == today then
         return state
