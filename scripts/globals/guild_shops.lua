@@ -4,7 +4,7 @@
 
 xi = xi or {}
 xi.guildShops = xi.guildShops or {}
-xi.guildShops.state = xi.guildShops.state or {} -- In-memory shop state, keyed by canonical shop name.
+xi.guildShops.state = xi.guildShops.state or {} -- In-memory shop state, keyed by canonical NPC name.
 
 --- Buy-curve divisor for an item.
 local priceFloorOf = function(cfg)
@@ -66,8 +66,8 @@ local shopConfig = function(shop, itemId)
     end
 end
 
--- Resolve an NPC to its canonical shop name, following shared-stock aliases
--- (multiple merchant NPCs that draw from one guild stock pool).
+-- Resolve an NPC to its Shop Name
+-- Some NPCs share stock
 local canonicalShop = function(npc)
     local name = npc:getName()
     local cfg  = xi.data.guildShops[name]
