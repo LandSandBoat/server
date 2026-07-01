@@ -1429,8 +1429,9 @@ void CZoneEntities::UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, 
     TracyZoneScoped;
 
     // Do not send packets that are updates of a hidden GM
-    if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
+    if (PEntity->objtype == TYPE_PC)
     {
+        auto* PChar = static_cast<CCharEntity*>(PEntity);
         if (PChar->m_isGMHidden && type != ENTITY_DESPAWN)
         {
             return;

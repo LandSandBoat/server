@@ -456,7 +456,17 @@ void CCharEntity::updateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, ui
 {
     auto       itr              = EntityUpdatePackets.find(PEntity->id);
     const bool hasPendingPacket = itr != EntityUpdatePackets.end() && itr->second != nullptr;
-    auto*      PChar            = dynamic_cast<CCharEntity*>(PEntity);
+
+    auto* PChar = [&]() -> CCharEntity*
+    {
+        if (PEntity->objtype == TYPE_PC)
+        {
+            return static_cast<CCharEntity*>(PEntity);
+        }
+
+        return nullptr;
+    }();
+
     if (hasPendingPacket)
     {
         // Found existing packet update for the given entity, so we update it instead of pushing new
