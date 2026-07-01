@@ -26,6 +26,7 @@ status_effects:
 
   sleep_i:
     id: 2
+    name: sleep
     flags:
       - damage
       - death
@@ -109,6 +110,7 @@ status_effects:
 
   curse_i:
     id: 9
+    name: curse
     flags:
       - death
       - waltzable
@@ -170,6 +172,7 @@ status_effects:
 
   charm_i:
     id: 14
+    name: charm
     flags:
       - death
       - no_cancel
@@ -199,7 +202,7 @@ status_effects:
 
   charm_ii:
     id: 17
-    name: charm_i
+    name: charm
     flags:
       - death
       - no_cancel
@@ -220,7 +223,7 @@ status_effects:
 
   sleep_ii:
     id: 19
-    name: sleep_i
+    name: sleep
     flags:
       - damage
       - death
@@ -234,7 +237,7 @@ status_effects:
   # Zombie
   curse_ii:
     id: 20
-    name: curse_i
+    name: curse
     flags:
       - death
       - no_rest
@@ -1669,7 +1672,7 @@ status_effects:
 
   encumbrance_ii:
     id: 177
-    name: encumbrance_i
+    name: encumbrance
     flags:
       - on_zone
       - no_cancel
@@ -2395,6 +2398,7 @@ status_effects:
 
   encumbrance_i:
     id: 259
+    name: encumbrance
     flags:
       - no_cancel
       - hide_timer
@@ -4636,7 +4640,7 @@ status_effects:
 
   embolden:
     id: 534
-    name: emboldened
+    name: embolden
     flags:
       - death
       - on_zone
@@ -5222,7 +5226,7 @@ status_effects:
 
   magic_evasion_boost:
     id: 611
-    name: magic_evasion_boost_ii
+    name: magic_evasion_boost
     flags:
       - death
 
@@ -5250,6 +5254,7 @@ status_effects:
 
   boost_ii:
     id: 615
+    name: boost
     flags:
       - attack
       - empathy
