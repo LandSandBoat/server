@@ -66,9 +66,9 @@ CBattlefield::CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PIn
 {
     m_Initiator.id     = PInitiator->id;
     m_Initiator.name   = PInitiator->name;
-    m_Record.name      = "Meme";
+    m_Record.name      = "Someone";
     m_Record.time      = 24h;
-    m_Record.partySize = 69;
+    m_Record.partySize = 6;
     m_Tick             = m_StartTime;
     m_RegisteredPlayers.emplace(PInitiator->id);
 }
@@ -762,6 +762,12 @@ bool CBattlefield::Cleanup(timer::time_point time, bool force)
 
     for (const auto& mob : m_RequiredEnemyList)
     {
+        // Negate the no despawn bit to allow mobs that may use no despawn mechanics to despawn properly
+        if (mob.PMob->m_Behavior & BEHAVIOR_NO_DESPAWN)
+        {
+            mob.PMob->m_Behavior &= ~BEHAVIOR_NO_DESPAWN;
+        }
+
         if (mob.PMob->isAlive() && mob.PMob->PAI->IsSpawned())
         {
             mob.PMob->PAI->Despawn();
@@ -770,6 +776,12 @@ bool CBattlefield::Cleanup(timer::time_point time, bool force)
 
     for (const auto& mob : m_AdditionalEnemyList)
     {
+        // Negate the no despawn bit to allow mobs that may use no despawn mechanics to despawn properly
+        if (mob.PMob->m_Behavior & BEHAVIOR_NO_DESPAWN)
+        {
+            mob.PMob->m_Behavior &= ~BEHAVIOR_NO_DESPAWN;
+        }
+
         if (mob.PMob->isAlive() && mob.PMob->PAI->IsSpawned())
         {
             mob.PMob->PAI->Despawn();
