@@ -38,6 +38,10 @@ entity.onMobInitialize = function(mob)
 
     -- Counter-attack with "Blind" spell when in magical stance.
     mob:addListener('TAKE_DAMAGE', 'COUNTER_WITH_BLIND', function(mobArg, amount, attacker, attackType, damageType)
+        if not attacker then
+            return
+        end
+
         if mobArg:getAnimationSub() ~= 1 then
             return
         end
