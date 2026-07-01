@@ -24,13 +24,15 @@
 // Alter Ego upgrade categories
 enum class AlterEgoCategory : uint8_t
 {
-    HP  = 8,
-    MP  = 9,
-    STR = 10,
-    DEX = 11,
-    VIT = 12,
-    AGI = 13,
-    INT = 14,
-    MND = 15,
-    CHR = 16,
+    HP           = 8,
+    MP           = 9,
+    STR          = 10,
+    DEX          = 11,
+    VIT          = 12,
+    AGI          = 13,
+    INT          = 14,
+    MND          = 15,
+    CHR          = 16,
+    CombatSkills = 17,
+    MagicSkills  = 18,
 };
