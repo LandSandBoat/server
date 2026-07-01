@@ -7,23 +7,23 @@ xi.tutorial = xi.tutorial or {}
 xi.tutorial.onTrigger = function(player, npc, npc_event_offset, nation_offset)
     local stage = player:getCharVar('TutorialProgress')
     if stage == 1 then
-        player:startEvent(npc_event_offset + 22)				-- Tutorial NPC introduces themselves.
+        player:startEvent(npc_event_offset + 22)                -- Tutorial NPC introduces themselves.
     else
         local mLevel = player:getMainLvl()
         local sLevel = player:getSubLvl()
         if stage == 2 then
-            player:startEvent(npc_event_offset)					-- Tutorial NPC instructs you to get Signet.
+            player:startEvent(npc_event_offset)                 -- Tutorial NPC instructs you to get Signet.
         elseif stage == 3 then
             if not player:hasStatusEffect(xi.effect.SIGNET) then
-                player:startEvent(npc_event_offset + 1)			-- You talked to them without Signet.
+                player:startEvent(npc_event_offset + 1)         -- You talked to them without Signet.
             else
-                player:startEvent(npc_event_offset + 2)			-- Tutorial NPC asks you to eat.
+                player:startEvent(npc_event_offset + 2)         -- Tutorial NPC asks you to eat.
             end
         elseif stage == 4 then
             if not player:hasStatusEffect(xi.effect.FOOD) then
-                player:startEvent(npc_event_offset + 3)			-- You talked to them without eating.
+                player:startEvent(npc_event_offset + 3)         -- You talked to them without eating.
             else
-                player:startEvent(npc_event_offset + 4)			-- Tutorial NPC asks you to learn a weaponskill.
+                player:startEvent(npc_event_offset + 4)         -- Tutorial NPC asks you to learn a weaponskill.
             end
         elseif stage == 5 then
             local isSkilled = false
@@ -35,67 +35,66 @@ xi.tutorial.onTrigger = function(player, npc, npc_event_offset, nation_offset)
             end
 
             if not isSkilled then
-                player:startEvent(npc_event_offset + 5)			-- You talked without having any weaponskills.
+                player:startEvent(npc_event_offset + 5)         -- You talked without having any weaponskills.
             else
-                player:startEvent(npc_event_offset + 6)			-- Tutorial NPC asks you to activate Records of Eminence.
+                player:startEvent(npc_event_offset + 6)         -- Tutorial NPC asks you to activate Records of Eminence.
             end
         elseif stage == 6 then
             if not player:hasKeyItem(xi.ki.MEMORANDOLL) then
-                player:startEvent(npc_event_offset + 7)			-- You didn't get your memorandoll.
+                player:startEvent(npc_event_offset + 7)         -- You didn't get your memorandoll.
             else
-                player:startEvent(npc_event_offset + 8)			-- Tutorial NPC asks you to poke an auction house counter.
+                player:startEvent(npc_event_offset + 8)         -- Tutorial NPC asks you to poke an auction house counter.
             end
         elseif stage == 7 then
-            player:startEvent(npc_event_offset + 9)				-- You haven't yet found an auction house.
+            player:startEvent(npc_event_offset + 9)             -- You haven't yet found an auction house.
         elseif stage == 8 then
-            player:startEvent(npc_event_offset + 10)			-- Tutorial NPC asks you to reach level 5.
+            player:startEvent(npc_event_offset + 10)            -- Tutorial NPC asks you to reach level 5.
         elseif stage == 9 then
             if mLevel < 5 then
-                player:startEvent(npc_event_offset + 11)		-- Your main job is below level 5.
+                player:startEvent(npc_event_offset + 11)        -- Your main job is below level 5.
             else
-                player:startEvent(npc_event_offset + 12)		-- Tutorial NPC asks you to get a trust permit.
+                player:startEvent(npc_event_offset + 12)        -- Tutorial NPC asks you to get a trust permit.
             end
-        elseif stage == 10 then									-- Logic to determine if you have a trust permit from the same nation as the Tutorial NPC.
-			local nationKiParam = 0
+        elseif stage == 10 then                                 -- Logic to determine if you have a trust permit from the same nation as the Tutorial NPC.
+            local nationKiParam = 0
             if player:getZoneID() == xi.zone.BASTOK_MARKETS then
                 nationKiParam = 2
             elseif player:getZoneID() == xi.zone.SOUTHERN_SAN_DORIA then
                 nationKiParam = 4
             end
-			
             if not player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT + nationKiParam) then
-                player:startEvent(npc_event_offset + 13)		-- You don't have a trust permit from the nation of this NPC yet.
+                player:startEvent(npc_event_offset + 13)        -- You don't have a trust permit from the nation of this NPC yet.
             else
-                player:startEvent(npc_event_offset + 14)		-- Tutorial NPC asks you to learn how to teleport.
+                player:startEvent(npc_event_offset + 14)        -- Tutorial NPC asks you to learn how to teleport.
             end
-		-- Captures indicate nation offset begins being sent with events here.
-		-- This does make a difference in dialogue when discussing Konschtat Highlands, La Theine Plateau, Tahrongi Canyon, Selbina, and Mhaura.
-		-- Unclear if it makes a difference in dialogue for other events, included here to be certain retail behavior is followed.
+        -- Captures indicate nation offset begins being sent with events here.
+        -- This does make a difference in dialogue when discussing Konschtat Highlands, La Theine Plateau, Tahrongi Canyon, Selbina, and Mhaura.
+        -- Unclear if it makes a difference in dialogue for other events, included here to be certain retail behavior is followed.
         elseif
-			stage == 11 or
-			stage == 12
-		then
-            player:startEvent(npc_event_offset + 15, nation_offset)		-- You haven't touched the survival guides in the correct order yet.
+            stage == 11 or
+            stage == 12
+        then
+            player:startEvent(npc_event_offset + 15, nation_offset)     -- You haven't touched the survival guides in the correct order yet.
         elseif
-			stage == 13 or
-			stage == 14
-		then
-            player:startEvent(npc_event_offset + 16, nation_offset)		-- Tutorial NPC asks you to reach level 18.
+            stage == 13 or
+            stage == 14
+        then
+            player:startEvent(npc_event_offset + 16, nation_offset)     -- Tutorial NPC asks you to reach level 18.
         elseif stage == 15 then
             if mLevel < 18 then
-                player:startEvent(npc_event_offset + 17)				-- Your main job is not yet level 18.
-				-- Capture shows no offset sent here.
+                player:startEvent(npc_event_offset + 17)                -- Your main job is not yet level 18.
+                -- Capture shows no offset sent here.
             else
-               player:startEvent(npc_event_offset + 18, nation_offset)	-- Tutorial NPC asks you to unlock your support job.
+                player:startEvent(npc_event_offset + 18, nation_offset) -- Tutorial NPC asks you to unlock your support job.
             end
         elseif stage == 16 then
             if sLevel < 1 then
-                player:startEvent(npc_event_offset + 19, nation_offset)	-- You haven't set a subjob yet.
+                player:startEvent(npc_event_offset + 19, nation_offset) -- You haven't set a subjob yet.
             else
-                player:startEvent(npc_event_offset + 20)				-- Tutorial NPC congratulates you for finishing all their tasks.
+                player:startEvent(npc_event_offset + 20)                -- Tutorial NPC congratulates you for finishing all their tasks.
             end
         elseif stage == 17 then
-            player:startEvent(npc_event_offset + 21)					-- Tutorial NPC post-tutorial dialogue.
+            player:startEvent(npc_event_offset + 21)                    -- Tutorial NPC post-tutorial dialogue.
         end
     end
 end
