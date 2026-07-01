@@ -74,7 +74,10 @@ entity.onMobSpellChoose = function(mob, target, spellId)
         [26] = { xi.magic.spell.CURE_IV,      mob,    true,  xi.action.type.HEALING_TARGET,       33,                  0, 100 },
     }
 
-    if target:hasStatusEffectByFlag(xi.effectFlag.DISPELABLE) then
+    if
+        target:hasStatusEffectByFlag(xi.effectFlag.DISPELABLE) and
+        mob:isEngaged()
+    then
         table.insert(spellList, #spellList + 1, { xi.magic.spell.DISPEL, target, false, xi.action.type.NONE, nil, 100 })
     end
 

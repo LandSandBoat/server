@@ -81,7 +81,10 @@ entity.onMobSpellChoose = function(mob, target, spellId)
         [23] = { xi.magic.spell.SLOW,         target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.SLOW,      3, 100 },
     }
 
-    if target:hasStatusEffectByFlag(xi.effectFlag.DISPELABLE) then
+    if
+        target:hasStatusEffectByFlag(xi.effectFlag.DISPELABLE) and
+        mob:isEngaged()
+    then
         table.insert(spellList, #spellList + 1, { xi.magic.spell.DISPEL, target, false, xi.action.type.NONE, nil, 0, 100 })
     end
 
