@@ -152,7 +152,10 @@ entity.onMobSpellChoose = function(mob, target, spellId)
         [10] = { xi.magic.spell.PHALANX,   mob,    false, xi.action.type.ENHANCING_FORCE_SELF, xi.effect.PHALANX,   0, 100 },
     }
 
-    if target:hasStatusEffectByFlag(xi.effectFlag.DISPELABLE) then
+    if
+        target:hasStatusEffectByFlag(xi.effectFlag.DISPELABLE) and
+        mob:isEngaged()
+    then
         table.insert(spellList, #spellList + 1, { xi.magic.spell.DISPELGA, target, false, xi.action.type.NONE, nil, 0, 100 })
     end
 

@@ -71,7 +71,10 @@ entity.onMobSpellChoose = function(mob, target)
         [4] = { xi.magic.spell.GRAVIGA,   target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.WEIGHT,    0, 100 },
     }
 
-    if target:hasStatusEffectByFlag(xi.effectFlag.DISPELABLE) then
+    if
+        target:hasStatusEffectByFlag(xi.effectFlag.DISPELABLE) and
+        mob:isEngaged()
+    then
         table.insert(spellList, #spellList + 1, { xi.magic.spell.DISPELGA, target, false, xi.action.type.NONE, nil, 100 })
     end
 
