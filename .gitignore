@@ -219,6 +219,8 @@ ip.txt
 # Tracy download
 ext/tracy/
 tracy.tar.gz
+tracy*
+**/*.tracy
 
 # Valgrind
 *.memcheck.log
