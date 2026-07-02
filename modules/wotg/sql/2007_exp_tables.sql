@@ -2,7 +2,7 @@
 -- 2007 Experience Tables Module
 -----------------------------------
 -- Source: https://ffxiclopedia.fandom.com/wiki/Experience_Points?oldid=334881#Base_Experience
--- Use in tandem with 2007_exp_curve.lua
+-- Use in tandem with modules/era/globals/exp_curve.lua otherwise mobs will /check with wrong values for difficulty
 -- date changed: https://www.bg-wiki.com/ffxi/Version_Update_(02/14/2011)
 -----------------------------------
 
