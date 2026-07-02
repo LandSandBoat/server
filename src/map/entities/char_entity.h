@@ -359,7 +359,6 @@ public:
     eminencecache_t  m_eminenceCache{};               // Caching data for Eminence lookups
     assaultlog_t     m_assaultLog{};                  // Assault mission list
     campaignlog_t    m_campaignLog{};                 // Campaign mission list
-    uint32           m_lastBcnmTimePrompt{};          // The last message prompt in seconds
     PetInfo_t        petZoningInfo{};                 // Used to repawn dragoons pets ect on zone
 
     void setPetZoningInfo();                            // Set pet zoning info (when zoning and logging out)
@@ -442,14 +441,6 @@ public:
     }
 
     CBattleEntity* PClaimedMob = nullptr;
-
-    // These missions do not need a list of completed, because client automatically
-    // displays earlier missions completed
-
-    uint16 m_copCurrent; // current mission of Chains of Promathia
-    uint16 m_acpCurrent; // current mission of A Crystalline Prophecy
-    uint16 m_mkeCurrent; // current mission of A Moogle Kupo d'Etat
-    uint16 m_asaCurrent; // current mission of A Shantotto Ascension
 
     // currency_t        m_currency;                 // conquest points, imperial standing points etc
     teleport_t teleport{}; // Outposts, Runic Portals, Homepoints, Survival Guides, Maws, etc.

@@ -210,8 +210,6 @@ public:
     uint16 m_roamFlags;    // defines its roaming behavior
     uint8  m_specialFlags; // flags for special skill
 
-    bool m_StatPoppedMobs; // true if dyna statue has popped mobs
-
     uint8 strRank;
     uint8 dexRank;
     uint8 vitRank;
@@ -262,10 +260,6 @@ public:
 
     uint32 m_flags;       // includes the CFH flag and whether the HP bar should be shown or not (e.g. Yilgeban doesnt)
     uint8  m_name_prefix; // The ding bats VS Ding bats
-
-    uint8 m_unk0; // possibly campaign related (entity 0x24)
-    uint8 m_unk1; // (entity_update 0x25)
-    uint8 m_unk2; // (entity_update 0x26)
 
     bool m_CallForHelpBlocked;
 
