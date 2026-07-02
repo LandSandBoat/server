@@ -106,7 +106,20 @@ zones[xi.zone.NORTH_GUSTABERG] =
 
     npc =
     {
-        OVERSEER_BASE = GetFirstID('Ennigreaud_RK'),
+        OVERSEER_BASE  = GetFirstID('Ennigreaud_RK'),
+        SIRENS_TEAR_QM = GetFirstID('qm1'),
+    },
+
+    positions =
+    {
+        sirensTear =
+        {
+            [1] = { 310.445, 1.511, 323.755 },
+            [2] = { 290.113, 1.877, 319.272 },
+            [3] = { 330.155, 1.929, 159.144 },
+            [4] = { 349.703, 1.938, 162.502 },
+            [5] = { 340.213, 2.869, 223.788 },
+        }
     },
 }
 
