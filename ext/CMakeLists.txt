@@ -83,7 +83,7 @@ endif(TRACY_ENABLE)
 CPMAddPackage(
     NAME fmt
     GITHUB_REPOSITORY fmtlib/fmt
-    GIT_TAG 12.1.0
+    GIT_TAG 12.2.0
     SYSTEM ON
 ) # defines: fmt::fmt
 
@@ -132,7 +132,7 @@ endif()
 CPMAddPackage(
     NAME rapidyaml
     GITHUB_REPOSITORY biojppm/rapidyaml
-    GIT_TAG v0.12.0
+    GIT_TAG v0.15.2
     SYSTEM ON
     OPTIONS
         "RYML_BUILD_TOOLS OFF"
@@ -171,7 +171,7 @@ CPMAddPackage(
 CPMAddPackage(
     NAME cpp-httplib
     GITHUB_REPOSITORY yhirose/cpp-httplib
-    GIT_TAG v0.18.3
+    GIT_TAG v0.49.0
     SYSTEM ON
     OPTIONS
         "HTTPLIB_REQUIRE_ZLIB OFF"
@@ -181,7 +181,7 @@ CPMAddPackage(
 CPMAddPackage(
     NAME json
     GITHUB_REPOSITORY nlohmann/json
-    GIT_TAG 9f60e855576bb1e95f39ab23b3821982cccb0bab
+    GIT_TAG v3.12.0
     SYSTEM ON
 ) # defines: nlohmann_json::nlohmann_json
 
@@ -197,9 +197,9 @@ endif()
 
 CPMAddPackage(
     NAME asio
-    VERSION 1.36.0
+    VERSION 1.38.0
     GITHUB_REPOSITORY chriskohlhoff/asio
-    GIT_TAG asio-1-36-0 # asio uses non-standard version tag, we must specify GIT_TAG
+    GIT_TAG asio-1-38-0 # asio uses non-standard version tag, we must specify GIT_TAG
 ) #defines asio
 
 # ASIO doesn't use CMake, we have to configure it manually. Extra notes for using on Windows:
@@ -281,7 +281,7 @@ CPMAddPackage(
 CPMAddPackage(
     NAME magic_enum
     GITHUB_REPOSITORY Neargye/magic_enum
-    GIT_TAG 1a1824df7ac798177a521eed952720681b0bf482
+    GIT_TAG v0.9.8
     SYSTEM ON
 ) # defines: magic_enum
 
@@ -295,7 +295,7 @@ CPMAddPackage(
 CPMAddPackage(
     NAME unordered_dense
     GITHUB_REPOSITORY martinus/unordered_dense
-    GIT_TAG v4.4.0
+    GIT_TAG v4.8.1
     SYSTEM ON
 ) # defines: unordered_dense::unordered_dense (aliased to FlatHashMap, see src/common/flat_hash_map.h)
 
