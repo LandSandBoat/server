@@ -238,6 +238,16 @@ SpawnSlot* CMobEntity::GetSpawnSlot()
     return this->spawnSlot;
 }
 
+auto CMobEntity::spawnWindow() const -> const Maybe<SpawnWindow>&
+{
+    return spawnWindow_;
+}
+
+void CMobEntity::setSpawnWindow(uint8 spawnHour, uint8 despawnHour)
+{
+    spawnWindow_ = SpawnWindow{ spawnHour, despawnHour };
+}
+
 bool CMobEntity::TrySpawn()
 {
     if (m_AllowRespawn && !PAI->IsSpawned())

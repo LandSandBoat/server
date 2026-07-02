@@ -901,8 +901,6 @@ void CZone::TOTDChange(vanadiel_time::TOTD TOTD)
 {
     TracyZoneScoped;
 
-    m_zoneEntities->TOTDChange(TOTD);
-
     luautils::OnTOTDChange(m_zoneID, TOTD);
 }
 

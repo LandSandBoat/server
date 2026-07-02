@@ -30,6 +30,7 @@
 #include "lua/luautils.h"
 #include "map_constants.h"
 #include "roe.h"
+#include "spawn_handler.h"
 #include "timetriggers.h"
 #include "transport.h"
 #include "utils/guildutils.h"
@@ -115,9 +116,10 @@ auto time_server(Scheduler& scheduler, MapConfig config) -> Task<void>
     {
         // Vana'diel Hour
         zoneutils::ForEachZone(
-            [](CZone* PZone)
+            [vanaHour](CZone* PZone)
             {
                 luautils::OnGameHour(PZone);
+                PZone->spawnHandler().onGameHour(vanaHour);
                 PZone->ForEachChar(
                     [](CCharEntity* PChar)
                     {

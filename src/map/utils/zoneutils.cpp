@@ -409,6 +409,7 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
 
                         const auto query = "SELECT mobname, packet_name, mobid, pos_rot, pos_x, pos_y, pos_z, "
                                            "respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, mob_spawn_points.minLevel, mob_spawn_points.maxLevel, "
+                                           "mob_spawn_points.spawnHour, mob_spawn_points.despawnHour, "
                                            "modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, "
                                            "ecosystemID, speed, "
                                            "STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, "
@@ -465,6 +466,11 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                                     PMob->m_RespawnTime = std::chrono::seconds(rset->get<uint32>("respawntime"));
                                     PMob->m_SpawnType   = rset->get<SPAWNTYPE>("spawntype");
                                     PMob->m_DropID      = rset->get<uint32>("dropid");
+
+                                    if (!rset->isNull("spawnHour") && !rset->isNull("despawnHour"))
+                                    {
+                                        PMob->setSpawnWindow(rset->get<uint8>("spawnHour"), rset->get<uint8>("despawnHour"));
+                                    }
 
                                     // Check if the drop list is valid
                                     if (PMob->m_DropID != 0 && itemutils::GetDropList(PMob->m_DropID) == nullptr)
@@ -670,10 +676,11 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
 
                     // Intialize monsters that do not require specific conditions to spawn initially. Monsters conditioned to
                     // spawn by time or weather will be allowed upon corresponding time/weather events.
-                    PMob->m_CanSpawn = PMob->m_SpawnType == SPAWNTYPE_NORMAL ||
-                                       PMob->m_SpawnType == SPAWNTYPE_LOTTERY ||
-                                       PMob->m_SpawnType == SPAWNTYPE_SCRIPTED ||
-                                       PMob->m_SpawnType == SPAWNTYPE_WINDOWED;
+                    PMob->m_CanSpawn = !PMob->spawnWindow().has_value() &&
+                                       (PMob->m_SpawnType == SPAWNTYPE_NORMAL ||
+                                        PMob->m_SpawnType == SPAWNTYPE_LOTTERY ||
+                                        PMob->m_SpawnType == SPAWNTYPE_SCRIPTED ||
+                                        PMob->m_SpawnType == SPAWNTYPE_WINDOWED);
                 });
 
             // Spawn mobs after they've all been initialized. Spawning some mobs will spawn other mobs that may not yet be initialized.
@@ -704,7 +711,8 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                         }
 
                         // Condition-based mobs (time/weather) register with 0s so they spawn when conditions are met
-                        const bool isConditionBased = PMob->m_SpawnType & (SPAWNTYPE_ATNIGHT | SPAWNTYPE_ATEVENING | SPAWNTYPE_WEATHER | SPAWNTYPE_FOG);
+                        const bool isConditionBased = (PMob->m_SpawnType & (SPAWNTYPE_ATNIGHT | SPAWNTYPE_ATEVENING | SPAWNTYPE_WEATHER | SPAWNTYPE_FOG)) ||
+                                                      PMob->spawnWindow().has_value();
                         PZone->spawnHandler().registerForRespawn(PMob, isConditionBased ? std::make_optional(0s) : std::nullopt);
                     }
                 });
