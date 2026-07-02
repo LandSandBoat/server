@@ -215,8 +215,6 @@ CCharEntity::CCharEntity()
     PMeritPoints = nullptr;
     PJobPoints   = nullptr;
 
-    PGuildShop = nullptr;
-
     m_isStyleLocked = false;
     m_isBlockingAid = false;
 
@@ -380,8 +378,6 @@ CCharEntity::~CCharEntity()
     destroy(Container);
     destroy(UContainer);
     destroy(PLatentEffectContainer);
-
-    PGuildShop = nullptr;
 
     destroy(eventPreparation);
     destroy(currentEvent);

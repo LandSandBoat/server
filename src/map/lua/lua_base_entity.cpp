@@ -2707,55 +2707,6 @@ void CLuaBaseEntity::sendMenu(uint32 menu)
 }
 
 /************************************************************************
- *  Function: sendGuild()
- *  Purpose : Sends a guild menu to the PC (Ex: Cooking, Smithing, etc)
- *  Example : if player:sendGuild(60426,1,18,6) then
- *  Notes   : L2 and L3 only need simplified 24-hour time format (1,2,etc)
- ************************************************************************/
-
-auto CLuaBaseEntity::sendGuild(const uint16 guildId, uint8 open, uint8 close, uint8 holiday) const -> bool
-{
-    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    if (!PChar)
-    {
-        ShowWarningFmt("Invalid entity type calling function ({}).", m_PBaseEntity->getName());
-        return false;
-    }
-
-    if (open > close)
-    {
-        ShowWarning("Open Time (%d) exceeds Close Time (%d)", open, close);
-        return false;
-    }
-
-    const vanadiel_time::time_point vanaTime     = vanadiel_time::now();
-    const uint8                     VanadielHour = static_cast<uint8>(vanadiel_time::get_hour(vanaTime));
-
-    auto status = GP_SERV_COMMAND_GUILD_OPEN_STAT::Open;
-
-    // Guild holiday - Removed in 2014
-    // uint8 vanadielDay = static_cast<uint8>(vanadiel_time::get_weekday(vanaTime));
-    //
-    // if (vanadielDay == holiday)
-    // {
-    //     status = GUILD_HOLYDAY;
-    // }
-
-    if ((VanadielHour < open) || (VanadielHour >= close))
-    {
-        status = GP_SERV_COMMAND_GUILD_OPEN_STAT::Close;
-    }
-
-    CItemContainer* PGuildShop = guildutils::GetGuildShop(guildId);
-
-    PChar->PGuildShop = PGuildShop;
-    PChar->guildShopNpc_.clean();
-    PChar->pushPacket<GP_SERV_COMMAND_GUILD_OPEN>(status, open, close, holiday);
-
-    return status == GP_SERV_COMMAND_GUILD_OPEN_STAT::Open;
-}
-
-/************************************************************************
  *  Function: openGuildShop()
  *  Purpose : Opens a lua guild shop and remembers the NPC the PC opened it with
  *  Example : if player:openGuildShop(npc, 8, 23) then
@@ -2784,7 +2735,6 @@ auto CLuaBaseEntity::openGuildShop(CLuaBaseEntity* PNpc, uint8 open, uint8 close
 
     PChar->guildShopNpc_.id     = PNpcEntity->id;
     PChar->guildShopNpc_.targid = PNpcEntity->targid;
-    PChar->PGuildShop           = nullptr;
     PChar->pushPacket<GP_SERV_COMMAND_GUILD_OPEN>(status, open, close, 0);
 
     return isOpen;
@@ -2806,7 +2756,6 @@ void CLuaBaseEntity::clearGuildShop() const
     }
 
     PChar->guildShopNpc_.clean();
-    PChar->PGuildShop = nullptr;
 }
 
 /************************************************************************
@@ -20238,7 +20187,6 @@ void CLuaBaseEntity::Register()
     // PC Instructions
     SOL_REGISTER("changeMusic", CLuaBaseEntity::changeMusic);
     SOL_REGISTER("sendMenu", CLuaBaseEntity::sendMenu);
-    SOL_REGISTER("sendGuild", CLuaBaseEntity::sendGuild);
     SOL_REGISTER("openGuildShop", CLuaBaseEntity::openGuildShop);
     SOL_REGISTER("clearGuildShop", CLuaBaseEntity::clearGuildShop);
     SOL_REGISTER("sendGuildClose", CLuaBaseEntity::sendGuildClose);

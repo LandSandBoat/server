@@ -43,6 +43,5 @@ public:
         uint8_t       Stat;
     };
 
-    GP_SERV_COMMAND_GUILD_SELLLIST(CCharEntity* PChar, const CItemContainer* PGuild);
     GP_SERV_COMMAND_GUILD_SELLLIST(CCharEntity* PChar, const std::vector<GP_GUILD_ITEM>& items);
 };
