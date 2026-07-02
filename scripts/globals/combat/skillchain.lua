@@ -49,7 +49,7 @@ local function getSkillchainElementToUse(target, skillchainType)
 
     -- Get lowest resistance rank value.
     local lowestResRank = 11
-    local lowestElement = xi.element.NONE
+    local lowestElement = xi.element.FIRE
 
     for j = #elementTable, 1, -1 do
         local resRankValue = target:getMod(xi.data.element.getElementalResistanceRankModifier(elementTable[j]))
@@ -85,19 +85,27 @@ xi.combat.skillchain.calculateSkillchainDamage = function(actor, target, baseDam
     end
 
     local skillchainElement = getSkillchainElementToUse(target, skillchainType)
+    if not skillchainElement then
+        return 0
+    end
+
     if xi.spells.damage.calculateNullification(target, skillchainElement, true, false) == 0 then
         return 0
     end
 
+    -- Resistance rank.
+    local resRankModifier = xi.data.element.getElementalResistanceRankModifier(skillchainElement)
+    local resRankValue    = utils.clamp(target:getMod(resRankModifier), -3, 11)
+
     -- Calculate base damage and multipliers.
     local finalDamage          = math.abs(baseDamage) -- Damage from skillchain, no matter if absorbed or not.
-    local levelMultiplier      = chainMultipliers[skillchainLevel][skillchainCount - 1] -- We substract 1 because the minimal ammount of WSs needed for a SC is 2.
+    local levelMultiplier      = chainMultipliers[skillchainLevel][skillchainCount]
     local bonusMultiplier      = 1 + actor:getMod(xi.mod.SKILLCHAINBONUS) / 100
     local damageMultiplier     = 1 + actor:getMod(xi.mod.SKILLCHAINDMG) / 10000
     local dayWeatherMultiplier = xi.spells.damage.calculateDayAndWeather(actor, skillchainElement, false)
     local staffMultiplier      = xi.spells.damage.calculateElementalStaffBonus(actor, skillchainElement)
     local affinityMultiplier   = xi.spells.damage.calculateElementalAffinityBonus(actor, skillchainElement)
-    local resRankMultiplier    = resistanceRankMultiplier[target:getMod(xi.data.element.getElementalResistanceRankModifier(skillchainElement))]
+    local resRankMultiplier    = resistanceRankMultiplier[resRankValue]
     local magicTakenMultiplier = xi.combat.damage.calculateDamageAdjustment(target, false, true, false, false)
 
     -- Unconfirmed order.
