@@ -80,16 +80,6 @@ void CAutomatonEntity::setEquip(const AutomatonEquip& equip)
     equip_ = equip;
 }
 
-auto CAutomatonEntity::elementMax(const uint8 element) const -> uint8
-{
-    return elementMax_[element];
-}
-
-auto CAutomatonEntity::elementCapacity(const uint8 element) const -> uint8
-{
-    return elementEquip_[element];
-}
-
 void CAutomatonEntity::burdenTick()
 {
     for (auto&& burden : burden_)
