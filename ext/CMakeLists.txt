@@ -42,17 +42,41 @@ if(TRACY_ENABLE)
                 tar xvf "${CMAKE_SOURCE_DIR}/tracy.tar.gz"
                 WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/
         )
-    else() # UNIX
-        # TODO: Auto-build Tracy and capture executables on Linux
-        # sudo apt-get -y install libglfw3-dev libdbus-1-dev libcapstone-dev libtbb-dev libdebuginfod-dev libfreetype-dev
+    else() # UNIX (Linux / macOS)
+        include(ExternalProject)
 
-        # execute_process(COMMAND "make"
-        #     WORKING_DIRECTORY ${tracy_SOURCE_DIR}/profiler/build/unix
-        # )
+        # target name:source subdirectory
+        set(TRACY_TOOLS
+            "tracy-capture:capture"
+            "tracy-csvexport:csvexport"
+        )
 
-        # execute_process(COMMAND "make"
-        #     WORKING_DIRECTORY ${tracy_SOURCE_DIR}/capture/build/unix
-        # )
+        foreach(_tracy_tool ${TRACY_TOOLS})
+            string(REPLACE ":" ";" _tracy_tool "${_tracy_tool}")
+            list(GET _tracy_tool 0 _tracy_tool_name)
+            list(GET _tracy_tool 1 _tracy_tool_dir)
+
+            message(STATUS "Configuring Tracy tool: ${_tracy_tool_name}")
+
+            set(_tracy_tool_bindir ${CMAKE_BINARY_DIR}/tracy-tools/${_tracy_tool_name})
+
+            ExternalProject_Add(${_tracy_tool_name}
+                SOURCE_DIR ${TracyClient_SOURCE_DIR}/${_tracy_tool_dir}
+                BINARY_DIR ${_tracy_tool_bindir}
+                CMAKE_ARGS
+                    -DCMAKE_BUILD_TYPE=Release
+                    -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
+                    -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
+                    -DCMAKE_OSX_ARCHITECTURES=${CMAKE_OSX_ARCHITECTURES}
+                    -DCMAKE_OSX_DEPLOYMENT_TARGET=${CMAKE_OSX_DEPLOYMENT_TARGET}
+                    -DCMAKE_OSX_SYSROOT=${CMAKE_OSX_SYSROOT}
+                    -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=${_tracy_tool_bindir}
+                BUILD_ALWAYS TRUE
+                INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                    ${_tracy_tool_bindir}/${_tracy_tool_name}
+                    ${CMAKE_SOURCE_DIR}/${_tracy_tool_name}
+            )
+        endforeach()
     endif()
 endif(TRACY_ENABLE)
 
