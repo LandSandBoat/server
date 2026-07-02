@@ -98,7 +98,6 @@ endif()
 
 # Find MariaDB
 find_package(MariaDB REQUIRED)
-find_package(MariaDBCPP REQUIRED)
 
 # Find ZMQ
 find_package(ZeroMQ REQUIRED)
@@ -113,14 +112,14 @@ find_package(OpenSSLlibcrypto REQUIRED)
 find_package(OpenSSLlibssl REQUIRED)
 
 if(UNIX AND NOT APPLE)
-# zstd is sometimes a prereq for binutils
+    # zstd is sometimes a prereq for binutils
     find_package(Zstd REQUIRED)
     find_package(Binutils REQUIRED)
 endif()
 
 # Link this 'library' to set the c++ standard / compile-time options requested
 add_library(project_options INTERFACE)
-target_compile_features(project_options INTERFACE cxx_std_17)
+target_compile_features(project_options INTERFACE cxx_std_20)
 
 # Link this 'library' to use the warnings specified in CompilerWarnings.cmake
 add_library(project_warnings INTERFACE)
