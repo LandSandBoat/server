@@ -22,7 +22,7 @@ entity.onMobInitialize = function(mob)
         end
 
         if damage >= 594 then
-            mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 200)
+            mobArg:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
         end
     end)
 end

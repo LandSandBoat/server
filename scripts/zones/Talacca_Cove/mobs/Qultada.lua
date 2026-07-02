@@ -30,7 +30,6 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setUnkillable(true)
-    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 125)
 
     -- Reset mob.
     xi.combat.behavior.enableAllActions(mob)

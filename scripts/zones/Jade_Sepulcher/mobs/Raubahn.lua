@@ -26,7 +26,7 @@ entity.onMobInitialize = function(mob)
     mob:addListener('TAKE_DAMAGE', 'RAUBAHN_TAKE_DAMAGE', function(mobArg, damage, attacker, attackType, damageType)
         if damage >= 400 then -- This might also increase Raubahn's accuracy.
             mob:messageText(mob, ID.text.RAUBAHN_GREATER_POWER)
-            mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 200)
+            mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
         end
     end)
 end
@@ -35,7 +35,6 @@ entity.onMobSpawn = function(mob)
     mob:setUnkillable(true)
     mob:setMod(xi.mod.DMGMAGIC, -1250) -- Observed at 99 and the skillchain damage in under level 71 vods
     mob:setMod(xi.mod.UFASTCAST, 70)
-    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 125)
     mob:setMobMod(xi.mobMod.ROAM_COOL, 8)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 18)
 
