@@ -2,13 +2,16 @@
 -- Area: Konschtat Highlands
 --   NM: Haty
 -----------------------------------
-require('scripts/quests/tutorial')
------------------------------------
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+end
+
 entity.onMobRoam = function(mob)
-    local hour = VanadielHour()
+    local hour      = VanadielHour()
     local moonCycle = getVanadielMoonCycle()
     if
         (hour >= 5 and hour < 17) or
@@ -18,18 +21,9 @@ entity.onMobRoam = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-    xi.tutorial.onMobDeath(player)
-end
-
 entity.onMobDespawn = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
     mob:setLocalVar('cooldown', GetSystemTime() + (144 * 13)) -- 13 vanadiel hours guarantees it will not spawn twice in the same night
-end
-
-entity.onMobInitialize = function(mob)
-    mob:addImmunity(xi.immunity.SILENCE)
-    mob:addImmunity(xi.immunity.DARK_SLEEP)
 end
 
 return entity

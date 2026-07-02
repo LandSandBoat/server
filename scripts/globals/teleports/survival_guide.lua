@@ -17,7 +17,7 @@ local optionMap =
     ADD_FAVORITE     = 4,
     REMOVE_FAVORITE  = 5,
     REPLACE_FAVORITE = 6,
-    TELEPORT_MENU    = 7
+    TELEPORT_MENU    = 7,
 }
 
 -----------------------------------
@@ -40,53 +40,62 @@ end
 -- Public functions
 -----------------------------------
 xi.survivalGuide.onTrigger = function(player)
-    local currentZoneId = player:getZoneID()
-    local tableIndex    = survival.zoneIdToGuideIdMap[currentZoneId]
-    local guide         = survival.survivalGuides[tableIndex]
-    local expansions    = 3 + (4 * xi.settings.main.ENABLE_COP) + (8 * xi.settings.main.ENABLE_TOAU) + (16 * xi.settings.main.ENABLE_WOTG) + (2048 * xi.settings.main.ENABLE_SOA)
+    local tableIndex = survival.zoneIdToGuideIdMap[player:getZoneID()]
+    local guide      = survival.survivalGuides[tableIndex]
 
-    if guide then
-        -- If this survival guide hasn't been registered yet (saved to database) do that now.
-        local foundRegisteredGuide = checkForRegisteredSurvivalGuide(player, guide)
-
-        if foundRegisteredGuide then
-            local param = bit.bor(tableIndex, bit.lshift(player:getCurrency('valor_point'), 16))
-
-            -- Get the teleport menu option.
-            -- Menu options can be organized by Region or Content.
-            -- Default (0) is region.
-            local teleportMenu = player:getTeleportMenu(xi.teleport.type.SURVIVAL)
-
-            if teleportMenu[10] == 1 then
-                param = bit.bor(param, 0x0800)
-            end
-
-            -- When all mog tablets are found, survival guides are free.
-            local allMogTabletsFound = false -- TODO: Implement mog tablets and fetch if they are all found here.
-            if allMogTabletsFound then
-                param = bit.bor(param, 0x0400)
-            end
-
-            -- "Rhapsody in White" key item reduces teleport fee by 80%
-            if player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
-                param = bit.bor(param, 0x2000)
-            end
-
-            local g1, g2, g3, g4 = unpack(player:getTeleportTable(xi.teleport.type.SURVIVAL))
-
-            -- param 1 = Does nothing.
-            -- param 2 = current area, player amount of tabs, fee reducer(s) and menu layout (region/content).
-            -- param 3 = gil
-            -- param 4 = zones unlocked (group 1), set to -1 to enable all zones in the group.
-            -- param 5 = Zones unlocked (group 2), set to -1 to enable all zones in the group.
-            -- param 6 = Zones unlocked (group 3), set to -1 to enable all zones in the group.
-            -- param 7 = zones unlocked (Zehrun mines and Eastern Adoulin), set to -1 to enable all zones in the group.
-            -- param 8 = expansions available.
-            player:startEvent(8500, 0, param, player:getGil(), g1, g2, g3, g4, expansions)
-        end
-    else
-        player:printToPlayer('Survival guides are not enabled!')
+    -- Early return: No info.
+    if not guide then
+        return
     end
+
+    -- If this survival guide hasn't been registered yet (saved to database) do that now.
+    local foundRegisteredGuide = checkForRegisteredSurvivalGuide(player, guide)
+    if not foundRegisteredGuide then
+        return
+    end
+
+    local param = bit.bor(tableIndex, bit.lshift(player:getCurrency('valor_point'), 16))
+
+    -- Get the teleport menu option.
+    -- Menu options can be organized by Region or Content.
+    -- Default (0) is region.
+    local teleportMenu = player:getTeleportMenu(xi.teleport.type.SURVIVAL)
+
+    -- When all mog tablets are found, survival guides are free.
+    local allMogTabletsFound = false -- TODO: Implement mog tablets and fetch if they are all found here.
+    if allMogTabletsFound then
+        param = bit.bor(param, 0x0400)
+    end
+
+    if teleportMenu[10] == 1 then
+        param = bit.bor(param, 0x0800)
+    end
+
+    -- Tutorial quest special option.
+    if player:getCharVar('TutorialBypass') == 2 then
+        param = bit.bor(param, 0x1000)
+    end
+
+    -- "Rhapsody in White" key item reduces teleport fee by 80%
+    if player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
+        param = bit.bor(param, 0x2000)
+    end
+
+    -- Params 4, 5, 6 and 7
+    local g1, g2, g3, g4 = unpack(player:getTeleportTable(xi.teleport.type.SURVIVAL))
+
+    -- Param 8
+    local expansions = 3 + 4 * xi.settings.main.ENABLE_COP + 8 * xi.settings.main.ENABLE_TOAU + 16 * xi.settings.main.ENABLE_WOTG + 2048 * xi.settings.main.ENABLE_SOA
+
+    -- param 1 = Does nothing.
+    -- param 2 = current area, player amount of tabs, fee reducer(s) and menu layout (region/content).
+    -- param 3 = gil
+    -- param 4 = zones unlocked (group 1), set to -1 to enable all zones in the group.
+    -- param 5 = Zones unlocked (group 2), set to -1 to enable all zones in the group.
+    -- param 6 = Zones unlocked (group 3), set to -1 to enable all zones in the group.
+    -- param 7 = zones unlocked (Zehrun mines and Eastern Adoulin), set to -1 to enable all zones in the group.
+    -- param 8 = expansions available.
+    player:startEvent(8500, 0, param, player:getGil(), g1, g2, g3, g4, expansions)
 end
 
 xi.survivalGuide.onEventUpdate = function(player, csid, option, npc)
@@ -138,56 +147,89 @@ xi.survivalGuide.onEventUpdate = function(player, csid, option, npc)
 end
 
 xi.survivalGuide.onEventFinish = function(player, eventId, option, npc)
-    if
-        eventId == 8500 and
-        bit.band(option, 0xFF) == optionMap.TELEPORT
-    then
-        local selectedMenuId = bit.rshift(option, 16)
+    if eventId ~= 8500 then
+        return
+    end
 
-        if selectedMenuId <= 97 then
-            local guide         = survival.survivalGuides[selectedMenuId] -- Destination.
-            local currentZoneId = player:getZoneID()
+    if bit.band(option, 0xFF) ~= optionMap.TELEPORT then
+        return
+    end
 
-            if
-                guide and
-                guide.zoneId ~= currentZoneId and
-                player:checkDistance(npc) <= 6 and
-                player:hasTeleport(xi.teleport.type.SURVIVAL, guide.groupIndex - 1, guide.group - 1) -- Destination check.
-            then
-                local teleportCostGil  = 1000
-                local teleportCostTabs = 50
-                local canTeleport      = false
+    local selectedMenuId = bit.rshift(option, 16)
+    if selectedMenuId > 97 then
+        return
+    end
 
-                -- When all mog tablets are found, survival guides are free.
-                local allMogTabletsFound = false -- TODO: Implement mog tablets and fetch if they are all found here.
-                if allMogTabletsFound then
-                    teleportCostGil  = 0
-                    teleportCostTabs = 0
+    -- Early return: No info.
+    local guide = survival.survivalGuides[selectedMenuId] -- Destination.
+    if not guide then
+        return
+    end
 
-                -- If the player has the "Rhapsody in White" KI, the cost is 10% of original gil or 20% of original tabs.
-                elseif player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
-                    teleportCostGil  = math.floor(teleportCostGil / 10)
-                    teleportCostTabs = math.floor(teleportCostTabs / 5)
-                end
+    -- Early return: Same zone destination as current.
+    if guide.zoneId == player:getZoneID() then
+        return
+    end
 
-                -- Currency checks.
-                if bit.band(bit.rshift(option, 8), 1) == 1 then
-                    -- Paying with tabs
-                    if player:getCurrency('valor_point') >= teleportCostTabs then
-                        player:delCurrency('valor_point', teleportCostTabs)
-                        canTeleport = true
-                    end
-                else
-                    if player:getGil() >= teleportCostGil then
-                        player:delGil(teleportCostGil)
-                        canTeleport = true
-                    end
-                end
+    -- Early return: Too far from npc.
+    if player:checkDistance(npc) > 6 then
+        return
+    end
 
-                if canTeleport then
-                    player:setPos(guide.posX, guide.posY, guide.posZ, guide.posRot, guide.zoneId)
-                end
-            end
+    -- Early return: Doesn't have destination unlocked.
+    if not player:hasTeleport(xi.teleport.type.SURVIVAL, guide.groupIndex - 1, guide.group - 1) then
+        return
+    end
+
+    -- Cost calculations.
+    local teleportCostGil  = 1000
+    local teleportCostTabs = 50
+    local canTeleport      = false
+
+    -- When all mog tablets are found or in the tutorial, survival guides are free.
+    local tutorialCostBypass = player:getCharVar('TutorialBypass') == 2
+    local allMogTabletsFound = false -- TODO: Implement mog tablets and fetch if they are all found here.
+
+    if allMogTabletsFound then
+        teleportCostGil  = 0
+        teleportCostTabs = 0
+
+    -- If the player has the "Rhapsody in White" KI, the cost is 10% of original gil or 20% of original tabs.
+    elseif player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
+        teleportCostGil  = math.floor(teleportCostGil / 10)
+        teleportCostTabs = math.floor(teleportCostTabs / 5)
+    end
+
+    -- Payment methods.
+    local paymentValor    = bit.band(bit.rshift(option, 8), 1) and true or false
+    local paymentTutorial = bit.band(bit.rshift(option, 9), 1) and true or false
+
+    -- Payment option when selecting "Travel using <amount> tabs." (Valor Points)
+    if paymentValor then
+        if player:getCurrency('valor_point') >= teleportCostTabs then
+            player:delCurrency('valor_point', teleportCostTabs)
+            canTeleport = true
+        end
+
+    -- Payment option when selecting "One-time free Warp for the objective." (Tutorial option)
+    elseif paymentTutorial then
+        if tutorialCostBypass then
+            player:setCharVar('TutorialBypass', 3)
+            canTeleport = true
+        end
+
+    -- Payment option when selecting "Travel using <amount> gil." or "Up and away!"
+    else
+        if player:getGil() >= teleportCostGil then
+            player:delGil(teleportCostGil)
+            canTeleport = true
         end
     end
+
+    -- Early return: Currency not paid.
+    if not canTeleport then
+        return
+    end
+
+    player:setPos(guide.posX, guide.posY, guide.posZ, guide.posRot, guide.zoneId)
 end

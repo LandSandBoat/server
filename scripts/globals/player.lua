@@ -142,7 +142,6 @@ xi.player.charCreate = function(player)
     player:setCharVar('HQuest[moghouseExpo]notSeen', 1) -- needs Moghouse intro
     player:setCharVar('spokeKindlix', 1)                -- Kindlix introduction
     player:setCharVar('spokePyropox', 1)                -- Pyropox introduction
-    player:setCharVar('TutorialProgress', 1)            -- Has not started tutorial
     player:setCharVar('EinherjarIntro', 1)              -- Has not seen Einherjar intro
     player:setNewPlayer(true)                           -- apply new player flag
 end
