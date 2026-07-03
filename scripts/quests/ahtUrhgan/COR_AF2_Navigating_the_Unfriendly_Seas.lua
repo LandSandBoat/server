@@ -57,7 +57,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 0 and
-                        npcUtil.tradeHasExactly(trade, xi.item.HYDROGAUGE)
+                        trade:getItemQty(xi.item.HYDROGAUGE) > 0
                     then
                         return quest:progressEvent(283)
                     end
@@ -77,7 +77,6 @@ quest.sections =
             {
                 [283] = function(player, csid, option, npc)
                     if quest:getVar(player, 'Prog') == 0 then
-                        player:confirmTrade()
                         quest:setVar(player, 'Prog', 1)
                     end
                 end,
