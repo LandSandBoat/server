@@ -1,12 +1,21 @@
 -----------------------------------
 -- Zone: North_Gustaberg (106)
 -----------------------------------
+local ID = zones[xi.zone.NORTH_GUSTABERG]
+-----------------------------------
 ---@type TZone
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.conquest.setRegionalConquestOverseers(zone:getRegionID())
     xi.voidwalker.zoneOnInit(zone)
+
+    local sirensTear = GetNPCByID(ID.npc.SIRENS_TEAR_QM)
+
+    -- randomize Siren's Tear position
+    if sirensTear then
+        sirensTear:setPos(unpack(ID.positions.sirensTear[math.random(1, #ID.positions.sirensTear)]))
+    end
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
