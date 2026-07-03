@@ -2,8 +2,6 @@
 -- Area: Konschtat Highlands
 --   NM: Bendigeit Vran
 -----------------------------------
-require('scripts/quests/tutorial')
------------------------------------
 ---@type TMobEntity
 local entity = {}
 
@@ -32,10 +30,6 @@ entity.onAdditionalEffect = function(mob, target, damage)
     }
 
     return xi.combat.action.executeAddEffectEnfeeblement(mob, target, pTable)
-end
-
-entity.onMobDeath = function(mob, player, optParams)
-    xi.tutorial.onMobDeath(player)
 end
 
 entity.onMobDespawn = function(mob)

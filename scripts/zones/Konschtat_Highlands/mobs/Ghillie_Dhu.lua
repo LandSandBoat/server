@@ -2,8 +2,6 @@
 -- Area: Konschtat Highlands
 --   NM: Ghillie Dhu
 -----------------------------------
-require('scripts/quests/tutorial')
------------------------------------
 ---@type TMobEntity
 local entity = {}
 
@@ -50,7 +48,6 @@ entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 204)
     -- I think he still counts for the FoV page? Most NM's do not though.
     xi.regime.checkRegime(player, mob, 81, 1, xi.regime.type.FIELDS)
-    xi.tutorial.onMobDeath(player)
 end
 
 entity.onMobDespawn = function(mob)

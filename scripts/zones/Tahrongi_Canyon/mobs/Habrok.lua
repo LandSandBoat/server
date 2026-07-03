@@ -2,14 +2,12 @@
 -- Area: Tahrongi Canyon
 --  Mob: Habrok
 -----------------------------------
-require('scripts/quests/tutorial')
------------------------------------
 ---@type TMobEntity
 local entity = {}
 
 entity.spawnPoints =
 {
-    { x = -292.000, y =  15.000, z = -540.000 }
+    { x = -292.000, y = 15.000, z = -540.000 }
 }
 
 entity.onMobInitialize = function(mob)
@@ -23,7 +21,6 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 258)
-    xi.tutorial.onMobDeath(player)
 end
 
 entity.onMobDespawn = function(mob)
