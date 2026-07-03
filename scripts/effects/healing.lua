@@ -2,6 +2,9 @@
 -- xi.effect.HEALING
 -- Activated through the /heal command
 -----------------------------------
+require('scripts/quests/adoulin/Dances_with_Luopans')
+-----------------------------------
+
 ---@type TEffect
 local effectObject = {}
 
