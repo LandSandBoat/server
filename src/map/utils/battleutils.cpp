@@ -1903,10 +1903,14 @@ auto CalculateTPFromDamageTaken(CBattleEntity* PAttacker, CBattleEntity* PDefend
 
 bool TryInterruptSpell(CBattleEntity* PAttacker, CBattleEntity* PDefender, CSpell* PSpell)
 {
-    // Exceptions.
-    if (PDefender->objtype == TYPE_TRUST ||                                              // Caster is a trust.
-        PDefender->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Manafont) || // Caster has Manafont.
-        (SKILLTYPE)PSpell->getSkillType() == SKILL_SINGING)                              // Spell is a song.
+    // Early return: Spell can't be interrupted.
+    if ((SKILLTYPE)PSpell->getSkillType() == SKILL_SINGING)
+    {
+        return false;
+    }
+
+    // Early return: Manafont prevents interruptions.
+    if (PDefender->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Manafont))
     {
         return false;
     }
@@ -1962,24 +1966,27 @@ bool TryInterruptSpell(CBattleEntity* PAttacker, CBattleEntity* PDefender, CSpel
     // SIRDRatio:   No limits. Can be negative. A negative value will guarantee NOT being interrupted.
     float finalRatio = levelRatio * skillRatio * SIRDRatio; // TL;DR Higher = Worse = More chances to get interrupted.
 
-    // You get interrupted. Handle aquaveil.
-    if (chance < finalRatio)
+    // Early return: You don't get interrupted.
+    if (chance >= finalRatio)
     {
-        if (PDefender->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Aquaveil))
-        {
-            auto aquaCount = PDefender->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Aquaveil)->GetPower();
-            if (aquaCount - 1 == 0) // removes the status, but still prevents the interrupt
-            {
-                PDefender->StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Aquaveil);
-            }
-            else
-            {
-                PDefender->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Aquaveil)->SetPower(aquaCount - 1);
-            }
-            return false;
-        }
+        return false;
+    }
 
+    // Early return: You can't prevent interruption via Aquaveil effect.
+    if (!PDefender->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Aquaveil))
+    {
         return true;
+    }
+
+    // Handle aquaveil.
+    auto aquaCount = PDefender->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Aquaveil)->GetPower();
+    if (aquaCount - 1 == 0) // removes the status, but still prevents the interrupt
+    {
+        PDefender->StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Aquaveil);
+    }
+    else
+    {
+        PDefender->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Aquaveil)->SetPower(aquaCount - 1);
     }
 
     return false;
