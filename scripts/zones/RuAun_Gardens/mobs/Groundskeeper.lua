@@ -8,6 +8,14 @@ local ID = zones[xi.zone.RUAUN_GARDENS]
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    -- Force wall groundskeepers to aggro
+    -- We can't set this in the DB because they are still doll species but not "special" in any way other than this
+    if mob:getPool() == xi.mobPool.GROUNDSKEEPER_WALL then
+        mob:setMobMod(xi.mobMod.DETECTION, bit.bor(xi.detects.MAGIC, xi.detects.SIGHT))
+    end
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 143, 2, xi.regime.type.FIELDS)
     xi.regime.checkRegime(player, mob, 144, 1, xi.regime.type.FIELDS)

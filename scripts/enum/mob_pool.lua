@@ -48,6 +48,7 @@ xi.mobPool =
     WREAKER                = 4382, -- Wreaker (CoP 1-3 Spire Battle)
     ZIZZY_ZILLAH           = 4509, -- Zizzy Zillah (Mamook NM)
     QNAERN_WHM             = 4651, -- Qn'Aern WHM benediction check
+    GROUNDSKEEPER_WALL     = 5128, -- Groundskeepers in wall that aggro
     AMNAF_PSYCHEFLAYER     = 5310, -- Reset enmity on sleepga
     SELHTEUS_DAWN          = 5417, -- Selhteus (CoP 8-4 Dawn)
     FAHRAFAHR_THE_BLOODIED = 6750, -- Reset Enmity on Drop Hammer
