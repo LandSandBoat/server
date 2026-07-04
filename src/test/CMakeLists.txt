@@ -7,6 +7,7 @@ set(SOURCES
     ${REPORTERS_SOURCES}
     enums/test_status.h
     enums/tick_type.h
+    tests/rng_spread_tests.cpp
     in_memory_sink.h
     mock_manager.cpp
     mock_manager.h
