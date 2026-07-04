@@ -46,13 +46,6 @@ describe('Sight aggro line of sight', function()
         local mob = alcoveGroundskeeper()
         assert(mob, 'alcove Groundskeeper not found')
 
-        -- TODO: We shouldn't have to set these manually, they should be the default behaviours
-        --     : of this particular Groundskeeper
-        mob:setAggressive(true)
-        mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
-        mob:setMobMod(xi.mobMod.DETECTION, xi.detects.SIGHT)
-        mob:setMobMod(xi.mobMod.SIGHT_RANGE, 20)
-
         -- Roam past the post-spawn neutral window so the mob can aggro at all.
         for _ = 1, 10 do
             xi.test.world:skipTime(5)
