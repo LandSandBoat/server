@@ -156,13 +156,14 @@ entity.onMobDisengage = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    mob:showText(mob, ID.text.YAZQUHL_DEATH)
-end
+    if optParams.isKiller or optParams.noKiller then
+        mob:showText(mob, ID.text.YAZQUHL_DEATH)
 
-entity.onMobDespawn = function(mob)
-    local instance = mob:getInstance()
-    if instance then
-        instance:setProgress(instance:getProgress() + 1)
+        local instance = mob:getInstance()
+
+        if instance then
+            instance:setProgress(instance:getProgress() + 1)
+        end
     end
 end
 
