@@ -22,6 +22,7 @@
 #include "auth_session.h"
 
 #include "common/ipc.h"
+#include "common/md52.h"
 #include "common/utils.h"
 #include "otp_helpers.h"
 

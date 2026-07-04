@@ -9,5 +9,6 @@ CREATE TABLE `char_flags` (
   `gmModeEnabled` smallint(3) NOT NULL DEFAULT '0',
   `gmHiddenEnabled` smallint(3) NOT NULL DEFAULT '0',
   `muted` boolean NOT NULL DEFAULT FALSE,
+  `rename` boolean NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`charid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

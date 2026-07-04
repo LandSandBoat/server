@@ -23,6 +23,7 @@
 
 #include "common/database.h"
 #include "common/ipc.h"
+#include "common/md52.h"
 #include "common/utils.h"
 
 void data_session::deleteCharFromCharInfo(uint32_t ffxi_id)
@@ -46,6 +47,21 @@ void data_session::addCharIntoCharInfo(const lpkt_chr_info_sub2& charInfo)
         if (existingCharInfo.character_name[0] == 0x20) // empty - name is a space
         {
             existingCharInfo = charInfo;
+            break;
+        }
+    }
+}
+
+// Keep the cached lobby list in sync after a rename.
+void data_session::renameCharInCharInfo(const uint32_t charId, const std::string& newName)
+{
+    for (auto& charInfo : characterInfoResponse.character_info)
+    {
+        if (charInfo.ffxi_id == charId)
+        {
+            std::memset(charInfo.character_name, 0, sizeof(charInfo.character_name));
+            std::memcpy(charInfo.character_name, newName.c_str(), std::min(newName.size(), sizeof(charInfo.character_name) - 1));
+            charInfo.renamef = 0;
             break;
         }
     }
@@ -106,11 +122,15 @@ void data_session::read_func()
                                                     "race, face, head, body, hands, legs, feet, main, sub,"
                                                     "war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng,"
                                                     "sam, nin, drg, smn, blu, cor, pup, dnc, sch, geo, run, "
-                                                    "gmlevel, nation, size, sjob "
+                                                    "gmlevel, nation, size, sjob, COALESCE(char_flags.`rename`, 0) AS `rename`, "
+                                                    "EXISTS(SELECT 1 FROM char_vars "
+                                                    "WHERE char_vars.charid = chars.charid "
+                                                    "AND varname = '[RaceChange]Eligible' AND value > UNIX_TIMESTAMP()) AS race_change "
                                                     "FROM chars "
                                                     "INNER JOIN char_stats USING(charid) "
                                                     "INNER JOIN char_look  USING(charid) "
                                                     "INNER JOIN char_jobs  USING(charid) "
+                                                    "LEFT JOIN  char_flags USING(charid) "
                                                     "WHERE accid = ? "
                                                     "LIMIT ?",
                                                     session.accountID,
@@ -163,9 +183,9 @@ void data_session::read_func()
                             characterInfo.ffxi_id           = contentId;
                             characterInfo.ffxi_id_world     = charIdMain;
                             characterInfo.worldid           = worldId;
-                            characterInfo.status            = 1; // 0 = Invalid/Hidden, 1 = Available, 2 = Disabled (unpaid)
-                            characterInfo.race_change       = 0; // 0 = no race change service, 1 = race change service (gold star icon) (NOT YET SUPPORTED!)
-                            characterInfo.renamef           = 0; // 0 = no rename required, 1 = rename required (NOT YET SUPPORTED!)
+                            characterInfo.status            = 1;                                        // 0 = Invalid/Hidden, 1 = Available, 2 = Disabled (unpaid)
+                            characterInfo.race_change       = rset1->get<uint8>("race_change") ? 1 : 0; // Shows a gold star icon if character eligible for race change
+                            characterInfo.renamef           = rset1->get<uint8>("rename") ? 1 : 0;      // Forces client to input a new name if set
                             characterInfo.ffxi_id_world_tbl = charIdExtra;
 
                             std::memcpy(characterInfo.character_name, &strCharName, 16);

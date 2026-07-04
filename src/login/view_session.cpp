@@ -24,6 +24,7 @@
 #include "data_session.h"
 
 #include <common/lua.h>
+#include <common/md52.h>
 #include <common/settings.h>
 #include <common/utils.h>
 
@@ -211,76 +212,8 @@ void view_session::read_func()
                 char CharName[PacketNameLength] = {};
                 std::memcpy(CharName, buffer_.data() + 32, PacketNameLength - 1);
 
-                Maybe<std::string> invalidNameReason = std::nullopt;
-
-                // Sanitize name & check for invalid characters
-                std::string nameStr = CharName;
-                for (const auto& letters : nameStr)
-                {
-                    if (!std::isalpha(letters))
-                    {
-                        invalidNameReason = "Invalid characters present in name.";
-                        break;
-                    }
-                }
-
-                // Check for invalid length name
-                // NOTE: The client checks for this. This is to guard
-                // against packet injection
-                if (nameStr.size() < 3 || nameStr.size() > 15)
-                {
-                    invalidNameReason = "Invalid name length.";
-                }
-
-                // Check if the name is already in use by another character
-                const auto rset0 = db::preparedStmt("SELECT charname FROM chars WHERE charname LIKE ?", nameStr);
-                if (!rset0)
-                {
-                    invalidNameReason = "Internal entity name query failed.";
-                }
-                else if (rset0 && rset0->rowsCount() != 0)
-                {
-                    invalidNameReason = "Name already in use.";
-                }
-
-                // (optional) Check if the name is in use by NPC or Mob entities
-                if (settings::get<bool>("login.DISABLE_MOB_NPC_CHAR_NAMES"))
-                {
-                    const auto query =
-                        "SELECT polutils_name AS `name` FROM npc_list "
-                        "WHERE REPLACE(REPLACE(UPPER(polutils_name), '-', ''), '_', '') "
-                        "LIKE REPLACE(REPLACE(UPPER(?), '-', ''), '_', '') "
-                        "UNION "
-                        "SELECT packet_name AS `name` FROM mob_pools "
-                        "WHERE REPLACE(REPLACE(UPPER(packet_name), '-', ''), '_', '') "
-                        "LIKE REPLACE(REPLACE(UPPER(?), '-', ''), '_', '')";
-
-                    const auto rset1 = db::preparedStmt(query, nameStr, nameStr);
-                    if (!rset1)
-                    {
-                        invalidNameReason = "Internal entity name query failed";
-                    }
-                    else if (rset1->rowsCount() != 0)
-                    {
-                        invalidNameReason = "Name already in use.";
-                    }
-                }
-
-                // TODO: Don't raw-access Lua like this outside of Lua helper code.
-                // (optional) Check if the name contains any words on the bad word list
-                const auto loginSettingsTable = lua["xi"]["settings"]["login"].get<sol::table>();
-                if (auto badWordsList = loginSettingsTable.get_or<sol::table>("BANNED_WORDS_LIST", sol::lua_nil); badWordsList.valid())
-                {
-                    const auto potentialName = to_upper(nameStr);
-                    for (const auto& entry : badWordsList)
-                    {
-                        const auto badWord = to_upper(entry.second.as<std::string>());
-                        if (potentialName.find(badWord) != std::string::npos)
-                        {
-                            invalidNameReason = fmt::format("Name matched with bad words list <{}>.", badWord);
-                        }
-                    }
-                }
+                const std::string nameStr           = CharName;
+                const auto        invalidNameReason = loginHelpers::validateCharacterName(nameStr);
 
                 if (invalidNameReason.has_value())
                 {
@@ -288,7 +221,6 @@ void view_session::read_func()
 
                     // Send error code:
                     // The character name you entered is unavailable. Please choose another name.
-                    // TODO: This message is displayed in Japanese, needs fixing.
                     loginHelpers::generateErrorMessage(buffer_.data(), loginErrors::errorCode::CHARACTER_NAME_UNAVAILABLE);
                     do_write(0x24);
                     return;
@@ -316,6 +248,97 @@ void view_session::read_func()
                     do_write(0x20);
                 }
             }
+        }
+        break;
+        case 0x28: // 40: Renaming a character flagged with renamef
+        {
+            // Character ID is sent at offset 28. New name at offset 36
+            const auto charid = ref<uint32>(buffer_.data(), 28);
+
+            char newNameRaw[PacketNameLength] = {};
+            std::memcpy(newNameRaw, buffer_.data() + 36, PacketNameLength - 1);
+            const std::string newName = newNameRaw;
+
+            // Retrieve expected account ID and flag for given character
+            uint32     accountID  = 0;
+            uint8      renameFlag = 0;
+            const auto rset       = db::preparedStmt("SELECT accid, COALESCE(char_flags.`rename`, 0) AS `rename` "
+                                                     "FROM chars LEFT JOIN char_flags USING(charid) "
+                                                     "WHERE charid = ? LIMIT 1",
+                                                     charid);
+            FOR_DB_SINGLE_RESULT(rset)
+            {
+                accountID  = rset->get<uint32>("accid");
+                renameFlag = rset->get<uint8>("rename");
+            }
+
+            // Check client actually owns character
+            if (accountID == 0 || accountID != session.accountID)
+            {
+                ShowErrorFmt("Account ID {} tried to rename character {} not in their account.", session.accountID, charid);
+                socket_.lowest_layer().close();
+                return;
+            }
+
+            // Check for legitimate flag
+            if (!renameFlag)
+            {
+                ShowWarningFmt("Account ID {} tried to rename character {} that is not flagged for rename.", session.accountID, charid);
+                socket_.lowest_layer().close();
+                return;
+            }
+
+            // Validate the name, using the same rules as char creation
+            if (const auto invalidNameReason = loginHelpers::validateCharacterName(newName); invalidNameReason.has_value())
+            {
+                ShowWarningFmt("rename name error <{}>: {}", newName, *invalidNameReason);
+                loginHelpers::generateErrorMessage(buffer_.data(), loginErrors::errorCode::CHARACTER_NAME_UNAVAILABLE);
+                do_write(0x24);
+                return;
+            }
+
+            // All good: update the name and remove the flag
+            if (!db::preparedStmt("UPDATE chars SET charname = ? WHERE charid = ? AND accid = ?", newName, charid, session.accountID))
+            {
+                loginHelpers::generateErrorMessage(buffer_.data(), loginErrors::errorCode::FAILED_TO_REGISTER_WITH_THE_NAME_SERVER);
+                do_write(0x24);
+                return;
+            }
+
+            db::preparedStmt("UPDATE char_flags SET `rename` = 0 WHERE charid = ?", charid);
+
+            // The client will immediately try to login with the character, so a few things need to happen:
+            // 1. Set the requested char ID as if it was a regular login
+            session.requestedCharacterID = charid;
+
+            // 2. Advance the key accounting for this exchange
+            session.incrementKeyValue += 4;
+
+            // 3. Rename the character in the stored struct
+            if (auto data = dynamic_cast<data_session*>(session.data_session.get()))
+            {
+                data->renameCharInCharInfo(charid, newName);
+            }
+
+            ShowInfoFmt("charid {} renamed to <{}> on account {}", charid, newName, session.accountID);
+
+            // 4. Acknowledge successful exchange, let client proceed.
+            std::memset(buffer_.data(), 0, 0x20);
+            buffer_.data()[0] = 0x20; // size
+
+            buffer_.data()[4] = 0x49; // I
+            buffer_.data()[5] = 0x58; // X
+            buffer_.data()[6] = 0x46; // F
+            buffer_.data()[7] = 0x46; // F
+
+            buffer_.data()[8] = 0x03; // result
+
+            unsigned char hash[16];
+
+            md5(reinterpret_cast<uint8*>(buffer_.data()), hash, 0x20);
+            std::memcpy(buffer_.data() + 12, hash, 16);
+
+            do_write(0x20);
         }
         break;
         case 0x26: // 38: Version + Expansions, "Setting up connection."

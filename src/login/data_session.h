@@ -47,6 +47,7 @@ public:
 
     void deleteCharFromCharInfo(uint32_t charid);
     void addCharIntoCharInfo(const lpkt_chr_info_sub2& charInfo);
+    void renameCharInCharInfo(uint32_t charId, const std::string& newName);
 
 protected:
     void read_func() override;
