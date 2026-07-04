@@ -1401,7 +1401,7 @@ xi.mobskills.mobBreathMove = function(mob, target, skill, action, skillParams)
     mAccuracyBonus = xi.combat.physical.calculateTPfactor(tpValue, mAccuracyBonusfTP)
 
     -- Damage Multipliers
-    local systemBonus            = 1 -- 1 + utils.getEcosystemStrengthBonus(mob:getEcosystem(), target:getEcosystem()) / 4
+    local systemBonus            = xi.combat.damage.ecosystemMultiplier(mob, target, mob:getEcosystem())
     local elementalSDT           = xi.combat.damage.magicalElementSDT(target, actionElement)
     local resistRate             = 1
     local dayAndWeather          = xi.spells.damage.calculateDayAndWeather(mob, actionElement, false)
@@ -1434,7 +1434,7 @@ xi.mobskills.mobBreathMove = function(mob, target, skill, action, skillParams)
     end
 
     -- TODO: Need more research about monster correlation.
-    -- local systemBonus     = 1 + utils.getEcosystemStrengthBonus(mob:getEcosystem(), target:getEcosystem()) / 4
+    -- local systemBonus     = xi.combat.damage.ecosystemMultiplier(mob, target, mob:getEcosystem())
 
     damage = math.floor(damage * systemBonus)
     damage = math.floor(damage * elementalSDT)
