@@ -23,18 +23,13 @@
 
 #include <map>
 
-#include <common/md52.h>
 #include <common/mmo.h>
 #include <common/types/maybe.h>
 #include <common/utils.h>
-#include <common/xirand.h>
 
-#include "login_errors.h"
 #include "login_packets.h"
 #include "nlohmann/json.hpp"
 #include "session.h"
-
-#include <iterator>
 
 using json = nlohmann::json;
 
@@ -86,6 +81,8 @@ enum FEATURE_DISPLAY : uint16
 };
 
 bool isStringMalformed(const std::string& str, std::size_t max_length);
+
+auto validateCharacterName(const std::string& name) -> Maybe<std::string>;
 
 auto isZoneAtPlayerCap(uint16 zoneId, bool isGM) -> bool;
 

@@ -21,8 +21,216 @@
 
 #include "login_helpers.h"
 
+#include "common/md52.h"
+
+#include <common/lua.h>
+
+#include <array>
+#include <cstring>
+#include <fstream>
+
 namespace loginHelpers
 {
+
+namespace
+{
+using NameHash = std::array<uint8, 16>;
+
+auto md5Of(char* text, std::size_t length) -> NameHash
+{
+    NameHash out{};
+    md5(reinterpret_cast<uint8*>(text), out.data(), static_cast<int32>(length));
+    return out;
+}
+
+auto contains(const std::vector<NameHash>& set, const NameHash& hash) -> bool
+{
+    return std::ranges::binary_search(set, hash);
+}
+
+struct BadNameSets
+{
+    std::vector<NameHash> exact;
+    std::vector<NameHash> substr;
+    std::vector<NameHash> prefix;
+    std::vector<NameHash> suffix;
+};
+
+// Loads sets of bad names and returns a cached copy on subsequent calls
+//
+// res/badnames.dat is a squashed version of retail bad name dictionaries (entrynw/entry/entry_f/entry_b.dic)
+// Format:
+// uint32 magic ("BNF1")
+// uint32 counts[4] - Number of entries per category (exact, substring, prefix, suffix)
+// Followed by four blocks of N ("counts") MD5 digests (16 bytes each)
+auto badNames() -> const BadNameSets&
+{
+    static const BadNameSets sets = []
+    {
+        BadNameSets   s;
+        std::ifstream file("res/badnames.dat", std::ios::binary);
+        char          magic[4]{};
+        uint32        counts[4]{};
+
+        if (!file.read(magic, sizeof(magic)) || std::memcmp(magic, "BNF1", sizeof(magic)) != 0 ||
+            !file.read(reinterpret_cast<char*>(counts), sizeof(counts)))
+        {
+            ShowWarningFmt("Character name filter (res/badnames.dat) missing or malformed; disabled.");
+            return s;
+        }
+
+        const auto readBlock = [&](const uint32 count)
+        {
+            std::vector<NameHash> out;
+            for (NameHash h{}; out.size() < count && file.read(reinterpret_cast<char*>(h.data()), h.size());)
+            {
+                out.push_back(h);
+            }
+
+            std::ranges::sort(out);
+            return out;
+        };
+
+        s.exact  = readBlock(counts[0]);
+        s.substr = readBlock(counts[1]);
+        s.prefix = readBlock(counts[2]);
+        s.suffix = readBlock(counts[3]);
+
+        ShowInfoFmt("Loaded character name filters ({} exact, {} substring, {} prefix, {} suffix)",
+                    s.exact.size(),
+                    s.substr.size(),
+                    s.prefix.size(),
+                    s.suffix.size());
+        return s;
+    }();
+
+    return sets;
+}
+
+// Character name vulgarity check
+// Mirrors retail client logic 1:1
+auto isVulgarName(const std::string& name) -> bool
+{
+    // Run all checks against lowercased string
+    std::string       canon                     = to_lower(name);
+    const std::size_t n                         = canon.size();
+    const auto& [exact, substr, prefix, suffix] = badNames();
+
+    // 1. Name cannot match ANY entry in the "exact" set
+    if (contains(exact, md5Of(canon.data(), n)))
+    {
+        return true;
+    }
+
+    // 2. Name cannot contain any substring from the "substr" set
+    for (std::size_t i = 0; i < n; ++i)
+    {
+        for (std::size_t len = 2; i + len <= n; ++len)
+        {
+            const NameHash hash = md5Of(canon.data() + i, len);
+            // 3. Name cannot be prefixed by any entry in the "prefix" set
+            if (contains(substr, hash) || (i == 0 && contains(prefix, hash)))
+            {
+                return true;
+            }
+        }
+    }
+
+    // 4. Name cannot end with any entry in the "suffix" set
+    // Note: Retail handling here is a little odd and only cares about the leftmost match.
+    //   Cliff -> blocked
+    //   Cliffaff -> not blocked
+    for (std::size_t i = 0; i < n; ++i)
+    {
+        for (std::size_t len = 2; i + len <= n; ++len)
+        {
+            if (contains(suffix, md5Of(canon.data() + i, len)))
+            {
+                return i + len == n;
+            }
+        }
+    }
+
+    return false;
+}
+} // namespace
+
+Maybe<std::string> validateCharacterName(const std::string& name)
+{
+    // Sanitize name & check for invalid characters
+    for (const auto& letter : name)
+    {
+        if (!std::isalpha(static_cast<unsigned char>(letter)))
+        {
+            return "Invalid characters present in name.";
+        }
+    }
+
+    // Check for invalid length name
+    // NOTE: The client checks for this. This is to guard against packet injection.
+    if (name.size() < 3 || name.size() > 15)
+    {
+        return "Invalid name length.";
+    }
+
+    // Check if the name is already in use by another character
+    const auto rset0 = db::preparedStmt("SELECT charname FROM chars WHERE charname LIKE ?", name);
+    if (!rset0)
+    {
+        return "Internal entity name query failed.";
+    }
+    else if (rset0->rowsCount() != 0)
+    {
+        return "Name already in use.";
+    }
+
+    // (optional) Check if the name is in use by NPC or Mob entities
+    if (settings::get<bool>("login.DISABLE_MOB_NPC_CHAR_NAMES"))
+    {
+        const auto query =
+            "SELECT polutils_name AS `name` FROM npc_list "
+            "WHERE REPLACE(REPLACE(UPPER(polutils_name), '-', ''), '_', '') "
+            "LIKE REPLACE(REPLACE(UPPER(?), '-', ''), '_', '') "
+            "UNION "
+            "SELECT packet_name AS `name` FROM mob_pools "
+            "WHERE REPLACE(REPLACE(UPPER(packet_name), '-', ''), '_', '') "
+            "LIKE REPLACE(REPLACE(UPPER(?), '-', ''), '_', '')";
+
+        const auto rset1 = db::preparedStmt(query, name, name);
+        if (!rset1)
+        {
+            return "Internal entity name query failed";
+        }
+        else if (rset1->rowsCount() != 0)
+        {
+            return "Name already in use.";
+        }
+    }
+
+    // TODO: Don't raw-access Lua like this outside of Lua helper code.
+    // (optional) Check if the name contains any words on the bad word list
+    const auto loginSettingsTable = lua["xi"]["settings"]["login"].get<sol::table>();
+    if (auto badWordsList = loginSettingsTable.get_or<sol::table>("BANNED_WORDS_LIST", sol::lua_nil); badWordsList.valid())
+    {
+        const auto potentialName = to_upper(name);
+        for (const auto& entry : badWordsList)
+        {
+            const auto badWord = to_upper(entry.second.as<std::string>());
+            if (potentialName.find(badWord) != std::string::npos)
+            {
+                return fmt::format("Name matched with bad words list <{}>.", badWord);
+            }
+        }
+    }
+
+    // Retail name vulgarity check.
+    if (isVulgarName(name))
+    {
+        return "Name matched the character name filter.";
+    }
+
+    return std::nullopt;
+}
 
 // [ip_addr][session_hash] = session
 std::unordered_map<std::string, std::map<std::string, session_t>> authenticatedSessions_;
@@ -351,8 +559,8 @@ int32 createCharacter(session_t& session, uint8* buf, lpkt_chr_info_sub2& charIn
     charInfo.ffxi_id_world     = charIdMain;
     charInfo.worldid           = worldId;
     charInfo.status            = 1; // 0 = Invalid/Hidden, 1 = Available, 2 = Disabled (unpaid)
-    charInfo.race_change       = 0; // 0 = no race change service, 1 = race change service (gold star icon) (NOT YET SUPPORTED!)
-    charInfo.renamef           = 0; // 0 = no rename required, 1 = rename required (NOT YET SUPPORTED!)
+    charInfo.race_change       = 0;
+    charInfo.renamef           = 0;
     charInfo.ffxi_id_world_tbl = charIdExtra;
 
     ShowDebug(fmt::format("char <{}> successfully saved", charName));
