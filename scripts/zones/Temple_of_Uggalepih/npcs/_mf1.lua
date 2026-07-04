@@ -17,7 +17,7 @@ entity.onTrigger = function(player, npc)
     end
 
     if guardian ~= nil and guardian:getHP() > 0 and guardian:getTarget() == nil then
-        guardian:updateClaim(player)
+        guardian:engage(player:getTargID())
     end
 end
 
