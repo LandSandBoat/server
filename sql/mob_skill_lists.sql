@@ -2299,7 +2299,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Cryptonberry_COP',500,785); -- Light of P
 INSERT INTO `mob_skill_lists` VALUES ('Cryptonberry_COP',500,786); -- Lateral Slash
 INSERT INTO `mob_skill_lists` VALUES ('Cryptonberry_COP',500,787); -- Vertical Slash
 INSERT INTO `mob_skill_lists` VALUES ('Cryptonberry_COP',500,788); -- Throat Stab
--- 501 free
+INSERT INTO `mob_skill_lists` VALUES ('Son_of_Anansi',501,959); -- Sickle Slash
+INSERT INTO `mob_skill_lists` VALUES ('Son_of_Anansi',501,960); -- Acid Spray
+INSERT INTO `mob_skill_lists` VALUES ('Son_of_Anansi',501,961); -- Spider Web
 -- 502 free
 INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,347);
 INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,419);
