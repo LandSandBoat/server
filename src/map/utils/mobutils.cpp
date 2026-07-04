@@ -30,6 +30,7 @@
 #include "battlefield.h"
 #include "battleutils.h"
 #include "grades.h"
+#include "instance.h"
 #include "items/item_weapon.h"
 #include "lua/luautils.h"
 #include "map_engine.h"
@@ -1824,7 +1825,12 @@ auto InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* instance) -> CMob
         PMob->m_TrueDetection = rset->get<bool>("true_detection");
         PMob->setMobMod(MOBMOD_DETECTION, rset->get<int16>("detects"));
 
-        if (CZone* PZone = zoneutils::GetZone(zoneID))
+        if (instance)
+        {
+            instance->AssignDynamicTargIDandLongID(PMob);
+            instance->InsertMOB(PMob);
+        }
+        else if (CZone* PZone = zoneutils::GetZone(zoneID))
         {
             PZone->GetZoneEntities()->AssignDynamicTargIDandLongID(PMob);
             PZone->GetZoneEntities()->InsertMOB(PMob);
