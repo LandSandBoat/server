@@ -27,8 +27,10 @@
 
 namespace Exdata
 {
+
 // Serializes any item without conflicting exdata but the only known retail usage is LuShang +1 and Ebisu +1
 #pragma pack(push, 1)
+
 struct Serialized
 {
     AugmentKindFlags    AugmentKind;
@@ -43,5 +45,7 @@ struct Serialized
     void toTable(sol::table& table) const;
     void fromTable(const sol::table& data);
 };
+
 #pragma pack(pop)
+
 } // namespace Exdata

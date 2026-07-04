@@ -26,6 +26,7 @@
 #include <vector>
 
 class CCharEntity;
+
 class GMCallContainer
 {
 public:

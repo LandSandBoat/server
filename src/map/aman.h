@@ -24,6 +24,7 @@
 #include "common/cbasetypes.h"
 
 class CCharEntity;
+
 class CAMANContainer
 {
 public:

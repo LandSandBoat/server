@@ -31,7 +31,9 @@
 
 namespace xi::items::detail
 {
+
 struct ItemAccess;
+
 } // namespace xi::items::detail
 
 // The main type of item m_type

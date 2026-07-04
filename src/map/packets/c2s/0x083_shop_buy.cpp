@@ -58,7 +58,7 @@ void GP_CLI_COMMAND_SHOP_BUY::process(MapSession* PSession, CCharEntity* PChar) 
 
     // Ensure player meets the item purchase requirement, if any
     const bool meetsRequirement = std::visit(
-        [&]<typename T>(T const& restriction) -> bool
+        [&]<typename T>(const T& restriction) -> bool
         {
             if constexpr (std::is_same_v<T, JobRestriction>)
             {

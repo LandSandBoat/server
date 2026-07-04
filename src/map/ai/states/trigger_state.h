@@ -29,11 +29,14 @@ class CTriggerState : public CState
 public:
     CTriggerState(CBaseEntity* PEntity, uint16 targid, bool door = false);
     virtual bool Update(timer::time_point tick) override;
+
     virtual void Cleanup(timer::time_point tick) override
     {
     }
+
     virtual bool CanChangeState() override;
     virtual bool CanFollowPath() override;
+
     virtual bool CanInterrupt() override
     {
         return false;

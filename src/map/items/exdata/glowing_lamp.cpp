@@ -23,7 +23,9 @@
 
 namespace
 {
+
 constexpr uint16_t CHAMBER_ID_OFFSET = 0x1D;
+
 }
 
 void Exdata::GlowingLamp::toTable(sol::table& table) const

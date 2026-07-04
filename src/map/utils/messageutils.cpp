@@ -25,6 +25,7 @@
 
 namespace messageutils
 {
+
 auto GetAoEVariant(const MsgBasic primary) -> MsgBasic
 {
     const auto it = aoeVariants.find(primary);
@@ -36,4 +37,5 @@ auto GetAbsorbVariant(const MsgBasic primary) -> MsgBasic
     const auto it = absorbVariants.find(primary);
     return it != absorbVariants.end() ? it->second : primary;
 }
+
 } // namespace messageutils

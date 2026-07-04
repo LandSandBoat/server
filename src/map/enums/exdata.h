@@ -44,6 +44,7 @@ enum class AugmentSubKindFlags : uint8_t
     Trial      = 0x40, // Magian trial
     Evolith    = 0x80,
 };
+
 } // namespace Exdata
 
 template <>
@@ -95,4 +96,5 @@ enum class Type : uint8_t
     HoneymoonTicket    = 26,
     WeaponUnlock       = 27,
 };
+
 } // namespace Exdata

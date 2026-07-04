@@ -171,6 +171,7 @@ public:
     virtual void HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override
     {
     }
+
     virtual void Die() override;
 
     virtual void OnWeaponSkillFinished(CWeaponSkillState&, action_t&) override;

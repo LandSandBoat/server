@@ -27,7 +27,9 @@
 
 namespace Exdata
 {
+
 #pragma pack(push, 1)
+
 // Bundled augments (Odyssey, JSE necks, Unity belts).
 // Augments referenced by DAT table index (see xi.data.augments.bundles).
 // MaxRankTier (2 bits): 0=15, 1=20, 2=25, 3=30.
@@ -50,5 +52,7 @@ struct AugmentBundle
     void toTable(sol::table& table) const;
     void fromTable(const sol::table& data);
 };
+
 #pragma pack(pop)
+
 } // namespace Exdata

@@ -111,6 +111,7 @@ void ClearTraitsList()
         jobTraitList.clear();
     }
 }
+
 /************************************************************************
  *                                                                       *
  *  Get List of Traits by Main Job or Sub Job                            *

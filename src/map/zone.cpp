@@ -20,6 +20,7 @@
 */
 
 #include "packets/s2c/0x057_weather.h"
+
 namespace
 {
 

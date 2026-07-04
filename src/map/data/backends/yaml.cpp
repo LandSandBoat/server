@@ -35,11 +35,13 @@ namespace xi::data::backends
 
 namespace
 {
+
 // ryml can pass a null location name to the error callbacks.
 auto toView(const ryml::csubstr s) -> std::string_view
 {
     return s.str ? std::string_view(s.str, s.len) : std::string_view{};
 }
+
 } // namespace
 
 void YAMLBackend::onErrorBasic(const ryml::csubstr msg, const ryml::ErrorDataBasic& errdata, void* /*ud*/)

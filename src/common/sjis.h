@@ -38,6 +38,7 @@
 
 namespace encoding
 {
+
 // clang-format off
 // Direct index by Unicode codepoint. 0 = unmapped.
 inline constexpr uint16_t UnicodeToSjis[65536] = {

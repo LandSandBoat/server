@@ -24,9 +24,11 @@
 
 namespace
 {
+
 constexpr uint8 DIRECTION_C2S       = 0x00; // Client to Server (incoming)
 constexpr uint8 DIRECTION_S2C       = 0x01; // Server to Client (outgoing)
 constexpr auto  DEFAULT_CAPTURE_DIR = "./log/packets";
+
 } // namespace
 
 class PacketCapModule : public CPPModule

@@ -24,6 +24,7 @@
 #include "base.h"
 
 class CCharEntity;
+
 struct expansion_addon_t
 {
     uint16_t ACP : 4;     // PS2: data

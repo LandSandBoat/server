@@ -27,7 +27,9 @@
 
 namespace Exdata
 {
+
 #pragma pack(push, 1)
+
 // Mezzotint augments (Delve, Geas Fete).
 // 3 augment slots using client LUT indices (see xi.mezzotint.augment).
 
@@ -52,5 +54,7 @@ struct AugmentMezzotint
     void toTable(sol::table& table) const;
     void fromTable(const sol::table& data);
 };
+
 #pragma pack(pop)
+
 } // namespace Exdata

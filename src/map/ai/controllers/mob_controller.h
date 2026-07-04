@@ -31,6 +31,7 @@ enum class FollowType : uint8
 };
 
 class CMobEntity;
+
 class CMobController : public CController
 {
 public:

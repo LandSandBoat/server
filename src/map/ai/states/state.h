@@ -38,6 +38,7 @@ public:
     , packet(std::move(_msg))
     {
     }
+
     std::unique_ptr<CBasicPacket> packet;
 };
 
@@ -56,6 +57,7 @@ public:
     auto GetErrorMsg() -> std::unique_ptr<CBasicPacket>;
 
     bool DoUpdate(timer::time_point tick);
+
     // try interrupt (on hit)
     virtual void TryInterrupt(CBattleEntity* PAttacker)
     {

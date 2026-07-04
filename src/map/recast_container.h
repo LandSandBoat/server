@@ -36,6 +36,7 @@ enum RECASTTYPE
     RECAST_ABILITY = 2,
     RECAST_LOOT    = 3
 };
+
 #define MAX_RECASTTPE_SIZE 4
 
 struct Recast_t
@@ -72,6 +73,7 @@ public:
     void         AddLootRecast(LootRecastID id, timer::duration duration);
     Recast_t*    Load(RECASTTYPE type, Recast id, timer::duration duration, timer::duration chargeTime = 0s, uint8 maxCharges = 0);
     virtual void ResetAbilities();
+
     virtual void ChangeJob()
     {
     }
@@ -81,6 +83,7 @@ public:
     Recast_t*             GetLootRecast(LootRecastID id);
 
     CRecastContainer(CBattleEntity* PChar);
+
     virtual ~CRecastContainer()
     {
     }

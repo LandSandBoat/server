@@ -25,7 +25,9 @@
 
 namespace Exdata
 {
+
 #pragma pack(push, 1)
+
 struct SoulReflector
 {
     uint64_t NameFirst : 6;
@@ -47,5 +49,7 @@ struct SoulReflector
     void toTable(sol::table& table) const;
     void fromTable(const sol::table& data);
 };
+
 #pragma pack(pop)
+
 } // namespace Exdata

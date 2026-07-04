@@ -26,6 +26,7 @@
 enum class GP_CLI_COMMAND_PBX_BOXNO : int8_t;
 enum class GP_CLI_COMMAND_PBX_COMMAND : uint8_t;
 class CItem;
+
 // PS2: GC_PBOX_SEND
 struct GC_PBOX_SEND
 {
@@ -82,6 +83,7 @@ public:
         int8_t  ResParam1;  // PS2: ResParam1
         int8_t  ResParam2;  // PS2: ResParam2
         int8_t  ResParam3;  // PS2: ResParam3
+
         union
         {
             uint32_t          Represent; // PS2: Represent

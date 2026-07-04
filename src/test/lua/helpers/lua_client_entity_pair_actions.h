@@ -29,6 +29,7 @@
 enum class SpellID : uint16;
 class CLuaClientEntityPair;
 class CLuaBaseEntity;
+
 class CLuaClientEntityPairActions
 {
 public:

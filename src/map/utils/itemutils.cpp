@@ -45,9 +45,11 @@
 
 namespace
 {
+
 std::array<std::unique_ptr<CItem>, MAX_ITEMID> itemTemplates;
 std::unique_ptr<CItemWeapon>                   unarmedItem;
 std::unique_ptr<CItemWeapon>                   unarmedH2HItem;
+
 } // namespace
 
 std::array<DropList_t*, MAX_DROPID> g_pDropList; // global array of monster droplist items

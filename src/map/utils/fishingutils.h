@@ -29,6 +29,7 @@
 #include <vector>
 
 enum class GP_CLI_COMMAND_FISHING_2_MODE : uint8_t;
+
 struct lsbret_t
 { // lose/snap/break return values
     uint8 failReason;

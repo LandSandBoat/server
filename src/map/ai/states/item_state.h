@@ -40,6 +40,7 @@ public:
     auto Update(timer::time_point tick) -> bool override;
     void Cleanup(timer::time_point tick) override;
     auto CanChangeState() -> bool override;
+
     auto CanFollowPath() -> bool override
     {
         return false;

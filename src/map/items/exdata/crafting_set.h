@@ -25,7 +25,9 @@
 
 namespace Exdata
 {
+
 #pragma pack(push, 1)
+
 struct CraftingSet
 {
     uint16_t padding00;
@@ -36,5 +38,7 @@ struct CraftingSet
     void toTable(sol::table& table) const;
     void fromTable(const sol::table& data);
 };
+
 #pragma pack(pop)
+
 } // namespace Exdata

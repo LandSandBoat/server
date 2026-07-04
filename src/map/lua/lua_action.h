@@ -32,6 +32,7 @@ enum class ActionInfo : uint8_t;
 enum class ActionResolution : uint8_t;
 struct action_t;
 struct action_target_t;
+
 class CLuaAction
 {
     action_t* m_PLuaAction;

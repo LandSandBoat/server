@@ -24,6 +24,7 @@
 #include "base.h"
 
 class CCharEntity;
+
 struct GP_SHOP
 {
     uint32_t ItemPrice; // PS2: ItemPrice

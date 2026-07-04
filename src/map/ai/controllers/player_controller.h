@@ -31,6 +31,7 @@ class CPlayerController : public CController
 {
 public:
     CPlayerController(CCharEntity*);
+
     virtual ~CPlayerController()
     {
     }

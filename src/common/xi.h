@@ -39,6 +39,7 @@
 #include "types/fn.h"
 #include "types/maybe.h"
 #include "types/variant.h"
+
 namespace xi
 {
 

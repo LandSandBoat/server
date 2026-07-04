@@ -34,6 +34,7 @@
 
 namespace xi::data
 {
+
 // Load `data/<path><B::kExtension>` dataset.
 // Enabled modules with matching filenames get loaded and deep merged into the dataset
 template <class T, NodeBackend B>
@@ -56,6 +57,7 @@ auto loadDataSet(std::string_view dataPath) -> std::unordered_map<decltype(T::Id
                 moduleSuffix);
     return result;
 }
+
 } // namespace xi::data
 
 inline auto LoadStatusEffects()

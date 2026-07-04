@@ -94,6 +94,7 @@ inline uint32 get_second(const time_point& tp = now())
     const clock::seconds seconds     = std::chrono::floor<clock::seconds>(since_epoch);
     return static_cast<uint32>((seconds % minutes).count());
 }
+
 // minutes after the hour – [​0​, 59]
 inline uint32 get_minute(const time_point& tp = now())
 {
@@ -102,6 +103,7 @@ inline uint32 get_minute(const time_point& tp = now())
     const clock::minutes minutes     = std::chrono::floor<clock::minutes>(since_epoch);
     return static_cast<uint32>((minutes % hours).count());
 }
+
 // hours since midnight – [​0​, 23]
 inline uint32 get_hour(const time_point& tp = now())
 {
@@ -110,6 +112,7 @@ inline uint32 get_hour(const time_point& tp = now())
     const clock::hours hours       = std::chrono::floor<clock::hours>(since_epoch);
     return static_cast<uint32>((hours % days).count());
 }
+
 // day of the month – [1, 30]
 inline uint32 get_monthday(const time_point& tp = now())
 {
@@ -118,6 +121,7 @@ inline uint32 get_monthday(const time_point& tp = now())
     const clock::days   days        = std::chrono::ceil<clock::days>(since_epoch);
     return static_cast<uint32>((days % months).count());
 }
+
 // current month – [​1​, 12]
 inline uint32 get_month(const time_point& tp = now())
 {
@@ -126,6 +130,7 @@ inline uint32 get_month(const time_point& tp = now())
     const clock::months months      = std::chrono::ceil<clock::months>(since_epoch);
     return static_cast<uint32>((months % years).count());
 }
+
 // years since 886
 inline int32 get_year(const time_point& tp = now())
 {
@@ -133,6 +138,7 @@ inline int32 get_year(const time_point& tp = now())
     const clock::years years       = std::chrono::floor<clock::years>(since_epoch);
     return static_cast<int32>(years.count());
 }
+
 // days since Firesday – [​0​, 7]
 inline uint32 get_weekday(const time_point& tp = now())
 {
@@ -141,6 +147,7 @@ inline uint32 get_weekday(const time_point& tp = now())
     const clock::days  days        = std::chrono::floor<clock::days>(since_epoch);
     return static_cast<uint32>((days % weeks).count());
 }
+
 // days since 1st day of year – [​0​, 360]
 inline uint32 get_yearday(const time_point& tp = now())
 {

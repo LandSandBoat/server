@@ -25,7 +25,9 @@
 
 namespace Exdata
 {
+
 #pragma pack(push, 1)
+
 // Chocobo Egg exdata (items: 2312, 2314, 2317-2319)
 // Reference: https://github.com/Ivaar/Windower-addons/tree/master/chococard
 struct ChocoboEgg
@@ -43,5 +45,7 @@ struct ChocoboEgg
     void toTable(sol::table& table) const;
     void fromTable(const sol::table& data);
 };
+
 #pragma pack(pop)
+
 } // namespace Exdata

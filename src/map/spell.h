@@ -29,6 +29,7 @@
 enum class ActionAnimation : uint16_t;
 enum class ActionModifier : uint32_t;
 enum class FourCC : uint32_t;
+
 enum SPELLGROUP
 {
     SPELLGROUP_NONE      = 0,

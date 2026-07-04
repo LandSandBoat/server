@@ -33,6 +33,7 @@
 
 namespace
 {
+
 constexpr float CHARREQ2_SYNC_RANGE = 50.0f;
 
 auto resolveByUniqueNo(const uint32 uniqueNo) -> CBaseEntity*
@@ -49,6 +50,7 @@ auto resolveByUniqueNo(const uint32 uniqueNo) -> CBaseEntity*
 
     return zoneutils::GetChar(uniqueNo);
 }
+
 } // namespace
 
 auto GP_CLI_COMMAND_CHARREQ2::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

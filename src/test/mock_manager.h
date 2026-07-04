@@ -28,6 +28,7 @@
 
 class CLuaSpy;
 class CLuaStub;
+
 class MockManager
 {
 public:

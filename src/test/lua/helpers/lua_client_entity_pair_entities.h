@@ -28,6 +28,7 @@
 class CLuaBaseEntity;
 class CLuaTestEntity;
 class CLuaClientEntityPair;
+
 class CLuaClientEntityPairEntities
 {
 public:

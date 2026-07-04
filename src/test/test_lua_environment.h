@@ -22,6 +22,7 @@
 #pragma once
 
 class MockManager;
+
 class TestLuaEnvironment
 {
 public:

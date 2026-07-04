@@ -28,6 +28,7 @@
 #include "zone.h"
 
 class CZone;
+
 class CLuaZone
 {
     CZone* m_pLuaZone;

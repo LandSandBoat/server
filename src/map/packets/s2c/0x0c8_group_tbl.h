@@ -25,6 +25,7 @@
 
 enum class PartyKind : uint8_t;
 class CParty;
+
 struct GROUP_TBL
 {
     uint32_t UniqueNo;              // PS2: UniqueNo

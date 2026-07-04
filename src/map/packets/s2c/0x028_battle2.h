@@ -25,6 +25,7 @@
 #include "sol/forward.hpp"
 
 struct action_t;
+
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x0028
 // This packet is sent by the server to inform clients of action related events.
 // Note: Highly complex packet, READ the documentation above first.

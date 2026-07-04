@@ -24,6 +24,7 @@
 #include "base.h"
 
 enum class Weather : uint16_t;
+
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x0057
 // This packet is sent by the server to inform the client of weather changes.
 class GP_SERV_COMMAND_WEATHER final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_WEATHER, GP_SERV_COMMAND_WEATHER>

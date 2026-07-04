@@ -25,6 +25,7 @@
 
 enum class GP_SERV_COMMAND_INFLUENCE_MODE : uint8_t;
 class CCharEntity;
+
 struct coalitionranks_t
 {
     uint32_t Pioneers : 4;

@@ -25,6 +25,7 @@
 
 struct EventInfo;
 class CCharEntity;
+
 // PS2: GP_SERV_POS_HEAD
 struct GP_SERV_POS_HEAD
 {

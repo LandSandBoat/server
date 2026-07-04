@@ -74,6 +74,7 @@ auto sysrandom(void* dst, size_t dstlen) -> size_t;
 
 namespace xirand
 {
+
 /// @brief Accessor for the thread-local engine. It is guaranteed to be correctly seeded.
 [[nodiscard]] auto rng() -> SelectedRandomEngine&;
 
@@ -129,7 +130,8 @@ template <std::ranges::random_access_range R>
 /// @example GetWeightedElement(std::map<std::string, double>{{"Common", 70}, {"Rare", 30}})
 /// @throws std::out_of_range if the table is empty and key_type is not default constructible.
 template <typename Container>
-[[nodiscard]] inline auto GetWeightedElement(Container const& table) -> typename Container::key_type;
+[[nodiscard]] inline auto GetWeightedElement(const Container& table) -> typename Container::key_type;
+
 } // namespace xirand
 
 //
@@ -202,7 +204,7 @@ template <std::ranges::random_access_range R>
 }
 
 template <typename Container>
-[[nodiscard]] inline auto xirand::GetWeightedElement(Container const& table) -> typename Container::key_type
+[[nodiscard]] inline auto xirand::GetWeightedElement(const Container& table) -> typename Container::key_type
 {
     if (table.empty())
     {
@@ -221,7 +223,7 @@ template <typename Container>
     weights.reserve(table.size());
     elements.reserve(table.size());
 
-    for (auto const& [item, weight] : table)
+    for (const auto& [item, weight] : table)
     {
         elements.push_back(item);
         weights.push_back(static_cast<double>(weight));

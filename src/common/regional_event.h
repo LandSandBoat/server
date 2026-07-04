@@ -57,6 +57,7 @@ enum ConquestMessage : uint8
     // Influence point update from any zone to world.
     M2W_AddInfluencePoints,
 };
+
 DECLARE_FORMAT_AS_UNDERLYING(ConquestMessage);
 
 // W2M_BroadcastInfluencePoints
@@ -87,6 +88,7 @@ struct ConquestAddInfluencePoints
 enum BesiegedMessage : uint8
 {
 };
+
 DECLARE_FORMAT_AS_UNDERLYING(BesiegedMessage);
 
 //
@@ -96,6 +98,7 @@ DECLARE_FORMAT_AS_UNDERLYING(BesiegedMessage);
 enum CampaignMessage : uint8
 {
 };
+
 DECLARE_FORMAT_AS_UNDERLYING(CampaignMessage);
 
 //
@@ -105,4 +108,5 @@ DECLARE_FORMAT_AS_UNDERLYING(CampaignMessage);
 enum ColonizationMessage : uint8
 {
 };
+
 DECLARE_FORMAT_AS_UNDERLYING(ColonizationMessage);

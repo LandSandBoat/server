@@ -233,6 +233,7 @@ uint16 GetJugWeaponDamage(CPetEntity* PPet)
     float MainLevel = PPet->GetMLevel();
     return (uint16)(MainLevel * (MainLevel < 40 ? 1.4 - MainLevel / 100 : 1));
 }
+
 uint16 GetJugBase(CPetEntity* PMob, uint8 rank)
 {
     uint8 lvl = PMob->GetMLevel();
@@ -278,6 +279,7 @@ uint16 GetJugBase(CPetEntity* PMob, uint8 rank)
     }
     return 0;
 }
+
 uint16 GetBaseToRank(uint8 rank, uint16 lvl)
 {
     switch (rank)

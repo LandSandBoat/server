@@ -29,6 +29,7 @@
 
 enum class PacketC2S : uint16_t;
 class CLuaClientEntityPair;
+
 class CLuaClientEntityPairPackets
 {
 public:

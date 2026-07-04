@@ -33,11 +33,13 @@
 
 namespace
 {
+
 auto allocTxId() -> uint64
 {
     static std::atomic<uint64> counter{ 1 };
     return counter.fetch_add(1, std::memory_order_relaxed);
 }
+
 } // namespace
 
 Transaction::Transaction()

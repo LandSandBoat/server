@@ -25,7 +25,9 @@
 
 namespace Exdata
 {
+
 #pragma pack(push, 1)
+
 struct RaceCertificate
 {
     uint32_t RaceId : 18;
@@ -36,5 +38,7 @@ struct RaceCertificate
     void toTable(sol::table& table) const;
     void fromTable(const sol::table& data);
 };
+
 #pragma pack(pop)
+
 } // namespace Exdata

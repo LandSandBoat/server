@@ -25,9 +25,11 @@
 
 namespace Exdata
 {
+
 // NOTE: Mode 0 used to exist packing both TimeValue and Level in a single uint32_t (29 + 3) but only Mode 1 is used nowadays.
 // Only Mode 1 is implemented here.
 #pragma pack(push, 1)
+
 struct BrennerBook
 {
     uint32_t TimeValue; // Seconds since epoch 1009929600 (Jan 2, 2002 00:00 UTC)
@@ -39,5 +41,7 @@ struct BrennerBook
     void toTable(sol::table& table) const;
     void fromTable(const sol::table& data);
 };
+
 #pragma pack(pop)
+
 } // namespace Exdata

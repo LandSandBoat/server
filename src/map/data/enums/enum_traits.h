@@ -51,6 +51,7 @@ inline constexpr bool isFlagEnum = false;
 
 namespace enum_detail
 {
+
 // Slug -> enum. Throws on miss; typeName goes in the message.
 template <class E>
 auto fromName(const std::string_view name, const std::span<const std::pair<std::string_view, E>> entries, const std::string_view typeName) -> E
@@ -86,6 +87,7 @@ auto toName(const E value, const std::span<const std::pair<std::string_view, E>>
     const auto it = table.find(value);
     return it != table.end() ? it->second : std::string_view{ "<unknown>" };
 }
+
 } // namespace enum_detail
 
 } // namespace xi::data

@@ -530,6 +530,7 @@ struct Merit_t
             uint8  next;  // required merit points for next upgrade
             uint8  count; // number of upgrades
         };
+
         uint32 data; // data sent in packet
     };
 

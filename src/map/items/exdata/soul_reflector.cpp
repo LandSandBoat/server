@@ -25,6 +25,7 @@
 
 namespace
 {
+
 constexpr uint32_t SKILL_ID_BITS    = 12;                               // 12 bits per skill ID
 constexpr uint32_t SKILL_LEVEL_BITS = 7;                                // 7 bits per skill level
 constexpr uint32_t BITS_PER_SLOT    = SKILL_ID_BITS + SKILL_LEVEL_BITS; // 19 bits per feral skill slot
@@ -62,6 +63,7 @@ auto getBitsLE(const uint8_t* buf, int32_t bitOffset, const uint8_t numBits) -> 
 
     return result;
 }
+
 } // anonymous namespace
 
 void Exdata::SoulReflector::toTable(sol::table& table) const

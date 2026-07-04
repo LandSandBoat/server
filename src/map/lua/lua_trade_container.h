@@ -26,6 +26,7 @@
 #include "luautils.h"
 
 class CTradeContainer;
+
 class CLuaTradeContainer
 {
     CTradeContainer* m_pMyTradeContainer;

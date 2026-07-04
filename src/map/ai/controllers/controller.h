@@ -36,9 +36,11 @@ public:
     using IgnoreRecastsAndCosts = xi::Flag<struct IgnoreRecastsAndCostsTag>;
 
     CController(CBattleEntity* _POwner);
+
     virtual ~CController()
     {
     }
+
     virtual auto Tick(timer::time_point tick) -> Task<void> = 0;
     virtual void Despawn();
     virtual void Reset();
@@ -48,6 +50,7 @@ public:
     virtual bool Disengage();
     virtual bool WeaponSkill(uint16 targid, uint16 wsid);
     virtual bool RangedAttack(uint16 targid);
+
     virtual bool Ability(uint16 targid, uint16 abilityid)
     {
         return false;

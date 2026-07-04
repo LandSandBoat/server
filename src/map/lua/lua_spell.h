@@ -27,6 +27,7 @@
 #include "luautils.h"
 
 class CSpell;
+
 class CLuaSpell
 {
     CSpell* m_PLuaSpell;

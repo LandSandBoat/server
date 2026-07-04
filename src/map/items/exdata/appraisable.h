@@ -25,12 +25,16 @@
 
 namespace Exdata
 {
+
 #pragma pack(push, 1)
+
 struct Appraisable
 {
     uint8_t padding00[22];
     uint8_t AppraisalId;
     uint8_t padding01;
 };
+
 #pragma pack(pop)
+
 } // namespace Exdata
