@@ -161,8 +161,11 @@ template <std::integral T>
         return min;
     }
 
-    using U              = std::make_unsigned_t<T>;
-    const uint64_t count = static_cast<uint64_t>(static_cast<U>(max) - static_cast<U>(min));
+    // Compute the outcome count in U's own modulus. The extra cast back to U matters
+    // for types narrower than int: `U(max) - U(min)` would otherwise promote to int and,
+    // for a negative min, widen to a bogus huge count. Keeping it in U wraps correctly.
+    using U       = std::make_unsigned_t<T>;
+    const U count = static_cast<U>(static_cast<U>(max) - static_cast<U>(min));
     return static_cast<T>(static_cast<U>(min) + detail::bounded32(rng(), count));
 }
 

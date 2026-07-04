@@ -80,6 +80,8 @@ template <std::uniform_random_bit_generator G>
         }
     }
 
-    // Only reachable via floating-point rounding at the very top of the range.
+    // Defensive fallback. Effectively unreachable: `cumulative` sums the weights in
+    // the same order as `total`, so after the final element cumulative == total exactly,
+    // and target = canonical53() * total < total, so the loop always returns first.
     return weights.size() - 1;
 }

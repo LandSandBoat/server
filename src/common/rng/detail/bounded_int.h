@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include <cassert>
 #include <cstdint>
 #include <random>
 
@@ -44,7 +45,8 @@ namespace xirand::detail
 /// @param count Number of distinct outcomes; result is in [0, count). Must be >= 1.
 /// @return A value in [0, count).
 /// @note Covers counts up to 2^32 (any range used in this codebase). Larger
-///       ranges would require a 64-bit variant.
+///       ranges would silently truncate to [0, 2^32) and would require a 64-bit
+///       variant; the debug assert below fails loudly if one is ever requested.
 template <std::uniform_random_bit_generator G>
 [[nodiscard]] constexpr auto bounded32(G& g, uint64_t count) -> uint32_t;
 
@@ -53,9 +55,13 @@ template <std::uniform_random_bit_generator G>
 template <std::uniform_random_bit_generator G>
 [[nodiscard]] constexpr auto xirand::detail::bounded32(G& g, uint64_t count) -> uint32_t
 {
+    // This helper consumes one 32-bit word per draw; a narrower engine can't feed it.
+    static_assert(sizeof(typename G::result_type) >= sizeof(uint32_t), "bounded32 requires a >= 32-bit engine");
+
+    assert(count <= (uint64_t{ 1 } << 32)); // larger ranges truncate; a 64-bit variant would be needed
     if (count >= (uint64_t{ 1 } << 32))
     {
-        return static_cast<uint32_t>(g()); // full 32-bit span
+        return static_cast<uint32_t>(g()); // exactly 2^32 -> full 32-bit span
     }
 
     const uint32_t range = static_cast<uint32_t>(count);

@@ -48,6 +48,9 @@ template <std::uniform_random_bit_generator G>
 template <std::uniform_random_bit_generator G>
 [[nodiscard]] constexpr auto xirand::detail::canonical53(G& g) -> double
 {
+    // This helper consumes one 32-bit word per draw; a narrower engine can't feed it.
+    static_assert(sizeof(typename G::result_type) >= sizeof(uint32_t), "canonical53 requires a >= 32-bit engine");
+
     const uint64_t hi = static_cast<uint32_t>(g()) >> 5; // top 27 bits
     const uint64_t lo = static_cast<uint32_t>(g()) >> 6; // top 26 bits
     // (hi * 2^26 + lo) / 2^53  ->  [0, 1)
