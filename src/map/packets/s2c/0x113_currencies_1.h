@@ -31,6 +31,7 @@ class GP_SERV_COMMAND_CURRENCIES_1 final : public GP_SERV_PACKET<PacketS2C::GP_S
 {
 public:
 #pragma pack(push, 1) // uint64_t throws off alignment
+
     struct PacketData
     {
         int32_t  conquest_points_sandoria;
@@ -138,6 +139,7 @@ public:
         uint16_t deeds;
         uint16_t padding01;
     };
+
 #pragma pack(pop)
 
     GP_SERV_COMMAND_CURRENCIES_1(CCharEntity* PChar);

@@ -105,4 +105,5 @@ struct TransformationMatrix
         return el[0][1] * vec.x + el[1][1] * vec.y + el[2][1] * vec.z + el[3][1];
     }
 };
+
 // clang-format on

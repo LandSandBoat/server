@@ -27,6 +27,7 @@
 
 namespace messageutils
 {
+
 // Maps the main message used by skills for their subtarget variant
 const std::unordered_map<MsgBasic, MsgBasic> aoeVariants = {
     { MsgBasic::MagicRecoversHP, MsgBasic::TargetRecoversHP },
@@ -82,4 +83,5 @@ const std::unordered_map<MsgBasic, MsgBasic> absorbVariants = {
 
 auto GetAoEVariant(MsgBasic primary) -> MsgBasic;
 auto GetAbsorbVariant(MsgBasic primary) -> MsgBasic;
+
 } // namespace messageutils

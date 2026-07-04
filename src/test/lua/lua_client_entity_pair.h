@@ -37,6 +37,7 @@ enum ZONEID : uint16;
 class CLuaSimulation;
 class TestChar;
 class MapEngine;
+
 class CLuaClientEntityPair : public CLuaTestEntity
 {
 public:

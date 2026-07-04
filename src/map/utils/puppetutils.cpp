@@ -38,6 +38,7 @@ namespace puppetutils
 
 namespace
 {
+
 // Returns automaton model ID for given frame and head
 auto calculateAutomatonModel(const AutomatonFrame frame, const AutomatonHead head) -> uint16
 {
@@ -115,6 +116,7 @@ auto calculateAutomatonModel(const AutomatonFrame frame, const AutomatonHead hea
 
     return 0x07B9; // Fallback: Harlequin frame + Harlequin head
 }
+
 } // namespace
 
 void LoadAutomaton(CCharEntity* PChar)

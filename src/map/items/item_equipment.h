@@ -95,15 +95,19 @@ public:
     void ApplyAugment(uint8 slot);
 
     void addModifier(CModifier modifier);
+
     void addModifier(Mod mod, int16 modValue)
     {
         return addModifier(CModifier(mod, modValue));
     };
+
     void addPetModifier(CPetModifier modifier);
+
     void addPetModifier(Mod mod, PetModType petType, int16 modValue)
     {
         return addPetModifier(CPetModifier(mod, petType, modValue));
     };
+
     void addLatent(xi::Latent ConditionsID, uint16 ConditionsValue, Mod ModValue, int16 ModPower);
 
     bool delModifier(Mod mod, int16 modValue);

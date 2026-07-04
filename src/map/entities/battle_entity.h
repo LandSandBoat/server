@@ -75,6 +75,7 @@ enum JOBTYPE : uint8
     JOB_RUN = 22,
     JOB_MON = 23, // NOTE: MON is not a full job
 };
+
 #define MAX_JOBTYPE 24
 DECLARE_FORMAT_AS_UNDERLYING(JOBTYPE);
 
@@ -132,6 +133,7 @@ enum SKILLTYPE : uint8
     SKILL_RID          = 58,
     SKILL_DIG          = 59,
 };
+
 #define MAX_SKILLTYPE 64
 DECLARE_FORMAT_AS_UNDERLYING(SKILLTYPE);
 
@@ -148,6 +150,7 @@ enum SUBSKILLTYPE : uint8
 
     // Ammo subskill types can map to jug pets, this is handled completely in lua
 };
+
 DECLARE_FORMAT_AS_UNDERLYING(SUBSKILLTYPE);
 
 enum SLOTTYPE : uint8
@@ -171,6 +174,7 @@ enum SLOTTYPE : uint8
     SLOT_LINK1  = 0x10,
     SLOT_LINK2  = 0x11,
 };
+
 #define MAX_SLOTTYPE 18
 DECLARE_FORMAT_AS_UNDERLYING(SLOTTYPE);
 
@@ -201,6 +205,7 @@ enum TARGETTYPE : uint16
     TARGET_IGNORE_BATTLEID         = 0x0400, // Can hit targets that do not have the same battle ID
     TARGET_ANY_ALLEGIANCE          = 0x0800, // Can hit targets from any allegiance simultaneously. To be used with other flags above and only makes sense for non-single-target skills
 };
+
 DECLARE_FORMAT_AS_UNDERLYING(TARGETTYPE);
 
 enum SKILLCHAIN_ELEMENT : uint8
@@ -226,6 +231,7 @@ enum SKILLCHAIN_ELEMENT : uint8
     SC_LIGHT_II    = 15, // Lv4 Light
     SC_DARKNESS_II = 16, // Lv4 Darkness
 };
+
 #define MAX_SKILLCHAIN_LEVEL (4)
 #define MAX_SKILLCHAIN_COUNT (5)
 DECLARE_FORMAT_AS_UNDERLYING(SKILLCHAIN_ELEMENT);
@@ -252,6 +258,7 @@ enum IMMUNITY : uint32
     IMMUNITY_PETRIFY     = 0x00010000, //  65536
     IMMUNITY_PLAGUE      = 0x00020000, // 131064
 };
+
 DECLARE_FORMAT_AS_UNDERLYING(IMMUNITY);
 
 struct battlehistory_t
@@ -432,10 +439,12 @@ public:
     virtual void Spawn() override;
     virtual void Die();
     uint16       GetBattleTargetID() const;
-    void         SetBattleTargetID(uint16 id)
+
+    void SetBattleTargetID(uint16 id)
     {
         m_battleTarget = id;
     }
+
     CBattleEntity* GetBattleTarget();
 
     bool hasEnmityEXPENSIVE() const; // Returns true if own notoriety container is not empty or mob in zone has entity listed as battle target
@@ -443,10 +452,12 @@ public:
     /* State callbacks */
     /* Auto attack */
     virtual bool OnAttack(CAttackState&, action_t&);
+
     virtual bool OnAttackError(CAttackState&)
     {
         return false;
     }
+
     /* Returns whether to call Attack or not (which includes error messages) */
     virtual bool           CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg);
     virtual CBattleEntity* IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg);
@@ -464,9 +475,11 @@ public:
     virtual void OnRangedAttack(CRangeState&, action_t&);
     void         processActionEffectFlags(const action_t& action) const; // Drops status effects whose flags are tied to action emit/receive.
     virtual void OnDeathTimer();
+
     virtual void OnRaise()
     {
     }
+
     virtual void TryHitInterrupt(CBattleEntity* PAttacker);
     virtual void OnDespawn(CDespawnState&);
 

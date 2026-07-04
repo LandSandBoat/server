@@ -75,12 +75,14 @@ public:
         uint8_t  FenceColor;    // PS2: (New; did not exist.)
         uint8_t  unknown26;     // PS2: (New; did not exist.)
         uint8_t  padding27;     // PS2: (New; did not exist.)
+
         union
         {
             uint8_t            Data[128];  // PS2: (New; did not exist.)
             scoreboard_data_t  Scoreboard; // PS2: (New; did not exist.)
             progressbar_data_t Progress;   // PS2: (New; did not exist.)
         };
+
         uint16_t MesNumTitle;       // PS2: (New; did not exist.)
         uint16_t MesNumDescription; // PS2: (New; did not exist.)
     };

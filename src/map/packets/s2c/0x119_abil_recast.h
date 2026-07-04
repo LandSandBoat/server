@@ -24,6 +24,7 @@
 #include "base.h"
 
 class CCharEntity;
+
 struct recasttimer_t
 {
     uint16_t Timer;     // PS2: (New; did not exist.)

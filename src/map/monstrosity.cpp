@@ -435,7 +435,7 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
     {
         uint8 total = 0;
 
-        for (auto const& idx : input)
+        for (const auto& idx : input)
         {
             total += gMonstrosityInstinctMap[idx].cost;
         }
@@ -446,7 +446,7 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, const mon_data_t& 
     auto instinctsContainDuplicates = [&](const std::array<uint16, 12>& input) -> bool
     {
         std::unordered_set<uint16> set;
-        for (auto const& idx : input)
+        for (const auto& idx : input)
         {
             if (idx == 0)
             {

@@ -25,7 +25,9 @@
 
 namespace Exdata
 {
+
 #pragma pack(push, 1)
+
 // Reference: https://github.com/Ivaar/Windower-addons/tree/master/chococard
 struct ChocoboStatByte
 {
@@ -63,5 +65,7 @@ struct ChocoboCard
     void toTable(sol::table& table) const;
     void fromTable(const sol::table& data);
 };
+
 #pragma pack(pop)
+
 } // namespace Exdata

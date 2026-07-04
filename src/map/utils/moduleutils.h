@@ -32,6 +32,7 @@
 
 // Forward declare
 class CPPModule;
+
 namespace moduleutils
 {
 
@@ -59,6 +60,7 @@ public:
     virtual void OnCharZoneIn(CCharEntity* PChar) {};
     virtual void OnCharZoneOut(CCharEntity* PChar) {};
     virtual void OnPushPacket(CCharEntity* PChar, const std::unique_ptr<CBasicPacket>& packet) {};
+
     virtual auto OnIncomingPacket(MapSession* session, CCharEntity* PChar, CBasicPacket& packet) -> bool
     {
         return false;

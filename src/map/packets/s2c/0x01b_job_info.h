@@ -25,6 +25,7 @@
 
 enum JOBTYPE : uint8;
 class CCharEntity;
+
 struct GP_MYROOM_DANCER
 {
     uint16_t mon_no;

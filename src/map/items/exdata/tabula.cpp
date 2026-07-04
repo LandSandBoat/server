@@ -24,6 +24,7 @@
 
 namespace
 {
+
 constexpr uint8_t GRID_SIZE       = 25;                                         // 5x5 board positions
 constexpr uint8_t NUM_RUNES       = 12;                                         // Max runes per tabula
 constexpr uint8_t RUNE_ID_BITS    = 9;                                          // Bits per rune ID
@@ -31,6 +32,7 @@ constexpr uint8_t RUNE_ROT_BITS   = 2;                                          
 constexpr uint8_t ROT_BIT_OFFSET  = NUM_RUNES * RUNE_ID_BITS;                   // Bit 108: rotations start
 constexpr uint8_t USES_BIT_OFFSET = ROT_BIT_OFFSET + NUM_RUNES * RUNE_ROT_BITS; // Bit 132: uses field start
 constexpr uint8_t USES_BITS       = 7;                                          // Bits for uses count
+
 } // anonymous namespace
 
 void Exdata::Tabula::toTable(sol::table& table) const

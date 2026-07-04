@@ -1748,7 +1748,7 @@ bool CGambitsContainer::TryTrustSkill()
                     // Only trigger No Quarter if the last skill used was ACTUALLY a Daybreak opener
                     if (daybreak_ws.count(lastSkillUsed))
                     {
-                        for (auto const& tskill : tp_skills)
+                        for (const auto& tskill : tp_skills)
                         {
                             if (tskill.skill_id == NO_QUARTER)
                             {
@@ -1761,7 +1761,7 @@ bool CGambitsContainer::TryTrustSkill()
                     // If we didn't pick No Quarter (either lastSkill was 0 or a regular skill)
                     if (!chosen_skill)
                     {
-                        for (auto const& tskill : tp_skills)
+                        for (const auto& tskill : tp_skills)
                         {
                             if (daybreak_ws.count(tskill.skill_id))
                             {
@@ -1773,7 +1773,7 @@ bool CGambitsContainer::TryTrustSkill()
                 else
                 {
                     // Normal state: use standard rotation
-                    for (auto const& tskill : tp_skills)
+                    for (const auto& tskill : tp_skills)
                     {
                         if (regular_ws.count(tskill.skill_id))
                         {

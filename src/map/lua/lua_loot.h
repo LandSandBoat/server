@@ -27,6 +27,7 @@
 
 struct action_t;
 struct action_target_t;
+
 class CLuaLootContainer
 {
     LootContainer* m_PLootContainer;

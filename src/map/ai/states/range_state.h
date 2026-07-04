@@ -31,10 +31,12 @@ public:
     CRangeState(CBattleEntity* PEntity, uint16 targid);
 
     void SpendCost();
+
     bool IsRapidShot()
     {
         return m_rapidShot;
     }
+
     bool IsOutOfRange()
     {
         return m_isOutOfRange;
@@ -42,14 +44,17 @@ public:
 
 protected:
     virtual bool CanChangeState() override;
+
     virtual bool CanFollowPath() override
     {
         return false;
     }
+
     virtual bool CanInterrupt() override
     {
         return true;
     }
+
     virtual bool Update(timer::time_point tick) override;
     virtual void Cleanup(timer::time_point tick) override;
     bool         CanUseRangedAttack(CBattleEntity* PTarget, bool isEndOfAttack);

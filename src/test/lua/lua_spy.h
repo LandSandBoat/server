@@ -33,6 +33,7 @@ public:
     void called(sol::optional<size_t> times = sol::nullopt);
     void calledWith(sol::variadic_args expected) const;
     void clear();
+
     auto calls() const -> sol::table
     {
         return calls_;

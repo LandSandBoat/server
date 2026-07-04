@@ -27,6 +27,7 @@
 #define MAX_MERITS_IN_PACKET 61
 
 class CCharEntity;
+
 struct merit_t
 {
     uint16_t index;

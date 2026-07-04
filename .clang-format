@@ -1,7 +1,7 @@
 ﻿---
 # https://clang.llvm.org/docs/ClangFormatStyleOptions.html
 # We base things of WebKit + Allman braces
-# Compatible with clang-format-20
+# Compatible with clang-format-22 (enforced by tools/run_clang_format.py)
 Language: Cpp
 
 # Access modifiers
@@ -28,8 +28,7 @@ AllowShortFunctionsOnASingleLine: None
 AllowShortIfStatementsOnASingleLine: Never
 AllowShortLambdasOnASingleLine: None
 AllowShortLoopsOnASingleLine: false
-
-# Note: LambdaBodyIndentation not available in clang-format-20
+LambdaBodyIndentation: Signature
 
 # Template declarations
 AlwaysBreakTemplateDeclarations: Yes
@@ -71,6 +70,8 @@ BinPackParameters: false
 # Namespaces
 CompactNamespaces: false
 NamespaceIndentation: None
+WrapNamespaceBodyWithEmptyLines: Always
+SeparateDefinitionBlocks: Always
 
 # Braced lists and initializers
 Cpp11BracedListStyle: false
@@ -89,8 +90,7 @@ MaxEmptyLinesToKeep: 1
 # Pointer and reference alignment
 PointerAlignment: Left
 ReferenceAlignment: Pointer
-
-# Note: QualifierAlignment not available in clang-format-20, use manual const placement
+QualifierAlignment: Left # West Const
 
 # Comments
 ReflowComments: Always

@@ -25,6 +25,7 @@
 #include <sol/sol.hpp>
 
 class CLuaClientEntityPair;
+
 class CLuaClientEntityPairEvents
 {
 public:

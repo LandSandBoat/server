@@ -35,15 +35,18 @@ public:
     virtual void Cleanup(timer::time_point tick) override
     {
     }
+
     // whether the state can be changed by normal means
     virtual bool CanChangeState() override
     {
         return false;
     }
+
     virtual bool CanFollowPath() override
     {
         return false;
     }
+
     virtual bool CanInterrupt() override
     {
         return false;

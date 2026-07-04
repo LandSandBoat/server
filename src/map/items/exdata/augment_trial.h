@@ -25,7 +25,9 @@
 
 namespace Exdata
 {
+
 #pragma pack(push, 1)
+
 struct AugmentTrial
 {
     AugmentKindFlags    AugmentKind;
@@ -38,5 +40,7 @@ struct AugmentTrial
     void toTable(sol::table& table) const;
     void fromTable(const sol::table& data);
 };
+
 #pragma pack(pop)
+
 } // namespace Exdata

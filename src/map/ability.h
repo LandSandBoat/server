@@ -30,6 +30,7 @@
 #include "status_effect.h"
 
 enum class ActionCategory : uint8_t;
+
 enum ADDTYPE
 {
     ADDTYPE_NORMAL      = 0,

@@ -53,7 +53,7 @@ GP_SERV_COMMAND_SHOP_LIST::GP_SERV_COMMAND_SHOP_LIST(CCharEntity* PChar)
 
         // Publish item restriction, if any
         std::visit(
-            [&]<typename T>(T const& restriction)
+            [&]<typename T>(const T& restriction)
             {
                 if constexpr (std::is_same_v<T, GuildRestriction>)
                 {

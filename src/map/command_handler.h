@@ -33,6 +33,7 @@
 //
 
 class CCharEntity;
+
 namespace sol
 {
 

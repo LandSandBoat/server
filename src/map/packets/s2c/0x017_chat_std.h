@@ -27,6 +27,7 @@
 
 enum CHAT_MESSAGE_TYPE : uint8_t;
 class CCharEntity;
+
 namespace ipc
 {
 

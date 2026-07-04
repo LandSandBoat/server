@@ -30,6 +30,7 @@ class CBattleEntity;
 // Baby chocobos will die if you make changes without a proper test with retail captures
 namespace ActionInterrupts
 {
+
 void AbilityInterrupt(CBattleEntity* PEntity);
 
 void AvatarOutOfRange(CBattleEntity* PAvatar, const CPetSkill* PSkill, const CBattleEntity* PTarget);
@@ -56,4 +57,5 @@ void ItemIntimidated(CBattleEntity* PEntity, const CBattleEntity* PTarget);
 void MagicInterrupt(CBattleEntity* PEntity, CSpell* PSpell);
 void MagicParalyzed(CBattleEntity* PEntity, CSpell* PSpell, const CBattleEntity* PTarget);
 void MagicIntimidated(CBattleEntity* PEntity, CSpell* PSpell, const CBattleEntity* PTarget);
+
 }; // namespace ActionInterrupts

@@ -25,6 +25,7 @@
 #include "job_points.h"
 
 class CCharEntity;
+
 struct jobpoint_t
 {
     uint16_t index : 5;

@@ -58,6 +58,7 @@ struct ChocoboCustomProperties
     union
     {
         uint32_t properties;
+
         struct
         {
             ChocoboPhysicalTraits traits;

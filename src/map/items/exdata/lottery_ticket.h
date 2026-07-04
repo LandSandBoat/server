@@ -25,7 +25,9 @@
 
 namespace Exdata
 {
+
 #pragma pack(push, 1)
+
 struct LotteryTicket
 {
     uint32_t Number : 24;
@@ -35,5 +37,7 @@ struct LotteryTicket
     void toTable(sol::table& table) const;
     void fromTable(const sol::table& data);
 };
+
 #pragma pack(pop)
+
 } // namespace Exdata

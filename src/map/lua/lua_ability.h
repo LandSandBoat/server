@@ -27,6 +27,7 @@
 
 class CAbility;
 enum class Recast : uint16_t;
+
 class CLuaAbility
 {
     CAbility* m_PLuaAbility;

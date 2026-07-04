@@ -27,7 +27,9 @@
 
 namespace Exdata
 {
+
 #pragma pack(push, 1)
+
 struct Escutcheon
 {
     AugmentKindFlags    AugmentKind;
@@ -44,5 +46,7 @@ struct Escutcheon
     void toTable(sol::table& table) const;
     void fromTable(const sol::table& data);
 };
+
 #pragma pack(pop)
+
 } // namespace Exdata

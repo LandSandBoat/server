@@ -2515,14 +2515,17 @@ uint8 GetHitRateEx(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 att
     }
     return static_cast<uint8>(hitrate);
 }
+
 uint8 GetHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender)
 {
     return GetHitRateEx(PAttacker, PDefender, 0, 0); // assume attack 0(main)
 }
+
 uint8 GetHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 attackNumber)
 {
     return GetHitRateEx(PAttacker, PDefender, attackNumber, 0);
 }
+
 uint8 GetHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 attackNumber, int16 offsetAccuracy)
 {
     return GetHitRateEx(PAttacker, PDefender, attackNumber, offsetAccuracy);
@@ -3930,6 +3933,7 @@ void handleSecondaryTargetEnmity(CBattleEntity* PAttacker, CBattleEntity* PTarge
         }
     }
 }
+
 /************************************************************************
  *                                                                       *
  *  Transfer Enmity (used with ACCOMPLICE & COLLABORATOR ability type)   *
@@ -6277,4 +6281,5 @@ void addEcosystemKillerEffects(CBattleEntity* PBattleEntity)
             break;
     }
 }
+
 }; // namespace battleutils

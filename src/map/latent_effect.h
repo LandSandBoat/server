@@ -67,6 +67,7 @@ public:
     CLatentEffect(CBattleEntity* owner, xi::Latent conditionsId, uint16 conditionsValue, uint8 slot, Mod modValue, int16 modPower);
     CLatentEffect(const CLatentEffect&)            = delete;
     CLatentEffect& operator=(const CLatentEffect&) = delete;
+
     CLatentEffect(CLatentEffect&& o) noexcept
     {
         std::swap(m_POwner, o.m_POwner);
@@ -78,6 +79,7 @@ public:
         std::swap(m_ModPower, o.m_ModPower);
         std::swap(m_Activated, o.m_Activated);
     }
+
     CLatentEffect& operator=(CLatentEffect&& o) noexcept
     {
         std::swap(m_POwner, o.m_POwner);

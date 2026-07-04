@@ -38,10 +38,12 @@ public:
     {
         return false;
     }
+
     virtual bool ChangeTarget(uint16 targid) override
     {
         return false;
     }
+
     virtual bool WeaponSkill(uint16 targid, uint16 wsid) override
     {
         return false;
@@ -51,6 +53,7 @@ public:
     {
         return false;
     }
+
     virtual bool RangedAttack(uint16 targid) override
     {
         return false;

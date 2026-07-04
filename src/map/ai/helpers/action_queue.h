@@ -62,14 +62,17 @@ inline bool operator<(const queueAction_t& lhs, const queueAction_t& rhs) noexce
 {
     return lhs.start_time + lhs.delay < rhs.start_time + rhs.delay;
 }
+
 inline bool operator>(const queueAction_t& lhs, const queueAction_t& rhs) noexcept
 {
     return rhs < lhs;
 }
+
 inline bool operator<=(const queueAction_t& lhs, const queueAction_t& rhs) noexcept
 {
     return !(lhs > rhs);
 }
+
 inline bool operator>=(const queueAction_t& lhs, const queueAction_t& rhs) noexcept
 {
     return !(lhs < rhs);

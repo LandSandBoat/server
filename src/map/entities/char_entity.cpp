@@ -678,6 +678,7 @@ void CCharEntity::setAutomatonElementMax(const uint8 element, const uint8 max)
 {
     automatonInfo_.elementMax[element] = max;
 }
+
 void CCharEntity::addAutomatonElementCapacity(const uint8 element, const int8 value)
 {
     automatonInfo_.elementEquip[element] += value;

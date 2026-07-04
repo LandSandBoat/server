@@ -32,6 +32,7 @@
 
 namespace
 {
+
 // MH1F: 20x24 grid with a 8x18 unusable rectangle (x 6..13, z 0..17)
 // MH2F: 20x26 grid, no exclusions.
 auto isValidFloorCell(const uint8 cx, const uint8 cz, const bool is2F) -> bool
@@ -134,6 +135,7 @@ auto anyInstalledFurnishing(CCharEntity* PChar, const uint8 selfCat, const uint8
 
     return false;
 }
+
 } // namespace
 
 auto GP_CLI_COMMAND_MYROOM_LAYOUT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

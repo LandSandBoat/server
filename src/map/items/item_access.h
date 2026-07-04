@@ -33,6 +33,7 @@ class Transaction;
 
 namespace xi::items::detail
 {
+
 struct ItemAccess
 {
     // Privileged InTransaction transitions, only callable from Transaction subclasses.
@@ -107,12 +108,15 @@ struct ItemAccess
         return true;
     }
 };
+
 } // namespace xi::items::detail
 
 namespace xi::items
 {
+
 [[nodiscard]] inline auto mark(CItem* item, const ItemState target) -> bool
 {
     return detail::ItemAccess::mark(item, target);
 }
+
 } // namespace xi::items

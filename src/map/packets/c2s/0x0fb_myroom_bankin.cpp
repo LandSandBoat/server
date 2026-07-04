@@ -33,6 +33,7 @@
 #include "packets/s2c/0x020_item_attr.h"
 #include "packets/s2c/0x026_item_subcontainer.h"
 #include "utils/charutils.h"
+
 namespace
 {
 

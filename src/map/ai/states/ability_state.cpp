@@ -41,6 +41,7 @@
 
 namespace
 {
+
 // Handle Blood Pacts and Ready distance checks separately.
 // They come in as the final ability to be used through the packets but must pass the intermediary ability distance before triggering
 // Examples:
@@ -95,6 +96,7 @@ auto PetSkillDistanceCheck(CCharEntity* PChar, CBaseEntity* PTarget, const CAbil
 
     return true;
 }
+
 } // namespace
 
 CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abilityid)

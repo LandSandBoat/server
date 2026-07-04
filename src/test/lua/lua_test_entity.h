@@ -27,6 +27,7 @@
 #include <common/scheduler.h>
 
 class CBaseEntity;
+
 class CLuaTestEntity : public CLuaBaseEntity
 {
 public:

@@ -35,6 +35,7 @@ enum class ArgumentType : uint8_t
 };
 
 struct ApplicationConfig;
+
 struct ArgumentDefinition
 {
     std::string  name;

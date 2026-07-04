@@ -25,9 +25,11 @@
 
 namespace Exdata
 {
+
 // Clears are packed as 3-bit counts in bytes 0-7: 5 expedition types x 4 levels = 60 bits used.
 // Grimoires are zone-locked (Sauromugue or Batallia).
 #pragma pack(push, 1)
+
 struct MeebleGrimoire
 {
     uint8_t Clears[8]; // 3-bit-per-level bitstream: 5 types x 4 levels = 60 bits
@@ -39,5 +41,7 @@ struct MeebleGrimoire
     void toTable(sol::table& table) const;
     void fromTable(const sol::table& data);
 };
+
 #pragma pack(pop)
+
 } // namespace Exdata

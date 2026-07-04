@@ -70,4 +70,5 @@ struct magic_enum::customize::enum_range<ActionInfo>
 {
     static constexpr bool is_flags = true;
 };
+
 using namespace magic_enum::bitwise_operators;

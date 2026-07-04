@@ -24,6 +24,7 @@
 #include "lua/lua_item.h"
 
 class CItemPuppet;
+
 class CLuaItemPuppet : public CLuaItem
 {
 public:

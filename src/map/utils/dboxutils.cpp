@@ -40,6 +40,7 @@
 
 namespace
 {
+
 auto isDeliveryBoxInflightAtCapacity(uint32 charid) -> bool
 {
     static const uint32 maxInflight = settings::get<uint32>("map.DELIVERY_BOX_MAX_INFLIGHT");
@@ -47,6 +48,7 @@ auto isDeliveryBoxInflightAtCapacity(uint32 charid) -> bool
     const auto rset = db::preparedStmt("SELECT COUNT(*) AS cnt FROM delivery_box WHERE charid = ? AND box = 1 AND slot >= 8", charid);
     return rset && rset->next() && rset->get<uint32>("cnt") >= maxInflight;
 }
+
 } // anonymous namespace
 
 void dboxutils::SendOldItems(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO BoxNo)

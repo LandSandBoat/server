@@ -30,6 +30,7 @@
 
 namespace Exdata
 {
+
 template <size_t N>
 auto decodeSignature(const uint8_t (&sig)[N]) -> std::string
 {
@@ -59,4 +60,5 @@ auto get_or(Proxy&& proxy, T fallback) -> T
 {
     return std::forward<Proxy>(proxy).template get<std::optional<T>>().value_or(std::move(fallback));
 }
+
 } // namespace Exdata

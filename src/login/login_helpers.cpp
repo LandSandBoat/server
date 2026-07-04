@@ -34,7 +34,7 @@ std::unordered_map<std::string, std::map<std::string, session_t>>& getAuthentica
 
 bool isStringMalformed(const std::string& str, std::size_t max_length)
 {
-    const auto unprintableChar = [](char const& c) -> bool
+    const auto unprintableChar = [](const char& c) -> bool
     {
         return c < 0x20;
     };

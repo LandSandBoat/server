@@ -62,8 +62,10 @@ class CItem;
 
 namespace Exdata
 {
+
 auto getType(const CItem* item) -> Type;
 
 auto toTable(const CItem* item, sol::table& table) -> bool;
 auto fromTable(CItem* item, const sol::table& data) -> bool;
+
 } // namespace Exdata

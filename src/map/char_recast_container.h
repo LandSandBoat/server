@@ -33,9 +33,11 @@ class CCharRecastContainer : public CRecastContainer
 {
 public:
     CCharRecastContainer(CCharEntity*);
+
     virtual ~CCharRecastContainer()
     {
     }
+
     virtual void          Check() override;
     virtual void          Add(RECASTTYPE type, Recast id, timer::duration duration, timer::duration chargeTime, uint8 maxCharges) override;
     virtual void          Del(RECASTTYPE type) override;

@@ -46,6 +46,7 @@
 
 namespace detail
 {
+
 // Transparent hasher for string-like keys. All overloads must agree on the hash
 // of equal inputs, so they all funnel through std::hash<std::string_view>.
 struct StringHash
@@ -83,6 +84,7 @@ struct HashMapTraits<std::string>
     using Hash     = StringHash;
     using KeyEqual = std::equal_to<>; // transparent
 };
+
 } // namespace detail
 
 // namespace xi

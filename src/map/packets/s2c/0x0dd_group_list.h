@@ -26,6 +26,7 @@
 
 class CCharEntity;
 class CTrustEntity;
+
 struct GP_GROUP_ATTR
 {
     uint32_t PartyNo : 2;           // PS2: PartyNo

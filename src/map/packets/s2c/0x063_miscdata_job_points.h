@@ -41,6 +41,7 @@ public:
         uint16_t                      unknown06; // PS2: (New; did not exist.)
         uint8_t                       access;    // Access flag (0=no access, 1=access)
         uint8_t                       padding[3];
+
         struct JobPointData
         {
             uint16_t capacityPoints; // Capacity points for this job

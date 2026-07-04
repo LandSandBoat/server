@@ -26,6 +26,7 @@
 
 enum class TreasurePoolType : uint8;
 class CTreasurePool;
+
 class CLuaTreasurePool
 {
     CTreasurePool* m_PLuaTreasurePool;

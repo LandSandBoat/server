@@ -27,6 +27,7 @@
 
 enum class ItemState : uint8;
 class CItem;
+
 class CLuaItem
 {
     const CItem* m_readItem;  // observer; always set
