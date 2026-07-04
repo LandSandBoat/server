@@ -426,7 +426,7 @@ auto CMobController::MobSkill(int listId) -> bool
         return false;
     }
 
-    std::shuffle(skillList.begin(), skillList.end(), xirand::rng());
+    xirand::ShuffleInPlace(skillList);
     CBattleEntity* PActionTarget{ nullptr };
 
     uint16 chosenSkillId = 0;

@@ -31,7 +31,7 @@ describe('Packets', function()
         local playerName = player:getName()
         local param0Offset = 0x0D + 8 + #playerName + 9
 
-        xi.test.world:setSeed(557)
+        xi.test.world:setSeed(1710)
         player.packets:send(0x0A2, p, ffi.sizeof(p))
 
         local incomingPackets = player.packets:getIncoming()

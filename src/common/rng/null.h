@@ -23,34 +23,43 @@
 
 #include <cstdint>
 #include <limits>
-#include <random>
 
 class NullRandomEngine
 {
 public:
     using result_type = uint64_t;
 
-    static constexpr result_type min()
-    {
-        return 0;
-    }
+    static constexpr auto min() -> result_type;
+    static constexpr auto max() -> result_type;
 
-    static constexpr result_type max()
-    {
-        return std::numeric_limits<result_type>::max();
-    }
+    constexpr auto operator()() -> result_type;
 
-    result_type operator()()
-    {
-        return (min() + max()) / 2;
-    }
-
-    void seed(result_type)
-    {
-    }
+    constexpr auto seed(result_type) -> void;
 
     template <class Sseq>
-    void seed(Sseq&)
-    {
-    }
+    constexpr auto seed(Sseq&) -> void;
 };
+
+constexpr auto NullRandomEngine::min() -> result_type
+{
+    return 0;
+}
+
+constexpr auto NullRandomEngine::max() -> result_type
+{
+    return std::numeric_limits<result_type>::max();
+}
+
+constexpr auto NullRandomEngine::operator()() -> result_type
+{
+    return (min() + max()) / 2;
+}
+
+constexpr auto NullRandomEngine::seed(result_type) -> void
+{
+}
+
+template <class Sseq>
+constexpr auto NullRandomEngine::seed(Sseq&) -> void
+{
+}
