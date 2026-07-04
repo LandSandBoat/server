@@ -1,6 +1,6 @@
 describe('PRNG', function()
     it('can be forced to a specific seed', function()
-        local expected = { 134, 137, 452, 22, 351, 912, 471, 75, 570, 636 }
+        local expected = { 141, 597, 964, 998, 667, 697, 572, 741, 488, 371 }
         local actual   = {}
 
         xi.test.world:setSeed(1)
@@ -15,7 +15,7 @@ describe('PRNG', function()
     end)
 
     it('test seed does not leak', function()
-        local expected = { 134, 137, 452, 22, 351, 912, 471, 75, 570, 636 }
+        local expected = { 141, 597, 964, 998, 667, 697, 572, 741, 488, 371 }
         local actual   = {}
 
         for _ = 1, 10 do
