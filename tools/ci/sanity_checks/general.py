@@ -5,30 +5,34 @@ target = sys.argv[1]
 
 
 def check(name):
-    with open(name) as f:
-        lines = f.readlines()
+    try:
+        with open(name, encoding="utf-8") as f:
+            lines = f.readlines()
+    except UnicodeDecodeError:
+        # Binary/non-text file, nothing to lint.
+        return
 
-        counter = 0
-        newline_counter = 0
-        for data in lines:
-            counter = counter + 1
-            if not data.endswith("\n"):
-                print(f"#### No newline at end of file, please add one.\n> {name}\n")
+    counter = 0
+    newline_counter = 0
+    for data in lines:
+        counter = counter + 1
+        if not data.endswith("\n"):
+            print(f"#### No newline at end of file, please add one.\n> {name}\n")
 
-            if "\t" in data:
-                print(
-                    f"#### Found tab character(s) in file, please replace these with 4x spaces.\n> {name}:{counter}\n"
-                )
+        if "\t" in data:
+            print(
+                f"#### Found tab character(s) in file, please replace these with 4x spaces.\n> {name}:{counter}\n"
+            )
 
-            if data == "\n":
-                newline_counter = newline_counter + 1
-            else:
-                newline_counter = 0
+        if data == "\n":
+            newline_counter = newline_counter + 1
+        else:
+            newline_counter = 0
 
-            if newline_counter > 1 or (counter == len(lines) and newline_counter == 1):
-                print(
-                    f"#### Found multiple newline characters next to each other, please replace these with single newlines.\n> {name}:{counter}\n"
-                )
+        if newline_counter > 1 or (counter == len(lines) and newline_counter == 1):
+            print(
+                f"#### Found multiple newline characters next to each other, please replace these with single newlines.\n> {name}:{counter}\n"
+            )
 
 
 if target == ".":
