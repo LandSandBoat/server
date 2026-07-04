@@ -122,7 +122,7 @@ void data_session::read_func()
                                                     "race, face, head, body, hands, legs, feet, main, sub,"
                                                     "war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng,"
                                                     "sam, nin, drg, smn, blu, cor, pup, dnc, sch, geo, run, "
-                                                    "gmlevel, nation, size, sjob, char_flags.`rename`, "
+                                                    "gmlevel, nation, size, sjob, COALESCE(char_flags.`rename`, 0) AS `rename`, "
                                                     "EXISTS(SELECT 1 FROM char_vars "
                                                     "WHERE char_vars.charid = chars.charid "
                                                     "AND varname = '[RaceChange]Eligible' AND value > UNIX_TIMESTAMP()) AS race_change "
@@ -130,7 +130,7 @@ void data_session::read_func()
                                                     "INNER JOIN char_stats USING(charid) "
                                                     "INNER JOIN char_look  USING(charid) "
                                                     "INNER JOIN char_jobs  USING(charid) "
-                                                    "INNER JOIN char_flags USING(charid) "
+                                                    "LEFT JOIN  char_flags USING(charid) "
                                                     "WHERE accid = ? "
                                                     "LIMIT ?",
                                                     session.accountID,

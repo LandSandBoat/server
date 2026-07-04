@@ -34,6 +34,7 @@ namespace loginHelpers
 
 namespace
 {
+
 using NameHash = std::array<uint8, 16>;
 
 auto md5Of(char* text, std::size_t length) -> NameHash
@@ -58,7 +59,9 @@ struct BadNameSets
 
 // Loads sets of bad names and returns a cached copy on subsequent calls
 //
-// res/badnames.dat is a squashed version of retail bad name dictionaries (entrynw/entry/entry_f/entry_b.dic)
+// res/badnames.bin is NOT the retail dictionaries (entrynw/entry/entry_f/entry_b.dic).
+// It is a custom format derived from them: each entry is MD5-hashed and all four categories are packed together into a single file.
+//
 // Format:
 // uint32 magic ("BNF1")
 // uint32 counts[4] - Number of entries per category (exact, substring, prefix, suffix)
@@ -68,14 +71,14 @@ auto badNames() -> const BadNameSets&
     static const BadNameSets sets = []
     {
         BadNameSets   s;
-        std::ifstream file("res/badnames.dat", std::ios::binary);
+        std::ifstream file("res/badnames.bin", std::ios::binary);
         char          magic[4]{};
         uint32        counts[4]{};
 
         if (!file.read(magic, sizeof(magic)) || std::memcmp(magic, "BNF1", sizeof(magic)) != 0 ||
             !file.read(reinterpret_cast<char*>(counts), sizeof(counts)))
         {
-            ShowWarningFmt("Character name filter (res/badnames.dat) missing or malformed; disabled.");
+            ShowWarningFmt("Character name filter (res/badnames.bin) missing or malformed; disabled.");
             return s;
         }
 
@@ -153,6 +156,7 @@ auto isVulgarName(const std::string& name) -> bool
 
     return false;
 }
+
 } // namespace
 
 Maybe<std::string> validateCharacterName(const std::string& name)

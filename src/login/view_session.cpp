@@ -262,8 +262,8 @@ void view_session::read_func()
             // Retrieve expected account ID and flag for given character
             uint32     accountID  = 0;
             uint8      renameFlag = 0;
-            const auto rset       = db::preparedStmt("SELECT accid, char_flags.`rename` "
-                                                     "FROM chars INNER JOIN char_flags USING(charid) "
+            const auto rset       = db::preparedStmt("SELECT accid, COALESCE(char_flags.`rename`, 0) AS `rename` "
+                                                     "FROM chars LEFT JOIN char_flags USING(charid) "
                                                      "WHERE charid = ? LIMIT 1",
                                                      charid);
             FOR_DB_SINGLE_RESULT(rset)
