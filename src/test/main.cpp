@@ -19,9 +19,10 @@
 ===========================================================================
 */
 
-#include "common/lua.h"
-#include "common/tracy.h"
-#include "test_application.h"
+#include <test/test_application.h>
+
+#include <common/lua.h>
+#include <common/tracy.h>
 
 #include <cstdlib>
 #include <iostream>
@@ -35,7 +36,7 @@ int main(int argc, char** argv)
 
     const auto success = testApp->run();
 
-    const int exitCode = success ? EXIT_SUCCESS : EXIT_FAILURE;
+    const auto exitCode = success ? EXIT_SUCCESS : EXIT_FAILURE;
 
     // Explicitly destroy TestApplication before the lua state get cleaned up
     testApp.reset();
