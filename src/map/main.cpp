@@ -19,13 +19,27 @@
 ===========================================================================
 */
 
-#include "map_application.h"
+#include <map/map_application.h>
+
+#include <common/lua.h>
+
+#include <cstdlib>
+#include <memory>
 
 int main(int argc, char** argv)
 {
-    const auto mapApp = std::make_unique<MapApplication>(argc, argv);
+    auto mapApp = std::make_unique<MapApplication>(argc, argv);
 
-    mapApp->run();
+    const auto success = mapApp->run();
 
-    return 0;
+    const auto exitCode = success ? EXIT_SUCCESS : EXIT_FAILURE;
+
+    // Explicitly destroy MapApplication before the lua state get cleaned up
+    mapApp.reset();
+
+    // TODO: This should be in ~Application but it needs more testing for xi_map
+    // TODO: This wouldn't be needed if lua wasn't global
+    lua_cleanup();
+
+    return exitCode;
 }
