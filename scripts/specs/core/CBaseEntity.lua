@@ -633,8 +633,9 @@ end
 ---@param npc CBaseEntity
 ---@param open integer
 ---@param close integer
+---@param holiday? integer Weekday the shop is closed (0-7); omit for none
 ---@return boolean
-function CBaseEntity:openGuildShop(npc, open, close)
+function CBaseEntity:openGuildShop(npc, open, close, holiday)
 end
 
 ---@return nil

@@ -326,6 +326,7 @@ xi.settings.main =
     EQUIP_FROM_OTHER_CONTAINERS  = false, -- true/false. Allows equipping items from Mog Satchel, Sack, and Case. Only possible with the use of client addons.
     REGIME_REWARD_THRESHOLD      = 15,    -- If the player is more than N levels below the minimum suggested range, do not award experience.
     PERSIST_SEAL_TIMERS          = false, -- Persist seal (Beastmen/Kindred) recast timers across zone changes and logout.
+    GUILD_SHOP_HOLIDAYS          = false, -- true/false. Close each guild shop on its weekly holiday.
 
     -- SYSTEM
     DISABLE_INACTIVITY_WATCHDOG = false, -- true/false. If this is enabled, the watchdog which detects if the main loop isn't being ticked will no longer be able to kill the process.
