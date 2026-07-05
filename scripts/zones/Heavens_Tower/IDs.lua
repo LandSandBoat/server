@@ -24,6 +24,7 @@ zones[xi.zone.HEAVENS_TOWER] =
         CALL_MULTIPLE_ALTER_EGO       = 7199, -- You are now able to call multiple alter egos.
         YOU_ACCEPT_THE_MISSION        = 7336, -- You have accepted the mission.
         FISHING_MESSAGE_OFFSET        = 7389, -- You can't fish here.
+        INVALID_ENSIGNIAS             = 7621, -- Your invalid ensignias have been disposed of.
         CELEBRATORY_GOODS             = 9123, -- An assortment of celebratory goods is available for purchase.
         OBTAINED_NUM_KEYITEMS         = 9201, -- Obtained key item: <number> <keyitem>!
         NOT_ACQUAINTED                = 9203, -- I'm sorry, but I don't believe we're acquainted. Please leave me be.

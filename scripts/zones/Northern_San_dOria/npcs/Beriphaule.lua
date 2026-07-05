@@ -56,6 +56,9 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setNation(newNation)
         player:setGil(player:getGil() - cost)
         player:setRankPoints(0)
+
+        -- Remove Expeditionary Force insignias
+        xi.expeditionaryForce.disposeInsigniaNationSwap(player)
     end
 end
 

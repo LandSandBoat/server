@@ -44,6 +44,7 @@ zones[xi.zone.METALWORKS] =
         CONQUEST                      = 8232,  -- You've earned conquest points!
         GLAROCIQUET_DIALOG            = 8234,  -- I am <name>, a Temple Knight. I am one of the guards charged with overseeing San d'Oria's conquest campaign.
         LEXUN_MARIXUN_DIALOG          = 8236,  -- I am <name>, a War Warlock. I am one of the guards charged with overseeing Windurst's conquest campaign.
+        INVALID_ENSIGNIAS             = 8354,  -- Your invalid ensignias have been disposed of.
         EXTENDED_MISSION_OFFSET       = 8622,  -- Go to Ore Street and talk to Medicine Eagle. He says he was there when the commotion started.
         STEEL_CYCLONE_LEARNED         = 9040,  -- You have learned the weapon skill Steel Cyclone!
         DETONATOR_LEARNED             = 9065,  -- You have learned the weapon skill Detonator!
