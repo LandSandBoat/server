@@ -27,6 +27,7 @@
 #include <common/scheduler.h>
 
 #include <map/map_constants.h>
+#include <map/map_statistics.h>
 #include <map/socket.h>
 
 #include <asio/ip/network_v4.hpp>
@@ -34,22 +35,32 @@
 #include <asio/ts/buffer.hpp>
 #include <asio/ts/internet.hpp>
 
+#include <set>
+#include <system_error>
+
 class MapSocket final : public Socket
 {
 public:
-    MapSocket(Scheduler& scheduler, uint16 port, ReceiveFn onReceiveFn);
+    MapSocket(Scheduler& scheduler, MapStatistics& mapStatistics, uint16 port, ReceiveFn onReceiveFn);
     ~MapSocket() override;
 
     void send(const IPP& ipp, ByteSpan buffer) override;
+    void flushDiagnostics() override;
 
 private:
     void receive();
 
-    Scheduler&              scheduler_;
-    uint16                  port_;
-    asio::ip::udp::socket   socket_;
-    NetworkBuffer           buffer_; // TODO: Pass in the global buffer, or only use this one
-    asio::ip::udp::endpoint remoteEndpoint_;
+    Scheduler&                scheduler_;
+    MapStatistics&            mapStatistics_;
+    uint16                    port_;
+    int64                     inFlightSends_;
+    int64                     sendsBlockedThisTick_;
+    int64                     sendsDroppedThisTick_;
+    std::set<std::error_code> blockedReasons_;
+    std::set<std::error_code> droppedReasons_;
+    asio::ip::udp::socket     socket_;
+    NetworkBuffer             buffer_; // TODO: Pass in the global buffer, or only use this one
+    asio::ip::udp::endpoint   remoteEndpoint_;
 
     ReceiveFn onReceiveFn_;
 };

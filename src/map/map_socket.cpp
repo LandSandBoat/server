@@ -23,9 +23,13 @@
 
 #include <common/logging.h>
 
-MapSocket::MapSocket(Scheduler& scheduler, const uint16 port, ReceiveFn onReceiveFn)
+MapSocket::MapSocket(Scheduler& scheduler, MapStatistics& mapStatistics, const uint16 port, ReceiveFn onReceiveFn)
 : scheduler_(scheduler)
+, mapStatistics_(mapStatistics)
 , port_(port)
+, inFlightSends_(0)
+, sendsBlockedThisTick_(0)
+, sendsDroppedThisTick_(0)
 , socket_(scheduler_.mainContext())
 , buffer_{}
 , onReceiveFn_(std::move(onReceiveFn))
@@ -99,17 +103,82 @@ void MapSocket::send(const IPP& ipp, ByteSpan buffer)
     const auto ip       = ntohl(ipp.getIP());
     const auto endpoint = asio::ip::udp::endpoint(asio::ip::address_v4(ip), ipp.getPort());
 
+    // Sends normally complete near-instantly. If the OS send path is backing up, completions
+    // arrive late (on POSIX, ASIO silently parks would-block sends until the socket is
+    // writable again) and the in-flight count climbs. Its per-tick high-water mark is the
+    // backpressure signal that send error codes alone can't show.
+    ++inFlightSends_;
+    mapStatistics_.set(MapStatistics::Key::MaxInFlightSendsPerTick,
+                       std::max(mapStatistics_.get(MapStatistics::Key::MaxInFlightSendsPerTick), inFlightSends_));
+
     socket_.async_send_to(
         asio::buffer(buffer),
         endpoint,
-        [](const std::error_code& ec, std::size_t /*bytes_sent*/)
+        [this](const std::error_code& ec, std::size_t bytesSent)
         {
+            --inFlightSends_;
+
             if (ec)
             {
-                ShowErrorFmt("Error sending data: {}", ec.message());
+                // ENOBUFS/EWOULDBLOCK (WSAENOBUFS/WSAEWOULDBLOCK on Windows): the OS couldn't
+                // accept the datagram right now, i.e. the send path is backing up.
+                // Aggregated and logged once per tick in flushDiagnostics(), so a burst of
+                // failures can't flood the log while the server is already under pressure.
+                if (ec == asio::error::no_buffer_space ||
+                    ec == asio::error::would_block ||
+                    ec == asio::error::try_again)
+                {
+                    mapStatistics_.increment(MapStatistics::Key::TotalSendsBlockedPerTick);
+                    ++sendsBlockedThisTick_;
+                    blockedReasons_.insert(ec);
+                }
+                else
+                {
+                    mapStatistics_.increment(MapStatistics::Key::TotalSendErrorsPerTick);
+                    ++sendsDroppedThisTick_;
+                    droppedReasons_.insert(ec);
+                }
+            }
+            else
+            {
+                mapStatistics_.increment(MapStatistics::Key::TotalBytesSentPerTick, static_cast<int64>(bytesSent));
             }
         });
 
     // This will only be called in the middle of a doSocketsFor() call, so we don't
     // need to enqueue more work when we're done here.
+}
+
+void MapSocket::flushDiagnostics()
+{
+    TracyZoneScoped;
+
+    const auto reasonsToString = [](const std::set<std::error_code>& reasons)
+    {
+        std::string out;
+        for (const auto& reason : reasons)
+        {
+            out += (out.empty() ? "" : ", ") + reason.message();
+        }
+        return out;
+    };
+
+    if (sendsBlockedThisTick_ > 0)
+    {
+        ShowWarningFmt("{} sends pushed back by the OS this tick (send path backing up, datagrams dropped). Reasons: {}",
+                       sendsBlockedThisTick_,
+                       reasonsToString(blockedReasons_));
+    }
+
+    if (sendsDroppedThisTick_ > 0)
+    {
+        ShowErrorFmt("{} sends failed this tick (datagrams dropped). Reasons: {}",
+                     sendsDroppedThisTick_,
+                     reasonsToString(droppedReasons_));
+    }
+
+    sendsBlockedThisTick_ = 0;
+    sendsDroppedThisTick_ = 0;
+    blockedReasons_.clear();
+    droppedReasons_.clear();
 }

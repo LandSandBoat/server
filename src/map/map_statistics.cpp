@@ -42,6 +42,14 @@ auto MapStatistics::toString(Key key)
             return "Total Packets Sent Per Tick";
         case Key::TotalPacketsDelayedPerTick:
             return "Total Packets Delayed Per Tick";
+        case Key::TotalBytesSentPerTick:
+            return "Total Bytes Sent Per Tick";
+        case Key::TotalSendsBlockedPerTick:
+            return "Total Sends Blocked Per Tick (OS backpressure)";
+        case Key::TotalSendErrorsPerTick:
+            return "Total Send Errors Per Tick";
+        case Key::MaxInFlightSendsPerTick:
+            return "Max In-Flight Sends Per Tick";
         case Key::TasksTickTime:
             return "Tasks Tick Time (ms)";
         case Key::NetworkTickTime:
