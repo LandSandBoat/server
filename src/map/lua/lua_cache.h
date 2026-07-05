@@ -26,6 +26,17 @@
 #include <common/lua.h>
 #include <common/types/flat_hash_map.h>
 
+// NOTE: We previously experimented with empty-handler elision here: using LuaJIT's bytecode
+// introspection to detect stub handlers (`function() end` JIT-ing to a single `RET0` op),
+// cache them as nil, and skip the C++ -> Lua call entirely on lookup.
+//
+// It was difficult and fiddly: several call sites use a handler's validity as an existence check
+// or pass the handler onward as an Interaction Framework fallback, so eliding silently broke
+// them (e.g. food items stopped applying stats) in ways that were hard to debug.
+//
+// Measured under an insane synthetic load (~5000 active status effects), the total saving was
+// only ~0.25ms of main-loop time per second. Cool concept, but not worth the effort.
+
 // Caches resolved Lua functions keyed by string (entity/spell/effect/file + function name).
 class LuaCache final
 {
