@@ -102,6 +102,7 @@
 #include <cctype>
 #include <cmath>
 #include <filesystem>
+#include <limits>
 #include <numeric>
 #include <ranges>
 #include <string>
@@ -224,6 +225,13 @@ void init(IPP mapIPP, bool isRunningInCI)
 
                 return xirand::GetRandomNumber<lua_Number>(lower, upper);
             });
+
+    lua["math"]["randomNormal"] =
+        [](lua_Number mean, lua_Number stddev, sol::optional<lua_Number> lower, sol::optional<lua_Number> upper)
+    {
+        constexpr double inf = std::numeric_limits<double>::infinity();
+        return xirand::GetNormalNumber(mean, stddev, lower.value_or(-inf), upper.value_or(inf));
+    };
 
     lua.set_function("GarbageCollectStep", &luautils::garbageCollectStep);
     lua.set_function("GarbageCollectFull", &luautils::garbageCollectFull);

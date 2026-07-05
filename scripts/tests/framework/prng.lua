@@ -127,6 +127,90 @@ describe('math.random() contract', function()
     end)
 end)
 
+describe('math.randomNormal() contract', function()
+    -- math.randomNormal is bound in luautils.cpp on top of xirand's inverse-CDF
+    -- sampler: one engine draw per call, exact truncation, no rejection loops.
+
+    it('matches the requested mean and standard deviation', function()
+        xi.test.world:setSeed(1)
+
+        local sum   = 0
+        local sumSq = 0
+
+        for _ = 1, kSamples do
+            local value = math.randomNormal(3.5, 1.5)
+            sum   = sum + value
+            sumSq = sumSq + value * value
+        end
+
+        local mean   = sum / kSamples
+        local stddev = math.sqrt(sumSq / kSamples - mean * mean)
+
+        assert(math.abs(mean - 3.5) < 0.05, string.format('Mean drifted: expected ~3.5, got %.5f', mean))
+        assert(math.abs(stddev - 1.5) < 0.05, string.format('Stddev drifted: expected ~1.5, got %.5f', stddev))
+    end)
+
+    it('respects both truncation bounds', function()
+        xi.test.world:setSeed(1)
+
+        local minSeen = math.huge
+        local maxSeen = -math.huge
+
+        for _ = 1, kSamples do
+            local value = math.randomNormal(3.5, 1.5, 2, 7)
+            assert(value >= 2 and value <= 7, string.format('math.randomNormal(3.5, 1.5, 2, 7) out of [2, 7]: %.17g', value))
+            minSeen = math.min(minSeen, value)
+            maxSeen = math.max(maxSeen, value)
+        end
+
+        assert(maxSeen > minSeen, 'Truncated normal should vary, not collapse to a constant')
+    end)
+
+    it('supports one-sided bounds via nil', function()
+        xi.test.world:setSeed(1)
+
+        for _ = 1, kSamples do
+            local lowerOnly = math.randomNormal(3.5, 1.5, 0)
+            assert(lowerOnly >= 0, string.format('math.randomNormal(3.5, 1.5, 0) below lower bound: %.17g', lowerOnly))
+
+            local upperOnly = math.randomNormal(3.5, 1.5, nil, 4)
+            assert(upperOnly <= 4, string.format('math.randomNormal(3.5, 1.5, nil, 4) above upper bound: %.17g', upperOnly))
+        end
+    end)
+
+    it('handles degenerate inputs', function()
+        xi.test.world:setSeed(1)
+
+        for _ = 1, 100 do
+            -- Zero stddev collapses to mean, clamped into any bounds.
+            assert(math.randomNormal(5, 0) == 5, 'math.randomNormal(5, 0) should always return 5')
+            assert(math.randomNormal(5, 0, nil, 3) == 3, 'math.randomNormal(5, 0, nil, 3) should clamp to 3')
+            assert(math.randomNormal(5, 0, 7) == 7, 'math.randomNormal(5, 0, 7) should clamp to 7')
+
+            -- Empty interval returns the lower bound, mirroring math.random(n, n < m).
+            assert(math.randomNormal(5, 1.5, 7, 2) == 7, 'math.randomNormal with inverted bounds should return lower')
+        end
+    end)
+
+    it('reproduces the same stream for the same seed', function()
+        local first = {}
+        xi.test.world:setSeed(42)
+        for _ = 1, 8 do
+            table.insert(first, math.randomNormal(3.5, 1.5, 2, 7))
+        end
+
+        local second = {}
+        xi.test.world:setSeed(42)
+        for _ = 1, 8 do
+            table.insert(second, math.randomNormal(3.5, 1.5, 2, 7))
+        end
+
+        for i = 1, 8 do
+            assert(first[i] == second[i], string.format('Element %d: %.17g ~= %.17g', i, first[i], second[i]))
+        end
+    end)
+end)
+
 describe('PRNG distribution', function()
     it('math.random() spreads evenly across buckets', function()
         xi.test.world:setSeed(1)

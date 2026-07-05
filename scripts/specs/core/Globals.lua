@@ -520,3 +520,20 @@ end
 --@return nil
 function InitializeFishingContestSystem()
 end
+
+-- Generates a normally distributed number (mean, standard deviation). Optional
+-- bounds truncate the distribution to [lower, upper] exactly, with no rejection
+-- sampling; pass nil for lower to set only an upper bound.
+-- Examples:
+-- math.randomNormal(3.5, 1.5)         : No bounds.
+-- math.randomNormal(3.5, 1.5, 2, 7)   : Truncated to [2, 7].
+-- math.randomNormal(3.5, 1.5, 0)      : Lower bound 0, no upper bound.
+-- math.randomNormal(3.5, 1.5, nil, 7) : No lower bound, upper bound 7.
+---@nodiscard
+---@param mean number
+---@param stddev number Standard deviation; values <= 0 collapse the distribution to mean.
+---@param lower number? Optional lower bound.
+---@param upper number? Optional upper bound.
+---@return number
+function math.randomNormal(mean, stddev, lower, upper)
+end
