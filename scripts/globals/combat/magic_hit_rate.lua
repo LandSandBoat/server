@@ -55,18 +55,13 @@ local function magicAccuracyFromSkill(actor, params)
 
         if params.skillType == xi.skill.SINGING then
             if actor:isPC() then
-                -- Add ranged skill level ONLY if it's an instrument.
-                local rangeType = actor:getWeaponSkillType(xi.slot.RANGED)
-
-                -- String instruments have half the skill effectiveness and amplify the AoE in exchange.
-                if rangeType == xi.skill.WIND_INSTRUMENT then
-                    magicAcc = magicAcc + actor:getSkillLevel(rangeType)
-                elseif rangeType == xi.skill.STRING_INSTRUMENT then
-                    magicAcc = magicAcc + math.floor(actor:getSkillLevel(rangeType) / 2)
+                -- String instruments sacrifice accuracy and amplify the AoE in exchange.
+                local rangedSkill = actor:getWeaponSkillType(xi.slot.RANGED)
+                if rangedSkill == xi.skill.WIND_INSTRUMENT then
+                    magicAcc = magicAcc + math.floor(actor:getSkillLevel(rangedSkill) / 2)
                 end
-
             else
-                magicAcc = magicAcc * 2
+                magicAcc = magicAcc + math.floor(magicAcc / 2)
             end
         end
 
@@ -295,8 +290,8 @@ local function magicAccuracyFromMagicBurst(target, params)
     return 100
 end
 
--- Magic Accuracy from Day and Weather Element.
-local function magicAccuracyFromDayWeatherElement(actor, params)
+-- Magic Accuracy from Weather Element. Note: https://wiki.ffo.jp/html/1796.html claims day does not affect macc.
+local function magicAccuracyFromWeatherElement(actor, params)
     local magicAcc = 0
 
     -- Early return: Invalid element.
@@ -319,7 +314,6 @@ local function magicAccuracyFromDayWeatherElement(actor, params)
     end
 
     -- Calculate bonuses/penalties.
-    local dayElement   = VanadielDayElement()
     local actorWeather = actor:getWeather()
 
     if applyBonuses then
@@ -328,10 +322,6 @@ local function magicAccuracyFromDayWeatherElement(actor, params)
         elseif actorWeather == xi.data.element.getAssociatedDoubleWeather(params.magicalElement) then
             magicAcc = magicAcc + 10 + actor:getMod(xi.mod.IRIDESCENCE) * 5
         end
-
-        if dayElement == params.magicalElement then
-            magicAcc = magicAcc + 5
-        end
     end
 
     if applyPenalties then
@@ -339,10 +329,6 @@ local function magicAccuracyFromDayWeatherElement(actor, params)
             magicAcc = magicAcc - 5 - actor:getMod(xi.mod.IRIDESCENCE) * 5
         elseif actorWeather == xi.data.element.getOppositeDoubleWeather(params.magicalElement) then
             magicAcc = magicAcc - 10 - actor:getMod(xi.mod.IRIDESCENCE) * 5
-        end
-
-        if dayElement == xi.data.element.getElementWeakness(params.magicalElement) then
-            magicAcc = magicAcc - 5
         end
     end
 
@@ -404,23 +390,23 @@ end
 local function calculateActorMagicAccuracy(actor, target, params)
     local finalMagicAcc = 0
 
-    local magicAccBase       = actor:getMod(xi.mod.MACC) + actor:getILvlMacc(xi.slot.MAIN) + params.bonusMacc
-    local magicAccSkill      = magicAccuracyFromSkill(actor, params)
-    local magicAccElement    = magicAccuracyFromElement(actor, params)
-    local magicAccStatDiff   = magicAccuracyFromStatDifference(actor, target, params)
-    local magicAccEffects    = magicAccuracyFromStatusEffects(actor, params)
-    local magicAccMerits     = magicAccuracyFromMerits(actor, params)
-    local magicAccJobPoints  = magicAccuracyFromJobPoints(actor, params)
-    local magicAccBurst      = magicAccuracyFromMagicBurst(target, params)
-    local magicAccDayWeather = magicAccuracyFromDayWeatherElement(actor, params)
-    local magicAccTandem     = magicAccuracyFromTandemStrike(actor)
+    local magicAccBase      = actor:getMod(xi.mod.MACC) + actor:getILvlMacc(xi.slot.MAIN) + params.bonusMacc
+    local magicAccSkill     = magicAccuracyFromSkill(actor, params)
+    local magicAccElement   = magicAccuracyFromElement(actor, params)
+    local magicAccStatDiff  = magicAccuracyFromStatDifference(actor, target, params)
+    local magicAccEffects   = magicAccuracyFromStatusEffects(actor, params)
+    local magicAccMerits    = magicAccuracyFromMerits(actor, params)
+    local magicAccJobPoints = magicAccuracyFromJobPoints(actor, params)
+    local magicAccBurst     = magicAccuracyFromMagicBurst(target, params)
+    local magicAccWeather   = magicAccuracyFromWeatherElement(actor, params)
+    local magicAccTandem    = magicAccuracyFromTandemStrike(actor)
 
     -- Multipliers
     local magicAccFoodFactor      = magicAccuracyFromFoodMultiplier(actor)
     local magicAccSoulVoiceFactor = magicAccuracyFromSoulVoiceMultiplier(actor, params)
 
     -- Add up food magic accuracy.
-    finalMagicAcc = magicAccBase + magicAccSkill + magicAccElement + magicAccStatDiff + magicAccEffects + magicAccMerits + magicAccJobPoints + magicAccBurst + magicAccDayWeather + magicAccTandem
+    finalMagicAcc = magicAccBase + magicAccSkill + magicAccElement + magicAccStatDiff + magicAccEffects + magicAccMerits + magicAccJobPoints + magicAccBurst + magicAccWeather + magicAccTandem
     finalMagicAcc = math.floor(finalMagicAcc * magicAccFoodFactor * magicAccSoulVoiceFactor)
 
     return finalMagicAcc
