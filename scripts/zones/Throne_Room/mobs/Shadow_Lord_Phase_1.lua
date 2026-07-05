@@ -129,35 +129,20 @@ end
 entity.onMobSpellChoose = function(mob, target, spellId)
     local spellList =
     {
-        xi.magic.spell.AEROGA_II,
-        xi.magic.spell.BLIZZAGA_II,
-        xi.magic.spell.DRAIN,
-        xi.magic.spell.FIRAGA_II,
-        xi.magic.spell.STONEGA_II,
-        xi.magic.spell.WATERGA_II,
+        [1]  = { xi.magic.spell.AEROGA_II,   target, false, xi.action.type.DAMAGE_TARGET,        nil,                  0, 100 },
+        [2]  = { xi.magic.spell.BLIZZAGA_II, target, false, xi.action.type.DAMAGE_TARGET,        nil,                  0, 100 },
+        [3]  = { xi.magic.spell.FIRAGA_II,   target, false, xi.action.type.DAMAGE_TARGET,        nil,                  0, 100 },
+        [4]  = { xi.magic.spell.STONEGA_II,  target, false, xi.action.type.DAMAGE_TARGET,        nil,                  0, 100 },
+        [5]  = { xi.magic.spell.WATERGA_II,  target, false, xi.action.type.DAMAGE_TARGET,        nil,                  0, 100 },
+        [6]  = { xi.magic.spell.DRAIN,       target, false, xi.action.type.DRAIN_HP,             nil,                  0, 100 },
+        [7]  = { xi.magic.spell.BLIND,       target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.BLINDNESS,  0, 100 },
+        [8]  = { xi.magic.spell.DROWN,       target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.DROWN,      0, 100 },
+        [9]  = { xi.magic.spell.FROST,       target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.FROST,      0, 100 },
+        [10] = { xi.magic.spell.RASP,        target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.RASP,       0, 100 },
+        [11] = { xi.magic.spell.ICE_SPIKES,  mob,    false, xi.action.type.ENHANCING_FORCE_SELF, xi.effect.ICE_SPIKES, 0, 100 },
     }
 
-    if not mob:hasStatusEffect(xi.effect.ICE_SPIKES) then
-        table.insert(spellList, xi.magic.spell.ICE_SPIKES)
-    end
-
-    if not target:hasStatusEffect(xi.effect.BLINDNESS) then
-        table.insert(spellList, xi.magic.spell.BLIND)
-    end
-
-    if not target:hasStatusEffect(xi.effect.DROWN) then
-        table.insert(spellList, xi.magic.spell.DROWN)
-    end
-
-    if not target:hasStatusEffect(xi.effect.FROST) then
-        table.insert(spellList, xi.magic.spell.FROST)
-    end
-
-    if not target:hasStatusEffect(xi.effect.RASP) then
-        table.insert(spellList, xi.magic.spell.RASP)
-    end
-
-    return spellList[math.random(1, #spellList)]
+    return xi.combat.behavior.chooseAction(mob, target, nil, spellList)
 end
 
 return entity
