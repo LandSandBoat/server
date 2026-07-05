@@ -78,6 +78,21 @@ local shopFor = function(npc)
     return xi.data.guildShops[canonicalShop(npc)]
 end
 
+-- The shop's holiday weekday, or nil when holidays are disabled or unset.
+local shopHoliday = function(shop)
+    if not xi.settings.main.GUILD_SHOP_HOLIDAYS then
+        return nil
+    end
+
+    return shop.holiday
+end
+
+-- True when today is the shop's guild holiday.
+local isHolidayToday = function(shop)
+    local holiday = shopHoliday(shop)
+    return holiday ~= nil and holiday == VanadielDayOfTheWeek()
+end
+
 ---A rejected result: zeroed itemNo/count with a Trade reason code.
 local rejected = function(trade)
     return { itemNo = 0, count = 0, trade = trade }
@@ -122,7 +137,7 @@ end
 
 local guildShopIsOpen = function(npc)
     local shop = shopFor(npc)
-    if shop == nil then
+    if shop == nil or isHolidayToday(shop) then
         return false
     end
 
@@ -142,7 +157,7 @@ xi.guildShops.onTrigger = function(player, npc)
     npc:facePlayer(player)
     rollShopDay(npc, shop)
 
-    return player:openGuildShop(npc, shop.hours[1], shop.hours[2])
+    return player:openGuildShop(npc, shop.hours[1], shop.hours[2], shopHoliday(shop))
 end
 
 ---Process player purchase.

@@ -2713,7 +2713,7 @@ void CLuaBaseEntity::sendMenu(uint32 menu)
  *  Example : if player:openGuildShop(npc, 8, 23) then
  ************************************************************************/
 
-auto CLuaBaseEntity::openGuildShop(CLuaBaseEntity* PNpc, uint8 open, uint8 close) const -> bool
+auto CLuaBaseEntity::openGuildShop(CLuaBaseEntity* PNpc, uint8 open, uint8 close, sol::optional<uint8> holiday) const -> bool
 {
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
     if (!PChar)
@@ -2728,15 +2728,26 @@ auto CLuaBaseEntity::openGuildShop(CLuaBaseEntity* PNpc, uint8 open, uint8 close
         return false;
     }
 
+    const bool isHoliday = holiday.has_value() && holiday.value() == vanadiel_time::get_weekday(vanadiel_time::now());
+
     const uint8 vanadielHour = static_cast<uint8>(vanadiel_time::get_hour(vanadiel_time::now()));
-    const bool  isOpen       = vanadielHour >= open && vanadielHour < close;
-    const auto  status       = isOpen ? GP_SERV_COMMAND_GUILD_OPEN_STAT::Open : GP_SERV_COMMAND_GUILD_OPEN_STAT::Close;
+    const bool  isOpen       = !isHoliday && vanadielHour >= open && vanadielHour < close;
+
+    auto status = GP_SERV_COMMAND_GUILD_OPEN_STAT::Close;
+    if (isHoliday)
+    {
+        status = GP_SERV_COMMAND_GUILD_OPEN_STAT::Holiday;
+    }
+    else if (isOpen)
+    {
+        status = GP_SERV_COMMAND_GUILD_OPEN_STAT::Open;
+    }
 
     const auto* PNpcEntity = PNpc->GetBaseEntity();
 
     PChar->guildShopNpc_.id     = PNpcEntity->id;
     PChar->guildShopNpc_.targid = PNpcEntity->targid;
-    PChar->pushPacket<GP_SERV_COMMAND_GUILD_OPEN>(status, open, close, 0);
+    PChar->pushPacket<GP_SERV_COMMAND_GUILD_OPEN>(status, open, close, holiday.value_or(0));
 
     return isOpen;
 }

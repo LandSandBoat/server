@@ -19,6 +19,7 @@ xi.data = xi.data or {}
 ---@class GuildShop
 ---@field hours?      integer[]       -- { openHour, closeHour }  (nil for a sharedStock alias)
 ---@field stock?      GuildShopItem[] -- nil for a sharedStock alias
+---@field holiday?    xi.day          -- weekday the shop closes for its guild holiday (nil for a sharedStock alias)
 ---@field sharedStock? string         -- alias NPC: draws from this shop's stock pool
 
 ---@type table<string, GuildShop>
@@ -26,8 +27,9 @@ xi.data.guildShops =
 {
     ['Achika'] =
     {
-        hours = { 9, 23 },
-        stock =
+        hours   = { 9, 23 },
+        holiday = xi.day.DARKSDAY,
+        stock   =
         {
             { id = xi.item.HACHIMAKI,         initial = 36, maxStock = 60, targetStock = 45, buyMax = 4125,   restockRate = 3 },
             { id = xi.item.COTTON_HACHIMAKI,  initial = 36, maxStock = 60, targetStock = 45, buyMax = 24420,  restockRate = 3 },
@@ -64,8 +66,9 @@ xi.data.guildShops =
     },
     ['Amulya'] =
     {
-        hours = { 8, 23 },
-        stock =
+        hours   = { 8, 23 },
+        holiday = xi.day.WATERSDAY,
+        stock   =
         {
             { id = xi.item.CHUNK_OF_TIN_ORE,         initial = 180, maxStock = 240, targetStock = 180, buyMax = 200,    restockRate = 40 },
             { id = xi.item.CHUNK_OF_IRON_ORE,        initial = 180, maxStock = 240, targetStock = 180, buyMax = 4500,   restockRate = 30 },
@@ -143,8 +146,9 @@ xi.data.guildShops =
     },
     ['Babubu'] =
     {
-        hours = { 3, 18 },
-        stock =
+        hours   = { 3, 18 },
+        holiday = xi.day.LIGHTNINGDAY,
+        stock   =
         {
             { id = xi.item.LITTLE_WORM,             initial = 180, maxStock = 240, targetStock = 180, buyMax = 20,     restockRate = 60 }, -- targetStock assumed
             { id = xi.item.LUGWORM,                 initial = 180, maxStock = 240, targetStock = 180, buyMax = 60,     restockRate = 60 }, -- targetStock assumed
@@ -225,8 +229,9 @@ xi.data.guildShops =
     },
     ['Beugungel'] =
     {
-        hours = { 5, 22 },
-        stock =
+        hours   = { 5, 22 },
+        holiday = xi.day.FIRESDAY,
+        stock   =
         {
             { id = xi.item.SPOOL_OF_BUNDLING_TWINE, initial = 180, maxStock = 240, targetStock = 180, buyMax = 500,  restockRate = 60 },
             { id = xi.item.HATCHET,                 initial = 180, maxStock = 200, targetStock = 180, buyMax = 2500, restockRate = 60, priceFloor = 180 },
@@ -239,8 +244,9 @@ xi.data.guildShops =
     },
     ['Blabbivix'] =
     {
-        hours = { 11, 22 },
-        stock =
+        hours   = { 11, 22 },
+        holiday = xi.day.DARKSDAY,
+        stock   =
         {
             { id = xi.item.RED_CHIP,    initial = 150, maxStock = 200, targetStock = 150, buyMax = 140000, restockRate = 50, noSell = true },
             { id = xi.item.BLUE_CHIP,   initial = 150, maxStock = 200, targetStock = 150, buyMax = 140000, restockRate = 50, noSell = true },
@@ -254,8 +260,9 @@ xi.data.guildShops =
     },
     ['Bornahn'] =
     {
-        hours = { 8, 23 },
-        stock =
+        hours   = { 8, 23 },
+        holiday = xi.day.ICEDAY,
+        stock   =
         {
             { id = xi.item.CHUNK_OF_COPPER_ORE,     initial = 180, maxStock = 240, targetStock = 180, buyMax = 60,     restockRate = 60 }, -- targetStock assumed
             { id = xi.item.CHUNK_OF_ZINC_ORE,       initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 625,    restockRate = 0 },  -- targetStock assumed
@@ -387,8 +394,9 @@ xi.data.guildShops =
     },
     ['Cehn_Teyohngo'] =
     {
-        hours = { 1, 23 },
-        stock =
+        hours   = { 1, 23 },
+        holiday = xi.day.LIGHTNINGDAY,
+        stock   =
         {
             { id = xi.item.LUGWORM,              initial = 180, maxStock = 240, targetStock = 180, buyMax = 60,    restockRate = 60 }, -- targetStock assumed
             { id = xi.item.SABIKI_RIG,           initial = 20,  maxStock = 120, targetStock = 90,  buyMax = 15960, restockRate = 5 },  -- targetStock assumed
@@ -420,8 +428,9 @@ xi.data.guildShops =
     },
     ['Chaupire'] =
     {
-        hours = { 6, 21 },
-        stock =
+        hours   = { 6, 21 },
+        holiday = xi.day.FIRESDAY,
+        stock   =
         {
             { id = xi.item.ASH_LOG,                   initial = 144, maxStock = 240, targetStock = 180, buyMax = 480,    restockRate = 12 },
             { id = xi.item.WILLOW_LOG,                initial = 144, maxStock = 240, targetStock = 180, buyMax = 800,    restockRate = 12 },
@@ -522,8 +531,9 @@ xi.data.guildShops =
     },
     ['Chiyo'] =
     {
-        hours = { 9, 23 },
-        stock =
+        hours   = { 9, 23 },
+        holiday = xi.day.DARKSDAY,
+        stock   =
         {
             { id = xi.item.SCROLL_OF_ABSORB_STR,    initial = 0,  maxStock = 60, targetStock = 45, buyMax = 105000, restockRate = 0 }, -- targetStock assumed
             { id = xi.item.SCROLL_OF_ABSORB_DEX,    initial = 0,  maxStock = 60, targetStock = 45, buyMax = 105000, restockRate = 0 }, -- targetStock assumed
@@ -549,8 +559,9 @@ xi.data.guildShops =
     },
     ['Dehbi_Moshal'] =
     {
-        hours = { 6, 21 },
-        stock =
+        hours   = { 6, 21 },
+        holiday = xi.day.FIRESDAY,
+        stock   =
         {
             { id = xi.item.ARROWWOOD_LOG,             initial = 180, maxStock = 240, targetStock = 180, buyMax = 100,    restockRate = 60 },
             { id = xi.item.LAUAN_LOG,                 initial = 144, maxStock = 240, targetStock = 144, buyMax = 180,    restockRate = 12 },
@@ -658,8 +669,9 @@ xi.data.guildShops =
     },
     ['Doggomehr'] =
     {
-        hours = { 8, 23 },
-        stock =
+        hours   = { 8, 23 },
+        holiday = xi.day.WATERSDAY,
+        stock   =
         {
             { id = xi.item.CHUNK_OF_TIN_ORE,         initial = 180, maxStock = 240, targetStock = 180, buyMax = 200,    restockRate = 60 },
             { id = xi.item.CHUNK_OF_IRON_ORE,        initial = 144, maxStock = 240, targetStock = 180, buyMax = 4500,   restockRate = 60 },
@@ -744,8 +756,9 @@ xi.data.guildShops =
     ['Gathweeda'] = { sharedStock = 'Wahraga' },
     ['Gaudylox'] =
     {
-        hours = { 11, 22 },
-        stock =
+        hours   = { 11, 22 },
+        holiday = xi.day.FIRESDAY,
+        stock   =
         {
             { id = xi.item.RED_CHIP,    initial = 150, maxStock = 200, targetStock = 150, buyMax = 140000, restockRate = 50, noSell = true },
             { id = xi.item.BLUE_CHIP,   initial = 150, maxStock = 200, targetStock = 150, buyMax = 140000, restockRate = 50, noSell = true },
@@ -759,8 +772,9 @@ xi.data.guildShops =
     },
     ['Graegham'] = -- TODO: Initial capture
     {
-        hours = { 3, 18 },
-        stock =
+        hours   = { 3, 18 },
+        holiday = xi.day.LIGHTNINGDAY,
+        stock   =
         {
             { id = xi.item.SABIKI_RIG,              initial = 0, maxStock = 240, targetStock = 180, buyMax = 4401,  restockRate = 5 },  -- targetStock assumed
             { id = xi.item.TARUTARU_FISHING_ROD,    initial = 0, maxStock = 60,  targetStock = 45,  buyMax = 27180, restockRate = 10 }, -- targetStock assumed
@@ -808,8 +822,9 @@ xi.data.guildShops =
     },
     ['Ilita'] =
     {
-        hours = { 12, 20 },
-        stock =
+        hours   = { 12, 20 },
+        holiday = xi.day.DARKSDAY,
+        stock   =
         {
             { id = xi.item.NEW_LINKSHELL,   initial = 75,  maxStock = 100, targetStock = 75,  buyMax = 6000, restockRate = 0, priceFloor = 0, sellPrice = 2250 }, -- Not a typo, they do not restock on retail.
             { id = xi.item.PENDANT_COMPASS, initial = 150, maxStock = 200, targetStock = 150, buyMax = 375,  restockRate = 0, priceFloor = 0, noSell = true },
@@ -817,8 +832,9 @@ xi.data.guildShops =
     },
     ['Jabbar'] =
     {
-        hours = { 1, 23 },
-        stock =
+        hours   = { 1, 23 },
+        holiday = xi.day.ICEDAY,
+        stock   =
         {
             { id = xi.item.BAMBOO_STICK,            initial = 50,  maxStock = 60,  targetStock = 50,  buyMax = 719,    restockRate = 10 },
             { id = xi.item.JAR_OF_TOAD_OIL,         initial = 0,   maxStock = 60,  targetStock = 50,  buyMax = 18000,  restockRate = 0 },
@@ -868,8 +884,9 @@ xi.data.guildShops =
     },
     ['Jidwahn'] =
     {
-        hours = { 1, 23 },
-        stock =
+        hours   = { 1, 23 },
+        holiday = xi.day.LIGHTNINGDAY,
+        stock   =
         {
             { id = xi.item.LUGWORM,              initial = 180, maxStock = 240, targetStock = 180, buyMax = 60,    restockRate = 60 }, -- targetStock assumed
             { id = xi.item.SABIKI_RIG,           initial = 20,  maxStock = 120, targetStock = 90,  buyMax = 15960, restockRate = 5 },  -- targetStock assumed
@@ -911,8 +928,9 @@ xi.data.guildShops =
     },
     ['Jirokichi'] =
     {
-        hours = { 9, 23 },
-        stock =
+        hours   = { 9, 23 },
+        holiday = xi.day.DARKSDAY,
+        stock   =
         {
             { id = xi.item.CAT_BAGHNAKHS,   initial = 0,  maxStock = 60, targetStock = 55, buyMax = 580,     restockRate = 0 }, -- targetStock assumed
             { id = xi.item.BRASS_BAGHNAKHS, initial = 0,  maxStock = 60, targetStock = 55, buyMax = 8450,    restockRate = 0 }, -- targetStock assumed
@@ -971,8 +989,9 @@ xi.data.guildShops =
     },
     ['Kamilah'] =
     {
-        hours = { 8, 23 },
-        stock =
+        hours   = { 8, 23 },
+        holiday = xi.day.WATERSDAY,
+        stock   =
         {
             { id = xi.item.CHUNK_OF_TIN_ORE,         initial = 110, maxStock = 240, targetStock = 110, buyMax = 200,    restockRate = 20 },
             { id = xi.item.CHUNK_OF_IRON_ORE,        initial = 110, maxStock = 240, targetStock = 110, buyMax = 4500,   restockRate = 10 },
@@ -997,8 +1016,9 @@ xi.data.guildShops =
     },
     ['Khel_Pahlhama'] =
     {
-        hours = { 12, 20 },
-        stock =
+        hours   = { 12, 20 },
+        holiday = xi.day.DARKSDAY,
+        stock   =
         {
             { id = xi.item.NEW_LINKSHELL,   initial = 75,  maxStock = 100, targetStock = 75,  buyMax = 6000, restockRate = 0, priceFloor = 0, sellPrice = 2250 }, -- Not a typo, they do not restock on retail.
             { id = xi.item.PENDANT_COMPASS, initial = 150, maxStock = 200, targetStock = 150, buyMax = 375,  restockRate = 0, priceFloor = 0, noSell = true },
@@ -1006,8 +1026,9 @@ xi.data.guildShops =
     },
     ['Kopopo'] = -- TODO: Recapture initial
     {
-        hours = { 5, 20 },
-        stock =
+        hours   = { 5, 20 },
+        holiday = xi.day.DARKSDAY,
+        stock   =
         {
             { id = xi.item.BAG_OF_HORO_FLOUR,            initial = 0,   maxStock = 240, targetStock = 180, buyMax = 200,   restockRate = 0 }, -- targetStock assumed
             { id = xi.item.BAG_OF_RYE_FLOUR,             initial = 144, maxStock = 240, targetStock = 180, buyMax = 200,   restockRate = 12 },
@@ -1117,8 +1138,9 @@ xi.data.guildShops =
     },
     ['Kueh_Igunahmori'] =
     {
-        hours = { 3, 18 },
-        stock =
+        hours   = { 3, 18 },
+        holiday = xi.day.ICEDAY,
+        stock   =
         {
             { id = xi.item.DHALMEL_HIDE,                  initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 5000,   restockRate = 0 }, -- targetStock assumed
             { id = xi.item.WOLF_HIDE,                     initial = 90,  maxStock = 120, targetStock = 90,  buyMax = 3225,   restockRate = 6 },
@@ -1192,8 +1214,9 @@ xi.data.guildShops =
     },
     ['Kuzah_Hpirohpon'] =
     {
-        hours = { 6, 21 },
-        stock =
+        hours   = { 6, 21 },
+        holiday = xi.day.FIRESDAY,
+        stock   =
         {
             { id = xi.item.BALL_OF_SARUTA_COTTON,   initial = 2,   maxStock = 240, targetStock = 18,  buyMax = 200,    restockRate = 1 },
             { id = xi.item.FLAX_FLOWER,             initial = 180, maxStock = 240, targetStock = 180, buyMax = 1250,   restockRate = 30 },
@@ -1276,8 +1299,9 @@ xi.data.guildShops =
     },
     ['Lokhong'] =
     {
-        hours = { 1, 23 },
-        stock =
+        hours   = { 1, 23 },
+        holiday = xi.day.LIGHTNINGDAY,
+        stock   =
         {
             { id = xi.item.LUGWORM,              initial = 180, maxStock = 240, targetStock = 180, buyMax = 60,    restockRate = 60 }, -- targetStock assumed
             { id = xi.item.SABIKI_RIG,           initial = 20,  maxStock = 120, targetStock = 90,  buyMax = 15960, restockRate = 5 },  -- targetStock assumed
@@ -1309,8 +1333,9 @@ xi.data.guildShops =
     },
     ['Maymunah'] =
     {
-        hours = { 8, 23 },
-        stock =
+        hours   = { 8, 23 },
+        holiday = xi.day.LIGHTSDAY,
+        stock   =
         {
             { id = xi.item.LUMP_OF_BEESWAX,           initial = 0,   maxStock = 240, targetStock = 180, buyMax = 600,    restockRate = 0 },
             { id = xi.item.MALBORO_VINE,              initial = 8,   maxStock = 60,  targetStock = 45,  buyMax = 7230,   restockRate = 1 },
@@ -1389,8 +1414,9 @@ xi.data.guildShops =
     ['Mendoline'] = { sharedStock = 'Graegham' },
     ['Mep_Nhapopoluko'] =
     {
-        hours = { 1, 18 },
-        stock =
+        hours   = { 1, 18 },
+        holiday = xi.day.LIGHTNINGDAY,
+        stock   =
         {
             { id = xi.item.FASTWATER_FISHING_ROD,   initial = 110, maxStock = 200, targetStock = 190, buyMax = 6976,  restockRate = 10 },
             { id = xi.item.SINGLE_HOOK_FISHING_ROD, initial = 110, maxStock = 200, targetStock = 190, buyMax = 64380, restockRate = 10 },
@@ -1408,8 +1434,9 @@ xi.data.guildShops =
     },
     ['Ndego'] =
     {
-        hours = { 8, 23 },
-        stock =
+        hours   = { 8, 23 },
+        holiday = xi.day.WATERSDAY,
+        stock   =
         {
             { id = xi.item.CHUNK_OF_COPPER_ORE,      initial = 180, maxStock = 240, targetStock = 180, buyMax = 60,     restockRate = 60 },
             { id = xi.item.CHUNK_OF_TIN_ORE,         initial = 180, maxStock = 240, targetStock = 180, buyMax = 200,    restockRate = 60 },
@@ -1496,8 +1523,9 @@ xi.data.guildShops =
     },
     ['Pashi_Maccaleh'] =
     {
-        hours = { 1, 23 },
-        stock =
+        hours   = { 1, 23 },
+        holiday = xi.day.LIGHTNINGDAY,
+        stock   =
         {
             { id = xi.item.LUGWORM,              initial = 180, maxStock = 240, targetStock = 180, buyMax = 60,    restockRate = 60 }, -- targetStock assumed
             { id = xi.item.SABIKI_RIG,           initial = 20,  maxStock = 120, targetStock = 90,  buyMax = 15960, restockRate = 5 },  -- targetStock assumed
@@ -1529,8 +1557,9 @@ xi.data.guildShops =
     },
     ['Paunelie'] =
     {
-        hours = { 12, 20 },
-        stock =
+        hours   = { 12, 20 },
+        holiday = xi.day.DARKSDAY,
+        stock   =
         {
             { id = xi.item.NEW_LINKSHELL,   initial = 75,  maxStock = 100, targetStock = 75,  buyMax = 6000, restockRate = 0, priceFloor = 0, sellPrice = 2250 }, -- Not a typo, they do not restock on retail.
             { id = xi.item.PENDANT_COMPASS, initial = 150, maxStock = 200, targetStock = 150, buyMax = 375,  restockRate = 0, priceFloor = 0, noSell = true },
@@ -1538,8 +1567,9 @@ xi.data.guildShops =
     },
     ['Rajmonda'] =
     {
-        hours = { 1, 23 },
-        stock =
+        hours   = { 1, 23 },
+        holiday = xi.day.LIGHTNINGDAY,
+        stock   =
         {
             { id = xi.item.LUGWORM,              initial = 180, maxStock = 240, targetStock = 180, buyMax = 60,    restockRate = 60 }, -- targetStock assumed
             { id = xi.item.SABIKI_RIG,           initial = 20,  maxStock = 120, targetStock = 90,  buyMax = 15960, restockRate = 5 },  -- targetStock assumed
@@ -1571,8 +1601,9 @@ xi.data.guildShops =
     },
     ['Scavnix'] =
     {
-        hours = { 11, 22 },
-        stock =
+        hours   = { 11, 22 },
+        holiday = xi.day.LIGHTSDAY,
+        stock   =
         {
             { id = xi.item.RED_CHIP,    initial = 150, maxStock = 200, targetStock = 150, buyMax = 140000, restockRate = 50, noSell = true },
             { id = xi.item.BLUE_CHIP,   initial = 150, maxStock = 200, targetStock = 150, buyMax = 140000, restockRate = 50, noSell = true },
@@ -1587,8 +1618,9 @@ xi.data.guildShops =
     ['Shih_Tayuun'] = -- TODO: Recapture initial
     {
 
-        hours = { 8, 23 },
-        stock =
+        hours   = { 8, 23 },
+        holiday = xi.day.WINDSDAY,
+        stock   =
         {
             { id = xi.item.CRAB_SHELL,        initial = 0,   maxStock = 240, targetStock = 180, buyMax = 11490,  restockRate = 0 }, -- targetStock assumed
             { id = xi.item.SHEEP_TOOTH,       initial = 36,  maxStock = 240, targetStock = 143, buyMax = 1000,   restockRate = 12 },
@@ -1653,8 +1685,9 @@ xi.data.guildShops =
     },
     ['Silver_Owl'] =
     {
-        hours = { 1, 23 },
-        stock =
+        hours   = { 1, 23 },
+        holiday = xi.day.ICEDAY,
+        stock   =
         {
             { id = xi.item.CAT_BAGHNAKHS,     initial = 0,  maxStock = 30, targetStock = 25, buyMax = 580,     restockRate = 0 },                -- targetStock assumed
             { id = xi.item.BRASS_BAGHNAKHS,   initial = 0,  maxStock = 30, targetStock = 25, buyMax = 8450,    restockRate = 0 },                -- targetStock assumed
@@ -1744,8 +1777,9 @@ xi.data.guildShops =
     },
     ['Taten-Bilten'] =
     {
-        hours = { 6, 21 },
-        stock =
+        hours   = { 6, 21 },
+        holiday = xi.day.FIRESDAY,
+        stock   =
         {
             { id = xi.item.SPOOL_OF_SILK_THREAD,    initial = 8,   maxStock = 30,  targetStock = 20,  buyMax = 4060,   restockRate = 1, priceFloor = 9 },
             { id = xi.item.SPOOL_OF_GRASS_THREAD,   initial = 180, maxStock = 240, targetStock = 180, buyMax = 300,    restockRate = 30 },
@@ -1834,8 +1868,9 @@ xi.data.guildShops =
     },
     ['Tilala'] =
     {
-        hours = { 6, 21 },
-        stock =
+        hours   = { 6, 21 },
+        holiday = xi.day.FIRESDAY,
+        stock   =
         {
             { id = xi.item.BALL_OF_SARUTA_COTTON,   initial = 0,  maxStock = 240, targetStock = 180, buyMax = 200,    restockRate = 0 }, -- targetStock assumed
             { id = xi.item.FLAX_FLOWER,             initial = 15, maxStock = 240, targetStock = 180, buyMax = 1250,   restockRate = 15 },
@@ -1864,8 +1899,9 @@ xi.data.guildShops =
     },
     ['Tsutsuroon'] =
     {
-        hours = { 1, 23 },
-        stock =
+        hours   = { 1, 23 },
+        holiday = xi.day.DARKSDAY,
+        stock   =
         {
             { id = xi.item.KUNAI,                   initial = 50,  maxStock = 60,  targetStock = 55,  buyMax = 4420,    restockRate = 10 },
             { id = xi.item.SUZUME,                  initial = 50,  maxStock = 60,  targetStock = 55,  buyMax = 36120,   restockRate = 10 },
@@ -1973,8 +2009,9 @@ xi.data.guildShops =
     },
     ['Visala'] =
     {
-        hours = { 8, 23 },
-        stock =
+        hours   = { 8, 23 },
+        holiday = xi.day.ICEDAY,
+        stock   =
         {
             { id = xi.item.CHUNK_OF_SILVER_ORE,     initial = 180, maxStock = 240, targetStock = 180, buyMax = 2100,   restockRate = 60 }, -- targetStock assumed
             { id = xi.item.CHUNK_OF_MYTHRIL_ORE,    initial = 12,  maxStock = 120, targetStock = 90,  buyMax = 10000,  restockRate = 6 },  -- targetStock assumed
@@ -2104,8 +2141,9 @@ xi.data.guildShops =
     },
     ['Vuliaie'] =
     {
-        hours = { 9, 23 },
-        stock =
+        hours   = { 9, 23 },
+        holiday = xi.day.DARKSDAY,
+        stock   =
         {
             { id = xi.item.BAMBOO_STICK,            initial = 50,  maxStock = 240, targetStock = 180, buyMax = 720,    restockRate = 10 },
             { id = xi.item.JAR_OF_TOAD_OIL,         initial = 18,  maxStock = 60,  targetStock = 45,  buyMax = 18000,  restockRate = 4 },
@@ -2138,8 +2176,9 @@ xi.data.guildShops =
     },
     ['Wahnid'] = -- TODO: Recapture initial
     {
-        hours = { 1, 18 },
-        stock =
+        hours   = { 1, 18 },
+        holiday = xi.day.LIGHTSDAY,
+        stock   =
         {
             { id = xi.item.LITTLE_WORM,             initial = 180, maxStock = 240, targetStock = 180, buyMax = 20,     restockRate = 60 }, -- targetStock assumed
             { id = xi.item.LUGWORM,                 initial = 180, maxStock = 240, targetStock = 180, buyMax = 60,     restockRate = 60 }, -- targetStock assumed
@@ -2228,8 +2267,9 @@ xi.data.guildShops =
     },
     ['Wahraga'] =
     {
-        hours = { 8, 23 },
-        stock =
+        hours   = { 8, 23 },
+        holiday = xi.day.LIGHTNINGDAY,
+        stock   =
         {
             { id = xi.item.JAR_OF_BLACK_INK,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 3800,   restockRate = 0 }, -- buyMax from Maymunah; targetStock assumed
             { id = xi.item.FLASK_OF_DEODORIZER,         initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 4800,   restockRate = 0 }, -- targetStock assumed
@@ -2318,8 +2358,9 @@ xi.data.guildShops =
     },
     ['Yabby_Tanmikey'] =
     {
-        hours = { 8, 23 },
-        stock =
+        hours   = { 8, 23 },
+        holiday = xi.day.ICEDAY,
+        stock   =
         {
             { id = xi.item.CHUNK_OF_SILVER_ORE,     initial = 100, maxStock = 200, targetStock = 100, buyMax = 2100,   restockRate = 10, priceFloor = 180 },
             { id = xi.item.CHUNK_OF_MYTHRIL_ORE,    initial = 0,   maxStock = 200, targetStock = 100, buyMax = 10000,  restockRate = 0,  priceFloor = 15 },
@@ -2352,8 +2393,9 @@ xi.data.guildShops =
     },
     ['Yahliq'] =
     {
-        hours = { 1, 23 },
-        stock =
+        hours   = { 1, 23 },
+        holiday = xi.day.LIGHTNINGDAY,
+        stock   =
         {
             { id = xi.item.LUGWORM,              initial = 180, maxStock = 240, targetStock = 180, buyMax = 60,    restockRate = 60 }, -- targetStock assumed
             { id = xi.item.SABIKI_RIG,           initial = 20,  maxStock = 120, targetStock = 90,  buyMax = 15960, restockRate = 5 },  -- targetStock assumed
