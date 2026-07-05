@@ -214,17 +214,27 @@ void init(IPP mapIPP, bool isRunningInCI)
             {
                 // Lua stock:
                 // When called with two integers: a pseudo-random integer in the range ([lower, upper] (closed)).
-                //
-                // Custom extension:
-                // We detect if the arguments are both integers, so we can then return an integer in the range [lower, upper] (closed).
-                // If one or both arguments are floating-point, we fall through to use lua_Number [lower, upper) (half-open).
-                if (lower == std::floor(lower) && upper == std::floor(upper))
-                {
-                    return static_cast<lua_Number>(xirand::GetRandomNumber<int64>(static_cast<int64>(lower), static_cast<int64>(upper) + 1));
-                }
-
-                return xirand::GetRandomNumber<lua_Number>(lower, upper);
+                // Fractional bounds are rounded to the nearest integer; use math.randomFloat for float ranges.
+                return static_cast<lua_Number>(xirand::GetRandomNumber<int64>(std::llround(lower), std::llround(upper) + 1));
             });
+
+    // Custom extension: a pseudo-random integer in the range [lower, upper] (closed).
+    // Identical to math.random(lower, upper), but explicit about its semantics at the
+    // call site. Fractional bounds are rounded to the nearest integer.
+    lua["math"]["randomInt"] =
+        [](lua_Number lower, lua_Number upper) -> lua_Number
+    {
+        return static_cast<lua_Number>(xirand::GetRandomNumber<int64>(std::llround(lower), std::llround(upper) + 1));
+    };
+
+    // Custom extension: a pseudo-random double in the range [lower, upper) (half-open),
+    // regardless of whether the bounds are integral-valued. LuaJIT cannot tell 7.0
+    // from 7, so this is the only way to request a float range with whole-number bounds.
+    lua["math"]["randomFloat"] =
+        [](lua_Number lower, lua_Number upper)
+    {
+        return xirand::GetRandomNumber<lua_Number>(lower, upper);
+    };
 
     lua["math"]["randomNormal"] =
         [](lua_Number mean, lua_Number stddev, sol::optional<lua_Number> lower, sol::optional<lua_Number> upper)

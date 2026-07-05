@@ -537,3 +537,24 @@ end
 ---@return number
 function math.randomNormal(mean, stddev, lower, upper)
 end
+
+-- Generates a pseudo-random integer in [lower, upper] (both endpoints inclusive).
+-- Identical to math.random(lower, upper), but explicit about its semantics at the
+-- call site. Fractional bounds are rounded to the nearest integer.
+---@nodiscard
+---@param lower number
+---@param upper number
+---@return integer
+function math.randomInt(lower, upper)
+end
+
+-- Generates a pseudo-random double in [lower, upper) (half-open), regardless of
+-- whether the bounds are whole numbers. This is the only way to request a float
+-- range with whole-number bounds: math.random(2.0, 7.0) rolls integers, because
+-- LuaJIT cannot tell 7.0 from 7.
+---@nodiscard
+---@param lower number
+---@param upper number
+---@return number
+function math.randomFloat(lower, upper)
+end
