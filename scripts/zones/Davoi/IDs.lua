@@ -20,6 +20,7 @@ zones[xi.zone.DAVOI] =
         LOGIN_NUMBER                  = 7007, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7027, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7072, -- Tallying conquest results...
+        REGION_POINTS_SANDORIA        = 7137, -- San d'Oria's region points have increased!
         FISHING_MESSAGE_OFFSET        = 7231, -- You can't fish here.
         CAVE_HAS_BEEN_SEALED_OFF      = 7376, -- The cave has been sealed off by some sort of barrier.
         MAY_BE_SOME_WAY_TO_BREAK      = 7377, -- There may be some way to break through.

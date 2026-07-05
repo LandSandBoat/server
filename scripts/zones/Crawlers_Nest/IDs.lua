@@ -8,6 +8,7 @@ zones[xi.zone.CRAWLERS_NEST] =
     text =
     {
         CONQUEST_BASE                 = 0,     -- Tallying conquest results...
+        REGION_POINTS_SANDORIA        = 65,    -- San d'Oria's region points have increased!
         DEVICE_NOT_WORKING            = 173,   -- The device is not working.
         SYS_OVERLOAD                  = 182,   -- Warning! Sys...verload! Enterin...fety mode. ID eras...d.
         YOU_LOST_THE                  = 187,   -- You lost the <item>.

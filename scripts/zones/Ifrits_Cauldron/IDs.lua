@@ -20,6 +20,7 @@ zones[xi.zone.IFRITS_CAULDRON] =
         LOGIN_NUMBER                  = 7007,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7027,  -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7072,  -- Tallying conquest results...
+        REGION_POINTS_SANDORIA        = 7137,  -- San d'Oria's region points have increased!
         ALTAR_COMPLETED               = 7261,  -- You have already made an offering today.
         ALTAR_INSPECT                 = 7262,  -- This looks like the altar where offerings are to be placed.
         ALTAR_OFFERING                = 7263,  -- You place your offering of <item> on the altar.

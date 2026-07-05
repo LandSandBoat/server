@@ -18,6 +18,7 @@ zones[xi.zone.DEN_OF_RANCOR] =
         LOGIN_NUMBER                  = 7007,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7027,  -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7072,  -- Tallying conquest results...
+        REGION_POINTS_SANDORIA        = 7137,  -- San d'Oria's region points have increased!
         LANTERN_OFFSET                = 7231,  -- The grating will not budge.
         LANTERN_ALREADY_LIT           = 7238,  -- The lantern is already lit.
         RUSTY_OLD_LANTERN             = 7245,  -- Rusty old lanterns hang from this altar.

@@ -33,6 +33,40 @@ local regionKITable =
 -- Public functions
 -----------------------------------
 
+-- Award influence for opening a chest/coffer with the region's insignia.
+-- TODO: The text order is slightly different than retail, but that would require modifying treasure.lua.
+xi.expeditionaryForce.onChestOpen = function(player)
+    -- Early return: Player doesn't have KI.
+    local currentRegion = player:getCurrentRegion()
+    if not player:hasKeyItem(regionKITable[currentRegion]) then
+        return
+    end
+
+    -- Early return: Player nation owns current region.
+    local playerNation = player:getNation()
+    local ownerNation  = GetRegionOwner(currentRegion)
+    if playerNation == ownerNation then
+        return
+    end
+
+    -- Early return: Player nation is allied with region owner nation.
+    if xi.conquest.areAllies(playerNation, ownerNation) then
+        return
+    end
+
+    -- Handle nation message.
+    player:messageSpecial(zones[player:getZoneID()].text.REGION_POINTS_SANDORIA + playerNation)
+
+    -- Record participation.
+    local participation = player:getCharVar('[ExpForce]Participation')
+    player:setCharVar('[ExpForce]Participation', bit.bor(participation, bit.lshift(1, currentRegion)))
+
+    -- TODO: Award influence.
+    -- player:gainConquestInfluence(xi.settings.main.EXP_FORCE_TREASURE_INFLUENCE)
+
+    -- TODO: Never tested if opening a chest granted the EF title.
+end
+
 -- Dispose of every Expeditionary Force insignia the player is holding.
 -- Called on a nation change, since insignias are tied to the player's old allegiance.
 xi.expeditionaryForce.disposeInsigniaNationSwap = function(player)

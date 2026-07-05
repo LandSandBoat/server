@@ -20,6 +20,7 @@ zones[xi.zone.UPPER_DELKFUTTS_TOWER] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7062,  -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET        = 7107,  -- You can't fish here.
         CONQUEST_BASE                 = 7208,  -- Tallying conquest results...
+        REGION_POINTS_SANDORIA        = 7273,  -- San d'Oria's region points have increased!
         CHEST_UNLOCKED                = 7375,  -- You unlock the chest!
         PLAYER_OBTAINS_ITEM           = 7398,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM         = 7399,  -- You were unable to obtain the item.

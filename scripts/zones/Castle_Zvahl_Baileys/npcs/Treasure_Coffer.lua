@@ -13,7 +13,11 @@ entity.onTrade = function(player, npc, trade)
     then
         xi.treasure.onTrade(player, npc, trade, 2, xi.keyItem.MIQUES_PAINTBRUSH)
     else
-        xi.treasure.onTrade(player, npc, trade, 0, 0)
+        local reward = xi.treasure.onTrade(player, npc, trade, 0, 0)
+
+        if reward > 0 then
+            xi.expeditionaryForce.onChestOpen(player)
+        end
     end
 end
 

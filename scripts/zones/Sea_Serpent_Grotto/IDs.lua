@@ -20,6 +20,7 @@ zones[xi.zone.SEA_SERPENT_GROTTO] =
         LOGIN_NUMBER                  = 7007,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7027,  -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7072,  -- Tallying conquest results...
+        REGION_POINTS_SANDORIA        = 7137,  -- San d'Oria's region points have increased!
         FISHING_MESSAGE_OFFSET        = 7231,  -- You can't fish here.
         CHEST_UNLOCKED                = 7340,  -- You unlock the chest!
         SAHAGIN_DOOR_INSIDE           = 7358,  -- The door is tightly shut.

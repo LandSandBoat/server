@@ -19,6 +19,7 @@ zones[xi.zone.LABYRINTH_OF_ONZOZO] =
         GEOMAGNETRON_ATTUNED          = 7016,  -- Your <keyitem> has been attuned to a geomagnetic fount in the corresponding locale.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7027,  -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7072,  -- Tallying conquest results...
+        REGION_POINTS_SANDORIA        = 7137,  -- San d'Oria's region points have increased!
         FISHING_MESSAGE_OFFSET        = 7231,  -- You can't fish here.
         CHEST_UNLOCKED                = 7340,  -- You unlock the chest!
         NEST_OF_LARGE_BIRD            = 7348,  -- It looks like the nest of a very large bird.

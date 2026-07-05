@@ -8,6 +8,7 @@ zones[xi.zone.THE_ELDIEME_NECROPOLIS] =
     text =
     {
         CONQUEST_BASE                    = 0,     -- Tallying conquest results...
+        REGION_POINTS_SANDORIA           = 65,    -- San d'Oria's region points have increased!
         ITEM_CANNOT_BE_OBTAINED          = 6545,  -- You cannot obtain the <item>. Come back after sorting your inventory.
         ITEM_OBTAINED                    = 6553,  -- Obtained: <item>.
         GIL_OBTAINED                     = 6554,  -- Obtained <number> gil.

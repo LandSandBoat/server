@@ -8,6 +8,7 @@ zones[xi.zone.MIDDLE_DELKFUTTS_TOWER] =
     text =
     {
         CONQUEST_BASE                 = 4,    -- Tallying conquest results...
+        REGION_POINTS_SANDORIA        = 69,   -- San d'Oria's region points have increased!
         ITEM_CANNOT_BE_OBTAINED       = 6549, -- You cannot obtain the <item>. Come back after sorting your inventory.
         ITEM_OBTAINED                 = 6557, -- Obtained: <item>.
         GIL_OBTAINED                  = 6558, -- Obtained <number> gil.
