@@ -18,6 +18,7 @@ zones[xi.zone.MONASTIC_CAVERN] =
         GEOMAGNETRON_ATTUNED          = 7016, -- Your <keyitem> has been attuned to a geomagnetic fount in the corresponding locale.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7027, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7072, -- Tallying conquest results...
+        REGION_POINTS_SANDORIA        = 7137, -- San d'Oria's region points have increased!
         ALTAR                         = 7287, -- This appears to be an altar.
         THE_MAGICITE_GLOWS_OMINOUSLY  = 7290, -- The magicite glows ominously.
         CHEST_UNLOCKED                = 7309, -- You unlock the chest!

@@ -19,6 +19,7 @@ zones[xi.zone.GUSGEN_MINES] =
         GEOMAGNETRON_ATTUNED          = 7016,  -- Your <keyitem> has been attuned to a geomagnetic fount in the corresponding locale.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7027,  -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7072,  -- Tallying conquest results...
+        REGION_POINTS_SANDORIA        = 7137,  -- San d'Oria's region points have increased!
         FISHING_MESSAGE_OFFSET        = 7231,  -- You can't fish here.
         DEVICE_NOT_WORKING            = 7346,  -- The device is not working.
         SYS_OVERLOAD                  = 7355,  -- Warning! Sys...verload! Enterin...fety mode. ID eras...d.

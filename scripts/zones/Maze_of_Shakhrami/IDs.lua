@@ -31,6 +31,7 @@ zones[xi.zone.MAZE_OF_SHAKHRAMI] =
         WATER_POOL                    = 7097,  -- Water forms a pool here.
         WAIT_A_BIT_LONGER             = 7098,  -- It does not seem to have become <item> yet. You need to wait a bit longer.
         CONQUEST_BASE                 = 7100,  -- Tallying conquest results...
+        REGION_POINTS_SANDORIA        = 7165,  -- San d'Oria's region points have increased!
         DEVICE_NOT_WORKING            = 7273,  -- The device is not working.
         SYS_OVERLOAD                  = 7282,  -- Warning! Sys...verload! Enterin...fety mode. ID eras...d.
         YOU_LOST_THE                  = 7287,  -- You lost the <item>.

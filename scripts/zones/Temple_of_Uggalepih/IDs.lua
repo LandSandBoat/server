@@ -20,6 +20,7 @@ zones[xi.zone.TEMPLE_OF_UGGALEPIH] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7027,  -- Your party is unable to participate because certain members' levels are restricted.
         UNABLE_TO_PROGRESS_MISSION    = 7051,  -- You are unable to make further progress in Rhapsodies of Vana'diel due to an event occurring in the [Chains of Promathia/Treasures of Aht Urhgan/Wings of the Goddess/Seekers of Adoulin/Rise of the Zilart] missions.
         CONQUEST_BASE                 = 7072,  -- Tallying conquest results...
+        REGION_POINTS_SANDORIA        = 7137,  -- San d'Oria's region points have increased!
         FISHING_MESSAGE_OFFSET        = 7231,  -- You can't fish here.
         CHEST_UNLOCKED                = 7340,  -- You unlock the chest!
         NO_REASON_TO_INVESTIGATE      = 7348,  -- There is no reason to investigate further.

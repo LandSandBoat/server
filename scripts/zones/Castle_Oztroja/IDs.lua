@@ -27,6 +27,7 @@ zones[xi.zone.CASTLE_OZTROJA] =
         BUXU                               = 23,   -- It reads, Buxu.
         XICU                               = 24,   -- It reads, Xicu.
         CONQUEST_BASE                      = 26,   -- Tallying conquest results...
+        REGION_POINTS_SANDORIA             = 91,   -- San d'Oria's region points have increased!
         ITEM_CANNOT_BE_OBTAINED            = 6571, -- You cannot obtain the <item>. Come back after sorting your inventory.
         FULL_INVENTORY_AFTER_TRADE         = 6575, -- You cannot obtain the <item>. Try trading again after sorting your inventory.
         ITEM_OBTAINED                      = 6579, -- Obtained: <item>.
