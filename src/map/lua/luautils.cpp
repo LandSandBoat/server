@@ -178,125 +178,6 @@ auto findGlobalLuaFunction(const std::string& funcName) -> sol::function
     return sol::lua_nil;
 }
 
-// Use LuaJIT's debug modules to look at the bytecode representation of a function. If it's a single
-// RET0 then it's a stub/empty handler. We can use this information to cache more aggressively.
-// TODO: We could also use this information to Warn on startup, or silently strip these functions
-// to streamline the Lua state size.
-bool isEmptyLuaFunction(const sol::function& fn)
-{
-    if (!fn.valid())
-    {
-        return false;
-    }
-
-    // Compile the checker once and cache it inside the Lua state itself (in the registry),
-    // rather than in a C++ static. A function-local static sol::function would be destroyed
-    // during static destruction at process exit - after lua_cleanup() has already closed the
-    // Lua state - causing luaL_unref to run against a freed lua_State (crash). Caching in the
-    // registry ties the checker's lifetime to the state, so it is torn down cleanly with it.
-    static constexpr auto checkerKey = "isEmptyLuaFunctionChecker";
-
-    const sol::function checker = [&]() -> sol::function
-    {
-        if (const sol::function cached = lua.registry()[checkerKey]; cached.valid())
-        {
-            return cached;
-        }
-
-        const auto result = lua.safe_script(
-            R"Lua(
-            local ok1, util  = pcall(require, "jit.util")
-            local ok2, vmdef = pcall(require, "jit.vmdef")
-            if not (ok1 and ok2 and util and vmdef) then
-                return function() return false end
-            end
-            local bcnames = vmdef.bcnames
-            local band    = bit.band
-            local function opname(ins)
-                local op = band(ins, 0xff)
-                return (bcnames:sub(op * 6 + 1, op * 6 + 6):gsub("%s+$", ""))
-            end
-            return function(f)
-                if type(f) ~= "function" then
-                    return false
-                end
-                local bodyCount, lastOp = 0, nil
-                for pc = 0, 4 do
-                    local ins = util.funcbc(f, pc)
-                    if not ins then
-                        break
-                    end
-                    local name = opname(ins)
-                    if name:sub(1, 4) ~= "FUNC" then -- skip the FUNCF/FUNCV/FUNCC header
-                        bodyCount = bodyCount + 1
-                        lastOp    = name
-                        if bodyCount > 1 then
-                            return false
-                        end
-                    end
-                end
-                return bodyCount == 1 and lastOp == "RET0"
-            end
-            )Lua",
-            sol::script_pass_on_error);
-
-        if (!result.valid())
-        {
-            const sol::error err = result;
-            ShowErrorFmt("Failed to create nil function checker: {}", err.what());
-            return sol::function(sol::lua_nil);
-        }
-
-        const sol::function created = result;
-        lua.registry()[checkerKey]  = created;
-        return created;
-    }();
-
-    if (!checker.valid())
-    {
-        return false;
-    }
-
-    const auto res = checker(fn);
-    return res.valid() && res.get<bool>();
-}
-
-sol::function nonEmptyOrNil(const std::string& funcName, sol::function fn)
-{
-    // NOTE: Interaction Framework relies on these functions existing and being valid for them to
-    // hook, so we can't mark them for replacement!
-    static constexpr std::string_view frameworkFallbacks[] = {
-        "onTrigger",
-        "onTrade",
-        "onSteal",
-        "onZoneIn",
-        "onZoneOut",
-        "afterZoneIn",
-        "onEventFinish",
-        "onEventUpdate",
-        "onTriggerAreaEnter",
-        "onTriggerAreaLeave",
-    };
-
-    for (const auto fallback : frameworkFallbacks)
-    {
-        if (funcName == fallback)
-        {
-            return fn;
-        }
-    }
-
-    return [&]()
-    {
-        if (!isEmptyLuaFunction(fn))
-        {
-            return fn;
-        }
-
-        return sol::function(sol::lua_nil);
-    }();
-}
-
 } // namespace detail
 
 //
@@ -766,25 +647,25 @@ sol::function getEntityCachedFunction(CBaseEntity* PEntity, const std::string& f
                 case TYPE_NPC:
                     if (auto f = lua["xi"]["zones"][PEntity->loc.zone->getName()]["npcs"][PEntity->getName()][funcName]; f.valid())
                     {
-                        return detail::nonEmptyOrNil(funcName, f.get<sol::function>());
+                        return f.get<sol::function>();
                     }
                     break;
                 case TYPE_MOB:
                     if (auto f = lua["xi"]["zones"][PEntity->loc.zone->getName()]["mobs"][PEntity->getName()][funcName]; f.valid())
                     {
-                        return detail::nonEmptyOrNil(funcName, f.get<sol::function>());
+                        return f.get<sol::function>();
                     }
                     break;
                 case TYPE_PET:
                     if (auto f = lua["xi"]["pets"][static_cast<CPetEntity*>(PEntity)->GetScriptName()][funcName]; f.valid())
                     {
-                        return detail::nonEmptyOrNil(funcName, f.get<sol::function>());
+                        return f.get<sol::function>();
                     }
                     break;
                 case TYPE_TRUST:
                     if (auto f = lua["xi"]["actions"]["spells"]["trust"][PEntity->getName()][funcName]; f.valid())
                     {
-                        return detail::nonEmptyOrNil(funcName, f.get<sol::function>());
+                        return f.get<sol::function>();
                     }
                     break;
                 default:
@@ -867,7 +748,7 @@ sol::function getSpellCachedFunction(CSpell* PSpell, std::string funcName)
         {
             if (auto f = lua["xi"]["actions"]["spells"][switchKey][name][funcName]; f.valid())
             {
-                return detail::nonEmptyOrNil(funcName, f.get<sol::function>());
+                return f.get<sol::function>();
             }
             return sol::lua_nil;
         });
@@ -891,7 +772,7 @@ auto getEffectCachedFunction(const std::string& effectName, const std::string& f
             {
                 if (auto f = effectTable[funcName]; f.valid())
                 {
-                    return detail::nonEmptyOrNil(funcName, f.get<sol::function>());
+                    return f.get<sol::function>();
                 }
             }
             return sol::lua_nil;
@@ -1168,7 +1049,7 @@ sol::function getCachedFileFunction(const std::string& filename, const std::stri
             {
                 if (auto f = table[funcName]; f.valid())
                 {
-                    return detail::nonEmptyOrNil(funcName, f.get<sol::function>());
+                    return f.get<sol::function>();
                 }
             }
             return sol::lua_nil;

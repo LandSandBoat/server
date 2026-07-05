@@ -27,7 +27,9 @@ describe('Item use', function()
         assert(sword:state() == xi.itemState.EQUIPPED)
     end)
 
-    it('food is InTransaction during cast then consumed', function()
+    it('food is InTransaction during cast then consumed and increases stats', function()
+        local playerSTR = player:getStat(xi.mod.STR)
+
         player:addItem(xi.item.MEAT_MITHKABOB)
         local kabob = player:findItem(xi.item.MEAT_MITHKABOB)
         assert(kabob)
@@ -45,6 +47,8 @@ describe('Item use', function()
         player.assert
             :hasEffect(xi.effect.FOOD)
             .no:hasItem(xi.item.MEAT_MITHKABOB)
+
+        assert((player:getStat(xi.mod.STR) - playerSTR) == 5, 'mithkabob increases STR by 5')
     end)
 
     it('using charged equipment keeps it in Equipped state', function()
