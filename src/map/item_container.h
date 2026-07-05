@@ -26,6 +26,8 @@
 #include "common/logging.h"
 #include "common/timer.h"
 
+#include "items/item.h"
+
 #include <array>
 #include <memory>
 #include <optional>
@@ -57,8 +59,6 @@ enum CONTAINER_ID : uint8
 #define MAX_CONTAINER_SIZE 120
 #define ERROR_SLOTID       255
 DECLARE_FORMAT_AS_UNDERLYING(CONTAINER_ID);
-
-class CItem;
 
 class CItemContainer
 {
