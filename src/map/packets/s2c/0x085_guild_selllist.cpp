@@ -22,7 +22,6 @@
 #include "0x085_guild_selllist.h"
 
 #include "entities/char_entity.h"
-#include "item_container.h"
 
 GP_SERV_COMMAND_GUILD_SELLLIST::GP_SERV_COMMAND_GUILD_SELLLIST(CCharEntity* PChar, const std::vector<GP_GUILD_ITEM>& items)
 {

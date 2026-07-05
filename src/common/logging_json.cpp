@@ -21,6 +21,9 @@
 
 #include "logging.h"
 
+#include "common/logging_context.h"
+#include <fmt/chrono.h>
+
 #include <chrono>
 #include <iterator>
 #include <span>

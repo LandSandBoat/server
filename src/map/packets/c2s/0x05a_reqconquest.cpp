@@ -21,10 +21,8 @@
 
 #include "0x05a_reqconquest.h"
 
-#include "campaign_system.h"
 #include "entities/char_entity.h"
 #include "packets/s2c/0x05e_conquest.h"
-#include "packets/s2c/0x071_influence_campaign.h"
 #include "packets/s2c/0x071_influence_colonization.h"
 
 auto GP_CLI_COMMAND_REQCONQUEST::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

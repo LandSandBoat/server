@@ -30,7 +30,9 @@ When a status effect is gained twice on a player. It can do one or more of the f
 */
 
 #include "common/logging.h"
+
 #include "common/timer.h"
+#include "enums/weather.h"
 
 #include <common/types/hash_map.h>
 

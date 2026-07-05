@@ -21,8 +21,6 @@
 
 #include "spawn_handler.h"
 
-#include <vector>
-
 #include "common/timer.h"
 #include "common/vana_time.h"
 #include "entities/mob_entity.h"

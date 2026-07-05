@@ -29,11 +29,9 @@
 #include "ai/states/range_state.h"
 #include "ai/states/weaponskill_state.h"
 #include "enmity_container.h"
-#include "mobskill.h"
 #include "notoriety_container.h"
 #include "spell.h"
 #include "utils/battleutils.h"
-#include "utils/trustutils.h"
 #include "weapon_skill.h"
 
 #include "ai/controllers/player_controller.h"
@@ -42,7 +40,6 @@
 #include "packets/s2c/0x038_schedulor.h"
 
 #include <algorithm>
-#include <ranges>
 
 namespace gambits
 {

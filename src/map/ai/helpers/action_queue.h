@@ -22,13 +22,10 @@
 #ifndef _ACTIONQUEUE_H
 #define _ACTIONQUEUE_H
 
-#include "common/cbasetypes.h"
-#include "common/mmo.h"
 #include "common/timer.h"
 
 #include "common/types/fn.h"
 
-#include <memory>
 #include <queue>
 
 #include "sol/sol.hpp"

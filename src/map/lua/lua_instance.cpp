@@ -24,6 +24,7 @@
 #include "common/logging.h"
 #include "common/timer.h"
 
+#include "entities/npc_entity.h"
 #include "instance.h"
 #include "lua_base_entity.h"
 #include "luautils.h"

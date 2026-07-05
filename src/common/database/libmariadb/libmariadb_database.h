@@ -22,9 +22,6 @@
 #pragma once
 
 #include <common/database/caching_database.h>
-#include <common/database/connection.h>
-
-#include <memory>
 
 namespace db
 {

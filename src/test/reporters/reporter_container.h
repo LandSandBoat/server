@@ -25,7 +25,6 @@
 #include <chrono>
 #include <memory>
 #include <string>
-#include <vector>
 
 class ReporterContainer
 {

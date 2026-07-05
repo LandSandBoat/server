@@ -21,11 +21,9 @@
 
 #include "moduleutils.h"
 
-#include "command_handler.h"
 #include "common/cbasetypes.h"
 #include "common/utils.h"
 #include "lua/luautils.h"
-#include "map_networking.h"
 
 #include <common/types/hash_map.h>
 
@@ -34,7 +32,8 @@
 #include <ranges>
 #include <string>
 #include <unordered_set>
-#include <vector>
+
+#include <fmt/ranges.h>
 
 namespace
 {

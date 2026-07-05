@@ -28,7 +28,6 @@
 #include <algorithm>
 #include <cctype>
 #include <charconv>
-#include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <regex>

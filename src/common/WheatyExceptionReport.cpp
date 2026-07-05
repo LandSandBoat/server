@@ -12,6 +12,9 @@
 #include <array>
 #include <string>
 
+#include <fmt/chrono.h>
+#include <fmt/ranges.h>
+
 #include "cbasetypes.h"
 #include "logging.h"
 #include "utils.h"

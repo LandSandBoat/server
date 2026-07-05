@@ -22,7 +22,6 @@
 #include "0x016_charreq.h"
 
 #include "entities/char_entity.h"
-#include "entities/npc_entity.h"
 #include "packets/char_status.h"
 #include "utils/zoneutils.h"
 

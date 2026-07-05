@@ -21,6 +21,11 @@
 
 #include "lua_trigger_area.h"
 
+#include "common/lua.h"
+
+#include "common/logging.h"
+#include "sol_bindings.h"
+
 #include "trigger_area.h"
 
 CLuaTriggerArea::CLuaTriggerArea(ITriggerArea* PTriggerArea)

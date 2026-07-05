@@ -22,13 +22,10 @@
 #ifndef _CBATTLEFIELD_H
 #define _CBATTLEFIELD_H
 
-#include <functional>
 #include <memory>
 #include <set>
-#include <vector>
 
 #include "common/cbasetypes.h"
-#include "common/mmo.h"
 #include "common/timer.h"
 
 #include <common/types/fn.h>
@@ -80,8 +77,6 @@ class CNpcEntity;
 class CMobEntity;
 class CCharEntity;
 class CBaseEntity;
-class CBattleEntity;
-class CBattlefieldHandler;
 class CZone;
 
 struct BattlefieldMob_t

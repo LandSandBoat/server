@@ -23,7 +23,6 @@
 
 #include "base.h"
 
-class CCharEntity;
 enum class GP_SERV_COMMAND_RECIPE_TYPE : uint16_t
 {
     RecipeDetail1 = 1, // A random recipe of appropriate level

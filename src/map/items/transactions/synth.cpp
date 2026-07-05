@@ -21,7 +21,6 @@
 
 #include "synth.h"
 
-#include "common/database.h"
 #include "common/logging.h"
 
 #include "entities/char_entity.h"

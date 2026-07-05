@@ -20,7 +20,6 @@
 */
 
 #include "despawn_state.h"
-#include "ai/ai_container.h"
 #include "entities/base_entity.h"
 #include "entities/mob_entity.h"
 #include "enums/four_cc.h"

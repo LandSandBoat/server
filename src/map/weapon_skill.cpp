@@ -21,10 +21,6 @@
 
 #include "weapon_skill.h"
 
-#include "enums/action/animation.h"
-
-#include <cstring>
-
 CWeaponSkill::CWeaponSkill(const uint16 id)
 : m_ID(id)
 , m_TypeID(0)

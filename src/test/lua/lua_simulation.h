@@ -22,7 +22,6 @@
 #pragma once
 
 #include "common/cbasetypes.h"
-#include "entities/base_entity.h"
 #include "lua_client_entity_pair.h"
 
 #include <sol/forward.hpp>

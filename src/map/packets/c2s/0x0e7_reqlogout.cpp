@@ -23,7 +23,6 @@
 
 #include "entities/char_entity.h"
 #include "status_effect_container.h"
-#include "utils/charutils.h"
 
 auto GP_CLI_COMMAND_REQLOGOUT::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {

@@ -24,7 +24,6 @@
 #include "base.h"
 
 class CCharEntity;
-class CBaseEntity;
 struct EventInfo;
 
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x0034

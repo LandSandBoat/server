@@ -27,7 +27,6 @@
 
 #include "ai/ai_container.h"
 
-#include "common/database.h"
 #include "common/logging.h"
 
 #include <common/types/hash_map.h>
@@ -42,12 +41,10 @@
 #include "packets/s2c/0x0ac_command_data.h"
 
 #include "utils/charutils.h"
-#include "utils/zoneutils.h"
 
 #include "packets/c2s/0x01a_action.h"
 #include "packets/c2s/0x102_extended_job.h"
 #include "packets/s2c/0x063_miscdata_monstrosity.h"
-#include "status_effect.h"
 #include "status_effect_container.h"
 
 struct MonstrositySpeciesRow

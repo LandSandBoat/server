@@ -21,7 +21,6 @@
 
 #include "battleutils.h"
 
-#include "common/database.h"
 #include "common/logging.h"
 #include "common/settings.h"
 #include "common/timer.h"
@@ -51,16 +50,12 @@
 #include "entities/mob_entity.h"
 #include "entities/pet_entity.h"
 #include "entities/trust_entity.h"
-#include "enums/action/hit_distortion.h"
-#include "enums/action/info.h"
 #include "enums/msg_std.h"
 #include "enums/weather.h"
 #include "item_container.h"
 #include "items.h"
 #include "items/item_weapon.h"
 #include "job_points.h"
-#include "map/navmesh/navmesh.h"
-#include "map_engine.h"
 #include "mob_modifier.h"
 #include "mobskill.h"
 #include "modifier.h"
@@ -80,8 +75,6 @@
 #include "utils/petutils.h"
 #include "weapon_skill.h"
 #include "zoneutils.h"
-
-#include <map/ximesh/ximesh.h>
 
 /************************************************************************
  *                                                                       *

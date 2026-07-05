@@ -21,6 +21,8 @@
 
 #include "item_state.h"
 
+#include "enums/four_cc.h"
+
 #include "ai/ai_container.h"
 #include "entities/battle_entity.h"
 #include "entities/char_entity.h"

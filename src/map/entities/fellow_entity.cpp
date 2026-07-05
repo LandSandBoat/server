@@ -21,6 +21,8 @@
 
 #include "fellow_entity.h"
 
+#include "char_entity.h"
+
 namespace
 {
 

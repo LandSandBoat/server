@@ -21,14 +21,12 @@
 
 #include "aman.h"
 
-#include "common/database.h"
 #include "entities/char_entity.h"
 #include "ipc_client.h"
 #include "lua/luautils.h"
 #include "packets/s2c/0x02a_talknumwork.h"
 #include "roe.h"
 #include "utils/charutils.h"
-#include "utils/zoneutils.h"
 
 namespace
 {

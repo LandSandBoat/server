@@ -20,6 +20,8 @@
 */
 
 #include "zone_entities.h"
+
+#include "common/logging_context.h"
 #include "enmity_container.h"
 #include "instance.h"
 #include "latent_effect_container.h"

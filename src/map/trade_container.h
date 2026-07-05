@@ -24,7 +24,6 @@
 
 #include "common/cbasetypes.h"
 #include <variant>
-#include <vector>
 
 #define CONTAINER_SIZE       17
 #define TRADE_CONTAINER_SIZE 8

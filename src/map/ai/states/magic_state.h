@@ -26,7 +26,6 @@
 #include "state.h"
 
 class CMobEntity;
-struct action_t;
 
 enum MAGICFLAGS
 {

@@ -151,7 +151,6 @@ There are 3 'types' when concerned with deriving these complete 32bit values.
 */
 
 #include <map>
-#include <vector>
 
 #include "common/cbasetypes.h"
 

@@ -21,21 +21,13 @@
 
 #pragma once
 
-#include <common/cbasetypes.h>
-#include <common/logging_context.h>
-#include <common/macros.h>
 #include <common/tracy.h>
 
 #include <string>
 #include <string_view>
-#include <utility>
 
-#include <fmt/args.h>
-#include <fmt/chrono.h>
-#include <fmt/core.h>
 #include <fmt/format.h>
 #include <fmt/printf.h>
-#include <fmt/ranges.h>
 
 #include <spdlog/spdlog.h>
 

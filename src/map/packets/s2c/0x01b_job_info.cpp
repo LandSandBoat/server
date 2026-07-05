@@ -25,7 +25,6 @@
 
 #include "aman.h"
 #include "entities/char_entity.h"
-#include "monstrosity.h"
 
 GP_SERV_COMMAND_JOB_INFO::GP_SERV_COMMAND_JOB_INFO(CCharEntity* PChar)
 {

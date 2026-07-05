@@ -22,7 +22,6 @@
 #pragma once
 
 #include "base.h"
-#include <vector>
 
 class CCharEntity;
 

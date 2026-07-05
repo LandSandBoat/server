@@ -24,8 +24,6 @@
 
 #include "mob_controller.h"
 
-class CPetEntity;
-
 class CPetController : public CMobController
 {
 public:

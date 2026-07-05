@@ -23,8 +23,6 @@
 
 #include "packets/c2s/0x0d3_faq_gmcall.h"
 
-#include <vector>
-
 class CCharEntity;
 
 class GMCallContainer

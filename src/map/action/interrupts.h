@@ -20,7 +20,6 @@
 */
 
 #pragma once
-#include "action.h"
 
 class CSpell;
 class CPetSkill;

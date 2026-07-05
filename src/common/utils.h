@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+
 #include "common/database.h"
 #include "common/logging.h"
 #include "common/mmo.h"
@@ -29,6 +30,7 @@
 #include "common/synchronized.h"
 #include "common/timer.h"
 #include "common/xirand.h"
+#include <fmt/ranges.h>
 
 #include <common/types/hash_map.h>
 

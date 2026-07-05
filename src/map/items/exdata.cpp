@@ -23,7 +23,6 @@
 
 #include "item.h"
 #include "item_equipment.h"
-#include "item_furnishing.h"
 #include "item_weapon.h"
 
 #include "items.h"

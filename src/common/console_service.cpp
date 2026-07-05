@@ -21,6 +21,8 @@
 
 #include "console_service.h"
 
+#include <fmt/ranges.h>
+
 #include "application.h"
 #include "database.h"
 #include "logging.h"

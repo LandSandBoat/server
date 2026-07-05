@@ -21,7 +21,6 @@
 
 #include "0x0dd_group_list.h"
 
-#include "alliance.h"
 #include "common/logging.h"
 #include "entities/char_entity.h"
 #include "entities/trust_entity.h"

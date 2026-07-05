@@ -26,7 +26,6 @@
 #include "items/exdata/mannequin.h"
 #include "items/item_furnishing.h"
 #include "lua/luautils.h"
-#include "packets/char_status.h"
 #include "packets/s2c/0x01c_item_max.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x01f_item_list.h"

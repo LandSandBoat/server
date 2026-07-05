@@ -21,6 +21,10 @@
 
 #include "common/logging.h"
 
+#include "common/lua.h"
+
+#include "sol_bindings.h"
+
 #include "lua_weaponskill.h"
 #include "weapon_skill.h"
 

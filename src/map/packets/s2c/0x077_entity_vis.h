@@ -23,8 +23,6 @@
 
 #include "base.h"
 
-#include <vector>
-
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x0077
 class GP_SERV_COMMAND_ENTITY_VIS final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_ENTITY_VIS, GP_SERV_COMMAND_ENTITY_VIS>
 {

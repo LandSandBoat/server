@@ -21,6 +21,8 @@
 
 #include "battle_entity.h"
 
+#include "enums/four_cc.h"
+
 #include "common/database.h"
 #include "common/logging.h"
 #include "common/utils.h"

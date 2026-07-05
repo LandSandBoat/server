@@ -26,8 +26,6 @@
 #include "base.h"
 #include "packets/c2s/0x03d_black_edit.h"
 
-#include <vector>
-
 class GP_SERV_COMMAND_BLACK_LIST final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_BLACK_LIST, GP_SERV_COMMAND_BLACK_LIST>
 {
 public:

@@ -27,10 +27,8 @@
 #include "colonization_system.h"
 #include "conquest_system.h"
 
-#include <concurrentqueue.h>
 #include <memory>
 
-#include "common/database.h"
 #include "common/logging.h"
 
 namespace

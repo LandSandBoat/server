@@ -23,7 +23,6 @@
 #define _CAMPAIGNHANDLER_H
 
 #include "common/cbasetypes.h"
-#include <vector>
 
 class CZone;
 

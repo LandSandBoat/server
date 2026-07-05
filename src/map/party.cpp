@@ -34,8 +34,6 @@
 #include "utils/charutils.h"
 #include "utils/jailutils.h"
 #include "utils/zoneutils.h"
-#include <cstring>
-#include <vector>
 
 #include "packets/c2s/0x077_group_change2.h"
 #include "packets/char_status.h"

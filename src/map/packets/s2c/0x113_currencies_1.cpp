@@ -21,7 +21,6 @@
 
 #include "0x113_currencies_1.h"
 
-#include "common/database.h"
 #include "entities/char_entity.h"
 #include "utils/charutils.h"
 

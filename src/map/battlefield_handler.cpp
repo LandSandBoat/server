@@ -19,12 +19,7 @@
 ===========================================================================
 */
 
-#include <algorithm>
 #include <cstring>
-
-#include "ai/states/death_state.h"
-
-#include "alliance.h"
 
 #include "battlefield.h"
 #include "battlefield_handler.h"
@@ -34,13 +29,7 @@
 
 #include "lua/luautils.h"
 
-#include "packets/s2c/0x119_abil_recast.h"
-
-#include "status_effect.h"
 #include "status_effect_container.h"
-
-#include "utils/charutils.h"
-#include "utils/zoneutils.h"
 
 #include "zone.h"
 

@@ -24,7 +24,6 @@
 #include "base.h"
 #include "packets/c2s/0x04e_auc.h"
 
-enum class GP_CLI_COMMAND_AUC_COMMAND : uint8_t;
 class CCharEntity;
 class CItem;
 

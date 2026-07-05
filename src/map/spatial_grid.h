@@ -26,7 +26,6 @@
 #include <common/types/flat_hash_map.h>
 
 #include <cmath>
-#include <cstdint>
 #include <vector>
 
 class CBaseEntity;

@@ -23,7 +23,6 @@
 #define _LUATRIGGERAREA_H
 
 #include "common/cbasetypes.h"
-#include "luautils.h"
 
 class ITriggerArea;
 

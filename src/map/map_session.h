@@ -37,6 +37,10 @@ class Scheduler;
 
 struct MapSession
 {
+    // Out-of-line so ~unique_ptr<CCharEntity> is instantiated where CCharEntity is complete
+    MapSession();
+    ~MapSession();
+
     // TODO: Don't pass the scheduler around in here!
     // This is a dirty hack to pipe the scheduler around into the packet handlers.
     Scheduler* scheduler = nullptr;

@@ -23,7 +23,6 @@
 #define _CLINKSHELLLISTPACKET_H_
 
 #include "common/cbasetypes.h"
-#include "search_list.h"
 
 class CLinkshellListPacket
 {

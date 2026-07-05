@@ -21,6 +21,8 @@
 
 #include "packets/s2c/0x057_weather.h"
 
+#include "enums/weather.h"
+
 #include <common/types/hash_map.h>
 
 namespace

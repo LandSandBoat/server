@@ -23,7 +23,6 @@
 
 #include "aman.h"
 #include "command_handler.h"
-#include "common/database.h"
 #include "common/ipc_structs.h"
 #include "common/settings.h"
 #include "entities/char_entity.h"

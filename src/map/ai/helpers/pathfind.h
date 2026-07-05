@@ -22,11 +22,8 @@
 #ifndef _PATHFIND_H
 #define _PATHFIND_H
 
-#include "common/logging.h"
 #include "common/mmo.h"
 #include "common/timer.h"
-
-#include <vector>
 
 class CBaseEntity;
 

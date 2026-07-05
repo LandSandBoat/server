@@ -20,6 +20,7 @@
 */
 
 #include "mobskill_state.h"
+
 #include "action/action.h"
 #include "action/interrupts.h"
 #include "ai/ai_container.h"
@@ -28,6 +29,7 @@
 #include "entities/battle_entity.h"
 #include "entities/mob_entity.h"
 #include "enums/action/category.h"
+#include "enums/four_cc.h"
 #include "lua/luautils.h"
 #include "mobskill.h"
 #include "packets/s2c/0x028_battle2.h"

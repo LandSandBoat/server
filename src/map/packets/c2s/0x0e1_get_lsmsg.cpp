@@ -21,7 +21,6 @@
 
 #include "0x0e1_get_lsmsg.h"
 
-#include "common/utils.h"
 #include "entities/char_entity.h"
 #include "linkshell.h"
 

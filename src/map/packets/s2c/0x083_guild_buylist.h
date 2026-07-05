@@ -21,11 +21,7 @@
 
 #pragma once
 
-#include "common/cbasetypes.h"
-
 #include "base.h"
-
-#include <vector>
 
 class CCharEntity;
 class CItemContainer;

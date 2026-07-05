@@ -21,6 +21,8 @@
 
 #include "0x01a_action.h"
 
+#include "common/logging_context.h"
+
 #include "ability.h"
 #include "ai/ai_container.h"
 #include "enmity_container.h"

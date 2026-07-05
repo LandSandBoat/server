@@ -26,12 +26,10 @@
 #include "enums/automaton.h"
 #include "items/item_puppet.h"
 #include "itemutils.h"
-#include "job_points.h"
 #include "lua/luautils.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "petutils.h"
 #include "status_effect_container.h"
-#include "zoneutils.h"
 
 namespace puppetutils
 {

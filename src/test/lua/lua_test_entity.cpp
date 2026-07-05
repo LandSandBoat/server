@@ -22,11 +22,8 @@
 #include "lua_test_entity.h"
 
 #include "ai/ai_container.h"
-#include "common/logging.h"
-#include "common/lua.h"
 #include "entities/mob_entity.h"
 #include "lua/lua_test_entity_assertions.h"
-#include "map/zone.h"
 #include "test_common.h"
 
 // Thin wrapper over CBaseEntity with assertions and some helpers.

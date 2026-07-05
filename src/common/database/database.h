@@ -21,24 +21,19 @@
 
 #pragma once
 
-#include <common/cbasetypes.h>
 #include <common/scheduler.h>
 #include <common/tracy.h>
 
 #include <common/types/fn.h>
 
 #include <common/database/binding.h>
-#include <common/database/blob.h>
 #include <common/database/bound_value.h>
-#include <common/database/prepared_statement.h>
 #include <common/database/result_set.h>
 
-#include <functional>
 #include <memory>
 #include <string>
 #include <string_view>
 #include <utility>
-#include <vector>
 
 // @note Everything in sql:: database-land is 1-indexed, not 0-indexed.
 namespace db

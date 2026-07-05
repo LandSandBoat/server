@@ -23,7 +23,6 @@
 
 #include "logging.h"
 #include "lua.h"
-#include "tracy.h"
 #include "utils.h"
 
 #include <filesystem>

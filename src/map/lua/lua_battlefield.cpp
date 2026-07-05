@@ -31,7 +31,6 @@
 #include "lua_base_entity.h"
 #include "lua_battlefield.h"
 #include "mob_modifier.h"
-#include "status_effect_container.h"
 #include "utils/mobutils.h"
 #include "utils/zoneutils.h"
 

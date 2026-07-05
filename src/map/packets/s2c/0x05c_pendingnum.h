@@ -23,7 +23,6 @@
 
 #include "base.h"
 #include <utility>
-#include <vector>
 
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x005C
 // This packet is sent by the server to update the clients event work parameters.

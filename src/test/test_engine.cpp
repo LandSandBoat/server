@@ -21,13 +21,11 @@
 
 #include "test_engine.h"
 #include "common/logging.h"
-#include "common/lua.h"
 #include "common/settings.h"
 #include "common/tracy.h"
 #include "enums/test_status.h"
 #include "in_memory_sink.h"
 #include "lua/lua_simulation.h"
-#include "map/utils/zoneutils.h"
 #include "reporters/reporter_container.h"
 #include "test_char.h"
 #include "test_suite.h"
@@ -35,9 +33,7 @@
 #include <chrono>
 #include <format>
 #include <sol/sol.hpp>
-#include <spdlog/spdlog.h>
 #include <utility>
-#include <vector>
 
 TestEngine::TestEngine(Application& application, TestConfig testConfig, std::unique_ptr<MapEngine> mapEngine, std::unique_ptr<WorldEngine> worldEngine)
 : application_(application)

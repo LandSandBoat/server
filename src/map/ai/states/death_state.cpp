@@ -26,7 +26,6 @@
 #include "entities/char_entity.h"
 #include "entities/mob_entity.h"
 #include "packets/s2c/0x0f9_res.h"
-#include "status_effect.h"
 #include "status_effect_container.h"
 
 namespace

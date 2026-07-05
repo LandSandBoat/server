@@ -24,16 +24,13 @@
 #include "instance_loader.h"
 #include "zone_instance.h"
 
-#include "entities/char_entity.h"
 #include "entities/mob_entity.h"
 #include "entities/npc_entity.h"
 #include "instance.h"
 #include "items/item_weapon.h"
 #include "lua/luautils.h"
-#include "map_engine.h"
 #include "mob_modifier.h"
 #include "mob_spell_list.h"
-#include "zone_entities.h"
 
 #include "utils/instanceutils.h"
 #include "utils/mobutils.h"

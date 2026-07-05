@@ -23,7 +23,6 @@
 
 #include "ipc_server.h"
 
-#include "common/database.h"
 #include "common/ipp.h"
 
 #include "common/settings.h"

@@ -25,14 +25,11 @@
 
 #include "packets/char_status.h"
 #include "packets/s2c/0x009_message.h"
-#include "packets/s2c/0x017_chat_std.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x01f_item_list.h"
 #include "packets/s2c/0x020_item_attr.h"
-#include "packets/s2c/0x053_systemmes.h"
 #include "packets/s2c/0x0e0_group_comlink.h"
 
-#include "conquest_system.h"
 #include "ipc_client.h"
 #include "item_container.h"
 #include "items/item_linkshell.h"
@@ -45,7 +42,6 @@
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
 #include "utils/jailutils.h"
-#include "utils/zoneutils.h"
 
 CLinkshell::CLinkshell(uint32 id)
 : m_postRights(GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL::Linkshell)

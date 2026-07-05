@@ -23,6 +23,8 @@
 
 #include "common/database.h"
 
+#include "common/earth_time.h"
+
 #include <common/types/hash_map.h>
 
 #include <chrono>

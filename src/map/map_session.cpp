@@ -22,6 +22,10 @@
 #include "map_session.h"
 
 #include "common/md52.h"
+#include "entities/char_entity.h"
+
+MapSession::MapSession()  = default;
+MapSession::~MapSession() = default;
 
 void MapSession::incrementBlowfish()
 {

@@ -21,7 +21,6 @@
 
 #include "petskill.h"
 
-#include "enums/action/category.h"
 #include "mobskill.h" // used for skillflags
 
 CPetSkill::CPetSkill(uint16 id)

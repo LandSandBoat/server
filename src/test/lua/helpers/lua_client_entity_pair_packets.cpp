@@ -23,8 +23,6 @@
 
 #include "ai/ai_container.h"
 #include "common/logging.h"
-#include "common/lua.h"
-#include "enums/packet_c2s.h"
 #include "enums/packet_s2c.h"
 #include "lua/lua_client_entity_pair.h"
 #include "lua/lua_simulation.h"
@@ -38,7 +36,6 @@
 #include "test_char.h"
 #include "test_common.h"
 #include "utils/charutils.h"
-#include "utils/zoneutils.h"
 
 CLuaClientEntityPairPackets::CLuaClientEntityPairPackets(CLuaClientEntityPair* parent)
 : parent_(parent)

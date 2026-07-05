@@ -24,7 +24,6 @@
 #include <common/lua.h>
 #include <common/tracy.h>
 
-#include <cstdlib>
 #include <iostream>
 #include <memory>
 

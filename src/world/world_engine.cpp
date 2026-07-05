@@ -21,9 +21,6 @@
 
 #include "world_engine.h"
 
-#include <common/application.h>
-#include <common/logging.h>
-
 #include <map/map_constants.h>
 
 #include "besieged_system.h"

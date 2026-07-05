@@ -21,8 +21,6 @@
 
 #pragma once
 
-#include "common/cbasetypes.h"
-
 #include "base.h"
 
 #include "items/craft_state.h"

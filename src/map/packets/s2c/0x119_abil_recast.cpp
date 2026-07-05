@@ -23,8 +23,6 @@
 
 #include "common/timer.h"
 
-#include <cstring>
-
 #include "ability.h"
 #include "entities/char_entity.h"
 #include "recast_container.h"

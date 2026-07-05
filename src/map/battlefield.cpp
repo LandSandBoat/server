@@ -40,14 +40,12 @@
 
 #include "lua/luautils.h"
 
-#include "packets/entity_update.h"
 #include "packets/s2c/0x038_schedulor.h"
 
 #include "status_effect_container.h"
 
 #include "enums/four_cc.h"
 #include "utils/charutils.h"
-#include "utils/itemutils.h"
 #include "utils/petutils.h"
 #include "utils/zoneutils.h"
 #include "zone.h"

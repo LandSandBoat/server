@@ -25,12 +25,10 @@
 #include "lua/luautils.h"
 
 #include "blue_spell.h"
-#include "items/item_weapon.h"
 #include "mob_spell_list.h"
 #include "spell.h"
 
 #include "enums/four_cc.h"
-#include "map_engine.h"
 #include "status_effect_container.h"
 #include "utils/blueutils.h"
 

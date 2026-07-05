@@ -14,13 +14,8 @@
 ===========================================================================
 */
 
-#include "common/utils.h"
-
-#include <cstring>
-
-#include "entities/char_entity.h"
-#include "ipc_client.h"
 #include "unitychat.h"
+#include "entities/char_entity.h"
 #include "utils/jailutils.h"
 
 CUnityChat::CUnityChat(uint32 leader)

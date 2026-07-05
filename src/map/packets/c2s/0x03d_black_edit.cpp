@@ -21,7 +21,6 @@
 
 #include "0x03d_black_edit.h"
 
-#include "common/database.h"
 #include "packets/s2c/0x042_black_edit.h"
 #include "utils/blacklistutils.h"
 #include "utils/charutils.h"

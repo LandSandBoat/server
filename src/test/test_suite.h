@@ -24,7 +24,6 @@
 #include "test_case.h"
 #include <sol/sol.hpp>
 #include <string>
-#include <vector>
 
 class TestSuite
 {

@@ -26,10 +26,6 @@
 #include <common/types/flag.h>
 
 class CCharEntity;
-class CDespawnState;
-class CMagicState;
-class CMobSkillState;
-class CWeaponSkillState;
 
 using IsPassiveTrust = xi::Flag<struct IsPassiveTrustTag>;
 

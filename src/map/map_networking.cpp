@@ -21,7 +21,6 @@
 
 #include "map_networking.h"
 
-#include <common/arguments.h>
 #include <common/md52.h>
 #include <common/tracy.h>
 #include <common/zlib.h>
@@ -34,14 +33,9 @@
 #include "utils/charutils.h"
 
 #include "ipc_client.h"
-#include "job_points.h"
 #include "latent_effect_container.h"
-#include "map_engine.h"
 #include "map_session.h"
 #include "map_statistics.h"
-#include "roe.h"
-#include "status_effect_container.h"
-#include "transport.h"
 #include "zone.h"
 #include "zone_entities.h"
 

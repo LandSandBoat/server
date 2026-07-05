@@ -25,7 +25,6 @@
 #include "common/cbasetypes.h"
 #include <array>
 #include <string>
-#include <vector>
 
 #define GP_ITEM_RANKS 7
 

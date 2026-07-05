@@ -27,7 +27,6 @@
 #include <algorithm>
 #include <cstring>
 
-#include "conquest_system.h"
 #include "entities/battle_entity.h"
 #include "ipc_client.h"
 #include "party.h"

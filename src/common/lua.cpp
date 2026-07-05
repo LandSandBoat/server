@@ -21,6 +21,10 @@
 
 #include "lua.h"
 
+#include "common/cbasetypes.h"
+#include <fmt/args.h>
+#include <fmt/ranges.h>
+
 #include "logging.h"
 #include "tracy.h"
 

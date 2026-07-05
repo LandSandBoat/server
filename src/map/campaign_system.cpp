@@ -19,10 +19,7 @@
 ===========================================================================
 */
 
-#include <tuple>
-
 #include "campaign_system.h"
-#include "common/database.h"
 #include "map/utils/zoneutils.h"
 #include "packets/s2c/0x071_influence_campaign.h"
 #include "utils/charutils.h"

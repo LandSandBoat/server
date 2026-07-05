@@ -26,13 +26,9 @@
 #include <common/types/hash_map.h>
 
 #include <algorithm>
-#include <cstring>
-#include <vector>
 
 #include "battleutils.h"
-#include "charutils.h"
 #include "mobutils.h"
-#include "zoneutils.h"
 
 #include "grades.h"
 #include "mob_spell_list.h"
@@ -40,13 +36,11 @@
 #include "ai/ai_container.h"
 #include "ai/controllers/trust_controller.h"
 #include "ai/helpers/gambits_container.h"
-#include "entities/mob_entity.h"
 #include "entities/trust_entity.h"
 #include "items/item_weapon.h"
 #include "mobskill.h"
 #include "status_effect_container.h"
 #include "weapon_skill.h"
-#include "zone_instance.h"
 
 //
 // Forward declarations

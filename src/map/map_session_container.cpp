@@ -21,13 +21,8 @@
 
 #include "map_session_container.h"
 
-#include "map_networking.h"
 #include "map_session.h"
 #include "status_effect_container.h"
-
-#include "common/database.h"
-#include "common/scheduler.h"
-#include "common/xi.h"
 
 #include "entities/char_entity.h"
 

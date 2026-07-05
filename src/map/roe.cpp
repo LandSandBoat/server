@@ -24,7 +24,6 @@
 #include "common/timer.h"
 #include "enums/chat_message_type.h"
 #include "lua/luautils.h"
-#include "map_engine.h"
 #include "packets/s2c/0x017_chat_std.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "utils/charutils.h"

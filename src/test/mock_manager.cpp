@@ -22,7 +22,6 @@
 #include "mock_manager.h"
 
 #include "common/logging.h"
-#include "common/lua.h"
 #include "lua/lua_spy.h"
 #include "lua/lua_stub.h"
 #include "map/lua/luautils.h"

@@ -23,7 +23,6 @@
 
 #include "gardenutils.h"
 
-#include "common/database.h"
 #include "common/logging.h"
 #include "common/vana_time.h"
 

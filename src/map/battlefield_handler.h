@@ -23,17 +23,14 @@
 #define _CBATTLEFIELDHANDLER_H
 
 #include "common/cbasetypes.h"
-#include "common/mmo.h"
 #include "common/timer.h"
 
 #include <map>
 #include <memory>
-#include <vector>
 
 class CBattlefield;
 class CCharEntity;
 class CBaseEntity;
-class CMobEntity;
 class CZone;
 
 struct BattlefieldRegistration

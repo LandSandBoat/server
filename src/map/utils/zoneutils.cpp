@@ -47,6 +47,8 @@
 #include <future>
 #include <ranges>
 
+#include <fmt/ranges.h>
+
 std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
 
 namespace zoneutils

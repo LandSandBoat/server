@@ -24,12 +24,7 @@
 #include <DetourNavMesh.h>
 #include <DetourNavMeshQuery.h>
 
-#include "common/logging.h"
 #include "inavmesh.h"
-
-#include <cfloat>
-#include <memory>
-#include <vector>
 
 class CNavMesh final : public INavMesh
 {

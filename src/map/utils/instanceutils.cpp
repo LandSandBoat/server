@@ -21,7 +21,6 @@
 
 #include "instanceutils.h"
 
-#include "common/database.h"
 #include "common/logging.h"
 
 #include <common/types/hash_map.h>
@@ -29,12 +28,13 @@
 #include "lua/luautils.h"
 
 #include "instance_loader.h"
-#include "map_engine.h"
 #include "zoneutils.h"
 
 #include <coroutine>
 #include <filesystem>
 #include <queue>
+
+#include <fmt/ranges.h>
 
 namespace instanceutils
 {

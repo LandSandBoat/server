@@ -23,7 +23,6 @@
 #define _CRANGE_STATE_H
 
 #include "state.h"
-class CCharEntity;
 
 class CRangeState : public CState
 {

@@ -21,6 +21,8 @@
 
 #include "luautils.h"
 
+#include "common/logging_context.h"
+
 #include <common/application.h>
 #include <common/filewatcher.h>
 #include <common/ipc.h>
@@ -108,6 +110,8 @@
 #include <numeric>
 #include <ranges>
 #include <string>
+
+#include <fmt/ranges.h>
 
 void ReportErrorToPlayer(CBaseEntity* PEntity, const std::string& message = "") noexcept
 {

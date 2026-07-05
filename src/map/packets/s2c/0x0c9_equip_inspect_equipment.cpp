@@ -21,9 +21,7 @@
 
 #include "0x0c9_equip_inspect_equipment.h"
 
-#include "common/vana_time.h"
 #include "entities/char_entity.h"
-#include "enums/packet_c2s.h"
 #include "items/exdata/augment_standard.h"
 #include "items/item_equipment.h"
 #include "items/item_usable.h"

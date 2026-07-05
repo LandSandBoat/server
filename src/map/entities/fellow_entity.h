@@ -21,7 +21,6 @@
 
 #pragma once
 
-#include "char_entity.h"
 #include "mob_entity.h"
 
 class CFellowEntity final : public CMobEntity

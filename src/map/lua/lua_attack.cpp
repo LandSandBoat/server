@@ -21,6 +21,10 @@
 
 #include "lua_attack.h"
 
+#include "common/lua.h"
+
+#include "sol_bindings.h"
+
 #include "attack.h"
 
 CLuaAttack::CLuaAttack(CAttack* attack)

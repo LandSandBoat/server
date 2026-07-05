@@ -21,7 +21,6 @@
 
 #include "item_equipment.h"
 
-#include "common/database.h"
 #include "common/logging.h"
 #include "common/utils.h"
 

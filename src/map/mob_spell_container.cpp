@@ -21,6 +21,8 @@
 
 #include <algorithm>
 
+#include "entities/pet_entity.h"
+
 #include "mob_modifier.h"
 #include "mob_spell_container.h"
 #include "recast_container.h"

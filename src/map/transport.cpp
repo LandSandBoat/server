@@ -21,14 +21,8 @@
 
 #include "transport.h"
 
-#include "common/timer.h"
 #include "common/vana_time.h"
-#include "map_engine.h"
 
-#include <cstdlib>
-
-#include "entities/char_entity.h"
-#include "packets/entity_update.h"
 #include "utils/zoneutils.h"
 #include "zone.h"
 

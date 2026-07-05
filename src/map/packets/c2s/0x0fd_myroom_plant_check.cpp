@@ -25,7 +25,6 @@
 #include "items/item_flowerpot.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x0fa_myroom_operation.h"
-#include "utils/charutils.h"
 
 namespace
 {

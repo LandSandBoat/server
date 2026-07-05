@@ -21,7 +21,6 @@
 
 #include "test_lua_environment.h"
 #include "common/logging.h"
-#include "common/lua.h"
 #include "lua/helpers/lua_client_entity_pair_actions.h"
 #include "lua/helpers/lua_client_entity_pair_bcnm.h"
 #include "lua/helpers/lua_client_entity_pair_entities.h"

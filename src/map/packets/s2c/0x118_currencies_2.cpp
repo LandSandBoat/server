@@ -21,7 +21,6 @@
 
 #include "0x118_currencies_2.h"
 
-#include "common/database.h"
 #include "entities/char_entity.h"
 
 GP_SERV_COMMAND_CURRENCIES_2::GP_SERV_COMMAND_CURRENCIES_2(CCharEntity* PChar)

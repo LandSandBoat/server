@@ -27,7 +27,6 @@
 #include "logging.h"
 #include "lua.h"
 #include "settings.h"
-#include "xirand.h"
 
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN

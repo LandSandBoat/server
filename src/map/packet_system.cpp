@@ -21,6 +21,8 @@
 
 #include "packet_system.h"
 
+#include "common/logging_context.h"
+
 #include "common/logging.h"
 #include "common/tracy.h"
 

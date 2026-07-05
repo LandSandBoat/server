@@ -21,13 +21,10 @@
 
 #pragma once
 
-#include "common/logging.h"
 #include "common/synchronized.h"
 #include "common/timer.h"
 
 #include "map/zone.h"
-
-#include <mutex>
 
 #include <httplib.h>
 

@@ -25,13 +25,11 @@
 #include <common/database/connection.h>
 #include <common/database/database.h>
 #include <common/database/prepared_statement.h>
-#include <common/database/result_set.h>
 
 #include <common/types/hash_map.h>
 
 #include <memory>
 #include <string>
-#include <vector>
 
 namespace db
 {
