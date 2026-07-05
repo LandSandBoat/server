@@ -66,6 +66,7 @@ public:
     void setVanaTime(uint8 vanaHour, uint8 vanaMinute) const;
     void setVanaDay(uint8 day) const;
     void skipToNextVanaDay() const;
+    void skipVanaDays(uint32 days) const;
     void setRegionOwner(REGION_TYPE region, NATION_TYPE nation) const;
     void setSeed(uint64 seed) const;
     void seed() const;

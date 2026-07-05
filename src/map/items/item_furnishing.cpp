@@ -171,16 +171,6 @@ uint8 CItemFurnishing::getRotation()
     return this->exdata<Exdata::Furniture>().Rotation;
 }
 
-void CItemFurnishing::setOrder(uint8 order)
-{
-    this->exdata<Exdata::Furniture>().Order = order;
-}
-
-uint8 CItemFurnishing::getOrder()
-{
-    return this->exdata<Exdata::Furniture>().Order;
-}
-
 void CItemFurnishing::setMannequinRace(uint8 race)
 {
     this->exdata<Exdata::Mannequin>().Race = race;

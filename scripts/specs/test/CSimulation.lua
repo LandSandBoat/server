@@ -67,6 +67,12 @@ end
 function CSimulation:skipToNextVanaDay()
 end
 
+---Advance Vana'diel time forward by whole days (does not tick).
+---@param days integer
+---@return nil
+function CSimulation:skipVanaDays(days)
+end
+
 ---Returns mobs in a spawn slot as a table
 ---@param zoneId xi.zone
 ---@param slotId integer

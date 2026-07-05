@@ -2563,7 +2563,6 @@ void CCharEntity::UpdateMoghancement()
 
     // Determine which moghancement to use from the dominant element
     uint8  bestAura          = 0;
-    uint8  bestOrder         = 255;
     uint16 newMoghancementID = 0;
     if (!hasTiedElements && dominantAura > 0)
     {
@@ -2576,13 +2575,16 @@ void CCharEntity::UpdateMoghancement()
                 if (PItem != nullptr && PItem->isType(ITEM_FURNISHING))
                 {
                     CItemFurnishing* PFurniture = static_cast<CItemFurnishing*>(PItem);
-                    // If aura is tied then use whichever furniture was placed most recently
-                    if (PFurniture->isInstalled() && !PFurniture->getOn2ndFloor() && PFurniture->getElement() == dominantElement &&
-                        (PFurniture->getAura() > bestAura || (PFurniture->getAura() == bestAura && PFurniture->getOrder() < bestOrder)))
+                    // Highest aura wins, ties broken by highest moghancement id.
+                    if (PFurniture->isInstalled() && !PFurniture->getOn2ndFloor() && PFurniture->getElement() == dominantElement)
                     {
-                        bestAura          = PFurniture->getAura();
-                        bestOrder         = PFurniture->getOrder();
-                        newMoghancementID = PFurniture->getMoghancement();
+                        const uint8  aura         = PFurniture->getAura();
+                        const uint16 moghancement = PFurniture->getMoghancement();
+                        if (aura > bestAura || (aura == bestAura && moghancement > newMoghancementID))
+                        {
+                            bestAura          = aura;
+                            newMoghancementID = moghancement;
+                        }
                     }
                 }
             }

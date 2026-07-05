@@ -46,6 +46,7 @@ public:
 
     void tick();
     void gotoZone(ZONEID zoneId, sol::optional<sol::table> pos);
+    void gotoMogHouse(ZONEID zoneId);
     auto isPendingZone() const -> bool;
     auto getItemInvSlot(uint16 itemId, uint8 quantity) const -> Maybe<uint16>;
     void claimAndKillMob(const sol::object& mobQuery, sol::optional<sol::table> params);
@@ -65,6 +66,8 @@ public:
     static void Register();
 
 private:
+    void doGotoZone(ZONEID zoneId, sol::optional<sol::table> pos, bool mogHouse);
+
     std::unique_ptr<TestChar> testChar_;
     CLuaSimulation*           simulation_;
     MapEngine*                engine_;

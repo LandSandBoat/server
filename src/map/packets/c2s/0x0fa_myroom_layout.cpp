@@ -309,46 +309,6 @@ void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PC
         PItem->setLevel(this->y);
         PItem->setRotation(this->v);
 
-        constexpr auto maxContainerSize = MAX_CONTAINER_SIZE * 2;
-
-        // Update installed furniture placement orders
-        // First we place the furniture into placed items using the order number as the index
-        std::array<CItemFurnishing*, maxContainerSize> placedItems = { nullptr };
-        for (auto safeMyroomCategory : { LOC_MOGSAFE, LOC_MOGSAFE2 })
-        {
-            CItemContainer* PContainer = PChar->getStorage(safeMyroomCategory);
-            for (int slotIndex = 1; slotIndex <= PContainer->GetSize(); ++slotIndex)
-            {
-                if (this->MyroomItemIndex == slotIndex && this->MyroomCategory == safeMyroomCategory)
-                {
-                    continue;
-                }
-
-                CItem* PContainerItem = PContainer->GetItem(slotIndex);
-                if (PContainerItem != nullptr && PContainerItem->isType(ITEM_FURNISHING))
-                {
-                    if (auto PFurniture = static_cast<CItemFurnishing*>(PContainerItem); PFurniture->isInstalled())
-                    {
-                        placedItems[PFurniture->getOrder()] = PFurniture;
-                    }
-                }
-            }
-        }
-
-        // Update the item's order number
-        for (int32 i = 0; i < MAX_CONTAINER_SIZE * 2; ++i)
-        {
-            // We can stop updating the order numbers once we hit an empty order number
-            if (placedItems[i] == nullptr)
-            {
-                break;
-            }
-            placedItems[i]->setOrder(placedItems[i]->getOrder() + 1);
-        }
-
-        // Set this item to being the most recently placed item
-        PItem->setOrder(0);
-
         PItem->setSubType(ITEM_LOCKED);
 
         PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PItem, static_cast<CONTAINER_ID>(this->MyroomCategory), this->MyroomItemIndex);

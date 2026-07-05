@@ -206,6 +206,20 @@ void CLuaSimulation::skipToNextVanaDay() const
 }
 
 /************************************************************************
+ *  Function: skipVanaDays()
+ *  Purpose : Advances Vana'diel time by whole days.
+ *  Example : sim:skipVanaDays(30)
+ *  Notes   : Vana'diel time only (like setVanaTime); does not tick.
+ ************************************************************************/
+
+void CLuaSimulation::skipVanaDays(const uint32 days) const
+{
+    ShowInfoFmt("Skipping {} Vana'diel days", days);
+
+    earth_time::add_offset(std::chrono::duration_cast<earth_time::duration>(xi::vanadiel_clock::days(days)));
+}
+
+/************************************************************************
  *  Function: setRegionOwner()
  *  Purpose : Sets a specific region to be controlled by given nation.
  *  Example : sim:setRegionOwner(xi.region.XXX, xi.nation.YYY)
@@ -615,6 +629,7 @@ void CLuaSimulation::Register()
     SOL_REGISTER("setVanaTime", CLuaSimulation::setVanaTime);
     SOL_REGISTER("setVanaDay", CLuaSimulation::setVanaDay);
     SOL_REGISTER("skipToNextVanaDay", CLuaSimulation::skipToNextVanaDay);
+    SOL_REGISTER("skipVanaDays", CLuaSimulation::skipVanaDays);
     SOL_REGISTER("setRegionOwner", CLuaSimulation::setRegionOwner);
     SOL_REGISTER("setSeed", CLuaSimulation::setSeed);
     SOL_REGISTER("seed", CLuaSimulation::seed);

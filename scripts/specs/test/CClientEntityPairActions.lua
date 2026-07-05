@@ -222,3 +222,48 @@ end
 ---@return nil
 function CClientEntityPairActions:craft(crystal, ingredients)
 end
+
+---Sow a seed or feed a crystal to a gardening pot. Pot and add item must be in a mog safe.
+---@param potContainer xi.inventoryLocation Container holding the flowerpot
+---@param potSlot integer Flowerpot slot index
+---@param addContainer xi.inventoryLocation Container holding the seed or crystal
+---@param addSlot integer Seed or crystal slot index
+---@return nil
+function CClientEntityPairActions:plantAdd(potContainer, potSlot, addContainer, addSlot)
+end
+
+---Examine a plant; resets its wilt timer.
+---@param potContainer xi.inventoryLocation Container holding the flowerpot
+---@param potSlot integer Flowerpot slot index
+---@return nil
+function CClientEntityPairActions:plantCheck(potContainer, potSlot)
+end
+
+---Harvest a mature plant; uproot clears the pot instead.
+---@param potContainer xi.inventoryLocation Container holding the flowerpot
+---@param potSlot integer Flowerpot slot index
+---@param uproot? boolean Uproot instead of harvesting (default false)
+---@return nil
+function CClientEntityPairActions:plantHarvest(potContainer, potSlot, uproot)
+end
+
+---Dry a plant so it stops growing and won't wilt.
+---@param potContainer xi.inventoryLocation Container holding the flowerpot
+---@param potSlot integer Flowerpot slot index
+---@return nil
+function CClientEntityPairActions:plantDry(potContainer, potSlot)
+end
+
+---Install a furnishing on the 1st floor at grid cell (x, z).
+---@param container xi.inventoryLocation Container holding the furnishing
+---@param slot integer Furnishing slot index
+---@param x integer Grid x cell
+---@param z integer Grid z cell
+---@return nil
+function CClientEntityPairActions:placeFurniture(container, slot, x, z)
+end
+
+---Finish placing furniture; recomputes the active moghancement.
+---@return nil
+function CClientEntityPairActions:finishFurnishing()
+end
