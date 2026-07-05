@@ -100,6 +100,7 @@
 
 #include <array>
 #include <cctype>
+#include <cmath>
 #include <filesystem>
 #include <numeric>
 #include <ranges>
@@ -189,28 +190,39 @@ void init(IPP mapIPP, bool isRunningInCI)
 
     ShowInfo("luautils: Lua initializing");
 
-    // Bind math.randon(...) globally
+    //
+    // Lua docs for math.random():
+    // https://www.luadocs.com/docs/functions/math/random
+    //
+
     lua["math"]["random"] =
         sol::overload(
             []()
             {
-                return xirand::GetRandomNumber(1.0f);
+                // Lua stock:
+                // When called without arguments: a pseudo-random float in the range ([0, 1) (half-open)).
+                return xirand::GetRandomNumber(1.0);
             },
-            [](int n)
+            [](lua_Number upper) -> lua_Number
             {
-                return xirand::GetRandomNumber<int>(1, n + 1);
+                // Lua stock:
+                // When called with a single argument: a pseudo-random integer in the range ([1, upper], (closed)).
+                return static_cast<lua_Number>(xirand::GetRandomNumber<int64>(1, std::llround(upper) + 1));
             },
-            [](float n)
+            [](lua_Number lower, lua_Number upper) -> lua_Number
             {
-                return xirand::GetRandomNumber<float>(0.0f, n);
-            },
-            [](int n, int m)
-            {
-                return xirand::GetRandomNumber<int>(n, m + 1);
-            },
-            [](float n, float m)
-            {
-                return xirand::GetRandomNumber<float>(n, m);
+                // Lua stock:
+                // When called with two integers: a pseudo-random integer in the range ([lower, upper] (closed)).
+                //
+                // Custom extension:
+                // We detect if the arguments are both integers, so we can then return an integer in the range [lower, upper] (closed).
+                // If one or both arguments are floating-point, we fall through to use lua_Number [lower, upper) (half-open).
+                if (lower == std::floor(lower) && upper == std::floor(upper))
+                {
+                    return static_cast<lua_Number>(xirand::GetRandomNumber<int64>(static_cast<int64>(lower), static_cast<int64>(upper) + 1));
+                }
+
+                return xirand::GetRandomNumber<lua_Number>(lower, upper);
             });
 
     lua.set_function("GarbageCollectStep", &luautils::garbageCollectStep);
