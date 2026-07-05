@@ -22,7 +22,8 @@
 #pragma once
 
 #include "common/cbasetypes.h"
-#include <unordered_map>
+
+#include <common/types/hash_map.h>
 
 class MapStatistics
 {
@@ -62,5 +63,5 @@ public:
 private:
     void reset();
 
-    std::unordered_map<Key, int64> statistics_;
+    HashMap<Key, int64> statistics_;
 };

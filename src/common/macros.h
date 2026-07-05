@@ -21,6 +21,9 @@
 
 #pragma once
 
+#include <cstdlib>
+#include <utility>
+
 // The following definitions are set by CMake based on the architecture
 // #define ENV64BIT
 // #define ENV32BIT
@@ -55,6 +58,16 @@
 #define DISALLOW_COPY_AND_MOVE(TypeName) \
     DISALLOW_COPY(TypeName)              \
     DISALLOW_MOVE(TypeName)
+
+// Marks a code path the author guarantees can never execute (e.g. after an
+// exhaustive switch, or a branch ruled out by prior validation). In debug
+// builds reaching it traps immediately; in release builds it lowers to
+// std::unreachable(), so the optimizer deletes the path entirely.
+#if defined(DEBUG)
+#define XI_UNREACHABLE() std::abort()
+#else
+#define XI_UNREACHABLE() std::unreachable()
+#endif
 
 //
 // This `FOR_EACH_PAIR_CAST_SECOND` macro replaces a common pattern we had in the hot path:

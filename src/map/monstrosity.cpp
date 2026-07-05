@@ -19,9 +19,9 @@
 ===========================================================================
 */
 
-// ===
+//
 // See scripts/globals/monstrosity.lua for a general overview of how Monstrosity works and is designed.
-// ===
+//
 
 #include "monstrosity.h"
 
@@ -29,6 +29,8 @@
 
 #include "common/database.h"
 #include "common/logging.h"
+
+#include <common/types/hash_map.h>
 
 #include "entities/char_entity.h"
 
@@ -70,8 +72,8 @@ struct MonstrosityInstinctRow
 namespace
 {
 
-std::unordered_map<uint16, MonstrositySpeciesRow>  gMonstrositySpeciesMap{};
-std::unordered_map<uint16, MonstrosityInstinctRow> gMonstrosityInstinctMap{};
+HashMap<uint16, MonstrositySpeciesRow>  gMonstrositySpeciesMap{};
+HashMap<uint16, MonstrosityInstinctRow> gMonstrosityInstinctMap{};
 
 } // namespace
 

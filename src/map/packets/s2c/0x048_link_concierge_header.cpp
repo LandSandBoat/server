@@ -23,7 +23,7 @@
 
 #include <fmt/format.h>
 
-GP_SERV_COMMAND_LINK_CONCIERGE::HEADER::HEADER(const std::optional<uint8> yourSlot, uint16 daysSincePost)
+GP_SERV_COMMAND_LINK_CONCIERGE::HEADER::HEADER(const Maybe<uint8> yourSlot, uint16 daysSincePost)
 {
     auto& packet = this->data();
 

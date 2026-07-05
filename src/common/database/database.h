@@ -25,6 +25,8 @@
 #include <common/scheduler.h>
 #include <common/tracy.h>
 
+#include <common/types/fn.h>
+
 #include <common/database/binding.h>
 #include <common/database/blob.h>
 #include <common/database/bound_value.h>
@@ -109,7 +111,7 @@ auto enableTimers() -> void;
 // function throws. Otherwise will commit the transaction on successful completion of the function.
 //
 // Returns true if the transaction was successful and committed or false if it was rolled back.
-auto transaction(const std::function<void()>& transactionFn) -> bool;
+auto transaction(const Fn<void() const>& transactionFn) -> bool;
 
 auto getTableColumnNames(const std::string& tableName) -> std::vector<std::string>;
 

@@ -25,11 +25,12 @@
 #include <common/tracy.h>
 #include <common/utils.h>
 
+#include <common/types/hash_map.h>
+
 #include <array>
 #include <cmath>
 #include <fstream>
 #include <span>
-#include <unordered_map>
 
 #include <DetourCommon.h>
 #include <zlib.h>
@@ -308,10 +309,10 @@ auto XiMesh::load(const std::string& filename) -> bool
     entries_.reserve(totalEntries);
 
     // Step 3a. Define block and placement parsers (deduplicated by file offset)
-    std::unordered_map<uint32, uint16> blockCache;
-    std::unordered_map<uint32, uint16> placeCache;
+    HashMap<uint32, uint16> blockCache;
+    HashMap<uint32, uint16> placeCache;
 
-    auto getOrParseBlock = [&](const uint32 fileOffset) -> std::optional<uint16>
+    auto getOrParseBlock = [&](const uint32 fileOffset) -> Maybe<uint16>
     {
         auto [it, inserted] = blockCache.try_emplace(fileOffset, static_cast<uint16>(blocks_.size()));
         if (!inserted)
@@ -377,7 +378,7 @@ auto XiMesh::load(const std::string& filename) -> bool
         return it->second;
     };
 
-    auto getOrParsePlacement = [&](const uint32 fileOffset) -> std::optional<uint16>
+    auto getOrParsePlacement = [&](const uint32 fileOffset) -> Maybe<uint16>
     {
         auto [it, inserted] = placeCache.try_emplace(fileOffset, static_cast<uint16>(placements_.size()));
         if (!inserted)
@@ -497,14 +498,14 @@ auto XiMesh::worldToCell(const float x, const float z) const -> std::pair<int, i
 }
 
 // Returns the triangle under (x, z) closest above y.
-auto XiMesh::query(const float x, const float y, const float z) const -> std::optional<CellHit>
+auto XiMesh::query(const float x, const float y, const float z) const -> Maybe<CellHit>
 {
     TracyZoneScoped;
 
     const auto [cx, cz]    = worldToCell(x, z);
     const std::array point = { x, 0.0f, z };
 
-    auto searchCell = [&](const int cellX, const int cellZ) -> std::optional<CellHit>
+    auto searchCell = [&](const int cellX, const int cellZ) -> Maybe<CellHit>
     {
         if (cellX < 0 || cellX >= header_.gridWidth || cellZ < 0 || cellZ >= header_.gridHeight)
         {
@@ -517,7 +518,7 @@ auto XiMesh::query(const float x, const float y, const float z) const -> std::op
             return std::nullopt;
         }
 
-        std::optional<CellHit> best;
+        Maybe<CellHit> best;
         for (uint16 ref = 0; ref < cell.count; ++ref)
         {
             const auto& [blockIdx, placementIdx] = entries_[cell.offset + ref];
@@ -571,7 +572,7 @@ auto XiMesh::query(const float x, const float y, const float z) const -> std::op
     }
 
     // Miss, check neighbors
-    std::optional<CellHit> best;
+    Maybe<CellHit> best;
     for (int dz = -1; dz <= 1; ++dz)
     {
         for (int dx = -1; dx <= 1; ++dx)
@@ -781,7 +782,7 @@ auto XiMesh::rayIntersect(const Vector3& start, const Vector3& end, const Ignore
     return false;
 }
 
-auto XiMesh::getPositionInfo(const Vector3& position, const YOffsets yOffsets, const IgnoreTransparentBarriers ignoreTransparentBarriers) const -> std::optional<RayHitInfo>
+auto XiMesh::getPositionInfo(const Vector3& position, const YOffsets yOffsets, const IgnoreTransparentBarriers ignoreTransparentBarriers) const -> Maybe<RayHitInfo>
 {
     TracyZoneScoped;
 
@@ -799,7 +800,7 @@ auto XiMesh::getPositionInfo(const Vector3& position, const YOffsets yOffsets, c
     const auto col1 = std::max<int32>(0, col - cellSearchDiff);
     const auto col2 = std::min<int32>(header_.gridWidth - 1, col + cellSearchDiff);
 
-    std::optional<RayHitInfo> closestHit;
+    Maybe<RayHitInfo> closestHit;
 
     for (int32 r = row1; r <= row2; ++r)
     {
@@ -901,7 +902,7 @@ auto XiMesh::rayIntersectCell(const Vector3& start, const Vector3& end, const YR
     return false;
 }
 
-auto XiMesh::rayIntersectCellHitInfo(const Vector3& start, const Vector3& end, const YRange yRange, const uint32 cellIdx, const IgnoreTransparentBarriers ignoreTransparentBarriers, std::optional<RayHitInfo>& closestHit) const -> void
+auto XiMesh::rayIntersectCellHitInfo(const Vector3& start, const Vector3& end, const YRange yRange, const uint32 cellIdx, const IgnoreTransparentBarriers ignoreTransparentBarriers, Maybe<RayHitInfo>& closestHit) const -> void
 {
     if (cellIdx >= cells_.size())
     {

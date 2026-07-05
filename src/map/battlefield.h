@@ -30,8 +30,11 @@
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
 #include "common/timer.h"
+
+#include <common/types/fn.h>
+#include <common/types/hash_map.h>
+
 #include "sol/sol.hpp"
-#include <unordered_map>
 
 enum BCRULES : uint8
 {
@@ -160,12 +163,12 @@ public:
     bool IsOccupied() const;
     bool isEntered(CCharEntity* PChar) const;
 
-    void ForEachPlayer(const std::function<void(CCharEntity*)>& func);
-    void ForEachEnemy(const std::function<void(CMobEntity*)>& func);
-    void ForEachRequiredEnemy(const std::function<void(CMobEntity*)>& func);
-    void ForEachAdditionalEnemy(const std::function<void(CMobEntity*)>& func);
-    void ForEachNpc(const std::function<void(CNpcEntity*)>& func);
-    void ForEachAlly(const std::function<void(CMobEntity*)>& func);
+    void ForEachPlayer(FnRef<void(CCharEntity*)> func);
+    void ForEachEnemy(FnRef<void(CMobEntity*)> func);
+    void ForEachRequiredEnemy(FnRef<void(CMobEntity*)> func);
+    void ForEachAdditionalEnemy(FnRef<void(CMobEntity*)> func);
+    void ForEachNpc(FnRef<void(CNpcEntity*)> func);
+    void ForEachAlly(FnRef<void(CMobEntity*)> func);
 
     void SetName(const std::string& name);
     void SetInitiator(const std::string& name);
@@ -235,8 +238,8 @@ private:
     bool              m_Cleanup        = false;
     bool              m_Attacked       = false;
 
-    std::unordered_map<std::string, uint64_t> localVars_;
-    std::vector<BattlefieldGroup>             m_groups;
+    HashMap<std::string, uint64_t> localVars_;
+    std::vector<BattlefieldGroup>  m_groups;
 };
 
 #endif

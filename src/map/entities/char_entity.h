@@ -36,15 +36,15 @@
 #include <common/types/flat_hash_map.h>
 #include <common/xi.h>
 
-#include <array>
+#include <common/types/hash_map.h>
+#include <common/types/maybe.h>
 
+#include <array>
 #include <bitset>
 #include <deque>
 #include <map>
 #include <memory>
-#include <optional>
 #include <set>
-#include <unordered_map>
 #include <unordered_set>
 
 #include "automaton_entity.h"
@@ -342,7 +342,7 @@ public:
 
     auto bindEquip(uint8 equipSlot, CItem* item) -> bool;
     void clearEquip(uint8 equipSlot);
-    auto equipLocation(uint8 equipSlot) const -> std::optional<ItemLocation>;
+    auto equipLocation(uint8 equipSlot) const -> Maybe<ItemLocation>;
 
     uint8            m_ZonesVisitedList[38]{}; // List of zones visited by the character
     xi::bitset<1024> m_SpellList{};            // List of learned spells
@@ -648,8 +648,8 @@ public:
     std::vector<GearSetMod_t>     m_GearSetMods; // The list of gear set mods currently applied to the character.
     std::vector<AuctionHistory_t> m_ah_history;  // AH history list (in the future consider using UContainer)
 
-    std::unordered_map<uint16, timer::time_point> m_PacketRecievedTimestamps;
-    uint16                                        m_LastPacketType{};
+    HashMap<uint16, timer::time_point> m_PacketRecievedTimestamps;
+    uint16                             m_LastPacketType{};
 
     void            SetPlayTime(timer::duration playTime); // Set playtime
     timer::duration GetPlayTime(bool needUpdate = true);   // Get playtime
@@ -793,14 +793,14 @@ private:
 
     InventorySyncState inventorySyncState_;
 
-    mutable std::unordered_map<std::string, std::pair<int32, uint32>> charVarCache;
-    std::unordered_set<std::string>                                   charVarChanges;
-    std::unordered_set<uint32>                                        charTriggerAreaIDs; // Holds any TriggerArea IDs that the player is currently within the bounds of
+    mutable HashMap<std::string, std::pair<int32, uint32>> charVarCache;
+    std::unordered_set<std::string>                        charVarChanges;
+    std::unordered_set<uint32>                             charTriggerAreaIDs; // Holds any TriggerArea IDs that the player is currently within the bounds of
 
     uint8             dataToPersist = 0;
     timer::time_point nextDataPersistTime{};
 
     // TODO: Don't use raw ptrs for this, but don't duplicate whole packets with unique_ptr either.
     std::deque<std::unique_ptr<CBasicPacket>> PacketList;          // The list of packets to be sent to the character during the next network cycle
-    std::unordered_map<uint32, CBasicPacket*> EntityUpdatePackets; // Keep track of entity update packets by ID, such that they can be updated
+    HashMap<uint32, CBasicPacket*>            EntityUpdatePackets; // Keep track of entity update packets by ID, such that they can be updated
 };

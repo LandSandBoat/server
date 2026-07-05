@@ -25,7 +25,7 @@
 #include <common/ipp.h>
 #include <common/types/maybe.h>
 
-#include <unordered_map>
+#include <common/types/flat_hash_map.h>
 
 class CharacterCache
 {
@@ -40,5 +40,5 @@ public:
     auto getCharacterIPP(uint32 charId) -> Maybe<IPP>;
 
 private:
-    std::unordered_map<uint32, IPP> charIdToIPP_;
+    FlatHashMap<uint32, IPP> charIdToIPP_;
 };

@@ -26,6 +26,8 @@
 #include "ai/states/magic_state.h"
 #include "ai/states/weaponskill_state.h"
 #include "common/database.h"
+#include "common/types/flat_hash_map.h"
+#include "common/types/hash_map.h"
 #include "common/utils.h"
 #include "enmity_container.h"
 #include "entities/trust_entity.h"
@@ -1658,9 +1660,9 @@ auto CAutomatonController::Disengage() -> bool
 namespace automaton
 {
 
-std::unordered_map<SpellID, AutomatonSpell, EnumClassHash> autoSpellList;
-std::vector<SpellID>                                       naSpells;
-std::unordered_map<uint16, AutomatonAbility>               autoAbilityList;
+FlatHashMap<SpellID, AutomatonSpell, EnumClassHash> autoSpellList;
+std::vector<SpellID>                                naSpells;
+HashMap<uint16, AutomatonAbility>                   autoAbilityList;
 
 void LoadAutomatonSpellList()
 {

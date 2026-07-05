@@ -21,7 +21,7 @@
 
 #include <map/los_cache.h>
 
-auto LineOfSightCache::get(const Vector3& src, const Vector3& dst, uint16 zoneId, timer::time_point now) -> std::optional<bool>
+auto LineOfSightCache::get(const Vector3& src, const Vector3& dst, uint16 zoneId, timer::time_point now) -> Maybe<bool>
 {
     const Key key = makeKey(src, dst, zoneId);
 

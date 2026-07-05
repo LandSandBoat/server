@@ -25,7 +25,9 @@
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
 #include "common/timer.h"
-#include <functional>
+
+#include "common/types/fn.h"
+
 #include <memory>
 #include <queue>
 
@@ -35,7 +37,9 @@ class CBaseEntity;
 
 struct queueAction_t
 {
-    using EntityFunc_t = std::function<void(CBaseEntity*)>;
+    // Move-only: queued actions can capture move-only state, and pushing/popping
+    // moves the callable instead of copying it.
+    using EntityFunc_t = Fn<void(CBaseEntity*)>;
 
     timer::time_point start_time{ timer::now() };
     timer::duration   delay{ 0ms };
@@ -50,10 +54,10 @@ struct queueAction_t
     {
     }
 
-    queueAction_t(timer::duration _ms, bool _checkstate, std::function<void(CBaseEntity*)> _func)
+    queueAction_t(timer::duration _ms, bool _checkstate, EntityFunc_t _func)
     : delay(_ms)
     , checkState(_checkstate)
-    , func(_func)
+    , func(std::move(_func))
     {
     }
 };

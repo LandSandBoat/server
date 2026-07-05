@@ -23,13 +23,13 @@
 
 #include "enums/msg_basic.h"
 
-#include <unordered_map>
+#include <common/types/hash_map.h>
 
 namespace messageutils
 {
 
 // Maps the main message used by skills for their subtarget variant
-const std::unordered_map<MsgBasic, MsgBasic> aoeVariants = {
+const HashMap<MsgBasic, MsgBasic> aoeVariants = {
     { MsgBasic::MagicRecoversHP, MsgBasic::TargetRecoversHP },
     { MsgBasic::MagicTeleport, MsgBasic::TargetTeleport },
     { MsgBasic::MagicResisted, MsgBasic::MagicResistedTarget },
@@ -76,7 +76,7 @@ const std::unordered_map<MsgBasic, MsgBasic> aoeVariants = {
     { MsgBasic::DoubleUpBust, MsgBasic::DoubleUpBustSub },
 };
 
-const std::unordered_map<MsgBasic, MsgBasic> absorbVariants = {
+const HashMap<MsgBasic, MsgBasic> absorbVariants = {
     { MsgBasic::UsesAbilityTakesDamage, MsgBasic::UsesRecoversHP },
     { MsgBasic::TargetTakesDamage, MsgBasic::TargetRecoversHP2 },
 };

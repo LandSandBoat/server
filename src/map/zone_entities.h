@@ -24,6 +24,7 @@
 #include "zone.h"
 
 #include "common/timer.h"
+#include "common/types/fn.h"
 
 #include "entities/base_entity.h"
 #include "entities/char_entity.h"
@@ -40,8 +41,8 @@
 #include <vector>
 
 // Per-entity callbacks used by the spawn-sync helpers.
-using EntityFn       = std::function<bool(CBaseEntity*)>; // visibility predicate
-using EntityCallback = std::function<void(CBaseEntity*)>; // action run on a newly-spawned entity
+using EntityFn       = FnRef<bool(CBaseEntity*)>; // visibility predicate
+using EntityCallback = FnRef<void(CBaseEntity*)>; // action run on a newly-spawned entity
 
 class CZoneEntities
 {
@@ -100,12 +101,12 @@ public:
     auto GetMobList() const -> const EntityList_t&;
     bool CharListEmpty() const;
 
-    void ForEachChar(const std::function<void(CCharEntity*)>& func);
-    void ForEachMob(const std::function<void(CMobEntity*)>& func);
-    void ForEachNpc(const std::function<void(CNpcEntity*)>& func);
-    void ForEachTrust(const std::function<void(CTrustEntity*)>& func);
-    void ForEachPet(const std::function<void(CPetEntity*)>& func);
-    void ForEachAlly(const std::function<void(CMobEntity*)>& func);
+    void ForEachChar(FnRef<void(CCharEntity*)> func);
+    void ForEachMob(FnRef<void(CMobEntity*)> func);
+    void ForEachNpc(FnRef<void(CNpcEntity*)> func);
+    void ForEachTrust(FnRef<void(CTrustEntity*)> func);
+    void ForEachPet(FnRef<void(CPetEntity*)> func);
+    void ForEachAlly(FnRef<void(CMobEntity*)> func);
 
     auto GetNewCharTargID() -> uint16;
     void AssignDynamicTargIDandLongID(CBaseEntity* PEntity);
@@ -131,7 +132,7 @@ private:
     // distance checks; `onAdd` runs per newly-added entity (mob aggro). `alwaysInclude` is an optional
     // set of entities that must be considered regardless of range (NPCs flagged alwaysRelevant, which
     // a range query can't find) - each is run through `visible` like any other candidate.
-    void syncSpawnListWithGrid(CCharEntity* PChar, SpawnIDList_t& spawnList, uint8 objtype, uint8 spawnFlag, const EntityFn& visible, const EntityCallback& onAdd = {}, const EntityCallback& onUpdate = {}, const std::vector<CBaseEntity*>* alwaysInclude = nullptr);
+    void syncSpawnListWithGrid(CCharEntity* PChar, SpawnIDList_t& spawnList, uint8 objtype, uint8 spawnFlag, EntityFn visible, EntityCallback onAdd = {}, EntityCallback onUpdate = {}, const std::vector<CBaseEntity*>* alwaysInclude = nullptr);
 
     Scheduler& scheduler_;
     MapConfig  config_;

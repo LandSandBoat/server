@@ -191,7 +191,8 @@ void SpawnHandler::Tick(const timer::time_point now)
     std::vector<CMobEntity*> mobsToSpawn;
 
     // Process non-slotted mobs
-    std::erase_if(
+    // Unqualified: ADL finds ankerl's erase_if for FlatHashMap
+    erase_if(
         pendingRespawns_,
         [&](const auto& pair)
         {
@@ -223,7 +224,8 @@ void SpawnHandler::Tick(const timer::time_point now)
     }
 
     // Process slotted spawns
-    std::erase_if(
+    // Unqualified: ADL finds ankerl's erase_if for FlatHashMap
+    erase_if(
         pendingSlotRespawns_,
         [&](const auto& pair)
         {

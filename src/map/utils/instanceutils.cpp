@@ -21,10 +21,10 @@
 
 #include "instanceutils.h"
 
-#include <filesystem>
-
 #include "common/database.h"
 #include "common/logging.h"
+
+#include <common/types/hash_map.h>
 
 #include "lua/luautils.h"
 
@@ -33,14 +33,15 @@
 #include "zoneutils.h"
 
 #include <coroutine>
+#include <filesystem>
 #include <queue>
 
 namespace instanceutils
 {
 
-std::unordered_map<uint16, InstanceData_t> InstanceData;
-std::queue<std::pair<uint32, uint16>>      LoadQueue; // player id, instance id
-detail::LazyLoadState                      lazyLoad;
+HashMap<uint16, InstanceData_t>       InstanceData;
+std::queue<std::pair<uint32, uint16>> LoadQueue; // player id, instance id
+detail::LazyLoadState                 lazyLoad;
 
 namespace
 {

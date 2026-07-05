@@ -85,7 +85,7 @@ private:
                 return name;
             }
 
-            return toValue(static_cast<std::underlying_type_t<U>>(v));
+            return toValue(std::to_underlying(v));
         }
         else if constexpr (std::is_integral_v<U> && std::is_signed_v<U>)
         {

@@ -30,6 +30,8 @@
 #include "common/timer.h"
 #include "common/xirand.h"
 
+#include <common/types/hash_map.h>
+
 // Ahead of <math.h> (not <cmath>)
 #ifndef _USE_MATH_DEFINES
 #define _USE_MATH_DEFINES
@@ -213,7 +215,7 @@ auto getRandomSampleString(T min, T max) -> std::string
 } // namespace utils
 
 // clang-format off
-static Synchronized<std::unordered_map<std::string, timer::time_point>> lastExecutionTimes;
+static Synchronized<HashMap<std::string, timer::time_point>> lastExecutionTimes;
 #define RATE_LIMIT(duration, code)                                                    \
 {                                                                                     \
     const auto currentTime = timer::now();                                            \

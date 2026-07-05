@@ -746,7 +746,7 @@ void CLatentEffectContainer::CheckLatentsTargetChange()
 // Process the latent effects container and apply a logic function responsible for
 // filtering the appropriate latents to be activated/deactivated and finally update
 // health post looping if at least one logic function returned true
-void CLatentEffectContainer::ProcessLatentEffects(const std::function<bool(CLatentEffect&)>& logic)
+void CLatentEffectContainer::ProcessLatentEffects(const Fn<bool(CLatentEffect&) const>& logic)
 {
     auto update = false;
 

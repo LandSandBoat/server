@@ -27,11 +27,12 @@
 #include "lua/luautils.h"
 #include "map_networking.h"
 
+#include <common/types/hash_map.h>
+
 #include <filesystem>
 #include <fstream>
 #include <ranges>
 #include <string>
-#include <unordered_map>
 #include <unordered_set>
 #include <vector>
 
@@ -229,7 +230,7 @@ void LoadLuaModules(IPP mapIPP)
     }
 
     // Cache zone -> port mapping for multi-process override filtering
-    std::unordered_map<std::string, uint16> zoneSettingsPorts;
+    HashMap<std::string, uint16> zoneSettingsPorts;
 
     const auto rset = db::preparedStmt("SELECT name, zoneport FROM zone_settings");
     while (rset && rset->next())

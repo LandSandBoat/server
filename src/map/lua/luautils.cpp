@@ -98,6 +98,8 @@
 #include "zone.h"
 #include "zone_entities.h"
 
+#include <common/types/hash_map.h>
+
 #include <array>
 #include <cctype>
 #include <cmath>
@@ -106,7 +108,6 @@
 #include <numeric>
 #include <ranges>
 #include <string>
-#include <unordered_map>
 
 void ReportErrorToPlayer(CBaseEntity* PEntity, const std::string& message = "") noexcept
 {
@@ -144,8 +145,8 @@ namespace luautils
 namespace
 {
 
-std::unique_ptr<Filewatcher>           filewatcher;
-std::unordered_map<uint32, sol::table> customMenuContext;
+std::unique_ptr<Filewatcher> filewatcher;
+HashMap<uint32, sol::table>  customMenuContext;
 
 LuaCache luaCache;
 
@@ -1173,7 +1174,7 @@ void PopulateIDLookups(uint16 zoneId, const std::string& zoneName)
     }
 
     // Load all Name/ID pairs from mobs and npcs
-    std::unordered_map<std::string, std::vector<uint32>> lookup;
+    HashMap<std::string, std::vector<uint32>> lookup;
 
     std::vector<uint16> effectiveZones;
     effectiveZones.push_back(static_cast<uint16>(zoneId));
@@ -1245,7 +1246,7 @@ void PopulateIDLookups(uint16 zoneId, const std::string& zoneName)
             }
         });
 
-    std::unordered_map<std::string, sol::table> idLuaTables;
+    HashMap<std::string, sol::table> idLuaTables;
 
     lua.set_function(
         "GetTableOfIDs",

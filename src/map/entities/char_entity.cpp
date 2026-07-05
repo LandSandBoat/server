@@ -965,7 +965,7 @@ auto CCharEntity::getEquip(const SLOTTYPE slot) const -> CItemEquipment*
     return static_cast<CItemEquipment*>(equipped_[slot]);
 }
 
-auto CCharEntity::equipLocation(const uint8 equipSlot) const -> std::optional<ItemLocation>
+auto CCharEntity::equipLocation(const uint8 equipSlot) const -> Maybe<ItemLocation>
 {
     if (equipSlot >= EquipSlotCount)
     {

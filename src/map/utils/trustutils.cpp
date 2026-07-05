@@ -23,6 +23,8 @@
 
 #include "common/utils.h"
 
+#include <common/types/hash_map.h>
+
 #include <algorithm>
 #include <cstring>
 #include <vector>
@@ -145,7 +147,7 @@ struct TrustData
     int8 blind_res_rank{};
 };
 
-std::unordered_map<uint16, std::unique_ptr<TrustData>> g_PTrustData;
+HashMap<uint16, std::unique_ptr<TrustData>> g_PTrustData;
 
 void trustutils::LoadTrustList()
 {

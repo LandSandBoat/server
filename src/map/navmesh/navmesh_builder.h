@@ -21,13 +21,15 @@
 
 #pragma once
 
+#include "navmesh_config.h"
+
 #include "common/cbasetypes.h"
 #include "common/scheduler.h"
-#include "navmesh_config.h"
+
+#include <common/types/hash_map.h>
 
 #include <limits>
 #include <string>
-#include <unordered_map>
 #include <vector>
 
 struct rcConfig;
@@ -90,5 +92,5 @@ private:
     float          worldBmin_[3]{ FloatMax, FloatMax, FloatMax };
     float          worldBmax_[3]{ FloatLowest, FloatLowest, FloatLowest };
 
-    std::unordered_map<uint32, PreTransformedBlock> preTransformed_;
+    HashMap<uint32, PreTransformedBlock> preTransformed_;
 };

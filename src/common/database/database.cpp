@@ -27,9 +27,10 @@
 #include <common/macros.h>
 #include <common/utils.h>
 
+#include <common/types/hash_map.h>
+
 #include <chrono>
 #include <thread>
-#include <unordered_map>
 using namespace std::chrono_literals;
 
 auto db::detail::validateQueryLeadingKeyword(const std::string& query) -> ResultSetType
@@ -118,12 +119,12 @@ auto db::detail::validateQueryContent(const std::string& query) -> bool
     // NOTE: We shouldn't be checking for the presence of '%', as this
     //     : is the SQL wildcard character.
 
-    if (query.find("{}") != std::string::npos)
+    if (query.contains("{}"))
     {
         return false;
     }
 
-    if (query.find(';') != std::string::npos)
+    if (query.contains(';'))
     {
         return false;
     }
@@ -133,7 +134,7 @@ auto db::detail::validateQueryContent(const std::string& query) -> bool
 
 auto db::escapeString(std::string_view str) -> std::string
 {
-    static const std::unordered_map<char, std::string> replacements = {
+    static const HashMap<char, std::string> replacements = {
         // Replacement map similar to str_replace in PHP
         { '\\', "\\\\" },
         { '\0', "\\0" },
@@ -353,7 +354,7 @@ auto db::transactionRollback() -> bool
     return true;
 }
 
-auto db::transaction(const std::function<void()>& transactionFn) -> bool
+auto db::transaction(const Fn<void() const>& transactionFn) -> bool
 {
     TracyZoneScoped;
 

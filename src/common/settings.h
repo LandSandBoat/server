@@ -25,13 +25,14 @@
 #include <common/utils.h>
 #include <common/xi.h>
 
+#include <common/types/hash_map.h>
+
 #include <atomic>
 #include <cstdint>
 #include <functional>
 #include <string>
 #include <string_view>
 #include <type_traits>
-#include <unordered_map>
 #include <utility>
 #include <variant>
 
@@ -48,23 +49,11 @@ namespace detail
 // hot-reload transparently invalidates every per-thread read cache.
 extern std::atomic<uint64_t> generation;
 
-// Transparent hash so both settingsMap and the read cache can be probed with a std::string_view
-// without allocating a std::string on the hot path (the map's key_equal must be transparent too,
-// hence std::equal_to<>).
-struct TransparentStringHash
-{
-    using is_transparent = void;
-
-    [[nodiscard]] std::size_t operator()(std::string_view sv) const noexcept
-    {
-        return std::hash<std::string_view>{}(sv);
-    }
-};
-
 } // namespace detail
 
-// Transparent map: lookups accept a std::string_view directly, no temporary std::string.
-using SettingsMap = std::unordered_map<std::string, SettingsVariant, detail::TransparentStringHash, std::equal_to<>>;
+// HashMap's string-keyed defaults are transparent: lookups accept a std::string_view
+// directly, no temporary std::string on the hot path.
+using SettingsMap = HashMap<std::string, SettingsVariant>;
 extern SettingsMap settingsMap;
 
 void init();
@@ -94,7 +83,7 @@ T getUncached(std::string_view key)
 
         // arg = type held inside the variant
         std::visit(
-            xi::overload{
+            overload{
                 [&](const bool& arg)
                 {
                     if constexpr (std::is_same_v<T, bool>)
@@ -182,7 +171,7 @@ T get(std::string_view key)
     // One memo per (T, thread). Bounded by the number of distinct setting keys, so it never
     // grows unbounded. thread_local also means no locking and no contention with the reload thread
     // on a cache hit.
-    static thread_local std::unordered_map<std::string, std::pair<uint64_t, T>, detail::TransparentStringHash, std::equal_to<>> cache;
+    static thread_local HashMap<std::string, std::pair<uint64_t, T>> cache;
 
     const uint64_t gen = detail::generation.load(std::memory_order_acquire);
 
@@ -217,6 +206,6 @@ void set(const auto& key, const auto& value)
     detail::generation.fetch_add(1, std::memory_order_release);
 }
 
-void visit(const xi::Fn<void(std::string, SettingsVariant)>& visitor);
+void visit(const Fn<void(std::string, SettingsVariant) const>& visitor);
 
 } // namespace settings

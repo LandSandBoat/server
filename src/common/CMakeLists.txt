@@ -42,6 +42,7 @@ set(COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/database/libmariadb/libmariadb_prepared_statement.h
     ${CMAKE_CURRENT_SOURCE_DIR}/database/libmariadb/libmariadb_result_set.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/database/libmariadb/libmariadb_result_set.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/types/error_or.h
     ${CMAKE_CURRENT_SOURCE_DIR}/types/flat_hash_map.h
     ${CMAKE_CURRENT_SOURCE_DIR}/types/hash_map.h
     ${CMAKE_CURRENT_SOURCE_DIR}/types/maybe.h

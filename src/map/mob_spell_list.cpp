@@ -19,6 +19,8 @@
 ===========================================================================
 */
 
+#include <common/types/hash_map.h>
+
 #include <cstring>
 
 #include "lua/luautils.h"
@@ -59,7 +61,7 @@ auto CMobSpellList::GetSpellMinLevel(const SpellID spellId) const -> uint16
 namespace mobSpellList
 {
 
-std::unordered_map<uint16, std::unique_ptr<CMobSpellList>> PMobSpellList;
+HashMap<uint16, std::unique_ptr<CMobSpellList>> PMobSpellList;
 
 // Load list of spells
 void LoadMobSpellList()

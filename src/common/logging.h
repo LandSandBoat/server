@@ -28,6 +28,7 @@
 
 #include <string>
 #include <string_view>
+#include <utility>
 
 #include <fmt/args.h>
 #include <fmt/chrono.h>
@@ -128,7 +129,7 @@ std::string asStringFromUntrustedSource(const T* ptr, size_t max_size)
 #define DECLARE_FORMAT_AS_UNDERLYING(type) \
 inline auto format_as(type v) \
 { \
-    return fmt::underlying(v); \
+    return std::to_underlying(v); \
 }
 
 #define STATEMENT_CLOSE \

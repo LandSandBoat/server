@@ -20,7 +20,6 @@
 */
 
 #include "zone_entities.h"
-#include "common/utils.h"
 #include "enmity_container.h"
 #include "instance.h"
 #include "latent_effect_container.h"
@@ -31,6 +30,10 @@
 #include "status_effect_container.h"
 #include "trade_container.h"
 #include "treasure_pool.h"
+
+#include "common/utils.h"
+
+#include <common/types/hash_map.h>
 
 #include "ai/ai_container.h"
 #include "ai/controllers/mob_controller.h"
@@ -695,7 +698,7 @@ bool CZoneEntities::CharListEmpty() const
     return m_charList.empty();
 }
 
-void CZoneEntities::ForEachChar(const std::function<void(CCharEntity*)>& func)
+void CZoneEntities::ForEachChar(FnRef<void(CCharEntity*)> func)
 {
     FOR_EACH_PAIR_CAST_SECOND(CCharEntity*, PChar, m_charList)
     {
@@ -703,7 +706,7 @@ void CZoneEntities::ForEachChar(const std::function<void(CCharEntity*)>& func)
     }
 }
 
-void CZoneEntities::ForEachMob(const std::function<void(CMobEntity*)>& func)
+void CZoneEntities::ForEachMob(FnRef<void(CMobEntity*)> func)
 {
     FOR_EACH_PAIR_CAST_SECOND(CMobEntity*, PMob, m_mobList)
     {
@@ -711,7 +714,7 @@ void CZoneEntities::ForEachMob(const std::function<void(CMobEntity*)>& func)
     }
 }
 
-void CZoneEntities::ForEachNpc(const std::function<void(CNpcEntity*)>& func)
+void CZoneEntities::ForEachNpc(FnRef<void(CNpcEntity*)> func)
 {
     FOR_EACH_PAIR_CAST_SECOND(CNpcEntity*, PNpc, m_npcList)
     {
@@ -719,7 +722,7 @@ void CZoneEntities::ForEachNpc(const std::function<void(CNpcEntity*)>& func)
     }
 }
 
-void CZoneEntities::ForEachTrust(const std::function<void(CTrustEntity*)>& func)
+void CZoneEntities::ForEachTrust(FnRef<void(CTrustEntity*)> func)
 {
     FOR_EACH_PAIR_CAST_SECOND(CTrustEntity*, PTrust, m_trustList)
     {
@@ -727,7 +730,7 @@ void CZoneEntities::ForEachTrust(const std::function<void(CTrustEntity*)>& func)
     }
 }
 
-void CZoneEntities::ForEachPet(const std::function<void(CPetEntity*)>& func)
+void CZoneEntities::ForEachPet(FnRef<void(CPetEntity*)> func)
 {
     FOR_EACH_PAIR_CAST_SECOND(CPetEntity*, PPet, m_petList)
     {
@@ -735,7 +738,7 @@ void CZoneEntities::ForEachPet(const std::function<void(CPetEntity*)>& func)
     }
 }
 
-void CZoneEntities::ForEachAlly(const std::function<void(CMobEntity*)>& func)
+void CZoneEntities::ForEachAlly(FnRef<void(CMobEntity*)> func)
 {
     FOR_EACH_PAIR_CAST_SECOND(CMobEntity*, PAlly, m_allyList)
     {
@@ -847,9 +850,9 @@ void CZoneEntities::syncSpawnListWithGrid(CCharEntity*                     PChar
                                           SpawnIDList_t&                   spawnList,
                                           uint8                            objtype,
                                           uint8                            spawnFlag,
-                                          const EntityFn&                  visible,
-                                          const EntityCallback&            onAdd,
-                                          const EntityCallback&            onUpdate,
+                                          EntityFn                         visible,
+                                          EntityCallback                   onAdd,
+                                          EntityCallback                   onUpdate,
                                           const std::vector<CBaseEntity*>* alwaysInclude)
 {
     // Remove pass: anything currently shown that is no longer visible.
@@ -1043,7 +1046,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
     }
 
     // Provide bonus score to characters targeted by spawned mobs or other conflict players, if in conflict
-    std::unordered_map<uint32, float> scoreBonus = std::unordered_map<uint32, float>();
+    HashMap<uint32, float> scoreBonus = HashMap<uint32, float>();
 
     FOR_EACH_PAIR_CAST_SECOND(CMobEntity*, PMob, PChar->SpawnMOBList)
     {

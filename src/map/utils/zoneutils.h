@@ -77,8 +77,8 @@ auto GetChar(uint32 charId) -> CCharEntity*;                          // returns
 auto GetCharToUpdate(uint32 primary, uint32 ternary) -> CCharEntity*; // returns pointer to preferred char to update for party changes
 auto GetZonesAssignedToThisProcess(IPP mapIPP) -> std::vector<uint16>;
 auto IsZoneAssignedToThisProcess(IPP mapIPP, ZONEID zoneId) -> bool;
-void ForEachZone(const std::function<void(CZone*)>& func);
-void ForEachZone(const std::vector<uint16>& zoneIds, const std::function<void(CZone*)>& func);
+void ForEachZone(FnRef<void(CZone*)> func);
+void ForEachZone(const std::vector<uint16>& zoneIds, FnRef<void(CZone*)> func);
 auto GetZoneIPP(uint16 zoneId) -> uint64;                    // returns IPP for zone ID
 auto IsZoneAtPlayerCap(uint16 zoneId, bool isGM) -> bool;    // returns true if the zone is at capacity and the entry should be denied
 auto IsResidentialArea(const CCharEntity* PChar) -> bool;    // returns whether or not the area is a residential zone

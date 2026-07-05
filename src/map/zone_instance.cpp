@@ -467,7 +467,7 @@ auto CZoneInstance::CheckTriggerAreas() -> Task<void>
     co_return;
 }
 
-void CZoneInstance::ForEachChar(const std::function<void(CCharEntity*)>& func)
+void CZoneInstance::ForEachChar(FnRef<void(CCharEntity*)> func)
 {
     TracyZoneScoped;
 
@@ -477,7 +477,7 @@ void CZoneInstance::ForEachChar(const std::function<void(CCharEntity*)>& func)
     }
 }
 
-void CZoneInstance::ForEachCharInstance(CBaseEntity* PEntity, const std::function<void(CCharEntity*)>& func)
+void CZoneInstance::ForEachCharInstance(CBaseEntity* PEntity, FnRef<void(CCharEntity*)> func)
 {
     TracyZoneScoped;
 
@@ -487,7 +487,7 @@ void CZoneInstance::ForEachCharInstance(CBaseEntity* PEntity, const std::functio
     }
 }
 
-void CZoneInstance::ForEachMob(const std::function<void(CMobEntity*)>& func)
+void CZoneInstance::ForEachMob(FnRef<void(CMobEntity*)> func)
 {
     TracyZoneScoped;
 
@@ -497,7 +497,7 @@ void CZoneInstance::ForEachMob(const std::function<void(CMobEntity*)>& func)
     }
 }
 
-void CZoneInstance::ForEachMobInstance(CBaseEntity* PEntity, const std::function<void(CMobEntity*)>& func)
+void CZoneInstance::ForEachMobInstance(CBaseEntity* PEntity, FnRef<void(CMobEntity*)> func)
 {
     TracyZoneScoped;
 
@@ -507,7 +507,7 @@ void CZoneInstance::ForEachMobInstance(CBaseEntity* PEntity, const std::function
     }
 }
 
-void CZoneInstance::ForEachNpc(const std::function<void(CNpcEntity*)>& func)
+void CZoneInstance::ForEachNpc(FnRef<void(CNpcEntity*)> func)
 {
     TracyZoneScoped;
 
@@ -517,7 +517,7 @@ void CZoneInstance::ForEachNpc(const std::function<void(CNpcEntity*)>& func)
     }
 }
 
-void CZoneInstance::ForEachNpcInstance(CBaseEntity* PEntity, const std::function<void(CNpcEntity*)>& func)
+void CZoneInstance::ForEachNpcInstance(CBaseEntity* PEntity, FnRef<void(CNpcEntity*)> func)
 {
     TracyZoneScoped;
 
@@ -527,7 +527,7 @@ void CZoneInstance::ForEachNpcInstance(CBaseEntity* PEntity, const std::function
     }
 }
 
-void CZoneInstance::ForEachTrust(const std::function<void(CTrustEntity*)>& func)
+void CZoneInstance::ForEachTrust(FnRef<void(CTrustEntity*)> func)
 {
     TracyZoneScoped;
 
@@ -537,7 +537,7 @@ void CZoneInstance::ForEachTrust(const std::function<void(CTrustEntity*)>& func)
     }
 }
 
-void CZoneInstance::ForEachTrustInstance(CBaseEntity* PEntity, const std::function<void(CTrustEntity*)>& func)
+void CZoneInstance::ForEachTrustInstance(CBaseEntity* PEntity, FnRef<void(CTrustEntity*)> func)
 {
     TracyZoneScoped;
 
@@ -547,7 +547,7 @@ void CZoneInstance::ForEachTrustInstance(CBaseEntity* PEntity, const std::functi
     }
 }
 
-void CZoneInstance::ForEachPet(const std::function<void(CPetEntity*)>& func)
+void CZoneInstance::ForEachPet(FnRef<void(CPetEntity*)> func)
 {
     TracyZoneScoped;
 
@@ -557,7 +557,7 @@ void CZoneInstance::ForEachPet(const std::function<void(CPetEntity*)>& func)
     }
 }
 
-void CZoneInstance::ForEachPetInstance(CBaseEntity* PEntity, const std::function<void(CPetEntity*)>& func)
+void CZoneInstance::ForEachPetInstance(CBaseEntity* PEntity, FnRef<void(CPetEntity*)> func)
 {
     TracyZoneScoped;
 
@@ -567,7 +567,7 @@ void CZoneInstance::ForEachPetInstance(CBaseEntity* PEntity, const std::function
     }
 }
 
-void CZoneInstance::ForEachAlly(const std::function<void(CMobEntity*)>& func)
+void CZoneInstance::ForEachAlly(FnRef<void(CMobEntity*)> func)
 {
     TracyZoneScoped;
 
@@ -577,7 +577,7 @@ void CZoneInstance::ForEachAlly(const std::function<void(CMobEntity*)>& func)
     }
 }
 
-void CZoneInstance::ForEachAllyInstance(CBaseEntity* PEntity, const std::function<void(CMobEntity*)>& func)
+void CZoneInstance::ForEachAllyInstance(CBaseEntity* PEntity, FnRef<void(CMobEntity*)> func)
 {
     TracyZoneScoped;
 

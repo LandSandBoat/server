@@ -178,7 +178,7 @@ auto CItemContainer::RemoveItem(uint8 SlotID) -> std::unique_ptr<CItem>
     return std::move(m_ItemList[SlotID]);
 }
 
-auto CItemContainer::MoveItemTo(uint8 fromSlot, CItemContainer& dst, std::optional<uint8> dstSlot) -> uint8
+auto CItemContainer::MoveItemTo(uint8 fromSlot, CItemContainer& dst, Maybe<uint8> dstSlot) -> uint8
 {
     if (dstSlot.has_value())
     {

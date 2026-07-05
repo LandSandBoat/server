@@ -24,7 +24,7 @@
 #include "common/cbasetypes.h"
 #include "common/timer.h"
 
-#include <unordered_map>
+#include <common/types/hash_map.h>
 
 class CCharEntity;
 
@@ -35,5 +35,5 @@ public:
     auto isLimited(CCharEntity* PChar, uint16 packetId) -> bool;
 
 private:
-    std::unordered_map<uint16, timer::duration> rateLimits_;
+    HashMap<uint16, timer::duration> rateLimits_;
 };

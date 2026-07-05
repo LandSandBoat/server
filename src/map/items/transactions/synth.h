@@ -23,12 +23,14 @@
 
 #include "common/cbasetypes.h"
 #include "common/types/badge.h"
+
 #include "items/craft_state.h"
 #include "items/transaction.h"
 
+#include <common/types/maybe.h>
+
 #include <array>
 #include <memory>
-#include <optional>
 
 class CCharEntity;
 class CItem;
@@ -82,5 +84,5 @@ private:
     CCharEntity*               player_{};
     std::array<Slot, MaxSlots> slots_{}; // [0] crystal, [1..8] ingredients
 
-    std::optional<CCraftState::Result> pendingResult_;
+    Maybe<CCraftState::Result> pendingResult_;
 };

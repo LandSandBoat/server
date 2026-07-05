@@ -240,7 +240,7 @@ void init()
     // lua.safe_script("require('settings/main'); require('settings/default/main'); print(xi.settings)");
 }
 
-void visit(const xi::Fn<void(std::string, SettingsVariant)>& visitor)
+void visit(const Fn<void(std::string, SettingsVariant) const>& visitor)
 {
     for (auto& [key, value] : settingsMap)
     {

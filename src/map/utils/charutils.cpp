@@ -26,6 +26,8 @@
 #include "common/utils.h"
 #include "common/vana_time.h"
 
+#include <common/types/hash_map.h>
+
 #include <array>
 #include <chrono>
 
@@ -1046,7 +1048,7 @@ void LoadSpells(CCharEntity* PChar)
 
     if (hasTrustPermit)
     {
-        static const std::unordered_map<uint8, uint16> trustSpells = {
+        static const HashMap<uint8, uint16> trustSpells = {
             { 1, 1002 }, // Cornelia
             { 2, 1003 }, // Matsui-P
         }; // This can be expanded if more trust spells are added as settings options.

@@ -21,6 +21,9 @@
 
 #pragma once
 
+#include <common/types/fn.h>
+#include <common/types/hash_map.h>
+
 #include <any>
 #include <condition_variable>
 #include <functional>
@@ -28,7 +31,6 @@
 #include <memory>
 #include <string>
 #include <thread>
-#include <unordered_map>
 
 #include <common/scheduler.h>
 
@@ -43,7 +45,7 @@ private:
         std::string description;
 
         // TODO: Use variant or any to carry a payload to the function
-        std::function<void(std::vector<std::string>& inputs)> func;
+        Fn<void(std::vector<std::string>& inputs)> func;
     };
 
 public:
@@ -52,7 +54,7 @@ public:
 
     // NOTE: If you capture things in this function, make sure they're protected (locked or atomic)!
     // NOTE: If you're going to print, use fmt::print, rather than ShowInfo etc.
-    void registerCommand(const std::string& name, const std::string& description, std::function<void(std::vector<std::string>&)> func);
+    void registerCommand(const std::string& name, const std::string& description, Fn<void(std::vector<std::string>&)> func);
 
 private:
     void registerDefaultCommands();
@@ -61,6 +63,6 @@ private:
 
     Application& application_;
 
-    std::mutex                                      m_consoleInputBottleneck;
-    std::unordered_map<std::string, ConsoleCommand> m_commands;
+    std::mutex                           m_consoleInputBottleneck;
+    HashMap<std::string, ConsoleCommand> m_commands;
 };

@@ -22,9 +22,13 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+
 #include "enums/packet_s2c.h"
 #include "packets/basic.h"
+
 #include <cstring>
+#include <type_traits>
+#include <utility>
 
 // https://github.com/atom0s/XiPackets/blob/main/world/Header.md
 struct GP_SERV_HEADER
@@ -47,7 +51,7 @@ protected:
     GP_SERV_PACKET()
     {
         std::memset(buffer_.data(), 0, PACKET_SIZE);
-        setType(static_cast<uint16_t>(PacketId));
+        setType(std::to_underlying(PacketId));
         // Auto-set size based on PacketData
         if constexpr (std::is_empty_v<typename Derived::PacketData>)
         {
@@ -63,16 +67,23 @@ protected:
         }
     }
 
-    // Access shifted by header size so individual packets do not need to declare it
+    // Access shifted by header size so individual packets do not need to declare it.
     template <typename T = Derived>
-    auto data() -> typename T::PacketData&
+    auto data(this auto& self) -> auto&
     {
-        return *reinterpret_cast<typename T::PacketData*>(buffer_.data() + sizeof(GP_SERV_HEADER));
+        return *payloadCast<typename T::PacketData>(self.buffer_.data() + sizeof(GP_SERV_HEADER));
     }
 
-    template <typename T = Derived>
-    auto data() const -> const typename T::PacketData&
+private:
+    template <typename Data>
+    static auto payloadCast(void* bytes) -> Data*
     {
-        return *reinterpret_cast<const typename T::PacketData*>(buffer_.data() + sizeof(GP_SERV_HEADER));
+        return reinterpret_cast<Data*>(bytes);
+    }
+
+    template <typename Data>
+    static auto payloadCast(const void* bytes) -> const Data*
+    {
+        return reinterpret_cast<const Data*>(bytes);
     }
 };

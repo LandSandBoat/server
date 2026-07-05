@@ -24,8 +24,9 @@
 #include "common/cbasetypes.h"
 #include "common/utils.h"
 
+#include <common/types/maybe.h>
+
 #include <cstddef>
-#include <optional>
 #include <sol/sol.hpp>
 
 namespace Exdata
@@ -52,13 +53,13 @@ void encodeSignature(const std::string& str, uint8_t (&sig)[N])
 template <typename T, typename Table, typename Key>
 auto get_or(Table&& tbl, Key&& key, T fallback) -> T
 {
-    return std::forward<Table>(tbl).template get<std::optional<T>>(std::forward<Key>(key)).value_or(std::move(fallback));
+    return std::forward<Table>(tbl).template get<Maybe<T>>(std::forward<Key>(key)).value_or(std::move(fallback));
 }
 
 template <typename T, typename Proxy>
 auto get_or(Proxy&& proxy, T fallback) -> T
 {
-    return std::forward<Proxy>(proxy).template get<std::optional<T>>().value_or(std::move(fallback));
+    return std::forward<Proxy>(proxy).template get<Maybe<T>>().value_or(std::move(fallback));
 }
 
 } // namespace Exdata

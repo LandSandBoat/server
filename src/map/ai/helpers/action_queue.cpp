@@ -49,7 +49,7 @@ void CAIActionQueue::checkAction(timer::time_point tick)
         const auto& topaction = timerQueue.top();
         if (tick > topaction.start_time + topaction.delay)
         {
-            queueAction_t action = timerQueue.top();
+            queueAction_t action = std::move(const_cast<queueAction_t&>(timerQueue.top()));
             timerQueue.pop();
             handleAction(action);
         }
@@ -63,7 +63,7 @@ void CAIActionQueue::checkAction(timer::time_point tick)
         const auto& topaction = actionQueue.top();
         if (tick > topaction.start_time + topaction.delay && (!topaction.checkState || PEntity->PAI->CanChangeState()))
         {
-            auto action = actionQueue.top();
+            auto action = std::move(const_cast<queueAction_t&>(actionQueue.top()));
             actionQueue.pop();
             handleAction(action);
         }

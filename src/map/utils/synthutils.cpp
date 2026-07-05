@@ -25,6 +25,7 @@
 #include "common/database.h"
 #include "common/logging.h"
 #include "common/timer.h"
+#include "common/types/flat_hash_map.h"
 #include "common/utils.h"
 #include "entities/battle_entity.h"
 #include "enums/key_items.h"
@@ -195,7 +196,7 @@ struct SynthRecipe
     }
 };
 
-std::unordered_map<std::string, SynthRecipe> synthRecipes;
+FlatHashMap<std::string, SynthRecipe> synthRecipes;
 
 struct CrystalProps
 {

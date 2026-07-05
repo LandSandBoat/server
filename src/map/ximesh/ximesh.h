@@ -34,12 +34,12 @@ public:
 
     DISALLOW_COPY_AND_MOVE(XiMesh);
 
-    auto query(float x, float y, float z) const -> std::optional<CellHit> override;
+    auto query(float x, float y, float z) const -> Maybe<CellHit> override;
     auto getTerrainAt(float x, float y, float z) const -> TerrainType override;
     auto getFloorId(float x, float y, float z) const -> uint8 override;
 
     auto rayIntersect(const Vector3& start, const Vector3& end, IgnoreTransparentBarriers ignoreTransparentBarriers = IgnoreTransparentBarriers::Yes) const -> bool override;
-    auto getPositionInfo(const Vector3& position, YOffsets yOffsets, IgnoreTransparentBarriers ignoreTransparentBarriers = IgnoreTransparentBarriers::Yes) const -> std::optional<RayHitInfo> override;
+    auto getPositionInfo(const Vector3& position, YOffsets yOffsets, IgnoreTransparentBarriers ignoreTransparentBarriers = IgnoreTransparentBarriers::Yes) const -> Maybe<RayHitInfo> override;
 
     auto blocks() const -> const std::vector<MeshBlock>& override;
     auto placements() const -> const std::vector<MeshPlacement>& override;
@@ -54,7 +54,7 @@ private:
     auto worldToCell(float x, float z) const -> std::pair<int, int>;
 
     auto rayIntersectCell(const Vector3& start, const Vector3& end, YRange yRange, uint32 cellIdx, IgnoreTransparentBarriers ignoreTransparentBarriers) const -> bool;
-    auto rayIntersectCellHitInfo(const Vector3& start, const Vector3& end, YRange yRange, uint32 cellIdx, IgnoreTransparentBarriers ignoreTransparentBarriers, std::optional<RayHitInfo>& closestHit) const -> void;
+    auto rayIntersectCellHitInfo(const Vector3& start, const Vector3& end, YRange yRange, uint32 cellIdx, IgnoreTransparentBarriers ignoreTransparentBarriers, Maybe<RayHitInfo>& closestHit) const -> void;
 
     XimeshHeader header_{};
 

@@ -23,11 +23,12 @@
 
 #include "common/cbasetypes.h"
 
+#include <common/types/hash_map.h>
+
 #include "packets/c2s/0x0a0_switch_proposal.h"
 
 #include <array>
 #include <string>
-#include <unordered_map>
 #include <unordered_set>
 #include <vector>
 
@@ -69,6 +70,6 @@ private:
     void broadcastFinal(const NominateProposal& proposal) const;
     void finalize(CCharEntity* PChar, const NominateProposal& proposal) const;
 
-    CZone&                                            zone_;
-    std::unordered_map<std::string, NominateProposal> activeProposals_;
+    CZone&                                 zone_;
+    HashMap<std::string, NominateProposal> activeProposals_;
 };

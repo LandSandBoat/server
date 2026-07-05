@@ -24,16 +24,17 @@
 #include <common/cbasetypes.h>
 #include <common/timer.h>
 
+#include <common/types/maybe.h>
+
 #include <map/ximesh/vector3.h>
 
 #include <array>
 #include <chrono>
-#include <optional>
 
 class LineOfSightCache
 {
 public:
-    auto get(const Vector3& src, const Vector3& dst, uint16 zoneId, timer::time_point now) -> std::optional<bool>;
+    auto get(const Vector3& src, const Vector3& dst, uint16 zoneId, timer::time_point now) -> Maybe<bool>;
     void put(const Vector3& src, const Vector3& dst, uint16 zoneId, bool result, timer::time_point now);
 
 private:

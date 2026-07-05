@@ -22,8 +22,9 @@
 #ifndef _BATTLEENTITY_H
 #define _BATTLEENTITY_H
 
+#include "common/types/flat_hash_map.h"
+
 #include <set>
-#include <unordered_map>
 #include <vector>
 
 #include "alliance.h"
@@ -522,9 +523,9 @@ private:
     timer::time_point m_battleStartTime;
     uint16            m_battleID = 0; // Current battle the entity is participating in. Battle ID must match in order for entities to interact with each other.
 
-    std::unordered_map<Mod, int16, EnumClassHash>                                                m_modStat;     // array of modifiers
-    std::unordered_map<Mod, int16, EnumClassHash>                                                m_modStatSave; // saved state
-    std::unordered_map<PetModType, std::unordered_map<Mod, int16, EnumClassHash>, EnumClassHash> m_petMod;
+    FlatHashMap<Mod, int16, EnumClassHash>                                         m_modStat;     // array of modifiers
+    FlatHashMap<Mod, int16, EnumClassHash>                                         m_modStatSave; // saved state
+    FlatHashMap<PetModType, FlatHashMap<Mod, int16, EnumClassHash>, EnumClassHash> m_petMod;
 };
 
 #endif

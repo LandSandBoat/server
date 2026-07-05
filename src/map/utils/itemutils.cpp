@@ -23,15 +23,16 @@
 
 #include "map_engine.h"
 
+#include "common/database.h"
+#include "common/logging.h"
+#include "common/sjis.h"
+
+#include <common/types/hash_map.h>
+
 #include <algorithm>
 #include <array>
 #include <cstring>
 #include <map>
-#include <unordered_map>
-
-#include "common/database.h"
-#include "common/logging.h"
-#include "common/sjis.h"
 
 #include "entities/battle_entity.h"
 #include "enums/item_types.h"
@@ -56,7 +57,7 @@ std::array<DropList_t*, MAX_DROPID> g_pDropList; // global array of monster drop
 std::array<LootList_t*, MAX_LOOTID> g_pLootList; // global array of BCNM lootlist items
 
 // Translation lookup: language -> (name -> {item id, translated name})
-std::map<GP_CLI_COMMAND_TRANSLATE_INDEX, std::unordered_map<std::string, std::pair<uint16, std::string>>> g_TranslateMap;
+std::map<GP_CLI_COMMAND_TRANSLATE_INDEX, HashMap<std::string, std::pair<uint16, std::string>>> g_TranslateMap;
 
 DropItem_t::DropItem_t(uint8 DropType, uint16 ItemID, uint16 DropRate)
 : DropType(DropType)
@@ -91,7 +92,7 @@ LootContainer::LootContainer(DropList_t* dropList)
 {
 }
 
-void LootContainer::ForEachGroup(const std::function<void(const DropGroup_t&)>& func)
+void LootContainer::ForEachGroup(FnRef<void(const DropGroup_t&)> func)
 {
     for (const auto& group : dropList->Groups)
     {
@@ -104,7 +105,7 @@ void LootContainer::ForEachGroup(const std::function<void(const DropGroup_t&)>& 
     }
 }
 
-void LootContainer::ForEachItem(const std::function<void(const DropItem_t&)>& func)
+void LootContainer::ForEachItem(FnRef<void(const DropItem_t&)> func)
 {
     for (const auto& item : dropList->Items)
     {
@@ -580,7 +581,7 @@ void FreeItemList()
 }
 
 auto TranslateItemName(GP_CLI_COMMAND_TRANSLATE_INDEX fromLang, GP_CLI_COMMAND_TRANSLATE_INDEX toLang, const std::string& name)
-    -> std::optional<std::pair<uint16, std::string>>
+    -> Maybe<std::pair<uint16, std::string>>
 {
     std::ignore = toLang; // With only EN/JP, the "from" map already stores the other language's translation.
 

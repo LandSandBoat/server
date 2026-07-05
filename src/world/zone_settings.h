@@ -21,14 +21,15 @@
 
 #pragma once
 
-#include "common/cbasetypes.h"
-#include "common/database.h"
-#include "common/ipp.h"
-#include "common/logging.h"
+#include <common/cbasetypes.h>
+#include <common/database.h>
+#include <common/ipp.h>
+#include <common/logging.h>
+
+#include <common/types/hash_map.h>
 
 #include <ranges>
 #include <set>
-#include <unordered_map>
 #include <vector>
 
 class ZoneSettings final
@@ -88,8 +89,8 @@ public:
 
     // TODO: Properly encapsulate this
     // private:
-    std::unordered_map<uint16, ZoneSettingsEntry> zoneSettingsMap_;
-    std::vector<IPP>                              mapEndpoints_;
-    std::vector<IPP>                              yellMapEndpoints_;
-    std::vector<IPP>                              assistMapEndpoints_;
+    HashMap<uint16, ZoneSettingsEntry> zoneSettingsMap_;
+    std::vector<IPP>                   mapEndpoints_;
+    std::vector<IPP>                   yellMapEndpoints_;
+    std::vector<IPP>                   assistMapEndpoints_;
 };

@@ -22,8 +22,9 @@
 #include "login_helpers.h"
 
 #include "common/md52.h"
-
 #include <common/lua.h>
+
+#include <common/types/hash_map.h>
 
 #include <array>
 #include <cstring>
@@ -237,9 +238,9 @@ Maybe<std::string> validateCharacterName(const std::string& name)
 }
 
 // [ip_addr][session_hash] = session
-std::unordered_map<std::string, std::map<std::string, session_t>> authenticatedSessions_;
+HashMap<std::string, std::map<std::string, session_t>> authenticatedSessions_;
 
-std::unordered_map<std::string, std::map<std::string, session_t>>& getAuthenticatedSessions()
+HashMap<std::string, std::map<std::string, session_t>>& getAuthenticatedSessions()
 {
     return authenticatedSessions_;
 }
