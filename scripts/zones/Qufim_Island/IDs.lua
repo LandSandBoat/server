@@ -22,6 +22,10 @@ zones[xi.zone.QUFIM_ISLAND] =
         LOGIN_NUMBER                   = 7007,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED  = 7027,  -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                  = 7072,  -- Tallying conquest results...
+        REGION_POINTS_SANDORIA         = 7137,  -- San d'Oria's region points have increased!
+        EXP_FORCE_KILL_SANDORIA        = 7140,  -- San d'Orian E.F. defeats beastmen hordes... Maintain current momentum.
+        BEASTMEN_BANNER_CURSE          = 7151,  -- There was a curse on the beastmen's banner!
+        BEASTMEN_BANNER_LIFTED         = 7152,  -- The curse of the beastmen's banner has been lifted!
         BEASTMEN_BANNER                = 7153,  -- There is a beastmen's banner.
         FISHING_MESSAGE_OFFSET         = 7231,  -- You can't fish here.
         THESE_WITHERED_FLOWERS         = 7352,  -- These withered flowers seem unable to bloom.
@@ -48,15 +52,28 @@ zones[xi.zone.QUFIM_ISLAND] =
     },
     mob =
     {
-        DOSETSU_TREE      = GetFirstID('Dosetsu_Tree'),
-        KRAKEN_NM         = GetTableOfIDs('Kraken')[3],
-        OPHIOTAURUS       = GetFirstID('Ophiotaurus'),
-        SLIPPERY_SUCKER   = GetFirstID('Slippery_Sucker'),
-        TRICKSTER_KINETIX = GetFirstID('Trickster_Kinetix'),
+        DOSETSU_TREE          = GetFirstID('Dosetsu_Tree'),
+        GIANT_BEASTMASTER     = GetFirstID('Giant_Beastmaster'),
+        GIANT_HIGH_RANGER     = GetFirstID('Giant_High_Ranger'),
+        GIANT_MONK            = GetFirstID('Giant_Monk'),
+        GIANT_WARRIOR         = GetFirstID('Giant_Warrior'),
+        HOBGOBLIN_BEASTMASTER = GetFirstID('Hobgoblin_Beastmaster'),
+        HOBGOBLIN_BLACK_MAGE  = GetFirstID('Hobgoblin_Black_Mage'),
+        HOBGOBLIN_DARK_KNIGHT = GetFirstID('Hobgoblin_Dark_Knight'),
+        HOBGOBLIN_RANGER      = GetFirstID('Hobgoblin_Ranger'),
+        HOBGOBLIN_RED_MAGE    = GetFirstID('Hobgoblin_Red_Mage'),
+        HOBGOBLIN_THIEF       = GetFirstID('Hobgoblin_Thief'),
+        HOBGOBLIN_WARRIOR     = GetFirstID('Hobgoblin_Warrior'),
+        HOBGOBLIN_WHITE_MAGE  = GetFirstID('Hobgoblin_White_Mage'),
+        KRAKEN_NM             = GetTableOfIDs('Kraken')[3],
+        OPHIOTAURUS           = GetFirstID('Ophiotaurus'),
+        SLIPPERY_SUCKER       = GetFirstID('Slippery_Sucker'),
+        TRICKSTER_KINETIX     = GetFirstID('Trickster_Kinetix'),
     },
     npc =
     {
-        OVERSEER_BASE = GetFirstID('Pitoire_RK'),
+        BEASTMENS_BANNER = GetFirstID('Beastmens_Banner'),
+        OVERSEER_BASE    = GetFirstID('Pitoire_RK'),
     },
 }
 

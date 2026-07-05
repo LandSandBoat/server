@@ -22,6 +22,10 @@ zones[xi.zone.THE_SANCTUARY_OF_ZITAH] =
         LOGIN_NUMBER                  = 7007,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7027,  -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7072,  -- Tallying conquest results...
+        REGION_POINTS_SANDORIA        = 7137,  -- San d'Oria's region points have increased!
+        EXP_FORCE_KILL_SANDORIA       = 7140,  -- San d'Orian E.F. defeats beastmen hordes... Maintain current momentum.
+        BEASTMEN_BANNER_CURSE         = 7151,  -- There was a curse on the beastmen's banner!
+        BEASTMEN_BANNER_LIFTED        = 7152,  -- The curse of the beastmen's banner has been lifted!
         BEASTMEN_BANNER               = 7153,  -- There is a beastmen's banner.
         CONQUEST                      = 7240,  -- You've earned conquest points!
         FISHING_MESSAGE_OFFSET        = 7573,  -- You can't fish here.
@@ -57,17 +61,26 @@ zones[xi.zone.THE_SANCTUARY_OF_ZITAH] =
     },
     mob =
     {
-        KEEPER_OF_HALIDOM = GetFirstID('Keeper_of_Halidom'),
-        NOBLE_MOLD        = GetFirstID('Noble_Mold'),
-        GUARDIAN_TREANT   = GetFirstID('Guardian_Treant'),
-        DOOMED_PILGRIMS   = GetFirstID('Doomed_Pilgrims'),
-        ISONADE           = GetFirstID('Isonade'),
-        GREENMAN          = GetFirstID('Greenman'),
+        DOOMED_PILGRIMS       = GetFirstID('Doomed_Pilgrims'),
+        GREENMAN              = GetFirstID('Greenman'),
+        GUARDIAN_TREANT       = GetFirstID('Guardian_Treant'),
+        HOBGOBLIN_BEASTMASTER = GetFirstID('Hobgoblin_Beastmaster'),
+        HOBGOBLIN_BLACK_MAGE  = GetFirstID('Hobgoblin_Black_Mage'),
+        HOBGOBLIN_DARK_KNIGHT = GetFirstID('Hobgoblin_Dark_Knight'),
+        HOBGOBLIN_RANGER      = GetFirstID('Hobgoblin_Ranger'),
+        HOBGOBLIN_RED_MAGE    = GetFirstID('Hobgoblin_Red_Mage'),
+        HOBGOBLIN_THIEF       = GetFirstID('Hobgoblin_Thief'),
+        HOBGOBLIN_WARRIOR     = GetFirstID('Hobgoblin_Warrior'),
+        HOBGOBLIN_WHITE_MAGE  = GetFirstID('Hobgoblin_White_Mage'),
+        ISONADE               = GetFirstID('Isonade'),
+        KEEPER_OF_HALIDOM     = GetFirstID('Keeper_of_Halidom'),
+        NOBLE_MOLD            = GetFirstID('Noble_Mold'),
     },
     npc =
     {
-        OVERSEER_BASE     = GetFirstID('Credaurion_RK'),
+        BEASTMENS_BANNER  = GetFirstID('Beastmens_Banner'),
         CERMET_HEADSTONE  = GetFirstID('Cermet_Headstone'),
+        OVERSEER_BASE     = GetFirstID('Credaurion_RK'),
     },
 }
 

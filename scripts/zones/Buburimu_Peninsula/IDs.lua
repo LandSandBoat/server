@@ -19,6 +19,10 @@ zones[xi.zone.BUBURIMU_PENINSULA] =
         LOGIN_NUMBER                   = 7042,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED  = 7062,  -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                  = 7107,  -- Tallying conquest results...
+        REGION_POINTS_SANDORIA         = 7172,  -- San d'Oria's region points have increased!
+        EXP_FORCE_KILL_SANDORIA        = 7175,  -- San d'Orian E.F. defeats beastmen hordes... Maintain current momentum.
+        BEASTMEN_BANNER_CURSE          = 7186,  -- There was a curse on the beastmen's banner!
+        BEASTMEN_BANNER_LIFTED         = 7187,  -- The curse of the beastmen's banner has been lifted!
         BEASTMEN_BANNER                = 7188,  -- There is a beastmen's banner.
         FIVEOFSPADES_DIALOG            = 7266,  -- GiMme★fIvE! FiVe is★A cArdIan★OF WiN-DuRst! FIvE★iS On★pA-tRol!
         FISHING_MESSAGE_OFFSET         = 7272,  -- You can't fish here.
@@ -61,12 +65,28 @@ zones[xi.zone.BUBURIMU_PENINSULA] =
     },
     mob =
     {
-        BACKOO     = GetFirstID('Backoo'),
-        BUBURIMBOO = GetFirstID('Buburimboo'),
-        HELLDIVER  = GetFirstID('Helldiver'),
+        BACKOO                = GetFirstID('Backoo'),
+        BUBURIMBOO            = GetFirstID('Buburimboo'),
+        HELLDIVER             = GetFirstID('Helldiver'),
+        HOBGOBLIN_BEASTMASTER = GetFirstID('Hobgoblin_Beastmaster'),
+        HOBGOBLIN_BLACK_MAGE  = GetFirstID('Hobgoblin_Black_Mage'),
+        HOBGOBLIN_DARK_KNIGHT = GetFirstID('Hobgoblin_Dark_Knight'),
+        HOBGOBLIN_RANGER      = GetFirstID('Hobgoblin_Ranger'),
+        HOBGOBLIN_RED_MAGE    = GetFirstID('Hobgoblin_Red_Mage'),
+        HOBGOBLIN_THIEF       = GetFirstID('Hobgoblin_Thief'),
+        HOBGOBLIN_WARRIOR     = GetFirstID('Hobgoblin_Warrior'),
+        HOBGOBLIN_WHITE_MAGE  = GetFirstID('Hobgoblin_White_Mage'),
+        THEOYAGUDO_BARD       = GetFirstID('Theoyagudo_Bard'),
+        THEOYAGUDO_BLACK_MAGE = GetFirstID('Theoyagudo_Black_Mage'),
+        THEOYAGUDO_MONK       = GetFirstID('Theoyagudo_Monk'),
+        THEOYAGUDO_NINJA      = GetFirstID('Theoyagudo_Ninja'),
+        THEOYAGUDO_SAMURAI    = GetFirstID('Theoyagudo_Samurai'),
+        THEOYAGUDO_SUMMONER   = GetFirstID('Theoyagudo_Summoner'),
+        THEOYAGUDO_WHITE_MAGE = GetFirstID('Theoyagudo_White_Mage'),
     },
     npc =
     {
+        BEASTMENS_BANNER   = GetFirstID('Beastmens_Banner'),
         BRIGAND_CHART_HUME = GetFirstID('Brigand_Chart_Hume'),
         BRIGAND_CHART_QM   = GetFirstID('qm1'),
         JADE_ETUI_TABLE    = GetTableOfIDs('Jade_Etui'),

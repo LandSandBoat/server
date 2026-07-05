@@ -8,6 +8,10 @@ zones[xi.zone.BEAUCEDINE_GLACIER] =
     text =
     {
         CONQUEST_BASE                  = 0,     -- Tallying conquest results...
+        REGION_POINTS_SANDORIA         = 65,    -- San d'Oria's region points have increased!
+        EXP_FORCE_KILL_SANDORIA        = 68,    -- San d'Orian E.F. defeats beastmen hordes... Maintain current momentum.
+        BEASTMEN_BANNER_CURSE          = 79,    -- There was a curse on the beastmen's banner!
+        BEASTMEN_BANNER_LIFTED         = 80,    -- The curse of the beastmen's banner has been lifted!
         BEASTMEN_BANNER                = 81,    -- There is a beastmen's banner.
         ITEM_CANNOT_BE_OBTAINED        = 6569,  -- You cannot obtain the item. Come back after sorting your inventory.
         FULL_INVENTORY_AFTER_TRADE     = 6571,  -- You cannot obtain the <item>. Try trading again after sorting your inventory.
@@ -50,10 +54,22 @@ zones[xi.zone.BEAUCEDINE_GLACIER] =
     },
     mob =
     {
-        GARGANTUA = GetFirstID('Gargantua'),
-        HUMBABA   = GetFirstID('Humbaba'),
-        KIRATA    = GetFirstID('Kirata'),
-        NUE       = GetFirstID('Nue'),
+        GARGANTUA             = GetFirstID('Gargantua'),
+        GIGAS_BEASTMASTER     = GetFirstID('Gigas_Beastmaster'),
+        GIGAS_MONK            = GetFirstID('Gigas_Monk'),
+        GIGAS_RANGER          = GetFirstID('Gigas_Ranger'),
+        GIGAS_WARRIOR         = GetFirstID('Gigas_Warrior'),
+        HOBGOBLIN_BEASTMASTER = GetFirstID('Hobgoblin_Beastmaster'),
+        HOBGOBLIN_BLACK_MAGE  = GetFirstID('Hobgoblin_Black_Mage'),
+        HOBGOBLIN_DARK_KNIGHT = GetFirstID('Hobgoblin_Dark_Knight'),
+        HOBGOBLIN_RANGER      = GetFirstID('Hobgoblin_Ranger'),
+        HOBGOBLIN_RED_MAGE    = GetFirstID('Hobgoblin_Red_Mage'),
+        HOBGOBLIN_THIEF       = GetFirstID('Hobgoblin_Thief'),
+        HOBGOBLIN_WARRIOR     = GetFirstID('Hobgoblin_Warrior'),
+        HOBGOBLIN_WHITE_MAGE  = GetFirstID('Hobgoblin_White_Mage'),
+        HUMBABA               = GetFirstID('Humbaba'),
+        KIRATA                = GetFirstID('Kirata'),
+        NUE                   = GetFirstID('Nue'),
 
         VOIDWALKER =
         {
@@ -89,8 +105,9 @@ zones[xi.zone.BEAUCEDINE_GLACIER] =
 
     npc =
     {
-        MIRROR_POND_J8 = GetFirstID('Mirror_Pond_1'),
-        OVERSEER_BASE  = GetFirstID('Parledaire_RK'),
+        BEASTMENS_BANNER = GetFirstID('Beastmens_Banner'),
+        MIRROR_POND_J8   = GetFirstID('Mirror_Pond_1'),
+        OVERSEER_BASE    = GetFirstID('Parledaire_RK'),
     },
 }
 
