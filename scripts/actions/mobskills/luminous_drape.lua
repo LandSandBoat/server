@@ -19,7 +19,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         return xi.effect.CHARM_I
     end
 
-    local msg = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.CHARM_I, 0, 3, math.random(5, 25))
+    local msg = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.CHARM_I, 0, 3, math.randomInt(5, 25))
     if msg == xi.msg.basic.SKILL_ENFEEB_IS then
         mob:charm(target)
         mob:resetEnmity(target)

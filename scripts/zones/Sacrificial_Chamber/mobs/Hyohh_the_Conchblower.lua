@@ -40,7 +40,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
     end
 
     -- Pick a random spell from the compiled list
-    return spellList[math.random(1, #spellList)]
+    return spellList[math.randomInt(1, #spellList)]
 end
 
 return entity

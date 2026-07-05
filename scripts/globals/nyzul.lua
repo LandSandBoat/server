@@ -325,11 +325,11 @@ xi.nyzul.vigilWeaponDrop = function(player, mob)
             end
         end
 
-        player:addTreasure(xi.nyzul.baseWeapons[math.random(1, #xi.nyzul.baseWeapons)], mob)
+        player:addTreasure(xi.nyzul.baseWeapons[math.randomInt(1, #xi.nyzul.baseWeapons)], mob)
 
     -- Every NM can randomly drop a vigil weapon
-    elseif math.random(1, 100) <= 20 and xi.settings.main.ENABLE_VIGIL_DROPS then
-        player:addTreasure(xi.nyzul.baseWeapons[math.random(1, #xi.nyzul.baseWeapons)], mob)
+    elseif math.randomInt(1, 100) <= 20 and xi.settings.main.ENABLE_VIGIL_DROPS then
+        player:addTreasure(xi.nyzul.baseWeapons[math.randomInt(1, #xi.nyzul.baseWeapons)], mob)
     end
 end
 
@@ -363,7 +363,7 @@ xi.nyzul.spawnChest = function(mob, player)
         mobID < ID.mob.BOSS_OFFSET and
         xi.settings.main.ENABLE_NYZUL_CASKETS
     then
-        if math.random(1, 100) <= 6 then
+        if math.randomInt(1, 100) <= 6 then
             for casketID = ID.npc.TREASURE_CASKET_OFFSET, ID.npc.TREASURE_CASKET_OFFSET + 3 do
                 local casket = GetNPCByID(casketID, instance)
 

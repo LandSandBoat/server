@@ -15,7 +15,7 @@ entity.onMobSpawn = function(mob)
         chance = 75, -- "Is possible that she will not use Eagle Eye Shot at all." (guessing 75 percent)
         specials =
         {
-            { id = xi.mobSkill.EES_LAMIA, hpp = math.random(5, 99) },
+            { id = xi.mobSkill.EES_LAMIA, hpp = math.randomInt(5, 99) },
         },
     })
 end
@@ -42,7 +42,7 @@ entity.onMobFight = function(mob, target)
         for i = ID.mob.MEDUSA + 1, ID.mob.MEDUSA + 4 do
             local bodyguard = GetMobByID(ID.mob.MEDUSA + 1)
             if bodyguard and not bodyguard:isSpawned() then
-                bodyguard:setSpawn(mob:getXPos() + math.random(1, 5), mob:getYPos(), mob:getZPos() + math.random(1, 5))
+                bodyguard:setSpawn(mob:getXPos() + math.randomInt(1, 5), mob:getYPos(), mob:getZPos() + math.randomInt(1, 5))
                 SpawnMob(i):updateEnmity(target)
                 break
             end

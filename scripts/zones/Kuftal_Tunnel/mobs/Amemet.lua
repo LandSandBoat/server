@@ -154,8 +154,8 @@ local pathFind =
     ['pathFind1'] = function(mob, reversePath)
         local pathNodes = {}
         if reversePath == 0 or reversePath == 1 then
-            local pathRnd = math.random(0, 1)
-            local reverseCheck = math.random(0, 2)
+            local pathRnd = math.randomInt(0, 1)
+            local reverseCheck = math.randomInt(0, 2)
             if pathRnd == 1 then
                 mob:setLocalVar('mobPath', 2)
                 if reverseCheck ~= 2 then
@@ -257,11 +257,11 @@ entity.onPath = function(mob)
             local y = mob:getYPos()
             local z = mob:getZPos()
             local pauses = {}
-            local pauseRnd = math.random(0, 2)
+            local pauseRnd = math.randomInt(0, 2)
             if pauseRnd == 2 then
-                local count = math.random(0, 6)
+                local count = math.randomInt(0, 6)
                 for i = 0, count do
-                    local wait = math.random(4000, 6000)
+                    local wait = math.randomInt(4000, 6000)
                     pauses[i + 1] =
                     {
                         x = x, y = y, z = z, wait = wait

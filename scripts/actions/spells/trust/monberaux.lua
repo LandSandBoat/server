@@ -37,7 +37,7 @@ spellObject.onMobSpawn = function(mob)
         end
     end
 
-    local healingMoveCooldown = math.random(3, 4) -- Mix I Retail values from BGWiki
+    local healingMoveCooldown = math.randomInt(3, 4) -- Mix I Retail values from BGWiki
     local buffMoveCooldown    = 60 -- Mix II Retail values from BGWiki
     local mpMoveCooldown      = 90 -- Mix III Retail values from BGWiki
 

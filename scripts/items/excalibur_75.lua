@@ -7,7 +7,7 @@
 local itemObject = {}
 
 itemObject.onItemAdditionalEffect = function(attacker, defender, baseAttackDamage, item)
-    if math.random(1, 100) <= 7 then -- 7% chance
+    if math.randomInt(1, 100) <= 7 then -- 7% chance
         local params = {}
 
         params.subEffect  = xi.subEffect.LIGHT_DAMAGE

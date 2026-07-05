@@ -44,7 +44,7 @@ end
 
 -- Has additional effect: TP Drain (15% chance, drains 50-1100 TP)
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TP_DRAIN, { chance = 15, power = math.random (50, 1100) })
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TP_DRAIN, { chance = 15, power = math.randomInt(50, 1100) })
 end
 
 entity.onMobMobskillChoose = function(mob, target, skillId)

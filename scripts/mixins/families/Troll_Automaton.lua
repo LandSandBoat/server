@@ -48,7 +48,7 @@ local automatonTypes =
 
 g_mixins.families.Troll_Automaton = function(automatonMob)
     automatonMob:addListener('SPAWN', 'TROLL_AUTOMATON_SPAWN', function(mob)
-        xi.mix.trollAutomaton.setupAutomaton(mob, automatonTypes[math.random(1, #automatonTypes)])
+        xi.mix.trollAutomaton.setupAutomaton(mob, automatonTypes[math.randomInt(1, #automatonTypes)])
     end)
 end
 
@@ -59,7 +59,7 @@ xi.mix.trollAutomaton.setupAutomaton = function(mob, automatonType)
     mob:setDelay(270) -- All Frames (Waiting for delay conversion PR to be merged)
     mob:setMod(xi.mod.DOUBLE_ATTACK, automatonType.doubleAttack or 0) -- Valoredge Frame
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 27) -- Harlequin and Stormwalker
-    mob:setMobMod(xi.mobMod.MAGIC_DELAY, math.random(3, 7)) -- Harlequin and Stormwalker
+    mob:setMobMod(xi.mobMod.MAGIC_DELAY, math.randomInt(3, 7)) -- Harlequin and Stormwalker
     mob:setSpellList(automatonType.spellList or 0) -- Harlequin and Stormwalker
     mob:setMagicCastingEnabled(automatonType.isCaster or false) -- Harlequin & Stormwalker
     mob:setBehavior(bit.band(mob:getBehavior(), bit.bnot(xi.behavior.STANDBACK))) -- Sharpshot and Stormwalker
@@ -101,7 +101,7 @@ xi.mix.trollAutomaton.onMobMobskillChoose = function(mob, target)
         return 0
     end
 
-    return skillList[math.random(1, #skillList)]
+    return skillList[math.randomInt(1, #skillList)]
 end
 
 return g_mixins.families.Troll_Automaton

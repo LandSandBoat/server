@@ -36,7 +36,7 @@ g_mixins.families.aern = function(aernMob)
             -- SMN Aerns only spawn 5 elementals
             local eleCount = mob:getLocalVar('aernElementalCount')
             if eleCount <= 5 then
-                local elemental = math.random(xi.magic.spell.FIRE_SPIRIT, xi.magic.spell.DARK_SPIRIT)
+                local elemental = math.randomInt(xi.magic.spell.FIRE_SPIRIT, xi.magic.spell.DARK_SPIRIT)
                 mob:castSpell(elemental, mob)
                 mob:setLocalVar('aernElementalCount', eleCount + 1)
 
@@ -165,7 +165,7 @@ g_mixins.families.aern = function(aernMob)
 
         if
             currReraise >= reraises or
-            math.random(1, 100) <= 60
+            math.randomInt(1, 100) <= 60
         then
             mob:setMobMod(xi.mobMod.NO_DROPS, 0)
 

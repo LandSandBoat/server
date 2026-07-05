@@ -18,7 +18,7 @@ entity.spawnPoints =
 
 entity.onMobInitialize = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(3600, 4200)) -- 60~70 min repop.
+    mob:setRespawnTime(math.randomInt(3600, 4200)) -- 60~70 min repop.
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
     -- For its TP drain melee.
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
@@ -41,7 +41,7 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TP_DRAIN, { power = math.random(10, 30) })
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TP_DRAIN, { power = math.randomInt(10, 30) })
 end
 
 entity.onMobDeath = function(mob, player, optParams)
@@ -52,7 +52,7 @@ end
 
 entity.onMobDespawn = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(3600, 4200)) -- 60~70 min repop.
+    mob:setRespawnTime(math.randomInt(3600, 4200)) -- 60~70 min repop.
 end
 
 return entity

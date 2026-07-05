@@ -38,7 +38,7 @@ entity.spawnPoints =
 }
 
 entity.onMobInitialize = function(mob)
-    local respawnTime = 900 + math.random(0, 6) * 1800 -- 0:15 to 3:15 spawn timer in 30 minute intervals
+    local respawnTime = 900 + math.randomInt(0, 6) * 1800 -- 0:15 to 3:15 spawn timer in 30 minute intervals
     for offset = 1, 10 do
         GetMobByID(mob:getID() - offset):setRespawnTime(respawnTime)
     end
@@ -79,7 +79,7 @@ entity.onMobDespawn = function(mob)
     GetMobByID(kingArthroID):setLocalVar('[POP]King_Arthro', 0)
 
     -- Set respawn of 21:05 to 24:05
-    local respawnTime = 75900 + math.random(0, 6) * 1800 -- 21:05 to 24:05 respawn timer in 30 minute intervals
+    local respawnTime = 75900 + math.randomInt(0, 6) * 1800 -- 21:05 to 24:05 respawn timer in 30 minute intervals
     for offset = 1, 10 do
         GetMobByID(kingArthroID - offset):setRespawnTime(respawnTime)
     end

@@ -24,20 +24,20 @@ local function generatePath(mob)
     local center = arenaCenters[battlefield:getArea()]
 
     -- Randomly choose a side to path towards, either right or left.
-    local positionX = center.x + 8.50 * (1 - 2 * math.random(0, 1))
+    local positionX = center.x + 8.50 * (1 - 2 * math.randomInt(0, 1))
     local positionY = center.y
     local positionZ = center.z + 6.25
 
     local pathPoints = {}
-    local pointCount = math.random(10, 15)
+    local pointCount = math.randomInt(10, 15)
 
     -- Populate 1st point with the chosen corner
     pathPoints[1] = { x = positionX, y = positionY, z = positionZ }
 
     -- Generate 10 to 15 random points with slight variation around the corner
     for i = 2, pointCount do
-        local variationX = math.random(-300, 300) / 100
-        local variationZ = math.random(-300, 300) / 100
+        local variationX = math.randomInt(-300, 300) / 100
+        local variationZ = math.randomInt(-300, 300) / 100
         pathPoints[i]    = { x = positionX + variationX, y = positionY, z = positionZ + variationZ }
     end
 
@@ -63,7 +63,7 @@ end
 
 entity.onMobEngage = function(mob)
     mob:setLocalVar('phase', 0)
-    mob:setLocalVar('nextPathTime', GetSystemTime() + math.random(5, 10))
+    mob:setLocalVar('nextPathTime', GetSystemTime() + math.randomInt(5, 10))
 end
 
 entity.onMobFight = function(mob, target)
@@ -79,7 +79,7 @@ entity.onMobFight = function(mob, target)
         [1] = function()
             if not mob:isFollowingPath() then
                 mob:setLocalVar('phase', 2)
-                mob:setLocalVar('nextPathTime', GetSystemTime() + math.random(20, 45))
+                mob:setLocalVar('nextPathTime', GetSystemTime() + math.randomInt(20, 45))
             end
         end,
 

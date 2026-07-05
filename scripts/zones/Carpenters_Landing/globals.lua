@@ -66,7 +66,7 @@ local carpentersLandingGlobal =
 
                 if
                     honey == 1 and
-                    math.random(1, 100) <= 20 and
+                    math.randomInt(1, 100) <= 20 and
                     mob and
                     mob:getLocalVar('hasSpawned') == 0 and
                     npcUtil.popFromQM(player, npc, ID.mob.HERCULES_BEETLE, { radius = 5, hide = 0 })

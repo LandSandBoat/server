@@ -11,7 +11,7 @@ local function getFleePosition(mob, target)
     local mobPosition         = mob:getPos()
     local targetPosition      = target:getPos()
     local awayFromTargetAngle = utils.getWorldAngle(targetPosition, mobPosition) -- Angle directly away from the target in radians
-    local angleOffset         = math.random() * math.pi - math.pi / 2 -- Random angle between -90 and +90 degrees in radians
+    local angleOffset         = math.randomFloat(0, 1) * math.pi - math.pi / 2 -- Random angle between -90 and +90 degrees in radians
     local randomizedAngle     = awayFromTargetAngle + angleOffset -- Final angle to flee in, randomized within a 180 degree cone away from the target
     local fleeAngle           = randomizedAngle - utils.rotationToAngle(targetPosition.rot)
 
@@ -51,8 +51,8 @@ end
 
 entity.onMobEngage = function(mob, target)
     local currentTime = GetSystemTime()
-    mob:setLocalVar('nextBindTime', currentTime + math.random(15, 25))
-    mob:setLocalVar('nextSkillTime', currentTime + math.random(8, 10))
+    mob:setLocalVar('nextBindTime', currentTime + math.randomInt(15, 25))
+    mob:setLocalVar('nextSkillTime', currentTime + math.randomInt(8, 10))
 end
 
 entity.onMobFight = function(mob, target)
@@ -65,13 +65,13 @@ entity.onMobFight = function(mob, target)
 
     if currentTime >= nextBindTime then
         mob:castSpell(xi.magic.spell.BINDGA, target)
-        mob:setLocalVar('nextBindTime', currentTime + math.random(15, 25))
+        mob:setLocalVar('nextBindTime', currentTime + math.randomInt(15, 25))
         return
     end
 
     if currentTime >= mob:getLocalVar('nextSkillTime') then
         mob:useMobAbility()
-        mob:setLocalVar('nextSkillTime', currentTime + math.random(8, 10))
+        mob:setLocalVar('nextSkillTime', currentTime + math.randomInt(8, 10))
     end
 end
 
@@ -84,7 +84,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.BLASTBOMB,
     }
 
-    return skillList[math.random(1, #skillList)]
+    return skillList[math.randomInt(1, #skillList)]
 end
 
 return entity

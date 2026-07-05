@@ -28,7 +28,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.MAELSTROM_1
     }
 
-    return skillList[math.random(1, #skillList)]
+    return skillList[math.randomInt(1, #skillList)]
 end
 
 entity.onMobDeath = function(mob, player, optParams)

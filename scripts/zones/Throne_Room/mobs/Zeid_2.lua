@@ -20,7 +20,7 @@ entity.onMobInitialize = function(mob)
         local justChained = mobEntity:getLocalVar('justChained')
 
         -- Only allow chaining if this wasn't already a chained TP move
-        if justChained == 0 and math.random(1, 100) <= 50 then
+        if justChained == 0 and math.randomInt(1, 100) <= 50 then
             mobEntity:setTP(3000)
             mobEntity:setLocalVar('justChained', 1) -- Mark this as a chained TP
         else
@@ -31,12 +31,12 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar('petSpawnPercent', math.random(50, 90))
+    mob:setLocalVar('petSpawnPercent', math.randomInt(50, 90))
     xi.mix.jobSpecial.config(mob,
         {
             specials =
             {
-                { id = xi.mobSkill.BLOOD_WEAPON_1, hpp = math.random(20, 50) },
+                { id = xi.mobSkill.BLOOD_WEAPON_1, hpp = math.randomInt(20, 50) },
             },
         })
 end

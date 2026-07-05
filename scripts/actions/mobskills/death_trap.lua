@@ -14,7 +14,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local stun   = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, math.random(10, 15))
+    local stun   = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, math.randomInt(10, 15))
     local poison = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, 10, 0, 300)
 
     mob:resetEnmity(target)

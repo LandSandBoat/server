@@ -70,7 +70,7 @@ m:addOverride('xi.actions.weaponskills.starburst.onUseWeaponSkill', function(pla
     params.ele        = xi.element.LIGHT
     params.dStat      = xi.mod.INT
 
-    if math.random(1, 100) <= 50 then
+    if math.randomInt(1, 100) <= 50 then
         params.ele = xi.element.DARK
     end
 
@@ -89,7 +89,7 @@ m:addOverride('xi.actions.weaponskills.sunburst.onUseWeaponSkill', function(play
     params.ele        = xi.element.LIGHT
     params.dStat      = xi.mod.INT
 
-    if math.random(1, 100) <= 50 then
+    if math.randomInt(1, 100) <= 50 then
         params.ele = xi.element.DARK
     end
 

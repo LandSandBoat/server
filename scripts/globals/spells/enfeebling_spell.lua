@@ -181,7 +181,7 @@ local function executeImmunobreak(caster, target, spell, effectId)
 
     -- Calculate Immunobreack chance.
     local immunobreakChance = caster:getMerit(xi.merit.IMMUNOBREAK_CHANCE) + 20 / (immunobreakValue + 1) -- TODO: Add immunobreak gear?
-    if math.random(1, 100) > immunobreakChance then
+    if math.randomInt(1, 100) > immunobreakChance then
         return
     end
 
@@ -325,7 +325,7 @@ xi.spells.enfeebling.calculateDuration = function(caster, target, spellId, spell
     local duration = pTable[spellId][column.BASE_DURATION] -- Get base duration.
 
     if spellEffect == xi.effect.BIND then
-        duration = math.random(13, 60)
+        duration = math.randomInt(13, 60)
     end
 
     -- Additions to base duration.

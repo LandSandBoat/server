@@ -23,7 +23,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.HP_DRAIN, { chance = 15, power = math.random(450, 550) }) -- This drain needs to be changed to physical damage
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.HP_DRAIN, { chance = 15, power = math.randomInt(450, 550) }) -- This drain needs to be changed to physical damage
 end
 
 return entity

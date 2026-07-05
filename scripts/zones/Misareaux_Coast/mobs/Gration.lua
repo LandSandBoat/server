@@ -53,7 +53,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.GRAND_SLAM_1,
     }
 
-    return skillList[math.random(1, #skillList)]
+    return skillList[math.randomInt(1, #skillList)]
 end
 
 -- All of Grations TP Moves have 0 Ready Time

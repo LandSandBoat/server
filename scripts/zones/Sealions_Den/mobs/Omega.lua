@@ -57,7 +57,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         }
     end
 
-    return tpSkills[math.random(1, #tpSkills)]
+    return tpSkills[math.randomInt(1, #tpSkills)]
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)

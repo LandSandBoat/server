@@ -9,7 +9,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     if mob:getID() == ID.mob.SNOW_MAIDEN - 1 then
-        mob:setLocalVar('timeToGrow', GetSystemTime() + math.random(115200, 158400)) -- 32 to 44 hours
+        mob:setLocalVar('timeToGrow', GetSystemTime() + math.randomInt(115200, 158400)) -- 32 to 44 hours
     end
 end
 
@@ -29,7 +29,7 @@ end
 
 entity.onMobDisengage = function(mob)
     if mob:getID() == ID.mob.SNOW_MAIDEN - 1 then
-        mob:setLocalVar('timeToGrow', GetSystemTime() + math.random(115200, 158400)) -- 32 to 44 hours
+        mob:setLocalVar('timeToGrow', GetSystemTime() + math.randomInt(115200, 158400)) -- 32 to 44 hours
     end
 end
 

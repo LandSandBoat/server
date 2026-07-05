@@ -22,7 +22,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            { id = xi.mobSkill.WILD_CARD, hpp = math.random(25, 35) },
+            { id = xi.mobSkill.WILD_CARD, hpp = math.randomInt(25, 35) },
         },
     })
 end
@@ -37,7 +37,7 @@ entity.onMobMobskillChoose = function(mob, target)
         xi.mobSkill.NETHERSPIKES_1,
     }
 
-    return tpList[math.random(1, #tpList)]
+    return tpList[math.randomInt(1, #tpList)]
 end
 
 return entity

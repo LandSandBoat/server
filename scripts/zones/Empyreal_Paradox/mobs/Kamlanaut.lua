@@ -44,7 +44,7 @@ entity.onMobFight = function(mob, target)
     end
 
     if GetSystemTime() > mob:getLocalVar('nextEnSkill') then
-        local skill = math.random(xi.mobSkill.FIRE_BLADE_1, xi.mobSkill.WATER_BLADE_1)
+        local skill = math.randomInt(xi.mobSkill.FIRE_BLADE_1, xi.mobSkill.WATER_BLADE_1)
         mob:useMobAbility(skill)
         mob:setLocalVar('nextEnSkill', GetSystemTime() + 30)
     end
@@ -57,7 +57,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.LIGHT_BLADE_1,
     }
 
-    return tpList[math.random(1, #tpList)]
+    return tpList[math.randomInt(1, #tpList)]
 end
 
 entity.onMobWeaponSkill = function(mob, target, skill, action)
@@ -89,7 +89,7 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
         local wsMax = mob:getLocalVar('wsMax')
 
         if wsCount == 0 then
-            wsMax = math.random(0, 2)
+            wsMax = math.randomInt(0, 2)
             mob:setLocalVar('wsMax', wsMax)
         end
 

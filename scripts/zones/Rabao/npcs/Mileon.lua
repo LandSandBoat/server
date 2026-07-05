@@ -34,7 +34,7 @@ local closeRewards =
 }
 
 entity.onSpawn = function(npc)
-    npc:setLocalVar('[LuckyRoll]Rabao', math.random (150, 250)) -- ~observed range from retail
+    npc:setLocalVar('[LuckyRoll]Rabao', math.randomInt(150, 250)) -- ~observed range from retail
 end
 
 entity.onTrigger = function(player, npc)
@@ -58,7 +58,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
         if csid == 100 and option == 0 and gil >= 100 then
 
             local currentTotal = npc:getLocalVar('[LuckyRoll]Rabao')
-            local roll = math.random(1, 6)
+            local roll = math.randomInt(1, 6)
             local newTotal = currentTotal + roll
 
             player:updateEvent(4, roll, 0, newTotal)
@@ -85,7 +85,7 @@ entity.onEventFinish = function(player, csid, option, npc)
                     npcUtil.giveItem(player, utils.randomEntry(closeRewards))
                 end
 
-                npc:setLocalVar('[LuckyRoll]Rabao', math.random(150, 250))
+                npc:setLocalVar('[LuckyRoll]Rabao', math.randomInt(150, 250))
                 npc:setLocalVar('[LuckyRoll]RabaoLastWon', VanadielUniqueDay())
                 player:addGil(10000)
             end

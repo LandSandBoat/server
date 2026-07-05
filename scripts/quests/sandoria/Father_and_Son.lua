@@ -32,10 +32,10 @@ quest.sections =
             ['Exoroche'] =
             {
                 onTrigger = function(player, npc)
-                    if math.random(100) < 30 then
+                    if math.randomInt(1, 100) < 30 then
                         return quest:message(southernSandoriaID.text.EXOROCHE_START)
                     else
-                        return quest:message(southernSandoriaID.text.EXOROCHE_DIALOG_OFFSET + math.random(0, 5))
+                        return quest:message(southernSandoriaID.text.EXOROCHE_DIALOG_OFFSET + math.randomInt(0, 5))
                     end
                 end,
             },

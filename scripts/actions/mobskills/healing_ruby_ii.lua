@@ -16,7 +16,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         potency = 15
     end
 
-    potency = potency - math.random(0, potency / 4)
+    potency = potency - math.randomInt(0, potency / 4)
 
     skill:setMsg(xi.msg.basic.SELF_HEAL)
 

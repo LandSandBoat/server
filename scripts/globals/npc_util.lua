@@ -87,8 +87,8 @@ function npcUtil.popFromQM(player, qm, mobId, params)
     for _, mob in pairs(mobs) do
         -- choose random position uniformly from within radius
         if params.radius and type(params.radius) == 'number' then
-            local r = params.radius * math.sqrt(math.random())
-            local theta = math.random() * 2 * math.pi
+            local r = params.radius * math.sqrt(math.randomFloat(0, 1))
+            local theta = math.randomFloat(0, 1) * 2 * math.pi
             local x = r * math.cos(theta)
             local z = r * math.sin(theta)
             mob:setSpawn(qm:getXPos() + x, qm:getYPos(), qm:getZPos() + z)
@@ -209,7 +209,7 @@ function npcUtil.pickNewPosition(npcID, positionTable, allowCurrentPosition)
     local npc = GetNPCByID(npcID)
     local positionIndex  = 1 -- Default to position one in the table if it can't be found.
     local tableSize      = 0
-    local newPosition    = math.random(1, tableSize)
+    local newPosition    = math.randomInt(1, tableSize)
     allowCurrentPosition = allowCurrentPosition or false
 
     for i, v in ipairs(positionTable) do   -- Looking for the current position
@@ -232,7 +232,7 @@ function npcUtil.pickNewPosition(npcID, positionTable, allowCurrentPosition)
     if not allowCurrentPosition then
         -- Pick a new pos that isn't the current
         repeat
-            newPosition = math.random(1, tableSize)
+            newPosition = math.randomInt(1, tableSize)
         until (newPosition ~= positionIndex)
     end
 
@@ -249,7 +249,7 @@ end
         npcUtil.giveItem(player, { xi.item.CHUNK_OF_COPPER_ORE, 1 , xi.item.CHUNK_OF_TIN_ORE, 1 })         -- copper ore x1, tin ore x1
         npcUtil.giveItem(player, { { xi.item.CHUNK_OF_COPPER_ORE, 2 } })                                   -- copper ore x2
         npcUtil.giveItem(player, { { xi.item.CHUNK_OF_COPPER_ORE, 12 }, { xi.item.CHUNK_OF_TIN_ORE, 3 } }) -- copper ore x12 tin ore x3
-        npcUtil.giveItem(target, { { xi.item.CHUNK_OF_COPPER_ORE, math.random(3, 15) } })                  -- random 3-15 copper ores
+        npcUtil.giveItem(target, { { xi.item.CHUNK_OF_COPPER_ORE, math.randomInt(3, 15) } })                  -- random 3-15 copper ores
         enum can be found in scripts/enum/item.lua
 
     params (table) can contain the following parameters:
@@ -962,7 +962,7 @@ function npcUtil.UpdateNPCSpawnPoint(id, minTime, maxTime, posTable, serverVar)
         return
     end
 
-    local respawnTime = math.random(minTime, maxTime)
+    local respawnTime = math.randomInt(minTime, maxTime)
     local newPosition = npcUtil.pickNewPosition(npc:getID(), posTable, true)
     serverVar = serverVar or nil -- serverVar is optional
 
@@ -1015,7 +1015,7 @@ function npcUtil.fishingAnimation(npc, phaseDuration, func)
         local nextAnimationDuration = 10
         local nextAnim = nil
         if anim then
-            nextAnim = anim.nextAnim[math.random(1, #anim.nextAnim)]
+            nextAnim = anim.nextAnim[math.randomInt(1, #anim.nextAnim)]
         end
 
         if nextAnim then

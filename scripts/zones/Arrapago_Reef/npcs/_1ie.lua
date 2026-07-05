@@ -18,7 +18,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHas(trade, xi.item.SET_OF_THIEFS_TOOLS) and
             player:getMainJob() == xi.job.THF
         then
-            if math.random(1, 2) == 1 then -- TODO: figure out actual percentage chance to pick locks; 50% for now
+            if math.randomInt(1, 2) == 1 then -- TODO: figure out actual percentage chance to pick locks; 50% for now
                 player:messageSpecial(ID.text.LOCK_SUCCESS, xi.item.SET_OF_THIEFS_TOOLS)
                 npc:openDoor()
             else
@@ -30,7 +30,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHas(trade, xi.item.LIVING_KEY) and
             player:getMainJob() == xi.job.THF
         then
-            if math.random(1, 2) == 1 then -- TODO: figure out actual percentage chance to pick locks; 50% for now
+            if math.randomInt(1, 2) == 1 then -- TODO: figure out actual percentage chance to pick locks; 50% for now
                 player:messageSpecial(ID.text.LOCK_SUCCESS, xi.item.LIVING_KEY)
                 npc:openDoor()
             else
@@ -42,7 +42,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHas(trade, xi.item.SKELETON_KEY) and
             player:getMainJob() == xi.job.THF
         then
-            if math.random(1, 2) == 1 then -- TODO: figure out actual percentage chance to pick locks; 50% for now
+            if math.randomInt(1, 2) == 1 then -- TODO: figure out actual percentage chance to pick locks; 50% for now
                 player:messageSpecial(ID.text.LOCK_SUCCESS, xi.item.SKELETON_KEY)
                 npc:openDoor()
             else

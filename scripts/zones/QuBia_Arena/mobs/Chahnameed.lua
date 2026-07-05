@@ -25,7 +25,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.ABYSS_BLAST,
     }
 
-    return skillList[math.random(1, #skillList)]
+    return skillList[math.randomInt(1, #skillList)]
 end
 
 return entity

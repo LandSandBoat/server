@@ -157,7 +157,7 @@ local function calculateSkillUp(player)
     local increment = 1
 
     -- this probably needs correcting
-    local roll = math.random(1, 100)
+    local roll = math.randomInt(1, 100)
 
     -- make sure our skill isn't capped
     if realSkill < maxSkill then
@@ -206,7 +206,7 @@ local function handleDiggingLayer(player, zoneId, currentLayer)
     local digRate    = 0
 
     for i = 1, #digTable do
-        randomRoll = utils.clamp(math.floor(math.random(1, 1000) * rollMultiplier), 1, 1000)
+        randomRoll = utils.clamp(math.floor(math.randomInt(1, 1000) * rollMultiplier), 1, 1000)
         digRate    = digTable[i][2]
 
         -- Denim Pants +1 and Black Chocobo Suit
@@ -233,7 +233,7 @@ local function handleDiggingLayer(player, zoneId, currentLayer)
         local isElementalOreZone = elementalOreZoneTable[player:getZoneID()] or false
 
         -- Crystals and Clusters.
-        randomRoll = utils.clamp(math.floor(math.random(1, 1000) * rollMultiplier), 1, 1000)
+        randomRoll = utils.clamp(math.floor(math.randomInt(1, 1000) * rollMultiplier), 1, 1000)
         if
             diggingWeatherTable[weather] and
             randomRoll <= 100
@@ -242,7 +242,7 @@ local function handleDiggingLayer(player, zoneId, currentLayer)
         end
 
         -- Geodes / Colored Rocks.
-        randomRoll = utils.clamp(math.floor(math.random(1, 1000) * rollMultiplier), 1, 1000)
+        randomRoll = utils.clamp(math.floor(math.randomInt(1, 1000) * rollMultiplier), 1, 1000)
         if
             playerRank >= xi.craftRank.NOVICE and
             randomRoll <= 50
@@ -251,7 +251,7 @@ local function handleDiggingLayer(player, zoneId, currentLayer)
         end
 
         -- Elemenal Ores.
-        randomRoll = utils.clamp(math.floor(math.random(1, 1000) * rollMultiplier), 1, 1000)
+        randomRoll = utils.clamp(math.floor(math.randomInt(1, 1000) * rollMultiplier), 1, 1000)
         if
             isElementalOreZone and                                              -- Zone can drop ore.
             playerRank >= xi.craftRank.CRAFTSMAN and                            -- Digging level must be 60+
@@ -265,7 +265,7 @@ local function handleDiggingLayer(player, zoneId, currentLayer)
 
     -- Choose a random entry from the valid item table.
     if #dTableItemIds > 0 then
-        local chosenItem = math.random(1, #dTableItemIds)
+        local chosenItem = math.randomInt(1, #dTableItemIds)
 
         rewardItem = dTableItemIds[chosenItem]
     end
@@ -285,7 +285,7 @@ local function handleItemObtained(player, text, itemId)
 end
 
 local function handleFatigue(player, text, todayDigCount)
-    if math.random(1, 100) <= player:getMod(xi.mod.DIG_BYPASS_FATIGUE) then
+    if math.randomInt(1, 100) <= player:getMod(xi.mod.DIG_BYPASS_FATIGUE) then
         player:messageSpecial(text.FOUND_ITEM_WITH_EASE)
     else
         xi.chocoboDig.updateFatigue(player, todayDigCount + 1)

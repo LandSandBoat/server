@@ -8,7 +8,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    local cs = math.random(20, 22)
+    local cs = math.randomInt(20, 22)
     player:startEvent(cs)
 end
 

@@ -345,7 +345,7 @@ instanceObject.onEventUpdate = function(player, csid, option, npc)
             xi.salvage.unsealDoors(instance, ID.npc.DOOR_4_1)
         elseif csid == 206 then -- north path
             instance:setStage(4)
-            instance:setProgress(math.random(2, 3))
+            instance:setProgress(math.randomInt(2, 3))
             xi.salvage.unsealDoors(instance, ID.npc.DOOR_4_2)
         elseif csid == 207 then
             instance:setStage(5)
@@ -435,7 +435,7 @@ instanceObject.onEventFinish = function(player, csid, option, npc)
             elseif csid == 208 then
                 xi.salvage.unsealDoors(instance, ID.npc.DOOR_5_1)
             elseif csid == 210 then
-                instance:setLocalVar('exitPoint', math.random(12, 13))
+                instance:setLocalVar('exitPoint', math.randomInt(12, 13))
             end
         end
     end

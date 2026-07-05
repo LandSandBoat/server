@@ -17,7 +17,7 @@ local function tryRegrowMushrooms(mob)
 
     -- Im out of mushrooms! Set a time to regrow them
     if nextTime == 0 then
-        mob:setLocalVar('regrowMushrooms', GetSystemTime() + math.random(60, 80))
+        mob:setLocalVar('regrowMushrooms', GetSystemTime() + math.randomInt(60, 80))
         return
     end
 
@@ -38,7 +38,7 @@ end
 entity.onMobEngage = function(mob)
     -- We set these up here to prevent all funguars from immediately using their skills on pull
     local currentTime   = GetSystemTime()
-    mob:setLocalVar('tpWait', math.random(5, 15))
+    mob:setLocalVar('tpWait', math.randomInt(5, 15))
     mob:setLocalVar('tpLast', currentTime)
 end
 
@@ -74,7 +74,7 @@ entity.onMobFight = function(mob, target)
     -- Use the skill and set up our next wait time
     mob:useMobAbility(skillTable[animationSub])
     mob:setLocalVar('tpLast', currentTime)
-    mob:setLocalVar('tpWait', math.random(5, 15))
+    mob:setLocalVar('tpWait', math.randomInt(5, 15))
 end
 
 return entity

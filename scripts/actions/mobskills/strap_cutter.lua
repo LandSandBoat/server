@@ -20,7 +20,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         table.insert(slots, slot)
     end
 
-    local total = math.random(3, 5)
+    local total = math.randomInt(3, 5)
     local amount = 0
     local power = 0
     slots = utils.shuffle(slots)

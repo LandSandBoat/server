@@ -22,10 +22,10 @@ end
 
 entity.onMobMobskillChoose = function(mob, target, skillId)
     -- use healing_ruby_ii with only a 5% chance (as much rarer than the other carby skills)
-    if math.random(1, 20) == 1 then
+    if math.randomInt(1, 20) == 1 then
         return 911
     else
-        return ({ 907, 908, 909, 910 })[math.random(1, 4)]
+        return ({ 907, 908, 909, 910 })[math.randomInt(1, 4)]
     end
 end
 

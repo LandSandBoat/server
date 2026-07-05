@@ -11,7 +11,7 @@ itemObject.onItemCheck = function(target, item, caster)
 end
 
 itemObject.onItemUse = function(target)
-    local amount = math.random(50, 99)
+    local amount = math.randomInt(50, 99)
     target:messageCombat(target, xi.item.SILT_POUCH, amount, xi.msg.basic.USE_OBTAIN_ESCHA_SILT)
     target:addCurrency('escha_silt', amount)
 end

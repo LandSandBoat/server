@@ -42,12 +42,12 @@ entity.onMobFight = function(mob, target)
 
                 if targetDistance > .25 then
                     -- away from target
-                    newX = newX + (newX > tarX and 1 or -1) * math.random(1, 3)
-                    newZ = newZ + (newZ > tarZ and 1 or -1) * math.random(1, 3)
+                    newX = newX + (newX > tarX and 1 or -1) * math.randomInt(1, 3)
+                    newZ = newZ + (newZ > tarZ and 1 or -1) * math.randomInt(1, 3)
                 else
                     -- random direction
-                    newX = newX + (math.random(1, 100) <= 50 and 1 or -1) * math.random(1, 3)
-                    newZ = newZ + (math.random(1, 100) <= 50 and 1 or -1) * math.random(1, 3)
+                    newX = newX + (math.randomInt(1, 100) <= 50 and 1 or -1) * math.randomInt(1, 3)
+                    newZ = newZ + (math.randomInt(1, 100) <= 50 and 1 or -1) * math.randomInt(1, 3)
                 end
 
                 mob:pathTo(newX, newY, newZ)

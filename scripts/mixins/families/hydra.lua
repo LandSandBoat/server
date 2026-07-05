@@ -7,7 +7,7 @@ local function nextRegrow(mob)
     local headRegrowMin = (mob:getLocalVar('headRegrowMin') ~= 0 and mob:getLocalVar('headRegrowMin')) or 120
     local headRegrowMax = (mob:getLocalVar('headRegrowMin') ~= 0 and mob:getLocalVar('headRegrowMin')) or 240
 
-    mob:setLocalVar('headgrow', GetSystemTime() + math.random(headRegrowMin, headRegrowMax))
+    mob:setLocalVar('headgrow', GetSystemTime() + math.randomInt(headRegrowMin, headRegrowMax))
 end
 
 local function checkRegrowHead(mob)
@@ -31,7 +31,7 @@ g_mixins.families.hydra = function(hydraMob)
         local broken          = mob:getAnimationSub()
         local headBreakChance = (mob:getLocalVar('headBreakChance') ~= 0 and mob:getLocalVar('headBreakChance')) or 15
 
-        if math.random(1, 100) <= headBreakChance and broken < 2 then
+        if math.randomInt(1, 100) <= headBreakChance and broken < 2 then
             mob:setAnimationSub(broken + 1)
             nextRegrow(mob)
         end

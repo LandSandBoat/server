@@ -57,7 +57,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     -- Handle status effects.
     local effectTable =
     {
-        [1] = { xi.effect.PLAGUE, 10, 3, 30 + math.random(0, 30) }, -- https://wiki.ffo.jp/html/22338.html
+        [1] = { xi.effect.PLAGUE, 10, 3, 30 + math.randomInt(0, 30) }, -- https://wiki.ffo.jp/html/22338.html
     }
 
     xi.spells.blue.applyBlueAdditionalEffect(caster, target, params, effectTable)

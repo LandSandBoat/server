@@ -10,7 +10,7 @@ local function pickSetPoint(instance)
     local currentFloor = instance:getLocalVar('Nyzul_Current_Floor')
 
     -- Random the floor layout
-    instance:setLocalVar('Nyzul_Isle_FloorLayout', math.random(1, (#xi.nyzul.FloorLayout - 1)))
+    instance:setLocalVar('Nyzul_Isle_FloorLayout', math.randomInt(1, (#xi.nyzul.FloorLayout - 1)))
     instance:setLocalVar('gearObjective', 0)
 
     -- Condition for floors
@@ -19,7 +19,7 @@ local function pickSetPoint(instance)
         instance:setStage(xi.nyzul.objective.ELIMINATE_ENEMY_LEADER)
         instance:setLocalVar('Nyzul_Isle_FloorLayout', 0)
     -- 3.33% for a free floor
-    elseif math.random(1, 30) == 1 and instance:getLocalVar('freeFloor') == 0 then -- 3.33% for a free floor
+    elseif math.randomInt(1, 30) == 1 and instance:getLocalVar('freeFloor') == 0 then -- 3.33% for a free floor
         instance:setStage(xi.nyzul.objective.FREE_FLOOR)
         instance:setLocalVar('freeFloor', 1)
 
@@ -44,8 +44,8 @@ local function pickSetPoint(instance)
         -- Randomly pick the objective from the generated list
         instance:setStage(utils.randomEntry(objective))
 
-        if math.random(1, 30) <= 5 then
-            instance:setLocalVar('gearObjective', math.random(xi.nyzul.gearObjective.AVOID_AGRO, xi.nyzul.gearObjective.DO_NOT_DESTROY))
+        if math.randomInt(1, 30) <= 5 then
+            instance:setLocalVar('gearObjective', math.randomInt(xi.nyzul.gearObjective.AVOID_AGRO, xi.nyzul.gearObjective.DO_NOT_DESTROY))
         end
     end
 
@@ -85,7 +85,7 @@ local function pickSetPoint(instance)
     end
 
     -- Set Rune of Transfer Menu
-    instance:setLocalVar('menuChoice', math.random(1, 20))
+    instance:setLocalVar('menuChoice', math.randomInt(1, 20))
 end
 
 -- Requirements for the first player registering the instance

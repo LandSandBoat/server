@@ -69,7 +69,7 @@ entity.onMobFight = function(mob)
     mob:setLocalVar('control', 1)
     mob:timer(15000, function(mobArg)
         local pos = mob:getPos()
-        mob:pathTo(pos.x + math.random(-2, 2), pos.y, pos.z + math.random(-2, 2), 9)
+        mob:pathTo(pos.x + math.randomInt(-2, 2), pos.y, pos.z + math.randomInt(-2, 2), 9)
         mobArg:setLocalVar('control', 0)
     end)
 end

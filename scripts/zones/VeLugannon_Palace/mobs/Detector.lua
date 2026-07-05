@@ -288,7 +288,7 @@ local getMobToSpawn = function(detector)
     end
 
     -- Early return: Luck check failed.
-    if math.random(1, 100) <= 90 then
+    if math.randomInt(1, 100) <= 90 then
         return caretaker
     end
 

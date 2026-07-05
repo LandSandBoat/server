@@ -7,7 +7,7 @@ local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- since we have no mobskill weighting, randomize allowing the skill to emulate this behavior
-    if math.random(1, 100) <= 5 then
+    if math.randomInt(1, 100) <= 5 then
         return 0
     end
 

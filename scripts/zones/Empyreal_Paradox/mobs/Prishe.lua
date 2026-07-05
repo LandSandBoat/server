@@ -114,7 +114,7 @@ local function useItem(mob, phase)
     end
 
     if #validItems > 0 then
-        local choice = validItems[math.random(1, #validItems)]
+        local choice = validItems[math.randomInt(1, #validItems)]
         choice.action(mob)
     end
 end

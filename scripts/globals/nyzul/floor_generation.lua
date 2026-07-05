@@ -1142,7 +1142,7 @@ local function lampsActivate(instance)
 
     -- Lamp Objective: Register
     if lampsObjective == xi.nyzul.lampsObjective.REGISTER then
-        local spawnPoint = math.random(1, #dTableLampPoints)
+        local spawnPoint = math.randomInt(1, #dTableLampPoints)
         local runicLamp1 = GetNPCByID(ID.npc.RUNIC_LAMP_OFFSET, instance)
 
         -- Spawn lamps.
@@ -1156,11 +1156,11 @@ local function lampsActivate(instance)
 
     -- Lamp Objective: Activate All
     elseif lampsObjective == xi.nyzul.lampsObjective.ACTIVATE_ALL then
-        local runicLamps = math.random(2, partySize - 1)
+        local runicLamps = math.randomInt(2, partySize - 1)
 
         -- Spawn lamps.
         for i = ID.npc.RUNIC_LAMP_OFFSET, ID.npc.RUNIC_LAMP_OFFSET + runicLamps do
-            local spawnPoint = math.random(1, #dTableLampPoints)
+            local spawnPoint = math.randomInt(1, #dTableLampPoints)
 
             GetNPCByID(i, instance):setPos(dTableLampPoints[spawnPoint])
             GetNPCByID(i, instance):setStatus(xi.status.NORMAL)
@@ -1172,7 +1172,7 @@ local function lampsActivate(instance)
 
     -- Lamp Objective: Activate in Order
     elseif lampsObjective == xi.nyzul.lampsObjective.ORDER then
-        local runicLamps      = math.random(2, 4)
+        local runicLamps      = math.randomInt(2, 4)
         local dTableLampOrder = {}
 
         -- Select lamps.
@@ -1182,8 +1182,8 @@ local function lampsActivate(instance)
 
         -- Spawn lamps.
         for i = ID.npc.RUNIC_LAMP_OFFSET, ID.npc.RUNIC_LAMP_OFFSET + runicLamps do
-            local spawnPoint = math.random(1, #dTableLampPoints)
-            local lampRandom = math.random(1, #dTableLampOrder)
+            local spawnPoint = math.randomInt(1, #dTableLampPoints)
+            local lampRandom = math.randomInt(1, #dTableLampOrder)
 
             GetNPCByID(i, instance):setPos(dTableLampPoints[spawnPoint])
             GetNPCByID(i, instance):setStatus(xi.status.NORMAL)
@@ -1214,9 +1214,9 @@ xi.nyzul.prepareMobs = function(instance)
         local floorBoss = 0
 
         if currentFloor <= 40 then
-            floorBoss = math.random(pTableEnemyLeaders[40][1], pTableEnemyLeaders[40][2])
+            floorBoss = math.randomInt(pTableEnemyLeaders[40][1], pTableEnemyLeaders[40][2])
         elseif currentFloor <= 100 then
-            floorBoss = math.random(pTableEnemyLeaders[100][1], pTableEnemyLeaders[100][2])
+            floorBoss = math.randomInt(pTableEnemyLeaders[100][1], pTableEnemyLeaders[100][2])
         end
 
         GetMobByID(ID.mob.ARCHAIC_RAMPART_OFFSET, instance):setSpawn(-36, 0, -362, 0)
@@ -1242,16 +1242,16 @@ xi.nyzul.prepareMobs = function(instance)
         {
             -- Enemy Leader Objective
             [xi.nyzul.objective.ELIMINATE_ENEMY_LEADER] = function()
-                local floorBoss = math.random(pTableEnemyLeaders[1][1], pTableEnemyLeaders[1][2])
-                spawnPointIndex = math.random(1, #dTableSpawnPoint)
+                local floorBoss = math.randomInt(pTableEnemyLeaders[1][1], pTableEnemyLeaders[1][2])
+                spawnPointIndex = math.randomInt(1, #dTableSpawnPoint)
                 spawnPoint      = dTableSpawnPoint[spawnPointIndex]
 
                 if floorBoss == ID.mob.LEADER_OFFSET + 18 then
-                    floorBoss = ID.mob.LEADER_OFFSET + 17 + math.random(0, 1) * 2
+                    floorBoss = ID.mob.LEADER_OFFSET + 17 + math.randomInt(0, 1) * 2
                 end
 
                 -- Spawn Mob.
-                GetMobByID(floorBoss, instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.random(0, 255))
+                GetMobByID(floorBoss, instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.randomInt(0, 255))
                 SpawnMob(floorBoss, instance)
 
                 -- Remove table entry.
@@ -1260,8 +1260,8 @@ xi.nyzul.prepareMobs = function(instance)
 
             -- Specified Enemy Group Objective
             [xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMIES] = function()
-                local specificGroup         = math.random(1, 7)
-                local groupAmount           = math.random(2, pTableSpecifiedMobs[specificGroup][2] - pTableSpecifiedMobs[specificGroup][1] + 1)
+                local specificGroup         = math.randomInt(1, 7)
+                local groupAmount           = math.randomInt(2, pTableSpecifiedMobs[specificGroup][2] - pTableSpecifiedMobs[specificGroup][1] + 1)
                 local dTableSpecificEnemies = {}
 
                 for i = pTableSpecifiedMobs[specificGroup][1], pTableSpecifiedMobs[specificGroup][2] do
@@ -1269,13 +1269,13 @@ xi.nyzul.prepareMobs = function(instance)
                 end
 
                 while groupAmount > 0 do
-                    local randomEnemy = math.random(1, #dTableSpecificEnemies)
+                    local randomEnemy = math.randomInt(1, #dTableSpecificEnemies)
                     local enemy       = dTableSpecificEnemies[randomEnemy]
-                    spawnPointIndex = math.random(1, #dTableSpawnPoint)
+                    spawnPointIndex = math.randomInt(1, #dTableSpawnPoint)
                     spawnPoint      = dTableSpawnPoint[spawnPointIndex]
 
                     -- Spawn Mob.
-                    GetMobByID(enemy, instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.random(0, 255))
+                    GetMobByID(enemy, instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.randomInt(0, 255))
                     SpawnMob(enemy, instance)
 
                     -- Set mobs of the specified group to CHECK_AS_NM
@@ -1297,12 +1297,12 @@ xi.nyzul.prepareMobs = function(instance)
 
             -- Eliminate All Objective
             [xi.nyzul.objective.ELIMINATE_ALL_ENEMIES] = function()
-                if math.random(1, 100) <= 20 then -- 20% chance that Dahank will spawn.
-                    spawnPointIndex = math.random(1, #dTableSpawnPoint)
+                if math.randomInt(1, 100) <= 20 then -- 20% chance that Dahank will spawn.
+                    spawnPointIndex = math.randomInt(1, #dTableSpawnPoint)
                     spawnPoint      = dTableSpawnPoint[spawnPointIndex]
 
                     -- Spawn Mob.
-                    GetMobByID(ID.mob.DAHAK, instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.random(0, 255))
+                    GetMobByID(ID.mob.DAHAK, instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.randomInt(0, 255))
                     SpawnMob(ID.mob.DAHAK, instance)
 
                     -- Remove table entry.
@@ -1315,18 +1315,18 @@ xi.nyzul.prepareMobs = function(instance)
 
             -- Activate Lamps Objective
             [xi.nyzul.objective.ACTIVATE_ALL_LAMPS] = function()
-                instance:setLocalVar('[Lamp]Objective', math.random(xi.nyzul.lampsObjective.REGISTER, xi.nyzul.lampsObjective.ORDER))
+                instance:setLocalVar('[Lamp]Objective', math.randomInt(xi.nyzul.lampsObjective.REGISTER, xi.nyzul.lampsObjective.ORDER))
                 lampsActivate(instance)
             end,
         }
 
         -- Spawn Rampart-Type mobs.
-        if math.random(1, 100) <= 90 then
-            spawnPointIndex = math.random(1, #dTableSpawnPoint)
+        if math.randomInt(1, 100) <= 90 then
+            spawnPointIndex = math.randomInt(1, #dTableSpawnPoint)
             spawnPoint      = dTableSpawnPoint[spawnPointIndex]
 
             -- Spawn Mob.
-            GetMobByID(ID.mob.ARCHAIC_RAMPART_OFFSET, instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.random(0, 255))
+            GetMobByID(ID.mob.ARCHAIC_RAMPART_OFFSET, instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.randomInt(0, 255))
             SpawnMob(ID.mob.ARCHAIC_RAMPART_OFFSET, instance)
 
             -- Remove table entry.
@@ -1338,12 +1338,12 @@ xi.nyzul.prepareMobs = function(instance)
             end
         end
 
-        if math.random(1, 100) <= 20 then
-            spawnPointIndex = math.random(1, #dTableSpawnPoint)
+        if math.randomInt(1, 100) <= 20 then
+            spawnPointIndex = math.randomInt(1, #dTableSpawnPoint)
             spawnPoint      = dTableSpawnPoint[spawnPointIndex]
 
             -- Spawn Mob.
-            GetMobByID(ID.mob.ARCHAIC_RAMPART_OFFSET + 1, instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.random(0, 255))
+            GetMobByID(ID.mob.ARCHAIC_RAMPART_OFFSET + 1, instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.randomInt(0, 255))
             SpawnMob(ID.mob.ARCHAIC_RAMPART_OFFSET + 1, instance)
 
             -- Remove table entry.
@@ -1358,11 +1358,11 @@ xi.nyzul.prepareMobs = function(instance)
         -- Spawn Gear-Type mobs.
         if instance:getLocalVar('gearObjective') > 0 then
             for i = pTableFloorRandomEntities[17][1], pTableFloorRandomEntities[17][2] do
-                spawnPointIndex = math.random(1, #dTableSpawnPoint)
+                spawnPointIndex = math.randomInt(1, #dTableSpawnPoint)
                 spawnPoint      = dTableSpawnPoint[spawnPointIndex]
 
                 -- Spawn Mob.
-                GetMobByID(i, instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.random(0, 255))
+                GetMobByID(i, instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.randomInt(0, 255))
                 SpawnMob(i, instance)
 
                 -- Remove table entry.
@@ -1370,7 +1370,7 @@ xi.nyzul.prepareMobs = function(instance)
             end
 
             -- Update floor gear penalty.
-            instance:setLocalVar('gearPenalty', math.random(xi.nyzul.penalty.TIME, xi.nyzul.penalty.PATHOS))
+            instance:setLocalVar('gearPenalty', math.randomInt(xi.nyzul.penalty.TIME, xi.nyzul.penalty.PATHOS))
         end
 
         -- Spawn fodder NM's.
@@ -1378,7 +1378,7 @@ xi.nyzul.prepareMobs = function(instance)
 
         -- Spawn none, 1 or 2 (max) NMs
         for i = 1, 2 do
-            if math.random(1, 100) <= 20 then
+            if math.randomInt(1, 100) <= 20 then
                 spawnedNMs = spawnedNMs + 1
             end
         end
@@ -1399,12 +1399,12 @@ xi.nyzul.prepareMobs = function(instance)
             end
 
             while spawnedNMs > 0 do
-                local index     = math.random(1, #dTableFloorNMs)
-                spawnPointIndex = math.random(1, #dTableSpawnPoint)
+                local index     = math.randomInt(1, #dTableFloorNMs)
+                spawnPointIndex = math.randomInt(1, #dTableSpawnPoint)
                 spawnPoint      = dTableSpawnPoint[spawnPointIndex]
 
                 -- Spawn Mob.
-                GetMobByID(dTableFloorNMs[index], instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.random(0, 255))
+                GetMobByID(dTableFloorNMs[index], instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.randomInt(0, 255))
                 SpawnMob(dTableFloorNMs[index], instance)
 
                 -- Remove table entry.
@@ -1421,8 +1421,8 @@ xi.nyzul.prepareMobs = function(instance)
         end
 
         -- Spawn fodder regular mobs.
-        local mobFamily     = math.random(1, 16)
-        local enemyAmount   = math.random(6, 12)
+        local mobFamily     = math.randomInt(1, 16)
+        local enemyAmount   = math.randomInt(6, 12)
         local dTableEnemies = {}
 
         for i = pTableFloorRandomEntities[mobFamily][1], pTableFloorRandomEntities[mobFamily][2] do
@@ -1430,9 +1430,9 @@ xi.nyzul.prepareMobs = function(instance)
         end
 
         while enemyAmount > 0 do
-            local randomEnemy = math.random(1, #dTableEnemies)
+            local randomEnemy = math.randomInt(1, #dTableEnemies)
             local mobID       = dTableEnemies[randomEnemy]
-            spawnPointIndex   = math.random(1, #dTableSpawnPoint)
+            spawnPointIndex   = math.randomInt(1, #dTableSpawnPoint)
             spawnPoint        = dTableSpawnPoint[spawnPointIndex]
 
             -- Remove table entry.
@@ -1452,7 +1452,7 @@ xi.nyzul.prepareMobs = function(instance)
             enemyAmount = enemyAmount - 1
 
             -- Spawn Mob. Do this last so everything is set for mob spawn logic in their lua script triggers properly.
-            GetMobByID(mobID, instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.random(0, 255))
+            GetMobByID(mobID, instance):setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z, math.randomInt(0, 255))
             SpawnMob(mobID, instance)
         end
     end

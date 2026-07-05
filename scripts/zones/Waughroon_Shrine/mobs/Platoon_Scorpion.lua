@@ -107,7 +107,7 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
         -- Apply debuff based on skill used and record the time we used it - play flavor text with a 3 second delay to allow skill to finish.
         if skillId == xi.mobSkill.WILD_RAGE then
             mob:setAutoAttackEnabled(false)
-            mob:setLocalVar('disableEnd', GetSystemTime() + math.random(10, 25))
+            mob:setLocalVar('disableEnd', GetSystemTime() + math.randomInt(10, 25))
             mob:setLocalVar('isDisabled', 1)
             mob:timer(3000, function(mobArg)
                 mobArg:messageText(mobArg, ID.text.SCORPION_IS_STUNNED, false)
@@ -115,7 +115,7 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
 
         elseif skillId == xi.mobSkill.EARTH_POUNDER then
             mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-            mob:setLocalVar('disableEnd', GetSystemTime() + math.random(10, 25))
+            mob:setLocalVar('disableEnd', GetSystemTime() + math.randomInt(10, 25))
             mob:setLocalVar('isDisabled', 1)
             mob:timer(3000, function(mobArg)
                 mobArg:messageText(mobArg, ID.text.SCORPION_IS_BOUND, false)

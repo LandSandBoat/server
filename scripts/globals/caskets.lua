@@ -193,7 +193,7 @@ local function dropChance(player)
         prowessCasketsPower = casketProwessEffect:getPower() / 100
     end
 
-    local rand = math.random()
+    local rand = math.randomFloat(0, 1)
     if rand < utils.clamp(xi.settings.main.CASKET_DROP_RATE + kupowersMMBPower + prowessCasketsPower, 0, 1) then
         return true
     end
@@ -237,12 +237,12 @@ local function setCasketData(player, x, y, z, r, npc, partyID, mobLvl)
     end
 
     local chestStyle = 965
-    local correctNum = math.random(10, 99)
-    local attempts   = math.random(4, 6)
+    local correctNum = math.randomInt(10, 99)
+    local attempts   = math.randomInt(4, 6)
 
     -- Get casket type.
     local kupowersBonus = 0 -- TODO: Kupowers add a 20% chance.
-    if math.random(1, 100) <= 15 + kupowersBonus then
+    if math.randomInt(1, 100) <= 15 + kupowersBonus then
         chestStyle = 966 -- Brown locked
     else
         chestStyle = 965 -- Blue
@@ -445,7 +445,7 @@ local function getDrops(npc, dropType, zoneId)
         for i = 1, itemCount do
             local itemId = xi.itemUtils.pickItemRandom(drops)
 
-            if math.random(1, 100) <= 5 then
+            if math.randomInt(1, 100) <= 5 then
                 items[1] = utils.randomEntry(xi.casket_loot.casketItems[zoneId].regionalItems)
             else
                 items[i] = itemId
@@ -711,7 +711,7 @@ xi.caskets.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, xi.item.SET_OF_THIEFS_TOOLS)
         then
             local splitNumbers = {}
-            local tradeAttempt = math.random()
+            local tradeAttempt = math.randomFloat(0, 1)
             local firstAttempt = npc:getLocalVar('[caskets]HINT_TRADE')
             local canGetHint   = false
 
@@ -736,12 +736,12 @@ xi.caskets.onTrade = function(player, npc, trade)
 
                 if splitNumbers[1] == 1 then
                     lowNum  = 10
-                    highNum = 20 + math.random(1, 9)
+                    highNum = 20 + math.randomInt(1, 9)
                 elseif splitNumbers[1] > 1 and splitNumbers[1] < 9 then
-                    lowNum  = splitNumbers[1] * 10 - 10 + math.random(1, 9)
-                    highNum = splitNumbers[1] * 10 + 10 + math.random(1, 9)
+                    lowNum  = splitNumbers[1] * 10 - 10 + math.randomInt(1, 9)
+                    highNum = splitNumbers[1] * 10 + 10 + math.randomInt(1, 9)
                 elseif splitNumbers[1] == 9 then
-                    lowNum  = 80 + math.random(1, 9)
+                    lowNum  = 80 + math.randomInt(1, 9)
                     highNum = 99
                 end
 
@@ -804,7 +804,7 @@ xi.caskets.onEventFinish = function(player, csid, option, npc)
         -----------------------------------
         if lockedChoice == 2 then -- Examine chest
             if option == 258 then
-                local randText = tonumber(availableHints[math.random(#availableHints)])
+                local randText = tonumber(availableHints[math.randomInt(1, #availableHints)])
 
                 if randText == 0 or randText == nil then
                     player:messageSpecial(baseMessage + casketInfo.messageOffset.UNABLE_TO_GET_HINT, 0, 0, 0, 0)
@@ -852,13 +852,13 @@ xi.caskets.onEventFinish = function(player, csid, option, npc)
 
                     if splitNumbers[1] == 1 then
                         lowNum  = 10
-                        highNum = 20 + math.random(1, 9)
+                        highNum = 20 + math.randomInt(1, 9)
                     elseif splitNumbers[1] == 9 then
-                        lowNum  = 80 + math.random(1, 9)
+                        lowNum  = 80 + math.randomInt(1, 9)
                         highNum = 99
                     else
-                        lowNum  = splitNumbers[1] * 10 - 10 + math.random(1, 9)
-                        highNum = splitNumbers[1] * 10 + 10 + math.random(1, 9)
+                        lowNum  = splitNumbers[1] * 10 - 10 + math.randomInt(1, 9)
+                        highNum = splitNumbers[1] * 10 + 10 + math.randomInt(1, 9)
                     end
 
                     player:messageSpecial(baseMessage + casketInfo.messageOffset.COMBINATION_GREATER_LESS, lowNum, highNum, 0, 0)

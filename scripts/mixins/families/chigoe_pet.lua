@@ -25,7 +25,7 @@ g_mixins.families.chigoe_pet = function(hostMob)
             local chigoe = GetMobByID(mobID)
 
             if chigoe and not chigoe:isSpawned() then
-                chigoe:setSpawn(hostMob:getXPos() + math.random(-2, 2), hostMob:getYPos() + math.random(-2, 2), hostMob:getZPos() + math.random(-2, 2), hostMob:getRotPos())
+                chigoe:setSpawn(hostMob:getXPos() + math.randomInt(-2, 2), hostMob:getYPos() + math.randomInt(-2, 2), hostMob:getZPos() + math.randomInt(-2, 2), hostMob:getRotPos())
                 chigoe:spawn()
                 if target then
                     chigoe:updateEnmity(target)

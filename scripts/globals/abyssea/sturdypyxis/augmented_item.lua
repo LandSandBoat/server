@@ -511,17 +511,17 @@ local function GetAugment(npc, itemid, slot)
         randLimit = 80
     end
 
-    if math.random(1, 100) > randLimit then
+    if math.randomInt(1, 100) > randLimit then
         secondAugment = true
     end
 
-    randaugment1 = math.random(1, #augs[itemid].augments - augTierDeduction[itemid][tier])
+    randaugment1 = math.randomInt(1, #augs[itemid].augments - augTierDeduction[itemid][tier])
 
     --- TODO: Find consistent method for table vs integer assignments
     ---@diagnostic disable-next-line: cast-local-type
     aug1 = augs[itemid].augments[randaugment1]
 
-    multival1 = math.random(aug1.min, aug1.max)
+    multival1 = math.randomInt(aug1.min, aug1.max)
 
     if multival1 > 1 then
         augment1 = bit.bor(aug1.aug, bit.lshift(multival1 - 1 , 11))
@@ -534,7 +534,7 @@ local function GetAugment(npc, itemid, slot)
     npc:setLocalVar('ITEM' .. slot .. 'AUG1VAL', multival1 - 1)
 
     if secondAugment then
-        randaugment2 = math.random(1, #augs[itemid].augments - augTierDeduction[itemid][tier])
+        randaugment2 = math.randomInt(1, #augs[itemid].augments - augTierDeduction[itemid][tier])
 
         if randaugment2 == randaugment1 then
             randaugment2 = 0
@@ -545,7 +545,7 @@ local function GetAugment(npc, itemid, slot)
             ---@diagnostic disable-next-line: cast-local-type
             aug2 = augs[itemid].augments[randaugment2]
 
-            multival2 = math.random(aug2.min, aug2.max)
+            multival2 = math.randomInt(aug2.min, aug2.max)
 
             if multival2 > 1 then
                 augment2 = bit.bor(aug2.aug, bit.lshift(multival2 - 1, 11))
@@ -632,12 +632,12 @@ end
 
 xi.pyxis.augItem.setAugmentItems = function(npc, tier)
     local zoneId = npc:getZoneID()
-    local item1 = augdrops[zoneId][math.random(1, 3)]
+    local item1 = augdrops[zoneId][math.randomInt(1, 3)]
     local item2 = 0
 
     if tier > 2 then
-        if math.random(0, 100) > (90 / tier) then
-            item2 = augdrops[zoneId][math.random(1, 3)]
+        if math.randomInt(0, 100) > (90 / tier) then
+            item2 = augdrops[zoneId][math.randomInt(1, 3)]
         end
     end
 

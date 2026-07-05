@@ -346,7 +346,7 @@ end
 -----------------------------------
 
 xi.teleport.toChamberOfPassage = function(player)
-    if math.random(1, 100) <= 50 then
+    if math.randomInt(1, 100) <= 50 then
         player:setPos(133.400, 1.485, 47.427, 96, 50) -- (R) Aht Urhgan Whitegate Chamber of Passage Left
     else
         player:setPos(116.670, 1.485, 47.427, 32, 50) -- (R) Aht Urhgan Whitegate Chamber of Passage Right

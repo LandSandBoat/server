@@ -14,8 +14,8 @@ local function getFleePosition(mob, target)
 
     -- Pass 1: preferred direction (away from target), wide cone, full distance
     for _ = 1, 4 do
-        local angle = awayFromTargetAngle + (math.random() * (math.pi / 2) - (math.pi / 4))
-        local pos   = GetFurthestValidPosition(mob, math.random(11, 50), angle)
+        local angle = awayFromTargetAngle + (math.randomFloat(0, 1) * (math.pi / 2) - (math.pi / 4))
+        local pos   = GetFurthestValidPosition(mob, math.randomInt(11, 50), angle)
         if pos then
             return pos
         end
@@ -23,7 +23,7 @@ local function getFleePosition(mob, target)
 
     -- Pass 2: any random direction, medium distance
     for _ = 1, 8 do
-        local pos = GetFurthestValidPosition(mob, math.random(8, 25), math.random() * 2 * math.pi)
+        local pos = GetFurthestValidPosition(mob, math.randomInt(8, 25), math.randomFloat(0, 1) * 2 * math.pi)
         if pos then
             return pos
         end
@@ -31,7 +31,7 @@ local function getFleePosition(mob, target)
 
     -- Pass 3: cornered escape — any direction, tiny step just to unstick
     for _ = 1, 12 do
-        local pos = GetFurthestValidPosition(mob, math.random(2, 8), math.random() * 2 * math.pi)
+        local pos = GetFurthestValidPosition(mob, math.randomInt(2, 8), math.randomFloat(0, 1) * 2 * math.pi)
         if pos then
             return pos
         end
@@ -71,7 +71,7 @@ end
 entity.onMobEngage = function(mob, target)
     local currentTime = GetSystemTime()
     local mobPos      = mob:getPos()
-    mob:setLocalVar('nextRunTime', currentTime + math.random(5, 8))
+    mob:setLocalVar('nextRunTime', currentTime + math.randomInt(5, 8))
     mob:setLocalVar('lastMoveTime', currentTime)
     mob:setLocalVar('lastPosX', math.floor(mobPos.x * 10))
     mob:setLocalVar('lastPosZ', math.floor(mobPos.z * 10))
@@ -121,7 +121,7 @@ entity.onMobFight = function(mob, target)
         if fleePosition then
             mob:pathTo(fleePosition.x, fleePosition.y, fleePosition.z, bit.bor(xi.pathflag.RUN, xi.pathflag.SCRIPT))
             mob:setRangedAttackEnabled(false)
-            mob:setLocalVar('nextRunTime', currentTime + math.random(10, 20))
+            mob:setLocalVar('nextRunTime', currentTime + math.randomInt(10, 20))
             mob:setLocalVar('lastMoveTime', currentTime)
         end
     end
@@ -140,7 +140,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.FAZE
     }
 
-    return skillList[math.random(1, #skillList)]
+    return skillList[math.randomInt(1, #skillList)]
 end
 
 entity.onMobDeath = function(mob, player, optParams)

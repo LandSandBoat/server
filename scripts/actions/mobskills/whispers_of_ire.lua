@@ -23,13 +23,13 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local amount = math.random(1, 6)
+    local amount = math.randomInt(1, 6)
     local count = 0
     local statsDrained = {}
     local size = amount
 
     while size > 0 do
-        local effectType = math.random(1, 7)
+        local effectType = math.randomInt(1, 7)
         local check = true
 
         for i = 1, amount do

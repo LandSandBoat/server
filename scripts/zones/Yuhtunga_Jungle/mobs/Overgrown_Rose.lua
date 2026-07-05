@@ -11,13 +11,13 @@ local roseGardenPH = ID.mob.ROSE_GARDEN - 1
 
 entity.onMobSpawn = function(mob)
     if mob:getID() == roseGardenPH then
-        mob:setLocalVar('timeToGrow', GetSystemTime() + math.random(36000, 37800)) -- 10:00:00 to 10:30:00
+        mob:setLocalVar('timeToGrow', GetSystemTime() + math.randomInt(36000, 37800)) -- 10:00:00 to 10:30:00
     end
 end
 
 entity.onMobDisengage = function(mob)
     if mob:getID() == roseGardenPH then
-        mob:setLocalVar('timeToGrow', GetSystemTime() + math.random(36000, 37800)) -- 10:00:00 to 10:30:00
+        mob:setLocalVar('timeToGrow', GetSystemTime() + math.randomInt(36000, 37800)) -- 10:00:00 to 10:30:00
     end
 end
 

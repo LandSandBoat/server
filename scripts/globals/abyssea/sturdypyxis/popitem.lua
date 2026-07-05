@@ -34,7 +34,7 @@ local function GetChestItemTable(npc)
 end
 
 local function GetRandItem(zoneId)
-    local rand = math.random(1, #popitemDrops[zoneId])
+    local rand = math.randomInt(1, #popitemDrops[zoneId])
     return popitemDrops[zoneId][rand]
 end
 

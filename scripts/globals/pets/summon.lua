@@ -160,7 +160,7 @@ xi.pets.summon.astralFlowId =
 }
 
 xi.pets.summon.setupSummon = function(mob, summonTable)
-    local chosenSummon = summonTable[math.random(1, #summonTable)]
+    local chosenSummon = summonTable[math.randomInt(1, #summonTable)]
 
     -- Sets the spell list, model and astral flow skill ID if needed.
     mob:setSpellList(xi.pets.summon.spellListId[chosenSummon])

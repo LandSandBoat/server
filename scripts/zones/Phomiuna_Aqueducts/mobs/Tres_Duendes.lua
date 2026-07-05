@@ -37,7 +37,7 @@ entity.onMobFight = function(mob, target)
 
         local selectedForm
         if form == 12 or form == 13 then
-            selectedForm = math.random(1, 2) == 1 and formConfigs.vertical or formConfigs.horizontal
+            selectedForm = math.randomInt(1, 2) == 1 and formConfigs.vertical or formConfigs.horizontal
         else
             selectedForm = formConfigs.normal
         end
@@ -71,7 +71,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         table.insert(tpMoves, xi.mobSkill.KNIFE_EDGE_CIRCLE)
     end
 
-    return tpMoves[math.random(1, #tpMoves)]
+    return tpMoves[math.randomInt(1, #tpMoves)]
 end
 
 entity.onMobDisengage = function(mob)
@@ -83,7 +83,7 @@ entity.onMobDisengage = function(mob)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setRespawnTime(math.random(75600, 86400)) -- 21 to 24 hours
+    mob:setRespawnTime(math.randomInt(75600, 86400)) -- 21 to 24 hours
 end
 
 return entity

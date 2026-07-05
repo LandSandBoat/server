@@ -79,7 +79,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.HOWL_BEHEMOTH,
     }
 
-    return skillList[math.random(1, #skillList)]
+    return skillList[math.randomInt(1, #skillList)]
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)

@@ -20,7 +20,7 @@ itemObject.onItemUse = function(target)
         return
     end
 
-    local percent = math.random(20, 35) * xi.settings.main.ITEM_POWER
+    local percent = math.randomInt(20, 35) * xi.settings.main.ITEM_POWER
     local totalHP = (pet:getMaxHP() / 100) * percent
     pet:addHP(totalHP)
     pet:messageBasic(xi.msg.basic.RECOVERS_HP, 0, totalHP)

@@ -482,7 +482,7 @@ xi.trust.teamworkMessage = function(mob, teamwork_messages)
     end
 
     if #messages > 0 then
-        xi.trust.message(mob, messages[math.random(1, #messages)])
+        xi.trust.message(mob, messages[math.randomInt(1, #messages)])
     else
         -- Defaults to regular spawn message
         xi.trust.message(mob, xi.trust.messageOffset.SPAWN)

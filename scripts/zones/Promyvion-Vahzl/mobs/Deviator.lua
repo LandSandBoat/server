@@ -31,20 +31,20 @@ entity.onMobSpawn = function(mob)
     mob:addImmunity(xi.immunity.SILENCE)
 
     -- Pick a random element to absorb after engaging
-    local currentAbsorb = math.random(xi.element.FIRE, xi.element.DARK)
+    local currentAbsorb = math.randomInt(xi.element.FIRE, xi.element.DARK)
 
     mob:setLocalVar('currentAbsorb', currentAbsorb)
     mob:setMod(xi.data.element.getElementalAbsorptionModifier(currentAbsorb), 100)
 end
 
 entity.onMobEngage = function(mob, target)
-    mob:setLocalVar('elementAbsorb', GetSystemTime() + math.random(30, 40))
+    mob:setLocalVar('elementAbsorb', GetSystemTime() + math.randomInt(30, 40))
 end
 
 entity.onMobFight = function(mob, target)
     if GetSystemTime() > mob:getLocalVar('elementAbsorb') then
         local previousAbsorb = mob:getLocalVar('currentAbsorb')
-        mob:setLocalVar('elementAbsorb', GetSystemTime() + math.random(30, 40))
+        mob:setLocalVar('elementAbsorb', GetSystemTime() + math.randomInt(30, 40))
 
         -- remove previous absorb mod, if set
         if previousAbsorb > 0 then
@@ -52,7 +52,7 @@ entity.onMobFight = function(mob, target)
         end
 
         -- add new absorb mod
-        local currentAbsorb = math.random(xi.element.FIRE, xi.element.DARK)
+        local currentAbsorb = math.randomInt(xi.element.FIRE, xi.element.DARK)
         mob:setLocalVar('currentAbsorb', currentAbsorb)
         mob:setMod(xi.data.element.getElementalAbsorptionModifier(currentAbsorb), 100)
 

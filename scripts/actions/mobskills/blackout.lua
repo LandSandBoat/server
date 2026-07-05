@@ -12,8 +12,8 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local power = math.random(10, 20)
-    local duration = math.random(60, 180)
+    local power = math.randomInt(10, 20)
+    local duration = math.randomInt(60, 180)
 
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, power, 0, duration)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, duration)

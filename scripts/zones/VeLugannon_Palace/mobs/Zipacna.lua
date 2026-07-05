@@ -331,12 +331,12 @@ end
 
 entity.onMobMobskillChoose = function(mob, target, skillId)
     -- Zipacna heavily prefers using Crystal Rain and Crystal Weapon
-    local roll = math.random(1, 100)
+    local roll = math.randomInt(1, 100)
 
     if roll <= 30 then
         return xi.mobSkill.CRYSTAL_RAIN_1
     elseif roll <= 60 then
-        local weaponEle = math.random(xi.mobSkill.CRYSTAL_WEAPON_FIRE_1, xi.mobSkill.CRYSTAL_WEAPON_WATER_1)
+        local weaponEle = math.randomInt(xi.mobSkill.CRYSTAL_WEAPON_FIRE_1, xi.mobSkill.CRYSTAL_WEAPON_WATER_1)
         return weaponEle
     end
 end
@@ -392,7 +392,7 @@ end
 
 entity.onMobDespawn = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(10800, 14400)) -- respawn 3-4 hrs
+    mob:setRespawnTime(math.randomInt(10800, 14400)) -- respawn 3-4 hrs
 end
 
 return entity

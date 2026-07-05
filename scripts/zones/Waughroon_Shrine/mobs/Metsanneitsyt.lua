@@ -54,7 +54,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
         [4] = { xi.magic.spell.DRAIN,    10 },
     }
 
-    local randomRoll = math.random(1, 100)
+    local randomRoll = math.randomInt(1, 100)
     local weightSum  = 0
     for i = 1, #spellList do
         weightSum = weightSum + spellList[i][2]

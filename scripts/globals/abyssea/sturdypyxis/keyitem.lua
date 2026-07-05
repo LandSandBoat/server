@@ -88,7 +88,7 @@ local drops =
 
 xi.pyxis.ki.setKeyItems = function(npc)
     local zoneId = npc:getZoneID()
-    local ki = drops[zoneId][math.random(1, #drops[zoneId])]
+    local ki = drops[zoneId][math.randomInt(1, #drops[zoneId])]
 
     npc:setLocalVar('KI', ki)
 end

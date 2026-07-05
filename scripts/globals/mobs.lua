@@ -86,7 +86,7 @@ xi.mob.updateNMSpawnPoint = function(mobParam, spawnPointsOverride)
         #spawnPoints > 0
     then
         local chosenSpawn    = utils.randomEntry(spawnPoints)
-        local randomRotation = math.random(0, 255) -- rotation does not matter
+        local randomRotation = math.randomInt(0, 255) -- rotation does not matter
 
         -- Updates the mob's spawn point
         mobParam:setSpawn(chosenSpawn.x, chosenSpawn.y, chosenSpawn.z, randomRotation)
@@ -188,7 +188,7 @@ xi.mob.phOnDespawn = function(ph, phNmId, chance, cooldown, params)
     if
         GetSystemTime() <= pop or
         lotteryPrimed(phList) or
-        math.random(1, 1000) > chance
+        math.randomInt(1, 1000) > chance
     then
         return false
     end
@@ -613,7 +613,7 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
 
         -- target:printToPlayer(string.format('Chance: %i', chance)) -- DEBUG
 
-        if math.random(1, 100) <= chance then
+        if math.randomInt(1, 100) <= chance then
 
             -- STATUS EFFECT
             if ae.applyEffect then
@@ -778,7 +778,7 @@ xi.mob.callPets = function(mob, petIds, params)
             then
                 spawnedCount = spawnedCount + 1
                 -- spawn pet around owner
-                petToSummon:setSpawn(pos.x + math.random(-2, 2), pos.y, pos.z + math.random(-2, 2), pos.rot)
+                petToSummon:setSpawn(pos.x + math.randomInt(-2, 2), pos.y, pos.z + math.randomInt(-2, 2), pos.rot)
                 petToSummon:spawn()
                 -- set home to be the owner's home position
                 petToSummon:setSpawn(spawnPos.x, spawnPos.y, spawnPos.z, spawnPos.rot)

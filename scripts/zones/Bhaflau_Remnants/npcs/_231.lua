@@ -24,7 +24,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         local instance = npc:getInstance()
 
         if instance and xi.salvage.onDoorOpen(npc, 1, 1) then
-            local random = math.random(100)
+            local random = math.randomInt(1, 100)
             local unsealed =
             {
                 ID.npc.DOOR_1_EAST_EXIT_1,

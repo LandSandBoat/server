@@ -1616,7 +1616,7 @@ local function moveTreasure(npc, respawnTime)
     local zoneId         = npc:getZoneID()
     local containerType  = npcTable[npc:getName()]
     local positions      = posTable[zoneId][containerType]
-    local chosenPosition = positions[math.random(1, #positions)]
+    local chosenPosition = positions[math.randomInt(1, #positions)]
     local hideTime       = respawnTime or 1800
 
     npc:setLocalVar('opened', 1)
@@ -1666,7 +1666,7 @@ local function handleGilDistribution(player, treasureLevel)
     -- Calculate gil.
     local gilPerEntity = 0
     if #playersInZoneTable > 0 then
-        gilPerEntity = membersInZoneNumber * treasureLevel ^ 2 + membersInZoneNumber * treasureLevel * math.random(0, treasureLevel)
+        gilPerEntity = membersInZoneNumber * treasureLevel ^ 2 + membersInZoneNumber * treasureLevel * math.randomInt(0, treasureLevel)
         gilPerEntity = math.floor(gilPerEntity / #playersInZoneTable)
     end
 
@@ -1814,7 +1814,7 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
     for i = 1, 4 do
         outcomeRate = outcomeRate + rateTable[i]
 
-        if math.random(1, 100) <= outcomeRate then
+        if math.randomInt(1, 100) <= outcomeRate then
             outcome = i
             break
         end
@@ -1955,7 +1955,7 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
     -----------------------------------
     -- Handle regular loot.
     -----------------------------------
-    local roll   = math.random(1, 1000)
+    local roll   = math.randomInt(1, 1000)
     local itemId = xi.item.NONE
     local weight = 0
     for i = 1, #itemTable do
@@ -2006,9 +2006,9 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
 
     -- Handle illusion timers.
     if containerType == treasureType.CHEST then
-        npc:setLocalVar('illusionCooldown', GetSystemTime() + math.random(xi.settings.main.CHEST_MIN_ILLUSION_TIME, xi.settings.main.CHEST_MAX_ILLUSION_TIME))
+        npc:setLocalVar('illusionCooldown', GetSystemTime() + math.randomInt(xi.settings.main.CHEST_MIN_ILLUSION_TIME, xi.settings.main.CHEST_MAX_ILLUSION_TIME))
     else
-        npc:setLocalVar('illusionCooldown', GetSystemTime() + math.random(xi.settings.main.COFFER_MIN_ILLUSION_TIME, xi.settings.main.COFFER_MAX_ILLUSION_TIME))
+        npc:setLocalVar('illusionCooldown', GetSystemTime() + math.randomInt(xi.settings.main.COFFER_MIN_ILLUSION_TIME, xi.settings.main.COFFER_MAX_ILLUSION_TIME))
     end
 
     return reward

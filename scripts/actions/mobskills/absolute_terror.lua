@@ -22,10 +22,10 @@ end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local power    = 30
-    local duration = math.random(15, 45)
+    local duration = math.randomInt(15, 45)
 
     if skill:isAoE() then
-        duration = math.random(10, 18)
+        duration = math.randomInt(10, 18)
     end
 
     skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.TERROR, power, 0, duration))

@@ -14,7 +14,7 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    local fTP = (math.random(45, 55) / 100) -- TODO: Is it random or does something influence it?
+    local fTP = (math.randomInt(45, 55) / 100) -- TODO: Is it random or does something influence it?
 
     params.baseDamage     = target:getHP()
     params.numHits        = 1

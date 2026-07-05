@@ -69,7 +69,7 @@ xi.chocoboRaising.walkEnergyRandomness = 5
 -- The amount of energy taken by: short, medium and long walks (+ a random amount between 0 and walkEnergyRandomness)
 xi.chocoboRaising.walkEnergyAmount = { 25, 33, 50 }
 
--- Chance for an event to happen while on a walk (checked as chance < math.random(1, 100))
+-- Chance for an event to happen while on a walk (checked as math.randomInt(1, 100) <= chance)
 xi.chocoboRaising.walkEventChance = 33
 
 -- The amount of energy taken by: watch over chocobo

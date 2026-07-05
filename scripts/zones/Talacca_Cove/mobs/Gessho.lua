@@ -9,10 +9,10 @@ local entity = {}
 
 entity.onMobFight = function(mob, target)
     if mob:getID() == ID.mob.GESSHO then
-        local chance = math.random(1, 100)
+        local chance = math.randomInt(1, 100)
 
         if chance == 50 then
-            local clones = math.random(1, 6)
+            local clones = math.randomInt(1, 6)
             for i = 1, clones, 1 do
                 SpawnMob(mob:getID() + i)
             end

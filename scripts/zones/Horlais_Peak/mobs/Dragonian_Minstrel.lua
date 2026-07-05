@@ -42,7 +42,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         -- table.insert(skills, xi.mobSkill.LODESONG_2)
     end
 
-    return skills[math.random(1, #skills)]
+    return skills[math.randomInt(1, #skills)]
 end
 
 entity.onMobWeaponSkill = function(mob, target, skill, action)

@@ -6,10 +6,10 @@
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar('topRoomsOption', math.random(2, 3))
-    mob:setLocalVar('middleRoomsOption', math.random(4, 5))
-    mob:setLocalVar('bottomRoomsOption', math.random(6, 7))
-    mob:setLocalVar('lowerForkOption', math.random(8, 9))
+    mob:setLocalVar('topRoomsOption', math.randomInt(2, 3))
+    mob:setLocalVar('middleRoomsOption', math.randomInt(4, 5))
+    mob:setLocalVar('bottomRoomsOption', math.randomInt(6, 7))
+    mob:setLocalVar('lowerForkOption', math.randomInt(8, 9))
     mob:setLocalVar('pathProgressMask', 0)
     mob:setLocalVar('mobChatMessage', 0)
     mob:setLocalVar('chatMessage', 0)

@@ -61,7 +61,7 @@ local generateReward = function(player)
         totalChance = totalChance + item.dropWeight
     end
 
-    local roll = math.random(totalChance)
+    local roll = math.randomInt(1, totalChance)
 
     for _, item in pairs(rewards) do
         totalChance = totalChance - item.dropWeight

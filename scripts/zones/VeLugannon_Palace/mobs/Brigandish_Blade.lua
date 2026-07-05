@@ -53,7 +53,7 @@ entity.onSteal = function(player, target, ability, action)
     -- this is a hack, we can't add item directly here with proper messaging at the moment, and this is a mega edge case.
     -- one tick later the item should be landed in the players inventory
     -- set exdata to indicate the item can be transformed
-    if math.random(1, 100) <= 10 then
+    if math.randomInt(1, 100) <= 10 then
         -- Check for inventory if the item exists (onSteal returning an item doesn't mean steal succeeds)
         player:timer(1, function(playerArg)
             local item = playerArg:findItem(xi.item.BUCCANEERS_KNIFE)

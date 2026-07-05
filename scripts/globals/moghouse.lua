@@ -257,7 +257,7 @@ xi.moghouse.onMoghouseZoneEvent = function(player, prevZone)
         local prevZoneLineID                        = player:getPreviousZoneLineID()
         local moghouseEntrance                      = zoneId == prevZoneId and moghouseZoneLines[prevZoneLineID] or 1
         local x, y, z, r, randomizedAxis, randomMax = unpack(xi.moghouse.exits[zoneId][moghouseEntrance])
-        local randomOffset                          = math.random(-randomMax * 1000, randomMax * 1000) -- offset -/+ from center point
+        local randomOffset                          = math.randomInt(-randomMax * 1000, randomMax * 1000) -- offset -/+ from center point
         local offsetValue                           = randomOffset / 1000 -- 0.000 - N.N00 variance
 
         -- A few moghouses are rotated so we handle them first.

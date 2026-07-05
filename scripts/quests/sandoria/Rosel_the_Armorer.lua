@@ -36,7 +36,7 @@ quest.sections =
                     -- Using questStage directly eliminates the need for an additional questProgress state
                     -- and the subsequent need for an additional db write on that change.
                     if questStage == 0 then
-                        questStage = math.random(1, 2)
+                        questStage = math.randomInt(1, 2)
                         quest:setVar(player, 'Stage', questStage)
                     end
 

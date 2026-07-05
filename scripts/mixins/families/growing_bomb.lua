@@ -44,7 +44,7 @@ xi.mix.growingBomb.onMobMobskillChoose = function(mob, target)
         end,
     }
 
-    return skillList[math.random(1, #skillList)]
+    return skillList[math.randomInt(1, #skillList)]
 end
 
 g_mixins.families.growing_bomb = function(bombMob)

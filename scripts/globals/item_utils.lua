@@ -137,7 +137,7 @@ xi.itemUtils.pickItemRandom = function(lootGroup)
         end
     end
 
-    local roll    = math.random(max)
+    local roll    = math.randomInt(1, max)
     local current = 0
 
     for _, entry in pairs(lootGroup) do

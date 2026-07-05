@@ -128,7 +128,7 @@ local function getQuestReward(player)
         luminium = { item = xi.item.IMPERIAL_GOLD_PIECE, amount = 2 },
         platinum =
         {
-            { item = xi.item.IMPERIAL_MYTHRIL_PIECE, amount = math.random(3, 4) },
+            { item = xi.item.IMPERIAL_MYTHRIL_PIECE, amount = math.randomInt(3, 4) },
             { item = xi.item.IMPERIAL_GOLD_PIECE, amount = 1 },
         },
     }
@@ -136,7 +136,7 @@ local function getQuestReward(player)
     if mythrallineQuality == 10 then
         reward = rewardTiers.luminium
     elseif mythrallineQuality >= 6 and mythrallineQuality <= 9.5 then
-        reward = rewardTiers.platinum[math.random(#rewardTiers.platinum)]
+        reward = rewardTiers.platinum[math.randomInt(1, #rewardTiers.platinum)]
     end
 
     return reward

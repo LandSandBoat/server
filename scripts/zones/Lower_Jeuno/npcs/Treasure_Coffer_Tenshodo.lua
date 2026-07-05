@@ -1715,7 +1715,7 @@ local function givePrize(player, ki)
             p = p.prizes
             -- determine prize
             local prize = nil
-            local roll = math.random(1, p[#p].cutoff)
+            local roll = math.randomInt(1, p[#p].cutoff)
             for i = 1, #p do
                 if roll <= p[i].cutoff then
                     prize = p[i]
@@ -1737,9 +1737,9 @@ local function givePrize(player, ki)
 
                 for i = 1, 4 do
                     -- static 50% chance to get any augment at all each loop
-                    if #addAug == 0 or math.random(1, 100) <= 50 then
+                    if #addAug == 0 or math.randomInt(1, 100) <= 50 then
                         -- since lua arrays start at index 1, set start at 1 to guarantee at least one augment
-                        roll = math.random(1, #pAug)
+                        roll = math.randomInt(1, #pAug)
                     else
                         roll = 0
                     end
@@ -1750,14 +1750,14 @@ local function givePrize(player, ki)
                             -- augment is itself a list
                             -- used for stat ranges that go between negative and positive
                             -- but, could also be used for groups of stats like int/mnd/chr to avoid having them all show up?
-                            aug = aug[math.random(1, #aug)]
+                            aug = aug[math.randomInt(1, #aug)]
                         end
 
                         -- if augment chosen, remove from cloned list to preserve chance of remaining augments
                         table.remove(pAug, roll)
 
                         table.insert(addAug, aug[1])
-                        table.insert(addAug, math.random(aug[2], aug[3]))
+                        table.insert(addAug, math.randomInt(aug[2], aug[3]))
                     end
                 end
             end

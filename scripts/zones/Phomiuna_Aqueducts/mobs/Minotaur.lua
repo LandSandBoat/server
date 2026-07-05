@@ -44,7 +44,7 @@ entity.onMobFight = function(mob, target)
 
     local drewIn = false
     for _, member in ipairs(allianceTarget:getAlliance()) do
-        local randomPos = drawInPositions[math.random(#drawInPositions)]
+        local randomPos = drawInPositions[math.randomInt(1, #drawInPositions)]
         randomPos.rot = member:getRotPos()
 
         if utils.drawIn(member, { conditions = { member:getZPos() < 290 }, position = randomPos }) then

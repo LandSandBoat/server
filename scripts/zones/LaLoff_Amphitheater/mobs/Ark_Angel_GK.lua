@@ -61,7 +61,7 @@ entity.onMobSpawn = function(mob)
             -- "Meikyo Shisui is used very frequently."
             {
                 id       = xi.mobSkill.MEIKYO_SHISUI_1,
-                hpp      = math.random(90, 95),
+                hpp      = math.randomInt(90, 95),
                 cooldown = 90,
 
                 begCode  = function(mobArg)

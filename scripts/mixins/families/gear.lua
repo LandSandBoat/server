@@ -6,8 +6,8 @@ g_mixins.families.gear = function(gearMob)
     gearMob:addListener('SPAWN', 'TRIPLE_GEAR_DROP', function(mob)
         -- Setup Triple Gears losing gears
         if mob:getSpecies() == xi.mobSpecies.TRIPLE_GEAR then
-            mob:setLocalVar('gearDrop1', math.random(45, 60))
-            mob:setLocalVar('gearDrop2', math.random(35, 20))
+            mob:setLocalVar('gearDrop1', math.randomInt(45, 60))
+            mob:setLocalVar('gearDrop2', math.randomInt(35, 20))
         end
     end)
 

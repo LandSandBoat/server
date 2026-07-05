@@ -27,6 +27,7 @@
 #include <cstdint>
 #include <initializer_list>
 #include <iterator>
+#include <limits>
 #include <map>
 #include <random>
 #include <ranges>
@@ -37,6 +38,7 @@
 
 #include <common/rng/detail/bounded_int.h>
 #include <common/rng/detail/canonical_float.h>
+#include <common/rng/detail/normal.h>
 #include <common/rng/detail/shuffle.h>
 #include <common/rng/detail/weighted_index.h>
 
@@ -113,6 +115,24 @@ template <std::floating_point T>
 template <typename T>
 [[nodiscard]] inline auto GetRandomNumber(T max) -> T;
 
+/// @brief Generates a normally distributed random number.
+/// @param mean Mean of the distribution.
+/// @param stddev Standard deviation; values <= 0 collapse the distribution to mean.
+/// @return Normally distributed value.
+/// @note Inverse-transform sampling (detail::inverseNormalCDF): exactly one engine
+///       draw per sample regardless of arguments, so seeded streams stay aligned.
+///       Results are capped at ~8.2 sigma by construction. Unlike the uniform
+///       helpers, values may differ in the last few ulps across platforms
+///       (std::log/exp/erfc are libm-dependent).
+[[nodiscard]] inline auto GetNormalNumber(double mean, double stddev) -> double;
+
+/// @brief Generates a normally distributed random number truncated to [lower, upper].
+/// @return Value in [lower, upper]; lower if the interval is empty.
+/// @note Exact truncated normal: the uniform draw is mapped into the CDF mass
+///       between the bounds, so there are no rejection loops, no redraw caps, and
+///       no probability spikes at the bounds. Still exactly one engine draw.
+[[nodiscard]] inline auto GetNormalNumber(double mean, double stddev, double lower, double upper) -> double;
+
 /// @brief Gets a random element from the given random_access_range (e.g. vector, array, deque).
 /// @tparam R Random access range type.
 /// @param range The container or range.
@@ -177,14 +197,46 @@ template <std::floating_point T>
         return min;
     }
 
-    const double unit = detail::canonical53(rng());
-    return static_cast<T>(static_cast<double>(min) + unit * (static_cast<double>(max) - static_cast<double>(min)));
+    // scaleCanonical guards the rounding edge where the scaled draw lands exactly on
+    // max (most likely when narrowing to float), keeping the [min, max) contract honest.
+    return detail::scaleCanonical(detail::canonical53(rng()), min, max);
 }
 
 template <typename T>
 [[nodiscard]] inline auto xirand::GetRandomNumber(T max) -> T
 {
     return GetRandomNumber<T>(0, max);
+}
+
+[[nodiscard]] inline auto xirand::GetNormalNumber(const double mean, const double stddev) -> double
+{
+    constexpr double inf = std::numeric_limits<double>::infinity();
+    return GetNormalNumber(mean, stddev, -inf, inf);
+}
+
+[[nodiscard]] inline auto xirand::GetNormalNumber(const double mean, const double stddev, const double lower, const double upper) -> double
+{
+    if (lower >= upper)
+    {
+        return lower;
+    }
+
+    if (!(stddev > 0.0)) // <= 0 or NaN: no spread.
+    {
+        return std::clamp(mean, lower, upper);
+    }
+
+    // CDF mass below each bound; 0 and 1 for infinite bounds.
+    const double pLo = detail::normalCDF((lower - mean) / stddev);
+    const double pHi = detail::normalCDF((upper - mean) / stddev);
+
+    // Map the draw into the mass between the bounds, keeping clear of the CDF
+    // endpoints where the inverse is singular (this caps results at ~8.2 sigma).
+    const double unit = detail::canonical53(rng());
+    const double p    = std::clamp(pLo + unit * (pHi - pLo), 0x1p-53, detail::nextDown(1.0));
+
+    // The final clamp only guards approximation edges right at the bounds.
+    return std::clamp(mean + stddev * detail::inverseNormalCDF(p), lower, upper);
 }
 
 template <std::ranges::random_access_range R>

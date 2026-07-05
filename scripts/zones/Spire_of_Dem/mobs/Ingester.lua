@@ -23,7 +23,7 @@ end
 entity.onMobMobskillChoose = function(mob, target, skillId)
     -- 20% chance to prefer Fission
     if
-        math.random(1, 100) <= 20 and
+        math.randomInt(1, 100) <= 20 and
         xi.mix.gorger.canUseFission(mob)
     then
         return xi.mobSkill.FISSION
@@ -39,11 +39,11 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.PROMYVION_BARRIER_2,
     }
 
-    return skillList[math.random(1, #skillList)]
+    return skillList[math.randomInt(1, #skillList)]
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.MP_DRAIN, { chance = 100, power = math.random(1, 4) })
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.MP_DRAIN, { chance = 100, power = math.randomInt(1, 4) })
 end
 
 return entity

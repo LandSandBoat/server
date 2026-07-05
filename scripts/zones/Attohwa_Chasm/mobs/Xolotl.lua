@@ -106,7 +106,7 @@ end
 entity.onMobDespawn = function(mob)
     -- Only set long respawn timer if killed, not if naturally despawned at dawn
     if mob:getLocalVar('killed') == 1 then
-        mob:setRespawnTime(math.random(75600, 86400))
+        mob:setRespawnTime(math.randomInt(75600, 86400))
     else
         mob:setRespawnTime(1)
     end

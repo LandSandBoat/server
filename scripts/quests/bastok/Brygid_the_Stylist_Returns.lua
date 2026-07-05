@@ -87,7 +87,7 @@ local getRandomEquippableItem = function(player, itemList)
         end
     end
 
-    return equippableItems[math.random(1, #equippableItems)]
+    return equippableItems[math.randomInt(1, #equippableItems)]
 end
 
 local hasArtifactArmorEquipped = function(player)

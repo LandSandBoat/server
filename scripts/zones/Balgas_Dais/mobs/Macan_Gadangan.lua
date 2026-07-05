@@ -48,7 +48,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.PETRIFACTIVE_BREATH,
     }
 
-    return mobskillList[math.random(1, #mobskillList)]
+    return mobskillList[math.randomInt(1, #mobskillList)]
 end
 
 -- Choose spell based on current phase or default to phase 5 (Burst) if I have been Silenced

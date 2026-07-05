@@ -81,7 +81,7 @@ quest.sections =
                         quest:getVar(player, 'Prog') == 3 and
                         npcUtil.tradeHasExactly(trade, xi.item.FAT_GREEDIE)
                     then
-                        if math.random(1, 100) <= 20 then
+                        if math.randomInt(1, 100) <= 20 then
                             return quest:progressEvent(35) -- Ring found !
                         else
                             return quest:event(36) -- Ring not found

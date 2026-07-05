@@ -25,7 +25,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setLocalVar('pop', GetSystemTime() + (math.random(45, 75) * 60))
+    mob:setLocalVar('pop', GetSystemTime() + (math.randomInt(45, 75) * 60))
 end
 
 return entity

@@ -32,7 +32,7 @@ function utils.attemptShadowMitigation(actor, attemptedRemovals)
     -- Through research, a skill's shadowBehavior acts as a counter for how many shadow mitigation attempts are made(attemptedRemovals).
     -- Example: An AoE skill that takes 4 shadows will attempt the mitgation step below 4 times. A shadow will only be mitigated if it passes the proc chance check.
     for i = 1, attemptedRemovals do
-        if math.random(1, 100) <= procChance then
+        if math.randomInt(1, 100) <= procChance then
             mitigated = mitigated + 1
         end
     end
@@ -73,7 +73,7 @@ function utils.takeShadows(actor, damage, shadowsToRemove)
     -- Handle Blink shadow removal
     if shadowType == xi.mod.BLINK then
         for _ = 1, shadowsToRemove do
-            if shadowsRemaining > 0 and math.random(1, 100) <= 80 then
+            if shadowsRemaining > 0 and math.randomInt(1, 100) <= 80 then
                 shadowsRemaining = shadowsRemaining - 1
                 shadowsUsed      = shadowsUsed + 1
             end
@@ -169,7 +169,7 @@ function utils.shadowAbsorb(target, shadowsToRemove)
 
     -- Blink has a random chance of triggering when no utsusemi is present.
     elseif blinkMod > 0 then
-        if math.random(1, 100) <= 20 then
+        if math.randomInt(1, 100) <= 20 then
             absorbHit = false
 
             return absorbHit, 0

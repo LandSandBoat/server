@@ -715,7 +715,7 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
 
         local sRatio = getSpikeRatio(true, wRatio)
 
-        if math.random(1, 10000) / 10000 <= sRatio then
+        if math.randomInt(1, 10000) / 10000 <= sRatio then
             return 1.0
         end
 
@@ -730,7 +730,7 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
 
         local sRatio = getSpikeRatio(false, wRatio)
 
-        if math.random(1, 10000) / 10000 <= sRatio then
+        if math.randomInt(1, 10000) / 10000 <= sRatio then
             return 1.0
         end
 
@@ -742,7 +742,7 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
     -- Dice roll the 50/50 chance to select two different bounds. Mote has not yet implemented the spike by the time of this post so his ratio is not 50/50 rate.
     -- His model at the time and implemented spike, so the (0.0, 0.5) bounds also looks different
     -- https://www.bluegartr.com/threads/108161-pDif-and-damage?p=5007487&viewfull=1#post5007487
-    local upperMax   = math.random(0, 1) == 0 and 0.5 or 0
+    local upperMax   = math.randomInt(0, 1) == 0 and 0.5 or 0
     local upperBound = math.max(pDifUpperCap + levelDifFactor, upperMax)
     local lowerbound = math.max(pDifLowerCap + levelDifFactor, 0)
 
@@ -750,12 +750,12 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
         return 0
     end
 
-    pDif = math.random(lowerbound * 1000, upperBound * 1000) / 1000
+    pDif = math.randomInt(lowerbound * 1000, upperBound * 1000) / 1000
 
     ----------------------------------------
     -- Step 4: Melee random factor.
     ----------------------------------------
-    local meleeRandom = 1 + math.random(0, 5) * 0.01 -- 5 distinct values
+    local meleeRandom = 1 + math.randomInt(0, 5) * 0.01 -- 5 distinct values
 
     pDif = pDif * meleeRandom
 
@@ -895,7 +895,7 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
     pDifUpperCap = pDifUpperCap + levelDifFactor
     pDifLowerCap = pDifLowerCap + levelDifFactor
 
-    pDif = math.random(pDifLowerCap * 1000, pDifUpperCap * 1000) / 1000
+    pDif = math.randomInt(pDifLowerCap * 1000, pDifUpperCap * 1000) / 1000
 
     -- do not go negative, rolls below zero (proportionally) need to be rolled
     pDif = math.max(pDif, 0)
@@ -1368,7 +1368,7 @@ xi.combat.physical.isBlocked = function(defender, attacker)
 
     if xi.combat.physical.canBlock(defender, attacker) then
 
-        if xi.combat.physical.calculateBlockRate(defender, attacker) * 100 >= math.random(1, 10000) then
+        if xi.combat.physical.calculateBlockRate(defender, attacker) * 100 >= math.randomInt(1, 10000) then
             blocked = true
         end
 
@@ -1391,7 +1391,7 @@ xi.combat.physical.isParried = function(defender, attacker)
     if xi.combat.physical.canParry(defender, attacker) then
         local isPC = defender:isPC()
 
-        if xi.combat.physical.calculateParryRate(defender, attacker) * 100 >= math.random(1, 10000) then
+        if xi.combat.physical.calculateParryRate(defender, attacker) * 100 >= math.randomInt(1, 10000) then
             parried = true
 
             -- https://www.bg-wiki.com/ffxi/Turms_Mittens
@@ -1429,7 +1429,7 @@ xi.combat.physical.isGuarded = function(defender, attacker)
 
     if xi.combat.physical.canGuard(defender, attacker) then
         local isPC = defender:isPC()
-        if xi.combat.physical.calculateGuardRate(defender, attacker) * 100 >= math.random(1, 10000) then
+        if xi.combat.physical.calculateGuardRate(defender, attacker) * 100 >= math.randomInt(1, 10000) then
             guarded = true
             if isPC then
                 -- handle tactical guard

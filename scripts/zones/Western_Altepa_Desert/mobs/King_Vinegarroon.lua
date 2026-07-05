@@ -139,7 +139,7 @@ local skillTable =
 entity.onMobSkillTarget = function(target, mob, mobskill)
     if mobskill:isAoE() then
         -- Chance for draw in to be single target or alliance
-        if math.random(0, 100) >= 50 then
+        if math.randomInt(0, 100) >= 50 then
             mob:drawIn()
         else
             -- If target is a pet, get the master for alliance lookup
@@ -159,7 +159,7 @@ entity.onMobSkillTarget = function(target, mob, mobskill)
         end
 
         -- KV always does an AOE TP move followed by a single target TP move
-        mob:useMobAbility(skillTable[math.random(1, #skillTable)])
+        mob:useMobAbility(skillTable[math.randomInt(1, #skillTable)])
     end
 end
 

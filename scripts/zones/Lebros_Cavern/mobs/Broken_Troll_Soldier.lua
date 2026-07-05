@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onMobEngage = function(mob, target)
     local maxHP = mob:getHP()
-    local bonus = math.random(2, 6)
+    local bonus = math.randomInt(2, 6)
     mob:setHP(maxHP / (8 / bonus))
 end
 

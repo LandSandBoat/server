@@ -9,7 +9,7 @@ local ID = zones[xi.zone.BEAUCEDINE_GLACIER]
 local entity = {}
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.GARGANTUA, 5, math.random(3600, 25200)) -- 1 to 7 hours
+    xi.mob.phOnDespawn(mob, ID.mob.GARGANTUA, 5, math.randomInt(3600, 25200)) -- 1 to 7 hours
 end
 
 return entity

@@ -18,7 +18,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
         xi.magic.spell.SLEEP,
     }
 
-    return spellList[math.random(1, #spellList)]
+    return spellList[math.randomInt(1, #spellList)]
 end
 
 entity.onMobMobskillChoose = function(mob, target, skillId)
@@ -29,7 +29,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.BROADSIDE_BARRAGE_1,
         xi.mobSkill.BLIND_SIDE_BARRAGE_1,
     }
-    return skillList[math.random(1, #skillList)]
+    return skillList[math.randomInt(1, #skillList)]
 end
 
 return entity

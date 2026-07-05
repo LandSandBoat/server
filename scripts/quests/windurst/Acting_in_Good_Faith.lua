@@ -92,7 +92,7 @@ quest.sections =
                     player:messageSpecial(eldiemeID.text.SPIRIT_INCENSE_EMITS_PUTRID_ODOR, xi.ki.SPIRIT_INCENSE)
                     player:delKeyItem(xi.ki.SPIRIT_INCENSE)
 
-                    npc:setPos(unpack(eldiemeID.npc.QM1_POS[math.random(1, 4)])) -- move QM1 randomly on quest completion
+                    npc:setPos(unpack(eldiemeID.npc.QM1_POS[math.randomInt(1, 4)])) -- move QM1 randomly on quest completion
                 end,
             },
         },

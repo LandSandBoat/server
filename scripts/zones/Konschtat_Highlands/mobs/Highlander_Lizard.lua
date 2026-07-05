@@ -16,7 +16,7 @@ entity.spawnPoints =
 
 entity.onMobInitialize = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(1200, 1800)) -- When server restarts, reset timer
+    mob:setRespawnTime(math.randomInt(1200, 1800)) -- When server restarts, reset timer
 
     -- Higher TP Gain per melee hit than normal lizards.
     -- It is definitly NOT regain.
@@ -35,7 +35,7 @@ end
 
 entity.onMobDespawn = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(1200, 1800)) -- 20~30 min repop
+    mob:setRespawnTime(math.randomInt(1200, 1800)) -- 20~30 min repop
 end
 
 return entity

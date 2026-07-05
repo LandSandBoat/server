@@ -10,7 +10,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local mpAmount = math.random(200, 300)
+    local mpAmount = math.randomInt(200, 300)
     local missingMP = target:getMaxMP() - target:getMP()
 
     if missingMP < mpAmount then

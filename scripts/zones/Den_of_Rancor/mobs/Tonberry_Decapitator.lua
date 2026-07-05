@@ -21,7 +21,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            { id = xi.mobSkill.MIJIN_GAKURE_1, hpp = math.random(20, 30) },
+            { id = xi.mobSkill.MIJIN_GAKURE_1, hpp = math.randomInt(20, 30) },
         },
     })
 end
@@ -33,7 +33,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setRespawnTime(math.random(1260, 1440)) -- 21 to 24 minutes
+    mob:setRespawnTime(math.randomInt(1260, 1440)) -- 21 to 24 minutes
 end
 
 return entity

@@ -24,10 +24,10 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.EMPTY_CUTTER
     }
 
-    if math.random(1, 100) <= 50 then
+    if math.randomInt(1, 100) <= 50 then
         return xi.mobSkill.TRINARY_TAP
     else
-        return skills[math.random(1, #skills)]
+        return skills[math.randomInt(1, #skills)]
     end
 end
 

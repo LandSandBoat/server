@@ -23,7 +23,7 @@ entity.onTrade = function(player, npc, trade)
     elseif spawnChance > 0 then
         player:confirmTrade()
         if
-            math.random(1, 100) <= spawnChance and
+            math.randomInt(1, 100) <= spawnChance and
             npcUtil.popFromQM(player, npc, ID.mob.EDACIOUS_OPO_OPO)
         then
             player:messageSpecial(ID.text.FAINT_CRY)

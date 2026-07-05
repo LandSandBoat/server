@@ -26,7 +26,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.SLEEP_MEVA, 90)
     mob:addImmunity(xi.immunity.SILENCE)
     -- assassins and executor have special 2hr logic thus use local vars to track
-    mob:setLocalVar('twoHourThreshold', math.random(20, 75))
+    mob:setLocalVar('twoHourThreshold', math.randomInt(20, 75))
 end
 
 entity.onMobFight = function(mob, target)

@@ -37,7 +37,7 @@ local spawnPoints =
 }
 
 entity.onMobInitialize = function(mob)
-    local spawnPoint = spawnPoints[math.random(1, #spawnPoints)]
+    local spawnPoint = spawnPoints[math.randomInt(1, #spawnPoints)]
     mob:setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z)
 end
 
@@ -64,7 +64,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
 end
 
 entity.onMobDespawn = function(mob)
-    local spawnPoint = spawnPoints[math.random(1, #spawnPoints)]
+    local spawnPoint = spawnPoints[math.randomInt(1, #spawnPoints)]
     mob:setSpawn(spawnPoint.x, spawnPoint.y, spawnPoint.z)
 end
 

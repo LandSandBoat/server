@@ -118,7 +118,7 @@ entity.onMobFight = function(mob, target)
         local usedAzure = mob:getLocalVar('usedAzureLore')
         if mob:getHPP() <= hpTrigger and usedAzure == 0 then
             mob:setLocalVar('usedAzureLore', 1)
-            mob:setLocalVar('AzureLoreHP', math.random(20, 50) -- Re-rolling the % for next 'life'
+            mob:setLocalVar('AzureLoreHP', math.randomInt(20, 50) -- Re-rolling the % for next 'life'
             mob:useMobAbility(xi.mobSkill.AZURE_LORE)
         end
     end

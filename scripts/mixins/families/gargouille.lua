@@ -28,7 +28,7 @@ local function changeStance(mob)
     end
 
     -- Reset timer
-    mob:setLocalVar('formTimer', GetSystemTime() + math.random(180, 240))
+    mob:setLocalVar('formTimer', GetSystemTime() + math.randomInt(180, 240))
 end
 
 g_mixins.families.gargouille = function(gargouilleMob)
@@ -36,7 +36,7 @@ g_mixins.families.gargouille = function(gargouilleMob)
     gargouilleMob:addListener('SPAWN', 'GARGOUILLE_SPAWN', function(mob)
         mob:setAnimationSub(4)
         mob:setMobMod(xi.mobMod.SKILL_LIST, 118) -- Set Standing Skill List. ('Terror Eye', 'Triumphant Roar' and 'Bloody Claw')
-        mob:setLocalVar('formTimer', GetSystemTime() + math.random(180, 240))
+        mob:setLocalVar('formTimer', GetSystemTime() + math.randomInt(180, 240))
     end)
 
     -- Handle regular changes on roam.

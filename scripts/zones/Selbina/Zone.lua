@@ -12,7 +12,7 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onGameHour = function(zone)
-    local destinationId = math.random(1, 100) <= 10 and xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES or xi.zone.SHIP_BOUND_FOR_MHAURA
+    local destinationId = math.randomInt(1, 100) <= 10 and xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES or xi.zone.SHIP_BOUND_FOR_MHAURA
     zone:setLocalVar('[Pirate]Zone', destinationId)
 end
 

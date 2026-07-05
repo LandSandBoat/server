@@ -59,7 +59,7 @@ g_mixins.families.rampart = function(rampartMob)
 
             if not mob:hasPreventActionEffect() then
                 if mob:getLocalVar('nextPet') == 0 then
-                    mob:setLocalVar('nextPet', (math.random(0, 3) * 5) + 45 + time)
+                    mob:setLocalVar('nextPet', (math.randomInt(0, 3) * 5) + 45 + time)
                 end
 
                 local nextPet = mob:getLocalVar('nextPet')
@@ -72,7 +72,7 @@ g_mixins.families.rampart = function(rampartMob)
                             if timedSpawn > 1 then
                                 mob:setLocalVar('nextPet', timedSpawn + nextPet)
                             else
-                                mob:setLocalVar('nextPet', (math.random(0, 3) * 5) + 45 + nextPet)
+                                mob:setLocalVar('nextPet', (math.randomInt(0, 3) * 5) + 45 + nextPet)
                             end
 
                             mob:useMobAbility(2034)
@@ -94,7 +94,7 @@ g_mixins.families.rampart = function(rampartMob)
                                             (rampartArg:getLocalVar('numberSpawned') < limitArg or limitArg == 0)
                                         then
                                             rampartArg:setLocalVar('nextPet', 0)
-                                            rampartArg:setLocalVar('timedSpawn', (math.random(0, 3) * 5) + 45)
+                                            rampartArg:setLocalVar('timedSpawn', (math.randomInt(0, 3) * 5) + 45)
                                         end
 
                                         petArg:removeListener('RAMPART_ADD')

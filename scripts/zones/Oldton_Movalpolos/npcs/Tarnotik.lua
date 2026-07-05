@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if math.random(1, 100) <= 50 then -- TODO: this isn't retail at all.
+    if math.randomInt(1, 100) <= 50 then -- TODO: this isn't retail at all.
         player:startEvent(30)
     else
         player:startEvent(31, { canSkip = true })

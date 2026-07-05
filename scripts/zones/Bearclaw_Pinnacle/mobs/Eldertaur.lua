@@ -35,7 +35,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         table.insert(skills, xi.mobSkill.APOCALYPTIC_RAY)
     end
 
-    return skills[math.random(1, #skills)]
+    return skills[math.randomInt(1, #skills)]
 end
 
 entity.onMobSpellChoose = function(mob, target, spellId)

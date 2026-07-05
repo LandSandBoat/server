@@ -34,7 +34,7 @@ entity.onTrigger = function(player, npc)
     then
         local prog = player:getCharVar('QuestNeverToReturn_prog')
         if prog <= 2 then
-            local fortune = math.random(1, 99)
+            local fortune = math.randomInt(1, 99)
             player:startEvent(204, fortune) -- Required to get fortune read 3x on 3 diff game days before quest is kicked off
         elseif prog == 3 then
             player:startEvent(202) -- Start 'Never to return' quest

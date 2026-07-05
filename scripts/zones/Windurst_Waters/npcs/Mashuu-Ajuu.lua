@@ -25,12 +25,12 @@ entity.onTrigger = function(player, npc)
     local reapstatus = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW)
 
     if reapstatus == xi.questStatus.QUEST_AVAILABLE then
-        local rand = math.random(1, 2)
+        local rand = math.randomInt(1, 2)
         if rand == 1 then
             player:startEvent(463, 0, xi.item.SOBBING_FUNGUS, xi.item.BAG_OF_HERB_SEEDS)                 -- REAP WHAT YOU SOW + HERB SEEDS: QUEST START
         end
     elseif reapstatus == xi.questStatus.QUEST_ACCEPTED then
-        local rand = math.random(1, 2)
+        local rand = math.randomInt(1, 2)
         if rand == 1 then
             player:startEvent(464, 0, xi.item.SOBBING_FUNGUS, xi.item.BAG_OF_HERB_SEEDS)                  -- REAP WHAT YOU SOW + HERB SEEDS: OBJECTIVE REMINDER
         else
@@ -43,7 +43,7 @@ entity.onTrigger = function(player, npc)
         not player:needToZone() and
         player:getCharVar('QuestReapSow_var') == 0
     then
-        local rand = math.random(1, 2)
+        local rand = math.randomInt(1, 2)
         if rand == 1 then
             player:startEvent(479, 0, xi.item.SOBBING_FUNGUS, xi.item.BAG_OF_HERB_SEEDS)                -- REAP WHAT YOU SOW + HERB SEEDS: REPEATABLE QUEST START
         end
@@ -51,7 +51,7 @@ entity.onTrigger = function(player, npc)
         reapstatus == xi.questStatus.QUEST_COMPLETED and
         player:getCharVar('QuestReapSow_var') == 1
     then
-        local rand = math.random(1, 2)
+        local rand = math.randomInt(1, 2)
         if rand == 1 then
             player:startEvent(464, 0, xi.item.SOBBING_FUNGUS, xi.item.BAG_OF_HERB_SEEDS)                  -- REAP WHAT YOU SOW + HERB SEEDS: OBJECTIVE REMINDER
         else

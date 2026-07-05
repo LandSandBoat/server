@@ -87,7 +87,7 @@ local function tryCureSpell(pet)
     if
         petLevel >= 16 and
         -- TODO: Check this. Guessed.
-        math.random(1, 100) <= math.min(10 + xi.summon.getSummoningSkillOverCap(pet), 50)
+        math.randomInt(1, 100) <= math.min(10 + xi.summon.getSummoningSkillOverCap(pet), 50)
     then
         spellGroup = xi.pets.avatar.lightSpiritSpells.curagas
     end

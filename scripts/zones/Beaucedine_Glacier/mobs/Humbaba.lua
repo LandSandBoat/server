@@ -15,7 +15,7 @@ entity.spawnPoints =
 
 entity.onMobInitialize = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(3600, 4200)) -- When server restarts, reset timer
+    mob:setRespawnTime(math.randomInt(3600, 4200)) -- When server restarts, reset timer
 
     mob:setMobMod(xi.mobMod.AUTO_SPIKES, 1)
     mob:addStatusEffect(xi.effect.ICE_SPIKES, { power = 50, origin = mob })
@@ -51,7 +51,7 @@ end
 
 entity.onMobDespawn = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(3600, 4200)) -- 60 to 70 minutes
+    mob:setRespawnTime(math.randomInt(3600, 4200)) -- 60 to 70 minutes
 end
 
 return entity

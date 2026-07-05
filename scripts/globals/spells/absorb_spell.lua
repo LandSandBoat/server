@@ -122,7 +122,7 @@ xi.spells.absorb.doDrainingSpell = function(caster, target, spell)
     local skillEquation      = casterSkill > 300 and 3 or 2
     local maxDamagePotential = math.floor(casterSkill * absorbPointsData[spellId][skillEquation][1] + absorbPointsData[spellId][skillEquation][2])
     local minDamagePotential = math.floor(maxDamagePotential * absorbPointsData[spellId][4])
-    local baseDamage         = math.random(minDamagePotential, maxDamagePotential)
+    local baseDamage         = math.randomInt(minDamagePotential, maxDamagePotential)
 
     -- Multipliers.
     local resistTier             = xi.combat.magicHitRate.calculateResistRate(caster, target, xi.magic.spellGroup.BLACK, xi.skill.DARK_MAGIC, 0, xi.element.DARK, xi.mod.INT, 0, 0)

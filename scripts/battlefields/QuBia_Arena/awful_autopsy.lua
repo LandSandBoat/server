@@ -120,7 +120,7 @@ function content:onBattlefieldTick(battlefield, tick)
         end
 
         local stomachPosition = stomach:getPos()
-        addEntity:setSpawn(stomachPosition.x + math.random(-1, 1) * 0.5, stomachPosition.y, stomachPosition.z + math.random(-1, 1) * 0.5, stomachPosition.rot)
+        addEntity:setSpawn(stomachPosition.x + math.randomInt(-1, 1) * 0.5, stomachPosition.y, stomachPosition.z + math.randomInt(-1, 1) * 0.5, stomachPosition.rot)
 
         SpawnMob(addEntityId)
 

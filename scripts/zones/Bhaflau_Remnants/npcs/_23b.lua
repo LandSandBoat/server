@@ -33,7 +33,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             }
             xi.salvage.spawnGroup(instance, mobs)
 
-            if math.random(100) >= 50 then
+            if math.randomInt(1, 100) >= 50 then
                 GetNPCByID(ID.npc.SOCKET, instance):setPos(222, 0, 260)
                 GetMobByID(ID.mob.FLUX_FLAN, instance):setSpawn(225, -0.5, 260, 0)
                 GetNPCByID(ID.npc.SOCKET, instance):setStatus(xi.status.NORMAL)

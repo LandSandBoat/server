@@ -32,7 +32,7 @@ local weaknessTable =
 
 local getNewWeakness = function(mob)
     local currentWeakness = mob:getAnimationSub()
-    local newWeakness = 1 + ((currentWeakness + math.random(1, 2)) % 3)
+    local newWeakness = 1 + ((currentWeakness + math.randomInt(1, 2)) % 3)
 
     mob:queue(3000, function(mobArg)
         -- Blood Weapon 2hr animation as captured on retail.

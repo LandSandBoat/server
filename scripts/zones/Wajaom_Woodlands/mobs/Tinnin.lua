@@ -15,7 +15,7 @@ local entity = {}
 
 local function regenerateHead(mob, animationSub)
     -- Reset timer.
-    mob:setLocalVar('headTimer', GetSystemTime() + math.random(90, 210))
+    mob:setLocalVar('headTimer', GetSystemTime() + math.randomInt(90, 210))
 
     -- Set animationSub.
     mob:setAnimationSub(animationSub - 1)
@@ -60,12 +60,12 @@ entity.onMobSpawn = function(mob)
 
     mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
 
-    mob:setLocalVar('headTimer', GetSystemTime() + math.random(90, 210))
+    mob:setLocalVar('headTimer', GetSystemTime() + math.randomInt(90, 210))
     mob:setLocalVar('head2Regeneration', 0)
     mob:setLocalVar('head3Regeneration', 0)
 
     -- Number of crits to lose a head
-    mob:setLocalVar('criticalsThreshold', math.random(10, 30))
+    mob:setLocalVar('criticalsThreshold', math.randomInt(10, 30))
     mob:setLocalVar('criticalsTaken', 0)
 end
 
@@ -152,8 +152,8 @@ entity.onCriticalHit = function(mob)
     if criticalCounter >= mob:getLocalVar('criticalsThreshold') then
         criticalCounter = 0 -- Reset critical count.
         mob:setAnimationSub(animationSub + 1)
-        mob:setLocalVar('headTimer', GetSystemTime() + math.random(90, 210))
-        mob:setLocalVar('criticalsThreshold', math.random(10, 30)) -- Reset critical threshold.
+        mob:setLocalVar('headTimer', GetSystemTime() + math.randomInt(90, 210))
+        mob:setLocalVar('criticalsThreshold', math.randomInt(10, 30)) -- Reset critical threshold.
     end
 
     mob:setLocalVar('criticalsTaken', criticalCounter)

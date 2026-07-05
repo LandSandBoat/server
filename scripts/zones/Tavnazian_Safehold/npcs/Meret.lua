@@ -46,7 +46,7 @@ end
 entity.onTrigger = function(player, npc)
     if player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_WARRIORS_PATH then
         if player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE) == xi.questStatus.QUEST_COMPLETED then
-            if math.random(1, 100) <= 50 then
+            if math.randomInt(1, 100) <= 50 then
                 player:startEvent(582)
             else
                 player:startEvent(583)

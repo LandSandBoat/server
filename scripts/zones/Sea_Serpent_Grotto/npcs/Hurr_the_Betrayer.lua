@@ -32,7 +32,7 @@ entity.onTrigger = function(player, npc)
         player:getCharVar('SahaginKeyItems') == 0 and
         not player:hasItem(xi.item.SAHAGIN_KEY)
     then
-        if math.random(1, 100) <= 50 then
+        if math.randomInt(1, 100) <= 50 then
             player:startEvent(105) -- Requires 3 Mythril Beastcoins and a Norg Shell
             player:setCharVar('SahaginKeyItems', 1)
         else

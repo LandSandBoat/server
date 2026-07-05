@@ -43,7 +43,7 @@ entity.onMobMobskillChoose = function(mob, target, mobSkillID)
         xi.mobSkill.SCISSOR_GUARD_1,
     }
 
-    return skillList[math.random(1, #skillList)]
+    return skillList[math.randomInt(1, #skillList)]
 end
 
 entity.onMobSpellChoose = function(mob, target, spellId)
@@ -54,7 +54,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
         xi.magic.spell.BLIND,
     }
 
-    return spellList[math.random(1, #spellList)]
+    return spellList[math.randomInt(1, #spellList)]
 end
 
 return entity

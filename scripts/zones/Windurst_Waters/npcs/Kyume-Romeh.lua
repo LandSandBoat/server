@@ -35,7 +35,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(669) -- Quest not furthered
         end
     else
-        if math.random(1, 100) <= 50 then
+        if math.randomInt(1, 100) <= 50 then
             player:startEvent(604) -- Standard Conversation
         else
             player:startEvent(393) -- Standard Conversation

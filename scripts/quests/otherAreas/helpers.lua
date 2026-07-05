@@ -11,7 +11,7 @@ xi.otherAreas.helpers.TestMyMettle = {}
 function xi.otherAreas.helpers.TestMyMettle.moveJar(npc)
     -- 5 min (offset by onGameHour frequency of ~2.5 min) to 3 hours
     -- full equation = ((2.5 * 10) * 6) to ((3 * 60) * 60)
-    local randomHourSpan = math.random(125, 10800)
+    local randomHourSpan = math.randomInt(125, 10800)
 
     SetServerVariable('Davoi_Jar_Move_Time', GetSystemTime() + randomHourSpan)
 

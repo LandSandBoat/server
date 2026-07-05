@@ -16,7 +16,7 @@ local function disturbMob(mob)
             not nm:isSpawned() and
             not GetMobByID(ID.mob.COLORFUL_LESHY + 1):isSpawned()
         then
-            nm:setLocalVar('timeToGrow', GetSystemTime() + math.random(43200, 86400)) -- Colorful in 12 to 24 hours
+            nm:setLocalVar('timeToGrow', GetSystemTime() + math.randomInt(43200, 86400)) -- Colorful in 12 to 24 hours
         end
     end
 end
@@ -40,7 +40,7 @@ entity.onMobRoam = function(mob)
             not GetMobByID(ID.mob.COLORFUL_LESHY + 1):isSpawned() and
             GetSystemTime() > nm:getLocalVar('timeToGrow') and
             nm:getLocalVar('phIndex') == 0 and
-            math.random(1, 20) == 1 -- this prevents the same Leshy from growing every cycle
+            math.randomInt(1, 20) == 1 -- this prevents the same Leshy from growing every cycle
         then
             local p = mob:getPos()
             DisallowRespawn(ph, true)

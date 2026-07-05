@@ -53,7 +53,7 @@ entity.onMobDisengage = function(mob)
 end
 
 entity.onMobDespawn = function(mob)
-    local respawn = math.random(3600, 7200) -- 1-2 hours during thunder weather
+    local respawn = math.randomInt(3600, 7200) -- 1-2 hours during thunder weather
     mob:setLocalVar('respawn', GetSystemTime() + respawn)
 end
 

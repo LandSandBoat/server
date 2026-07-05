@@ -29,7 +29,7 @@ psoXjaGlobal.attemptPickLock = function(player, npc, trade, correctSideOfDoor)
         if GetMobByID(gargoyle):isSpawned() then
             player:messageSpecial(ID.text.DOOR_LOCKED)
         else
-            if math.random(1, 100) <= 50 then
+            if math.randomInt(1, 100) <= 50 then
                 npc:messageName(ID.text.DISCOVER_DISARM_FAIL, player)
                 SpawnMob(gargoyle):updateClaim(player)
             else
@@ -55,7 +55,7 @@ psoXjaGlobal.attemptOpenDoor = function(player, npc, correctSideOfDoor)
             if GetMobByID(gargoyle):isSpawned() then
                 player:messageSpecial(ID.text.DOOR_LOCKED)
             else
-                if math.random(1, 10) <= 9 then -- Spawn Gargoyle
+                if math.randomInt(1, 10) <= 9 then -- Spawn Gargoyle
                     npc:messageName(ID.text.TRAP_ACTIVATED, player)
                     SpawnMob(gargoyle):updateClaim(player)
                 else

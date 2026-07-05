@@ -13,7 +13,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
         return 1
     elseif mob:getHPP() > 30 then -- Can only be used under 30% HP
         return 1
-    elseif math.random(1, 100) >= 5 then -- Here's the 95% chance to not blow up
+    elseif math.randomInt(1, 100) >= 5 then -- Here's the 95% chance to not blow up
         return 1
     else
         return 0

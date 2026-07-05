@@ -26,8 +26,8 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            { id = xi.mobSkill.BENEDICTION_1, hpp = math.random(20, 30) },                -- "Uses Benediction once."
-            { id = xi.mobSkill.INVINCIBLE_1,  hpp = math.random(90, 95), cooldown = 90 }, -- "Uses Invincible many times."
+            { id = xi.mobSkill.BENEDICTION_1, hpp = math.randomInt(20, 30) },                -- "Uses Benediction once."
+            { id = xi.mobSkill.INVINCIBLE_1,  hpp = math.randomInt(90, 95), cooldown = 90 }, -- "Uses Invincible many times."
         },
     })
 end

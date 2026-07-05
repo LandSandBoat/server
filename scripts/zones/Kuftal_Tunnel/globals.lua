@@ -26,7 +26,7 @@ movePhantomWormQM = function()
 
     npc:setStatus(xi.status.DISAPPEAR)
     npc:timer(1000, function(npcArg)
-        npcArg:setPos(unpack(phantomQmPoints[math.random(1, 6)]))
+        npcArg:setPos(unpack(phantomQmPoints[math.randomInt(1, 6)]))
         npcArg:setStatus(xi.status.NORMAL)
     end)
 

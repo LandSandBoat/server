@@ -30,7 +30,7 @@ end
 
 entity.onMobFight = function(mob, target)
     if GetSystemTime() > mob:getLocalVar('nextEnSkill') then
-        local skill = math.random(823, 828)
+        local skill = math.randomInt(823, 828)
         mob:setLocalVar('currentTP', mob:getTP())
         mob:useMobAbility(skill)
         mob:setLocalVar('nextEnSkill', GetSystemTime() + 20)

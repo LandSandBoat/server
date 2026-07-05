@@ -45,7 +45,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
     list            = list > 0 and list or 1
     local spellList = spellTable[list]
 
-    return spellList[math.random(1, #spellList)]
+    return spellList[math.randomInt(1, #spellList)]
 end
 
 entity.onMobFight = function(mob, target)

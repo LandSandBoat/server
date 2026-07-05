@@ -46,7 +46,7 @@ local changeForm = function(mob)
         end
     end
 
-    local newForm = possibleForms[math.random(1, #possibleForms)]
+    local newForm = possibleForms[math.randomInt(1, #possibleForms)]
     mob:setAnimationSub(newForm)
 end
 
@@ -62,18 +62,18 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
-    mob:setLocalVar('healPercent', math.random(15, 25))
+    mob:setLocalVar('healPercent', math.randomInt(15, 25))
 
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            { id = xi.mobSkill.MANAFONT_1, hpp = math.random(50, 80) },
+            { id = xi.mobSkill.MANAFONT_1, hpp = math.randomInt(50, 80) },
         },
     })
 end
 
 entity.onMobEngage = function(mob, target)
-    mob:setLocalVar('nextChangeTime', GetSystemTime() + math.random(15, 45))
+    mob:setLocalVar('nextChangeTime', GetSystemTime() + math.randomInt(15, 45))
     mob:setAnimationSub(forms.POT)
 
     -- Mob paths off of alcove before casting
@@ -82,7 +82,7 @@ entity.onMobEngage = function(mob, target)
 
     -- Choose a random tier 1 nuke to cast after pathing completes
     local isDark    = mobID == ID.mob.IXZDEI_BLM
-    local nukeSpell = (isDark and tier1NukesDark or tier1NukesLight)[math.random(1, 3)]
+    local nukeSpell = (isDark and tier1NukesDark or tier1NukesLight)[math.randomInt(1, 3)]
     mob:setLocalVar('initialNuke', nukeSpell)
 end
 
@@ -112,7 +112,7 @@ entity.onMobFight = function(mob, target)
     -- Change forms at random intervals
     if GetSystemTime() > mob:getLocalVar('nextChangeTime') then
         changeForm(mob)
-        mob:setLocalVar('nextChangeTime', GetSystemTime() + math.random(15, 45))
+        mob:setLocalVar('nextChangeTime', GetSystemTime() + math.randomInt(15, 45))
     end
 
     -- Zdei will attempt to heal itself once below a certain HP percent
@@ -159,7 +159,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     switch (form): caseof
     {
         [forms.POT] = function()
-            if math.random(1, 100) <= 75 then
+            if math.randomInt(1, 100) <= 75 then
                 table.insert(tpMoves, xi.mobSkill.OPTIC_INDURATION_CHARGE)
             end
         end,
@@ -175,7 +175,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         end,
     }
 
-    return tpMoves[math.random(1, #tpMoves)]
+    return tpMoves[math.randomInt(1, #tpMoves)]
 end
 
 entity.onMobWeaponSkill = function(mob, target, skill, action)

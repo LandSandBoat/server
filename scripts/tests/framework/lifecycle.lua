@@ -64,7 +64,7 @@ describe('Test lifecycle', function()
                 {
                     zone  = xi.zone.WEST_RONFAURE,
                     job   = xi.job.WHM,
-                    level = math.random(1, 99),
+                    level = math.randomInt(1, 99),
                 })
 
             if currentLevel and player:getMainLvl() == currentLevel then

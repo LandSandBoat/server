@@ -28,7 +28,7 @@ end
 
 zoneObject.onInitialize = function(zone)
     -- randomize Old Prof. Mariselle's spawn location
-    GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + math.random(0, 5)):setLocalVar('hasProfessorMariselle', 1)
+    GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + math.randomInt(0, 5)):setLocalVar('hasProfessorMariselle', 1)
     GetNPCByID(ID.npc.QM_TAVNAZIAN_COOKBOOK):addPeriodicTrigger(0, 250, 0) -- QM moves every 10 minutes
 
     xi.treasure.initZone(zone)
@@ -86,7 +86,7 @@ zoneObject.onZoneWeatherChange = function(weather)
         (vanadielHour < 4 or vanadielHour >= 20)
     then
         DisallowRespawn(elel:getID(), false)
-        elel:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after dark weather starts
+        elel:setRespawnTime(math.randomInt(30, 150)) -- pop 30-150 sec after dark weather starts
         -- Attempting to spawn Elel -- gate it so we don't continually reset it's spawn time.
         elel:getZone():setLocalVar('elelQueued', 1)
     end
@@ -107,7 +107,7 @@ zoneObject.onZoneTick = function(zone)
                 not elel:isSpawned() and GetSystemTime() > elel:getLocalVar('cooldown')
             then
                 DisallowRespawn(elel:getID(), false)
-                elel:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after dark weather starts
+                elel:setRespawnTime(math.randomInt(30, 150)) -- pop 30-150 sec after dark weather starts
                 -- Attempting to spawn Elel -- gate it so we don't continually reset it's spawn time.
                 zone:setLocalVar('elelQueued', 1)
             end

@@ -87,7 +87,7 @@ entity.onMobDespawn = function(mob)
         return
     end
 
-    zone:setLocalVar('Heliodromos_ToD', GetSystemTime() + math.random(43200, 54000)) -- 12 to 15 hours
+    zone:setLocalVar('Heliodromos_ToD', GetSystemTime() + math.randomInt(43200, 54000)) -- 12 to 15 hours
 
     -- Allow placeholders to respawn
     for i = ID.mob.HELIODROMOS_OFFSET - 3, ID.mob.HELIODROMOS_OFFSET - 1 do

@@ -73,7 +73,7 @@ entity.onMobSpawn = function(mob)
     -- Cache instance calculation once on spawn
     local inst = math.floor((mob:getID() - ID.mob.DIABOLOS) / 7)
     mob:setLocalVar('instance', inst)
-    mob:setLocalVar('nightmarePercent', math.random(25, 75))
+    mob:setLocalVar('nightmarePercent', math.randomInt(25, 75))
 
     mob:addListener('WEAPONSKILL_STATE_EXIT', 'DIABOLOS_NIGHTMARE_WS', function(mobArg, skillId, wasExecuted)
         if
@@ -116,7 +116,7 @@ entity.onMobEngage = function(mob, target)
             local positions = drawInPositions[inst + 1]
 
             for _, member in ipairs(battlefield:getPlayers()) do
-                local randomPos = positions[math.random(#positions)]
+                local randomPos = positions[math.randomInt(1, #positions)]
                 mob:drawIn(member, 0, 0, randomPos)
             end
         end
@@ -148,7 +148,7 @@ entity.onMobFight = function(mob, target)
     if target:getYPos() > drawInYThresholds[inst + 1] then
         mob:setMobMod(xi.mobMod.NO_MOVE, 1)
         local positions = drawInPositions[inst + 1]
-        local randomPos = positions[math.random(#positions)]
+        local randomPos = positions[math.randomInt(1, #positions)]
         randomPos.rot = target:getRotPos()
         mob:drawIn(target, 0, 0, randomPos)
     else
@@ -164,7 +164,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         [3] = { xi.mobSkill.NIGHTMARE_1,       20 },
     }
 
-    local randomRoll = math.random(1, 100)
+    local randomRoll = math.randomInt(1, 100)
     local weightSum  = 0
     for i = 1, #tpSkills do
         weightSum = weightSum + tpSkills[i][2]
@@ -197,7 +197,7 @@ entity.onMobSpellChoose = function(mob, target)
         xi.magic.spell.BLIND,
     }
 
-    return spellList[math.random(1, #spellList)]
+    return spellList[math.randomInt(1, #spellList)]
 end
 
 return entity

@@ -177,7 +177,7 @@ xi.chocoboRaising.initChocoState = function(player)
         if not xi.chocoboRaising.hasCondition(chocoState) then
             for _, condition in ipairs(xi.chocoboRaising.conditions) do
                 -- TODO: Use stats and history instead of pure chance
-                if math.random(1, 100) <= 5 then
+                if math.randomInt(1, 100) <= 5 then
                     xi.chocoboRaising.setCondition(chocoState, condition, true)
                     break
                 end

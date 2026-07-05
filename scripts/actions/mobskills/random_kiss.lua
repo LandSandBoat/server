@@ -23,7 +23,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     -- TODO: This probably isn't the ideal but will address in a future PR.
     --       Need to think about how to structure/handle drains better.
-    local drainType = math.random(xi.mobskills.drainType.HP, xi.mobskills.drainType.TP)
+    local drainType = math.randomInt(xi.mobskills.drainType.HP, xi.mobskills.drainType.TP)
 
     if
         drainType == xi.mobskills.drainType.MP or

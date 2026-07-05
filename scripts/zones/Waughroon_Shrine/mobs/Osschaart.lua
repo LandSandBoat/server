@@ -223,7 +223,7 @@ entity.onMobEngage = function(mob, target)
 
     -- Shuffle the player list to randomize the charm order
     for i = #players, 2, -1 do
-        local j = math.random(i)
+        local j = math.randomInt(1, i)
         players[i], players[j] = players[j], players[i]
     end
 
@@ -235,7 +235,7 @@ entity.onMobEngage = function(mob, target)
 
     -- Sets the charm order to the first player and sets the two-hour HP threshold
     mob:setLocalVar('charmIndex', 1)
-    mob:setLocalVar('twoHourHPP', math.random(20, 65))
+    mob:setLocalVar('twoHourHPP', math.randomInt(20, 65))
 end
 
 -----------------------------------
@@ -333,7 +333,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
         xi.magic.spell.STUN,
     }
 
-    return spellList[math.random(1, #spellList)]
+    return spellList[math.randomInt(1, #spellList)]
 end
 
 -----------------------------------

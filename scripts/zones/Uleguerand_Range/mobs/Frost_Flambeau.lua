@@ -15,7 +15,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setRespawnTime(math.random(7200, 9000)) -- 2 to 2.5 hours
+    mob:setRespawnTime(math.randomInt(7200, 9000)) -- 2 to 2.5 hours
 end
 
 return entity

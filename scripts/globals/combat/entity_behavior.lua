@@ -318,7 +318,7 @@ xi.combat.behavior.chooseAction = function(actor, mainTarget, optionalTargets, a
     end
 
     -- Choose action and target.
-    local randomRoll  = math.random(1, totalWeight)
+    local randomRoll  = math.randomInt(1, totalWeight)
     local chosenEntry = 0
     local weight      = 0
     for i = 1, #actionList do

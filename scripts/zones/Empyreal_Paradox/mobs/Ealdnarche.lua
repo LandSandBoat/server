@@ -37,7 +37,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.VORTEX_1,
     }
 
-    return spellList[math.random(1, #spellList)]
+    return spellList[math.randomInt(1, #spellList)]
 end
 
 entity.onMobSpellChoose = function(mob, target)

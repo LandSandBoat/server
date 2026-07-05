@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    local rand = math.random(1, 2)
+    local rand = math.randomInt(1, 2)
 
     if rand == 1 then
         player:startEvent(441) -- Standard Conversation 1

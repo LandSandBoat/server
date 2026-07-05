@@ -26,7 +26,7 @@ entity.onMobEngage = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.MP_DRAIN, { chance = 255, power = math.random(25, 38) })
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.MP_DRAIN, { chance = 255, power = math.randomInt(25, 38) })
 end
 
 return entity

@@ -48,7 +48,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(268)
     else
     --Standard dialogs
-        local rand = math.random(1, 3)
+        local rand = math.randomInt(1, 3)
         if rand == 1 then  -- STANDARD CONVO: sings song about ingredients
             player:startEvent(249)
         elseif rand == 2 then   -- STANDARD CONVO 2: sings song about ingredients

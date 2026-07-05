@@ -198,23 +198,23 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         end,
 
         [24] = function()
-            player:startOptionalCutscene(4 + math.random(0, 1), { cs_option = 0, canSkip = true })
+            player:startOptionalCutscene(4 + math.randomInt(0, 1), { cs_option = 0, canSkip = true })
         end,
 
         [25] = function()
-            player:startOptionalCutscene(11 + math.random(0, 1), { cs_option = 0, canSkip = true })
+            player:startOptionalCutscene(11 + math.randomInt(0, 1), { cs_option = 0, canSkip = true })
         end,
 
         [26] = function()
-            player:startOptionalCutscene(18 + math.random(0, 1), { cs_option = 0, canSkip = true })
+            player:startOptionalCutscene(18 + math.randomInt(0, 1), { cs_option = 0, canSkip = true })
         end,
 
         [27] = function()
-            player:startOptionalCutscene(25 + math.random(0, 1), { cs_option = 0, canSkip = true })
+            player:startOptionalCutscene(25 + math.randomInt(0, 1), { cs_option = 0, canSkip = true })
         end,
 
         [28] = function()
-            player:startOptionalCutscene(32 + math.random(0, 1), { cs_option = 0, canSkip = true })
+            player:startOptionalCutscene(32 + math.randomInt(0, 1), { cs_option = 0, canSkip = true })
         end,
 
         [29] = function()

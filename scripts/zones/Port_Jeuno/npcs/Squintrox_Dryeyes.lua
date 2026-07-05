@@ -427,7 +427,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
             local entry = menuMetadata[1][xi.ki.MOOGLE_KEY]
             local asaKit = player:getCharVar(entry.reqItemCharVar)
             if asaKit == 0 then
-                asaKit = entry.reqItems[math.random(1, #entry.reqItems)]
+                asaKit = entry.reqItems[math.randomInt(1, #entry.reqItems)]
                 player:setCharVar(entry.reqItemCharVar, asaKit)
             end
 

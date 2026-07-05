@@ -34,7 +34,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar('godSpawnTime', GetSystemTime() + math.random(180, 300)) -- 3-5 minutes
+    mob:setLocalVar('godSpawnTime', GetSystemTime() + math.randomInt(180, 300)) -- 3-5 minutes
 
     -- Wait 5 seconds after spawn to cast
     mob:setMagicCastingEnabled(false)
@@ -63,7 +63,7 @@ entity.onMobFight = function(mob, target)
 
         -- Spawn one random god if any are available
         if #availableGods > 0 then
-            local selectedGod = availableGods[math.random(1, #availableGods)]
+            local selectedGod = availableGods[math.randomInt(1, #availableGods)]
 
             -- Use callPets to spawn exactly one god
             if xi.mob.callPets(mob, selectedGod, callPetParams) then
@@ -78,7 +78,7 @@ entity.onMobFight = function(mob, target)
                 mob:setLocalVar('numAdds', numAdds + 1)
 
                 -- Set next god spawn time (3-5 minutes later)
-                mob:setLocalVar('godSpawnTime', GetSystemTime() + math.random(180, 300))
+                mob:setLocalVar('godSpawnTime', GetSystemTime() + math.randomInt(180, 300))
             end
         end
     end

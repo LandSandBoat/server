@@ -13,7 +13,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local dispelCount = math.random(1, 3)
+    local dispelCount = math.randomInt(1, 3)
     local successfulDispels = 0
 
     for i = 1, dispelCount do

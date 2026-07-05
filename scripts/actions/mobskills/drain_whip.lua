@@ -13,7 +13,7 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    local drainType = math.random(xi.mobskills.drainType.HP, xi.mobskills.drainType.TP)
+    local drainType = math.randomInt(xi.mobskills.drainType.HP, xi.mobskills.drainType.TP)
 
     -- TODO: Is this magical or physical? Need captures
     -- TODO: Are the fTPs the same for each drain type?

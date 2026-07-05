@@ -34,7 +34,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.EVA, math.floor(mob:getEVA() * 0.275)) -- +27.5% EVA
     mob:setMobMod(xi.mobMod.HP_STANDBACK, -1)
 
-    xi.mix.jobSpecial.config(mob, { specials = { { id = xi.mobSkill.MANAFONT_1, cooldown = math.random(60, 240) } } })
+    xi.mix.jobSpecial.config(mob, { specials = { { id = xi.mobSkill.MANAFONT_1, cooldown = math.randomInt(60, 240) } } })
 end
 
 entity.onMobFight = function(mob)
@@ -64,7 +64,7 @@ end
 
 entity.onMobDespawn = function(mob)
     -- Move QM to random location
-    GetNPCByID(ID.npc.QM_JAILER_OF_FAITH):setPos(unpack(gardenGlobal.qmPosFaithTable[math.random(1, 5)]))
+    GetNPCByID(ID.npc.QM_JAILER_OF_FAITH):setPos(unpack(gardenGlobal.qmPosFaithTable[math.randomInt(1, 5)]))
 end
 
 return entity

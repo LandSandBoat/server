@@ -78,7 +78,7 @@ end
 entity.onMobEngage = function(mob, target)
     local currentTime = GetSystemTime()
     mob:messageText(mob, ID.text.HO_HO) -- Ho-Ho, ho-ho! Time for goodebyongo!
-    mob:setLocalVar('marionetteDiceTime', currentTime + math.random(10, 15))
+    mob:setLocalVar('marionetteDiceTime', currentTime + math.randomInt(10, 15))
 end
 
 entity.onMobFight = function(mob, target)
@@ -96,7 +96,7 @@ entity.onMobFight = function(mob, target)
             return
         end
 
-        local randomRoll = possibleRolls[math.random(1, #possibleRolls)]
+        local randomRoll = possibleRolls[math.randomInt(1, #possibleRolls)]
         if randomRoll >= 7 then
             local fantoccini = GetMobByID(mob:getID() + 2)
             if fantoccini and fantoccini:isAlive() then
@@ -106,7 +106,7 @@ entity.onMobFight = function(mob, target)
             mob:useMobAbility(marionetteDice[randomRoll], target, 0, true)
         end
 
-        mob:setLocalVar('marionetteDiceTime', currentTime + math.random(25, 30))
+        mob:setLocalVar('marionetteDiceTime', currentTime + math.randomInt(25, 30))
     end
 
     if mob:getLocalVar('moblinAttacked') == 1 then

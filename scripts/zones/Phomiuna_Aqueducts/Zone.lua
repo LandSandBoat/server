@@ -14,12 +14,12 @@ zoneObject.onInitialize = function(zone)
     local eba     = GetMobByID(ID.mob.EBA)
 
     if mahisha and eba then
-        if math.random(1, 100) <= 50 then
+        if math.randomInt(1, 100) <= 50 then
             DisallowRespawn(eba:getID(), true)
-            mahisha:setRespawnTime(math.random(28800, 43200)) -- 8 to 12 hours
+            mahisha:setRespawnTime(math.randomInt(28800, 43200)) -- 8 to 12 hours
         else
             DisallowRespawn(mahisha:getID(), true)
-            eba:setRespawnTime(math.random(28800, 43200)) -- 8 to 12 hours
+            eba:setRespawnTime(math.randomInt(28800, 43200)) -- 8 to 12 hours
         end
     end
 end

@@ -94,7 +94,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     -- High chance to use Chains move
     -- Determine which Chains based on initiator race
     local initRace = battlefield:getLocalVar('initRace')
-    if math.random(1, 100) <= 50 then
+    if math.randomInt(1, 100) <= 50 then
         return raceToChains[initRace].skill
     end
 
@@ -107,7 +107,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     }
 
     -- Otherwise choose from TP moves
-    return tpList[math.random(#tpList)]
+    return tpList[math.randomInt(1, #tpList)]
 end
 
 entity.onMobWeaponSkill = function(mob, target, skill, action)

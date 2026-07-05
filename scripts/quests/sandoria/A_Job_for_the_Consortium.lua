@@ -29,7 +29,7 @@ local checkSmuggle = function()
     if
         hour > 5 and
         hour < 18 and
-        math.random(1, 100) <= 25
+        math.randomInt(1, 100) <= 25
     then
         caughtSmuggling = true
     end

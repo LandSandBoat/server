@@ -75,11 +75,11 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     end
 
     -- Below 20% HP: Malediction 75% of the time, his other TP moves 25% of the time
-    if math.random(1, 100) <= 75 then
+    if math.randomInt(1, 100) <= 75 then
         return xi.mobSkill.MALEDICTION
     end
 
-    return normalTpMoves[math.random(1, #normalTpMoves)]
+    return normalTpMoves[math.randomInt(1, #normalTpMoves)]
 end
 
 entity.onMobDeath = function(mob, player, optParams)

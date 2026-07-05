@@ -55,7 +55,7 @@ xi.path =
         end
 
         if #validPoints > 0 then
-            local target = points[validPoints[math.random(1, #validPoints)]]
+            local target = points[validPoints[math.randomInt(1, #validPoints)]]
             mob:pathThrough({ target.x, target.y, target.z })
         end
     end

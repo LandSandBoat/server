@@ -29,7 +29,7 @@ entity.onMobSpawn = function(mob)
 
     -- Sky gods wait 10 seconds after spawning to start casting
     mob:setMagicCastingEnabled(false)
-    mob:timer(math.random(5000, 10000), function(mobArg)
+    mob:timer(math.randomInt(5000, 10000), function(mobArg)
         if mobArg then
             mobArg:setMagicCastingEnabled(true)
         end

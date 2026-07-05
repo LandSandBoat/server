@@ -14,7 +14,7 @@ zoneObject.onInitialize = function(zone)
 
     -- Move Curtana to random position on zone load
     if curtanaQm then
-        curtanaQm:setPos(unpack(ID.positions.curtana[math.random(1, #ID.positions.curtana)]))
+        curtanaQm:setPos(unpack(ID.positions.curtana[math.randomInt(1, #ID.positions.curtana)]))
     end
 end
 

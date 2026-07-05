@@ -80,7 +80,7 @@ entity.onTrade = function(player, npc, trade)
             maxRoll = 20 -- TODO confirm this value via a lot of data
         end
 
-        local diceRoll = math.random(2, maxRoll)
+        local diceRoll = math.randomInt(2, maxRoll)
         player:tradeComplete() -- Completing trade here prevents exploiting this system
         player:startEvent(55, tradeGil, maxToWin, diceRoll, mineShaftWarpCost)
 

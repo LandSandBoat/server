@@ -110,7 +110,7 @@ local function calculateVivaciousPulseHealing(target)
     end
 
     if debuffCount > 0 and target:getMod(xi.mod.AUGMENTS_VIVACIOUS_PULSE) > 0 then -- add random removal of Poison, Paralyze, Blind, Silence, Mute, Curse, Bane, Doom, Virus, Plague, Petrification via AF3 head (source: https://www.bg-wiki.com/ffxi/Erilaz_Galea)
-        target:delStatusEffect(debuffs[math.random(1, debuffCount)])
+        target:delStatusEffect(debuffs[math.randomInt(1, debuffCount)])
     end
 
     hpHealAmount = hpHealAmount * bonusPct

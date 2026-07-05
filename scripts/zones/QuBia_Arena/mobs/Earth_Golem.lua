@@ -32,7 +32,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         [mob:getID() - 1] = { crystalWeapon = xi.mobSkill.CRYSTAL_WEAPON_WIND_1,  elementalBreak = xi.mobSkill.THUNDER_BREAK_1 }, -- Wind Golem
     }
 
-    local chosenSkill = skillList[math.random(1, #skillList)]
+    local chosenSkill = skillList[math.randomInt(1, #skillList)]
 
     for golemID, mimicSkills in pairs(mimicTable) do
         local golem = GetMobByID(golemID)

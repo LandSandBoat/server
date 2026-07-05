@@ -17,7 +17,7 @@ local function enterShell(mob)
     mob:setMod(xi.mod.UDMGMAGIC, -7500)
     mob:setMod(xi.mod.UDMGBREATH, -7500)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-    mob:setLocalVar('shellExitTime', GetSystemTime() + math.random(50, 70))
+    mob:setLocalVar('shellExitTime', GetSystemTime() + math.randomInt(50, 70))
     mob:useMobAbility(xi.mobSkill.VENOM_SHELL_1)
 end
 
@@ -123,7 +123,7 @@ entity.onMobFight = function(mob)
         mob:getLocalVar('nextPetTime') == 0 and
         phase == 1
     then
-        mob:setLocalVar('nextPetTime', currentTime + math.random(petSpawnTable[1].minDelay, petSpawnTable[1].maxDelay))
+        mob:setLocalVar('nextPetTime', currentTime + math.randomInt(petSpawnTable[1].minDelay, petSpawnTable[1].maxDelay))
         return
     end
 
@@ -147,7 +147,7 @@ entity.onMobFight = function(mob)
             mob:setLocalVar('petPhase', phase)
 
             if petSpawnTable[phase] then
-                mob:setLocalVar('nextPetTime', currentTime + math.random(petSpawnTable[phase].minDelay, petSpawnTable[phase].maxDelay))
+                mob:setLocalVar('nextPetTime', currentTime + math.randomInt(petSpawnTable[phase].minDelay, petSpawnTable[phase].maxDelay))
             end
         end
     end
@@ -169,7 +169,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.SUCTORIAL_TENTACLE_1,
     }
 
-    return skillList[math.random(1, #skillList)]
+    return skillList[math.randomInt(1, #skillList)]
 end
 
 return entity

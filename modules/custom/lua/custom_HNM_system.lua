@@ -35,7 +35,7 @@ hnmSystem:addOverride('xi.zones.Dragons_Aery.Zone.onInitialize', function(zone)
 
     -- First-time setup.
     if hnmPopTime == 0 then
-        hnmPopTime = currentTime + math.random(1, 48) * 1800
+        hnmPopTime = currentTime + math.randomInt(1, 48) * 1800
 
         SetServerVariable('[HNM]Fafnir', hnmPopTime) -- Save pop time.
     end
@@ -54,7 +54,7 @@ hnmSystem:addOverride('xi.zones.Dragons_Aery.mobs.Fafnir.onMobDespawn', function
     super(mob)
 
     -- Server Variable work.
-    local randomPopTime = 75600 + math.random(0, 6) * 1800
+    local randomPopTime = 75600 + math.randomInt(0, 6) * 1800
 
     SetServerVariable('[HNM]Fafnir', GetSystemTime() + randomPopTime) -- Save next pop time.
 
@@ -85,7 +85,7 @@ hnmSystem:addOverride('xi.zones.Valley_of_Sorrows.Zone.onInitialize', function(z
 
     -- First-time setup.
     if hnmPopTime == 0 then
-        hnmPopTime = currentTime + math.random(1, 48) * 1800
+        hnmPopTime = currentTime + math.randomInt(1, 48) * 1800
 
         SetServerVariable('[HNM]Adamantoise', hnmPopTime) -- Save pop time.
     end
@@ -104,7 +104,7 @@ hnmSystem:addOverride('xi.zones.Valley_of_Sorrows.mobs.Adamantoise.onMobDespawn'
     super(mob)
 
     -- Server Variable work.
-    local randomPopTime = 75600 + math.random(0, 6) * 1800
+    local randomPopTime = 75600 + math.randomInt(0, 6) * 1800
 
     SetServerVariable('[HNM]Adamantoise', GetSystemTime() + randomPopTime) -- Save next pop time.
 
@@ -135,7 +135,7 @@ hnmSystem:addOverride('xi.zones.Behemoths_Dominion.Zone.onInitialize', function(
 
     -- First-time setup.
     if hnmPopTime == 0 then
-        hnmPopTime = currentTime + math.random(1, 48) * 1800
+        hnmPopTime = currentTime + math.randomInt(1, 48) * 1800
 
         SetServerVariable('[HNM]Behemoth', hnmPopTime) -- Save pop time.
     end
@@ -154,7 +154,7 @@ hnmSystem:addOverride('xi.zones.Behemoths_Dominion.mobs.Behemoth.onMobDespawn', 
     super(mob)
 
     -- Server Variable work.
-    local randomPopTime = 75600 + math.random(0, 6) * 1800
+    local randomPopTime = 75600 + math.randomInt(0, 6) * 1800
 
     SetServerVariable('[HNM]Behemoth', GetSystemTime() + randomPopTime) -- Save next pop time.
 

@@ -91,7 +91,7 @@ end
 
 local function searchEmptyPos(zoneId)
     local maxPos     = #xi.voidwalker.pos[zoneId]
-    local pos        = math.random(1, maxPos)
+    local pos        = math.randomInt(1, maxPos)
     local currentPos = xi.voidwalker.pos[zoneId][pos]
 
     if currentPos.mobId == nil then
@@ -200,7 +200,7 @@ local function checkUpgrade(player, mob, nextKeyItem)
     then
         local zoneTextTable  = zones[mob:getZoneID()].text
         local currentKeyItem = mob:getLocalVar('[VoidWalker]PopedWith')
-        local rand           = math.random(1, 10)
+        local rand           = math.randomInt(1, 10)
 
         if rand == 5 then
             if player:hasKeyItem(currentKeyItem) then
@@ -308,7 +308,7 @@ end
 
 local function randomly(mob, chance, between, effect, skill)
     if
-        math.random(0, 100) <= chance and
+        math.randomInt(0, 100) <= chance and
         not mob:hasStatusEffect(effect) and
         GetSystemTime() > (mob:getLocalVar('MOBSKILL_TIME') + between)
     then

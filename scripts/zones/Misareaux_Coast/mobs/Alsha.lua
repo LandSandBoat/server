@@ -29,7 +29,7 @@ entity.onMobSpawn = function(mob)
 
     mob:setLocalVar('FinalPhase', 0)
     mob:setLocalVar('CuresCasted', 0)
-    mob:setLocalVar('CureTime', GetSystemTime() + math.random(45, 90))
+    mob:setLocalVar('CureTime', GetSystemTime() + math.randomInt(45, 90))
 end
 
 entity.onMobFight = function(mob, target)
@@ -65,7 +65,7 @@ entity.onMobFight = function(mob, target)
     -- Regular behavior: Occasionally cast Cure III on oponent.
     if isCureTime then
         mob:messageText(mob, ID.text.DROP_OF_OIL, false)
-        mob:setLocalVar('CureTime', GetSystemTime() + math.random(30, 90))
+        mob:setLocalVar('CureTime', GetSystemTime() + math.randomInt(30, 90))
         mob:setLocalVar('CuresCasted', curesCasted + 1)
         mob:castSpell(xi.magic.spell.CURE_III, target)
     end
@@ -81,7 +81,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.TRUE_STRIKE_1,
     }
 
-    return tpTable[math.random(1, #tpTable)]
+    return tpTable[math.randomInt(1, #tpTable)]
 end
 
 entity.onMobSpellChoose = function(mob, target, spellId)

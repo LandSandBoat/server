@@ -103,7 +103,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 28 and option == 0 then
-        local rand = math.random(1, 4)
+        local rand = math.randomInt(1, 4)
         local card = xi.item.TARUT_CARD_THE_FOOL
 
         if rand == 1 then
@@ -142,7 +142,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         (csid == 10110 or csid == 10112 or csid == 10113) and
         option == 0
     then -- ALL_IN_THE_CARDS started, repeated, or additional cards given
-        local rand = math.random(1, 4)
+        local rand = math.randomInt(1, 4)
         local card = xi.item.TARUT_CARD_THE_FOOL
 
         if rand == 1 then

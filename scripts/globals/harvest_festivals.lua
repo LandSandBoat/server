@@ -66,7 +66,7 @@ local function halloweenItemsCheck(player)
     local cnt = #rewardList
 
     while cnt ~= 0 do
-        local picked = rewardList[math.random(1, #rewardList)]
+        local picked = rewardList[math.randomInt(1, #rewardList)]
         if not player:hasItem(picked) then
             reward = picked
             cnt = 0
@@ -161,7 +161,7 @@ xi.events.harvestFestival.onHalloweenTrade = function(player, trade, npc)
                 if
                     itemReward ~= 0 and
                     player:getFreeSlotsCount() >= 1 and
-                    math.random(1, 3) < 2
+                    math.randomInt(1, 3) < 2
                 then
                     -- Math.random added so you have 33% chance on getting item
 
@@ -183,18 +183,18 @@ xi.events.harvestFestival.onHalloweenTrade = function(player, trade, npc)
                 -- 564/579 skele
 
                     -- Possible costume values:
-                    local yagudo = math.random(580, 607)
-                    local quadav = math.random(644, 671)
-                    local shade = math.random(535, 538)
-                    local orc = math.random(612, 639)
+                    local yagudo = math.randomInt(580, 607)
+                    local quadav = math.randomInt(644, 671)
+                    local shade = math.randomInt(535, 538)
+                    local orc = math.randomInt(612, 639)
                     local ghost = 368
                     local hound = 365
                     local skeleton = 564
-                    local darkStalker = math.random(531, 534)
+                    local darkStalker = math.randomInt(531, 534)
 
                     local halloweenCostumeList = { quadav, orc, yagudo, shade, ghost, hound, skeleton, darkStalker }
 
-                    local costumePicked = halloweenCostumeList[math.random(1, #halloweenCostumeList)] -- will randomly pick one of the costumes in the list
+                    local costumePicked = halloweenCostumeList[math.randomInt(1, #halloweenCostumeList)] -- will randomly pick one of the costumes in the list
                     player:addStatusEffect(xi.effect.COSTUME, { power = costumePicked, duration = 3600, origin = player })
 
                     -- pitchForkCostumeList defines the special costumes per zone that can trigger the pitch fork requirement

@@ -89,7 +89,7 @@ hnmSystem:addOverride('xi.zones.Dragons_Aery.Zone.onInitialize', function(zone)
 
     -- First-time setup.
     if hnmPopTime == 0 then
-        hnmPopTime = currentTime + math.random(1, 48) * 1800
+        hnmPopTime = currentTime + math.randomInt(1, 48) * 1800
 
         SetServerVariable('[HNM]Fafnir', hnmPopTime) -- Save pop time.
     end
@@ -99,7 +99,7 @@ hnmSystem:addOverride('xi.zones.Dragons_Aery.Zone.onInitialize', function(zone)
 
     if
         hnmKillCount > 3 and
-        (math.random(1, 5) == 3 or hnmKillCount > 6)
+        (math.randomInt(1, 5) == 3 or hnmKillCount > 6)
     then
         monster = dragonsAeryID.mob.NIDHOGG
     end
@@ -122,7 +122,7 @@ hnmSystem:addOverride('xi.zones.Dragons_Aery.mobs.Fafnir.onMobDespawn', function
     super(mob)
 
     -- Server Variable work.
-    local randomPopTime = 75600 + math.random(0, 6) * 1800
+    local randomPopTime = 75600 + math.randomInt(0, 6) * 1800
     local hnmKillCount  = GetServerVariable('[HNM]Fafnir_C') + 1
 
     SetServerVariable('[HNM]Fafnir', GetSystemTime() + randomPopTime) -- Save next pop time.
@@ -133,7 +133,7 @@ hnmSystem:addOverride('xi.zones.Dragons_Aery.mobs.Fafnir.onMobDespawn', function
 
     if
         hnmKillCount > 3 and
-        (math.random(1, 5) == 3 or hnmKillCount > 6)
+        (math.randomInt(1, 5) == 3 or hnmKillCount > 6)
     then
         monster = dragonsAeryID.mob.NIDHOGG
     end
@@ -146,7 +146,7 @@ hnmSystem:addOverride('xi.zones.Dragons_Aery.mobs.Nidhogg.onMobDespawn', functio
     super(mob)
 
     -- Server Variable work.
-    local randomPopTime = 75600 + math.random(0, 6) * 1800
+    local randomPopTime = 75600 + math.randomInt(0, 6) * 1800
 
     SetServerVariable('[HNM]Fafnir', GetSystemTime() + randomPopTime) -- Save next pop time.
     SetServerVariable('[HNM]Fafnir_C', 0)                       -- Save kill count.
@@ -222,7 +222,7 @@ hnmSystem:addOverride('xi.zones.Valley_of_Sorrows.Zone.onInitialize', function(z
 
     -- First-time setup.
     if hnmPopTime == 0 then
-        hnmPopTime = currentTime + math.random(1, 48) * 1800
+        hnmPopTime = currentTime + math.randomInt(1, 48) * 1800
 
         SetServerVariable('[HNM]Adamantoise', hnmPopTime) -- Save pop time.
     end
@@ -232,7 +232,7 @@ hnmSystem:addOverride('xi.zones.Valley_of_Sorrows.Zone.onInitialize', function(z
 
     if
         hnmKillCount > 3 and
-        (math.random(1, 5) == 3 or hnmKillCount > 6)
+        (math.randomInt(1, 5) == 3 or hnmKillCount > 6)
     then
         monster = valleySorrowsID.mob.ASPIDOCHELONE
     end
@@ -255,7 +255,7 @@ hnmSystem:addOverride('xi.zones.Valley_of_Sorrows.mobs.Adamantoise.onMobDespawn'
     super(mob)
 
     -- Server Variable work.
-    local randomPopTime = 75600 + math.random(0, 6) * 1800
+    local randomPopTime = 75600 + math.randomInt(0, 6) * 1800
     local hnmKillCount  = GetServerVariable('[HNM]Adamantoise_C') + 1
 
     SetServerVariable('[HNM]Adamantoise', GetSystemTime() + randomPopTime) -- Save next pop time.
@@ -266,7 +266,7 @@ hnmSystem:addOverride('xi.zones.Valley_of_Sorrows.mobs.Adamantoise.onMobDespawn'
 
     if
         hnmKillCount > 3 and
-        (math.random(1, 5) == 3 or hnmKillCount > 6)
+        (math.randomInt(1, 5) == 3 or hnmKillCount > 6)
     then
         monster = valleySorrowsID.mob.ASPIDOCHELONE
     end
@@ -279,7 +279,7 @@ hnmSystem:addOverride('xi.zones.Valley_of_Sorrows.mobs.Aspidochelone.onMobDespaw
     super(mob)
 
     -- Server Variable work.
-    local randomPopTime = 75600 + math.random(0, 6) * 1800
+    local randomPopTime = 75600 + math.randomInt(0, 6) * 1800
 
     SetServerVariable('[HNM]Adamantoise', GetSystemTime() + randomPopTime) -- Save next pop time.
     SetServerVariable('[HNM]Adamantoise_C', 0)                       -- Save kill count.
@@ -355,7 +355,7 @@ hnmSystem:addOverride('xi.zones.Behemoths_Dominion.Zone.onInitialize', function(
 
     -- First-time setup.
     if hnmPopTime == 0 then
-        hnmPopTime = currentTime + math.random(1, 48) * 1800
+        hnmPopTime = currentTime + math.randomInt(1, 48) * 1800
 
         SetServerVariable('[HNM]Behemoth', hnmPopTime) -- Save pop time.
     end
@@ -365,7 +365,7 @@ hnmSystem:addOverride('xi.zones.Behemoths_Dominion.Zone.onInitialize', function(
 
     if
         hnmKillCount > 3 and
-        (math.random(1, 5) == 3 or hnmKillCount > 6)
+        (math.randomInt(1, 5) == 3 or hnmKillCount > 6)
     then
         monster = behemothDomID.mob.KING_BEHEMOTH
     end
@@ -388,7 +388,7 @@ hnmSystem:addOverride('xi.zones.Behemoths_Dominion.mobs.Behemoth.onMobDespawn', 
     super(mob)
 
     -- Server Variable work.
-    local randomPopTime = 75600 + math.random(0, 6) * 1800
+    local randomPopTime = 75600 + math.randomInt(0, 6) * 1800
     local hnmKillCount  = GetServerVariable('[HNM]Behemoth_C') + 1
 
     SetServerVariable('[HNM]Behemoth', GetSystemTime() + randomPopTime) -- Save next pop time.
@@ -399,7 +399,7 @@ hnmSystem:addOverride('xi.zones.Behemoths_Dominion.mobs.Behemoth.onMobDespawn', 
 
     if
         hnmKillCount > 3 and
-        (math.random(1, 5) == 3 or hnmKillCount > 6)
+        (math.randomInt(1, 5) == 3 or hnmKillCount > 6)
     then
         monster = behemothDomID.mob.KING_BEHEMOTH
     end
@@ -412,7 +412,7 @@ hnmSystem:addOverride('xi.zones.Behemoths_Dominion.mobs.King_Behemoth.onMobDespa
     super(mob)
 
     -- Server Variable work.
-    local randomPopTime = 75600 + math.random(0, 6) * 1800
+    local randomPopTime = 75600 + math.randomInt(0, 6) * 1800
 
     SetServerVariable('[HNM]Behemoth', GetSystemTime() + randomPopTime) -- Save next pop time.
     SetServerVariable('[HNM]Behemoth_C', 0)                       -- Save kill count.

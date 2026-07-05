@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(641)                      -- WONDERING_MINSTREL: Quest After
     else
-        local rand = math.random(1, 2)
+        local rand = math.randomInt(1, 2)
         if rand == 1 then
             player:startEvent(612)                  -- Standard Conversation 1
         else

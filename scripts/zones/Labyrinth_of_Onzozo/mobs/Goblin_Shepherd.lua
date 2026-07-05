@@ -19,7 +19,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.SOULSTEALER_SKULLNIX, 5, math.random(7200, 10800)) -- 2 to 3 hours
+    xi.mob.phOnDespawn(mob, ID.mob.SOULSTEALER_SKULLNIX, 5, math.randomInt(7200, 10800)) -- 2 to 3 hours
 end
 
 return entity

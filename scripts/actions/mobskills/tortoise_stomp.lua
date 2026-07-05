@@ -28,7 +28,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
         -- TODO: Random, resisted, or scales with TP?
-        local duration = math.random(120, 180)
+        local duration = math.randomInt(120, 180)
         xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DEFENSE_DOWN, 25, 0, duration)
     end
 

@@ -58,8 +58,8 @@ xi.pyxis.goldChest.unlock = function(player, csid, option, npc)
                 player:messageSpecial(ID.text.GREATER_OR_LESS_THAN, inputnumber, 0, 0, 0) -- less
             end
 
-            local randtext = math.random(1, 5)
-            local randDigit = math.random(1, 2)
+            local randtext = math.randomInt(1, 5)
+            local randDigit = math.randomInt(1, 2)
 
             local digit = tonumber(splitnumbers[randDigit])
 
@@ -106,7 +106,7 @@ xi.pyxis.goldChest.unlock = function(player, csid, option, npc)
                         }
                     end
 
-                    local rand = math.random(1, #hints)
+                    local rand = math.randomInt(1, #hints)
 
                     local hintsRand = hints[rand]
 

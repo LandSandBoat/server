@@ -16,7 +16,7 @@ entity.spawnPoints =
 
 entity.onMobInitialize = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(3600, 5400)) -- 60-90 min repop
+    mob:setRespawnTime(math.randomInt(3600, 5400)) -- 60-90 min repop
 end
 
 entity.onMobDeath = function(mob, player, optParams)
@@ -25,7 +25,7 @@ end
 
 entity.onMobDespawn = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(3600, 5400)) -- 60-90 min repop
+    mob:setRespawnTime(math.randomInt(3600, 5400)) -- 60-90 min repop
 end
 
 return entity

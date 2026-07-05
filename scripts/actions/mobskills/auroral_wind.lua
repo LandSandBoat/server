@@ -14,7 +14,7 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    params.baseDamage     = mob:getMainLvl() * math.random(2, 3)
+    params.baseDamage     = mob:getMainLvl() * math.randomInt(2, 3)
     params.fTP            = { 1.0, 1.0, 1.0 }
     params.element        = xi.element.LIGHT
     params.attackType     = xi.attackType.MAGICAL

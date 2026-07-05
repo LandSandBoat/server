@@ -29,7 +29,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.REGEN, 50)
-    mob:setLocalVar('buffTimer', GetSystemTime() + math.random(30, 40))
+    mob:setLocalVar('buffTimer', GetSystemTime() + math.randomInt(30, 40))
 end
 
 entity.onMobFight = function(mob, target)
@@ -50,8 +50,8 @@ entity.onMobFight = function(mob, target)
     end
 
     if pathingToSpawn == 1 and not mob:isFollowingPath() then
-        local buffChoice = math.random(ID.text.KURREA_MUSCLES, ID.text.KURREA_GREEN)
-        local timer      = math.random(30, 40)
+        local buffChoice = math.randomInt(ID.text.KURREA_MUSCLES, ID.text.KURREA_GREEN)
+        local timer      = math.randomInt(30, 40)
         mob:setLocalVar('pathingToSpawn', 0)
         mob:setLocalVar('buffTimer', GetSystemTime() + timer)
         mob:setMobMod(xi.mobMod.NO_MOVE, 1)
@@ -89,7 +89,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
         xi.magic.spell.GRAVIGA,
         xi.magic.spell.SILENCEGA,
     }
-    return spellList[math.random(1, #spellList)]
+    return spellList[math.randomInt(1, #spellList)]
 end
 
 return entity

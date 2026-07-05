@@ -33,7 +33,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
         xi.magic.spell.POISONGA_II,
     }
 
-    return spellList[math.random(1, #spellList)]
+    return spellList[math.randomInt(1, #spellList)]
 end
 
 -- When Anansi dies, their eight sons spawn one at a time every 5 seconds after an initial 10 second delay. Anansis' body fades away after all sons have spawned.
@@ -60,7 +60,7 @@ entity.onMobDeath = function(mob, player, optParams)
                     if i == 1 then
                         son:setPos(posX, posY, posZ)
                     else
-                        son:setPos(posX + math.random(-1, 1) * 0.5, posY, posZ + math.random(-1, 1) * 0.5)
+                        son:setPos(posX + math.randomInt(-1, 1) * 0.5, posY, posZ + math.randomInt(-1, 1) * 0.5)
                     end
 
                     son:updateEnmity(player)

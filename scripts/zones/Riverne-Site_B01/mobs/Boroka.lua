@@ -42,7 +42,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.FANTOD_1,
     }
 
-    return tpList[math.random(1, #tpList)]
+    return tpList[math.randomInt(1, #tpList)]
 end
 
 entity.onMobSpellChoose = function(mob, target, spellId)
@@ -60,7 +60,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
         [10] = { xi.magic.spell.DEXTROUS_ETUDE,     5 },
     }
 
-    local roll = math.random(1, 100)
+    local roll = math.randomInt(1, 100)
     local sum  = 0
 
     for i = 1, #spellList do
@@ -83,7 +83,7 @@ entity.onMobDeath = function(mob, player, optParams)
         player:addTitle(xi.title.BOROKA_BELEAGUERER)
     end
 
-    mob:setRespawnTime(math.random(75600, 86400)) -- 21-24 hour respawn
+    mob:setRespawnTime(math.randomInt(75600, 86400)) -- 21-24 hour respawn
 end
 
 return entity

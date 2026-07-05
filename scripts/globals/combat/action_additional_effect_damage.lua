@@ -107,7 +107,7 @@ xi.combat.action.executeAddEffectDamage = function(actor, target, fedData)
     end
 
     -- Early return: No proc.
-    if math.random(1, 100) > params.chance then
+    if math.randomInt(1, 100) > params.chance then
         return 0, 0, 0
     end
 

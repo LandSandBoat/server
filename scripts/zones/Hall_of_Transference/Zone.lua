@@ -55,7 +55,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         [5] = function()
             if player:getCharVar('MeaChipRegistration') == 1 then
                 if
-                    math.random(1, 100) <= 95 or
+                    math.randomInt(1, 100) <= 95 or
                     player:getCharVar('LastSkyWarpMea') < GetSystemTime()
                 then
                     -- 5% Chance chip breaks
@@ -71,7 +71,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         [6] = function()
             if player:getCharVar('HollaChipRegistration') == 1 then
                 if
-                    math.random(1, 100) <= 95 or
+                    math.randomInt(1, 100) <= 95 or
                     player:getCharVar('LastSkyWarpHolla') < GetSystemTime()
                 then
                     -- 5% Chance chip breaks
@@ -87,7 +87,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         [7] = function()
             if player:getCharVar('DemChipRegistration') == 1 then
                 if
-                    math.random(1, 100) <= 95 or
+                    math.randomInt(1, 100) <= 95 or
                     player:getCharVar('LastSkyWarpDem') < GetSystemTime()
                 then
                     -- 5% Chance chip breaks

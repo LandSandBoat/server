@@ -231,12 +231,12 @@ xi.salvage.onTriggerCrate = function(player, npc)
         player:addTreasure(xi.item.DUPLICATUS_CELL, npc)
         player:addTreasure(xi.item.PRAECIPITATIO_CELL, npc)
         player:addTreasure(xi.item.OPACUS_CELL, npc)
-        player:addTreasure(firstRandom[math.random(#firstRandom)], npc)
-        player:addTreasure(firstRandom[math.random(#firstRandom)], npc)
-        player:addTreasure(secondRandom[math.random(#secondRandom)], npc)
-        player:addTreasure(secondRandom[math.random(#secondRandom)], npc)
+        player:addTreasure(firstRandom[math.randomInt(1, #firstRandom)], npc)
+        player:addTreasure(firstRandom[math.randomInt(1, #firstRandom)], npc)
+        player:addTreasure(secondRandom[math.randomInt(1, #secondRandom)], npc)
+        player:addTreasure(secondRandom[math.randomInt(1, #secondRandom)], npc)
 
-        if math.random(1, 2) == 1 then
+        if math.randomInt(1, 2) == 1 then
             player:addTreasure(xi.item.PRAECIPITATIO_CELL, npc)
         else
             player:addTreasure(xi.item.OPACUS_CELL, npc)
@@ -403,7 +403,7 @@ xi.salvage.spawnTempChest = function(mob, params)
     end
 
     if params.rate ~= 0 then
-        if params.rate < math.random(1, 1000) then
+        if params.rate < math.randomInt(1, 1000) then
             return
         end
     end
@@ -460,33 +460,33 @@ end
 xi.salvage.tempBoxPickItems = function(npc)
     local tempBoxItems =
     {
-        [1]  = { itemID = xi.item.BOTTLE_OF_BARBARIANS_DRINK, amount = math.random(1, 3) },
-        [2]  = { itemID = xi.item.BOTTLE_OF_FIGHTERS_DRINK,   amount = math.random(1, 3) },
-        [3]  = { itemID = xi.item.BOTTLE_OF_ORACLES_DRINK,    amount = math.random(1, 3) },
-        [4]  = { itemID = xi.item.BOTTLE_OF_ASSASSINS_DRINK,  amount = math.random(1, 3) },
-        [5]  = { itemID = xi.item.BOTTLE_OF_SPYS_DRINK,       amount = math.random(1, 3) },
-        [6]  = { itemID = xi.item.BOTTLE_OF_BRAVERS_DRINK,    amount = math.random(1, 3) },
-        [7]  = { itemID = xi.item.BOTTLE_OF_SOLDIERS_DRINK,   amount = math.random(1, 3) },
-        [8]  = { itemID = xi.item.BOTTLE_OF_CHAMPIONS_DRINK,  amount = math.random(1, 3) },
-        [9]  = { itemID = xi.item.BOTTLE_OF_MONARCHS_DRINK,   amount = math.random(1, 3) },
-        [10] = { itemID = xi.item.BOTTLE_OF_GNOSTICS_DRINK,   amount = math.random(1, 3) },
-        [11] = { itemID = xi.item.BOTTLE_OF_CLERICS_DRINK,    amount = math.random(1, 3) },
-        [12] = { itemID = xi.item.BOTTLE_OF_SHEPHERDS_DRINK,  amount = math.random(1, 3) },
-        [13] = { itemID = xi.item.BOTTLE_OF_SPRINTERS_DRINK,  amount = math.random(1, 3) },
-        [14] = { itemID = xi.item.FLASK_OF_STRANGE_MILK,      amount = math.random(1, 5) },
-        [15] = { itemID = xi.item.BOTTLE_OF_STRANGE_JUICE,    amount = math.random(1, 5) },
+        [1]  = { itemID = xi.item.BOTTLE_OF_BARBARIANS_DRINK, amount = math.randomInt(1, 3) },
+        [2]  = { itemID = xi.item.BOTTLE_OF_FIGHTERS_DRINK,   amount = math.randomInt(1, 3) },
+        [3]  = { itemID = xi.item.BOTTLE_OF_ORACLES_DRINK,    amount = math.randomInt(1, 3) },
+        [4]  = { itemID = xi.item.BOTTLE_OF_ASSASSINS_DRINK,  amount = math.randomInt(1, 3) },
+        [5]  = { itemID = xi.item.BOTTLE_OF_SPYS_DRINK,       amount = math.randomInt(1, 3) },
+        [6]  = { itemID = xi.item.BOTTLE_OF_BRAVERS_DRINK,    amount = math.randomInt(1, 3) },
+        [7]  = { itemID = xi.item.BOTTLE_OF_SOLDIERS_DRINK,   amount = math.randomInt(1, 3) },
+        [8]  = { itemID = xi.item.BOTTLE_OF_CHAMPIONS_DRINK,  amount = math.randomInt(1, 3) },
+        [9]  = { itemID = xi.item.BOTTLE_OF_MONARCHS_DRINK,   amount = math.randomInt(1, 3) },
+        [10] = { itemID = xi.item.BOTTLE_OF_GNOSTICS_DRINK,   amount = math.randomInt(1, 3) },
+        [11] = { itemID = xi.item.BOTTLE_OF_CLERICS_DRINK,    amount = math.randomInt(1, 3) },
+        [12] = { itemID = xi.item.BOTTLE_OF_SHEPHERDS_DRINK,  amount = math.randomInt(1, 3) },
+        [13] = { itemID = xi.item.BOTTLE_OF_SPRINTERS_DRINK,  amount = math.randomInt(1, 3) },
+        [14] = { itemID = xi.item.FLASK_OF_STRANGE_MILK,      amount = math.randomInt(1, 5) },
+        [15] = { itemID = xi.item.BOTTLE_OF_STRANGE_JUICE,    amount = math.randomInt(1, 5) },
         [16] = { itemID = xi.item.BOTTLE_OF_FANATICS_DRINK,   amount = 1 },
         [17] = { itemID = xi.item.BOTTLE_OF_FOOLS_DRINK,      amount = 1 },
         [18] = { itemID = xi.item.DUSTY_WING,                 amount = 1 },
-        [19] = { itemID = xi.item.BOTTLE_OF_VICARS_DRINK,     amount = math.random(1, 3) },
-        [20] = { itemID = xi.item.DUSTY_POTION,               amount = math.random(1, 10) },
-        [21] = { itemID = xi.item.DUSTY_ETHER,                amount = math.random(1, 10) },
+        [19] = { itemID = xi.item.BOTTLE_OF_VICARS_DRINK,     amount = math.randomInt(1, 3) },
+        [20] = { itemID = xi.item.DUSTY_POTION,               amount = math.randomInt(1, 10) },
+        [21] = { itemID = xi.item.DUSTY_ETHER,                amount = math.randomInt(1, 10) },
         [22] = { itemID = xi.item.DUSTY_ELIXIR,               amount = 1 }
     }
-    local chosen1      = math.random(1, #tempBoxItems)
+    local chosen1      = math.randomInt(1, #tempBoxItems)
     local item1        = tempBoxItems[chosen1]
-    local item2random = math.random(1, 10) > 4
-    local item3random = math.random(1, 10) > 8
+    local item2random = math.randomInt(1, 10) > 4
+    local item3random = math.randomInt(1, 10) > 8
 
     if npc:getLocalVar('itemID_1') == 0 then
         npc:setLocalVar('itemID_1', item1.itemID)
@@ -495,7 +495,7 @@ xi.salvage.tempBoxPickItems = function(npc)
     end
 
     if item2random then
-        local chosen2 = math.random(1, #tempBoxItems)
+        local chosen2 = math.randomInt(1, #tempBoxItems)
         local item2   = tempBoxItems[chosen2]
 
         npc:setLocalVar('itemID_2', item2.itemID)
@@ -504,7 +504,7 @@ xi.salvage.tempBoxPickItems = function(npc)
     end
 
     if item3random then
-        local chosen3 = math.random(1, #tempBoxItems)
+        local chosen3 = math.randomInt(1, #tempBoxItems)
         local item3   = tempBoxItems[chosen3]
 
         npc:setLocalVar('itemID_3', item3.itemID)

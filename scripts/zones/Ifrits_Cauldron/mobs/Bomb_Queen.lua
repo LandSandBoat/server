@@ -64,7 +64,7 @@ entity.onMobFight = function(mob, target)
         not xi.combat.behavior.isEntityBusy(mob) and
         GetSystemTime() >= mob:getLocalVar('spawn_time')
     then
-        mob:setLocalVar('spawn_time', GetSystemTime() + math.random(17, 30))
+        mob:setLocalVar('spawn_time', GetSystemTime() + math.randomInt(17, 30))
         mob:setMagicCastingEnabled(false)
 
         -- will call the first that is not spawned

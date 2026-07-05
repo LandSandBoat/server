@@ -14,7 +14,7 @@ entity.onMobDespawn = function(mob)
     end
 
     local slimeMob = GetMobByID(ID.mob.UNDEAD_SLIME, instance)
-    local randVal  = math.random(1, 5)
+    local randVal  = math.randomInt(1, 5)
 
     if
         randVal == 1 and

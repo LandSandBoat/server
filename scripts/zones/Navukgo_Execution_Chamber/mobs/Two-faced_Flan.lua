@@ -12,7 +12,7 @@ local function smooth(mob)
     mob:setMod(xi.mod.DMGPHYS, 0)
     mob:setMod(xi.mod.DELAYP, 0)
     mob:setMod(xi.mod.REGAIN, 0)
-    mob:setLocalVar('spikesTime', GetSystemTime() + math.random(20, 60))
+    mob:setLocalVar('spikesTime', GetSystemTime() + math.randomInt(20, 60))
 end
 
 local function spikes(mob)
@@ -22,7 +22,7 @@ local function spikes(mob)
     mob:setMod(xi.mod.DMGPHYS, -5000)
     mob:setMod(xi.mod.DELAYP, -50)
     mob:setMod(xi.mod.REGAIN, 200)
-    mob:setLocalVar('smoothTime', GetSystemTime() + math.random(20, 60))
+    mob:setLocalVar('smoothTime', GetSystemTime() + math.randomInt(20, 60))
 end
 
 entity.onMobInitialize = function(mob)
@@ -70,7 +70,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.BOILING_POINT
     }
 
-    return skillList[math.random(1, #skillList)]
+    return skillList[math.randomInt(1, #skillList)]
 end
 
 return entity

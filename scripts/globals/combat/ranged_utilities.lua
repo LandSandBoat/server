@@ -123,7 +123,7 @@ xi.combat.ranged.shouldUseAmmo = function(attacker)
             recycleChance = 100
         end
 
-        if math.random(1, 100) <= recycleChance then
+        if math.randomInt(1, 100) <= recycleChance then
             return false
         end
 

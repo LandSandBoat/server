@@ -126,7 +126,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.AQUA_BREATH_1,
     }
 
-    return skillList[math.random(1, #skillList)]
+    return skillList[math.randomInt(1, #skillList)]
 end
 
 entity.onMobSpellChoose = function(mob, target, spellId)

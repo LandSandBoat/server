@@ -41,7 +41,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
         local chance = 50 * power / utils.clamp(petskill:getTotalTargets(), 1, 50)
 
         if
-            math.random(1, 100) <= chance and
+            math.randomInt(1, 100) <= chance and
             target:getAnimation() ~= 33
         then
             petskill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)

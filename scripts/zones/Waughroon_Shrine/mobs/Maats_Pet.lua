@@ -78,7 +78,7 @@ local petTable =
 entity.onMobSpawn = function(mob)
     xi.combat.behavior.enableAllActions(mob)
 
-    local petChosen = math.random(1, #petTable)
+    local petChosen = math.randomInt(1, #petTable)
     local petInfo  = petTable[petChosen]
 
     mob:setModelId(petInfo.modelId)
@@ -95,7 +95,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         return
     end
 
-    return petInfo.skillList[math.random(1, #petInfo.skillList)]
+    return petInfo.skillList[math.randomInt(1, #petInfo.skillList)]
 end
 
 entity.onMobDeath = function(mob, player, optParams)

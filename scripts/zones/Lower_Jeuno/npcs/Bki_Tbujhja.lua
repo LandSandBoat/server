@@ -49,7 +49,7 @@ entity.onTrigger = function(player, npc)
         player:getCharVar('TheRequiemCS') == 3 and
         not player:hasKeyItem(xi.ki.STAR_RING1)
     then
-        if math.random(1, 100) <= 50 then
+        if math.randomInt(1, 100) <= 50 then
             player:startEvent(147) -- oh, did you take the holy water and play the requiem? you must do both!
         else
             player:startEvent(149) -- his stone sarcophagus is deep inside the eldieme necropolis.
@@ -80,7 +80,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 151 then
         player:setCharVar('TheRequiemCS', 3)
         player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.FLASK_OF_HOLY_WATER) -- Holy Water (just message)
-        player:setCharVar('TheRequiemRandom', math.random(1, 5)) -- pick a random sarcophagus
+        player:setCharVar('TheRequiemRandom', math.randomInt(1, 5)) -- pick a random sarcophagus
 
     elseif csid == 150 then
         if player:getFreeSlotsCount() == 0 then

@@ -128,7 +128,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar('[2hour]HPP', math.random(75, 85))
+    mob:setLocalVar('[2hour]HPP', math.randomInt(75, 85))
     mob:setLocalVar('[2hour]Used', 0)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
@@ -151,7 +151,7 @@ entity.onMobFight = function(mob, target)
         mob:setLocalVar('[2hour]Used', 1)
         mob:setMagicCastingEnabled(false)
         mob:useMobAbility(xi.mobSkill.BLOOD_WEAPON_1)
-        mob:setLocalVar('twoHourTime', currentTime + math.random(120, 180))
+        mob:setLocalVar('twoHourTime', currentTime + math.randomInt(120, 180))
         return
     end
 

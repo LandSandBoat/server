@@ -605,13 +605,13 @@ xi.abyssea.DropLights = function(killer, mobName, killType, mob)
     if amount == 0 then
         return
     elseif amount == 100 then
-        if math.random(1, 100) <= 20 then
-            amount = 16 * math.random(1, 4)
+        if math.randomInt(1, 100) <= 20 then
+            amount = 16 * math.randomInt(1, 4)
         else
-            amount = 16 * math.random(1, 2)
+            amount = 16 * math.randomInt(1, 2)
         end
     elseif amount == 50 then
-        amount = 16 * math.random(1, 2)
+        amount = 16 * math.randomInt(1, 2)
     end
 
     dropLight = lightTypes[killType].light
@@ -648,7 +648,7 @@ xi.abyssea.DropLights = function(killer, mobName, killType, mob)
         end
     end
 
-    local canDrop = math.random(1, 100)
+    local canDrop = math.randomInt(1, 100)
 
     if canDrop <= dropRate then
         for _, member in pairs(killer:getAlliance()) do

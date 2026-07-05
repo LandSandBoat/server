@@ -35,12 +35,12 @@ entity.onMobFight = function(mob, target)
     local battletime = mob:getBattleTime()
     local twohourTime = mob:getLocalVar('twohourTime')
 
-    if twohourTime == 0 and hpp <= math.random(93, 94) then
+    if twohourTime == 0 and hpp <= math.randomInt(93, 94) then
         mob:useMobAbility(xi.mobSkill.SUPER_BUFF)
-        mob:setLocalVar('twohourTime', battletime + math.random(31, 240))
+        mob:setLocalVar('twohourTime', battletime + math.randomInt(31, 240))
     elseif twohourTime > 0 and battletime >= twohourTime then
         mob:useMobAbility(xi.mobSkill.SUPER_BUFF)
-        mob:setLocalVar('twohourTime', battletime + math.random(31, 240))
+        mob:setLocalVar('twohourTime', battletime + math.randomInt(31, 240))
     end
 
     local drawInTable =

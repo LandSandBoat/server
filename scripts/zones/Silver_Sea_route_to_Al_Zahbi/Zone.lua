@@ -30,9 +30,9 @@ zoneObject.onZoneIn = function(player, prevZone)
     -- Check if Apkallu pops this boat ride.
     if
         currentTime > almightyapkallu:getLocalVar('respawn') and
-        math.random(1, 100) <= 20
+        math.randomInt(1, 100) <= 20
     then
-        almightyapkallu:setRespawnTime(math.random(120, 180)) -- 2 to 3 minutes
+        almightyapkallu:setRespawnTime(math.randomInt(120, 180)) -- 2 to 3 minutes
     end
 
     return cs

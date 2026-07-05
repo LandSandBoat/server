@@ -81,7 +81,7 @@ end
 local function handleBoomingBombination(mob)
     mob:setLocalVar('boomingCooldown', GetSystemTime() + 10)
 
-    if math.random(1, 100) <= 20 then
+    if math.randomInt(1, 100) <= 20 then
         for _, effect in ipairs({ xi.effect.SILENCE, xi.effect.AMNESIA, xi.effect.POISON }) do
             mob:addStatusEffect(effect, { power = 6, duration = 60, origin = mob, tick = 3, subType = effect, subPower = 50, tier = xi.auraTarget.ENEMIES, flag = xi.effectFlag.AURA })
         end

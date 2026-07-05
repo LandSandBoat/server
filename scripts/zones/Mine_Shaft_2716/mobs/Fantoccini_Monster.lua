@@ -64,7 +64,7 @@ local petTable =
 entity.onMobSpawn = function(mob)
     mob:setMagicCastingEnabled(false)
 
-    local petChosen = math.random(1, #petTable)
+    local petChosen = math.randomInt(1, #petTable)
     local petInfo  = petTable[petChosen]
 
     mob:setModelId(petInfo.modelId)
@@ -80,7 +80,7 @@ entity.onMobFight = function(mob, target)
 
     if mob:getLocalVar('jobAbilityUsed') == 1 then
         mob:setLocalVar('jobAbilityUsed', 0)
-        mob:useMobAbility(petInfo.skillList[math.random(1, #petInfo.skillList)])
+        mob:useMobAbility(petInfo.skillList[math.randomInt(1, #petInfo.skillList)])
     end
 end
 
@@ -91,7 +91,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         return 0
     end
 
-    return petInfo.skillList[math.random(1, #petInfo.skillList)]
+    return petInfo.skillList[math.randomInt(1, #petInfo.skillList)]
 end
 
 entity.onMobDeath = function(mob, player, optParams)

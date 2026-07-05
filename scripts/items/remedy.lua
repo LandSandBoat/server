@@ -26,7 +26,7 @@ itemObject.onItemUse = function(target)
         end
     end
 
-    local rDisease = math.random(1, 2) -- Disease is not guaranteed to be cured, 1 means removed 2 means fail. 50% chance
+    local rDisease = math.randomInt(1, 2) -- Disease is not guaranteed to be cured, 1 means removed 2 means fail. 50% chance
     if rDisease == 1 and target:hasStatusEffect(xi.effect.DISEASE) then
         target:delStatusEffect(xi.effect.DISEASE)
     end

@@ -49,7 +49,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     local pTable =
     {
         chance   = 25,
-        effectId = effectTable[math.random(1, #effectTable)],
+        effectId = effectTable[math.randomInt(1, #effectTable)],
         power    = 20,
         duration = 60,
     }

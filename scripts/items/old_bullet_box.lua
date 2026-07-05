@@ -11,7 +11,7 @@ itemObject.onItemCheck = function(target, item, caster)
 end
 
 itemObject.onItemUse = function(target)
-    npcUtil.giveItem(target, { { xi.item.ANTIQUE_BULLET, math.random(10, 20) } })
+    npcUtil.giveItem(target, { { xi.item.ANTIQUE_BULLET, math.randomInt(10, 20) } })
 end
 
 return itemObject

@@ -17,7 +17,7 @@ end
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
     mob:setLocalVar('changeTime', 150)
-    mob:setLocalVar('useWise', math.random(25, 50))
+    mob:setLocalVar('useWise', math.randomInt(25, 50))
     mob:addMod(xi.mod.UFASTCAST, 150)
 end
 

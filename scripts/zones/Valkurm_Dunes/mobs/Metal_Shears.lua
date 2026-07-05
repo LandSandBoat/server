@@ -19,11 +19,11 @@ entity.spawnPoints =
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(3600, 4200)) -- 60-70 min repop
+    mob:setRespawnTime(math.randomInt(3600, 4200)) -- 60-70 min repop
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.POISON, { power = 15, duration = math.random(10, 25) })
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.POISON, { power = 15, duration = math.randomInt(10, 25) })
 end
 
 entity.onMobDeath = function(mob, player, optParams)
@@ -32,7 +32,7 @@ end
 
 entity.onMobDespawn = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(3600, 4200)) -- 60-70 min repop
+    mob:setRespawnTime(math.randomInt(3600, 4200)) -- 60-70 min repop
 end
 
 return entity

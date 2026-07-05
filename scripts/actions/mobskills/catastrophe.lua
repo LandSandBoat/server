@@ -29,7 +29,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
         if not target:isUndead() then
-            local drain = math.floor(info.damage * math.random(30, 70) / 100)
+            local drain = math.floor(info.damage * math.randomInt(30, 70) / 100)
 
             mob:addHP(utils.clamp(drain, 0, targetHP))
         end

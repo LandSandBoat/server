@@ -87,7 +87,7 @@ mission.sections =
                     -- 3: Doll
 
                     if option == 19 then
-                        local randomChoice = math.random(1, 3)
+                        local randomChoice = math.randomInt(1, 3)
                         mission:setVar(player, 'Option', randomChoice)
                         player:updateEvent(0, 0, 0, 0, 0, 0, 0, randomChoice)
                     end

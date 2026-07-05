@@ -93,7 +93,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     local warriorsPathComplete = player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH) and 1 or 0
-                    local questItemSet = math.random(#questItemSets)
+                    local questItemSet = math.randomInt(1, #questItemSets)
                     quest:setVar(player, 'ItemSet', questItemSet)
                     return quest:progressEvent(10057, {
                         [0] = warriorsPathComplete,
@@ -202,7 +202,7 @@ quest.sections =
                         return quest:progressEvent(10060, { [0] = warriorsPathComplete })
                     else
                         -- Player has the quest active and needs the item list again
-                        questItemSet = math.random(#questItemSets)
+                        questItemSet = math.randomInt(1, #questItemSets)
                         quest:setVar(player, 'ItemSet', questItemSet)
                         return quest:progressEvent(10057, {
                             [0] = warriorsPathComplete,

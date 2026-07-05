@@ -26,7 +26,7 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
         mob:useMobAbility(644)
 
     elseif id == 627 then -- follow with random dragon skills, no known absorb
-            local choose = math.random(1, 7)
+            local choose = math.randomInt(1, 7)
 
             if choose == 1 then
                 mob:useMobAbility(645) -- Body Slam

@@ -267,21 +267,21 @@ xi.gobbieMysteryBox.onEventUpdate = function(player, csid, option, events)
                 end,  -- special dial
 
                 [9] = function() -- abjuration
-                    itemID = abjurationItems[math.random(1, #abjurationItems)]
+                    itemID = abjurationItems[math.randomInt(1, #abjurationItems)]
                     if player:hasItem(itemID) then
-                        itemID = gobbieJunk[math.random(1, #gobbieJunk)]
+                        itemID = gobbieJunk[math.randomInt(1, #gobbieJunk)]
                     end
                 end,
 
                 [10] = function()
-                    itemID = fortuneItems[math.random(1, #fortuneItems)]
+                    itemID = fortuneItems[math.randomInt(1, #fortuneItems)]
                 end, -- fortune
 
             --  [??] = function()  end, -- furnishing
 
                 [13] = function()-- anniversary
-                    if math.random(1, 100) == 1 then -- 1% chance for ANV exclusive item?
-                        itemID = anniversaryItems[math.random(1, #anniversaryItems)]
+                    if math.randomInt(1, 100) == 1 then -- 1% chance for ANV exclusive item?
+                        itemID = anniversaryItems[math.randomInt(1, #anniversaryItems)]
                     else
                         itemID = SelectDailyItem(player, 6)
                     end

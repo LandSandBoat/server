@@ -396,7 +396,7 @@ xi.spells.enhancing.calculateEnhancingDuration = function(caster, target, spell,
         spellEffect == xi.effect.INVISIBLE or
         spellEffect == xi.effect.SNEAK
     then
-        duration = duration + 60 * math.random(0, 2)
+        duration = duration + 60 * math.randomInt(0, 2)
     end
 
     --------------------

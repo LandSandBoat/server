@@ -8,7 +8,7 @@ g_mixins.families.orobon = function(orobonMob)
     orobonMob:addListener('CRITICAL_TAKE', 'OROBON_CRITICAL_TAKE', function(mob)
         if
             mob:getAnimationSub() == 0 and
-            math.random(1, 100) <= 10
+            math.randomInt(1, 100) <= 10
         then
             mob:setAnimationSub(1)
         end

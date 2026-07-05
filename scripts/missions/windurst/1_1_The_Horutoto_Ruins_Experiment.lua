@@ -209,7 +209,7 @@ mission.sections =
             {
                 [42] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 3)
-                    mission:setVar(player, 'RandomGizmo', math.random(1, 6))
+                    mission:setVar(player, 'RandomGizmo', math.randomInt(1, 6))
                 end,
             },
         },

@@ -20,16 +20,17 @@
 */
 
 //
-// Compile-time uniformity tests for the RNG. Everything here is
+// Compile-time uniformity and boundary tests for the RNG. Everything here is
 // consteval, so seeding, drawing, and histogramming happen entirely during
-// compilation: the static_asserts below fail the build if the spread is skewed.
-// This translation unit emits no runtime code; it is linked into xi_test purely
-// so the compiler evaluates the checks.
+// compilation: the static_asserts below fail the build if the spread is skewed
+// or an excluded interval endpoint leaks. This translation unit emits no runtime
+// code; it is linked into xi_test purely so the compiler evaluates the checks.
 //
 
 #include <common/rng/detail/bounded_int.h>
 #include <common/rng/detail/canonical_float.h>
 #include <common/rng/squirrel5.h>
+#include <test/tests/utils/saturated_engine.h>
 
 #include <array>
 #include <cstdint>
@@ -126,5 +127,33 @@ inline constexpr std::uint32_t kFloatSamples = 14000; // 10 buckets -> 1 sigma ~
 
 static_assert(spreadWithin<10, kIntSamples>(0xDEADBEEF, 90), "integer spread too skewed");           // within 9%
 static_assert(canonicalSpreadWithin<10, kFloatSamples>(0xDEADBEEF, 120), "float spread too skewed"); // within 12%
+
+//
+// Boundary tests: the half-open [min, max) contract must survive the worst draw.
+//
+
+[[nodiscard]] consteval auto worstCaseUnit() -> double
+{
+    SaturatedEngine g;
+    return detail::canonical53(g);
+}
+
+// The raw canonical double is strictly below 1...
+static_assert(worstCaseUnit() < 1.0, "canonical53 must stay below 1");
+
+// ...but narrowing it to float rounds up to exactly 1.0f. This is the hazard
+// scaleCanonical exists to absorb; if this assert ever fails, the guard in it
+// is dead code and can be removed.
+static_assert(static_cast<float>(worstCaseUnit()) == 1.0f, "float narrowing hazard no longer reproduces");
+
+// scaleCanonical must keep the excluded endpoint out at every representative shape:
+// unit range, scaled range, negative range, and the double path.
+static_assert(detail::scaleCanonical(worstCaseUnit(), 0.0f, 1.0f) < 1.0f, "float (0,1) leaked max");
+static_assert(detail::scaleCanonical(worstCaseUnit(), 0.0f, 100.0f) < 100.0f, "float (0,100) leaked max");
+static_assert(detail::scaleCanonical(worstCaseUnit(), -10.0f, -5.0f) < -5.0f, "float negative range leaked max");
+static_assert(detail::scaleCanonical(worstCaseUnit(), 0.0, 1.0) < 1.0, "double (0,1) leaked max");
+
+// The guard must not disturb the inclusive lower bound.
+static_assert(detail::scaleCanonical(0.0, 2.0f, 7.0f) == 2.0f, "min must remain inclusive");
 
 } // namespace xirand::test

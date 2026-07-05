@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onMobMobskillChoose = function(mob, target, skillId)
-    if math.random(1, 4) > 1 then
+    if math.randomInt(1, 4) > 1 then
         return 1957
     end
 end

@@ -111,8 +111,8 @@ local function chooseTeodorAction(player)
         local playerShotData = getShotHistory(player, 'playerShots')
         local teodorShotData = getShotHistory(player, 'teodorShots')
 
-        local playerCardSlot = math.random(1, #playerShotData)
-        local teodorCardSlot = math.random(1, #teodorShotData)
+        local playerCardSlot = math.randomInt(1, #playerShotData)
+        local teodorCardSlot = math.randomInt(1, #teodorShotData)
 
         teodorSpecial = bit.lshift(teodorShotData[teodorCardSlot], 5) + playerShotData[playerCardSlot]
 
@@ -123,12 +123,12 @@ local function chooseTeodorAction(player)
     elseif
         player:getLocalVar('turnNumber') > 1 and
         player:getLocalVar('teodorSpecial') == 0 and
-        math.random(1, 100) <= 20
+        math.randomInt(1, 100) <= 20
     then
         -- Crooked Die
         teodorAction = 4
-        local chosenSlot      = math.random(1, #getShotHistory(player, 'playerShots')) - 1
-        local newRollValue    = math.random(1, 6)
+        local chosenSlot      = math.randomInt(1, #getShotHistory(player, 'playerShots')) - 1
+        local newRollValue    = math.randomInt(1, 6)
 
         teodorSpecial         = bit.lshift(newRollValue, 5) + chosenSlot
 
@@ -136,14 +136,14 @@ local function chooseTeodorAction(player)
         player:setLocalVar('teodorSpecial', 1)
 
     elseif
-        math.random(1, 100) <= rollThreshold and
+        math.randomInt(1, 100) <= rollThreshold and
         player:getLocalVar('teodorStayed') == 0 and
         ((teodorScore > 0 and teodorScore <= 11) or
         player:getLocalVar('turnNumber') == 1)
     then
         -- Shoot
         teodorAction = 0
-        teodorShotValue = math.random(1, 6)
+        teodorShotValue = math.randomInt(1, 6)
         addShot(player, 'teodorShots', teodorShotValue)
 
     else
@@ -169,7 +169,7 @@ xi.soa.helpers.updateMinigameEvent = function(player, csid, option, npc)
 
     -- Shoot
     if option == 0 then
-        local playerShotValue = math.random(1, 6)
+        local playerShotValue = math.randomInt(1, 6)
         addShot(player, 'playerShots', playerShotValue)
 
         local teodorAction, teodorShotValue, teodorSpecial = chooseTeodorAction(player)
@@ -228,7 +228,7 @@ xi.soa.helpers.updateMinigameEvent = function(player, csid, option, npc)
     -- Crooked Die
     elseif bit.band(option, 0x7) == 4 then
         local chosenSlot   = bit.rshift(option, 7)
-        local newRollValue = math.random(1, 6)
+        local newRollValue = math.randomInt(1, 6)
         local rerollData   = bit.lshift(newRollValue, 5) + bit.lshift(chosenSlot, 1)
 
         replaceShot(player, 'teodorShots', newRollValue, chosenSlot + 1)

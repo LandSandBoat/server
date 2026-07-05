@@ -38,7 +38,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         table.insert(tpMoves, xi.mobSkill.SOUL_ACCRETION)
     end
 
-    return tpMoves[math.random(1, #tpMoves)]
+    return tpMoves[math.randomInt(1, #tpMoves)]
 end
 
 entity.onMobWeaponSkill = function(mob, target, skill, action)
@@ -62,7 +62,7 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setRespawnTime(math.random(75600, 86400)) -- 21 to 24 hr
+    mob:setRespawnTime(math.randomInt(75600, 86400)) -- 21 to 24 hr
 end
 
 return entity

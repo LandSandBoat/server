@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target, item, caster)
 end
 
 itemObject.onItemUse = function(target)
-    local hpHeal = math.random(50, 75)
+    local hpHeal = math.randomInt(50, 75)
     local dif = target:getMaxHP() - target:getHP()
     if hpHeal > dif then
         hpHeal = dif

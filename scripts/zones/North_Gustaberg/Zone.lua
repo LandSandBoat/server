@@ -14,7 +14,7 @@ zoneObject.onInitialize = function(zone)
 
     -- randomize Siren's Tear position
     if sirensTear then
-        sirensTear:setPos(unpack(ID.positions.sirensTear[math.random(1, #ID.positions.sirensTear)]))
+        sirensTear:setPos(unpack(ID.positions.sirensTear[math.randomInt(1, #ID.positions.sirensTear)]))
     end
 end
 

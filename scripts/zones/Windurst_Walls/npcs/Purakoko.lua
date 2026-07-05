@@ -20,7 +20,7 @@ entity.onSpawn = function(npc)
 end
 
 entity.onPathComplete = function(npc)
-    local index = math.random(1, #paths)
+    local index = math.randomInt(1, #paths)
     npc:pathThrough(paths[index], xi.path.flag.PATROL)
 end
 

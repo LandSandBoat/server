@@ -42,7 +42,7 @@ end
 entity.onMobWeaponSkill = function(mob, target, skill, action)
     if
         skill:getID() == xi.mobSkill.WATER_BOMB and
-        math.random(1, 100) <= 25
+        math.randomInt(1, 100) <= 25
     then
         local enmityList = mob:getEnmityList()
         for _, enmity in ipairs(enmityList) do

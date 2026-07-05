@@ -16,11 +16,11 @@ entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, { { 'gil', 5 } }) then
         player:confirmTrade()
 
-        local vdie1 = math.random(1, 6)
-        local vdie2 = math.random(1, 6)
+        local vdie1 = math.randomInt(1, 6)
+        local vdie2 = math.randomInt(1, 6)
         local vtotal = vdie1 + vdie2
-        local pdie1 = math.random(1, 6)
-        local pdie2 = math.random(1, 6)
+        local pdie1 = math.randomInt(1, 6)
+        local pdie2 = math.randomInt(1, 6)
         local ptotal = pdie1 + pdie2
 
         local result = gameLost

@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
         GetNPCByID(ID.npc.ALTEPA_GATE + 7):getAnimation() == xi.anim.OPEN_DOOR and
         GetNPCByID(ID.npc.ALTEPA_GATE + 8):getAnimation() == xi.anim.OPEN_DOOR
     then
-        local openTime = math.random(15, 30) * 1000 * 60
+        local openTime = math.randomInt(15, 30) * 1000 * 60
 
         for i = ID.npc.ALTEPA_GATE, ID.npc.ALTEPA_GATE + 8 do
             local door = GetNPCByID(i)

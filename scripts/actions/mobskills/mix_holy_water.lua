@@ -21,7 +21,10 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     for _, effect in pairs(statii) do
         lastEffect = effect
-        if target:hasStatusEffect(xi.effect.DOOM) and power > math.random(1, 100) then
+        if
+            target:hasStatusEffect(xi.effect.DOOM) and
+            power > math.randomInt(1, 100)
+        then
             target:delStatusEffect(xi.effect.DOOM)
             target:messageBasic(xi.msg.basic.NARROWLY_ESCAPE)
             skill:setMsg(xi.msg.basic.SKILL_ERASE)

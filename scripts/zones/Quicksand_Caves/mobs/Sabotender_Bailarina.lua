@@ -44,7 +44,7 @@ entity.onMobFight = function(mob, target)
     end
 
     if mob:getLocalVar('1000') == 3 then
-        local move = math.random(1, 2)
+        local move = math.randomInt(1, 2)
 
         if move == 1 and (currentTime >= 6 and currentTime <= 18) then -- photosynthesis during daytime only
             mob:useMobAbility(304)
@@ -54,7 +54,7 @@ entity.onMobFight = function(mob, target)
 
         mob:setLocalVar('1000', 2)
     elseif mob:getLocalVar('1000') == 2 then
-        local move = math.random(1, 2)
+        local move = math.randomInt(1, 2)
 
         if move == 1 and (currentTime >= 6 and currentTime <= 18) then
             mob:useMobAbility(304)
@@ -64,7 +64,7 @@ entity.onMobFight = function(mob, target)
 
         mob:setLocalVar('1000', 1)
     elseif mob:getLocalVar('1000') == 1 then
-        local move = math.random(1, 2)
+        local move = math.randomInt(1, 2)
 
         if move == 1 and (currentTime >= 6 and currentTime <= 18) then
             mob:useMobAbility(304)

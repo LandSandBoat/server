@@ -41,7 +41,7 @@ entity.onMobSpellChoose = function(mob, target, spell)
         xi.magic.spell.DISPEL,
     }
 
-    return spellList[math.random(1, #spellList)]
+    return spellList[math.randomInt(1, #spellList)]
 end
 
 return entity

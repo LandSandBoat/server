@@ -19,7 +19,7 @@ end
 
 local function deactivateBracelets(mob)
     local originalAcc = mob:getLocalVar('originalACC')
-    mob:setLocalVar('braceletTimer', GetSystemTime() + math.random(60, 80))
+    mob:setLocalVar('braceletTimer', GetSystemTime() + math.randomInt(60, 80))
     mob:setAnimationSub(5)
     mob:setMod(xi.mod.ACC, originalAcc)
     mob:setMod(xi.mod.ATTP, 0)
@@ -42,7 +42,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngage = function(mob, target)
-    mob:setLocalVar('braceletTimer', GetSystemTime() + math.random(60, 80))
+    mob:setLocalVar('braceletTimer', GetSystemTime() + math.randomInt(60, 80))
 end
 
 entity.onMobFight = function(mob, target)

@@ -66,7 +66,7 @@ xi.ally =
         local target
 
         if #targetMobs > 0 then
-            target = targetMobs[math.random(1, #targetMobs)]
+            target = targetMobs[math.randomInt(1, #targetMobs)]
         end
 
         if not target then

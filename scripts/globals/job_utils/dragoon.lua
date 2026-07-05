@@ -98,7 +98,7 @@ xi.job_utils.dragoon.cutEmpathyEffectTable = function(validEffects, i, maxCount)
     local delindex = 1
 
     while maxCount < i do
-        delindex = math.random(1, i)
+        delindex = math.randomInt(1, i)
 
         while validEffects[delindex + 1] ~= nil do
             validEffects[delindex] = validEffects[delindex + 1]
@@ -303,13 +303,13 @@ xi.job_utils.dragoon.checkForRemovableEffectsOnSpiritLink = function(player, wyv
         end
 
         if #validEffects > 0 then
-            local removeIndex = math.random(1, #validEffects)
+            local removeIndex = math.randomInt(1, #validEffects)
 
             wyvern:delStatusEffect(validEffects[removeIndex])
             table.remove(validEffects, removeIndex)
 
             if #validEffects > 0 then
-                wyvern:delStatusEffect(validEffects[math.random(1, #validEffects)])
+                wyvern:delStatusEffect(validEffects[math.randomInt(1, #validEffects)])
             end
         end
     end
@@ -374,7 +374,7 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability, action)
     local drainamount = 0
 
     if wyvern:getHP() ~= wyvern:getMaxHP() then
-        drainamount = (math.random(25, 35) / 100) * playerHP
+        drainamount = (math.randomInt(25, 35) / 100) * playerHP
         drainamount = drainamount * (1 - (0.01 * player:getJobPointLevel(xi.jp.SPIRIT_LINK_EFFECT)))
     end
 

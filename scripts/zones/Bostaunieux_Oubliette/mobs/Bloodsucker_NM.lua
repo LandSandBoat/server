@@ -70,7 +70,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.HP_DRAIN, { chance = 35, power = math.random(135) }) -- Power of 135 but should be subject to resist. Additional effects need further updates before this can happen.
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.HP_DRAIN, { chance = 35, power = math.randomInt(1, 135) }) -- Power of 135 but should be subject to resist. Additional effects need further updates before this can happen.
 end
 
 entity.onMobDeath = function(mob, player, optParams)

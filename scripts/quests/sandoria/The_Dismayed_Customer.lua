@@ -47,7 +47,7 @@ quest.sections =
                 [605] = function(player, csid, option, npc)
                     if option == 0 then
                         quest:begin(player)
-                        quest:setVar(player, 'Stage', math.random(1, 3))
+                        quest:setVar(player, 'Stage', math.randomInt(1, 3))
                     end
                 end,
             },

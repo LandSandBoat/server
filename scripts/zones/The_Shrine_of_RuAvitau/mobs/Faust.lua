@@ -11,7 +11,7 @@ local north = 192
 local home = { 740, -0.463, -99 }
 
 local setFaustNextTurnTime = function(faust)
-    faust:setLocalVar('NextTurnTime', GetSystemTime() + math.random(45, 75))
+    faust:setLocalVar('NextTurnTime', GetSystemTime() + math.randomInt(45, 75))
 end
 
 local faustNextTurnTime = function(faust)
@@ -90,7 +90,7 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setRespawnTime(math.random(10800, 21600)) -- respawn 3-6 hrs
+    mob:setRespawnTime(math.randomInt(10800, 21600)) -- respawn 3-6 hrs
 end
 
 return entity

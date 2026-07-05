@@ -115,7 +115,7 @@ local pathFind =
         local pathNodes = {}
         if reversePath == 0 or reversePath == 1 then
             mob:setLocalVar('mobPath', 2)
-            local reverseCheck = math.random(0, 2)
+            local reverseCheck = math.randomInt(0, 2)
             if reverseCheck == 0 then
                 mob:setLocalVar('reversePath', 0)
                 pathNodes = pathBranch1
@@ -153,7 +153,7 @@ local pathFind =
         if reversePath == 0 then
             mob:setLocalVar('mobPath', 5)
         else
-            local reverseCheck = math.random(0, 2)
+            local reverseCheck = math.randomInt(0, 2)
             if reverseCheck == 0 then
                 mob:setLocalVar('mobPath', 4)
                 mob:setLocalVar('reversePath', 0)
@@ -173,7 +173,7 @@ local pathFind =
         mob:setLocalVar('mobPath', 6)
 
         if reversePath == 0 then
-            local reverseCheck = math.random(0, 2)
+            local reverseCheck = math.randomInt(0, 2)
             if reverseCheck == 0 then
                 mob:setLocalVar('mobPath', 6)
                 mob:setLocalVar('reversePath', 0)
@@ -214,14 +214,14 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MAX, 12000)
 
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(900, 10800))
+    mob:setRespawnTime(math.randomInt(900, 10800))
 end
 
 entity.onMobSpawn = function(mob)
     -- Guivre will despawn if not claimed within 3-5 hours.
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 200)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 15)
-    mob:setLocalVar('despawnTime', math.random(10800, 18000) + GetSystemTime())
+    mob:setLocalVar('despawnTime', math.randomInt(10800, 18000) + GetSystemTime())
     mob:setLocalVar('isPaused', 0)
     mob:setLocalVar('mobPath', 1)
     mob:pathThrough(pathStart, xi.path.flag.COORDS)
@@ -252,12 +252,12 @@ entity.onPath = function(mob)
             local y = mob:getYPos()
             local z = mob:getZPos()
             local rotations = {}
-            local count = math.random(2, 6)
+            local count = math.randomInt(2, 6)
             for i = 0, count do
-                local wait = math.random(1500, 3000)
+                local wait = math.randomInt(1500, 3000)
                 rotations[i + 1] =
                 {
-                    x = x, y = y, z = z, rotation = math.random(0, 255), wait = wait
+                    x = x, y = y, z = z, rotation = math.randomInt(0, 255), wait = wait
                 }
             end
 
@@ -276,7 +276,7 @@ end
 
 entity.onMobDespawn = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(64800, 86400)) -- 18 to 24 hours
+    mob:setRespawnTime(math.randomInt(64800, 86400)) -- 18 to 24 hours
 end
 
 return entity

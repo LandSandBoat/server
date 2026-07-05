@@ -83,7 +83,7 @@ xi.geomanticReservoir.onTrigger = function(player, npc, geoSpell)
     -- TODO: According to BG-Wiki there is a sequence here that a player can proc '!!' and achieve a Geomancy skill-up.
     -- TODO: is there different messaging if you don't know the indi spell vs already having the geo spell?
     -- https://www.bg-wiki.com/ffxi/Geomantic_Reservoir
-    local procEffectTime = math.random(230, 300)
+    local procEffectTime = math.randomInt(230, 300)
     local indiSpell = indiSpellMap[geoSpell]
 
     if

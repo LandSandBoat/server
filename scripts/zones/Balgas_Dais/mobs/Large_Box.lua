@@ -71,7 +71,7 @@ entity.onMobEngage = function(mob, target)
     DespawnMob(boxId - 1) -- Medium Box
 
     -- Determine if this box is a winner
-    if math.random(1, 3) == 1 then
+    if math.randomInt(1, 3) == 1 then
         -- We won! Set to invisible and and kill the box, move Armoury Crate to Large Box position
         mob:setStatus(xi.status.INVISIBLE)
         mob:setHP(0)
@@ -80,7 +80,7 @@ entity.onMobEngage = function(mob, target)
     else
         -- We lost... Set animation sub to 1 (Mimic) and move Armoury Crate to Small or Medium Box position
         mob:setAnimationSub(1)
-        local pos = armouryCratePositions[area][math.random(1, 2)] -- Small (1) or Medium (2) position
+        local pos = armouryCratePositions[area][math.randomInt(1, 2)] -- Small (1) or Medium (2) position
         crate:setPos(pos[1], pos[2], pos[3], pos[4])
     end
 end

@@ -33,7 +33,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     -- Handle HP Drain
     if not target:isUndead() then
-        local drain = math.floor(damage * math.random(30, 70) / 100) -- TODO: JP Wiki States 50% Heal but all current proof i have shows 30-70%
+        local drain = math.floor(damage * math.randomInt(30, 70) / 100) -- TODO: JP Wiki States 50% Heal but all current proof i have shows 30-70%
 
         drain = utils.clamp(drain, 0, targetHP)
 

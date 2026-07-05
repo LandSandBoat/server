@@ -10,7 +10,7 @@ local entity = {}
 local function disturbMob(mob)
     local phIndex = mob:getLocalVar('phIndex')
     if phIndex > 0 then
-        mob:setLocalVar('timeToGrow', GetSystemTime() + math.random(86400, 259200)) -- 1 to 3 days
+        mob:setLocalVar('timeToGrow', GetSystemTime() + math.randomInt(86400, 259200)) -- 1 to 3 days
     end
 end
 

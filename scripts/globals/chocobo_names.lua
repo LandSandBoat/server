@@ -870,7 +870,7 @@ xi.chocoboNames.getRandomName = function()
     -- We have to do this nil-checking loop to account for the gaps in the list
     while name == nil do
         -- Pick a 5-8 letter name
-        name = xi.chocoboNames[math.random(168, 762)]
+        name = xi.chocoboNames[math.randomInt(168, 762)]
     end
 
     return name

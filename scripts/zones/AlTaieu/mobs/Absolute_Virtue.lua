@@ -131,10 +131,10 @@ local handleSP = function(mob)
     local now = GetSystemTime()
     if now > xi.av.nextsp then
         if xi.av.bracelets and #xi.av.braceletsps ~= 0 then
-            local trigger = xi.av.braceletsps[math.random(1, #xi.av.braceletsps)]
+            local trigger = xi.av.braceletsps[math.randomInt(1, #xi.av.braceletsps)]
             local combo = combos[trigger]
             if trigger == xi.mobSkill.CHAINSPELL_1 then
-                combo = combos[math.random(1, 2)]
+                combo = combos[math.randomInt(1, 2)]
             end
 
             for _, jsa in ipairs(combo) do
@@ -145,14 +145,14 @@ local handleSP = function(mob)
                 end
             end
         elseif #xi.av.sps ~= 0 then
-            local sp = xi.av.sps[math.random(1, #xi.av.sps)]
+            local sp = xi.av.sps[math.randomInt(1, #xi.av.sps)]
             mob:setLocalVar(string.format('sp_%u', sp), GetSystemTime())
             avdebug(string.format('%s using %d', mob:getName(), sp))
             mob:useMobAbility(sp)
         end
 
         -- TODO: minimum should be max of 2hr combos length
-        xi.av.nextsp = now + math.random(45, 90)
+        xi.av.nextsp = now + math.randomInt(45, 90)
     end
 end
 
@@ -260,7 +260,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngage = function(mob, target)
-    xi.av.nextsp = GetSystemTime() + math.random(45, 90)
+    xi.av.nextsp = GetSystemTime() + math.randomInt(45, 90)
 end
 
 entity.onPlayerAbilityUse = function(mob, player, ability)

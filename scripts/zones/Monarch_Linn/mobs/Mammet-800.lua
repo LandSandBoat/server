@@ -133,7 +133,7 @@ entity.onMobFight = function(mob, target)
         not cannotChangeForm
     then
         -- Pick a new form --
-        local rand = math.random(0, 3)
+        local rand = math.randomInt(0, 3)
         mob:setAnimationSub(rand)
         switch (rand): caseof
         {
@@ -162,7 +162,7 @@ entity.onMobFight = function(mob, target)
                 mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 100)
             end,
         }
-        mob:setLocalVar('formTimeTracker', mob:getBattleTime() + math.random(15, 60))
+        mob:setLocalVar('formTimeTracker', mob:getBattleTime() + math.randomInt(15, 60))
     end
 end
 
@@ -173,7 +173,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     local form  = mob:getAnimationSub()
     local moves = tpMoves[form]
 
-    return moves[math.random(1, #moves)]
+    return moves[math.randomInt(1, #moves)]
 end
 
 entity.onMobSpellChoose = function(mob, target, spellId)
@@ -187,7 +187,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
         xi.magic.spell.THUNDAGA_III,
     }
 
-    return spellList[math.random(#spellList)]
+    return spellList[math.randomInt(1, #spellList)]
 end
 
 -----------------------------------

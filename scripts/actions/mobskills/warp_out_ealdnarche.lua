@@ -16,7 +16,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     local t = battletarget:getPos()
     t.rot = battletarget:getRotPos()
-    local angle = math.random() * math.pi
+    local angle = math.randomFloat(0, 1) * math.pi
     local pos = NearLocation(t, 1.5, angle)
     mob:teleport(pos, battletarget)
     skill:setMsg(xi.msg.basic.NONE)

@@ -13,7 +13,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local power = 10
-    local duration = math.random(60, 180)
+    local duration = math.randomInt(60, 180)
 
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PLAGUE, power, 0, duration)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DEFENSE_DOWN, power, 0, duration)

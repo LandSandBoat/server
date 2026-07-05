@@ -760,7 +760,7 @@ end
 xi.abyssea.canGiveNMKI = function(mob, dropChance)
     local redProcValue = mob:getLocalVar('[AbysseaRedProc]')
 
-    if math.random(1, 100) <= dropChance or redProcValue == 1 then
+    if math.randomInt(1, 100) <= dropChance or redProcValue == 1 then
         return true
     end
 
@@ -819,7 +819,7 @@ end
 
 xi.abyssea.getNewYellowWeakness = function(mob)
     local currentDay = VanadielDayOfTheWeek()                      -- Fetch current day.
-    local chosenDay  = math.random(currentDay - 1, currentDay + 1) -- It can be the element of the same day, the day before or the day after.
+    local chosenDay  = math.randomInt(currentDay - 1, currentDay + 1) -- It can be the element of the same day, the day before or the day after.
 
     -- Acount for day element cycling.
     if chosenDay < xi.day.FIRESDAY then
@@ -830,11 +830,11 @@ xi.abyssea.getNewYellowWeakness = function(mob)
 
     local element = xi.data.element.getDayElement(chosenDay)
 
-    return yellowWeakness[element][math.random(1, #yellowWeakness[element])] -- Choose an specific spell the mob is weak to.
+    return yellowWeakness[element][math.randomInt(1, #yellowWeakness[element])] -- Choose an specific spell the mob is weak to.
 end
 
 xi.abyssea.getNewRedWeakness = function(mob)
-    return redWeakness[math.random(#redWeakness)]
+    return redWeakness[math.randomInt(1, #redWeakness)]
 end
 
 xi.abyssea.getNewBlueWeakness = function(mob)
@@ -847,7 +847,7 @@ xi.abyssea.getNewBlueWeakness = function(mob)
         table = 2
     end
 
-    return blueWeakness[table][math.random(#blueWeakness[table])]
+    return blueWeakness[table][math.randomInt(1, #blueWeakness[table])]
 end
 
 xi.abyssea.procMonster = function(mob, player, triggerType)
@@ -911,9 +911,9 @@ xi.abyssea.qmOnTrade = function(player, npc, trade, mobId, reqTrade)
 
     -- complete trade and pop nm
     player:tradeComplete()
-    local dx = player:getXPos() + math.random(-1, 1)
+    local dx = player:getXPos() + math.randomInt(-1, 1)
     local dy = player:getYPos()
-    local dz = player:getZPos() + math.random(-1, 1)
+    local dz = player:getZPos() + math.randomInt(-1, 1)
     GetMobByID(mobId):setSpawn(dx, dy, dz)
 
     SpawnMob(mobId):updateClaim(player)
@@ -1013,9 +1013,9 @@ xi.abyssea.qmOnEventFinish = function(player, csid, option, npc)
 
         -- pop nm
         local nm = player:getLocalVar('[AbysseaPopNmID]')
-        local dx = player:getXPos() + math.random(-1, 1)
+        local dx = player:getXPos() + math.randomInt(-1, 1)
         local dy = player:getYPos()
-        local dz = player:getZPos() + math.random(-1, 1)
+        local dz = player:getZPos() + math.randomInt(-1, 1)
 
         GetMobByID(nm):setSpawn(dx, dy, dz)
         SpawnMob(nm):updateClaim(player)
