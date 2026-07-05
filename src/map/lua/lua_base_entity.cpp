@@ -42,6 +42,7 @@
 #include "alliance.h"
 #include "aman.h"
 #include "battlefield.h"
+#include "conquest_system.h"
 #include "daily_system.h"
 #include "enmity_container.h"
 #include "fishingcontest.h"
@@ -9810,6 +9811,32 @@ void CLuaBaseEntity::delCP(int32 cp)
 
     charutils::AddPoints(PChar, charutils::GetConquestPointsName(PChar).c_str(), -cp);
     PChar->pushPacket<GP_SERV_COMMAND_CONQUEST>(PChar);
+}
+
+/************************************************************************
+ *  Function: gainConquestInfluence()
+ *  Purpose : Adds conquest influence to the player's nation and current region
+ *  Example : player:gainConquestInfluence(50)
+ *  Notes   : Applies the player's Moghancement region bonus.
+ ************************************************************************/
+
+void CLuaBaseEntity::gainConquestInfluence(int32 points)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+        return;
+    }
+
+    if (points <= 0)
+    {
+        ShowWarning("gainConquestInfluence: non-positive amount (%d) ignored.", points);
+        return;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    conquest::GainInfluencePoints(PChar, static_cast<uint32>(points));
 }
 
 /************************************************************************
@@ -20479,6 +20506,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getCP", CLuaBaseEntity::getCP);
     SOL_REGISTER("addCP", CLuaBaseEntity::addCP);
     SOL_REGISTER("delCP", CLuaBaseEntity::delCP);
+    SOL_REGISTER("gainConquestInfluence", CLuaBaseEntity::gainConquestInfluence);
 
     SOL_REGISTER("getSeals", CLuaBaseEntity::getSeals);
     SOL_REGISTER("addSeals", CLuaBaseEntity::addSeals);
