@@ -177,8 +177,9 @@ template <std::floating_point T>
         return min;
     }
 
-    const double unit = detail::canonical53(rng());
-    return static_cast<T>(static_cast<double>(min) + unit * (static_cast<double>(max) - static_cast<double>(min)));
+    // scaleCanonical guards the rounding edge where the scaled draw lands exactly on
+    // max (most likely when narrowing to float), keeping the [min, max) contract honest.
+    return detail::scaleCanonical(detail::canonical53(rng()), min, max);
 }
 
 template <typename T>

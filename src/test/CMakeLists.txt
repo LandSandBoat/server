@@ -8,6 +8,7 @@ set(SOURCES
     enums/test_status.h
     enums/tick_type.h
     tests/rng_spread_tests.cpp
+    tests/utils/saturated_engine.h
     in_memory_sink.h
     mock_manager.cpp
     mock_manager.h
