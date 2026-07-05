@@ -49,6 +49,9 @@ void CAIActionQueue::checkAction(timer::time_point tick)
         const auto& topaction = timerQueue.top();
         if (tick > topaction.start_time + topaction.delay)
         {
+            // Safe: the element isn't const and pop() follows before the queue is used again.
+            // priority_queue has no API to move out of top().
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-const-cast)
             queueAction_t action = std::move(const_cast<queueAction_t&>(timerQueue.top()));
             timerQueue.pop();
             handleAction(action);
@@ -63,6 +66,9 @@ void CAIActionQueue::checkAction(timer::time_point tick)
         const auto& topaction = actionQueue.top();
         if (tick > topaction.start_time + topaction.delay && (!topaction.checkState || PEntity->PAI->CanChangeState()))
         {
+            // Safe: the element isn't const and pop() follows before the queue is used again.
+            // priority_queue has no API to move out of top().
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-const-cast)
             auto action = std::move(const_cast<queueAction_t&>(actionQueue.top()));
             actionQueue.pop();
             handleAction(action);
