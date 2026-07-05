@@ -66,6 +66,10 @@ ConnectEngine::ConnectEngine(Scheduler& scheduler, ZMQService& zmqService)
 
 ConnectEngine::~ConnectEngine()
 {
+    // authenticatedSessions_ is a file-scope global, so it is torn down by the
+    // C++ runtime _after_ main() returns. We should clear it manually now.
+    // TODO: Proper lifetime management for authenticatedSessions_.
+    loginHelpers::getAuthenticatedSessions().clear();
 }
 
 void ConnectEngine::periodicCleanup()
