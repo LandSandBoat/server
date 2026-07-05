@@ -30,19 +30,18 @@ namespace Exdata
 
 struct Furniture
 {
-    uint8_t Header;
-    uint8_t On2ndFloor : 1;
-    uint8_t padding00 : 5;
-    uint8_t Installed : 1;
-    uint8_t padding01 : 1;
-    uint8_t Order; // LSB-only: placement order for moghancement tiebreaking. Not present on retail.
-    uint8_t padding02[3];
-    uint8_t X;
-    uint8_t Z;
-    uint8_t Y;
-    uint8_t Rotation;
-    uint8_t Signature[12];
-    uint8_t padding03[2];
+    uint8_t  Header;
+    uint8_t  On2ndFloor : 1;
+    uint8_t  padding00 : 5;
+    uint8_t  Installed : 1;
+    uint8_t  padding01 : 1;
+    uint32_t padding02;
+    uint8_t  X;
+    uint8_t  Z;
+    uint8_t  Y;
+    uint8_t  Rotation;
+    uint8_t  Signature[12];
+    uint8_t  padding03[2];
 
     void toTable(sol::table& table) const;
     void fromTable(const sol::table& data);

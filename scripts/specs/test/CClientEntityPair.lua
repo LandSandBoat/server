@@ -30,6 +30,12 @@ end
 function CClientEntityPair:gotoZone(zoneId, pos)
 end
 
+---Zone into the player's own Mog House in the given zone
+---@param zoneId xi.zone Zone whose Mog House to enter
+---@return nil
+function CClientEntityPair:gotoMogHouse(zoneId)
+end
+
 ---Check if the client is currently waiting for a zone change
 ---@nodiscard
 ---@return boolean

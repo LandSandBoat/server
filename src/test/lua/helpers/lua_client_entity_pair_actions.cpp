@@ -34,7 +34,10 @@
 #include "lua/lua_spy.h"
 #include "map/ability.h"
 #include "map/ai/controllers/player_controller.h"
+#include "map/entities/char_entity.h"
 #include "map/enums/party_kind.h"
+#include "map/item_container.h"
+#include "map/items/item.h"
 #include "map/lua/lua_base_entity.h"
 #include "map/packets/c2s/0x01a_action.h"
 #include "map/packets/c2s/0x028_item_dump.h"
@@ -53,6 +56,11 @@
 #include "map/packets/c2s/0x0ab_guild_buylist.h"
 #include "map/packets/c2s/0x0ac_guild_sell.h"
 #include "map/packets/c2s/0x0ad_guild_selllist.h"
+#include "map/packets/c2s/0x0fa_myroom_layout.h"
+#include "map/packets/c2s/0x0fc_myroom_plant_add.h"
+#include "map/packets/c2s/0x0fd_myroom_plant_check.h"
+#include "map/packets/c2s/0x0fe_myroom_plant_crop.h"
+#include "map/packets/c2s/0x0ff_myroom_plant_stop.h"
 #include "map/packets/c2s/0x102_extended_job.h"
 #include "map/spell.h"
 #include "map/status_effect_container.h"
@@ -833,6 +841,135 @@ void CLuaClientEntityPairActions::craft(const uint16 crystalItemId, const sol::t
     parent_->packets().sendBasicPacket(*packet);
 }
 
+namespace
+{
+
+auto storageItemNo(CCharEntity* PChar, const uint8 container, const uint8 slot) -> uint16
+{
+    CItemContainer* PContainer = PChar->getStorage(container);
+    CItem*          PItem      = PContainer ? PContainer->GetItem(slot) : nullptr;
+
+    return PItem ? PItem->getID() : 0;
+}
+
+} // namespace
+
+/************************************************************************
+ *  Function: plantAdd()
+ *  Purpose : Sow a seed or feed a crystal into a gardening pot.
+ *  Notes   : Pot and add item must both be in a mog safe.
+ ************************************************************************/
+
+void CLuaClientEntityPairActions::plantAdd(const uint8 potContainer, const uint8 potSlot, const uint8 addContainer, const uint8 addSlot) const
+{
+    auto* PChar = parent_->testChar()->entity();
+
+    const auto packet       = parent_->packets().createPacket<GP_CLI_COMMAND_MYROOM_PLANT_ADD>();
+    auto*      p            = packet->as<GP_CLI_COMMAND_MYROOM_PLANT_ADD>();
+    p->MyroomPlantItemNo    = storageItemNo(PChar, potContainer, potSlot);
+    p->MyroomAddItemNo      = storageItemNo(PChar, addContainer, addSlot);
+    p->MyroomPlantItemIndex = potSlot;
+    p->MyroomAddItemIndex   = addSlot;
+    p->MyroomPlantCategory  = potContainer;
+    p->MyroomAddCategory    = addContainer;
+
+    parent_->packets().sendBasicPacket(*packet);
+}
+
+/************************************************************************
+ *  Function: plantCheck()
+ *  Purpose : Examine a plant, resetting its wilt timer.
+ ************************************************************************/
+
+void CLuaClientEntityPairActions::plantCheck(const uint8 potContainer, const uint8 potSlot) const
+{
+    auto* PChar = parent_->testChar()->entity();
+
+    const auto packet       = parent_->packets().createPacket<GP_CLI_COMMAND_MYROOM_PLANT_CHECK>();
+    auto*      p            = packet->as<GP_CLI_COMMAND_MYROOM_PLANT_CHECK>();
+    p->MyroomPlantItemNo    = storageItemNo(PChar, potContainer, potSlot);
+    p->MyroomPlantItemIndex = potSlot;
+    p->MyroomPlantCategory  = potContainer;
+
+    parent_->packets().sendBasicPacket(*packet);
+}
+
+/************************************************************************
+ *  Function: plantHarvest()
+ *  Purpose : Harvest a mature plant; uproot clears the pot instead.
+ ************************************************************************/
+
+void CLuaClientEntityPairActions::plantHarvest(const uint8 potContainer, const uint8 potSlot, const sol::optional<bool> uproot) const
+{
+    auto* PChar = parent_->testChar()->entity();
+
+    const auto packet       = parent_->packets().createPacket<GP_CLI_COMMAND_MYROOM_PLANT_CROP>();
+    auto*      p            = packet->as<GP_CLI_COMMAND_MYROOM_PLANT_CROP>();
+    p->MyroomPlantItemNo    = storageItemNo(PChar, potContainer, potSlot);
+    p->MyroomPlantItemIndex = potSlot;
+    p->MyroomPlantCategory  = potContainer;
+    p->CancellFlg           = uproot.value_or(false) ? 1 : 0;
+
+    parent_->packets().sendBasicPacket(*packet);
+}
+
+/************************************************************************
+ *  Function: plantDry()
+ *  Purpose : Dry a plant so it stops growing and won't wilt.
+ ************************************************************************/
+
+void CLuaClientEntityPairActions::plantDry(const uint8 potContainer, const uint8 potSlot) const
+{
+    auto* PChar = parent_->testChar()->entity();
+
+    const auto packet       = parent_->packets().createPacket<GP_CLI_COMMAND_MYROOM_PLANT_STOP>();
+    auto*      p            = packet->as<GP_CLI_COMMAND_MYROOM_PLANT_STOP>();
+    p->MyroomPlantItemNo    = storageItemNo(PChar, potContainer, potSlot);
+    p->MyroomPlantItemIndex = potSlot;
+    p->MyroomPlantCategory  = potContainer;
+
+    parent_->packets().sendBasicPacket(*packet);
+}
+
+/************************************************************************
+ *  Function: placeFurniture()
+ *  Purpose : Install a furnishing on the 1st floor at grid cell (x, z).
+ *  Example : player.actions:placeFurniture(xi.inv.MOGSAFE, slot, 0, 0)
+ ************************************************************************/
+
+void CLuaClientEntityPairActions::placeFurniture(const uint8 container, const uint8 slot, const uint8 x, const uint8 z) const
+{
+    auto* PChar = parent_->testChar()->entity();
+
+    const auto packet  = parent_->packets().createPacket<GP_CLI_COMMAND_MYROOM_LAYOUT>();
+    auto*      p       = packet->as<GP_CLI_COMMAND_MYROOM_LAYOUT>();
+    p->MyroomItemNo    = storageItemNo(PChar, container, slot);
+    p->MyroomItemIndex = slot;
+    p->MyroomCategory  = container;
+    p->MyroomFloorFlg  = 0;
+    p->x               = x;
+    p->z               = z;
+    p->y               = 0;
+    p->v               = 0;
+
+    parent_->packets().sendBasicPacket(*packet);
+}
+
+/************************************************************************
+ *  Function: finishFurnishing()
+ *  Purpose : Finish placing furniture; recomputes the active moghancement.
+ *  Example : player.actions:finishFurnishing()
+ ************************************************************************/
+
+void CLuaClientEntityPairActions::finishFurnishing() const
+{
+    const auto packet = parent_->packets().createPacket<GP_CLI_COMMAND_MYROOM_LAYOUT>();
+    auto*      p      = packet->as<GP_CLI_COMMAND_MYROOM_LAYOUT>();
+    p->MyroomItemNo   = 0;
+
+    parent_->packets().sendBasicPacket(*packet);
+}
+
 void CLuaClientEntityPairActions::Register()
 {
     SOL_USERTYPE("CClientEntityPairActions", CLuaClientEntityPairActions);
@@ -867,4 +1004,10 @@ void CLuaClientEntityPairActions::Register()
     SOL_REGISTER("dropItem", CLuaClientEntityPairActions::dropItem);
     SOL_REGISTER("setLockstyle", CLuaClientEntityPairActions::setLockstyle);
     SOL_REGISTER("craft", CLuaClientEntityPairActions::craft);
+    SOL_REGISTER("plantAdd", CLuaClientEntityPairActions::plantAdd);
+    SOL_REGISTER("plantCheck", CLuaClientEntityPairActions::plantCheck);
+    SOL_REGISTER("plantHarvest", CLuaClientEntityPairActions::plantHarvest);
+    SOL_REGISTER("plantDry", CLuaClientEntityPairActions::plantDry);
+    SOL_REGISTER("placeFurniture", CLuaClientEntityPairActions::placeFurniture);
+    SOL_REGISTER("finishFurnishing", CLuaClientEntityPairActions::finishFurnishing);
 }

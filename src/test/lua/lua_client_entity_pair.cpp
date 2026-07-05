@@ -90,6 +90,23 @@ void CLuaClientEntityPair::tick()
 
 void CLuaClientEntityPair::gotoZone(ZONEID zoneId, sol::optional<sol::table> pos)
 {
+    doGotoZone(zoneId, std::move(pos), false);
+}
+
+/************************************************************************
+ *  Function: gotoMogHouse()
+ *  Purpose : Zone the player into their own Mog House in the given zone.
+ *  Example : player:gotoMogHouse(xi.zone.WINDURST_WOODS)
+ *  Notes   : Errors if the player is in an event.
+ ************************************************************************/
+
+void CLuaClientEntityPair::gotoMogHouse(ZONEID zoneId)
+{
+    doGotoZone(zoneId, sol::nullopt, true);
+}
+
+void CLuaClientEntityPair::doGotoZone(ZONEID zoneId, sol::optional<sol::table> pos, bool mogHouse)
+{
     // Check if player is in an event
     if (testChar_->entity()->isInEvent())
     {
@@ -108,7 +125,10 @@ void CLuaClientEntityPair::gotoZone(ZONEID zoneId, sol::optional<sol::table> pos
     charutils::removeCharFromZone(testChar_->entity());
     packets().sendZonePackets(); // Send zone in packets, reload PChar
 
-    // If position provided, set it and tick
+    // Set on the reloaded entity so it sticks through the zone-in.
+    testChar_->entity()->m_moghouseID = mogHouse ? testChar_->entity()->id : 0;
+
+    // If position provided, set it
     if (pos.has_value())
     {
         auto*      entity   = GetBaseEntity();
@@ -124,9 +144,12 @@ void CLuaClientEntityPair::gotoZone(ZONEID zoneId, sol::optional<sol::table> pos
         entity->loc.p.y        = y;
         entity->loc.p.z        = z;
         entity->loc.p.rotation = rot;
+    }
 
-        // After setting position on zone-in, we MUST perform these ticks in sequence
-        // Events will not be set if we don't!
+    // After zone-in we MUST perform these ticks in sequence, or events won't be
+    // set and the Mog House state won't settle.
+    if (pos.has_value() || mogHouse)
+    {
         simulation_->tick(TickType::ZoneTick);
         simulation_->tick(TickType::TriggerAreas);
     }
@@ -343,6 +366,7 @@ void CLuaClientEntityPair::Register()
     SOL_USERTYPE_INHERIT("CClientEntityPair", CLuaClientEntityPair, CLuaTestEntity, CLuaBaseEntity);
     SOL_REGISTER("tick", CLuaClientEntityPair::tick);
     SOL_REGISTER("gotoZone", CLuaClientEntityPair::gotoZone);
+    SOL_REGISTER("gotoMogHouse", CLuaClientEntityPair::gotoMogHouse);
     SOL_REGISTER("isPendingZone", CLuaClientEntityPair::isPendingZone);
     SOL_REGISTER("getItemInvSlot", CLuaClientEntityPair::getItemInvSlot);
     SOL_REGISTER("claimAndKillMob", CLuaClientEntityPair::claimAndKillMob);
