@@ -36,5 +36,10 @@ public:
 
     virtual void send(const IPP& ipp, ByteSpan buffer) = 0;
 
+    // Called once per tick to emit aggregated diagnostics (e.g. send failures).
+    virtual void flushDiagnostics()
+    {
+    }
+
     // TODO: Mockable receive()
 };
