@@ -16,7 +16,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, math.random(23, 24), 0, math.random(30, 90)))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, math.randomInt(23, 24), 0, math.randomInt(30, 90)))
 
     return xi.effect.POISON
 end

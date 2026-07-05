@@ -26,7 +26,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
          -- TODO: Capture power/duration
-        local power  = math.random(10, 30)
+        local power  = math.randomInt(10, 30)
         xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BURN, power, 3, 60)
     end
 

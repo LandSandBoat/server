@@ -35,7 +35,7 @@ instanceObject.afterInstanceRegister = function(player)
     xi.assault.afterInstanceRegister(player, xi.item.CAGE_OF_BHAFLAU_FIREFLIES)
     GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setPos(220.000, 1.465, -504.999, 0)
     GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setPos(220.000, 1.619, -502.999, 0)
-    instance:setProgress(math.random(ID.npc.POT_HATCH, ID.npc.POT_HATCH + 2))
+    instance:setProgress(math.randomInt(ID.npc.POT_HATCH, ID.npc.POT_HATCH + 2))
 end
 
 instanceObject.onInstanceTimeUpdate = function(instance, elapsed)

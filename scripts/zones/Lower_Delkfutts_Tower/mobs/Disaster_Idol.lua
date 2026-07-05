@@ -37,7 +37,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.GRAVITY_FIELD,
     }
 
-    return skillList[math.random(1, #skillList)]
+    return skillList[math.randomInt(1, #skillList)]
 end
 
 -- Disaster Idol dynamically adjusts his level based on his current target's level

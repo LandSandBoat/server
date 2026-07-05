@@ -9,7 +9,7 @@ g_mixins.families.marid = function(maridMob)
         local brokenTusks = mob:getAnimationSub()
 
         if
-            math.random(1, 100) <= 20 and
+            math.randomInt(1, 100) <= 20 and
             brokenTusks < 2
         then
             mob:setAnimationSub(brokenTusks + 1)

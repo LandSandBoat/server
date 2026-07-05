@@ -328,7 +328,7 @@ mission.sections =
             onEventFinish =
             {
                 [43] = function(player, csid, option, npc)
-                    local coloredDropId = xi.item.RED_DROP + math.random(0, 7)
+                    local coloredDropId = xi.item.RED_DROP + math.randomInt(0, 7)
 
                     if not npcUtil.giveItem(player, coloredDropId) then
                         mission:setVar(player, 'coloredDropId', coloredDropId)

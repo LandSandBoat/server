@@ -25,7 +25,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            { id = 875, hpp = math.random(30, 55) }, -- uses Aerial Blast once while near 50% HPP.
+            { id = 875, hpp = math.randomInt(30, 55) }, -- uses Aerial Blast once while near 50% HPP.
         },
     })
 

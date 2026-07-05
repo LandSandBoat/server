@@ -18,7 +18,7 @@ entity.onMobInitialize = function(mob)
         local justChained = mobEntity:getLocalVar('justChained')
 
         -- Only allow chaining if this wasn't already a chained TP move
-        if justChained == 0 and math.random(1, 100) <= 50 then
+        if justChained == 0 and math.randomInt(1, 100) <= 50 then
             mobEntity:setTP(3000)
             mobEntity:setLocalVar('justChained', 1) -- Mark this as a chained TP
         else

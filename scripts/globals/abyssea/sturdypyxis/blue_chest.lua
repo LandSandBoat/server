@@ -18,7 +18,7 @@ end
 
 xi.pyxis.blueChest.unlock = function(player, csid, option, npc)
     local ID               = zones[player:getZoneID()]
-    local newRand          = math.random(10, 99)
+    local newRand          = math.randomInt(10, 99)
     local lockedChoice     = bit.lshift(1, option - 1)
     local currentAttempts  = npc:getLocalVar('CURRENT_ATTEMPTS')
     local failedAttempts   = npc:getLocalVar('FAILED_ATTEMPTS')

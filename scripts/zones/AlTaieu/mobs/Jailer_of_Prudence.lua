@@ -57,8 +57,8 @@ local teleportToTarget = function(mob, target, currentTargetId)
         end
 
         local targetX, targetY, targetZ = target:getXPos(), target:getYPos(), target:getZPos()
-        local offsetX = math.random(-2, 2)
-        local offsetZ = math.random(-2, 2)
+        local offsetX = math.randomInt(-2, 2)
+        local offsetZ = math.randomInt(-2, 2)
         mobArg:setStatus(xi.status.INVISIBLE)
         mobArg:setPos(targetX + offsetX, targetY, targetZ + offsetZ, target:getRotPos())
 

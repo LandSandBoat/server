@@ -37,7 +37,7 @@ entity.onMobSpawn = function(mob)
         specials =
         {
             { id = xi.mobSkill.HUNDRED_FISTS_1 },
-            { id = xi.mobSkill.HUNDRED_FISTS_1, cooldown = 390, hpp = math.random(75, 85) },
+            { id = xi.mobSkill.HUNDRED_FISTS_1, cooldown = 390, hpp = math.randomInt(75, 85) },
         },
     })
 end
@@ -55,7 +55,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.SHOULDER_TACKLE_2
     }
 
-    return skillList[math.random(1, #skillList)]
+    return skillList[math.randomInt(1, #skillList)]
 end
 
 entity.onMobWeaponSkill = function(mob, target, skill, action)

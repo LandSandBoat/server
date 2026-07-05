@@ -309,7 +309,7 @@ local function magicAccuracyFromDayWeatherElement(actor, params)
     local applyPenalties = false
 
     if
-        math.random(1, 100) <= 33 or                     -- Random. Applies to both bonuses and penalties.
+        math.randomInt(1, 100) <= 33 or                     -- Random. Applies to both bonuses and penalties.
         actor:getMod(xi.mod.FORCE_DW_BONUS_PENALTY) >= 1 -- Hachirin-no-Obi forces both bonuses and penalties.
     then
         applyBonuses   = true
@@ -523,7 +523,7 @@ local function calculateResistanceFactor(actor, target, params)
     -- Notes: https://wiki-ffo-jp.translate.goog/html/795.html?_x_tr_sl=ja&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=sc
     local resistTier = 0
     for i = 1, maxResistTier do
-        if math.random() > params.magicHitRate then
+        if math.randomFloat(0, 1) > params.magicHitRate then
             resistTier = resistTier + 1
         else
             break

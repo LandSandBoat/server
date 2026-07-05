@@ -69,7 +69,7 @@ entity.onMobSpawn = function(mob)
     -- Handle initial variables.
     local currentTime = GetSystemTime()
     mob:setLocalVar('petReviveTimer', currentTime + 60)
-    mob:setLocalVar('healTimer', currentTime + math.random(30, 120))
+    mob:setLocalVar('healTimer', currentTime + math.randomInt(30, 120))
 
     -- Default to disabled magic casting. Judge inside onMobFight if it can cast.
     mob:setMagicCastingEnabled(false)
@@ -100,8 +100,8 @@ entity.onMobFight = function(mob, target)
                 not xi.combat.behavior.isEntityBusy(filtrate)
             then
                 local spells = { [1] = xi.magic.spell.WATER_IV, [2] = xi.magic.spell.WATER_III }
-                filtrate:castSpell(spells[math.random(1, #spells)], mob)
-                mob:setLocalVar('healTimer', currentTime + math.random(30, 120))
+                filtrate:castSpell(spells[math.randomInt(1, #spells)], mob)
+                mob:setLocalVar('healTimer', currentTime + math.randomInt(30, 120))
                 break
             end
         end
@@ -125,7 +125,7 @@ entity.onMobFight = function(mob, target)
                 filtrateTwo:isSpawned() and
                 currentTime >= mob:getLocalVar('shellTimer')
             then
-                mob:setLocalVar('shellTimer', currentTime + math.random(30, 120))
+                mob:setLocalVar('shellTimer', currentTime + math.randomInt(30, 120))
                 enterShell(mob)
             end
         end,
@@ -137,7 +137,7 @@ entity.onMobFight = function(mob, target)
                 not filtrateTwo:isSpawned() or
                 currentTime >= mob:getLocalVar('shellTimer')
             then
-                mob:setLocalVar('shellTimer', currentTime + math.random(30, 120))
+                mob:setLocalVar('shellTimer', currentTime + math.randomInt(30, 120))
                 exitShell(mob)
             end
         end,
@@ -174,7 +174,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
         [2] = xi.magic.spell.WATERGA_III,
     }
 
-    return spellList[math.random(1, #spellList)]
+    return spellList[math.randomInt(1, #spellList)]
 end
 
 entity.onSpellPrecast = function(mob, spell)

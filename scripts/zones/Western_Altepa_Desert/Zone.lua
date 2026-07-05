@@ -67,7 +67,7 @@ zoneObject.onZoneWeatherChange = function(weather)
                 kvMob:getRespawnTime() == 0
             then
                 if
-                    (weather == xi.weather.DUST_STORM and math.random(1, 100) <= 50) or
+                    (weather == xi.weather.DUST_STORM and math.randomInt(1, 100) <= 50) or
                     weather == xi.weather.SAND_STORM
                 then
                     DisallowRespawn(ID.mob.KING_VINEGARROON, false) -- Allow respawn.

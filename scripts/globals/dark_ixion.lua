@@ -88,7 +88,7 @@ local changeHornState = function(mob, state)
     end
 
     -- reset phasechange timer
-    mob:setLocalVar('phaseChange', GetSystemTime() + math.random(60, 240))
+    mob:setLocalVar('phaseChange', GetSystemTime() + math.randomInt(60, 240))
 end
 
 xi.darkixion.zoneinfo =
@@ -296,10 +296,10 @@ xi.darkixion.repop = function(mob)
         table.insert(keys, k)
     end
 
-    local randZoneID = keys[math.random(#keys)]
+    local randZoneID = keys[math.randomInt(1, #keys)]
     SetServerVariable('DarkIxion_ZoneID', randZoneID)
     -- wiki says 'It can pop there in less than 10 seconds or take the whole 15 minutes'
-    SetServerVariable('DarkIxion_PopTime', GetSystemTime() + math.random(1, 15 * 60)) -- based on onGameHour function timing
+    SetServerVariable('DarkIxion_PopTime', GetSystemTime() + math.randomInt(1, 15 * 60)) -- based on onGameHour function timing
 end
 
 -- Adjustments made once to Dark Ixion when he begins roaming
@@ -385,7 +385,7 @@ xi.darkixion.zoneOnGameHour = function(zone)
         ixionPopTime < GetSystemTime() - 45
     then
         -- if gamehour flip is within 45s, randomly spawn within next twice that
-        ixion:setRespawnTime(math.random(0, 90))
+        ixion:setRespawnTime(math.randomInt(0, 90))
     elseif
         ixion:isSpawned() and
         ixionZoneID ~= zone:getID()
@@ -418,7 +418,7 @@ xi.darkixion.onMobDespawn = function(mob)
     DisallowRespawn(mob:getID(), true)
     if mob:getZoneID() == GetServerVariable('DarkIxion_ZoneID') then
         xi.darkixion.repop(mob)
-        SetServerVariable('DarkIxion_PopTime', GetSystemTime() + math.random(20, 24) * 60 * 60) -- repop 20-24 hours after death
+        SetServerVariable('DarkIxion_PopTime', GetSystemTime() + math.randomInt(20, 24) * 60 * 60) -- repop 20-24 hours after death
     end
 end
 
@@ -428,7 +428,7 @@ local checkHornBreak = function(mob, attacker)
         not xi.combat.behavior.isEntityBusy(mob) and
         (animationSub == animationSubs.NORMAL or animationSub == animationSubs.GLOWING) and
         (attacker ~= nil and attacker:isInfront(mob)) and
-        math.random(1, 100) <= 5
+        math.randomInt(1, 100) <= 5
     then
         changeHornState(mob, 2)
     end
@@ -447,7 +447,7 @@ xi.darkixion.onMobWeaponSkill = function(target, mob, skill)
     if skillID == xi.mobSkill.DAMSEL_MEMENTO then -- sometimes after healing, fix horn
         if
             mob:getAnimationSub() == animationSubs.HORN_BROKEN and
-            math.random(1, 100) <= 25
+            math.randomInt(1, 100) <= 25
         then
             -- If horn is restored by heal, glow and allow animation to finish, then restore horn
             skill:setFinalAnimationSub(3)
@@ -486,11 +486,11 @@ xi.darkixion.onMobWeaponSkill = function(target, mob, skill)
             local mobHPP = mob:getHPP()
             local trampleCount = mob:getLocalVar('trampleCount')
 
-            local random = math.random(1, 100)
+            local random = math.randomInt(1, 100)
             if random <= 30 and mobHPP < 33 then
-                trampleCount = trampleCount + math.random(1, 3)
+                trampleCount = trampleCount + math.randomInt(1, 3)
             elseif random <= 20 and mobHPP < 50 then
-                trampleCount = trampleCount + math.random(1, 2)
+                trampleCount = trampleCount + math.randomInt(1, 2)
             elseif random <= 10 then
                 trampleCount = trampleCount + 1
             end
@@ -526,7 +526,7 @@ end
 -- either turn in a random direction, or turn away from skillTarget to use acheron kick
 local turnForSkill = function(mob, skillTarget)
     local mobPos = mob:getPos()
-    local lookAtPos = { x = mobPos.x + math.random(-4, 4), y = mobPos.y, z = mobPos.z + math.random(-4, 4) }
+    local lookAtPos = { x = mobPos.x + math.randomInt(-4, 4), y = mobPos.y, z = mobPos.z + math.randomInt(-4, 4) }
 
     if skillTarget then
         local targetPos = skillTarget:getPos()
@@ -620,7 +620,7 @@ xi.darkixion.onMobEngage = function(mob, target)
     mob:setMod(xi.mod.UDMGBREATH, 0)
     mob:setMod(xi.mod.UDMGMAGIC, 0)
     mob:setMod(xi.mod.REGAIN, 20) -- 'has tp regen': https://www.bluegartr.com/threads/59044-Ixion-discussion-thread/page8
-    mob:setLocalVar('phaseChange', GetSystemTime() + math.random(60, 240))
+    mob:setLocalVar('phaseChange', GetSystemTime() + math.randomInt(60, 240))
 end
 
 xi.darkixion.onMobDisengage = function(mob)
@@ -653,7 +653,7 @@ xi.darkixion.onMobFight = function(mob, target)
         (animationSub == animationSubs.NORMAL or
         animationSub == animationSubs.GLOWING)
     then
-        mob:setLocalVar('phaseChange', GetSystemTime() + math.random(60, 240))
+        mob:setLocalVar('phaseChange', GetSystemTime() + math.randomInt(60, 240))
 
         -- alternate phase between normal (can trample) and glowing (double-up mobskills)
         animationSub = animationSub ~= animationSubs.NORMAL and animationSubs.NORMAL or animationSubs.GLOWING
@@ -710,8 +710,8 @@ xi.darkixion.beginTramplePath = function(mob)
     -- can also trample at someone close. Fallback to a random spot nearby
     mob:setLocalVar('trampleTargID', 0)
     local tramplePos = mob:getPos()
-    tramplePos.x = tramplePos.x + math.random(-10, 10)
-    tramplePos.z = tramplePos.z + math.random(-10, 10)
+    tramplePos.x = tramplePos.x + math.randomInt(-10, 10)
+    tramplePos.z = tramplePos.z + math.randomInt(-10, 10)
     local potentialTargets = getEnemiesInRange(mob, 30)
     local trampleTarget = nil
     if #potentialTargets > 0 then
@@ -777,7 +777,7 @@ xi.darkixion.endTramplePath = function(mob)
         mob:setBaseSpeed(40)
         mob:setBehavior(0)
 
-        mob:setLocalVar('nextTrampleTime', GetSystemTime() + math.random(15, 60))
+        mob:setLocalVar('nextTrampleTime', GetSystemTime() + math.randomInt(15, 60))
     end
 
     mob:setLocalVar('trampleCount', trampleCount)

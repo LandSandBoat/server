@@ -81,7 +81,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.AOE_HIT_ALL, 1)
 
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(144, 240) * 1800) -- 3 to 5 days in 30 minute windows
+    mob:setRespawnTime(math.randomInt(144, 240) * 1800) -- 3 to 5 days in 30 minute windows
 end
 
 entity.onMobSpawn = function(mob)
@@ -276,7 +276,7 @@ end
 
 entity.onMobDespawn = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(144, 240) * 1800) -- 3 to 5 days in 30 minute windows
+    mob:setRespawnTime(math.randomInt(144, 240) * 1800) -- 3 to 5 days in 30 minute windows
 end
 
 return entity

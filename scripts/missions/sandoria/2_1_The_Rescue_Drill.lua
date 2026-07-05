@@ -400,7 +400,7 @@ mission.sections =
             onEventFinish =
             {
                 [1] = function(player, csid, option, npc)
-                    mission:setVar(player, 'Option', math.random(1, 3))
+                    mission:setVar(player, 'Option', math.randomInt(1, 3))
                     player:setMissionStatus(mission.areaId, 8)
                 end,
 

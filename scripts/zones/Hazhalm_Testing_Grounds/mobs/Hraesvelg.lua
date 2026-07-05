@@ -35,7 +35,7 @@ entity.onMobFight = function(mob)
         mob:addEnmity(randomTarget.entity, 30000, 30000)
         mob:updateTarget()
 
-        mob:setLocalVar('resetEnmity', GetSystemTime() + math.random(5, 20))
+        mob:setLocalVar('resetEnmity', GetSystemTime() + math.randomInt(5, 20))
     end
 end
 

@@ -185,14 +185,14 @@ entity.onTrade = function(player, npc, trade)
                 then
                     local range = getWaitRange(xi.item.WHITE_PUPPET_TURBAN, trade)
 
-                    play_event902(player, 12, math.random(range[1], range[2]))
+                    play_event902(player, 12, math.randomInt(range[1], range[2]))
                 elseif
                     trade:getItemQty(xi.item.BLACK_PUPPET_TURBAN) == 1 and
                     not player:hasAttachment(xi.item.SPIRITREAVER_HEAD)
                 then
                     local range = getWaitRange(xi.item.BLACK_PUPPET_TURBAN, trade)
 
-                    play_event902(player, 13, math.random(range[1], range[2]))
+                    play_event902(player, 13, math.randomInt(range[1], range[2]))
                 end
             end
         end
@@ -325,7 +325,7 @@ entity.onTrigger = function(player, npc)
 
             -- Default PUP actions after first Unlock
             elseif numUnlockedHeads > 0 then
-                local rand = math.random(1, 2)
+                local rand = math.randomInt(1, 2)
                 if rand == 1 then
                     player:startEvent(628)
                 else

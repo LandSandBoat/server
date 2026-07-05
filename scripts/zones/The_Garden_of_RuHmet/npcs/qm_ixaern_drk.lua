@@ -41,7 +41,7 @@ entity.onTrigger = function(player, npc)
         npcUtil.popFromQM(player, npc, { ID.mob.IXAERN_DRK + 1, ID.mob.IXAERN_DRK + 2, ID.mob.IXAERN_DRK }, { radius = 3, claim = true })
 
         -- move QM to random location, and reset animosity
-        local pos = math.random(1, 4)
+        local pos = math.randomInt(1, 4)
         npcUtil.queueMove(npc, gardenGlobal.qmPosDRKTable[pos])
         npc:setLocalVar('position', pos)
         npc:setLocalVar('hatedPlayer', 0)

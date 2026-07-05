@@ -28,7 +28,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.HEX_EYE,
     }
 
-    return skillList[math.random(1, #skillList)]
+    return skillList[math.randomInt(1, #skillList)]
 end
 
 entity.onMobSpellChoose = function(mob, target, spellId)

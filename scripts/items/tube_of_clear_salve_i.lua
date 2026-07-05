@@ -30,7 +30,7 @@ itemObject.onItemUse = function(target)
         xi.effect.BLINDNESS
     }
 
-    local count = math.random(1, 2)
+    local count = math.randomInt(1, 2)
     local random = 1
 
     xi.itemUtils.removeMultipleEffects(pet, effects, count, random)

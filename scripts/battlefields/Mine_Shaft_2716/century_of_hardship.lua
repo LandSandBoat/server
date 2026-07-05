@@ -60,7 +60,7 @@ local function handleMoblinCommand(moblin, bugbear, offset)
     moblin:setBehavior(bit.bor(moblin:getBehavior(), xi.behavior.NO_TURN))
 
     -- Select which command to give Bugbear (60% enmity, 30% TP move, 10% Mighty Strikes)
-    local randomRoll = math.random(1, 100)
+    local randomRoll = math.randomInt(1, 100)
     local commandType = randomRoll <= 60 and 1 or randomRoll <= 90 and 2 or 3
 
     -- Moblin issues the command (commandType maps to message offset)
@@ -82,12 +82,12 @@ local function handleMoblinCommand(moblin, bugbear, offset)
     bugbear:setBehavior(bit.bor(bugbear:getBehavior(), xi.behavior.NO_TURN))
 
     -- Bugbear can refuse any command, or if Mighty Strikes is commanded but already used
-    local bugbearRefuses = math.random(100) <= 20
+    local bugbearRefuses = math.randomInt(1, 100) <= 20
     local forceRefusal = commandType == 3 and alreadyUsedMightyStrikes
 
     if bugbearRefuses or forceRefusal then
         -- Bugbear refuses
-        local bugbearRefuseMsg = mineshaftID.text.BUGBBY_DIALOGUE + 6 + math.random(0, 1)
+        local bugbearRefuseMsg = mineshaftID.text.BUGBBY_DIALOGUE + 6 + math.randomInt(0, 1)
         bugbear:timer(1000, function(bugArg)
             bugArg:messageText(bugArg, bugbearRefuseMsg)
         end)
@@ -99,7 +99,7 @@ local function handleMoblinCommand(moblin, bugbear, offset)
             if refusalSkill then
                 -- For Goblin Dice, add random offset to get variant
                 if refusalSkill == xi.mobSkill.GOBLIN_DICE_HEAL then
-                    refusalSkill = refusalSkill + math.random(0, 10)
+                    refusalSkill = refusalSkill + math.randomInt(0, 10)
                 end
 
                 mobArg:useMobAbility(refusalSkill)
@@ -110,7 +110,7 @@ local function handleMoblinCommand(moblin, bugbear, offset)
     end
 
     -- Bugbby accepts the command
-    local bugbearAcceptMsg = mineshaftID.text.BUGBBY_DIALOGUE + math.random(0, 5)
+    local bugbearAcceptMsg = mineshaftID.text.BUGBBY_DIALOGUE + math.randomInt(0, 5)
     bugbear:messageText(bugbear, bugbearAcceptMsg)
 
     -- Execute command based on type
@@ -232,7 +232,7 @@ function content:onBattlefieldTick(battlefield, tick)
         bugbear:getHPP() < 90
     then
         battlefield:setLocalVar('commandSequence', 1)
-        battlefield:setLocalVar('nextCommandTime', GetSystemTime() + math.random(30, 60))
+        battlefield:setLocalVar('nextCommandTime', GetSystemTime() + math.randomInt(30, 60))
     end
 
     -- Global command timer - triggers a Moblin to command
@@ -254,10 +254,10 @@ function content:onBattlefieldTick(battlefield, tick)
 
         -- Pick alive Moblin to command Bugbear
         if #aliveMoblins > 0 then
-            local selectedMoblin = aliveMoblins[math.random(1, #aliveMoblins)]
+            local selectedMoblin = aliveMoblins[math.randomInt(1, #aliveMoblins)]
             handleMoblinCommand(selectedMoblin, bugbear, offset)
             -- Set next global command timer (30-60 seconds)
-            battlefield:setLocalVar('nextCommandTime', GetSystemTime() + math.random(30, 60))
+            battlefield:setLocalVar('nextCommandTime', GetSystemTime() + math.randomInt(30, 60))
         end
     end
 end

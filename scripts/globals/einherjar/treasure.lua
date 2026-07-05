@@ -167,7 +167,7 @@ local function craftingMaterialRewards()
     local rewards = {}
 
     -- Step 1: Roll to determine the number of item types
-    local roll     = math.random(1, 100)
+    local roll     = math.randomInt(1, 100)
     local numItems = 1  -- Default to 1 item type
 
     if roll <= 30 then
@@ -183,7 +183,7 @@ local function craftingMaterialRewards()
 
     for _ = 1, numItems do
         -- Roll a random number within the total rate
-        local itemRoll       = math.random(1, 1000)
+        local itemRoll       = math.randomInt(1, 1000)
         local cumulativeRate = 0
 
         -- Select item based on the weighted roll
@@ -192,7 +192,7 @@ local function craftingMaterialRewards()
             if itemRoll <= cumulativeRate then
                 -- Step 3: Apply linear decay formula to determine quantity
                 local totalWeight              = material.max * (material.max + 1) / 2
-                local quantityRoll             = math.random(1, totalWeight)
+                local quantityRoll             = math.randomInt(1, totalWeight)
                 local cumulativeQuantityWeight = 0
                 local quantity                 = 1
 
@@ -230,7 +230,7 @@ xi.einherjar.getArmouryCrateRewards = function(bossId, chamberId)
         local itemId   = lootEntry.item
         local itemRate = lootEntry.rate
 
-        if math.random(1, 1000) <= itemRate then
+        if math.randomInt(1, 1000) <= itemRate then
             table.insert(rewards, itemId)
         end
     end
@@ -241,12 +241,12 @@ xi.einherjar.getArmouryCrateRewards = function(bossId, chamberId)
     end
 
     -- 3. Wing specific abjuration (5% chance)
-    if math.random(1, 100) <= 5 then
-        local selectedAbjuration = abjurations[tier][math.random(1, #abjurations[tier])]
+    if math.randomInt(1, 100) <= 5 then
+        local selectedAbjuration = abjurations[tier][math.randomInt(1, #abjurations[tier])]
         table.insert(rewards, selectedAbjuration)
         -- Captures show it is possible to get 2x of the same abjuration, even without Heitrun.
         -- TODO: Rate of secondary roll is likely between 5 and 10%.
-        if math.random(1, 100) <= 5 then
+        if math.randomInt(1, 100) <= 5 then
             table.insert(rewards, selectedAbjuration)
         end
     end
@@ -299,9 +299,9 @@ xi.einherjar.getTempItems = function()
     local availableTempItems = { unpack(tempItems) }
 
     for _ = 1, 6 do
-        local roll             = math.random(1, #availableTempItems)
+        local roll             = math.randomInt(1, #availableTempItems)
         local selectedTempItem = availableTempItems[roll]
-        local selectedQty      = math.random(selectedTempItem.min, selectedTempItem.max)
+        local selectedQty      = math.randomInt(selectedTempItem.min, selectedTempItem.max)
 
         table.insert(temp, bit.bor(bit.lshift(selectedQty, 16), selectedTempItem.item))
 

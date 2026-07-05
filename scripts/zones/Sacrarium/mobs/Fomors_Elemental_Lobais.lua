@@ -29,7 +29,7 @@ entity.onMobDeath = function(mob, player, optParams)
             return
         end
 
-        master:setLocalVar('petSummonTime', GetSystemTime() + math.random(10, 15))
+        master:setLocalVar('petSummonTime', GetSystemTime() + math.randomInt(10, 15))
     end
 end
 

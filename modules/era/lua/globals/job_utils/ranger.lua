@@ -97,7 +97,7 @@ if not xi.module.isContentEnabled('SOA') then
         end
 
         -- Success rate check
-        if math.random(1, 100) > 25 + player:getMod(xi.mod.SCAVENGE_EFFECT) then
+        if math.randomInt(1, 100) > 25 + player:getMod(xi.mod.SCAVENGE_EFFECT) then
             action:messageID(playerID, xi.msg.basic.SCAVENGE_FIND_NOTHING)
 
             return 0
@@ -110,9 +110,9 @@ if not xi.module.isContentEnabled('SOA') then
             itemPool[#itemPool + 1] = v
         end
 
-        itemPool[#itemPool + 1] = scavengeData.guaranteedItems[math.random(1, #scavengeData.guaranteedItems)]
+        itemPool[#itemPool + 1] = scavengeData.guaranteedItems[math.randomInt(1, #scavengeData.guaranteedItems)]
 
-        local selectedItem = itemPool[math.random(1, #itemPool)]
+        local selectedItem = itemPool[math.randomInt(1, #itemPool)]
 
         if player:addItem(selectedItem) then
             action:messageID(playerID, xi.msg.basic.SCAVENGE_FIND_ITEM)

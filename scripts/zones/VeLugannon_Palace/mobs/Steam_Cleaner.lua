@@ -18,11 +18,11 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TP_DRAIN, { power = (math.random(500, 1000)) })
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TP_DRAIN, { power = (math.randomInt(500, 1000)) })
 end
 
 entity.onMobDespawn = function(mob)
-    SetServerVariable('[POP]SteamCleaner', GetSystemTime() + math.random(7200, 14400))
+    SetServerVariable('[POP]SteamCleaner', GetSystemTime() + math.randomInt(7200, 14400))
 end
 
 return entity

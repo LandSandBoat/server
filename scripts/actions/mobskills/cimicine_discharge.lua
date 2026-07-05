@@ -12,7 +12,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local power = 1950
-    local duration = math.random(60, 180)
+    local duration = math.randomInt(60, 180)
 
     if not mob:hasStatusEffect(xi.effect.HASTE) then
         mob:addStatusEffect(xi.effect.HASTE, { power = 1500, duration = duration, origin = mob })

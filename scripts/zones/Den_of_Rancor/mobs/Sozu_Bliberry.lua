@@ -21,7 +21,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            { id = xi.mobSkill.MANAFONT_1, hpp = math.random(40, 95) },
+            { id = xi.mobSkill.MANAFONT_1, hpp = math.randomInt(40, 95) },
         },
     })
 end

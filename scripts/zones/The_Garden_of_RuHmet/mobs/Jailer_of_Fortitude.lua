@@ -94,7 +94,7 @@ end
 
 entity.onMobDespawn = function(mob)
     -- Move QM to random location
-    GetNPCByID(ID.npc.QM_JAILER_OF_FORTITUDE):setPos(unpack(gardenGlobal.qmPosFortTable[math.random(1, 5)]))
+    GetNPCByID(ID.npc.QM_JAILER_OF_FORTITUDE):setPos(unpack(gardenGlobal.qmPosFortTable[math.randomInt(1, 5)]))
 end
 
 return entity

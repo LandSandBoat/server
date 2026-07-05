@@ -202,7 +202,7 @@ end
 -----------------------------------
 local function CanSpawnPyxis(player)
     local lightValues = xi.abyssea.getLightsTable(player)
-    local dropchance = math.random(1 + lightValues[xi.abyssea.lightType.PEARL], 500)
+    local dropchance = math.randomInt(1 + lightValues[xi.abyssea.lightType.PEARL], 500)
     return dropchance >= 250
 end
 
@@ -214,9 +214,9 @@ local function determineChestType(lightValues)
     local blueLight = lightValues[xi.abyssea.lightType.AZURE]
     local goldLight = lightValues[xi.abyssea.lightType.AMBER]
 
-    local blueChance = math.max(math.random(blueLight), 255 * 0.25) -- min 25% can adjust
-    local redChance = math.random(redLight)
-    local goldChance = math.random(goldLight)
+    local blueChance = math.max(math.randomInt(1, blueLight), 255 * 0.25) -- min 25% can adjust
+    local redChance = math.randomInt(1, redLight)
+    local goldChance = math.randomInt(1, goldLight)
 
     if redChance > blueChance and redChance > goldChance then
         return xi.pyxis.chestType.RED
@@ -258,7 +258,7 @@ local function GetBlueChestInfos(player, lightValues)
     local chestModel = 965
     local chestSize = 3
     local chestType = xi.pyxis.chestType.BLUE
-    local amountCorrectAnswerNeeded = math.random(2, 6)
+    local amountCorrectAnswerNeeded = math.randomInt(2, 6)
     local chestTier = 1
 
     for i, abyssite in pairs(abyssitesAmountCorrect) do
@@ -275,8 +275,8 @@ local function GetBlueChestInfos(player, lightValues)
 
     for tier, azureTier in pairs(dataAzureTiers) do
         if playerAzureLight >= azureTier.min and playerAzureLight <= azureTier.max then
-            if math.random(1, 100) < 5 then
-                chestTier = math.max(tier, math.random(tier, 5))
+            if math.randomInt(1, 100) < 5 then
+                chestTier = math.max(tier, math.randomInt(tier, 5))
             else
                 chestTier = tier
             end
@@ -297,7 +297,7 @@ local function GetBlueChestInfos(player, lightValues)
         ::skip_to_next::
     end
 
-    local dropType = tmpTable[math.random(1, #tmpTable)]
+    local dropType = tmpTable[math.randomInt(1, #tmpTable)]
 
     local drop = xi.pyxis.spawn.chestMessageByChestType[chestType][dropType][1]
 
@@ -309,13 +309,13 @@ local function GetBlueChestInfos(player, lightValues)
 
     local nbItem = 0
     if drop.maxItem then
-        nbItem = math.random(1, drop.maxItem)
+        nbItem = math.randomInt(1, drop.maxItem)
     end
 
     local restore = 0
 
     if chestTier <= 3 then
-        restore = math.random(1, 3)
+        restore = math.randomInt(1, 3)
     else
         restore = chestTier
     end
@@ -356,8 +356,8 @@ local function GetRedChestInfos(player, lightValues)
 
     for tier, rubytier in pairs(dataRubyTiers) do
         if playerRubyLight >= rubytier.min and playerRubyLight <= rubytier.max then
-            if math.random(1, 100) < 5 then
-                chestTier = math.max(tier, math.random(tier, 5))
+            if math.randomInt(1, 100) < 5 then
+                chestTier = math.max(tier, math.randomInt(tier, 5))
             else
                 chestTier = tier
             end
@@ -374,7 +374,7 @@ local function GetRedChestInfos(player, lightValues)
         nb = nb + 1
     end
 
-    local randLight = math.random(1, #lightAvailable)
+    local randLight = math.randomInt(1, #lightAvailable)
     local light = lightAvailable[randLight]
     local message = xi.pyxis.spawn.lightsMessage[light][chestTier]
     local chestLightValue = xi.pyxis.spawn.chestLightValues[chestTier][light]
@@ -415,8 +415,8 @@ local function GetGoldChestInfos(player, lightValues)
 
     for tier, amberTier in pairs(dataAmberTiers) do
         if playerAmberLight >= amberTier.min and playerAmberLight <= amberTier.max then
-            if math.random(1, 100) < 5 then
-                chestTier = math.max(tier, math.random(tier, 5))
+            if math.randomInt(1, 100) < 5 then
+                chestTier = math.max(tier, math.randomInt(tier, 5))
                 maxUnlockNumber = dataAmberTiers[tier + 1].maxUnlockNumber
             else
                 chestTier = tier
@@ -427,16 +427,16 @@ local function GetGoldChestInfos(player, lightValues)
 
     chestTier = math.min(chestTier + amberabyssitebonus, 5)
 
-    if chestTier >= 5 or math.random(1, 100) < 5 then
+    if chestTier >= 5 or math.randomInt(1, 100) < 5 then
         chestSize = xi.pyxis.spawn.goldCofferSize.BIG_CHEST
     end
 
-    local droptype = math.random(1, #xi.pyxis.spawn.chestMessageByChestType[chestType][chestSize])
+    local droptype = math.randomInt(1, #xi.pyxis.spawn.chestMessageByChestType[chestType][chestSize])
     local drop = xi.pyxis.spawn.chestMessageByChestType[chestType][chestSize][droptype]
     local nbItem = 1
 
     for i = 2, drop.maxItem do
-        if math.random(1, 100) < 40 then
+        if math.randomInt(1, 100) < 40 then
             nbItem = nbItem + 1
         end
     end
@@ -461,7 +461,7 @@ local function SetPyxisData(npc, mob, player)
     local nbItem            = 0
     local maxUnlockNumber   = 0
     local partyLeaderId     = player:getLeaderID()
-    local required          = math.random(1, 6)
+    local required          = math.randomInt(1, 6)
     local randnum           = 0
     local mobPos            = mob:getPos()
     local chestLightValue   = 0
@@ -472,7 +472,7 @@ local function SetPyxisData(npc, mob, player)
     {
         [xi.pyxis.chestType.BLUE] = function()
             local bcChestSize, bcChestType, bcChestModel, bcChestTier, bcAmountCorrectAnswerNeeded, bcDroptype, bcMessage, bcRestore, bcNbItem = GetBlueChestInfos(player, lightValues)
-            randnum     = math.random(10, 99)
+            randnum     = math.randomInt(10, 99)
             sizeflag    = bcChestSize
             message     = bcMessage
             dropType    = bcDroptype
@@ -486,7 +486,7 @@ local function SetPyxisData(npc, mob, player)
 
         [xi.pyxis.chestType.RED] = function()
             local rcDropType, rcChestModel, rcChestSize, rcChestTier, rcLight, rcMessage, rcChestLightValue = GetRedChestInfos(player, lightValues)
-            randnum         = math.random(25, 60)
+            randnum         = math.randomInt(25, 60)
             sizeflag        = rcChestSize
             dropType        = rcDropType
             message         = rcMessage
@@ -498,7 +498,7 @@ local function SetPyxisData(npc, mob, player)
 
         [xi.pyxis.chestType.GOLD] = function()
             local gcSize, gcMaxUnlockNumber, gcChestTier, gcChestModel, gcDroptype, gcNbItem, gcMessage = GetGoldChestInfos(player, lightValues)
-            randnum         = math.random(11, gcMaxUnlockNumber)
+            randnum         = math.randomInt(11, gcMaxUnlockNumber)
             maxUnlockNumber = gcMaxUnlockNumber
             sizeflag        = gcSize
             dropType        = gcDroptype

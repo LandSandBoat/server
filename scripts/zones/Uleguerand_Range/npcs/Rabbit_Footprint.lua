@@ -64,7 +64,7 @@ local function moveFootprint(npc)
     -- Set to move every 5 vana minutes as observed on retail
 
     local currentPoint = npc:getLocalVar('currentPoint')
-    local nextPoint = math.random(1, 17)
+    local nextPoint = math.randomInt(1, 17)
 
     if nextPoint == currentPoint then
         nextPoint = nextPoint + 1
@@ -97,7 +97,7 @@ entity.onTimeTrigger = function(npc, triggerID)
             (getVanadielMoonCycle() == xi.moonCycle.NEW_MOON)
         then
             if activeTime == 0 then
-                npc:setLocalVar('activeTime', GetSystemTime() + math.random(60 * 9, 60 * 15)) -- moon phase just changed, i'm active in 9 to 15 mins from now
+                npc:setLocalVar('activeTime', GetSystemTime() + math.randomInt(60 * 9, 60 * 15)) -- moon phase just changed, i'm active in 9 to 15 mins from now
             elseif GetSystemTime() > activeTime then
                 moveFootprint(npc)
             end

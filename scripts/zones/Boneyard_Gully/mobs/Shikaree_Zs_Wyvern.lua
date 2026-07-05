@@ -76,7 +76,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.PET_HYDRO_BREATH,
     }
 
-    return tpSkills[math.random(1, #tpSkills)]
+    return tpSkills[math.randomInt(1, #tpSkills)]
 end
 
 entity.onMobSkillTarget = function(target, mob, skill)

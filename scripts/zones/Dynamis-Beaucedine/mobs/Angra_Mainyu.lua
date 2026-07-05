@@ -50,7 +50,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
         return xi.magic.spell.DEATH
     end
 
-    return spellList[math.random(1, #spellList)]
+    return spellList[math.randomInt(1, #spellList)]
 end
 
 entity.onMobDeath = function(mob, player, optParams)

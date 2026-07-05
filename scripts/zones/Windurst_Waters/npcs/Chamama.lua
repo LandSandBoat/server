@@ -18,7 +18,7 @@ entity.onTrade = function(player, npc, trade)
         trade:getItemCount() == 1 and
         trade:getGil() == 0
     then
-        local rand = math.random(1, 4)
+        local rand = math.randomInt(1, 4)
         if rand <= 2 then
             if inAPickle == xi.questStatus.QUEST_ACCEPTED then
                 player:startEvent(659) -- IN A PICKLE: Quest Turn In (1st Time)
@@ -40,7 +40,7 @@ entity.onTrigger = function(player, npc)
     local needToZone = player:needToZone()
 
     if inAPickle == xi.questStatus.QUEST_AVAILABLE and not needToZone then
-        local rand = math.random(1, 2)
+        local rand = math.randomInt(1, 2)
         if rand == 1 then
             player:startEvent(654, 0, xi.item.RARAB_TAIL) -- IN A PICKLE + RARAB TAIL: Quest Begin
         else
@@ -58,7 +58,7 @@ entity.onTrigger = function(player, npc)
         not needToZone and
         player:getCharVar('QuestInAPickle_var') ~= 1
     then
-        local rand = math.random(1, 2)
+        local rand = math.randomInt(1, 2)
         if rand == 1 then
             player:startEvent(661) -- IN A PICKLE: Repeatable Quest Begin
         else

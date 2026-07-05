@@ -41,7 +41,7 @@ entity.onMobSpawn = function(mob)
             for _, mobId in ipairs(ID.mob.ALEXANDER_IMAGE) do
                 local image = GetMobByID(mobId, mob:getInstance())
                 if image and not image:isSpawned() then
-                    image:setSpawn(mob:getXPos() + math.random(-2, 2), mob:getYPos() + math.random(-2, 2), mob:getZPos() + math.random(-2, 2), mob:getRotPos())
+                    image:setSpawn(mob:getXPos() + math.randomInt(-2, 2), mob:getYPos() + math.randomInt(-2, 2), mob:getZPos() + math.randomInt(-2, 2), mob:getRotPos())
                     image:spawn()
 
                     local target = mob:getTarget()

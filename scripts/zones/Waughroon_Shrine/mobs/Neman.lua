@@ -19,7 +19,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.BROADSIDE_BARRAGE_1,
         xi.mobSkill.BLIND_SIDE_BARRAGE_1,
     }
-    return skillList[math.random(1, #skillList)]
+    return skillList[math.randomInt(1, #skillList)]
 end
 
 return entity

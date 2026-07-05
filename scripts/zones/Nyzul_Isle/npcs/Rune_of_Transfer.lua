@@ -147,8 +147,8 @@ entity.onEventFinish = function(player, csid, option, npc)
             end
 
             -- left/right Menu
-            if option > 2 and math.random(1, 100) >= 50 then
-                instance:setLocalVar('randomPathos', math.random(18, 29))
+            if option > 2 and math.randomInt(1, 100) >= 50 then
+                instance:setLocalVar('randomPathos', math.randomInt(18, 29))
             end
 
             xi.nyzul.clearChests(instance)

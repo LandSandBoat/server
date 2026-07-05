@@ -17,7 +17,7 @@ itemObject.onItemCheck = function(target, item, caster)
 end
 
 itemObject.onItemUse = function(target)
-    target:addExp(xi.settings.main.EXP_RATE * math.random(200, 500))
+    target:addExp(xi.settings.main.EXP_RATE * math.randomInt(200, 500))
 end
 
 return itemObject

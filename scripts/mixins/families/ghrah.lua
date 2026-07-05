@@ -213,11 +213,11 @@ g_mixins.families.ghrah = function(ghrahMob)
     initializeLookupTables() -- Initialize lookup tables once
 
     ghrahMob:addListener('SPAWN', 'GHRAH_SPAWN', function(mob)
-        local skin = math.random(1161, 1168)
+        local skin = math.randomInt(1161, 1168)
         mob:setModelId(skin)
         mob:setAnimationSub(0)
         mob:setAggressive(false)
-        mob:setLocalVar('changeTime', GetSystemTime() + math.random(40, 60)) -- Stagger first change
+        mob:setLocalVar('changeTime', GetSystemTime() + math.randomInt(40, 60)) -- Stagger first change
         mob:setLocalVar('targetForm', getTargetForm(mob))
         mob:addMod(xi.mod.MATT, 20) -- Ghrah have innate +20 MATT on top of BLM bonuses
         mob:addMod(xi.mod.DMGMAGIC, -1250)

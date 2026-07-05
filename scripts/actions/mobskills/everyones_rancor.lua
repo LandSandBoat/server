@@ -28,7 +28,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     -- TODO: Verify if this is accurate
     if target:isPet() then
-        realDmg = 50 * math.random(50, 100)
+        realDmg = 50 * math.randomInt(50, 100)
     end
 
     -- Uggalepih Necklace mitigation

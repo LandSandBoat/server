@@ -14,7 +14,7 @@ instanceObject.afterInstanceRegister = function(player)
 end
 
 instanceObject.onInstanceCreated = function(instance)
-    local figureheadChest = math.random(ID.npc.ILRUSI_CURSED_CHEST_OFFSET, ID.npc.ILRUSI_CURSED_CHEST_OFFSET + 11)
+    local figureheadChest = math.randomInt(ID.npc.ILRUSI_CURSED_CHEST_OFFSET, ID.npc.ILRUSI_CURSED_CHEST_OFFSET + 11)
 
     for i, v in pairs(ID.mob[1]) do
         SpawnMob(v, instance)

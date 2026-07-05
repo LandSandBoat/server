@@ -38,7 +38,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
         xi.magic.spell.POISONGA_II,
     }
 
-    return spellList[math.random(1, #spellList)]
+    return spellList[math.randomInt(1, #spellList)]
 end
 
 entity.onMobWeaponSkill = function(mob, target, skill, action)

@@ -52,7 +52,7 @@ entity.onMobDespawn = function(mob)
 
     if lumberDeath == 1 then
         -- Lumber Jack died, Set Weeping Willow's respawn time (21-24 hours)
-        GetMobByID(mob:getID() -6):setRespawnTime(math.random(75600, 86400))
+        GetMobByID(mob:getID() -6):setRespawnTime(math.randomInt(75600, 86400))
     else
         -- Lumber Jack idle despawned, set Weeping Willow to 30 min respawn
         GetMobByID(mob:getID() -6):setRespawnTime(1800)

@@ -23,7 +23,7 @@ end
 entity.onMobSpawn = function(mob)
     -- Burn the 21-24 hour window the instant it appears, so a pop that nobody
     -- stays aboard to kill still consumes the cooldown until it can show again.
-    mob:setLocalVar('cooldown', GetSystemTime() + math.random(75600, 86400)) -- 21 to 24 hours
+    mob:setLocalVar('cooldown', GetSystemTime() + math.randomInt(75600, 86400)) -- 21 to 24 hours
 
     -- Emerge onto the barge: spawn invisible, jump aboard, then become targetable.
     mob:hideName(true)

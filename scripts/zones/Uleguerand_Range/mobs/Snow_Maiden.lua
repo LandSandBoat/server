@@ -8,7 +8,7 @@ local ID = zones[xi.zone.ULEGUERAND_RANGE]
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar('timeToGrow', GetSystemTime() + math.random(43200, 46800)) -- 12 to 13 hourss
+    mob:setLocalVar('timeToGrow', GetSystemTime() + math.randomInt(43200, 46800)) -- 12 to 13 hourss
 end
 
 entity.onMobRoam = function(mob)
@@ -24,7 +24,7 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobDisengage = function(mob)
-    mob:setLocalVar('timeToGrow', GetSystemTime() + math.random(43200, 46800)) -- 12 to 13 hours
+    mob:setLocalVar('timeToGrow', GetSystemTime() + math.randomInt(43200, 46800)) -- 12 to 13 hours
 end
 
 entity.onMobDespawn = function(mob)

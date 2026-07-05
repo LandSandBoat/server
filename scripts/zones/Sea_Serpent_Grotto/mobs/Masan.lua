@@ -31,7 +31,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TP_DRAIN, { power = (math.random(250, 500)) })  -- Wiki reports of HP drain add effect seem to be made up, only TP drain found in extensive testing
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TP_DRAIN, { power = (math.randomInt(250, 500)) })  -- Wiki reports of HP drain add effect seem to be made up, only TP drain found in extensive testing
 end
 
 entity.onMobDeath = function(mob, player, optParams)

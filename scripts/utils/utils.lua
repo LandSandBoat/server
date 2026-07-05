@@ -160,7 +160,7 @@ function utils.shuffle(inputTable)
     local shuffledTable = {}
 
     for _, v in ipairs(inputTable) do
-        local pos = math.random(1, #shuffledTable + 1)
+        local pos = math.randomInt(1, #shuffledTable + 1)
         table.insert(shuffledTable, pos, v)
     end
 
@@ -661,7 +661,7 @@ function utils.randomEntryIdx(t)
         keys[#keys + 1] = key
     end
 
-    local index = keys[math.random(1, #keys)]
+    local index = keys[math.randomInt(1, #keys)]
     return index, t[index]
 end
 
@@ -1138,7 +1138,7 @@ function utils.selectFromLootGroups(actor, lootTable)
         local quantity = lootGroup.quantity or 1
 
         for j = 1, quantity do
-            local roll    = math.random(max)
+            local roll    = math.randomInt(1, max)
             local current = 0
 
             for _, entry in pairs(lootGroup) do

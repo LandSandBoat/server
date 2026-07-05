@@ -26,7 +26,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
         -- TODO: Random? Or does it scale with TP?
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 10, 0, math.random(30, 60))
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 10, 0, math.randomInt(30, 60))
     end
 
     return info.damage

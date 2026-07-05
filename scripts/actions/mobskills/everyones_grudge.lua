@@ -21,7 +21,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     -- TODO: Verify if this is accurate
     if target:isPet() then
-        realDmg = power * math.random(30, 100)
+        realDmg = power * math.randomInt(30, 100)
     end
 
     if mob:isNM() then

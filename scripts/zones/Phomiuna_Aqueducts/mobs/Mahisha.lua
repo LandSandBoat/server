@@ -21,16 +21,16 @@ entity.onMobDespawn = function(mob)
     end
 
     -- Eba spawns next
-    if math.random(1, 100) <= 50 then
+    if math.randomInt(1, 100) <= 50 then
         DisallowRespawn(mob:getID(), true)
         DisallowRespawn(eba:getID(), false)
-        eba:setRespawnTime(math.random(28800, 43200)) -- 8 to 12 hours
+        eba:setRespawnTime(math.randomInt(28800, 43200)) -- 8 to 12 hours
 
     -- Mahisha spawns next
     else
         DisallowRespawn(eba:getID(), true)
         DisallowRespawn(mob:getID(), false)
-        mob:setRespawnTime(math.random(28800, 43200)) -- 8 to 12 hours
+        mob:setRespawnTime(math.randomInt(28800, 43200)) -- 8 to 12 hours
     end
 end
 

@@ -10,7 +10,7 @@ zoneObject.onInitialize = function(zone)
     -- A Chocobo Riding Game finish line
     zone:registerCylindricalTriggerArea(1, -489.11, 349.14, 20)
 
-    GetNPCByID(ID.npc.QM2 + math.random(0, 5)):setLocalVar('Quest[2][70]Option', 1) -- Determine which QM is active today for THF AF2
+    GetNPCByID(ID.npc.QM2 + math.randomInt(0, 5)):setLocalVar('Quest[2][70]Option', 1) -- Determine which QM is active today for THF AF2
     xi.voidwalker.zoneOnInit(zone)
 end
 
@@ -49,7 +49,7 @@ zoneObject.onGameDay = function()
         GetNPCByID(i):resetLocalVars()
     end
 
-    GetNPCByID(ID.npc.QM2 + math.random(0, 5)):setLocalVar('Quest[2][70]Option', 1) -- Determine which QM is active today for THF AF2
+    GetNPCByID(ID.npc.QM2 + math.randomInt(0, 5)):setLocalVar('Quest[2][70]Option', 1) -- Determine which QM is active today for THF AF2
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

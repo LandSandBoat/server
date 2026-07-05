@@ -109,7 +109,7 @@ spellObject.onMobSpawn = function(mob)
     mob:addListener('WEAPONSKILL_USE', 'RUGHADJEEN_WEAPONSKILL_USE', function(mobArg, target, skill, tp, action, damage)
         if skill:getID() == xi.mobSkill.VICTORY_BEACON_TRUST then -- Victory Beacon
         -- Do not despair! The Goddess of Victory fights by our side!
-            if math.random(1, 100) <= 33 then
+            if math.randomInt(1, 100) <= 33 then
                 xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)
             end
         end

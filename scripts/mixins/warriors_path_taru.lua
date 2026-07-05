@@ -23,8 +23,8 @@ g_mixins.warriors_path_taru = function(mob)
         local changetime = mob:getLocalVar('changetime')
         local battletime = mob:getBattleTime()
         local ID = zones[mob:getZoneID()]
-        local randOffset = math.random(0, 2) -- each taru most commonly uses text offset 0-2+ for during fight
-        local animationchance = math.random()
+        local randOffset = math.randomInt(0, 2) -- each taru most commonly uses text offset 0-2+ for during fight
+        local animationchance = math.randomFloat(0, 1)
         local battlefield = mob:getBattlefield()
         if -- every 5 seconds the taru's will say something and use a random animation
             battletime - changetime >= 5 and

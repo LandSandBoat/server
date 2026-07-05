@@ -35,7 +35,7 @@ xi.combat.physicalHitRate.checkAnticipated = function(attacker, defender)
     -- Calculate if "Third Eye" is retained.
     if
         thirdEyeRetentionChance == 0 or
-        math.random(1, 10000) > thirdEyeRetentionChance
+        math.randomInt(1, 10000) > thirdEyeRetentionChance
     then
         defender:delStatusEffect(xi.effect.THIRD_EYE)
     end

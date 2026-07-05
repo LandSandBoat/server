@@ -45,7 +45,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
 
     if mob:getHPP() < 25 then
         -- 16.67% (1/6 possible TP moves) chance to start a GoH sequence
-        if math.random(1, 10000) <= 1667 then
+        if math.randomInt(1, 10000) <= 1667 then
             mob:setLocalVar('gohSequence', 6)
             return xi.mobSkill.LAVA_SPIT
         end

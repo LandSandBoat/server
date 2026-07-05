@@ -77,12 +77,12 @@ local function giveAugmentedItem(player, itemID, augmentList, maxAugments)
     local paramIndex = 3
 
     for i = 1, maxAugments do
-        if math.random(1, 100) <= augmentChance[i] then
-            local augmentTable = augmentList[math.random(1, #augmentList)]
+        if math.randomInt(1, 100) <= augmentChance[i] then
+            local augmentTable = augmentList[math.randomInt(1, #augmentList)]
 
             if not isDuplicateAugment(itemParams, augmentTable[1]) then
                 itemParams[paramIndex] = augmentTable[1]
-                itemParams[paramIndex + 1] = math.random(augmentTable[2], augmentTable[3])
+                itemParams[paramIndex + 1] = math.randomInt(augmentTable[2], augmentTable[3])
                 paramIndex = paramIndex + 2
             end
         end

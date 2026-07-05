@@ -35,7 +35,7 @@ local attohwaChasmGlobal =
 
     handleMiasma = function(npc)
         local timer    = npc:getLocalVar('timer')
-        local newTimer = math.random(30, 40)
+        local newTimer = math.randomInt(30, 40)
 
         if GetSystemTime() >= timer then
             if npc:getAnimation() == xi.anim.CLOSE_DOOR then
@@ -54,7 +54,7 @@ local attohwaChasmGlobal =
         -- Reactivate a random deactivated luminant after 30-60 minutes
         -- Because 3 luminants always start activated when the server starts,
         -- the luminants will always be restored back to 3 active eventually.
-        npc:timer(math.random(1800, 3600), function()
+        npc:timer(math.randomInt(1800, 3600), function()
             local luminantTable = ID.npc.LUMINANT
             local shuffledTable = utils.shuffle(luminantTable) -- Reorder the luminantTable randomly.
             for _, luminantId in ipairs(shuffledTable) do

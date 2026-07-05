@@ -115,7 +115,7 @@ xi.combat.action.executeAddEffectEnhancement = function(actor, target, fedData)
     end
 
     -- Early return: No proc.
-    if math.random(1, 100) > params.chance then
+    if math.randomInt(1, 100) > params.chance then
         return 0, 0, 0
     end
 
@@ -146,7 +146,7 @@ xi.combat.action.executeAddEffectEnfeeblement = function(actor, target, fedData)
     end
 
     -- Early return: No proc.
-    if math.random(1, 100) > params.chance then
+    if math.randomInt(1, 100) > params.chance then
         return 0, 0, 0
     end
 
@@ -196,7 +196,7 @@ xi.combat.action.executeAddEffectDispel = function(actor, target, fedData)
     end
 
     -- Early return: No proc.
-    if math.random(1, 100) > params.chance then
+    if math.randomInt(1, 100) > params.chance then
         return 0, 0, 0
     end
 

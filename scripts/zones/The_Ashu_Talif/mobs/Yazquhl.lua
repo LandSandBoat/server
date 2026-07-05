@@ -111,7 +111,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         table.insert(tpTable, xi.mobSkill.VORPAL_BLADE_1)
     end
 
-    return tpTable[math.random(1, #tpTable)]
+    return tpTable[math.randomInt(1, #tpTable)]
 end
 
 entity.onMobWeaponSkill = function(mob, target, skill, action)
@@ -135,7 +135,7 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
     }
 
     if mob:isEngaged() then
-        mob:showText(mob, weaponskillMessage[math.random(1, #weaponskillMessage)])
+        mob:showText(mob, weaponskillMessage[math.randomInt(1, #weaponskillMessage)])
     end
 
     local gowam = GetMobByID(ID.mob.GOWAM, instance)

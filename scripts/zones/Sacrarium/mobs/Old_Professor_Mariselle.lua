@@ -40,7 +40,7 @@ end
 entity.onMobEngage = function(mob, target)
     local currentTime = GetSystemTime()
     mob:setLocalVar('petTimer', currentTime + 10)
-    mob:setLocalVar('teleportTime', currentTime + math.random(30, 180))
+    mob:setLocalVar('teleportTime', currentTime + math.randomInt(30, 180))
 end
 
 entity.onMobFight = function(mob, target)
@@ -70,7 +70,7 @@ entity.onMobFight = function(mob, target)
             end
         end
 
-        mob:setLocalVar('teleportTime', currentTime + math.random(30, 180))
+        mob:setLocalVar('teleportTime', currentTime + math.randomInt(30, 180))
     end
 end
 
@@ -84,7 +84,7 @@ entity.onMobSpellChoose = function(mob)
         xi.magic.spell.SLEEPGA_II,
     }
 
-    return spellList[math.random(1, #spellList)]
+    return spellList[math.randomInt(1, #spellList)]
 end
 
 entity.onMobDisengage = function(mob)
@@ -93,7 +93,7 @@ end
 
 entity.onMobDespawn = function(mob)
     -- Randomize Old Prof. Mariselle's spawn location
-    local nextSpawn = math.random(0, 5)
+    local nextSpawn = math.randomInt(0, 5)
     for i = 0, 5 do
         local value = i == nextSpawn and 1 or 0
         GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + i):setLocalVar('hasProfessorMariselle', value)

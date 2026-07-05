@@ -72,7 +72,7 @@ entity.onMobFight = function(mob, target)
         mob:getAnimationSub() == 0 and
         mob:getHPP() < nextBreakpoint
     then
-        local pickImmune = math.random(1, 100) <= 50 and xi.mobSkill.WHEEL_OF_IMPREGNABILITY or xi.mobSkill.BASTION_OF_TWILIGHT
+        local pickImmune = math.randomInt(1, 100) <= 50 and xi.mobSkill.WHEEL_OF_IMPREGNABILITY or xi.mobSkill.BASTION_OF_TWILIGHT
         mob:useMobAbility(pickImmune)
         mob:setLocalVar('nextBreakpoint', nextBreakpoint - 10)
     end
@@ -90,7 +90,7 @@ entity.onSpellPrecast = function(mob, spell)
 end
 
 entity.onMobSpellChoose = function(mob, target, spellId)
-    if math.random(1, 100) <= 25 then
+    if math.randomInt(1, 100) <= 25 then
         return xi.magic.spell.COMET
     else
         return xi.magic.spell.METEOR
@@ -112,7 +112,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         table.insert(tpList, xi.mobSkill.INFERNAL_DELIVERANCE_2)
     end
 
-    return tpList[math.random(#tpList)]
+    return tpList[math.randomInt(1, #tpList)]
 end
 
 entity.onMobDespawn = function(mob)

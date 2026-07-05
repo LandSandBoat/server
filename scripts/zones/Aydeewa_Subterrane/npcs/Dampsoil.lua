@@ -37,14 +37,14 @@ entity.onTrade = function(player, npc, trade)
 
     -- Must have at least 3 trades to pop, but threshold is randomized between 3 and 10 to prevent predictability
     if threshold == 0 then
-        threshold = math.random(3, 10)
+        threshold = math.randomInt(3, 10)
         npc:setLocalVar('threshold', threshold)
     end
 
     -- Clusters give a 50% chance to pop Crystal Eater, crystals give 20%
     local popChance = isCluster and 50 or 20
 
-    if trades >= threshold and math.random(1, 100) <= popChance then
+    if trades >= threshold and math.randomInt(1, 100) <= popChance then
         -- Crystal Eater pops. Cooldown is NOT applied here - it will be applied by the mob's onMobDeath handler when the fight ends
         player:messageSpecial(ID.text.MONSTER_MUSHROOM_SPROUTS)
         if crystalEater then
@@ -61,7 +61,7 @@ entity.onTrade = function(player, npc, trade)
         local awardedItem = false
 
         -- 10% chance to award a mushroom item - if awarded, no cooldown applies
-        if math.random(1, 100) <= 10 then
+        if math.randomInt(1, 100) <= 10 then
             local tradeRewards =
             {
                 xi.item.SLEEPSHROOM,
@@ -70,7 +70,7 @@ entity.onTrade = function(player, npc, trade)
                 xi.item.KING_TRUFFLE,
             }
 
-            local rewardItem = tradeRewards[math.random(1, 4)]
+            local rewardItem = tradeRewards[math.randomInt(1, 4)]
             if npcUtil.giveItem(player, rewardItem, { silent = true }) then
                 player:messageSpecial(ID.text.PULL_UP_MUSHROOM_1, rewardItem)
                 awardedItem = true

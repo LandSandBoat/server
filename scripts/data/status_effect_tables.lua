@@ -266,7 +266,7 @@ xi.data.statusEffect.isTargetResistant = function(actor, target, effectId)
         resistancePower = math.floor(resistancePower / 2)
     end
 
-    if math.random(1, 100) <= resistancePower then
+    if math.randomInt(1, 100) <= resistancePower then
         return true
     end
 

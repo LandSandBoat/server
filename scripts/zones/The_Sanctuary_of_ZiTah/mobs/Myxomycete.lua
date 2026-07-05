@@ -45,10 +45,10 @@ entity.onMobSpawn = function(mob)
         -- (i.e. there's a chance to not spawn on a change to water weather if a high delay is selected, because weather will change before transform)
         if weather == xi.weather.RAIN then
             -- Noble Mold always spawns on the minute after weather change
-            nobleMoldDelay  = math.random(2, 120) * 60
+            nobleMoldDelay  = math.randomInt(2, 120) * 60
         elseif weather == xi.weather.SQUALL then
             -- TODO is chance actually higher for squall... Squall is a very rare weather so probably?
-            nobleMoldDelay  = math.random(2, 20) * 60
+            nobleMoldDelay  = math.randomInt(2, 20) * 60
         end
 
         if nobleMoldDelay > 0 then

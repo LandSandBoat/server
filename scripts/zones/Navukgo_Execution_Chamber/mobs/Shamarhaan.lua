@@ -32,13 +32,13 @@ entity.onMobSpawn = function(mob)
 
     -- Reset mob.
     xi.combat.behavior.enableAllActions(mob)
-    mob:setLocalVar('[2hour]HPP', math.random(60, 90))
+    mob:setLocalVar('[2hour]HPP', math.randomInt(60, 90))
     mob:setLocalVar('[2hour]Used', 0)
     mob:setLocalVar('initialTaunt', 0)
     mob:setLocalVar('talkTime', 0)
     mob:setLocalVar('alreadyTalked', 0)
     mob:setLocalVar('maneuverUseTime', 0)
-    mob:setLocalVar('maneuverNextTimer', math.random(45, 60))
+    mob:setLocalVar('maneuverNextTimer', math.randomInt(45, 60))
 end
 
 entity.onMobRoam = function(mob)
@@ -144,9 +144,9 @@ entity.onMobFight = function(mob, target)
     -- Handle Maneuvers.
     local timer = mob:getLocalVar('maneuverNextTimer')
     if currentTime > mob:getLocalVar('maneuverUseTime') + timer then
-        mob:useMobAbility(math.random(xi.mobSkill.FIRE_MANEUVER, xi.mobSkill.WATER_MANEUVER))
+        mob:useMobAbility(math.randomInt(xi.mobSkill.FIRE_MANEUVER, xi.mobSkill.WATER_MANEUVER))
         mob:setLocalVar('maneuverUseTime', currentTime)
-        mob:setLocalVar('maneuverNextTimer', math.random(45, 60))
+        mob:setLocalVar('maneuverNextTimer', math.randomInt(45, 60))
         return
     end
 end
@@ -163,7 +163,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.HOWLING_FIST_1,
     }
 
-    return tpTable[math.random(1, #tpTable)]
+    return tpTable[math.randomInt(1, #tpTable)]
 end
 
 entity.onMobWeaponSkill = function(mob, target, skill, action)

@@ -17,7 +17,7 @@ entity.onTrigger = function(player, npc)
         player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, xi.ki.NEW_MODEL_HAT)
         player:startEvent(56)
     else
-        if math.random(1, 100) <= 50 then
+        if math.randomInt(1, 100) <= 50 then
             player:startEvent(302) -- Standard converstation
         else
             player:startEvent(303) -- Standard converstation

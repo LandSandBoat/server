@@ -15,7 +15,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getYPos() == 0 and
         player:getZPos() == 0
     then
-        local position = math.random(-2, 2) + 0.150
+        local position = math.randomInt(-2, 2) + 0.150
         player:setPos(position, -2.100, 3.250, 64)
     end
 

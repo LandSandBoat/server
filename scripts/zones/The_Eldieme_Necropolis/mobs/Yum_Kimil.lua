@@ -30,7 +30,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
         chance         = 100,
         attackType     = xi.attackType.MAGICAL,
         magicalElement = xi.element.FIRE,
-        basePower      = math.random(150, 200),
+        basePower      = math.randomInt(150, 200),
         actorStat      = xi.mod.INT,
         canResist      = true,
     }

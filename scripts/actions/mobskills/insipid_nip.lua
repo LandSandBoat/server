@@ -25,7 +25,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
-        xi.mobskills.mobDrainAttribute(mob, target, xi.effect.STR_DOWN + math.random(0, 6), math.random(25, 30), 9, 120)
+        xi.mobskills.mobDrainAttribute(mob, target, xi.effect.STR_DOWN + math.randomInt(0, 6), math.randomInt(25, 30), 9, 120)
     end
 
     return info.damage

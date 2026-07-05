@@ -39,7 +39,7 @@ entity.onMobFight = function(mob, target)
             GetMobByID(baseId + i):updateEnmity(target)
         end
 
-        local chosenLeveret = GetMobByID(baseId + math.random(1, 5))
+        local chosenLeveret = GetMobByID(baseId + math.randomInt(1, 5))
         if chosenLeveret then
             chosenLeveret:setLocalVar('chosenLeveret', 1)
             chosenLeveret:setMobMod(xi.mobMod.ADD_EFFECT, 1)
@@ -56,7 +56,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.WILD_GINSENG,
     }
 
-    return skills[math.random(1, #skills)]
+    return skills[math.randomInt(1, #skills)]
 end
 
 return entity

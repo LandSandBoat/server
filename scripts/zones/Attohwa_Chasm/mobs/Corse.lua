@@ -11,7 +11,7 @@ local entity = {}
 entity.onMobDespawn = function(mob)
     local params = {}
     params.nightOnly = true
-    xi.mob.phOnDespawn(mob, ID.mob.CITIPATI, 10, math.random(10800, 21600), params) -- 3 to 6 hours, night only
+    xi.mob.phOnDespawn(mob, ID.mob.CITIPATI, 10, math.randomInt(10800, 21600), params) -- 3 to 6 hours, night only
 end
 
 return entity

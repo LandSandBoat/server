@@ -12,7 +12,7 @@ zoneObject.onInitialize = function(zone)
     -- Give the Acting in Good Faith ??? a random spawn
     local qm1 = GetNPCByID(eldiemeID.npc.QM1)
     if qm1 then
-        qm1:setPos(unpack(eldiemeID.npc.QM1_POS[math.random(1, 4)]))
+        qm1:setPos(unpack(eldiemeID.npc.QM1_POS[math.randomInt(1, 4)]))
     end
 end
 

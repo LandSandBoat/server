@@ -18,7 +18,10 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    if math.random(100) <= 5 and not target:hasStatusEffect(xi.effect.PLAGUE) then
+    if
+        math.randomInt(1, 100) <= 5 and
+        not target:hasStatusEffect(xi.effect.PLAGUE)
+    then
         return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PLAGUE, { chance = 100 })
     else
         return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.MP_DRAIN, { power = target:getMaxMP() * 0.01, chance = 100 })

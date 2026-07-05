@@ -12,7 +12,7 @@ itemObject.onItemCheck = function(target, item, caster)
 end
 
 itemObject.onItemUse = function(target)
-    npcUtil.giveItem(target, { { xi.item.METAL_SLIME_CANDY, math.random(5, 12) } })
+    npcUtil.giveItem(target, { { xi.item.METAL_SLIME_CANDY, math.randomInt(5, 12) } })
 end
 
 return itemObject

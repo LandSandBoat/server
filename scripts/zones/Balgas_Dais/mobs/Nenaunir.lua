@@ -29,7 +29,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
         xi.magic.spell.BIND
     }
 
-    return spellList[math.random(1, #spellList)]
+    return spellList[math.randomInt(1, #spellList)]
 end
 
 -- Only uses Healing Breeze as a weapon skill.

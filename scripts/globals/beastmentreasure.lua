@@ -158,7 +158,7 @@ local wSealsUnique =
 
 local function weightedRandomSelect(w_loot)
     -- Takes a weighted loot table and returns a single random result
-    return w_loot[math.random(#w_loot)]
+    return w_loot[math.randomInt(1, #w_loot)]
 end
 
 local function getAssignedDigSite(player)
@@ -218,7 +218,7 @@ xi.beastmenTreasure.handleNpcOnTrade = function(player, trade, digsiteids)
         npcUtil.tradeHasExactly(trade, zd.fetchitems)
     then
         -- Assign a random dig site to the player
-        player:setCharVar(zd.dsvar, math.random(1, 8))
+        player:setCharVar(zd.dsvar, math.randomInt(1, 8))
         startMapMarkerEvent(101, player, xi.beastmenTreasure.getTableOfIDs(digsiteids)) -- Peddlestox shows you where to dig
     end
 end

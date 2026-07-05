@@ -114,7 +114,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         table.insert(mobskillList, xi.mobSkill.THUNDRIS_SHRIEK)
     end
 
-    return mobskillList[math.random(1, #mobskillList)]
+    return mobskillList[math.randomInt(1, #mobskillList)]
 end
 
 entity.onMobWeaponSkill = function(mob, target, skill, action)

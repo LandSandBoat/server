@@ -218,7 +218,7 @@ instanceObject.onEventUpdate = function(player, csid, option, npc)
                 instance:setStage(5)
                 instance:setProgress(1)
                 xi.salvage.unsealDoors(instance, ID.npc.DOOR_5_1)
-                instance:setLocalVar('exitPoint', math.random(9, 10))
+                instance:setLocalVar('exitPoint', math.randomInt(9, 10))
             end
         end
     end

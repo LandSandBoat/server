@@ -38,7 +38,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DARK_SLEEP_RES_RANK, 11)
-    mob:setLocalVar('petSummonTime', GetSystemTime() + math.random(10, 15))
+    mob:setLocalVar('petSummonTime', GetSystemTime() + math.randomInt(10, 15))
     mob:setLocalVar('spellCastTime', GetSystemTime())
 end
 
@@ -60,8 +60,8 @@ entity.onMobFight = function(mob, target)
         currentTime >= mob:getLocalVar('spellCastTime') and
         not xi.combat.behavior.isEntityBusy(mob)
     then
-        mob:castSpell(spells[math.random(1, #spells)], target)
-        mob:setLocalVar('spellCastTime', currentTime + math.random(30, 45))
+        mob:castSpell(spells[math.randomInt(1, #spells)], target)
+        mob:setLocalVar('spellCastTime', currentTime + math.randomInt(30, 45))
     end
 end
 

@@ -1021,7 +1021,7 @@ local function addGovProwessBonusEffect(player)
 
     -- pick one and apply
     if #availableProwesses > 0 then
-        local p = availableProwesses[math.random(1, #availableProwesses)]
+        local p = availableProwesses[math.randomInt(1, #availableProwesses)]
         local e = player:getStatusEffect(p.effect)
 
         -- get current power

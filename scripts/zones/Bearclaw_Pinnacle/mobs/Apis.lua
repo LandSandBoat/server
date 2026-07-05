@@ -46,7 +46,7 @@ entity.onMobFight = function(mob, target)
         return
     end
 
-    local nextPhase = math.random(1, #colorPhaseData)
+    local nextPhase = math.randomInt(1, #colorPhaseData)
     local colorPhase = colorPhaseData[nextPhase]
 
     mob:setMod(xi.mod.UDMGRANGE, colorPhase.uDmgRange)
@@ -57,7 +57,7 @@ entity.onMobFight = function(mob, target)
     mob:setMod(xi.mod.DOUBLE_ATTACK, colorPhase.doubleAttack)
     mob:setDelay(colorPhase.delay)
     mob:injectActionPacket(mob:getID(), 11, colorPhase.injectedAction, 0, 0x18, 0, 0, 0)
-    mob:setLocalVar('colorChangeTime', currentTime + math.random(60, 90))
+    mob:setLocalVar('colorChangeTime', currentTime + math.randomInt(60, 90))
 end
 
 return entity

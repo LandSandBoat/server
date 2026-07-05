@@ -44,7 +44,7 @@ end
 
 -- Has additional effect: Stun (15% chance)
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN, { chance = 15, duration = math.random(7, 8) })
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN, { chance = 15, duration = math.randomInt(7, 8) })
 end
 
 -- Only uses Leafstorm.

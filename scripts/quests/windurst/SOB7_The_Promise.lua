@@ -253,7 +253,7 @@ quest.sections =
                             return quest:event(528)
                         end
                     else
-                        local random = math.random(0, 1)
+                        local random = math.randomInt(0, 1)
                         if random == 0 then
                             return quest:event(544)
                         else

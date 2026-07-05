@@ -174,8 +174,8 @@ end
 local function buildRunPath(path, mob)
     local runPath       = {}
     local startingPoint = getNearestStartPoint(path, mob:getPos()) -- Fetches the path point to the mob to start the run from.
-    local pathLength    = math.random(15, 50) -- Will generate a path between 15 and 50 points long.
-    local direction     = math.random(0, 1) == 0 and -1 or 1 -- Randomly choose to run the path clockwise or counter-clockwise.
+    local pathLength    = math.randomInt(15, 50) -- Will generate a path between 15 and 50 points long.
+    local direction     = math.randomInt(0, 1) == 0 and -1 or 1 -- Randomly choose to run the path clockwise or counter-clockwise.
 
     for offset = 0, pathLength - 1 do -- Starting from the nearest point, add points to the run path in the chosen direction.
         local pointTable = ((startingPoint + offset * direction - 1) % #path) + 1 -- Loop through the path and wrap-around using modulo to make a full circle if needed.
@@ -222,7 +222,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngage = function(mob, target)
-    mob:setLocalVar('raptorRunTime', GetSystemTime() + math.random(25, 40))
+    mob:setLocalVar('raptorRunTime', GetSystemTime() + math.randomInt(25, 40))
 end
 
 entity.onMobFight = function(mob, target)
@@ -277,13 +277,13 @@ entity.onMobFight = function(mob, target)
                 track == paths[2].inner or
                 track == paths[3].inner
             then
-                mob:useMobAbility(innerRaptorSkills[math.random(1, #innerRaptorSkills)])
+                mob:useMobAbility(innerRaptorSkills[math.randomInt(1, #innerRaptorSkills)])
             else
-                mob:useMobAbility(outerRaptorSkills[math.random(1, #outerRaptorSkills)])
+                mob:useMobAbility(outerRaptorSkills[math.randomInt(1, #outerRaptorSkills)])
             end
 
             mob:setLocalVar('runPhase', 1)
-            mob:setLocalVar('raptorRunTime', currentTime + math.random(25, 40))
+            mob:setLocalVar('raptorRunTime', currentTime + math.randomInt(25, 40))
             mob:setBaseSpeed(44)
         end,
     }
@@ -301,9 +301,9 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         track == paths[2].inner or
         track == paths[3].inner
     then
-        return innerRaptorSkills[math.random(1, #innerRaptorSkills)]
+        return innerRaptorSkills[math.randomInt(1, #innerRaptorSkills)]
     else
-        return outerRaptorSkills[math.random(1, #outerRaptorSkills)]
+        return outerRaptorSkills[math.randomInt(1, #outerRaptorSkills)]
     end
 end
 

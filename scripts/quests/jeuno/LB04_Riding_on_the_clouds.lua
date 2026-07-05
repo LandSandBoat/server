@@ -64,10 +64,10 @@ quest.sections =
             ['Maat'] =
             {
                 onTrigger = function(player, npc)
-                    quest:setVar(player, 'npcSandoria', math.random(0, 7))
-                    quest:setVar(player, 'npcBastok', math.random(0, 7))
-                    quest:setVar(player, 'npcWindurst', math.random(0, 7))
-                    quest:setVar(player, 'npcOtherlands', math.random(0, 7))
+                    quest:setVar(player, 'npcSandoria', math.randomInt(0, 7))
+                    quest:setVar(player, 'npcBastok', math.randomInt(0, 7))
+                    quest:setVar(player, 'npcWindurst', math.randomInt(0, 7))
+                    quest:setVar(player, 'npcOtherlands', math.randomInt(0, 7))
                     return quest:progressEvent(88,
                         quest:getVar(player, 'npcSandoria'),
                         quest:getVar(player, 'npcBastok'),

@@ -15,7 +15,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local base = 10
 
     if mob:isNM() then
-        base = math.random(10, 25)
+        base = math.randomInt(10, 25)
     end
 
     skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.COPY_IMAGE, 1, 0, 300, 0, base))

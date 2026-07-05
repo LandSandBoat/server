@@ -65,7 +65,7 @@ local entity = {}
 local function goDormant(mob, zoneIndex)
     mob:clearPath()
 
-    zoneIndex = zoneIndex or math.random(1, #patrolZones)
+    zoneIndex = zoneIndex or math.randomInt(1, #patrolZones)
 
     mob:setLocalVar('patrolZone', zoneIndex)
     mob:setLocalVar('state', 0)
@@ -280,7 +280,7 @@ entity.onMobDespawn = function(mob)
     DespawnMob(mobId + 1)
     DespawnMob(mobId + 2)
 
-    mob:setRespawnTime(math.random(3600, 10800)) -- respawn in 1-3 hours
+    mob:setRespawnTime(math.randomInt(3600, 10800)) -- respawn in 1-3 hours
 end
 
 return entity

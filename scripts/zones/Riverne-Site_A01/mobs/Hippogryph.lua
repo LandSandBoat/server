@@ -13,7 +13,7 @@ local function disturbMob(mob)
     if offset >= 0 and offset <= 2 then
         local zone = mob:getZone()
         if zone then
-            zone:setLocalVar('Heliodromos_ToD', GetSystemTime() + math.random(43200, 54000)) -- 12 to 15 hours
+            zone:setLocalVar('Heliodromos_ToD', GetSystemTime() + math.randomInt(43200, 54000)) -- 12 to 15 hours
         end
     end
 end

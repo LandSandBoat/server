@@ -51,7 +51,7 @@ stoneTimer = function(player)
     -- For all other Luminants, there were no times below 60s (14 recorded)
     -- There could be some subtle differences based on the Luminant distance to the Cradle,
     -- but unless we get a hundred more times captured this is probably the best we can do.
-    player:timer(math.random(50, 90) * 1000, function()
+    player:timer(math.randomInt(50, 90) * 1000, function()
         stoneTimer(player)
     end)
 end
@@ -76,7 +76,7 @@ quest.sections =
                     quest:setLocalVar(player, 'NumFades', 0)
                     quest:setLocalVar(player, 'Progress', 0)
 
-                    player:timer(math.random(50, 90) * 1000, function()
+                    player:timer(math.randomInt(50, 90) * 1000, function()
                         stoneTimer(player)
                     end)
                 end,

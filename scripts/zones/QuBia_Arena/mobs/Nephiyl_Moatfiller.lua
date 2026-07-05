@@ -15,7 +15,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('charmUsed', 0)
-    mob:setLocalVar('twoHourHpPercent', math.random(40, 60))
+    mob:setLocalVar('twoHourHpPercent', math.randomInt(40, 60))
 end
 
 entity.onMobFight = function(mob, target)

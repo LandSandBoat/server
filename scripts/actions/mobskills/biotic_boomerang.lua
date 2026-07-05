@@ -27,7 +27,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PLAGUE, 5, 3, math.random(30, 60))
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PLAGUE, 5, 3, math.randomInt(30, 60))
     end
 
     return info.damage

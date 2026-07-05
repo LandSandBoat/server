@@ -77,7 +77,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         table.insert(skillList, xi.mobSkill.INK_JET_1)
     end
 
-    return skillList[math.random(1, #skillList)]
+    return skillList[math.randomInt(1, #skillList)]
 end
 
 return entity

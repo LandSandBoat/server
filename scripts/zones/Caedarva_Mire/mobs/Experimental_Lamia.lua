@@ -19,7 +19,7 @@ local function spawnMinions(mob, target)
         local minion = GetMobByID(i)
 
         if minion then
-            minion:setSpawn(x + math.random(-2, 2), y, z + math.random(-2, 2))
+            minion:setSpawn(x + math.randomInt(-2, 2), y, z + math.randomInt(-2, 2))
             minion:spawn()
             minion:updateEnmity(target)
         end

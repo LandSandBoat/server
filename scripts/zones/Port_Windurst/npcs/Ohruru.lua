@@ -44,7 +44,7 @@ entity.onTrigger = function(player, npc)
         not player:hasStatusEffect(xi.effect.BANE) and
         not player:hasStatusEffect(xi.effect.PLAGUE)
     then
-        local rand = math.random(1, 2)
+        local rand = math.randomInt(1, 2)
         if rand == 1 then
             player:startEvent(248) -- CATCH IT IF YOU CAN: During Quest 1
         else

@@ -338,6 +338,49 @@ class LuaStyleCheck:
                     f"Use of deprecated function: {deprecated_func}. Suggested replacement: {replacement}"
                 )
 
+    def check_math_random_bounds(self, line):
+        """math.random must state both bounds at the call site.
+
+        math.random(1, 100) -- PASS
+        math.random(1)      -- FAIL: use math.randomInt(1, n)
+        math.random()       -- FAIL: use math.randomFloat(0, 1)
+        math.random(1, 2, 3) -- FAIL: not a valid call
+
+        scripts/tests/framework/prng.lua deliberately exercises every stock
+        argument form of the binding, and is exempt.
+        """
+
+        if "tests/framework/prng.lua" in self.filename.replace("\\", "/"):
+            return
+
+        for match in re.finditer(r"math\.random\s*\(", line):
+            depth = 1
+            commas = 0
+            has_content = False
+
+            for char in line[match.end() :]:
+                if char == "(":
+                    depth += 1
+                elif char == ")":
+                    depth -= 1
+                    if depth == 0:
+                        break
+                elif char == "," and depth == 1:
+                    commas += 1
+                elif not char.isspace():
+                    has_content = True
+
+            if depth != 0:
+                # Call spans multiple lines; the argument list is not visible here.
+                continue
+
+            args = commas + 1 if has_content else 0
+            if args != 2:
+                self.error(
+                    f"math.random takes exactly (lower, upper): got {args} argument(s). "
+                    "Use math.randomInt(lower, upper) or math.randomFloat(lower, upper)"
+                )
+
     def check_deprecated_require(self, line):
         if ("require(") in line:
             for deprecated_str in deprecated_requires:
@@ -537,6 +580,7 @@ class LuaStyleCheck:
                 self.check_multiline_condition_format(code_line)
 
                 self.check_deprecated_functions(code_line)
+                self.check_math_random_bounds(code_line)
                 self.check_function_parameters(code_line)
 
                 # Multiple line conditions can occur in several places.  Check every individual

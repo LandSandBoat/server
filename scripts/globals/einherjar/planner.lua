@@ -102,7 +102,7 @@ local function getRandomMobFamily(chamberTier)
     end
 
     -- Lock the selected family
-    local selectedFamily = availableFamilies[math.random(#availableFamilies)]
+    local selectedFamily = availableFamilies[math.randomInt(1, #availableFamilies)]
     lockedMobs[selectedFamily[1]] = true
 
     return selectedFamily
@@ -156,7 +156,7 @@ local function getRandomBoss(chamberTier)
     end
 
     -- Select a random boss
-    local index        = math.random(#availableBosses)
+    local index        = math.randomInt(1, #availableBosses)
     local selectedBoss = availableBosses[index]
 
     -- Lock the selected boss and return it
@@ -177,7 +177,7 @@ local specialPool =
 -- Returns a random special mob
 -- No lock is necessary since 9 copies exist
 local function getRandomSpecial(chamberId)
-    local rand       = math.random(1, 100)
+    local rand       = math.randomInt(1, 100)
     local cumulative = 0
 
     for _, choice in ipairs(specialPool) do
@@ -205,7 +205,7 @@ local function generateDistribution(familyCount, waveCount)
     end
 
     while remainingFamilies > 0 and #validWaves > 0 do
-        local waveIndex         = validWaves[math.random(1, #validWaves)]
+        local waveIndex         = validWaves[math.randomInt(1, #validWaves)]
         distribution[waveIndex] = distribution[waveIndex] + 1
         remainingFamilies       = remainingFamilies - 1
 
@@ -232,10 +232,10 @@ local function getWaveCount(familyCount, chamberTier)
 
     if chamberTier == 2 then
         -- 1 or 2 waves (40%-60%)
-        return math.random(1, 100) > 40 and maxWaves or 1
+        return math.randomInt(1, 100) > 40 and maxWaves or 1
     elseif chamberTier == 3 then
         -- 1 to 3 waves (5%-45%-45%), but max cannot exceed family count
-        local roll = math.random(1, 100)
+        local roll = math.randomInt(1, 100)
 
         return (roll > 50 and maxWaves) or (roll > 5 and math.min(2, maxWaves)) or 1
     end
@@ -277,13 +277,13 @@ xi.einherjar.makeChamberPlan = function(chamberId)
     local familyCount
     if chamberTier == 1 then
         -- 1 to 2 families (40%-60%) over 1 wave
-        familyCount = math.random(1, 100) > 40 and 2 or 1
+        familyCount = math.randomInt(1, 100) > 40 and 2 or 1
     elseif chamberTier == 2 then
         -- 2 to 3 families (75%-25%) over 1 or 2 waves (40%-60%)
-        familyCount = math.random(1, 100) > 25 and 2 or 3
+        familyCount = math.randomInt(1, 100) > 25 and 2 or 3
     elseif chamberTier == 3 then
         -- 2 to 4 families (25%-50%-25%) over 1, 2, or 3 waves (5%-45%-45%)
-        local roll  = math.random(1, 100)
+        local roll  = math.randomInt(1, 100)
         familyCount = (roll > 75 and 4) or (roll > 25 and 3) or 2
     end
 
@@ -357,7 +357,7 @@ xi.einherjar.subDivideMobs = function(mobIds)
     while index <= #shuffled do
         local remaining = #shuffled - index + 1
         -- Random group size between 2 and 5, but not exceeding remaining mobs
-        local groupSize = math.min(math.random(2, 5), remaining)
+        local groupSize = math.min(math.randomInt(2, 5), remaining)
         local subGroup  = {}
 
         for i = 0, groupSize - 1 do
@@ -372,14 +372,14 @@ xi.einherjar.subDivideMobs = function(mobIds)
 end
 
 xi.einherjar.getRandomPosForMobGroup = function(chamberId, min, max)
-    local groupOffsetX = math.random(min, max)
-    local groupOffsetZ = math.random(min, max)
+    local groupOffsetX = math.randomInt(min, max)
+    local groupOffsetZ = math.randomInt(min, max)
 
-    if math.random(1, 100) <= 50 then
+    if math.randomInt(1, 100) <= 50 then
         groupOffsetX = -groupOffsetX
     end
 
-    if math.random(1, 100) <= 50 then
+    if math.randomInt(1, 100) <= 50 then
         groupOffsetZ = -groupOffsetZ
     end
 

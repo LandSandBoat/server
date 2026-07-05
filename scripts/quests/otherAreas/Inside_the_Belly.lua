@@ -505,7 +505,7 @@ local function tradeFish(player, fishId)
     quest:setLocalVar(player, 'itemIdx', 0)
 
     local rewards = fishRewards[fishId].items
-    local roll    = math.random(1, 1000)
+    local roll    = math.randomInt(1, 1000)
     local sum     = 0
 
     -- NOTE: We confirm the trade now, and not at the end of the cutscene as normal
@@ -537,7 +537,7 @@ local function giveReward(player)
         local itemQt = 1
 
         if rewardItem.min ~= nil and rewardItem.max ~= nil then
-            itemQt = math.random(rewardItem.min, rewardItem.max)
+            itemQt = math.randomInt(rewardItem.min, rewardItem.max)
         end
 
         npcUtil.giveItem(player, { { itemId, itemQt } })

@@ -33,7 +33,7 @@ end
 
 -- Chooses the HP percentage at which to spawn Percipient Zoraal Ja
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar('whenToPopZoraal', math.random(20, 50))
+    mob:setLocalVar('whenToPopZoraal', math.randomInt(20, 50))
     mob:setLocalVar('hasPoppedZoraal', 0)
     mob:setUnkillable(true)
 end
@@ -63,7 +63,7 @@ entity.onMobFight = function(mob, target)
         not GetMobByID(ID.mob.PERCIPIENT_ZORAAL_JA):isSpawned() and
         mob:getLocalVar('hasPoppedZoraal') == 0
     then
-        GetMobByID(ID.mob.PERCIPIENT_ZORAAL_JA):setSpawn(mob:getXPos() + math.random(-2, 2), mob:getYPos(), mob:getZPos() + math.random(-2, 2))
+        GetMobByID(ID.mob.PERCIPIENT_ZORAAL_JA):setSpawn(mob:getXPos() + math.randomInt(-2, 2), mob:getYPos(), mob:getZPos() + math.randomInt(-2, 2))
         SpawnMob(ID.mob.PERCIPIENT_ZORAAL_JA):updateEnmity(target)
         mob:setHP(mob:getMaxHP())
         mob:setLocalVar('hasPoppedZoraal', 1)

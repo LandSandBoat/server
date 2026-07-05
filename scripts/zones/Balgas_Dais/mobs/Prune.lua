@@ -12,7 +12,7 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
 
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 15)
-    mob:setMobMod(xi.mobMod.MAGIC_DELAY, math.random(10, 12))
+    mob:setMobMod(xi.mobMod.MAGIC_DELAY, math.randomInt(10, 12))
     mob:setMobMod(xi.mobMod.SOUND_RANGE, 15) -- 15' aggro range
 end
 
@@ -23,7 +23,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
         xi.magic.spell.ASPIR,
     }
 
-    return spellList[math.random(1, #spellList)]
+    return spellList[math.randomInt(1, #spellList)]
 end
 
 return entity

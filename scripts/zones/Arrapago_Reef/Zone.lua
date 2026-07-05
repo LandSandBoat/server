@@ -44,7 +44,7 @@ local function applyDeathListener(player)
         end
 
         -- Early return: Doesn't get triggered. 80% chance she answers it (estimate from current captures; needs more data for a precise rate)
-        if math.random(1, 100) > 80 then
+        if math.randomInt(1, 100) > 80 then
             return
         end
 

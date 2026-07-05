@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, xi.item.ROLANBERRY) then -- Rolanberry
         player:confirmTrade()
         if
-            math.random(1, 100) > 38 or
+            math.randomInt(1, 100) > 38 or
             not npcUtil.popFromQM(player, npc, ID.mob.AWD_GOGGIE - 6, { claim = true, hide = 0 })
         then
             player:messageSpecial(ID.text.NOTHING_SEEMS_TO_HAPPEN)

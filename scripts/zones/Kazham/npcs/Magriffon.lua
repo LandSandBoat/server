@@ -50,7 +50,7 @@ entity.onTrigger = function(player, npc)
         gulliblesTravelsStatus == xi.questStatus.QUEST_AVAILABLE and
         player:getFameLevel(xi.fameArea.WINDURST) >= 6
     then
-        local gil = math.random(10, 30) * 1000
+        local gil = math.randomInt(10, 30) * 1000
         player:setCharVar('MAGRIFFON_GIL_REQUEST', gil)
         player:startEvent(144, 0, gil)
     elseif

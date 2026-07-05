@@ -16,7 +16,10 @@ itemObject.onItemUse = function(target)
     local bane = target:getStatusEffect(xi.effect.BANE)
     local power = 33 + target:getMod(xi.mod.ENHANCES_HOLYWATER)
 
-    if target:hasStatusEffect(xi.effect.DOOM) and power > math.random(1, 100) then
+    if
+        target:hasStatusEffect(xi.effect.DOOM) and
+        power > math.randomInt(1, 100)
+    then
         target:delStatusEffect(xi.effect.DOOM)
         target:messageBasic(xi.msg.basic.NARROWLY_ESCAPE)
     elseif curse ~= nil and curse2 ~= nil and bane ~= nil then

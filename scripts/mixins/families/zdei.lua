@@ -42,7 +42,7 @@ g_mixins.families.zdei = function(zdeiMob)
 
     zdeiMob:addListener('ENGAGE', 'ZDEI_ENGAGE', function(mob, target)
         mob:setAnimationSub(1)
-        mob:setLocalVar('changeTime', GetSystemTime() + math.random(15, 30))
+        mob:setLocalVar('changeTime', GetSystemTime() + math.randomInt(15, 30))
     end)
 
     zdeiMob:addListener('WEAPONSKILL_STATE_EXIT', 'ZDEI_WS_EXIT', function(mob, skillId, wasExecuted)
@@ -56,7 +56,7 @@ g_mixins.families.zdei = function(zdeiMob)
                 if chargeCount == 0 then
                     mob:setAutoAttackEnabled(false)
                     mob:setMagicCastingEnabled(false)
-                    mob:setLocalVar('chargeTotal', math.random(3, 5))
+                    mob:setLocalVar('chargeTotal', math.randomInt(3, 5))
                 end
 
                 chargeCount = chargeCount + 1
@@ -87,9 +87,9 @@ g_mixins.families.zdei = function(zdeiMob)
             mob:getCurrentAction() == xi.action.category.BASIC_ATTACK and
             mob:getLocalVar('chargeCount') == 0
         then
-            local newSub = math.random(1, 3)
+            local newSub = math.randomInt(1, 3)
             while newSub == mob:getAnimationSub() do
-                newSub = math.random(1, 3)
+                newSub = math.randomInt(1, 3)
             end
 
             mob:setAnimationSub(newSub)

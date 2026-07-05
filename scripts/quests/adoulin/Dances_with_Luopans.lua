@@ -19,7 +19,7 @@ xi.dancesWithLuopans.onHealing = function(player)
         local maxRestSeconds    = 8 * 60
         local secondsPerTick    = xi.settings.map.HEALING_TICK_DELAY
         local minWaitTime       = math.min(3 * secondsPerTick, maxRestSeconds)
-        local waitTimeInSeconds = math.random(minWaitTime, maxRestSeconds)
+        local waitTimeInSeconds = math.randomInt(minWaitTime, maxRestSeconds)
 
         player:messageSpecial(ID.text.ENERGIES_COURSE)
         quest:setLocalVar(player, 'RestUntil', GetSystemTime() + waitTimeInSeconds)

@@ -137,7 +137,7 @@ mission.sections =
             {
                 [505] = function(player, csid, option, npc)
                     if option == 0 then
-                        local crystalItem = math.random(xi.item.FIRE_CRYSTAL, xi.item.DARK_CRYSTAL)
+                        local crystalItem = math.randomInt(xi.item.FIRE_CRYSTAL, xi.item.DARK_CRYSTAL)
 
                         if npcUtil.giveItem(player, crystalItem) then
                             player:setMissionStatus(mission.areaId, 1)

@@ -72,8 +72,8 @@ entity.onMobSpawn = function(mob)
     -- Cache instance calculation once on spawn
     local inst = math.floor((mob:getID() - ID.mob.DIABOLOS_WD) / 7)
     mob:setLocalVar('instance', inst)
-    mob:setLocalVar('nightmarePercent', math.random(50, 75))
-    mob:setLocalVar('ruinousOmenPercent', math.random(35, 49))
+    mob:setLocalVar('nightmarePercent', math.randomInt(50, 75))
+    mob:setLocalVar('ruinousOmenPercent', math.randomInt(35, 49))
     mob:setMagicCastingEnabled(false)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
@@ -122,7 +122,7 @@ entity.onMobEngage = function(mob, target)
             local positions = drawInPositions[inst + 1]
 
             for _, member in ipairs(battlefield:getPlayers()) do
-                local randomPos = positions[math.random(#positions)]
+                local randomPos = positions[math.randomInt(1, #positions)]
                 mob:drawIn(member, 0, 0, randomPos)
             end
         end
@@ -161,7 +161,7 @@ entity.onMobFight = function(mob, target)
     if target:getYPos() > drawInYThresholds[inst + 1] then
         mob:setMobMod(xi.mobMod.NO_MOVE, 1)
         local positions = drawInPositions[inst + 1]
-        local randomPos = positions[math.random(#positions)]
+        local randomPos = positions[math.randomInt(1, #positions)]
         randomPos.rot = target:getRotPos()
         mob:drawIn(target, 0, 0, randomPos)
     else
@@ -182,7 +182,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         { skill = xi.mobSkill.NIGHTMARE_1,       weight = 5  },
     }
 
-    local roll = math.random(1, 100)
+    local roll = math.randomInt(1, 100)
     local cumulative = 0
 
     for _, entry in ipairs(skills) do
@@ -203,7 +203,7 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
         skillId == xi.mobSkill.CACODEMONIA_1 or
         skillId == xi.mobSkill.NIGHTMARE_1
     then
-        local camisado = math.random(1, 2) == 1 and xi.mobSkill.CAMISADO_1 or xi.mobSkill.CAMISADO_2
+        local camisado = math.randomInt(1, 2) == 1 and xi.mobSkill.CAMISADO_1 or xi.mobSkill.CAMISADO_2
         mob:queue(0, function(mobArg)
             mobArg:useMobAbility(camisado)
         end)

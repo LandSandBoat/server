@@ -8,8 +8,8 @@ local entity = {}
 
 local function pickRunPoint(mob)
     mob:setLocalVar('ignore', 1)
-    local distance   = math.random(10, 25)
-    local angle      = math.random() * math.pi
+    local distance   = math.randomInt(10, 25)
+    local angle      = math.randomFloat(0, 1) * math.pi
     local fromTarget = mob:getTarget()
 
     if fromTarget == nil then
@@ -36,7 +36,7 @@ local function continuePoints(mob)
         mob:setLocalVar('cycles', cycles - 1)
         pickRunPoint(mob)
     else
-        mob:setLocalVar('runTime', mob:getBattleTime() + math.random(10, 25))
+        mob:setLocalVar('runTime', mob:getBattleTime() + math.randomInt(10, 25))
         mob:setLocalVar('ignore', 0)
     end
 end
@@ -74,7 +74,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngage = function(mob, target)
-    mob:setLocalVar('runTime', math.random(10, 25))
+    mob:setLocalVar('runTime', math.randomInt(10, 25))
 end
 
 entity.onMobFight = function(mob, target)
@@ -85,14 +85,14 @@ entity.onMobFight = function(mob, target)
 
     -- setup inital run around logic point and how many cycle of points
     if battletime > runTime and ignore == 0 then
-        mob:setLocalVar('cycles', math.random(3, 6))
+        mob:setLocalVar('cycles', math.randomInt(3, 6))
         pickRunPoint(mob)
     -- make sure mob keeps running and cycle to new plotted points
     elseif ignore == 1 then
         continuePoints(mob)
 
         if GetMobByID(mob:getID() - 1, instance):getStatus() == xi.status.DISAPPEAR then
-            if math.random(1, 5) == 2 then -- TODO: Add sleep check.
+            if math.randomInt(1, 5) == 2 then -- TODO: Add sleep check.
                 dropBomb(mob)
             end
         end

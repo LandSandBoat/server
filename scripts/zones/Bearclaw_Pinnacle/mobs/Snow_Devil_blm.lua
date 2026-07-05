@@ -16,7 +16,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 60)
     mob:setMobMod(xi.mobMod.SOUND_RANGE, 60)
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
-    mob:setMobMod(xi.mobMod.MAGIC_DELAY, math.random(3, 7))
+    mob:setMobMod(xi.mobMod.MAGIC_DELAY, math.randomInt(3, 7))
     mob:setMod(xi.mod.REGAIN, 50)
     mob:setMod(xi.mod.DESPAWN_TIME_REDUCTION, 15)
 end
@@ -29,7 +29,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
         xi.magic.spell.BLIZZAGA_III,
     }
 
-    return spellList[math.random(1, #spellList)]
+    return spellList[math.randomInt(1, #spellList)]
 end
 
 return entity

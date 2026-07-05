@@ -300,7 +300,7 @@ xi.einherjar.onMobEngage = function(mob, target)
         if chamberData.encounters.special then
             -- Unknown if that's the actual trigger for countdown
             -- Captures show special spawn as early as 1.5 minutes from engaging mobs
-            local specialMobSpawnTime = GetSystemTime() + math.random(90, 300)
+            local specialMobSpawnTime = GetSystemTime() + math.randomInt(90, 300)
             log(chamberData.id, 'Special mob will spawn at ' .. specialMobSpawnTime)
             chamberData.eventsQueue[specialMobSpawnTime] = function()
                 -- If final crate is already up and visible, don't spawn special mob
@@ -311,7 +311,7 @@ xi.einherjar.onMobEngage = function(mob, target)
                 local x, y, z = unpack(xi.einherjar.getRandomPosForMobGroup(chamberData.id, 10, 30))
                 local specialMob = GetMobByID(chamberData.encounters.special)
                 if specialMob then
-                    specialMob:setSpawn(x, y, z, math.random(0, 255))
+                    specialMob:setSpawn(x, y, z, math.randomInt(0, 255))
                     xi.einherjar.spawnMob(specialMob, mobType.SPECIAL, chamberData)
                 end
             end
@@ -621,10 +621,10 @@ xi.einherjar.cycleWave = function(chamberData)
 
             if newMob then
                 newMob:setSpawn(
-                    groupCenterX + math.random(-3, 3),
+                    groupCenterX + math.randomInt(-3, 3),
                     groupCenterY,
-                    groupCenterZ + math.random(-7, 7),
-                    math.random(0, 255)
+                    groupCenterZ + math.randomInt(-7, 7),
+                    math.randomInt(0, 255)
                 )
                 xi.einherjar.spawnMob(newMob, mobType.REGULAR, chamberData)
             end

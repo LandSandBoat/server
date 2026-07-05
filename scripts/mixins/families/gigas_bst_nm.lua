@@ -28,7 +28,7 @@ g_mixins.families = g_mixins.families or {}
 
 g_mixins.families.gigas_beastmaster_nm = function(mob)
     mob:addListener('PRESPAWN', 'GIGAS_BEASTMASTER_PRESPAWN', function(mobArg)
-        mobArg:setLocalVar(variables.HPP_TRIGGER,       math.random(configuration.minimumHppTrigger, configuration.maximumHppTrigger))
+        mobArg:setLocalVar(variables.HPP_TRIGGER,       math.randomInt(configuration.minimumHppTrigger, configuration.maximumHppTrigger))
         mobArg:setLocalVar(variables.COOLDOWN,          configuration.cooldownSeconds)
         mobArg:setLocalVar(variables.ENGAGE_DELAY,      configuration.engageDelaySeconds)
         mobArg:setLocalVar(variables.ENGAGE_READY_TIME, 0)

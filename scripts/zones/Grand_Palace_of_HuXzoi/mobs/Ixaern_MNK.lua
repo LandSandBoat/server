@@ -136,7 +136,7 @@ entity.onMobDespawn = function(mob)
 
     local qm = GetNPCByID(ID.npc.QM_IXAERN_MNK)
     if qm then
-        if math.random(0, 1) == 1 then
+        if math.randomInt(0, 1) == 1 then
             qm:setPos(380, 0, 540, 0) -- G-7
         else
             qm:setPos(460, 0, 540, 0) -- I-7

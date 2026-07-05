@@ -68,8 +68,8 @@ local triggerPatch = function(player, npc)
             not player:needToZone()
         then
             local timeBonus = 1
-            local bonus = math.random(1, 100) >= 75 and 5 or 0
-            if time >= 4 and time <= 6 and math.random(1, 100) >= 50 then
+            local bonus = math.randomInt(1, 100) >= 75 and 5 or 0
+            if time >= 4 and time <= 6 and math.randomInt(1, 100) >= 50 then
                 timeBonus = 2
             end
 

@@ -133,7 +133,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
         chance         = 100,
         attackType     = xi.attackType.MAGICAL,
         magicalElement = xi.element.EARTH,
-        basePower      = math.random(70, 90),
+        basePower      = math.randomInt(70, 90),
         actorStat      = xi.mod.INT,
     }
 
@@ -153,8 +153,8 @@ entity.onMobFight = function(mob, target)
             canUseTwoHour(mob)
         then
             mob:setLocalVar('twoHourUsed', 1)
-            mob:setLocalVar('nextTwoHourTime', battleTime + math.random(90, 210))
-            mob:useMobAbility(twoHours[math.random(1, #twoHours)])
+            mob:setLocalVar('nextTwoHourTime', battleTime + math.randomInt(90, 210))
+            mob:useMobAbility(twoHours[math.randomInt(1, #twoHours)])
             return
         end
 
@@ -164,8 +164,8 @@ entity.onMobFight = function(mob, target)
             battleTime >= mob:getLocalVar('nextTwoHourTime') and
             canUseTwoHour(mob)
         then
-            mob:setLocalVar('nextTwoHourTime', battleTime + math.random(90, 210))
-            mob:useMobAbility(twoHours[math.random(1, #twoHours)])
+            mob:setLocalVar('nextTwoHourTime', battleTime + math.randomInt(90, 210))
+            mob:useMobAbility(twoHours[math.randomInt(1, #twoHours)])
             return
         end
     end

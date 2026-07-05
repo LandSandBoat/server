@@ -31,7 +31,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         [7] = { xi.mobSkill.INFRASONICS_1,       10 },
         [8] = { xi.mobSkill.SECRETION_1,         10 },
     }
-    local randomRoll = math.random(1, 100)
+    local randomRoll = math.randomInt(1, 100)
     local weightSum  = 0
 
     for i = 1, #mobskillTable do

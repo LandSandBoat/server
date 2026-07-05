@@ -18,7 +18,7 @@ entity.spawnPoints =
 
 entity.onMobInitialize = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(5400, 7200))
+    mob:setRespawnTime(math.randomInt(5400, 7200))
 
     mob:addImmunity(xi.immunity.SILENCE)
     mob:addImmunity(xi.immunity.BIND)
@@ -42,7 +42,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
         xi.magic.spell.STONEGA,
     }
 
-    return spellList[math.random(1, #spellList)]
+    return spellList[math.randomInt(1, #spellList)]
 end
 
 entity.onMobMobskillChoose = function(mob, target, skillId)
@@ -56,7 +56,7 @@ end
 entity.onMobDespawn = function(mob)
     -- Sets to respawn between 90 to 120 minutes
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(5400, 7200))
+    mob:setRespawnTime(math.randomInt(5400, 7200))
 end
 
 return entity

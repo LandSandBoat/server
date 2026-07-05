@@ -21,7 +21,7 @@ itemObject.onItemUse = function(target)
     then
         local effectRemoved = 0
         while effectRemoved == 0 do
-            local num = math.random(1, 5)
+            local num = math.randomInt(1, 5)
             if num == 1 and target:hasStatusEffect(xi.effect.SILENCE) then
                 effectRemoved = effectRemoved + 1
                 target:delStatusEffect(xi.effect.SILENCE)

@@ -96,8 +96,8 @@ quest.sections =
                         not hasQuestKeyItem(player) and
                         npcUtil.tradeHasExactly(trade, xi.item.PICKAXE)
                     then
-                        if math.random(1, 10) > 5 then
-                            quest:setVar(player, 'Prog', math.random(1, 3))
+                        if math.randomInt(1, 10) > 5 then
+                            quest:setVar(player, 'Prog', math.randomInt(1, 3))
 
                             return quest:progressEvent(0, { [0] = keyItems[quest:getVar(player, 'Prog')] })
                         else
@@ -204,8 +204,8 @@ quest.sections =
                         not hasQuestKeyItem(player) and
                         npcUtil.tradeHasExactly(trade, xi.item.PICKAXE)
                     then
-                        if math.random(1, 10) > 5 then
-                            quest:setVar(player, 'Prog', math.random(1, 3))
+                        if math.randomInt(1, 10) > 5 then
+                            quest:setVar(player, 'Prog', math.randomInt(1, 3))
 
                             return quest:progressEvent(0, { [0] = keyItems[quest:getVar(player, 'Prog')] })
                         else

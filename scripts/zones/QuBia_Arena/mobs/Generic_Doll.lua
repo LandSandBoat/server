@@ -60,7 +60,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     -- Check to see which Doll we are and return the appropriate skill list
     local skillList = dollSkillLists[battlefield:getLocalVar('dollsSpawned')]
 
-    return skillList[math.random(1, #skillList)]
+    return skillList[math.randomInt(1, #skillList)]
 end
 
 entity.onMobSkillTarget = function(target, mob, skill) -- TODO: Seems that it should just "ignore" someone sleeping rather than reset enmity, this will keep the behavior similar to retail until we have a way to do this.
@@ -84,7 +84,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
         table.insert(spellList, xi.magic.spell.SHOCK_SPIKES)
     end
 
-    return spellList[math.random(1, #spellList)]
+    return spellList[math.randomInt(1, #spellList)]
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)

@@ -89,7 +89,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.AOE_HIT_ALL, 1)
 
     mob:setCarefulPathing(true)
-    mob:setRespawnTime(math.random(144, 240) * 1800) -- 3 to 5 days in 30 minute windows
+    mob:setRespawnTime(math.randomInt(144, 240) * 1800) -- 3 to 5 days in 30 minute windows
 end
 
 entity.onMobSpawn = function(mob)
@@ -129,12 +129,12 @@ entity.onMobFight = function(mob, target)
     local fifteenBlock = mob:getBattleTime() / 15
 
     if twohourTime == 0 then
-        twohourTime = math.random(4, 6)
+        twohourTime = math.randomInt(4, 6)
         mob:setLocalVar('twohourTime', twohourTime)
     end
 
     if spawnTime == 0 then
-        spawnTime = math.random(3, 5)
+        spawnTime = math.randomInt(3, 5)
         mob:setLocalVar('spawnTime', spawnTime)
     end
 
@@ -144,14 +144,14 @@ entity.onMobFight = function(mob, target)
     then
         mob:useMobAbility(710)
         mob:setLocalVar('skill_tp', mob:getTP()) -- 2 hr shouldn't wipe TP
-        mob:setLocalVar('twohourTime', fifteenBlock + math.random(4, 6))
+        mob:setLocalVar('twohourTime', fifteenBlock + math.randomInt(4, 6))
 
         -- call the first pet that is not spawned, will wait for actions to finish
     elseif
         fifteenBlock > spawnTime and
         xi.mob.callPets(mob, utils.shuffle(pets), callPetParams)
     then
-        spawnTime = math.random(3, 5)
+        spawnTime = math.randomInt(3, 5)
         mob:setLocalVar('spawnTime', fifteenBlock + spawnTime)
     end
 
@@ -210,7 +210,7 @@ end
 entity.onMobDespawn = function(mob)
     -- Set Vrtra's spawnpoint and respawn time (3-5 days)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(144, 240) * 1800) -- 3 to 5 days in 30 minute windows
+    mob:setRespawnTime(math.randomInt(144, 240) * 1800) -- 3 to 5 days in 30 minute windows
 end
 
 return entity

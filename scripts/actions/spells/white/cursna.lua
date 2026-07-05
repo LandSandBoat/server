@@ -21,7 +21,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     local power = (10 + (skill / 30)) * (1 + (bonus / 100))
 
     spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-    if target:hasStatusEffect(xi.effect.DOOM) and power > math.random(1, 100) then
+    if
+        target:hasStatusEffect(xi.effect.DOOM) and
+        power > math.randomInt(1, 100)
+    then
         -- remove doom
         final = xi.effect.DOOM
         target:delStatusEffect(xi.effect.DOOM)

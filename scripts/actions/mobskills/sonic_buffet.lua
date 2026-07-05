@@ -24,7 +24,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
-        for i = 1, math.random(2, 3) do
+        for i = 1, math.randomInt(2, 3) do
             target:dispelStatusEffect(xi.effectFlag.DISPELABLE)
         end
     end

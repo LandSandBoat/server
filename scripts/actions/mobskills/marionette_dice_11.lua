@@ -10,7 +10,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local healAmount = math.random(400, 600)
+    local healAmount = math.randomInt(400, 600)
     local missingHP = target:getMaxHP() - target:getHP()
 
     if missingHP < healAmount then

@@ -32,7 +32,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.WILD_CARROT_1,
     }
 
-    return skills[math.random(1, #skills)]
+    return skills[math.randomInt(1, #skills)]
 end
 
 -- The "real" Bearclaw Leveret has a small chance to proc enblizzard damage on hit, revealing itself to players

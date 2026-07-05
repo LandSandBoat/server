@@ -44,7 +44,7 @@ mission.sections =
                     -- where an event update is displayed.  Until this is determined, randomly select item.
                     -- Reference: http://www.famitsu.com/news/201412/12067432.html
 
-                    local selectedSet = math.random(1, #missionItems)
+                    local selectedSet = math.randomInt(1, #missionItems)
 
                     xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.COURIER_CATASTROPHE, 'Option', selectedSet)
 

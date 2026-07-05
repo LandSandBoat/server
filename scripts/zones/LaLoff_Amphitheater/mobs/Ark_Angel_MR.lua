@@ -21,7 +21,7 @@ local function spawnArkAngelPet(mob)
     local battlefieldId    = battlefield:getID()
     local battlefieldArea  = battlefield:getArea()
     local content          = xi.battlefield.contents[battlefieldId]
-    local selectedPetGroup = math.random(2, 3) -- 2 = Tiger, 3 = Mandragora
+    local selectedPetGroup = math.randomInt(2, 3) -- 2 = Tiger, 3 = Mandragora
     local petId            = content.groups[selectedPetGroup]['mobIds'][battlefieldArea][1]
     local pet              = GetMobByID(petId)
 

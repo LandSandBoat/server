@@ -22,7 +22,7 @@ xi.mix.clusters.onMobMobskillChoose = function(mob, target)
 
     local animation    = mob:getAnimationSub()
     local mobHPP       = mob:getHPP()
-    local deathVersion = math.random(1, 100) <= 5
+    local deathVersion = math.randomInt(1, 100) <= 5
 
     switch(animation): caseof
     {
@@ -101,7 +101,7 @@ xi.mix.clusters.onMobMobskillChoose = function(mob, target)
         end,
     }
 
-    return tpList[math.random(1, #tpList)]
+    return tpList[math.randomInt(1, #tpList)]
 end
 
 g_mixins.families.bomb_cluster = function(mob)

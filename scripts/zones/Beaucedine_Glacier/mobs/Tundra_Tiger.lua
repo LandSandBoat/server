@@ -13,8 +13,8 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.KIRATA, 7, math.random(3600, 28800)) -- 1 to 8 hours
-    xi.mob.phOnDespawn(mob, ID.mob.NUE, 7, math.random(3600, 7200)) -- 1 to 2 hours
+    xi.mob.phOnDespawn(mob, ID.mob.KIRATA, 7, math.randomInt(3600, 28800)) -- 1 to 8 hours
+    xi.mob.phOnDespawn(mob, ID.mob.NUE, 7, math.randomInt(3600, 7200)) -- 1 to 2 hours
 end
 
 return entity

@@ -262,7 +262,7 @@ xi.automaton.getExtraHits = function(automaton, numHits)
     local extraHits        = 0
     if doubleAttackRate > 0 then
         for _ = 1, numHits do
-            if math.random(1, 100) <= doubleAttackRate then
+            if math.randomInt(1, 100) <= doubleAttackRate then
                 extraHits = extraHits + 1
             end
         end

@@ -38,7 +38,7 @@ entity.onMobFight = function(mob, target)
         local nextSteam = mob:getLocalVar('nextSteam')
         if currentTime >= nextSteam then
             mob:messageText(mob, ID.text.LARGE_STEAM)
-            mob:setLocalVar('nextSteam', currentTime + math.random(7, 10))
+            mob:setLocalVar('nextSteam', currentTime + math.randomInt(7, 10))
         end
 
     -- Salt just wore off - show message and reset
@@ -55,13 +55,13 @@ entity.onMobFight = function(mob, target)
             [4] = function()
                 mob:setAnimationSub(5)
                 mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 216) -- 140 at 65, 142 at 66
-                mob:setLocalVar('changeTime', changeTime + math.random(20, 25))
+                mob:setLocalVar('changeTime', changeTime + math.randomInt(20, 25))
             end,
 
             [5] = function()
                 mob:setAnimationSub(6)
                 mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 231) -- 150 at 65, 152 at 66
-                mob:setLocalVar('changeTime', changeTime + math.random(20, 25))
+                mob:setLocalVar('changeTime', changeTime + math.randomInt(20, 25))
             end,
 
             [6] = function()
@@ -80,7 +80,7 @@ end
 entity.onMobMobskillChoose = function(mob, target, skillId)
     if
         mob:getAnimationSub() == 7 and
-        math.random(1, 100) <= 75
+        math.randomInt(1, 100) <= 75
     then
         return xi.mobSkill.HYPOTHERMAL_COMBUSTION_2
     end
@@ -92,7 +92,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.HIEMAL_STORM,
     }
 
-    return tpList[math.random(1, #tpList)]
+    return tpList[math.randomInt(1, #tpList)]
 end
 
 entity.onMobDeath = function(mob, player, optParams)

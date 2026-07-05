@@ -99,7 +99,7 @@ if not xi.module.isContentEnabled('ROV') then
         local drainamount = 0
 
         if wyvern:getHP() ~= wyvern:getMaxHP() then
-            drainamount = (math.random(25, 35) / 100) * playerHP
+            drainamount = (math.randomInt(25, 35) / 100) * playerHP
             drainamount = drainamount * (1 - (0.01 * player:getJobPointLevel(xi.jp.SPIRIT_LINK_EFFECT)))
         end
 
@@ -376,7 +376,7 @@ if not xi.module.isContentEnabled('ABYSSEA') then
         local drainAmount = 0
 
         if wyvern:getHP() ~= wyvern:getMaxHP() then
-            drainAmount = (math.random(25, 35) / 100) * playerHP
+            drainAmount = (math.randomInt(25, 35) / 100) * playerHP
             drainAmount = drainAmount * (1 - (0.01 * player:getJobPointLevel(xi.jp.SPIRIT_LINK_EFFECT)))
         end
 

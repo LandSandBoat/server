@@ -15,7 +15,7 @@ end
 
 itemObject.onItemUse = function(target)
     local hpCap  = target:getMaxHP() - target:getHP()
-    local hpHeal = utils.clamp(math.random(160, 170), 0, hpCap)
+    local hpHeal = utils.clamp(math.randomInt(160, 170), 0, hpCap)
     target:addHP(hpHeal)
     target:messageBasic(xi.msg.basic.RECOVERS_HP, 0, hpHeal)
 end

@@ -29,7 +29,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
         local power    = 50 -- Observed 50 from Lv82 Dynamis Dragon TODO : Capture more data points.
-        local duration = math.random(120, 180)
+        local duration = math.randomInt(120, 180)
 
         xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, power, 3, duration)
     end

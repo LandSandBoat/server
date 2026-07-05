@@ -12,7 +12,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.STONESKIN, 1000, 0, 300))
-    xi.mobskills.mobBuffMove(mob, xi.effect.BLAZE_SPIKES, math.random(20, 30), 0, 180)
+    xi.mobskills.mobBuffMove(mob, xi.effect.BLAZE_SPIKES, math.randomInt(20, 30), 0, 180)
 
     local effect = mob:getStatusEffect(xi.effect.STONESKIN)
     if effect then

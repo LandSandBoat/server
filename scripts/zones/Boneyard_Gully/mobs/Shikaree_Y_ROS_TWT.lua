@@ -80,7 +80,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.SPIRAL_HELL,
     }
 
-    return tpMoves[math.random(1, #tpMoves)]
+    return tpMoves[math.randomInt(1, #tpMoves)]
 end
 
 entity.onMobWeaponSkill = function(mob, target, skill, action)

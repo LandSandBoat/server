@@ -11,11 +11,11 @@ local entity = {}
 entity.onMobMobskillChoose = function(mob, target, skillId)
     if mob:getHPP() > 25 then
         return 0
-    elseif math.random(1, 2) == 2 then
+    elseif math.randomInt(1, 2) == 2 then
         return 2057 -- Mortal Revolution
     end
 
-    return ({ 2055, 2056 })[math.random(1, 2)]
+    return ({ 2055, 2056 })[math.randomInt(1, 2)]
 end
 
 entity.onMobDeath = function(mob, player, optParams)

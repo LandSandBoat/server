@@ -23,9 +23,9 @@ entity.onMobSpawn = function(mob)
             end
 
             local cell1 = xi.item.CIRROCUMULUS_CELL
-            local cell2 = table.remove(cellDrops, math.random(1, #cellDrops))
-            local cell3 = table.remove(cellDrops, math.random(1, #cellDrops))
-            local cell4 = table.remove(cellDrops, math.random(1, #cellDrops))
+            local cell2 = table.remove(cellDrops, math.randomInt(1, #cellDrops))
+            local cell3 = table.remove(cellDrops, math.randomInt(1, #cellDrops))
+            local cell4 = table.remove(cellDrops, math.randomInt(1, #cellDrops))
             loot:addItem(cell1, xi.drop_rate.GUARANTEED)
             loot:addItem(cell2, xi.drop_rate.GUARANTEED)
             loot:addItem(cell3, xi.drop_rate.VERY_COMMON)

@@ -19,7 +19,7 @@ entity.onMobDeath = function(mob, player, optParams)
         player:getCurrentMission(xi.mission.log_id.ACP) >= xi.mission.id.acp.THE_ECHO_AWAKENS
     then
         -- Guesstimating 15% chance
-        if math.random(1, 100) <= 15 then
+        if math.randomInt(1, 100) <= 15 then
             npcUtil.giveKeyItem(player, xi.ki.CHUNK_OF_SMOKED_GOBLIN_GRUB)
         end
     end

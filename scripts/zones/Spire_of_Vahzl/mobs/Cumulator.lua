@@ -33,7 +33,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         table.insert(tpMoves, xi.mobSkill.PROMYVION_BRUME_2)
     end
 
-    return tpMoves[math.random(#tpMoves)]
+    return tpMoves[math.randomInt(1, #tpMoves)]
 end
 
 entity.onMobFight = function(mob, target)

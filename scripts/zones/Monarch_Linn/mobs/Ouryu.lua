@@ -67,7 +67,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            { id = xi.mobSkill.INVINCIBLE_1, hpp = math.random(50, 85) },
+            { id = xi.mobSkill.INVINCIBLE_1, hpp = math.randomInt(50, 85) },
         },
     })
 

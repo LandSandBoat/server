@@ -14,7 +14,7 @@ g_mixins.families = g_mixins.families or {}
 
 local function curlUpRoaming(mob)
     mob:setAnimationSub(5) -- Curl
-    mob:setLocalVar('formTimeRoam', GetSystemTime() + math.random(43, 47))
+    mob:setLocalVar('formTimeRoam', GetSystemTime() + math.randomInt(43, 47))
     mob:setMobMod(xi.mobMod.SKILL_LIST, 1162) -- Set Curled Skill List. ('Cannonball' and 'Heat Barrier' only)
     mob:addMod(xi.mod.DMGPHYS, -2500)
     mob:delMod(xi.mod.DMGMAGIC, -2500)
@@ -22,7 +22,7 @@ end
 
 local function strechUpRoaming(mob)
     mob:setAnimationSub(4) -- Strech
-    mob:setLocalVar('formTimeRoam', GetSystemTime() + math.random(43, 47))
+    mob:setLocalVar('formTimeRoam', GetSystemTime() + math.randomInt(43, 47))
     mob:setMobMod(xi.mobMod.SKILL_LIST, 254) -- Set streched Skill List. (All TP moves except 'Cannonball')
     mob:delMod(xi.mod.DMGPHYS, -2500)
     mob:addMod(xi.mod.DMGMAGIC, -2500)
@@ -43,7 +43,7 @@ local function strechUpEngaged(mob)
 end
 
 local function resetCount(mob)
-    mob:setLocalVar('formTimeEngaged', GetSystemTime() + math.random(40, 50))
+    mob:setLocalVar('formTimeEngaged', GetSystemTime() + math.randomInt(40, 50))
     mob:setLocalVar('hitPoints',  mob:getHP() - math.floor(mob:getMaxHP() * 20 / 100))
 end
 
@@ -66,11 +66,11 @@ g_mixins.families.wamouracampa = function(wamouracampaMob)
         mob:setMobMod(xi.mobMod.SKILL_LIST, 254)
         mob:addMod(xi.mod.DMGMAGIC, -2500)
         mob:setLocalVar('hitPoints', mob:getHP())
-        mob:setLocalVar('formTimeRoam', GetSystemTime() + math.random(30, 90))
+        mob:setLocalVar('formTimeRoam', GetSystemTime() + math.randomInt(30, 90))
         mob:setLocalVar('formTimeEngaged', GetSystemTime())
 
         if canUseEclosion then
-            mob:setLocalVar('eclosionTime', GetSystemTime() + math.random(2400, 3000))
+            mob:setLocalVar('eclosionTime', GetSystemTime() + math.randomInt(2400, 3000))
         end
     end)
 
@@ -105,7 +105,7 @@ g_mixins.families.wamouracampa = function(wamouracampaMob)
 
     wamouracampaMob:addListener('DISENGAGE', 'WAMOURACAMPA_DISENGAGE', function(mob)
         if canUseEclosion then
-            mob:setLocalVar('eclosionTime', GetSystemTime() + math.random(2400, 3000))
+            mob:setLocalVar('eclosionTime', GetSystemTime() + math.randomInt(2400, 3000))
         end
     end)
 

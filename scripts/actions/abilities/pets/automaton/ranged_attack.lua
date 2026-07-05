@@ -29,7 +29,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     local doubleShotRate = automaton:getMod(xi.mod.DOUBLE_SHOT_RATE)
     if
         doubleShotRate > 0 and
-        math.random(1, 100) <= doubleShotRate
+        math.randomInt(1, 100) <= doubleShotRate
     then
         -- For players these shots are seperate, like double attack, but for automatons, they are added together.
         params.numHits = 2

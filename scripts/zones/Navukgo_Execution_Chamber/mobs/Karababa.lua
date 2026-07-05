@@ -26,7 +26,7 @@ end
 
 entity.onMobSpellChoose = function(mob, target, spellId)
     local powerup = mob:getLocalVar('powerup')
-    local rnd = math.random(1, 6)
+    local rnd = math.randomInt(1, 6)
     local warp = mob:getLocalVar('warp')
 
     if warp == 1 then

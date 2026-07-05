@@ -311,7 +311,7 @@ xi.garrison.pickMobsFromPool = function(firstMobID, lastMobID, numMobs, excluded
     -- Now we can apply a common algorithm used to 'shuffle a deck of cards'
     for i = 1, numMobs do
         -- Pick random index from J to pool end. Add the picked element to result
-        local pickedIndex = math.random(i, #dTableMobPool)
+        local pickedIndex = math.randomInt(i, #dTableMobPool)
 
         table.insert(dTableMobs, dTableMobPool[pickedIndex])
 
@@ -375,8 +375,8 @@ local function aggroGroups(group1, group2)
                 printf('[warning] Could not apply aggro because either %i or %i are not valid entities', entityId1, entityId2)
             else
                 debugLogf('Applying enmity: %i <-> %i', entityId1, entityId2)
-                entity1:addEnmity(entity2, math.random(1, 5), math.random(1, 5))
-                entity2:addEnmity(entity1, math.random(1, 5), math.random(1, 5))
+                entity1:addEnmity(entity2, math.randomInt(1, 5), math.randomInt(1, 5))
+                entity2:addEnmity(entity1, math.randomInt(1, 5), math.randomInt(1, 5))
             end
         end
     end

@@ -9,7 +9,7 @@ local entity = {}
 
 entity.onMobFight = function(mob)
     -- Forms: 0 = Closed  1 = Closed  2 = Open 3 = Closed
-    local randomTime = math.random(50, 75)
+    local randomTime = math.randomInt(50, 75)
     local changeTime = mob:getLocalVar('changeTime')
 
     if mob:getBattleTime() - changeTime > randomTime then

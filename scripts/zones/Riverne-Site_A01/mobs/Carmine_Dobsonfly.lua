@@ -36,7 +36,7 @@ entity.onMobDespawn = function(mob)
     end
 
     if allFliesDead then
-        local respawnTime = math.random(75600, 86400)
+        local respawnTime = math.randomInt(75600, 86400)
         for i = ID.mob.CARMINE_DOBSONFLY_OFFSET, ID.mob.CARMINE_DOBSONFLY_OFFSET + 9 do
             DisallowRespawn(i, false)
             GetMobByID(i):setRespawnTime(respawnTime)

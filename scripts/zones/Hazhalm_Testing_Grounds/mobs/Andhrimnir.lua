@@ -69,7 +69,7 @@ entity.onMobFight = function(mob, target)
         end
 
         vanish(mob)
-        mob:setLocalVar('nextCharm', GetSystemTime() + math.random(60, 70))
+        mob:setLocalVar('nextCharm', GetSystemTime() + math.randomInt(60, 70))
 
         -- After 5 seconds, reappear next to victim and use Danse Macabre
         mob:timer(5000, function(mobArg)
@@ -90,7 +90,7 @@ end
 entity.onMobDisengage = reset
 
 entity.onMobEngage = function(mob, target)
-    mob:setLocalVar('nextCharm', GetSystemTime() + math.random(60, 70))
+    mob:setLocalVar('nextCharm', GetSystemTime() + math.randomInt(60, 70))
 end
 
 return entity

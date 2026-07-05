@@ -209,7 +209,7 @@ if not xi.module.isContentEnabled('ABYSSEA') then
             local snakeEye = caster:getStatusEffect(xi.effect.SNAKE_EYE)
 
             if snakeEye then
-                if roll >= 5 and math.random(1, 100) < snakeEye:getPower() then
+                if roll >= 5 and math.randomInt(1, 100) < snakeEye:getPower() then
                     roll = 11
                 else
                     roll = roll + 1
@@ -217,7 +217,7 @@ if not xi.module.isContentEnabled('ABYSSEA') then
 
                 caster:delStatusEffect(xi.effect.SNAKE_EYE)
             else
-                roll = roll + math.random(1, 6)
+                roll = roll + math.randomInt(1, 6)
             end
 
             if roll >= 12 then -- bust

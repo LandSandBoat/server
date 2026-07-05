@@ -26,7 +26,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            { id = 839, hpp = math.random(30, 55) }, -- Uses Howling Moon once while near 50% HPP.
+            { id = 839, hpp = math.randomInt(30, 55) }, -- Uses Howling Moon once while near 50% HPP.
         },
     })
 
@@ -45,7 +45,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.ECLIPSE_BITE
     }
 
-    return skills[math.random(1, #skills)]
+    return skills[math.randomInt(1, #skills)]
 end
 
 return entity

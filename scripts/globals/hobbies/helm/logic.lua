@@ -37,7 +37,7 @@ local rocks =
 -----------------------------------
 
 local function doesToolBreak(player, info)
-    local roll  = math.random(1, 100)
+    local roll  = math.randomInt(1, 100)
     local mod   = info.mod
 
     if mod then
@@ -56,7 +56,7 @@ local function pickItem(player, info)
     local zoneId = player:getZoneID()
 
     -- found nothing
-    if math.random(1, 100) > info.settingRate then
+    if math.randomInt(1, 100) > info.settingRate then
         return 0
     end
 
@@ -71,7 +71,7 @@ local function pickItem(player, info)
 
     -- pick weighted result
     local item = 0
-    local pick = math.random(1, sum)
+    local pick = math.randomInt(1, sum)
     sum = 0
 
     for i = 1, #drops do
@@ -98,7 +98,7 @@ end
 
 local function movePoint(player, npc, zoneId, info)
     local points = info.zone[zoneId].points
-    local point  = points[math.random(1, #points)]
+    local point  = points[math.randomInt(1, #points)]
 
     npc:hideNPC(120)
     npc:queue(3000, doMove(npc, unpack(point)))

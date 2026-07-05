@@ -36,7 +36,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            { id = xi.mobSkill.BENEDICTION_1, hpp = math.random(1, 50) } -- "Uses Benediction at around 50% or as low as 1%"
+            { id = xi.mobSkill.BENEDICTION_1, hpp = math.randomInt(1, 50) } -- "Uses Benediction at around 50% or as low as 1%"
         }
     })
 end

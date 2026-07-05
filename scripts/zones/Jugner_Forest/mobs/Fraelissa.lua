@@ -72,7 +72,7 @@ end
 
 entity.onMobInitialize = function(mob)
     xi.mob.updateNMSpawnPoint(mob, fraelissaSpawnPoints)
-    mob:setRespawnTime(math.random(3600, 4500)) -- 60 to 75 minutes
+    mob:setRespawnTime(math.randomInt(3600, 4500)) -- 60 to 75 minutes
 end
 
 entity.onMobSpawn = function(mob)
@@ -97,7 +97,7 @@ entity.onMobDespawn = function(mob)
     local params = { }
 
     if not xi.mob.phOnDespawn(mob, ID.mob.FRADUBIO, 10, 75600, params) then -- 21 hour minimum
-        mob:setRespawnTime(math.random(3600, 4500)) -- 60 to 75 minutes
+        mob:setRespawnTime(math.randomInt(3600, 4500)) -- 60 to 75 minutes
     end
 end
 

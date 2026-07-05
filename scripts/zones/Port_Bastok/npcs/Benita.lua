@@ -6,7 +6,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    local rand = math.random(1, 2)
+    local rand = math.randomInt(1, 2)
 
     -- TODO: Needs verification
     if rand == 1 then

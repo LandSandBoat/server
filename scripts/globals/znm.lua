@@ -20,9 +20,9 @@ xi.znm = xi.znm or {}
 
 -- Called during JstMidnight tick
 xi.znm.UpdateSanrakusMobs = function()
-    SetServerVariable('[ZNM][Sanraku]Interest', math.random(#xi.znm.SANRAKUS_INTEREST))
-    SetServerVariable('[ZNM][Sanraku]Fauna', math.random(#xi.znm.SANRAKUS_FAUNA))
-    SetServerVariable('[ZNM][Sanraku]Trades', math.random(0, 250))
+    SetServerVariable('[ZNM][Sanraku]Interest', math.randomInt(1, #xi.znm.SANRAKUS_INTEREST))
+    SetServerVariable('[ZNM][Sanraku]Fauna', math.randomInt(1, #xi.znm.SANRAKUS_FAUNA))
+    SetServerVariable('[ZNM][Sanraku]Trades', math.randomInt(0, 250))
 end
 
 xi.znm.serverPlateTrades = function()
@@ -41,7 +41,7 @@ xi.znm.getSanrakusInterest = function()
 
     -- Initialize the server var if it hasn't been already
     if interest == nil or interest == 0 then
-        interest = math.random(#xi.znm.SANRAKUS_INTEREST)
+        interest = math.randomInt(1, #xi.znm.SANRAKUS_INTEREST)
         SetServerVariable('[ZNM][Sanraku]Interest', interest)
     end
 
@@ -54,7 +54,7 @@ xi.znm.getSanrakusFauna = function()
 
     -- Initialize the server var if it hasn't been already
     if fauna == nil or fauna == 0 then
-        fauna = math.random(#xi.znm.SANRAKUS_FAUNA)
+        fauna = math.randomInt(1, #xi.znm.SANRAKUS_FAUNA)
         SetServerVariable('[ZNM][Sanraku]Fauna', fauna)
     end
 
@@ -205,7 +205,7 @@ end
 xi.znm.soultrapper.onItemUse = function(target, player, item)
     -- Soul plate not guaranteed
     -- to validate long term: some posts hint at level correction on success rate vs. higher level mobs.
-    if math.random(100) > xi.znm.SOULTRAPPER_SUCCESS * xi.znm.SOULPLATE_HS_MULT then
+    if math.randomInt(1, 100) > xi.znm.SOULTRAPPER_SUCCESS * xi.znm.SOULPLATE_HS_MULT then
         -- todo, message should show to all in area
         player:timer(4000, function(playerArg)
             playerArg:messageBasic(xi.msg.basic.SOULTRAPPER_FAILED)
@@ -301,7 +301,7 @@ xi.znm.soultrapper.getZeniValue = function(target, player)
     zeni = utils.clamp(zeni, xi.znm.SOULPLATE_MIN_VALUE, xi.znm.SOULPLATE_MAX_VALUE)
 
     -- Add a little randomness
-    zeni = zeni + math.random(6)
+    zeni = zeni + math.randomInt(1, 6)
 
     -- Having claim on the mob you take pictures of increases Zeni reward significantly.
     -- If another party has claim on the mob, you will only receive 1-5 Zeni for the pictures you take, even in the best possible situation.

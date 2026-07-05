@@ -38,9 +38,9 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         -- 60 TP drained
         -- 25 MP drained
 
-        local drainedHP = math.random(info.damage / 2, info.damage)
-        local drainedMP = math.random(info.damage / 3, info.damage / 2)
-        local drainedTP = math.random(info.damage / 2, info.damage)
+        local drainedHP = math.randomInt(info.damage / 2, info.damage)
+        local drainedMP = math.randomInt(info.damage / 3, info.damage / 2)
+        local drainedTP = math.randomInt(info.damage / 2, info.damage)
 
         -- TODO: Capture power for effects. Current numbers roughly based off video capture.
         skill:setMsg(xi.mobskills.mobDrainMove(mob, target, xi.mobskills.drainType.HP, drainedHP))

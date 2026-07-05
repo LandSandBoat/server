@@ -64,7 +64,7 @@ local function findClosestNode(mob, target)
     end)
 
     local topCount = math.min(3, #candidates)
-    local chosen   = candidates[math.random(1, topCount)]
+    local chosen   = candidates[math.randomInt(1, topCount)]
 
     return chosen.node
 end
@@ -200,9 +200,9 @@ entity.onMobWeaponSkill = function(mob, target, skill)
                 if captain then
                     node =
                     {
-                        x = captain:getXPos() + math.random(-2, 2),
+                        x = captain:getXPos() + math.randomInt(-2, 2),
                         y = captain:getYPos(),
-                        z = captain:getZPos() + math.random(-2, 2)
+                        z = captain:getZPos() + math.randomInt(-2, 2)
                     }
                 end
             else

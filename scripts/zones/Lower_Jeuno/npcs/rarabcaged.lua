@@ -8,7 +8,7 @@ local entity = {}
 local rotationTime = 3000 -- approximate
 
 local function rotate(npc)
-    npc:setRotation(math.random(0, 255)) -- This can pick the same rotation multiple times in a row
+    npc:setRotation(math.randomInt(0, 255)) -- This can pick the same rotation multiple times in a row
 
     -- Recursive
     -- No randomness here. Both rarabs rotate at the same time.

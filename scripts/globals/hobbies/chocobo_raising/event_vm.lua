@@ -205,7 +205,7 @@ local function handleStoryUpdate(player, chocoState, option)
     debug(string.format('Story: %s', stories[story]))
 
     -- TODO: Remove key items?
-    if math.random(1, 100) <= 25 then
+    if math.randomInt(1, 100) <= 25 then
         debug('-> Chocobo learned ability')
         player:updateEvent(1, 1, 1, 1, 1, 1, 1, 1) -- TODO: What do the caps say?
     else
@@ -229,7 +229,7 @@ local function handleGoOnAWalk(player, chocoState, option)
         0, 0, 0, 0, 0, 0, 0, 0)
 
     local baseCS       = xi.chocoboRaising.csidTable[zoneId][6]
-    local energyAmount = xi.chocoboRaising.walkEnergyAmount[config.energyIdx] + math.random(0, xi.chocoboRaising.walkEnergyRandomness)
+    local energyAmount = xi.chocoboRaising.walkEnergyAmount[config.energyIdx] + math.randomInt(0, xi.chocoboRaising.walkEnergyRandomness)
     local walkZoneId   = xi.chocoboRaising[config.locationMap][xi.chocoboRaising.raisingLocation[zoneId]]
     local csWeather    = xi.chocoboRaising.getWeatherInZone(walkZoneId)
 
@@ -251,7 +251,7 @@ local function handleGoOnAWalk(player, chocoState, option)
         return
     end
 
-    if math.random(1, 100) <= xi.chocoboRaising.walkEventChance then
+    if math.randomInt(1, 100) <= xi.chocoboRaising.walkEventChance then
         -- Event: Find an item
         if chocoState.held_item == 0 then
             local itemId         = utils.randomEntry(xi.chocoboRaising.walkItems[walkZoneId])
@@ -720,7 +720,7 @@ local vmHandlers =
 
     [vmOpCodes.COMPETE_WITH_OTHERS] = function(player, chocoState, option)
         local winner = utils.randomEntry({ 0, 2 })
-        if math.random(1, 100) <= 5 then
+        if math.randomInt(1, 100) <= 5 then
             winner = 1
         end
 
@@ -834,7 +834,7 @@ local vmHandlers =
     [vmOpCodes.WHISTLE_GAME_RESULT] = function(player, chocoState, option)
         local keyItem = xi.keyItem.HANDKERCHIEF
 
-        if math.random(1, 100) < 25 then
+        if math.randomInt(1, 100) < 25 then
             player:updateEvent(keyItem, 0, 0, 0, 0, 1, 0, 0)
             player:addKeyItem(keyItem)
             player:setCharVar('HQuest[ChocoboWhistle]Prog', 3)

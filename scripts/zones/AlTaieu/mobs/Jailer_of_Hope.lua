@@ -36,7 +36,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            { id = xi.mobSkill.MIGHTY_STRIKES_1, cooldown = 90, hpp = math.random(85, 95) }, -- 'May use Mighty Strikes multiple times.'
+            { id = xi.mobSkill.MIGHTY_STRIKES_1, cooldown = 90, hpp = math.randomInt(85, 95) }, -- 'May use Mighty Strikes multiple times.'
         },
     })
 
@@ -71,7 +71,7 @@ entity.onMobFight = function(mob, target)
     if
         repeatMove ~= 0 and
         not xi.combat.behavior.isEntityBusy(mob) and
-        math.random(100) <= 75 -- High chance to use it again
+        math.randomInt(1, 100) <= 75 -- High chance to use it again
     then
         mob:useMobAbility(repeatMove, nil, 0)
     end
@@ -105,7 +105,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
         chance   = 65,
         effectId = xi.effect.STUN,
         element  = xi.element.THUNDER,
-        duration = math.random(4, 8),
+        duration = math.randomInt(4, 8),
     }
 
     return xi.combat.action.executeAddEffectEnfeeblement(mob, target, pTable)

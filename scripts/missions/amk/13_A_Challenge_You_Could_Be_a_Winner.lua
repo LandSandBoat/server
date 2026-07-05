@@ -239,7 +239,7 @@ mission.sections =
 
                 [508] = function(player, csid, option, npc)
                     -- Pipset offset by 1 to account for saving 0 as a variable.  When retrieving, subtract 1
-                    mission:setLocalVar(player, '[p1]pipSet', math.random(1, 10)) -- range: 0 - 9
+                    mission:setLocalVar(player, '[p1]pipSet', math.randomInt(1, 10)) -- range: 0 - 9
                 end,
             },
         },
@@ -409,13 +409,13 @@ mission.sections =
                         player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, { power = 1, origin = player })
 
                         -- https://www.bg-wiki.com/ffxi/Kupo_Mission_13 : "The effect durations are random. They can be 3-7 minutes long. "
-                        local buffDuration = math.floor(utils.minutes(math.random(3, 7)) * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER)
+                        local buffDuration = math.floor(utils.minutes(math.randomInt(3, 7)) * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER)
                         player:addStatusEffect(xi.effect.INVISIBLE, { power = 1, duration = buffDuration, origin = player, tick = 10 })
                         player:addStatusEffect(xi.effect.DEODORIZE, { power = 1, duration = buffDuration, origin = player, tick = 10 })
                         player:addStatusEffect(xi.effect.SNEAK, { power = 1, duration = buffDuration, origin = player, tick = 10 })
                     elseif option == 2 then
                         -- Player came back to refresh buffs
-                        local buffDuration = math.floor(utils.minutes(math.random(3, 7)) * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER)
+                        local buffDuration = math.floor(utils.minutes(math.randomInt(3, 7)) * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER)
                         player:addStatusEffect(xi.effect.INVISIBLE, { power = 1, duration = buffDuration, origin = player, tick = 10 })
                         player:addStatusEffect(xi.effect.DEODORIZE, { power = 1, duration = buffDuration, origin = player, tick = 10 })
                         player:addStatusEffect(xi.effect.SNEAK, { power = 1, duration = buffDuration, origin = player, tick = 10 })
@@ -470,7 +470,7 @@ mission.sections =
                     local eventArg = 2
 
                     if correctCohortIdx == 0 then
-                        correctCohortIdx = math.random(1, 4)
+                        correctCohortIdx = math.randomInt(1, 4)
                         -- Save cohort temporarily
                         npc:setLocalVar('cohortIdx', correctCohortIdx)
                         eventArg = 1

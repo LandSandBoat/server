@@ -14,7 +14,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         target:isUndead() or
         target:hasStatusEffect(xi.effect.MAGIC_SHIELD) or
         -- Todo: DeathRes has no place in the resistance functions so far..
-        math.random(1, 100) <= target:getMod(xi.mod.DEATH_MEVA)
+        math.randomInt(1, 100) <= target:getMod(xi.mod.DEATH_MEVA)
     then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
         return 0

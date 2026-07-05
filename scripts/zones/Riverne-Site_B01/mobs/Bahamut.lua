@@ -134,7 +134,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.HORRIBLE_ROAR_BAHAMUT
     }
 
-    return skills[math.random(1, #skills)]
+    return skills[math.randomInt(1, #skills)]
 end
 
 entity.onMobSpellChoose = function(mob, target, spellId)

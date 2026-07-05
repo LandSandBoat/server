@@ -30,9 +30,9 @@ zoneObject.onZoneIn = function(player, prevZone)
     -- Check if Proteus pops this boat ride.
     if
         currentTime > proteus:getLocalVar('respawn') and
-        math.random(1, 100) <= 10
+        math.randomInt(1, 100) <= 10
     then
-        proteus:setRespawnTime(math.random(120, 180)) -- 2 to 3 minutes
+        proteus:setRespawnTime(math.randomInt(120, 180)) -- 2 to 3 minutes
     end
 
     return cs

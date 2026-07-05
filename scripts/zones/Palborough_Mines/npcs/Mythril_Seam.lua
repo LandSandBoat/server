@@ -12,7 +12,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, xi.item.PICKAXE) then -- pickaxe
         if player:getFreeSlotsCount() > 0 then
-            if math.random(1, 100) <= 47 then
+            if math.randomInt(1, 100) <= 47 then
                 if
                     player:getCharVar('Quest[2][26]Prog') >= 2 and
                     not player:hasItem(xi.item.SHARP_STONE) -- Allows for the player to reobtain the Sharp Stone if they drop it before finishing the quest

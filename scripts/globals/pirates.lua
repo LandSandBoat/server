@@ -115,14 +115,14 @@ local function summonAnimations(npc, rotation, offset)
         local summonStartTime = npc:getLocalVar('summonStartTime')
         if summonStartTime ~= 0 and summonStartTime <= currentTime then
             npc:setLocalVar('summonStartTime', 0)
-            npc:setLocalVar('summonEndTime', currentTime + math.random(1, 2))
+            npc:setLocalVar('summonEndTime', currentTime + math.randomInt(1, 2))
 
             npc:entityAnimationPacket(xi.animationString.CAST_SUMMONER_START)
         end
 
         local summonEndTime = npc:getLocalVar('summonEndTime')
         if summonEndTime ~= 0 and summonEndTime <= currentTime then
-            npc:setLocalVar('summonStartTime', currentTime + math.random(4 + offset, 10))
+            npc:setLocalVar('summonStartTime', currentTime + math.randomInt(4 + offset, 10))
             npc:setLocalVar('summonEndTime', 0)
 
             npc:entityAnimationPacket(xi.animationString.CAST_SUMMONER_STOP)
@@ -179,7 +179,7 @@ xi.pirates.pirateNPCTimeTrigger = function(npc, triggerId, zoneKey)
     if triggerId == actions.PIRATES_ARRIVE then
         if pirateIdx == 2 then
             -- middle pirate has chance to wear a verm cloak, which then means the pirate encounter _might_ have the NM spawn
-            local hasVermCloak = math.random(1, 100) <= 10
+            local hasVermCloak = math.randomInt(1, 100) <= 10
             npc:setModelId(hasVermCloak and 47 or 8195, xi.slot.BODY) -- 47 = verm cloak body, 8195 = default body
             pirateZone:setLocalVar('nmCanSpawn', hasVermCloak and 1 or 0) -- 1 = NM still eligible; cleared to 0 once it spawns
         end
@@ -237,7 +237,7 @@ xi.pirates.zoneStateChange = function(zone, action)
             end
         end
 
-        if zone:getLocalVar('nmCanSpawn') == 1 and math.random(1, 100) <= 75 then
+        if zone:getLocalVar('nmCanSpawn') == 1 and math.randomInt(1, 100) <= 75 then
             -- HQ ride, 75%: NM appears from the start
             local nm = GetMobByID(getNMId(zoneId))
             if nm then

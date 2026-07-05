@@ -36,7 +36,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
-        local remainingMPP = 1 - math.random(10, 30) / 100
+        local remainingMPP = 1 - math.randomInt(10, 30) / 100
         target:setMP(target:getMP() * remainingMPP)
     end
 

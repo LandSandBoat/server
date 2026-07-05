@@ -149,7 +149,7 @@ entity.onMobSpawn = function(mob)
 
         -- Hydra phase
         if phase == 9 then
-            mob:setLocalVar('critsRemaining', math.random(10, 30))
+            mob:setLocalVar('critsRemaining', math.randomInt(10, 30))
         end
     else
         mob:setBehavior(bit.band(mob:getBehavior(), bit.bnot(xi.behavior.NO_TURN)))
@@ -217,7 +217,7 @@ entity.onCriticalHit = function(mob)
         end
 
         -- Number of crits to lose a head, re-randoming
-        critsRemaining = math.random(10, 30)
+        critsRemaining = math.randomInt(10, 30)
     end
 
     mob:setLocalVar('critsRemaining', critsRemaining)

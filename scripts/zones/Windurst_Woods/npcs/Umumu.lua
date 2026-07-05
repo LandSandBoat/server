@@ -29,7 +29,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(382) -- Reminded to validate
         end
     elseif makingHeadlines == xi.questStatus.QUEST_COMPLETED then
-        local rand = math.random(1, 3)
+        local rand = math.randomInt(1, 3)
 
         if rand == 1 then
             player:startEvent(385) -- Conversation after quest completed

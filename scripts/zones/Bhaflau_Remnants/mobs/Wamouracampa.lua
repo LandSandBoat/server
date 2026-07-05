@@ -11,11 +11,11 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     -- having to copy the mixin due to the strange damage values
     mob:addListener('SPAWN', 'WAMOURACAMPA_SPAWN', function(mobArg)
-        mobArg:setLocalVar('formTime', GetSystemTime() + math.random(45, 60))
+        mobArg:setLocalVar('formTime', GetSystemTime() + math.randomInt(45, 60))
     end)
 
     mob:addListener('DISENGAGE', 'WAMOURACAMPA_DISENGAGE', function(mobArg)
-        mobArg:setLocalVar('formTime', GetSystemTime() + math.random(45, 60))
+        mobArg:setLocalVar('formTime', GetSystemTime() + math.randomInt(45, 60))
     end)
 
     mob:addListener('ROAM_TICK', 'WAMOURACAMPA_ROAM', function(mobArg)
@@ -28,7 +28,7 @@ entity.onMobSpawn = function(mob)
                 mobArg:setMod(xi.mod.DMGRANGE, 0)
                 mobArg:setMod(xi.mod.UDMGMAGIC, 1500)
                 mobArg:setMod(xi.mod.UDMGBREATH, 150)
-                mobArg:setLocalVar('damageThreshold', math.random(5, 15) / 100 * mobArg:getMaxHP())
+                mobArg:setLocalVar('damageThreshold', math.randomInt(5, 15) / 100 * mobArg:getMaxHP())
             else
                 mobArg:setAnimationSub(0)
                 mobArg:setMod(xi.mod.DMGPHYS, -25)
@@ -38,7 +38,7 @@ entity.onMobSpawn = function(mob)
                 mobArg:setLocalVar('damageThreshold', 0)
             end
 
-            mobArg:setLocalVar('formTime', GetSystemTime() + math.random(45, 60))
+            mobArg:setLocalVar('formTime', GetSystemTime() + math.randomInt(45, 60))
         end
     end)
 
@@ -54,7 +54,7 @@ entity.onMobSpawn = function(mob)
                 mobArg:setMod(xi.mod.UDMGBREATH, 150)
             end
 
-            damageThreshold = math.random(10, 50) / 100 * mobArg:getMaxHP()
+            damageThreshold = math.randomInt(10, 50) / 100 * mobArg:getMaxHP()
         elseif mobArg:getAnimationSub() == 1 then
             if damageThreshold < damage then
                 mobArg:setAnimationSub(0)

@@ -17,7 +17,7 @@ itemObject.onItemUse = function(target)
         local effectSubPower = target:getStatusEffect(statusEffect):getSubPower()
         -- If the amnesia is too strong, do not remove it. By default this would be zero allowing removal.
         -- (Ladybugs, Rafflesia, Promathia, certain NMs, low chance vs Disorienting Waul)
-        if effectSubPower < math.random(1, 100) then
+        if effectSubPower < math.randomInt(1, 100) then
             target:delStatusEffect(statusEffect)
         end
     end

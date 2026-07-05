@@ -18,7 +18,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.OPHION, 5, math.random(7200, 14400)) -- 2 to 4 hours (could not find info, so using Ogygos' cooldown)
+    xi.mob.phOnDespawn(mob, ID.mob.OPHION, 5, math.randomInt(7200, 14400)) -- 2 to 4 hours (could not find info, so using Ogygos' cooldown)
 end
 
 return entity

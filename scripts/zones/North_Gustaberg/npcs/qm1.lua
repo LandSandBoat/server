@@ -28,7 +28,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
 
         -- Siren's tear moves no matter what. and it can pick the same position twice. It doesnt seem to have a logical pattern after testing about 20 positions.
-        npc:setPos(unpack(ID.positions.sirensTear[math.random(1, #ID.positions.sirensTear)]))
+        npc:setPos(unpack(ID.positions.sirensTear[math.randomInt(1, #ID.positions.sirensTear)]))
     end
 end
 

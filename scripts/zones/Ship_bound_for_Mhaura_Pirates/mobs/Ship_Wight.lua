@@ -24,7 +24,7 @@ entity.onMobDespawn = function(mob)
         return
     end
 
-    if math.random(1, 100) > 90 then
+    if math.randomInt(1, 100) > 90 then
         return
     end
 

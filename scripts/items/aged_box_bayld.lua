@@ -10,7 +10,7 @@ itemObject.onItemCheck = function(target, item, caster)
 end
 
 itemObject.onItemUse = function(target)
-    npcUtil.giveItem(target, { { xi.item.PINCH_OF_HIGH_PURITY_BAYLD, math.random(3, 15) } })
+    npcUtil.giveItem(target, { { xi.item.PINCH_OF_HIGH_PURITY_BAYLD, math.randomInt(3, 15) } })
 end
 
 return itemObject

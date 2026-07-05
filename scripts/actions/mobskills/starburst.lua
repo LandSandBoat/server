@@ -19,7 +19,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     -- params.mnd_wSC       = 0.4 -- TODO: Capture if mobskill weaponskills have wSC.
     params.attackType       = xi.attackType.MAGICAL
 
-    if math.random(1, 100) <= 50 then
+    if math.randomInt(1, 100) <= 50 then
         params.element      = xi.element.LIGHT
         params.damageType   = xi.damageType.LIGHT
     else

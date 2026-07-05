@@ -40,10 +40,10 @@ entity.onMobSpawn = function(mob)
         if weather == xi.weather.GLOOM then
             -- Noble Mold always spawns on the minute after weather change
             -- Ereshkigal witnessed doing the same thing
-            ereshkigalDelay  = math.random(2, 120) * 60
+            ereshkigalDelay  = math.randomInt(2, 120) * 60
         elseif weather == xi.weather.DARKNESS then
             -- TODO is chance actually higher for double dark... it's a very rare weather so probably?
-            ereshkigalDelay  = math.random(2, 20) * 60
+            ereshkigalDelay  = math.randomInt(2, 20) * 60
         end
 
         if ereshkigalDelay > 0 then
@@ -93,7 +93,7 @@ entity.onMobSpawn = function(mob)
         -- we ensure this by only changing spawn point when he's not following a path, and making him path to his new spot
         if
             not mobArg:isFollowingPath() and
-            math.random(1, 100) <= 4
+            math.randomInt(1, 100) <= 4
         then
             local index = (mobArg:getLocalVar('spawnPos') + 1) % #phSpawnPoints
             mobArg:setLocalVar('spawnPos', index)

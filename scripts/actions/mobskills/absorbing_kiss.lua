@@ -22,7 +22,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
             -- This seems strange, but without better ways to test this we will pick it at random
             -- MND down had 27 seconds left but still had -8 MND, so this must not decay.
             -- Even if it were a half resist it would still have had several ticks to decay
-            local msg = xi.mobskills.mobDrainAttribute(mob, target, i, math.random(7, 8), 0, 120)
+            local msg = xi.mobskills.mobDrainAttribute(mob, target, i, math.randomInt(7, 8), 0, 120)
 
             -- mobDrainAttribute returns either ATTR_DRAINED or SKILL_MISS currently
             if msg == xi.msg.basic.ATTR_DRAINED then
@@ -39,7 +39,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         return numAttributesDrained
     end
 
-    local effectType = math.random(xi.effect.STR_DOWN, xi.effect.CHR_DOWN)
+    local effectType = math.randomInt(xi.effect.STR_DOWN, xi.effect.CHR_DOWN)
 
     skill:setMsg(xi.mobskills.mobDrainAttribute(mob, target, effectType, 10, 3, 120))
 

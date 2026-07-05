@@ -21,7 +21,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
                         xi.effect.EVASION_DOWN, xi.effect.DEFENSE_DOWN, xi.effect.MAGIC_ACC_DOWN, xi.effect.MAGIC_ATK_DOWN, xi.effect.MAGIC_EVASION_DOWN,
                         xi.effect.MAGIC_DEF_DOWN, xi.effect.MAX_TP_DOWN, xi.effect.MAX_MP_DOWN, xi.effect.MAX_HP_DOWN }
 
-    local dmg = utils.takeShadows(target, 1, math.random(2, 3)) --removes 2-3 shadows
+    local dmg = utils.takeShadows(target, 1, math.randomInt(2, 3)) --removes 2-3 shadows
     --if removed more shadows than were up or there weren't any
     if dmg > 0 then
         for _, effect in ipairs(removables) do

@@ -34,7 +34,7 @@ entity.onMobFight = function(mob, target)
         for i = ID.mob.GULOOL_JA_JA + 1, ID.mob.GULOOL_JA_JA + 4 do
             local bodyguard = GetMobByID(i)
             if bodyguard and not bodyguard:isSpawned() then
-                bodyguard:setSpawn(mob:getXPos() + math.random(1, 5), mob:getYPos(), mob:getZPos() + math.random(1, 5))
+                bodyguard:setSpawn(mob:getXPos() + math.randomInt(1, 5), mob:getYPos(), mob:getZPos() + math.randomInt(1, 5))
                 SpawnMob(i):updateEnmity(target)
                 break
             end

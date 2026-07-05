@@ -24,7 +24,7 @@ entity.onMobEngage = function(mob, target)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TP_DRAIN, { chance = 35, power = math.random(95, 135) })
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TP_DRAIN, { chance = 35, power = math.randomInt(95, 135) })
 end
 
 entity.onMobDeath = function(mob, player, optParams)
@@ -45,7 +45,7 @@ entity.onMobDespawn = function(mob)
     DisallowRespawn(mob:getID(), true)
     DisallowRespawn(nqId, false)
     xi.mob.updateNMSpawnPoint(nqId)
-    GetMobByID(nqId):setRespawnTime(math.random(75600, 86400))
+    GetMobByID(nqId):setRespawnTime(math.randomInt(75600, 86400))
 end
 
 return entity

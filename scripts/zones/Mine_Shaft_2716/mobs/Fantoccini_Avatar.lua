@@ -128,7 +128,7 @@ local avatarTable =
 entity.onMobSpawn = function(mob)
     mob:setMagicCastingEnabled(false)
 
-    local avatarChosen = math.random(1, #avatarTable)
+    local avatarChosen = math.randomInt(1, #avatarTable)
     local avatarInfo  = avatarTable[avatarChosen]
 
     mob:setModelId(avatarInfo.modelId)
@@ -149,7 +149,7 @@ entity.onMobFight = function(mob, target)
 
     if mob:getLocalVar('jobAbilityUsed') == 1 then
         mob:setLocalVar('jobAbilityUsed', 0)
-        mob:useMobAbility(avatarInfo.skillList[math.random(1, #avatarInfo.skillList)])
+        mob:useMobAbility(avatarInfo.skillList[math.randomInt(1, #avatarInfo.skillList)])
     end
 end
 
@@ -160,7 +160,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         return 0
     end
 
-    return avatarInfo.skillList[math.random(1, #avatarInfo.skillList)]
+    return avatarInfo.skillList[math.randomInt(1, #avatarInfo.skillList)]
 end
 
 entity.onMobDeath = function(mob, player, optParams)

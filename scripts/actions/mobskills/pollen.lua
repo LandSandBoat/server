@@ -10,7 +10,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local potencyBonus = mob:isNM() and math.random(0, 294) or 0
+    local potencyBonus = mob:isNM() and math.randomInt(0, 294) or 0
     local potency      = (147 + potencyBonus) / 1024
     local finalPotency = math.floor(mob:getMaxHP() * potency)
 

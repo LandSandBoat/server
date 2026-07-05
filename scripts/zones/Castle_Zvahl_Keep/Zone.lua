@@ -46,7 +46,7 @@ zoneObject.onZoneTick = function(zone)
             end
 
             teleporter:openDoor(8)
-            teleporter:setLocalVar('timer', math.random(15, 60) + GetSystemTime())
+            teleporter:setLocalVar('timer', math.randomInt(15, 60) + GetSystemTime())
         end
     end
 end

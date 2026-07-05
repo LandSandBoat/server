@@ -160,11 +160,11 @@ function content:onBattlefieldTick(battlefield, tick)
         -- All shields share the same position entry ID to maintain a coordinated formation
         local positions    = self.positions
         local lastPosition = battlefield:getLocalVar('position')
-        local newPosition  = math.random(1, #positions[area][1])
+        local newPosition  = math.randomInt(1, #positions[area][1])
 
         -- Ensure position is new
         while newPosition == lastPosition do
-            newPosition = math.random(1, #positions[area][1])
+            newPosition = math.randomInt(1, #positions[area][1])
         end
 
         battlefield:setLocalVar('position', newPosition)

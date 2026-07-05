@@ -28,11 +28,11 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.WHIRL_CLAWS_1
     }
 
-    return skillList[math.random(1, #skillList)]
+    return skillList[math.randomInt(1, #skillList)]
 end
 
 entity.onMobDespawn = function(mob)
-    GetNPCByID(ID.npc.RABBIT_FOOTPRINT):setLocalVar('activeTime', GetSystemTime() + math.random(60 * 9, 60 * 15))
+    GetNPCByID(ID.npc.RABBIT_FOOTPRINT):setLocalVar('activeTime', GetSystemTime() + math.randomInt(60 * 9, 60 * 15))
 end
 
 return entity

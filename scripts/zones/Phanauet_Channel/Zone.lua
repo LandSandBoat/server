@@ -35,7 +35,7 @@ zoneObject.onZoneTick = function(zone)
     end
 
     -- Per-tick chance so the appearance is spread randomly across the ride.
-    if math.random(1, 100) <= 5 then
+    if math.randomInt(1, 100) <= 5 then
         SpawnMob(ID.mob.STUBBORN_DREDVODD)
     end
 end
@@ -50,7 +50,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getYPos() == 0 and
         player:getZPos() == 0
     then
-        local position = math.random(-2, 2) + 0.15
+        local position = math.randomInt(-2, 2) + 0.15
         player:setPos(position, -2.000, -1.000, 190)
     end
 

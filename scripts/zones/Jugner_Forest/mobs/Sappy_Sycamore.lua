@@ -22,7 +22,7 @@ entity.spawnPoints =
 
 entity.onMobInitialize = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(3600, 4200)) -- 60 to 70 min
+    mob:setRespawnTime(math.randomInt(3600, 4200)) -- 60 to 70 min
 
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:addMod(xi.mod.SLEEP_MEVA, 20)
@@ -31,7 +31,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.SLOW, { power = 1500, duration = math.random(15, 25) })
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.SLOW, { power = 1500, duration = math.randomInt(15, 25) })
 end
 
 entity.onMobDeath = function(mob, player, optParams)
@@ -40,7 +40,7 @@ end
 
 entity.onMobDespawn = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(3600, 4200)) -- 60 to 70 min
+    mob:setRespawnTime(math.randomInt(3600, 4200)) -- 60 to 70 min
 end
 
 return entity

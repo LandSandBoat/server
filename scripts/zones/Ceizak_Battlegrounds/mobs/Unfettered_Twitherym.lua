@@ -22,7 +22,7 @@ local skillchainAffinities =
 }
 
 local function chooseAffinity(mob)
-    local chosenElement = math.random(xi.element.FIRE, xi.element.DARK)
+    local chosenElement = math.randomInt(xi.element.FIRE, xi.element.DARK)
     mob:setLocalVar('chosenElement', chosenElement)
 end
 

@@ -22,7 +22,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.REGAIN, 35)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
 
-    mob:setLocalVar('[2hour]HPP', math.random(25, 35))
+    mob:setLocalVar('[2hour]HPP', math.randomInt(25, 35))
     mob:setLocalVar('[2hour]Used', 0)
     mob:setLocalVar('vulcanTimer', 0)
 end
@@ -123,7 +123,7 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
     end
 
     -- Dice roll to determine if Gessho will attempt to interrupt
-    if math.random(1, 100) > 25 then
+    if math.randomInt(1, 100) > 25 then
         return
     end
 

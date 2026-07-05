@@ -99,7 +99,7 @@ xi.combat.magicAoE.calculateTypeAndRadius = function(caster, spell)
         if
             caster:hasTrait(xi.trait.DIVINE_VEIL) and
             (spellFamily == xi.magic.spellFamily.NA or spell:getID() == xi.magic.spell.ERASE) and
-            (caster:hasStatusEffect(xi.effect.DIVINE_SEAL) or math.random(100) <= caster:getMod(xi.mod.AOE_NA))
+            (caster:hasStatusEffect(xi.effect.DIVINE_SEAL) or math.randomInt(1, 100) <= caster:getMod(xi.mod.AOE_NA))
         then
             return { xi.magic.aoe.RADIAL, 10 }
         end

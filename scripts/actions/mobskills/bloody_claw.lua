@@ -30,7 +30,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         skill:setMsg(xi.mobskills.mobDrainMove(mob, target, xi.mobskills.drainType.HP, info.damage))
 
         -- Add 0 to 6 for all 7 of the possible attribute reductions
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STR_DOWN + math.random(0, 6), 20, 9, 120)
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STR_DOWN + math.randomInt(0, 6), 20, 9, 120)
     end
 
     return info.damage

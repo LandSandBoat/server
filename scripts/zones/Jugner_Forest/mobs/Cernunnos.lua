@@ -18,7 +18,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.ENTANGLE_DRAIN,
     }
 
-    return tpMoves[math.random(1, #tpMoves)]
+    return tpMoves[math.randomInt(1, #tpMoves)]
 end
 
 entity.onMobSpellChoose = function(mob, target, spellId)
@@ -45,7 +45,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
         table.insert(spellList, xi.magic.spell.CURE_IV)
     end
 
-    return spellList[math.random(1, #spellList)]
+    return spellList[math.randomInt(1, #spellList)]
 end
 
 return entity

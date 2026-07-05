@@ -59,8 +59,8 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            { id = xi.mobSkill.MEIKYO_SHISUI_1, hpp = math.random(65, 70) },
-            { id = xi.mobSkill.MEIKYO_SHISUI_1, hpp = math.random(35, 40) },
+            { id = xi.mobSkill.MEIKYO_SHISUI_1, hpp = math.randomInt(65, 70) },
+            { id = xi.mobSkill.MEIKYO_SHISUI_1, hpp = math.randomInt(35, 40) },
         },
     })
 
@@ -70,7 +70,7 @@ entity.onMobSpawn = function(mob)
         mob:setMod(xi.data.element.getElementalSDTModifier(element), -10000)
     end
 
-    mob:setLocalVar('changeTime', GetSystemTime() + math.random(30, 180))
+    mob:setLocalVar('changeTime', GetSystemTime() + math.randomInt(30, 180))
 end
 
 entity.onMobFight = function(mob)
@@ -80,10 +80,10 @@ entity.onMobFight = function(mob)
 
     -- Apply the form change
     if currentTime >= changeTime then
-        local newForm = math.random(1, 3)
+        local newForm = math.randomInt(1, 3)
 
         while newForm == currentForm do
-            newForm = math.random(1, 3)
+            newForm = math.randomInt(1, 3)
         end
 
         -- Briefly transition to animationSub 1, then change to new form
@@ -97,7 +97,7 @@ entity.onMobFight = function(mob)
             end
         end)
 
-        mob:setLocalVar('changeTime', currentTime + math.random(30, 390))
+        mob:setLocalVar('changeTime', currentTime + math.randomInt(30, 390))
     end
 end
 
@@ -108,7 +108,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     switch (form): caseof
     {
         [1] = function()
-            if math.random(1, 100) <= 75 then
+            if math.randomInt(1, 100) <= 75 then
                 table.insert(tpMoves, xi.mobSkill.OPTIC_INDURATION)
             end
         end,
@@ -124,7 +124,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         end,
     }
 
-    return tpMoves[math.random(1, #tpMoves)]
+    return tpMoves[math.randomInt(1, #tpMoves)]
 end
 
 entity.onMobDespawn = function(mob)

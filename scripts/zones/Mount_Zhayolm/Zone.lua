@@ -7,7 +7,7 @@ local ID = zones[xi.zone.MOUNT_ZHAYOLM]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    GetMobByID(ID.mob.CERBERUS):setRespawnTime(math.random(12, 36) * 3600)
+    GetMobByID(ID.mob.CERBERUS):setRespawnTime(math.randomInt(12, 36) * 3600)
 
     xi.helm.initZone(zone, xi.helmType.MINING)
     xi.darkRider.addHoofprints(zone)

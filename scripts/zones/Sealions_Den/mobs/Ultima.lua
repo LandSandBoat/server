@@ -40,7 +40,7 @@ entity.onMobFight = function(mob, target)
         [1] = function()
             local nextChemBomb = mob:getLocalVar('nextChemBomb')
             if currentTime >= nextChemBomb then
-                mob:setLocalVar('nextChemBomb', currentTime + math.random(60, 90))
+                mob:setLocalVar('nextChemBomb', currentTime + math.randomInt(60, 90))
                 mob:useMobAbility(xi.mobSkill.CHEMICAL_BOMB)
             end
 
@@ -49,7 +49,7 @@ entity.onMobFight = function(mob, target)
                 mob:setLocalVar('phase', 2)
                 mob:setMobAbilityEnabled(false)
                 mob:useMobAbility(xi.mobSkill.NUCLEAR_WASTE)
-                mob:setLocalVar('nextNuke', currentTime + math.random(25, 35))
+                mob:setLocalVar('nextNuke', currentTime + math.randomInt(25, 35))
                 return
             end
         end,
@@ -58,7 +58,7 @@ entity.onMobFight = function(mob, target)
         [2] = function()
             local nextNuke = mob:getLocalVar('nextNuke')
             if currentTime >= nextNuke then
-                mob:setLocalVar('nextNuke', currentTime + math.random(25, 35))
+                mob:setLocalVar('nextNuke', currentTime + math.randomInt(25, 35))
                 mob:useMobAbility(xi.mobSkill.NUCLEAR_WASTE)
             end
 
@@ -130,7 +130,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         end,
     }
 
-    local roll      = math.random(1, 100)
+    local roll      = math.randomInt(1, 100)
     local weightSum = 0
     for i = 1, #tpSkills do
         weightSum = weightSum + tpSkills[i][2]
@@ -146,7 +146,7 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
 
     -- Nuclear Waste phase: Follow up with a random elemental conal
     if phase == 2 and skillID == xi.mobSkill.NUCLEAR_WASTE then
-        local eleConal = math.random(xi.mobSkill.FLAME_THROWER, xi.mobSkill.HYDRO_CANON)
+        local eleConal = math.randomInt(xi.mobSkill.FLAME_THROWER, xi.mobSkill.HYDRO_CANON)
         mob:useMobAbility(eleConal)
     end
 
@@ -166,7 +166,7 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
             -- Second Antimatter finished, set timer for next rotation
             elseif abilityOrder == 3 then
                 mob:setLocalVar('abilityOrder', 0)
-                mob:setLocalVar('nextAntimatter', GetSystemTime() + math.random(15, 20))
+                mob:setLocalVar('nextAntimatter', GetSystemTime() + math.randomInt(15, 20))
             end
         end
     end

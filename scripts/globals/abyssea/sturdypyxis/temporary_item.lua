@@ -163,7 +163,7 @@ xi.pyxis.tempItem.setTempItems = function(npc, tier)
     local maxItem = npc:getLocalVar('NB_ITEM')
 
     for i = 1, maxItem do
-        local temp = drops[tier][math.random(1, #drops[tier])]
+        local temp = drops[tier][math.randomInt(1, #drops[tier])]
         npc:setLocalVar('TEMP' .. i, temp)
     end
 end
@@ -174,7 +174,7 @@ xi.pyxis.tempItem.giveTemporaryItems = function(npc, player)
     local alliance = player:getAlliance()
 
     for i = 1, #drops[tier] do
-        local item = drops[tier][math.random(1, #drops[tier])]
+        local item = drops[tier][math.randomInt(1, #drops[tier])]
         for p, member in ipairs(alliance) do
             if
                 member:isPC() and

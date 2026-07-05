@@ -21,7 +21,7 @@ local oztrojaGlobal =
         repeat
             numOpen = 0
             for i = 0, 3 do
-                local correctState = xi.anim.OPEN_DOOR + math.random(0, 1)
+                local correctState = xi.anim.OPEN_DOOR + math.randomInt(0, 1)
                 combo[i] = correctState
                 if correctState == xi.anim.OPEN_DOOR then
                     numOpen = numOpen + 1
@@ -61,7 +61,7 @@ local oztrojaGlobal =
         }
 
         for i = 1, #passwordLocalVarNames do
-            local passwordIndex = math.random(1, #passwordIndexes)
+            local passwordIndex = math.randomInt(1, #passwordIndexes)
             GetNPCByID(ID.npc.TRAP_DOOR_FLOOR_4):setLocalVar(passwordLocalVarNames[i], passwordIndexes[passwordIndex])
             table.remove(passwordIndexes, passwordIndex) -- Prevent duplicates
         end

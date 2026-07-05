@@ -12,7 +12,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            { id = 866, hpp = math.random(30, 55) }, -- uses Tidal Wave once while near 50% HPP.
+            { id = 866, hpp = math.randomInt(30, 55) }, -- uses Tidal Wave once while near 50% HPP.
         },
     })
 

@@ -44,7 +44,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(286, 0, 937) -- Post Making Amens! dialogue (before Wonder Wands)
         end
     else
-        local rand = math.random(1, 2)
+        local rand = math.randomInt(1, 2)
         if rand == 1 then
             player:startEvent(225)   -- Standard Conversation
         else

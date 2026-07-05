@@ -72,7 +72,7 @@ m:addOverride('xi.actions.weaponskills.flat_blade.onUseWeaponSkill', function(pl
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     -- Handle status effect
-    if math.random(1, 100) <= xi.weaponskills.fTP(tp, { 50, 75, 100 }) then
+    if math.randomInt(1, 100) <= xi.weaponskills.fTP(tp, { 50, 75, 100 }) then
         local effectId      = xi.effect.STUN
         local actionElement = xi.element.THUNDER
         local power         = 1
@@ -354,7 +354,7 @@ m:addOverride('xi.actions.weaponskills.death_blossom.onUseWeaponSkill', function
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     -- Handle status effect
-    if math.random(1, 100) <= xi.weaponskills.fTP(tp, { 50, 75, 100 }) then
+    if math.randomInt(1, 100) <= xi.weaponskills.fTP(tp, { 50, 75, 100 }) then
         local effectId      = xi.effect.MAGIC_EVASION_DOWN
         local actionElement = xi.element.THUNDER
         local power         = 10

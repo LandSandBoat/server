@@ -35,7 +35,7 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobDespawn = function(mob)
-    GetMobByID(ID.mob.ZIRNITRA):setRespawnTime(math.random(14400, 18000)) -- 4 to 5 hours
+    GetMobByID(ID.mob.ZIRNITRA):setRespawnTime(math.randomInt(14400, 18000)) -- 4 to 5 hours
 end
 
 entity.onMobDeath = function(mob, player, optParams)

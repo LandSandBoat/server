@@ -63,7 +63,7 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.TERROR)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(32400, 43200)) -- 9 to 12 hours
+    mob:setRespawnTime(math.randomInt(32400, 43200)) -- 9 to 12 hours
     DisallowRespawn(mob:getID(), true) -- prevents accidental 'pop' during no wind weather and immediate despawn
 end
 
@@ -112,7 +112,7 @@ end
 entity.onMobDespawn = function(mob)
     -- Set Kruetzet's spawnpoint and respawn time (9-12 hours)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(32400, 43200))
+    mob:setRespawnTime(math.randomInt(32400, 43200))
     DisallowRespawn(mob:getID(), true) -- prevents accidental 'pop' during no wind weather and immediate despawn
 end
 

@@ -12,7 +12,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobEngage = function(mob)
-    mob:setLocalVar('seetherTimer', GetSystemTime() + math.random(15, 120)) -- Envier summons Seether every 15 to 120 seconds.
+    mob:setLocalVar('seetherTimer', GetSystemTime() + math.randomInt(15, 120)) -- Envier summons Seether every 15 to 120 seconds.
 end
 
 entity.onMobFight = function(mob, target)
@@ -23,7 +23,7 @@ entity.onMobFight = function(mob, target)
     end
 
     if mob:getLocalVar('seetherTimer') < GetSystemTime() then
-        mob:setLocalVar('seetherTimer', GetSystemTime() + math.random(15, 120))
+        mob:setLocalVar('seetherTimer', GetSystemTime() + math.randomInt(15, 120))
         local envierID = mob:getID()
         local pets = { envierID + 1, envierID + 2, envierID + 3 }
         local petParams =

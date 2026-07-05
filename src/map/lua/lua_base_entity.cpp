@@ -811,7 +811,7 @@ uint32 CLuaBaseEntity::getLocalVar(const std::string& var)
 /************************************************************************
  *  Function: setLocalVar()
  *  Purpose : Assigns a local variable to an entity
- *  Example : mob:setLocalVar("pop", GetSystemTime() + math.random(1200,7200));
+ *  Example : mob:setLocalVar("pop", GetSystemTime() + math.randomInt(1200, 7200));
  *  Notes   :
  ************************************************************************/
 
@@ -9251,7 +9251,7 @@ void CLuaBaseEntity::unseenKeyItem(const KeyItem keyItemID) const
 /************************************************************************
  *  Function: addExp()
  *  Purpose : Adds a set amount of XP to the player
- *  Example : player:addExp(math.random(500,1000))
+ *  Example : player:addExp(math.randomInt(500, 1000))
  *  Notes   : Used in Dynamis Pages, etc
  ************************************************************************/
 
@@ -17905,7 +17905,7 @@ auto CLuaBaseEntity::getRespawnTime() const -> uint32
 /************************************************************************
  *  Function: setRespawnTime()
  *  Purpose : Setting the respawn time for a Mob
- *  Example : mob:setRespawnTime(math.random(3600, 7200))
+ *  Example : mob:setRespawnTime(math.randomInt(3600, 7200))
  *  Notes   : 0 disables respawn.
  ************************************************************************/
 

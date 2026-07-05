@@ -37,7 +37,7 @@ entity.onMobSpawn = function(mob)
 
     -- 70/30 split to be able to spawn a NM or not into rotation
     local canSpawnNM = 700
-    if math.random(1000) > canSpawnNM then
+    if math.randomInt(1, 1000) > canSpawnNM then
         mob:setLocalVar('noSpawnNM', 1)
     end
 end
@@ -70,7 +70,7 @@ entity.onMobFight = function(mob, target)
             mob:setLocalVar('spawn', 0)
         end
 
-        mob:setLocalVar('next', now + math.random(10, 15))
+        mob:setLocalVar('next', now + math.randomInt(10, 15))
         mob:setHP(mob:getHP() - (mob:getMaxHP() / 100))
 
         local petid = mob:getLocalVar('spawn')
@@ -89,7 +89,7 @@ entity.onMobFight = function(mob, target)
                         return
                     end
 
-                    if math.random(100) > 97 and not nm:isSpawned() then
+                    if math.randomInt(1, 100) > 97 and not nm:isSpawned() then
                         petid = offset + 6
                     end
                 end

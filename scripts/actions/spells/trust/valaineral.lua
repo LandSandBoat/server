@@ -93,7 +93,7 @@ spellObject.onMobSpawn = function(mob)
     mob:addListener('WEAPONSKILL_USE', 'VALAINERAL_WEAPONSKILL_USE', function(mobArg, target, skill, tp, action, damage)
         if skill:getID() == xi.mobSkill.URIEL_BLADE_1 then -- Uriel Blade
             -- Let the Blade of the Conqueror once again bring glory to the Kingdom!
-            if math.random(1, 100) <= 33 then
+            if math.randomInt(1, 100) <= 33 then
                 if target:getID() == skill:getPrimaryTargetID() then
                     xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)
                 end

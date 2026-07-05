@@ -86,7 +86,7 @@ local function setupBowPhase(mob, phase)
     mob:setLocalVar('[Tenzen]ShotCount', 0)
     mob:setLocalVar('[Tenzen]ShouldOisoya', 0)
     mob:setLocalVar('[Tenzen]TransitionActive', 0)
-    mob:setLocalVar('[Tenzen]ShotAmount', math.random(config.minShots, config.maxShots))
+    mob:setLocalVar('[Tenzen]ShotAmount', math.randomInt(config.minShots, config.maxShots))
 end
 
 local function wsSequence(mob)
@@ -134,8 +134,8 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('[Tenzen]ShiftTimer', 0)
     mob:setLocalVar('[Tenzen]RiceBallTimer', 0)
     mob:setLocalVar('[Tenzen]LastWeaponskill', 0)
-    mob:setLocalVar('[Tenzen]EnrageHP', math.random(25, 30))
-    mob:setLocalVar('[Tenzen]MeikyoHP', math.random(60, 80))
+    mob:setLocalVar('[Tenzen]EnrageHP', math.randomInt(25, 30))
+    mob:setLocalVar('[Tenzen]MeikyoHP', math.randomInt(60, 80))
 end
 
 entity.onMobEngage = function(mob, target)
@@ -143,7 +143,7 @@ entity.onMobEngage = function(mob, target)
 
     local currentTime = GetSystemTime()
     mob:setLocalVar('[Tenzen]ShiftTimer', currentTime + 40)
-    mob:setLocalVar('[Tenzen]RiceBallTimer', currentTime + math.random(90, 120))
+    mob:setLocalVar('[Tenzen]RiceBallTimer', currentTime + math.randomInt(90, 120))
 
     -- Update Taru helpers enmity.
     local mobId = mob:getID()
@@ -170,7 +170,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
                 xi.mobSkill.AMATSU_YUKIARASHI,
                 xi.mobSkill.AMATSU_TSUKIOBORO,
             }
-            chosenSkill = tpList[math.random(1, #tpList)]
+            chosenSkill = tpList[math.randomInt(1, #tpList)]
             skill = chosenSkill
         end,
 
@@ -216,7 +216,7 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
 
             mob:setLocalVar('[Tenzen]MeikyoActive', 1)
             mob:setLocalVar('[Tenzen]MeikyoStep', 0)
-            mob:setLocalVar('[Tenzen]ShiftTimer', GetSystemTime() + math.random(25, 70))
+            mob:setLocalVar('[Tenzen]ShiftTimer', GetSystemTime() + math.randomInt(25, 70))
             setupForm(mob, forms.MELEE)
             wsSequence(mob)
         end,
@@ -343,7 +343,7 @@ entity.onMobFight = function(mob, target)
 
             -- Return to melee
             if not phaseConfig or phaseConfig.nextPhase == 0 then
-                mob:setLocalVar('[Tenzen]ShiftTimer', currentTime + math.random(25, 70))
+                mob:setLocalVar('[Tenzen]ShiftTimer', currentTime + math.randomInt(25, 70))
                 mob:setLocalVar('[Tenzen]ShotCount', 0)
                 mob:setLocalVar('[Tenzen]BowPhase', 0)
                 setupForm(mob, forms.MELEE)

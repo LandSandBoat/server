@@ -7,7 +7,7 @@ g_mixins.families.imp = function(impMob)
     -- 20% chance to break horn on critical hit
     -- Reacquires horn in stages of 30, 35, 40, 45, and a very rare 60 seconds
     impMob:addListener('CRITICAL_TAKE', 'IMP_CRITICAL_TAKE', function(mob)
-        local random = math.random(1, 100)
+        local random = math.randomInt(1, 100)
 
         if random <= 20 and mob:getAnimationSub() == 4 then
             mob:setAnimationSub(5)

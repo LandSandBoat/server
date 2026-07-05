@@ -14,8 +14,8 @@ end
 
 entity.onMobDespawn = function(mob)
     DisallowRespawn(ID.mob.ORCISH_PANZER, false)
-    GetMobByID(ID.mob.ORCISH_PANZER):setRespawnTime(math.random(3600, 4200)) -- 60 to 70 min
-    mob:setLocalVar('pop', GetSystemTime() + math.random(75600, 86400)) -- 21 to 24 hours
+    GetMobByID(ID.mob.ORCISH_PANZER):setRespawnTime(math.randomInt(3600, 4200)) -- 60 to 70 min
+    mob:setLocalVar('pop', GetSystemTime() + math.randomInt(75600, 86400)) -- 21 to 24 hours
 end
 
 return entity

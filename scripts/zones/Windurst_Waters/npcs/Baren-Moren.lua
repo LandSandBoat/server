@@ -68,7 +68,7 @@ entity.onTrigger = function(player, npc)
 
     -- default dialog
     else
-        local rand = math.random(1, 6)
+        local rand = math.randomInt(1, 6)
 
         if rand == 1 then
             player:startEvent(42) -- Standard Conversation 1

@@ -528,7 +528,7 @@ xi.spells.damage.calculateDayAndWeather = function(caster, spellElement, alwaysA
 
     if
         alwaysApply or                                    -- Helixes and other actions always apply both bonuses and penalties.
-        math.random(1, 100) <= 33 or                      -- Random. Applies to both bonuses and penalties.
+        math.randomInt(1, 100) <= 33 or                      -- Random. Applies to both bonuses and penalties.
         caster:getMod(xi.mod.FORCE_DW_BONUS_PENALTY) >= 1 -- Hachirin-no-Obi forces both bonuses and penalties.
     then
         applyBonuses   = true
@@ -646,7 +646,7 @@ xi.spells.damage.calculateMagicBonusDiff = function(caster, target, spellId, ski
         mab = mab + caster:getMod(xi.mod.NIN_NUKE_BONUS_GEAR)
     end
 
-    if math.random(1, 100) <= mabCritChance then
+    if math.randomInt(1, 100) <= mabCritChance then
         mab = mab + utils.clamp(10 + caster:getMod(xi.mod.MAGIC_CRIT_DMG_INCREASE), 10, 40)
     end
 
@@ -701,7 +701,7 @@ xi.spells.damage.calculateMagicCriticalMultiplier = function(caster)
     -- https://www.bg-wiki.com/ffxi/Magic_Critical_Hit
     -- https://www.bg-wiki.com/ffxi/Sroda_Tathlum
     local criticalChance = caster:getMod(xi.mod.MAGIC_CRITHITRATE_II)
-    if math.random(1, 100) <= criticalChance then
+    if math.randomInt(1, 100) <= criticalChance then
         return 1.25
     end
 
@@ -899,14 +899,14 @@ xi.spells.damage.calculateAbsorption = function(target, element, isMagic)
     end
 
     -- Absorb: All damage.
-    if math.random(1, 100) <= target:getMod(xi.mod.ABSORB_DMG_CHANCE) then
+    if math.randomInt(1, 100) <= target:getMod(xi.mod.ABSORB_DMG_CHANCE) then
         return -1
     end
 
     -- Absorb: Magic damage.
     if
         isMagic and
-        math.random(1, 100) <= target:getMod(xi.mod.MAGIC_ABSORB)
+        math.randomInt(1, 100) <= target:getMod(xi.mod.MAGIC_ABSORB)
     then
         return -1
     end
@@ -914,7 +914,7 @@ xi.spells.damage.calculateAbsorption = function(target, element, isMagic)
     -- Absorb: Element damage.
     if
         element > 0 and
-        math.random(1, 100) <= target:getMod(xi.data.element.getElementalAbsorptionModifier(element))
+        math.randomInt(1, 100) <= target:getMod(xi.data.element.getElementalAbsorptionModifier(element))
     then
         return -1
     end
@@ -925,14 +925,14 @@ end
 
 xi.spells.damage.calculateNullification = function(target, element, isMagic, isBreath)
     -- Nullify: All damage.
-    if math.random(1, 100) <= target:getMod(xi.mod.NULL_DAMAGE) then
+    if math.randomInt(1, 100) <= target:getMod(xi.mod.NULL_DAMAGE) then
         return 0
     end
 
     -- Nullify: Magic damage.
     if
         isMagic and
-        math.random(1, 100) <= target:getMod(xi.mod.NULL_MAGICAL_DAMAGE)
+        math.randomInt(1, 100) <= target:getMod(xi.mod.NULL_MAGICAL_DAMAGE)
     then
         return 0
     end
@@ -940,7 +940,7 @@ xi.spells.damage.calculateNullification = function(target, element, isMagic, isB
     -- Nullify: Breath damage.
     if
         isBreath and
-        math.random(1, 100) <= target:getMod(xi.mod.NULL_BREATH_DAMAGE)
+        math.randomInt(1, 100) <= target:getMod(xi.mod.NULL_BREATH_DAMAGE)
     then
         return 0
     end
@@ -948,7 +948,7 @@ xi.spells.damage.calculateNullification = function(target, element, isMagic, isB
     -- Nullify: Element damage.
     if
         element > 0 and
-        math.random(1, 100) <= target:getMod(xi.data.element.getElementalNullificationModifier(element))
+        math.randomInt(1, 100) <= target:getMod(xi.data.element.getElementalNullificationModifier(element))
     then
         return 0
     end

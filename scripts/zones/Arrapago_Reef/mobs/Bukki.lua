@@ -15,7 +15,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            { id = xi.mobSkill.MANAFONT_1, hpp = math.random(10, 50) },
+            { id = xi.mobSkill.MANAFONT_1, hpp = math.randomInt(10, 50) },
         },
     })
 
@@ -24,7 +24,7 @@ entity.onMobSpawn = function(mob)
     mob:setMagicCastingEnabled(true)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
     mob:setMobMod(xi.mobMod.GIL_MAX, -1)
-    mob:setLocalVar('tp_spam', math.random(5, 15))
+    mob:setLocalVar('tp_spam', math.randomInt(5, 15))
     mob:addListener('COMBAT_TICK', 'BUKKI_TICK', function(mobArg)
         if
             mobArg:getHPP() <= mobArg:getLocalVar('tp_spam') and

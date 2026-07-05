@@ -16,7 +16,7 @@ entity.onMobSpawn = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.BIND)
 
-    xi.mix.jobSpecial.config(mob, { specials = { { id = xi.mobSkill.SOUL_VOICE_1, hpp = math.random(10, 75) } } })
+    xi.mix.jobSpecial.config(mob, { specials = { { id = xi.mobSkill.SOUL_VOICE_1, hpp = math.randomInt(10, 75) } } })
 end
 
 entity.onMobSpellChoose = function(mob, target, spellId)

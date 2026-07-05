@@ -20,7 +20,7 @@ entity.onMobSpawn = function(mob)
         mob:setPet(GetMobByID(pet, instance))
         mob:timer(5000, function(mobArg)
             local pos = mob:getPos()
-            GetMobByID(pet, instance):setSpawn(pos.x + math.random(-2, 2), pos.y, pos.z + math.random(-2, 2))
+            GetMobByID(pet, instance):setSpawn(pos.x + math.randomInt(-2, 2), pos.y, pos.z + math.randomInt(-2, 2))
             SpawnMob(pet, instance)
         end)
     end
@@ -30,7 +30,7 @@ entity.onMobSkillTarget = function(target, mob, skill)
     local triggerSkills = { 1733, 1736, 1923, 1925 }
     local skillID = skill:getID()
     if utils.contains(skillID, triggerSkills) then
-        if math.random(0, 100) > 50 then
+        if math.randomInt(0, 100) > 50 then
             local instance = mob:getInstance()
             for _, gateid in ipairs(ID.mob[xi.assault.mission.IMPERIAL_AGENT_RESCUE].GATES) do
                 local gate = GetMobByID(gateid, instance)

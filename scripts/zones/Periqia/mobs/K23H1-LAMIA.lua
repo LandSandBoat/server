@@ -11,7 +11,7 @@ entity.onMobDespawn = function(mob)
         return
     end
 
-    local progress = math.random(1, 4)
+    local progress = math.randomInt(1, 4)
     instance:setProgress(instance:getProgress() + progress)
 end
 

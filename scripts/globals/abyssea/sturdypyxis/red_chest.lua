@@ -28,7 +28,7 @@ local function GetLockwearMessage(npc)
     local lockwearmessage  = npc:getLocalVar('LOCKWEARMESSAGE')
 
     if lockwearmessage == 0 or lockwearmessage == nil then
-        lockwearmessage = math.random(1, 4)
+        lockwearmessage = math.randomInt(1, 4)
     end
 
     return lockwearmessage
@@ -37,7 +37,7 @@ end
 local function SetLockwearAdd(npc, lockwearmessage)
     local lockwearmax = lockwear[lockwearmessage]
 
-    npc:setLocalVar('LOCKWEARADD', math.random(0, lockwearmax))
+    npc:setLocalVar('LOCKWEARADD', math.randomInt(0, lockwearmax))
 end
 
 xi.pyxis.redChest.startEvent = function(player, npc, event, contentMessage, timeleft)
@@ -50,7 +50,7 @@ xi.pyxis.redChest.startEvent = function(player, npc, event, contentMessage, time
     local attemptsallowed = 5
 
     if currentpressure <= 0 then
-        currentpressure = math.random(90, 100)
+        currentpressure = math.randomInt(90, 100)
         npc:setLocalVar('CURRENTPRESSURE', currentpressure)
     end
 
@@ -107,7 +107,7 @@ xi.pyxis.redChest.unlock = function(player, csid, option, npc)
         xi.pyxis.messageChest(player, ID.text.PLAYER_FAILED_LOCK, 0, 0, 0, 0, npc)
         player:messageSpecial(ID.text.CHEST_DISAPPEARED)
     else
-        npc:setLocalVar('LOCKWEARMESSAGE', math.random(1, 4))
+        npc:setLocalVar('LOCKWEARMESSAGE', math.randomInt(1, 4))
 
         if newPressure > 0 then
             npc:setLocalVar('CURRENTPRESSURE', newPressure)

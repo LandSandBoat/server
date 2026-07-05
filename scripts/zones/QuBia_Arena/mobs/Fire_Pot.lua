@@ -42,7 +42,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
         xi.magic.spell.FIRE_IV,
     }
 
-    return spellList[math.random(1, #spellList)]
+    return spellList[math.randomInt(1, #spellList)]
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)

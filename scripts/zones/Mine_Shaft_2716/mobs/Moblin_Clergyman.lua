@@ -41,7 +41,7 @@ entity.onMobSpellChoose = function(mob, target, spell)
         xi.magic.spell.PROTECT_III,
     }
 
-    return spellList[math.random(1, #spellList)]
+    return spellList[math.randomInt(1, #spellList)]
 end
 
 return entity

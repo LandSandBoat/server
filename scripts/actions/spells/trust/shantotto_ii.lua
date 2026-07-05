@@ -49,7 +49,7 @@ spellObject.onMobSpawn = function(mob)
 
     -- Spellcast (occasionally)
     mob:addListener('MAGIC_USE', 'SHANTOTTO_II_MAGIC', function(mobArg, target, spell, action)
-        if math.random(1, 100) <= 33 then
+        if math.randomInt(1, 100) <= 33 then
             -- Ohohohohoho!
             xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_2)
         end

@@ -9,27 +9,27 @@ xi.nyzul = xi.nyzul or {}
 
 local tempBoxItems =
 {
-    [ 1] = { itemID = xi.item.BOTTLE_OF_BARBARIANS_DRINK, amount = math.random(1, 3) },
-    [ 2] = { itemID = xi.item.BOTTLE_OF_FIGHTERS_DRINK,   amount = math.random(1, 3) },
-    [ 3] = { itemID = xi.item.BOTTLE_OF_ORACLES_DRINK,    amount = math.random(1, 3) },
-    [ 4] = { itemID = xi.item.BOTTLE_OF_ASSASSINS_DRINK,  amount = math.random(1, 3) },
-    [ 5] = { itemID = xi.item.BOTTLE_OF_SPYS_DRINK,       amount = math.random(1, 3) },
-    [ 6] = { itemID = xi.item.BOTTLE_OF_BRAVERS_DRINK,    amount = math.random(1, 3) },
-    [ 7] = { itemID = xi.item.BOTTLE_OF_SOLDIERS_DRINK,   amount = math.random(1, 3) },
-    [ 8] = { itemID = xi.item.BOTTLE_OF_CHAMPIONS_DRINK,  amount = math.random(1, 3) },
-    [ 9] = { itemID = xi.item.BOTTLE_OF_MONARCHS_DRINK,   amount = math.random(1, 3) },
-    [10] = { itemID = xi.item.BOTTLE_OF_GNOSTICS_DRINK,   amount = math.random(1, 3) },
-    [11] = { itemID = xi.item.BOTTLE_OF_CLERICS_DRINK,    amount = math.random(1, 3) },
-    [12] = { itemID = xi.item.BOTTLE_OF_SHEPHERDS_DRINK,  amount = math.random(1, 3) },
-    [13] = { itemID = xi.item.BOTTLE_OF_SPRINTERS_DRINK,  amount = math.random(1, 3) },
-    [14] = { itemID = xi.item.FLASK_OF_STRANGE_MILK,      amount = math.random(1, 5) },
-    [15] = { itemID = xi.item.BOTTLE_OF_STRANGE_JUICE,    amount = math.random(1, 5) },
+    [ 1] = { itemID = xi.item.BOTTLE_OF_BARBARIANS_DRINK, amount = math.randomInt(1, 3) },
+    [ 2] = { itemID = xi.item.BOTTLE_OF_FIGHTERS_DRINK,   amount = math.randomInt(1, 3) },
+    [ 3] = { itemID = xi.item.BOTTLE_OF_ORACLES_DRINK,    amount = math.randomInt(1, 3) },
+    [ 4] = { itemID = xi.item.BOTTLE_OF_ASSASSINS_DRINK,  amount = math.randomInt(1, 3) },
+    [ 5] = { itemID = xi.item.BOTTLE_OF_SPYS_DRINK,       amount = math.randomInt(1, 3) },
+    [ 6] = { itemID = xi.item.BOTTLE_OF_BRAVERS_DRINK,    amount = math.randomInt(1, 3) },
+    [ 7] = { itemID = xi.item.BOTTLE_OF_SOLDIERS_DRINK,   amount = math.randomInt(1, 3) },
+    [ 8] = { itemID = xi.item.BOTTLE_OF_CHAMPIONS_DRINK,  amount = math.randomInt(1, 3) },
+    [ 9] = { itemID = xi.item.BOTTLE_OF_MONARCHS_DRINK,   amount = math.randomInt(1, 3) },
+    [10] = { itemID = xi.item.BOTTLE_OF_GNOSTICS_DRINK,   amount = math.randomInt(1, 3) },
+    [11] = { itemID = xi.item.BOTTLE_OF_CLERICS_DRINK,    amount = math.randomInt(1, 3) },
+    [12] = { itemID = xi.item.BOTTLE_OF_SHEPHERDS_DRINK,  amount = math.randomInt(1, 3) },
+    [13] = { itemID = xi.item.BOTTLE_OF_SPRINTERS_DRINK,  amount = math.randomInt(1, 3) },
+    [14] = { itemID = xi.item.FLASK_OF_STRANGE_MILK,      amount = math.randomInt(1, 5) },
+    [15] = { itemID = xi.item.BOTTLE_OF_STRANGE_JUICE,    amount = math.randomInt(1, 5) },
     [16] = { itemID = xi.item.BOTTLE_OF_FANATICS_DRINK,   amount = 1                 },
     [17] = { itemID = xi.item.BOTTLE_OF_FOOLS_DRINK,      amount = 1                 },
     [18] = { itemID = xi.item.DUSTY_WING,                 amount = 1                 },
-    [19] = { itemID = xi.item.BOTTLE_OF_VICARS_DRINK,     amount = math.random(1, 3) },
-    [20] = { itemID = xi.item.DUSTY_POTION,               amount = math.random(1, 3) },
-    [21] = { itemID = xi.item.DUSTY_ETHER,                amount = math.random(1, 3) },
+    [19] = { itemID = xi.item.BOTTLE_OF_VICARS_DRINK,     amount = math.randomInt(1, 3) },
+    [20] = { itemID = xi.item.DUSTY_POTION,               amount = math.randomInt(1, 3) },
+    [21] = { itemID = xi.item.DUSTY_ETHER,                amount = math.randomInt(1, 3) },
     [22] = { itemID = xi.item.DUSTY_ELIXIR,               amount = 1                 }
 }
 
@@ -132,11 +132,11 @@ xi.nyzul.tempBoxTrigger = function(player, npc)
         end
 
         -- Execute rolls.
-        local item2Random = math.random(1, 100)
-        local item3Random = math.random(1, 100)
+        local item2Random = math.randomInt(1, 100)
+        local item3Random = math.randomInt(1, 100)
 
         -- Select items and amounts. Save selection into local vars.
-        local entry = math.random(1, #dTableBoxItems)
+        local entry = math.randomInt(1, #dTableBoxItems)
         local item  = dTableBoxItems[entry]
 
         npc:setLocalVar('itemID_1', item.itemID)
@@ -144,7 +144,7 @@ xi.nyzul.tempBoxTrigger = function(player, npc)
         table.remove(dTableBoxItems, entry)
 
         if item2Random <= 60 then
-            entry = math.random(1, #dTableBoxItems)
+            entry = math.randomInt(1, #dTableBoxItems)
             item  = dTableBoxItems[entry]
 
             npc:setLocalVar('itemID_2', item.itemID)
@@ -153,7 +153,7 @@ xi.nyzul.tempBoxTrigger = function(player, npc)
         end
 
         if item2Random <= 60 and item3Random <= 20 then
-            entry = math.random(1, #dTableBoxItems)
+            entry = math.randomInt(1, #dTableBoxItems)
             item  = dTableBoxItems[entry]
 
             npc:setLocalVar('itemID_3', item.itemID)
@@ -192,7 +192,7 @@ xi.nyzul.handleAppraisalItem = function(player, npc)
             local itemID = appraisalItems[mobOffset]
 
             if type(itemID) == 'table' then
-                local pick = math.random(1, #itemID)
+                local pick = math.randomInt(1, #itemID)
                 itemID     = itemID[pick]
             end
 

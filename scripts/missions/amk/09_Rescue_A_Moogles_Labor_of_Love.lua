@@ -48,7 +48,7 @@ local getMarkerSet = function(player)
     -- markerSet is the setIndex of a random table within markerSets defined above
     local markerSet = player:getCharVar('Mission[10][8]markerSet')
     if markerSet == 0 then
-        markerSet = math.random(1, #markerSets)
+        markerSet = math.randomInt(1, #markerSets)
         player:setCharVar('Mission[10][8]markerSet', markerSet)
     end
 

@@ -13,7 +13,7 @@ zoneObject.onInitialize = function(zone)
     table.insert(keys, ID.mob.CHARYBDIS - 2)
     table.insert(keys, ID.mob.CHARYBDIS - 4)
 
-    DespawnMob(keys[math.random(1, #keys)])
+    DespawnMob(keys[math.randomInt(1, #keys)])
 
     xi.treasure.initZone(zone)
 end

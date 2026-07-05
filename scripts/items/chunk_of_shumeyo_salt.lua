@@ -33,7 +33,7 @@ itemObject.onItemUse = function(target, player)
     if saltTime < currentTime then
         target:messageText(target, ID.text.BEGINS_TO_MELT)
         target:setLocalVar('saltTime', currentTime + 20)
-        target:setLocalVar('nextSteam', currentTime + math.random(7, 10))
+        target:setLocalVar('nextSteam', currentTime + math.randomInt(7, 10))
 
     -- Extend existing salt duration by 20 seconds
     else

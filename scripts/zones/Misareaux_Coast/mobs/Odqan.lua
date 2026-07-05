@@ -24,9 +24,9 @@ entity.onMobDespawn = function(mob)
     local odqan2 = GetMobByID(ID.mob.ODQAN[2])
 
     if odqan1 and odqan2 then
-        local respawnTime = math.random(7200, 18000) -- 2 to 5 hours
+        local respawnTime = math.randomInt(7200, 18000) -- 2 to 5 hours
 
-        if math.random(1, 2) == 1 then
+        if math.randomInt(1, 2) == 1 then
             odqan1:setLocalVar('canSpawn', 0)
             odqan2:setLocalVar('canSpawn', 1)
             odqan2:setRespawnTime(respawnTime)

@@ -33,13 +33,13 @@ entity.onMobSpawn = function(mob)
 
     -- Reset mob.
     xi.combat.behavior.enableAllActions(mob)
-    mob:setLocalVar('[2hour]HPP', math.random(50, 90))
+    mob:setLocalVar('[2hour]HPP', math.randomInt(50, 90))
     mob:setLocalVar('[2hour]Used', 0)
     mob:setLocalVar('initialTaunt', 0)
     mob:setLocalVar('talkTime', 0)
     mob:setLocalVar('alreadyTalked', 0)
     mob:setLocalVar('quickdrawUseTime', 0)
-    mob:setLocalVar('quickdrawNextTimer', math.random(8, 30))
+    mob:setLocalVar('quickdrawNextTimer', math.randomInt(8, 30))
 end
 
 entity.onMobRoam = function(mob)
@@ -73,7 +73,7 @@ entity.onMobRoam = function(mob)
     mob:timer(6000, function(mobArg)
         mobArg:useJobAbility(xi.ja.DOUBLE_UP, mob)
         mob:timer(4000, function(mobArgTwo)
-            mobArgTwo:messageText(mob, math.random(ID.text.QULTADA_LUCK_OF_CORSAIR, ID.text.QULTADA_CHIPS_ARE_DOWN))
+            mobArgTwo:messageText(mob, math.randomInt(ID.text.QULTADA_LUCK_OF_CORSAIR, ID.text.QULTADA_CHIPS_ARE_DOWN))
         end)
     end)
 end
@@ -167,9 +167,9 @@ entity.onMobFight = function(mob, target)
     -- Handle Quickdraw.
     local timer = mob:checkDistance(target) >= mob:getMeleeRange(target) and 8 or mob:getLocalVar('quickdrawNextTimer')
     if currentTime > mob:getLocalVar('quickdrawUseTime') + timer then
-        mob:useMobAbility(math.random(xi.mobSkill.FIRE_SHOT, xi.mobSkill.DARK_SHOT))
+        mob:useMobAbility(math.randomInt(xi.mobSkill.FIRE_SHOT, xi.mobSkill.DARK_SHOT))
         mob:setLocalVar('quickdrawUseTime', currentTime)
-        mob:setLocalVar('quickdrawNextTimer', math.random(8, 60))
+        mob:setLocalVar('quickdrawNextTimer', math.randomInt(8, 60))
         return
     end
 end
@@ -195,7 +195,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         table.insert(tpTable, xi.mobSkill.DETONATOR_1)
     end
 
-    return tpTable[math.random(1, #tpTable)]
+    return tpTable[math.randomInt(1, #tpTable)]
 end
 
 entity.onMobWeaponSkill = function(mob, target, skill, action)
@@ -226,7 +226,7 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
             [2] = ID.text.QULTADA_TRY_YOUR_LUCK,
         }
 
-        mob:showText(mob, messageTable[math.random(1, #messageTable)])
+        mob:showText(mob, messageTable[math.randomInt(1, #messageTable)])
     end
 end
 

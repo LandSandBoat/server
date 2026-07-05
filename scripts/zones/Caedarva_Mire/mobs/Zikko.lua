@@ -69,7 +69,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    local respawn = math.random(60, 75) * 60 -- 60 to 75 minutes
+    local respawn = math.randomInt(60, 75) * 60 -- 60 to 75 minutes
     mob:setLocalVar('cooldown', GetSystemTime() + respawn)
 end
 

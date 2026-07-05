@@ -18,7 +18,7 @@ entity.spawnPoints =
 entity.onMobInitialize = function(mob)
     -- Update spawn point and set respawn time
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(75600 + 1800 * math.random(1, 6))
+    mob:setRespawnTime(75600 + 1800 * math.randomInt(1, 6))
 
     -- the quest version of this NM doesn't drop gil
     if mob:getID() >= ID.mob.UNDERSTANDING_OVERLORD_OFFSET then
@@ -52,8 +52,8 @@ entity.onMobDespawn = function(mob)
     local hqId        = mobId + 1
     local timeOfDeath = GetServerVariable('[POP]Overlord_Bakgodek')
     local kills       = GetServerVariable('[PH]Overlord_Bakgodek') + 1
-    local popNow      = kills >= 7 or (kills >= 2 and math.random(1, 100) <= 20)
-    local respawnTime = 75600 + 1800 * math.random(1, 6)
+    local popNow      = kills >= 7 or (kills >= 2 and math.randomInt(1, 100) <= 20)
+    local respawnTime = 75600 + 1800 * math.randomInt(1, 6)
 
     if GetSystemTime() > timeOfDeath and popNow then
         DisallowRespawn(mobId, true)

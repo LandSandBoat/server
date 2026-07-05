@@ -285,7 +285,7 @@ end
 
 local function GetRandItem(zoneId, tier)
     local drops = { unpack(commonDrops), unpack(itemDrops[zoneId]) }
-    local rand = math.random(1, #drops - itemTierDeductions[zoneId][tier])
+    local rand = math.randomInt(1, #drops - itemTierDeductions[zoneId][tier])
 
     return drops[rand]
 end

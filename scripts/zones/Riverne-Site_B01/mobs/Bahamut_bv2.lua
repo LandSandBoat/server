@@ -117,7 +117,7 @@ entity.onMobFight = function(mob, target)
             end)
 
         elseif flarePhase < 9 then
-            mob:messageText(mob, ID.text.BAHAMUT_TAUNT + (math.random(0, 1) == 0 and 2 or 14))
+            mob:messageText(mob, ID.text.BAHAMUT_TAUNT + (math.randomInt(0, 1) == 0 and 2 or 14))
             mob:setLocalVar('messagePlayed', 2)
 
         elseif flarePhase == 9 then
@@ -201,7 +201,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     if mob:getLocalVar('flarePhase') == 10 then
         return xi.mobSkill.TERAFLARE
     else
-        return skillList[math.random(1, #skillList)]
+        return skillList[math.randomInt(1, #skillList)]
     end
 end
 

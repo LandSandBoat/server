@@ -31,7 +31,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
         -- TODO: Capture effect duration
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, 100, 3, math.random(3, 6) * 3)  -- 3-6 ticks
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, 100, 3, math.randomInt(3, 6) * 3)  -- 3-6 ticks
     end
 
     return info.damage

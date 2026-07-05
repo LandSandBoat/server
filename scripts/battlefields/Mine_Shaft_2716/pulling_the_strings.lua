@@ -163,7 +163,7 @@ local function getLootPool(battlefield)
         local bonusAttachment = lootTables[key]
         if key == xi.job.PUP and type(bonusAttachment) == 'table' then
             for _ = 1, 2 do
-                if math.random(1, 100) <= 20 then
+                if math.randomInt(1, 100) <= 20 then
                     table.insert(bonusLootPools, utils.randomEntry(bonusAttachment))
                 end
             end

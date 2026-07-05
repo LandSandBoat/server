@@ -362,7 +362,7 @@ instanceObject.onTrack = function(instance)
                 enemys:isSpawned()
             then
                 if mobChatMessage == 0 then
-                    mob:setLocalVar('runTimer', GetSystemTime() + math.random(20, 40))
+                    mob:setLocalVar('runTimer', GetSystemTime() + math.randomInt(20, 40))
                     mob:setLocalVar('mobChatMessage', 1)
                     mob:setLocalVar('moveStatus', 1)
                     mob:setLocalVar('runStart', 1)
@@ -491,7 +491,7 @@ instanceObject.onTrack = function(instance)
                         if lockToggle == 0 then
                             mob:showText(mob, ID.text.EXCALIACE_TIRED)
                             mob:timer(15000, function(mobArg)
-                                mobArg:setLocalVar('runTimer', GetSystemTime() + math.random(20, 40))
+                                mobArg:setLocalVar('runTimer', GetSystemTime() + math.randomInt(20, 40))
                                 mobArg:setLocalVar('moveLock', 1)
                                 mobArg:setLocalVar('lockToggle', 0)
                             end)
@@ -499,7 +499,7 @@ instanceObject.onTrack = function(instance)
                             mob:setLocalVar('lockToggle', 1)
                         end
                     else
-                        mob:setLocalVar('runTimer', GetSystemTime() + math.random(30, 40))
+                        mob:setLocalVar('runTimer', GetSystemTime() + math.randomInt(30, 40))
                         mob:showText(mob, ID.text.EXCALIACE_RUN)
                         mob:setLocalVar('runStart', 1)
                         mob:setBaseSpeed(100)

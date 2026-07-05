@@ -94,7 +94,7 @@ end
 
 entity.onMobEngage = function(mob, target)
     local currentTime = GetSystemTime()
-    mob:setLocalVar('addTime', currentTime + math.random(25, 30))
+    mob:setLocalVar('addTime', currentTime + math.randomInt(25, 30))
 end
 
 entity.onMobFight = function(mob, target)
@@ -106,7 +106,7 @@ entity.onMobFight = function(mob, target)
     local addTime = mob:getLocalVar('addTime')
 
     if currentTime > addTime then
-        mob:setLocalVar('addTime', currentTime + math.random(55, 60))
+        mob:setLocalVar('addTime', currentTime + math.randomInt(55, 60))
         xi.mob.callPets(mob, utils.shuffle(pets), callPetParams)
     end
 
@@ -136,7 +136,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.HORRID_ROAR_6,
     }
 
-    return skillList[math.random(1, #skillList)]
+    return skillList[math.randomInt(1, #skillList)]
 end
 
 entity.onMobSpellChoose = function(mob, target, spellId)

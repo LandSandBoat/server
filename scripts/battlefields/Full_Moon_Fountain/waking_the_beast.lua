@@ -62,8 +62,8 @@ local handleLoot = function(battlefield)
         -- Three loot pools with droprates estimated as follows: 40% -> 20% -> 10%
         local lootChance = 40
         for i = 1, 3 do
-            if math.random(1, 100) <= lootChance then
-                playerToAddTreasure:addTreasure(loot[math.random(1, 7)])
+            if math.randomInt(1, 100) <= lootChance then
+                playerToAddTreasure:addTreasure(loot[math.randomInt(1, 7)])
             end
 
             lootChance = lootChance / 2
@@ -159,7 +159,7 @@ local spawnElementalAvatars = function(spawnPosition, battlefield, numberAvatars
                 avatarArg:setSpawnAnimation(0)
             end)
 
-            avatarPostSpawn:setPos(spawnPosition.x + math.random(-3, 3), spawnPosition.y, spawnPosition.z + math.random(-3, 3), spawnPosition.rot)
+            avatarPostSpawn:setPos(spawnPosition.x + math.randomInt(-3, 3), spawnPosition.y, spawnPosition.z + math.randomInt(-3, 3), spawnPosition.rot)
             local enmityList = content.lastEnmityList[battlefield:getArea()]
             -- if there is a saved enmityList and it is not empty
             if enmityList and next(enmityList) ~= nil then
@@ -171,7 +171,7 @@ local spawnElementalAvatars = function(spawnPosition, battlefield, numberAvatars
 
             -- about half the time have a single avatar of the phase show the specified text
             -- need to delay the showText by 2000 seconds to wait for the mob to appear
-            if i == numberAvatarsToSpawn and math.random(1, 2) == 1 then
+            if i == numberAvatarsToSpawn and math.randomInt(1, 2) == 1 then
                 avatarPostSpawn:queue(2000, function(avatarArg)
                     if avatarArg then
                         local players = avatarArg:getBattlefield():getPlayers()

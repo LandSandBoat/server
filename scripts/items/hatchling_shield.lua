@@ -28,8 +28,8 @@ if xi.settings.main.ENABLE_TOAU == 1 then
 end
 
 itemObject.onItemUse = function(target)
-    local egg = eggTable[math.random(1, #eggTable)]
-    npcUtil.giveItem(target, { { egg[1], math.random(egg[2], egg[3]) } })
+    local egg = eggTable[math.randomInt(1, #eggTable)]
+    npcUtil.giveItem(target, { { egg[1], math.randomInt(egg[2], egg[3]) } })
 end
 
 return itemObject

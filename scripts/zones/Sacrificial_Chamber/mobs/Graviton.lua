@@ -20,7 +20,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar('everyonesRancorHPP', math.random(20, 30))
+    mob:setLocalVar('everyonesRancorHPP', math.randomInt(20, 30))
 end
 
 entity.onMobFight = function(mob, target)

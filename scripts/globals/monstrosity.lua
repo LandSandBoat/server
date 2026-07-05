@@ -1255,7 +1255,7 @@ xi.monstrosity.odysseanPassageOnEventFinish = function(player, csid, option, npc
             xi.monstrosity.onMonstrosityReturnToEntrance(player)
         else
             if xi.monstrosity.teleports[zoneSelected] then
-                local teleportPos = xi.monstrosity.teleports[zoneSelected][math.random(1, #xi.monstrosity.teleports[zoneSelected])]
+                local teleportPos = xi.monstrosity.teleports[zoneSelected][math.randomInt(1, #xi.monstrosity.teleports[zoneSelected])]
 
                 player:setPos(teleportPos[1],
                     teleportPos[2],

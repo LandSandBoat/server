@@ -23,7 +23,7 @@ entity.onMobSpawn = function(mob)
     then
         -- Give Ix'DRG a random placeholder by picking one of the four groups' first PH, then adding a random number of 0-2 for the specific mob.
         local basePhId = utils.randomEntry(ID.mob.AWAERN_DRG_GROUPS)
-        SetServerVariable('[SEA]IxAernDRG_PH', basePhId + math.random(0, 2))
+        SetServerVariable('[SEA]IxAernDRG_PH', basePhId + math.randomInt(0, 2))
     end
 end
 
@@ -50,7 +50,7 @@ entity.onMobDeath = function(mob, player, optParams)
                 local position = GetNPCByID(ID.npc.QM_IXAERN_DRK):getLocalVar('position')
                 local offset = mob:getID() - ID.mob.AWAERN_DRK_GROUPS[position]
                 if offset >= 0 and offset <= 2 then
-                    if math.random(1, 8) == 1 then
+                    if math.randomInt(1, 8) == 1 then
                         qmDrk:setLocalVar('hatedPlayer', player:getID())
                         qmDrk:setLocalVar('hateTimer', GetSystemTime() + 600) -- player with animosity has 10 minutes to touch QM
                         player:messageSpecial(ID.text.SHEER_ANIMOSITY)

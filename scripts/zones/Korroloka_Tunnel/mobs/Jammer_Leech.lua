@@ -6,11 +6,11 @@
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setRespawnTime(math.random(600, 1800)) -- 10-30 minutes
+    mob:setRespawnTime(math.randomInt(600, 1800)) -- 10-30 minutes
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setRespawnTime(math.random(600, 1800)) -- 10-30 minutes
+    mob:setRespawnTime(math.randomInt(600, 1800)) -- 10-30 minutes
 end
 
 return entity

@@ -50,7 +50,7 @@ g_mixins.families.peiste = function(peisteMob)
             -- could be moved to mobskill luas with skill:setFinalAnimationSub(), but leaving here due to reliance on the mapping table
             -- Sets glowy eyes, which triggers the combat tick aura gaze
             mob:setAnimationSub(gazeAnimSub)
-            mob:timer(math.random(30, 45) * 1000, function(mobArg)
+            mob:timer(math.randomInt(30, 45) * 1000, function(mobArg)
                 mobArg:setAnimationSub(0)
             end)
         end

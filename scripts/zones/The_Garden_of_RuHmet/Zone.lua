@@ -50,12 +50,12 @@ zoneObject.onInitialize = function(zone)
     -- Give the Fortitude ??? a random spawn
     local qmFort = GetNPCByID(ID.npc.QM_JAILER_OF_FORTITUDE)
     if qmFort then
-        qmFort:setPos(unpack(gardenGlobal.qmPosFortTable[math.random(1, 5)]))
+        qmFort:setPos(unpack(gardenGlobal.qmPosFortTable[math.randomInt(1, 5)]))
     end
 
     -- Give the Ix'Aern DRK ??? a random spawn
     local qmDrk    = GetNPCByID(ID.npc.QM_IXAERN_DRK)
-    local qmDrkPos = math.random(1, 4)
+    local qmDrkPos = math.randomInt(1, 4)
 
     if qmDrk then
         qmDrk:setLocalVar('position', qmDrkPos)
@@ -66,7 +66,7 @@ zoneObject.onInitialize = function(zone)
     -- Give the Faith ??? a random spawn
     local qmFaith = GetNPCByID(ID.npc.QM_JAILER_OF_FAITH)
     if qmFaith then
-        qmFaith:setPos(unpack(gardenGlobal.qmPosFaithTable[math.random(1, 5)]))
+        qmFaith:setPos(unpack(gardenGlobal.qmPosFaithTable[math.randomInt(1, 5)]))
     end
 end
 
@@ -93,10 +93,10 @@ zoneObject.onGameHour = function(zone)
     local qmFaith = GetNPCByID(ID.npc.QM_JAILER_OF_FAITH) -- Jailer of Faith
     if
         qmFaith and
-        vanadielHour % math.random(6, 12) == 0
+        vanadielHour % math.randomInt(6, 12) == 0
     then
         qmFaith:hideNPC(60) -- Hide it for 60 seconds
-        qmFaith:setPos(unpack(gardenGlobal.qmPosFaithTable[math.random(1, 5)])) -- Set the new position
+        qmFaith:setPos(unpack(gardenGlobal.qmPosFaithTable[math.randomInt(1, 5)])) -- Set the new position
     end
 
     -- Ix'DRK spawn randomiser
@@ -106,7 +106,7 @@ zoneObject.onGameHour = function(zone)
         qmDrk:getStatus() ~= xi.status.DISAPPEAR
     then
         -- Change ??? position every 12 hours Vana'diel time (30 mins)
-        local qmDrkPos = math.random(1, 4)
+        local qmDrkPos = math.randomInt(1, 4)
 
         qmDrk:hideNPC(30)
         qmDrk:setLocalVar('position', qmDrkPos)

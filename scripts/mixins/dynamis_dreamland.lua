@@ -47,7 +47,7 @@ g_mixins.dynamis_dreamland = function(dynamisDreamlandMob)
         local isPrimary = action and target:getID() == action:getPrimaryTargetID()
         local chance = isPrimary and 8 or 1 -- Lowered chance if not primary target. 1% is likely not the right number, submit captures.
 
-        if math.random(1, 100) > chance then
+        if math.randomInt(1, 100) > chance then
             return
         end
 
@@ -71,7 +71,7 @@ g_mixins.dynamis_dreamland = function(dynamisDreamlandMob)
         local isPrimary = action and target:getID() == action:getPrimaryTargetID()
         local chance = isPrimary and 25 or 2 -- Lowered chance if not primary target. 2% is likely not the right number, submit captures.
 
-        if math.random(1, 100) > chance then
+        if math.randomInt(1, 100) > chance then
             return
         end
 
@@ -95,7 +95,7 @@ g_mixins.dynamis_dreamland = function(dynamisDreamlandMob)
         local isPrimary = action and target:getID() == action:getPrimaryTargetID()
         local chance = isPrimary and 20 or 2 -- Lowered chance if not primary target. 2% is likely not the right number, submit captures.
 
-        if math.random(1, 100) > chance then
+        if math.randomInt(1, 100) > chance then
             return
         end
 
@@ -124,7 +124,7 @@ g_mixins.dynamis_dreamland = function(dynamisDreamlandMob)
         local hundredChance = th.hundred
         local currency      = mob:getLocalVar('dynamis_currency')
         if currency == 0 then
-            currency = xi.item.TUKUKU_WHITESHELL + math.random(0, 2) * 3
+            currency = xi.item.TUKUKU_WHITESHELL + math.randomInt(0, 2) * 3
         end
 
         -- White (special) adds 100% hundred slot

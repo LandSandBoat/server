@@ -27,7 +27,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     -- Handle status effect
-    if math.random(1, 100) <= tp / 30 * applyResistanceAddEffect(player, target, xi.element.ICE, 0) then
+    if math.randomInt(1, 100) <= tp / 30 * applyResistanceAddEffect(player, target, xi.element.ICE, 0) then
         local effectId      = xi.effect.BIND
         local actionElement = xi.element.ICE
         local power         = 1

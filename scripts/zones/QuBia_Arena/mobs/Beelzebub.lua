@@ -20,7 +20,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            { id = xi.mobSkill.BENEDICTION_1, hpp = math.random(20, 30) }, -- "Uses Benediction once."
+            { id = xi.mobSkill.BENEDICTION_1, hpp = math.randomInt(20, 30) }, -- "Uses Benediction once."
         },
     })
 end
@@ -33,7 +33,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
         xi.magic.spell.SILENCEGA,
     }
 
-    return spellList[math.random(1, #spellList)]
+    return spellList[math.randomInt(1, #spellList)]
 end
 
 return entity

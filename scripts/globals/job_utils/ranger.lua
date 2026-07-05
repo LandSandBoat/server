@@ -20,7 +20,7 @@ xi.job_utils.ranger.tryScavengeQuestItem = function(player)
         player:getYPos() > -43 and player:getYPos() < -38 and
         player:getXPos() > -85 and player:getXPos() < -73 and
         player:getZPos() > -85 and player:getZPos() < -75 and
-        math.random(1, 100) <= 50
+        math.randomInt(1, 100) <= 50
     then
         npcUtil.giveItem(player, xi.item.OLD_EARRING)
 
@@ -234,7 +234,7 @@ xi.job_utils.ranger.useScavenge = function(player, target, ability, action)
 end
 
 xi.job_utils.ranger.useCamouflage = function(player, target, ability, action)
-    local duration = math.random(30, 300) * (1 + 0.01 * player:getMod(xi.mod.CAMOUFLAGE_DURATION))
+    local duration = math.randomInt(30, 300) * (1 + 0.01 * player:getMod(xi.mod.CAMOUFLAGE_DURATION))
     player:addStatusEffect(xi.effect.CAMOUFLAGE, { power = 1, duration = math.floor(duration * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER), origin = player })
 
     return xi.effect.CAMOUFLAGE
@@ -255,7 +255,7 @@ xi.job_utils.ranger.useShadowbind = function(player, target, ability, action)
 
     -- TODO: Acc penalty for /RNG, acc vs. mob level?
     if
-        math.random(0, 99) >= target:getMod(xi.mod.BIND_MEVA) and
+        math.randomInt(0, 99) >= target:getMod(xi.mod.BIND_MEVA) and
         not target:hasStatusEffect(xi.effect.BIND)
     then
         target:addStatusEffect(xi.effect.BIND, { duration = duration, origin = player })
@@ -344,7 +344,7 @@ xi.job_utils.ranger.useBountyShot = function(player, target, ability, action)
         local procRate      = 0.10 / math.pow(2, treausureHunterLevelDiff)
         local procRateBonus = 1.0 + (target:getMod(xi.mod.TREASURE_HUNTER_PROC) + player:getMod(xi.mod.TREASURE_HUNTER_PROC)) / 100
 
-        if math.random() < procRate * procRateBonus then
+        if math.randomFloat(0, 1) < procRate * procRateBonus then
             newTHLevel = mobTHLevel + 1
 
             ability:setMsg(xi.msg.basic.JA_TH_EFFECTIVENESS)

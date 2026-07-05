@@ -29,7 +29,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
         -- TODO: Jugpet Differences
-        local duration = math.random(15, 60)
+        local duration = math.randomInt(15, 60)
         xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, duration)
     end
 

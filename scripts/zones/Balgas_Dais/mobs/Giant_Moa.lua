@@ -34,7 +34,7 @@ local mobskillTable =
 }
 
 entity.onMobMobskillChoose = function(mob, target, skillId)
-    local randomRoll = math.random(1, 100)
+    local randomRoll = math.randomInt(1, 100)
     local weightSum  = 0
     for i = 1, #mobskillTable do
         weightSum = weightSum + mobskillTable[i][2]

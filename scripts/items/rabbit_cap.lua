@@ -11,10 +11,10 @@ itemObject.onItemCheck = function(target, item, caster)
 end
 
 itemObject.onItemUse = function(target)
-    npcUtil.giveItem(target, { { math.random(xi.item.A_EGG, xi.item.Z_EGG), 1 } })
+    npcUtil.giveItem(target, { { math.randomInt(xi.item.A_EGG, xi.item.Z_EGG), 1 } })
 
-    if math.random(1, 5) > 4 then
-        npcUtil.giveItem(target, { { math.random(xi.item.A_EGG, xi.item.Z_EGG), 1 } })
+    if math.randomInt(1, 5) > 4 then
+        npcUtil.giveItem(target, { { math.randomInt(xi.item.A_EGG, xi.item.Z_EGG), 1 } })
     end
 end
 

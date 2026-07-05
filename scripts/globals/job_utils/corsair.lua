@@ -426,7 +426,7 @@ local rollEnhanceMods =
 -----------------------------------
 
 local function corsairSetup(caster, ability, action, effect, job)
-    local roll = math.random(1, 6)
+    local roll = math.randomInt(1, 6)
 
     caster:delStatusEffectSilent(xi.effect.DOUBLE_UP_CHANCE)
     caster:addStatusEffect(xi.effect.DOUBLE_UP_CHANCE, {
@@ -682,7 +682,7 @@ xi.job_utils.corsair.handleQuickDrawEffectBoost = function(player, target, abili
     end
 
     -- Select effect entry from table and fetch it's content.
-    local selected = effects[math.random(1, #effects)]
+    local selected = effects[math.randomInt(1, #effects)]
     local effect   = selected.effect
     local entry    = selected.entry
 
@@ -751,7 +751,7 @@ xi.job_utils.corsair.checkForJobBonus = function(caster, job)
         return
     end
 
-    if math.random(1, 100) <= caster:getMod(xi.mod.JOB_BONUS_CHANCE) then
+    if math.randomInt(1, 100) <= caster:getMod(xi.mod.JOB_BONUS_CHANCE) then
         caster:setLocalVar('corsairRollBonus', 1)
         return
     end
@@ -765,7 +765,7 @@ xi.job_utils.corsair.applyRoll = function(caster, target, inAbility, total, isDo
     local rollInfo    = xi.job_utils.corsair.rollData[abilityId]
     local effectpower = total >= 12 and rollInfo.bustPower or rollInfo.powers[total]    -- Get roll or bust power values
     local enhanceMod  = rollEnhanceMods[abilityId]                                      -- Check for roll enhancement gear mod specific to the rolled ability
-    local doBonus     = enhanceMod and math.random(1, 100) <= caster:getMod(enhanceMod) -- Chance to enhance roll based on gear mod
+    local doBonus     = enhanceMod and math.randomInt(1, 100) <= caster:getMod(enhanceMod) -- Chance to enhance roll based on gear mod
 
     -- Apply roll bonus if matching job or gear mod triggers
     if
@@ -903,7 +903,7 @@ end
 
 xi.job_utils.corsair.useWildCard = function(caster, target, ability, action)
     if caster:getID() == target:getID() then
-        local roll = math.random(1, 6)
+        local roll = math.randomInt(1, 6)
         caster:setLocalVar('corsairRollTotal', roll)
         action:info(caster:getID(), roll)
     end
@@ -943,7 +943,7 @@ xi.job_utils.corsair.useDoubleUp = function(caster, target, ability, action)
         local snakeEye = caster:getStatusEffect(xi.effect.SNAKE_EYE)
 
         if snakeEye then
-            if roll >= 5 and math.random(1, 100) < snakeEye:getPower() then
+            if roll >= 5 and math.randomInt(1, 100) < snakeEye:getPower() then
                 roll = 11
             else
                 roll = roll + 1
@@ -951,7 +951,7 @@ xi.job_utils.corsair.useDoubleUp = function(caster, target, ability, action)
 
             caster:delStatusEffect(xi.effect.SNAKE_EYE)
         else
-            roll = roll + math.random(1, 6)
+            roll = roll + math.randomInt(1, 6)
         end
 
         if roll >= 12 then -- bust
@@ -1104,7 +1104,7 @@ xi.job_utils.corsair.useFold = function(player, action)
         player:delStatusEffectSilent(xi.effect.DOUBLE_UP_CHANCE)
 
         -- Each merit level adds +10% chance to reset Phantom Roll recast.
-        if math.random(1, 100) <= player:getMerit(xi.merit.FOLD) then
+        if math.randomInt(1, 100) <= player:getMerit(xi.merit.FOLD) then
             player:resetRecast(xi.recast.ABILITY, xi.recastID.PHANTOM_ROLL)
         end
     end
@@ -1115,7 +1115,7 @@ end
 -- TODO: Binding does not exist, implement this (old code remains)
 xi.job_utils.corsair.useCuttingCards = function(caster, target, ability, action)
     if caster:getID() == target:getID() then
-        local roll = math.random(1, 6)
+        local roll = math.randomInt(1, 6)
 
         caster:setLocalVar('corsairRollTotal', roll)
         action:info(caster:getID(), roll)

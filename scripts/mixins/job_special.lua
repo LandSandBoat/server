@@ -212,7 +212,7 @@ xi.mix.jobSpecial.config = function(mob, params)
                 if v.hpp and type(v.hpp) == 'number' then
                     mob:setLocalVar('[jobSpecial]hpp_' .. i, utils.clamp(v.hpp, 0, 100))
                 else
-                    mob:setLocalVar('[jobSpecial]hpp_' .. i, math.random(40, 60))
+                    mob:setLocalVar('[jobSpecial]hpp_' .. i, math.randomInt(40, 60))
                 end
 
                 if type(v.begCode) == 'function' then
@@ -283,7 +283,7 @@ g_mixins.job_special = function(jobSpecialMob)
         if ability then
             mob:setLocalVar('[jobSpecial]numAbilities', 1)
             mob:setLocalVar('[jobSpecial]ability_1', ability)
-            mob:setLocalVar('[jobSpecial]hpp_1', math.random(40, 60))
+            mob:setLocalVar('[jobSpecial]hpp_1', math.randomInt(40, 60))
             mob:setLocalVar('[jobSpecial]between_1', 7200)
         end
 
@@ -293,7 +293,7 @@ g_mixins.job_special = function(jobSpecialMob)
     end)
 
     jobSpecialMob:addListener('ENGAGE', 'JOB_SPECIAL_ENGAGE', function(mob)
-        if math.random(1, 100) <= mob:getLocalVar('[jobSpecial]chance') then
+        if math.randomInt(1, 100) <= mob:getLocalVar('[jobSpecial]chance') then
             mob:setLocalVar('[jobSpecial]readyInitial', GetSystemTime() + mob:getLocalVar('[jobSpecial]delayInitial'))
         end
     end)
@@ -302,7 +302,7 @@ g_mixins.job_special = function(jobSpecialMob)
         local abilities = abilitiesReady(mob)
 
         if #abilities > 0 then
-            local i = abilities[math.random(#abilities)]
+            local i = abilities[math.randomInt(1, #abilities)]
             local ability = mob:getLocalVar('[jobSpecial]ability_' .. i)
             local now = GetSystemTime()
 

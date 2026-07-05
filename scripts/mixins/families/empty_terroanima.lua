@@ -24,7 +24,7 @@ local function doTerrorRun(mob)
                 mob:setMobAbilityEnabled(false)
                 mob:setMagicCastingEnabled(false)
                 local pos = mob:getPos()
-                mob:pathTo(pos.x + math.random(-5, 5), pos.y, pos.z + math.random(-5, 5), 9) -- Pathflags = 9 (xi.pathflag.run, xi.pathflag.scripted)
+                mob:pathTo(pos.x + math.randomInt(-5, 5), pos.y, pos.z + math.randomInt(-5, 5), 9) -- Pathflags = 9 (xi.pathflag.run, xi.pathflag.scripted)
             end
         end
     end

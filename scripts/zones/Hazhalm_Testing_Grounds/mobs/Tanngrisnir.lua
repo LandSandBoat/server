@@ -35,8 +35,8 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
     local requeueCount = mob:getLocalVar('requeue')
     if requeueCount ~= 0 then -- continue the current sequence
         mob:setLocalVar('requeue', requeueCount - 1)
-    elseif math.random(1, 100) <= 60 then -- 60% chance to start a new sequence
-        mob:setLocalVar('requeue', math.random(1, 2))
+    elseif math.randomInt(1, 100) <= 60 then -- 60% chance to start a new sequence
+        mob:setLocalVar('requeue', math.randomInt(1, 2))
     end
 end
 

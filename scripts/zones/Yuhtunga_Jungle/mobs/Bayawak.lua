@@ -45,7 +45,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    local respawn = math.random(5400, 7200)
+    local respawn = math.randomInt(5400, 7200)
     mob:setRespawnTime(respawn)
     mob:setLocalVar('respawn', GetSystemTime() + respawn)
     DisallowRespawn(mob:getID(), true) -- prevents accidental 'pop' during no fire weather and immediate despawn

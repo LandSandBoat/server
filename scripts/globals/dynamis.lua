@@ -426,7 +426,7 @@ xi.dynamis.zoneOnInitialize = function(zone)
                 group = { unpack(v.mob) }
             end
 
-            local teId = group[math.random(1, #group)]
+            local teId = group[math.randomInt(1, #group)]
             DisallowRespawn(teId, false)
             SpawnMob(teId)
         end
@@ -441,7 +441,7 @@ xi.dynamis.zoneOnInitialize = function(zone)
                 table.insert(group, m.mob)
             end
 
-            local spawnId = group[math.random(1, #group)]
+            local spawnId = group[math.randomInt(1, #group)]
             DisallowRespawn(spawnId, false)
             SpawnMob(spawnId)
         end
@@ -582,7 +582,7 @@ xi.dynamis.timeExtensionOnDeath = function(mob, player, optParams)
 
             -- spawn a new mob in this group
             if optParams.isKiller then
-                local teId = group[math.random(1, #group)]
+                local teId = group[math.randomInt(1, #group)]
                 if teId ~= mobId then
                     DisallowRespawn(mobId, true)
                     DisallowRespawn(teId, false)
@@ -682,7 +682,7 @@ xi.dynamis.refillStatueOnDeath = function(mob, player, optParams)
                 mob:setAnimationSub(xi.dynamis.eye.NONE)
 
                 -- spawn a new mob in this group
-                local nextId = group[math.random(1, #group)]
+                local nextId = group[math.randomInt(1, #group)]
                 if nextId ~= mobId then
                     DisallowRespawn(mobId, true)
                     DisallowRespawn(nextId, false)
@@ -713,7 +713,7 @@ xi.dynamis.qmOnTrade = function(player, npc, trade)
                     local mobId
 
                     if type(v.mob) == 'table' then
-                        mobId = v.mob[math.random(1, #v.mob)]
+                        mobId = v.mob[math.randomInt(1, #v.mob)]
                     else
                         mobId = v.mob
                     end
@@ -820,7 +820,7 @@ xi.dynamis.procMonster = function(mob, player)
         if extensions > 2 then
             if
                 player:hasStatusEffect(xi.effect.SJ_RESTRICTION) and
-                math.random(1, 100) == 1
+                math.randomInt(1, 100) == 1
             then
                 mob:setLocalVar('dynamis_proc', 4)
                 mob:addStatusEffect(xi.effect.TERROR, { duration = 30, origin = player })

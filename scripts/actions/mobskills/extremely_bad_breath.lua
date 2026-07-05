@@ -15,7 +15,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    if math.random(1, 100) <= target:getMod(xi.mod.DEATHRES) then
+    if math.randomInt(1, 100) <= target:getMod(xi.mod.DEATHRES) then
         skill:setMsg(xi.msg.basic.SKILL_MISS)
     else
         skill:setMsg(xi.msg.basic.FALL_TO_GROUND)

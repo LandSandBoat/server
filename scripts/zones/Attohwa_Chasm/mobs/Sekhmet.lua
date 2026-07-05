@@ -21,11 +21,11 @@ entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.FASTCAST, 15)
 
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(5400, 7200)) -- When server restarts, reset timer
+    mob:setRespawnTime(math.randomInt(5400, 7200)) -- When server restarts, reset timer
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.MP_DRAIN, { power = math.random(1, 10) })
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.MP_DRAIN, { power = math.randomInt(1, 10) })
 end
 
 entity.onMobDeath = function(mob, player, optParams)
@@ -33,7 +33,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setRespawnTime(math.random(5400, 7200)) -- 1.5 to 2 hours.
+    mob:setRespawnTime(math.randomInt(5400, 7200)) -- 1.5 to 2 hours.
     xi.mob.updateNMSpawnPoint(mob)
 end
 

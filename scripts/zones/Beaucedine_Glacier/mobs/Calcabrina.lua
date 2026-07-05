@@ -61,7 +61,7 @@ entity.spawnPoints =
 
 entity.onMobInitialize = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(5400, 6000)) -- When server restarts, reset timer
+    mob:setRespawnTime(math.randomInt(5400, 6000)) -- When server restarts, reset timer
 
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.DETECTION, bit.bor(xi.detects.MAGIC, xi.detects.SCENT)) -- TODO: Verify scent tracking on retail.
@@ -77,7 +77,7 @@ end
 
 entity.onMobDespawn = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(5400, 6000)) -- 90 to 100 minutes
+    mob:setRespawnTime(math.randomInt(5400, 6000)) -- 90 to 100 minutes
 end
 
 return entity

@@ -158,7 +158,7 @@ xi.job_utils.beastmaster.attemptCharm = function(charmer, target)
     then
         local resist = applyResistanceAddEffect(charmer, target, xi.element.ICE, 0)
         if not target:hasStatusEffect(xi.effect.BIND) and resist >= 0.5 then
-            target:addStatusEffect(xi.effect.BIND, { power = 1, duration = math.random(1, 5), origin = charmer })
+            target:addStatusEffect(xi.effect.BIND, { power = 1, duration = math.randomInt(1, 5), origin = charmer })
             return xi.msg.basic.JA_ENFEEB_IS
         else
             return xi.msg.basic.JA_MISS
@@ -169,7 +169,7 @@ xi.job_utils.beastmaster.attemptCharm = function(charmer, target)
     local chance = xi.job_utils.beastmaster.getCharmChance(charmer, target, true)
 
     -- If successful then calculate duration and charm
-    if chance > math.random(1, 100) then
+    if chance > math.randomInt(1, 100) then
         local duration = getCharmDuration(charmer, target)
 
         if duration > 0 then

@@ -92,7 +92,7 @@ m:addOverride('xi.actions.weaponskills.shockwave.onUseWeaponSkill', function(pla
     local power         = 1
     local skillType     = xi.skill.GREAT_SWORD
     local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
-    local duration      = math.floor((math.random(0, 30) + tp * 0.01) * resist)
+    local duration      = math.floor((math.randomInt(0, 30) + tp * 0.01) * resist)
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
     return tpHits, extraHits, criticalHit, damage

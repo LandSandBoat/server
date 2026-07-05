@@ -85,7 +85,7 @@ xi.wotg.helpers.helmTrade = function(player, helmType, broke)
     if
         helmType == xi.helmType.LOGGING and
         broke ~= 1 and
-        math.random(1, 100) < wotgChance
+        math.randomInt(1, 100) < wotgChance
     then
         if
             zoneId == xi.zone.EAST_RONFAURE_S and

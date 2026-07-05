@@ -318,7 +318,7 @@ local minorRewards =
 }
 
 local minorReward = function()
-    return minorRewards[math.random(#minorRewards)]
+    return minorRewards[math.randomInt(1, #minorRewards)]
 end
 
 local tradeInReward =
@@ -385,13 +385,13 @@ local tradeInReward =
 
 local rollRewardAmount = function(rewardAmount)
     if rewardAmount == 1 then
-        return { math.random(xi.item.A_EGG, xi.item.Z_EGG) }
+        return { math.randomInt(xi.item.A_EGG, xi.item.Z_EGG) }
     end
 
     local rewardTable = {}
 
     for i = 1, rewardAmount do
-        table.insert(rewardTable, math.random(xi.item.A_EGG, xi.item.Z_EGG))
+        table.insert(rewardTable, math.randomInt(xi.item.A_EGG, xi.item.Z_EGG))
     end
 
     return rewardTable
@@ -569,7 +569,7 @@ local regionControl = function(player, npc, trade)
 
             -- Beastmen controlled
             if owner == 3 then
-                local costume = beastCostumes[math.random(#beastCostumes)]
+                local costume = beastCostumes[math.randomInt(1, #beastCostumes)]
                 player:addStatusEffect(xi.effect.COSTUME, { power = costume, duration = utils.minutes(60), origin = player })
                 player:confirmTrade()
 
@@ -675,7 +675,7 @@ local eraCombo =
 local testEraCombo = function(player, npc, trade, combo, rewardQty)
     if npcUtil.tradeHasExactly(trade, combo[1]) then
         if rewardQty then
-            local qty = math.random(rewardQty[1], rewardQty[2])
+            local qty = math.randomInt(rewardQty[1], rewardQty[2])
             return { { combo[2], qty } }
         else
             return combo[2]
@@ -789,7 +789,7 @@ xi.events.eggHunt.helmResult = function(player, itemID)
         player:getCharVar(settings.VAR.DAILY_HELM) < VanadielUniqueDay()
     then
         player:timer(3000, function(playerArg)
-            if npcUtil.giveItem(playerArg, math.random(xi.item.A_EGG, xi.item.Z_EGG)) then
+            if npcUtil.giveItem(playerArg, math.randomInt(xi.item.A_EGG, xi.item.Z_EGG)) then
                 playerArg:setCharVar(settings.VAR.DAILY_HELM, VanadielUniqueDay())
             end
         end)
@@ -853,7 +853,7 @@ xi.events.eggHunt.onEventFinish = function(player, csid, option, npc)
 
     -- Random daily letter
     else
-        if npcUtil.giveItem(player, math.random(xi.item.A_EGG, xi.item.Z_EGG)) then
+        if npcUtil.giveItem(player, math.randomInt(xi.item.A_EGG, xi.item.Z_EGG)) then
             player:setVar(settings.VAR.DAILY_EGG, VanadielUniqueDay())
         end
     end

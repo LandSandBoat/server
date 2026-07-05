@@ -80,7 +80,7 @@ auto CLuaZone::getLocalVars() -> sol::table
 /************************************************************************
  *  Function: setLocalVar()
  *  Purpose : Assigns a local variable to a zone
- *  Example : zone:setLocalVar("pop", GetSystemTime() + math.random(1200,7200));
+ *  Example : zone:setLocalVar("pop", GetSystemTime() + math.randomInt(1200, 7200));
  *  Notes   :
  ************************************************************************/
 

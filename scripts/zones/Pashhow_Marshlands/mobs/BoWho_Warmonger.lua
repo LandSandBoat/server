@@ -14,7 +14,7 @@ entity.spawnPoints =
 
 entity.onMobInitialize = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(75600 + math.random(600, 900)) -- 21 hours, plus 10 to 15 min
+    mob:setRespawnTime(75600 + math.randomInt(600, 900)) -- 21 hours, plus 10 to 15 min
 end
 
 -- all body guard functionality in the rotz_bodyguarded_nm mixin
@@ -33,7 +33,7 @@ end
 
 entity.onMobDespawn = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(75600 + math.random(600, 900)) -- 21 hours, plus 10 to 15 min
+    mob:setRespawnTime(75600 + math.randomInt(600, 900)) -- 21 hours, plus 10 to 15 min
 end
 
 return entity

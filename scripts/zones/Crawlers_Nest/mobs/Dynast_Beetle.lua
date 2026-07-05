@@ -12,7 +12,7 @@ entity.spawnPoints =
 
 entity.onMobInitialize = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(5400, 7200))
+    mob:setRespawnTime(math.randomInt(5400, 7200))
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:addImmunity(xi.immunity.BIND)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
@@ -33,7 +33,7 @@ end
 
 entity.onMobDespawn = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(5400, 7200)) -- 90 to 120 minutes
+    mob:setRespawnTime(math.randomInt(5400, 7200)) -- 90 to 120 minutes
 end
 
 return entity

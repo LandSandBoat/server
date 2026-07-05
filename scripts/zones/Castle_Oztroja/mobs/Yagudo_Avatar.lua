@@ -67,7 +67,7 @@ entity.spawnPoints =
 entity.onMobInitialize = function(mob)
     xi.pet.setMobPet(mob, 1, 'Yagudos_Elemental')
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(math.random(900, 10800))
+    mob:setRespawnTime(math.randomInt(900, 10800))
 end
 
 entity.onMobEngage = function(mob, target)
@@ -92,8 +92,8 @@ entity.onMobDespawn = function(mob)
     local hqId        = mobId + 3
     local timeOfDeath = GetServerVariable('[POP]Tzee_Xicu_the_Manifest')
     local kills       = GetServerVariable('[PH]Tzee_Xicu_the_Manifest') + 1
-    local popNow      = kills >= 7 or (kills >= 2 and math.random(1, 100) <= 20)
-    local respawnTime = 75600 + 1800 * math.random(1, 6)
+    local popNow      = kills >= 7 or (kills >= 2 and math.randomInt(1, 100) <= 20)
+    local respawnTime = 75600 + 1800 * math.randomInt(1, 6)
 
     if GetSystemTime() > timeOfDeath and popNow then
         DisallowRespawn(mobId, true)

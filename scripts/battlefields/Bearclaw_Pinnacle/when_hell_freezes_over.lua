@@ -28,8 +28,8 @@ local content = Battlefield:new({
 
 local function spawnSnowDevils(battlefield)
     local base   = bearclawID.mob.SNOW_DEVIL + (battlefield:getArea() - 1) * 8
-    local offset = math.random(0, 1) * 3
-    local count  = math.random(0, 2)
+    local offset = math.randomInt(0, 1) * 3
+    local count  = math.randomInt(0, 2)
     local wave   = battlefield:getLocalVar('wave')
 
     for i = 0, count do

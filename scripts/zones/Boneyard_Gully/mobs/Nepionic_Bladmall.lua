@@ -20,7 +20,7 @@ end
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
     mob:setMobMod(xi.mobMod.STANDBACK_COOL, 0)
-    mob:setMobMod(xi.mobMod.MAGIC_DELAY, math.random(3, 7))
+    mob:setMobMod(xi.mobMod.MAGIC_DELAY, math.randomInt(3, 7))
 end
 
 -----------------------------------

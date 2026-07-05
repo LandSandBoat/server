@@ -65,7 +65,7 @@ entity.onMobDeath = function(mob, player, optParams)
         -- if executor is the first mob killed
         if mob:getLocalVar('assassinsKilled') == 0 then
             -- then force one random assassin to use 2hr
-            local randomAssassin = GetMobByID(assassins[math.random(1, #assassins)])
+            local randomAssassin = GetMobByID(assassins[math.randomInt(1, #assassins)])
             if randomAssassin then
                 randomAssassin:setLocalVar('triggerTwoHour', 1)
             end

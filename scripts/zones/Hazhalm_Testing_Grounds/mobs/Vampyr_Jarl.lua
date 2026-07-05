@@ -96,7 +96,7 @@ local function onAddRoam(jarl, mob)
 
     if despawnTime >= GetSystemTime() and not mob:isFollowingPath() then
         local pos = mob:getPos()
-        mob:pathTo(pos.x + math.random(-30, 30), pos.y, pos.z + math.random(-30, 30), bit.bor(xi.pathflag.RUN, xi.pathflag.SCRIPT))
+        mob:pathTo(pos.x + math.randomInt(-30, 30), pos.y, pos.z + math.randomInt(-30, 30), bit.bor(xi.pathflag.RUN, xi.pathflag.SCRIPT))
         return
     end
 
@@ -190,7 +190,7 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
     then
         local selectedMobs
         vanish(mob)
-        if math.random(1, 2) == 1 then
+        if math.randomInt(1, 2) == 1 then
             selectedMobs = vampyrBats
             mob:setLocalVar('addsFamily', 1)
         else

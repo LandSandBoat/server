@@ -11,7 +11,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local base = math.random(4, 10)
+    local base = math.randomInt(4, 10)
 
     skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.BLINK, base, 0, 180))
     return xi.effect.BLINK

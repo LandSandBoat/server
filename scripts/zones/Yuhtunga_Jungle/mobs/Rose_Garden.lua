@@ -19,7 +19,7 @@ end
 entity.onMobSpawn = function(mob)
     updateRegen(mob)
 
-    mob:setLocalVar('timeToGrow', GetSystemTime() + math.random(36000, 37800)) -- 10:00:00 to 10:30:00
+    mob:setLocalVar('timeToGrow', GetSystemTime() + math.randomInt(36000, 37800)) -- 10:00:00 to 10:30:00
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
@@ -42,7 +42,7 @@ entity.onMobFight = function(mob)
 end
 
 entity.onMobDisengage = function(mob)
-    mob:setLocalVar('timeToGrow', GetSystemTime() + math.random(36000, 37800)) -- 10:00:00 to 10:30:00
+    mob:setLocalVar('timeToGrow', GetSystemTime() + math.randomInt(36000, 37800)) -- 10:00:00 to 10:30:00
 end
 
 entity.onMobDespawn = function(mob)

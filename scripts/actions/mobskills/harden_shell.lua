@@ -15,7 +15,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local duration = math.random(60, 180)
+    local duration = math.randomInt(60, 180)
     local power = 33
     if mob:isNM() then
         power = 80

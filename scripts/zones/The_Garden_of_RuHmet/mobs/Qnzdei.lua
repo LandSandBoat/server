@@ -72,7 +72,7 @@ entity.onMobSpawn = function(mob)
 
     -- Qn'Zdei randomly spin at speeds 4, 8, 16, 64 and can be reversed (negative)
     mob:setLocalVar('spinSpeed', utils.randomEntry(spinSpeeds))
-    if math.random(1, 100) <= 50 then
+    if math.randomInt(1, 100) <= 50 then
         mob:setLocalVar('reversed', 1)
     end
 end
@@ -104,7 +104,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     switch (form): caseof
     {
         [1] = function()
-            if math.random(1, 100) <= 75 then
+            if math.randomInt(1, 100) <= 75 then
                 table.insert(tpMoves, xi.mobSkill.OPTIC_INDURATION_CHARGE)
             end
         end,
@@ -120,7 +120,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         end,
     }
 
-    return tpMoves[math.random(1, #tpMoves)]
+    return tpMoves[math.randomInt(1, #tpMoves)]
 end
 
 entity.onMobDeath = function(mob, player, optParams)

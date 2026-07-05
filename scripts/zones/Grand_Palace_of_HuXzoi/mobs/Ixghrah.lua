@@ -86,7 +86,7 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
     local currentForm = mob:getAnimationSub()
 
     if skill:getID() == formConfig[currentForm][1] then
-        local newForm = (currentForm + math.random(1, 3)) % 4
+        local newForm = (currentForm + math.randomInt(1, 3)) % 4
         setupForm(mob, newForm)
     end
 end

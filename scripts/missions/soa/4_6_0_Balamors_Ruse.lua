@@ -20,7 +20,7 @@ local keyItemOnMobDeath =
         if
             player and                                     -- We need it to fetch the party.
             (optParams.isKiller or optParams.noKiller) and -- Only run once, not once per party member
-            math.random(1, 100) <= 20                      -- This is currently set to a lower value than observed in capture.
+            math.randomInt(1, 100) <= 20                      -- This is currently set to a lower value than observed in capture.
         then
             local zoneID = mob:getZoneID() -- Fetch the zoneId of the mob to ensure correct zone in case of no killer.
 

@@ -32,7 +32,7 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.TERROR)
 
-    local saplingsRespawn = math.random(1800, 3600) -- 30 to 60 minutes
+    local saplingsRespawn = math.randomInt(1800, 3600) -- 30 to 60 minutes
     mob:timer(saplingsRespawn * 1000, function(mobArg)
         spawnSaplings()
     end)
@@ -53,7 +53,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.ENTANGLE_POISON,
     }
 
-    return tpMoves[math.random(1, #tpMoves)]
+    return tpMoves[math.randomInt(1, #tpMoves)]
 end
 
 entity.onMobDeath = function(mob, player, optParams)
@@ -67,9 +67,9 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    local saplingsRespawn = math.random(1800, 3600) -- 30 to 60 minutes
+    local saplingsRespawn = math.randomInt(1800, 3600) -- 30 to 60 minutes
     if mob:getLocalVar('wasKilled') == 1 then
-        saplingsRespawn = math.random(216000, 259200) -- 60 to 72 hours
+        saplingsRespawn = math.randomInt(216000, 259200) -- 60 to 72 hours
     end
 
     mob:timer(saplingsRespawn * 1000, function(mobArg)

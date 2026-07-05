@@ -46,7 +46,7 @@ xi.amk.helpers.helmTrade = function(player, helmType, broke)
         if
             helmMapping[helmType] and
             validRegions[regionId] and
-            math.random(1, 100) <= amkChance
+            math.randomInt(1, 100) <= amkChance
         then
             npcUtil.giveKeyItem(player, helmMapping[helmType])
         end
@@ -76,7 +76,7 @@ xi.amk.helpers.cardianOrbDrop = function(mob, player, orb)
 
         -- Chance ranges from 4% to 25.8% (based on max mob lvl of 44)
         local dropChance = (3 * mob:getMainLvl()) + (30 * utils.clamp(partySize, 1, 6)) - 10
-        local roll = math.random(1, 1000)
+        local roll = math.randomInt(1, 1000)
 
         if roll < dropChance then
             mob:setLocalVar('Mission[10][5]cardianOrbDrop', 1)
@@ -339,7 +339,7 @@ xi.amk.helpers.getDiggingZone = function(player)
         -- 11 = Yhoator Jungle
         -- 12 = Western Altepa Desert
         -- 13 = Eastern Altepa Desert
-        diggingZone = digZoneIds[math.random(#digZoneIds)]
+        diggingZone = digZoneIds[math.randomInt(1, #digZoneIds)]
         player:setCharVar('Mission[10][6]diggingZone', diggingZone)
     end
 
@@ -350,7 +350,7 @@ xi.amk.helpers.tryRandomlyPlaceDiggingLocation = function(player)
     -- Randomly selects a dig spot every time player zones into an AMK7 zone
     local diggingZoneId = xi.amk.helpers.getDiggingZone(player)
     local diggingSiteTable = xi.amk.helpers.digSites[diggingZoneId].spots
-    player:setLocalVar('Mission[10][6]diggingSpot', math.random(#diggingSiteTable))
+    player:setLocalVar('Mission[10][6]diggingSpot', math.randomInt(1, #diggingSiteTable))
 end
 
 xi.amk.helpers.chocoboDig = function(player, zoneId, text)
@@ -526,7 +526,7 @@ local xarc = zones[xi.zone.XARCABARD]
 
 -- returns -1 or 1 to offset the wrong answer randomly
 local randomSign = function()
-    return math.random(1, 100) <= 50 and 1 or -1
+    return math.randomInt(1, 100) <= 50 and 1 or -1
 end
 
 -- Structured list of the trivia questions
@@ -694,7 +694,7 @@ local assignRandomTriviaQuestions = function(player, mission)
     end
 
     for i = 1, 3 do
-        local index = math.random(1, #questions)
+        local index = math.randomInt(1, #questions)
         mission:setLocalVar(player, '[p2]question' .. i, questions[index])
         table.remove(questions, index)
     end
@@ -774,7 +774,7 @@ xi.amk.helpers.puzzleTwoOnEventUpdate = function(player, csid, option, npc, miss
 
         -- Right and wrong answer/stooge has to be randomized in terms of order given to updateEvent
         -- Randomize which of the two other options is correct.  Set vars to a default choice, then swap only when answerOne is 2
-        local answerOne = math.random(1, 2)
+        local answerOne = math.randomInt(1, 2)
 
         -- Default: answerOne == 1
         local correctOption = stooge.answerOne
@@ -801,7 +801,7 @@ xi.amk.helpers.puzzleTwoOnEventUpdate = function(player, csid, option, npc, miss
         )
     elseif option == 11 then
         -- Incorrect Answer
-        local randomFlavorText = math.random(1, 2)
+        local randomFlavorText = math.randomInt(1, 2)
         if randomFlavorText == 1 then
             player:messageSpecial(xarc.text.INCORRECT_NO_GIFTS)
         else

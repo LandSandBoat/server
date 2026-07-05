@@ -1562,7 +1562,7 @@ xi.appraisal.itemPick = function(player, info, appraisalID)
 
     -- pick weighted result
     local item = 0
-    local pick = math.random(1, sum)
+    local pick = math.randomInt(1, sum)
     sum = 0
 
     for i = 1, #items do

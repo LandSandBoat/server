@@ -96,7 +96,10 @@ xi.job_utils.white_mage.useBenediction = function(player, target, ability)
 
     local power = 33 --chance to remove Doom. Basing off of Holy Water?
 
-    if target:hasStatusEffect(xi.effect.DOOM) and power > math.random(1, 100) then
+    if
+        target:hasStatusEffect(xi.effect.DOOM) and
+        power > math.randomInt(1, 100)
+    then
         target:delStatusEffect(xi.effect.DOOM)
     end
 

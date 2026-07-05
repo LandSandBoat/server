@@ -30,7 +30,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         table.insert(tpMoves, xi.mobSkill.FISSION)
     end
 
-    return tpMoves[math.random(#tpMoves)]
+    return tpMoves[math.randomInt(1, #tpMoves)]
 end
 
 return entity

@@ -107,7 +107,7 @@ end
 --   'An egg bought or ISNMed has about a 30% chance of obtaining a color other than yellow.'
 xi.chocoboRaising.rollNonBredEggAlleles = function()
     local y = xi.chocoboRaising.color.YELLOW
-    if math.random(1, 100) <= 70 then
+    if math.randomInt(1, 100) <= 70 then
         return { y, y, y }
     end
 
@@ -118,7 +118,7 @@ xi.chocoboRaising.rollNonBredEggAlleles = function()
         xi.chocoboRaising.color.RED,
         xi.chocoboRaising.color.GREEN,
     }
-    local color = nonYellow[math.random(1, #nonYellow)]
+    local color = nonYellow[math.randomInt(1, #nonYellow)]
     return { color, color, color }
 end
 
@@ -161,7 +161,7 @@ xi.chocoboRaising.rollEggGender = function(egg)
         maleChance = 30
     end
 
-    if math.random(1, 100) <= maleChance then
+    if math.randomInt(1, 100) <= maleChance then
         return xi.chocoboRaising.gender.MALE
     end
 
@@ -244,7 +244,7 @@ local function inheritDna(motherDna, fatherDna)
     end
 
     for i = #pool, 2, -1 do
-        local j = math.random(1, i)
+        local j = math.randomInt(1, i)
         pool[i], pool[j] = pool[j], pool[i]
     end
 
@@ -311,7 +311,7 @@ local function inheritAbility(motherCard, fatherCard, plan)
     -- Inheritance chance: 60% baseline + 3% per averaged RCP rank (max +21%).
     -- 'Nowhere near guaranteed' per Arael; this lands in the 60-81% band.
     local chance = 60 + math.floor(avgReceptivityRank(motherCard, fatherCard) * 3)
-    if math.random(1, 100) > chance then
+    if math.randomInt(1, 100) > chance then
         return xi.chocoboRaising.ability.NONE
     end
 
@@ -325,12 +325,12 @@ local function inheritAbility(motherCard, fatherCard, plan)
             end
         end
 
-        if #favoured > 0 and math.random(1, 100) <= 70 then
-            return favoured[math.random(1, #favoured)]
+        if #favoured > 0 and math.randomInt(1, 100) <= 70 then
+            return favoured[math.randomInt(1, #favoured)]
         end
     end
 
-    return pool[math.random(1, #pool)]
+    return pool[math.randomInt(1, #pool)]
 end
 
 -- Produce exdata for a freshly bred egg from two parent chococards and the chosen

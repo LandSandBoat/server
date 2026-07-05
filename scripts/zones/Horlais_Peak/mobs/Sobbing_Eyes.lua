@@ -48,7 +48,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         table.insert(skillList, xi.mobSkill.CATHARSIS) -- Observed Catharsis usage at low HP only
     end
 
-    return skillList[math.random(1, #skillList)]
+    return skillList[math.randomInt(1, #skillList)]
 end
 
 entity.onMobSpellChoose = function(mob, target, spellId)
@@ -62,7 +62,7 @@ entity.onMobSpellChoose = function(mob, target, spellId)
         table.insert(spellList, xi.magic.spell.STUN)
     end
 
-    return spellList[math.random(1, #spellList)]
+    return spellList[math.randomInt(1, #spellList)]
 end
 
 return entity

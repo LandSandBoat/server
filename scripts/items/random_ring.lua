@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 15770
 -- Item: Random Ring
--- Item Effect: Enchantment Dex + math.random(1, 8)
+-- Item Effect: Enchantment Dex + math.randomInt(1, 8)
 -- Duration: 30 Mins
 -----------------------------------
 ---@type TItem
@@ -17,7 +17,7 @@ end
 
 itemObject.onItemUse = function(target, user)
     if target:hasEquipped(xi.item.RANDOM_RING) then
-        local power = math.random(1, 8)
+        local power = math.randomInt(1, 8)
 
         target:addStatusEffect(xi.effect.ENCHANTMENT, { power = power, duration = 3600, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.RANDOM_RING })
     end

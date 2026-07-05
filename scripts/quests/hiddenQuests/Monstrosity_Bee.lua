@@ -55,7 +55,7 @@ quest.sections =
                     local quizInfo = quest:getVar(player, 'Option')
 
                     if quizInfo == 0 then
-                        quizInfo = math.random(1, 6)
+                        quizInfo = math.randomInt(1, 6)
                         quest:setVar(player, 'Option', quizInfo)
                     end
 

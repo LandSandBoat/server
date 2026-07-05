@@ -79,7 +79,7 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
         xi.mobSkill.PETRIBREATH
     }
 
-    return tpMoves[math.random(1, #tpMoves)]
+    return tpMoves[math.randomInt(1, #tpMoves)]
 end
 
 return entity

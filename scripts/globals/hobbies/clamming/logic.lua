@@ -86,7 +86,7 @@ xi.clamming.nodeOnEventUpdate = function(player, csid, option, npc)
     local incidentChance = player:getMod(xi.mod.CLAMMING_REDUCED_INCIDENTS) > 0 and 5 or 10
     if
         kitSize == 200 and
-        math.random(1, 100) <= incidentChance
+        math.randomInt(1, 100) <= incidentChance
     then
         -- SE seems to add 10000 to the previous weight if Alraune had stolen your stuff.
         -- A weight higher than your capacity prevents the CS performing the clamming animation.
@@ -110,7 +110,7 @@ xi.clamming.nodeOnEventUpdate = function(player, csid, option, npc)
 
     -- Roll based on rate sum and decide clammed item.
     local itemId     = 0
-    local randomRoll = math.random(1, rateSum)
+    local randomRoll = math.randomInt(1, rateSum)
     for i = 1, #lootList do
         if lootList[i][2 + rateColumn] <= randomRoll then
             itemId = lootList[i][1]

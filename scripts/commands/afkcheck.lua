@@ -29,8 +29,8 @@ commandObj.onTrigger = function(player)
 
     -- Generate options
     local function getCorrectOption()
-        local a = math.random(1, 10)
-        local b = math.random(1, 10)
+        local a = math.randomInt(1, 10)
+        local b = math.randomInt(1, 10)
         local c = a + b
 
         return
@@ -44,10 +44,10 @@ commandObj.onTrigger = function(player)
     end
 
     local function getIncorrectOption()
-        local a = math.random(1, 10)
-        local b = math.random(1, 10)
-        local randomChange = math.random(1, 3)
-        if math.random(0, 1) == 1 then
+        local a = math.randomInt(1, 10)
+        local b = math.randomInt(1, 10)
+        local randomChange = math.randomInt(1, 3)
+        if math.randomInt(0, 1) == 1 then
             randomChange = randomChange * -1
         end
 

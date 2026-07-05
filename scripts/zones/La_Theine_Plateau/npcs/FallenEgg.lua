@@ -10,7 +10,7 @@ local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    local random = math.random(1, 100)
+    local random = math.randomInt(1, 100)
     local nm = GetMobByID(ID.mob.NIHNIKNOOVI)
     if
         nm and
