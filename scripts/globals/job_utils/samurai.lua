@@ -96,11 +96,7 @@ end
 
 xi.job_utils.samurai.useWardingCircle = function(player, target, ability)
     local duration = 180 + player:getMod(xi.mod.WARDING_CIRCLE_DURATION)
-    local power    = 15
-
-    if player:getMainJob() ~= xi.job.SAM then
-        power = 5
-    end
+    local power    = player:getMainJob() == xi.job.SAM and 15 or 5
 
     power = power + player:getMod(xi.mod.WARDING_CIRCLE_POTENCY)
 

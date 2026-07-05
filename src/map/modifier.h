@@ -365,6 +365,20 @@ enum class Mod
     LUMINIAN_KILLER = 237, // Enhances "Luminian Killer" effect
     LUMINION_KILLER = 238, // Enhances "Luminion Killer" effect
 
+    AUGMENT_KILLER_EFFECTS = 1201, // Augments "Killer" effects (Examples: Ferine Gausape +1 and +2)
+
+    // Circle modifiers for damage done.
+    ARCANA_DMG_MULTIPLIER = 1202,
+    DEMON_DMG_MULTIPLIER  = 1203,
+    DRAGON_DMG_MULTIPLIER = 1204,
+    UNDEAD_DMG_MULTIPLIER = 1205,
+
+    // Circle modifiers for damage recieved.
+    ARCANA_RES_MULTIPLIER = 1206,
+    DEMON_RES_MULTIPLIER  = 1207,
+    DRAGON_RES_MULTIPLIER = 1208,
+    UNDEAD_RES_MULTIPLIER = 1209,
+
     // Resistances to enfeebles - Job Traits/Job Abilities/Atmas/Items/Gear
     SLEEPRES    = 240, // Enhances "Resist Sleep" effect
     POISONRES   = 241, // Enhances "Resist Poison" effect
@@ -1156,7 +1170,7 @@ enum class Mod
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1201 and onward
+    // SPARE IDs: 1210 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

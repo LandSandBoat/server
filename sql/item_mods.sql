@@ -4903,6 +4903,7 @@ INSERT INTO `item_mods` VALUES (11092,25,18);   -- ACC: 18
 INSERT INTO `item_mods` VALUES (11092,68,18);   -- EVA: 18
 INSERT INTO `item_mods` VALUES (11092,84,7);    -- AXE: 7
 INSERT INTO `item_mods` VALUES (11092,384,200); -- HASTE_GEAR: 200
+INSERT INTO `item_mods` VALUES (11092,1201,50); -- AUGMENT_KILLER_EFFECTS: 50
 
 -- Aoidos Hongreline +2
 INSERT INTO `item_mods` VALUES (11093,1,51);   -- DEF: 51
@@ -5609,11 +5610,12 @@ INSERT INTO `item_mods` VALUES (11191,23,28);   -- ATT: 28
 INSERT INTO `item_mods` VALUES (11191,384,200); -- HASTE_GEAR: 200
 
 -- Ferine Gausape +1
-INSERT INTO `item_mods` VALUES (11192,1,64);  -- DEF: 64
-INSERT INTO `item_mods` VALUES (11192,23,15); -- ATT: 15
-INSERT INTO `item_mods` VALUES (11192,25,15); -- ACC: 15
-INSERT INTO `item_mods` VALUES (11192,68,15); -- EVA: 15
-INSERT INTO `item_mods` VALUES (11192,84,5);  -- AXE: 5
+INSERT INTO `item_mods` VALUES (11192,1,64);    -- DEF: 64
+INSERT INTO `item_mods` VALUES (11192,23,15);   -- ATT: 15
+INSERT INTO `item_mods` VALUES (11192,25,15);   -- ACC: 15
+INSERT INTO `item_mods` VALUES (11192,68,15);   -- EVA: 15
+INSERT INTO `item_mods` VALUES (11192,84,5);    -- AXE: 5
+INSERT INTO `item_mods` VALUES (11192,1201,25); -- AUGMENT_KILLER_EFFECTS: 50
 
 -- Aoidos Hongreline +1
 INSERT INTO `item_mods` VALUES (11193,1,48);  -- DEF: 48
@@ -49600,7 +49602,7 @@ INSERT INTO `item_mods` VALUES (23160,68,84);   -- EVA: 84
 INSERT INTO `item_mods` VALUES (23160,84,16);   -- AXE: 16
 INSERT INTO `item_mods` VALUES (23160,384,300); -- HASTE_GEAR: 3%
 INSERT INTO `item_mods` VALUES (23160,841,8);   -- ALL_WSDMG_FIRST_HIT: 8
--- TODO: Augments "Killer" effects - Damage dealt and damage reduction are improved by 1/2 of your total Killer Effect %
+INSERT INTO `item_mods` VALUES (23160,1201,50); -- AUGMENT_KILLER_EFFECTS: 50
 
 -- Fili Hongreline +2
 INSERT INTO `item_mods` VALUES (23161,1,145);   -- DEF: 145
@@ -66430,6 +66432,7 @@ INSERT INTO `item_mods` VALUES (26914,31,40);   -- MEVA: 40
 INSERT INTO `item_mods` VALUES (26914,68,38);   -- EVA: 38
 INSERT INTO `item_mods` VALUES (26914,84,9);    -- AXE: 9
 INSERT INTO `item_mods` VALUES (26914,384,300); -- HASTE_GEAR: 300
+INSERT INTO `item_mods` VALUES (26914,1201,50); -- AUGMENT_KILLER_EFFECTS: 50
 
 -- Nukumi Gausape +1
 INSERT INTO `item_mods` VALUES (26915,1,133);   -- DEF: 133
@@ -66448,6 +66451,7 @@ INSERT INTO `item_mods` VALUES (26915,31,59);   -- MEVA: 59
 INSERT INTO `item_mods` VALUES (26915,68,69);   -- EVA: 69
 INSERT INTO `item_mods` VALUES (26915,84,11);   -- AXE: 11
 INSERT INTO `item_mods` VALUES (26915,384,300); -- HASTE_GEAR: 300
+INSERT INTO `item_mods` VALUES (26915,1201,50); -- AUGMENT_KILLER_EFFECTS: 50
 
 -- Fili Hongreline
 INSERT INTO `item_mods` VALUES (26916,1,90);    -- DEF: 90

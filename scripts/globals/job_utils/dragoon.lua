@@ -214,12 +214,7 @@ end
 
 xi.job_utils.dragoon.useAncientCircle = function(player, target, ability)
     local duration = 180 + player:getMod(xi.mod.ANCIENT_CIRCLE_DURATION)
-    local jpValue  = player:getJobPointLevel(xi.jp.ANCIENT_CIRCLE_EFFECT)
-    local power    = 5
-
-    if player:getMainJob() == xi.job.DRG then
-        power = 15 + jpValue
-    end
+    local power    = player:getMainJob() == xi.job.DRG and 15 or 5
 
     power = power + player:getMod(xi.mod.ANCIENT_CIRCLE_POTENCY)
 

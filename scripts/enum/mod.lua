@@ -347,6 +347,20 @@ xi.mod =
     LUMINIAN_KILLER                 = 237,
     LUMINION_KILLER                 = 238,
 
+    AUGMENT_KILLER_EFFECTS          = 1201, -- Augments "Killer" effects (Examples: Ferine Gausape +1 and +2, Kukumi Gausape...)
+
+    -- Circle modifiers for damage done.
+    ARCANA_DMG_MULTIPLIER           = 1202,
+    DEMON_DMG_MULTIPLIER            = 1203,
+    DRAGON_DMG_MULTIPLIER           = 1204,
+    UNDEAD_DMG_MULTIPLIER           = 1205,
+
+    -- Circle modifiers for damage recieved.
+    ARCANA_RES_MULTIPLIER           = 1206,
+    DEMON_RES_MULTIPLIER            = 1207,
+    DRAGON_RES_MULTIPLIER           = 1208,
+    UNDEAD_RES_MULTIPLIER           = 1209,
+
     -- Status effect Job trait resistance modifiers.
     SLEEPRES                        = 240,
     POISONRES                       = 241,

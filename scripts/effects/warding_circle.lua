@@ -5,9 +5,11 @@
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
-    local jpValue = target:getJobPointLevel(xi.jp.WARDING_CIRCLE_EFFECT)
+    local jpValue = target:getJobPointLevel(xi.jp.WARDING_CIRCLE_EFFECT) -- Only affects damage recieved.
 
-    effect:addMod(xi.mod.DEMON_KILLER, effect:getPower() + jpValue)
+    effect:addMod(xi.mod.DEMON_KILLER, effect:getPower())
+    effect:addMod(xi.mod.DEMON_DMG_MULTIPLIER, effect:getPower())
+    effect:addMod(xi.mod.DEMON_RES_MULTIPLIER, effect:getPower() + jpValue)
 end
 
 effectObject.onEffectTick = function(target, effect)
