@@ -326,7 +326,7 @@ public:
     void   setAnimation(uint8 animation);
     uint8  getAnimationSub();
     void   setAnimationSub(uint8 animationsub, const sol::object& sendUpdate);
-    void   setSpawnAnimation(uint8 spawnAnimation);
+    void   setSpawnAnimation(xi::SpawnAnimation spawnAnimation);
     bool   getCallForHelpFlag() const;
     void   setCallForHelpFlag(bool cfh);
     bool   getCallForHelpBlocked() const;
@@ -852,7 +852,7 @@ public:
     uint8  getEcosystem();
     uint16 getFamily();
     uint16 getSpecies();
-    auto   isMobType(uint8 mobType) const -> bool; // True if mob is of type passed to function
+    auto   isMobType(xi::MobType mobType) const -> bool; // True if mob is of type passed to function
     auto   isUndead() -> bool;
     bool   isNM();
 

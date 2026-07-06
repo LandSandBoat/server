@@ -6059,7 +6059,7 @@ CBaseEntity* GenerateDynamicEntity(CZone* PZone, CInstance* PInstance, sol::tabl
 
         PMob->m_isAggroable = table["isAggroable"].get_or(false);
 
-        PMob->spawnAnimation = static_cast<SPAWN_ANIMATION>(table["specialSpawnAnimation"].get_or(false) ? 1 : 0);
+        PMob->spawnAnimation = table["specialSpawnAnimation"].get_or(false) ? xi::SpawnAnimation::Special : xi::SpawnAnimation::Normal;
 
         uint32 flags  = table.get_or<uint32>("entityFlags", 0);
         PMob->m_flags = flags == 0 ? PMob->m_flags : flags;

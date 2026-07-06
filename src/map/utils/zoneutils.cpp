@@ -501,7 +501,7 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
 
                                     PMob->m_Behavior  = rset->get<uint16>("behavior");
                                     PMob->m_Link      = rset->get<uint32>("links");
-                                    PMob->m_Type      = rset->get<MOBTYPE>("mobType");
+                                    PMob->m_Type      = rset->get<xi::MobType>("mobType");
                                     PMob->m_Immunity  = rset->get<uint32>("immunity");
                                     PMob->m_EcoSystem = rset->get<xi::Ecosystem>("ecosystemID");
 
@@ -562,12 +562,12 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                                     PMob->m_flags       = rset->get<uint32>("entityFlags");
 
                                     // Cap Level if Necessary (Don't Cap NMs)
-                                    if (normalLevelRangeMin > 0 && !(PMob->m_Type & MOBTYPE_NOTORIOUS) && PMob->m_minLevel > normalLevelRangeMin)
+                                    if (normalLevelRangeMin > 0 && !((PMob->m_Type & xi::MobType::Notorious) != xi::MobType::Normal) && PMob->m_minLevel > normalLevelRangeMin)
                                     {
                                         PMob->m_minLevel = normalLevelRangeMin;
                                     }
 
-                                    if (normalLevelRangeMax > 0 && !(PMob->m_Type & MOBTYPE_NOTORIOUS) && PMob->m_maxLevel > normalLevelRangeMax)
+                                    if (normalLevelRangeMax > 0 && !((PMob->m_Type & xi::MobType::Notorious) != xi::MobType::Normal) && PMob->m_maxLevel > normalLevelRangeMax)
                                     {
                                         PMob->m_maxLevel = normalLevelRangeMax;
                                     }
@@ -622,10 +622,10 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
 
                                     // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
                                     // can be set in their onInitialize
-                                    if (PMob->m_Type & MOBTYPE_EVENT ||
-                                        PMob->m_Type & MOBTYPE_FISHED ||
-                                        PMob->m_Type & MOBTYPE_BATTLEFIELD ||
-                                        PMob->m_Type & MOBTYPE_NOTORIOUS ||
+                                    if ((PMob->m_Type & xi::MobType::Event) != xi::MobType::Normal ||
+                                        (PMob->m_Type & xi::MobType::Fished) != xi::MobType::Normal ||
+                                        (PMob->m_Type & xi::MobType::Battlefield) != xi::MobType::Normal ||
+                                        (PMob->m_Type & xi::MobType::Notorious) != xi::MobType::Normal ||
                                         zoneType & ZONE_TYPE::DYNAMIS)
                                     {
                                         PMob->setMobMod(MOBMOD_CHARMABLE, 0);

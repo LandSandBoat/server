@@ -160,7 +160,7 @@ uint16 GetBaseWeaponDamage(CMobEntity* PMob, uint16 slot)
 
     // Normal mobs in beginner zones have the offset lowered by 1.
     // Excluded NMs for now for things like Voidwatch Mobs.
-    if (mobZoneId != 0 && PMob->m_Type != MOBTYPE_NOTORIOUS && (mobZoneId == ZONE_WEST_RONFAURE || mobZoneId == ZONE_EAST_RONFAURE || mobZoneId == ZONE_NORTH_GUSTABERG || mobZoneId == ZONE_SOUTH_GUSTABERG || mobZoneId == ZONE_WEST_SARUTABARUTA || mobZoneId == ZONE_EAST_SARUTABARUTA))
+    if (mobZoneId != 0 && PMob->m_Type != xi::MobType::Notorious && (mobZoneId == ZONE_WEST_RONFAURE || mobZoneId == ZONE_EAST_RONFAURE || mobZoneId == ZONE_NORTH_GUSTABERG || mobZoneId == ZONE_SOUTH_GUSTABERG || mobZoneId == ZONE_WEST_SARUTABARUTA || mobZoneId == ZONE_EAST_SARUTABARUTA))
     {
         offset -= 1;
         rangedOffset -= 1;
@@ -675,7 +675,7 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
         PMob->StatusEffectContainer->KillAllStatusEffect();
     }
 
-    bool      isNM     = PMob->m_Type & MOBTYPE_NOTORIOUS;
+    bool      isNM     = (PMob->m_Type & xi::MobType::Notorious) != xi::MobType::Normal;
     JOBTYPE   mJob     = PMob->GetMJob();
     JOBTYPE   sJob     = PMob->GetSJob();
     uint8     mLvl     = PMob->GetMLevel();
@@ -994,12 +994,12 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
 
     PMob->m_Behavior |= PMob->getMobMod(MOBMOD_BEHAVIOR);
 
-    if (PMob->m_Type & MOBTYPE_BATTLEFIELD)
+    if ((PMob->m_Type & xi::MobType::Battlefield) != xi::MobType::Normal)
     {
         SetupBattlefieldMob(PMob);
     }
 
-    if (PMob->m_Type & MOBTYPE_NOTORIOUS)
+    if ((PMob->m_Type & xi::MobType::Notorious) != xi::MobType::Normal)
     {
         PMob->setMobMod(MOBMOD_NO_DESPAWN, 1);
     }
@@ -1009,7 +1009,7 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
         SetupDungeonInstanceMob(PMob);
     }
 
-    if (PMob->m_Type & MOBTYPE_EVENT)
+    if ((PMob->m_Type & xi::MobType::Event) != xi::MobType::Normal)
     {
         SetupEventMob(PMob);
     }
@@ -1744,7 +1744,7 @@ auto InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* instance) -> CMob
 
         PMob->m_Behavior  = rset->get<uint16>("behavior");
         PMob->m_Link      = rset->get<uint8>("links");
-        PMob->m_Type      = rset->get<uint8>("mobType");
+        PMob->m_Type      = rset->get<xi::MobType>("mobType");
         PMob->m_Immunity  = rset->get<IMMUNITY>("immunity");
         PMob->m_EcoSystem = rset->get<xi::Ecosystem>("ecosystemID");
 
@@ -1919,7 +1919,7 @@ auto InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZone
 
         PMob->m_Behavior  = rset->get<uint16>("behavior");
         PMob->m_Link      = rset->get<uint8>("links");
-        PMob->m_Type      = rset->get<uint8>("mobType");
+        PMob->m_Type      = rset->get<xi::MobType>("mobType");
         PMob->m_Immunity  = rset->get<IMMUNITY>("immunity");
         PMob->m_EcoSystem = rset->get<xi::Ecosystem>("ecosystemID");
 

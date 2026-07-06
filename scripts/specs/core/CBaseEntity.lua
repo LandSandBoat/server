@@ -1346,7 +1346,7 @@ end
 function CBaseEntity:setAnimationSub(animationsub, sendUpdate)
 end
 
----@param spawnAnimation integer
+---@param spawnAnimation xi.spawnAnimation
 ---@return nil
 function CBaseEntity:setSpawnAnimation(spawnAnimation)
 end
@@ -3699,7 +3699,7 @@ function CBaseEntity:getSpecies()
 end
 
 ---@nodiscard
----@param mobType integer
+---@param mobType xi.mobType
 ---@return boolean
 function CBaseEntity:isMobType(mobType)
 end

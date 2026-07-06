@@ -203,7 +203,7 @@ void CLuaAction::knockback(const uint32 actionTargetId, const Knockback knockbac
     }
 }
 
-void CLuaAction::recordDamage(const CLuaBaseEntity* PLuaTarget, const ATTACK_TYPE atkType, const int32 damage, const Maybe<bool> isCritical) const
+void CLuaAction::recordDamage(const CLuaBaseEntity* PLuaTarget, const xi::AttackType atkType, const int32 damage, const Maybe<bool> isCritical) const
 {
     if (auto* PTarget = dynamic_cast<CBattleEntity*>(PLuaTarget->GetBaseEntity()))
     {

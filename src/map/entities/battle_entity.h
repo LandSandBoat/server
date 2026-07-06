@@ -31,6 +31,7 @@
 #include "enums/msg_basic.h"
 #include "modifier.h"
 
+#include "data/enums/attack_type.h"
 #include "data/enums/damage_type.h"
 #include "data/enums/ecosystem.h"
 #include "party.h"
@@ -178,17 +179,6 @@ enum SLOTTYPE : uint8
 #define MAX_SLOTTYPE 18
 DECLARE_FORMAT_AS_UNDERLYING(SLOTTYPE);
 
-enum class ATTACK_TYPE : uint8
-{
-    NONE     = 0,
-    PHYSICAL = 1,
-    MAGICAL  = 2,
-    RANGED   = 3,
-    BREATH   = 4,
-    SPECIAL  = 5,
-};
-DECLARE_FORMAT_AS_UNDERLYING(ATTACK_TYPE);
-
 enum TARGETTYPE : uint16
 {
     TARGET_NONE                    = 0x0000,
@@ -263,7 +253,7 @@ DECLARE_FORMAT_AS_UNDERLYING(IMMUNITY);
 
 struct battlehistory_t
 {
-    ATTACK_TYPE lastHitTaken_atkType;
+    xi::AttackType lastHitTaken_atkType;
 };
 
 class CModifier;
@@ -356,7 +346,7 @@ public:
     virtual int32 addMP(int32 mp); // increase/decrease the amount of mp
 
     // Deals damage and updates the last attacker which is used when sending a player death message
-    virtual auto takeDamage(int32 amount, CBattleEntity* attacker = nullptr, ATTACK_TYPE attackType = ATTACK_TYPE::NONE, xi::DamageType damageType = xi::DamageType::None, bool isSkillchainDamage = false) -> int32;
+    virtual auto takeDamage(int32 amount, CBattleEntity* attacker = nullptr, xi::AttackType attackType = xi::AttackType::None, xi::DamageType damageType = xi::DamageType::None, bool isSkillchainDamage = false) -> int32;
 
     int16 getMod(Mod modID);
     int16 getMaxGearMod(Mod modID);

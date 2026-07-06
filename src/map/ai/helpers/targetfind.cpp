@@ -457,7 +457,7 @@ bool CTargetFind::isMobOwner(CBattleEntity* PTarget)
 
     if (auto* PMob = dynamic_cast<CMobEntity*>(PTarget))
     {
-        if (PMob->getMobMod(MOBMOD_CLAIM_TYPE) == static_cast<int16>(ClaimType::NonExclusive))
+        if (PMob->getMobMod(MOBMOD_CLAIM_TYPE) == static_cast<int16>(xi::ClaimType::NonExclusive))
         {
             return true;
         }

@@ -29,6 +29,7 @@
 #include "packets/basic.h"
 
 #include "data/enums/allegiance.h"
+#include "data/enums/spawn_animation.h"
 #include "data/enums/status.h"
 
 #include <map>
@@ -183,12 +184,6 @@ enum NAMEVIS : uint8
     VIS_GHOST_PHASE = 0x80,
 };
 
-enum class SPAWN_ANIMATION : uint8
-{
-    NORMAL  = 0,
-    SPECIAL = 1,
-};
-
 // TODO: It is possible to make this structure part of the class, instead of the current ID and Targid, but without the clean() method.
 struct EntityID_t
 {
@@ -313,7 +308,7 @@ public:
 
     bool m_bReleaseTargIDOnDisappear;
 
-    SPAWN_ANIMATION spawnAnimation;
+    xi::SpawnAnimation spawnAnimation;
 
     std::unique_ptr<CAIContainer> PAI;          // AI container
     CBattlefield*                 PBattlefield; // pointer to battlefield (if in one)

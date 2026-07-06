@@ -137,7 +137,7 @@ auto CInstanceLoader::LoadInstance() const -> CInstance*
 
             PMob->m_Behavior  = rset->get<uint16>("behavior");
             PMob->m_Link      = rset->get<uint8>("links");
-            PMob->m_Type      = rset->get<uint8>("mobType");
+            PMob->m_Type      = rset->get<xi::MobType>("mobType");
             PMob->m_Immunity  = rset->get<IMMUNITY>("immunity");
             PMob->m_EcoSystem = rset->get<xi::Ecosystem>("ecosystemID");
 
@@ -217,7 +217,7 @@ auto CInstanceLoader::LoadInstance() const -> CInstance*
             const auto aggro      = rset->get<uint32>("aggro");
             PMob->m_Aggro         = aggro;
             // If a special instanced mob aggros, it should always aggro regardless of level.
-            if (PMob->m_Type & MOBTYPE_EVENT)
+            if ((PMob->m_Type & xi::MobType::Event) != xi::MobType::Normal)
             {
                 PMob->setMobMod(MOBMOD_ALWAYS_AGGRO, aggro);
             }
@@ -229,7 +229,7 @@ auto CInstanceLoader::LoadInstance() const -> CInstance*
 
             // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
             // can be set in in their onInitialize
-            if (PMob->m_Type & MOBTYPE_EVENT || PMob->m_Type & MOBTYPE_FISHED || PMob->m_Type & MOBTYPE_BATTLEFIELD || PMob->m_Type & MOBTYPE_NOTORIOUS)
+            if ((PMob->m_Type & xi::MobType::Event) != xi::MobType::Normal || (PMob->m_Type & xi::MobType::Fished) != xi::MobType::Normal || (PMob->m_Type & xi::MobType::Battlefield) != xi::MobType::Normal || (PMob->m_Type & xi::MobType::Notorious) != xi::MobType::Normal)
             {
                 PMob->setMobMod(MOBMOD_CHARMABLE, 0);
             }

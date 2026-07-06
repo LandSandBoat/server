@@ -318,7 +318,7 @@ void CZoneEntities::InsertPET(CBaseEntity* PPet)
 
     TryAddToNearbySpawnLists(PPet);
 
-    PPet->spawnAnimation = SPAWN_ANIMATION::NORMAL; // Turn off special spawn animation
+    PPet->spawnAnimation = xi::SpawnAnimation::Normal; // Turn off special spawn animation
 }
 
 void CZoneEntities::InsertTRUST(CBaseEntity* PTrust)
@@ -344,7 +344,7 @@ void CZoneEntities::InsertTRUST(CBaseEntity* PTrust)
 
     TryAddToNearbySpawnLists(PTrust);
 
-    PTrust->spawnAnimation = SPAWN_ANIMATION::NORMAL; // Turn off special spawn animation
+    PTrust->spawnAnimation = xi::SpawnAnimation::Normal; // Turn off special spawn animation
 }
 
 void CZoneEntities::FindPartyForMob(CBaseEntity* PEntity)

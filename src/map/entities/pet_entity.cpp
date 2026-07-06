@@ -62,7 +62,7 @@ CPetEntity::CPetEntity(PET_TYPE petType, uint32 petID)
     allegiance                  = xi::Allegiance::Player;
     m_MobSkillList              = 0;
     m_bReleaseTargIDOnDisappear = true;
-    spawnAnimation              = SPAWN_ANIMATION::SPECIAL; // Initial spawn has the special spawn-in animation
+    spawnAnimation              = xi::SpawnAnimation::Special; // Initial spawn has the special spawn-in animation
 
     PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CPetController>(this), std::make_unique<CTargetFind>(this));
 }
@@ -546,7 +546,7 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
             //       furthermore, this likely needs to be PSkill->setMsg(MsgBasic::SkillRecoversHP) and happen before the above code
             msg = MsgBasic::SkillRecoversHP;
             actionResult.recordDamage(attack_outcome_t{
-                .atkType = ATTACK_TYPE::PHYSICAL,
+                .atkType = xi::AttackType::Physical,
                 .damage  = std::clamp(-damage, 0, PTargetFound->GetMaxHP() - PTargetFound->health.hp),
                 .target  = PTargetFound,
             });

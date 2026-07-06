@@ -65,7 +65,7 @@ public:
     uint8           getPrimarySkillchain() const;
     uint8           getSecondarySkillchain() const;
     uint8           getTertiarySkillchain() const;
-    auto            getAttackType() const -> ATTACK_TYPE;
+    auto            getAttackType() const -> xi::AttackType;
     auto            isCritical() const -> bool;
 
     bool isDamageMsg() const;
@@ -93,7 +93,7 @@ public:
     void setPrimarySkillchain(uint8 skillchain);
     void setSecondarySkillchain(uint8 skillchain);
     void setTertiarySkillchain(uint8 skillchain);
-    void setAttackType(ATTACK_TYPE attackType);
+    void setAttackType(xi::AttackType attackType);
     void setCritical(bool isCritical);
 
     const std::string& getName() const;
@@ -118,7 +118,7 @@ private:
     uint8           m_primarySkillchain; // weaponskill ID of skillchain properties
     uint8           m_secondarySkillchain;
     uint8           m_tertiarySkillchain;
-    ATTACK_TYPE     m_attackType{ ATTACK_TYPE::NONE };
+    xi::AttackType  m_attackType{ xi::AttackType::None };
     bool            m_isCritical{ false };
 
     int16  m_TP;  // the tp at the time of finish readying (for scripts)

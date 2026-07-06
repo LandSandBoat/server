@@ -23,7 +23,12 @@
 #define _MOBENTITY_H
 
 #include "battle_entity.h"
+
 #include <common/types/maybe.h>
+
+#include "data/enums/claim_type.h"
+#include "data/enums/mob_type.h"
+
 #include <unordered_map>
 
 enum class MsgBasic : uint16_t;
@@ -76,17 +81,6 @@ enum ROAMFLAG : uint16
     ROAMFLAG_FOLLOW   = 0x800, // follows a player when sighted for a little while
 };
 
-enum MOBTYPE
-{
-    MOBTYPE_NORMAL      = 0x00,
-    MOBTYPE_0X01        = 0x01, // available for use
-    MOBTYPE_NOTORIOUS   = 0x02,
-    MOBTYPE_FISHED      = 0x04,
-    MOBTYPE_CALLED      = 0x08,
-    MOBTYPE_BATTLEFIELD = 0x10,
-    MOBTYPE_EVENT       = 0x20
-};
-
 enum DETECT : uint16
 {
     DETECT_NONE        = 0x00,
@@ -110,13 +104,6 @@ enum BEHAVIOR : uint16
     BEHAVIOR_NO_ASSIST    = 0x008, // mob can not be targeted by helpful magic from players (cure, protect, etc)
     BEHAVIOR_AGGRO_AMBUSH = 0x200, // mob aggroes by ambush
     BEHAVIOR_NO_TURN      = 0x400  // mob does not turn to face target
-};
-
-enum class ClaimType : uint8
-{
-    Exclusive    = 0, // Regular exclusive claim behavior. Only one entity and related group can attack.
-    NonExclusive = 1, // Regular claim behavior but multiple unrelated entities can attack and compete for claim. Rewards distributed to last claiming entity.
-    Unclaimable  = 2, // Mob cannot be claimed. Multiple unrelated entities can attack. Rewards will not be distributed.
 };
 
 class CMobSkillState;
@@ -242,13 +229,13 @@ public:
     bool  m_disableScent;    // stop detecting by scent
     float m_maxRoamDistance; // maximum distance mob can be from spawn before despawning
 
-    uint8     m_Type; // mob type
-    bool      m_Aggro;
-    bool      m_TrueDetection; // Has true sight or sound
-    uint8     m_Link;          // link with mobs of it's family
-    bool      m_isAggroable;   // Can be aggroed by other monsters when in the player allegiance
-    uint16    m_Behavior;      // mob behavior
-    SPAWNTYPE m_SpawnType;     // condition for mob to spawn
+    xi::MobType m_Type; // mob type
+    bool        m_Aggro;
+    bool        m_TrueDetection; // Has true sight or sound
+    uint8       m_Link;          // link with mobs of it's family
+    bool        m_isAggroable;   // Can be aggroed by other monsters when in the player allegiance
+    uint16      m_Behavior;      // mob behavior
+    SPAWNTYPE   m_SpawnType;     // condition for mob to spawn
 
     int8   m_battlefieldID; // battlefield belonging to
     uint16 m_bcnmID;        // belongs to which battlefield
