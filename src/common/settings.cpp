@@ -220,13 +220,19 @@ void init()
         }
     }
 
-    // Push the consolidated defaults + user settings back up into xi.settings
+    // Push the consolidated defaults + user settings back up into xi.settings.
+    // Push the held alternative, not the variant itself: sol only auto-unwraps
+    // std::variant exactly, and SettingsVariant is our derived Variant - assigning
+    // it directly would land in Lua as opaque userdata.
     for (const auto& [key, value] : settingsMap)
     {
-        auto parts                          = split(key, ".");
-        auto outer                          = to_lower(parts[0]);
-        auto inner                          = to_upper(parts[1]);
-        lua["xi"]["settings"][outer][inner] = value;
+        auto parts = split(key, ".");
+        auto outer = to_lower(parts[0]);
+        auto inner = to_upper(parts[1]);
+        value.visit([&](const auto& held)
+                    {
+                        lua["xi"]["settings"][outer][inner] = held;
+                    });
     }
 
     detail::generation.fetch_add(1, std::memory_order_release);

@@ -26,6 +26,7 @@
 #include <common/xi.h>
 
 #include <common/types/hash_map.h>
+#include <common/types/variant.h>
 
 #include <atomic>
 #include <cstdint>
@@ -34,12 +35,11 @@
 #include <string_view>
 #include <type_traits>
 #include <utility>
-#include <variant>
 
 namespace settings
 {
 
-using SettingsVariant = std::variant<bool, double, std::string>;
+using SettingsVariant = Variant<bool, double, std::string>;
 
 namespace detail
 {
@@ -82,7 +82,7 @@ T getUncached(std::string_view key)
         const auto& variant = maybeResult->second;
 
         // arg = type held inside the variant
-        std::visit(
+        variant.visit(
             overload{
                 [&](const bool& arg)
                 {
@@ -156,8 +156,7 @@ T getUncached(std::string_view key)
                         out = arg;
                     }
                 },
-            },
-            variant);
+            });
         return out;
     }
 

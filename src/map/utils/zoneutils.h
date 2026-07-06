@@ -25,6 +25,8 @@
 #include <common/ipp.h>
 #include <common/types/flag.h>
 
+#include <queue>
+
 #include "zone.h"
 
 class CBaseEntity;

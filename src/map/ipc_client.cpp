@@ -26,7 +26,6 @@
 #include "common/ipp.h"
 
 #include <concurrentqueue.h>
-#include <queue>
 
 #include "alliance.h"
 #include "aman.h"
