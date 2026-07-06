@@ -956,30 +956,20 @@ xi.spells.damage.calculateNullification = function(target, element, isMagic, isB
     return 1
 end
 
-xi.spells.damage.calculateIfMagicBurst = function(target, spellElement, skillchainCount)
-    local magicBurst = 1 -- The variable we want to calculate
-
-    if spellElement > xi.element.NONE then
-        local resistRank = target:getMod(xi.data.element.getElementalResistanceRankModifier(spellElement))
-        local rankTable  = { 1.15, 0.85, 0.6, 0.5, 0.4, 0.15, 0.05 }
-        local rankBonus  = 0
-
-        if resistRank <= -3 then
-            rankBonus = 1.5
-        elseif resistRank >= 5 then
-            rankBonus = 0
-        else
-            rankBonus = rankTable[resistRank + 3]
-        end
-
-        magicBurst = 1.25 + rankBonus + skillchainCount / 10
+xi.spells.damage.calculateIfMagicBurst = function(caster, target, spellElement, magicBurstTier)
+    if spellElement <= xi.element.NONE then
+        return 1
     end
 
+    -- Multiplier for each resistance rank.
+    local rankTable  = { 1.5, 1.15, 0.85, 0.6, 0.5, 0.4, 0.15, 0.05, 0, 0, 0, 0, 0, 0, 0 }
+
+    local resistRank = utils.clamp(target:getMod(xi.data.element.getElementalResistanceRankModifier(spellElement)), -3, 11) + 4 -- We add 4 so the minimum value is 1, for table.
+    local countBonus = caster:isPC() and 0.1 or 0.05
+    local magicBurst = 1.25 + rankTable[resistRank] + countBonus * magicBurstTier
+
     -- Sengikori appears to add to base mb multiplier per JP wiki https://wiki.ffo.jp/html/20051.html
-    if
-        skillchainCount >= 1 and
-        target:getMod(xi.mod.SENGIKORI_MB_DMG_DEBUFF) > 0
-    then
+    if target:getMod(xi.mod.SENGIKORI_MB_DMG_DEBUFF) > 0 then
         magicBurst = magicBurst + target:getMod(xi.mod.SENGIKORI_MB_DMG_DEBUFF) / 100
         target:setMod(xi.mod.SENGIKORI_MB_DMG_DEBUFF, 0) -- Consume the "Effect" upon magic burst.
     end
@@ -1113,7 +1103,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local elementalAffinityBonus      = xi.spells.damage.calculateElementalAffinityBonus(caster, spellElement)
     local resistTier                  = notAbsorb and xi.combat.magicHitRate.calculateResistRate(caster, target, spellGroup, skillType, 0, spellElement, statUsed, 0, bonusMacc) or 1
     local additionalResistTier        = notAbsorb and xi.spells.damage.calculateAdditionalResistTier(caster, target, spellElement) or 1
-    local magicBurst                  = canMBurst and xi.spells.damage.calculateIfMagicBurst(target, spellElement, magicBurstTier) or 1
+    local magicBurst                  = canMBurst and xi.spells.damage.calculateIfMagicBurst(caster, target, spellElement, magicBurstTier) or 1
     local magicBurstBonus             = canMBurst and xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spellId, skillType, spellElement) or 1
     local dayAndWeather               = xi.spells.damage.calculateDayAndWeather(caster, spellElement, forceDayWeather)
     local magicBonusDiff              = xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement, 0)

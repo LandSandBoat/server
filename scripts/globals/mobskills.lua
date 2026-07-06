@@ -58,56 +58,6 @@ xi.mobskills.magicalTpBonus =
     DMG_BONUS  = 3, -- Damage formula incorrect
 }
 
-local burstMultipliersByTier =
-{
-    [0] = 1.0,
-    [1] = 1.3,
-    [2] = 1.35,
-    [3] = 1.40,
-    [4] = 1.45,
-    [5] = 1.5,
-}
-
----@params target CBaseEntity
----@params actionElement xi.element
----@params skillChainCount integer
----@return number
-local function calculateMobMagicBurst(target, actionElement, skillchainCount)
-    local burstMultiplier = 1.0
-
-    if actionElement > xi.element.NONE then
-        local resistRank = target:getMod(xi.data.element.getElementalResistanceRankModifier(actionElement))
-        local rankTable  = { 1.15, 0.85, 0.6, 0.5, 0.4, 0.15, 0.05 } -- TODO: Confirm resist rank tier scaling.
-        local rankBonus  = 0
-
-        if resistRank <= -3 then
-            rankBonus = 1.5
-        elseif resistRank >= 5 then
-            rankBonus = 0
-        else
-            rankBonus = rankTable[resistRank + 3]
-        end
-
-        -- https://w.atwiki.jp/bartlett3/pages/329.html
-        -- This page has a bullet point on pet magic bursts where avatar magic damage is discussed.
-        if skillchainCount >= 1 then
-            burstMultiplier = burstMultipliersByTier[skillchainCount] + rankBonus
-        end
-    end
-
-    -- TODO: Do pets gain bonus from Sengikori?
-    -- Sengikori appears to add to base mb multiplier per JP wiki https://wiki.ffo.jp/html/20051.html
-    -- if
-    --     skillchainCount >= 1 and
-    --     target:getMod(xi.mod.SENGIKORI_MB_DMG_DEBUFF) > 0
-    -- then
-    --     burstMultiplier = burstMultiplier + target:getMod(xi.mod.SENGIKORI_MB_DMG_DEBUFF) / 100
-    --     target:setMod(xi.mod.SENGIKORI_MB_DMG_DEBUFF, 0) -- Consume the "Effect" upon magic burst.
-    -- end
-
-    return burstMultiplier
-end
-
 -- LLS definitions for normalizePhysicalSkillParams()
 --- @class physicalSkillParams
 --- @field baseDamage          number|nil
@@ -1230,7 +1180,7 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, action, skillParams)
 
             if skillchainCount > 0 then
                 -- TODO: Glyphic Bracers magic burst modifiers. https://www.bg-wiki.com/ffxi/Glyphic_Bracers
-                magicBurst      = calculateMobMagicBurst(target, actionElement, skillchainCount)
+                magicBurst      = xi.spells.damage.calculateIfMagicBurst(mob, target, actionElement, skillchainCount)
                 magicBurstBonus = xi.spells.damage.calculateIfMagicBurstBonus(mob, target, 0, 0, actionElement)
 
                 -- TODO: petskills currently seem to be searching for a mobskillID rather than the petskill ID which causes the magic burst to display the wrong message. Use JA_MAGIC_BURST for now.
@@ -1421,7 +1371,7 @@ xi.mobskills.mobBreathMove = function(mob, target, skill, action, skillParams)
                     mAccuracyBonus = mAccuracyBonus + 25 -- TODO: This is based off a previous function. Would eventually like to get a capture for this.
 
                     -- TODO: Do jug pet breaths gain damage or only an accuracy bonus?
-                    -- magicBurst      = calculateMobMagicBurst(target, actionElement, skillchainCount)
+                    -- magicBurst      = xi.spells.damage.calculateIfMagicBurst(mob, target, actionElement, skillchainCount)
                     -- magicBurstBonus = xi.spells.damage.calculateIfMagicBurstBonus(mob, target, 0, 0, actionElement)
 
                     skill:setMsg(xi.msg.basic.PET_MAGIC_BURST)

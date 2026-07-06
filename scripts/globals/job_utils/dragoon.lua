@@ -708,7 +708,7 @@ xi.job_utils.dragoon.useDamageBreath = function(wyvern, target, skill, action, d
     local magicBurst          = 1
 
     if skillchainCount > 0 then
-        magicBurst = xi.spells.damage.calculateIfMagicBurst(target, element, skillchainCount)
+        magicBurst = xi.spells.damage.calculateIfMagicBurst(wyvern, target, element, skillchainCount)
     end
 
     -- It appears that MB breaths don't do more damage based on testing.

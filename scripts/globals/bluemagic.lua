@@ -423,7 +423,7 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
         caster:hasStatusEffect(xi.effect.AZURE_LORE)
     then
         if skillchainCount > 0 then
-            finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurst(target, spellElement, skillchainCount))
+            finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurst(caster, target, spellElement, skillchainCount))
             finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spellId, skillType, spellElement))
 
             spell:setMsg(spell:getMagicBurstMessage()) -- "Magic Burst!"
@@ -480,7 +480,7 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap
         caster:hasStatusEffect(xi.effect.AZURE_LORE)
     then
         if skillchainCount > 0 then
-            finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurst(target, spellElement, skillchainCount))
+            finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurst(caster, target, spellElement, skillchainCount))
             finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spellId, skillType, spellElement))
 
             spell:setMsg(spell:getMagicBurstMessage()) -- "Magic Burst!"
