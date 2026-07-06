@@ -62,7 +62,6 @@
 #include <mutex>
 #include <numeric>
 #include <optional>
-#include <queue>
 #include <ranges>
 #include <regex>
 #include <set>
@@ -90,6 +89,7 @@
 #include <fmt/core.h>
 #include <fmt/format.h>
 #include <fmt/printf.h>
+#include <fmt/ranges.h>
 
 #include <spdlog/common.h>
 #include <spdlog/spdlog.h>

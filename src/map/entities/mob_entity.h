@@ -24,14 +24,14 @@
 
 #include "battle_entity.h"
 
+#include <common/types/hash_map.h>
 #include <common/types/maybe.h>
 
 #include "data/enums/claim_type.h"
 #include "data/enums/mob_type.h"
 
-#include <unordered_map>
-
 enum class MsgBasic : uint16_t;
+
 // forward declaration
 class CMobSpellContainer;
 class CMobSpellList;
@@ -279,12 +279,12 @@ protected:
     void DropItems(CCharEntity* PChar);
 
 private:
-    timer::time_point              m_DespawnTimer{ timer::time_point::min() }; // Despawn Timer to despawn mob after set duration
-    std::unordered_map<int, int16> m_mobModStat;
-    std::unordered_map<int, int16> m_mobModStatSave;
-    static constexpr float         roam_home_distance{ 60.f };
-    SpawnSlot*                     spawnSlot = nullptr;
-    Maybe<SpawnWindow>             spawnWindow_;
+    timer::time_point      m_DespawnTimer{ timer::time_point::min() }; // Despawn Timer to despawn mob after set duration
+    HashMap<int, int16>    m_mobModStat;
+    HashMap<int, int16>    m_mobModStatSave;
+    static constexpr float roam_home_distance{ 60.f };
+    SpawnSlot*             spawnSlot = nullptr;
+    Maybe<SpawnWindow>     spawnWindow_;
 };
 
 #endif

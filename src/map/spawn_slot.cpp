@@ -16,8 +16,6 @@
 
 #include "spawn_slot.h"
 
-#include <ranges>
-
 #include "entities/mob_entity.h"
 #include "spawn_handler.h"
 #include "zone.h"

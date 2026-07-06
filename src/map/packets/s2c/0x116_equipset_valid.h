@@ -24,7 +24,6 @@
 #include "base.h"
 #include "packets/c2s/0x052_equipset_check.h"
 
-struct GP_CLI_COMMAND_EQUIPSET_CHECK;
 class CCharEntity;
 
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x0116

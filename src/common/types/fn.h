@@ -21,20 +21,40 @@
 
 #pragma once
 
-#include <functional>
+#include <function2/function2.hpp>
 
-namespace xi
-{
+// namespace xi
+// {
 
 //
 // Fn<Signature>
 //
-// An alias for std::function for brevity.
+// A move-only callable wrapper (fu2::unique_function), standing in for
+// std::move_only_function until libc++ (macOS) implements it.
 //
-// TODO: Once we have C++23, we want to use std::move_only_function.
+// Unlike std::function:
+//   - Not copyable, so it can hold move-only captures (e.g. a unique_ptr).
+//   - The signature carries qualifiers: to invoke through a const Fn&, the
+//     signature must be const-qualified (e.g. Fn<void(int) const>).
+//   - Invoking an empty Fn throws/traps instead of throwing std::bad_function_call.
 //
 
 template <typename Signature>
-using Fn = std::function<Signature>;
+using Fn = fu2::unique_function<Signature>;
 
-} // namespace xi
+//
+// FnRef<Signature>
+//
+// A non-owning callable view (fu2::function_view), standing in for C++26's
+// std::function_ref. Use it for callback parameters that are only invoked
+// during the call (ForEach-style iterators): unlike Fn/std::function it never
+// copies or allocates, it just points at the caller's callable.
+//
+// Pass it by value (like a string_view), and never store one beyond the call
+// - it dangles as soon as the referenced callable goes out of scope.
+//
+
+template <typename Signature>
+using FnRef = fu2::function_view<Signature>;
+
+// } // namespace xi

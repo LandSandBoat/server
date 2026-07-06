@@ -21,11 +21,7 @@
 
 #include "mobskill.h"
 
-#include "entities/mob_entity.h"
-#include "enums/action/animation.h"
 #include "enums/action/knockback.h"
-
-#include <cstring>
 
 CMobSkill::CMobSkill(uint16 id)
 : m_ID(id)

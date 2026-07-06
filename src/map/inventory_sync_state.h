@@ -26,7 +26,6 @@
 #include "item_container.h"
 
 #include <set>
-#include <vector>
 
 enum SLOTTYPE : uint8;
 class CItem;

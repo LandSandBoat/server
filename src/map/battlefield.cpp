@@ -21,6 +21,8 @@
 
 #include "battlefield.h"
 
+#include <algorithm>
+
 #include "common/settings.h"
 #include "common/timer.h"
 
@@ -38,14 +40,12 @@
 
 #include "lua/luautils.h"
 
-#include "packets/entity_update.h"
 #include "packets/s2c/0x038_schedulor.h"
 
 #include "status_effect_container.h"
 
 #include "enums/four_cc.h"
 #include "utils/charutils.h"
-#include "utils/itemutils.h"
 #include "utils/petutils.h"
 #include "utils/zoneutils.h"
 #include "zone.h"
@@ -640,9 +640,9 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
 
             if (auto* PNpcEntity = dynamic_cast<CNpcEntity*>(PEntity))
             {
-                if (std::find(m_NpcList.begin(), m_NpcList.end(), PNpcEntity) != m_NpcList.end())
+                if (std::ranges::contains(m_NpcList, PNpcEntity))
                 {
-                    m_NpcList.erase(std::remove_if(m_NpcList.begin(), m_NpcList.end(), check), m_NpcList.end());
+                    std::erase_if(m_NpcList, check);
                 }
             }
         }
@@ -661,7 +661,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
 
                 if (auto* PMobEntity = dynamic_cast<CMobEntity*>(PEntity))
                 {
-                    if (std::find(m_AllyList.begin(), m_AllyList.end(), PMobEntity) != m_AllyList.end())
+                    if (std::ranges::contains(m_AllyList, PMobEntity))
                     {
                         // We should not put an isAlive check here because some ally can be dead at cleanup
                         // but not despawned (for example Prishe in Dawn fight)
@@ -671,7 +671,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
                             PEntity->loc.zone->UpdateEntityPacket(PEntity, ENTITY_DESPAWN, UPDATE_NONE);
                         }
 
-                        m_AllyList.erase(std::remove_if(m_AllyList.begin(), m_AllyList.end(), check), m_AllyList.end());
+                        std::erase_if(m_AllyList, check);
                     }
                 }
             }
@@ -899,7 +899,7 @@ bool CBattlefield::CheckInProgress()
     return m_Status != BATTLEFIELD_STATUS_OPEN;
 }
 
-void CBattlefield::ForEachPlayer(const std::function<void(CCharEntity*)>& func)
+void CBattlefield::ForEachPlayer(FnRef<void(CCharEntity*)> func)
 {
     for (auto player : m_EnteredPlayers)
     {
@@ -907,13 +907,13 @@ void CBattlefield::ForEachPlayer(const std::function<void(CCharEntity*)>& func)
     }
 }
 
-void CBattlefield::ForEachEnemy(const std::function<void(CMobEntity*)>& func)
+void CBattlefield::ForEachEnemy(FnRef<void(CMobEntity*)> func)
 {
     ForEachRequiredEnemy(func);
     ForEachAdditionalEnemy(func);
 }
 
-void CBattlefield::ForEachRequiredEnemy(const std::function<void(CMobEntity*)>& func)
+void CBattlefield::ForEachRequiredEnemy(FnRef<void(CMobEntity*)> func)
 {
     for (auto mob : m_RequiredEnemyList)
     {
@@ -921,7 +921,7 @@ void CBattlefield::ForEachRequiredEnemy(const std::function<void(CMobEntity*)>& 
     }
 }
 
-void CBattlefield::ForEachAdditionalEnemy(const std::function<void(CMobEntity*)>& func)
+void CBattlefield::ForEachAdditionalEnemy(FnRef<void(CMobEntity*)> func)
 {
     for (auto mob : m_AdditionalEnemyList)
     {
@@ -929,7 +929,7 @@ void CBattlefield::ForEachAdditionalEnemy(const std::function<void(CMobEntity*)>
     }
 }
 
-void CBattlefield::ForEachNpc(const std::function<void(CNpcEntity*)>& func)
+void CBattlefield::ForEachNpc(FnRef<void(CNpcEntity*)> func)
 {
     for (auto* npc : m_NpcList)
     {
@@ -937,7 +937,7 @@ void CBattlefield::ForEachNpc(const std::function<void(CNpcEntity*)>& func)
     }
 }
 
-void CBattlefield::ForEachAlly(const std::function<void(CMobEntity*)>& func)
+void CBattlefield::ForEachAlly(FnRef<void(CMobEntity*)> func)
 {
     for (auto* ally : m_AllyList)
     {

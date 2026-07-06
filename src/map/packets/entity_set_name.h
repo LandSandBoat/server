@@ -22,8 +22,6 @@
 #ifndef _CENTITYSETNAMEPACKET_H
 #define _CENTITYSETNAMEPACKET_H
 
-#include "common/cbasetypes.h"
-
 #include "basic.h"
 
 class CBaseEntity;

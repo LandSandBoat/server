@@ -22,8 +22,6 @@
 #include "targetfind.h"
 
 #include "ai/ai_container.h"
-#include "ai/states/inactive_state.h"
-#include "alliance.h"
 #include "common/mmo.h"
 #include "common/utils.h"
 #include "enmity_container.h"

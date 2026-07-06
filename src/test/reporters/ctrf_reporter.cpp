@@ -20,10 +20,13 @@
 */
 
 #include "ctrf_reporter.h"
+
 #include "common/logging.h"
 #include "common/version.h"
+#include "ctrf_types.h"
 #include "enums/test_status.h"
 #include "test_suite.h"
+#include <nlohmann/json.hpp>
 
 #include <chrono>
 #include <fstream>

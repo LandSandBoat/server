@@ -50,9 +50,9 @@ end
 --  - ancientBoxPos:    (optional) { x, y, z, rot } position of the Ancient Lockbox NPC on completion
 --  - requiredProgress: (optional) Progress value at which the instance auto-completes
 --  - basePoints:       (optional) Base assault points before bonuses and penalties
---  - mobs:             (optional) { { baseID = id, offset = n } } — spawns mobs from baseID to baseID+offset
+--  - mobs:             (optional) { { baseID = id, offset = n } } - spawns mobs from baseID to baseID+offset
 --  - npcs:             (optional) Same format as mobs; sets animation to NORMAL on instance creation
---  - wallNPCs:         (optional) { npcID, ... } — NPCs set to OPEN_DOOR animation on instance creation
+--  - wallNPCs:         (optional) { npcID, ... } - NPCs set to OPEN_DOOR animation on instance creation
 --  - loot:             (optional) Ancient Lockbox reward table. Omit to use the zone's Ancient_Lockbox.lua.
 --      - loot.appraisalReward = { { { itemId, weight }, ... } }       group for unappraised gear
 --      - loot.bonusLoot       = { { { itemId, weight }, ... }, ... }  one or more groups for consumables

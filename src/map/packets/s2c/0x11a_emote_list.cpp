@@ -21,7 +21,6 @@
 
 #include "0x11a_emote_list.h"
 
-#include "entities/char_entity.h"
 #include "enums/key_items.h"
 #include "utils/charutils.h"
 

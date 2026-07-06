@@ -21,8 +21,7 @@
 
 #pragma once
 
-#include "common/cbasetypes.h"
-#include "luautils.h"
+#include <iosfwd>
 
 class CAttack;
 

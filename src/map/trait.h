@@ -24,7 +24,6 @@
 #include "common/cbasetypes.h"
 
 #include "modifier.h"
-#include <vector>
 
 enum TRAITTYPE
 {

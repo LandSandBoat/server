@@ -22,7 +22,6 @@
 #include "arguments.h"
 
 #include "application.h"
-#include "logging.h"
 #include "version.h"
 
 Arguments::Arguments(const ApplicationConfig& config, const int argc, char** argv)

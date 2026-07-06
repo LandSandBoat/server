@@ -25,7 +25,6 @@
 #include <set>
 
 class CBattleEntity;
-class CMobEntity;
 
 // If enmity is a one-to-many list held by monsters,
 // notoriety is the many-to-one opposite list held by players (or other targets of enmity)

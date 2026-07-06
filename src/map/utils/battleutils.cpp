@@ -21,16 +21,16 @@
 
 #include "battleutils.h"
 
-#include "common/database.h"
 #include "common/logging.h"
 #include "common/settings.h"
 #include "common/timer.h"
 #include "common/utils.h"
 
+#include <common/types/hash_map.h>
+
 #include <algorithm>
 #include <array>
 #include <cstring>
-#include <unordered_map>
 
 #include "packets/char_status.h"
 #include "packets/s2c/0x01d_item_same.h"
@@ -50,16 +50,12 @@
 #include "entities/mob_entity.h"
 #include "entities/pet_entity.h"
 #include "entities/trust_entity.h"
-#include "enums/action/hit_distortion.h"
-#include "enums/action/info.h"
 #include "enums/msg_std.h"
 #include "enums/weather.h"
 #include "item_container.h"
 #include "items.h"
 #include "items/item_weapon.h"
 #include "job_points.h"
-#include "map/navmesh/navmesh.h"
-#include "map_engine.h"
 #include "mob_modifier.h"
 #include "mobskill.h"
 #include "modifier.h"
@@ -80,8 +76,6 @@
 #include "weapon_skill.h"
 #include "zoneutils.h"
 
-#include <map/ximesh/ximesh.h>
-
 /************************************************************************
  *                                                                       *
  *  Lists used in battleutils                                            *
@@ -94,10 +88,10 @@ std::array<std::array<uint16, MAX_SKILLCHAIN_COUNT + 1>, MAX_SKILLCHAIN_LEVEL + 
 
 std::array<CWeaponSkill*, MAX_WEAPONSKILL_ID> g_PWeaponSkillList; // Holds all Weapon skills
 std::array<CMobSkill*, MAX_MOBSKILL_ID>       g_PMobSkillList;    // List of mob skills
-std::unordered_map<uint32, CPetSkill*>        g_PPetSkillList;    // List of pet skills
+HashMap<uint32, CPetSkill*>                   g_PPetSkillList;    // List of pet skills
 
 std::array<std::list<CWeaponSkill*>, MAX_SKILLTYPE> g_PWeaponSkillsList;
-std::unordered_map<uint16, std::vector<uint16>>     g_PMobSkillLists; // List of mob skills defined from mob_skill_lists.sql
+HashMap<uint16, std::vector<uint16>>                g_PMobSkillLists; // List of mob skills defined from mob_skill_lists.sql
 
 namespace battleutils
 {
@@ -3472,7 +3466,7 @@ auto GetSkillChainEffect(const CBattleEntity* PDefender, uint8 primary, uint8 se
 
 std::vector<ELEMENT> GetSkillchainMagicElement(SKILLCHAIN_ELEMENT skillchain)
 {
-    static const std::unordered_map<SKILLCHAIN_ELEMENT, std::vector<ELEMENT>> resonanceToElement = {
+    static const HashMap<SKILLCHAIN_ELEMENT, std::vector<ELEMENT>> resonanceToElement = {
         { SC_NONE, {} },
         { SC_TRANSFIXION, { ELEMENT_LIGHT } },
         { SC_COMPRESSION, { ELEMENT_DARK } },
@@ -3499,7 +3493,7 @@ std::vector<ELEMENT> GetSkillchainMagicElement(SKILLCHAIN_ELEMENT skillchain)
 
 Mod GetResistanceRankModFromElement(ELEMENT& element)
 {
-    static const std::unordered_map<ELEMENT, Mod> elementToMod = {
+    static const HashMap<ELEMENT, Mod> elementToMod = {
         { ELEMENT_FIRE, Mod::FIRE_RES_RANK },
         { ELEMENT_WATER, Mod::WATER_RES_RANK },
         { ELEMENT_WIND, Mod::WIND_RES_RANK },

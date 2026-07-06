@@ -21,8 +21,6 @@
 
 #include "item_usable.h"
 
-#include "common/vana_time.h"
-#include "enums/action/animation.h"
 #include "exdata/timer_info.h"
 
 CItemUsable::CItemUsable(uint16 id)

@@ -25,12 +25,11 @@
 #include <common/database/connection.h>
 #include <common/database/database.h>
 #include <common/database/prepared_statement.h>
-#include <common/database/result_set.h>
+
+#include <common/types/hash_map.h>
 
 #include <memory>
 #include <string>
-#include <unordered_map>
-#include <vector>
 
 namespace db
 {
@@ -41,8 +40,8 @@ namespace detail
 // Per-(thread, backend) connection state: the live connection plus its prepared-statement cache.
 struct ConnectionState
 {
-    std::unique_ptr<Connection>                                         connection;
-    std::unordered_map<std::string, std::unique_ptr<PreparedStatement>> statements;
+    std::unique_ptr<Connection>                              connection;
+    HashMap<std::string, std::unique_ptr<PreparedStatement>> statements;
 };
 
 } // namespace detail

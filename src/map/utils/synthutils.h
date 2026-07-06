@@ -21,8 +21,6 @@
 
 #pragma once
 
-#include <common/cbasetypes.h>
-
 /************************************************************************
  *                                                                       *
  *  Methods required for the synthesis to work                           *

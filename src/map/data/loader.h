@@ -23,6 +23,8 @@
 
 #include "common/logging.h"
 
+#include <common/types/hash_map.h>
+
 #include "data/all.h" // Automatically generated manifest with every struct/populators
 #include "data/backends/yaml.h"
 #include "utils/moduleutils.h"
@@ -30,7 +32,6 @@
 #include <chrono>
 #include <fmt/format.h>
 #include <string_view>
-#include <unordered_map>
 
 namespace xi::data
 {
@@ -38,7 +39,7 @@ namespace xi::data
 // Load `data/<path><B::kExtension>` dataset.
 // Enabled modules with matching filenames get loaded and deep merged into the dataset
 template <class T, NodeBackend B>
-auto loadDataSet(std::string_view dataPath) -> std::unordered_map<decltype(T::Id), T>
+auto loadDataSet(std::string_view dataPath) -> HashMap<decltype(T::Id), T>
 {
     const auto start    = std::chrono::steady_clock::now();
     const auto corePath = fmt::format("data/{}{}", dataPath, B::kExtension);

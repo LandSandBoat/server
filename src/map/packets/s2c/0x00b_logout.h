@@ -24,8 +24,6 @@
 #include "base.h"
 #include "common/ipp.h"
 
-class CCharEntity;
-
 // PS2: GP_GAME_LOGOUT_STATE
 enum class GP_GAME_LOGOUT_STATE : uint8_t
 {

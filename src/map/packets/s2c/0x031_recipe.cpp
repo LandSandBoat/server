@@ -21,6 +21,8 @@
 
 #include "0x031_recipe.h"
 
+#include <map>
+
 namespace
 {
 

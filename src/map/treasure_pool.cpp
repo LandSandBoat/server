@@ -27,7 +27,6 @@
 #include "packets/s2c/0x0d3_trophy_solution.h"
 
 #include "item_container.h"
-#include "recast_container.h"
 #include "treasure_pool.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"

@@ -30,7 +30,6 @@
 #include <memory>
 #include <string>
 #include <thread>
-#include <vector>
 
 #include <concurrentqueue.h>
 #include <zmq.hpp>

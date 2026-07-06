@@ -26,7 +26,6 @@
 #include "common/utils.h"
 #include "entities/char_entity.h"
 #include "enums/msg_std.h"
-#include "map/navmesh/navmesh.h"
 #include "packets/s2c/0x053_systemmes.h"
 #include "packets/s2c/0x065_wpos2.h"
 #include "utils/charutils.h"

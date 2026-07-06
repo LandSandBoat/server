@@ -21,10 +21,11 @@
 
 #include "ipc_client.h"
 
+#include "common/logging_context.h"
+
 #include "common/ipp.h"
 
 #include <concurrentqueue.h>
-#include <queue>
 
 #include "alliance.h"
 #include "aman.h"

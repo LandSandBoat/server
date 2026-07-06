@@ -23,7 +23,6 @@
 #define _CWEAPONSKILL_H
 
 #include "common/cbasetypes.h"
-#include "common/mmo.h"
 
 #include "entities/battle_entity.h"
 #include "enums/action/animation.h"

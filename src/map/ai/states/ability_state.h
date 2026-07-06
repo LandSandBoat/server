@@ -25,8 +25,6 @@
 #include "ability.h"
 #include "state.h"
 
-class CCharEntity;
-
 class CAbilityState : public CState
 {
 public:

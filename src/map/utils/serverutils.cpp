@@ -21,21 +21,24 @@
 ===========================================================================
 */
 
+#include "common/database.h"
+
+#include "common/earth_time.h"
+
+#include <common/types/hash_map.h>
+
 #include <chrono>
 #include <iostream>
 #include <time.h>
-#include <unordered_map>
 #include <unordered_set>
 
 #include "utils/serverutils.h"
 
-#include "common/database.h"
-
 namespace serverutils
 {
 
-std::unordered_map<std::string, std::pair<int32, uint32>> serverVarCache;
-std::unordered_set<std::string>                           serverVarChanges;
+HashMap<std::string, std::pair<int32, uint32>> serverVarCache;
+std::unordered_set<std::string>                serverVarChanges;
 
 uint32 GetServerVar(const std::string& name)
 {

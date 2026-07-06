@@ -28,7 +28,6 @@
 #include <algorithm>
 #include <cctype>
 #include <charconv>
-#include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <regex>
@@ -797,7 +796,7 @@ bool matches(const std::string& target, const std::string& pattern)
 
 bool starts_with(const std::string& target, const std::string& pattern)
 {
-    return target.rfind(pattern, 0) != std::string::npos;
+    return target.starts_with(pattern);
 }
 
 std::string replace(const std::string& target, const std::string& search, const std::string& replace)

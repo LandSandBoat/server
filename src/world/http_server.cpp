@@ -144,8 +144,8 @@ HTTPServer::HTTPServer(Scheduler& scheduler)
                                 }
                             }
 
-                            std::visit(
-                                xi::overload{
+                            variant.visit(
+                                overload{
                                     [&](const bool& arg)
                                     {
                                         j[key] = arg;
@@ -159,8 +159,7 @@ HTTPServer::HTTPServer(Scheduler& scheduler)
                                         // JSON can't handle non-ASCII characters, so strip them out
                                         j[key] = utils::toASCII(arg, '?');
                                     },
-                                },
-                                variant);
+                                });
                         });
 
                     res.set_content(j.dump(), "application/json");

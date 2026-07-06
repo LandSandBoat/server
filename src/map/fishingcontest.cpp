@@ -23,13 +23,9 @@
 
 #include <algorithm>
 #include <cstring>
-#include <time.h>
 
-#include "common/vana_time.h"
 #include "lua/luautils.h"
 #include "utils/charutils.h"
-#include "utils/itemutils.h"
-#include "utils/zoneutils.h"
 
 namespace
 {

@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+
 #include "common/database.h"
 #include "common/logging.h"
 #include "common/mmo.h"
@@ -29,6 +30,9 @@
 #include "common/synchronized.h"
 #include "common/timer.h"
 #include "common/xirand.h"
+#include <fmt/ranges.h>
+
+#include <common/types/hash_map.h>
 
 // Ahead of <math.h> (not <cmath>)
 #ifndef _USE_MATH_DEFINES
@@ -213,7 +217,7 @@ auto getRandomSampleString(T min, T max) -> std::string
 } // namespace utils
 
 // clang-format off
-static Synchronized<std::unordered_map<std::string, timer::time_point>> lastExecutionTimes;
+static Synchronized<HashMap<std::string, timer::time_point>> lastExecutionTimes;
 #define RATE_LIMIT(duration, code)                                                    \
 {                                                                                     \
     const auto currentTime = timer::now();                                            \

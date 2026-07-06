@@ -21,7 +21,6 @@
 
 #pragma once
 
-#include "lua.hpp"
 #include <sol/sol.hpp>
 
 extern sol::state lua;

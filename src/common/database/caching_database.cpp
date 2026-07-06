@@ -29,10 +29,11 @@
 #include <common/tracy.h>
 #include <common/xi.h>
 
+#include <common/types/fn.h>
+#include <common/types/hash_map.h>
+
 #include <chrono>
-#include <functional>
 #include <thread>
-#include <unordered_map>
 using namespace std::chrono_literals;
 
 namespace
@@ -40,15 +41,15 @@ namespace
 
 // Per-(thread, backend instance) connection state. thread_local keeps each worker thread on its own
 // connection; keying by the backend pointer lets multiple backends coexist in one process.
-thread_local std::unordered_map<const db::CachingDatabase*, db::detail::ConnectionState> tlsStates;
+thread_local HashMap<const db::CachingDatabase*, db::detail::ConnectionState> tlsStates;
 
 bool timersEnabled = false;
 
 // Emit a slow-query log line on scope exit if the query exceeded the configured thresholds.
-auto makeQueryTimer(const std::string& query) -> xi::final_action<std::function<void()>>
+auto makeQueryTimer(const std::string& query) -> xi::final_action<Fn<void()>>
 {
     const auto start = timer::now();
-    return xi::finally<std::function<void()>>(
+    return xi::finally<Fn<void()>>(
         [query, start]() -> void
         {
             if (!timersEnabled || !settings::get<bool>("logging.SQL_SLOW_QUERY_LOG_ENABLE"))

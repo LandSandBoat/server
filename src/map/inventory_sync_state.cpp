@@ -21,7 +21,6 @@
 
 #include "inventory_sync_state.h"
 
-#include "common/database.h"
 #include "entities/char_entity.h"
 #include "items/item.h"
 #include "packets/s2c/0x020_item_attr.h"

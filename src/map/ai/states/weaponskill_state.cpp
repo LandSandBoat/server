@@ -21,6 +21,8 @@
 
 #include "weaponskill_state.h"
 
+#include "enums/four_cc.h"
+
 #include "action/action.h"
 #include "ai/ai_container.h"
 #include "entities/battle_entity.h"

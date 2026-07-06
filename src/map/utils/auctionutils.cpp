@@ -21,7 +21,6 @@
 
 #include "auctionutils.h"
 
-#include "common/database.h"
 #include "common/logging.h"
 #include "common/settings.h"
 #include "common/timer.h"
@@ -35,7 +34,6 @@
 
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
-#include "utils/zoneutils.h"
 
 namespace
 {

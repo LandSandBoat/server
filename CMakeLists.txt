@@ -4,13 +4,32 @@ cmake_minimum_required(VERSION 3.25)
 cmake_policy(SET CMP0141 NEW)
 set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT Embedded)
 
+# On macOS, pin the deployment target to the host OS version (must happen before
+# project()). Without this, some compilers infer it from the Darwin kernel version
+# using the pre-macOS-26 numbering scheme (e.g. Homebrew LLVM 20 maps Darwin 25 to
+# "macOS 16.0" instead of 26), and every link against a Homebrew dylib stamped with
+# the real version warns:
+#   ld: warning: building for macOS-16.0, but linking with dylib built for newer version 26.0
+# Overridable as usual via -DCMAKE_OSX_DEPLOYMENT_TARGET or MACOSX_DEPLOYMENT_TARGET.
+if(CMAKE_HOST_APPLE AND "${CMAKE_OSX_DEPLOYMENT_TARGET}" STREQUAL "" AND "$ENV{MACOSX_DEPLOYMENT_TARGET}" STREQUAL "")
+    execute_process(
+        COMMAND sw_vers -productVersion
+        OUTPUT_VARIABLE host_macos_version
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+    string(REGEX MATCH "^[0-9]+" host_macos_major "${host_macos_version}")
+    if(host_macos_major)
+        set(CMAKE_OSX_DEPLOYMENT_TARGET "${host_macos_major}.0")
+    endif()
+endif()
+
 project(server C CXX)
 
 # https://cmake.org/cmake/help/latest/policy/CMP0069.html
 cmake_policy(SET CMP0069 NEW)
 set(CMAKE_POLICY_DEFAULT_CMP0069 NEW)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(LINKER_LANGUAGE CXX)
@@ -119,7 +138,7 @@ endif()
 
 # Link this 'library' to set the c++ standard / compile-time options requested
 add_library(project_options INTERFACE)
-target_compile_features(project_options INTERFACE cxx_std_20)
+target_compile_features(project_options INTERFACE cxx_std_23)
 
 # Link this 'library' to use the warnings specified in CompilerWarnings.cmake
 add_library(project_warnings INTERFACE)

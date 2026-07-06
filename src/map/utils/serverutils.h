@@ -25,7 +25,6 @@
 #define _SERVERUTILS_H
 
 #include "common/cbasetypes.h"
-#include "common/mmo.h"
 
 namespace serverutils
 {

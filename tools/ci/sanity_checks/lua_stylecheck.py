@@ -691,7 +691,7 @@ elif target == "test":
     total_errors = LuaStyleCheck(
         "tools/ci/sanity_checks/lua_stylecheck.lua", show_errors=False
     ).errcount
-    expected_errors = 93
+    expected_errors = 96
 else:
     total_errors = LuaStyleCheck(target).errcount
 

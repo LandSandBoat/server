@@ -21,9 +21,7 @@
 
 #include "conquest_system.h"
 
-#include "common/mmo.h"
 #include "common/vana_time.h"
-#include "common/xi.h"
 
 #include "entities/char_entity.h"
 #include "ipc_client.h"

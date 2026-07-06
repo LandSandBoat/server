@@ -23,9 +23,6 @@
 #define _CLINKSHELL_H
 
 #include "common/cbasetypes.h"
-#include "common/mmo.h"
-
-#include <vector>
 
 enum class GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL : uint8_t;
 class CBasicPacket;

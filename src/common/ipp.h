@@ -24,7 +24,6 @@
 #include "cbasetypes.h"
 
 #include <zmq.hpp>
-#include <zmq_addon.hpp>
 
 #ifdef _WIN32
 #include <io.h>
@@ -45,10 +44,7 @@
 #include <unistd.h>
 #endif
 
-#include <array>
 #include <cstdio>
-#include <cstdlib>
-#include <cstring>
 #include <memory>
 #include <string>
 #include <type_traits>

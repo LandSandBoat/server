@@ -22,11 +22,8 @@
 #include "0x04b_fragments.h"
 
 #include "entities/char_entity.h"
-#include "enums/chat_message_type.h"
 #include "fishingcontest.h"
 #include "lua/luautils.h"
-#include "packets/char_sync.h"
-#include "packets/s2c/0x017_chat_std.h"
 #include "packets/s2c/0x04d_fragments_fishranking.h"
 #include "packets/s2c/0x04d_fragments_servmes.h"
 

@@ -24,10 +24,8 @@
 
 #include "campaign_handler.h"
 #include "common/cbasetypes.h"
-#include <vector>
 
 class CCharEntity;
-class CZoneCampaign;
 
 namespace campaign
 {

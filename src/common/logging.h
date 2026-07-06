@@ -21,20 +21,13 @@
 
 #pragma once
 
-#include <common/cbasetypes.h>
-#include <common/logging_context.h>
-#include <common/macros.h>
 #include <common/tracy.h>
 
 #include <string>
 #include <string_view>
 
-#include <fmt/args.h>
-#include <fmt/chrono.h>
-#include <fmt/core.h>
 #include <fmt/format.h>
 #include <fmt/printf.h>
-#include <fmt/ranges.h>
 
 #include <spdlog/spdlog.h>
 
@@ -128,7 +121,7 @@ std::string asStringFromUntrustedSource(const T* ptr, size_t max_size)
 #define DECLARE_FORMAT_AS_UNDERLYING(type) \
 inline auto format_as(type v) \
 { \
-    return fmt::underlying(v); \
+    return std::to_underlying(v); \
 }
 
 #define STATEMENT_CLOSE \

@@ -30,9 +30,7 @@
 
 #include <filesystem>
 #include <string>
-#include <vector>
 
-struct FilterConfig;
 class ReporterContainer;
 
 class TestCollector

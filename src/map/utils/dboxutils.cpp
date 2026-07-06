@@ -21,17 +21,14 @@
 
 #include "dboxutils.h"
 
-#include "common/database.h"
 #include "common/logging.h"
 #include "common/macros.h"
 #include "common/settings.h"
-#include "common/tracy.h"
 
 #include "entities/char_entity.h"
 
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
-#include "utils/zoneutils.h"
 
 #include "packets/c2s/0x04d_pbx.h"
 #include "packets/s2c/0x01d_item_same.h"

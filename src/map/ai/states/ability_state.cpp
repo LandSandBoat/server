@@ -23,7 +23,6 @@
 
 #include "ability.h"
 #include "action/action.h"
-#include "action/interrupts.h"
 #include "ai/ai_container.h"
 #include "common/utils.h"
 #include "enmity_container.h"

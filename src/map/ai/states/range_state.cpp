@@ -21,6 +21,8 @@
 
 #include "range_state.h"
 
+#include "enums/four_cc.h"
+
 #include "action/action.h"
 #include "action/interrupts.h"
 #include "ai/ai_container.h"

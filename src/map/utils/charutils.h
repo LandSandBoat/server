@@ -26,8 +26,6 @@
 #include <memory>
 
 #include "entities/char_entity.h"
-#include "items/item_equipment.h"
-#include "zone.h"
 
 using Recalculate = xi::Flag<struct RecalculateTag>;
 
@@ -37,7 +35,6 @@ enum class QuestLog : uint8_t;
 enum class KeyItem : uint16_t;
 class CPetEntity;
 class CMobEntity;
-class CMeritPoints;
 class CAbility;
 class CItemWeapon;
 

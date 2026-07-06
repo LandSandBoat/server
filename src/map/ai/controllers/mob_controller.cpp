@@ -28,7 +28,6 @@
 #include "ai/states/inactive_state.h"
 #include "ai/states/magic_state.h"
 #include "ai/states/weaponskill_state.h"
-#include "battlefield.h"
 #include "common/utils.h"
 #include "enmity_container.h"
 #include "entities/mob_entity.h"

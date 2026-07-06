@@ -23,11 +23,11 @@
 #define _CENMITYCONTAINER_H
 
 #include "common/cbasetypes.h"
-#include <unordered_map>
+
+#include "common/types/flat_hash_map.h"
 
 class CBattleEntity;
 class CMobEntity;
-class CCharEntity;
 
 struct EnmityObject_t
 {
@@ -37,7 +37,7 @@ struct EnmityObject_t
     bool           active;
 };
 
-typedef std::unordered_map<uint32, EnmityObject_t> EnmityList_t;
+typedef FlatHashMap<uint32, EnmityObject_t> EnmityList_t;
 
 class CEnmityContainer
 {

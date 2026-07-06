@@ -21,7 +21,6 @@
 
 #include "jailutils.h"
 
-#include "conquest_system.h"
 #include "entities/char_entity.h"
 
 #include "ai/ai_container.h"

@@ -21,22 +21,19 @@
 
 #pragma once
 
-#include <common/cbasetypes.h>
 #include <common/scheduler.h>
 #include <common/tracy.h>
 
+#include <common/types/fn.h>
+
 #include <common/database/binding.h>
-#include <common/database/blob.h>
 #include <common/database/bound_value.h>
-#include <common/database/prepared_statement.h>
 #include <common/database/result_set.h>
 
-#include <functional>
 #include <memory>
 #include <string>
 #include <string_view>
 #include <utility>
-#include <vector>
 
 // @note Everything in sql:: database-land is 1-indexed, not 0-indexed.
 namespace db
@@ -109,7 +106,7 @@ auto enableTimers() -> void;
 // function throws. Otherwise will commit the transaction on successful completion of the function.
 //
 // Returns true if the transaction was successful and committed or false if it was rolled back.
-auto transaction(const std::function<void()>& transactionFn) -> bool;
+auto transaction(const Fn<void() const>& transactionFn) -> bool;
 
 auto getTableColumnNames(const std::string& tableName) -> std::vector<std::string>;
 

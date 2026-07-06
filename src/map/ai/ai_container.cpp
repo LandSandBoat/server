@@ -27,8 +27,6 @@
 #include "entities/base_entity.h"
 #include "entities/battle_entity.h"
 #include "entities/char_entity.h"
-#include "entities/mob_entity.h"
-#include "packets/s2c/0x038_schedulor.h"
 #include "states/ability_state.h"
 #include "states/attack_state.h"
 #include "states/death_state.h"

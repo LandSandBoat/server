@@ -21,16 +21,11 @@
 
 #include "lua_base_entity.h"
 
-#include "lua_battlefield.h"
 #include "lua_instance.h"
-#include "lua_item.h"
-#include "lua_item_puppet.h"
 
 #include "items/exdata/worn_item.h"
 #include "lua_spell.h"
 #include "lua_statuseffect.h"
-#include "lua_trade_container.h"
-#include "lua_zone.h"
 #include "luautils.h"
 
 #include "common/logging.h"
@@ -43,14 +38,12 @@
 #include "aman.h"
 #include "battlefield.h"
 #include "conquest_system.h"
-#include "daily_system.h"
 #include "enmity_container.h"
 #include "fishingcontest.h"
 #include "guild.h"
 #include "instance.h"
 #include "ipc_client.h"
 #include "item_container.h"
-#include "items.h"
 #include "job_points.h"
 #include "latent_effect_container.h"
 #include "linkshell.h"
@@ -68,7 +61,6 @@
 #include "timetriggers.h"
 #include "trade_container.h"
 #include "transport.h"
-#include "treasure_pool.h"
 #include "weapon_skill.h"
 #include "zone.h"
 
@@ -94,7 +86,6 @@
 
 #include "entities/automaton_entity.h"
 #include "entities/char_entity.h"
-#include "entities/fellow_entity.h"
 #include "entities/mob_entity.h"
 #include "entities/npc_entity.h"
 #include "entities/pet_entity.h"
@@ -137,7 +128,6 @@
 #include "packets/s2c/0x052_eventucoff.h"
 #include "packets/s2c/0x053_systemmes.h"
 #include "packets/s2c/0x055_scenarioitem.h"
-#include "packets/s2c/0x056_mission.h"
 #include "packets/s2c/0x05a_motionmes.h"
 #include "packets/s2c/0x05b_wpos.h"
 #include "packets/s2c/0x05c_pendingnum.h"
@@ -151,10 +141,6 @@
 #include "packets/s2c/0x063_miscdata_monstrosity.h"
 #include "packets/s2c/0x075_battlefield.h"
 #include "packets/s2c/0x077_entity_vis.h"
-#include "packets/s2c/0x082_guild_buy.h"
-#include "packets/s2c/0x083_guild_buylist.h"
-#include "packets/s2c/0x084_guild_sell.h"
-#include "packets/s2c/0x085_guild_selllist.h"
 #include "packets/s2c/0x086_guild_open.h"
 #include "packets/s2c/0x0aa_magic_data.h"
 #include "packets/s2c/0x0ac_command_data.h"
@@ -1078,8 +1064,8 @@ void CLuaBaseEntity::sendLinkshellConcierge(const sol::table& data) const
         return;
     }
 
-    const auto           yourSlotRaw = data.get<sol::optional<uint8>>("yourSlot");
-    std::optional<uint8> yourSlot;
+    const auto   yourSlotRaw = data.get<sol::optional<uint8>>("yourSlot");
+    Maybe<uint8> yourSlot;
     if (yourSlotRaw)
     {
         yourSlot = *yourSlotRaw;
@@ -12869,6 +12855,31 @@ void CLuaBaseEntity::disengage()
     }
 }
 
+namespace
+{
+
+// Adapts a Lua function into an action-queue callable, adding the
+// invoke-and-log-errors boilerplate.
+auto wrapLuaAction(sol::function func) -> queueAction_t::EntityFunc_t
+{
+    return [func = std::move(func)](CBaseEntity* PEntity)
+    {
+        if (!func.valid())
+        {
+            return;
+        }
+
+        auto result = func(PEntity);
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("CAIActionQueue Lua action for %s (%i): %s", PEntity->name, PEntity->id, err.what());
+        }
+    };
+}
+
+} // namespace
+
 /************************************************************************
  *  Function: timer()
  *  Purpose : Inserts a pre-defined Lua fuction into the queue and executes
@@ -12879,7 +12890,7 @@ void CLuaBaseEntity::disengage()
 
 void CLuaBaseEntity::timer(int ms, sol::function func)
 {
-    m_PBaseEntity->PAI->QueueAction(queueAction_t(ms, false, std::move(func)));
+    m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(ms), false, wrapLuaAction(std::move(func))));
 }
 
 /************************************************************************
@@ -12894,7 +12905,7 @@ void CLuaBaseEntity::timer(int ms, sol::function func)
 
 void CLuaBaseEntity::queue(int ms, sol::function func)
 {
-    m_PBaseEntity->PAI->QueueAction(queueAction_t(ms, true, std::move(func)));
+    m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(ms), true, wrapLuaAction(std::move(func))));
 }
 
 /************************************************************************

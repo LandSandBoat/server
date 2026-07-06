@@ -24,7 +24,8 @@
 #include <common/lua.h>
 #include <common/tracy.h>
 
-#include <cstdlib>
+#include <catch2/catch_session.hpp>
+
 #include <iostream>
 #include <memory>
 
@@ -33,6 +34,20 @@ int main(int argc, char** argv)
     TracySetThreadName("Test Thread");
 
     auto testApp = std::make_unique<TestApplication>(argc, argv);
+
+    {
+        std::cout << "[----------] Running C++ unit tests with Catch2\n";
+
+        const char* catchArgv[] = { argv[0] };
+        if (Catch::Session().run(1, catchArgv) != 0)
+        {
+            std::cerr << "C++ unit tests failed; skipping the Lua test suite.\n";
+
+            testApp.reset();
+            lua_cleanup();
+            return EXIT_FAILURE;
+        }
+    }
 
     const auto success = testApp->run();
 

@@ -21,6 +21,8 @@
 
 #include "console_service.h"
 
+#include <fmt/ranges.h>
+
 #include "application.h"
 #include "database.h"
 #include "logging.h"
@@ -120,7 +122,7 @@ ConsoleService::~ConsoleService() = default;
 
 // NOTE: If you capture things in this function, make sure they're protected (locked or atomic)!
 // NOTE: If you're going to print, use fmt::print, rather than ShowInfo etc.
-void ConsoleService::registerCommand(const std::string& name, const std::string& description, std::function<void(std::vector<std::string>&)> func)
+void ConsoleService::registerCommand(const std::string& name, const std::string& description, Fn<void(std::vector<std::string>&)> func)
 {
     std::lock_guard<std::mutex> lock(m_consoleInputBottleneck);
 
@@ -257,29 +259,31 @@ auto ConsoleService::consoleLoop() -> Task<void>
 
             if (!inputs.empty())
             {
-                TracyZoneScoped;
+                // Dispatch to the main thread and look the command up there, where
+                // m_commands lives: the handler is invoked in place and never copied,
+                // and this worker thread never touches the map (registerCommand may
+                // add entries after the loop has started).
+                scheduler.postToMainThread(
+                    [this, args = std::move(inputs)]() mutable
+                    {
+                        TracyZoneScoped;
 
-                auto it = m_commands.find(inputs[0]);
-                if (it != m_commands.end())
-                {
-                    // Dispatch to main thread
-                    scheduler.postToMainThread(
-                        [cmd = it->second.func, args = std::move(inputs)]() mutable
+                        const auto it = m_commands.find(args[0]);
+                        if (it == m_commands.end())
                         {
-                            try
-                            {
-                                cmd(args);
-                            }
-                            catch (const std::exception& e)
-                            {
-                                fmt::print(stderr, "> Command error: {}\n", e.what());
-                            }
-                        });
-                }
-                else
-                {
-                    fmt::print("> Unknown command: {}\n", inputs[0]);
-                }
+                            fmt::print("> Unknown command: {}\n", args[0]);
+                            return;
+                        }
+
+                        try
+                        {
+                            it->second.func(args);
+                        }
+                        catch (const std::exception& e)
+                        {
+                            fmt::print(stderr, "> Command error: {}\n", e.what());
+                        }
+                    });
             }
             line.clear();
 

@@ -21,8 +21,6 @@
 
 #include "0x034_eventnum.h"
 
-#include <cstring>
-
 #include "entities/char_entity.h"
 #include "event_info.h"
 

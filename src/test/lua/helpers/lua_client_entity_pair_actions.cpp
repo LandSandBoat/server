@@ -22,7 +22,6 @@
 #include "lua/helpers/lua_client_entity_pair_actions.h"
 
 #include "ai/ai_container.h"
-#include "common/logging.h"
 #include "common/timer.h"
 #include "common/utils.h"
 #include "enums/packet_s2c.h"
@@ -31,7 +30,6 @@
 #include "lua/helpers/lua_client_entity_pair_packets.h"
 #include "lua/lua_client_entity_pair.h"
 #include "lua/lua_simulation.h"
-#include "lua/lua_spy.h"
 #include "map/ability.h"
 #include "map/ai/controllers/player_controller.h"
 #include "map/entities/char_entity.h"
@@ -62,7 +60,6 @@
 #include "map/packets/c2s/0x0fe_myroom_plant_crop.h"
 #include "map/packets/c2s/0x0ff_myroom_plant_stop.h"
 #include "map/packets/c2s/0x102_extended_job.h"
-#include "map/spell.h"
 #include "map/status_effect_container.h"
 #include "packets/c2s/0x015_pos.h"
 #include "test_char.h"

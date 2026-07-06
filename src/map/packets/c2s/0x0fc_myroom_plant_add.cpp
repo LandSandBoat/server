@@ -25,7 +25,6 @@
 #include "enums/msg_std.h"
 #include "items.h"
 #include "items/item_flowerpot.h"
-#include "packets/char_status.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x020_item_attr.h"
 #include "packets/s2c/0x0fa_myroom_operation.h"

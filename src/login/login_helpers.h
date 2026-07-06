@@ -24,8 +24,10 @@
 #include <map>
 
 #include <common/mmo.h>
-#include <common/types/maybe.h>
 #include <common/utils.h>
+
+#include <common/types/hash_map.h>
+#include <common/types/maybe.h>
 
 #include "login_packets.h"
 #include "nlohmann/json.hpp"
@@ -36,7 +38,7 @@ using json = nlohmann::json;
 namespace loginHelpers
 {
 
-std::unordered_map<std::string, std::map<std::string, session_t>>& getAuthenticatedSessions();
+HashMap<std::string, std::map<std::string, session_t>>& getAuthenticatedSessions();
 
 // Displays expansions on main menu. // May be a 32 bit integer on the client.
 enum EXPANSION_DISPLAY : uint16

@@ -298,6 +298,15 @@ CPMAddPackage(
     SYSTEM ON
 ) # defines: unordered_dense::unordered_dense (aliased to FlatHashMap, see src/common/flat_hash_map.h)
 
+# TODO: std::move_only_function lands in C++23, but libc++ (macOS) has not implemented
+#     : it yet. Remove this once all compilers for all platforms implement.
+CPMAddPackage(
+    NAME function2
+    GITHUB_REPOSITORY Naios/function2
+    GIT_TAG 4.2.4
+    SYSTEM ON
+) # defines: function2 (aliased to Fn, see src/common/types/fn.h)
+
 set(SHARED_EXTERNAL_LIBS
     fmt::fmt
     spdlog
@@ -313,6 +322,7 @@ set(SHARED_EXTERNAL_LIBS
     magic_enum
     utf8cpp
     unordered_dense::unordered_dense
+    function2
 )
 
 if(WIN32)

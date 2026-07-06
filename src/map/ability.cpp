@@ -21,7 +21,6 @@
 
 #include "ability.h"
 
-#include "common/database.h"
 #include "enums/recast.h"
 
 #include "lua/luautils.h"

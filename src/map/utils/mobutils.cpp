@@ -21,19 +21,15 @@
 
 #include "mobutils.h"
 
-#include "common/database.h"
 #include "common/logging.h"
-#include "common/utils.h"
 
 #include "action/action.h"
 #include "ai/ai_container.h"
-#include "battlefield.h"
 #include "battleutils.h"
 #include "grades.h"
 #include "instance.h"
 #include "items/item_weapon.h"
 #include "lua/luautils.h"
-#include "map_engine.h"
 #include "mob_modifier.h"
 #include "mob_spell_container.h"
 #include "mob_spell_list.h"
@@ -42,7 +38,6 @@
 #include "trait.h"
 #include "zone_entities.h"
 #include "zoneutils.h"
-#include <vector>
 
 namespace mobutils
 {

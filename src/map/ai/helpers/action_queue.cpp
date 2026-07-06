@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -20,10 +20,9 @@
 */
 
 #include "action_queue.h"
+
 #include "ai/ai_container.h"
 #include "entities/base_entity.h"
-#include "lua/lua_base_entity.h"
-#include "lua/luautils.h"
 
 CAIActionQueue::CAIActionQueue(CBaseEntity* _PEntity)
 : PEntity(_PEntity)
@@ -44,71 +43,38 @@ void CAIActionQueue::pushAction(queueAction_t&& action)
 
 void CAIActionQueue::checkAction(timer::time_point tick)
 {
-    while (!timerQueue.empty())
+    while (!timerQueue.empty() && tick > timerQueue.top().deadline)
     {
-        const auto& topaction = timerQueue.top();
-        if (tick > topaction.start_time + topaction.delay)
-        {
-            queueAction_t action = timerQueue.top();
-            timerQueue.pop();
-            handleAction(action);
-        }
-        else
-        {
-            break;
-        }
+        queueAction_t action = timerQueue.pop();
+        handleAction(action);
     }
-    while (!actionQueue.empty())
+
+    while (!actionQueue.empty() && tick > actionQueue.top().deadline && PEntity->PAI->CanChangeState())
     {
-        const auto& topaction = actionQueue.top();
-        if (tick > topaction.start_time + topaction.delay && (!topaction.checkState || PEntity->PAI->CanChangeState()))
-        {
-            auto action = actionQueue.top();
-            actionQueue.pop();
-            handleAction(action);
-        }
-        else
-        {
-            break;
-        }
+        queueAction_t action = actionQueue.pop();
+        handleAction(action);
     }
 }
 
 void CAIActionQueue::handleAction(queueAction_t& action)
 {
-    if (action.lua_func.valid())
-    {
-        auto result = action.lua_func(PEntity);
-        if (!result.valid())
-        {
-            sol::error err = result;
-            ShowError("CAIActionQueue::handleAction for %s (%i): %s", PEntity->name, PEntity->id, err.what());
-        }
-    }
-
     if (action.func)
     {
         action.func(PEntity);
     }
 }
 
-bool CAIActionQueue::isEmpty()
+bool CAIActionQueue::isEmpty() const
 {
     return actionQueue.empty() && timerQueue.empty();
 }
 
 void CAIActionQueue::clearActionQueue()
 {
-    while (!actionQueue.empty())
-    {
-        actionQueue.pop();
-    }
+    actionQueue.clear();
 }
 
 void CAIActionQueue::clearTimerQueue()
 {
-    while (!timerQueue.empty())
-    {
-        timerQueue.pop();
-    }
+    timerQueue.clear();
 }

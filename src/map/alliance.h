@@ -23,11 +23,7 @@
 
 #include "common/cbasetypes.h"
 
-#include <vector>
-
-class CBasicPacket;
 class CBattleEntity;
-class CCharEntity;
 class CParty;
 
 // it's assumed here that the alliance leader is the party leader of the lead party. sounds confusing, but it's logical.

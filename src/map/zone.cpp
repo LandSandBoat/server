@@ -21,6 +21,10 @@
 
 #include "packets/s2c/0x057_weather.h"
 
+#include "enums/weather.h"
+
+#include <common/types/hash_map.h>
+
 namespace
 {
 
@@ -301,7 +305,7 @@ uint32 CZone::GetLocalVar(const char* var)
     return localVars_[var];
 }
 
-std::unordered_map<std::string, uint32>& CZone::GetLocalVars()
+HashMap<std::string, uint32>& CZone::GetLocalVars()
 {
     return localVars_;
 }
@@ -969,84 +973,84 @@ auto CZone::ZoneServer(timer::time_point tick) -> Task<void>
     co_return;
 }
 
-void CZone::ForEachChar(const std::function<void(CCharEntity*)>& func)
+void CZone::ForEachChar(FnRef<void(CCharEntity*)> func)
 {
     TracyZoneScoped;
 
     m_zoneEntities->ForEachChar(func);
 }
 
-void CZone::ForEachCharInstance(CBaseEntity* PEntity, const std::function<void(CCharEntity*)>& func)
+void CZone::ForEachCharInstance(CBaseEntity* PEntity, FnRef<void(CCharEntity*)> func)
 {
     TracyZoneScoped;
 
     ForEachChar(func);
 }
 
-void CZone::ForEachMob(const std::function<void(CMobEntity*)>& func)
+void CZone::ForEachMob(FnRef<void(CMobEntity*)> func)
 {
     TracyZoneScoped;
 
     m_zoneEntities->ForEachMob(func);
 }
 
-void CZone::ForEachMobInstance(CBaseEntity* PEntity, const std::function<void(CMobEntity*)>& func)
+void CZone::ForEachMobInstance(CBaseEntity* PEntity, FnRef<void(CMobEntity*)> func)
 {
     TracyZoneScoped;
 
     ForEachMob(func);
 }
 
-void CZone::ForEachNpc(const std::function<void(CNpcEntity*)>& func)
+void CZone::ForEachNpc(FnRef<void(CNpcEntity*)> func)
 {
     TracyZoneScoped;
 
     m_zoneEntities->ForEachNpc(func);
 }
 
-void CZone::ForEachNpcInstance(CBaseEntity* PEntity, const std::function<void(CNpcEntity*)>& func)
+void CZone::ForEachNpcInstance(CBaseEntity* PEntity, FnRef<void(CNpcEntity*)> func)
 {
     TracyZoneScoped;
 
     ForEachNpc(func);
 }
 
-void CZone::ForEachTrust(const std::function<void(CTrustEntity*)>& func)
+void CZone::ForEachTrust(FnRef<void(CTrustEntity*)> func)
 {
     TracyZoneScoped;
 
     m_zoneEntities->ForEachTrust(func);
 }
 
-void CZone::ForEachTrustInstance(CBaseEntity* PEntity, const std::function<void(CTrustEntity*)>& func)
+void CZone::ForEachTrustInstance(CBaseEntity* PEntity, FnRef<void(CTrustEntity*)> func)
 {
     TracyZoneScoped;
 
     ForEachTrust(func);
 }
 
-void CZone::ForEachPet(const std::function<void(CPetEntity*)>& func)
+void CZone::ForEachPet(FnRef<void(CPetEntity*)> func)
 {
     TracyZoneScoped;
 
     m_zoneEntities->ForEachPet(func);
 }
 
-void CZone::ForEachPetInstance(CBaseEntity* PEntity, const std::function<void(CPetEntity*)>& func)
+void CZone::ForEachPetInstance(CBaseEntity* PEntity, FnRef<void(CPetEntity*)> func)
 {
     TracyZoneScoped;
 
     ForEachPet(func);
 }
 
-void CZone::ForEachAlly(const std::function<void(CMobEntity*)>& func)
+void CZone::ForEachAlly(FnRef<void(CMobEntity*)> func)
 {
     TracyZoneScoped;
 
     m_zoneEntities->ForEachAlly(func);
 }
 
-void CZone::ForEachAllyInstance(CBaseEntity* PEntity, const std::function<void(CMobEntity*)>& func)
+void CZone::ForEachAllyInstance(CBaseEntity* PEntity, FnRef<void(CMobEntity*)> func)
 {
     TracyZoneScoped;
 

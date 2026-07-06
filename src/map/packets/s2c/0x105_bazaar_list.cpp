@@ -21,10 +21,7 @@
 
 #include "0x105_bazaar_list.h"
 
-#include "common/utils.h"
-#include "common/vana_time.h"
 #include "items/item_usable.h"
-#include "utils/itemutils.h"
 
 GP_SERV_COMMAND_BAZAAR_LIST::GP_SERV_COMMAND_BAZAAR_LIST(CItem* PItem, const uint8 slotId, const uint16 tax)
 {

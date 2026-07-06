@@ -25,15 +25,9 @@
 #include "items/exdata.h"
 #include "items/item.h"
 #include "items/item_equipment.h"
-#include "items/item_fish.h"
-#include "items/item_flowerpot.h"
 #include "items/item_furnishing.h"
-#include "items/item_general.h"
-#include "items/item_linkshell.h"
 #include "items/item_usable.h"
 #include "items/item_weapon.h"
-#include "map/enums/item_state.h"
-#include "utils/itemutils.h"
 
 CLuaItem::CLuaItem(CItem* PItem)
 : m_readItem(PItem)

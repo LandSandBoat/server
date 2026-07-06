@@ -21,8 +21,6 @@
 
 #pragma once
 
-#include "xirand.h"
-
 #include <string>
 
 namespace uuid

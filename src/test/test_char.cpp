@@ -22,10 +22,7 @@
 #include "test_char.h"
 
 #include "common/cbasetypes.h"
-#include "common/database.h"
-#include "common/lua.h"
 #include "login/login_helpers.h"
-#include "lua/lua_spy.h"
 #include "map/entities/base_entity.h"
 #include "map/entities/char_entity.h"
 #include "test_common.h"

@@ -22,10 +22,9 @@
 #include "synthutils.h"
 
 #include "charutils.h"
-#include "common/database.h"
 #include "common/logging.h"
 #include "common/timer.h"
-#include "common/utils.h"
+#include "common/types/flat_hash_map.h"
 #include "entities/battle_entity.h"
 #include "enums/key_items.h"
 #include "enums/synthesis_effect.h"
@@ -41,7 +40,6 @@
 #include "packets/s2c/0x070_combine_inf.h"
 #include "roe.h"
 #include "zone.h"
-#include "zoneutils.h"
 
 #include <algorithm>
 #include <cmath>
@@ -195,7 +193,7 @@ struct SynthRecipe
     }
 };
 
-std::unordered_map<std::string, SynthRecipe> synthRecipes;
+FlatHashMap<std::string, SynthRecipe> synthRecipes;
 
 struct CrystalProps
 {

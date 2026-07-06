@@ -26,8 +26,6 @@
 #include "ai/helpers/pathfind.h"
 #include "ai/helpers/targetfind.h"
 #include "ai/states/attack_state.h"
-#include "ai/states/mobskill_state.h"
-#include "ai/states/weaponskill_state.h"
 #include "battlefield.h"
 #include "common/timer.h"
 #include "common/utils.h"
@@ -37,13 +35,10 @@
 #include "enums/loot_recast.h"
 #include "enums/weather.h"
 #include "items.h"
-#include "lua/lua_loot.h"
 #include "lua/luautils.h"
 #include "mob_modifier.h"
 #include "mob_spell_container.h"
-#include "mob_spell_list.h"
 #include "mobskill.h"
-#include "packets/entity_update.h"
 #include "packets/pet_sync.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "recast_container.h"
@@ -58,9 +53,6 @@
 #include "utils/mobutils.h"
 #include "utils/petutils.h"
 #include "utils/zoneutils.h"
-#include "weapon_skill.h"
-
-#include <cstring>
 
 namespace
 {

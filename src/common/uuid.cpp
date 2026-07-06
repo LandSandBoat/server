@@ -21,6 +21,8 @@
 
 #include "uuid.h"
 
+#include "common/xirand.h"
+
 auto uuid::GenerateUUID() -> std::string
 {
     // https://stackoverflow.com/questions/24365331/how-can-i-generate-uuid-in-c-without-using-boost-library

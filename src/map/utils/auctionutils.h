@@ -21,7 +21,7 @@
 
 #pragma once
 
-#include "common/cbasetypes.h"
+#include <cstdint>
 
 struct GP_AUC_PARAM_BID;
 struct GP_AUC_PARAM_ASKCOMMIT;

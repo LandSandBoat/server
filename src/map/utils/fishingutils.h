@@ -26,7 +26,6 @@
 #include "items/item_fish.h"
 
 #include <map>
-#include <vector>
 
 enum class GP_CLI_COMMAND_FISHING_2_MODE : uint8_t;
 
@@ -900,11 +899,8 @@ enum FISHINGROD : uint32
  *                                                                       *
  ************************************************************************/
 
-class CBasicPacket;
 class CCharEntity;
 class CMobEntity;
-class CItemFish;
-class CItemWeapon;
 
 namespace fishingutils
 {

@@ -20,7 +20,6 @@
 */
 
 #include "gmcall_container.h"
-#include "common/database.h"
 #include "common/ipc_structs.h"
 #include "common/logging.h"
 #include "entities/char_entity.h"

@@ -23,6 +23,8 @@
 
 #include "data/enums/enum_traits.h"
 
+#include "common/macros.h"
+
 #include <concepts>
 #include <string>
 #include <string_view>
@@ -224,7 +226,7 @@ public:
         else
         {
             static_assert(alwaysFalse<T>, "Node<B>::as<T>: unsupported T");
-            return T{}; // unreachable
+            XI_UNREACHABLE();
         }
     }
 

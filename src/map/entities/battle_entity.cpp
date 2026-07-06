@@ -21,6 +21,8 @@
 
 #include "battle_entity.h"
 
+#include "enums/four_cc.h"
+
 #include "common/database.h"
 #include "common/logging.h"
 #include "common/utils.h"
@@ -266,8 +268,8 @@ void CBattleEntity::UpdateHealth()
     baseMPBonus = std::floor((baseMPBonus + convertMP) * MPPPower);
 
     // Food is additive at the end
-    float foodHPBonus = std::min<int16>(baseHPBonus * m_modStat[Mod::FOOD_HPP] / 100, m_modStat[Mod::FOOD_HP_CAP]);
-    float foodMPBonus = std::min<int16>(baseMPBonus * m_modStat[Mod::FOOD_MPP] / 100, m_modStat[Mod::FOOD_MP_CAP]);
+    float foodHPBonus = std::min<int16>(baseHPBonus * getMod(Mod::FOOD_HPP) / 100, getMod(Mod::FOOD_HP_CAP));
+    float foodMPBonus = std::min<int16>(baseMPBonus * getMod(Mod::FOOD_MPP) / 100, getMod(Mod::FOOD_MP_CAP));
 
     health.modhp = baseHPBonus + foodHPBonus;
     health.modmp = baseMPBonus + foodMPBonus;
@@ -1090,47 +1092,47 @@ uint16 CBattleEntity::STR()
     // Hasso gives STR only if main weapon is two handed
     if (weapon && weapon->isTwoHanded())
     {
-        return std::clamp(stats.STR + m_modStat[Mod::STR] + m_modStat[Mod::TWOHAND_STR], 0, 999);
+        return std::clamp(stats.STR + getMod(Mod::STR) + getMod(Mod::TWOHAND_STR), 0, 999);
     }
-    return std::clamp(stats.STR + m_modStat[Mod::STR], 0, 999);
+    return std::clamp(stats.STR + getMod(Mod::STR), 0, 999);
 }
 
 uint16 CBattleEntity::DEX()
 {
-    return std::clamp(stats.DEX + m_modStat[Mod::DEX], 0, 999);
+    return std::clamp(stats.DEX + getMod(Mod::DEX), 0, 999);
 }
 
 uint16 CBattleEntity::VIT()
 {
-    return std::clamp(stats.VIT + m_modStat[Mod::VIT], 0, 999);
+    return std::clamp(stats.VIT + getMod(Mod::VIT), 0, 999);
 }
 
 uint16 CBattleEntity::AGI()
 {
-    return std::clamp(stats.AGI + m_modStat[Mod::AGI], 0, 999);
+    return std::clamp(stats.AGI + getMod(Mod::AGI), 0, 999);
 }
 
 uint16 CBattleEntity::INT()
 {
-    return std::clamp(stats.INT + m_modStat[Mod::INT], 0, 999);
+    return std::clamp(stats.INT + getMod(Mod::INT), 0, 999);
 }
 
 uint16 CBattleEntity::MND()
 {
-    return std::clamp(stats.MND + m_modStat[Mod::MND], 0, 999);
+    return std::clamp(stats.MND + getMod(Mod::MND), 0, 999);
 }
 
 uint16 CBattleEntity::CHR()
 {
-    return std::clamp(stats.CHR + m_modStat[Mod::CHR], 0, 999);
+    return std::clamp(stats.CHR + getMod(Mod::CHR), 0, 999);
 }
 
 uint16 CBattleEntity::ATT(SLOTTYPE slot)
 {
     TracyZoneScoped;
 
-    int32 ATT           = 8 + m_modStat[Mod::ATT];
-    auto  ATTP          = m_modStat[Mod::ATTP];
+    int32 ATT           = 8 + getMod(Mod::ATT);
+    auto  ATTP          = getMod(Mod::ATTP);
     auto* weapon        = dynamic_cast<CItemWeapon*>(m_Weapons[slot]);
     float strMultiplier = 0.5;
 
@@ -1203,7 +1205,7 @@ uint16 CBattleEntity::ATT(SLOTTYPE slot)
         }
     }
     // use max to prevent underflow
-    return std::max(1, ATT + (ATT * ATTP / 100) + std::min<int16>((ATT * m_modStat[Mod::FOOD_ATTP] / 100), m_modStat[Mod::FOOD_ATT_CAP]));
+    return std::max(1, ATT + (ATT * ATTP / 100) + std::min<int16>((ATT * getMod(Mod::FOOD_ATTP) / 100), getMod(Mod::FOOD_ATT_CAP)));
 }
 
 auto CBattleEntity::RATT(uint16 bonusAtt) -> uint16
@@ -1270,9 +1272,9 @@ auto CBattleEntity::RATT(uint16 bonusAtt) -> uint16
     }
     // mobs and pets don't have "skill level" -- it's baked into m_modStat[Mod::RATT]
 
-    int32 RATT = 8 + skillLevel + bonusAtt + m_modStat[Mod::RATT] + battleutils::GetRangedAttackBonuses(this) + std::floor(STR() * strMultiplier);
+    int32 RATT = 8 + skillLevel + bonusAtt + getMod(Mod::RATT) + battleutils::GetRangedAttackBonuses(this) + std::floor(STR() * strMultiplier);
     // use max to prevent any underflow
-    return std::max<int16>(1, RATT + (RATT * m_modStat[Mod::RATTP] / 100.f) + std::min<int16>((RATT * m_modStat[Mod::FOOD_RATTP] / 100.f), m_modStat[Mod::FOOD_RATT_CAP]));
+    return std::max<int16>(1, RATT + (RATT * getMod(Mod::RATTP) / 100.f) + std::min<int16>((RATT * getMod(Mod::FOOD_RATTP) / 100.f), getMod(Mod::FOOD_RATT_CAP)));
 }
 
 inline uint32 GetAccFromSkill(uint32 skill)
@@ -1358,7 +1360,7 @@ auto CBattleEntity::RACC(uint16 bonusAcc) -> uint16
 
         RACC = GetAccFromSkill(skillLevel);
         RACC += std::floor(AGI() * 0.5);
-        RACC += m_modStat[Mod::ACC] + bonusAcc;
+        RACC += getMod(Mod::ACC) + bonusAcc;
 
         // Tandem Strike is listed here in ACC call but no clue if it works for automatons or RACC in general
     }
@@ -1370,11 +1372,11 @@ auto CBattleEntity::RACC(uint16 bonusAcc) -> uint16
 
         RACC = GetAccFromSkill(std::max({ archery_acc, marksmanship_acc, throwing_acc }));
         RACC += std::floor(AGI() * 0.75); // 0.75 needs verification
-        RACC += m_modStat[Mod::RACC] + bonusAcc;
+        RACC += getMod(Mod::RACC) + bonusAcc;
     }
     else // pets, mobs
     {
-        RACC = m_modStat[Mod::RACC] + bonusAcc;
+        RACC = getMod(Mod::RACC) + bonusAcc;
 
         // TODO: does this work for ranged accuracy?
         if (petutils::IsTandemActive(this))
@@ -1482,13 +1484,13 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
             dexMultiplier = settings::get<float>("main.TWO_HANDED_DEX_ACCURACY_MULTIPLIER");
 
             ACC += std::floor(DEX() * dexMultiplier);
-            ACC += m_modStat[Mod::TWOHAND_ACC];
+            ACC += getMod(Mod::TWOHAND_ACC);
         }
         else
         {
             ACC += std::floor(DEX() * dexMultiplier);
         }
-        ACC = (ACC + m_modStat[Mod::ACC] + offsetAccuracy);
+        ACC = (ACC + getMod(Mod::ACC) + offsetAccuracy);
 
         if (this->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Enlight))
         {
@@ -1506,7 +1508,7 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
             ACC += PChar->PMeritPoints->GetMeritValue(MERIT_ACCURACY, PChar);
         }
 
-        ACC = ACC + std::min<int16>((ACC * m_modStat[Mod::FOOD_ACCP] / 100.f), m_modStat[Mod::FOOD_ACC_CAP]);
+        ACC = ACC + std::min<int16>((ACC * getMod(Mod::FOOD_ACCP) / 100.f), getMod(Mod::FOOD_ACC_CAP));
         return std::max<int16>(0, ACC);
     }
     else if (this->objtype == TYPE_PET && ((CPetEntity*)this)->getPetType() == PET_TYPE::AUTOMATON)
@@ -1515,7 +1517,7 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
 
         ACC = GetAccFromSkill(skillLevel);
         ACC += std::floor(DEX() * 0.5);
-        ACC += m_modStat[Mod::ACC] + offsetAccuracy;
+        ACC += getMod(Mod::ACC) + offsetAccuracy;
 
         if (this->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Enlight))
         {
@@ -1532,7 +1534,7 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
     }
     else
     {
-        ACC = m_modStat[Mod::ACC] + offsetAccuracy;
+        ACC = getMod(Mod::ACC) + offsetAccuracy;
 
         if (this->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Enlight))
         {
@@ -1613,7 +1615,7 @@ uint16 CBattleEntity::DEF()
         }
     }
 
-    DEF += m_modStat[Mod::DEF];
+    DEF += getMod(Mod::DEF);
 
     // TODO: support old style counterstance
     if (this->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Counterstance, 0))
@@ -1622,7 +1624,7 @@ uint16 CBattleEntity::DEF()
     }
 
     // use max to prevent underflow
-    return std::max(1, DEF + (DEF * m_modStat[Mod::DEFP] / 100) + std::min<int16>((DEF * m_modStat[Mod::FOOD_DEFP] / 100), m_modStat[Mod::FOOD_DEF_CAP]));
+    return std::max(1, DEF + (DEF * getMod(Mod::DEFP) / 100) + std::min<int16>((DEF * getMod(Mod::FOOD_DEFP) / 100), getMod(Mod::FOOD_DEF_CAP)));
 }
 
 uint16 CBattleEntity::EVA()
@@ -1633,7 +1635,7 @@ uint16 CBattleEntity::EVA()
 
     if (this->objtype == TYPE_MOB || (this->objtype == TYPE_PET && !isAutomaton))
     {
-        evasion = m_modStat[Mod::EVA]; // Mobs and pets base evasion is based off the EVA mod
+        evasion = getMod(Mod::EVA); // Mobs and pets base evasion is based off the EVA mod
     }
     else // Players and automatons use SKILL_EVASION
     {
@@ -1648,7 +1650,7 @@ uint16 CBattleEntity::EVA()
 
     evasion += AGI() / 2;
 
-    return std::max(1, evasion + (this->objtype == TYPE_MOB || (this->objtype == TYPE_PET && !isAutomaton) ? 0 : m_modStat[Mod::EVA])); // The mod for a pet or mob is already calclated in the above so return 0
+    return std::max(1, evasion + (this->objtype == TYPE_MOB || (this->objtype == TYPE_PET && !isAutomaton) ? 0 : getMod(Mod::EVA))); // The mod for a pet or mob is already calclated in the above so return 0
 }
 
 JOBTYPE CBattleEntity::GetMJob() const
@@ -1966,7 +1968,7 @@ void CBattleEntity::savePetModifiers()
     for (auto mod : petModsToUpdate)
     {
         // Only update the saved map if it exists and is different
-        int16 currentVal = m_modStat[mod];
+        int16 currentVal = getMod(mod);
         auto  it         = m_modStatSave.find(mod);
         if (it == m_modStatSave.end() || it->second != currentVal)
         {
@@ -2082,7 +2084,8 @@ int16 CBattleEntity::getMod(Mod modID)
         return 0;
     }
 
-    return m_modStat[modID];
+    const auto it = m_modStat.find(modID);
+    return it != m_modStat.end() ? it->second : 0;
 }
 
 /************************************************************************

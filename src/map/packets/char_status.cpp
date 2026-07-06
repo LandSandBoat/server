@@ -22,19 +22,12 @@
 #include "char_status.h"
 
 #include "aman.h"
-#include "common/logging.h"
-
-#include "common/vana_time.h"
 
 #include <cstring>
 
-#include "ai/ai_container.h"
-#include "ai/states/death_state.h"
 #include "entities/char_entity.h"
-#include "item_container.h"
 #include "items/item_linkshell.h"
 #include "status_effect_container.h"
-#include "utils/itemutils.h"
 #include "utils/mountutils.h"
 
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x0037

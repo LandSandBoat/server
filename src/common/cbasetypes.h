@@ -28,7 +28,6 @@
 #include <climits>
 #include <cstddef>
 #include <cstdint>
-#include <queue>
 #include <span>
 #include <utility>
 #include <vector>
@@ -76,21 +75,6 @@ inline void destroy_arr(T*& ptr)
 }
 
 using namespace std::literals::chrono_literals;
-
-template <class T>
-using MinHeap = std::priority_queue<T, std::vector<T>, std::greater<T>>;
-
-template <typename T>
-struct PtrGreater
-{
-    bool operator()(const T left, const T right)
-    {
-        return *left > *right;
-    }
-};
-
-template <class T>
-using MinHeapPtr = std::priority_queue<T, std::vector<T>, PtrGreater<T>>;
 
 using NetworkBuffer = std::array<uint8, 2500U>; // TODO: Bring constants in here
 using ByteSpan      = std::span<uint8>;

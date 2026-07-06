@@ -19,9 +19,7 @@
 ===========================================================================
 */
 
-#include "common/timer.h"
 #include "common/utils.h"
-#include "common/vana_time.h"
 
 #include <cstring>
 
@@ -30,8 +28,6 @@
 #include "entities/base_entity.h"
 #include "entities/mob_entity.h"
 #include "entities/npc_entity.h"
-#include "entities/pet_entity.h"
-#include "entities/trust_entity.h"
 #include "status_effect_container.h"
 #include "zone.h"
 

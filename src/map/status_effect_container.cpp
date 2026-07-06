@@ -30,7 +30,11 @@ When a status effect is gained twice on a player. It can do one or more of the f
 */
 
 #include "common/logging.h"
+
 #include "common/timer.h"
+#include "enums/weather.h"
+
+#include <common/types/hash_map.h>
 
 #include <array>
 #include <cstring>
@@ -1102,7 +1106,7 @@ uint8 CStatusEffectContainer::GetActiveRuneCount()
 
 auto CStatusEffectContainer::GetHighestRuneEffect() -> xi::StatusEffect
 {
-    std::unordered_map<xi::StatusEffect, uint8> runeEffects;
+    HashMap<xi::StatusEffect, uint8> runeEffects;
 
     for (const auto& PStatusEffect : m_StatusEffectSet)
     {

@@ -22,9 +22,7 @@
 #include "xirand.h"
 
 #include <array>
-#include <cstddef>
 #include <fstream>
-#include <stdexcept>
 
 // https://stackoverflow.com/a/45069417
 #ifdef _WIN32

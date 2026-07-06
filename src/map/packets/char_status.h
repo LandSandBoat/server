@@ -22,8 +22,6 @@
 #ifndef _CCHARSTATUSPACKET_H
 #define _CCHARSTATUSPACKET_H
 
-#include "common/cbasetypes.h"
-
 #include "basic.h"
 
 class CCharEntity;

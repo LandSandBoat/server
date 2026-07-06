@@ -21,7 +21,6 @@
 
 #include "0x0b6_chat_name.h"
 
-#include "common/database.h"
 #include "common/ipc_structs.h"
 #include "common/settings.h"
 #include "entities/char_entity.h"

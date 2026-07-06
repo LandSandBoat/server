@@ -23,11 +23,8 @@
 
 #include "entities/char_entity.h"
 #include "items/item.h"
-#include "items/item_shop.h"
 #include "lua/luautils.h"
-#include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x082_guild_buy.h"
-#include "utils/charutils.h"
 #include "utils/itemutils.h"
 #include "utils/zoneutils.h"
 

@@ -28,8 +28,6 @@
 
 #include <array>
 
-class CCharEntity;
-
 class CAutomatonEntity final : public CPetEntity
 {
 public:

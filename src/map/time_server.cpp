@@ -24,11 +24,9 @@
 #include "common/logging.h"
 #include "common/vana_time.h"
 
-#include "daily_system.h"
 #include "entities/char_entity.h"
 #include "latent_effect_container.h"
 #include "lua/luautils.h"
-#include "map_constants.h"
 #include "roe.h"
 #include "spawn_handler.h"
 #include "timetriggers.h"

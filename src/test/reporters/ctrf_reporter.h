@@ -21,11 +21,9 @@
 
 #pragma once
 
-#include "ctrf_types.h"
 #include "test_reporter.h"
 #include <chrono>
 #include <string>
-#include <vector>
 
 class CTRFReporter final : public TestReporter
 {

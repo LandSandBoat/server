@@ -21,9 +21,6 @@
 
 #include "engine.h"
 
-#include "earth_time.h"
-#include "xirand.h"
-
 Engine::Engine()
 {
 }

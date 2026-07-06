@@ -21,7 +21,6 @@
 
 #include "item_use.h"
 
-#include "entities/char_entity.h"
 #include "items/item.h"
 #include "items/item_usable.h"
 #include "utils/charutils.h"

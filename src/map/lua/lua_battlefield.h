@@ -23,10 +23,8 @@
 #define _LUABATTLEFIELD_H
 
 #include "common/cbasetypes.h"
-#include "luautils.h"
 
 class CBattlefield;
-class CLuaBaseEntity;
 
 class CLuaBattlefield
 {

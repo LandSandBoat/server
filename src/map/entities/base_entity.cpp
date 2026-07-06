@@ -27,12 +27,7 @@
 
 #include "battlefield.h"
 #include "instance.h"
-#include "map/navmesh/navmesh.h"
 #include "zone.h"
-
-#include <map/ximesh/ximesh.h>
-
-#include <cstring>
 
 CBaseEntity::CBaseEntity()
 : id(0)

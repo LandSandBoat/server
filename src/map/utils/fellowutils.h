@@ -20,13 +20,6 @@
 */
 #pragma once
 
-#include "common/cbasetypes.h"
-#include "common/mmo.h"
-
-class CBattleEntity;
-class CCharEntity;
-class CFellowEntity;
-
 namespace fellowutils
 {
 

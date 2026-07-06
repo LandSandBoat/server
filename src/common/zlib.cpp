@@ -24,11 +24,12 @@
 #include "common/logging.h"
 #include "common/utils.h"
 
+#include "common/types/error_or.h"
+
 #include <cassert>
 #include <cstring>
 #include <memory>
 #include <string>
-#include <vector>
 
 #if (defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__) || (defined(__BYTE_ORDER) && __BYTE_ORDER == __BIG_ENDIAN) ||           \
     defined(__BIG_ENDIAN__) || defined(__ARMEB__) || defined(__THUMBEB__) || defined(__AARCH64EB__) || defined(_MIBSEB) || defined(__MIBSEB) || \
@@ -88,28 +89,26 @@ static void swap32_if_be(const uint32* v, const size_t memb)
 #endif
 }
 
-static bool read_to_vector(const std::string& filename, std::vector<uint32>& vec)
+static auto read_to_vector(const std::string& filename) -> ErrorOr<std::vector<uint32>>
 {
     auto fp = utils::openFile(filename, "rb");
     if (!fp)
     {
-        ShowCritical("zlib: can't open file <%s>", filename.c_str());
-        return false;
+        return Error(fmt::format("can't open file <{}>", filename));
     }
 
     fseek(fp.get(), 0, SEEK_END);
     const size_t size = ftell(fp.get());
     fseek(fp.get(), 0, SEEK_SET);
 
-    vec.resize(size / sizeof(uint32));
+    std::vector<uint32> vec(size / sizeof(uint32));
     if (fread(vec.data(), sizeof(uint32), vec.size(), fp.get()) != vec.size())
     {
-        ShowCritical("zlib: can't read file <%s>: %s", filename.c_str(), strerror(errno));
-        return false;
+        return Error(fmt::format("can't read file <{}>: {}", filename, strerror(errno)));
     }
 
     swap32_if_be(vec.data(), vec.size());
-    return true;
+    return vec;
 }
 
 static void populate_jump_table(std::vector<struct zlib_jump>& jump, const std::vector<uint32>& dec)
@@ -183,13 +182,22 @@ void build_decode_table()
 
 int32 zlib_init()
 {
-    std::vector<uint32> dec;
-    if (!read_to_vector("res/compress.dat", zlib.enc) || !read_to_vector("res/decompress.dat", dec))
+    auto enc = read_to_vector("res/compress.dat");
+    if (!enc)
     {
+        ShowCritical("zlib: %s", enc.error());
+        return -1;
+    }
+    zlib.enc = std::move(*enc);
+
+    auto dec = read_to_vector("res/decompress.dat");
+    if (!dec)
+    {
+        ShowCritical("zlib: %s", dec.error());
         return -1;
     }
 
-    populate_jump_table(zlib.jump, dec);
+    populate_jump_table(zlib.jump, *dec);
     build_decode_table();
     return 0;
 }

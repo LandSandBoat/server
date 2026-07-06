@@ -19,16 +19,17 @@
 ===========================================================================
 */
 
-// ===
+//
 // See scripts/globals/monstrosity.lua for a general overview of how Monstrosity works and is designed.
-// ===
+//
 
 #include "monstrosity.h"
 
 #include "ai/ai_container.h"
 
-#include "common/database.h"
 #include "common/logging.h"
+
+#include <common/types/hash_map.h>
 
 #include "entities/char_entity.h"
 
@@ -40,12 +41,10 @@
 #include "packets/s2c/0x0ac_command_data.h"
 
 #include "utils/charutils.h"
-#include "utils/zoneutils.h"
 
 #include "packets/c2s/0x01a_action.h"
 #include "packets/c2s/0x102_extended_job.h"
 #include "packets/s2c/0x063_miscdata_monstrosity.h"
-#include "status_effect.h"
 #include "status_effect_container.h"
 
 struct MonstrositySpeciesRow
@@ -70,8 +69,8 @@ struct MonstrosityInstinctRow
 namespace
 {
 
-std::unordered_map<uint16, MonstrositySpeciesRow>  gMonstrositySpeciesMap{};
-std::unordered_map<uint16, MonstrosityInstinctRow> gMonstrosityInstinctMap{};
+HashMap<uint16, MonstrositySpeciesRow>  gMonstrositySpeciesMap{};
+HashMap<uint16, MonstrosityInstinctRow> gMonstrosityInstinctMap{};
 
 } // namespace
 

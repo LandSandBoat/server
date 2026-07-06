@@ -23,7 +23,6 @@
 
 #include "entities/char_entity.h"
 #include "entities/npc_entity.h"
-#include "item_container.h"
 #include "items/item_weapon.h"
 
 GP_SERV_COMMAND_MOTIONMES::GP_SERV_COMMAND_MOTIONMES(const CCharEntity* PChar, const uint32 targetId, const uint16 targetIndex, Emote emoteId, EmoteMode emoteMode, const uint16 extra)

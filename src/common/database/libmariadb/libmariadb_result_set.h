@@ -25,20 +25,20 @@
 
 #include <common/database/result_set.h>
 
+#include <common/types/hash_map.h>
+
 #include <cstddef>
 #include <memory>
 #include <string>
-#include <unordered_map>
 #include <variant>
-#include <vector>
 
 namespace db
 {
 
 struct ColumnSchema
 {
-    std::vector<std::string>                     names;
-    std::unordered_map<std::string, std::size_t> index;
+    std::vector<std::string>          names;
+    HashMap<std::string, std::size_t> index;
 };
 
 class LibMariaDBResultSet final : public ResultSet

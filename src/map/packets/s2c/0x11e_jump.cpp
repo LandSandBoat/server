@@ -21,8 +21,6 @@
 
 #include "0x11e_jump.h"
 
-#include "entities/char_entity.h"
-
 GP_SERV_COMMAND_JUMP::GP_SERV_COMMAND_JUMP(CCharEntity* PChar, uint16_t targetIndex)
 {
     auto& packet = this->data();

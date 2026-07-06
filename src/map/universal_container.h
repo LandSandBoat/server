@@ -23,7 +23,6 @@
 #define _CUNIVERSALCONTAINER_H
 
 #include "common/cbasetypes.h"
-#include <vector>
 
 enum UCONTAINERTYPE
 {
@@ -49,7 +48,6 @@ enum UCONTAINERTYPE
 // main item (gil, crystal, used item...)
 
 class CItem;
-class CBaseEntity;
 
 class CUContainer
 {

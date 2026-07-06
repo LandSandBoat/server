@@ -26,7 +26,6 @@
 
 #include <array>
 #include <utility>
-#include <vector>
 
 #include <zmq_addon.hpp>
 

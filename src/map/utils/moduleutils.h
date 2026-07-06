@@ -22,13 +22,10 @@
 #ifndef _MODULEUTILS_H
 #define _MODULEUTILS_H
 
-#include "common/database.h"
-#include "common/logging.h"
 #include "lua/luautils.h"
 
 #include <string>
 #include <string_view>
-#include <vector>
 
 // Forward declare
 class CPPModule;

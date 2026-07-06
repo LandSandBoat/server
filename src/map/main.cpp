@@ -23,7 +23,6 @@
 
 #include <common/lua.h>
 
-#include <cstdlib>
 #include <memory>
 
 int main(int argc, char** argv)

@@ -20,11 +20,15 @@
 */
 
 #include "common/logging.h"
+
 #include "common/macros.h"
 #include "common/settings.h"
 #include "common/timer.h"
 #include "common/utils.h"
 #include "common/vana_time.h"
+#include <fmt/ranges.h>
+
+#include <common/types/hash_map.h>
 
 #include <array>
 #include <chrono>
@@ -1046,7 +1050,7 @@ void LoadSpells(CCharEntity* PChar)
 
     if (hasTrustPermit)
     {
-        static const std::unordered_map<uint8, uint16> trustSpells = {
+        static const HashMap<uint8, uint16> trustSpells = {
             { 1, 1002 }, // Cornelia
             { 2, 1003 }, // Matsui-P
         }; // This can be expanded if more trust spells are added as settings options.
@@ -7229,7 +7233,9 @@ void AddPoints(CCharEntity* PChar, const char* type, int32 amount, int32 max)
     TracyZoneScoped;
 
     const auto currentPointsValue = GetPoints(PChar, type);
-    const auto newPointsValue     = std::clamp(currentPointsValue + amount, 0, max);
+    // 64-bit sum so amount can't overflow, and max is sanitized: callers (including Lua's
+    // addCurrency) can pass a non-positive cap, which would otherwise invert the clamp bounds.
+    const auto newPointsValue = static_cast<int32>(std::clamp<int64>(static_cast<int64>(currentPointsValue) + amount, 0, std::max(max, 0)));
     SetPoints(PChar, type, newPointsValue);
 
     if (strcmp(type, "unity_accolades") == 0 && amount > 0)

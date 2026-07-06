@@ -21,7 +21,6 @@
 
 #include "search_comment.h"
 
-#include "common/logging.h"
 #include "common/utils.h"
 
 SearchCommentPacket::SearchCommentPacket(uint32 playerId, const std::string& comment)

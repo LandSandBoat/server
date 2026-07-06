@@ -24,6 +24,8 @@
 
 #include "common/cbasetypes.h"
 
+#include "common/types/fn.h"
+
 #include "entities/pet_entity.h"
 #include "enums/weather.h"
 #include "items/item_equipment.h"
@@ -78,7 +80,7 @@ private:
     CCharEntity*               m_POwner;
     std::vector<CLatentEffect> m_LatentEffectList;
 
-    void ProcessLatentEffects(const std::function<bool(CLatentEffect&)>& logic);
+    void ProcessLatentEffects(const Fn<bool(CLatentEffect&) const>& logic);
     auto ProcessLatentEffect(CLatentEffect& latentEffect, bool isDuringWs = false) -> bool;
     bool ApplyLatentEffect(CLatentEffect& effect, bool expression);
 };

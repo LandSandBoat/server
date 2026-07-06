@@ -20,7 +20,6 @@
 */
 
 #include "md52.h"
-#include <cstring>
 
 // clang-format off
 #define GET_UINT32(n,b,i)                       \

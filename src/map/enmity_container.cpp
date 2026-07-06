@@ -19,18 +19,14 @@
 ===========================================================================
 */
 
-#include "common/logging.h"
 #include "common/settings.h"
 #include "common/utils.h"
 
-#include "ai/ai_container.h"
-#include "alliance.h"
 #include "enmity_container.h"
 #include "entities/battle_entity.h"
 #include "entities/char_entity.h"
 #include "entities/mob_entity.h"
 #include "notoriety_container.h"
-#include "packets/entity_update.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
 #include "utils/zoneutils.h"

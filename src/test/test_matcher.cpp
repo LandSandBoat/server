@@ -111,7 +111,7 @@ auto TestMatcher::matchesAnyPattern(const std::string& text, const std::vector<s
         {
             ShowErrorFmt("Invalid regex pattern '{}': {}", pattern, e.what());
             // Fall back to simple string matching
-            if (text.find(pattern) != std::string::npos)
+            if (text.contains(pattern))
             {
                 return true;
             }
@@ -124,5 +124,5 @@ auto TestMatcher::matchesAnyPattern(const std::string& text, const std::vector<s
 // Check if the test name contains the specified tag (formatted as #tag)
 auto TestMatcher::hasTag(const std::string& testName, const std::string& tag) const -> bool
 {
-    return testName.find(std::format("#{}", tag)) != std::string::npos;
+    return testName.contains(std::format("#{}", tag));
 }

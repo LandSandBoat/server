@@ -22,13 +22,17 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+
 #include "enums/blocked_state.h"
 #include "enums/packet_c2s.h"
 #include "magic_enum/magic_enum.hpp"
 #include "zone.h"
-#include <fmt/ranges.h>
+
 #include <format>
 #include <set>
+#include <utility>
+
+#include <fmt/ranges.h>
 
 enum LSTYPE : std::uint8_t;
 enum class KeyItem : uint16_t;
@@ -161,7 +165,7 @@ public:
         {
             if constexpr (std::is_enum_v<T>)
             {
-                result_.addError(std::format("{} value {} is not allowed.", fieldName, static_cast<std::underlying_type_t<T>>(value)));
+                result_.addError(std::format("{} value {} is not allowed.", fieldName, std::to_underlying(value)));
             }
             else
             {
@@ -206,7 +210,7 @@ public:
         if (!magic_enum::enum_contains<E>(value))
         {
             constexpr std::string_view enumTypeName    = magic_enum::enum_type_name<E>();
-            auto                       underlyingValue = static_cast<std::underlying_type_t<E>>(value);
+            auto                       underlyingValue = std::to_underlying(value);
             result_.addError(std::format("{} not a valid {} value.", underlyingValue, enumTypeName));
         }
 

@@ -58,13 +58,10 @@
 #include "ai/states/attack_state.h"
 #include "ai/states/item_state.h"
 #include "ai/states/magic_state.h"
-#include "ai/states/range_state.h"
 #include "ai/states/weaponskill_state.h"
 
 #include "ability.h"
 #include "aman.h"
-#include "attack.h"
-#include "automaton_entity.h"
 #include "battlefield.h"
 #include "char_recast_container.h"
 
@@ -72,7 +69,6 @@
 #include "action/interrupts.h"
 #include "blue_spell.h"
 #include "conquest_system.h"
-#include "enums/key_items.h"
 #include "enums/recast.h"
 #include "ipc_client.h"
 #include "item_container.h"
@@ -100,7 +96,6 @@
 #include "trust_entity.h"
 #include "unitychat.h"
 #include "universal_container.h"
-#include "utils/attackutils.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
 #include "utils/gardenutils.h"
@@ -965,7 +960,7 @@ auto CCharEntity::getEquip(const SLOTTYPE slot) const -> CItemEquipment*
     return static_cast<CItemEquipment*>(equipped_[slot]);
 }
 
-auto CCharEntity::equipLocation(const uint8 equipSlot) const -> std::optional<ItemLocation>
+auto CCharEntity::equipLocation(const uint8 equipSlot) const -> Maybe<ItemLocation>
 {
     if (equipSlot >= EquipSlotCount)
     {

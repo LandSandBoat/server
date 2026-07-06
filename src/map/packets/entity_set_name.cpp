@@ -24,7 +24,6 @@
 #include "entity_set_name.h"
 
 #include "entities/base_entity.h"
-#include "entities/char_entity.h"
 #include "entities/trust_entity.h"
 
 CEntitySetNamePacket::CEntitySetNamePacket(CBaseEntity* PEntity)

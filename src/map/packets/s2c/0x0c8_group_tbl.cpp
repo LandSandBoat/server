@@ -22,9 +22,6 @@
 #include "0x0c8_group_tbl.h"
 
 #include "alliance.h"
-#include "common/database.h"
-#include "common/logging.h"
-#include "map_engine.h"
 #include "party.h"
 
 #include "entities/char_entity.h"

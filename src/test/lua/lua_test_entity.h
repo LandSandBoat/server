@@ -24,8 +24,6 @@
 #include "lua_test_entity_assertions.h"
 #include "map/lua/lua_base_entity.h"
 
-#include <common/scheduler.h>
-
 class CBaseEntity;
 
 class CLuaTestEntity : public CLuaBaseEntity

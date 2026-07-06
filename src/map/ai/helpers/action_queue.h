@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -22,82 +22,60 @@
 #ifndef _ACTIONQUEUE_H
 #define _ACTIONQUEUE_H
 
-#include "common/cbasetypes.h"
-#include "common/mmo.h"
 #include "common/timer.h"
-#include <functional>
-#include <memory>
-#include <queue>
 
-#include "sol/sol.hpp"
+#include "common/types/fn.h"
+#include "common/types/heap.h"
 
 class CBaseEntity;
 
 struct queueAction_t
 {
-    using EntityFunc_t = std::function<void(CBaseEntity*)>;
+    // Move-only: queued actions can capture move-only state, and pushing/popping
+    // moves the callable instead of copying it.
+    using EntityFunc_t = Fn<void(CBaseEntity*)>;
 
-    timer::time_point start_time{ timer::now() };
-    timer::duration   delay{ 0ms };
+    timer::time_point deadline;
     bool              checkState{ false };
-    sol::function     lua_func{};
     EntityFunc_t      func{};
 
-    queueAction_t(int _ms, bool _checkstate, sol::function _lua_func)
-    : delay(std::chrono::milliseconds(_ms))
+    queueAction_t(timer::duration _ms, bool _checkstate, EntityFunc_t _func)
+    : deadline(timer::now() + _ms)
     , checkState(_checkstate)
-    , lua_func(_lua_func)
-    {
-    }
-
-    queueAction_t(timer::duration _ms, bool _checkstate, std::function<void(CBaseEntity*)> _func)
-    : delay(_ms)
-    , checkState(_checkstate)
-    , func(_func)
+    , func(std::move(_func))
     {
     }
 };
 
-inline bool operator<(const queueAction_t& lhs, const queueAction_t& rhs) noexcept
+// Min-heap ordering: the action with the soonest deadline is at the top.
+struct QueueActionDeadlineGreater
 {
-    return lhs.start_time + lhs.delay < rhs.start_time + rhs.delay;
-}
-
-inline bool operator>(const queueAction_t& lhs, const queueAction_t& rhs) noexcept
-{
-    return rhs < lhs;
-}
-
-inline bool operator<=(const queueAction_t& lhs, const queueAction_t& rhs) noexcept
-{
-    return !(lhs > rhs);
-}
-
-inline bool operator>=(const queueAction_t& lhs, const queueAction_t& rhs) noexcept
-{
-    return !(lhs < rhs);
-}
+    bool operator()(const queueAction_t& lhs, const queueAction_t& rhs) const noexcept
+    {
+        return lhs.deadline > rhs.deadline;
+    }
+};
 
 class CAIActionQueue
 {
 public:
-    CAIActionQueue(CBaseEntity*);
+    explicit CAIActionQueue(CBaseEntity*);
 
     void pushAction(queueAction_t&&);
     void checkAction(timer::time_point tick);
 
-    void handleAction(queueAction_t& action);
-
     void clearActionQueue();
     void clearTimerQueue();
-    bool isEmpty();
+    bool isEmpty() const;
 
 private:
-    using ActionPQ_t = std::priority_queue<queueAction_t, std::vector<queueAction_t>, std::greater<queueAction_t>>;
+    void handleAction(queueAction_t& action);
+
+    using ActionHeap_t = Heap<queueAction_t, QueueActionDeadlineGreater>;
 
     CBaseEntity* PEntity;
-    ActionPQ_t   actionQueue;
-    ActionPQ_t   timerQueue;
+    ActionHeap_t actionQueue;
+    ActionHeap_t timerQueue;
 };
 
 #endif

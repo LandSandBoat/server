@@ -22,7 +22,6 @@
 #pragma once
 
 #include "base.h"
-#include "common/mmo.h"
 
 class CBaseEntity;
 enum class POSMODE : uint8

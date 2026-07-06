@@ -27,6 +27,7 @@
 #include "common/utils.h"
 #include "common/xirand.h"
 
+#include <cfloat>
 #include <fstream>
 #include <set>
 #include <vector>

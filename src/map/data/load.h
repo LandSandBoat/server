@@ -24,6 +24,8 @@
 #include "common/cbasetypes.h"
 #include "common/logging.h"
 
+#include <common/types/hash_map.h>
+
 #include "data/node.h"
 
 #include <charconv>
@@ -35,7 +37,6 @@
 #include <string>
 #include <string_view>
 #include <type_traits>
-#include <unordered_map>
 #include <utility>
 #include <vector>
 
@@ -52,11 +53,11 @@ enum class IdSource
 // Shared body for codegen'd populateMaps; per-type bits go in populateOne.
 // Data backend is provided at compilation time, we just want something that deals with a tree-like structure
 template <class T, class B, class PopulateOne>
-auto populateMapDriver(const Node<B> root, const std::string_view sectionName, const IdSource idSource, const std::string_view source, PopulateOne populateOne) -> std::unordered_map<decltype(T::Id), T>
+auto populateMapDriver(const Node<B> root, const std::string_view sectionName, const IdSource idSource, const std::string_view source, PopulateOne populateOne) -> HashMap<decltype(T::Id), T>
 {
     using KeyT = decltype(T::Id);
 
-    std::unordered_map<KeyT, T> result;
+    HashMap<KeyT, T> result;
 
     // Section is the top level key where the records are stored
     if (!root.has(sectionName))
@@ -109,12 +110,12 @@ auto populateMapDriver(const Node<B> root, const std::string_view sectionName, c
 
 // Must be specialized by codegen, else it's a compile-time failure
 template <class T, class B>
-auto populateMap(Node<B> root, std::type_identity<T>) -> std::unordered_map<decltype(T::Id), T> = delete;
+auto populateMap(Node<B> root, std::type_identity<T>) -> HashMap<decltype(T::Id), T> = delete;
 
 // Parse core, merge each module over it in init.txt order, populate.
 // Module trees stay alive until populate ends; backend's merge references them.
 template <class T, NodeBackend B>
-auto loadAllOf(const std::string_view corePath, const std::span<const std::string> modulePaths) -> std::unordered_map<decltype(T::Id), T>
+auto loadAllOf(const std::string_view corePath, const std::span<const std::string> modulePaths) -> HashMap<decltype(T::Id), T>
 {
     const auto slurp = [](std::string_view path) -> std::string
     {

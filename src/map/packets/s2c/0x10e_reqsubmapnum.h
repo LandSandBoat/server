@@ -23,8 +23,6 @@
 
 #include "base.h"
 
-class CCharEntity;
-
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x010E
 // This packet is sent by the server to update the clients sub map number.
 class GP_SERV_COMMAND_REQSUBMAPNUM final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_REQSUBMAPNUM, GP_SERV_COMMAND_REQSUBMAPNUM>

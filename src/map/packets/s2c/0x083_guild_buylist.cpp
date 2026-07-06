@@ -22,7 +22,6 @@
 #include "0x083_guild_buylist.h"
 
 #include "entities/char_entity.h"
-#include "item_container.h"
 
 GP_SERV_COMMAND_GUILD_BUYLIST::GP_SERV_COMMAND_GUILD_BUYLIST(CCharEntity* PChar, const std::vector<GP_GUILD_ITEM>& items)
 {

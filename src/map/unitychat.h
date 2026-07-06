@@ -18,9 +18,6 @@
 #define _CUNITYCHAT_H
 
 #include "common/cbasetypes.h"
-#include "common/mmo.h"
-
-#include <vector>
 
 class CBasicPacket;
 class CCharEntity;

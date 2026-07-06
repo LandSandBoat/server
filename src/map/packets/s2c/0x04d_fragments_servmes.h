@@ -23,8 +23,6 @@
 
 #include "base.h"
 
-class CBaseEntity;
-
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x004D
 // This packet is sent by the server to respond to a client fragment request.
 // The main usage of this packet is for sending the client fragments of the server message as the client requests them.

@@ -21,8 +21,6 @@
 
 #include "messageutils.h"
 
-#include "enums/msg_basic.h"
-
 namespace messageutils
 {
 

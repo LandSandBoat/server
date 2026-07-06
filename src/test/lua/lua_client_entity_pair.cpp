@@ -20,7 +20,6 @@
 */
 
 #include "lua_client_entity_pair.h"
-#include "common/lua.h"
 #include "enums/tick_type.h"
 #include "map/entities/base_entity.h"
 #include "map/entities/char_entity.h"
@@ -29,16 +28,12 @@
 #include "map/lua/lua_base_entity.h"
 #include "map/lua/sol_bindings.h"
 #include "map/utils/charutils.h"
-#include "map/utils/zoneutils.h"
 #include "map/zone.h"
 #include "map_engine.h"
 #include "map_networking.h"
 #include "test/lua/lua_simulation.h"
-#include "test/lua/lua_spy.h"
 #include "test_char.h"
 #include "test_common.h"
-
-#include <unordered_map>
 
 // A test player that combines client and player entity functionality
 // Common test patterns are exposed as properties

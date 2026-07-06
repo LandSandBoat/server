@@ -21,12 +21,11 @@
 
 #pragma once
 
-#include "common/cbasetypes.h"
-
 #include "base.h"
 
-#include <optional>
-#include <string_view>
+#include "common/cbasetypes.h"
+
+#include <common/types/maybe.h>
 
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x0048
 // This packet is sent by the server when the client is interacting with a linkshell concierge NPC.
@@ -40,7 +39,7 @@ class HEADER final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_LINK_CONCI
 public:
     struct PacketData
     {
-        uint8_t  Sentinel[4]; // FEFEFEFE — identifies header packet
+        uint8_t  Sentinel[4]; // FEFEFEFE - identifies header packet
         uint16_t SlotIndex;   // Player own LS slot in the 16-slot table
         uint16_t ListingFlag; // 0xFFFF when registered
         uint8_t  padding00[16];
@@ -50,7 +49,7 @@ public:
         uint8_t  padding02[79];
     };
 
-    HEADER(std::optional<uint8> yourSlot, uint16 daysSincePost);
+    HEADER(Maybe<uint8> yourSlot, uint16 daysSincePost);
 };
 
 #pragma pack(pop)

@@ -22,10 +22,8 @@
 #include "attackutils.h"
 #include "attack.h"
 #include "battleutils.h"
-#include "common/utils.h"
 #include "items/item_weapon.h"
 #include "lua/luautils.h"
-#include "status_effect_container.h"
 
 namespace attackutils
 {

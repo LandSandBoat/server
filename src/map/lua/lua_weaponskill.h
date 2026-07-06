@@ -22,7 +22,6 @@
 #pragma once
 
 #include "common/cbasetypes.h"
-#include "luautils.h"
 
 class CWeaponSkill;
 

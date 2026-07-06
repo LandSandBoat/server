@@ -19,14 +19,12 @@
 ===========================================================================
 */
 
-#include "common/logging.h"
 #include "common/utils.h"
 
 #include "data_loader.h"
 #include "search_list.h"
 
 #include <cstring>
-#include <fstream>
 
 #include "linkshell_list.h"
 

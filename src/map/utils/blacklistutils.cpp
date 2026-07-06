@@ -21,7 +21,6 @@
 
 #include "blacklistutils.h"
 
-#include "common/database.h"
 #include "common/utils.h"
 
 #include "entities/char_entity.h"

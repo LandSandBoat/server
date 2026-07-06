@@ -21,7 +21,6 @@
 
 #include "0x076_group_effects.h"
 
-#include "entities/battle_entity.h"
 #include "entities/char_entity.h"
 #include "status_effect_container.h"
 
