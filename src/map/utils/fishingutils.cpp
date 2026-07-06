@@ -1407,7 +1407,7 @@ bool CanFishMob(CMobEntity* PMob)
         return false;
     }
 
-    if (PMob->status != STATUS_TYPE::DISAPPEAR)
+    if (PMob->status != xi::Status::Disappear)
     {
         return false;
     }
@@ -1651,7 +1651,7 @@ int32 CatchChest(CCharEntity* PChar, uint32 NpcID, uint8 distance, int8 angle)
     m.rotation         = p.rotation; // getangle(m, p);
 
     Chest->loc.p  = m;
-    Chest->status = STATUS_TYPE::NORMAL;
+    Chest->status = xi::Status::Normal;
     Chest->SetLocalVar("owner", PChar->id);
     Chest->updatemask |= UPDATE_COMBAT;
     return 1;

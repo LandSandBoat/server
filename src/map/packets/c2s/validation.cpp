@@ -45,7 +45,7 @@ auto PacketValidator::blockedBy(const magic_enum::containers::bitset<BlockedStat
     CHECK_BLOCKED(BlockedState::Mounted,        PChar_->isMounted())
     CHECK_BLOCKED(BlockedState::InEvent,        PChar_->isInEvent())
     CHECK_BLOCKED(BlockedState::Engaged,        PChar_->PAI->IsEngaged())
-    CHECK_BLOCKED(BlockedState::AbnormalStatus, PChar_->status != STATUS_TYPE::NORMAL)
+    CHECK_BLOCKED(BlockedState::AbnormalStatus, PChar_->status != xi::Status::Normal)
     CHECK_BLOCKED(BlockedState::Monstrosity,    PChar_->m_PMonstrosity != nullptr)
     CHECK_BLOCKED(BlockedState::Healing,        PChar_->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Healing) || PChar_->animation == ANIMATION_HEALING)
     CHECK_BLOCKED(BlockedState::Charmed,        PChar_->StatusEffectContainer->HasStatusEffect({ xi::StatusEffect::CharmI, xi::StatusEffect::CharmIi }))

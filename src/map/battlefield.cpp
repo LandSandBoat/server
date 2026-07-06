@@ -357,7 +357,7 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
     }
     else if (PEntity->objtype == TYPE_NPC)
     {
-        PEntity->status = (conditions & CONDITION_DISAPPEAR_AT_START) == CONDITION_DISAPPEAR_AT_START ? STATUS_TYPE::DISAPPEAR : STATUS_TYPE::NORMAL;
+        PEntity->status = (conditions & CONDITION_DISAPPEAR_AT_START) == CONDITION_DISAPPEAR_AT_START ? xi::Status::Disappear : xi::Status::Normal;
         PEntity->loc.zone->UpdateEntityPacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
         m_NpcList.emplace_back(static_cast<CNpcEntity*>(PEntity));
     }
@@ -457,7 +457,7 @@ CBaseEntity* CBattlefield::GetEntity(CBaseEntity* PEntity)
     }
     else if (PEntity->objtype == TYPE_MOB)
     {
-        if (PEntity->allegiance == ALLEGIANCE_TYPE::MOB)
+        if (PEntity->allegiance == xi::Allegiance::Mob)
         {
             for (const auto& mob : m_AdditionalEnemyList)
             {
@@ -474,7 +474,7 @@ CBaseEntity* CBattlefield::GetEntity(CBaseEntity* PEntity)
                 }
             }
         }
-        else if (PEntity->allegiance == ALLEGIANCE_TYPE::PLAYER)
+        else if (PEntity->allegiance == xi::Allegiance::Player)
         {
             for (auto* PAlly : m_AllyList)
             {
@@ -635,7 +635,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
 
         if (PEntity->objtype == TYPE_NPC)
         {
-            PEntity->status = STATUS_TYPE::DISAPPEAR;
+            PEntity->status = xi::Status::Disappear;
             PEntity->loc.zone->UpdateEntityPacket(PEntity, ENTITY_DESPAWN, UPDATE_ALL_MOB);
 
             if (auto* PNpcEntity = dynamic_cast<CNpcEntity*>(PEntity))
@@ -656,7 +656,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
                 auto* PPetEntity = dynamic_cast<CPetEntity*>(PEntity);
                 if (PPetEntity && (!PPetEntity->PMaster || PPetEntity->PMaster->objtype != TYPE_PC))
                 {
-                    PEntity->status = STATUS_TYPE::DISAPPEAR;
+                    PEntity->status = xi::Status::Disappear;
                 }
 
                 if (auto* PMobEntity = dynamic_cast<CMobEntity*>(PEntity))
@@ -667,7 +667,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
                         // but not despawned (for example Prishe in Dawn fight)
                         if (PMobEntity->PAI->IsSpawned())
                         {
-                            PEntity->status = STATUS_TYPE::DISAPPEAR;
+                            PEntity->status = xi::Status::Disappear;
                             PEntity->loc.zone->UpdateEntityPacket(PEntity, ENTITY_DESPAWN, UPDATE_NONE);
                         }
 

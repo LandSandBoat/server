@@ -62,7 +62,7 @@ CTrustEntity::CTrustEntity(CCharEntity* PChar, uint32 trustId, IsPassiveTrust is
 {
     objtype                     = TYPE_TRUST;
     m_EcoSystem                 = xi::Ecosystem::Unclassified;
-    allegiance                  = ALLEGIANCE_TYPE::PLAYER;
+    allegiance                  = xi::Allegiance::Player;
     m_MobSkillList              = 0;
     PMaster                     = PChar;
     m_bReleaseTargIDOnDisappear = true;
@@ -111,7 +111,7 @@ void CTrustEntity::PostTick()
     // TODO: Calling a grand-parent's impl. of an overridden function is bad
     CBattleEntity::PostTick();
     timer::time_point now = timer::now();
-    if (loc.zone && updatemask && status != STATUS_TYPE::DISAPPEAR && now > m_nextUpdateTimer)
+    if (loc.zone && updatemask && status != xi::Status::Disappear && now > m_nextUpdateTimer)
     {
         m_nextUpdateTimer = now + 250ms;
         loc.zone->UpdateEntityPacket(this, ENTITY_UPDATE, updatemask);

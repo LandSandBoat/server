@@ -340,7 +340,7 @@ auto LoadNPCList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                                     PNpc->animationsub = rset->get<uint8>("animationsub");
 
                                     PNpc->namevis = rset->get<uint8>("namevis");
-                                    PNpc->status  = rset->get<STATUS_TYPE>("status");
+                                    PNpc->status  = rset->get<xi::Status>("status");
                                     PNpc->m_flags = rset->get<uint32>("entityFlags");
 
                                     db::extractFromBlob(rset, "look", PNpc->look);
@@ -590,7 +590,7 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
 
                                     PMob->m_Pool = rset->get<uint32>("poolid");
 
-                                    PMob->allegiance      = rset->get<ALLEGIANCE_TYPE>("allegiance");
+                                    PMob->allegiance      = rset->get<xi::Allegiance>("allegiance");
                                     PMob->namevis         = rset->get<uint8>("namevis");
                                     PMob->modelHitboxSize = std::max<float>(0.0f, rset->getOrDefault<float>("modelHitboxSize", 0) / 10.f);
                                     PMob->modelSize       = rset->getOrDefault<uint8>("modelSize", 0);

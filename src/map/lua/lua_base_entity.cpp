@@ -1738,7 +1738,7 @@ bool CLuaBaseEntity::isFellow() const
 bool CLuaBaseEntity::isAlly() const
 {
     const auto isMob          = m_PBaseEntity->objtype == TYPE_MOB;
-    const auto playerAlliance = m_PBaseEntity->allegiance == ALLEGIANCE_TYPE::PLAYER;
+    const auto playerAlliance = m_PBaseEntity->allegiance == xi::Allegiance::Player;
     return isMob && playerAlliance;
 }
 
@@ -1779,9 +1779,9 @@ void CLuaBaseEntity::resetAI()
  *  Notes   :
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getStatus()
+auto CLuaBaseEntity::getStatus() -> xi::Status
 {
-    return static_cast<uint8>(m_PBaseEntity->status);
+    return m_PBaseEntity->status;
 }
 
 /************************************************************************
@@ -1791,9 +1791,9 @@ uint8 CLuaBaseEntity::getStatus()
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::setStatus(uint8 status)
+void CLuaBaseEntity::setStatus(xi::Status status)
 {
-    m_PBaseEntity->status = static_cast<STATUS_TYPE>(status);
+    m_PBaseEntity->status = status;
     m_PBaseEntity->updatemask |= UPDATE_HP;
 }
 
@@ -2528,13 +2528,13 @@ void CLuaBaseEntity::showNPC(const sol::object& seconds)
 
     uint32 showTime = (seconds != sol::lua_nil) ? seconds.as<uint32>() * 1000 : 15000;
 
-    m_PBaseEntity->status = STATUS_TYPE::NORMAL;
+    m_PBaseEntity->status = xi::Status::Normal;
     m_PBaseEntity->loc.zone->UpdateEntityPacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_COMBAT);
 
     // clang-format off
     m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(showTime), false, [](CBaseEntity* PNpc)
     {
-        PNpc->status = STATUS_TYPE::DISAPPEAR;
+        PNpc->status = xi::Status::Disappear;
         if (PNpc->loc.zone)
         {
             PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_DESPAWN, UPDATE_NONE);
@@ -2563,17 +2563,17 @@ void CLuaBaseEntity::hideNPC(const sol::object& seconds)
         return;
     }
 
-    if (m_PBaseEntity->status == STATUS_TYPE::NORMAL)
+    if (m_PBaseEntity->status == xi::Status::Normal)
     {
         uint32 hideTime = (seconds != sol::lua_nil) ? seconds.as<uint32>() * 1000 : 15000;
 
-        m_PBaseEntity->status = STATUS_TYPE::DISAPPEAR;
+        m_PBaseEntity->status = xi::Status::Disappear;
         m_PBaseEntity->loc.zone->UpdateEntityPacket(m_PBaseEntity, ENTITY_DESPAWN, UPDATE_NONE);
 
         // clang-format off
         m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(hideTime), false, [](CBaseEntity* PNpc)
         {
-            PNpc->status = STATUS_TYPE::NORMAL;
+            PNpc->status = xi::Status::Normal;
             if (PNpc->loc.zone)
             {
                 PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT);
@@ -2598,14 +2598,14 @@ void CLuaBaseEntity::updateNPCHideTime(const sol::object& seconds)
         return;
     }
 
-    if (m_PBaseEntity->status == STATUS_TYPE::DISAPPEAR)
+    if (m_PBaseEntity->status == xi::Status::Disappear)
     {
         uint32 hideTime = (seconds != sol::lua_nil) ? seconds.as<uint32>() * 1000 : 15000;
 
         // clang-format off
         m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(hideTime), false, [](CBaseEntity* PNpc)
         {
-            PNpc->status = STATUS_TYPE::NORMAL;
+            PNpc->status = xi::Status::Normal;
             if (PNpc->loc.zone)
             {
                 PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT);
@@ -2822,7 +2822,7 @@ void CLuaBaseEntity::leaveGame()
     {
         // Because we can't detect if this is happening in the middle of an effect wearing off or not,
         // this can be processed after player tick in CZoneEntities::ZoneServer
-        PChar->status = STATUS_TYPE::SHUTDOWN;
+        PChar->status = xi::Status::Shutdown;
     }
 }
 
@@ -3243,7 +3243,7 @@ void CLuaBaseEntity::clearPlayerTriggerAreas()
 *  Notes   : Currently only used for port bastok drawbridge as
              setAnimation() only updates for chars in range.
 ************************************************************************/
-void CLuaBaseEntity::updateToEntireZone(uint8 statusID, uint8 animation, const sol::object& matchTime)
+void CLuaBaseEntity::updateToEntireZone(xi::Status statusID, uint8 animation, const sol::object& matchTime)
 {
     if (m_PBaseEntity->objtype != TYPE_NPC)
     {
@@ -3254,7 +3254,7 @@ void CLuaBaseEntity::updateToEntireZone(uint8 statusID, uint8 animation, const s
     auto* PNpc          = static_cast<CNpcEntity*>(m_PBaseEntity);
     bool  updateForTime = (matchTime != sol::lua_nil) ? matchTime.as<bool>() : false;
 
-    PNpc->status    = static_cast<STATUS_TYPE>(statusID);
+    PNpc->status    = statusID;
     PNpc->animation = animation;
 
     // If this flag is high, update the NPC's name to match the current time
@@ -3492,7 +3492,7 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
         auto* PChar = ((CCharEntity*)m_PBaseEntity);
-        if (va[4].is<uint8>() && PChar->status == STATUS_TYPE::DISAPPEAR)
+        if (va[4].is<uint8>() && PChar->status == xi::Status::Disappear)
         {
             // do not modify zone/position if the character is already zoning
             return;
@@ -3520,7 +3520,7 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
             }
 
             PChar->loc.destination     = zoneid;
-            PChar->status              = STATUS_TYPE::DISAPPEAR;
+            PChar->status              = xi::Status::Disappear;
             PChar->loc.boundary        = 0;
             PChar->m_moghouseID        = 0;
             PChar->requestedZoneChange = true;
@@ -3531,7 +3531,7 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
                 PChar->setPetZoningInfo();
             }
         }
-        else if (PChar->status != STATUS_TYPE::DISAPPEAR)
+        else if (PChar->status != xi::Status::Disappear)
         {
             PChar->pushPacket<GP_SERV_COMMAND_WPOS>(PChar, PChar->loc.p);
         }
@@ -6076,7 +6076,7 @@ void CLuaBaseEntity::setCostume(uint16 costume)
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    if (PChar->m_Costume != costume && PChar->status != STATUS_TYPE::SHUTDOWN && PChar->status != STATUS_TYPE::DISAPPEAR)
+    if (PChar->m_Costume != costume && PChar->status != xi::Status::Shutdown && PChar->status != xi::Status::Disappear)
     {
         PChar->m_Costume = costume;
         PChar->updatemask |= UPDATE_LOOK;
@@ -6119,7 +6119,7 @@ void CLuaBaseEntity::setCostume2(uint16 costume)
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    if (PChar->m_Costume2 != costume && PChar->status != STATUS_TYPE::SHUTDOWN && PChar->status != STATUS_TYPE::DISAPPEAR)
+    if (PChar->m_Costume2 != costume && PChar->status != xi::Status::Shutdown && PChar->status != xi::Status::Disappear)
     {
         PChar->m_Costume2 = costume;
         PChar->updatemask |= UPDATE_LOOK;
@@ -6314,9 +6314,9 @@ void CLuaBaseEntity::setNation(uint8 nation)
  *  Example : if target:getAllegiance() == caster:getAllegiance() then
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getAllegiance()
+auto CLuaBaseEntity::getAllegiance() -> xi::Allegiance
 {
-    return static_cast<uint8>(m_PBaseEntity->allegiance);
+    return m_PBaseEntity->allegiance;
 }
 
 /************************************************************************
@@ -6325,9 +6325,9 @@ uint8 CLuaBaseEntity::getAllegiance()
  *  Example : target:setAllegiance(???)
  ************************************************************************/
 
-void CLuaBaseEntity::setAllegiance(uint8 allegiance)
+void CLuaBaseEntity::setAllegiance(xi::Allegiance allegiance)
 {
-    m_PBaseEntity->allegiance = static_cast<ALLEGIANCE_TYPE>(allegiance);
+    m_PBaseEntity->allegiance = allegiance;
     m_PBaseEntity->updatemask |= UPDATE_HP | UPDATE_NAME;
 }
 
@@ -7372,7 +7372,7 @@ uint8 CLuaBaseEntity::levelRestriction(const sol::object& level)
             // Update the character's Automaton capacity bonus regardless if the pet is out or not
             PChar->setAutomatonElementalCapacityBonus(PChar->getMod(Mod::AUTO_ELEM_CAPACITY));
 
-            if (PChar->status != STATUS_TYPE::DISAPPEAR)
+            if (PChar->status != xi::Status::Disappear)
             {
                 PChar->pushPacket<GP_SERV_COMMAND_JOB_INFO>(PChar);
                 PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
@@ -16271,7 +16271,7 @@ bool CLuaBaseEntity::hasPet()
 
     auto* PTarget = static_cast<CBattleEntity*>(m_PBaseEntity);
 
-    return PTarget->PPet != nullptr && PTarget->PPet->status != STATUS_TYPE::DISAPPEAR;
+    return PTarget->PPet != nullptr && PTarget->PPet->status != xi::Status::Disappear;
 }
 
 /************************************************************************
@@ -16291,7 +16291,7 @@ bool CLuaBaseEntity::hasJugPet()
 
     auto* PBattle = static_cast<CBattleEntity*>(m_PBaseEntity);
 
-    if (auto* PPet = dynamic_cast<CPetEntity*>(PBattle->PPet); PPet && PPet->status != STATUS_TYPE::DISAPPEAR)
+    if (auto* PPet = dynamic_cast<CPetEntity*>(PBattle->PPet); PPet && PPet->status != xi::Status::Disappear)
     {
         return PPet->getPetType() == PET_TYPE::JUG_PET;
     }
@@ -17829,7 +17829,7 @@ bool CLuaBaseEntity::isSpawned()
     }
     else if (CNpcEntity* PNpcEntity = dynamic_cast<CNpcEntity*>(m_PBaseEntity))
     {
-        return PNpcEntity->status != STATUS_TYPE::DISAPPEAR;
+        return PNpcEntity->status != xi::Status::Disappear;
     }
     else
     {

@@ -508,7 +508,7 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
         }
         else
         {
-            PChar->PPet->status = STATUS_TYPE::DISAPPEAR;
+            PChar->PPet->status = xi::Status::Disappear;
             if (static_cast<CPetEntity*>(PChar->PPet)->getPetType() == PET_TYPE::AVATAR)
             {
                 PChar->setModifier(Mod::AVATAR_PERPETUATION, 0);
@@ -921,7 +921,7 @@ void CZoneEntities::SpawnMOBs(CCharEntity* PChar)
         UPDATE_ALL_MOB,
         /*Fn: visible*/ [&](CBaseEntity* entity)
         {
-            return entity->status != STATUS_TYPE::DISAPPEAR &&
+            return entity->status != xi::Status::Disappear &&
                    isWithinVerticalDistance(PChar, entity) &&
                    isWithinDistance(PChar->loc.p, entity->loc.p, ENTITY_RENDER_DISTANCE);
         },
@@ -948,7 +948,7 @@ void CZoneEntities::SpawnPETs(CCharEntity* PChar)
         UPDATE_ALL_MOB,
         /*Fn: visible*/ [&](CBaseEntity* entity)
         {
-            return (entity->status == STATUS_TYPE::NORMAL || entity->status == STATUS_TYPE::UPDATE) &&
+            return (entity->status == xi::Status::Normal || entity->status == xi::Status::Update) &&
                    isWithinVerticalDistance(PChar, entity) &&
                    isWithinDistance(PChar->loc.p, entity->loc.p, ENTITY_RENDER_DISTANCE);
         });
@@ -981,7 +981,7 @@ void CZoneEntities::SpawnNPCs(CCharEntity* PChar)
                        isWithinDistance(PChar->loc.p, PEntity->loc.p, ENTITY_RENDER_DISTANCE);
             }
 
-            const bool visibleStatus = PEntity->status == STATUS_TYPE::NORMAL || PEntity->status == STATUS_TYPE::UPDATE;
+            const bool visibleStatus = PEntity->status == xi::Status::Normal || PEntity->status == xi::Status::Update;
             const bool inRange       = isWithinDistance(PChar->loc.p, PEntity->loc.p, ENTITY_RENDER_DISTANCE);
             const bool alwaysRel     = static_cast<CNpcEntity*>(PEntity)->alwaysRelevant();
             return visibleStatus && (inRange || alwaysRel);
@@ -1002,7 +1002,7 @@ void CZoneEntities::SpawnTRUSTs(CCharEntity* PChar)
         UPDATE_ALL_MOB,
         /*Fn: visible*/ [&](CBaseEntity* entity)
         {
-            return (entity->status == STATUS_TYPE::NORMAL || entity->status == STATUS_TYPE::UPDATE) &&
+            return (entity->status == xi::Status::Normal || entity->status == xi::Status::Update) &&
                    isWithinVerticalDistance(PChar, entity) &&
                    isWithinDistance(PChar->loc.p, entity->loc.p, ENTITY_RENDER_DISTANCE);
         });
@@ -1248,15 +1248,15 @@ void CZoneEntities::SpawnConditionalNPCs(CCharEntity* PChar)
     {
         if (visible)
         {
-            PEntity->status = STATUS_TYPE::NORMAL;
+            PEntity->status = xi::Status::Normal;
         }
         else
         {
-            PEntity->status = STATUS_TYPE::DISAPPEAR;
+            PEntity->status = xi::Status::Disappear;
         }
 
         PChar->updateEntityPacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
-        PEntity->status = STATUS_TYPE::DISAPPEAR;
+        PEntity->status = xi::Status::Disappear;
     };
 
     for (const auto& [_, PCurrentEntity] : m_npcList)
@@ -1677,7 +1677,7 @@ auto CZoneEntities::mobTick(CMobEntity* PMob, timer::time_point tick) -> Task<vo
     co_await PMob->PAI->Tick(tick);
 
     // This is only valid for dynamic entities
-    if (PMob->status == STATUS_TYPE::DISAPPEAR && PMob->m_bReleaseTargIDOnDisappear)
+    if (PMob->status == xi::Status::Disappear && PMob->m_bReleaseTargIDOnDisappear)
     {
         if (PMob->PPet != nullptr)
         {
@@ -1721,7 +1721,7 @@ auto CZoneEntities::mobTick(CMobEntity* PMob, timer::time_point tick) -> Task<vo
         co_return;
     }
 
-    if (PMob->allegiance == ALLEGIANCE_TYPE::PLAYER && PMob->m_isAggroable)
+    if (PMob->allegiance == xi::Allegiance::Player && PMob->m_isAggroable)
     {
         m_aggroableMobs.emplace_back(PMob);
     }
@@ -1776,7 +1776,7 @@ auto CZoneEntities::npcTick(CNpcEntity* PNpc, timer::time_point tick) -> Task<vo
     co_await PNpc->PAI->Tick(tick);
 
     // This is only valid for dynamic entities
-    if (PNpc->status == STATUS_TYPE::DISAPPEAR && PNpc->m_bReleaseTargIDOnDisappear)
+    if (PNpc->status == xi::Status::Disappear && PNpc->m_bReleaseTargIDOnDisappear)
     {
         FOR_EACH_PAIR_CAST_SECOND(CCharEntity*, PChar, m_charList)
         {
@@ -1806,7 +1806,7 @@ auto CZoneEntities::petTick(CPetEntity* PPet, timer::time_point tick) -> Task<vo
 
     // Pets specifically need to have their AI tick skipped if they're marked for deletion
     // to prevent a number of issues which can result from a pet having a deleted/nullptr'd PMaster
-    if (PPet->status == STATUS_TYPE::DISAPPEAR)
+    if (PPet->status == xi::Status::Disappear)
     {
         FOR_EACH_PAIR_CAST_SECOND(CMobEntity*, PCurrentMob, m_mobList)
         {
@@ -1855,7 +1855,7 @@ auto CZoneEntities::trustTick(CTrustEntity* PTrust, timer::time_point tick) -> T
 
     co_await PTrust->PAI->Tick(tick);
 
-    if (PTrust->status == STATUS_TYPE::DISAPPEAR)
+    if (PTrust->status == xi::Status::Disappear)
     {
         FOR_EACH_PAIR_CAST_SECOND(CMobEntity*, PCurrentMob, m_mobList)
         {
@@ -1884,7 +1884,7 @@ auto CZoneEntities::charTick(CCharEntity* PChar, timer::time_point tick) -> Task
 
     ShowTraceFmt("CZoneEntities::ZoneServer: Char: {} ({})", PChar->getName(), PChar->id);
 
-    if (PChar->status != STATUS_TYPE::SHUTDOWN)
+    if (PChar->status != xi::Status::Shutdown)
     {
         PChar->PRecastContainer->Check();
 
@@ -1903,7 +1903,7 @@ auto CZoneEntities::charTick(CCharEntity* PChar, timer::time_point tick) -> Task
         }
     }
 
-    if (PChar->requestedZoneChange || PChar->requestedWarp || PChar->status == STATUS_TYPE::SHUTDOWN)
+    if (PChar->requestedZoneChange || PChar->requestedWarp || PChar->status == xi::Status::Shutdown)
     {
         m_charsToChangeZone.insert(PChar);
     }
@@ -2071,12 +2071,12 @@ auto CZoneEntities::ZoneServer(timer::time_point tick) -> Task<void>
         bool  shouldErase = false;
 
         auto ipp = zoneutils::GetZoneIPP(PChar->loc.destination);
-        if (ipp == 0 && PChar->status != STATUS_TYPE::SHUTDOWN)
+        if (ipp == 0 && PChar->status != xi::Status::Shutdown)
         {
             ShowWarning(fmt::format("Char {} requested zone ({}) returned IPP of 0", PChar->name, PChar->loc.destination));
             shouldErase = true;
         }
-        else if (PChar->status == STATUS_TYPE::SHUTDOWN)
+        else if (PChar->status == xi::Status::Shutdown)
         {
             PChar->clearPacketList();
             charutils::ForceLogout(PChar);

@@ -985,7 +985,7 @@ auto LoadChar(Scheduler& scheduler, MapConfig config, const uint32 charId) -> st
     luautils::OnZoneIn(PChar);
     luautils::OnGameIn(PChar, zoning == 1);
 
-    PChar->status = STATUS_TYPE::DISAPPEAR;
+    PChar->status = xi::Status::Disappear;
 
     return charEntity;
 }
@@ -5886,7 +5886,7 @@ void SaveCharPosition(CCharEntity* PChar)
 {
     TracyZoneScoped;
 
-    if (PChar->status == STATUS_TYPE::DISAPPEAR)
+    if (PChar->status == xi::Status::Disappear)
     {
         return;
     }
@@ -7386,7 +7386,7 @@ auto SendToZone(CCharEntity* PChar, uint16 zoneId) -> bool
     PChar->PSession->zone_ipp = {};
     PChar->pushPacket<GP_SERV_COMMAND_LOGOUT>(GP_GAME_LOGOUT_STATE::ZONECHANGE, IPP(ipp));
 
-    PChar->status = STATUS_TYPE::DISAPPEAR;
+    PChar->status = xi::Status::Disappear;
 
     // Save pet if any
     if (PChar->shouldPetPersistThroughZoning())
@@ -7405,7 +7405,7 @@ void SendDisconnect(CCharEntity* PChar)
     PChar->clearPacketList();
 
     PChar->loc.destination     = 0xFFFF;
-    PChar->status              = STATUS_TYPE::SHUTDOWN;
+    PChar->status              = xi::Status::Shutdown;
     PChar->requestedZoneChange = true;
 
     // Save pet if any
@@ -7426,7 +7426,7 @@ void ForceLogout(CCharEntity* PChar)
 void ForceRezone(CCharEntity* PChar)
 {
     PChar->loc.destination = PChar->getZone();
-    PChar->status          = STATUS_TYPE::DISAPPEAR;
+    PChar->status          = xi::Status::Disappear;
     PChar->loc.boundary    = 0;
 
     PChar->clearPacketList();
@@ -7468,7 +7468,7 @@ auto HomePoint(CCharEntity* PChar, bool resetHPMP) -> bool
     PChar->loc.p           = PChar->profile.home_point.p;
     PChar->loc.destination = PChar->profile.home_point.destination;
 
-    PChar->status    = STATUS_TYPE::DISAPPEAR;
+    PChar->status    = xi::Status::Disappear;
     PChar->animation = ANIMATION_NONE;
     PChar->updatemask |= UPDATE_HP;
 
@@ -8082,7 +8082,7 @@ void removeCharFromZone(CCharEntity* PChar)
         PChar->ClearTrusts();
     }
 
-    if (PChar->status == STATUS_TYPE::SHUTDOWN)
+    if (PChar->status == xi::Status::Shutdown)
     {
         if (PChar->PParty != nullptr)
         {
@@ -8149,7 +8149,7 @@ void removeCharFromZone(CCharEntity* PChar)
     charutils::SaveEminenceData(PChar);
     charutils::SaveLastLogout(PChar);
 
-    PChar->status = STATUS_TYPE::DISAPPEAR;
+    PChar->status = xi::Status::Disappear;
 }
 
 void updateSession(MapSession* PSession, CCharEntity* PChar, CZone* currentZone)

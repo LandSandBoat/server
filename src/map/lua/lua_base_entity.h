@@ -136,8 +136,8 @@ public:
     // AI and Control
     void  initNpcAi();
     void  resetAI();
-    uint8 getStatus();
-    void  setStatus(uint8 status);
+    auto  getStatus() -> xi::Status;
+    void  setStatus(xi::Status status);
     uint8 getCurrentAction();
     bool  canUseAbilities();
 
@@ -212,7 +212,7 @@ public:
     void onPlayerTriggerAreaLeave(uint32 triggerAreaId);
     void clearPlayerTriggerAreas();
 
-    void updateToEntireZone(uint8 statusID, uint8 animation, const sol::object& matchTime); // Forces an update packet to update the NPC entity zone-wide
+    void updateToEntireZone(xi::Status statusID, uint8 animation, const sol::object& matchTime); // Forces an update packet to update the NPC entity zone-wide
     void sendEntityUpdateToPlayer(CLuaBaseEntity* entityToUpdate, uint8 entityUpdate, uint8 updateMask);
     void sendEmptyEntityUpdateToPlayer(CLuaBaseEntity* entityToUpdate);
 
@@ -335,8 +335,8 @@ public:
     // Player Status
     uint8 getNation();
     void  setNation(uint8 nation);
-    uint8 getAllegiance();
-    void  setAllegiance(uint8 allegiance);
+    auto  getAllegiance() -> xi::Allegiance;
+    void  setAllegiance(xi::Allegiance allegiance);
 
     uint8 getCampaignAllegiance();
     void  setCampaignAllegiance(uint8 allegiance);

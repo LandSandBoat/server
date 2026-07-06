@@ -287,7 +287,7 @@ void CTreasurePool::updatePool(CCharEntity* PChar)
         return;
     }
 
-    if (PChar->status != STATUS_TYPE::DISAPPEAR)
+    if (PChar->status != xi::Status::Disappear)
     {
         for (auto& m_PoolItem : m_PoolItems)
         {

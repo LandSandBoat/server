@@ -417,11 +417,11 @@ function CBaseEntity:resetAI()
 end
 
 ---@nodiscard
----@return integer
+---@return xi.status
 function CBaseEntity:getStatus()
 end
 
----@param status integer
+---@param status xi.status
 ---@return nil
 function CBaseEntity:setStatus(status)
 end
@@ -783,7 +783,7 @@ end
 function CBaseEntity:clearPlayerTriggerAreas()
 end
 
----@param statusID integer
+---@param statusID xi.status
 ---@param animation integer
 ---@param matchTime boolean?
 ---@return nil
@@ -1382,11 +1382,11 @@ function CBaseEntity:setNation(nation)
 end
 
 ---@nodiscard
----@return integer
+---@return xi.allegiance
 function CBaseEntity:getAllegiance()
 end
 
----@param allegiance integer
+---@param allegiance xi.allegiance
 ---@return nil
 function CBaseEntity:setAllegiance(allegiance)
 end

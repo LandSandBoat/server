@@ -38,13 +38,13 @@ CBaseEntity::CBaseEntity()
 : id(0)
 , targid(0)
 , objtype(ENTITYTYPE::TYPE_NONE)
-, status(STATUS_TYPE::DISAPPEAR)
+, status(xi::Status::Disappear)
 , m_TargID(0)
 , animation(0)
 , animationsub(0)
 , baseSpeed(settings::get<uint8>("map.BASE_SPEED"))
 , namevis(0)
-, allegiance(ALLEGIANCE_TYPE::MOB)
+, allegiance(xi::Allegiance::Mob)
 , updatemask(0)
 , priorityRender(false)
 , isRenamed(false)
@@ -73,7 +73,7 @@ CBaseEntity::~CBaseEntity()
 
 void CBaseEntity::Spawn()
 {
-    status = allegiance == ALLEGIANCE_TYPE::MOB ? STATUS_TYPE::UPDATE : STATUS_TYPE::NORMAL;
+    status = allegiance == xi::Allegiance::Mob ? xi::Status::Update : xi::Status::Normal;
     updatemask |= UPDATE_HP;
     ResetLocalVars();
     PAI->Reset();
@@ -81,7 +81,7 @@ void CBaseEntity::Spawn()
 
 void CBaseEntity::FadeOut()
 {
-    status = STATUS_TYPE::DISAPPEAR;
+    status = xi::Status::Disappear;
     updatemask |= UPDATE_HP;
 }
 
@@ -171,7 +171,7 @@ bool CBaseEntity::GetUntargetable() const
 
 bool CBaseEntity::isWideScannable()
 {
-    return status != STATUS_TYPE::DISAPPEAR && !IsNameHidden() && !GetUntargetable();
+    return status != xi::Status::Disappear && !IsNameHidden() && !GetUntargetable();
 }
 
 bool CBaseEntity::CanSeeTarget(CBaseEntity* target)

@@ -27,8 +27,8 @@
 auto GP_CLI_COMMAND_POS::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator(PChar)
-        .mustNotEqual(PChar->status, STATUS_TYPE::DISAPPEAR, "Character is disappearing")
-        .mustNotEqual(PChar->status, STATUS_TYPE::SHUTDOWN, "Character is shutting down");
+        .mustNotEqual(PChar->status, xi::Status::Disappear, "Character is disappearing")
+        .mustNotEqual(PChar->status, xi::Status::Shutdown, "Character is shutting down");
 }
 
 void GP_CLI_COMMAND_POS::process(MapSession* PSession, CCharEntity* PChar) const
@@ -100,7 +100,7 @@ void GP_CLI_COMMAND_POS::process(MapSession* PSession, CCharEntity* PChar) const
             {
                 PChar->pushPacket<GP_SERV_COMMAND_TRACKING_POS>(PWideScanEntity);
 
-                if (PWideScanEntity->status == STATUS_TYPE::DISAPPEAR)
+                if (PWideScanEntity->status == xi::Status::Disappear)
                 {
                     PChar->WideScanTarget = std::nullopt;
                 }

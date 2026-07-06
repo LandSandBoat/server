@@ -39,7 +39,7 @@ CNpcEntity::CNpcEntity()
 
     objtype    = TYPE_NPC;
     look.face  = 0x32;
-    allegiance = ALLEGIANCE_TYPE::MOB;
+    allegiance = xi::Allegiance::Mob;
 
     PAI = std::make_unique<CAIContainer>(this);
 }
@@ -125,13 +125,13 @@ void CNpcEntity::setAlwaysRelevant(bool alwaysRelevant)
 
 bool CNpcEntity::isWideScannable()
 {
-    return widescan_ == 1 && status == STATUS_TYPE::NORMAL && CBaseEntity::isWideScannable();
+    return widescan_ == 1 && status == xi::Status::Normal && CBaseEntity::isWideScannable();
 }
 
 void CNpcEntity::PostTick()
 {
     timer::time_point now = timer::now();
-    if (loc.zone && updatemask && status != STATUS_TYPE::DISAPPEAR && now > m_nextUpdateTimer)
+    if (loc.zone && updatemask && status != xi::Status::Disappear && now > m_nextUpdateTimer)
     {
         m_nextUpdateTimer = now + 250ms;
         loc.zone->UpdateEntityPacket(this, ENTITY_UPDATE, updatemask);

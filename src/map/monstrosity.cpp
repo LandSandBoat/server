@@ -617,7 +617,7 @@ void monstrosity::HandleDeathMenu(CCharEntity* PChar, const GP_CLI_COMMAND_ACTIO
 
         PChar->SetDeathTime(timer::time_point::min());
 
-        PChar->status = STATUS_TYPE::DISAPPEAR;
+        PChar->status = xi::Status::Disappear;
 
         PChar->clearPacketList();
 

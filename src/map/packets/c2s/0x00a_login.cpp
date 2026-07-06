@@ -38,7 +38,7 @@ auto GP_CLI_COMMAND_LOGIN::validate(MapSession* PSession, const CCharEntity* PCh
 {
     return PacketValidator(PChar)
         .mustEqual(PChar->id, this->UniqueNo, "Player ID mismatch")
-        .mustNotEqual(PSession->blowfish.status == BLOWFISH_ACCEPTED && PChar->status == STATUS_TYPE::NORMAL && PSession->hasDecryptedPacket, true, "Player already logged in.");
+        .mustNotEqual(PSession->blowfish.status == BLOWFISH_ACCEPTED && PChar->status == xi::Status::Normal && PSession->hasDecryptedPacket, true, "Player already logged in.");
 }
 
 void GP_CLI_COMMAND_LOGIN::process(MapSession* PSession, CCharEntity* PChar) const
@@ -139,7 +139,7 @@ void GP_CLI_COMMAND_LOGIN::process(MapSession* PSession, CCharEntity* PChar) con
                 PChar->pushPacket<GP_SERV_COMMAND_EQUIP_LIST>(*eloc, static_cast<SLOTTYPE>(i));
             }
         }
-        PChar->status = STATUS_TYPE::NORMAL;
+        PChar->status = xi::Status::Normal;
         PChar->PAI->QueueAction(queueAction_t(4000ms, false, zoneutils::AfterZoneIn));
     }
 }

@@ -28,6 +28,9 @@
 #include "los_cache.h"
 #include "packets/basic.h"
 
+#include "data/enums/allegiance.h"
+#include "data/enums/status.h"
+
 #include <map>
 #include <memory>
 #include <vector>
@@ -45,19 +48,6 @@ enum ENTITYTYPE : uint8
 };
 
 DECLARE_FORMAT_AS_UNDERLYING(ENTITYTYPE);
-
-enum class STATUS_TYPE : uint8
-{
-    NORMAL        = 0,
-    UPDATE        = 1,
-    DISAPPEAR     = 2,
-    INVISIBLE     = 3,
-    STATUS_4      = 4,
-    CUTSCENE_ONLY = 6,
-    STATUS_18     = 18,
-    SHUTDOWN      = 20,
-};
-DECLARE_FORMAT_AS_UNDERLYING(STATUS_TYPE);
 
 enum ANIMATIONTYPE : uint8
 {
@@ -152,17 +142,6 @@ enum MOUNTTYPE : uint8
     MOUNT_CRACKLAW       = 37,
     //
     MOUNT_MAX = 38,
-};
-
-enum class ALLEGIANCE_TYPE : uint8
-{
-    MOB       = 0,
-    PLAYER    = 1,
-    SAN_DORIA = 2,
-    BASTOK    = 3,
-    WINDURST  = 4,
-    WYVERNS   = 5,
-    GRIFFONS  = 6,
 };
 
 enum UPDATETYPE : uint8
@@ -308,24 +287,24 @@ public:
 
     bool IsDynamicEntity() const;
 
-    uint32          id;             // global identifier unique on the server
-    uint16          targid;         // local identifier unique to the zone
-    ENTITYTYPE      objtype;        // Type of entity
-    STATUS_TYPE     status;         // Entity status (different entities - different statuses)
-    uint16          m_TargID;       // the targid of the object the entity is looking at
-    std::string     name;           // Entity name
-    std::string     packetName;     // Used to override name when being sent to the client
-    look_t          look;           //
-    look_t          mainlook;       // only used if mob use changeSkin() or player /lockstyle
-    location_t      loc;            // Location of entity
-    uint8           animation;      // animation
-    uint8           animationsub;   // Additional animation parameter
-    uint8           baseSpeed;      // base movement speed
-    uint8           animationSpeed; // speed of movement animation
-    uint8           namevis;
-    ALLEGIANCE_TYPE allegiance;     // what types of targets the entity can fight
-    uint8           updatemask;     // what to update next server tick to players nearby
-    bool            priorityRender; // CliPriorityFlag, will force this entity to render on clients if set. See https://github.com/atom0s/XiPackets/tree/main/world/server/0x0037 (also applies to 0x00E)
+    uint32         id;             // global identifier unique on the server
+    uint16         targid;         // local identifier unique to the zone
+    ENTITYTYPE     objtype;        // Type of entity
+    xi::Status     status;         // Entity status (different entities - different statuses)
+    uint16         m_TargID;       // the targid of the object the entity is looking at
+    std::string    name;           // Entity name
+    std::string    packetName;     // Used to override name when being sent to the client
+    look_t         look;           //
+    look_t         mainlook;       // only used if mob use changeSkin() or player /lockstyle
+    location_t     loc;            // Location of entity
+    uint8          animation;      // animation
+    uint8          animationsub;   // Additional animation parameter
+    uint8          baseSpeed;      // base movement speed
+    uint8          animationSpeed; // speed of movement animation
+    uint8          namevis;
+    xi::Allegiance allegiance;     // what types of targets the entity can fight
+    uint8          updatemask;     // what to update next server tick to players nearby
+    bool           priorityRender; // CliPriorityFlag, will force this entity to render on clients if set. See https://github.com/atom0s/XiPackets/tree/main/world/server/0x0037 (also applies to 0x00E)
 
     float modelHitboxSize = 0.0f; // used for distance calculations and is in packets
     uint8 modelSize       = 0;
