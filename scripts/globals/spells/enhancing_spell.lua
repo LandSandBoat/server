@@ -583,7 +583,7 @@ xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
     local duration   = xi.spells.enhancing.calculateEnhancingDuration(caster, target, spell, spellId, spellGroup, spellEffect)
 
     ------------------------------
-    -- Handle Status Effects, Embolden buffs can only be applied by player, so do not remove embolden..
+    -- Handle Embolden. Embolden buffs the next spell cast on target, not by caster.
     ------------------------------
     if
         not caster:isPet() and

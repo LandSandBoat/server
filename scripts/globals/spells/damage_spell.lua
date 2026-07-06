@@ -722,8 +722,6 @@ xi.spells.damage.calculateDivineSealMultiplier = function(caster, target, skillT
         return 1
     end
 
-    caster:delStatusEffect(xi.effect.DIVINE_SEAL)
-
     return 2
 end
 
@@ -736,8 +734,6 @@ xi.spells.damage.calculateDivineEmblemMultiplier = function(caster, skillType)
     if skillType ~= xi.skill.DIVINE_MAGIC then
         return 1
     end
-
-    caster:delStatusEffect(xi.effect.DIVINE_EMBLEM)
 
     return 1 + caster:getSkillLevel(xi.skill.DIVINE_MAGIC) / 100
 end
@@ -769,8 +765,6 @@ xi.spells.damage.calculateEbullienceMultiplier = function(caster, spellGroup)
     if spellGroup ~= xi.magic.spellGroup.BLACK then
         return 1
     end
-
-    caster:delStatusEffectSilent(xi.effect.EBULLIENCE)
 
     return 1.2 + caster:getMod(xi.mod.EBULLIENCE_AMOUNT) / 100
 end
