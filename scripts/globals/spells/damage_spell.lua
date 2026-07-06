@@ -2,6 +2,7 @@
 -- Damage Spell Utilities
 -- Used for spells that deal direct damage. (Black, White, Dark and Ninjutsu)
 -----------------------------------
+require('scripts/globals/combat/damage_multipliers')
 require('scripts/globals/combat/magic_burst')
 require('scripts/globals/combat/magic_hit_rate')
 -----------------------------------

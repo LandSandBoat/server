@@ -3,6 +3,7 @@
 -- Used for Blue Magic spells.
 -----------------------------------
 require('scripts/globals/combat/physical_utilities')
+require('scripts/globals/combat/damage_multipliers')
 require('scripts/globals/combat/magic_burst')
 require('scripts/globals/combat/magic_hit_rate')
 require('scripts/globals/magic')

@@ -1,9 +1,12 @@
 -----------------------------------
 -- Ninja Job Utilities
 -----------------------------------
+require('scripts/globals/combat/damage_multipliers')
+-----------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
 xi.job_utils.ninja = xi.job_utils.ninja or {}
+-----------------------------------
 
 -----------------------------------
 -- Ability Check Functions

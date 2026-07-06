@@ -4,6 +4,7 @@
 -- What is known is that they roughly follow player Weaponskill calculations (pDIF, dMOD, ratio, etc) so this is what
 -- this set of functions emulates.
 -----------------------------------
+require('scripts/globals/combat/damage_multipliers')
 require('scripts/globals/combat/magic_burst')
 require('scripts/globals/combat/magic_hit_rate')
 require('scripts/globals/magic')
