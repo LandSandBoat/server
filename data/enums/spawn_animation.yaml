@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.spawnAnimation
+
+values:
+  normal: 0
+  special: 1

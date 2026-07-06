@@ -62,7 +62,7 @@ CPetEntity::CPetEntity(PET_TYPE petType, uint32 petID)
     allegiance                  = xi::Allegiance::Player;
     m_MobSkillList              = 0;
     m_bReleaseTargIDOnDisappear = true;
-    spawnAnimation              = SPAWN_ANIMATION::SPECIAL; // Initial spawn has the special spawn-in animation
+    spawnAnimation              = xi::SpawnAnimation::Special; // Initial spawn has the special spawn-in animation
 
     PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CPetController>(this), std::make_unique<CTargetFind>(this));
 }

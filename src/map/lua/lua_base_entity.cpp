@@ -6196,9 +6196,9 @@ void CLuaBaseEntity::setAnimationSub(uint8 animationsub, const sol::object& send
     }
 }
 
-void CLuaBaseEntity::setSpawnAnimation(uint8 spawnAnimation)
+void CLuaBaseEntity::setSpawnAnimation(xi::SpawnAnimation spawnAnimation)
 {
-    m_PBaseEntity->spawnAnimation = static_cast<SPAWN_ANIMATION>(spawnAnimation);
+    m_PBaseEntity->spawnAnimation = spawnAnimation;
 }
 
 /************************************************************************

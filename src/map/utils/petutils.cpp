@@ -1284,7 +1284,7 @@ void SpawnPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
 
         if (spawningFromZone)
         {
-            PPet->spawnAnimation = SPAWN_ANIMATION::NORMAL; // Don't play special spawn animation on zone in
+            PPet->spawnAnimation = xi::SpawnAnimation::Normal; // Don't play special spawn animation on zone in
         }
 
         PMaster->loc.zone->InsertPET(PPet);

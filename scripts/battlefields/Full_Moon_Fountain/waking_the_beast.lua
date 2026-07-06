@@ -135,7 +135,7 @@ local spawnElementalAvatars = function(spawnPosition, battlefield, numberAvatars
         -- set special spawn animation so the avatars enter with their summoning animation
         local avatarPreSpawn = GetMobByID(avatarID)
         if avatarPreSpawn then
-            avatarPreSpawn:setSpawnAnimation(1)
+            avatarPreSpawn:setSpawnAnimation(xi.spawnAnimation.SPECIAL)
         end
 
         local avatarPostSpawn = SpawnMob(avatarID)
@@ -156,7 +156,7 @@ local spawnElementalAvatars = function(spawnPosition, battlefield, numberAvatars
             -- set back to normal spawn animation after spawning so players moving into
             -- range (of 50 yalms) get just the normal animation
             avatarPostSpawn:queue(3000, function(avatarArg)
-                avatarArg:setSpawnAnimation(0)
+                avatarArg:setSpawnAnimation(xi.spawnAnimation.NORMAL)
             end)
 
             avatarPostSpawn:setPos(spawnPosition.x + math.randomInt(-3, 3), spawnPosition.y, spawnPosition.z + math.randomInt(-3, 3), spawnPosition.rot)

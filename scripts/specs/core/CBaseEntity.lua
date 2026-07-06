@@ -1346,7 +1346,7 @@ end
 function CBaseEntity:setAnimationSub(animationsub, sendUpdate)
 end
 
----@param spawnAnimation integer
+---@param spawnAnimation xi.spawnAnimation
 ---@return nil
 function CBaseEntity:setSpawnAnimation(spawnAnimation)
 end
