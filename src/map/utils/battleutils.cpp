@@ -1909,6 +1909,12 @@ bool TryInterruptSpell(CBattleEntity* PAttacker, CBattleEntity* PDefender, CSpel
         return false;
     }
 
+    // Early return: Chainspell prevents interruptions.
+    if (PDefender->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Chainspell))
+    {
+        return false;
+    }
+
     // Calculate level ratio.
     int   baseRate   = (PDefender->objtype == TYPE_MOB) ? 5 : 50;
     float levelRatio = (float)(baseRate + PAttacker->GetMLevel() - PDefender->GetMLevel()) / 100.0f;
