@@ -343,16 +343,6 @@ void CZoneInstance::SpawnTransport(CCharEntity* PChar)
     }
 }
 
-void CZoneInstance::TOTDChange(vanadiel_time::TOTD TOTD)
-{
-    TracyZoneScoped;
-
-    for (const auto& PInstance : m_InstanceList)
-    {
-        PInstance->TOTDChange(TOTD);
-    }
-}
-
 void CZoneInstance::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message_type, const std::unique_ptr<CBasicPacket>& packet)
 {
     TracyZoneScoped;

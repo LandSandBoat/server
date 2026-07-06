@@ -1379,13 +1379,6 @@ CBaseEntity* CZoneEntities::GetEntity(uint16 targid, uint8 filter)
     return nullptr;
 }
 
-void CZoneEntities::TOTDChange(vanadiel_time::TOTD TOTD)
-{
-    TracyZoneScoped;
-
-    m_zone->spawnHandler().onTOTDChange(TOTD);
-}
-
 void CZoneEntities::SavePlayTime()
 {
     TracyZoneScoped;

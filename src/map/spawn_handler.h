@@ -61,7 +61,7 @@ public:
     void unregister(CMobEntity* PMob);
     auto isRegistered(CMobEntity* PMob) const -> bool;
     auto getRemainingRespawnTime(CMobEntity* PMob) const -> Maybe<timer::duration>;
-    void onTOTDChange(vanadiel_time::TOTD totd) const;
+    void onGameHour(uint32 hour) const;
     void onWeatherChange(Weather weather) const;
     auto canSpawnNow(const CMobEntity* PMob) const -> bool;
 

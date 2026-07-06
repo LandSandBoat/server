@@ -32,6 +32,42 @@
 #include "utils/zoneutils.h"
 #include "zone.h"
 
+namespace
+{
+
+auto hourInWindow(const uint32 hour, const uint8 spawn, const uint8 despawn) -> bool
+{
+    if (spawn <= despawn)
+    {
+        return hour >= spawn && hour < despawn;
+    }
+
+    return hour >= spawn || hour < despawn;
+}
+
+// Spawn window for a mob, or nullopt if unrestricted. Per-mob window wins over the SPAWNTYPE flags.
+auto spawnWindowOf(const CMobEntity* PMob) -> Maybe<SpawnWindow>
+{
+    if (PMob->spawnWindow().has_value())
+    {
+        return PMob->spawnWindow();
+    }
+
+    if (PMob->m_SpawnType & SPAWNTYPE_ATNIGHT)
+    {
+        return SpawnWindow{ 20, 4 };
+    }
+
+    if (PMob->m_SpawnType & SPAWNTYPE_ATEVENING)
+    {
+        return SpawnWindow{ 18, 6 };
+    }
+
+    return std::nullopt;
+}
+
+} // namespace
+
 SpawnHandler::SpawnHandler(CZone* PZone)
 : zone_(PZone)
 {
@@ -69,7 +105,10 @@ void SpawnHandler::registerForRespawn(CMobEntity* PMob, const Maybe<timer::durat
 
     if (auto slot = PMob->GetSpawnSlot())
     {
-        const auto specificMobId   = respawnTime.has_value() ? Maybe<uint32>(PMob->id) : std::nullopt;
+        // Only a non-zero timer (deaggro/scripting) pins the respawn to this mob; otherwise the slot re-rolls.
+        const auto specificMobId   = (respawnTime.has_value() && *respawnTime > timer::duration::zero())
+                                         ? Maybe<uint32>(PMob->id)
+                                         : std::nullopt;
         pendingSlotRespawns_[slot] = { respawnAt, specificMobId };
     }
     else
@@ -198,39 +237,18 @@ void SpawnHandler::Tick(const timer::time_point now)
         });
 }
 
-// On TOTD change, process all relevant despawns.
-// This is not tied to the 30s task.
-void SpawnHandler::onTOTDChange(const vanadiel_time::TOTD totd) const
+// Despawn mobs now outside their spawn window. Not tied to 30s task.
+void SpawnHandler::onGameHour(const uint32 hour) const
 {
-    switch (totd)
-    {
-        case vanadiel_time::TOTD::NEWDAY:
+    zone_->ForEachMob(
+        [hour](CMobEntity* PMob)
         {
-            zone_->ForEachMob(
-                [](CMobEntity* PMob)
-                {
-                    if (PMob->m_SpawnType & SPAWNTYPE_ATNIGHT)
-                    {
-                        PMob->SetDespawnTime(1ms);
-                    }
-                });
-        }
-        break;
-        case vanadiel_time::TOTD::DAWN:
-        {
-            zone_->ForEachMob(
-                [](CMobEntity* PMob)
-                {
-                    if (PMob->m_SpawnType & SPAWNTYPE_ATEVENING)
-                    {
-                        PMob->SetDespawnTime(1ms);
-                    }
-                });
-        }
-        break;
-        default:
-            break;
-    }
+            const auto window = spawnWindowOf(PMob);
+            if (window.has_value() && PMob->isAlive() && !hourInWindow(hour, window->spawnHour, window->despawnHour))
+            {
+                PMob->SetDespawnTime(1ms);
+            }
+        });
 }
 
 // On Weather change, process all relevant despawns.
@@ -267,23 +285,9 @@ auto SpawnHandler::canSpawnNow(const CMobEntity* PMob) const -> bool
     }
 
     // Time-based spawn conditions
-    const auto totd = vanadiel_time::get_totd();
-    if (PMob->m_SpawnType & SPAWNTYPE_ATNIGHT)
+    if (const auto window = spawnWindowOf(PMob); window.has_value())
     {
-        // 20:00-04:00 (NIGHT, MIDNIGHT)
-        if (totd != vanadiel_time::TOTD::NIGHT && totd != vanadiel_time::TOTD::MIDNIGHT)
-        {
-            return false;
-        }
-    }
-
-    if (PMob->m_SpawnType & SPAWNTYPE_ATEVENING)
-    {
-        // 18:00-06:00 (EVENING, NIGHT, MIDNIGHT, NEWDAY)
-        if (totd != vanadiel_time::TOTD::EVENING &&
-            totd != vanadiel_time::TOTD::NIGHT &&
-            totd != vanadiel_time::TOTD::MIDNIGHT &&
-            totd != vanadiel_time::TOTD::NEWDAY)
+        if (!hourInWindow(vanadiel_time::get_hour(), window->spawnHour, window->despawnHour))
         {
             return false;
         }
