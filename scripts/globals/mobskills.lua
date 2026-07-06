@@ -4,8 +4,8 @@
 -- What is known is that they roughly follow player Weaponskill calculations (pDIF, dMOD, ratio, etc) so this is what
 -- this set of functions emulates.
 -----------------------------------
+require('scripts/globals/combat/magic_burst')
 require('scripts/globals/combat/magic_hit_rate')
-require('scripts/globals/magicburst')
 require('scripts/globals/magic')
 require('scripts/globals/spells/damage_spell')
 -----------------------------------
@@ -1226,7 +1226,7 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, action, skillParams)
         end
 
         if canMagicBurst then
-            local _, skillchainCount = xi.magicburst.formMagicBurst(target, actionElement)
+            local skillchainCount = xi.combat.magicBurst.getMagicBurstTier(target, actionElement)
 
             if skillchainCount > 0 then
                 -- TODO: Glyphic Bracers magic burst modifiers. https://www.bg-wiki.com/ffxi/Glyphic_Bracers
@@ -1414,7 +1414,7 @@ xi.mobskills.mobBreathMove = function(mob, target, skill, action, skillParams)
     -- Note: Elemental absorb mechanics such as Liement are calculated BEFORE resist/damage adjustments (such as shell/magic bursts).
     if absorbDamage > 0 then
         if canMagicBurst then
-            local _, skillchainCount = xi.magicburst.formMagicBurst(target, actionElement)
+            local skillchainCount = xi.combat.magicBurst.getMagicBurstTier(target, actionElement)
 
             if skillchainCount > 0 then
                 if mob:isPet() and mob:getMaster() ~= nil then
@@ -1793,10 +1793,10 @@ xi.mobskills.calculatePetMagicAccuracyBonus = function(mob, target, actionElemen
             petAccBonus = utils.clamp(masterSkillLevel - masterMaxSkillLevel, 0, 200)
         end
 
-        local skillchainTier, _ = xi.magicburst.formMagicBurst(target, actionElement)
+        local skillchainCount = xi.combat.magicBurst.getMagicBurstTier(target, actionElement)
         if
             mob:getPetID() > 0 and
-            skillchainTier > 0
+            skillchainCount > 0
         then
             petAccBonus = petAccBonus + 25
         end

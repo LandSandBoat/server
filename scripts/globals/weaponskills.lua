@@ -10,7 +10,6 @@
 -- applications of damage mods ('Damage varies with TP.')
 -- performance of the actual WS (rand numbers, etc)
 -----------------------------------
-require('scripts/globals/magicburst')
 require('scripts/globals/ability')
 require('scripts/globals/magic')
 require('scripts/globals/combat/physical_utilities')

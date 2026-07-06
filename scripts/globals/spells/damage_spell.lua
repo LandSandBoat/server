@@ -2,8 +2,8 @@
 -- Damage Spell Utilities
 -- Used for spells that deal direct damage. (Black, White, Dark and Ninjutsu)
 -----------------------------------
+require('scripts/globals/combat/magic_burst')
 require('scripts/globals/combat/magic_hit_rate')
-require('scripts/globals/magicburst')
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}
@@ -1092,11 +1092,11 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     end
 
     -- Calculate absoprtion and magic burst.
-    local absorbFactor       = xi.spells.damage.calculateAbsorption(target, spellElement, true)
-    local _, skillchainCount = xi.magicburst.formMagicBurst(target, spellElement) -- External function.
+    local absorbFactor   = xi.spells.damage.calculateAbsorption(target, spellElement, true)
+    local magicBurstTier = xi.combat.magicBurst.getMagicBurstTier(target, spellElement)
 
     local notAbsorb = absorbFactor > 0
-    local canMBurst = absorbFactor > 0 and skillchainCount > 0
+    local canMBurst = absorbFactor > 0 and magicBurstTier > 0
 
     -- Fetch tabled data.
     local spellId         = spell:getID()
@@ -1113,7 +1113,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local elementalAffinityBonus      = xi.spells.damage.calculateElementalAffinityBonus(caster, spellElement)
     local resistTier                  = notAbsorb and xi.combat.magicHitRate.calculateResistRate(caster, target, spellGroup, skillType, 0, spellElement, statUsed, 0, bonusMacc) or 1
     local additionalResistTier        = notAbsorb and xi.spells.damage.calculateAdditionalResistTier(caster, target, spellElement) or 1
-    local magicBurst                  = canMBurst and xi.spells.damage.calculateIfMagicBurst(target, spellElement, skillchainCount) or 1
+    local magicBurst                  = canMBurst and xi.spells.damage.calculateIfMagicBurst(target, spellElement, magicBurstTier) or 1
     local magicBurstBonus             = canMBurst and xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spellId, skillType, spellElement) or 1
     local dayAndWeather               = xi.spells.damage.calculateDayAndWeather(caster, spellElement, forceDayWeather)
     local magicBonusDiff              = xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement, 0)
