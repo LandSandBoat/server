@@ -202,23 +202,27 @@ bool CAbilityState::Update(timer::time_point tick)
 
     if (!IsCompleted() && tick > GetEntryTime() + m_castTime)
     {
-        if (CanUseAbility())
+        // A failed validity check exits immediately and doesn't serve out the animation lock.
+        if (!CanUseAbility())
         {
-            action_t action{};
-            m_PEntity->OnAbility(*this, action);
-            m_PEntity->PAI->EventHandler.triggerListener("ABILITY_USE", m_PEntity, GetTarget(), m_PAbility.get(), &action);
-            // Only send packet if action was populated (e.g. interrupts return early)
-            if (!action.targets.empty())
+            return true;
+        }
+
+        action_t action{};
+        m_PEntity->OnAbility(*this, action);
+        m_PEntity->PAI->EventHandler.triggerListener("ABILITY_USE", m_PEntity, GetTarget(), m_PAbility.get(), &action);
+        // Only send packet if action was populated (e.g. interrupts return early)
+        if (!action.targets.empty())
+        {
+            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
+        }
+
+        for (auto& actionTarget : action.targets)
+        {
+            auto* PActionTarget = dynamic_cast<CBattleEntity*>(zoneutils::GetEntity(actionTarget.actorId));
+            if (PActionTarget)
             {
-                m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
-            }
-            for (auto& actionTarget : action.targets)
-            {
-                auto* PActionTarget = dynamic_cast<CBattleEntity*>(zoneutils::GetEntity(actionTarget.actorId));
-                if (PActionTarget)
-                {
-                    PActionTarget->PAI->EventHandler.triggerListener("ABILITY_TAKE", m_PEntity, PActionTarget, m_PAbility.get(), &action);
-                }
+                PActionTarget->PAI->EventHandler.triggerListener("ABILITY_TAKE", m_PEntity, PActionTarget, m_PAbility.get(), &action);
             }
         }
 
