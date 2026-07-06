@@ -546,7 +546,7 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
             //       furthermore, this likely needs to be PSkill->setMsg(MsgBasic::SkillRecoversHP) and happen before the above code
             msg = MsgBasic::SkillRecoversHP;
             actionResult.recordDamage(attack_outcome_t{
-                .atkType = ATTACK_TYPE::PHYSICAL,
+                .atkType = xi::AttackType::Physical,
                 .damage  = std::clamp(-damage, 0, PTargetFound->GetMaxHP() - PTargetFound->health.hp),
                 .target  = PTargetFound,
             });

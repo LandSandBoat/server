@@ -140,12 +140,12 @@ uint8 CLuaMobSkill::getMobHPP()
     return m_PLuaMobSkill->getHPP();
 }
 
-auto CLuaMobSkill::getAttackType() const -> ATTACK_TYPE
+auto CLuaMobSkill::getAttackType() const -> xi::AttackType
 {
     return m_PLuaMobSkill->getAttackType();
 }
 
-void CLuaMobSkill::setAttackType(ATTACK_TYPE attackType)
+void CLuaMobSkill::setAttackType(xi::AttackType attackType)
 {
     m_PLuaMobSkill->setAttackType(attackType);
 }

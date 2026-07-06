@@ -10403,7 +10403,7 @@ void CLuaBaseEntity::takeDamage(int32 damage, const sol::object& attacker, const
         removePetrify = true;
     }
 
-    ATTACK_TYPE    attackType = (atkType != sol::lua_nil) ? static_cast<ATTACK_TYPE>(atkType.as<uint8>()) : ATTACK_TYPE::NONE;
+    xi::AttackType attackType = (atkType != sol::lua_nil) ? static_cast<xi::AttackType>(atkType.as<uint8>()) : xi::AttackType::None;
     xi::DamageType damageType = (dmgType != sol::lua_nil) ? static_cast<xi::DamageType>(dmgType.as<uint8>()) : xi::DamageType::None;
 
     PDefender->takeDamage(damage, PAttacker, attackType, damageType);
@@ -15775,7 +15775,7 @@ auto CLuaBaseEntity::takeWeaponskillDamage(CLuaBaseEntity* attacker, int32 damag
         return 0;
     }
 
-    ATTACK_TYPE attackType = static_cast<ATTACK_TYPE>(atkType);
+    xi::AttackType attackType = static_cast<xi::AttackType>(atkType);
 
     return battleutils::TakeWeaponskillDamage(PBattleAttacker, PBattleDefender, damage, attackType, dmgType, slot, primary, tpMultiplier, bonusTP, targetTPMultiplier);
 }
@@ -15804,7 +15804,7 @@ void CLuaBaseEntity::takeSpellDamage(CLuaBaseEntity* caster, CLuaSpell* spell, i
     }
 
     auto*          PSpell     = spell->GetSpell();
-    ATTACK_TYPE    attackType = static_cast<ATTACK_TYPE>(atkType);
+    xi::AttackType attackType = static_cast<xi::AttackType>(atkType);
     xi::DamageType damageType = static_cast<xi::DamageType>(dmgType);
 
     battleutils::TakeSpellDamage(PBattleDefender, PBattleAttacker, PSpell, damage, attackType, damageType);
@@ -15833,7 +15833,7 @@ auto CLuaBaseEntity::takeSwipeLungeDamage(CLuaBaseEntity* caster, int32 damage, 
         return 0;
     }
 
-    ATTACK_TYPE attackType = static_cast<ATTACK_TYPE>(atkType);
+    xi::AttackType attackType = static_cast<xi::AttackType>(atkType);
 
     return battleutils::TakeSwipeLungeDamage(PBattleDefender, PBattleAttacker, damage, attackType, dmgType);
 }

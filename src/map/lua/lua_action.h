@@ -64,7 +64,7 @@ public:
     void info(uint32 actionTargetId, ActionInfo info) const;
     void hitDistortion(uint32 actionTargetId, HitDistortion distortion) const;
     void knockback(uint32 actionTargetId, Knockback knockback) const;
-    void recordDamage(const CLuaBaseEntity* PLuaTarget, ATTACK_TYPE atkType, int32 damage, Maybe<bool> isCritical = false) const;
+    void recordDamage(const CLuaBaseEntity* PLuaTarget, xi::AttackType atkType, int32 damage, Maybe<bool> isCritical = false) const;
     void modifier(uint32 actionTargetId, uint8 modifier) const;
     void additionalEffect(uint32 actionTargetId, ActionProcAddEffect additionalEffect) const;
     void addEffectParam(uint32 actionTargetId, int32 addEffectParam) const;

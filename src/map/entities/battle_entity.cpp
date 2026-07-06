@@ -102,7 +102,7 @@ CBattleEntity::CBattleEntity()
 
     m_DeathType = DEATH_TYPE::NONE;
 
-    BattleHistory.lastHitTaken_atkType = ATTACK_TYPE::NONE;
+    BattleHistory.lastHitTaken_atkType = xi::AttackType::None;
 }
 
 CBattleEntity::~CBattleEntity()
@@ -1022,7 +1022,7 @@ int32 CBattleEntity::addMP(int32 mp)
     return abs(mp);
 }
 
-auto CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullptr*/, ATTACK_TYPE attackType /* = ATTACK_NONE*/, xi::DamageType damageType /* = DAMAGE_NONE*/, bool isSkillchainDamage /* = false */) -> int32
+auto CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullptr*/, xi::AttackType attackType /* = ATTACK_NONE*/, xi::DamageType damageType /* = DAMAGE_NONE*/, bool isSkillchainDamage /* = false */) -> int32
 {
     TracyZoneScoped;
 
@@ -2555,7 +2555,7 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
             if (PSpell->getSpellGroup() == SPELLGROUP_BLUE && PSpell->getElement() == ELEMENT_NONE && msg == MsgBasic::MagicDamage)
             {
                 actionResult.recordDamage(attack_outcome_t{
-                    .atkType    = ATTACK_TYPE::PHYSICAL,
+                    .atkType    = xi::AttackType::Physical,
                     .damage     = damage,
                     .target     = PTarget,
                     .isCritical = PSpell->isCritical(),
@@ -3383,7 +3383,7 @@ void CBattleEntity::OnRangedAttack(CRangeState& state, action_t& action)
             totalDamage     = attackutils::CheckForDamageMultiplier(PChar, PItem, totalDamage, attackType, slot, true);
         }
         actionResult.recordDamage(attack_outcome_t{
-            .atkType    = ATTACK_TYPE::PHYSICAL,
+            .atkType    = xi::AttackType::Physical,
             .damage     = battleutils::TakePhysicalDamage(this, PTarget, PHYSICAL_ATTACK_TYPE::RANGED, totalDamage, false, slot, realHits, nullptr, true, true),
             .target     = PTarget,
             .isCritical = wasCritical,
@@ -3837,7 +3837,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 {
                     // This will set the physical hit distortion accordingly
                     actionResult.recordDamage(attack_outcome_t{
-                        .atkType    = ATTACK_TYPE::PHYSICAL,
+                        .atkType    = xi::AttackType::Physical,
                         .damage     = damage,
                         .target     = PTarget,
                         .isCritical = attack.IsCritical(),

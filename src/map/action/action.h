@@ -40,7 +40,7 @@
 
 struct attack_outcome_t
 {
-    ATTACK_TYPE    atkType{ ATTACK_TYPE::PHYSICAL };
+    xi::AttackType atkType{ xi::AttackType::Physical };
     int32          damage{ 0 };
     CBattleEntity* target{ nullptr };
     bool           isCritical{ false };

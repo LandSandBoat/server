@@ -51,9 +51,9 @@ auto action_result_t::recordDamage(const attack_outcome_t& outcome) -> action_re
 
     switch (outcome.atkType)
     {
-        case ATTACK_TYPE::SPECIAL:  // Assumed
-        case ATTACK_TYPE::PHYSICAL: // Confirmed
-        case ATTACK_TYPE::RANGED:   // Confirmed
+        case xi::AttackType::Special:  // Assumed
+        case xi::AttackType::Physical: // Confirmed
+        case xi::AttackType::Ranged:   // Confirmed
         {
             if (outcome.isCritical)
             {

@@ -367,12 +367,12 @@ void CMobSkill::setTertiarySkillchain(uint8 skillchain)
     m_tertiarySkillchain = skillchain;
 }
 
-auto CMobSkill::getAttackType() const -> ATTACK_TYPE
+auto CMobSkill::getAttackType() const -> xi::AttackType
 {
     return m_attackType;
 }
 
-void CMobSkill::setAttackType(const ATTACK_TYPE attackType)
+void CMobSkill::setAttackType(const xi::AttackType attackType)
 {
     m_attackType = attackType;
 }
