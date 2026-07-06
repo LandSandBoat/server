@@ -36,6 +36,9 @@
 #include "common/utils.h"
 
 #include <common/types/hash_map.h>
+#include <common/types/heap.h>
+
+#include <tuple>
 
 #include "ai/ai_container.h"
 #include "ai/controllers/mob_controller.h"
@@ -1105,7 +1108,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
             else if (!spawnedCharacters.empty() && spawnedCharacters.top().first < totalScore)
             {
                 spawnedCharacters.emplace(std::make_pair(totalScore, PCurrentChar));
-                spawnedCharacters.pop();
+                std::ignore = spawnedCharacters.pop();
             }
         }
     }
@@ -1149,7 +1152,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
                 candidateCharacters.emplace(totalScore, PCurrentChar);
                 if (candidateCharacters.size() > CHARACTER_SYNC_LIMIT_MAX)
                 {
-                    candidateCharacters.pop();
+                    std::ignore = candidateCharacters.pop();
                 }
             }
         }
@@ -1173,8 +1176,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
         std::vector<CharScorePair> candidates;
         while (!candidateCharacters.empty())
         {
-            candidates.emplace_back(candidateCharacters.top());
-            candidateCharacters.pop();
+            candidates.emplace_back(candidateCharacters.pop());
         }
         std::reverse(candidates.begin(), candidates.end());
 
@@ -1202,10 +1204,9 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
                 // to avoid causing a lot of spawn/despawns all the time as people move around.
                 if (candidateScore > spawnedCharacters.top().first)
                 {
-                    CCharEntity* spawnedChar = spawnedCharacters.top().second;
+                    CCharEntity* spawnedChar = spawnedCharacters.pop().second;
                     PChar->SpawnPCList.erase(spawnedChar->id);
                     PChar->updateEntityPacket(spawnedChar, ENTITY_DESPAWN, UPDATE_NONE);
-                    spawnedCharacters.pop();
                     ++swapCount;
                 }
                 else

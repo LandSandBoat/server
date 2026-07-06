@@ -12855,6 +12855,29 @@ void CLuaBaseEntity::disengage()
     }
 }
 
+namespace
+{
+    // Adapts a Lua function into an action-queue callable, adding the
+    // invoke-and-log-errors boilerplate.
+    auto wrapLuaAction(sol::function func) -> queueAction_t::EntityFunc_t
+    {
+        return [func = std::move(func)](CBaseEntity* PEntity)
+        {
+            if (!func.valid())
+            {
+                return;
+            }
+
+            auto result = func(PEntity);
+            if (!result.valid())
+            {
+                sol::error err = result;
+                ShowError("CAIActionQueue Lua action for %s (%i): %s", PEntity->name, PEntity->id, err.what());
+            }
+        };
+    }
+} // namespace
+
 /************************************************************************
  *  Function: timer()
  *  Purpose : Inserts a pre-defined Lua fuction into the queue and executes
@@ -12865,7 +12888,7 @@ void CLuaBaseEntity::disengage()
 
 void CLuaBaseEntity::timer(int ms, sol::function func)
 {
-    m_PBaseEntity->PAI->QueueAction(queueAction_t(ms, false, std::move(func)));
+    m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(ms), false, wrapLuaAction(std::move(func))));
 }
 
 /************************************************************************
@@ -12880,7 +12903,7 @@ void CLuaBaseEntity::timer(int ms, sol::function func)
 
 void CLuaBaseEntity::queue(int ms, sol::function func)
 {
-    m_PBaseEntity->PAI->QueueAction(queueAction_t(ms, true, std::move(func)));
+    m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(ms), true, wrapLuaAction(std::move(func))));
 }
 
 /************************************************************************

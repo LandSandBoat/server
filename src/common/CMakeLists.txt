@@ -45,6 +45,7 @@ set(COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/types/error_or.h
     ${CMAKE_CURRENT_SOURCE_DIR}/types/flat_hash_map.h
     ${CMAKE_CURRENT_SOURCE_DIR}/types/hash_map.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/types/heap.h
     ${CMAKE_CURRENT_SOURCE_DIR}/types/maybe.h
     ${CMAKE_CURRENT_SOURCE_DIR}/types/variant.h
     ${CMAKE_CURRENT_SOURCE_DIR}/debug.h
