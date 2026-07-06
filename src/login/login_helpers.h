@@ -95,7 +95,7 @@ void generateErrorMessage(uint8* packet, uint16 errorCode);
 
 uint16 generateExpansionBitmask();
 
-uint16 generateFeatureBitmask();
+uint16 generateFeatureBitmask(const bool& needsOTP);
 
 int32 saveCharacter(uint32 accid, uint32 charid, char_mini* createchar);
 

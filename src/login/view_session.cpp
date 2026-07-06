@@ -29,6 +29,7 @@
 #include <common/utils.h>
 
 #include "login_packets.h"
+#include "otp_helpers.h"
 
 void view_session::read_func()
 {
@@ -394,6 +395,8 @@ void view_session::read_func()
                 }
             }
 
+            bool needsOTP = otpHelpers::doesAccountNeedOTP(session.accountID, "TOTP");
+
             // https://github.com/atom0s/XiPackets/blob/main/lobby/S2C_0x0005_ResponseKey.md
             struct lpkt_key
             {
@@ -417,7 +420,7 @@ void view_session::read_func()
             packet.command        = 0x05;
             packet.key            = 0xAD5DE04F; // old magic key. May be able to replace with a randomized key some day...
             packet.excode_server  = loginHelpers::generateExpansionBitmask();
-            packet.excode_server2 = loginHelpers::generateFeatureBitmask();
+            packet.excode_server2 = loginHelpers::generateFeatureBitmask(needsOTP);
 
             std::memcpy(buffer_.data(), &packet, sizeof(lpkt_key));
 

@@ -35,7 +35,7 @@
 namespace otpHelpers
 {
 
-std::vector<uint8_t> base32Decode(const std::string& base32)
+inline std::vector<uint8_t> base32Decode(const std::string& base32)
 {
     static const std::array<int8_t, 256> lookup = []
     {
@@ -85,7 +85,7 @@ std::vector<uint8_t> base32Decode(const std::string& base32)
     return bytes;
 }
 
-std::string generateTOTP(const std::string& base32Secret, uint64_t epochSeconds, int digits = 6, int period = 30)
+inline std::string generateTOTP(const std::string& base32Secret, uint64_t epochSeconds, int digits = 6, int period = 30)
 {
     std::vector<uint8_t> key     = base32Decode(base32Secret);
     uint64_t             counter = epochSeconds / period;
