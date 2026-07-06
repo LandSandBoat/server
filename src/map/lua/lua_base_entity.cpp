@@ -18475,6 +18475,52 @@ void CLuaBaseEntity::delMobMod(uint16 mobModID, int16 value)
 }
 
 /************************************************************************
+ *  Function: getfTPModifierOverride()
+ *  Purpose : Returns the fTP modifier override table set for a mob skill, or nil if none is set
+ *  Example : mob:getfTPModifierOverride(xi.mobSkill.FLYING_HIP_PRESS)
+ *  Notes   :
+ ************************************************************************/
+
+auto CLuaBaseEntity::getfTPModifierOverride(uint16 skillId) -> sol::object
+{
+    if (m_PBaseEntity->objtype & TYPE_NPC || m_PBaseEntity->objtype & TYPE_PC)
+    {
+        ShowError("function call on invalid entity! (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
+        return sol::lua_nil;
+    }
+
+    if (const auto fTPModifierOverride = static_cast<CMobEntity*>(m_PBaseEntity)->getfTPModifierOverride(skillId))
+    {
+        auto table = lua.create_table();
+        table.add((*fTPModifierOverride)[0]);
+        table.add((*fTPModifierOverride)[1]);
+        table.add((*fTPModifierOverride)[2]);
+
+        return table;
+    }
+
+    return sol::lua_nil;
+}
+
+/************************************************************************
+ *  Function: setfTPModifierOverride()
+ *  Purpose : Sets an fTP modifier override table for a mob skill, replacing the skill's default fTP scaling
+ *  Example : mob:setfTPModifierOverride(xi.mobSkill.FLYING_HIP_PRESS, 7.0, 9.0, 11.0)
+ *  Notes   : Needs to be added to the mob skill to be consumed. params.fTP = mob:getfTPModifierOverride(skill:getID()) or params.fTP
+ ************************************************************************/
+
+void CLuaBaseEntity::setfTPModifierOverride(uint16 skillId, float ftp1, float ftp2, float ftp3)
+{
+    if (m_PBaseEntity->objtype & TYPE_NPC || m_PBaseEntity->objtype & TYPE_PC)
+    {
+        ShowError("function call on invalid entity! (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
+        return;
+    }
+
+    static_cast<CMobEntity*>(m_PBaseEntity)->setfTPModifierOverride(skillId, ftp1, ftp2, ftp3);
+}
+
+/************************************************************************
  *  Function: getBattleTime()
  *  Purpose : Returns the time the Mob has been engaged in seconds
  *  Example : if mob:getBattleTime() == 3600 then -- 1 Hour
@@ -20946,6 +20992,9 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setMobMod", CLuaBaseEntity::setMobMod);
     SOL_REGISTER("addMobMod", CLuaBaseEntity::addMobMod);
     SOL_REGISTER("delMobMod", CLuaBaseEntity::delMobMod);
+
+    SOL_REGISTER("getfTPModifierOverride", CLuaBaseEntity::getfTPModifierOverride);
+    SOL_REGISTER("setfTPModifierOverride", CLuaBaseEntity::setfTPModifierOverride);
 
     SOL_REGISTER("getBattleTime", CLuaBaseEntity::getBattleTime);
     SOL_REGISTER("getCrystalElement", CLuaBaseEntity::getCrystalElement);

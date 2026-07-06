@@ -10,6 +10,10 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
+entity.onMobSpawn = function(mob)
+    mob:setfTPModifierOverride(xi.mobSkill.FLYING_HIP_PRESS, 7.0, 7.0, 7.0)
+end
+
 entity.onMobFight = function(mob, target)
     if xi.combat.behavior.isEntityBusy(mob) then
         return

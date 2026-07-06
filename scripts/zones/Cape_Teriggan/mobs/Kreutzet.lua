@@ -5,6 +5,14 @@
 ---@type TMobEntity
 local entity = {}
 
+-- Kreutzet Stormwind Chain fTP (3.00 -> 3.25 -> 3.60)
+local stormwindFTP =
+{
+    [1] = 3.00,
+    [2] = 3.25,
+    [3] = 3.60,
+}
+
 entity.spawnPoints =
 {
     { x = 207.000, y = 8.000, z =  1.000 },
@@ -69,6 +77,8 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+    mob:setLocalVar('stormwindCounter', 0)
+    mob:setfTPModifierOverride(xi.mobSkill.STORMWIND, stormwindFTP[1], stormwindFTP[1], stormwindFTP[1])
 end
 
 entity.onMobRoam = function(mob)
@@ -86,14 +96,17 @@ entity.onMobFight = function(mob, target)
     if mob:canUseAbilities() then
         if stormwindCounter == 3 then
             mob:setLocalVar('stormwindCounter', 0)
+            mob:setfTPModifierOverride(xi.mobSkill.STORMWIND, stormwindFTP[1], stormwindFTP[1], stormwindFTP[1])
         elseif
             stormwindCounter >= 1 and
             mob:checkDistance(target) <= 15
         then
             stormwindCounter = stormwindCounter + 1
             mob:setLocalVar('stormwindCounter', stormwindCounter)
-            mob:setLocalVar('stormwindDamage', stormwindCounter) -- extra var for dmg calculation (in stormwind.lua)
-            mob:useMobAbility(926)
+
+            local ftp = stormwindFTP[stormwindCounter]
+            mob:setfTPModifierOverride(xi.mobSkill.STORMWIND, ftp, ftp, ftp)
+            mob:useMobAbility(xi.mobSkill.STORMWIND)
         end
     end
 end
@@ -101,11 +114,10 @@ end
 entity.onMobWeaponSkill = function(mob, target, skill, action)
     local stormwindCounter = mob:getLocalVar('stormwindCounter')
     if
-        skill:getID() == 926 and
+        skill:getID() == xi.mobSkill.STORMWIND and
         stormwindCounter == 0
     then
         mob:setLocalVar('stormwindCounter', 1)
-        mob:setLocalVar('stormwindDamage', 1)
     end
 end
 

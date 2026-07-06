@@ -24,6 +24,8 @@
 
 #include "battle_entity.h"
 
+#include <array>
+
 #include <common/types/hash_map.h>
 #include <common/types/maybe.h>
 
@@ -174,6 +176,9 @@ public:
 
     virtual void Die() override;
 
+    auto getfTPModifierOverride(uint16 skillId) -> Maybe<std::array<float, 3>>;
+    void setfTPModifierOverride(uint16 skillId, float ftp1, float ftp2, float ftp3);
+
     virtual void OnWeaponSkillFinished(CWeaponSkillState&, action_t&) override;
     virtual void OnMobSkillFinished(CMobSkillState&, action_t&) override;
     virtual void OnEngage(CAttackState&) override;
@@ -279,12 +284,13 @@ protected:
     void DropItems(CCharEntity* PChar);
 
 private:
-    timer::time_point      m_DespawnTimer{ timer::time_point::min() }; // Despawn Timer to despawn mob after set duration
-    HashMap<int, int16>    m_mobModStat;
-    HashMap<int, int16>    m_mobModStatSave;
-    static constexpr float roam_home_distance{ 60.f };
-    SpawnSlot*             spawnSlot = nullptr;
-    Maybe<SpawnWindow>     spawnWindow_;
+    timer::time_point                     m_DespawnTimer{ timer::time_point::min() }; // Despawn Timer to despawn mob after set duration
+    HashMap<int, int16>                   m_mobModStat;
+    HashMap<int, int16>                   m_mobModStatSave;
+    HashMap<uint16, std::array<float, 3>> m_fTPModifierOverrides;
+    static constexpr float                roam_home_distance{ 60.f };
+    SpawnSlot*                            spawnSlot = nullptr;
+    Maybe<SpawnWindow>                    spawnWindow_;
 };
 
 #endif

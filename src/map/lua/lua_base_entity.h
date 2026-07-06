@@ -906,6 +906,9 @@ public:
     void  addMobMod(uint16 mobModID, int16 value);
     void  delMobMod(uint16 mobModID, int16 value);
 
+    auto getfTPModifierOverride(uint16 skillId) -> sol::object;
+    void setfTPModifierOverride(uint16 skillId, float ftp1, float ftp2, float ftp3);
+
     uint32 getBattleTime();
     auto   getCrystalElement() const -> ELEMENT;
     void   setCrystalElement(ELEMENT crystalElement);

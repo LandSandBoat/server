@@ -14,21 +14,11 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
     params.baseDamage     = mob:getMainLvl() + 2
-    params.fTP            = { 3.00, 3.00, 3.00 }
+    params.fTP            = mob:getfTPModifierOverride(skill:getID()) or { 3.00, 3.00, 3.00 }
     params.element        = xi.element.WIND
     params.attackType     = xi.attackType.MAGICAL
     params.damageType     = xi.damageType.WIND
     params.shadowBehavior = xi.mobskills.shadowBehavior.WIPE_SHADOWS
-
-    if mob:getPool() == xi.mobPool.KREUTZET then
-        local stormwindDamage = mob:getLocalVar('stormwindDamage') -- TODO: Maybe change name of localVar to stormwindCounter for clarity.
-
-        if stormwindDamage == 2 then
-            params.fTP = { 3.25, 3.25, 3.25 }
-        elseif stormwindDamage == 3 then
-            params.fTP = { 3.60, 3.60, 3.60 }
-        end
-    end
 
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, action, params)
 
