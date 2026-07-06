@@ -124,7 +124,7 @@ void GP_CLI_COMMAND_MYROOM_IS::process(MapSession* PSession, CCharEntity* PChar)
                 const auto zoneid = PChar->getZone();
 
                 PChar->loc.destination = zoneid;
-                PChar->status          = STATUS_TYPE::DISAPPEAR;
+                PChar->status          = xi::Status::Disappear;
 
                 PChar->clearPacketList();
                 PChar->requestedZoneChange = true;

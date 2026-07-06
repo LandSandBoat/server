@@ -46,7 +46,7 @@ const auto denyZone = [](CCharEntity* PChar)
     PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::CouldNotEnter);
     PChar->pushPacket<GP_SERV_COMMAND_WPOS2>(PChar, PChar->loc.p, POSMODE::RESET);
 
-    PChar->status = STATUS_TYPE::NORMAL;
+    PChar->status = xi::Status::Normal;
 };
 
 } // namespace
@@ -74,9 +74,9 @@ void GP_CLI_COMMAND_MAPRECT::process(MapSession* PSession, CCharEntity* PChar) c
     const std::string_view mogEntrancePrefix  = rectView.substr(0, 3);
     const auto             isMogHouseEntrance = mogEntrancePrefix == "zmr" || mogEntrancePrefix == "zms"; // zmr* classic cities; zms* WoTG [S] + Adoulin
 
-    if (PChar->status == STATUS_TYPE::NORMAL)
+    if (PChar->status == xi::Status::Normal)
     {
-        PChar->status       = STATUS_TYPE::DISAPPEAR;
+        PChar->status       = xi::Status::Disappear;
         PChar->loc.boundary = 0;
 
         // Exiting Mog House
@@ -180,14 +180,14 @@ void GP_CLI_COMMAND_MAPRECT::process(MapSession* PSession, CCharEntity* PChar) c
                 }
                 else
                 {
-                    PChar->status = STATUS_TYPE::NORMAL;
+                    PChar->status = xi::Status::Normal;
                     ShowWarning("GP_CLI_COMMAND_MAPRECT: Moghouse 2F requested without it being unlocked: %s", PChar->getName());
                     return;
                 }
             }
             else
             {
-                PChar->status = STATUS_TYPE::NORMAL;
+                PChar->status = xi::Status::Normal;
                 ShowWarning("GP_CLI_COMMAND_MAPRECT: Moghouse zoneline abuse by %s", PChar->getName());
                 return;
             }

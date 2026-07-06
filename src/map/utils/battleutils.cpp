@@ -5015,7 +5015,7 @@ void DrawIn(CBattleEntity* PTarget, const position_t pos, const float offset, co
     // Move the target a little higher, just in case
     nearEntity.y -= 1.0f;
 
-    if (PTarget->status != STATUS_TYPE::CUTSCENE_ONLY)
+    if (PTarget->status != xi::Status::CutsceneOnly)
     {
         // don't draw in dead players for now!
         // see tractor

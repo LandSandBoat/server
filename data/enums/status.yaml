@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.status
+
+values:
+  normal: 0
+  update: 1
+  disappear: 2
+  invisible: 3
+  status_4: 4
+  cutscene_only: 6
+  status_18: 18
+  shutdown: 20

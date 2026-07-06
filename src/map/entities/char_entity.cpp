@@ -129,7 +129,7 @@ CCharEntity::CCharEntity()
     m_GMlevel    = 0;
     m_isGMHidden = false;
 
-    allegiance = ALLEGIANCE_TYPE::PLAYER;
+    allegiance = xi::Allegiance::Player;
 
     TradeContainer = new CTradeContainer();
     Container      = new CTradeContainer();
@@ -2356,7 +2356,7 @@ CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags
     {
         // Check if target is a BEHAVIOR_NO_ASSIST mob with player allegiance
         auto* PEntity = GetEntity(targid, TYPE_MOB | TYPE_PC | TYPE_PET | TYPE_TRUST);
-        if (PEntity && PEntity->objtype == TYPE_MOB && static_cast<CMobEntity*>(PEntity)->allegiance == ALLEGIANCE_TYPE::PLAYER &&
+        if (PEntity && PEntity->objtype == TYPE_MOB && static_cast<CMobEntity*>(PEntity)->allegiance == xi::Allegiance::Player &&
             (static_cast<CMobEntity*>(PEntity)->m_Behavior & BEHAVIOR_NO_ASSIST))
         {
             errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::CannotOnThatTarget);
@@ -2432,7 +2432,7 @@ void CCharEntity::Die(timer::duration _duration)
     PAI->Internal_Die(_duration);
 
     // If player allegiance is not reset on death they will auto-homepoint
-    allegiance = ALLEGIANCE_TYPE::PLAYER;
+    allegiance = xi::Allegiance::Player;
 
     // reraise modifiers
     if (this->getMod(Mod::RERAISE_I) > 0)

@@ -39,7 +39,7 @@ CPlayerCharmController::~CPlayerCharmController()
         POwner->PAI->Internal_Disengage();
     }
     POwner->PAI->PathFind.reset();
-    POwner->allegiance = ALLEGIANCE_TYPE::PLAYER;
+    POwner->allegiance = xi::Allegiance::Player;
 }
 
 auto CPlayerCharmController::Tick(timer::time_point tick) -> Task<void>

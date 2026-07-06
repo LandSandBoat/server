@@ -382,7 +382,7 @@ auto LoadTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntity*
 
     PTrust->UpdateSpeed();
 
-    PTrust->status          = STATUS_TYPE::NORMAL;
+    PTrust->status          = xi::Status::Normal;
     PTrust->modelSize       = trustData->modelSize;
     PTrust->modelHitboxSize = trustData->modelHitboxSize;
     PTrust->m_EcoSystem     = trustData->EcoSystem;

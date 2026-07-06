@@ -1816,7 +1816,7 @@ auto InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* instance) -> CMob
 
         PMob->m_Pool = rset->get<uint32>("poolid");
 
-        PMob->allegiance      = rset->get<ALLEGIANCE_TYPE>("allegiance");
+        PMob->allegiance      = rset->get<xi::Allegiance>("allegiance");
         PMob->namevis         = rset->get<uint8>("namevis");
         PMob->modelHitboxSize = std::max<float>(0.0f, rset->getOrDefault<float>("modelHitboxSize", 0) / 10.f);
         PMob->modelSize       = rset->getOrDefault<uint8>("modelSize", 0);
@@ -1979,7 +1979,7 @@ auto InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZone
 
         PMob->m_Pool = rset->get<uint32>("poolid");
 
-        PMob->allegiance      = rset->get<ALLEGIANCE_TYPE>("allegiance");
+        PMob->allegiance      = rset->get<xi::Allegiance>("allegiance");
         PMob->namevis         = rset->get<uint8>("namevis");
         PMob->modelHitboxSize = std::max<float>(0.0f, rset->getOrDefault<float>("modelHitboxSize", 0) / 10.f);
         PMob->modelSize       = rset->getOrDefault<uint8>("modelSize", 0);

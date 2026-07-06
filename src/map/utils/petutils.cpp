@@ -1444,7 +1444,7 @@ void DetachPet(CBattleEntity* PMaster)
         }
 
         PMob->isCharmed  = false;
-        PMob->allegiance = ALLEGIANCE_TYPE::MOB;
+        PMob->allegiance = xi::Allegiance::Mob;
         PMob->charmTime  = timer::time_point::min();
         PMob->PMaster    = nullptr;
 
@@ -1938,7 +1938,7 @@ void LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
     }
 
     PPet->setSpawnLevel(PPet->GetMLevel());
-    PPet->status          = STATUS_TYPE::NORMAL;
+    PPet->status          = xi::Status::Normal;
     PPet->modelSize       = PPetData->modelSize;
     PPet->modelHitboxSize = PPetData->modelHitboxSize;
     PPet->m_EcoSystem     = PPetData->EcoSystem;

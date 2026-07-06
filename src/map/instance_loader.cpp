@@ -209,7 +209,7 @@ auto CInstanceLoader::LoadInstance() const -> CInstance*
 
             PMob->m_Pool = rset->get<uint32>("poolid");
 
-            PMob->allegiance      = rset->get<ALLEGIANCE_TYPE>("allegiance");
+            PMob->allegiance      = rset->get<xi::Allegiance>("allegiance");
             PMob->namevis         = rset->get<uint8>("namevis");
             PMob->m_roamFlags     = rset->get<uint16>("roamflag");
             PMob->modelHitboxSize = std::max<float>(0.0f, rset->getOrDefault<float>("modelHitboxSize", 0) / 10.f);
@@ -276,7 +276,7 @@ auto CInstanceLoader::LoadInstance() const -> CInstance*
             PNpc->animationsub = rset->get<uint8>("animationsub");
 
             PNpc->namevis = rset->get<uint8>("namevis");
-            PNpc->status  = rset->get<STATUS_TYPE>("status");
+            PNpc->status  = rset->get<xi::Status>("status");
             PNpc->m_flags = rset->get<uint32>("entityFlags");
 
             uint16 sqlModelID[10];

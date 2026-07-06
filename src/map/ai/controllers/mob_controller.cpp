@@ -1268,7 +1268,7 @@ auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
                                     false,
                                     [](CBaseEntity* MobEntity)
                                     {
-                                        MobEntity->status = STATUS_TYPE::INVISIBLE;
+                                        MobEntity->status = xi::Status::Invisible;
                                     }));
                         }
                     }
@@ -1352,7 +1352,7 @@ void CMobController::FollowRoamPath()
                 PMob->loc.zone->UpdateEntityPacket(PMob, ENTITY_UPDATE, UPDATE_POS);
 
                 // don't re-enter this block, but don't roam until emerging
-                PMob->status = STATUS_TYPE::UPDATE;
+                PMob->status = xi::Status::Update;
                 PMob->SetUntargetable(false);
                 Wait(2s);
                 PMob->PAI->QueueAction(

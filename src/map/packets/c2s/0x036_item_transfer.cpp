@@ -83,7 +83,7 @@ void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PC
     }
 
     // Only allow trading with mobs if it's status is an NPC
-    if (PNpc->objtype == TYPE_MOB && PNpc->status != STATUS_TYPE::NORMAL)
+    if (PNpc->objtype == TYPE_MOB && PNpc->status != xi::Status::Normal)
     {
         return;
     }

@@ -151,7 +151,7 @@ CMobEntity::CMobEntity()
     TracyZoneScoped;
 
     objtype     = ENTITYTYPE::TYPE_MOB;
-    allegiance  = ALLEGIANCE_TYPE::MOB;
+    allegiance  = xi::Allegiance::Mob;
     m_EcoSystem = xi::Ecosystem::Unclassified;
 
     m_SpellListContainer = nullptr;
