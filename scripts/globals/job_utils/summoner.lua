@@ -2,7 +2,6 @@
 -- Summoner Job Utilities
 -----------------------------------
 require('scripts/globals/ability')
-require('scripts/globals/jobpoints')
 require('scripts/globals/combat/tp')
 -----------------------------------
 xi = xi or {}

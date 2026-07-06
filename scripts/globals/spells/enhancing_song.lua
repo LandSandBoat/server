@@ -1,8 +1,6 @@
 -----------------------------------
 -- Song Utilities
 -----------------------------------
-require('scripts/globals/jobpoints')
------------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}
 xi.spells.enhancing = xi.spells.enhancing or {}

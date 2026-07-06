@@ -3,7 +3,6 @@
 -- Used for songs that deal negative status effects upon targets.
 -----------------------------------
 require('scripts/globals/combat/magic_hit_rate')
-require('scripts/globals/jobpoints')
 require('scripts/globals/magicburst')
 -----------------------------------
 xi = xi or {}

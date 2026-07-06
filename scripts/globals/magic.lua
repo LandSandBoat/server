@@ -1,5 +1,4 @@
 require('scripts/globals/combat/magic_hit_rate')
-require('scripts/globals/jobpoints')
 require('scripts/globals/spells/damage_spell')
 -----------------------------------
 xi = xi or {}

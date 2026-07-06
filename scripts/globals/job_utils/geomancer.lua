@@ -4,7 +4,6 @@
 require('scripts/globals/ability')
 require('scripts/globals/pets')
 require('scripts/globals/weaponskills')
-require('scripts/globals/jobpoints')
 -----------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
