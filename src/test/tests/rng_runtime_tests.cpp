@@ -48,17 +48,19 @@ constexpr int kSamples = 1'000'000;
 TEST_CASE("seeded engine reproduces the same stream", "[rng]")
 {
     std::vector<uint32_t> first;
+    first.reserve(16);
     xirand::rng().seed(42);
     for (int i = 0; i < 16; ++i)
     {
-        first.push_back(xirand::GetRandomNumber<uint32_t>(1'000'000));
+        first.emplace_back(xirand::GetRandomNumber<uint32_t>(1'000'000));
     }
 
     std::vector<uint32_t> second;
+    second.reserve(16);
     xirand::rng().seed(42);
     for (int i = 0; i < 16; ++i)
     {
-        second.push_back(xirand::GetRandomNumber<uint32_t>(1'000'000));
+        second.emplace_back(xirand::GetRandomNumber<uint32_t>(1'000'000));
     }
 
     REQUIRE(first == second);
