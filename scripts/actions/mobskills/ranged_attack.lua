@@ -18,7 +18,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     params.baseDamage     = mob:getWeaponDmg()
     params.numHits        = 1
-    params.fTP            = { 1.5, 1.5, 1.5 } -- TODO: Mobs get more base damage on their ranged weapon slot already. Do we need the 1.5 fTP?
+    params.fTP            = { 1.0, 1.0, 1.0 }
     params.attackType     = xi.attackType.RANGED
     params.damageType     = xi.damageType.PIERCING
     params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
