@@ -34,7 +34,7 @@ local column =
     MULTIPLIER_500    = 14,
 }
 
-local pTable =
+xi.spells.damage.pTable =
 {
 -- Single target black magic spells:
 --                                       1          2     3      4     5      6      7    8    9    10    11    12    13    14
@@ -330,7 +330,7 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
 
     -- Choose system to use.
     if
-        pTable[spellId][column.MULTIPLIER_0] > 0 and -- We actually have new system values.
+        xi.spells.damage.pTable[spellId][column.MULTIPLIER_0] > 0 and -- We actually have new system values.
         caster:isPC() and                            -- Only players use new system.
         not xi.settings.main.USE_OLD_MAGIC_DAMAGE    -- New system is allowed in settings.
     then
@@ -340,10 +340,10 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
     -----------------------------------
     -- STEP 1: baseSpellDamage (V)
     -----------------------------------
-    local baseSpellDamage = pTable[spellId][column.NPC_POWER] -- (V) In Wiki.
+    local baseSpellDamage = xi.spells.damage.pTable[spellId][column.NPC_POWER] -- (V) In Wiki.
 
     if useNewSystem then
-        baseSpellDamage = pTable[spellId][column.PC_POWER] -- vPC
+        baseSpellDamage = xi.spells.damage.pTable[spellId][column.PC_POWER] -- vPC
     end
 
     -----------------------------------
@@ -366,13 +366,13 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
         }
 
         for i = 1, 7 do
-            statDiffBonus = statDiffBonus + math.floor(utils.clamp(statDiff - mTable[i][1], 0, mTable[i][2]) * pTable[spellId][column.INFLEXION_POINT + i])
+            statDiffBonus = statDiffBonus + math.floor(utils.clamp(statDiff - mTable[i][1], 0, mTable[i][2]) * xi.spells.damage.pTable[spellId][column.INFLEXION_POINT + i])
         end
 
     -- Old system
     else
-        local spellMultiplier = pTable[spellId][column.NPC_MULTIPLIER]  -- M
-        local inflexionPoint  = pTable[spellId][column.INFLEXION_POINT] -- I
+        local spellMultiplier = xi.spells.damage.pTable[spellId][column.NPC_MULTIPLIER]  -- M
+        local inflexionPoint  = xi.spells.damage.pTable[spellId][column.INFLEXION_POINT] -- I
 
         -- Cap stat difference. In the old system, in 99% of cases, the stat difference capped at 3 times the infexion point, from which point, stat would stop taking effect.
         local statCap = 3 * inflexionPoint
@@ -1102,9 +1102,9 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local spellId         = spell:getID()
     local skillType       = spell:getSkillType()
     local spellGroup      = spell:getSpellGroup()
-    local statUsed        = pTable[spellId][column.STAT_USED]
-    local bonusMacc       = pTable[spellId][column.BONUS_MACC] + cardinalChantBonus(caster, target, xi.direction.SOUTH, spellId, skillType)
-    local forceDayWeather = pTable[spellId][column.FORCE_DAY_WEATHER]
+    local statUsed        = xi.spells.damage.pTable[spellId][column.STAT_USED]
+    local bonusMacc       = xi.spells.damage.pTable[spellId][column.BONUS_MACC] + cardinalChantBonus(caster, target, xi.direction.SOUTH, spellId, skillType)
+    local forceDayWeather = xi.spells.damage.pTable[spellId][column.FORCE_DAY_WEATHER]
 
     -- Calculate base damage and the rest of damage multipliers.
     local spellDamage                 = xi.spells.damage.calculateBaseDamage(caster, target, spellId, spellGroup, skillType, statUsed)
