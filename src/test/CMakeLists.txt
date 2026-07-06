@@ -1,6 +1,18 @@
 add_subdirectory(lua)
 add_subdirectory(reporters)
 
+# Catch2 hosts the C++ unit tests that run during xi_test startup, before the
+# Lua test engine boots (see main.cpp).
+CPMAddPackage(
+    NAME Catch2
+    GITHUB_REPOSITORY catchorg/Catch2
+    GIT_TAG v3.7.1
+    SYSTEM ON
+    OPTIONS
+        "CATCH_INSTALL_DOCS OFF"
+        "CATCH_INSTALL_EXTRAS OFF"
+) # defines: Catch2::Catch2
+
 set(SOURCES
     ${COMMON_SOURCES}
     ${LUA_SOURCES}
@@ -37,8 +49,13 @@ else()
     set(resource "${CMAKE_SOURCE_DIR}/res/testserver.rc")
 endif()
 
+# Catch2 test TUs must live in the executable, not xi_test_lib: their tests are
+# registered by static initializers, which the linker drops for unreferenced
+# object files in a static library.
 add_executable(xi_test
     ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/entity_list_tests.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/rng_runtime_tests.cpp
     ${resource})
 
 set(TEST_LIB_SOURCES ${SOURCES})
@@ -77,7 +94,8 @@ target_include_directories(xi_test_lib
 
 target_link_libraries(xi_test
     PUBLIC
-        xi_test_lib)
+        xi_test_lib
+        Catch2::Catch2)
 
 set_target_output_directory(xi_test)
 

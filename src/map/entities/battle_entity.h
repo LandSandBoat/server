@@ -22,9 +22,10 @@
 #ifndef _BATTLEENTITY_H
 #define _BATTLEENTITY_H
 
-#include "common/types/flat_hash_map.h"
+#include "common/types/hash_map.h"
 
 #include <set>
+#include <type_traits>
 #include <vector>
 
 #include "alliance.h"
@@ -523,9 +524,15 @@ private:
     timer::time_point m_battleStartTime;
     uint16            m_battleID = 0; // Current battle the entity is participating in. Battle ID must match in order for entities to interact with each other.
 
-    FlatHashMap<Mod, int16, EnumClassHash>                                         m_modStat;     // array of modifiers
-    FlatHashMap<Mod, int16, EnumClassHash>                                         m_modStatSave; // saved state
-    FlatHashMap<PetModType, FlatHashMap<Mod, int16, EnumClassHash>, EnumClassHash> m_petMod;
+    HashMap<Mod, int16, EnumClassHash>                                     m_modStat;     // array of modifiers
+    HashMap<Mod, int16, EnumClassHash>                                     m_modStatSave; // saved state
+    HashMap<PetModType, HashMap<Mod, int16, EnumClassHash>, EnumClassHash> m_petMod;
+
+    // The mod maps MUST be node-based (HashMap): references into them are held while
+    // other entries are inserted, and a flat/dense map relocates its storage on growth.
+    static_assert(std::is_same_v<decltype(m_modStat), HashMap<Mod, int16, EnumClassHash>>);
+    static_assert(std::is_same_v<decltype(m_modStatSave), HashMap<Mod, int16, EnumClassHash>>);
+    static_assert(std::is_same_v<decltype(m_petMod), HashMap<PetModType, HashMap<Mod, int16, EnumClassHash>, EnumClassHash>>);
 };
 
 #endif

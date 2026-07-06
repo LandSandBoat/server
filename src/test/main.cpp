@@ -22,7 +22,10 @@
 #include <test/test_application.h>
 
 #include <common/lua.h>
+#include <common/settings.h>
 #include <common/tracy.h>
+
+#include <catch2/catch_session.hpp>
 
 #include <iostream>
 #include <memory>
@@ -30,6 +33,27 @@
 int main(int argc, char** argv)
 {
     TracySetThreadName("Test Thread");
+
+    // Run the Catch2 C++ unit tests first: they're fast, need no DB or engine,
+    // and a failure means a core container/type invariant is broken - there's
+    // no point booting the Lua suite on top of that. xi_test's own CLI flags
+    // aren't valid Catch2 arguments, so the session runs everything registered.
+    {
+        // Entity constructors read settings (BASE_SPEED etc.), which normally
+        // load in Application's constructor - and settings load through the
+        // global lua state. Both inits are idempotent; TestApplication re-runs
+        // them later.
+        lua_init();
+        settings::init();
+        std::cout << "[----------] Running C++ unit tests (Catch2)" << std::endl;
+
+        const char* catchArgv[] = { argv[0] };
+        if (Catch::Session().run(1, const_cast<char**>(catchArgv)) != 0)
+        {
+            std::cerr << "C++ unit tests failed; skipping the Lua test suite." << std::endl;
+            return EXIT_FAILURE;
+        }
+    }
 
     auto testApp = std::make_unique<TestApplication>(argc, argv);
 

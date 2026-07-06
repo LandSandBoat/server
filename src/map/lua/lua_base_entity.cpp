@@ -12857,25 +12857,27 @@ void CLuaBaseEntity::disengage()
 
 namespace
 {
-    // Adapts a Lua function into an action-queue callable, adding the
-    // invoke-and-log-errors boilerplate.
-    auto wrapLuaAction(sol::function func) -> queueAction_t::EntityFunc_t
-    {
-        return [func = std::move(func)](CBaseEntity* PEntity)
-        {
-            if (!func.valid())
-            {
-                return;
-            }
 
-            auto result = func(PEntity);
-            if (!result.valid())
-            {
-                sol::error err = result;
-                ShowError("CAIActionQueue Lua action for %s (%i): %s", PEntity->name, PEntity->id, err.what());
-            }
-        };
-    }
+// Adapts a Lua function into an action-queue callable, adding the
+// invoke-and-log-errors boilerplate.
+auto wrapLuaAction(sol::function func) -> queueAction_t::EntityFunc_t
+{
+    return [func = std::move(func)](CBaseEntity* PEntity)
+    {
+        if (!func.valid())
+        {
+            return;
+        }
+
+        auto result = func(PEntity);
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("CAIActionQueue Lua action for %s (%i): %s", PEntity->name, PEntity->id, err.what());
+        }
+    };
+}
+
 } // namespace
 
 /************************************************************************
