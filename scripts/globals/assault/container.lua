@@ -407,7 +407,14 @@ xi.assault.onInstanceFailure = function(instance)
         entity:messageSpecial(zones[zoneID].text.MISSION_FAILED, 10, 10)
         entity:setCharVar('assaultEntered', 0)
         entity:setCharVar('AssaultFailed', 1)
-        entity:startEvent(102)
+        if entity:isInEvent() then
+            entity:release()
+            entity:timer(1, function(entityArg)
+                entityArg:startEvent(102)
+            end)
+        else
+            entity:startEvent(102)
+        end
     end
 end
 
@@ -457,7 +464,14 @@ local function awardCompletionPoints(player, instance)
 
             member:setCharVar('assaultEntered', 0)
             member:setCharVar('Assault_Armband', 0)
-            member:startEvent(102)
+            if member:getID() ~= player:getID() and member:isInEvent() then -- Player is finishing Rune of Release event: do not interrupt.
+                member:release()
+                member:timer(1, function(memberArg)
+                    memberArg:startEvent(102)
+                end)
+            else
+                member:startEvent(102)
+            end
         end
     end
 

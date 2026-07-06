@@ -10,7 +10,7 @@ entity.onTrigger = function(player, npc)
     local instance = npc:getInstance()
 
     if instance and instance:completed() then
-        player:startEvent(100, 3)
+        player:startOptionalCutscene(100, { [0] = 3, cs_option = 0, canSkip = true })
     end
 end
 
