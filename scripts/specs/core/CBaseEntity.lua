@@ -3699,7 +3699,7 @@ function CBaseEntity:getSpecies()
 end
 
 ---@nodiscard
----@param mobType integer
+---@param mobType xi.mobType
 ---@return boolean
 function CBaseEntity:isMobType(mobType)
 end

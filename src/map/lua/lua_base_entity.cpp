@@ -17500,12 +17500,12 @@ uint16 CLuaBaseEntity::getSpecies()
 /************************************************************************
  *  Function: isMobType()
  *  Purpose : Returns true if a Mob is of a specified type (if !Mob->false)
- *  Example : if mob:isMobType(MOBTYPE_NOTORIOUS) then
+ *  Example : if mob:isMobType(xi.mobType.NOTORIOUS) then
  *  Notes   : Oddly, this is only being used to check if Mob is NM...?
  *  Notes   : To Do: This isn't the intended function for NM checks...
  ************************************************************************/
 
-auto CLuaBaseEntity::isMobType(const uint8 mobType) const -> bool
+auto CLuaBaseEntity::isMobType(const xi::MobType mobType) const -> bool
 {
     if (m_PBaseEntity->objtype != TYPE_MOB)
     {
@@ -17514,13 +17514,13 @@ auto CLuaBaseEntity::isMobType(const uint8 mobType) const -> bool
 
     const auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
 
-    // Special case for isMobType(MOBTYPE_NORMAL), else 0 & 0 returns false.
-    if (mobType == MOBTYPE_NORMAL)
+    // Special case for isMobType(xi.mobType.NORMAL), else 0 & 0 returns false.
+    if (mobType == xi::MobType::Normal)
     {
-        return PMob->m_Type == MOBTYPE_NORMAL;
+        return PMob->m_Type == xi::MobType::Normal;
     }
 
-    return PMob->m_Type & mobType;
+    return (PMob->m_Type & mobType) != xi::MobType::Normal;
 }
 
 /************************************************************************
@@ -17548,7 +17548,7 @@ auto CLuaBaseEntity::isUndead() -> bool
 
 bool CLuaBaseEntity::isNM()
 {
-    if (m_PBaseEntity->objtype == TYPE_MOB && static_cast<CMobEntity*>(m_PBaseEntity)->m_Type & MOBTYPE_NOTORIOUS)
+    if (m_PBaseEntity->objtype == TYPE_MOB && (static_cast<CMobEntity*>(m_PBaseEntity)->m_Type & xi::MobType::Notorious) != xi::MobType::Normal)
     {
         return true;
     }

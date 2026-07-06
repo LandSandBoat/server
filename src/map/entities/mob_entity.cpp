@@ -121,7 +121,7 @@ CMobEntity::CMobEntity()
 , m_dmgMult(100)
 , m_disableScent(false)
 , m_maxRoamDistance(50.0f)
-, m_Type(MOBTYPE_NORMAL)
+, m_Type(xi::MobType::Normal)
 , m_Aggro(false)
 , m_TrueDetection(false)
 , m_Link(0)
@@ -447,7 +447,7 @@ bool CMobEntity::ShouldForceLink()
         return true;
     }
 
-    if (m_Type & MOBTYPE_BATTLEFIELD)
+    if ((m_Type & xi::MobType::Battlefield) != xi::MobType::Normal)
     {
         return true;
     }
@@ -462,7 +462,7 @@ bool CMobEntity::ShouldForceLink()
 
 bool CMobEntity::CanDeaggro() const
 {
-    return !(m_Type & MOBTYPE_NOTORIOUS || m_Type & MOBTYPE_BATTLEFIELD);
+    return !((m_Type & xi::MobType::Notorious) != xi::MobType::Normal || (m_Type & xi::MobType::Battlefield) != xi::MobType::Normal);
 }
 
 bool CMobEntity::IsFarFromHome()
@@ -472,7 +472,7 @@ bool CMobEntity::IsFarFromHome()
 
 bool CMobEntity::CanBeNeutral() const
 {
-    return !(m_Type & MOBTYPE_NOTORIOUS);
+    return !((m_Type & xi::MobType::Notorious) != xi::MobType::Normal);
 }
 
 bool CMobEntity::shouldUseTPMove(uint16 tpThreshold)
@@ -670,7 +670,7 @@ void CMobEntity::Spawn()
     TracyZoneScoped;
 
     // Reset stolen item always for battlefields or only if HP was 0 (mob died)
-    if (this->m_Type & MOBTYPE_BATTLEFIELD || health.hp == 0)
+    if ((this->m_Type & xi::MobType::Battlefield) != xi::MobType::Normal || health.hp == 0)
     {
         m_ItemStolen    = false;
         m_ItemDespoiled = false;
@@ -1040,7 +1040,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     }
 
     ZONE_TYPE zoneType  = zoneutils::GetZone(PChar->getZone())->GetTypeMask();
-    bool      validZone = !(this->m_Type & MOBTYPE_BATTLEFIELD) && !(zoneType & ZONE_TYPE::DYNAMIS);
+    bool      validZone = !((this->m_Type & xi::MobType::Battlefield) != xi::MobType::Normal) && !(zoneType & ZONE_TYPE::DYNAMIS);
 
     // Check if mob can drop seals -- mobmod to disable drops, zone type isnt battlefield/dynamis, mob is stronger than Too Weak, or mobmod for EXP bonus is -100 or lower (-100% exp)
     if (!getMobMod(MOBMOD_NO_DROPS) && validZone && charutils::CheckMob(m_HiPCLvl, this) > EMobDifficulty::TooWeak && getMobMod(MOBMOD_EXP_BONUS) > -100)

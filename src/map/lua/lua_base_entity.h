@@ -852,7 +852,7 @@ public:
     uint8  getEcosystem();
     uint16 getFamily();
     uint16 getSpecies();
-    auto   isMobType(uint8 mobType) const -> bool; // True if mob is of type passed to function
+    auto   isMobType(xi::MobType mobType) const -> bool; // True if mob is of type passed to function
     auto   isUndead() -> bool;
     bool   isNM();
 

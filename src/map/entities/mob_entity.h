@@ -27,6 +27,7 @@
 #include <common/types/maybe.h>
 
 #include "data/enums/claim_type.h"
+#include "data/enums/mob_type.h"
 
 #include <unordered_map>
 
@@ -78,17 +79,6 @@ enum ROAMFLAG : uint16
     ROAMFLAG_IGNORE   = 0x200, // ignore all hate, except linking hate
     ROAMFLAG_STEALTH  = 0x400, // stays name hidden and untargetable until someone comes close (chigoe)
     ROAMFLAG_FOLLOW   = 0x800, // follows a player when sighted for a little while
-};
-
-enum MOBTYPE
-{
-    MOBTYPE_NORMAL      = 0x00,
-    MOBTYPE_0X01        = 0x01, // available for use
-    MOBTYPE_NOTORIOUS   = 0x02,
-    MOBTYPE_FISHED      = 0x04,
-    MOBTYPE_CALLED      = 0x08,
-    MOBTYPE_BATTLEFIELD = 0x10,
-    MOBTYPE_EVENT       = 0x20
 };
 
 enum DETECT : uint16
@@ -239,13 +229,13 @@ public:
     bool  m_disableScent;    // stop detecting by scent
     float m_maxRoamDistance; // maximum distance mob can be from spawn before despawning
 
-    uint8     m_Type; // mob type
-    bool      m_Aggro;
-    bool      m_TrueDetection; // Has true sight or sound
-    uint8     m_Link;          // link with mobs of it's family
-    bool      m_isAggroable;   // Can be aggroed by other monsters when in the player allegiance
-    uint16    m_Behavior;      // mob behavior
-    SPAWNTYPE m_SpawnType;     // condition for mob to spawn
+    xi::MobType m_Type; // mob type
+    bool        m_Aggro;
+    bool        m_TrueDetection; // Has true sight or sound
+    uint8       m_Link;          // link with mobs of it's family
+    bool        m_isAggroable;   // Can be aggroed by other monsters when in the player allegiance
+    uint16      m_Behavior;      // mob behavior
+    SPAWNTYPE   m_SpawnType;     // condition for mob to spawn
 
     int8   m_battlefieldID; // battlefield belonging to
     uint16 m_bcnmID;        // belongs to which battlefield

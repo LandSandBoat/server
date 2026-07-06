@@ -78,7 +78,7 @@ void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PC
             if (PMobTarget)
             {
                 // /check on a mob
-                if (PMobTarget->m_Type & MOBTYPE_NOTORIOUS || PMobTarget->m_Type & MOBTYPE_BATTLEFIELD || PMobTarget->getMobMod(MOBMOD_CHECK_AS_NM) > 0)
+                if ((PMobTarget->m_Type & xi::MobType::Notorious) != xi::MobType::Normal || (PMobTarget->m_Type & xi::MobType::Battlefield) != xi::MobType::Normal || PMobTarget->getMobMod(MOBMOD_CHECK_AS_NM) > 0)
                 {
                     PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PMobTarget, 0, 0, MsgBasic::CheckImpossibleToGauge);
                 }
