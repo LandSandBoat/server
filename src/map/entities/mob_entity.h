@@ -23,7 +23,11 @@
 #define _MOBENTITY_H
 
 #include "battle_entity.h"
+
 #include <common/types/maybe.h>
+
+#include "data/enums/claim_type.h"
+
 #include <unordered_map>
 
 enum class MsgBasic : uint16_t;
@@ -110,13 +114,6 @@ enum BEHAVIOR : uint16
     BEHAVIOR_NO_ASSIST    = 0x008, // mob can not be targeted by helpful magic from players (cure, protect, etc)
     BEHAVIOR_AGGRO_AMBUSH = 0x200, // mob aggroes by ambush
     BEHAVIOR_NO_TURN      = 0x400  // mob does not turn to face target
-};
-
-enum class ClaimType : uint8
-{
-    Exclusive    = 0, // Regular exclusive claim behavior. Only one entity and related group can attack.
-    NonExclusive = 1, // Regular claim behavior but multiple unrelated entities can attack and compete for claim. Rewards distributed to last claiming entity.
-    Unclaimable  = 2, // Mob cannot be claimed. Multiple unrelated entities can attack. Rewards will not be distributed.
 };
 
 class CMobSkillState;

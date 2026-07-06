@@ -111,7 +111,7 @@ enum MOBMODIFIER : int
     MOBMOD_SKIP_ALLEGIANCE_CHECK  = 80, // Skip the allegiance check for valid target (allows for example a mob to cast a TARGET_ENEMY spell on itself)
     MOBMOD_ABILITY_RESPONSE       = 81, // Mob can respond to player ability use with onPlayerAbilityUse()
     MOBMOD_RUN_SPEED_MULT         = 82, // Multiplier for the speed of a mob while running (generally when the target is out of range) 100 = 1.00x
-    MOBMOD_CLAIM_TYPE             = 83, // Changes the claim behavior of the mob. See ClaimType enum.
+    MOBMOD_CLAIM_TYPE             = 83, // Changes the claim behavior of the mob. See xi::ClaimType enum.
     MOBMOD_NO_SPELL_COST          = 84, // Mob does not use MP when casting spells
     MOBMOD_ASTRAL_PET_OFFSET      = 85, // If non-zero, defines the offset from main mob's ID for astral flow (if zero, will assume offset of 2)
     MOBMOD_BASE_DAMAGE_MULTIPLIER = 86, // Multiplies the mob's base damage. Example: 150 = x1.5. MOBMOD_DAMAGE_OFFSET/MOBMOD_RANGED_DAMAGE_OFFSET are not subject to multiplication.

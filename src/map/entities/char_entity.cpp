@@ -2082,7 +2082,7 @@ bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
 
     if (auto* PMob = dynamic_cast<CMobEntity*>(PBattleTarget))
     {
-        if (PMob->getMobMod(MOBMOD_CLAIM_TYPE) == static_cast<int16>(ClaimType::NonExclusive))
+        if (PMob->getMobMod(MOBMOD_CLAIM_TYPE) == static_cast<int16>(xi::ClaimType::NonExclusive))
         {
             return true;
         }
