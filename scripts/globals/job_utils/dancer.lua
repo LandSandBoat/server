@@ -1,7 +1,6 @@
 -----------------------------------
 -- Dancer Job Utilities
 -----------------------------------
-require('scripts/globals/jobpoints')
 require('scripts/globals/magic')
 require('scripts/globals/weaponskills')
 -----------------------------------

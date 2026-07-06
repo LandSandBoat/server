@@ -2,8 +2,9 @@
 -- Dragoon Job Utilities
 -----------------------------------
 require('scripts/globals/ability')
+require('scripts/globals/combat/damage_multipliers')
+require('scripts/globals/combat/magic_burst')
 require('scripts/globals/combat/magic_hit_rate')
-require('scripts/globals/jobpoints')
 require('scripts/globals/spells/damage_spell')
 require('scripts/globals/weaponskills')
 -----------------------------------
@@ -696,9 +697,9 @@ xi.job_utils.dragoon.useDamageBreath = function(wyvern, target, skill, action, d
         wyvern:addTP(strafeMeritPower * 5) -- add 50 TP per merit with augmented AF2 legs
     end
 
-    local bonusMacc          = strafeMeritPower + master:getMod(xi.mod.WYVERN_BREATH_MACC)
-    local element            = damageType - xi.damageType.ELEMENTAL
-    local _, skillchainCount = xi.magicburst.formMagicBurst(target, element)
+    local bonusMacc       = strafeMeritPower + master:getMod(xi.mod.WYVERN_BREATH_MACC)
+    local element         = damageType - xi.damageType.ELEMENTAL
+    local skillchainCount = xi.combat.magicBurst.getMagicBurstTier(target, element)
 
     -- Breath accuracy is directly affected by a wyvern's current HP, but no data exists.
     local resist              = xi.combat.magicHitRate.calculateResistRate(wyvern, target, 0, 0, 0, element, 0, 0, bonusMacc)
@@ -708,7 +709,7 @@ xi.job_utils.dragoon.useDamageBreath = function(wyvern, target, skill, action, d
     local magicBurst          = 1
 
     if skillchainCount > 0 then
-        magicBurst = xi.spells.damage.calculateIfMagicBurst(target, element, skillchainCount)
+        magicBurst = xi.spells.damage.calculateIfMagicBurst(wyvern, target, element, skillchainCount)
     end
 
     -- It appears that MB breaths don't do more damage based on testing.

@@ -2,9 +2,8 @@
 -- Enfeebling Song Utilities
 -- Used for songs that deal negative status effects upon targets.
 -----------------------------------
+require('scripts/globals/combat/magic_burst')
 require('scripts/globals/combat/magic_hit_rate')
-require('scripts/globals/jobpoints')
-require('scripts/globals/magicburst')
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}
@@ -243,8 +242,8 @@ xi.spells.enfeebling.useEnfeeblingSong = function(caster, target, spell)
     -- STEP 5: Attempt to apply the status effect. Check for magic burst.
     ------------------------------
     if target:addStatusEffect(spellEffect, { power = power, duration = duration, origin = caster, tick = tick, subPower = subEffect, tier = spellTier }) then
-        local _, skillchainCount = xi.magicburst.formMagicBurst(target, spellElement)
-        if skillchainCount > 0 then
+        local magicBurstTier = xi.combat.magicBurst.getMagicBurstTier(target, spellElement)
+        if magicBurstTier > 0 then
             spell:setMsg(xi.msg.basic.MAGIC_BURST_ENFEEB)
             caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)
         else

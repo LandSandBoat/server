@@ -2,9 +2,8 @@
 -- Enfeebling Spell Utilities
 -- Used for spells that deal negative status effects upon targets.
 -----------------------------------
+require('scripts/globals/combat/magic_burst')
 require('scripts/globals/combat/magic_hit_rate')
-require('scripts/globals/jobpoints')
-require('scripts/globals/magicburst')
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}
@@ -495,18 +494,10 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     -- STEP 6: Final Operations.
     ------------------------------
     if target:addStatusEffect(spellEffect, { power = potency, duration = duration, origin = caster, tick = tick, subPower = subpotency, tier = tier }) then
-        -- Delete Stymie effect
-        if
-            skillType == xi.skill.ENFEEBLING_MAGIC and
-            caster:hasStatusEffect(xi.effect.STYMIE)
-        then
-            caster:delStatusEffect(xi.effect.STYMIE)
-        end
-
         -- Add "Magic Burst!" message
-        local _, skillchainCount = xi.magicburst.formMagicBurst(target, spellElement) -- External function. Not present in magic.lua.
+        local magicBurstTier = xi.combat.magicBurst.getMagicBurstTier(target, spellElement)
 
-        if skillchainCount > 0 then
+        if magicBurstTier > 0 then
             spell:setMsg(xi.msg.basic.MAGIC_BURST_ENFEEB_IS - message * 3)
             caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)
         else

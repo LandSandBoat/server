@@ -2693,11 +2693,35 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
 
     StatusEffectContainer->DelStatusEffectsByFlag(xi::StatusEffectFlag::MagicEnd);
 
+    // Remove Divine Emblem effect.
+    if (PSpell->getSkillType() == SKILL_DIVINE_MAGIC && StatusEffectContainer->HasStatusEffect(xi::StatusEffect::DivineEmblem))
+    {
+        StatusEffectContainer->DelStatusEffect(xi::StatusEffect::DivineEmblem);
+    }
+
+    // Remove Stymie effect.
+    if (PSpell->getSkillType() == SKILL_ENFEEBLING_MAGIC && StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Stymie))
+    {
+        StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Stymie);
+    }
+
     // Remove Cascade effect and consume TP.
     if (PSpell->getSkillType() == SKILL_ELEMENTAL_MAGIC && StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Cascade))
     {
         StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Cascade);
         this->health.tp = 0;
+    }
+
+    // Remove Marcato effect.
+    if (PSpell->getSkillType() == SKILL_SINGING && StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Marcato))
+    {
+        StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Marcato);
+    }
+
+    // Remove Ebullience effect.
+    if (PSpell->getSpellGroup() == SPELLGROUP_BLACK && StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Ebullience))
+    {
+        StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Ebullience);
     }
 
     PRecastContainer->Add(RECAST_MAGIC, static_cast<Recast>(PSpell->getID()), action.recast);

@@ -19,6 +19,8 @@
 
 -- 4  - Add them all, and final operations/considerations.
 -----------------------------------
+require('scripts/globals/combat/damage_multipliers')
+-----------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.physical = xi.combat.physical or {}

@@ -1,9 +1,12 @@
 -----------------------------------
 -- Global file for magic based skills magic hit rate.
 -----------------------------------
+require('scripts/globals/combat/magic_burst')
+-----------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.magicHitRate = xi.combat.magicHitRate or {}
+-----------------------------------
 
 -----------------------------------
 -- Calculate Target Resistance Rank
@@ -282,8 +285,7 @@ local function magicAccuracyFromMagicBurst(target, params)
         return 0
     end
 
-    local _, skillchainCount = xi.magicburst.formMagicBurst(target, params.magicalElement)
-    if skillchainCount <= 0 then
+    if params.magicBurstTier <= 0 then
         return 0
     end
 
@@ -481,16 +483,6 @@ end
 -- Calculate resist rate.
 -----------------------------------
 local function calculateResistanceFactor(actor, target, params)
-    -- Early return: Magic shield.
-    if target:hasStatusEffect(xi.effect.MAGIC_SHIELD, 0) then
-        return 0
-    end
-
-    -- Early return: Cannot resist non-elemental magic.
-    if params.magicalElement == xi.element.NONE then
-        return 1
-    end
-
     -- Calculate max allowed resist tier.
     local maxResistTier = 3
 
@@ -529,6 +521,7 @@ local function validateParameters(actor, target, fedData)
     params.effectId           = fedData.effectId or 0
     params.magicalElement     = fedData.magicalElement or xi.element.NONE
     params.bonusMacc          = fedData.bonusMacc or 0
+    params.magicBurstTier     = fedData.magicBurstTier or 0
     params.actorStat          = fedData.actorStat or 0
     params.targetStat         = fedData.targetStat or params.actorStat
     params.skillType          = fedData.skillType or 0
@@ -550,6 +543,7 @@ xi.combat.magicHitRate.calculateResistRate = function(actor, target, spellGroup,
         effectId       = utils.defaultIfNil(effectId, 0),
         magicalElement = utils.defaultIfNil(actionElement, 0),
         bonusMacc      = utils.defaultIfNil(bonusMacc, 0),
+        magicBurstTier = utils.defaultIfNil(xi.combat.magicBurst.getMagicBurstTier(target, actionElement), 0),
         actorStat      = utils.defaultIfNil(statUsed, 0),
         skillType      = utils.defaultIfNil(skillType, 0),
         skillRank      = utils.defaultIfNil(skillRank, 0),
@@ -559,7 +553,17 @@ xi.combat.magicHitRate.calculateResistRate = function(actor, target, spellGroup,
     -- Validate fed parameters.
     local params = validateParameters(actor, target, fedData)
 
-    -- Calculate and table resistance rank.
+    -- Early return: Magic shield.
+    if target:hasStatusEffect(xi.effect.MAGIC_SHIELD, 0) then
+        return 0
+    end
+
+    -- Early return: Cannot resist non-elemental magic actions.
+    if params.magicalElement == xi.element.NONE then
+        return 1
+    end
+
+    -- Calculate and table resistance rank. TODO: Feed it to the function directly.
     params.resistanceRank = calculateTargetResistanceRank(actor, target, params)
 
     -- Early return: Auto-resist.

@@ -3,6 +3,8 @@
 -- Used for Blue Magic spells.
 -----------------------------------
 require('scripts/globals/combat/physical_utilities')
+require('scripts/globals/combat/damage_multipliers')
+require('scripts/globals/combat/magic_burst')
 require('scripts/globals/combat/magic_hit_rate')
 require('scripts/globals/magic')
 require('scripts/globals/mobskills')
@@ -401,11 +403,11 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     local correlationMultiplier = xi.combat.damage.ecosystemMultiplier(caster, target, params.ecosystem)
 
     -- Data
-    local spellId            = spell:getID()
-    local spellElement       = spell:getElement()
-    local spellGroup         = spell:getSpellGroup()
-    local skillType          = xi.skill.BLUE_MAGIC
-    local _, skillchainCount = xi.magicburst.formMagicBurst(target, spellElement) -- External function. Not present in magic.lua.
+    local spellId         = spell:getID()
+    local spellElement    = spell:getElement()
+    local spellGroup      = spell:getSpellGroup()
+    local skillType       = xi.skill.BLUE_MAGIC
+    local skillchainCount = xi.combat.magicBurst.getMagicBurstTier(target, spellElement)
 
     -- Final D value
     local finalDamage    = (initialD + wsc) * (params.multiplier + azureBonus + correlationMultiplier) + statBonus
@@ -422,7 +424,7 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
         caster:hasStatusEffect(xi.effect.AZURE_LORE)
     then
         if skillchainCount > 0 then
-            finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurst(target, spellElement, skillchainCount))
+            finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurst(caster, target, spellElement, skillchainCount))
             finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spellId, skillType, spellElement))
 
             spell:setMsg(spell:getMagicBurstMessage()) -- "Magic Burst!"
@@ -462,11 +464,11 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap
     end
 
     -- Data
-    local spellId            = spell:getID()
-    local spellElement       = spell:getElement()
-    local spellGroup         = spell:getSpellGroup()
-    local skillType          = xi.skill.BLUE_MAGIC
-    local _, skillchainCount = xi.magicburst.formMagicBurst(target, spellElement) -- External function. Not present in magic.lua.
+    local spellId         = spell:getID()
+    local spellElement    = spell:getElement()
+    local spellGroup      = spell:getSpellGroup()
+    local skillType       = xi.skill.BLUE_MAGIC
+    local skillchainCount = xi.combat.magicBurst.getMagicBurstTier(target, spellElement)
 
     finalDamage = math.floor(finalDamage * xi.combat.magicHitRate.calculateResistRate(caster, target, spellGroup, skillType, 0, spellElement, params.attribute, 0, 0))
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateElementalStaffBonus(caster, spellElement))
@@ -479,7 +481,7 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap
         caster:hasStatusEffect(xi.effect.AZURE_LORE)
     then
         if skillchainCount > 0 then
-            finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurst(target, spellElement, skillchainCount))
+            finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurst(caster, target, spellElement, skillchainCount))
             finalDamage = math.floor(finalDamage * xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spellId, skillType, spellElement))
 
             spell:setMsg(spell:getMagicBurstMessage()) -- "Magic Burst!"
@@ -734,7 +736,7 @@ xi.spells.blue.useEnfeeblingSpell = function(caster, target, spell, params)
 
     if target:addStatusEffect(effect, { power = params.power, duration = math.floor(params.duration * resist), origin = caster, tick = params.tick }) then
         -- Add "Magic Burst!" message
-        local _, skillchainCount = xi.magicburst.formMagicBurst(target, spellElement) -- External function. Not present in magic.lua.
+        local skillchainCount = xi.combat.magicBurst.getMagicBurstTier(target, spellElement)
 
         if skillchainCount > 0 then
             spell:setMsg(xi.msg.basic.MAGIC_BURST_ENFEEB_IS)

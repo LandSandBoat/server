@@ -2,10 +2,11 @@
 -- Rune Fencer Job Utilities
 -----------------------------------
 require('scripts/globals/ability')
+require('scripts/globals/combat/damage_multipliers')
+require('scripts/globals/combat/magic_burst')
 require('scripts/globals/combat/magic_hit_rate')
-require('scripts/globals/weaponskills')
-require('scripts/globals/jobpoints')
 require('scripts/globals/spells/damage_spell')
+require('scripts/globals/weaponskills')
 -----------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
@@ -530,10 +531,10 @@ local function getSwipeLungeDamageMultipliers(player, target, element, bonusMacc
     multipliers.magicBurst          = 1
     multipliers.magicBurstBonus     = 1
 
-    local _, skillchainCount = xi.magicburst.formMagicBurst(target, element)
+    local skillchainCount = xi.combat.magicBurst.getMagicBurstTier(target, element)
 
     if skillchainCount > 0 then
-        multipliers.magicBurst      = xi.spells.damage.calculateIfMagicBurst(target, element, skillchainCount)
+        multipliers.magicBurst      = xi.spells.damage.calculateIfMagicBurst(player, target, element, skillchainCount)
         multipliers.magicBurstBonus = xi.spells.damage.calculateIfMagicBurstBonus(player, target, 0, element)
     end
 

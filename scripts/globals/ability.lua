@@ -1,8 +1,11 @@
 -----------------------------------
 -- ABILITIES
 -----------------------------------
+require('scripts/globals/combat/damage_multipliers')
+-----------------------------------
 xi = xi or {}
 xi.ability = xi.ability or {}
+-----------------------------------
 
 xi.ability.adjustDamage = function(dmg, attacker, skill, target, skilltype, skillparam, shadowbehav) -- seems to only be used for Wyvern breaths and chi blast
     -- physical attack missed, skip rest

@@ -2,9 +2,9 @@
 -- Damage Spell Utilities
 -- Used for spells that deal direct damage. (Black, White, Dark and Ninjutsu)
 -----------------------------------
+require('scripts/globals/combat/damage_multipliers')
+require('scripts/globals/combat/magic_burst')
 require('scripts/globals/combat/magic_hit_rate')
-require('scripts/globals/jobpoints')
-require('scripts/globals/magicburst')
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}
@@ -35,7 +35,7 @@ local column =
     MULTIPLIER_500    = 14,
 }
 
-local pTable =
+xi.spells.damage.pTable =
 {
 -- Single target black magic spells:
 --                                       1          2     3      4     5      6      7    8    9    10    11    12    13    14
@@ -331,7 +331,7 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
 
     -- Choose system to use.
     if
-        pTable[spellId][column.MULTIPLIER_0] > 0 and -- We actually have new system values.
+        xi.spells.damage.pTable[spellId][column.MULTIPLIER_0] > 0 and -- We actually have new system values.
         caster:isPC() and                            -- Only players use new system.
         not xi.settings.main.USE_OLD_MAGIC_DAMAGE    -- New system is allowed in settings.
     then
@@ -341,10 +341,10 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
     -----------------------------------
     -- STEP 1: baseSpellDamage (V)
     -----------------------------------
-    local baseSpellDamage = pTable[spellId][column.NPC_POWER] -- (V) In Wiki.
+    local baseSpellDamage = xi.spells.damage.pTable[spellId][column.NPC_POWER] -- (V) In Wiki.
 
     if useNewSystem then
-        baseSpellDamage = pTable[spellId][column.PC_POWER] -- vPC
+        baseSpellDamage = xi.spells.damage.pTable[spellId][column.PC_POWER] -- vPC
     end
 
     -----------------------------------
@@ -367,13 +367,13 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
         }
 
         for i = 1, 7 do
-            statDiffBonus = statDiffBonus + math.floor(utils.clamp(statDiff - mTable[i][1], 0, mTable[i][2]) * pTable[spellId][column.INFLEXION_POINT + i])
+            statDiffBonus = statDiffBonus + math.floor(utils.clamp(statDiff - mTable[i][1], 0, mTable[i][2]) * xi.spells.damage.pTable[spellId][column.INFLEXION_POINT + i])
         end
 
     -- Old system
     else
-        local spellMultiplier = pTable[spellId][column.NPC_MULTIPLIER]  -- M
-        local inflexionPoint  = pTable[spellId][column.INFLEXION_POINT] -- I
+        local spellMultiplier = xi.spells.damage.pTable[spellId][column.NPC_MULTIPLIER]  -- M
+        local inflexionPoint  = xi.spells.damage.pTable[spellId][column.INFLEXION_POINT] -- I
 
         -- Cap stat difference. In the old system, in 99% of cases, the stat difference capped at 3 times the infexion point, from which point, stat would stop taking effect.
         local statCap = 3 * inflexionPoint
@@ -722,8 +722,6 @@ xi.spells.damage.calculateDivineSealMultiplier = function(caster, target, skillT
         return 1
     end
 
-    caster:delStatusEffect(xi.effect.DIVINE_SEAL)
-
     return 2
 end
 
@@ -736,8 +734,6 @@ xi.spells.damage.calculateDivineEmblemMultiplier = function(caster, skillType)
     if skillType ~= xi.skill.DIVINE_MAGIC then
         return 1
     end
-
-    caster:delStatusEffect(xi.effect.DIVINE_EMBLEM)
 
     return 1 + caster:getSkillLevel(xi.skill.DIVINE_MAGIC) / 100
 end
@@ -769,8 +765,6 @@ xi.spells.damage.calculateEbullienceMultiplier = function(caster, spellGroup)
     if spellGroup ~= xi.magic.spellGroup.BLACK then
         return 1
     end
-
-    caster:delStatusEffectSilent(xi.effect.EBULLIENCE)
 
     return 1.2 + caster:getMod(xi.mod.EBULLIENCE_AMOUNT) / 100
 end
@@ -957,30 +951,20 @@ xi.spells.damage.calculateNullification = function(target, element, isMagic, isB
     return 1
 end
 
-xi.spells.damage.calculateIfMagicBurst = function(target, spellElement, skillchainCount)
-    local magicBurst = 1 -- The variable we want to calculate
-
-    if spellElement > xi.element.NONE then
-        local resistRank = target:getMod(xi.data.element.getElementalResistanceRankModifier(spellElement))
-        local rankTable  = { 1.15, 0.85, 0.6, 0.5, 0.4, 0.15, 0.05 }
-        local rankBonus  = 0
-
-        if resistRank <= -3 then
-            rankBonus = 1.5
-        elseif resistRank >= 5 then
-            rankBonus = 0
-        else
-            rankBonus = rankTable[resistRank + 3]
-        end
-
-        magicBurst = 1.25 + rankBonus + skillchainCount / 10
+xi.spells.damage.calculateIfMagicBurst = function(caster, target, spellElement, magicBurstTier)
+    if spellElement <= xi.element.NONE then
+        return 1
     end
 
+    -- Multiplier for each resistance rank.
+    local rankTable  = { 1.5, 1.15, 0.85, 0.6, 0.5, 0.4, 0.15, 0.05, 0, 0, 0, 0, 0, 0, 0 }
+
+    local resistRank = utils.clamp(target:getMod(xi.data.element.getElementalResistanceRankModifier(spellElement)), -3, 11) + 4 -- We add 4 so the minimum value is 1, for table.
+    local countBonus = caster:isPC() and 0.1 or 0.05
+    local magicBurst = 1.25 + rankTable[resistRank] + countBonus * magicBurstTier
+
     -- Sengikori appears to add to base mb multiplier per JP wiki https://wiki.ffo.jp/html/20051.html
-    if
-        skillchainCount >= 1 and
-        target:getMod(xi.mod.SENGIKORI_MB_DMG_DEBUFF) > 0
-    then
+    if target:getMod(xi.mod.SENGIKORI_MB_DMG_DEBUFF) > 0 then
         magicBurst = magicBurst + target:getMod(xi.mod.SENGIKORI_MB_DMG_DEBUFF) / 100
         target:setMod(xi.mod.SENGIKORI_MB_DMG_DEBUFF, 0) -- Consume the "Effect" upon magic burst.
     end
@@ -1093,19 +1077,19 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     end
 
     -- Calculate absoprtion and magic burst.
-    local absorbFactor       = xi.spells.damage.calculateAbsorption(target, spellElement, true)
-    local _, skillchainCount = xi.magicburst.formMagicBurst(target, spellElement) -- External function.
+    local absorbFactor   = xi.spells.damage.calculateAbsorption(target, spellElement, true)
+    local magicBurstTier = xi.combat.magicBurst.getMagicBurstTier(target, spellElement)
 
     local notAbsorb = absorbFactor > 0
-    local canMBurst = absorbFactor > 0 and skillchainCount > 0
+    local canMBurst = absorbFactor > 0 and magicBurstTier > 0
 
     -- Fetch tabled data.
     local spellId         = spell:getID()
     local skillType       = spell:getSkillType()
     local spellGroup      = spell:getSpellGroup()
-    local statUsed        = pTable[spellId][column.STAT_USED]
-    local bonusMacc       = pTable[spellId][column.BONUS_MACC] + cardinalChantBonus(caster, target, xi.direction.SOUTH, spellId, skillType)
-    local forceDayWeather = pTable[spellId][column.FORCE_DAY_WEATHER]
+    local statUsed        = xi.spells.damage.pTable[spellId][column.STAT_USED]
+    local bonusMacc       = xi.spells.damage.pTable[spellId][column.BONUS_MACC] + cardinalChantBonus(caster, target, xi.direction.SOUTH, spellId, skillType)
+    local forceDayWeather = xi.spells.damage.pTable[spellId][column.FORCE_DAY_WEATHER]
 
     -- Calculate base damage and the rest of damage multipliers.
     local spellDamage                 = xi.spells.damage.calculateBaseDamage(caster, target, spellId, spellGroup, skillType, statUsed)
@@ -1114,7 +1098,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local elementalAffinityBonus      = xi.spells.damage.calculateElementalAffinityBonus(caster, spellElement)
     local resistTier                  = notAbsorb and xi.combat.magicHitRate.calculateResistRate(caster, target, spellGroup, skillType, 0, spellElement, statUsed, 0, bonusMacc) or 1
     local additionalResistTier        = notAbsorb and xi.spells.damage.calculateAdditionalResistTier(caster, target, spellElement) or 1
-    local magicBurst                  = canMBurst and xi.spells.damage.calculateIfMagicBurst(target, spellElement, skillchainCount) or 1
+    local magicBurst                  = canMBurst and xi.spells.damage.calculateIfMagicBurst(caster, target, spellElement, magicBurstTier) or 1
     local magicBurstBonus             = canMBurst and xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spellId, skillType, spellElement) or 1
     local dayAndWeather               = xi.spells.damage.calculateDayAndWeather(caster, spellElement, forceDayWeather)
     local magicBonusDiff              = xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement, 0)

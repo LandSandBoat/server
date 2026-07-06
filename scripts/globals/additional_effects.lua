@@ -2,8 +2,9 @@
 -- This global is intended to handle additional effects from item sources of:
 -- melee attacks, ranged attacks, auto-spikes
 -----------------------------------
-require('scripts/globals/teleports') -- For warp weapon proc.
+require('scripts/globals/combat/damage_multipliers')
 require('scripts/globals/magic') -- For resist functions
+require('scripts/globals/teleports') -- For warp weapon proc.
 -----------------------------------
 xi = xi or {}
 xi.additionalEffect = xi.additionalEffect or {}
