@@ -41,7 +41,7 @@ local function getSkillchainElementToUse(target, skillchainType)
     -- Build skillchain available elements table.
     local elementTable = {}
     for i = xi.element.FIRE, xi.element.DARK do
-        if xi.data.element.skillchainElementTable[i][skillchainType + 1] > 0 then
+        if xi.data.element.skillchainElementTable[i][skillchainType] > 0 then
             table.insert(elementTable, #elementTable + 1, i)
         end
     end

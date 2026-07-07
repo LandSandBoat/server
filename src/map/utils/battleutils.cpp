@@ -82,9 +82,8 @@
  *                                                                       *
  ************************************************************************/
 
-std::array<std::array<uint16, 14>, 100>                                            g_SkillTable;
-std::array<std::array<uint8, MAX_JOBTYPE>, MAX_SKILLTYPE>                          g_SkillRanks;
-std::array<std::array<uint16, MAX_SKILLCHAIN_COUNT + 1>, MAX_SKILLCHAIN_LEVEL + 1> g_SkillChainDamageModifiers;
+std::array<std::array<uint16, 14>, 100>                   g_SkillTable;
+std::array<std::array<uint8, MAX_JOBTYPE>, MAX_SKILLTYPE> g_SkillRanks;
 
 std::array<CWeaponSkill*, MAX_WEAPONSKILL_ID> g_PWeaponSkillList; // Holds all Weapon skills
 std::array<CMobSkill*, MAX_MOBSKILL_ID>       g_PMobSkillList;    // List of mob skills
@@ -278,21 +277,6 @@ void LoadPetSkillsList()
 
         auto filename = fmt::format("./scripts/actions/abilities/pets/{}.lua", PPetSkill->getName());
         luautils::LoadLuaObjectFromFile(filename);
-    }
-}
-
-void LoadSkillChainDamageModifiers()
-{
-    const auto rset = db::preparedStmt("SELECT chain_level, chain_count, initial_modifier, magic_burst_modifier "
-                                       "FROM skillchain_damage_modifiers "
-                                       "ORDER BY chain_level, chain_count");
-    FOR_DB_MULTIPLE_RESULTS(rset)
-    {
-        const auto level = rset->get<uint16>("chain_level");
-        const auto count = rset->get<uint16>("chain_count");
-        const auto value = rset->get<uint16>("initial_modifier");
-
-        g_SkillChainDamageModifiers[level][count] = value;
     }
 }
 
