@@ -4,6 +4,7 @@
 xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.magicAoE = xi.combat.magicAoE or {}
+-----------------------------------
 
 ---Return total song radius after factoring String equipment bonus
 ---@param caster CBaseEntity
@@ -61,7 +62,8 @@ local calculateMobAoE = function(baseType, baseRadius)
     return { baseType, baseRadius }
 end
 
----Calculate spell AoE type and radius based on caster modifiers.
+-- Calculate spell AoE type and radius based on caster modifiers.
+-- Used in core.
 ---@param caster CBaseEntity
 ---@param spell CSpell
 ---@return [xi.magic.aoe, number]

@@ -1,8 +1,6 @@
 -----------------------------------
 -- ABILITIES
 -----------------------------------
-require('scripts/globals/combat/damage_multipliers')
------------------------------------
 xi = xi or {}
 xi.ability = xi.ability or {}
 -----------------------------------

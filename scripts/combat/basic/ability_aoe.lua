@@ -4,8 +4,10 @@
 xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.abilityAoE = xi.combat.abilityAoE or {}
+-----------------------------------
 
----Calculate ability AoE type and radius based on caster modifiers.
+-- Calculate ability AoE type and radius based on caster modifiers.
+-- Used in core.
 ---@param caster CBaseEntity
 ---@param ability CAbility
 ---@return [xi.aoeType, number]

@@ -11,8 +11,6 @@
 -- performance of the actual WS (rand numbers, etc)
 -----------------------------------
 require('scripts/globals/ability')
-require('scripts/globals/combat/physical_utilities')
-require('scripts/globals/combat/damage_multipliers')
 require('scripts/globals/magic')
 require('scripts/globals/spells/damage_spell')
 -----------------------------------

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Corsair Job Utilities
 -----------------------------------
-require('scripts/globals/combat/damage_multipliers')
 require('scripts/globals/spells/damage_spell')
 -----------------------------------
 xi = xi or {}
