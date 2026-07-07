@@ -1542,7 +1542,7 @@ local function handlePurchuase(player, option, pNation, pRank, guardNation, mOff
         return
     end
 
-    local isEXPRing = option <= 32933 and option >= 32935
+    local isEXPRing = option >= 32933 and option <= 32935
     if isEXPRing and not canBuyExpRing(player, stock.item) then
         return
     end
