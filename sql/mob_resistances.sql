@@ -206,7 +206,7 @@ INSERT INTO `mob_resistances` VALUES (164,'Hydra',0,0,0,-1250,0,0,0,0,0,0,0,0,0,
 INSERT INTO `mob_resistances` VALUES (165,'Imp',0,2500,0,0,0,0,0,0,0,0,0,0,0,-1,-1,2,-1,-1,-1,-2,6,-1,-1,2,-1,-1,-2,6,6);
 INSERT INTO `mob_resistances` VALUES (166,'Imp - Jakko',0,2500,0,0,0,0,0,0,0,0,0,0,0,-1,-1,2,-1,-1,-1,-2,6,-1,-1,2,-1,-1,-2,6,6);
 INSERT INTO `mob_resistances` VALUES (167,'Karakul',0,0,0,0,0,0,0,0,0,0,0,0,0,-1,1,-1,1,-2,-2,-1,-1,1,1,-1,1,-2,-1,-1,-1);
-INSERT INTO `mob_resistances` VALUES (168,'Khimaira',0,0,0,0,0,0,0,0,0,0,0,0,0,8,5,8,7,9,5,7,5,1,1,5,4,1,4,1,1);
+INSERT INTO `mob_resistances` VALUES (168,'Khimaira',0,0,0,0,0,0,0,0,0,0,0,0,0,8,5,8,7,9,5,7,5,7,7,7,7,7,7,7,7);
 INSERT INTO `mob_resistances` VALUES (169,'Kindred',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-2,0,0,0,0,0,0,-2,0,0);
 INSERT INTO `mob_resistances` VALUES (170,'Ladybug',0,2500,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,4,4,4,0,0,0,0,4,4);
 INSERT INTO `mob_resistances` VALUES (171,'Lamiae',0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-2,-1,-1,-2,3,-2,2,-2,-2,-1,-1,3,-2,2,2);

@@ -73,8 +73,8 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.TERROR)
     mob:addImmunity(xi.immunity.PLAGUE)
 
-    mob:setMobMod(xi.mobMod.GIL_MIN, 30000)
-    mob:setMobMod(xi.mobMod.GIL_MAX, 30000)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 20000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 20000)
 end
 
 entity.onMobRoam = function(mob)
@@ -103,6 +103,14 @@ entity.onMobSpawn = function(mob)
 
     mob:setMod(xi.mod.UDMGBREATH, -5000)
     mob:setMod(xi.mod.UDMGMAGIC, -2500)
+
+    mob:setMod(xi.mod.SILENCE_RES_RANK, 7)
+    mob:setMod(xi.mod.POISON_RES_RANK, 7)
+    mob:setMod(xi.mod.SLOW_RES_RANK, 7)
+    mob:setMod(xi.mod.PARALYZE_RES_RANK, 7)
+    mob:setMod(xi.mod.BLIND_RES_RANK, 7)
+    mob:setMod(xi.mod.BIND_RES_RANK, 7)
+    mob:setMod(xi.mod.GRAVITY_MEVA, 100) -- Needs to be RES Rank
 
     mob:setMod(xi.mod.CURSE_MEVA, 1000)
     mob:setLocalVar('roarTimer', GetSystemTime() + math.randomInt(150, 210))
