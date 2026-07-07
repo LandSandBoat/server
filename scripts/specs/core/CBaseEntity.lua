@@ -3938,6 +3938,20 @@ function CBaseEntity:delMobMod(mobModID, value)
 end
 
 ---@nodiscard
+---@param skillId integer
+---@return number[]|nil
+function CBaseEntity:getfTPModifierOverride(skillId)
+end
+
+---@param skillId integer
+---@param ftp1 number
+---@param ftp2 number
+---@param ftp3 number
+---@return nil
+function CBaseEntity:setfTPModifierOverride(skillId, ftp1, ftp2, ftp3)
+end
+
+---@nodiscard
 ---@return integer
 function CBaseEntity:getBattleTime()
 end

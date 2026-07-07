@@ -528,6 +528,21 @@ void CMobEntity::restoreMobModifiers()
     m_mobModStat = m_mobModStatSave;
 }
 
+auto CMobEntity::getfTPModifierOverride(uint16 skillId) -> Maybe<std::array<float, 3>>
+{
+    if (const auto it = m_fTPModifierOverrides.find(skillId); it != m_fTPModifierOverrides.end())
+    {
+        return it->second;
+    }
+
+    return std::nullopt;
+}
+
+void CMobEntity::setfTPModifierOverride(uint16 skillId, float ftp1, float ftp2, float ftp3)
+{
+    m_fTPModifierOverrides[skillId] = { ftp1, ftp2, ftp3 };
+}
+
 void CMobEntity::HideHP(bool hide)
 {
     if (hide)

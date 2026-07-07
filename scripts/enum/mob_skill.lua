@@ -601,6 +601,8 @@ xi.mobSkill =
     GIGA_SCREAM_1                 =  923,
     DREAD_DIVE_1                  =  924,
 
+    STORMWIND                     =  926,
+
     DRILL_BRANCH_NM               =  927,
     PINECONE_BOMB_NM              =  928,
     LEAFSTORM_DISPEL              =  929,

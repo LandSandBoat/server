@@ -18,6 +18,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DARK_SLEEP_RES_RANK, 10)
     mob:setMobMod(xi.mobMod.NO_H2H_PENALTY, 1)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+    mob:setfTPModifierOverride(xi.mobSkill.FLYING_HIP_PRESS, 10.0, 10.0, 10.0)
 end
 
 entity.onMobMobskillChoose = function(mob, target, skillId)
