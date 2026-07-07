@@ -15,7 +15,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     params.baseDamage       = mob:getWeaponDmg()
     params.numHits          = 2
-    params.fTP              = { 1.0, 1.0, 1.0 }
+    params.fTP              = mob:getfTPModifierOverride(skill:getID()) or { 1.0, 1.0, 1.0 }
     params.attackType       = xi.attackType.PHYSICAL
     params.damageType       = xi.damageType.HAND_TO_HAND
     params.shadowBehavior   = xi.mobskills.shadowBehavior.NUMSHADOWS_2

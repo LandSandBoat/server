@@ -14,13 +14,13 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:setfTPModifierOverride(xi.mobSkill.CROSS_ATTACK_1, 6.0, 6.0, 6.0)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
     mob:setMod(xi.mod.STORETP, 30)
 
     mob:setMod(xi.mod.SILENCE_RES_RANK, 10)
 end
 
--- This quest NM has a special JUICED version of Cross Attack that will need to be fixed when mob skills are updated.  It's likely 4X base damage.
 entity.onMobMobskillChoose = function(mob, target, skillId)
     local skillList =
     {
