@@ -192,7 +192,6 @@ auto MapEngine::init() -> Task<void>
     battleutils::LoadWeaponSkillsList();
     battleutils::LoadMobSkillsList();
     battleutils::LoadPetSkillsList();
-    battleutils::LoadSkillChainDamageModifiers();
     petutils::LoadPetList();
     trustutils::LoadTrustList();
     mobutils::LoadSqlModifiers();

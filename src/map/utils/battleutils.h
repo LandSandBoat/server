@@ -107,7 +107,6 @@ void LoadSkillTable();
 void LoadWeaponSkillsList();
 void LoadMobSkillsList();
 void LoadPetSkillsList();
-void LoadSkillChainDamageModifiers();
 
 uint8 CheckMultiHits(CBattleEntity* PEntity, CItemWeapon* PWeapon);
 
