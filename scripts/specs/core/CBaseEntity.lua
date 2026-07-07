@@ -1114,6 +1114,47 @@ end
 function CBaseEntity:sendLinkshellConcierge(data)
 end
 
+---@class ChocoboRaceStats
+---@field str xi.chocoboRaising.statRank?
+---@field ["end"] xi.chocoboRaising.statRank?
+---@field dsc xi.chocoboRaising.statRank?
+---@field rcp xi.chocoboRaising.statRank?
+
+---@class ChocoboRaceEntry
+---@field item xi.chocoboRacing.sectionEvent?
+---@field orders xi.chocoboRacing.order?
+---@field size xi.chocoboRacing.jockeySize?
+---@field color xi.chocoboRaising.color?
+---@field gender xi.chocoboRaising.gender?
+---@field weather xi.chocoboRaising.weather?
+---@field temperament xi.chocoboRaising.temperament?
+---@field ability1 xi.chocoboRaising.ability?
+---@field ability2 xi.chocoboRaising.ability?
+---@field stats ChocoboRaceStats?
+
+---@class ChocoboRaceTrigger
+---@field type xi.chocoboRacing.sectionEvent?
+---@field user integer? Bitmask: the acting chocobo
+---@field targets integer? Bitmask: affected chocobos
+---@field param integer? Bitmask: extra affected / type param
+
+---@class ChocoboRaceSection
+---@field from integer[] Per-chocobo positions at section start
+---@field to integer[] Per-chocobo positions at section end
+---@field trigger ChocoboRaceTrigger? Optional per-section event
+
+---@class ChocoboRace
+---@field counter integer? Race counter (rolling 0-3)
+---@field weather xi.weather? Race weather
+---@field chocobos ChocoboRaceEntry[]? The racers (up to 8)
+---@field sections ChocoboRaceSection[]? The race sections
+---@field places integer[]? Finishing place per chocobo (0 = 1st)
+
+---@param race ChocoboRace
+---@return nil
+function CBaseEntity:sendChocoboRace(race)
+end
+
 ---@nodiscard
 ---@param locationID integer
 ---@return integer

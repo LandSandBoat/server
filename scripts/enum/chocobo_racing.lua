@@ -4,6 +4,15 @@
 xi = xi or {}
 xi.chocoboRacing = xi.chocoboRacing or {}
 
+-- Chocobo Racing Jockey Orders
+---@enum xi.chocoboRacing.order
+xi.chocoboRacing.order =
+{
+    SPRINT      = 0, -- Top speed from the start until 75% stamina, then eases off
+    KEEP_PACE   = 1, -- Steady pace, even stamina drain, holds position
+    FINAL_SPURT = 2, -- Holds back >=25% stamina for a top-speed finish
+}
+
 -- Stored in Chocobet and Completion Certificates exdata
 ---@enum xi.chocoboRacing.raceGrade
 xi.chocoboRacing.raceGrade =
@@ -27,4 +36,22 @@ xi.chocoboRacing.jockeySize =
     TARUTARU_M = 5,
     TARUTARU_F = 6,
     MITHRA     = 7,
+}
+
+-- Per-section race events.
+---@enum xi.chocoboRacing.sectionEvent
+xi.chocoboRacing.sectionEvent =
+{
+    STRAINING          = 0x00, -- Low-stamina state
+    SPEED_APPLE        = 0x01,
+    STAMINA_APPLE      = 0x02,
+    SHADOW_APPLE       = 0x03,
+    PEPPER_BISCUIT     = 0x04, -- Target in Param
+    FIRE_BISCUIT       = 0x05, -- Target in Targets
+    GYSAHL_BOMB        = 0x06,
+    SPORE_BOMB         = 0x07,
+    FAIRWEATHER_FETISH = 0x08,
+    FOULWEATHER_FROG   = 0x09,
+    RACE_START         = 0x20,
+    ACCIDENT           = 0x21, -- "feet caught in mud". Rainy races only.
 }
