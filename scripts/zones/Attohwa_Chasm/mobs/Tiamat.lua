@@ -59,10 +59,20 @@ entity.spawnPoints =
     { x = -549.802, y = -8.944,  z = -24.848 },
 }
 
+-----------------------------------
+-- Enter/Exit Flight Functions
+-----------------------------------
 local function enterFlight(mob)
-    mob:setAnimationSub(1) -- Change to flight.
-    mob:addStatusEffect(xi.effect.ALL_MISS, { power = 1, origin = mob, icon = 0 })
     mob:setMobSkillAttack(730)
+    mob:addStatusEffect(xi.effect.ALL_MISS, { power = 1, origin = mob, icon = 0 })
+    mob:setAnimationSub(1)
+    mob:setLocalVar('flightTime', GetSystemTime() + 120)
+    mob:setLocalVar('changeHP', mob:getHP() - 10000)
+end
+
+local function exitFlight(mob)
+    mob:useMobAbility(xi.mobSkill.TOUCHDOWN_3)
+    mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_TURN))
     mob:setLocalVar('flightTime', GetSystemTime() + 120)
     mob:setLocalVar('changeHP', mob:getHP() - 10000)
 end
@@ -76,7 +86,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    -- Ensure Tiamat spawns with correct ground status
     mob:setMobSkillAttack(0)
     mob:setAnimationSub(0)
     mob:delStatusEffect(xi.effect.ALL_MISS)
@@ -114,17 +123,16 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobEngage = function(mob, target)
-    local flightTime = mob:getLocalVar('flightTime')
+    local currentTime = GetSystemTime()
+    local flightTime  = mob:getLocalVar('flightTime')
 
-    -- Set flight time to two min if fresh spawn
     if flightTime == 0 then
-        mob:setLocalVar('flightTime', GetSystemTime() + 120)
-    -- Otherwise, set how many seconds left to fly from last pull
+        mob:setLocalVar('flightTime', currentTime + 120)
     else
-        mob:setLocalVar('flightTime', GetSystemTime() + flightTime)
+        mob:setLocalVar('flightTime', currentTime + flightTime)
     end
 
-    mob:setLocalVar('twohourTime', GetSystemTime() + 210)
+    mob:setLocalVar('twohourTime', currentTime + 210)
     mob:setLocalVar('changeHP', mob:getHP() - 10000)
 end
 
@@ -163,82 +171,63 @@ entity.onMobFight = function(mob, target)
     end
 
     -- Gains a delay reduction (from 210 to 160) when health is under 10%
-    if hpp <= 10 and mob:getLocalVar('appliedDelayReduction') == 0 then
-        mob:addMod(xi.mod.DELAY, -833)
-        mob:setLocalVar('appliedDelayReduction', 1)
-    elseif hpp > 10 and mob:getLocalVar('appliedDelayReduction') == 1 then
-        mob:delMod(xi.mod.DELAY, -833)
-        mob:setLocalVar('appliedDelayReduction', 0)
+    if hpp <= 10 then
+        mob:setDelay(160)
+    else
+        mob:setDelay(210)
     end
 
-    -- Animation (Ground or flight mode) logic.
-    if
-        not mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) and
-        not xi.combat.behavior.isEntityBusy(mob)
-    then
-        local flightTime  = mob:getLocalVar('flightTime')
-        local twohourTime = mob:getLocalVar('twohourTime')
-        local changeHP    = mob:getLocalVar('changeHP')
-        local animation   = mob:getAnimationSub()
-
-        -- Initial grounded mode.
-        if
-            animation == 0 and
-            (GetSystemTime() > flightTime and mob:getHP() < changeHP)
-        then
-            enterFlight(mob)
-
-        -- Flight mode.
-        elseif
-            animation == 1 and
-            (GetSystemTime() > flightTime and mob:getHP() < changeHP)
-        then
-            mob:useMobAbility(1282) -- This ability also handles animation change to 2.
-            mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_TURN))
-            mob:setLocalVar('flightTime', GetSystemTime() + 120)
-            mob:setLocalVar('changeHP', mob:getHP() - 10000)
-
-        -- Subsequent grounded mode.
-        elseif animation == 2 then
-             -- 2-Hour logic.
-            if GetSystemTime() > twohourTime then
-                mob:useMobAbility(688) -- Mighty Strikes
-                mob:setLocalVar('twohourTime', GetSystemTime() + 210)
-
-            elseif
-                GetSystemTime() > flightTime or
-                mob:getHP() < changeHP
-            then
-                enterFlight(mob)
-            end
-        end
-    end
+    local animationSub = mob:getAnimationSub()
 
     -- Tiamat wakes from sleep in air
     if
-        (mob:hasStatusEffect(xi.effect.SLEEP_I) or
-        mob:hasStatusEffect(xi.effect.SLEEP_II) or
-        mob:hasStatusEffect(xi.effect.LULLABY)) and
-        mob:getAnimationSub() == 1
+        animationSub == 1 and
+        mob:hasStatusEffect(xi.effect.SLEEP_I)
     then
         mob:wakeUp()
     end
-end
 
-entity.onMobMobskillChoose = function(mob, target, skillId)
-    if mob:getAnimationSub() == 1 then
-        mob:setLocalVar('skill_tp', mob:getTP())
+    -- If Mighty Strikes is active, cannot fly until it ends.
+    if
+        mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) or
+        xi.combat.behavior.isEntityBusy(mob)
+    then
+        return
     end
-end
 
-entity.onMobWeaponSkill = function(mob, target, skill, action)
-    -- Don't lose TP from autos during flight
-    if skill:getID() == 1278 then
-        mob:addTP(64) -- Needs to gain TP from flight auto attacks
-        mob:setLocalVar('skill_tp', 0)
-    elseif skill:getID() == 1282 then -- Don't consume TP on touchdown
-        mob:addTP(mob:getLocalVar('skill_tp'))
-        mob:setLocalVar('skill_tp', 0)
+    -- Landing / Flying logic
+    local currentTime = GetSystemTime()
+    local flightTime  = mob:getLocalVar('flightTime')
+    local twohourTime = mob:getLocalVar('twohourTime')
+    local changeHP    = mob:getLocalVar('changeHP')
+    local currentHP   = mob:getHP()
+
+    if
+        animationSub == 0 and
+        currentTime > flightTime or
+        currentHP < changeHP
+    then
+        enterFlight(mob)
+
+    elseif
+        animationSub == 1 and
+        currentTime > flightTime or
+        currentHP < changeHP
+    then
+        exitFlight(mob)
+
+    elseif animationSub == 2 then
+        -- 2-Hour logic.
+        if currentTime > twohourTime then
+            mob:useMobAbility(xi.mobSkill.MIGHTY_STRIKES_1)
+            mob:setLocalVar('twohourTime', currentTime + 210)
+
+        elseif
+            currentTime > flightTime or
+            currentHP < changeHP
+        then
+            enterFlight(mob)
+        end
     end
 end
 
@@ -259,12 +248,14 @@ entity.onMobDisengage = function(mob)
     -- Reset Tiamat back to the ground on wipe
     if mob:getAnimationSub() == 1 then
         local flightTime = mob:getLocalVar('flightTime')
-        mob:setLocalVar('flightTime', flightTime - GetSystemTime()) -- Get seconds left to fly for next pull
+        mob:setLocalVar('flightTime', math.max(flightTime - GetSystemTime(), 1)) -- Get seconds left to fly for next pull
         mob:setAnimationSub(0)
         mob:delStatusEffect(xi.effect.ALL_MISS)
         mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_TURN))
         mob:setMobSkillAttack(0)
         mob:setLocalVar('changeHP', 0)
+    else
+        mob:setLocalVar('flightTime', 0)
     end
 end
 
