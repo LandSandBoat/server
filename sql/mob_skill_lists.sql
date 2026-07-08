@@ -1212,7 +1212,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Serket',273,724);
 INSERT INTO `mob_skill_lists` VALUES ('KingV',274,354);
 INSERT INTO `mob_skill_lists` VALUES ('KingV',274,722);
 INSERT INTO `mob_skill_lists` VALUES ('KingV',274,723);
--- 275: Matamata
+INSERT INTO `mob_skill_lists` VALUES ('Matamata',275,2965);
+INSERT INTO `mob_skill_lists` VALUES ('Matamata',275,2966);
+INSERT INTO `mob_skill_lists` VALUES ('Matamata',275,2967);
+INSERT INTO `mob_skill_lists` VALUES ('Matamata',275,2968);
+INSERT INTO `mob_skill_lists` VALUES ('Matamata',275,2969);
 -- 276: Crepuscular Worm
 INSERT INTO `mob_skill_lists` VALUES ('Genbu',277,805);
 INSERT INTO `mob_skill_lists` VALUES ('Genbu',277,806);
