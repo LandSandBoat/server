@@ -22,6 +22,11 @@ CREATE TABLE IF NOT EXISTS `mob_skill_lists` (
 --
 
 -- 1: Acrolith
+INSERT INTO `mob_skill_lists` VALUES ('Acrolith',1,2070);
+INSERT INTO `mob_skill_lists` VALUES ('Acrolith',1,2071);
+INSERT INTO `mob_skill_lists` VALUES ('Acrolith',1,2072);
+INSERT INTO `mob_skill_lists` VALUES ('Acrolith',1,2073);
+INSERT INTO `mob_skill_lists` VALUES ('Acrolith',1,2074);
 INSERT INTO `mob_skill_lists` VALUES ('Adamantoise',2,804);
 INSERT INTO `mob_skill_lists` VALUES ('Adamantoise',2,805);
 INSERT INTO `mob_skill_lists` VALUES ('Adamantoise',2,806);
