@@ -2,9 +2,6 @@
 -- Enfeebling Song Utilities
 -- Used for songs that deal negative status effects upon targets.
 -----------------------------------
-require('scripts/globals/combat/magic_burst')
-require('scripts/globals/combat/magic_hit_rate')
------------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}
 xi.spells.enfeebling = xi.spells.enfeebling or {}

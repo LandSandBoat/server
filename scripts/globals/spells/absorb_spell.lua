@@ -2,8 +2,6 @@
 -- Absorb Spell Utilities
 -- Drain, Aspir, Absorb-TP, Absorb-STAT, Absorb-Attri
 -----------------------------------
-require('scripts/globals/combat/damage_multipliers')
-require('scripts/globals/combat/magic_hit_rate')
 require('scripts/globals/spells/damage_spell')
 -----------------------------------
 xi = xi or {}

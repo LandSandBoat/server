@@ -382,53 +382,30 @@ void init(IPP mapIPP, bool isRunningInCI)
     CLuaItem::Register();
     CLuaItemPuppet::Register();
 
-    // Load global enums
-    for (const auto& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./scripts/enum"))
+    // Load global scripts in the defined order. Directories are walked recursively.
+    // Already loaded files are skipped therefore it is safe to load childrens first (i.e. combat/basic/ before combat/)
+    const std::vector<std::string> globalScriptDirs{
+        "./scripts/enum",
+        "./scripts/utils",
+        "./scripts/data",
+        "./scripts/combat/basic",
+        "./scripts/combat",
+    };
+
+    std::set<std::filesystem::path> loadedScripts;
+    for (const auto& dir : globalScriptDirs)
     {
-        if (entry.extension() == ".lua")
+        for (const auto& entry : sorted_directory_iterator<std::filesystem::recursive_directory_iterator>(dir))
         {
-            const auto relative_path_string = entry.relative_path().generic_string();
-
-            ShowTrace("Loading enum script %s", relative_path_string);
-
-            const auto result = lua.safe_script_file(relative_path_string);
-            if (!result.valid())
+            if (entry.extension() != ".lua" || !loadedScripts.insert(entry).second)
             {
-                const sol::error err = result;
-                ShowError(err.what());
+                continue;
             }
-        }
-    }
 
-    // Load global utilities
-    for (const auto& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./scripts/utils"))
-    {
-        if (entry.extension() == ".lua")
-        {
             const auto relative_path_string = entry.relative_path().generic_string();
 
-            ShowTrace("Loading utility script %s", relative_path_string);
-
-            const auto result = lua.safe_script_file(relative_path_string);
-            if (!result.valid())
-            {
-                const sol::error err = result;
-                ShowError(err.what());
-            }
-        }
-    }
-
-    // Load global data
-    for (const auto& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./scripts/data"))
-    {
-        if (entry.extension() == ".lua")
-        {
-            const auto relative_path_string = entry.relative_path().generic_string();
-
-            ShowTrace("Loading data script %s", relative_path_string);
-
-            const auto result = lua.safe_script_file(relative_path_string);
-            if (!result.valid())
+            ShowTrace("Loading global script %s", relative_path_string);
+            if (const auto result = lua.safe_script_file(relative_path_string); !result.valid())
             {
                 const sol::error err = result;
                 ShowError(err.what());

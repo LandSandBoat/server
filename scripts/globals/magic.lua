@@ -1,9 +1,9 @@
-require('scripts/globals/combat/damage_multipliers')
-require('scripts/globals/combat/magic_hit_rate')
+-----------------------------------
 require('scripts/globals/spells/damage_spell')
 -----------------------------------
 xi = xi or {}
 xi.magic = xi.magic or {}
+-----------------------------------
 
 -----------------------------------
 --   getCurePower returns the caster's cure power

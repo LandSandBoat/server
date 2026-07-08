@@ -1,7 +1,7 @@
 -----------------------------------
 -- Global file for magic based skills magic hit rate.
 -----------------------------------
-require('scripts/globals/combat/magic_burst')
+-- NOTE: Remove dependency to magic burst by feeding if its a magic burst directly. Then move file to scripts/combat/basic.
 -----------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}

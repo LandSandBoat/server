@@ -1,7 +1,7 @@
 -----------------------------------
 -- Global file for additional effects (Status Effects)
 -----------------------------------
-require('scripts/globals/combat/magic_hit_rate')
+require('scripts/combat/magic_hit_rate')
 -----------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
