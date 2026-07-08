@@ -1,6 +1,7 @@
 -----------------------------------
 -- Barrage Turbine
--- https://www.bg-wiki.com/ffxi/Barrage_Turbine
+-- Fires a number of projectiles based on the number of active Wind Maneuvers
+-- Applies 7/14/21 Wind Burden per Maneuver active when activated.
 -- https://wiki.ffo.jp/html/23698.html
 -- TODO : Find out if shots from this do not return full TP.
 -----------------------------------
@@ -15,6 +16,13 @@ local shotCount =
     [3] = 9,
 }
 
+local burdenApplied =
+{
+    [1] = 7,
+    [2] = 14,
+    [3] = 21,
+}
+
 abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
     return 0
 end
@@ -23,6 +31,11 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     automaton:addRecast(xi.recast.ABILITY, skill:getID(), 180)
 
     local windManeuvers = master:countEffect(xi.effect.WIND_MANEUVER)
+    local burdenAmount  = burdenApplied[windManeuvers]
+
+    if burdenAmount then
+        master:addBurden(xi.element.WIND - 1, burdenAmount)
+    end
 
     local params = {}
 

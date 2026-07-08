@@ -1,6 +1,7 @@
 -----------------------------------
 -- Eraser
 -- Removes up to 3 status effects from the Automaton or its Master based on the number of Light Maneuvers active.
+-- Applies 7/14/21 Light Burden per Maneuver active when activated regardless of the number of effects removed.
 -----------------------------------
 ---@type TAbilityAutomaton
 local abilityObject = {}
@@ -70,10 +71,22 @@ local removables =
     xi.effect.MAX_HP_DOWN
 }
 
+local burdenApplied =
+{
+    [1] = 7,
+    [2] = 14,
+    [3] = 21,
+}
+
 abilityObject.onAutomatonAbility = function(target, automaton, skill, master, action)
     automaton:addRecast(xi.recast.ABILITY, skill:getID(), 30)
 
-    local maneuvers = master:countEffect(xi.effect.LIGHT_MANEUVER)
+    local maneuvers    = master:countEffect(xi.effect.LIGHT_MANEUVER)
+    local burdenAmount = burdenApplied[maneuvers]
+
+    if burdenAmount then
+        master:addBurden(xi.element.LIGHT - 1, burdenAmount)
+    end
 
     local effectsRemoved = 0
 
