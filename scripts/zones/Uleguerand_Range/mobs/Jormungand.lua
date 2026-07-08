@@ -60,11 +60,21 @@ entity.spawnPoints =
 }
 
 local function enterFlight(mob)
-    mob:setAnimationSub(1)
-    mob:addStatusEffect(xi.effect.ALL_MISS, { power = 1, origin = mob, icon = 0 })
     mob:setMobSkillAttack(732)
+    mob:addStatusEffect(xi.effect.ALL_MISS, { power = 1, origin = mob, icon = 0 })
+    mob:setBehavior(bit.band(mob:getBehavior(), bit.bnot(xi.behavior.NO_TURN)))
     mob:setLocalVar('flightTime', GetSystemTime() + 30)
-    mob:setLocalVar('changeHP', mob:getHP() - 6000)
+    mob:setLocalVar('changeHP', math.max(0, mob:getHP() - 6000))
+    mob:setAnimationSub(1)
+end
+
+local function exitFlight(mob)
+    mob:setMobSkillAttack(0)
+    mob:delStatusEffect(xi.effect.ALL_MISS)
+    mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_TURN))
+    mob:setLocalVar('flightTime', GetSystemTime() + 60)
+    mob:setLocalVar('changeHP', math.max(0, mob:getHP() - 6000))
+    mob:useMobAbility(xi.mobSkill.TOUCHDOWN_4)
 end
 
 entity.onMobInitialize = function(mob)
@@ -112,65 +122,21 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngage = function(mob, target)
-    local flightTime = mob:getLocalVar('flightTime')
+    local currentTime = GetSystemTime()
+    local flightTime  = mob:getLocalVar('flightTime')
 
-    -- Set flight time to two min if fresh spawn
     if flightTime == 0 then
-        mob:setLocalVar('flightTime', GetSystemTime() + 30)
-    -- Otherwise, set how many seconds left to fly from last pull
+        mob:setLocalVar('flightTime', currentTime + 30)
     else
-        mob:setLocalVar('flightTime', GetSystemTime() + flightTime)
+        mob:setLocalVar('flightTime', currentTime + flightTime)
     end
 
-    mob:setLocalVar('twohourTime', GetSystemTime() + 210)
-    mob:setLocalVar('changeHP', mob:getHP() - 6000)
+    mob:setLocalVar('twohourTime', currentTime + 210)
+    mob:setLocalVar('changeHP', math.max(0, mob:getHP() - 6000))
 end
 
 entity.onMobFight = function(mob, target)
-    -- Animation (Ground or flight mode) logic.
-    if
-        not mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) and
-        not xi.combat.behavior.isEntityBusy(mob)
-    then
-        local flightTime  = mob:getLocalVar('flightTime')
-        local twohourTime = mob:getLocalVar('twohourTime')
-        local changeHP    = mob:getLocalVar('changeHP')
-        local animation   = mob:getAnimationSub()
-
-        -- Initial grounded mode.
-        if
-            animation == 0 and
-            (GetSystemTime() > flightTime and mob:getHP() < changeHP)
-        then
-            enterFlight(mob)
-
-        -- Flight mode.
-        elseif
-            animation == 1 and
-            (GetSystemTime() > flightTime and mob:getHP() < changeHP) and
-            mob:checkDistance(target) <= 6 -- This 2 checks are a hack until we can handle skills targeting a position and not an entity.
-        then
-            mob:useMobAbility(1292) -- Touchdown: This ability also handles animation change to 2.
-            mob:setLocalVar('flightTime', GetSystemTime() + 60)
-            mob:setLocalVar('changeHP', mob:getHP() - 6000)
-
-        -- Subsequent grounded mode.
-        elseif animation == 2 then
-             -- 2-Hour logic.
-            if GetSystemTime() > twohourTime then
-                mob:useMobAbility(695) -- Blood Weapon
-                mob:setLocalVar('twohourTime', GetSystemTime() + 300)
-
-            elseif
-                GetSystemTime() > flightTime or
-                mob:getHP() < changeHP
-            then
-                enterFlight(mob)
-            end
-        end
-    end
-
-    -- Jorm draws in from set boundaries leaving her spawn area
+    -- Draw in, prevents Jormungand from leaving the spawn area.
     local drawInTable =
     {
         conditions =
@@ -192,52 +158,92 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    -- Do not use mobskills or magic during 2hr
-    if mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) then
-        mob:setMobAbilityEnabled(false)
-        mob:setMagicCastingEnabled(false)
-    else
-        mob:setMobAbilityEnabled(true)
-        mob:setMagicCastingEnabled(true)
-    end
-end
+    local currentAnimation = mob:getAnimationSub()
 
-entity.onMobMobskillChoose = function(mob, target, skillId)
-    if mob:getAnimationSub() == 1 then
-        mob:setLocalVar('skill_tp', mob:getTP())
+    -- Wakes up if slept during air phase.
+    if
+        currentAnimation == 1 and
+        mob:hasStatusEffect(xi.effect.SLEEP_I)
+    then
+        mob:wakeUp()
+    end
+
+    -- No Casting or TP Abilities during Blood Weapon.
+    local bloodWeaponActive = mob:hasStatusEffect(xi.effect.BLOOD_WEAPON)
+
+    mob:setMobAbilityEnabled(not bloodWeaponActive)
+    mob:setMagicCastingEnabled(not bloodWeaponActive)
+
+    -- Cannot change phases while Blood Weapon is active.
+    if
+        bloodWeaponActive or
+        xi.combat.behavior.isEntityBusy(mob)
+    then
+        return
+    end
+
+    local currentTime      = GetSystemTime()
+    local currentHP        = mob:getHP()
+
+    if
+        currentAnimation == 2 and
+        currentTime > mob:getLocalVar('twohourTime')
+    then
+        mob:useMobAbility(xi.mobSkill.BLOOD_WEAPON_1)
+        mob:setLocalVar('twohourTime', currentTime + 300)
+        return
+    end
+
+    if
+        currentTime > mob:getLocalVar('flightTime') or
+        currentHP < mob:getLocalVar('changeHP')
+    then
+        if currentAnimation == 1 then
+            exitFlight(mob)
+        else
+            enterFlight(mob)
+        end
     end
 end
 
 entity.onMobWeaponSkill = function(mob, target, skill, action)
-    -- Don't lose TP from autos during flight
-    if skill:getID() == 1288 then
-        mob:addTP(64) -- Needs to gain TP from flight auto attacks
-        mob:setLocalVar('skill_tp', 0)
-    elseif skill:getID() == 1292 then -- Don't lose TP from Touchdown
-        mob:addTP(mob:getLocalVar('skill_tp'))
-        mob:setLocalVar('skill_tp', 0)
+    if
+        mob:getHPP() > 25 or
+        mob:getAnimationSub() == 1 or
+        skill:getID() ~= xi.mobSkill.HORRID_ROAR_4
+    then
+        return
     end
 
-    -- Below 25% Jorm can Horrid Roar 3x
+    mob:setMagicCastingEnabled(false)
+    mob:setLocalVar('isBusy', 1)
     local roarCount = mob:getLocalVar('roarCount')
 
-    if
-        mob:getHPP() <= 25 and
-        skill:getID() == 1296 and -- Check for Horrid Roar
-        (mob:getAnimationSub() == 0 or mob:getAnimationSub() == 2) -- If it flies during horrid roar cancel the remainders
-    then
-        if roarCount < 2 then
-            if not target:isBehind(mob, 96) then
-                mob:useMobAbility(1286) -- Use Horrid Roar 3
-            else
-                mob:useMobAbility(1290) -- Use Spike Flail
-            end
-
-            mob:setLocalVar('roarCount', roarCount + 1)
+    if roarCount < 2 then
+        if not target:isBehind(mob, 96) then
+            mob:useMobAbility(xi.mobSkill.HORRID_ROAR_4)
         else
-            mob:setLocalVar('roarCount', 0) -- Need to reset once 3x roars are done
+            mob:useMobAbility(xi.mobSkill.SPIKE_FLAIL_4)
         end
+
+        mob:setLocalVar('roarCount', roarCount + 1)
+    else
+        mob:setMagicCastingEnabled(true)
+        mob:setLocalVar('isBusy', 0)
+        mob:setLocalVar('roarCount', 0)
     end
+end
+
+entity.onMobSpellChoose = function(mob, target, spellId)
+    local spellList =
+    {
+        [1] = { xi.magic.spell.BLIZZAGA_III,    target, false, xi.action.type.DAMAGE_TARGET,        nil,                  0, 100 },
+        [2] = { xi.magic.spell.PARALYGA,        target, false, xi.action.type.DAMAGE_TARGET,        nil,                  0, 100 },
+        [3] = { xi.magic.spell.BINDGA,          target, false, xi.action.type.DAMAGE_TARGET,        nil,                  0, 100 },
+        [4] = { xi.magic.spell.ICE_SPIKES,      mob,    false, xi.action.type.ENHANCING_FORCE_SELF, xi.effect.ICE_SPIKES, 0, 100 },
+    }
+
+    return xi.combat.behavior.chooseAction(mob, target, nil, spellList)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
@@ -254,10 +260,10 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDisengage = function(mob)
-    -- Reset Jorm back to the ground on wipe
     if mob:getAnimationSub() == 1 then
-        local flightTime = mob:getLocalVar('flightTime')
-        mob:setLocalVar('flightTime', flightTime - GetSystemTime()) -- Get seconds left to fly for next pull
+        local flightTime = math.max(mob:getLocalVar('flightTime') - GetSystemTime(), 1)
+
+        mob:setLocalVar('flightTime', flightTime)
         mob:setAnimationSub(0)
         mob:delStatusEffect(xi.effect.ALL_MISS)
         mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_TURN))
@@ -266,6 +272,7 @@ entity.onMobDisengage = function(mob)
     end
 
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+    mob:setAnimationSub(0)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
