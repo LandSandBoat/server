@@ -139,6 +139,7 @@
 #include "packets/s2c/0x063_miscdata_job_points.h"
 #include "packets/s2c/0x063_miscdata_merits.h"
 #include "packets/s2c/0x063_miscdata_monstrosity.h"
+#include "packets/s2c/0x069_chocobo_racing.h"
 #include "packets/s2c/0x075_battlefield.h"
 #include "packets/s2c/0x077_entity_vis.h"
 #include "packets/s2c/0x086_guild_open.h"
@@ -1111,6 +1112,112 @@ void CLuaBaseEntity::sendLinkshellConcierge(const sol::table& data) const
 
         PChar->pushPacket<GP_SERV_COMMAND_LINK_CONCIERGE::RECORD>(entries);
     }
+}
+
+/************************************************************************
+ *  Function: sendChocoboRace()
+ *  Purpose : Send the entire chocobo race content to the player.
+ *  Note    : Complex API, see chocobo_racing.lua for usage.
+ ************************************************************************/
+void CLuaBaseEntity::sendChocoboRace(const sol::table& race) const
+{
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (!PChar)
+    {
+        return;
+    }
+
+    // Read a 1-indexed lua table of per-chocobo values (positions or places) into a fixed array.
+    const auto readNibbles = [](const sol::table& values) -> std::array<uint8, GP_SERV_COMMAND_CHOCOBO_RACING::kNumRacers>
+    {
+        std::array<uint8, GP_SERV_COMMAND_CHOCOBO_RACING::kNumRacers> out{};
+        for (uint8 racer = 0; racer < GP_SERV_COMMAND_CHOCOBO_RACING::kNumRacers; ++racer)
+        {
+            out[racer] = values.get_or<uint8>(racer + 1, 0);
+        }
+
+        return out;
+    };
+
+    // Mode 1: Race parameters
+    PChar->pushPacket<GP_SERV_COMMAND_CHOCOBO_RACING::RACINGPARAMS>(race.get_or<uint32>("weather", 1), race.get_or<uint32>("counter", 0)); // 1 = xi.weather.SUNSHINE (clear)
+
+    // Mode 2: Racing Chocobos
+    if (const auto chocobos = race.get<sol::optional<sol::table>>("chocobos"))
+    {
+        const auto                                                count = std::min<size_t>(chocobos->size(), GP_SERV_COMMAND_CHOCOBO_RACING::kNumRacers);
+        std::vector<GP_SERV_COMMAND_CHOCOBO_RACING::ChocoboParam> entries(count);
+
+        for (size_t idx = 1; idx <= count; ++idx)
+        {
+            auto&      entry = entries[idx - 1];
+            const auto data  = chocobos->get<sol::table>(idx);
+
+            entry.Item        = data.get_or<uint8>("item", 0);   // equipped item (sectionEvent)
+            entry.Orders      = data.get_or<uint8>("orders", 0); // jockey orders
+            entry.Size        = data.get_or<uint8>("size", 0);   // jockey (jockeySize)
+            entry.Color       = data.get_or<uint8>("color", 0);  // plumage colour
+            entry.Gender      = data.get_or<uint8>("gender", 0);
+            entry.Weather     = data.get_or<uint8>("weather", 0);     // preferred weather (xi.chocoboRaising.weather)
+            entry.Temperament = data.get_or<uint8>("temperament", 0); // display/raising trait; no race effect
+            entry.Ability1    = data.get_or<uint8>("ability1", 0);    // xi.chocoboRaising.ability (Gallop/Canter/...)
+            entry.Ability2    = data.get_or<uint8>("ability2", 0);
+
+            // Racing stats (chococard ranks 0-7 = F..SS): STR/END/DSC/RCP.
+            if (const auto stats = data.get<sol::optional<sol::table>>("stats"))
+            {
+                entry.STR.Rank = stats->get_or<uint8>("str", 0);
+                entry.END.Rank = stats->get_or<uint8>("end", 0);
+                entry.DSC.Rank = stats->get_or<uint8>("dsc", 0);
+                entry.RCP.Rank = stats->get_or<uint8>("rcp", 0);
+            }
+        }
+
+        PChar->pushPacket<GP_SERV_COMMAND_CHOCOBO_RACING::CHOCOBOPARAMS>(entries);
+    }
+
+    // Mode 3: Racing sections, 16 sections per packet.
+    if (const auto raceSections = race.get<sol::optional<sol::table>>("sections"))
+    {
+        const size_t                                              sectionCount = std::min<size_t>(raceSections->size(), GP_SERV_COMMAND_CHOCOBO_RACING::kMaxSections);
+        std::vector<GP_SERV_COMMAND_CHOCOBO_RACING::SectionParam> sections(sectionCount);
+
+        for (size_t idx = 1; idx <= sectionCount; ++idx)
+        {
+            const auto sec     = raceSections->get<sol::table>(idx);
+            auto&      section = sections[idx - 1];
+
+            GP_SERV_COMMAND_CHOCOBO_RACING::packNibbles(section.From, readNibbles(sec.get<sol::table>("from")));
+            GP_SERV_COMMAND_CHOCOBO_RACING::packNibbles(section.To, readNibbles(sec.get<sol::table>("to")));
+
+            if (const auto event = sec.get<sol::optional<sol::table>>("trigger"))
+            {
+                section.Trigger.User    = event->get_or<uint8>("user", 0);
+                section.Trigger.Targets = event->get_or<uint8>("targets", 0);
+                section.Trigger.Param   = event->get_or<uint8>("param", 0);
+                section.Trigger.Type    = static_cast<GP_SERV_COMMAND_CHOCOBO_RACING::SectionEventType>(event->get_or<uint8>("type", 0));
+            }
+        }
+
+        // Each packet carries up to kSectionsPerPacket sections;
+        // ParamIndex is the starting section index.
+        for (size_t offset = 0; offset < sections.size(); offset += GP_SERV_COMMAND_CHOCOBO_RACING::kSectionsPerPacket)
+        {
+            const auto end = std::min(offset + GP_SERV_COMMAND_CHOCOBO_RACING::kSectionsPerPacket, sections.size());
+
+            std::vector<GP_SERV_COMMAND_CHOCOBO_RACING::SectionParam> chunk(sections.begin() + offset, sections.begin() + end);
+            PChar->pushPacket<GP_SERV_COMMAND_CHOCOBO_RACING::SECTIONPARAMS>(static_cast<uint8>(offset), chunk);
+        }
+    }
+
+    // Mode 4: Final race results.
+    if (const auto places = race.get<sol::optional<sol::table>>("places"))
+    {
+        PChar->pushPacket<GP_SERV_COMMAND_CHOCOBO_RACING::RESULTPARAMS>(readNibbles(*places));
+    }
+
+    // Mode 5: Notify client exchange is done.
+    PChar->pushPacket<GP_SERV_COMMAND_CHOCOBO_RACING::END>();
 }
 
 /************************************************************************
@@ -20210,6 +20317,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("entityAnimationPacket", CLuaBaseEntity::entityAnimationPacket);
     SOL_REGISTER("sendDebugPacket", CLuaBaseEntity::sendDebugPacket);
     SOL_REGISTER("sendLinkshellConcierge", CLuaBaseEntity::sendLinkshellConcierge);
+    SOL_REGISTER("sendChocoboRace", CLuaBaseEntity::sendChocoboRace);
 
     SOL_REGISTER("startEvent", CLuaBaseEntity::startEvent);
     SOL_REGISTER("startCutscene", CLuaBaseEntity::startCutscene);

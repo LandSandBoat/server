@@ -97,6 +97,7 @@ public:
     void entityAnimationPacket(const char* command, const sol::object& target);
     void sendDebugPacket(const sol::table& packetData);
     void sendLinkshellConcierge(const sol::table& data) const;
+    void sendChocoboRace(const sol::table& race) const;
 
     void       StartEventHelper(int32 EventID, sol::variadic_args va, EVENT_TYPE eventType);
     EventInfo* ParseEvent(int32 EventID, sol::variadic_args va, EventPrep* eventPreparation, EVENT_TYPE eventType);
