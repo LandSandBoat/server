@@ -101,7 +101,7 @@ jobs:
       build_type: Release
       test_modules: false
       multi_process: true
-      xi_test: ${{ !startsWith(matrix.runner, 'macos') }}
+      xi_test: true
       startup_checks: true
 
   Docker_Test:

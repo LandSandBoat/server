@@ -297,7 +297,7 @@ jobs:
           - runner: macos-26
             test_modules: false
             multi_process: false
-            xi_test: false
+            xi_test: true
             startup_checks: true
           - runner: ubuntu-26.04
             test_modules: false
