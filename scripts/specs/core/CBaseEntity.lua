@@ -3168,7 +3168,6 @@ end
 function CBaseEntity:isTandemActive()
 end
 
----@nodiscard
 ---@param element integer
 ---@param burden integer
 ---@return integer

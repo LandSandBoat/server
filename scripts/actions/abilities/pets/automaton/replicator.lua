@@ -5,6 +5,7 @@
 -- Amount of images increased on December 15th, 2011.
 -- Changed from Blink to Copy Image on August 5th, 2015.
 -- Changed to not consume Wind Maneuvers on August 6th, 2019.
+-- Applies 7/14/21 Wind Burden per Maneuver active when activated.
 -- https://wiki.ffo.jp/html/12225.html
 -----------------------------------
 ---@type TAbilityAutomaton
@@ -17,6 +18,13 @@ local shadowTable =
     [3] = 10,
 }
 
+local burdenApplied =
+{
+    [1] = 7,
+    [2] = 14,
+    [3] = 21,
+}
+
 abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
     return 0
 end
@@ -24,6 +32,11 @@ end
 abilityObject.onAutomatonAbility = function(target, automaton, skill, master, action)
     local windManeuvers = master:countEffect(xi.effect.WIND_MANEUVER)
     local shadows       = shadowTable[windManeuvers]
+    local burdenAmount  = burdenApplied[windManeuvers]
+
+    if burdenAmount then
+        master:addBurden(xi.element.WIND - 1, burdenAmount)
+    end
 
     automaton:addRecast(xi.recast.ABILITY, skill:getID(), 60)
 

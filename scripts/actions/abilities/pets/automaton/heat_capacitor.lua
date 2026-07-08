@@ -1,6 +1,7 @@
 -----------------------------------
 -- Heat Capacitor
 -- Increases TP based on the number of Fire Maneuvers and the attachments equipped.
+-- Applies 7/14/21 Fire Burden per Maneuver active when activated.
 -- https://wiki.ffo.jp/html/23696.html
 -----------------------------------
 ---@type TAbilityAutomaton
@@ -27,6 +28,13 @@ local tpTable =
     },
 }
 
+local burdenApplied =
+{
+    [1] = 7,
+    [2] = 14,
+    [3] = 21,
+}
+
 abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
     return 0
 end
@@ -40,6 +48,12 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
 
     if not tpAmounts then
         return 0
+    end
+
+    local burdenAmount = burdenApplied[fireManeuvers]
+
+    if burdenAmount then
+        master:addBurden(xi.element.FIRE - 1, burdenAmount)
     end
 
     for attachment, tpAmount in pairs(tpAmounts) do

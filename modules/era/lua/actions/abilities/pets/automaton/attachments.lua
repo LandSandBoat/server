@@ -99,8 +99,46 @@ end)
 -----------------------------------
 -- Ice Maker - Reduces Magic Attack Bonus from Ice Maker, and consumes all Ice Maneuvers on magic attack execution. https://wiki.ffo.jp/html/11198.html
 -----------------------------------
+local validIceMakerSpells = set
+{
+    xi.magic.spell.FIRE,
+    xi.magic.spell.FIRE_II,
+    xi.magic.spell.FIRE_III,
+    xi.magic.spell.FIRE_IV,
+    xi.magic.spell.FIRE_V,
+    xi.magic.spell.BLIZZARD,
+    xi.magic.spell.BLIZZARD_II,
+    xi.magic.spell.BLIZZARD_III,
+    xi.magic.spell.BLIZZARD_IV,
+    xi.magic.spell.BLIZZARD_V,
+    xi.magic.spell.AERO,
+    xi.magic.spell.AERO_II,
+    xi.magic.spell.AERO_III,
+    xi.magic.spell.AERO_IV,
+    xi.magic.spell.AERO_V,
+    xi.magic.spell.STONE,
+    xi.magic.spell.STONE_II,
+    xi.magic.spell.STONE_III,
+    xi.magic.spell.STONE_IV,
+    xi.magic.spell.STONE_V,
+    xi.magic.spell.THUNDER,
+    xi.magic.spell.THUNDER_II,
+    xi.magic.spell.THUNDER_III,
+    xi.magic.spell.THUNDER_IV,
+    xi.magic.spell.THUNDER_V,
+    xi.magic.spell.WATER,
+    xi.magic.spell.WATER_II,
+    xi.magic.spell.WATER_III,
+    xi.magic.spell.WATER_IV,
+    xi.magic.spell.WATER_V,
+}
+
 m:addOverride('xi.actions.abilities.pets.attachments.ice_maker.onEquip', function(pet, attachment)
     pet:addListener('MAGIC_USE', 'AUTO_ICE_MAKER_USE', function(automaton, target, spell, action)
+        if not validIceMakerSpells[spell:getID()] then
+            return
+        end
+
         local master = automaton:getMaster()
 
         if not master then
@@ -125,7 +163,7 @@ m:addOverride('xi.actions.abilities.pets.attachments.ice_maker.onUnequip', funct
 end)
 
 -----------------------------------
--- Replicator - Reduces amount of absorbs granted by Replicator, and changes them to Blink from Utsusemi. https://wiki.ffo.jp/html/12225.html
+-- Replicator - Reduces amount of absorbs granted by Replicator, and changes them to Blink from Utsusemi. Also consumes Wind Maneuvers. https://wiki.ffo.jp/html/12225.html
 -----------------------------------
 local shadowTable =
 {
@@ -147,6 +185,8 @@ m:addOverride('xi.actions.abilities.pets.automaton.replicator.onAutomatonAbility
     for i = 1, windManeuvers do
         master:delStatusEffectSilent(xi.effect.WIND_MANEUVER)
     end
+
+    master:updateAttachments()
 
     if
         shadows and
@@ -441,6 +481,26 @@ m:addOverride('xi.actions.abilities.pets.automaton.eraser.onAutomatonAbility', f
     end
 
     return effectsRemoved
+end)
+
+-----------------------------------
+-- Economizer - Changes Economizer to consume all Dark Maneuvers on activation. : https://wiki.ffo.jp/html/10435.html
+-----------------------------------
+m:addOverride('xi.actions.abilities.pets.automaton.economizer.onAutomatonAbility', function(target, automaton, skill, master, action)
+    automaton:addRecast(xi.recast.ABILITY, skill:getID(), 180)
+
+    local darkManeuvers = master:countEffect(xi.effect.DARK_MANEUVER)
+    local mpRecovered   = math.floor(automaton:getMaxMP() * 0.2 * darkManeuvers)
+
+    for _ = 1, darkManeuvers do
+        master:delStatusEffectSilent(xi.effect.DARK_MANEUVER)
+    end
+
+    master:updateAttachments()
+
+    skill:setMsg(xi.msg.basic.SKILL_RECOVERS_MP)
+
+    return automaton:addMP(mpRecovered)
 end)
 
 return m
