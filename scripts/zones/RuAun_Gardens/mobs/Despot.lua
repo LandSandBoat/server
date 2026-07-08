@@ -38,6 +38,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MIN, 18000)
     mob:setMobMod(xi.mobMod.GIL_MAX, 18000)
     mob:setMobMod(xi.mobMod.MUG_GIL, 3250)
+    -- TODO: Check Petrify immunity, other Sky NMs seem to have it.
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.ELEGY)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)

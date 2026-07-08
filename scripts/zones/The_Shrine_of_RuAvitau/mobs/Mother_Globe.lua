@@ -184,6 +184,7 @@ end
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    -- TODO: Check Petrify immunity, other Sky NMs seem to have it.
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.SILENCE)
@@ -280,7 +281,7 @@ end
 
 entity.onMobDespawn = function(mob)
     mob:removeListener('MG_SPIKES')
-    mob:setRespawnTime(math.randomInt(10800, 21600)) -- 3 to 6 hours
+    mob:setRespawnTime(math.randomInt(10800, 21600)) -- 3 to 6 hours.
 end
 
 return entity
