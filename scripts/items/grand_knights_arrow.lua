@@ -1,29 +1,23 @@
 -----------------------------------
--- ID: 18151
--- Item: Bloody Bolt
--- Additional effect: en-drain
+-- ID: 17327
+-- Item: Grand Knights Arrow
+-- Additional effect: Fire damage
 -----------------------------------
 ---@type TItem
 local itemObject = {}
 
 itemObject.onItemAdditionalEffect = function(attacker, defender, baseAttackDamage, item)
     local dStat = attacker:getStat(xi.mod.INT) - defender:getStat(xi.mod.INT)
-    -- Minimum observed at more than -100 dStat is 57. Negative dStat does seem to drop you to 57, but scaling is currently unknown.
-    -- 92 is the upper cap starting at 48 dStat
+    -- Unconfirmed power.
 
     local pTable =
     {
         isRanged        = true,
-        basePower       = 60 + utils.clamp(dStat, -3, 16) + utils.clamp(math.floor((dStat - 16) / 2), 0, 16),
+        basePower       = 10 + utils.clamp(dStat, -3, 8) + utils.clamp(math.floor((dStat - 8) / 2), 0, 8),
         attackType      = xi.attackType.PHYSICAL,
         physicalElement = xi.damageType.PIERCING,
-        magicalElement  = xi.element.DARK,
+        magicalElement  = xi.element.FIRE,
         canResist       = true,
-        lowestResist    = 0.5,
-        limitUndead     = true,
-        drainHP         = true,
-        overDrain       = true,
-        animation       = xi.subEffect.HP_DRAIN,
     }
 
     return xi.combat.action.executeAddEffectDamage(attacker, defender, pTable)

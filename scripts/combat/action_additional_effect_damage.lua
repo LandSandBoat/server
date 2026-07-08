@@ -36,15 +36,20 @@ local function validateParameters(actor, target, fedData)
     -- Limit undead
     params.limitUndead     = fedData.limitUndead or false -- Default: Works on undead.
 
+    -- Source is ranged attack or melee? Skip en-spell check if so.
+    params.isRanged        = fedData.isRanged or false -- Assume melee.
+
+    -- Base damage parameters.
+    params.basePower       = fedData.basePower or 0
+
     -- Action properties.
     params.attackType      = fedData.attackType or xi.attackType.SPECIAL   -- Physical, Magical, Ranged, Breath or Special.
     params.physicalElement = fedData.physicalElement or xi.damageType.NONE -- None, H2H, Slashing, Piercing or Blunt.
     params.magicalElement  = fedData.magicalElement or xi.element.NONE     -- None, Fire, Ice, Wind, Earth, Thunder, Water, Light, Dark.
-
-    -- Base damage parameters.
-    params.basePower       = fedData.basePower or 0
     params.actorStat       = fedData.actorStat or 0
-    params.targetStat      = fedData.targetStat or params.actorStat
+    params.targetStat      = fedData.targetStat or params.actorStat        -- Currently unused. For future use.
+    params.skillRank       = fedData.skillRank or xi.skillRank.A_PLUS
+    params.macc            = fedData.macc or 0
 
     -- Multiplier properties.
     params.canMAB          = fedData.canMAB or false
@@ -100,8 +105,8 @@ end
 xi.combat.action.executeAddEffectDamage = function(actor, target, fedData)
     local params = validateParameters(actor, target, fedData)
 
-    -- Early return: En-spell overrides innate/weapon additional effects.
-    if hasEnspell(actor) then
+    -- Early return: En-spell overrides innate/weapon additional effects, except ranged attacks.
+    if not params.isRanged and hasEnspell(actor) then
         return 0, 0, 0
     end
 
@@ -115,19 +120,24 @@ xi.combat.action.executeAddEffectDamage = function(actor, target, fedData)
         return 0, 0, 0
     end
 
-    -- Additional variables.
-    local isPhysical = params.attackType == xi.attackType.PHYSICAL or false
-    local isMagical  = params.attackType == xi.attackType.MAGICAL or false
-    local isRanged   = params.attackType == xi.attackType.RANGED or false
-    local isBreath   = params.attackType == xi.attackType.BREATH or false
+    -- Early return: Effect is nullified.
+    local nullification = xi.spells.damage.calculateNullification(params.aeTarget, params.magicalElement, params.attackType == xi.attackType.MAGICAL, params.attackType == xi.attackType.BREATH)
+    if nullification == 0 then
+        return 0, 0, 0
+    end
+
+    -- Early return: Effect is resisted.
+    local multiplierResist = params.canResist and xi.combat.magicHitRate.calculateResistRate(actor, params.aeTarget, 0, 0, params.skillRank, params.magicalElement, params.actorStat, 0, params.macc) or 1
+    if multiplierResist < params.lowestResist then
+        return 0, 0, 0
+    end
 
     -- Calculate base power.
     local damage = params.basePower + actor:getMod(params.actorStat) - params.aeTarget:getMod(params.targetStat)
 
     -- Calculate mandatory multipliers.
-    local multiplierAbsorption         = xi.spells.damage.calculateAbsorption(params.aeTarget, params.magicalElement, params.isMagical)
-    local multiplierNullification      = xi.spells.damage.calculateNullification(params.aeTarget, params.magicalElement, isMagical, isBreath)
-    local multiplierDamageTypeSDT      = xi.combat.damage.calculateDamageAdjustment(params.aeTarget, isPhysical, isMagical, isRanged, isBreath)
+    local multiplierAbsorption         = xi.spells.damage.calculateAbsorption(params.aeTarget, params.magicalElement, params.params.attackType == xi.attackType.MAGICAL)
+    local multiplierDamageTypeSDT      = xi.combat.damage.calculateDamageAdjustment(params.aeTarget, params.attackType == xi.attackType.PHYSICAL, params.attackType == xi.attackType.MAGICAL, params.attackType == xi.attackType.RANGED, params.attackType == xi.attackType.BREATH)
     local multiplierPhysicalElementSDT = xi.combat.damage.physicalElementSDT(params.aeTarget, params.physicalElement)
     local multiplierMagicalElementSDT  = xi.combat.damage.magicalElementSDT(params.aeTarget, params.magicalElement)
     local multiplierElementalStaff     = xi.spells.damage.calculateElementalStaffBonus(actor, params.magicalElement)
@@ -136,17 +146,10 @@ xi.combat.action.executeAddEffectDamage = function(actor, target, fedData)
 
     -- Calculate optional multipliers.
     local multiplierMagicDiff          = params.canMAB and xi.spells.damage.calculateMagicBonusDiff(actor, params.aeTarget, 0, 0, params.magicalElement, 0) or 1
-    local multiplierResist             = params.canResist and xi.combat.magicHitRate.calculateResistRate(actor, params.aeTarget, 0, 0, xi.skillRank.A_PLUS, params.magicalElement, params.actorStat, 0, 0) or 1
     local multiplierForcedResistTier   = params.canResistExtra and xi.spells.damage.calculateAdditionalResistTier(actor, params.aeTarget, params.magicalElement) or 1
-
-    -- Early return: Resist state is too low. Auto-fail.
-    if multiplierResist < params.lowestResist then
-        return 0, 0, 0
-    end
 
     -- Calculate final damage.
     damage = math.floor(damage * multiplierAbsorption)
-    damage = math.floor(damage * multiplierNullification)
     damage = math.floor(damage * multiplierDamageTypeSDT)
     damage = math.floor(damage * multiplierPhysicalElementSDT)
     damage = math.floor(damage * multiplierMagicalElementSDT)
@@ -183,12 +186,7 @@ xi.combat.action.executeAddEffectDamage = function(actor, target, fedData)
         actor:addTP(damage)
     end
 
-    -- No damage, no proc.
-    if damage == 0 then
-        return 0, 0, 0
-    end
-
-    if damage < 0  then
+    if damage < 0 then
         params.aeTarget:addHP(-damage) -- Heal target.
         return params.animation, params.messageHeal, -damage
     end

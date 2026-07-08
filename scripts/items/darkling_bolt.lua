@@ -1,27 +1,23 @@
 -----------------------------------
--- ID: 17651
--- Item: Dainslaif
--- Additional effect: en-drain
+-- ID: 19196
+-- Item: Darkling Bolt
+-- Additional effect: Darkness damage
 -----------------------------------
 ---@type TItem
 local itemObject = {}
 
 itemObject.onItemAdditionalEffect = function(attacker, defender, baseAttackDamage, item)
     local dStat = attacker:getStat(xi.mod.INT) - defender:getStat(xi.mod.INT)
+    -- Unconfirmed power.
 
     local pTable =
     {
-        chance          = 22, -- Observed rate is 21% which is close to (0.22 * .95) = 21%~ (resist roll failure)
-        basePower       = 40 + utils.clamp(dStat, -3, 16) + utils.clamp(math.floor((dStat - 16) / 2), 0, 16),
+        isRanged        = true,
+        basePower       = 10 + utils.clamp(dStat, -3, 8) + utils.clamp(math.floor((dStat - 8) / 2), 0, 8),
         attackType      = xi.attackType.PHYSICAL,
-        physicalElement = xi.damageType.SLASHING,
+        physicalElement = xi.damageType.PIERCING,
         magicalElement  = xi.element.DARK,
         canResist       = true,
-        lowestResist    = 0.5,
-        limitUndead     = true,
-        drainHP         = true,
-        overDrain       = true,
-        animation       = xi.subEffect.DARKNESS_DAMAGE,
     }
 
     return xi.combat.action.executeAddEffectDamage(attacker, defender, pTable)
