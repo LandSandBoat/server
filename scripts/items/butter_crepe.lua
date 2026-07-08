@@ -1,0 +1,32 @@
+-----------------------------------
+-- ID: 5766
+-- Item: Butter Crepe
+-- Food Effect: 30 Min, All Races
+-----------------------------------
+-- HP +10% (cap 10)
+-- Magic Accuracy +20% (cap 25)
+-- Magic Defense +1
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 1800, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_HPP, 10)
+    effect:addMod(xi.mod.FOOD_HP_CAP, 10)
+    effect:addMod(xi.mod.MDEF, 1)
+    effect:addMod(xi.mod.FOOD_MACCP, 20)
+    effect:addMod(xi.mod.FOOD_MACC_CAP, 25)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

@@ -1,0 +1,8 @@
+-----------------------------------
+-- Area: The Eldieme Necropolis [S] (175)
+--  Mob: Shadowhand Cuirassier
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+return entity

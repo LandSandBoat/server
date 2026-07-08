@@ -1,0 +1,28 @@
+-----------------------------------
+-- ID: 5755
+-- Item: Slab of Ruszor Meat
+-- Food Effect: 30Min, Galka only
+-----------------------------------
+-- Strength 5
+-- Intelligence -7
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.RAW_MEAT)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 1800, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.STR, 5)
+    effect:addMod(xi.mod.INT, -7)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

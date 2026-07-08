@@ -1,0 +1,96 @@
+-----------------------------------
+-- func: afkcheck
+-- desc: Sends a custom menu to the cursor target,
+--     : with some very simple but randomized questions.
+--     : If the target doesn't respond with a correct answer
+--     : within 30 seconds, they will be set to 0hp.
+-----------------------------------
+---@type TCommand
+local commandObj = {}
+
+commandObj.cmdprops =
+{
+    permission = 1,
+    parameters = ''
+}
+
+commandObj.onTrigger = function(player)
+    -- Validate target
+    local target = player:getCursorTarget()
+
+    if not target then
+        player:printToPlayer('No target selected target, using self')
+        target = player
+    end
+
+    if target:getObjType() ~= xi.objType.PC then
+        player:printToPlayer('Invalid target')
+    end
+
+    -- Generate options
+    local function getCorrectOption()
+        local a = math.randomInt(1, 10)
+        local b = math.randomInt(1, 10)
+        local c = a + b
+
+        return
+        {
+            string.format('%2i + %2i = %2i', a, b, c),
+            function(playerArg)
+                playerArg:printToPlayer('AFK Check passed', xi.msg.channel.NS_SAY)
+                playerArg:setLocalVar('CAPTCHA', 0)
+            end,
+        }
+    end
+
+    local function getIncorrectOption()
+        local a = math.randomInt(1, 10)
+        local b = math.randomInt(1, 10)
+        local randomChange = math.randomInt(1, 3)
+        if math.randomInt(0, 1) == 1 then
+            randomChange = randomChange * -1
+        end
+
+        local c = a + b + randomChange
+
+        return
+        {
+            string.format('%2i + %2i = %2i', a, b, c),
+            function(playerArg)
+                playerArg:printToPlayer('AFK Check failed', xi.msg.channel.NS_SAY)
+                playerArg:setHP(0)
+            end,
+        }
+    end
+
+    local options = {}
+    table.insert(options, getCorrectOption())
+    table.insert(options, getIncorrectOption())
+    table.insert(options, getIncorrectOption())
+
+    options = utils.shuffle(options)
+
+    -- Present menu
+    local menu =
+    {
+        title = 'AFK Check: Please pick true statement (30s)',
+        onStart = function(playerArg)
+            playerArg:setLocalVar('CAPTCHA', 1)
+        end,
+
+        options = options,
+        onCancelled = function(playerArg)
+            playerArg:printToPlayer('AFK Check failed!', xi.msg.channel.NS_SAY)
+        end,
+    }
+    target:customMenu(menu)
+
+    -- Add timer
+    target:timer(30000, function(playerArg)
+        if playerArg:getLocalVar('CAPTCHA') == 1 then
+            playerArg:setHP(0)
+        end
+    end)
+end
+
+return commandObj

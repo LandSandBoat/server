@@ -1,0 +1,18 @@
+-----------------------------------
+-- Lowing
+-- Description: AoE Powerful plague
+-----------------------------------
+---@type TMobSkill
+local mobskillObject = {}
+
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    return 0
+end
+
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PLAGUE, 5, 0, 60))
+
+    return xi.effect.PLAGUE
+end
+
+return mobskillObject

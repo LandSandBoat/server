@@ -1,0 +1,44 @@
+-----------------------------------
+-- Area: Fort Karugo-Narugo [S]
+--   NM: Emela-ntouka
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobInitialize = function(mob)
+    -- The value below is estimated based on another example in the code
+    -- where the mob 'Seemed to have very high TP gain.'
+    mob:setMod(xi.mod.REGAIN, 200)
+    mob:setMod(xi.mod.TRIPLE_ATTACK, 25)
+end
+
+entity.onMobSpawn = function(mob)
+    -- Mob uses blockhead exclusively, twice, back-to-back
+    mob:addListener('WEAPONSKILL_USE', 'DOUBLE_BLOCKHEAD', function(mobArg, target, skill, tp, action, damage)
+        local reuseMobskill = mob:getLocalVar('reuseMobskill')
+
+        if reuseMobskill == 0 then
+            mob:setLocalVar('reuseMobskill', 1)
+            mob:setTP(3000)
+            mob:useMobAbility(skill:getID())
+        else
+            mob:setLocalVar('reuseMobskill', 0)
+        end
+    end)
+
+    mob:setRespawnTime(0)
+end
+
+entity.onMobDeath = function(mob, player, optParams)
+    xi.hunts.checkHunt(mob, player, 521)
+end
+
+entity.onMobDespawn = function(mob)
+    mob:removeListener('DOUBLE_BLOCKHEAD')
+
+    -- Do not respawn for 3-4 hours
+    mob:setRespawnTime(math.randomInt(10800, 14400))
+    mob:resetLocalVars()
+end
+
+return entity

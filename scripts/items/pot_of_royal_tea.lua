@@ -1,0 +1,28 @@
+-----------------------------------
+-- ID: 4524
+-- Item: pot_of_royal_tea
+-- Food Effect: 240Min, All Races
+-----------------------------------
+-- Vitality -1
+-- Charisma 3
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 14400, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.VIT, -1)
+    effect:addMod(xi.mod.CHR, 3)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

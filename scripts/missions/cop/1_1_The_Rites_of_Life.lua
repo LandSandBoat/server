@@ -1,0 +1,173 @@
+-----------------------------------
+-- The Rites of Life
+-- Promathia 1-1
+-----------------------------------
+-- NOTE: xi.mission.id.cop.THE_RITES_OF_LIFE is set when zoning into Lower Delkfutt's Tower from Qufim
+--       ENABLE_COP must be set to 1 in settings/main.lua
+-- 1. Enter Lower Delkfutt: !pos -286 -20 320 126
+-- 2. Enter Upper Jeuno:    !pos 2.2 -3.2 58.4 245
+-- 3. Talk to Monberaux:    !pos -43 0 -1 244
+-----------------------------------
+
+local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.THE_RITES_OF_LIFE)
+
+mission.reward =
+{
+    keyItem     = xi.ki.MYSTERIOUS_AMULET,
+    nextMission = { xi.mission.log_id.COP, xi.mission.id.cop.BELOW_THE_ARKS },
+}
+
+mission.sections =
+{
+    -- 1. To start this mission, enter Lower Delkfutt's Tower for a cutscene after installing the Chains of Promathia expansion pack.
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return xi.settings.main.ENABLE_COP == 1 and currentMission < xi.mission.id.cop.THE_RITES_OF_LIFE
+        end,
+
+        [xi.zone.LOWER_DELKFUTTS_TOWER] =
+        {
+            ['Tales_Beginning'] =
+            {
+                onTrigger = function(player, npc)
+                    return mission:progressEvent(53, 3) -- 3 prints "Chains of Promathia". I guess the cutscene was copy pasted?
+                end,
+            },
+
+            onZoneIn = function(player, prevZone)
+                if prevZone == xi.zone.QUFIM_ISLAND and player:getCharVar('[COP]TalesBeginning') == 0 then
+                    return 22
+                end
+            end,
+
+            afterZoneIn = function(player)
+                if player:getCharVar('[COP]TalesBeginning') > 0 then
+                    local lowerDelkfuttsIDs = zones[xi.zone.LOWER_DELKFUTTS_TOWER]
+
+                    player:enableEntities({ lowerDelkfuttsIDs.npc.TALES_BEGINNING, lowerDelkfuttsIDs.npc.TALES_BEGINNING - 1 })
+                end
+            end,
+
+            onEventFinish =
+            {
+                -- TODO: These are most likely a series of pos changes that trigger
+                -- onZoneIn events.  In addition, set status vars after each one
+                -- so that on disconnect, it will resume at the latest state.  This
+                -- pattern should also change in section 3
+                [22] = function(player, csid, option, npc)
+                    if option == 1 then
+                        player:startEvent(36)
+                    else
+                        local lowerDelkfuttsIDs = zones[xi.zone.LOWER_DELKFUTTS_TOWER]
+
+                        player:setCharVar('[COP]TalesBeginning', 1)
+                        player:enableEntities({ lowerDelkfuttsIDs.npc.TALES_BEGINNING, lowerDelkfuttsIDs.npc.TALES_BEGINNING - 1 })
+
+                        player:sendPartialMissionLog(xi.mission.log_id.COP, false) -- Send packet to update mission log with special text
+                    end
+                end,
+
+                [36] = function(player, csid, option, npc)
+                    player:startEvent(37)
+                end,
+
+                [37] = function(player, csid, option, npc)
+                    player:startEvent(38)
+                end,
+
+                [38] = function(player, csid, option, npc)
+                    player:startEvent(39)
+                end,
+
+                [39] = function(player, csid, option, npc)
+                    if player:getCharVar('[COP]TalesBeginning') > 0 then
+                        -- Send blank entry to hide all selectively shown NPCs again
+                        -- see https://github.com/atom0s/XiPackets/blob/main/world/server/0x0077/README.md
+                        player:enableEntities({})
+
+                        player:setCharVar('[COP]TalesBeginning', 0)
+                    end
+
+                    mission:begin(player)
+                    mission:setVar(player, 'Status', 1)
+                end,
+
+                [53] = function(player, csid, option, npc)
+                    if option == 4 then -- It seems this parameter changes depending on the input to event 53
+                        player:startEvent(22, 0, 0, 0, 1) -- CoP intro CS with param[3] == 1 does not have the dialog that would eventually lead us to Tales' Beginning
+                    end
+                end,
+            },
+        },
+    },
+
+    -- 2. After the cutscene has finished, enter Upper Jeuno for another cutscene.
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == mission.missionId and vars.Status == 1
+        end,
+
+        [xi.zone.UPPER_JEUNO] =
+        {
+            onZoneIn = function(player, prevZone)
+                return 2
+            end,
+
+            onEventFinish =
+            {
+                [2] = function(player, csid, option, npc)
+                    mission:setVar(player, 'Status', 2)
+                end,
+            },
+        },
+    },
+
+    -- 3. After the second cutscene finishes, speak to Monberaux (G-10, inside the Infirmary) for final cutscene and a Mysterious Amulet.
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == mission.missionId and vars.Status == 2
+        end,
+
+        [xi.zone.UPPER_JEUNO] =
+        {
+            ['Monberaux'] = mission:progressEvent(10),
+
+            onEventFinish =
+            {
+                [10] = function(player, csid, option, npc)
+                    player:startEvent(206)
+                end,
+
+                [206] = function(player, csid, option, npc)
+                    player:startEvent(207)
+                end,
+
+                [207] = function(player, csid, option, npc)
+                    mission:complete(player)
+                end,
+            },
+        },
+    },
+
+    -- 4. After the first cutscene, several NPCs permanently change their default dialogue.
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return player:hasCompletedMission(mission.areaId, mission.missionId) or
+                vars.Status > 0
+        end,
+
+        [xi.zone.RULUDE_GARDENS] =
+        {
+            ['Auchefort'] = mission:event(8):replaceDefault(),
+            ['Baran']     = mission:event(17):replaceDefault(),
+            ['Colti']     = mission:event(21):replaceDefault(),
+        },
+
+        [xi.zone.UPPER_JEUNO] =
+        {
+            ['Rosaline'] = mission:event(97):replaceDefault(),
+        },
+    },
+}
+
+return mission

@@ -1,0 +1,90 @@
+// GENERATED from {{ source }}. Do not edit.
+#pragma once
+
+#include "data/{{ name }}.h"
+#include "data/load.h"
+#include "data/node.h"
+{% for inc in enum_includes %}
+#include "data/enums/{{ inc }}.h"
+{% endfor %}
+
+#include <fmt/format.h>
+#include <stdexcept>
+#include <type_traits>
+#include <unordered_map>
+
+namespace xi::data
+{
+
+{% for pod in pods if not pod.is_main %}
+template <class B>
+auto populate(const Node<B> node, std::type_identity<{{ pod.struct_name }}>) -> {{ pod.struct_name }}
+{
+    return {{ pod.struct_name }}{
+{% for f in pod.fields %}
+{% if f.default %}
+        .{{ f.cpp_name }} = node.has("{{ f.yaml_name }}") ? node.template read<{{ f.cpp_type }}>("{{ f.yaml_name }}") : {{ f.cpp_type }}{ {{- f.default -}} },
+{% else %}
+        .{{ f.cpp_name }} = node.template read<{{ f.cpp_type }}>("{{ f.yaml_name }}"),
+{% endif %}
+{% endfor %}
+    };
+}
+
+{% endfor %}
+template <class B>
+auto populate(const Node<B> node, std::type_identity<{{ main_pod.struct_name }}>) -> {{ main_pod.struct_name }}
+{
+    return {{ main_pod.struct_name }}{
+{% for f in main_pod.fields %}
+{% if f.yaml_name == "id" %}
+{% elif f.yaml_name == "name" and main_pod.name_default_from_key %}
+        .Name = node.has("name") ? node.template read<std::string>("name") : std::string(node.key()),
+{% elif f.default %}
+        .{{ f.cpp_name }} = node.has("{{ f.yaml_name }}") ? node.template read<{{ f.cpp_type }}>("{{ f.yaml_name }}") : {{ f.cpp_type }}{ {{- f.default -}} },
+{% else %}
+        .{{ f.cpp_name }} = node.template read<{{ f.cpp_type }}>("{{ f.yaml_name }}"),
+{% endif %}
+{% endfor %}
+    };
+}
+
+template <class B>
+auto populateMap(const Node<B> root, std::type_identity<{{ main_pod.struct_name }}>) -> std::unordered_map<decltype({{ main_pod.struct_name }}::Id), {{ main_pod.struct_name }}>
+{
+    return populateMapDriver<{{ main_pod.struct_name }}, B>(
+        root,
+        "{{ section_name }}",
+{% if main_pod.key_source == "yaml_field" %}
+        IdSource::YAMLField,
+{% else %}
+        IdSource::YAMLKey,
+{% endif %}
+        "{{ source }}",
+        [](const Node<B> child, const auto id) {
+            auto data = populate(child, std::type_identity<{{ main_pod.struct_name }}>{});
+            data.Id   = id;
+{% if main_pod.variant_arms %}
+            switch (data.{{ main_pod.discriminator_field }})
+            {
+{% for arm in main_pod.variant_arms if arm.struct_name %}
+                case xi::{{ main_pod.discriminator_enum }}::{{ arm.cpp_name }}:
+                    data.Payload = child.template read<{{ arm.struct_name }}>("{{ arm.yaml_key }}");
+                    break;
+{% endfor %}
+{% for arm in main_pod.variant_arms if not arm.struct_name %}
+                case xi::{{ main_pod.discriminator_enum }}::{{ arm.cpp_name }}:
+                    break;
+{% endfor %}
+                default:
+                    throw std::runtime_error(fmt::format(
+                        "{{ main_pod.struct_name }}: unhandled discriminator '{}' for id {}",
+                        EnumTraits<xi::{{ main_pod.discriminator_enum }}>::toName(data.{{ main_pod.discriminator_field }}),
+                        data.Id));
+            }
+{% endif %}
+            return data;
+        });
+}
+
+} // namespace xi::data

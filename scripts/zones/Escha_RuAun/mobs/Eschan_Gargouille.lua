@@ -1,0 +1,20 @@
+-----------------------------------
+-- Area: Escha Ru'Aun
+--  Mob: Eschan Gargouille
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobSpawn = function(mob)
+    mob:hideName(true)
+    mob:setUntargetable(true)
+    mob:setAnimationSub(6)
+end
+
+entity.onMobEngage = function(mob, target)
+    mob:hideName(false)
+    mob:setUntargetable(false)
+    mob:setAnimationSub(0)
+end
+
+return entity

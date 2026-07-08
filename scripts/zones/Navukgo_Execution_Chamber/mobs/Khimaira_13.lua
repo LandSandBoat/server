@@ -1,0 +1,23 @@
+-----------------------------------
+-- Area: Navukgo Execution Chamber
+--  Mob: Khimaira 13
+-----------------------------------
+mixins =
+{
+    require('scripts/mixins/families/khimaira'),
+}
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobEngage = function(mob, target)
+    local bcnmAllies = mob:getBattlefield():getAllies()
+    for _, allyObj in ipairs(bcnmAllies) do
+        if allyObj:getName() == 'Karababa' then
+            allyObj:addEnmity(mob, 0, 1)
+            allyObj:updateEnmity(mob)
+        end
+    end
+end
+
+return entity

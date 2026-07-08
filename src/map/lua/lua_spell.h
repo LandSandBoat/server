@@ -1,0 +1,81 @@
+﻿/*
+===========================================================================
+
+  Copyright (c) 2010-2015 Darkstar Dev Teams
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
+
+===========================================================================
+*/
+
+#ifndef _LUASPELL_H
+#define _LUASPELL_H
+
+#include "common/cbasetypes.h"
+#include "enums/action/knockback.h"
+#include "luautils.h"
+
+class CSpell;
+
+class CLuaSpell
+{
+    CSpell* m_PLuaSpell;
+
+public:
+    CLuaSpell(CSpell*);
+
+    CSpell* GetSpell() const
+    {
+        return m_PLuaSpell;
+    }
+
+    friend std::ostream& operator<<(std::ostream& out, const CLuaSpell& spell);
+
+    void   setMsg(MsgBasic messageID);
+    void   setModifier(ActionModifier modifier) const;
+    void   setCritical(bool isCritical) const;
+    void   setAoE(uint8 aoe);
+    void   setFlag(uint8 flags);
+    void   setRadius(float radius);
+    void   setAnimation(uint16 animationID);
+    void   setCastTime(uint32 casttime);
+    void   setMPCost(uint16 mpcost);
+    bool   canTargetEnemy();
+    uint8  isAoE();
+    float  getRadius();
+    bool   tookEffect();
+    uint16 getTotalTargets();
+    auto   getMagicBurstMessage() const -> MsgBasic;
+    uint16 getElement();
+    uint16 getID();
+    uint16 getMPCost();
+    uint8  getSkillType();
+    uint8  getSpellGroup();
+    uint8  getSpellFamily();
+    uint8  getFlag();
+    uint8  getLevel(JOBTYPE jobId);
+    uint32 getCastTime();
+    uint32 getPrimaryTargetID();
+    auto   getKnockback() const -> Knockback;
+    auto   isCritical() const -> bool;
+
+    bool operator==(const CLuaSpell& other) const
+    {
+        return this->m_PLuaSpell == other.m_PLuaSpell;
+    }
+
+    static void Register();
+};
+
+#endif

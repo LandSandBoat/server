@@ -1,0 +1,37 @@
+-----------------------------------
+-- Flames for the Dead
+-- Bearclaw Pinnacle mission battlefield
+-- !pos -720 9 -441 6
+-----------------------------------
+local ID = zones[xi.zone.BEARCLAW_PINNACLE]
+-----------------------------------
+
+local content = BattlefieldMission:new({
+    zoneId        = xi.zone.BEARCLAW_PINNACLE,
+    battlefieldId = xi.battlefield.id.FLAMES_FOR_THE_DEAD,
+    canLoseExp    = false,
+    maxPlayers    = 6,
+    levelCap      = 99,
+    timeLimit     = utils.minutes(30),
+    index         = 0,
+    entryNpc      = 'Wind_Pillar_1',
+    exitNpc       = 'Wind_Pillar_Exit',
+
+    missionArea           = xi.mission.log_id.COP,
+    mission               = xi.mission.id.cop.THREE_PATHS,
+    missionStatusArea     = xi.mission.log_id.COP,
+    missionStatus         = xi.mission.status.COP.ULMIA,
+    requiredMissionStatus = 8,
+    title                 = xi.title.TRUE_COMPANION_OF_LOUVERANCE,
+    grantXP               = 1000,
+})
+
+content:addEssentialMobs({ 'Snoll_Tzar' })
+
+function content:onBattlefieldLoss(player, battlefield)
+    player:messageSpecial(ID.text.BLOWN_AWAY)
+
+    Battlefield.onBattlefieldLoss(self, player, battlefield)
+end
+
+return content:register()

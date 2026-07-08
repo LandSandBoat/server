@@ -1,0 +1,32 @@
+-----------------------------------
+-- ID: 5859
+-- Item: galkan_sausage_+1
+-- Food Effect: 30Min, All Races
+-----------------------------------
+-- Strength 4
+-- Intelligence -5
+-- Attack 10
+-- Ranged Attack 10
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 1800, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.STR, 4)
+    effect:addMod(xi.mod.INT, -5)
+    effect:addMod(xi.mod.ATT, 10)
+    effect:addMod(xi.mod.RATT, 10)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

@@ -1,0 +1,15 @@
+-----------------------------------
+-- Area: Beadeaux (254)
+--  Mob: Brass Quadav
+-- Note: PH for Bi'Gho Headtaker
+-----------------------------------
+local ID = zones[xi.zone.BEADEAUX]
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.BI_GHO_HEADTAKER, 10, 3600) -- 1 hour
+end
+
+return entity

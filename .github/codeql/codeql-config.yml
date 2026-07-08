@@ -1,0 +1,6 @@
+name: "codeql config"
+
+# Details on CodeQL's query packs refer to : https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
+queries:
+  - uses: security-extended
+  - uses: security-and-quality

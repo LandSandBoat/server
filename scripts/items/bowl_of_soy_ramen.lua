@@ -1,0 +1,40 @@
+-----------------------------------
+-- ID: 6458
+-- Item: bowl_of_soy_ramen
+-- Food Effect: 30Min, All Races
+-----------------------------------
+-- HP +50
+-- STR +5
+-- VIT +5
+-- AGI +3
+-- Attack +10% (cap 170)
+-- Ranged Attack +10% (cap 170)
+-- Resist Slow +10
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 1800, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_HP, 50)
+    effect:addMod(xi.mod.STR, 5)
+    effect:addMod(xi.mod.VIT, 5)
+    effect:addMod(xi.mod.AGI, 3)
+    effect:addMod(xi.mod.FOOD_ATTP, 10)
+    effect:addMod(xi.mod.FOOD_ATT_CAP, 170)
+    effect:addMod(xi.mod.FOOD_RATTP, 10)
+    effect:addMod(xi.mod.FOOD_RATT_CAP, 170)
+    effect:addMod(xi.mod.SLOWRES, 10)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

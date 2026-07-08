@@ -1,0 +1,45 @@
+-----------------------------------
+-- Tachi Kasha
+-- Great Katana weapon skill
+-- Skill Level: 250
+-- Paralyzes target. Damage varies with TP.
+-- Paralyze effect duration is 60 seconds when unresisted.
+-- In order to obtain Tachi: Kasha, the quest The Potential Within must be completed.
+-- Will stack with Sneak Attack.
+-- Tachi: Kasha appears to have a moderate attack bonus of +50%. [1]
+-- Aligned with the Flame Gorget, Light Gorget & Shadow Gorget.
+-- Aligned with the Flame Belt, Light Belt & Shadow Belt.
+-- Element: None
+-- Modifiers: STR:75%
+-- 100%TP    200%TP    300%TP
+-- 1.5625    2.6875    4.125
+-----------------------------------
+---@type TWeaponSkill
+local weaponskillObject = {}
+
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
+    local params     = {}
+    params.numHits   = 1
+    params.ftpMod    = { 1.56, 1.88, 2.5 }
+    params.str_wsc   = 0.75
+    params.atkVaries = { 1.5, 1.5, 1.5 }
+
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        params.ftpMod    = { 1.5625, 2.6875, 4.125 }
+        params.str_wsc   = 0.75
+        params.atkVaries = { 1.65, 1.65, 1.65 }
+    end
+
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+
+    -- Handle status effect
+    local effectId      = xi.effect.PARALYSIS
+    local actionElement = xi.element.ICE
+    local power         = 25
+    local duration      = math.floor(60 * applyResistanceAddEffect(player, target, actionElement, 0))
+    xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
+
+    return tpHits, extraHits, criticalHit, damage
+end
+
+return weaponskillObject

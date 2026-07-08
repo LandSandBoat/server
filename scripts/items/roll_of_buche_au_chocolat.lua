@@ -1,0 +1,36 @@
+-----------------------------------
+-- ID: 5550
+-- Item: Roll of Buche Au Chocolat
+-- Food Effect: 3 Hrs, All Races
+-----------------------------------
+-- TODO: Group Effect
+-- HP +8
+-- MP +3% Cap 13
+-- Intelligence +2
+-- HP Recovered while healing +1
+-- MP Recovered while healing +4
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 10800, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_MPP, 3)
+    effect:addMod(xi.mod.FOOD_MP_CAP, 13)
+    effect:addMod(xi.mod.FOOD_HP, 8)
+    effect:addMod(xi.mod.INT, 2)
+    effect:addMod(xi.mod.HPHEAL, 1)
+    effect:addMod(xi.mod.MPHEAL, 4)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

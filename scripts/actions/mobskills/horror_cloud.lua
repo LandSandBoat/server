@@ -1,0 +1,23 @@
+-----------------------------------
+-- Horror Cloud
+--
+-- Description: A debilitating cloud slows the attack speed of a single target.
+-- Type: Enfeebling
+-- Utsusemi/Blink absorb: Ignores shadows
+-- Range: Melee
+-- Notes: Can be overwritten and blocked by Haste.
+-----------------------------------
+---@type TMobSkill
+local mobskillObject = {}
+
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    return 0
+end
+
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 5000, 0, 120))
+
+    return xi.effect.SLOW
+end
+
+return mobskillObject

@@ -1,0 +1,21 @@
+-----------------------------------
+-- ID: 5944
+-- Item: Bottle of Frontier Soda
+-- Item Effect: Restores 20 TP over 60 seconds.
+-----------------------------------
+---@type TItem
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return 0
+end
+
+itemObject.onItemUse = function(target, user)
+    if not target:hasStatusEffect(xi.effect.REGAIN) then
+        target:addStatusEffect(xi.effect.REGAIN, { power = 1, duration = 60, origin = user, tick = 3 })
+    else
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
+    end
+end
+
+return itemObject

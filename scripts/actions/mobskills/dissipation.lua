@@ -1,0 +1,26 @@
+-----------------------------------
+-- Dissipation
+-- Dispels all buffs add terror effect
+-----------------------------------
+---@type TMobSkill
+local mobskillObject = {}
+
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    return 0
+end
+
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.TERROR, 1, 0, 10)
+
+    local count = target:dispelAllStatusEffect()
+
+    if count == 0 then
+        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
+    else
+        skill:setMsg(xi.msg.basic.DISAPPEAR_NUM)
+    end
+
+    return count
+end
+
+return mobskillObject

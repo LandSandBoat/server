@@ -1,0 +1,34 @@
+-----------------------------------
+-- ID: 5635
+-- Item: shrimp_cracker
+-- Food Effect: 3Min, All Races
+-----------------------------------
+-- Vitality 1
+-- DEF +10
+-- Amorph Killer 10
+-- Resist Virus +10
+-- HP Recovered While Healing 8
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 180, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.VIT, 1)
+    effect:addMod(xi.mod.DEF, 10)
+    effect:addMod(xi.mod.AMORPH_KILLER, 10)
+    effect:addMod(xi.mod.VIRUSRES, 10)
+    effect:addMod(xi.mod.HPHEAL, 8)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

@@ -1,0 +1,22 @@
+-- This file is used to test framework error handling behavior
+-- It is commented out by default to avoid running during normal test execution
+-- Uncomment to verify that the test framework properly handles passing tests
+
+-- describe('Error Handling Verification', function()
+--     it('should properly handle test failures', function()
+--         -- This test passes to show the framework works
+--         assert(true, 'Basic assertion works')
+--     end)
+--
+--     it('should report assertion failures correctly', function()
+--         -- Uncomment to test failure reporting
+--         -- assert(false, "This is an intentional failure for testing")
+--         assert(1 + 1 == 2, 'Math still works')
+--     end)
+--
+--     describe('Nested Suite', function()
+--         it('should work in nested suites', function()
+--             assert(type({}) == 'table', 'Type checking works')
+--         end)
+--     end)
+-- end)

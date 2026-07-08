@@ -1,0 +1,31 @@
+-----------------------------------
+-- ID: 14678
+-- Item: Assassin's Ring
+-- Item Effect: Ranged Accuracy 20
+-- Duration 3 Minutes
+-----------------------------------
+---@type TItem
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    if target:getStatusEffectBySource(xi.effect.ENCHANTMENT, xi.effectSourceType.EQUIPPED_ITEM, xi.item.ASSASSINS_RING) ~= nil then
+        target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.ASSASSINS_RING)
+    end
+
+    return 0
+end
+
+itemObject.onItemUse = function(target, user)
+    if target:hasEquipped(xi.item.ASSASSINS_RING) then
+        target:addStatusEffect(xi.effect.ENCHANTMENT, { duration = 180, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.ASSASSINS_RING })
+    end
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.RACC, 20)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

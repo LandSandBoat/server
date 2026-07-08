@@ -1,0 +1,42 @@
+-----------------------------------
+-- Area: Wajaom Woodlands
+--  Mob: Jaded Jody
+-----------------------------------
+mixins = { require('scripts.mixins.families.morbol_toau') }
+local ID = zones[xi.zone.WAJAOM_WOODLANDS]
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.spawnPoints =
+{
+    { x = -572.000, y = -8.500, z = -335.000 }
+}
+
+entity.phList =
+{
+    [ID.mob.JADED_JODY - 1]  = ID.mob.JADED_JODY, -- Confirmed on retail
+}
+
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.PLAGUE)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.TERROR)
+end
+
+entity.onMobSpawn = function(mob)
+    xi.mix.toau_morbol.config(mob, { nightRoaming = 1, })
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+end
+
+entity.onMobMobskillChoose = function(mob, target, skillId)
+    return target:countEffectWithFlag(xi.effectFlag.DISPELABLE) > 0 and xi.mobSkill.VAMPIRIC_ROOT or 0
+end
+
+entity.onMobDeath = function(mob, player, optParams)
+    xi.hunts.checkHunt(mob, player, 448)
+end
+
+return entity

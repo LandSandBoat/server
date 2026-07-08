@@ -1,0 +1,41 @@
+-----------------------------------
+-- ID: 5762
+-- Item: green_curry_bun_+1
+-- Food Effect: 60 min, All Races
+-----------------------------------
+-- TODO: Group effects
+-- VIT +3
+-- AGI +4
+-- Ranged Accuracy +10% (cap 25)
+-- DEF +13% (cap 180)
+-- Resist Sleep +5
+-- hHP +6
+-- hMP +3
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 3600, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.VIT, 3)
+    effect:addMod(xi.mod.AGI, 4)
+    effect:addMod(xi.mod.FOOD_RACCP, 10)
+    effect:addMod(xi.mod.FOOD_RACC_CAP, 25)
+    effect:addMod(xi.mod.FOOD_DEFP, 13)
+    effect:addMod(xi.mod.FOOD_DEF_CAP, 180)
+    effect:addMod(xi.mod.SLEEPRES, 5)
+    effect:addMod(xi.mod.HPHEAL, 6)
+    effect:addMod(xi.mod.MPHEAL, 3)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

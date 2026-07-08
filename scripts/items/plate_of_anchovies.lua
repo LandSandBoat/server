@@ -1,0 +1,28 @@
+-----------------------------------
+-- ID: 5652
+-- Item: plate_of_anchovies
+-- Food Effect: 3Min, All Races
+-----------------------------------
+-- Dexterity 1
+-- Mind -3
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 180, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.DEX, 1)
+    effect:addMod(xi.mod.MND, -3)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

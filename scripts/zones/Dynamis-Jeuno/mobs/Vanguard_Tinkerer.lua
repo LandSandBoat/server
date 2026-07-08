@@ -1,0 +1,23 @@
+-----------------------------------
+-- Area: Dynamis - Jeuno
+--  Mob: Vanguard Tinkerer
+-----------------------------------
+mixins =
+{
+    require('scripts/mixins/dynamis_beastmen'),
+    require('scripts/mixins/job_special')
+}
+local ID = zones[xi.zone.DYNAMIS_JEUNO]
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.TYMEXOX_NINEFINGERS, 10, 1200) -- 20 minute cooldown and 10% lottery chance values ASSUMED same as Dynamis-Beaucedine/Xarcabard, needs final verification
+end
+
+return entity

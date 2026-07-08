@@ -1,0 +1,16 @@
+-----------------------------------
+-- Area: Castle Oztroja [S]
+--  Mob: Yagudo Sentinel
+-- Note: PH for Aa Xalmo the Savage and Zhuu Buxu the Silent
+-----------------------------------
+local ID = zones[xi.zone.CASTLE_OZTROJA_S]
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.AA_XALMO_THE_SAVAGE, 10, 7200) -- 2 hour
+    xi.mob.phOnDespawn(mob, ID.mob.ZHUU_BUXU_THE_SILENT, 10, 7200) -- 2 hour
+end
+
+return entity

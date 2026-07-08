@@ -1,0 +1,22 @@
+-----------------------------------
+-- Petro Gaze
+-- Description: Petrifies opponents with a gaze attack.
+-- Type: Gaze
+-- Utsusemi/Blink absorb: Ignores shadows
+-- Range: Single gaze
+-- Known users: Hecteyes in CoP areas, Sobbing Eyes in Under Observation, Shoggoth
+-----------------------------------
+---@type TMobSkill
+local mobskillObject = {}
+
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    return 0
+end
+
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, xi.effect.PETRIFICATION, 1, 0, 25))
+
+    return xi.effect.PETRIFICATION
+end
+
+return mobskillObject

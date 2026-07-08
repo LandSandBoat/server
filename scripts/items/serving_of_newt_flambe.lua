@@ -1,0 +1,36 @@
+-----------------------------------
+-- ID: 4329
+-- Item: serving_of_newt_flambe
+-- Food Effect: 240Min, All Races
+-----------------------------------
+-- Dexterity 4
+-- Mind -3
+-- Attack % 18
+-- Attack Cap 65
+-- Virus Resist 4
+-- Curse Resist 4
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 14400, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.DEX, 4)
+    effect:addMod(xi.mod.MND, -3)
+    effect:addMod(xi.mod.FOOD_ATTP, 18)
+    effect:addMod(xi.mod.FOOD_ATT_CAP, 65)
+    effect:addMod(xi.mod.VIRUSRES, 4)
+    effect:addMod(xi.mod.CURSERES, 4)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

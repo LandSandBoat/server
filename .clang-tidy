@@ -1,0 +1,29 @@
+---
+# https://releases.llvm.org/14.0.0/tools/clang/tools/extra/docs/clang-tidy/checks/list.html
+Checks: >
+  -*,
+  cppcoreguidelines-avoid-goto,
+  cppcoreguidelines-init-variables,
+  cppcoreguidelines-no-malloc,
+  cppcoreguidelines-pro-type-const-cast,
+  cppcoreguidelines-pro-type-member-init,
+
+  cppcoreguidelines-slicing,
+  cppcoreguidelines-special-member-functions,
+  cppcoreguidelines-virtual-class-destructor,
+  misc-definitions-in-headers,
+  modernize-pass-by-value,
+  modernize-use-emplace,
+  modernize-use-nullptr,
+  modernize-use-override,
+  performance-*,
+
+# TODO: Enable these
+#  concurrency-mt-unsafe,
+#  cppcoreguidelines-prefer-member-initializer,
+#  cppcoreguidelines-pro-type-vararg,
+
+# TODO: These are important, but they're destructive. Turn on one day.
+#  cppcoreguidelines-pro-type-static-cast-downcast,
+#  cppcoreguidelines-pro-type-cstyle-cast,
+...

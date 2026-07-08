@@ -1,0 +1,67 @@
+-----------------------------------
+-- Area: Navukgo Execution Chamber
+--   NM: Watch Wamoura
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+local function curl(mob)
+    mob:setBaseSpeed(20)
+    mob:setDelay(800)
+    mob:setMod(xi.mod.DMG, -9500)
+    mob:addStatusEffect(xi.effect.BLAZE_SPIKES, { power = 100, origin = mob })
+    mob:setAnimationSub(5)
+    mob:setLocalVar('stretchTime', GetSystemTime() + math.randomInt(65, 80))
+end
+
+local function stretch(mob)
+    mob:setBaseSpeed(100)
+    mob:delMod(xi.mod.DMG, -9500)
+    mob:delStatusEffect(xi.effect.BLAZE_SPIKES)
+    mob:setDelay(170)
+    mob:setAnimationSub(4)
+    mob:setLocalVar('curlThreshold', math.max(0, mob:getHPP() - 20))
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.DETECTION, bit.bor(xi.detects.SIGHT, xi.detects.HEARING))
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 200)
+    mob:setMod(xi.mod.REGAIN, 150)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+    curl(mob)
+end
+
+entity.onMobEngage = function(mob, target)
+    mob:setLocalVar('stretchTime', GetSystemTime() + math.randomInt(65, 80))
+    mob:setLocalVar('curlThreshold', math.max(0, mob:getHPP() - 20))
+end
+
+entity.onMobFight = function(mob, target)
+    local animation = mob:getAnimationSub()
+    if animation == 4 and mob:getHPP() < mob:getLocalVar('curlThreshold') then
+        curl(mob)
+    elseif animation == 5 and GetSystemTime() >= mob:getLocalVar('stretchTime') then
+        stretch(mob)
+    end
+
+    if animation == 4 and GetSystemTime() >= mob:getLocalVar('resetEnmity') then
+        -- While stretched out the mob is constantly switching its target
+        local enmitylist = mob:getEnmityList()
+
+        for _, enmity in ipairs(enmitylist) do
+            if enmity.active then
+                mob:addEnmity(enmity.entity, 1, 0)
+            end
+        end
+
+        local currentTarget = mob:getTarget()
+        if currentTarget then
+            mob:resetEnmity(currentTarget)
+            mob:setLocalVar('resetEnmity', GetSystemTime() + 3)
+        end
+    end
+end
+
+return entity

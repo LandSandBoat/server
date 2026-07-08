@@ -1,0 +1,25 @@
+-----------------------------------
+-- ID: 5261
+-- Item: Bottle Of Psychoanima
+-- Item Effect: Intimidate
+-----------------------------------
+---@type TItem
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    local result = 0
+    if target:getEcosystem() ~= xi.ecosystem.EMPTY then -- Empty
+        result = xi.msg.basic.ITEM_UNABLE_TO_USE
+    elseif target:checkDistance(caster) > 10 then
+        result = xi.msg.basic.TOO_FAR_AWAY
+    end
+
+    return result
+end
+
+itemObject.onItemUse = function(target, player)
+    target:delStatusEffectSilent(xi.effect.INTIMIDATE)
+    target:addStatusEffect(xi.effect.INTIMIDATE, { power = 100, duration = math.randomInt(25, 32), origin = player })
+end
+
+return itemObject

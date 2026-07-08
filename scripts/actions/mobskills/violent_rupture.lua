@@ -1,0 +1,39 @@
+-----------------------------------
+-- Violent Rupture
+-- Family: Shadow Lord (Dynamis Lord)
+-----------------------------------
+---@type TMobSkill
+local mobskillObject = {}
+
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    return 0
+end
+
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    local params = {}
+
+    params.percentMultipier = 0.10
+    params.damageCap        = 200
+    params.bonusDamage      = 0
+    params.mAccuracyBonus   = { 0, 0, 0 }
+    params.resistStat       = xi.mod.INT
+    params.element          = xi.element.FIRE
+    params.attackType       = xi.attackType.BREATH
+    params.damageType       = xi.damageType.FIRE
+    params.shadowBehavior   = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+
+    local info = xi.mobskills.mobBreathMove(mob, target, skill, action, params)
+
+    if xi.mobskills.processDamage(mob, target, skill, action, info) then
+        target:takeDamage(info.damage, mob, info.attackType, info.damageType)
+
+        local power = 50
+        local duration = 120
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STR_DOWN, power, 3, duration)
+    end
+
+    return info.damage
+end
+
+return mobskillObject

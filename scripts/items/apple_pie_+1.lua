@@ -1,0 +1,30 @@
+-----------------------------------
+-- ID: 4320
+-- Item: Apple Pie +1
+-- Food Effect: 60Min, All Races
+-----------------------------------
+-- Magic 30
+-- Intelligence 4
+-- Magic Regen While Healing 2
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 3600, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_MP, 30)
+    effect:addMod(xi.mod.INT, 4)
+    effect:addMod(xi.mod.MPHEAL, 2)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

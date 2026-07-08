@@ -1,0 +1,30 @@
+-----------------------------------
+-- Area: Dynamis - Buburimu
+--  Mob: Lyncean Juwgneg
+-----------------------------------
+mixins =
+{
+    require('scripts/mixins/dynamis_beastmen'),
+    require('scripts/mixins/job_special')
+}
+-----------------------------------
+local ID = zones[xi.zone.DYNAMIS_BUBURIMU]
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.spawnPoints =
+{
+    { x = -136.805, y = -22.812, z =  80.546 }
+}
+
+entity.phList =
+{
+    [ID.mob.LYNCEAN_JUWGNEG - 7] = ID.mob.LYNCEAN_JUWGNEG, -- Vanguard_Predator
+}
+
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
+return entity

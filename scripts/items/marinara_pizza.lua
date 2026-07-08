@@ -1,0 +1,34 @@
+-----------------------------------
+-- ID: 5743
+-- Item: marinara_pizza
+-- Food Effect: 3 hours, all Races
+-----------------------------------
+-- HP +20
+-- Attack +20% (cap 50 @ 250 base attack)
+-- Accuracy +10% (54)
+-- Undead Killer
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 10800, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_HP, 20)
+    effect:addMod(xi.mod.FOOD_ATTP, 20)
+    effect:addMod(xi.mod.FOOD_ATT_CAP, 50)
+    effect:addMod(xi.mod.FOOD_ACCP, 10)
+    effect:addMod(xi.mod.FOOD_ACC_CAP, 54)
+    effect:addMod(xi.mod.UNDEAD_KILLER, 5)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

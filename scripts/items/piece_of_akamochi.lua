@@ -1,0 +1,60 @@
+-----------------------------------
+-- ID: 6260
+-- Item: akamochi
+-- Food Effect: 30 Min, All Races
+-----------------------------------
+-- HP + 20 (Pet & Master)
+-- Vitality + 3 (Pet & Master)
+-- Acc + 10% Cap: 50 (Pet & Master) Pet Cap: 75
+-- R. Acc + 10% Cap: 50 (Pet & Master) Pet Cap: 75
+-- Attack + 16% Cap: 50 (Pet & Master) Pet Cap: 75
+-- R. Attack + 16% Cap: 50 (Pet & Master) Pet Cap: 75
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 1800, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_HP, 20)
+    effect:addMod(xi.mod.VIT, 3)
+    effect:addMod(xi.mod.FOOD_ACCP, 10)
+    effect:addMod(xi.mod.FOOD_ACC_CAP, 50)
+    effect:addMod(xi.mod.FOOD_RACCP, 10)
+    effect:addMod(xi.mod.FOOD_RACC_CAP, 50)
+    effect:addMod(xi.mod.FOOD_ATTP, 16)
+    effect:addMod(xi.mod.FOOD_ATT_CAP, 50)
+    effect:addMod(xi.mod.FOOD_RATTP, 16)
+    effect:addMod(xi.mod.FOOD_RATT_CAP, 50)
+    target:addPetMod(xi.mod.FOOD_HP, 20)
+    target:addPetMod(xi.mod.VIT, 3)
+    target:addPetMod(xi.mod.FOOD_ACCP, 10)
+    target:addPetMod(xi.mod.FOOD_ACC_CAP, 75)
+    target:addPetMod(xi.mod.FOOD_RACCP, 10)
+    target:addPetMod(xi.mod.FOOD_RACC_CAP, 75)
+    target:addPetMod(xi.mod.FOOD_ATTP, 16)
+    target:addPetMod(xi.mod.FOOD_ATT_CAP, 75)
+    target:addPetMod(xi.mod.FOOD_RATTP, 16)
+    target:addPetMod(xi.mod.FOOD_RATT_CAP, 75)
+end
+
+itemObject.onEffectLose = function(target, effect)
+    target:delPetMod(xi.mod.FOOD_HP, 20)
+    target:delPetMod(xi.mod.VIT, 3)
+    target:delPetMod(xi.mod.FOOD_ACCP, 10)
+    target:delPetMod(xi.mod.FOOD_ACC_CAP, 75)
+    target:delPetMod(xi.mod.FOOD_RACCP, 10)
+    target:delPetMod(xi.mod.FOOD_RACC_CAP, 75)
+    target:delPetMod(xi.mod.FOOD_ATTP, 16)
+    target:delPetMod(xi.mod.FOOD_ATT_CAP, 75)
+    target:delPetMod(xi.mod.FOOD_RATTP, 16)
+    target:delPetMod(xi.mod.FOOD_RATT_CAP, 75)
+end
+
+return itemObject

@@ -1,0 +1,23 @@
+-----------------------------------
+-- Dukkeripen
+-- Self healing move
+-- Type: Magical
+-----------------------------------
+---@type TMobSkill
+local mobskillObject = {}
+
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if mob:getMainJob() == xi.job.COR then
+        return 0
+    else
+        return 1
+    end
+end
+
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    skill:setMsg(xi.msg.basic.SELF_HEAL)
+
+    return xi.mobskills.mobHealMove(mob, math.randomInt(350, 500))
+end
+
+return mobskillObject

@@ -1,0 +1,19 @@
+-----------------------------------
+-- Stinking Gas
+-- Description: Lowers Vitality of enemies within range.
+-- Type: Magical (Wind)
+-----------------------------------
+---@type TMobSkill
+local mobskillObject = {}
+
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    return 0
+end
+
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.VIT_DOWN, 10, 5, 180))
+
+    return xi.effect.VIT_DOWN
+end
+
+return mobskillObject

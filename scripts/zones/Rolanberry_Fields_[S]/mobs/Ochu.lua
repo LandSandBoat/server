@@ -1,0 +1,15 @@
+-----------------------------------
+-- Area: Rolanberry Fields [S]
+--  Mob: Ochu
+-- Note: PH for Delicieuse Delphine
+-----------------------------------
+local ID = zones[xi.zone.ROLANBERRY_FIELDS_S]
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.DELICIEUSE_DELPHINE_PH, 10, 5400) -- 1.5 hours
+end
+
+return entity

@@ -1,0 +1,85 @@
+/*
+===========================================================================
+
+  Copyright (c) 2025 LandSandBoat Dev Teams
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
+
+===========================================================================
+*/
+
+#pragma once
+
+#include "ability.h"
+#include "common/cbasetypes.h"
+#include "sol/forward.hpp"
+#include <sol/sol.hpp>
+
+enum class SpellID : uint16;
+class CLuaClientEntityPair;
+class CLuaBaseEntity;
+
+class CLuaClientEntityPairActions
+{
+public:
+    CLuaClientEntityPairActions(CLuaClientEntityPair* parent);
+    ~CLuaClientEntityPairActions() = default;
+
+    void move(float x, float y, float z, sol::optional<uint8_t> rot) const;
+    void useSpell(CLuaBaseEntity* target, SpellID spellId) const;
+    void setBlueSpells(const sol::table& spellIds) const;
+    void useWeaponskill(CLuaBaseEntity* target, uint16 wsId) const;
+    void useAbility(CLuaBaseEntity* target, ABILITY abilityId) const;
+    void changeTarget(CLuaBaseEntity* target) const;
+    void rangedAttack(CLuaBaseEntity* target) const;
+    void useItem(CLuaBaseEntity* target, uint8 slotId, sol::optional<uint8> storageId) const;
+    void trigger(CLuaBaseEntity* target, sol::optional<sol::table> expectedEvent = sol::nullopt) const;
+    void inviteToParty(CLuaBaseEntity* player) const;
+    void formAlliance(CLuaBaseEntity* player) const;
+    void acceptPartyInvite() const;
+    void tradeNpc(const sol::object& npcQuery, const sol::table& items, sol::optional<sol::table> expectedEvent) const;
+    void tradeRequest(CLuaBaseEntity* target) const;
+    void tradeAccept() const;
+    void tradeOffer(uint8 tradeIndex, uint8 invSlot, uint16 itemId, uint32 quantity) const;
+    void tradeClearSlot(uint8 tradeIndex) const;
+    void tradeMake() const;
+    void tradeCancel() const;
+    void acceptRaise() const;
+    void engage(CLuaBaseEntity* mob) const;
+    void skillchain(CLuaBaseEntity* target, sol::variadic_args weaponskillIds) const;
+
+    void guildBuy(uint16 itemId, uint8 quantity) const;
+    void guildSell(uint16 itemId, uint8 quantity) const;
+    auto guildBuyList() const -> sol::table;
+    auto guildSellList() const -> sol::table;
+
+    void moveItem(uint8 srcContainer, uint8 srcSlot, uint8 dstContainer, uint32 quantity, sol::optional<uint8> dstSlot) const;
+    void sortContainer(uint8 container) const;
+    void dropItem(uint8 container, uint8 slot, uint32 quantity) const;
+    void setLockstyle(uint8 mode, sol::optional<sol::table> items) const;
+    void craft(uint16 crystalItemId, const sol::table& ingredients) const;
+
+    void plantAdd(uint8 potContainer, uint8 potSlot, uint8 addContainer, uint8 addSlot) const;
+    void plantCheck(uint8 potContainer, uint8 potSlot) const;
+    void plantHarvest(uint8 potContainer, uint8 potSlot, sol::optional<bool> uproot) const;
+    void plantDry(uint8 potContainer, uint8 potSlot) const;
+
+    void placeFurniture(uint8 container, uint8 slot, uint8 x, uint8 z) const;
+    void finishFurnishing() const;
+
+    static void Register();
+
+private:
+    CLuaClientEntityPair* parent_;
+};

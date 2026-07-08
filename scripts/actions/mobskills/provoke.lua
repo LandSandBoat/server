@@ -1,0 +1,16 @@
+-----------------------------------
+-- Provoke
+-----------------------------------
+---@type TMobSkill
+local mobskillObject = {}
+
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    return 0
+end
+
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    target:addEnmity(mob, 1, 1800)
+    skill:setMsg(xi.msg.basic.NONE)
+end
+
+return mobskillObject

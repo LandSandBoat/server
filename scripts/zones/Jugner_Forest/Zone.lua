@@ -1,0 +1,65 @@
+-----------------------------------
+-- Zone: Jugner_Forest (104)
+-----------------------------------
+require('scripts/missions/amk/helpers')
+-----------------------------------
+---@type TZone
+local zoneObject = {}
+
+zoneObject.onInitialize = function(zone)
+    zone:registerCylindricalTriggerArea(1, -484, 292, 10) -- Sets Mark for "Under Oath" Quest cutscene.
+
+    xi.conquest.setRegionalConquestOverseers(zone:getRegionID())
+
+    xi.helm.initZone(zone, xi.helmType.LOGGING)
+
+    xi.voidwalker.zoneOnInit(zone)
+end
+
+zoneObject.onZoneIn = function(player, prevZone)
+    local cs = -1
+
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
+        player:setPos(-594, -7, -442, 253)
+    end
+
+    -- AMK06/AMK07
+    if xi.settings.main.ENABLE_AMK == 1 then
+        xi.amk.helpers.tryRandomlyPlaceDiggingLocation(player)
+    end
+
+    return cs
+end
+
+zoneObject.afterZoneIn = function(player)
+    xi.chocoboGame.handleMessage(player)
+end
+
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+end
+
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    if
+        triggerArea:getTriggerAreaID() == 1 and
+        player:getCharVar('UnderOathCS') == 7
+    then
+        -- Quest: Under Oath - PLD AF3
+        player:startEvent(14)
+    end
+end
+
+zoneObject.onEventUpdate = function(player, csid, option, npc)
+end
+
+zoneObject.onEventFinish = function(player, csid, option, npc)
+    if csid == 14 then
+        player:setCharVar('UnderOathCS', 8) -- Quest: Under Oath - PLD AF3
+    end
+end
+
+return zoneObject

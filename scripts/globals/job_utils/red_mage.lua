@@ -1,0 +1,72 @@
+-----------------------------------
+-- Red Mage Job Utilities
+-----------------------------------
+xi = xi or {}
+xi.job_utils = xi.job_utils or {}
+xi.job_utils.red_mage = xi.job_utils.red_mage or {}
+
+-----------------------------------
+-- Ability Check Functions
+-----------------------------------
+xi.job_utils.red_mage.checkChainspell = function(player, target, ability)
+    ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST) * 60))
+    return 0, 0
+end
+
+xi.job_utils.red_mage.checkStymie = function(player, target, ability)
+    ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST) * 60))
+    return 0, 0
+end
+
+-----------------------------------
+-- Ability Use Functions
+-----------------------------------
+xi.job_utils.red_mage.useChainspell = function(player, target, ability)
+    player:addStatusEffect(xi.effect.CHAINSPELL, { power = 1, duration = 60, origin = player })
+
+    return xi.effect.CHAINSPELL
+end
+
+xi.job_utils.red_mage.useComposure = function(player, target, ability)
+    player:delStatusEffect(xi.effect.COMPOSURE)
+    player:addStatusEffect(xi.effect.COMPOSURE, { power = 1, duration = 7200, origin = player })
+
+    return xi.effect.COMPOSURE
+end
+
+xi.job_utils.red_mage.useConvert = function(player, target, ability)
+    local playerMP    = player:getMP()
+    local playerHP    = player:getHP()
+    local playerMaxHP = player:getMaxHP()
+
+    -- HP bonuses
+    local jpExtraHP       = math.floor(playerMaxHP * player:getJobPointLevel(xi.jp.CONVERT_EFFECT) / 100)
+    local murgleisExtraHP = 0
+
+    if player:getMod(xi.mod.AUGMENTS_CONVERT) > 0 then
+        murgleisExtraHP = math.floor(playerMaxHP * player:getMod(xi.mod.AUGMENTS_CONVERT) / 100)
+    end
+
+    if playerMP > 0 then -- Safety check, not really needed.
+        player:setHP(playerMP + jpExtraHP + murgleisExtraHP)
+        player:setMP(playerHP)
+    end
+end
+
+xi.job_utils.red_mage.useSaboteur = function(player, target, ability)
+    player:addStatusEffect(xi.effect.SABOTEUR, { power = 1, duration = 60, origin = player })
+
+    return xi.effect.SABOTEUR
+end
+
+xi.job_utils.red_mage.useSpontaneity = function(player, target, ability)
+    target:addStatusEffect(xi.effect.SPONTANEITY, { power = 1, duration = 60, origin = player })
+
+    return xi.effect.SPONTANEITY
+end
+
+xi.job_utils.red_mage.useStymie = function(player, target, ability)
+    target:addStatusEffect(xi.effect.STYMIE, { power = 1, duration = 60, origin = player })
+
+    return xi.effect.STYMIE
+end

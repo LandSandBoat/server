@@ -1,0 +1,40 @@
+-----------------------------------
+-- Area: Sacrificial Chamber
+--  Mob: Grav'iton
+-- Zilart Mission 4 BCNM Fight
+-----------------------------------
+mixins =
+{
+    require('scripts/mixins/families/tonberry'),
+    require('scripts/mixins/job_special')
+}
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:addImmunity(xi.immunity.SILENCE)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setLocalVar('everyonesRancorHPP', math.randomInt(20, 30))
+end
+
+entity.onMobFight = function(mob, target)
+    if
+        mob:getLocalVar('everyonesRancorUsed') == 0 and
+        mob:getHPP() <= mob:getLocalVar('everyonesRancorHPP')
+    then
+        mob:setLocalVar('everyonesRancorUsed', 1)
+        mob:useMobAbility(921)
+    end
+end
+
+entity.onMobDisengage = function(mob)
+    mob:setLocalVar('everyonesRancorUsed', 0)
+end
+
+return entity

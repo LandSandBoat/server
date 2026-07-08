@@ -1,0 +1,19 @@
+-----------------------------------
+-- xi.effect.CHAOS_ROLL
+-----------------------------------
+---@type TEffect
+local effectObject = {}
+
+effectObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.ATTP, effect:getPower())
+    effect:addMod(xi.mod.RATTP, effect:getPower())
+end
+
+effectObject.onEffectTick = function(target, effect)
+end
+
+effectObject.onEffectLose = function(target, effect)
+    xi.job_utils.corsair.onRollEffectLose(target, effect)
+end
+
+return effectObject

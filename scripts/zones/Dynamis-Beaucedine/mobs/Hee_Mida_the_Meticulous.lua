@@ -1,0 +1,31 @@
+-----------------------------------
+-- Area: Dynamis - Beaucedine
+--  Mob: Hee Mida the Meticulous
+-----------------------------------
+mixins =
+{
+    require('scripts/mixins/dynamis_beastmen'),
+    require('scripts/mixins/job_special'),
+    require('scripts/mixins/remove_doom')
+}
+-----------------------------------
+local ID = zones[xi.zone.DYNAMIS_BEAUCEDINE]
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.spawnPoints =
+{
+    { x =  221.160, y = -20.200, z =  32.861 }
+}
+
+entity.phList =
+{
+    [ID.mob.HEE_MIDA_THE_METICULOUS - 2] = ID.mob.HEE_MIDA_THE_METICULOUS, -- Vanguard_Salvager
+}
+
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
+return entity

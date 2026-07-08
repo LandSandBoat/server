@@ -1,0 +1,6 @@
+[submodule "navmeshes"]
+    path = navmeshes
+    url = https://github.com/LandSandBoat/xiNavmeshes.git
+[submodule "ximeshes"]
+    path = ximeshes
+    url = https://github.com/InoUno/ximeshes.git

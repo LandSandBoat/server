@@ -1,0 +1,44 @@
+-----------------------------------
+-- ID: 6258
+-- Item: piece_of_shiromochi
+-- Food Effect: 30 Min, All Races
+-----------------------------------
+-- HP + 20 VIT + 3 (Pet & Master)
+-- Accuracy/Ranged Accuracy +14% (cap 70 on master, cap 108 on pet)
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 1800, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_HP, 20)
+    effect:addMod(xi.mod.VIT, 3)
+    effect:addMod(xi.mod.FOOD_ACCP, 14)
+    effect:addMod(xi.mod.FOOD_ACC_CAP, 70)
+    effect:addMod(xi.mod.FOOD_RACCP, 14)
+    effect:addMod(xi.mod.FOOD_RACC_CAP, 70)
+    target:addPetMod(xi.mod.FOOD_HP, 20)
+    target:addPetMod(xi.mod.VIT, 3)
+    target:addPetMod(xi.mod.FOOD_ACCP, 14)
+    target:addPetMod(xi.mod.FOOD_ACC_CAP, 108)
+    target:addPetMod(xi.mod.FOOD_RACCP, 14)
+    target:addPetMod(xi.mod.FOOD_RACC_CAP, 108)
+end
+
+itemObject.onEffectLose = function(target, effect)
+    target:delPetMod(xi.mod.FOOD_HP, 20)
+    target:delPetMod(xi.mod.VIT, 3)
+    target:delPetMod(xi.mod.FOOD_ACCP, 14)
+    target:delPetMod(xi.mod.FOOD_ACC_CAP, 108)
+    target:delPetMod(xi.mod.FOOD_RACCP, 14)
+    target:delPetMod(xi.mod.FOOD_RACC_CAP, 108)
+end
+
+return itemObject

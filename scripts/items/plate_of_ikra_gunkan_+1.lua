@@ -1,0 +1,40 @@
+-----------------------------------
+-- ID: 5220
+-- Item: plate_of_ikra_gunkan_+1
+-- Food Effect: 60Min, All Races
+-----------------------------------
+-- Health 30
+-- Magic 12
+-- Dexterity 3
+-- Mind -1
+-- Accuracy % 18
+-- Accuracy Cap 30
+-- Ranged ACC % 18
+-- Ranged ACC Cap 30
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 3600, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_HP, 30)
+    effect:addMod(xi.mod.FOOD_MP, 12)
+    effect:addMod(xi.mod.DEX, 3)
+    effect:addMod(xi.mod.MND, -1)
+    effect:addMod(xi.mod.FOOD_ACCP, 18)
+    effect:addMod(xi.mod.FOOD_ACC_CAP, 30)
+    effect:addMod(xi.mod.FOOD_RACCP, 18)
+    effect:addMod(xi.mod.FOOD_RACC_CAP, 30)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

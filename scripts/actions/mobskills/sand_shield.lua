@@ -1,0 +1,18 @@
+-----------------------------------
+-- Sand Shield
+-- Enhances defense.
+-----------------------------------
+---@type TMobSkill
+local mobskillObject = {}
+
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    return 0
+end
+
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.DEFENSE_BOOST, 50, 0, 90))
+
+    return xi.effect.DEFENSE_BOOST
+end
+
+return mobskillObject

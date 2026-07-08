@@ -1,0 +1,84 @@
+-----------------------------------
+-- Area: Stellar Fulcrum
+--  Mob: Kam'lanaut
+-- Zilart Mission 8 BCNM Fight
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+local skillToAbsorb =
+{
+    [823] = xi.mod.FIRE_ABSORB,  -- fire_blade
+    [824] = xi.mod.ICE_ABSORB,   -- frost_blade
+    [825] = xi.mod.WIND_ABSORB,  -- wind_blade2
+    [826] = xi.mod.EARTH_ABSORB, -- earth_blade
+    [827] = xi.mod.LTNG_ABSORB,  -- lightning_blade
+    [828] = xi.mod.WATER_ABSORB, -- water_blade
+}
+
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.PETRIFY)
+    mob:addImmunity(xi.immunity.TERROR)
+end
+
+entity.onMobEngage = function(mob, target)
+    mob:setLocalVar('nextEnSkill', GetSystemTime() + 10)
+end
+
+entity.onMobFight = function(mob, target)
+    if GetSystemTime() > mob:getLocalVar('nextEnSkill') then
+        local skill = math.randomInt(823, 828)
+        mob:setLocalVar('currentTP', mob:getTP())
+        mob:useMobAbility(skill)
+        mob:setLocalVar('nextEnSkill', GetSystemTime() + 20)
+    end
+end
+
+entity.onMobWeaponSkill = function(mob, target, skill, action)
+    local skillId  = skill:getID()
+    local absorbId = skillToAbsorb[skillId]
+
+    if absorbId then
+        -- ----------------------------------------------------------------------
+        -- when using en-spell weapon skill, absorb damage of that element type
+        -- ----------------------------------------------------------------------
+
+        -- remove previous absorb mod, if set
+        local previousAbsorb = mob:getLocalVar('currentAbsorb')
+
+        if previousAbsorb > 0 then
+            mob:setMod(previousAbsorb, 0)
+        end
+
+        -- add new absorb mod
+        mob:setLocalVar('currentAbsorb', absorbId)
+        mob:setMod(absorbId, 100)
+
+        -- return TP
+        mob:setTP(mob:getLocalVar('currentTP'))
+    end
+end
+
+entity.onMobSpellChoose = function(mob, target)
+    local spellList =
+    {
+        [1] = { xi.magic.spell.SLOWGA,    target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.SLOW,      3, 100 },
+        [2] = { xi.magic.spell.SILENCEGA, target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.SILENCE,   0, 100 },
+        [3] = { xi.magic.spell.PARALYGA,  target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.PARALYSIS, 0, 100 },
+        [4] = { xi.magic.spell.GRAVIGA,   target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.WEIGHT,    0, 100 },
+    }
+
+    if
+        target:hasStatusEffectByFlag(xi.effectFlag.DISPELABLE) and
+        mob:isEngaged()
+    then
+        table.insert(spellList, #spellList + 1, { xi.magic.spell.DISPELGA, target, false, xi.action.type.NONE, nil, 100 })
+    end
+
+    return xi.combat.behavior.chooseAction(mob, target, nil, spellList)
+end
+
+return entity

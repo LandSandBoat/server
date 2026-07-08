@@ -1,0 +1,26 @@
+﻿-----------------------------------
+-- Curilla Unleashed
+-- The Voracious Resurgence M3-3
+-----------------------------------
+-- TODO: Add correct !addmission command
+-----------------------------------
+
+local mission = Mission:new(xi.mission.log_id.TVR, xi.mission.id.tvr.CURILLA_UNLEASHED)
+
+mission.reward =
+{
+    nextMission = { xi.mission.log_id.TVR, xi.mission.id.tvr.RUN_EXCENMILLE_RUN },
+}
+
+mission.sections =
+{
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == mission.missionId
+        end,
+
+        -- TODO: Add zones and interactions
+    },
+}
+
+return mission

@@ -1,0 +1,712 @@
+﻿/*
+===========================================================================
+
+  Copyright (c) 2010-2015 Darkstar Dev Teams
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
+
+===========================================================================
+*/
+
+#include "targetfind.h"
+
+#include "ai/ai_container.h"
+#include "common/mmo.h"
+#include "common/utils.h"
+#include "enmity_container.h"
+#include "entities/char_entity.h"
+#include "entities/mob_entity.h"
+#include "entities/trust_entity.h"
+#include "mob_modifier.h"
+#include "status_effect_container.h"
+#include "utils/zoneutils.h"
+
+CTargetFind::CTargetFind(CBattleEntity* PBattleEntity)
+: isPlayer(false)
+, m_radius(0.0f)
+, m_PRadiusAround(nullptr)
+, m_PBattleEntity(PBattleEntity)
+, m_PMasterTarget(nullptr)
+, m_PTarget(nullptr)
+, m_zone(0)
+, m_findType{}
+, m_findFlags(0)
+, m_targetFlags(0)
+, m_conal(false)
+, m_scalar(0.0f)
+, m_APoint(nullptr)
+, m_BPoint{}
+, m_CPoint{}
+, m_selfCenteredAoE(false)
+{
+    reset();
+}
+
+void CTargetFind::reset()
+{
+    m_findType = FIND_TYPE::NONE;
+    m_targets.clear();
+    m_conal           = false;
+    m_radius          = 0.0f;
+    m_zone            = 0;
+    m_findFlags       = FINDFLAGS_NONE;
+    m_selfCenteredAoE = false;
+
+    m_APoint        = nullptr;
+    m_PRadiusAround = nullptr;
+    m_PTarget       = nullptr;
+    m_PMasterTarget = nullptr;
+}
+
+void CTargetFind::findSingleTarget(CBattleEntity* PTarget, uint8 findFlags, uint16 targetFlags)
+{
+    // Ensure caster and target are valid before proceeding.
+    if (m_PBattleEntity == nullptr || PTarget == nullptr)
+    {
+        return;
+    }
+
+    m_findFlags     = findFlags;
+    m_targetFlags   = targetFlags;
+    m_zone          = m_PBattleEntity->getZone();
+    m_PTarget       = nullptr;
+    m_PRadiusAround = &PTarget->loc.p;
+
+    addEntity(PTarget, false);
+}
+
+void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, float radius, uint8 findFlags, uint16 targetFlags)
+{
+    // Ensure caster and target are valid before proceeding.
+    if (m_PBattleEntity == nullptr || PTarget == nullptr)
+    {
+        return;
+    }
+
+    TracyZoneScoped;
+
+    m_findFlags   = findFlags;
+    m_targetFlags = targetFlags;
+    m_radius      = radius;
+    m_zone        = m_PBattleEntity->getZone();
+
+    // Always set each time (CTargetFind objects may be reused between actions)
+    m_selfCenteredAoE = false;
+
+    if (radiusType == AOE_RADIUS::ATTACKER)
+    {
+        m_PRadiusAround   = &m_PBattleEntity->loc.p;
+        m_selfCenteredAoE = true;
+    }
+    else
+    {
+        // radius around target
+        m_PRadiusAround = &PTarget->loc.p;
+    }
+
+    // get master to properly handle loops
+    m_PMasterTarget = findMaster(PTarget);
+
+    // do not include pets if this AoE is a buff spell
+    // this is a buff because i'm targetting myself
+    bool withPet = PETS_CAN_AOE_BUFF || (m_findFlags & FINDFLAGS_PET) || (m_PMasterTarget->objtype != m_PBattleEntity->objtype);
+
+    // Pets/trusts don't buff other pets with self-centered AoEs
+    if (radiusType == AOE_RADIUS::ATTACKER && m_PBattleEntity->PMaster != nullptr)
+    {
+        withPet = false;
+    }
+
+    // add original target first except for self-centered moves
+    if (radiusType != AOE_RADIUS::ATTACKER || m_conal)
+    {
+        addEntity(PTarget, false); // pet will be added later
+        m_PTarget = PTarget;
+    }
+
+    isPlayer = checkIsPlayer(m_PBattleEntity);
+
+    if (isPlayer)
+    {
+        // handle this as a player
+        if (m_PMasterTarget->objtype == TYPE_PC)
+        {
+            // players will never need to add whole alliance
+            m_findType = FIND_TYPE::PLAYER_PLAYER;
+
+            // For self-centered AoEs, add caster first
+            if (m_selfCenteredAoE)
+            {
+                addEntity(m_PBattleEntity, false);
+            }
+
+            if (m_PMasterTarget->PParty != nullptr)
+            {
+                // player -ra spells should never hit whole alliance
+                if ((m_findFlags & FINDFLAGS_ALLIANCE) && m_PMasterTarget->PParty->m_PAlliance != nullptr)
+                {
+                    addAllInAlliance(m_PMasterTarget, withPet);
+                }
+                else
+                {
+                    // add party members
+                    addAllInParty(m_PMasterTarget, withPet);
+                }
+            }
+            else
+            {
+                addEntity(m_PMasterTarget, withPet);
+            }
+        }
+        else
+        {
+            m_findType = FIND_TYPE::PLAYER_MONSTER;
+            // special case to add all mobs in range
+            addAllInMobList(m_PMasterTarget, false);
+        }
+    }
+    else
+    {
+        // handle this as a mob
+        if (m_targetFlags & TARGET_ANY_ALLEGIANCE)
+        {
+            m_findType = FIND_TYPE::MONSTER_PLAYER;
+            if ((m_targetFlags & TARGET_SELF) && m_PBattleEntity->GetBattleTarget())
+            {
+                // This ability targets self for aoe skills (such as Frozen Mist)
+                // We must update the base target for allegiance checks
+                m_PMasterTarget = findMaster(m_PBattleEntity->GetBattleTarget());
+            }
+        }
+        else if (m_PMasterTarget->objtype == TYPE_PC || m_PBattleEntity->allegiance == xi::Allegiance::Player || m_PMasterTarget->allegiance == xi::Allegiance::Player)
+        {
+            m_findType = FIND_TYPE::MONSTER_PLAYER;
+        }
+        else
+        {
+            m_findType = FIND_TYPE::MONSTER_MONSTER;
+        }
+
+        // do not include pets in monster AoE buffs
+        if (m_findType == FIND_TYPE::MONSTER_MONSTER && m_PTarget && m_PTarget->PMaster == nullptr)
+        {
+            withPet = PETS_CAN_AOE_BUFF;
+        }
+
+        // For self-centered AoEs, add caster first
+        if (m_selfCenteredAoE)
+        {
+            addEntity(m_PBattleEntity, false);
+        }
+
+        if (m_findType == FIND_TYPE::MONSTER_PLAYER &&
+            ((m_PBattleEntity->objtype == TYPE_MOB && static_cast<CMobEntity*>(m_PBattleEntity)->getMobMod(MOBMOD_AOE_HIT_ALL)) ||
+             static_cast<CMobEntity*>(m_PBattleEntity)->GetCallForHelpFlag()))
+        {
+            addAllInZone(m_PMasterTarget, withPet);
+        }
+        else
+        {
+            addAllInAlliance(m_PMasterTarget, withPet);
+
+            // Is the monster casting on a player..
+            if (m_findType == FIND_TYPE::MONSTER_PLAYER)
+            {
+                // Treat AoE as player-side if either:
+                // 1) The caster is player-aligned (trust, pet, charmed, etc.), OR
+                // 2) The base target is a player-aligned mob (mission / battlefield allies)
+                if (m_PBattleEntity->allegiance == xi::Allegiance::Player ||
+                    (m_PMasterTarget->objtype == TYPE_MOB && m_PMasterTarget->allegiance == xi::Allegiance::Player))
+                {
+                    addAllInZone(m_PMasterTarget, withPet);
+                }
+                else
+                {
+                    addAllInEnmityList();
+                }
+            }
+        }
+    }
+}
+
+void CTargetFind::findWithinCone(CBattleEntity* PTarget, float distance, float angle, uint8 findFlags, uint16 targetFlags, uint8 aoeType)
+{
+    // Ensure caster and target are valid before proceeding.
+    if (m_PBattleEntity == nullptr || PTarget == nullptr)
+    {
+        return;
+    }
+
+    m_findFlags   = findFlags;
+    m_targetFlags = targetFlags;
+    m_conal       = true;
+
+    m_APoint = &m_PBattleEntity->loc.p;
+
+    uint8 halfAngle = static_cast<uint8>((angle * (256.0f / 360.0f)) / 2.0f);
+
+    // Confirmation on the center of cones is still needed for mob skills; player skills seem to be facing angle
+    // uint8 angleToTarget = worldAngle(m_PBattleEntity->loc.p, PTarget->loc.p);
+    uint8 angleToTarget = relativeAngle(m_APoint->rotation, 128 * (aoeType == 8)); // adds 180 degree rotation if rear type
+
+    // "Left" and "Right" are like the entity's face - "left" means "turning to the left" NOT "left when looking overhead"
+    // Remember that rotation increases when turning to the right, and decreases when turning to the left
+    float leftAngle  = rotationToRadian(relativeAngle(angleToTarget, -halfAngle));
+    float rightAngle = rotationToRadian(relativeAngle(angleToTarget, halfAngle));
+
+    // calculate end points for triangle
+    m_BPoint.x = cosf((2 * (float)M_PI) - rightAngle) * distance + m_APoint->x;
+    m_BPoint.z = sinf((2 * (float)M_PI) - rightAngle) * distance + m_APoint->z;
+
+    m_CPoint.x = cosf((2 * (float)M_PI) - leftAngle) * distance + m_APoint->x;
+    m_CPoint.z = sinf((2 * (float)M_PI) - leftAngle) * distance + m_APoint->z;
+
+    // precompute for next stage
+    m_BPoint.x = m_BPoint.x - m_APoint->x;
+    m_BPoint.z = m_BPoint.z - m_APoint->z;
+
+    m_CPoint.x = m_CPoint.x - m_APoint->x;
+    m_CPoint.z = m_CPoint.z - m_APoint->z;
+
+    // calculate scalar
+    m_scalar = (m_BPoint.x * m_CPoint.z) - (m_BPoint.z * m_CPoint.x);
+
+    findWithinArea(PTarget, AOE_RADIUS::ATTACKER, distance, findFlags, targetFlags);
+}
+
+void CTargetFind::addAllInMobList(CBattleEntity* PTarget, bool withPet)
+{
+    CCharEntity* PChar = dynamic_cast<CCharEntity*>(findMaster(m_PBattleEntity));
+    if (PChar)
+    {
+        FOR_EACH_PAIR_CAST_SECOND(CMobEntity*, PBattleTarget, PChar->SpawnMOBList)
+        {
+            if (PBattleTarget && isMobOwner(PBattleTarget))
+            {
+                addEntity(PBattleTarget, withPet);
+            }
+        }
+    }
+}
+
+void CTargetFind::addAllInZone(CBattleEntity* PTarget, bool withPet)
+{
+    TracyZoneScoped;
+
+    // clang-format off
+    zoneutils::GetZone(PTarget->getZone())->ForEachCharInstance(PTarget, [&](CCharEntity* PChar)
+    {
+        if (PChar)
+        {
+            addEntity(PChar, withPet);
+        }
+    });
+    zoneutils::GetZone(PTarget->getZone())->ForEachMobInstance(PTarget, [&](CMobEntity* PMob)
+    {
+        if (PMob)
+        {
+            addEntity(PMob, withPet);
+        }
+    });
+    zoneutils::GetZone(PTarget->getZone())->ForEachTrustInstance(PTarget, [&](CTrustEntity* PTrust)
+    {
+        if (PTrust)
+        {
+            addEntity(PTrust, withPet);
+        }
+    });
+    // clang-format on
+}
+
+void CTargetFind::addAllInAlliance(CBattleEntity* PTarget, bool withPet)
+{
+    // clang-format off
+    PTarget->ForAlliance([this, withPet](CBattleEntity* PMember)
+    {
+        addEntity(PMember, withPet);
+    });
+    // clang-format on
+}
+
+void CTargetFind::addAllInParty(CBattleEntity* PTarget, bool withPet)
+{
+    // clang-format off
+    if (PTarget->objtype == TYPE_PC)
+    {
+        static_cast<CCharEntity*>(PTarget)->ForPartyWithTrusts([this, withPet](CBattleEntity* PMember)
+        {
+            if (!PMember->inMogHouse())
+            {
+                addEntity(PMember, withPet);
+            }
+        });
+    }
+    else
+    {
+        PTarget->ForParty([this, withPet](CBattleEntity* PMember)
+        {
+            addEntity(PMember, withPet);
+        });
+    }
+    // clang-format on
+}
+
+void CTargetFind::addAllInEnmityList()
+{
+    if (m_PBattleEntity->objtype == TYPE_MOB)
+    {
+        CMobEntity* PMob = static_cast<CMobEntity*>(m_PBattleEntity);
+
+        for (const auto& [_, PEnmityObject] : *PMob->PEnmityContainer->GetEnmityList())
+        {
+            if (PEnmityObject.PEnmityOwner)
+            {
+                addEntity(PEnmityObject.PEnmityOwner, false);
+            }
+        }
+    }
+}
+
+void CTargetFind::addAllInRange(CBattleEntity* PTarget, float radius, xi::Allegiance allegiance)
+{
+    m_radius        = radius;
+    m_PRadiusAround = &(m_PBattleEntity->loc.p);
+
+    if (PTarget && allegiance == xi::Allegiance::Player)
+    {
+        if (PTarget->objtype == TYPE_PC)
+        {
+            CCharEntity* PChar = static_cast<CCharEntity*>(PTarget);
+            for (const auto* spawnList : { &PChar->SpawnPCList, &PChar->SpawnPETList })
+            {
+                FOR_EACH_PAIR_CAST_SECOND(CBattleEntity*, PBattleEntity, *spawnList)
+                {
+                    if (PBattleEntity &&
+                        isWithinArea(&(PBattleEntity->loc.p)) &&
+                        !PBattleEntity->isDead() &&
+                        PBattleEntity->allegiance == xi::Allegiance::Player)
+                    {
+                        m_targets.emplace_back(PBattleEntity);
+                    }
+                }
+            }
+        }
+        else
+        {
+            // clang-format off
+            zoneutils::GetZone(PTarget->getZone())->ForEachCharInstance(PTarget, [&](CCharEntity* PChar)
+            {
+                if (PChar && isWithinArea(&(PChar->loc.p)) && !PChar->isDead())
+                {
+                    m_targets.emplace_back(PChar);
+                }
+            });
+            // clang-format on
+        }
+    }
+}
+
+void CTargetFind::addEntity(CBattleEntity* PTarget, bool withPet)
+{
+    if (validEntity(PTarget))
+    {
+        m_targets.emplace_back(PTarget);
+    }
+
+    // add my pet too, if its allowed
+    if (withPet && PTarget->PPet != nullptr && validEntity(PTarget->PPet))
+    {
+        m_targets.emplace_back(PTarget->PPet);
+    }
+}
+
+CBattleEntity* CTargetFind::findMaster(CBattleEntity* PTarget)
+{
+    if (PTarget->PMaster != nullptr)
+    {
+        return PTarget->PMaster;
+    }
+    return PTarget;
+}
+
+bool CTargetFind::isMobOwner(CBattleEntity* PTarget)
+{
+    if (findMaster(m_PBattleEntity)->objtype != TYPE_PC || PTarget->objtype == TYPE_PC)
+    {
+        // always true for mobs, npcs, pets
+        return true;
+    }
+
+    if (PTarget->m_OwnerID.id == 0 || PTarget->m_OwnerID.id == findMaster(m_PBattleEntity)->id)
+    {
+        return true;
+    }
+
+    if (auto* PMob = dynamic_cast<CMobEntity*>(PTarget))
+    {
+        if (PMob->getMobMod(MOBMOD_CLAIM_TYPE) == static_cast<int16>(xi::ClaimType::NonExclusive))
+        {
+            return true;
+        }
+    }
+
+    bool found = false;
+
+    // clang-format off
+    findMaster(m_PBattleEntity)->ForAlliance([&found, &PTarget](CBattleEntity* PMember)
+    {
+        if (PMember->id == PTarget->m_OwnerID.id)
+        {
+            found = true;
+        }
+    });
+    // clang-format on
+
+    return found;
+}
+
+/*
+validEntity will check if the given entity can be targeted in the AoE.
+*/
+bool CTargetFind::validEntity(CBattleEntity* PTarget)
+{
+    // Assume entity is valid only need to check target not null
+    if (PTarget == nullptr)
+    {
+        return false;
+    }
+
+    // Check if entity is already in list
+    // TODO: Does it make sense to use a hashmap here instead?
+    if (std::find(m_targets.begin(), m_targets.end(), PTarget) != m_targets.end())
+    {
+        return false;
+    }
+
+    if (!(m_findFlags & FINDFLAGS_DEAD) && PTarget->isDead())
+    {
+        return false;
+    }
+
+    if (m_PBattleEntity->StatusEffectContainer->GetConfrontationEffect() != PTarget->StatusEffectContainer->GetConfrontationEffect() ||
+        m_PBattleEntity->PBattlefield != PTarget->PBattlefield || m_PBattleEntity->PInstance != PTarget->PInstance ||
+        ((m_findFlags & FINDFLAGS_IGNORE_BATTLEID) == FINDFLAGS_NONE && m_PBattleEntity->getBattleID() != PTarget->getBattleID()))
+    {
+        return false;
+    }
+
+    if (m_PTarget == PTarget || PTarget->getZone() != m_zone || PTarget->GetUntargetable() || PTarget->status == xi::Status::Invisible)
+    {
+        return false;
+    }
+
+    // Super Jump or otherwise untargetable
+    if (PTarget->PAI->IsUntargetable())
+    {
+        return false;
+    }
+
+    // m_Locked targets should not be able to be attacked or have any ability or spell cast on them, including AoEs.
+    // TODO: Should a locked player's pet or trust be excluded as well? Verify on retail. Can add that check by changing PTarget to findMaster(PTarget).
+    // m_Locked is only in a CCharEntity, not all CBattleEntity which do not have m_Locked. Need to account for that.
+    CCharEntity* PChar = dynamic_cast<CCharEntity*>(PTarget);
+    if (PChar != nullptr && PChar->m_Locked)
+    {
+        return false;
+    }
+
+    // -------------------------------------------------
+    // IMPORTANT: Benediction/self-centered ally-only check
+    // This must run BEFORE the "first target always allowed" short-circuit.
+    // -------------------------------------------------
+    if (m_selfCenteredAoE &&
+        (m_targetFlags & TARGET_ANY_ALLEGIANCE) == 0 &&
+        (m_targetFlags & TARGET_ENEMY) == 0)
+    {
+        CBattleEntity* PCasterMaster = findMaster(m_PBattleEntity);
+        if (PCasterMaster && PCasterMaster->allegiance != PTarget->allegiance)
+        {
+            return false;
+        }
+    }
+
+    // check vertical range
+    // Retail caps at 8.5y for mob self-centered AoE, 8y for everything else.
+    const float yDelta = fabsf(PTarget->loc.p.y - m_PRadiusAround->y);
+    const float yCap   = m_selfCenteredAoE && m_PBattleEntity->objtype == TYPE_MOB ? 8.5f : 8.0f;
+    if (yDelta >= yCap)
+    {
+        return false;
+    }
+
+    // this is first target, always add him first
+    // Exception: for self-centered AoEs, all targets must pass radius validation
+    // Conals always add the main target
+    if (m_PTarget == nullptr && (!m_selfCenteredAoE || m_conal))
+    {
+        return true;
+    }
+
+    // short-circuit allegiance checks for aoe skills/abilities/spells that can hit players and mobs simultaneously
+    if (m_targetFlags & TARGET_ANY_ALLEGIANCE)
+    {
+        if (m_PBattleEntity == PTarget)
+        {
+            // Don't erroneously include self when using TARGET_ANY_ALLEGIANCE
+            return false;
+        }
+    }
+    else
+    {
+        if (m_PTarget && m_PTarget->allegiance != PTarget->allegiance)
+        {
+            return false;
+        }
+
+        // If offensive, don't target other entities with same allegiance
+        // Cures can be AoE with Accession and Majesty, ideally we would use SPELLGROUP or some other mechanism, but TargetFind wasn't designed with that in mind
+        if ((m_targetFlags & TARGET_ENEMY) && !(m_targetFlags & TARGET_PLAYER_PARTY) &&
+            m_PBattleEntity->allegiance == PTarget->allegiance)
+        {
+            return false;
+        }
+
+        // shouldn't add if target is charmed by the enemy
+        if (PTarget->PMaster != nullptr)
+        {
+            if (m_findType == FIND_TYPE::MONSTER_PLAYER)
+            {
+                if (PTarget->PMaster->objtype == TYPE_MOB)
+                {
+                    return false;
+                }
+            }
+            else if (m_findType == FIND_TYPE::PLAYER_MONSTER)
+            {
+                if (PTarget->PMaster->objtype == TYPE_PC)
+                {
+                    return false;
+                }
+            }
+            else if (m_findType == FIND_TYPE::MONSTER_MONSTER || m_findType == FIND_TYPE::PLAYER_PLAYER)
+            {
+                // Allow Trusts and summoner/jug pets in party-targeted AoEs
+                return PTarget->objtype == TYPE_TRUST || PTarget->objtype == TYPE_PET;
+            }
+        }
+    }
+
+    // check placement
+    // force first target to be added
+    // this will be removed when conal targetting is polished
+    if (m_conal)
+    {
+        if (isWithinCone(&PTarget->loc.p))
+        {
+            return true;
+        }
+    }
+    else
+    {
+        if (isWithinArea(&PTarget->loc.p))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool CTargetFind::checkIsPlayer(CBattleEntity* PTarget)
+{
+    if (PTarget == nullptr)
+    {
+        return false;
+    }
+    if (PTarget->objtype == TYPE_PC)
+    {
+        return true;
+    }
+
+    // check if i'm owned by a pc
+    return PTarget->PMaster != nullptr && PTarget->PMaster->objtype == TYPE_PC;
+}
+
+bool CTargetFind::isWithinArea(position_t* pos)
+{
+    return distance(*m_PRadiusAround, *pos) <= m_radius;
+}
+
+bool CTargetFind::isWithinCone(position_t* pos)
+{
+    position_t PPoint;
+
+    // holds final weight
+    position_t WPoint;
+
+    // move origin to one vertex
+    PPoint.x = pos->x - m_APoint->x;
+    PPoint.z = pos->z - m_APoint->z;
+
+    WPoint.x = (PPoint.x * (m_BPoint.z - m_CPoint.z) + PPoint.z * (m_CPoint.x - m_BPoint.x) + m_BPoint.x * m_CPoint.z - m_CPoint.x * m_BPoint.z) / m_scalar;
+
+    WPoint.y = (PPoint.x * m_CPoint.z - PPoint.z * m_CPoint.x) / m_scalar;
+    WPoint.z = (PPoint.z * m_BPoint.x - PPoint.x * m_BPoint.z) / m_scalar;
+
+    if (WPoint.x < 0 || WPoint.x > 1)
+    {
+        return false;
+    }
+
+    if (WPoint.y < 0 || WPoint.y > 1)
+    {
+        return false;
+    }
+
+    if (WPoint.z < 0 || WPoint.z > 1)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+bool CTargetFind::isWithinRange(position_t* pos, float range)
+{
+    return distance(m_PBattleEntity->loc.p, *pos) <= range;
+}
+
+CBattleEntity* CTargetFind::getValidTarget(uint16 actionTargetID, uint16 validTargetFlags)
+{
+    CBattleEntity* PTarget = (CBattleEntity*)m_PBattleEntity->GetEntity(actionTargetID, TYPE_MOB | TYPE_PC | TYPE_PET | TYPE_TRUST);
+
+    if (PTarget == nullptr)
+    {
+        return nullptr;
+    }
+
+    if (validTargetFlags & TARGET_PET && m_PBattleEntity->PPet)
+    {
+        return m_PBattleEntity->PPet;
+    }
+
+    bool ignoreBattleId  = (validTargetFlags & TARGET_IGNORE_BATTLEID) == TARGET_IGNORE_BATTLEID;
+    bool hasSameBattleId = m_PBattleEntity->getBattleID() == PTarget->getBattleID();
+    if ((ignoreBattleId || hasSameBattleId) && PTarget->ValidTarget(m_PBattleEntity, validTargetFlags))
+    {
+        return PTarget;
+    }
+
+    return nullptr;
+}

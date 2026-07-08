@@ -1,0 +1,22 @@
+-----------------------------------
+-- Area: Kuftal Tunnel (174)
+--   NM: Kettenkaefer
+-- Note: Popped by qm3
+-- !pos 204.052 10.25 96.414 174
+-- Involved in Quest: The Potential Within
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:setMobMod(xi.mobMod.EXP_BONUS, -100)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+end
+
+return entity

@@ -1,0 +1,44 @@
+-----------------------------------
+-- ID: 5674
+-- Item: Aileen's Delight
+-- Food Effect: 60 Min, All Races
+-----------------------------------
+-- HP +50
+-- MP +50
+-- STR +4
+-- DEX +4
+-- VIT +4
+-- AGI +4
+-- INT +4
+-- MND +4
+-- CHR +4
+-- MP recovered while healing +2
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 3600, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_HP, 50)
+    effect:addMod(xi.mod.FOOD_MP, 50)
+    effect:addMod(xi.mod.STR, 4)
+    effect:addMod(xi.mod.DEX, 4)
+    effect:addMod(xi.mod.VIT, 4)
+    effect:addMod(xi.mod.AGI, 4)
+    effect:addMod(xi.mod.INT, 4)
+    effect:addMod(xi.mod.MND, 4)
+    effect:addMod(xi.mod.CHR, 4)
+    effect:addMod(xi.mod.MPHEAL, 2)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

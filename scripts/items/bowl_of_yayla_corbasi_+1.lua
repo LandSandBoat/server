@@ -1,0 +1,34 @@
+-----------------------------------
+-- ID: 5580
+-- Item: bowl_of_yayla_corbasi_+1
+-- Food Effect: 4Hrs, All Races
+-----------------------------------
+-- HP 25
+-- Dexterity -1
+-- Vitality 3
+-- HP Recovered While Healing 5
+-- MP Recovered While Healing 2
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 14400, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_HP, 25)
+    effect:addMod(xi.mod.DEX, -1)
+    effect:addMod(xi.mod.VIT, 3)
+    effect:addMod(xi.mod.HPHEAL, 5)
+    effect:addMod(xi.mod.MPHEAL, 2)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "status_effects.schema.json",
+  "title": "StatusEffects",
+  "description": "Schema for data/status_effects.yaml.",
+  "type": "object",
+  "unevaluatedProperties": false,
+  "required": ["status_effects"],
+
+  "properties": {
+    "meta": { "$ref": "_meta.schema.json" },
+    "status_effects": {
+      "type": "object",
+      "description": "Status effects.",
+      "propertyNames": { "pattern": "^[a-z][a-z0-9_]*$" },
+      "additionalProperties": { "$ref": "#/$defs/status_effect" }
+    }
+  },
+
+  "$defs": {
+    "status_effect": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "required": ["id"],
+      "properties": {
+        "id": { "type": "integer", "minimum": 0, "maximum": 65535 },
+        "name": {
+          "type": "string",
+          "description": "Override for the Lua script lookup name. Defaults to the YAML key."
+        },
+        "flags": {
+          "type": "array",
+          "items": { "$ref": "enums/status_effect_flag.codegen.json" },
+          "uniqueItems": true,
+          "default": []
+        },
+        "exclusion_group": {
+          "$ref": "enums/status_effect.codegen.json",
+          "description": "Applying this effect removes all other effects sharing the same group (the group's representative effect). e.g. all spikes share blaze_spikes."
+        },
+        "negative": { "$ref": "enums/status_effect.codegen.json" },
+        "overwrite": { "$ref": "enums/effect_overwrite.codegen.json" },
+        "block": { "$ref": "enums/status_effect.codegen.json" },
+        "remove": { "$ref": "enums/status_effect.codegen.json" },
+        "element": { "$ref": "enums/element.codegen.json" },
+        "min_duration": { "type": "integer", "minimum": 0, "maximum": 65535 },
+        "sort_key": { "type": "integer", "minimum": 0, "maximum": 65535 },
+        "wear_off_message_id": { "type": "integer", "minimum": 0, "maximum": 65535 }
+      }
+    }
+  }
+}

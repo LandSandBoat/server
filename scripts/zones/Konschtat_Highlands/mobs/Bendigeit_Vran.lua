@@ -1,0 +1,39 @@
+-----------------------------------
+-- Area: Konschtat Highlands
+--   NM: Bendigeit Vran
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
+
+entity.onMobRoam = function(mob)
+    local hour      = VanadielHour()
+    local moonCycle = getVanadielMoonCycle()
+    if
+        (hour >= 5 and hour < 17) or
+        (moonCycle ~= xi.moonCycle.NEW_MOON)
+    then
+        DespawnMob(mob:getID())
+    end
+end
+
+entity.onAdditionalEffect = function(mob, target, damage)
+    local pTable =
+    {
+        chance   = 50,
+        effectId = xi.effect.EVASION_DOWN,
+        power    = 25,
+        duration = 60,
+    }
+
+    return xi.combat.action.executeAddEffectEnfeeblement(mob, target, pTable)
+end
+
+entity.onMobDespawn = function(mob)
+    mob:setLocalVar('cooldown', GetSystemTime() + (144 * 13)) -- 13 vanadiel hours guarantees it will not spawn twice in the same night
+end
+
+return entity

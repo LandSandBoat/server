@@ -1,0 +1,32 @@
+-----------------------------------
+-- ID: 5704
+-- Item: anglers_cassoulet
+-- Food Effect: 30, All Races
+-----------------------------------
+-- VIT -1
+-- AGI +5
+-- Ranged Accuracy +1
+-- Regen +1
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 1800, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.REGEN, 1)
+    effect:addMod(xi.mod.VIT, -1)
+    effect:addMod(xi.mod.AGI, 5)
+    effect:addMod(xi.mod.RACC, 5)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

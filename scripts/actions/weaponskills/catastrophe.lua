@@ -1,0 +1,46 @@
+-----------------------------------
+-- Catastrophe
+-- Scythe weapon skill
+-- Skill Level: N/A
+-- Drain target's HP. Bec de Faucon/Apocalypse: Additional effect: Haste
+-- This weapon skill is available with the stage 5 relic Scythe Apocalypse or within Dynamis with the stage 4 Bec de Faucon.
+-- Also available without Aftermath effects with the Crisis Scythe. After 13 weapon skills have been used successfully, gives one "charge" of Catastrophe.
+-- Aligned with the Shadow Gorget & Soil Gorget.
+-- Aligned with the Shadow Belt & Soil Belt.
+-- Element: None
+-- Modifiers: INT:40%  AGI:40%
+-- 100%TP    200%TP    300%TP
+-- 2.75      2.75      2.75
+-----------------------------------
+---@type TWeaponSkill
+local weaponskillObject = {}
+
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
+    local params = {}
+    local targetHP = target:getHP()
+    params.numHits = 1
+    params.ftpMod = { 2.75, 2.75, 2.75 }
+    params.agi_wsc = 0.4 params.int_wsc = 0.4
+
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        params.str_wsc = 0.4 params.agi_wsc = 0.0 params.int_wsc = 0.4
+    end
+
+    -- Apply aftermath
+    xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.RELIC)
+
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+
+    -- Handle HP Drain
+    if not target:isUndead() then
+        local drain = math.floor(damage * math.randomInt(30, 70) / 100) -- TODO: JP Wiki States 50% Heal but all current proof i have shows 30-70%
+
+        drain = utils.clamp(drain, 0, targetHP)
+
+        player:addHP(drain)
+    end
+
+    return tpHits, extraHits, criticalHit, damage
+end
+
+return weaponskillObject

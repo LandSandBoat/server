@@ -1,0 +1,30 @@
+-----------------------------------
+-- Area: Dynamis - Jeuno
+--  Mob: Prowlox Barrelbelly
+-----------------------------------
+mixins =
+{
+    require('scripts/mixins/dynamis_beastmen'),
+    require('scripts/mixins/job_special')
+}
+-----------------------------------
+local ID = zones[xi.zone.DYNAMIS_JEUNO]
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.spawnPoints =
+{
+    { x =  7.549, y =  2.599, z =  118.240 }
+}
+
+entity.phList =
+{
+    [ID.mob.PROWLOX_BARRELBELLY - 1] = ID.mob.PROWLOX_BARRELBELLY, -- Vanguard_Ambusher     7.509    2.500   118.109
+}
+
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
+return entity

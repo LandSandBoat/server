@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  flags: true
+  cpp:
+    underlying: uint32_t
+  lua:
+    table: xi.effectFlag
+
+values:
+  none: 0x00000000
+  dispelable: 0x00000001
+  erasable: 0x00000002
+  attack: 0x00000004
+  empathy: 0x00000008
+  damage: 0x00000010
+  death: 0x00000020
+  magic_begin: 0x00000040
+  magic_end: 0x00000080
+  on_zone: 0x00000100
+  no_loss_message: 0x00000200
+  invisible: 0x00000400
+  detectable: 0x00000800
+  no_rest: 0x00001000
+  prevent_action: 0x00002000
+  waltzable: 0x00004000
+  food: 0x00008000
+  song: 0x00010000
+  roll: 0x00020000
+  synth_support: 0x00040000
+  confrontation: 0x00080000
+  logout: 0x00100000
+  bloodpact: 0x00200000
+  on_jobchange: 0x00400000
+  no_cancel: 0x00800000
+  influence: 0x01000000
+  offline_tick: 0x02000000
+  aura: 0x04000000
+  hide_timer: 0x08000000
+  on_zone_pathos: 0x10000000
+  always_expiring: 0x20000000
+  on_attack: 0x40000000

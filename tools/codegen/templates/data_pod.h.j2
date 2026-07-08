@@ -1,0 +1,45 @@
+// GENERATED from {{ source }}. Do not edit.
+#pragma once
+
+#include "common/cbasetypes.h"
+{% for inc in enum_includes %}
+#include "data/enums/{{ inc }}.h"
+{% endfor %}
+
+#include <string>
+#include <vector>
+{% if main_pod.variant_arms %}
+#include <variant>
+{% endif %}
+
+namespace xi::data
+{
+
+{% for pod in pods if not pod.is_main %}
+struct {{ pod.struct_name }}
+{
+{% for f in pod.fields %}
+    {{ "%-*s"|format(pod.cpp_type_width, f.cpp_type) }} {{ f.cpp_name }}{ {{- f.default -}} };
+{% endfor %}
+};
+
+{% endfor %}
+{% if main_pod.variant_arms %}
+using {{ main_pod.struct_name }}Payload = std::variant<std::monostate
+{% for arm in main_pod.variant_arms if arm.struct_name %}
+    , {{ arm.struct_name }}
+{% endfor %}
+>;
+
+{% endif %}
+struct {{ main_pod.struct_name }}
+{
+{% for f in main_pod.fields %}
+    {{ "%-*s"|format(main_pod.cpp_type_width, f.cpp_type) }} {{ f.cpp_name }}{ {{- f.default -}} };
+{% endfor %}
+{% if main_pod.variant_arms %}
+    {{ "%-*s"|format(main_pod.cpp_type_width, main_pod.struct_name + "Payload") }} Payload{};
+{% endif %}
+};
+
+} // namespace xi::data

@@ -1,0 +1,22 @@
+-----------------------------------
+-- ID: 15841
+-- Recall ring: Jugner
+-- Enchantment: "Recall-Jugner"
+-----------------------------------
+---@type TItem
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    local result = 0
+    if not target:hasKeyItem(xi.ki.JUGNER_GATE_CRYSTAL) then
+        result = 445
+    end
+
+    return result
+end
+
+itemObject.onItemUse = function(target, user)
+    target:addStatusEffect(xi.effect.TELEPORT, { power = xi.teleport.id.JUGNER, duration = 4, origin = user, icon = 0 })
+end
+
+return itemObject

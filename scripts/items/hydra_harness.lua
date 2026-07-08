@@ -1,0 +1,32 @@
+-----------------------------------
+-- ID: 14516
+-- Item: hydra_harness
+-- Item Effect: Attack +25, Ranged Attack +25
+-- Duration: 3 Minutes
+-----------------------------------
+---@type TItem
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    if target:getStatusEffectBySource(xi.effect.ATTACK_BOOST, xi.effectSourceType.EQUIPPED_ITEM, xi.item.HYDRA_HARNESS) ~= nil then
+        target:delStatusEffect(xi.effect.ATTACK_BOOST, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.HYDRA_HARNESS)
+    end
+
+    return 0
+end
+
+itemObject.onItemUse = function(target, user)
+    if target:hasEquipped(xi.item.HYDRA_HARNESS) then
+        target:addStatusEffect(xi.effect.ATTACK_BOOST, { duration = 180, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.HYDRA_HARNESS })
+    end
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.ATT, 25)
+    effect:addMod(xi.mod.RATT, 25)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

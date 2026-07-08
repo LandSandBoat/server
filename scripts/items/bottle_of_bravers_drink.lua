@@ -1,0 +1,34 @@
+-----------------------------------
+-- ID: 5390
+-- Item: bottle_of_bravers_drink
+-- Item Effect: all stats +15
+-----------------------------------
+
+---@type TItem
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return 0
+end
+
+itemObject.onItemUse = function(target, user)
+    local power     = 15
+    local duration  = 180
+
+    local effects =
+    {
+        xi.effect.STR_BOOST_II,
+        xi.effect.DEX_BOOST_II,
+        xi.effect.VIT_BOOST_II,
+        xi.effect.AGI_BOOST_II,
+        xi.effect.INT_BOOST_II,
+        xi.effect.MND_BOOST_II,
+        xi.effect.CHR_BOOST_II
+    }
+
+    for _, effect in ipairs(effects) do
+        target:addStatusEffect(effect, { power = power, duration = duration, origin = user })
+    end
+end
+
+return itemObject

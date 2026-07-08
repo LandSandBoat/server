@@ -1,0 +1,21 @@
+Expansion Icons - 2 Bytes
+
+Byte 1 - Zilart to A Shantotto Ascension
+00000000 Bit0 - Not Used - Original FFXI bit
+00000010 Bit1 - Enables Rise of Zilart Icon
+00000100 Bit2 - Enables Chains of Promathia Icon
+00001000 Bit3 - Enables Treasures of Aht Urhgan Icon
+00010000 Bit4 - Enables Wings of The Goddess
+00100000 Bit5 - Enables A Crystalline Prophecy Icon
+01000000 Bit6 - Enables A Moogle Kupod'Etat Icon
+10000000 Bit7 - Enables A Shantotto Ascension Icon
+
+Byte 2 - Vision of Abyssea to Seekers of Adoulin
+00000001 Bit0 - Enables Vision of Abyssea
+00000010 Bit1 - Enables Scars of Abyssea
+00000100 Bit2 - Enables Heroes of Abyssea
+00001000 Bit3 - Enables Seekers of Adoulin
+00010000 Bit4 - Not Used - Future expansion
+00100000 Bit5 - Not Used - Future expansion
+01000000 Bit6 - Not Used - Future expansion
+10000000 Bit7 - Not Used - Future expansion

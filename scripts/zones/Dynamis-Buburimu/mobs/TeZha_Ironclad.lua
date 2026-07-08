@@ -1,0 +1,30 @@
+-----------------------------------
+-- Area: Dynamis - Buburimu
+--  Mob: TeZha Ironclad
+-----------------------------------
+mixins =
+{
+    require('scripts/mixins/dynamis_beastmen'),
+    require('scripts/mixins/job_special')
+}
+-----------------------------------
+local ID = zones[xi.zone.DYNAMIS_BUBURIMU]
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.spawnPoints =
+{
+    { x =  86.541, y = -8.591, z =  43.407 }
+}
+
+entity.phList =
+{
+    [ID.mob.TEZHA_IRONCLAD - 8] = ID.mob.TEZHA_IRONCLAD, -- Vanguard_Defender
+}
+
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
+return entity

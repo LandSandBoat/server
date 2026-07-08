@@ -1,0 +1,19 @@
+-----------------------------------
+-- Yawn
+-- 15' AoE sleep
+-----------------------------------
+---@type TMobSkill
+local mobskillObject = {}
+
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    return 0
+end
+
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    local duration = math.randomInt(60, 120)
+    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, xi.effect.SLEEP_I, 1, 0, duration))
+
+    return xi.effect.SLEEP_I
+end
+
+return mobskillObject

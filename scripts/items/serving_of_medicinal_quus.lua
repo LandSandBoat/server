@@ -1,0 +1,32 @@
+-----------------------------------
+-- ID: 4294
+-- Item: serving_of_medicinal_quus
+-- Food Effect: 240Min, All Races
+-----------------------------------
+-- Dexterity 1
+-- Mind -1
+-- Ranged ACC % 7
+-- Ranged ACC Cap 15
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 14400, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.DEX, 1)
+    effect:addMod(xi.mod.MND, -1)
+    effect:addMod(xi.mod.FOOD_RACCP, 7)
+    effect:addMod(xi.mod.FOOD_RACC_CAP, 15)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

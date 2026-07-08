@@ -1,0 +1,29 @@
+-----------------------------------
+-- ID: 5712
+-- Item: Melon Snowcone
+-- Food Effect: 5 Min, All Races
+-----------------------------------
+-- HP % 10 Cap 200
+-- HP Healing 3
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 300, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_HPP, 10)
+    effect:addMod(xi.mod.FOOD_HP_CAP, 200)
+    effect:addMod(xi.mod.HPHEAL, 3)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

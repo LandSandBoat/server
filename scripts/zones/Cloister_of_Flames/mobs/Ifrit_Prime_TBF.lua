@@ -1,0 +1,58 @@
+-----------------------------------
+-- Area: Cloister of Flames
+--  Mob: Ifrit Prime
+-- Involved in Quest: Trial by Fire
+-----------------------------------
+mixins = { require('scripts/mixins/job_special') }
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.BLIND)
+    mob:addImmunity(xi.immunity.SLOW)
+    mob:addImmunity(xi.immunity.ELEGY)
+    mob:addImmunity(xi.immunity.PARALYZE)
+    mob:addImmunity(xi.immunity.GRAVITY)
+    mob:addImmunity(xi.immunity.BIND)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+end
+
+entity.onMobSpawn = function(mob)
+    xi.mix.jobSpecial.config(mob, {
+        specials =
+        {
+            { id = 848, hpp = math.randomInt(30, 55) }, -- uses Inferno once while near 50% HPP.
+        },
+    })
+
+    mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 20)
+    mob:setMobMod(xi.mobMod.MAGIC_RANGE, 40)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMod(xi.mod.FIRE_ABSORB, 100)
+    -- res rank for mob that absorbs is always lowest value
+    mob:setMod(xi.mod.FIRE_RES_RANK, -3)
+    mob:setMod(xi.mod.UDMGPHYS, -6000)
+    mob:setMod(xi.mod.UDMGRANGE, -6000)
+
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+end
+
+entity.onAdditionalEffect = function(mob, target, damage)
+    local pTable =
+    {
+        chance         = 100,
+        attackType     = xi.attackType.MAGICAL,
+        magicalElement = xi.element.FIRE,
+        basePower      = math.floor(damage / 2),
+        actorStat      = xi.mod.INT,
+    }
+
+    return xi.combat.action.executeAddEffectDamage(mob, target, pTable)
+end
+
+return entity

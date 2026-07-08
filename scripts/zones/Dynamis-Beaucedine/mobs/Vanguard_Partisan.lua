@@ -1,0 +1,27 @@
+-----------------------------------
+-- Area: Dynamis - Beaucedine
+--  Mob: Vanguard Partisan
+-----------------------------------
+mixins =
+{
+    require('scripts/mixins/dynamis_beastmen'),
+    require('scripts/mixins/job_special')
+}
+local ID = zones[xi.zone.DYNAMIS_BEAUCEDINE]
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Vanguards_Wyvern')
+end
+
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.MAA_ZAUA_THE_WYRMKEEPER, 10, 1200) -- 20 minutes
+end
+
+return entity

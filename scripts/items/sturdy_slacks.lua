@@ -1,0 +1,32 @@
+-----------------------------------
+-- ID: 15611
+-- Item: sturdy_slacks
+-- Item Effect: HP +7, MP +7
+-- Duration: 30 Minutes
+-----------------------------------
+---@type TItem
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    if target:getStatusEffectBySource(xi.effect.ENCHANTMENT, xi.effectSourceType.EQUIPPED_ITEM, xi.item.STURDY_SLACKS) ~= nil then
+        target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.STURDY_SLACKS)
+    end
+
+    return 0
+end
+
+itemObject.onItemUse = function(target, user)
+    if target:hasEquipped(xi.item.STURDY_SLACKS) then
+        target:addStatusEffect(xi.effect.ENCHANTMENT, { duration = 1800, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.STURDY_SLACKS })
+    end
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.HP, 7)
+    effect:addMod(xi.mod.MP, 7)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

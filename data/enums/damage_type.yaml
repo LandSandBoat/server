@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint16_t
+  lua:
+    table: xi.damageType
+
+values:
+  none: 0
+  piercing: 1
+  slashing: 2
+  blunt: 3
+  hand_to_hand: 4
+  elemental: 5
+  fire: 6
+  ice: 7
+  wind: 8
+  earth: 9
+  thunder: 10
+  water: 11
+  light: 12
+  dark: 13

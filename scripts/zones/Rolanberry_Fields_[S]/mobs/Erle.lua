@@ -1,0 +1,40 @@
+-----------------------------------
+-- Area: Rolanberry Fields [S]
+--   NM: Erle
+-- https://www.bg-wiki.com/ffxi/Erle
+-- TODO allow deaggro based on distance (core CMobEntity::CanDeaggro() forces NM and Battlefield mobs to never stop chasing)
+-----------------------------------
+local ID = zones[xi.zone.ROLANBERRY_FIELDS_S]
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.phList =
+{
+    [ID.mob.ERLE - 6] = ID.mob.ERLE,
+}
+
+entity.onMobInitialize = function(mob)
+    mob:setMod(xi.mod.TRIPLE_ATTACK, 35)
+    mob:setMod(xi.mod.MDEF, 100)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
+
+entity.onAdditionalEffect = function(mob, target, damage)
+    local pTable =
+    {
+        chance         = 100,
+        attackType     = xi.attackType.MAGICAL,
+        magicalElement = xi.element.WIND,
+        basePower      = math.floor(damage / 2),
+        actorStat      = xi.mod.INT,
+    }
+
+    return xi.combat.action.executeAddEffectDamage(mob, target, pTable)
+end
+
+entity.onMobDeath = function(mob, player, optParams)
+    xi.hunts.checkHunt(mob, player, 512)
+end
+
+return entity

@@ -1,0 +1,39 @@
+-----------------------------------
+-- Area: Lufaise Meadows
+--   NM: Flockbock
+-- https://www.bg-wiki.com/ffxi/Flockbock
+-- TODO: NM has several possible spawn locations
+-----------------------------------
+mixins = { require('scripts/mixins/rage') }
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobInitialize = function(mob)
+    -- Has enhanced double attack.
+    -- TODO: Exact STP value needs to be researched further
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 50)
+    mob:addMod(xi.mod.STORETP,       25)
+    mob:setRespawnTime(math.randomInt(3600, 7200))
+end
+
+entity.onMobSpawn = function(mob)
+    -- Petribreath resets hate on use
+    mob:addListener('WEAPONSKILL_USE', 'PETRIBREATH_HATE_RESET', function(mobArg, target, skill, tp, action, damage)
+        if skill:getID() == 269 then
+            mob:resetEnmity(target)
+        end
+    end)
+
+    mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
+end
+
+entity.onMobDeath = function(mob, player, optParams)
+    xi.hunts.checkHunt(mob, player, 442)
+end
+
+entity.onMobDespawn = function(mob)
+    mob:setRespawnTime(math.randomInt(3600, 7200)) -- 1-2 hours
+end
+
+return entity

@@ -1,0 +1,31 @@
+-----------------------------------
+-- Area: Dynamis - Beaucedine
+--  Mob: Foo Peku the Bloodcloak
+-----------------------------------
+mixins =
+{
+    require('scripts/mixins/dynamis_beastmen'),
+    require('scripts/mixins/job_special'),
+    require('scripts/mixins/remove_doom')
+}
+-----------------------------------
+local ID = zones[xi.zone.DYNAMIS_BEAUCEDINE]
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.spawnPoints =
+{
+    { x =  72.117, y = -20.430, z = -141.940 }
+}
+
+entity.phList =
+{
+    [ID.mob.FOO_PEKU_THE_BLOODCLOAK - 2] = ID.mob.FOO_PEKU_THE_BLOODCLOAK, -- Vanguard_Skirmisher
+}
+
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
+return entity

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "_meta.schema.json",
+  "title": "Data-file codegen metadata",
+  "description": "Optional top-level `meta:` block in data yamls. Carries directives that drive codegen.",
+  "type": "object",
+  "unevaluatedProperties": false,
+  "properties": {
+    "enum": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "required": ["cpp"],
+      "description": "Emit a typed enum derived from a top-level section of the data file.",
+      "properties": {
+        "cpp": {
+          "type": "object",
+          "unevaluatedProperties": false,
+          "required": ["underlying", "class"],
+          "properties": {
+            "underlying": { "type": "string" },
+            "class": { "type": "string", "pattern": "^[A-Z][A-Za-z0-9]*$" },
+            "case": { "type": "string", "enum": ["pascal", "screaming"], "default": "pascal" }
+          }
+        },
+        "lua": {
+          "type": "object",
+          "unevaluatedProperties": false,
+          "properties": {
+            "table": { "type": "string", "pattern": "^xi\\.[A-Za-z][A-Za-z0-9_]*$" }
+          }
+        },
+        "section": {
+          "type": "string",
+          "description": "Which top-level YAML section to walk. Defaults to the filename."
+        },
+        "name_from": {
+          "type": "string",
+          "description": "Dot-path inside each entry to a string that gets slugged into the enum value name (e.g., `name.en`). When set, the YAML key is treated as the integer id."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+-----------------------------------
+-- ID: 5924
+-- Item: Smoldering Salisbury Steak
+-- Food Effect: 180 Min, All Races
+-----------------------------------
+-- HP +30
+-- Strength +7
+-- Intelligence -5
+-- Attack % 20 Cap 160
+-- Ranged Attack %20 Cap 160
+-- Dragon Killer +5
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 10800, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_HP, 30)
+    effect:addMod(xi.mod.STR, 7)
+    effect:addMod(xi.mod.INT, -5)
+    effect:addMod(xi.mod.FOOD_ATTP, 20)
+    effect:addMod(xi.mod.FOOD_ATT_CAP, 160)
+    effect:addMod(xi.mod.FOOD_RATTP, 20)
+    effect:addMod(xi.mod.FOOD_RATT_CAP, 160)
+    effect:addMod(xi.mod.DRAGON_KILLER, 5)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

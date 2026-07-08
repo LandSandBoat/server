@@ -1,0 +1,30 @@
+-----------------------------------
+-- Area: Dynamis - Beaucedine
+--  Mob: Bordox Kittyback
+-----------------------------------
+mixins =
+{
+    require('scripts/mixins/dynamis_beastmen'),
+    require('scripts/mixins/job_special')
+}
+-----------------------------------
+local ID = zones[xi.zone.DYNAMIS_BEAUCEDINE]
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.spawnPoints =
+{
+    { x = -26.328, y = -40.017, z = -198.928 }
+}
+
+entity.phList =
+{
+    [ID.mob.BORDOX_KITTYBACK - 2] = ID.mob.BORDOX_KITTYBACK, -- Vanguard_Welldigger
+}
+
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
+return entity

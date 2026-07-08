@@ -1,0 +1,41 @@
+-----------------------------------
+-- Area: QuBia_Arena
+--  Mob: Death Clan Destroyer
+-----------------------------------
+local ID = zones[xi.zone.QUBIA_ARENA]
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addMod(xi.mod.REGAIN, 100)
+    mob:setMobMod(xi.mobMod.HP_STANDBACK, 60)
+end
+
+entity.onMobFight = function(mob, target)
+    local inst = mob:getBattlefield():getArea()
+    local instOffset = ID.mob.WARLORD_ROJGNOJ + (14 * (inst - 1))
+    mob:setMP(9999)
+
+    -- queue curaga II on any sleeping ally
+    for i = instOffset + 3, instOffset + 12 do
+        local allyMob = GetMobByID(i)
+        if allyMob and allyMob:getCurrentAction() == xi.action.category.SLEEP then
+            if not xi.combat.behavior.isEntityBusy(mob) then
+                if mob:getLocalVar('cooldown') == 0 then
+                    mob:castSpell(8, allyMob)
+                    mob:setLocalVar('cooldown', 20)
+                end
+            else
+                mob:setLocalVar('cooldown', 20)
+            end
+        end
+    end
+
+    if mob:getLocalVar('cooldown') > 0 then
+        mob:setLocalVar('cooldown', mob:getLocalVar('cooldown') - 1)
+    end
+end
+
+return entity

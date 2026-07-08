@@ -1,0 +1,36 @@
+-----------------------------------
+-- ID: 5929
+-- Item: Ojo Rice Ball
+-- Food Effect: 60 Mins, All Races
+-----------------------------------
+-- HP +50
+-- Dexterity +5
+-- Vitality +5
+-- Character +5
+-- Effect with enhancing equipment (Note: these are latents on gear with the effect)
+-- Attack +60
+-- Defense +40
+-- Triple Attack +2%
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 3600, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_HP, 50)
+    effect:addMod(xi.mod.DEX, 5)
+    effect:addMod(xi.mod.VIT, 5)
+    effect:addMod(xi.mod.CHR, 5)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

@@ -1,0 +1,20 @@
+-----------------------------------
+-- Water Blade
+-- Description: Applies Enwater and absorbs Water damage.
+-- Type: Enhancing
+-- Used only by Kam'lanaut. Enwater aspect adds 70+ to his melee attacks.
+-----------------------------------
+---@type TMobSkill
+local mobskillObject = {}
+
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    return 0
+end
+
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.ENWATER, 65, 0, 30))
+
+    return xi.effect.ENWATER
+end
+
+return mobskillObject

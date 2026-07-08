@@ -1,0 +1,19 @@
+-----------------------------------
+-- Ability: Assassin's Charge
+-- Will triple your next attack.
+-- Obtained: Thief Level 75
+-- Recast Time: 5:00
+-- Duration: 1:00 minute
+-----------------------------------
+---@type TAbility
+local abilityObject = {}
+
+abilityObject.onAbilityCheck = function(player, target, ability)
+    return 0, 0
+end
+
+abilityObject.onUseAbility = function(player, target, ability, action)
+    return xi.job_utils.thief.useAssassinsCharge(player, target, ability, action)
+end
+
+return abilityObject

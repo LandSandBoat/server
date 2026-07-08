@@ -1,0 +1,32 @@
+-----------------------------------
+-- ID: 4343
+-- Item: witch_kabob
+-- Food Effect: 1hour, All Races
+-----------------------------------
+-- Magic Points 15
+-- Mind 4
+-- Enmity -1
+-- MP Recovered While Healing 3
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 3600, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_MP, 15)
+    effect:addMod(xi.mod.MND, 4)
+    effect:addMod(xi.mod.ENMITY, -1)
+    effect:addMod(xi.mod.MPHEAL, 3)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

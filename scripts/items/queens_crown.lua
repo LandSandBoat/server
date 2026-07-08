@@ -1,0 +1,39 @@
+-----------------------------------
+-- ID: 6064
+-- Item: queens_crown
+-- Food Effect: 240 Min, All Races
+-----------------------------------
+-- MP+6% (Upper limit 55)
+-- INT+4
+-- MND+3
+-- CHR+2
+-- STR-2
+-- MACC+4
+-- MAB+7
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 14400, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_MPP, 6)
+    effect:addMod(xi.mod.FOOD_MP_CAP, 55)
+    effect:addMod(xi.mod.INT, 4)
+    effect:addMod(xi.mod.MND, 3)
+    effect:addMod(xi.mod.CHR, 2)
+    effect:addMod(xi.mod.STR, -2)
+    effect:addMod(xi.mod.MACC, 4)
+    effect:addMod(xi.mod.MATT, 7)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

@@ -1,0 +1,36 @@
+-----------------------------------
+-- ID: 5551
+-- Item: Roll of Sylvan Excursion
+-- Food Effect: 4 Hrs, All Races
+-----------------------------------
+-- TODO: Group Effect
+-- HP +10
+-- MP +3% Cap 15
+-- Intelligence +3
+-- HP Recovered while healing +2
+-- MP Recovered while healing +5
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 14400, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_MPP, 3)
+    effect:addMod(xi.mod.FOOD_MP_CAP, 15)
+    effect:addMod(xi.mod.FOOD_HP, 10)
+    effect:addMod(xi.mod.INT, 3)
+    effect:addMod(xi.mod.HPHEAL, 2)
+    effect:addMod(xi.mod.MPHEAL, 5)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

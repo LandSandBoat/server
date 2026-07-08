@@ -1,0 +1,27 @@
+local ID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
+
+return {
+    ['_4n2']         = { messageSpecial = ID.text.SEEMS_LOCKED },
+    ['_4n3']         = { messageSpecial = ID.text.SEEMS_LOCKED },
+    ['_4n4']         = { messageSpecial = ID.text.SEEMS_LOCKED },
+    ['_4n5']         = { messageSpecial = ID.text.SEEMS_LOCKED },
+    ['_4n6']         = { messageSpecial = ID.text.SEEMS_LOCKED },
+    ['_4n7']         = { messageSpecial = ID.text.SEEMS_LOCKED },
+    ['_4n8']         = { messageSpecial = ID.text.SEEMS_LOCKED },
+    ['_4n9']         = { messageSpecial = ID.text.SEEMS_LOCKED },
+    ['_4na']         = { messageSpecial = ID.text.SEEMS_LOCKED },
+    ['_4nb']         = { messageSpecial = ID.text.SEEMS_LOCKED },
+    ['_4nc']         = { messageSpecial = ID.text.SEEMS_LOCKED },
+    ['_4nd']         = { messageSpecial = ID.text.SEEMS_LOCKED },
+    ['_4ne']         = { event          = 18 },
+    ['_4nf']         = { messageSpecial = ID.text.SEEMS_LOCKED },
+    ['_4ng']         = { messageSpecial = ID.text.SEEMS_LOCKED },
+    ['_4nh']         = { messageSpecial = ID.text.SEEMS_LOCKED },
+    ['_4ni']         = { messageSpecial = ID.text.SEEMS_LOCKED },
+    ['_4nj']         = { messageSpecial = ID.text.SEEMS_LOCKED },
+    ['_4nk']         = { messageSpecial = ID.text.SEEMS_LOCKED },
+    ['Chumia']       = { text           = ID.text.CHUMIA_DIALOG },
+    ['Couchatorage'] = { event          =  9 },
+    ['Novalmauge']   = { event          = 10 },
+    ['qm1']          = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
+}

@@ -1,0 +1,511 @@
+-----------------------------------
+-- Enfeebling Spell Utilities
+-- Used for spells that deal negative status effects upon targets.
+-----------------------------------
+require('scripts/globals/combat/magic_burst')
+require('scripts/globals/combat/magic_hit_rate')
+-----------------------------------
+xi = xi or {}
+xi.spells = xi.spells or {}
+xi.spells.enfeebling = xi.spells.enfeebling or {}
+-----------------------------------
+local column =
+{
+    EFFECT_ID      = 1,
+    EFFECT_TIER    = 2,
+    STAT_USED      = 3,
+    BASE_POTENCY   = 4,
+    BASE_TICK      = 5,
+    BASE_DURATION  = 6,
+    MESSAGE_OFFSET = 7,
+    SABOTEUR       = 8,
+    BONUS_MACC     = 9,
+}
+
+local pTable =
+{
+    -- Black Magic
+    [xi.magic.spell.BIND          ] = { xi.effect.BIND,               1, xi.mod.INT,    0,   0,  60, 0, false,   0 },
+    [xi.magic.spell.BINDGA        ] = { xi.effect.BIND,               1, xi.mod.INT,    0,   0,  60, 0, false,   0 },
+    [xi.magic.spell.BLIND         ] = { xi.effect.BLINDNESS,          1, xi.mod.INT,    0,   0, 180, 0, true,    0 },
+    [xi.magic.spell.BLIND_II      ] = { xi.effect.BLINDNESS,          3, xi.mod.INT,    0,   0, 180, 0, true,    0 },
+    [xi.magic.spell.BLINDGA       ] = { xi.effect.BLINDNESS,          2, xi.mod.INT,    0,   0, 180, 0, true,    0 },
+    [xi.magic.spell.BREAK         ] = { xi.effect.PETRIFICATION,      1, xi.mod.INT,    1,   0,  30, 0, false,   0 },
+    [xi.magic.spell.BREAKGA       ] = { xi.effect.PETRIFICATION,      2, xi.mod.INT,    1,   0,  30, 0, false,   0 },
+    [xi.magic.spell.BURN          ] = { xi.effect.BURN,               1, xi.mod.INT,    0,   3,  90, 1, true,    0 },
+    [xi.magic.spell.CHOKE         ] = { xi.effect.CHOKE,              1, xi.mod.INT,    0,   3,  90, 1, true,    0 },
+    [xi.magic.spell.CURSE         ] = { xi.effect.CURSE_I,            1, xi.mod.INT,   50,   0, 300, 0, false,   0 },
+    [xi.magic.spell.DISPEL        ] = { xi.effect.NONE,               1, xi.mod.INT,    0,   0,   0, 0, false, 175 },
+    [xi.magic.spell.DISPELGA      ] = { xi.effect.NONE,               1, xi.mod.INT,    0,   0,   0, 0, false,   0 },
+    [xi.magic.spell.DISTRACT      ] = { xi.effect.EVASION_DOWN,       1, xi.mod.MND,    0,   0, 120, 0, true,  150 },
+    [xi.magic.spell.DISTRACT_II   ] = { xi.effect.EVASION_DOWN,       2, xi.mod.MND,    0,   0, 120, 0, true,  150 },
+    [xi.magic.spell.DISTRACT_III  ] = { xi.effect.EVASION_DOWN,       3, xi.mod.MND,    0,   0, 120, 0, true,  150 },
+    [xi.magic.spell.DROWN         ] = { xi.effect.DROWN,              1, xi.mod.INT,    0,   3,  90, 1, true,    0 },
+    [xi.magic.spell.FRAZZLE       ] = { xi.effect.MAGIC_EVASION_DOWN, 1, xi.mod.MND,    0,   0, 120, 0, true,  150 },
+    [xi.magic.spell.FRAZZLE_II    ] = { xi.effect.MAGIC_EVASION_DOWN, 2, xi.mod.MND,    0,   0, 120, 0, true,  150 },
+    [xi.magic.spell.FRAZZLE_III   ] = { xi.effect.MAGIC_EVASION_DOWN, 3, xi.mod.MND,    0,   0, 120, 0, true,  150 },
+    [xi.magic.spell.FROST         ] = { xi.effect.FROST,              1, xi.mod.INT,    0,   3,  90, 1, true,    0 },
+    [xi.magic.spell.GRAVITY       ] = { xi.effect.WEIGHT,             1, xi.mod.INT,   26,   0, 120, 0, true,    0 },
+    [xi.magic.spell.GRAVITY_II    ] = { xi.effect.WEIGHT,             2, xi.mod.INT,   32,   0, 180, 0, true,    0 },
+    [xi.magic.spell.GRAVIGA       ] = { xi.effect.WEIGHT,             1, xi.mod.INT,   50,   0, 120, 0, true,    0 },
+    [xi.magic.spell.POISON        ] = { xi.effect.POISON,             1, xi.mod.INT,    0,   3,  90, 0, true,    0 },
+    [xi.magic.spell.POISON_II     ] = { xi.effect.POISON,             2, xi.mod.INT,    0,   3, 120, 0, true,   30 },
+    [xi.magic.spell.POISON_III    ] = { xi.effect.POISON,             3, xi.mod.INT,    0,   3, 150, 0, true,    0 },
+    [xi.magic.spell.POISONGA      ] = { xi.effect.POISON,             1, xi.mod.INT,    0,   3,  90, 0, true,    0 },
+    [xi.magic.spell.POISONGA_II   ] = { xi.effect.POISON,             1, xi.mod.INT,    0,   3, 120, 0, true,    0 },
+    [xi.magic.spell.POISONGA_III  ] = { xi.effect.POISON,             1, xi.mod.INT,    0,   3, 150, 0, true,    0 },
+    [xi.magic.spell.RASP          ] = { xi.effect.RASP,               1, xi.mod.INT,    0,   3,  90, 1, true,    0 },
+    [xi.magic.spell.SHOCK         ] = { xi.effect.SHOCK,              1, xi.mod.INT,    0,   3,  90, 1, true,    0 },
+    [xi.magic.spell.SLEEP         ] = { xi.effect.SLEEP_I,            1, xi.mod.INT,    1,   0,  60, 0, false,   0 },
+    [xi.magic.spell.SLEEP_II      ] = { xi.effect.SLEEP_I,            2, xi.mod.INT,    2,   0,  90, 0, false,   0 },
+    [xi.magic.spell.SLEEPGA       ] = { xi.effect.SLEEP_I,            1, xi.mod.INT,    1,   0,  60, 0, false,   0 },
+    [xi.magic.spell.SLEEPGA_II    ] = { xi.effect.SLEEP_I,            2, xi.mod.INT,    2,   0,  90, 0, false,   0 },
+    [xi.magic.spell.STUN          ] = { xi.effect.STUN,               1, xi.mod.INT,    1,   0,   5, 0, false, 200 },
+    [xi.magic.spell.VIRUS         ] = { xi.effect.PLAGUE,             1, xi.mod.INT,    5,   3,  60, 0, false,   0 },
+
+    -- Black magic Helixes
+    [xi.magic.spell.GEOHELIX      ] = { xi.effect.HELIX,              1, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.GEOHELIX_II   ] = { xi.effect.HELIX,              2, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.HYDROHELIX    ] = { xi.effect.HELIX,              1, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.HYDROHELIX_II ] = { xi.effect.HELIX,              2, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.ANEMOHELIX    ] = { xi.effect.HELIX,              1, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.ANEMOHELIX_II ] = { xi.effect.HELIX,              2, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.PYROHELIX     ] = { xi.effect.HELIX,              1, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.PYROHELIX_II  ] = { xi.effect.HELIX,              2, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.CRYOHELIX     ] = { xi.effect.HELIX,              1, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.CRYOHELIX_II  ] = { xi.effect.HELIX,              2, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.IONOHELIX     ] = { xi.effect.HELIX,              1, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.IONOHELIX_II  ] = { xi.effect.HELIX,              2, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.NOCTOHELIX    ] = { xi.effect.HELIX,              1, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.NOCTOHELIX_II ] = { xi.effect.HELIX,              2, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.LUMINOHELIX   ] = { xi.effect.HELIX,              1, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+    [xi.magic.spell.LUMINOHELIX_II] = { xi.effect.HELIX,              2, xi.mod.INT,    0,  10,  30, 0, false,   0 },
+
+    -- White Magic
+    [xi.magic.spell.ADDLE         ] = { xi.effect.ADDLE,              1, xi.mod.MND,   20,   0, 180, 0, true,   20 },
+    [xi.magic.spell.ADDLE_II      ] = { xi.effect.ADDLE,              2, xi.mod.MND,   50,   0, 180, 0, true,   20 },
+    [xi.magic.spell.FLASH         ] = { xi.effect.FLASH,              1, xi.mod.MND,    0,   0,  12, 0, true,  512 },
+    [xi.magic.spell.INUNDATION    ] = { xi.effect.INUNDATION,         1, xi.mod.MND,    1,   0, 300, 0, false,   0 },
+    [xi.magic.spell.PARALYZE      ] = { xi.effect.PARALYSIS,          1, xi.mod.MND,    0,   0, 120, 0, true,  -10 },
+    [xi.magic.spell.PARALYZE_II   ] = { xi.effect.PARALYSIS,          3, xi.mod.MND,    0,   0, 120, 0, true,    0 },
+    [xi.magic.spell.PARALYGA      ] = { xi.effect.PARALYSIS,          2, xi.mod.MND,    0,   0, 120, 0, true,    0 },
+    [xi.magic.spell.REPOSE        ] = { xi.effect.SLEEP_I,            2, xi.mod.MND,    2,   0,  90, 1, false,   0 },
+    [xi.magic.spell.SILENCE       ] = { xi.effect.SILENCE,            1, xi.mod.MND,    1,   0, 120, 0, false,   0 },
+    [xi.magic.spell.SILENCEGA     ] = { xi.effect.SILENCE,            2, xi.mod.MND,    1,   0, 120, 0, false,   0 },
+    [xi.magic.spell.SLOW          ] = { xi.effect.SLOW,               3, xi.mod.MND,    0,   0, 180, 0, true,   10 },
+    [xi.magic.spell.SLOW_II       ] = { xi.effect.SLOW,               7, xi.mod.MND,    0,   0, 180, 0, true,   10 },
+    [xi.magic.spell.SLOWGA        ] = { xi.effect.SLOW,               8, xi.mod.MND,    0,   0, 180, 0, true,    0 },
+
+    -- Ninjutsu
+    [xi.magic.spell.AISHA_ICHI    ] = { xi.effect.ATTACK_DOWN,        1, xi.mod.INT,   15,   0, 120, 1, false,   0 },
+    [xi.magic.spell.DOKUMORI_ICHI ] = { xi.effect.POISON,             1, xi.mod.INT,    3,   3,  60, 0, false,   0 },
+    [xi.magic.spell.DOKUMORI_NI   ] = { xi.effect.POISON,             2, xi.mod.INT,   10,   3, 120, 0, false,   0 },
+    [xi.magic.spell.DOKUMORI_SAN  ] = { xi.effect.POISON,             3, xi.mod.INT,   20,   3, 360, 0, false,   0 },
+    [xi.magic.spell.HOJO_ICHI     ] = { xi.effect.SLOW,               3, xi.mod.INT, 1465,   0, 180, 0, false,   0 },
+    [xi.magic.spell.HOJO_NI       ] = { xi.effect.SLOW,               4, xi.mod.INT, 1953,   0, 300, 0, false,   0 },
+    [xi.magic.spell.HOJO_SAN      ] = { xi.effect.SLOW,               7, xi.mod.INT, 2930,   0, 420, 0, false,   0 },
+    [xi.magic.spell.JUBAKU_ICHI   ] = { xi.effect.PARALYSIS,          1, xi.mod.INT,   20,   0, 180, 1, false,   0 },
+    [xi.magic.spell.JUBAKU_NI     ] = { xi.effect.PARALYSIS,          2, xi.mod.INT,   30,   0, 300, 1, false,   0 },
+    [xi.magic.spell.JUBAKU_SAN    ] = { xi.effect.PARALYSIS,          3, xi.mod.INT,   35,   0, 420, 1, false,   0 },
+    [xi.magic.spell.KURAYAMI_ICHI ] = { xi.effect.BLINDNESS,          1, xi.mod.INT,   20,   0, 180, 0, false,   0 },
+    [xi.magic.spell.KURAYAMI_NI   ] = { xi.effect.BLINDNESS,          2, xi.mod.INT,   30,   0, 300, 0, false,   0 },
+    [xi.magic.spell.KURAYAMI_SAN  ] = { xi.effect.BLINDNESS,          3, xi.mod.INT,   40,   0, 420, 0, false,   0 },
+    [xi.magic.spell.YURIN_ICHI    ] = { xi.effect.INHIBIT_TP,         1, xi.mod.INT,   10,   0, 180, 1, false,   0 },
+}
+
+local function getElementalDebuffPotency(caster, statUsed)
+    local potency    = 1
+    local casterStat = caster:getStat(statUsed)
+
+    if casterStat > 150 then
+        potency = potency + 4
+    elseif casterStat > 100 then
+        potency = potency + 3
+    elseif casterStat > 70 then
+        potency = potency + 2
+    elseif casterStat > 40 then
+        potency = potency + 1
+    end
+
+    potency = potency + caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_EFFECT) + caster:getMod(xi.mod.ELEMENTAL_DEBUFF_EFFECT) / 2
+
+    return potency
+end
+
+local function executeImmunobreak(caster, target, spell, effectId)
+    -- Early return: Immunobreak didn't exist in lvl 75 era.
+    if not xi.settings.main.ENABLE_IMMUNOBREAK then
+        return
+    end
+
+    -- Early return: Only players can immunobreak. (NOTE: Any job can proc Immunobreaks.)
+    if not caster:isPC() then
+        return
+    end
+
+    -- Early return: Only non-players can be immunobroken.
+    if not target:isMob() then
+        return
+    end
+
+    -- Early return: Only Enfeebling magic can immunobreak.
+    if spell:getSkillType() ~= xi.skill.ENFEEBLING_MAGIC then
+        return
+    end
+
+    -- Early return: This effect doesn't have an immunobreak associated modifier.
+    local immunobreakModId = xi.data.statusEffect.getAssociatedImmunobreakModifier(effectId)
+    if immunobreakModId == 0 then
+        return
+    end
+
+    -- Fetch resistance rank modifier (Either effect-specific or elemental)
+    local resistanceRankModId = xi.data.statusEffect.getAssociatedResistanceRankModifier(effectId, spell:getElement())
+    if resistanceRankModId == 0 then -- If it's an effect and this is 0, try with element.
+        resistanceRankModId = xi.data.element.getElementalResistanceRankModifier(spell:getElement())
+    end
+
+    -- Early return: Only mobs with a resistance rank of 6+ (x <= 30% EEM) can be immunobroken.
+    local baseResistanceRank  = target:getMod(resistanceRankModId)
+    if baseResistanceRank < 6 then
+        return
+    end
+
+    -- Early return: Resistance rank cannot be lowered (and wont trigger) bellow rank 4 (50% EEM)
+    local immunobreakValue    = target:getMod(immunobreakModId)
+    local finalResistanceRank = baseResistanceRank - immunobreakValue
+    if finalResistanceRank <= 4 then
+        return
+    end
+
+    -- Calculate Immunobreack chance.
+    local immunobreakChance = caster:getMerit(xi.merit.IMMUNOBREAK_CHANCE) + 20 / (immunobreakValue + 1) -- TODO: Add immunobreak gear?
+    if math.randomInt(1, 100) > immunobreakChance then
+        return
+    end
+
+    -- Apply immunobreak effect (lower resistance rank) and apply special message.
+    target:setMod(immunobreakModId, immunobreakValue + 1) -- TODO: Add equipment modifier (x2) here (Chironic Hose).
+    spell:setModifier(xi.msg.actionModifier.IMMUNOBREAK)
+end
+
+-- Calculate potency.
+xi.spells.enfeebling.calculatePotency = function(caster, target, spellId, spellEffect, skillType, statUsed)
+    local potency    = pTable[spellId][column.BASE_POTENCY]
+    local statDiff   = caster:getStat(statUsed) - target:getStat(statUsed)
+    local skillLevel = caster:getSkillLevel(skillType)
+
+    -- Calculate base potency for spells.
+    switch (spellEffect) : caseof
+    {
+        [xi.effect.ADDLE] = function()
+            potency = potency + utils.clamp(math.floor(statDiff / 5), 0, 20) -- Values from JP wiki: http://wiki.ffo.jp/html/21127.html
+        end,
+
+        [xi.effect.BLINDNESS] = function()
+            statDiff = caster:getStat(statUsed) - target:getStat(xi.mod.MND)
+
+            if spellId == xi.magic.spell.BLIND_II then
+                potency = utils.clamp(statDiff * 0.375 + 49, 19, 94) -- Values from JP wiki: http://wiki.ffo.jp/html/3449.html
+            else
+                potency = utils.clamp(statDiff * 0.225 + 23, 5, 50)  -- Values from JP wiki: http://wiki.ffo.jp/html/834.html
+            end
+        end,
+
+        [xi.effect.EVASION_DOWN] = function()
+            if spellId == xi.magic.spell.DISTRACT then
+                potency = utils.clamp(skillLevel / 5, 0, 25) + utils.clamp(statDiff / 5, 0, 10)
+            elseif spellId == xi.magic.spell.DISTRACT_II then
+                potency = utils.clamp(skillLevel * 4 / 35, 0, 40) + utils.clamp(statDiff / 5, 0, 10)
+            else
+                potency = utils.clamp(skillLevel / 5, 0, 120) + utils.clamp(statDiff / 5, 0, 10)
+            end
+        end,
+
+        [xi.effect.MAGIC_EVASION_DOWN] = function()
+            if spellId == xi.magic.spell.FRAZZLE then
+                potency = utils.clamp(skillLevel / 5, 0, 25) + utils.clamp(statDiff / 5, 0, 10)
+            elseif spellId == xi.magic.spell.FRAZZLE_II then
+                potency = utils.clamp(skillLevel * 4 / 35, 0, 40) + utils.clamp(statDiff / 5, 0, 10)
+            else
+                potency = utils.clamp(skillLevel / 5, 0, 120) + utils.clamp(statDiff / 5, 0, 10)
+            end
+        end,
+
+        [xi.effect.PARALYSIS] = function()
+            if spellId == xi.magic.spell.PARALYZE_II then
+                potency = utils.clamp(statDiff / 4 + 24, 14, 34) -- Values from JP wiki: https://wiki.ffo.jp/html/3453.html
+            else
+                potency = utils.clamp(statDiff / 4 + 15, 5, 25)
+            end
+        end,
+
+        [xi.effect.POISON] = function()
+            if
+                spellId == xi.magic.spell.POISON or
+                spellId == xi.magic.spell.POISONGA
+            then
+                potency = math.max(skillLevel / 25, 1)
+                if skillLevel > 400 then
+                    potency = math.min((skillLevel - 225) / 5, 55) -- Cap is 55 hp/tick.
+                end
+            elseif
+                spellId == xi.magic.spell.POISON_II or
+                spellId == xi.magic.spell.POISONGA_II
+            then
+                potency = math.max(skillLevel / 20, 4)
+                if skillLevel > 400 then
+                    potency = skillLevel * 49 / 183 - 55 -- No cap can be reached yet
+                end
+            else
+                potency = skillLevel / 10 + 1
+            end
+        end,
+
+        [xi.effect.SLOW] = function()
+            if spellId == xi.magic.spell.SLOW_II then
+                potency = utils.clamp(statDiff * 226 / 15 + 2780, 1650, 3910) -- https://wiki.ffo.jp/html/3454.html
+            else
+                potency = utils.clamp(statDiff * 73 / 5 + 1825, 730, 2920)
+            end
+        end,
+
+        [xi.effect.BURN] = function()
+            potency = getElementalDebuffPotency(caster, statUsed)
+        end,
+
+        [xi.effect.CHOKE] = function()
+            potency = getElementalDebuffPotency(caster, statUsed)
+        end,
+
+        [xi.effect.DROWN] = function()
+            potency = getElementalDebuffPotency(caster, statUsed)
+        end,
+
+        [xi.effect.FROST] = function()
+            potency = getElementalDebuffPotency(caster, statUsed)
+        end,
+
+        [xi.effect.RASP] = function()
+            potency = getElementalDebuffPotency(caster, statUsed)
+        end,
+
+        [xi.effect.SHOCK] = function()
+            potency = getElementalDebuffPotency(caster, statUsed)
+        end,
+    }
+
+    ---@cast potency integer
+    potency = math.floor(potency)
+
+    -- Apply Saboteur Effect when applicable.
+    local applySaboteur = pTable[spellId][column.SABOTEUR]
+
+    if
+        applySaboteur and
+        caster:hasStatusEffect(xi.effect.SABOTEUR) and
+        skillType == xi.skill.ENFEEBLING_MAGIC
+    then
+        if target:isNM() then
+            potency = math.floor(potency * (1.3 + caster:getMod(xi.mod.ENHANCES_SABOTEUR)))
+        else
+            potency = math.floor(potency * (2 + caster:getMod(xi.mod.ENHANCES_SABOTEUR)))
+        end
+    end
+
+    -- General Enfeebling potency modifier.
+    potency = math.floor(potency * (1 + caster:getMod(xi.mod.ENF_MAG_POTENCY) / 100))
+
+    return potency
+end
+
+-- Calculate duration before resist
+xi.spells.enfeebling.calculateDuration = function(caster, target, spellId, spellEffect, skillType)
+    local duration = pTable[spellId][column.BASE_DURATION] -- Get base duration.
+
+    if spellEffect == xi.effect.BIND then
+        duration = math.randomInt(13, 60)
+    end
+
+    -- Additions to base duration.
+    if
+        spellEffect == xi.effect.BURN or
+        spellEffect == xi.effect.CHOKE or
+        spellEffect == xi.effect.DROWN or
+        spellEffect == xi.effect.FROST or
+        spellEffect == xi.effect.RASP or
+        spellEffect == xi.effect.SHOCK
+    then
+        duration = duration + caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_DURATION) -- TODO: Add BLM Toban gear effect (duration) here.
+
+    elseif spellEffect == xi.effect.HELIX then
+        local casterLevel = caster:getMainLvl()
+
+        if casterLevel >= 60 then
+            duration = duration + 60
+        elseif casterLevel >= 40 then
+            duration = duration + 30
+        end
+
+        if caster:hasStatusEffect(xi.effect.DARK_ARTS) then
+            duration = duration + 3 * caster:getJobPointLevel(xi.jp.DARK_ARTS_EFFECT)
+        end
+
+        duration = duration + caster:getMod(xi.mod.HELIX_DURATION)
+    end
+
+    if skillType == xi.skill.ENFEEBLING_MAGIC then
+        if caster:hasStatusEffect(xi.effect.SABOTEUR) then
+            if target:isNM() then
+                duration = duration * 1.25
+            else
+                duration = duration * 2
+            end
+        end
+
+        -- After Saboteur according to bg-wiki
+        if caster:getMainJob() == xi.job.RDM then
+            -- RDM Merit: Enfeebling Magic Duration
+            duration = duration + caster:getMerit(xi.merit.ENFEEBLING_MAGIC_DURATION)
+
+            -- RDM Job Point: Enfeebling Magic Duration
+            duration = duration + caster:getJobPointLevel(xi.jp.ENFEEBLE_DURATION)
+
+            -- RDM Job Point: Stymie effect
+            if caster:hasStatusEffect(xi.effect.STYMIE) then
+                duration = duration + caster:getJobPointLevel(xi.jp.STYMIE_EFFECT)
+            end
+        end
+
+        duration = math.floor(duration * (1 + caster:getMod(xi.mod.ENF_MAG_DURATION) / 100))
+    end
+
+    ---@cast duration integer
+    return math.floor(duration)
+end
+
+-- Main function, called by spell scripts
+xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
+    local spellId      = spell:getID()
+    local spellElement = spell:getElement()
+    local skillType    = spell:getSkillType()
+    local spellEffect  = pTable[spellId][column.EFFECT_ID]
+    local tier         = pTable[spellId][column.EFFECT_TIER] or 0
+
+    ------------------------------
+    -- STEP 1: Check spell nullification.
+    ------------------------------
+    if xi.data.statusEffect.isTargetImmune(target, spellEffect, spellElement) then
+        spell:setMsg(xi.msg.basic.MAGIC_COMPLETE_RESIST)
+        return spellEffect
+    end
+
+    -- Check trait nullification trigger.
+    if xi.data.statusEffect.isTargetResistant(caster, target, spellEffect) then
+        spell:setModifier(xi.msg.actionModifier.RESIST)
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
+        return spellEffect
+    end
+
+    -- Target already has an status effect that nullifies current.
+    if xi.data.statusEffect.isEffectNullified(target, spellEffect, tier) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return spellEffect
+    end
+
+    ------------------------------
+    -- STEP 2: Calculate resist tiers.
+    ------------------------------
+    local spellGroup = spell:getSpellGroup()
+    local statUsed   = pTable[spellId][column.STAT_USED]
+    local message    = pTable[spellId][column.MESSAGE_OFFSET]
+    local bonusMacc  = pTable[spellId][column.BONUS_MACC]
+    local resistRate = xi.combat.magicHitRate.calculateResistRate(caster, target, spellGroup, skillType, 0, spellElement, statUsed, spellEffect, bonusMacc)
+
+    if spellEffect ~= xi.effect.NONE then
+        -- Stymie
+        if
+            skillType == xi.skill.ENFEEBLING_MAGIC and
+            caster:hasStatusEffect(xi.effect.STYMIE)
+        then
+            resistRate = 1
+
+        -- Fealty
+        elseif target:hasStatusEffect(xi.effect.FEALTY) then
+            resistRate = 0
+        end
+    end
+
+    ------------------------------
+    -- STEP 3: Check if spell resists.
+    ------------------------------
+    if not xi.data.statusEffect.isResistRateSuccessfull(spellEffect, resistRate, 0) then
+        executeImmunobreak(caster, target, spell, spellEffect)
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
+
+        return spellEffect
+    end
+
+    ------------------------------
+    -- STEP 4: Calculate Duration, Potency, Tick and Sub-Potency (additional effects)
+    ------------------------------
+    local potency    = xi.spells.enfeebling.calculatePotency(caster, target, spellId, spellEffect, skillType, statUsed)
+    local subpotency = 0
+    local duration   = math.floor(xi.spells.enfeebling.calculateDuration(caster, target, spellId, spellEffect, skillType) * resistRate)
+    local tick       = pTable[spellId][column.BASE_TICK]
+
+    ------------------------------
+    -- STEP 5: Exceptions.
+    ------------------------------
+    -- Bind: Dependant on target speed.
+    -- Bind: Duration floor of 5 seconds.
+    if spellEffect == xi.effect.BIND then
+        potency = target:getSpeed()
+        duration = utils.clamp(duration, 5, 60)
+
+    -- TODO: This is unnecesary, but, for now, we will comply with core.
+    elseif spellEffect == xi.effect.SLEEP_I then
+        subpotency = spellElement
+
+    -- Addle: Sub-effect -> Slows casting time.
+    elseif spellEffect == xi.effect.ADDLE then
+        subpotency = 20 + utils.clamp(math.floor((caster:getStat(statUsed) - target:getStat(statUsed)) / 5), 0, 20)
+
+    -- Break: Player petrification sucks.
+    elseif spellEffect == xi.effect.PETRIFICATION then
+        if caster:isPC() then
+            subpotency = 1
+        end
+
+    -- Dispel: It's special in that it has no real effect.
+    elseif spellEffect == xi.effect.NONE then
+        spellEffect = target:dispelStatusEffect()
+
+        if spellEffect == xi.effect.NONE then
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        else
+            spell:setMsg(xi.msg.basic.MAGIC_ERASE)
+        end
+
+        return spellEffect
+    end
+
+    ------------------------------
+    -- STEP 6: Final Operations.
+    ------------------------------
+    if target:addStatusEffect(spellEffect, { power = potency, duration = duration, origin = caster, tick = tick, subPower = subpotency, tier = tier }) then
+        -- Add "Magic Burst!" message
+        local magicBurstTier = xi.combat.magicBurst.getMagicBurstTier(target, spellElement)
+
+        if magicBurstTier > 0 then
+            spell:setMsg(xi.msg.basic.MAGIC_BURST_ENFEEB_IS - message * 3)
+            caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)
+        else
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS + message)
+        end
+    else
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+    end
+
+    return spellEffect
+end

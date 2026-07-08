@@ -1,0 +1,38 @@
+-----------------------------------
+-- ID: 5222
+-- Item: Bowl of Homemade Stew
+-- Food Effect: 30Min, All Races
+-----------------------------------
+-- Vitality 1
+-- Accuracy +12% (cap 80)
+-- Attack +10% (cap 40)
+-- Ranged Accuracy +12% (cap 80)
+-- Ranged Attack +10% (cap 40)
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 1800, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.VIT, 1)
+    effect:addMod(xi.mod.FOOD_ACCP, 12)
+    effect:addMod(xi.mod.FOOD_ACC_CAP, 80)
+    effect:addMod(xi.mod.FOOD_ATTP, 10)
+    effect:addMod(xi.mod.FOOD_ATT_CAP, 40)
+    effect:addMod(xi.mod.FOOD_RACCP, 12)
+    effect:addMod(xi.mod.FOOD_RACC_CAP, 80)
+    effect:addMod(xi.mod.FOOD_RATTP, 10)
+    effect:addMod(xi.mod.FOOD_RATT_CAP, 40)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

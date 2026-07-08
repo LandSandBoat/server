@@ -1,0 +1,37 @@
+-----------------------------------
+-- Binary Tap
+-- Family: Thinkers
+-- Description: Steals up to 2 buffs from a target.
+-----------------------------------
+---@type TMobSkill
+local mobskillObject = {}
+
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    return 0
+end
+
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    local dispel = nil
+    local count  = 0
+    local msg -- To be set later
+
+    for i = 1, 2 do
+        dispel = mob:stealStatusEffect(target, bit.bor(xi.effectFlag.DISPELABLE, xi.effectFlag.FOOD))
+
+        if dispel ~= 0 then
+            count = count + 1
+        end
+    end
+
+    if count == 0 then
+        msg = xi.msg.basic.SKILL_NO_EFFECT -- No effect
+    else
+        msg = xi.msg.basic.DISAPPEAR_NUM
+    end
+
+    skill:setMsg(msg)
+
+    return count
+end
+
+return mobskillObject

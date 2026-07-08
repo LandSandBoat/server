@@ -1,0 +1,62 @@
+-----------------------------------
+-- Trust: Cherukiki
+-----------------------------------
+-- Taillegeas : !pos 31.000 1.995 57.971 243
+-----------------------------------
+local ruludeID = zones[xi.zone.RULUDE_GARDENS]
+-----------------------------------
+
+local quest = HiddenQuest:new('TrustCherukiki')
+
+local trustMemory = function(player)
+    local memories = 0
+
+    -- TODO: Does she have these?
+
+    return memories
+end
+
+quest.sections =
+{
+    {
+        check = function(player, questVars, vars)
+            return xi.settings.main.ENABLE_TRUST_QUESTS == 1 and
+                xi.trust.hasPermit(player) and
+                not player:hasSpell(xi.magic.spell.CHERUKIKI) and
+                (
+                    -- Between these missions
+                    (player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.CHAINS_AND_BONDS and
+                    player:getCurrentMission(xi.mission.log_id.COP) < xi.mission.id.cop.THE_WARRIORS_PATH)
+                    or
+                    -- On Dawn, but past "the boss"
+                    (player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
+                    xi.mission.getVar(player, xi.mission.log_id.COP, xi.mission.id.cop.DAWN, 'Status') >= 2)
+                    or
+                    -- Past Dawn
+                    player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.DAWN
+                )
+        end,
+
+        [xi.zone.RULUDE_GARDENS] =
+        {
+            ['Taillegeas'] =
+            {
+                onTrigger = function(player, npc, trade)
+                    return quest:progressEvent(10235, 0, 0, 0, trustMemory(player))
+                end,
+            },
+
+            onEventFinish =
+            {
+                [10235] = function(player, csid, option, npc)
+                    if option == 2 and quest:complete(player) then
+                        player:addSpell(xi.magic.spell.CHERUKIKI, { silentLog = true })
+                        player:messageSpecial(ruludeID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.CHERUKIKI)
+                    end
+                end,
+            },
+        },
+    },
+}
+
+return quest

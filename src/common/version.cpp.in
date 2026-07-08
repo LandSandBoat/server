@@ -1,0 +1,26 @@
+#include "version.h"
+
+const char* version::GetGitSha()
+{
+    return "@GIT_SHA1@";
+}
+
+const char* version::GetGitBranch()
+{
+    return "@GIT_BRANCH@";
+}
+
+const char* version::GetGitDate()
+{
+    return "@GIT_DATE@";
+}
+
+const char* version::GetGitCommitSubject()
+{
+    return "@GIT_COMMIT_SUBJECT@";
+}
+
+const char* version::GetVersionString()
+{
+    return "@GIT_BRANCH@ (@GIT_SHA1@)";
+}

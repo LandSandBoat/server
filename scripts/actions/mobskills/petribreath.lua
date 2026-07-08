@@ -1,0 +1,21 @@
+-----------------------------------
+-- Petribreath
+-- Description: Petrifies targets within a fan-shaped area.
+-- Type: Breath
+-- Utsusemi/Blink absorb: Ignores shadows
+-- Range: Unknown  cone, Seen up to 15' distance.
+-----------------------------------
+---@type TMobSkill
+local mobskillObject = {}
+
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    return 0
+end
+
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PETRIFICATION, 1, 0, 120))
+
+    return xi.effect.PETRIFICATION
+end
+
+return mobskillObject

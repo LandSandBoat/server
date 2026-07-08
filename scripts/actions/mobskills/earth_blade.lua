@@ -1,0 +1,20 @@
+-----------------------------------
+-- Earth Blade
+-- Description: Applies Enstone and absorbs Earth damage.
+-- Type: Enhancing
+-- Used only by Kam'lanaut. Enstone aspect adds 70+ to his melee attacks.
+-----------------------------------
+---@type TMobSkill
+local mobskillObject = {}
+
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    return 0
+end
+
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.ENSTONE, 65, 0, 30))
+
+    return xi.effect.ENSTONE
+end
+
+return mobskillObject

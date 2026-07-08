@@ -1,0 +1,105 @@
+-----------------------------------
+-- Area: Monarch Linn
+--  Mob: Mammet-19 Epsilon
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+local forms =
+{
+    UNARMED = 0,
+    SWORD   = 1,
+    POLEARM = 2,
+    STAFF   = 3,
+}
+
+local tpMoves =
+{
+
+    [forms.UNARMED] =
+    {
+        xi.mobSkill.TRANSMOGRIFICATION,
+        xi.mobSkill.TREMOROUS_TREAD,
+    },
+    [forms.SWORD] =
+    {
+        xi.mobSkill.VELOCIOUS_BLADE,
+        xi.mobSkill.SONIC_BLADE,
+        xi.mobSkill.SCISSION_THRUST,
+    },
+    [forms.POLEARM] =
+    {
+        xi.mobSkill.PERCUSSIVE_FOIN,
+        xi.mobSkill.GRAVITY_WHEEL,
+        xi.mobSkill.MICROQUAKE,
+    },
+    [forms.STAFF] =
+    {
+        xi.mobSkill.PSYCHOMANCY,
+        xi.mobSkill.MIND_WALL,
+    },
+}
+
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 20)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setMagicCastingEnabled(false)
+end
+
+entity.onMobFight = function(mob, target)
+    -- Chages forms after 25-60 seconds randomly
+    local timeTracker = mob:getLocalVar('formTimeTracker')
+    local currentTime = mob:getBattleTime()
+    -- NOTE: Yellow Liquid applies xi.effect.FOOD to the Mammets
+    local cannotChangeForm = mob:hasStatusEffect(xi.effect.FOOD)
+
+    if
+        currentTime >= timeTracker and
+        not cannotChangeForm
+    then
+        -- Pick a new form --
+        local rand = math.randomInt(0, 3)
+        mob:setAnimationSub(rand)
+        switch (rand): caseof
+        {
+            [forms.UNARMED] = function()
+                mob:setMagicCastingEnabled(false)
+                mob:setDelay(240)
+                mob:setDamage(40, xi.slot.MAIN)
+            end,
+
+            [forms.SWORD] = function()
+                mob:setMagicCastingEnabled(false)
+                mob:setDelay(120)
+                mob:setDamage(40, xi.slot.MAIN)
+            end,
+
+            [forms.POLEARM] = function()
+                mob:setMagicCastingEnabled(false)
+                mob:setDelay(300)
+                mob:setDamage(75, xi.slot.MAIN)
+            end,
+
+            [forms.STAFF] = function()
+                mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
+                mob:setMagicCastingEnabled(true)
+                mob:setDelay(240)
+                mob:setDamage(40, xi.slot.MAIN)
+            end,
+        }
+        mob:setLocalVar('formTimeTracker', mob:getBattleTime() + math.randomInt(30, 60))
+    end
+end
+
+entity.onMobMobskillChoose = function(mob, target, skillId)
+    local form  = mob:getAnimationSub()
+    local moves = tpMoves[form]
+
+    return moves[math.randomInt(1, #moves)]
+end
+
+return entity

@@ -1,0 +1,30 @@
+-----------------------------------
+-- ID: 4281
+-- Item: red_hot_cracker
+-- Food Effect: 3Min, All Races
+-----------------------------------
+-- HP Recovered While Healing 9
+-- Beast Killer 12
+-- Resist Sleep 12
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 180, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.HPHEAL, 9)
+    effect:addMod(xi.mod.BEAST_KILLER, 12)
+    effect:addMod(xi.mod.SLEEPRES, 12)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

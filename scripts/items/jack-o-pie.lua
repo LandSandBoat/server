@@ -1,0 +1,32 @@
+-----------------------------------
+-- ID: 5644
+-- Item: jack-o-pie
+-- Food Effect: 1hour, All Races
+-----------------------------------
+-- MP 45
+-- CHR -1
+-- Intelligence 4
+-- hMP +1
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 3600, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_MP, 45)
+    effect:addMod(xi.mod.CHR, -1)
+    effect:addMod(xi.mod.INT, 4)
+    effect:addMod(xi.mod.MPHEAL, 1)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

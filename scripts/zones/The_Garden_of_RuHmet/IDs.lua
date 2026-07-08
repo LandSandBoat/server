@@ -1,0 +1,81 @@
+-----------------------------------
+-- Area: The_Garden_of_RuHmet
+-----------------------------------
+zones = zones or {}
+
+zones[xi.zone.THE_GARDEN_OF_RUHMET] =
+{
+    text =
+    {
+        ITEM_CANNOT_BE_OBTAINED       = 6386, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED                 = 6394, -- Obtained: <item>.
+        GIL_OBTAINED                  = 6395, -- Obtained <number> gil.
+        KEYITEM_OBTAINED              = 6397, -- Obtained key item: <keyitem>.
+        CARRIED_OVER_POINTS           = 7005, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY       = 7006, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
+        LOGIN_NUMBER                  = 7007, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED = 7027, -- Your party is unable to participate because certain members' levels are restricted.
+        TIME_IN_THE_BATTLEFIELD_IS_UP = 7077, -- Your time in the battlefield is up! Now exiting...
+        PARTY_MEMBERS_ARE_ENGAGED     = 7092, -- The battlefield where your party members are engaged in combat is locked. Access is denied.
+        MEMBERS_OF_YOUR_PARTY         = 7383, -- Currently, # members of your party (including yourself) have clearance to enter the battlefield.
+        MEMBERS_OF_YOUR_ALLIANCE      = 7384, -- Currently, # members of your alliance (including yourself) have clearance to enter the battlefield.
+        TIME_LIMIT_FOR_THIS_BATTLE_IS = 7386, -- The time limit for this battle is <number> minutes.
+        PARTY_MEMBERS_HAVE_FALLEN     = 7422, -- All party members have fallen in battle. Now leaving the battlefield.
+        THE_PARTY_WILL_BE_REMOVED     = 7429, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        CONQUEST_BASE                 = 7464, -- Tallying conquest results...
+        ENTERING_THE_BATTLEFIELD_FOR  = 7627, -- Entering the battlefield for [When Angels Fall/]!
+        YOU_MUST_MOVE_CLOSER          = 7635, -- You must move closer.
+        PORTAL_WONT_OPEN_ON_THIS_SIDE = 7637, -- The portal won't open from this side.
+        NO_NEED_INVESTIGATE           = 7643, -- There is no need to investigate further.
+        PORTAL_SEALED                 = 7672, -- The portal is firmly sealed by a mysterious energy.
+        FORTITUDE_QM                  = 7779, -- You hear something vaguely resembling a voice emanating from the depths of your soul. Bring...mem...ries...hrah...
+        UNKNOWN_PRESENCE              = 7780, -- You sense some unknown presence...
+        NONE_HOSTILE                  = 7781, -- You sense some unknown presence, but it does not seem hostile.
+        MENACING_CREATURES            = 7782, -- Menacing creatures appear out of nowhere!
+        SHEER_ANIMOSITY               = 7783, -- <name> is enveloped in sheer animosity!
+        FAITH_QM                      = 7785, -- You hear something vaguely resembling a voice emanating from the depths of your soul. Bring me...euv...recccepta...
+        HOMEPOINT_SET                 = 7788, -- Home point set!
+    },
+
+    mob =
+    {
+        AWAERN_DRG_GROUPS = -- First Aw'Aerns in each group. Used to randomize the mobID as the new placeholder.
+        {
+            16920777,
+            16920781,
+            16920785,
+            16920789,
+        },
+
+        AWAERN_DRK_GROUPS =
+        {
+            16920646, -- SW
+            16920651, -- NW
+            16920660, -- NE
+            16920665, -- SE
+        },
+
+        AWGHRAH_BIRD        = utils.slice(GetTableOfIDs('Awghrah'), 1, 57),
+        AWGHRAH_SPIDER      = utils.slice(GetTableOfIDs('Awghrah'), 58, 94),
+        AWGHRAH_HUMAN       = utils.slice(GetTableOfIDs('Awghrah'), 95),
+        IXAERN_DRK          = GetFirstID('Ixaern_DRK'),
+        IXAERN_DRG          = GetFirstID('Ixaern_DRG'),
+        IXZDEI_BLM          = GetFirstID('Ixzdei_BLM'),
+        IXZDEI_RDM          = GetFirstID('Ixzdei_RDM'),
+        JAILER_OF_FAITH     = GetFirstID('Jailer_of_Faith'),
+        JAILER_OF_FORTITUDE = GetFirstID('Jailer_of_Fortitude'),
+        KFGHRAH_WHM         = GetFirstID('Kfghrah_WHM'),
+        KFGHRAH_BLM         = GetFirstID('Kfghrah_BLM'),
+        QNZDEI_OFFSET       = GetFirstID('Qnzdei'),
+    },
+
+    npc =
+    {
+        QM_JAILER_OF_FORTITUDE = GetFirstID('qm_jailer_of_fortitude'),
+        QM_IXAERN_DRK          = GetFirstID('qm_ixaern_drk'),
+        QM_JAILER_OF_FAITH     = GetFirstID('qm_jailer_of_faith'),
+        QNZDEI_DOOR_OFFSET     = GetFirstID('_0zw'),
+    },
+}
+
+return zones[xi.zone.THE_GARDEN_OF_RUHMET]

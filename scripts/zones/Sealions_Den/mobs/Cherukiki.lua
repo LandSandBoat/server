@@ -1,0 +1,82 @@
+-----------------------------------
+-- Area: Sealion's Den
+--  Mob: Cherukiki
+-----------------------------------
+local ID = zones[xi.zone.SEALIONS_DEN]
+mixins = { require('scripts/mixins/warriors_path_taru') }
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:addMod(xi.mod.SILENCE_RES_RANK, 9)
+end
+
+entity.onMobSpawn = function(mob)
+    -- Leaving these mods here for visual: Tarus can't take damage, don't move, and have scripted fight interactions
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 60) -- cherukiki casts magic aproximately every 25 seconds
+    mob:setMobMod(xi.mobMod.NO_AGGRO, 1)
+    mob:setMobMod(xi.mobMod.NO_LINK, 1)
+    mob:addMod(xi.mod.UDMGPHYS, -10000)
+    mob:addMod(xi.mod.UDMGMAGIC, -10000)
+    mob:addMod(xi.mod.UDMGRANGE, -10000)
+    mob:addMod(xi.mod.UDMGBREATH, -10000)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+    mob:setLocalVar('cheru', 1)
+    mob:setMagicCastingEnabled(false)
+end
+
+entity.onMobEngage = function(mob, target)
+    mob:entityAnimationPacket('ouen') -- each taru will use this animation at the start of the fight
+    mob:setMobMod(xi.mobMod.NO_LINK, 0)
+    mob:setMobMod(xi.mobMod.NO_AGGRO, 0)
+    mob:setMagicCastingEnabled(true)
+    mob:setAnimationSub(1)
+end
+
+entity.onMobFight = function(mob, target)
+    local battlefield = mob:getBattlefield()
+    if not battlefield then
+        return
+    end
+
+    local bfID = battlefield:getArea()
+
+    local changetime = mob:getLocalVar('changetime')
+    local battletime = mob:getBattleTime()
+    if battlefield:getLocalVar('fireworks') == 1 then
+        mob:setMagicCastingEnabled(false)
+        if battletime - changetime >= 3 then
+            mob:entityAnimationPacket('ffr2')
+            mob:setAnimationSub(2)
+            mob:setLocalVar('changetime', mob:getBattleTime())
+        end
+    end
+
+    local tenzenObj = GetMobByID(ID.mob.TENZEN + (bfID - 1))
+    if
+        tenzenObj and
+        tenzenObj:getHPP() <= 70 and
+        battlefield:getLocalVar('fireworks') == 0
+    then
+        if mob:getLocalVar('cooldown') == 0 then
+            mob:castSpell(4, tenzenObj)
+            mob:setLocalVar('cooldown', 70) -- every 30 seconds Cherukiki will cast Cure IV on tenzen
+        end
+    else
+        mob:setLocalVar('cooldown', 70)
+    end
+
+    if mob:getLocalVar('cooldown') > 0 then
+        mob:setLocalVar('cooldown', mob:getLocalVar('cooldown') - 1)
+    end
+end
+
+entity.onMobDisengage = function(mob)
+    mob:setAnimationSub(2) -- laughing pose
+end
+
+return entity

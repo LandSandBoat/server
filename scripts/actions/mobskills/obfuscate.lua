@@ -1,0 +1,21 @@
+-----------------------------------
+-- Obfuscate
+-- Description: A blinding wave hits players in an area of effect.
+-- Type: Enfeebling
+-- Utsusemi/Blink absorb: Ignores shadows
+-- Range: 10' radial
+-----------------------------------
+---@type TMobSkill
+local mobskillObject = {}
+
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    return 0
+end
+
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.FLASH, 0, 0, math.randomInt(15, 20)))
+
+    return xi.effect.FLASH
+end
+
+return mobskillObject

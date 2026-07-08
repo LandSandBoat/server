@@ -1,0 +1,28 @@
+-----------------------------------
+-- ID: 14497
+-- Item: High Healing Harness
+-- Item Effect: Restores 90-105 HP
+-----------------------------------
+---@type TItem
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    if target:getHP() == target:getMaxHP() then
+        return xi.msg.basic.ITEM_UNABLE_TO_USE
+    end
+
+    return 0
+end
+
+itemObject.onItemUse = function(target)
+    local hpHeal = math.randomInt(90, 105)
+    local dif = target:getMaxHP() - target:getHP()
+    if hpHeal > dif then
+        hpHeal = dif
+    end
+
+    target:addHP(hpHeal)
+    target:messageBasic(xi.msg.basic.RECOVERS_HP, 0, hpHeal)
+end
+
+return itemObject

@@ -1,0 +1,34 @@
+-----------------------------------
+-- ID: 4405
+-- Item: Rice Ball
+-- Food Effect: 30Min, All Races
+-----------------------------------
+-- HP 10,
+-- Vit +2
+-- Dex -1
+-- hHP +1
+-- Effect with enhancing equipment (Note: these are latents on gear with the effect)
+-- Def +50
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 1800, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_HP, 10)
+    effect:addMod(xi.mod.VIT, 2)
+    effect:addMod(xi.mod.DEX, -1)
+    effect:addMod(xi.mod.HPHEAL, 1)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

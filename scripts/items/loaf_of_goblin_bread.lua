@@ -1,0 +1,30 @@
+-----------------------------------
+-- ID: 4458
+-- Item: loaf_of_goblin_bread
+-- Food Effect: 30Min, All Races
+-----------------------------------
+-- Health 7
+-- Vitality 1
+-- Charisma -5
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 1800, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_HP, 7)
+    effect:addMod(xi.mod.VIT, 1)
+    effect:addMod(xi.mod.CHR, -5)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

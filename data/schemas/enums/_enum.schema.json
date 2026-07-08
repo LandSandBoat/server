@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "_enum.schema.json",
+  "title": "Enum source",
+  "description": "Meta-schema for data/enums/*.yaml. Each file declares a typed enum: a `meta` block describing the C++/Lua surface, and a `values` map of name -> integer.",
+  "type": "object",
+  "unevaluatedProperties": false,
+  "required": ["meta", "values"],
+
+  "properties": {
+    "meta": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "required": ["cpp"],
+      "properties": {
+        "flags": {
+          "description": "True if values are bitmask flags.",
+          "type": "boolean",
+          "default": false
+        },
+        "cpp": {
+          "type": "object",
+          "unevaluatedProperties": false,
+          "required": ["underlying"],
+          "properties": {
+            "underlying": {
+              "description": "C++ underlying integer type for the enum class.",
+              "type": "string",
+              "enum": ["int8_t", "uint8_t", "int16_t", "uint16_t", "int32_t", "uint32_t", "int64_t", "uint64_t"]
+            },
+            "class": {
+              "description": "Generated C++ enum class name (PascalCase).",
+              "type": "string",
+              "pattern": "^[A-Z][A-Za-z0-9]*$"
+            },
+            "case": {
+              "description": "Case style for generated enum value names. `pascal` (default): `War`, `MysteryBox`. `screaming`: `WAR`, `MYSTERY_BOX`.",
+              "type": "string",
+              "enum": ["pascal", "screaming"],
+              "default": "pascal"
+            }
+          }
+        },
+        "lua": {
+          "type": "object",
+          "unevaluatedProperties": false,
+          "properties": {
+            "table": {
+              "description": "Lua table path the values are exported under. Example: `xi.itemFlag`.",
+              "type": "string",
+              "pattern": "^xi\\.[A-Za-z][A-Za-z0-9_]*$"
+            }
+          }
+        }
+      }
+    },
+    "values": {
+      "description": "Map of value name -> integer. Names must be snake_case and unique. Integers may be decimal or hex (0xNN).",
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^[a-z][a-z0-9_]*$" },
+      "additionalProperties": { "type": "integer" }
+    }
+  }
+}

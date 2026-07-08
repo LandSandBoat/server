@@ -1,0 +1,18 @@
+-----------------------------------
+-- Plasma Charge
+-- Covers the user in Shock spikes and absorbs damage. Enemies that hit it take fire damage.
+-----------------------------------
+---@type TMobSkill
+local mobskillObject = {}
+
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    return 0
+end
+
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.SHOCK_SPIKES, math.randomInt(15, 30), 0, 60))
+
+    return xi.effect.SHOCK_SPIKES
+end
+
+return mobskillObject

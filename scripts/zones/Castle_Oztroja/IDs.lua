@@ -1,0 +1,85 @@
+-----------------------------------
+-- Area: Castle_Oztroja
+-----------------------------------
+zones = zones or {}
+
+zones[xi.zone.CASTLE_OZTROJA] =
+{
+    text =
+    {
+        CANNOT_REACH_TARGET                = 0,    -- Cannot reach target.
+        ITS_LOCKED                         = 1,    -- It's locked.
+        PROBABLY_WORKS_WITH_SOMETHING_ELSE = 3,    -- It probably works with something else.
+        UNLIT_TORCH                        = 4,    -- You find an unlit torch.
+        TORCH_LIT                          = 5,    -- The torch is lit.
+        INCORRECT                          = 11,   -- Incorrect.
+        FIRST_WORD                         = 12,   -- The first word.
+        SECOND_WORD                        = 13,   -- The second word.
+        THIRD_WORD                         = 14,   -- The third word.
+        DEGGI                              = 15,   -- It reads, Deggi.
+        HAQA                               = 16,   -- It reads, Haqa.
+        MJUU                               = 17,   -- It reads, Mjuu.
+        PUQU                               = 18,   -- It reads, Puqu.
+        OUZI                               = 19,   -- It reads, Ouzi.
+        DUZU                               = 20,   -- It reads, Duzu.
+        GADU                               = 21,   -- It reads, Gadu.
+        MONG                               = 22,   -- It reads, Mong.
+        BUXU                               = 23,   -- It reads, Buxu.
+        XICU                               = 24,   -- It reads, Xicu.
+        CONQUEST_BASE                      = 26,   -- Tallying conquest results...
+        REGION_POINTS_SANDORIA             = 91,   -- San d'Oria's region points have increased!
+        ITEM_CANNOT_BE_OBTAINED            = 6571, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        FULL_INVENTORY_AFTER_TRADE         = 6575, -- You cannot obtain the <item>. Try trading again after sorting your inventory.
+        ITEM_OBTAINED                      = 6579, -- Obtained: <item>.
+        GIL_OBTAINED                       = 6580, -- Obtained <number> gil.
+        KEYITEM_OBTAINED                   = 6582, -- Obtained key item: <keyitem>.
+        NOT_ENOUGH_GIL                     = 6584, -- You do not have enough gil.
+        ITEMS_OBTAINED                     = 6588, -- You obtain <number> <item>!
+        NOTHING_OUT_OF_ORDINARY            = 6593, -- There is nothing out of the ordinary here.
+        SENSE_OF_FOREBODING                = 6594, -- You are suddenly overcome with a sense of foreboding...
+        FELLOW_MESSAGE_OFFSET              = 6608, -- I'm ready. I suppose.
+        CARRIED_OVER_POINTS                = 7190, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY            = 7191, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
+        LOGIN_NUMBER                       = 7192, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED      = 7212, -- Your party is unable to participate because certain members' levels are restricted.
+        FISHING_MESSAGE_OFFSET             = 7276, -- You can't fish here.
+        CHEST_UNLOCKED                     = 7448, -- You unlock the chest!
+        FLAME_BURNING                      = 7456, -- A mysterious flame is burning.
+        YOU_HOLD                           = 7457, -- You hold <item> over the flame... A peculiar scent covers the area.
+        TEBHI_ACCEPTS                      = 7459, -- Tebhi happily accepts the <item> and leaves.
+        YAGUDO_AVATAR_ENGAGE               = 7469, -- Kahk-ka-ka... You filthy, dim-witted heretics! You have damned yourselves by coming here.
+        YAGUDO_AVATAR_DEATH                = 7470, -- Our lord, Tzee Xicu the Manifest! Even should our bodies be crushed and broken, may our souls endure into eternity...
+        YAGUDO_KING_ENGAGE                 = 7471, -- You are not here as sacrifices, are you? Could you possibly be committing this affront in the face of a deity? Very well, I will personally mete out your divine punishment, kyah!
+        YAGUDO_KING_DEATH                  = 7472, -- You have...bested me... However, I...am...a god... I will never die...never rot...never fade...never...
+        HERETICS                           = 8017, -- Kyah! Kyah! Heretics being in our midst! Kill them!
+        LETTING_YOU_GO                     = 8024, -- This time I be letting you go. Be flying home, smoothskin! Ka-kyah!
+        LEARNS_SPELL                       = 8313, -- <name> learns <spell>!
+        UNCANNY_SENSATION                  = 8315, -- You are assaulted by an uncanny sensation.
+        COMMON_SENSE_SURVIVAL              = 8322, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+    },
+    mob =
+    {
+        MEE_DEGGI_THE_PUNISHER  = GetFirstID('Mee_Deggi_the_Punisher'),
+        MOO_OUZI_THE_SWIFTBLADE = GetFirstID('Moo_Ouzi_the_Swiftblade'),
+        QUU_DOMI_THE_GALLANT    = GetFirstID('Quu_Domi_the_Gallant'),
+        YAA_HAQA_THE_PROFANE    = GetFirstID('Yaa_Haqa_the_Profane'),
+        YAGUDO_AVATAR           = GetFirstID('Yagudo_Avatar'),
+        HUU_XALMO_THE_SAVAGE    = GetFirstID('Huu_Xalmo_the_Savage'),
+        MIMIC                   = GetFirstID('Mimic'),
+    },
+    npc =
+    {
+        HANDLE_DOOR_FLOOR_2    = GetFirstID('_471'),
+        FIRST_PASSWORD_STATUE  = GetTableOfIDs('Brass_Statue')[1],
+        SECOND_PASSWORD_STATUE = GetTableOfIDs('Brass_Statue')[3], -- This is intentional.
+        THIRD_PASSWORD_STATUE  = GetTableOfIDs('Brass_Statue')[2], -- This is intentional.
+        FINAL_PASSWORD_STATUE  = GetTableOfIDs('Brass_Statue')[4],
+        BRASS_DOOR_FLOOR_4_H7  = GetFirstID('_477'),
+        TRAP_DOOR_FLOOR_4      = GetFirstID('_478'),
+        HINT_HANDLE_OFFSET     = GetFirstID('_47q'),
+        TREASURE_CHEST         = GetFirstID('Treasure_Chest'),
+        TREASURE_COFFER        = GetFirstID('Treasure_Coffer'),
+    },
+}
+
+return zones[xi.zone.CASTLE_OZTROJA]

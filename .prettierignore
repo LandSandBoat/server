@@ -1,0 +1,7 @@
+*.codegen.json
+*.codegen.lua
+
+build/
+build*/
+cmake-*/
+out/

@@ -1,0 +1,101 @@
+-----------------------------------
+-- ID: 6540
+-- Item: Altanas Repast +2
+-- Food Effect: 3 Hrs, All Races
+-----------------------------------
+-- AoE:
+-- STR+20
+-- DEX+20
+-- VIT+20
+-- AGI+20
+-- INT+20
+-- MND+20
+-- CHR+20
+-- Accuracy+90
+-- Attack+90
+-- R. Accuracy+90
+-- R. Attack+90
+-- M. Accuracy+90
+-- "M. Atk. Bonus"+20
+-- "M. Def. Bonus"+5
+-- Evasion+90
+-- DEF+90
+-- M. Evasion+90
+-- "Store TP"+8
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:forMembersInRange(30, function(member)
+        if not member:hasStatusEffect(xi.effect.FOOD) then
+            member:addStatusEffect(xi.effect.FOOD, { duration = 10800, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+        end
+    end)
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.STR, 20)
+    effect:addMod(xi.mod.DEX, 20)
+    effect:addMod(xi.mod.VIT, 20)
+    effect:addMod(xi.mod.AGI, 20)
+    effect:addMod(xi.mod.INT, 20)
+    effect:addMod(xi.mod.MND, 20)
+    effect:addMod(xi.mod.CHR, 20)
+    effect:addMod(xi.mod.ACC, 90)
+    effect:addMod(xi.mod.ATT, 90)
+    effect:addMod(xi.mod.RACC, 90)
+    effect:addMod(xi.mod.RATT, 90)
+    effect:addMod(xi.mod.MACC, 90)
+    effect:addMod(xi.mod.MATT, 20)
+    effect:addMod(xi.mod.MDEF, 5)
+    effect:addMod(xi.mod.EVA, 90)
+    effect:addMod(xi.mod.DEF, 90)
+    effect:addMod(xi.mod.MEVA, 90)
+    effect:addMod(xi.mod.STORETP, 8)
+    target:addPetMod(xi.mod.STR, 20)
+    target:addPetMod(xi.mod.DEX, 20)
+    target:addPetMod(xi.mod.VIT, 20)
+    target:addPetMod(xi.mod.AGI, 20)
+    target:addPetMod(xi.mod.INT, 20)
+    target:addPetMod(xi.mod.MND, 20)
+    target:addPetMod(xi.mod.CHR, 20)
+    target:addPetMod(xi.mod.ACC, 90)
+    target:addPetMod(xi.mod.ATT, 90)
+    target:addPetMod(xi.mod.RACC, 90)
+    target:addPetMod(xi.mod.RATT, 90)
+    target:addPetMod(xi.mod.MACC, 90)
+    target:addPetMod(xi.mod.MATT, 20)
+    target:addPetMod(xi.mod.MDEF, 5)
+    target:addPetMod(xi.mod.EVA, 90)
+    target:addPetMod(xi.mod.DEF, 90)
+    target:addPetMod(xi.mod.MEVA, 90)
+    target:addPetMod(xi.mod.STORETP, 8)
+end
+
+itemObject.onEffectLose = function(target, effect)
+    target:delPetMod(xi.mod.STR, 20)
+    target:delPetMod(xi.mod.DEX, 20)
+    target:delPetMod(xi.mod.VIT, 20)
+    target:delPetMod(xi.mod.AGI, 20)
+    target:delPetMod(xi.mod.INT, 20)
+    target:delPetMod(xi.mod.MND, 20)
+    target:delPetMod(xi.mod.CHR, 20)
+    target:delPetMod(xi.mod.ACC, 90)
+    target:delPetMod(xi.mod.ATT, 90)
+    target:delPetMod(xi.mod.RACC, 90)
+    target:delPetMod(xi.mod.RATT, 90)
+    target:delPetMod(xi.mod.MACC, 90)
+    target:delPetMod(xi.mod.MATT, 20)
+    target:delPetMod(xi.mod.MDEF, 5)
+    target:delPetMod(xi.mod.EVA, 90)
+    target:delPetMod(xi.mod.DEF, 90)
+    target:delPetMod(xi.mod.MEVA, 90)
+    target:delPetMod(xi.mod.STORETP, 8)
+end
+
+return itemObject

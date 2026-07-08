@@ -1,0 +1,3185 @@
+/*
+===========================================================================
+
+  Copyright (c) 2010-2015 Darkstar Dev Teams
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
+
+===========================================================================
+*/
+
+#include "char_entity.h"
+
+#include "common/logging.h"
+#include "common/timer.h"
+#include "common/utils.h"
+
+#include <cstring>
+
+#include "enums/item_lockflg.h"
+#include "items/item_access.h"
+#include "packets/basic.h"
+#include "packets/char_status.h"
+#include "packets/char_sync.h"
+#include "packets/char_update.h"
+#include "packets/entity_update.h"
+#include "packets/s2c/0x01d_item_same.h"
+#include "packets/s2c/0x01f_item_list.h"
+#include "packets/s2c/0x02a_talknumwork.h"
+#include "packets/s2c/0x032_event.h"
+#include "packets/s2c/0x033_eventstr.h"
+#include "packets/s2c/0x034_eventnum.h"
+#include "packets/s2c/0x036_talknum.h"
+#include "packets/s2c/0x050_equip_list.h"
+#include "packets/s2c/0x051_grap_list.h"
+#include "packets/s2c/0x052_eventucoff.h"
+#include "packets/s2c/0x053_systemmes.h"
+#include "packets/s2c/0x055_scenarioitem.h"
+#include "packets/s2c/0x058_assist.h"
+#include "packets/s2c/0x0aa_magic_data.h"
+#include "packets/s2c/0x0ac_command_data.h"
+#include "packets/s2c/0x0df_group_attr.h"
+
+#include "ai/ai_container.h"
+#include "ai/controllers/player_controller.h"
+#include "ai/helpers/targetfind.h"
+#include "ai/states/ability_state.h"
+#include "ai/states/attack_state.h"
+#include "ai/states/item_state.h"
+#include "ai/states/magic_state.h"
+#include "ai/states/weaponskill_state.h"
+
+#include "ability.h"
+#include "aman.h"
+#include "battlefield.h"
+#include "char_recast_container.h"
+
+#include "action/action.h"
+#include "action/interrupts.h"
+#include "blue_spell.h"
+#include "conquest_system.h"
+#include "enums/recast.h"
+#include "ipc_client.h"
+#include "item_container.h"
+#include "items/item_equipment.h"
+#include "items/item_furnishing.h"
+#include "items/item_usable.h"
+#include "items/item_weapon.h"
+#include "items/transactions/synth.h"
+#include "job_points.h"
+#include "latent_effect_container.h"
+#include "linkshell.h"
+#include "mob_modifier.h"
+#include "mobskill.h"
+#include "modifier.h"
+#include "notoriety_container.h"
+#include "packets/s2c/0x020_item_attr.h"
+#include "packets/s2c/0x028_battle2.h"
+#include "packets/s2c/0x029_battle_message.h"
+#include "packets/s2c/0x063_miscdata_status_icons.h"
+#include "petskill.h"
+#include "spell.h"
+#include "status_effect_container.h"
+#include "trade_container.h"
+#include "treasure_pool.h"
+#include "trust_entity.h"
+#include "unitychat.h"
+#include "universal_container.h"
+#include "utils/battleutils.h"
+#include "utils/charutils.h"
+#include "utils/gardenutils.h"
+#include "utils/messageutils.h"
+#include "utils/moduleutils.h"
+#include "utils/petutils.h"
+#include "weapon_skill.h"
+
+CCharEntity::CCharEntity()
+: m_PlayTime(0s)
+{
+    TracyZoneScoped;
+
+    objtype     = TYPE_PC;
+    m_EcoSystem = xi::Ecosystem::Humanoid;
+
+    eventPreparation = new EventPrep();
+    currentEvent     = new EventInfo();
+
+    inSequence       = false;
+    gotMessage       = false;
+    m_Locked         = false;
+    m_zoneInCutscene = false;
+
+    accid        = 0;
+    m_GMlevel    = 0;
+    m_isGMHidden = false;
+
+    allegiance = xi::Allegiance::Player;
+
+    TradeContainer = new CTradeContainer();
+    Container      = new CTradeContainer();
+    UContainer     = new CUContainer();
+
+    m_Inventory  = std::make_unique<CItemContainer>(LOC_INVENTORY);
+    m_Mogsafe    = std::make_unique<CItemContainer>(LOC_MOGSAFE);
+    m_Storage    = std::make_unique<CItemContainer>(LOC_STORAGE);
+    m_Tempitems  = std::make_unique<CItemContainer>(LOC_TEMPITEMS);
+    m_Moglocker  = std::make_unique<CItemContainer>(LOC_MOGLOCKER);
+    m_Mogsatchel = std::make_unique<CItemContainer>(LOC_MOGSATCHEL);
+    m_Mogsack    = std::make_unique<CItemContainer>(LOC_MOGSACK);
+    m_Mogcase    = std::make_unique<CItemContainer>(LOC_MOGCASE);
+    m_Wardrobe   = std::make_unique<CItemContainer>(LOC_WARDROBE);
+    m_Mogsafe2   = std::make_unique<CItemContainer>(LOC_MOGSAFE2);
+    m_Wardrobe2  = std::make_unique<CItemContainer>(LOC_WARDROBE2);
+    m_Wardrobe3  = std::make_unique<CItemContainer>(LOC_WARDROBE3);
+    m_Wardrobe4  = std::make_unique<CItemContainer>(LOC_WARDROBE4);
+    m_Wardrobe5  = std::make_unique<CItemContainer>(LOC_WARDROBE5);
+    m_Wardrobe6  = std::make_unique<CItemContainer>(LOC_WARDROBE6);
+    m_Wardrobe7  = std::make_unique<CItemContainer>(LOC_WARDROBE7);
+    m_Wardrobe8  = std::make_unique<CItemContainer>(LOC_WARDROBE8);
+    m_RecycleBin = std::make_unique<CItemContainer>(LOC_RECYCLEBIN);
+
+    keys = {};
+
+    m_SpellList.reset();
+    std::memset(&m_LearnedAbilities, 0, sizeof(m_LearnedAbilities));
+    std::memset(&m_TitleList, 0, sizeof(m_TitleList));
+    std::memset(&m_ZonesVisitedList, 0, sizeof(m_ZonesVisitedList));
+    std::memset(&m_Abilities, 0, sizeof(m_Abilities));
+    std::memset(&m_TraitList, 0, sizeof(m_TraitList));
+    std::memset(&m_PetCommands, 0, sizeof(m_PetCommands));
+    std::memset(&m_WeaponSkills, 0, sizeof(m_WeaponSkills));
+    std::memset(&m_SetBlueSpells, 0, sizeof(m_SetBlueSpells));
+    std::memset(&m_FieldChocobo, 0, sizeof(m_FieldChocobo));
+    std::memset(&m_unlockedAttachments, 0, sizeof(m_unlockedAttachments));
+
+    std::memset(&m_questLog, 0, sizeof(m_questLog));
+    std::memset(&m_missionLog, 0, sizeof(m_missionLog));
+    m_eminenceCache.activemap.reset();
+
+    std::memset(&m_claimedDeeds, 0, sizeof(m_claimedDeeds));
+
+    for (uint8 i = 0; i <= 3; ++i)
+    {
+        m_missionLog[i].current = 0xFFFF;
+    }
+
+    m_missionLog[4].current = 0;   // MISSION_TOAU
+    m_missionLog[5].current = 0;   // MISSION_WOTG
+    m_missionLog[6].current = 101; // MISSION_COP
+    for (auto& i : m_missionLog)
+    {
+        i.statusUpper = 0;
+        i.statusLower = 0;
+    }
+
+    m_PMonstrosity = nullptr;
+
+    m_Costume            = 0;
+    m_Costume2           = 0;
+    m_hasTractor         = 0;
+    m_hasRaise           = 0;
+    m_weaknessLvl        = 0;
+    m_hasArise           = false;
+    m_LevelRestriction   = 0;
+    servmesLastOffset_   = std::nullopt;
+    m_AHHistoryTimestamp = timer::time_point::min();
+    m_DeathTimestamp     = timer::time_point::min();
+
+    m_EquipFlag         = 0;
+    m_EquipBlock        = 0;
+    m_StatsDebilitation = 0;
+
+    MeritMode    = false;
+    PMeritPoints = nullptr;
+    PJobPoints   = nullptr;
+
+    m_isStyleLocked = false;
+    m_isBlockingAid = false;
+
+    BazaarID.clean();
+
+    WideScanTarget = std::nullopt;
+
+    lastTradeInvite = {};
+    TradePending.clean();
+    InvitePending.clean();
+
+    PLinkshell1   = nullptr;
+    PLinkshell2   = nullptr;
+    PUnityChat    = nullptr;
+    PTreasurePool = nullptr;
+
+    PClaimedMob            = nullptr;
+    PRecastContainer       = std::make_unique<CCharRecastContainer>(this);
+    PLatentEffectContainer = new CLatentEffectContainer(this);
+
+    requestedWarp       = false;
+    requestedZoneChange = false;
+
+    retriggerLatents = false;
+
+    resetPetZoningInfo();
+    petZoningInfo.petID = 0;
+
+    m_SaveTime    = timer::time_point::min();
+    m_reloadParty = false;
+
+    m_moghouseID     = 0;
+    m_moghancementID = 0;
+
+    m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
+
+    playerConfig = {};
+
+    PAI = std::make_unique<CAIContainer>(this, nullptr, std::make_unique<CPlayerController>(this), std::make_unique<CTargetFind>(this));
+
+    hookedFish   = nullptr;
+    lastCastTime = 0;
+    nextFishTime = 0;
+    fishingToken = 0;
+    hookDelay    = 13;
+
+    profile = {};
+    search  = {};
+    std::memset(&styleItems, 0, sizeof(styleItems));
+
+    m_StartActionPos   = {};
+    m_ActionOffsetPos  = {};
+    m_previousLocation = {};
+    m_PrevZonelineID   = 0;
+
+    m_jobMasterDisplay = false;
+    m_EffectsChanged   = false;
+
+    visibleGmLevel        = 0;
+    wallhackEnabled       = false;
+    isFrozenFlagged       = false;
+    isSettingBazaarPrices = false;
+    isLinkDead            = false;
+    pendingPositionUpdate = false;
+}
+
+CCharEntity::~CCharEntity()
+{
+    TracyZoneScoped;
+
+    clearPacketList();
+
+    if (PTreasurePool != nullptr)
+    {
+        // remove myself
+        PTreasurePool->delMember(this);
+    }
+
+    ClearTrusts(); // trusts don't survive zone lines
+
+    if (PLinkshell1 != nullptr)
+    {
+        PLinkshell1->DelMember(this);
+    }
+
+    if (PLinkshell2 != nullptr)
+    {
+        PLinkshell2->DelMember(this);
+    }
+
+    if (PUnityChat != nullptr)
+    {
+        PUnityChat->DelMember(this);
+    }
+
+    if (isDead())
+    {
+        charutils::SaveDeathTime(this);
+    }
+
+    if (m_LevelRestriction != 0)
+    {
+        if (PParty)
+        {
+            if (PParty->GetSyncTarget() == this || PParty->GetLeader() == this)
+            {
+                PParty->SetSyncTarget("", MsgStd::LevelSyncDeactivateLeftArea);
+            }
+            if (PParty->GetSyncTarget() != nullptr)
+            {
+                uint8 count = 0;
+                for (uint32 i = 0; i < PParty->members.size(); ++i)
+                {
+                    if (PParty->members.at(i) != this && PParty->members.at(i)->getZone() == PParty->GetSyncTarget()->getZone())
+                    {
+                        count++;
+                    }
+                }
+                if (count < 2) // 3, because one is zoning out - thus at least 2 will be left
+                {
+                    PParty->SetSyncTarget("", MsgStd::LevelSyncRemoveTooFewMembers);
+                }
+            }
+        }
+        StatusEffectContainer->DelStatusEffectSilent(xi::StatusEffect::LevelSync);
+        StatusEffectContainer->DelStatusEffectSilent(xi::StatusEffect::LevelRestriction);
+    }
+
+    if (PParty && loc.destination != 0 && !inMogHouse())
+    {
+        if (PParty->m_PAlliance)
+        {
+            message::send(ipc::AllianceReload{
+                .allianceId = PParty->m_PAlliance->m_AllianceID,
+            });
+        }
+        else
+        {
+            message::send(ipc::PartyReload{
+                .partyId = PParty->GetPartyID(),
+            });
+        }
+    }
+
+    SpawnPCList.clear();
+    SpawnNPCList.clear();
+    SpawnMOBList.clear();
+    SpawnPETList.clear();
+    SpawnTRUSTList.clear();
+
+    if (PParty)
+    {
+        PParty->PopMember(this);
+    }
+
+    charutils::WriteHistory(this);
+
+    this->clearTransactions();
+
+    destroy(TradeContainer);
+    destroy(Container);
+    destroy(UContainer);
+    destroy(PLatentEffectContainer);
+
+    destroy(eventPreparation);
+    destroy(currentEvent);
+
+    while (!eventQueue.empty())
+    {
+        auto head = eventQueue.front();
+        eventQueue.pop_front();
+        destroy(head);
+    }
+}
+
+uint8 CCharEntity::GetGender()
+{
+    return (look.race) % 2 ^ (look.race > 6);
+}
+
+bool CCharEntity::isPacketListEmpty()
+{
+    return PacketList.empty();
+}
+
+auto CCharEntity::getPacketList() const -> const std::deque<std::unique_ptr<CBasicPacket>>&
+{
+    return PacketList;
+}
+
+auto CCharEntity::getPacketListCopy() -> std::deque<std::unique_ptr<CBasicPacket>>
+{
+    std::deque<std::unique_ptr<CBasicPacket>> PacketListCopy;
+    for (const auto& packet : PacketList)
+    {
+        PacketListCopy.emplace_back(packet->copy());
+    }
+    return PacketListCopy;
+}
+
+void CCharEntity::clearPacketList()
+{
+    while (!PacketList.empty())
+    {
+        std::ignore = popPacket();
+    }
+}
+
+void CCharEntity::pushPacket(std::unique_ptr<CBasicPacket>&& packet)
+{
+    TracyZoneScoped;
+    TracyZoneString(getName());
+    TracyZoneHex16(packet->getType());
+
+    if (isPacketFiltered(packet))
+    {
+        // packet will destruct itself when it goes out of scope
+        return;
+    }
+
+    moduleutils::OnPushPacket(this, packet);
+
+    if (packet->getType() == 0x5B)
+    {
+        if (packet->ref<uint32>(0x10) == this->id)
+        {
+            pendingPositionUpdate = true;
+        }
+    }
+
+    PacketList.emplace_back(std::move(packet));
+}
+
+void CCharEntity::updateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask)
+{
+    auto       itr              = EntityUpdatePackets.find(PEntity->id);
+    const bool hasPendingPacket = itr != EntityUpdatePackets.end() && itr->second != nullptr;
+
+    auto* PChar = [&]() -> CCharEntity*
+    {
+        if (PEntity->objtype == TYPE_PC)
+        {
+            return static_cast<CCharEntity*>(PEntity);
+        }
+
+        return nullptr;
+    }();
+
+    if (hasPendingPacket)
+    {
+        // Found existing packet update for the given entity, so we update it instead of pushing new
+        auto& packet = itr->second;
+        if (PChar)
+        {
+            static_cast<CCharUpdatePacket*>(packet)->updateWith(PChar, type, updatemask);
+        }
+        else
+        {
+            static_cast<CEntityUpdatePacket*>(packet)->updateWith(PEntity, type, updatemask);
+        }
+    }
+    else
+    {
+        // No existing packet update for the given entity, so we push new packet
+        if (PChar)
+        {
+            auto packet                    = std::make_unique<CCharUpdatePacket>(PChar, type, updatemask);
+            EntityUpdatePackets[PChar->id] = packet.get();
+            PacketList.emplace_back(std::move(packet));
+        }
+        else
+        {
+            auto packet                      = std::make_unique<CEntityUpdatePacket>(PEntity, type, updatemask);
+            EntityUpdatePackets[PEntity->id] = packet.get();
+            PacketList.emplace_back(std::move(packet));
+        }
+    }
+}
+
+auto CCharEntity::popPacket() -> std::unique_ptr<CBasicPacket>
+{
+    auto PPacket = std::move(PacketList.front());
+    PacketList.pop_front();
+
+    // Clean up pending
+    switch (PPacket->getType())
+    {
+        case 0x0D: // Char update
+            [[fallthrough]];
+        case 0x0E: // Entity update
+            EntityUpdatePackets.erase(PPacket->ref<uint32>(0x04));
+            break;
+        case 0x5B: // Position update
+            if (PPacket->ref<uint32>(0x10) == this->id)
+            {
+                pendingPositionUpdate = false;
+            }
+            break;
+        default:
+            break;
+    }
+
+    return PPacket;
+}
+
+size_t CCharEntity::getPacketCount()
+{
+    return PacketList.size();
+}
+
+void CCharEntity::erasePackets(uint8 num)
+{
+    for (auto i = 0; i < num; i++)
+    {
+        std::ignore = popPacket();
+    }
+}
+
+bool CCharEntity::isPacketFiltered(std::unique_ptr<CBasicPacket>& packet)
+{
+    // Filter others synthesis results
+    if (packet->getType() == 0x70 && playerConfig.MessageFilter.others_synthesis_and_fishing_results)
+    {
+        return true;
+    }
+
+    return false;
+}
+
+bool CCharEntity::isNewPlayer() const
+{
+    return !playerConfig.NewAdventurerOffFlg;
+}
+
+bool CCharEntity::isSeekingParty() const
+{
+    return playerConfig.InviteFlg;
+}
+
+bool CCharEntity::isAnon() const
+{
+    return playerConfig.AnonymityFlg;
+}
+
+bool CCharEntity::isAway() const
+{
+    return playerConfig.AwayFlg;
+}
+
+bool CCharEntity::hasAutoTargetEnabled() const
+{
+    return !playerConfig.AutoTargetOffFlg;
+}
+
+auto CCharEntity::isCrafting() const -> bool
+{
+    return animation == ANIMATION_SYNTH || this->activeTransaction<SynthTransaction>();
+}
+
+auto CCharEntity::isFishing() const -> bool
+{
+    return (animation >= ANIMATION_FISHING_FISH && animation <= ANIMATION_FISHING_STOP) ||
+           animation == ANIMATION_FISHING_START_OLD ||
+           animation == ANIMATION_FISHING_START;
+}
+
+void CCharEntity::setPetZoningInfo()
+{
+    if (PPet == nullptr || PPet->objtype != TYPE_PET)
+    {
+        return;
+    }
+
+    auto PPetEntity = dynamic_cast<CPetEntity*>(PPet);
+    if (PPetEntity == nullptr)
+    {
+        return;
+    }
+    petZoningInfo.petID = PPetEntity->petID();
+
+    switch (PPetEntity->getPetType())
+    {
+        case PET_TYPE::JUG_PET:
+            if (!settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"))
+            {
+                break;
+            }
+            petZoningInfo.jugSpawnTime = PPetEntity->getJugSpawnTime();
+            petZoningInfo.jugDuration  = PPetEntity->getJugDuration();
+            [[fallthrough]];
+        case PET_TYPE::AVATAR:
+            if (PPetEntity->petID() == PETID_ALEXANDER || PPetEntity->petID() == PETID_ODIN || PPetEntity->petID() == PETID_ATOMOS)
+            {
+                // Alexander, Odin and Atomos cannot persist through zoning.
+                break;
+            }
+            [[fallthrough]];
+        case PET_TYPE::AUTOMATON:
+        case PET_TYPE::WYVERN:
+            petZoningInfo.petLevel = PPetEntity->getSpawnLevel();
+            petZoningInfo.petHP    = PPet->health.hp;
+            petZoningInfo.petTP    = PPet->health.tp;
+            petZoningInfo.petMP    = PPet->health.mp;
+            petZoningInfo.petType  = PPetEntity->getPetType();
+            break;
+        default:
+            break;
+    }
+
+    petZoningInfo.respawnPet = true;
+}
+
+void CCharEntity::resetPetZoningInfo()
+{
+    // reset the petZoning info
+    petZoningInfo.petLevel     = 0;
+    petZoningInfo.petHP        = 0;
+    petZoningInfo.petTP        = 0;
+    petZoningInfo.petMP        = 0;
+    petZoningInfo.respawnPet   = false;
+    petZoningInfo.petType      = PET_TYPE::AVATAR;
+    petZoningInfo.jugSpawnTime = timer::time_point{};
+    petZoningInfo.jugDuration  = 0s;
+}
+
+auto CCharEntity::shouldPetPersistThroughZoning() const -> bool
+{
+    PET_TYPE petType{};
+    auto     PPetEntity = dynamic_cast<CPetEntity*>(PPet);
+
+    if (PPetEntity == nullptr && !petZoningInfo.respawnPet)
+    {
+        return false;
+    }
+
+    if (PPetEntity != nullptr)
+    {
+        petType = PPetEntity->getPetType();
+    }
+    else // petZoningInfo.respawnPet == true
+    {
+        petType = petZoningInfo.petType;
+    }
+
+    return petType == PET_TYPE::WYVERN ||
+           petType == PET_TYPE::AVATAR ||
+           petType == PET_TYPE::AUTOMATON ||
+           (petType == PET_TYPE::JUG_PET && settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"));
+}
+
+void CCharEntity::setAutomatonFrame(const AutomatonFrame frame)
+{
+    automatonInfo_.equip.frame = frame;
+}
+
+void CCharEntity::setAutomatonHead(const AutomatonHead head)
+{
+    automatonInfo_.equip.head = head;
+}
+
+void CCharEntity::setAutomatonAttachment(const uint8 slotid, const uint8 id)
+{
+    automatonInfo_.equip.attachments[slotid] = id;
+}
+
+void CCharEntity::setAutomatonElementMax(const uint8 element, const uint8 max)
+{
+    automatonInfo_.elementMax[element] = max;
+}
+
+void CCharEntity::addAutomatonElementCapacity(const uint8 element, const int8 value)
+{
+    automatonInfo_.elementEquip[element] += value;
+}
+
+void CCharEntity::setAutomatonElementalCapacityBonus(const uint8 bonus)
+{
+    if (bonus == automatonInfo_.elementalCapacityBonus)
+    {
+        return;
+    }
+
+    int8 difference = static_cast<int8>(bonus) - automatonInfo_.elementalCapacityBonus;
+    for (size_t i = 0; i < automatonInfo_.elementMax.size(); ++i)
+    {
+        automatonInfo_.elementMax[i] += difference;
+    }
+
+    automatonInfo_.elementalCapacityBonus = bonus;
+}
+
+auto CCharEntity::getAutomatonFrame() const -> AutomatonFrame
+{
+    return automatonInfo_.equip.frame;
+}
+
+auto CCharEntity::getAutomatonHead() const -> AutomatonHead
+{
+    return automatonInfo_.equip.head;
+}
+
+auto CCharEntity::getAutomatonAttachment(const uint8 slotid) const -> uint8
+{
+    return automatonInfo_.equip.attachments[slotid];
+}
+
+auto CCharEntity::hasAutomatonAttachment(const uint8 attachment) const -> bool
+{
+    for (auto&& attachmentid : automatonInfo_.equip.attachments)
+    {
+        if (attachmentid == attachment)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+auto CCharEntity::getAutomatonElementMax(const uint8 element) const -> uint8
+{
+    return automatonInfo_.elementMax[element];
+}
+
+auto CCharEntity::getAutomatonElementCapacity(const uint8 element) const -> uint8
+{
+    return automatonInfo_.elementEquip[element];
+}
+
+/************************************************************************
+ *
+ * Return the container with the specified ID.If the ID goes beyond, then *
+ * We protect the server from falling the use of temporary container *
+ * Items as a plug (from this container items can not *
+ * Move, wear, transmit, sell, etc.).Display *
+ * Fatal error message.*
+ *
+ ************************************************************************/
+
+auto CCharEntity::getStorage(const uint8 locationId) const -> CItemContainer*
+{
+    switch (locationId)
+    {
+        case LOC_INVENTORY:
+            return m_Inventory.get();
+        case LOC_MOGSAFE:
+            return m_Mogsafe.get();
+        case LOC_STORAGE:
+            return m_Storage.get();
+        case LOC_TEMPITEMS:
+            return m_Tempitems.get();
+        case LOC_MOGLOCKER:
+            return m_Moglocker.get();
+        case LOC_MOGSATCHEL:
+            return m_Mogsatchel.get();
+        case LOC_MOGSACK:
+            return m_Mogsack.get();
+        case LOC_MOGCASE:
+            return m_Mogcase.get();
+        case LOC_WARDROBE:
+            return m_Wardrobe.get();
+        case LOC_MOGSAFE2:
+            return m_Mogsafe2.get();
+        case LOC_WARDROBE2:
+            return m_Wardrobe2.get();
+        case LOC_WARDROBE3:
+            return m_Wardrobe3.get();
+        case LOC_WARDROBE4:
+            return m_Wardrobe4.get();
+        case LOC_WARDROBE5:
+            return m_Wardrobe5.get();
+        case LOC_WARDROBE6:
+            return m_Wardrobe6.get();
+        case LOC_WARDROBE7:
+            return m_Wardrobe7.get();
+        case LOC_WARDROBE8:
+            return m_Wardrobe8.get();
+        case LOC_RECYCLEBIN:
+            return m_RecycleBin.get();
+    }
+
+    ShowWarning("Unhandled or Invalid Location ID (%d) passed to function.", locationId);
+    return nullptr;
+}
+
+auto CCharEntity::aman() -> CAMANContainer&
+{
+    if (!m_AMAN)
+    {
+        m_AMAN = CAMANContainer(this);
+    }
+    return *m_AMAN;
+}
+
+auto CCharEntity::lastProposalCloseTime() const -> timer::time_point
+{
+    return lastProposalCloseTime_;
+}
+
+void CCharEntity::setLastProposalCloseTime(timer::time_point t)
+{
+    lastProposalCloseTime_ = t;
+}
+
+auto CCharEntity::inMogHouse() const -> bool
+{
+    return m_moghouseID != 0;
+}
+
+auto CCharEntity::gmCallContainer() -> GMCallContainer&
+{
+    return gmCallContainer_;
+}
+
+auto CCharEntity::maze() -> maze_t&
+{
+    return maze_;
+}
+
+int8 CCharEntity::getShieldSize()
+{
+    CItemEquipment* PItem = getEquip(SLOT_SUB);
+
+    if (PItem == nullptr)
+    {
+        return 0;
+    }
+
+    if (!PItem->IsShield())
+    {
+        return 0;
+    }
+
+    return PItem->getShieldSize();
+}
+
+int16 CCharEntity::getShieldDefense()
+{
+    CItemEquipment* PItem = getEquip(SLOT_SUB);
+
+    if (PItem && PItem->IsShield())
+    {
+        return PItem->getModifier(Mod::DEF);
+    }
+
+    return 0;
+}
+
+bool CCharEntity::hasBazaar()
+{
+    if (isSettingBazaarPrices)
+    {
+        return false;
+    }
+
+    CItemContainer* playerInventory = getStorage(LOC_INVENTORY);
+
+    if (playerInventory)
+    {
+        for (uint8 slotID = 1; slotID <= playerInventory->GetSize(); ++slotID)
+        {
+            CItem* PItem = playerInventory->GetItem(slotID);
+
+            if ((PItem != nullptr) && (PItem->getCharPrice() != 0))
+            {
+                return true;
+                break;
+            }
+        }
+    }
+    return false;
+}
+
+void CCharEntity::SetName(const std::string& name)
+{
+    this->name = name;
+
+    if (this->name.size() > PacketNameLength)
+    {
+        this->name.resize(PacketNameLength); // Enforce max name limit
+    }
+}
+
+int16 CCharEntity::addTP(int16 tp)
+{
+    tp = CBattleEntity::addTP(tp);
+    PLatentEffectContainer->CheckLatentsTP();
+
+    return abs(tp);
+}
+
+int32 CCharEntity::addHP(int32 hp)
+{
+    hp = CBattleEntity::addHP(hp);
+    PLatentEffectContainer->CheckLatentsHP();
+
+    return abs(hp);
+}
+
+int32 CCharEntity::addMP(int32 mp)
+{
+    mp = CBattleEntity::addMP(mp);
+    PLatentEffectContainer->CheckLatentsMP();
+
+    return abs(mp);
+}
+
+bool CCharEntity::getStyleLocked() const
+{
+    return m_isStyleLocked;
+}
+
+void CCharEntity::setStyleLocked(bool isStyleLocked)
+{
+    m_isStyleLocked = isStyleLocked;
+}
+
+bool CCharEntity::getBlockingAid() const
+{
+    return m_isBlockingAid;
+}
+
+void CCharEntity::setBlockingAid(bool isBlockingAid)
+{
+    m_isBlockingAid = isBlockingAid;
+}
+
+void CCharEntity::SetPlayTime(timer::duration playTime)
+{
+    m_PlayTime = playTime;
+    m_SaveTime = timer::now();
+}
+
+timer::duration CCharEntity::GetPlayTime(bool needUpdate)
+{
+    if (needUpdate)
+    {
+        auto currentTime = timer::now();
+
+        m_PlayTime += currentTime - m_SaveTime;
+        m_SaveTime = currentTime;
+    }
+
+    return m_PlayTime;
+}
+
+auto CCharEntity::getEquip(const SLOTTYPE slot) const -> CItemEquipment*
+{
+    if (slot >= EquipSlotCount)
+    {
+        ShowWarningFmt("getEquip: slot {} out of range", slot);
+        return nullptr;
+    }
+
+    return static_cast<CItemEquipment*>(equipped_[slot]);
+}
+
+auto CCharEntity::equipLocation(const uint8 equipSlot) const -> Maybe<ItemLocation>
+{
+    if (equipSlot >= EquipSlotCount)
+    {
+        ShowWarningFmt("equipLocation: slot {} out of range", equipSlot);
+        return std::nullopt;
+    }
+
+    if (!equipped_[equipSlot])
+    {
+        return std::nullopt;
+    }
+
+    return ItemLocation{
+        static_cast<CONTAINER_ID>(equipped_[equipSlot]->getLocationID()),
+        equipped_[equipSlot]->getSlotID(),
+    };
+}
+
+auto CCharEntity::bindEquip(const uint8 equipSlot, CItem* item) -> bool
+{
+    if (equipSlot >= EquipSlotCount)
+    {
+        ShowWarningFmt("bindEquip: slot {} out of range", equipSlot);
+        return false;
+    }
+
+    if (!item)
+    {
+        ShowWarningFmt("bindEquip: null item for slot {}", equipSlot);
+        return false;
+    }
+
+    if (!xi::items::mark(item, ItemState::Equipped))
+    {
+        return false;
+    }
+
+    clearEquip(equipSlot);
+    equipped_[equipSlot] = item;
+    return true;
+}
+
+void CCharEntity::clearEquip(const uint8 equipSlot)
+{
+    if (equipSlot >= EquipSlotCount)
+    {
+        return;
+    }
+
+    if (auto* item = equipped_[equipSlot]; item != nullptr)
+    {
+        if (!xi::items::mark(item, ItemState::Free))
+        {
+            return;
+        }
+
+        equipped_[equipSlot] = nullptr;
+    }
+}
+
+void CCharEntity::ReloadPartyInc()
+{
+    m_reloadParty = true;
+}
+
+void CCharEntity::ReloadPartyDec()
+{
+    m_reloadParty = false;
+}
+
+bool CCharEntity::ReloadParty() const
+{
+    return m_reloadParty;
+}
+
+void CCharEntity::RemoveTrust(CTrustEntity* PTrust)
+{
+    if (!PTrust->PAI->IsSpawned())
+    {
+        return;
+    }
+
+    // clang-format off
+    auto trustIt = std::find_if(PTrusts.begin(), PTrusts.end(), [PTrust](auto trust)
+    {
+        return PTrust == trust;
+    });
+    // clang-format on
+
+    if (trustIt != PTrusts.end())
+    {
+        PTrust->PAI->Despawn();
+        PTrusts.erase(trustIt);
+    }
+
+    ReloadPartyInc();
+}
+
+void CCharEntity::ClearTrusts()
+{
+    for (auto* PTrust : PTrusts)
+    {
+        PTrust->PAI->Despawn();
+    }
+    PTrusts.clear();
+
+    ReloadPartyInc();
+}
+
+void CCharEntity::RequestPersist(CHAR_PERSIST toPersist)
+{
+    dataToPersist |= toPersist;
+}
+
+bool CCharEntity::PersistData()
+{
+    bool didPersist = false;
+
+    if (!charVarChanges.empty())
+    {
+        for (auto&& charVarName : charVarChanges)
+        {
+            charutils::PersistCharVar(this->id, charVarName.c_str(), charVarCache[charVarName].first, charVarCache[charVarName].second);
+        }
+
+        charVarChanges.clear();
+        didPersist = true;
+    }
+
+    if (!dataToPersist)
+    {
+        return didPersist;
+    }
+    else
+    {
+        didPersist = true;
+    }
+
+    if (dataToPersist & CHAR_PERSIST::EQUIP)
+    {
+        charutils::SaveCharEquip(this);
+        charutils::SaveCharLook(this);
+    }
+
+    if (dataToPersist & CHAR_PERSIST::POSITION)
+    {
+        charutils::SaveCharPosition(this);
+    }
+
+    if (dataToPersist & CHAR_PERSIST::EFFECTS)
+    {
+        StatusEffectContainer->SaveStatusEffects(true);
+    }
+
+    /* TODO
+    if (dataToPersist & CHAR_PERSIST::LINKSHELL)
+    {
+        charutils::SaveCharLinkshells(this);
+    }
+    */
+
+    dataToPersist = 0;
+    return didPersist;
+}
+
+bool CCharEntity::PersistData(timer::time_point tick)
+{
+    if (tick < nextDataPersistTime || !PersistData())
+    {
+        return false;
+    }
+
+    nextDataPersistTime = tick + TIME_BETWEEN_PERSIST;
+    return true;
+}
+
+auto CCharEntity::Tick(timer::time_point tick) -> Task<void>
+{
+    TracyZoneScoped;
+
+    co_await CBattleEntity::Tick(tick);
+
+    if (m_DeathTimestamp > timer::time_point::min() && tick >= m_deathSyncTime)
+    {
+        // Send an update packet at a regular interval to keep the player's death variables synced
+        updatemask |= UPDATE_STATUS;
+        m_deathSyncTime = tick + death_update_frequency;
+    }
+
+    if (inMogHouse())
+    {
+        gardenutils::UpdateGardening(this, SendPacket::Yes);
+    }
+
+    co_return;
+}
+
+void CCharEntity::PostTick()
+{
+    TracyZoneScoped;
+
+    CBattleEntity::PostTick();
+
+    if (ReloadParty())
+    {
+        charutils::ReloadParty(this);
+    }
+
+    if (m_EffectsChanged)
+    {
+        pushPacket<CCharStatusPacket>(this);
+        pushPacket<CCharSyncPacket>(this);
+        charutils::SendExtendedJobPackets(this);
+        pushPacket<GP_SERV_COMMAND_MISCDATA::STATUS_ICONS>(this);
+        if (PParty)
+        {
+            PParty->PushEffectsPacket();
+        }
+        m_EffectsChanged = false;
+    }
+
+    timer::time_point now = timer::now();
+
+    if (updatemask && now > m_nextUpdateTimer)
+    {
+        m_nextUpdateTimer = now + 250ms;
+
+        if (loc.zone && !m_isGMHidden)
+        {
+            loc.zone->UpdateEntityPacket(this, ENTITY_UPDATE, updatemask);
+        }
+
+        if (isCharmed)
+        {
+            updateEntityPacket(this, ENTITY_UPDATE, updatemask);
+        }
+
+        if (updatemask & UPDATE_HP)
+        {
+            // clang-format off
+            ForAlliance([&](auto PEntity)
+            {
+                static_cast<CCharEntity*>(PEntity)->pushPacket<GP_SERV_COMMAND_GROUP_ATTR>(this);
+            });
+            // clang-format on
+        }
+        // Do not send an update packet when only the position has change
+        // Send one if the m_SendServerStatus flag is set (cutscenes will ALWAYS send one, and may also send an 0x00D!)
+        // sendServerStatus_ is essentially like a separate update mask, and acts like an "extension" of updatemask
+        if (updatemask ^ UPDATE_POS || sendServerStatus_)
+        {
+            pushPacket<CCharStatusPacket>(this);
+        }
+
+        sendServerStatus_ = false;
+        updatemask        = 0;
+    }
+
+    inventorySyncState_.flushDirtyItems(this);
+}
+
+// Flush all pending equipment changes at end of network cycle after all SmallPackets have been processed
+void CCharEntity::flushEquipChanges()
+{
+    if (!inventorySyncState_.hasPendingEquipChanges())
+    {
+        return;
+    }
+
+    // EQUIP_LIST + GRAP_LIST pairs for each change
+    for (const auto& change : inventorySyncState_.pendingEquipChanges())
+    {
+        if (change.equipping)
+        {
+            pushPacket<GP_SERV_COMMAND_EQUIP_LIST>(change.containerSlotId, change.equipSlot, change.container);
+        }
+        else
+        {
+            pushPacket<GP_SERV_COMMAND_EQUIP_LIST>(0, change.equipSlot, LOC_INVENTORY);
+        }
+
+        pushPacket<GP_SERV_COMMAND_GRAP_LIST>(this);
+    }
+
+    // For each dirty container: ITEM_LIST or ITEM_ATTR for items in that container, then ITEM_SAME pair
+    // Only send ITEM_SAME if the container has already been sent to the client during zone-in
+    for (const auto& container : inventorySyncState_.dirtyContainers())
+    {
+        for (const auto& change : inventorySyncState_.pendingEquipChanges())
+        {
+            if (static_cast<CONTAINER_ID>(change.item->getLocationID()) == container)
+            {
+                if (change.item->isSubType(ITEM_CHARGED))
+                {
+                    pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(change.item, container, change.item->getSlotID());
+                }
+                else
+                {
+                    pushPacket<GP_SERV_COMMAND_ITEM_LIST>(change.item, change.equipping ? ItemLockFlg::NoDrop : ItemLockFlg::Normal);
+                }
+            }
+        }
+
+        // Only send ITEM_SAME if container has been loaded - prevents sort reset during zone-in
+        if (inventorySyncState_.isSynced(container))
+        {
+            pushPacket<GP_SERV_COMMAND_ITEM_SAME>(container, this);
+            pushPacket<GP_SERV_COMMAND_ITEM_SAME>(this);
+        }
+    }
+
+    // Send updated list of spells, abilities and weaponskills
+    pushPacket<GP_SERV_COMMAND_MAGIC_DATA>(this);
+    pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(this);
+
+    inventorySyncState_.clearEquipChanges();
+}
+
+auto CCharEntity::inventorySyncState() -> InventorySyncState&
+{
+    return inventorySyncState_;
+}
+
+void CCharEntity::addTrait(CTrait* PTrait)
+{
+    CBattleEntity::addTrait(PTrait);
+    charutils::addTrait(this, PTrait->getID());
+}
+
+void CCharEntity::delTrait(CTrait* PTrait)
+{
+    CBattleEntity::delTrait(PTrait);
+    charutils::delTrait(this, PTrait->getID());
+}
+
+bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
+{
+    TracyZoneScoped;
+
+    if (StatusEffectContainer->GetConfrontationEffect() != PInitiator->StatusEffectContainer->GetConfrontationEffect())
+    {
+        return false;
+    }
+
+    if (isDead())
+    {
+        return (targetFlags & TARGET_PLAYER_DEAD) != 0;
+    }
+
+    if ((targetFlags & TARGET_PLAYER) && allegiance == PInitiator->allegiance)
+    {
+        return true;
+    }
+
+    if (CBattleEntity::ValidTarget(PInitiator, targetFlags))
+    {
+        return true;
+    }
+
+    bool isSameParty      = PParty && PInitiator->PParty && PInitiator->PParty == PParty;
+    bool isSameAlliance   = PParty && PParty->m_PAlliance && PInitiator->PParty && PInitiator->PParty->m_PAlliance && PParty->m_PAlliance == PInitiator->PParty->m_PAlliance;
+    bool isPartyPetMaster = PInitiator->PMaster && PInitiator->PMaster->PParty && PInitiator->PMaster->PParty == PParty;
+    bool isSoloPetMaster  = PParty == nullptr && PInitiator->PMaster == this;
+    bool targetsParty     = targetFlags & TARGET_PLAYER_PARTY;
+    bool targetsAlliance  = targetFlags & TARGET_PLAYER_ALLIANCE;
+    bool hasPianissimo    = (targetFlags & TARGET_PLAYER_PARTY_PIANISSIMO) && PInitiator->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Pianissimo);
+    bool hasEntrust       = (targetFlags & TARGET_PLAYER_PARTY_ENTRUST) && PInitiator->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Entrust);
+    bool isDifferentChar  = PInitiator != this;
+    bool isTrust          = PInitiator->objtype == TYPE_TRUST;
+
+    // Alliance member valid target.
+    if (targetsAlliance &&
+        isSameAlliance &&
+        isDifferentChar)
+    {
+        return true;
+    }
+
+    // Party member valid targeting.
+    if ((targetsParty || hasPianissimo) &&
+        (isSameParty || isPartyPetMaster || isSoloPetMaster) &&
+        isDifferentChar)
+    {
+        return true;
+    }
+
+    if (hasEntrust && (isSameParty || isTrust))
+    {
+        return true;
+    }
+
+    return false;
+}
+
+bool CCharEntity::CanUseSpell(CSpell* PSpell)
+{
+    TracyZoneScoped;
+
+    return charutils::hasSpell(this, static_cast<uint16>(PSpell->getID())) && CBattleEntity::CanUseSpell(PSpell);
+}
+
+void CCharEntity::OnChangeTarget(CBattleEntity* PNewTarget)
+{
+    TracyZoneScoped;
+
+    battleutils::RelinquishClaim(this);
+    pushPacket<GP_SERV_COMMAND_ASSIST>(this, PNewTarget);
+    PLatentEffectContainer->CheckLatentsTargetChange();
+}
+
+void CCharEntity::OnEngage(CAttackState& state)
+{
+    TracyZoneScoped;
+
+    CBattleEntity::OnEngage(state);
+    PLatentEffectContainer->CheckLatentsTargetChange();
+    this->m_charHistory.battlesFought++;
+}
+
+void CCharEntity::OnDisengage(CAttackState& state)
+{
+    TracyZoneScoped;
+
+    battleutils::RelinquishClaim(this);
+    CBattleEntity::OnDisengage(state);
+    if (state.HasErrorMsg())
+    {
+        pushPacket(state.GetErrorMsg());
+    }
+    PLatentEffectContainer->CheckLatentsWeaponDraw(false);
+}
+
+bool CCharEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg)
+{
+    TracyZoneScoped;
+
+    if (PTarget->PAI->IsUntargetable())
+    {
+        return false;
+    }
+
+    float dist = distance(loc.p, PTarget->loc.p);
+
+    if (!IsMobOwner(PTarget))
+    {
+        errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, PTarget, 0, 0, MsgBasic::AlreadyClaimed);
+
+        PAI->Disengage();
+        return false;
+    }
+    else if (!this->StatusEffectContainer->HasStatusEffect({ xi::StatusEffect::CharmI, xi::StatusEffect::CharmIi }) && dist > 30)
+    {
+        errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, PTarget, 0, 0, MsgBasic::LoseSight);
+        PAI->Disengage();
+        return false;
+    }
+    else if (!facing(this->loc.p, PTarget->loc.p, 64))
+    {
+        errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, PTarget, 0, 0, MsgBasic::UnableToSeeTarget);
+        return false;
+    }
+    else if (dist > GetMeleeRange(PTarget))
+    {
+        errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, PTarget, 0, 0, MsgBasic::TargetOutOfRange);
+        return false;
+    }
+    return true;
+}
+
+bool CCharEntity::OnAttack(CAttackState& state, action_t& action)
+{
+    TracyZoneScoped;
+
+    auto* controller{ static_cast<CPlayerController*>(PAI->GetController()) };
+    controller->setLastAttackTime(timer::now());
+    auto ret = CBattleEntity::OnAttack(state, action);
+
+    return ret;
+}
+
+void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
+{
+    TracyZoneScoped;
+
+    auto* PSpell  = state.GetSpell();
+    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+
+    // not ideal, since Trick Attack character (taChar) is also calculated on the lua side for the base spell.
+    // Only blue spells that act as a physical WS can TA.
+    CBattleEntity* taChar = nullptr;
+
+    if (StatusEffectContainer->HasStatusEffect(xi::StatusEffect::TrickAttack) &&
+        PSpell->getSpellGroup() == SPELLGROUP_BLUE &&
+        PSpell->dealsDamage())
+    {
+        taChar = battleutils::getAvailableTrickAttackChar(this, PTarget);
+    }
+
+    auto* controller{ static_cast<CPlayerController*>(PAI->GetController()) };
+    controller->setLastSpellFinishedTime(timer::now());
+
+    CBattleEntity::OnCastFinished(state, action);
+
+    for (auto&& actionTarget : action.targets)
+    {
+        for (auto&& actionResult : actionTarget.results)
+        {
+            if (actionResult.param > 0 &&
+                PSpell->dealsDamage() &&
+                PSpell->getSpellGroup() == SPELLGROUP_BLUE &&
+                (StatusEffectContainer->HasStatusEffect(xi::StatusEffect::ChainAffinity) || StatusEffectContainer->HasStatusEffect(xi::StatusEffect::AzureLore)) &&
+                static_cast<CBlueSpell*>(PSpell)->getPrimarySkillchain() != 0)
+            {
+                auto*      PBlueSpell = static_cast<CBlueSpell*>(PSpell);
+                const auto effect     = battleutils::GetSkillChainEffect(PTarget, PBlueSpell->getPrimarySkillchain(), PBlueSpell->getSecondarySkillchain(), 0);
+                if (effect != ActionProcSkillChain::None)
+                {
+                    actionResult.recordSkillchain(effect, battleutils::TakeSkillchainDamage(this, PTarget, actionResult.param, taChar));
+                }
+
+                if (StatusEffectContainer->HasStatusEffect({ xi::StatusEffect::Sekkanoki, xi::StatusEffect::MeikyoShisui }))
+                {
+                    health.tp = (health.tp > 1000 ? health.tp - 1000 : 0);
+                }
+                else
+                {
+                    health.tp = 0;
+                }
+
+                StatusEffectContainer->DelStatusEffectSilent(xi::StatusEffect::ChainAffinity);
+            }
+
+            // Immanence will create or extend a skillchain for elemental spells
+            if (PTarget->health.hp > 0 &&
+                actionResult.param >= 0 &&
+                PSpell->dealsDamage() &&
+                PSpell->getSpellGroup() == SPELLGROUP_BLACK &&
+                (StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Immanence)))
+            {
+                auto immanenceApplies = true;
+                auto isHelix          = false;
+                auto effect           = ActionProcSkillChain::None;
+                switch (PSpell->getSpellFamily())
+                {
+                    case SPELLFAMILY_GEOHELIX:
+                        isHelix = true;
+                        [[fallthrough]];
+                    case SPELLFAMILY_STONE:
+                        effect = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_SCISSION, 0, 0);
+                        break;
+                    case SPELLFAMILY_HYDROHELIX:
+                        isHelix = true;
+                        [[fallthrough]];
+                    case SPELLFAMILY_WATER:
+                        effect = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_REVERBERATION, 0, 0);
+                        break;
+                    case SPELLFAMILY_ANEMOHELIX:
+                        isHelix = true;
+                        [[fallthrough]];
+                    case SPELLFAMILY_AERO:
+                        effect = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_DETONATION, 0, 0);
+                        break;
+                    case SPELLFAMILY_PYROHELIX:
+                        isHelix = true;
+                        [[fallthrough]];
+                    case SPELLFAMILY_FIRE:
+                        effect = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_LIQUEFACTION, 0, 0);
+                        break;
+                    case SPELLFAMILY_CRYOHELIX:
+                        isHelix = true;
+                        [[fallthrough]];
+                    case SPELLFAMILY_BLIZZARD:
+                        effect = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_INDURATION, 0, 0);
+                        break;
+                    case SPELLFAMILY_IONOHELIX:
+                        isHelix = true;
+                        [[fallthrough]];
+                    case SPELLFAMILY_THUNDER:
+                        effect = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_IMPACTION, 0, 0);
+                        break;
+                    case SPELLFAMILY_NOCTOHELIX:
+                        isHelix = true;
+                        effect  = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_COMPRESSION, 0, 0);
+                        break;
+                    case SPELLFAMILY_LUMINOHELIX:
+                        isHelix = true;
+                        effect  = battleutils::GetSkillChainEffect(PTarget, SKILLCHAIN_ELEMENT::SC_TRANSFIXION, 0, 0);
+                        break;
+                    default:
+                        immanenceApplies = false;
+                        break;
+                }
+
+                if (immanenceApplies)
+                {
+                    StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Immanence);
+                }
+
+                if (effect != ActionProcSkillChain::None)
+                {
+                    actionResult.recordSkillchain(effect, battleutils::TakeSkillchainDamage(this, PTarget, actionResult.param, nullptr));
+
+                    // Closing a skillchain with an immanence Helix will make the magic burst window longer
+                    auto scEffect = PTarget->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Skillchain, 0);
+                    if (isHelix && scEffect)
+                    {
+                        scEffect->SetDuration(scEffect->GetDuration() + 2s);
+                    }
+                }
+            }
+        }
+    }
+    charutils::RemoveStratagems(this, PSpell);
+    if (PSpell->tookEffect())
+    {
+        charutils::TrySkillUP(this, (SKILLTYPE)PSpell->getSkillType(), PTarget->GetMLevel());
+
+        CItemWeapon* PItem = static_cast<CItemWeapon*>(getEquip(SLOT_RANGED));
+
+        if (PItem && PItem->isType(ITEM_EQUIPMENT))
+        {
+            SKILLTYPE Skilltype = (SKILLTYPE)PItem->getSkillType();
+
+            switch (PSpell->getSkillType())
+            {
+                case SKILL_GEOMANCY:
+                    if (Skilltype == SKILL_HANDBELL)
+                    {
+                        charutils::TrySkillUP(this, Skilltype, PTarget->GetMLevel());
+                    }
+                    break;
+                case SKILL_SINGING:
+                    if (Skilltype == SKILL_STRING_INSTRUMENT || Skilltype == SKILL_WIND_INSTRUMENT || Skilltype == SKILL_SINGING)
+                    {
+                        charutils::TrySkillUP(this, Skilltype, PTarget->GetMLevel());
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+}
+
+void CCharEntity::OnCastInterrupted(CMagicState& state, action_t& action, MsgBasic msg, bool blockedCast)
+{
+    TracyZoneScoped;
+
+    CBattleEntity::OnCastInterrupted(state, action, msg, blockedCast);
+
+    if (state.HasErrorMsg())
+    {
+        auto message = state.GetErrorMsg();
+
+        // TODO: May need special handling if interrupt was handled elsewhere
+        if (message)
+        {
+            pushPacket(std::move(message));
+        }
+    }
+}
+
+void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action)
+{
+    TracyZoneScoped;
+
+    CBattleEntity::OnWeaponSkillFinished(state, action);
+
+    auto* PWeaponSkill  = state.GetSkill();
+    auto* PBattleTarget = static_cast<CBattleEntity*>(state.GetTarget());
+
+    int16 tp = state.GetSpentTP();
+    tp       = battleutils::CalculateWeaponSkillTP(this, PWeaponSkill, tp);
+
+    PLatentEffectContainer->CheckLatentsTP();
+    PLatentEffectContainer->CheckLatentsWS(true);
+
+    SLOTTYPE damslot = SLOT_MAIN;
+
+    if (distance(loc.p, PBattleTarget->loc.p) <= (PWeaponSkill->getRange() + this->modelHitboxSize + PBattleTarget->modelHitboxSize))
+    {
+        if (PWeaponSkill->getID() >= 192 && PWeaponSkill->getID() <= 221)
+        {
+            damslot = SLOT_RANGED;
+        }
+
+        PAI->TargetFind->reset();
+        // TODO: revise parameters
+        if (PWeaponSkill->isAoE())
+        {
+            PAI->TargetFind->findWithinArea(PBattleTarget, AOE_RADIUS::TARGET, PWeaponSkill->getRadius(), FINDFLAGS_NONE, TARGET_NONE);
+        }
+        else
+        {
+            PAI->TargetFind->findSingleTarget(PBattleTarget, FINDFLAGS_NONE, TARGET_NONE);
+        }
+
+        if (PAI->TargetFind->m_targets.size() == 0)
+        {
+            // There used to be an assumed interrupt handler here.
+            // Add a test and capture before reintroducing.
+            return;
+        }
+
+        for (auto&& PTarget : PAI->TargetFind->m_targets)
+        {
+            bool             primary      = PTarget == PBattleTarget;
+            action_target_t& actionTarget = action.addTarget(PTarget->id);
+            action_result_t& actionResult = actionTarget.addResult();
+
+            uint16         tpHitsLanded    = 0;
+            uint16         extraHitsLanded = 0;
+            int32          damage          = 0;
+            CBattleEntity* taChar          = battleutils::getAvailableTrickAttackChar(this, PTarget);
+
+            actionResult.resolution                         = ActionResolution::Hit;
+            actionResult.animation                          = PWeaponSkill->getAnimationId();
+            std::tie(damage, tpHitsLanded, extraHitsLanded) = luautils::OnUseWeaponSkill(this, PTarget, PWeaponSkill, tp, primary, action, taChar);
+
+            if (!battleutils::isValidSelfTargetWeaponskill(PWeaponSkill->getID()))
+            {
+                if (primary && PBattleTarget->objtype == TYPE_MOB)
+                {
+                    luautils::OnWeaponskillHit(PBattleTarget, this, PWeaponSkill->getID());
+                }
+            }
+            else
+            {
+                actionResult.messageID  = primary ? MsgBasic::UsesSkillRecoversMP : MsgBasic::TargetRecoversMP;
+                actionResult.resolution = ActionResolution::Hit;
+                damage                  = std::max(damage, 0);
+                actionResult.param      = PTarget->addMP(damage);
+            }
+
+            if (primary)
+            {
+                // See battleentity.h for REACTION class
+                // On retail, weaponskills will contain 0x08, 0x10 (HIT, ABILITY) on hit and may include the following:
+                // 0x01, 0x02, 0x04 (MISS, GUARDED, BLOCK)
+                // TODO: refactor this so lua returns the number of hits so we don't have to check the reaction bits.
+                bool isNegated = actionResult.resolution == ActionResolution::Miss || actionResult.resolution == ActionResolution::Parry;
+                if (!isNegated)
+                {
+                    int wspoints = settings::get<uint8>("map.WS_POINTS_BASE");
+
+                    if (PBattleTarget->health.hp > 0 && PWeaponSkill->getPrimarySkillchain() != 0)
+                    {
+                        // NOTE: GetSkillChainEffect is INSIDE this if statement because it
+                        //  ALTERS the state of the resonance, which misses and non-elemental skills should NOT do.
+                        const auto effect = battleutils::GetSkillChainEffect(
+                            PBattleTarget,
+                            PWeaponSkill->getPrimarySkillchain(),
+                            PWeaponSkill->getSecondarySkillchain(),
+                            PWeaponSkill->getTertiarySkillchain());
+                        if (effect != ActionProcSkillChain::None)
+                        {
+                            actionResult.recordSkillchain(effect, battleutils::TakeSkillchainDamage(this, PBattleTarget, damage, taChar));
+
+                            // Despite appearances, ws_points_skillchain is not a multiplier it is just an amount "per skillchain level"
+                            const auto wsPointsSkillchain = settings::get<uint8>("map.WS_POINTS_SKILLCHAIN");
+                            if (effect >= ActionProcSkillChain::Compression && effect < ActionProcSkillChain::Radiance)
+                            {
+                                wspoints += (1 * wsPointsSkillchain); // Level 1
+                            }
+                            else if (effect >= ActionProcSkillChain::Gravitation)
+                            {
+                                wspoints += (2 * wsPointsSkillchain); // Level 2
+                            }
+                            else
+                            {
+                                wspoints += (3 * wsPointsSkillchain); // Level 3
+                            }
+                        }
+                    }
+                    // check for ws points
+                    // TODO: As a general rule, mobs not granting EXP do not give WSP
+                    // The following exceptions apply:
+                    // - PC targeted weaponskills always give WSP
+                    // - A handful of content: Besieged, DI
+                    if (charutils::CheckMob(this->GetMLevel(), PTarget) > EMobDifficulty::TooWeak)
+                    {
+                        charutils::AddWeaponSkillPoints(this, damslot, wspoints);
+                    }
+                }
+            }
+        }
+        battleutils::ClaimMob(PBattleTarget, this);
+    }
+    else
+    {
+        ActionInterrupts::WeaponSkillOutOfRange(this, PBattleTarget);
+    }
+
+    PLatentEffectContainer->CheckLatentsWS(false);
+    this->processActionEffectFlags(action);
+}
+
+void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
+{
+    TracyZoneScoped;
+
+    auto* PAbility = state.GetAbility();
+    if (this->PRecastContainer->HasRecast(RECAST_ABILITY, PAbility->getRecastId(), PAbility->getRecastTime()))
+    {
+        pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::WaitLonger);
+        return;
+    }
+    if (this->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Amnesia))
+    {
+        pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::UnableToUseJobAbility2);
+        return;
+    }
+
+    uint8 findFlags = 0;
+
+    if ((PAbility->getValidTarget() & TARGET_PLAYER_DEAD) == TARGET_PLAYER_DEAD)
+    {
+        findFlags |= FINDFLAGS_DEAD;
+    }
+
+    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    PAI->TargetFind->reset();
+    PAI->TargetFind->findSingleTarget(PTarget, findFlags, PAbility->getValidTarget());
+
+    // Check if target is untargetable
+    if (PAI->TargetFind->m_targets.size() == 0)
+    {
+        return;
+    }
+
+    std::unique_ptr<CBasicPacket> errMsg;
+    if (IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))
+    {
+        // get any available recast reduction
+        // TODO: this is DIFFERENT than gear reduction mod which is a static reduction for the entire ability!
+        auto recastReduction = 0s;
+
+        if (PAbility->getMeritModID() > 0 && !(PAbility->getAddType() & ADDTYPE_MERIT))
+        {
+            recastReduction = std::chrono::seconds(PMeritPoints->GetMeritValue((MERIT_TYPE)PAbility->getMeritModID(), this));
+        }
+
+        auto* charge         = ability::GetCharge(this, static_cast<uint16>(PAbility->getRecastId()));
+        auto  baseChargeTime = 0ns; // this can be reduced with merits/job point gifts. NOT the same as Recast- gear (so far...)
+
+        if (charge && PAbility->getID() != ABILITY_SIC)
+        {
+            auto chargesUsed = timer::count_seconds(PAbility->getRecastTime()); // charge cost is stored in the recast...
+
+            //  Can't assign merits via ability ID for Sic/Ready due to shenanigans
+            if (PAbility->getRecastId() == Recast::Sic) // Sic/Ready recast ID
+            {
+                recastReduction = std::chrono::seconds(PMeritPoints->GetMeritValue(MERIT_SIC_RECAST, this));
+            }
+            else if (PAbility->getRecastId() == Recast::Strategems)
+            {
+                recastReduction += std::chrono::seconds(this->getMod(Mod::STRATAGEM_RECAST));
+            }
+
+            baseChargeTime = charge->chargeTime - recastReduction;
+
+            action.recast = baseChargeTime * chargesUsed;
+        }
+        else
+        {
+            action.recast = PAbility->getRecastTime() - recastReduction;
+        }
+
+        if (PAbility->getID() == ABILITY_LIGHT_ARTS || PAbility->getID() == ABILITY_DARK_ARTS || PAbility->getRecastId() == Recast::Strategems)
+        {
+            if (this->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::TabulaRasa))
+            {
+                action.recast  = 0s;
+                baseChargeTime = 0s;
+            }
+        }
+        else if (PAbility->getRecastId() == Recast::BloodPactRage || PAbility->getRecastId() == Recast::BloodPactWard)
+        {
+            uint16 favorReduction          = 0;
+            uint16 bloodPact_I_Reduction   = std::min<int16>(getMod(Mod::BP_DELAY), 15);
+            uint16 bloodPact_II_Reduction  = std::min<int16>(getMod(Mod::BP_DELAY_II), 15);
+            uint16 bloodPact_III_Reduction = 0; // std::min<int16>(getMod(Mod::BP_DELAY_III, 10); TODO: BP Delay III (SMN JP gift) not implemented
+
+            CStatusEffect* avatarsFavor = this->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::AvatarsFavor);
+            if (avatarsFavor)
+            {
+                favorReduction = std::min<int16>(avatarsFavor->GetPower(), 10);
+            }
+
+            int16 bloodPactDelayReduction = favorReduction + std::min<int16>(bloodPact_I_Reduction + bloodPact_II_Reduction + bloodPact_III_Reduction, 30);
+
+            // Localvar will set the BP ability timer when the move consumes MP
+            // The delay is snapshot when the player uses the ability: https://www.bg-wiki.com/ffxi/Blood_Pact_Ability_Delay
+            this->SetLocalVar("bpRecastTime", static_cast<uint16>(timer::count_seconds(std::max<timer::duration>(0s, action.recast - std::chrono::seconds(bloodPactDelayReduction)))));
+
+            // Recast is actually triggered when the bp goes off (no recast packet at all on using a bp and the target moving out of range of the pet)
+            action.recast = 0s;
+        }
+
+        // Check paralysis and consume recast for non-SP abilities
+        if (battleutils::IsParalyzed(this))
+        {
+            // SP abilities don't consume recast when paralyzed
+            const auto recastId = PAbility->getRecastId();
+            if (recastId != Recast::Special && recastId != Recast::Special2)
+            {
+                charutils::ApplyAbilityRecast(this, PAbility, charge, baseChargeTime, action.recast);
+            }
+
+            ActionInterrupts::AbilityParalyzed(this, PTarget);
+            return;
+        }
+
+        // remove invisible if aggressive
+        if (PAbility->getID() != ABILITY_TAME && PAbility->getID() != ABILITY_FIGHT && PAbility->getID() != ABILITY_DEPLOY && PAbility->getID() != ABILITY_GAUGE)
+        {
+            if (PAbility->getValidTarget() & TARGET_ENEMY)
+            {
+                if (PAbility->getID() == ABILITY_ASSAULT)
+                {
+                    charutils::RemoveInvisible(this);
+                }
+                // generic aggressive action
+                else
+                {
+                    StatusEffectContainer->DelStatusEffectsByFlag(xi::StatusEffectFlag::Detectable);
+                }
+                StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Illusion);
+            }
+            else if (PAbility->getID() != ABILITY_TRICK_ATTACK)
+            {
+                // remove invisible only
+                charutils::RemoveInvisible(this);
+                StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Illusion);
+            }
+        }
+
+        if (PAbility->getID() == ABILITY_REWARD)
+        {
+            CItem* PItem = getEquip(SLOT_HEAD);
+            if (PItem && (PItem->getID() == 15157 || PItem->getID() == 15158 || PItem->getID() == 16104 || PItem->getID() == 16105))
+            {
+                // TODO: Transform this into an item Mod::REWARD_RECAST perhaps ?
+                // The Bison/Brave's Warbonnet & Khimaira/Stout Bonnet reduces recast time by 10 seconds.
+                action.recast -= 10s; // remove 10 seconds
+            }
+        }
+        else if (PAbility->getID() == ABILITY_READY || PAbility->getID() == ABILITY_SIC)
+        {
+            action.recast = std::max<timer::duration>(0s, action.recast - std::chrono::seconds(getMod(Mod::SIC_READY_RECAST)));
+        }
+
+        action.actorId    = this->id;
+        action.actiontype = PAbility->getActionType();
+        action.actionid   = PAbility->getID();
+
+        // Calculate ability AoE type and radius via Lua
+        const auto  aoeResult = luautils::callGlobal<sol::table>("xi.combat.abilityAoE.calculateTypeAndRadius", this, PAbility);
+        const auto  aoeType   = static_cast<AOE_TYPE>(aoeResult.get_or(1, 0));
+        const float aoeRadius = aoeResult.get_or(2, 0.0f);
+
+        // TODO: get rid of this to script, too
+        if (PAbility->isPetAbility())
+        {
+            CPetEntity* PPetEntity = dynamic_cast<CPetEntity*>(PPet);
+            CPetSkill*  PPetSkill  = battleutils::GetPetSkill(PAbility->getID());
+
+            // is a real pet (charmed pets won't return a valid PPetEntity)
+            // and has pet ability in the pet_skills sql table
+            if (PPetEntity && PPetSkill) // don't display msg and notify pet
+            {
+                // For jug pet abilities, the JobAbility FINISH packet targets the player, not the pet
+                action_target_t& actionTarget = action.addTarget((PPetEntity->getPetType() == PET_TYPE::JUG_PET) ? this->id : PTarget->id);
+                action_result_t& actionResult = actionTarget.addResult();
+                actionResult.animation        = ActionAnimation::PetSkillStart;
+                actionResult.resolution       = ActionResolution::Hit;
+
+                auto PPetTarget = PTarget->targid;
+
+                // set primary target for jug ready abilities (JA targets the player, but the pet acts like a mob and makes its own decision on the skill target)
+                if (PPetEntity->getPetType() == PET_TYPE::JUG_PET)
+                {
+                    if (PPetSkill->getValidTargets() & TARGET_ENEMY)
+                    {
+                        PPetTarget = PPetEntity->GetBattleTargetID();
+                    }
+                    else
+                    {
+                        PPetTarget = PPetEntity->targid;
+                    }
+                }
+
+                // OnAbilityCheck succeeded and petskill is found, tell pet to perform it
+                // TODO: This ends up sending the pet action packet before PC...
+                PPetEntity->PAI->PetSkill(PPetTarget, PPetSkill->getID());
+            }
+        }
+        // TODO: make this generic enough to not require an if
+        else if (aoeType != AOE_TYPE::NONE)
+        {
+            PAI->TargetFind->reset();
+            PAI->TargetFind->findWithinArea(this, AOE_RADIUS::ATTACKER, aoeRadius, findFlags, PAbility->getValidTarget());
+
+            auto prevMsg = MsgBasic::None;
+            for (auto&& PTargetFound : PAI->TargetFind->m_targets)
+            {
+                action_target_t& actionTarget = action.addTarget(PTargetFound->id);
+                action_result_t& actionResult = actionTarget.addResult();
+                actionResult.resolution       = ActionResolution::Hit;
+                actionResult.animation        = PAbility->getAnimationID();
+                actionResult.messageID        = PAbility->getMessage();
+
+                int32 value = luautils::OnUseAbility(this, PTargetFound, PAbility, &action);
+
+                if (prevMsg == MsgBasic::None) // get default message for the first target
+                {
+                    actionResult.messageID = PAbility->getMessage();
+                }
+                else // get AoE message for secondary targets
+                {
+                    actionResult.messageID = messageutils::GetAoEVariant(PAbility->getMessage());
+                }
+
+                actionResult.param = value;
+
+                if (value < 0)
+                {
+                    actionResult.messageID = messageutils::GetAbsorbVariant(actionResult.messageID);
+                    actionResult.param     = -actionResult.param;
+                }
+
+                prevMsg = actionResult.messageID;
+
+                state.ApplyEnmity();
+            }
+        }
+        else
+        {
+            action_target_t& actionTarget = action.addTarget(PTarget->id);
+            action_result_t& actionResult = actionTarget.addResult();
+            actionResult.resolution       = ActionResolution::Hit;
+            actionResult.animation        = PAbility->getAnimationID();
+            MsgBasic prevMsg              = actionResult.messageID;
+
+            // Check for special situations from Steal (The Tenshodo Showdown quest)
+            if (PAbility->getID() == ABILITY_STEAL)
+            {
+                // Force a specific result to be stolen based on the mob LUA
+                actionResult.param = luautils::OnSteal(this, PTarget, PAbility, &action);
+            }
+
+            int32 value = luautils::OnUseAbility(this, PTarget, PAbility, &action);
+
+            if (prevMsg == actionResult.messageID)
+            {
+                actionResult.messageID = PAbility->getMessage();
+            }
+
+            // TODO: Some abilities legitimately have no message (e.g., Full Circle)
+            if (actionResult.messageID == MsgBasic::None)
+            {
+                actionResult.messageID = MsgBasic::UsesJobAbility;
+            }
+
+            actionResult.param = value;
+
+            if (value < 0)
+            {
+                actionResult.messageID = messageutils::GetAbsorbVariant(actionResult.messageID);
+                actionResult.param     = -value;
+            }
+
+            state.ApplyEnmity();
+        }
+
+        // Some mobs respond to abilities (ex. Absolute Virtue / Ob)
+        for (CBattleEntity* PBattleEntity : *PNotorietyContainer)
+        {
+            if (auto* PMob = dynamic_cast<CMobEntity*>(PBattleEntity))
+            {
+                if (PMob->getMobMod(MOBMOD_ABILITY_RESPONSE) && PMob->getZone() == this->getZone())
+                {
+                    luautils::OnPlayerAbilityUse(PMob, this, PAbility);
+                }
+            }
+        }
+
+        // Cleanup "consumed" abilities after action like Contradance
+        StatusEffectContainer->DelStatusEffect(PAbility->getPostActionEffectCleanup());
+
+        charutils::ApplyAbilityRecast(this, PAbility, charge, baseChargeTime, action.recast);
+        this->processActionEffectFlags(action);
+    }
+    else if (errMsg)
+    {
+        pushPacket(std::move(errMsg));
+    }
+}
+
+bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
+{
+    TracyZoneScoped;
+
+    if (PBattleTarget == nullptr)
+    {
+        ShowWarning("CCharEntity::IsMobOwner() - PBattleTarget was null.");
+        return false;
+    }
+
+    if (PBattleTarget->m_OwnerID.id == 0 || PBattleTarget->m_OwnerID.id == this->id || PBattleTarget->objtype == TYPE_PC)
+    {
+        return true;
+    }
+
+    if (auto* PMob = dynamic_cast<CMobEntity*>(PBattleTarget))
+    {
+        if (PMob->getMobMod(MOBMOD_CLAIM_TYPE) == static_cast<int16>(xi::ClaimType::NonExclusive))
+        {
+            return true;
+        }
+    }
+
+    bool found = false;
+
+    // clang-format off
+    ForAlliance([&PBattleTarget, &found](CBattleEntity* PEntity)
+    {
+        if (PEntity->id == PBattleTarget->m_OwnerID.id)
+        {
+            found = true;
+        }
+    });
+    // clang-format on
+
+    return found;
+}
+
+void CCharEntity::HandleErrorMessage(std::unique_ptr<CBasicPacket>& msg)
+{
+    TracyZoneScoped;
+
+    if (msg && !isCharmed)
+    {
+        pushPacket(std::move(msg));
+    }
+}
+
+void CCharEntity::OnDeathTimer()
+{
+    TracyZoneScoped;
+
+    charutils::SetCharVar(this, "expLost", 0);
+    requestedWarp = true; // zone entities will warp us on the next tick
+}
+
+void CCharEntity::OnRaise()
+{
+    TracyZoneScoped;
+
+    // TODO: Moghancement Experience needs to be factored in here somewhere.
+    if (m_hasRaise > 0)
+    {
+        // Player had no weakness prior, so set this to 1
+        if (m_weaknessLvl == 0)
+        {
+            m_weaknessLvl = 1;
+        }
+
+        // add weakness effect (75% reduction in HP/MP)
+        if (GetLocalVar("MijinGakure") == 0)
+        {
+            auto weaknessTime = 5min;
+
+            // Arise has a reduced weakness time of 3 mins
+            if (m_hasArise)
+            {
+                weaknessTime = 3min;
+            }
+
+            StatusEffectContainer->AddStatusEffect(xi::StatusEffect::Weakness, static_cast<uint16>(xi::StatusEffect::Weakness), m_weaknessLvl, 0s, weaknessTime);
+        }
+
+        double ratioReturned = 0.0f;
+        uint16 hpReturned    = 1;
+
+        action_t action{
+            .actorId    = id,
+            .actiontype = ActionCategory::MagicFinish,
+        };
+
+        auto& actionTarget = action.addTarget(id);
+        auto& actionResult = actionTarget.addResult();
+
+        // Mijin Gakure used with MIJIN_RERAISE MOD
+        if (GetLocalVar("MijinGakure") != 0 && getMod(Mod::MIJIN_RERAISE) != 0)
+        {
+            actionResult.animation = ActionAnimation::Raise;
+            hpReturned             = (uint16)(GetMaxHP());
+        }
+        else if (m_hasRaise == 1)
+        {
+            actionResult.animation = ActionAnimation::Raise;
+            hpReturned             = static_cast<uint16>((GetLocalVar("MijinGakure") != 0) ? GetMaxHP() * 0.5 : GetMaxHP() * 0.1);
+            ratioReturned          = 0.50f * static_cast<double>(1 - settings::get<uint8>("map.EXP_RETAIN"));
+        }
+        else if (m_hasRaise == 2)
+        {
+            actionResult.animation = ActionAnimation::Raise2;
+            hpReturned             = static_cast<uint16>((GetLocalVar("MijinGakure") != 0) ? GetMaxHP() * 0.5 : GetMaxHP() * 0.25);
+            ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.75f) * static_cast<double>(1 - settings::get<uint8>("map.EXP_RETAIN"));
+        }
+        else if (m_hasRaise == 3)
+        {
+            actionResult.animation = ActionAnimation::Raise3;
+            hpReturned             = static_cast<uint16>(GetMaxHP() * 0.5);
+            ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.90f) * static_cast<double>(1 - settings::get<uint8>("map.EXP_RETAIN"));
+        }
+        else if (m_hasRaise == 4) // Used for spell "Arise" and Arise from the spell "Reraise IV"
+        {
+            actionResult.animation = ActionAnimation::Arise;
+            hpReturned             = static_cast<uint16>(GetMaxHP());
+            ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.90f) * static_cast<double>(1 - settings::get<uint8>("map.EXP_RETAIN"));
+        }
+
+        addHP(((hpReturned < 1) ? 1 : hpReturned));
+        updatemask |= UPDATE_HP;
+
+        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
+
+        // Do not return EXP to the player if they do not have experienceLost variable.
+        uint16 expLost = charutils::GetCharVar(this, "expLost");
+
+        if (expLost != 0)
+        {
+            uint16 xpReturned = (uint16)(ceil(expLost * ratioReturned));
+            charutils::AddExperiencePoints(true, false, false, this, this, xpReturned);
+
+            charutils::SetCharVar(this, "expLost", 0);
+        }
+
+        // If Arise was used then apply a reraise 3 effect on the target
+        if (m_hasArise)
+        {
+            StatusEffectContainer->AddStatusEffect(xi::StatusEffect::Reraise, static_cast<uint16>(xi::StatusEffect::Reraise), 3, 0s, 1h);
+        }
+
+        SetLocalVar("MijinGakure", 0);
+        m_hasArise = false;
+        m_hasRaise = 0;
+    }
+}
+
+auto CCharEntity::OnItemFinish(CItemState& state, action_t& action) -> bool
+{
+    TracyZoneScoped;
+
+    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PItem   = state.GetItem();
+
+    if (!PItem->isType(ITEM_EQUIPMENT) && (PItem->getQuantity() < 1 || PItem->getReserve() > 0))
+    {
+        ShowWarning("OnItemFinish: %s attempted to use reserved/insufficient %s (%u).", this->getName(), PItem->getName(), PItem->getID());
+        this->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, PItem->getID(), 0, MsgBasic::ItemFailsToActivate);
+
+        return false;
+    }
+
+    uint8 findFlags = 0;
+
+    // Raise Rod, Raise Rod II, Shobuhouou Kabuto at time of writing
+    if ((PItem->getValidTarget() & TARGET_PLAYER_DEAD) == TARGET_PLAYER_DEAD)
+    {
+        findFlags |= FINDFLAGS_DEAD;
+    }
+
+    PAI->TargetFind->reset();
+    PAI->TargetFind->findSingleTarget(PTarget, findFlags, PItem->getValidTarget());
+
+    // Check if target is untargetable
+    if (PAI->TargetFind->m_targets.size() == 0)
+    {
+        // TODO: interrupt action packet?
+        return false;
+    }
+
+    action.actorId    = this->id;
+    action.actiontype = ActionCategory::ItemFinish;
+    action.actionid   = PItem->getID();
+
+    auto processAction = [&](CBaseEntity* PTargetFound) -> void
+    {
+        action_target_t& actionTarget = action.addTarget(PTargetFound->id);
+        action_result_t& actionResult = actionTarget.addResult();
+        actionResult.resolution       = ActionResolution::Hit;
+        actionResult.animation        = PItem->getAnimationID();
+
+        // TODO: guard charutils::UpdateItem against InTransaction items so a
+        // Lua delItem inside OnItemUse can't decrement out-of-tx.
+        int32 value = luautils::OnItemUse(this, PTargetFound, PItem, action);
+
+        actionResult.param = value;
+        // TODO: how to detect if item does damage?
+        /*if (value < 0)
+        {
+            actionResult.messageID = messageutils::GetAbsorbVariant(actionResult.messageID);
+            actionResult.param     = -actionResult.param;
+        }*/
+    };
+
+    if (PItem->getAoE())
+    {
+        PAI->TargetFind->reset();
+
+        float distance = 10; // TODO: ask the item for its range
+
+        PAI->TargetFind->findWithinArea(this, AOE_RADIUS::ATTACKER, distance, findFlags, PItem->getValidTarget());
+
+        for (auto&& PTargetFound : PAI->TargetFind->m_targets)
+        {
+            processAction(PTargetFound);
+        }
+    }
+    else
+    {
+        processAction(PTarget);
+    }
+
+    if (PItem->isType(ITEM_EQUIPMENT))
+    {
+        if (PItem->getMaxCharges() > 1)
+        {
+            PItem->setCurrentCharges(PItem->getCurrentCharges() - 1);
+        }
+        PItem->setLastUseTime(timer::now());
+
+        db::preparedStmt("UPDATE char_inventory "
+                         "SET extra = ? "
+                         "WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
+                         PItem->m_extra,
+                         this->id,
+                         PItem->getLocationID(),
+                         PItem->getSlotID());
+
+        if (PItem->getCurrentCharges() != 0)
+        {
+            // add recast timer to Recast List from any bag
+            this->PRecastContainer->Add(RECAST_ITEM, static_cast<Recast>(PItem->getSlotID() << 8 | PItem->getLocationID()), PItem->getReuseTime());
+        }
+        return false;
+    }
+
+    // Consumable items: signal CItemState::FinishItem to commit the ItemUseTransaction
+    // TODO: Some non-equipment items should not be consumed on use
+    return true;
+}
+
+CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg)
+{
+    TracyZoneScoped;
+
+    auto* PTarget = CBattleEntity::IsValidTarget(targid, validTargetFlags, errMsg);
+    if (PTarget)
+    {
+        if (PTarget->objtype == TYPE_PC && charutils::IsAidBlocked(this, static_cast<CCharEntity*>(PTarget)))
+        {
+            // Target is blocking assistance
+            errMsg = std::make_unique<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::TargetIsCurrentlyBlocking);
+            // Interaction was blocked
+            static_cast<CCharEntity*>(PTarget)->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::BlockedByBlockaid);
+        }
+        else if (IsMobOwner(PTarget))
+        {
+            if (PTarget->isAlive() || (validTargetFlags & TARGET_PLAYER_DEAD) != 0)
+            {
+                return PTarget;
+            }
+            else
+            {
+                errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::CannotOnThatTarget);
+            }
+        }
+        else
+        {
+            errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, PTarget, 0, 0, MsgBasic::AlreadyClaimed);
+        }
+    }
+    else
+    {
+        // Check if target is a BEHAVIOR_NO_ASSIST mob with player allegiance
+        auto* PEntity = GetEntity(targid, TYPE_MOB | TYPE_PC | TYPE_PET | TYPE_TRUST);
+        if (PEntity && PEntity->objtype == TYPE_MOB && static_cast<CMobEntity*>(PEntity)->allegiance == xi::Allegiance::Player &&
+            (static_cast<CMobEntity*>(PEntity)->m_Behavior & BEHAVIOR_NO_ASSIST))
+        {
+            errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::CannotOnThatTarget);
+        }
+        else
+        {
+            errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::CannotAttackTarget);
+        }
+    }
+    return nullptr;
+}
+
+void CCharEntity::Die()
+{
+    TracyZoneScoped;
+
+    if (auto* PLastAttacker = GetEntity(lastAttackerId_.targid); PLastAttacker && PLastAttacker->id == lastAttackerId_.id)
+    {
+        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PLastAttacker, this, 0, 0, MsgBasic::PlayerDefeatedBy));
+    }
+    else
+    {
+        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::FallsToGround));
+    }
+
+    battleutils::RelinquishClaim(this);
+
+    if (this->PPet)
+    {
+        petutils::DespawnPet(this);
+    }
+
+    Die(death_duration);
+    SetDeathTime(timer::now());
+
+    setBlockingAid(false);
+
+    // influence for conquest system
+    conquest::LoseInfluencePoints(this);
+
+    if (GetLocalVar("MijinGakure") == 0 &&
+        (PBattlefield == nullptr || (PBattlefield->GetRuleMask() & RULES_LOSE_EXP) == RULES_LOSE_EXP) &&
+        GetMLevel() >= settings::get<uint8>("map.EXP_LOSS_LEVEL"))
+    {
+        float retainPercent = std::clamp(settings::get<uint8>("map.EXP_RETAIN") + getMod(Mod::EXPERIENCE_RETAINED) / 100.0f, 0.0f, 1.0f);
+        charutils::DelExperiencePoints(this, retainPercent, 0);
+    }
+
+    luautils::OnPlayerDeath(this);
+}
+
+void CCharEntity::Die(timer::duration _duration)
+{
+    TracyZoneScoped;
+
+    this->ClearTrusts();
+
+    if (StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Weakness))
+    {
+        // Remove weakness effect as per retail but keep track of weakness
+        StatusEffectContainer->DelStatusEffectSilent(xi::StatusEffect::Weakness);
+        // Increase the weakness counter if previously weakened
+        m_weaknessLvl++;
+    }
+    else
+    {
+        // Reset weakness here, then +1 it on raise as we had no weakness prior
+        m_weaknessLvl = 0;
+    }
+
+    m_deathSyncTime = timer::now() + death_update_frequency;
+    PAI->ClearStateStack();
+    PAI->Internal_Die(_duration);
+
+    // If player allegiance is not reset on death they will auto-homepoint
+    allegiance = xi::Allegiance::Player;
+
+    // reraise modifiers
+    if (this->getMod(Mod::RERAISE_I) > 0)
+    {
+        m_hasRaise = 1;
+    }
+
+    if (this->getMod(Mod::RERAISE_II) > 0)
+    {
+        m_hasRaise = 2;
+    }
+
+    if (this->getMod(Mod::RERAISE_III) > 0)
+    {
+        m_hasRaise = 3;
+    }
+    // MIJIN_RERAISE checks
+    if (m_hasRaise == 0 && this->getMod(Mod::MIJIN_RERAISE) > 0)
+    {
+        m_hasRaise = 1;
+    }
+
+    this->m_charHistory.timesKnockedOut++;
+
+    CBattleEntity::Die();
+}
+
+void CCharEntity::Raise()
+{
+    TracyZoneScoped;
+
+    OnRaise();
+    PAI->Accept_Raise();
+
+    SetDeathTime(timer::time_point::min());
+}
+
+void CCharEntity::SetDeathTime(timer::time_point timestamp)
+{
+    m_DeathTimestamp = timestamp;
+}
+
+timer::duration CCharEntity::GetTimeSinceDeath() const
+{
+    return m_DeathTimestamp > timer::time_point::min() ? timer::now() - m_DeathTimestamp : 0s;
+}
+
+timer::duration CCharEntity::GetTimeUntilDeathHomepoint() const
+{
+    return 60min - GetTimeSinceDeath();
+}
+
+earth_time::time_point CCharEntity::GetTimeCreated()
+{
+    TracyZoneScoped;
+
+    const auto rset = db::preparedStmt("SELECT UNIX_TIMESTAMP(timecreated) FROM chars WHERE charid = ? LIMIT 1", id);
+
+    if (rset && rset->rowsCount() && rset->next())
+    {
+        return earth_time::time_point(std::chrono::seconds(rset->get<uint32>("UNIX_TIMESTAMP(timecreated)")));
+    }
+
+    return earth_time::time_point::min();
+}
+
+uint8 CCharEntity::getHighestJobLevel()
+{
+    uint8 maxJobLevel = 0;
+
+    for (uint8 jobId = 0; jobId < MAX_JOBTYPE; jobId++)
+    {
+        if (jobs.job[jobId] > maxJobLevel)
+        {
+            maxJobLevel = jobs.job[jobId];
+        }
+    }
+
+    return maxJobLevel;
+}
+
+bool CCharEntity::hasMoghancement(uint16 moghancementID) const
+{
+    return m_moghancementID == moghancementID;
+}
+
+void CCharEntity::UpdateMoghancement()
+{
+    TracyZoneScoped;
+
+    // Add up all of the installed furniture auras
+    std::array<uint16, 8> elements = { 0 };
+    for (auto containerID : { LOC_MOGSAFE, LOC_MOGSAFE2 })
+    {
+        CItemContainer* PContainer = getStorage(containerID);
+        for (int slotID = 1; slotID <= PContainer->GetSize(); ++slotID)
+        {
+            CItem* PItem = PContainer->GetItem(slotID);
+            if (PItem != nullptr && PItem->isType(ITEM_FURNISHING))
+            {
+                CItemFurnishing* PFurniture = static_cast<CItemFurnishing*>(PItem);
+                if (PFurniture->isInstalled() && !PFurniture->getOn2ndFloor())
+                {
+                    elements[PFurniture->getElement() - 1] += PFurniture->getAura();
+                }
+            }
+        }
+    }
+
+    // Determine the dominant aura
+    uint8  dominantElement = 0;
+    uint16 dominantAura    = 0;
+    bool   hasTiedElements = false;
+    for (uint8 elementID = 1; elementID < 9; ++elementID)
+    {
+        uint16 aura = elements[elementID - 1];
+        if (aura > dominantAura)
+        {
+            dominantElement = elementID;
+            dominantAura    = aura;
+            hasTiedElements = false;
+        }
+        else if (aura == dominantAura)
+        {
+            hasTiedElements = true;
+        }
+    }
+
+    // Determine which moghancement to use from the dominant element
+    uint8  bestAura          = 0;
+    uint16 newMoghancementID = 0;
+    if (!hasTiedElements && dominantAura > 0)
+    {
+        for (auto containerID : { LOC_MOGSAFE, LOC_MOGSAFE2 })
+        {
+            CItemContainer* PContainer = getStorage(containerID);
+            for (int slotID = 1; slotID <= PContainer->GetSize(); ++slotID)
+            {
+                CItem* PItem = PContainer->GetItem(slotID);
+                if (PItem != nullptr && PItem->isType(ITEM_FURNISHING))
+                {
+                    CItemFurnishing* PFurniture = static_cast<CItemFurnishing*>(PItem);
+                    // Highest aura wins, ties broken by highest moghancement id.
+                    if (PFurniture->isInstalled() && !PFurniture->getOn2ndFloor() && PFurniture->getElement() == dominantElement)
+                    {
+                        const uint8  aura         = PFurniture->getAura();
+                        const uint16 moghancement = PFurniture->getMoghancement();
+                        if (aura > bestAura || (aura == bestAura && moghancement > newMoghancementID))
+                        {
+                            bestAura          = aura;
+                            newMoghancementID = moghancement;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Always show which moghancement the player has if they have one at all
+    if (newMoghancementID != 0)
+    {
+        pushPacket<GP_SERV_COMMAND_TALKNUMWORK>(this, luautils::GetTextIDVariable(getZone(), "KEYITEM_OBTAINED"), newMoghancementID, 0, 0, 0, false);
+    }
+
+    if (newMoghancementID != m_moghancementID)
+    {
+        // Remove the previous moghancement
+        if (m_moghancementID != 0)
+        {
+            charutils::delKeyItem(this, static_cast<KeyItem>(m_moghancementID));
+        }
+
+        // Add the new moghancement
+        if (newMoghancementID != 0)
+        {
+            charutils::addKeyItem(this, static_cast<KeyItem>(newMoghancementID));
+        }
+
+        // Send only one key item packet if they are in the same key item table
+        uint8 newTable     = newMoghancementID >> 9;
+        uint8 currentTable = m_moghancementID >> 9;
+        if (newTable == currentTable)
+        {
+            pushPacket<GP_SERV_COMMAND_SCENARIOITEM>(this, newTable);
+        }
+        else
+        {
+            if (newTable != 0)
+            {
+                pushPacket<GP_SERV_COMMAND_SCENARIOITEM>(this, newTable);
+            }
+            if (currentTable != 0)
+            {
+                pushPacket<GP_SERV_COMMAND_SCENARIOITEM>(this, currentTable);
+            }
+        }
+        charutils::SaveKeyItems(this);
+
+        SetMoghancement(newMoghancementID);
+        charutils::SaveCharMoghancement(this);
+    }
+}
+
+void CCharEntity::SetMoghancement(uint16 moghancementID)
+{
+    // Remove the previous Moghancement first
+    changeMoghancement(m_moghancementID, false);
+    changeMoghancement(moghancementID, true);
+    m_moghancementID = moghancementID;
+}
+
+void CCharEntity::changeMoghancement(uint16 moghancementID, bool isAdding)
+{
+    TracyZoneScoped;
+
+    if (moghancementID == 0)
+    {
+        return;
+    }
+
+    // Apply the Moghancement
+    int16 multiplier = isAdding ? 1 : -1;
+    switch (moghancementID)
+    {
+        case MOGHANCEMENT_FIRE:
+            addModifier(Mod::SYNTH_MATERIAL_LOSS_FIRE, 5 * multiplier);
+            break;
+        case MOGHANCEMENT_ICE:
+            addModifier(Mod::SYNTH_MATERIAL_LOSS_ICE, 5 * multiplier);
+            break;
+        case MOGHANCEMENT_WIND:
+            addModifier(Mod::SYNTH_MATERIAL_LOSS_WIND, 5 * multiplier);
+            break;
+        case MOGHANCEMENT_EARTH:
+            addModifier(Mod::SYNTH_MATERIAL_LOSS_EARTH, 5 * multiplier);
+            break;
+        case MOGHANCEMENT_LIGHTNING:
+            addModifier(Mod::SYNTH_MATERIAL_LOSS_THUNDER, 5 * multiplier);
+            break;
+        case MOGHANCEMENT_WATER:
+            addModifier(Mod::SYNTH_MATERIAL_LOSS_WATER, 5 * multiplier);
+            break;
+        case MOGHANCEMENT_LIGHT:
+            addModifier(Mod::SYNTH_MATERIAL_LOSS_LIGHT, 5 * multiplier);
+            break;
+        case MOGHANCEMENT_DARK:
+            addModifier(Mod::SYNTH_MATERIAL_LOSS_DARK, 5 * multiplier);
+            break;
+
+        case MOGHANCEMENT_FISHING:
+            addModifier(Mod::FISH, 1 * multiplier);
+            break;
+        case MOGHANCEMENT_WOODWORKING:
+            addModifier(Mod::WOOD, 1 * multiplier);
+            break;
+        case MOGHANCEMENT_SMITHING:
+            addModifier(Mod::SMITH, 1 * multiplier);
+            break;
+        case MOGHANCEMENT_GOLDSMITHING:
+            addModifier(Mod::GOLDSMITH, 1 * multiplier);
+            break;
+        case MOGHANCEMENT_CLOTHCRAFT:
+            addModifier(Mod::CLOTH, 1 * multiplier);
+            break;
+        case MOGHANCEMENT_LEATHERCRAFT:
+            addModifier(Mod::LEATHER, 1 * multiplier);
+            break;
+        case MOGHANCEMENT_BONECRAFT:
+            addModifier(Mod::BONE, 1 * multiplier);
+            break;
+        case MOGHANCEMENT_ALCHEMY:
+            addModifier(Mod::ALCHEMY, 1 * multiplier);
+            break;
+        case MOGHANCEMENT_COOKING:
+            addModifier(Mod::COOK, 1 * multiplier);
+            break;
+
+        case MOGLIFICATION_FISHING:
+            addModifier(Mod::FISH, 1 * multiplier);
+            // TODO: "makes it slightly easier to reel in your catch"
+            break;
+        case MOGLIFICATION_WOODWORKING:
+            addModifier(Mod::WOOD, 1 * multiplier);
+            addModifier(Mod::SYNTH_MATERIAL_LOSS_WOODWORKING, 5 * multiplier);
+            break;
+        case MOGLIFICATION_SMITHING:
+            addModifier(Mod::SMITH, 1 * multiplier);
+            addModifier(Mod::SYNTH_MATERIAL_LOSS_SMITHING, 5 * multiplier);
+            break;
+        case MOGLIFICATION_GOLDSMITHING:
+            addModifier(Mod::GOLDSMITH, 1 * multiplier);
+            addModifier(Mod::SYNTH_MATERIAL_LOSS_GOLDSMITHING, 5 * multiplier);
+            break;
+        case MOGLIFICATION_CLOTHCRAFT:
+            addModifier(Mod::CLOTH, 1 * multiplier);
+            addModifier(Mod::SYNTH_MATERIAL_LOSS_CLOTHCRAFT, 5 * multiplier);
+            break;
+        case MOGLIFICATION_LEATHERCRAFT:
+            addModifier(Mod::LEATHER, 1 * multiplier);
+            addModifier(Mod::SYNTH_MATERIAL_LOSS_LEATHERCRAFT, 5 * multiplier);
+            break;
+        case MOGLIFICATION_BONECRAFT:
+            addModifier(Mod::BONE, 1 * multiplier);
+            addModifier(Mod::SYNTH_MATERIAL_LOSS_BONECRAFT, 5 * multiplier);
+            break;
+        case MOGLIFICATION_ALCHEMY:
+            addModifier(Mod::ALCHEMY, 1 * multiplier);
+            addModifier(Mod::SYNTH_MATERIAL_LOSS_ALCHEMY, 5 * multiplier);
+            break;
+        case MOGLIFICATION_COOKING:
+            addModifier(Mod::COOK, 1 * multiplier);
+            addModifier(Mod::SYNTH_MATERIAL_LOSS_COOKING, 5 * multiplier);
+            break;
+
+        // Mega Moglifications do not state anything about lowering material loss.
+        case MEGA_MOGLIFICATION_FISHING:
+            addModifier(Mod::FISH, 5 * multiplier);
+            break;
+        case MEGA_MOGLIFICATION_WOODWORKING:
+            addModifier(Mod::WOOD, 5 * multiplier);
+            break;
+        case MEGA_MOGLIFICATION_SMITHING:
+            addModifier(Mod::SMITH, 5 * multiplier);
+            break;
+        case MEGA_MOGLIFICATION_GOLDSMITHING:
+            addModifier(Mod::GOLDSMITH, 5 * multiplier);
+            break;
+        case MEGA_MOGLIFICATION_CLOTHCRAFT:
+            addModifier(Mod::CLOTH, 5 * multiplier);
+            break;
+        case MEGA_MOGLIFICATION_LEATHERCRAFT:
+            addModifier(Mod::LEATHER, 5 * multiplier);
+            break;
+        case MEGA_MOGLIFICATION_BONECRAFT:
+            addModifier(Mod::BONE, 5 * multiplier);
+            break;
+        case MEGA_MOGLIFICATION_ALCHEMY:
+            addModifier(Mod::ALCHEMY, 5 * multiplier);
+            break;
+        case MEGA_MOGLIFICATION_COOKING:
+            addModifier(Mod::COOK, 5 * multiplier);
+            break;
+
+        case MOGHANCEMENT_EXPERIENCE:
+            addModifier(Mod::EXPERIENCE_RETAINED, 5 * multiplier);
+            break;
+        case MOGHANCEMENT_GARDENING:
+            addModifier(Mod::GARDENING_WILT_BONUS, 36 * multiplier);
+            break;
+        case MOGHANCEMENT_DESYNTHESIS:
+            addModifier(Mod::SYNTH_SUCCESS_RATE_DESYNTHESIS, 2 * multiplier);
+            break;
+        case MOGHANCEMENT_CONQUEST:
+            addModifier(Mod::CONQUEST_BONUS, 6 * multiplier);
+            break;
+        case MOGHANCEMENT_REGION:
+            addModifier(Mod::CONQUEST_REGION_BONUS, 10 * multiplier);
+            break;
+        case MOGHANCEMENT_FISHING_ITEM:
+            // TODO: Increases the chances of finding items when fishing
+            break;
+        case MOGHANCEMENT_SANDORIA_CONQUEST:
+            if (profile.nation == 0)
+            {
+                addModifier(Mod::CONQUEST_BONUS, 6 * multiplier);
+            }
+            break;
+        case MOGHANCEMENT_BASTOK_CONQUEST:
+            if (profile.nation == 1)
+            {
+                addModifier(Mod::CONQUEST_BONUS, 6 * multiplier);
+            }
+            break;
+        case MOGHANCEMENT_WINDURST_CONQUEST:
+            if (profile.nation == 2)
+            {
+                addModifier(Mod::CONQUEST_BONUS, 6 * multiplier);
+            }
+            break;
+        case MOGHANCEMENT_MONEY:
+            addModifier(Mod::MOGHANCEMENT_GIL_BONUS_P, 10 * multiplier);
+            break;
+        case MOGHANCEMENT_CAMPAIGN:
+            addModifier(Mod::CAMPAIGN_BONUS, 5 * multiplier);
+            break;
+        case MOGHANCEMENT_MONEY_II:
+            addModifier(Mod::MOGHANCEMENT_GIL_BONUS_P, 15 * multiplier);
+            break;
+        case MOGHANCEMENT_SKILL_GAINS:
+            // NOTE: Exact value is unknown but considering this only granted by a newish item it makes sense SE made it fairly strong
+            addModifier(Mod::COMBAT_SKILLUP_RATE, 25 * multiplier);
+            addModifier(Mod::MAGIC_SKILLUP_RATE, 25 * multiplier);
+            break;
+        case MOGHANCEMENT_BOUNTY:
+            addModifier(Mod::EXP_BONUS, 10 * multiplier);
+            addModifier(Mod::CAPACITY_BONUS, 10 * multiplier);
+            break;
+        case MOGLIFICATION_EXPERIENCE_BOOST:
+            addModifier(Mod::EXP_BONUS, 15 * multiplier);
+            break;
+        case MOGLIFICATION_CAPACITY_BOOST:
+            addModifier(Mod::CAPACITY_BONUS, 15 * multiplier);
+            break;
+
+        // NOTE: Exact values for resistances is unknown
+        case MOGLIFICATION_RESIST_DEATH:
+            addModifier(Mod::DEATHRES, 10 * multiplier);
+            break;
+        case MOGLIFICATION_RESIST_SLEEP:
+            addModifier(Mod::SLEEPRES, 10 * multiplier);
+            break;
+        case MOGLIFICATION_RESIST_POISON:
+            addModifier(Mod::POISONRES, 10 * multiplier);
+            break;
+        case MOGLIFICATION_RESIST_PARALYSIS:
+            addModifier(Mod::PARALYZERES, 10 * multiplier);
+            break;
+        case MOGLIFICATION_RESIST_SILENCE:
+            addModifier(Mod::SILENCERES, 10 * multiplier);
+            break;
+        case MOGLIFICATION_RESIST_PETRIFICATION:
+            addModifier(Mod::PETRIFYRES, 10 * multiplier);
+            break;
+        case MOGLIFICATION_RESIST_VIRUS:
+            addModifier(Mod::VIRUSRES, 10 * multiplier);
+            break;
+        case MOGLIFICATION_RESIST_CURSE:
+            addModifier(Mod::CURSERES, 10 * multiplier);
+            break;
+        default:
+            break;
+    }
+}
+
+bool CCharEntity::OnAttackError(CAttackState& state)
+{
+    TracyZoneScoped;
+
+    auto* controller{ static_cast<CPlayerController*>(PAI->GetController()) };
+    if (controller->getLastErrMsgTime() + std::chrono::milliseconds(this->GetWeaponDelay(false)) < PAI->getTick())
+    {
+        controller->setLastErrMsgTime(PAI->getTick());
+        return true;
+    }
+    return false;
+}
+
+bool CCharEntity::isInTriggerArea(uint32 triggerAreaID)
+{
+    return charTriggerAreaIDs.find(triggerAreaID) != charTriggerAreaIDs.end();
+}
+
+void CCharEntity::onTriggerAreaEnter(uint32 triggerAreaID)
+{
+    charTriggerAreaIDs.insert(triggerAreaID);
+}
+
+void CCharEntity::onTriggerAreaLeave(uint32 triggerAreaID)
+{
+    charTriggerAreaIDs.erase(triggerAreaID);
+}
+
+void CCharEntity::clearTriggerAreas()
+{
+    charTriggerAreaIDs.clear();
+}
+
+auto CCharEntity::isInEvent() const -> bool
+{
+    return currentEvent->eventId != -1;
+}
+
+bool CCharEntity::isNpcLocked()
+{
+    return isInEvent() || inSequence;
+}
+
+void CCharEntity::endCurrentEvent()
+{
+    currentEvent->reset();
+    eventPreparation->reset();
+    setLocked(false);
+    m_zoneInCutscene = false;
+    m_Substate       = CHAR_SUBSTATE::SUBSTATE_NONE;
+    tryStartNextEvent();
+}
+
+void CCharEntity::queueEvent(EventInfo* eventToQueue)
+{
+    for (auto& eventElement : eventQueue)
+    {
+        if (eventElement->eventId == eventToQueue->eventId)
+        {
+            ShowError("CCharEntity::queueEvent: Character attempted to start multiple of the same event.");
+            return;
+        }
+    }
+
+    eventQueue.emplace_back(eventToQueue);
+    tryStartNextEvent();
+}
+
+void CCharEntity::tryStartNextEvent()
+{
+    TracyZoneScoped;
+
+    if (isInEvent())
+    {
+        return;
+    }
+
+    if (eventQueue.empty())
+    {
+        updatemask |= UPDATE_POS; // TODO: decouple from this. We want the 250ms post-tick processing
+
+        // Chocobo NPC (outside, gives you a mount) edge case
+        if (auto PStatusEffect = StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Mounted))
+        {
+            switch (PStatusEffect->GetPower())
+            {
+                case MOUNT_CHOCOBO:
+                case MOUNT_NOBLE_CHOCOBO:
+                    animation = ANIMATION_CHOCOBO;
+                    break;
+                default:
+                    animation = ANIMATION_MOUNT;
+                    break;
+            }
+        }
+        else
+        {
+            animation = this->isDead() ? ANIMATION_DEATH : ANIMATION_NONE;
+        }
+
+        sendServerStatus_ = true;
+        return;
+    }
+
+    EventInfo* oldEvent = currentEvent;
+    currentEvent        = eventQueue.front();
+    eventQueue.pop_front();
+    destroy(oldEvent);
+
+    eventPreparation->reset();
+
+    m_Substate = CHAR_SUBSTATE::SUBSTATE_IN_CS;
+    if (animation == ANIMATION_HEALING)
+    {
+        StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Healing);
+    }
+
+    if (PPet)
+    {
+        PPet->PAI->Disengage();
+    }
+
+    auto PNpc = currentEvent->targetEntity;
+    if (PNpc && PNpc->objtype == TYPE_NPC)
+    {
+        PNpc->SetLocalVar("pauseNPCPathing", 1);
+    }
+
+    // If it's a cutscene, we lock the player immediately
+    setLocked(currentEvent->type == CUTSCENE);
+
+    if (currentEvent->strings.empty())
+    {
+        if (currentEvent->params.size() > 0 || currentEvent->textTable != -1)
+        {
+            pushPacket<GP_SERV_COMMAND_EVENTNUM>(this, currentEvent);
+        }
+        else
+        {
+            pushPacket<GP_SERV_COMMAND_EVENT>(this, currentEvent);
+        }
+    }
+    else
+    {
+        pushPacket<GP_SERV_COMMAND_EVENTSTR>(this, currentEvent);
+    }
+
+    animation = ANIMATION_EVENT;
+    updatemask |= UPDATE_POS; // TODO: decouple from this. We want the 250ms post-tick processing.
+    sendServerStatus_ = true; // sendServerStatus_ is somewhat like an update mask on its own
+}
+
+void CCharEntity::skipEvent()
+{
+    TracyZoneScoped;
+
+    // Locked players are untargetable and can not skip events.
+    if (!isInEvent() || m_Locked || !currentEvent->canSkip)
+    {
+        return;
+    }
+
+    pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::EventSkipped);
+    pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(this, GP_SERV_COMMAND_EVENTUCOFF_MODE::CancelEvent);
+    m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
+
+    if (currentEvent->interruptText != 0)
+    {
+        pushPacket<GP_SERV_COMMAND_TALKNUM>(currentEvent->targetEntity, currentEvent->interruptText, false);
+    }
+
+    endCurrentEvent();
+}
+
+void CCharEntity::setLocked(bool locked)
+{
+    TracyZoneScoped;
+
+    m_Locked = locked;
+    if (locked)
+    {
+        // Player and pet enmity are handled in mobcontroler.cpp, CheckLock() fucntion.
+        // Mob casting interruption handled in magic_state.cpp, CMagicState::Update boolean.
+        PAI->Disengage();
+        if (PPet)
+        {
+            PPet->PAI->Disengage();
+        }
+        battleutils::RelinquishClaim(this);
+    }
+}
+
+auto CCharEntity::getCharVar(const std::string& varName) const -> int32
+{
+    if (auto charVar = charVarCache.find(varName); charVar != charVarCache.end())
+    {
+        std::pair cachedVarData = charVar->second;
+
+        // If the cached variable is not expired, return it.  Else, fall through so that the
+        // database can be cleaned up.
+        if (cachedVarData.second == 0 || cachedVarData.second > earth_time::timestamp())
+        {
+            return cachedVarData.first;
+        }
+    }
+
+    const auto value = charutils::FetchCharVar(this->id, varName);
+
+    charVarCache[varName] = value;
+    return value.first;
+}
+
+auto CCharEntity::getCharVarsWithPrefix(const std::string& prefix) -> std::vector<std::pair<std::string, int32>>
+{
+    const auto currentTimestamp = earth_time::timestamp();
+
+    std::vector<std::pair<std::string, int32>> charVars;
+
+    const auto rset = db::preparedStmt("SELECT varname, value, expiry FROM char_vars WHERE charid = ? AND varname LIKE ?",
+                                       this->id,
+                                       fmt::format("{}%", prefix));
+    if (rset && rset->rowsCount())
+    {
+        while (rset->next())
+        {
+            const auto varname = rset->get<std::string>("varname");
+            const auto value   = rset->get<int32>("value");
+            const auto expiry  = rset->get<uint32>("expiry");
+
+            if (expiry == 0 || expiry > currentTimestamp)
+            {
+                charVarCache[varname] = { value, expiry };
+
+                charVars.emplace_back(varname, value);
+            }
+        }
+    }
+
+    return charVars;
+}
+
+auto CCharEntity::getCharVarsWithSuffix(const std::string& suffix) -> std::vector<std::pair<std::string, int32>>
+{
+    const auto currentTimestamp = earth_time::timestamp();
+
+    std::vector<std::pair<std::string, int32>> charVars;
+
+    const auto rset = db::preparedStmt("SELECT varname, value, expiry FROM char_vars WHERE charid = ? AND varname LIKE ?",
+                                       this->id,
+                                       fmt::format("%{}", suffix));
+    if (rset && rset->rowsCount())
+    {
+        while (rset->next())
+        {
+            const auto varname = rset->get<std::string>("varname");
+            const auto value   = rset->get<int32>("value");
+            const auto expiry  = rset->get<uint32>("expiry");
+
+            if (expiry == 0 || expiry > currentTimestamp)
+            {
+                charVarCache[varname] = { value, expiry };
+
+                charVars.emplace_back(varname, value);
+            }
+        }
+    }
+
+    return charVars;
+}
+
+void CCharEntity::setCharVar(const std::string& charVarName, int32 value, uint32 expiry /* = 0 */)
+{
+    charVarCache[charVarName] = { value, expiry };
+    charutils::PersistCharVar(this->id, charVarName, value, expiry);
+}
+
+void CCharEntity::setVolatileCharVar(const std::string& charVarName, int32 value, uint32 expiry /* = 0 */)
+{
+    charVarCache[charVarName] = { value, expiry };
+    charVarChanges.insert(charVarName);
+}
+
+void CCharEntity::updateCharVarCache(const std::string& charVarName, int32 value, uint32 expiry /* = 0 */)
+{
+    charVarCache[charVarName] = { value, expiry };
+}
+
+void CCharEntity::removeFromCharVarCache(const std::string& varName)
+{
+    charVarCache.erase(varName);
+}
+
+void CCharEntity::clearCharVarsWithPrefix(const std::string& prefix)
+{
+    if (prefix.size() < 5)
+    {
+        ShowError("Prefix too short to clear with: '%s'", prefix);
+        return;
+    }
+
+    auto iter = charVarCache.begin();
+    while (iter != charVarCache.end())
+    {
+        if (iter->first.rfind(prefix, 0) == 0)
+        {
+            iter->second = { 0, 0 };
+        }
+        ++iter;
+    }
+
+    db::preparedStmt("DELETE FROM char_vars WHERE charid = ? AND varname LIKE ?", this->id, fmt::format("{}%", prefix));
+}
+
+bool CCharEntity::startSynth(SKILLTYPE synthSkill)
+{
+    if (PAI)
+    {
+        return PAI->Internal_Synth(synthSkill);
+    }
+    return false;
+}

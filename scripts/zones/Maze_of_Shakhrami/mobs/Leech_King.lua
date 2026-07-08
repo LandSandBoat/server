@@ -1,0 +1,32 @@
+-----------------------------------
+-- Area: Maze of Shakhrami
+--   NM: Leech King
+-----------------------------------
+local ID = zones[xi.zone.MAZE_OF_SHAKHRAMI]
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.spawnPoints =
+{
+    { x =  270.000, y =  18.000, z = -202.000 },
+    { x =  270.000, y =  20.000, z = -229.000 },
+    { x =  291.000, y =  18.000, z = -228.000 },
+    { x =  283.000, y =  19.000, z = -204.000 }
+}
+
+entity.onMobDespawn = function(mob)
+    if math.randomInt(1, 100) <= 50 then
+        DisallowRespawn(ID.mob.LEECH_KING, true)
+        DisallowRespawn(ID.mob.ARGUS, false)
+        xi.mob.updateNMSpawnPoint(ID.mob.ARGUS)
+        GetMobByID(ID.mob.ARGUS):setRespawnTime(math.randomInt(3600, 7200)) -- 1-2 hours
+    else
+        DisallowRespawn(ID.mob.ARGUS, true)
+        DisallowRespawn(ID.mob.LEECH_KING, false)
+        xi.mob.updateNMSpawnPoint(ID.mob.LEECH_KING)
+        GetMobByID(ID.mob.LEECH_KING):setRespawnTime(math.randomInt(3600, 7200)) -- 1-2 hours
+    end
+end
+
+return entity

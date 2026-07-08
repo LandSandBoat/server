@@ -1,0 +1,23 @@
+-----------------------------------
+-- Area: Sea Serpent Grotto
+--   NM: Abyss Sahagin
+-----------------------------------
+mixins = { require('scripts/mixins/job_special') }
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 6000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 6000)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+end
+
+entity.onMobDespawn = function(mob)
+    mob:setRespawnTime(math.randomInt(1200, 1500)) -- 20 to 25 minutes
+end
+
+return entity

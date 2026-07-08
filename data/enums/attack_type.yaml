@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.attackType
+
+values:
+  none: 0
+  physical: 1
+  magical: 2
+  ranged: 3
+  breath: 4
+  special: 5

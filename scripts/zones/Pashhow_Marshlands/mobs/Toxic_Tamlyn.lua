@@ -1,0 +1,13 @@
+-----------------------------------
+-- Area: Pashhow Marshlands
+--   NM: Toxic Tamlyn
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobDeath = function(mob, player, optParams)
+    xi.hunts.checkHunt(mob, player, 213)
+    mob:setLocalVar('spawnTime', 3600 + GetSystemTime()) -- 1 hour
+end
+
+return entity

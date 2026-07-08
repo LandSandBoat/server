@@ -1,0 +1,46 @@
+﻿/*
+===========================================================================
+
+  Copyright (c) 2023 LandSandBoat Dev Teams
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
+
+===========================================================================
+*/
+
+#pragma once
+
+#include "handler_session.h"
+
+#include "common/timer.h"
+
+// Metadata about each session
+struct session_t
+{
+    // Auth session is not yet needed to be stored
+    // std::shared_ptr<handler_session> auth_session;
+    std::shared_ptr<handler_session> data_session;
+    std::shared_ptr<handler_session> view_session;
+    std::shared_ptr<handler_session> pol_session;
+
+    uint32      accountID                 = 0;
+    uint32      serverIP                  = 0;
+    uint32      requestedCharacterID      = 0;
+    std::string requestedNewCharacterName = "";
+    bool        justCreatedNewChar        = false;
+    bool        versionMismatch           = false;
+    uint8       incrementKeyValue         = 0; // Used to increment key by N in case of errors
+
+    timer::time_point authorizedTime = timer::now();
+};

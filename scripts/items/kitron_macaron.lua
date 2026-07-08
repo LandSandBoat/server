@@ -1,0 +1,28 @@
+-----------------------------------
+-- ID: 5781
+-- Item: kitron_macaron
+-- Food Effect: 30Min, All Races
+-----------------------------------
+-- Increases rate of synthesis success +7%
+-- Increases synthesis skill gain rate +7%
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 1800, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.SYNTH_SUCCESS_RATE, 7)
+    effect:addMod(xi.mod.SYNTH_SKILL_GAIN, 7)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

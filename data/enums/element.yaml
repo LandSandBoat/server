@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.element
+
+values:
+  none: 0
+  fire: 1
+  ice: 2
+  wind: 3
+  earth: 4
+  thunder: 5
+  water: 6
+  light: 7
+  dark: 8

@@ -1,0 +1,73 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint16_t
+  lua:
+    table: xi.latent
+
+values:
+  hp_under_percent: 0 # hp less than or equal to % - PARAM: HP PERCENT
+  hp_over_percent: 1 # hp more than % - PARAM: HP PERCENT
+  hp_under_tp_under_100: 2 # hp less than or equal to %, tp under 100 - PARAM: HP PERCENT
+  hp_over_tp_under_100: 3 # hp more than %, tp over 100 - PARAM: HP PERCENT
+  mp_under_percent: 4 # mp less than or equal to % - PARAM: MP PERCENT
+  mp_under: 5 # mp less than # - PARAM: MP #
+  tp_under: 6 # tp under # and during WS - PARAM: TP VALUE
+  tp_over: 7 # tp over # - PARAM: TP VALUE
+  subjob: 8 # subjob - PARAM: JOBTYPE
+  pet_id: 9 # pettype - PARAM: PETID
+  weapon_drawn: 10 # weapon drawn
+  weapon_sheathed: 11 # weapon sheathed
+  signet_bonus: 12 # While in conquest region and engaged to an even match or less target
+  status_effect_active: 13 # status effect on player - PARAM: EFFECTID
+  no_food_active: 14 # no food effects active on player
+  party_members: 15 # party size # - PARAM: # OF MEMBERS
+  party_members_in_zone: 16 # party size # and members in zone - PARAM: # OF MEMBERS
+  sanction_regen_bonus: 17 # While in besieged region and HP is less than PARAM%
+  sanction_refresh_bonus: 18 # While in besieged region and MP is less than PARAM%
+  sigil_regen_bonus: 19 # While in campaign region and HP is less than PARAM%
+  sigil_refresh_bonus: 20 # While in campaign region and MP is less than PARAM%
+  avatar_in_party: 21 # party has a specific avatar - PARAM: same as globals/pets.lua (21 for any avatar)
+  job_in_party: 22 # party has job - PARAM: JOBTYPE
+  zone: 23 # in zone - PARAM: zoneid
+  synth_trainee: 24 # synth skill under 40 + no support: PARAM: 48: FISH, 49: WOOD, 50: SMITH, 51: GOLDSMITH, 52: CLOTH, 53: LEATHER, 54: BONE, 55: ALCHEMY, 56: COOKING
+  song_roll_active: 25 # any song or roll active
+  time_of_day: 26 # PARAM: 0: DAYTIME 1: NIGHTTIME 2: DUSK-DAWN
+  hour_of_day: 27 # PARAM: 1: NEW DAY, 2: DAWN, 3: DAY, 4: DUSK, 5: EVENING, 6: DEAD OF NIGHT
+  firesday: 28
+  earthsday: 29
+  watersday: 30
+  windsday: 31
+  darksday: 32
+  iceday: 34
+  lightningsday: 35
+  lightsday: 36
+  moon_phase: 37 # PARAM: 0: New Moon, 1: Waxing Crescent, 2: First Quarter, 3: Waxing Gibbous, 4: Full Moon, 5: Waning Gibbous, 6: Last Quarter, 7: Waning Crescent
+  job_multiple: 38 # PARAM: 0: ODD, 2: EVEN, 3-X: DIVISOR
+  job_multiple_at_night: 39 # PARAM: 0: ODD, 2: EVEN, 3-X: DIVISOR
+  equipped_in_slot: 40 # When item is equipped in the specified slot (e.g. Dweomer Knife, Erlking's Sword, etc.) PARAM: slotID
+  during_ws: 41 # During WS
+  weather_condition: 42 # See Weather.h for WEATHER enum
+  weapon_drawn_hp_under: 43 # PARAM: HP PERCENT
+  nation_citizen: 44 # Triggered by player being citizen of nation matching param: 0 San d'Oria, 1 Bastok, 2 Windurst
+  mp_under_visible_gear: 45 # mp less than or equal to %, calculated using MP bonuses from visible gear only
+  hp_over_visible_gear: 46 # hp more than or equal to %, calculated using HP bonuses from visible gear only
+  weapon_broken: 47
+  in_dynamis: 48
+  food_active: 49 # food effect (foodId) active - PARAM: FOOD ITEMID
+  job_level_below: 50 # PARAM: level
+  job_level_above: 51 # PARAM: level
+  weather_element: 52 # PARAM: 0: NONE, 1: FIRE, 2: ICE, 3: WIND 4: EARTH, 5: THUNDER, 6: WATER, 7: LIGHT, 8: DARK
+  nation_control: 53 # checks if player region is under nation's control - PARAM: 0: Under own nation's control, 1: Outside own nation's control
+  zone_home_nation: 54 # in zone and citizen of nation (aketons)
+  mp_over: 55 # mp greater than # - PARAM: MP #
+  weapon_drawn_mp_over: 56 # while weapon is drawn and mp greater than # - PARAM: MP #
+  eleven_roll_active: 57 # corsair roll of 11 active
+  in_assault: 58 # is in an Instance battle in a TOAU zone
+  vs_ecosystem: 59 # Vs. Specific Ecosystem ID (e.g. Vs. Plantoid: Accuracy+3)
+  vs_species: 60 # Vs. Specific Species ID (e.g. Vs. Korrigan: Accuracy+3)
+  vs_family: 61 # Vs. Specific Family ID (e.g. Vs. Mandragora: Accuracy+3)
+  mainjob: 62 # mainjob - PARAM: JOBTYPE
+  in_adoulin: 63
+  in_garrison: 64 # while in an active Garrison

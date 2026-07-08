@@ -1,0 +1,25 @@
+-----------------------------------
+-- ID: 5260
+-- Item: Regain Feather
+-- Status Effect: Medicated, 2 hours
+-- Instantly restors HP/MP full TP
+-----------------------------------
+---@type TItem
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    if target:hasStatusEffect(xi.effect.MEDICINE) then
+        return xi.msg.basic.ITEM_NO_USE_MEDICATED
+    end
+
+    return 0
+end
+
+itemObject.onItemUse = function(target, user)
+    target:setHP(target:getMaxHP())
+    target:setMP(target:getMaxMP())
+    target:setTP(3000)
+    target:addStatusEffect(xi.effect.MEDICINE, { duration = 7200, origin = user })
+end
+
+return itemObject

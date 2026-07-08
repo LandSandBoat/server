@@ -1,0 +1,13 @@
+mariadb
+gitpython
+pylint
+pyyaml
+colorama
+zmq
+black
+regex
+argparse
+requests
+bcrypt
+jinja2
+jsonschema>=4.18

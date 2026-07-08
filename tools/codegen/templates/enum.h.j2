@@ -1,0 +1,58 @@
+// GENERATED from {{ source_name }}. Do not edit.
+#pragma once
+
+#include <array>
+#include <cstdint>
+#include <string_view>
+#include <utility>
+{% if is_flags %}
+#include <magic_enum/magic_enum.hpp>
+{% endif %}
+
+#include "data/enums/enum_traits.h"
+
+namespace xi
+{
+enum class {{ cls_name }} : {{ underlying }}
+{
+{% for key, val in values.items() %}
+    {{ "%-*s"|format(enum_width, cpp_names[key]) }} = {{ "0x%08x"|format(val) if is_flags else val }},
+{% endfor %}
+};
+} // namespace xi
+{% if is_flags %}
+
+using namespace magic_enum::bitwise_operators;
+{% endif %}
+
+namespace xi::data
+{
+
+template <>
+struct EnumTraits<xi::{{ cls_name }}>
+{
+    static constexpr std::string_view kTypeName{ "{{ cls_name }}" };
+
+    static constexpr std::array<std::pair<std::string_view, xi::{{ cls_name }}>, {{ values|length }}> kEntries{ {
+{% for key in values %}
+        std::pair{ std::string_view{ {{ "%-*s"|format(quote_width, '"' + key + '"') }} }, xi::{{ cls_name }}::{{ cpp_names[key] }} },
+{% endfor %}
+    } };
+
+    static auto fromName(const std::string_view name) -> xi::{{ cls_name }}
+    {
+        return enum_detail::fromName<xi::{{ cls_name }}>(name, kEntries, kTypeName);
+    }
+
+    static auto toName(const xi::{{ cls_name }} value) -> std::string_view
+    {
+        return enum_detail::toName<xi::{{ cls_name }}>(value, kEntries);
+    }
+};
+{% if is_flags %}
+
+template <>
+inline constexpr bool isFlagEnum<xi::{{ cls_name }}> = true;
+{% endif %}
+
+} // namespace xi::data

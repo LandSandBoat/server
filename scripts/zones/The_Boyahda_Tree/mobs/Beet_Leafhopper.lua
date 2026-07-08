@@ -1,0 +1,19 @@
+-----------------------------------
+-- Area: The Boyahda Tree (153)
+--   NM: Beet Leafhopper
+-- Note: Popped by qm1
+-- Involved in Quest: Shoot First, Ask Questions Later
+-- !pos -18 -19.2 -176.4 153
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+end
+
+return entity

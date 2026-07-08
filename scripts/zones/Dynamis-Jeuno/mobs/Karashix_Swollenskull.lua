@@ -1,0 +1,23 @@
+-----------------------------------
+-- Area: Dynamis - Jeuno
+--  Mob: Karashix Swollenskull
+-----------------------------------
+mixins =
+{
+    require('scripts/mixins/dynamis_beastmen'),
+    require('scripts/mixins/job_special')
+}
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.spawnPoints =
+{
+    { x =  1.111, y =  1.402, z =  70.975 }
+}
+
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
+return entity

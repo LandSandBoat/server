@@ -1,0 +1,32 @@
+-----------------------------------
+-- ID: 5640
+-- Item: M&P Cracker
+-- Food Effect: 3Min, All Races
+-----------------------------------
+-- Vitality 5
+-- Mind -5
+-- Defense % 25
+-- Attack Cap 154
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 180, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.VIT, 5)
+    effect:addMod(xi.mod.MND, -5)
+    effect:addMod(xi.mod.FOOD_DEFP, 25)
+    effect:addMod(xi.mod.FOOD_DEF_CAP, 154)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

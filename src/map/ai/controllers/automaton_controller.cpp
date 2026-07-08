@@ -1,0 +1,1761 @@
+﻿/*
+===========================================================================
+
+  Copyright (c) 2010-2015 Darkstar Dev Teams
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
+
+===========================================================================
+*/
+
+#include "automaton_controller.h"
+
+#include "ai/ai_container.h"
+#include "ai/states/ability_state.h"
+#include "ai/states/magic_state.h"
+#include "ai/states/weaponskill_state.h"
+#include "common/database.h"
+#include "common/types/flat_hash_map.h"
+#include "common/types/hash_map.h"
+#include "common/utils.h"
+#include "enmity_container.h"
+#include "entities/trust_entity.h"
+#include "enums/automaton.h"
+#include "lua/luautils.h"
+#include "mob_spell_container.h"
+#include "mobskill.h"
+#include "recast_container.h"
+#include "status_effect_container.h"
+#include "utils/battleutils.h"
+#include "utils/itemutils.h"
+#include "utils/petutils.h"
+#include "utils/puppetutils.h"
+
+CAutomatonController::CAutomatonController(CAutomatonEntity* PPet)
+: CPetController(PPet)
+, PAutomaton(PPet)
+{
+    setCooldowns();
+    if (shouldStandBack())
+    {
+        PAutomaton->m_Behavior |= BEHAVIOR_STANDBACK;
+    }
+}
+
+void CAutomatonController::setCooldowns()
+{
+    switch (PAutomaton->frame())
+    {
+        case AutomatonFrame::Sharpshot:
+        {
+            switch (PAutomaton->head())
+            {
+                case AutomatonHead::Sharpshot:
+                    m_rangedCooldown = 20s;
+                    break;
+                case AutomatonHead::Harlequin:
+                    m_rangedCooldown = 25s;
+                    break;
+                default:
+                    m_rangedCooldown = 36s;
+            }
+        }
+        break;
+        case AutomatonFrame::Harlequin:
+        {
+            setMagicCooldowns();
+        }
+        break;
+        case AutomatonFrame::Stormwaker:
+        {
+            setMagicCooldowns();
+        }
+        break;
+        case AutomatonFrame::Valoredge:
+        {
+            m_shieldbashCooldown = 3min;
+        }
+    }
+}
+
+// New retail Automaton magic AI (Needs more information to accurately recreate)
+void CAutomatonController::setMagicCooldowns()
+{
+    switch (PAutomaton->head())
+    {
+        case AutomatonHead::Harlequin:
+        {
+            m_magicCooldown    = 10s;
+            m_enfeebleCooldown = 12s;
+            m_healCooldown     = 12s;
+        }
+        break;
+        case AutomatonHead::Valoredge:
+        {
+            m_magicCooldown = 10s;
+            m_healCooldown  = 20s;
+        }
+        break;
+        case AutomatonHead::Sharpshot:
+        {
+            m_magicCooldown    = 10s;
+            m_enfeebleCooldown = 12s;
+            m_healCooldown     = 20s;
+        }
+        break;
+        case AutomatonHead::Stormwaker:
+        {
+            m_magicCooldown     = 8s;
+            m_enfeebleCooldown  = 10s;
+            m_healCooldown      = 20s;
+            m_elementalCooldown = 25s;
+            m_enhanceCooldown   = 25s;
+        }
+        break;
+        case AutomatonHead::Soulsoother:
+        {
+            m_magicCooldown    = 8s;
+            m_enfeebleCooldown = 10s;
+            m_healCooldown     = 10s;
+            m_statusCooldown   = 10s;
+            m_enhanceCooldown  = 25s;
+        }
+        break;
+        case AutomatonHead::Spiritreaver:
+        {
+            m_magicCooldown     = 8s;
+            m_enfeebleCooldown  = 10s;
+            m_elementalCooldown = 30s;
+            m_enhanceCooldown   = 35s;
+        }
+    }
+}
+
+// Determines standback behavior for the Automaton.
+// Type 2 animators override all behavior, Valor Edge frame will always enter melee, followed
+// by ranged head types defaulting to ranged behavior.
+auto CAutomatonController::shouldStandBack() const -> bool
+{
+    const CBattleEntity* PMaster = PAutomaton->PMaster;
+
+    if (PMaster)
+    {
+        CItemWeapon* animator = dynamic_cast<CItemWeapon*>(PMaster->m_Weapons[SLOT_AMMO]);
+
+        if (animator && animator->getSubSkillType() == SUBSKILLTYPE::SUBSKILL_ANIMATOR_II)
+        {
+            return true;
+        }
+    }
+    else if (PAutomaton->frame() == AutomatonFrame::Valoredge)
+    {
+        return false;
+    }
+    else if (PAutomaton->head() >= AutomatonHead::Sharpshot)
+    {
+        return true;
+    }
+
+    return false;
+}
+
+auto CAutomatonController::GetCurrentManeuvers() const -> CurrentManeuvers
+{
+    const auto& statuses = PAutomaton->PMaster->StatusEffectContainer;
+    return {
+        statuses->GetEffectsCount(xi::StatusEffect::FireManeuver),
+        statuses->GetEffectsCount(xi::StatusEffect::IceManeuver),
+        statuses->GetEffectsCount(xi::StatusEffect::WindManeuver),
+        statuses->GetEffectsCount(xi::StatusEffect::EarthManeuver),
+        statuses->GetEffectsCount(xi::StatusEffect::ThunderManeuver),
+        statuses->GetEffectsCount(xi::StatusEffect::WaterManeuver),
+        statuses->GetEffectsCount(xi::StatusEffect::LightManeuver),
+        statuses->GetEffectsCount(xi::StatusEffect::DarkManeuver),
+    };
+}
+
+auto CAutomatonController::DoCombatTick(timer::time_point tick) -> Task<void>
+{
+    if ((PAutomaton->PMaster == nullptr || PAutomaton->PMaster->isDead()) && PAutomaton->isAlive())
+    {
+        PAutomaton->Die();
+        co_return;
+    }
+
+    PTarget = static_cast<CBattleEntity*>(PAutomaton->GetEntity(PAutomaton->GetBattleTargetID()));
+
+    if (TryDeaggro())
+    {
+        Disengage();
+        co_return;
+    }
+
+    // Automatons only attempt actions in 3 second intervals (Reduced by the Tactical Processor)
+    if (TryAction())
+    {
+        auto maneuvers = GetCurrentManeuvers();
+
+        if (TryShieldBash())
+        {
+            m_LastShieldBashTime = m_Tick;
+            co_return;
+        }
+        else if (TrySpellcast(maneuvers))
+        {
+            m_LastMagicTime = m_Tick;
+            co_return;
+        }
+        else if (TryTPMove())
+        {
+            co_return;
+        }
+        else if (TryRangedAttack())
+        {
+            m_LastRangedTime = m_Tick;
+            co_return;
+        }
+        else if (TryAttachment())
+        {
+            co_return;
+        }
+    }
+
+    Move();
+}
+
+void CAutomatonController::Move()
+{
+    if ((shouldStandBack() && !isWithinDistance(PAutomaton->loc.p, PTarget->loc.p, 15.0f)) ||
+        (PAutomaton->health.mp < 8 && PAutomaton->health.maxmp > 8))
+    {
+        PAutomaton->m_Behavior &= ~BEHAVIOR_STANDBACK;
+    }
+
+    CPetController::Move();
+}
+
+auto CAutomatonController::TryAction() -> bool
+{
+    if (m_Tick > m_LastActionTime + (m_actionCooldown - std::chrono::milliseconds(PAutomaton->getMod(Mod::AUTO_DECISION_DELAY) * 10)))
+    {
+        m_LastActionTime = m_Tick;
+        PAutomaton->PAI->EventHandler.triggerListener("AUTOMATON_AI_TICK", PAutomaton, PTarget);
+
+        return true;
+    }
+
+    return false;
+}
+
+auto CAutomatonController::TryShieldBash() -> bool
+{
+    CState* PState = PTarget->PAI->GetCurrentState();
+
+    if (m_shieldbashCooldown > 0s && PState && PState->CanInterrupt() &&
+        m_Tick > m_LastShieldBashTime + (m_shieldbashCooldown - std::chrono::seconds(PAutomaton->getMod(Mod::AUTO_SHIELD_BASH_DELAY))))
+    {
+        return MobSkill(PTarget->targid, m_ShieldBashAbility, std::nullopt);
+    }
+
+    return false;
+}
+
+auto CAutomatonController::TrySpellcast(const CurrentManeuvers& maneuvers) -> bool
+{
+    // Apparently the automaton has nothing in its spell list, so CanCastSpells must ignore spell lists and recasts?
+    if (!PAutomaton->PMaster || m_magicCooldown == 0s ||
+        m_Tick <= m_LastMagicTime + (m_magicCooldown + std::chrono::seconds(PAutomaton->getMod(Mod::AUTO_MAGIC_COOLDOWN))) || !CanCastSpells(IgnoreRecastsAndCosts::Yes))
+    {
+        return false;
+    }
+
+    switch (PAutomaton->head())
+    {
+        case AutomatonHead::Valoredge:
+        {
+            if (TryHeal(maneuvers))
+            {
+                m_LastHealTime = m_Tick;
+                return true;
+            }
+        }
+        break;
+        case AutomatonHead::Sharpshot:
+        {
+            if (maneuvers.light && TryHeal(maneuvers)) // Light -> Heal
+            {
+                m_LastHealTime = m_Tick;
+                return true;
+            }
+
+            if (TryEnfeeble(maneuvers))
+            {
+                m_LastEnfeebleTime = m_Tick;
+                return true;
+            }
+            else if (!maneuvers.light && TryHeal(maneuvers))
+            {
+                m_LastHealTime = m_Tick;
+                return true;
+            }
+        }
+        break;
+        case AutomatonHead::Harlequin:
+        {
+            if (maneuvers.light && TryHeal(maneuvers)) // Light -> Heal
+            {
+                m_LastHealTime = m_Tick;
+                return true;
+            }
+
+            if (TryEnfeeble(maneuvers))
+            {
+                m_LastEnfeebleTime = m_Tick;
+                return true;
+            }
+            else if (!maneuvers.light && TryHeal(maneuvers))
+            {
+                m_LastHealTime = m_Tick;
+                return true;
+            }
+        }
+        break;
+        case AutomatonHead::Stormwaker:
+        {
+            bool lowHP = PTarget->GetHPP() <= 30 && PTarget->health.hp <= 300;
+            if (lowHP && TryElemental(maneuvers)) // Mob low HP -> Nuke
+            {
+                m_LastElementalTime = m_Tick;
+                return true;
+            }
+
+            if (maneuvers.light && TryHeal(maneuvers)) // Light -> Heal
+            {
+                m_LastHealTime = m_Tick;
+                return true;
+            }
+            else if (!lowHP && maneuvers.ice && TryElemental(maneuvers)) // Ice -> Nuke
+            {
+                m_LastElementalTime = m_Tick;
+                return true;
+            }
+
+            if (TryEnfeeble(maneuvers))
+            {
+                m_LastEnfeebleTime = m_Tick;
+                return true;
+            }
+            else if (!maneuvers.light && TryHeal(maneuvers))
+            {
+                m_LastHealTime = m_Tick;
+                return true;
+            }
+            else if (!lowHP && !maneuvers.ice && TryElemental(maneuvers))
+            {
+                m_LastElementalTime = m_Tick;
+                return true;
+            }
+            else if (TryEnhance())
+            {
+                m_LastEnhanceTime = m_Tick;
+                return true;
+            }
+        }
+        break;
+        case AutomatonHead::Soulsoother:
+        {
+            if (maneuvers.light && TryHeal(maneuvers)) // Light -> Heal
+            {
+                m_LastHealTime = m_Tick;
+                return true;
+            }
+
+            if (TryStatusRemoval(maneuvers))
+            {
+                m_LastStatusTime = m_Tick;
+                return true;
+            }
+            else if (!maneuvers.light && TryHeal(maneuvers))
+            {
+                m_LastHealTime = m_Tick;
+                return true;
+            }
+            else if (TryEnhance())
+            {
+                m_LastEnhanceTime = m_Tick;
+                return true;
+            }
+            else if (TryEnfeeble(maneuvers))
+            {
+                m_LastEnfeebleTime = m_Tick;
+                return true;
+            }
+        }
+        break;
+        case AutomatonHead::Spiritreaver:
+        {
+            if (maneuvers.ice && TryElemental(maneuvers)) // Ice -> Nuke
+            {
+                m_LastElementalTime = m_Tick;
+                return true;
+            }
+            else if (maneuvers.dark && TryEnhance())
+            {
+                m_LastEnhanceTime = m_Tick;
+                return true;
+            }
+            else if ((maneuvers.dark || PAutomaton->GetHPP() < 75 || PAutomaton->GetMPP() < 75) &&
+                     TryEnfeeble(maneuvers)) // Dark or self HPP/MPP < 75 -> Enfeeble
+            {
+                m_LastEnfeebleTime = m_Tick;
+                return true;
+            }
+
+            if (!maneuvers.ice && TryElemental(maneuvers))
+            {
+                m_LastElementalTime = m_Tick;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+auto CAutomatonController::TryHeal(const CurrentManeuvers& maneuvers) -> bool
+{
+    if (!PAutomaton->PMaster || m_healCooldown == 0s ||
+        m_Tick <= m_LastHealTime + (m_healCooldown - std::chrono::seconds(PAutomaton->getMod(Mod::AUTO_HEALING_DELAY))))
+    {
+        return false;
+    }
+
+    float threshold = 0;
+    switch (maneuvers.light) // Light -> Higher healing threshold
+    {
+        case 1:
+            threshold = 40;
+            break;
+        case 2:
+            threshold = 50;
+            break;
+        case 3:
+            threshold = 75;
+            break;
+        default:
+            threshold = 30;
+            break;
+    }
+
+    threshold                  = std::clamp<float>(threshold + PAutomaton->getMod(Mod::AUTO_HEALING_THRESHOLD), 30.0f, 90.0f);
+    CBattleEntity* PCastTarget = nullptr;
+
+    bool          haveHate   = false;
+    EnmityList_t* enmityList = nullptr;
+
+    auto* PMob = dynamic_cast<CMobEntity*>(PTarget);
+    if (PMob)
+    {
+        enmityList            = PMob->PEnmityContainer->GetEnmityList();
+        auto masterEnmity_obj = enmityList->find(PAutomaton->PMaster->id);
+        auto selfEnmity_obj   = enmityList->find(PAutomaton->id);
+
+        if (masterEnmity_obj == enmityList->end())
+        {
+            haveHate = true;
+        }
+        else if (selfEnmity_obj == enmityList->end())
+        {
+            haveHate = false;
+        }
+        else
+        {
+            int32 selfEnmity   = selfEnmity_obj->second.CE + selfEnmity_obj->second.VE;
+            int32 masterEnmity = masterEnmity_obj->second.CE + masterEnmity_obj->second.VE;
+            haveHate           = selfEnmity > masterEnmity;
+        }
+    }
+
+    // Prioritize hate
+    if (haveHate)
+    {
+        if (PAutomaton->GetHPP() <= 50)
+        { // Automaton only heals itself when <= 50%
+            PCastTarget = PAutomaton;
+        }
+        else if (PAutomaton->PMaster->GetHPP() <= threshold && distance(PAutomaton->loc.p, PAutomaton->PMaster->loc.p) < 20)
+        {
+            PCastTarget = PAutomaton->PMaster;
+        }
+    }
+    else
+    {
+        if (PAutomaton->PMaster->GetHPP() <= threshold)
+        {
+            PCastTarget = PAutomaton->PMaster;
+        }
+        else if (PAutomaton->GetHPP() <= 50)
+        { // Automaton only heals itself when <= 50%
+            PCastTarget = PAutomaton;
+        }
+    }
+
+    if (maneuvers.light && !PCastTarget && PAutomaton->head() == AutomatonHead::Soulsoother && PAutomaton->PMaster->PParty) // Light + Soulsoother head -> Heal party
+    {
+        // clang-format off
+        if (PMob)
+        {
+            uint16 highestEnmity = 0;
+            static_cast<CCharEntity*>(PAutomaton->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+            {
+                if (PMember->id != PAutomaton->PMaster->id)
+                {
+                    auto enmity_obj = enmityList->find(PMember->id);
+                    if (enmity_obj != enmityList->end() && highestEnmity < enmity_obj->second.CE + enmity_obj->second.VE && PMember->GetHPP() <= threshold &&
+                        distance(PAutomaton->loc.p, PAutomaton->PMaster->loc.p) < 20)
+                    {
+                        highestEnmity = enmity_obj->second.CE + enmity_obj->second.VE;
+                        PCastTarget   = PMember;
+                    }
+                }
+            });
+        }
+        else
+        {
+            static_cast<CCharEntity*>(PAutomaton->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+            {
+                if (PMember->id != PAutomaton->PMaster->id && distance(PAutomaton->loc.p, PAutomaton->PMaster->loc.p) < 20)
+                {
+                    if (PMember->GetHPP() <= threshold)
+                    {
+                        PCastTarget = PMember;
+                    }
+                }
+            });
+        }
+        // clang-format on
+    }
+
+    // This might be wrong
+    if (PCastTarget)
+    {
+        auto missinghp = PCastTarget->GetMaxHP() - PCastTarget->health.hp;
+        if (missinghp > 850 && Cast(PCastTarget->targid, SpellID::Cure_VI))
+        {
+            return true;
+        }
+        else if (missinghp > 600 && Cast(PCastTarget->targid, SpellID::Cure_V))
+        {
+            return true;
+        }
+        else if (missinghp > 350 && Cast(PCastTarget->targid, SpellID::Cure_IV))
+        {
+            return true;
+        }
+        else if (missinghp > 190 && Cast(PCastTarget->targid, SpellID::Cure_III))
+        {
+            return true;
+        }
+        else if (missinghp > 120 && Cast(PCastTarget->targid, SpellID::Cure_II))
+        {
+            return true;
+        }
+        else if (Cast(PCastTarget->targid, SpellID::Cure))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+inline auto resistanceComparator(const std::pair<SpellID, int16>& firstElem, const std::pair<SpellID, int16>& secondElem) -> bool
+{
+    return firstElem.second < secondElem.second;
+}
+
+auto CAutomatonController::TryElemental(const CurrentManeuvers& maneuvers) -> bool
+{
+    if (!PAutomaton->PMaster || m_elementalCooldown == 0s || m_Tick <= m_LastElementalTime + m_elementalCooldown)
+    {
+        return false;
+    }
+
+    std::vector<SpellID> castPriority;
+    std::vector<SpellID> defaultPriority;
+
+    int8        tier   = 4;
+    const int32 hp     = PTarget->health.hp;
+    const int32 selfmp = PAutomaton->health.mp; // Shortcut for wasting less time
+    if (selfmp < 4)
+    {
+        return false;
+    }
+    else if (hp <= 50 || selfmp < 16)
+    {
+        tier = 0;
+    }
+    else if (hp <= 150 || selfmp < 40)
+    {
+        tier = 1;
+    }
+    else if (hp <= 200 || selfmp < 88)
+    {
+        tier = 2;
+    }
+    else if (hp <= 600 || selfmp < 156)
+    {
+        tier = 3;
+    }
+
+    if (PAutomaton->getMod(Mod::AUTO_SCAN_RESISTS))
+    {
+        std::vector<std::pair<SpellID, int16>> reslist{
+            std::make_pair(SpellID::Fire, PTarget->getMod(Mod::FIRE_RES_RANK)),
+            std::make_pair(SpellID::Blizzard, PTarget->getMod(Mod::ICE_RES_RANK)),
+            std::make_pair(SpellID::Aero, PTarget->getMod(Mod::WIND_RES_RANK)),
+            std::make_pair(SpellID::Stone, PTarget->getMod(Mod::EARTH_RES_RANK)),
+            std::make_pair(SpellID::Thunder, PTarget->getMod(Mod::THUNDER_RES_RANK)),
+            std::make_pair(SpellID::Water, PTarget->getMod(Mod::WATER_RES_RANK)),
+        };
+        std::stable_sort(reslist.begin(), reslist.end(), resistanceComparator);
+        for (std::pair<SpellID, int16>& res : reslist)
+        {
+            castPriority.emplace_back(res.first);
+        }
+    }
+    else if (PAutomaton->head() == AutomatonHead::Spiritreaver)
+    {
+        if (maneuvers.thunder)
+        { // Thunder -> Thunder spells
+            castPriority.emplace_back(SpellID::Thunder);
+        }
+        else
+        {
+            defaultPriority.emplace_back(SpellID::Thunder);
+        }
+
+        if (maneuvers.ice)
+        { // Ice -> Blizzard spells
+            castPriority.emplace_back(SpellID::Blizzard);
+        }
+        else
+        {
+            defaultPriority.emplace_back(SpellID::Blizzard);
+        }
+
+        if (maneuvers.fire)
+        { // Fire -> Fire spells
+            castPriority.emplace_back(SpellID::Fire);
+        }
+        else
+        {
+            defaultPriority.emplace_back(SpellID::Fire);
+        }
+
+        if (maneuvers.wind)
+        { // Wind -> Aero spells
+            castPriority.emplace_back(SpellID::Aero);
+        }
+        else
+        {
+            defaultPriority.emplace_back(SpellID::Aero);
+        }
+
+        if (maneuvers.water)
+        { // Water -> Water spells
+            castPriority.emplace_back(SpellID::Water);
+        }
+        else
+        {
+            defaultPriority.emplace_back(SpellID::Water);
+        }
+
+        if (maneuvers.earth)
+        { // Earth -> Stone spells
+            castPriority.emplace_back(SpellID::Stone);
+        }
+        else
+        {
+            defaultPriority.emplace_back(SpellID::Stone);
+        }
+    }
+    else
+    {
+        defaultPriority = { SpellID::Thunder, SpellID::Blizzard, SpellID::Fire, SpellID::Aero, SpellID::Water, SpellID::Stone };
+    }
+
+    for (int8 i = tier; i >= 0; --i)
+    {
+        for (SpellID& id : castPriority)
+        {
+            if (Cast(PTarget->targid, static_cast<SpellID>(static_cast<uint16>(id) + i)))
+            {
+                return true;
+            }
+        }
+
+        for (SpellID& id : defaultPriority)
+        {
+            if (Cast(PTarget->targid, static_cast<SpellID>(static_cast<uint16>(id) + i)))
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+auto CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers) -> bool
+{
+    if (!PAutomaton->PMaster || m_enfeebleCooldown == 0s || m_Tick <= m_LastEnfeebleTime + m_enfeebleCooldown)
+    {
+        return false;
+    }
+
+    std::vector<SpellID> castPriority;
+    std::vector<SpellID> defaultPriority;
+
+    switch (PAutomaton->head())
+    {
+        case AutomatonHead::Stormwaker:
+        {
+            bool dispel = false;
+            PTarget->StatusEffectContainer->ForEachEffect(
+                [&dispel](CStatusEffect& PStatus)
+                {
+                    if (!dispel && PStatus.GetDuration() > 0s)
+                    {
+                        if (PStatus.HasEffectFlag(xi::StatusEffectFlag::Dispelable))
+                        {
+                            dispel = true;
+                            return;
+                        }
+                    }
+                });
+            if (dispel)
+            {
+                castPriority.emplace_back(SpellID::Dispel);
+            }
+            break;
+        }
+        default:
+        {
+            if (!PTarget->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Dia))
+            {
+                if (maneuvers.dark) // Dark -> Bio
+                {
+                    castPriority.emplace_back(SpellID::Bio_II);
+                }
+                else
+                {
+                    defaultPriority.emplace_back(SpellID::Bio_II);
+                }
+            }
+
+            if (!PTarget->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Bio))
+            {
+                if (maneuvers.light)
+                {
+                    castPriority.emplace_back(SpellID::Dia_II);
+                }
+                else
+                {
+                    defaultPriority.emplace_back(SpellID::Dia_II);
+                }
+            }
+
+            if (!PTarget->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Dia))
+            {
+                if (maneuvers.dark) // Dark -> Bio
+                {
+                    castPriority.emplace_back(SpellID::Bio);
+                }
+                else
+                {
+                    defaultPriority.emplace_back(SpellID::Bio);
+                }
+            }
+
+            if (!PTarget->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Bio))
+            {
+                if (maneuvers.light)
+                {
+                    castPriority.emplace_back(SpellID::Dia);
+                }
+                else
+                {
+                    defaultPriority.emplace_back(SpellID::Dia);
+                }
+            }
+
+            if (maneuvers.water) // Water -> Poison
+            {
+                castPriority.emplace_back(SpellID::Poison_II);
+                castPriority.emplace_back(SpellID::Poison);
+            }
+            else
+            {
+                defaultPriority.emplace_back(SpellID::Poison_II);
+                defaultPriority.emplace_back(SpellID::Poison);
+            }
+
+            if (maneuvers.wind)
+            { // Wind -> Silence
+                castPriority.emplace_back(SpellID::Silence);
+            }
+            else
+            {
+                defaultPriority.emplace_back(SpellID::Silence);
+            }
+
+            if (maneuvers.earth)
+            { // Earth -> Slow
+                castPriority.emplace_back(SpellID::Slow);
+            }
+            else
+            {
+                defaultPriority.emplace_back(SpellID::Slow);
+            }
+
+            if (maneuvers.dark)
+            { // Dark -> Blind
+                castPriority.emplace_back(SpellID::Blind);
+            }
+            else
+            {
+                defaultPriority.emplace_back(SpellID::Blind);
+            }
+
+            if (maneuvers.ice)
+            { // Ice -> Paralyze
+                castPriority.emplace_back(SpellID::Paralyze);
+            }
+            else
+            {
+                defaultPriority.emplace_back(SpellID::Paralyze);
+            }
+
+            if (maneuvers.fire)
+            { // Fire -> Addle
+                castPriority.emplace_back(SpellID::Addle);
+            }
+            else
+            {
+                defaultPriority.emplace_back(SpellID::Addle);
+            }
+            break;
+        }
+        case AutomatonHead::Spiritreaver:
+        {
+            if (PAutomaton->GetMPP() < 75 && PTarget->health.mp > 0) // MPP < 75 -> Aspir
+            {
+                castPriority.emplace_back(SpellID::Aspir_II);
+                castPriority.emplace_back(SpellID::Aspir);
+            }
+
+            if (PAutomaton->GetHPP() < 75 && PTarget->m_EcoSystem != xi::Ecosystem::Undead)
+            { // HPP <= 75 -> Drain
+                castPriority.emplace_back(SpellID::Drain);
+            }
+
+            if (maneuvers.dark) // Dark -> Access to Enfeebles
+            {
+                if (!PAutomaton->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::IntBoost))
+                { // Use it ASAP
+                    defaultPriority.emplace_back(SpellID::Absorb_INT);
+                }
+
+                // Not prioritizable since it requires 1 Dark to access Enfeebles and requires 2 of another element to prioritize another
+                defaultPriority.emplace_back(SpellID::Blind);
+                if (!PTarget->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Dia))
+                {
+                    defaultPriority.emplace_back(SpellID::Bio_II);
+                }
+
+                if (!PTarget->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Bio))
+                {
+                    if (maneuvers.light >= 2) // 2 Light -> Dia
+                    {
+                        castPriority.emplace_back(SpellID::Dia_II);
+                    }
+                    else
+                    {
+                        defaultPriority.emplace_back(SpellID::Dia_II);
+                    }
+                }
+                if (!PTarget->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Dia))
+                {
+                    defaultPriority.emplace_back(SpellID::Bio);
+                }
+
+                if (!PTarget->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Bio))
+                {
+                    if (maneuvers.light >= 2) // 2 Light -> Dia
+                    {
+                        castPriority.emplace_back(SpellID::Dia);
+                    }
+                    else
+                    {
+                        defaultPriority.emplace_back(SpellID::Dia);
+                    }
+                }
+
+                if (maneuvers.water >= 2) // 2 Water -> Poison
+                {
+                    castPriority.emplace_back(SpellID::Poison_II);
+                    castPriority.emplace_back(SpellID::Poison);
+                }
+                else
+                {
+                    defaultPriority.emplace_back(SpellID::Poison_II);
+                    defaultPriority.emplace_back(SpellID::Poison);
+                }
+
+                if (maneuvers.wind >= 2)
+                { // 2 Wind -> Silence
+                    castPriority.emplace_back(SpellID::Silence);
+                }
+                else
+                {
+                    defaultPriority.emplace_back(SpellID::Silence);
+                }
+
+                if (maneuvers.earth >= 2)
+                { // 2 Earth -> Slow
+                    castPriority.emplace_back(SpellID::Slow);
+                }
+                else
+                {
+                    defaultPriority.emplace_back(SpellID::Slow);
+                }
+
+                if (maneuvers.ice >= 2)
+                { // 2 Ice -> Paralyze
+                    castPriority.emplace_back(SpellID::Paralyze);
+                }
+                else
+                {
+                    defaultPriority.emplace_back(SpellID::Paralyze);
+                }
+
+                if (maneuvers.fire >= 2)
+                { // 2 Fire -> Addle
+                    castPriority.emplace_back(SpellID::Addle);
+                }
+                else
+                {
+                    defaultPriority.emplace_back(SpellID::Addle);
+                }
+            }
+            break;
+        }
+        case AutomatonHead::Soulsoother:
+        {
+            if (maneuvers.earth)
+            { // Earth -> Slow
+                castPriority.emplace_back(SpellID::Slow);
+            }
+            else
+            {
+                defaultPriority.emplace_back(SpellID::Slow);
+            }
+
+            if (maneuvers.water) // 2 Water -> Poison
+            {
+                castPriority.emplace_back(SpellID::Poison_II);
+                castPriority.emplace_back(SpellID::Poison);
+            }
+            else
+            {
+                defaultPriority.emplace_back(SpellID::Poison_II);
+                defaultPriority.emplace_back(SpellID::Poison);
+            }
+
+            if (maneuvers.dark) // Dark -> Blind > Bio
+            {
+                castPriority.emplace_back(SpellID::Blind);
+                if (!PTarget->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Dia))
+                {
+                    castPriority.emplace_back(SpellID::Bio_II);
+                }
+            }
+            else
+            {
+                defaultPriority.emplace_back(SpellID::Blind);
+                if (!PTarget->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Dia))
+                {
+                    defaultPriority.emplace_back(SpellID::Bio_II);
+                }
+            }
+
+            if (!PTarget->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Bio))
+            {
+                if (maneuvers.light) // Light -> Dia
+                {
+                    castPriority.emplace_back(SpellID::Dia_II);
+                }
+                else
+                {
+                    defaultPriority.emplace_back(SpellID::Dia_II);
+                }
+            }
+
+            if (!PTarget->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Dia))
+            {
+                if (maneuvers.dark) // Dark -> Blind > Bio
+                {
+                    castPriority.emplace_back(SpellID::Bio);
+                }
+                else
+                {
+                    defaultPriority.emplace_back(SpellID::Bio);
+                }
+            }
+
+            if (!PTarget->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Bio))
+            {
+                if (maneuvers.light) // Light -> Dia
+                {
+                    castPriority.emplace_back(SpellID::Dia);
+                }
+                else
+                {
+                    defaultPriority.emplace_back(SpellID::Dia);
+                }
+            }
+
+            if (maneuvers.wind)
+            { // Wind -> Silence
+                castPriority.emplace_back(SpellID::Silence);
+            }
+            else
+            {
+                defaultPriority.emplace_back(SpellID::Silence);
+            }
+
+            if (maneuvers.ice)
+            { // Ice -> Paralyze
+                castPriority.emplace_back(SpellID::Paralyze);
+            }
+            else
+            {
+                defaultPriority.emplace_back(SpellID::Paralyze);
+            }
+
+            if (maneuvers.fire)
+            { // Fire -> Addle
+                castPriority.emplace_back(SpellID::Addle);
+            }
+            else
+            {
+                defaultPriority.emplace_back(SpellID::Addle);
+            }
+            break;
+        }
+    }
+
+    for (SpellID& id : castPriority)
+    {
+        if (automaton::CanUseEnfeeble(PTarget, id) && Cast(PTarget->targid, id))
+        {
+            return true;
+        }
+    }
+
+    for (SpellID& id : defaultPriority)
+    {
+        if (automaton::CanUseEnfeeble(PTarget, id) && Cast(PTarget->targid, id))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+auto CAutomatonController::TryStatusRemoval(const CurrentManeuvers& maneuvers) -> bool
+{
+    if (!PAutomaton->PMaster || m_statusCooldown == 0s || m_Tick <= m_LastStatusTime + m_statusCooldown)
+    {
+        return false;
+    }
+
+    std::vector<SpellID> castPriority;
+
+    PAutomaton->PMaster->StatusEffectContainer->ForEachEffect(
+        [&castPriority](CStatusEffect& PStatus)
+        {
+            if (PStatus.GetDuration() > 0s)
+            {
+                auto id = automaton::FindNaSpell(&PStatus);
+                if (id.has_value())
+                {
+                    castPriority.emplace_back(id.value());
+                }
+            }
+        });
+
+    for (SpellID& id : castPriority)
+    {
+        if (Cast(PAutomaton->PMaster->targid, id))
+        {
+            return true;
+        }
+    }
+
+    castPriority.clear();
+
+    PAutomaton->StatusEffectContainer->ForEachEffect(
+        [&castPriority](CStatusEffect& PStatus)
+        {
+            if (PStatus.GetDuration() > 0s)
+            {
+                auto id = automaton::FindNaSpell(&PStatus);
+                if (id.has_value())
+                {
+                    castPriority.emplace_back(id.value());
+                }
+            }
+        });
+
+    for (SpellID& id : castPriority)
+    {
+        if (Cast(PAutomaton->targid, id))
+        {
+            return true;
+        }
+    }
+
+    if (maneuvers.water && PAutomaton->head() == AutomatonHead::Soulsoother && PAutomaton->PMaster->PParty) // Water + Soulsoother head -> Remove party's statuses
+    {
+        for (auto member : PAutomaton->PMaster->PParty->members)
+        {
+            if (member->id != PAutomaton->PMaster->id)
+            {
+                castPriority.clear();
+
+                member->StatusEffectContainer->ForEachEffect(
+                    [&castPriority](CStatusEffect& PStatus)
+                    {
+                        if (PStatus.GetDuration() > 0s)
+                        {
+                            auto id = automaton::FindNaSpell(&PStatus);
+                            if (id.has_value())
+                            {
+                                castPriority.emplace_back(id.value());
+                            }
+                        }
+                    });
+
+                for (auto id : castPriority)
+                {
+                    if (Cast(member->targid, id))
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+
+    return false;
+}
+
+auto CAutomatonController::TryEnhance() -> bool
+{
+    if (!PAutomaton->PMaster || m_enhanceCooldown == 0s || m_Tick <= m_LastEnhanceTime + m_enhanceCooldown)
+    {
+        return false;
+    }
+
+    if (PAutomaton->head() == AutomatonHead::Spiritreaver)
+    {
+        return Cast(PAutomaton->targid, SpellID::Dread_Spikes);
+    }
+
+    uint16 highestEnmity = 0;
+
+    CBattleEntity* PRegenTarget     = nullptr;
+    CBattleEntity* PProtectTarget   = nullptr;
+    CBattleEntity* PShellTarget     = nullptr;
+    CBattleEntity* PHasteTarget     = nullptr;
+    CBattleEntity* PStoneSkinTarget = nullptr;
+    CBattleEntity* PPhalanxTarget   = nullptr;
+
+    bool  protect      = false;
+    uint8 protectcount = 0;
+    bool  shell        = false;
+    uint8 shellcount   = 0;
+    bool  haste        = false;
+    bool  stoneskin    = false;
+    bool  phalanx      = false;
+
+    bool isEngaged = false;
+
+    if (distance(PAutomaton->loc.p, PAutomaton->PMaster->loc.p) < 20)
+    {
+        if (auto* PMob = dynamic_cast<CMobEntity*>(PTarget))
+        {
+            auto enmityList = PMob->PEnmityContainer->GetEnmityList();
+            if (auto enmity_obj = enmityList->find(PAutomaton->PMaster->id);
+                enmity_obj != enmityList->end())
+            {
+                isEngaged = true;
+                if (highestEnmity < enmity_obj->second.CE + enmity_obj->second.VE)
+                {
+                    highestEnmity = enmity_obj->second.CE + enmity_obj->second.VE;
+                    PRegenTarget  = PAutomaton->PMaster;
+                }
+            }
+            else
+            {
+                isEngaged = true; // Assume everyone is engaged if the target isn't a mob
+            }
+        }
+
+        PAutomaton->PMaster->StatusEffectContainer->ForEachEffect(
+            [&protect, &protectcount, &shell, &shellcount, &haste, &stoneskin, &phalanx](CStatusEffect& PStatus)
+            {
+                if (PStatus.GetDuration() > 0s)
+                {
+                    if (PStatus.GetStatusID() == xi::StatusEffect::Protect)
+                    {
+                        protect = true;
+                        ++protectcount;
+                    }
+
+                    if (PStatus.GetStatusID() == xi::StatusEffect::Shell)
+                    {
+                        shell = true;
+                        ++shellcount;
+                    }
+
+                    if (PStatus.GetStatusID() == xi::StatusEffect::Haste || PStatus.GetStatusID() == xi::StatusEffect::GeoHaste)
+                    {
+                        haste = true;
+                    }
+
+                    if (PStatus.GetStatusID() == xi::StatusEffect::Stoneskin)
+                    {
+                        stoneskin = true;
+                    }
+
+                    if (PStatus.GetStatusID() == xi::StatusEffect::Phalanx)
+                    {
+                        phalanx = true;
+                    }
+                }
+            });
+
+        if (isEngaged)
+        {
+            if (!protect)
+            {
+                PProtectTarget = PAutomaton->PMaster;
+            }
+
+            if (!shell)
+            {
+                PShellTarget = PAutomaton->PMaster;
+            }
+
+            if (!haste)
+            {
+                PHasteTarget = PAutomaton->PMaster;
+            }
+
+            if (!stoneskin)
+            {
+                PStoneSkinTarget = PAutomaton->PMaster;
+            }
+
+            if (!phalanx)
+            {
+                PPhalanxTarget = PAutomaton->PMaster;
+            }
+        }
+    }
+
+    protect   = false;
+    shell     = false;
+    haste     = false;
+    stoneskin = false;
+    phalanx   = false;
+
+    if (auto* PMob = dynamic_cast<CMobEntity*>(PTarget))
+    {
+        auto enmityList = PMob->PEnmityContainer->GetEnmityList();
+        auto enmity_obj = enmityList->find(PAutomaton->id);
+        if (enmity_obj != enmityList->end() && highestEnmity < enmity_obj->second.CE + enmity_obj->second.VE)
+        {
+            highestEnmity = enmity_obj->second.CE + enmity_obj->second.VE;
+            PRegenTarget  = PAutomaton;
+        }
+    }
+
+    PAutomaton->StatusEffectContainer->ForEachEffect(
+        [&protect, &shell, &haste](CStatusEffect& PStatus)
+        {
+            if (PStatus.GetDuration() > 0s)
+            {
+                if (PStatus.GetStatusID() == xi::StatusEffect::Protect)
+                {
+                    protect = true;
+                }
+
+                if (PStatus.GetStatusID() == xi::StatusEffect::Shell)
+                {
+                    shell = true;
+                }
+
+                if (PStatus.GetStatusID() == xi::StatusEffect::Haste || PStatus.GetStatusID() == xi::StatusEffect::GeoHaste)
+                {
+                    haste = true;
+                }
+            }
+        });
+
+    if (!PProtectTarget && !protect)
+    {
+        PProtectTarget = PAutomaton;
+    }
+
+    if (!PShellTarget && !shell)
+    {
+        PShellTarget = PAutomaton;
+    }
+
+    if (!PHasteTarget && !haste)
+    {
+        PHasteTarget = PAutomaton;
+    }
+
+    size_t members = 0;
+
+    // Unknown whether it only applies buffs to other members if they have hate or if the Soulsoother head is needed
+    if (PAutomaton->PMaster->PParty)
+    {
+        members = PAutomaton->PMaster->PParty->members.size();
+        // clang-format off
+        static_cast<CCharEntity*>(PAutomaton->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+        {
+            if (PMember->id != PAutomaton->PMaster->id && distance(PAutomaton->loc.p, PMember->loc.p) < 20)
+            {
+                protect = false;
+                shell   = false;
+                haste   = false;
+
+                isEngaged = false;
+
+                if (auto* PMob = dynamic_cast<CMobEntity*>(PTarget))
+                {
+                    auto enmityList = PMob->PEnmityContainer->GetEnmityList();
+                    auto enmity_obj = enmityList->find(PMember->id);
+                    if (enmity_obj != enmityList->end())
+                    {
+                        isEngaged = true;
+                        if (highestEnmity < enmity_obj->second.CE + enmity_obj->second.VE)
+                        {
+                            highestEnmity = enmity_obj->second.CE + enmity_obj->second.VE;
+                            PRegenTarget  = PMember;
+                        }
+                    }
+                }
+                else
+                {
+                    isEngaged = true; // Assume everyone is engaged if the target isn't a mob
+                }
+
+                PMember->StatusEffectContainer->ForEachEffect([&protect, &protectcount, &shell, &shellcount, &haste](CStatusEffect& PStatus)
+                {
+                    if (PStatus.GetDuration() > 0s)
+                    {
+                        if (PStatus.GetStatusID() == xi::StatusEffect::Protect)
+                        {
+                            protect = true;
+                            ++protectcount;
+                        }
+
+                        if (PStatus.GetStatusID() == xi::StatusEffect::Shell)
+                        {
+                            shell = true;
+                            ++shellcount;
+                        }
+
+                        if (PStatus.GetStatusID() == xi::StatusEffect::Haste || PStatus.GetStatusID() == xi::StatusEffect::GeoHaste)
+                        {
+                            haste = true;
+                        }
+                    }
+                });
+
+                if (isEngaged)
+                {
+                    if (!PProtectTarget && !protect)
+                    {
+                        PProtectTarget = PMember;
+                    }
+
+                    if (!PShellTarget && !shell)
+                    {
+                        PShellTarget = PMember;
+                    }
+
+                    if (!PHasteTarget && !haste)
+                    {
+                        PHasteTarget = PMember;
+                    }
+                }
+            }
+        });
+        // clang-format on
+    }
+
+    // No info on how this spell worked
+    if ((members - protectcount) >= 4)
+    {
+        Cast(PAutomaton->targid, SpellID::Protectra_V);
+    }
+
+    // No info on how this spell worked
+    if ((members - shellcount) >= 4)
+    {
+        Cast(PAutomaton->targid, SpellID::Shellra_V);
+    }
+
+    if (PRegenTarget &&
+        !(PRegenTarget->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Regen) || PRegenTarget->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::GeoRegen)))
+    {
+        if (Cast(PRegenTarget->targid, SpellID::Regen_III) || Cast(PRegenTarget->targid, SpellID::Regen_II) || Cast(PRegenTarget->targid, SpellID::Regen))
+        {
+            return true;
+        }
+    }
+
+    if (PProtectTarget)
+    {
+        if (Cast(PProtectTarget->targid, SpellID::Protect_V) || Cast(PProtectTarget->targid, SpellID::Protect_IV) ||
+            Cast(PProtectTarget->targid, SpellID::Protect_III) || Cast(PProtectTarget->targid, SpellID::Protect_II) ||
+            Cast(PProtectTarget->targid, SpellID::Protect))
+        {
+            return true;
+        }
+    }
+
+    if (PShellTarget)
+    {
+        if (Cast(PShellTarget->targid, SpellID::Shell_V) || Cast(PShellTarget->targid, SpellID::Shell_IV) || Cast(PShellTarget->targid, SpellID::Shell_III) ||
+            Cast(PShellTarget->targid, SpellID::Shell_II) || Cast(PShellTarget->targid, SpellID::Shell))
+        {
+            return true;
+        }
+    }
+
+    if (PHasteTarget)
+    {
+        if (Cast(PHasteTarget->targid, SpellID::Haste_II) || Cast(PHasteTarget->targid, SpellID::Haste))
+        {
+            return true;
+        }
+    }
+
+    if (PStoneSkinTarget)
+    {
+        if (Cast(PStoneSkinTarget->targid, SpellID::Stoneskin))
+        {
+            return true;
+        }
+    }
+
+    if (PPhalanxTarget)
+    {
+        if (Cast(PPhalanxTarget->targid, SpellID::Phalanx))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+auto CAutomatonController::TryTPMove() -> bool
+{
+    if (PAutomaton->health.tp >= 1000)
+    {
+        const auto& FrameSkills = battleutils::GetMobSkillList(PAutomaton->m_MobSkillList);
+
+        std::vector<CMobSkill*> validSkills;
+
+        // load the skills that the automaton has access to with it's skill
+        SKILLTYPE skilltype = SKILL_AUTOMATON_MELEE;
+
+        if (PAutomaton->frame() == AutomatonFrame::Sharpshot)
+        {
+            skilltype = SKILL_AUTOMATON_RANGED;
+        }
+
+        for (auto skillid : FrameSkills)
+        {
+            auto* PSkill = battleutils::GetMobSkill(skillid);
+            if (PSkill && PAutomaton->GetSkill(skilltype) > PSkill->getParam() && PSkill->getParam() != -1 &&
+                distance(PAutomaton->loc.p, PTarget->loc.p) < PSkill->getRadius())
+            {
+                validSkills.emplace_back(PSkill);
+            }
+        }
+
+        int16      currentSkill     = -1;
+        CMobSkill* PWSkill          = nullptr;
+        int8       currentManeuvers = -1;
+
+        bool attemptChain = (PAutomaton->getMod(Mod::AUTO_TP_EFFICIENCY) != 0);
+
+        if (attemptChain)
+        {
+            CStatusEffect* PSCEffect = PTarget->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Skillchain, 0);
+            if (PSCEffect && PSCEffect->GetStartTime() + 3s < timer::now())
+            {
+                std::list<SKILLCHAIN_ELEMENT> resonanceProperties;
+
+                if (uint16 power = PSCEffect->GetPower())
+                {
+                    resonanceProperties.emplace_back((SKILLCHAIN_ELEMENT)(power & 0xF));
+                    resonanceProperties.emplace_back((SKILLCHAIN_ELEMENT)((power >> 4) & 0xF));
+                    resonanceProperties.emplace_back((SKILLCHAIN_ELEMENT)(power >> 8));
+                }
+
+                for (auto* PSkill : validSkills)
+                {
+                    if (PSkill->getParam() > currentSkill)
+                    {
+                        std::list<SKILLCHAIN_ELEMENT> skillProperties;
+                        skillProperties.emplace_back((SKILLCHAIN_ELEMENT)PSkill->getPrimarySkillchain());
+                        skillProperties.emplace_back((SKILLCHAIN_ELEMENT)PSkill->getSecondarySkillchain());
+                        skillProperties.emplace_back((SKILLCHAIN_ELEMENT)PSkill->getTertiarySkillchain());
+                        if (battleutils::FormSkillchain(resonanceProperties, skillProperties) != SC_NONE)
+                        {
+                            currentManeuvers = 1;
+                            currentSkill     = PSkill->getParam();
+                            PWSkill          = PSkill;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (!attemptChain || (currentManeuvers == -1 && PAutomaton->PMaster && PAutomaton->PMaster->health.tp < PAutomaton->getMod(Mod::AUTO_TP_EFFICIENCY)))
+        {
+            for (auto* PSkill : validSkills)
+            {
+                int8 maneuvers = luautils::OnAutomatonAbilityCheck(PTarget, PAutomaton, PSkill);
+                if (maneuvers > -1 && (maneuvers > currentManeuvers || (maneuvers == currentManeuvers && PSkill->getParam() > currentSkill)))
+                {
+                    currentManeuvers = maneuvers;
+                    currentSkill     = PSkill->getParam();
+                    PWSkill          = PSkill;
+                }
+            }
+        }
+
+        // No WS was chosen (waiting on master's TP to skillchain probably)
+        if (currentManeuvers == -1)
+        {
+            return false;
+        }
+
+        if (PWSkill)
+        {
+            return MobSkill(PTarget->targid, PWSkill->getID(), std::nullopt);
+        }
+    }
+    return false;
+}
+
+auto CAutomatonController::TryRangedAttack() -> bool // TODO: Find the animation for its ranged attack
+{
+    if (PAutomaton->frame() == AutomatonFrame::Sharpshot)
+    {
+        timer::duration minDelay   = PAutomaton->head() == AutomatonHead::Sharpshot ? 5s : 10s;
+        timer::duration attackTime = m_rangedCooldown - std::chrono::seconds(PAutomaton->getMod(Mod::AUTO_RANGED_DELAY));
+
+        if (m_rangedCooldown > 0s && m_Tick > m_LastRangedTime + std::max(attackTime, minDelay))
+        {
+            return MobSkill(PTarget->targid, m_RangedAbility, std::nullopt);
+        }
+    }
+
+    return false;
+}
+
+auto CAutomatonController::TryAttachment() -> bool
+{
+    if (!PAutomaton->PAI->CanChangeState())
+    {
+        return false;
+    }
+
+    PAutomaton->PAI->EventHandler.triggerListener("AUTOMATON_ATTACHMENT_CHECK", PAutomaton, PTarget);
+
+    return false;
+}
+
+auto CAutomatonController::CanCastSpells(IgnoreRecastsAndCosts ignoreRecastsAndCosts) -> bool
+{
+    // Check for spell blockers e.g. silence
+    if (PAutomaton->StatusEffectContainer->HasStatusEffect({ xi::StatusEffect::Silence, xi::StatusEffect::Mute }))
+    {
+        return false;
+    }
+
+    if (!ignoreRecastsAndCosts && !PAutomaton->SpellContainer->IsAnySpellAvailable())
+    {
+        return false;
+    }
+
+    // Check if we can change states!
+    return PAutomaton->PAI->CanChangeState();
+}
+
+auto CAutomatonController::Cast(uint16 targid, SpellID spellid) -> bool
+{
+    if (!automaton::CanUseSpell(PAutomaton, spellid) || PAutomaton->PRecastContainer->HasRecast(RECAST_MAGIC, static_cast<Recast>(spellid), 0s))
+    {
+        return false;
+    }
+
+    return CPetController::Cast(targid, spellid);
+}
+
+auto CAutomatonController::MobSkill(uint16 targid, uint16 wsid, Maybe<timer::duration> castTimeOverride) -> bool
+{
+    if (PAutomaton->PRecastContainer->HasRecast(RECAST_ABILITY, static_cast<Recast>(wsid), 0s))
+    {
+        return false;
+    }
+    return CPetController::MobSkill(targid, wsid, castTimeOverride);
+}
+
+auto CAutomatonController::Disengage() -> bool
+{
+    PTarget = nullptr;
+    if (shouldStandBack())
+    {
+        PAutomaton->m_Behavior |= BEHAVIOR_STANDBACK;
+    }
+    return CMobController::Disengage();
+}
+
+namespace automaton
+{
+
+FlatHashMap<SpellID, AutomatonSpell, EnumClassHash> autoSpellList;
+std::vector<SpellID>                                naSpells;
+HashMap<uint16, AutomatonAbility>                   autoAbilityList;
+
+void LoadAutomatonSpellList()
+{
+    const auto rset = db::preparedStmt("SELECT spellid, skilllevel, heads, enfeeble, immunity, removes FROM automaton_spells");
+    if (rset && rset->rowsCount())
+    {
+        while (rset->next())
+        {
+            SpellID id = rset->get<SpellID>("spellid");
+
+            AutomatonSpell PSpell{
+                .skilllevel = rset->get<uint16>("skilllevel"),
+                .heads      = rset->get<uint8>("heads"),
+                .enfeeble   = rset->get<xi::StatusEffect>("enfeeble"),
+                .immunity   = rset->get<IMMUNITY>("immunity"),
+                .removes    = {}, // Will handle in a moment
+            };
+
+            uint32 removes = rset->get<uint32>("removes");
+            while (removes > 0)
+            {
+                PSpell.removes.emplace_back(static_cast<xi::StatusEffect>(removes & 0xFF));
+                removes = removes >> 8;
+            }
+
+            if (!PSpell.removes.empty())
+            {
+                naSpells.emplace_back(id);
+            }
+
+            autoSpellList[id] = std::move(PSpell);
+        }
+    }
+}
+
+bool CanUseSpell(CAutomatonEntity* PCaster, SpellID spellid)
+{
+    const AutomatonSpell& PSpell = autoSpellList[spellid];
+    return ((PCaster->GetSkill(SKILL_AUTOMATON_MAGIC) >= PSpell.skilllevel) && (PSpell.heads & (1 << ((uint8)PCaster->head() - 1))));
+}
+
+bool CanUseEnfeeble(CBattleEntity* PTarget, SpellID spell)
+{
+    const AutomatonSpell& PSpell   = autoSpellList[spell];
+    auto&                 statuses = PTarget->StatusEffectContainer;
+    return (!statuses->HasStatusEffect(PSpell.enfeeble) && !PTarget->hasImmunity(PSpell.immunity));
+}
+
+Maybe<SpellID> FindNaSpell(CStatusEffect* PStatus)
+{
+    for (auto spell : naSpells)
+    {
+        const AutomatonSpell& PSpell = autoSpellList[spell];
+        if (std::find(PSpell.removes.begin(), PSpell.removes.end(), PStatus->GetStatusID()) != PSpell.removes.end())
+        {
+            return spell;
+        }
+    }
+
+    if (PStatus->HasEffectFlag(xi::StatusEffectFlag::Erasable))
+    {
+        return SpellID::Erase;
+    }
+    else
+    {
+        // TODO: -Wno-maybe-uninitialized - possible false positive (anonymous may be used)
+        return {};
+    }
+}
+
+void LoadAutomatonAbilities()
+{
+    const auto rset = db::preparedStmt("SELECT abilityid, abilityname, reqframe, skilllevel FROM automaton_abilities");
+
+    if (rset && rset->rowsCount())
+    {
+        while (rset->next())
+        {
+            uint16 id = rset->get<uint16>("abilityid");
+
+            AutomatonAbility PAbility{
+                .requiredFrame = rset->get<uint8>("reqframe"),
+                .skillLevel    = rset->get<uint16>("skilllevel"),
+            };
+
+            autoAbilityList[id] = PAbility;
+
+            const auto abilityName = rset->get<std::string>("abilityname");
+
+            const auto filename = fmt::format("./scripts/actions/abilities/pets/automaton/{}.lua", abilityName);
+            luautils::LoadLuaObjectFromFile(filename);
+        }
+    }
+}
+
+} // namespace automaton

@@ -1,0 +1,18 @@
+{
+    "recommendations": [
+        "sumneko.lua",
+        "Chouzz.vscode-better-align",
+        "ms-python.python",
+        "ms-python.black-formatter",
+        "eamodio.gitlens",
+        "donjayamanne.githistory",
+        "josetr.cmake-language-support-vscode",
+        "ms-vscode.cpptools-themes",
+        "ms-vscode.cpptools-extension-pack",
+        "ms-vscode.cpptools",
+        "jeff-hykin.better-cpp-syntax",
+        "bierner.github-markdown-preview",
+        "esbenp.prettier-vscode",
+        "redhat.vscode-yaml"
+    ]
+}

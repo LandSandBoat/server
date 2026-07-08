@@ -1,0 +1,17 @@
+-----------------------------------
+-- Area: Gustav Tunnel
+--  Mob: Goblin Shepherd
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Goblins_Leech')
+end
+
+entity.onMobDeath = function(mob, player, optParams)
+    xi.regime.checkRegime(player, mob, 764, 3, xi.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 765, 3, xi.regime.type.GROUNDS)
+end
+
+return entity

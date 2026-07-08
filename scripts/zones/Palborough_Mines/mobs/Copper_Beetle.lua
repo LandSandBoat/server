@@ -1,0 +1,15 @@
+-----------------------------------
+-- Area: Palborough Mines
+--  Mob: Copper Beetle
+-- Note: PH for Bu'Ghi Howlblade
+-----------------------------------
+local ID = zones[xi.zone.PALBOROUGH_MINES]
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.BU_GHI_HOWLBLADE, 10, 3600) -- 1 hour
+end
+
+return entity

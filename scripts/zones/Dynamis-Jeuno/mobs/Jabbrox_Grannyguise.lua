@@ -1,0 +1,30 @@
+-----------------------------------
+-- Area: Dynamis - Jeuno
+--  Mob: Jabbrox Grannyguise
+-----------------------------------
+mixins =
+{
+    require('scripts/mixins/dynamis_beastmen'),
+    require('scripts/mixins/job_special')
+}
+-----------------------------------
+local ID = zones[xi.zone.DYNAMIS_JEUNO]
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.spawnPoints =
+{
+    { x =  1.115, y =  2.500, z =  105.376 }
+}
+
+entity.phList =
+{
+    [ID.mob.JABBROX_GRANNYGUISE - 3] = ID.mob.JABBROX_GRANNYGUISE, -- Vanguard_Enchanter    0.371    2.663   115.674
+}
+
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
+return entity

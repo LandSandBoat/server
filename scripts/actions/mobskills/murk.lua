@@ -1,0 +1,35 @@
+-----------------------------------
+-- Murk
+--
+-- Description: Slow and Weight Area of Effect (10.0')
+-- Type: Enfeebling
+-- Utsusemi/Blink absorb: Ignores shadows
+-----------------------------------
+---@type TMobSkill
+local mobskillObject = {}
+
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    return 0
+end
+
+mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    local typeEffect = nil
+    -- SubPower 1 marks this slow as overwritable by haste despite high power
+    local slowed     = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 8500, 0, 90, 0, 1)
+    local weight     = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 44, 0, 120)
+
+    skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
+
+    -- display slow first, else weight
+    if slowed == xi.msg.basic.SKILL_ENFEEB_IS then
+        typeEffect = xi.effect.SLOW
+    elseif weight == xi.msg.basic.SKILL_ENFEEB_IS then
+        typeEffect = xi.effect.WEIGHT
+    else
+        skill:setMsg(xi.msg.basic.SKILL_MISS)
+    end
+
+    return typeEffect
+end
+
+return mobskillObject

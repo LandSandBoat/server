@@ -1,0 +1,34 @@
+-----------------------------------
+-- ID: 4585
+-- Item: Broiled Pipira
+-- Food Effect: 60Min, All Races
+-----------------------------------
+-- Dexterity 4
+-- Mind -1
+-- Attack % 14 (cap 80)
+-- Ranged ATT % 14 (cap 80)
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 3600, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.DEX, 4)
+    effect:addMod(xi.mod.MND, -1)
+    effect:addMod(xi.mod.FOOD_ATTP, 14)
+    effect:addMod(xi.mod.FOOD_ATT_CAP, 80)
+    effect:addMod(xi.mod.FOOD_RATTP, 14)
+    effect:addMod(xi.mod.FOOD_RATT_CAP, 80)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

@@ -1,0 +1,42 @@
+-----------------------------------
+-- ID: 5199
+-- Item: dish_of_spaghetti_carbonara_+1
+-- Food Effect: 30Min, All Races
+-----------------------------------
+-- Health % 14
+-- Health Cap 180
+-- Magic 15
+-- Strength 4
+-- Vitality 2
+-- Intelligence -3
+-- Attack % 17
+-- Attack Cap 70
+-- Store TP 6
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 3600, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_HPP, 14)
+    effect:addMod(xi.mod.FOOD_HP_CAP, 180)
+    effect:addMod(xi.mod.FOOD_MP, 15)
+    effect:addMod(xi.mod.STR, 4)
+    effect:addMod(xi.mod.VIT, 2)
+    effect:addMod(xi.mod.INT, -3)
+    effect:addMod(xi.mod.FOOD_ATTP, 17)
+    effect:addMod(xi.mod.FOOD_ATT_CAP, 70)
+    effect:addMod(xi.mod.STORETP, 6)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

@@ -1,0 +1,34 @@
+-----------------------------------
+-- ID: 5660
+-- Item: stick_of_pepperoni
+-- Food Effect: 30Min, All Races
+-----------------------------------
+-- HP % 3 (assuming 3% from testing, no known cap)
+-- Strength 3
+-- Intelligence -1
+-- Attack % 60 (assuming 60%, cap 30)
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 1800, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_HPP, 3)
+    effect:addMod(xi.mod.FOOD_HP_CAP, 999)
+    effect:addMod(xi.mod.STR, 3)
+    effect:addMod(xi.mod.INT, -1)
+    effect:addMod(xi.mod.FOOD_ATTP, 60)
+    effect:addMod(xi.mod.FOOD_ATT_CAP, 30)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

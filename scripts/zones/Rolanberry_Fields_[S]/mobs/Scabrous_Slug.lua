@@ -1,0 +1,14 @@
+-----------------------------------
+-- Area: Rolanberry Fields [S]
+--  Mob: Scabrous Slug
+-- Note: PH for Dyinyanga
+-----------------------------------
+local ID = zones[xi.zone.ROLANBERRY_FIELDS_S]
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.DYINYINGA, 10, 3600) -- 1 hour
+end
+
+return entity

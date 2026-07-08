@@ -1,0 +1,88 @@
+﻿/*
+===========================================================================
+
+  Copyright (c) 2010-2015 Darkstar Dev Teams
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
+
+===========================================================================
+*/
+
+#ifndef _LATENTEFFECTCONTAINER_H
+#define _LATENTEFFECTCONTAINER_H
+
+#include "common/cbasetypes.h"
+
+#include "common/types/fn.h"
+
+#include "entities/pet_entity.h"
+#include "enums/weather.h"
+#include "items/item_equipment.h"
+#include "latent_effect.h"
+
+/************************************************************************
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
+
+class CCharEntity;
+
+class CLatentEffectContainer
+{
+public:
+    void CheckLatentsHP();
+    void CheckLatentsTP();
+    void CheckLatentsWS(bool isDuringWs);
+    void CheckLatentsMP();
+    void CheckLatentsEquip(uint8 slot);
+    void CheckLatentsWeaponDraw(bool drawn);
+    void CheckLatentsStatusEffect();
+    void CheckLatentsFoodEffect();
+    void CheckLatentsRollSong();
+    void CheckLatentsDay();
+    void CheckLatentsMoonPhase();
+    void CheckLatentsHours();
+    void CheckLatentsWeekDay();
+    void CheckLatentsPartyMembers(size_t members, size_t trustCount);
+    void CheckLatentsPartyJobs();
+    void CheckLatentsPartyAvatar();
+    void CheckLatentsJobLevel();
+    void CheckLatentsPetType();
+    void CheckLatentsTime();
+    void CheckLatentsWeaponBreak(uint8 slot);
+    void CheckLatentsZone();
+    void CheckLatentsWeather();
+    void CheckLatentsWeather(Weather weather);
+    void CheckLatentsTargetChange();
+
+    void AddLatentEffects(std::vector<CItemEquipment::itemLatent>& latentList, uint8 reqLvl, uint8 slot);
+    void DelLatentEffects(uint8 reqLvl, uint8 slot);
+    bool HasAllLatentsActive(uint8 slot);
+
+    void AddLatentEffect(xi::Latent conditionID, uint16 conditionValue, Mod modID, int16 modValue);
+    auto DelLatentEffect(xi::Latent conditionID, uint16 conditionValue, Mod modID, int16 modValue) -> bool;
+
+    CLatentEffectContainer(CCharEntity* PEntity);
+
+private:
+    CCharEntity*               m_POwner;
+    std::vector<CLatentEffect> m_LatentEffectList;
+
+    void ProcessLatentEffects(const Fn<bool(CLatentEffect&) const>& logic);
+    auto ProcessLatentEffect(CLatentEffect& latentEffect, bool isDuringWs = false) -> bool;
+    bool ApplyLatentEffect(CLatentEffect& effect, bool expression);
+};
+
+#endif

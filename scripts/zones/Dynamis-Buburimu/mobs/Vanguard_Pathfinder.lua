@@ -1,0 +1,27 @@
+-----------------------------------
+-- Area: Dynamis - Buburimu
+--  Mob: Vanguard Pathfinder
+-----------------------------------
+mixins =
+{
+    require('scripts/mixins/dynamis_beastmen'),
+    require('scripts/mixins/job_special')
+}
+local ID = zones[xi.zone.DYNAMIS_BUBURIMU]
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob, 1, 'Vanguards_Slime')
+end
+
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.WOODNIX_SHRILLWHISTLE, 10, 1200) -- 20 minutes
+end
+
+return entity

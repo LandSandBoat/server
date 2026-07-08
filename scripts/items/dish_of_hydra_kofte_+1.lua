@@ -1,0 +1,42 @@
+-----------------------------------
+-- ID: 5603
+-- Item: dish_of_hydra_kofte_+1
+-- Food Effect: 240Min, All Races
+-----------------------------------
+-- Strength 8
+-- Intelligence -4
+-- Attack % 20
+-- Attack Cap 160
+-- Defense % 25
+-- Defense Cap 75
+-- Ranged ATT % 20
+-- Ranged ATT Cap 160
+-- Poison Resist 5
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 14400, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.STR, 8)
+    effect:addMod(xi.mod.INT, -4)
+    effect:addMod(xi.mod.FOOD_ATTP, 20)
+    effect:addMod(xi.mod.FOOD_ATT_CAP, 160)
+    effect:addMod(xi.mod.FOOD_DEFP, 25)
+    effect:addMod(xi.mod.FOOD_DEF_CAP, 75)
+    effect:addMod(xi.mod.FOOD_RATTP, 20)
+    effect:addMod(xi.mod.FOOD_RATT_CAP, 160)
+    effect:addMod(xi.mod.POISONRES, 5)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

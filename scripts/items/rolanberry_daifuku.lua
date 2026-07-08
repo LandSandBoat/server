@@ -1,0 +1,62 @@
+-----------------------------------
+-- ID: 6339
+-- Item: rolanberry_daifuku
+-- Food Effect: 30 Min, All Races
+-----------------------------------
+-- HP +20
+-- DEX +2
+-- VIT +3
+-- Accuracy +10% (cap 80)
+-- Ranged Accuracy +10% (cap 80)
+-- Magic Accuracy +50
+-- Pet:
+-- HP +20
+-- DEX +2
+-- VIT +3
+-- Accuracy +10% (cap 105)
+-- Ranged Accuracy +10% (cap 105)
+-- Magic Accuracy +75
+-- https://www.bg-wiki.com/bg/Rolan._Daifuku
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 1800, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_HP, 20)
+    effect:addMod(xi.mod.DEX, 2)
+    effect:addMod(xi.mod.VIT, 3)
+    effect:addMod(xi.mod.FOOD_ACCP, 10)
+    effect:addMod(xi.mod.FOOD_ACC_CAP, 80)
+    effect:addMod(xi.mod.FOOD_RACCP, 10)
+    effect:addMod(xi.mod.FOOD_RACC_CAP, 80)
+    effect:addMod(xi.mod.MACC, 50)
+    target:addPetMod(xi.mod.FOOD_HP, 20)
+    target:addPetMod(xi.mod.DEX, 2)
+    target:addPetMod(xi.mod.VIT, 3)
+    target:addPetMod(xi.mod.FOOD_ACCP, 10)
+    target:addPetMod(xi.mod.FOOD_ACC_CAP, 105)
+    target:addPetMod(xi.mod.FOOD_RACCP, 10)
+    target:addPetMod(xi.mod.FOOD_RACC_CAP, 105)
+    target:addPetMod(xi.mod.MACC, 75)
+end
+
+itemObject.onEffectLose = function(target, effect)
+    target:delPetMod(xi.mod.FOOD_HP, 20)
+    target:delPetMod(xi.mod.DEX, 2)
+    target:delPetMod(xi.mod.VIT, 3)
+    target:delPetMod(xi.mod.FOOD_ACCP, 10)
+    target:delPetMod(xi.mod.FOOD_ACC_CAP, 105)
+    target:delPetMod(xi.mod.FOOD_RACCP, 10)
+    target:delPetMod(xi.mod.FOOD_RACC_CAP, 105)
+    target:delPetMod(xi.mod.MACC, 75)
+end
+
+return itemObject

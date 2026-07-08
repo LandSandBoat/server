@@ -1,0 +1,82 @@
+-----------------------------------
+-- Area: Batallia_Downs_[S]
+-----------------------------------
+zones = zones or {}
+
+zones[xi.zone.BATALLIA_DOWNS_S] =
+{
+    text =
+    {
+        NOTHING_HAPPENS               = 119,  -- Nothing happens...
+        ITEM_CANNOT_BE_OBTAINED       = 6386, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED                 = 6394, -- Obtained: <item>.
+        GIL_OBTAINED                  = 6395, -- Obtained <number> gil.
+        KEYITEM_OBTAINED              = 6397, -- Obtained key item: <keyitem>.
+        NOTHING_OUT_OF_ORDINARY       = 6408, -- There is nothing out of the ordinary here.
+        CARRIED_OVER_POINTS           = 7005, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY       = 7006, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
+        LOGIN_NUMBER                  = 7007, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED = 7027, -- Your party is unable to participate because certain members' levels are restricted.
+        UNABLE_TO_PROGRESS            = 7051, -- You are unable to make further progress in Rhapsodies of Vana'diel due to an event occurring in the [Chains of Promathia/Treasures of Aht Urhgan/Wings of the Goddess/Seekers of Adoulin/Rise of the Zilart] missions.
+        LYCOPODIUM_ENTRANCED          = 7079, -- The lycopodium is entranced by a sparkling light...
+        FISHING_MESSAGE_OFFSET        = 7092, -- You can't fish here.
+        CAMPAIGN_RESULTS_TALLIED      = 7630, -- Campaign results tallied.
+        NO_RESPONSE                   = 7715, -- There is no response...
+        VOIDWALKER_DESPAWN            = 8279, -- The monster fades before your eyes, a look of disappointment on its face.
+        VOIDWALKER_NO_MOB             = 8326, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR        = 8327, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT           = 8328, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
+        VOIDWALKER_SPAWN_MOB          = 8329, -- A monster materializes out of nowhere!
+        VOIDWALKER_UPGRADE_KI_1       = 8331, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
+        VOIDWALKER_UPGRADE_KI_2       = 8332, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
+        VOIDWALKER_BREAK_KI           = 8333, -- The <keyitem> shatters into tiny fragments.
+        VOIDWALKER_OBTAIN_KI          = 8334, -- Obtained key item: <keyitem>!
+        COMMON_SENSE_SURVIVAL         = 9609, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+    },
+
+    mob =
+    {
+        BURLIBIX_BRAWNBACK = GetFirstID('Burlibix_Brawnback'),
+        HABERGOASS         = GetFirstID('Habergoass'),
+        LA_VELUE           = GetFirstID('La_Velue'),
+        MENECHME           = GetFirstID('Menechme'),
+
+        VOIDWALKER =
+        {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
+                17121722,  -- Lacus
+                17121721,  -- Thunor
+                17121720, -- Beorht
+                17121719, -- Pruina
+                17121718,  -- Puretos
+                17121717,  -- Eorthe
+                17121716, -- Deorc
+                17121715, -- Aither
+            },
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
+                17121714, -- Skuld
+                17121713  -- Urd
+            },
+
+            [xi.keyItem.YELLOW_ABYSSITE] =
+            {
+                17121712  -- Verthandi
+            },
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
+                17121711  -- Yilbegan
+            }
+        }
+    },
+
+    npc =
+    {
+        CAMPAIGN_NPC_OFFSET = GetFirstID('Myllue_RK'), -- San, Bas, Win, Flag +4, CA
+    },
+}
+
+return zones[xi.zone.BATALLIA_DOWNS_S]

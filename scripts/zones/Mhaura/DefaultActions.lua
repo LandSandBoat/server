@@ -1,0 +1,28 @@
+-- local ID = zones[xi.zone.MHAURA]
+
+return {
+    ['Amalanbraux']      = { event = 700 },
+    ['Bihoro-Guhoro']    = { event = 750 },
+    ['Blandine']         = { event = 122 },
+    ['Emila']            = { event = 324 },
+    ['Galdo']            = { event = 650 },
+    ['Grimr']            = { event = 120 },
+    ['Hagain']           = { event = 10002 },
+    ['Itzha_Delavhitta'] = { event = 900 },
+    ['Jikka-Abukka']     = { event = 850 },
+    ['Katsunaga']        = { event = 190 },
+    ['Kotan-Purutan']    = { event = 140 },
+    ['Kupupu']           = { event = 800 },
+    ['Lacia']            = { event = 10021 },
+    ['Lakom-Lukom']      = { event = 600 },
+    ['Mathele']          = { event = 304 },
+    ['Maximin']          = { event = 12 },
+    ['Numi_Adaligo']     = { event = 50 },
+    ['Phoochuchu']       = { event = 300 },
+    ['Rycharde']         = { event = 69 },
+    ['Take']             = { event = 59 },
+    ['Tonasav']          = { event = 372 },
+    ['Zexu']             = { event = 121 },
+    ['Zhon_Kihshimo']    = { event = 25 },
+    ['Zurko-Bazurko']    = { event = 347 },
+}

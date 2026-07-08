@@ -1,0 +1,61 @@
+-----------------------------------
+-- Area: Phomiuna Aqueducts
+--  Mob: Minotaur
+-----------------------------------
+mixins = { require('scripts/mixins/fomor_hate') }
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 45)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setLocalVar('fomorHateAdj', 2)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 200)
+end
+
+entity.onMobFight = function(mob, target)
+    -- Draws in alliance to a random set of fixed positions if they are south of z=290
+    local drawInPositions =
+    {
+        { x = 65.31, y = 1.00, z = 295.64 },
+        { x = 60.40, y = 1.00, z = 295.64 },
+        { x = 55.13, y = 1.00, z = 295.64 },
+        { x = 65.31, y = 1.00, z = 300.00 },
+        { x = 60.40, y = 1.00, z = 300.00 },
+        { x = 55.13, y = 1.00, z = 300.00 },
+        { x = 65.31, y = 1.00, z = 304.64 },
+        { x = 60.40, y = 1.00, z = 304.64 },
+        { x = 55.13, y = 1.00, z = 304.64 },
+    }
+
+    -- If target is a pet, get the master for alliance lookup
+    local allianceTarget = target
+    if target:getObjType() ~= xi.objType.PC then
+        local master = target:getMaster()
+        if master and master:getObjType() == xi.objType.PC then
+            allianceTarget = master
+        else
+            return
+        end
+    end
+
+    local drewIn = false
+    for _, member in ipairs(allianceTarget:getAlliance()) do
+        local randomPos = drawInPositions[math.randomInt(1, #drawInPositions)]
+        randomPos.rot = member:getRotPos()
+
+        if utils.drawIn(member, { conditions = { member:getZPos() < 290 }, position = randomPos }) then
+            drewIn = true
+        end
+    end
+
+    -- Draw in triggers TP move
+    if drewIn then
+        mob:useMobAbility()
+    end
+end
+
+return entity

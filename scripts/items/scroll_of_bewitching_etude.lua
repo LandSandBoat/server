@@ -1,0 +1,17 @@
+-----------------------------------
+-- ID: 5045
+-- Scroll of Bewitching Etude
+-- Teaches the song Bewitching Etude
+-----------------------------------
+---@type TItem
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return target:canLearnSpell(xi.magic.spell.BEWITCHING_ETUDE)
+end
+
+itemObject.onItemUse = function(target)
+    target:addSpell(xi.magic.spell.BEWITCHING_ETUDE)
+end
+
+return itemObject

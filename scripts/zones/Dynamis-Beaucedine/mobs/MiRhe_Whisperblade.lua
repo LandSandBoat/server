@@ -1,0 +1,30 @@
+-----------------------------------
+-- Area: Dynamis - Beaucedine
+--  Mob: MiRhe Whisperblade
+-----------------------------------
+mixins =
+{
+    require('scripts/mixins/dynamis_beastmen'),
+    require('scripts/mixins/job_special')
+}
+-----------------------------------
+local ID = zones[xi.zone.DYNAMIS_BEAUCEDINE]
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.spawnPoints =
+{
+    { x =  333.961, y =  0.001, z = -67.264 }
+}
+
+entity.phList =
+{
+    [ID.mob.MIRHE_WHISPERBLADE - 1] = ID.mob.MIRHE_WHISPERBLADE, -- Vanguard_Kusa
+}
+
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
+return entity

@@ -1,0 +1,36 @@
+-----------------------------------
+-- ID: 4434
+-- Item: Plate of Mushroom Risotto
+-- Food Effect: 3 Hr, All Races
+-----------------------------------
+-- MP 30
+-- Strength -1
+-- Vitality 3
+-- Mind 3
+-- MP Recovered while healing 2
+-- Enmity -4
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 10800, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_MP, 30)
+    effect:addMod(xi.mod.STR, -1)
+    effect:addMod(xi.mod.VIT, 3)
+    effect:addMod(xi.mod.MND, 3)
+    effect:addMod(xi.mod.MPHEAL, 2)
+    effect:addMod(xi.mod.ENMITY, -4)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

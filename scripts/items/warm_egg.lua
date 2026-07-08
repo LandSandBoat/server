@@ -1,0 +1,28 @@
+-----------------------------------
+-- ID: 4602
+-- Item: warm_egg
+-- Food Effect: 5Min, All Races
+-----------------------------------
+-- Health 18
+-- Magic 18
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 300, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_HP, 18)
+    effect:addMod(xi.mod.FOOD_MP, 18)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

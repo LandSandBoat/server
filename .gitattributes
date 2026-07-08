@@ -1,0 +1,18 @@
+
+# Files that shouldn't be modified
+*.nav binary
+*.dll binary
+*.lib binary
+*.dat binary
+*.ico binary
+
+# Files that should have LF line endings
+*.lua text eol=lf
+*.cpp text eol=lf
+*.h text eol=lf
+*.sql text eol=lf
+*.sh text eol=lf
+
+# Retaining CRLF line ends in the documentation dir (for now..)
+*.txt text eol=crlf
+*.log text eol=crlf

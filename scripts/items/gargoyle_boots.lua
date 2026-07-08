@@ -1,0 +1,38 @@
+-----------------------------------
+-- ID: 15326
+-- Item: Gargoyle Boots
+-----------------------------------
+---@type TItem
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    local pet = caster:getPet()
+
+    -- No obvious range limit, observed working at 30' (max engaged range)
+    if not pet or (pet and pet:getPetID() ~= xi.petId.WYVERN) then
+        return xi.msg.basic.ITEM_NO_TARGET
+    end
+
+    return 0
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    local pet = user:getPet()
+
+    if pet and pet:getPetID() == xi.petId.WYVERN then
+        -- item is self target but reports effect on Wyvern.
+        action:ID(user:getID(), pet:getID())
+
+        if pet:addStatusEffect(xi.effect.STONESKIN, { power = 200, duration = 60, origin = user }) then
+            action:messageID(pet:getID(), xi.msg.basic.ITEM_RECEIVES_EFFECT)
+
+            return xi.effect.STONESKIN
+        end
+    end
+
+    action:messageID(target:getID(), xi.msg.basic.ITEM_NO_EFFECT) -- Guessed
+
+    return 0
+end
+
+return itemObject

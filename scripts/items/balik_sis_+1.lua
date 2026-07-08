@@ -1,0 +1,38 @@
+-----------------------------------
+-- ID: 5601
+-- Item: Balik Sis +1
+-- Food Effect: 60Min, All Races
+-----------------------------------
+-- Dexterity 5
+-- Mind -2
+-- Attack % 15
+-- Attack Cap 70
+-- Ranged ACC 2
+-- Ranged ATT % 15
+-- Ranged ATT Cap 70
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 3600, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.DEX, 5)
+    effect:addMod(xi.mod.MND, -2)
+    effect:addMod(xi.mod.FOOD_ATTP, 15)
+    effect:addMod(xi.mod.FOOD_ATT_CAP, 70)
+    effect:addMod(xi.mod.RACC, 2)
+    effect:addMod(xi.mod.FOOD_RATTP, 15)
+    effect:addMod(xi.mod.FOOD_RATT_CAP, 70)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

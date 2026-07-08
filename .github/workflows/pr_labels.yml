@@ -1,0 +1,36 @@
+name: PR Labels
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - labeled
+      - unlabeled
+      - synchronize
+      - reopened
+
+jobs:
+  Check_Blocking_Labels:
+    name: Check Blocking Labels
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Check for blocking labels
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const response = await github.rest.issues.listLabelsOnIssue({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+            });
+
+            for (const idx in response.data)
+            {
+                const entry = response.data[idx];
+                if (entry.name === "hold" || entry.name === "squash" || entry.name === "audit" || entry.name === "invalid")
+                {
+                    console.log("Found PR-blocking label: " + entry.name)
+                    core.setFailed("Found PR-blocking label: " + entry.name)
+                }
+            }

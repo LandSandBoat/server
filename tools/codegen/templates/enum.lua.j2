@@ -1,0 +1,10 @@
+-- GENERATED from {{ source_name }}. Do not edit.
+xi = xi or {}
+
+---@enum {{ lua_table }}
+{{ lua_table }} =
+{
+{% for key, val in values.items() %}
+    {{ "%-*s"|format(name_width, lua_names[key]) }} = {{ "0x%08x"|format(val) if is_flags else val }},
+{% endfor %}
+}

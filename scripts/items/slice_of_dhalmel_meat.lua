@@ -1,0 +1,28 @@
+-----------------------------------
+-- ID: 4359
+-- Item: slice_of_dhalmel_meat
+-- Food Effect: 5Min, Galka only
+-----------------------------------
+-- Strength 3
+-- Intelligence -5
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.RAW_MEAT)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 300, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.STR, 3)
+    effect:addMod(xi.mod.INT, -5)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

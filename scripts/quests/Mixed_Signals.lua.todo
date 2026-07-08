@@ -1,0 +1,126 @@
+-----------------------------------
+-- Regaining Trust
+-- Ratoto !pos 27 -1 -32 244
+-- Luto Mewrilah !pos -53 0 45 244
+-- Raimbroy !pos -141 -3 34.6 230
+-- Qm1 !pos 260 40 79 148
+-----------------------------------
+
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.MIXED_SIGNALS)
+
+quest.sections = {
+
+    {
+        check = function(player, status, vars)
+            return status == xi.questStatus.QUEST_AVAILABLE
+                and player:getQuestStatus(xi.questLog.JEUNO, BLESSED_RADIANCE) == xi.questStatus.QUEST_COMPLETED
+                and player:getFellowValue('level') >= 56
+                and player:getFellowValue('bond') >= 80
+        end,
+
+        [xi.zone.UPPER_JEUNO] = {
+            ['Ratoto'] = {
+                onTrigger = function(player, npc)
+                    return quest:progressEvent(10078, {[7] = getFellowParam(player)})
+                end,
+            },
+
+            onEventFinish = {
+                [10078] = function(player, csid, option, npc)
+                    quest:begin(player)
+                end,
+            },
+        },
+    },
+
+    {
+        check = function(player, status, vars)
+            return status == xi.questStatus.QUEST_ACCEPTED
+        end,
+
+        [xi.zone.UPPER_JEUNO] = {
+            ['Luto_Mewrilah'] = {
+                onTrigger = function(player, npc)
+                    if quest:getVar(player, 'Prog') == 0 then
+                        return quest:progressEvent(10079, {[7] = getFellowParam(player)})
+                    elseif quest:getVar(player, 'Prog') == 1 then
+                        return quest:event(10071, {[7] = getFellowParam(player)})
+                    elseif quest:getVar(player, 'Prog') == 2 then
+                        return quest:progressEvent(10080, {[7] = getFellowParam(player)})
+                    elseif quest:getVar(player, 'Prog') == 4 then
+                        return quest:progressEvent(10081, {[7] = getFellowParam(player)})
+                    end
+                end,
+            },
+
+            onEventFinish = {
+                [10079] = function(player, csid, option, npc)
+                    quest:setVar(player, 'Prog', 1)
+                end,
+                [10080] = function(player, csid, option, npc)
+                    quest:setVar(player, 'Prog', 3)
+                end,
+                [10081] = function(player, csid, option, npc)
+                    player:setFellowValue('lvlcap', 65)
+                    quest:complete(player)
+                    npcUtil.giveItem(player, quest.foodItem(player))
+                end,
+            },
+        },
+
+        [xi.zone.SOUTHERN_SAN_DORIA] = {
+            ['Raimbroy'] = {
+                onTrigger = function(player, npc)
+                    if quest:getVar(player, 'Prog') == 1 then
+                        return quest:progressEvent(780, {[7] = getFellowParam(player)})
+                    end
+                end,
+            },
+
+            onEventFinish = {
+                [780] = function(player, csid, option, npc)
+                    quest:setVar(player, 'Prog', 2)
+                end,
+            },
+        },
+
+        [xi.zone.QULUN_DOME] = {
+            ['qm1'] = {
+                onTrigger = function(player, npc)
+                    if quest:getVar(player, 'Prog') == 3 then
+                        return quest:progressEvent(67, {[7] = getFellowParam(player)})
+                    end
+                end,
+            },
+
+            onEventFinish = {
+                [67] = function(player, csid, option, npc)
+                    quest:setVar(player, 'Prog', 4)
+                end,
+            },
+        },
+    },
+}
+
+quest.foodItem = function(player)
+    local item = player:getFellowValue('personality')
+    local foodTable =
+    {
+        [4]  = xi.item.CHUNK_OF_HOMEMADE_CHEESE,
+        [8]  = xi.item.HOMEMADE_STEAK,
+        [12] = xi.item.CONE_OF_HOMEMADE_GELATO,
+        [16] = xi.item.LOAF_OF_HOMEMADE_BREAD,
+        [40] = xi.item.HOMEMADE_SALISBURY_STEAK,
+        [44] = xi.item.HOMEMADE_OMELETTE,
+        [20] = xi.item.PLATE_OF_HOMEMADE_RISOTTO,
+        [24] = xi.item.HOMEMADE_RICE_BALL,
+        [28] = xi.item.PITCHER_OF_HOMEMADE_HERBAL_TEA,
+        [32] = xi.item.BOWL_OF_HOMEMADE_STEW,
+        [36] = xi.item.PLATE_OF_HOMEMADE_SALAD,
+        [48] = xi.item.DISH_OF_HOMEMADE_CARBONARA,
+    }
+
+    return foodTable[item]
+end
+
+return quest

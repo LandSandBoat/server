@@ -1,0 +1,5718 @@
+# yaml-language-server: $schema=schemas/status_effects.schema.json
+
+meta:
+  enum:
+    cpp:
+      underlying: uint16_t
+      class: StatusEffect
+    lua:
+      table: xi.effect
+
+status_effects:
+  ko:
+    id: 0
+    flags:
+      - no_cancel
+      - hide_timer
+    wear_off_message_id: 204
+
+  weakness:
+    id: 1
+    flags:
+      - no_cancel
+    overwrite: always
+    min_duration: 1
+    wear_off_message_id: 204
+
+  sleep_i:
+    id: 2
+    name: sleep
+    flags:
+      - damage
+      - death
+      - no_cancel
+    exclusion_group: sleep_i
+    negative: sleep_ii
+    overwrite: higher
+    block: lullaby
+    element: dark
+    min_duration: 1
+    wear_off_message_id: 204
+
+  poison:
+    id: 3
+    flags:
+      - death
+      - waltzable
+      - no_cancel
+    overwrite: never
+    element: water
+    min_duration: 1
+    wear_off_message_id: 204
+
+  paralysis:
+    id: 4
+    flags:
+      - death
+      - waltzable
+      - no_cancel
+    overwrite: higher
+    element: ice
+    min_duration: 1
+    wear_off_message_id: 204
+
+  blindness:
+    id: 5
+    flags:
+      - death
+      - waltzable
+      - no_cancel
+    overwrite: higher
+    element: dark
+    min_duration: 1
+    wear_off_message_id: 204
+
+  silence:
+    id: 6
+    flags:
+      - death
+      - waltzable
+      - no_cancel
+    overwrite: never
+    element: wind
+    min_duration: 1
+    wear_off_message_id: 204
+
+  petrification:
+    id: 7
+    flags:
+      - death
+      - no_cancel
+    exclusion_group: petrification
+    overwrite: never
+    block: stun
+    element: earth
+    min_duration: 1
+    wear_off_message_id: 204
+
+  disease:
+    id: 8
+    flags:
+      - death
+      - no_rest
+      - waltzable
+      - no_cancel
+    exclusion_group: disease
+    overwrite: never
+    element: fire
+    min_duration: 1
+    wear_off_message_id: 204
+
+  curse_i:
+    id: 9
+    name: curse
+    flags:
+      - death
+      - waltzable
+      - no_cancel
+    exclusion_group: curse_i
+    overwrite: never
+    element: dark
+    min_duration: 1
+    wear_off_message_id: 204
+
+  stun:
+    id: 10
+    flags:
+      - erasable
+      - death
+      - no_cancel
+    overwrite: never
+    block: petrification
+    element: thunder
+    min_duration: 1
+    wear_off_message_id: 204
+
+  bind:
+    id: 11
+    flags:
+      - erasable
+      - death
+      - waltzable
+      - no_cancel
+    overwrite: never
+    element: ice
+    min_duration: 1
+    wear_off_message_id: 204
+
+  weight:
+    id: 12
+    flags:
+      - erasable
+      - death
+      - waltzable
+      - no_cancel
+    negative: flee
+    overwrite: higher
+    element: wind
+    min_duration: 1
+    wear_off_message_id: 204
+
+  slow:
+    id: 13
+    flags:
+      - erasable
+      - death
+      - waltzable
+      - no_cancel
+    negative: haste
+    overwrite: higher
+    element: earth
+    min_duration: 1
+
+  charm_i:
+    id: 14
+    name: charm
+    flags:
+      - death
+      - no_cancel
+    overwrite: never
+    element: light
+    wear_off_message_id: 204
+
+  doom:
+    id: 15
+    flags:
+      - death
+      - no_cancel
+    overwrite: never
+    element: dark
+    min_duration: 1
+    wear_off_message_id: 204
+
+  amnesia:
+    id: 16
+    flags:
+      - death
+      - no_cancel
+    overwrite: never
+    element: fire
+    min_duration: 1
+    wear_off_message_id: 204
+
+  charm_ii:
+    id: 17
+    name: charm
+    flags:
+      - death
+      - no_cancel
+    overwrite: never
+    element: light
+    wear_off_message_id: 204
+
+  gradual_petrification:
+    id: 18
+    flags:
+      - death
+      - no_cancel
+    exclusion_group: petrification
+    overwrite: never
+    element: earth
+    min_duration: 1
+    wear_off_message_id: 204
+
+  sleep_ii:
+    id: 19
+    name: sleep
+    flags:
+      - damage
+      - death
+      - no_cancel
+    exclusion_group: sleep_i
+    overwrite: higher
+    element: dark
+    min_duration: 1
+    wear_off_message_id: 204
+
+  # Zombie
+  curse_ii:
+    id: 20
+    name: curse
+    flags:
+      - death
+      - no_rest
+      - no_cancel
+    exclusion_group: curse_i
+    overwrite: never
+    element: dark
+    min_duration: 1
+    wear_off_message_id: 204
+
+  addle:
+    id: 21
+    flags:
+      - erasable
+      - death
+      - on_zone
+      - waltzable
+      - no_cancel
+    overwrite: never
+    element: fire
+    min_duration: 1
+
+  intimidate:
+    id: 22
+    flags:
+      - death
+      - no_cancel
+    overwrite: never
+    min_duration: 1
+    wear_off_message_id: 204
+
+  kaustra:
+    id: 23
+    flags:
+      - death
+      - on_zone
+      - no_cancel
+    negative: embrava
+    wear_off_message_id: 204
+
+  terror:
+    id: 28
+    flags:
+      - death
+      - no_cancel
+    exclusion_group: petrification
+    element: dark
+    min_duration: 1
+    wear_off_message_id: 204
+
+  mute:
+    id: 29
+    flags:
+      - death
+      - no_cancel
+    overwrite: never
+    remove: silence
+    element: wind
+    min_duration: 1
+    wear_off_message_id: 204
+
+  bane:
+    id: 30
+    flags:
+      - death
+      - waltzable
+      - no_cancel
+    overwrite: never
+    remove: curse_i
+    element: dark
+    min_duration: 1
+    wear_off_message_id: 204
+
+  plague:
+    id: 31
+    flags:
+      - death
+      - no_rest
+      - waltzable
+      - no_cancel
+    exclusion_group: disease
+    overwrite: never
+    element: fire
+    min_duration: 1
+    wear_off_message_id: 204
+
+  flee:
+    id: 32
+    flags:
+      - dispelable
+      - empathy
+      - death
+    negative: weight
+    element: wind
+
+  haste:
+    id: 33
+    flags:
+      - dispelable
+      - empathy
+      - death
+    negative: slow
+    element: wind
+    sort_key: 100
+
+  blaze_spikes:
+    id: 34
+    flags:
+      - dispelable
+      - empathy
+      - death
+    exclusion_group: blaze_spikes
+    element: fire
+    sort_key: 800
+
+  ice_spikes:
+    id: 35
+    flags:
+      - dispelable
+      - empathy
+      - death
+    exclusion_group: blaze_spikes
+    element: ice
+    sort_key: 800
+
+  blink:
+    id: 36
+    flags:
+      - dispelable
+      - empathy
+      - death
+    exclusion_group: blink
+    block: copy_image
+    element: wind
+    sort_key: 50
+
+  stoneskin:
+    id: 37
+    flags:
+      - dispelable
+      - empathy
+      - death
+    overwrite: tier_higher
+    element: earth
+    sort_key: 600
+
+  shock_spikes:
+    id: 38
+    flags:
+      - dispelable
+      - empathy
+      - death
+    exclusion_group: blaze_spikes
+    element: thunder
+    sort_key: 800
+
+  aquaveil:
+    id: 39
+    flags:
+      - dispelable
+      - empathy
+      - death
+    element: water
+    sort_key: 650
+
+  protect:
+    id: 40
+    flags:
+      - dispelable
+      - empathy
+      - death
+    element: light
+    sort_key: 200
+
+  shell:
+    id: 41
+    flags:
+      - dispelable
+      - empathy
+      - death
+    element: light
+    sort_key: 250
+
+  regen:
+    id: 42
+    flags:
+      - dispelable
+      - empathy
+      - death
+    element: light
+    sort_key: 700
+
+  refresh:
+    id: 43
+    flags:
+      - dispelable
+      - empathy
+      - death
+    element: light
+    sort_key: 750
+
+  mighty_strikes:
+    id: 44
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+    element: fire
+
+  boost:
+    id: 45
+    flags:
+      - attack
+      - empathy
+      - death
+      - on_jobchange
+    element: fire
+
+  hundred_fists:
+    id: 46
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+    element: thunder
+
+  manafont:
+    id: 47
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+    element: water
+
+  chainspell:
+    id: 48
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+    element: thunder
+
+  perfect_dodge:
+    id: 49
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+    element: wind
+
+  invincible:
+    id: 50
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+    element: earth
+
+  blood_weapon:
+    id: 51
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+    exclusion_group: enfire
+    element: dark
+
+  soul_voice:
+    id: 52
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+    element: light
+
+  eagle_eye_shot:
+    id: 53
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+    element: thunder
+
+  meikyo_shisui:
+    id: 54
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+    element: thunder
+
+  astral_flow:
+    id: 55
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+    element: thunder
+
+  berserk:
+    id: 56
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    element: fire
+
+  defender:
+    id: 57
+    flags:
+      - dispelable
+      - death
+      - on_zone
+    element: earth
+
+  aggressor:
+    id: 58
+    flags:
+      - dispelable
+      - death
+      - on_zone
+
+  focus:
+    id: 59
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+
+  dodge:
+    id: 60
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+
+  counterstance:
+    id: 61
+    flags:
+      - dispelable
+      - death
+      - on_zone
+
+  sentinel:
+    id: 62
+    flags:
+      - dispelable
+      - death
+      - on_zone
+
+  souleater:
+    id: 63
+    flags:
+      - empathy
+      - death
+      - on_zone
+      - on_jobchange
+
+  last_resort:
+    id: 64
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+
+  sneak_attack:
+    id: 65
+    flags:
+      - attack
+      - death
+      - on_zone
+      - on_jobchange
+
+  copy_image:
+    id: 66
+    flags:
+      - dispelable
+      - death
+    remove: blink
+    element: wind
+    sort_key: 50
+
+  third_eye:
+    id: 67
+    flags:
+      - dispelable
+      - empathy
+      - death
+
+  warcry:
+    id: 68
+    flags:
+      - dispelable
+      - empathy
+      - death
+    remove: blood_rage
+    sort_key: 400
+
+  invisible:
+    id: 69
+    flags:
+      - dispelable
+      - attack
+      - death
+      - magic_begin
+      - on_zone
+      - invisible
+      - detectable
+      - logout
+    overwrite: never
+    element: wind
+    sort_key: 850
+
+  deodorize:
+    id: 70
+    flags:
+      - dispelable
+      - attack
+      - death
+      - on_zone
+      - detectable
+      - logout
+    overwrite: never
+    element: wind
+    sort_key: 1100
+
+  sneak:
+    id: 71
+    flags:
+      - dispelable
+      - attack
+      - death
+      - on_zone
+      - detectable
+      - logout
+    overwrite: never
+    element: wind
+    sort_key: 1150
+
+  sharpshot:
+    id: 72
+    flags:
+      - dispelable
+      - death
+      - on_zone
+
+  barrage:
+    id: 73
+    flags:
+      - dispelable
+      - death
+      - on_zone
+    exclusion_group: barrage
+
+  holy_circle:
+    id: 74
+    flags:
+      - dispelable
+      - empathy
+      - death
+
+  arcane_circle:
+    id: 75
+    flags:
+      - dispelable
+      - empathy
+      - death
+
+  hide:
+    id: 76
+    flags:
+      - dispelable
+      - attack
+      - death
+      - magic_begin
+      - on_zone
+      - invisible
+      - detectable
+      - logout
+
+  camouflage:
+    id: 77
+    flags:
+      - dispelable
+      - attack
+      - death
+      - magic_begin
+      - on_zone
+      - invisible
+      - detectable
+      - logout
+
+  divine_seal:
+    id: 78
+    flags:
+      - dispelable
+      - death
+      - magic_end
+      - on_zone
+
+  elemental_seal:
+    id: 79
+    flags:
+      - dispelable
+      - death
+      - magic_end
+      - on_zone
+
+  str_boost:
+    id: 80
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    negative: str_down
+    element: fire
+
+  dex_boost:
+    id: 81
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    negative: dex_down
+    element: thunder
+
+  vit_boost:
+    id: 82
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    negative: vit_down
+    element: earth
+
+  agi_boost:
+    id: 83
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    negative: agi_down
+    element: wind
+
+  int_boost:
+    id: 84
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    negative: int_down
+    element: ice
+
+  mnd_boost:
+    id: 85
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    negative: mnd_down
+    element: water
+
+  chr_boost:
+    id: 86
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    negative: chr_down
+    element: light
+
+  trick_attack:
+    id: 87
+    flags:
+      - attack
+      - death
+      - on_zone
+      - on_jobchange
+
+  max_hp_boost:
+    id: 88
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    negative: max_hp_down
+    element: light
+
+  max_mp_boost:
+    id: 89
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    negative: max_mp_down
+    element: dark
+
+  accuracy_boost:
+    id: 90
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    negative: accuracy_down
+    element: thunder
+
+  attack_boost:
+    id: 91
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    negative: attack_down
+    element: fire
+
+  evasion_boost:
+    id: 92
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    negative: evasion_down
+    element: wind
+
+  defense_boost:
+    id: 93
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    negative: defense_down
+    element: earth
+
+  enfire:
+    id: 94
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    exclusion_group: enfire
+    negative: blood_weapon
+    element: fire
+    sort_key: 1200
+
+  enblizzard:
+    id: 95
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    exclusion_group: enfire
+    negative: blood_weapon
+    element: ice
+    sort_key: 1200
+
+  enaero:
+    id: 96
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    exclusion_group: enfire
+    negative: blood_weapon
+    element: wind
+    sort_key: 1200
+
+  enstone:
+    id: 97
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    exclusion_group: enfire
+    negative: blood_weapon
+    element: earth
+    sort_key: 1200
+
+  enthunder:
+    id: 98
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    exclusion_group: enfire
+    negative: blood_weapon
+    element: thunder
+    sort_key: 1200
+
+  enwater:
+    id: 99
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    exclusion_group: enfire
+    negative: blood_weapon
+    element: water
+    sort_key: 1200
+
+  barfire:
+    id: 100
+    flags:
+      - dispelable
+      - empathy
+      - death
+    exclusion_group: barfire
+    element: water
+    sort_key: 500
+
+  barblizzard:
+    id: 101
+    flags:
+      - dispelable
+      - empathy
+      - death
+    exclusion_group: barfire
+    element: fire
+    sort_key: 500
+
+  baraero:
+    id: 102
+    flags:
+      - dispelable
+      - empathy
+      - death
+    exclusion_group: barfire
+    element: ice
+    sort_key: 500
+
+  barstone:
+    id: 103
+    flags:
+      - dispelable
+      - empathy
+      - death
+    exclusion_group: barfire
+    element: wind
+    sort_key: 500
+
+  barthunder:
+    id: 104
+    flags:
+      - dispelable
+      - empathy
+      - death
+    exclusion_group: barfire
+    element: earth
+    sort_key: 500
+
+  barwater:
+    id: 105
+    flags:
+      - dispelable
+      - empathy
+      - death
+    exclusion_group: barfire
+    element: thunder
+    sort_key: 500
+
+  barsleep:
+    id: 106
+    flags:
+      - dispelable
+      - empathy
+      - death
+    exclusion_group: barsleep
+    element: light
+    sort_key: 500
+
+  barpoison:
+    id: 107
+    flags:
+      - dispelable
+      - empathy
+      - death
+    exclusion_group: barsleep
+    element: thunder
+    sort_key: 500
+
+  barparalyze:
+    id: 108
+    flags:
+      - dispelable
+      - empathy
+      - death
+    exclusion_group: barsleep
+    element: fire
+    sort_key: 500
+
+  barblind:
+    id: 109
+    flags:
+      - dispelable
+      - empathy
+      - death
+    exclusion_group: barsleep
+    element: light
+    sort_key: 500
+
+  barsilence:
+    id: 110
+    flags:
+      - dispelable
+      - empathy
+      - death
+    exclusion_group: barsleep
+    element: ice
+    sort_key: 500
+
+  barpetrify:
+    id: 111
+    flags:
+      - dispelable
+      - empathy
+      - death
+    exclusion_group: barsleep
+    element: wind
+    sort_key: 500
+
+  barvirus:
+    id: 112
+    flags:
+      - dispelable
+      - empathy
+      - death
+    exclusion_group: barsleep
+    element: water
+    sort_key: 500
+
+  reraise:
+    id: 113
+    flags:
+      - empathy
+      - death
+      - on_jobchange
+    element: light
+    sort_key: 900
+
+  cover:
+    id: 114
+    flags:
+      - death
+      - on_jobchange
+
+  unlimited_shot:
+    id: 115
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+    exclusion_group: barrage
+
+  phalanx:
+    id: 116
+    flags:
+      - dispelable
+      - death
+      - on_zone
+    element: light
+    sort_key: 1050
+
+  warding_circle:
+    id: 117
+    flags:
+      - dispelable
+      - empathy
+      - death
+
+  ancient_circle:
+    id: 118
+    flags:
+      - dispelable
+      - empathy
+      - death
+
+  str_boost_ii:
+    id: 119
+    name: str_boost
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - no_cancel
+    element: fire
+
+  dex_boost_ii:
+    id: 120
+    name: dex_boost
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - no_cancel
+    element: thunder
+
+  vit_boost_ii:
+    id: 121
+    name: vit_boost
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - no_cancel
+    element: earth
+
+  agi_boost_ii:
+    id: 122
+    name: agi_boost
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - no_cancel
+    element: wind
+
+  int_boost_ii:
+    id: 123
+    name: int_boost
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - no_cancel
+    element: ice
+
+  mnd_boost_ii:
+    id: 124
+    name: mnd_boost
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - no_cancel
+    element: water
+
+  chr_boost_ii:
+    id: 125
+    name: chr_boost
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - no_cancel
+    element: light
+
+  spirit_surge:
+    id: 126
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  costume:
+    id: 127
+    flags:
+      - attack
+      - death
+      - magic_end
+      - on_zone
+
+  burn:
+    id: 128
+    flags:
+      - erasable
+      - death
+      - waltzable
+      - no_cancel
+    block: drown
+    remove: frost
+    element: fire
+
+  frost:
+    id: 129
+    flags:
+      - erasable
+      - death
+      - waltzable
+      - no_cancel
+    block: burn
+    remove: choke
+    element: ice
+
+  choke:
+    id: 130
+    flags:
+      - erasable
+      - death
+      - waltzable
+      - no_cancel
+    block: frost
+    remove: rasp
+    element: wind
+
+  rasp:
+    id: 131
+    flags:
+      - erasable
+      - death
+      - waltzable
+      - no_cancel
+    block: choke
+    remove: shock
+    element: earth
+
+  shock:
+    id: 132
+    flags:
+      - erasable
+      - death
+      - waltzable
+      - no_cancel
+    block: rasp
+    remove: drown
+    element: thunder
+
+  drown:
+    id: 133
+    flags:
+      - erasable
+      - death
+      - waltzable
+      - no_cancel
+    block: shock
+    remove: burn
+    element: water
+
+  dia:
+    id: 134
+    flags:
+      - erasable
+      - death
+      - waltzable
+      - no_cancel
+    negative: dia
+    overwrite: higher
+    element: light
+
+  bio:
+    id: 135
+    flags:
+      - erasable
+      - death
+      - waltzable
+      - no_cancel
+    negative: dia
+    overwrite: higher
+    element: dark
+
+  str_down:
+    id: 136
+    flags:
+      - erasable
+      - death
+      - waltzable
+      - no_cancel
+    remove: str_boost
+    element: water
+
+  dex_down:
+    id: 137
+    flags:
+      - erasable
+      - death
+      - waltzable
+      - no_cancel
+    remove: dex_boost
+    element: earth
+
+  vit_down:
+    id: 138
+    flags:
+      - erasable
+      - death
+      - waltzable
+      - no_cancel
+    remove: vit_boost
+    element: wind
+
+  agi_down:
+    id: 139
+    flags:
+      - erasable
+      - death
+      - waltzable
+      - no_cancel
+    remove: agi_boost
+    element: ice
+
+  int_down:
+    id: 140
+    flags:
+      - erasable
+      - death
+      - waltzable
+      - no_cancel
+    remove: int_boost
+    element: fire
+
+  mnd_down:
+    id: 141
+    flags:
+      - erasable
+      - death
+      - waltzable
+      - no_cancel
+    remove: mnd_boost
+    element: thunder
+
+  chr_down:
+    id: 142
+    flags:
+      - erasable
+      - death
+      - waltzable
+      - no_cancel
+    remove: chr_boost
+    element: dark
+
+  level_restriction:
+    id: 143
+    flags:
+      - no_loss_message
+      - no_cancel
+      - hide_timer
+
+  max_hp_down:
+    id: 144
+    flags:
+      - erasable
+      - death
+      - waltzable
+      - no_cancel
+    remove: max_hp_boost
+    element: dark
+
+  max_mp_down:
+    id: 145
+    flags:
+      - erasable
+      - death
+      - waltzable
+      - no_cancel
+    remove: max_mp_boost
+    element: light
+
+  accuracy_down:
+    id: 146
+    flags:
+      - erasable
+      - death
+      - on_zone
+      - waltzable
+      - no_cancel
+    remove: accuracy_boost
+    element: earth
+
+  attack_down:
+    id: 147
+    flags:
+      - erasable
+      - death
+      - on_zone
+      - waltzable
+      - no_cancel
+    remove: attack_boost
+    element: water
+
+  evasion_down:
+    id: 148
+    flags:
+      - erasable
+      - death
+      - on_zone
+      - waltzable
+      - no_cancel
+    remove: evasion_boost
+    element: ice
+
+  defense_down:
+    id: 149
+    flags:
+      - erasable
+      - death
+      - on_zone
+      - waltzable
+      - no_cancel
+    remove: defense_boost
+    element: wind
+
+  physical_shield:
+    id: 150
+    flags:
+      - dispelable
+      - empathy
+      - death
+
+  arrow_shield:
+    id: 151
+    flags:
+      - dispelable
+      - death
+      - no_cancel
+
+  magic_shield:
+    id: 152
+    flags:
+      - dispelable
+      - empathy
+      - death
+
+  damage_spikes:
+    id: 153
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - no_cancel
+    exclusion_group: blaze_spikes
+    sort_key: 800
+
+  shining_ruby:
+    id: 154
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - no_cancel
+
+  medicine:
+    id: 155
+    flags:
+      - no_cancel
+    wear_off_message_id: 204
+
+  flash:
+    id: 156
+    flags:
+      - erasable
+      - death
+      - on_zone
+      - waltzable
+      - no_cancel
+    overwrite: higher
+    element: light
+    wear_off_message_id: 204
+
+  sj_restriction:
+    id: 157
+    flags:
+      - on_zone
+      - no_loss_message
+      - no_cancel
+
+  provoke:
+    id: 158
+    flags:
+      - death
+      - no_cancel
+    wear_off_message_id: 204
+
+  penalty:
+    id: 159
+    flags:
+      - death
+      - no_cancel
+    wear_off_message_id: 204
+
+  preparations:
+    id: 160
+    flags:
+      - death
+      - no_cancel
+    wear_off_message_id: 204
+
+  sprint:
+    id: 161
+    flags:
+      - death
+      - no_cancel
+
+  enchantment:
+    id: 162
+    flags:
+      - death
+      - on_zone
+      - no_cancel
+    overwrite: ignore_duplicate
+    wear_off_message_id: 204
+
+  azure_lore:
+    id: 163
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  chain_affinity:
+    id: 164
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  burst_affinity:
+    id: 165
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  overdrive:
+    id: 166
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  magic_def_down:
+    id: 167
+    flags:
+      - erasable
+      - death
+      - on_zone
+      - waltzable
+      - no_cancel
+
+  inhibit_tp:
+    id: 168
+    flags:
+      - death
+      - no_cancel
+    element: dark
+
+  potency:
+    id: 169
+    flags:
+      - empathy
+      - death
+      - on_zone
+
+  regain:
+    id: 170
+    flags:
+      - empathy
+      - death
+      - on_zone
+    element: light
+
+  pax:
+    id: 171
+    flags:
+      - empathy
+      - death
+      - on_zone
+
+  intension:
+    id: 172
+    flags:
+      - empathy
+      - death
+
+  dread_spikes:
+    id: 173
+    flags:
+      - dispelable
+      - empathy
+      - death
+    exclusion_group: blaze_spikes
+    sort_key: 800
+
+  magic_acc_down:
+    id: 174
+    flags:
+      - erasable
+      - death
+      - on_zone
+      - waltzable
+      - no_cancel
+    element: fire
+
+  magic_atk_down:
+    id: 175
+    flags:
+      - erasable
+      - death
+      - on_zone
+      - waltzable
+      - no_cancel
+    element: earth
+
+  quickening:
+    id: 176
+    flags:
+      - attack
+      - empathy
+      - damage
+      - death
+      - on_jobchange
+      - on_attack
+    wear_off_message_id: 204
+
+  encumbrance_ii:
+    id: 177
+    name: encumbrance
+    flags:
+      - on_zone
+      - no_cancel
+    wear_off_message_id: 204
+
+  firestorm:
+    id: 178
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  hailstorm:
+    id: 179
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  windstorm:
+    id: 180
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  sandstorm:
+    id: 181
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  thunderstorm:
+    id: 182
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  rainstorm:
+    id: 183
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  aurorastorm:
+    id: 184
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  voidstorm:
+    id: 185
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  helix:
+    id: 186
+    flags:
+      - death
+      - no_cancel
+
+  sublimation_activated:
+    id: 187
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+      - no_cancel
+      - hide_timer
+
+  sublimation_complete:
+    id: 188
+    flags:
+      - death
+      - on_jobchange
+      - no_cancel
+
+  max_tp_down:
+    id: 189
+    flags:
+      - erasable
+      - death
+      - on_zone
+      - waltzable
+      - no_cancel
+    element: dark
+
+  magic_atk_boost:
+    id: 190
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    element: ice
+
+  magic_def_boost:
+    id: 191
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    element: water
+
+  requiem:
+    id: 192
+    flags:
+      - erasable
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: higher
+    element: light
+    sort_key: 2000
+
+  lullaby:
+    id: 193
+    flags:
+      - damage
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    exclusion_group: sleep_i
+    negative: sleep_ii
+    overwrite: never
+    block: sleep_i
+    element: light
+    min_duration: 1
+    sort_key: 2000
+
+  elegy:
+    id: 194
+    flags:
+      - erasable
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    element: earth
+    sort_key: 2000
+
+  paeon:
+    id: 195
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    element: light
+    sort_key: 2000
+
+  ballad:
+    id: 196
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    element: light
+    sort_key: 2000
+
+  minne:
+    id: 197
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    element: earth
+    sort_key: 2000
+
+  minuet:
+    id: 198
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    element: fire
+    sort_key: 2000
+
+  madrigal:
+    id: 199
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    element: thunder
+    sort_key: 2000
+
+  prelude:
+    id: 200
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 2000
+
+  mambo:
+    id: 201
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 2000
+
+  aubade:
+    id: 202
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 2000
+
+  pastoral:
+    id: 203
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 2000
+
+  hum:
+    id: 204
+    flags:
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 2000
+
+  fantasia:
+    id: 205
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 2000
+
+  operetta:
+    id: 206
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 2000
+
+  capriccio:
+    id: 207
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 2000
+
+  serenade:
+    id: 208
+    flags:
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 2000
+
+  round:
+    id: 209
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 2000
+
+  gavotte:
+    id: 210
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 2000
+
+  fugue:
+    id: 211
+    flags:
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 2000
+
+  rhapsody:
+    id: 212
+    flags:
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 2000
+
+  aria:
+    id: 213
+    flags:
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 2000
+
+  march:
+    id: 214
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 2000
+
+  etude:
+    id: 215
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 2000
+
+  carol:
+    id: 216
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 2000
+
+  threnody:
+    id: 217
+    flags:
+      - empathy
+      - death
+      - on_zone
+      - no_loss_message
+      - song
+      - no_cancel
+    overwrite: higher
+    sort_key: 2000
+
+  hymnus:
+    id: 218
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 2000
+
+  mazurka:
+    id: 219
+    flags:
+      - dispelable
+      - attack
+      - damage
+      - death
+      - on_zone
+      - song
+      - no_cancel
+      - on_attack
+    sort_key: 2000
+
+  sirvente:
+    id: 220
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 2000
+
+  dirge:
+    id: 221
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 2000
+
+  scherzo:
+    id: 222
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - song
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 2000
+
+  nocturne:
+    id: 223
+    flags:
+      - death
+      - on_zone
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 2000
+
+  store_tp:
+    id: 227
+    flags:
+      - death
+      - on_zone
+
+  embrava:
+    id: 228
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+    negative: kaustra
+
+  manawell:
+    id: 229
+    flags:
+      - death
+      - magic_end
+      - on_zone
+      - on_jobchange
+
+  spontaneity:
+    id: 230
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  marcato:
+    id: 231
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  auto_regen:
+    id: 233
+    name: auto-regen
+    flags:
+      - death
+    overwrite: ignore_duplicate
+
+  auto_refresh:
+    id: 234
+    name: auto-refresh
+    flags:
+      - death
+    overwrite: ignore_duplicate
+
+  fishing_imagery:
+    id: 235
+    flags:
+      - death
+      - synth_support
+      - no_cancel
+    exclusion_group: imagery_1
+
+  woodworking_imagery:
+    id: 236
+    flags:
+      - death
+      - synth_support
+      - no_cancel
+    exclusion_group: imagery_1
+
+  smithing_imagery:
+    id: 237
+    flags:
+      - death
+      - synth_support
+      - no_cancel
+    exclusion_group: imagery_1
+
+  goldsmithing_imagery:
+    id: 238
+    flags:
+      - death
+      - synth_support
+      - no_cancel
+    exclusion_group: imagery_1
+
+  clothcraft_imagery:
+    id: 239
+    flags:
+      - death
+      - synth_support
+      - no_cancel
+    exclusion_group: imagery_1
+
+  leathercraft_imagery:
+    id: 240
+    flags:
+      - death
+      - synth_support
+      - no_cancel
+    exclusion_group: imagery_1
+
+  bonecraft_imagery:
+    id: 241
+    flags:
+      - death
+      - synth_support
+      - no_cancel
+    exclusion_group: imagery_1
+
+  alchemy_imagery:
+    id: 242
+    flags:
+      - death
+      - synth_support
+      - no_cancel
+    exclusion_group: imagery_1
+
+  cooking_imagery:
+    id: 243
+    flags:
+      - death
+      - synth_support
+      - no_cancel
+    exclusion_group: imagery_1
+
+  imagery_1:
+    id: 244
+    name: imagery
+    flags:
+      - death
+      - no_cancel
+    exclusion_group: imagery_1
+
+  imagery_2:
+    id: 245
+    name: imagery
+    flags:
+      - death
+      - no_cancel
+    exclusion_group: imagery_1
+
+  imagery_3:
+    id: 246
+    name: imagery
+    flags:
+      - death
+      - no_cancel
+    exclusion_group: imagery_1
+
+  imagery_4:
+    id: 247
+    name: imagery
+    flags:
+      - death
+      - no_cancel
+    exclusion_group: imagery_1
+
+  imagery_5:
+    id: 248
+    name: imagery
+    flags:
+      - death
+      - no_cancel
+    exclusion_group: imagery_1
+
+  dedication:
+    id: 249
+    flags:
+      - no_cancel
+
+  ef_badge:
+    id: 250
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+
+  food:
+    id: 251
+    flags:
+      - death
+      - food
+      - no_cancel
+    overwrite: never
+
+  mounted:
+    id: 252
+    flags:
+      - attack
+      - death
+      - magic_end
+      - no_cancel
+
+  signet:
+    id: 253
+    flags:
+      - no_cancel
+      - influence
+    sort_key: 1000
+
+  battlefield:
+    id: 254
+    flags:
+      - confrontation
+      - no_cancel
+      - hide_timer
+
+  sanction:
+    id: 256
+    flags:
+      - no_cancel
+      - influence
+    sort_key: 1000
+
+  besieged:
+    id: 257
+    flags:
+      - no_cancel
+      - hide_timer
+
+  illusion:
+    id: 258
+    flags:
+      - attack
+      - damage
+      - death
+      - magic_end
+      - on_zone
+      - no_rest
+
+  encumbrance_i:
+    id: 259
+    name: encumbrance
+    flags:
+      - no_cancel
+      - hide_timer
+      - on_zone_pathos
+    wear_off_message_id: 204
+
+  obliviscence:
+    id: 260
+    flags:
+      - no_cancel
+      - hide_timer
+      - on_zone_pathos
+
+  impairment:
+    id: 261
+    flags:
+      - no_cancel
+      - hide_timer
+      - on_zone_pathos
+    wear_off_message_id: 204
+
+  omerta:
+    id: 262
+    flags:
+      - no_cancel
+      - hide_timer
+      - on_zone_pathos
+
+  debilitation:
+    id: 263
+    flags:
+      - no_cancel
+      - hide_timer
+      - on_zone_pathos
+    wear_off_message_id: 204
+
+  pathos:
+    id: 264
+    flags:
+      - no_cancel
+      - hide_timer
+      - on_zone_pathos
+
+  flurry:
+    id: 265
+    flags:
+      - death
+      - on_jobchange
+      - no_cancel
+      - hide_timer
+
+  concentration:
+    id: 266
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+
+  allied_tags:
+    id: 267
+    flags:
+      - death
+      - on_zone
+      - confrontation
+      - no_cancel
+      - hide_timer
+
+  sigil:
+    id: 268
+    flags:
+      - no_cancel
+      - influence
+
+  level_sync:
+    id: 269
+    flags:
+      - on_zone
+      - no_cancel
+      - hide_timer
+
+  aftermath_lv1:
+    id: 270
+    flags:
+      - death
+      - on_zone
+      - no_cancel
+
+  aftermath_lv2:
+    id: 271
+    flags:
+      - death
+      - on_zone
+      - no_cancel
+
+  aftermath_lv3:
+    id: 272
+    flags:
+      - death
+      - on_zone
+      - no_cancel
+
+  aftermath:
+    id: 273
+    flags:
+      - death
+      - on_zone
+      - no_cancel
+
+  enlight:
+    id: 274
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    exclusion_group: enfire
+    negative: blood_weapon
+    element: light
+
+  auspice:
+    id: 275
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+    exclusion_group: enfire
+    negative: blood_weapon
+    element: light
+
+  confrontation:
+    id: 276
+    flags:
+      - death
+      - on_zone
+      - confrontation
+      - no_cancel
+      - hide_timer
+
+  enfire_ii:
+    id: 277
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    exclusion_group: enfire
+    negative: blood_weapon
+    element: fire
+
+  enblizzard_ii:
+    id: 278
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    exclusion_group: enfire
+    negative: blood_weapon
+    element: ice
+
+  enaero_ii:
+    id: 279
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    exclusion_group: enfire
+    negative: blood_weapon
+    element: wind
+
+  enstone_ii:
+    id: 280
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    exclusion_group: enfire
+    negative: blood_weapon
+    element: earth
+
+  enthunder_ii:
+    id: 281
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    exclusion_group: enfire
+    negative: blood_weapon
+    element: thunder
+
+  enwater_ii:
+    id: 282
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    exclusion_group: enfire
+    negative: blood_weapon
+    element: water
+
+  perfect_defense:
+    id: 283
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+      - no_cancel
+
+  egg:
+    id: 284
+    flags:
+      - death
+      - on_zone
+
+  visitant:
+    id: 285
+    flags:
+      - on_zone
+      - no_cancel
+      - offline_tick
+
+  baramnesia:
+    id: 286
+    flags:
+      - dispelable
+      - empathy
+      - death
+    exclusion_group: barsleep
+    sort_key: 500
+
+  atma:
+    id: 287
+    flags:
+      - on_zone
+      - no_cancel
+      - hide_timer
+    overwrite: ignore_duplicate
+
+  endark:
+    id: 288
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    exclusion_group: enfire
+    negative: blood_weapon
+    element: dark
+
+  enmity_boost:
+    id: 289
+    flags:
+      - death
+    element: fire
+
+  subtle_blow_plus:
+    id: 290
+    flags:
+      - death
+      - on_zone
+
+  enmity_down:
+    id: 291
+    flags:
+      - erasable
+      - death
+      - waltzable
+    element: water
+
+  pennant:
+    id: 292
+    flags:
+      - death
+      - confrontation
+      - no_cancel
+      - hide_timer
+
+  negate_petrify:
+    id: 293
+    flags:
+      - dispelable
+      - death
+      - on_zone
+    block: petrification
+
+  negate_terror:
+    id: 294
+    flags:
+      - dispelable
+      - death
+      - on_zone
+    block: terror
+
+  negate_amnesia:
+    id: 295
+    flags:
+      - dispelable
+      - death
+      - on_zone
+    block: amnesia
+
+  negate_doom:
+    id: 296
+    flags:
+      - dispelable
+      - death
+      - on_zone
+    block: doom
+
+  negate_poison:
+    id: 297
+    flags:
+      - dispelable
+      - death
+      - on_zone
+    block: poison
+
+  crit_hit_evasion_down:
+    id: 298
+    name: critical_hit_evasion_down
+    flags:
+      - erasable
+      - death
+      - waltzable
+      - no_cancel
+
+  overload:
+    id: 299
+    flags:
+      - death
+      - on_zone
+      - no_cancel
+    wear_off_message_id: 204
+
+  fire_maneuver:
+    id: 300
+    flags:
+      - death
+      - on_zone
+      - no_loss_message
+      - logout
+      - on_jobchange
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 3000
+
+  ice_maneuver:
+    id: 301
+    flags:
+      - death
+      - on_zone
+      - no_loss_message
+      - logout
+      - on_jobchange
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 3000
+
+  wind_maneuver:
+    id: 302
+    flags:
+      - death
+      - on_zone
+      - no_loss_message
+      - logout
+      - on_jobchange
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 3000
+
+  earth_maneuver:
+    id: 303
+    flags:
+      - death
+      - on_zone
+      - no_loss_message
+      - logout
+      - on_jobchange
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 3000
+
+  thunder_maneuver:
+    id: 304
+    flags:
+      - death
+      - on_zone
+      - no_loss_message
+      - logout
+      - on_jobchange
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 3000
+
+  water_maneuver:
+    id: 305
+    flags:
+      - death
+      - on_zone
+      - no_loss_message
+      - logout
+      - on_jobchange
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 3000
+
+  light_maneuver:
+    id: 306
+    flags:
+      - death
+      - on_zone
+      - no_loss_message
+      - logout
+      - on_jobchange
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 3000
+
+  dark_maneuver:
+    id: 307
+    flags:
+      - death
+      - on_zone
+      - no_loss_message
+      - logout
+      - on_jobchange
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 3000
+
+  double_up_chance:
+    id: 308
+    name: double-up_chance
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+      - no_cancel
+    sort_key: 2050
+
+  bust:
+    id: 309
+    flags:
+      - death
+      - on_zone
+      - no_cancel
+    overwrite: ignore_duplicate
+    sort_key: 2050
+
+  fighters_roll:
+    id: 310
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  monks_roll:
+    id: 311
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  healers_roll:
+    id: 312
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  wizards_roll:
+    id: 313
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  warlocks_roll:
+    id: 314
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  rogues_roll:
+    id: 315
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  gallants_roll:
+    id: 316
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  chaos_roll:
+    id: 317
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  beast_roll:
+    id: 318
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  choral_roll:
+    id: 319
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  hunters_roll:
+    id: 320
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  samurai_roll:
+    id: 321
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  ninja_roll:
+    id: 322
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  drachen_roll:
+    id: 323
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  evokers_roll:
+    id: 324
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  maguss_roll:
+    id: 325
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  corsairs_roll:
+    id: 326
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  puppet_roll:
+    id: 327
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  dancers_roll:
+    id: 328
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  scholars_roll:
+    id: 329
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  bolters_roll:
+    id: 330
+    flags:
+      - dispelable
+      - attack
+      - empathy
+      - damage
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+      - on_attack
+    sort_key: 2000
+
+  casters_roll:
+    id: 331
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  coursers_roll:
+    id: 332
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  blitzers_roll:
+    id: 333
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  tacticians_roll:
+    id: 334
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  allies_roll:
+    id: 335
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  misers_roll:
+    id: 336
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  companions_roll:
+    id: 337
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  avengers_roll:
+    id: 338
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  naturalists_roll:
+    id: 339
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - logout
+      - on_jobchange
+      - no_cancel
+    sort_key: 2000
+
+  warriors_charge:
+    id: 340
+    flags:
+      - attack
+      - death
+      - on_zone
+      - on_jobchange
+
+  formless_strikes:
+    id: 341
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  assassins_charge:
+    id: 342
+    flags:
+      - attack
+      - death
+      - on_zone
+      - on_jobchange
+
+  feint:
+    id: 343
+    flags:
+      - death
+      - on_jobchange
+
+  fealty:
+    id: 344
+    flags:
+      - dispelable
+      - death
+      - on_zone
+      - on_jobchange
+
+  dark_seal:
+    id: 345
+    flags:
+      - dispelable
+      - death
+      - magic_end
+      - on_zone
+
+  diabolic_eye:
+    id: 346
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  nightingale:
+    id: 347
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  troubadour:
+    id: 348
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  killer_instinct:
+    id: 349
+    flags:
+      - death
+      - on_jobchange
+
+  stealth_shot:
+    id: 350
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  flashy_shot:
+    id: 351
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  sange:
+    id: 352
+    flags:
+      - death
+      - on_zone
+    exclusion_group: barrage
+
+  hasso:
+    id: 353
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    exclusion_group: hasso
+
+  seigan:
+    id: 354
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+    exclusion_group: hasso
+
+  convergence:
+    id: 355
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  diffusion:
+    id: 356
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  snake_eye:
+    id: 357
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  light_arts:
+    id: 358
+    flags:
+      - death
+      - on_zone
+      - logout
+      - on_jobchange
+      - no_cancel
+
+  dark_arts:
+    id: 359
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+      - no_cancel
+
+  penury:
+    id: 360
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  parsimony:
+    id: 361
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  celerity:
+    id: 362
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  alacrity:
+    id: 363
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  rapture:
+    id: 364
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  ebullience:
+    id: 365
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  accession:
+    id: 366
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  manifestation:
+    id: 367
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  drain_samba:
+    id: 368
+    flags:
+      - empathy
+      - death
+      - on_zone
+      - on_jobchange
+    exclusion_group: drain_samba
+
+  aspir_samba:
+    id: 369
+    flags:
+      - empathy
+      - death
+      - on_zone
+      - on_jobchange
+    exclusion_group: drain_samba
+
+  haste_samba:
+    id: 370
+    flags:
+      - empathy
+      - death
+      - on_zone
+      - on_jobchange
+    exclusion_group: drain_samba
+
+  velocity_shot:
+    id: 371
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  building_flourish:
+    id: 375
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+      - no_cancel
+
+  trance:
+    id: 376
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  tabula_rasa:
+    id: 377
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  drain_daze:
+    id: 378
+    flags:
+      - death
+      - no_cancel
+
+  aspir_daze:
+    id: 379
+    flags:
+      - death
+      - no_cancel
+
+  haste_daze:
+    id: 380
+    flags:
+      - death
+      - no_cancel
+
+  finishing_move_1:
+    id: 381
+    name: finishing_move
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+      - no_cancel
+
+  finishing_move_2:
+    id: 382
+    name: finishing_move
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+      - no_cancel
+
+  finishing_move_3:
+    id: 383
+    name: finishing_move
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+      - no_cancel
+
+  finishing_move_4:
+    id: 384
+    name: finishing_move
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+      - no_cancel
+
+  finishing_move_5:
+    id: 385
+    name: finishing_move
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+      - no_cancel
+
+  lethargic_daze_1:
+    id: 386
+    flags:
+      - death
+      - no_cancel
+
+  lethargic_daze_2:
+    id: 387
+    flags:
+      - death
+      - no_cancel
+
+  lethargic_daze_3:
+    id: 388
+    flags:
+      - death
+      - no_cancel
+
+  lethargic_daze_4:
+    id: 389
+    flags:
+      - death
+      - no_cancel
+
+  lethargic_daze_5:
+    id: 390
+    flags:
+      - death
+      - no_cancel
+
+  sluggish_daze_1:
+    id: 391
+    flags:
+      - death
+      - no_cancel
+
+  sluggish_daze_2:
+    id: 392
+    flags:
+      - death
+      - no_cancel
+
+  sluggish_daze_3:
+    id: 393
+    flags:
+      - death
+      - no_cancel
+
+  sluggish_daze_4:
+    id: 394
+    flags:
+      - death
+      - no_cancel
+
+  sluggish_daze_5:
+    id: 395
+    flags:
+      - death
+      - no_cancel
+
+  weakened_daze_1:
+    id: 396
+    flags:
+      - death
+      - no_cancel
+
+  weakened_daze_2:
+    id: 397
+    flags:
+      - death
+      - no_cancel
+
+  weakened_daze_3:
+    id: 398
+    flags:
+      - death
+      - no_cancel
+
+  weakened_daze_4:
+    id: 399
+    flags:
+      - death
+      - no_cancel
+
+  weakened_daze_5:
+    id: 400
+    flags:
+      - death
+      - no_cancel
+
+  addendum_white:
+    id: 401
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+      - no_cancel
+
+  addendum_black:
+    id: 402
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+      - no_cancel
+
+  reprisal:
+    id: 403
+    flags:
+      - dispelable
+      - death
+    exclusion_group: blaze_spikes
+
+  magic_evasion_down:
+    id: 404
+    flags:
+      - erasable
+      - death
+      - waltzable
+      - no_cancel
+
+  retaliation:
+    id: 405
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  footwork:
+    id: 406
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  klimaform:
+    id: 407
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  sekkanoki:
+    id: 408
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  pianissimo:
+    id: 409
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  saber_dance:
+    id: 410
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  fan_dance:
+    id: 411
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  altruism:
+    id: 412
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  focalization:
+    id: 413
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  tranquility:
+    id: 414
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  equanimity:
+    id: 415
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  enlightenment:
+    id: 416
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  afflatus_solace:
+    id: 417
+    flags:
+      - dispelable
+      - death
+      - on_zone
+
+  afflatus_misery:
+    id: 418
+    flags:
+      - dispelable
+      - death
+      - on_zone
+
+  composure:
+    id: 419
+    flags:
+      - dispelable
+      - death
+      - on_zone
+
+  yonin:
+    id: 420
+    flags:
+      - dispelable
+      - death
+      - on_zone
+    exclusion_group: yonin
+
+  innin:
+    id: 421
+    flags:
+      - dispelable
+      - death
+      - on_zone
+    exclusion_group: yonin
+
+  carbuncles_favor:
+    id: 422
+    flags:
+      - death
+      - on_zone
+      - no_cancel
+      - hide_timer
+
+  ifrits_favor:
+    id: 423
+    flags:
+      - death
+      - on_zone
+      - no_cancel
+      - hide_timer
+
+  shivas_favor:
+    id: 424
+    flags:
+      - death
+      - on_zone
+      - no_cancel
+      - hide_timer
+
+  garudas_favor:
+    id: 425
+    flags:
+      - death
+      - on_zone
+      - no_cancel
+      - hide_timer
+
+  titans_favor:
+    id: 426
+    flags:
+      - death
+      - on_zone
+      - no_cancel
+      - hide_timer
+
+  ramuhs_favor:
+    id: 427
+    flags:
+      - death
+      - on_zone
+      - no_cancel
+      - hide_timer
+
+  leviathans_favor:
+    id: 428
+    flags:
+      - death
+      - on_zone
+      - no_cancel
+      - hide_timer
+
+  fenrirs_favor:
+    id: 429
+    flags:
+      - death
+      - on_zone
+      - no_cancel
+      - hide_timer
+
+  diaboloss_favor:
+    id: 430
+    flags:
+      - death
+      - on_zone
+      - no_cancel
+      - hide_timer
+
+  avatars_favor:
+    id: 431
+    flags:
+      - dispelable
+      - death
+      - on_zone
+      - on_jobchange
+      - offline_tick
+      - hide_timer
+
+  multi_strikes:
+    id: 432
+    flags:
+      - death
+      - on_zone
+
+  double_shot:
+    id: 433
+    flags:
+      - death
+      - on_zone
+
+  transcendency:
+    id: 434
+    flags:
+      - on_zone
+      - no_cancel
+
+  restraint:
+    id: 435
+    flags:
+      - death
+      - on_zone
+      - logout
+      - on_jobchange
+
+  perfect_counter:
+    id: 436
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  mana_wall:
+    id: 437
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  divine_emblem:
+    id: 438
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  nether_void:
+    id: 439
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  sengikori:
+    id: 440
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  futae:
+    id: 441
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  presto:
+    id: 442
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  climactic_flourish:
+    id: 443
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  copy_image_2:
+    id: 444
+    name: copy_image
+    flags:
+      - death
+      - on_jobchange
+    exclusion_group: blink
+    sort_key: 50
+
+  copy_image_3:
+    id: 445
+    name: copy_image
+    flags:
+      - death
+      - on_jobchange
+    exclusion_group: blink
+    sort_key: 50
+
+  copy_image_4:
+    id: 446
+    name: copy_image
+    flags:
+      - death
+      - on_jobchange
+    exclusion_group: blink
+    sort_key: 50
+
+  multi_shots:
+    id: 447
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  bewildered_daze_1:
+    id: 448
+    flags:
+      - death
+      - no_cancel
+
+  bewildered_daze_2:
+    id: 449
+    flags:
+      - death
+      - no_cancel
+
+  bewildered_daze_3:
+    id: 450
+    flags:
+      - death
+      - no_cancel
+
+  bewildered_daze_4:
+    id: 451
+    flags:
+      - death
+      - no_cancel
+
+  bewildered_daze_5:
+    id: 452
+    flags:
+      - death
+      - no_cancel
+
+  divine_caress_i:
+    id: 453
+    name: divine_caress
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  saboteur:
+    id: 454
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  tenuto:
+    id: 455
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  spur:
+    id: 456
+    flags:
+      - death
+
+  efflux:
+    id: 457
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  earthen_armor:
+    id: 458
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  divine_caress_ii:
+    id: 459
+    name: divine_caress
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  blood_rage:
+    id: 460
+    flags:
+      - death
+      - on_jobchange
+    remove: warcry
+
+  impetus:
+    id: 461
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  conspirator:
+    id: 462
+    flags:
+      - dispelable
+      - death
+      - on_zone
+
+  sepulcher:
+    id: 463
+    flags:
+      - death
+      - no_cancel
+
+  arcane_crest:
+    id: 464
+    flags:
+      - death
+      - no_cancel
+
+  hamanoha:
+    id: 465
+    flags:
+      - death
+      - no_cancel
+
+  dragon_breaker:
+    id: 466
+    flags:
+      - death
+      - no_cancel
+
+  triple_shot:
+    id: 467
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  striking_flourish:
+    id: 468
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  perpetuance:
+    id: 469
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  immanence:
+    id: 470
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  migawari:
+    id: 471
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+      - no_cancel
+
+  # DNC 93
+  ternary_flourish:
+    id: 472
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  # MOB EFFECT
+  muddle:
+    id: 473
+    flags:
+      - death
+      - on_zone
+      - no_cancel
+
+  # GROUNDS OF VALOR
+  prowess:
+    id: 474
+    flags:
+      - on_zone
+      - no_loss_message
+      - no_cancel
+
+  # VOIDWATCH
+  voidwatcher:
+    id: 475
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+
+  # ATMACITE
+  ensphere:
+    id: 476
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+
+  # WHM 95
+  sacrosanctity:
+    id: 477
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  # PLD 95
+  palisade:
+    id: 478
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  # DRK 95
+  scarlet_delirium:
+    id: 479
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+      - no_cancel
+
+  # DRK 95
+  scarlet_delirium_1:
+    id: 480
+    name: scarlet_delirium
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  abdhaljs_seal:
+    id: 481
+    flags:
+      - no_cancel
+
+  # RNG 95
+  decoy_shot:
+    id: 482
+    flags:
+      - death
+      - on_jobchange
+    exclusion_group: decoy_shot
+
+  # SAM 95
+  hagakure:
+    id: 483
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  # NIN 95
+  issekigan:
+    id: 484
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  # BLU 95
+  unbridled_learning:
+    id: 485
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  # ENDRAIN                  = 487, -- FENRIR 96
+  counter_boost:
+    id: 486
+    flags:
+      - death
+
+  endrain:
+    id: 487
+    flags:
+      - death
+      - on_zone
+    exclusion_group: enfire
+
+  # FENRIR 96
+  enaspir:
+    id: 488
+    flags:
+      - death
+      - on_zone
+    exclusion_group: enfire
+
+  # WS AFTEREFFECT
+  afterglow:
+    id: 489
+    flags:
+      - death
+      - no_cancel
+
+  # INNER_STRENGTH           = 491,
+  brazen_rush:
+    id: 490
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  inner_strength:
+    id: 491
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  asylum:
+    id: 492
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  subtle_sorcery:
+    id: 493
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  stymie:
+    id: 494
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  macro_test:
+    id: 495
+    flags:
+      - death
+      - on_zone
+      - no_loss_message
+      - on_jobchange
+      - hide_timer
+      - always_expiring
+
+  intervene:
+    id: 496
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+      - no_cancel
+
+  soul_enslavement:
+    id: 497
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  unleash:
+    id: 498
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  clarion_call:
+    id: 499
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  overkill:
+    id: 500
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  yaegasumi:
+    id: 501
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  mikage:
+    id: 502
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  fly_high:
+    id: 503
+    flags:
+      - death
+      - on_jobchange
+
+  astral_conduit:
+    id: 504
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  # NONE                      = 506,
+  unbridled_wisdom:
+    id: 505
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  grace:
+    id: 506
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+      - no_cancel
+      - hide_timer
+
+  grand_pas:
+    id: 507
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  widened_compass:
+    id: 508
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  odyllic_subterfuge:
+    id: 509
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+      - no_cancel
+
+  ergon_might:
+    id: 510
+    flags:
+      - death
+
+  reive_mark:
+    id: 511
+    flags:
+      - death
+      - confrontation
+      - no_cancel
+      - hide_timer
+
+  ionis:
+    id: 512
+    flags:
+      - no_cancel
+      - influence
+
+  # NONE                      = 514,
+  bolster:
+    id: 513
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  lasting_emanation:
+    id: 515
+    flags:
+      - death
+      - no_cancel
+
+  ecliptic_attrition:
+    id: 516
+    flags:
+      - death
+      - no_cancel
+
+  collimated_fervor:
+    id: 517
+    flags:
+      - death
+      - on_zone
+
+  dematerialize:
+    id: 518
+    flags:
+      - death
+      - no_cancel
+
+  # NONE                      = 520,
+  theurgic_focus:
+    id: 519
+    flags:
+      - death
+      - on_zone
+
+  elemental_sforzo:
+    id: 522
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  ignis:
+    id: 523
+    flags:
+      - death
+      - on_zone
+      - no_loss_message
+      - logout
+      - on_jobchange
+      - no_cancel
+    overwrite: ignore_duplicate
+    element: fire
+
+  gelus:
+    id: 524
+    flags:
+      - death
+      - on_zone
+      - no_loss_message
+      - logout
+      - on_jobchange
+      - no_cancel
+    overwrite: ignore_duplicate
+    element: ice
+
+  flabra:
+    id: 525
+    flags:
+      - death
+      - on_zone
+      - no_loss_message
+      - logout
+      - on_jobchange
+      - no_cancel
+    overwrite: ignore_duplicate
+    element: wind
+
+  tellus:
+    id: 526
+    flags:
+      - death
+      - on_zone
+      - no_loss_message
+      - logout
+      - on_jobchange
+      - no_cancel
+    overwrite: ignore_duplicate
+    element: earth
+
+  sulpor:
+    id: 527
+    flags:
+      - death
+      - on_zone
+      - no_loss_message
+      - logout
+      - on_jobchange
+      - no_cancel
+    overwrite: ignore_duplicate
+    element: thunder
+
+  unda:
+    id: 528
+    flags:
+      - death
+      - on_zone
+      - no_loss_message
+      - logout
+      - on_jobchange
+      - no_cancel
+    overwrite: ignore_duplicate
+    element: water
+
+  lux:
+    id: 529
+    flags:
+      - death
+      - on_zone
+      - no_loss_message
+      - logout
+      - on_jobchange
+      - no_cancel
+    overwrite: ignore_duplicate
+    element: light
+
+  tenebrae:
+    id: 530
+    flags:
+      - death
+      - on_zone
+      - no_loss_message
+      - logout
+      - on_jobchange
+      - no_cancel
+    overwrite: ignore_duplicate
+    element: dark
+
+  vallation:
+    id: 531
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  swordplay:
+    id: 532
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  pflug:
+    id: 533
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  embolden:
+    id: 534
+    name: embolden
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  valiance:
+    id: 535
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+    block: vallation
+
+  gambit:
+    id: 536
+    flags:
+      - erasable
+      - death
+      - no_cancel
+    overwrite: never
+
+  liement:
+    id: 537
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  one_for_all:
+    id: 538
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  geo_regen:
+    id: 539
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: light
+
+  geo_poison:
+    id: 540
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: water
+
+  geo_refresh:
+    id: 541
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: light
+
+  geo_str_boost:
+    id: 542
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: fire
+
+  geo_dex_boost:
+    id: 543
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: thunder
+
+  geo_vit_boost:
+    id: 544
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: earth
+
+  geo_agi_boost:
+    id: 545
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: wind
+
+  geo_int_boost:
+    id: 546
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: ice
+
+  geo_mnd_boost:
+    id: 547
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: water
+
+  geo_chr_boost:
+    id: 548
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: light
+
+  geo_attack_boost:
+    id: 549
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: fire
+
+  geo_defense_boost:
+    id: 550
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: earth
+
+  geo_magic_atk_boost:
+    id: 551
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: ice
+
+  geo_magic_def_boost:
+    id: 552
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: water
+
+  geo_accuracy_boost:
+    id: 553
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: thunder
+
+  geo_evasion_boost:
+    id: 554
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: wind
+
+  geo_magic_acc_boost:
+    id: 555
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: dark
+
+  geo_magic_evasion_boost:
+    id: 556
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: light
+
+  geo_attack_down:
+    id: 557
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: water
+
+  geo_defense_down:
+    id: 558
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: wind
+
+  geo_magic_atk_down:
+    id: 559
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: fire
+
+  geo_magic_def_down:
+    id: 560
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: thunder
+
+  geo_accuracy_down:
+    id: 561
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: earth
+
+  geo_evasion_down:
+    id: 562
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: ice
+
+  geo_magic_acc_down:
+    id: 563
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: light
+
+  geo_magic_evasion_down:
+    id: 564
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: dark
+
+  geo_slow:
+    id: 565
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: earth
+
+  geo_paralysis:
+    id: 566
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: ice
+
+  geo_weight:
+    id: 567
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: wind
+
+  foil:
+    id: 568
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  blaze_of_glory:
+    id: 569
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  battuta:
+    id: 570
+    flags:
+      - death
+      - on_zone
+      - logout
+      - on_jobchange
+
+  rayke:
+    id: 571
+    flags:
+      - erasable
+      - death
+      - no_cancel
+    overwrite: never
+
+  avoidance_down:
+    id: 572
+    flags:
+      - death
+      - no_cancel
+
+  deluge_spikes:
+    id: 573
+    flags:
+      - dispelable
+      - empathy
+      - death
+    exclusion_group: blaze_spikes
+    element: water
+    sort_key: 800
+
+  fast_cast:
+    id: 574
+    flags:
+      - death
+
+  gestation:
+    id: 575
+    flags:
+      - death
+
+  # Bully: Intimidation Enfeeble status
+  doubt:
+    id: 576
+    flags:
+      - death
+      - no_cancel
+    wear_off_message_id: 204
+
+  cait_siths_favor:
+    id: 577
+    flags:
+      - death
+      - on_zone
+      - no_cancel
+      - hide_timer
+
+  fishy_intuition:
+    id: 578
+    flags:
+      - death
+      - on_zone
+      - no_cancel
+
+  commitment:
+    id: 579
+    flags:
+      - no_cancel
+
+  geo_haste:
+    id: 580
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+    element: wind
+
+  flurry_ii:
+    id: 581
+    flags:
+      - death
+      - on_jobchange
+
+  contradance:
+    id: 582
+    flags:
+      - dispelable
+      - death
+      - on_zone
+      - on_jobchange
+
+  apogee:
+    id: 583
+    flags:
+      - dispelable
+      - death
+      - on_zone
+      - bloodpact
+      - no_cancel
+
+  entrust:
+    id: 584
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  costume_ii:
+    id: 585
+    name: costume
+    flags:
+      - death
+      - on_zone
+      - no_cancel
+    wear_off_message_id: 204
+
+  curing_conduit:
+    id: 586
+    flags:
+      - death
+      - on_zone
+
+  tp_bonus:
+    id: 587
+    flags:
+      - death
+      - on_zone
+
+  finishing_move_6:
+    id: 588
+    name: finishing_move
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+      - no_cancel
+
+  firestorm_ii:
+    id: 589
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  hailstorm_ii:
+    id: 590
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  windstorm_ii:
+    id: 591
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  sandstorm_ii:
+    id: 592
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  thunderstorm_ii:
+    id: 593
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  rainstorm_ii:
+    id: 594
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  aurorastorm_ii:
+    id: 595
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  voidstorm_ii:
+    id: 596
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  inundation:
+    id: 597
+    flags:
+      - death
+      - no_cancel
+
+  cascade:
+    id: 598
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  consume_mana:
+    id: 599
+    flags:
+      - dispelable
+      - death
+      - on_zone
+
+  runeists_roll:
+    id: 600
+    flags:
+      - empathy
+      - death
+      - on_zone
+      - roll
+      - no_cancel
+
+  crooked_cards:
+    id: 601
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  vorseal:
+    id: 602
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+
+  elvorseal:
+    id: 603
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+
+  mighty_guard:
+    id: 604
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  gale_spikes:
+    id: 605
+    flags:
+      - dispelable
+      - empathy
+      - death
+    exclusion_group: blaze_spikes
+    element: wind
+    sort_key: 800
+
+  clod_spikes:
+    id: 606
+    flags:
+      - dispelable
+      - empathy
+      - death
+    exclusion_group: blaze_spikes
+    element: earth
+    sort_key: 800
+
+  glint_spikes:
+    id: 607
+    flags:
+      - dispelable
+      - empathy
+      - death
+    exclusion_group: blaze_spikes
+    element: light
+    sort_key: 800
+
+  negate_virus:
+    id: 608
+    flags:
+      - dispelable
+      - death
+      - on_zone
+
+  negate_curse:
+    id: 609
+    flags:
+      - dispelable
+      - death
+      - on_zone
+
+  negate_charm:
+    id: 610
+    flags:
+      - dispelable
+      - death
+      - on_zone
+
+  magic_evasion_boost:
+    id: 611
+    name: magic_evasion_boost
+    flags:
+      - death
+
+  colure_active:
+    id: 612
+    flags:
+      - on_zone
+      - logout
+      - no_cancel
+    overwrite: always
+
+  mumors_radiance:
+    id: 613
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+
+  ullegores_gloom:
+    id: 614
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+
+  boost_ii:
+    id: 615
+    name: boost
+    flags:
+      - attack
+      - empathy
+      - death
+      - on_jobchange
+
+  artisanal_knowledge:
+    id: 616
+    flags:
+      - no_cancel
+
+  sacrifice:
+    id: 617
+    flags:
+      - dispelable
+      - death
+      - on_zone
+      - on_jobchange
+
+  emporoxs_gift:
+    id: 618
+    flags:
+      - no_cancel
+
+  spirit_bond:
+    id: 619
+    flags:
+      - dispelable
+      - empathy
+      - death
+      - on_zone
+      - logout
+      - on_jobchange
+
+  awaken:
+    id: 620
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+      - no_cancel
+
+  majesty:
+    id: 621
+    flags:
+      - dispelable
+      - death
+      - on_zone
+
+  guarding_rate_boost:
+    id: 622
+    flags:
+      - dispelable
+      - empathy
+      - death
+
+  rampart:
+    id: 623
+    flags:
+      - death
+      - on_zone
+      - logout
+      - on_jobchange
+
+  winds_blessing:
+    id: 624
+    flags:
+      - dispelable
+      - death
+      - on_zone
+      - on_jobchange
+      - no_cancel
+
+  sirens_favor:
+    id: 625
+    flags:
+      - death
+      - on_zone
+      - no_cancel
+      - hide_timer
+
+  negate_sleep:
+    id: 626
+    flags:
+      - dispelable
+      - death
+      - on_zone
+
+  mobilization:
+    id: 627
+    flags:
+      - death
+      - on_zone
+      - on_jobchange
+      - on_attack
+
+  hover_shot:
+    id: 628
+    flags:
+      - dispelable
+      - death
+      - on_zone
+    exclusion_group: decoy_shot
+
+  moogle_amplifier:
+    id: 629
+    flags:
+      - no_cancel
+
+  taint:
+    id: 630
+    flags:
+      - death
+      - no_cancel
+
+  haunt:
+    id: 631
+    flags:
+      - death
+      - no_cancel
+
+  black_sanctus:
+    id: 632
+    flags:
+      - death
+      - no_cancel
+
+  animated:
+    id: 633
+    flags:
+      - death
+      - on_zone
+      - no_cancel
+
+  serpents_guile:
+    id: 634
+    flags:
+      - death
+      - on_zone
+      - no_cancel
+
+  # Effect icons in packet can go from 0-767, so no custom effects should go in that range.
+  resolved:
+    id: 635
+    flags:
+      - on_zone
+      - no_cancel
+
+  abyssea_str:
+    id: 768
+    flags:
+      - on_zone
+    element: fire
+
+  abyssea_dex:
+    id: 769
+    flags:
+      - on_zone
+    element: thunder
+
+  abyssea_vit:
+    id: 770
+    flags:
+      - on_zone
+    element: earth
+
+  abyssea_agi:
+    id: 771
+    flags:
+      - on_zone
+    element: wind
+
+  abyssea_int:
+    id: 772
+    flags:
+      - on_zone
+    element: ice
+
+  abyssea_mnd:
+    id: 773
+    flags:
+      - on_zone
+    element: water
+
+  abyssea_chr:
+    id: 774
+    flags:
+      - on_zone
+    element: light
+
+  abyssea_hp:
+    id: 775
+    flags:
+      - on_zone
+    element: light
+
+  # *Prowess increases not currently retail accurate.
+  abyssea_mp:
+    id: 776
+    flags:
+      - on_zone
+    element: dark
+
+  # (Unimplemented)
+  prowess_casket_rate:
+    id: 777
+    flags:
+      - on_zone
+      - no_loss_message
+
+  # (Unimplemented)
+  prowess_skill_rate:
+    id: 778
+    flags:
+      - on_zone
+      - no_loss_message
+
+  # (Unimplemented)
+  prowess_crystal_yield:
+    id: 779
+    name: prowess_crystal_yeild
+    flags:
+      - on_zone
+      - no_loss_message
+
+  # +1 per tier
+  prowess_th:
+    id: 780
+    flags:
+      - on_zone
+      - no_loss_message
+
+  # *flat 4% for now
+  prowess_attack_speed:
+    id: 781
+    flags:
+      - on_zone
+      - no_loss_message
+
+  # Base 3% and another 1% per tier.
+  prowess_hp_mp:
+    id: 782
+    flags:
+      - on_zone
+      - no_loss_message
+
+  # *flat 4% for now
+  prowess_acc_racc:
+    id: 783
+    flags:
+      - on_zone
+      - no_loss_message
+
+  # *flat 4% for now
+  prowess_att_ratt:
+    id: 784
+    flags:
+      - on_zone
+      - no_loss_message
+
+  # *flat 4% for now
+  prowess_macc_matk:
+    id: 785
+    flags:
+      - on_zone
+      - no_loss_message
+
+  # *flat 4% for now
+  prowess_cure_potency:
+    id: 786
+    flags:
+      - on_zone
+      - no_loss_message
+
+  # (Unimplemented) 2% per tier.
+  prowess_ws_dmg:
+    id: 787
+    flags:
+      - on_zone
+      - no_loss_message
+
+  # *flat +4 for now
+  prowess_killer:
+    id: 788
+    flags:
+      - on_zone
+      - no_loss_message
+
+  # Tracks 30 min timer in ACP mission "Those Who Lurk in Shadows (II)"
+  mark_of_seed:
+    id: 790
+    flags:
+      - on_zone
+      - no_loss_message
+
+  # Indicates a target is unable to be hit by normal melee attacks (formerly TOO_HIGH)
+  all_miss:
+    id: 791
+    flags:
+      - death
+
+  super_buff:
+    id: 792
+    flags:
+      - death
+
+  ninjutsu_ele_debuff:
+    id: 793
+    flags:
+      - death
+      - no_loss_message
+
+  healing:
+    id: 794
+    flags:
+      - attack
+      - damage
+      - death
+      - magic_begin
+      - on_zone
+      - logout
+
+  leavegame:
+    id: 795
+    flags:
+      - attack
+      - damage
+      - death
+      - magic_begin
+      - on_zone
+      - logout
+
+  haste_samba_haste:
+    id: 796
+    flags:
+      - magic_begin
+      - on_zone
+
+  teleport:
+    id: 797
+    flags:
+      - death
+      - on_jobchange
+
+  chainbound:
+    id: 798
+    flags:
+      - death
+
+  skillchain:
+    id: 799
+    flags:
+      - death
+
+  dynamis:
+    id: 800
+    flags:
+      - offline_tick
+
+  # Dummy effect for SAM Meditate JA
+  meditate:
+    id: 801
+    flags:
+      - death
+      - on_zone
+    element: light
+
+  # Elemental resistance down
+  elementalres_down:
+    id: 802
+    name: elemental_resistance_down
+    flags:
+      - death
+      - on_zone
+      - no_loss_message
+      - no_cancel
+
+  # Helper for quest: Full Speed Ahead!
+  full_speed_ahead:
+    id: 803
+    flags:
+      - on_zone
+      - no_loss_message
+
+  # Silent status effect inflicted by a Warrior using the "Tomahawk" job ability
+  tomahawk:
+    id: 805
+    flags:
+      - death
+      - no_loss_message
+
+  # CHR Aura, +9.7% Defense Bonus, +5 Magic Defense Bonus and +5 CHR at lv. 99, stacks with player Indi/Geo CHR.
+  trust_aura_chr:
+    id: 807
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+
+  # HASTE Aura, Haste +20%, Accuracy +30, Ranged Accuracy +30 and Magic Accuracy +30 at lvl 99, stacks with player Indi/Geo HASTE.
+  trust_aura_haste:
+    id: 808
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+
+  # EXP Aura, +20% dedication effect for Experience Points and Capacity Points, stacks with other forms of dedication.
+  trust_aura_exp:
+    id: 809
+    flags:
+      - death
+      - no_cancel
+
+  # ACC Aura, Accuracy+24, Ranged accuracy+24, and DEX+5 at lvl 99, stacks with player Indi/Geo PRECISION.
+  trust_aura_acc:
+    id: 810
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+
+  # REFRESH Aura, 3 MP/tick at lvl 99 stacks with player Indi/Geo REFRESH, also grants an increase to magical skill gain rate.
+  trust_aura_refresh:
+    id: 811
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+
+  # REGEN Aura, 6 HP/tick at lvl 99 stacks with player Indi/Geo REGEN. also grants an increase to physical combat skill gain rate.
+  trust_aura_regen:
+    id: 812
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+
+  # MATT Aura, Magic Attack Boost +19 and +19 Magic Accuracy boost at lvl 99, stacks with player Indi/Geo ACUMEN.
+  trust_aura_magic_attack:
+    id: 813
+    flags:
+      - death
+      - no_cancel
+      - hide_timer
+
+  # Not a retail effect
+  na:
+    id: 232
+
+  # Not a retail effect
+  none:
+    id: 255
+
+  # Used for Hysteroanima to stop after readying a weaponskill with no msg.
+  hysteria:
+    id: 804
+
+  # Custom effect for NM type mobs only.
+  nuke_wall:
+    id: 806

@@ -1,0 +1,18 @@
+-----------------------------------
+-- xi.effect.SNEAK_ATTACK
+-----------------------------------
+---@type TEffect
+local effectObject = {}
+
+effectObject.onEffectGain = function(target, effect)
+    local jpValue = target:getJobPointLevel(xi.jp.SNEAK_ATTACK_EFFECT)
+    effect:addMod(xi.mod.SNEAK_ATK_DEX, jpValue)
+end
+
+effectObject.onEffectTick = function(target, effect)
+end
+
+effectObject.onEffectLose = function(target, effect)
+end
+
+return effectObject

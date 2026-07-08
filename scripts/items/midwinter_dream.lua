@@ -1,0 +1,36 @@
+-----------------------------------
+-- ID: 5543
+-- Item: midwinter_dream
+-- Food Effect: 4 Hrs, All Races
+-----------------------------------
+-- TODO: Group Effect
+-- HP 10
+-- MP 8% Cap 60
+-- Intelligence 2
+-- HP Recovered while healing 2
+-- MP Recovered while healing 2
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 14400, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_HP, 10)
+    effect:addMod(xi.mod.INT, 2)
+    effect:addMod(xi.mod.FOOD_MPP, 8)
+    effect:addMod(xi.mod.FOOD_MP_CAP, 60)
+    effect:addMod(xi.mod.HPHEAL, 2)
+    effect:addMod(xi.mod.MPHEAL, 2)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

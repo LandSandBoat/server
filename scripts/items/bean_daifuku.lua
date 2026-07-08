@@ -1,0 +1,59 @@
+-----------------------------------
+-- ID: 6341
+-- Item: bean_daifuku
+-- Food Effect: 30 Min, All Races
+-----------------------------------
+-- HP +20
+-- VIT +5
+-- Accuracy +10% (cap 80)
+-- Ranged Accuracy +10% (cap 80)
+-- Pet:
+-- HP +20
+-- VIT +5
+-- Accuracy +10% (cap 105)
+-- Ranged Accuracy +10% (cap 105)
+-- Defense +10% (cap 100)
+-- Haste +3%
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 1800, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_HP, 20)
+    effect:addMod(xi.mod.VIT, 5)
+    effect:addMod(xi.mod.FOOD_ACCP, 10)
+    effect:addMod(xi.mod.FOOD_ACC_CAP, 80)
+    effect:addMod(xi.mod.FOOD_RACCP, 10)
+    effect:addMod(xi.mod.FOOD_RACC_CAP, 80)
+    target:addPetMod(xi.mod.FOOD_HP, 20)
+    target:addPetMod(xi.mod.VIT, 5)
+    target:addPetMod(xi.mod.FOOD_ACCP, 10)
+    target:addPetMod(xi.mod.FOOD_ACC_CAP, 105)
+    target:addPetMod(xi.mod.FOOD_RACCP, 10)
+    target:addPetMod(xi.mod.FOOD_RACC_CAP, 105)
+    target:addPetMod(xi.mod.FOOD_DEFP, 10)
+    target:addPetMod(xi.mod.FOOD_DEF_CAP, 100)
+    target:addPetMod(xi.mod.HASTE_GEAR, 300)
+end
+
+itemObject.onEffectLose = function(target, effect)
+    target:delPetMod(xi.mod.FOOD_HP, 20)
+    target:delPetMod(xi.mod.VIT, 5)
+    target:delPetMod(xi.mod.FOOD_ACCP, 10)
+    target:delPetMod(xi.mod.FOOD_ACC_CAP, 105)
+    target:delPetMod(xi.mod.FOOD_RACCP, 10)
+    target:delPetMod(xi.mod.FOOD_RACC_CAP, 105)
+    target:delPetMod(xi.mod.FOOD_DEFP, 10)
+    target:delPetMod(xi.mod.FOOD_DEF_CAP, 100)
+    target:delPetMod(xi.mod.HASTE_GEAR, 300)
+end
+
+return itemObject

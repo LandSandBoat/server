@@ -1,0 +1,121 @@
+-----------------------------------
+-- Zone: Western_Altepa_Desert (125)
+-----------------------------------
+local ID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
+require('scripts/missions/amk/helpers')
+-----------------------------------
+---@type TZone
+local zoneObject = {}
+
+zoneObject.onInitialize = function(zone)
+    xi.beastmenTreasure.updatePeddlestox(xi.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
+
+    -- loop through Altepa Gate, Ruby/Topaz/Emerald/Sapphire pillar/column, set them all always relevant
+    for i = 0, 8, 1 do
+        local npc = GetNPCByID(ID.npc.ALTEPA_GATE + i)
+        if npc then
+            npc:setNpcAlwaysRelevant(true)
+        end
+    end
+end
+
+zoneObject.onGameDay = function()
+    xi.beastmenTreasure.updatePeddlestox(xi.zone.WESTERN_ALTEPA_DESERT, ID.npc.PEDDLESTOX)
+end
+
+zoneObject.onZoneIn = function(player, prevZone)
+    local cs = -1
+
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
+        player:setPos(-19.901, 13.607, 440.058, 78)
+    end
+
+    -- AMK06/AMK07
+    if xi.settings.main.ENABLE_AMK == 1 then
+        xi.amk.helpers.tryRandomlyPlaceDiggingLocation(player)
+    end
+
+    return cs
+end
+
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+end
+
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+end
+
+zoneObject.onEventUpdate = function(player, csid, option, npc)
+end
+
+zoneObject.onEventFinish = function(player, csid, option, npc)
+end
+
+zoneObject.onZoneWeatherChange = function(weather)
+    -- HNM King Vinegarroon only spawns during earth weather
+    local kvMob = GetMobByID(ID.mob.KING_VINEGARROON)
+
+    if kvMob then
+        if weather == xi.weather.DUST_STORM or weather == xi.weather.SAND_STORM then
+            -- Check for respawn.
+            if
+                not kvMob:isSpawned() and
+                kvMob:getRespawnTime() == 0
+            then
+                if
+                    (weather == xi.weather.DUST_STORM and math.randomInt(1, 100) <= 50) or
+                    weather == xi.weather.SAND_STORM
+                then
+                    DisallowRespawn(ID.mob.KING_VINEGARROON, false) -- Allow respawn.
+                end
+            end
+
+        else
+            DisallowRespawn(ID.mob.KING_VINEGARROON, true) -- Disallow respawn.
+        end
+    end
+
+    -- NM Dahu only spawns during fire or earth weather
+    local dahu = GetMobByID(ID.mob.DAHU)
+
+    if dahu then
+        local dahuValidWeather =
+        set{
+            xi.weather.DUST_STORM,
+            xi.weather.SAND_STORM,
+            xi.weather.HOT_SPELL,
+            xi.weather.HEAT_WAVE,
+        }
+
+        if dahuValidWeather[weather] then
+            -- Spawn if respawn is up
+            if
+                not dahu:isSpawned() and
+                dahu:getRespawnTime() == 0
+            then
+                DisallowRespawn(ID.mob.DAHU, false) -- Allow respawn.
+            end
+        else
+            DisallowRespawn(ID.mob.DAHU, true) -- Disallow respawn.
+        end
+    end
+end
+
+zoneObject.afterZoneIn = function(player)
+    -- Send players who zone in an update for the Altepa Gate "doors" so you can see the state from further away
+    -- TODO: these NPCs should be "permanently" in the NPC spawn list for all players -- there's a bug if you get too close and move away they revert to the "needs to be opened" state.
+    -- This currently acts as a small QoL from a long distance, better than nothing, but closer to retail.
+    for gateId = ID.npc.ALTEPA_GATE, ID.npc.ALTEPA_GATE + 8 do
+        local gateObj = GetNPCByID(gateId)
+
+        if gateObj then
+            player:sendEntityUpdateToPlayer(gateObj, xi.entityUpdate.ENTITY_UPDATE, xi.updateType.UPDATE_COMBAT)
+        end
+    end
+end
+
+return zoneObject

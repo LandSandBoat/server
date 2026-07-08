@@ -1,0 +1,81 @@
+-----------------------------------
+-- Area: Waughroon Shrine
+--  Mob: Titanis Xax
+-- KSNM: Prehistoric Pigeons
+-----------------------------------
+mixins = { require('scripts/mixins/job_special') }
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setLocalVar('spellList', 1)
+    mob:setMod(xi.mod.DARK_SLEEP_RES_RANK, 7)
+    mob:setMod(xi.mod.LIGHT_SLEEP_RES_RANK, 7)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+    mob:setMod(xi.mod.REGAIN, 200)
+    xi.mix.jobSpecial.config(mob, {
+        specials =
+        {
+            { id = xi.mobSkill.SOUL_VOICE_1, hpp = 60 },
+        },
+    })
+end
+
+entity.onMobSpellChoose = function(mob, target, spellId)
+    local spellTable =
+    {
+        [1] =
+        {
+            xi.magic.spell.ADVANCING_MARCH,
+            xi.magic.spell.BATTLEFIELD_ELEGY,
+        },
+        [2] =
+        {
+            xi.magic.spell.VICTORY_MARCH,
+            xi.magic.spell.CARNAGE_ELEGY,
+        },
+    }
+
+    local list      = mob:getLocalVar('spellList')
+    list            = list > 0 and list or 1
+    local spellList = spellTable[list]
+
+    return spellList[math.randomInt(1, #spellList)]
+end
+
+entity.onMobFight = function(mob, target)
+    local battlefield = mob:getBattlefield()
+    if battlefield then
+        local deathCount = battlefield:getLocalVar('pigeonDeaths')
+        if deathCount > 0 then
+            local hasteValue = 750 * deathCount
+            mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150 + 16 * deathCount)
+            mob:setMod(xi.mod.HASTE_ABILITY, hasteValue)
+            mob:setMod(xi.mod.HASTE_GEAR, hasteValue)
+            mob:setMod(xi.mod.HASTE_MAGIC, hasteValue)
+        end
+    end
+end
+
+entity.onMobWeaponSkill = function(mob, target, skill, action)
+    if skill:getID() == xi.mobSkill.SOUL_VOICE_1 then -- 696
+        mob:setLocalVar('spellList', 2)
+    end
+end
+
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
+        local battlefield = mob:getBattlefield()
+        if battlefield then
+            local deathCount = battlefield:getLocalVar('pigeonDeaths')
+            battlefield:setLocalVar('pigeonDeaths', deathCount + 1)
+        end
+    end
+end
+
+return entity

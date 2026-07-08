@@ -1,0 +1,38 @@
+-----------------------------------
+-- ID: 4550
+-- Item: plate_of_bream_risotto
+-- Food Effect: 180Min, All Races
+-----------------------------------
+-- Health 40
+-- Dexterity 6
+-- Agility 3
+-- Mind -4
+-- Health Regen While Healing 1
+-- Ranged Accuracy % 6
+-- Ranged Accuracy Cap 15
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 10800, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.FOOD_HP, 40)
+    effect:addMod(xi.mod.DEX, 6)
+    effect:addMod(xi.mod.AGI, 3)
+    effect:addMod(xi.mod.MND, -4)
+    effect:addMod(xi.mod.HPHEAL, 1)
+    effect:addMod(xi.mod.FOOD_RACCP, 6)
+    effect:addMod(xi.mod.FOOD_RACC_CAP, 15)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

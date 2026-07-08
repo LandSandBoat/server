@@ -1,0 +1,30 @@
+-----------------------------------
+-- ID: 6686
+-- Item: gyudon
+-- Food Effect: 30Min, All Races
+-----------------------------------
+-- Enmity -5
+-- Double Attack % 5
+-- Weapon Skill Damage % 5
+-----------------------------------
+---@type TItemFood
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
+end
+
+itemObject.onItemUse = function(target, user, item, action)
+    target:addStatusEffect(xi.effect.FOOD, { duration = 1800, origin = user, sourceType = xi.effectSourceType.FOOD, sourceTypeParam = item:getID() })
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.ENMITY, -5)
+    effect:addMod(xi.mod.DOUBLE_ATTACK, 5)
+    effect:addMod(xi.mod.ALL_WSDMG_ALL_HITS, 5)
+end
+
+itemObject.onEffectLose = function(target, effect)
+end
+
+return itemObject

@@ -1,0 +1,17 @@
+-----------------------------------
+-- ID: 6183
+-- Pluton Box
+-- Breaks up a Pluton Box
+-----------------------------------
+---@type TItem
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, item, caster)
+    return xi.itemUtils.itemBoxOnItemCheck(target)
+end
+
+itemObject.onItemUse = function(target)
+    npcUtil.giveItem(target, { { xi.item.PLUTON, math.randomInt(15, 30) } })
+end
+
+return itemObject

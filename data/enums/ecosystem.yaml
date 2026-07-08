@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.ecosystem
+
+values:
+  unclassified: 0
+  amorph: 1
+  aquan: 2
+  arcana: 3
+  archaic_machine: 4
+  beast: 5
+  beastmen: 6
+  bird: 7
+  demon: 8
+  dragon: 9
+  elemental: 10
+  empty: 11
+  humanoid: 12
+  lizard: 13
+  luminian: 14
+  luminion: 15
+  plantoid: 16
+  supreme_beings: 17
+  undead: 18
+  vermin: 19
+  voragean: 20
+  structures: 21
+  weapons: 22

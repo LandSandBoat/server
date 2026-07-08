@@ -1,0 +1,8 @@
+-----------------------------------
+-- Area: The Eldieme Necropolis [S] (175)
+--  Mob: Shadoweye Gnat
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+return entity
