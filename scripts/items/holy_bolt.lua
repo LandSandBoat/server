@@ -6,8 +6,8 @@
 ---@type TItem
 local itemObject = {}
 
-itemObject.onItemAdditionalEffect = function(attacker, defender, baseAttackDamage, item)
-    local dStat = attacker:getStat(xi.mod.MND) - defender:getStat(xi.mod.MND)
+itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, item)
+    local dStat = actor:getStat(xi.mod.MND) - target:getStat(xi.mod.MND)
     -- Unconfirmed power.
 
     local pTable =
@@ -20,7 +20,7 @@ itemObject.onItemAdditionalEffect = function(attacker, defender, baseAttackDamag
         canResist       = true,
     }
 
-    return xi.combat.action.executeAddEffectDamage(attacker, defender, pTable)
+    return xi.combat.action.executeAddEffectDamage(actor, target, pTable)
 end
 
 return itemObject

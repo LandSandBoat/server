@@ -6,8 +6,8 @@
 ---@type TItem
 local itemObject = {}
 
-itemObject.onItemAdditionalEffect = function(attacker, defender, baseAttackDamage, item)
-    local dStat = attacker:getStat(xi.mod.INT) - defender:getStat(xi.mod.INT)
+itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, item)
+    local dStat = actor:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     -- Minimum observed at more than -100 dStat is 57. Negative dStat does seem to drop you to 57, but scaling is currently unknown.
     -- 92 is the upper cap starting at 48 dStat
 
@@ -26,7 +26,7 @@ itemObject.onItemAdditionalEffect = function(attacker, defender, baseAttackDamag
         animation       = xi.subEffect.HP_DRAIN,
     }
 
-    return xi.combat.action.executeAddEffectDamage(attacker, defender, pTable)
+    return xi.combat.action.executeAddEffectDamage(actor, target, pTable)
 end
 
 return itemObject

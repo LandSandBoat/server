@@ -6,7 +6,7 @@
 ---@type TItem
 local itemObject = {}
 
-itemObject.onItemAdditionalEffect = function(attacker, defender, baseAttackDamage, item)
+itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, item)
     -- Unconfirmed power.
     local pTable =
     {
@@ -18,7 +18,7 @@ itemObject.onItemAdditionalEffect = function(attacker, defender, baseAttackDamag
         canResist       = true,
     }
 
-    return xi.combat.action.executeAddEffectDamage(attacker, defender, pTable)
+    return xi.combat.action.executeAddEffectDamage(actor, target, pTable)
 end
 
 return itemObject
