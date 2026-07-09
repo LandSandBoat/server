@@ -136,7 +136,7 @@ xi.combat.action.executeAddEffectDamage = function(actor, target, fedData)
     local damage = params.basePower + actor:getMod(params.actorStat) - params.aeTarget:getMod(params.targetStat)
 
     -- Calculate mandatory multipliers.
-    local multiplierAbsorption         = xi.spells.damage.calculateAbsorption(params.aeTarget, params.magicalElement, params.params.attackType == xi.attackType.MAGICAL)
+    local multiplierAbsorption         = xi.spells.damage.calculateAbsorption(params.aeTarget, params.magicalElement, params.attackType == xi.attackType.PHYSICAL, params.params.attackType == xi.attackType.MAGICAL, params.attackType == xi.attackType.RANGED, params.attackType == xi.attackType.BREATH)
     local multiplierDamageTypeSDT      = xi.combat.damage.calculateDamageAdjustment(params.aeTarget, params.attackType == xi.attackType.PHYSICAL, params.attackType == xi.attackType.MAGICAL, params.attackType == xi.attackType.RANGED, params.attackType == xi.attackType.BREATH)
     local multiplierPhysicalElementSDT = xi.combat.damage.physicalElementSDT(params.aeTarget, params.physicalElement)
     local multiplierMagicalElementSDT  = xi.combat.damage.magicalElementSDT(params.aeTarget, params.magicalElement)

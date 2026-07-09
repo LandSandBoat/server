@@ -523,7 +523,7 @@ local function getSwipeLungeDamageMultipliers(player, target, element, bonusMacc
     multipliers.dayAndWeather       = xi.spells.damage.calculateDayAndWeather(player, element, false)
     multipliers.magicBonusDiff      = xi.spells.damage.calculateMagicBonusDiff(player, target, 0, 0, element, 0)
     multipliers.TMDA                = xi.combat.damage.calculateDamageAdjustment(target, false, true, false, false)
-    multipliers.absorb              = xi.spells.damage.calculateAbsorption(target, element, true)
+    multipliers.absorb              = xi.spells.damage.calculateAbsorption(target, element, false, true, false, false)
     multipliers.nullify             = xi.spells.damage.calculateNullification(target, element, true, false)
     multipliers.magicBurst          = 1
     multipliers.magicBurstBonus     = 1

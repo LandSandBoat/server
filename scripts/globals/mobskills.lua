@@ -1119,9 +1119,9 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, action, skillParams)
     end
 
     if attackType == xi.attackType.BREATH then
-        absorbDamage  = xi.spells.damage.calculateAbsorption(target, actionElement, false)
+        absorbDamage  = xi.spells.damage.calculateAbsorption(target, actionElement, false, false, false, true)
     else
-        absorbDamage  = xi.spells.damage.calculateAbsorption(target, actionElement, true)
+        absorbDamage  = xi.spells.damage.calculateAbsorption(target, actionElement, false, true, false, false)
     end
 
     ----------------------------------
@@ -1335,7 +1335,7 @@ xi.mobskills.mobBreathMove = function(mob, target, skill, action, skillParams)
         return returnInfo
     end
 
-    absorbDamage = xi.spells.damage.calculateAbsorption(target, actionElement, false)
+    absorbDamage = xi.spells.damage.calculateAbsorption(target, actionElement, false, false, false, true)
 
     -- Calulate TP and TP_BONUS if applicable.
     -- TODO: Do mobs benefit from Fencer job trait's TP_BONUS?
@@ -1758,7 +1758,7 @@ xi.mobskills.handleHybridDamage = function(mob, target, physicalDamage, element)
 
     -- Multipliers.
     local nullifyDamage         = xi.spells.damage.calculateNullification(target, element, true, false)
-    local absorbDamage          = xi.spells.damage.calculateAbsorption(target, element, true)
+    local absorbDamage          = xi.spells.damage.calculateAbsorption(target, element, false, true, false, false)
     local sdt                   = 1
     local resist                = 1
     local magicDamageAdjustment = 1

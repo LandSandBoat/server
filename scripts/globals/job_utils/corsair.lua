@@ -627,7 +627,7 @@ xi.job_utils.corsair.handleQuickDrawDamage = function(player, target, action, el
     -- Unconfirmed order.
     local sdtMultiplier          = xi.combat.damage.magicalElementSDT(target, element)
     local additionalResistTier   = xi.spells.damage.calculateAdditionalResistTier(player, target, element)
-    local elementalAbsorption    = xi.spells.damage.calculateAbsorption(target, element, false)
+    local elementalAbsorption    = xi.spells.damage.calculateAbsorption(target, element, false, false, true, false)
     local elementalNullification = xi.spells.damage.calculateNullification(target, element, false, false)
 
     -- Apply multipliers and bonuses.

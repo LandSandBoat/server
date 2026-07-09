@@ -553,7 +553,7 @@ local addEffectImmediate = function(mob, target, damage, ae, params)
 
     power = addBonusesAbility(mob, ae.ele, target, power, ae.bonusAbilityParams)
     power = power * applyResistanceAddEffect(mob, target, ae.ele, 0)
-    power = power * xi.spells.damage.calculateAbsorption(target, ae.ele, true)
+    power = power * xi.spells.damage.calculateAbsorption(target, ae.ele, false, true, false, false)
     power = power * xi.spells.damage.calculateNullification(target, ae.ele, true, false)
 
     if ae.sub ~= xi.subEffect.TP_DRAIN and ae.sub ~= xi.subEffect.MP_DRAIN then

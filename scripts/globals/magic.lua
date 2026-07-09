@@ -84,7 +84,7 @@ function finalMagicNonSpellAdjustments(caster, target, ele, dmg)
     -- Handles target's HP adjustment and returns SIGNED dmg (negative values on absorb)
 
     dmg = math.floor(dmg * xi.combat.damage.calculateDamageAdjustment(target, false, true, false, false))
-    dmg = math.floor(dmg * xi.spells.damage.calculateAbsorption(target, ele, true))
+    dmg = math.floor(dmg * xi.spells.damage.calculateAbsorption(target, ele, false, true, false, false))
     dmg = math.floor(dmg * xi.spells.damage.calculateNullification(target, ele, true, false))
     dmg = math.floor(target:handleSevereDamage(dmg, false))
 

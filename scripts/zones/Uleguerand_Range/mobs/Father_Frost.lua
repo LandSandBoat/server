@@ -21,7 +21,7 @@ entity.onSpikesDamage = function(mob, target, damage)
     local dmg = damage + mob:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     dmg       = addBonusesAbility(mob, xi.element.ICE, target, dmg, params)
     dmg       = dmg * applyResistanceAddEffect(mob, target, xi.element.ICE, 0)
-    dmg       = math.floor(dmg * xi.spells.damage.calculateAbsorption(target, xi.element.ICE, true))
+    dmg       = math.floor(dmg * xi.spells.damage.calculateAbsorption(target, xi.element.ICE, false, true, false, false))
     dmg       = math.floor(dmg * xi.spells.damage.calculateNullification(target, xi.element.ICE, true, false))
     dmg       = finalMagicNonSpellAdjustments(mob, target, xi.element.ICE, dmg)
 
