@@ -7,6 +7,28 @@ local entity = {}
 
 local ID = zones[xi.zone.KING_RANPERRES_TOMB]
 
+local charmThresholds =
+{
+    [ 1] = 90,
+    [ 2] = 85,
+    [ 3] = 80,
+    [ 4] = 75,
+    [ 5] = 70,
+    [ 6] = 65,
+    [ 7] = 60,
+    [ 8] = 55,
+    [ 9] = 50,
+    [10] = 45,
+    [11] = 40,
+    [12] = 35,
+    [13] = 30,
+    [14] = 25,
+    [15] = 20,
+    [16] = 15,
+    [17] = 10,
+    [18] =  5,
+}
+
 local pets =
 {
     ID.mob.VRTRA + 1,
@@ -20,6 +42,7 @@ local pets =
 local callPetParams =
 {
     inactiveTime = 3000,
+    ignoreInactive = true,
     maxSpawns = 1,
 }
 
@@ -118,44 +141,22 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobEngage = function(mob, target)
-    -- Reset the onMobFight variables
-    mob:setLocalVar('spawnTime', 0)
-    mob:setLocalVar('twohourTime', 0)
+    local currentTime = GetSystemTime()
+    local hpPercent   = mob:getHPP()
+    local charmsLeft  = 0
+
+    -- Amount of charms remaining set on engage, to reset properly on wipe.
+    for _, threshold in ipairs(charmThresholds) do
+        if hpPercent >= threshold then
+            charmsLeft = charmsLeft + 1
+        end
+    end
+
+    mob:setLocalVar('charmsLeft', charmsLeft)
+    mob:setLocalVar('petTime', currentTime + math.randomInt(3, 5) * 15)
 end
 
 entity.onMobFight = function(mob, target)
-    local spawnTime = mob:getLocalVar('spawnTime')
-    local twohourTime = mob:getLocalVar('twohourTime')
-    local fifteenBlock = mob:getBattleTime() / 15
-
-    if twohourTime == 0 then
-        twohourTime = math.randomInt(4, 6)
-        mob:setLocalVar('twohourTime', twohourTime)
-    end
-
-    if spawnTime == 0 then
-        spawnTime = math.randomInt(3, 5)
-        mob:setLocalVar('spawnTime', spawnTime)
-    end
-
-    if
-        fifteenBlock > twohourTime and
-        mob:canUseAbilities()
-    then
-        mob:useMobAbility(710)
-        mob:setLocalVar('skill_tp', mob:getTP()) -- 2 hr shouldn't wipe TP
-        mob:setLocalVar('twohourTime', fifteenBlock + math.randomInt(4, 6))
-
-        -- call the first pet that is not spawned, will wait for actions to finish
-    elseif
-        fifteenBlock > spawnTime and
-        xi.mob.callPets(mob, utils.shuffle(pets), callPetParams)
-    then
-        spawnTime = math.randomInt(3, 5)
-        mob:setLocalVar('spawnTime', fifteenBlock + spawnTime)
-    end
-
-    -- Vrtra draws in if you attempt to leave the room
     local drawInTable =
     {
         conditions =
@@ -165,19 +166,33 @@ entity.onMobFight = function(mob, target)
         position = mob:getPos(),
         wait = 3,
     }
+
     if drawInTable.conditions[1] then
         mob:setMobMod(xi.mobMod.NO_MOVE, 1)
         utils.drawIn(target, drawInTable)
     else
         mob:setMobMod(xi.mobMod.NO_MOVE, 0)
     end
-end
 
-entity.onMobWeaponSkill = function(mob, target, skill, action)
-    -- Don't lose TP from charm 2hr
-    if skill:getID() == 710 then
-        mob:addTP(mob:getLocalVar('skill_tp'))
-        mob:setLocalVar('skill_tp', 0)
+    local currentTime = GetSystemTime()
+
+    if
+        currentTime > mob:getLocalVar('petTime') and
+        xi.mob.callPets(mob, utils.shuffle(pets), callPetParams)
+    then
+        mob:setLocalVar('petTime', currentTime + math.randomInt(3, 5) * 15)
+    end
+
+    local charmsLeft  = mob:getLocalVar('charmsLeft')
+    local charmIndex  = #charmThresholds - charmsLeft + 1
+
+    if
+        charmsLeft > 0 and
+        mob:getHPP() <= charmThresholds[charmIndex] and
+        not xi.combat.behavior.isEntityBusy(mob)
+    then
+        mob:useMobAbility(xi.mobSkill.CHARM)
+        mob:setLocalVar('charmsLeft', charmsLeft - 1)
     end
 end
 
