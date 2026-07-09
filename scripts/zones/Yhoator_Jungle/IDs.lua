@@ -63,7 +63,7 @@ zones[xi.zone.YHOATOR_JUNGLE] =
     {
         OVERSEER_BASE     = GetFirstID('Ilieumort_RK'),
         PEDDLESTOX        = 17285687,
-        BEASTMEN_TREASURE_OFFSET = GetFirstID('qm5'), -- qm4 has an ID after qm11 so start the offset at qm5
+        BEASTMEN_TREASURE_OFFSET = GetFirstID('qm4'),
 
         HARVESTING = GetTableOfIDs('Harvesting_Point'),
         LOGGING    = GetTableOfIDs('Logging_Point'),

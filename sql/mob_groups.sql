@@ -12845,6 +12845,10 @@ INSERT INTO `mob_groups` VALUES (18,6946,179,'Lion_TL',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (19,6946,179,'Lion_AFF',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (20,6947,179,'Zeid',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (21,6948,179,'Aldo',0,128,0,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (22,200,179,'Seed_Goblin',0,128,0,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (23,201,179,'Seed_Orc',0,128,0,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (24,202,179,'Seed_Quadav',0,128,0,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (25,203,179,'Seed_Yagudo',0,128,0,0,0,0,NULL);
 
 -- ------------------------------------------------------------
 -- LaLoff_Amphitheater (Zone 180)
