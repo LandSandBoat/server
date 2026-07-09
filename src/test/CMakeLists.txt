@@ -43,6 +43,14 @@ set(SOURCES
     test_suite.cpp
 )
 
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Apple")
+    set_source_files_properties(
+        tests/rng_spread_tests.cpp
+        PROPERTIES
+            COMPILE_OPTIONS "-fconstexpr-steps=2097152"
+    )
+endif()
+
 if(UNIX)
     set(resource "")
 else()
