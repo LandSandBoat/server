@@ -8,6 +8,12 @@ require('scripts/globals/packet')
 xi = xi or {}
 xi.chocoboRacing = xi.chocoboRacing or {}
 
+local settings                         =
+{
+    RACE_PERIOD    = 900,        -- A race every 15 minutes.
+    VANADIEL_EPOCH = 1009810800, -- Jan 1 2002
+}
+
 -- FOR HEAVILY-IN-DEVELOPMET TESTING, you can force these setting:
 -- TODO: When ready for release, publish these to main settings files.
 xi.settings.main.ENABLE_CHOCOBO_RACING = false
@@ -259,4 +265,249 @@ xi.chocoboRacing.onEventFinish = function(player, csid, option, npc)
     if csid == 210 and option == 17 then
         debug(player, 'Hand out winnings')
     end
+end
+
+-- This is an example set of 8 Chocobos competing in the upcoming race
+-- Replace with actual chocobos when implementing.
+local fakeChocoboRacers                =
+{
+    {
+        name        = 'Joyeuse',
+        orders      = xi.chocoboRacing.order.KEEP_PACE,
+        item        = xi.chocoboRacing.sectionEvent.SPEED_APPLE,
+        weather     = xi.chocoboRaising.weather.RAINY,
+        color       = xi.chocoboRaising.color.BLACK,
+        gender      = xi.chocoboRaising.gender.FEMALE,
+        size        = xi.chocoboRacing.jockeySize.HUME_M,
+        ability1    = xi.chocoboRaising.ability.BURROW,
+        ability2    = xi.chocoboRaising.ability.NONE,
+        temperament = xi.chocoboRaising.temperament.VERY_PATIENT,
+        stats       =
+        {
+            str     = xi.chocoboRaising.statRank.BETTER_THAN_AVG,
+            ['end'] = xi.chocoboRaising.statRank.OUTSTANDING,
+            dsc     = xi.chocoboRaising.statRank.IMPRESSIVE,
+            rcp     = xi.chocoboRaising.statRank.IMPRESSIVE,
+        },
+    },
+    {
+        name        = 'Schuss',
+        orders      = xi.chocoboRacing.order.KEEP_PACE,
+        item        = xi.chocoboRacing.sectionEvent.FIRE_BISCUIT,
+        weather     = xi.chocoboRaising.weather.CLEAR,
+        color       = xi.chocoboRaising.color.RED,
+        gender      = xi.chocoboRaising.gender.MALE,
+        size        = xi.chocoboRacing.jockeySize.HUME_M,
+        ability1    = xi.chocoboRaising.ability.NONE,
+        ability2    = xi.chocoboRaising.ability.NONE,
+        temperament = xi.chocoboRaising.temperament.ILL_TEMPERED,
+        stats       =
+        {
+            str     = xi.chocoboRaising.statRank.BETTER_THAN_AVG,
+            ['end'] = xi.chocoboRaising.statRank.AVERAGE,
+            dsc     = xi.chocoboRaising.statRank.FIRST_CLASS,
+            rcp     = xi.chocoboRaising.statRank.OUTSTANDING,
+        },
+    },
+    {
+        name        = 'Humble',
+        orders      = xi.chocoboRacing.order.FINAL_SPURT,
+        item        = xi.chocoboRacing.sectionEvent.SPEED_APPLE,
+        weather     = xi.chocoboRaising.weather.CLEAR,
+        color       = xi.chocoboRaising.color.BLACK,
+        gender      = xi.chocoboRaising.gender.MALE,
+        size        = xi.chocoboRacing.jockeySize.HUME_F,
+        ability1    = xi.chocoboRaising.ability.BURROW,
+        ability2    = xi.chocoboRaising.ability.GALLOP,
+        temperament = xi.chocoboRaising.temperament.QUITE_SENSITIVE,
+        stats       =
+        {
+            str     = xi.chocoboRaising.statRank.FIRST_CLASS,
+            ['end'] = xi.chocoboRaising.statRank.FIRST_CLASS,
+            dsc     = xi.chocoboRaising.statRank.BETTER_THAN_AVG,
+            rcp     = xi.chocoboRaising.statRank.POOR,
+        },
+    },
+    {
+        name        = 'Melody',
+        orders      = xi.chocoboRacing.order.FINAL_SPURT,
+        item        = xi.chocoboRacing.sectionEvent.GYSAHL_BOMB,
+        weather     = xi.chocoboRaising.weather.CLEAR,
+        color       = xi.chocoboRaising.color.GREEN,
+        gender      = xi.chocoboRaising.gender.MALE,
+        size        = xi.chocoboRacing.jockeySize.HUME_M,
+        ability1    = xi.chocoboRaising.ability.NONE,
+        ability2    = xi.chocoboRaising.ability.NONE,
+        temperament = xi.chocoboRaising.temperament.VERY_PATIENT,
+        stats       =
+        {
+            str     = xi.chocoboRaising.statRank.FIRST_CLASS,
+            ['end'] = xi.chocoboRaising.statRank.FIRST_CLASS,
+            dsc     = xi.chocoboRaising.statRank.A_BIT_DEFICIENT,
+            rcp     = xi.chocoboRaising.statRank.A_BIT_DEFICIENT,
+        },
+    },
+    {
+        name        = 'Gagnante',
+        orders      = xi.chocoboRacing.order.KEEP_PACE,
+        item        = xi.chocoboRacing.sectionEvent.PEPPER_BISCUIT,
+        weather     = xi.chocoboRaising.weather.RAINY,
+        color       = xi.chocoboRaising.color.RED,
+        gender      = xi.chocoboRaising.gender.MALE,
+        size        = xi.chocoboRacing.jockeySize.HUME_F,
+        ability1    = xi.chocoboRaising.ability.BURROW,
+        ability2    = xi.chocoboRaising.ability.CANTER,
+        temperament = xi.chocoboRaising.temperament.ENIGMATIC,
+        stats       =
+        {
+            str     = xi.chocoboRaising.statRank.FIRST_CLASS,
+            ['end'] = xi.chocoboRaising.statRank.OUTSTANDING,
+            dsc     = xi.chocoboRaising.statRank.AVERAGE,
+            rcp     = xi.chocoboRaising.statRank.BETTER_THAN_AVG,
+        },
+    },
+    {
+        name        = 'Jolie',
+        orders      = xi.chocoboRacing.order.KEEP_PACE,
+        item        = xi.chocoboRacing.sectionEvent.FIRE_BISCUIT,
+        weather     = xi.chocoboRaising.weather.SANDSTORMS,
+        color       = xi.chocoboRaising.color.YELLOW,
+        gender      = xi.chocoboRaising.gender.FEMALE,
+        size        = xi.chocoboRacing.jockeySize.HUME_F,
+        ability1    = xi.chocoboRaising.ability.BORE,
+        ability2    = xi.chocoboRaising.ability.NONE,
+        temperament = xi.chocoboRaising.temperament.ENIGMATIC,
+        stats       =
+        {
+            str     = xi.chocoboRaising.statRank.BETTER_THAN_AVG,
+            ['end'] = xi.chocoboRaising.statRank.AVERAGE,
+            dsc     = xi.chocoboRaising.statRank.FIRST_CLASS,
+            rcp     = xi.chocoboRaising.statRank.OUTSTANDING,
+        },
+    },
+    {
+        name        = 'Invincible',
+        orders      = xi.chocoboRacing.order.SPRINT,
+        item        = xi.chocoboRacing.sectionEvent.SHADOW_APPLE,
+        weather     = xi.chocoboRaising.weather.CLEAR,
+        color       = xi.chocoboRaising.color.YELLOW,
+        gender      = xi.chocoboRaising.gender.FEMALE,
+        size        = xi.chocoboRacing.jockeySize.HUME_M,
+        ability1    = xi.chocoboRaising.ability.NONE,
+        ability2    = xi.chocoboRaising.ability.NONE,
+        temperament = xi.chocoboRaising.temperament.ILL_TEMPERED,
+        stats       =
+        {
+            str     = xi.chocoboRaising.statRank.FIRST_CLASS,
+            ['end'] = xi.chocoboRaising.statRank.FIRST_CLASS,
+            dsc     = xi.chocoboRaising.statRank.POOR,
+            rcp     = xi.chocoboRaising.statRank.POOR,
+        },
+    },
+    {
+        name        = 'Bec',
+        orders      = xi.chocoboRacing.order.KEEP_PACE,
+        item        = xi.chocoboRacing.sectionEvent.FIRE_BISCUIT,
+        weather     = xi.chocoboRaising.weather.CLEAR,
+        color       = xi.chocoboRaising.color.YELLOW,
+        gender      = xi.chocoboRaising.gender.FEMALE,
+        size        = xi.chocoboRacing.jockeySize.HUME_F,
+        ability1    = xi.chocoboRaising.ability.NONE,
+        ability2    = xi.chocoboRaising.ability.NONE,
+        temperament = xi.chocoboRaising.temperament.QUITE_SENSITIVE,
+        stats       =
+        {
+            str     = xi.chocoboRaising.statRank.BETTER_THAN_AVG,
+            ['end'] = xi.chocoboRaising.statRank.AVERAGE,
+            dsc     = xi.chocoboRaising.statRank.FIRST_CLASS,
+            rcp     = xi.chocoboRaising.statRank.OUTSTANDING,
+        },
+    },
+}
+
+-- Return auto-generated race number, advancing every 15 minutes
+xi.chocoboRacing.currentRaceNo         = function()
+    return math.floor(GetSystemTime() / settings.RACE_PERIOD)
+end
+
+-- Sends the "Betting ends in..." countdown via a PENDINGNUM
+xi.chocoboRacing.sendBettingCountdown   = function(player, listIndex)
+    local now      = GetSystemTime()
+    local closesIn = settings.RACE_PERIOD - (now % settings.RACE_PERIOD)
+    player:updateEvent(
+        closesIn,                      -- When the betting period ends
+        now - settings.VANADIEL_EPOCH, -- Current server time. Used by client to know when to refresh.
+        0, 0, 0,
+        closesIn,                      -- When the betting period ends
+        1,                             -- Unknown
+        listIndex or 0                 -- Presently unused but may be used to index into a different race
+    )
+end
+
+xi.chocoboRacing.onToteboardTrigger     = function(player, eventId)
+    player:startEvent(
+        eventId,                                   -- NPC Event ID
+        1,                                         -- Race weather
+        -1, -1, -1,                                -- PC position, retail sends -1
+        player:getRotPos() * 16,                   -- PC rotation, retail sends rot * 16
+        0,                                         -- Copied but never used by event scripts
+        GetSystemTime() - settings.VANADIEL_EPOCH, -- Server timestamp, appears to be unused by event
+        2                                          -- 2 opens the board, -1 shows "Preparations for the next race are underway"
+    )
+end
+
+xi.chocoboRacing.onToteboardEventUpdate = function(player, option)
+    -- Client is browsing to the Toteboard or the client is requesting an automatic update
+    if option == 3 or option == 4 then
+        xi.chocoboRacing.sendBettingCountdown(player, 0)
+        return
+    end
+
+    -- Client is requesting to view a specific chocobo from the Paddock
+    if option % 8 == 0 and option <= 56 then
+        local slot  = math.floor(option / 8)
+        local choco = fakeChocoboRacers[slot + 1]
+        if choco then
+            -- Pack the chocobo stats for event purposes:
+            -- statBytes = STR|END|DSC|RCP, dna = the ability/weather/gender/colour/size/temperament bitfield.
+            local stats     = choco.stats
+            local statBytes = bit.bor(bit.lshift(stats.str, 5), bit.lshift(stats['end'], 13), bit.lshift(stats.dsc, 21), bit.lshift(stats.rcp, 29))
+            local dna       = bit.bor(bit.lshift(choco.ability1, 9), bit.lshift(choco.ability2, 13), bit.lshift(choco.temperament, 17), bit.lshift(choco.weather, 20), bit.lshift(choco.gender, 24),
+                bit.lshift(choco.color, 25), bit.lshift(choco.size, 28))
+
+            -- First, send a PENDINGSTR with the name of the Chocobo (all 4 slots)
+            player:updateEventString(choco.name, choco.name, choco.name, choco.name)
+            -- Second, update the event VM with the Chocobo stats
+            player:updateEvent(6, 0, choco.orders, choco.item, statBytes, dna, 1, slot * 2)
+        end
+    end
+end
+
+-- Flow race information back to core for specific menu requests. (Toteboard)
+xi.chocoboRacing.onRaceRequest          = function(player, param, kind)
+    if kind == 1 then -- Toteboard: betting odds
+        -- Quinella odds: exactly 28 entries must be passed, one per chocobo pair (8-choose-2 = 28),
+        -- in this fixed order (a pair = the two chocobos finishing 1st/2nd, in either order):
+        --   [1]=(1,2)  [2]=(1,3)  [3]=(1,4)  [4]=(1,5)  [5]=(1,6)  [6]=(1,7)  [7]=(1,8)
+        --   [8]=(2,3)  [9]=(2,4)  [10]=(2,5) [11]=(2,6) [12]=(2,7) [13]=(2,8)
+        --   [14]=(3,4) [15]=(3,5) [16]=(3,6) [17]=(3,7) [18]=(3,8)
+        --   [19]=(4,5) [20]=(4,6) [21]=(4,7) [22]=(4,8)
+        --   [23]=(5,6) [24]=(5,7) [25]=(5,8)
+        --   [26]=(6,7) [27]=(6,8)
+        --   [28]=(7,8)
+        -- Each value is that pair's payout; 50000 means "no bet".
+        return
+        {
+            grade      = xi.chocoboRacing.raceGrade.C4,
+            raceNumber = xi.chocoboRacing.currentRaceNo(),
+            odds       = { 10050, 773, 837, 913, 50000, 50000, 773, 2512, 3350, 2512, 50000, 50000, 50000, 558, 670, 50000, 50000, 1256, 628, 50000, 50000, 773, 50000, 50000, 3350, 50000, 50000, 50000 },
+        }
+    end
+
+    -- ChocoboList: race weather and entrant field
+    return
+    {
+        weather  = xi.weather.SUNSHINE,
+        chocobos = fakeChocoboRacers,
+    }
 end

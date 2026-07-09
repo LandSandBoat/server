@@ -21,10 +21,38 @@
 
 #include "0x069_chocobo_racing.h"
 
+#include "common/lua.h"
+
 #include <algorithm>
 
 namespace GP_SERV_COMMAND_CHOCOBO_RACING
 {
+
+auto ChocoboParam::fromLua(const sol::table& data) -> ChocoboParam
+{
+    ChocoboParam param{};
+
+    param.Item        = data.get_or<uint8_t>("item", 0);        // xi.chocoboRacing.sectionEvent
+    param.Orders      = data.get_or<uint8_t>("orders", 0);      // xi.chocoboRacing.order
+    param.Size        = data.get_or<uint8_t>("size", 0);        // xi.chocoboRacing.jockeySize
+    param.Color       = data.get_or<uint8_t>("color", 0);       // xi.chocoboRaising.color
+    param.Gender      = data.get_or<uint8_t>("gender", 0);      // xi.chocoboRaising.gender
+    param.Weather     = data.get_or<uint8_t>("weather", 0);     // xi.chocoboRaising.weather
+    param.Temperament = data.get_or<uint8_t>("temperament", 0); // xi.chocoboRaising.temperament
+    param.Ability1    = data.get_or<uint8_t>("ability1", 0);    // xi.chocoboRaising.ability
+    param.Ability2    = data.get_or<uint8_t>("ability2", 0);    // xi.chocoboRaising.ability
+
+    // stats str/end/dsc/rcp: xi.chocoboRaising.statRank
+    if (const auto stats = data.get<sol::optional<sol::table>>("stats"))
+    {
+        param.STR.Rank = stats->get_or<uint8_t>("str", 0);
+        param.END.Rank = stats->get_or<uint8_t>("end", 0);
+        param.DSC.Rank = stats->get_or<uint8_t>("dsc", 0);
+        param.RCP.Rank = stats->get_or<uint8_t>("rcp", 0);
+    }
+
+    return param;
+}
 
 // Various fields pack 2 chocobos per uint8.
 void packNibbles(uint8_t out[4], const std::array<uint8_t, kNumRacers>& nibbles)

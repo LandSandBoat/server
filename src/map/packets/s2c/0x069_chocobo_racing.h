@@ -23,6 +23,7 @@
 
 #include "base.h"
 #include "items/exdata/chocobo_card.h"
+#include "sol/forward.hpp"
 
 #include <array>
 #include <vector>
@@ -61,6 +62,8 @@ struct ChocoboParam
     uint32_t                   Color : 3;       // xi.chocoboRaising.color
     uint32_t                   Size : 3;        // xi.chocoboRacing.jockeySize
     uint32_t                   unknown00 : 1;
+
+    static ChocoboParam fromLua(const sol::table& data);
 };
 
 // Each racing section/keyframe can contain optional trigger/events
