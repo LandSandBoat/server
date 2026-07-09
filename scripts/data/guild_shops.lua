@@ -1143,10 +1143,10 @@ xi.data.guildShops =
         stock   =
         {
             { id = xi.item.DHALMEL_HIDE,                  initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 5000,   restockRate = 0 }, -- targetStock assumed
-            { id = xi.item.WOLF_HIDE,                     initial = 90,  maxStock = 120, targetStock = 90,  buyMax = 3225,   restockRate = 6 },
-            { id = xi.item.RAM_SKIN,                      initial = 90,  maxStock = 120, targetStock = 90,  buyMax = 6250,   restockRate = 6 },
-            { id = xi.item.TIGER_HIDE,                    initial = 57,  maxStock = 120, targetStock = 57,  buyMax = 8750,   restockRate = 6 },
-            { id = xi.item.COEURL_HIDE,                   initial = 66,  maxStock = 120, targetStock = 66,  buyMax = 18000,  restockRate = 6 },
+            { id = xi.item.WOLF_HIDE,                     initial = 12,  maxStock = 120, targetStock = 90,  buyMax = 3225,   restockRate = 6 },
+            { id = xi.item.RAM_SKIN,                      initial = 12,  maxStock = 120, targetStock = 90,  buyMax = 6250,   restockRate = 6 },
+            { id = xi.item.TIGER_HIDE,                    initial = 12,  maxStock = 120, targetStock = 57,  buyMax = 8750,   restockRate = 6 },
+            { id = xi.item.COEURL_HIDE,                   initial = 12,  maxStock = 120, targetStock = 66,  buyMax = 18000,  restockRate = 6 },
             { id = xi.item.MANTICORE_HIDE,                initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 45600,  restockRate = 0 }, -- targetStock assumed
             { id = xi.item.SQUARE_OF_SHEEP_LEATHER,       initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 1000,   restockRate = 0 }, -- targetStock assumed
             { id = xi.item.SQUARE_OF_DHALMEL_LEATHER,     initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 11650,  restockRate = 0 }, -- targetStock assumed
@@ -1155,8 +1155,8 @@ xi.data.guildShops =
             { id = xi.item.SQUARE_OF_COEURL_LEATHER,      initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 38610,  restockRate = 0 }, -- targetStock assumed
             { id = xi.item.SQUARE_OF_MANTICORE_LEATHER,   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 55900,  restockRate = 0 }, -- targetStock assumed
             { id = xi.item.LIZARD_SKIN,                   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 1625,   restockRate = 0 }, -- targetStock assumed
-            { id = xi.item.RAPTOR_SKIN,                   initial = 45,  maxStock = 60,  targetStock = 45,  buyMax = 14370,  restockRate = 2 },
-            { id = xi.item.COCKATRICE_SKIN,               initial = 45,  maxStock = 60,  targetStock = 45,  buyMax = 17670,  restockRate = 2 },
+            { id = xi.item.RAPTOR_SKIN,                   initial = 34,  maxStock = 60,  targetStock = 45,  buyMax = 14370,  restockRate = 2 },
+            { id = xi.item.COCKATRICE_SKIN,               initial = 34,  maxStock = 60,  targetStock = 45,  buyMax = 17670,  restockRate = 2 },
             { id = xi.item.CLUMP_OF_SHEEP_WOOL,           initial = 0,   maxStock = 240, targetStock = 180, buyMax = 4500,   restockRate = 0 }, -- targetStock assumed
             { id = xi.item.WILLOW_LOG,                    initial = 180, maxStock = 240, targetStock = 180, buyMax = 800,    restockRate = 60 },
             { id = xi.item.FLASK_OF_DISTILLED_WATER,      initial = 180, maxStock = 240, targetStock = 180, buyMax = 60,     restockRate = 60 },
