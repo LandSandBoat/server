@@ -16178,7 +16178,7 @@ INSERT INTO `item_basic` VALUES (18485,0,'imperial_bhuj','imperial_bhuj','イン
 INSERT INTO `item_basic` VALUES (18486,0,'wardancer','wardancer','ウォーダンサー',@WEAPON_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANEQUIP,@GREATAXE,9517);
 INSERT INTO `item_basic` VALUES (18487,0,'eriks_axe','eriks_axe','エイリークアクス',@WEAPON_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (18488,0,'assailants_axe','assailants_axe','アサイラントアクス',@WEAPON_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANTRADENPC | @FLAG_CANEQUIP,@GREATAXE,225);
-INSERT INTO `item_basic` VALUES (18489,0,'dark_amood','dark_amood','ダークアムード',@WEAPON_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@GREATAXE,9157);
+INSERT INTO `item_basic` VALUES (18489,0,'dark_amood','dark_amood','ダークアムード',@WEAPON_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@GREATAXE,9157);
 INSERT INTO `item_basic` VALUES (18490,0,'dark_amood_+1','dark_amood_+1','ダークアムード+1',@WEAPON_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@GREATAXE,11446);
 INSERT INTO `item_basic` VALUES (18491,0,'perdu_voulge','perdu_voulge','ペルデュヴォウジェ',@WEAPON_TYPE,1,@FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (18492,0,'sturdy_axe','sturdy_axe','魔神の斧',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
@@ -18622,6 +18622,7 @@ INSERT INTO `item_basic` VALUES (21539,0,'dathaba_claws','dathaba_claws','ダサ
 INSERT INTO `item_basic` VALUES (21540,0,'dragon_fangs','dragon_fangs','ドラゴンファング',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (21541,0,'premium_hearts','premium_hearts','プレミアムハート',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (21542,0,'ja_ja_mace','ja_ja_mace','ジャジャメイス',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
+INSERT INTO `item_basic` VALUES (21543,0,'ryofu_uchiwa','ryofu_uchiwa','涼風団扇',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (21544,0,'skia_knuckles','skia_knuckles','五闇の鉄拳',@WEAPON_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@NONE,0);  -- TODO: Verify AH category, Verify NPC sale price
 INSERT INTO `item_basic` VALUES (21545,0,'arctus_knuckles','arctus_knuckles','冥闇の鉄拳',@WEAPON_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@NONE,0);                  -- TODO: Verify AH category, Verify NPC sale price
 INSERT INTO `item_basic` VALUES (21546,0,'telognophos_knuckles','telognophos_knu.','極闇の鉄拳',@WEAPON_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@NONE,0);            -- TODO: Verify AH category, Verify NPC sale price
@@ -18674,6 +18675,7 @@ INSERT INTO `item_basic` VALUES (21596,0,'telognophos_knife','telognophos_knife'
 INSERT INTO `item_basic` VALUES (21597,0,'auge_knife','auge_knife','アウゲーナイフ',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (21598,0,'daduchos_knife','daduchos_knife','ダデュコナイフ',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (21599,0,'telopanos_knife','telopanos_knife','テロパノナイフ',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
+INSERT INTO `item_basic` VALUES (21600,0,'prophetic_knife','prophetic_knife','プロフェテクナイフ',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (21602,0,'onion_sword_iii','onion_sword_iii','真オニオンソード',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (21603,0,'save_the_queen_iii','save_the_queen_iii','真セイブザクイーン',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (21604,0,'arasy_sword','arasy_sword','アラシソード',@WEAPON_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@SWORD,0);
@@ -18804,6 +18806,7 @@ INSERT INTO `item_basic` VALUES (21735,0,'telognophos_axe','telognophos_axe','�
 INSERT INTO `item_basic` VALUES (21736,0,'auge_axe','auge_axe','アウゲーアクス',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (21737,0,'daduchos_axe','daduchos_axe','ダデュコアクス',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (21738,0,'telopanos_axe','telopanos_axe','テロパノアクス',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
+INSERT INTO `item_basic` VALUES (21739,0,'prophetic_axe','prophetic_axe','プロフェテクアクス',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (21741,0,'demonic_axe','demonic_axe','魔人の斧',@WEAPON_TYPE,1,@FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (21742,0,'aern_axe','aern_axe','アーンアクス',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (21743,0,'aern_axe_ii','aern_axe_ii','アーンアクスII',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
@@ -19213,6 +19216,8 @@ INSERT INTO `item_basic` VALUES (22185,0,'telognophos_saber','telognophos_saber'
 INSERT INTO `item_basic` VALUES (22186,0,'auge_saber','auge_saber','アウゲーセイバー',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (22187,0,'daduchos_saber','daduchos_saber','ダデュコセイバー',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (22188,0,'telopanos_saber','telopanos_saber','テロパノセイバー',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
+INSERT INTO `item_basic` VALUES (22189,0,'prophetic_sword','prophetic_sword','プロフェテクソード',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
+INSERT INTO `item_basic` VALUES (22190,0,'prophetic_club','prophetic_club','プロフェテククラブ',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (22194,0,'dathaba_staff','dathaba_staff','ダサバスタッフ',@WEAPON_TYPE,1,@FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (22195,0,'flanged_grip','flanged_grip','フランジドグリップ',@WEAPON_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (22196,0,'alber_strap','alber_strap','アルバーストラップ',@WEAPON_TYPE,1,@FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
@@ -19316,6 +19321,7 @@ INSERT INTO `item_basic` VALUES (22307,0,'loughnashade','loughnashade','ラッ�
 INSERT INTO `item_basic` VALUES (22308,0,'bayeux_bullet','bayeux_bullet','ベヨーブレット',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (22309,0,'bayeux_arrow','bayeux_arrow','ベヨーアロー',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (22310,0,'hoxne_ampulla','hoxne_ampulla','ホクスニアムプラ',@WEAPON_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANTRADENPC | @FLAG_CANEQUIP | @FLAG_RARE,@NONE,0);  -- TODO: Verify AH category, Verify NPC sale price
+INSERT INTO `item_basic` VALUES (22311,0,'prophetica','prophetica','プロフェテカ',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (23040,0,'pummelers_mask_+2','pummelers_mask_+2','ＰＭマスク+2',@EQUIPMENT_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (23041,0,'anchorites_crown_+2','anch._crown_+2','ＡＮクラウン+2',@EQUIPMENT_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (23042,0,'theophany_cap_+2','theophany_cap_+2','ＴＥキャップ+2',@EQUIPMENT_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
@@ -20560,6 +20566,9 @@ INSERT INTO `item_basic` VALUES (24301,0,'wn_clomps_+1','wn_clomps_+1','ＷＮ�
 INSERT INTO `item_basic` VALUES (24302,0,'sv_gaiters_+1','sv_gaiters_+1','ＳＶゲートル+1',@EQUIPMENT_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (24303,0,'el_sandals_+1','el_sandals_+1','ＥＬサンダル+1',@EQUIPMENT_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (24304,0,'azimuth_turban','azimuth_turban','アズィマターバン',@EQUIPMENT_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
+INSERT INTO `item_basic` VALUES (24305,0,'reciente_coselete','reciente_coselete','レシエンコセレーテ',@EQUIPMENT_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
+INSERT INTO `item_basic` VALUES (24306,0,'mirce_wardecors','mirce_wardecors','ミルセワルドコル',@EQUIPMENT_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
+INSERT INTO `item_basic` VALUES (24307,0,'noble_redingote','noble_redingote','ノーブルルダンゴト',@EQUIPMENT_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (25414,0,'elite_royal_collar','elite_royal_collar','上級近衛騎士カラー',@EQUIPMENT_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (25415,0,'republican_platinum_medal','rep._plat._medal','共和プラチナ章',@EQUIPMENT_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (25416,0,'sibyl_scarf','sibyl_scarf','シビルスカーフ',@EQUIPMENT_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
