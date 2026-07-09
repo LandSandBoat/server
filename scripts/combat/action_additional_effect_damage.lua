@@ -121,7 +121,7 @@ xi.combat.action.executeAddEffectDamage = function(actor, target, fedData)
     end
 
     -- Early return: Effect is nullified.
-    local nullification = xi.spells.damage.calculateNullification(params.aeTarget, params.magicalElement, params.attackType == xi.attackType.MAGICAL, params.attackType == xi.attackType.BREATH)
+    local nullification = xi.spells.damage.calculateNullification(params.aeTarget, params.magicalElement, params.attackType == xi.attackType.PHYSICAL, params.params.attackType == xi.attackType.MAGICAL, params.attackType == xi.attackType.RANGED, params.attackType == xi.attackType.BREATH)
     if nullification == 0 then
         return 0, 0, 0
     end

@@ -92,7 +92,7 @@ xi.combat.skillchain.calculateSkillchainDamage = function(actor, target, baseDam
         return 0
     end
 
-    if xi.spells.damage.calculateNullification(target, skillchainElement, true, false) == 0 then
+    if xi.spells.damage.calculateNullification(target, skillchainElement, false, true, false, false) == 0 then
         return 0
     end
 

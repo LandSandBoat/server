@@ -85,7 +85,7 @@ xi.additionalEffect.calcDamage = function(attacker, element, defender, damage)
     damage            = addBonusesAbility(attacker, element, defender, damage, params)
     damage            = math.floor(damage * applyResistanceAddEffect(attacker, defender, element, 0))
     damage            = math.floor(damage * xi.spells.damage.calculateAbsorption(defender, element, false, true, false, false))
-    damage            = math.floor(damage * xi.spells.damage.calculateNullification(defender, element, true, false))
+    damage            = math.floor(damage * xi.spells.damage.calculateNullification(defender, element, false, true, false, false))
     -- Todo: make sure day/weather/affinity bonuses tie in right here
     damage            = finalMagicNonSpellAdjustments(attacker, defender, element, damage)
 

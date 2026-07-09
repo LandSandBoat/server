@@ -39,7 +39,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     damage = math.floor(damage * xi.spells.damage.calculateAbsorption(target, xi.element.NONE, false, true, false, false))
-    damage = math.floor(damage * xi.spells.damage.calculateNullification(target, xi.element.NONE, true, false))
+    damage = math.floor(damage * xi.spells.damage.calculateNullification(target, xi.element.NONE, false, true, false, false))
     damage = math.floor(damage * xi.spells.damage.calculateMTDR(caster, spell))
     damage = math.floor(damage * xi.combat.damage.calculateDamageAdjustment(target, false, true, false, false))
 

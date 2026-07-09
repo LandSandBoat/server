@@ -628,7 +628,7 @@ xi.job_utils.corsair.handleQuickDrawDamage = function(player, target, action, el
     local sdtMultiplier          = xi.combat.damage.magicalElementSDT(target, element)
     local additionalResistTier   = xi.spells.damage.calculateAdditionalResistTier(player, target, element)
     local elementalAbsorption    = xi.spells.damage.calculateAbsorption(target, element, false, false, true, false)
-    local elementalNullification = xi.spells.damage.calculateNullification(target, element, false, false)
+    local elementalNullification = xi.spells.damage.calculateNullification(target, element, false, false, true, false)
 
     -- Apply multipliers and bonuses.
     damage = math.floor(damage * deathPenaltyMultiplier)

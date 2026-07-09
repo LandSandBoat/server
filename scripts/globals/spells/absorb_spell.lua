@@ -104,7 +104,7 @@ xi.spells.absorb.doDrainingSpell = function(caster, target, spell)
     -- Early return: Target absorbs or nullifies dark.
     if
         xi.spells.damage.calculateAbsorption(target, xi.element.DARK, false, true, false, false) ~= 1 or
-        xi.spells.damage.calculateNullification(target, xi.element.DARK, true, false) ~= 1
+        xi.spells.damage.calculateNullification(target, xi.element.DARK, false, true, false, false) ~= 1
     then
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         return finalDamage
@@ -219,7 +219,7 @@ xi.spells.absorb.doAbsorbTPSpell = function(caster, target, spell)
     -- Early return: Target absorbs or nullifies dark.
     if
         xi.spells.damage.calculateAbsorption(target, xi.element.DARK, false, true, false, false) ~= 1 or
-        xi.spells.damage.calculateNullification(target, xi.element.DARK, true, false) ~= 1
+        xi.spells.damage.calculateNullification(target, xi.element.DARK, false, true, false, false) ~= 1
     then
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         return finalDamage

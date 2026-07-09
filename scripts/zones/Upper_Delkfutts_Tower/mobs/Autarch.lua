@@ -28,7 +28,7 @@ entity.onSpikesDamage = function(mob, target, damage)
     dmg = addBonusesAbility(mob, xi.element.THUNDER, target, dmg, params)
     dmg = dmg * applyResistanceAddEffect(mob, target, xi.element.THUNDER, 0)
     dmg = math.floor(dmg * xi.spells.damage.calculateAbsorption(target, xi.element.THUNDER, false, true, false, false))
-    dmg = math.floor(dmg * xi.spells.damage.calculateNullification(target, xi.element.THUNDER, true, false))
+    dmg = math.floor(dmg * xi.spells.damage.calculateNullification(target, xi.element.THUNDER, false, true, false, false))
     dmg = finalMagicNonSpellAdjustments(mob, target, xi.element.THUNDER, dmg)
 
     if dmg < 0 then

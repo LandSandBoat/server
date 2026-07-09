@@ -924,16 +924,32 @@ xi.spells.damage.calculateAbsorption = function(target, element, isPhysical, isM
     return 1
 end
 
-xi.spells.damage.calculateNullification = function(target, element, isMagical, isBreath)
+xi.spells.damage.calculateNullification = function(target, element, isPhysical, isMagical, isRanged, isBreath)
     -- Nullify: All damage.
     if math.randomInt(1, 100) <= target:getMod(xi.mod.NULL_DAMAGE) then
         return 0
     end
 
-    -- Nullify: Magic damage.
+    -- Nullify: Physical damage.
+    if
+        isPhysical and
+        math.randomInt(1, 100) <= target:getMod(xi.mod.NULL_PHYSICAL_DAMAGE)
+    then
+        return 0
+    end
+
+    -- Nullify: Magical damage.
     if
         isMagical and
         math.randomInt(1, 100) <= target:getMod(xi.mod.NULL_MAGICAL_DAMAGE)
+    then
+        return 0
+    end
+
+    -- Nullify: Ranged damage.
+    if
+        isRanged and
+        math.randomInt(1, 100) <= target:getMod(xi.mod.NULL_RANGED_DAMAGE)
     then
         return 0
     end
@@ -946,9 +962,9 @@ xi.spells.damage.calculateNullification = function(target, element, isMagical, i
         return 0
     end
 
-    -- Nullify: Element damage.
+    -- Nullify: Elemental damage.
     if
-        element > 0 and
+        element > xi.element.NONE and
         math.randomInt(1, 100) <= target:getMod(xi.data.element.getElementalNullificationModifier(element))
     then
         return 0
@@ -1077,7 +1093,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
 
     -- Early return: Spell is nullified.
     local spellElement = spell:getElement()
-    if xi.spells.damage.calculateNullification(target, spellElement, true, false) == 0 then
+    if xi.spells.damage.calculateNullification(target, spellElement, false, true, false, false) == 0 then
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
 
         return 0
