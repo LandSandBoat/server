@@ -87,7 +87,7 @@ zones[xi.zone.PORT_BASTOK] =
         OBTAINED_GUILD_POINTS         = 12713, -- Obtained: <number> guild points.
         OBTAINED_NUM_KEYITEMS         = 13107, -- Obtained key item: <number> <keyitem>!
         NOT_ACQUAINTED                = 13109, -- I'm sorry, but I don't believe we're acquainted. Please leave me be.
-        UNABLE_RACE_CHANGE            = 14212, -- You were unable to use the specified appearance for your character.
+        UNABLE_RACE_CHANGE            = 14215, -- You were unable to use the specified appearance for your character.
     },
     mob =
     {

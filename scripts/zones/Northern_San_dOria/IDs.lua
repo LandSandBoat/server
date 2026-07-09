@@ -130,13 +130,13 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         FRAGMENT_FAR_TOO_SMALL        = 18144, -- You obtain <keyitem>. However, it is far too small to house an adequate amount of energy. Alone, it serves no purpose.
         FRAGMENTS_MELD                = 18145, -- The tiny fragments of Lilisette's memory meld together to form <keyitem>!
         RETRIEVE_DIALOG_ID            = 18180, -- You retrieve <item> from the porter moogle's care.
-        COMMON_SENSE_SURVIVAL         = 18526, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
-        MAP_MARKER_TUTORIAL           = 18648, -- Selecting Map from the main menu opens the map of the area in which you currently reside. Select Markers and press the right arrow key to see all the markers placed on your map.
-        LINK_CONCIERGE_GOODBYE        = 19288, -- It was my pleasure to meet with you this fine day. May you encounter many friendly faces throughout your travels.
-        LINK_CONCIERGE_ONE_PER_DAY    = 19292, -- In the interest of fairness, I am unable to distribute multiple linkpearls to someone on the same day. Please come back tomorrow.
-        LINK_CONCIERGE_REGISTERED     = 19349, -- Your registration is officially complete.
-        LINK_CONCIERGE_REGISTERED_2   = 19350, -- May your journeys lead you to many as-yet-unmet friends, and may the bonds you forge last a lifetime.
-        LINK_CONCIERGE_LS_TAKEN       = 19351, -- Another member of that linkshell currently has an active registration. Please wait until that registration expires and try again.
+        COMMON_SENSE_SURVIVAL         = 18529, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        MAP_MARKER_TUTORIAL           = 18651, -- Selecting Map from the main menu opens the map of the area in which you currently reside. Select Markers and press the right arrow key to see all the markers placed on your map.
+        LINK_CONCIERGE_GOODBYE        = 19291, -- It was my pleasure to meet with you this fine day. May you encounter many friendly faces throughout your travels.
+        LINK_CONCIERGE_ONE_PER_DAY    = 19295, -- In the interest of fairness, I am unable to distribute multiple linkpearls to someone on the same day. Please come back tomorrow.
+        LINK_CONCIERGE_REGISTERED     = 19352, -- Your registration is officially complete.
+        LINK_CONCIERGE_REGISTERED_2   = 19353, -- May your journeys lead you to many as-yet-unmet friends, and may the bonds you forge last a lifetime.
+        LINK_CONCIERGE_LS_TAKEN       = 19354, -- Another member of that linkshell currently has an active registration. Please wait until that registration expires and try again.
     },
     mob =
     {
