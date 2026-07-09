@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
     if player:hasKeyItem(xi.ki.MIASMA_FILTER) then
         player:startEvent(11)
     else
-        if miasmaFilterCD >= VanadielTime then
+        if miasmaFilterCD >= VanadielTime() then
             -- Both Vanadiel time and unix timestamps are based on seconds. Add the difference to the event.
             player:startEvent(14, miasmaFilterCD)
         else
