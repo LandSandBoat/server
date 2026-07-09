@@ -14,8 +14,7 @@ itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, it
     {
         isRanged        = true,
         basePower       = 10 + utils.clamp(dStat, -3, 8) + utils.clamp(math.floor((dStat - 8) / 2), 0, 8),
-        attackType      = xi.attackType.PHYSICAL,
-        physicalElement = xi.damageType.PIERCING,
+        attackType      = xi.attackType.MAGICAL,
         magicalElement  = xi.element.DARK,
         canResist       = true,
     }
