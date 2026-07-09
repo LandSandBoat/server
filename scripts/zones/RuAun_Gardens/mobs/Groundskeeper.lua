@@ -28,7 +28,7 @@ entity.onMobDespawn = function(mob)
     local params = {}
 
     params.immediate = true
-    if xi.mob.phOnDespawn(mob, ID.mob.DESPOT, 5, 7200, params) then -- 2 hours
+    if xi.mob.phOnDespawn(mob, ID.mob.DESPOT, 5, 7200, params) then -- Lottery opens after 2 hours.
         local zone = mob:getZone()
         local phId = mob:getID()
 
