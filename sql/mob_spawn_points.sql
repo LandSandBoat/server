@@ -67521,6 +67521,21 @@ INSERT INTO `mob_spawn_points` VALUES (17510676,0,'Aldo','Aldo',21,0,0,-0.021,2.
 INSERT INTO `mob_spawn_points` VALUES (17510677,0,'Lion','Lion',19,0,0,-0.795,-197.505,430.090,60,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17510678,0,'Zeid','Zeid',20,0,0,-1.054,-197.570,434.288,61,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17510679,0,'Aldo','Aldo',21,0,0,-0.021,-197.555,432.557,72,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17510680,0,'Seed_Crystal','Seed Crystal',14,77,80,0.000,202.000,-367.000,64,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17510681,0,'Seed_Orc','Seed Orc',23,150,150,1.511,202.449,-375.416,142,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17510682,0,'Seed_Quadav','Seed Quadav',24,150,150,-1.857,202.100,-368.345,11,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17510683,0,'Seed_Yagudo','Seed Yagudo',25,150,150,2.055,202.479,-374.182,124,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17510684,0,'Seed_Goblin','Seed Goblin',22,150,150,1.741,202.488,-372.882,107,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17510685,0,'Seed_Crystal','Seed Crystal',14,77,80,0.000,2.000,33.000,64,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17510686,0,'Seed_Orc','Seed Orc',23,150,150,2.833,2.000,32.442,96,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17510687,0,'Seed_Quadav','Seed Quadav',24,150,150,3.455,2.000,32.941,77,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17510688,0,'Seed_Yagudo','Seed Yagudo',25,150,150,1.122,2.000,32.219,64,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17510689,0,'Seed_Goblin','Seed Goblin',22,150,150,4.548,2.000,32.924,93,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17510690,0,'Seed_Crystal','Seed Crystal',14,77,80,0.000,-198.000,433.000,64,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17510691,0,'Seed_Orc','Seed Orc',23,150,150,2.759,-197.872,432.633,99,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17510692,0,'Seed_Quadav','Seed Quadav',24,150,150,-1.483,-198.000,432.768,41,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17510693,0,'Seed_Yagudo','Seed Yagudo',25,150,150,1.383,-198.000,435.642,75,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17510694,0,'Seed_Goblin','Seed Goblin',22,150,150,1.327,-197.549,432.847,83,NULL,NULL);
 
 -- ------------------------------------------------------------
 -- La'Loff Amphitheater (Zone 180)
