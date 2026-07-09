@@ -183,6 +183,8 @@ entity.onMobFight = function(mob, target)
     checkEnrage(mob)
 
     local currentAnimation = mob:getAnimationSub()
+    local currentTime      = GetSystemTime()
+
     if
         currentAnimation == 1 and
         mob:hasStatusEffect(xi.effect.SLEEP_I)
@@ -204,7 +206,15 @@ entity.onMobFight = function(mob, target)
         return
     end
 
-    local currentTime = GetSystemTime()
+    if
+        currentAnimation == 2 and
+        currentTime > mob:getLocalVar('twohourTime')
+    then
+        mob:useMobAbility(xi.mobSkill.MIGHTY_STRIKES_1)
+        mob:setLocalVar('twohourTime', currentTime + 210)
+        return
+    end
+
     local flightTime  = mob:getLocalVar('flightTime')
     local changeHP    = mob:getLocalVar('changeHP')
     local currentHP   = mob:getHP()
