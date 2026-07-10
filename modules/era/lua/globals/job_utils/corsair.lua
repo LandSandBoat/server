@@ -251,8 +251,9 @@ if not xi.module.isContentEnabled('ABYSSEA') then
 
     -- Snake Eye: Revert to cooldown reduction from merit points, remove bonus free XI effect.
     -- Source: https://www.bg-wiki.com/ffxi/Version_Update_(05/15/2012)
+    -- Merit value is set to 150s/level by modules/abyssea/sql/job_adjustments.sql
     m:addOverride('xi.job_utils.corsair.useSnakeEye', function(player, action)
-        local recastReduction = (player:getMerit(xi.merit.SNAKE_EYE) / 10) * 60
+        local recastReduction = player:getMerit(xi.merit.SNAKE_EYE) - 150
         action:setRecast(action:getRecast() - recastReduction)
 
         player:addStatusEffect(xi.effect.SNAKE_EYE, { power = 0, duration = 60, origin = player })
@@ -294,7 +295,8 @@ if not xi.module.isContentEnabled('ABYSSEA') then
             player:delStatusEffect(selected:getEffectType())
             player:delStatusEffectSilent(xi.effect.DOUBLE_UP_CHANCE)
 
-            local recastReduction = (player:getMerit(xi.merit.FOLD) / 10) * 60
+            -- Merit value is set to 150s/level by modules/abyssea/sql/job_adjustments.sql
+            local recastReduction = player:getMerit(xi.merit.FOLD) - 150
             action:setRecast(action:getRecast() - recastReduction)
         end
     end)
