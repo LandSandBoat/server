@@ -111,7 +111,7 @@ void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PC
 
         if (PItem->isSubType(ITEM_LOCKED))
         {
-            ShowErrorFmt("GP_CLI_COMMAND_ITEM_TRANSFER: {} trying to trade NPC {} with locked item!", PChar->getName(), PNpc->getName());
+            ShowErrorFmt("GP_CLI_COMMAND_ITEM_TRANSFER: {} trying to trade NPC {} with locked item {} ({})!", PChar->getName(), PNpc->getName(), PItem->getName(), PItem->getID());
             return;
         }
 
