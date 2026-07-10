@@ -111,6 +111,18 @@ void GP_CLI_COMMAND_LOCKSTYLE::process(MapSession* PSession, CCharEntity* PChar)
                     failedItemIds.push_back(itemId);
                     itemId = 0;
                 }
+                else if (!charutils::canEquipItemOnAnyJob(PChar, PItem)) // owned but no leveled job can equip it
+                {
+                    failedItemIds.push_back(itemId);
+                    itemId = 0;
+                }
+                else if ((item.EquipKind == SLOT_MAIN || item.EquipKind == SLOT_SUB || item.EquipKind == SLOT_RANGED) &&
+                         !charutils::hasValidStyle(PChar, PChar->getEquip(static_cast<SLOTTYPE>(item.EquipKind)), PItem))
+                {
+                    // A weapon appearance can only be locked over a weapon of the same skill type
+                    failedItemIds.push_back(itemId);
+                    itemId = 0;
+                }
 
                 PChar->styleItems[item.EquipKind] = itemId;
 

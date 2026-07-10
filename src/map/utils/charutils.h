@@ -143,6 +143,8 @@ void   CheckUnarmedWeapon(CCharEntity* PChar);
 void   SetStyleLock(CCharEntity* PChar, bool isStyleLocked);
 void   UpdateWeaponStyle(CCharEntity* PChar, uint8 equipSlotID, CItemEquipment* PItem);
 void   UpdateArmorStyle(CCharEntity* PChar, uint8 equipSlotID);
+auto   canEquipItemOnAnyJob(CCharEntity* PChar, const CItemEquipment* PItem) -> bool;
+auto   hasValidStyle(CCharEntity* PChar, const CItemEquipment* PItem, const CItemEquipment* AItem) -> bool;
 void   UpdateRemovedSlotsLookForLockStyle(CCharEntity* PChar);
 void   UpdateRemovedSlotsLook(CCharEntity* PChar);
 void   AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uint8 quantity);
