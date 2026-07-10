@@ -727,22 +727,22 @@ local overseerOffsets =
 
 local crystals =
 {
-    [xi.item.FIRE_CRYSTAL]      = 12,
-    [xi.item.ICE_CRYSTAL]       = 12,
-    [xi.item.WIND_CRYSTAL]      = 12,
-    [xi.item.EARTH_CRYSTAL]     = 12,
+    [xi.item.FIRE_CRYSTAL     ] = 12,
+    [xi.item.ICE_CRYSTAL      ] = 12,
+    [xi.item.WIND_CRYSTAL     ] = 12,
+    [xi.item.EARTH_CRYSTAL    ] = 12,
     [xi.item.LIGHTNING_CRYSTAL] = 12,
-    [xi.item.WATER_CRYSTAL]     = 12,
-    [xi.item.LIGHT_CRYSTAL]     = 16,
-    [xi.item.DARK_CRYSTAL]      = 16,
-    [xi.item.INFERNO_CRYSTAL]   = 12,
-    [xi.item.GLACIER_CRYSTAL]   = 12,
-    [xi.item.CYCLONE_CRYSTAL]   = 12,
-    [xi.item.TERRA_CRYSTAL]     = 12,
-    [xi.item.PLASMA_CRYSTAL]    = 12,
-    [xi.item.TORRENT_CRYSTAL]   = 12,
-    [xi.item.AURORA_CRYSTAL]    = 16,
-    [xi.item.TWILIGHT_CRYSTAL]  = 16,
+    [xi.item.WATER_CRYSTAL    ] = 12,
+    [xi.item.LIGHT_CRYSTAL    ] = 16,
+    [xi.item.DARK_CRYSTAL     ] = 16,
+    [xi.item.INFERNO_CRYSTAL  ] = 12,
+    [xi.item.GLACIER_CRYSTAL  ] = 12,
+    [xi.item.CYCLONE_CRYSTAL  ] = 12,
+    [xi.item.TERRA_CRYSTAL    ] = 12,
+    [xi.item.PLASMA_CRYSTAL   ] = 12,
+    [xi.item.TORRENT_CRYSTAL  ] = 12,
+    [xi.item.AURORA_CRYSTAL   ] = 16,
+    [xi.item.TWILIGHT_CRYSTAL ] = 16,
 }
 
 local expRings =
@@ -1288,7 +1288,7 @@ xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardTyp
             if addPoints > 0 and pRank ~= 1 and pRankPoints < 4000 then
                 if pRankPoints + addPoints >= 4000 then
                     player:setRankPoints(4000)
-                    player:addCP(pRankPoints + addPoints - 4000)
+                    player:addCP(pRankPoints + utils.clamp(addPoints - 4000, 0, 1000))
                     player:showText(npc, mOffset + 44) -- 'Your rank points are full. We've added the excess to your conquest points.'
                 else
                     player:addRankPoints(addPoints)
