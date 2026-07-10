@@ -20,6 +20,7 @@ entity.onTrade = function(player, npc, trade)
                     player:startEventString(651, automatonName, automatonName, automatonName, automatonName, subid) --unlock attachment event
                     if trade:confirmSlot(i) then
                         player:confirmTrade()
+                        break
                     end
                 else
                     player:startEvent(652) --already unlocked event
