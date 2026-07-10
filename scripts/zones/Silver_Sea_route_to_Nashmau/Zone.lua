@@ -39,7 +39,7 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
-    player:startEvent(1025)
+    player:startEvent(1028)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
@@ -49,7 +49,7 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
-    if csid == 1025 then
+    if csid == 1028 then
         player:setPos(0, 0, 0, 0, xi.zone.NASHMAU)
     end
 end

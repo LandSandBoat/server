@@ -26,18 +26,20 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getYPos() == 0 and
         player:getZPos() == 0
     then
+        local arrivalFlags = bit.bor(xi.cutsceneFlag.UNKNOWN_1, xi.cutsceneFlag.NO_PCS)
+
         if prevZone == xi.zone.SAN_DORIA_JEUNO_AIRSHIP then
             player:setPos(-87.000, 12.000, 116.000, 128)
-            return 10018
+            return { 10018, -1, arrivalFlags }
         elseif prevZone == xi.zone.BASTOK_JEUNO_AIRSHIP then
             player:setPos(-50.000, 12.000, -116.000, 0)
-            return 10020
+            return { 10020, -1, arrivalFlags }
         elseif prevZone == xi.zone.WINDURST_JEUNO_AIRSHIP then
             player:setPos(16.000, 12.000, -117.000, 0)
-            return 10019
+            return { 10019, -1, arrivalFlags }
         elseif prevZone == xi.zone.KAZHAM_JEUNO_AIRSHIP then
             player:setPos(-24.000, 12.000, 116.000, 128)
-            return 10021
+            return { 10021, -1, arrivalFlags }
         end
     end
 
@@ -49,14 +51,16 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
 end
 
 zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
+    local boardingFlags = bit.bor(xi.cutsceneFlag.NO_PCS, xi.cutsceneFlag.UNKNOWN_3, xi.cutsceneFlag.UNKNOWN_7)
+
     if prevZoneId == xi.zone.SAN_DORIA_JEUNO_AIRSHIP then
-        player:startEvent(10010)
+        player:startEvent(10010, { isHidden = true, flags = boardingFlags })
     elseif prevZoneId == xi.zone.BASTOK_JEUNO_AIRSHIP then
-        player:startEvent(10012)
+        player:startEvent(10012, { isHidden = true, flags = boardingFlags })
     elseif prevZoneId == xi.zone.WINDURST_JEUNO_AIRSHIP then
-        player:startEvent(10011)
+        player:startEvent(10011, { isHidden = true, flags = boardingFlags })
     elseif prevZoneId == xi.zone.KAZHAM_JEUNO_AIRSHIP then
-        player:startEvent(10013)
+        player:startEvent(10013, { isHidden = true, flags = boardingFlags })
     end
 end
 

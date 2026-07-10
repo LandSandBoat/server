@@ -422,6 +422,7 @@ xi.barge.onTransportEvent = function(player, zoneId, transportId)
             [0] = 0,
             [1] = xi.ki.BARGE_TICKET,
             [2] = 0, -- Important to be set to 0
+            isHidden = true,
             flags = bit.bor(
                 xi.cutsceneFlag.UNKNOWN_1,
                 xi.cutsceneFlag.NO_PCS,
@@ -444,6 +445,7 @@ xi.barge.onTransportEvent = function(player, zoneId, transportId)
             [0] = usesLeft,     -- Not actually used by CS but passed in
             [1] = xi.ki.BARGE_MULTI_TICKET,
             [2] = usesLeft + 1, -- This expects the number of uses before it get decremented
+            isHidden = true,
             flags = bit.bor(
                 xi.cutsceneFlag.UNKNOWN_1,
                 xi.cutsceneFlag.NO_PCS,
