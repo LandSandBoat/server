@@ -332,7 +332,7 @@ INSERT INTO `mob_skills` VALUES (300,44,'head_butt',0,0.0,7.0,1500,800,4,0,0,0,0
 INSERT INTO `mob_skills` VALUES (301,45,'dream_flower',1,0.0,15.0,2000,1200,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (302,46,'wild_oats',0,0.0,7.0,2000,800,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (303,47,'hundred_fists',0,0.0,7.0,2000,0,1,4,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (304,48,'photosynthesis',0,0.0,7.0,2000,800,1,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (304,48,'photosynthesis_mandragora',0,0.0,7.0,2000,800,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (305,49,'leaf_dagger',0,0.0,7.0,2000,1200,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (306,50,'scream',1,0.0,15.0,2000,800,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (307,439,'substitute',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
@@ -352,7 +352,7 @@ INSERT INTO `mob_skills` VALUES (320,64,'sweet_breath',4,0.0,15.0,2000,1500,4,0,
 INSERT INTO `mob_skills` VALUES (321,65,'needleshot',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (322,66,'1000_needles',1,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (323,37,'wild_carrot',0,0.0,20.0,2000,2600,1,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (324,68,'photosynthesis',0,0.0,7.0,2000,1500,1,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (324,68,'photosynthesis_sabotender',0,0.0,7.0,2000,1500,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (325,161,'random_kiss',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (326,164,'absorbing_kiss',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (327,165,'deep_kiss',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
@@ -3380,7 +3380,7 @@ INSERT INTO `mob_skills` VALUES (3337,313,'lunar_bay',0,0.0,10.0,519,1500,4,0,0,
 -- INSERT INTO `mob_skills` VALUES (3349,3093,'dark_burst',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3350,3094,'dark_flood',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3351,46,'wild_oats',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0); -- BabbanMheillea
--- INSERT INTO `mob_skills` VALUES (3352,3096,'photosynthesis',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+-- INSERT INTO `mob_skills` VALUES (3352,3096,'photosynthesis_mandragora',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3353,1603,'petal_pirouette',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3354,44,'head_butt',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3355,325,'blow',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
