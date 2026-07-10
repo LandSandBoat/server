@@ -1624,7 +1624,14 @@ uint16 CBattleEntity::DEF()
     }
 
     // use max to prevent underflow
-    return std::max(1, DEF + (DEF * getMod(Mod::DEFP) / 100) + std::min<int16>((DEF * getMod(Mod::FOOD_DEFP) / 100), getMod(Mod::FOOD_DEF_CAP)));
+    float regularDefPercent = static_cast<float>(getMod(Mod::DEFP)) / 100.0f;
+    float foodDefPercent    = static_cast<float>(getMod(Mod::FOOD_DEFP)) / 100.0f;
+    int16 foodDefPercentCap = static_cast<int16>(getMod(Mod::FOOD_DEF_CAP));
+
+    int16 regularDefBonus = static_cast<int16>(DEF * regularDefPercent);
+    int16 foodDefBonus    = std::min<int16>(DEF * foodDefPercent, foodDefPercentCap);
+
+    return std::max(1, DEF + regularDefBonus + foodDefBonus);
 }
 
 uint16 CBattleEntity::EVA()
