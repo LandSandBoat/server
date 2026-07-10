@@ -17,6 +17,12 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
 end
 
+entity.onMobRoam = function(mob)
+    if VanadielHour() >= 4 and VanadielHour() < 20 then
+        DespawnMob(mob:getID(), 1)
+    end
+end
+
 entity.onMobSpellChoose = function(mob, target, spellId)
     local spellList =
     {

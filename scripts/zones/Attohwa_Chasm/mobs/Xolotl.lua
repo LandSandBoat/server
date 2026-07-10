@@ -38,6 +38,7 @@ end
 
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:setRespawnTime(math.randomInt(75600, 86400)) -- When server restarts, reset respawn timer.
 end
 
 entity.onMobSpawn = function(mob)
