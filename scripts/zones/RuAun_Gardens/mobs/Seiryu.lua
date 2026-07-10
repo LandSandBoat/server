@@ -41,6 +41,13 @@ entity.onMobSpawn = function(mob)
             mobArg:setMobAbilityEnabled(true)
         end
     end)
+
+    xi.mix.jobSpecial.config(mob, {
+        specials =
+        {
+            { id = xi.mobSkill.HUNDRED_FISTS_1, hpp = math.random(50, 60) },
+        },
+    })
 end
 
 entity.onMobFight = function(mob, target)
