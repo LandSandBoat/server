@@ -172,6 +172,10 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x071_influence_campaign.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x071_influence_colonization.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x071_influence_colonization.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x073_chocobo_toteboard.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x073_chocobo_toteboard.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x074_chocobo_list.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x074_chocobo_list.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x075_battlefield.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x075_battlefield.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x076_group_effects.h
