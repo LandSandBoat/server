@@ -51,7 +51,7 @@ GP_SERV_COMMAND_CONQUEST::GP_SERV_COMMAND_CONQUEST(CCharEntity* PChar)
         packet.Conquest.Regions[regionId].InfluenceRankingWithBeastmen = conquest::GetInfluenceRanking(sandoriaInf, bastokInf, windurstInf, beastmenInf);
         packet.Conquest.Regions[regionId].InfluenceRankingNoBeastmen   = conquest::GetInfluenceRanking(sandoriaInf, bastokInf, windurstInf);
         packet.Conquest.Regions[regionId].InfluenceGraphics            = conquest::GetInfluenceGraphics(sandoriaInf, bastokInf, windurstInf, beastmenInf);
-        packet.Conquest.Regions[regionId].Owner                        = regionOwner + 1;
+        packet.Conquest.Regions[regionId].Owner                        = regionOwner == NATION_NEUTRAL ? 0 : regionOwner + 1;
 
         const int64 total         = sandoriaInf + bastokInf + windurstInf;
         const int64 totalBeastmen = total + beastmenInf;

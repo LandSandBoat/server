@@ -568,13 +568,13 @@ local regionControl = function(player, npc, trade)
             local owner = GetRegionOwner(regionID - 1)
 
             -- Beastmen controlled
-            if owner == 3 then
+            if owner == xi.nation.BEASTMEN then
                 local costume = beastCostumes[math.randomInt(1, #beastCostumes)]
                 player:addStatusEffect(xi.effect.COSTUME, { power = costume, duration = utils.minutes(60), origin = player })
                 player:confirmTrade()
 
                 return
-            else
+            elseif owner >= xi.nation.SANDORIA and owner <= xi.nation.WINDURST then
                 local reward = nationRewards[owner + 1]
 
                 -- 2005 Reward
