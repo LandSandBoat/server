@@ -881,7 +881,7 @@ xi.spells.damage.calculateSpellActionTypeMultiplier = function(caster)
     return 1 + caster:getMod(xi.mod.POWER_MULTIPLIER_SPELL) / 100
 end
 
-xi.spells.damage.calculateAbsorption = function(target, element, isMagic)
+xi.spells.damage.calculateAbsorption = function(target, element, isPhysical, isMagical, isRanged, isBreath)
     -- Absobtion by liement.
     local liementFactor = target:checkLiementAbsorb(xi.damageType.ELEMENTAL + element) -- Check for Liement.
     if liementFactor < 0 then
@@ -893,17 +893,28 @@ xi.spells.damage.calculateAbsorption = function(target, element, isMagic)
         return -1
     end
 
-    -- Absorb: Magic damage.
+    -- Absorb: Physical or Ranged.
     if
-        isMagic and
+        (isPhysical or isRanged) and
+        math.randomInt(1, 100) <= target:getMod(xi.mod.PHYS_ABSORB)
+    then
+        return -1
+    end
+
+    -- Absorb: Magic damage. TODO: Do breaths count as magical damage for this mod usage?
+    if
+        isMagical and
         math.randomInt(1, 100) <= target:getMod(xi.mod.MAGIC_ABSORB)
     then
         return -1
     end
 
+    -- Absorb: Breath
+    -- Modifier doesn't exist. But it case it ever does, place here.
+
     -- Absorb: Element damage.
     if
-        element > 0 and
+        element > xi.element.NONE and
         math.randomInt(1, 100) <= target:getMod(xi.data.element.getElementalAbsorptionModifier(element))
     then
         return -1
@@ -913,16 +924,32 @@ xi.spells.damage.calculateAbsorption = function(target, element, isMagic)
     return 1
 end
 
-xi.spells.damage.calculateNullification = function(target, element, isMagic, isBreath)
+xi.spells.damage.calculateNullification = function(target, element, isPhysical, isMagical, isRanged, isBreath)
     -- Nullify: All damage.
     if math.randomInt(1, 100) <= target:getMod(xi.mod.NULL_DAMAGE) then
         return 0
     end
 
-    -- Nullify: Magic damage.
+    -- Nullify: Physical damage.
     if
-        isMagic and
+        isPhysical and
+        math.randomInt(1, 100) <= target:getMod(xi.mod.NULL_PHYSICAL_DAMAGE)
+    then
+        return 0
+    end
+
+    -- Nullify: Magical damage.
+    if
+        isMagical and
         math.randomInt(1, 100) <= target:getMod(xi.mod.NULL_MAGICAL_DAMAGE)
+    then
+        return 0
+    end
+
+    -- Nullify: Ranged damage.
+    if
+        isRanged and
+        math.randomInt(1, 100) <= target:getMod(xi.mod.NULL_RANGED_DAMAGE)
     then
         return 0
     end
@@ -935,9 +962,9 @@ xi.spells.damage.calculateNullification = function(target, element, isMagic, isB
         return 0
     end
 
-    -- Nullify: Element damage.
+    -- Nullify: Elemental damage.
     if
-        element > 0 and
+        element > xi.element.NONE and
         math.randomInt(1, 100) <= target:getMod(xi.data.element.getElementalNullificationModifier(element))
     then
         return 0
@@ -1066,14 +1093,14 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
 
     -- Early return: Spell is nullified.
     local spellElement = spell:getElement()
-    if xi.spells.damage.calculateNullification(target, spellElement, true, false) == 0 then
+    if xi.spells.damage.calculateNullification(target, spellElement, false, true, false, false) == 0 then
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
 
         return 0
     end
 
     -- Calculate absoprtion and magic burst.
-    local absorbFactor   = xi.spells.damage.calculateAbsorption(target, spellElement, true)
+    local absorbFactor   = xi.spells.damage.calculateAbsorption(target, spellElement, false, true, false, false)
     local magicBurstTier = xi.combat.magicBurst.getMagicBurstTier(target, spellElement)
 
     local notAbsorb = absorbFactor > 0

@@ -6,14 +6,14 @@
 ---@type TItem
 local itemObject = {}
 
-itemObject.onItemAdditionalEffect = function(attacker, defender, baseAttackDamage, item)
+itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, item)
     local pTable =
     {
         chance  = 10,
         element = xi.element.DARK,
     }
 
-    return xi.combat.action.executeAddEffectDispel(attacker, defender, pTable)
+    return xi.combat.action.executeAddEffectDispel(actor, target, pTable)
 end
 
 return itemObject

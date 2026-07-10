@@ -12,23 +12,18 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onSpikesDamage = function(mob, target, damage)
-    -- "Damage" is the power of the status effect up in onMobinitialize.
-    local intDiff = mob:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-    local dmg = damage + intDiff
-    local params = {}
-    params.bonusmab = 0
-    params.includemab = false
-    dmg = addBonusesAbility(mob, xi.element.FIRE, target, dmg, params)
-    dmg = dmg * applyResistanceAddEffect(mob, target, xi.element.FIRE, 0)
-    dmg = math.floor(dmg * xi.spells.damage.calculateAbsorption(target, xi.element.FIRE, true))
-    dmg = math.floor(dmg * xi.spells.damage.calculateNullification(target, xi.element.FIRE, true, false))
-    dmg = finalMagicNonSpellAdjustments(mob, target, xi.element.FIRE, dmg)
+    local pTable =
+    {
+        basePower       = damage,
+        attackType      = xi.attackType.MAGICAL,
+        magicalElement  = xi.element.FIRE,
+        actorStat       = xi.mod.INT,
+        canMAB          = true,
+        canResist       = true,
+        canResistExtra  = true,
+    }
 
-    if dmg < 0 then
-        dmg = 0
-    end
-
-    return xi.subEffect.BLAZE_SPIKES, xi.msg.basic.SPIKES_EFFECT_DMG, dmg
+    return xi.combat.action.executeAddEffectDamage(mob, target, pTable)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

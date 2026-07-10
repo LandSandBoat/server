@@ -21,23 +21,18 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onSpikesDamage = function(mob, target, damage)
-    -- "damage" is the power of the status effect up in onMobinitialize.
-    local intDiff = mob:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-    local dmg = damage + intDiff
-    local params = {}
-    params.bonusmab = 0
-    params.includemab = false
-    dmg = addBonusesAbility(mob, xi.element.ICE, target, dmg, params)
-    dmg = dmg * applyResistanceAddEffect(mob, target, xi.element.ICE, 0)
-    dmg = math.floor(dmg * xi.spells.damage.calculateAbsorption(target, xi.element.ICE, true))
-    dmg = math.floor(dmg * xi.spells.damage.calculateNullification(target, xi.element.ICE, true, false))
-    dmg = finalMagicNonSpellAdjustments(mob, target, xi.element.ICE, dmg)
+    local pTable =
+    {
+        basePower       = damage,
+        attackType      = xi.attackType.MAGICAL,
+        magicalElement  = xi.element.ICE,
+        actorStat       = xi.mod.INT,
+        canMAB          = true,
+        canResist       = true,
+        canResistExtra  = true,
+    }
 
-    if dmg < 0 then
-        dmg = 0
-    end
-
-    return xi.subEffect.ICE_SPIKES, xi.msg.basic.SPIKES_EFFECT_DMG, dmg
+    return xi.combat.action.executeAddEffectDamage(mob, target, pTable)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)

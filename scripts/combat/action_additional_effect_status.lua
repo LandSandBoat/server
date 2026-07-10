@@ -38,34 +38,37 @@ local function validateParameters(actor, target, fedData)
     local params = {}
 
     -- Additional effect target.
-    params.aeTarget     = fedData.aeTarget or target -- Default to the current attack target.
+    params.aeTarget        = fedData.aeTarget or target -- Default to the current attack target.
 
     -- Chance.
-    params.chance       = fedData.chance or 100 -- Default: Always proc.
+    params.chance          = fedData.chance or 100 -- Default: Always proc.
+
+    -- Source is ranged attack or melee? Skip en-spell check if so.
+    params.isRanged        = fedData.isRanged or false -- Assume melee.
 
     -- Status effect application parameters.
-    params.effectId     = fedData.effectId or xi.effect.NONE
-    params.power        = fedData.power or 0
-    params.tick         = fedData.tick or 0
-    params.duration     = fedData.duration or 120
-    params.subType      = fedData.subType or 0
-    params.subPower     = fedData.subPower or 0
-    params.tier         = fedData.tier or 0
+    params.effectId        = fedData.effectId or xi.effect.NONE
+    params.power           = fedData.power or 0
+    params.tick            = fedData.tick or 0
+    params.duration        = fedData.duration or 120
+    params.subType         = fedData.subType or 0
+    params.subPower        = fedData.subPower or 0
+    params.tier            = fedData.tier or 0
 
     -- Action properties.
-    params.element      = fedData.element or xi.element.NONE
-    params.actorStat    = fedData.actorStat or 0
-    params.targetStat   = fedData.targetStat or params.actorStat -- Currently unused. For future use.
-    params.macc         = fedData.macc or 0
-    params.resistRate   = fedData.resistRate or 0
+    params.element         = fedData.element or xi.element.NONE     -- None, Fire, Ice, Wind, Earth, Thunder, Water, Light, Dark.
+    params.actorStat       = fedData.actorStat or 0
+    params.targetStat      = fedData.targetStat or params.actorStat        -- Currently unused. For future use.
+    params.skillRank       = fedData.skillRank or xi.skillRank.A_PLUS
+    params.macc            = fedData.macc or 0
 
     -- Optional behavior.
-    params.resetEmnity  = fedData.resetEmnity or false
-    params.absorbEffect = fedData.absorbEffect or false
+    params.resetEmnity     = fedData.resetEmnity or false -- Currently unused. For future use.
+    params.absorbEffect    = fedData.absorbEffect or false
 
     -- Animations and messaging.
-    params.animation    = fedData.animation or (defaultsTable[params.effectId][1] or 0)
-    params.message      = fedData.message or (defaultsTable[params.effectId][2] or 0)
+    params.animation       = fedData.animation or (defaultsTable[params.effectId][1] or 0)
+    params.message         = fedData.message or (defaultsTable[params.effectId][2] or 0)
 
     return params
 end
@@ -104,8 +107,8 @@ end
 xi.combat.action.executeAddEffectEnhancement = function(actor, target, fedData)
     local params = validateParameters(actor, target, fedData)
 
-    -- Early return: En-spell overrides innate/weapon additional effects.
-    if hasEnspell(actor) then
+    -- Early return: En-spell overrides innate/weapon additional effects, except ranged attacks.
+    if not params.isRanged and hasEnspell(actor) then
         return 0, 0, 0
     end
 
@@ -135,8 +138,8 @@ end
 xi.combat.action.executeAddEffectEnfeeblement = function(actor, target, fedData)
     local params = validateParameters(actor, target, fedData)
 
-    -- Early return: En-spell overrides innate/weapon additional effects.
-    if hasEnspell(actor) then
+    -- Early return: En-spell overrides innate/weapon additional effects, except ranged attacks.
+    if not params.isRanged and hasEnspell(actor) then
         return 0, 0, 0
     end
 
@@ -166,7 +169,7 @@ xi.combat.action.executeAddEffectEnfeeblement = function(actor, target, fedData)
     end
 
     -- Early return: Resist rate too high.
-    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(actor, params.aeTarget, 0, 0, xi.skillRank.A_PLUS, params.element, params.actorStat, params.effectId, params.macc)
+    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(actor, params.aeTarget, 0, 0, params.skillRank, params.element, params.actorStat, params.effectId, params.macc)
     if not xi.data.statusEffect.isResistRateSuccessfull(params.effectId, resistanceRate, params.resistRate) then
         return 0, 0, 0
     end
@@ -185,8 +188,8 @@ end
 xi.combat.action.executeAddEffectDispel = function(actor, target, fedData)
     local params = validateParameters(actor, target, fedData)
 
-    -- Early return: En-spell overrides innate/weapon additional effects.
-    if hasEnspell(actor) then
+    -- Early return: En-spell overrides innate/weapon additional effects, except ranged attacks.
+    if not params.isRanged and hasEnspell(actor) then
         return 0, 0, 0
     end
 
@@ -206,7 +209,7 @@ xi.combat.action.executeAddEffectDispel = function(actor, target, fedData)
     end
 
     -- Early return: Resist rate too high.
-    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(actor, params.aeTarget, 0, 0, xi.skillRank.A_PLUS, params.element, params.actorStat, params.effectId, params.macc)
+    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(actor, params.aeTarget, 0, 0, params.skillRank, params.element, params.actorStat, params.effectId, params.macc)
     if not xi.data.statusEffect.isResistRateSuccessfull(params.effectId, resistanceRate, params.resistRate) then
         return 0, 0, 0
     end

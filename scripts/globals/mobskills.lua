@@ -1104,9 +1104,9 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, action, skillParams)
     local nullifyDamage = 1
 
     if attackType == xi.attackType.BREATH then
-        nullifyDamage  = xi.spells.damage.calculateNullification(target, actionElement, false, true)
+        nullifyDamage  = xi.spells.damage.calculateNullification(target, actionElement, false, false, false, true)
     else
-        nullifyDamage  = xi.spells.damage.calculateNullification(target, actionElement, true, false)
+        nullifyDamage  = xi.spells.damage.calculateNullification(target, actionElement, false, true, false, false)
     end
 
     if nullifyDamage == 0 then
@@ -1119,9 +1119,9 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, action, skillParams)
     end
 
     if attackType == xi.attackType.BREATH then
-        absorbDamage  = xi.spells.damage.calculateAbsorption(target, actionElement, false)
+        absorbDamage  = xi.spells.damage.calculateAbsorption(target, actionElement, false, false, false, true)
     else
-        absorbDamage  = xi.spells.damage.calculateAbsorption(target, actionElement, true)
+        absorbDamage  = xi.spells.damage.calculateAbsorption(target, actionElement, false, true, false, false)
     end
 
     ----------------------------------
@@ -1324,7 +1324,7 @@ xi.mobskills.mobBreathMove = function(mob, target, skill, action, skillParams)
     local absorbDamage  = 1
     local nullifyDamage = 1
 
-    nullifyDamage = xi.spells.damage.calculateNullification(target, actionElement, false, true)
+    nullifyDamage = xi.spells.damage.calculateNullification(target, actionElement, false, false, false, true)
 
     if nullifyDamage == 0 then
         -- Note: Nullification takes precedence over elemental absorption.
@@ -1335,7 +1335,7 @@ xi.mobskills.mobBreathMove = function(mob, target, skill, action, skillParams)
         return returnInfo
     end
 
-    absorbDamage = xi.spells.damage.calculateAbsorption(target, actionElement, false)
+    absorbDamage = xi.spells.damage.calculateAbsorption(target, actionElement, false, false, false, true)
 
     -- Calulate TP and TP_BONUS if applicable.
     -- TODO: Do mobs benefit from Fencer job trait's TP_BONUS?
@@ -1757,8 +1757,8 @@ xi.mobskills.handleHybridDamage = function(mob, target, physicalDamage, element)
     local magicDamage = math.floor(physicalDamage)
 
     -- Multipliers.
-    local nullifyDamage         = xi.spells.damage.calculateNullification(target, element, true, false)
-    local absorbDamage          = xi.spells.damage.calculateAbsorption(target, element, true)
+    local nullifyDamage         = xi.spells.damage.calculateNullification(target, element, false, true, false, false)
+    local absorbDamage          = xi.spells.damage.calculateAbsorption(target, element, false, true, false, false)
     local sdt                   = 1
     local resist                = 1
     local magicDamageAdjustment = 1

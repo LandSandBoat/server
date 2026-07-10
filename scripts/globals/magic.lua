@@ -27,7 +27,7 @@ function getCurePowerOld(caster)
 end
 
 function getBaseCure(power, divisor, constant, basepower)
-    return ((power - basepower) / divisor) + constant
+    return (power - basepower) / divisor + constant
 end
 
 function getBaseCureOld(power, divisor, constant)
@@ -78,33 +78,6 @@ end
 -- Applies resistance for additional effects
 function applyResistanceAddEffect(actor, target, element, bonusMacc)
     return xi.combat.magicHitRate.calculateResistRate(actor, target, 0, xi.skill.NONE, 0, element, 0, 0, bonusMacc)
-end
-
-function finalMagicNonSpellAdjustments(caster, target, ele, dmg)
-    -- Handles target's HP adjustment and returns SIGNED dmg (negative values on absorb)
-
-    dmg = math.floor(dmg * xi.combat.damage.calculateDamageAdjustment(target, false, true, false, false))
-    dmg = math.floor(dmg * xi.spells.damage.calculateAbsorption(target, ele, true))
-    dmg = math.floor(dmg * xi.spells.damage.calculateNullification(target, ele, true, false))
-    dmg = math.floor(target:handleSevereDamage(dmg, false))
-
-    dmg = utils.handlePhalanx(target, dmg)
-    dmg = utils.handleOneForAll(target, dmg)
-    dmg = utils.handleStoneskin(target, dmg)
-
-    dmg = utils.clamp(dmg, -99999, 99999)
-
-    if dmg < 0 then
-        dmg = -(target:addHP(-dmg))
-    else
-        target:takeDamage(dmg, caster, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL + ele)
-    end
-
-    -- Not updating enmity from damage, as this is primarily used for additional effects (which don't generate emnity)
-    --  in the case that updating enmity is needed, do it manually after calling this
-    -- target:updateEnmityFromDamage(caster, dmg)
-
-    return dmg
 end
 
 function addBonusesAbility(caster, ele, target, dmg, params)

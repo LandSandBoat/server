@@ -10,15 +10,15 @@ xi.combat.action = xi.combat.action or {}
 
 local defaultsTable =
 {
-    [xi.element.NONE   ] = { xi.subEffect.LIGHT_DAMAGE     }, -- Like Excalibur.
-    [xi.element.FIRE   ] = { xi.subEffect.FIRE_DAMAGE      },
-    [xi.element.ICE    ] = { xi.subEffect.ICE_DAMAGE       },
-    [xi.element.WIND   ] = { xi.subEffect.WIND_DAMAGE      },
-    [xi.element.EARTH  ] = { xi.subEffect.EARTH_DAMAGE     },
-    [xi.element.THUNDER] = { xi.subEffect.LIGHTNING_DAMAGE },
-    [xi.element.WATER  ] = { xi.subEffect.WATER_DAMAGE     },
-    [xi.element.LIGHT  ] = { xi.subEffect.LIGHT_DAMAGE     },
-    [xi.element.DARK   ] = { xi.subEffect.DARKNESS_DAMAGE  },
+    [xi.element.NONE   ] = { xi.subEffect.DEATH_SPIKES  },
+    [xi.element.FIRE   ] = { xi.subEffect.BLAZE_SPIKES  },
+    [xi.element.ICE    ] = { xi.subEffect.ICE_SPIKES    },
+    [xi.element.WIND   ] = { xi.subEffect.GALE_SPIKES   },
+    [xi.element.EARTH  ] = { xi.subEffect.CLOD_SPIKES   },
+    [xi.element.THUNDER] = { xi.subEffect.SHOCK_SPIKES  },
+    [xi.element.WATER  ] = { xi.subEffect.DELUGE_SPIKES },
+    [xi.element.LIGHT  ] = { xi.subEffect.GLINT_SPIKES  },
+    [xi.element.DARK   ] = { xi.subEffect.DREAD_SPIKES  },
 }
 
 -----------------------------------
@@ -27,17 +27,11 @@ local defaultsTable =
 local function validateParameters(actor, target, fedData)
     local params = {}
 
-    -- Additional effect target.
-    params.aeTarget        = fedData.aeTarget or target -- Default to the current attack target.
-
     -- Chance.
     params.chance          = fedData.chance or 100 -- Default: Always proc.
 
     -- Limit undead
     params.limitUndead     = fedData.limitUndead or false -- Default: Works on undead.
-
-    -- Source is ranged attack or melee? Skip en-spell check if so.
-    params.isRanged        = fedData.isRanged or false -- Assume melee.
 
     -- Base damage parameters.
     params.basePower       = fedData.basePower or 0
@@ -48,7 +42,7 @@ local function validateParameters(actor, target, fedData)
     params.magicalElement  = fedData.magicalElement or xi.element.NONE     -- None, Fire, Ice, Wind, Earth, Thunder, Water, Light, Dark.
     params.actorStat       = fedData.actorStat or 0
     params.targetStat      = fedData.targetStat or params.actorStat        -- Currently unused. For future use.
-    params.skillRank       = fedData.skillRank or xi.skillRank.A_PLUS
+    params.skillRank       = fedData.skillRank or 0
     params.macc            = fedData.macc or 0
 
     -- Multiplier properties.
@@ -65,50 +59,17 @@ local function validateParameters(actor, target, fedData)
 
     -- Animations and messaging.
     params.animation       = fedData.animation or defaultsTable[params.magicalElement][1]
-    params.messageDamage   = fedData.messageDamage or xi.msg.basic.ADD_EFFECT_DMG
-    params.messageHeal     = fedData.messageHeal or xi.msg.basic.ADD_EFFECT_HEAL
+    params.messageDamage   = fedData.messageDamage or xi.msg.basic.SPIKES_EFFECT_DMG
+    params.messageHeal     = fedData.messageHeal or xi.msg.basic.SPIKES_EFFECT_HEAL
 
     return params
 end
 
-local function hasEnspell(actor)
-    local enspellTable =
-    {
-        [ 1] = xi.effect.ENFIRE,
-        [ 2] = xi.effect.ENFIRE_II,
-        [ 3] = xi.effect.ENBLIZZARD,
-        [ 4] = xi.effect.ENBLIZZARD_II,
-        [ 5] = xi.effect.ENAERO,
-        [ 6] = xi.effect.ENAERO_II,
-        [ 7] = xi.effect.ENSTONE,
-        [ 8] = xi.effect.ENSTONE_II,
-        [ 9] = xi.effect.ENTHUNDER,
-        [10] = xi.effect.ENTHUNDER_II,
-        [11] = xi.effect.ENWATER,
-        [12] = xi.effect.ENWATER_II,
-        [13] = xi.effect.ENLIGHT,
-        [14] = xi.effect.ENDARK,
-    }
-
-    for i = 1, #enspellTable do
-        if actor:hasStatusEffect(enspellTable[i]) then
-            return true
-        end
-    end
-
-    return false
-end
-
 -----------------------------------
--- Global functions called from "emtity.onAdditionalEffect()"
+-- Global functions called from "emtity.onSpikesDamage()"
 -----------------------------------
-xi.combat.action.executeAddEffectDamage = function(actor, target, fedData)
+xi.combat.action.executeSpikesDamage = function(actor, target, fedData)
     local params = validateParameters(actor, target, fedData)
-
-    -- Early return: En-spell overrides innate/weapon additional effects, except ranged attacks.
-    if not params.isRanged and hasEnspell(actor) then
-        return 0, 0, 0
-    end
 
     -- Early return: No proc.
     if math.randomInt(1, 100) > params.chance then
@@ -140,8 +101,6 @@ xi.combat.action.executeAddEffectDamage = function(actor, target, fedData)
     local multiplierDamageTypeSDT      = xi.combat.damage.calculateDamageAdjustment(params.aeTarget, params.attackType == xi.attackType.PHYSICAL, params.attackType == xi.attackType.MAGICAL, params.attackType == xi.attackType.RANGED, params.attackType == xi.attackType.BREATH)
     local multiplierPhysicalElementSDT = xi.combat.damage.physicalElementSDT(params.aeTarget, params.physicalElement)
     local multiplierMagicalElementSDT  = xi.combat.damage.magicalElementSDT(params.aeTarget, params.magicalElement)
-    local multiplierElementalStaff     = xi.spells.damage.calculateElementalStaffBonus(actor, params.magicalElement)
-    local multiplierElementalAffinity  = xi.spells.damage.calculateElementalAffinityBonus(actor, params.magicalElement)
     local multiplierDayWeather         = xi.spells.damage.calculateDayAndWeather(actor, params.magicalElement, false)
 
     -- Calculate optional multipliers.
@@ -153,8 +112,6 @@ xi.combat.action.executeAddEffectDamage = function(actor, target, fedData)
     damage = math.floor(damage * multiplierDamageTypeSDT)
     damage = math.floor(damage * multiplierPhysicalElementSDT)
     damage = math.floor(damage * multiplierMagicalElementSDT)
-    damage = math.floor(damage * multiplierElementalStaff)
-    damage = math.floor(damage * multiplierElementalAffinity)
     damage = math.floor(damage * multiplierDayWeather)
     damage = math.floor(damage * multiplierMagicDiff)
     damage = math.floor(damage * multiplierResist)

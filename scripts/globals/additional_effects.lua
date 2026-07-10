@@ -84,16 +84,22 @@ xi.additionalEffect.calcDamage = function(attacker, element, defender, damage)
     params.includemab = false -- May possibly need to include mab on case by case basis, further tests needed
     damage            = addBonusesAbility(attacker, element, defender, damage, params)
     damage            = math.floor(damage * applyResistanceAddEffect(attacker, defender, element, 0))
-    damage            = math.floor(damage * xi.spells.damage.calculateAbsorption(defender, element, true))
-    damage            = math.floor(damage * xi.spells.damage.calculateNullification(defender, element, true, false))
-    -- Todo: make sure day/weather/affinity bonuses tie in right here
-    damage            = finalMagicNonSpellAdjustments(attacker, defender, element, damage)
+    damage            = math.floor(damage * xi.spells.damage.calculateAbsorption(defender, element, false, true, false, false))
+    damage            = math.floor(damage * xi.spells.damage.calculateNullification(defender, element, false, true, false, false))
+    damage            = math.floor(damage * xi.combat.damage.calculateDamageAdjustment(defender, false, true, false, false))
+    damage            = math.floor(damage * xi.spells.damage.calculateAbsorption(defender, element, false, true, false, false))
+    damage            = math.floor(damage * xi.spells.damage.calculateNullification(defender, element, false, true, false, false))
+    damage            = math.floor(defender:handleSevereDamage(damage, false))
+    damage            = utils.handlePhalanx(defender, damage)
+    damage            = utils.handleOneForAll(defender, damage)
+    damage            = utils.handleStoneskin(defender, damage)
+    damage            = utils.clamp(damage, -99999, 99999)
 
-    --[[
-    This should rightly be modified by resistance checks, and while those DO they are presently not perfect.
-    If you want to force some extra randomness, un-comment the line below to artificially force 20% variance.
-    ]]
-    -- damage = damage * (math.randomInt(90, 110) / 100)
+    if damage < 0 then
+        damage = -(defender:addHP(-damage))
+    else
+        defender:takeDamage(damage, attacker, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL + element)
+    end
 
     return damage
 end

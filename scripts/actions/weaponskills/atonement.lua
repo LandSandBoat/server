@@ -74,8 +74,8 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     damage = dmg
     damage = math.floor(damage * xi.combat.damage.calculateDamageAdjustment(target, false, false, false, true))
-    damage = math.floor(damage * xi.spells.damage.calculateAbsorption(target, xi.element.NONE, false))
-    damage = math.floor(damage * xi.spells.damage.calculateNullification(target, xi.element.NONE, false, true))
+    damage = math.floor(damage * xi.spells.damage.calculateAbsorption(target, xi.element.NONE, false, false, false, true))
+    damage = math.floor(damage * xi.spells.damage.calculateNullification(target, xi.element.NONE, false, false, false, true))
     damage = math.floor(target:handleSevereDamage(damage, false))
 
     if player:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 then

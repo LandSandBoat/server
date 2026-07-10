@@ -553,11 +553,24 @@ local addEffectImmediate = function(mob, target, damage, ae, params)
 
     power = addBonusesAbility(mob, ae.ele, target, power, ae.bonusAbilityParams)
     power = power * applyResistanceAddEffect(mob, target, ae.ele, 0)
-    power = power * xi.spells.damage.calculateAbsorption(target, ae.ele, true)
-    power = power * xi.spells.damage.calculateNullification(target, ae.ele, true, false)
+    power = power * xi.spells.damage.calculateAbsorption(target, ae.ele, false, true, false, false)
+    power = power * xi.spells.damage.calculateNullification(target, ae.ele, false, true, false, false)
 
     if ae.sub ~= xi.subEffect.TP_DRAIN and ae.sub ~= xi.subEffect.MP_DRAIN then
-        power = finalMagicNonSpellAdjustments(mob, target, ae.ele, power)
+        power = math.floor(power * xi.combat.damage.calculateDamageAdjustment(target, false, true, false, false))
+        power = math.floor(power * xi.spells.damage.calculateAbsorption(target, ae.ele, false, true, false, false))
+        power = math.floor(power * xi.spells.damage.calculateNullification(target, ae.ele, false, true, false, false))
+        power = math.floor(target:handleSevereDamage(power, false))
+        power = utils.handlePhalanx(target, power)
+        power = utils.handleOneForAll(target, power)
+        power = utils.handleStoneskin(target, power)
+        power = utils.clamp(power, -99999, 99999)
+
+        if power < 0 then
+            power = -(target:addHP(-power))
+        else
+            target:takeDamage(power, mob, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL + ae.ele)
+        end
     end
 
     -- target:printToPlayer(string.format('Adjusted Power: %f', power)) -- DEBUG
