@@ -31,8 +31,6 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
         target:takeDamage(info.damage, pet, info.attackType, info.damageType)
     end
 
-    petskill:setMsg(xi.msg.basic.PET_MAGIC_BURST)
-
     return info.damage
 end
 
