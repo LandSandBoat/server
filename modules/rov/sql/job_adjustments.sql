@@ -123,3 +123,36 @@ UPDATE abilities SET recastId = 158 WHERE name = 'spirit_jump';
 -- High Jump / Soul Jump: Revert to share a cooldown
 UPDATE abilities SET recastId = 159 WHERE name = 'high_jump';
 UPDATE abilities SET recastId = 159 WHERE name = 'soul_jump';
+
+------------------------------------
+-- Summoner
+------------------------------------
+
+-- Bloodpact: Ward AoE skills: Revert radius from 14 to 10
+-- TODO: Could use more verification on exact range value
+-- Source: https://forum.square-enix.com/ffxi/threads/46531-Mar-26-2015-%28JST%29-Version-Update
+UPDATE pet_skills SET pet_skill_radius = 10 WHERE pet_skill_name IN (
+    'shining_ruby',
+    'glittering_ruby',
+    'healing_ruby_ii',
+    'soothing_ruby',
+    'ecliptic_growl',
+    'ecliptic_howl',
+    'heavenward_howl',
+    'crimson_howl',
+    'inferno_howl',
+    'earthen_ward',
+    'spring_water',
+    'soothing_current',
+    'whispering_wind',
+    'hastega',
+    'aerial_armor',
+    'fleet_wind',
+    'hastega_ii',
+    'frost_armor',
+    'crystal_blessing',
+    'rolling_thunder',
+    'lightning_armor',
+    'noctoshield',
+    'dream_shroud'
+);

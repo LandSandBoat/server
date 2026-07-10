@@ -156,6 +156,7 @@ xi.settings.main =
     USE_ADOULIN_WEAPON_SKILL_CHANGES = true,  -- true/false. Change to toggle new Adoulin weapon skill damage calculations
     DISABLE_PARTY_EXP_PENALTY        = false, -- true/false.
     ENABLE_IMMUNOBREAK               = true,  -- true/false. Allow/Disallow immunobreaks to happen.
+    ENABLE_SMN_MAGIC_CAST_TIME_MERIT = true,  -- true/false. If false, the Summoning Magic Casting Time merit has no effect on cast time (pre-2012 behavior).
 
     -- TRUSTS
     ENABLE_TRUST_CASTING           = 1,

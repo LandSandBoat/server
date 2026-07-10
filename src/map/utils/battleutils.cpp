@@ -5493,7 +5493,7 @@ timer::duration CalculateSpellCastTime(CBattleEntity* PEntity, CMagicState* PMag
     {
         auto amount = 1000ms * PEntity->getMod(Mod::SUMMONING_MAGIC_CAST);
 
-        if (PEntity->objtype == TYPE_PC)
+        if (PEntity->objtype == TYPE_PC && settings::get<bool>("main.ENABLE_SMN_MAGIC_CAST_TIME_MERIT"))
         {
             auto* PChar = static_cast<CCharEntity*>(PEntity);
             amount += std::chrono::floor<std::chrono::milliseconds>(base * 0.01 * PChar->PMeritPoints->GetMeritValue(MERIT_SUMMONING_MAGIC_CAST_TIME, PChar));
