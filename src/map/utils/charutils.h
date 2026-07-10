@@ -27,7 +27,8 @@
 
 #include "entities/char_entity.h"
 
-using Recalculate = xi::Flag<struct RecalculateTag>;
+using Recalculate       = xi::Flag<struct RecalculateTag>;
+using IncludeRecycleBin = xi::Flag<struct IncludeRecycleBinTag>;
 
 struct Charge_t;
 enum class MissionLog : uint8_t;
@@ -123,7 +124,7 @@ void DoTrade(CCharEntity* PChar, CCharEntity* PTarget);
 bool CanTrade(CCharEntity* PChar, CCharEntity* PTarget);
 
 void   CheckWeaponSkill(CCharEntity* PChar, uint8 skill);
-bool   HasItem(CCharEntity* PChar, uint16 ItemID);
+bool   HasItem(CCharEntity* PChar, uint16 ItemID, IncludeRecycleBin includeRecycleBin = IncludeRecycleBin::Yes);
 uint32 getItemCount(CCharEntity* PChar, uint16 ItemID);
 auto   AddItem(CCharEntity* PChar, uint8 LocationID, std::unique_ptr<CItem> PItem, bool silence = false) -> uint8;
 uint8  AddItem(CCharEntity* PChar, uint8 LocationID, uint16 itemID, uint32 quantity = 1, bool silence = false);
@@ -142,6 +143,8 @@ void   CheckUnarmedWeapon(CCharEntity* PChar);
 void   SetStyleLock(CCharEntity* PChar, bool isStyleLocked);
 void   UpdateWeaponStyle(CCharEntity* PChar, uint8 equipSlotID, CItemEquipment* PItem);
 void   UpdateArmorStyle(CCharEntity* PChar, uint8 equipSlotID);
+auto   canEquipItemOnAnyJob(CCharEntity* PChar, const CItemEquipment* PItem) -> bool;
+auto   hasValidStyle(CCharEntity* PChar, const CItemEquipment* PItem, const CItemEquipment* AItem) -> bool;
 void   UpdateRemovedSlotsLookForLockStyle(CCharEntity* PChar);
 void   UpdateRemovedSlotsLook(CCharEntity* PChar);
 void   AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uint8 quantity);

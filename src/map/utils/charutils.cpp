@@ -1796,7 +1796,7 @@ auto AddItem(CCharEntity* PChar, uint8 LocationID, std::unique_ptr<CItem> PItem,
  *                                                                       *
  ************************************************************************/
 
-bool HasItem(CCharEntity* PChar, uint16 ItemID)
+bool HasItem(CCharEntity* PChar, uint16 ItemID, IncludeRecycleBin includeRecycleBin)
 {
     if (ItemID == 0)
     {
@@ -1804,6 +1804,11 @@ bool HasItem(CCharEntity* PChar, uint16 ItemID)
     }
     for (uint8 LocID = 0; LocID < CONTAINER_ID::MAX_CONTAINER_ID; ++LocID)
     {
+        if (!includeRecycleBin && LocID == LOC_RECYCLEBIN)
+        {
+            continue;
+        }
+
         if (PChar->getStorage(LocID)->SearchItem(ItemID) != ERROR_SLOTID)
         {
             return true;
@@ -2007,37 +2012,6 @@ uint32 UpdateItem(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quan
         auto PRemoved = PChar->getStorage(LocationID)->RemoveItem(slotID);
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, static_cast<CONTAINER_ID>(LocationID), slotID);
 
-        if (PChar->getStyleLocked() && !HasItem(PChar, ItemID))
-        {
-            if (PItem->isType(ITEM_WEAPON))
-            {
-                if (PChar->styleItems[SLOT_MAIN] == ItemID)
-                {
-                    charutils::UpdateWeaponStyle(PChar, SLOT_MAIN, (CItemWeapon*)PChar->getEquip(SLOT_MAIN));
-                }
-                else if (PChar->styleItems[SLOT_SUB] == ItemID)
-                {
-                    charutils::UpdateWeaponStyle(PChar, SLOT_SUB, (CItemWeapon*)PChar->getEquip(SLOT_SUB));
-                }
-            }
-            else if (PItem->isType(ITEM_EQUIPMENT))
-            {
-                auto equipSlotID = ((CItemEquipment*)PItem)->getSlotType();
-                if (PChar->styleItems[equipSlotID] == ItemID)
-                {
-                    switch (equipSlotID)
-                    {
-                        case SLOT_HEAD:
-                        case SLOT_BODY:
-                        case SLOT_HANDS:
-                        case SLOT_LEGS:
-                        case SLOT_FEET:
-                            charutils::UpdateArmorStyle(PChar, equipSlotID);
-                            break;
-                    }
-                }
-            }
-        }
         luautils::OnItemDrop(PChar, PItem);
 
         // Remove soon to be stale PItem pointer from sync state
