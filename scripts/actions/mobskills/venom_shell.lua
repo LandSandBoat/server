@@ -18,6 +18,10 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local power = math.floor(mob:getMainLvl() / 2) - 2
     power = math.max(power, 16) -- Floor of 16 damage per tick
 
+    if mob:getPool() == xi.mobPool.ZOREDONITE then
+        power = 30 -- Retail capture: Zoredonite's Venom Shell ticks for 30
+    end
+
     skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, power, 0, 120))
 
     return xi.effect.POISON
