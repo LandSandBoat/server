@@ -557,6 +557,9 @@ xi.aftermath.addStatusEffect = function(player, tp, weaponSlot, aftermathType)
         return
     end
 
+    -- Ensures atleast 1000 TP is fed to AM handler, incase of TP Draining ability TODO: Check how this interaction works on retail.
+    tp = utils.clamp(tp, 1000, 3000)
+
     local weapon = player:getStorageItem(0, 0, weaponSlot)
     if not weapon then
         return
