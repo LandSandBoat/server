@@ -211,10 +211,13 @@ void CLinkshell::ChangeMemberRank(const std::string& MemberName, const uint8 req
                     newShellItem->setSubType(ITEM_LOCKED);
                     uint8 LocationID = PItemLinkshell->getLocationID();
                     uint8 SlotID     = PItemLinkshell->getSlotID();
+
+                    PMember->clearEquip(slot);
                     PMember->getStorage(LocationID)->RemoveItem(SlotID);
 
                     PItemLinkshell = newShellItem;
                     PMember->getStorage(LocationID)->InsertItem(std::move(PNewItem), SlotID);
+                    PMember->bindEquip(slot, newShellItem);
                     db::preparedStmt("UPDATE char_inventory SET itemid = ?, extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
                                      PItemLinkshell->getID(),
                                      PItemLinkshell->m_extra,
