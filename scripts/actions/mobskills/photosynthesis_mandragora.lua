@@ -1,7 +1,7 @@
 -----------------------------------
 -- Photosynthesis
---
--- Description: Adds a Regen xi.effect.
+-- Family : Mandragora
+-- Description : Adds Regen Effect
 -- Type: Enhancing
 -- Utsusemi/Blink absorb: N/A
 -- Range: Self
@@ -24,7 +24,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local power = math.floor(mob:getMainLvl() / 10)
+    local power = 1 + math.floor(mob:getMainLvl() / 10)
 
     skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.REGEN, power, 0, 120))
 
