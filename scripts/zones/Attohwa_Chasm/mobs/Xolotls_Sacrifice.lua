@@ -13,6 +13,12 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.PETRIFY)
 end
 
+entity.onMobRoam = function(mob)
+    if VanadielHour() >= 4 and VanadielHour() < 20 then
+        DespawnMob(mob:getID(), 1)
+    end
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller or optParams.noKiller then
         local xolotl = GetMobByID(zones[xi.zone.ATTOHWA_CHASM].mob.XOLOTL)
