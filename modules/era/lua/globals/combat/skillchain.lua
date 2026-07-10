@@ -76,7 +76,7 @@ m:addOverride('xi.combat.skillchain.calculateSkillchainDamage', function(actor, 
         return 0
     end
 
-    if xi.spells.damage.calculateNullification(target, skillchainElement, true, false) == 0 then
+    if xi.spells.damage.calculateNullification(target, skillchainElement, false, true, false, false) == 0 then
         return 0
     end
 
@@ -94,7 +94,7 @@ m:addOverride('xi.combat.skillchain.calculateSkillchainDamage', function(actor, 
     -- Unconfirmed order.
     local inninMultiplier      = 1 + actor:getMerit(xi.merit.INNIN_EFFECT) / 100
     local sengikoriMultiplier  = 1 + target:getMod(xi.mod.SENGIKORI_SC_DMG_DEBUFF) / 100
-    local absorptionMultiplier = xi.spells.damage.calculateAbsorption(target, skillchainElement, true)
+    local absorptionMultiplier = xi.spells.damage.calculateAbsorption(target, skillchainElement, false, true, false, false)
 
     -- Apply multipliers in order and floor after each step.
     finalDamage = math.floor(finalDamage * levelMultiplier)
