@@ -250,7 +250,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     wsc       = wsc + wsc * bonusWSC -- Bonus WSC from AF3/CA
 
     -- Monster correlation
-    local correlationMultiplier = xi.combat.damage.ecosystemMultiplier(caster, target, params.ecosystem)
+    local correlationMultiplier = xi.combat.damage.ecosystemMultiplier(caster, target, params.ecosystem or 0)
 
     -- Azure Lore
     if caster:getStatusEffect(xi.effect.AZURE_LORE) then
@@ -396,7 +396,7 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     end
 
     -- Monster correlation
-    local correlationMultiplier = xi.combat.damage.ecosystemMultiplier(caster, target, params.ecosystem)
+    local correlationMultiplier = xi.combat.damage.ecosystemMultiplier(caster, target, params.ecosystem or 0)
 
     -- Data
     local spellId         = spell:getID()
@@ -547,7 +547,7 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
     local damageType   = params.damageType or xi.damageType.NONE
 
     -- Multipliers
-    local correlationMultiplier       = xi.combat.damage.ecosystemMultiplier(caster, target, params.ecosystem)
+    local correlationMultiplier       = xi.combat.damage.ecosystemMultiplier(caster, target, params.ecosystem or 0)
     local breathSDT                   = 1 + caster:getMod(xi.mod.BREATH_DMG_DEALT) / 100
     local absorb                      = xi.spells.damage.calculateAbsorption(target, spellElement, false, true, false, true)
     local nullify                     = xi.spells.damage.calculateNullification(target, spellElement, false, true, false, true)
