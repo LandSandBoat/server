@@ -52,7 +52,7 @@ struct AutomatonSpell
     uint16                        skilllevel{ 0 };
     uint8                         heads{ 0 };
     xi::StatusEffect              enfeeble{ xi::StatusEffect::Ko };
-    IMMUNITY                      immunity{ IMMUNITY_NONE };
+    xi::Immunity                  immunity{ xi::Immunity::None };
     std::vector<xi::StatusEffect> removes;
 };
 

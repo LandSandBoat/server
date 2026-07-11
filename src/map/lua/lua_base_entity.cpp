@@ -18097,7 +18097,7 @@ bool CLuaBaseEntity::hasTrait(uint16 traitID)
  *  Notes   : Arguments are dec to bin, so powers of 2 (max 256) -- Listed in mobentity.h
  ************************************************************************/
 
-bool CLuaBaseEntity::hasImmunity(uint32 immunityID)
+bool CLuaBaseEntity::hasImmunity(xi::Immunity immunityID)
 {
     auto* PEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PEntity)
@@ -18115,7 +18115,7 @@ bool CLuaBaseEntity::hasImmunity(uint32 immunityID)
  *  Example : mob:addImmunity(xi.immunity.SILENCE)
  ************************************************************************/
 
-void CLuaBaseEntity::addImmunity(uint32 immunityID)
+void CLuaBaseEntity::addImmunity(xi::Immunity immunityID)
 {
     auto PEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (PEntity)
@@ -18130,7 +18130,7 @@ void CLuaBaseEntity::addImmunity(uint32 immunityID)
  *  Example : mob:delImmunity(xi.immunity.SILENCE)
  ************************************************************************/
 
-void CLuaBaseEntity::delImmunity(uint32 immunityID)
+void CLuaBaseEntity::delImmunity(xi::Immunity immunityID)
 {
     auto PEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (PEntity)

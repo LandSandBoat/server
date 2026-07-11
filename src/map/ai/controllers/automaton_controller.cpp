@@ -1677,7 +1677,7 @@ void LoadAutomatonSpellList()
                 .skilllevel = rset->get<uint16>("skilllevel"),
                 .heads      = rset->get<uint8>("heads"),
                 .enfeeble   = rset->get<xi::StatusEffect>("enfeeble"),
-                .immunity   = rset->get<IMMUNITY>("immunity"),
+                .immunity   = rset->get<xi::Immunity>("immunity"),
                 .removes    = {}, // Will handle in a moment
             };
 

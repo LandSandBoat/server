@@ -1740,7 +1740,7 @@ auto InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* instance) -> CMob
         PMob->m_Behavior  = rset->get<xi::Behavior>("behavior");
         PMob->m_Link      = rset->get<uint8>("links");
         PMob->m_Type      = rset->get<xi::MobType>("mobType");
-        PMob->m_Immunity  = rset->get<IMMUNITY>("immunity");
+        PMob->m_Immunity  = rset->get<xi::Immunity>("immunity");
         PMob->m_EcoSystem = rset->get<xi::Ecosystem>("ecosystemID");
 
         PMob->baseSpeed      = rset->get<uint8>("speed"); // Overwrites baseentity.cpp's defined baseSpeed
@@ -1915,7 +1915,7 @@ auto InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZone
         PMob->m_Behavior  = rset->get<xi::Behavior>("behavior");
         PMob->m_Link      = rset->get<uint8>("links");
         PMob->m_Type      = rset->get<xi::MobType>("mobType");
-        PMob->m_Immunity  = rset->get<IMMUNITY>("immunity");
+        PMob->m_Immunity  = rset->get<xi::Immunity>("immunity");
         PMob->m_EcoSystem = rset->get<xi::Ecosystem>("ecosystemID");
 
         PMob->baseSpeed      = rset->get<uint8>("speed"); // Overwrites baseentity.cpp's defined baseSpeed

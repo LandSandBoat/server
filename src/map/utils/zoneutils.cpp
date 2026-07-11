@@ -504,7 +504,7 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                                     PMob->m_Behavior  = rset->get<xi::Behavior>("behavior");
                                     PMob->m_Link      = rset->get<uint32>("links");
                                     PMob->m_Type      = rset->get<xi::MobType>("mobType");
-                                    PMob->m_Immunity  = rset->get<uint32>("immunity");
+                                    PMob->m_Immunity  = rset->get<xi::Immunity>("immunity");
                                     PMob->m_EcoSystem = rset->get<xi::Ecosystem>("ecosystemID");
 
                                     PMob->baseSpeed      = rset->get<uint8>("speed");

@@ -242,11 +242,11 @@ bool CStatusEffectContainer::CanGainStatusEffect(CStatusEffect* PStatusEffect)
         case xi::StatusEffect::Lullaby:
         {
             uint16 subPower = PStatusEffect->GetSubPower();
-            if (subPower == ELEMENT_LIGHT && m_POwner->hasImmunity(IMMUNITY_LIGHT_SLEEP))
+            if (subPower == ELEMENT_LIGHT && m_POwner->hasImmunity(xi::Immunity::LightSleep))
             {
                 return false;
             }
-            else if (subPower == ELEMENT_DARK && m_POwner->hasImmunity(IMMUNITY_DARK_SLEEP))
+            else if (subPower == ELEMENT_DARK && m_POwner->hasImmunity(xi::Immunity::DarkSleep))
             {
                 return false;
             }
@@ -254,73 +254,73 @@ bool CStatusEffectContainer::CanGainStatusEffect(CStatusEffect* PStatusEffect)
             break;
         }
         case xi::StatusEffect::Weight:
-            if (m_POwner->hasImmunity(IMMUNITY_GRAVITY))
+            if (m_POwner->hasImmunity(xi::Immunity::Gravity))
             {
                 return false;
             }
             break;
         case xi::StatusEffect::Bind:
-            if (m_POwner->hasImmunity(IMMUNITY_BIND))
+            if (m_POwner->hasImmunity(xi::Immunity::Bind))
             {
                 return false;
             }
             break;
         case xi::StatusEffect::Stun:
-            if (m_POwner->hasImmunity(IMMUNITY_STUN))
+            if (m_POwner->hasImmunity(xi::Immunity::Stun))
             {
                 return false;
             }
             break;
         case xi::StatusEffect::Silence:
-            if (m_POwner->hasImmunity(IMMUNITY_SILENCE))
+            if (m_POwner->hasImmunity(xi::Immunity::Silence))
             {
                 return false;
             }
             break;
         case xi::StatusEffect::Paralysis:
-            if (m_POwner->hasImmunity(IMMUNITY_PARALYZE))
+            if (m_POwner->hasImmunity(xi::Immunity::Paralyze))
             {
                 return false;
             }
             break;
         case xi::StatusEffect::Blindness:
-            if (m_POwner->hasImmunity(IMMUNITY_BLIND))
+            if (m_POwner->hasImmunity(xi::Immunity::Blind))
             {
                 return false;
             }
             break;
         case xi::StatusEffect::Slow:
-            if (m_POwner->hasImmunity(IMMUNITY_SLOW))
+            if (m_POwner->hasImmunity(xi::Immunity::Slow))
             {
                 return false;
             }
             break;
         case xi::StatusEffect::Poison:
-            if (m_POwner->hasImmunity(IMMUNITY_POISON))
+            if (m_POwner->hasImmunity(xi::Immunity::Poison))
             {
                 return false;
             }
             break;
         case xi::StatusEffect::Elegy:
-            if (m_POwner->hasImmunity(IMMUNITY_ELEGY))
+            if (m_POwner->hasImmunity(xi::Immunity::Elegy))
             {
                 return false;
             }
             break;
         case xi::StatusEffect::Requiem:
-            if (m_POwner->hasImmunity(IMMUNITY_REQUIEM))
+            if (m_POwner->hasImmunity(xi::Immunity::Requiem))
             {
                 return false;
             }
             break;
         case xi::StatusEffect::Terror:
-            if (m_POwner->hasImmunity(IMMUNITY_TERROR))
+            if (m_POwner->hasImmunity(xi::Immunity::Terror))
             {
                 return false;
             }
             break;
         case xi::StatusEffect::Petrification:
-            if (m_POwner->hasImmunity(IMMUNITY_PETRIFY))
+            if (m_POwner->hasImmunity(xi::Immunity::Petrify))
             {
                 return false;
             }

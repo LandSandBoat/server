@@ -3847,17 +3847,17 @@ function CBaseEntity:hasTrait(traitID)
 end
 
 ---@nodiscard
----@param immunityID integer
+---@param immunityID xi.immunity
 ---@return boolean
 function CBaseEntity:hasImmunity(immunityID)
 end
 
----@param immunityID integer
+---@param immunityID xi.immunity
 ---@return nil
 function CBaseEntity:addImmunity(immunityID)
 end
 
----@param immunityID integer
+---@param immunityID xi.immunity
 ---@return nil
 function CBaseEntity:delImmunity(immunityID)
 end

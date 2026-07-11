@@ -135,7 +135,7 @@ auto CInstanceLoader::LoadInstance() const -> CInstance*
             PMob->m_Behavior  = rset->get<xi::Behavior>("behavior");
             PMob->m_Link      = rset->get<uint8>("links");
             PMob->m_Type      = rset->get<xi::MobType>("mobType");
-            PMob->m_Immunity  = rset->get<IMMUNITY>("immunity");
+            PMob->m_Immunity  = rset->get<xi::Immunity>("immunity");
             PMob->m_EcoSystem = rset->get<xi::Ecosystem>("ecosystemID");
 
             PMob->baseSpeed      = rset->get<uint8>("speed"); // Overwrites baseentity.cpp's defined baseSpeed
