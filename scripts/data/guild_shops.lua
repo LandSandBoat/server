@@ -950,7 +950,7 @@ xi.data.guildShops =
             { id = xi.item.KODACHI,         initial = 0,  maxStock = 60, targetStock = 55, buyMax = 67200,   restockRate = 0 }, -- targetStock assumed
             -- { id = xi.item.SHINOGI,         initial = 0,  maxStock = 60, targetStock = 55, buyMax = 5400,    restockRate = 0 },  -- sell-only; unsourced, buyMax/targetStock unconfirmed
             { id = xi.item.SAKURAFUBUKI,    initial = 0,  maxStock = 60, targetStock = 55, buyMax = 127050,  restockRate = 0 }, -- targetStock assumed
-            -- { id = xi.item.HOCHO,           initial = 0,  maxStock = 60, targetStock = 55, buyMax = 6300,    restockRate = 0 },  -- sell-only; unsourced, buyMax/targetStock unconfirmed
+            { id = xi.item.HOCHO,           initial = 0,  maxStock = 60, targetStock = 55, buyMax = 273000,  restockRate = 0 }, -- targetStock assumed
             { id = xi.item.KABUTOWARI,      initial = 0,  maxStock = 60, targetStock = 55, buyMax = 322000,  restockRate = 0 },
             { id = xi.item.UCHIGATANA,      initial = 50, maxStock = 60, targetStock = 55, buyMax = 26680,   restockRate = 10 },
             { id = xi.item.DOTANUKI,        initial = 0,  maxStock = 60, targetStock = 55, buyMax = 715000,  restockRate = 0 }, -- targetStock assumed
@@ -1707,7 +1707,7 @@ xi.data.guildShops =
             { id = xi.item.KODACHI,           initial = 0,  maxStock = 30, targetStock = 25, buyMax = 67200,   restockRate = 0 },                -- targetStock assumed
             -- { id = xi.item.SHINOGI,           initial = 0,  maxStock = 30, targetStock = 25, buyMax = 0,      restockRate = 0 }, -- unsourced (missing on Jirokichi too); disabled
             { id = xi.item.SAKURAFUBUKI,      initial = 0,  maxStock = 30, targetStock = 25, buyMax = 127050,  restockRate = 0 },                -- targetStock assumed
-            -- { id = xi.item.HOCHO,             initial = 0,  maxStock = 30, targetStock = 25, buyMax = 0,      restockRate = 0 }, -- unsourced (missing on Jirokichi too); disabled
+            { id = xi.item.HOCHO,             initial = 0,  maxStock = 30, targetStock = 25, buyMax = 273000,  restockRate = 0 },  -- targetStock assumed
             { id = xi.item.KABUTOWARI,        initial = 0,  maxStock = 30, targetStock = 25, buyMax = 322000,  restockRate = 0 },                -- targetStock assumed
             { id = xi.item.UCHIGATANA,        initial = 0,  maxStock = 30, targetStock = 25, buyMax = 26680,   restockRate = 0 },                -- targetStock assumed
             { id = xi.item.DOTANUKI,          initial = 0,  maxStock = 30, targetStock = 25, buyMax = 147957,  restockRate = 0 },                -- targetStock assumed
@@ -1912,7 +1912,7 @@ xi.data.guildShops =
             { id = xi.item.KODACHI,                 initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 67200,   restockRate = 0 }, -- targetStock assumed
             -- { id = xi.item.SHINOGI,                 initial = 0,  maxStock = 60,  targetStock = 45,  buyMax = 0,       restockRate = 0 }, -- unsourced (missing on Jirokichi too); disabled
             { id = xi.item.SAKURAFUBUKI,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 127050,  restockRate = 0 }, -- targetStock assumed
-            -- { id = xi.item.HOCHO,                   initial = 0,  maxStock = 60,  targetStock = 45,  buyMax = 0,       restockRate = 0 }, -- unsourced (missing on Jirokichi too); disabled
+            { id = xi.item.HOCHO,                   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 273000,  restockRate = 0 },  -- targetStock assumed
             { id = xi.item.KABUTOWARI,              initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 322000,  restockRate = 0 }, -- targetStock assumed
             { id = xi.item.UCHIGATANA,              initial = 50,  maxStock = 60,  targetStock = 55,  buyMax = 26680,   restockRate = 10 },
             { id = xi.item.DOTANUKI,                initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 715000,  restockRate = 0 }, -- targetStock assumed
