@@ -47,11 +47,11 @@
 
 #include "battleutils.h"
 #include "charutils.h"
+#include "data/enums/weather.h"
 #include "enums/chat_message_type.h"
 #include "enums/four_cc.h"
 #include "enums/key_items.h"
 #include "enums/msg_std.h"
-#include "enums/weather.h"
 #include "item_container.h"
 #include "itemutils.h"
 #include "mob_modifier.h"
@@ -333,11 +333,11 @@ auto GetWeatherModifier(const CCharEntity* PChar) -> float
     const auto weather    = zoneutils::GetZone(PChar->getZone())->weather().current();
     float      weatherMod = 1.0f;
 
-    if (weather == Weather::Rain)
+    if (weather == xi::Weather::Rain)
     {
         weatherMod = 1.1f;
     }
-    else if (weather == Weather::Squall)
+    else if (weather == xi::Weather::Squall)
     {
         weatherMod = 1.2f;
     }

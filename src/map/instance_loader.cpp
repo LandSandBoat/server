@@ -110,7 +110,7 @@ auto CInstanceLoader::LoadInstance() const -> CInstance*
             PMob->loc.p                 = PMob->m_SpawnPoint;
 
             PMob->m_RespawnTime = std::chrono::seconds(rset->get<uint32>("respawntime"));
-            PMob->m_SpawnType   = rset->get<SPAWNTYPE>("spawntype");
+            PMob->m_SpawnType   = rset->get<xi::SpawnType>("spawntype");
             PMob->m_DropID      = rset->get<uint32>("dropid");
 
             PMob->HPmodifier = rset->get<uint32>("HP");

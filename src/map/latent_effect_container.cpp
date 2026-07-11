@@ -705,7 +705,7 @@ void CLatentEffectContainer::CheckLatentsWeather()
     CheckLatentsWeather(PZone->weather().current());
 }
 
-void CLatentEffectContainer::CheckLatentsWeather(Weather weather)
+void CLatentEffectContainer::CheckLatentsWeather(xi::Weather weather)
 {
     ProcessLatentEffects(
         [this, weather](CLatentEffect& latent)

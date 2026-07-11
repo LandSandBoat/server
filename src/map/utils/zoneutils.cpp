@@ -27,9 +27,9 @@
 #include "campaign_system.h"
 #include "common/logging.h"
 #include "conquest_system.h"
+#include "data/enums/weather.h"
 #include "entities/mob_entity.h"
 #include "entities/npc_entity.h"
-#include "enums/weather.h"
 #include "items/item_weapon.h"
 #include "itemutils.h"
 #include "lua/luautils.h"
@@ -466,7 +466,7 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                                     PMob->loc.p                 = PMob->m_SpawnPoint;
 
                                     PMob->m_RespawnTime = std::chrono::seconds(rset->get<uint32>("respawntime"));
-                                    PMob->m_SpawnType   = rset->get<SPAWNTYPE>("spawntype");
+                                    PMob->m_SpawnType   = rset->get<xi::SpawnType>("spawntype");
                                     PMob->m_DropID      = rset->get<uint32>("dropid");
 
                                     if (!rset->isNull("spawnHour") && !rset->isNull("despawnHour"))
@@ -614,7 +614,7 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                                     {
                                         SpawnSlot* spawnSlot = PZone->spawnHandler().getOrCreateSpawnSlot(slotId);
 
-                                        if (PMob->m_SpawnType == SPAWNTYPE_SCRIPTED)
+                                        if (PMob->m_SpawnType == xi::SpawnType::Scripted)
                                         {
                                             ShowError("Mob with ID %u in spawn slot %u in zone %u is a scripted spawn. Scripted spawns should not be assigned to spawn slots.", PMob->id, slotId, zoneId);
                                         }
@@ -672,17 +672,17 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                     PMob->saveMobModifiers();
 
                     // Allow the mob to respawn if it is NOT a lottery, scripted, or windowed spawn
-                    PMob->m_AllowRespawn = !(PMob->m_SpawnType == SPAWNTYPE_LOTTERY ||
-                                             PMob->m_SpawnType == SPAWNTYPE_SCRIPTED ||
-                                             PMob->m_SpawnType == SPAWNTYPE_WINDOWED);
+                    PMob->m_AllowRespawn = !(PMob->m_SpawnType == xi::SpawnType::Lottery ||
+                                             PMob->m_SpawnType == xi::SpawnType::Scripted ||
+                                             PMob->m_SpawnType == xi::SpawnType::Windowed);
 
                     // Intialize monsters that do not require specific conditions to spawn initially. Monsters conditioned to
                     // spawn by time or weather will be allowed upon corresponding time/weather events.
                     PMob->m_CanSpawn = !PMob->spawnWindow().has_value() &&
-                                       (PMob->m_SpawnType == SPAWNTYPE_NORMAL ||
-                                        PMob->m_SpawnType == SPAWNTYPE_LOTTERY ||
-                                        PMob->m_SpawnType == SPAWNTYPE_SCRIPTED ||
-                                        PMob->m_SpawnType == SPAWNTYPE_WINDOWED);
+                                       (PMob->m_SpawnType == xi::SpawnType::Normal ||
+                                        PMob->m_SpawnType == xi::SpawnType::Lottery ||
+                                        PMob->m_SpawnType == xi::SpawnType::Scripted ||
+                                        PMob->m_SpawnType == xi::SpawnType::Windowed);
                 });
 
             // Spawn mobs after they've all been initialized. Spawning some mobs will spawn other mobs that may not yet be initialized.
@@ -692,7 +692,7 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                     // Skip mobs already registered via setRespawnTime in onMobInitialize - let SpawnHandler handle them
                     if (PZone->spawnHandler().isRegistered(PMob))
                     {
-                        if (PMob->m_SpawnType == SPAWNTYPE_SCRIPTED && PMob->m_RespawnTime > 0s)
+                        if (PMob->m_SpawnType == xi::SpawnType::Scripted && PMob->m_RespawnTime > 0s)
                         {
                             PMob->m_AllowRespawn = true;
                         }
@@ -707,13 +707,13 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                     else
                     {
                         // If the mob is a scripted spawn and it has a respawn time defined when the mob initializes then allow it to respawn
-                        if (PMob->m_SpawnType == SPAWNTYPE_SCRIPTED && PMob->m_RespawnTime > 0s)
+                        if (PMob->m_SpawnType == xi::SpawnType::Scripted && PMob->m_RespawnTime > 0s)
                         {
                             PMob->m_AllowRespawn = true;
                         }
 
                         // Condition-based mobs (time/weather) register with 0s so they spawn when conditions are met
-                        const bool isConditionBased = (PMob->m_SpawnType & (SPAWNTYPE_ATNIGHT | SPAWNTYPE_ATEVENING | SPAWNTYPE_WEATHER | SPAWNTYPE_FOG)) ||
+                        const bool isConditionBased = (PMob->m_SpawnType & (xi::SpawnType::AtNight | xi::SpawnType::AtEvening | xi::SpawnType::Weather | xi::SpawnType::Fog)) != xi::SpawnType::Normal ||
                                                       PMob->spawnWindow().has_value();
                         PZone->spawnHandler().registerForRespawn(PMob, isConditionBased ? std::make_optional(0s) : std::nullopt);
                     }
@@ -1252,9 +1252,9 @@ auto GetCurrentContinent(const uint16 zoneId) -> CONTINENT_TYPE
     return GetCurrentRegion(zoneId) != REGION_TYPE::UNKNOWN ? CONTINENT_TYPE::THE_MIDDLE_LANDS : CONTINENT_TYPE::OTHER_AREAS;
 }
 
-auto GetWeatherElement(const Weather weather) -> int
+auto GetWeatherElement(const xi::Weather weather) -> int
 {
-    if (!magic_enum::enum_contains<Weather>(weather))
+    if (!magic_enum::enum_contains<xi::Weather>(weather))
     {
         ShowWarning("zoneutils::GetWeatherElement() - Invalid weather passed to function.");
         return 0;

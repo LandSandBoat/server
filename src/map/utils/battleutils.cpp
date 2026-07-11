@@ -45,13 +45,13 @@
 #include "attack.h"
 #include "attackutils.h"
 #include "charutils.h"
+#include "data/enums/weather.h"
 #include "enmity_container.h"
 #include "entities/battle_entity.h"
 #include "entities/mob_entity.h"
 #include "entities/pet_entity.h"
 #include "entities/trust_entity.h"
 #include "enums/msg_std.h"
-#include "enums/weather.h"
 #include "item_container.h"
 #include "items.h"
 #include "items/item_weapon.h"
@@ -717,15 +717,15 @@ int32 CalculateEnspellDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender,
     uint32 WeekDay = static_cast<uint8>(vanadiel_time::get_weekday());
     auto   weather = GetWeather(PAttacker, false);
 
-    DAYTYPE strongDay[8]           = { FIRESDAY, ICEDAY, WINDSDAY, EARTHSDAY, LIGHTNINGDAY, WATERSDAY, LIGHTSDAY, DARKSDAY };
-    DAYTYPE weakDay[8]             = { WATERSDAY, FIRESDAY, ICEDAY, WINDSDAY, EARTHSDAY, LIGHTNINGDAY, DARKSDAY, LIGHTSDAY };
-    Weather strongWeatherSingle[8] = { Weather::HotSpell, Weather::Snow, Weather::Wind, Weather::DustStorm, Weather::Thunder, Weather::Rain, Weather::Auroras, Weather::Gloom };
-    Weather strongWeatherDouble[8] = { Weather::HeatWave, Weather::Blizzards, Weather::Gales, Weather::SandStorm, Weather::Thunderstorms, Weather::Squall, Weather::StellarGlare, Weather::Darkness };
-    Weather weakWeatherSingle[8]   = { Weather::Rain, Weather::HotSpell, Weather::Snow, Weather::Wind, Weather::DustStorm, Weather::Thunder, Weather::Gloom, Weather::Auroras };
-    Weather weakWeatherDouble[8]   = { Weather::Squall, Weather::HeatWave, Weather::Blizzards, Weather::Gales, Weather::SandStorm, Weather::Thunderstorms, Weather::Darkness, Weather::StellarGlare };
-    uint32  obi[8]                 = { 15435, 15436, 15437, 15438, 15439, 15440, 15441, 15442 };
-    Mod     resistarray[8]         = { Mod::FIRE_MEVA, Mod::ICE_MEVA, Mod::WIND_MEVA, Mod::EARTH_MEVA, Mod::THUNDER_MEVA, Mod::WATER_MEVA, Mod::LIGHT_MEVA, Mod::DARK_MEVA };
-    bool    obiBonus               = false;
+    DAYTYPE     strongDay[8]           = { FIRESDAY, ICEDAY, WINDSDAY, EARTHSDAY, LIGHTNINGDAY, WATERSDAY, LIGHTSDAY, DARKSDAY };
+    DAYTYPE     weakDay[8]             = { WATERSDAY, FIRESDAY, ICEDAY, WINDSDAY, EARTHSDAY, LIGHTNINGDAY, DARKSDAY, LIGHTSDAY };
+    xi::Weather strongWeatherSingle[8] = { xi::Weather::HotSpell, xi::Weather::Snow, xi::Weather::Wind, xi::Weather::DustStorm, xi::Weather::Thunder, xi::Weather::Rain, xi::Weather::Auroras, xi::Weather::Gloom };
+    xi::Weather strongWeatherDouble[8] = { xi::Weather::HeatWave, xi::Weather::Blizzards, xi::Weather::Gales, xi::Weather::SandStorm, xi::Weather::Thunderstorms, xi::Weather::Squall, xi::Weather::StellarGlare, xi::Weather::Darkness };
+    xi::Weather weakWeatherSingle[8]   = { xi::Weather::Rain, xi::Weather::HotSpell, xi::Weather::Snow, xi::Weather::Wind, xi::Weather::DustStorm, xi::Weather::Thunder, xi::Weather::Gloom, xi::Weather::Auroras };
+    xi::Weather weakWeatherDouble[8]   = { xi::Weather::Squall, xi::Weather::HeatWave, xi::Weather::Blizzards, xi::Weather::Gales, xi::Weather::SandStorm, xi::Weather::Thunderstorms, xi::Weather::Darkness, xi::Weather::StellarGlare };
+    uint32      obi[8]                 = { 15435, 15436, 15437, 15438, 15439, 15440, 15441, 15442 };
+    Mod         resistarray[8]         = { Mod::FIRE_MEVA, Mod::ICE_MEVA, Mod::WIND_MEVA, Mod::EARTH_MEVA, Mod::THUNDER_MEVA, Mod::WATER_MEVA, Mod::LIGHT_MEVA, Mod::DARK_MEVA };
+    bool        obiBonus               = false;
 
     double half      = (double)(PDefender->getMod(resistarray[element - 1])) / 100;
     double quart     = pow(half, 2);
@@ -4802,68 +4802,68 @@ ELEMENT GetDayElement()
     }
 }
 
-auto GetWeather(CBattleEntity* PEntity, bool ignoreScholar) -> Weather
+auto GetWeather(CBattleEntity* PEntity, bool ignoreScholar) -> xi::Weather
 {
     if (PEntity == nullptr || zoneutils::GetZone(PEntity->getZone()) == nullptr)
     {
-        return Weather::None;
+        return xi::Weather::None;
     }
 
     return GetWeather(PEntity, ignoreScholar, zoneutils::GetZone(PEntity->getZone())->weather().current());
 }
 
-auto GetWeather(CBattleEntity* PEntity, bool ignoreScholar, Weather zoneWeather) -> Weather
+auto GetWeather(CBattleEntity* PEntity, bool ignoreScholar, xi::Weather zoneWeather) -> xi::Weather
 {
     if (PEntity == nullptr)
     {
-        return Weather::None;
+        return xi::Weather::None;
     }
 
-    auto scholarSpell = Weather::None;
+    auto scholarSpell = xi::Weather::None;
 
     if (!ignoreScholar) // Do not need to check for status effects if we're ignoring scholar spells
     {
         if (PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Firestorm))
         {
-            scholarSpell = Weather::HotSpell;
+            scholarSpell = xi::Weather::HotSpell;
         }
         if (PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Rainstorm))
         {
-            scholarSpell = Weather::Rain;
+            scholarSpell = xi::Weather::Rain;
         }
         if (PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Sandstorm))
         {
-            scholarSpell = Weather::DustStorm;
+            scholarSpell = xi::Weather::DustStorm;
         }
         if (PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Windstorm))
         {
-            scholarSpell = Weather::Wind;
+            scholarSpell = xi::Weather::Wind;
         }
         if (PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Hailstorm))
         {
-            scholarSpell = Weather::Snow;
+            scholarSpell = xi::Weather::Snow;
         }
         if (PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Thunderstorm))
         {
-            scholarSpell = Weather::Thunder;
+            scholarSpell = xi::Weather::Thunder;
         }
         if (PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Aurorastorm))
         {
-            scholarSpell = Weather::Auroras;
+            scholarSpell = xi::Weather::Auroras;
         }
         if (PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Voidstorm))
         {
-            scholarSpell = Weather::Gloom;
+            scholarSpell = xi::Weather::Gloom;
         }
     }
 
-    if (ignoreScholar || scholarSpell == Weather::None || static_cast<uint16_t>(zoneWeather) == (static_cast<uint16_t>(scholarSpell) + 1))
+    if (ignoreScholar || scholarSpell == xi::Weather::None || static_cast<uint16_t>(zoneWeather) == (static_cast<uint16_t>(scholarSpell) + 1))
     { // Strong weather overwrites scholar spell weak weather
         return zoneWeather;
     }
     else if (scholarSpell == zoneWeather)
     {
-        return static_cast<Weather>(static_cast<uint16_t>(zoneWeather) + 1); // Storm spells stack with weather
+        return static_cast<xi::Weather>(static_cast<uint16_t>(zoneWeather) + 1); // Storm spells stack with weather
     }
     else
     {
@@ -4871,7 +4871,7 @@ auto GetWeather(CBattleEntity* PEntity, bool ignoreScholar, Weather zoneWeather)
     }
 }
 
-auto WeatherMatchesElement(const Weather weather, const uint8 element) -> bool
+auto WeatherMatchesElement(const xi::Weather weather, const uint8 element) -> bool
 {
     switch (element)
     {
@@ -4881,8 +4881,8 @@ auto WeatherMatchesElement(const Weather weather, const uint8 element) -> bool
         case ELEMENT_FIRE:
             switch (weather)
             {
-                case Weather::HotSpell:
-                case Weather::HeatWave:
+                case xi::Weather::HotSpell:
+                case xi::Weather::HeatWave:
                     return true;
                     break;
                 default:
@@ -4892,8 +4892,8 @@ auto WeatherMatchesElement(const Weather weather, const uint8 element) -> bool
         case ELEMENT_ICE:
             switch (weather)
             {
-                case Weather::Snow:
-                case Weather::Blizzards:
+                case xi::Weather::Snow:
+                case xi::Weather::Blizzards:
                     return true;
                     break;
                 default:
@@ -4903,8 +4903,8 @@ auto WeatherMatchesElement(const Weather weather, const uint8 element) -> bool
         case ELEMENT_WIND:
             switch (weather)
             {
-                case Weather::Wind:
-                case Weather::Gales:
+                case xi::Weather::Wind:
+                case xi::Weather::Gales:
                     return true;
                     break;
                 default:
@@ -4914,8 +4914,8 @@ auto WeatherMatchesElement(const Weather weather, const uint8 element) -> bool
         case ELEMENT_EARTH:
             switch (weather)
             {
-                case Weather::DustStorm:
-                case Weather::SandStorm:
+                case xi::Weather::DustStorm:
+                case xi::Weather::SandStorm:
                     return true;
                     break;
                 default:
@@ -4925,8 +4925,8 @@ auto WeatherMatchesElement(const Weather weather, const uint8 element) -> bool
         case ELEMENT_THUNDER:
             switch (weather)
             {
-                case Weather::Thunder:
-                case Weather::Thunderstorms:
+                case xi::Weather::Thunder:
+                case xi::Weather::Thunderstorms:
                     return true;
                     break;
                 default:
@@ -4936,8 +4936,8 @@ auto WeatherMatchesElement(const Weather weather, const uint8 element) -> bool
         case ELEMENT_WATER:
             switch (weather)
             {
-                case Weather::Rain:
-                case Weather::Squall:
+                case xi::Weather::Rain:
+                case xi::Weather::Squall:
                     return true;
                     break;
                 default:
@@ -4947,8 +4947,8 @@ auto WeatherMatchesElement(const Weather weather, const uint8 element) -> bool
         case ELEMENT_LIGHT:
             switch (weather)
             {
-                case Weather::Auroras:
-                case Weather::StellarGlare:
+                case xi::Weather::Auroras:
+                case xi::Weather::StellarGlare:
                     return true;
                     break;
                 default:
@@ -4958,8 +4958,8 @@ auto WeatherMatchesElement(const Weather weather, const uint8 element) -> bool
         case ELEMENT_DARK:
             switch (weather)
             {
-                case Weather::Gloom:
-                case Weather::Darkness:
+                case xi::Weather::Gloom:
+                case xi::Weather::Darkness:
                     return true;
                     break;
                 default:

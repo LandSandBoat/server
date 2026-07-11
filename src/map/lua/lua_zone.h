@@ -61,7 +61,7 @@ public:
     REGION_TYPE getRegionID();
     ZONE_TYPE   getTypeMask();
     auto        getBattlefieldByInitiator(uint32 charID) -> CBattlefield*;
-    auto        getWeather() const -> Weather;
+    auto        getWeather() const -> xi::Weather;
     uint32      getUptime();
     void        reloadNavmesh();
     void        rebuildNavmesh(const sol::table& table);

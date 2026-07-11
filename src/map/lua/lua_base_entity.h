@@ -175,7 +175,7 @@ public:
     void updateNPCHideTime(const sol::object& seconds); // Updates the length of time a NPC remains hidden, if shorter than the original hide time.
 
     auto getWeather(const sol::object& ignoreScholar) const -> uint8;
-    void setWeather(Weather weatherType); // Set Weather condition (GM COMMAND)
+    void setWeather(xi::Weather weatherType); // Set Weather condition (GM COMMAND)
 
     // PC Instructions
     void changeMusic(MusicSlot slotId, uint16 trackId) const;                                                      // Sets the specified music Track for specified music block.

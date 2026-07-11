@@ -32,7 +32,7 @@ When a status effect is gained twice on a player. It can do one or more of the f
 #include "common/logging.h"
 
 #include "common/timer.h"
-#include "enums/weather.h"
+#include "data/enums/weather.h"
 
 #include <common/types/hash_map.h>
 
@@ -2054,12 +2054,12 @@ void CStatusEffectContainer::TickRegen(timer::time_point tick)
                     petElementIdx = static_cast<uint8>(petElement) - 1;
                 }
 
-                static const Mod     strong[8]        = { Mod::FIRE_AFFINITY_PERP, Mod::ICE_AFFINITY_PERP, Mod::WIND_AFFINITY_PERP, Mod::EARTH_AFFINITY_PERP, Mod::THUNDER_AFFINITY_PERP, Mod::WATER_AFFINITY_PERP, Mod::LIGHT_AFFINITY_PERP, Mod::DARK_AFFINITY_PERP };
-                static const Weather weatherStrong[8] = { Weather::HotSpell, Weather::Snow, Weather::Wind, Weather::DustStorm, Weather::Thunder, Weather::Rain, Weather::Auroras, Weather::Gloom };
+                static const Mod         strong[8]        = { Mod::FIRE_AFFINITY_PERP, Mod::ICE_AFFINITY_PERP, Mod::WIND_AFFINITY_PERP, Mod::EARTH_AFFINITY_PERP, Mod::THUNDER_AFFINITY_PERP, Mod::WATER_AFFINITY_PERP, Mod::LIGHT_AFFINITY_PERP, Mod::DARK_AFFINITY_PERP };
+                static const xi::Weather weatherStrong[8] = { xi::Weather::HotSpell, xi::Weather::Snow, xi::Weather::Wind, xi::Weather::DustStorm, xi::Weather::Thunder, xi::Weather::Rain, xi::Weather::Auroras, xi::Weather::Gloom };
 
                 // Day / Weather elemental matches.
                 bool dayMatch     = elementValid && dayElement == petElement;
-                bool weatherMatch = elementValid && (weather == weatherStrong[petElementIdx] || weather == static_cast<Weather>(static_cast<uint16_t>(weatherStrong[petElementIdx]) + 1));
+                bool weatherMatch = elementValid && (weather == weatherStrong[petElementIdx] || weather == static_cast<xi::Weather>(static_cast<uint16_t>(weatherStrong[petElementIdx]) + 1));
 
                 // Halve perpetuation cost before all regular reductions.
                 bool halfFromCarby   = PChar->getMod(Mod::HALF_PERPETUATION_CARBUNCLE) != 0 && PPet->petID() == PETID_CARBUNCLE;

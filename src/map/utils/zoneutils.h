@@ -69,7 +69,7 @@ void SavePlayTime();
 auto GetCurrentRegion(uint16 zoneId) -> REGION_TYPE;
 auto GetCurrentContinent(uint16 zoneId) -> CONTINENT_TYPE;
 
-auto GetWeatherElement(Weather weather) -> int;
+auto GetWeatherElement(xi::Weather weather) -> int;
 
 auto GetZone(uint16 zoneId) -> CZone*;
 auto GetEntity(uint32 id, uint8 filter = -1) -> CBaseEntity*;

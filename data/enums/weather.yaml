@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint16_t
+  lua:
+    table: xi.weather
+
+values:
+  none: 0
+  sunshine: 1
+  clouds: 2
+  fog: 3
+  hot_spell: 4
+  heat_wave: 5
+  rain: 6
+  squall: 7
+  dust_storm: 8
+  sand_storm: 9
+  wind: 10
+  gales: 11
+  snow: 12
+  blizzards: 13
+  thunder: 14
+  thunderstorms: 15
+  auroras: 16
+  stellar_glare: 17
+  gloom: 18
+  darkness: 19

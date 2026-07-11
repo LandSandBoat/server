@@ -21,7 +21,7 @@
 
 #include "packets/s2c/0x057_weather.h"
 
-#include "enums/weather.h"
+#include "data/enums/weather.h"
 
 #include <common/types/hash_map.h>
 
@@ -391,7 +391,7 @@ void CZone::LoadZoneLines()
  *                                                                        *
  *  Loads weather for the zone from zone_bweather SQL Table               *
  *                                                                        *
- *  Weather is a rotating pattern of 2160 vanadiel days for each zone.    *
+ *  xi::Weather is a rotating pattern of 2160 vanadiel days for each zone.    *
  *  It's stored as a blob of 2160 16-bit values, each representing 1 day  *
  *  starting from day 0 and storing 3 5-bit weather values each.          *
  *                                                                        *
@@ -418,9 +418,9 @@ void CZone::LoadZoneWeather()
         {
             if (weatherBlob[i])
             {
-                const auto w_normal = static_cast<Weather>(weatherBlob[i] >> 10);
-                const auto w_common = static_cast<Weather>((weatherBlob[i] >> 5) & 0x1F);
-                const auto w_rare   = static_cast<Weather>(weatherBlob[i] & 0x1F);
+                const auto w_normal = static_cast<xi::Weather>(weatherBlob[i] >> 10);
+                const auto w_common = static_cast<xi::Weather>((weatherBlob[i] >> 5) & 0x1F);
+                const auto w_rare   = static_cast<xi::Weather>(weatherBlob[i] & 0x1F);
                 weather_.addEntry(i, ZoneWeather(w_normal, w_common, w_rare));
             }
         }
@@ -678,11 +678,11 @@ void CZone::updateCharLevelRestriction(CCharEntity* PChar)
     }
 }
 
-void CZone::SetWeather(const Weather weather)
+void CZone::SetWeather(const xi::Weather weather)
 {
     TracyZoneScoped;
 
-    if (!magic_enum::enum_contains<Weather>(weather))
+    if (!magic_enum::enum_contains<xi::Weather>(weather))
     {
         ShowWarningFmt("Weather value ({}) invalid.", static_cast<uint16_t>(weather));
         return;
@@ -727,7 +727,7 @@ void CZone::UpdateWeather()
 
     const ZoneWeather weatherType = weather_.entryForDay(static_cast<uint16>(WeatherDay));
 
-    auto selectedWeather = Weather::None;
+    auto selectedWeather = xi::Weather::None;
 
     // 15% chance for rare weather, 35% chance for common weather, 50% chance for normal weather
     // * Percentages were generated from a 6 hour sample and rounded down to closest multiple of 5*
@@ -748,10 +748,10 @@ void CZone::UpdateWeather()
     // (Al'Taieu likely has it every morning, while Atohwa Chasm can have it at random any time of day)
     if ((CurrentVanaDate >= StartFogVanaDate) &&
         (CurrentVanaDate < EndFogVanaDate) &&
-        (selectedWeather < Weather::HotSpell) &&
+        (selectedWeather < xi::Weather::HotSpell) &&
         !(GetTypeMask() & ZONE_TYPE::CITY))
     {
-        selectedWeather = Weather::Fog;
+        selectedWeather = xi::Weather::Fog;
         // Force the weather to change by 7 am
         WeatherNextUpdate = EndFogVanaDate - CurrentVanaDate;
     }

@@ -278,7 +278,7 @@ bool  IsContentEnabled(const std::string& content);
 
 void OnGameDay(CZone* PZone);
 void OnGameHour(CZone* PZone);
-void OnZoneWeatherChange(uint16 zoneId, Weather weather);
+void OnZoneWeatherChange(uint16 zoneId, xi::Weather weather);
 void OnTOTDChange(uint16 ZoneID, uint8 TOTD);
 
 void OnGameIn(CCharEntity* PChar, bool zoning);

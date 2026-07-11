@@ -25,15 +25,15 @@
 
 #include <map>
 
-enum class Weather : uint16_t;
+#include "data/enums/weather.h"
 
 struct ZoneWeather
 {
-    Weather normal;
-    Weather common;
-    Weather rare;
+    xi::Weather normal;
+    xi::Weather common;
+    xi::Weather rare;
 
-    ZoneWeather(Weather normal, Weather common, Weather rare)
+    ZoneWeather(xi::Weather normal, xi::Weather common, xi::Weather rare)
     : normal(normal)
     , common(common)
     , rare(rare)
@@ -48,9 +48,9 @@ struct ZoneWeather
 class WeatherContainer
 {
 public:
-    auto current() const -> Weather;
+    auto current() const -> xi::Weather;
     auto changeTime() const -> uint32;
-    void set(Weather weather, uint32 changeTime);
+    void set(xi::Weather weather, uint32 changeTime);
 
     // A zone with 0 or 1 probability entries never cycles its weather.
     auto isStatic() const -> bool;
@@ -59,11 +59,11 @@ public:
     void addEntry(uint16 day, ZoneWeather entry);
 
     // The probabilities in effect for the given day-of-cycle. Returns a zeroed
-    // entry (which reads as Weather::None) when no entry covers the day.
+    // entry (which reads as xi::Weather::None) when no entry covers the day.
     auto entryForDay(uint16 day) const -> ZoneWeather;
 
 private:
-    Weather                       current_{}; // defaults to Weather::None (0)
+    xi::Weather                   current_{}; // defaults to xi::Weather::None (0)
     uint32                        changeTime_{};
     std::map<uint16, ZoneWeather> probabilities_; // keyed by day-of-cycle
 };

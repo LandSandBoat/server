@@ -54,7 +54,7 @@
 // Forward Declarations
 //
 
-enum class Weather : uint16_t;
+#include "data/enums/weather.h"
 class XiMesh;
 class CNavMesh;
 class SpawnHandler;
@@ -610,7 +610,7 @@ public:
     virtual CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1); // Get a pointer to any entity in the zone
 
     bool CanUseMisc(uint16 misc) const;
-    void SetWeather(Weather weather);
+    void SetWeather(xi::Weather weather);
     void UpdateWeather();
     bool CheckMobsPathedBack();
 

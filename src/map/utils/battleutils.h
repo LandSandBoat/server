@@ -31,7 +31,7 @@
 
 enum class ActionReactKind : uint8_t;
 enum class ActionProcSkillChain : uint8_t;
-enum class Weather : uint16_t;
+#include "data/enums/weather.h"
 class CMobEntity;
 class CAbility;
 class CAttack;
@@ -241,9 +241,9 @@ float HandleTranquilHeart(CBattleEntity* PEntity);
 void assistTarget(CCharEntity* PChar, uint16 TargID);
 
 ELEMENT GetDayElement();
-auto    GetWeather(CBattleEntity* PEntity, bool ignoreScholar) -> Weather;
-auto    GetWeather(CBattleEntity* PEntity, bool ignoreScholar, Weather zoneWeather) -> Weather;
-bool    WeatherMatchesElement(Weather weather, uint8 element);
+auto    GetWeather(CBattleEntity* PEntity, bool ignoreScholar) -> xi::Weather;
+auto    GetWeather(CBattleEntity* PEntity, bool ignoreScholar, xi::Weather zoneWeather) -> xi::Weather;
+bool    WeatherMatchesElement(xi::Weather weather, uint8 element);
 void    DrawIn(CBattleEntity* PTarget, position_t pos, float offset, float degrees);
 void    DoWildCardToEntity(CCharEntity* PCaster, CCharEntity* PTarget, uint8 roll);
 bool    DoRandomDealToEntity(CCharEntity* PChar, CBattleEntity* PTarget);

@@ -21,9 +21,9 @@
 
 #include "weather_container.h"
 
-#include "enums/weather.h"
+#include "data/enums/weather.h"
 
-auto WeatherContainer::current() const -> Weather
+auto WeatherContainer::current() const -> xi::Weather
 {
     return current_;
 }
@@ -33,7 +33,7 @@ auto WeatherContainer::changeTime() const -> uint32
     return changeTime_;
 }
 
-void WeatherContainer::set(Weather weather, uint32 changeTime)
+void WeatherContainer::set(xi::Weather weather, uint32 changeTime)
 {
     current_    = weather;
     changeTime_ = changeTime;
@@ -51,7 +51,7 @@ void WeatherContainer::addEntry(uint16 day, ZoneWeather entry)
 
 auto WeatherContainer::entryForDay(uint16 day) const -> ZoneWeather
 {
-    ZoneWeather entry(Weather::None, Weather::None, Weather::None);
+    ZoneWeather entry(xi::Weather::None, xi::Weather::None, xi::Weather::None);
     for (const auto& [entryDay, probabilities] : probabilities_)
     {
         if (entryDay > day)

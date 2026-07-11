@@ -87,7 +87,7 @@ public:
 
     void TransportDepart(uint16 boundary, uint16 prevZoneId, uint16 transportId); // ship/boat is leaving, passengers need to be collected
 
-    void WeatherChange(Weather weather);
+    void WeatherChange(xi::Weather weather);
     void MusicChange(MusicSlot slotId, uint16 trackId);
 
     void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, const std::unique_ptr<CBasicPacket>&); // send a global package within the zone

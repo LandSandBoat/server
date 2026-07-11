@@ -30,10 +30,10 @@
 #include "common/timer.h"
 #include "common/utils.h"
 #include "conquest_system.h"
+#include "data/enums/weather.h"
 #include "enmity_container.h"
 #include "entities/char_entity.h"
 #include "enums/loot_recast.h"
-#include "enums/weather.h"
 #include "items.h"
 #include "lua/luautils.h"
 #include "mob_modifier.h"
@@ -119,7 +119,7 @@ CMobEntity::CMobEntity()
 , m_Link(0)
 , m_isAggroable(false)
 , m_Behavior(BEHAVIOR_NONE)
-, m_SpawnType(SPAWNTYPE_NORMAL)
+, m_SpawnType(xi::SpawnType::Normal)
 , m_battlefieldID(0)
 , m_bcnmID(0)
 , m_giveExp(false)
@@ -857,7 +857,7 @@ auto CMobEntity::GetEligibleGeodes() const -> std::vector<uint16>
     uint8 element = 0;
 
     // Set element by weather
-    if (const Weather weather = loc.zone->weather().current(); weather >= Weather::HotSpell && weather <= Weather::Darkness)
+    if (const xi::Weather weather = loc.zone->weather().current(); weather >= xi::Weather::HotSpell && weather <= xi::Weather::Darkness)
     {
         /*
         element = zoneutils::GetWeatherElement(weather);
@@ -866,36 +866,36 @@ auto CMobEntity::GetEligibleGeodes() const -> std::vector<uint16>
         */
         switch (weather)
         {
-            case Weather::HotSpell:
-            case Weather::HeatWave:
+            case xi::Weather::HotSpell:
+            case xi::Weather::HeatWave:
                 element = ELEMENT_FIRE;
                 break;
-            case Weather::Rain:
-            case Weather::Squall:
+            case xi::Weather::Rain:
+            case xi::Weather::Squall:
                 element = ELEMENT_WATER;
                 break;
-            case Weather::DustStorm:
-            case Weather::SandStorm:
+            case xi::Weather::DustStorm:
+            case xi::Weather::SandStorm:
                 element = ELEMENT_EARTH;
                 break;
-            case Weather::Wind:
-            case Weather::Gales:
+            case xi::Weather::Wind:
+            case xi::Weather::Gales:
                 element = ELEMENT_WIND;
                 break;
-            case Weather::Snow:
-            case Weather::Blizzards:
+            case xi::Weather::Snow:
+            case xi::Weather::Blizzards:
                 element = ELEMENT_ICE;
                 break;
-            case Weather::Thunder:
-            case Weather::Thunderstorms:
+            case xi::Weather::Thunder:
+            case xi::Weather::Thunderstorms:
                 element = ELEMENT_THUNDER;
                 break;
-            case Weather::Auroras:
-            case Weather::StellarGlare:
+            case xi::Weather::Auroras:
+            case xi::Weather::StellarGlare:
                 element = ELEMENT_LIGHT;
                 break;
-            case Weather::Gloom:
-            case Weather::Darkness:
+            case xi::Weather::Gloom:
+            case xi::Weather::Darkness:
                 element = ELEMENT_DARK;
                 break;
             default:

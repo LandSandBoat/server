@@ -2696,7 +2696,7 @@ void CLuaBaseEntity::updateNPCHideTime(const sol::object& seconds)
 
 auto CLuaBaseEntity::getWeather(const sol::object& ignoreScholar) const -> uint8
 {
-    auto weather = Weather::None;
+    auto weather = xi::Weather::None;
 
     if (m_PBaseEntity->objtype & TYPE_PC || m_PBaseEntity->objtype & TYPE_MOB)
     {
@@ -2718,9 +2718,9 @@ auto CLuaBaseEntity::getWeather(const sol::object& ignoreScholar) const -> uint8
  *  Notes   : Only used for GM command: scripts/commands/setweather.lua
  ************************************************************************/
 
-void CLuaBaseEntity::setWeather(Weather weatherType)
+void CLuaBaseEntity::setWeather(xi::Weather weatherType)
 {
-    if (magic_enum::enum_contains<Weather>(weatherType))
+    if (magic_enum::enum_contains<xi::Weather>(weatherType))
     {
         zoneutils::GetZone(m_PBaseEntity->getZone())->SetWeather(weatherType);
         luautils::OnZoneWeatherChange(m_PBaseEntity->getZone(), weatherType);
