@@ -99,13 +99,13 @@ void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PC
 
         if (PItem == nullptr || PItem->getQuantity() < quantity)
         {
-            ShowErrorFmt("GP_CLI_COMMAND_ITEM_TRANSFER: {} trying to trade NPC {} with invalid item!", PChar->getName(), PNpc->getName());
+            ShowErrorFmt("GP_CLI_COMMAND_ITEM_TRANSFER: {} trying to trade NPC {} with invalid item {} ({})!", PChar->getName(), PNpc->getName(), PItem->getName(), PItem->getID());
             return;
         }
 
         if (PItem->getReserve() > 0)
         {
-            ShowErrorFmt("GP_CLI_COMMAND_ITEM_TRANSFER: {} trying to trade NPC {} with reserved item!", PChar->getName(), PNpc->getName());
+            ShowErrorFmt("GP_CLI_COMMAND_ITEM_TRANSFER: {} trying to trade NPC {} with reserved item {} ({})!", PChar->getName(), PNpc->getName(), PItem->getName(), PItem->getID());
             return;
         }
 
