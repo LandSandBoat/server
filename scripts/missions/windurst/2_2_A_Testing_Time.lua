@@ -73,6 +73,7 @@ local failMission = function(player, csid, option, npc)
     mission:setVar(player, 'EndTime', 0)
     mission:setVar(player, 'KillCount', 0)
     player:delKeyItem(xi.ki.CREATURE_COUNTER_MAGIC_DOLL)
+    player:setMissionStatus(mission.areaId, 0)
     player:delMission(mission.areaId, mission.missionId)
 end
 
