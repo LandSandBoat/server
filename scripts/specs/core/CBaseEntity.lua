@@ -1522,7 +1522,7 @@ function CBaseEntity:jail()
 end
 
 ---@nodiscard
----@param misc integer
+---@param misc xi.zoneMisc
 ---@return boolean
 function CBaseEntity:canUseMisc(misc)
 end

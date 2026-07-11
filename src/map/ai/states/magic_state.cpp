@@ -415,7 +415,7 @@ bool CMagicState::CanCastSpell(CBattleEntity* PTarget, bool isEndOfCast)
         }
     }
 
-    if (!isEndOfCast && m_PEntity->objtype == TYPE_PC && m_PEntity->loc.zone->CanUseMisc(MISC_LOS_PLAYER_BLOCK) && !m_PEntity->CanSeeTarget(PTarget))
+    if (!isEndOfCast && m_PEntity->objtype == TYPE_PC && m_PEntity->loc.zone->CanUseMisc(xi::ZoneMisc::LosPlayerBlock) && !m_PEntity->CanSeeTarget(PTarget))
     {
         m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget, static_cast<uint16>(m_PSpell->getID()), 0, MsgBasic::CannotPerformAction);
         return false;

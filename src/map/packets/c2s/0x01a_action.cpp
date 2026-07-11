@@ -535,7 +535,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
             {
                 PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CannotPerformAction);
             }
-            else if (!PChar->loc.zone->CanUseMisc(MISC_MOUNT))
+            else if (!PChar->loc.zone->CanUseMisc(xi::ZoneMisc::Mount))
             {
                 PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CannotUseInArea);
             }

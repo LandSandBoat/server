@@ -22,6 +22,8 @@
 #pragma once
 
 #include <common/cbasetypes.h>
+
+#include "data/enums/zone_misc.h"
 #include <common/database.h>
 #include <common/ipp.h>
 #include <common/logging.h>
@@ -69,12 +71,12 @@ public:
 
             mapEndpointSet.insert(zone_settings.ipp);
 
-            if (zone_settings.misc & ZONEMISC::MISC_YELL)
+            if (zone_settings.misc & static_cast<uint32>(xi::ZoneMisc::Yell))
             {
                 yellMapEndpointSet.insert(zone_settings.ipp);
             }
 
-            if (zone_settings.misc & ZONEMISC::MISC_ASSIST)
+            if (zone_settings.misc & static_cast<uint32>(xi::ZoneMisc::Assist))
             {
                 assistMapEndpointSet.insert(zone_settings.ipp);
             }

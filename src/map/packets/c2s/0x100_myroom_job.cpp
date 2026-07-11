@@ -45,7 +45,7 @@ auto GP_CLI_COMMAND_MYROOM_JOB::validate(MapSession* PSession, const CCharEntity
 {
     auto pv = PacketValidator(PChar)
                   .blockedBy({ BlockedState::InEvent })
-                  .mustEqual(PChar->loc.zone->CanUseMisc(MISC_MOGMENU) || PChar->m_moghouseID == PChar->id, true, "Player not in MH or zone with Moogle.");
+                  .mustEqual(PChar->loc.zone->CanUseMisc(xi::ZoneMisc::Mogmenu) || PChar->m_moghouseID == PChar->id, true, "Player not in MH or zone with Moogle.");
 
     if (this->MainJobIndex)
     {

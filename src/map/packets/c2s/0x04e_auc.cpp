@@ -29,7 +29,7 @@ auto GP_CLI_COMMAND_AUC::validate(MapSession* PSession, const CCharEntity* PChar
 {
     auto pv = PacketValidator(PChar)
                   .blockedBy({ BlockedState::InEvent })
-                  .hasZoneMiscFlag(MISC_AH)
+                  .hasZoneMiscFlag(xi::ZoneMisc::Ah)
                   .mustEqual(jailutils::InPrison(PChar), false, "Character in jail")
                   .oneOf<GP_CLI_COMMAND_AUC_COMMAND>(this->Command)
                   .mustEqual(this->Result, 0, "Result not 0")

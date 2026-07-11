@@ -6771,7 +6771,7 @@ void CLuaBaseEntity::jail()
  *  Notes   : Checks if specified MISC flag is set in current zone
  ************************************************************************/
 
-bool CLuaBaseEntity::canUseMisc(uint16 misc)
+bool CLuaBaseEntity::canUseMisc(xi::ZoneMisc misc)
 {
     if (m_PBaseEntity->loc.zone == nullptr)
     {

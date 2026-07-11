@@ -197,12 +197,12 @@ float CSpell::getRadius() const
     return m_radius;
 }
 
-uint16 CSpell::getZoneMisc() const
+xi::ZoneMisc CSpell::getZoneMisc() const
 {
     return m_zoneMisc;
 }
 
-void CSpell::setZoneMisc(uint16 Misc)
+void CSpell::setZoneMisc(xi::ZoneMisc Misc)
 {
     m_zoneMisc = Misc;
 }
@@ -503,7 +503,7 @@ void LoadSpellList()
         PSpell->setAOE(rset->get<uint8>("AOE"));
         PSpell->setBase(rset->get<uint16>("base"));
         PSpell->setElement(rset->get<uint16>("element"));
-        PSpell->setZoneMisc(rset->get<uint16>("zonemisc"));
+        PSpell->setZoneMisc(rset->get<xi::ZoneMisc>("zonemisc"));
         PSpell->setMultiplier(rset->get<float>("multiplier"));
         PSpell->setMessage(rset->get<MsgBasic>("message"));
         PSpell->setMagicBurstMessage(rset->get<MsgBasic>("magicBurstMessage"));

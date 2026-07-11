@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "data/enums/zone_misc.h"
 #include "entities/battle_entity.h"
 
 #define CANNOT_USE_SPELL 0
@@ -1188,7 +1189,7 @@ public:
     auto               getSpellGroup() const -> SPELLGROUP;
     SPELLFAMILY        getSpellFamily();
     uint8              getSkillType() const;
-    uint16             getZoneMisc() const;
+    xi::ZoneMisc       getZoneMisc() const;
     uint8              getAOE() const;
     uint16             getBase() const;
     uint16             getElement() const;
@@ -1228,7 +1229,7 @@ public:
     void setSpellGroup(SPELLGROUP SpellGroup);
     void setSpellFamily(SPELLFAMILY SpellFamily);
     void setSkillType(uint8 SkillType);
-    void setZoneMisc(uint16 Misc);
+    void setZoneMisc(xi::ZoneMisc Misc);
     void setAOE(uint8 AOE);
     void setBase(uint16 base);
     void setElement(uint16 element);
@@ -1273,7 +1274,7 @@ private:
     uint16                         m_ValidTarget{};                   // target pc/npc/both
     SPELLGROUP                     m_spellGroup{ SPELLGROUP_NONE };   // spellgroup
     SPELLFAMILY                    m_spellFamily{ SPELLFAMILY_NONE }; // spell family
-    uint16                         m_zoneMisc{};                      // spellcasting conditions
+    xi::ZoneMisc                   m_zoneMisc{};                      // spellcasting conditions
     uint8                          m_AOE{};                           // aoe or single target spell
     uint16                         m_base{};                          // spell base damage
     float                          m_multiplier{};                    // multiplier for upper tier spells

@@ -320,7 +320,7 @@ void CZone::ResetLocalVars()
     localVars_.clear();
 }
 
-bool CZone::CanUseMisc(uint16 misc) const
+bool CZone::CanUseMisc(xi::ZoneMisc misc) const
 {
     return (m_miscMask & misc) == misc;
 }
@@ -460,7 +460,7 @@ void CZone::LoadZoneSettings()
         m_zoneMusic.m_bSongS    = rset->get<uint8>("battlesolo");
         m_zoneMusic.m_bSongM    = rset->get<uint8>("battlemulti");
         m_tax                   = static_cast<uint16>(rset->get<float>("tax") * 100); // tax for bazaar
-        m_miscMask              = rset->get<uint16>("misc");
+        m_miscMask              = rset->get<xi::ZoneMisc>("misc");
         m_zoneType              = rset->get<xi::ZoneType>("zonetype");
 
         if (rset->getOrDefault<std::string>("bcnmname", "") != "") // bcnmid cannot be used now, because they start from scratch
@@ -468,7 +468,7 @@ void CZone::LoadZoneSettings()
             m_BattlefieldHandler = new CBattlefieldHandler(this);
         }
 
-        if (m_miscMask & MISC_TREASURE)
+        if ((m_miscMask & xi::ZoneMisc::Treasure) != xi::ZoneMisc::None)
         {
             m_TreasurePool = new CTreasurePool(TreasurePoolType::Zone);
         }
@@ -1090,7 +1090,7 @@ void CZone::CharZoneIn(CCharEntity* PChar)
     PChar->loc.destination = 0;
     PChar->clearTriggerAreas();
 
-    if (PChar->isMounted() && !CanUseMisc(MISC_MOUNT))
+    if (PChar->isMounted() && !CanUseMisc(xi::ZoneMisc::Mount))
     {
         PChar->animation = ANIMATION_NONE;
         PChar->StatusEffectContainer->DelStatusEffectSilent(xi::StatusEffect::Mounted);

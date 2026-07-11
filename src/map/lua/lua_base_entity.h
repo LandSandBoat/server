@@ -361,7 +361,7 @@ public:
     bool isJailed();
     void jail();
 
-    bool canUseMisc(uint16 misc); // Check misc flags of current zone.
+    bool canUseMisc(xi::ZoneMisc misc); // Check misc flags of current zone.
 
     uint8 getSpeed();
     uint8 getBaseSpeed();

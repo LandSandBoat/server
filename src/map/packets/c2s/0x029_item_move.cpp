@@ -67,7 +67,7 @@ const auto validContainers = [](const CCharEntity* PChar) -> std::set<CONTAINER_
     };
 
     // Retail allows injecting into Safe from anywhere in a zone with a Nomad Moogle.
-    if (PChar->loc.zone->CanUseMisc(MISC_MOGMENU) || PChar->m_moghouseID == PChar->id)
+    if (PChar->loc.zone->CanUseMisc(xi::ZoneMisc::Mogmenu) || PChar->m_moghouseID == PChar->id)
     {
         allowedContainers.insert(LOC_MOGSAFE);
 
