@@ -34,33 +34,31 @@ local pTable =
     [xi.magic.spell.WARP_II       ] = { xi.teleport.id.WARP,    0,                              3, false },
 }
 
--- Check for "Retrace" Spell.
-xi.spells.enhancing.checkTeleportSpell = function(caster, target, spell)
-    if target:getCampaignAllegiance() > 0 then
-        return 0
-    else
-        return 48
-    end
-end
-
 -- Main function for Teleport / Warp / etc. Spells.
 xi.spells.enhancing.useTeleportSpell = function(caster, target, spell)
-    local spellId    = spell:getID()
-    local teleportId = pTable[spellId][column.TELEPORT_ID]
-    local keyItem    = pTable[spellId][column.TELEPORT_KEY_ITEM]
-    local duration   = pTable[spellId][column.TELEPORT_DURATION]
-    local campaign   = pTable[spellId][column.TELEPORT_CAMPAIGN]
+    spell:setMsg(xi.msg.basic.NONE)
 
-    if
-        target:getObjType() == xi.objType.PC and
-        (keyItem == 0 or (keyItem > 0 and target:hasKeyItem(keyItem))) and
-        (not campaign or (campaign and target:getCampaignAllegiance() > 0))
-    then
-        target:addStatusEffect(xi.effect.TELEPORT, { power = teleportId, duration = duration, origin = caster, icon = 0 })
-        spell:setMsg(xi.msg.basic.MAGIC_TELEPORT)
-    else
-        spell:setMsg(xi.msg.basic.NONE)
+    if target:getObjType() == xi.objType.PC then
+        return 0
     end
 
-    return 0
+    if target:hasStatusEffect(xi.effect.MOUNTED) then
+        return 0
+    end
+
+    local spellId = spell:getID()
+    local keyItem = pTable[spellId][column.TELEPORT_KEY_ITEM]
+    if keyItem > 0 and not target:hasKeyItem(keyItem) then
+        return 0
+    end
+
+    local campaign = pTable[spellId][column.TELEPORT_CAMPAIGN]
+    if campaign and target:getCampaignAllegiance() == 0 then
+        return 0
+    end
+
+    target:addStatusEffect(xi.effect.TELEPORT, { power = pTable[spellId][column.TELEPORT_ID], duration = pTable[spellId][column.TELEPORT_DURATION], origin = caster, icon = 0 })
+    spell:setMsg(xi.msg.basic.MAGIC_TELEPORT)
+
+    return xi.effect.TELEPORT
 end

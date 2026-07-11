@@ -6,6 +6,10 @@
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
+    if target:hasStatusEffect(xi.effect.MOUNTED) then
+        return xi.msg.basic.MAGIC_CANNOT_BE_CAST
+    end
+
     return 0
 end
 
