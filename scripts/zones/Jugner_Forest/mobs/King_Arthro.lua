@@ -46,6 +46,7 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.POISON)
 
+    mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMod(xi.mod.UFASTCAST, 90)
 
@@ -70,23 +71,26 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local mobHPP = mob:getHPP()
-
-    -- 2 Hour.
-    if
-        mob:getLocalVar('[2hour]Used') == 0 and
-        mobHPP < mob:getLocalVar('[2hour]HPP')
-    then
-        mob:setLocalVar('[2hour]Used', 1)
-        mob:useMobAbility(xi.mobSkill.HUNDRED_FISTS_1)
+    if xi.combat.behavior.isEntityBusy(mob) then
         return
     end
+
+    if mob:getLocalVar('[2hour]Used') ~= 0 then
+        return
+    end
+
+    if mob:getHPP() >= mob:getLocalVar('[2hour]HPP') then
+        return
+    end
+
+    mob:setLocalVar('[2hour]Used', 1)
+    mob:useMobAbility(xi.mobSkill.HUNDRED_FISTS_1)
 end
 
 entity.onMobSpellChoose = function(mob, target, spellId)
     local spellList =
     {
-        [1] = { xi.magic.spell.WATERGA_IV,  target, false, xi.action.type.DAMAGE_TARGET,        nil,                 0, 100 },
+        [1] = { xi.magic.spell.WATERGA_IV,  target, false, xi.action.type.DAMAGE_TARGET,        nil,                 0, 200 },
         [2] = { xi.magic.spell.ENWATER,     mob,    false, xi.action.type.ENHANCING_FORCE_SELF, xi.effect.ENWATER,   1, 100 },
         [3] = { xi.magic.spell.DROWN,       target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.DROWN,     1, 100 },
         [4] = { xi.magic.spell.POISONGA_II, target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.POISON,    2, 100 },
