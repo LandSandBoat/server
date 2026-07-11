@@ -4,7 +4,6 @@
 -----------------------------------
 mixins =
 {
-    require('scripts/mixins/job_special'),
     require('scripts/mixins/rage')
 }
 -----------------------------------
@@ -43,14 +42,25 @@ entity.onMobInitialize = function(mob)
         GetMobByID(mob:getID() - offset):setRespawnTime(respawnTime)
     end
 
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.POISON)
+
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:setMod(xi.mod.UFASTCAST, 100)
-    mob:setMobMod(xi.mobMod.GIL_MIN, 15000)
-    mob:setMobMod(xi.mobMod.GIL_MAX, 20000)
+    mob:setMod(xi.mod.UFASTCAST, 90)
+
+    mob:setMobMod(xi.mobMod.GIL_MIN, 10000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 10000)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.CANNOT_GUARD, 1)
+    mob:setLocalVar('[2hour]HPP', math.randomInt(60, 65))
+    mob:setLocalVar('[2hour]Used', 0)
+
+    mob:setMod(xi.mod.BIND_RES_RANK, 10)
+    mob:setMod(xi.mod.SILENCE_RES_RANK, 10)
+
+    mob:setMod(xi.mod.DEF, 500)
     local kingArthroID = mob:getID()
 
     -- Use King Arthro ID to determine Knight Crab Id's, then set their respawn to 0 so they don't spawn while KA is up
@@ -59,12 +69,38 @@ entity.onMobSpawn = function(mob)
     end
 end
 
+entity.onMobFight = function(mob, target)
+    local mobHPP = mob:getHPP()
+
+    -- 2 Hour.
+    if
+        mob:getLocalVar('[2hour]Used') == 0 and
+        mobHPP < mob:getLocalVar('[2hour]HPP')
+    then
+        mob:setLocalVar('[2hour]Used', 1)
+        mob:useMobAbility(xi.mobSkill.HUNDRED_FISTS_1)
+        return
+    end
+end
+
+entity.onMobSpellChoose = function(mob, target, spellId)
+    local spellList =
+    {
+        [1] = { xi.magic.spell.WATERGA_IV,  target, false, xi.action.type.DAMAGE_TARGET,        nil,                 0, 100 },
+        [2] = { xi.magic.spell.ENWATER,     mob,    false, xi.action.type.ENHANCING_FORCE_SELF, xi.effect.ENWATER,   1, 100 },
+        [3] = { xi.magic.spell.DROWN,       target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.DROWN,     1, 100 },
+        [4] = { xi.magic.spell.POISONGA_II, target, false, xi.action.type.ENFEEBLING_TARGET,    xi.effect.POISON,    2, 100 },
+    }
+
+    return xi.combat.behavior.chooseAction(mob, target, nil, spellList)
+end
+
 entity.onAdditionalEffect = function(mob, target, damage)
     local pTable =
     {
         chance   = 25,
         effectId = xi.effect.PARALYSIS,
-        power    = 20,
+        power    = 75,
         duration = 60,
     }
 

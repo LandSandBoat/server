@@ -7898,7 +7898,7 @@ INSERT INTO `mob_groups` VALUES (4,1323,104,'Ferocious_Pugil',0,128,147,0,0,0,NU
 INSERT INTO `mob_groups` VALUES (5,2001,104,'Huge_Leech',0,128,895,0,0,0,NULL);
 
 INSERT INTO `mob_groups` VALUES (6,2271,104,'Knight_Crab',0,128,552,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (7,2254,104,'King_Arthro',0,128,1449,35000,7500,0,NULL);
+INSERT INTO `mob_groups` VALUES (7,2254,104,'King_Arthro',0,128,1449,35000,10000,0,NULL);
 INSERT INTO `mob_groups` VALUES (8,3752,104,'Stag_Beetle',300,0,2319,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (9,6356,104,'Wandering_Sapling',300,0,2619,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (10,548,104,'Brutal_Sheep',300,0,368,0,0,0,NULL);
