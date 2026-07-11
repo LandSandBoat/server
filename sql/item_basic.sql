@@ -1231,7 +1231,7 @@ INSERT INTO `item_basic` VALUES (1236,0,'bag_of_cactus_stems','cactus_stems','�
 INSERT INTO `item_basic` VALUES (1237,0,'bag_of_tree_cuttings','tree_cuttings','謎の樹木の挿木',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@MISC,519);
 INSERT INTO `item_basic` VALUES (1238,0,'bag_of_tree_saplings','tree_saplings','謎の樹木の苗',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@MISC,1000);
 INSERT INTO `item_basic` VALUES (1239,0,'goblin_doll','goblin_doll','ゴブリン人形',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@BEAST_MADE,30);
-INSERT INTO `item_basic` VALUES (1240,0,'koma','koma','独楽',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@WOODWORKING,42);
+INSERT INTO `item_basic` VALUES (1240,0,'koma','koma','独楽',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@WOODWORKING,44);
 INSERT INTO `item_basic` VALUES (1241,0,'pinch_of_twinkle_powder','twinkle_powder','ツインクルパウダー',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@ALCHEMY,77);
 INSERT INTO `item_basic` VALUES (1242,0,'handful_of_blind_bolt_heads','bln._bolt_heads','暗闇の鏃',@GENERAL_TYPE,99,@FLAG_MYSTERY_BOX,@WOODWORKING,35);
 INSERT INTO `item_basic` VALUES (1243,0,'handful_of_acid_bolt_heads','acid_bolt_heads','溶解の鏃',@GENERAL_TYPE,99,@FLAG_MYSTERY_BOX,@WOODWORKING,40);
@@ -2120,7 +2120,7 @@ INSERT INTO `item_basic` VALUES (2125,0,'square_of_yellow_mouton','yellow_mouton
 INSERT INTO `item_basic` VALUES (2126,0,'chunk_of_orpiment','orpiment','オーピメント',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@ALCHEMY,214);
 INSERT INTO `item_basic` VALUES (2127,0,'metal_chip','metal_chip','メタルチップ',@GENERAL_TYPE,1,@FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (2128,0,'spindle','spindle','スピンドル',@GENERAL_TYPE,99,@FLAG_MYSTERY_BOX,@CLOTHCRAFT,25);
-INSERT INTO `item_basic` VALUES (2129,0,'tanning_vat','tanning_vat','タンニングバット',@GENERAL_TYPE,99,@FLAG_MYSTERY_BOX,@LEATHERCRAFT,24);
+INSERT INTO `item_basic` VALUES (2129,0,'tanning_vat','tanning_vat','タンニングバット',@GENERAL_TYPE,99,@FLAG_MYSTERY_BOX,@LEATHERCRAFT,25);
 INSERT INTO `item_basic` VALUES (2130,0,'shagreen_file','shagreen_file','鮫やすり',@GENERAL_TYPE,99,@FLAG_MYSTERY_BOX,@BONECRAFT,27);
 INSERT INTO `item_basic` VALUES (2131,0,'triturator','triturator','トリチャレーター',@GENERAL_TYPE,99,@FLAG_MYSTERY_BOX,@ALCHEMY,25);
 INSERT INTO `item_basic` VALUES (2132,0,'mana_willow_lumber','m._will._lumber','魔力の楊柳',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@WOODWORKING,213);
@@ -2450,7 +2450,7 @@ INSERT INTO `item_basic` VALUES (2455,0,'cursed_trews','cursed_trews','呪われ
 INSERT INTO `item_basic` VALUES (2456,0,'cursed_trews_-1','cursed_trews_-1','祟られた裙子',@GENERAL_TYPE,1,0,@CURSED_ITEMS,0);
 INSERT INTO `item_basic` VALUES (2457,0,'cursed_clogs','cursed_clogs','呪われた革靴',@GENERAL_TYPE,1,@FLAG_MYSTERY_BOX,@CURSED_ITEMS,0);
 INSERT INTO `item_basic` VALUES (2458,0,'cursed_clogs_-1','cursed_clogs_-1','祟られた革靴',@GENERAL_TYPE,1,0,@CURSED_ITEMS,0);
-INSERT INTO `item_basic` VALUES (2459,0,'pinch_of_minium','minium','光明丹',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@ALCHEMY,8415);
+INSERT INTO `item_basic` VALUES (2459,0,'pinch_of_minium','minium','光明丹',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@ALCHEMY,8250);
 INSERT INTO `item_basic` VALUES (2460,0,'flint_glass_sheet','f._glass_sheet','フリントガラス板',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@ALCHEMY,10750);
 INSERT INTO `item_basic` VALUES (2461,0,'rusty_medal','rusty_medal','錆びたアイアン章',@GENERAL_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_RARE,@MISC,318);
 INSERT INTO `item_basic` VALUES (2462,0,'frayed_arrow','frayed_arrow','薄汚れた矢',@GENERAL_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_RARE,@MISC,308);
@@ -2693,7 +2693,7 @@ INSERT INTO `item_basic` VALUES (2698,0,'bamboo_birdcage','bamboo_birdcage','竹
 INSERT INTO `item_basic` VALUES (2699,0,'bamboo_charcoal_basket','bam._char._basket','竹の炭籠',@GENERAL_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (2700,0,'bamboo_tea_basket','bam._tea_basket','竹の茶籠',@GENERAL_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (2701,0,'bamboo_snakecage','bam._snakecage','竹の蛇籠',@GENERAL_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
-INSERT INTO `item_basic` VALUES (2702,0,'bag_of_buckwheat_flour','buckwheat_flour','蕎麦粉',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@INGREDIENTS,408);
+INSERT INTO `item_basic` VALUES (2702,0,'bag_of_buckwheat_flour','buckwheat_flour','蕎麦粉',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@INGREDIENTS,40);
 INSERT INTO `item_basic` VALUES (2703,0,'square_of_khromated_leather','khrom._leather','クロマカラクール革',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@LEATHERCRAFT,229);
 INSERT INTO `item_basic` VALUES (2704,0,'square_of_oil-soaked_cloth','oil-soaked_clth.','オイルクロス',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@CLOTHCRAFT,1590);
 INSERT INTO `item_basic` VALUES (2705,0,'square_of_foulard','foulard','フーラード',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@CLOTHCRAFT,3838);
@@ -4601,8 +4601,8 @@ INSERT INTO `item_basic` VALUES (4724,314,'scroll_of_enaero_ii','enaero_ii','エ
 INSERT INTO `item_basic` VALUES (4725,315,'scroll_of_enstone_ii','enstone_ii','エンストーンII',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_SCROLL | @FLAG_CANUSE | @FLAG_CANTRADENPC | @FLAG_RARE,@WHITE_MAGIC,884);
 INSERT INTO `item_basic` VALUES (4726,316,'scroll_of_enthunder_ii','enthunder_ii','エンサンダーII',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_SCROLL | @FLAG_CANUSE | @FLAG_CANTRADENPC | @FLAG_RARE,@WHITE_MAGIC,800);
 INSERT INTO `item_basic` VALUES (4727,317,'scroll_of_enwater_ii','enwater_ii','エンウォータII',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_SCROLL | @FLAG_CANUSE | @FLAG_CANTRADENPC | @FLAG_RARE,@WHITE_MAGIC,1000);
-INSERT INTO `item_basic` VALUES (4728,120,'scroll_of_teleport-yhoat','teleport-yhoat','テレポヨト',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_SCROLL | @FLAG_CANUSE | @FLAG_CANTRADENPC,@WHITE_MAGIC,1642);
-INSERT INTO `item_basic` VALUES (4729,121,'scroll_of_teleport-altep','teleport-altep','テレポルテ',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_SCROLL | @FLAG_CANUSE | @FLAG_CANTRADENPC,@WHITE_MAGIC,1642);
+INSERT INTO `item_basic` VALUES (4728,120,'scroll_of_teleport-yhoat','teleport-yhoat','テレポヨト',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_SCROLL | @FLAG_CANUSE | @FLAG_CANTRADENPC,@WHITE_MAGIC,2300);
+INSERT INTO `item_basic` VALUES (4729,121,'scroll_of_teleport-altep','teleport-altep','テレポルテ',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_SCROLL | @FLAG_CANUSE | @FLAG_CANTRADENPC,@WHITE_MAGIC,2300);
 INSERT INTO `item_basic` VALUES (4730,122,'scroll_of_teleport-holla','teleport-holla','テレポホラ',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_SCROLL | @FLAG_CANUSE | @FLAG_CANTRADENPC,@WHITE_MAGIC,2100);
 INSERT INTO `item_basic` VALUES (4731,123,'scroll_of_teleport-dem','teleport-dem','テレポデム',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_SCROLL | @FLAG_CANUSE | @FLAG_CANTRADENPC,@WHITE_MAGIC,2100);
 INSERT INTO `item_basic` VALUES (4732,124,'scroll_of_teleport-mea','teleport-mea','テレポメア',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_SCROLL | @FLAG_CANUSE | @FLAG_CANTRADENPC,@WHITE_MAGIC,1556);
@@ -4620,7 +4620,7 @@ INSERT INTO `item_basic` VALUES (4743,135,'scroll_of_reraise','reraise','リレ�
 INSERT INTO `item_basic` VALUES (4744,136,'scroll_of_invisible','invisible','インビジ',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_SCROLL | @FLAG_CANUSE | @FLAG_CANTRADENPC,@WHITE_MAGIC,959);
 INSERT INTO `item_basic` VALUES (4745,137,'scroll_of_sneak','sneak','スニーク',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_SCROLL | @FLAG_CANUSE | @FLAG_CANTRADENPC,@WHITE_MAGIC,500);
 INSERT INTO `item_basic` VALUES (4746,138,'scroll_of_deodorize','deodorize','デオード',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_SCROLL | @FLAG_CANUSE | @FLAG_CANTRADENPC,@WHITE_MAGIC,259);
-INSERT INTO `item_basic` VALUES (4747,139,'scroll_of_teleport-vahzl','teleport-vahzl','テレポヴァズ',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_SCROLL | @FLAG_CANUSE | @FLAG_CANTRADENPC,@WHITE_MAGIC,1815);
+INSERT INTO `item_basic` VALUES (4747,139,'scroll_of_teleport-vahzl','teleport-vahzl','テレポヴァズ',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_SCROLL | @FLAG_CANUSE | @FLAG_CANTRADENPC,@WHITE_MAGIC,2300);
 INSERT INTO `item_basic` VALUES (4748,140,'scroll_of_raise_iii','raise_iii','レイズIII',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_SCROLL | @FLAG_CANUSE | @FLAG_CANTRADENPC | @FLAG_RARE,@WHITE_MAGIC,6000);
 INSERT INTO `item_basic` VALUES (4749,141,'scroll_of_reraise_ii','reraise_ii','リレイズII',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_SCROLL | @FLAG_CANUSE | @FLAG_CANTRADENPC | @FLAG_RARE,@WHITE_MAGIC,2125);
 INSERT INTO `item_basic` VALUES (4750,142,'scroll_of_reraise_iii','reraise_iii','リレイズIII',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_SCROLL | @FLAG_CANUSE | @FLAG_CANTRADENPC,@WHITE_MAGIC,6000);
@@ -5050,8 +5050,8 @@ INSERT INTO `item_basic` VALUES (5232,0,'jug_of_soy_milk','soy_milk','豆乳',@U
 INSERT INTO `item_basic` VALUES (5233,0,'cube_of_cotton_tofu','cotton_tofu','木綿豆腐',@USABLE_TYPE,12,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@INGREDIENTS,340);
 INSERT INTO `item_basic` VALUES (5234,0,'sprig_of_cibol','cibol','シバル',@USABLE_TYPE,12,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@INGREDIENTS,44);
 INSERT INTO `item_basic` VALUES (5235,0,'head_of_napa','napa','ナパ',@USABLE_TYPE,12,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@INGREDIENTS,50);
-INSERT INTO `item_basic` VALUES (5236,0,'clump_of_shungiku','shungiku','春菊',@USABLE_TYPE,12,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@INGREDIENTS,383);
-INSERT INTO `item_basic` VALUES (5237,0,'bundle_of_shirataki','shirataki','白滝',@USABLE_TYPE,12,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@INGREDIENTS,88);
+INSERT INTO `item_basic` VALUES (5236,0,'clump_of_shungiku','shungiku','春菊',@USABLE_TYPE,12,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@INGREDIENTS,56);
+INSERT INTO `item_basic` VALUES (5237,0,'bundle_of_shirataki','shirataki','白滝',@USABLE_TYPE,12,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@INGREDIENTS,82);
 INSERT INTO `item_basic` VALUES (5238,0,'seafood_stewpot','seafood_stewpot','寄せ鍋',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_INSCRIBABLE | @FLAG_CANUSE | @FLAG_CANTRADENPC,@SOUPS,1560);
 INSERT INTO `item_basic` VALUES (5239,0,'prime_seafood_stewpot','prm._sfd._stewpot','寄せ鍋目付',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_INSCRIBABLE | @FLAG_CANUSE | @FLAG_CANTRADENPC,@SOUPS,2028);
 INSERT INTO `item_basic` VALUES (5240,0,'prized_seafood_stewpot','prz._sfd._stewpot','寄せ鍋奉行',@USABLE_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_INSCRIBABLE | @FLAG_CANUSE | @FLAG_CANTRADENPC,@SOUPS,2496);
@@ -10220,7 +10220,7 @@ INSERT INTO `item_basic` VALUES (12492,0,'fugacity_beret','fugacity_beret','フ�
 INSERT INTO `item_basic` VALUES (12493,0,'accord_hat','accord_hat','アコードハット',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANEQUIP,@HEAD,0);
 INSERT INTO `item_basic` VALUES (12494,0,'gold_hairpin','gold_hairpin','金の髪飾り',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,2040);
 INSERT INTO `item_basic` VALUES (12495,0,'silver_hairpin','silver_hairpin','銀の髪飾り',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,351);
-INSERT INTO `item_basic` VALUES (12496,0,'copper_hairpin','copper_hairpin','銅の髪飾り',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,37);
+INSERT INTO `item_basic` VALUES (12496,0,'copper_hairpin','copper_hairpin','銅の髪飾り',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,39);
 INSERT INTO `item_basic` VALUES (12497,0,'brass_hairpin','brass_hairpin','黄銅の髪飾り',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,259);
 INSERT INTO `item_basic` VALUES (12498,0,'cotton_headband','cotton_headband','木綿のヘッドバンド',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,210);
 INSERT INTO `item_basic` VALUES (12499,0,'flax_headband','flax_headband','亜麻のヘッドバンド',@EQUIPMENT_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@HEAD,800);
@@ -14686,7 +14686,7 @@ INSERT INTO `item_basic` VALUES (16983,0,'nodachi_+1','nodachi_+1','野太刀改
 INSERT INTO `item_basic` VALUES (16984,0,'jindachi','jindachi','陣太刀',@WEAPON_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@GREATKATANA,3800);
 INSERT INTO `item_basic` VALUES (16985,0,'jindachi_+1','jindachi_+1','陣太刀改',@WEAPON_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@GREATKATANA,3895);
 INSERT INTO `item_basic` VALUES (16986,0,'homura_+1','homura_+1','焔改',@WEAPON_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@GREATKATANA,2392);
-INSERT INTO `item_basic` VALUES (16987,0,'okanehira','okanehira','大包平',@WEAPON_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANEQUIP,@GREATKATANA,3412);
+INSERT INTO `item_basic` VALUES (16987,0,'okanehira','okanehira','大包平',@WEAPON_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANEQUIP,@GREATKATANA,3491);
 INSERT INTO `item_basic` VALUES (16988,0,'kotetsu','kotetsu','虎徹',@WEAPON_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANEQUIP,@GREATKATANA,3584);
 INSERT INTO `item_basic` VALUES (16989,0,'mikazuki_+1','mikazuki_+1','三日月改',@WEAPON_TYPE,1,@FLAG_INSCRIBABLE | @FLAG_CANEQUIP,@GREATKATANA,4791);
 INSERT INTO `item_basic` VALUES (16990,0,'daihannya','daihannya','大般若',@WEAPON_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CANEQUIP,@GREATKATANA,6050);
