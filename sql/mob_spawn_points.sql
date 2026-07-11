@@ -73803,9 +73803,9 @@ INSERT INTO `mob_spawn_points` VALUES (17588563,0,'Labyrinth_Scorpion','Labyrint
 INSERT INTO `mob_spawn_points` VALUES (17588564,37,'Labyrinth_Scorpion','Labyrinth Scorpion',29,30,33,125.572,19.732,-120.216,127,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17588565,0,'Air_Elemental','Air Elemental',19,33,36,-90.685,19.093,-44.223,74,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17588566,0,'Earth_Elemental','Earth Elemental',20,33,36,-113.736,19.480,-44.871,86,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17588567,0,'Labyrinth_Scorpion','Labyrinth Scorpion',29,30,33,98.572,18.706,-97.871,127,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17588567,0,'Labyrinth_Scorpion','Labyrinth Scorpion',29,30,33,96.674,20.177,-110.061,127,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17588568,0,'Labyrinth_Scorpion','Labyrinth Scorpion',29,30,33,285.000,20.000,-78.000,127,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17588569,0,'Protozoan','Protozoan',30,29,31,262.000,19.000,-69.000,127,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17588569,0,'Protozoan','Protozoan',30,29,31,107.036,20.000,-92.527,127,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17588570,38,'Wight','Wight',28,32,35,-36.483,19.319,5.305,190,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17588571,38,'Wight','Wight',45,32,35,99.726,12.857,-185.486,41,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17588572,38,'Wight','Wight',28,32,35,102.059,19.287,-164.017,62,NULL,NULL);
@@ -73930,7 +73930,7 @@ INSERT INTO `mob_spawn_points` VALUES (17588690,0,'Poison_Leech','Poison Leech',
 INSERT INTO `mob_spawn_points` VALUES (17588691,0,'Poison_Leech','Poison Leech',17,24,28,262.621,18.497,-190.639,183,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17588692,0,'Poison_Leech','Poison Leech',17,24,28,265.386,19.561,-211.336,110,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17588693,0,'Poison_Leech','Poison Leech',17,24,28,264.362,19.538,-211.007,42,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17588694,0,'Protozoan','Protozoan',30,29,31,261.942,19.305,-69.162,68,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17588694,0,'Protozoan','Protozoan',30,29,31,269.119,20.226,-229.505,68,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17588695,62,'Wight','Wight',45,32,35,0.000,0.000,0.000,0,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17588696,62,'Wight','Wight',28,32,35,0.000,0.000,0.000,0,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17588697,63,'Wight','Wight',45,32,35,0.000,0.000,0.000,0,NULL,NULL);
