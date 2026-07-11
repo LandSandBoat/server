@@ -364,7 +364,7 @@ auto CMobController::CanDetectTarget(CBattleEntity* PTarget, const bool forceSig
         return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
     }
 
-    if ((PMob->m_Behavior & BEHAVIOR_AGGRO_AMBUSH) && currentDistance < 3 && !hasSneak)
+    if (((PMob->m_Behavior & xi::Behavior::AggroAmbush) != xi::Behavior::None) && currentDistance < 3 && !hasSneak)
     {
         return true;
     }
@@ -836,7 +836,7 @@ void CMobController::FaceTarget(const uint16 targid) const
 
     const uint16 resolvedTargid = targid != 0 ? targid : PMob->GetBattleTargetID();
     const auto*  maybeTarget    = PMob->GetEntity(resolvedTargid);
-    if (!(PMob->m_Behavior & BEHAVIOR_NO_TURN) && maybeTarget)
+    if (!((PMob->m_Behavior & xi::Behavior::NoTurn) != xi::Behavior::None) && maybeTarget)
     {
         PMob->PAI->PathFind->LookAt(maybeTarget->loc.p);
     }
@@ -1624,7 +1624,7 @@ auto CMobController::CanMoveForward(const float currentDistance) -> bool
 
     const bool isClosingToRangedAttackRange = IsRangedAttackEnabled() && currentDistance > PMob->GetRangedAttackRange();
 
-    if (!isClosingToRangedAttackRange && PMob->m_Behavior & BEHAVIOR_STANDBACK && currentDistance < standbackRange && PMob->CanSeeTarget(PTarget))
+    if (!isClosingToRangedAttackRange && (PMob->m_Behavior & xi::Behavior::Standback) != xi::Behavior::None && currentDistance < standbackRange && PMob->CanSeeTarget(PTarget))
     {
         return false;
     }

@@ -987,7 +987,7 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
         SetupPetSkills(PMob);
     }
 
-    PMob->m_Behavior |= PMob->getMobMod(MOBMOD_BEHAVIOR);
+    PMob->m_Behavior |= static_cast<xi::Behavior>(PMob->getMobMod(MOBMOD_BEHAVIOR));
 
     if ((PMob->m_Type & xi::MobType::Battlefield) != xi::MobType::Normal)
     {
@@ -1737,7 +1737,7 @@ auto InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* instance) -> CMob
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDelay(rset->get<uint16>("cmbDelay"));
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setBaseDelay(rset->get<uint16>("cmbDelay"));
 
-        PMob->m_Behavior  = rset->get<uint16>("behavior");
+        PMob->m_Behavior  = rset->get<xi::Behavior>("behavior");
         PMob->m_Link      = rset->get<uint8>("links");
         PMob->m_Type      = rset->get<xi::MobType>("mobType");
         PMob->m_Immunity  = rset->get<IMMUNITY>("immunity");
@@ -1912,7 +1912,7 @@ auto InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZone
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDelay(rset->get<uint16>("cmbDelay"));
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setBaseDelay(rset->get<uint16>("cmbDelay"));
 
-        PMob->m_Behavior  = rset->get<uint16>("behavior");
+        PMob->m_Behavior  = rset->get<xi::Behavior>("behavior");
         PMob->m_Link      = rset->get<uint8>("links");
         PMob->m_Type      = rset->get<xi::MobType>("mobType");
         PMob->m_Immunity  = rset->get<IMMUNITY>("immunity");

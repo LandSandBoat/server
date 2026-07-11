@@ -31,7 +31,7 @@ CDespawnState::CDespawnState(CBaseEntity* _PEntity, bool instantDespawn)
 : CState(_PEntity, _PEntity->targid)
 , despawnTime_(timer::now() + (instantDespawn ? 0s : 3s))
 {
-    if (!instantDespawn && (_PEntity->status != xi::Status::Disappear && !(static_cast<CMobEntity*>(_PEntity)->m_Behavior & BEHAVIOR_NO_DESPAWN)))
+    if (!instantDespawn && (_PEntity->status != xi::Status::Disappear && !((static_cast<CMobEntity*>(_PEntity)->m_Behavior & xi::Behavior::NoDespawn) != xi::Behavior::None)))
     {
         _PEntity->loc.zone->PushPacket(_PEntity, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_SCHEDULOR>(_PEntity, _PEntity, FourCC::FadeOut));
     }
@@ -44,7 +44,7 @@ CDespawnState::CDespawnState(CBaseEntity* _PEntity, bool instantDespawn)
 
 bool CDespawnState::Update(timer::time_point tick)
 {
-    if (!IsCompleted() && !(static_cast<CMobEntity*>(m_PEntity)->m_Behavior & BEHAVIOR_NO_DESPAWN))
+    if (!IsCompleted() && !((static_cast<CMobEntity*>(m_PEntity)->m_Behavior & xi::Behavior::NoDespawn) != xi::Behavior::None))
     {
         if (tick >= despawnTime_)
         {

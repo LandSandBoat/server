@@ -4007,11 +4007,11 @@ function CBaseEntity:setCrystalElement(element)
 end
 
 ---@nodiscard
----@return integer
+---@return xi.behavior
 function CBaseEntity:getBehavior()
 end
 
----@param behavior integer
+---@param behavior xi.behavior
 ---@return nil
 function CBaseEntity:setBehavior(behavior)
 end

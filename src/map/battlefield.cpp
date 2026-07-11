@@ -763,9 +763,9 @@ bool CBattlefield::Cleanup(timer::time_point time, bool force)
     for (const auto& mob : m_RequiredEnemyList)
     {
         // Negate the no despawn bit to allow mobs that may use no despawn mechanics to despawn properly
-        if (mob.PMob->m_Behavior & BEHAVIOR_NO_DESPAWN)
+        if ((mob.PMob->m_Behavior & xi::Behavior::NoDespawn) != xi::Behavior::None)
         {
-            mob.PMob->m_Behavior &= ~BEHAVIOR_NO_DESPAWN;
+            mob.PMob->m_Behavior &= ~xi::Behavior::NoDespawn;
         }
 
         if (mob.PMob->isAlive() && mob.PMob->PAI->IsSpawned())
@@ -777,9 +777,9 @@ bool CBattlefield::Cleanup(timer::time_point time, bool force)
     for (const auto& mob : m_AdditionalEnemyList)
     {
         // Negate the no despawn bit to allow mobs that may use no despawn mechanics to despawn properly
-        if (mob.PMob->m_Behavior & BEHAVIOR_NO_DESPAWN)
+        if ((mob.PMob->m_Behavior & xi::Behavior::NoDespawn) != xi::Behavior::None)
         {
-            mob.PMob->m_Behavior &= ~BEHAVIOR_NO_DESPAWN;
+            mob.PMob->m_Behavior &= ~xi::Behavior::NoDespawn;
         }
 
         if (mob.PMob->isAlive() && mob.PMob->PAI->IsSpawned())

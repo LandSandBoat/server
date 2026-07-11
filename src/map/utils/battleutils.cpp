@@ -5188,7 +5188,7 @@ void turnTowardsTarget(CBaseEntity* PEntity, CBaseEntity* PTarget, bool force)
 
     // Big mobs typically should ignore this -- Such as dragons/wyrms or other big things.
     // Some TP moves like Petro Eyes from normal dragons _also_ ignore their standard behavior, so we must allow it sometimes.
-    if (PMob && (PMob->m_Behavior & BEHAVIOR_NO_TURN) && !force)
+    if (PMob && ((PMob->m_Behavior & xi::Behavior::NoTurn) != xi::Behavior::None) && !force)
     {
         return;
     }

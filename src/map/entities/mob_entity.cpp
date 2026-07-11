@@ -118,7 +118,7 @@ CMobEntity::CMobEntity()
 , m_TrueDetection(false)
 , m_Link(0)
 , m_isAggroable(false)
-, m_Behavior(BEHAVIOR_NONE)
+, m_Behavior(xi::Behavior::None)
 , m_SpawnType(xi::SpawnType::Normal)
 , m_battlefieldID(0)
 , m_bcnmID(0)
@@ -651,19 +651,19 @@ bool CMobEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
         return true;
     }
 
-    if (targetFlags & TARGET_PLAYER_DEAD && (m_Behavior & BEHAVIOR_RAISABLE) && isDead())
+    if (targetFlags & TARGET_PLAYER_DEAD && ((m_Behavior & xi::Behavior::Raisable) != xi::Behavior::None) && isDead())
     {
         return true;
     }
 
-    if ((targetFlags & TARGET_PLAYER) && allegiance == PInitiator->allegiance && !(m_Behavior & BEHAVIOR_NO_ASSIST) && !isCharmed)
+    if ((targetFlags & TARGET_PLAYER) && allegiance == PInitiator->allegiance && !((m_Behavior & xi::Behavior::NoAssist) != xi::Behavior::None) && !isCharmed)
     {
         return true;
     }
 
     if (targetFlags & TARGET_NPC)
     {
-        if (allegiance == PInitiator->allegiance && !(m_Behavior & BEHAVIOR_NO_ASSIST) && !isCharmed)
+        if (allegiance == PInitiator->allegiance && !((m_Behavior & xi::Behavior::NoAssist) != xi::Behavior::None) && !isCharmed)
         {
             return true;
         }
@@ -1245,7 +1245,7 @@ void CMobEntity::OnDeathTimer()
 {
     TracyZoneScoped;
 
-    if (!(m_Behavior & BEHAVIOR_RAISABLE))
+    if (!((m_Behavior & xi::Behavior::Raisable) != xi::Behavior::None))
     {
         PAI->Despawn();
     }

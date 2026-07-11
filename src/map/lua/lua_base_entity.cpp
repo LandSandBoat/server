@@ -18671,12 +18671,12 @@ void CLuaBaseEntity::setCrystalElement(ELEMENT crystalElement)
  *  Notes   : Currently used in bitwise calculations for high-tier NM's
  ************************************************************************/
 
-uint16 CLuaBaseEntity::getBehavior()
+auto CLuaBaseEntity::getBehavior() -> xi::Behavior
 {
     if (m_PBaseEntity->objtype != TYPE_MOB)
     {
         ShowWarning("Attempting to get behavior for invalid entity type (%s).", m_PBaseEntity->getName());
-        return 0;
+        return xi::Behavior::None;
     }
 
     return static_cast<CMobEntity*>(m_PBaseEntity)->m_Behavior;
@@ -18689,7 +18689,7 @@ uint16 CLuaBaseEntity::getBehavior()
  *  Notes   : Currently used in bitwise calculations for high-tier NM's
  ************************************************************************/
 
-void CLuaBaseEntity::setBehavior(uint16 behavior)
+void CLuaBaseEntity::setBehavior(xi::Behavior behavior)
 {
     if (m_PBaseEntity->objtype != TYPE_MOB)
     {

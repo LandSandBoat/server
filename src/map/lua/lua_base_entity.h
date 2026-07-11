@@ -914,8 +914,8 @@ public:
     auto   getCrystalElement() const -> ELEMENT;
     void   setCrystalElement(ELEMENT crystalElement);
 
-    uint16 getBehavior();
-    void   setBehavior(uint16 behavior);
+    auto   getBehavior() -> xi::Behavior;
+    void   setBehavior(xi::Behavior behavior);
     uint8  getLink();
     void   setLink(uint8 link);
     uint16 getRoamFlags();

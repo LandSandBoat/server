@@ -29,6 +29,7 @@
 #include <common/types/hash_map.h>
 #include <common/types/maybe.h>
 
+#include "data/enums/behavior.h"
 #include "data/enums/claim_type.h"
 #include "data/enums/mob_type.h"
 #include "data/enums/spawn_type.h"
@@ -83,17 +84,6 @@ enum DETECT : uint16
     DETECT_WEAPONSKILL = 0x40,
     DETECT_JOBABILITY  = 0x80,
     DETECT_SCENT       = 0x100
-};
-
-enum BEHAVIOR : uint16
-{
-    BEHAVIOR_NONE         = 0x000,
-    BEHAVIOR_NO_DESPAWN   = 0x001, // mob does not despawn on death
-    BEHAVIOR_STANDBACK    = 0x002, // mob will standback forever
-    BEHAVIOR_RAISABLE     = 0x004, // mob can be raised via Raise spells
-    BEHAVIOR_NO_ASSIST    = 0x008, // mob can not be targeted by helpful magic from players (cure, protect, etc)
-    BEHAVIOR_AGGRO_AMBUSH = 0x200, // mob aggroes by ambush
-    BEHAVIOR_NO_TURN      = 0x400  // mob does not turn to face target
 };
 
 class CMobSkillState;
@@ -227,7 +217,7 @@ public:
     bool          m_TrueDetection; // Has true sight or sound
     uint8         m_Link;          // link with mobs of it's family
     bool          m_isAggroable;   // Can be aggroed by other monsters when in the player allegiance
-    uint16        m_Behavior;      // mob behavior
+    xi::Behavior  m_Behavior;      // mob behavior
     xi::SpawnType m_SpawnType;     // condition for mob to spawn
 
     int8   m_battlefieldID; // battlefield belonging to

@@ -501,7 +501,7 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                                     mainWeapon->setDelay(rset->get<uint16>("cmbDelay"));
                                     mainWeapon->setBaseDelay(rset->get<uint16>("cmbDelay"));
 
-                                    PMob->m_Behavior  = rset->get<uint16>("behavior");
+                                    PMob->m_Behavior  = rset->get<xi::Behavior>("behavior");
                                     PMob->m_Link      = rset->get<uint32>("links");
                                     PMob->m_Type      = rset->get<xi::MobType>("mobType");
                                     PMob->m_Immunity  = rset->get<uint32>("immunity");

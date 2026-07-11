@@ -132,7 +132,7 @@ auto CInstanceLoader::LoadInstance() const -> CInstance*
             static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDelay(rset->get<uint16>("cmbDelay"));
             static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setBaseDelay(rset->get<uint16>("cmbDelay"));
 
-            PMob->m_Behavior  = rset->get<uint16>("behavior");
+            PMob->m_Behavior  = rset->get<xi::Behavior>("behavior");
             PMob->m_Link      = rset->get<uint8>("links");
             PMob->m_Type      = rset->get<xi::MobType>("mobType");
             PMob->m_Immunity  = rset->get<IMMUNITY>("immunity");
