@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "data/enums/zone_misc.h"
 
 #include "enums/blocked_state.h"
 #include "enums/packet_c2s.h"
@@ -224,7 +225,7 @@ public:
     // Character must have necessary rank in the linkshell in the given slot
     auto hasLinkshellRank(uint8_t slot, LSTYPE rank) -> PacketValidator&;
     // Character zone must allow specified flag. GMs can bypass this check.
-    auto hasZoneMiscFlag(ZONEMISC flag) -> PacketValidator&;
+    auto hasZoneMiscFlag(xi::ZoneMisc flag) -> PacketValidator&;
     // Character must be the party leader
     auto isPartyLeader() -> PacketValidator&;
     // Character must be the alliance leader

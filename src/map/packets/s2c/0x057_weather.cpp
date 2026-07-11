@@ -21,7 +21,7 @@
 
 #include "0x057_weather.h"
 
-GP_SERV_COMMAND_WEATHER::GP_SERV_COMMAND_WEATHER(const uint32_t startTime, const Weather weatherId, const uint16_t offsetTime)
+GP_SERV_COMMAND_WEATHER::GP_SERV_COMMAND_WEATHER(const uint32_t startTime, const xi::Weather weatherId, const uint16_t offsetTime)
 {
     auto& packet = this->data();
 

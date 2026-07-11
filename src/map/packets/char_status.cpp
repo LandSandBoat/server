@@ -251,7 +251,7 @@ CCharStatusPacket::CCharStatusPacket(CCharEntity* PChar)
     flags0.AwayFlag        = PChar->isAway();
     flags0.AnonymousFlag   = PChar->isAnon();
     flags0.Gender          = PChar->GetGender();
-    flags0.unknown_1_9     = PChar->loc.zone ? PChar->loc.zone->CanUseMisc(MISC_TREASURE) : 0; // Set global treasure pool;
+    flags0.unknown_1_9     = PChar->loc.zone ? PChar->loc.zone->CanUseMisc(xi::ZoneMisc::Treasure) : 0; // Set global treasure pool;
     flags0.unknown_1_10    = 0;
     flags0.GraphSize       = PChar->look.size;
     flags0.Chocobo_Index   = 0;

@@ -43,7 +43,7 @@ CInstanceLoader::CInstanceLoader(uint32 instanceid, CCharEntity* PRequester)
     auto   instanceData = instanceutils::GetInstanceData(instanceid);
     CZone* PZone        = zoneutils::GetZone(instanceData.instance_zone);
 
-    if (!PZone || !(PZone->GetTypeMask() & ZONE_TYPE::INSTANCED))
+    if (!PZone || !((PZone->GetTypeMask() & xi::ZoneType::Instanced) != xi::ZoneType::Unknown))
     {
         ShowError("Invalid zone for instanceid: %d", instanceid);
         return;
@@ -110,7 +110,7 @@ auto CInstanceLoader::LoadInstance() const -> CInstance*
             PMob->loc.p                 = PMob->m_SpawnPoint;
 
             PMob->m_RespawnTime = std::chrono::seconds(rset->get<uint32>("respawntime"));
-            PMob->m_SpawnType   = rset->get<SPAWNTYPE>("spawntype");
+            PMob->m_SpawnType   = rset->get<xi::SpawnType>("spawntype");
             PMob->m_DropID      = rset->get<uint32>("dropid");
 
             PMob->HPmodifier = rset->get<uint32>("HP");
@@ -132,10 +132,10 @@ auto CInstanceLoader::LoadInstance() const -> CInstance*
             static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDelay(rset->get<uint16>("cmbDelay"));
             static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setBaseDelay(rset->get<uint16>("cmbDelay"));
 
-            PMob->m_Behavior  = rset->get<uint16>("behavior");
+            PMob->m_Behavior  = rset->get<xi::Behavior>("behavior");
             PMob->m_Link      = rset->get<uint8>("links");
             PMob->m_Type      = rset->get<xi::MobType>("mobType");
-            PMob->m_Immunity  = rset->get<IMMUNITY>("immunity");
+            PMob->m_Immunity  = rset->get<xi::Immunity>("immunity");
             PMob->m_EcoSystem = rset->get<xi::Ecosystem>("ecosystemID");
 
             PMob->baseSpeed      = rset->get<uint8>("speed"); // Overwrites baseentity.cpp's defined baseSpeed
@@ -208,7 +208,7 @@ auto CInstanceLoader::LoadInstance() const -> CInstance*
 
             PMob->allegiance      = rset->get<xi::Allegiance>("allegiance");
             PMob->namevis         = rset->get<uint8>("namevis");
-            PMob->m_roamFlags     = rset->get<uint16>("roamflag");
+            PMob->m_roamFlags     = rset->get<xi::RoamFlag>("roamflag");
             PMob->modelHitboxSize = std::max<float>(0.0f, rset->getOrDefault<float>("modelHitboxSize", 0) / 10.f);
             PMob->modelSize       = rset->getOrDefault<uint8>("modelSize", 0);
             const auto aggro      = rset->get<uint32>("aggro");

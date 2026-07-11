@@ -6787,7 +6787,7 @@ auto hasMogLockerAccess(const CCharEntity* PChar) -> bool
         {
             case 1: // All areas
                 // Allowed if in a zone with a Nomad Moogle or in your own Mog House
-                return curZone->CanUseMisc(MISC_MOGMENU) || PChar->m_moghouseID == PChar->id;
+                return curZone->CanUseMisc(xi::ZoneMisc::Mogmenu) || PChar->m_moghouseID == PChar->id;
             case 0: // Al Zahbi only
             default:
                 const auto zoneId = curZone->GetID();

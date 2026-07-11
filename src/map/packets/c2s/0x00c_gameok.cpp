@@ -96,7 +96,7 @@ void GP_CLI_COMMAND_GAMEOK::process(MapSession* PSession, CCharEntity* PChar) co
     PChar->loc.zone->SpawnTransport(PChar);
 
     // respawn any pets from last zone
-    if (PChar->loc.zone->CanUseMisc(MISC_PET) && !PChar->inMogHouse())
+    if (PChar->loc.zone->CanUseMisc(xi::ZoneMisc::Pet) && !PChar->inMogHouse())
     {
         if (PChar->shouldPetPersistThroughZoning())
         {

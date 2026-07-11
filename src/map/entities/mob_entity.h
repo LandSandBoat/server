@@ -29,8 +29,11 @@
 #include <common/types/hash_map.h>
 #include <common/types/maybe.h>
 
+#include "data/enums/behavior.h"
 #include "data/enums/claim_type.h"
 #include "data/enums/mob_type.h"
+#include "data/enums/roam_flag.h"
+#include "data/enums/spawn_type.h"
 
 enum class MsgBasic : uint16_t;
 
@@ -39,19 +42,6 @@ class CMobSpellContainer;
 class CMobSpellList;
 class CEnmityContainer;
 class SpawnSlot;
-
-enum SPAWNTYPE
-{
-    SPAWNTYPE_NORMAL    = 0x00, // 00:00-24:00
-    SPAWNTYPE_ATNIGHT   = 0x01, // 20:00-04:00
-    SPAWNTYPE_ATEVENING = 0x02, // 18:00-06:00
-    SPAWNTYPE_WEATHER   = 0x04,
-    SPAWNTYPE_FOG       = 0x08, // 02:00-07:00
-    SPAWNTYPE_MOONPHASE = 0x10,
-    SPAWNTYPE_LOTTERY   = 0x20,
-    SPAWNTYPE_WINDOWED  = 0x40,
-    SPAWNTYPE_SCRIPTED  = 0x80 // scripted spawn
-};
 
 // Per-mob spawn window in Vana'diel hours; the mob spawns only within [spawnHour, despawnHour) (wraps past midnight).
 struct SpawnWindow
@@ -66,23 +56,6 @@ enum SPECIALFLAG
     SPECIALFLAG_HIDDEN = 0x1 // only use special when hidden
 };
 
-enum ROAMFLAG : uint16
-{
-    ROAMFLAG_NONE     = 0x00,
-    ROAMFLAG_NONE0    = 0x01,  //
-    ROAMFLAG_NONE1    = 0x02,  //
-    ROAMFLAG_NONE2    = 0x04,  //
-    ROAMFLAG_NONE3    = 0x08,  //
-    ROAMFLAG_NONE4    = 0x10,  //
-    ROAMFLAG_NONE5    = 0x20,  //
-    ROAMFLAG_WORM     = 0x40,  // pop up and down when moving
-    ROAMFLAG_AMBUSH   = 0x80,  // stays hidden until someone comes close (antlion)
-    ROAMFLAG_SCRIPTED = 0x100, // calls lua method for roaming logic
-    ROAMFLAG_IGNORE   = 0x200, // ignore all hate, except linking hate
-    ROAMFLAG_STEALTH  = 0x400, // stays name hidden and untargetable until someone comes close (chigoe)
-    ROAMFLAG_FOLLOW   = 0x800, // follows a player when sighted for a little while
-};
-
 enum DETECT : uint16
 {
     DETECT_NONE        = 0x00,
@@ -95,17 +68,6 @@ enum DETECT : uint16
     DETECT_WEAPONSKILL = 0x40,
     DETECT_JOBABILITY  = 0x80,
     DETECT_SCENT       = 0x100
-};
-
-enum BEHAVIOR : uint16
-{
-    BEHAVIOR_NONE         = 0x000,
-    BEHAVIOR_NO_DESPAWN   = 0x001, // mob does not despawn on death
-    BEHAVIOR_STANDBACK    = 0x002, // mob will standback forever
-    BEHAVIOR_RAISABLE     = 0x004, // mob can be raised via Raise spells
-    BEHAVIOR_NO_ASSIST    = 0x008, // mob can not be targeted by helpful magic from players (cure, protect, etc)
-    BEHAVIOR_AGGRO_AMBUSH = 0x200, // mob aggroes by ambush
-    BEHAVIOR_NO_TURN      = 0x400  // mob does not turn to face target
 };
 
 class CMobSkillState;
@@ -213,8 +175,8 @@ public:
     float HPscale; // HP boost percentage
     float MPscale; // MP boost percentage
 
-    uint16 m_roamFlags;    // defines its roaming behavior
-    uint8  m_specialFlags; // flags for special skill
+    xi::RoamFlag m_roamFlags;    // defines its roaming behavior
+    uint8        m_specialFlags; // flags for special skill
 
     uint8 strRank;
     uint8 dexRank;
@@ -234,13 +196,13 @@ public:
     bool  m_disableScent;    // stop detecting by scent
     float m_maxRoamDistance; // maximum distance mob can be from spawn before despawning
 
-    xi::MobType m_Type; // mob type
-    bool        m_Aggro;
-    bool        m_TrueDetection; // Has true sight or sound
-    uint8       m_Link;          // link with mobs of it's family
-    bool        m_isAggroable;   // Can be aggroed by other monsters when in the player allegiance
-    uint16      m_Behavior;      // mob behavior
-    SPAWNTYPE   m_SpawnType;     // condition for mob to spawn
+    xi::MobType   m_Type; // mob type
+    bool          m_Aggro;
+    bool          m_TrueDetection; // Has true sight or sound
+    uint8         m_Link;          // link with mobs of it's family
+    bool          m_isAggroable;   // Can be aggroed by other monsters when in the player allegiance
+    xi::Behavior  m_Behavior;      // mob behavior
+    xi::SpawnType m_SpawnType;     // condition for mob to spawn
 
     int8   m_battlefieldID; // battlefield belonging to
     uint16 m_bcnmID;        // belongs to which battlefield

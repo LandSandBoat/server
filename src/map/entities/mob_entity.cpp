@@ -30,10 +30,10 @@
 #include "common/timer.h"
 #include "common/utils.h"
 #include "conquest_system.h"
+#include "data/enums/weather.h"
 #include "enmity_container.h"
 #include "entities/char_entity.h"
 #include "enums/loot_recast.h"
-#include "enums/weather.h"
 #include "items.h"
 #include "lua/luautils.h"
 #include "mob_modifier.h"
@@ -97,7 +97,7 @@ CMobEntity::CMobEntity()
 , MPmodifier(0)
 , HPscale(1.0)
 , MPscale(1.0)
-, m_roamFlags(ROAMFLAG_NONE)
+, m_roamFlags(xi::RoamFlag::None)
 , m_specialFlags(SPECIALFLAG_NONE)
 , strRank(3)
 , dexRank(3)
@@ -118,8 +118,8 @@ CMobEntity::CMobEntity()
 , m_TrueDetection(false)
 , m_Link(0)
 , m_isAggroable(false)
-, m_Behavior(BEHAVIOR_NONE)
-, m_SpawnType(SPAWNTYPE_NORMAL)
+, m_Behavior(xi::Behavior::None)
+, m_SpawnType(xi::SpawnType::Normal)
 , m_battlefieldID(0)
 , m_bcnmID(0)
 , m_giveExp(false)
@@ -350,7 +350,7 @@ void CMobEntity::ResetGilPurse()
 
 bool CMobEntity::CanRoamHome()
 {
-    if ((speed == 0 && !(m_roamFlags & ROAMFLAG_WORM)) || getMobMod(MOBMOD_NO_MOVE) > 0)
+    if ((speed == 0 && !((m_roamFlags & xi::RoamFlag::Worm) != xi::RoamFlag::None)) || getMobMod(MOBMOD_NO_MOVE) > 0)
     {
         return false;
     }
@@ -365,7 +365,7 @@ bool CMobEntity::CanRoamHome()
 
 bool CMobEntity::CanRoam()
 {
-    return !(m_roamFlags & ROAMFLAG_SCRIPTED) && PMaster == nullptr && (speed > 0 || (m_roamFlags & ROAMFLAG_WORM)) && getMobMod(MOBMOD_NO_MOVE) == 0;
+    return !((m_roamFlags & xi::RoamFlag::Scripted) != xi::RoamFlag::None) && PMaster == nullptr && (speed > 0 || ((m_roamFlags & xi::RoamFlag::Worm) != xi::RoamFlag::None)) && getMobMod(MOBMOD_NO_MOVE) == 0;
 }
 
 void CMobEntity::TapDeaggroTime()
@@ -395,13 +395,13 @@ bool CMobEntity::CanLink(position_t* pos, int16 superLink)
     }
 
     // Don't link I'm an underground worm
-    if ((m_roamFlags & ROAMFLAG_WORM) && IsNameHidden())
+    if (((m_roamFlags & xi::RoamFlag::Worm) != xi::RoamFlag::None) && IsNameHidden())
     {
         return false;
     }
 
     // Don't link I'm an underground antlion
-    if ((m_roamFlags & ROAMFLAG_AMBUSH) && IsNameHidden())
+    if (((m_roamFlags & xi::RoamFlag::Ambush) != xi::RoamFlag::None) && IsNameHidden())
     {
         return false;
     }
@@ -434,7 +434,7 @@ bool CMobEntity::ShouldForceLink()
     // There are certain cases where mobs should always be able
     // to link with other mobs, even if their families or sublinks
     // do not align
-    if (loc.zone->GetTypeMask() & ZONE_TYPE::DYNAMIS)
+    if ((loc.zone->GetTypeMask() & xi::ZoneType::Dynamis) != xi::ZoneType::Unknown)
     {
         return true;
     }
@@ -651,19 +651,19 @@ bool CMobEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
         return true;
     }
 
-    if (targetFlags & TARGET_PLAYER_DEAD && (m_Behavior & BEHAVIOR_RAISABLE) && isDead())
+    if (targetFlags & TARGET_PLAYER_DEAD && ((m_Behavior & xi::Behavior::Raisable) != xi::Behavior::None) && isDead())
     {
         return true;
     }
 
-    if ((targetFlags & TARGET_PLAYER) && allegiance == PInitiator->allegiance && !(m_Behavior & BEHAVIOR_NO_ASSIST) && !isCharmed)
+    if ((targetFlags & TARGET_PLAYER) && allegiance == PInitiator->allegiance && !((m_Behavior & xi::Behavior::NoAssist) != xi::Behavior::None) && !isCharmed)
     {
         return true;
     }
 
     if (targetFlags & TARGET_NPC)
     {
-        if (allegiance == PInitiator->allegiance && !(m_Behavior & BEHAVIOR_NO_ASSIST) && !isCharmed)
+        if (allegiance == PInitiator->allegiance && !((m_Behavior & xi::Behavior::NoAssist) != xi::Behavior::None) && !isCharmed)
         {
             return true;
         }
@@ -711,7 +711,7 @@ void CMobEntity::Spawn()
     // spawn somewhere around my point
     loc.p = m_SpawnPoint;
 
-    if (m_roamFlags & ROAMFLAG_STEALTH)
+    if ((m_roamFlags & xi::RoamFlag::Stealth) != xi::RoamFlag::None)
     {
         HideName(true);
         SetUntargetable(true);
@@ -857,7 +857,7 @@ auto CMobEntity::GetEligibleGeodes() const -> std::vector<uint16>
     uint8 element = 0;
 
     // Set element by weather
-    if (const Weather weather = loc.zone->weather().current(); weather >= Weather::HotSpell && weather <= Weather::Darkness)
+    if (const xi::Weather weather = loc.zone->weather().current(); weather >= xi::Weather::HotSpell && weather <= xi::Weather::Darkness)
     {
         /*
         element = zoneutils::GetWeatherElement(weather);
@@ -866,36 +866,36 @@ auto CMobEntity::GetEligibleGeodes() const -> std::vector<uint16>
         */
         switch (weather)
         {
-            case Weather::HotSpell:
-            case Weather::HeatWave:
+            case xi::Weather::HotSpell:
+            case xi::Weather::HeatWave:
                 element = ELEMENT_FIRE;
                 break;
-            case Weather::Rain:
-            case Weather::Squall:
+            case xi::Weather::Rain:
+            case xi::Weather::Squall:
                 element = ELEMENT_WATER;
                 break;
-            case Weather::DustStorm:
-            case Weather::SandStorm:
+            case xi::Weather::DustStorm:
+            case xi::Weather::SandStorm:
                 element = ELEMENT_EARTH;
                 break;
-            case Weather::Wind:
-            case Weather::Gales:
+            case xi::Weather::Wind:
+            case xi::Weather::Gales:
                 element = ELEMENT_WIND;
                 break;
-            case Weather::Snow:
-            case Weather::Blizzards:
+            case xi::Weather::Snow:
+            case xi::Weather::Blizzards:
                 element = ELEMENT_ICE;
                 break;
-            case Weather::Thunder:
-            case Weather::Thunderstorms:
+            case xi::Weather::Thunder:
+            case xi::Weather::Thunderstorms:
                 element = ELEMENT_THUNDER;
                 break;
-            case Weather::Auroras:
-            case Weather::StellarGlare:
+            case xi::Weather::Auroras:
+            case xi::Weather::StellarGlare:
                 element = ELEMENT_LIGHT;
                 break;
-            case Weather::Gloom:
-            case Weather::Darkness:
+            case xi::Weather::Gloom:
+            case xi::Weather::Darkness:
                 element = ELEMENT_DARK;
                 break;
             default:
@@ -1046,8 +1046,8 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         // clang-format on
     }
 
-    ZONE_TYPE zoneType  = zoneutils::GetZone(PChar->getZone())->GetTypeMask();
-    bool      validZone = !((this->m_Type & xi::MobType::Battlefield) != xi::MobType::Normal) && !(zoneType & ZONE_TYPE::DYNAMIS);
+    xi::ZoneType zoneType  = zoneutils::GetZone(PChar->getZone())->GetTypeMask();
+    bool         validZone = !((this->m_Type & xi::MobType::Battlefield) != xi::MobType::Normal) && !((zoneType & xi::ZoneType::Dynamis) != xi::ZoneType::Unknown);
 
     // Check if mob can drop seals -- mobmod to disable drops, zone type isnt battlefield/dynamis, mob is stronger than Too Weak, or mobmod for EXP bonus is -100 or lower (-100% exp)
     if (!getMobMod(MOBMOD_NO_DROPS) && validZone && charutils::CheckMob(m_HiPCLvl, this) > EMobDifficulty::TooWeak && getMobMod(MOBMOD_EXP_BONUS) > -100)
@@ -1245,7 +1245,7 @@ void CMobEntity::OnDeathTimer()
 {
     TracyZoneScoped;
 
-    if (!(m_Behavior & BEHAVIOR_RAISABLE))
+    if (!((m_Behavior & xi::Behavior::Raisable) != xi::Behavior::None))
     {
         PAI->Despawn();
     }

@@ -49,7 +49,7 @@ CAutomatonController::CAutomatonController(CAutomatonEntity* PPet)
     setCooldowns();
     if (shouldStandBack())
     {
-        PAutomaton->m_Behavior |= BEHAVIOR_STANDBACK;
+        PAutomaton->m_Behavior |= xi::Behavior::Standback;
     }
 }
 
@@ -239,7 +239,7 @@ void CAutomatonController::Move()
     if ((shouldStandBack() && !isWithinDistance(PAutomaton->loc.p, PTarget->loc.p, 15.0f)) ||
         (PAutomaton->health.mp < 8 && PAutomaton->health.maxmp > 8))
     {
-        PAutomaton->m_Behavior &= ~BEHAVIOR_STANDBACK;
+        PAutomaton->m_Behavior &= ~xi::Behavior::Standback;
     }
 
     CPetController::Move();
@@ -1652,7 +1652,7 @@ auto CAutomatonController::Disengage() -> bool
     PTarget = nullptr;
     if (shouldStandBack())
     {
-        PAutomaton->m_Behavior |= BEHAVIOR_STANDBACK;
+        PAutomaton->m_Behavior |= xi::Behavior::Standback;
     }
     return CMobController::Disengage();
 }
@@ -1677,7 +1677,7 @@ void LoadAutomatonSpellList()
                 .skilllevel = rset->get<uint16>("skilllevel"),
                 .heads      = rset->get<uint8>("heads"),
                 .enfeeble   = rset->get<xi::StatusEffect>("enfeeble"),
-                .immunity   = rset->get<IMMUNITY>("immunity"),
+                .immunity   = rset->get<xi::Immunity>("immunity"),
                 .removes    = {}, // Will handle in a moment
             };
 

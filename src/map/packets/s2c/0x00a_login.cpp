@@ -209,8 +209,8 @@ GP_SERV_COMMAND_LOGIN::GP_SERV_COMMAND_LOGIN(CCharEntity* PChar, const EventInfo
     {
         packet.LoginState      = SAVE_LOGIN_STATE::SAVE_LOGIN_STATE_GAME;
         packet.MyroomMapNumber = 0x01FF;
-        packet.SendCount       = csid > 0 ? 0x01 : 0x00;                    // TODO: SendCount is where we should put the number of King NPCs needed for the upcoming CS
-        packet.MogZoneFlag     = PChar->loc.zone->CanUseMisc(MISC_MOGMENU); // flag allows you to use Mog Menu outside Mog House
+        packet.SendCount       = csid > 0 ? 0x01 : 0x00;                             // TODO: SendCount is where we should put the number of King NPCs needed for the upcoming CS
+        packet.MogZoneFlag     = PChar->loc.zone->CanUseMisc(xi::ZoneMisc::Mogmenu); // flag allows you to use Mog Menu outside Mog House
     }
 
     const auto& nameStr = PChar->getName();

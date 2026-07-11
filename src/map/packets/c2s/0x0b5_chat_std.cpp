@@ -257,7 +257,7 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
             const auto isYellBanned     = PChar->getCharVar("[YELL]Banned") == 1;
             const auto isInYellCooldown = PChar->getCharVar("[YELL]Cooldown") == 1;
 
-            if (PChar->loc.zone->CanUseMisc(MISC_YELL))
+            if (PChar->loc.zone->CanUseMisc(xi::ZoneMisc::Yell))
             {
                 if (isYellBanned)
                 {
@@ -323,7 +323,7 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
         case GP_CLI_COMMAND_CHAT_STD_KIND::AssistJ:
         {
             if (!settings::get<bool>("main.ASSIST_CHANNEL_ENABLED") ||
-                !PChar->loc.zone->CanUseMisc(MISC_ASSIST) ||
+                !PChar->loc.zone->CanUseMisc(xi::ZoneMisc::Assist) ||
                 PChar->aman().isMuted() ||
                 !PChar->aman().isAssistChannelEligible())
             {
@@ -349,7 +349,7 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
         case GP_CLI_COMMAND_CHAT_STD_KIND::AssistE:
         {
             if (!settings::get<bool>("main.ASSIST_CHANNEL_ENABLED") ||
-                !PChar->loc.zone->CanUseMisc(MISC_ASSIST) ||
+                !PChar->loc.zone->CanUseMisc(xi::ZoneMisc::Assist) ||
                 PChar->aman().isMuted() ||
                 !PChar->aman().isAssistChannelEligible())
             {

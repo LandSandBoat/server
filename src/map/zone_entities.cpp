@@ -55,7 +55,7 @@
 #include "lua/luautils.h"
 
 #include "battlefield.h"
-#include "enums/weather.h"
+#include "data/enums/weather.h"
 #include "items/transactions/synth.h"
 #include "packets/s2c/0x05f_music.h"
 #include "utils/battleutils.h"
@@ -450,7 +450,7 @@ void CZoneEntities::TransportDepart(uint16 boundary, uint16 prevZoneId, uint16 t
     }
 }
 
-void CZoneEntities::WeatherChange(Weather weather)
+void CZoneEntities::WeatherChange(xi::Weather weather)
 {
     TracyZoneScoped;
 
@@ -462,7 +462,7 @@ void CZoneEntities::WeatherChange(Weather weather)
 
         if (PCurrentMob->getMobMod(MOBMOD_DETECTION) & DETECT_SCENT)
         {
-            PCurrentMob->m_disableScent = (weather == Weather::Rain || weather == Weather::Squall || weather == Weather::Blizzards);
+            PCurrentMob->m_disableScent = (weather == xi::Weather::Rain || weather == xi::Weather::Squall || weather == xi::Weather::Blizzards);
         }
     }
 
@@ -835,7 +835,7 @@ void CZoneEntities::tapMobAggro(CCharEntity* PChar, CMobEntity* PCurrentMob)
     CMobController* PController = static_cast<CMobController*>(PCurrentMob->PAI->GetController());
 
     // Check if this mob follows targets and if so then it should not aggro
-    if (PCurrentMob->m_roamFlags & ROAMFLAG_FOLLOW)
+    if ((PCurrentMob->m_roamFlags & xi::RoamFlag::Follow) != xi::RoamFlag::None)
     {
         if (PController->CanFollowTarget(PChar))
         {

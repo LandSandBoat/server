@@ -98,7 +98,7 @@ CBattleEntity::CBattleEntity()
     m_modStat[Mod::HTH_SDT]    = 0;
     m_modStat[Mod::IMPACT_SDT] = 0;
 
-    m_Immunity   = 0;
+    m_Immunity   = xi::Immunity::None;
     isCharmed    = false;
     m_unkillable = false;
 
@@ -149,7 +149,7 @@ bool CBattleEntity::isInDynamis()
     auto* PZone = loc.zone == nullptr ? zoneutils::GetZone(loc.destination) : loc.zone;
     if (PZone)
     {
-        return PZone->GetTypeMask() & ZONE_TYPE::DYNAMIS;
+        return (PZone->GetTypeMask() & xi::ZoneType::Dynamis) != xi::ZoneType::Unknown;
     }
     return false;
 }
@@ -158,7 +158,7 @@ bool CBattleEntity::isInAssault()
 {
     if (loc.zone != nullptr)
     {
-        return loc.zone->GetTypeMask() & ZONE_TYPE::INSTANCED &&
+        return (loc.zone->GetTypeMask() & xi::ZoneType::Instanced) != xi::ZoneType::Unknown &&
                (loc.zone->GetRegionID() >= REGION_TYPE::WEST_AHT_URHGAN && loc.zone->GetRegionID() <= REGION_TYPE::ALZADAAL);
     }
     return false;
@@ -200,12 +200,11 @@ bool CBattleEntity::inMogHouse()
 }
 
 // return true if the mob has immunity
-bool CBattleEntity::hasImmunity(uint32 imID)
+bool CBattleEntity::hasImmunity(xi::Immunity imID)
 {
     if (objtype == TYPE_MOB || objtype == TYPE_PET)
     {
-        IMMUNITY mobImmunity = (IMMUNITY)imID;
-        return (m_Immunity & mobImmunity);
+        return (m_Immunity & imID) != xi::Immunity::None;
     }
     return false;
 }

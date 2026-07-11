@@ -21,7 +21,7 @@
 
 #pragma once
 
-#include "data/enums/enum_traits.h"
+#include "common/enum_traits.h"
 
 #include "common/macros.h"
 

@@ -175,7 +175,7 @@ public:
     void updateNPCHideTime(const sol::object& seconds); // Updates the length of time a NPC remains hidden, if shorter than the original hide time.
 
     auto getWeather(const sol::object& ignoreScholar) const -> uint8;
-    void setWeather(Weather weatherType); // Set Weather condition (GM COMMAND)
+    void setWeather(xi::Weather weatherType); // Set Weather condition (GM COMMAND)
 
     // PC Instructions
     void changeMusic(MusicSlot slotId, uint16 trackId) const;                                                      // Sets the specified music Track for specified music block.
@@ -361,7 +361,7 @@ public:
     bool isJailed();
     void jail();
 
-    bool canUseMisc(uint16 misc); // Check misc flags of current zone.
+    bool canUseMisc(xi::ZoneMisc misc); // Check misc flags of current zone.
 
     uint8 getSpeed();
     uint8 getBaseSpeed();
@@ -878,9 +878,9 @@ public:
     void instantiateMob(uint32 groupID);
 
     bool hasTrait(uint16 traitID);
-    bool hasImmunity(uint32 immunityID); // Check if the mob has immunity for a type of spell (immunity list in mobentity.h)
-    void addImmunity(uint32 immunityID);
-    void delImmunity(uint32 immunityID);
+    bool hasImmunity(xi::Immunity immunityID); // Check if the mob has immunity for a type of spell (immunity list in mobentity.h)
+    void addImmunity(xi::Immunity immunityID);
+    void delImmunity(xi::Immunity immunityID);
 
     void setAggressive(bool aggressive);
     void setTrueDetection(bool truedetection);
@@ -914,12 +914,12 @@ public:
     auto   getCrystalElement() const -> ELEMENT;
     void   setCrystalElement(ELEMENT crystalElement);
 
-    uint16 getBehavior();
-    void   setBehavior(uint16 behavior);
-    uint8  getLink();
-    void   setLink(uint8 link);
-    uint16 getRoamFlags();
-    void   setRoamFlags(uint16 newRoamFlags);
+    auto  getBehavior() -> xi::Behavior;
+    void  setBehavior(xi::Behavior behavior);
+    uint8 getLink();
+    void  setLink(uint8 link);
+    auto  getRoamFlags() -> xi::RoamFlag;
+    void  setRoamFlags(xi::RoamFlag newRoamFlags);
 
     auto getTarget() -> CBaseEntity*;
     void updateTarget(); // Force mob to update target from enmity container (ie after updateEnmity)

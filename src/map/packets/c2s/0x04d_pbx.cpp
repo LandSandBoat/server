@@ -180,7 +180,7 @@ void GP_CLI_COMMAND_PBX::process(MapSession* PSession, CCharEntity* PChar) const
 {
     const auto charName = PChar->getName();
 
-    if (!zoneutils::IsResidentialArea(PChar) && PChar->m_GMlevel == 0 && !PChar->loc.zone->CanUseMisc(MISC_AH) && !PChar->loc.zone->CanUseMisc(MISC_MOGMENU))
+    if (!zoneutils::IsResidentialArea(PChar) && PChar->m_GMlevel == 0 && !PChar->loc.zone->CanUseMisc(xi::ZoneMisc::Ah) && !PChar->loc.zone->CanUseMisc(xi::ZoneMisc::Mogmenu))
     {
         ShowWarningFmt("DBOX: {} ({}) is trying to use the delivery box in a disallowed zone [{}]", charName, PChar->id, PChar->loc.zone->getName());
         return;

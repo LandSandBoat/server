@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  flags: true
+  cpp:
+    underlying: uint32_t
+  lua:
+    table: xi.immunity
+
+values:
+  none: 0x00000000
+  addle: 0x00000001
+  gravity: 0x00000002
+  bind: 0x00000004
+  stun: 0x00000008
+  silence: 0x00000010
+  paralyze: 0x00000020
+  blind: 0x00000040
+  slow: 0x00000080
+  poison: 0x00000100
+  elegy: 0x00000200
+  requiem: 0x00000400
+  light_sleep: 0x00000800
+  dark_sleep: 0x00001000
+  aspir: 0x00002000
+  terror: 0x00004000
+  dispel: 0x00008000
+  petrify: 0x00010000
+  plague: 0x00020000

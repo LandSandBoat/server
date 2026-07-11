@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  flags: true
+  cpp:
+    underlying: uint16_t
+  lua:
+    table: xi.behavior
+
+values:
+  none: 0x000
+  no_despawn: 0x001 # mob does not despawn on death
+  standback: 0x002 # mob will standback forever
+  raisable: 0x004 # mob can be raised via Raise spells
+  no_assist: 0x008 # mob can not be targeted by helpful magic from players (cure, protect, etc)
+  aggro_ambush: 0x200 # mob aggroes by ambush
+  no_turn: 0x400 # mob does not turn to face target

@@ -1,7 +1,6 @@
 set(DATA_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/backends/yaml.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/backends/yaml.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/enums/enum_traits.h
     ${CMAKE_CURRENT_SOURCE_DIR}/load.h
     ${CMAKE_CURRENT_SOURCE_DIR}/loader.h
     ${CMAKE_CURRENT_SOURCE_DIR}/node.h

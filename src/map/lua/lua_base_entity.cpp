@@ -2696,7 +2696,7 @@ void CLuaBaseEntity::updateNPCHideTime(const sol::object& seconds)
 
 auto CLuaBaseEntity::getWeather(const sol::object& ignoreScholar) const -> uint8
 {
-    auto weather = Weather::None;
+    auto weather = xi::Weather::None;
 
     if (m_PBaseEntity->objtype & TYPE_PC || m_PBaseEntity->objtype & TYPE_MOB)
     {
@@ -2718,9 +2718,9 @@ auto CLuaBaseEntity::getWeather(const sol::object& ignoreScholar) const -> uint8
  *  Notes   : Only used for GM command: scripts/commands/setweather.lua
  ************************************************************************/
 
-void CLuaBaseEntity::setWeather(Weather weatherType)
+void CLuaBaseEntity::setWeather(xi::Weather weatherType)
 {
-    if (magic_enum::enum_contains<Weather>(weatherType))
+    if (magic_enum::enum_contains<xi::Weather>(weatherType))
     {
         zoneutils::GetZone(m_PBaseEntity->getZone())->SetWeather(weatherType);
         luautils::OnZoneWeatherChange(m_PBaseEntity->getZone(), weatherType);
@@ -6771,7 +6771,7 @@ void CLuaBaseEntity::jail()
  *  Notes   : Checks if specified MISC flag is set in current zone
  ************************************************************************/
 
-bool CLuaBaseEntity::canUseMisc(uint16 misc)
+bool CLuaBaseEntity::canUseMisc(xi::ZoneMisc misc)
 {
     if (m_PBaseEntity->loc.zone == nullptr)
     {
@@ -18097,7 +18097,7 @@ bool CLuaBaseEntity::hasTrait(uint16 traitID)
  *  Notes   : Arguments are dec to bin, so powers of 2 (max 256) -- Listed in mobentity.h
  ************************************************************************/
 
-bool CLuaBaseEntity::hasImmunity(uint32 immunityID)
+bool CLuaBaseEntity::hasImmunity(xi::Immunity immunityID)
 {
     auto* PEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PEntity)
@@ -18115,7 +18115,7 @@ bool CLuaBaseEntity::hasImmunity(uint32 immunityID)
  *  Example : mob:addImmunity(xi.immunity.SILENCE)
  ************************************************************************/
 
-void CLuaBaseEntity::addImmunity(uint32 immunityID)
+void CLuaBaseEntity::addImmunity(xi::Immunity immunityID)
 {
     auto PEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (PEntity)
@@ -18130,7 +18130,7 @@ void CLuaBaseEntity::addImmunity(uint32 immunityID)
  *  Example : mob:delImmunity(xi.immunity.SILENCE)
  ************************************************************************/
 
-void CLuaBaseEntity::delImmunity(uint32 immunityID)
+void CLuaBaseEntity::delImmunity(xi::Immunity immunityID)
 {
     auto PEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (PEntity)
@@ -18671,12 +18671,12 @@ void CLuaBaseEntity::setCrystalElement(ELEMENT crystalElement)
  *  Notes   : Currently used in bitwise calculations for high-tier NM's
  ************************************************************************/
 
-uint16 CLuaBaseEntity::getBehavior()
+auto CLuaBaseEntity::getBehavior() -> xi::Behavior
 {
     if (m_PBaseEntity->objtype != TYPE_MOB)
     {
         ShowWarning("Attempting to get behavior for invalid entity type (%s).", m_PBaseEntity->getName());
-        return 0;
+        return xi::Behavior::None;
     }
 
     return static_cast<CMobEntity*>(m_PBaseEntity)->m_Behavior;
@@ -18689,7 +18689,7 @@ uint16 CLuaBaseEntity::getBehavior()
  *  Notes   : Currently used in bitwise calculations for high-tier NM's
  ************************************************************************/
 
-void CLuaBaseEntity::setBehavior(uint16 behavior)
+void CLuaBaseEntity::setBehavior(xi::Behavior behavior)
 {
     if (m_PBaseEntity->objtype != TYPE_MOB)
     {
@@ -18742,12 +18742,12 @@ void CLuaBaseEntity::setLink(uint8 link)
  *  Example : mob:getRoamFlags()
  ************************************************************************/
 
-uint16 CLuaBaseEntity::getRoamFlags()
+auto CLuaBaseEntity::getRoamFlags() -> xi::RoamFlag
 {
     if (m_PBaseEntity->objtype != TYPE_MOB)
     {
         ShowWarning("Attempting to get roam flags for invalid entity type (%s).", m_PBaseEntity->getName());
-        return 0;
+        return xi::RoamFlag::None;
     }
 
     return static_cast<CMobEntity*>(m_PBaseEntity)->m_roamFlags;
@@ -18759,7 +18759,7 @@ uint16 CLuaBaseEntity::getRoamFlags()
  *  Example : mob:setRoamFlags(bit.bor(mob:getRoamFlags(), xi.roamFlag.STEALTH))
  ************************************************************************/
 
-void CLuaBaseEntity::setRoamFlags(uint16 newRoamFlags)
+void CLuaBaseEntity::setRoamFlags(xi::RoamFlag newRoamFlags)
 {
     if (m_PBaseEntity->objtype != TYPE_MOB)
     {

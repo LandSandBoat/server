@@ -175,7 +175,7 @@ REGION_TYPE CLuaZone::getRegionID()
     return m_pLuaZone->GetRegionID();
 }
 
-ZONE_TYPE CLuaZone::getTypeMask()
+xi::ZoneType CLuaZone::getTypeMask()
 {
     return m_pLuaZone->GetTypeMask();
 }
@@ -189,7 +189,7 @@ auto CLuaZone::getBattlefieldByInitiator(uint32 charID) -> CBattlefield*
     return nullptr;
 }
 
-auto CLuaZone::getWeather() const -> Weather
+auto CLuaZone::getWeather() const -> xi::Weather
 {
     return m_pLuaZone->weather().current();
 }

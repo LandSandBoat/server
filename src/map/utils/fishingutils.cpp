@@ -47,11 +47,11 @@
 
 #include "battleutils.h"
 #include "charutils.h"
+#include "data/enums/weather.h"
 #include "enums/chat_message_type.h"
 #include "enums/four_cc.h"
 #include "enums/key_items.h"
 #include "enums/msg_std.h"
-#include "enums/weather.h"
 #include "item_container.h"
 #include "itemutils.h"
 #include "mob_modifier.h"
@@ -333,11 +333,11 @@ auto GetWeatherModifier(const CCharEntity* PChar) -> float
     const auto weather    = zoneutils::GetZone(PChar->getZone())->weather().current();
     float      weatherMod = 1.0f;
 
-    if (weather == Weather::Rain)
+    if (weather == xi::Weather::Rain)
     {
         weatherMod = 1.1f;
     }
-    else if (weather == Weather::Squall)
+    else if (weather == xi::Weather::Squall)
     {
         weatherMod = 1.2f;
     }
@@ -1836,7 +1836,7 @@ void FishingSkillup(CCharEntity* PChar, uint8 catchLevel, uint8 successType)
 
     // Not in City bonus
     CZone* PZone = zoneutils::GetZone(PChar->getZone());
-    if (!(PZone && PZone->GetTypeMask() & ZONE_TYPE::CITY))
+    if (!(PZone && (PZone->GetTypeMask() & xi::ZoneType::City) != xi::ZoneType::Unknown))
     {
         skillRoll -= 10;
     }
@@ -2121,7 +2121,7 @@ fishresponse_t* FishingCheck(CCharEntity* PChar, uint8 fishingSkill, rod_t* rod,
     float  noCatchMoonModifier  = MOONPATTERN_5(GetMoonPhase());
 
     CZone* PZone = zoneutils::GetZone(PChar->getZone());
-    if (PZone && PZone->GetTypeMask() & ZONE_TYPE::CITY)
+    if (PZone && (PZone->GetTypeMask() & xi::ZoneType::City) != xi::ZoneType::Unknown)
     {
         FishPoolWeight = (uint16)std::floor(15 * fishPoolMoonModifier);
         ItemPoolWeight = 25 + (uint16)std::floor(20 * itemPoolMoonModifier);

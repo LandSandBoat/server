@@ -72,7 +72,7 @@ function CZone:getRegionID()
 end
 
 ---@nodiscard
----@return integer
+---@return xi.zoneType
 function CZone:getTypeMask()
 end
 

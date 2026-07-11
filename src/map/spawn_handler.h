@@ -33,7 +33,7 @@
 #include <map>
 #include <memory>
 
-enum class Weather : uint16_t;
+#include "data/enums/weather.h"
 
 class CMobEntity;
 class CZone;
@@ -63,7 +63,7 @@ public:
     auto isRegistered(CMobEntity* PMob) const -> bool;
     auto getRemainingRespawnTime(CMobEntity* PMob) const -> Maybe<timer::duration>;
     void onGameHour(uint32 hour) const;
-    void onWeatherChange(Weather weather) const;
+    void onWeatherChange(xi::Weather weather) const;
     auto canSpawnNow(const CMobEntity* PMob) const -> bool;
 
 private:

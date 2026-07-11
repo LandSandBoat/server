@@ -23,7 +23,7 @@
 
 #include "base.h"
 
-enum class Weather : uint16_t;
+#include "data/enums/weather.h"
 
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x0057
 // This packet is sent by the server to inform the client of weather changes.
@@ -32,10 +32,10 @@ class GP_SERV_COMMAND_WEATHER final : public GP_SERV_PACKET<PacketS2C::GP_SERV_C
 public:
     struct PacketData
     {
-        uint32_t StartTime;
-        Weather  WeatherNumber;
-        uint16_t WeatherOffsetTime;
+        uint32_t    StartTime;
+        xi::Weather WeatherNumber;
+        uint16_t    WeatherOffsetTime;
     };
 
-    GP_SERV_COMMAND_WEATHER(uint32_t startTime, Weather weatherId, uint16_t offsetTime);
+    GP_SERV_COMMAND_WEATHER(uint32_t startTime, xi::Weather weatherId, uint16_t offsetTime);
 };

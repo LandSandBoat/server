@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  flags: true
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.spawnType
+
+values:
+  normal: 0x00 # 00:00-24:00
+  at_night: 0x01 # 20:00-04:00
+  at_evening: 0x02 # 18:00-06:00
+  weather: 0x04
+  fog: 0x08 # 02:00-07:00
+  moonphase: 0x10
+  lottery: 0x20
+  windowed: 0x40
+  scripted: 0x80 # scripted spawn

@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  flags: true
+  cpp:
+    underlying: uint16_t
+  lua:
+    table: xi.roamFlag
+
+values:
+  none: 0x000
+  none0: 0x001
+  none1: 0x002
+  none2: 0x004
+  none3: 0x008
+  none4: 0x010
+  none5: 0x020
+  worm: 0x040 # pop up and down when moving
+  ambush: 0x080 # stays hidden until someone comes close (antlion)
+  scripted: 0x100 # calls lua method for roaming logic
+  ignore: 0x200 # ignore all hate, except linking hate
+  stealth: 0x400 # stays name hidden and untargetable until someone comes close (chigoe)
+  follow: 0x800 # follows a player when sighted for a little while

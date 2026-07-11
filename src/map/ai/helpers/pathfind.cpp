@@ -49,7 +49,7 @@ CPathFind::CPathFind(CBaseEntity* PTarget)
 , m_distanceFromPoint(0.0f)
 , m_pathFlags(0)
 , m_patrolFlags(0)
-, m_roamFlags(0)
+, m_roamFlags(xi::RoamFlag::None)
 , m_onPoint(false)
 , m_currentPoint(0)
 , m_currentTurn(0)
@@ -72,7 +72,7 @@ CPathFind::~CPathFind()
     Clear();
 }
 
-bool CPathFind::RoamAround(const position_t& point, float maxRadius, uint8 maxTurns, uint16 roamFlags)
+bool CPathFind::RoamAround(const position_t& point, float maxRadius, uint8 maxTurns, xi::RoamFlag roamFlags)
 {
     TracyZoneScoped;
     TracyZoneString(m_POwner->getName());
@@ -350,7 +350,7 @@ void CPathFind::StepTo(const position_t& pos, bool run)
 
     if (const auto* PMobEntity = dynamic_cast<CMobEntity*>(m_POwner))
     {
-        if (PMobEntity->GetSpeed() == 0 && (m_roamFlags & ROAMFLAG_WORM))
+        if (PMobEntity->GetSpeed() == 0 && ((m_roamFlags & xi::RoamFlag::Worm) != xi::RoamFlag::None))
         {
             speed = 20;
         }
@@ -453,7 +453,7 @@ bool CPathFind::FindPath(const position_t& start, const position_t& end)
     return true;
 }
 
-bool CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 maxTurns, uint16 roamFlags)
+bool CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 maxTurns, xi::RoamFlag roamFlags)
 {
     TracyZoneScoped;
     TracyZoneString(m_POwner->getName());
@@ -588,7 +588,7 @@ void CPathFind::Clear()
 {
     m_distanceFromPoint = 0;
     m_pathFlags         = 0;
-    m_roamFlags         = 0;
+    m_roamFlags         = xi::RoamFlag::None;
 
     m_points.clear();
 

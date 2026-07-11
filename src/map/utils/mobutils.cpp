@@ -670,12 +670,12 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
         PMob->StatusEffectContainer->KillAllStatusEffect();
     }
 
-    bool      isNM     = (PMob->m_Type & xi::MobType::Notorious) != xi::MobType::Normal;
-    JOBTYPE   mJob     = PMob->GetMJob();
-    JOBTYPE   sJob     = PMob->GetSJob();
-    uint8     mLvl     = PMob->GetMLevel();
-    uint8     sLvl     = PMob->GetSLevel();
-    ZONE_TYPE zoneType = PMob->loc.zone->GetTypeMask();
+    bool         isNM     = (PMob->m_Type & xi::MobType::Notorious) != xi::MobType::Normal;
+    JOBTYPE      mJob     = PMob->GetMJob();
+    JOBTYPE      sJob     = PMob->GetSJob();
+    uint8        mLvl     = PMob->GetMLevel();
+    uint8        sLvl     = PMob->GetSLevel();
+    xi::ZoneType zoneType = PMob->loc.zone->GetTypeMask();
 
     uint8 mJobGrade = 0; // main jobs grade
     uint8 sJobGrade = 0; // subjobs grade
@@ -987,7 +987,7 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
         SetupPetSkills(PMob);
     }
 
-    PMob->m_Behavior |= PMob->getMobMod(MOBMOD_BEHAVIOR);
+    PMob->m_Behavior |= static_cast<xi::Behavior>(PMob->getMobMod(MOBMOD_BEHAVIOR));
 
     if ((PMob->m_Type & xi::MobType::Battlefield) != xi::MobType::Normal)
     {
@@ -999,7 +999,7 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
         PMob->setMobMod(MOBMOD_NO_DESPAWN, 1);
     }
 
-    if (zoneType & ZONE_TYPE::INSTANCED)
+    if ((zoneType & xi::ZoneType::Instanced) != xi::ZoneType::Unknown)
     {
         SetupDungeonInstanceMob(PMob);
     }
@@ -1228,7 +1228,7 @@ void SetupRoaming(CMobEntity* PMob)
     PMob->defaultMobMod(MOBMOD_ROAM_COOL, cool);
     PMob->defaultMobMod(MOBMOD_ROAM_RATE, rate);
 
-    if (PMob->m_roamFlags & ROAMFLAG_AMBUSH)
+    if ((PMob->m_roamFlags & xi::RoamFlag::Ambush) != xi::RoamFlag::None)
     {
         PMob->m_specialFlags |= SPECIALFLAG_HIDDEN;
         // always stay close to spawn
@@ -1237,7 +1237,7 @@ void SetupRoaming(CMobEntity* PMob)
         PMob->setMobMod(MOBMOD_ROAM_TURNS, 1);
     }
 
-    if (PMob->m_roamFlags & ROAMFLAG_SCRIPTED)
+    if ((PMob->m_roamFlags & xi::RoamFlag::Scripted) != xi::RoamFlag::None)
     {
         PMob->setMobMod(MOBMOD_ROAM_RESET_FACING, 1);
     }
@@ -1349,7 +1349,7 @@ void SetupBattlefieldMob(CMobEntity* PMob)
 void SetupEventMob(CMobEntity* PMob)
 {
     // event mob types will always have scripted roaming (any mob can have it scripted, but these ALWAYS do)
-    PMob->m_roamFlags |= ROAMFLAG_SCRIPTED;
+    PMob->m_roamFlags |= xi::RoamFlag::Scripted;
     PMob->setMobMod(MOBMOD_ROAM_RESET_FACING, 1);
     PMob->m_maxRoamDistance = 0.5f; // always go back to spawn
 
@@ -1715,7 +1715,7 @@ auto InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* instance) -> CMob
         PMob->packetName.insert(0, rset->get<std::string>("packet_name"));
 
         PMob->m_RespawnTime = std::chrono::seconds(rset->get<uint32>("respawntime"));
-        PMob->m_SpawnType   = rset->get<SPAWNTYPE>("spawntype");
+        PMob->m_SpawnType   = rset->get<xi::SpawnType>("spawntype");
         PMob->m_DropID      = rset->get<uint32>("dropid");
 
         PMob->HPmodifier = rset->get<uint32>("HP");
@@ -1737,10 +1737,10 @@ auto InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* instance) -> CMob
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDelay(rset->get<uint16>("cmbDelay"));
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setBaseDelay(rset->get<uint16>("cmbDelay"));
 
-        PMob->m_Behavior  = rset->get<uint16>("behavior");
+        PMob->m_Behavior  = rset->get<xi::Behavior>("behavior");
         PMob->m_Link      = rset->get<uint8>("links");
         PMob->m_Type      = rset->get<xi::MobType>("mobType");
-        PMob->m_Immunity  = rset->get<IMMUNITY>("immunity");
+        PMob->m_Immunity  = rset->get<xi::Immunity>("immunity");
         PMob->m_EcoSystem = rset->get<xi::Ecosystem>("ecosystemID");
 
         PMob->baseSpeed      = rset->get<uint8>("speed"); // Overwrites baseentity.cpp's defined baseSpeed
@@ -1893,7 +1893,7 @@ auto InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZone
         PMob->packetName.insert(0, rset->get<std::string>("packet_name"));
 
         PMob->m_RespawnTime = std::chrono::seconds(rset->get<uint32>("respawntime"));
-        PMob->m_SpawnType   = rset->get<SPAWNTYPE>("spawntype");
+        PMob->m_SpawnType   = rset->get<xi::SpawnType>("spawntype");
         PMob->m_DropID      = rset->get<uint32>("dropid");
 
         PMob->HPmodifier = rset->get<uint32>("HP");
@@ -1912,10 +1912,10 @@ auto InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZone
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDelay(rset->get<uint16>("cmbDelay"));
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setBaseDelay(rset->get<uint16>("cmbDelay"));
 
-        PMob->m_Behavior  = rset->get<uint16>("behavior");
+        PMob->m_Behavior  = rset->get<xi::Behavior>("behavior");
         PMob->m_Link      = rset->get<uint8>("links");
         PMob->m_Type      = rset->get<xi::MobType>("mobType");
-        PMob->m_Immunity  = rset->get<IMMUNITY>("immunity");
+        PMob->m_Immunity  = rset->get<xi::Immunity>("immunity");
         PMob->m_EcoSystem = rset->get<xi::Ecosystem>("ecosystemID");
 
         PMob->baseSpeed      = rset->get<uint8>("speed"); // Overwrites baseentity.cpp's defined baseSpeed

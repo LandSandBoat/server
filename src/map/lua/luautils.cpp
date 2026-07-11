@@ -4056,7 +4056,7 @@ void OnGameHour(CZone* PZone)
     }
 }
 
-void OnZoneWeatherChange(const uint16 zoneId, Weather weather)
+void OnZoneWeatherChange(const uint16 zoneId, xi::Weather weather)
 {
     TracyZoneScoped;
 
@@ -6007,7 +6007,7 @@ CBaseEntity* GenerateDynamicEntity(CZone* PZone, CInstance* PInstance, sol::tabl
         const auto spawnType = table["spawnType"].get_or<uint16>(0);
         if (spawnType > 0)
         {
-            PMob->m_SpawnType = (SPAWNTYPE)spawnType;
+            PMob->m_SpawnType = static_cast<xi::SpawnType>(spawnType);
         }
 
         const auto modelSize = table["modelSize"].get_or<uint8>(0);

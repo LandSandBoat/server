@@ -1522,7 +1522,7 @@ function CBaseEntity:jail()
 end
 
 ---@nodiscard
----@param misc integer
+---@param misc xi.zoneMisc
 ---@return boolean
 function CBaseEntity:canUseMisc(misc)
 end
@@ -3847,17 +3847,17 @@ function CBaseEntity:hasTrait(traitID)
 end
 
 ---@nodiscard
----@param immunityID integer
+---@param immunityID xi.immunity
 ---@return boolean
 function CBaseEntity:hasImmunity(immunityID)
 end
 
----@param immunityID integer
+---@param immunityID xi.immunity
 ---@return nil
 function CBaseEntity:addImmunity(immunityID)
 end
 
----@param immunityID integer
+---@param immunityID xi.immunity
 ---@return nil
 function CBaseEntity:delImmunity(immunityID)
 end
@@ -4007,21 +4007,21 @@ function CBaseEntity:setCrystalElement(element)
 end
 
 ---@nodiscard
----@return integer
+---@return xi.behavior
 function CBaseEntity:getBehavior()
 end
 
----@param behavior integer
+---@param behavior xi.behavior
 ---@return nil
 function CBaseEntity:setBehavior(behavior)
 end
 
 ---@nodiscard
----@return integer
+---@return xi.roamFlag
 function CBaseEntity:getRoamFlags()
 end
 
----@param newRoamFlags integer
+---@param newRoamFlags xi.roamFlag
 ---@return nil
 function CBaseEntity:setRoamFlags(newRoamFlags)
 end

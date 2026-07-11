@@ -138,7 +138,7 @@ auto PacketValidator::hasLinkshellRank(const uint8_t slot, const LSTYPE rank) ->
     return *this;
 }
 
-auto PacketValidator::hasZoneMiscFlag(const ZONEMISC flag) -> PacketValidator&
+auto PacketValidator::hasZoneMiscFlag(const xi::ZoneMisc flag) -> PacketValidator&
 {
     if (!result_.valid())
     {

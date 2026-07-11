@@ -85,7 +85,7 @@ CAMANContainer::CAMANContainer(CCharEntity* PChar)
         }
 
         // If you're not in an Assist Channel zone, don't bother evaluating membership.
-        if (!m_player->loc.zone || !m_player->loc.zone->CanUseMisc(MISC_ASSIST))
+        if (!m_player->loc.zone || !m_player->loc.zone->CanUseMisc(xi::ZoneMisc::Assist))
         {
             return;
         }
@@ -155,7 +155,7 @@ auto CAMANContainer::isAssistChannelEligible() const -> bool
         return false;
     }
 
-    if (!m_player->loc.zone->CanUseMisc(MISC_ASSIST))
+    if (!m_player->loc.zone->CanUseMisc(xi::ZoneMisc::Assist))
     {
         return false;
     }
