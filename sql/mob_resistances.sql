@@ -298,10 +298,10 @@ INSERT INTO `mob_resistances` VALUES (256,'Weeper',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 INSERT INTO `mob_resistances` VALUES (257,'Wivre',0,0,0,0,0,0,0,0,0,0,0,0,0,0,-2,-2,3,1,-1,-1,-1,-2,-2,-2,3,-1,-1,-1,-1);
 INSERT INTO `mob_resistances` VALUES (258,'Worm',0,0,0,0,0,0,0,0,0,0,0,0,0,-2,-2,-3,2,-2,-2,-3,0,-2,-2,-3,2,-2,-3,0,0);
 INSERT INTO `mob_resistances` VALUES (259,'Wyrm-Ouryu',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-2,11,11,0,0,0,0,0,-2,11,0,0,0,0);
-INSERT INTO `mob_resistances` VALUES (260,'Wyrm-Fafnir',0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,-2,-2,0,11,11,0,0,-2,6,6,0);
+INSERT INTO `mob_resistances` VALUES (260,'Wyrm-Fafnir',0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,-2,-2,0,0,0,0,0,-2,6,6,0);
 INSERT INTO `mob_resistances` VALUES (261,'Wyrm-Cynoprosopi',0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,-2,-2,0,11,11,0,0,-2,-2,0,0);
 INSERT INTO `mob_resistances` VALUES (262,'Wyrm',0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,-2,0,0,11,11,0,0,-2,0,0,0);
-INSERT INTO `mob_resistances` VALUES (263,'Wyrm-Nidhogg',0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,-2,-2,0,11,11,0,0,-2,6,6,0);
+INSERT INTO `mob_resistances` VALUES (263,'Wyrm-Nidhogg',0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,-2,-2,0,0,0,0,0,-2,6,6,0);
 INSERT INTO `mob_resistances` VALUES (264,'Unused',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (265,'Wyvern-Simorg',0,0,0,0,0,0,0,0,0,0,0,0,0,4,1,0,0,-2,-2,-2,-3,1,1,0,0,-2,-2,-3,-3);
 INSERT INTO `mob_resistances` VALUES (266,'Wyvern',0,0,0,0,0,0,0,0,0,0,0,0,0,4,1,0,0,-2,-2,-2,-3,1,1,0,0,-2,-2,-3,-3);
