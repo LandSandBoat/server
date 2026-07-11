@@ -3,7 +3,7 @@
 -----------------------------------
 -- Log ID: 1, Quest ID: 23
 -- Evi : !pos -4.656 -2.101 1.664 236
--- qm1 : !pos -201 16 80 108
+-- qm2 : !pos -201 16 80 108
 -----------------------------------
 
 local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.PAST_PERFECT)
@@ -28,11 +28,9 @@ quest.sections =
             ['Evi'] =
             {
                 onTrigger = function(player, npc)
-                    local questProgress = quest:getVar(player, 'Prog')
-
-                    if questProgress == 0 then
-                        return quest:progressEvent(104)
-                    elseif questProgress == 2 then
+                    if quest:getVar(player, 'Prog') == 0 then
+                        return quest:progressEvent(21)
+                    else
                         return quest:progressEvent(130)
                     end
                 end,
@@ -40,11 +38,7 @@ quest.sections =
 
             onEventFinish =
             {
-                [22] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 2)
-                end,
-
-                [104] = function(player, csid, option, npc)
+                [21] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
                 end,
 
@@ -62,7 +56,7 @@ quest.sections =
 
         [xi.zone.KONSCHTAT_HIGHLANDS] =
         {
-            ['qm1'] =
+            ['qm2'] =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.TATTERED_MISSION_ORDERS) then
@@ -79,6 +73,8 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.TATTERED_MISSION_ORDERS) then
                         return quest:progressEvent(131)
+                    else
+                        return quest:event(104)
                     end
                 end,
             },
@@ -89,6 +85,33 @@ quest.sections =
                     if quest:complete(player) then
                         player:delKeyItem(xi.ki.TATTERED_MISSION_ORDERS)
                     end
+                end,
+            },
+        },
+    },
+
+    {
+        check = function(player, status, vars)
+            return status == xi.questStatus.QUEST_COMPLETED
+        end,
+
+        [xi.zone.PORT_BASTOK] =
+        {
+            ['Evi'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getLocalVar('EviDialog') == 0 then
+                        return quest:progressEvent(21)
+                    else
+                        return quest:event(104)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [21] = function(player, csid, option, npc)
+                    quest:setVar(player, 'Prog', 1)
                 end,
             },
         },
