@@ -1,6 +1,6 @@
 -----------------------------------
--- Area: RaKaznar_Inner_Court
---  NPC: Vertical Transit Device (1)
+-- Area: Ra'Kaznar Inner Court
+--  NPC: Vertical Transit Device
 -- !pos 747 119 20 276
 -----------------------------------
 ---@type TNpcEntity
