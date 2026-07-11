@@ -27,7 +27,7 @@ xi.automaton.attachmentModifiers['strobe'            ] = { { modifier = xi.mod.E
 xi.automaton.attachmentModifiers['inhibitor'         ] = { { modifier = xi.mod.STORETP,                     values = {   5,   10,   15,   20 }, opticFiber = true  }, }
 xi.automaton.attachmentModifiers['armor_plate'       ] = { { modifier = xi.mod.DEFP,                        values = {  10,   15,   20,   25 }, opticFiber = true  }, }
 xi.automaton.attachmentModifiers['armor_plate_ii'    ] = { { modifier = xi.mod.DEFP,                        values = {  20,   25,   30,   35 }, opticFiber = true  }, }
-xi.automaton.attachmentModifiers['drum_magazine'     ] = { { modifier = xi.mod.AUTO_RANGED_DELAY,           values = {   3,    6,    9,   15 }, opticFiber = false },
+xi.automaton.attachmentModifiers['drum_magazine'     ] = { { modifier = xi.mod.AUTO_RANGED_DELAY,           values = {   2,    4,    6,    8 }, opticFiber = false },
                                                             { modifier = xi.mod.RACC,                        values = { -15,  -30,  -50,  -75 }, opticFiber = false }, }
 xi.automaton.attachmentModifiers['flame_holder'      ] = { { modifier = xi.mod.WEAPONSKILL_DAMAGE_BASE,     values = {   0,  125,  150,  175 }, opticFiber = true  }, }
 xi.automaton.attachmentModifiers['ice_maker'         ] = { { modifier = xi.mod.AUTO_MAB_COEFFICIENT,        values = {   0,   20,   40,   60 }, opticFiber = true  }, }
@@ -486,6 +486,52 @@ end)
 -----------------------------------
 -- Economizer - Changes Economizer to consume all Dark Maneuvers on activation. : https://wiki.ffo.jp/html/10435.html
 -----------------------------------
+local activationThresholds =
+{
+    [0] = 30,
+    [1] = 40,
+    [2] = 50,
+    [3] = 60,
+}
+
+m:addOverride('xi.actions.abilities.pets.automaton.economizer.onEquip', function(pet)
+    pet:addListener('AUTOMATON_ATTACHMENT_CHECK', 'ATTACHMENT_ECONOMIZER', function(automaton, target)
+        -- If Economizer is still on cooldown, do nothing.
+        if automaton:hasRecast(xi.recast.ABILITY, xi.mobSkill.ECONOMIZER_AUTOMATON) then
+            return
+        end
+
+        local master = automaton:getMaster()
+
+        if not master then
+            return
+        end
+
+        local darkManeuvers = master:countEffect(xi.effect.DARK_MANEUVER)
+
+        if darkManeuvers == 0 then
+            return
+        end
+
+        local maxMP = automaton:getMaxMP()
+
+        -- If this automaton has no MP, do nothing.
+        if maxMP == 0 then
+            return
+        end
+
+        local mpPercent = automaton:getMPP()
+        local mpThreshold = activationThresholds[darkManeuvers] or 30
+
+        -- If the automaton's MP is above the threshold, do nothing.
+        if mpPercent > mpThreshold then
+            return
+        end
+
+        automaton:useMobAbility(xi.mobSkill.ECONOMIZER_AUTOMATON, automaton)
+    end)
+end)
+
 m:addOverride('xi.actions.abilities.pets.automaton.economizer.onAutomatonAbility', function(target, automaton, skill, master, action)
     automaton:addRecast(xi.recast.ABILITY, skill:getID(), 180)
 
