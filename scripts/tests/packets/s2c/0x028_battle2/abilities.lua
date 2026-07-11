@@ -94,62 +94,30 @@ local packets =
 
         expected =
         {
+            m_uID   = ph.TEST_CHAR,
+            trg_sum = 1,
+            res_sum = 0,
+            cmd_no  = xi.action.category.MAGIC_FINISH,
+            cmd_arg = 0,
+            info    = 0,
+            target  =
             {
-                m_uID   = ph.TEST_CHAR,
-                trg_sum = 1,
-                res_sum = 0,
-                cmd_no  = xi.action.category.MAGIC_FINISH,
-                cmd_arg = 0,
-                info    = 0,
-                target  =
                 {
+                    m_uID      = ph.TEST_MOB,
+                    result_sum = 1,
+                    result     =
                     {
-                        m_uID      = ph.TEST_CHAR,
-                        result_sum = 1,
-                        result     =
                         {
-                            {
-                                miss      = 0,
-                                kind      = 0,
-                                sub_kind  = 508,
-                                info      = 0,
-                                scale     = 0,
-                                value     = 0,
-                                message   = xi.msg.basic.IS_PARALYZED_2,
-                                bit       = 0,
-                                has_proc  = false,
-                                has_react = false,
-                            },
-                        },
-                    },
-                },
-            },
-            {
-                m_uID   = ph.TEST_CHAR,
-                trg_sum = 1,
-                res_sum = 0,
-                cmd_no  = xi.action.category.MAGIC_FINISH,
-                cmd_arg = 0,
-                info    = 0,
-                target  =
-                {
-                    {
-                        m_uID      = ph.TEST_MOB,
-                        result_sum = 1,
-                        result     =
-                        {
-                            {
-                                miss      = 0,
-                                kind      = 0,
-                                sub_kind  = 508,
-                                info      = 0,
-                                scale     = 0,
-                                value     = 0,
-                                message   = xi.msg.basic.IS_PARALYZED_2,
-                                bit       = 0,
-                                has_proc  = false,
-                                has_react = false,
-                            },
+                            miss      = 0,
+                            kind      = 0,
+                            sub_kind  = 508,
+                            info      = 0,
+                            scale     = 0,
+                            value     = 0,
+                            message   = xi.msg.basic.IS_PARALYZED_2,
+                            bit       = 0,
+                            has_proc  = false,
+                            has_react = false,
                         },
                     },
                 },

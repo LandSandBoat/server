@@ -12,7 +12,7 @@ end
 
 itemObject.onItemUse = function(target, user)
     if not target:hasStatusEffect(xi.effect.PARALYSIS) then
-        target:addStatusEffect(xi.effect.PARALYSIS, { power = 20, duration = 180, origin = user })
+        target:addStatusEffect(xi.effect.PARALYSIS, { power = 100, duration = 180, origin = user })
     else
         target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
