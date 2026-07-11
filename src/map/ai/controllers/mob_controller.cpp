@@ -182,7 +182,7 @@ auto CMobController::CheckLock(CBattleEntity* PTarget) const -> bool
             const auto* PChar = dynamic_cast<CCharEntity*>(PTarget);
             if (PChar && PChar->m_Locked)
             {
-                return !CanPursueTarget(PTarget);
+                return true;
             }
         }
         else if (PTarget->objtype == TYPE_PET)
@@ -201,7 +201,7 @@ auto CMobController::CheckLock(CBattleEntity* PTarget) const -> bool
 
             if (PChar->m_Locked)
             {
-                return !CanPursueTarget(PTarget);
+                return true;
             }
         }
     }
