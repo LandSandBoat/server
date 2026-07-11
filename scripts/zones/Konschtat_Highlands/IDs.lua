@@ -29,12 +29,14 @@ zones[xi.zone.KONSCHTAT_HIGHLANDS] =
         SIGNPOST_DIALOG_1             = 7409,  -- North: Valkurm Dunes South: To Gustaberg
         SIGNPOST_DIALOG_2             = 7410,  -- You see something stuck behind the signpost.
         SOMETHING_BURIED_HERE         = 7411,  -- Something has been buried here.
+        THOUGHT_YOU_SAW_SOMETHING     = 7412,  -- You thought you saw something, but find nothing.
         BLACKENED_SPOT_ON_GROUND      = 7460,  -- There is a blackened spot on the ground...
         BLACKENED_SHOULD_PLACE        = 7461,  -- This is the blackened spot you were told about. You should place <item> here.
         PLACE_BLACKENED_SPOT          = 7462,  -- You place <item> on the blackened spot.
         BLACKENED_NOTHING_HAPPENS     = 7463,  -- You place <item> on the blackened spot, but nothing happens.
         BLACKENED_MUST_BE_CLOSER      = 7464,  -- You have to be closer to place anything on the blackened spot.
         NOT_THE_TIME_FOR_THAT         = 7473,  -- This is not the time for that!
+        GIMME_EVERYTHING_YA_GOT       = 7474,  -- Gimme everything ya got in your bag.
         TELEPOINT_HAS_BEEN_SHATTERED  = 7500,  -- The telepoint has been shattered into a thousand pieces...
         TIME_ELAPSED                  = 7556,  -- Time elapsed: <number> [hour/hours] (Vana'diel time) <number> [minute/minutes] and <number> [second/seconds] (Earth time)
         MEMORIES_SEALED_OFF           = 7613,  -- A portion of your memories has been sealed off.
@@ -60,13 +62,13 @@ zones[xi.zone.KONSCHTAT_HIGHLANDS] =
     },
     mob =
     {
-        STRAY_MARY     = GetTableOfIDs('Stray_Mary'), -- 2 NMs
-        RAMPAGING_RAM  = GetFirstID('Rampaging_Ram'),
-        STEELFLEECE    = GetFirstID('Steelfleece_Baldarich'),
-        TREMOR_RAM     = GetTableOfIDs('Tremor_Ram'),
+        BENDIGEIT_VRAN = GetFirstID('Bendigeit_Vran'),
         FORGER         = GetFirstID('Forger'),
         HATY           = GetFirstID('Haty'),
-        BENDIGEIT_VRAN = GetFirstID('Bendigeit_Vran'),
+        RAMPAGING_RAM  = GetFirstID('Rampaging_Ram'),
+        STEELFLEECE    = GetFirstID('Steelfleece_Baldarich'),
+        STRAY_MARY     = GetTableOfIDs('Stray_Mary'), -- 2 NMs
+        TREMOR_RAM     = GetTableOfIDs('Tremor_Ram'),
 
         VOIDWALKER =
         {
@@ -76,15 +78,15 @@ zones[xi.zone.KONSCHTAT_HIGHLANDS] =
                 17220018, -- Prickly Sheep
                 17220017, -- Prickly Sheep
                 17220016, -- Prickly Sheep
-                17220015,  -- Void Hare
-                17220014,  -- Void Hare
-                17220013,  -- Void Hare
-                17220012,  -- Void Hare
+                17220015, -- Void Hare
+                17220014, -- Void Hare
+                17220013, -- Void Hare
+                17220012, -- Void Hare
             },
 
             [xi.keyItem.COLORFUL_ABYSSITE] =
             {
-                17220011,  -- Chesma
+                17220011, -- Chesma
                 17220010, -- Tammuz
             },
 

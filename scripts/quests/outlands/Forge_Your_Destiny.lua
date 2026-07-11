@@ -5,7 +5,7 @@
 -- Jaucribaix      : !pos 91 -7 -8 252
 -- Aeka            : !pos 4 0 -4 252
 -- Ranemaud        : !pos 15 0 23 252
--- qm2 (Konschtat) : !pos -709 2 102 108
+-- qm3 (Konschtat) : !pos -709 2 102 108
 -- qm2 (Zi'Tah)    : !pos 639 -1 -151 121
 -----------------------------------
 local konschtatID = zones[xi.zone.KONSCHTAT_HIGHLANDS]
@@ -52,7 +52,7 @@ quest.sections =
 
         [xi.zone.KONSCHTAT_HIGHLANDS] =
         {
-            ['qm2'] =
+            ['qm3'] =
             {
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, xi.item.LUMP_OF_ORIENTAL_STEEL) then
