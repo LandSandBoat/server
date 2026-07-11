@@ -1,7 +1,8 @@
 local ID = zones[xi.zone.KONSCHTAT_HIGHLANDS]
 
 return {
-    ['qm1']                 = { messageSpecial = ID.text.FIND_NOTHING },
+    ['qm']                  = { messageSpecial = ID.text.GIMME_EVERYTHING_YA_GOT },
+    ['qm1']                 = { messageSpecial = ID.text.THOUGHT_YOU_SAW_SOMETHING },
     ['qm2']                 = { messageSpecial = ID.text.BLACKENED_SPOT_ON_GROUND },
     ['Shattered_Telepoint'] = { messageSpecial = ID.text.TELEPOINT_HAS_BEEN_SHATTERED },
     ['Signpost']            = { messageSpecial = ID.text.SIGNPOST_DIALOG_1 },
