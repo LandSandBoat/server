@@ -32,6 +32,7 @@
 #include "data/enums/behavior.h"
 #include "data/enums/claim_type.h"
 #include "data/enums/mob_type.h"
+#include "data/enums/roam_flag.h"
 #include "data/enums/spawn_type.h"
 
 enum class MsgBasic : uint16_t;
@@ -53,23 +54,6 @@ enum SPECIALFLAG
 {
     SPECIALFLAG_NONE   = 0x0,
     SPECIALFLAG_HIDDEN = 0x1 // only use special when hidden
-};
-
-enum ROAMFLAG : uint16
-{
-    ROAMFLAG_NONE     = 0x00,
-    ROAMFLAG_NONE0    = 0x01,  //
-    ROAMFLAG_NONE1    = 0x02,  //
-    ROAMFLAG_NONE2    = 0x04,  //
-    ROAMFLAG_NONE3    = 0x08,  //
-    ROAMFLAG_NONE4    = 0x10,  //
-    ROAMFLAG_NONE5    = 0x20,  //
-    ROAMFLAG_WORM     = 0x40,  // pop up and down when moving
-    ROAMFLAG_AMBUSH   = 0x80,  // stays hidden until someone comes close (antlion)
-    ROAMFLAG_SCRIPTED = 0x100, // calls lua method for roaming logic
-    ROAMFLAG_IGNORE   = 0x200, // ignore all hate, except linking hate
-    ROAMFLAG_STEALTH  = 0x400, // stays name hidden and untargetable until someone comes close (chigoe)
-    ROAMFLAG_FOLLOW   = 0x800, // follows a player when sighted for a little while
 };
 
 enum DETECT : uint16
@@ -191,8 +175,8 @@ public:
     float HPscale; // HP boost percentage
     float MPscale; // MP boost percentage
 
-    uint16 m_roamFlags;    // defines its roaming behavior
-    uint8  m_specialFlags; // flags for special skill
+    xi::RoamFlag m_roamFlags;    // defines its roaming behavior
+    uint8        m_specialFlags; // flags for special skill
 
     uint8 strRank;
     uint8 dexRank;

@@ -97,7 +97,7 @@ CMobEntity::CMobEntity()
 , MPmodifier(0)
 , HPscale(1.0)
 , MPscale(1.0)
-, m_roamFlags(ROAMFLAG_NONE)
+, m_roamFlags(xi::RoamFlag::None)
 , m_specialFlags(SPECIALFLAG_NONE)
 , strRank(3)
 , dexRank(3)
@@ -350,7 +350,7 @@ void CMobEntity::ResetGilPurse()
 
 bool CMobEntity::CanRoamHome()
 {
-    if ((speed == 0 && !(m_roamFlags & ROAMFLAG_WORM)) || getMobMod(MOBMOD_NO_MOVE) > 0)
+    if ((speed == 0 && !((m_roamFlags & xi::RoamFlag::Worm) != xi::RoamFlag::None)) || getMobMod(MOBMOD_NO_MOVE) > 0)
     {
         return false;
     }
@@ -365,7 +365,7 @@ bool CMobEntity::CanRoamHome()
 
 bool CMobEntity::CanRoam()
 {
-    return !(m_roamFlags & ROAMFLAG_SCRIPTED) && PMaster == nullptr && (speed > 0 || (m_roamFlags & ROAMFLAG_WORM)) && getMobMod(MOBMOD_NO_MOVE) == 0;
+    return !((m_roamFlags & xi::RoamFlag::Scripted) != xi::RoamFlag::None) && PMaster == nullptr && (speed > 0 || ((m_roamFlags & xi::RoamFlag::Worm) != xi::RoamFlag::None)) && getMobMod(MOBMOD_NO_MOVE) == 0;
 }
 
 void CMobEntity::TapDeaggroTime()
@@ -395,13 +395,13 @@ bool CMobEntity::CanLink(position_t* pos, int16 superLink)
     }
 
     // Don't link I'm an underground worm
-    if ((m_roamFlags & ROAMFLAG_WORM) && IsNameHidden())
+    if (((m_roamFlags & xi::RoamFlag::Worm) != xi::RoamFlag::None) && IsNameHidden())
     {
         return false;
     }
 
     // Don't link I'm an underground antlion
-    if ((m_roamFlags & ROAMFLAG_AMBUSH) && IsNameHidden())
+    if (((m_roamFlags & xi::RoamFlag::Ambush) != xi::RoamFlag::None) && IsNameHidden())
     {
         return false;
     }
@@ -711,7 +711,7 @@ void CMobEntity::Spawn()
     // spawn somewhere around my point
     loc.p = m_SpawnPoint;
 
-    if (m_roamFlags & ROAMFLAG_STEALTH)
+    if ((m_roamFlags & xi::RoamFlag::Stealth) != xi::RoamFlag::None)
     {
         HideName(true);
         SetUntargetable(true);

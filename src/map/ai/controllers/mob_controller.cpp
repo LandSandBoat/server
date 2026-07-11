@@ -218,7 +218,7 @@ auto CMobController::CheckDetection(CBattleEntity* PTarget) -> bool
         TapDeaggroTime();
     }
 
-    const auto additionalDeaggroTime = PMob->m_roamFlags & ROAMFLAG_WORM ? std::chrono::seconds(0) : std::chrono::seconds(settings::get<uint32>("map.MOB_ADDITIONAL_TIME_TO_DEAGGRO"));
+    const auto additionalDeaggroTime = (PMob->m_roamFlags & xi::RoamFlag::Worm) != xi::RoamFlag::None ? std::chrono::seconds(0) : std::chrono::seconds(settings::get<uint32>("map.MOB_ADDITIONAL_TIME_TO_DEAGGRO"));
     return PMob->CanDeaggro() && (m_Tick >= m_DeaggroTime + 25s + additionalDeaggroTime);
 }
 
@@ -1094,12 +1094,12 @@ auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
 {
     TracyZoneScopedC(0x00FF00);
     // If there's someone on our enmity list, go from roaming -> engaging
-    if (PMob->PEnmityContainer->GetHighestEnmity() != nullptr && !(PMob->m_roamFlags & ROAMFLAG_IGNORE))
+    if (PMob->PEnmityContainer->GetHighestEnmity() != nullptr && !((PMob->m_roamFlags & xi::RoamFlag::Ignore) != xi::RoamFlag::None))
     {
         Engage(PMob->PEnmityContainer->GetHighestEnmity()->targid);
         co_return;
     }
-    else if (PMob->m_OwnerID.id != 0 && !(PMob->m_roamFlags & ROAMFLAG_IGNORE))
+    else if (PMob->m_OwnerID.id != 0 && !((PMob->m_roamFlags & xi::RoamFlag::Ignore) != xi::RoamFlag::None))
     {
         // i'm claimed by someone and want to be fighting them
         PTarget = static_cast<CBattleEntity*>(PMob->GetEntity(PMob->m_OwnerID.targid, TYPE_PC | TYPE_MOB | TYPE_PET | TYPE_TRUST));
@@ -1118,7 +1118,7 @@ auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
         co_return;
     }
 
-    if (PMob->m_roamFlags & ROAMFLAG_IGNORE)
+    if ((PMob->m_roamFlags & xi::RoamFlag::Ignore) != xi::RoamFlag::None)
     {
         // don't claim me if I ignore
         PMob->m_OwnerID.clean();
@@ -1238,7 +1238,7 @@ auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
                 {
                     // I spawned a pet
                 }
-                else if (PMob->m_roamFlags & ROAMFLAG_SCRIPTED)
+                else if ((PMob->m_roamFlags & xi::RoamFlag::Scripted) != xi::RoamFlag::None)
                 {
                     // allow custom event action
                     PMob->PAI->EventHandler.triggerListener("ROAM_ACTION", PMob);
@@ -1248,7 +1248,7 @@ auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
                 else if (PMob->CanRoam())
                 {
                     // TODO: #AIToScript (event probably)
-                    if (PMob->m_roamFlags & ROAMFLAG_WORM && !PMob->IsNameHidden())
+                    if ((PMob->m_roamFlags & xi::RoamFlag::Worm) != xi::RoamFlag::None && !PMob->IsNameHidden())
                     {
                         // don't reset m_LastActionTime until the roaming commences
                         if (!PMob->PAI->IsCurrentState<CMagicState>())
@@ -1273,7 +1273,7 @@ auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
                     }
                     else if (PMob->PAI->PathFind->RoamAround(PMob->m_SpawnPoint, PMob->GetRoamDistance(), static_cast<uint8>(PMob->getMobMod(MOBMOD_ROAM_TURNS)), PMob->m_roamFlags))
                     {
-                        if ((PMob->m_roamFlags & ROAMFLAG_STEALTH))
+                        if (((PMob->m_roamFlags & xi::RoamFlag::Stealth) != xi::RoamFlag::None))
                         {
                             // hidden name
                             PMob->HideName(true);
@@ -1345,7 +1345,7 @@ void CMobController::FollowRoamPath()
             m_LastActionTime            = m_Tick - std::chrono::milliseconds(xirand::GetRandomNumber(roamRandomness));
 
             // i'm a worm pop back up
-            if (PMob->m_roamFlags & ROAMFLAG_WORM && PMob->PAI->IsUntargetable())
+            if ((PMob->m_roamFlags & xi::RoamFlag::Worm) != xi::RoamFlag::None && PMob->PAI->IsUntargetable())
             {
                 // send a final position update before coming out of the ground to avoid a slight movement as it emerges
                 PMob->loc.zone->UpdateEntityPacket(PMob, ENTITY_UPDATE, UPDATE_POS);
@@ -1488,7 +1488,7 @@ auto CMobController::Engage(const uint16 targid) -> bool
 
 auto CMobController::CanFollowTarget(CBattleEntity* PTarget) const -> bool
 {
-    return !PMob->m_neutral && (PMob->m_roamFlags & ROAMFLAG_FOLLOW) && PFollowTarget == nullptr && m_followType == FollowType::None && CanAggroTarget(PTarget);
+    return !PMob->m_neutral && ((PMob->m_roamFlags & xi::RoamFlag::Follow) != xi::RoamFlag::None) && PFollowTarget == nullptr && m_followType == FollowType::None && CanAggroTarget(PTarget);
 }
 
 auto CMobController::CanAggroTarget(CBattleEntity* PTarget) const -> bool
@@ -1528,7 +1528,7 @@ auto CMobController::CanAggroTarget(CBattleEntity* PTarget) const -> bool
         }
 
         // Don't aggro I'm an underground worm
-        if ((PMob->m_roamFlags & ROAMFLAG_WORM) && PMob->IsNameHidden())
+        if (((PMob->m_roamFlags & xi::RoamFlag::Worm) != xi::RoamFlag::None) && PMob->IsNameHidden())
         {
             return false;
         }
@@ -1688,12 +1688,12 @@ auto CMobController::IsSpellReady(const float& currentDistance, const float& mel
     }
 
     // Worms don't cast in melee range (typically.) The edge cases can be scripted.
-    if (PMob->m_roamFlags & ROAMFLAG_WORM && currentDistance <= meleeRange)
+    if ((PMob->m_roamFlags & xi::RoamFlag::Worm) != xi::RoamFlag::None && currentDistance <= meleeRange)
     {
         return false;
     }
 
-    if (currentDistance > 5 && (PMob->m_roamFlags & ROAMFLAG_WORM) == 0)
+    if (currentDistance > 5 && ((PMob->m_roamFlags & xi::RoamFlag::Worm) != xi::RoamFlag::None) == 0)
     {
         // Mobs use magic quicker when standing back
         return m_Tick >= (m_nextMagicTime - std::chrono::seconds(PMob->getMobMod(MOBMOD_STANDBACK_COOL)));

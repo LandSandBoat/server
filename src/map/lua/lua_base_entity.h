@@ -914,12 +914,12 @@ public:
     auto   getCrystalElement() const -> ELEMENT;
     void   setCrystalElement(ELEMENT crystalElement);
 
-    auto   getBehavior() -> xi::Behavior;
-    void   setBehavior(xi::Behavior behavior);
-    uint8  getLink();
-    void   setLink(uint8 link);
-    uint16 getRoamFlags();
-    void   setRoamFlags(uint16 newRoamFlags);
+    auto  getBehavior() -> xi::Behavior;
+    void  setBehavior(xi::Behavior behavior);
+    uint8 getLink();
+    void  setLink(uint8 link);
+    auto  getRoamFlags() -> xi::RoamFlag;
+    void  setRoamFlags(xi::RoamFlag newRoamFlags);
 
     auto getTarget() -> CBaseEntity*;
     void updateTarget(); // Force mob to update target from enmity container (ie after updateEnmity)

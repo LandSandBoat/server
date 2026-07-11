@@ -25,6 +25,8 @@
 #include "common/mmo.h"
 #include "common/timer.h"
 
+#include "data/enums/roam_flag.h"
+
 class CBaseEntity;
 
 // no path can be longer than this
@@ -51,7 +53,7 @@ public:
     ~CPathFind();
 
     // move to a random point around given point
-    bool RoamAround(const position_t& point, float maxRadius, uint8 maxTurns, uint16 roamFlags = 0);
+    bool RoamAround(const position_t& point, float maxRadius, uint8 maxTurns, xi::RoamFlag roamFlags = xi::RoamFlag::None);
 
     // find and walk to the given point
     bool PathTo(const position_t& point, uint8 pathFlags = 0, bool clear = true);
@@ -124,7 +126,7 @@ private:
     bool FindClosestPath(const position_t& start, const position_t& end);
 
     // finds a random path around the given point
-    bool FindRandomPath(const position_t& start, float maxRadius, uint8 maxTurns, uint16 roamFlags);
+    bool FindRandomPath(const position_t& start, float maxRadius, uint8 maxTurns, xi::RoamFlag roamFlags);
 
     void AddPoints(std::vector<pathpoint_t>&& points, bool reverse = false);
 
@@ -137,11 +139,11 @@ private:
     position_t               m_originalPoint;
     float                    m_distanceFromPoint;
 
-    uint8  m_pathFlags;
-    uint8  m_patrolFlags;
-    uint16 m_roamFlags;
-    bool   m_onPoint;
-    int16  m_currentPoint;
+    uint8        m_pathFlags;
+    uint8        m_patrolFlags;
+    xi::RoamFlag m_roamFlags;
+    bool         m_onPoint;
+    int16        m_currentPoint;
 
     timer::time_point m_timeAtPoint;
 

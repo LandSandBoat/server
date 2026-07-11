@@ -18742,12 +18742,12 @@ void CLuaBaseEntity::setLink(uint8 link)
  *  Example : mob:getRoamFlags()
  ************************************************************************/
 
-uint16 CLuaBaseEntity::getRoamFlags()
+auto CLuaBaseEntity::getRoamFlags() -> xi::RoamFlag
 {
     if (m_PBaseEntity->objtype != TYPE_MOB)
     {
         ShowWarning("Attempting to get roam flags for invalid entity type (%s).", m_PBaseEntity->getName());
-        return 0;
+        return xi::RoamFlag::None;
     }
 
     return static_cast<CMobEntity*>(m_PBaseEntity)->m_roamFlags;
@@ -18759,7 +18759,7 @@ uint16 CLuaBaseEntity::getRoamFlags()
  *  Example : mob:setRoamFlags(bit.bor(mob:getRoamFlags(), xi.roamFlag.STEALTH))
  ************************************************************************/
 
-void CLuaBaseEntity::setRoamFlags(uint16 newRoamFlags)
+void CLuaBaseEntity::setRoamFlags(xi::RoamFlag newRoamFlags)
 {
     if (m_PBaseEntity->objtype != TYPE_MOB)
     {

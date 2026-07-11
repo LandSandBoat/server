@@ -835,7 +835,7 @@ void CZoneEntities::tapMobAggro(CCharEntity* PChar, CMobEntity* PCurrentMob)
     CMobController* PController = static_cast<CMobController*>(PCurrentMob->PAI->GetController());
 
     // Check if this mob follows targets and if so then it should not aggro
-    if (PCurrentMob->m_roamFlags & ROAMFLAG_FOLLOW)
+    if ((PCurrentMob->m_roamFlags & xi::RoamFlag::Follow) != xi::RoamFlag::None)
     {
         if (PController->CanFollowTarget(PChar))
         {

@@ -208,7 +208,7 @@ auto CInstanceLoader::LoadInstance() const -> CInstance*
 
             PMob->allegiance      = rset->get<xi::Allegiance>("allegiance");
             PMob->namevis         = rset->get<uint8>("namevis");
-            PMob->m_roamFlags     = rset->get<uint16>("roamflag");
+            PMob->m_roamFlags     = rset->get<xi::RoamFlag>("roamflag");
             PMob->modelHitboxSize = std::max<float>(0.0f, rset->getOrDefault<float>("modelHitboxSize", 0) / 10.f);
             PMob->modelSize       = rset->getOrDefault<uint8>("modelSize", 0);
             const auto aggro      = rset->get<uint32>("aggro");

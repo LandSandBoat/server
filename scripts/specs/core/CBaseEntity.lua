@@ -4017,11 +4017,11 @@ function CBaseEntity:setBehavior(behavior)
 end
 
 ---@nodiscard
----@return integer
+---@return xi.roamFlag
 function CBaseEntity:getRoamFlags()
 end
 
----@param newRoamFlags integer
+---@param newRoamFlags xi.roamFlag
 ---@return nil
 function CBaseEntity:setRoamFlags(newRoamFlags)
 end

@@ -1228,7 +1228,7 @@ void SetupRoaming(CMobEntity* PMob)
     PMob->defaultMobMod(MOBMOD_ROAM_COOL, cool);
     PMob->defaultMobMod(MOBMOD_ROAM_RATE, rate);
 
-    if (PMob->m_roamFlags & ROAMFLAG_AMBUSH)
+    if ((PMob->m_roamFlags & xi::RoamFlag::Ambush) != xi::RoamFlag::None)
     {
         PMob->m_specialFlags |= SPECIALFLAG_HIDDEN;
         // always stay close to spawn
@@ -1237,7 +1237,7 @@ void SetupRoaming(CMobEntity* PMob)
         PMob->setMobMod(MOBMOD_ROAM_TURNS, 1);
     }
 
-    if (PMob->m_roamFlags & ROAMFLAG_SCRIPTED)
+    if ((PMob->m_roamFlags & xi::RoamFlag::Scripted) != xi::RoamFlag::None)
     {
         PMob->setMobMod(MOBMOD_ROAM_RESET_FACING, 1);
     }
@@ -1349,7 +1349,7 @@ void SetupBattlefieldMob(CMobEntity* PMob)
 void SetupEventMob(CMobEntity* PMob)
 {
     // event mob types will always have scripted roaming (any mob can have it scripted, but these ALWAYS do)
-    PMob->m_roamFlags |= ROAMFLAG_SCRIPTED;
+    PMob->m_roamFlags |= xi::RoamFlag::Scripted;
     PMob->setMobMod(MOBMOD_ROAM_RESET_FACING, 1);
     PMob->m_maxRoamDistance = 0.5f; // always go back to spawn
 

@@ -598,7 +598,7 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                                     PMob->modelSize       = rset->getOrDefault<uint8>("modelSize", 0);
                                     PMob->m_Aggro         = rset->get<bool>("aggro");
 
-                                    PMob->m_roamFlags    = rset->get<uint16>("roamflag");
+                                    PMob->m_roamFlags    = rset->get<xi::RoamFlag>("roamflag");
                                     PMob->m_MobSkillList = rset->get<uint16>("skill_list_id");
 
                                     PMob->m_TrueDetection = rset->get<bool>("true_detection");
