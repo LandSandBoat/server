@@ -104,6 +104,8 @@ describe('Status Effect Flags', function()
             mob = player.entities:moveTo('Wild_Rabbit')
             mob:respawn()
             mob.assert:isAlive()
+            local pos = player:getPos()
+            mob:setPos(pos.x, pos.y, pos.z)
         end)
 
         describe('emitting hostile actions', function()

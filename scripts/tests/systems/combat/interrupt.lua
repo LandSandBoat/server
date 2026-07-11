@@ -21,9 +21,16 @@ describe('Action interrupts', function()
         caster = xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE, job = xi.job.BLM, level = 99 })
         target = caster.entities:moveTo('Wild_Rabbit')
         target:respawn() -- reset to full HP/alive; a prior test's cast may have killed it
+        target:setAutoAttackEnabled(false)
         local pos = caster:getPos()
         target:setPos(pos.x, pos.y, pos.z)
         caster:addSpell(xi.magic.spell.STONE)
+    end)
+
+    after_each(function()
+        if target then
+            target:setAutoAttackEnabled(true)
+        end
     end)
 
     -- Advance enough for a cast to finish and the (completed or interrupted) magic state
