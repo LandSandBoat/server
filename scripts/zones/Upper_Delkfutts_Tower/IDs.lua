@@ -34,14 +34,15 @@ zones[xi.zone.UPPER_DELKFUTTS_TOWER] =
     },
     mob =
     {
+        ALKYONEUS = GetFirstID('Alkyoneus'),
         ENKELADOS = GetTableOfIDs('Enkelados'),
         IXTAB     = GetTableOfIDs('Ixtab'),
         PALLAS    = GetFirstID('Pallas'),
-        ALKYONEUS = GetFirstID('Alkyoneus'),
     },
     npc =
     {
-        TREASURE_CHEST = GetFirstID('Treasure_Chest'),
+        QM_DELKFUTT_KEY = GetFirstID('qm_delkfutts_key'),
+        TREASURE_CHEST  = GetFirstID('Treasure_Chest'),
     },
 }
 
