@@ -2194,22 +2194,22 @@ xi.data.guildShops =
             { id = xi.item.PEELED_CRAYFISH,         initial = 144, maxStock = 240, targetStock = 180, buyMax = 350,    restockRate = 12 },
             { id = xi.item.SLICE_OF_MOAT_CARP,      initial = 144, maxStock = 240, targetStock = 180, buyMax = 350,    restockRate = 12 },
             { id = xi.item.FLY_LURE,                initial = 144, maxStock = 240, targetStock = 180, buyMax = 3600,   restockRate = 12 },
-            { id = xi.item.MINNOW,                  initial = 144, maxStock = 240, targetStock = 180, buyMax = 2025,   restockRate = 5 },
-            { id = xi.item.SINKING_MINNOW,          initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 5160,   restockRate = 3 }, -- targetStock assumed
-            { id = xi.item.WORM_LURE,               initial = 144, maxStock = 240, targetStock = 180, buyMax = 3600,   restockRate = 0 },
+            { id = xi.item.MINNOW,                  initial = 144, maxStock = 240, targetStock = 180, buyMax = 2025,   restockRate = 12 },
+            { id = xi.item.SINKING_MINNOW,          initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 5160,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.WORM_LURE,               initial = 144, maxStock = 240, targetStock = 180, buyMax = 3600,   restockRate = 12 },
             { id = xi.item.FROG_LURE,               initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 2500,   restockRate = 0 }, -- targetStock assumed
             { id = xi.item.SHRIMP_LURE,             initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 5730,   restockRate = 0 }, -- targetStock assumed
             { id = xi.item.LIZARD_LURE,             initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 4590,   restockRate = 0 }, -- targetStock assumed
-            { id = xi.item.SABIKI_RIG,              initial = 144, maxStock = 240, targetStock = 180, buyMax = 15960,  restockRate = 5 },
-            { id = xi.item.WILLOW_FISHING_ROD,      initial = 108, maxStock = 180, targetStock = 160, buyMax = 360,    restockRate = 0 },
+            { id = xi.item.SABIKI_RIG,              initial = 144, maxStock = 240, targetStock = 180, buyMax = 15960,  restockRate = 12 },
+            { id = xi.item.WILLOW_FISHING_ROD,      initial = 108, maxStock = 180, targetStock = 160, buyMax = 360,    restockRate = 9 },
             { id = xi.item.YEW_FISHING_ROD,         initial = 108, maxStock = 180, targetStock = 160, buyMax = 1180,   restockRate = 9 },
             { id = xi.item.BAMBOO_FISHING_ROD,      initial = 108, maxStock = 180, targetStock = 160, buyMax = 2700,   restockRate = 9 },
-            { id = xi.item.FASTWATER_FISHING_ROD,   initial = 72,  maxStock = 120, targetStock = 100, buyMax = 6975,   restockRate = 0 },
-            { id = xi.item.TARUTARU_FISHING_ROD,    initial = 36,  maxStock = 60,  targetStock = 45,  buyMax = 27180,  restockRate = 10 },
-            { id = xi.item.MITHRAN_FISHING_ROD,     initial = 40,  maxStock = 60,  targetStock = 45,  buyMax = 171600, restockRate = 0 },
+            { id = xi.item.FASTWATER_FISHING_ROD,   initial = 72,  maxStock = 120, targetStock = 100, buyMax = 6975,   restockRate = 6 },
+            { id = xi.item.TARUTARU_FISHING_ROD,    initial = 36,  maxStock = 60,  targetStock = 45,  buyMax = 27180,  restockRate = 3 },
+            { id = xi.item.MITHRAN_FISHING_ROD,     initial = 40,  maxStock = 60,  targetStock = 45,  buyMax = 171600, restockRate = 5 },
             { id = xi.item.GLASS_FIBER_FISHING_ROD, initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 43140,  restockRate = 0 },
-            { id = xi.item.CLOTHESPOLE,             initial = 36,  maxStock = 60,  targetStock = 45,  buyMax = 13200,  restockRate = 0 },
-            { id = xi.item.SINGLE_HOOK_FISHING_ROD, initial = 36,  maxStock = 60,  targetStock = 45,  buyMax = 64380,  restockRate = 0 },
+            { id = xi.item.CLOTHESPOLE,             initial = 36,  maxStock = 60,  targetStock = 45,  buyMax = 13200,  restockRate = 3 },
+            { id = xi.item.SINGLE_HOOK_FISHING_ROD, initial = 36,  maxStock = 60,  targetStock = 45,  buyMax = 64380,  restockRate = 3 },
             { id = xi.item.DENIZANASI,              initial = 144, maxStock = 240, targetStock = 180, buyMax = 170,    restockRate = 12 },
             { id = xi.item.CRAYFISH_1,              initial = 18,  maxStock = 120, targetStock = 90,  buyMax = 200,    restockRate = 6 },
             { id = xi.item.GURNARD,                 initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 28500,  restockRate = 0 }, -- targetStock assumed

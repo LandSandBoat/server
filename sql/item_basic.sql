@@ -2286,7 +2286,7 @@ INSERT INTO `item_basic` VALUES (2291,0,'bag_of_puk_fletchings','puk_fletching',
 INSERT INTO `item_basic` VALUES (2292,0,'bag_of_apkallu_fletchings','apkal._fletching','アプカルの矢羽根',@GENERAL_TYPE,99,@FLAG_MYSTERY_BOX,@WOODWORKING,4);
 INSERT INTO `item_basic` VALUES (2293,0,'handful_of_marid_tusk_arrowheads','m._tusk_arwhds.','マーリド牙の矢尻',@GENERAL_TYPE,99,@FLAG_MYSTERY_BOX,@WOODWORKING,46);
 INSERT INTO `item_basic` VALUES (2294,0,'handful_of_paralysis_arrowheads','par._arrowheads','マヒの矢尻',@GENERAL_TYPE,99,@FLAG_MYSTERY_BOX,@WOODWORKING,1266);
-INSERT INTO `item_basic` VALUES (2295,0,'clump_of_mohbwa_grass','mohbwa_grass','モブワ草',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@CLOTHCRAFT,1);
+INSERT INTO `item_basic` VALUES (2295,0,'clump_of_mohbwa_grass','mohbwa_grass','モブワ草',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@CLOTHCRAFT,6);
 INSERT INTO `item_basic` VALUES (2296,0,'spool_of_mohbwa_thread','mohbwa_thread','モブワ草糸',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@CLOTHCRAFT,18);
 INSERT INTO `item_basic` VALUES (2297,0,'handful_of_water_arrowheads','water_arrowhds.','水の矢尻',@GENERAL_TYPE,99,@FLAG_MYSTERY_BOX,@WOODWORKING,937);
 INSERT INTO `item_basic` VALUES (2298,0,'handful_of_wind_arrowheads','wind_arrowhds.','風の矢尻',@GENERAL_TYPE,99,@FLAG_MYSTERY_BOX,@WOODWORKING,90);
