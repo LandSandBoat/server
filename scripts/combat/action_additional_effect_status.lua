@@ -54,6 +54,7 @@ local function validateParameters(actor, target, fedData)
     params.subType         = fedData.subType or 0
     params.subPower        = fedData.subPower or 0
     params.tier            = fedData.tier or 0
+    params.resistRate      = fedData.resistRate or 0
 
     -- Action properties.
     params.element         = fedData.element or xi.element.NONE     -- None, Fire, Ice, Wind, Earth, Thunder, Water, Light, Dark.
