@@ -2693,7 +2693,7 @@ INSERT INTO `item_basic` VALUES (2698,0,'bamboo_birdcage','bamboo_birdcage','竹
 INSERT INTO `item_basic` VALUES (2699,0,'bamboo_charcoal_basket','bam._char._basket','竹の炭籠',@GENERAL_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (2700,0,'bamboo_tea_basket','bam._tea_basket','竹の茶籠',@GENERAL_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (2701,0,'bamboo_snakecage','bam._snakecage','竹の蛇籠',@GENERAL_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
-INSERT INTO `item_basic` VALUES (2702,0,'bag_of_buckwheat_flour','buckwheat_flour','蕎麦粉',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@INGREDIENTS,40-);
+INSERT INTO `item_basic` VALUES (2702,0,'bag_of_buckwheat_flour','buckwheat_flour','蕎麦粉',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@INGREDIENTS,40);
 INSERT INTO `item_basic` VALUES (2703,0,'square_of_khromated_leather','khrom._leather','クロマカラクール革',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@LEATHERCRAFT,229);
 INSERT INTO `item_basic` VALUES (2704,0,'square_of_oil-soaked_cloth','oil-soaked_clth.','オイルクロス',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@CLOTHCRAFT,1590);
 INSERT INTO `item_basic` VALUES (2705,0,'square_of_foulard','foulard','フーラード',@GENERAL_TYPE,12,@FLAG_MYSTERY_BOX,@CLOTHCRAFT,3838);
