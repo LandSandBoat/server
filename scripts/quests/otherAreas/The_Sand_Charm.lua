@@ -23,8 +23,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getFameLevel(xi.fameArea.WINDURST) >= 2 and
-                xi.settings.map.FISHING_ENABLE == true
+                player:getFameLevel(xi.fameArea.WINDURST) >= 2
         end,
 
         [xi.zone.MHAURA] =
@@ -37,9 +36,11 @@ quest.sections =
 
                     -- Cutscenes won't start in the docking area. Must be on town side.
                     if zPos <= 29 or zPos >= 38 or xPos <= 16 or xPos >= 32 then
-                        if quest:getVar(player, 'Prog') == 0 then
+                        local questProgress = quest:getVar(player, 'Prog')
+
+                        if questProgress == 0 then
                             return quest:progressEvent(125) -- I know he's out there
-                        elseif quest:getVar(player, 'Prog') == 2 then
+                        elseif questProgress == 2 then
                             return quest:progressEvent(124) -- Celestina doesn't want to hear it anymore
                         end
                     end
@@ -96,7 +97,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHas(trade, xi.item.SAND_CHARM) then
-                        return quest:progressEvent(127, 0, xi.item.SAND_CHARM) -- hes dead, but he'll be back soon I'm sure
+                        return quest:progressEvent(127, 0, xi.item.SAND_CHARM) -- He's dead, but he'll be back soon I'm sure
                     end
                 end,
             },
@@ -106,7 +107,7 @@ quest.sections =
                 [127] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:tradeComplete()
-                        player:setCharVar('SmallDialogByBlandine', 1)
+                        player:setCharVar('BlandineDialog', 1)
                     end
                 end,
             },
@@ -123,7 +124,7 @@ quest.sections =
             ['Blandine'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar('SmallDialogByBlandine') == 1 then
+                    if player:getCharVar('BlandineDialog') == 1 then
                         return quest:progressEvent(128) -- I stand here and pray for sailors now
                     else
                         return quest:event(129):replaceDefault() -- May the sea be kind...
@@ -134,7 +135,7 @@ quest.sections =
             onEventFinish =
             {
                 [128] = function(player, csid, option, npc)
-                    player:setCharVar('SmallDialogByBlandine', 0)
+                    player:setCharVar('BlandineDialog', 0)
                 end,
             },
         },
