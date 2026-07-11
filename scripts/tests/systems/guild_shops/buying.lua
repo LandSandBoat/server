@@ -10,6 +10,7 @@ describe('Guild shop buying', function()
     local notOffered = xi.item.CHAINMAIL        -- initial 0   => only bought, never offered
 
     local function open(hour)
+        xi.test.world:setVanaDay(xi.day.WINDSDAY)
         xi.test.world:setVanaTime(hour or 8, 0)
         player.entities:gotoAndTrigger('Kamilah')
     end
@@ -114,6 +115,7 @@ describe('Guild shop shared stock', function()
 
     before_each(function()
         player = xi.test.world:spawnPlayer({ zone = xi.zone.AHT_URHGAN_WHITEGATE })
+        xi.test.world:setVanaDay(xi.day.WINDSDAY)
         xi.test.world:setVanaTime(8, 0)
     end)
 
