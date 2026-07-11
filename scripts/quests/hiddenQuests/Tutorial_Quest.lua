@@ -926,7 +926,7 @@ quest.sections =
             onEventFinish =
             {
                 [715] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.item.WARP_RING) then
+                    if npcUtil.giveItem(player, xi.item.COPPER_AMAN_VOUCHER) then
                         quest:setVar(player, 'Prog', 11)
                     end
                 end,
@@ -949,7 +949,7 @@ quest.sections =
             onEventFinish =
             {
                 [3658] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.item.WARP_RING) then
+                    if npcUtil.giveItem(player, xi.item.COPPER_AMAN_VOUCHER) then
                         quest:setVar(player, 'Prog', 11)
                     end
                 end,
@@ -972,7 +972,7 @@ quest.sections =
             onEventFinish =
             {
                 [1006] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.item.WARP_RING) then
+                    if npcUtil.giveItem(player, xi.item.COPPER_AMAN_VOUCHER) then
                         quest:setVar(player, 'Prog', 11)
                     end
                 end,
