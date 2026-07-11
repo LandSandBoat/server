@@ -1109,7 +1109,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
 
                 // Signet Regions
                 default:
-                    if (regionID < REGION_TYPE::TAVNAZIA && conquest::GetRegionOwner(regionID) <= 2)
+                    if (regionID < REGION_TYPE::TAVNAZIA && conquest::GetRegionOwner(regionID) != NATION_BEASTMEN)
                     {
                         requiredEffect = xi::StatusEffect::Signet;
                     }

@@ -11,4 +11,5 @@ xi.nation =
     WINDURST = 2,
     BEASTMEN = 3,
     OTHER    = 4,
+    NEUTRAL  = 5,
 }

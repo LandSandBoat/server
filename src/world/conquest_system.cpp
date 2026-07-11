@@ -188,7 +188,9 @@ void ConquestSystem::updateWeekConquest()
                        "IF(bastok_influence > sandoria_influence AND bastok_influence > windurst_influence AND "
                        "bastok_influence > beastmen_influence, 1, "
                        "IF(windurst_influence > bastok_influence AND windurst_influence > sandoria_influence AND "
-                       "windurst_influence > beastmen_influence, 2, 3)))";
+                       "windurst_influence > beastmen_influence, 2, "
+                       "IF(beastmen_influence > sandoria_influence AND beastmen_influence > bastok_influence AND "
+                       "beastmen_influence > windurst_influence, 3, 5))))";
 
     const auto rset = db::preparedStmt(query);
     if (!rset)
