@@ -2,7 +2,6 @@
 -- Area: Valley of Sorrows
 --  HNM: Aspidochelone
 -----------------------------------
-local ID = zones[xi.zone.VALLEY_OF_SORROWS]
 mixins =
 {
     require('scripts/mixins/rage'),
@@ -51,9 +50,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    -- Despawn the ???
-    GetNPCByID(ID.npc.ADAMANTOISE_QM):setStatus(xi.status.DISAPPEAR)
-
     mob:setMobAbilityEnabled(true)
     mob:setAutoAttackEnabled(true)
     mob:setAnimationSub(0)
@@ -114,11 +110,6 @@ entity.onMobDeath = function(mob, player, optParams)
     if player then
         player:addTitle(xi.title.ASPIDOCHELONE_SINKER)
     end
-end
-
-entity.onMobDespawn = function(mob)
-    -- Respawn the ???
-    GetNPCByID(ID.npc.ADAMANTOISE_QM):updateNPCHideTime(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
 end
 
 return entity

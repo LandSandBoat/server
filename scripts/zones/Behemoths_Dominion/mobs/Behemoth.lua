@@ -2,7 +2,6 @@
 -- Area: Behemoth's Dominion
 --  HNM: Behemoth
 -----------------------------------
-local ID = zones[xi.zone.BEHEMOTHS_DOMINION]
 mixins = { require('scripts/mixins/rage') }
 -----------------------------------
 ---@type TMobEntity
@@ -24,9 +23,6 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.ATT, 211)
     mob:setMod(xi.mod.DARK_SLEEP_RES_RANK, 11)
     mob:setMod(xi.mod.STUN_RES_RANK, 10)
-
-    -- Despawn the ???
-    GetNPCByID(ID.npc.BEHEMOTH_QM):setStatus(xi.status.DISAPPEAR)
 end
 
 entity.onMobRoam = function(mob)
@@ -59,11 +55,6 @@ entity.onMobDeath = function(mob, player, optParams)
     if player then
         player:addTitle(xi.title.BEHEMOTHS_BANE)
     end
-end
-
-entity.onMobDespawn = function(mob)
-    -- Respawn the ???
-    GetNPCByID(ID.npc.BEHEMOTH_QM):updateNPCHideTime(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
 end
 
 return entity
