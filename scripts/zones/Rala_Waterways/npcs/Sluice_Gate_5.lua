@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Rala Waterways (258)
---  NPC: Sluice Gate #2
+--  NPC: Sluice Gate #5
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
@@ -11,7 +11,7 @@ entity.onTrigger = function(player, npc)
         return
     end
 
-    local resultTable = zone:queryEntitiesByName('_76r')
+    local resultTable = zone:queryEntitiesByName('_76v')
 
     resultTable[1]:openDoor(10)
 end
