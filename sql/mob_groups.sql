@@ -705,7 +705,7 @@ INSERT INTO `mob_groups` VALUES (6,3784,16,'Stray',0,128,0,0,0,0,NULL);
 -- 7 free
 -- 8 free
 INSERT INTO `mob_groups` VALUES (9,3897,16,'Thinker',720,0,2398,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (10,3539,16,'Seether',720,0,2192,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (10,3634,16,'Seether',720,0,2192,0,0,0,NULL);
 -- 11 free
 -- 12 free
 INSERT INTO `mob_groups` VALUES (13,4331,16,'Weeper',720,0,2634,0,0,0,NULL);
@@ -751,7 +751,7 @@ INSERT INTO `mob_groups` VALUES (5,6645,18,'Memory_Receptacle',300,0,0,0,0,0,NUL
 INSERT INTO `mob_groups` VALUES (6,3784,18,'Stray',0,128,0,0,0,0,NULL);
 -- 7 free
 -- 8 free
-INSERT INTO `mob_groups` VALUES (9,3539,18,'Seether',720,0,2193,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (9,3634,18,'Seether',720,0,2193,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (10,1768,18,'Gorger',720,0,1207,0,0,0,NULL);
 -- 11 free
 -- 12 free
@@ -795,7 +795,7 @@ INSERT INTO `mob_groups` VALUES (5,6646,20,'Memory_Receptacle',300,0,0,0,0,0,NUL
 INSERT INTO `mob_groups` VALUES (6,3784,20,'Stray',0,128,0,0,0,0,NULL);
 -- 7 free
 -- 8 free
-INSERT INTO `mob_groups` VALUES (9,3539,20,'Seether',720,0,2194,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (9,3634,20,'Seether',720,0,2194,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (10,830,20,'Craver',720,0,526,0,0,0,NULL);
 -- 11 free
 -- 12 free
