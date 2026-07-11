@@ -56,7 +56,7 @@ quest.sections =
                         player:getMainLvl() >= 10 and
                         player:getFameLevel(xi.fameArea.JEUNO) >= 3
                     then
-                        return quest:progressEvent(10016)
+                        return quest:progressEvent(10016, VanadielRSELocation(), VanadielRSERace())
                     else
                         return quest:event(10020)
                     end
