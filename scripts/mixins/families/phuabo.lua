@@ -10,21 +10,18 @@ g_mixins.families.phuabo = function(phuaboMob)
         mob:hideName(true)
         mob:setUntargetable(true)
         mob:setAnimationSub(5)
-        mob:wait(2000)
     end)
 
     phuaboMob:addListener('ENGAGE', 'PHUABO_ENGAGE', function(mob, target)
         mob:hideName(false)
         mob:setUntargetable(false)
         mob:setAnimationSub(6)
-        mob:wait(2000)
     end)
 
     phuaboMob:addListener('DISENGAGE', 'PHUABO_DISENGAGE', function(mob, target)
         mob:hideName(true)
         mob:setUntargetable(true)
         mob:setAnimationSub(5)
-        mob:wait(2000)
     end)
 end
 
