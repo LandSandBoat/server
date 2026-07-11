@@ -80,7 +80,7 @@ CZone::CZone(Scheduler& scheduler, MapConfig config, ZONEID ZoneID, REGION_TYPE 
 , navMesh_{ std::make_unique<NullNavMesh>() }
 , xiMesh_{ std::make_unique<NullXiMesh>() }
 , m_zoneID(ZoneID)
-, m_zoneType(ZONE_TYPE::UNKNOWN)
+, m_zoneType(xi::ZoneType::Unknown)
 , m_regionID(RegionID)
 , m_continentID(ContinentID)
 , m_levelRestriction(levelRestriction)
@@ -142,7 +142,7 @@ auto CZone::GetID() const -> ZONEID
     return m_zoneID;
 }
 
-ZONE_TYPE CZone::GetTypeMask()
+xi::ZoneType CZone::GetTypeMask()
 {
     return m_zoneType;
 }
@@ -461,7 +461,7 @@ void CZone::LoadZoneSettings()
         m_zoneMusic.m_bSongM    = rset->get<uint8>("battlemulti");
         m_tax                   = static_cast<uint16>(rset->get<float>("tax") * 100); // tax for bazaar
         m_miscMask              = rset->get<uint16>("misc");
-        m_zoneType              = rset->get<ZONE_TYPE>("zonetype");
+        m_zoneType              = rset->get<xi::ZoneType>("zonetype");
 
         if (rset->getOrDefault<std::string>("bcnmname", "") != "") // bcnmid cannot be used now, because they start from scratch
         {
@@ -749,7 +749,7 @@ void CZone::UpdateWeather()
     if ((CurrentVanaDate >= StartFogVanaDate) &&
         (CurrentVanaDate < EndFogVanaDate) &&
         (selectedWeather < xi::Weather::HotSpell) &&
-        !(GetTypeMask() & ZONE_TYPE::CITY))
+        !((GetTypeMask() & xi::ZoneType::City) != xi::ZoneType::Unknown))
     {
         selectedWeather = xi::Weather::Fog;
         // Force the weather to change by 7 am
@@ -1127,7 +1127,7 @@ void CZone::CharZoneIn(CCharEntity* PChar)
         }
     }
 
-    if (!(m_zoneType & ZONE_TYPE::INSTANCED))
+    if (!((m_zoneType & xi::ZoneType::Instanced) != xi::ZoneType::Unknown))
     {
         charutils::ClearTempItems(PChar);
         PChar->PInstance = nullptr;

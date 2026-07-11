@@ -175,7 +175,7 @@ REGION_TYPE CLuaZone::getRegionID()
     return m_pLuaZone->GetRegionID();
 }
 
-ZONE_TYPE CLuaZone::getTypeMask()
+xi::ZoneType CLuaZone::getTypeMask()
 {
     return m_pLuaZone->GetTypeMask();
 }

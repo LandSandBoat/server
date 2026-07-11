@@ -55,6 +55,7 @@
 //
 
 #include "data/enums/weather.h"
+#include "data/enums/zone_type.h"
 class XiMesh;
 class CNavMesh;
 class SpawnHandler;
@@ -441,22 +442,6 @@ enum class CONTINENT_TYPE : uint8
 };
 DECLARE_FORMAT_AS_UNDERLYING(CONTINENT_TYPE);
 
-enum ZONE_TYPE : uint16
-{
-    UNKNOWN   = 0x0000,
-    CITY      = 0x0001,
-    OUTDOORS  = 0x0002,
-    DUNGEON   = 0x0004,
-    SIGNET    = 0x0008,
-    SANCTION  = 0x0010, // 16
-    SIGIL     = 0x0020, // 32
-    IONIS     = 0x0040, // 64
-    DYNAMIS   = 0x0080, // 128
-    INSTANCED = 0x0100, // 256
-};
-
-DECLARE_FORMAT_AS_UNDERLYING(ZONE_TYPE);
-
 enum GLOBAL_MESSAGE_TYPE : uint8
 {
     CHAR_INRANGE,
@@ -572,7 +557,7 @@ public:
     DISALLOW_COPY_AND_MOVE(CZone);
 
     auto           GetID() const -> ZONEID;
-    ZONE_TYPE      GetTypeMask();
+    xi::ZoneType   GetTypeMask();
     REGION_TYPE    GetRegionID();
     CONTINENT_TYPE GetContinentID();
     uint8          getLevelRestriction();
@@ -707,7 +692,7 @@ private:
     std::unique_ptr<IXiMesh>  xiMesh_;
 
     ZONEID         m_zoneID;
-    ZONE_TYPE      m_zoneType;
+    xi::ZoneType   m_zoneType;
     REGION_TYPE    m_regionID;
     CONTINENT_TYPE m_continentID;
     uint8          m_levelRestriction;

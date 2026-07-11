@@ -434,7 +434,7 @@ bool CMobEntity::ShouldForceLink()
     // There are certain cases where mobs should always be able
     // to link with other mobs, even if their families or sublinks
     // do not align
-    if (loc.zone->GetTypeMask() & ZONE_TYPE::DYNAMIS)
+    if ((loc.zone->GetTypeMask() & xi::ZoneType::Dynamis) != xi::ZoneType::Unknown)
     {
         return true;
     }
@@ -1046,8 +1046,8 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         // clang-format on
     }
 
-    ZONE_TYPE zoneType  = zoneutils::GetZone(PChar->getZone())->GetTypeMask();
-    bool      validZone = !((this->m_Type & xi::MobType::Battlefield) != xi::MobType::Normal) && !(zoneType & ZONE_TYPE::DYNAMIS);
+    xi::ZoneType zoneType  = zoneutils::GetZone(PChar->getZone())->GetTypeMask();
+    bool         validZone = !((this->m_Type & xi::MobType::Battlefield) != xi::MobType::Normal) && !((zoneType & xi::ZoneType::Dynamis) != xi::ZoneType::Unknown);
 
     // Check if mob can drop seals -- mobmod to disable drops, zone type isnt battlefield/dynamis, mob is stronger than Too Weak, or mobmod for EXP bonus is -100 or lower (-100% exp)
     if (!getMobMod(MOBMOD_NO_DROPS) && validZone && charutils::CheckMob(m_HiPCLvl, this) > EMobDifficulty::TooWeak && getMobMod(MOBMOD_EXP_BONUS) > -100)

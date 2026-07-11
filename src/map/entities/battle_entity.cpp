@@ -149,7 +149,7 @@ bool CBattleEntity::isInDynamis()
     auto* PZone = loc.zone == nullptr ? zoneutils::GetZone(loc.destination) : loc.zone;
     if (PZone)
     {
-        return PZone->GetTypeMask() & ZONE_TYPE::DYNAMIS;
+        return (PZone->GetTypeMask() & xi::ZoneType::Dynamis) != xi::ZoneType::Unknown;
     }
     return false;
 }
@@ -158,7 +158,7 @@ bool CBattleEntity::isInAssault()
 {
     if (loc.zone != nullptr)
     {
-        return loc.zone->GetTypeMask() & ZONE_TYPE::INSTANCED &&
+        return (loc.zone->GetTypeMask() & xi::ZoneType::Instanced) != xi::ZoneType::Unknown &&
                (loc.zone->GetRegionID() >= REGION_TYPE::WEST_AHT_URHGAN && loc.zone->GetRegionID() <= REGION_TYPE::ALZADAAL);
     }
     return false;

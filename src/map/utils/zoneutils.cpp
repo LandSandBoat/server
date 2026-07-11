@@ -317,7 +317,7 @@ auto LoadNPCList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
 
                                 const auto NpcID = rset->get<uint32>("npcid");
 
-                                if (!(PZone->GetTypeMask() & ZONE_TYPE::INSTANCED))
+                                if (!((PZone->GetTypeMask() & xi::ZoneType::Instanced) != xi::ZoneType::Unknown))
                                 {
                                     CNpcEntity* PNpc = new CNpcEntity;
                                     PNpc->targid     = NpcID & 0xFFF;
@@ -447,9 +447,9 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                                     continue;
                                 }
 
-                                ZONE_TYPE zoneType = PZone->GetTypeMask();
+                                xi::ZoneType zoneType = PZone->GetTypeMask();
 
-                                if (!(zoneType & ZONE_TYPE::INSTANCED))
+                                if (!((zoneType & xi::ZoneType::Instanced) != xi::ZoneType::Unknown))
                                 {
                                     CMobEntity* PMob = new CMobEntity;
 
@@ -628,7 +628,7 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                                         (PMob->m_Type & xi::MobType::Fished) != xi::MobType::Normal ||
                                         (PMob->m_Type & xi::MobType::Battlefield) != xi::MobType::Normal ||
                                         (PMob->m_Type & xi::MobType::Notorious) != xi::MobType::Normal ||
-                                        zoneType & ZONE_TYPE::DYNAMIS)
+                                        (zoneType & xi::ZoneType::Dynamis) != xi::ZoneType::Unknown)
                                     {
                                         PMob->setMobMod(MOBMOD_CHARMABLE, 0);
                                     }
@@ -735,10 +735,10 @@ auto CreateZone(Scheduler& scheduler, MapConfig config, uint16 ZoneID) -> CZone*
     const auto rset = db::preparedStmt(query, ZoneID);
     if (rset && rset->rowsCount() && rset->next())
     {
-        const auto zoneType    = rset->get<ZONE_TYPE>("zonetype");
+        const auto zoneType    = rset->get<xi::ZoneType>("zonetype");
         const auto restriction = rset->get<uint8>("restriction");
 
-        if (zoneType & ZONE_TYPE::INSTANCED)
+        if ((zoneType & xi::ZoneType::Instanced) != xi::ZoneType::Unknown)
         {
             return new CZoneInstance(scheduler, config, static_cast<ZONEID>(ZoneID), GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID), restriction);
         }
@@ -1366,8 +1366,8 @@ auto IsZoneAtPlayerCap(uint16 zoneId, bool isGM) -> bool
 
     FOR_DB_SINGLE_RESULT(rset)
     {
-        const auto zoneType = rset->get<uint16>("zonetype");
-        if (zoneType & ZONE_TYPE::INSTANCED)
+        const auto zoneType = rset->get<xi::ZoneType>("zonetype");
+        if ((zoneType & xi::ZoneType::Instanced) != xi::ZoneType::Unknown)
         {
             return false;
         }

@@ -670,12 +670,12 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
         PMob->StatusEffectContainer->KillAllStatusEffect();
     }
 
-    bool      isNM     = (PMob->m_Type & xi::MobType::Notorious) != xi::MobType::Normal;
-    JOBTYPE   mJob     = PMob->GetMJob();
-    JOBTYPE   sJob     = PMob->GetSJob();
-    uint8     mLvl     = PMob->GetMLevel();
-    uint8     sLvl     = PMob->GetSLevel();
-    ZONE_TYPE zoneType = PMob->loc.zone->GetTypeMask();
+    bool         isNM     = (PMob->m_Type & xi::MobType::Notorious) != xi::MobType::Normal;
+    JOBTYPE      mJob     = PMob->GetMJob();
+    JOBTYPE      sJob     = PMob->GetSJob();
+    uint8        mLvl     = PMob->GetMLevel();
+    uint8        sLvl     = PMob->GetSLevel();
+    xi::ZoneType zoneType = PMob->loc.zone->GetTypeMask();
 
     uint8 mJobGrade = 0; // main jobs grade
     uint8 sJobGrade = 0; // subjobs grade
@@ -999,7 +999,7 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
         PMob->setMobMod(MOBMOD_NO_DESPAWN, 1);
     }
 
-    if (zoneType & ZONE_TYPE::INSTANCED)
+    if ((zoneType & xi::ZoneType::Instanced) != xi::ZoneType::Unknown)
     {
         SetupDungeonInstanceMob(PMob);
     }
