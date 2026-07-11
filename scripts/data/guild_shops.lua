@@ -398,32 +398,32 @@ xi.data.guildShops =
         holiday = xi.day.LIGHTNINGDAY,
         stock   =
         {
-            { id = xi.item.LUGWORM,              initial = 180, maxStock = 240, targetStock = 180, buyMax = 60,    restockRate = 60 }, -- targetStock assumed
-            { id = xi.item.SABIKI_RIG,           initial = 20,  maxStock = 120, targetStock = 90,  buyMax = 15960, restockRate = 5 },  -- targetStock assumed
-            { id = xi.item.MINNOW,               initial = 20,  maxStock = 60,  targetStock = 50,  buyMax = 2025,  restockRate = 5 },  -- targetStock assumed
-            { id = xi.item.SINKING_MINNOW,       initial = 16,  maxStock = 60,  targetStock = 50,  buyMax = 5160,  restockRate = 3 },  -- targetStock assumed
-            { id = xi.item.TARUTARU_FISHING_ROD, initial = 140, maxStock = 240, targetStock = 180, buyMax = 27180, restockRate = 10 }, -- targetStock assumed
-            { id = xi.item.COBALT_JELLYFISH,     initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.CLUMP_OF_PAMTAM_KELP, initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BASTORE_SARDINE_1,    initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.SHALL_SHELL,          initial = 0,   maxStock = 200, targetStock = 150, buyMax = 9000,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.YELLOW_GLOBE,         initial = 0,   maxStock = 200, targetStock = 150, buyMax = 400,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.NOSTEAU_HERRING_1,    initial = 0,   maxStock = 200, targetStock = 150, buyMax = 2000,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.TIGER_COD_1,          initial = 0,   maxStock = 200, targetStock = 150, buyMax = 1300,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.NEBIMONITE,           initial = 0,   maxStock = 200, targetStock = 150, buyMax = 1300,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.OGRE_EEL_1,           initial = 0,   maxStock = 200, targetStock = 150, buyMax = 800,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.ZAFMLUG_BASS,         initial = 0,   maxStock = 200, targetStock = 150, buyMax = 775,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.GOLD_LOBSTER_1,       initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 5760,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BLUETAIL_1,           initial = 0,   maxStock = 200, targetStock = 150, buyMax = 9000,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.NOBLE_LADY,           initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 14000, restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.SILVER_SHARK,         initial = 0,   maxStock = 200, targetStock = 150, buyMax = 20000, restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BASTORE_BREAM,        initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 27000, restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BLACK_SOLE,           initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 35000, restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.GREEDIE,              initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.QUUS_1,               initial = 0,   maxStock = 200, targetStock = 150, buyMax = 400,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.GUGRU_TUNA_1,         initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 2500,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BHEFHEL_MARLIN_1,     initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 9000,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BLADEFISH_1,          initial = 0,   maxStock = 40,  targetStock = 30,  buyMax = 14000, restockRate = 0 },  -- targetStock assumed
+            { id = xi.item.LUGWORM,              initial = 180, maxStock = 240, targetStock = 180, buyMax = 60,    restockRate = 60 },
+            { id = xi.item.SABIKI_RIG,           initial = 20,  maxStock = 120, targetStock = 90,  buyMax = 15960, restockRate = 5 },
+            { id = xi.item.MINNOW,               initial = 20,  maxStock = 60,  targetStock = 50,  buyMax = 2025,  restockRate = 5 },
+            { id = xi.item.SINKING_MINNOW,       initial = 16,  maxStock = 60,  targetStock = 50,  buyMax = 5160,  restockRate = 3 },
+            { id = xi.item.TARUTARU_FISHING_ROD, initial = 140, maxStock = 240, targetStock = 180, buyMax = 27180, restockRate = 10 },
+            { id = xi.item.COBALT_JELLYFISH,     initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.CLUMP_OF_PAMTAM_KELP, initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BASTORE_SARDINE_1,    initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SHALL_SHELL,          initial = 0,   maxStock = 200, targetStock = 150, buyMax = 9000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.YELLOW_GLOBE,         initial = 0,   maxStock = 200, targetStock = 150, buyMax = 400,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.NOSTEAU_HERRING_1,    initial = 0,   maxStock = 200, targetStock = 150, buyMax = 2000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.TIGER_COD_1,          initial = 0,   maxStock = 200, targetStock = 150, buyMax = 1300,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.NEBIMONITE,           initial = 0,   maxStock = 200, targetStock = 150, buyMax = 1300,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.OGRE_EEL_1,           initial = 0,   maxStock = 200, targetStock = 150, buyMax = 800,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.ZAFMLUG_BASS,         initial = 0,   maxStock = 200, targetStock = 150, buyMax = 775,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.GOLD_LOBSTER_1,       initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 5760,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BLUETAIL_1,           initial = 0,   maxStock = 200, targetStock = 150, buyMax = 9000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.NOBLE_LADY,           initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 14000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SILVER_SHARK,         initial = 0,   maxStock = 200, targetStock = 150, buyMax = 20000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BASTORE_BREAM,        initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 27000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BLACK_SOLE,           initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 35000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.GREEDIE,              initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.QUUS_1,               initial = 0,   maxStock = 200, targetStock = 150, buyMax = 400,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.GUGRU_TUNA_1,         initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 2500,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BHEFHEL_MARLIN_1,     initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 9000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BLADEFISH_1,          initial = 0,   maxStock = 40,  targetStock = 30,  buyMax = 14000, restockRate = 0 }, -- targetStock assumed
         },
     },
     ['Chaupire'] =
@@ -776,17 +776,17 @@ xi.data.guildShops =
         holiday = xi.day.LIGHTNINGDAY,
         stock   =
         {
-            { id = xi.item.SABIKI_RIG,              initial = 180, maxStock = 240, targetStock = 180, buyMax = 4401,  restockRate = 5 },  -- targetStock assumed
-            { id = xi.item.TARUTARU_FISHING_ROD,    initial = 45,  maxStock = 60,  targetStock = 45,  buyMax = 27180, restockRate = 10 }, -- targetStock assumed
-            { id = xi.item.CLOTHESPOLE,             initial = 45,  maxStock = 60,  targetStock = 45,  buyMax = 13200, restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.FASTWATER_FISHING_ROD,   initial = 45,  maxStock = 60,  targetStock = 45,  buyMax = 6970,  restockRate = 0 },  -- targetStock assumed
+            { id = xi.item.SABIKI_RIG,              initial = 180, maxStock = 240, targetStock = 180, buyMax = 4401,  restockRate = 60 },
+            { id = xi.item.TARUTARU_FISHING_ROD,    initial = 45,  maxStock = 60,  targetStock = 45,  buyMax = 27180, restockRate = 15 },
+            { id = xi.item.CLOTHESPOLE,             initial = 45,  maxStock = 60,  targetStock = 45,  buyMax = 13200, restockRate = 15 },
+            { id = xi.item.FASTWATER_FISHING_ROD,   initial = 45,  maxStock = 60,  targetStock = 45,  buyMax = 6970,  restockRate = 15 },
             { id = xi.item.CARBON_FISHING_ROD,      initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 64380, restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.SINGLE_HOOK_FISHING_ROD, initial = 36,  maxStock = 60,  targetStock = 45,  buyMax = 64380, restockRate = 0 },  -- targetStock assumed
+            { id = xi.item.SINGLE_HOOK_FISHING_ROD, initial = 36,  maxStock = 60,  targetStock = 45,  buyMax = 64380, restockRate = 3 },
             { id = xi.item.COBALT_JELLYFISH,        initial = 0,   maxStock = 240, targetStock = 180, buyMax = 160,   restockRate = 0 },  -- targetStock assumed
             { id = xi.item.CRAYFISH_1,              initial = 0,   maxStock = 240, targetStock = 180, buyMax = 200,   restockRate = 0 },  -- targetStock assumed
             { id = xi.item.CLUMP_OF_PAMTAM_KELP,    initial = 0,   maxStock = 240, targetStock = 180, buyMax = 160,   restockRate = 0 },  -- targetStock assumed
             { id = xi.item.MOAT_CARP_1,             initial = 0,   maxStock = 240, targetStock = 180, buyMax = 200,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BASTORE_SARDINE_1,       initial = 0,   maxStock = 240, targetStock = 42,  buyMax = 160,   restockRate = 1 },  -- targetStock assumed
+            { id = xi.item.BASTORE_SARDINE_1,       initial = 0,   maxStock = 240, targetStock = 180, buyMax = 160,   restockRate = 0 },  -- targetStock assumed
             { id = xi.item.SHINING_TROUT_1,         initial = 0,   maxStock = 240, targetStock = 180, buyMax = 650,   restockRate = 0 },  -- targetStock assumed
             { id = xi.item.SHALL_SHELL,             initial = 0,   maxStock = 240, targetStock = 180, buyMax = 9000,  restockRate = 0 },  -- targetStock assumed
             { id = xi.item.CHEVAL_SALMON,           initial = 0,   maxStock = 240, targetStock = 180, buyMax = 400,   restockRate = 0 },  -- targetStock assumed
@@ -795,22 +795,22 @@ xi.data.guildShops =
             { id = xi.item.NOSTEAU_HERRING_1,       initial = 0,   maxStock = 240, targetStock = 180, buyMax = 2000,  restockRate = 0 },  -- targetStock assumed
             { id = xi.item.PIPIRA_1,                initial = 0,   maxStock = 240, targetStock = 180, buyMax = 1150,  restockRate = 0 },  -- targetStock assumed
             { id = xi.item.TIGER_COD_1,             initial = 0,   maxStock = 240, targetStock = 180, buyMax = 1300,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.DARK_BASS_1,             initial = 0,   maxStock = 240, targetStock = 33,  buyMax = 400,   restockRate = 1 },  -- targetStock assumed
-            { id = xi.item.NEBIMONITE,              initial = 0,   maxStock = 240, targetStock = 17,  buyMax = 1300,  restockRate = 1 },  -- targetStock assumed
+            { id = xi.item.DARK_BASS_1,             initial = 0,   maxStock = 240, targetStock = 180, buyMax = 400,   restockRate = 0 },  -- targetStock assumed
+            { id = xi.item.NEBIMONITE,              initial = 0,   maxStock = 240, targetStock = 180, buyMax = 1300,  restockRate = 0 },  -- targetStock assumed
             { id = xi.item.BLACK_EEL_1,             initial = 0,   maxStock = 240, targetStock = 180, buyMax = 5760,  restockRate = 0 },  -- targetStock assumed
             { id = xi.item.OGRE_EEL_1,              initial = 0,   maxStock = 240, targetStock = 180, buyMax = 800,   restockRate = 0 },  -- targetStock assumed
             { id = xi.item.ICEFISH,                 initial = 0,   maxStock = 240, targetStock = 180, buyMax = 4590,  restockRate = 0 },  -- targetStock assumed
             { id = xi.item.ZAFMLUG_BASS,            initial = 0,   maxStock = 240, targetStock = 180, buyMax = 775,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.RED_TERRAPIN,            initial = 0,   maxStock = 120, targetStock = 14,  buyMax = 9000,  restockRate = 1 },  -- targetStock assumed
+            { id = xi.item.RED_TERRAPIN,            initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 9000,  restockRate = 0 },  -- targetStock assumed
             { id = xi.item.GOLD_LOBSTER_1,          initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 5760,  restockRate = 0 },  -- targetStock assumed
             { id = xi.item.BLUETAIL_1,              initial = 0,   maxStock = 240, targetStock = 180, buyMax = 9000,  restockRate = 0 },  -- targetStock assumed
             { id = xi.item.CRESCENT_FISH,           initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 15400, restockRate = 0 },  -- targetStock assumed
             { id = xi.item.NOBLE_LADY,              initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 14000, restockRate = 0 },  -- targetStock assumed
             { id = xi.item.COPPER_FROG_1,           initial = 0,   maxStock = 240, targetStock = 180, buyMax = 400,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.SILVER_SHARK,            initial = 0,   maxStock = 240, targetStock = 83,  buyMax = 20000, restockRate = 1 },  -- targetStock assumed
+            { id = xi.item.SILVER_SHARK,            initial = 0,   maxStock = 240, targetStock = 90,  buyMax = 20000, restockRate = 0 },  -- targetStock assumed
             { id = xi.item.BASTORE_BREAM,           initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 27000, restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BLACK_SOLE,              initial = 0,   maxStock = 120, targetStock = 9,   buyMax = 35000, restockRate = 1 },  -- targetStock assumed
-            { id = xi.item.GREEDIE,                 initial = 0,   maxStock = 240, targetStock = 62,  buyMax = 160,   restockRate = 2 },  -- targetStock assumed
+            { id = xi.item.BLACK_SOLE,              initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 35000, restockRate = 0 },  -- targetStock assumed
+            { id = xi.item.GREEDIE,                 initial = 0,   maxStock = 240, targetStock = 90,  buyMax = 160,   restockRate = 0 },  -- targetStock assumed
             { id = xi.item.QUUS_1,                  initial = 0,   maxStock = 240, targetStock = 180, buyMax = 400,   restockRate = 0 },  -- targetStock assumed
             { id = xi.item.GIANT_CATFISH_1,         initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 2500,  restockRate = 0 },  -- targetStock assumed
             { id = xi.item.MONKE_ONKE_1,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 9000,  restockRate = 0 },  -- targetStock assumed
@@ -888,11 +888,11 @@ xi.data.guildShops =
         holiday = xi.day.LIGHTNINGDAY,
         stock   =
         {
-            { id = xi.item.LUGWORM,              initial = 180, maxStock = 240, targetStock = 180, buyMax = 60,    restockRate = 60 }, -- targetStock assumed
-            { id = xi.item.SABIKI_RIG,           initial = 20,  maxStock = 120, targetStock = 90,  buyMax = 15960, restockRate = 5 },  -- targetStock assumed
-            { id = xi.item.MINNOW,               initial = 20,  maxStock = 60,  targetStock = 50,  buyMax = 2025,  restockRate = 5 },  -- targetStock assumed
-            { id = xi.item.SINKING_MINNOW,       initial = 16,  maxStock = 60,  targetStock = 50,  buyMax = 5160,  restockRate = 3 },  -- targetStock assumed
-            { id = xi.item.TARUTARU_FISHING_ROD, initial = 140, maxStock = 240, targetStock = 180, buyMax = 27180, restockRate = 10 }, -- targetStock assumed
+            { id = xi.item.LUGWORM,              initial = 180, maxStock = 240, targetStock = 180, buyMax = 60,    restockRate = 60 },
+            { id = xi.item.SABIKI_RIG,           initial = 20,  maxStock = 120, targetStock = 90,  buyMax = 15960, restockRate = 5 },
+            { id = xi.item.MINNOW,               initial = 20,  maxStock = 60,  targetStock = 50,  buyMax = 2025,  restockRate = 5 },
+            { id = xi.item.SINKING_MINNOW,       initial = 16,  maxStock = 60,  targetStock = 50,  buyMax = 5160,  restockRate = 3 },
+            { id = xi.item.TARUTARU_FISHING_ROD, initial = 140, maxStock = 240, targetStock = 180, buyMax = 27180, restockRate = 10 },
             { id = xi.item.COBALT_JELLYFISH,     initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 },  -- targetStock assumed
             { id = xi.item.CLUMP_OF_PAMTAM_KELP, initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 },  -- targetStock assumed
             { id = xi.item.BASTORE_SARDINE_1,    initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 },  -- targetStock assumed
@@ -1303,32 +1303,32 @@ xi.data.guildShops =
         holiday = xi.day.LIGHTNINGDAY,
         stock   =
         {
-            { id = xi.item.LUGWORM,              initial = 180, maxStock = 240, targetStock = 180, buyMax = 60,    restockRate = 60 }, -- targetStock assumed
-            { id = xi.item.SABIKI_RIG,           initial = 20,  maxStock = 120, targetStock = 90,  buyMax = 15960, restockRate = 5 },  -- targetStock assumed
-            { id = xi.item.MINNOW,               initial = 20,  maxStock = 60,  targetStock = 50,  buyMax = 2025,  restockRate = 5 },  -- targetStock assumed
-            { id = xi.item.SINKING_MINNOW,       initial = 16,  maxStock = 60,  targetStock = 50,  buyMax = 5160,  restockRate = 3 },  -- targetStock assumed
-            { id = xi.item.TARUTARU_FISHING_ROD, initial = 140, maxStock = 240, targetStock = 180, buyMax = 27180, restockRate = 10 }, -- targetStock assumed
-            { id = xi.item.COBALT_JELLYFISH,     initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.CLUMP_OF_PAMTAM_KELP, initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BASTORE_SARDINE_1,    initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.SHALL_SHELL,          initial = 0,   maxStock = 200, targetStock = 150, buyMax = 9000,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.YELLOW_GLOBE,         initial = 0,   maxStock = 200, targetStock = 150, buyMax = 400,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.NOSTEAU_HERRING_1,    initial = 0,   maxStock = 200, targetStock = 150, buyMax = 2000,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.TIGER_COD_1,          initial = 0,   maxStock = 200, targetStock = 150, buyMax = 1300,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.NEBIMONITE,           initial = 0,   maxStock = 200, targetStock = 150, buyMax = 1300,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.OGRE_EEL_1,           initial = 0,   maxStock = 200, targetStock = 150, buyMax = 800,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.ZAFMLUG_BASS,         initial = 0,   maxStock = 200, targetStock = 150, buyMax = 775,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.GOLD_LOBSTER_1,       initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 5760,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BLUETAIL_1,           initial = 0,   maxStock = 200, targetStock = 150, buyMax = 9000,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.NOBLE_LADY,           initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 14000, restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.SILVER_SHARK,         initial = 0,   maxStock = 200, targetStock = 150, buyMax = 20000, restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BASTORE_BREAM,        initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 27000, restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BLACK_SOLE,           initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 35000, restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.GREEDIE,              initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.QUUS_1,               initial = 0,   maxStock = 200, targetStock = 150, buyMax = 400,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.GUGRU_TUNA_1,         initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 2500,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BHEFHEL_MARLIN_1,     initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 9000,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BLADEFISH_1,          initial = 0,   maxStock = 40,  targetStock = 30,  buyMax = 14000, restockRate = 0 },  -- targetStock assumed
+            { id = xi.item.LUGWORM,              initial = 180, maxStock = 240, targetStock = 180, buyMax = 60,    restockRate = 60 },
+            { id = xi.item.SABIKI_RIG,           initial = 20,  maxStock = 120, targetStock = 90,  buyMax = 15960, restockRate = 5 },
+            { id = xi.item.MINNOW,               initial = 20,  maxStock = 60,  targetStock = 50,  buyMax = 2025,  restockRate = 5 },
+            { id = xi.item.SINKING_MINNOW,       initial = 16,  maxStock = 60,  targetStock = 50,  buyMax = 5160,  restockRate = 3 },
+            { id = xi.item.TARUTARU_FISHING_ROD, initial = 140, maxStock = 240, targetStock = 180, buyMax = 27180, restockRate = 10 },
+            { id = xi.item.COBALT_JELLYFISH,     initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.CLUMP_OF_PAMTAM_KELP, initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BASTORE_SARDINE_1,    initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SHALL_SHELL,          initial = 0,   maxStock = 200, targetStock = 150, buyMax = 9000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.YELLOW_GLOBE,         initial = 0,   maxStock = 200, targetStock = 150, buyMax = 400,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.NOSTEAU_HERRING_1,    initial = 0,   maxStock = 200, targetStock = 150, buyMax = 2000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.TIGER_COD_1,          initial = 0,   maxStock = 200, targetStock = 150, buyMax = 1300,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.NEBIMONITE,           initial = 0,   maxStock = 200, targetStock = 150, buyMax = 1300,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.OGRE_EEL_1,           initial = 0,   maxStock = 200, targetStock = 150, buyMax = 800,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.ZAFMLUG_BASS,         initial = 0,   maxStock = 200, targetStock = 150, buyMax = 775,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.GOLD_LOBSTER_1,       initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 5760,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BLUETAIL_1,           initial = 0,   maxStock = 200, targetStock = 150, buyMax = 9000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.NOBLE_LADY,           initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 14000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SILVER_SHARK,         initial = 0,   maxStock = 200, targetStock = 150, buyMax = 20000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BASTORE_BREAM,        initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 27000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BLACK_SOLE,           initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 35000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.GREEDIE,              initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.QUUS_1,               initial = 0,   maxStock = 200, targetStock = 150, buyMax = 400,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.GUGRU_TUNA_1,         initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 2500,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BHEFHEL_MARLIN_1,     initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 9000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BLADEFISH_1,          initial = 0,   maxStock = 40,  targetStock = 30,  buyMax = 14000, restockRate = 0 }, -- targetStock assumed
         },
     },
     ['Maymunah'] =
@@ -1527,32 +1527,32 @@ xi.data.guildShops =
         holiday = xi.day.LIGHTNINGDAY,
         stock   =
         {
-            { id = xi.item.LUGWORM,              initial = 180, maxStock = 240, targetStock = 180, buyMax = 60,    restockRate = 60 }, -- targetStock assumed
-            { id = xi.item.SABIKI_RIG,           initial = 20,  maxStock = 120, targetStock = 90,  buyMax = 15960, restockRate = 5 },  -- targetStock assumed
-            { id = xi.item.MINNOW,               initial = 20,  maxStock = 60,  targetStock = 50,  buyMax = 2025,  restockRate = 5 },  -- targetStock assumed
-            { id = xi.item.SINKING_MINNOW,       initial = 16,  maxStock = 60,  targetStock = 50,  buyMax = 5160,  restockRate = 3 },  -- targetStock assumed
-            { id = xi.item.TARUTARU_FISHING_ROD, initial = 140, maxStock = 240, targetStock = 180, buyMax = 27180, restockRate = 10 }, -- targetStock assumed
-            { id = xi.item.COBALT_JELLYFISH,     initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.CLUMP_OF_PAMTAM_KELP, initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BASTORE_SARDINE_1,    initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.SHALL_SHELL,          initial = 0,   maxStock = 200, targetStock = 150, buyMax = 9000,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.YELLOW_GLOBE,         initial = 0,   maxStock = 200, targetStock = 150, buyMax = 400,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.NOSTEAU_HERRING_1,    initial = 0,   maxStock = 200, targetStock = 150, buyMax = 2000,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.TIGER_COD_1,          initial = 0,   maxStock = 200, targetStock = 150, buyMax = 1300,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.NEBIMONITE,           initial = 0,   maxStock = 200, targetStock = 150, buyMax = 1300,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.OGRE_EEL_1,           initial = 0,   maxStock = 200, targetStock = 150, buyMax = 800,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.ZAFMLUG_BASS,         initial = 0,   maxStock = 200, targetStock = 150, buyMax = 775,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.GOLD_LOBSTER_1,       initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 5760,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BLUETAIL_1,           initial = 0,   maxStock = 200, targetStock = 150, buyMax = 9000,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.NOBLE_LADY,           initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 14000, restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.SILVER_SHARK,         initial = 0,   maxStock = 200, targetStock = 150, buyMax = 20000, restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BASTORE_BREAM,        initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 27000, restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BLACK_SOLE,           initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 35000, restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.GREEDIE,              initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.QUUS_1,               initial = 0,   maxStock = 200, targetStock = 150, buyMax = 400,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.GUGRU_TUNA_1,         initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 2500,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BHEFHEL_MARLIN_1,     initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 9000,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BLADEFISH_1,          initial = 0,   maxStock = 40,  targetStock = 30,  buyMax = 14000, restockRate = 0 },  -- targetStock assumed
+            { id = xi.item.LUGWORM,              initial = 180, maxStock = 240, targetStock = 180, buyMax = 60,    restockRate = 60 },
+            { id = xi.item.SABIKI_RIG,           initial = 20,  maxStock = 120, targetStock = 90,  buyMax = 15960, restockRate = 5 },
+            { id = xi.item.MINNOW,               initial = 20,  maxStock = 60,  targetStock = 50,  buyMax = 2025,  restockRate = 5 },
+            { id = xi.item.SINKING_MINNOW,       initial = 16,  maxStock = 60,  targetStock = 50,  buyMax = 5160,  restockRate = 3 },
+            { id = xi.item.TARUTARU_FISHING_ROD, initial = 140, maxStock = 240, targetStock = 180, buyMax = 27180, restockRate = 10 },
+            { id = xi.item.COBALT_JELLYFISH,     initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.CLUMP_OF_PAMTAM_KELP, initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BASTORE_SARDINE_1,    initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SHALL_SHELL,          initial = 0,   maxStock = 200, targetStock = 150, buyMax = 9000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.YELLOW_GLOBE,         initial = 0,   maxStock = 200, targetStock = 150, buyMax = 400,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.NOSTEAU_HERRING_1,    initial = 0,   maxStock = 200, targetStock = 150, buyMax = 2000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.TIGER_COD_1,          initial = 0,   maxStock = 200, targetStock = 150, buyMax = 1300,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.NEBIMONITE,           initial = 0,   maxStock = 200, targetStock = 150, buyMax = 1300,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.OGRE_EEL_1,           initial = 0,   maxStock = 200, targetStock = 150, buyMax = 800,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.ZAFMLUG_BASS,         initial = 0,   maxStock = 200, targetStock = 150, buyMax = 775,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.GOLD_LOBSTER_1,       initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 5760,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BLUETAIL_1,           initial = 0,   maxStock = 200, targetStock = 150, buyMax = 9000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.NOBLE_LADY,           initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 14000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SILVER_SHARK,         initial = 0,   maxStock = 200, targetStock = 150, buyMax = 20000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BASTORE_BREAM,        initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 27000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BLACK_SOLE,           initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 35000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.GREEDIE,              initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.QUUS_1,               initial = 0,   maxStock = 200, targetStock = 150, buyMax = 400,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.GUGRU_TUNA_1,         initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 2500,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BHEFHEL_MARLIN_1,     initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 9000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BLADEFISH_1,          initial = 0,   maxStock = 40,  targetStock = 30,  buyMax = 14000, restockRate = 0 }, -- targetStock assumed
         },
     },
     ['Paunelie'] =
@@ -1571,32 +1571,32 @@ xi.data.guildShops =
         holiday = xi.day.LIGHTNINGDAY,
         stock   =
         {
-            { id = xi.item.LUGWORM,              initial = 180, maxStock = 240, targetStock = 180, buyMax = 60,    restockRate = 60 }, -- targetStock assumed
-            { id = xi.item.SABIKI_RIG,           initial = 20,  maxStock = 120, targetStock = 90,  buyMax = 15960, restockRate = 5 },  -- targetStock assumed
-            { id = xi.item.MINNOW,               initial = 20,  maxStock = 60,  targetStock = 50,  buyMax = 2025,  restockRate = 5 },  -- targetStock assumed
-            { id = xi.item.SINKING_MINNOW,       initial = 16,  maxStock = 60,  targetStock = 50,  buyMax = 5160,  restockRate = 3 },  -- targetStock assumed
-            { id = xi.item.TARUTARU_FISHING_ROD, initial = 140, maxStock = 240, targetStock = 180, buyMax = 27180, restockRate = 10 }, -- targetStock assumed
-            { id = xi.item.COBALT_JELLYFISH,     initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.CLUMP_OF_PAMTAM_KELP, initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BASTORE_SARDINE_1,    initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.SHALL_SHELL,          initial = 0,   maxStock = 200, targetStock = 150, buyMax = 9000,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.YELLOW_GLOBE,         initial = 0,   maxStock = 200, targetStock = 150, buyMax = 400,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.NOSTEAU_HERRING_1,    initial = 0,   maxStock = 200, targetStock = 150, buyMax = 2000,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.TIGER_COD_1,          initial = 0,   maxStock = 200, targetStock = 150, buyMax = 1300,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.NEBIMONITE,           initial = 0,   maxStock = 200, targetStock = 150, buyMax = 1300,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.OGRE_EEL_1,           initial = 0,   maxStock = 200, targetStock = 150, buyMax = 800,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.ZAFMLUG_BASS,         initial = 0,   maxStock = 200, targetStock = 150, buyMax = 775,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.GOLD_LOBSTER_1,       initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 5760,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BLUETAIL_1,           initial = 0,   maxStock = 200, targetStock = 150, buyMax = 9000,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.NOBLE_LADY,           initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 14000, restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.SILVER_SHARK,         initial = 0,   maxStock = 200, targetStock = 150, buyMax = 20000, restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BASTORE_BREAM,        initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 27000, restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BLACK_SOLE,           initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 35000, restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.GREEDIE,              initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.QUUS_1,               initial = 0,   maxStock = 200, targetStock = 150, buyMax = 400,   restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.GUGRU_TUNA_1,         initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 2500,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BHEFHEL_MARLIN_1,     initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 9000,  restockRate = 0 },  -- targetStock assumed
-            { id = xi.item.BLADEFISH_1,          initial = 0,   maxStock = 40,  targetStock = 30,  buyMax = 14000, restockRate = 0 },  -- targetStock assumed
+            { id = xi.item.LUGWORM,              initial = 180, maxStock = 240, targetStock = 180, buyMax = 60,    restockRate = 60 },
+            { id = xi.item.SABIKI_RIG,           initial = 20,  maxStock = 120, targetStock = 90,  buyMax = 15960, restockRate = 5 },
+            { id = xi.item.MINNOW,               initial = 20,  maxStock = 60,  targetStock = 50,  buyMax = 2025,  restockRate = 5 },
+            { id = xi.item.SINKING_MINNOW,       initial = 16,  maxStock = 60,  targetStock = 50,  buyMax = 5160,  restockRate = 3 },
+            { id = xi.item.TARUTARU_FISHING_ROD, initial = 140, maxStock = 240, targetStock = 180, buyMax = 27180, restockRate = 10 },
+            { id = xi.item.COBALT_JELLYFISH,     initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.CLUMP_OF_PAMTAM_KELP, initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BASTORE_SARDINE_1,    initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SHALL_SHELL,          initial = 0,   maxStock = 200, targetStock = 150, buyMax = 9000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.YELLOW_GLOBE,         initial = 0,   maxStock = 200, targetStock = 150, buyMax = 400,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.NOSTEAU_HERRING_1,    initial = 0,   maxStock = 200, targetStock = 150, buyMax = 2000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.TIGER_COD_1,          initial = 0,   maxStock = 200, targetStock = 150, buyMax = 1300,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.NEBIMONITE,           initial = 0,   maxStock = 200, targetStock = 150, buyMax = 1300,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.OGRE_EEL_1,           initial = 0,   maxStock = 200, targetStock = 150, buyMax = 800,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.ZAFMLUG_BASS,         initial = 0,   maxStock = 200, targetStock = 150, buyMax = 775,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.GOLD_LOBSTER_1,       initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 5760,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BLUETAIL_1,           initial = 0,   maxStock = 200, targetStock = 150, buyMax = 9000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.NOBLE_LADY,           initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 14000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.SILVER_SHARK,         initial = 0,   maxStock = 200, targetStock = 150, buyMax = 20000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BASTORE_BREAM,        initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 27000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BLACK_SOLE,           initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 35000, restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.GREEDIE,              initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.QUUS_1,               initial = 0,   maxStock = 200, targetStock = 150, buyMax = 400,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.GUGRU_TUNA_1,         initial = 0,   maxStock = 120, targetStock = 90,  buyMax = 2500,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BHEFHEL_MARLIN_1,     initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 9000,  restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.BLADEFISH_1,          initial = 0,   maxStock = 40,  targetStock = 30,  buyMax = 14000, restockRate = 0 }, -- targetStock assumed
         },
     },
     ['Scavnix'] =
@@ -2397,11 +2397,11 @@ xi.data.guildShops =
         holiday = xi.day.LIGHTNINGDAY,
         stock   =
         {
-            { id = xi.item.LUGWORM,              initial = 180, maxStock = 240, targetStock = 180, buyMax = 60,    restockRate = 60 }, -- targetStock assumed
-            { id = xi.item.SABIKI_RIG,           initial = 20,  maxStock = 120, targetStock = 90,  buyMax = 15960, restockRate = 5 },  -- targetStock assumed
-            { id = xi.item.MINNOW,               initial = 20,  maxStock = 60,  targetStock = 50,  buyMax = 2025,  restockRate = 5 },  -- targetStock assumed
-            { id = xi.item.SINKING_MINNOW,       initial = 16,  maxStock = 60,  targetStock = 50,  buyMax = 5160,  restockRate = 3 },  -- targetStock assumed
-            { id = xi.item.TARUTARU_FISHING_ROD, initial = 140, maxStock = 240, targetStock = 180, buyMax = 27180, restockRate = 10 }, -- targetStock assumed
+            { id = xi.item.LUGWORM,              initial = 180, maxStock = 240, targetStock = 180, buyMax = 60,    restockRate = 60 },
+            { id = xi.item.SABIKI_RIG,           initial = 20,  maxStock = 120, targetStock = 90,  buyMax = 15960, restockRate = 5 },
+            { id = xi.item.MINNOW,               initial = 20,  maxStock = 60,  targetStock = 50,  buyMax = 2025,  restockRate = 5 },
+            { id = xi.item.SINKING_MINNOW,       initial = 16,  maxStock = 60,  targetStock = 50,  buyMax = 5160,  restockRate = 3 },
+            { id = xi.item.TARUTARU_FISHING_ROD, initial = 140, maxStock = 240, targetStock = 180, buyMax = 27180, restockRate = 10 },
             { id = xi.item.COBALT_JELLYFISH,     initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 },  -- targetStock assumed
             { id = xi.item.CLUMP_OF_PAMTAM_KELP, initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 },  -- targetStock assumed
             { id = xi.item.BASTORE_SARDINE_1,    initial = 0,   maxStock = 200, targetStock = 150, buyMax = 160,   restockRate = 0 },  -- targetStock assumed
