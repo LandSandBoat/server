@@ -8271,6 +8271,7 @@ INSERT INTO `mob_pools` VALUES (8164,'Skomora','Skomora',0,0x0000000000000000000
 INSERT INTO `mob_pools` VALUES (8165,'Triboulex','Triboulex',0,0x0000000000000000000000000000000000000000,1,1,1,240,100,0,1,1,1,16,0,0,0,3,0,0,0,0,0,0,0,NULL,NULL);                             -- Capture needed
 INSERT INTO `mob_pools` VALUES (8166,'Zisurru','Zisurru',0,0x0000000000000000000000000000000000000000,1,1,1,240,100,0,1,1,1,16,0,0,0,3,0,0,0,0,0,0,0,NULL,NULL);                                 -- Capture needed
 INSERT INTO `mob_pools` VALUES (8167,'Clavauert_B_Chanoix','Clavauert B Chanoix',0,0x0000000000000000000000000000000000000000,1,1,1,240,100,0,0,0,0,0,0,32,0,3,0,0,0,0,0,0,0,NULL,NULL);         -- Capture needed
+INSERT INTO `mob_pools` VALUES (8168,'Orcs_Wyvern_SW','Orcs_Wyvern',236,0x0000180000000000000000000000000000000000,1,1,7,200,100,0,0,0,0,16,0,0,0,131,0,0,0,0,0,714,193,1,8);
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
