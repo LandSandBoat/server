@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Hagakoff
--- TODO: Stock needs to be modified based on
---       status of Astral Candescence
 -----------------------------------
 local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
@@ -12,27 +10,26 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        { xi.item.KATARS,            15448, }, -- (Requires Astral Candescence)
-        { xi.item.DARKSTEEL_KATARS,  67760, },
-        { xi.item.PATAS,             45760, }, -- (Requires Astral Candescence)
-        { xi.item.BRONZE_DAGGER,       156, },
-        { xi.item.DAGGER,             2030, },
-        { xi.item.SAPARA,              776, },
-        { xi.item.SCIMITAR,           4525, },
-        { xi.item.TULWAR,            38800, }, -- (Requires Astral Candescence)
-        { xi.item.TABAR,              6600, },
-        { xi.item.DARKSTEEL_TABAR,  124305, }, -- (Requires Astral Candescence)
-        { xi.item.BUTTERFLY_AXE,       672, },
-        { xi.item.GREATAXE,           4550, }, -- (Requires Astral Candescence)
-        { xi.item.BRONZE_ZAGHNAL,      344, },
-        { xi.item.ZAGHNAL,           12540, }, -- (Requires Astral Candescence)
-        { xi.item.ASH_CLUB,             72, },
-        { xi.item.CHESTNUT_CLUB,      1740, }, -- (Requires Astral Candescence)
-        { xi.item.ANGON,               238, },
+        { xi.item.ANGON,               248, astralCandescence = false },
+        { xi.item.DARKSTEEL_KATARS,  67760, astralCandescence = false },
+        { xi.item.PATAS,             45760, astralCandescence = true  },
+        { xi.item.BRONZE_DAGGER,       156, astralCandescence = false },
+        { xi.item.DAGGER,             2030, astralCandescence = false },
+        { xi.item.SAPARA,              776, astralCandescence = false },
+        { xi.item.SCIMITAR,           4525, astralCandescence = false },
+        { xi.item.TULWAR,            38800, astralCandescence = true  },
+        { xi.item.TABAR,             66000, astralCandescence = false },
+        { xi.item.DARKSTEEL_TABAR,  124305, astralCandescence = true  },
+        { xi.item.BUTTERFLY_AXE,       672, astralCandescence = false },
+        { xi.item.GREATAXE,           4550, astralCandescence = true  },
+        { xi.item.BRONZE_ZAGHNAL,      344, astralCandescence = false },
+        { xi.item.ZAGHNAL,           12540, astralCandescence = true  },
+        { xi.item.ASH_CLUB,             72, astralCandescence = false },
+        { xi.item.CHESTNUT_CLUB,      1740, astralCandescence = true  },
     }
 
     player:showText(npc, ID.text.HAGAKOFF_SHOP_DIALOG)
-    xi.shop.general(player, stock)
+    xi.besieged.shop(player, stock)
 end
 
 return entity

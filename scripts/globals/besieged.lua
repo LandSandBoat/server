@@ -98,6 +98,22 @@ xi.besieged.getAstralCandescence = function()
     return 1 -- Hardcoded to 1 for now
 end
 
+---Send shop dialog to a player after removing items requiring the Astral Candescence if it is missing
+---@param player CBaseEntity
+---@param stock { [1]: xi.item, [2]: integer, astralCandescence: boolean? }[] Entries flagged `astralCandescence = true` are hidden without the AC
+xi.besieged.shop = function(player, stock)
+    local hasAstralCandescence = xi.besieged.getAstralCandescence() == 1
+    local available            = {}
+
+    for _, entry in ipairs(stock) do
+        if not entry.astralCandescence or hasAstralCandescence then
+            available[#available + 1] = entry
+        end
+    end
+
+    xi.shop.general(player, available)
+end
+
 xi.besieged.badges =
 {
     xi.ki.PSC_WILDCAT_BADGE,
