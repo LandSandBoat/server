@@ -44,7 +44,7 @@ enum MOBMODIFIER : int
     MOBMOD_SEVERE_SPELL_CHANCE    = 13, // % chance to use a severe spell like death or impact
     MOBMOD_SKILL_LIST             = 14, // uses given mob skill list
     MOBMOD_MUG_GIL                = 15, // amount gil carried for mugging
-    MOBMOD_DETECTION              = 16, // Overrides mob family's detection method. In order to set to override to none an unused bit must be set such as DETECT_NONE1.
+    MOBMOD_DETECTION              = 16, // Overrides mob family's detection method. In order to set to override to none an unused bit must be set such as xi::Detects::None1.
     MOBMOD_NO_DESPAWN             = 17, // do not despawn when too far from spawn. Gob Diggers have this.
     MOBMOD_VAR                    = 18, // temp var for whatever. Gets cleared on spawn
     MOBMOD_CAN_SHIELD_BLOCK       = 19, // toggle shield use for mobs without physical shields (trusts)

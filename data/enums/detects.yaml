@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  flags: true
+  cpp:
+    underlying: uint16_t
+  lua:
+    table: xi.detects
+
+values:
+  none: 0x000
+  sight: 0x001
+  hearing: 0x002
+  sight_and_hearing: 0x003
+  lowhp: 0x004
+  none1: 0x008
+  none2: 0x010
+  magic: 0x020
+  weaponskill: 0x040
+  jobability: 0x080
+  scent: 0x100

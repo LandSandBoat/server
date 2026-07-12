@@ -407,7 +407,8 @@ bool CMobEntity::CanLink(position_t* pos, int16 superLink)
     }
 
     // If a mob detects by both sight and hearing it only needs to meet one check.
-    if ((getMobMod(MOBMOD_DETECTION) & DETECT_SIGHT) && !(getMobMod(MOBMOD_DETECTION) & DETECT_HEARING) && !facing(loc.p, *pos, 64))
+    const auto detects = static_cast<xi::Detects>(getMobMod(MOBMOD_DETECTION));
+    if (((detects & xi::Detects::Sight) != xi::Detects::None) && !((detects & xi::Detects::Hearing) != xi::Detects::None) && !facing(loc.p, *pos, 64))
     {
         return false;
     }

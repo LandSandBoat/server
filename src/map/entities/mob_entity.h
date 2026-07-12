@@ -31,6 +31,7 @@
 
 #include "data/enums/behavior.h"
 #include "data/enums/claim_type.h"
+#include "data/enums/detects.h"
 #include "data/enums/mob_type.h"
 #include "data/enums/roam_flag.h"
 #include "data/enums/spawn_type.h"
@@ -54,20 +55,6 @@ enum SPECIALFLAG
 {
     SPECIALFLAG_NONE   = 0x0,
     SPECIALFLAG_HIDDEN = 0x1 // only use special when hidden
-};
-
-enum DETECT : uint16
-{
-    DETECT_NONE        = 0x00,
-    DETECT_SIGHT       = 0x01,
-    DETECT_HEARING     = 0x02,
-    DETECT_LOWHP       = 0x04,
-    DETECT_NONE1       = 0x08,
-    DETECT_NONE2       = 0x10,
-    DETECT_MAGIC       = 0x20,
-    DETECT_WEAPONSKILL = 0x40,
-    DETECT_JOBABILITY  = 0x80,
-    DETECT_SCENT       = 0x100
 };
 
 class CMobSkillState;

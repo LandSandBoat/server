@@ -148,7 +148,7 @@ auto CMobController::CanPursueTarget(const CBattleEntity* PTarget) const -> bool
 {
     TracyZoneScoped;
 
-    if (PMob->getMobMod(MOBMOD_DETECTION) & DETECT_SCENT)
+    if ((static_cast<xi::Detects>(PMob->getMobMod(MOBMOD_DETECTION)) & xi::Detects::Scent) != xi::Detects::None)
     {
         // if mob is in water it will instant deaggro if target cannot be detected
         if (!PMob->PAI->PathFind->InWater() && PTarget && !PTarget->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Deodorize))
@@ -166,7 +166,7 @@ auto CMobController::CheckHide(const CBattleEntity* PTarget) const -> bool
 
     if (PTarget && PTarget->GetMJob() == JOB_THF && PTarget->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Hide))
     {
-        return !CanPursueTarget(PTarget) && !PMob->m_TrueDetection && !(PMob->getMobMod(MOBMOD_DETECTION) & DETECT_HEARING);
+        return !CanPursueTarget(PTarget) && !PMob->m_TrueDetection && !((static_cast<xi::Detects>(PMob->getMobMod(MOBMOD_DETECTION)) & xi::Detects::Hearing) != xi::Detects::None);
     }
     return false;
 }
@@ -332,10 +332,10 @@ auto CMobController::CanDetectTarget(CBattleEntity* PTarget, const bool forceSig
         return false;
     }
 
-    const auto detects         = PMob->getMobMod(MOBMOD_DETECTION);
+    const auto detects         = static_cast<xi::Detects>(PMob->getMobMod(MOBMOD_DETECTION));
     const auto currentDistance = distance(PTarget->loc.p, PMob->loc.p) + PTarget->getMod(Mod::STEALTH);
 
-    const bool detectSight  = (detects & DETECT_SIGHT) || forceSight;
+    const bool detectSight  = ((detects & xi::Detects::Sight) != xi::Detects::None) || forceSight;
     bool       hasInvisible = false;
     bool       hasSneak     = false;
 
@@ -369,12 +369,12 @@ auto CMobController::CanDetectTarget(CBattleEntity* PTarget, const bool forceSig
         return true;
     }
 
-    if ((detects & DETECT_HEARING) && currentDistance < PMob->getMobMod(MOBMOD_SOUND_RANGE) && !hasSneak)
+    if (((detects & xi::Detects::Hearing) != xi::Detects::None) && currentDistance < PMob->getMobMod(MOBMOD_SOUND_RANGE) && !hasSneak)
     {
         return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
     }
 
-    if ((detects & DETECT_MAGIC) && currentDistance < PMob->getMobMod(MOBMOD_MAGIC_RANGE) &&
+    if (((detects & xi::Detects::Magic) != xi::Detects::None) && currentDistance < PMob->getMobMod(MOBMOD_MAGIC_RANGE) &&
         PTarget->PAI->IsCurrentState<CMagicState>() && static_cast<CMagicState*>(PTarget->PAI->GetCurrentState())->GetSpell()->hasMPCost())
     {
         return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
@@ -386,17 +386,17 @@ auto CMobController::CanDetectTarget(CBattleEntity* PTarget, const bool forceSig
         return false;
     }
 
-    if ((detects & DETECT_LOWHP) && PTarget->GetHPP() < 75)
+    if (((detects & xi::Detects::Lowhp) != xi::Detects::None) && PTarget->GetHPP() < 75)
     {
         return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
     }
 
-    if ((detects & DETECT_WEAPONSKILL) && PTarget->PAI->IsCurrentState<CWeaponSkillState>())
+    if (((detects & xi::Detects::Weaponskill) != xi::Detects::None) && PTarget->PAI->IsCurrentState<CWeaponSkillState>())
     {
         return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
     }
 
-    if ((detects & DETECT_JOBABILITY) && PTarget->PAI->IsCurrentState<CAbilityState>())
+    if (((detects & xi::Detects::Jobability) != xi::Detects::None) && PTarget->PAI->IsCurrentState<CAbilityState>())
     {
         return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
     }
