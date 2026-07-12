@@ -776,7 +776,7 @@ xi.data.guildShops =
         holiday = xi.day.LIGHTNINGDAY,
         stock   =
         {
-            { id = xi.item.SABIKI_RIG,              initial = 180, maxStock = 240, targetStock = 180, buyMax = 4401,  restockRate = 60 },
+            { id = xi.item.SABIKI_RIG,              initial = 180, maxStock = 240, targetStock = 180, buyMax = 15960, restockRate = 60 },
             { id = xi.item.TARUTARU_FISHING_ROD,    initial = 45,  maxStock = 60,  targetStock = 45,  buyMax = 27180, restockRate = 15 },
             { id = xi.item.CLOTHESPOLE,             initial = 45,  maxStock = 60,  targetStock = 45,  buyMax = 13200, restockRate = 15 },
             { id = xi.item.FASTWATER_FISHING_ROD,   initial = 45,  maxStock = 60,  targetStock = 45,  buyMax = 6970,  restockRate = 15 },
@@ -875,7 +875,7 @@ xi.data.guildShops =
             { id = xi.item.ONZ_OF_TURMERIC,         initial = 50,  maxStock = 60,  targetStock = 50,  buyMax = 3225,   restockRate = 15 },
             { id = xi.item.ONZ_OF_CORIANDER,        initial = 50,  maxStock = 60,  targetStock = 50,  buyMax = 7925,   restockRate = 15 },
             { id = xi.item.SPRIG_OF_HOLY_BASIL,     initial = 50,  maxStock = 60,  targetStock = 50,  buyMax = 4000,   restockRate = 15 },
-            { id = xi.item.ONZ_OF_CURRY_POWDER,     initial = 25,  maxStock = 30,  targetStock = 25,  buyMax = 1456,   restockRate = 7,   priceFloor = 55 },
+            { id = xi.item.ONZ_OF_CURRY_POWDER,     initial = 25,  maxStock = 30,  targetStock = 25,  buyMax = 4950,   restockRate = 7 },
             { id = xi.item.JAR_OF_GROUND_WASABI,    initial = 90,  maxStock = 150, targetStock = 120, buyMax = 12974,  restockRate = 20,  priceFloor = 150 },
             { id = xi.item.BOTTLE_OF_RICE_VINEGAR,  initial = 90,  maxStock = 150, targetStock = 120, buyMax = 1000,   restockRate = 20,  priceFloor = 150 },
             { id = xi.item.CLUMP_OF_SHUNGIKU,       initial = 120, maxStock = 150, targetStock = 120, buyMax = 1400,   restockRate = 100, priceFloor = 150 },
