@@ -25,7 +25,8 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getFameLevel(xi.fameArea.BASTOK) >= 2 and
-                player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.MOM_THE_ADVENTURER)
+                player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.MOM_THE_ADVENTURER) and
+                not xi.quest.getMustZone(player, xi.questLog.BASTOK, xi.quest.id.bastok.MOM_THE_ADVENTURER)
         end,
 
         [xi.zone.BASTOK_MARKETS] =
@@ -50,11 +51,11 @@ quest.sections =
 
         [xi.zone.KONSCHTAT_HIGHLANDS] =
         {
-            ['Signpost'] =
+            ['Signpost3'] =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.PAINTING_OF_A_WINDMILL) then
-                        player:messageSpecial(konschtatID.text.SIGNPOST_DIALOG_2)
+                        player:messageSpecial(konschtatID.text.SIGNPOST3_DIALOG_2)
 
                         return quest:keyItem(xi.ki.PAINTING_OF_A_WINDMILL)
                     end

@@ -1247,7 +1247,7 @@ xi.quest.setLocalVar = function(player, areaId, questId, name, value)
 end
 
 xi.quest.getMustZone = function(player, areaId, questId)
-    return player:setCharVar(getVarPrefix(areaId, questId) .. 'mustZone') ~= 0 and true or false
+    return player:getCharVar(getVarPrefix(areaId, questId) .. 'mustZone') ~= 0 and true or false
 end
 
 xi.quest.setMustZone = function(player, areaId, questId)
