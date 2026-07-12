@@ -47,7 +47,7 @@ local garlaigeQmOnTrigger = function(player, npc)
         quest:getVar(player, 'hagainProg') == qmData[1]
     then
         player:messageSpecial(garlaigeID.text.PRESENCE_FROM_CEILING)
-        return quest:progressEvent(qmData[2], xi.ki.BOMB_INCENSE)
+        return quest:progressCutscene(qmData[2], xi.ki.BOMB_INCENSE)
     end
 end
 
@@ -137,7 +137,7 @@ quest.sections =
                             player:hasKeyItem(xi.ki.BOMB_INCENSE)
                         then
                             player:messageSpecial(garlaigeID.text.HEAT_FROM_CEILING)
-                            return quest:progressEvent(56, xi.keyItem.BOMB_INCENSE)
+                            return quest:progressCutscene(56, xi.ki.BOMB_INCENSE)
                         end
                     end
                 end,

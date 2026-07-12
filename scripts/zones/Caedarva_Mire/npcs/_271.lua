@@ -13,11 +13,11 @@ entity.onTrigger = function(player, npc)
         if player:getZPos() < -78 then
             player:messageSpecial(ID.text.STAGING_GATE_DVUCCA)
             player:messageSpecial(ID.text.STAGING_GATE_INTERACT)
-            player:startOptionalCutscene(122)
+            player:startOptionalCutscene(122, { cs_option = 0, canSkip = true })
         elseif not player:hasKeyItem(xi.ki.PERIQIA_ASSAULT_ORDERS) then
             player:messageSpecial(ID.text.STAGING_GATE_DVUCCA)
             player:messageSpecial(ID.text.STAGING_GATE_INTERACT)
-            player:startEvent(123)
+            player:startOptionalCutscene(123, { cs_option = 0, canSkip = true })
         else
             player:messageSpecial(ID.text.CANNOT_LEAVE, xi.ki.PERIQIA_ASSAULT_ORDERS)
         end

@@ -13,11 +13,11 @@ entity.onTrigger = function(player, npc)
         if player:getXPos() < 8 then
             player:messageSpecial(ID.text.STAGING_GATE_ILRUSI)
             player:messageSpecial(ID.text.STAGING_GATE_INTERACT)
-            player:startOptionalCutscene(106)
+            player:startOptionalCutscene(106, { cs_option = 0, canSkip = true })
         elseif not player:hasKeyItem(xi.ki.ILRUSI_ASSAULT_ORDERS) then
             player:messageSpecial(ID.text.STAGING_GATE_ILRUSI)
             player:messageSpecial(ID.text.STAGING_GATE_INTERACT)
-            player:startEvent(107)
+            player:startOptionalCutscene(107, { cs_option = 0, canSkip = true })
         else
             player:messageSpecial(ID.text.CANNOT_LEAVE, xi.ki.ILRUSI_ASSAULT_ORDERS)
         end
