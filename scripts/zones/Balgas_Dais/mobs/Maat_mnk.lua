@@ -30,6 +30,7 @@ end
 entity.onMobSpawn = function(mob)
     mob:setUnkillable(true)
     mob:setBaseSpeed(60)
+    mob:setMod(xi.mod.ACC, 229)
 
     -- Reset mob.
     xi.combat.behavior.enableAllActions(mob)
