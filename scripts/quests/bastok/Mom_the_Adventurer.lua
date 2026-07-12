@@ -29,8 +29,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status ~= xi.questStatus.QUEST_ACCEPTED and
-                vars.Prog == 0
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.BASTOK_MARKETS] =
@@ -41,11 +40,7 @@ quest.sections =
             {
                 [230] = function(player, csid, option, npc)
                     if npcUtil.giveItem(player, xi.item.FIRE_CRYSTAL) then
-                        quest:setVar(player, 'Prog', 1)
-
-                        if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_AVAILABLE then
-                            quest:begin(player)
-                        end
+                        quest:begin(player)
                     end
                 end,
             },
@@ -54,8 +49,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status ~= xi.questStatus.QUEST_AVAILABLE and
-                vars.Prog == 1
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.BASTOK_MARKETS] =
@@ -100,9 +94,75 @@ quest.sections =
             {
                 [95] = function(player, csid, option, npc)
                     player:confirmTrade()
-
                     npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_ROH_LATTEH)
                 end,
+            },
+        },
+    },
+
+    {
+        check = function(player, status, vars)
+            return status == xi.questStatus.QUEST_COMPLETED and
+                not quest:getMustZone(player)
+        end,
+
+        [xi.zone.BASTOK_MARKETS] =
+        {
+            ['Nbu_Latteh'] =
+            {
+                onTrigger = function(player, npc)
+                    -- Allow quest completion regardless of fame level.
+                    if player:hasKeyItem(xi.ki.LETTER_FROM_ROH_LATTEH) then
+                        if player:seenKeyItem(xi.ki.LETTER_FROM_ROH_LATTEH) then
+                            return quest:progressEvent(234)
+                        else
+                            return quest:progressEvent(233)
+                        end
+                    end
+
+                    -- Allow quest repeat at Bastok fame 1.
+                    local questProgress = quest:getVar(player, 'Prog')
+                    if
+                        player:getFameLevel(xi.fameArea.BASTOK) == 1 and
+                        questProgress == 0
+                    then
+                        return quest:progressEvent(230)
+
+                    -- Now you are stuck.
+                    elseif questProgress == 1 then
+                        return quest:event(231)
+                    end
+                end,
+            },
+
+            ['Roh_Latteh'] =
+            {
+                onTrade = function(player, npc, trade)
+                    if
+                        quest:getVar(player, 'Prog') == 1 and
+                        not player:hasKeyItem(xi.ki.LETTER_FROM_ROH_LATTEH) and
+                        npcUtil.tradeHasExactly(trade, xi.item.COPPER_RING)
+                    then
+                        return quest:progressEvent(95)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [95] = function(player, csid, option, npc)
+                    player:confirmTrade()
+                    npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_ROH_LATTEH)
+                end,
+
+                [230] = function(player, csid, option, npc)
+                    if npcUtil.giveItem(player, xi.item.FIRE_CRYSTAL) then
+                        quest:setVar(player, 'Prog', 1)
+                    end
+                end,
+
+                [233] = handleEventFinish,
+                [234] = handleEventFinish,
             },
         },
     },
