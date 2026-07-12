@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Valley of Sorrows
---  NPC: qm1 (???)
+--  NPC: qm_adamantoise (???)
 -- Spawns Adamantoise or Aspidochelone
 -- !pos 0 0 -37 59
 -----------------------------------
