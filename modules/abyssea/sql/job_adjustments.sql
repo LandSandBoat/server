@@ -69,7 +69,8 @@ UPDATE merits SET value = 20 WHERE name = 'arcane_circle_recast';
 UPDATE abilities SET recastTime = 300 WHERE name = 'weapon_bash';
 
 -- Weapon Bash merit: Revert value to 10 seconds per level
-UPDATE merits SET value = 10 WHERE name = 'weapon_bash_recast';
+-- Note: merit is named weapon_bash_effect (provides both recast reduction and effect)
+UPDATE merits SET value = 10 WHERE name = 'weapon_bash_effect';
 
 -- Dark Seal: Revert recast from 5 to 15 minutes
 -- Source: https://www.bg-wiki.com/ffxi/Version_Update_(03/26/2012)

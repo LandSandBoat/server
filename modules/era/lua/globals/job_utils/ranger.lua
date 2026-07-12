@@ -60,7 +60,7 @@ if not xi.module.isContentEnabled('SOA') then
     -- Source: https://ffxiclopedia.fandom.com/wiki/Scavenge/Items
     m:addOverride('xi.job_utils.ranger.useScavenge', function(player, target, ability, action)
         local meritReduction = player:getMerit(xi.merit.SCAVENGE_EFFECT)
-        ability:setRecast(ability:getRecast() - meritReduction)
+        action:setRecast(math.max(0, action:getRecast() - meritReduction))
 
         -- RNG AF2 quest check
         if xi.job_utils.ranger.tryScavengeQuestItem(player) then

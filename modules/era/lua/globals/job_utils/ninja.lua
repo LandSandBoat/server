@@ -22,7 +22,7 @@ if not xi.module.isContentEnabled('SOA') then
     -- Source: https://forum.square-enix.com/ffxi/threads/44592-Oct-7-2014-%28JST%29-Version-Update
     m:addOverride('xi.job_utils.ninja.useSange', function(player, target, ability, action)
         local meritReduction = player:getMerit(xi.merit.SANGE) - 150
-        ability:setRecast(math.max(0, ability:getRecast() - meritReduction))
+        action:setRecast(math.max(0, action:getRecast() - meritReduction))
 
         -- Apply Sange effect (shadows are consumed when the ranged attack fires)
         player:addStatusEffect(xi.effect.SANGE, { duration = 60, origin = player })
