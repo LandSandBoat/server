@@ -171,6 +171,14 @@ bool CMagicState::Update(timer::time_point tick)
             Complete();
             return false;
         }
+
+        auto& PSpell = m_PSpell;
+
+        // Bard songs do not get interrupted here
+        if (PSpell && PSpell->getSpellGroup() != SPELLGROUP_SONG && m_PEntity->StatusEffectContainer->HasPreventActionEffect())
+        {
+            m_interrupted = true;
+        }
     }
 
     if (tick > GetEntryTime() + m_castTime && !IsCompleted())
@@ -254,13 +262,9 @@ bool CMagicState::Update(timer::time_point tick)
         }
 
         // Slept/stunned/petrified/etc. at the moment of completion: the cast is interrupted.
-        // A prevent-action effect that lands mid-cast does not cancel the cast on retail;
-        // the interrupt is decided here, at the finish, mirroring CMobSkillState.
         if (m_PEntity->StatusEffectContainer->HasPreventActionEffect())
         {
-            m_PEntity->OnCastInterrupted(*this, action, msg, false);
-            Complete();
-            return false;
+            m_interrupted = true;
         }
 
         if (m_interrupted)
