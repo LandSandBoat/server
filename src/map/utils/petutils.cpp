@@ -1169,7 +1169,7 @@ void CalculateLuopanStats(CBattleEntity* PMaster, CPetEntity* PPet)
     // This sets the correct visual size for the luopan as pets currently
     // do not make use of the entity flags in the database
     // TODO: make pets use entity flags
-    PPet->m_flags = 0x0000008B;
+    PPet->m_flags = static_cast<xi::EntityFlags>(0x0000008B);
     // Just sit, do nothing
     PPet->baseSpeed = 0;
     PPet->UpdateSpeed();

@@ -17763,7 +17763,7 @@ float CLuaBaseEntity::getMeleeRange(CLuaBaseEntity* target)
  *  Notes   : Used for changing Ul'xzomit babies' size and through !setmobflags command
  ************************************************************************/
 
-void CLuaBaseEntity::setMobFlags(uint32 flags, const sol::object& mobId)
+void CLuaBaseEntity::setMobFlags(xi::EntityFlags flags, const sol::object& mobId)
 {
     if (m_PBaseEntity->objtype != TYPE_MOB && m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -17810,12 +17810,12 @@ void CLuaBaseEntity::setMobFlags(uint32 flags, const sol::object& mobId)
  *  Example : Not in use in scripts
  *  Notes   : Currently only used through !getMobFlags command
  ************************************************************************/
-uint32 CLuaBaseEntity::getMobFlags()
+auto CLuaBaseEntity::getMobFlags() -> xi::EntityFlags
 {
     if (m_PBaseEntity->objtype != TYPE_MOB)
     {
         ShowWarning("Attempting to get mob flags for invalid entity type (%s).", m_PBaseEntity->getName());
-        return 0;
+        return xi::EntityFlags::None;
     }
 
     if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
@@ -17823,7 +17823,7 @@ uint32 CLuaBaseEntity::getMobFlags()
         return PMob->getEntityFlags();
     }
 
-    return 0;
+    return xi::EntityFlags::None;
 }
 
 /************************************************************************
@@ -17833,7 +17833,7 @@ uint32 CLuaBaseEntity::getMobFlags()
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::setNpcFlags(uint32 flags)
+void CLuaBaseEntity::setNpcFlags(xi::EntityFlags flags)
 {
     if (m_PBaseEntity->objtype != TYPE_NPC)
     {

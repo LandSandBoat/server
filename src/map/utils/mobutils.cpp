@@ -1796,7 +1796,7 @@ auto InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* instance) -> CMob
         PMob->m_Element     = rset->get<uint8>("Element");
         PMob->m_Species     = rset->get<uint16>("speciesid");
         PMob->m_name_prefix = rset->get<uint8>("name_prefix");
-        PMob->m_flags       = rset->get<uint32>("entityFlags");
+        PMob->m_flags       = rset->get<xi::EntityFlags>("entityFlags");
 
         // Special sub animation for Mob (yovra, jailer of love, phuabo)
         // yovra 1: On top/in the sky, 2: , 3: On top/in the sky
@@ -1812,7 +1812,7 @@ auto InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* instance) -> CMob
         PMob->m_Pool = rset->get<uint32>("poolid");
 
         PMob->allegiance      = rset->get<xi::Allegiance>("allegiance");
-        PMob->namevis         = rset->get<uint8>("namevis");
+        PMob->namevis         = rset->get<xi::NameVis>("namevis");
         PMob->modelHitboxSize = std::max<float>(0.0f, rset->getOrDefault<float>("modelHitboxSize", 0) / 10.f);
         PMob->modelSize       = rset->getOrDefault<uint8>("modelSize", 0);
         PMob->m_Aggro         = rset->get<bool>("aggro");
@@ -1962,7 +1962,7 @@ auto InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZone
         PMob->m_Element     = rset->get<uint8>("Element");
         PMob->m_Species     = rset->get<uint16>("speciesid");
         PMob->m_name_prefix = rset->get<uint8>("name_prefix");
-        PMob->m_flags       = rset->get<uint32>("entityFlags");
+        PMob->m_flags       = rset->get<xi::EntityFlags>("entityFlags");
 
         PMob->animationsub = rset->get<uint32>("animationsub");
 
@@ -1975,7 +1975,7 @@ auto InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZone
         PMob->m_Pool = rset->get<uint32>("poolid");
 
         PMob->allegiance      = rset->get<xi::Allegiance>("allegiance");
-        PMob->namevis         = rset->get<uint8>("namevis");
+        PMob->namevis         = rset->get<xi::NameVis>("namevis");
         PMob->modelHitboxSize = std::max<float>(0.0f, rset->getOrDefault<float>("modelHitboxSize", 0) / 10.f);
         PMob->modelSize       = rset->getOrDefault<uint8>("modelSize", 0);
         PMob->m_Aggro         = rset->get<bool>("aggro");

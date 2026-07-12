@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  flags: true
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.nameVis
+
+values:
+  none: 0x00
+  icon: 0x01 # (I) Icon next to name
+  hide_name: 0x08
+  ghost_phase: 0x80

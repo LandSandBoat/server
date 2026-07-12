@@ -341,7 +341,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
                 ref<uint8>(0x1F) = PEntity->animation;
                 ref<uint8>(0x2A) |= PEntity->animationsub;
 
-                ref<uint32>(0x21) = PNpc->m_flags;
+                ref<uint32>(0x21) = static_cast<uint32>(PNpc->m_flags);
                 ref<uint8>(0x27)  = PNpc->name_prefix; // gender and something else
 
                 if (PNpc->triggerable())
@@ -350,7 +350,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
                 }
 
                 ref<uint8>(0x29) = static_cast<uint8>(PEntity->allegiance);
-                ref<uint8>(0x2B) = PEntity->namevis;
+                ref<uint8>(0x2B) = static_cast<uint8>(PEntity->namevis);
             }
 
             // TODO: Unify name logic
@@ -380,7 +380,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
                 ref<uint8>(0x1F) = PEntity->animation;
                 ref<uint8>(0x2A) |= PEntity->animationsub;
 
-                ref<uint32>(0x21) = PMob->m_flags;
+                ref<uint32>(0x21) = static_cast<uint32>(PMob->m_flags);
                 ref<uint8>(0x25)  = PMob->health.hp > 0 ? 0x08 : 0;
                 ref<uint8>(0x27)  = PMob->m_name_prefix;
                 if (PMob->PMaster != nullptr && PMob->PMaster->objtype == TYPE_PC)
@@ -401,7 +401,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
                 ref<uint8>(0x28) |= PMob->health.hp > 0 && PMob->animation == ANIMATION_DEATH ? 0x08 : 0;
                 ref<uint8>(0x28) |= PMob->status == xi::Status::Normal && PMob->objtype == TYPE_MOB ? 0x40 : 0; // Make the entity triggerable if a mob and normal status
                 ref<uint8>(0x29) = static_cast<uint8>(PEntity->allegiance);
-                ref<uint8>(0x2B) = PEntity->namevis;
+                ref<uint8>(0x2B) = static_cast<uint8>(PEntity->namevis);
             }
 
             // TODO: make flags struct for 0x00E when it's decompped

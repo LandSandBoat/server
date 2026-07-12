@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  flags: true
+  cpp:
+    underlying: uint32_t
+  lua:
+    table: xi.entityFlags
+
+values:
+  none: 0x000
+  info_icon: 0x001 # (I) Icon next to name
+  # TODO: Flags 0x002, 0x004 and 0x008 do different things for different entities.
+  #     : It isn't one-size-fits-all, and different combinations may do different things.
+  #     : It'll need to be researched more.
+  # alt_appearance: 0x002
+  hide_name: 0x008
+  call_for_help: 0x020
+  hide_model: 0x080
+  hide_hp: 0x100
+  untargetable: 0x800

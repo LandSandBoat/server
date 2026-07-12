@@ -78,8 +78,8 @@ public:
     CMobEntity();
     ~CMobEntity() override;
 
-    uint32 getEntityFlags() const;             // Returns the current value in m_flags
-    void   setEntityFlags(uint32 EntityFlags); // Change the current value in m_flags
+    auto getEntityFlags() const -> xi::EntityFlags;   // Returns the current value in m_flags
+    void setEntityFlags(xi::EntityFlags EntityFlags); // Change the current value in m_flags
 
     bool IsFarFromHome();      // check if mob is too far from spawn
     bool CanBeNeutral() const; // check if mob can have killing pause
@@ -226,8 +226,8 @@ public:
     CMobSpellList*           m_SpellListContainer; // The spells list container for this mob
     std::map<uint16, uint16> m_UsedSkillIds;       // mob skill ids used (key) along with mob level (value)
 
-    uint32 m_flags;       // includes the CFH flag and whether the HP bar should be shown or not (e.g. Yilgeban doesnt)
-    uint8  m_name_prefix; // The ding bats VS Ding bats
+    xi::EntityFlags m_flags;       // includes the CFH flag and whether the HP bar should be shown or not (e.g. Yilgeban doesnt)
+    uint8           m_name_prefix; // The ding bats VS Ding bats
 
     bool m_CallForHelpBlocked;
 

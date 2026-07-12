@@ -38,7 +38,7 @@ CBaseEntity::CBaseEntity()
 , animation(0)
 , animationsub(0)
 , baseSpeed(settings::get<uint8>("map.BASE_SPEED"))
-, namevis(0)
+, namevis(xi::NameVis::None)
 , allegiance(xi::Allegiance::Mob)
 , updatemask(0)
 , priorityRender(false)
@@ -132,11 +132,11 @@ void CBaseEntity::HideName(bool hide)
     if (hide)
     {
         // I totally guessed this number
-        namevis |= FLAG_HIDE_NAME;
+        namevis |= xi::NameVis::HideName;
     }
     else
     {
-        namevis &= ~FLAG_HIDE_NAME;
+        namevis &= ~xi::NameVis::HideName;
     }
     updatemask |= UPDATE_HP;
 }
@@ -145,18 +145,18 @@ void CBaseEntity::GhostPhase(bool ghost)
 {
     if (ghost)
     {
-        namevis |= VIS_GHOST_PHASE;
+        namevis |= xi::NameVis::GhostPhase;
     }
     else
     {
-        namevis &= ~VIS_GHOST_PHASE;
+        namevis &= ~xi::NameVis::GhostPhase;
     }
     updatemask |= UPDATE_HP;
 }
 
 bool CBaseEntity::IsNameHidden() const
 {
-    return namevis & FLAG_HIDE_NAME;
+    return (namevis & xi::NameVis::HideName) != xi::NameVis::None;
 }
 
 bool CBaseEntity::GetUntargetable() const
