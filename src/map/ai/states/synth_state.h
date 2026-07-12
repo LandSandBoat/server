@@ -28,7 +28,7 @@
 class CSynthState : public CState
 {
 public:
-    CSynthState(CCharEntity* PChar, SKILLTYPE skill);
+    CSynthState(CCharEntity* PChar, xi::SkillType skill);
 
     // state logic done per tick - returns whether to exit the state or not
     virtual bool Update(timer::time_point tick) override;

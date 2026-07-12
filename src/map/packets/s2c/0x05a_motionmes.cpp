@@ -53,11 +53,11 @@ GP_SERV_COMMAND_MOTIONMES::GP_SERV_COMMAND_MOTIONMES(const CCharEntity* PChar, c
         const CItemWeapon* PWeapon = static_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED));
         if (PWeapon && PWeapon->getID() != 65535)
         {
-            if (PWeapon->getSkillType() == SKILL_THROWING)
+            if (PWeapon->getSkillType() == xi::SkillType::Throwing)
             {
                 packet.Param = PWeapon->getID();
             }
-            else if (PWeapon->getSkillType() == SKILL_MARKSMANSHIP || PWeapon->getSkillType() == SKILL_ARCHERY)
+            else if (PWeapon->getSkillType() == xi::SkillType::Marksmanship || PWeapon->getSkillType() == xi::SkillType::Archery)
             {
                 const CItemWeapon* PAmmo = static_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
                 if (PAmmo && PAmmo->getID() != 65535)

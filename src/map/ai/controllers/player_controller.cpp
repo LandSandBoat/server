@@ -214,7 +214,7 @@ bool CPlayerController::WeaponSkill(uint16 targid, uint16 wsid)
             return false;
         }
 
-        if (PWeaponSkill->getType() == SKILL_ARCHERY || PWeaponSkill->getType() == SKILL_MARKSMANSHIP)
+        if (static_cast<xi::SkillType>(PWeaponSkill->getType()) == xi::SkillType::Archery || static_cast<xi::SkillType>(PWeaponSkill->getType()) == xi::SkillType::Marksmanship)
         {
             auto* PItem  = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
             auto* weapon = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[SLOT_RANGED]);

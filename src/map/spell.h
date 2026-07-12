@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "data/enums/skill_type.h"
 #include "data/enums/zone_misc.h"
 #include "entities/battle_entity.h"
 
@@ -1188,7 +1189,7 @@ public:
     timer::duration    getAnimationTime() const;
     auto               getSpellGroup() const -> SPELLGROUP;
     SPELLFAMILY        getSpellFamily();
-    uint8              getSkillType() const;
+    auto               getSkillType() const -> xi::SkillType;
     xi::ZoneMisc       getZoneMisc() const;
     uint8              getAOE() const;
     uint16             getBase() const;
@@ -1228,7 +1229,7 @@ public:
     void setAnimationTime(timer::duration AnimationTime);
     void setSpellGroup(SPELLGROUP SpellGroup);
     void setSpellFamily(SPELLFAMILY SpellFamily);
-    void setSkillType(uint8 SkillType);
+    void setSkillType(xi::SkillType SkillType);
     void setZoneMisc(xi::ZoneMisc Misc);
     void setAOE(uint8 AOE);
     void setBase(uint16 base);
@@ -1265,7 +1266,7 @@ private:
     timer::duration                m_recastTime{};      // recast time
     uint16                         m_animation{};       // animation for spell
     timer::duration                m_animationTime{};
-    uint8                          m_skillType{};
+    xi::SkillType                  m_skillType{};
     float                          m_range{};
     float                          m_radius{};
     uint16                         m_totalTargets{};

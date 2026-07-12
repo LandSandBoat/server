@@ -182,7 +182,7 @@ void CAutomatonEntity::OnCastFinished(CMagicState& state, action_t& action)
 
     if (PSpell->tookEffect())
     {
-        puppetutils::TrySkillUP(this, SKILL_AUTOMATON_MAGIC, PTarget->GetMLevel());
+        puppetutils::TrySkillUP(this, xi::SkillType::AutomatonMagic, PTarget->GetMLevel());
 
         if (PTarget && PTarget->objtype == TYPE_MOB && PTarget->allegiance != xi::Allegiance::Player)
         {
@@ -216,7 +216,7 @@ void CAutomatonEntity::OnMobSkillFinished(CMobSkillState& state, action_t& actio
     // Ranged attack skill up
     if (PSkill->getID() == 1949 && !PSkill->hasMissMsg())
     {
-        puppetutils::TrySkillUP(this, SKILL_AUTOMATON_RANGED, PTarget->GetMLevel());
+        puppetutils::TrySkillUP(this, xi::SkillType::AutomatonRanged, PTarget->GetMLevel());
     }
 }
 

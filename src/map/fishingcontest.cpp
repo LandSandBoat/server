@@ -529,7 +529,7 @@ bool SubmitFish(CCharEntity* PChar, uint32 score)
     entry.slvl        = PChar->GetSLevel();
     entry.race        = PChar->mainlook.race;
     entry.allegiance  = (uint8)PChar->allegiance;
-    entry.fishRank    = PChar->RealSkills.rank[SKILLTYPE::SKILL_FISHING];
+    entry.fishRank    = PChar->RealSkills.rank[static_cast<uint8>(xi::SkillType::Fishing)];
     entry.score       = score;
     entry.submitTime  = earth_time::vanadiel_timestamp();
     entry.contestRank = 0;

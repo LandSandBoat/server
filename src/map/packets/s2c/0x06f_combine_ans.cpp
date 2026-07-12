@@ -54,7 +54,7 @@ GP_SERV_COMMAND_COMBINE_ANS::GP_SERV_COMMAND_COMBINE_ANS(const CCharEntity* PCha
                 continue;
             }
 
-            const uint8 required = craftState.skillRequired(skillID - SKILL_WOODWORKING);
+            const uint8 required = craftState.skillRequired(skillID - static_cast<uint8>(xi::SkillType::Woodworking));
             if (required > skillValue)
             {
                 skillValue       = required;

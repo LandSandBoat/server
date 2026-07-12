@@ -494,7 +494,7 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                                     auto* mainWeapon = static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN]);
 
                                     mainWeapon->setMaxHit(1);
-                                    mainWeapon->setSkillType(rset->get<uint8>("cmbSkill"));
+                                    mainWeapon->setSkillType(rset->get<xi::SkillType>("cmbSkill"));
 
                                     PMob->m_dmgMult = rset->get<uint16>("cmbDmgMult");
 

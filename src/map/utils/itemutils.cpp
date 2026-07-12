@@ -350,7 +350,7 @@ void LoadItemList()
 
             if (PItem->isType(ITEM_WEAPON))
             {
-                static_cast<CItemWeapon*>(PItem)->setSkillType(rset->get<uint8>("skill"));
+                static_cast<CItemWeapon*>(PItem)->setSkillType(rset->get<xi::SkillType>("skill"));
                 static_cast<CItemWeapon*>(PItem)->setSubSkillType(rset->get<uint8>("subskill"));
                 static_cast<CItemWeapon*>(PItem)->setILvlSkill(rset->get<uint16>("ilvl_skill"));
                 static_cast<CItemWeapon*>(PItem)->setILvlParry(rset->get<uint16>("ilvl_parry"));
@@ -364,7 +364,7 @@ void LoadItemList()
 
                 int        dmg   = rset->get<uint16>("dmg");
                 int        delay = rset->get<uint16>("delay");
-                const bool isH2H = static_cast<CItemWeapon*>(PItem)->getSkillType() == SKILL_HAND_TO_HAND;
+                const bool isH2H = static_cast<CItemWeapon*>(PItem)->getSkillType() == xi::SkillType::HandToHand;
 
                 if ((dmg > 0 || isH2H) && delay > 0) // avoid division by zero for items not yet implemented. Zero dmg h2h weapons don't actually have zero dmg for the purposes of DPS.
                 {
@@ -539,12 +539,12 @@ void Initialize()
 
     unarmedItem = std::make_unique<CItemWeapon>(0);
     unarmedItem->setDmgType(xi::DamageType::None);
-    unarmedItem->setSkillType(SKILL_NONE);
+    unarmedItem->setSkillType(xi::SkillType::None);
     unarmedItem->setDamage(3);
 
     unarmedH2HItem = std::make_unique<CItemWeapon>(0);
     unarmedH2HItem->setDmgType(xi::DamageType::HandToHand);
-    unarmedH2HItem->setSkillType(SKILL_HAND_TO_HAND);
+    unarmedH2HItem->setSkillType(xi::SkillType::HandToHand);
     unarmedH2HItem->setDamage(0);
 
     // load magian trial data AFTER items

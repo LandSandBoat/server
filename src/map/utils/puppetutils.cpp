@@ -456,7 +456,7 @@ void setHead(CCharEntity* PChar, AutomatonHead head)
     }
 }
 
-auto getSkillCap(const CCharEntity* PChar, const SKILLTYPE skill, const uint8 level) -> uint16
+auto getSkillCap(const CCharEntity* PChar, const xi::SkillType skill, const uint8 level) -> uint16
 {
     if (PChar == nullptr)
     {
@@ -464,7 +464,7 @@ auto getSkillCap(const CCharEntity* PChar, const SKILLTYPE skill, const uint8 le
         return 0;
     }
 
-    if (skill < SKILL_AUTOMATON_MELEE || skill > SKILL_AUTOMATON_MAGIC)
+    if (skill < xi::SkillType::AutomatonMelee || skill > xi::SkillType::AutomatonMagic)
     {
         return 0;
     }
@@ -536,7 +536,7 @@ auto getSkillCap(const CCharEntity* PChar, const SKILLTYPE skill, const uint8 le
     return battleutils::GetMaxSkill(rank, level > 99 ? 99 : level);
 }
 
-void TrySkillUP(CAutomatonEntity* PAutomaton, SKILLTYPE SkillID, uint8 lvl)
+void TrySkillUP(CAutomatonEntity* PAutomaton, xi::SkillType SkillID, uint8 lvl)
 {
     if (!PAutomaton->PMaster || PAutomaton->PMaster->objtype != TYPE_PC)
     {
@@ -545,9 +545,9 @@ void TrySkillUP(CAutomatonEntity* PAutomaton, SKILLTYPE SkillID, uint8 lvl)
     }
 
     auto* PChar = static_cast<CCharEntity*>(PAutomaton->PMaster);
-    if (getSkillCap(PChar, SkillID, PAutomaton->GetMLevel()) != 0 && !(PAutomaton->WorkingSkills.skill[SkillID] & 0x8000))
+    if (getSkillCap(PChar, SkillID, PAutomaton->GetMLevel()) != 0 && !(PAutomaton->WorkingSkills.skill[static_cast<uint8>(SkillID)] & 0x8000))
     {
-        const uint16 CurSkill = PChar->RealSkills.skill[SkillID];
+        const uint16 CurSkill = PChar->RealSkills.skill[static_cast<uint8>(SkillID)];
         uint16       MaxSkill = getSkillCap(PChar, SkillID, std::min(PAutomaton->GetMLevel(), lvl));
 
         const int16 Diff          = MaxSkill - CurSkill / 10;
@@ -617,19 +617,19 @@ void TrySkillUP(CAutomatonEntity* PAutomaton, SKILLTYPE SkillID, uint8 lvl)
             if (SkillAmount + CurSkill >= MaxSkill)
             {
                 SkillAmount = MaxSkill - CurSkill;
-                PAutomaton->WorkingSkills.skill[SkillID] |= 0x8000;
+                PAutomaton->WorkingSkills.skill[static_cast<uint8>(SkillID)] |= 0x8000;
             }
 
-            PChar->RealSkills.skill[SkillID] += SkillAmount;
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PAutomaton, PAutomaton, SkillID, SkillAmount, MsgBasic::SkillGain);
+            PChar->RealSkills.skill[static_cast<uint8>(SkillID)] += SkillAmount;
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PAutomaton, PAutomaton, static_cast<uint8>(SkillID), SkillAmount, MsgBasic::SkillGain);
 
             if ((CurSkill / 10) < (CurSkill + SkillAmount) / 10) // if gone up a level
             {
-                PChar->WorkingSkills.skill[SkillID] += 1;
-                PAutomaton->WorkingSkills.skill[SkillID] += 1;
-                if (SkillID == SKILL_AUTOMATON_MAGIC)
+                PChar->WorkingSkills.skill[static_cast<uint8>(SkillID)] += 1;
+                PAutomaton->WorkingSkills.skill[static_cast<uint8>(SkillID)] += 1;
+                if (SkillID == xi::SkillType::AutomatonMagic)
                 {
-                    const uint16 amaSkill                     = PAutomaton->WorkingSkills.skill[SKILL_AUTOMATON_MAGIC];
+                    const uint16 amaSkill                     = PAutomaton->WorkingSkills.skill[static_cast<uint8>(xi::SkillType::AutomatonMagic)];
                     PAutomaton->WorkingSkills.automaton_magic = amaSkill;
                     PAutomaton->WorkingSkills.healing         = amaSkill;
                     PAutomaton->WorkingSkills.enhancing       = amaSkill;
@@ -639,9 +639,9 @@ void TrySkillUP(CAutomatonEntity* PAutomaton, SKILLTYPE SkillID, uint8 lvl)
                 }
 
                 charutils::SendExtendedJobPackets(PChar);
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PAutomaton, PAutomaton, SkillID, (CurSkill + SkillAmount) / 10, MsgBasic::SkillLevelUp);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PAutomaton, PAutomaton, static_cast<uint8>(SkillID), (CurSkill + SkillAmount) / 10, MsgBasic::SkillLevelUp);
             }
-            charutils::SaveCharSkills(PChar, SkillID);
+            charutils::SaveCharSkills(PChar, static_cast<uint8>(SkillID));
         }
     }
 }

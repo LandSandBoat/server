@@ -110,10 +110,10 @@ uint16 AddCapacityBonus(CCharEntity* PChar, uint16 capacityPoints);
 void   AddCapacityPoints(CCharEntity* PChar, CBaseEntity* PMob, uint32 capacityPoints, int16 levelDiff = 0, bool isCapacityChain = false);
 void   DistributeCapacityPoints(CCharEntity* PChar, CMobEntity* PMob);
 
-void  TrySkillUP(CCharEntity* PChar, SKILLTYPE SkillID, uint8 lvl, bool forceSkillUp = false, bool useSubSkill = false);
+void  TrySkillUP(CCharEntity* PChar, xi::SkillType SkillID, uint8 lvl, bool forceSkillUp = false, bool useSubSkill = false);
 void  TrackArrowUsageForScavenge(CCharEntity* PChar, CItemWeapon* PAmmo);
-bool  isArtsBonusActive(CCharEntity* PChar, SKILLTYPE SkillID);
-int16 ArtsBonusSkill(CCharEntity* PChar, SKILLTYPE SkillID);
+bool  isArtsBonusActive(CCharEntity* PChar, xi::SkillType SkillID);
+int16 ArtsBonusSkill(CCharEntity* PChar, xi::SkillType SkillID);
 void  BuildingCharSkillsTable(CCharEntity* PChar);
 void  BuildingCharWeaponSkills(CCharEntity* PChar);
 void  BuildingCharAbilityTable(CCharEntity* PChar);

@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.skill
+
+values:
+  # Combat Skills
+  none: 0
+  hand_to_hand: 1
+  dagger: 2
+  sword: 3
+  great_sword: 4
+  axe: 5
+  great_axe: 6
+  scythe: 7
+  polearm: 8
+  katana: 9
+  great_katana: 10
+  club: 11
+  staff: 12
+  # 13-21 unused
+  automaton_melee: 22
+  automaton_ranged: 23
+  automaton_magic: 24
+  archery: 25
+  marksmanship: 26
+  throwing: 27
+  # Defensive Skills
+  guard: 28
+  evasion: 29
+  shield: 30
+  parry: 31
+  # Magic Skills
+  divine_magic: 32
+  healing_magic: 33
+  enhancing_magic: 34
+  enfeebling_magic: 35
+  elemental_magic: 36
+  dark_magic: 37
+  summoning_magic: 38
+  ninjutsu: 39
+  singing: 40
+  string_instrument: 41
+  wind_instrument: 42
+  blue_magic: 43
+  geomancy: 44
+  handbell: 45
+  # 46-47 unused
+  # Crafting Skills
+  fishing: 48
+  woodworking: 49
+  smithing: 50
+  goldsmithing: 51
+  clothcraft: 52
+  leathercraft: 53
+  bonecraft: 54
+  alchemy: 55
+  cooking: 56
+  synergy: 57
+  # Other Skills
+  rid: 58
+  dig: 59

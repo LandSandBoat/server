@@ -35,7 +35,7 @@ public:
     CItemWeapon(const CItemWeapon& other);
     virtual ~CItemWeapon();
 
-    uint8  getSkillType() const;
+    auto   getSkillType() const -> xi::SkillType;
     uint8  getSubSkillType() const;
     uint16 getILvlSkill() const;
     uint16 getILvlParry() const;
@@ -60,7 +60,7 @@ public:
     bool isUnlockable() const;
     bool isUnlocked();
 
-    void setSkillType(uint8 skillType);
+    void setSkillType(xi::SkillType skillType);
     void setSubSkillType(uint8 subSkillType);
     void setILvlSkill(uint16 skill);
     void setILvlParry(uint16 parry);
@@ -77,7 +77,7 @@ public:
     void setCurrentUnlockPoints(uint16 points);
 
 private:
-    uint8          m_skillType;
+    xi::SkillType  m_skillType;
     uint8          m_subSkillType; // gun vs crossbow, any other exclusives
     uint16         m_iLvlSkill;
     uint16         m_iLvlParry;

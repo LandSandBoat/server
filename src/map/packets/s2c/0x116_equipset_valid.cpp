@@ -117,7 +117,7 @@ GP_SERV_COMMAND_EQUIPSET_VALID::GP_SERV_COMMAND_EQUIPSET_VALID(const CCharEntity
             // Remove one handed weapons or shield from sub if new item is two handed
             if (newItemWeapon->isTwoHanded())
             {
-                if ((PSub && PSub->getSkillType() != SKILL_NONE) || (equipSet[SLOT_SUB] && equipSet[SLOT_SUB]->IsShield()))
+                if ((PSub && PSub->getSkillType() != xi::SkillType::None) || (equipSet[SLOT_SUB] && equipSet[SLOT_SUB]->IsShield()))
                 {
                     equipSet[SLOT_SUB] = nullptr;
                 }
@@ -137,7 +137,7 @@ GP_SERV_COMMAND_EQUIPSET_VALID::GP_SERV_COMMAND_EQUIPSET_VALID(const CCharEntity
             }
 
             // Equipping grip, remove non-2h weapon
-            if (newItemWeapon->getSkillType() == SKILL_NONE && newItemWeapon->getEquipSlotId() & 0x02)
+            if (newItemWeapon->getSkillType() == xi::SkillType::None && newItemWeapon->getEquipSlotId() & 0x02)
             {
                 if (PWeapon && !PWeapon->isTwoHanded())
                 {
@@ -148,7 +148,7 @@ GP_SERV_COMMAND_EQUIPSET_VALID::GP_SERV_COMMAND_EQUIPSET_VALID(const CCharEntity
             // Equipping 1h item in main slot with grip in sub
             if (equippedIndex == SLOT_MAIN && !newItemWeapon->isHandToHand() && !newItemWeapon->isTwoHanded())
             {
-                if (PSub && PSub->getSkillType() == SKILL_NONE)
+                if (PSub && PSub->getSkillType() == xi::SkillType::None)
                 {
                     equipSet[SLOT_SUB] = nullptr;
                 }
