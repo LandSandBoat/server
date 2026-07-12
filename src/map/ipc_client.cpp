@@ -950,7 +950,7 @@ void IPCClient::handleMessage_SendPlayerToLocation(const IPP& ipp, const ipc::Se
 
         PChar->clearPacketList();
 
-        PChar->requestedWarp = true;
+        PChar->requestedZoneChange = true;
 
         // Save pet if any
         if (PChar->shouldPetPersistThroughZoning())
