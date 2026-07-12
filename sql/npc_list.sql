@@ -18,7 +18,7 @@ DROP TABLE IF EXISTS `npc_list`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `npc_list` (
   `npcid` int(10) unsigned NOT NULL,
-  `name` varbinary(24) DEFAULT NULL,
+  `name` varbinary(64) DEFAULT NULL,
   `polutils_name` char(50) DEFAULT NULL,
   `pos_rot` tinyint(3) unsigned NOT NULL DEFAULT 0,
   `pos_x` float(7,3) NOT NULL DEFAULT 0.000,
