@@ -1274,6 +1274,7 @@ EventInfo* CLuaBaseEntity::ParseEvent(int32 EventID, sol::variadic_args va, Even
         eventToStart->interruptText = table.get_or<int16>("interrupt_text", 0);
         eventToStart->eventFlags    = table.get_or<uint32>("flags", 0);
         eventToStart->canSkip       = table.get_or("canSkip", false);
+        eventToStart->isHidden      = table.get_or("isHidden", false);
 
         sol::object csOption = table["cs_option"];
         if (csOption.is<int32>())

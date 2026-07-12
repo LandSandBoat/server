@@ -2277,7 +2277,7 @@ void OnZoneIn(CCharEntity* PChar)
         return;
     }
 
-    PChar->m_zoneInCutscene = false;
+    PChar->m_isPCHidden = false;
 
     CZone*      prevZone    = zoneutils::GetZone(PChar->loc.prevzone);
     std::string prevZoneStr = "Unknown";
@@ -2320,7 +2320,7 @@ void OnZoneIn(CCharEntity* PChar)
     if (PChar->currentEvent->eventId >= 0)
     {
         PChar->currentEvent->type = CUTSCENE;
-        PChar->m_zoneInCutscene   = true;
+        PChar->m_isPCHidden       = true;
         PChar->setLocked(true);
     }
 }

@@ -64,6 +64,7 @@ struct EventInfo : EventPrep
     uint16             interruptText = 0;
     uint32             eventFlags    = 0;
     bool               canSkip       = false;
+    bool               isHidden      = false;
 
     bool hasCutsceneOption(int32 _option)
     {
@@ -82,6 +83,7 @@ struct EventInfo : EventPrep
         eventFlags = 0;
         type       = NORMAL;
         canSkip    = false;
+        isHidden   = false;
     }
 };
 
