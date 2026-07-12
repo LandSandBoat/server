@@ -89,7 +89,7 @@ quest.sections =
                             quest:setLocalVar(player, 'isActor', 1)
 
                             for nmId = korrolokaID.mob.KORROLOKA_LEECH, korrolokaID.mob.KORROLOKA_LEECH + 2 do
-                                SpawnMob(nmId)
+                                SpawnMob(nmId):updateClaim(player)
                             end
 
                             return quest:messageSpecial(korrolokaID.text.SENSE_OF_FOREBODING)
