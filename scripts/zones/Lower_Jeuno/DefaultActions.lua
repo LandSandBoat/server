@@ -45,7 +45,6 @@ return {
     ['Song_Runes']      = { messageSpecial = ID.text.SONG_RUNES_DEFAULT },
     ['Sutarara']        = { event = 208 },
     ['Tawfeeq']         = { event = 225 },
-    ['Taza']            = { text = ID.text.WAAG_DEEG_SHOP_DIALOG },
     ['Teigero-Bangero'] = { event = 34 },
     ['Tuh_Almodankha']  = { event = 10013 },
     ['Vhana_Ehgaklywha'] = { text = ID.text.VHANA_DEFAULT },
