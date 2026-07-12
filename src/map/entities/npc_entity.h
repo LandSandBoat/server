@@ -35,7 +35,6 @@ public:
     void setEntityFlags(xi::EntityFlags EntityFlags); // Change the current value in m_flags
 
     void hideHP(bool hide);
-    bool hpHidden() const;
 
     void setUntargetable(bool untargetable);
     bool GetUntargetable() const override;

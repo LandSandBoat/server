@@ -67,11 +67,6 @@ void CNpcEntity::hideHP(bool hide)
     }
 }
 
-bool CNpcEntity::hpHidden() const
-{
-    return (m_flags & xi::EntityFlags::Untargetable) == xi::EntityFlags::Untargetable;
-}
-
 void CNpcEntity::setUntargetable(bool untargetable)
 {
     if (untargetable)
