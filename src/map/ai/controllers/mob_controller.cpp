@@ -231,31 +231,42 @@ void CMobController::TryLink()
         return;
     }
 
-    // handle pet behavior on the targets behalf (faster than in ai_pet_dummy)
-    // Avatars defend masters by attacking mobs if the avatar isn't attacking anything currently (bodyguard behavior)
-    // Alexander, Odin and Atomos are passive and do not protect the master.
+    // Handle pets that act as bodyguards for their master. Will defend the master if they are being attacked.
+    // Will not switch targets if they are already engaged.
+    // Atomos, Alexander, and Odin are exempt from this behavior.
     if (PTarget->PPet != nullptr && PTarget->PPet->GetBattleTargetID() == 0)
     {
+        bool isBodyguard = false;
+
         if (PTarget->PPet->objtype == TYPE_PET)
         {
             const auto PPetEntity = static_cast<CPetEntity*>(PTarget->PPet);
-            if (PPetEntity->getPetType() == PET_TYPE::AVATAR &&
-                PPetEntity->petID() != PETID_ALEXANDER &&
-                PPetEntity->petID() != PETID_ODIN &&
-                PPetEntity->petID() != PETID_ATOMOS)
+
+            isBodyguard = PPetEntity->getPetType() == PET_TYPE::AVATAR &&
+                          PPetEntity->petID() != PETID_ALEXANDER &&
+                          PPetEntity->petID() != PETID_ODIN &&
+                          PPetEntity->petID() != PETID_ATOMOS;
+        }
+        else if (PTarget->PPet->objtype == TYPE_MOB)
+        {
+            const auto PPetMob = static_cast<CMobEntity*>(PTarget->PPet);
+
+            isBodyguard = PPetMob->isCharmed && PPetMob->getMobMod(MOBMOD_BODYGUARD);
+        }
+
+        if (isBodyguard)
+        {
+            if (PTarget->objtype == TYPE_PC)
             {
-                if (PTarget->objtype == TYPE_PC)
-                {
-                    auto* PChar = dynamic_cast<CCharEntity*>(PTarget);
-                    if (PChar && PChar->IsMobOwner(PMob))
-                    {
-                        petutils::AttackTarget(PTarget, PMob);
-                    }
-                }
-                else
+                auto* PChar = dynamic_cast<CCharEntity*>(PTarget);
+                if (PChar && PChar->IsMobOwner(PMob))
                 {
                     petutils::AttackTarget(PTarget, PMob);
                 }
+            }
+            else
+            {
+                petutils::AttackTarget(PTarget, PMob);
             }
         }
     }
