@@ -38,7 +38,7 @@ zones[xi.zone.VALLEY_OF_SORROWS] =
     },
     npc =
     {
-        ADAMANTOISE_QM = GetFirstID('qm0'),
+        ADAMANTOISE_QM = GetFirstID('qm_adamantoise'),
     },
 }
 

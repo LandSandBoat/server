@@ -3,13 +3,13 @@
 -- San d'Oria M9-1
 -----------------------------------
 -- !addmission 0 22
--- Ambrotien             : !pos 93.419 -0.001 -57.347 230
--- Grilau                : !pos -241.987 6.999 57.887 231
--- Endracion             : !pos -110 1 -34 230
--- (_6h4) Great Hall     : !pos 0 -1 13 233
--- qm2 (VoS)             : !pos 91 -3 -16 128
--- qm5 (Xarcabard)       : !pos 179 -33 82 112
--- qm3 (Batallia Downs)  : !pos 210 17 -615 105
+-- Ambrotien                  : !pos 93.419 -0.001 -57.347 230
+-- Grilau                     : !pos -241.987 6.999 57.887 231
+-- Endracion                  : !pos -110 1 -34 230
+-- (_6h4) Great Hall          : !pos 0 -1 13 233
+-- qm_breaking_barriers (VoS) : !pos 91 -3 -16 128
+-- qm5 (Xarcabard)            : !pos 179 -33 82 112
+-- qm3 (Batallia Downs)       : !pos 210 17 -615 105
 -----------------------------------
 local batalliaID = zones[xi.zone.BATALLIA_DOWNS]
 -----------------------------------
@@ -115,7 +115,7 @@ mission.sections =
 
         [xi.zone.VALLEY_OF_SORROWS] =
         {
-            ['qm2'] =
+            ['qm_breaking_barriers'] =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 1 then
