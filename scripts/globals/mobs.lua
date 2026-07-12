@@ -791,10 +791,13 @@ xi.mob.callPets = function(mob, petIds, params)
             then
                 spawnedCount = spawnedCount + 1
                 -- spawn pet around owner
-                petToSummon:setSpawn(pos.x + math.randomInt(-2, 2), pos.y, pos.z + math.randomInt(-2, 2), pos.rot)
+                local randomX = math.randomInt(1, 100) <= 50 and 2 or -2
+                local randomZ = math.randomInt(1, 100) <= 50 and 2 or -2
+
+                petToSummon:setSpawn(pos.x + randomX, pos.y, pos.z + randomZ, pos.rot)
                 petToSummon:spawn()
                 -- set home to be the owner's home position
-                petToSummon:setSpawn(spawnPos.x, spawnPos.y, spawnPos.z, spawnPos.rot)
+                petToSummon:setSpawn(spawnPos.x + randomX, spawnPos.y, spawnPos.z + randomZ, spawnPos.rot)
 
                 local ownerRoamListenerName = fmt('OWNER_ASSIST_{}', petId)
                 if params.superLink then
