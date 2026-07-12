@@ -1,7 +1,7 @@
 -----------------------------------
 -- Mountain Buster
 -- Family: Avatar (Titan)
--- Description: Delivers a Blunt attack to a target.
+-- Description: Delivers a Blunt attack to a target. Additional Effect: Bind
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}
@@ -30,6 +30,13 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
 
     if xi.mobskills.processDamage(pet, target, petskill, action, info) then
         target:takeDamage(info.damage, pet, info.attackType, info.damageType)
+
+        local effectTable =
+        {
+            [1] = { effectId = xi.effect.BIND, power = 1, duration = math.randomInt(13, 60), origin = pet }, -- TODO: Get additional captures.
+        }
+
+        xi.combat.action.executeMobskillStatusEffect(pet, target, petskill, effectTable, { messageBypass = true })
     end
 
     return info.damage
