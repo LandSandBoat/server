@@ -341,9 +341,9 @@ auto LoadNPCList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                                     PNpc->animation    = rset->get<uint8>("animation");
                                     PNpc->animationsub = rset->get<uint8>("animationsub");
 
-                                    PNpc->namevis = rset->get<uint8>("namevis");
+                                    PNpc->namevis = rset->get<xi::NameVis>("namevis");
                                     PNpc->status  = rset->get<xi::Status>("status");
-                                    PNpc->m_flags = rset->get<uint32>("entityFlags");
+                                    PNpc->m_flags = rset->get<xi::EntityFlags>("entityFlags");
 
                                     db::extractFromBlob(rset, "look", PNpc->look);
 
@@ -494,7 +494,7 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                                     auto* mainWeapon = static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN]);
 
                                     mainWeapon->setMaxHit(1);
-                                    mainWeapon->setSkillType(rset->get<uint8>("cmbSkill"));
+                                    mainWeapon->setSkillType(rset->get<xi::SkillType>("cmbSkill"));
 
                                     PMob->m_dmgMult = rset->get<uint16>("cmbDmgMult");
 
@@ -561,7 +561,7 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                                     PMob->m_Species     = rset->get<uint16>("speciesid");
                                     PMob->m_Family      = rset->get<uint16>("familyID");
                                     PMob->m_name_prefix = rset->get<uint8>("name_prefix");
-                                    PMob->m_flags       = rset->get<uint32>("entityFlags");
+                                    PMob->m_flags       = rset->get<xi::EntityFlags>("entityFlags");
 
                                     // Cap Level if Necessary (Don't Cap NMs)
                                     if (normalLevelRangeMin > 0 && !((PMob->m_Type & xi::MobType::Notorious) != xi::MobType::Normal) && PMob->m_minLevel > normalLevelRangeMin)
@@ -593,7 +593,7 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                                     PMob->m_Pool = rset->get<uint32>("poolid");
 
                                     PMob->allegiance      = rset->get<xi::Allegiance>("allegiance");
-                                    PMob->namevis         = rset->get<uint8>("namevis");
+                                    PMob->namevis         = rset->get<xi::NameVis>("namevis");
                                     PMob->modelHitboxSize = std::max<float>(0.0f, rset->getOrDefault<float>("modelHitboxSize", 0) / 10.f);
                                     PMob->modelSize       = rset->getOrDefault<uint8>("modelSize", 0);
                                     PMob->m_Aggro         = rset->get<bool>("aggro");

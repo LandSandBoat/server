@@ -45,12 +45,12 @@ CNpcEntity::~CNpcEntity()
     TracyZoneScoped;
 }
 
-uint32 CNpcEntity::entityFlags() const
+auto CNpcEntity::entityFlags() const -> xi::EntityFlags
 {
     return m_flags;
 }
 
-void CNpcEntity::setEntityFlags(uint32 EntityFlags)
+void CNpcEntity::setEntityFlags(xi::EntityFlags EntityFlags)
 {
     m_flags = EntityFlags;
 }
@@ -59,34 +59,29 @@ void CNpcEntity::hideHP(bool hide)
 {
     if (hide)
     {
-        m_flags |= 0x100;
+        m_flags |= xi::EntityFlags::HideHp;
     }
     else
     {
-        m_flags &= ~0x100;
+        m_flags &= ~xi::EntityFlags::HideHp;
     }
-}
-
-bool CNpcEntity::hpHidden() const
-{
-    return (m_flags & 0x800) == 0x800;
 }
 
 void CNpcEntity::setUntargetable(bool untargetable)
 {
     if (untargetable)
     {
-        m_flags |= FLAG_UNTARGETABLE;
+        m_flags |= xi::EntityFlags::Untargetable;
     }
     else
     {
-        m_flags &= ~FLAG_UNTARGETABLE;
+        m_flags &= ~xi::EntityFlags::Untargetable;
     }
 }
 
 bool CNpcEntity::GetUntargetable() const
 {
-    return (m_flags & FLAG_UNTARGETABLE) == FLAG_UNTARGETABLE;
+    return (m_flags & xi::EntityFlags::Untargetable) == xi::EntityFlags::Untargetable;
 }
 
 bool CNpcEntity::triggerable() const

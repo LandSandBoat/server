@@ -1059,7 +1059,7 @@ bool IsLiveBait(bait_t* bait)
 
 uint8 GetFishingSkill(CCharEntity* PChar)
 {
-    return static_cast<uint8>(std::floor(PChar->RealSkills.skill[SKILL_FISHING] / 10) + PChar->getMod(Mod::FISH));
+    return static_cast<uint8>(std::floor(PChar->RealSkills.skill[static_cast<uint8>(xi::SkillType::Fishing)] / 10) + PChar->getMod(Mod::FISH));
 }
 
 uint8 GetBaitPower(bait_t* bait, fish_t* fish)
@@ -1329,7 +1329,7 @@ bool BaitLoss(CCharEntity* PChar, RemoveFly removeFly, SendUpdate sendUpdate)
             return false;
         }
 
-        if (PBait->getSkillType() != SKILL_FISHING)
+        if (PBait->getSkillType() != xi::SkillType::Fishing)
         {
             ShowWarning("PBait Skilltype is not Fishing.");
             return false;
@@ -1612,7 +1612,7 @@ int32 CatchMonster(CCharEntity* PChar, uint32 MobID)
 
     // PMob->SetLocalVar("QuestBattleID", PChar->GetLocalVar("QuestBattleID"));
     // PChar->StatusEffectContainer->CopyConfrontationEffect(PMob);
-    if ((mob->log < 255 && mob->quest < 255) || mob->questOnly || (PMob->m_TrueDetection && PMob->getMobMod(MOBMOD_DETECTION) & DETECT_SCENT) || !PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Sneak))
+    if ((mob->log < 255 && mob->quest < 255) || mob->questOnly || (PMob->m_TrueDetection && (static_cast<xi::Detects>(PMob->getMobMod(MOBMOD_DETECTION)) & xi::Detects::Scent) != xi::Detects::None) || !PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Sneak))
     {
         PMob->PAI->Engage(PChar->targid);
         battleutils::ClaimMob(PMob, (CBattleEntity*)PChar);
@@ -1745,10 +1745,10 @@ void FishingSkillup(CCharEntity* PChar, uint8 catchLevel, uint8 successType)
         return;
     }
 
-    uint8        skillRank       = PChar->RealSkills.rank[SKILL_FISHING];
+    uint8        skillRank       = PChar->RealSkills.rank[static_cast<uint8>(xi::SkillType::Fishing)];
     uint16       maxSkill        = (skillRank + 1) * 100;
-    int32        charSkill       = PChar->RealSkills.skill[SKILL_FISHING];
-    int32        charSkillLevel  = (uint32)std::floor(PChar->RealSkills.skill[SKILL_FISHING] / 10);
+    int32        charSkill       = PChar->RealSkills.skill[static_cast<uint8>(xi::SkillType::Fishing)];
+    int32        charSkillLevel  = (uint32)std::floor(PChar->RealSkills.skill[static_cast<uint8>(xi::SkillType::Fishing)] / 10);
     uint8        levelDifference = 0;
     int          maxSkillAmount  = 1;
     CItemWeapon* Rod             = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED));
@@ -1867,23 +1867,23 @@ void FishingSkillup(CCharEntity* PChar, uint8 catchLevel, uint8 successType)
 
         if (skillAmount > 0)
         {
-            PChar->RealSkills.skill[SKILL_FISHING] += skillAmount;
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, SKILL_FISHING, skillAmount, MsgBasic::SkillGain);
+            PChar->RealSkills.skill[static_cast<uint8>(xi::SkillType::Fishing)] += skillAmount;
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, static_cast<uint8>(xi::SkillType::Fishing), skillAmount, MsgBasic::SkillGain);
 
             if ((charSkill / 10) < (charSkill + skillAmount) / 10)
             {
-                PChar->WorkingSkills.skill[SKILL_FISHING] += 0x20;
+                PChar->WorkingSkills.skill[static_cast<uint8>(xi::SkillType::Fishing)] += 0x20;
 
-                if (PChar->RealSkills.skill[SKILL_FISHING] >= maxSkill)
+                if (PChar->RealSkills.skill[static_cast<uint8>(xi::SkillType::Fishing)] >= maxSkill)
                 {
-                    PChar->WorkingSkills.skill[SKILL_FISHING] |= 0x8000; // blue capped text
+                    PChar->WorkingSkills.skill[static_cast<uint8>(xi::SkillType::Fishing)] |= 0x8000; // blue capped text
                 }
 
                 PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, SKILL_FISHING, (charSkill + skillAmount) / 10, MsgBasic::SkillLevelUp);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, static_cast<uint8>(xi::SkillType::Fishing), (charSkill + skillAmount) / 10, MsgBasic::SkillLevelUp);
             }
 
-            charutils::SaveCharSkills(PChar, SKILL_FISHING);
+            charutils::SaveCharSkills(PChar, static_cast<uint8>(xi::SkillType::Fishing));
         }
     }
 }
@@ -1982,7 +1982,7 @@ void StartFishing(CCharEntity* PChar)
         Bait = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
 
         // If no rod, then can't fish
-        if ((Rod == nullptr) || !(Rod->isType(ITEM_WEAPON)) || (Rod->getSkillType() != SKILL_FISHING))
+        if ((Rod == nullptr) || !(Rod->isType(ITEM_WEAPON)) || (Rod->getSkillType() != xi::SkillType::Fishing))
         {
             PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_NOROD);
             PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Fishing);
@@ -1991,7 +1991,7 @@ void StartFishing(CCharEntity* PChar)
         }
 
         // If no bait, then can't fish
-        if ((Bait == nullptr) || !(Bait->isType(ITEM_WEAPON)) || (Bait->getSkillType() != SKILL_FISHING))
+        if ((Bait == nullptr) || !(Bait->isType(ITEM_WEAPON)) || (Bait->getSkillType() != xi::SkillType::Fishing))
         {
             PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_NOBAIT);
             PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Fishing);

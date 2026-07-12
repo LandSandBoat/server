@@ -135,7 +135,7 @@ CMobEntity::CMobEntity()
 , m_Family(0)
 , m_MobSkillList(0)
 , m_Pool(0)
-, m_flags(0)
+, m_flags(xi::EntityFlags::None)
 , m_name_prefix(0)
 , m_CallForHelpBlocked(false)
 , m_IsPathingHome(false)
@@ -187,12 +187,12 @@ CMobEntity::~CMobEntity()
     }
 }
 
-uint32 CMobEntity::getEntityFlags() const
+auto CMobEntity::getEntityFlags() const -> xi::EntityFlags
 {
     return m_flags;
 }
 
-void CMobEntity::setEntityFlags(uint32 EntityFlags)
+void CMobEntity::setEntityFlags(xi::EntityFlags EntityFlags)
 {
     m_flags = EntityFlags;
 }
@@ -407,7 +407,8 @@ bool CMobEntity::CanLink(position_t* pos, int16 superLink)
     }
 
     // If a mob detects by both sight and hearing it only needs to meet one check.
-    if ((getMobMod(MOBMOD_DETECTION) & DETECT_SIGHT) && !(getMobMod(MOBMOD_DETECTION) & DETECT_HEARING) && !facing(loc.p, *pos, 64))
+    const auto detects = static_cast<xi::Detects>(getMobMod(MOBMOD_DETECTION));
+    if (((detects & xi::Detects::Sight) != xi::Detects::None) && !((detects & xi::Detects::Hearing) != xi::Detects::None) && !facing(loc.p, *pos, 64))
     {
         return false;
     }
@@ -547,55 +548,55 @@ void CMobEntity::HideHP(bool hide)
 {
     if (hide)
     {
-        m_flags |= FLAG_HIDE_HP;
+        m_flags |= xi::EntityFlags::HideHp;
     }
     else
     {
-        m_flags &= ~FLAG_HIDE_HP;
+        m_flags &= ~xi::EntityFlags::HideHp;
     }
     updatemask |= UPDATE_HP;
 }
 
 bool CMobEntity::IsHPHidden() const
 {
-    return m_flags & FLAG_HIDE_HP;
+    return (m_flags & xi::EntityFlags::HideHp) != xi::EntityFlags::None;
 }
 
 void CMobEntity::SetCallForHelpFlag(bool call)
 {
     if (call)
     {
-        m_flags |= FLAG_CALL_FOR_HELP;
+        m_flags |= xi::EntityFlags::CallForHelp;
         m_OwnerID.clean();
     }
     else
     {
-        m_flags &= ~FLAG_CALL_FOR_HELP;
+        m_flags &= ~xi::EntityFlags::CallForHelp;
     }
     updatemask |= UPDATE_COMBAT;
 }
 
 bool CMobEntity::GetCallForHelpFlag() const
 {
-    return m_flags & FLAG_CALL_FOR_HELP;
+    return (m_flags & xi::EntityFlags::CallForHelp) != xi::EntityFlags::None;
 }
 
 void CMobEntity::SetUntargetable(bool untargetable)
 {
     if (untargetable)
     {
-        m_flags |= FLAG_UNTARGETABLE;
+        m_flags |= xi::EntityFlags::Untargetable;
     }
     else
     {
-        m_flags &= ~FLAG_UNTARGETABLE;
+        m_flags &= ~xi::EntityFlags::Untargetable;
     }
     updatemask |= UPDATE_HP;
 }
 
 bool CMobEntity::GetUntargetable() const
 {
-    return m_flags & FLAG_UNTARGETABLE;
+    return (m_flags & xi::EntityFlags::Untargetable) != xi::EntityFlags::None;
 }
 
 void CMobEntity::PostTick()

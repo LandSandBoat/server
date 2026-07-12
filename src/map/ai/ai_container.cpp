@@ -604,7 +604,7 @@ bool CAIContainer::Internal_Despawn(bool instantDespawn)
     return false;
 }
 
-bool CAIContainer::Internal_Synth(SKILLTYPE synthSkill)
+bool CAIContainer::Internal_Synth(xi::SkillType synthSkill)
 {
     auto PChar = dynamic_cast<CCharEntity*>(PEntity);
     if (PChar && !IsCurrentState<CSynthState>())

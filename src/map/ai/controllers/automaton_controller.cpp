@@ -1499,11 +1499,11 @@ auto CAutomatonController::TryTPMove() -> bool
         std::vector<CMobSkill*> validSkills;
 
         // load the skills that the automaton has access to with it's skill
-        SKILLTYPE skilltype = SKILL_AUTOMATON_MELEE;
+        xi::SkillType skilltype = xi::SkillType::AutomatonMelee;
 
         if (PAutomaton->frame() == AutomatonFrame::Sharpshot)
         {
-            skilltype = SKILL_AUTOMATON_RANGED;
+            skilltype = xi::SkillType::AutomatonRanged;
         }
 
         for (auto skillid : FrameSkills)
@@ -1701,7 +1701,7 @@ void LoadAutomatonSpellList()
 bool CanUseSpell(CAutomatonEntity* PCaster, SpellID spellid)
 {
     const AutomatonSpell& PSpell = autoSpellList[spellid];
-    return ((PCaster->GetSkill(SKILL_AUTOMATON_MAGIC) >= PSpell.skilllevel) && (PSpell.heads & (1 << ((uint8)PCaster->head() - 1))));
+    return ((PCaster->GetSkill(xi::SkillType::AutomatonMagic) >= PSpell.skilllevel) && (PSpell.heads & (1 << ((uint8)PCaster->head() - 1))));
 }
 
 bool CanUseEnfeeble(CBattleEntity* PTarget, SpellID spell)

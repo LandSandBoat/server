@@ -23,6 +23,7 @@
 #define _CLUABASEENTITY_H
 
 #include "common/cbasetypes.h"
+#include "data/enums/entity_flags.h"
 #include "enums/mission_log.h"
 #include "luautils.h"
 #include "packets/s2c/0x009_message.h"
@@ -857,15 +858,15 @@ public:
     auto   isUndead() -> bool;
     bool   isNM();
 
-    uint8  getModelSize();
-    void   setModelSize(uint8 newSize);
-    float  getHitboxSize();
-    void   setHitboxSize(float newSize);
-    float  getMeleeRange(CLuaBaseEntity* target);
-    void   setMobFlags(uint32 flags, const sol::object& mobId); // Used to manipulate the mob's flags, such as changing size.
-    uint32 getMobFlags();
+    uint8 getModelSize();
+    void  setModelSize(uint8 newSize);
+    float getHitboxSize();
+    void  setHitboxSize(float newSize);
+    float getMeleeRange(CLuaBaseEntity* target);
+    void  setMobFlags(xi::EntityFlags flags, const sol::object& mobId); // Used to manipulate the mob's flags, such as changing size.
+    auto  getMobFlags() -> xi::EntityFlags;
 
-    void setNpcFlags(uint32 flags);
+    void setNpcFlags(xi::EntityFlags flags);
     void setNpcAlwaysRelevant(bool alwaysRelevant);
 
     void spawn(const sol::object& despawnSec, const sol::object& respawnSec);

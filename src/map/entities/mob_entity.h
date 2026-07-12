@@ -31,6 +31,7 @@
 
 #include "data/enums/behavior.h"
 #include "data/enums/claim_type.h"
+#include "data/enums/detects.h"
 #include "data/enums/mob_type.h"
 #include "data/enums/roam_flag.h"
 #include "data/enums/spawn_type.h"
@@ -56,20 +57,6 @@ enum SPECIALFLAG
     SPECIALFLAG_HIDDEN = 0x1 // only use special when hidden
 };
 
-enum DETECT : uint16
-{
-    DETECT_NONE        = 0x00,
-    DETECT_SIGHT       = 0x01,
-    DETECT_HEARING     = 0x02,
-    DETECT_LOWHP       = 0x04,
-    DETECT_NONE1       = 0x08,
-    DETECT_NONE2       = 0x10,
-    DETECT_MAGIC       = 0x20,
-    DETECT_WEAPONSKILL = 0x40,
-    DETECT_JOBABILITY  = 0x80,
-    DETECT_SCENT       = 0x100
-};
-
 class CMobSkillState;
 
 class CMobEntity : public CBattleEntity
@@ -78,8 +65,8 @@ public:
     CMobEntity();
     ~CMobEntity() override;
 
-    uint32 getEntityFlags() const;             // Returns the current value in m_flags
-    void   setEntityFlags(uint32 EntityFlags); // Change the current value in m_flags
+    auto getEntityFlags() const -> xi::EntityFlags;   // Returns the current value in m_flags
+    void setEntityFlags(xi::EntityFlags EntityFlags); // Change the current value in m_flags
 
     bool IsFarFromHome();      // check if mob is too far from spawn
     bool CanBeNeutral() const; // check if mob can have killing pause
@@ -226,8 +213,8 @@ public:
     CMobSpellList*           m_SpellListContainer; // The spells list container for this mob
     std::map<uint16, uint16> m_UsedSkillIds;       // mob skill ids used (key) along with mob level (value)
 
-    uint32 m_flags;       // includes the CFH flag and whether the HP bar should be shown or not (e.g. Yilgeban doesnt)
-    uint8  m_name_prefix; // The ding bats VS Ding bats
+    xi::EntityFlags m_flags;       // includes the CFH flag and whether the HP bar should be shown or not (e.g. Yilgeban doesnt)
+    uint8           m_name_prefix; // The ding bats VS Ding bats
 
     bool m_CallForHelpBlocked;
 

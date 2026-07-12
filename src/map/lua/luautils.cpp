@@ -4635,7 +4635,7 @@ int32 OnPetAbility(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill
             CCharEntity* PMaster = (CCharEntity*)PPet->PMaster;
             if (PMaster->GetMJob() == JOB_SMN)
             {
-                charutils::TrySkillUP(PMaster, SKILL_SUMMONING_MAGIC, PMaster->GetMLevel());
+                charutils::TrySkillUP(PMaster, xi::SkillType::SummoningMagic, PMaster->GetMLevel());
             }
         }
     }
@@ -4668,7 +4668,7 @@ int32 OnPetAbility(CBaseEntity* PTarget, CPetEntity* PPet, CPetSkill* PPetSkill,
         CCharEntity* PMaster = (CCharEntity*)PPet->PMaster;
         if (PMaster->GetMJob() == JOB_SMN)
         {
-            charutils::TrySkillUP(PMaster, SKILL_SUMMONING_MAGIC, PMaster->GetMLevel());
+            charutils::TrySkillUP(PMaster, xi::SkillType::SummoningMagic, PMaster->GetMLevel());
         }
     }
 
@@ -5915,15 +5915,15 @@ CBaseEntity* GenerateDynamicEntity(CZone* PZone, CInstance* PInstance, sol::tabl
 
     if (auto* PNpc = dynamic_cast<CNpcEntity*>(PEntity))
     {
-        PNpc->namevis     = table.get_or<uint8>("namevis", 0);
+        PNpc->namevis     = static_cast<xi::NameVis>(table.get_or<uint8>("namevis", 0));
         PNpc->status      = xi::Status::Normal;
         PNpc->name_prefix = 32;
 
         // TODO: Does this even work?
         PNpc->setWidescan(table.get_or<uint8>("widescan", 1));
 
-        uint32 flags  = table.get_or<uint32>("entityFlags", 0);
-        PNpc->m_flags = flags == 0 ? PNpc->m_flags : flags;
+        auto flags    = static_cast<xi::EntityFlags>(table.get_or<uint32>("entityFlags", 0));
+        PNpc->m_flags = flags == xi::EntityFlags::None ? PNpc->m_flags : flags;
 
         // Ensure that the npc is triggerable if onTrigger is passed in
         auto onTrigger = table["onTrigger"].get_or<sol::function>(sol::lua_nil);
@@ -6043,8 +6043,8 @@ CBaseEntity* GenerateDynamicEntity(CZone* PZone, CInstance* PInstance, sol::tabl
 
         PMob->spawnAnimation = table["specialSpawnAnimation"].get_or(false) ? xi::SpawnAnimation::Special : xi::SpawnAnimation::Normal;
 
-        uint32 flags  = table.get_or<uint32>("entityFlags", 0);
-        PMob->m_flags = flags == 0 ? PMob->m_flags : flags;
+        auto flags    = static_cast<xi::EntityFlags>(table.get_or<uint32>("entityFlags", 0));
+        PMob->m_flags = flags == xi::EntityFlags::None ? PMob->m_flags : flags;
 
         // Ensure mobs get a function for onMobDeath
         auto onMobDeath = table["onMobDeath"].get<sol::function>();

@@ -89,25 +89,25 @@ struct SynthRecipe
     std::string ResultName;
     std::string ContentTag;
 
-    uint16 getSkillValue(SKILLTYPE type) const
+    uint16 getSkillValue(xi::SkillType type) const
     {
         switch (type)
         {
-            case SKILL_WOODWORKING:
+            case xi::SkillType::Woodworking:
                 return Wood;
-            case SKILL_SMITHING:
+            case xi::SkillType::Smithing:
                 return Smith;
-            case SKILL_GOLDSMITHING:
+            case xi::SkillType::Goldsmithing:
                 return Gold;
-            case SKILL_CLOTHCRAFT:
+            case xi::SkillType::Clothcraft:
                 return Cloth;
-            case SKILL_LEATHERCRAFT:
+            case xi::SkillType::Leathercraft:
                 return Leather;
-            case SKILL_BONECRAFT:
+            case xi::SkillType::Bonecraft:
                 return Bone;
-            case SKILL_ALCHEMY:
+            case xi::SkillType::Alchemy:
                 return Alchemy;
-            case SKILL_COOKING:
+            case xi::SkillType::Cooking:
                 return Cook;
             default:
                 return 0;
@@ -400,12 +400,12 @@ auto resolveRecipe(CCharEntity* PChar, const SynthOffer& offer) -> bool
         data.ingredientItemIds[i] = offer.ingredients[i].itemId;
     }
 
-    for (uint8 skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID)
+    for (uint8 skillID = static_cast<uint8>(xi::SkillType::Woodworking); skillID <= static_cast<uint8>(xi::SkillType::Cooking); ++skillID)
     {
-        const uint16 skillValue   = recipe.getSkillValue(static_cast<SKILLTYPE>(skillID));
+        const uint16 skillValue   = recipe.getSkillValue(static_cast<xi::SkillType>(skillID));
         const uint16 currentSkill = PChar->RealSkills.skill[skillID];
 
-        data.skillRequired[skillID - SKILL_WOODWORKING] = static_cast<uint8>(skillValue);
+        data.skillRequired[skillID - static_cast<uint8>(xi::SkillType::Woodworking)] = static_cast<uint8>(skillValue);
 
         if (currentSkill < (skillValue * 10 - 150))
         {
@@ -423,36 +423,38 @@ auto getSynthDifficulty(CCharEntity* PChar, uint8 skillID) -> int16
 {
     Mod ModID = Mod::NONE;
 
-    switch (skillID)
+    switch (static_cast<xi::SkillType>(skillID))
     {
-        case SKILL_WOODWORKING:
+        case xi::SkillType::Woodworking:
             ModID = Mod::WOOD;
             break;
-        case SKILL_SMITHING:
+        case xi::SkillType::Smithing:
             ModID = Mod::SMITH;
             break;
-        case SKILL_GOLDSMITHING:
+        case xi::SkillType::Goldsmithing:
             ModID = Mod::GOLDSMITH;
             break;
-        case SKILL_CLOTHCRAFT:
+        case xi::SkillType::Clothcraft:
             ModID = Mod::CLOTH;
             break;
-        case SKILL_LEATHERCRAFT:
+        case xi::SkillType::Leathercraft:
             ModID = Mod::LEATHER;
             break;
-        case SKILL_BONECRAFT:
+        case xi::SkillType::Bonecraft:
             ModID = Mod::BONE;
             break;
-        case SKILL_ALCHEMY:
+        case xi::SkillType::Alchemy:
             ModID = Mod::ALCHEMY;
             break;
-        case SKILL_COOKING:
+        case xi::SkillType::Cooking:
             ModID = Mod::COOK;
+            break;
+        default:
             break;
     }
 
     const uint8 charSkill  = static_cast<uint8>(PChar->RealSkills.skill[skillID] / 10); // Player skill level is truncated before synth difficulty is calculated
-    const int16 difficulty = static_cast<int16>(PChar->craftState().skillRequired(skillID - SKILL_WOODWORKING) - charSkill - PChar->getMod(ModID));
+    const int16 difficulty = static_cast<int16>(PChar->craftState().skillRequired(skillID - static_cast<uint8>(xi::SkillType::Woodworking)) - charSkill - PChar->getMod(ModID));
 
     return difficulty;
 }
@@ -462,31 +464,33 @@ auto canSynthesizeHQ(CCharEntity* PChar, uint8 skillID) -> bool
 {
     Mod ModID = Mod::NONE;
 
-    switch (skillID)
+    switch (static_cast<xi::SkillType>(skillID))
     {
-        case SKILL_WOODWORKING:
+        case xi::SkillType::Woodworking:
             ModID = Mod::SYNTH_ANTI_HQ_WOODWORKING;
             break;
-        case SKILL_SMITHING:
+        case xi::SkillType::Smithing:
             ModID = Mod::SYNTH_ANTI_HQ_SMITHING;
             break;
-        case SKILL_GOLDSMITHING:
+        case xi::SkillType::Goldsmithing:
             ModID = Mod::SYNTH_ANTI_HQ_GOLDSMITHING;
             break;
-        case SKILL_CLOTHCRAFT:
+        case xi::SkillType::Clothcraft:
             ModID = Mod::SYNTH_ANTI_HQ_CLOTHCRAFT;
             break;
-        case SKILL_LEATHERCRAFT:
+        case xi::SkillType::Leathercraft:
             ModID = Mod::SYNTH_ANTI_HQ_LEATHERCRAFT;
             break;
-        case SKILL_BONECRAFT:
+        case xi::SkillType::Bonecraft:
             ModID = Mod::SYNTH_ANTI_HQ_BONECRAFT;
             break;
-        case SKILL_ALCHEMY:
+        case xi::SkillType::Alchemy:
             ModID = Mod::SYNTH_ANTI_HQ_ALCHEMY;
             break;
-        case SKILL_COOKING:
+        case xi::SkillType::Cooking:
             ModID = Mod::SYNTH_ANTI_HQ_COOKING;
+            break;
+        default:
             break;
     }
 
@@ -506,10 +510,10 @@ auto calculateSynthResult(CCharEntity* PChar) -> uint8
     //------------------------------
     // Section 2: Break handling
     //------------------------------
-    for (skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID)
+    for (skillID = static_cast<uint8>(xi::SkillType::Woodworking); skillID <= static_cast<uint8>(xi::SkillType::Cooking); ++skillID)
     {
         // Skip current iteration if skill isn't involved.
-        if (PChar->craftState().skillRequired(skillID - SKILL_WOODWORKING) == 0)
+        if (PChar->craftState().skillRequired(skillID - static_cast<uint8>(xi::SkillType::Woodworking)) == 0)
         {
             continue;
         }
@@ -653,10 +657,10 @@ auto calculateDesynthResult(CCharEntity* PChar) -> uint8
     bool   canHQ           = true;
 
     // Calculate success or break.
-    for (skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID)
+    for (skillID = static_cast<uint8>(xi::SkillType::Woodworking); skillID <= static_cast<uint8>(xi::SkillType::Cooking); ++skillID)
     {
         // Skip current iteration if skill isn't involved.
-        if (PChar->craftState().skillRequired(skillID - SKILL_WOODWORKING) == 0)
+        if (PChar->craftState().skillRequired(skillID - static_cast<uint8>(xi::SkillType::Woodworking)) == 0)
         {
             continue;
         }
@@ -786,7 +790,7 @@ void handleMaterialLoss(CCharEntity* PChar)
 
     const int16 breakGlobalReduction    = PChar->getMod(Mod::SYNTH_MATERIAL_LOSS);
     const int16 breakElementalReduction = PChar->getMod(static_cast<Mod>(static_cast<int32>(Mod::SYNTH_MATERIAL_LOSS_FIRE) + craftState.element()));
-    const int16 breakTypeReduction      = PChar->getMod(static_cast<Mod>(static_cast<int32>(Mod::SYNTH_MATERIAL_LOSS_WOODWORKING) + currentCraft - SKILL_WOODWORKING));
+    const int16 breakTypeReduction      = PChar->getMod(static_cast<Mod>(static_cast<int32>(Mod::SYNTH_MATERIAL_LOSS_WOODWORKING) + currentCraft - static_cast<uint8>(xi::SkillType::Woodworking)));
     int16       synthDifficulty         = getSynthDifficulty(PChar, currentCraft);
 
     synthDifficulty = std::max<int16>(synthDifficulty, 0);
@@ -832,9 +836,9 @@ void handleSynthSuccess(CCharEntity* PChar)
     // Calculate what craft this recipe "belongs" to based on highest skill required
     uint32 skillType    = 0;
     uint32 highestSkill = 0;
-    for (uint8 skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID)
+    for (uint8 skillID = static_cast<uint8>(xi::SkillType::Woodworking); skillID <= static_cast<uint8>(xi::SkillType::Cooking); ++skillID)
     {
-        uint8 skillRequired = craftState.skillRequired(skillID - SKILL_WOODWORKING);
+        uint8 skillRequired = craftState.skillRequired(skillID - static_cast<uint8>(xi::SkillType::Woodworking));
         if (skillRequired > highestSkill)
         {
             skillType    = skillID;
@@ -888,14 +892,14 @@ void handleSynthFail(CCharEntity* PChar)
 // Used in: sendSynthDone
 void doSynthSkillUp(CCharEntity* PChar)
 {
-    for (uint8 skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID) // Check for all skills involved in a recipe, to check for skill up
+    for (uint8 skillID = static_cast<uint8>(xi::SkillType::Woodworking); skillID <= static_cast<uint8>(xi::SkillType::Cooking); ++skillID) // Check for all skills involved in a recipe, to check for skill up
     {
         //------------------------------
         // Section 1: Checks
         //------------------------------
 
         // We don't Skill Up if the recipe doesn't involve the currently checked skill.
-        if (PChar->craftState().skillRequired(skillID - SKILL_WOODWORKING) == 0)
+        if (PChar->craftState().skillRequired(skillID - static_cast<uint8>(xi::SkillType::Woodworking)) == 0)
         {
             continue; // Break current loop iteration.
         }
@@ -912,7 +916,7 @@ void doSynthSkillUp(CCharEntity* PChar)
         // We don't Skill Up if the recipe isn't difficult enough.
         // Era -> Char lvl must be bellow recipe level. Retail -> Char level myst be bellow recipe level + 10.
         // Char level does NOT count the effects of image support/gear.
-        const int16 baseDiff = static_cast<int16>(PChar->craftState().skillRequired(skillID - SKILL_WOODWORKING) - charSkill / 10);
+        const int16 baseDiff = static_cast<int16>(PChar->craftState().skillRequired(skillID - static_cast<uint8>(xi::SkillType::Woodworking)) - charSkill / 10);
         const int8  minDiff  = settings::get<bool>("map.CRAFT_MODERN_SYSTEM") ? -11 : 0;
         if (baseDiff <= minDiff)
         {
@@ -1042,7 +1046,7 @@ void doSynthSkillUp(CCharEntity* PChar)
 
         if ((charSkill + skillUpAmount) > craftCommonCap) // If server is using the specialization system
         {
-            for (uint8 i = SKILL_WOODWORKING; i <= SKILL_COOKING; i++) // Cycle through all skills
+            for (uint8 i = static_cast<uint8>(xi::SkillType::Woodworking); i <= static_cast<uint8>(xi::SkillType::Cooking); i++) // Cycle through all skills
             {
                 if (PChar->RealSkills.skill[i] > craftCommonCap) // If the skill being checked is above the cap from wich spezialitation points start counting.
                 {
@@ -1127,9 +1131,9 @@ void startSynth(CCharEntity* PChar, const SynthOffer& offer)
     // Calculate what craft this recipe "belongs" to based on highest skill required
     uint32 skillType    = 0;
     uint32 highestSkill = 0;
-    for (uint8 skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID)
+    for (uint8 skillID = static_cast<uint8>(xi::SkillType::Woodworking); skillID <= static_cast<uint8>(xi::SkillType::Cooking); ++skillID)
     {
-        if (const uint8 skillRequired = PChar->craftState().skillRequired(skillID - SKILL_WOODWORKING); skillRequired > highestSkill)
+        if (const uint8 skillRequired = PChar->craftState().skillRequired(skillID - static_cast<uint8>(xi::SkillType::Woodworking)); skillRequired > highestSkill)
         {
             skillType    = skillID;
             highestSkill = skillRequired;
@@ -1139,7 +1143,7 @@ void startSynth(CCharEntity* PChar, const SynthOffer& offer)
     PChar->animation = ANIMATION_SYNTH;
     PChar->updatemask |= UPDATE_HP;
     PChar->pushPacket<CCharStatusPacket>(PChar);
-    PChar->startSynth(static_cast<SKILLTYPE>(skillType));
+    PChar->startSynth(static_cast<xi::SkillType>(skillType));
 
     PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_EFFECT>(PChar, effect, result));
 }

@@ -406,14 +406,14 @@ void LoadAutomatonStats(CCharEntity* PMaster, CPetEntity* PPet, Pet_t* petStats,
     auto& tempStats  = PMaster->automatonInfo_.automatonStats;
     auto& tempHealth = PMaster->automatonInfo_.automatonHealth;
 
-    tempSkills.automaton_melee  = std::min(puppetutils::getSkillCap(PMaster, SKILL_AUTOMATON_MELEE, mlvl), PMaster->GetSkill(SKILL_AUTOMATON_MELEE));
-    tempSkills.automaton_ranged = std::min(puppetutils::getSkillCap(PMaster, SKILL_AUTOMATON_RANGED, mlvl), PMaster->GetSkill(SKILL_AUTOMATON_RANGED));
-    tempSkills.automaton_magic  = std::min(puppetutils::getSkillCap(PMaster, SKILL_AUTOMATON_MAGIC, mlvl), PMaster->GetSkill(SKILL_AUTOMATON_MAGIC));
+    tempSkills.automaton_melee  = std::min(puppetutils::getSkillCap(PMaster, xi::SkillType::AutomatonMelee, mlvl), PMaster->GetSkill(xi::SkillType::AutomatonMelee));
+    tempSkills.automaton_ranged = std::min(puppetutils::getSkillCap(PMaster, xi::SkillType::AutomatonRanged, mlvl), PMaster->GetSkill(xi::SkillType::AutomatonRanged));
+    tempSkills.automaton_magic  = std::min(puppetutils::getSkillCap(PMaster, xi::SkillType::AutomatonMagic, mlvl), PMaster->GetSkill(xi::SkillType::AutomatonMagic));
 
     // Set capped flags
     for (int i = 22; i <= 24; ++i)
     {
-        if ((tempSkills.skill[i] & 0x7FFF) == (puppetutils::getSkillCap(PMaster, (SKILLTYPE)i, mlvl)))
+        if ((tempSkills.skill[i] & 0x7FFF) == (puppetutils::getSkillCap(PMaster, (xi::SkillType)i, mlvl)))
         {
             tempSkills.skill[i] |= 0x8000;
         }
@@ -431,12 +431,12 @@ void LoadAutomatonStats(CCharEntity* PMaster, CPetEntity* PPet, Pet_t* petStats,
     int32 meritbonus = PMaster->PMeritPoints->GetMeritValue(MERIT_AUTOMATON_SKILLS, PMaster);
 
     // If skill rank is 0, merit bonus needs to be added to be displayed like retail does
-    if (puppetutils::getSkillCap(PMaster, SKILL_AUTOMATON_RANGED, mlvl) == 0)
+    if (puppetutils::getSkillCap(PMaster, xi::SkillType::AutomatonRanged, mlvl) == 0)
     {
         tempSkills.automaton_ranged = meritbonus + PMaster->getMod(Mod::AUTO_RANGED_SKILL);
     }
 
-    if (puppetutils::getSkillCap(PMaster, SKILL_AUTOMATON_MAGIC, mlvl) == 0)
+    if (puppetutils::getSkillCap(PMaster, xi::SkillType::AutomatonMagic, mlvl) == 0)
     {
         auto modBonus = PMaster->getMod(Mod::AUTO_MAGIC_SKILL);
 
@@ -669,13 +669,13 @@ void LoadAutomatonStats(CCharEntity* PMaster, CPetEntity* PPet, Pet_t* petStats,
         PPet->name      = PMaster->automatonInfo_.automatonName;
         PPet->look.size = MODEL_AUTOMATON;
 
-        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setSkillType(SKILL_AUTOMATON_MELEE);
+        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setSkillType(xi::SkillType::AutomatonMelee);
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay(petStats->cmbDelay); // every pet should use this eventually
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay(petStats->cmbDelay);
-        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage(static_cast<uint16>(std::floor((PPet->GetSkill(SKILL_AUTOMATON_MELEE) / 8.7f) * 2.0f + 3.0f)));
+        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage(static_cast<uint16>(std::floor((PPet->GetSkill(xi::SkillType::AutomatonMelee) / 8.7f) * 2.0f + 3.0f)));
 
-        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setSkillType(SKILL_AUTOMATON_RANGED);
-        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setDamage(static_cast<uint16>(std::floor((PPet->GetSkill(SKILL_AUTOMATON_RANGED) / 8.7f) * 2.0f + 3.0f)));
+        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setSkillType(xi::SkillType::AutomatonRanged);
+        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setDamage(static_cast<uint16>(std::floor((PPet->GetSkill(xi::SkillType::AutomatonRanged) / 8.7f) * 2.0f + 3.0f)));
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setDmgType(xi::DamageType::Piercing);
 
         // Automatons are hard to interrupt
@@ -801,7 +801,7 @@ void LoadAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
     PPet->health.mp    = PPet->health.maxmp;
 
     // add in evasion from skill
-    int16 evaskill = PPet->GetSkill(SKILL_EVASION);
+    int16 evaskill = PPet->GetSkill(xi::SkillType::Evasion);
     int16 eva      = evaskill;
     if (evaskill > 200)
     { // Evasion skill is 0.9 evasion post-200
@@ -933,17 +933,17 @@ void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
 
     // Set B+ weapon skill (assumed capped for level derp)
     // attack is madly high for avatars (roughly x2)
-    PPet->setModifier(Mod::ATT, 2 * battleutils::GetMaxSkill(SKILL_CLUB, JOB_WHM, mLvl > 99 ? 99 : mLvl));
-    PPet->setModifier(Mod::ACC, battleutils::GetMaxSkill(SKILL_CLUB, JOB_WHM, mLvl > 99 ? 99 : mLvl));
+    PPet->setModifier(Mod::ATT, 2 * battleutils::GetMaxSkill(xi::SkillType::Club, JOB_WHM, mLvl > 99 ? 99 : mLvl));
+    PPet->setModifier(Mod::ACC, battleutils::GetMaxSkill(xi::SkillType::Club, JOB_WHM, mLvl > 99 ? 99 : mLvl));
 
     // Set E evasion and def
-    PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, mLvl > 99 ? 99 : mLvl));
-    PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, mLvl > 99 ? 99 : mLvl));
+    PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(xi::SkillType::Throwing, JOB_WHM, mLvl > 99 ? 99 : mLvl));
+    PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(xi::SkillType::Throwing, JOB_WHM, mLvl > 99 ? 99 : mLvl));
 
     // cap all magic skills so they play nice with spell scripts
-    for (int i = SKILL_DIVINE_MAGIC; i <= SKILL_BLUE_MAGIC; i++)
+    for (int i = static_cast<int>(xi::SkillType::DivineMagic); i <= static_cast<int>(xi::SkillType::BlueMagic); i++)
     {
-        uint16 maxSkill = battleutils::GetMaxSkill((SKILLTYPE)i, PPet->GetMJob(), mLvl > 99 ? 99 : mLvl);
+        uint16 maxSkill = battleutils::GetMaxSkill((xi::SkillType)i, PPet->GetMJob(), mLvl > 99 ? 99 : mLvl);
         if (maxSkill != 0)
         {
             PPet->WorkingSkills.skill[i] = maxSkill;
@@ -951,7 +951,7 @@ void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
         else // if the mob is WAR/BLM and can cast spell
         {
             // set skill as high as main level, so their spells won't get resisted
-            uint16 maxSubSkill = battleutils::GetMaxSkill((SKILLTYPE)i, PPet->GetSJob(), mLvl > 99 ? 99 : mLvl);
+            uint16 maxSubSkill = battleutils::GetMaxSkill((xi::SkillType)i, PPet->GetSJob(), mLvl > 99 ? 99 : mLvl);
 
             if (maxSubSkill != 0)
             {
@@ -1013,11 +1013,11 @@ void CalculateWyvernStats(CBattleEntity* PMaster, CPetEntity* PPet)
     static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay(320);
     static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage((uint16)(floor(mLvl / 2) + 3));
     // Set A+ weapon skill
-    PPet->setModifier(Mod::ATT, battleutils::GetMaxSkill(SKILL_GREAT_AXE, JOB_WAR, mLvl > 99 ? 99 : mLvl));
-    PPet->setModifier(Mod::ACC, battleutils::GetMaxSkill(SKILL_GREAT_AXE, JOB_WAR, mLvl > 99 ? 99 : mLvl));
+    PPet->setModifier(Mod::ATT, battleutils::GetMaxSkill(xi::SkillType::GreatAxe, JOB_WAR, mLvl > 99 ? 99 : mLvl));
+    PPet->setModifier(Mod::ACC, battleutils::GetMaxSkill(xi::SkillType::GreatAxe, JOB_WAR, mLvl > 99 ? 99 : mLvl));
     // Set D evasion and def
-    PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, mLvl > 99 ? 99 : mLvl));
-    PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, mLvl > 99 ? 99 : mLvl));
+    PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(xi::SkillType::HandToHand, JOB_WAR, mLvl > 99 ? 99 : mLvl));
+    PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(xi::SkillType::HandToHand, JOB_WAR, mLvl > 99 ? 99 : mLvl));
 
     // https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#Combat_Stats
     // innate -40 % DT, which does not contribute to the -50 % cap (this is a unique attribute to pets having a "higher" DT cap)
@@ -1169,7 +1169,7 @@ void CalculateLuopanStats(CBattleEntity* PMaster, CPetEntity* PPet)
     // This sets the correct visual size for the luopan as pets currently
     // do not make use of the entity flags in the database
     // TODO: make pets use entity flags
-    PPet->m_flags = 0x0000008B;
+    PPet->m_flags = static_cast<xi::EntityFlags>(0x0000008B);
     // Just sit, do nothing
     PPet->baseSpeed = 0;
     PPet->UpdateSpeed();

@@ -207,7 +207,7 @@ auto CLuaItem::getAugment(uint8 slot) -> sol::table
 uint8 CLuaItem::getSkillType()
 {
     auto* PItem = dynamic_cast<const CItemWeapon*>(m_readItem);
-    return PItem ? PItem->getSkillType() : -1;
+    return PItem ? static_cast<uint8>(PItem->getSkillType()) : -1;
 }
 
 uint16 CLuaItem::getWeaponskillPoints()

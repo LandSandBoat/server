@@ -460,7 +460,7 @@ void CZoneEntities::WeatherChange(xi::Weather weather)
     {
         PCurrentMob->PAI->EventHandler.triggerListener("WEATHER_CHANGE", CLuaBaseEntity(PCurrentMob), static_cast<int>(weather), element);
 
-        if (PCurrentMob->getMobMod(MOBMOD_DETECTION) & DETECT_SCENT)
+        if ((static_cast<xi::Detects>(PCurrentMob->getMobMod(MOBMOD_DETECTION)) & xi::Detects::Scent) != xi::Detects::None)
         {
             PCurrentMob->m_disableScent = (weather == xi::Weather::Rain || weather == xi::Weather::Squall || weather == xi::Weather::Blizzards);
         }

@@ -37,7 +37,7 @@ CItemWeapon::CItemWeapon(uint16 id)
 {
     setType(ITEM_WEAPON);
 
-    m_skillType      = SKILL_NONE;
+    m_skillType      = xi::SkillType::None;
     m_subSkillType   = SUBSKILL_XBOW_SHORTBOW;
     m_iLvlSkill      = 0;
     m_iLvlParry      = 0;
@@ -105,7 +105,7 @@ bool CItemWeapon::isRanged() const
 
 bool CItemWeapon::isThrowing() const
 {
-    return isRanged() && getSkillType() == SKILL_THROWING;
+    return isRanged() && getSkillType() == xi::SkillType::Throwing;
 }
 
 /************************************************************************
@@ -138,7 +138,7 @@ bool CItemWeapon::isTwoHanded() const
 
 bool CItemWeapon::isHandToHand() const
 {
-    return getSkillType() == SKILL_HAND_TO_HAND;
+    return getSkillType() == xi::SkillType::HandToHand;
 }
 
 /************************************************************************
@@ -149,7 +149,7 @@ bool CItemWeapon::isHandToHand() const
 
 bool CItemWeapon::isUnlockable() const
 {
-    if (m_skillType == SKILL_NONE)
+    if (m_skillType == xi::SkillType::None)
     {
         return false;
     }
@@ -196,22 +196,24 @@ bool CItemWeapon::addWsPoints(uint16 points)
  *                                                                       *
  ************************************************************************/
 
-void CItemWeapon::setSkillType(uint8 skillType)
+void CItemWeapon::setSkillType(xi::SkillType skillType)
 {
     switch (skillType)
     {
-        case SKILL_GREAT_SWORD:
-        case SKILL_GREAT_AXE:
-        case SKILL_SCYTHE:
-        case SKILL_POLEARM:
-        case SKILL_GREAT_KATANA:
-        case SKILL_STAFF:
+        case xi::SkillType::GreatSword:
+        case xi::SkillType::GreatAxe:
+        case xi::SkillType::Scythe:
+        case xi::SkillType::Polearm:
+        case xi::SkillType::GreatKatana:
+        case xi::SkillType::Staff:
             m_twoHanded = true;
             break;
-        case SKILL_ARCHERY:
-        case SKILL_MARKSMANSHIP:
-        case SKILL_THROWING:
+        case xi::SkillType::Archery:
+        case xi::SkillType::Marksmanship:
+        case xi::SkillType::Throwing:
             m_ranged = true;
+            break;
+        default:
             break;
     }
     m_skillType = skillType;
@@ -223,7 +225,7 @@ void CItemWeapon::setSkillType(uint8 skillType)
  *                                                                      *
  ************************************************************************/
 
-uint8 CItemWeapon::getSkillType() const
+auto CItemWeapon::getSkillType() const -> xi::SkillType
 {
     return m_skillType;
 }

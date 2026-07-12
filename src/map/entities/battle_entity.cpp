@@ -659,7 +659,7 @@ uint16 CBattleEntity::GetMainWeaponDmg()
 
         if (PPetEntity->getPetType() == PET_TYPE::AUTOMATON)
         {
-            return std::floor((GetSkill(SKILL_AUTOMATON_MELEE) / 8.7f) * 2.0f + 3.0f) + getMod(Mod::MAIN_DMG_RATING);
+            return std::floor((GetSkill(xi::SkillType::AutomatonMelee) / 8.7f) * 2.0f + 3.0f) + getMod(Mod::MAIN_DMG_RATING);
         }
         else if (PPetEntity->getPetType() == PET_TYPE::WYVERN)
         {
@@ -811,7 +811,7 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
 
         if (PPetEntity->getPetType() == PET_TYPE::AUTOMATON)
         {
-            return std::floor((GetSkill(SKILL_AUTOMATON_RANGED) / 8.7f) * 2.0f + 3.0f) + getMod(Mod::RANGED_DMG_RATING);
+            return std::floor((GetSkill(xi::SkillType::AutomatonRanged) / 8.7f) * 2.0f + 3.0f) + getMod(Mod::RANGED_DMG_RATING);
         }
         else if (PPetEntity->getPetType() == PET_TYPE::WYVERN)
         {
@@ -882,7 +882,7 @@ uint16 CBattleEntity::GetMainWeaponRank()
         wDamage -= weapon->getModifier(Mod::DMG_RATING);    // Company sword, Maneater, etc don't boost weapon rank
         // apply the H2H formula adjustment only to players
         // as mobs use H2H for dual wield and thus further research is needed
-        if (objtype == TYPE_PC && weapon->getSkillType() == SKILL_HAND_TO_HAND)
+        if (objtype == TYPE_PC && weapon->getSkillType() == xi::SkillType::HandToHand)
         {
             wDamage += 3;
         }
@@ -1183,7 +1183,7 @@ uint16 CBattleEntity::ATT(SLOTTYPE slot)
     }
     else if (this->objtype == TYPE_PET && ((CPetEntity*)this)->getPetType() == PET_TYPE::AUTOMATON)
     {
-        ATT += this->GetSkill(SKILL_AUTOMATON_MELEE);
+        ATT += this->GetSkill(xi::SkillType::AutomatonMelee);
     }
     else if (this->objtype == TYPE_PET)
     {
@@ -1224,7 +1224,7 @@ auto CBattleEntity::RATT(uint16 bonusAtt) -> uint16
         auto* weapon  = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_RANGED]);
 
         // Return 0 if ranged weapon but no ammo
-        if (weapon && weapon->getSkillType() != SKILL_THROWING && dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_AMMO]) == nullptr)
+        if (weapon && weapon->getSkillType() != xi::SkillType::Throwing && dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_AMMO]) == nullptr)
         {
             return 0;
         }
@@ -1238,12 +1238,12 @@ auto CBattleEntity::RATT(uint16 bonusAtt) -> uint16
         if (weapon)
         {
             // non-damaging weapon
-            if (weapon->getDmgType() == xi::DamageType::None || weapon->getSkillType() == SKILL_NONE)
+            if (weapon->getDmgType() == xi::DamageType::None || weapon->getSkillType() == xi::SkillType::None)
             {
                 return 0;
             }
 
-            if (weapon->getSkillType() != SKILL_FISHING)
+            if (weapon->getSkillType() != xi::SkillType::Fishing)
             {
                 skillLevel = GetSkill(weapon->getSkillType());
                 skillLevel += weapon->getILvlSkill();
@@ -1257,15 +1257,15 @@ auto CBattleEntity::RATT(uint16 bonusAtt) -> uint16
     }
     else if (objtype & TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AUTOMATON)
     {
-        skillLevel = this->GetSkill(SKILL_AUTOMATON_RANGED);
+        skillLevel = this->GetSkill(xi::SkillType::AutomatonRanged);
     }
     else if (objtype & TYPE_TRUST)
     {
         strMultiplier = 0.75; // TODO: verify
 
-        auto archery_acc      = this->GetSkill(SKILL_ARCHERY);
-        auto marksmanship_acc = this->GetSkill(SKILL_MARKSMANSHIP);
-        auto throwing_acc     = this->GetSkill(SKILL_THROWING);
+        auto archery_acc      = this->GetSkill(xi::SkillType::Archery);
+        auto marksmanship_acc = this->GetSkill(xi::SkillType::Marksmanship);
+        auto throwing_acc     = this->GetSkill(xi::SkillType::Throwing);
 
         skillLevel = std::max({ archery_acc, marksmanship_acc, throwing_acc });
     }
@@ -1313,7 +1313,7 @@ auto CBattleEntity::RACC(uint16 bonusAcc) -> uint16
         auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_RANGED]);
 
         // Return 0 if ranged weapon but no ammo
-        if (weapon && weapon->getSkillType() != SKILL_THROWING && dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_AMMO]) == nullptr)
+        if (weapon && weapon->getSkillType() != xi::SkillType::Throwing && dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_AMMO]) == nullptr)
         {
             return 0;
         }
@@ -1329,12 +1329,12 @@ auto CBattleEntity::RACC(uint16 bonusAcc) -> uint16
         if (weapon)
         {
             // non-damaging weapon
-            if (weapon->getDmgType() == xi::DamageType::None || weapon->getSkillType() == SKILL_NONE)
+            if (weapon->getDmgType() == xi::DamageType::None || weapon->getSkillType() == xi::SkillType::None)
             {
                 return 0;
             }
 
-            if (weapon->getSkillType() != SKILL_FISHING)
+            if (weapon->getSkillType() != xi::SkillType::Fishing)
             {
                 skillLevel = GetSkill(weapon->getSkillType());
                 skillLevel += weapon->getILvlSkill();
@@ -1355,7 +1355,7 @@ auto CBattleEntity::RACC(uint16 bonusAcc) -> uint16
     }
     else if (objtype & TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AUTOMATON)
     {
-        uint16 skillLevel = this->GetSkill(SKILL_AUTOMATON_RANGED);
+        uint16 skillLevel = this->GetSkill(xi::SkillType::AutomatonRanged);
 
         RACC = GetAccFromSkill(skillLevel);
         RACC += std::floor(AGI() * 0.5);
@@ -1365,9 +1365,9 @@ auto CBattleEntity::RACC(uint16 bonusAcc) -> uint16
     }
     else if (objtype & TYPE_TRUST)
     {
-        auto archery_acc      = this->GetSkill(SKILL_ARCHERY);
-        auto marksmanship_acc = this->GetSkill(SKILL_MARKSMANSHIP);
-        auto throwing_acc     = this->GetSkill(SKILL_THROWING);
+        auto archery_acc      = this->GetSkill(xi::SkillType::Archery);
+        auto marksmanship_acc = this->GetSkill(xi::SkillType::Marksmanship);
+        auto throwing_acc     = this->GetSkill(xi::SkillType::Throwing);
 
         RACC = GetAccFromSkill(std::max({ archery_acc, marksmanship_acc, throwing_acc }));
         RACC += std::floor(AGI() * 0.75); // 0.75 needs verification
@@ -1420,10 +1420,10 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
 
     if (this->objtype & TYPE_PC)
     {
-        float  dexMultiplier = 0.5f;
-        uint8  skill         = 0;
-        uint16 iLvlSkill     = 0;
-        auto*  PMainWeapon   = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]);
+        float         dexMultiplier = 0.5f;
+        xi::SkillType skill         = xi::SkillType::None;
+        uint16        iLvlSkill     = 0;
+        auto*         PMainWeapon   = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]);
 
         if (attackNumber == 0)
         {
@@ -1433,9 +1433,9 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
             {
                 skill     = PMainWeapon->getSkillType();
                 iLvlSkill = PMainWeapon->getILvlSkill();
-                if ((skill == SKILL_NONE && GetSkill(SKILL_HAND_TO_HAND) > 0) || PMainWeapon->isHandToHand())
+                if ((skill == xi::SkillType::None && GetSkill(xi::SkillType::HandToHand) > 0) || PMainWeapon->isHandToHand())
                 {
-                    skill         = SKILL_HAND_TO_HAND;
+                    skill         = xi::SkillType::HandToHand;
                     dexMultiplier = settings::get<float>("main.HAND_TO_HAND_DEX_ACCURACY_MULTIPLIER");
                 }
             }
@@ -1448,12 +1448,12 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
                 skill         = weapon->getSkillType();
                 iLvlSkill     = weapon->getILvlSkill();
 
-                if (skill == SKILL_NONE && GetSkill(SKILL_HAND_TO_HAND) > 0)
+                if (skill == xi::SkillType::None && GetSkill(xi::SkillType::HandToHand) > 0)
                 {
                     auto* main_weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]);
-                    if (main_weapon && (main_weapon->getSkillType() == SKILL_NONE || main_weapon->getSkillType() == SKILL_HAND_TO_HAND))
+                    if (main_weapon && (main_weapon->getSkillType() == xi::SkillType::None || main_weapon->getSkillType() == xi::SkillType::HandToHand))
                     {
-                        skill         = SKILL_HAND_TO_HAND;
+                        skill         = xi::SkillType::HandToHand;
                         dexMultiplier = settings::get<float>("main.HAND_TO_HAND_DEX_ACCURACY_MULTIPLIER");
                     }
                 }
@@ -1461,7 +1461,7 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
             else if (PMainWeapon && PMainWeapon->isHandToHand())
             {
                 iLvlSkill     = PMainWeapon->getILvlSkill();
-                skill         = SKILL_HAND_TO_HAND;
+                skill         = xi::SkillType::HandToHand;
                 dexMultiplier = settings::get<float>("main.HAND_TO_HAND_DEX_ACCURACY_MULTIPLIER");
             }
         }
@@ -1471,7 +1471,7 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
             {
                 iLvlSkill = weapon->getILvlSkill();
             }
-            skill         = SKILL_HAND_TO_HAND;
+            skill         = xi::SkillType::HandToHand;
             dexMultiplier = settings::get<float>("main.HAND_TO_HAND_DEX_ACCURACY_MULTIPLIER");
         }
 
@@ -1512,7 +1512,7 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
     }
     else if (this->objtype == TYPE_PET && ((CPetEntity*)this)->getPetType() == PET_TYPE::AUTOMATON)
     {
-        int32 skillLevel = this->GetSkill(SKILL_AUTOMATON_MELEE);
+        int32 skillLevel = this->GetSkill(xi::SkillType::AutomatonMelee);
 
         ACC = GetAccFromSkill(skillLevel);
         ACC += std::floor(DEX() * 0.5);
@@ -1636,9 +1636,9 @@ uint16 CBattleEntity::EVA()
     {
         evasion = getMod(Mod::EVA); // Mobs and pets base evasion is based off the EVA mod
     }
-    else // Players and automatons use SKILL_EVASION
+    else // Players and automatons use xi::SkillType::Evasion
     {
-        evasion = GetSkill(SKILL_EVASION);
+        evasion = GetSkill(xi::SkillType::Evasion);
 
         // Skill based evasion calculation
         if (evasion > 200)
@@ -2228,13 +2228,13 @@ void CBattleEntity::removePetModifiers(CPetEntity* PPet)
  *                                                                      *
  ************************************************************************/
 
-uint16 CBattleEntity::GetSkill(uint16 SkillID)
+uint16 CBattleEntity::GetSkill(xi::SkillType SkillID)
 {
     TracyZoneScoped;
 
-    if (SkillID < MAX_SKILLTYPE)
+    if (static_cast<uint8>(SkillID) < MAX_SKILLTYPE)
     {
-        return WorkingSkills.skill[SkillID] & 0x7FFF;
+        return WorkingSkills.skill[static_cast<uint8>(SkillID)] & 0x7FFF;
     }
     return 0;
 }
@@ -2536,7 +2536,7 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
             damage = luautils::OnSpellCast(this, PTarget, PSpell);
 
             // Remove Saboteur
-            if (PSpell->getSkillType() == SKILLTYPE::SKILL_ENFEEBLING_MAGIC)
+            if (PSpell->getSkillType() == xi::SkillType::EnfeeblingMagic)
             {
                 StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Saboteur);
             }
@@ -2678,7 +2678,7 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
         // No mobs should claim with magic not even charmed mobs.
 
         bool isTargetValidMob = (PActionTarget->objtype == TYPE_MOB && PActionTarget->allegiance != this->allegiance);
-        bool isNotSummoning   = (PSpell->getSkillType() != SKILL_SUMMONING_MAGIC);
+        bool isNotSummoning   = (PSpell->getSkillType() != xi::SkillType::SummoningMagic);
         bool isAutomaton      = (this->objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AUTOMATON);
         bool isMob            = (this->objtype == TYPE_MOB);
 
@@ -2693,26 +2693,26 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
     StatusEffectContainer->DelStatusEffectsByFlag(xi::StatusEffectFlag::MagicEnd);
 
     // Remove Divine Emblem effect.
-    if (PSpell->getSkillType() == SKILL_DIVINE_MAGIC && StatusEffectContainer->HasStatusEffect(xi::StatusEffect::DivineEmblem))
+    if (PSpell->getSkillType() == xi::SkillType::DivineMagic && StatusEffectContainer->HasStatusEffect(xi::StatusEffect::DivineEmblem))
     {
         StatusEffectContainer->DelStatusEffect(xi::StatusEffect::DivineEmblem);
     }
 
     // Remove Stymie effect.
-    if (PSpell->getSkillType() == SKILL_ENFEEBLING_MAGIC && StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Stymie))
+    if (PSpell->getSkillType() == xi::SkillType::EnfeeblingMagic && StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Stymie))
     {
         StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Stymie);
     }
 
     // Remove Cascade effect and consume TP.
-    if (PSpell->getSkillType() == SKILL_ELEMENTAL_MAGIC && StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Cascade))
+    if (PSpell->getSkillType() == xi::SkillType::ElementalMagic && StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Cascade))
     {
         StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Cascade);
         this->health.tp = 0;
     }
 
     // Remove Marcato effect.
-    if (PSpell->getSkillType() == SKILL_SINGING && StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Marcato))
+    if (PSpell->getSkillType() == xi::SkillType::Singing && StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Marcato))
     {
         StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Marcato);
     }
@@ -3312,11 +3312,11 @@ void CBattleEntity::OnRangedAttack(CRangeState& state, action_t& action)
                 {
                     if (slot == SLOT_RANGED && PItem != nullptr)
                     {
-                        charutils::TrySkillUP(PChar, static_cast<SKILLTYPE>(PItem->getSkillType()), PTarget->GetMLevel());
+                        charutils::TrySkillUP(PChar, PItem->getSkillType(), PTarget->GetMLevel());
                     }
                     else if (slot == SLOT_AMMO && PAmmo != nullptr)
                     {
-                        charutils::TrySkillUP(PChar, static_cast<SKILLTYPE>(PAmmo->getSkillType()), PTarget->GetMLevel());
+                        charutils::TrySkillUP(PChar, PAmmo->getSkillType(), PTarget->GetMLevel());
                     }
                 }
                 totalDamage += damage;
@@ -3719,29 +3719,29 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                     }
                     else
                     {
-                        int32     naturalh2hDMG = 0;
-                        auto*     targ_weapon   = dynamic_cast<CItemWeapon*>(PTarget->m_Weapons[SLOT_MAIN]);
-                        SKILLTYPE skilltype     = SKILLTYPE::SKILL_NONE;
+                        int32         naturalh2hDMG = 0;
+                        auto*         targ_weapon   = dynamic_cast<CItemWeapon*>(PTarget->m_Weapons[SLOT_MAIN]);
+                        xi::SkillType skilltype     = xi::SkillType::None;
 
                         if (PTarget->objtype == TYPE_PC)
                         {
                             if (targ_weapon)
                             {
-                                skilltype = static_cast<SKILLTYPE>(targ_weapon->getSkillType());
+                                skilltype = targ_weapon->getSkillType();
                             }
                             else
                             {
-                                skilltype = SKILLTYPE::SKILL_HAND_TO_HAND;
+                                skilltype = xi::SkillType::HandToHand;
                             }
                         }
 
                         float mobH2HPenalty = 1.0f;
 
-                        if (PTarget->objtype == TYPE_PC && skilltype == SKILLTYPE::SKILL_HAND_TO_HAND)
+                        if (PTarget->objtype == TYPE_PC && skilltype == xi::SkillType::HandToHand)
                         {
-                            naturalh2hDMG = std::floor<int32>((PTarget->GetSkill(SKILL_HAND_TO_HAND) * 0.11f) + 3);
+                            naturalh2hDMG = std::floor<int32>((PTarget->GetSkill(xi::SkillType::HandToHand) * 0.11f) + 3);
                         }
-                        else if (PTarget->objtype == TYPE_MOB && targ_weapon && targ_weapon->getSkillType() == SKILLTYPE::SKILL_HAND_TO_HAND) // This is how Attack Round checks for h2h penalty
+                        else if (PTarget->objtype == TYPE_MOB && targ_weapon && targ_weapon->getSkillType() == xi::SkillType::HandToHand) // This is how Attack Round checks for h2h penalty
                         {
                             REGION_TYPE regionID = PTarget->loc.zone->GetRegionID();
                             if (static_cast<CMobEntity*>(PTarget)->getMobMod(MOBMOD_NO_H2H_PENALTY) == 0)
@@ -3785,7 +3785,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                         else if (PTarget->objtype == TYPE_PET && PTarget->PMaster && PTarget->PMaster->objtype == TYPE_PC &&
                                  static_cast<CPetEntity*>(PTarget)->getPetType() == PET_TYPE::AUTOMATON)
                         {
-                            puppetutils::TrySkillUP((CAutomatonEntity*)PTarget, SKILL_AUTOMATON_MELEE, GetMLevel());
+                            puppetutils::TrySkillUP((CAutomatonEntity*)PTarget, xi::SkillType::AutomatonMelee, GetMLevel());
                         }
                     }
                 }
@@ -3875,7 +3875,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             {
                 if (!attack.IsCountered() && !attack.IsParried())
                 {
-                    charutils::TrySkillUP((CCharEntity*)PTarget, SKILL_EVASION, GetMLevel());
+                    charutils::TrySkillUP((CCharEntity*)PTarget, xi::SkillType::Evasion, GetMLevel());
                 }
             }
         }
@@ -3892,7 +3892,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             // player should still be able to skill up evasion on an evaded attack
             if (auto* PChar = dynamic_cast<CCharEntity*>(PTarget))
             {
-                charutils::TrySkillUP(PChar, SKILL_EVASION, GetMLevel());
+                charutils::TrySkillUP(PChar, xi::SkillType::Evasion, GetMLevel());
             }
 
             this->PAI->EventHandler.triggerListener("MELEE_SWING_MISS", this, PTarget, &attack);

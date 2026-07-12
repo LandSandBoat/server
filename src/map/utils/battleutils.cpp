@@ -123,28 +123,28 @@ void LoadSkillTable()
         const auto SkillID = std::clamp<uint8>(rset->get<uint8>("skillid"), 0, MAX_SKILLTYPE - 1);
 
         // NOTE: Skip over Monstrosity, they re-use other jobs ranks
-        g_SkillRanks[SkillID][JOB_WAR] = std::clamp<uint8>(rset->get<uint8>("war"), 0, 11);
-        g_SkillRanks[SkillID][JOB_MNK] = std::clamp<uint8>(rset->get<uint8>("mnk"), 0, 11);
-        g_SkillRanks[SkillID][JOB_WHM] = std::clamp<uint8>(rset->get<uint8>("whm"), 0, 11);
-        g_SkillRanks[SkillID][JOB_BLM] = std::clamp<uint8>(rset->get<uint8>("blm"), 0, 11);
-        g_SkillRanks[SkillID][JOB_RDM] = std::clamp<uint8>(rset->get<uint8>("rdm"), 0, 11);
-        g_SkillRanks[SkillID][JOB_THF] = std::clamp<uint8>(rset->get<uint8>("thf"), 0, 11);
-        g_SkillRanks[SkillID][JOB_PLD] = std::clamp<uint8>(rset->get<uint8>("pld"), 0, 11);
-        g_SkillRanks[SkillID][JOB_DRK] = std::clamp<uint8>(rset->get<uint8>("drk"), 0, 11);
-        g_SkillRanks[SkillID][JOB_BST] = std::clamp<uint8>(rset->get<uint8>("bst"), 0, 11);
-        g_SkillRanks[SkillID][JOB_BRD] = std::clamp<uint8>(rset->get<uint8>("brd"), 0, 11);
-        g_SkillRanks[SkillID][JOB_RNG] = std::clamp<uint8>(rset->get<uint8>("rng"), 0, 11);
-        g_SkillRanks[SkillID][JOB_SAM] = std::clamp<uint8>(rset->get<uint8>("sam"), 0, 11);
-        g_SkillRanks[SkillID][JOB_NIN] = std::clamp<uint8>(rset->get<uint8>("nin"), 0, 11);
-        g_SkillRanks[SkillID][JOB_DRG] = std::clamp<uint8>(rset->get<uint8>("drg"), 0, 11);
-        g_SkillRanks[SkillID][JOB_SMN] = std::clamp<uint8>(rset->get<uint8>("smn"), 0, 11);
-        g_SkillRanks[SkillID][JOB_BLU] = std::clamp<uint8>(rset->get<uint8>("blu"), 0, 11);
-        g_SkillRanks[SkillID][JOB_COR] = std::clamp<uint8>(rset->get<uint8>("cor"), 0, 11);
-        g_SkillRanks[SkillID][JOB_PUP] = std::clamp<uint8>(rset->get<uint8>("pup"), 0, 11);
-        g_SkillRanks[SkillID][JOB_DNC] = std::clamp<uint8>(rset->get<uint8>("dnc"), 0, 11);
-        g_SkillRanks[SkillID][JOB_SCH] = std::clamp<uint8>(rset->get<uint8>("sch"), 0, 11);
-        g_SkillRanks[SkillID][JOB_GEO] = std::clamp<uint8>(rset->get<uint8>("geo"), 0, 11);
-        g_SkillRanks[SkillID][JOB_RUN] = std::clamp<uint8>(rset->get<uint8>("run"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_WAR] = std::clamp<uint8>(rset->get<uint8>("war"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_MNK] = std::clamp<uint8>(rset->get<uint8>("mnk"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_WHM] = std::clamp<uint8>(rset->get<uint8>("whm"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_BLM] = std::clamp<uint8>(rset->get<uint8>("blm"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_RDM] = std::clamp<uint8>(rset->get<uint8>("rdm"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_THF] = std::clamp<uint8>(rset->get<uint8>("thf"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_PLD] = std::clamp<uint8>(rset->get<uint8>("pld"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_DRK] = std::clamp<uint8>(rset->get<uint8>("drk"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_BST] = std::clamp<uint8>(rset->get<uint8>("bst"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_BRD] = std::clamp<uint8>(rset->get<uint8>("brd"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_RNG] = std::clamp<uint8>(rset->get<uint8>("rng"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_SAM] = std::clamp<uint8>(rset->get<uint8>("sam"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_NIN] = std::clamp<uint8>(rset->get<uint8>("nin"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_DRG] = std::clamp<uint8>(rset->get<uint8>("drg"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_SMN] = std::clamp<uint8>(rset->get<uint8>("smn"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_BLU] = std::clamp<uint8>(rset->get<uint8>("blu"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_COR] = std::clamp<uint8>(rset->get<uint8>("cor"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_PUP] = std::clamp<uint8>(rset->get<uint8>("pup"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_DNC] = std::clamp<uint8>(rset->get<uint8>("dnc"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_SCH] = std::clamp<uint8>(rset->get<uint8>("sch"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_GEO] = std::clamp<uint8>(rset->get<uint8>("geo"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_RUN] = std::clamp<uint8>(rset->get<uint8>("run"), 0, 11);
     }
 }
 
@@ -317,9 +317,9 @@ void FreePetSkillList()
  *                                                                       *
  ************************************************************************/
 
-uint8 GetSkillRank(SKILLTYPE SkillID, JOBTYPE JobID)
+uint8 GetSkillRank(xi::SkillType SkillID, JOBTYPE JobID)
 {
-    return g_SkillRanks[SkillID][JobID];
+    return g_SkillRanks[static_cast<uint8>(SkillID)][JobID];
 }
 
 /************************************************************************
@@ -328,7 +328,7 @@ uint8 GetSkillRank(SKILLTYPE SkillID, JOBTYPE JobID)
  *                                                                       *
  ************************************************************************/
 
-uint16 GetMaxSkill(SKILLTYPE SkillID, JOBTYPE JobID, uint8 level)
+uint16 GetMaxSkill(xi::SkillType SkillID, JOBTYPE JobID, uint8 level)
 {
     // The skill_caps table is 0-indexed, so our maximum level should one lower
     // than the size of the array.
@@ -346,7 +346,7 @@ uint16 GetMaxSkill(SKILLTYPE SkillID, JOBTYPE JobID, uint8 level)
         ShowDebug("battleutils::GetMaxSkill() received level value greater than array size! (Received: %d, Clamped to: %d)", level, maxLevel);
     }
 
-    return g_SkillTable[std::clamp<uint8>(level, 0, maxLevel)][g_SkillRanks[SkillID][JobID]];
+    return g_SkillTable[std::clamp<uint8>(level, 0, maxLevel)][g_SkillRanks[static_cast<uint8>(SkillID)][JobID]];
 }
 
 uint16 GetMaxSkill(uint8 rank, uint8 level)
@@ -376,7 +376,7 @@ bool isValidSelfTargetWeaponskill(int wsid)
 
 bool CanUseWeaponskill(CCharEntity* PChar, CWeaponSkill* PSkill)
 {
-    return ((PSkill->getSkillLevel() > 0 && PChar->GetSkill(PSkill->getType()) >= PSkill->getSkillLevel() &&
+    return ((PSkill->getSkillLevel() > 0 && PChar->GetSkill(static_cast<xi::SkillType>(PSkill->getType())) >= PSkill->getSkillLevel() &&
              (PSkill->getUnlockId() == 0 || charutils::hasLearnedWeaponskill(PChar, PSkill->getUnlockId()))) ||
             (PSkill->getSkillLevel() == 0 && (PSkill->getUnlockId() == 0 ||
                                               (charutils::hasLearnedWeaponskill(PChar, PSkill->getUnlockId()) && PChar->GetMLevel() >= 75)))) &&
@@ -438,7 +438,7 @@ const std::list<CWeaponSkill*>& GetWeaponSkills(uint8 skill)
     if (skill >= MAX_SKILLTYPE)
     {
         ShowWarning("Skill (%d) exceeds MAX_SKILLTYPE", skill);
-        return g_PWeaponSkillsList[SKILL_NONE];
+        return g_PWeaponSkillsList[static_cast<uint8>(xi::SkillType::None)];
     }
 
     return g_PWeaponSkillsList[skill];
@@ -527,7 +527,7 @@ int32 CalculateEnspellDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender,
     else if (Tier == 2)
     {
         // Tier 2 enspells calculate the damage on each hit and increment the potency in Mod::ENSPELL_DMG per hit
-        uint16 skill = PAttacker->GetSkill(SKILL_ENHANCING_MAGIC);
+        uint16 skill = PAttacker->GetSkill(xi::SkillType::EnhancingMagic);
         uint16 cap   = 3 + 6 * skill / 100;
         if (skill > 200)
         {
@@ -866,17 +866,17 @@ auto HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, acti
         }
         else // Struck the target
         {
-            SKILLTYPE skilltype = SKILLTYPE::SKILL_NONE;
+            xi::SkillType skilltype = xi::SkillType::None;
 
             if (PDefender->objtype == TYPE_PC)
             {
                 if (auto* weapon = dynamic_cast<CItemWeapon*>(PDefender->m_Weapons[SLOT_MAIN]))
                 {
-                    skilltype = static_cast<SKILLTYPE>(weapon->getSkillType());
+                    skilltype = weapon->getSkillType();
                 }
                 else
                 {
-                    skilltype = SKILLTYPE::SKILL_HAND_TO_HAND;
+                    skilltype = xi::SkillType::HandToHand;
                 }
 
                 // Check for skillup
@@ -1519,7 +1519,7 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
     }
     // check script for grip if main failed
     else if (PAttacker->objtype == TYPE_PC && static_cast<CCharEntity*>(PAttacker)->getEquip(SLOT_SUB) && weapon == PAttacker->m_Weapons[SLOT_MAIN] &&
-             static_cast<CItemWeapon*>(static_cast<CCharEntity*>(PAttacker)->getEquip(SLOT_SUB))->getSkillType() == SKILL_NONE &&
+             static_cast<CItemWeapon*>(static_cast<CCharEntity*>(PAttacker)->getEquip(SLOT_SUB))->getSkillType() == xi::SkillType::None &&
              battleutils::GetScaledItemModifier(PAttacker, static_cast<CCharEntity*>(PAttacker)->getEquip(SLOT_SUB), Mod::ITEM_ADDEFFECT_TYPE) > 0 &&
              luautils::additionalEffectAttack(PAttacker, PDefender, static_cast<CItemWeapon*>(static_cast<CCharEntity*>(PAttacker)->getEquip(SLOT_SUB)), Action, finaldamage) == 0 &&
              Action->hasAdditionalEffect())
@@ -1724,7 +1724,7 @@ float GetRangedDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, b
         }
     }
 
-    uint8 weaponType = targ_weapon->getSkillType();
+    uint8 weaponType = static_cast<uint8>(targ_weapon->getSkillType());
 
     auto levelCorrectionFunc = lua["xi"]["data"]["levelCorrection"]["isLevelCorrectedZone"];
     auto rangedPDIFFunc      = lua["xi"]["combat"]["physical"]["calculateRangedPDIF"];
@@ -1782,7 +1782,7 @@ auto GetBaseDelay(CBattleEntity* PEntity) -> uint16
 
         if (PMainWeapon)
         {
-            if (PMainWeapon->getSkillType() == SKILLTYPE::SKILL_HAND_TO_HAND)
+            if (PMainWeapon->getSkillType() == xi::SkillType::HandToHand)
             {
                 baseDelay = PMainWeapon->getBaseDelay(); // h2h items include 480 base delay
             }
@@ -1882,7 +1882,7 @@ auto CalculateTPFromDamageTaken(CBattleEntity* PAttacker, CBattleEntity* PDefend
 bool TryInterruptSpell(CBattleEntity* PAttacker, CBattleEntity* PDefender, CSpell* PSpell)
 {
     // Early return: Spell can't be interrupted.
-    if ((SKILLTYPE)PSpell->getSkillType() == SKILL_SINGING)
+    if (PSpell->getSkillType() == xi::SkillType::Singing)
     {
         return false;
     }
@@ -1915,13 +1915,13 @@ bool TryInterruptSpell(CBattleEntity* PAttacker, CBattleEntity* PDefender, CSpel
     if (PDefender->objtype == TYPE_PC)
     {
         CCharEntity* PChar      = (CCharEntity*)PDefender;
-        float        skillCap   = GetMaxSkill((SKILLTYPE)PSpell->getSkillType(), PChar->GetMJob(), PChar->GetMLevel());
+        float        skillCap   = GetMaxSkill(PSpell->getSkillType(), PChar->GetMJob(), PChar->GetMLevel());
         float        skillLevel = PChar->GetSkill(PSpell->getSkillType());
 
         // If skill cap is 0, player may be using a spell from their subjob.
         if (skillCap == 0)
         {
-            skillCap = GetMaxSkill((SKILLTYPE)PSpell->getSkillType(), PChar->GetSJob(), PChar->GetMLevel()); // This may need to be re-investigated in the future.
+            skillCap = GetMaxSkill(PSpell->getSkillType(), PChar->GetSJob(), PChar->GetMLevel()); // This may need to be re-investigated in the future.
         }
 
         // If skill level is 0, set ratio to 10.
@@ -2559,7 +2559,7 @@ uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ig
             CItemWeapon*    PSubWeapon = dynamic_cast<CItemWeapon*>(PCharAttacker->m_Weapons[SLOT_SUB]);
 
             if (PMain && !PMain->isTwoHanded() && !PMain->isHandToHand() &&
-                (!PSub || (PSubWeapon && PSubWeapon->getSkillType() == SKILL_NONE) || PSub->IsShield()))
+                (!PSub || (PSubWeapon && PSubWeapon->getSkillType() == xi::SkillType::None) || PSub->IsShield()))
             {
                 critHitRate += PCharAttacker->getMod(Mod::FENCER_CRITHITRATE);
             }
@@ -2702,7 +2702,7 @@ int8 GetAGICritBonus(CBattleEntity* PAttacker, CBattleEntity* PDefender)
  *                                                                       *
  ************************************************************************/
 
-float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent, SKILLTYPE weaponType, SLOTTYPE weaponSlot, bool isCannonball)
+float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent, xi::SkillType weaponType, SLOTTYPE weaponSlot, bool isCannonball)
 {
     float pDIF = 1.0f;
 
@@ -4088,7 +4088,7 @@ uint8 getBarrageShotCount(CBattleEntity* PBattleEntity)
         {
             CItemWeapon* PItem = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED));
 
-            if (PItem && PItem->getSkillType() != SKILL_ARCHERY && PItem->getSkillType() != SKILL_MARKSMANSHIP)
+            if (PItem && PItem->getSkillType() != xi::SkillType::Archery && PItem->getSkillType() != xi::SkillType::Marksmanship)
             {
                 return 0;
             }
@@ -4599,7 +4599,7 @@ float HandleTranquilHeart(CBattleEntity* PEntity)
 
     if (PEntity->objtype == TYPE_PC && charutils::hasTrait((CCharEntity*)PEntity, TRAIT_TRANQUIL_HEART))
     {
-        int16 healingSkill = PEntity->GetSkill(SKILL_HEALING_MAGIC);
+        int16 healingSkill = PEntity->GetSkill(xi::SkillType::HealingMagic);
         reductionPercent   = ((healingSkill / 10.0f) * 0.5f);
 
         // Reduction Percent Caps at 25%
@@ -5436,7 +5436,7 @@ timer::duration CalculateSpellCastTime(CBattleEntity* PEntity, CMagicState* PMag
         // Add Black & Dark Magic Casting Time -% bonus to Bio, Absorbs, Drain, Aspir, Dread Spikes, Stun, Tractor, Endark
         // https://www.bg-wiki.com/ffxi/Abs._Burgeonet_%2B2
         // https://www.bg-wiki.com/ffxi/Fallen%27s_Burgeonet
-        else if (PSpell->getSkillType() == SKILLTYPE::SKILL_DARK_MAGIC)
+        else if (PSpell->getSkillType() == xi::SkillType::DarkMagic)
         {
             cast      = std::chrono::floor<std::chrono::milliseconds>(cast * (1.0f + ((PEntity->getMod(Mod::BLACK_MAGIC_CAST) + PEntity->getMod(Mod::DARK_MAGIC_CAST)) / 100.0f)));
             applyArts = false;
@@ -5543,7 +5543,7 @@ timer::duration CalculateSpellCastTime(CBattleEntity* PEntity, CMagicState* PMag
     }
 
     int16 fastCast = std::clamp<int16>(PEntity->getMod(Mod::FASTCAST), -100, 50);
-    if (PSpell->getSkillType() == SKILLTYPE::SKILL_ELEMENTAL_MAGIC) // Elemental Celerity reductions
+    if (PSpell->getSkillType() == xi::SkillType::ElementalMagic) // Elemental Celerity reductions
     {
         fastCast += PEntity->getMod(Mod::ELEMENTAL_CELERITY);
     }
@@ -5555,7 +5555,7 @@ timer::duration CalculateSpellCastTime(CBattleEntity* PEntity, CMagicState* PMag
             fastCast += ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MERIT_CURE_CAST_TIME, (CCharEntity*)PEntity);
         }
     }
-    else if (PSpell->getSkillType() == SKILLTYPE::SKILL_GEOMANCY && PEntity->objtype == TYPE_PC)
+    else if (PSpell->getSkillType() == xi::SkillType::Geomancy && PEntity->objtype == TYPE_PC)
     {
         auto* PChar = static_cast<CCharEntity*>(PEntity);
         fastCast += PChar->PJobPoints->GetJobPointValue(JP_WIDENED_COMPASS_EFFECT);
@@ -5752,20 +5752,22 @@ timer::duration CalculateSpellRecastTime(CBattleEntity* PEntity, CSpell* PSpell)
     int32 recastMod = 0;
     switch (PSpell->getSkillType())
     {
-        case SKILLTYPE::SKILL_ELEMENTAL_MAGIC:
+        case xi::SkillType::ElementalMagic:
             recastMod = PEntity->getMod(Mod::ELEMENTAL_MAGIC_RECAST);
             break;
-        case SKILLTYPE::SKILL_BLUE_MAGIC:
+        case xi::SkillType::BlueMagic:
             recastMod = PEntity->getMod(Mod::BLUE_MAGIC_RECAST);
             break;
-        case SKILLTYPE::SKILL_HEALING_MAGIC:
+        case xi::SkillType::HealingMagic:
             recastMod = PEntity->getMod(Mod::HEALING_MAGIC_RECAST);
             break;
-        case SKILLTYPE::SKILL_ENFEEBLING_MAGIC:
+        case xi::SkillType::EnfeeblingMagic:
             recastMod = PEntity->getMod(Mod::ENFEEBLING_MAGIC_RECAST);
             break;
-        case SKILLTYPE::SKILL_ENHANCING_MAGIC:
+        case xi::SkillType::EnhancingMagic:
             recastMod = PEntity->getMod(Mod::ENHANCING_MAGIC_RECAST);
+            break;
+        default:
             break;
     }
 
@@ -5905,7 +5907,7 @@ int16 CalculateWeaponSkillTP(CBattleEntity* PEntity, CWeaponSkill* PWeaponSkill,
             CItemWeapon*    PSubWeapon = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[SLOT_SUB]);
 
             if (PMain && !PMain->isTwoHanded() && !PMain->isHandToHand() &&
-                (!PSub || (PSubWeapon && PSubWeapon->getSkillType() == SKILL_NONE) || PSub->IsShield()))
+                (!PSub || (PSubWeapon && PSubWeapon->getSkillType() == xi::SkillType::None) || PSub->IsShield()))
             {
                 tp += PEntity->getMod(Mod::FENCER_TP_BONUS);
             }

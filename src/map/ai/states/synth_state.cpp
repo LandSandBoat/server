@@ -26,34 +26,34 @@
 #include "ai/ai_container.h"
 #include "utils/synthutils.h"
 
-CSynthState::CSynthState(CCharEntity* PChar, SKILLTYPE skill)
+CSynthState::CSynthState(CCharEntity* PChar, xi::SkillType skill)
 : CState(PChar, PChar->targid)
 , m_PEntity(PChar)
 {
     switch (skill)
     {
-        case SKILL_WOODWORKING:
+        case xi::SkillType::Woodworking:
             m_synthFinishTime -= std::chrono::milliseconds(PChar->getMod(Mod::SYNTH_SPEED_WOODWORKING));
             break;
-        case SKILL_SMITHING:
+        case xi::SkillType::Smithing:
             m_synthFinishTime -= std::chrono::milliseconds(PChar->getMod(Mod::SYNTH_SPEED_SMITHING));
             break;
-        case SKILL_GOLDSMITHING:
+        case xi::SkillType::Goldsmithing:
             m_synthFinishTime -= std::chrono::milliseconds(PChar->getMod(Mod::SYNTH_SPEED_GOLDSMITHING));
             break;
-        case SKILL_CLOTHCRAFT:
+        case xi::SkillType::Clothcraft:
             m_synthFinishTime -= std::chrono::milliseconds(PChar->getMod(Mod::SYNTH_SPEED_CLOTHCRAFT));
             break;
-        case SKILL_LEATHERCRAFT:
+        case xi::SkillType::Leathercraft:
             m_synthFinishTime -= std::chrono::milliseconds(PChar->getMod(Mod::SYNTH_SPEED_LEATHERCRAFT));
             break;
-        case SKILL_BONECRAFT:
+        case xi::SkillType::Bonecraft:
             m_synthFinishTime -= std::chrono::milliseconds(PChar->getMod(Mod::SYNTH_SPEED_BONECRAFT));
             break;
-        case SKILL_ALCHEMY:
+        case xi::SkillType::Alchemy:
             m_synthFinishTime -= std::chrono::milliseconds(PChar->getMod(Mod::SYNTH_SPEED_ALCHEMY));
             break;
-        case SKILL_COOKING:
+        case xi::SkillType::Cooking:
             m_synthFinishTime -= std::chrono::milliseconds(PChar->getMod(Mod::SYNTH_SPEED_COOKING));
             break;
         default:

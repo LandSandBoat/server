@@ -405,7 +405,7 @@ auto LoadTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntity*
     if (auto* mainWeapon = dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_MAIN]))
     {
         mainWeapon->setMaxHit(1);
-        mainWeapon->setSkillType(trustData->cmbSkill);
+        mainWeapon->setSkillType(static_cast<xi::SkillType>(trustData->cmbSkill));
 
         mainWeapon->setDamage(finalDamage);
         mainWeapon->setDelay(trustData->cmbDelay);
@@ -461,8 +461,8 @@ auto LoadTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntity*
 
     // NOTE: Trusts don't really have weapons, and they don't really have combat skills. They only have
     // a damage type, and whether or not they are multi-hit. We handle this wrong everywhere.
-    // To give any Trust multi-hit, you need to give them cmbSkill == SKILL_HAND_TO_HAND (1).
-    if (trustData->cmbSkill == SKILL_HAND_TO_HAND)
+    // To give any Trust multi-hit, you need to give them cmbSkill == xi::SkillType::HandToHand (1).
+    if (trustData->cmbSkill == static_cast<uint8>(xi::SkillType::HandToHand))
     {
         PTrust->m_dualWield = true;
     }
@@ -673,9 +673,9 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
     PTrust->stats.CHR   = static_cast<uint16>((fCHR + mCHR + sCHR) * statMultiplier);
 
     // Skills =======================
-    for (int i = SKILL_DIVINE_MAGIC; i <= SKILL_BLUE_MAGIC; i++)
+    for (int i = static_cast<int>(xi::SkillType::DivineMagic); i <= static_cast<int>(xi::SkillType::BlueMagic); i++)
     {
-        uint16 maxSkill = battleutils::GetMaxSkill((SKILLTYPE)i, mJob, mLvl > 99 ? 99 : mLvl);
+        uint16 maxSkill = battleutils::GetMaxSkill((xi::SkillType)i, mJob, mLvl > 99 ? 99 : mLvl);
         if (maxSkill != 0)
         {
             PTrust->WorkingSkills.skill[i] = static_cast<uint16>(maxSkill * settings::get<float>("map.ALTER_EGO_SKILL_MULTIPLIER"));
@@ -683,7 +683,7 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
         else // if the mob is WAR/BLM and can cast spell
         {
             // set skill as high as main level, so their spells won't get resisted
-            uint16 maxSubSkill = battleutils::GetMaxSkill((SKILLTYPE)i, sJob, mLvl > 99 ? 99 : mLvl);
+            uint16 maxSubSkill = battleutils::GetMaxSkill((xi::SkillType)i, sJob, mLvl > 99 ? 99 : mLvl);
 
             if (maxSubSkill != 0)
             {
@@ -692,9 +692,9 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
         }
     }
 
-    for (int i = SKILL_HAND_TO_HAND; i <= SKILL_STAFF; i++)
+    for (int i = static_cast<int>(xi::SkillType::HandToHand); i <= static_cast<int>(xi::SkillType::Staff); i++)
     {
-        uint16 maxSkill = battleutils::GetMaxSkill((SKILLTYPE)i, mLvl > 99 ? 99 : mLvl);
+        uint16 maxSkill = battleutils::GetMaxSkill(static_cast<uint8>(i), mLvl > 99 ? 99 : mLvl);
         if (maxSkill != 0)
         {
             PTrust->WorkingSkills.skill[i] = static_cast<uint16>(maxSkill * settings::get<float>("map.ALTER_EGO_SKILL_MULTIPLIER"));

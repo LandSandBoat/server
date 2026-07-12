@@ -67,27 +67,27 @@ GP_SERV_COMMAND_EXTENDED_JOB::PUP::PUP(CCharEntity* PChar, const bool mjob)
     }
 
     const int32  meritbonus = PChar->PMeritPoints->GetMeritValue(MERIT_AUTOMATON_SKILLS, PChar);
-    const uint16 ameCap     = puppetutils::getSkillCap(PChar, SKILL_AUTOMATON_MELEE, jobLevel);
+    const uint16 ameCap     = puppetutils::getSkillCap(PChar, xi::SkillType::AutomatonMelee, jobLevel);
     const uint16 ameBonus   = PChar->getMod(Mod::AUTO_MELEE_SKILL) + meritbonus;
-    const uint16 araCap     = puppetutils::getSkillCap(PChar, SKILL_AUTOMATON_RANGED, jobLevel);
+    const uint16 araCap     = puppetutils::getSkillCap(PChar, xi::SkillType::AutomatonRanged, jobLevel);
     const uint16 araBonus   = PChar->getMod(Mod::AUTO_RANGED_SKILL) + meritbonus;
-    const uint16 amaCap     = puppetutils::getSkillCap(PChar, SKILL_AUTOMATON_MAGIC, jobLevel);
+    const uint16 amaCap     = puppetutils::getSkillCap(PChar, xi::SkillType::AutomatonMagic, jobLevel);
     const uint16 amaBonus   = PChar->getMod(Mod::AUTO_MAGIC_SKILL) + meritbonus;
 
-    packet.MeleeSkill     = std::min(ameCap, PChar->GetSkill(SKILL_AUTOMATON_MELEE)) + ameBonus;
+    packet.MeleeSkill     = std::min(ameCap, PChar->GetSkill(xi::SkillType::AutomatonMelee)) + ameBonus;
     packet.MeleeSkillCap  = ameCap + ameBonus;
-    packet.RangedSkill    = std::min(araCap, PChar->GetSkill(SKILL_AUTOMATON_RANGED)) + araBonus;
+    packet.RangedSkill    = std::min(araCap, PChar->GetSkill(xi::SkillType::AutomatonRanged)) + araBonus;
     packet.RangedSkillCap = araCap + araBonus;
-    packet.MagicSkill     = std::min(amaCap, PChar->GetSkill(SKILL_AUTOMATON_MAGIC)) + amaBonus;
+    packet.MagicSkill     = std::min(amaCap, PChar->GetSkill(xi::SkillType::AutomatonMagic)) + amaBonus;
     packet.MagicSkillCap  = amaCap + amaBonus;
 
-    if (puppetutils::getSkillCap(PChar, SKILL_AUTOMATON_MAGIC, jobLevel) == 0)
+    if (puppetutils::getSkillCap(PChar, xi::SkillType::AutomatonMagic, jobLevel) == 0)
     {
         packet.MagicSkill    = amaBonus;
         packet.MagicSkillCap = amaBonus;
     }
 
-    if (puppetutils::getSkillCap(PChar, SKILL_AUTOMATON_RANGED, jobLevel) == 0)
+    if (puppetutils::getSkillCap(PChar, xi::SkillType::AutomatonRanged, jobLevel) == 0)
     {
         packet.RangedSkill    = araBonus;
         packet.RangedSkillCap = araBonus;

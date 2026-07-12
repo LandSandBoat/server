@@ -164,7 +164,7 @@ uint16 CLuaSpell::getMPCost()
 
 uint8 CLuaSpell::getSkillType()
 {
-    return m_PLuaSpell->getSkillType();
+    return static_cast<uint8>(m_PLuaSpell->getSkillType());
 }
 
 uint8 CLuaSpell::getSpellGroup()

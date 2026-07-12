@@ -29,6 +29,8 @@
 #include "packets/basic.h"
 
 #include "data/enums/allegiance.h"
+#include "data/enums/entity_flags.h"
+#include "data/enums/name_vis.h"
 #include "data/enums/spawn_animation.h"
 #include "data/enums/status.h"
 
@@ -159,31 +161,6 @@ enum UPDATETYPE : uint8
     UPDATE_DESPAWN  = 0x20,
 };
 
-enum ENTITYFLAGS : uint16
-{
-    FLAG_NONE      = 0x000,
-    FLAG_INFO_ICON = 0x001, // (I) Icon next to name
-
-    // TODO: Flags 0x002, 0x004 and 0x008 do different things for different entities.
-    //     : It isn't one-size-fits-all, and different combinations may do different things.
-    //     : It'll need to researched more.
-    // FLAG_ALT_APPEARANCE = 0x002,
-
-    FLAG_HIDE_NAME     = 0x008,
-    FLAG_CALL_FOR_HELP = 0x020,
-    FLAG_HIDE_MODEL    = 0x080,
-    FLAG_HIDE_HP       = 0x100,
-    FLAG_UNTARGETABLE  = 0x800,
-};
-
-enum NAMEVIS : uint8
-{
-    VIS_NONE        = 0x00,
-    VIS_ICON        = 0x01,
-    VIS_HIDE_NAME   = 0x08,
-    VIS_GHOST_PHASE = 0x80,
-};
-
 // TODO: It is possible to make this structure part of the class, instead of the current ID and Targid, but without the clean() method.
 struct EntityID_t
 {
@@ -296,7 +273,7 @@ public:
     uint8          animationsub;   // Additional animation parameter
     uint8          baseSpeed;      // base movement speed
     uint8          animationSpeed; // speed of movement animation
-    uint8          namevis;
+    xi::NameVis    namevis;
     xi::Allegiance allegiance;     // what types of targets the entity can fight
     uint8          updatemask;     // what to update next server tick to players nearby
     bool           priorityRender; // CliPriorityFlag, will force this entity to render on clients if set. See https://github.com/atom0s/XiPackets/tree/main/world/server/0x0037 (also applies to 0x00E)

@@ -747,7 +747,7 @@ public:
     bool m_zoneInCutscene{}; // Is the player currently in a zone-in cutscene
 
     // Starts a synth with skillType X
-    bool startSynth(SKILLTYPE synthSkill);
+    bool startSynth(xi::SkillType synthSkill);
 
     CCharEntity();
     ~CCharEntity() override;

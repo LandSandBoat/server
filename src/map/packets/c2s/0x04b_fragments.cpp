@@ -118,7 +118,7 @@ void GP_CLI_COMMAND_FRAGMENTS::process(MapSession* PSession, CCharEntity* PChar)
                 selfEntry.slvl       = PChar->GetSLevel();
                 selfEntry.race       = PChar->mainlook.race;
                 selfEntry.allegiance = static_cast<uint8>(PChar->allegiance);
-                selfEntry.fishRank   = PChar->RealSkills.rank[SKILLTYPE::SKILL_FISHING];
+                selfEntry.fishRank   = PChar->RealSkills.rank[static_cast<uint8>(xi::SkillType::Fishing)];
                 selfEntry.submitTime = earth_time::vanadiel_timestamp();
             }
         }

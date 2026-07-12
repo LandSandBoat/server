@@ -78,7 +78,7 @@ public:
     bool Internal_Die(timer::duration);
     bool Internal_UseItem(uint16 targetid, uint8 loc, uint8 slotid);
     bool Internal_Despawn(bool instantDespawn = false);
-    bool Internal_Synth(SKILLTYPE synthSkill);
+    bool Internal_Synth(xi::SkillType synthSkill);
     bool Accept_Raise();
 
     void    Reset();

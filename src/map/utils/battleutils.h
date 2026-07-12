@@ -116,8 +116,8 @@ int16 GetRangedDelayReduction(CBattleEntity* battleEntity, int16 delay);
 int32 GetRangedAttackBonuses(CBattleEntity* battleEntity);
 int32 GetRangedAccuracyBonuses(CBattleEntity* battleEntity);
 
-uint8  GetSkillRank(SKILLTYPE SkillID, JOBTYPE JobID);
-uint16 GetMaxSkill(SKILLTYPE SkillID, JOBTYPE JobID, uint8 level);
+uint8  GetSkillRank(xi::SkillType SkillID, JOBTYPE JobID);
+uint16 GetMaxSkill(xi::SkillType SkillID, JOBTYPE JobID, uint8 level);
 uint16 GetMaxSkill(uint8 rank, uint8 level);
 
 CWeaponSkill* GetWeaponSkill(uint16 WSkillID);
@@ -152,7 +152,7 @@ uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ig
 uint8 GetRangedCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
 int8  GetDexCritBonus(CBattleEntity* PAttacker, CBattleEntity* PDefender);
 int8  GetAGICritBonus(CBattleEntity* PAttacker, CBattleEntity* PDefender);
-float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent, SKILLTYPE weaponType, SLOTTYPE weaponSlot, bool isCannonball);
+float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent, xi::SkillType weaponType, SLOTTYPE weaponSlot, bool isCannonball);
 
 auto TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHYSICAL_ATTACK_TYPE physicalAttackType, int32 damage, bool isBlocked, uint8 slot, uint16 tpMultiplier, CBattleEntity* taChar, bool giveTPtoVictim, bool giveTPtoAttacker, bool isCounter = false, bool isCovered = false, CBattleEntity* POriginalTarget = nullptr) -> int32;
 auto TakeWeaponskillDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 damage, xi::AttackType attackType, xi::DamageType damageType, uint8 slot, bool primary, float tpMultiplier, uint16 bonusTP, float targetTPMultiplier) -> int32;

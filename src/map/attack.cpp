@@ -117,18 +117,18 @@ void CAttack::SetCritical(bool value)
             }
         }
 
-        SKILLTYPE skilltype  = SKILLTYPE::SKILL_NONE;
-        SLOTTYPE  weaponSlot = static_cast<SLOTTYPE>(GetWeaponSlot());
+        xi::SkillType skilltype  = xi::SkillType::None;
+        SLOTTYPE      weaponSlot = static_cast<SLOTTYPE>(GetWeaponSlot());
 
         if (m_attacker->objtype == TYPE_PC)
         {
             if (auto* weapon = dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[weaponSlot]))
             {
-                skilltype = static_cast<SKILLTYPE>(weapon->getSkillType());
+                skilltype = weapon->getSkillType();
             }
             else
             {
-                skilltype = SKILLTYPE::SKILL_HAND_TO_HAND;
+                skilltype = xi::SkillType::HandToHand;
             }
         }
 
@@ -570,17 +570,17 @@ void CAttack::ProcessDamage()
 
                     if (m_attackType == PHYSICAL_ATTACK_TYPE::DAKEN)
                     {
-                        charutils::TrySkillUP(PChar, SKILLTYPE::SKILL_THROWING, m_victim->GetMLevel());
+                        charutils::TrySkillUP(PChar, xi::SkillType::Throwing, m_victim->GetMLevel());
                     }
                     else if (auto* weapon = dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[static_cast<SLOTTYPE>(GetWeaponSlot())]))
                     {
-                        charutils::TrySkillUP(PChar, static_cast<SKILLTYPE>(weapon->getSkillType()), m_victim->GetMLevel());
+                        charutils::TrySkillUP(PChar, weapon->getSkillType(), m_victim->GetMLevel());
                     }
                 }
                 else if (m_attacker->objtype == TYPE_PET && m_attacker->PMaster && m_attacker->PMaster->objtype == TYPE_PC &&
                          static_cast<CPetEntity*>(m_attacker)->getPetType() == PET_TYPE::AUTOMATON)
                 {
-                    puppetutils::TrySkillUP(static_cast<CAutomatonEntity*>(m_attacker), SKILL_AUTOMATON_MELEE, m_victim->GetMLevel());
+                    puppetutils::TrySkillUP(static_cast<CAutomatonEntity*>(m_attacker), xi::SkillType::AutomatonMelee, m_victim->GetMLevel());
                 }
             }
             m_isBlocked = attackutils::IsBlocked(m_attacker, m_victim);
@@ -619,7 +619,7 @@ void CAttack::ProcessDamage()
     SLOTTYPE slot = static_cast<SLOTTYPE>(GetWeaponSlot());
     if (m_attackRound->IsH2H())
     {
-        m_naturalH2hDamage = std::floor<int32>(m_attacker->GetSkill(SKILL_HAND_TO_HAND) * 0.11f) + 3;
+        m_naturalH2hDamage = std::floor<int32>(m_attacker->GetSkill(xi::SkillType::HandToHand) * 0.11f) + 3;
         m_baseDamage       = m_attacker->GetMainWeaponDmg();
         int32 kickDamage   = 0;
 
@@ -758,17 +758,17 @@ void CAttack::ProcessDamage()
             auto* PChar = static_cast<CCharEntity*>(m_attacker);
             if (m_attackType == PHYSICAL_ATTACK_TYPE::DAKEN)
             {
-                charutils::TrySkillUP(PChar, SKILLTYPE::SKILL_THROWING, m_victim->GetMLevel());
+                charutils::TrySkillUP(PChar, xi::SkillType::Throwing, m_victim->GetMLevel());
             }
             else if (auto* weapon = dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[slot]))
             {
-                charutils::TrySkillUP(PChar, static_cast<SKILLTYPE>(weapon->getSkillType()), m_victim->GetMLevel());
+                charutils::TrySkillUP(PChar, weapon->getSkillType(), m_victim->GetMLevel());
             }
         }
         else if (m_attacker->objtype == TYPE_PET && m_attacker->PMaster && m_attacker->PMaster->objtype == TYPE_PC &&
                  static_cast<CPetEntity*>(m_attacker)->getPetType() == PET_TYPE::AUTOMATON)
         {
-            puppetutils::TrySkillUP(static_cast<CAutomatonEntity*>(m_attacker), SKILL_AUTOMATON_MELEE, m_victim->GetMLevel());
+            puppetutils::TrySkillUP(static_cast<CAutomatonEntity*>(m_attacker), xi::SkillType::AutomatonMelee, m_victim->GetMLevel());
         }
     }
     m_isBlocked = attackutils::IsBlocked(m_attacker, m_victim);
