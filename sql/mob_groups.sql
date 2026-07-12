@@ -10751,7 +10751,7 @@ INSERT INTO `mob_groups` VALUES (4,2126,139,'Jagidbod_of_Clan_Reaper',0,128,0,40
 INSERT INTO `mob_groups` VALUES (5,1002,139,'Derakbak_of_Clan_Wolf',0,128,0,4000,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (6,3341,139,'Reaper_Clan_Warmachine',0,128,0,1800,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (7,4358,139,'Wolf_Clan_Warmachine',0,128,0,1800,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (8,3048,139,'Orcs_Wyvern',0,128,0,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (8,8168,139,'Orcs_Wyvern',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (9,4835,139,'Maat_war',0,128,0,3650,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (10,4836,139,'Maat_blm',0,128,0,1800,3000,0,NULL);
 INSERT INTO `mob_groups` VALUES (11,4837,139,'Maat_rng',0,128,0,2400,0,0,NULL);
