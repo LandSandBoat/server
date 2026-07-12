@@ -221,9 +221,8 @@ templates:
     attributes:
       combat:
         skill: scythe
-        delay: 170
+        delay: 250
       resists:
-        immune_status: [light_sleep, dark_sleep]
         dmg_physical:
           slashing: -5000
           piercing: -5000
@@ -1126,7 +1125,8 @@ templates:
     attributes:
       combat:
         skill: scythe
-      jobs: [pld, pld]
+        delay: 270
+      jobs: [cor, cor]
       resists:
         rank_element:
           fire:    -2
@@ -1158,8 +1158,6 @@ templates:
         true_detection: true
       spawn:
         type: [scripted]
-      stats:
-        hp: 10500
 
   Puffer_Pugil:
     id:            3220
@@ -1438,35 +1436,35 @@ templates:
 spawns:
   17002497:
     template: Percipient_Fish
-    at:       [364.000, -5.000, 99.000, 33]
+    at:       [260.272, -2.000, 24.269, 0]
     level:    [81, 82]
   17002498:
     template: Percipient_Fish
-    at:       [343.000, -5.000, 99.000, 94]
+    at:       [309.655, -7.136, 56.875, 0]
     level:    [81, 82]
   17002499:
     template: Percipient_Fish
-    at:       [338.000, -6.000, 67.000, 90]
+    at:       [300.966, -3.209, 67.613, 0]
     level:    [81, 82]
   17002500:
     template: Percipient_Fish
-    at:       [302.000, -6.000, 50.000, 41]
+    at:       [340.193, -5.315, 92.964, 0]
     level:    [81, 82]
   17002501:
     template: Percipient_Fish
-    at:       [256.000, -1.000, 22.000, 41]
+    at:       [399.113, -7.000, 135.454, 0]
     level:    [81, 82]
   17002502:
     template: Percipient_Fish
-    at:       [223.000, -2.000, -21.000, 41]
+    at:       [462.867, -3.655, 142.684, 0]
     level:    [81, 82]
   17002503:
     template: Percipient_Fish
-    at:       [295.000, -4.000, -14.000, 41]
+    at:       [542.181, -6.000, 168.428, 0]
     level:    [81, 82]
   17002504:
     template: Percipient_Fish
-    at:       [313.000, -6.000, -16.000, 41]
+    at:       [535.110, -4.000, 170.383, 0]
     level:    [81, 82]
   17002505:
     template: Cursed_Chest

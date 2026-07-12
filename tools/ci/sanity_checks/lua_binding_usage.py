@@ -121,6 +121,7 @@ def main():
     function_names.append("getStatusEffectBySource")
     function_names.append("afterInstanceRegister")
     function_names.append("onInstanceCreated")
+    function_names.append("onInstanceTimeUpdate")
     function_names.append("onAssaultFail")
     function_names.append("onInstanceProgressUpdate")
     function_names.append("onInstanceComplete")
