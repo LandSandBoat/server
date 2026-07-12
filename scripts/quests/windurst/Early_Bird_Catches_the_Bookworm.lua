@@ -113,6 +113,7 @@ quest.sections =
 
                 [395] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
+                    player:delKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATIONS_EARLY_BIRD)
                 end,
 
                 [398] = function(player, csid, option, npc)
@@ -122,7 +123,7 @@ quest.sections =
                 [400] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:setLocalVar('Quest[2][13]mustZone', 1)
-                        player:delKeyItem(xi.ki.OVERDUE_BOOK_NOTIFICATIONS_EARLY_BIRD)
+                        player:delKeyItem(xi.ki.ART_FOR_EVERYONE)
                     end
                 end,
             },
