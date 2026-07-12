@@ -1046,11 +1046,11 @@ void SetupJob(CMobEntity* PMob)
     JOBTYPE sJob = PMob->GetSJob();
     JOBTYPE job{};
 
-    if (grade::GetJobGrade(mJob, 1) > 0 || mJob == JOB_NIN) // check if mainjob gives mp or is NIN
+    if (grade::GetJobGrade(mJob, 1) > 0 || mJob == JOB_NIN || mJob == JOB_BRD) // Check if main job is a caster.
     {
         job = mJob;
     }
-    else // if mainjob had no MP (and isn't NIN), use subjob in switch cases.
+    else // If main job is not a caster, check sub job.
     {
         job = sJob;
     }
