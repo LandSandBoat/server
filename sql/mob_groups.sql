@@ -3013,7 +3013,7 @@ INSERT INTO `mob_groups` VALUES (102,6129,54,'Mamool_Ja_Diver',0,128,0,0,0,0,NUL
 -- ------------------------------------------------------------
 
 INSERT INTO `mob_groups` VALUES (1,3117,55,'Percipient_Fish',0,128,0,10500,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (2,864,55,'Cursed_Chest',0,128,0,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (2,864,55,'Cursed_Chest',0,128,0,6500,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (3,2340,55,'Lamia_No13',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (4,1292,55,'Fallen_Volunteer',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (5,1286,55,'Fallen_Imperial_Wizard',0,128,0,0,0,0,NULL);

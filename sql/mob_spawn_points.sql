@@ -13429,26 +13429,26 @@ INSERT INTO `mob_spawn_points` VALUES (16998890,0,'Awoken_Morbol_Emperor','Awoke
 -- ------------------------------------------------------------
 
 -- Golden Salvage
-INSERT INTO `mob_spawn_points` VALUES (17002497,0,'Percipient_Fish','Percipient Fish',1,81,82,364.000,-5.000,99.000,33,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17002498,0,'Percipient_Fish','Percipient Fish',1,81,82,343.000,-5.000,99.000,94,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17002499,0,'Percipient_Fish','Percipient Fish',1,81,82,338.000,-6.000,67.000,90,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17002500,0,'Percipient_Fish','Percipient Fish',1,81,82,302.000,-6.000,50.000,41,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17002501,0,'Percipient_Fish','Percipient Fish',1,81,82,256.000,-1.000,22.000,41,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17002502,0,'Percipient_Fish','Percipient Fish',1,81,82,223.000,-2.000,-21.000,41,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17002503,0,'Percipient_Fish','Percipient Fish',1,81,82,295.000,-4.000,-14.000,41,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17002504,0,'Percipient_Fish','Percipient Fish',1,81,82,313.000,-6.000,-16.000,41,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17002505,0,'Cursed_Chest','Cursed Chest',2,73,75,509.000,-7.000,100.000,192,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17002506,0,'Cursed_Chest','Cursed Chest',2,73,75,590.000,-15.000,103.000,127,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17002507,0,'Cursed_Chest','Cursed Chest',2,73,75,346.000,-2.000,113.000,49,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17002508,0,'Cursed_Chest','Cursed Chest',2,73,75,351.000,-15.000,-14.000,134,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17002509,0,'Cursed_Chest','Cursed Chest',2,73,75,305.000,-7.000,-56.000,249,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17002510,0,'Cursed_Chest','Cursed Chest',2,73,75,288.000,-15.000,-105.000,248,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17002511,0,'Cursed_Chest','Cursed Chest',2,73,75,331.000,-15.000,-181.000,202,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17002512,0,'Cursed_Chest','Cursed Chest',2,73,75,434.000,-7.000,-123.000,103,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17002513,0,'Cursed_Chest','Cursed Chest',2,73,75,330.000,-3.000,-34.000,163,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17002514,0,'Cursed_Chest','Cursed Chest',2,73,75,472.000,-7.000,228.000,96,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17002515,0,'Cursed_Chest','Cursed Chest',2,73,75,221.000,-1.000,-32.000,226,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17002516,0,'Cursed_Chest','Cursed Chest',2,73,75,546.000,-7.000,161.000,156,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17002497,0,'Percipient_Fish','Percipient Fish',1,81,82,256.659,-2.000,20.155,33,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17002498,0,'Percipient_Fish','Percipient Fish',1,81,82,344.061,-5.000,98.852,94,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17002499,0,'Percipient_Fish','Percipient Fish',1,81,82,294.499,-3.000,52.677,90,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17002500,0,'Percipient_Fish','Percipient Fish',1,81,82,344.571,-4.000,105.403,41,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17002501,0,'Percipient_Fish','Percipient Fish',1,81,82,406.046,-7.000,136.254,41,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17002502,0,'Percipient_Fish','Percipient Fish',1,81,82,466.457,-3.000,136.727,41,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17002503,0,'Percipient_Fish','Percipient Fish',1,81,82,505.912,-7.000,208.139,41,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17002504,0,'Percipient_Fish','Percipient Fish',1,81,82,518.554,-6.000,220.020,41,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17002505,0,'Cursed_Chest','Cursed Chest',2,73,75,1.000,0.000,0.000,0,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17002506,0,'Cursed_Chest','Cursed Chest',2,73,75,1.000,0.000,0.000,0,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17002507,0,'Cursed_Chest','Cursed Chest',2,73,75,1.000,0.000,0.000,0,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17002508,0,'Cursed_Chest','Cursed Chest',2,73,75,1.000,0.000,0.000,0,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17002509,0,'Cursed_Chest','Cursed Chest',2,73,75,1.000,0.000,0.000,0,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17002510,0,'Cursed_Chest','Cursed Chest',2,73,75,1.000,0.000,0.000,0,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17002511,0,'Cursed_Chest','Cursed Chest',2,73,75,1.000,0.000,0.000,0,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17002512,0,'Cursed_Chest','Cursed Chest',2,73,75,1.000,0.000,0.000,0,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17002513,0,'Cursed_Chest','Cursed Chest',2,73,75,1.000,0.000,0.000,0,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17002514,0,'Cursed_Chest','Cursed Chest',2,73,75,1.000,0.000,0.000,0,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17002515,0,'Cursed_Chest','Cursed Chest',2,73,75,1.000,0.000,0.000,0,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17002516,0,'Cursed_Chest','Cursed Chest',2,73,75,1.000,0.000,0.000,0,NULL,NULL);
 
 -- lamia 13
 INSERT INTO `mob_spawn_points` VALUES (17002517,0,'Lamia_No13','Lamia No.13',3,77,78,24.381,-4.094,-209.261,42,NULL,NULL);

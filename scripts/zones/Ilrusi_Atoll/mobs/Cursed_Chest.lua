@@ -5,31 +5,65 @@
 ---@type TMobEntity
 local entity = {}
 
-local function CheckForDrawnIn(centerX, centerY, centerZ, playerX, playerY, playerZ, rayon, maxRayon)
-    local difX = playerX-centerX
-    local difY = playerY-centerY
-    local difZ = playerZ-centerZ
-    local distance = math.sqrt(math.pow(difX, 2) + math.pow(difY, 2) + math.pow(difZ, 2))
+local function hideMimic(mob)
+    local instance = mob:getInstance()
+    local chestId  = mob:getID()
 
-    if distance > rayon and distance < maxRayon then
-        return true
-    else
-        return false
+    DespawnMob(chestId, instance)
+
+    local npcChest = GetNPCByID(chestId, instance)
+    if npcChest then
+        npcChest:setStatus(xi.status.NORMAL)
     end
 end
 
-entity.onMobFight = function(mob, target)
-    local playerX = target:getXPos()
-    local playerY = target:getYPos()
-    local playerZ = target:getZPos()
-    local mobX = mob:getXPos()
-    local mobY = mob:getYPos()
-    local mobZ = mob:getZPos()
-    local distanceMin = 3
-    local distanceMax = 20
+entity.onMobSpawn = function(mob)
+    -- Mimics only exist while revealed; the disguised chest is the NPC with
+    -- the same ID (see scripts/assaults/Ilrusi_Atoll/golden_salvage.lua).
+    mob:setLocalVar('[Timer]NoTarget', 0)
+end
 
-    if CheckForDrawnIn(mobX, mobY, mobZ, playerX, playerY, playerZ, distanceMin, distanceMax) then
+entity.onMobFight = function(mob, target)
+    local distanceToTarget = mob:checkDistance(target)
+    if distanceToTarget <= 3 then
+        return
+    end
+
+    -- Handle draw-in.
+    if distanceToTarget < 30 then
+        mob:setLocalVar('[Timer]NoTarget', 0)
         target:setPos(mob:getXPos(), mob:getYPos(), mob:getZPos())
+        return
+    end
+
+    -- Main target is out of range. Check additional targets.
+    for _, hateEntry in pairs(mob:getEnmityList()) do
+        if
+            hateEntry and
+            not hateEntry:isDead() and
+            mob:checkDistance(hateEntry) < 30
+        then
+            mob:setLocalVar('[Timer]NoTarget', 0)
+            return
+        end
+    end
+
+    local currentTime   = GetSystemTime()
+    local noTargetTimer = mob:getLocalVar('[Timer]NoTarget')
+    if noTargetTimer == 0 then
+        mob:setLocalVar('[Timer]NoTarget', currentTime)
+        return
+    end
+
+    if currentTime - noTargetTimer >= 5 then
+        hideMimic(mob)
+    end
+end
+
+entity.onMobDisengage = function(mob)
+    -- A slain mimic stays gone; only a live one re-disguises as a chest.
+    if mob:isAlive() then
+        hideMimic(mob)
     end
 end
 

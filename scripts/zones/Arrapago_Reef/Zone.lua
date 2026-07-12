@@ -85,7 +85,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     end
 
     if prevZone == xi.zone.ILRUSI_ATOLL then
-        player:setPos(26, -7, 606, 222)
+        player:setPos(9.304, -7.377, 620.133, 0)
     end
 
     return cs
@@ -113,10 +113,19 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
-    if csid == 108 then -- enter instance: illrusi atoll
+    -- Enter instance: Illrusi Atoll
+    if csid == 108 then
         player:setPos(0, 0, 0, 0, 55)
-    elseif csid == 222 then -- Enter instance: Black coffin
-        player:setPos(0, 0, 0, 0, 60)
+
+    -- Party member entry cutscene, shared by Black Coffin and Ilrusi assaults.
+    elseif csid == 222 then
+        -- Only zone the player here for Black Coffin (The Ashu Talif).
+        -- Ilrusi assault members are teleported by the leader's confirm event (xi.instance.onEventFinish);
+        -- zoning them here too caused a double teleport to the wrong destination.
+        local instance = player:getInstance()
+        if instance and instance:getZone():getID() == xi.zone.THE_ASHU_TALIF then
+            player:setPos(0, 0, 0, 0, xi.zone.THE_ASHU_TALIF)
+        end
     end
 end
 

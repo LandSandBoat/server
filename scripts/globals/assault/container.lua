@@ -17,6 +17,7 @@ xi.assault.contentsByZone = xi.assault.contentsByZone or {}
 ---@field requiredProgress         integer?
 ---@field afterInstanceRegister    function
 ---@field onInstanceCreated        function
+---@field onInstanceTimeUpdate     function
 ---@field onInstanceProgressUpdate function
 ---@field onInstanceComplete       function
 ---@field onAssaultFail            function
@@ -62,6 +63,7 @@ end
 -- Call InstanceAssault.methodName(self, ...) within an override to utilize the default behavior of the functions.
 --  - function content:afterInstanceRegister(player)
 --  - function content:onInstanceCreated(instance)
+--  - function content:onInstanceTimeUpdate(instance, elapsed)
 --  - function content:onInstanceProgressUpdate(instance, progress)
 --  - function content:onEventUpdate(player, csid, option, npc)
 --  - function content:onEventFinish(player, csid, option, npc)
@@ -103,6 +105,10 @@ end
 
 function InstanceAssault:onInstanceCreated(instance)
     xi.assault.onInstanceSetup(instance, self)
+end
+
+function InstanceAssault:onInstanceTimeUpdate(instance, elapsed)
+    xi.instance.updateInstanceTime(instance, elapsed, zones[self.zoneID].text)
 end
 
 function InstanceAssault:onInstanceProgressUpdate(instance, progress)
@@ -173,7 +179,7 @@ function InstanceAssault:register()
     end
 
     instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
-        xi.instance.updateInstanceTime(instance, elapsed, zones[content.zoneID].text)
+        content:onInstanceTimeUpdate(instance, elapsed)
     end
 
     instanceObject.onInstanceFailure = function(instance)
@@ -352,7 +358,10 @@ xi.assault.afterInstanceRegistration = function(player, content)
 
     local areaData = xi.assault.areaData[content.assaultArea]
     if areaData and areaData.firefly then
-        player:addTempItem(areaData.firefly)
+        -- Only add firefly if there's no entry event that will give it to prevent double items in inv.
+        if not content.entranceParams or not content.entranceParams.entryEvent then
+            player:addTempItem(areaData.firefly)
+        end
     end
 end
 

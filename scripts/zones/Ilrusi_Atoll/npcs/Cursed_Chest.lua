@@ -2,31 +2,17 @@
 -- Area: Ilrusi Atoll
 --  NPC: Cursed Chest
 -----------------------------------
-local ID = zones[xi.zone.ILRUSI_ATOLL]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
+entity.onSpawn = function(npc)
+    -- Hidden by default; the Golden Salvage assault shows the one chest that
+    -- holds the figurehead (see scripts/assaults/Ilrusi_Atoll/golden_salvage.lua).
+    npc:setStatus(xi.status.DISAPPEAR)
+end
+
 entity.onTrigger = function(player, npc)
-    player:messageSpecial(ID.text.CHEST)
-
-    local npcID    = npc:getID()
-    local instance = npc:getInstance()
-    if not instance then
-        return
-    end
-
-    local figureheadChest = instance:getProgress()
-
-    if npcID == figureheadChest then
-        player:messageSpecial(ID.text.GOLDEN)
-        instance:complete()
-        for i, v in pairs(ID.mob[2]) do
-            DespawnMob(v, instance)
-        end
-    else
-        SpawnMob(npcID, instance):updateClaim(player)
-    end
+    xi.assault.contents[xi.assault.mission.GOLDEN_SALVAGE].onChestTrigger(player, npc)
 end
 
 return entity
