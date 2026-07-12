@@ -78,7 +78,7 @@ quest.sections =
                         return
                     end
 
-                    local eventCancelled = bit.rshift(option, 31) == 1 and true or false
+                    local eventCancelled = bit.rshift(option, 30) == 1 and true or false
                     if eventCancelled then
                         return
                     end

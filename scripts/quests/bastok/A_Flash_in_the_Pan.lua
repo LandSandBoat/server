@@ -25,12 +25,40 @@ quest.sections =
 
         [xi.zone.BASTOK_MARKETS] =
         {
-            ['Aquillina'] = quest:progressEvent(217),
+            ['Aquillina'] =
+            {
+                onTrade = function(player, npc, trade)
+                    if trade:getItemQty(xi.item.FLINT_STONE) == 0 then
+                        return quest:noAction()
+                    end
+
+                    if npc:getLocalVar('tradeCooldown') > GetSystemTime() then
+                        return quest:event(218)
+                    end
+
+                    if npcUtil.tradeHasExactly(trade, { { xi.item.FLINT_STONE, 4 } }) then
+                        return quest:progressEvent(219) -- She does NOT care if you ever spoke to her.
+                    end
+                end,
+
+                onTrigger = function(player, npc)
+                    if npc:getLocalVar('tradeCooldown') <= GetSystemTime() then
+                        return quest:progressEvent(217)
+                    end
+                end,
+            },
 
             onEventFinish =
             {
                 [217] = function(player, csid, option, npc)
                     quest:begin(player)
+                end,
+
+                [219] = function(player, csid, option, npc)
+                    if quest:complete(player) then
+                        player:confirmTrade()
+                        GetNPCByID(bastokMarketsID.npc.AQUILLINA):setLocalVar('tradeCooldown', GetSystemTime() + 900)
+                    end
                 end,
             },
         },
@@ -38,7 +66,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_ACCEPTED
+            return status ~= xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.BASTOK_MARKETS] =
@@ -46,12 +74,22 @@ quest.sections =
             ['Aquillina'] =
             {
                 onTrade = function(player, npc, trade)
+                    if trade:getItemQty(xi.item.FLINT_STONE) == 0 then
+                        return quest:noAction()
+                    end
+
+                    if npc:getLocalVar('tradeCooldown') > GetSystemTime() then
+                        return quest:event(218)
+                    end
+
                     if npcUtil.tradeHasExactly(trade, { { xi.item.FLINT_STONE, 4 } }) then
-                        if npc:getLocalVar('tradeCooldown') <= GetSystemTime() then
-                            return quest:progressEvent(219)
-                        else
-                            return quest:progressEvent(218)
-                        end
+                        return quest:progressEvent(219) -- She does NOT care if you ever spoke to her.
+                    end
+                end,
+
+                onTrigger = function(player, npc)
+                    if npc:getLocalVar('tradeCooldown') <= GetSystemTime() then
+                        return quest:event(217)
                     end
                 end,
             },
