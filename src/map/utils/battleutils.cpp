@@ -1789,7 +1789,9 @@ auto GetBaseDelay(CBattleEntity* PEntity) -> uint16
             else
             {
                 baseDelay = PMainWeapon->getBaseDelay();
-                if (PSubWeapon)
+
+                // Only add delay if subweapon isnt a grip
+                if (PSubWeapon && PSubWeapon->getSkillType() != xi::SkillType::None)
                 {
                     baseDelay += PSubWeapon->getBaseDelay();
                 }
@@ -1801,7 +1803,7 @@ auto GetBaseDelay(CBattleEntity* PEntity) -> uint16
         CItemWeapon* PWeapon = dynamic_cast<CItemWeapon*>(PMobEntity->m_Weapons[SLOT_MAIN]);
         if (PWeapon)
         {
-            baseDelay = PWeapon->getBaseDelay(); // there is some precision loss that results in delays of 319.98 instead of 320, etc, so round to nearest.
+            baseDelay = PWeapon->getBaseDelay();
         }
     }
 
@@ -1841,7 +1843,7 @@ auto GetBaseRangedDelay(CBattleEntity* PEntity) -> uint16
         CItemWeapon* PWeapon = dynamic_cast<CItemWeapon*>(PMobEntity->m_Weapons[SLOT_MAIN]);
         if (PWeapon)
         {
-            baseDelay = PWeapon->getBaseDelay(); // there is some precision loss that results in delays of 319.98 instead of 320, etc, so round to nearest.
+            baseDelay = PWeapon->getBaseDelay();
         }
     }
 
