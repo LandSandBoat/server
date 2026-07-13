@@ -886,6 +886,7 @@ public:
     void setAggressive(bool aggressive);
     void setTrueDetection(bool truedetection);
     void setUnkillable(bool unkillable);
+    auto getUnkillable() -> bool;
     void setUntargetable(bool untargetable);
     bool getUntargetable();
     void setIsAggroable(bool isAggroable);
