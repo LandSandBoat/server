@@ -8,14 +8,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    local wildcatSandy = player:getCharVar('WildcatSandy')
-
-    if
-        player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == xi.questStatus.QUEST_ACCEPTED and
-        not utils.mask.getBit(wildcatSandy, 0)
-    then
-        player:startEvent(810)
-    elseif player:getCharVar('peaceForTheSpiritCS') == 3 then
+    if player:getCharVar('peaceForTheSpiritCS') == 3 then
         player:startEvent(72)
     elseif player:getCharVar('peaceForTheSpiritCS') == 5 then
         player:startEvent(73)
@@ -25,9 +18,7 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 810 then
-        player:setCharVar('WildcatSandy', utils.mask.setBit(player:getCharVar('WildcatSandy'), 0, true))
-    elseif csid == 72 then
+    if csid == 72 then
         player:setCharVar('peaceForTheSpiritCS', 4)
     end
 end

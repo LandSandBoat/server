@@ -18,26 +18,26 @@ quest.reward =
 
 local wildcatNpcData =
 {
-    ['Kaede']             = {  0, 352 }, -- !pos 48 -6 67 236
-    ['Patient_Wheel']     = {  1, 354 }, -- !pos -107.988 3.898 52.557 236
-    ['Paujean']           = {  2, 355 }, -- !pos -93.738 4.649 34.373 236
-    ['Hilda']             = {  3, 356 }, -- !pos -163 -8 13 236
-    ['Tilian']            = {  4, 353 }, -- !pos -118.460 4.999 -68.090 236
-    ['Raibaht']           = {  5, 933 }, -- !pos -27 -10 -1 237
+    ['Kaede'            ] = {  0, 352 }, -- !pos 48 -6 67 236
+    ['Patient_Wheel'    ] = {  1, 354 }, -- !pos -107.988 3.898 52.557 236
+    ['Paujean'          ] = {  2, 355 }, -- !pos -93.738 4.649 34.373 236
+    ['Hilda'            ] = {  3, 356 }, -- !pos -163 -8 13 236
+    ['Tilian'           ] = {  4, 353 }, -- !pos -118.46 4.999 -68.09 236
+    ['Raibaht'          ] = {  5, 933 }, -- !pos -27 -10 -1 237
     ['Invincible_Shield'] = {  6, 932 }, -- !pos -51.083 -11 2.126 237
-    ['Manilam']           = {  7, 931 }, -- !pos -57.300 -11 22.332 237
-    ['Kaela']             = {  8, 934 }, -- !pos 40.167 -14.999 16.073 237
-    ['Ayame']             = {  9, 935 }, -- !pos 133 -19 34 237
-    ['Harmodios']         = { 10, 430 }, -- !pos -79.928 -4.824 -135.114 235
-    ['Arawn']             = { 11, 429 }, -- !pos -121.492 -4 -123.923 235
-    ['Horatius']          = { 12, 428 }, -- !pos -158 -6 -117 235
-    ['Ken']               = { 13, 432 }, -- !pos -340.857 -11.003 -149.008 235
-    ['Pavel']             = { 14, 431 }, -- !pos -349.798 -10.002 -181.296 235
-    ['Griselda']          = { 15, 507 }, -- !pos -25.749 -0.044 52.360 234
-    ['Goraow']            = { 16, 506 }, -- !pos 38 0.1 14 234
-    ['Echo_Hawk']         = { 17, 505 }, -- !pos -0.965 5.999 -15.567 234
-    ['Deidogg']           = { 18, 504 }, -- !pos -13 7 29 234
-    ['Vaghron']           = { 19, 503 }, -- !pos -39.162 -1 -92.147 234
+    ['Manilam'          ] = {  7, 931 }, -- !pos -57.3 -11 22.332 237
+    ['Kaela'            ] = {  8, 934 }, -- !pos 40.167 -14.999 16.073 237
+    ['Ayame'            ] = {  9, 935 }, -- !pos 133 -19 34 237
+    ['Harmodios'        ] = { 10, 430 }, -- !pos -79.928 -4.824 -135.114 235
+    ['Arawn'            ] = { 11, 429 }, -- !pos -121.492 -4 -123.923 235
+    ['Horatius'         ] = { 12, 428 }, -- !pos -158 -6 -117 235
+    ['Ken'              ] = { 13, 432 }, -- !pos -340.857 -11.003 -149.008 235
+    ['Pavel'            ] = { 14, 431 }, -- !pos -349.798 -10.002 -181.296 235
+    ['Griselda'         ] = { 15, 507 }, -- !pos -25.749 -0.044 52.36 234
+    ['Goraow'           ] = { 16, 506 }, -- !pos 38 0.1 14 234
+    ['Echo_Hawk'        ] = { 17, 505 }, -- !pos -0.965 5.999 -15.567 234
+    ['Deidogg'          ] = { 18, 504 }, -- !pos -13 7 29 234
+    ['Vaghron'          ] = { 19, 503 }, -- !pos -39.162 -1 -92.147 234
 }
 
 local wildcatOnTrigger = function(player, npc)
@@ -81,11 +81,11 @@ quest.sections =
 
         [xi.zone.BASTOK_MARKETS] =
         {
-            ['Arawn']     = wildcatOnTrigger,
+            ['Arawn'    ] = wildcatOnTrigger,
             ['Harmodios'] = wildcatOnTrigger,
-            ['Horatius']  = wildcatOnTrigger,
-            ['Ken']       = wildcatOnTrigger,
-            ['Pavel']     = wildcatOnTrigger,
+            ['Horatius' ] = wildcatOnTrigger,
+            ['Ken'      ] = wildcatOnTrigger,
+            ['Pavel'    ] = wildcatOnTrigger,
 
             onEventFinish =
             {
@@ -99,11 +99,11 @@ quest.sections =
 
         [xi.zone.BASTOK_MINES] =
         {
-            ['Deidogg']   = wildcatOnTrigger,
+            ['Deidogg'  ] = wildcatOnTrigger,
             ['Echo_Hawk'] = wildcatOnTrigger,
-            ['Goraow']    = wildcatOnTrigger,
-            ['Griselda']  = wildcatOnTrigger,
-            ['Vaghron']   = wildcatOnTrigger,
+            ['Goraow'   ] = wildcatOnTrigger,
+            ['Griselda' ] = wildcatOnTrigger,
+            ['Vaghron'  ] = wildcatOnTrigger,
 
             onEventFinish =
             {
@@ -117,11 +117,11 @@ quest.sections =
 
         [xi.zone.METALWORKS] =
         {
-            ['Ayame']             = wildcatOnTrigger,
+            ['Ayame'            ] = wildcatOnTrigger,
             ['Invincible_Shield'] = wildcatOnTrigger,
-            ['Kaela']             = wildcatOnTrigger,
-            ['Manilam']           = wildcatOnTrigger,
-            ['Raibaht']           = wildcatOnTrigger,
+            ['Kaela'            ] = wildcatOnTrigger,
+            ['Manilam'          ] = wildcatOnTrigger,
+            ['Raibaht'          ] = wildcatOnTrigger,
 
             onEventFinish =
             {
@@ -150,11 +150,11 @@ quest.sections =
                 end,
             },
 
-            ['Hilda']         = wildcatOnTrigger,
-            ['Kaede']         = wildcatOnTrigger,
+            ['Hilda'        ] = wildcatOnTrigger,
+            ['Kaede'        ] = wildcatOnTrigger,
             ['Patient_Wheel'] = wildcatOnTrigger,
-            ['Paujean']       = wildcatOnTrigger,
-            ['Tilian']        = wildcatOnTrigger,
+            ['Paujean'      ] = wildcatOnTrigger,
+            ['Tilian'       ] = wildcatOnTrigger,
 
             onEventFinish =
             {

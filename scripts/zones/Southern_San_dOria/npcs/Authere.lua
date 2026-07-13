@@ -8,14 +8,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    local wildcatSandy = player:getCharVar('WildcatSandy')
-
-    if
-        player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == xi.questStatus.QUEST_ACCEPTED and
-        not utils.mask.getBit(wildcatSandy, 1)
-    then
-        player:startEvent(809)
-    elseif player:getCharVar('BrothersCS') == 1 then
+    if player:getCharVar('BrothersCS') == 1 then
         player:startEvent(597)  -- brothers cs
     else
         player:startEvent(605)  -- when i grow up im gonna fight like trion
@@ -23,9 +16,7 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 809 then
-        player:setCharVar('WildcatSandy', utils.mask.setBit(player:getCharVar('WildcatSandy'), 1, true))
-    elseif csid == 597 then
+    if csid == 597 then
         player:setCharVar('BrothersCS', 0)
     end
 end

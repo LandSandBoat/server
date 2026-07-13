@@ -18,26 +18,26 @@ quest.reward =
 
 local wildcatNpcData =
 {
-    ['Albiona']       = {  0, 10089 }, -- !pos -4.363 8.999 -31.901 243
+    ['Albiona'      ] = {  0, 10089 }, -- !pos -4.363 8.999 -31.901 243
     ['Crooked_Arrow'] = {  1, 10090 }, -- !pos -34.9 2.999 -10.877 243
-    ['Muhoho']        = {  2, 10093 }, -- !pos -4.808 -4.999 27.83 243
-    ['Adolie']        = {  3, 10091 }, -- !pos -35 2 59 243
-    ['Yavoraile']     = {  4, 10092 }, -- !pos 30.173 2 68.864 243
-    ['Sibila-Mobla']  = {  5, 10083 }, -- !pos -52.531 0 122.68 244
-    ['Shiroro']       = {  6, 10084 }, -- !pos -72.632 -1.2 52.905 244
+    ['Muhoho'       ] = {  2, 10093 }, -- !pos -4.808 -4.999 27.83 243
+    ['Adolie'       ] = {  3, 10091 }, -- !pos -35 2 59 243
+    ['Yavoraile'    ] = {  4, 10092 }, -- !pos 30.173 2 68.864 243
+    ['Sibila-Mobla' ] = {  5, 10083 }, -- !pos -52.531 0 122.68 244
+    ['Shiroro'      ] = {  6, 10084 }, -- !pos -72.632 -1.2 52.905 244
     ['Luto_Mewrilah'] = {  7, 10085 }, -- !pos -53 0 45 244
-    ['Renik']         = {  8, 10086 }, -- !pos -14.672 0 38.624 244
-    ['Hinda']         = {  9, 10087 }, -- !pos -25.605 -1.499 19.891 244
-    ['Sutarara']      = { 10, 10055 }, -- !pos 30 0.1 -2 245
-    ['Saprut']        = { 11, 10054 }, -- !pos 2.257 -5.999 -16.434 245
-    ['Bluffnix']      = { 12, 10056 }, -- !pos -43.099 5.9 -114.788 245
-    ['Naruru']        = { 13, 10053 }, -- !pos -56 0.1 -138 245
-    ['Gurdern']       = { 14, 10052 }, -- !pos -98.021 0 -142.601 245
-    ['Red_Ghost']     = { 15,   314 }, -- !pos -96.503 0 7.688 246
-    ['Karl']          = { 16,   316 }, -- !pos -60 0.1 -8 246
-    ['Shami']         = { 17,   317 }, -- !pos -53.9 0 10.8 246
-    ['Rinzei']        = { 18,   315 }, -- !pos -14.388 0 -9.156 246
-    ['Sagheera']      = { 19,   313 }, -- !pos -3 0.1 -9 246
+    ['Renik'        ] = {  8, 10086 }, -- !pos -14.672 0 38.624 244
+    ['Hinda'        ] = {  9, 10087 }, -- !pos -25.605 -1.499 19.891 244
+    ['Sutarara'     ] = { 10, 10055 }, -- !pos 30 0.1 -2 245
+    ['Saprut'       ] = { 11, 10054 }, -- !pos 2.257 -5.999 -16.434 245
+    ['Bluffnix'     ] = { 12, 10056 }, -- !pos -43.099 5.9 -114.788 245
+    ['Naruru'       ] = { 13, 10053 }, -- !pos -56 0.1 -138 245
+    ['Gurdern'      ] = { 14, 10052 }, -- !pos -98.021 0 -142.601 245
+    ['Red_Ghost'    ] = { 15,   314 }, -- !pos -96.503 0 7.688 246
+    ['Karl'         ] = { 16,   316 }, -- !pos -60 0.1 -8 246
+    ['Shami'        ] = { 17,   317 }, -- !pos -53.9 0 10.8 246
+    ['Rinzei'       ] = { 18,   315 }, -- !pos -14.388 0 -9.156 246
+    ['Sagheera'     ] = { 19,   313 }, -- !pos -3 0.1 -9 246
 }
 
 local wildcatOnTrigger = function(player, npc)
@@ -82,9 +82,9 @@ quest.sections =
         [xi.zone.LOWER_JEUNO] =
         {
             ['Bluffnix'] = wildcatOnTrigger,
-            ['Gurdern']  = wildcatOnTrigger,
-            ['Naruru']   = wildcatOnTrigger,
-            ['Saprut']   = wildcatOnTrigger,
+            ['Gurdern' ] = wildcatOnTrigger,
+            ['Naruru'  ] = wildcatOnTrigger,
+            ['Saprut'  ] = wildcatOnTrigger,
             ['Sutarara'] = wildcatOnTrigger,
 
             onEventFinish =
@@ -99,11 +99,11 @@ quest.sections =
 
         [xi.zone.PORT_JEUNO] =
         {
-            ['Karl']      = wildcatOnTrigger,
+            ['Karl'     ] = wildcatOnTrigger,
             ['Red_Ghost'] = wildcatOnTrigger,
-            ['Rinzei']    = wildcatOnTrigger,
-            ['Sagheera']  = wildcatOnTrigger,
-            ['Shami']     = wildcatOnTrigger,
+            ['Rinzei'   ] = wildcatOnTrigger,
+            ['Sagheera' ] = wildcatOnTrigger,
+            ['Shami'    ] = wildcatOnTrigger,
 
             onEventFinish =
             {
@@ -117,11 +117,11 @@ quest.sections =
 
         [xi.zone.RULUDE_GARDENS] =
         {
-            ['Adolie']        = wildcatOnTrigger,
-            ['Albiona']       = wildcatOnTrigger,
+            ['Adolie'       ] = wildcatOnTrigger,
+            ['Albiona'      ] = wildcatOnTrigger,
             ['Crooked_Arrow'] = wildcatOnTrigger,
-            ['Muhoho']        = wildcatOnTrigger,
-            ['Yavoraile']     = wildcatOnTrigger,
+            ['Muhoho'       ] = wildcatOnTrigger,
+            ['Yavoraile'    ] = wildcatOnTrigger,
 
             onEventFinish =
             {
@@ -150,11 +150,11 @@ quest.sections =
                 end,
             },
 
-            ['Hinda']         = wildcatOnTrigger,
+            ['Hinda'        ] = wildcatOnTrigger,
             ['Luto_Mewrilah'] = wildcatOnTrigger,
-            ['Renik']         = wildcatOnTrigger,
-            ['Shiroro']       = wildcatOnTrigger,
-            ['Sibila-Mobla']  = wildcatOnTrigger,
+            ['Renik'        ] = wildcatOnTrigger,
+            ['Shiroro'      ] = wildcatOnTrigger,
+            ['Sibila-Mobla' ] = wildcatOnTrigger,
 
             onEventFinish =
             {

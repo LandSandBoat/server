@@ -11,15 +11,8 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     local makingHeadlines = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES)
-    local lureOfTheWildcat = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT)
-    local wildcatWindurst = player:getCharVar('WildcatWindurst')
 
     if
-        lureOfTheWildcat == xi.questStatus.QUEST_ACCEPTED and
-        not utils.mask.getBit(wildcatWindurst, 14)
-    then
-        player:startEvent(939)
-    elseif
         player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and
         not utils.mask.getBit(player:getCharVar('QuestHatInHand_var'), 4)
     then
@@ -50,8 +43,6 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 60 then
         player:setCharVar('QuestHatInHand_var', utils.mask.setBit(player:getCharVar('QuestHatInHand_var'), 4, true))
         player:incrementCharVar('QuestHatInHand_count', 1)
-    elseif csid == 939 then
-        player:setCharVar('WildcatWindurst', utils.mask.setBit(player:getCharVar('WildcatWindurst'), 14, true))
     end
 end
 

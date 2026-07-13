@@ -47,19 +47,10 @@ local trustMemory = function(player)
 end
 
 entity.onTrigger = function(player, npc)
-    local wildcatWindurst = player:getCharVar('WildcatWindurst')
     local mihgosAmigo = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.MIHGOS_AMIGO)
 
-    -- LURE OF THE WILDCAT (WINDURST 2-1)
-    -- Simply checks this NPC as talked to for the PC, should be highest priority
-    if
-        player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == xi.questStatus.QUEST_ACCEPTED and
-        not utils.mask.getBit(wildcatWindurst, 4)
-    then
-        player:startEvent(732)
-
     -- TRUST
-    elseif
+    if
         player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT) and
         not player:hasSpell(xi.magic.spell.NANAA_MIHGO) and
         player:getLocalVar('TrustDialogue') == 0
@@ -73,11 +64,7 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    -- LURE OF THE WILDCAT (WINDURST)
-    if csid == 732 then
-        player:setCharVar('WildcatWindurst', utils.mask.setBit(player:getCharVar('WildcatWindurst'), 4, true))
-
-    elseif csid == 865 and option == 2 then
+    if csid == 865 and option == 2 then
         player:addSpell(xi.magic.spell.NANAA_MIHGO, { silentLog = true })
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.NANAA_MIHGO)
     end

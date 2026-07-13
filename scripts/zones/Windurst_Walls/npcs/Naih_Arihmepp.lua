@@ -21,22 +21,7 @@ entity.onSpawn = function(npc)
 end
 
 entity.onTrigger = function(player, npc)
-    local wildcatWindurst = player:getCharVar('WildcatWindurst')
-
-    if
-        player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == xi.questStatus.QUEST_ACCEPTED and
-        not utils.mask.getBit(wildcatWindurst, 9)
-    then
-        player:startEvent(500)
-    else
-        player:startEvent(326)
-    end
-end
-
-entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 500 then
-        player:setCharVar('WildcatWindurst', utils.mask.setBit(player:getCharVar('WildcatWindurst'), 9, true))
-    end
+    player:startEvent(326)
 end
 
 return entity
