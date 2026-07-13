@@ -11,8 +11,19 @@ mixins =
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.NO_DESPAWN, 1)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
-    xi.regime.checkRegime(player, mob, 133, 1, xi.regime.type.FIELDS)
+    if optParams.isKiller or optParams.noKiller then
+        xi.expeditionaryForce.onMobDeath(mob, player)
+    end
+end
+
+entity.onMobDespawn = function(mob)
+    xi.expeditionaryForce.onMobDespawn(mob)
 end
 
 return entity

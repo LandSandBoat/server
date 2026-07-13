@@ -46814,7 +46814,7 @@ INSERT INTO `mob_spawn_points` VALUES (17281477,0,'Demisahagin_Monk','Demisahagi
 INSERT INTO `mob_spawn_points` VALUES (17281478,0,'Demishagin_White_Mage','Demishagin White Mage',43,40,43,1.000,1.000,1.000,0,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17281479,0,'Demisahagin_Bard','Demisahagin Bard',44,40,43,1.000,1.000,1.000,0,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17281480,0,'Demisahagin_Dragoon','Demisahagin Dragoon',45,40,43,1.000,1.000,1.000,0,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17281481,0,'Sahagins_Wyvern','Sahagin\'s Wyvern',46,38,40,0.000,0.000,0.000,0,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17281481,0,'Sahagins_Wyvern','Sahagin\'s Wyvern',46,38,40,1.000,1.000,1.000,0,NULL,NULL);
 
 -- Garrison
 INSERT INTO `mob_spawn_points` VALUES (17281482,0,'Brook_Sahagin','Brook Sahagin',47,40,45,-224.851,0.483,-392.204,95,NULL,NULL);
