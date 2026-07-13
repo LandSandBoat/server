@@ -56,22 +56,22 @@ zones[xi.zone.GARLAIGE_CITADEL] =
     },
     mob =
     {
+        APPARATUS_ELEMENTAL = GetFirstID('Light_Elemental'),
+        CHANDELIER          = GetFirstID('Chandelier'),
+        GUARDIAN_STATUE     = GetFirstID('Guardian_Statue'),
         HAZMAT              = GetFirstID('Hazmat'),
         HOVERING_HOTPOT     = GetFirstID('Hovering_Hotpot'),
         OLD_TWO_WINGS       = GetFirstID('Old_Two-Wings'),
-        SKEWER_SAM          = GetFirstID('Skewer_Sam'),
-        CHANDELIER          = GetFirstID('Chandelier'),
-        GUARDIAN_STATUE     = GetFirstID('Guardian_Statue'),
-        SERKET              = GetFirstID('Serket'),
         MIMIC               = GetFirstID('Mimic'),
-        APPARATUS_ELEMENTAL = GetFirstID('Light_Elemental'),
+        SERKET              = GetFirstID('Serket'),
+        SKEWER_SAM          = GetFirstID('Skewer_Sam'),
     },
     npc =
     {
-        BANISHING_GATE_OFFSET = 17596762,
+        BANISHING_GATE_OFFSET = GetFirstID('_5k0'),
+        CHANDELIER_QM         = GetFirstID('qm15'),
         TREASURE_CHEST        = GetFirstID('Treasure_Chest'),
         TREASURE_COFFER       = GetFirstID('Treasure_Coffer'),
-        CHANDELIER_QM         = 17596831,
     },
 }
 

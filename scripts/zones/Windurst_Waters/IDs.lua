@@ -84,7 +84,7 @@ zones[xi.zone.WINDURST_WATERS] =
             [17752103] = 62, -- Ahyeekih
         },
 
-        LELEROON_GREEN_DOOR = 17752333,
+        LELEROON_GREEN_DOOR = GetFirstID('Door_House'),
     },
 }
 
