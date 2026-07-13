@@ -90,7 +90,7 @@ xi.ability.adjustDamage = function(dmg, attacker, skill, target, skilltype, skil
         dmg = utils.handleOneForAll(target, dmg)
     end
 
-    dmg = utils.handleStoneskin(target, dmg)
+    dmg = utils.handleStoneskin(target, dmg, skilltype)
 
     if dmg > 0 then
         target:wakeUp()

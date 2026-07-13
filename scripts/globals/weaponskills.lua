@@ -225,7 +225,7 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
     adjustedDamage = adjustedDamage + xi.combat.damage.souleaterAddition(attacker)
 
     adjustedDamage = utils.handlePhalanx(target, adjustedDamage)
-    adjustedDamage = utils.handleStoneskin(target, adjustedDamage)
+    adjustedDamage = utils.handleStoneskin(target, adjustedDamage, xi.attackType.PHYSICAL)
 
     return adjustedDamage
 end
