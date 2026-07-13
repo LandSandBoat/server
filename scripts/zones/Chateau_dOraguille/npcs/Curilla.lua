@@ -57,13 +57,6 @@ entity.onTrigger = function(player, npc)
         player:setLocalVar('TrustDialogue', 1)
         player:startEvent(573, 0, 0, 0, trustMemory(player), 0, 0, 0, rank3)
 
-    -- "Lure of the Wildcat"
-    elseif
-        player:getQuestStatus(xi.questLog.SANDORIA, sandyQuests.LURE_OF_THE_WILDCAT) == xi.questStatus.QUEST_ACCEPTED and
-        not utils.mask.getBit(player:getCharVar('WildcatSandy'), 15)
-    then
-        player:startEvent(562)
-
     -- "Peace for the Spirit" (RDM AF Body)
     elseif peaceForTheSpirit == xi.questStatus.QUEST_ACCEPTED then
         local questStatus = player:getCharVar('peaceForTheSpiritCS')
@@ -102,8 +95,6 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 109 and option == 1 then
         player:addQuest(xi.questLog.SANDORIA, sandyQuests.PEACE_FOR_THE_SPIRIT)
-    elseif csid == 562 then
-        player:setCharVar('WildcatSandy', utils.mask.setBit(player:getCharVar('WildcatSandy'), 15, true))
     elseif csid == 573 and option == 2 then
         player:addSpell(xi.magic.spell.CURILLA, { silentLog = true })
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.CURILLA)

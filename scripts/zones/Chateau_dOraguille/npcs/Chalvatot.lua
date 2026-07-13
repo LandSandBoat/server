@@ -12,8 +12,6 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local circleOfTime = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
     local circleProgress = player:getCharVar('circleTime')
-    local lureOfTheWildcat = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT)
-    local wildcatSandy = player:getCharVar('WildcatSandy')
 
     -- CIRCLE OF TIME (Bard AF3)
     if circleOfTime == xi.questStatus.QUEST_ACCEPTED then
@@ -26,13 +24,6 @@ entity.onTrigger = function(player, npc)
         elseif circleProgress == 9 then
             player:startEvent(96)
         end
-
-    -- LURE OF THE WILDCAT
-    elseif
-        lureOfTheWildcat == xi.questStatus.QUEST_ACCEPTED and
-        not utils.mask.getBit(wildcatSandy, 19)
-    then
-        player:startEvent(561)
     end
 end
 
@@ -49,9 +40,6 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addTitle(xi.title.PARAGON_OF_BARD_EXCELLENCE)
             player:setCharVar('circleTime', 0)
         end
-    -- LURE OF THE WILDCAT
-    elseif csid == 561 then
-        player:setCharVar('WildcatSandy', utils.mask.setBit(player:getCharVar('WildcatSandy'), 19, true))
     end
 end
 

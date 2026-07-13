@@ -38,14 +38,8 @@ end
 
 entity.onTrigger = function(player, npc)
     local amazinScorpio = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_AMAZIN_SCORPIO)
-    local wildcatWindurst = player:getCharVar('WildcatWindurst')
 
-    if
-        player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == xi.questStatus.QUEST_ACCEPTED and
-        not utils.mask.getBit(wildcatWindurst, 0)
-    then
-        player:startEvent(735)
-    elseif amazinScorpio == xi.questStatus.QUEST_COMPLETED then
+    if amazinScorpio == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(485)
     elseif amazinScorpio == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(482, 0, 0, xi.item.SCORPION_STINGER)
@@ -67,8 +61,6 @@ entity.onEventFinish = function(player, csid, option, npc)
         npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.THE_AMAZIN_SCORPIO, { fame = 80, title = xi.title.GREAT_GRAPPLER_SCORPIO, gil = 1500 })
     then
         player:confirmTrade()
-    elseif csid == 735 then
-        player:setCharVar('WildcatWindurst', utils.mask.setBit(player:getCharVar('WildcatWindurst'), 0, true))
     end
 end
 

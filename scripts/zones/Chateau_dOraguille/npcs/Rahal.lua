@@ -12,15 +12,9 @@ entity.onTrigger = function(player, npc)
     local hasDragonCurseRemedy = player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
     local stalkerQuest = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER)
     local stalkerProgress = player:getCharVar('KnightStalker_Progress')
-    local wildcatSandy = player:getCharVar('WildcatSandy')
 
-    if
-        player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == xi.questStatus.QUEST_ACCEPTED and
-        not utils.mask.getBit(wildcatSandy, 17)
-    then
-        player:startEvent(559)
     -- Need to speak with Rahal to get Dragon Curse Remedy
-    elseif crestProgress == 5 and not hasDragonCurseRemedy then
+    if crestProgress == 5 and not hasDragonCurseRemedy then
         player:startEvent(60) -- Gives key item
     elseif crestProgress == 5 and hasDragonCurseRemedy then
         player:startEvent(122) -- Reminder to go to Gelsba
@@ -58,8 +52,6 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 60 then
         npcUtil.giveKeyItem(player, xi.ki.DRAGON_CURSE_REMEDY)
-    elseif csid == 559 then
-        player:setCharVar('WildcatSandy', utils.mask.setBit(player:getCharVar('WildcatSandy'), 17, true))
     elseif csid == 121 then
         if option == 1 then
             player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER)
