@@ -26,9 +26,7 @@
 
 auto GP_CLI_COMMAND_REQSUBMAPNUM::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    // No parameter to validate.
-    return PacketValidator(PChar)
-        .blockedBy({ BlockedState::InEvent });
+    return PacketValidator(PChar);
 }
 
 void GP_CLI_COMMAND_REQSUBMAPNUM::process(MapSession* PSession, CCharEntity* PChar) const
