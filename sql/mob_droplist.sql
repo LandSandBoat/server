@@ -3096,6 +3096,7 @@ INSERT INTO `mob_droplist` VALUES (325,4,0,1000,825,0);       -- Square Of Cotto
 -- ZoneID: 193 - Vorpal Bunny
 INSERT INTO `mob_droplist` VALUES (326,0,0,1000,856,@UNCOMMON); -- Rabbit Hide (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (326,0,0,1000,4358,@COMMON);  -- Slice Of Hare Meat (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (326,2,0,1000,4358,0);        -- Slice Of Hare Meat (Steal)
 INSERT INTO `mob_droplist` VALUES (326,4,0,1000,856,0);         -- Rabbit Hide (Despoil)
 INSERT INTO `mob_droplist` VALUES (326,4,0,1000,4358,0);        -- Slice Of Hare Meat (Despoil)
 
