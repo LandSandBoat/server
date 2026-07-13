@@ -49,6 +49,7 @@ zones[xi.zone.BOSTAUNIEUX_OUBLIETTE] =
     },
     npc =
     {
+        TRAP_DOOR_OFFSET = GetFirstID('_mn0'), -- Pressure plate trap doors, 25 of them.
     },
 }
 
