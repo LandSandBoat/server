@@ -258,7 +258,7 @@ local function calculateHybridMagicDamage(tp, physicaldmg, attacker, target, wsP
     if magicdmg > 0 then -- handle nonzero damage if previous function does not absorb or nullify
         magicdmg = utils.handlePhalanx(target, magicdmg)
         magicdmg = utils.handleOneForAll(target, magicdmg)
-        magicdmg = utils.handleStoneskin(target, magicdmg)
+        magicdmg = utils.handleStoneskin(target, magicdmg, xi.attackType.MAGICAL)
     end
 
     return math.floor(magicdmg)
@@ -895,7 +895,7 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
 
         dmg = utils.handlePhalanx(target, dmg)
         dmg = utils.handleOneForAll(target, dmg)
-        dmg = utils.handleStoneskin(target, dmg)
+        dmg = utils.handleStoneskin(target, dmg, xi.attackType.MAGICAL)
 
         dmg = dmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     else

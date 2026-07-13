@@ -141,7 +141,7 @@ xi.combat.skillchain.calculateSkillchainDamage = function(actor, target, baseDam
     if finalDamage > 0 then
         finalDamage = utils.clamp(utils.handlePhalanx(target, finalDamage), 0, 99999)
         finalDamage = utils.clamp(utils.handleOneForAll(target, finalDamage), 0, 99999)
-        finalDamage = utils.clamp(utils.handleStoneskin(target, finalDamage), 0, 99999)
+        finalDamage = utils.handleStoneskin(target, finalDamage, xi.attackType.SPECIAL)
         finalDamage = target:checkDamageCap(finalDamage)
 
         target:takeDamage(finalDamage, actor, xi.attackType.SPECIAL, xi.damageType.ELEMENTAL + skillchainElement)

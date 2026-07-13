@@ -21,11 +21,11 @@ abilityObject.onPetAbility = function(target, pet, petskill, master, action)
     end
 
     if dmgBoost > 0 then
-        dmg = dmg + (dmg * 0.01 * dmgBoost)
+        dmg = dmg + math.floor(dmg * dmgBoost / 100)
     end
 
     -- TODO: Affected by Phalanx, MDT, Magic Damage % modifiers, OneForAll?
-    dmg = utils.handleStoneskin(target, dmg)
+    dmg = utils.handleStoneskin(target, dmg, xi.attackType.MAGICAL)
 
     target:takeDamage(dmg, pet, xi.attackType.MAGICAL, xi.damageType.NONE)
 

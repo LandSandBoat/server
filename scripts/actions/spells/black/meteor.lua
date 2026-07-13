@@ -46,7 +46,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     -- Handle Phalanx, One for All, Stoneskin.
     damage = utils.clamp(utils.handlePhalanx(target, damage), 0, 99999)
     damage = utils.clamp(utils.handleOneForAll(target, damage), 0, 99999)
-    damage = utils.clamp(utils.handleStoneskin(target, damage), -99999, 99999)
+    damage = utils.handleStoneskin(target, damage, xi.attackType.MAGICAL)
 
     -- Handle final adjustments. Most are located in core. TODO: Decide if we want core handling this.
     -- Check if the mob has a damage cap

@@ -563,7 +563,7 @@ local addEffectImmediate = function(mob, target, damage, ae, params)
         power = math.floor(target:handleSevereDamage(power, false))
         power = utils.handlePhalanx(target, power)
         power = utils.handleOneForAll(target, power)
-        power = utils.handleStoneskin(target, power)
+        power = utils.handleStoneskin(target, power, xi.attackType.MAGICAL)
         power = utils.clamp(power, -99999, 99999)
 
         if power < 0 then

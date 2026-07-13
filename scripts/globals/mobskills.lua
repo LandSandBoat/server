@@ -1772,7 +1772,7 @@ xi.mobskills.handleHybridDamage = function(mob, target, physicalDamage, element)
     magicDamage = math.floor(magicDamage * 0.5)
 
     magicDamage = utils.handleOneForAll(target, magicDamage)
-    magicDamage = utils.handleStoneskin(target, magicDamage)
+    magicDamage = utils.handleStoneskin(target, magicDamage, xi.attackType.MAGICAL)
 
     return magicDamage
 end
