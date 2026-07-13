@@ -19,6 +19,10 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS] =
         LOGIN_NUMBER                  = 7029,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7049,  -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7094,  -- Tallying conquest results...
+        REGION_POINTS_SANDORIA        = 7159,  -- San d'Oria's region points have increased!
+        EXP_FORCE_KILL_SANDORIA       = 7162,  -- San d'Orian E.F. defeats beastmen hordes... Maintain current momentum.
+        BEASTMEN_BANNER_CURSE         = 7173,  -- There was a curse on the beastmen's banner!
+        BEASTMEN_BANNER_LIFTED        = 7174,  -- The curse of the beastmen's banner has been lifted!
         BEASTMEN_BANNER               = 7175,  -- There is a beastmen's banner.
         FISHING_MESSAGE_OFFSET        = 7253,  -- You can't fish here.
         DIG_THROW_AWAY                = 7266,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
@@ -52,11 +56,26 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS] =
 
     mob =
     {
+        COO_KEJA_THE_UNSEEN    = GetFirstID('Coo_Keja_the_Unseen'),
+        DAGGERCLAW_DRACOS      = GetFirstID('Daggerclaw_Dracos'),
+        HOBGOBLIN_BEASTMASTER  = GetFirstID('Hobgoblin_Beastmaster'),
+        HOBGOBLIN_BLACK_MAGE   = GetFirstID('Hobgoblin_Black_Mage'),
+        HOBGOBLIN_DARK_KNIGHT  = GetFirstID('Hobgoblin_Dark_Knight'),
+        HOBGOBLIN_RANGER       = GetFirstID('Hobgoblin_Ranger'),
+        HOBGOBLIN_RED_MAGE     = GetFirstID('Hobgoblin_Red_Mage'),
+        HOBGOBLIN_THIEF        = GetFirstID('Hobgoblin_Thief'),
+        HOBGOBLIN_WARRIOR      = GetFirstID('Hobgoblin_Warrior'),
+        HOBGOBLIN_WHITE_MAGE   = GetFirstID('Hobgoblin_White_Mage'),
         NAA_ZEKU_THE_UNWAITING = GetFirstID('Naa_Zeku_the_Unwaiting'),
         PATRIPATAN             = GetFirstID('Patripatan'),
-        DAGGERCLAW_DRACOS      = GetFirstID('Daggerclaw_Dracos'),
+        THEOYAGUDO_BARD        = GetFirstID('Theoyagudo_Bard'),
+        THEOYAGUDO_BLACK_MAGE  = GetFirstID('Theoyagudo_Black_Mage'),
+        THEOYAGUDO_MONK        = GetFirstID('Theoyagudo_Monk'),
+        THEOYAGUDO_NINJA       = GetFirstID('Theoyagudo_Ninja'),
+        THEOYAGUDO_SAMURAI     = GetFirstID('Theoyagudo_Samurai'),
+        THEOYAGUDO_SUMMONER    = GetFirstID('Theoyagudo_Summoner'),
+        THEOYAGUDO_WHITE_MAGE  = GetFirstID('Theoyagudo_White_Mage'),
         WARAXE_BEAK            = GetFirstID('Waraxe_Beak'),
-        COO_KEJA_THE_UNSEEN    = GetFirstID('Coo_Keja_the_Unseen'),
 
         VOIDWALKER =
         {
@@ -92,7 +111,8 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS] =
 
     npc =
     {
-        OVERSEER_BASE = GetFirstID('Chegourt_RK'),
+        BEASTMENS_BANNER = GetFirstID('Beastmens_Banner'),
+        OVERSEER_BASE    = GetFirstID('Chegourt_RK'),
     },
 }
 

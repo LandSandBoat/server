@@ -20,6 +20,10 @@ zones[xi.zone.PASHHOW_MARSHLANDS] =
         LOGIN_NUMBER                  = 7029,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7049,  -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7094,  -- Tallying conquest results...
+        REGION_POINTS_SANDORIA        = 7159,  -- San d'Oria's region points have increased!
+        EXP_FORCE_KILL_SANDORIA       = 7162,  -- San d'Orian E.F. defeats beastmen hordes... Maintain current momentum.
+        BEASTMEN_BANNER_CURSE         = 7173,  -- There was a curse on the beastmen's banner!
+        BEASTMEN_BANNER_LIFTED        = 7174,  -- The curse of the beastmen's banner has been lifted!
         BEASTMEN_BANNER               = 7175,  -- There is a beastmen's banner.
         FISHING_MESSAGE_OFFSET        = 7253,  -- You can't fish here.
         DIG_THROW_AWAY                = 7266,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
@@ -52,11 +56,26 @@ zones[xi.zone.PASHHOW_MARSHLANDS] =
 
     mob =
     {
-        NI_ZHO_BLADEBENDER = GetFirstID('NiZho_Bladebender'),
-        JOLLY_GREEN        = GetFirstID('Jolly_Green'),
-        BLOODPOOL_VORAX    = GetFirstID('Bloodpool_Vorax'),
-        BOWHO_WARMONGER    = GetFirstID('BoWho_Warmonger'),
-        TOXIC_TAMLYN       = GetFirstID('Toxic_Tamlyn'),
+        BLOODPOOL_VORAX        = GetFirstID('Bloodpool_Vorax'),
+        BOWHO_WARMONGER        = GetFirstID('BoWho_Warmonger'),
+        HOBGOBLIN_BEASTMASTER  = GetFirstID('Hobgoblin_Beastmaster'),
+        HOBGOBLIN_BLACK_MAGE   = GetFirstID('Hobgoblin_Black_Mage'),
+        HOBGOBLIN_DARK_KNIGHT  = GetFirstID('Hobgoblin_Dark_Knight'),
+        HOBGOBLIN_RANGER       = GetFirstID('Hobgoblin_Ranger'),
+        HOBGOBLIN_RED_MAGE     = GetFirstID('Hobgoblin_Red_Mage'),
+        HOBGOBLIN_THIEF        = GetFirstID('Hobgoblin_Thief'),
+        HOBGOBLIN_WARRIOR      = GetFirstID('Hobgoblin_Warrior'),
+        HOBGOBLIN_WHITE_MAGE   = GetFirstID('Hobgoblin_White_Mage'),
+        JOLLY_GREEN            = GetFirstID('Jolly_Green'),
+        METAQUADAV_BLACK_MAGE  = GetFirstID('Metaquadav_Black_Mage'),
+        METAQUADAV_DARK_KNIGHT = GetFirstID('Metaquadav_Dark_Knight'),
+        METAQUADAV_PALADIN     = GetFirstID('Metaquadav_Paladin'),
+        METAQUADAV_RED_MAGE    = GetFirstID('Metaquadav_Red_Mage'),
+        METAQUADAV_THIEF       = GetFirstID('Metaquadav_Thief'),
+        METAQUADAV_WARRIOR     = GetFirstID('Metaquadav_Warrior'),
+        METAQUADAV_WHITE_MAGE  = GetFirstID('Metaquadav_White_Mage'),
+        NI_ZHO_BLADEBENDER     = GetFirstID('NiZho_Bladebender'),
+        TOXIC_TAMLYN           = GetFirstID('Toxic_Tamlyn'),
 
         VOIDWALKER  =
         {
@@ -105,7 +124,8 @@ zones[xi.zone.PASHHOW_MARSHLANDS] =
 
     npc =
     {
-        OVERSEER_BASE = GetFirstID('Mesachedeau_RK'),
+        BEASTMENS_BANNER = GetFirstID('Beastmens_Banner'),
+        OVERSEER_BASE    = GetFirstID('Mesachedeau_RK'),
     },
 }
 
