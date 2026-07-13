@@ -10,7 +10,7 @@ end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     local dint = pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-    local dmg = 600 + dint * 1.5 + pet:getTP() / 20
+    local dmg = 600 + dint * 1.5 + petskill:getTP() / 20
 
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
