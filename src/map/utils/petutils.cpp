@@ -1444,6 +1444,8 @@ void DetachPet(CBattleEntity* PMaster)
         PMob->charmTime  = timer::time_point::min();
         PMob->PMaster    = nullptr;
 
+        PMob->setMobMod(MOBMOD_BODYGUARD, 0);
+
         PMob->PAI->SetController(std::make_unique<CMobController>(PMob));
 
         // clear all enmity towards a charmed mob when it is released

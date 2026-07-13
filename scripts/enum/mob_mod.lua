@@ -105,4 +105,5 @@ xi.mobMod =
     FOLLOW_LEASH_RANGE     = 94, -- Distance the leader can walk before their followers start moving. Applied to followers.
     FOLLOW_STOP_RANGE      = 95, -- Distance the followers attempt to stop at once their leader stops moving. Applied to followers.
     TRUST_SHIELD_SIZE      = 96, -- TRUSTS ONLY: Set the size of the mob's shield. 3 = Default size, only used for trusts that use shields.
+    BODYGUARD              = 97, -- Charmed mob defends its master similar to an avatar. (Maidens Virelai)
 }

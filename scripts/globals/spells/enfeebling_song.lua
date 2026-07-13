@@ -224,8 +224,11 @@ xi.spells.enfeebling.useEnfeeblingSong = function(caster, target, spell)
 
     -- Virelai applies a charm. Quit early.
     elseif spellEffect == xi.effect.CHARM_I then
-        target:addStatusEffect(xi.effect.CHARM_I, { duration = duration, origin = caster })
-        caster:charm(target)
+        -- Should be tracking status effect here with : target:addStatusEffect(xi.effect.CHARM_I, { duration = duration, origin = caster })
+        -- Currently when applied it disables the mobs AI.
+        caster:charm(target, duration)
+        -- Makes charmed mob act as a bodyguard, like avatars.
+        target:setMobMod(xi.mobMod.BODYGUARD, 1)
         if caster:isPC() then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
         else
