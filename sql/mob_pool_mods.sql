@@ -69,9 +69,6 @@ INSERT INTO `mob_pool_mods` VALUES (592,3,100,1);  -- MP_BASE: 100
 INSERT INTO `mob_pool_mods` VALUES (592,68,15,0);  -- EVA: 15
 INSERT INTO `mob_pool_mods` VALUES (592,302,45,0); -- TRIPLE_ATTACK: 45
 
--- Cargo Crab Colin
-INSERT INTO `mob_pool_mods` VALUES (639,63,25,0); -- DEFP: 25
-
 -- Cerberus
 INSERT INTO `mob_pool_mods` VALUES (680,1,322,0);   -- DEF: 322
 INSERT INTO `mob_pool_mods` VALUES (680,31,200,0);  -- MEVA: 200

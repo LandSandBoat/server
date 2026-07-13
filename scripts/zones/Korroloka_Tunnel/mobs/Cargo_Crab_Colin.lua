@@ -70,13 +70,13 @@ entity.phList =
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:setMobMod(xi.mobMod.GIL_MIN, 1320)
-    mob:setMobMod(xi.mobMod.GIL_MAX, 1320)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 1200)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 1200)
 end
 
 entity.onMobSpawn = function(mob)
     -- Has very high physical defense, takes normal damage from magic.
-    mob:setMod(xi.mod.DEF, 300)
+    mob:setMod(xi.mod.DEF, 375)
     mob:setMod(xi.mod.VIT, 25)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
