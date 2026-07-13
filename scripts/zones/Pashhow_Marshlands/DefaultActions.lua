@@ -1,7 +1,6 @@
 local ID = zones[xi.zone.PASHHOW_MARSHLANDS]
 
 return {
-    ['Beastmens_Banner'] = { messageSpecial = ID.text.BEASTMEN_BANNER },
     ['Luck_Rune']        = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Meh_Nbolo']        = { event = 27 },
     ['Odyssean_Passage'] = { messageSpecial = ID.text.NOTHING_HAPPENS },

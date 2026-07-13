@@ -20,6 +20,8 @@ zoneObject.onInitialize = function(zone)
             qm2:setStatus(xi.status.DISAPPEAR)
         end
     end
+
+    xi.expeditionaryForce.initZone(zone)
 end
 
 zoneObject.onZoneTick = function(zone)

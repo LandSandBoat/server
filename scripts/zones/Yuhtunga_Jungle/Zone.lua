@@ -17,6 +17,8 @@ zoneObject.onInitialize = function(zone)
     xi.helm.initZone(zone, xi.helmType.LOGGING)
 
     xi.beastmenTreasure.updatePeddlestox(xi.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
+
+    xi.expeditionaryForce.initZone(zone)
 end
 
 zoneObject.onGameDay = function()

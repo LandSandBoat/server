@@ -1,7 +1,6 @@
 local ID = zones[xi.zone.XARCABARD]
 
 return {
-    ['Beastmens_Banner'] = { messageSpecial = ID.text.BEASTMEN_BANNER },
     ['Luck_Rune']        = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Option_One']       = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Option_Two']       = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },

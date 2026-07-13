@@ -14,6 +14,8 @@ zoneObject.onInitialize = function(zone)
     xi.helm.initZone(zone, xi.helmType.LOGGING)
 
     xi.voidwalker.zoneOnInit(zone)
+
+    xi.expeditionaryForce.initZone(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
