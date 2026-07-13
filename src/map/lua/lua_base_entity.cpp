@@ -18189,6 +18189,23 @@ void CLuaBaseEntity::setUnkillable(bool unkillable)
 }
 
 /************************************************************************
+ *  Function: getUnkillable()
+ *  Purpose : Gets a Mob to unkillable var
+ *  Example : mob:getUnkillable()
+ *  Notes   :
+ ************************************************************************/
+
+bool CLuaBaseEntity::getUnkillable()
+{
+    if (auto* PBattle = dynamic_cast<CBattleEntity*>(m_PBaseEntity))
+    {
+        return PBattle->m_unkillable;
+    }
+
+    return false;
+}
+
+/************************************************************************
  *  Function: setUntargetable()
  *  Purpose : Sets a target's untargetable flag.
  *  Example : target:setUntargetable(true)
@@ -21059,6 +21076,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setAggressive", CLuaBaseEntity::setAggressive);
     SOL_REGISTER("setTrueDetection", CLuaBaseEntity::setTrueDetection);
     SOL_REGISTER("setUnkillable", CLuaBaseEntity::setUnkillable);
+    SOL_REGISTER("getUnkillable", CLuaBaseEntity::getUnkillable);
     SOL_REGISTER("setUntargetable", CLuaBaseEntity::setUntargetable);
     SOL_REGISTER("getUntargetable", CLuaBaseEntity::getUntargetable);
     SOL_REGISTER("setIsAggroable", CLuaBaseEntity::setIsAggroable);
