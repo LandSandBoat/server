@@ -9,18 +9,15 @@ local entity = {}
 
 local pathNodes =
 {
-    { x = 666.868, y =  -9.506, z = -338.416, rotation = 162, wait =  10000 },
-    { x = 671.028, y =  -9.169, z = -345.759, rotation = 043                }, -- Turns around and runs to the next spot
-    { x = 667.912, y =  -9.512, z = -339.858, rotation = 172, wait =  10000 },
-    { x = 661.358, y =  -9.812, z = -332.499, rotation = 162, wait =  10000 },
-    { x = 666.870, y =  -9.506, z = -338.418, rotation = 033, wait =  10000 },
-    { x = 671.745, y =  -8.992, z = -347.048, rotation = 043, wait =  10000 },
-    { x = 667.945, y =  -9.513, z = -339.920, rotation = 172, wait =  10000 },
-    { x = 662.475, y =  -9.715, z = -333.734, rotation = 162                }, -- Turns around and runs to the next spot
-    { x = 666.871, y =  -9.506, z = -338.418, rotation = 033, wait =  10000 },
-    { x = 671.712, y =  -9.001, z = -346.989, rotation = 043, wait =  10000 },
-    { x = 677.547, y = -10.064, z = -361.535, rotation = 075                }, -- Gateway waypoint so it doesn't path through the wall
-    { x = 667.128, y =  -8.359, z = -378.015, rotation = 086, wait = 100000 }, -- Final resting place
+    { x = 653.744, y =  -9.640, z = -328.601, rotation = 146, wait =  50000 }, -- Starting position
+    { x = 659.830, y = -10.235, z = -331.406, rotation = 017, wait =  12000 },
+    { x = 666.793, y = -10.053, z = -338.386, rotation = 032, wait =  19000 },
+    { x = 671.675, y =  -9.494, z = -346.934, rotation = 042, wait =  17000 },
+    { x = 667.914, y =  -9.982, z = -339.863, rotation = 172, wait =  38000 },
+    { x = 661.361, y = -10.305, z = -332.502, rotation = 162, wait =  13000 },
+    { x = 675.301, y = -10.208, z = -356.221, rotation = 063                }, -- Pathing node to avoid wall.
+    { x = 677.547, y = -10.064, z = -361.535, rotation = 075                }, -- Pathing node to avoid wall.
+    { x = 667.100, y =  -9.474, z = -378.066, rotation = 086, wait = 100000 }, -- Resting place.
 }
 
 entity.onMobInitialize = function(mob)
@@ -44,9 +41,9 @@ entity.onMobSpawn = function(mob)
     mob:setAutoAttackEnabled(false)
 
     -- Handle poison.
-    local poisonPower    = math.floor(mob:getHP() / 24) -- Kill Old Sabertooth in 24 10-second ticks.
+    local poisonPower    = math.floor(mob:getHP() / 64) -- Kill Old Sabertooth 3.5 minutes with 3-second ticks.
     local poisonDuration = 1800                         -- Ensure it doesn't wear off before it dies.
-    mob:addStatusEffect(xi.effect.POISON, { power = poisonPower, duration = poisonDuration, origin = mob, tick = 10 })
+    mob:addStatusEffect(xi.effect.POISON, { power = poisonPower, duration = poisonDuration, origin = mob })
 
     -- Handle path.
     mob:pathThrough(pathNodes, xi.path.flag.COORDS)
