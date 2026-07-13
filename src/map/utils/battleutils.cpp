@@ -2145,7 +2145,7 @@ auto TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHYS
     {
         damage = std::max(damage - PDefender->getMod(Mod::PHALANX), 0);
 
-        damage = HandleStoneskin(PDefender, damage);
+        damage = HandleStoneskin(PDefender, damage, attackType);
         HandleAfflatusMiseryDamage(PDefender, damage);
     }
     damage = std::clamp(damage, -99999, 99999);
@@ -2303,7 +2303,7 @@ auto TakeWeaponskillDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, i
     if (damage > 0)
     {
         damage = std::max(damage - PDefender->getMod(Mod::PHALANX), 0);
-        damage = HandleStoneskin(PDefender, damage);
+        damage = HandleStoneskin(PDefender, damage, attackType);
     }
 
     if (!isRanged)
@@ -4648,8 +4648,31 @@ int32 HandleOneForAll(CBattleEntity* PDefender, int32 damage)
     return damage;
 }
 
-int32 HandleStoneskin(CBattleEntity* PDefender, int32 damage)
+int32 HandleStoneskin(CBattleEntity* PDefender, int32 damage, xi::AttackType attackType)
 {
+    // subType 1 = physical/ranged only, 2 = magical only (frozen_mist / hydro_wave / Rampart)
+    if (attackType != xi::AttackType::None)
+    {
+        if (auto* PEffect = PDefender->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Stoneskin))
+        {
+            const uint32 stoneskinType = PEffect->GetSubID();
+            if (stoneskinType == 2)
+            {
+                if (attackType == xi::AttackType::Physical || attackType == xi::AttackType::Ranged)
+                {
+                    return damage;
+                }
+            }
+            else if (stoneskinType == 1)
+            {
+                if (attackType == xi::AttackType::Magical || attackType == xi::AttackType::Breath || attackType == xi::AttackType::Special)
+                {
+                    return damage;
+                }
+            }
+        }
+    }
+
     int16 skin = PDefender->getMod(Mod::STONESKIN);
     if (damage > 0 && skin > 0)
     {

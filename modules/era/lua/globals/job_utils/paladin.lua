@@ -15,7 +15,6 @@ if not xi.module.isContentEnabled('ROV') then
         local defense     = player:getMainLvl() == 75 and 23 or 21
 
         -- Apply STONESKIN effect but display as RAMPART icon
-        -- TODO: subType 2 not yet implemented for magical only stoneskin
         target:addStatusEffect(xi.effect.STONESKIN, { power = defense, duration = duration, origin   = player, icon = xi.effect.RAMPART, subType  = 2, subPower = stoneskinHP })
 
         return xi.effect.RAMPART

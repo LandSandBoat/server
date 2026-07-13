@@ -232,13 +232,39 @@ function utils.handleOneForAll(actor, damage)
 end
 
 -- Calculates Stoneskin damage reduction.
+-- Optional attackType: subType 1 = physical/ranged only, 2 = magical only (frozen_mist / hydro_wave / Rampart).
+-- Omitting attackType preserves previous absorb-all behavior.
 ---@nodiscard
 ---@param actor CBaseEntity
 ---@param damage integer
+---@param attackType xi.attackType?
 ---@return integer
-function utils.handleStoneskin(actor, damage)
+function utils.handleStoneskin(actor, damage, attackType)
     if damage <= 0 then
         return damage
+    end
+
+    if attackType ~= nil and attackType ~= xi.attackType.NONE then
+        local effect = actor:getStatusEffect(xi.effect.STONESKIN)
+        if effect then
+            local stoneskinType = effect:getSubType()
+            if stoneskinType == 2 then
+                if
+                    attackType == xi.attackType.PHYSICAL or
+                    attackType == xi.attackType.RANGED
+                then
+                    return damage
+                end
+            elseif stoneskinType == 1 then
+                if
+                    attackType == xi.attackType.MAGICAL or
+                    attackType == xi.attackType.BREATH or
+                    attackType == xi.attackType.SPECIAL
+                then
+                    return damage
+                end
+            end
+        end
     end
 
     local stoneskinRemaining = actor:getMod(xi.mod.STONESKIN)

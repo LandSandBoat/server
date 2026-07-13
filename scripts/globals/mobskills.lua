@@ -366,7 +366,7 @@ local function handleSinglePhysicalHit(mob, target, baseHitDamage, params)
     hitDamage = utils.handlePhalanx(target, hitDamage)
 
     if not params.skipStoneskin then
-        hitDamage = utils.handleStoneskin(target, hitDamage)
+        hitDamage = utils.handleStoneskin(target, hitDamage, xi.attackType.PHYSICAL)
     end
 
     hitDamage = math.floor(target:checkDamageCap(hitDamage))
@@ -473,7 +473,7 @@ local function handleSingleRangedHit(mob, target, baseHitDamage, params)
     hitDamage = utils.handlePhalanx(target, hitDamage)
 
     if not params.skipStoneskin then
-        hitDamage = utils.handleStoneskin(target, hitDamage)
+        hitDamage = utils.handleStoneskin(target, hitDamage, xi.attackType.RANGED)
     end
 
     if hitDamage > 0 then
@@ -1225,8 +1225,7 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, action, skillParams)
     damage = utils.handleOneForAll(target, damage)
 
     if not skipStoneskin then
-        -- TODO: Some Stoneskin effects only absorb certain damage types.
-        damage = utils.handleStoneskin(target, damage)
+        damage = utils.handleStoneskin(target, damage, attackType)
     end
 
     target:handleAfflatusMiseryDamage(damage)
@@ -1414,8 +1413,7 @@ xi.mobskills.mobBreathMove = function(mob, target, skill, action, skillParams)
     damage = utils.handleOneForAll(target, damage)
 
     if not skipStoneskin then
-        -- TODO: Some Stoneskin effects only absorb certain damage types.
-        damage = utils.handleStoneskin(target, damage)
+        damage = utils.handleStoneskin(target, damage, attackType)
     end
 
     target:handleAfflatusMiseryDamage(damage)
