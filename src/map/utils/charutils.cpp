@@ -3222,6 +3222,19 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 contai
         return;
     }
 
+    // Can't equip (job)
+    if (!(PItem->getJobs() & (1 << (PChar->GetMJob() - 1))))
+    {
+        return;
+    }
+
+    // gear sync disabled: can't equip based on current level
+    // gear sync enabled: can't equip based on real level
+    if (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()]))
+    {
+        return;
+    }
+
     // slotID of zero = unequip
     if (slotID > 0)
     {
