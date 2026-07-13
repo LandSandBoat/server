@@ -201,6 +201,10 @@ INSERT INTO `mob_spell_lists` VALUES ('Beastmen_BRD',6,419,29,59);  -- advancing
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_BRD',6,420,60,255); -- victory_march (60~255)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_BRD',6,421,39,58);  -- battlefield_elegy (39~58)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_BRD',6,422,59,255); -- carnage_elegy (59~255)
+INSERT INTO `mob_spell_lists` VALUES ('Beastmen_BRD',6,425,32,255); -- dextrous_etude (32~255)
+INSERT INTO `mob_spell_lists` VALUES ('Beastmen_BRD',6,427,28,255); -- quick_etude (28~255)
+INSERT INTO `mob_spell_lists` VALUES ('Beastmen_BRD',6,434,68,255); -- swift_etude (68~255)
+INSERT INTO `mob_spell_lists` VALUES ('Beastmen_BRD',6,432,72,255); -- uncanny_etude (72~255)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_BRD',6,462,33,255); -- magic_finale (33~255)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_BRD',6,463,16,255); -- foe_lullaby (16~255)
 
