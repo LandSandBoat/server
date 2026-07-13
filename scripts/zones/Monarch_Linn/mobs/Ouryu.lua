@@ -26,7 +26,7 @@ end
 
 local function fly(mob)
     mob:setAnimationSub(allFlightPhaseAnimationSub)
-    mob:addStatusEffect(xi.effect.ALL_MISS, { power = 1, origin = mob, icon = 0 })
+    mob:addStatusEffect(xi.effect.ALL_MISS, { power = 1, duration = 7200, origin = mob, icon = 0 })
     mob:setMobSkillAttack(731)
     setNextPhaseTriggers(mob, subsequentPhaseDuration)
 end
@@ -48,9 +48,6 @@ entity.onMobSpawn = function(mob)
     mob:setMobSkillAttack(0)
     -- subanim 0 is only used when it spawns until first flight
     mob:setAnimationSub(initialGroundPhaseAnimationSub)
-    if mob:hasStatusEffect(xi.effect.ALL_MISS) then
-        mob:delStatusEffect(xi.effect.ALL_MISS)
-    end
 
     -- 54 + 2 + 14 = 70 total damage (the 14 dmg accounts for a 25% boost)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MODIFIER, 14)
