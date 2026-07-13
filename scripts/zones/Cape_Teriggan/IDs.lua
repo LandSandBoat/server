@@ -68,7 +68,7 @@ zones[xi.zone.CAPE_TERIGGAN] =
     npc =
     {
         BEASTMENS_BANNER = GetFirstID('Beastmens_Banner'),
-        CERMET_HEADSTONE = 17240498,
+        CERMET_HEADSTONE = GetFirstID('Cermet_Headstone'),
         OVERSEER_BASE    = GetFirstID('Salimardi_RK'),
     },
 }

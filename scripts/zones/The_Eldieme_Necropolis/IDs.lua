@@ -63,33 +63,33 @@ zones[xi.zone.THE_ELDIEME_NECROPOLIS] =
 
     mob =
     {
+        APPARATUS_ELEMENTAL = GetTableOfIDs('Ice_Elemental')[6],
         CWN_CYRFF           = GetFirstID('Cwn_Cyrff'),
         LICH_C_MAGNUS       = GetFirstID('Lich_C_Magnus'),
-        YUM_KIMIL           = GetFirstID('Yum_Kimil'),
+        MIMIC               = GetFirstID('Mimic'),
+        NAMORODO            = GetFirstID('Namorodo'),
         STURM               = GetFirstID('Sturm'),
         TAIFUN              = GetFirstID('Taifun'),
         TROMBE              = GetFirstID('Trombe'),
-        MIMIC               = GetFirstID('Mimic'),
-        APPARATUS_ELEMENTAL = 17576271,
-        NAMORODO            = GetFirstID('Namorodo'),
+        YUM_KIMIL           = GetFirstID('Yum_Kimil'),
     },
 
     npc =
     {
-        GATE_OFFSET        = GetFirstID('_5f1'),
         BRAZIER            = GetFirstID('Brazier'),
+        CANDLE_OFFSET      = GetFirstID('_5fu'),
+        GATE_OFFSET        = GetFirstID('_5f1'),
+        QM1                = GetFirstID('qm1'),
         TREASURE_CHEST     = GetFirstID('Treasure_Chest'),
         TREASURE_COFFER    = GetFirstID('Treasure_Coffer'),
         SARCOPHAGUS_OFFSET = GetFirstID('Sarcophagus'),
-        CANDLE_OFFSET      = GetFirstID('_5fu'),
-        QM1                = GetFirstID('qm1'),
 
         QM1_POS =
         {
-            { -460.85, -1.5, 425.14 }, -- D-5.
-            { -24.10, -9.303, 258.993 }, -- I-7.
-            { -19.624, -1.631, 60.368 }, -- I-10.
-            { 256.757, -20.489, 335.920 }, -- M-6.
+            { -460.850,  -1.500, 425.140 }, -- D-5.
+            {  -24.100,  -9.303, 258.993 }, -- I-7.
+            {  -19.624,  -1.631,  60.368 }, -- I-10.
+            {  256.757, -20.489, 335.920 }, -- M-6.
         },
     },
 }
