@@ -147,8 +147,7 @@ entity.onMobFight = function(mob, target)
         end
 
         SpawnMob(queenJellyID)
-        queenJelly:setMaxHP(queenHP)
-        queenJelly:setHP(queenJelly:getMaxHP())
+        queenJelly:setHP(queenHP)
     end
 end
 
