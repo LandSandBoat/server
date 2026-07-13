@@ -10,16 +10,16 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        { xi.item.DRIED_DATE,                 200, },
-        { xi.item.FLASK_OF_AYRAN,             800, },
-        { xi.item.BALIK_SANDVICI,            3750, },
-        { xi.item.BAG_OF_WILDGRASS_SEEDS,     320, },
-        { xi.item.SCROLL_OF_RAPTOR_MAZURKA,  4400, },
-        { xi.item.EMPIRE_WAYSTONE,          10000, },
+        { xi.item.DRIED_DATE,                 200, astralCandescence = false },
+        { xi.item.FLASK_OF_AYRAN,             800, astralCandescence = true  },
+        { xi.item.BALIK_SANDVICI,            3750, astralCandescence = true  },
+        { xi.item.BAG_OF_WILDGRASS_SEEDS,     320, astralCandescence = false },
+        { xi.item.SCROLL_OF_RAPTOR_MAZURKA,  4400, astralCandescence = false },
+        { xi.item.EMPIRE_WAYSTONE,          10000, astralCandescence = false },
     }
 
     player:showText(npc, ID.text.KHAFJHIFANM_SHOP_DIALOG)
-    xi.shop.general(player, stock)
+    xi.besieged.shop(player, stock)
 end
 
 return entity
