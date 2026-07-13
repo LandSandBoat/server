@@ -1801,6 +1801,11 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         if (PAbility->getMeritModID() > 0 && !(PAbility->getAddType() & ADDTYPE_MERIT))
         {
             recastReduction = std::chrono::seconds(PMeritPoints->GetMeritValue((MERIT_TYPE)PAbility->getMeritModID(), this));
+
+            if (PAbility->getID() == ABILITY_THIRD_EYE && StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Seigan))
+            {
+                recastReduction = recastReduction / 2;
+            }
         }
 
         auto* charge         = ability::GetCharge(this, static_cast<uint16>(PAbility->getRecastId()));
