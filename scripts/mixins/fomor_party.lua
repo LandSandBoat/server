@@ -112,7 +112,9 @@ local zoneParties =
         patrol =
         {
             { leader = sacrariumID.mob.FOMOR_WARRIOR[5], followers = 1 },
-            { leader = sacrariumID.mob.FOMOR_BARD[6],    followers = 3 },
+            { leader = sacrariumID.mob.FOMOR_BARD[6],    followers = 2 },
+            { leader = sacrariumID.mob.FOMOR_THIEF[4],   followers = 1 },
+            { leader = sacrariumID.mob.FOMOR_MONK[5],    followers = 1 },
         },
 
         guard =
