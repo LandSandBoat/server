@@ -13,11 +13,8 @@ mixins =
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    xi.pet.setMobPet(mob, 1, 'Fomors_Bat')
-end
-
-entity.onMobSpawn = function(mob)
     xi.mix.fomorParty.onPartySpawn(mob)
+    xi.pet.setMobPet(mob, 1, 'Fomors_Bat')
 end
 
 entity.onMobRoam = function(mob)

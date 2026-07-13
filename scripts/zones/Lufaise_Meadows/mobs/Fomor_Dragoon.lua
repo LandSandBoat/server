@@ -13,12 +13,11 @@ mixins =
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    xi.mix.fomorParty.onPartySpawn(mob)
     xi.pet.setMobPet(mob, 1, 'Fomors_Wyvern')
 end
 
 entity.onMobSpawn = function(mob)
-    xi.mix.fomorParty.onPartySpawn(mob)
-
     -- Summon wyvern immediately on spawn
     mob:useMobAbility(xi.mobSkill.CALL_WYVERN_1)
 end

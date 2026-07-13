@@ -49,6 +49,7 @@ zones[xi.zone.SACRARIUM] =
         FOMOR_RANGER            = GetTableOfIDs('Fomor_Ranger'),
         FOMOR_RED_MAGE          = GetTableOfIDs('Fomor_Red_Mage'),
         FOMOR_SAMURAI           = GetTableOfIDs('Fomor_Samurai'),
+        FOMOR_THIEF             = GetTableOfIDs('Fomor_Thief'),
         FOMOR_WARRIOR           = GetTableOfIDs('Fomor_Warrior'),
         OLD_PROFESSOR_MARISELLE = GetFirstID('Old_Professor_Mariselle'),
         SWIFT_BELT_NM_OFFSET    = GetFirstID('Balor'),

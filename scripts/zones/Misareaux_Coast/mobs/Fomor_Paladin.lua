@@ -12,7 +12,7 @@ mixins =
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobSpawn = function(mob)
+entity.onMobInitialize = function(mob)
     xi.mix.fomorParty.onPartySpawn(mob)
 end
 
