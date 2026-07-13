@@ -967,8 +967,14 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
 
     -- Core does not modify the TP for the 10 TP/hit like it should, so we're doing it here
     local storeTPModifier = 1 + attacker:getMod(xi.mod.STORETP) / 100 -- TODO, make a global function to get this (inhibit TP is not accounted for properly in core)
+    local extraHitsTP     = (wsResults.extraHitsLanded * 10 * storeTPModifier) + wsResults.bonusTP
 
-    finaldmg = defender:takeWeaponskillDamage(attacker, finaldmg, attack.type, attack.damageType, attack.slot, primaryMsg, wsResults.tpHitsLanded * attackerTPMult, (wsResults.extraHitsLanded * 10 * storeTPModifier) + wsResults.bonusTP, targetTPMult)
+    -- Extra hits return 0 TP while under the effect of Meikyo Shisui
+    if attacker:hasStatusEffect(xi.effect.MEIKYO_SHISUI) then
+        extraHitsTP = 0
+    end
+
+    finaldmg = defender:takeWeaponskillDamage(attacker, finaldmg, attack.type, attack.damageType, attack.slot, primaryMsg, wsResults.tpHitsLanded * attackerTPMult, extraHitsTP, targetTPMult)
     if wsResults.tpHitsLanded + wsResults.extraHitsLanded > 0 then
         action:recordDamage(defender, attack.type, math.abs(finaldmg), wsResults.criticalHit)
     end
