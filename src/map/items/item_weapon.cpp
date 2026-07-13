@@ -84,7 +84,7 @@ CItemWeapon::~CItemWeapon() = default;
 
 void CItemWeapon::resetDelay()
 {
-    m_delay = m_baseDelay;
+    setDelay(m_baseDelay);
 }
 
 /************************************************************************
