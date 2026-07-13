@@ -46,7 +46,7 @@ CItemWeapon::CItemWeapon(uint16 id)
     m_effect         = 0;
     m_dmgType        = xi::DamageType::None;
     m_delay          = 8000;
-    m_baseDelay      = 8000; // this should only be needed for mobs (specifically mnks)
+    m_baseDelay      = 480; // this should only be needed for mobs (specifically mnks)
     m_maxHit         = 0;
     m_DPS            = 0.0;
     m_ranged         = false;
@@ -319,52 +319,28 @@ uint16 CItemWeapon::getILvlMacc() const
     return m_iLvlMacc;
 }
 
-/************************************************************************
- *                                                                      *
- * Set the weapon delay time. Value in raw game delay units.            *
- * Converts to milliseconds: delay * 1000 / 60.                         *
- *                                                                      *
- ************************************************************************/
-
+// set delay used for milliseconds calculations (such as auto attack delay)
 void CItemWeapon::setDelay(uint16 delay)
 {
     m_delay = uint16(delay * 1000.0f / 60.0f);
 }
 
-/************************************************************************
- *                                                                      *
- * Get the weapon delay time. Value in milliseconds.                    *
- * All math operations are performed with integers which is why         *
- * the order of operations is important                                 *
- *                                                                      *
- ************************************************************************/
-
+// get delay used for milliseconds calculations (such as auto attack delay)
 uint16 CItemWeapon::getDelay() const
 {
     return m_delay;
 }
 
-/************************************************************************
- *                                                                      *
- *  Set the un-adjusted delay of the weapon. Value in raw game units.  *
- *  Converts to milliseconds: delay * 1000 / 60.                       *
- *                                                                      *
- ************************************************************************/
-
+// set real delay used by real people
 void CItemWeapon::setBaseDelay(uint16 delay)
 {
-    m_baseDelay = uint16(delay * 1000.0f / 60.0f);
+    m_baseDelay = delay;
 }
 
-/************************************************************************
- *                                                                       *
- * Get the un-adjusted base delay of the weapon. Value in raw game units.*
- *                                                                       *
- ************************************************************************/
-
+// get real delay used by real people
 uint16 CItemWeapon::getBaseDelay() const
 {
-    return uint16(m_baseDelay * 60.0f / 1000.0f);
+    return m_baseDelay;
 }
 
 /************************************************************************
