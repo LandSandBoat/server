@@ -7,6 +7,14 @@ local ID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    local doorCount = 25 -- _mn0 to _mns
+    local trapRadius = 1.5
+    for i = 1, doorCount do
+        local door = GetNPCByID(ID.npc.TRAP_DOOR_OFFSET + i - 1)
+        if door ~= nil then
+            zone:registerCylindricalTriggerArea(i, door:getXPos(), door:getZPos(), trapRadius)
+        end
+    end
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -28,6 +36,16 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    local doorCount = 25
+    local triggerAreaID = triggerArea:getTriggerAreaID()
+    if triggerAreaID >= 1 and triggerAreaID <= doorCount then
+        local door = GetNPCByID(ID.npc.TRAP_DOOR_OFFSET + triggerAreaID - 1)
+        if door ~= nil then
+            door:timer(800, function(doorArg)
+                doorArg:openDoor(6) -- opens for 6s, then auto-closes
+            end)
+        end
+    end
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
