@@ -743,8 +743,8 @@ public:
 
     void clearCharVarsWithPrefix(const std::string& prefix);
 
-    bool m_Locked{};         // Is the player locked in a cutscene
-    bool m_zoneInCutscene{}; // Is the player currently in a zone-in cutscene
+    bool m_Locked{};     // Is the player locked in a cutscene
+    bool m_isPCHidden{}; // Is the player currently hidden from other players
 
     // Starts a synth with skillType X
     bool startSynth(xi::SkillType synthSkill);
