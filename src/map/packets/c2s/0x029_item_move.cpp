@@ -21,6 +21,7 @@
 
 #include "0x029_item_move.h"
 
+#include "common/settings.h"
 #include "entities/char_entity.h"
 #include "items.h"
 #include "packets/s2c/0x01d_item_same.h"
@@ -72,7 +73,7 @@ const auto validContainers = [](const CCharEntity* PChar) -> std::set<CONTAINER_
         allowedContainers.insert(LOC_MOGSAFE);
 
         // Bitflag indicating if Mog 2F is unlocked
-        if (PChar->profile.mhflag & 0x20)
+        if ((PChar->profile.mhflag & 0x20) && settings::get<bool>("main.ENABLE_MOG_HOUSE_2F"))
         {
             allowedContainers.insert(LOC_MOGSAFE2);
         }

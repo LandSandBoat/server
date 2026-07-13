@@ -38,6 +38,10 @@ xi.settings.main =
     ENABLE_TVR       = 1,
     ENABLE_VOIDWATCH = 1, -- Not an expansion, but has its own storyline. (Not Implemented)
 
+    -- MOG HOUSE
+    ENABLE_MOG_HOUSE_2F = 1, -- Enables Access to Mog House 2F / Mog Safe 2.
+    ENABLE_MOG_GARDEN   = 1, -- Enables Access to Mog Garden, will send player to the area they entered from if disabled.
+
     -- FIELDS OF VALOR/Grounds of Valor settings
     ENABLE_FIELD_MANUALS  = 1, -- Enables Fields of Valor
     ENABLE_GROUNDS_TOMES  = 1, -- Enables Grounds of Valor

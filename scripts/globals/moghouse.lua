@@ -311,6 +311,7 @@ xi.moghouse.onMoghouseZoneIn = function(player, prevZone)
     -- Reset: !exec player:setMoghouseFlag(0)
     -- Complete quests: !exec player:setMoghouseFlag(7)
     if
+        xi.settings.main.ENABLE_MOG_HOUSE_2F == 1 and
         xi.moghouse.inMogHouseInHomeNation(player) and
         growingFlowers and
         aLadysHeart and
