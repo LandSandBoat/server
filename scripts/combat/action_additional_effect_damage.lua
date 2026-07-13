@@ -36,8 +36,8 @@ local function validateParameters(actor, target, fedData)
     -- Limit undead
     params.limitUndead     = fedData.limitUndead or false -- Default: Works on undead.
 
-    -- Source is ranged attack or melee? Skip en-spell check if so.
-    params.isRanged        = fedData.isRanged or false -- Assume melee.
+    -- Bypass regular En-Spell > AE > Daze priority.
+    params.ignoreEnSpell   = fedData.ignoreEnSpell or false -- Assume En-Spell takes priority.
 
     -- Base damage parameters.
     params.basePower       = fedData.basePower or 0
@@ -105,8 +105,8 @@ end
 xi.combat.action.executeAddEffectDamage = function(actor, target, fedData)
     local params = validateParameters(actor, target, fedData)
 
-    -- Early return: En-spell overrides innate/weapon additional effects, except ranged attacks.
-    if not params.isRanged and hasEnspell(actor) then
+    -- Early return: En-spell override.
+    if not params.ignoreEnSpell and hasEnspell(actor) then
         return 0, 0, 0
     end
 

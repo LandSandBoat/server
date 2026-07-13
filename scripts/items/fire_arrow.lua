@@ -10,7 +10,7 @@ itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, it
     -- Unconfirmed power.
     local pTable =
     {
-        isRanged        = true,
+        ignoreEnSpell   = true,
         basePower       = math.random(7, 10),
         attackType      = xi.attackType.MAGICAL,
         magicalElement  = xi.element.FIRE,

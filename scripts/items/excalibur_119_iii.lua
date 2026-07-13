@@ -10,6 +10,7 @@ itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, it
     local pTable =
     {
         chance          = 7,
+        ignoreEnSpell   = true,
         basePower       = math.floor(actor:getHP() / 4),
         attackType      = xi.attackType.PHYSICAL,
         physicalElement = xi.damageType.SLASHING,
