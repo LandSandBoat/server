@@ -1,12 +1,8 @@
 -----------------------------------
--- Area: Mount Zhayolm
---  Mob: Scoriaceous Eruca
+-- Area: Caedarva Mire
+--  Mob: Jnun
 -----------------------------------
-mixins =
-{
-    require('scripts/mixins/families/eruca'),
-    require('scripts/mixins/sleep_at_night'),
-}
+mixins = { require('scripts/mixins/sleep_at_night') }
 -----------------------------------
 ---@type TMobEntity
 local entity = {}

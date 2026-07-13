@@ -3,7 +3,8 @@
 --  Mob: Ziz
 -- Note: PH for Zizzy Zillah
 -----------------------------------
-mixins = { require('scripts/mixins/families/ziz') }
+mixins = { require('scripts/mixins/sleep_at_night') }
+-----------------------------------
 local ID = zones[xi.zone.MAMOOK]
 -----------------------------------
 ---@type TMobEntity

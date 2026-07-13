@@ -1,14 +1,16 @@
+-----------------------------------
 -- Aern family mixin
 -- Customization:
---   Setting AERN_RERAISE_MAX will determine the number of times it will reraise.
---   By default, this will be 1 40% of the time and 0 the rest (ie. default aern behavior).
---   For multiple reraises, this can be set on spawn for more reraises.
---   To run a function when a reraise occurs, add a listener to AERN_RERAISE
-
+-- Setting AERN_RERAISE_MAX will determine the number of times it will reraise.
+-- By default, this will be 1 40% of the time and 0 the rest (ie. default aern behavior).
+-- For multiple reraises, this can be set on spawn for more reraises.
+-- To run a function when a reraise occurs, add a listener to AERN_RERAISE
+-----------------------------------
 require('scripts/globals/mixins')
-
+-----------------------------------
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
+-----------------------------------
 
 g_mixins.families.aern = function(aernMob)
     local petDeath = function(mob)

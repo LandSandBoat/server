@@ -2,14 +2,14 @@
 -- Area: Zhayolm Remnants
 -- MOB: Ziz
 -----------------------------------
+mixins = { require('scripts/mixins/sleep_at_night') }
+-----------------------------------
 local ID = zones[xi.zone.ZHAYOLM_REMNANTS]
-mixins = { require('scripts/mixins/families/ziz') }
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar('noSleep', 1)
     mob:setDelay(750)
     mob:setMod(xi.mod.ATT, 100)
     mob:setMod(xi.mod.MAIN_DMG_RATING, -15)
