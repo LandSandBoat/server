@@ -10,7 +10,7 @@ end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     local base = 47 + pet:getMainLvl() * 3
-    local tp   = pet:getTP()
+    local tp   = petskill:getTP()
 
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
