@@ -19,7 +19,6 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MAX, 18000)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 35)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MODIFIER, 30)
-    mob:setMod(xi.mod.SILENCE_RES_RANK, 11)
     mob:setMod(xi.mod.DEFP, 15)
     mob:setMod(xi.mod.ATTP, 20)
     mob:setMod(xi.mod.VIT, 75)
@@ -29,6 +28,22 @@ end
 entity.onMobSpawn = function(mob)
     mob:messageText(mob, ID.text.SKY_GOD_OFFSET + 7) -- Spawn message
     GetNPCByID(ID.npc.PORTAL_OFFSET + 11):setAnimation(xi.anim.CLOSE_DOOR)
+
+    mob:setMod(xi.mod.PARALYZE_RES_RANK, 4)
+    mob:setMod(xi.mod.SLOW_RES_RANK, 4)
+    mob:setMod(xi.mod.BLIND_RES_RANK, 4)
+    mob:setMod(xi.mod.POISON_RES_RANK, -2)
+    mob:setMod(xi.mod.SILENCE_RES_RANK, 10)
+    mob:setMod(xi.mod.BIND_RES_RANK, 10)
+
+    mob:setMod(xi.mod.DARK_RES_RANK, 4)
+    mob:setMod(xi.mod.LIGHT_RES_RANK, 4)
+    mob:setMod(xi.mod.EARTH_RES_RANK, 4)
+    mob:setMod(xi.mod.WATER_RES_RANK, -2)
+    mob:setMod(xi.mod.WIND_RES_RANK, 4)
+    mob:setMod(xi.mod.FIRE_RES_RANK, 10)
+    mob:setMod(xi.mod.ICE_RES_RANK, 10)
+    mob:setMod(xi.mod.THUNDER_RES_RANK, 4)
 
     -- Sky gods wait 5-10 seconds after spawning to start casting
     mob:setMagicCastingEnabled(false)
