@@ -111,7 +111,7 @@ float CLuaPetSkill::getTP()
     return static_cast<float>(m_PLuaPetSkill->getTP());
 }
 
-auto CLuaPetSkill::getMobHP() const -> uint8
+auto CLuaPetSkill::getMobHP() const -> int32
 {
     return m_PLuaPetSkill->getHP();
 }
