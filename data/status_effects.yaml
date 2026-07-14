@@ -5163,6 +5163,7 @@ status_effects:
     id: 603
     flags:
       - death
+      - confrontation
       - no_cancel
       - hide_timer
 

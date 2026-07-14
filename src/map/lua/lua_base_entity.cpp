@@ -12748,10 +12748,11 @@ void CLuaBaseEntity::countdown(const sol::object& secondsObj) const
                 strongholdNameOverride = 0
             },
             fence = {
-                pos = {x = 0.000, z = 0.000}, -- center of fence
-                radius = 25.00, -- radius from pos in yalms
-                render = 25.00, -- distance from fence it becomes visible
-                blue = true -- optional, turns default red fence bars blue
+                pos    = {x = 0.000, z = 0.000}, -- center of fence
+                radius = 25.00,                  -- radius from pos in yalms
+                render = 25.00,                  -- distance from fence it becomes visible
+                blue   = true,                   -- optional, turns default red fence bars blue
+                gateId = 13                      -- optional content culling ID (hides non-participants while inside)
             },
             help = {
                 title = 1, -- string index from ROM\333\16.DAT
@@ -12845,8 +12846,9 @@ void CLuaBaseEntity::objectiveUtility(const sol::object& obj) const
             const float radius = fenceObj.as<sol::table>().get_or<float>("radius", 0.00);
             const float render = fenceObj.as<sol::table>().get_or<float>("render", 25.00);
             const bool  blue   = fenceObj.as<sol::table>().get_or<bool, std::string, bool>("blue", false);
+            const uint8 gateId = fenceObj.as<sol::table>().get_or<uint8>("gateId", PChar->StatusEffectContainer->GetConfrontationSubPower() & 0x0F);
 
-            packet->addFence(posX, posZ, radius, render, blue);
+            packet->addFence(posX, posZ, radius, render, blue, gateId);
         }
 
         const sol::object helpObj = obj.as<sol::table>()["help"];
@@ -18234,6 +18236,19 @@ void CLuaBaseEntity::setUntargetable(bool untargetable)
 }
 
 /************************************************************************
+ *  Function: setPriorityRender()
+ *  Purpose : Forces clients to always render this entity (CliPriorityFlag)
+ *  Example : mob:setPriorityRender(true)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::setPriorityRender(const bool enabled) const
+{
+    m_PBaseEntity->priorityRender = enabled;
+    m_PBaseEntity->updatemask |= UPDATE_HP;
+}
+
+/************************************************************************
  *  Function: getUntargetable()
  *  Purpose : Returns true if a Mob or NPC is setUntargetable (Not True)
  *  Example : if target:setUntargetable() then
@@ -21080,6 +21095,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getUnkillable", CLuaBaseEntity::getUnkillable);
     SOL_REGISTER("setUntargetable", CLuaBaseEntity::setUntargetable);
     SOL_REGISTER("getUntargetable", CLuaBaseEntity::getUntargetable);
+    SOL_REGISTER("setPriorityRender", CLuaBaseEntity::setPriorityRender);
     SOL_REGISTER("setIsAggroable", CLuaBaseEntity::setIsAggroable);
     SOL_REGISTER("isAggroable", CLuaBaseEntity::isAggroable);
 

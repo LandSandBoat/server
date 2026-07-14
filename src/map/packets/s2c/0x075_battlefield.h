@@ -73,7 +73,7 @@ public:
         uint32_t FenceRotation; // PS2: (New; did not exist.)
         uint8_t  Flags;         // PS2: (New; did not exist.)
         uint8_t  FenceColor;    // PS2: (New; did not exist.)
-        uint8_t  unknown26;     // PS2: (New; did not exist.)
+        uint8_t  FenceGateId;   // PS2: (New; did not exist.)
         uint8_t  padding27;     // PS2: (New; did not exist.)
 
         union
@@ -93,6 +93,6 @@ public:
     void addCountdown(uint32 duration, uint32 warning);
     void addBars(std::vector<std::pair<std::string, uint32>>&& bars);
     void addScoreboard(const std::pair<int32, int32>& score, const std::vector<uint32>& data);
-    void addFence(float x, float z, float radius, float render, bool blue = false);
+    void addFence(float x, float z, float radius, float render, bool blue = false, uint8 gateId = 0);
     void addHelpText(uint16 title, uint16 description);
 };

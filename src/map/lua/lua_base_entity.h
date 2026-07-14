@@ -889,6 +889,7 @@ public:
     auto getUnkillable() -> bool;
     void setUntargetable(bool untargetable);
     bool getUntargetable();
+    void setPriorityRender(bool enabled) const;
     void setIsAggroable(bool isAggroable);
     bool isAggroable();
 

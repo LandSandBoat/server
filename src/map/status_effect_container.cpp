@@ -2165,6 +2165,19 @@ uint16 CStatusEffectContainer::GetConfrontationEffect()
     return 0;
 }
 
+auto CStatusEffectContainer::GetConfrontationSubPower() const -> uint16
+{
+    for (const auto& PEffect : m_StatusEffectSet)
+    {
+        if (PEffect->HasEffectFlag(xi::StatusEffectFlag::Confrontation))
+        {
+            return PEffect->GetSubPower();
+        }
+    }
+
+    return 0;
+}
+
 void CStatusEffectContainer::CopyConfrontationEffect(CBattleEntity* PEntity)
 {
     for (const auto& PEffect : m_StatusEffectSet)

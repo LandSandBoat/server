@@ -91933,17 +91933,17 @@ INSERT INTO `mob_spawn_points` VALUES (17961635,0,'Warders_Wynav','Warder\'s Wyn
 INSERT INTO `mob_spawn_points` VALUES (17961636,0,'Warders_Wynav','Warder\'s Wynav',94,145,145,0.000,0.000,0.000,0,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17961637,0,'Balamor','Balamor',95,121,122,-1.185,-54.905,-618.450,179,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17961638,0,'Naga_Raja','Naga Raja',96,119,119,0.001,-44.099,-210.000,64,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17961639,0,'Naga_Rajas_Lamia','Naga Raja\'s Lamia',97,119,119,5.583,-44.086,-211.099,69,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17961640,0,'Naga_Rajas_Lamia','Naga Raja\'s Lamia',98,119,119,0.816,-44.099,-216.170,196,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17961641,0,'Naga_Rajas_Lamia','Naga Raja\'s Lamia',97,119,119,4.620,-44.032,-214.133,133,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17961642,0,'Naga_Rajas_Lamia','Naga Raja\'s Lamia',98,119,119,2.035,-44.099,-217.008,180,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17961643,0,'Naga_Rajas_Lamia','Naga Raja\'s Lamia',97,119,119,2.236,-44.099,-211.939,157,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17961644,0,'Naga_Rajas_Lamia','Naga Raja\'s Lamia',98,119,119,5.644,-44.099,-214.791,79,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17961645,0,'Naga_Rajas_Lamia','Naga Raja\'s Lamia',97,119,119,4.921,-44.045,-212.132,72,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17961646,0,'Naga_Rajas_Lamia','Naga Raja\'s Lamia',98,119,119,6.339,-44.099,-213.972,80,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17961647,0,'Naga_Rajas_Lamia','Naga Raja\'s Lamia',97,119,119,4.287,-43.873,-214.330,71,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17961648,0,'Naga_Rajas_Lamia','Naga Raja\'s Lamia',98,119,119,3.779,-44.099,-210.366,67,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17961649,0,'Naga_Rajas_Lamia','Naga Raja\'s Lamia',97,119,119,3.750,-43.885,-215.937,157,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17961639,0,'Naga_Rajas_Lamia','Naga Raja\'s Lamia',97,115,117,5.583,-44.086,-211.099,69,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17961640,0,'Naga_Rajas_Lamia','Naga Raja\'s Lamia',98,115,117,0.816,-44.099,-216.170,196,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17961641,0,'Naga_Rajas_Lamia','Naga Raja\'s Lamia',97,115,117,4.620,-44.032,-214.133,133,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17961642,0,'Naga_Rajas_Lamia','Naga Raja\'s Lamia',98,115,117,2.035,-44.099,-217.008,180,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17961643,0,'Naga_Rajas_Lamia','Naga Raja\'s Lamia',97,115,117,2.236,-44.099,-211.939,157,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17961644,0,'Naga_Rajas_Lamia','Naga Raja\'s Lamia',98,115,117,5.644,-44.099,-214.791,79,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17961645,0,'Naga_Rajas_Lamia','Naga Raja\'s Lamia',97,115,117,4.921,-44.045,-212.132,72,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17961646,0,'Naga_Rajas_Lamia','Naga Raja\'s Lamia',98,115,117,6.339,-44.099,-213.972,80,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17961647,0,'Naga_Rajas_Lamia','Naga Raja\'s Lamia',97,115,117,4.287,-43.873,-214.330,71,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17961648,0,'Naga_Rajas_Lamia','Naga Raja\'s Lamia',98,115,117,3.779,-44.099,-210.366,67,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17961649,0,'Naga_Rajas_Lamia','Naga Raja\'s Lamia',97,115,117,3.750,-43.885,-215.937,157,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17961650,0,'Mireu','Mireu',99,0,0,0.000,0.000,0.000,0,NULL,NULL);
 
 -- ------------------------------------------------------------
