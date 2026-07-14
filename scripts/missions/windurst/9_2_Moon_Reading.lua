@@ -213,7 +213,14 @@ mission.sections =
         {
             onZoneIn = function(player, prevZone)
                 if player:getMissionStatus(mission.areaId) == 4 then
-                    return 443
+                    player:setPos(0, -16.750, 130, 64)
+
+                    local cutsceneFlags = bit.bor(
+                        xi.cutsceneFlag.NO_PCS,
+                        xi.cutsceneFlag.UNKNOWN_2
+                    )
+
+                    return { 443, -1, cutsceneFlags }
                 end
             end,
 
