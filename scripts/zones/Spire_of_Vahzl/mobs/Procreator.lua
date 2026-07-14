@@ -7,6 +7,25 @@ mixins = { require('scripts/mixins/families/gorger_nm') }
 ---@type TMobEntity
 local entity = {}
 
+local function engageNextMob(mob, target)
+    if not target then
+        return
+    end
+
+    local nextMob = GetMobByID(mob:getID() - 1) -- Agonizer
+
+    if not nextMob then
+        return
+    end
+
+    if
+        nextMob:isAlive() and
+        not nextMob:isEngaged()
+    then
+        nextMob:updateEnmity(target)
+    end
+end
+
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
@@ -48,11 +67,14 @@ entity.onMobFight = function(mob, target)
         mob:setMod(xi.mod.REGAIN, 100)
     end
 
-    if mob:getHPP() < 20 then
-        local nextMob = GetMobByID(mob:getID() - 1) --Agonizer aggros at <20%
-        if nextMob and not nextMob:isEngaged() then
-            nextMob:updateEnmity(target)
-        end
+    if mob:getHPP() < 20 then -- Agonizer engages < 20% HP.
+        engageNextMob(mob, target)
+    end
+end
+
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
+        engageNextMob(mob, player)
     end
 end
 
