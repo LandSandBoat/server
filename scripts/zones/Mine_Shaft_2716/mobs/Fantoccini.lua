@@ -13,7 +13,7 @@ local jobTable =
     {
         modelId    = 1209,
         hp         = 3750,
-        delay      = 240,
+        delay      =  240,
         skillList  =
         {
             xi.mobSkill.RAGING_AXE,
@@ -33,7 +33,7 @@ local jobTable =
     {
         modelId    = 1210,
         hp         = 5000,
-        delay      = 420,
+        delay      =  420,
         skillList  =
         {
             xi.mobSkill.COMBO_1,
@@ -54,7 +54,7 @@ local jobTable =
     {
         modelId   = 1214,
         hp        = 2750,
-        delay     = 240,
+        delay     =  240,
         skillList =
         {
             xi.mobSkill.SHINING_STRIKE_1,
@@ -82,7 +82,7 @@ local jobTable =
     {
         modelId   = 1215,
         hp        = 4000,
-        delay     = 240,
+        delay     =  240,
         skillList =
         {
             xi.mobSkill.SHINING_STRIKE_1,
@@ -109,7 +109,7 @@ local jobTable =
     {
         modelId   = 1216,
         hp        = 3500,
-        delay     = 240,
+        delay     =  240,
         skillList =
         {
             xi.mobSkill.FAST_BLADE_1,
@@ -143,7 +143,8 @@ local jobTable =
     {
         modelId    = 1218,
         hp         = 2750,
-        delay      = 240,
+        delay      =  200,
+        baseDmg    =   80,
         skillList  =
         {
             xi.mobSkill.WASP_STING_1,
@@ -163,7 +164,7 @@ local jobTable =
     {
         modelId     = 1219,
         hp          = 2750,
-        delay       = 240,
+        delay       =  240,
         shieldBlock = true,
         skillList   =
         {
@@ -191,8 +192,8 @@ local jobTable =
     {
         modelId    = 1220,
         hp         = 3250,
-        delay      = 580,
-        baseDmg    = 150,
+        delay      =  580,
+        baseDmg    =  150,
         skillList  =
         {
             xi.mobSkill.SLICE,
@@ -213,7 +214,7 @@ local jobTable =
     {
         modelId    = 1224,
         hp         = 3750,
-        delay      = 240,
+        delay      =  240,
         skillList  =
         {
             xi.mobSkill.RAGING_AXE,
@@ -247,7 +248,7 @@ local jobTable =
     {
         modelId   = 1227,
         hp        = 3000,
-        delay     = 240,
+        delay     =  240,
         skillList =
         {
             xi.mobSkill.WASP_STING_1,
@@ -275,8 +276,8 @@ local jobTable =
     {
         modelId      = 1228,
         hp           = 4500,
-        delay        = 240,
-        rangedAttack = 14,
+        delay        =  240,
+        rangedAttack =   14,
         skillList    =
         {
             xi.mobSkill.FLAMING_ARROW,
@@ -294,8 +295,8 @@ local jobTable =
     {
         modelId    = 1229,
         hp         = 3750,
-        delay      = 580,
-        baseDmg    = 150,
+        delay      =  580,
+        baseDmg    =  150,
         skillList  =
         {
             xi.mobSkill.TACHI_ENPI,
@@ -316,7 +317,7 @@ local jobTable =
     {
         modelId   = 1232,
         hp        = 3750,
-        delay     = 280,
+        delay     =  280,
         dualWield = true,
         skillList =
         {
@@ -351,8 +352,8 @@ local jobTable =
     {
         modelId    = 1234,
         hp         = 3750,
-        delay      = 580,
-        baseDmg    = 150,
+        delay      =  580,
+        baseDmg    =  150,
         skillList  =
         {
             xi.mobSkill.DOUBLE_THRUST,
@@ -386,7 +387,7 @@ local jobTable =
     {
         modelId    = 1235,
         hp         = 3250,
-        delay      = 480,
+        delay      =  480,
         skillList  =
         {
             xi.mobSkill.HEAVY_SWING,
@@ -421,7 +422,7 @@ local jobTable =
     {
         modelId   = 1396,
         hp        = 3250,
-        delay     = 240,
+        delay     =  240,
         skillList =
         {
             xi.mobSkill.FAST_BLADE_1,
@@ -443,8 +444,8 @@ local jobTable =
     {
         modelId      = 1397,
         hp           = 3750,
-        delay        = 240,
-        rangedAttack = 14,
+        delay        =  240,
+        rangedAttack =   14,
         skillList    =
         {
             xi.mobSkill.HOT_SHOT_1,
@@ -470,7 +471,7 @@ local jobTable =
     {
         modelId    = 1398,
         hp         = 3500,
-        delay      = 420,
+        delay      =  420,
         skillList  =
         {
             xi.mobSkill.COMBO_1,

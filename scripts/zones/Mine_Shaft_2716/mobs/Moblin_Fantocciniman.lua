@@ -9,7 +9,8 @@ local entity = {}
 local ID = zones[xi.zone.MINE_SHAFT_2716]
 -----------------------------------
 
--- TODO: Possible rolls are weighted?
+-- TODO: More accurate weights for rolls. Fully Restore HP/MP only captured once, seems to be very rare.
+-- TODO: Apparently you can steal the moblins dice on THF and it limits his rolls to only the player targeting dice.
 
 -----------------------------------
 --- Marionette Dice Table
@@ -17,48 +18,56 @@ local ID = zones[xi.zone.MINE_SHAFT_2716]
 local marionetteDice =
 {
     -- Main target: Player.
-    [ 1] = xi.mobSkill.MARIONETTE_DICE_2,  -- Restore HP to Player
-    [ 2] = xi.mobSkill.MARIONETTE_DICE_3,  -- Restore MP to Player
-    [ 3] = xi.mobSkill.MARIONETTE_DICE_4,  -- Attack Boost to Player
-    [ 4] = xi.mobSkill.MARIONETTE_DICE_5,  -- Defense Boost to Player
-    [ 5] = xi.mobSkill.MARIONETTE_DICE_6,  -- TP Boost to Player
-    [ 6] = xi.mobSkill.MARIONETTE_DICE_15, -- Reset job abilities for Player
+    [ 1] = { skill = xi.mobSkill.MARIONETTE_DICE_1,  weight = 1, targetsFantoccini = false, isCasterRoll = false }, -- Fully Restores Player HP / MP
+    [ 2] = { skill = xi.mobSkill.MARIONETTE_DICE_2,  weight = 8, targetsFantoccini = false, isCasterRoll = false }, -- Restore HP to Player
+    [ 3] = { skill = xi.mobSkill.MARIONETTE_DICE_3,  weight = 8, targetsFantoccini = false, isCasterRoll =  true }, -- Restore MP to Player
+    [ 4] = { skill = xi.mobSkill.MARIONETTE_DICE_4,  weight = 8, targetsFantoccini = false, isCasterRoll = false }, -- Attack Boost to Player
+    [ 5] = { skill = xi.mobSkill.MARIONETTE_DICE_5,  weight = 8, targetsFantoccini = false, isCasterRoll = false }, -- Defense Boost to Player
+    [ 6] = { skill = xi.mobSkill.MARIONETTE_DICE_6,  weight = 8, targetsFantoccini = false, isCasterRoll = false }, -- TP Boost to Player
+    [ 7] = { skill = xi.mobSkill.MARIONETTE_DICE_15, weight = 5, targetsFantoccini = false, isCasterRoll = false }, -- Reset job abilities for Player
 
     -- Main target: Fantoccini.
-    [ 7] = xi.mobSkill.MARIONETTE_DICE_7,  -- Fantoccini uses a job ability or casts a spell
-    [ 8] = xi.mobSkill.MARIONETTE_DICE_8,  -- Fantoccini TP Boost
-    [ 9] = xi.mobSkill.MARIONETTE_DICE_9,  -- Fantoccini Attack Boost
-    [10] = xi.mobSkill.MARIONETTE_DICE_10, -- Fantoccini Defense Boost
-    [11] = xi.mobSkill.MARIONETTE_DICE_11, -- Restore HP to Fantoccini
-    [12] = xi.mobSkill.MARIONETTE_DICE_12, -- Restore MP to Fantoccini
-    [13] = xi.mobSkill.MARIONETTE_DICE_14, -- Fantoccini uses 2-hour ability
+    [ 8] = { skill = xi.mobSkill.MARIONETTE_DICE_7,  weight = 8, targetsFantoccini =  true, isCasterRoll = false }, -- Fantoccini uses a job ability or casts a spell
+    [ 9] = { skill = xi.mobSkill.MARIONETTE_DICE_8,  weight = 8, targetsFantoccini =  true, isCasterRoll = false }, -- Fantoccini TP Boost
+    [10] = { skill = xi.mobSkill.MARIONETTE_DICE_9,  weight = 8, targetsFantoccini =  true, isCasterRoll = false }, -- Fantoccini Attack Boost
+    [11] = { skill = xi.mobSkill.MARIONETTE_DICE_10, weight = 8, targetsFantoccini =  true, isCasterRoll = false }, -- Fantoccini Defense Boost
+    [12] = { skill = xi.mobSkill.MARIONETTE_DICE_11, weight = 8, targetsFantoccini =  true, isCasterRoll = false }, -- Restore HP to Fantoccini
+    [13] = { skill = xi.mobSkill.MARIONETTE_DICE_12, weight = 8, targetsFantoccini =  true, isCasterRoll =  true }, -- Restore MP to Fantoccini
+    [14] = { skill = xi.mobSkill.MARIONETTE_DICE_13, weight = 1, targetsFantoccini =  true, isCasterRoll = false }, -- Fully Restores Fantoccini HP / MP
+    [15] = { skill = xi.mobSkill.MARIONETTE_DICE_14, weight = 5, targetsFantoccini =  true, isCasterRoll = false }, -- Fantoccini uses 2-hour ability
 }
 
 -----------------------------------
--- Function to get the possible rolls based off the initiators job. If they are not a spell caster, mana rolls get excluded.
+-- Function to select roll.
 -----------------------------------
-local function getPossibleRolls(mob)
+local function rollDice(mob)
     local battlefield = mob:getBattlefield()
-
     if not battlefield then
         return
     end
 
-    local initiatorJob = battlefield:getLocalVar('initiatorJob')
-    local possibleRolls = { 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13 }
+    local mainJob  = battlefield:getLocalVar('initiatorJob')
+    local isCaster = mainJob == xi.job.WHM or mainJob == xi.job.BLM or mainJob == xi.job.RDM or mainJob == xi.job.SMN or mainJob == xi.job.BLU
 
-    if
-        initiatorJob == xi.job.WHM or
-        initiatorJob == xi.job.BLM or
-        initiatorJob == xi.job.RDM or
-        initiatorJob == xi.job.SMN or
-        initiatorJob == xi.job.BLU
-    then
-        table.insert(possibleRolls, 2)
-        table.insert(possibleRolls, 12)
+    local possibleRolls = {}
+    local totalWeight   = 0
+
+    for i = 1, #marionetteDice do
+        local rollData = marionetteDice[i]
+        if isCaster or not rollData.isCasterRoll then
+            possibleRolls[#possibleRolls + 1] = rollData
+            totalWeight                       = totalWeight + rollData.weight
+        end
     end
 
-    return possibleRolls
+    local randomRoll = math.randomInt(1, totalWeight)
+    local weight     = 0
+    for j = 1, #possibleRolls do
+        weight = weight + possibleRolls[j].weight
+        if randomRoll <= weight then
+            return possibleRolls[j]
+        end
+    end
 end
 
 entity.onMobInitialize = function(mob)
@@ -90,39 +99,39 @@ entity.onMobFight = function(mob, target)
     if currentTime >= mob:getLocalVar('marionetteDiceTime') then
         mob:messageText(mob, ID.text.HO_HO + 2) -- Roly-poly, roly-poly♪
 
-        local possibleRolls = getPossibleRolls(mob)
-
-        if not possibleRolls then
+        local roll = rollDice(mob)
+        if not roll then
             return
         end
 
-        local randomRoll = possibleRolls[math.randomInt(1, #possibleRolls)]
-        if randomRoll >= 7 then
+        if roll.targetsFantoccini then
             local fantoccini = GetMobByID(mob:getID() + 2)
             if fantoccini and fantoccini:isAlive() then
-                mob:useMobAbility(marionetteDice[randomRoll], fantoccini, 0, true)
+                mob:useMobAbility(roll.skill, fantoccini, 0, true)
             end
         else
-            mob:useMobAbility(marionetteDice[randomRoll], target, 0, true)
+            mob:useMobAbility(roll.skill, target, 0, true)
         end
 
         mob:setLocalVar('marionetteDiceTime', currentTime + math.randomInt(25, 30))
     end
 
+    -- Early return: Moblin is marked as attacked.
     if mob:getLocalVar('moblinAttacked') == 1 then
         return
     end
 
-    -----------------------------------
-    -- If the moblin is attacked and goes below 95% HP, attack the player. (They can still be enfeebled without this triggering)
-    -----------------------------------
-    if mob:getHPP() < 95 then
-        mob:messageText(mob, ID.text.HO_HO + 11) -- Ow-ow, ow-ow! You make me mad now!
-        mob:setLocalVar('moblinAttacked', 1)
-        mob:setAutoAttackEnabled(true)
-        mob:setMobAbilityEnabled(true)
-        mob:setBehavior(xi.behavior.NONE)
+    -- Early return: Moblin HP is high enough to not count as having been attacked.
+    if mob:getHPP() >= 95 then
+        return
     end
+
+    -- Handle being attacked.
+    mob:setLocalVar('moblinAttacked', 1)
+    mob:messageText(mob, ID.text.HO_HO + 11) -- Ow-ow, ow-ow! You make me mad now!
+    mob:setAutoAttackEnabled(true)
+    mob:setMobAbilityEnabled(true)
+    mob:setBehavior(xi.behavior.NONE)
 end
 
 entity.onMobWeaponSkill = function(mob, target, skill, action)
@@ -132,7 +141,7 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
     -- If the skill used is not Marionette Dice, return.
     -----------------------------------
     if
-        skillUsed < xi.mobSkill.MARIONETTE_DICE_2 or
+        skillUsed < xi.mobSkill.MARIONETTE_DICE_1 or
         skillUsed > xi.mobSkill.MARIONETTE_DICE_15
     then
         return

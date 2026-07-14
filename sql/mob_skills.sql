@@ -1442,7 +1442,7 @@ INSERT INTO `mob_skills` VALUES (1410,967,'ocher_blast',1,0.0,23.0,2000,1500,4,0
 INSERT INTO `mob_skills` VALUES (1411,658,'bai_wing',1,0.0,30.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1412,659,'absolute_terror',1,0.0,18.0,4000,800,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1413,660,'horrid_roar_3',0,0.0,18.0,4000,800,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1414,1046,'marionette_dice_1',0,0.0,15.0,2000,1500,4,4,0,0,0,0,0); -- Unused
+INSERT INTO `mob_skills` VALUES (1414,1046,'marionette_dice_1',0,0.0,30.0,2000,1500,4,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1415,1046,'marionette_dice_2',0,0.0,30.0,2000,1500,4,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1416,1047,'marionette_dice_3',0,0.0,30.0,2000,1500,4,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1417,1048,'marionette_dice_4',0,0.0,30.0,2000,1500,4,4,0,0,0,0,0);
@@ -1454,7 +1454,7 @@ INSERT INTO `mob_skills` VALUES (1422,1052,'marionette_dice_9',0,0.0,30.0,2000,1
 INSERT INTO `mob_skills` VALUES (1423,1052,'marionette_dice_10',0,0.0,30.0,2000,1500,65,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1424,1053,'marionette_dice_11',0,0.0,30.0,2000,1500,65,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1425,1053,'marionette_dice_12',0,0.0,30.0,2000,1500,65,4,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1426,1054,'marionette_dice_13',0,0.0,15.0,2000,1500,65,4,0,0,0,0,0); -- Unused
+INSERT INTO `mob_skills` VALUES (1426,1054,'marionette_dice_13',0,0.0,30.0,2000,1500,65,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1427,1054,'marionette_dice_14',0,0.0,30.0,2000,1500,65,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1428,28,'warcry',0,0.0,7.0,2000,0,1,0,0,0,0,0,0); -- Finish 6
 INSERT INTO `mob_skills` VALUES (1429,8,'counterstance_4',0,0.0,7.0,2000,0,1,0,0,0,0,0,0); -- Finish 6

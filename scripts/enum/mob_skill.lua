@@ -885,7 +885,7 @@ xi.mobSkill =
     BAI_WING_2                    = 1411,
     ABSOLUTE_TERROR_7             = 1412,
     HORRID_ROAR_7                 = 1413,
-
+    MARIONETTE_DICE_1             = 1414,
     MARIONETTE_DICE_2             = 1415,
     MARIONETTE_DICE_3             = 1416,
     MARIONETTE_DICE_4             = 1417,
@@ -897,7 +897,7 @@ xi.mobSkill =
     MARIONETTE_DICE_10            = 1423,
     MARIONETTE_DICE_11            = 1424,
     MARIONETTE_DICE_12            = 1425,
-
+    MARIONETTE_DICE_13            = 1426,
     MARIONETTE_DICE_14            = 1427,
     WARCRY                        = 1428,
     COUNTERSTANCE_4               = 1429,
