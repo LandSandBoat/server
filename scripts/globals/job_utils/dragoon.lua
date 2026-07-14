@@ -73,7 +73,7 @@ local function performWSJump(player, target, action, params, abilityID)
     end
 
     -- Jumps add JUMP_TP_BONUS regardless of 0 dmg or miss and is affected by Store TP but not the target's subtle blow
-    local storeTPModifier = (100 + player:getMod(xi.mod.STORETP)) / 100
+    local storeTPModifier = (100 + player:getMod(xi.mod.STORETP) + player:getMerit(xi.merit.STORE_TP_EFFECT)) / 100
     local extraTP         = player:getMod(xi.mod.JUMP_TP_BONUS)
 
     -- Spirit jump specific TP bonus

@@ -966,7 +966,7 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
     end
 
     -- Core does not modify the TP for the 10 TP/hit like it should, so we're doing it here
-    local storeTPModifier = 1 + attacker:getMod(xi.mod.STORETP) / 100 -- TODO, make a global function to get this (inhibit TP is not accounted for properly in core)
+    local storeTPModifier = 1 + (attacker:getMod(xi.mod.STORETP) + attacker:getMerit(xi.merit.STORE_TP_EFFECT)) / 100 -- TODO, make a global function to get this (inhibit TP is not accounted for properly in core)
     local extraHitsTP     = (wsResults.extraHitsLanded * 10 * storeTPModifier) + wsResults.bonusTP
 
     -- Extra hits return 0 TP while under the effect of Meikyo Shisui
