@@ -1437,6 +1437,14 @@ void CZoneEntities::UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, 
         }
     }
 
+    if (PEntity->objtype == TYPE_NPC)
+    {
+        if (static_cast<CNpcEntity*>(PEntity)->alwaysRelevant())
+        {
+            alwaysInclude = true;
+        }
+    }
+
     // Grid-accelerated recipient selection for the common ENTITY_UPDATE case: instead of scanning
     // every player in the zone (O(P) per broadcast -> O(P^2)/tick), query the spatial hash for the
     // players near the entity.
