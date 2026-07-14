@@ -95,13 +95,20 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsi
             PActionTarget = m_PEntity;
         }
 
+        auto targetID = PActionTarget ? PActionTarget->id : m_PEntity->id;
+
+        if (m_PEntity->objtype != TYPE_PC && settings::get<bool>("map.HIDE_READIES_TARGET"))
+        {
+            targetID = m_PEntity->id;
+        }
+
         action_t action{
             .actorId    = m_PEntity->id,
             .actiontype = ActionCategory::SkillStart,
             .actionid   = static_cast<uint32_t>(FourCC::SkillUse),
             .targets    = {
                 {
-                    .actorId = PActionTarget ? PActionTarget->id : m_PEntity->id,
+                    .actorId = targetID,
                     .results = {
                         {
                             .param     = m_PSkill->getID(),
