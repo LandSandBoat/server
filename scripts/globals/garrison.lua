@@ -92,7 +92,12 @@ xi.garrison.addLevelCap = function(entity, definedCap)
     end
 
     -- Note the level restriction does not wear on death.
-    entity:addStatusEffect(xi.effect.LEVEL_RESTRICTION, { power = cap, origin = entity, flag = xi.effectFlag.ON_ZONE + xi.effectFlag.CONFRONTATION })
+    entity:addStatusEffect(xi.effect.LEVEL_RESTRICTION, {
+        power = cap,
+        subPower = 1, -- exp uses actual level and not the restricted level.
+        origin = entity,
+        flag = xi.effectFlag.ON_ZONE + xi.effectFlag.CONFRONTATION,
+    })
 end
 
 -----------------------------------
@@ -259,6 +264,7 @@ xi.garrison.spawnMob = function(mobID, zoneData)
 
     xi.garrison.addLevelCap(mob, zoneData.levelCap)
     mob:setRoamFlags(xi.roamFlag.SCRIPTED)
+    mob:setMobMod(xi.mobMod.EXP_BONUS, -100)
     table.insert(zoneData.mobs, mobID)
 
     -- Death listener for tracking win/lose condition

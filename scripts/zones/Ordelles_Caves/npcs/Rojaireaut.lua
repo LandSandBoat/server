@@ -22,7 +22,12 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 51 and option == 1 then
-        player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, { power = 25, origin = player })
+        player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, {
+            power    = 25,
+            subPower = 1, -- exp uses actual level and not the restricted level.
+            origin   = player,
+            flag     = xi.effectFlag.ON_ZONE
+        })
     elseif csid == 54 then
         player:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
         player:setCharVar('EcoStatus', 3)
