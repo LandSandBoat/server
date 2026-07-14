@@ -71,7 +71,7 @@ void GP_SERV_COMMAND_BATTLEFIELD::addScoreboard(const std::pair<int32, int32>& s
     };
 }
 
-void GP_SERV_COMMAND_BATTLEFIELD::addFence(const float x, const float z, const float radius, const float render, const bool blue /* = false */)
+void GP_SERV_COMMAND_BATTLEFIELD::addFence(const float x, const float z, const float radius, const float render, const bool blue /* = false */, const uint8 gateId /* = 0 */)
 {
     auto& packet = this->data();
 
@@ -81,6 +81,7 @@ void GP_SERV_COMMAND_BATTLEFIELD::addFence(const float x, const float z, const f
     packet.FenceRadius   = static_cast<uint32>(radius * 1000);
     packet.FenceRotation = static_cast<uint32>(render * 1000);
     packet.FenceColor    = blue;
+    packet.FenceGateId   = gateId;
 }
 
 void GP_SERV_COMMAND_BATTLEFIELD::addHelpText(const uint16 title, const uint16 description)

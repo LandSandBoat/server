@@ -113,7 +113,7 @@ struct flags5_t
 {
     uint8_t unknown_0_0 : 2;
     uint8_t unknown_0_2 : 2;
-    uint8_t unknown_0_4 : 4;
+    uint8_t unknown_0_4 : 4; // GateId for fenced content
 };
 
 struct flags6_t
@@ -337,7 +337,10 @@ CCharStatusPacket::CCharStatusPacket(CCharEntity* PChar)
     }
 
     // flags5 starts at 0x5A
-    charStatusFlags::flags5_t flags5 = {}; // All unknown, see https://github.com/atom0s/XiPackets/tree/main/world/server/0x0037
+    charStatusFlags::flags5_t flags5 = {}; // Mostly unknown, see https://github.com/atom0s/XiPackets/tree/main/world/server/0x0037
+
+    // Also known as "GateId". Fenced content ID.
+    flags5.unknown_0_4 = PChar->StatusEffectContainer->GetConfrontationSubPower() & 0x0F;
 
     // flags6 starts at 0x5C
     charStatusFlags::flags6_t flags6 = {}; // All unknown, see https://github.com/atom0s/XiPackets/tree/main/world/server/0x0037

@@ -364,7 +364,7 @@ void CCharUpdatePacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 
             packet->Flags5.GeoIndiSize = 2;
         }
 
-        packet->Flags6.GateId = 0; // Set as "Confrontation" sub power? This will make other players invisible that dont also have this status.
+        packet->Flags6.GateId = PChar->StatusEffectContainer->GetConfrontationSubPower() & 0x0F;
         packet->size          = roundUpToNearestFour(general_size) / 4;
     }
 

@@ -4,7 +4,10 @@
 ---@type TZone
 local zoneObject = {}
 
+local domainInvasionFence = { pos = { x = 0.0, z = -210.0 }, radius = 25.0 }
+
 zoneObject.onInitialize = function(zone)
+    zone:registerCylindricalTriggerArea(1, domainInvasionFence.pos.x, domainInvasionFence.pos.z, domainInvasionFence.radius)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -25,6 +28,15 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    if triggerArea:getTriggerAreaID() == 1 then -- Send updates as player moves in the Domain Invasion fence
+        xi.domainInvasion.updateFence(player, domainInvasionFence, true)
+    end
+end
+
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
+    if triggerArea:getTriggerAreaID() == 1 then -- Send updates as player moves out of the Domain Invasion fence
+        xi.domainInvasion.updateFence(player, domainInvasionFence, false)
+    end
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)
