@@ -135,7 +135,7 @@ xi.combat.tp.getSingleMeleeHitTPReturn = function(actor, isZanshin)
         tpReturn = tpReturn + actor:getMerit(xi.merit.IKISHOTEN) -- https://www.bg-wiki.com/ffxi/Ikishoten
     end
 
-    local storeTPModifier = 1 + actor:getMod(xi.mod.STORETP) / 100
+    local storeTPModifier = 1 + (actor:getMod(xi.mod.STORETP) + actor:getMerit(xi.merit.STORE_TP_EFFECT)) / 100
 
     return math.floor(tpReturn * storeTPModifier)
 end
