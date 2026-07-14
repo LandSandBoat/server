@@ -12,7 +12,7 @@ itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, it
 
     local pTable =
     {
-        isRanged        = true,
+        ignoreEnSpell   = true,
         basePower       = 10 + utils.clamp(dStat, -3, 8) + utils.clamp(math.floor((dStat - 8) / 2), 0, 8),
         attackType      = xi.attackType.MAGICAL,
         magicalElement  = xi.element.FIRE,
