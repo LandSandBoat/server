@@ -260,6 +260,10 @@ xi.settings.map =
     -- Prevent players from performing WS while unengaged using packet injection.
     PREVENT_UNENGAGED_WS = false,
 
+    -- Don't leak the target of non PCs readying items/casting spells/using mobskills. Essentially, server side kills the info the targetlines addon uses.
+    -- This will also make battlemod/simplelog show self target on spells
+    HIDE_READIES_TARGET = false,
+
     -- Command Audit [logging] commands with lower permission than this will not be logged.
     -- Zero for no logging at all. Commands given to non GMs are not logged.
     AUDIT_GM_CMD = false,
