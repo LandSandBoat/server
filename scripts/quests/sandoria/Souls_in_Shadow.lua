@@ -115,7 +115,7 @@ quest.sections =
 
         [xi.zone.DEN_OF_RANCOR] =
         {
-            ['qm2'] =
+            ['qm_mokumokuren'] =
             {
                 onTrigger = function(player, npc)
                     if player:getLocalVar('killed_wsnm') == 1 then
