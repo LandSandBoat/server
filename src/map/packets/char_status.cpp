@@ -242,10 +242,10 @@ CCharStatusPacket::CCharStatusPacket(CCharEntity* PChar)
     // flags 0 starts at 0x28
     charStatusFlags::flags0_t flags0 = {};
 
-    flags0.HideFlag        = false; // This hides your UI. Probably used for the Live Vanadiel streams.
-    flags0.SleepFlag       = false; // Hides the player, probably also used for Live Vanadiel
-    flags0.GroundFlag      = false; // Do not ignore collision
-    flags0.CliPosInitFlag  = false; // Ready to render?
+    flags0.HideFlag        = PChar->m_isPCHidden; // Hides the player from themselves.
+    flags0.SleepFlag       = false;               // Hides the player, probably also used for Live Vanadiel
+    flags0.GroundFlag      = false;               // Do not ignore collision
+    flags0.CliPosInitFlag  = false;               // Ready to render?
     flags0.LfgFlag         = PChar->isSeekingParty();
     flags0.CfhFlag         = false; // Orange name for CFH, players don't currently use this?
     flags0.AwayFlag        = PChar->isAway();
