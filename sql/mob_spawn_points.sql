@@ -54066,19 +54066,19 @@ INSERT INTO `mob_spawn_points` VALUES (17346568,0,'Jagidbod_of_Clan_Reaper','Jag
 INSERT INTO `mob_spawn_points` VALUES (17346569,0,'Derakbak_of_Clan_Wolf','Derakbak of Clan Wolf',5,68,68,-399.629,94.910,-66.259,45,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17346570,0,'Reaper_Clan_Warmachine','Reaper Clan Warmachine',6,68,68,-395.314,94.813,-59.798,45,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17346571,0,'Wolf_Clan_Warmachine','Wolf Clan Warmachine',7,68,68,-400.811,94.859,-64.510,45,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17346572,0,'Orcs_Wyvern','Orc\'s Wyvern',8,54,54,-398.337,94.763,-65.268,45,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17346572,0,'Orcs_Wyvern','Orc\'s Wyvern',8,63,63,-398.337,94.763,-65.268,45,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17346573,0,'Darokbok_of_Clan_Reaper','Darokbok of Clan Reaper',3,68,68,-155.155,-25.258,113.279,45,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17346574,0,'Jagidbod_of_Clan_Reaper','Jagidbod of Clan Reaper',4,68,68,-152.734,-25.099,116.859,45,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17346575,0,'Derakbak_of_Clan_Wolf','Derakbak of Clan Wolf',5,68,68,-159.694,-25.099,113.711,45,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17346576,0,'Reaper_Clan_Warmachine','Reaper Clan Warmachine',6,68,68,-155.379,-25.196,120.172,45,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17346577,0,'Wolf_Clan_Warmachine','Wolf Clan Warmachine',7,68,68,-160.876,-25.150,115.460,45,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17346578,0,'Orcs_Wyvern','Orc\'s Wyvern',8,54,54,-158.402,-25.246,114.702,45,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17346578,0,'Orcs_Wyvern','Orc\'s Wyvern',8,63,63,-158.402,-25.246,114.702,45,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17346579,0,'Darokbok_of_Clan_Reaper','Darokbok of Clan Reaper',3,68,68,84.838,-145.275,293.113,45,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17346580,0,'Jagidbod_of_Clan_Reaper','Jagidbod of Clan Reaper',4,68,68,87.259,-145.116,296.693,45,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17346581,0,'Derakbak_of_Clan_Wolf','Derakbak of Clan Wolf',5,68,68,80.299,-145.116,293.545,45,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17346582,0,'Reaper_Clan_Warmachine','Reaper Clan Warmachine',6,68,68,84.614,-145.213,300.006,45,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17346583,0,'Wolf_Clan_Warmachine','Wolf Clan Warmachine',7,68,68,79.117,-145.167,295.294,45,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17346584,0,'Orcs_Wyvern','Orc\'s Wyvern',8,54,54,81.591,-145.263,294.536,45,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17346584,0,'Orcs_Wyvern','Orc\'s Wyvern',8,63,63,81.591,-145.263,294.536,45,NULL,NULL);
 
 -- Shattering Stars
 INSERT INTO `mob_spawn_points` VALUES (17346585,0,'Maat_war','Maat',9,70,70,-396.160,94.712,-64.398,46,NULL,NULL); -- Maat (WAR arena 1)
