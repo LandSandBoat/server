@@ -1344,6 +1344,19 @@ auto GetZoneIPP(uint16 zoneId) -> uint64
     return ipp;
 }
 
+auto CanZoneUseMisc(uint16 zoneId, xi::ZoneMisc misc) -> bool
+{
+    const auto rset = db::preparedStmt("SELECT misc FROM zone_settings WHERE zoneid = ?", zoneId);
+    FOR_DB_SINGLE_RESULT(rset)
+    {
+        const auto mask = rset->get<xi::ZoneMisc>("misc");
+        return (mask & misc) == misc;
+    }
+
+    ShowCritical("zoneutils::CanZoneUseMisc: Cannot find zone %u", zoneId);
+    return false;
+}
+
 auto IsZoneAtPlayerCap(uint16 zoneId, bool isGM) -> bool
 {
     const auto cap = settings::get<uint16>("map.ZONE_PLAYER_CAP");

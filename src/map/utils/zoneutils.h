@@ -81,10 +81,11 @@ auto GetZonesAssignedToThisProcess(IPP mapIPP) -> std::vector<uint16>;
 auto IsZoneAssignedToThisProcess(IPP mapIPP, ZONEID zoneId) -> bool;
 void ForEachZone(FnRef<void(CZone*)> func);
 void ForEachZone(const std::vector<uint16>& zoneIds, FnRef<void(CZone*)> func);
-auto GetZoneIPP(uint16 zoneId) -> uint64;                    // returns IPP for zone ID
-auto IsZoneAtPlayerCap(uint16 zoneId, bool isGM) -> bool;    // returns true if the zone is at capacity and the entry should be denied
-auto IsResidentialArea(const CCharEntity* PChar) -> bool;    // returns whether or not the area is a residential zone
-auto IsAlwaysOutOfNationControl(REGION_TYPE region) -> bool; // returns true if a region should never trigger "in areas outside own nation's control" latent effect; false otherwise.
+auto GetZoneIPP(uint16 zoneId) -> uint64;                      // returns IPP for zone ID
+auto CanZoneUseMisc(uint16 zoneId, xi::ZoneMisc misc) -> bool; // DB-backed misc check; works for zones on other processes
+auto IsZoneAtPlayerCap(uint16 zoneId, bool isGM) -> bool;      // returns true if the zone is at capacity and the entry should be denied
+auto IsResidentialArea(const CCharEntity* PChar) -> bool;      // returns whether or not the area is a residential zone
+auto IsAlwaysOutOfNationControl(REGION_TYPE region) -> bool;   // returns true if a region should never trigger "in areas outside own nation's control" latent effect; false otherwise.
 
 void AfterZoneIn(CBaseEntity* PEntity); // triggers after a player has finished zoning in
 
