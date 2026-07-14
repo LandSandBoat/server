@@ -247,26 +247,49 @@ xi.job_utils.ranger.useBarrage = function(player, target, ability, action)
 end
 
 xi.job_utils.ranger.useShadowbind = function(player, target, ability, action)
+    if xi.combat.ranged.shouldUseAmmo(player) then
+        player:removeAmmo(1) -- Shadowbind depletes one round of ammo.
+    end
+
     if player:getWeaponSkillType(xi.slot.RANGED) == xi.skill.MARKSMANSHIP then -- can't have your crossbow/gun held like a bow, now can we?
         action:setAnimation(target:getID(), action:getAnimation(target:getID()) + 1)
     end
 
-    local duration      = 30 + player:getMod(xi.mod.SHADOW_BIND_EXT) + player:getJobPointLevel(xi.jp.SHADOWBIND_DURATION)
-
-    -- TODO: Acc penalty for /RNG, acc vs. mob level?
-    if
-        math.randomInt(0, 99) >= target:getMod(xi.mod.BIND_MEVA) and
-        not target:hasStatusEffect(xi.effect.BIND)
-    then
-        target:addStatusEffect(xi.effect.BIND, { duration = duration, origin = player })
-        ability:setMsg(xi.msg.basic.IS_EFFECT) -- Target is bound.
-    else
+    -- Check for shadowBind
+    if target:hasStatusEffect(xi.effect.BIND) then
         ability:setMsg(xi.msg.basic.JA_MISS) -- Player uses Shadowbind, but misses.
+        return xi.effect.BIND
     end
 
-    if xi.combat.ranged.shouldUseAmmo(player) then
-        player:removeAmmo(1) -- Shadowbind depletes one round of ammo.
+    -- Check target immunity.
+    if xi.data.statusEffect.isTargetImmune(target, xi.effect.BIND, xi.element.NONE) then
+        ability:setMsg(xi.msg.basic.JA_MISS) -- Player uses Shadowbind, but misses.
+        return xi.effect.BIND
     end
+
+    -- Check trait nullification trigger.
+    if xi.data.statusEffect.isTargetResistant(player, target, xi.effect.BIND) then
+        ability:setMsg(xi.msg.basic.JA_MISS) -- Player uses Shadowbind, but misses.
+        return xi.effect.BIND
+    end
+
+    -- Target already has an status effect that nullifies current.
+    if xi.data.statusEffect.isEffectNullified(target, xi.effect.BIND, 0) then
+        ability:setMsg(xi.msg.basic.JA_MISS) -- Player uses Shadowbind, but misses.
+        return xi.effect.BIND
+    end
+
+    -- Resistance rank check.
+    local resistRate = xi.combat.magicHitRate.calculateResistRate(player, target, xi.skillRank.A_PLUS, 0, 0, xi.element.DARK, 0, xi.effect.BIND, 200)
+    if not xi.data.statusEffect.isResistRateSuccessfull(xi.effect.BIND, resistRate, 0) then
+        ability:setMsg(xi.msg.basic.JA_MISS) -- Player uses Shadowbind, but misses.
+        return xi.effect.BIND
+    end
+
+    local duration = 30 + player:getMod(xi.mod.SHADOW_BIND_EXT) + player:getJobPointLevel(xi.jp.SHADOWBIND_DURATION)
+
+    target:addStatusEffect(xi.effect.BIND, { duration = duration, origin = player })
+    ability:setMsg(xi.msg.basic.IS_EFFECT) -- Target is bound.
 
     return xi.effect.BIND
 end
