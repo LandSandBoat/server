@@ -21,6 +21,8 @@
 
 #include "0x100_myroom_job.h"
 
+#include "ai/ai_container.h"
+#include "ai/states/magic_state.h"
 #include "entities/char_entity.h"
 #include "items/item_weapon.h"
 #include "job_points.h"
@@ -64,28 +66,31 @@ auto GP_CLI_COMMAND_MYROOM_JOB::validate(MapSession* PSession, const CCharEntity
 
 void GP_CLI_COMMAND_MYROOM_JOB::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    if ((this->MainJobIndex > 0x00) && (this->MainJobIndex < MAX_JOBTYPE) && (PChar->jobs.unlocked & (1 << this->MainJobIndex)))
+    const JOBTYPE prevMainJob = PChar->GetMJob();
+    const JOBTYPE prevSubJob  = PChar->GetSJob();
+    const bool    hadBlueMage = prevMainJob == JOB_BLU || prevSubJob == JOB_BLU;
+
+    const bool changingMainJob = this->MainJobIndex > 0x00;
+
+    if (changingMainJob)
     {
-        const JOBTYPE prevjob = PChar->GetMJob();
         PChar->resetPetZoningInfo();
 
         charutils::SaveJobChangeGear(PChar);
         charutils::RemoveAllEquipment(PChar);
         PChar->SetMJob(this->MainJobIndex);
+
+        // New main matches the current sub, swap them like retail.
+        if (PChar->GetSJob() == PChar->GetMJob())
+        {
+            PChar->SetSJob(prevMainJob);
+        }
+
         PChar->SetMLevel(PChar->jobs.job[PChar->GetMJob()]);
         PChar->SetSLevel(PChar->jobs.job[PChar->GetSJob()]);
 
         // If removing RemoveAllEquipment, please add a charutils::CheckUnarmedItem(PChar) if main hand is empty.
         puppetutils::LoadAutomaton(PChar);
-
-        if (this->MainJobIndex == JOB_BLU)
-        {
-            blueutils::LoadSetSpells(PChar);
-        }
-        else if (prevjob == JOB_BLU)
-        {
-            blueutils::UnequipAllBlueSpells(PChar);
-        }
 
         bool canUseMeritMode = PChar->jobs.job[PChar->GetMJob()] >= 75 && charutils::hasKeyItem(PChar, KeyItem::LIMIT_BREAKER);
         if (!canUseMeritMode && PChar->MeritMode)
@@ -97,24 +102,18 @@ void GP_CLI_COMMAND_MYROOM_JOB::process(MapSession* PSession, CCharEntity* PChar
         }
     }
 
-    if ((this->SupportJobIndex > 0x00) && (this->SupportJobIndex < MAX_JOBTYPE) && (PChar->jobs.unlocked & (1 << this->SupportJobIndex)))
+    // Reject a sub change that equals the current main.
+    const bool changingSubJob    = this->SupportJobIndex > 0x00;
+    const bool subJobMatchesMain = this->SupportJobIndex == PChar->GetMJob();
+
+    if (changingSubJob && !subJobMatchesMain)
     {
-        JOBTYPE prevsjob = PChar->GetSJob();
         PChar->resetPetZoningInfo();
 
         PChar->SetSJob(this->SupportJobIndex);
         PChar->SetSLevel(PChar->jobs.job[PChar->GetSJob()]);
 
         puppetutils::LoadAutomaton(PChar);
-
-        if (this->SupportJobIndex == JOB_BLU)
-        {
-            blueutils::LoadSetSpells(PChar);
-        }
-        else if (prevsjob == JOB_BLU)
-        {
-            blueutils::UnequipAllBlueSpells(PChar);
-        }
 
         xi::DamageType subType = xi::DamageType::None;
         if (auto* weapon = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[SLOT_SUB]))
@@ -126,6 +125,21 @@ void GP_CLI_COMMAND_MYROOM_JOB::process(MapSession* PSession, CCharEntity* PChar
         {
             charutils::UnequipItem(PChar, SLOT_SUB);
         }
+    }
+
+    // Refresh blue magic for the resulting jobs.
+    const bool hasBlueMage = PChar->GetMJob() == JOB_BLU || PChar->GetSJob() == JOB_BLU;
+    if (hasBlueMage && !hadBlueMage)
+    {
+        blueutils::LoadSetSpells(PChar);
+    }
+    else if (hasBlueMage)
+    {
+        blueutils::ValidateBlueSpells(PChar);
+    }
+    else if (hadBlueMage)
+    {
+        blueutils::UnequipAllBlueSpells(PChar);
     }
 
     charutils::SetStyleLock(PChar, false);
@@ -149,6 +163,12 @@ void GP_CLI_COMMAND_MYROOM_JOB::process(MapSession* PSession, CCharEntity* PChar
     }
 
     PChar->StatusEffectContainer->DelStatusEffectsByFlag(xi::StatusEffectFlag::Dispelable | xi::StatusEffectFlag::Roll | xi::StatusEffectFlag::OnJobchange);
+
+    // Changing jobs interrupts any spell being cast.
+    if (PChar->PAI->IsCurrentState<CMagicState>())
+    {
+        PChar->PAI->InterruptStates();
+    }
 
     // clang-format off
     PChar->ForParty([](CBattleEntity* PMember)
