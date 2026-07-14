@@ -45,7 +45,7 @@ class AHPaginationModule : public CPPModule
             return false;
         }
 
-        if (PChar->m_GMlevel == 0 && !PChar->loc.zone->CanUseMisc(MISC_AH))
+        if (PChar->m_GMlevel == 0 && !PChar->loc.zone->CanUseMisc(xi::ZoneMisc::AuctionHouse))
         {
             ShowWarning("[AH PAGES] %s is trying to use the auction house in a disallowed zone [%s]", PChar->getName(), PChar->loc.zone->getName());
             return true;
