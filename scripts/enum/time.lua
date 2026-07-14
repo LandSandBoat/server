@@ -3,12 +3,13 @@ xi = xi or {}
 ---@enum xi.time
 xi.time =
 {
-    NONE        = 0,
-    MIDNIGHT    = 1,
-    NEW_DAY     = 2,
-    DAWN        = 3,
-    DAY         = 4,
-    DUSK        = 5,
-    EVENING     = 6,
-    NIGHT       = 7,
+    NONE           = 0,
+    MIDNIGHT       = 1,
+    NEW_DAY        = 2,
+    DAWN           = 3,
+    DAY            = 4,
+    DUSK           = 5,
+    EVENING        = 6,
+    NIGHT          = 7,
+    VANADIEL_EPOCH = 1009810800, -- unix timestamp for 2001/12/31 15:00
 }

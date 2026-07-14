@@ -25,26 +25,20 @@
 ---@type TNpcEntity
 local entity = {}
 
-local function getNumberOfCoinsToUpgradeSize(size)
-    if size == 30 then
-        return 4
-    elseif size == 40 then
-        return 2
-    elseif size == 50 then
-        return 3
-    elseif size == 60 then
-        return 5
-    elseif size == 70 then
-        return 10
-    elseif size == 80 then
-        return 0
-    end
-end
+local coinCost =
+{
+    [30] =  4,
+    [40] =  3,
+    [50] =  4,
+    [60] =  5,
+    [70] = 10,
+    [80] =  0,
+}
 
 entity.onTrade = function(player, npc, trade)
-    local numBronze = trade:getItemQty(xi.item.IMPERIAL_BRONZE_PIECE)
+    local numBronze  = trade:getItemQty(xi.item.IMPERIAL_BRONZE_PIECE)
     local numMythril = trade:getItemQty(xi.item.IMPERIAL_MYTHRIL_PIECE)
-    local numGold = trade:getItemQty(xi.item.IMPERIAL_GOLD_PIECE)
+    local numGold    = trade:getItemQty(xi.item.IMPERIAL_GOLD_PIECE)
     if player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.PRESIDENT_SALAHEEM then
         if numBronze > 0 and numMythril == 0 and numGold == 0 then
             if xi.moghouse.addMogLockerExpiryTime(player, numBronze) then
@@ -83,7 +77,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.PRESIDENT_SALAHEEM then
-        local accessType = xi.moghouse.getMogLockerAccessType(player)
+        local accessType               = xi.moghouse.getMogLockerAccessType(player)
         local mogLockerExpiryTimestamp = xi.moghouse.getMogLockerExpiryTimestamp(player)
 
         if mogLockerExpiryTimestamp == nil then
@@ -93,7 +87,7 @@ entity.onTrigger = function(player, npc)
         end
 
         player:startEvent(600, mogLockerExpiryTimestamp, accessType, xi.moghouse.MOGLOCKER_ALZAHBI_VALID_DAYS, player:getContainerSize(xi.inv.MOGLOCKER),
-            getNumberOfCoinsToUpgradeSize(player:getContainerSize(xi.inv.MOGLOCKER)), 2, 3, xi.moghouse.MOGLOCKER_ALLAREAS_VALID_DAYS)
+            coinCost[player:getContainerSize(xi.inv.MOGLOCKER)], 2, 3, xi.moghouse.MOGLOCKER_ALLAREAS_VALID_DAYS)
     else
         player:startEvent(600)
     end
