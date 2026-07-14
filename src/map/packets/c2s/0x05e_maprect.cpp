@@ -29,13 +29,15 @@
 #include "enums/msg_std.h"
 #include "packets/s2c/0x053_systemmes.h"
 #include "packets/s2c/0x065_wpos2.h"
+#include "status_effect.h"
+#include "status_effect_container.h"
 #include "utils/charutils.h"
 #include "utils/zoneutils.h"
 
 namespace
 {
 
-const auto denyZone = [](CCharEntity* PChar)
+const auto denyZone = [](CCharEntity* PChar, MsgStd message = MsgStd::CouldNotEnter)
 {
     // TODO: Retail handling:
     // - Tripped poshack check: Placed somewhere on the corresponding 'exit' zoneline
@@ -43,10 +45,16 @@ const auto denyZone = [](CCharEntity* PChar)
     // - Invalid zoneline (observed in Kamihr): Placed on a different zoneline
     PChar->loc.p.rotation += 128;
 
-    PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::CouldNotEnter);
+    PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, message);
     PChar->pushPacket<GP_SERV_COMMAND_WPOS2>(PChar, PChar->loc.p, POSMODE::RESET);
 
     PChar->status = xi::Status::Normal;
+};
+
+const auto isRidingRentalChocobo = [](const CCharEntity* PChar) -> bool
+{
+    const auto* effect = PChar->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Mounted);
+    return effect != nullptr && effect->GetPower() == MOUNT_CHOCOBO && effect->GetSubPower() == 0;
 };
 
 } // namespace
@@ -245,6 +253,13 @@ void GP_CLI_COMMAND_MAPRECT::process(MapSession* PSession, CCharEntity* PChar) c
                 if (!isMogHouseEntrance && zoneutils::IsZoneAtPlayerCap(PZoneLine->destinationZoneId, PChar->m_GMlevel > 0))
                 {
                     denyZone(PChar);
+                    return;
+                }
+
+                // A rental chocobo cannot be taken into a zone that does not permit riding.
+                if (isRidingRentalChocobo(PChar) && !zoneutils::CanZoneUseMisc(PZoneLine->destinationZoneId, xi::ZoneMisc::Mount))
+                {
+                    denyZone(PChar, MsgStd::CannotEnterAreaWhileMounted);
                     return;
                 }
 

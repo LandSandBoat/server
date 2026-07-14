@@ -60,7 +60,7 @@ enum class MsgStd : uint16_t
     MoogleDriesPlant             = 133, // Your moogle dries the plant in the <item>.
     MoogleUsesItemOnPLant        = 136, // Your moogle uses the <item> on the plant.
     MoghouseCantPickUp           = 137, // Kupo... I can't pick anything right now, kupo.
-    ChocoboRefusedToEnte         = 138, // The chocobo refused to enter the next area.
+    CannotEnterAreaWhileMounted  = 138, // You cannot enter the next area while mounted.
     CurrentPollResultsSystem     = 140, // Player Name's proposal - Current poll results:
     FinalPollResultsSystem       = 141, // Player Name's proposal - Final poll results:
     CannotUseCommandAtTheMoment  = 142, // You cannot use that command at the moment. Please try again later.
