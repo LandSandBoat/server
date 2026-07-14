@@ -970,7 +970,7 @@ INSERT INTO `mob_groups` VALUES (55,1573,24,'Gigas_Martialist',300,0,981,0,0,0,N
 INSERT INTO `mob_groups` VALUES (56,1555,24,'Gigas_Catapulter',300,0,981,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (57,6276,24,'Orcish_Bowshooter',300,0,3257,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (58,6278,24,'Orcish_Footsoldier',300,0,3257,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (59,3015,24,'Orcish_Gladiator',300,0,3257,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (59,3052,24,'Orcish_Gladiator',300,0,3257,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (60,3039,24,'Orcish_Trooper',300,0,3257,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (61,1397,24,'Fomor_Thief',300,1,858,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (62,2392,24,'Leshachikha',300,0,2463,0,0,0,NULL);
