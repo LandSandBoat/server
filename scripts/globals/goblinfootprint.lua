@@ -18,6 +18,7 @@ local gobCS = -- add the goblin cs to this table
     [xi.zone.BOSTAUNIEUX_OUBLIETTE] = 100,
     [xi.zone.MAZE_OF_SHAKHRAMI]     = 67,
     [xi.zone.GARLAIGE_CITADEL]      = 61,
+    [xi.zone.RUAUN_GARDENS]         = 52,
 }
 
 local csReq = -- add checks to this table
@@ -260,6 +261,13 @@ local csReq = -- add checks to this table
             return player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT)
         end,
     },
+
+    [xi.zone.RUAUN_GARDENS] =
+    {
+        [1] = function(player)
+            return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_GATE_OF_THE_GODS)
+        end,
+    },
 }
 
 local cutscene = -- add cutscenes to this table
@@ -340,6 +348,10 @@ local cutscene = -- add cutscenes to this table
     {
         [1] = { 60 },             -- Escort for Hire (Windurst)
         [2] = { 14 },             -- Peace for the Spirit
+    },
+    [xi.zone.RUAUN_GARDENS] =
+    {
+        [1] = { 51 },             -- The Gate of the Gods
     },
 }
 
