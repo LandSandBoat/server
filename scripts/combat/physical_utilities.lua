@@ -285,7 +285,7 @@ xi.combat.physical.calculateMeleeStatFactor = function(actor, target)
         end
 
         fSTR = math.floor(fSTR)
-        fSTR = utils.clamp(fSTR, math.floor(mLvl / 5) - 1, math.floor(mLvl / 5) + 5)
+        fSTR = utils.clamp(fSTR, -1 - math.floor(mLvl / 5), math.floor(mLvl / 5) + 5)
 
         return fSTR
     end
@@ -332,6 +332,7 @@ end
 -- 'fSTR2' in English Wikis. 'SV function' in JP wiki and Studio Gobli.
 -- BG wiki: https://www.bg-wiki.com/ffxi/FSTR
 -- Gobli Wiki: https://w-atwiki-jp.translate.goog/studiogobli/pages/14.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp
+-- https://docs.google.com/spreadsheets/d/1YBoveP-weMdidrirY-vPDzHyxbEI2ryECINlfCnFkLI/edit?gid=224123492#gid=224123492&range=A53
 xi.combat.physical.calculateRangedStatFactor = function(actor, target)
     local fSTR = 0 -- The variable we want to calculate.
     local mLvl = actor:getMainLvl()
@@ -373,7 +374,7 @@ xi.combat.physical.calculateRangedStatFactor = function(actor, target)
         end
 
         fSTR = math.floor(fSTR)
-        fSTR = utils.clamp(fSTR, math.floor((mLvl / 5 - 1) * 2), math.floor((mLvl / 5 + 5) * 2))
+        fSTR = utils.clamp(fSTR, math.floor((-1 - (mLvl / 5)) * 2), math.floor((mLvl / 5 + 5) * 2))
 
         return fSTR
     end
