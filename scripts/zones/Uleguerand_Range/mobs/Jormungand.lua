@@ -61,7 +61,7 @@ entity.spawnPoints =
 
 local function enterFlight(mob)
     mob:setMobSkillAttack(732)
-    mob:addStatusEffect(xi.effect.ALL_MISS, { power = 1, origin = mob, icon = 0 })
+    mob:addStatusEffect(xi.effect.ALL_MISS, { power = 1, duration = 7200, origin = mob, icon = 0 })
     mob:setBehavior(bit.band(mob:getBehavior(), bit.bnot(xi.behavior.NO_TURN)))
     mob:setLocalVar('flightTime', GetSystemTime() + 30)
     mob:setLocalVar('changeHP', math.max(0, mob:getHP() - 6000))
