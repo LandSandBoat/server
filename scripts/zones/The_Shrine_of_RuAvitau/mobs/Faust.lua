@@ -45,6 +45,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MIN, 18000)
     mob:setMobMod(xi.mobMod.GIL_MAX, 18000)
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 30)
+    mob:setMobMod(xi.mobMod.DETECTION, bit.bor(xi.detects.MAGIC, xi.detects.SIGHT)) -- Aggros to magic and sight (30 yalms).
     mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.ELEGY)
