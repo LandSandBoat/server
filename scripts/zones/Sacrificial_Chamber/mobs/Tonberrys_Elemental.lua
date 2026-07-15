@@ -1,23 +1,21 @@
 -----------------------------------
 -- Area: Sacrificial Chamber
--- Name: Tonberrys Elemental
+--  Mob: Tonberry's Elemental
+-----------------------------------
+require('scripts/globals/pets/summon')
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
 
--- TODO: Add elemental randomization back once core code supports it.
+local possibleSpirits =
+{
+    xi.pets.summon.type.FIRE_SPIRIT,
+    xi.pets.summon.type.WATER_SPIRIT,
+    xi.pets.summon.type.LIGHT_SPIRIT,
+}
 
---[[
 entity.onMobSpawn = function(mob)
-    local possibleTypes =
-    {
-        [1] = xi.pets.summon.type.FIRE_SPIRIT,
-        [2] = xi.pets.summon.type.WATER_SPIRIT,
-        [3] = xi.pets.summon.type.LIGHT_SPIRIT,
-    }
-
-    xi.pets.summon.setupSummon(mob, possibleTypes)
+    xi.pets.summon.setupSummon(mob, possibleSpirits)
 end
-]]
 
 return entity
