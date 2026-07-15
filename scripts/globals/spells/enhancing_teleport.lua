@@ -38,7 +38,7 @@ local pTable =
 xi.spells.enhancing.useTeleportSpell = function(caster, target, spell)
     spell:setMsg(xi.msg.basic.NONE)
 
-    if target:getObjType() == xi.objType.PC then
+    if target:getObjType() ~= xi.objType.PC then
         return 0
     end
 
