@@ -285,7 +285,7 @@ xi.combat.physical.calculateMeleeStatFactor = function(actor, target)
         end
 
         fSTR = math.floor(fSTR)
-        fSTR = utils.clamp(fSTR, math.floor(mLvl / 5) - 1, math.floor(mLvl / 5) + 5)
+        fSTR = utils.clamp(fSTR, -1 - math.floor(mLvl / 5), math.floor(mLvl / 5) + 5)
 
         return fSTR
     end
