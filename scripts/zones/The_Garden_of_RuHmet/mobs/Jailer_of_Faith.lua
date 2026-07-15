@@ -38,6 +38,10 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob)
+    if xi.combat.behavior.isEntityBusy(mob) then
+        return
+    end
+
     -- Forms: 0 = Closed  1 = Closed  2 = Open 3 = Closed
     local changeTime = mob:getLocalVar('changeTime')
 
@@ -57,9 +61,6 @@ entity.onMobFight = function(mob)
             mob:setLocalVar('changeTime', GetSystemTime() + 60)
         end
     end
-end
-
-entity.onMobDeath = function(mob)
 end
 
 entity.onMobDespawn = function(mob)

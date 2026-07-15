@@ -179,14 +179,15 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
 end
 
 entity.onMobWeaponSkill = function(mob, target, skill, action)
+    local skillId = skill:getID()
     -- Handle healing completion
-    if skill:getID() == xi.mobSkill.VULTURE_3 then
+    if skillId == xi.mobSkill.VULTURE_3 then
         mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.STANDBACK))
         mob:setHP(mob:getMaxHP())
         mob:setLocalVar('healed', 1)
         mob:setMobMod(xi.mobMod.NO_MOVE, 0)
 
-    elseif skill:getID() == xi.mobSkill.OPTIC_INDURATION_CHARGE then
+    elseif skillId == xi.mobSkill.OPTIC_INDURATION_CHARGE then
         local chargeCount = mob:getLocalVar('chargeCount')
         local chargeTotal = mob:getLocalVar('chargeTotal')
 
@@ -204,7 +205,7 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
             mob:useMobAbility(xi.mobSkill.OPTIC_INDURATION_CHARGE)
         end
 
-    elseif skill:getID() == xi.mobSkill.OPTIC_INDURATION then
+    elseif skillId == xi.mobSkill.OPTIC_INDURATION then
         mob:setAutoAttackEnabled(true)
         mob:setMagicCastingEnabled(true)
         mob:setLocalVar('chargeCount', 0)

@@ -168,32 +168,37 @@ local teleportEventsByArea =
 }
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    if player:getLocalVar('TeleportAntiTrigger') == 0 and player:getAnimation() == 0 then
-        local areaId = triggerArea:getTriggerAreaID()
+    if player:getLocalVar('TeleportAntiTrigger') ~= 0 then
+        return
+    end
 
-        if areaId == 1 then
-            if
-                areaId == 1 and
-                (player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN or
-                player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN) or
-                player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE))
-            then
-                player:startEvent(101)
-            else
-                player:startEvent(155)
-            end
-        elseif areaId == 2 then
-            if
-                player:hasKeyItem(xi.ki.BRAND_OF_DAWN) and
-                player:hasKeyItem(xi.ki.BRAND_OF_TWILIGHT)
-            then
-                player:startEvent(156)
-            else
-                player:startEvent(183)
-            end
-        elseif teleportEventsByArea[areaId] then
-            player:startOptionalCutscene(teleportEventsByArea[areaId], { cs_option = 0, canSkip = true }) -- Confirmed to wipe enmity.
+    if player:getAnimation() ~= xi.animation.NONE then
+        return
+    end
+
+    local areaId = triggerArea:getTriggerAreaID()
+
+    if areaId == 1 then
+        if
+            player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN or
+            player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN) or
+            player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE)
+        then
+            player:startEvent(101)
+        else
+            player:startEvent(155)
         end
+    elseif areaId == 2 then
+        if
+            player:hasKeyItem(xi.ki.BRAND_OF_DAWN) and
+            player:hasKeyItem(xi.ki.BRAND_OF_TWILIGHT)
+        then
+            player:startEvent(156)
+        else
+            player:startEvent(183)
+        end
+    elseif teleportEventsByArea[areaId] then
+        player:startOptionalCutscene(teleportEventsByArea[areaId], { cs_option = 0, canSkip = true }) -- Confirmed to wipe enmity.
     end
 end
 
