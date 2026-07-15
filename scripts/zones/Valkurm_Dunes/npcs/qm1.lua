@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     -- NOTE: The NPC is despawned when weather is not up, we do NOT need to check weather.
-    if player:getCharVar('[qm1]mustZone') == 1 then
+    if player:getCharVar('[qm1]mustZone') ~= 0 then
         player:messageSpecial(ID.text.JUST_A_PILE_OF_SAND)
     elseif npcUtil.giveItem(player, xi.item.PINCH_OF_VALKURM_SUNSAND) then
         player:setCharVar('[qm1]mustZone', player:getZoneID())
