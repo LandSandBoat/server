@@ -75,7 +75,4 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.combat.action.executeAddEffectDamage(mob, target, pTable)
 end
 
-entity.onMobDeath = function(mob)
-end
-
 return entity

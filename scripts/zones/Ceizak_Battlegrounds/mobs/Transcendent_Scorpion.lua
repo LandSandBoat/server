@@ -54,7 +54,4 @@ entity.onMobSpawn = function(mob)
     end)
 end
 
-entity.onMobDeath = function(mob)
-end
-
 return entity
