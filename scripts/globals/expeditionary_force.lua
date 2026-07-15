@@ -19,6 +19,14 @@ local bannerState =
 -- Tables
 -----------------------------------
 
+local regionPointsEarned =
+{
+    [0] =  500, -- No standing
+    [1] =  500,
+    [2] =  750,
+    [3] = 1000,
+}
+
 local zoneInfoTable =
 {
     [xi.zone.BEAUCEDINE_GLACIER    ] = { levelCap = 40 },
@@ -966,8 +974,7 @@ xi.expeditionaryForce.onMobDeath = function(mob, player)
     end
 
     -- Award Influence
-    -- TODO: Implement this
-    -- player:gainConquestInfluence(xi.settings.main.EXP_FORCE_MOBKILL_INFLUENCE)
+    player:gainConquestInfluence(regionPointsEarned[GetNationRank(creditNation)])
 
     -- SEND ZONE MESSAGE
     for _, person in pairs(mob:getZone():getPlayers()) do
@@ -1070,8 +1077,8 @@ xi.expeditionaryForce.onChestOpen = function(player)
     local participation = player:getCharVar('[ExpForce]Participation')
     player:setCharVar('[ExpForce]Participation', bit.bor(participation, bit.lshift(1, currentRegion)))
 
-    -- TODO: Award influence.
-    -- player:gainConquestInfluence(xi.settings.main.EXP_FORCE_TREASURE_INFLUENCE)
+    -- Award influence
+    player:gainConquestInfluence(regionPointsEarned[GetNationRank(playerNation)])
 
     -- TODO: Never tested if opening a chest granted the EF title.
 end
