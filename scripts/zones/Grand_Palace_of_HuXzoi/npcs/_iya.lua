@@ -12,7 +12,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 52 and option == 1 then
-        player:setPos(-419.995, 0, 248.483, 191, 35) -- To The Garden of RuHmet
+        player:setPos(-419.995, 0, 248.483, 191, xi.zone.THE_GARDEN_OF_RUHMET)
     end
 end
 

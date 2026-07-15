@@ -24,6 +24,13 @@ mission.sections =
 
         [xi.zone.GRAND_PALACE_OF_HUXZOI] =
         {
+            ['_iya'] =
+            {
+                onTrigger = function(player, npc)
+                    return mission:messageSpecial(huxoiID.text.DOES_NOT_RESPOND):setPriority(1000)
+                end,
+            },
+
             ['_iyq'] =
             {
                 onTrigger = function(player, npc)
