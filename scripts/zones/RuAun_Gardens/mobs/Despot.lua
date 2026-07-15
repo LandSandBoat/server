@@ -64,7 +64,7 @@ entity.onMobInitialize = function(mob)
             target:isAlive() and
             counter < maxCount
         then
-            mob:useMobAbility(xi.mobSkill.PANZERFAUST, target, 0)
+            mob:useMobAbility(xi.mobSkill.PANZERFAUST, target, 1)
 
         -- Break sequence.
         else
