@@ -94,6 +94,17 @@ local function clearPirates(zoneId)
     end
 end
 
+-- Swap the ferry's ambient BGM for everyone aboard, and for anyone zoning in mid-ride.
+local function setShipMusic(zone, musicId)
+    zone:setBackgroundMusicDay(musicId)
+    zone:setBackgroundMusicNight(musicId)
+
+    for _, player in pairs(zone:getPlayers()) do
+        player:changeMusic(0, musicId) -- Day
+        player:changeMusic(1, musicId) -- Night
+    end
+end
+
 -- Calls itself via timer until the npc is hidden.
 local function summonAnimations(npc, rotation, offset)
     if npc:getStatus() == xi.status.DISAPPEAR then
@@ -225,7 +236,9 @@ xi.pirates.zoneStateChange = function(zone, action)
     local zoneId = zone:getID()
     local ID     = zones[zoneId]
 
-    if action == actions.MOBS_SPAWN then
+    if action == actions.ARRIVING then
+        setShipMusic(zone, 170) -- Pirate attack theme
+    elseif action == actions.MOBS_SPAWN then
         -- clear any mobs lingering from a previous ride before summoning fresh ones
         clearPirates(zoneId)
 
@@ -253,5 +266,7 @@ xi.pirates.zoneStateChange = function(zone, action)
         end
     elseif action == actions.PIRATES_RETREAT then
         clearPirates(zoneId)
+    elseif action == actions.DEPART then
+        setShipMusic(zone, 106) -- Normal ferry BGM, per zone_settings for zones 227/228
     end
 end
