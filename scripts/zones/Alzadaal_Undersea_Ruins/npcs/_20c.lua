@@ -13,11 +13,11 @@ entity.onTrigger = function(player, npc)
         if player:getZPos() > 80 then
             player:messageSpecial(ID.text.STAGING_GATE_NYZUL)
             player:messageSpecial(ID.text.STAGING_GATE_INTERACT)
-            player:startEvent(106)
+            player:startOptionalCutscene(106, { cs_option = 0, canSkip = true })
         elseif not player:hasKeyItem(xi.ki.NYZUL_ISLE_ASSAULT_ORDERS) then
             player:messageSpecial(ID.text.STAGING_GATE_NYZUL)
             player:messageSpecial(ID.text.STAGING_GATE_INTERACT)
-            player:startEvent(107)
+            player:startOptionalCutscene(107, { cs_option = 0, canSkip = true })
         else
             player:messageSpecial(ID.text.CANNOT_LEAVE, xi.ki.NYZUL_ISLE_ASSAULT_ORDERS)
         end

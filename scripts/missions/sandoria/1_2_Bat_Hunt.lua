@@ -97,7 +97,7 @@ mission.sections =
             ['Tombstone_Upper'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(4)
+                    return mission:progressCutscene(4)
                 end,
             },
 
