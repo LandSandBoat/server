@@ -31,7 +31,7 @@ end
 -- Ability Use Functions
 -----------------------------------
 xi.job_utils.monk.useBoost = function(player, target, ability)
-    local power = 12.5 + (0.10 * player:getMod(xi.mod.BOOST_EFFECT))
+    local power = 12.5 + player:getMod(xi.mod.BOOST_EFFECT) / 10
 
     if player:hasStatusEffect(xi.effect.BOOST) then
         local effect = player:getStatusEffect(xi.effect.BOOST)
@@ -82,15 +82,15 @@ xi.job_utils.monk.useChiBlast = function(player, target, ability)
         target:addStatusEffect(xi.effect.INHIBIT_TP, { power = 25, duration = penanceMerits, origin = player })
     end
 
-    local boost = player:getStatusEffect(xi.effect.BOOST)
-    local multiplier = 1.0
-    if boost ~= nil then
-        multiplier = (boost:getPower() / 100) * 4 -- power is the raw % atk boost
-    end
+    local boost           = player:getStatusEffect(xi.effect.BOOST)
+    local statMultiplier  = 0.5 + math.randomFloat(0, 1) / 2
+    local boostMultiplier = boost and 1 + 4 * boost:getPower() / 100 or 1
 
-    local dmg = math.floor(player:getStat(xi.mod.MND) * (0.5 + (math.randomFloat(0, 1) / 2))) * multiplier
+    local dmg = player:getStat(xi.mod.MND)
+    dmg       = math.floor(dmg * statMultiplier)
+    dmg       = math.floor(dmg * boostMultiplier)
+    dmg       = xi.ability.adjustDamage(dmg, player, ability, target, xi.attackType.BREATH, xi.damageType.ELEMENTAL, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
-    dmg = xi.ability.adjustDamage(dmg, player, ability, target, xi.attackType.BREATH, xi.damageType.ELEMENTAL, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     target:takeDamage(dmg, player, xi.attackType.BREATH, xi.damageType.ELEMENTAL)
     target:updateClaim(player)
     player:delStatusEffect(xi.effect.BOOST)
