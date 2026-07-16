@@ -10,7 +10,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local duration = math.randomInt(300, 540)
+    local duration = xi.mobskills.calculateDuration(skill:getTP(), 180, 360)
     skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 5000, 0, duration))
 
     return xi.effect.SLOW
