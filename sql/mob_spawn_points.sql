@@ -75701,7 +75701,7 @@ INSERT INTO `mob_spawn_points` VALUES (17625127,0,'Ifrit_Prime_HTBF','Ifrit Prim
 -- Quicksand Caves (Zone 208)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_spawn_points` VALUES (17629185,0,'Valor','Valor',1,65,65,572.037,22.212,-940.621,117,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17629185,0,'Valor','Valor',1,70,70,572.037,22.212,-940.621,117,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17629186,0,'Honor','Honor',2,70,70,576.066,22.890,-935.485,117,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17629187,0,'Centurio_IV-VII','Centurio IV-VII',3,70,70,-468.000,0.001,625.000,27,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17629188,0,'Triarius_IV-XIV','Triarius IV-XIV',4,70,70,-468.000,0.001,617.000,240,NULL,NULL);
