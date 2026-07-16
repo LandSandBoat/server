@@ -540,7 +540,7 @@ xi.quest.id =
         AN_AFFABLE_ADAMANTKING          = 107,
         A_MORAL_MANIFEST                = 108, -- +
         A_GENEROUS_GENERAL              = 109,
-        RECORDS_OF_EMINENCE             = 110,
+        RECORDS_OF_EMINENCE             = 110, -- + Converted
         UNITY_CONCORD                   = 111,
     },
 
