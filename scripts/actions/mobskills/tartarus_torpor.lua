@@ -11,7 +11,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local duration = xi.mobskills.calculateDuration(skill:getTP(), 60, 180)
+    local duration = xi.mobskills.calculateDuration(skill:getTP(), 60, 300)
 
     -- params.str_wSC = 0.3 -- TODO: Capture if mobskill weaponskills have wSC.
     -- params.int_wSC = 0.3 -- TODO: Capture if mobskill weaponskills have wSC.

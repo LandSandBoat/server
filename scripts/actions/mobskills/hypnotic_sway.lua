@@ -13,7 +13,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local power = 1
-    local duration = xi.mobskills.calculateDuration(skill:getTP(), 30, 60)
+    local duration = xi.mobskills.calculateDuration(skill:getTP(), 30, 90)
 
     skill:setMsg(xi.mobskills.mobGazeMove(mob, target, xi.effect.AMNESIA, power, 0, duration))
     return xi.effect.AMNESIA

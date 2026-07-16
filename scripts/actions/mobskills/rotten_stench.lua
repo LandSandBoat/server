@@ -11,7 +11,7 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     -- TODO Confirm actual power
     local power        = 50
-    local duration     = xi.mobskills.calculateDuration(skill:getTP(), 90, 120)
+    local duration     = xi.mobskills.calculateDuration(skill:getTP(), 90, 150)
     local accuracyDown = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ACCURACY_DOWN, power, 0, duration)
     local magicAccDown = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.MAGIC_ACC_DOWN, power, 0, duration)
     local typeEffect   = 0

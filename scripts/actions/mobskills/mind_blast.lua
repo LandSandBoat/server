@@ -28,7 +28,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
         -- TODO: Capture Paralysis power. Sources say its extremely potent.
         -- TODO: More captures for duration to account for effect resistance.
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 20, 0, xi.mobskills.calculateDuration(skill:getTP(), 15, 45))
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 20, 0, xi.mobskills.calculateDuration(skill:getTP(), 15, 75))
     end
 
     return info.damage

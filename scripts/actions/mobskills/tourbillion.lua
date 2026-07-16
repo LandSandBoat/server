@@ -28,7 +28,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
         -- TODO: Capture power/duration
-        local duration = xi.mobskills.calculateDuration(mob:getTP(), 20, 60)
+        local duration = xi.mobskills.calculateDuration(skill:getTP(), 20, 100)
         xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DEFENSE_DOWN, 20, 0, duration)
     end
 

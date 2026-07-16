@@ -31,7 +31,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
-        local duration = xi.mobskills.calculateDuration(mob:getTP(), 15, 30)
+        local duration = xi.mobskills.calculateDuration(skill:getTP(), 15, 45)
         xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, duration)
     end
 

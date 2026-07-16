@@ -26,7 +26,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
-        local duration = xi.mobskills.calculateDuration(30, 120)
+        local duration = xi.mobskills.calculateDuration(skill:getTP(), 30, 210)
 
         xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.AMNESIA, 1, 0, duration) -- TODO: Capture power of Amnesia
     end
