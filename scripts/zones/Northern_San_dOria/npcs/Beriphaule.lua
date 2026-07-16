@@ -42,7 +42,8 @@ entity.onTrigger = function(player, npc)
             hasGil = 1
         end
 
-        player:startEvent(606, 0, 1, player:getRank(newNation), newNation, hasGil, cost)
+        local wasCitizen = utils.mask.getBit(player:getCharVar('HQuest[newCharacterCS]nations'), newNation) and 1 or 0
+        player:startEvent(606, 0, wasCitizen, player:getRank(newNation), newNation, hasGil, cost)
     end
 end
 
