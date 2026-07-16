@@ -71,25 +71,25 @@ local function validateParameters(actor, target, fedData)
     return params
 end
 
-local function hasEnspell(actor)
-    local enspellTable =
-    {
-        [ 1] = xi.effect.ENFIRE,
-        [ 2] = xi.effect.ENFIRE_II,
-        [ 3] = xi.effect.ENBLIZZARD,
-        [ 4] = xi.effect.ENBLIZZARD_II,
-        [ 5] = xi.effect.ENAERO,
-        [ 6] = xi.effect.ENAERO_II,
-        [ 7] = xi.effect.ENSTONE,
-        [ 8] = xi.effect.ENSTONE_II,
-        [ 9] = xi.effect.ENTHUNDER,
-        [10] = xi.effect.ENTHUNDER_II,
-        [11] = xi.effect.ENWATER,
-        [12] = xi.effect.ENWATER_II,
-        [13] = xi.effect.ENLIGHT,
-        [14] = xi.effect.ENDARK,
-    }
+local enspellTable =
+{
+    [ 1] = xi.effect.ENFIRE,
+    [ 2] = xi.effect.ENFIRE_II,
+    [ 3] = xi.effect.ENBLIZZARD,
+    [ 4] = xi.effect.ENBLIZZARD_II,
+    [ 5] = xi.effect.ENAERO,
+    [ 6] = xi.effect.ENAERO_II,
+    [ 7] = xi.effect.ENSTONE,
+    [ 8] = xi.effect.ENSTONE_II,
+    [ 9] = xi.effect.ENTHUNDER,
+    [10] = xi.effect.ENTHUNDER_II,
+    [11] = xi.effect.ENWATER,
+    [12] = xi.effect.ENWATER_II,
+    [13] = xi.effect.ENLIGHT,
+    [14] = xi.effect.ENDARK,
+}
 
+local function hasEnspell(actor)
     for i = 1, #enspellTable do
         if actor:hasStatusEffect(enspellTable[i]) then
             return true
@@ -102,6 +102,9 @@ end
 -----------------------------------
 -- Global functions called from "emtity.onAdditionalEffect()"
 -----------------------------------
+
+-- Disable cyclomatic complexity check for this function:
+-- luacheck: ignore 561
 xi.combat.action.executeAddEffectDamage = function(actor, target, fedData)
     local params = validateParameters(actor, target, fedData)
 
@@ -132,14 +135,16 @@ xi.combat.action.executeAddEffectDamage = function(actor, target, fedData)
         return 0, 0, 0
     end
 
+    -- Check if we absorb, to skip steps.
+    local absorb = xi.spells.damage.calculateAbsorption(params.aeTarget, params.magicalElement, params.attackType == xi.attackType.PHYSICAL, params.attackType == xi.attackType.MAGICAL, params.attackType == xi.attackType.RANGED, params.attackType == xi.attackType.BREATH) < 0
+
     -- Calculate base power.
-    local damage = params.basePower + actor:getMod(params.actorStat) - params.aeTarget:getMod(params.targetStat)
+    local damage = utils.clamp(params.basePower + actor:getMod(params.actorStat) - params.aeTarget:getMod(params.targetStat), 0, 99999)
 
     -- Calculate mandatory multipliers.
-    local multiplierAbsorption         = xi.spells.damage.calculateAbsorption(params.aeTarget, params.magicalElement, params.attackType == xi.attackType.PHYSICAL, params.attackType == xi.attackType.MAGICAL, params.attackType == xi.attackType.RANGED, params.attackType == xi.attackType.BREATH)
-    local multiplierDamageTypeSDT      = xi.combat.damage.calculateDamageAdjustment(params.aeTarget, params.attackType == xi.attackType.PHYSICAL, params.attackType == xi.attackType.MAGICAL, params.attackType == xi.attackType.RANGED, params.attackType == xi.attackType.BREATH)
-    local multiplierPhysicalElementSDT = xi.combat.damage.physicalElementSDT(params.aeTarget, params.physicalElement)
-    local multiplierMagicalElementSDT  = xi.combat.damage.magicalElementSDT(params.aeTarget, params.magicalElement)
+    local multiplierDamageTypeSDT      = not absorb and xi.combat.damage.calculateDamageAdjustment(params.aeTarget, params.attackType == xi.attackType.PHYSICAL, params.attackType == xi.attackType.MAGICAL, params.attackType == xi.attackType.RANGED, params.attackType == xi.attackType.BREATH) or 1
+    local multiplierPhysicalElementSDT = not absorb and xi.combat.damage.physicalElementSDT(params.aeTarget, params.physicalElement) or 1
+    local multiplierMagicalElementSDT  = not absorb and xi.combat.damage.magicalElementSDT(params.aeTarget, params.magicalElement) or 1
     local multiplierElementalStaff     = xi.spells.damage.calculateElementalStaffBonus(actor, params.magicalElement)
     local multiplierElementalAffinity  = xi.spells.damage.calculateElementalAffinityBonus(actor, params.magicalElement)
     local multiplierDayWeather         = xi.spells.damage.calculateDayAndWeather(actor, params.magicalElement, false)
@@ -149,7 +154,6 @@ xi.combat.action.executeAddEffectDamage = function(actor, target, fedData)
     local multiplierForcedResistTier   = params.canResistExtra and xi.spells.damage.calculateAdditionalResistTier(actor, params.aeTarget, params.magicalElement) or 1
 
     -- Calculate final damage.
-    damage = math.floor(damage * multiplierAbsorption)
     damage = math.floor(damage * multiplierDamageTypeSDT)
     damage = math.floor(damage * multiplierPhysicalElementSDT)
     damage = math.floor(damage * multiplierMagicalElementSDT)
@@ -165,6 +169,18 @@ xi.combat.action.executeAddEffectDamage = function(actor, target, fedData)
         damage = utils.clamp(utils.handlePhalanx(params.aeTarget, damage), 0, 99999)
         damage = utils.clamp(utils.handleOneForAll(params.aeTarget, damage), 0, 99999)
         damage = utils.clamp(utils.handleStoneskin(params.aeTarget, damage), 0, 99999)
+    end
+
+    -- Handle absorption.
+    if absorb then
+        -- Nullify drain-like AEs.
+        local isDrain = params.drainHP or params.drainMP or params.drainTP
+        if isDrain then
+            return 0, 0, 0
+        end
+
+        params.aeTarget:addHP(damage) -- Heal target.
+        return params.animation, params.messageHeal, damage
     end
 
     -- Drain HP, MP or TP
@@ -186,11 +202,7 @@ xi.combat.action.executeAddEffectDamage = function(actor, target, fedData)
         actor:addTP(damage)
     end
 
-    if damage < 0 then
-        params.aeTarget:addHP(-damage) -- Heal target.
-        return params.animation, params.messageHeal, -damage
-    end
-
+    -- Handle target damage listeners and other core-side stuff.
     local actionDamageType = params.physicalElement > 0 and params.physicalElement or xi.damageType.ELEMENTAL + params.magicalElement
     params.aeTarget:takeDamage(damage, actor, params.attackType, actionDamageType)
 

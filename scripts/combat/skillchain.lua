@@ -114,7 +114,6 @@ xi.combat.skillchain.calculateSkillchainDamage = function(actor, target, baseDam
     -- Unconfirmed order.
     local inninMultiplier      = 1 + actor:getMerit(xi.merit.INNIN_EFFECT) / 100
     local sengikoriMultiplier  = 1 + target:getMod(xi.mod.SENGIKORI_SC_DMG_DEBUFF) / 100
-    local absorptionMultiplier = xi.spells.damage.calculateAbsorption(target, skillchainElement, false, true, false, false)
 
     -- Apply multipliers in order and floor after each step.
     finalDamage = math.floor(finalDamage * levelMultiplier)
@@ -127,10 +126,16 @@ xi.combat.skillchain.calculateSkillchainDamage = function(actor, target, baseDam
     finalDamage = math.floor(finalDamage * magicTakenMultiplier)
     finalDamage = math.floor(finalDamage * inninMultiplier)
     finalDamage = math.floor(finalDamage * sengikoriMultiplier)
-    finalDamage = math.floor(finalDamage * absorptionMultiplier)
 
     -- Handle (reset) Sengikori.
     target:setMod(xi.mod.SENGIKORI_SC_DMG_DEBUFF, 0)
+
+    -- Handle absorbption.
+    local absorb = xi.spells.damage.calculateAbsorption(target, skillchainElement, false, true, false, false) < 0
+    if absorb then
+        target:addHP(finalDamage)
+        return finalDamage
+    end
 
     -- Handle other damage alterations.
     if finalDamage > 0 then
@@ -140,10 +145,6 @@ xi.combat.skillchain.calculateSkillchainDamage = function(actor, target, baseDam
         finalDamage = target:checkDamageCap(finalDamage)
 
         target:takeDamage(finalDamage, actor, xi.attackType.SPECIAL, xi.damageType.ELEMENTAL + skillchainElement)
-
-    -- Handle absorbption.
-    else
-        target:addHP(-finalDamage)
     end
 
     return finalDamage
