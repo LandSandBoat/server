@@ -153,6 +153,7 @@ function utils.shadowAbsorb(target, shadowsToRemove)
         local effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
         if effect then
             if targetShadows == 0 then
+                effect:setIcon(xi.effect.COPY_IMAGE)
                 target:delStatusEffect(xi.effect.COPY_IMAGE)
             elseif targetShadows == 1 then
                 effect:setIcon(xi.effect.COPY_IMAGE)
