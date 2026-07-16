@@ -1631,11 +1631,10 @@ xi.mobskills.mobHealMove = function(target, healAmount)
 end
 
 xi.mobskills.calculateDuration = function(tp, minimum, maximum)
-    if tp <= 1000 then
-        return minimum
-    end
+    local midpoint = (minimum + maximum) / 2
+    local duration = minimum + (midpoint - minimum) * (tp - 1000) / 1000
 
-    return minimum + (maximum - minimum) * (tp - 1000) / 1000
+    return utils.clamp(duration, minimum, maximum)
 end
 
 -- Used for mobskills that remove player equipment.

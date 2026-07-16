@@ -15,7 +15,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local power = 500
-    local duration = xi.mobskills.calculateDuration(skill:getTP(), 30, 90)
+    local duration = xi.mobskills.calculateDuration(skill:getTP(), 30, 150)
 
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ATTACK_DOWN, power, 0, duration)
 end

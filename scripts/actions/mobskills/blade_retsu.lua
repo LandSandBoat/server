@@ -29,7 +29,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
         local power = utils.clamp(30 + 3 * (mob:getMainLvl() - target:getMainLvl()), 5, 35)
 
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, power, 0, xi.mobskills.calculateDuration(skill:getTP(), 30, 120))
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, power, 0, xi.mobskills.calculateDuration(skill:getTP(), 30, 210))
     end
 
     return info.damage

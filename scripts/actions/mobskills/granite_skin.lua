@@ -12,7 +12,7 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     -- This is a special case where the defense boost prevents damage
     -- while the attacker is in front of the defender at the given subpower angle
-    local duration = xi.mobskills.calculateDuration(skill:getTP(), 60, 90)
+    local duration = xi.mobskills.calculateDuration(skill:getTP(), 60, 120)
     skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.DEFENSE_BOOST, 0, 0, duration))
 
     local effect = mob:getStatusEffect(xi.effect.DEFENSE_BOOST)

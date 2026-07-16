@@ -16,7 +16,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local power = 60
-    local duration = xi.mobskills.calculateDuration(mob:getTP(), 120, 180)
+    local duration = xi.mobskills.calculateDuration(skill:getTP(), 120, 240)
     skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.PROTECT, power, 0, duration))
 
     return xi.effect.PROTECT

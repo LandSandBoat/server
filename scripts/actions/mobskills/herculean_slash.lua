@@ -12,7 +12,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
-    local duration = xi.mobskills.calculateDuration(skill:getTP(), 60, 180)
+    local duration = xi.mobskills.calculateDuration(skill:getTP(), 60, 300)
 
     params.baseDamage     = mob:getMainLvl() + 2
     params.fTP            = { 3.5, 3.5, 3.5 }

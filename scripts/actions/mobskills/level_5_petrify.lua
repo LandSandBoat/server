@@ -14,7 +14,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if target:getMainLvl() % 5 == 0 then
-        local duration = xi.mobskills.calculateDuration(mob:getTP(), 15, 60)
+        local duration = xi.mobskills.calculateDuration(skill:getTP(), 15, 105)
 
         skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PETRIFICATION, 1, 0, duration))
     else
