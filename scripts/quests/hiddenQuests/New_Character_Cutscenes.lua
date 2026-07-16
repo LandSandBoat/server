@@ -56,6 +56,8 @@ quest.sections =
                     player:setHomePoint()
 
                     quest:setVar(player, 'notSeen', 0)
+                    local nationsSeen = quest:getVar(player, 'nations')
+                    quest:setVar(player, 'nations', utils.mask.setBit(nationsSeen, xi.nation.BASTOK, true))
                 end,
             },
         },
@@ -86,6 +88,8 @@ quest.sections =
                     player:setHomePoint()
 
                     quest:setVar(player, 'notSeen', 0)
+                    local nationsSeen = quest:getVar(player, 'nations')
+                    quest:setVar(player, 'nations', utils.mask.setBit(nationsSeen, xi.nation.BASTOK, true))
                 end,
             },
         },
@@ -116,6 +120,8 @@ quest.sections =
                     player:setHomePoint()
 
                     quest:setVar(player, 'notSeen', 0)
+                    local nationsSeen = quest:getVar(player, 'nations')
+                    quest:setVar(player, 'nations', utils.mask.setBit(nationsSeen, xi.nation.BASTOK, true))
                 end,
             },
         },
@@ -147,6 +153,8 @@ quest.sections =
                     player:setHomePoint()
 
                     quest:setVar(player, 'notSeen', 0)
+                    local nationsSeen = quest:getVar(player, 'nations')
+                    quest:setVar(player, 'nations', utils.mask.setBit(nationsSeen, xi.nation.SANDORIA, true))
                 end,
             },
         },
@@ -178,6 +186,8 @@ quest.sections =
                     player:setHomePoint()
 
                     quest:setVar(player, 'notSeen', 0)
+                    local nationsSeen = quest:getVar(player, 'nations')
+                    quest:setVar(player, 'nations', utils.mask.setBit(nationsSeen, xi.nation.SANDORIA, true))
                 end,
             },
         },
@@ -209,6 +219,8 @@ quest.sections =
                     player:setHomePoint()
 
                     quest:setVar(player, 'notSeen', 0)
+                    local nationsSeen = quest:getVar(player, 'nations')
+                    quest:setVar(player, 'nations', utils.mask.setBit(nationsSeen, xi.nation.SANDORIA, true))
                 end,
             },
         },
@@ -252,6 +264,8 @@ quest.sections =
                     player:setPos(-40.611, -5, 102.5, 57) -- Move back to CS exit position
 
                     quest:setVar(player, 'notSeen', 0)
+                    local nationsSeen = quest:getVar(player, 'nations')
+                    quest:setVar(player, 'nations', utils.mask.setBit(nationsSeen, xi.nation.WINDURST, true))
                 end,
             },
         },
@@ -283,6 +297,8 @@ quest.sections =
                     player:setHomePoint()
 
                     quest:setVar(player, 'notSeen', 0)
+                    local nationsSeen = quest:getVar(player, 'nations')
+                    quest:setVar(player, 'nations', utils.mask.setBit(nationsSeen, xi.nation.WINDURST, true))
                 end,
             },
         },
@@ -315,6 +331,8 @@ quest.sections =
 
                     player:setPos(-140, -7, 172, 32)
                     quest:setVar(player, 'notSeen', 0)
+                    local nationsSeen = quest:getVar(player, 'nations')
+                    quest:setVar(player, 'nations', utils.mask.setBit(nationsSeen, xi.nation.WINDURST, true))
                 end,
             },
         },
