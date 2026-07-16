@@ -12,7 +12,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 DROP TABLE IF EXISTS `char_vars`;
 CREATE TABLE IF NOT EXISTS `char_vars` (
   `charid` int(10) unsigned NOT NULL,
-  `varname` varchar(30) NOT NULL,
+  `varname` varchar(64) NOT NULL,
   `value` int(11) NOT NULL,
   `expiry` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`charid`,`varname`)
