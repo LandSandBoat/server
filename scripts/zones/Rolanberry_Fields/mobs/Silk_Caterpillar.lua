@@ -27,6 +27,11 @@ entity.spawnPoints =
     { x = 380.297, y = -0.248, z = 167.144 },
 }
 
+entity.onMobInitialize = function(mob)
+    -- Despawns 3.5 minutes after spawning, approximately when the Jeuno-Bastok airship departs Jeuno to fly back over towards Bastok.
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 210)
+end
+
 entity.onMobDespawn = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
 end
