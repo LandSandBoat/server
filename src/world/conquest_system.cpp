@@ -123,12 +123,16 @@ bool ConquestSystem::updateInfluencePoints(int points, unsigned int nation, REGI
         rset->get<int>("beastmen_influence"),
     };
 
+    const int total = influences[0] + influences[1] + influences[2] + influences[3];
+
     // Read from main settings. Protect against 0 or too high of number.
     // Restricted by a factor of 100 because of packet lines in 0x05e_conquest.cpp
-    const int32 influenceCap = std::clamp<int32>(settings::get<int32>("main.CONQUEST_INFLUENCE_CAP"), 1, 20000000);
+    const int32 influenceCapSetting = std::clamp<int32>(settings::get<int32>("main.CONQUEST_INFLUENCE_CAP"), 1, 20000000);
 
-    int total = influences[0] + influences[1] + influences[2] + influences[3];
-    int room  = influenceCap - total;
+    // Account for situation where influenceCapSetting was reduced midweek.
+    const int32 influenceCap = std::max<int32>(influenceCapSetting, total);
+
+    const int room = influenceCap - total;
 
     if (points <= room) // Pool is not capped and there is space. Straight add.
     {
@@ -138,11 +142,12 @@ bool ConquestSystem::updateInfluencePoints(int points, unsigned int nation, REGI
     {
         // Fill the remaining room first, then redistribute the overflow.
         influences[nation] += room;
-        int overflow = points - room;
 
         // Do not adjust anything if the nation is already at the pool maximum.
         if (influences[nation] < influenceCap)
         {
+            const int overflow = points - room;
+
             auto lost = 0;
             for (auto i = 0u; i < 4; ++i)
             {
