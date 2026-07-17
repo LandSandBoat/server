@@ -13,8 +13,8 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    params.baseDamage           = mob:getMainLvl() + 2 -- TODO: Capture base damage. Other MP Drains are often Level - 2
-    params.fTP                  = { 3, 3, 3 } -- TODO: Capture fTP
+    params.baseDamage           = mob:getMainLvl() - 2
+    params.fTP                  = { 2.0, 2.0, 2.0 }
     params.element              = xi.element.NONE
     params.attackType           = xi.attackType.MAGICAL
     params.damageType           = xi.damageType.NONE

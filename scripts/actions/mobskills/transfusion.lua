@@ -14,7 +14,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
     params.baseDamage         = mob:getMainLvl() + 2
-    params.fTP                = { 3.00, 3.00, 3.00 } -- TODO: Capture fTPs
+    params.fTP                = { 2.00, 2.00, 2.00 } -- TODO: Capture fTPs
     params.element            = xi.element.NONE
     params.attackType         = xi.attackType.MAGICAL
     params.damageType         = xi.damageType.NONE

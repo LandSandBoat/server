@@ -10154,7 +10154,7 @@ INSERT INTO `mob_groups` VALUES (197,6064,134,'Rearguard_Eye',0,128,0,8000,8000,
 -- Dynamis-Xarcabard (Zone 135)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,1154,135,'Dynamis_Lord',0,128,729,81000,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (1,1154,135,'Dynamis_Lord',0,128,729,78000,78000,0,NULL);
 INSERT INTO `mob_groups` VALUES (2,4473,135,'Ying',0,128,0,17000,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (3,4464,135,'Yang',0,128,0,17000,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (4,6053,135,'Duke_Haures',0,128,714,0,5000,0,NULL);

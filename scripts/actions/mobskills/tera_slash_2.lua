@@ -1,8 +1,7 @@
 -----------------------------------
--- Dynamic Implosion
--- Family: Shadow Lord
--- Description: Deals damage to players within an area of effect. Additional Effect: Terror
--- Notes: Used by Dynamis Lord
+-- Tera Slash 2
+-- Family: Shadow Lord (Dynamis Lord)
+-- Description: Deals high damage to players within a fan-shaped area of effect. Has a 50% chance to instantly K.O. the target instead.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -12,21 +11,29 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    if
+        math.randomInt(1, 100) <= 50 and
+        math.randomInt(1, 100) > target:getMod(xi.mod.DEATHRES)
+    then
+        skill:setMsg(xi.msg.basic.FALL_TO_GROUND)
+        target:setHP(0)
+
+        return 0
+    end
+
     local params = {}
 
     params.baseDamage     = mob:getWeaponDmg()
     params.numHits        = 1
-    params.fTP            = { 4.0, 4.0, 4.0 }
+    params.fTP            = { 5.0, 5.0, 5.0 } -- TODO: Capture fTPs
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.SLASHING
-    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- TODO: Capture shadowBehavior
+    params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
-
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.TERROR, 1, 0, 30)
     end
 
     return info.damage

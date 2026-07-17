@@ -7,60 +7,44 @@ local ID = zones[xi.zone.DYNAMIS_XARCABARD]
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:addImmunity(xi.immunity.GRAVITY)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+end
+
 entity.onMobSpawn = function(mob)
-    xi.dynamis.mobInfo(mob)
-    local dynaLord = GetMobByID(ID.mob.DYNAMIS_LORD)
-
-    if
-        dynaLord and
-        dynaLord:getLocalVar('physImmune') < 2
-    then
-        -- both dragons have not been killed initially
-        dynaLord:setMod(xi.mod.UDMGPHYS, -10000)
-        dynaLord:setMod(xi.mod.UDMGRANGE, -10000)
-        dynaLord:setLocalVar('physImmune', 0)
-        mob:setSpawn(-364, -35.974, 24.254) -- Reset Yang's spawn point to initial spot.
-    else
-        mob:setSpawn(-414.282, -44, 20.427) -- Spawned by DL, reset to DL's spawn point.
-    end
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
-entity.onMobFight = function(mob, target)
-    -- Repop Ying every 30 seconds if Yang is up and Ying is not.
-    local ying = GetMobByID(ID.mob.YING)
-    local yingToD = mob:getLocalVar('YingToD')
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
+        local ying = GetMobByID(ID.mob.YING)
+        if not ying then
+            return
+        end
 
-    if
-        ying and
-        ying:getCurrentAction() == xi.action.category.NONE and
-        GetSystemTime() > yingToD + 30
-    then
-        ying:setSpawn(mob:getXPos(), mob:getYPos(), mob:getZPos())
-        ying:spawn()
-        ying:updateEnmity(target)
-    end
-end
+        if ying:isAlive() then
+            return
+        end
 
-entity.onMobDespawn = function(mob)
-    local ying = GetMobByID(ID.mob.YING)
-    local dynaLord = GetMobByID(ID.mob.DYNAMIS_LORD)
+        local director = GetNPCByID(ID.npc.DYNAMIS_LORD_DIRECTOR)
+        if not director then
+            return
+        end
 
-    -- localVars clear on death, so setting it on its partner
-    if ying then
-        ying:setLocalVar('YangToD', GetSystemTime())
-    end
+        -- Both dragons defeated, schedule next summoning time.
+        director:setLocalVar('[Timer]YingYang', GetSystemTime() + 240)
 
-    if
-        dynaLord and
-        dynaLord:getLocalVar('physImmune') == 0
-    then
-        dynaLord:setMod(xi.mod.UDMGPHYS, 0)
-        dynaLord:setMod(xi.mod.UDMGRANGE, 0)
-        if dynaLord:getLocalVar('magImmune') == 1 then -- other dragon is also dead
-            dynaLord:setLocalVar('physImmune', 2)
-            dynaLord:setLocalVar('magImmune', 2)
-        else
-            dynaLord:setLocalVar('physImmune', 1)
+        local realDynamisLord = GetMobByID(director:getLocalVar('[Lord]RealId'))
+        if not realDynamisLord then
+            return
+        end
+
+        if realDynamisLord:isAlive() then
+            realDynamisLord:messageText(realDynamisLord, ID.text.DYNAMIS_LORD_DIALOGUE + 8) -- Immortal drakes, defeated by these insignificant beings? How amusing.
         end
     end
 end

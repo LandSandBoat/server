@@ -1608,8 +1608,10 @@ INSERT INTO `mob_skill_lists` VALUES ('DynamisLord',361,1128);
 INSERT INTO `mob_skill_lists` VALUES ('DynamisLord',361,1129);
 INSERT INTO `mob_skill_lists` VALUES ('DynamisLord',361,1130);
 INSERT INTO `mob_skill_lists` VALUES ('DynamisLord',361,1131);
+INSERT INTO `mob_skill_lists` VALUES ('DynamisLord',361,1132);
 INSERT INTO `mob_skill_lists` VALUES ('DynamisLord',361,1133);
 INSERT INTO `mob_skill_lists` VALUES ('DynamisLord',361,1134);
+INSERT INTO `mob_skill_lists` VALUES ('DynamisLord',361,1135);
 INSERT INTO `mob_skill_lists` VALUES ('Killer_Jonny',362,408); -- sound_vacuum
 INSERT INTO `mob_skill_lists` VALUES ('Automaton_Harlequin',363,1943);
 INSERT INTO `mob_skill_lists` VALUES ('Automaton_Harlequin',363,2067);

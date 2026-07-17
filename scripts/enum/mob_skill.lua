@@ -706,6 +706,16 @@ xi.mobSkill =
     EES_YAGUDO                    = 1121,
     EES_QUADAV                    = 1122,
 
+    DYNAMIC_IMPLOSION             = 1127,
+    TRANSFUSION                   = 1128,
+    MANA_STORM                    = 1129,
+    DYNAMIC_ASSAULT               = 1130,
+    VIOLENT_RUPTURE               = 1131,
+    OBLIVION_SMASH_1              = 1132,
+    OBLIVION_SMASH_2              = 1133,
+    TERA_SLASH_1                  = 1134,
+    TERA_SLASH_2                  = 1135,
+
     EES_KINDRED                   = 1151,
 
     -- EES_?                         = 1153,

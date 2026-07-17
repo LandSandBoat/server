@@ -22,6 +22,7 @@ zones[xi.zone.DYNAMIS_XARCABARD] =
         DYNAMIS_TIME_UPDATE_2         = 7240, -- You will be expelled from Dynamis in <number> [seconds/minutes] (Earth time).
         DYNAMIS_TIME_EXPIRED          = 7242, -- The sands of the hourglass have emptied...
         OMINOUS_PRESENCE              = 7254, -- You feel an ominous presence, as if something might happen if you possessed <item>.
+        DYNAMIS_LORD_DIALOGUE         = 7296, -- Writhing Worms... Look at you crawl before me. I will end your meaningless existence.
         ANIMATED_KNUCKLES_DIALOG      = 7321, -- I am known as the Fists of Mystics. Come, show me your fighting spirit.
         ANIMATED_DAGGER_DIALOG        = 7353, -- I am called the Ornate Blade. Now, show me your strength.
         ANIMATED_LONGSWORD_DIALOG     = 7385, -- People have named me the Holy Blade. I will try thy resolution.
@@ -94,27 +95,30 @@ zones[xi.zone.DYNAMIS_XARCABARD] =
             },
         },
 
-        DYNAMIS_LORD      = 17330177,
-        YING              = 17330183,
-        YANG              = 17330184,
-        COUNT_ZAEBOS      = GetFirstID('Count_Zaebos'),
-        DUKE_GOMORY       = GetFirstID('Duke_Gomory'),
-        PRINCE_SEERE      = GetFirstID('Prince_Seere'),
-        MARQUIS_ORIAS     = GetFirstID('Marquis_Orias'),
-        DUKE_BERITH       = GetFirstID('Duke_Berith'),
         COUNT_RAUM        = GetFirstID('Count_Raum'),
-        MARQUIS_SABNAK    = GetFirstID('Marquis_Sabnak'),
-        DUKE_SCOX         = GetFirstID('Duke_Scox'),
-        MARQUIS_ANDRAS    = GetFirstID('Marquis_Andras'),
-        MARQUIS_DECARABIA = GetFirstID('Marquis_Decarabia'),
-        MARQUIS_CIMERIES  = GetFirstID('Marquis_Cimeries'),
         COUNT_VINE        = GetFirstID('Count_Vine'),
-        MARQUIS_GAMYGYN   = GetFirstID('Marquis_Gamygyn'),
+        COUNT_ZAEBOS      = GetFirstID('Count_Zaebos'),
+        DUKE_BERITH       = GetFirstID('Duke_Berith'),
+        DUKE_GOMORY       = GetFirstID('Duke_Gomory'),
+        DUKE_SCOX         = GetFirstID('Duke_Scox'),
+        DYNAMIS_LORD      = GetFirstID('Dynamis_Lord'),
         KING_ZAGAN        = GetFirstID('King_Zagan'),
+        MARQUIS_ANDRAS    = GetFirstID('Marquis_Andras'),
+        MARQUIS_CIMERIES  = GetFirstID('Marquis_Cimeries'),
+        MARQUIS_DECARABIA = GetFirstID('Marquis_Decarabia'),
+        MARQUIS_GAMYGYN   = GetFirstID('Marquis_Gamygyn'),
         MARQUIS_NEBIROS   = GetFirstID('Marquis_Nebiros'),
+        MARQUIS_ORIAS     = GetFirstID('Marquis_Orias'),
+        MARQUIS_SABNAK    = GetFirstID('Marquis_Sabnak'),
+        PRINCE_SEERE      = GetFirstID('Prince_Seere'),
+        YANG              = GetFirstID('Yang'),
+        YING              = GetFirstID('Ying'),
     },
+
     npc =
     {
+        DYNAMIS_LORD_DIRECTOR = GetFirstID('qm0'), -- Dynamis Lord pop QM, holds the encounter variables.
+
         QM =
         {
             [17330781] =
