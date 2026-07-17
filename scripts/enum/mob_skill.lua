@@ -1015,6 +1015,7 @@ xi.mobSkill =
     FORCEFUL_BLOW                 = 1731, -- Used with Mamool's weapons break.
 
     FIRESPIT                      = 1733,
+    AXE_THROW                     = 1736,
 
     LAVA_SPIT                     = 1785,
 
@@ -1046,6 +1047,7 @@ xi.mobSkill =
     -- SPIRIT_SURGE                  = 1893,
 
     FIRESPIT_BLUE_MAMOOLJA        = 1923, -- Ignores shadows
+    STAVE_TOSS                    = 1925,
 
     EES_LAMIA                     = 1931,
     EES_MERROW                    = 1932,

@@ -10,46 +10,39 @@ local entity = {}
 
 -- Gate durability is represented as four points:
 -- Firespit = 1 point; Axe Throw / Stave Toss = 4 points.
--- Both known Stave Toss IDs are accepted while this old Assault is being
--- brought forward to the current LSB combat hooks.
-local gateSkillDamage =
+local gateDamageSkills =
 {
-    [1733] = 1, -- Firespit
-    [1923] = 1, -- Firespit (alternate Mamool family skill)
-    [1736] = 4, -- Axe Throw
-    [1925] = 4, -- Stave Toss in current Omega data
-    [2361] = 4, -- Stave Toss in the original Wings implementation
+    [xi.mobSkill.FIRESPIT_BLUE_MAMOOLJA] = 1,
+    [xi.mobSkill.AXE_THROW]               = 4,
+    [xi.mobSkill.STAVE_TOSS]              = 4,
 }
 
 local whmRoamBuffs =
 {
-    46, -- Protect IV
-    51, -- Shell IV
-    53, -- Blink
-    54, -- Stoneskin
-    55, -- Aquaveil
-    57, -- Haste
-    67, -- Barblizzara
+    xi.magic.spell.PROTECT_IV,
+    xi.magic.spell.SHELL_IV,
+    xi.magic.spell.BLINK,
+    xi.magic.spell.STONESKIN,
+    xi.magic.spell.AQUAVEIL,
+    xi.magic.spell.HASTE,
+    xi.magic.spell.BARBLIZZARA,
 }
 
 entity.onMobSpawn = function(mob)
     xi.assault.adjustMobLevel(mob)
 
-    -- Skill selection is data-driven through the mission-specific mob pools.
-    -- Do not override SKILL_LIST here; the BST and NIN pools use the restricted
-    -- Imperial Agent Rescue lists defined in sql/mob_skill_lists.sql.
+    local job = mob:getMainJob()
 
     -- The generic weapon_break mixin can remove the visible weapon after a
     -- critical hit even though no Stave Toss or Axe Throw occurred. That is
     -- misleading and can interfere with the mission presentation.
     mob:setLocalVar('BreakChance', 0)
 
-    if mob:getMainJob() == xi.job.NIN then
-        -- NIN Warders otherwise remain at ranged-attack distance and are very
-        -- difficult to position toward a gate.
+    if job == xi.job.NIN then
+        -- Keep NIN Warders in melee range so they engage gates.
         mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
         mob:setMobMod(xi.mobMod.MAGIC_COOL, 25)
-    elseif mob:getMainJob() == xi.job.BST then
+    elseif job == xi.job.BST then
         local instance = mob:getInstance()
         local petId = mob:getID() + 1
         local pet = GetMobByID(petId, instance)
@@ -72,13 +65,10 @@ entity.onMobSpawn = function(mob)
             end)
         end
 
-        -- These mission-specific combat values existed in the original
-        -- implementation and prevent the Warders from behaving like weak,
-        -- incomplete placeholder mobs.
         mob:addMod(xi.mod.MAIN_DMG_RATING, 45)
         mob:setMod(xi.mod.STR, 15)
         mob:setMod(xi.mod.ATT, 320)
-    elseif mob:getMainJob() == xi.job.WHM then
+    elseif job == xi.job.WHM then
         mob:addMod(xi.mod.MAIN_DMG_RATING, 35)
         mob:setMod(xi.mod.STR, 10)
         mob:setMod(xi.mod.ATT, 270)
@@ -113,20 +103,14 @@ entity.onMobRoam = function(mob)
     end
 end
 
--- Current LSB calls this after the mob weapon skill resolves as:
--- (mob, target, skill, action).
---
--- Do not redirect the actual combat target and do not synthesize an engine
--- WEAPONSKILL_TAKE event. Instead, update the instance-owned gate directly.
+-- Apply qualifying Warder weapon skills to nearby gates.
 entity.onMobWeaponSkill = function(mob, target, skill, action)
-    local skillId = skill:getID()
-    local hitValue = gateSkillDamage[skillId]
+    local hitValue = gateDamageSkills[skill:getID()]
     if not hitValue then
         return
     end
 
-    -- Original mission behavior allows the move to miss the gate even when
-    -- the Warder is positioned correctly.
+    -- Warder weapon skills have an 80% chance to damage the gate.
     if math.randomInt(1, 100) > 80 then
         return
     end
@@ -144,7 +128,7 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
             mob:checkDistance(gate) <= 10 and
             mob:isFacing(gate)
         then
-            -- Preserve the short visual delay from the original mission.
+            -- Briefly reveal the gate before applying damage.
             gate:hideName(false)
             gate:timer(1, function(gateArg)
                 gateArg:hideName(true)
