@@ -143,10 +143,7 @@ xi.pet.spawnPet = function(caster, petID, state, target)
                 end
                 -- 11 seconds here gives time for the animation to consistently line up to retail
                 pet:timer(11000, function()
-                    -- Chronoshift requires the summoner be within 30 yalms
-                    if caster:checkDistance(pet) <= 30 then
-                        pet:usePetAbility(xi.jobAbility.CHRONOSHIFT, pet)
-                    end
+                    pet:usePetAbility(xi.jobAbility.CHRONOSHIFT, pet)
                 end)
                 -- Ensure Atomos always despawns
                 pet:timer(17000, function()
