@@ -17,7 +17,7 @@ entity.onTrade = function(player, npc, trade)
     then
         -- 12 La Theine Cabbages
         local mobToSpawn = (math.randomInt(1, 100) <= 20) and ID.mob.HABETROT or ID.mob.HABETROT + 1 -- 20% Chance to spawn Habetrot, else it's a Rumble Crawler
-        npcUtil.popFromQM(player, npc, mobToSpawn)
+        npcUtil.popFromQM(player, npc, mobToSpawn, { hide = 900 })
         player:confirmTrade()
     end
 end
