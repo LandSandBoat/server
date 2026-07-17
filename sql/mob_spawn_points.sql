@@ -72459,10 +72459,10 @@ INSERT INTO `mob_spawn_points` VALUES (17572193,0,'Balloon','Balloon',52,8,10,50
 INSERT INTO `mob_spawn_points` VALUES (17572194,80,'Goblin_Weaver','Goblin Weaver',58,4,7,532.532,-0.041,-692.563,127,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17572195,0,'Balloon','Balloon',52,8,10,496.000,-1.000,-737.000,127,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17572196,80,'Goblin_Weaver','Goblin Weaver',58,4,7,540.000,-1.000,-687.000,11,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17572197,0,'Jack_of_Cups','Jack of Cups',60,62,62,-291.000,0.001,-662.000,129,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17572197,0,'Jack_of_Cups','Jack of Cups',60,62,62,-291.000,0.001,-663.000,129,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17572198,0,'Jack_of_Batons','Jack of Batons',61,62,62,-291.000,0.001,-657.000,126,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17572199,0,'Jack_of_Swords','Jack of Swords',62,62,62,-295.000,0.001,-659.000,130,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17572200,0,'Jack_of_Coins','Jack of Coins',63,62,62,-291.000,0.001,-659.000,127,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17572199,0,'Jack_of_Swords','Jack of Swords',62,62,62,-291.000,0.001,-659.000,130,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17572200,0,'Jack_of_Coins','Jack of Coins',63,62,62,-291.000,0.001,-661.000,127,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17572201,0,'Queen_of_Swords','Queen of Swords',64,72,72,-422.000,0.001,618.000,239,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17572202,0,'Queen_of_Coins','Queen of Coins',65,72,72,-422.000,0.001,621.000,16,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17572203,0,'Thunder_Elemental','Thunder Elemental',66,75,75,-576.613,-1.014,739.999,0,NULL,NULL);
