@@ -24,6 +24,11 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.TERROR)
 end
 
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.DETECTION, xi.detects.HEARING)
+    mob:setMobMod(xi.mobMod.SOUND_RANGE, 15)
+end
+
 entity.onMobEngage = function(mob, target)
     mob:setLocalVar('nextEnSkill', GetSystemTime() + 10)
 end
