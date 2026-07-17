@@ -704,6 +704,7 @@ local overseerOffsets =
         { offset =  1, nation = xi.nation.BASTOK   }, -- flag
         { offset =  2, nation = xi.nation.WINDURST }, -- flag
         { offset =  3, nation = xi.nation.BEASTMEN }, -- flag
+        { offset =  4, nation = xi.nation.OTHER    }, -- Bartabaq
     },
     [xi.region.TAVNAZIANARCH] =
     {
