@@ -51,7 +51,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
             math.randomInt(1, 100) <= chance and
             target:getAnimation() ~= 33
         then
-            target:setHP(0)
+            target:takeDamage(target:getHP(), pet, xi.attackType.MAGICAL, xi.damageType.DARK)
 
             returnParam = xi.effect.KO
         else
