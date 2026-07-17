@@ -44,9 +44,9 @@ INSERT INTO `mob_spawn_points` VALUES (16781322,0,'Flytrap','Flytrap',8,15,25,-7
 INSERT INTO `mob_spawn_points` VALUES (16781323,0,'Ooze','Ooze',9,25,29,4.495,-3.084,13.966,224,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (16781324,0,'Thunder_Elemental','Thunder Elemental',10,27,29,3.938,-3.101,14.569,254,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (16781325,0,'Water_Elemental','Water Elemental',11,27,29,-6.726,-3.017,10.120,69,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (16781326,0,'Vodyanoi','Vodyanoi',12,45,47,4.616,-2.636,4.485,59,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (16781327,0,'Stubborn_Dredvodd','Stubborn Dredvodd',13,33,33,-12.295,-2.500,0.140,0,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (16781328,0,'Orcs_Wyvern','Orc\'s Wyvern',14,28,28,-7.120,-2.500,-2.167,46,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (16781326,0,'Vodyanoi','Vodyanoi',12,45,47,4.616,-2.636,4.485,59,20,4);
+INSERT INTO `mob_spawn_points` VALUES (16781327,0,'Stubborn_Dredvodd','Stubborn Dredvodd',13,33,33,-12.295,-2.500,0.140,0,10,16);
+INSERT INTO `mob_spawn_points` VALUES (16781328,0,'Orcs_Wyvern','Orc\'s Wyvern',14,28,28,-7.120,-2.500,-2.167,46,10,16);
 
 -- ------------------------------------------------------------
 -- Carpenter's Landing (Zone 2)

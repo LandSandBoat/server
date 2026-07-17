@@ -18,6 +18,10 @@ zoneObject.onInitialize = function(zone)
     func.herculesTreeOnGameHour()
 end
 
+zoneObject.onZoneTick = function(zone)
+    xi.barge.onZoneTick(zone)
+end
+
 zoneObject.onZoneIn = function(player, prevZone)
     if
         player:getXPos() == 0 and
