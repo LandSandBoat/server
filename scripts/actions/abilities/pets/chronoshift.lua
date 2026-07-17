@@ -24,12 +24,6 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
         petskill:setMsg(xi.msg.basic.NO_EFFECT)
     end
 
-    pet:timer(5000, function()
-        if summoner then
-            summoner:despawnPet()
-        end
-    end)
-
     return effectCount
 end
 

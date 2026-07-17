@@ -26,10 +26,6 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     target:addEnmity(pet, 1, 60)
     target:addEnmity(summoner, 1, 0) -- this is to ensure you cannot cheese mobs with this, mob goes passive if not added
 
-    pet:timer(5000, function()
-        pet:usePetAbility(xi.jobAbility.CHRONOSHIFT, pet)
-    end)
-
     return effectCount
 end
 

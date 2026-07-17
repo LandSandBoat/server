@@ -65,13 +65,6 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
 
     summoner:setMP(0)
 
-    -- Despawn Odin after 8 seconds.
-    pet:timer(8000, function()
-        if summoner then
-            summoner:despawnPet()
-        end
-    end)
-
     return returnParam
 end
 
