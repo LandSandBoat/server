@@ -11,10 +11,14 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
+    return 0, 0
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
+    if summoner == nil then
+        return 0
+    end
+
     local returnParam = 0
     local power       = summoner:getMP() / utils.clamp(summoner:getMaxMP(), 1, 9999)
 
@@ -37,15 +41,17 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
 
         returnParam = info.damage
     else
-        -- Insta-kill: Highly innacurate against regular monsters.
-        local chance = 50 * power / utils.clamp(petskill:getTotalTargets(), 1, 50)
+        -- Zantetsuken chance to kill starts at MP/MaxMP so at full MP the kill chance is 100%
+        -- This is then divided by the number of targets. So with 4 targets, each one has a 25%
+        -- to die if the summoner has full MP. I am guessing at the 1% floor with 100 targets.
+        -- I have never tested this against more than 5-6 targets on retail.
+        local chance = 100 * power / utils.clamp(petskill:getTotalTargets(), 1, 100)
 
         if
             math.randomInt(1, 100) <= chance and
             target:getAnimation() ~= 33
         then
-            petskill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
-            target:takeDamage(target:getHP(), pet, xi.attackType.MAGICAL, xi.damageType.DARK)
+            target:setHP(0)
 
             returnParam = xi.effect.KO
         else
@@ -56,6 +62,13 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     end
 
     summoner:setMP(0)
+
+    -- Despawn Odin after 8 seconds.
+    pet:timer(8000, function()
+        if summoner then
+            summoner:despawnPet()
+        end
+    end)
 
     return returnParam
 end
