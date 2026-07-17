@@ -130,13 +130,9 @@ xi.pet.spawnPet = function(caster, petID, state, target)
                 local pet = caster:getPet()
                 if pet then
                     -- Timed sequence after spawning, wait -> Deconstruction -> wait -> Chronoshift (despawn pet after complete)
-                    -- Full cycle takes 3s -> 6s -> 3s from summon to despawn
-                    pet:timer(3000, function()
+                    -- Full cycle takes 5s -> 5s -> 5s from summon to despawn
+                    pet:timer(5000, function()
                         pet:usePetAbility(xi.jobAbility.DECONSTRUCTION, target)
-                    end)
-
-                    pet:timer(6000, function()
-                        pet:usePetAbility(xi.jobAbility.CHRONOSHIFT, pet)
                     end)
                 end
             end
