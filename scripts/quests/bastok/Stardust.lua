@@ -38,7 +38,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status ~= xi.questStatus.QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.METALWORKS] =
@@ -57,6 +57,7 @@ quest.sections =
                 [555] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:confirmTrade()
+                        quest:setMustZone(player)
                     end
                 end,
             },
@@ -67,6 +68,51 @@ quest.sections =
             ['Drangord'] = quest:event(97),
         },
     },
+
+    {
+        check = function(player, status, vars)
+            return status == xi.questStatus.QUEST_COMPLETED
+        end,
+
+        [xi.zone.METALWORKS] =
+        {
+            ['Baldric'] =
+            {
+                onTrade = function(player, npc, trade)
+                    if
+                        quest:getVar(player, 'Prog') == 1 and
+                        npcUtil.tradeHasExactly(trade, xi.item.PINCH_OF_VALKURM_SUNSAND)
+                    then
+                        return quest:progressEvent(555)
+                    end
+                end,
+
+                onTrigger = function(player, npc)
+                    if
+                        quest:getVar(player, 'Prog') == 0 and
+                        not quest:getMustZone(player)
+                    then
+                        return quest:progressEvent(554)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [554] = function(player, csid, option, npc)
+                    quest:setVar(player, 'Prog', 1)
+                end,
+
+                [555] = function(player, csid, option, npc)
+                    if quest:complete(player) then
+                        player:confirmTrade()
+                        quest:setMustZone(player)
+                    end
+                end,
+            },
+        },
+    },
+
 }
 
 return quest
