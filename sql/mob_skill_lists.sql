@@ -4357,7 +4357,17 @@ INSERT INTO `mob_skill_lists` VALUES ('FOMOR_HAND_TO_HAND',2100,251); -- aegis_s
 INSERT INTO `mob_skill_lists` VALUES ('FOMOR_HAND_TO_HAND',2100,252); -- dancing_chains
 INSERT INTO `mob_skill_lists` VALUES ('FOMOR_HAND_TO_HAND',2100,253); -- barbed_crescent
 
--- Next ID : 2101
+INSERT INTO `mob_skill_lists` VALUES ('ImperialAgentRescue_BST',2101,1731); -- Forceful Blow
+INSERT INTO `mob_skill_lists` VALUES ('ImperialAgentRescue_BST',2101,1732); -- Somersault Kick
+INSERT INTO `mob_skill_lists` VALUES ('ImperialAgentRescue_BST',2101,1733); -- Firespit
+INSERT INTO `mob_skill_lists` VALUES ('ImperialAgentRescue_BST',2101,1734); -- Warm-Up
+INSERT INTO `mob_skill_lists` VALUES ('ImperialAgentRescue_BST',2101,1736); -- Axe Throw
+INSERT INTO `mob_skill_lists` VALUES ('ImperialAgentRescue_NIN',2102,1731); -- Forceful Blow
+INSERT INTO `mob_skill_lists` VALUES ('ImperialAgentRescue_NIN',2102,1732); -- Somersault Kick
+INSERT INTO `mob_skill_lists` VALUES ('ImperialAgentRescue_NIN',2102,1733); -- Firespit
+INSERT INTO `mob_skill_lists` VALUES ('ImperialAgentRescue_NIN',2102,1734); -- Warm-Up
+
+-- Next ID : 2103
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date
