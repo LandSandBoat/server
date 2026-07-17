@@ -22,6 +22,8 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     local returnParam = 0
     local power       = summoner:getMP() / utils.clamp(summoner:getMaxMP(), 1, 9999)
 
+    summoner:delStatusEffect(xi.effect.ASTRAL_FLOW)
+
     if target:isNM() then
         local params = {}
 

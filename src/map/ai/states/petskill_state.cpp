@@ -168,7 +168,7 @@ bool CPetSkillState::Update(timer::time_point tick)
                 PSummoner->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::AvatarsFavor)->SetPower(power > 11 ? power : 11);
             }
 
-            if (PTarget && m_PEntity->getPetType() == PET_TYPE::AVATAR && (m_PEntity->petID() != PETID_ALEXANDER && m_PEntity->petID() != PETID_ATOMOS))
+            if (PTarget && m_PEntity->getPetType() == PET_TYPE::AVATAR && (m_PEntity->petID() != PETID_ALEXANDER && m_PEntity->petID() != PETID_ATOMOS && m_PEntity->petID() != PETID_ODIN))
             {
                 auto* PBattleTarget = dynamic_cast<CBattleEntity*>(PTarget);
                 if (PBattleTarget &&
