@@ -118,11 +118,11 @@ xi.pet.spawnPet = function(caster, petID, state, target)
         elseif petID == xi.petId.ODIN then
             local pet = caster:getPet()
             if pet then
-                if target then
-                    pet:timer(5000, function()
+                pet:timer(5000, function()
+                    if target and target:isAlive() then
                         pet:usePetAbility(xi.jobAbility.ZANTETSUKEN, target)
-                    end)
-                end
+                    end
+                end)
                 -- Retail Odin despawns 15 seconds after appearing even if he fails to use Zantetsuken
                 pet:timer(15000, function()
                     caster:despawnPet()
@@ -136,11 +136,11 @@ xi.pet.spawnPet = function(caster, petID, state, target)
                 -- On retail the behavior appears to be that Atomos will always do Deconstruction if the target is in range
                 -- If the target moves out of range, Atomos still does Chronoshift as long as the summoner is within 30 yalms
                 -- If the target and the summoner are both out of range then Atomos just waits and despawns
-                if target then
-                    pet:timer(5000, function()
+                pet:timer(5000, function()
+                    if target and target:isAlive() then
                         pet:usePetAbility(xi.jobAbility.DECONSTRUCTION, target)
-                    end)
-                end
+                    end
+                end)
                 -- 11 seconds here gives time for the animation to consistently line up to retail
                 pet:timer(11000, function()
                     pet:usePetAbility(xi.jobAbility.CHRONOSHIFT, pet)
