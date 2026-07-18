@@ -5932,7 +5932,7 @@ xi.roe.records =
     [757] =
     { -- Subjugation: Dynamis Lord
         trigger = xi.roeTrigger.DEFEAT_MOB,
-        reqs = { mobID = set { 17330177 } },
+        reqs = { mobID = set { 17330177, 17330178, 17330179, 17330180, 17330181, 17330182 } },
         flags = set { 'repeat' },
         reward = { sparks = 300, exp = 1500, accolades = 30 },
     },
