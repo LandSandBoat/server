@@ -4,7 +4,6 @@
 -- Note: CoP Mission 8-3
 -----------------------------------
 local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
-mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
@@ -48,14 +47,8 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
-    mob:setLocalVar('healPercent', math.randomInt(15, 25))
-
-    xi.mix.jobSpecial.config(mob, {
-        specials =
-        {
-            { id = xi.mobSkill.MANAFONT_1, hpp = math.randomInt(50, 80) },
-        },
-    })
+    mob:setLocalVar('[2hour]Used', 0)
+    mob:setLocalVar('[2hour]HPP', math.randomInt(50, 80))
 end
 
 entity.onMobEngage = function(mob, target)
@@ -70,6 +63,15 @@ end
 entity.onMobFight = function(mob, target)
     if xi.combat.behavior.isEntityBusy(mob) then
         return
+    end
+
+    -- Handle 2-hour.
+    if
+        mob:getLocalVar('[2hour]Used') == 0 and
+        mob:getHPP() <= mob:getLocalVar('[2hour]HPP')
+    then
+        mob:setLocalVar('[2hour]Used', 1)
+        mob:useMobAbility(xi.mobSkill.MANAFONT_1)
     end
 
     -- Paths to designated location and begins casting
@@ -118,8 +120,10 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
 end
 
 entity.onMobWeaponSkill = function(mob, target, skill, action)
+    local skillId = skill:getID()
+
     -- Handle healing completion
-    if skill:getID() == xi.mobSkill.OPTIC_INDURATION_CHARGE then
+    if skillId == xi.mobSkill.OPTIC_INDURATION_CHARGE then
         local chargeCount = mob:getLocalVar('chargeCount')
         local chargeTotal = mob:getLocalVar('chargeTotal')
 
@@ -137,7 +141,7 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
             mob:useMobAbility(xi.mobSkill.OPTIC_INDURATION_CHARGE)
         end
 
-    elseif skill:getID() == xi.mobSkill.OPTIC_INDURATION then
+    elseif skillId == xi.mobSkill.OPTIC_INDURATION then
         mob:setAutoAttackEnabled(true)
         mob:setMagicCastingEnabled(true)
         mob:setLocalVar('chargeCount', 0)

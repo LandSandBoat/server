@@ -133,9 +133,14 @@ entity.onMobDisengage = function(mob)
 end
 
 entity.onMobDespawn = function(mob)
+    local zone = mob:getZone()
+    if not zone then
+        return
+    end
+
     -- Give Ix'DRG a random placeholder by picking one of the four groups' first PH, then adding a random number of 0-2 for the specific mob.
     local basePhId = utils.randomEntry(ID.mob.AWAERN_DRG_GROUPS)
-    SetServerVariable('[SEA]IxAernDRG_PH', basePhId + math.randomInt(0, 2))
+    zone:setLocalVar('[SEA]IxAernDRG_PH', basePhId + math.randomInt(0, 2))
 end
 
 return entity

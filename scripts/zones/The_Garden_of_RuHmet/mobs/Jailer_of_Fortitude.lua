@@ -37,9 +37,9 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local delay = mob:getLocalVar('delay')
+    local delay    = mob:getLocalVar('delay')
     local lastCast = mob:getLocalVar('LAST_CAST')
-    local spell = mob:getLocalVar('COPY_SPELL')
+    local spell    = mob:getLocalVar('COPY_SPELL')
 
     if mob:getBattleTime() - lastCast > 30 then
         mob:setLocalVar('COPY_SPELL', 0)

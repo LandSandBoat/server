@@ -34,7 +34,4 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob)
-end
-
 return entity
