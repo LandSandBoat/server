@@ -157,9 +157,9 @@ xi.manaclipper.onZoneIn = function(player, prevZone)
 
         -- game client updates player's position
         if eventId == 13 then
-            return 13
+            return { 13, -1, bit.bor(xi.cutsceneFlag.UNKNOWN_1, xi.cutsceneFlag.NO_PCS) }
         else
-            return 12
+            return { 12, -1, bit.bor(xi.cutsceneFlag.UNKNOWN_1, xi.cutsceneFlag.NO_PCS) }
         end
     end
 
@@ -174,7 +174,14 @@ xi.manaclipper.onTransportEvent = function(player, prevZoneId, transportId)
     if aboard == 1 then
         if player:hasKeyItem(xi.ki.MANACLIPPER_TICKET) then
             player:delKeyItem(xi.ki.MANACLIPPER_TICKET)
-            player:startEvent(14)
+            player:startEvent(14, {
+                flags = bit.bor(
+                    xi.cutsceneFlag.UNKNOWN_1,
+                    xi.cutsceneFlag.NO_PCS,
+                    xi.cutsceneFlag.UNKNOWN_4,
+                    xi.cutsceneFlag.UNKNOWN_7
+                ),
+            })
         elseif player:hasKeyItem(xi.ki.MANACLIPPER_MULTI_TICKET) then
             local uses = player:getCharVar('Manaclipper_Ticket') - 1
 
@@ -187,7 +194,14 @@ xi.manaclipper.onTransportEvent = function(player, prevZoneId, transportId)
             end
 
             player:setCharVar('Manaclipper_Ticket', uses)
-            player:startEvent(14)
+            player:startEvent(14, {
+                flags = bit.bor(
+                    xi.cutsceneFlag.UNKNOWN_1,
+                    xi.cutsceneFlag.NO_PCS,
+                    xi.cutsceneFlag.UNKNOWN_4,
+                    xi.cutsceneFlag.UNKNOWN_7
+                ),
+            })
         else
             player:messageSpecial(ID.text.NO_BILLET, xi.ki.MANACLIPPER_TICKET)
             player:setPos(489, -3, 713, 200) -- kicked off Manaclipper, returned to Sunset Docks
@@ -195,6 +209,12 @@ xi.manaclipper.onTransportEvent = function(player, prevZoneId, transportId)
 
     -- leaving Purgonorgo Isle. must be standing in trigger area 2. no ticket required.
     elseif aboard == 2 then
-        player:startEvent(16)
+        player:startEvent(16, {
+            flags = bit.bor(
+                xi.cutsceneFlag.UNKNOWN_1,
+                xi.cutsceneFlag.NO_PCS,
+                xi.cutsceneFlag.UNKNOWN_7
+            ),
+        })
     end
 end

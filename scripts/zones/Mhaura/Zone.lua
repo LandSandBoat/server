@@ -29,7 +29,7 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
-    local cs = -1
+    local cs = { }
 
     if
         player:getXPos() == 0 and
@@ -42,7 +42,7 @@ zoneObject.onZoneIn = function(player, prevZone)
             prevZone == xi.zone.OPEN_SEA_ROUTE_TO_MHAURA or
             prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES)
         then
-            cs = 202
+            cs = { 202, -1, bit.bor(xi.cutsceneFlag.UNKNOWN_1, xi.cutsceneFlag.NO_PCS) }
             player:setPos(14.960, -3.430, 18.423, 192)
         else
             player:setPos(0.003, -6.252, 117.971, 65)
@@ -70,14 +70,28 @@ zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
             player:hasKeyItem(xi.ki.BOARDING_PERMIT) and
             player:hasKeyItem(xi.ki.FERRY_TICKET)
         then
-            player:startEvent(200)
+            player:startEvent(200, {
+                isHidden = true,
+                flags    = bit.bor(
+                    xi.cutsceneFlag.UNKNOWN_1,
+                    xi.cutsceneFlag.NO_PCS,
+                    xi.cutsceneFlag.UNKNOWN_7
+                ),
+            })
         else
             player:startEvent(204)
             player:messageSpecial(ID.text.DO_NOT_POSSESS, xi.ki.BOARDING_PERMIT)
         end
     else
         if player:hasKeyItem(xi.ki.FERRY_TICKET) then
-            player:startEvent(200)
+            player:startEvent(200, {
+                isHidden = true,
+                flags    = bit.bor(
+                    xi.cutsceneFlag.UNKNOWN_1,
+                    xi.cutsceneFlag.NO_PCS,
+                    xi.cutsceneFlag.UNKNOWN_7
+                ),
+            })
         else
             player:startEvent(204)
         end

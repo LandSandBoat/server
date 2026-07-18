@@ -14,7 +14,7 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
-    local cs = -1
+    local cs = { }
 
     if
         player:getXPos() == 0 and
@@ -22,7 +22,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getZPos() == 0
     then
         if prevZone == xi.zone.KAZHAM_JEUNO_AIRSHIP then
-            cs = 10002
+            cs = { 10002, -1, bit.bor(xi.cutsceneFlag.UNKNOWN_1, xi.cutsceneFlag.NO_PCS) }
         end
 
         player:setPos(-4.000, -3.000, 14.000, 66)
@@ -32,7 +32,14 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
-    player:startEvent(10000)
+    player:startEvent(10000, {
+        isHidden = true,
+        flags    = bit.bor(
+            xi.cutsceneFlag.UNKNOWN_1,
+            xi.cutsceneFlag.UNKNOWN_3,
+            xi.cutsceneFlag.UNKNOWN_7
+        ),
+    })
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)
