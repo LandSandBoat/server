@@ -481,7 +481,7 @@ void MapSocket::Impl::flushDiagnostics()
 }
 
 MapSocket::MapSocket(Scheduler& scheduler, MapStatistics& mapStatistics, const uint16 port, ReceiveFn onReceiveFn)
-: impl_(std::make_unique<Impl>(scheduler, mapStatistics, port, std::move(onReceiveFn)))
+: impl_(makeBox<Impl>(scheduler, mapStatistics, port, std::move(onReceiveFn)))
 {
 }
 
