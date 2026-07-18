@@ -35,11 +35,11 @@ local content = InstanceAssault:new(
 -- The gaps are pets spawned by their owning BST Warders.
 content.mobs =
 {
-    { baseID = rescueMobs.MOBS_START[1], offset = 1 }, -- 17047553-17047554
-    { baseID = rescueMobs.MOBS_START[3], offset = 1 }, -- 17047556-17047557
-    { baseID = rescueMobs.MOBS_START[5], offset = 2 }, -- 17047559-17047561
-    { baseID = rescueMobs.MOBS_START[8], offset = 3 }, -- 17047563-17047566
-    { baseID = rescueMobs.GATES[1],      offset = 2 }, -- 17047567-17047569
+    { baseID = rescueMobs.MAMOOL_JA_WARDER,     offset = 1 },
+    { baseID = rescueMobs.MAMOOL_JA_WARDER + 2, offset = 1 },
+    { baseID = rescueMobs.MAMOOL_JA_WARDER + 4, offset = 2 },
+    { baseID = rescueMobs.MAMOOL_JA_WARDER + 7, offset = 3 },
+    { baseID = rescueMobs.DILAPIDATED_GATE,     offset = 2 },
 }
 
 content.loot =

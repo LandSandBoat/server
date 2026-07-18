@@ -3,14 +3,6 @@
 -----------------------------------
 zones = zones or {}
 
-local allImperialAgentRescueWarders = GetTableOfIDs('Mamool_Ja_Warder')
-local imperialAgentRescueWarders    = {}
-local imperialAgentRescueGates      = GetTableOfIDs('Dilapidated_Gate')
-
-for index = 1, 11 do
-    imperialAgentRescueWarders[index] = allImperialAgentRescueWarders[index]
-end
-
 zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =
 {
     text =
@@ -39,8 +31,8 @@ zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =
     {
         [xi.assault.mission.IMPERIAL_AGENT_RESCUE] =
         {
-            MOBS_START = imperialAgentRescueWarders,
-            GATES      = imperialAgentRescueGates,
+            MAMOOL_JA_WARDER = GetFirstID('Mamool_Ja_Warder'),
+            DILAPIDATED_GATE = GetFirstID('Dilapidated_Gate'),
         },
 
         [xi.assault.mission.PREEMPTIVE_STRIKE] =

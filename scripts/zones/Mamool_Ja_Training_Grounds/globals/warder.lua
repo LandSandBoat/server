@@ -36,7 +36,10 @@ warder.onMobWeaponSkill = function(mob, target, skill, action)
         return
     end
 
-    for _, gateId in ipairs(ID.mob[xi.assault.mission.IMPERIAL_AGENT_RESCUE].GATES) do
+    local gateBaseId = ID.mob[xi.assault.mission.IMPERIAL_AGENT_RESCUE].DILAPIDATED_GATE
+
+    for offset = 0, 2 do
+        local gateId = gateBaseId + offset
         local gate = GetMobByID(gateId, instance)
         if
             gate and

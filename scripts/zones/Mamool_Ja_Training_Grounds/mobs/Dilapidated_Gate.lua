@@ -24,15 +24,15 @@ entity.onMobDeath = function(mob, player, optParams)
         return
     end
 
-    local mobId = mob:getID()
-    local gates = ID.mob[xi.assault.mission.IMPERIAL_AGENT_RESCUE].GATES
+    local mobId      = mob:getID()
+    local gateBaseId = ID.mob[xi.assault.mission.IMPERIAL_AGENT_RESCUE].DILAPIDATED_GATE
     local doorId
 
-    if mobId == gates[1] then
+    if mobId == gateBaseId then
         doorId = ID.npc.DOOR_1
-    elseif mobId == gates[2] then
+    elseif mobId == gateBaseId + 1 then
         doorId = ID.npc.DOOR_2
-    elseif mobId == gates[3] then
+    elseif mobId == gateBaseId + 2 then
         doorId = ID.npc.DOOR_3
     end
 
