@@ -40,7 +40,6 @@ zones[xi.zone.BIBIKI_BAY] =
         YOU_ARE_NOT_ALONE             = 7463, -- You are not alone!
         NO_BILLET                     = 7505, -- You were refused passage for failing to present <item>!
         HAVE_BILLET                   = 7510, -- You cannot buy morrre than one <item>. Use the one you have now to ride the next ship.
-        NO_NEED_TO_PURCHASE           = 7512, -- You do not need to purrrchase a new ticket at this time.
         LEFT_BILLET                   = 7515, -- You use your <item>. (<number> trip[/s] remaining)
         NUM_TICKETS_ADDED_TO_MULTI    = 7517, -- <number> ticket[/s] [was/were] added to your <item>.
         END_BILLET                    = 7516, -- You use up your <item>.
