@@ -14,20 +14,9 @@ xi.zoneUtil.ImperialAgent_PotHatch = function(player, npc, posX, posZ, posR)
         return
     end
 
-    -- The Assault controller normally initializes this when the instance is
-    -- created. Retain a defensive fallback for already-running instances.
-    local selectedPot = instance:getLocalVar('ImperialAgentRescuePotId')
-    if selectedPot == 0 then
-        selectedPot = math.randomInt(ID.npc.POT_HATCH, ID.npc.POT_HATCH + 2)
-        instance:setLocalVar('ImperialAgentRescuePotId', selectedPot)
-    end
-
     npc:setAnimation(8)
 
-    if
-        npc:getID() ~= selectedPot or
-        instance:getLocalVar('ImperialAgentRescueTriggered') == 1
-    then
+    if npc:getLocalVar('Prisoner') ~= 1 then
         return
     end
 
@@ -36,7 +25,7 @@ xi.zoneUtil.ImperialAgent_PotHatch = function(player, npc, posX, posZ, posR)
         return
     end
 
-    instance:setLocalVar('ImperialAgentRescueTriggered', 1)
+    npc:setLocalVar('Prisoner', 0)
 
     ally:setStatus(xi.status.NORMAL)
     ally:entityAnimationPacket(xi.animationString.STATUS_VISIBLE)
