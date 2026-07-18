@@ -5550,6 +5550,11 @@ void DelExperiencePoints(CCharEntity* PChar, float retainPercent, uint16 forcedX
     uint8  mLevel  = (PChar->m_LevelRestriction != 0 && PChar->m_LevelRestriction < PChar->GetMLevel()) ? PChar->m_LevelRestriction : PChar->GetMLevel();
     uint16 exploss = mLevel <= 67 ? (GetExpNEXTLevel(mLevel) * 8) / 100 : 2400;
 
+    if (mLevel <= 24 && settings::get<bool>("map.USE_PRE_ABYSSEA_EXP_LOSS_TIERS"))
+    {
+        exploss = (GetExpNEXTLevel(mLevel) * 10) / 100;
+    }
+
     if (forcedXpLoss > 0)
     {
         // Override normal XP loss with specified value.
