@@ -36,6 +36,8 @@ public:
         TotalBytesSentPerTick,
         TotalSendsBlockedPerTick,
         TotalSendErrorsPerTick,
+        IngressPacketsDroppedPerTick,
+        EgressPacketsDroppedPerTick,
         MaxInFlightSendsPerTick,
         TasksTickTime,
         NetworkTickTime,
