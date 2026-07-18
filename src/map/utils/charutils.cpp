@@ -2736,7 +2736,15 @@ void UpdateWeaponStyle(CCharEntity* PChar, uint8 equipSlotID, CItemEquipment* PI
                     switch (PWeapon->getSkillType())
                     {
                         case xi::SkillType::HandToHand:
-                            PChar->mainlook.sub = appearanceModel + 0x1000;
+                            if (hasValidStyle(PChar, PItem, appearance))
+                            {
+                                PChar->mainlook.sub = appearanceModel + 0x1000;
+                            }
+                            else
+                            {
+                                PChar->mainlook.sub = PChar->look.sub;
+                            }
+
                             break;
                         case xi::SkillType::GreatSword:
                         case xi::SkillType::GreatAxe:
