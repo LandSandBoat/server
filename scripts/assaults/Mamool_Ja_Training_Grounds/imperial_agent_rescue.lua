@@ -69,15 +69,15 @@ content.loot =
     },
 }
 
--- Store the selected hatch separately from instance progress. Progress is
--- reserved by InstanceAssault for objective completion and must not contain
--- an NPC ID. Call the base method first so content.mobs are spawned normally.
 function content:onInstanceCreated(instance)
     InstanceAssault.onInstanceCreated(self, instance)
 
-    local selectedPot = math.randomInt(ID.npc.POT_HATCH, ID.npc.POT_HATCH + 2)
-    instance:setLocalVar('ImperialAgentRescuePotId', selectedPot)
-    instance:setLocalVar('ImperialAgentRescueTriggered', 0)
+    local selectedPotId = ID.npc.POT_HATCH + math.randomInt(0, 2)
+    local selectedPot   = GetNPCByID(selectedPotId, instance)
+
+    if selectedPot then
+        selectedPot:setLocalVar('Prisoner', 1)
+    end
 end
 
 return content:register()
