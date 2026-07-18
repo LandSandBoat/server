@@ -48,8 +48,12 @@ auto MapStatistics::toString(Key key)
             return "Total Sends Blocked Per Tick (OS backpressure)";
         case Key::TotalSendErrorsPerTick:
             return "Total Send Errors Per Tick";
+        case Key::IngressPacketsDroppedPerTick:
+            return "Ingress Packets Dropped Per Tick (recv queue full)";
+        case Key::EgressPacketsDroppedPerTick:
+            return "Egress Packets Dropped Per Tick (send queue full)";
         case Key::MaxInFlightSendsPerTick:
-            return "Max In-Flight Sends Per Tick";
+            return "Max In-Flight Sends Per Tick (egress queue depth)";
         case Key::TasksTickTime:
             return "Tasks Tick Time (ms)";
         case Key::NetworkTickTime:

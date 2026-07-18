@@ -1,7 +1,7 @@
 /*
 ===========================================================================
 
-  Copyright (c) 2025 LandSandBoat Dev Teams
+  Copyright (c) 2026 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -21,30 +21,22 @@
 
 #pragma once
 
-#include <common/cbasetypes.h>
-#include <common/ipp.h>
-#include <common/types/box.h>
+#include <memory>
+#include <utility>
 
-#include <map/socket.h>
+// namespace xi
+// {
 
-class Scheduler;
-class MapStatistics;
+//
+// Box<T>
+//
+template <typename T>
+using Box = std::unique_ptr<T>;
 
-// MapSocket owns a dedicated networking thread. That thread does nothing but drain the OS
-// receive buffer as fast as the kernel will hand us datagrams (pushing them into a lockless
-// ingress ring) and drain our egress ring back out to the wire.
-class MapSocket final : public Socket
+template <typename T, typename... Args>
+auto makeBox(Args&&... args) -> Box<T>
 {
-public:
-    MapSocket(Scheduler& scheduler, MapStatistics& mapStatistics, uint16 port, ReceiveFn onReceiveFn);
-    ~MapSocket() override;
+    return std::make_unique<T>(std::forward<Args>(args)...);
+}
 
-    DISALLOW_COPY_AND_MOVE(MapSocket);
-
-    void send(const IPP& ipp, ByteSpan buffer) override;
-    void flushDiagnostics() override;
-
-private:
-    struct Impl;
-    Box<Impl> impl_;
-};
+// } // namespace xi
