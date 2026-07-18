@@ -242,6 +242,15 @@ jobs:
             xi_*
             tracy.tar.gz
 
+      - name: Remove exes from build cache
+        if: ${{ inputs.save_cache && env.SKIP_BUILD != 'true' && steps.restore_build.outputs.cache-hit != 'true' }}
+        run: |
+          rm -f build/src/login/xi_connect*
+          rm -f build/src/map/xi_map*
+          rm -f build/src/search/xi_search*
+          rm -f build/src/test/xi_test*
+          rm -f build/src/world/xi_world*
+
       - name: Cache build
         if: ${{ inputs.save_cache && env.SKIP_BUILD != 'true' && steps.restore_build.outputs.cache-hit != 'true' }}
         uses: actions/cache/save@v5
