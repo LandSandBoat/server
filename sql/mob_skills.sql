@@ -953,7 +953,7 @@ INSERT INTO `mob_skills` VALUES (921,504,'everyones_rancor',0,0.0,7.0,2000,1500,
 INSERT INTO `mob_skills` VALUES (922,143,'blind_vortex',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (923,144,'giga_scream',0,0.0,7.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (924,145,'dread_dive',0,0.0,7.0,2000,1500,4,0,0,2,0,0,0);
--- INSERT INTO `mob_skills` VALUES (925,669,'feather_barrier',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+-- INSERT INTO `mob_skills` VALUES (925,146,'feather_barrier',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (926,147,'stormwind',1,0.0,15.0,6000,1500,4,0,0,0,0,0,0); -- animation times may very.
 INSERT INTO `mob_skills` VALUES (927,72,'drill_branch_nm',4,0.0,15.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (928,73,'pinecone_bomb_nm',2,0.0,15.0,2000,1500,4,0,0,0,0,0,0);
@@ -3178,7 +3178,7 @@ INSERT INTO `mob_skills` VALUES (3142,2266,'glassy_nova',1,0.0,18.0,2000,1000,4,
 -- INSERT INTO `mob_skills` VALUES (3147,2891,'#1355',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3148,2274,'noname',1,0.0,18.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3149,2275,'dazing_discord',1,0.0,18.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3150,2276,'steaming_rage',1,0.0,18.0,2000,1000,1,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3150,2280,'steaming_rage',1,0.0,18.0,2000,1000,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3151,2277,'noname',1,0.0,18.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3152,2289,'shining_salvo',1,0.0,18.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3153,2290,'palling_salvo',1,0.0,18.0,2000,1000,4,0,0,0,0,0,0);
