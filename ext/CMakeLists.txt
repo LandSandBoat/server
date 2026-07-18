@@ -3,6 +3,7 @@
 # add_subdirectory(zmq) # Handled globally
 # add_subdirectory(openssl) # Handled globally
 add_subdirectory(concurrentqueue)
+add_subdirectory(SPSCQueue)
 add_subdirectory(sol)
 
 # CPM Modules
@@ -311,6 +312,7 @@ set(SHARED_EXTERNAL_LIBS
     fmt::fmt
     spdlog
     concurrentqueue
+    spscqueue
     mariadbclient
     sol2_single
     argparse
