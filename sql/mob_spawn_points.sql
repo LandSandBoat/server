@@ -925,14 +925,14 @@ INSERT INTO `mob_spawn_points` VALUES (17059855,0,'Leujaoam_Worm','Leujaoam Worm
 
 -- Orichalcum survey assaut entrance @ -432 -27.627 169
 -- all worms spawn @ mining points in npc_list
-INSERT INTO `mob_spawn_points` VALUES (17059856,0,'Qiqirn_Miner','Qiqirn Miner',2,0,0,-519.519,-52.068,196.745,113,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17059857,0,'Qiqirn_Miner','Qiqirn Miner',2,0,0,-538.091,-48.863,294.327,108,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17059858,0,'Qiqirn_Miner','Qiqirn Miner',2,0,0,-414.927,-24.107,247.502,252,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17059859,0,'Qiqirn_Miner','Qiqirn Miner',2,0,0,-318.907,3.821,159.317,193,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17059860,0,'Qiqirn_Miner','Qiqirn Miner',2,0,0,-312.961,-0.335,217.331,23,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17059861,0,'Qiqirn_Miner','Qiqirn Miner',2,0,0,-428.855,-17.967,59.715,241,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17059862,0,'Qiqirn_Miner','Qiqirn Miner',2,0,0,-378.242,-28.197,178.675,209,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17059863,0,'Qiqirn_Miner','Qiqirn Miner',2,0,0,-417.615,-32.208,323.733,184,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17059856,0,'Qiqirn_Miner','Qiqirn Miner',2,0,0,-536.691,-51,204.461,113,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17059857,0,'Qiqirn_Miner','Qiqirn Miner',2,0,0,-503.933,-39,307.678,108,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17059858,0,'Qiqirn_Miner','Qiqirn Miner',2,0,0,-405.292,-23,230.958,252,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17059859,0,'Qiqirn_Miner','Qiqirn Miner',2,0,0,-366.991,3,162.922,193,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17059860,0,'Qiqirn_Miner','Qiqirn Miner',2,0,0,-318.242,1,225.166,23,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17059861,0,'Qiqirn_Miner','Qiqirn Miner',2,0,0,-422.101,-14,70.077,241,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17059862,0,'Qiqirn_Miner','Qiqirn Miner',2,0,0,-373.936,-28,180.027,209,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17059863,0,'Qiqirn_Miner','Qiqirn Miner',2,0,0,-425.597,-32,322.252,184,NULL,NULL);
 -- each mineral eater can spawn from any mining point
 INSERT INTO `mob_spawn_points` VALUES (17059864,0,'Mineral_Eater','Mineral Eater',3,77,78,-424.166,-32.041,335.851,54,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17059865,0,'Mineral_Eater','Mineral Eater',3,77,78,-551.561,-51.654,207.978,94,NULL,NULL);
