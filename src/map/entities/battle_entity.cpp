@@ -1616,9 +1616,21 @@ uint16 CBattleEntity::DEF()
 
     DEF += getMod(Mod::DEF);
 
-    // TODO: support old style counterstance
     if (this->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Counterstance, 0))
     {
+        // https://ffxiclopedia.fandom.com/wiki/Talk:Counterstance: DEF = 1 + VIT/2; gear/Protect ignored; % mods apply
+        if (settings::get<bool>("main.USE_OLD_COUNTERSTANCE"))
+        {
+            DEF = 1 + VIT() / 2;
+
+            if (CStatusEffect* PMinne = this->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Minne))
+            {
+                DEF += PMinne->GetPower();
+            }
+
+            return std::max(1, DEF + (DEF * getMod(Mod::DEFP) / 100) + std::min<int16>((DEF * getMod(Mod::FOOD_DEFP) / 100), getMod(Mod::FOOD_DEF_CAP)));
+        }
+
         return DEF / 2;
     }
 
