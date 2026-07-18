@@ -2,7 +2,6 @@
 -- Area: Mamool Ja Training Grounds (Imperial Agent Rescue)
 --  MOB: Mamool Ja Warder (NIN)
 -----------------------------------
-mixins = { require('scripts/mixins/weapon_break') }
 
 local warder = require('scripts/zones/Mamool_Ja_Training_Grounds/globals/warder')
 -----------------------------------
