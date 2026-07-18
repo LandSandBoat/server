@@ -28,6 +28,7 @@ entity.onMobSpawn = function(mob)
     -- online videos show that 24/27 SL were unresisted on retail
     -- this reduction in MEVA roughly gives roughly the correct resist rate
     mob:addMod(xi.mod.LIGHT_MEVA, -35)
+    mob:setMod(xi.mod.LIGHT_RES_RANK, 0)
 
     mob:addImmunity(xi.immunity.BLIND)
     mob:addImmunity(xi.immunity.SLOW)
