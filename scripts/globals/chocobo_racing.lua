@@ -8,10 +8,9 @@ require('scripts/globals/packet')
 xi = xi or {}
 xi.chocoboRacing = xi.chocoboRacing or {}
 
-local settings                         =
+local settings =
 {
-    RACE_PERIOD    = 900,        -- A race every 15 minutes.
-    VANADIEL_EPOCH = 1009810800, -- Jan 1 2002
+    RACE_PERIOD = 900, -- A race every 15 minutes.
 }
 
 -- FOR HEAVILY-IN-DEVELOPMET TESTING, you can force these setting:
@@ -435,24 +434,24 @@ xi.chocoboRacing.sendBettingCountdown   = function(player, listIndex)
     local now      = GetSystemTime()
     local closesIn = settings.RACE_PERIOD - (now % settings.RACE_PERIOD)
     player:updateEvent(
-        closesIn,                      -- When the betting period ends
-        now - settings.VANADIEL_EPOCH, -- Current server time. Used by client to know when to refresh.
+        closesIn,                     -- When the betting period ends
+        now - xi.time.VANADIEL_EPOCH, -- Current server time. Used by client to know when to refresh.
         0, 0, 0,
-        closesIn,                      -- When the betting period ends
-        1,                             -- Unknown
-        listIndex or 0                 -- Presently unused but may be used to index into a different race
+        closesIn,                     -- When the betting period ends
+        1,                            -- Unknown
+        listIndex or 0                -- Presently unused but may be used to index into a different race
     )
 end
 
 xi.chocoboRacing.onToteboardTrigger     = function(player, eventId)
     player:startEvent(
-        eventId,                                   -- NPC Event ID
-        1,                                         -- Race weather
-        -1, -1, -1,                                -- PC position, retail sends -1
-        player:getRotPos() * 16,                   -- PC rotation, retail sends rot * 16
-        0,                                         -- Copied but never used by event scripts
-        GetSystemTime() - settings.VANADIEL_EPOCH, -- Server timestamp, appears to be unused by event
-        2                                          -- 2 opens the board, -1 shows "Preparations for the next race are underway"
+        eventId,                                  -- NPC Event ID
+        1,                                        -- Race weather
+        -1, -1, -1,                               -- PC position, retail sends -1
+        player:getRotPos() * 16,                  -- PC rotation, retail sends rot * 16
+        0,                                        -- Copied but never used by event scripts
+        GetSystemTime() - xi.time.VANADIEL_EPOCH, -- Server timestamp, appears to be unused by event
+        2                                         -- 2 opens the board, -1 shows "Preparations for the next race are underway"
     )
 end
 

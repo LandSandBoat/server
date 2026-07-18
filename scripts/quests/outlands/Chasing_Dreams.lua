@@ -266,8 +266,8 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, { { 1664, 5 } }) and
-                        quest:getVar(player, 'Prog') == 6
+                        quest:getVar(player, 'Prog') == 6 and
+                        npcUtil.tradeHasExactly(trade, { { xi.item.EASTERN_GEM, 5 } })
                     then
                         return quest:progressEvent(323)
                     end

@@ -188,8 +188,7 @@ local function replenishFromTimer(player, tagStock, maxTagStock, idTagPeriod)
         player:setCharVar('tagDrawTime', 0)
     end
 
-    local vanaEpoch     = 1009810800 -- Vanadiel epoch time base for restock timer
-    local allTagsTimeCS = tagDrawTime > 0 and (tagDrawTime - vanaEpoch) or 0 -- Timestamp passed to event to display the restock timer
+    local allTagsTimeCS = tagDrawTime > 0 and (tagDrawTime - xi.time.VANADIEL_EPOCH) or 0 -- Timestamp passed to event to display the restock timer
 
     return tagStock, allTagsTimeCS
 end
