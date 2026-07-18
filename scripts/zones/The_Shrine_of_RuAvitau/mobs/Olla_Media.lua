@@ -22,6 +22,34 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.REGAIN, 200)
 end
 
+entity.onMobSpellChoose = function(mob, target, spellId)
+    local spellList =
+    {
+        [ 1] = { xi.magic.spell.BIO_III,    target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.BIO,      3, 100 },
+        [ 2] = { xi.magic.spell.SLEEPGA,    target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.SLEEP_I,  1, 100 },
+        [ 3] = { xi.magic.spell.SLEEPGA_II, target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.SLEEP_I,  2, 100 },
+        [ 4] = { xi.magic.spell.STUN,       target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.STUN,     1, 100 },
+        [ 5] = { xi.magic.spell.ABSORB_STR, target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.STR_DOWN, 1, 100 },
+        [ 6] = { xi.magic.spell.ABSORB_DEX, target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.DEX_DOWN, 1, 100 },
+        [ 7] = { xi.magic.spell.ABSORB_VIT, target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.VIT_DOWN, 1, 100 },
+        [ 8] = { xi.magic.spell.ABSORB_AGI, target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.AGI_DOWN, 1, 100 },
+        [ 9] = { xi.magic.spell.ABSORB_INT, target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.INT_DOWN, 1, 100 },
+        [10] = { xi.magic.spell.ABSORB_MND, target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.MND_DOWN, 1, 100 },
+        [11] = { xi.magic.spell.ABSORB_CHR, target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.CHR_DOWN, 1, 100 },
+        [12] = { xi.magic.spell.DRAIN,      target, false, xi.action.type.DRAIN_HP,          nil,                0, 100 },
+        [13] = { xi.magic.spell.ASPIR,      target, false, xi.action.type.DRAIN_MP,          nil,                0, 100 },
+    }
+
+    if
+        target:hasStatusEffectByFlag(xi.effectFlag.DISPELABLE) and
+        mob:isEngaged()
+    then
+        table.insert(spellList, #spellList + 1, { xi.magic.spell.DISPEL, target, false, xi.action.type.NONE, nil, 0, 100 })
+    end
+
+    return xi.combat.behavior.chooseAction(mob, target, nil, spellList)
+end
+
 entity.onAdditionalEffect = function(mob, target, damage)
     local pTable =
     {
@@ -34,7 +62,15 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller or optParams.noKiller then
-        SpawnMob(mob:getID() + 1):updateClaim(player)
+        local deathPosition = mob:getPos()
+        local ollaGrande    = GetMobByID(mob:getID() + 1)
+
+        if not ollaGrande then
+            return
+        end
+
+        ollaGrande:setSpawn(deathPosition.x, deathPosition.y, deathPosition.z, deathPosition.rot)
+        SpawnMob(ollaGrande:getID()):updateClaim(player)
     end
 end
 

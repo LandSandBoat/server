@@ -67208,7 +67208,7 @@ INSERT INTO `mob_spawn_points` VALUES (17506663,0,'Gefyrst','Gefyrst',20,104,106
 INSERT INTO `mob_spawn_points` VALUES (17506664,0,'Ungeweder','Ungeweder',21,104,106,0.000,0.000,0.000,0,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17506665,0,'Byrgen','Byrgen',22,104,106,0.000,0.000,0.000,0,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17506666,0,'Aura_Sculpture','Aura Sculpture',23,104,106,82.000,32.000,-5.000,127,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17506667,0,'Olla_Pequena','Olla Pequena',24,82,83,851.000,-1.000,92.000,113,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17506667,0,'Olla_Pequena','Olla Pequena',24,82,83,854.619,-0.099,98.345,157,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17506668,0,'Olla_Media','Olla Media',25,84,84,851.000,-1.000,92.000,113,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17506669,0,'Olla_Grande','Olla Grande',26,85,85,851.000,-1.000,92.000,113,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17506670,0,'Kirin','Kirin',27,92,92,-90.377,32.575,5.507,25,NULL,NULL);
