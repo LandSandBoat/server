@@ -27,4 +27,8 @@ if not xi.module.isContentEnabled('ABYSSEA') then
     end)
 end
 
+if #m.overrides == 0 then
+    return { name = moduleName }
+end
+
 return m
