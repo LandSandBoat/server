@@ -23,14 +23,13 @@
 
 #include <common/cbasetypes.h>
 #include <common/ipp.h>
-
-#include <functional>
+#include <common/types/fn.h>
 
 class Socket
 {
 public:
     // Called when bytes are received from a client, with the sender's address.
-    using ReceiveFn = std::function<void(ByteSpan, const IPP&)>;
+    using ReceiveFn = Fn<void(ByteSpan, const IPP&)>;
 
     virtual ~Socket() = default;
 
