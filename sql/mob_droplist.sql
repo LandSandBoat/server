@@ -17426,16 +17426,27 @@ INSERT INTO `mob_droplist` VALUES (2135,4,0,1000,2755,0);         -- Ruszor Hide
 INSERT INTO `mob_droplist` VALUES (2135,4,0,1000,5755,0);         -- Slab Of Ruszor Meat (Despoil)
 
 -- ZoneID:   2 - Sabertooth Tiger
--- ZoneID: 105 - Sabertooth Tiger
--- ZoneID: 120 - Sabertooth Tiger
 INSERT INTO `mob_droplist` VALUES (2136,0,0,1000,884,@VCOMMON);  -- Black Tiger Fang (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (2136,0,0,1000,861,@UNCOMMON); -- Black Tiger Hide (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2136,2,0,1000,4372,0);        -- Slice Of Giant Sheep Meat (Steal)
-INSERT INTO `mob_droplist` VALUES (2136,2,0,1000,4400,0);        -- Slice Of Land Crab Meat (Steal)
 INSERT INTO `mob_droplist` VALUES (2136,4,0,1000,884,0);         -- Black Tiger Fang (Despoil)
 INSERT INTO `mob_droplist` VALUES (2136,4,0,1000,861,0);         -- Black Tiger Hide (Despoil)
 
--- 2137-2138 Available
+-- ZoneID: 105 - Sabertooth Tiger
+INSERT INTO `mob_droplist` VALUES (2137,0,0,1000,884,@VCOMMON);  -- Black Tiger Fang (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2137,0,0,1000,861,@UNCOMMON); -- Black Tiger Hide (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2137,2,0,1000,4400,0);        -- Slice Of Land Crab Meat (Steal)
+INSERT INTO `mob_droplist` VALUES (2137,4,0,1000,884,0);         -- Black Tiger Fang (Despoil)
+INSERT INTO `mob_droplist` VALUES (2137,4,0,1000,861,0);         -- Black Tiger Hide (Despoil)
+
+-- ZoneID: 120 - Sabertooth Tiger
+INSERT INTO `mob_droplist` VALUES (2138,0,0,1000,884,@VCOMMON);  -- Black Tiger Fang (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2138,0,0,1000,861,@UNCOMMON); -- Black Tiger Hide (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2138,2,0,1000,4435,0);        -- Slice Of Cockatrice Meat (Steal)
+INSERT INTO `mob_droplist` VALUES (2138,4,0,1000,884,0);         -- Black Tiger Fang (Despoil)
+INSERT INTO `mob_droplist` VALUES (2138,4,0,1000,861,0);         -- Black Tiger Hide (Despoil)
+
+-- 2139-2138 Available
 
 -- ZoneID:  74 - Sabotender Maestro
 INSERT INTO `mob_droplist` VALUES (2139,0,0,1000,5379,@UNCOMMON); -- Nimbus Cell (Uncommon, 10%)

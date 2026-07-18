@@ -8003,7 +8003,7 @@ INSERT INTO `mob_groups` VALUES (7,3694,105,'Sobbing_Sapling',0,128,462,1400,0,0
 INSERT INTO `mob_groups` VALUES (8,2450,105,'Lumber_Jack',0,128,1549,35000,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (9,2597,105,'May_Fly',300,0,923,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (10,3754,105,'Stalking_Sapling',300,0,2912,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (11,3424,105,'Sabertooth_Tiger',300,0,2136,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (11,3424,105,'Sabertooth_Tiger',300,0,2137,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (12,2589,105,'Mauthe_Doog',300,1,226,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (13,1266,105,'Evil_Spirit',300,1,795,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (14,1690,105,'Goblin_Mugger',300,0,1117,0,0,0,NULL);
@@ -9126,7 +9126,7 @@ INSERT INTO `mob_groups` VALUES (26,1666,120,'Goblin_Gambler',300,0,1081,0,0,0,N
 INSERT INTO `mob_groups` VALUES (27,1715,120,'Goblin_Smithy',300,0,1162,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (28,1710,120,'Goblin_Shaman',300,0,1148,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (29,1160,120,'Earth_Elemental',300,4,733,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (30,3424,120,'Sabertooth_Tiger',300,0,2136,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (30,3424,120,'Sabertooth_Tiger',300,0,2138,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (31,2966,120,'Old_Sabertooth',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (32,3485,120,'Sauromugue_Skink',300,0,2935,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (33,5873,120,'Thunderclaw_Thuban',5400,0,3079,4000,0,0,'WOTG');
