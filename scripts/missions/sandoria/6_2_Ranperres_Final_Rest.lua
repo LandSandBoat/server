@@ -213,6 +213,7 @@ mission.sections =
 
                 [8] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.ANCIENT_SAN_DORIAN_BOOK)
+                    player:delKeyItem(xi.ki.PIECE_OF_PAPER)
                 end,
             },
         },
