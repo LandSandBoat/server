@@ -754,14 +754,14 @@ void MapNetworking::flushStatistics()
 
     mapStatistics_.set(MapStatistics::Key::DynamicTargIdUsagePercent, static_cast<int64>(percent));
 
-    // This also zeroes out all the stats
-    mapStatistics_.flush();
-
     // Null on test servers, which don't open a socket
     if (socket_)
     {
         socket_->flushDiagnostics();
     }
+
+    // This also zeroes out all the stats
+    mapStatistics_.flush();
 }
 
 auto MapNetworking::ipp() const -> IPP
