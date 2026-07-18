@@ -15735,20 +15735,20 @@ INSERT INTO `mob_spawn_points` VALUES (17043910,0,'Predatory_Colibri','Predatory
 -- ------------------------------------------------------------
 
 -- Imperial Agent Rescue entering@ -20 2.276 -405
-INSERT INTO `mob_spawn_points` VALUES (17047553,0,'Mamool_Ja_Warder','Mamool Ja Warder',1,77,78,-52.529,11.454,-481.784,173,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17047554,0,'Mamool_Ja_Warder','Mamool Ja Warder',2,77,78,-56.889,11.425,-478.689,120,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17047553,0,'Mamool_Ja_Warder_whm','Mamool Ja Warder',1,77,78,-52.529,11.454,-481.784,173,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17047554,0,'Mamool_Ja_Warder_bst','Mamool Ja Warder',2,77,78,-56.889,11.425,-478.689,120,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17047555,0,'Mamool_Jas_Lizard','Mamool Ja\'s Lizard',3,70,70,-56.888,11.328,-478.687,120,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17047556,0,'Mamool_Ja_Warder','Mamool Ja Warder',1,77,78,-73.562,11.445,-476.531,197,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17047557,0,'Mamool_Ja_Warder','Mamool Ja Warder',2,77,78,-83.271,11.411,-451.202,110,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17047556,0,'Mamool_Ja_Warder_whm','Mamool Ja Warder',1,77,78,-73.562,11.445,-476.531,197,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17047557,0,'Mamool_Ja_Warder_bst','Mamool Ja Warder',2,77,78,-83.271,11.411,-451.202,110,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17047558,0,'Mamool_Jas_Lizard','Mamool Ja\'s Lizard',3,70,70,-83.271,11.411,-451.202,120,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17047559,0,'Mamool_Ja_Warder','Mamool Ja Warder',1,77,78,166.512,1.886,-418.296,127,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17047560,0,'Mamool_Ja_Warder','Mamool Ja Warder',1,77,78,261.726,1.318,-421.633,90,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17047561,0,'Mamool_Ja_Warder','Mamool Ja Warder',2,77,78,214.891,1.294,-578.562,204,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17047559,0,'Mamool_Ja_Warder_whm','Mamool Ja Warder',1,77,78,166.512,1.886,-418.296,127,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17047560,0,'Mamool_Ja_Warder_whm','Mamool Ja Warder',1,77,78,261.726,1.318,-421.633,90,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17047561,0,'Mamool_Ja_Warder_bst','Mamool Ja Warder',2,77,78,214.891,1.294,-578.562,204,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17047562,0,'Mamool_Jas_Lizard','Mamool Ja\'s Lizard',3,70,70,215.239,1.254,-580.130,191,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17047563,0,'Mamool_Ja_Warder','Mamool Ja Warder',4,77,78,197.111,2.415,-458.513,140,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17047564,0,'Mamool_Ja_Warder','Mamool Ja Warder',4,77,78,215.755,2.173,-461.893,103,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17047565,0,'Mamool_Ja_Warder','Mamool Ja Warder',4,77,78,258.477,5.566,-471.841,188,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17047566,0,'Mamool_Ja_Warder','Mamool Ja Warder',4,77,78,178.120,5.206,-522.340,196,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17047563,0,'Mamool_Ja_Warder_nin','Mamool Ja Warder',4,77,78,197.111,2.415,-458.513,140,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17047564,0,'Mamool_Ja_Warder_nin','Mamool Ja Warder',4,77,78,215.755,2.173,-461.893,103,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17047565,0,'Mamool_Ja_Warder_nin','Mamool Ja Warder',4,77,78,258.477,5.566,-471.841,188,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17047566,0,'Mamool_Ja_Warder_nin','Mamool Ja Warder',4,77,78,178.120,5.206,-522.340,196,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17047567,0,'Dilapidated_Gate','Dilapidated Gate',5,75,75,220.004,0.690,-439.999,0,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17047568,0,'Dilapidated_Gate','Dilapidated Gate',5,75,75,179.999,0.671,-559.996,0,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17047569,0,'Dilapidated_Gate','Dilapidated Gate',5,75,75,259.999,0.666,-559.996,0,NULL,NULL);

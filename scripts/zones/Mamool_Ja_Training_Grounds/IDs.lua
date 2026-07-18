@@ -31,7 +31,7 @@ zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =
     {
         [xi.assault.mission.IMPERIAL_AGENT_RESCUE] =
         {
-            MAMOOL_JA_WARDER = GetFirstID('Mamool_Ja_Warder'),
+            MAMOOL_JA_WARDER = GetFirstID('Mamool_Ja_Warder_whm'),
             DILAPIDATED_GATE = GetFirstID('Dilapidated_Gate'),
         },
 

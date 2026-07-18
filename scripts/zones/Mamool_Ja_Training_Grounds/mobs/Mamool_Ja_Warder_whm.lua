@@ -2,6 +2,10 @@
 -- Area: Mamool Ja Training Grounds (Imperial Agent Rescue)
 --  MOB: Mamool Ja Warder (WHM)
 -----------------------------------
+mixins = { require('scripts/mixins/weapon_break') }
+
+local warder = require('scripts/zones/Mamool_Ja_Training_Grounds/globals/warder')
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 
@@ -17,6 +21,8 @@ local whmRoamBuffs =
 }
 
 entity.onMobSpawn = function(mob)
+    warder.onMobSpawn(mob)
+
     mob:addMod(xi.mod.MAIN_DMG_RATING, 35)
     mob:setMod(xi.mod.STR, 10)
     mob:setMod(xi.mod.ATT, 270)
@@ -35,5 +41,7 @@ entity.onMobRoam = function(mob)
         mob:setLocalVar('magicBuffCooldown', cooldown - 1)
     end
 end
+
+entity.onMobWeaponSkill = warder.onMobWeaponSkill
 
 return entity
