@@ -1,12 +1,12 @@
 -----------------------------------
 -- Carpenters' Landing Barge
 -- https://www.bg-wiki.com/ffxi/Phanauet_Channel
--- TODO timed npc messages:
---      - When a barge arrives (not onTransportEvent, earlier than that)
---      - various chats while the barge goes up/down the river
 -----------------------------------
 xi = xi or {}
 xi.barge = xi.barge or {}
+
+local channelID = zones[xi.zone.PHANAUET_CHANNEL]
+local landingID = zones[xi.zone.CARPENTERS_LANDING]
 
 -- OOS = out of service
 -- ARRIVE action is given until the boat has fully docked
@@ -49,8 +49,8 @@ local bargeSchedule =
     {
         { endTime = utils.timeStringToMinutes('16:00'), action = actions.ARRIVE_OOS, route = destinations.CENTRAL_LANDING },
         { endTime = utils.timeStringToMinutes('16:21'), action = actions.DEPART_OOS, route = destinations.CENTRAL_LANDING },
-        { endTime = utils.timeStringToMinutes('16:45'), action = actions.ARRIVE, route = destinations.CENTRAL_LANDING },
-        { endTime = utils.timeStringToMinutes('17:40'), action = actions.DEPART, route = destinations.CENTRAL_LANDING },
+        { endTime = utils.timeStringToMinutes('16:45'), action = actions.ARRIVE,     route = destinations.CENTRAL_LANDING },
+        { endTime = utils.timeStringToMinutes('17:40'), action = actions.DEPART,     route = destinations.CENTRAL_LANDING },
     },
     [xi.barge.location.CENTRAL_LANDING] =
     {
@@ -61,22 +61,22 @@ local bargeSchedule =
     },
     [xi.barge.location.SOUTH_LANDING] =
     {
-        { endTime = utils.timeStringToMinutes('00:15'), action = actions.ARRIVE, route = destinations.CENTRAL_LANDING_EMFEA },
-        { endTime = utils.timeStringToMinutes('01:05'), action = actions.DEPART, route = destinations.CENTRAL_LANDING_EMFEA },
-        { endTime = utils.timeStringToMinutes('08:55'), action = actions.ARRIVE_OOS, route = destinations.NORTH_LANDING },
-        { endTime = utils.timeStringToMinutes('09:06'), action = actions.DEPART_OOS, route = destinations.NORTH_LANDING },
-        { endTime = utils.timeStringToMinutes('09:35'), action = actions.ARRIVE, route = destinations.NORTH_LANDING },
-        { endTime = utils.timeStringToMinutes('10:25'), action = actions.DEPART, route = destinations.NORTH_LANDING },
+        { endTime = utils.timeStringToMinutes('00:15'), action = actions.ARRIVE,     route = destinations.CENTRAL_LANDING_EMFEA },
+        { endTime = utils.timeStringToMinutes('01:05'), action = actions.DEPART,     route = destinations.CENTRAL_LANDING_EMFEA },
+        { endTime = utils.timeStringToMinutes('08:55'), action = actions.ARRIVE_OOS, route = destinations.NORTH_LANDING         },
+        { endTime = utils.timeStringToMinutes('09:06'), action = actions.DEPART_OOS, route = destinations.NORTH_LANDING         },
+        { endTime = utils.timeStringToMinutes('09:35'), action = actions.ARRIVE,     route = destinations.NORTH_LANDING         },
+        { endTime = utils.timeStringToMinutes('10:25'), action = actions.DEPART,     route = destinations.NORTH_LANDING         },
         { endTime = utils.timeStringToMinutes('23:35'), action = actions.ARRIVE_OOS, route = destinations.CENTRAL_LANDING_EMFEA },
         { endTime = utils.timeStringToMinutes('23:56'), action = actions.DEPART_OOS, route = destinations.CENTRAL_LANDING_EMFEA },
     },
     [xi.barge.location.PHANAUET_CHANNEL] =
     {
         { endTime = utils.timeStringToMinutes('04:35'), route = destinations.CENTRAL_LANDING_EMFEA },
-        { endTime = utils.timeStringToMinutes('08:55'), route = destinations.SOUTH_LANDING },
-        { endTime = utils.timeStringToMinutes('16:00'), route = destinations.NORTH_LANDING },
-        { endTime = utils.timeStringToMinutes('19:15'), route = destinations.CENTRAL_LANDING },
-        { endTime = utils.timeStringToMinutes('23:35'), route = destinations.SOUTH_LANDING },
+        { endTime = utils.timeStringToMinutes('08:55'), route = destinations.SOUTH_LANDING         },
+        { endTime = utils.timeStringToMinutes('16:00'), route = destinations.NORTH_LANDING         },
+        { endTime = utils.timeStringToMinutes('19:15'), route = destinations.CENTRAL_LANDING       },
+        { endTime = utils.timeStringToMinutes('23:35'), route = destinations.SOUTH_LANDING         },
     },
 }
 
@@ -150,31 +150,84 @@ local npcList =
     [destinations.NORTH_LANDING] =
     {
         -- Roi, Luquillaue, Ineuteniace
-        tonberry = 1,
+        tonberry   = 1,
         timekeeper = 0,
-        rider = 1,
+        rider      = 1,
     },
     [destinations.CENTRAL_LANDING] =
     {
         -- Roi, Luquillaue, Eunirange
-        tonberry = 1,
+        tonberry   = 1,
         timekeeper = 1,
-        rider = 1,
+        rider      = 1,
     },
     [destinations.SOUTH_LANDING] =
     {
         -- Riche, Laiteconce, Ineuteniace
-        tonberry = 0,
+        tonberry   = 0,
         timekeeper = 0,
-        rider = 0,
+        rider      = 0,
     },
     [destinations.CENTRAL_LANDING_EMFEA] =
     {
         -- Riche, Laiteconce, Eunirange
-        tonberry = 0,
+        tonberry   = 0,
         timekeeper = 1,
-        rider = 0,
+        rider      = 0,
     },
+}
+
+-- The timekeeper narrates the trip while the barge is in the channel. Keyed by route rather
+-- than by leg, because both South Landing legs run the same Newtpool script at the same
+-- offsets. `before` is minutes ahead of the leg's endTime in bargeSchedule. Lines flagged
+-- `emote` are shown without a speaker name. From captures.
+local routeDialogue =
+{
+    [destinations.NORTH_LANDING] =
+    {
+        { before = 323, messageId = channelID.text.NORTH_GREETING,       emote = false },
+        { before = 305, messageId = channelID.text.NORTH_MAIN_CANAL,     emote = false },
+        { before = 281, messageId = channelID.text.NORTH_WATERFALL,      emote = false },
+        { before = 215, messageId = channelID.text.NORTH_LINE_CAUGHT,    emote = true  },
+        { before = 125, messageId = channelID.text.NORTH_CURRENTS_MEET,  emote = false },
+        { before =  75, messageId = channelID.text.NORTH_CHILLY_AIR,     emote = false },
+        { before =  14, messageId = channelID.text.NORTH_ARRIVING_NORTH, emote = false },
+    },
+    [destinations.CENTRAL_LANDING] =
+    {
+        { before =  88, messageId = channelID.text.CENTRAL_GREETING            },
+        { before =  74, messageId = channelID.text.CENTRAL_CRISP_BREEZE        },
+        { before =  41, messageId = channelID.text.CENTRAL_FORK_IN_CANAL       },
+        { before =  32, messageId = channelID.text.CENTRAL_SCRUMPTIOUS_LIZARDS },
+        { before =  18, messageId = channelID.text.CENTRAL_ARRIVING_CENTRAL    },
+    },
+    [destinations.SOUTH_LANDING] =
+    {
+        { before = 190, messageId = channelID.text.NEWTPOOL_GREETING        },
+        { before = 180, messageId = channelID.text.NEWTPOOL_CONVERGE        },
+        { before = 164, messageId = channelID.text.NEWTPOOL_LIZARDS         },
+        { before = 118, messageId = channelID.text.NEWTPOOL_PASSING_THROUGH },
+        { before =  53, messageId = channelID.text.NEWTPOOL_EDGE_OF_POOL    },
+        { before =  14, messageId = channelID.text.NEWTPOOL_ARRIVING_SOUTH  },
+    },
+    [destinations.CENTRAL_LANDING_EMFEA] =
+    {
+        { before = 190, messageId = channelID.text.EMFEA_GREETING         },
+        { before = 175, messageId = channelID.text.EMFEA_AMPHIBIANS       },
+        { before = 149, messageId = channelID.text.EMFEA_NARROW_ROUTE     },
+        { before = 135, messageId = channelID.text.EMFEA_VARIETY_OF_LIFE  },
+        { before =  96, messageId = channelID.text.EMFEA_DANGEROUS_BRIDGE },
+        { before =  52, messageId = channelID.text.EMFEA_NEWTS_AND_FROGS  },
+        { before =  21, messageId = channelID.text.EMFEA_ARRIVING_CENTRAL },
+    },
+}
+
+-- Each landing's timekeeper announces the barge docking and departing. From captures.
+local dockAnnouncers =
+{
+    { location = xi.barge.location.NORTH_LANDING,   npcId = landingID.npc.FELOURIE },
+    { location = xi.barge.location.CENTRAL_LANDING, npcId = landingID.npc.RATOULLE },
+    { location = xi.barge.location.SOUTH_LANDING,   npcId = landingID.npc.CHUAIE   },
 }
 
 local handleEntityVisibility = function(destination, zoneId)
@@ -185,7 +238,7 @@ local handleEntityVisibility = function(destination, zoneId)
     end
 
     zone:setLocalVar('destinationEntities', destination + 1)
-    local ID = zones[zone:getID()]
+    local ID      = zones[zoneId]
     local npcData = npcList[destination]
     if not npcData then
         -- should not be possible
@@ -194,9 +247,9 @@ local handleEntityVisibility = function(destination, zoneId)
 
     local offsets =
     {
-        tonberry = ID.npc.TONBERRY_OFFSET,
+        tonberry   = ID.npc.TONBERRY_OFFSET,
         timekeeper = ID.npc.TIMEKEEPER_OFFSET,
-        rider = ID.npc.RIDER_OFFSET,
+        rider      = ID.npc.RIDER_OFFSET,
     }
 
     for k, v in pairs(npcData) do
@@ -218,43 +271,93 @@ local dockEventData =
     [destinations.NORTH_LANDING] =
     {
         -- transport ids from DB
-        transports = { 25 },
-        arrivalCsId = 11,
-        arrivalPos =
-        {
-            x = -303.166, y = -1.971, z = 504.964, rotation = 96,
-        },
-        departEvent = 16,
-        kickEvent = 34,
+        transports    = { 25 },
+        arrivalCsId   = 11,
+        arrivalPos    = { x = -303.166, y = -1.971, z = 504.964, rotation = 96 },
+        departEvent   = 16,
+        kickEvent     = 34,
         triggerAreaId = 1,
     },
     [destinations.CENTRAL_LANDING] =
     {
         -- transport ids from DB
-        transports = { 21, 26 },
-        arrivalCsId = 10,
-        arrivalPos =
-        {
-            x = -137.275, y = -1.964, z = 60.265, rotation = 96,
-        },
-        departEvent = 40,
-        kickEvent = 42,
+        transports    = { 21, 26 },
+        arrivalCsId   = 10,
+        arrivalPos    = { x = -137.275, y = -1.964, z = 60.265, rotation = 96 },
+        departEvent   = 40,
+        kickEvent     = 42,
         triggerAreaId = 3,
     },
     [destinations.SOUTH_LANDING] =
     {
         -- transport ids from DB
-        transports = { 20, 23 },
-        arrivalCsId = 38,
-        arrivalPos =
-        {
-            x = 230.621, y = -1.987, z = -530.240, rotation = 129
-        },
-        departEvent = 14,
-        kickEvent = 33,
+        transports    = { 20, 23 },
+        arrivalCsId   = 38,
+        arrivalPos    = { x = 230.621, y = -1.987, z = -530.240, rotation = 129 },
+        departEvent   = 14,
+        kickEvent     = 33,
         triggerAreaId = 2,
     },
 }
+
+-- Aboard, the timekeeper narrates the current leg. At the landings, their timekeeper
+-- announces the barge docking and departing. Nothing fires while a zone is empty.
+xi.barge.onZoneTick = function(zone)
+    local currentTime = VanadielHour() * 60 + VanadielMinute()
+
+    -- A Vana'diel minute is 2.4 earth seconds, so only look once per minute rather than on
+    -- every tick. Offset by one to avoid zero, so midnight is not mistaken for unset.
+    if zone:getLocalVar('[barge]lastMessage') == currentTime + 1 then
+        return
+    end
+
+    zone:setLocalVar('[barge]lastMessage', currentTime + 1)
+
+    if zone:getID() == xi.zone.PHANAUET_CHANNEL then
+        local nextEvent = getNextEvent(currentTime, bargeSchedule[xi.barge.location.PHANAUET_CHANNEL])
+        local dialogue  = routeDialogue[nextEvent.route]
+        if not dialogue then
+            return
+        end
+
+        for _, line in ipairs(dialogue) do
+            if nextEvent.endTime - line.before == currentTime then
+                local timekeeper = GetNPCByID(channelID.npc.TIMEKEEPER_OFFSET + npcList[nextEvent.route].timekeeper)
+                if timekeeper then
+                    if line.emote then
+                        timekeeper:messageText(timekeeper, line.messageId, false, 4)
+                    else
+                        timekeeper:messageText(timekeeper, line.messageId, true)
+                    end
+                end
+
+                return
+            end
+        end
+    else
+        -- Out of service arrivals and departures are not announced.
+        for _, dock in ipairs(dockAnnouncers) do
+            for _, event in ipairs(bargeSchedule[dock.location]) do
+                local messageId = nil
+
+                if event.action == actions.ARRIVE and event.endTime == currentTime then
+                    messageId = landingID.text.BARGE_HAS_ARRIVED
+                elseif event.action == actions.DEPART and event.endTime - 15 == currentTime then
+                    messageId = landingID.text.BARGE_ABOUT_TO_DEPART
+                end
+
+                if messageId then
+                    local timekeeper = GetNPCByID(dock.npcId)
+                    if timekeeper then
+                        timekeeper:messageText(timekeeper, messageId, true)
+                    end
+
+                    return
+                end
+            end
+        end
+    end
+end
 
 xi.barge.onZoneIn = function(player, prevZone)
     local zoneId = player:getZoneID()
@@ -301,7 +404,7 @@ xi.barge.onTransportEvent = function(player, zoneId, transportId)
         end
     end
 
-    if destData == nil then -- was not in trigger area for the transport event
+    if not destData then -- was not in trigger area for the transport event
         return -1
     end
 
@@ -315,17 +418,17 @@ xi.barge.onTransportEvent = function(player, zoneId, transportId)
         player:delKeyItem(xi.ki.BARGE_TICKET)
 
         player:startEvent(destData.departEvent,
-            {
-                [0] = 0,
-                [1] = xi.ki.BARGE_TICKET,
-                [2] = 0, -- Important to be set to 0
-                flags = bit.bor(
-                    xi.cutsceneFlag.UNKNOWN_1,
-                    xi.cutsceneFlag.NO_PCS,
-                    xi.cutsceneFlag.UNKNOWN_4,
-                    xi.cutsceneFlag.UNKNOWN_7
-                ),
-            })
+        {
+            [0] = 0,
+            [1] = xi.ki.BARGE_TICKET,
+            [2] = 0, -- Important to be set to 0
+            flags = bit.bor(
+                xi.cutsceneFlag.UNKNOWN_1,
+                xi.cutsceneFlag.NO_PCS,
+                xi.cutsceneFlag.UNKNOWN_4,
+                xi.cutsceneFlag.UNKNOWN_7
+            ),
+        })
     elseif player:hasKeyItem(xi.ki.BARGE_MULTI_TICKET) then
         local usesLeft = player:getCharVar('[barge]multiTicket') - 1
 
@@ -337,17 +440,17 @@ xi.barge.onTransportEvent = function(player, zoneId, transportId)
         player:setCharVar('[barge]multiTicket', usesLeft)
         -- was in trigger area and had a ticket
         player:startEvent(destData.departEvent,
-            {
-                [0] = usesLeft,     -- Not actually used by CS but passed in
-                [1] = xi.ki.BARGE_MULTI_TICKET,
-                [2] = usesLeft + 1, -- This expects the number of uses before it get decremented
-                flags = bit.bor(
-                    xi.cutsceneFlag.UNKNOWN_1,
-                    xi.cutsceneFlag.NO_PCS,
-                    xi.cutsceneFlag.UNKNOWN_4,
-                    xi.cutsceneFlag.UNKNOWN_7
-                ),
-            })
+        {
+            [0] = usesLeft,     -- Not actually used by CS but passed in
+            [1] = xi.ki.BARGE_MULTI_TICKET,
+            [2] = usesLeft + 1, -- This expects the number of uses before it get decremented
+            flags = bit.bor(
+                xi.cutsceneFlag.UNKNOWN_1,
+                xi.cutsceneFlag.NO_PCS,
+                xi.cutsceneFlag.UNKNOWN_4,
+                xi.cutsceneFlag.UNKNOWN_7
+            ),
+        })
     else
         -- was in trigger area but didn't have a ticket
         player:startEvent(destData.kickEvent)
@@ -360,20 +463,20 @@ local tickets =
     [1] =
     {
         keyItem = xi.ki.BARGE_TICKET,
-        cost = 50,
+        cost    = 50,
     },
 
     [2] =
     {
         keyItem = xi.ki.BARGE_MULTI_TICKET,
-        cost = 300,
+        cost    = 300,
         charges = 10,
     },
 }
 
 xi.barge.onTicketShopTrigger = function(player, eventId)
     local hasKeyItemParam = 0
-    local numberTicket = player:getCharVar('[barge]multiTicket')
+    local numberTicket    = player:getCharVar('[barge]multiTicket')
     for i, ticketData in pairs(tickets) do
         hasKeyItemParam = utils.mask.setBit(hasKeyItemParam, i - 1, player:hasKeyItem(ticketData.keyItem))
     end
@@ -383,9 +486,9 @@ xi.barge.onTicketShopTrigger = function(player, eventId)
 end
 
 xi.barge.onTicketShopEventFinish = function(player, csid, option, npc)
-    local ID = zones[player:getZoneID()]
+    local ID           = zones[player:getZoneID()]
     local numberTicket = player:getCharVar('[barge]multiTicket')
-    local ticketData = tickets[option]
+    local ticketData   = tickets[option]
 
     if
         ticketData and

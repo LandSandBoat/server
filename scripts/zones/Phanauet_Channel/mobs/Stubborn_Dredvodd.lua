@@ -17,7 +17,7 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.TERROR)
     mob:addImmunity(xi.immunity.PLAGUE)
     mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1) -- He agros level 99 characters.
-    mob:setMobMod(xi.mobMod.MAGIC_COOL, 45) -- seconds between casts. he only has 1 spell.
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 45) -- Seconds between casts. he only has 1 spell.
 end
 
 entity.onMobSpawn = function(mob)
@@ -72,6 +72,16 @@ entity.onMobSpellChoose = function(mob, target, spellId)
     }
 
     return xi.combat.behavior.chooseAction(mob, target, nil, spellList)
+end
+
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
+        -- Ineuteniace the timekeeper thanks the party for killing Dredvodd.
+        local timekeeper = GetNPCByID(ID.npc.TIMEKEEPER_OFFSET)
+        if timekeeper then
+            timekeeper:messageText(timekeeper, ID.text.DREDVODD_DEATH, true)
+        end
+    end
 end
 
 return entity

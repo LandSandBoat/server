@@ -29,6 +29,8 @@ zones[xi.zone.CARPENTERS_LANDING] =
         LOGGING_IS_POSSIBLE_HERE      = 7411, -- Logging is possible here if you have <item>.
         BEUGUNGEL_SHOP_DIALOG         = 7443, -- Hello, [sir/ma'am]! I'm selling goods direct from the Carpenters' Guild.
         TOO_POOR                      = 7449, -- I'm sorry, [sir/madame]. You don't have enough gil to purchase a ticket.
+        BARGE_HAS_ARRIVED             = 7451, -- The barge has arrived. Please purchase a ticket prior to boarding.
+        BARGE_ABOUT_TO_DEPART         = 7452, -- The barge is about to depart.
         BARGE_TICKET_REMAINING        = 7462, -- You use your %. (# trip[/s] remaining)
         BARGE_TICKET_USED             = 7463, -- You use up your %.
         BARGE_TICKET_ADDED            = 7464, -- # ticket[/s] [was/were] added to your %.
@@ -56,8 +58,11 @@ zones[xi.zone.CARPENTERS_LANDING] =
     },
     npc =
     {
+        CHUAIE                = GetFirstID('Chuaie'),
+        FELOURIE              = GetFirstID('Felourie'),
         HERCULES_BEETLE_TREES = GetTableOfIDs('qm_hercules_beetle'),
         LOGGING               = GetTableOfIDs('Logging_Point'),
+        RATOULLE              = GetFirstID('Ratoulle'),
     },
 }
 
