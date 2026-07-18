@@ -637,6 +637,7 @@ public:
     timer::time_point m_LastRangedAttackTime{};
 
     void flushEquipChanges();
+    void resyncEquipment();
     auto inventorySyncState() -> InventorySyncState&;
 
     CHAR_SUBSTATE m_Substate;

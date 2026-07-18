@@ -2014,8 +2014,12 @@ uint32 UpdateItem(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quan
 
         luautils::OnItemDrop(PChar, PItem);
 
-        // Remove soon to be stale PItem pointer from sync state
-        PChar->inventorySyncState().removeEquipChange(PItem);
+        // Equipped item consumed to 0: resync equipment.
+        if (PChar->inventorySyncState().hasEquipChange(PItem))
+        {
+            PChar->inventorySyncState().clearEquipChanges();
+            PChar->resyncEquipment();
+        }
     }
     return ItemID;
 }
