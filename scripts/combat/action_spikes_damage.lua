@@ -68,6 +68,9 @@ end
 -----------------------------------
 -- Global functions called from "emtity.onSpikesDamage()"
 -----------------------------------
+
+-- Disable cyclomatic complexity check for this function:
+-- luacheck: ignore 561
 xi.combat.action.executeSpikesDamage = function(actor, target, fedData)
     local params = validateParameters(actor, target, fedData)
 
@@ -93,14 +96,16 @@ xi.combat.action.executeSpikesDamage = function(actor, target, fedData)
         return 0, 0, 0
     end
 
+    -- Check if we absorb, to skip steps.
+    local absorb = xi.spells.damage.calculateAbsorption(params.aeTarget, params.magicalElement, params.attackType == xi.attackType.PHYSICAL, params.attackType == xi.attackType.MAGICAL, params.attackType == xi.attackType.RANGED, params.attackType == xi.attackType.BREATH) < 0
+
     -- Calculate base power.
-    local damage = params.basePower + actor:getMod(params.actorStat) - params.aeTarget:getMod(params.targetStat)
+    local damage = utils.clamp(params.basePower + actor:getMod(params.actorStat) - params.aeTarget:getMod(params.targetStat), 0, 99999)
 
     -- Calculate mandatory multipliers.
-    local multiplierAbsorption         = xi.spells.damage.calculateAbsorption(params.aeTarget, params.magicalElement, params.attackType == xi.attackType.PHYSICAL, params.params.attackType == xi.attackType.MAGICAL, params.attackType == xi.attackType.RANGED, params.attackType == xi.attackType.BREATH)
-    local multiplierDamageTypeSDT      = xi.combat.damage.calculateDamageAdjustment(params.aeTarget, params.attackType == xi.attackType.PHYSICAL, params.attackType == xi.attackType.MAGICAL, params.attackType == xi.attackType.RANGED, params.attackType == xi.attackType.BREATH)
-    local multiplierPhysicalElementSDT = xi.combat.damage.physicalElementSDT(params.aeTarget, params.physicalElement)
-    local multiplierMagicalElementSDT  = xi.combat.damage.magicalElementSDT(params.aeTarget, params.magicalElement)
+    local multiplierDamageTypeSDT      = not absorb and xi.combat.damage.calculateDamageAdjustment(params.aeTarget, params.attackType == xi.attackType.PHYSICAL, params.attackType == xi.attackType.MAGICAL, params.attackType == xi.attackType.RANGED, params.attackType == xi.attackType.BREATH) or 1
+    local multiplierPhysicalElementSDT = not absorb and xi.combat.damage.physicalElementSDT(params.aeTarget, params.physicalElement) or 1
+    local multiplierMagicalElementSDT  = not absorb and xi.combat.damage.magicalElementSDT(params.aeTarget, params.magicalElement) or 1
     local multiplierDayWeather         = xi.spells.damage.calculateDayAndWeather(actor, params.magicalElement, false)
 
     -- Calculate optional multipliers.
@@ -108,7 +113,6 @@ xi.combat.action.executeSpikesDamage = function(actor, target, fedData)
     local multiplierForcedResistTier   = params.canResistExtra and xi.spells.damage.calculateAdditionalResistTier(actor, params.aeTarget, params.magicalElement) or 1
 
     -- Calculate final damage.
-    damage = math.floor(damage * multiplierAbsorption)
     damage = math.floor(damage * multiplierDamageTypeSDT)
     damage = math.floor(damage * multiplierPhysicalElementSDT)
     damage = math.floor(damage * multiplierMagicalElementSDT)
@@ -116,6 +120,17 @@ xi.combat.action.executeSpikesDamage = function(actor, target, fedData)
     damage = math.floor(damage * multiplierMagicDiff)
     damage = math.floor(damage * multiplierResist)
     damage = math.floor(damage * multiplierForcedResistTier)
+
+    if absorb then
+        -- Nullify drain-like AEs.
+        local isDrain = params.drainHP or params.drainMP or params.drainTP
+        if isDrain then
+            return 0, 0, 0
+        end
+
+        params.aeTarget:addHP(damage) -- Heal target.
+        return params.animation, params.messageHeal, damage
+    end
 
     -- Phalanx, One for all, Stoneskin.
     if damage > 0 then
@@ -141,11 +156,6 @@ xi.combat.action.executeSpikesDamage = function(actor, target, fedData)
         damage               = params.overDrain and damage or utils.clamp(damage, 0, params.aeTarget:getTP())
         params.messageDamage = xi.msg.basic.ADD_EFFECT_TP_DRAIN
         actor:addTP(damage)
-    end
-
-    if damage < 0 then
-        params.aeTarget:addHP(-damage) -- Heal target.
-        return params.animation, params.messageHeal, -damage
     end
 
     local actionDamageType = params.physicalElement > 0 and params.physicalElement or xi.damageType.ELEMENTAL + params.magicalElement

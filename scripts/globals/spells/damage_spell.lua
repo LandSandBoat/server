@@ -1100,11 +1100,9 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     end
 
     -- Calculate absoprtion and magic burst.
-    local absorbFactor   = xi.spells.damage.calculateAbsorption(target, spellElement, false, true, false, false)
+    local absorb         = xi.spells.damage.calculateAbsorption(target, spellElement, false, true, false, false) < 0
     local magicBurstTier = xi.combat.magicBurst.getMagicBurstTier(target, spellElement)
-
-    local notAbsorb = absorbFactor > 0
-    local canMBurst = absorbFactor > 0 and magicBurstTier > 0
+    local canMBurst      = not absorb and magicBurstTier > 0
 
     -- Fetch tabled data.
     local spellId         = spell:getID()
@@ -1119,14 +1117,14 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local multipleTargetReduction     = xi.spells.damage.calculateMTDR(caster, spell)
     local elementalStaffBonus         = xi.spells.damage.calculateElementalStaffBonus(caster, spellElement)
     local elementalAffinityBonus      = xi.spells.damage.calculateElementalAffinityBonus(caster, spellElement)
-    local resistTier                  = notAbsorb and xi.combat.magicHitRate.calculateResistRate(caster, target, spellGroup, skillType, 0, spellElement, statUsed, 0, bonusMacc) or 1
-    local additionalResistTier        = notAbsorb and xi.spells.damage.calculateAdditionalResistTier(caster, target, spellElement) or 1
+    local resistTier                  = not absorb and xi.combat.magicHitRate.calculateResistRate(caster, target, spellGroup, skillType, 0, spellElement, statUsed, 0, bonusMacc) or 1
+    local additionalResistTier        = not absorb and xi.spells.damage.calculateAdditionalResistTier(caster, target, spellElement) or 1
     local magicBurst                  = canMBurst and xi.spells.damage.calculateIfMagicBurst(caster, target, spellElement, magicBurstTier) or 1
     local magicBurstBonus             = canMBurst and xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spellId, skillType, spellElement) or 1
     local dayAndWeather               = xi.spells.damage.calculateDayAndWeather(caster, spellElement, forceDayWeather)
     local magicBonusDiff              = xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement, 0)
-    local targetMagicDamageAdjustment = notAbsorb and xi.combat.damage.calculateDamageAdjustment(target, false, true, false, false) or 1
-    local sdt                         = xi.combat.damage.magicalElementSDT(target, spellElement)
+    local targetMagicDamageAdjustment = not absorb and xi.combat.damage.calculateDamageAdjustment(target, false, true, false, false) or 1
+    local sdt                         = not absorb and xi.combat.damage.magicalElementSDT(target, spellElement) or 1
     local ecosystemMultiplier         = xi.combat.damage.ecosystemMultiplier(caster, target, 0)
     local criticalDamageMultiplier    = xi.spells.damage.calculateMagicCriticalMultiplier(caster)
     local divineSealMultiplier        = xi.spells.damage.calculateDivineSealMultiplier(caster, target, skillType)
@@ -1172,15 +1170,14 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * helixMeritMultiplier)
     finalDamage = math.floor(finalDamage * areaOfEffectResistance)
     finalDamage = math.floor(finalDamage * actionTypeMultiplier)
-    finalDamage = math.floor(finalDamage * absorbFactor)
 
     -- Handle "Nuke Wall". It must be handled after all previous calculations, but before clamp.
-    local nukeWallFactor = notAbsorb and calculateNukeWallFactor(target, spellElement, finalDamage) or 1
+    local nukeWallFactor = not absorb and calculateNukeWallFactor(target, spellElement, finalDamage) or 1
     finalDamage          = math.floor(finalDamage * nukeWallFactor)
 
     -- Handle Magic Absorb message and HP recovery.
-    if finalDamage < 0 then
-        finalDamage = target:addHP(-finalDamage)
+    if absorb then
+        finalDamage = target:addHP(finalDamage)
         spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)
 
         return finalDamage
