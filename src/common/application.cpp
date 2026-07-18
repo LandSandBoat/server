@@ -31,6 +31,8 @@
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+
+#include <timeapi.h>
 #else // UNIX
 #include <sys/resource.h>
 #include <sys/time.h>
@@ -43,7 +45,10 @@ namespace
 {
 
 #ifdef _WIN32
+constexpr unsigned int kTimerResolutionMs = 1;
+
 unsigned long prevQuickEditMode;
+bool          timerResolutionRaised = false;
 #endif // _WIN32
 
 } // namespace
@@ -61,6 +66,8 @@ Application::Application(const ApplicationConfig& appConfig, int argc, char** ar
     tryDisableQuickEditMode();
     usercheck();
     tryIncreaseRLimits();
+    tryRaiseTimerResolution();
+    tryPreventBackgroundThrottling();
 
     debug::init();
 
@@ -85,6 +92,7 @@ Application::Application(const ApplicationConfig& appConfig, int argc, char** ar
 
 Application::~Application()
 {
+    tryRestoreTimerResolution();
     tryRestoreQuickEditMode();
     logging::ShutDown();
 }
@@ -173,6 +181,54 @@ void Application::tryIncreaseRLimits()
         }
     }
 #endif
+}
+
+void Application::tryRaiseTimerResolution()
+{
+#ifdef _WIN32
+    // Windows' default system timer resolution is ~15.6ms, which coarsely quantises every
+    // sleep and timed wait we make. Ask the OS for the finest resolution (1ms) so our
+    // scheduler ticks and network timing behave predictably.
+    // See: https://devblogs.microsoft.com/go/high-resolution-timers-windows/
+    if (timeBeginPeriod(kTimerResolutionMs) != TIMERR_NOERROR)
+    {
+        std::cerr << fmt::format("Failed to raise the system timer resolution to {}ms; timing may be coarse\n", kTimerResolutionMs);
+        return;
+    }
+
+    timerResolutionRaised = true;
+#endif // _WIN32
+}
+
+void Application::tryRestoreTimerResolution()
+{
+#ifdef _WIN32
+    // Balance timeBeginPeriod with a matching timeEndPeriod on the way out, but only if we
+    // actually raised the resolution.
+    if (timerResolutionRaised)
+    {
+        timeEndPeriod(kTimerResolutionMs);
+        timerResolutionRaised = false;
+    }
+#endif // _WIN32
+}
+
+void Application::tryPreventBackgroundThrottling() const
+{
+#ifdef _WIN32
+    // Since Windows 10, processes that aren't in the foreground can be throttled (EcoQoS),
+    // deprioritising their execution speed even when we've asked for high-resolution timers.
+    // Opt out so the server keeps running at full speed while backgrounded.
+    PROCESS_POWER_THROTTLING_STATE powerThrottling{};
+    powerThrottling.Version     = PROCESS_POWER_THROTTLING_CURRENT_VERSION;
+    powerThrottling.ControlMask = PROCESS_POWER_THROTTLING_EXECUTION_SPEED;
+    powerThrottling.StateMask   = 0; // 0 == throttling disabled for the masked controls
+
+    if (!SetProcessInformation(GetCurrentProcess(), ProcessPowerThrottling, &powerThrottling, sizeof(powerThrottling)))
+    {
+        std::cerr << fmt::format("Failed to opt out of background execution-speed throttling (error {})\n", GetLastError());
+    }
+#endif // _WIN32
 }
 
 void Application::tryDisableQuickEditMode() const

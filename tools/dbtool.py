@@ -1418,6 +1418,53 @@ def validate_yaml_data():
         print_red("YAML validation failed.")
 
 
+def add_windows_defender_exclusions():
+    if platform.system() != "Windows":
+        print_red("Windows Defender exclusions are only applicable on Windows.")
+        return
+
+    # Excluding the whole server directory stops Defender from scanning the thousands of
+    # Lua/data files that are opened during start-up, and excluding the map process stops it
+    # scanning on every file access the process makes. On Windows this is the single biggest
+    # contributor to slow start-up (each CreateFile otherwise triggers a synchronous AV scan).
+    exclusion_path = server_dir_path
+    exclusion_process = f"xi_map{exe}"
+
+    print_red(
+        "This will add Windows Defender exclusions so it stops scanning the server's\n"
+        "files and the map process. This can dramatically reduce server start-up time.\n"
+    )
+    print("The following will be run (requires an Administrator terminal):\n")
+    print(f'  Add-MpPreference -ExclusionPath "{exclusion_path}"')
+    print(f'  Add-MpPreference -ExclusionProcess "{exclusion_process}"\n')
+
+    if input('Type "yes" to continue.\n> ').strip().lower() != "yes":
+        print_red("Aborted.")
+        return
+
+    command = (
+        f'Add-MpPreference -ExclusionPath "{exclusion_path}"; '
+        f'Add-MpPreference -ExclusionProcess "{exclusion_process}"'
+    )
+
+    result = subprocess.run(
+        ["powershell", "-NoProfile", "-Command", command],
+        capture_output=True,
+        text=True,
+    )
+
+    if result.returncode == 0:
+        print_green("Windows Defender exclusions added successfully.")
+    else:
+        print_red("Failed to add Windows Defender exclusions.")
+        print_red(
+            "This usually means dbtool is not running as Administrator.\n"
+            "You can launch Powershell as Administrator and paste in the following commands:\n"
+            f'    Add-MpPreference -ExclusionPath "{exclusion_path}"\n'
+            f'    Add-MpPreference -ExclusionProcess "{exclusion_process}"'
+        )
+
+
 def tasks_menu():
     present_menu(
         "Maintenance Tasks",
@@ -1445,6 +1492,7 @@ def tasks_menu():
             ],
             "d": ["Dump Table", dump_table],
             "a": ["Dump All Tables", dump_all_tables],
+            "w": ["Add Windows Defender exclusions (speeds up start-up)", add_windows_defender_exclusions],
             "q": ["Quit to main menu", NOOP],
         },
     )
