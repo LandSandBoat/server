@@ -41,6 +41,7 @@ zones[xi.zone.BIBIKI_BAY] =
         NO_BILLET                     = 7505, -- You were refused passage for failing to present <item>!
         HAVE_BILLET                   = 7510, -- You cannot buy morrre than one <item>. Use the one you have now to ride the next ship.
         LEFT_BILLET                   = 7515, -- You use your <item>. (<number> trip[/s] remaining)
+        NUM_TICKETS_ADDED_TO_MULTI    = 7517, -- <number> ticket[/s] [was/were] added to your <item>.
         END_BILLET                    = 7516, -- You use up your <item>.
         NOTHING_LEFT_INTEREST         = 7633, -- There is nothing left of interest here.
         SHEN_QM                       = 7634, -- Innumerable shrimp shells are floating in the water here.
