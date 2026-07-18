@@ -3,13 +3,13 @@
 -- Npc: Pot Hatch
 -- !pos 183 0 -581
 -----------------------------------
-local potHatch = require('scripts/zones/Mamool_Ja_Training_Grounds/npcs/Pot_Hatch')
+require('scripts/zones/Mamool_Ja_Training_Grounds/globals/zoneUtil')
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    potHatch.onTrigger(player, npc, 184, -583, 185)
+    xi.zoneUtil.ImperialAgent_PotHatch(player, npc, 184, -583, 185)
 end
 
 return entity
