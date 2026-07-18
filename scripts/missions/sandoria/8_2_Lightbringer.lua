@@ -185,6 +185,8 @@ mission.sections =
                             return mission:messageSpecial(uggalepihID.text.BEGINS_TO_QUIVER, xi.ki.CRYSTAL_DOWSER)
                         end
                     end
+
+                    return mission:messageSpecial(uggalepihID.text.YOU_CANNOT_OPEN_THIS_DOOR)
                 end,
             },
 
@@ -270,6 +272,9 @@ mission.sections =
             {
                 [65] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 6)
+                    player:delKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY1)
+                    player:delKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY2)
+                    player:delKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY3)
                 end,
             },
         },
