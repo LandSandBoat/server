@@ -62,6 +62,7 @@ struct Datagram
     Datagram(const IPP& ipp, ByteSpan bytes)
     : ipp(ipp)
     , length(static_cast<uint16>(std::min<std::size_t>(bytes.size(), kMaxBufferSize)))
+    , data{}
     {
         std::memcpy(data.data(), bytes.data(), length);
     }
@@ -209,7 +210,7 @@ MapSocket::Impl::Impl(Scheduler& scheduler, MapStatistics& mapStatistics, const 
     armReceive();
 
     netThread_ = std::jthread(
-        [this](std::stop_token stopToken)
+        [this](const std::stop_token& stopToken)
         {
             TracySetThreadName("Map Network Thread");
             const auto stopOnRequest = std::stop_callback(
