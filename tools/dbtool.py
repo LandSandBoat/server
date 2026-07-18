@@ -8,6 +8,8 @@ import fileinput
 import shutil
 import importlib
 import pathlib
+import socket
+import urllib.request
 
 import platform
 
@@ -839,18 +841,62 @@ def set_external_ip(ip_str):
     _ = db_query(query)
 
 
-def set_external_ip_dialog():
-    import urllib.request
+def find_local_network_ip():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        # No packets are actually sent; this just picks the interface the
+        # kernel would use to reach an external host.
+        s.connect(("8.8.8.8", 80))
+        return s.getsockname()[0]
+    finally:
+        s.close()
 
-    if input("Make server public-facing? [y/N] ").lower() == "y":
-        external_ip = urllib.request.urlopen("https://ident.me").read().decode("utf8")
-        print_green(f"Detected your public-facing IP as: {external_ip}")
-        if input("Is this correct? [y/N] ").lower() == "y":
-            set_external_ip(external_ip)
-        else:
-            external_ip = input("Please enter your public-facing IP: ")
-            if len(external_ip.strip()) > 0:
-                set_external_ip(external_ip)
+
+def find_public_ip():
+    return urllib.request.urlopen("https://ident.me").read().decode("utf8")
+
+
+def set_local_only_ip():
+    set_external_ip("127.0.0.1")
+
+
+def set_local_network_ip():
+    try:
+        detected_ip = find_local_network_ip()
+    except Exception as e:
+        print_red(f"Could not detect local network IP: {e}")
+        return
+    print_green(f"Detected your local network IP as: {detected_ip}")
+    set_external_ip(detected_ip)
+
+
+def set_public_ip():
+    try:
+        detected_ip = find_public_ip()
+    except Exception as e:
+        print_red(f"Could not detect public IP: {e}")
+        return
+    print_green(f"Detected your public-facing IP as: {detected_ip}")
+    set_external_ip(detected_ip)
+
+
+def set_manual_ip():
+    external_ip = input("Please enter the zone IP: ")
+    if len(external_ip.strip()) > 0:
+        set_external_ip(external_ip.strip())
+
+
+def set_external_ip_dialog():
+    present_menu(
+        "Set Zone IP Addresses",
+        {
+            "1": ["Local only (127.0.0.1)", set_local_only_ip],
+            "2": ["Local network (auto-detect LAN IP)", set_local_network_ip],
+            "3": ["Public IP (via ident.me)", set_public_ip],
+            "m": ["Manual entry", set_manual_ip],
+            "q": ["Quit to tasks menu", NOOP],
+        },
+    )
 
 
 def print_db_tables_by_size():
