@@ -53,13 +53,14 @@ public:
     // Equipment change queue
     void queueEquipChange(CONTAINER_ID container, uint8 containerSlotId, SLOTTYPE equipSlot, CItem* item, Equipping equipping);
     void removeEquipChange(const CItem* item);
+    auto hasEquipChange(const CItem* item) const -> bool;
     void clearEquipChanges();
     auto hasPendingEquipChanges() const -> bool;
     auto pendingEquipChanges() const -> const std::vector<equip_change_t>&;
     auto dirtyContainers() const -> const std::set<CONTAINER_ID>&;
 
     // Dirty item exdata flush
-    void flushDirtyItems(class CCharEntity* PChar);
+    void flushDirtyItems(class CCharEntity* PChar) const;
 
 private:
     xi::bitset<MAX_CONTAINER_ID> syncedContainers_{};
