@@ -404,6 +404,28 @@ xi.moghouse.setMogLockerAccessType = function(player, accessType)
     return accessType
 end
 
+-- Toggles the mog locker access type, scaling the remaining lease time by the ratio of the new to old day/bronze rate.
+xi.moghouse.switchMogLockerAccessType = function(player)
+    local isAllAreas = xi.moghouse.getMogLockerAccessType(player) == xi.moghouse.lockerAccessType.ALLAREAS
+    local oldDays    = isAllAreas and xi.moghouse.MOGLOCKER_ALLAREAS_VALID_DAYS or xi.moghouse.MOGLOCKER_ALZAHBI_VALID_DAYS
+    local newDays    = isAllAreas and xi.moghouse.MOGLOCKER_ALZAHBI_VALID_DAYS or xi.moghouse.MOGLOCKER_ALLAREAS_VALID_DAYS
+    local newType    = isAllAreas and xi.moghouse.lockerAccessType.ALZAHBI or xi.moghouse.lockerAccessType.ALLAREAS
+
+    xi.moghouse.setMogLockerAccessType(player, newType)
+
+    local expiryTs = xi.moghouse.getMogLockerExpiryTimestamp(player)
+    if expiryTs ~= nil and expiryTs ~= -1 then
+        local now       = GetSystemTime() - xi.time.VANADIEL_EPOCH
+        local remaining = expiryTs - now
+        if remaining > 0 then
+            local newExpiry = now + math.floor(remaining * newDays / oldDays)
+            player:setCharVar('mog-locker-expiry-timestamp', newExpiry)
+        end
+    end
+
+    return newType
+end
+
 -- Gets the mog locker access type (all area or alzahbi only). Returns the new access type.
 xi.moghouse.getMogLockerAccessType = function(player)
     return player:getCharVar(xi.moghouse.MOGLOCKER_PLAYERVAR_ACCESS_TYPE)
