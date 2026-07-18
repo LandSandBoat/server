@@ -7,17 +7,13 @@ local warder = {}
 
 local gateDamageSkills =
 {
-    [xi.mobSkill.FIRESPIT]                = 1,
-    [xi.mobSkill.AXE_THROW]               = 4,
-    [xi.mobSkill.STAVE_TOSS]              = 4,
+    [xi.mobSkill.FIRESPIT]   = 1,
+    [xi.mobSkill.AXE_THROW]  = 4,
+    [xi.mobSkill.STAVE_TOSS] = 4,
 }
 
 warder.onMobSpawn = function(mob)
     xi.assault.adjustMobLevel(mob)
-
-    -- The generic weapon_break mixin can remove the visible weapon after a
-    -- critical hit even though no Stave Toss or Axe Throw occurred.
-    mob:setLocalVar('BreakChance', 0)
 end
 
 warder.onMobWeaponSkill = function(mob, target, skill, action)
