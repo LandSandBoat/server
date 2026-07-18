@@ -12484,7 +12484,7 @@ INSERT INTO `mob_groups` VALUES (24,1587,173,'Gigas_Stonegrinder',300,0,988,0,0,
 INSERT INTO `mob_groups` VALUES (25,1563,173,'Gigas_Foreman',300,0,988,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (26,1593,173,'Gigass_Spider',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (27,4831,173,'Thoon',3600,0,3020,3000,0,0,'WOTG');
-INSERT INTO `mob_groups` VALUES (28,2283,173,'Korroloka_Leech',0,128,0,250,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (28,2283,173,'Korroloka_Leech',0,128,0,400,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (29,2748,173,'Morion_Worm',0,128,1739,2100,2100,0,NULL);
 INSERT INTO `mob_groups` VALUES (30,2633,173,'Metallic_Slime',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (31,1642,173,'Goblin_Bounty_Hunter',300,0,1030,0,0,0,NULL);
