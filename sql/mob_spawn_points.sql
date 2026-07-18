@@ -65024,9 +65024,9 @@ INSERT INTO `mob_spawn_points` VALUES (17486183,24,'Gigas_Stonecarrier','Gigas S
 INSERT INTO `mob_spawn_points` VALUES (17486184,24,'Gigas_Stonegrinder','Gigas Stonegrinder',24,35,37,-272.000,-0.500,0.500,127,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17486185,24,'Gigas_Foreman','Gigas Foreman',25,35,37,-198.000,-0.500,0.500,127,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17486186,0,'Gigass_Spider','Gigas\'s Spider',26,28,30,1.000,1.000,1.000,0,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17486187,0,'Korroloka_Leech','Korroloka Leech',28,32,32,-212.000,-9.000,179.000,247,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17486188,0,'Korroloka_Leech','Korroloka Leech',28,32,32,-209.000,-9.000,172.000,246,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17486189,0,'Korroloka_Leech','Korroloka Leech',28,32,32,-215.000,-10.000,167.000,114,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17486187,0,'Korroloka_Leech','Korroloka Leech',28,15,15,-212.000,-9.000,179.000,247,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17486188,0,'Korroloka_Leech','Korroloka Leech',28,15,15,-209.000,-9.000,172.000,246,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17486189,0,'Korroloka_Leech','Korroloka Leech',28,15,15,-215.000,-10.000,167.000,114,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17486190,0,'Morion_Worm','Morion Worm',29,28,28,255.652,-6.039,20.878,0,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17486191,0,'Metallic_Slime','Metallic Slime',30,24,30,0.000,0.000,0.000,0,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17486192,0,'Goblin_Bounty_Hunter','Goblin Bounty Hunter',31,10,10,-48.364,-4.866,106.168,64,NULL,NULL);

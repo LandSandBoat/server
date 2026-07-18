@@ -25,6 +25,7 @@ zones[xi.zone.KORROLOKA_TUNNEL] =
         ENTERED_SPRING                = 7348,  -- The water in this spring is pleasant and tepid. This looks like a nice place to warm yourself up.
         LEFT_SPRING_EARLY             = 7349,  -- You are not warm enough yet. You will need to spend more time than that in the spring to get your body heated up.
         LEFT_SPRING_CLEAN             = 7350,  -- Your whole body is piping hot, and the smell of the Rafflesia pollen is gone!
+        HAIR_STANDS_ON_END            = 7352,  -- The hair on the back of your neck begins to stand on end!
         MORION_WORM_1                 = 7353,  -- It appears to be a hole made by some kind of animal. Fragments of iron ore are scattered around the area...
         FILL_FLASK                    = 7356,  -- You carefully draw the water stored in the clam into <keyitem>.
         STILL_LIGHT                   = 7357,  -- The flask still feels light...
