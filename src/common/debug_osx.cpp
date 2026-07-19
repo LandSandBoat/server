@@ -39,7 +39,11 @@
 
 #include <cpptrace/cpptrace.hpp>
 
+#include <climits>
+#include <crt_externs.h>
+#include <cstdlib>
 #include <cstring>
+#include <mach-o/dyld.h>
 #include <tuple>
 #include <unistd.h>
 
@@ -160,6 +164,36 @@ auto debug::isRunningUnderDebugger() -> bool
 auto debug::isUserRoot() -> bool
 {
     return getuid() == 0 && getgid() == 0;
+}
+
+auto debug::executablePath() -> std::string
+{
+    char     buf[PATH_MAX];
+    uint32_t size = sizeof(buf);
+    if (_NSGetExecutablePath(buf, &size) != 0)
+    {
+        return {};
+    }
+
+    char real[PATH_MAX];
+    return realpath(buf, real) != nullptr ? std::string(real) : std::string(buf);
+}
+
+auto debug::commandLine() -> std::string
+{
+    const int    argc = *_NSGetArgc();
+    char** const argv = *_NSGetArgv();
+
+    std::string out;
+    for (int i = 0; i < argc; ++i)
+    {
+        if (i > 0)
+        {
+            out += ' ';
+        }
+        out += argv[i];
+    }
+    return out;
 }
 
 #endif // __APPLE__

@@ -30,7 +30,10 @@
 
 #include <cpptrace/cpptrace.hpp>
 
+#include <climits>
 #include <cstring>
+#include <fstream>
+#include <iterator>
 #include <tuple>
 #include <unistd.h>
 
@@ -142,6 +145,43 @@ auto debug::isRunningUnderDebugger() -> bool
 auto debug::isUserRoot() -> bool
 {
     return getuid() == 0 && getgid() == 0;
+}
+
+auto debug::executablePath() -> std::string
+{
+    char          buf[PATH_MAX];
+    const ssize_t len = readlink("/proc/self/exe", buf, sizeof(buf) - 1);
+    if (len <= 0)
+    {
+        return {};
+    }
+
+    buf[len] = '\0';
+    return buf;
+}
+
+auto debug::commandLine() -> std::string
+{
+    // /proc/self/cmdline is the argv joined by NUL bytes (with a trailing NUL).
+    std::ifstream file("/proc/self/cmdline", std::ios::binary);
+    if (!file)
+    {
+        return {};
+    }
+
+    std::string raw((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+    for (char& c : raw)
+    {
+        if (c == '\0')
+        {
+            c = ' ';
+        }
+    }
+    while (!raw.empty() && raw.back() == ' ')
+    {
+        raw.pop_back();
+    }
+    return raw;
 }
 
 #endif // __linux__

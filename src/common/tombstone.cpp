@@ -21,6 +21,7 @@
 
 #include "tombstone.h"
 
+#include "debug.h"
 #include "earth_time.h"
 #include "logging.h"
 #include "version.h"
@@ -34,6 +35,7 @@
 #include <cstdio>
 #include <filesystem>
 #include <fstream>
+#include <iterator>
 #include <string_view>
 
 #ifdef _WIN32
@@ -127,27 +129,38 @@ auto build(const Reason& reason, const cpptrace::stacktrace& trace) -> std::stri
     fmt::memory_buffer buf;
     auto               out = std::back_inserter(buf);
 
+    const auto orUnknown = [](auto str) -> std::string
+    {
+        if (!str.empty())
+        {
+            return str;
+        }
+
+        return "<unknown>";
+    };
+
+    const std::string exePath = debug::executablePath();
+    const std::string exeName = !exePath.empty() ? std::filesystem::path(exePath).filename().string() : "";
+    const std::string cmdLine = debug::commandLine();
+
     fmt::format_to(out, "{}\n", kRule);
     fmt::format_to(out, "*** TOMBSTONE ***\n");
     fmt::format_to(out, "{}\n", kRule);
-    fmt::format_to(out, "Reason:        {}\n", reason.kind);
-    if (!reason.detail.empty())
-    {
-        fmt::format_to(out, "Detail:        {}\n", reason.detail);
-    }
+    fmt::format_to(out, "Crash reason:  {}\n", orUnknown(reason.kind));
+    fmt::format_to(out, "Crash detail:  {}\n", orUnknown(reason.detail));
     fmt::format_to(out, "Time of crash: {}\n", localTimestamp());
     fmt::format_to(out, "Process:       pid {}\n", static_cast<long>(xi_getpid()));
     fmt::format_to(out, "Uptime:        {}\n", uptimeString());
-
-    fmt::format_to(out, "{}\n", kThin);
-    fmt::format_to(out, "Build:\n");
-    fmt::format_to(out, "    Git:         {} ({})\n", version::GetGitBranch(), version::GetGitSha());
-    fmt::format_to(out, "    Build type:  {}\n", XI_BUILD_TYPE);
-    fmt::format_to(out, "    Compiler:    {}\n", compilerString());
+    fmt::format_to(out, "Executable:    {}\n", orUnknown(exeName));
+    fmt::format_to(out, "Path:          {}\n", orUnknown(exePath));
+    fmt::format_to(out, "Command line:  {}\n", orUnknown(cmdLine));
+    fmt::format_to(out, "Git:           {} ({})\n", version::GetGitBranch(), version::GetGitSha());
+    fmt::format_to(out, "Build type:    {}\n", XI_BUILD_TYPE);
+    fmt::format_to(out, "Compiler:      {}\n", compilerString());
 #ifdef TRACY_ENABLE
-    fmt::format_to(out, "    Tracy:       enabled\n");
+    fmt::format_to(out, "Tracy:         Enabled\n");
 #else
-    fmt::format_to(out, "    Tracy:       disabled\n");
+    fmt::format_to(out, "Tracy:         Disabled\n");
 #endif
 
     fmt::format_to(out, "{}\n", kThin);
@@ -193,7 +206,7 @@ auto write(const Reason& reason, const cpptrace::stacktrace& trace) -> std::stri
     std::string path;
     try
     {
-        const std::filesystem::path dir = "tombstones";
+        const std::filesystem::path dir = "dmp";
         std::filesystem::create_directories(dir);
 
         path = (dir / fmt::format("tombstone_{}_{}.log", static_cast<long>(xi_getpid()), fileTimestamp())).string();

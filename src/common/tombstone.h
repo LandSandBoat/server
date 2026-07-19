@@ -49,7 +49,7 @@ void markStartTime();
 // Build the annotated tombstone report as a string. Performs no I/O.
 [[nodiscard]] auto build(const Reason& reason, const cpptrace::stacktrace& trace) -> std::string;
 
-// Build and write the report to `tombstones/tombstone_<pid>_<timestamp>.log`, and
+// Build and write the report to `dmp/tombstone_<pid>_<timestamp>.log`, and
 // always mirror the full report to stderr (via fwrite, so it survives even a wedged
 // logging stack). Returns the path written, or an empty string on failure.
 //

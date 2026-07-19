@@ -100,10 +100,10 @@ auto filenameTimestamp() -> std::string
 // only here: cpptrace/the tombstone never have it. Returns the path (empty on error).
 auto writeMiniDump(PEXCEPTION_POINTERS info) -> std::string
 {
-    CreateDirectoryA("tombstones", nullptr);
+    CreateDirectoryA("dmp", nullptr);
 
     char path[MAX_PATH];
-    std::snprintf(path, sizeof(path), "tombstones\\tombstone_%lu_%s.dmp", GetCurrentProcessId(), filenameTimestamp().c_str());
+    std::snprintf(path, sizeof(path), "dmp\\tombstone_%lu_%s.dmp", GetCurrentProcessId(), filenameTimestamp().c_str());
 
     const HANDLE hFile = CreateFileA(path, GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
     if (hFile == INVALID_HANDLE_VALUE)
@@ -169,6 +169,19 @@ auto debug::isUserRoot() -> bool
 {
     // There is no root user on Windows, so we check for admin instead
     return IsUserAnAdmin();
+}
+
+auto debug::executablePath() -> std::string
+{
+    char        buf[MAX_PATH];
+    const DWORD len = GetModuleFileNameA(nullptr, buf, static_cast<DWORD>(sizeof(buf)));
+    return std::string(buf, len);
+}
+
+auto debug::commandLine() -> std::string
+{
+    const char* const cmd = GetCommandLineA();
+    return cmd != nullptr ? std::string(cmd) : std::string{};
 }
 
 #endif // _WIN32

@@ -21,6 +21,8 @@
 
 #pragma once
 
+#include <string>
+
 namespace debug
 {
 
@@ -30,6 +32,12 @@ void init();
 auto isRunningUnderDebugger() -> bool;
 
 auto isUserRoot() -> bool;
+
+// Canonical full path to the running executable (empty on failure). Platform-specific.
+auto executablePath() -> std::string;
+
+// The full invocation - executable plus all arguments (empty on failure). Platform-specific.
+auto commandLine() -> std::string;
 
 // One-shot crash-report guard. Returns true only for the FIRST caller; every later
 // caller gets false.
