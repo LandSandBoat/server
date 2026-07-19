@@ -3420,14 +3420,6 @@ auto GetSkillChainEffect(const CBattleEntity* PDefender, uint8 primary, uint8 se
         return ActionProcSkillChain::None;
     }
 
-    Mod resistanceRankMods[] = { Mod::FIRE_RES_RANK, Mod::ICE_RES_RANK, Mod::WIND_RES_RANK, Mod::EARTH_RES_RANK, Mod::THUNDER_RES_RANK, Mod::ICE_RES_RANK, Mod::LIGHT_RES_RANK, Mod::DARK_RES_RANK };
-
-    // Reset the effects resistance rank mods
-    for (const auto& resistanceRank : resistanceRankMods)
-    {
-        PSCEffect->setMod(resistanceRank, 0);
-    }
-
     if (skillchain != SC_NONE)
     {
         PSCEffect->SetStartTime(timer::now());
@@ -3435,14 +3427,6 @@ auto GetSkillChainEffect(const CBattleEntity* PDefender, uint8 primary, uint8 se
         PSCEffect->SetTier(GetSkillchainTier(skillchain));
         PSCEffect->SetPower(skillchain);
         PSCEffect->SetSubPower(std::min(PSCEffect->GetSubPower() + 1, 5)); // Linked, limited to 5
-
-        // Set new resistance rank modifiers
-        // https://www.bg-wiki.com/ffxi/Resist#Modifying_Resistance_Rank
-        for (auto& element : GetSkillchainMagicElement(skillchain))
-        {
-            const Mod resistanceRankMod = GetResistanceRankModFromElement(element);
-            PSCEffect->setMod(resistanceRankMod, -1);
-        }
 
         return GetSkillchainSubeffect(skillchain);
     }
@@ -3481,22 +3465,6 @@ std::vector<ELEMENT> GetSkillchainMagicElement(SKILLCHAIN_ELEMENT skillchain)
     };
 
     return resonanceToElement.at(skillchain);
-}
-
-Mod GetResistanceRankModFromElement(ELEMENT& element)
-{
-    static const HashMap<ELEMENT, Mod> elementToMod = {
-        { ELEMENT_FIRE, Mod::FIRE_RES_RANK },
-        { ELEMENT_WATER, Mod::WATER_RES_RANK },
-        { ELEMENT_WIND, Mod::WIND_RES_RANK },
-        { ELEMENT_EARTH, Mod::EARTH_RES_RANK },
-        { ELEMENT_THUNDER, Mod::THUNDER_RES_RANK },
-        { ELEMENT_ICE, Mod::ICE_RES_RANK },
-        { ELEMENT_LIGHT, Mod::LIGHT_RES_RANK },
-        { ELEMENT_DARK, Mod::DARK_RES_RANK },
-    };
-
-    return elementToMod.at(element);
 }
 
 auto TakeSkillchainDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 lastSkillDamage, CBattleEntity* taChar) -> int32
