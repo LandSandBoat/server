@@ -2,6 +2,8 @@
 -- Area: Lower Delkfutt's Tower
 --  Mob: Gigas Butcher
 -----------------------------------
+mixins = { require('scripts/mixins/families/gigas_bst') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

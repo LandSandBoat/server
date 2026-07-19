@@ -17,4 +17,8 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.TERROR)
 end
 
+entity.onMobDeath = function(mob, player, optParams)
+    xi.hunts.checkHunt(mob, player, 489)
+end
+
 return entity

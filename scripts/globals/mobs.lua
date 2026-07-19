@@ -753,10 +753,10 @@ xi.mob.callPets = function(mob, petIds, params)
         actionParams =
         {
             finishCategory = params.action.finishCategory or 11,
-            actionID = params.action.messageID or 307,
-            animationID = params.action.animationID or 439,
-            messageID = params.action.messageID or 0,
-            param = params.action.param or 0,
+            actionID       = params.action.messageID or 307,
+            animationID    = params.action.animationID or 439,
+            messageID      = params.action.messageID or 0,
+            param          = params.action.param or 0,
         }
     end
 
@@ -778,10 +778,11 @@ xi.mob.callPets = function(mob, petIds, params)
             end
         end
 
-        local spawnPos = mobArg:getSpawnPos()
-        local pos = mobArg:getPos()
-        params.maxSpawns = params.maxSpawns or #petIds
+        local spawnPos     = mobArg:getSpawnPos()
+        local pos          = mobArg:getPos()
+        params.maxSpawns   = params.maxSpawns or #petIds
         local spawnedCount = 0
+
         for _, petId in ipairs(petIds) do
             local petToSummon = GetMobByID(petId)
             if
