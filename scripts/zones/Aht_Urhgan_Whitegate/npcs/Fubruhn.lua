@@ -83,7 +83,8 @@ entity.onTrigger = function(player, npc)
         if mogLockerExpiryTimestamp == nil then
             -- a nil timestamp means they haven't unlocked it yet. We're going to unlock it by merely talking to this NPC.
             mogLockerExpiryTimestamp = xi.moghouse.unlockMogLocker(player)
-            accessType = xi.moghouse.setMogLockerAccessType(player, xi.moghouse.lockerAccessType.ALLAREAS)
+
+            accessType = xi.moghouse.setMogLockerAccessType(player, xi.moghouse.lockerAccessType.ALZAHBI)
         end
 
         player:startEvent(600, mogLockerExpiryTimestamp, accessType, xi.moghouse.MOGLOCKER_ALZAHBI_VALID_DAYS, player:getContainerSize(xi.inv.MOGLOCKER),
