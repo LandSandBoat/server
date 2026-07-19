@@ -30,7 +30,9 @@
 //   artifact (a core dump on POSIX, a .dmp minidump on Windows).
 //
 
-#include <cpptrace/forward.hpp>
+#include <common/types/maybe.h>
+
+#include <cpptrace/cpptrace.hpp>
 
 #include <string>
 
@@ -39,22 +41,22 @@ namespace tombstone
 
 struct Reason
 {
-    std::string kind;         // short tag, e.g. "SIGSEGV", "unhandled-exception", "watchdog"
-    std::string detail;       // human-readable: signal description, exception what(), etc.
-    std::string dumpLocation; // where the OS core / minidump is (or a hint to find it); empty if none
+    std::string        kind;         // short tag, e.g. "SIGSEGV", "unhandled-exception", "watchdog"
+    Maybe<std::string> detail;       // human-readable: signal description, exception what(), etc.
+    Maybe<std::string> dumpLocation; // where the OS core / minidump is (or a hint to find it)
 };
 
 // Records an approximate process-start time for the "Uptime" field.
 void markStartTime();
 
 // Build the annotated tombstone report as a string. Performs no I/O.
-[[nodiscard]] auto build(const Reason& reason, const cpptrace::stacktrace& trace) -> std::string;
+[[nodiscard]] auto build(const Reason& reason, const cpptrace::stacktrace& trace, const Maybe<cpptrace::stacktrace>& mainThreadTrace = std::nullopt) -> std::string;
 
 // Build and write the report to `dmp/tombstone_<pid>_<timestamp>.log`, and
 // always mirror the full report to stderr (via fwrite, so it survives even a wedged
 // logging stack). Returns the path written, or an empty string on failure.
 //
 // NOTE: This allocates and touches the filesystem, so it is NOT async-signal-safe.
-auto write(const Reason& reason, const cpptrace::stacktrace& trace) -> std::string;
+auto write(const Reason& reason, const cpptrace::stacktrace& trace, const Maybe<cpptrace::stacktrace>& mainThreadTrace = std::nullopt) -> std::string;
 
 } // namespace tombstone

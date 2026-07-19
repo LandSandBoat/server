@@ -21,6 +21,10 @@
 
 #pragma once
 
+#include <common/types/maybe.h>
+
+#include <cpptrace/cpptrace.hpp>
+
 #include <string>
 
 namespace debug
@@ -33,16 +37,19 @@ auto isRunningUnderDebugger() -> bool;
 
 auto isUserRoot() -> bool;
 
-// Canonical full path to the running executable (empty on failure). Platform-specific.
-auto executablePath() -> std::string;
+// The current process id. Platform-specific.
+auto processId() -> int;
 
-// The full invocation - executable plus all arguments (empty on failure). Platform-specific.
-auto commandLine() -> std::string;
+// Canonical full path to the running executable (nullopt on failure). Platform-specific.
+auto executablePath() -> Maybe<std::string>;
 
-// Where the OS core dump can be found, or a hint for retrieving it (empty if none is
-// expected). POSIX only; Windows returns empty since its minidump path is reported
+// The full invocation - executable plus all arguments (nullopt on failure). Platform-specific.
+auto commandLine() -> Maybe<std::string>;
+
+// Where the OS core dump can be found, or a hint for retrieving it (nullopt if none is
+// expected). POSIX only; Windows returns nullopt since its minidump path is reported
 // directly by the crash filter.
-auto coreDumpHint() -> std::string;
+auto coreDumpHint() -> Maybe<std::string>;
 
 // One-shot crash-report guard. Returns true only for the FIRST caller; every later
 // caller gets false.
@@ -51,5 +58,13 @@ auto beginCrashReport() -> bool;
 // Installs a std::terminate handler that writes a tombstone for unhandled C++
 // exceptions. Cross-platform; invoked by each platform's init().
 void installTerminateHandler();
+
+// Records the calling thread as the "main" thread and installs the machinery used to
+// capture its stack from another thread during a crash.
+void registerMainThread();
+
+// Captures the main thread's stack, for a crash that originated on another thread so
+// the tombstone can show what the main thread was doing.
+auto captureMainThreadTrace() -> Maybe<cpptrace::stacktrace>;
 
 } // namespace debug

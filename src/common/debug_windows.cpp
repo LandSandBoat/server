@@ -20,8 +20,8 @@
 */
 
 #ifdef _WIN32
-#include "debug.h"
-#include "tombstone.h"
+#include <common/debug.h>
+#include <common/tombstone.h>
 
 #include <cpptrace/cpptrace.hpp>
 
@@ -36,9 +36,13 @@
 #include <cstdio>
 #include <cstdlib>
 #include <string>
+#include <vector>
 
 namespace
 {
+
+DWORD  mainThreadId     = 0;
+HANDLE mainThreadHandle = nullptr;
 
 // SEH codes that must NOT be treated as crashes: pass them through to their real
 // handlers with EXCEPTION_CONTINUE_SEARCH.
@@ -98,17 +102,17 @@ auto filenameTimestamp() -> std::string
 // Writes a .dmp minidump using the exact fault context. This MUST run inside the SEH
 // filter, because MiniDumpWriteDump needs the EXCEPTION_POINTERS that Windows passes
 // only here: cpptrace/the tombstone never have it. Returns the path (empty on error).
-auto writeMiniDump(PEXCEPTION_POINTERS info) -> std::string
+auto writeMiniDump(PEXCEPTION_POINTERS info) -> Maybe<std::string>
 {
     CreateDirectoryA("dmp", nullptr);
 
     char path[MAX_PATH];
     std::snprintf(path, sizeof(path), "dmp\\tombstone_%lu_%s.dmp", GetCurrentProcessId(), filenameTimestamp().c_str());
 
-    const HANDLE hFile = CreateFileA(path, GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
+    const auto hFile = CreateFileA(path, GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
     if (hFile == INVALID_HANDLE_VALUE)
     {
-        return {};
+        return std::nullopt;
     }
 
     MINIDUMP_EXCEPTION_INFORMATION mei{};
@@ -116,16 +120,21 @@ auto writeMiniDump(PEXCEPTION_POINTERS info) -> std::string
     mei.ExceptionPointers = info;
     mei.ClientPointers    = FALSE;
 
-    const BOOL ok = MiniDumpWriteDump(
+    const auto ok = MiniDumpWriteDump(
         GetCurrentProcess(), GetCurrentProcessId(), hFile, MiniDumpNormal, &mei, nullptr, nullptr);
 
     CloseHandle(hFile);
-    return ok ? std::string(path) : std::string();
+    if (!ok)
+    {
+        return std::nullopt;
+    }
+
+    return std::string(path);
 }
 
 LONG WINAPI unhandledExceptionFilter(PEXCEPTION_POINTERS info)
 {
-    const DWORD code = info->ExceptionRecord->ExceptionCode;
+    const auto code = info->ExceptionRecord->ExceptionCode;
 
     if (isNonFatalException(code))
     {
@@ -134,11 +143,16 @@ LONG WINAPI unhandledExceptionFilter(PEXCEPTION_POINTERS info)
 
     if (debug::beginCrashReport())
     {
-        const std::string dumpPath = writeMiniDump(info);
+        // Write the minidump first (it snapshots all threads), then capture the main
+        // thread's stack for the tombstone (nullopt when the fault is on the main thread).
+        const auto dumpPath  = writeMiniDump(info);
+        const auto mainTrace = debug::captureMainThreadTrace();
 
         // The filter runs on the faulting thread's stack, so an ordinary unwind here
         // includes the fault frames (unlike a POSIX signal handler on an alt stack).
-        tombstone::write({ .kind = exceptionName(code), .detail = "", .dumpLocation = dumpPath }, cpptrace::generate_trace());
+        tombstone::write({ .kind = exceptionName(code), .dumpLocation = dumpPath },
+                         cpptrace::generate_trace(),
+                         mainTrace);
     }
 
     // We've captured everything we need; terminate the process without the WER dialog.
@@ -149,6 +163,8 @@ LONG WINAPI unhandledExceptionFilter(PEXCEPTION_POINTERS info)
 
 void debug::init()
 {
+    debug::registerMainThread();
+
     SetUnhandledExceptionFilter(unhandledExceptionFilter);
 
     // Keep a headless server from blocking on the CRT abort() dialog (the terminate
@@ -170,24 +186,107 @@ auto debug::isUserRoot() -> bool
     return IsUserAnAdmin();
 }
 
-auto debug::executablePath() -> std::string
+auto debug::processId() -> int
 {
-    char        buf[MAX_PATH];
-    const DWORD len = GetModuleFileNameA(nullptr, buf, static_cast<DWORD>(sizeof(buf)));
+    return static_cast<int>(GetCurrentProcessId());
+}
+
+auto debug::executablePath() -> Maybe<std::string>
+{
+    char       buf[MAX_PATH];
+    const auto len = GetModuleFileNameA(nullptr, buf, static_cast<DWORD>(sizeof(buf)));
+    if (len == 0)
+    {
+        return std::nullopt;
+    }
+
     return std::string(buf, len);
 }
 
-auto debug::commandLine() -> std::string
+auto debug::commandLine() -> Maybe<std::string>
 {
-    const char* const cmd = GetCommandLineA();
-    return cmd != nullptr ? std::string(cmd) : std::string{};
+    const auto cmd = GetCommandLineA();
+    if (cmd == nullptr)
+    {
+        return std::nullopt;
+    }
+
+    return std::string(cmd);
 }
 
-auto debug::coreDumpHint() -> std::string
+auto debug::coreDumpHint() -> Maybe<std::string>
 {
     // Windows has no core dump; the minidump is written by the SEH filter and its path
     // is reported directly (see unhandledExceptionFilter).
-    return {};
+    return std::nullopt;
+}
+
+void debug::registerMainThread()
+{
+    mainThreadId = GetCurrentThreadId();
+
+    // GetCurrentThread() is a pseudo-handle only valid on this thread; duplicate it into
+    // a real handle another thread can suspend/inspect during a crash.
+    DuplicateHandle(GetCurrentProcess(), GetCurrentThread(), GetCurrentProcess(), &mainThreadHandle, 0, FALSE, DUPLICATE_SAME_ACCESS);
+}
+
+auto debug::captureMainThreadTrace() -> Maybe<cpptrace::stacktrace>
+{
+    if (mainThreadHandle == nullptr || GetCurrentThreadId() == mainThreadId)
+    {
+        return std::nullopt;
+    }
+
+    if (SuspendThread(mainThreadHandle) == static_cast<DWORD>(-1))
+    {
+        return std::nullopt;
+    }
+
+    std::vector<cpptrace::frame_ptr> frames;
+
+    CONTEXT ctx{};
+    ctx.ContextFlags = CONTEXT_FULL;
+    if (GetThreadContext(mainThreadHandle, &ctx))
+    {
+        STACKFRAME64 sf{};
+        sf.AddrPC.Mode    = AddrModeFlat;
+        sf.AddrFrame.Mode = AddrModeFlat;
+        sf.AddrStack.Mode = AddrModeFlat;
+#if defined(_M_ARM64)
+        const auto machine  = IMAGE_FILE_MACHINE_ARM64;
+        sf.AddrPC.Offset    = ctx.Pc;
+        sf.AddrFrame.Offset = ctx.Fp;
+        sf.AddrStack.Offset = ctx.Sp;
+#else // _M_X64
+        const auto machine  = IMAGE_FILE_MACHINE_AMD64;
+        sf.AddrPC.Offset    = ctx.Rip;
+        sf.AddrFrame.Offset = ctx.Rbp;
+        sf.AddrStack.Offset = ctx.Rsp;
+#endif
+        const auto process = GetCurrentProcess();
+        for (int i = 0; i < 256; ++i)
+        {
+            if (!StackWalk64(machine, process, mainThreadHandle, &sf, &ctx, nullptr, SymFunctionTableAccess64, SymGetModuleBase64, nullptr) ||
+                sf.AddrPC.Offset == 0)
+            {
+                break;
+            }
+            frames.push_back(static_cast<cpptrace::frame_ptr>(sf.AddrPC.Offset));
+        }
+    }
+
+    ResumeThread(mainThreadHandle);
+
+    cpptrace::raw_trace raw;
+    raw.frames = std::move(frames);
+
+    const auto stack = raw.resolve();
+    if (stack.empty())
+    {
+        return std::nullopt;
+    }
+
+    return stack;
 }
 
 #endif // _WIN32

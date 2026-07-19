@@ -25,15 +25,18 @@
 #include <sys/resource.h>
 #include <sys/types.h>
 
-#include "debug.h"
-#include "tombstone.h"
+#include <common/debug.h>
+#include <common/tombstone.h>
 
 #include <cpptrace/cpptrace.hpp>
 
+#include <atomic>
 #include <climits>
 #include <cstring>
+#include <ctime>
 #include <fstream>
 #include <iterator>
+#include <pthread.h>
 #include <tuple>
 #include <unistd.h>
 
@@ -41,6 +44,19 @@ namespace
 {
 
 constexpr std::size_t kMaxFrames = 128;
+
+// State for capturing the main thread's stack from another thread on request.
+pthread_t           mainThread{};
+std::atomic<bool>   mainThreadRegistered{ false };
+std::atomic<bool>   mainStackCaptured{ false };
+cpptrace::raw_trace mainThreadRaw; // written by captureMainStackHandler, read after mainStackCaptured
+
+// Runs on the main thread when it receives SIGUSR2 from captureMainThreadTrace().
+void captureMainStackHandler(int)
+{
+    mainThreadRaw = cpptrace::generate_raw_trace();
+    mainStackCaptured.store(true, std::memory_order_release);
+}
 
 constexpr auto signalName(int sig) -> const char*
 {
@@ -63,8 +79,8 @@ void crashSignalHandler(int sig)
 {
     if (debug::beginCrashReport())
     {
-        const char* msg = "Crash detected, writing tombstone...\n";
-        std::ignore     = write(STDERR_FILENO, msg, std::strlen(msg));
+        const auto msg = "Crash detected, writing tombstone...\n";
+        std::ignore    = write(STDERR_FILENO, msg, std::strlen(msg));
 
         cpptrace::stacktrace trace;
 
@@ -73,7 +89,7 @@ void crashSignalHandler(int sig)
         if (cpptrace::can_signal_safe_unwind())
         {
             cpptrace::frame_ptr buffer[kMaxFrames];
-            const std::size_t   count = cpptrace::safe_generate_raw_trace(buffer, kMaxFrames);
+            const auto          count = cpptrace::safe_generate_raw_trace(buffer, kMaxFrames);
 
             cpptrace::raw_trace raw;
             raw.frames.assign(buffer, buffer + count);
@@ -89,7 +105,11 @@ void crashSignalHandler(int sig)
             trace = cpptrace::generate_trace();
         }
 
-        tombstone::write({ .kind = signalName(sig), .detail = "", .dumpLocation = debug::coreDumpHint() }, trace);
+        // captureMainThreadTrace() grabs the main thread's stack when the crash is off
+        // the main thread (nullopt otherwise, so no second stack is printed).
+        tombstone::write({ .kind = signalName(sig), .dumpLocation = debug::coreDumpHint() },
+                         trace,
+                         debug::captureMainThreadTrace());
     }
 
     // Restore the default handler and re-raise so the OS can dump a core file.
@@ -101,6 +121,8 @@ void crashSignalHandler(int sig)
 
 void debug::init()
 {
+    debug::registerMainThread();
+
     rlimit core_limits{};
     core_limits.rlim_cur = core_limits.rlim_max = RLIM_INFINITY;
     setrlimit(RLIMIT_CORE, &core_limits);
@@ -147,26 +169,31 @@ auto debug::isUserRoot() -> bool
     return getuid() == 0 && getgid() == 0;
 }
 
-auto debug::executablePath() -> std::string
+auto debug::processId() -> int
 {
-    char          buf[PATH_MAX];
-    const ssize_t len = readlink("/proc/self/exe", buf, sizeof(buf) - 1);
+    return getpid();
+}
+
+auto debug::executablePath() -> Maybe<std::string>
+{
+    char       buf[PATH_MAX];
+    const auto len = readlink("/proc/self/exe", buf, sizeof(buf) - 1);
     if (len <= 0)
     {
-        return {};
+        return std::nullopt;
     }
 
     buf[len] = '\0';
-    return buf;
+    return std::string(buf);
 }
 
-auto debug::commandLine() -> std::string
+auto debug::commandLine() -> Maybe<std::string>
 {
     // /proc/self/cmdline is the argv joined by NUL bytes (with a trailing NUL).
     std::ifstream file("/proc/self/cmdline", std::ios::binary);
     if (!file)
     {
-        return {};
+        return std::nullopt;
     }
 
     std::string raw((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
@@ -181,10 +208,16 @@ auto debug::commandLine() -> std::string
     {
         raw.pop_back();
     }
+
+    if (raw.empty())
+    {
+        return std::nullopt;
+    }
+
     return raw;
 }
 
-auto debug::coreDumpHint() -> std::string
+auto debug::coreDumpHint() -> Maybe<std::string>
 {
     std::ifstream file("/proc/sys/kernel/core_pattern");
     std::string   pattern;
@@ -195,7 +228,7 @@ auto debug::coreDumpHint() -> std::string
 
     if (pattern.empty())
     {
-        return {};
+        return std::nullopt;
     }
 
     // A leading '|' means the core is piped to a userspace handler rather than written
@@ -210,6 +243,50 @@ auto debug::coreDumpHint() -> std::string
     }
 
     return "core_pattern: " + pattern + " (relative paths land in the server's working directory)";
+}
+
+void debug::registerMainThread()
+{
+    mainThread = pthread_self();
+    std::signal(SIGUSR2, captureMainStackHandler);
+    mainThreadRegistered.store(true, std::memory_order_release);
+}
+
+auto debug::captureMainThreadTrace() -> Maybe<cpptrace::stacktrace>
+{
+    if (!mainThreadRegistered.load(std::memory_order_acquire) ||
+        pthread_equal(pthread_self(), mainThread))
+    {
+        return std::nullopt;
+    }
+
+    // Ask the main thread to capture its own stack (captureMainStackHandler), then wait
+    // a bounded time for it. If it never responds (signals blocked, wedged in the kernel)
+    // we give up rather than hang the crash path.
+    mainStackCaptured.store(false, std::memory_order_release);
+    if (pthread_kill(mainThread, SIGUSR2) != 0)
+    {
+        return std::nullopt;
+    }
+
+    for (int i = 0; i < 1000 && !mainStackCaptured.load(std::memory_order_acquire); ++i)
+    {
+        timespec ts{ .tv_sec = 0, .tv_nsec = 1'000'000 }; // 1ms, up to ~1s total
+        nanosleep(&ts, nullptr);
+    }
+
+    if (!mainStackCaptured.load(std::memory_order_acquire))
+    {
+        return std::nullopt;
+    }
+
+    const auto stack = mainThreadRaw.resolve();
+    if (stack.empty())
+    {
+        return std::nullopt;
+    }
+
+    return stack;
 }
 
 #endif // __linux__

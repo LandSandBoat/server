@@ -19,9 +19,9 @@
 ===========================================================================
 */
 
-#include "debug.h"
+#include <common/debug.h>
 
-#include "tombstone.h"
+#include <common/tombstone.h>
 
 #include <cpptrace/cpptrace.hpp>
 
@@ -35,7 +35,7 @@
 namespace
 {
 
-std::atomic<bool> g_crashReported{ false };
+std::atomic<bool> crashReported{ false };
 
 [[noreturn]] void terminateHandler()
 {
@@ -43,7 +43,7 @@ std::atomic<bool> g_crashReported{ false };
     // SIGABRT, and that handler will see the guard already set and just dump core.
     if (debug::beginCrashReport())
     {
-        tombstone::Reason reason{ .kind = "unhandled-exception", .detail = "terminate called without an active exception", .dumpLocation = debug::coreDumpHint() };
+        auto reason = tombstone::Reason{ .kind = "unhandled-exception", .detail = "terminate called without an active exception", .dumpLocation = debug::coreDumpHint() };
 
         if (const auto eptr = std::current_exception())
         {
@@ -61,10 +61,11 @@ std::atomic<bool> g_crashReported{ false };
             }
         }
 
-        // For a genuinely uncaught exception the stack is typically not unwound yet,
-        // so this trace is close to the throw site. This is not a signal context, so
-        // full symbolization (which may spawn atos/addr2line) is safe here.
-        tombstone::write(reason, cpptrace::generate_trace());
+        // For a genuinely uncaught exception the stack is typically not unwound yet, so
+        // this trace is close to the throw site. captureMainThreadTrace() adds the main
+        // thread's stack when the throw escaped a worker (nullopt otherwise). Not a signal
+        // context, so full symbolization (which may spawn atos/addr2line) is safe here.
+        tombstone::write(reason, cpptrace::generate_trace(), debug::captureMainThreadTrace());
     }
 
     std::abort();
@@ -74,8 +75,8 @@ std::atomic<bool> g_crashReported{ false };
 
 auto debug::beginCrashReport() -> bool
 {
-    bool expected = false;
-    return g_crashReported.compare_exchange_strong(expected, true);
+    auto expected = false;
+    return crashReported.compare_exchange_strong(expected, true);
 }
 
 void debug::installTerminateHandler()

@@ -19,14 +19,16 @@
 ===========================================================================
 */
 
-#include "tombstone.h"
+#include <common/tombstone.h>
 
-#include "debug.h"
-#include "earth_time.h"
-#include "logging.h"
-#include "version.h"
+#include <common/debug.h>
+#include <common/earth_time.h>
+#include <common/logging.h>
+#include <common/macros.h>
+#include <common/version.h>
 
 #include <cpptrace/cpptrace.hpp>
+#include <cpptrace/formatting.hpp>
 
 #include <fmt/chrono.h>
 #include <fmt/format.h>
@@ -38,25 +40,10 @@
 #include <iterator>
 #include <string_view>
 
-#ifdef _WIN32
-#include <process.h>
-#define xi_getpid _getpid
-#else
-#include <unistd.h>
-#define xi_getpid getpid
-#endif
-
-#ifndef XI_BUILD_TYPE
-#define XI_BUILD_TYPE "unknown"
-#endif
-
-#define XI_TOMBSTONE_STRINGIFY2(x) #x
-#define XI_TOMBSTONE_STRINGIFY(x)  XI_TOMBSTONE_STRINGIFY2(x)
-
 namespace
 {
 
-std::chrono::steady_clock::time_point g_processStart = std::chrono::steady_clock::now();
+auto processStart = std::chrono::steady_clock::now();
 
 auto localTimestamp() -> std::string
 {
@@ -72,7 +59,7 @@ auto fileTimestamp() -> std::string
 
 auto uptimeString() -> std::string
 {
-    const auto elapsed = std::chrono::steady_clock::now() - g_processStart;
+    const auto elapsed = std::chrono::steady_clock::now() - processStart;
     const auto secs    = std::chrono::duration_cast<std::chrono::seconds>(elapsed).count();
     return fmt::format("{}h {}m {}s", secs / 3600, (secs % 3600) / 60, secs % 60);
 }
@@ -80,21 +67,35 @@ auto uptimeString() -> std::string
 constexpr auto compilerString() -> const char*
 {
 #if defined(__clang__)
-    return "clang " __clang_version__;
+    return "Clang " __clang_version__;
 #elif defined(__GNUC__)
-    return "gcc " XI_TOMBSTONE_STRINGIFY(__GNUC__) "." XI_TOMBSTONE_STRINGIFY(__GNUC_MINOR__) "." XI_TOMBSTONE_STRINGIFY(__GNUC_PATCHLEVEL__);
+    return "GCC " XI_STRINGIFY(__GNUC__) "." XI_STRINGIFY(__GNUC_MINOR__) "." XI_STRINGIFY(__GNUC_PATCHLEVEL__);
 #elif defined(_MSC_VER)
-    return "msvc " XI_TOMBSTONE_STRINGIFY(_MSC_VER);
+    return "MSVC " XI_STRINGIFY(_MSC_VER);
 #else
-    return "unknown compiler";
+    return "Unknown";
 #endif
+}
+
+// Formats stack frames as "#N <address> in <symbol>", dropping the source location:
+// on a stripped / dSYM-less build cpptrace falls back to printing the binary path on
+// every frame, which is just noise. The symbol + address is the useful part.
+auto traceFormatter() -> const cpptrace::formatter&
+{
+    static const auto formatter = cpptrace::formatter{}.header("").transform(
+        [](cpptrace::stacktrace_frame frame)
+        {
+            frame.filename.clear();
+            return frame;
+        });
+    return formatter;
 }
 
 // Appends `text` to `buf` with every line prefixed by `indent`.
 void appendIndented(fmt::memory_buffer& buf, const std::string& text, std::string_view indent)
 {
-    auto out         = std::back_inserter(buf);
-    bool atLineStart = true;
+    const auto out         = std::back_inserter(buf);
+    bool       atLineStart = true;
     for (const char c : text)
     {
         if (atLineStart && c != '\n')
@@ -104,6 +105,7 @@ void appendIndented(fmt::memory_buffer& buf, const std::string& text, std::strin
         fmt::format_to(out, "{}", c);
         atLineStart = (c == '\n');
     }
+
     if (!text.empty() && text.back() != '\n')
     {
         fmt::format_to(out, "\n");
@@ -121,40 +123,35 @@ namespace tombstone
 
 void markStartTime()
 {
-    g_processStart = std::chrono::steady_clock::now();
+    processStart = std::chrono::steady_clock::now();
 }
 
-auto build(const Reason& reason, const cpptrace::stacktrace& trace) -> std::string
+auto build(const Reason& reason, const cpptrace::stacktrace& trace, const Maybe<cpptrace::stacktrace>& mainThreadTrace) -> std::string
 {
     fmt::memory_buffer buf;
-    auto               out = std::back_inserter(buf);
+    const auto         out = std::back_inserter(buf);
 
-    const auto orUnknown = [](auto str) -> std::string
+    const auto exePath = debug::executablePath();
+    const auto cmdLine = debug::commandLine();
+
+    Maybe<std::string> exeName;
+    if (exePath)
     {
-        if (!str.empty())
-        {
-            return str;
-        }
-
-        return "<unknown>";
-    };
-
-    const std::string exePath = debug::executablePath();
-    const std::string exeName = !exePath.empty() ? std::filesystem::path(exePath).filename().string() : "";
-    const std::string cmdLine = debug::commandLine();
+        exeName = std::filesystem::path(*exePath).filename().string();
+    }
 
     fmt::format_to(out, "{}\n", kRule);
     fmt::format_to(out, "*** TOMBSTONE ***\n");
     fmt::format_to(out, "{}\n", kRule);
-    fmt::format_to(out, "Crash reason:  {}\n", orUnknown(reason.kind));
-    fmt::format_to(out, "Crash detail:  {}\n", orUnknown(reason.detail));
-    fmt::format_to(out, "Crash dump:    {}\n", reason.dumpLocation.empty() ? "none" : reason.dumpLocation.c_str());
+    fmt::format_to(out, "Crash reason:  {}\n", reason.kind);
+    fmt::format_to(out, "Crash detail:  {}\n", reason.detail.value_or("<unknown>"));
+    fmt::format_to(out, "Crash dump:    {}\n", reason.dumpLocation.value_or("none"));
     fmt::format_to(out, "Time of crash: {}\n", localTimestamp());
-    fmt::format_to(out, "Process:       pid {}\n", static_cast<long>(xi_getpid()));
+    fmt::format_to(out, "Process:       pid {}\n", debug::processId());
     fmt::format_to(out, "Uptime:        {}\n", uptimeString());
-    fmt::format_to(out, "Executable:    {}\n", orUnknown(exeName));
-    fmt::format_to(out, "Path:          {}\n", orUnknown(exePath));
-    fmt::format_to(out, "Command line:  {}\n", orUnknown(cmdLine));
+    fmt::format_to(out, "Executable:    {}\n", exeName.value_or("<unknown>"));
+    fmt::format_to(out, "Path:          {}\n", exePath.value_or("<unknown>"));
+    fmt::format_to(out, "Command line:  {}\n", cmdLine.value_or("<unknown>"));
     fmt::format_to(out, "Git:           {} ({})\n", version::GetGitBranch(), version::GetGitSha());
     fmt::format_to(out, "Build type:    {}\n", XI_BUILD_TYPE);
     fmt::format_to(out, "Compiler:      {}\n", compilerString());
@@ -180,14 +177,29 @@ auto build(const Reason& reason, const cpptrace::stacktrace& trace) -> std::stri
     }
 
     fmt::format_to(out, "{}\n", kThin);
-    fmt::format_to(out, "Stack trace:\n");
+    if (mainThreadTrace)
+    {
+        fmt::format_to(out, "Stack trace (crashing thread):\n");
+    }
+    else
+    {
+        fmt::format_to(out, "Stack trace:\n");
+    }
+
     if (trace.empty())
     {
         fmt::format_to(out, "{}<no frames captured>\n", kIndent);
     }
     else
     {
-        appendIndented(buf, trace.to_string(/*color=*/false), kIndent);
+        appendIndented(buf, traceFormatter().format(trace), kIndent);
+    }
+
+    if (mainThreadTrace)
+    {
+        fmt::format_to(out, "{}\n", kThin);
+        fmt::format_to(out, "Stack trace (main thread):\n");
+        appendIndented(buf, traceFormatter().format(*mainThreadTrace), kIndent);
     }
 
     fmt::format_to(out, "{}\n", kRule);
@@ -195,9 +207,9 @@ auto build(const Reason& reason, const cpptrace::stacktrace& trace) -> std::stri
     return fmt::to_string(buf);
 }
 
-auto write(const Reason& reason, const cpptrace::stacktrace& trace) -> std::string
+auto write(const Reason& reason, const cpptrace::stacktrace& trace, const Maybe<cpptrace::stacktrace>& mainThreadTrace) -> std::string
 {
-    const std::string report = build(reason, trace);
+    const auto report = build(reason, trace, mainThreadTrace);
 
     // Always surface the full report on stderr. fwrite is far more robust than the
     // logging stack in a crashing/handler context (and doesn't touch spdlog).
@@ -207,12 +219,12 @@ auto write(const Reason& reason, const cpptrace::stacktrace& trace) -> std::stri
     std::string path;
     try
     {
-        const std::filesystem::path dir = "dmp";
+        const auto dir = std::filesystem::path("dmp");
         std::filesystem::create_directories(dir);
 
-        path = (dir / fmt::format("tombstone_{}_{}.log", static_cast<long>(xi_getpid()), fileTimestamp())).string();
+        path = (dir / fmt::format("tombstone_{}_{}.log", debug::processId(), fileTimestamp())).string();
 
-        std::ofstream file(path, std::ios::out | std::ios::trunc);
+        auto file = std::ofstream(path, std::ios::out | std::ios::trunc);
         if (!file)
         {
             return {};

@@ -25,6 +25,7 @@
 #include <sys/resource.h>
 #include <sys/sysctl.h>
 #include <sys/types.h>
+#include <sys/ucontext.h>
 
 #ifndef PTRACE_TRACEME
 #define PTRACE_TRACEME 0
@@ -34,23 +35,83 @@
 #define PTRACE_DETACH 17
 #endif // PTRACE_DETACH
 
-#include "debug.h"
-#include "tombstone.h"
+#include <common/debug.h>
+#include <common/tombstone.h>
 
 #include <cpptrace/cpptrace.hpp>
 
+#include <atomic>
 #include <climits>
 #include <crt_externs.h>
+#include <cstdint>
 #include <cstdlib>
 #include <cstring>
+#include <ctime>
 #include <mach-o/dyld.h>
+#include <pthread.h>
 #include <tuple>
 #include <unistd.h>
+#include <vector>
 
 namespace
 {
 
 constexpr std::size_t kMaxFrames = 128;
+
+// State for capturing the main thread's stack from another thread on request.
+pthread_t           mainThread{};
+std::atomic<bool>   mainThreadRegistered{ false };
+std::atomic<bool>   mainStackCaptured{ false };
+cpptrace::raw_trace mainThreadRaw; // written by captureMainStackHandler, read after mainStackCaptured
+
+// Walks frame pointers from a signal's ucontext to recover the interrupted thread's real
+// stack. macOS's unwinder cannot cross the signal trampoline (an ordinary unwind from a
+// handler misses the leaf frames and shows handler noise), but frame pointers are always
+// present here, so this gives the true stack starting at the interrupted instruction.
+auto framesFromContext(void* ucontextRaw) -> std::vector<cpptrace::frame_ptr>
+{
+    std::vector<cpptrace::frame_ptr> frames;
+
+    const auto uc = static_cast<const ucontext_t*>(ucontextRaw);
+    if (uc == nullptr)
+    {
+        return frames;
+    }
+
+    const auto& ss = uc->uc_mcontext->__ss;
+#if defined(__arm64__) || defined(__aarch64__)
+    auto fp = static_cast<std::uintptr_t>(ss.__fp);
+    frames.push_back(static_cast<std::uintptr_t>(ss.__pc));
+#else // __x86_64__
+    auto fp = static_cast<std::uintptr_t>(ss.__rbp);
+    frames.push_back(static_cast<std::uintptr_t>(ss.__rip));
+#endif
+
+    for (std::size_t i = 0; i < kMaxFrames && fp != 0; ++i)
+    {
+        const auto record = reinterpret_cast<const std::uintptr_t*>(fp);
+        const auto nextFp = record[0];
+        const auto ret    = record[1];
+        if (ret == 0)
+        {
+            break;
+        }
+        frames.push_back(ret);
+        if (nextFp <= fp) // guard against a corrupt / non-monotonic chain
+        {
+            break;
+        }
+        fp = nextFp;
+    }
+    return frames;
+}
+
+// Runs on the main thread when it receives SIGUSR2 from captureMainThreadTrace().
+void captureMainStackHandler(int, siginfo_t*, void* ucontext)
+{
+    mainThreadRaw.frames = framesFromContext(ucontext);
+    mainStackCaptured.store(true, std::memory_order_release);
+}
 
 constexpr auto signalName(int sig) -> const char*
 {
@@ -69,38 +130,31 @@ constexpr auto signalName(int sig) -> const char*
     }
 }
 
-void crashSignalHandler(int sig)
+void crashSignalHandler(int sig, siginfo_t*, void* ucontext)
 {
     if (debug::beginCrashReport())
     {
-        const char* msg = "Crash detected, writing tombstone...\n";
-        std::ignore     = write(STDERR_FILENO, msg, std::strlen(msg));
+        const auto msg = "Crash detected, writing tombstone...\n";
+        std::ignore    = write(STDERR_FILENO, msg, std::strlen(msg));
 
-        cpptrace::stacktrace trace;
+        // Unwind from the signal ucontext (frame-pointer walk) so we get the real fault
+        // frame rather than this handler and the trampoline. Symbolization here is NOT
+        // async-signal-safe (it allocates and may spawn atos), but the process is already
+        // terminating. Fall back to an ordinary unwind if the frame walk comes up empty.
+        cpptrace::raw_trace raw;
+        raw.frames = framesFromContext(ucontext);
 
-        // Prefer the signal-safe unwind (capture raw return addresses without
-        // allocating) where the platform supports it. macOS/arm64 currently does
-        // not (can_signal_safe_unwind() == false), so this yields nothing there.
-        if (cpptrace::can_signal_safe_unwind())
-        {
-            cpptrace::frame_ptr buffer[kMaxFrames];
-            const std::size_t   count = cpptrace::safe_generate_raw_trace(buffer, kMaxFrames);
-
-            cpptrace::raw_trace raw;
-            raw.frames.assign(buffer, buffer + count);
-            trace = raw.resolve();
-        }
-
-        // Fallback: a best-effort ordinary unwind. This is NOT async-signal-safe (it
-        // allocates, and the addr2line backend may spawn atos), but the process is
-        // already terminating. On platforms without signal-safe unwind it is the only
-        // way to get any stack at all.
+        auto trace = raw.resolve();
         if (trace.empty())
         {
             trace = cpptrace::generate_trace();
         }
 
-        tombstone::write({ .kind = signalName(sig), .detail = "", .dumpLocation = debug::coreDumpHint() }, trace);
+        // captureMainThreadTrace() grabs the main thread's stack when the crash is off
+        // the main thread (nullopt otherwise, so no second stack is printed).
+        tombstone::write({ .kind = signalName(sig), .dumpLocation = debug::coreDumpHint() },
+                         trace,
+                         debug::captureMainThreadTrace());
     }
 
     // Restore the default handler and re-raise so the OS can dump a core file.
@@ -112,15 +166,23 @@ void crashSignalHandler(int sig)
 
 void debug::init()
 {
+    debug::registerMainThread();
+
     rlimit core_limits{};
     core_limits.rlim_cur = core_limits.rlim_max = RLIM_INFINITY;
     setrlimit(RLIMIT_CORE, &core_limits);
 
-    // Fatal signals we turn into a tombstone (then re-raise for a core dump).
-    std::signal(SIGABRT, crashSignalHandler);
-    std::signal(SIGSEGV, crashSignalHandler);
-    std::signal(SIGFPE, crashSignalHandler);
-    std::signal(SIGXFSZ, crashSignalHandler);
+    // Fatal signals we turn into a tombstone (then re-raise for a core dump). SA_SIGINFO
+    // hands the handler the ucontext, so we can unwind the actual fault stack across the
+    // signal trampoline.
+    struct sigaction action{};
+    action.sa_sigaction = crashSignalHandler;
+    action.sa_flags     = SA_SIGINFO;
+    sigemptyset(&action.sa_mask);
+    sigaction(SIGABRT, &action, nullptr);
+    sigaction(SIGSEGV, &action, nullptr);
+    sigaction(SIGFPE, &action, nullptr);
+    sigaction(SIGXFSZ, &action, nullptr);
 
     // Pass these onto the default handler.
     std::signal(SIGILL, SIG_DFL);
@@ -166,23 +228,36 @@ auto debug::isUserRoot() -> bool
     return getuid() == 0 && getgid() == 0;
 }
 
-auto debug::executablePath() -> std::string
+auto debug::processId() -> int
+{
+    return getpid();
+}
+
+auto debug::executablePath() -> Maybe<std::string>
 {
     char     buf[PATH_MAX];
     uint32_t size = sizeof(buf);
     if (_NSGetExecutablePath(buf, &size) != 0)
     {
-        return {};
+        return std::nullopt;
     }
 
     char real[PATH_MAX];
-    return realpath(buf, real) != nullptr ? std::string(real) : std::string(buf);
+    if (realpath(buf, real) != nullptr)
+    {
+        return std::string(real);
+    }
+    return std::string(buf);
 }
 
-auto debug::commandLine() -> std::string
+auto debug::commandLine() -> Maybe<std::string>
 {
-    const int    argc = *_NSGetArgc();
-    char** const argv = *_NSGetArgv();
+    const auto argc = *_NSGetArgc();
+    const auto argv = *_NSGetArgv();
+    if (argc <= 0)
+    {
+        return std::nullopt;
+    }
 
     std::string out;
     for (int i = 0; i < argc; ++i)
@@ -196,11 +271,62 @@ auto debug::commandLine() -> std::string
     return out;
 }
 
-auto debug::coreDumpHint() -> std::string
+auto debug::coreDumpHint() -> Maybe<std::string>
 {
     // macOS writes cores to /cores/core.<pid> when enabled (we raise RLIMIT_CORE in
     // init, but the /cores directory must also exist and be writable).
     return "/cores/core." + std::to_string(getpid()) + " (if core dumps are enabled)";
+}
+
+void debug::registerMainThread()
+{
+    mainThread = pthread_self();
+
+    // SA_SIGINFO so captureMainStackHandler receives the ucontext to unwind from.
+    struct sigaction action{};
+    action.sa_sigaction = captureMainStackHandler;
+    action.sa_flags     = SA_SIGINFO;
+    sigemptyset(&action.sa_mask);
+    sigaction(SIGUSR2, &action, nullptr);
+
+    mainThreadRegistered.store(true, std::memory_order_release);
+}
+
+auto debug::captureMainThreadTrace() -> Maybe<cpptrace::stacktrace>
+{
+    if (!mainThreadRegistered.load(std::memory_order_acquire) ||
+        pthread_equal(pthread_self(), mainThread))
+    {
+        return std::nullopt;
+    }
+
+    // Ask the main thread to capture its own stack (captureMainStackHandler), then wait
+    // a bounded time for it. If it never responds (signals blocked, wedged in the kernel)
+    // we give up rather than hang the crash path.
+    mainStackCaptured.store(false, std::memory_order_release);
+    if (pthread_kill(mainThread, SIGUSR2) != 0)
+    {
+        return std::nullopt;
+    }
+
+    for (int i = 0; i < 1000 && !mainStackCaptured.load(std::memory_order_acquire); ++i)
+    {
+        timespec ts{ .tv_sec = 0, .tv_nsec = 1'000'000 }; // 1ms, up to ~1s total
+        nanosleep(&ts, nullptr);
+    }
+
+    if (!mainStackCaptured.load(std::memory_order_acquire))
+    {
+        return std::nullopt;
+    }
+
+    const auto stack = mainThreadRaw.resolve();
+    if (stack.empty())
+    {
+        return std::nullopt;
+    }
+
+    return stack;
 }
 
 #endif // __APPLE__
