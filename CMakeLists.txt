@@ -144,16 +144,16 @@ target_compile_features(project_options INTERFACE cxx_std_23)
 add_library(project_warnings INTERFACE)
 set_project_warnings(project_warnings)
 
-# Globally define SOL_ALL_SAFETIES_ON so sol can be included anywhere
-# If SOL_NO_CHECK_NUMBER_PRECISION is defined, turns off number precision and integer
-# precision fitting when pushing numbers into sol
-# add_compile_definitions() comes with CMake 3.12
-add_definitions(
-    -DSOL_ALL_SAFETIES_ON=1
-    -DSOL_NO_CHECK_NUMBER_PRECISION=1
-    -DSOL_DEFAULT_PASS_ON_ERROR=1
-    -DSOL_PRINT_ERRORS=0
-    -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG
+add_compile_definitions(
+    # Globally define SOL_ALL_SAFETIES_ON so sol can be included anywhere.
+    SOL_ALL_SAFETIES_ON=1
+    # If SOL_NO_CHECK_NUMBER_PRECISION is defined, turns off number precision and integer
+    # precision fitting when pushing numbers into sol.
+    SOL_NO_CHECK_NUMBER_PRECISION=1
+    SOL_DEFAULT_PASS_ON_ERROR=1
+    SOL_PRINT_ERRORS=0
+    SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG
+    XI_BUILD_TYPE="$<CONFIG>"
 )
 
 # For external libs
