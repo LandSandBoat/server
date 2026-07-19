@@ -13,7 +13,7 @@ local mission = Mission:new(xi.mission.log_id.ASA, xi.mission.id.asa.THAT_WHICH_
 
 mission.reward =
 {
-    keyItem          =
+    keyItem =
     {
         xi.ki.DOMINAS_SCARLET_SEAL,
         xi.ki.DOMINAS_CERULEAN_SEAL,
@@ -24,19 +24,6 @@ mission.reward =
     },
     nextMission = { xi.mission.log_id.ASA, xi.mission.id.asa.SUGAR_COATED_DIRECTIVE },
 }
-
-local function handleTradeEvent(player, trade, firstId)
-    local asaKit = mission:getVar(player, 'Option')
-    if npcUtil.tradeHasExactly(trade, asaKit) then
-        return mission:progressEvent(firstId)
-    end
-end
-
-local handleTradeEventFinish = function(player, csid, option, npc)
-    if mission:complete(player) then
-        player:confirmTrade()
-    end
-end
 
 mission.sections =
 {
@@ -98,12 +85,20 @@ mission.sections =
             ['Trodden_Snow'] =
             {
                 onTrade = function(player, npc, trade)
-                    return handleTradeEvent(player, trade, 44)
+                    local asaKit = mission:getVar(player, 'Option')
+                    if npcUtil.tradeMatches(trade, { asaKit, 1 }) then
+                        return mission:progressEvent(44)
+                    end
                 end,
             },
+
             onEventFinish =
             {
-                [44] = handleTradeEventFinish,
+                [44] = function(player, csid, option, npc)
+                    if mission:complete(player) then
+                        player:tradeComplete()
+                    end
+                end,
             },
         },
     },
