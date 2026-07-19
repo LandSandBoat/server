@@ -1,5 +1,5 @@
 -----------------------------------
--- The Tigress Stirs
+-- The Tigress Stirs (WOTG Nation Quests - Windurst 1)
 -----------------------------------
 -- !addquest 7 17
 -- Dhea Prandoleh              : !pos 1 -1 15 94
@@ -62,7 +62,8 @@ quest.sections =
             ['Dhea_Prandoleh'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(160)
+                    -- In-progress reminder
+                    return quest:event(131)
                 end,
             },
 

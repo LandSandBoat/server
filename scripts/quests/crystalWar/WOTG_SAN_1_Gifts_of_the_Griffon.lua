@@ -1,5 +1,5 @@
 -----------------------------------
--- Gifts of the Griffon
+-- Gifts of the Griffon (WOTG Nation Quests - San d'Oria 1)
 -----------------------------------
 -- !addquest 7 15
 -- Louxiard   : !pos -93 -4 49 80

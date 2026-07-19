@@ -1,10 +1,10 @@
 -----------------------------------
--- Boy and the Beast
+-- Boy and the Beast (WOTG Nation Quests - San d'Oria 3)
 -----------------------------------
 -- !addquest 7 24
 -- Rholont     : !pos -168 -2 56 80
--- qm7         : !pos -26 -31 364
--- Leafy Patch : !pos -418 -33 576
+-- qm7         : !pos -26 -31 364 83
+-- Leafy Patch : !pos -418 -33 576 83
 -----------------------------------
 
 local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.BOY_AND_THE_BEAST)

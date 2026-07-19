@@ -1,5 +1,5 @@
 -----------------------------------
--- Honor Under Fire
+-- Honor Under Fire (WOTG Nation Quests - Bastok 8)
 -----------------------------------
 -- !addquest 7 43
 -- Gentle Tiger    : !pos -203.932 -9.998 2.237 87

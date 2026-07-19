@@ -1,5 +1,5 @@
 -----------------------------------
--- Better Part of Valor
+-- Better Part of Valor (WOTG Nation Quests - Bastok 1)
 -----------------------------------
 -- !addquest 7 12
 -- Wolfram    : !pos -249 0 88 87

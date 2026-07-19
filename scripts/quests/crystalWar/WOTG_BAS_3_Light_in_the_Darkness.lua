@@ -1,5 +1,6 @@
 -----------------------------------
--- Light in the Darkness
+-- Light in the Darkness (WOTG Nation Quests - Bastok 3)
+-----------------------------------
 -- !addquest 7 19
 -- Gentle Tiger   : !pos -203.932 -9.998 2.237 87
 -- Pagdako        : !pos -202.080 -6.000 -93.928 87

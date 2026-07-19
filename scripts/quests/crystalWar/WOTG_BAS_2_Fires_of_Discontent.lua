@@ -1,5 +1,5 @@
 -----------------------------------
--- Fires of Discontent
+-- Fires of Discontent (WOTG Nation Quests - Bastok 2)
 -----------------------------------
 -- !addquest 7 13
 -- Engelhart    : !pos -80.085 -4.425 -125.327 87

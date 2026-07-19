@@ -1,5 +1,5 @@
 -----------------------------------
--- In a Haze of Glory
+-- In a Haze of Glory (WOTG Nation Quests - San d'Oria 6)
 -----------------------------------
 -- !addquest 7 38
 -- Rholont       : !pos -168 -2 56 80

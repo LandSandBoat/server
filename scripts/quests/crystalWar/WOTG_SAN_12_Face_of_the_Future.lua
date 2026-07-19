@@ -1,5 +1,5 @@
 -----------------------------------
--- Face of the Future
+-- Face of the Future (WOTG Nation Quests - San d'Oria 12)
 -----------------------------------
 -- !addquest 7 61
 -- Metallic Hodgepodge : !pos -285.493 -7.819 -163.707 104

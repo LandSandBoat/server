@@ -1,12 +1,12 @@
 -----------------------------------
--- Steamed Rams
+-- Steamed Rams (WOTG Nation Quests - San d'Oria 0)
 -----------------------------------
 -- !addquest 7 9
 -- Randecque   : !pos 61 -6 137 164
 -- Mainchelite : !pos -16 1 -30 80
--- qm3         : !pos 312.821 -30.495 -67.15
--- qm4         : !pos 541.425 -49.83 178.563
--- qm5         : !pos 380.015 -26.5 -22.525
+-- qm3         : !pos 312.821 -30.495 -67.15 81
+-- qm4         : !pos 541.425 -49.83 178.563 81
+-- qm5         : !pos 380.015 -26.5 -22.525 81
 -----------------------------------
 local southernSandoriaSID = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
 -----------------------------------

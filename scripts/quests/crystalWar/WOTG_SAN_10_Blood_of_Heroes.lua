@@ -1,5 +1,5 @@
 -----------------------------------
--- Blood of Heroes
+-- Blood of Heroes (WOTG Nation Quests - San d'Oria 10)
 -----------------------------------
 -- !addquest 7 52
 -- Animal Spoor      : !pos 543.954 -0.522 -290.313 137

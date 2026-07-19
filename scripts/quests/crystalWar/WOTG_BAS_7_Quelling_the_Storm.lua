@@ -1,13 +1,13 @@
 -----------------------------------
--- Quelling the Storm
+-- Quelling the Storm (WOTG Nation Quests - Bastok 7)
 -----------------------------------
 -- !addquest 7 42
--- Gentle Tiger            : !pos -203.932 -9.998 2.237 87
--- Paul                    : !pos -192.880 -3.999 53.083 87
--- Biggorf                 : !pos -210.139 1.999 -140.872 87
--- Wilhelmina              : !pos -158.092 -4.000 -120.077 87
--- Blatherix               : !pos -309.824 -11.999 -42.791 87
--- ??? (qm8)               : !pos -356.278 -32.117 285.950 83
+-- Gentle Tiger : !pos -203.932 -9.998 2.237 87
+-- Paul         : !pos -192.880 -3.999 53.083 87
+-- Biggorf      : !pos -210.139 1.999 -140.872 87
+-- Wilhelmina   : !pos -158.092 -4.000 -120.077 87
+-- Blatherix    : !pos -309.824 -11.999 -42.791 87
+-- ??? (qm8)    : !pos -356.278 -32.117 285.950 83
 -----------------------------------
 
 local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.QUELLING_THE_STORM)

@@ -1,8 +1,8 @@
 -----------------------------------
--- The Price of Valor
+-- The Price of Valor (WOTG Nation Quests - San d'Oria 7)
 -----------------------------------
 -- !addquest 7 44
--- Rholont       : !pos -168 -2 56 80
+-- Rholont : !pos -168 -2 56 80
 -----------------------------------
 local vunkerlID = zones[xi.zone.VUNKERL_INLET_S]
 -----------------------------------

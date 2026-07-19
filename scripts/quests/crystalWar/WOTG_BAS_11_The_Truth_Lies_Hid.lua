@@ -1,5 +1,5 @@
 -----------------------------------
--- The Truth Lies Hid
+-- The Truth Lies Hid (WOTG Nation Quests - Bastok 11)
 -----------------------------------
 -- !addquest 7 58
 -- Gentle Tiger    : !pos -203.932 -9.998 2.237 87

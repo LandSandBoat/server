@@ -1,5 +1,5 @@
 -----------------------------------
--- Perils of the Griffon
+-- Perils of the Griffon (WOTG Nation Quests - San d'Oria 5)
 -----------------------------------
 -- !addquest 7 37
 -- Rholont : !pos -168 -2 56 80
