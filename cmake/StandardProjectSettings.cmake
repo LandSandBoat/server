@@ -117,6 +117,25 @@ function(set_target_output_directory target)
             COMMAND_EXPAND_LISTS
             VERBATIM)
     endif()
+
+    if(APPLE)
+        # Under LTO the linker merges codegen objects into temp files and deletes after linking.
+        # We need to preserve those for the next step!
+        # -object_path_lto persists those codegen objects to a real, per-target directory so
+        # dsymutil can gather their DWARF into the .dSYM.
+        if(CMAKE_INTERPROCEDURAL_OPTIMIZATION)
+            set(lto_object_dir "${CMAKE_BINARY_DIR}/lto-objects/${target}")
+            file(MAKE_DIRECTORY "${lto_object_dir}")
+            target_link_options(${target} PRIVATE "-Wl,-object_path_lto,${lto_object_dir}")
+        endif()
+
+        # dsymutil consolidates the DWARF into a self-contained .dSYM that travels with the
+        # binary, and atos picks it up automatically.
+        add_custom_command(TARGET ${target} POST_BUILD
+            COMMAND "$<$<CONFIG:Debug,RelWithDebInfo>:dsymutil;$<TARGET_FILE:${target}>;-o;${CMAKE_SOURCE_DIR}/$<TARGET_FILE_NAME:${target}>.dSYM>"
+            COMMAND_EXPAND_LISTS
+            VERBATIM)
+    endif()
 endfunction()
 
 function(disable_lto target)

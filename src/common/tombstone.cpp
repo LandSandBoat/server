@@ -77,17 +77,11 @@ constexpr auto compilerString() -> const char*
 #endif
 }
 
-// Formats stack frames as "#N <address> in <symbol>", dropping the source location:
-// on a stripped / dSYM-less build cpptrace falls back to printing the binary path on
-// every frame, which is just noise. The symbol + address is the useful part.
 auto traceFormatter() -> const cpptrace::formatter&
 {
-    static const auto formatter = cpptrace::formatter{}.header("").transform(
-        [](cpptrace::stacktrace_frame frame)
-        {
-            frame.filename.clear();
-            return frame;
-        });
+    static const auto formatter = cpptrace::formatter{}
+                                      .header("")
+                                      .symbols(cpptrace::formatter::symbol_mode::pruned);
     return formatter;
 }
 
