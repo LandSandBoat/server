@@ -558,7 +558,7 @@ INSERT INTO `item_latents` VALUES (13557,13,3,53,0);     -- MND +3 in areas insi
 
 -- Gold Musketeer's Ring
 INSERT INTO `item_latents` VALUES (13558,1,4,53,0);      -- DEF +4 in areas inside own nation's control
-INSERT INTO `item_latents` VALUES (13558,10,2,53,0);     -- VIT +3 in areas inside own nation's control
+INSERT INTO `item_latents` VALUES (13558,10,3,53,0);     -- VIT +3 in areas inside own nation's control
 INSERT INTO `item_latents` VALUES (13558,11,2,53,0);     -- AGI +2 in areas inside own nation's control
 
 -- Patriarch Protector's Ring
@@ -1249,7 +1249,7 @@ INSERT INTO `item_latents` VALUES (14783,10,4,26,1);     -- VIT+4 during Nightti
 INSERT INTO `item_latents` VALUES (14806,4,40,53,1);     -- convmptohp 40 in areas outside own nation's control
 
 -- Diabolos's Earring
-INSERT INTO `item_latents` VALUES (14814,25,-3,52,8);    -- cumulative acc-3 in Dark weather
+INSERT INTO `item_latents` VALUES (14814,25,-3,52,8);    -- ACC-3 in Dark weather (cancels base +3)
 INSERT INTO `item_latents` VALUES (14814,30,2,52,8);     -- magic acc+2 in Dark weather
 
 -- Rasetsu Tekko
@@ -1556,8 +1556,8 @@ INSERT INTO `item_latents` VALUES (15504,25,3,53,0);     -- ACC +3 in areas insi
 INSERT INTO `item_latents` VALUES (15506,369,1,1,85);    -- Refresh when HP >=85%
 
 -- Diabolos's Torque
-INSERT INTO `item_latents` VALUES (15516,24,7,52,8);     -- ranged acc+8 in Dark weather
-INSERT INTO `item_latents` VALUES (15516,26,-16,52,8);   -- cumulative ranged acc-8 in Dark weather
+INSERT INTO `item_latents` VALUES (15516,24,8,52,8);     -- RATT+8 in Dark weather
+INSERT INTO `item_latents` VALUES (15516,26,-8,52,8);    -- RACC-8 in Dark weather (cancels base +8)
 
 -- Storm Muffler
 INSERT INTO `item_latents` VALUES (15519,370,1,58,0);    -- Regen +1
