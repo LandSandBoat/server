@@ -18,7 +18,6 @@ return {
     ['Ferrol']           = { event = 254 },
     ['Grin']             = { text = ID.text.SUSPICIOUS_CHARACTERS }, -- TODO: Confirm old event was for quest "A Discerning Eye"
     ['Gudav']            = { event = 31 },
-    ['Gwinar']           = { event = 365 },
     ['Hilda']            = { event = 48 },
     ['Ihsan']            = { event = 16 },
     ['Johanna']          = { event = 18 },

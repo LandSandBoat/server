@@ -92,5 +92,4 @@ return {
     ['Tsuran-Botaran']   = { event = 578 },
     ['Yohra-Ora']        = { event = 565 },
     ['Yomotsutsu']       = { event = 579 },
-    ['Zelala']           = { event = 960 },
 }
