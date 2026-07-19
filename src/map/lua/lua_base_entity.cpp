@@ -2850,7 +2850,7 @@ void CLuaBaseEntity::clearGuildShop() const
  *  Example : player:sendGuildClose(8, 23)
  ************************************************************************/
 
-void CLuaBaseEntity::sendGuildClose(uint8 open, uint8 close) const
+void CLuaBaseEntity::sendGuildClose(uint8 open, uint8 close, sol::optional<bool> passive) const
 {
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
     if (!PChar)
@@ -2859,7 +2859,7 @@ void CLuaBaseEntity::sendGuildClose(uint8 open, uint8 close) const
         return;
     }
 
-    PChar->pushPacket<GP_SERV_COMMAND_GUILD_OPEN>(GP_SERV_COMMAND_GUILD_OPEN_STAT::Close, open, close, 0);
+    PChar->pushPacket<GP_SERV_COMMAND_GUILD_OPEN>(GP_SERV_COMMAND_GUILD_OPEN_STAT::Close, open, close, 0, PassiveGuildClose(passive.value_or(false)));
 }
 
 /************************************************************************

@@ -455,10 +455,10 @@ void CZone::LoadZoneSettings()
         m_zoneIP   = str2ip(rset->get<std::string>("zoneip"));
         m_zonePort = rset->get<uint16>("zoneport");
 
-        m_zoneMusic.m_songDay   = rset->get<uint8>("music_day");
-        m_zoneMusic.m_songNight = rset->get<uint8>("music_night");
-        m_zoneMusic.m_bSongS    = rset->get<uint8>("battlesolo");
-        m_zoneMusic.m_bSongM    = rset->get<uint8>("battlemulti");
+        m_zoneMusic.m_songDay   = rset->get<uint16>("music_day");
+        m_zoneMusic.m_songNight = rset->get<uint16>("music_night");
+        m_zoneMusic.m_bSongS    = rset->get<uint16>("battlesolo");
+        m_zoneMusic.m_bSongM    = rset->get<uint16>("battlemulti");
         m_tax                   = static_cast<uint16>(rset->get<float>("tax") * 100); // tax for bazaar
         m_miscMask              = rset->get<xi::ZoneMisc>("misc");
         m_zoneType              = rset->get<xi::ZoneType>("zonetype");

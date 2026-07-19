@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/types/flag.h"
 
 #include "base.h"
 
@@ -31,6 +32,8 @@ enum class GP_SERV_COMMAND_GUILD_OPEN_STAT : uint8
     Close   = 1,
     Holiday = 2
 };
+
+using PassiveGuildClose = xi::Flag<struct PassiveGuildCloseTag>;
 
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x0086
 // This packet is sent by the server to respond to the client requesting to open a guild shop menu.
@@ -44,5 +47,5 @@ public:
         uint32_t                        Time;
     };
 
-    GP_SERV_COMMAND_GUILD_OPEN(GP_SERV_COMMAND_GUILD_OPEN_STAT status, uint8 open, uint8 close, uint8 holiday);
+    GP_SERV_COMMAND_GUILD_OPEN(GP_SERV_COMMAND_GUILD_OPEN_STAT status, uint8 open, uint8 close, uint8 holiday, PassiveGuildClose passive = PassiveGuildClose::No);
 };
