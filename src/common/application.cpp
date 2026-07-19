@@ -168,16 +168,13 @@ void Application::tryIncreaseRLimits()
 #ifndef _WIN32
     rlimit limits{};
 
-    uint32 newRLimit = 10240;
-
-    // Get old limits
+    // Raise the soft limit to the hard limit.
     if (getrlimit(RLIMIT_NOFILE, &limits) == 0)
     {
-        // Increase open file limit, which includes sockets, to newRLimit. This only effects the current process and child processes
-        limits.rlim_cur = newRLimit;
+        limits.rlim_cur = limits.rlim_max;
         if (setrlimit(RLIMIT_NOFILE, &limits) == -1)
         {
-            std::cerr << fmt::format("Failed to increase rlim_cur to {}\n", newRLimit);
+            std::cerr << fmt::format("Failed to increase rlim_cur to {}\n", static_cast<uint64>(limits.rlim_max));
         }
     }
 #endif
