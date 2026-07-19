@@ -345,14 +345,7 @@ set(SHARED_EXTERNAL_LIBS
     cpptrace::cpptrace
 )
 
-if(WIN32)
-    # add wepoll for epoll support on windows
-    add_subdirectory(wepoll)
-
-    list(APPEND SHARED_EXTERNAL_LIBS
-        wepoll
-    )
-elseif(APPLE)
+if(APPLE)
     list(APPEND SHARED_EXTERNAL_LIBS
         dl
     )
