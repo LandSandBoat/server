@@ -301,7 +301,7 @@ xi.job_utils.beastmaster.checkPetCommand = function(player, target, ability)
     end
 
     if
-        not player:hasJugPet() or
+        not player:hasJugPet() and
         pet:getObjType() ~= xi.objType.MOB
     then
         return xi.msg.basic.REQUIRES_A_PET, 0
