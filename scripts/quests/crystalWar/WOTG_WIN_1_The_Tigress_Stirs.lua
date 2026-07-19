@@ -62,7 +62,8 @@ quest.sections =
             ['Dhea_Prandoleh'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(160)
+                    -- In-progress reminder
+                    return quest:event(131)
                 end,
             },
 
