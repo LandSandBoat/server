@@ -140,6 +140,15 @@ endif()
 add_library(project_options INTERFACE)
 target_compile_features(project_options INTERFACE cxx_std_23)
 
+# Windows-only preprocessor defines for our first-party code ONLY.
+if(WIN32)
+    target_compile_definitions(project_options INTERFACE
+        NOMINMAX
+        WIN32_LEAN_AND_MEAN
+        _CRT_SECURE_NO_WARNINGS
+    )
+endif()
+
 # Link this 'library' to use the warnings specified in CompilerWarnings.cmake
 add_library(project_warnings INTERFACE)
 set_project_warnings(project_warnings)

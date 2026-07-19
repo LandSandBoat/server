@@ -51,8 +51,6 @@ if(MSVC)
     list(APPEND FLAGS_AND_DEFINES
         -D_CONSOLE
         -D_MBCS
-        -DNOMINMAX
-        -D_CRT_SECURE_NO_WARNINGS
         -D_CRT_NONSTDC_NO_DEPRECATE
         # TODO: This is being overwritten by /Ob0
         # /Ob2 # Inline Function Expansion

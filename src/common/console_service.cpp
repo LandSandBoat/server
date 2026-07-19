@@ -37,7 +37,6 @@
 #ifdef _WIN32
 #include <conio.h>
 #include <io.h>
-#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #define isatty  _isatty
 #define getchar _getch
