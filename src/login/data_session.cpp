@@ -26,6 +26,8 @@
 #include "common/md52.h"
 #include "common/utils.h"
 
+#include <asio/write.hpp>
+
 void data_session::deleteCharFromCharInfo(uint32_t ffxi_id)
 {
     for (auto& charInfo : characterInfoResponse.character_info)
@@ -519,6 +521,19 @@ void data_session::read_func()
                 }
             }
 
+            // Log and return error to client if we're somehow trying to send a char to a disabled zone
+            if (characterSelectionResponse.server_ip == 0)
+            {
+                ShowWarning(fmt::format("data_session: no map address for charid {} (zone {}); check zone_settings", charid, ZoneID));
+                if (auto viewSession = session.view_session.get())
+                {
+                    loginHelpers::generateErrorMessage(viewSession->buffer_.data(), loginErrors::errorCode::UNABLE_TO_CONNECT_TO_WORLD_SERVER);
+                    viewSession->do_write(0x24);
+                }
+
+                return;
+            }
+
             unsigned char Hash[16] = {};
             md5(reinterpret_cast<uint8*>(&characterSelectionResponse), Hash, sizeof(lpkt_next_login));
 
@@ -527,10 +542,21 @@ void data_session::read_func()
             if (auto viewSession = session.view_session.get())
             {
                 std::memcpy(viewSession->buffer_.data(), &characterSelectionResponse, sizeof(characterSelectionResponse));
-                viewSession->do_write(sizeof(characterSelectionResponse));
 
-                viewSession->socket_.lowest_layer().shutdown(asio::socket_base::shutdown_both); // Client waits for us to close the socket
-                viewSession->socket_.lowest_layer().close();
+                // Write synchronously here to ensure the write() completes before the subsequent shutdown
+                std::error_code writeEc;
+                asio::write(viewSession->socket_.next_layer(),
+                            asio::buffer(viewSession->buffer_.data(), sizeof(characterSelectionResponse)),
+                            writeEc);
+                if (writeEc)
+                {
+                    ShowError(fmt::format("data_session: failed to write charselect reply to {}: {}", ipAddress, writeEc.message()));
+                }
+
+                // Client waits for us to close the socket.
+                std::error_code closeEc;
+                viewSession->socket_.lowest_layer().shutdown(asio::socket_base::shutdown_both, closeEc);
+                viewSession->socket_.lowest_layer().close(closeEc);
                 session.view_session = nullptr;
 
                 session.incrementKeyValue = 0;     // Reset incremented key after inserting into db
