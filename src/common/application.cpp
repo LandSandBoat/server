@@ -136,7 +136,7 @@ void Application::registerSignalHandlers()
 #ifdef _WIN32
     signals_.add(SIGBREAK);
     // Don't register crash signals with ASIO on Windows - they need to reach SEH
-    // for WheatyExceptionReport to generate crash dumps
+    // for our unhandled-exception filter to write the tombstone and minidump
 #endif
 #ifndef _WIN32
     signals_.add(SIGXFSZ);

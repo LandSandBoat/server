@@ -35,42 +35,76 @@
 #endif // PTRACE_DETACH
 
 #include "debug.h"
-#include "logging.h"
+#include "tombstone.h"
 
-#define BACKWARD_HAS_BFD 1
-#include "ext/backward/backward.hpp"
+#include <cpptrace/cpptrace.hpp>
 
-// https://man7.org/linux/man-pages/man7/signal-safety.7.html
-void safe_print(const char* str)
+#include <cstring>
+#include <tuple>
+#include <unistd.h>
+
+namespace
 {
-    // https://man7.org/linux/man-pages/man2/write.2.html
-    // https://man7.org/linux/man-pages/man3/strlen.3.html
-    std::ignore = write(1, str, strlen(str));
+
+constexpr std::size_t kMaxFrames = 128;
+
+constexpr auto signalName(int sig) -> const char*
+{
+    switch (sig)
+    {
+        case SIGSEGV:
+            return "SIGSEGV";
+        case SIGABRT:
+            return "SIGABRT";
+        case SIGFPE:
+            return "SIGFPE";
+        case SIGXFSZ:
+            return "SIGXFSZ";
+        default:
+            return "signal";
+    }
 }
 
-void dumpBacktrace(int signal)
+void crashSignalHandler(int sig)
 {
-    safe_print("Crash detected, generating traceback (this may take a while)\n");
-
-    backward::StackTrace trace;
-    backward::Printer    printer;
-
-    trace.load_here(10);
-
-    printer.object     = true;
-    printer.color_mode = backward::ColorMode::always;
-    printer.address    = true;
-
-    for (auto& line : logging::GetBacktrace())
+    if (debug::beginCrashReport())
     {
-        safe_print(line.c_str());
+        const char* msg = "Crash detected, writing tombstone...\n";
+        std::ignore     = write(STDERR_FILENO, msg, std::strlen(msg));
+
+        cpptrace::stacktrace trace;
+
+        // Prefer the signal-safe unwind (capture raw return addresses without
+        // allocating) where the platform supports it. macOS/arm64 currently does
+        // not (can_signal_safe_unwind() == false), so this yields nothing there.
+        if (cpptrace::can_signal_safe_unwind())
+        {
+            cpptrace::frame_ptr buffer[kMaxFrames];
+            const std::size_t   count = cpptrace::safe_generate_raw_trace(buffer, kMaxFrames);
+
+            cpptrace::raw_trace raw;
+            raw.frames.assign(buffer, buffer + count);
+            trace = raw.resolve();
+        }
+
+        // Fallback: a best-effort ordinary unwind. This is NOT async-signal-safe (it
+        // allocates, and the addr2line backend may spawn atos), but the process is
+        // already terminating. On platforms without signal-safe unwind it is the only
+        // way to get any stack at all.
+        if (trace.empty())
+        {
+            trace = cpptrace::generate_trace();
+        }
+
+        tombstone::write({ .kind = signalName(sig), .detail = "" }, trace);
     }
 
-    std::ostringstream traceStream;
-    printer.print(trace, traceStream);
-    safe_print(traceStream.str().c_str()); // This probably isn't safe?
-    raise(SIGQUIT);                        // Let OS dump the core file
+    // Restore the default handler and re-raise so the OS can dump a core file.
+    std::signal(sig, SIG_DFL);
+    raise(sig);
 }
+
+} // namespace
 
 void debug::init()
 {
@@ -78,19 +112,22 @@ void debug::init()
     core_limits.rlim_cur = core_limits.rlim_max = RLIM_INFINITY;
     setrlimit(RLIMIT_CORE, &core_limits);
 
-    // things we want to handle
-    std::signal(SIGABRT, dumpBacktrace);
-    std::signal(SIGSEGV, dumpBacktrace);
-    std::signal(SIGFPE, dumpBacktrace);
-    std::signal(SIGXFSZ, dumpBacktrace);
+    // Fatal signals we turn into a tombstone (then re-raise for a core dump).
+    std::signal(SIGABRT, crashSignalHandler);
+    std::signal(SIGSEGV, crashSignalHandler);
+    std::signal(SIGFPE, crashSignalHandler);
+    std::signal(SIGXFSZ, crashSignalHandler);
 
-    // pass these onto default handler
+    // Pass these onto the default handler.
     std::signal(SIGILL, SIG_DFL);
     std::signal(SIGBUS, SIG_DFL);
     std::signal(SIGTRAP, SIG_DFL);
+
+    // Unhandled C++ exceptions -> tombstone.
+    debug::installTerminateHandler();
 }
 
-bool debug::isRunningUnderDebugger()
+auto debug::isRunningUnderDebugger() -> bool
 {
     static bool isCheckedAlready = false;
     static bool underDebugger    = false;
@@ -120,7 +157,7 @@ bool debug::isRunningUnderDebugger()
     return underDebugger;
 }
 
-bool debug::isUserRoot()
+auto debug::isUserRoot() -> bool
 {
     return getuid() == 0 && getgid() == 0;
 }

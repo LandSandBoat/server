@@ -27,8 +27,16 @@ namespace debug
 void init();
 
 // https://forum.juce.com/t/detecting-if-a-process-is-being-run-under-a-debugger/2098
-bool isRunningUnderDebugger();
+auto isRunningUnderDebugger() -> bool;
 
-bool isUserRoot();
+auto isUserRoot() -> bool;
+
+// One-shot crash-report guard. Returns true only for the FIRST caller; every later
+// caller gets false.
+auto beginCrashReport() -> bool;
+
+// Installs a std::terminate handler that writes a tombstone for unhandled C++
+// exceptions. Cross-platform; invoked by each platform's init().
+void installTerminateHandler();
 
 } // namespace debug

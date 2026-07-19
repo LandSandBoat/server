@@ -46,6 +46,7 @@
 #include <chrono>
 #include <concepts>
 #include <cstdio>
+#include <exception>
 #include <format>
 #include <iostream>
 #include <iterator>
@@ -106,6 +107,37 @@ concept IsInvocableReturnsAwaitableVoid = IsInvocable<T> && IsAwaitableReturnsVo
 
 template <typename T>
 concept IsInvocableReturnsVoidOrAwaitableVoid = IsInvocableReturnsAwaitableVoid<T> || IsInvocableReturnsVoid<T>;
+
+// onUnhandledTaskException
+//   Re-activates an exception that escaped a fire-and-forget task and routes it
+//   through std::terminate, which the installed terminate handler turns into a
+//   tombstone.
+[[noreturn]] inline void onUnhandledTaskException(std::exception_ptr eptr) noexcept
+{
+    try
+    {
+        std::rethrow_exception(eptr);
+    }
+    catch (...)
+    {
+        std::terminate();
+    }
+}
+
+// FatalOnException
+//   Drop-in replacement for asio::detached as the completion handler of fire-and-
+//   forget tasks. On success it does nothing; on failure it routes the escaped
+//   exception to onUnhandledTaskException instead of swallowing it.
+struct FatalOnException
+{
+    void operator()(std::exception_ptr eptr) const noexcept
+    {
+        if (eptr)
+        {
+            onUnhandledTaskException(eptr);
+        }
+    }
+};
 
 } // namespace detail
 
@@ -329,7 +361,7 @@ public:
     template <detail::IsAwaitableReturnsVoid T>
     void postToMainThread(T&& task)
     {
-        asio::co_spawn(mainContext_.get_executor(), std::forward<T>(task), asio::bind_allocator(asio::recycling_allocator<void>(), asio::detached));
+        asio::co_spawn(mainContext_.get_executor(), std::forward<T>(task), asio::bind_allocator(asio::recycling_allocator<void>(), detail::FatalOnException{}));
     }
 
     // postToMainThread
@@ -337,7 +369,7 @@ public:
     template <detail::IsInvocableReturnsAwaitableVoid T>
     void postToMainThread(T&& func)
     {
-        asio::co_spawn(mainContext_.get_executor(), std::forward<T>(func), asio::bind_allocator(asio::recycling_allocator<void>(), asio::detached));
+        asio::co_spawn(mainContext_.get_executor(), std::forward<T>(func), asio::bind_allocator(asio::recycling_allocator<void>(), detail::FatalOnException{}));
     }
 
     // postToMainThread
@@ -353,7 +385,7 @@ public:
     template <detail::IsAwaitableReturnsVoid T>
     void postToWorkerThread(T&& task)
     {
-        asio::co_spawn(workerPool_.executor(), std::forward<T>(task), asio::bind_allocator(asio::recycling_allocator<void>(), asio::detached));
+        asio::co_spawn(workerPool_.executor(), std::forward<T>(task), asio::bind_allocator(asio::recycling_allocator<void>(), detail::FatalOnException{}));
     }
 
     // postToWorkerThread
@@ -361,7 +393,7 @@ public:
     template <detail::IsInvocableReturnsAwaitableVoid T>
     void postToWorkerThread(T&& func)
     {
-        asio::co_spawn(workerPool_.executor(), std::forward<T>(func), asio::bind_allocator(asio::recycling_allocator<void>(), asio::detached));
+        asio::co_spawn(workerPool_.executor(), std::forward<T>(func), asio::bind_allocator(asio::recycling_allocator<void>(), detail::FatalOnException{}));
     }
 
     // postToWorkerThread
@@ -411,7 +443,7 @@ public:
                     }
                 }
             },
-            asio::bind_allocator(asio::recycling_allocator<void>(), asio::bind_cancellation_slot(signal->slot(), asio::detached)));
+            asio::bind_allocator(asio::recycling_allocator<void>(), asio::bind_cancellation_slot(signal->slot(), detail::FatalOnException{})));
 
         return Token(std::move(signal));
     }
@@ -455,7 +487,7 @@ public:
                     }
                 }
             },
-            asio::bind_allocator(asio::recycling_allocator<void>(), asio::bind_cancellation_slot(signal->slot(), asio::detached)));
+            asio::bind_allocator(asio::recycling_allocator<void>(), asio::bind_cancellation_slot(signal->slot(), detail::FatalOnException{})));
 
         return Token(std::move(signal));
     }
@@ -499,7 +531,7 @@ public:
                     }
                 }
             },
-            asio::bind_allocator(asio::recycling_allocator<void>(), asio::bind_cancellation_slot(signal->slot(), asio::detached)));
+            asio::bind_allocator(asio::recycling_allocator<void>(), asio::bind_cancellation_slot(signal->slot(), detail::FatalOnException{})));
 
         return Token(std::move(signal));
     }
