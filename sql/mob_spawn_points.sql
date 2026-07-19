@@ -40012,7 +40012,7 @@ INSERT INTO `mob_spawn_points` VALUES (17219995,45,'Skeleton_Sorcerer','Skeleton
 INSERT INTO `mob_spawn_points` VALUES (17219996,0,'Thunder_Elemental','Thunder Elemental',19,18,20,-154.221,49.092,420.093,33,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17219997,0,'Goblin_Digger','Goblin Digger',31,13,14,-82.375,70.154,676.150,127,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17219998,0,'Goblin_Archaeologist','Goblin Archaeologist',32,30,75,141.024,23.679,248.830,101,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17219999,0,'Forger','Forger',33,33,33,-710.000,2.000,102.000,6,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17219999,0,'Forger','Forger',33,20,20,-710.000,2.000,102.000,6,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17220000,0,'Haty','Haty',34,14,14,-204.271,8.118,36.959,0,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17220001,0,'Bendigeit_Vran','Bendigeit Vran',35,14,14,-2.110,24.440,105.396,127,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17220002,0,'Pixie','Pixie',36,51,54,0.000,0.000,0.000,0,NULL,NULL);
@@ -45615,7 +45615,7 @@ INSERT INTO `mob_spawn_points` VALUES (17272835,0,'Greater_Pugil','Greater Pugil
 INSERT INTO `mob_spawn_points` VALUES (17272836,0,'Bigclaw','Bigclaw',3,38,39,1.000,1.000,1.000,0,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17272837,0,'Apsaras','Apsaras',4,26,31,1.000,1.000,1.000,0,NULL,NULL);
 
-INSERT INTO `mob_spawn_points` VALUES (17272838,0,'Guardian_Treant','Guardian Treant',5,33,33,635.000,-1.000,-151.000,114,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17272838,0,'Guardian_Treant','Guardian Treant',5,20,20,642.317,-4.877,-149.643,114,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17272839,0,'Doomed_Pilgrims','Doomed Pilgrims',6,68,68,231.000,0.100,284.000,15,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17272840,0,'Goblin_Mugger','Goblin Mugger',7,25,29,-310.139,0.284,-419.161,76,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17272841,0,'Goblin_Mugger','Goblin Mugger',7,25,29,-316.794,-0.243,-408.387,127,NULL,NULL);

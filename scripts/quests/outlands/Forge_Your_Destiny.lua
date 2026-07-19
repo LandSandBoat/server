@@ -6,7 +6,7 @@
 -- Aeka            : !pos 4 0 -4 252
 -- Ranemaud        : !pos 15 0 23 252
 -- qm3 (Konschtat) : !pos -709 2 102 108
--- qm2 (Zi'Tah)    : !pos 639 -1 -151 121
+-- qm2 (Zi'Tah)    : !pos 642 -5 -150 121
 -----------------------------------
 local konschtatID = zones[xi.zone.KONSCHTAT_HIGHLANDS]
 local norgID      = zones[xi.zone.NORG]
@@ -17,10 +17,11 @@ local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DE
 
 quest.reward =
 {
-    fame = 30,
+    fame     = 30,
     fameArea = xi.fameArea.NORG,
-    item = xi.item.MUMEITO,
-    title = xi.title.BUSHIDO_BLADE,
+    item     = xi.item.MUMEITO,
+    keyItem  = xi.ki.JOB_GESTURE_SAMURAI,
+    title    = xi.title.BUSHIDO_BLADE,
 }
 
 quest.sections =
@@ -57,11 +58,6 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if player:checkDistance(npc) > 1.6 then
                         return quest:messageSpecial(konschtatID.text.BLACKENED_MUST_BE_CLOSER)
-                    elseif
-                        GetMobByID(konschtatID.mob.FORGER):isSpawned() or
-                        npc:getLocalVar('forgerNextPopAllowedTime') > GetSystemTime()
-                    then
-                        return quest:messageSpecial(konschtatID.text.BLACKENED_NOTHING_HAPPENS, xi.item.LUMP_OF_ORIENTAL_STEEL)
                     end
 
                     local forgerMob = SpawnMob(konschtatID.mob.FORGER)
@@ -69,12 +65,18 @@ quest.sections =
                         return quest:noAction()
                     end
 
+                    if
+                        forgerMob:isSpawned() or
+                        npc:getLocalVar('forgerNextPopAllowedTime') > GetSystemTime()
+                    then
+                        return quest:messageSpecial(konschtatID.text.BLACKENED_NOTHING_HAPPENS, xi.item.LUMP_OF_ORIENTAL_STEEL)
+                    end
+
                     if npcUtil.tradeHasExactly(trade, xi.item.LUMP_OF_ORIENTAL_STEEL) then
                         player:confirmTrade()
                         forgerMob:updateClaim(player)
 
-                        -- QM is visible, but cannot be used to spawn Forger again until two minutes have elapsed
-                        -- since the NM despawns.
+                        -- QM is visible, but cannot be used to spawn Forger again until two minutes have elapsed since the NM despawns.
                         forgerMob:setLocalVar('QMID', npc:getID())
                         forgerMob:addListener('DESPAWN', 'DESPAWN_' .. konschtatID.mob.FORGER, function(mobArg)
                             local qmID = mobArg:getLocalVar('QMID')
@@ -90,9 +92,14 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if GetMobByID(konschtatID.mob.FORGER):isSpawned() then
                         return quest:messageSpecial(konschtatID.text.NOT_THE_TIME_FOR_THAT)
+
+                    -- This message persists even after kill, while the QM is active and quest is accepted.
                     elseif npc:getLocalVar('forgerNextPopAllowedTime') <= GetSystemTime() then
-                        -- This message persists even after kill, while the QM is active and quest is accepted.
                         return quest:messageSpecial(konschtatID.text.BLACKENED_SHOULD_PLACE, xi.item.LUMP_OF_ORIENTAL_STEEL)
+
+                    -- Forger was killed and is still on its respawn cooldown.
+                    else
+                        return quest:messageSpecial(konschtatID.text.BLACKENED_SPOT_ON_GROUND)
                     end
                 end,
             },
@@ -112,9 +119,9 @@ quest.sections =
                 end,
 
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'waitTimer') == 0 then
+                    if quest:getVar(player, 'waitTime') == 0 then
                         if player:findItem(xi.item.LUMP_OF_BOMB_STEEL) then
-                            return quest:progressEvent(48, xi.item.LUMP_OF_BOMB_STEEL)
+                            return quest:progressEvent(49, xi.item.LUMP_OF_BOMB_STEEL, xi.item.LUMP_OF_ORIENTAL_STEEL)
                         elseif not player:findItem(xi.item.LUMP_OF_ORIENTAL_STEEL) then
                             if not quest:isVarBitsSet(player, 'Option', 0) then
                                 return quest:progressEvent(44, xi.item.LUMP_OF_BOMB_STEEL, xi.item.LUMP_OF_ORIENTAL_STEEL)
@@ -167,9 +174,9 @@ quest.sections =
                 end,
 
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'waitTimer') == 0 then
+                    if quest:getVar(player, 'waitTime') == 0 then
                         if player:findItem(xi.item.SACRED_BRANCH) then
-                            return quest:progressEvent(48, xi.item.SACRED_BRANCH)
+                            return quest:progressEvent(48, xi.item.SACRED_BRANCH, xi.item.SACRED_SPRIG)
                         elseif not player:findItem(xi.item.SACRED_SPRIG) then
                             if not quest:isVarBitsSet(player, 'Option', 1) then
                                 return quest:progressEvent(40, xi.item.SACRED_BRANCH, xi.item.SACRED_SPRIG)
