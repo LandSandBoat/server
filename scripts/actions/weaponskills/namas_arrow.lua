@@ -24,10 +24,10 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.overrideVE = 480
     params.rangedAccuracyBonus = 100 -- https://wiki.ffo.jp/html/3094.html 特性の有無で100近く飛命が低い侍であっても問題なくとてとてに当てられるほど。
 
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
+
     -- Apply aftermath
     xi.aftermath.addStatusEffect(player, tp, xi.slot.RANGED, xi.aftermath.type.RELIC)
-
-    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
 
     return tpHits, extraHits, criticalHit, damage
 end
