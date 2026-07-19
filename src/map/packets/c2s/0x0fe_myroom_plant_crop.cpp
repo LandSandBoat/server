@@ -21,6 +21,7 @@
 
 #include "0x0fe_myroom_plant_crop.h"
 
+#include "common/settings.h"
 #include "entities/char_entity.h"
 #include "enums/msg_std.h"
 #include "items/item_flowerpot.h"
@@ -92,7 +93,9 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CROP::process(MapSession* PSession, CCharEntity
             std::tie(resultID, totalQuantity) = gardenutils::CalculateResults(PChar, PPotItem);
             const uint8 stackSize             = xi::items::lookup(resultID)->getStackSize();
             const uint8 requiredSlots         = (uint8)ceil(float(totalQuantity) / stackSize);
-            const uint8 totalFreeSlots        = PChar->getStorage(LOC_MOGSAFE)->GetFreeSlotsCount() + PChar->getStorage(LOC_MOGSAFE2)->GetFreeSlotsCount();
+            const bool  safe2Unlocked         = (PChar->profile.mhflag & 0x20) && settings::get<bool>("main.ENABLE_MOG_HOUSE_2F");
+            const uint8 totalFreeSlots        = PChar->getStorage(LOC_MOGSAFE)->GetFreeSlotsCount() + (safe2Unlocked ? PChar->getStorage(LOC_MOGSAFE2)->GetFreeSlotsCount() : 0);
+
             if (requiredSlots > totalFreeSlots || totalQuantity == 0)
             {
                 PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::MoghouseCantPickUp); // Kupo. I can't pick anything right now, kupo.
@@ -102,7 +105,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CROP::process(MapSession* PSession, CCharEntity
             for (uint8 slot = 0; slot < requiredSlots; ++slot)
             {
                 uint8 quantity = std::min(remainingQuantity, stackSize);
-                if (charutils::AddItem(PChar, LOC_MOGSAFE, resultID, quantity) == ERROR_SLOTID)
+                if (charutils::AddItem(PChar, LOC_MOGSAFE, resultID, quantity) == ERROR_SLOTID && safe2Unlocked)
                 {
                     charutils::AddItem(PChar, LOC_MOGSAFE2, resultID, quantity);
                 }
