@@ -34,9 +34,7 @@ local handleAcceptMission = function(player, csid, option, npc)
 end
 
 local handleFetichTrade = function(player, npc, trade)
-    if
-        npcUtil.tradeHasExactly(trade, { xi.item.QUADAV_FETICH_HEAD, xi.item.QUADAV_FETICH_TORSO, xi.item.QUADAV_FETICH_ARMS, xi.item.QUADAV_FETICH_LEGS })
-    then
+    if npcUtil.tradeMatches(trade, { { xi.item.QUADAV_FETICH_HEAD, 1 }, { xi.item.QUADAV_FETICH_TORSO, 1 }, { xi.item.QUADAV_FETICH_ARMS, 1 }, { xi.item.QUADAV_FETICH_LEGS, 1 } }) then
         if not player:hasCompletedMission(mission.areaId, mission.missionId) then
             return mission:progressEvent(1008)
         else
@@ -47,7 +45,7 @@ end
 
 local handleCompleteEvent = function(player, csid, option, npc)
     if mission:complete(player) then
-        player:confirmTrade()
+        player:tradeComplete()
     end
 end
 

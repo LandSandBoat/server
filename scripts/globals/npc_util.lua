@@ -936,6 +936,60 @@ function npcUtil.tradeHasExactly(trade, items)
     return npcUtil.tradeHas(trade, items, true)
 end
 
+-- Function to check if a trade contains exactly what's defined. Does not lock items. Use player:tradeComplete()
+function npcUtil.tradeMatches(trade, itemTable)
+    -- Create table of traded items.
+    --[[ Structure:
+    local tradedItemsTable =
+    {
+        [itemId1] = amount1,
+        [itemId2] = amount2,
+    }
+    ]]--
+
+    local tradedItemsTable = {}
+    local tradedItemId
+    local tradedQuantity
+    for slot = 0, trade:getSlotCount() - 1 do
+        tradedItemId                   = trade:getItemId(slot)
+        tradedQuantity                 = trade:getItemQty(tradedItemId)
+        tradedItemsTable[tradedItemId] = tradedQuantity
+    end
+
+    -- Create table of needed items, matching structure above.
+    local neededItemsTable = {}
+    local neededItemId
+    local neededQuantity
+    for _, entry in pairs(itemTable) do
+        neededItemId   = entry[1]
+        neededQuantity = entry[2]
+
+        -- Insert new entry or update previous entry quantity.
+        if neededItemId then
+            neededItemsTable[neededItemId] = neededItemsTable[neededItemId] == nil and neededQuantity or neededItemsTable[neededItemId] + neededQuantity
+        end
+    end
+
+    -- Check if all needed items have been traded. Remove from list if so.
+    for itemNeeded, quantityNeeded in pairs(neededItemsTable) do
+        local tradedQty = tradedItemsTable[itemNeeded] == nil and 0 or tradedItemsTable[itemNeeded]
+        if quantityNeeded > tradedQty then
+            return false
+        else
+            tradedItemsTable[itemNeeded] = tradedQty - quantityNeeded
+        end
+    end
+
+    -- Check if any excess items were traded.
+    for _, v in pairs(tradedItemsTable) do
+        if v > 0 then
+            return false
+        end
+    end
+
+    return true
+end
+
 -- Checks to see if a trade only contains one item, but the total count can be variable
 function npcUtil.tradeHasOnly(trade, itemID)
     return npcUtil.tradeHasExactly(trade, { { itemID, trade:getItemCount() } })

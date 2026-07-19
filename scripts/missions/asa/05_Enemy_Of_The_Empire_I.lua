@@ -43,42 +43,6 @@ local mobList =
     { 'Shore Sahagin',    'ShoreSahagin'    },
 }
 
-local function handleTradeEvent(player, trade)
-    local mobOne = mission:getVar(player, 'MobOne')
-
-    -- Trading Soul Plates
-    if mobOne ~= 0 and npcUtil.tradeHasExactly(trade, xi.item.SOUL_PLATE) then
-        local mobTwo = mission:getVar(player, 'MobTwo')
-        local mobThree = mission:getVar(player, 'MobThree')
-        local platesTraded = mission:getVar(player, 'Plates')
-        local item = trade:getItem(0)
-        local plateData = item:getExData()
-
-        -- Check if traded Soulplate is one of the requested mobs
-        for value, data in pairs(mobList) do
-            if data[2] == plateData.signature then
-                mission:setVar(player, 'Found', value)
-                mission:setVar(player, 'Plates', platesTraded + 1)
-
-                -- Assign 99 to traded mob's var to mark it as completed
-                if value == mobOne then
-                    mission:setVar(player, 'MobOne', 99)
-                elseif value == mobTwo then
-                    mission:setVar(player, 'MobTwo', 99)
-                elseif value == mobThree then
-                    mission:setVar(player, 'MobThree', 99)
-                end
-
-                player:confirmTrade()
-                return mission:progressEvent(241)
-            end
-        end
-
-        -- Wrong soulplate traded
-        return mission:progressEvent(242)
-    end
-end
-
 mission.sections =
 {
     {
@@ -90,35 +54,79 @@ mission.sections =
         {
             ['Andrause'] =
             {
-                onTrigger = function(player, npc)
-                    local mobCheck = mission:getVar(player, 'MobOne')
+                onTrade = function(player, npc, trade)
+                    local mobOne = mission:getVar(player, 'MobOne')
+                    if mobOne == 0 then
+                        return
+                    end
+
+                    -- Trading Soul Plates
+                    if not npcUtil.tradeMatches(trade, { xi.item.SOUL_PLATE, 1 }) then
+                        return
+                    end
+
+                    local item = trade:getItem(0)
+                    if not item then
+                        return
+                    end
+
+                    local plateData = item:getExData()
+                    if not plateData then
+                        return
+                    end
+
+                    local mobTwo       = mission:getVar(player, 'MobTwo')
+                    local mobThree     = mission:getVar(player, 'MobThree')
                     local platesTraded = mission:getVar(player, 'Plates')
 
-                    if not player:hasKeyItem(xi.ki.BLACK_BOOK) then
-                        -- Select mobs for player to get pictures of
-                        if mobCheck == 0 then
-                            local mobOne, MobTwo, mobThree = unpack(utils.uniqueRandomTable(1, 23, 3))
+                    -- Check if traded Soulplate is one of the requested mobs
+                    for value, data in pairs(mobList) do
+                        if data[2] == plateData.signature then
+                            mission:setVar(player, 'Found', value)
+                            mission:setVar(player, 'Plates', platesTraded + 1)
 
-                            mission:setVar(player, 'MobOne', mobOne)
-                            mission:setVar(player, 'MobTwo', MobTwo)
-                            mission:setVar(player, 'MobThree', mobThree)
+                            -- Assign 99 to traded mob's var to mark it as completed
+                            if value == mobOne then
+                                mission:setVar(player, 'MobOne', 99)
+                            elseif value == mobTwo then
+                                mission:setVar(player, 'MobTwo', 99)
+                            elseif value == mobThree then
+                                mission:setVar(player, 'MobThree', 99)
+                            end
 
-                            return mission:progressEvent(237)
-                        -- Tell player what mobs are still needed
-                        elseif mobCheck ~= 0 and platesTraded == 0 then
-                            return mission:progressEvent(238, 3)
-                        elseif mobCheck ~= 0 and platesTraded == 1 then
-                            return mission:progressEvent(238, 2)
-                        elseif mobCheck ~= 0 and platesTraded == 2 then
-                            return mission:progressEvent(238, 1)
+                            return mission:progressEvent(241)
                         end
-                    elseif player:hasKeyItem(xi.ki.BLACK_BOOK) then
-                        return mission:progressEvent(240)
                     end
+
+                    -- Wrong soulplate traded
+                    return mission:progressEvent(242)
                 end,
 
-                onTrade = function(player, npc, trade)
-                    return handleTradeEvent(player, trade)
+                onTrigger = function(player, npc)
+                    if player:hasKeyItem(xi.ki.BLACK_BOOK) then
+                        return mission:event(240)
+                    end
+
+                    -- Select mobs for player to get pictures of
+                    if mission:getVar(player, 'MobOne') == 0 then
+                        local mobOne, MobTwo, mobThree = unpack(utils.uniqueRandomTable(1, 23, 3))
+
+                        mission:setVar(player, 'MobOne', mobOne)
+                        mission:setVar(player, 'MobTwo', MobTwo)
+                        mission:setVar(player, 'MobThree', mobThree)
+
+                        return mission:progressEvent(237)
+                    end
+
+                    -- Tell player what mobs are still needed
+                    local platesTraded = mission:getVar(player, 'Plates')
+                    if platesTraded == 0 then
+                        return mission:progressEvent(238, 3)
+                    elseif platesTraded == 1 then
+                        return mission:progressEvent(238, 2)
+                    elseif platesTraded == 2 then
+                        return mission:progressEvent(238, 1)
+                    end
                 end,
             },
 
@@ -129,8 +137,8 @@ mission.sections =
                 -- option 2 = yes, ill do it
                 -- option 5 = buy the camera, doesnt appear to be a 'not enough gil dialogue'
                 [237] = function(player, csid, option, npc)
-                    local mobOne = mission:getVar(player, 'MobOne')
-                    local mobTwo = mission:getVar(player, 'MobTwo')
+                    local mobOne   = mission:getVar(player, 'MobOne')
+                    local mobTwo   = mission:getVar(player, 'MobTwo')
                     local mobThree = mission:getVar(player, 'MobThree')
 
                     if option == 4 then
@@ -148,10 +156,10 @@ mission.sections =
 
                 -- Tell the player what mobs are still needed
                 [238] = function(player, csid, option, npc)
-                    local mobOne = mission:getVar(player, 'MobOne')
-                    local mobTwo = mission:getVar(player, 'MobTwo')
-                    local mobThree = mission:getVar(player, 'MobThree')
-                    local pickupReady = mission:getVar(player, 'Soulplate') < GetSystemTime()
+                    local mobOne       = mission:getVar(player, 'MobOne')
+                    local mobTwo       = mission:getVar(player, 'MobTwo')
+                    local mobThree     = mission:getVar(player, 'MobThree')
+                    local pickupReady  = mission:getVar(player, 'Soulplate') < GetSystemTime()
                     local platesTraded = mission:getVar(player, 'Plates')
 
                     if option == 6 then
@@ -188,12 +196,12 @@ mission.sections =
 
                 -- Player traded a soulplate correctly, tell them what mobs are still needed
                 [241] = function(player, csid, option, npc)
-                    local mobOne = mission:getVar(player, 'MobOne')
-                    local mobTwo = mission:getVar(player, 'MobTwo')
-                    local mobThree = mission:getVar(player, 'MobThree')
+                    local mobOne       = mission:getVar(player, 'MobOne')
+                    local mobTwo       = mission:getVar(player, 'MobTwo')
+                    local mobThree     = mission:getVar(player, 'MobThree')
                     local platesTraded = mission:getVar(player, 'Plates')
+                    local foundMob     = mission:getVar(player, 'Found')
 
-                    local foundMob = mission:getVar(player, 'Found')
                     if platesTraded == 1 then
                         -- 99 = Player traded correct plate for requested mob
                         if mobOne == 99 then
@@ -262,8 +270,9 @@ mission.sections =
 
                 -- Player finished all three plates, give them the KI and complete mission
                 [241] = function(player, csid, option, npc)
-                    local platesTraded = mission:getVar(player, 'Plates')
-                    if platesTraded == 3 then
+                    player:tradeComplete()
+
+                    if mission:getVar(player, 'Plates') == 3 then
                         mission:complete(player)
                     end
                 end,
