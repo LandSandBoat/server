@@ -78,7 +78,7 @@ if(MSVC)
         )
     endif()
 
-    link_libraries(WS2_32 dbghelp Shlwapi winmm)
+    link_libraries(ws2_32 dbghelp shlwapi winmm shell32 user32)
 endif()
 
 if(UNIX)

@@ -308,6 +308,23 @@ CPMAddPackage(
     SYSTEM ON
 ) # defines: function2 (aliased to Fn, see src/common/types/fn.h)
 
+set(CPPTRACE_SYMBOL_OPTIONS "")
+if(NOT WIN32)
+    list(APPEND CPPTRACE_SYMBOL_OPTIONS
+        "CPPTRACE_GET_SYMBOLS_WITH_LIBDWARF OFF"
+        "CPPTRACE_GET_SYMBOLS_WITH_ADDR2LINE ON"
+    )
+endif()
+
+CPMAddPackage(
+    NAME cpptrace
+    GITHUB_REPOSITORY jeremy-rifkin/cpptrace
+    GIT_TAG v1.0.4
+    SYSTEM ON
+    OPTIONS
+        ${CPPTRACE_SYMBOL_OPTIONS}
+) # defines: cpptrace::cpptrace
+
 set(SHARED_EXTERNAL_LIBS
     fmt::fmt
     spdlog
@@ -325,6 +342,7 @@ set(SHARED_EXTERNAL_LIBS
     utf8cpp
     unordered_dense::unordered_dense
     function2
+    cpptrace::cpptrace
 )
 
 if(WIN32)
@@ -334,16 +352,11 @@ if(WIN32)
     list(APPEND SHARED_EXTERNAL_LIBS
         wepoll
     )
-
-# backwards needs these to add to linker
 elseif(APPLE)
-    # MacOS has bfd built in clang
     list(APPEND SHARED_EXTERNAL_LIBS
         dl
     )
 elseif(UNIX)
-    # Linux needs bfd as it's not native like MacOS
-    # bfd may link zstd
     list(APPEND SHARED_EXTERNAL_LIBS
         bfd
         dl
