@@ -70675,7 +70675,7 @@ INSERT INTO `mob_spawn_points` VALUES (17555466,0,'Carrion_Worm','Carrion Worm',
 INSERT INTO `mob_spawn_points` VALUES (17555467,0,'Carrion_Worm','Carrion Worm',2,2,4,8.060,-0.475,-63.485,127,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17555468,0,'Goblin_Thug','Goblin Thug',3,4,8,-139.000,-0.933,186.000,85,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17555469,0,'Ding_Bats','Ding Bats',1,2,4,-130.115,-0.688,207.026,127,19,5);
-INSERT INTO `mob_spawn_points` VALUES (17555470,0,'Ding_Bats','Ding Bats',1,2,4,-56.607,-0.500,-62.510,127,18,4);
+INSERT INTO `mob_spawn_points` VALUES (17555470,0,'Ding_Bats','Ding Bats',1,2,4,-144.857,0.000,184.288,218,18,4);
 INSERT INTO `mob_spawn_points` VALUES (17555471,0,'Mouse_Bat','Mouse Bat',4,3,6,-148.087,6.097,144.072,117,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17555472,0,'Mouse_Bat','Mouse Bat',4,3,6,-138.000,7.000,169.000,10,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17555473,1,'Goblin_Thug','Goblin Thug',3,4,8,-182.057,6.225,90.120,60,NULL,NULL);
