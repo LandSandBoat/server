@@ -43,7 +43,6 @@ return {
     ['qm4']                  = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Rosel']                = { text = ID.text.ROSEL_GREETINGS },
     ['Rouva']                = { event = 662 },
-    ['Rumoie']               = { event = 863 },
     ['Simmie']               = { event = 673 },
     ['Sobane']               = { text = ID.text.SOBANE_DIALOG },
     ['Taumila']              = { text = ID.text.TAUMILA_DIALOG },

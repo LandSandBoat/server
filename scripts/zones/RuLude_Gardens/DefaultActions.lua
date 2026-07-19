@@ -34,7 +34,6 @@ return {
     ['Muhoho']               = { event = 152 },
     ['Neraf-Najiruf']        = { event = 156 },
     ['Nomad_Moogle']         = { event = 10045, options = { 0, 2, 0, 0 } },
-    ['Nuria']                = { event = 10095 },
     ['Perisa-Neburusa']      = { event = 76 },
     ['Petva']                = { event = 151 },
     ['Pherimociel']          = { event = 155 },
