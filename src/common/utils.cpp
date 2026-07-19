@@ -22,6 +22,7 @@
 #include "common/utils.h"
 
 #include "common/logging.h"
+#include "common/macros.h"
 #include "common/md52.h"
 #include "common/stdext.h"
 
@@ -891,14 +892,14 @@ bool definitelyLessThan(float a, float b)
     return (b - a) > ((fabs(a) < fabs(b) ? fabs(b) : fabs(a)) * epsilon);
 }
 
-void crash()
+XI_NOINLINE void crash()
 {
     unsigned long long* volatile ptr = nullptr;
     // cppcheck-suppress nullPointer
     *ptr = 0xDEADBEEF;
 }
 
-void hang()
+XI_NOINLINE void hang()
 {
     // NOLINTNEXTLINE(bugprone-infinite-loop): the hang is deliberate.
     for (volatile bool spin = true; spin;)
