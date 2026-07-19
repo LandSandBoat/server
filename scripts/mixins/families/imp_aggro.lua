@@ -1,11 +1,13 @@
+-----------------------------------
 require('scripts/globals/mixins')
 -----------------------------------
 xi = xi or {}
 xi.mix = xi.mix or {}
 xi.mix.imp_aggro = xi.mix.imp_aggro or {}
-
+-----------------------------------
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
+-----------------------------------
 
 local function updateAggro(mob, hour)
     mob:setLocalVar('hour', hour)
