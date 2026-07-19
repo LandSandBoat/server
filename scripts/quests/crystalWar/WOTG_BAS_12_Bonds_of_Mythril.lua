@@ -1,5 +1,5 @@
 -----------------------------------
--- Bonds of Mythril
+-- Bonds of Mythril (WOTG Nation Quests - Bastok 12)
 -----------------------------------
 -- !addquest 7 59
 -- Gentle Tiger    : !pos -203.932 -9.998 2.237 87

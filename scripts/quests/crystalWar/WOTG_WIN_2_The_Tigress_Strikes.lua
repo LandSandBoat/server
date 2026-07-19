@@ -1,5 +1,5 @@
 -----------------------------------
--- The Tigress Strikes
+-- The Tigress Strikes (WOTG Nation Quests - Windurst 2)
 -----------------------------------
 -- !addquest 7 18
 -- Dhea Prandoleh               : !pos 1 -1 15 94

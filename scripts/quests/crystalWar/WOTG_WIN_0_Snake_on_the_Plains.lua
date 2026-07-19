@@ -1,5 +1,5 @@
 -----------------------------------
--- Snake on the Plains
+-- Snake on the Plains (WOTG Nation Quests - Windurst 0)
 -----------------------------------
 -- !addquest 7 8
 -- Miah Riyuh        : !pos 5.323 -2 37.462 94

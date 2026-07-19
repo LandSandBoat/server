@@ -1,5 +1,5 @@
 -----------------------------------
--- What Price Loyalty
+-- What Price Loyalty (WOTG Nation Quests - Bastok 10)
 -----------------------------------
 -- !addquest 7 50
 -- Gentle Tiger      : !pos -203.932 -9.998 2.237 87

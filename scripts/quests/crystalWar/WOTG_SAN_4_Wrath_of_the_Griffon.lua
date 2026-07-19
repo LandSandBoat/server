@@ -1,5 +1,5 @@
 -----------------------------------
--- Wrath of the Griffon
+-- Wrath of the Griffon (WOTG Nation Quests - San d'Oria 4)
 -----------------------------------
 -- !addquest 7 25
 -- Rholont : !pos -168 -2 56 80

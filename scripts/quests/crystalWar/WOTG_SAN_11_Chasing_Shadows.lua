@@ -1,5 +1,5 @@
 -----------------------------------
--- Chasing Shadows
+-- Chasing Shadows (WOTG Nation Quests - San d'Oria 11)
 -----------------------------------
 -- !addquest 7 60
 -- Rongelouts        : !pos 0.067 2 -22 80

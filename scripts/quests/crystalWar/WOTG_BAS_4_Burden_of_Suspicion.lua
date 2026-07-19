@@ -1,5 +1,5 @@
 -----------------------------------
--- Burden of Suspicion
+-- Burden of Suspicion (WOTG Nation Quests - Bastok 4)
 -----------------------------------
 -- !addquest 7 20
 -- Gentle Tiger : !pos -203 -9 0 87

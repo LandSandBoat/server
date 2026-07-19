@@ -1,5 +1,5 @@
 -----------------------------------
--- Fire in the Hole
+-- Fire in the Hole (WOTG Nation Quests - Bastok 6)
 -----------------------------------
 -- !addquest 7 36
 -- Stonehoused Adit : !pos -434.655 36.708 279.983 88

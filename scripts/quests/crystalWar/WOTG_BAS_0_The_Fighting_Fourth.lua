@@ -1,5 +1,5 @@
 -----------------------------------
--- The Fighting Fourth (WOTG Nation Quests Bastok Intro)
+-- The Fighting Fourth (WOTG Nation Quests - Bastok 0)
 -----------------------------------
 -- !addquest 7 7
 -- Turbulent Storm : !pos 422.461 -48.000 -47.308 175

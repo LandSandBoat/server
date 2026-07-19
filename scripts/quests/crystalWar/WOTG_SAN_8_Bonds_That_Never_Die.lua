@@ -1,5 +1,5 @@
 -----------------------------------
--- Bonds That Never Die
+-- Bonds That Never Die (WOTG Nation Quests - San d'Oria 8)
 -----------------------------------
 -- !addquest 7 45
 -- Rholont : !pos -168 -2 56 80

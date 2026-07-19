@@ -1,5 +1,5 @@
 -----------------------------------
--- The Tigress Stirs
+-- The Tigress Stirs (WOTG Nation Quests - Windurst 1)
 -----------------------------------
 -- !addquest 7 17
 -- Dhea Prandoleh              : !pos 1 -1 15 94

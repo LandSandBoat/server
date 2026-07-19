@@ -1,11 +1,11 @@
 -----------------------------------
--- Beneath the Mask
+-- Beneath the Mask (WOTG Nation Quests - Bastok 9)
 -----------------------------------
 -- !addquest 7 49
--- Gentle Tiger: !pos -203.932 -9.998 2.237 87
--- Red Axe     : !pos 304.627 -27.500 13.955 175
--- Leadavox    : !pos 207.081 -31.997 315.458 83
--- Hoarfang    : !pos -263.577 -40.757 -329.347 136
+-- Gentle Tiger : !pos -203.932 -9.998 2.237 87
+-- Red Axe      : !pos 304.627 -27.500 13.955 175
+-- Leadavox     : !pos 207.081 -31.997 315.458 83
+-- Hoarfang     : !pos -263.577 -40.757 -329.347 136
 -----------------------------------
 
 local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.BENEATH_THE_MASK)

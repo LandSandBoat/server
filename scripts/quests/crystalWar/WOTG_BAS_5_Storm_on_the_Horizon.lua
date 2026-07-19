@@ -1,5 +1,5 @@
 -----------------------------------
--- Storm on the Horizon
+-- Storm on the Horizon (WOTG Nation Quests - Bastok 5)
 -----------------------------------
 -- !addquest 7 35
 -- Blatherix    : !pos -310 -12 -43 87

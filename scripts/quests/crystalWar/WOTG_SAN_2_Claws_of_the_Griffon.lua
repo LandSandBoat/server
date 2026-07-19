@@ -1,5 +1,5 @@
 -----------------------------------
--- Claws of the Griffon
+-- Claws of the Griffon (WOTG Nation Quests - San d'Oria 2)
 -----------------------------------
 -- !addquest 7 15
 -- Rholont : !pos -168 -2 56 80
