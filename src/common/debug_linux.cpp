@@ -89,7 +89,7 @@ void crashSignalHandler(int sig)
             trace = cpptrace::generate_trace();
         }
 
-        tombstone::write({ .kind = signalName(sig), .detail = "" }, trace);
+        tombstone::write({ .kind = signalName(sig), .detail = "", .dumpLocation = debug::coreDumpHint() }, trace);
     }
 
     // Restore the default handler and re-raise so the OS can dump a core file.
@@ -182,6 +182,34 @@ auto debug::commandLine() -> std::string
         raw.pop_back();
     }
     return raw;
+}
+
+auto debug::coreDumpHint() -> std::string
+{
+    std::ifstream file("/proc/sys/kernel/core_pattern");
+    std::string   pattern;
+    if (file)
+    {
+        std::getline(file, pattern);
+    }
+
+    if (pattern.empty())
+    {
+        return {};
+    }
+
+    // A leading '|' means the core is piped to a userspace handler rather than written
+    // to a file (systemd-coredump, apport, ...).
+    if (pattern.front() == '|')
+    {
+        if (pattern.find("systemd-coredump") != std::string::npos)
+        {
+            return "handled by systemd-coredump (retrieve with: coredumpctl dump " + std::to_string(getpid()) + ")";
+        }
+        return "piped to core handler:" + pattern.substr(1);
+    }
+
+    return "core_pattern: " + pattern + " (relative paths land in the server's working directory)";
 }
 
 #endif // __linux__

@@ -135,11 +135,10 @@ LONG WINAPI unhandledExceptionFilter(PEXCEPTION_POINTERS info)
     if (debug::beginCrashReport())
     {
         const std::string dumpPath = writeMiniDump(info);
-        const std::string detail   = dumpPath.empty() ? std::string() : ("minidump: " + dumpPath);
 
         // The filter runs on the faulting thread's stack, so an ordinary unwind here
         // includes the fault frames (unlike a POSIX signal handler on an alt stack).
-        tombstone::write({ .kind = exceptionName(code), .detail = detail }, cpptrace::generate_trace());
+        tombstone::write({ .kind = exceptionName(code), .detail = "", .dumpLocation = dumpPath }, cpptrace::generate_trace());
     }
 
     // We've captured everything we need; terminate the process without the WER dialog.
@@ -182,6 +181,13 @@ auto debug::commandLine() -> std::string
 {
     const char* const cmd = GetCommandLineA();
     return cmd != nullptr ? std::string(cmd) : std::string{};
+}
+
+auto debug::coreDumpHint() -> std::string
+{
+    // Windows has no core dump; the minidump is written by the SEH filter and its path
+    // is reported directly (see unhandledExceptionFilter).
+    return {};
 }
 
 #endif // _WIN32

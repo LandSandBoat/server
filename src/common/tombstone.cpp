@@ -148,6 +148,7 @@ auto build(const Reason& reason, const cpptrace::stacktrace& trace) -> std::stri
     fmt::format_to(out, "{}\n", kRule);
     fmt::format_to(out, "Crash reason:  {}\n", orUnknown(reason.kind));
     fmt::format_to(out, "Crash detail:  {}\n", orUnknown(reason.detail));
+    fmt::format_to(out, "Crash dump:    {}\n", reason.dumpLocation.empty() ? "none" : reason.dumpLocation.c_str());
     fmt::format_to(out, "Time of crash: {}\n", localTimestamp());
     fmt::format_to(out, "Process:       pid {}\n", static_cast<long>(xi_getpid()));
     fmt::format_to(out, "Uptime:        {}\n", uptimeString());

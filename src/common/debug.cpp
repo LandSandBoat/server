@@ -43,7 +43,7 @@ std::atomic<bool> g_crashReported{ false };
     // SIGABRT, and that handler will see the guard already set and just dump core.
     if (debug::beginCrashReport())
     {
-        tombstone::Reason reason{ .kind = "unhandled-exception", .detail = "terminate called without an active exception" };
+        tombstone::Reason reason{ .kind = "unhandled-exception", .detail = "terminate called without an active exception", .dumpLocation = debug::coreDumpHint() };
 
         if (const auto eptr = std::current_exception())
         {

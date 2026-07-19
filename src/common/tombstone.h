@@ -39,8 +39,9 @@ namespace tombstone
 
 struct Reason
 {
-    std::string kind;   // short tag, e.g. "SIGSEGV", "unhandled-exception", "watchdog"
-    std::string detail; // human-readable: signal description, exception what(), etc.
+    std::string kind;         // short tag, e.g. "SIGSEGV", "unhandled-exception", "watchdog"
+    std::string detail;       // human-readable: signal description, exception what(), etc.
+    std::string dumpLocation; // where the OS core / minidump is (or a hint to find it); empty if none
 };
 
 // Records an approximate process-start time for the "Uptime" field.

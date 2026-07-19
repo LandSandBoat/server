@@ -39,6 +39,11 @@ auto executablePath() -> std::string;
 // The full invocation - executable plus all arguments (empty on failure). Platform-specific.
 auto commandLine() -> std::string;
 
+// Where the OS core dump can be found, or a hint for retrieving it (empty if none is
+// expected). POSIX only; Windows returns empty since its minidump path is reported
+// directly by the crash filter.
+auto coreDumpHint() -> std::string;
+
 // One-shot crash-report guard. Returns true only for the FIRST caller; every later
 // caller gets false.
 auto beginCrashReport() -> bool;

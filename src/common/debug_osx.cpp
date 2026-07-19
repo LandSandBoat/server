@@ -100,7 +100,7 @@ void crashSignalHandler(int sig)
             trace = cpptrace::generate_trace();
         }
 
-        tombstone::write({ .kind = signalName(sig), .detail = "" }, trace);
+        tombstone::write({ .kind = signalName(sig), .detail = "", .dumpLocation = debug::coreDumpHint() }, trace);
     }
 
     // Restore the default handler and re-raise so the OS can dump a core file.
@@ -194,6 +194,13 @@ auto debug::commandLine() -> std::string
         out += argv[i];
     }
     return out;
+}
+
+auto debug::coreDumpHint() -> std::string
+{
+    // macOS writes cores to /cores/core.<pid> when enabled (we raise RLIMIT_CORE in
+    // init, but the /cores directory must also exist and be writable).
+    return "/cores/core." + std::to_string(getpid()) + " (if core dumps are enabled)";
 }
 
 #endif // __APPLE__
