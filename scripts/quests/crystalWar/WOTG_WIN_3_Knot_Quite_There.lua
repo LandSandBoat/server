@@ -67,13 +67,17 @@ quest.sections =
             ['Bulwark_Gate'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 0 then
-                        return quest:progressEvent(105)
-                    end
+                    local prog = quest:getVar(player, 'Prog')
 
-                    -- TODO: retail plays additional Rachemace reminder cutscenes when the gate
-                    -- is examined again (BG-Wiki: "firmly sealed" repeated). Event IDs not
-                    -- captured, so those reminders are not implemented here.
+                    if prog == 0 then
+                        return quest:progressEvent(105)
+                    elseif prog == 1 then
+                        -- Pre-trade reminder to hand over the 108-Knot Quipu.
+                        return quest:event(107)
+                    elseif prog == 2 then
+                        -- Post-trade reminder to head to Southern San d'Oria.
+                        return quest:event(108)
+                    end
                 end,
 
                 onTrade = function(player, npc, trade)
