@@ -58,4 +58,86 @@ describe('WOTG Nation Quests - San d\'Oria', function()
             player.assert:hasKI(xi.ki.BRONZE_RIBBON_OF_SERVICE)
         end)
     end)
+
+    describe('01 - Gifts of the Griffon', function()
+        it('should accept, distribute the seven plumes, and complete for the Deathstone', function()
+            -- Prereq: the section-1 check requires a completed first nation quest.
+            player:completeQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.STEAMED_RAMS)
+
+            -- Opening cutscene with Louxiard (Prog 0 -> 1, sets mustZone).
+            player:gotoZone(xi.zone.SOUTHERN_SAN_DORIA_S)
+            player.entities:gotoAndTrigger('Louxiard', { eventId = 21, finishOption = 0 })
+            player.assert.no:hasQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.GIFTS_OF_THE_GRIFFON)
+
+            -- Zone out to a different zone then back to clear mustZone, then the return cutscene (Prog 1 -> 2).
+            player:gotoZone(xi.zone.EAST_RONFAURE_S)
+            player:gotoZone(xi.zone.SOUTHERN_SAN_DORIA_S)
+            player.entities:gotoAndTrigger('Louxiard', { eventId = 22, finishOption = 0 })
+
+            -- Rholont accepts the quest and hands over seven Plumes d'Or.
+            player.entities:gotoAndTrigger('Rholont', { eventId = 23, finishOption = 0 })
+            player.assert:hasQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.GIFTS_OF_THE_GRIFFON)
+            player.assert:hasItem(xi.item.PLUME_DOR)
+
+            -- Distribute one Plume d'Or to each of the seven elders (per-NPC trade events 25-31).
+            player.actions:tradeNpc('Machionage',           { xi.item.PLUME_DOR }, { eventId = 28 })
+            player.actions:tradeNpc('Louxiard',             { xi.item.PLUME_DOR }, { eventId = 26 })
+            player.actions:tradeNpc('Illeuse',              { xi.item.PLUME_DOR }, { eventId = 31 })
+            player.actions:tradeNpc('Rongelouts_N_Distaud', { xi.item.PLUME_DOR }, { eventId = 25 })
+            player.actions:tradeNpc('Sabiliont',            { xi.item.PLUME_DOR }, { eventId = 27 })
+            player.actions:tradeNpc('Elnonde',              { xi.item.PLUME_DOR }, { eventId = 30 })
+            player.actions:tradeNpc('Loillie',              { xi.item.PLUME_DOR }, { eventId = 29 })
+
+            -- All seven plumes handed out.
+            player.assert.no:hasItem(xi.item.PLUME_DOR)
+
+            -- Return to Rholont to complete the quest (all 7 bits set -> event 24).
+            player.entities:gotoAndTrigger('Rholont', { eventId = 24, finishOption = 0 })
+            player.assert:hasCompletedQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.GIFTS_OF_THE_GRIFFON)
+            player.assert:hasItem(xi.item.DEATHSTONE)
+        end)
+    end)
+
+    describe('02 - Claws of the Griffon', function()
+        it('should accept, drive the full quest, and reward the Angelstone', function()
+            -- Prereqs (from the impl's check): San d'Oria alignment + Gifts of the Griffon done.
+            -- Timer var defaults to 0 <= VanadielUniqueDay(), so the one-day wait is already satisfied.
+            player:completeQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.STEAMED_RAMS)
+            player:completeQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.GIFTS_OF_THE_GRIFFON)
+
+            -- Accept the quest from Rholont in Southern San d'Oria (S) (sets mustZone).
+            player:gotoZone(xi.zone.SOUTHERN_SAN_DORIA_S)
+            player.entities:gotoAndTrigger('Rholont', { eventId = 47, finishOption = 0 })
+            player.assert:hasQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.CLAWS_OF_THE_GRIFFON)
+
+            -- Talking again before zoning gives the pre-zone-out flavor dialogue (Option 0 -> event 50).
+            player.entities:gotoAndTrigger('Rholont', { eventId = 50 })
+
+            -- Zone out (clears mustZone) and return to Rholont for the follow-up cutscene (Prog -> 1).
+            player:gotoZone(xi.zone.EAST_RONFAURE_S)
+            player:gotoZone(xi.zone.SOUTHERN_SAN_DORIA_S)
+            player.entities:gotoAndTrigger('Rholont', { eventId = 48 })
+
+            -- Travel to Jugner Forest (S) via East Ronfaure (S) to trigger the onZoneIn cutscene (Prog -> 2).
+            player:gotoZone(xi.zone.EAST_RONFAURE_S)
+            player:gotoZone(xi.zone.JUGNER_FOREST_S)
+            player.events:expect({ eventId = 200 })
+
+            -- Check the ??? (qm6) for the pre-fight cutscene (Prog -> 3).
+            player.entities:gotoAndTrigger('qm6', { eventId = 201 })
+
+            -- Check the ??? again to spawn and claim Fingerfilcher Dradzad (Prog stays 3).
+            player.entities:gotoAndTrigger('qm6', { eventId = 202 })
+
+            -- Defeat Fingerfilcher Dradzad. Open-world mob combat isn't driveable through the
+            -- test harness (only BCNM mobs expose killMobs), so simulate the onMobDeath outcome
+            -- that advances Prog 3 -> 4.
+            player:setVar(xi.quest.getVarPrefix(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.CLAWS_OF_THE_GRIFFON) .. 'Prog', 4)
+
+            -- Check the ??? a final time to complete the quest and receive the reward.
+            player.entities:gotoAndTrigger('qm6', { eventId = 203 })
+            player.assert:hasCompletedQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.CLAWS_OF_THE_GRIFFON)
+            player.assert:hasItem(xi.item.ANGELSTONE)
+        end)
+    end)
 end)
