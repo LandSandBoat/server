@@ -184,14 +184,15 @@ xi.settings.main =
         '\129\153\129\154 The Alter Ego Expo Campaign is active! \129\154\129\153\n' ..
         'Trusts gain the benefits of Increased HP, MP, and Status Resistances!',
 
-    HARVESTING_BREAK_CHANCE = 33, -- % chance for the sickle to break during harvesting.  Set between 0 and 100.
-    EXCAVATION_BREAK_CHANCE = 33, -- % chance for the pickaxe to break during excavation.  Set between 0 and 100.
-    LOGGING_BREAK_CHANCE    = 33, -- % chance for the hatchet to break during logging.  Set between 0 and 100.
-    MINING_BREAK_CHANCE     = 33, -- % chance for the pickaxe to break during mining.  Set between 0 and 100.
-    HARVESTING_RATE         = 50, -- % chance to recieve an item from haresting.  Set between 0 and 100.
-    EXCAVATION_RATE         = 50, -- % chance to recieve an item from excavation.  Set between 0 and 100.
-    LOGGING_RATE            = 50, -- % chance to recieve an item from logging.  Set between 0 and 100.
-    MINING_RATE             = 50, -- % chance to recieve an item from mining.  Set between 0 and 100.
+    HARVESTING_BREAK_CHANCE = 33,    -- % chance for the sickle to break during harvesting.  Set between 0 and 100.
+    EXCAVATION_BREAK_CHANCE = 33,    -- % chance for the pickaxe to break during excavation.  Set between 0 and 100.
+    LOGGING_BREAK_CHANCE    = 33,    -- % chance for the hatchet to break during logging.  Set between 0 and 100.
+    MINING_BREAK_CHANCE     = 33,    -- % chance for the pickaxe to break during mining.  Set between 0 and 100.
+    HARVESTING_RATE         = 50,    -- % chance to recieve an item from haresting.  Set between 0 and 100.
+    EXCAVATION_RATE         = 50,    -- % chance to recieve an item from excavation.  Set between 0 and 100.
+    LOGGING_RATE            = 50,    -- % chance to recieve an item from logging.  Set between 0 and 100.
+    MINING_RATE             = 50,    -- % chance to recieve an item from mining.  Set between 0 and 100.
+    ENABLE_HELM_WAIT        = false, -- Enforces a 3 second wait between HELM gathering attempts.
 
     HEALING_TP_CHANGE       = -100, -- Change in TP for each healing tick. Default is -100
 

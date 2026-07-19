@@ -161,6 +161,17 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
     player:delStatusEffect(xi.effect.INVISIBLE)
 
     if trade:hasItemQty(info.tool, 1) and trade:getItemCount() == 1 then
+        -- Forced wait between gathering attempts
+        if xi.settings.main.ENABLE_HELM_WAIT then
+            local now = GetSystemTime()
+
+            if now < player:getLocalVar('[HELM]LastAttempt') + 3 then
+                return
+            end
+
+            player:setLocalVar('[HELM]LastAttempt', now)
+        end
+
         -- start event
         local itemID = pickItem(player, info)
         local broke  = doesToolBreak(player, info) and 1 or 0
