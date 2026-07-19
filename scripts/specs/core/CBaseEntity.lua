@@ -644,8 +644,9 @@ end
 
 ---@param open integer
 ---@param close integer
+---@param passive boolean?
 ---@return nil
-function CBaseEntity:sendGuildClose(open, close)
+function CBaseEntity:sendGuildClose(open, close, passive)
 end
 
 ---@return nil

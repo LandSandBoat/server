@@ -23,7 +23,7 @@
 
 #include "common/utils.h"
 
-GP_SERV_COMMAND_GUILD_OPEN::GP_SERV_COMMAND_GUILD_OPEN(const GP_SERV_COMMAND_GUILD_OPEN_STAT status, const uint8 open, const uint8 close, const uint8 holiday)
+GP_SERV_COMMAND_GUILD_OPEN::GP_SERV_COMMAND_GUILD_OPEN(const GP_SERV_COMMAND_GUILD_OPEN_STAT status, const uint8 open, const uint8 close, const uint8 holiday, const PassiveGuildClose passive)
 {
     auto& packet = this->data();
 
@@ -36,6 +36,12 @@ GP_SERV_COMMAND_GUILD_OPEN::GP_SERV_COMMAND_GUILD_OPEN(const GP_SERV_COMMAND_GUI
         {
             // Pack guild hours into Time field (bits representing open to close hours)
             packBitsBE(reinterpret_cast<uint8*>(&packet.Time), 0xFFFFFF, open, close - open);
+
+            // Bit 31 suppresses the client-side close message if shop isn't currently open.
+            if (passive)
+            {
+                packet.Time |= 0x80000000;
+            }
         }
         break;
         case GP_SERV_COMMAND_GUILD_OPEN_STAT::Holiday:

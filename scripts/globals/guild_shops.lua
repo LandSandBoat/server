@@ -352,7 +352,7 @@ end
 xi.guildShops.onShopClose = function(player, npc)
     local shop = shopFor(npc)
     if shop ~= nil then
-        player:sendGuildClose(shop.hours[1], shop.hours[2])
+        player:sendGuildClose(shop.hours[1], shop.hours[2], true)
     end
 
     player:clearGuildShop()

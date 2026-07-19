@@ -184,7 +184,7 @@ public:
     auto sendGuild(uint16 guildId, uint8 open, uint8 close, uint8 holiday) const -> bool;                          // Sends guild shop menu
     auto openGuildShop(CLuaBaseEntity* PNpc, uint8 open, uint8 close, sol::optional<uint8> holiday) const -> bool; // Opens a lua guild shop and remembers the NPC the PC opened it with
     void clearGuildShop() const;                                                                                   // Clears the PC's open guild shop handle
-    void sendGuildClose(uint8 open, uint8 close) const;                                                            // Sends the guild-open packet with a Close status
+    void sendGuildClose(uint8 open, uint8 close, sol::optional<bool> passive) const;                               // Sends the guild-open packet with a Close status
     void openSendBox() const;                                                                                      // Opens send box (to deliver items)
     void leaveGame();
     void sendEmote(const CLuaBaseEntity* target, uint8 emID, uint8 emMode, bool othersOnly) const;
