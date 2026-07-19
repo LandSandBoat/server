@@ -7,19 +7,22 @@ local ID = zones[xi.zone.MHAURA]
 local zoneObject = {}
 
 zoneObject.onGameHour = function(zone)
+    -- Script for Laughing Bison sign flip animations.
     local laughingBison = GetNPCByID(ID.npc.LAUGHING_BISON)
     if laughingBison then
-        -- Script for Laughing Bison sign flip animations
-        local timer = 1152 - (GetSystemTime() - 1009810802) % 1152
+        local departureTime = VanadielHour() % 8
 
-        -- Next ferry is Al Zhabi for higher values.
-        if timer >= 576 then
+        -- Next ferry is Al Zhabi.
+        if departureTime == 0 then
             laughingBison:setAnimationSub(1)
-        else
+
+        -- Next ferry is Selbina.
+        elseif departureTime == 4 then
             laughingBison:setAnimationSub(0)
         end
     end
 
+    -- Pirate logic.
     local destinationId = math.randomInt(1, 100) <= 10 and xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES or xi.zone.SHIP_BOUND_FOR_SELBINA
     zone:setLocalVar('[Pirate]Zone', destinationId)
 end
