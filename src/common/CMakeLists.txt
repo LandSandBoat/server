@@ -85,8 +85,6 @@ set(COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/vana_time.h
     ${CMAKE_CURRENT_SOURCE_DIR}/version.cpp # auto-generated
     ${CMAKE_CURRENT_SOURCE_DIR}/version.h
-    $<$<PLATFORM_ID:Windows>:${CMAKE_CURRENT_SOURCE_DIR}/WheatyExceptionReport.cpp>
-    $<$<PLATFORM_ID:Windows>:${CMAKE_CURRENT_SOURCE_DIR}/WheatyExceptionReport.h>
     ${CMAKE_CURRENT_SOURCE_DIR}/zlib.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/zlib.h
     PARENT_SCOPE
