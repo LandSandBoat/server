@@ -829,6 +829,12 @@ auto LoadZones(Scheduler& scheduler, MapConfig config, const std::vector<uint16>
             luautils::OnZoneInitialize(g_PZoneList[zoneId]->GetID());
         }
     }
+
+    // Start zone timers after all entities are loaded
+    for (auto zoneId : zonesIdsToLoad)
+    {
+        g_PZoneList[zoneId]->createZoneTimers();
+    }
 }
 
 auto LoadZoneList(Scheduler& scheduler, MapConfig config) -> Task<void>

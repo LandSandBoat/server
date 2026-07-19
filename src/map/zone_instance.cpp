@@ -209,11 +209,6 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
 
     if (PChar->PInstance)
     {
-        if (!zoneTimerToken_.has_value())
-        {
-            createZoneTimers();
-        }
-
         PChar->targid = PChar->PInstance->GetNewCharTargID();
 
         if (PChar->targid >= 0x700)
