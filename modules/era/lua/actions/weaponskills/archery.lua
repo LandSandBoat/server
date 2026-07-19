@@ -145,10 +145,11 @@ m:addOverride('xi.actions.weaponskills.namas_arrow.onUseWeaponSkill', function(p
     params.overrideVE          = 480
     params.rangedAccuracyBonus = 100
 
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
+
     -- Apply aftermath
     xi.aftermath.addStatusEffect(player, tp, xi.slot.RANGED, xi.aftermath.type.RELIC)
 
-    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
     return tpHits, extraHits, criticalHit, damage
 end)
 
