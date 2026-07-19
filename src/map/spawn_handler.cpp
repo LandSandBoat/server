@@ -21,7 +21,6 @@
 
 #include "spawn_handler.h"
 
-#include "ai/ai_container.h"
 #include "common/timer.h"
 #include "common/vana_time.h"
 #include "data/enums/weather.h"
@@ -241,23 +240,13 @@ void SpawnHandler::Tick(const timer::time_point now)
 // Despawn mobs now outside their spawn window. Not tied to 30s task.
 void SpawnHandler::onGameHour(const uint32 hour) const
 {
-    const bool zoneActive = zone_->IsZoneActive();
-
     zone_->ForEachMob(
-        [zoneActive, hour](CMobEntity* PMob)
+        [hour](CMobEntity* PMob)
         {
             const auto window = spawnWindowOf(PMob);
             if (window.has_value() && PMob->isAlive() && !hourInWindow(hour, window->spawnHour, window->despawnHour))
             {
-                if (zoneActive)
-                {
-                    PMob->SetDespawnTime(1ms);
-                }
-                else
-                {
-                    // Sleeping zone -> process the despawn immediately since AI doesnt tick on its own
-                    PMob->PAI->Despawn();
-                }
+                PMob->SetDespawnTime(1ms);
             }
         });
 }

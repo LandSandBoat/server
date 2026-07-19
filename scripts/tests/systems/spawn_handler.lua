@@ -266,6 +266,7 @@ describe('Spawn Handler', function()
             local despawned = false
             for _ = 1, 24 do
                 xi.test.world:tick(xi.tick.VANA_HOUR)
+                xi.test.world:skipTime(1)
                 xi.test.world:tickEntity(xolotl)
                 if not xolotl:isSpawned() then
                     despawned = true
@@ -425,6 +426,7 @@ describe('Spawn Handler', function()
             local despawned = false
             for _ = 1, 24 do
                 xi.test.world:tick(xi.tick.VANA_HOUR)
+                xi.test.world:skipTime(1)
                 for _, mob in ipairs(slot) do
                     xi.test.world:tickEntity(mob)
                 end
