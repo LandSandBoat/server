@@ -893,13 +893,18 @@ bool definitelyLessThan(float a, float b)
 
 void crash()
 {
-#ifndef _DEBUG
-    ShowInfo("crash command is likely optimized out in release mode.");
-#endif
-
-    int* volatile ptr = nullptr;
+    unsigned long long* volatile ptr = nullptr;
     // cppcheck-suppress nullPointer
-    *ptr = 0xDEAD;
+    *ptr = 0xDEADBEEF;
+}
+
+void hang()
+{
+    // NOLINTNEXTLINE(bugprone-infinite-loop): the hang is deliberate.
+    for (volatile bool spin = true; spin;)
+    {
+        // Spin! Wheeeee!
+    }
 }
 
 std::unique_ptr<FILE> utils::openFile(const std::string& path, const std::string& mode)

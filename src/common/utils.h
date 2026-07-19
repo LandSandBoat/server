@@ -176,6 +176,7 @@ bool definitelyGreaterThan(float a, float b);
 bool definitelyLessThan(float a, float b);
 
 void crash();
+void hang();
 
 template <typename T>
 std::set<std::filesystem::path> sorted_directory_iterator(std::string path_name)
