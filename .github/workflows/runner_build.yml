@@ -99,7 +99,7 @@ jobs:
       - name: Install dependencies (macOS)
         if: ${{ runner.os == 'macOS' && env.SKIP_BUILD != 'true' }}
         run: |
-          brew update && brew install --quiet \
+          brew install --quiet \
             mariadb \
             zeromq \
             luajit \
@@ -108,7 +108,7 @@ jobs:
       - name: Setup LLVM Clang (macOS)
         if: ${{ runner.os == 'macOS' && startsWith(inputs.compiler, 'clang') && env.SKIP_BUILD != 'true' }}
         run: |
-          brew update && brew install --quiet \
+          brew install --quiet \
             llvm@${{ inputs.compiler_version }} \
             lld@${{ inputs.compiler_version }}
 
@@ -128,7 +128,7 @@ jobs:
       - name: Setup GCC (macOS)
         if: ${{ runner.os == 'macOS' && startsWith(inputs.compiler, 'gcc') && env.SKIP_BUILD != 'true' }}
         run: |
-          brew update && brew install --quiet gcc@${{ inputs.compiler_version }}
+          brew install --quiet gcc@${{ inputs.compiler_version }}
           GCC_PREFIX=$(brew --prefix gcc@${{ inputs.compiler_version }})
           echo "PATH=$GCC_PREFIX/bin:$PATH" >> $GITHUB_ENV
           echo "CC=$GCC_PREFIX/bin/gcc-${{ inputs.compiler_version }}" >> $GITHUB_ENV
