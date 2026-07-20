@@ -69,6 +69,8 @@ quest.sections =
                 end,
             },
 
+            ['Parnika'] = quest:event(232),
+
             onEventFinish =
             {
                 [233] = handleEventFinish,
@@ -135,6 +137,23 @@ quest.sections =
                 end,
             },
 
+            ['Parnika'] = quest:event(232),
+
+            onEventFinish =
+            {
+                [230] = function(player, csid, option, npc)
+                    if npcUtil.giveItem(player, xi.item.FIRE_CRYSTAL) then
+                        quest:setVar(player, 'Prog', 1)
+                    end
+                end,
+
+                [233] = handleEventFinish,
+                [234] = handleEventFinish,
+            },
+        },
+
+        [xi.zone.BASTOK_MINES] =
+        {
             ['Roh_Latteh'] =
             {
                 onTrade = function(player, npc, trade)
@@ -154,15 +173,6 @@ quest.sections =
                     player:confirmTrade()
                     npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_ROH_LATTEH)
                 end,
-
-                [230] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.item.FIRE_CRYSTAL) then
-                        quest:setVar(player, 'Prog', 1)
-                    end
-                end,
-
-                [233] = handleEventFinish,
-                [234] = handleEventFinish,
             },
         },
     },
