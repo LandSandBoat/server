@@ -18998,18 +18998,18 @@ void CLuaBaseEntity::castSpell(const sol::object& spell, const sol::object& enti
 
 void CLuaBaseEntity::useJobAbility(uint16 skillID, const sol::object& pet)
 {
-    CBattleEntity* PTarget{ nullptr };
+    EntityID_t targetId{};
 
     if ((pet != sol::lua_nil) && pet.is<CLuaBaseEntity*>())
     {
         CLuaBaseEntity* PLuaBaseEntity = pet.as<CLuaBaseEntity*>();
-        PTarget                        = static_cast<CBattleEntity*>(PLuaBaseEntity->m_PBaseEntity);
+        targetId                       = EntityID_t(PLuaBaseEntity->m_PBaseEntity);
     }
 
     // clang-format off
-    m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true, [PTarget, skillID](auto PEntity)
+    m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true, [targetId, skillID](auto PEntity)
     {
-        if (PTarget)
+        if (auto* PTarget = targetId.resolve<CBattleEntity>())
         {
             PEntity->PAI->Ability(PTarget->targid, skillID);
         }
@@ -19053,9 +19053,9 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
         return;
     }
 
-    auto           skillid{ va.get<uint16>(0) };
-    CBattleEntity* PTarget{ nullptr };
-    auto*          PMobSkill{ battleutils::GetMobSkill(skillid) };
+    auto       skillid{ va.get<uint16>(0) };
+    EntityID_t targetId{};
+    auto*      PMobSkill{ battleutils::GetMobSkill(skillid) };
 
     if (!PMobSkill)
     {
@@ -19065,7 +19065,7 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
     if (va.size() >= 2)
     {
         CLuaBaseEntity* PLuaBaseEntity = va.get<CLuaBaseEntity*>(1);
-        PTarget                        = PLuaBaseEntity ? (CBattleEntity*)PLuaBaseEntity->m_PBaseEntity : nullptr;
+        targetId                       = PLuaBaseEntity ? EntityID_t(PLuaBaseEntity->m_PBaseEntity) : EntityID_t{};
     }
 
     Maybe<timer::duration> castTimeOverride = std::nullopt;
@@ -19087,9 +19087,10 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
     }
 
     // clang-format off
-    m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true, [PTarget, skillid, PMobSkill, castTimeOverride, ignoreDistance](auto PEntity)
+    m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true, [targetId, skillid, PMobSkill, castTimeOverride, ignoreDistance](auto PEntity)
     {
-        auto mobObj = dynamic_cast<CMobEntity*>(PEntity);
+        auto  mobObj  = dynamic_cast<CMobEntity*>(PEntity);
+        auto* PTarget = targetId.resolve<CBattleEntity>();
 
         // has both a valid target (specified by user and mob)
         if (PTarget && mobObj)
@@ -19140,7 +19141,7 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
 
 void CLuaBaseEntity::usePetAbility(uint16 skillId, const sol::object& target) const
 {
-    CBattleEntity* PTarget{ nullptr };
+    EntityID_t targetId{};
 
     // Don't queue an ability if we're not in auto attack state or no state
     if (!m_PBaseEntity->PAI->IsCurrentState<CAttackState>() && !m_PBaseEntity->PAI->IsStateStackEmpty())
@@ -19162,13 +19163,13 @@ void CLuaBaseEntity::usePetAbility(uint16 skillId, const sol::object& target) co
     if ((target != sol::lua_nil) && target.is<CLuaBaseEntity*>())
     {
         const auto* PLuaBaseEntity = target.as<CLuaBaseEntity*>();
-        PTarget                    = static_cast<CBattleEntity*>(PLuaBaseEntity->m_PBaseEntity);
+        targetId                   = EntityID_t(PLuaBaseEntity->m_PBaseEntity);
     }
 
     // clang-format off
-    m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true, [PTarget, skillId](auto PEntity)
+    m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true, [targetId, skillId](auto PEntity)
     {
-        if (PTarget)
+        if (auto* PTarget = targetId.resolve<CBattleEntity>())
         {
             PEntity->PAI->PetSkill(PTarget->targid, skillId);
         }
