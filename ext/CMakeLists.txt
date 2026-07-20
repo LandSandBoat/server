@@ -308,11 +308,22 @@ CPMAddPackage(
     SYSTEM ON
 ) # defines: function2 (aliased to Fn, see src/common/types/fn.h)
 
+# How cpptrace turns a crash address into function + file:line, per platform:
 set(CPPTRACE_SYMBOL_OPTIONS "")
-if(NOT WIN32)
+if(APPLE)
+    # macOS binaries carry a "debug map" pointing at the .o files rather than embedded DWARF;
+    # atos resolves against the staged .dSYM (see set_target_output_directory) and is fast.
     list(APPEND CPPTRACE_SYMBOL_OPTIONS
         "CPPTRACE_GET_SYMBOLS_WITH_LIBDWARF OFF"
         "CPPTRACE_GET_SYMBOLS_WITH_ADDR2LINE ON"
+    )
+elseif(UNIX)
+    # Linux: resolve in-process with libdwarf.
+    list(APPEND CPPTRACE_SYMBOL_OPTIONS
+        "CPPTRACE_GET_SYMBOLS_WITH_ADDR2LINE OFF"
+        "CPPTRACE_GET_SYMBOLS_WITH_LIBDWARF ON"
+        "CPPTRACE_USE_EXTERNAL_LIBDWARF ON"
+        "CPPTRACE_FIND_LIBDWARF_WITH_PKGCONFIG ON"
     )
 endif()
 
