@@ -23,11 +23,15 @@
 
 #include "common/tracy.h"
 
+#include <atomic>
+
 #include "ai/ai_container.h"
 
 #include "battlefield.h"
 #include "instance.h"
+#include "utils/zoneutils.h"
 #include "zone.h"
+#include "zone_instance.h"
 
 CBaseEntity::CBaseEntity()
 : id(0)
@@ -51,6 +55,10 @@ CBaseEntity::CBaseEntity()
 , m_nextUpdateTimer(timer::now())
 {
     TracyZoneScoped;
+
+    static std::atomic<uint64> nextSerial{ 1 };
+
+    serial_ = nextSerial.fetch_add(1, std::memory_order_relaxed);
 
     speed          = baseSpeed;
     animationSpeed = static_cast<uint8>(std::clamp<float>((baseSpeed / settings::get<float>("map.ANIMATION_SPEED_DIVISOR")), std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max()));
@@ -213,6 +221,16 @@ CBaseEntity* CBaseEntity::GetEntity(uint16 targid, uint8 filter) const
     {
         return loc.zone->GetEntity(targid, filter);
     }
+}
+
+auto CBaseEntity::serial() const -> uint64
+{
+    return serial_;
+}
+
+auto CBaseEntity::entityId() const -> EntityID_t
+{
+    return EntityID_t{ this };
 }
 
 void CBaseEntity::SendZoneUpdate()

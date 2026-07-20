@@ -259,6 +259,8 @@ public:
 
     bool IsDynamicEntity() const;
 
+    auto           serial() const -> uint64;
+    auto           entityId() const -> EntityID_t;
     uint32         id;             // global identifier unique on the server
     uint16         targid;         // local identifier unique to the zone
     ENTITYTYPE     objtype;        // Type of entity
@@ -298,6 +300,9 @@ protected:
     uint8                         speed; // speed of movement
 
     LineOfSightCache losCache_;
+
+private:
+    uint64 serial_{ 0 };
 };
 
 #endif // _BASEENTITY_H
