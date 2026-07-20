@@ -81,6 +81,7 @@ function(set_project_warnings project_name)
         CLANG_WARNINGS
         -Wno-nan-infinity-disabled # TODO: fmt triggers this, a combination of the fast-math flag and `isfinite`
         -Wunused-private-field # warn on unused private fields
+        -Wno-nontrivial-memcall # recastnavigation memsets non-trivially-copyable types (e.g. dtMeshTile)
       )
   endif()
 
