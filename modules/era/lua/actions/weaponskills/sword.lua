@@ -298,11 +298,10 @@ m:addOverride('xi.actions.weaponskills.atonement.onUseWeaponSkill', function(pla
         return calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.criticalHit, damage
     end
 
-    -- Regular damage formula
-    local dmg = target:getCE(player) * cePercent + target:getVE(player) * vePercent
+    -- Calculate damage based on target's CE and VE, clamped to the global damage cap.
+    damage = utils.clamp(target:getCE(player) * cePercent + target:getVE(player) * vePercent, 0, globalDamageCap)
 
     -- This is here to account for damage adjustments needed because it is breath damage.
-    damage = dmg
     damage = math.floor(damage * xi.combat.damage.calculateDamageAdjustment(target, false, false, false, true))
     damage = math.floor(damage * xi.spells.damage.calculateAbsorption(target, xi.element.NONE, false, false, false, true))
     damage = math.floor(damage * xi.spells.damage.calculateNullification(target, xi.element.NONE, false, false, false, true))
@@ -312,7 +311,6 @@ m:addOverride('xi.actions.weaponskills.atonement.onUseWeaponSkill', function(pla
         damage = damage * (100 + player:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)) / 100
     end
 
-    damage = utils.clamp(damage, 0, globalDamageCap)
     calcParams.finalDmg = damage
 
     -- If one or more hits land, Atonement always counts as landing both hits.
