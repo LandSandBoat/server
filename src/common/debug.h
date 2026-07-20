@@ -32,6 +32,8 @@ namespace debug
 
 void init();
 
+void setCoreDumpsEnabled(bool enabled);
+
 // https://forum.juce.com/t/detecting-if-a-process-is-being-run-under-a-debugger/2098
 auto isRunningUnderDebugger() -> bool;
 

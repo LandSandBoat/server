@@ -77,6 +77,8 @@ Application::Application(const ApplicationConfig& appConfig, int argc, char** ar
     // It is safe to use the logging macros and settings from this point on
     //
 
+    debug::setCoreDumpsEnabled(settings::get<bool>("main.GENERATE_CORE_DUMP"));
+
     ShowInfoFmt("=======================================================================");
     ShowInfoFmt("Begin {}-server init...", serverName_);
 

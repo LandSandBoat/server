@@ -168,10 +168,6 @@ void debug::init()
 {
     debug::registerMainThread();
 
-    rlimit core_limits{};
-    core_limits.rlim_cur = core_limits.rlim_max = RLIM_INFINITY;
-    setrlimit(RLIMIT_CORE, &core_limits);
-
     // Fatal signals we turn into a tombstone (then re-raise for a core dump). SA_SIGINFO
     // hands the handler the ucontext, so we can unwind the actual fault stack across the
     // signal trampoline.
@@ -191,6 +187,17 @@ void debug::init()
 
     // Unhandled C++ exceptions -> tombstone.
     debug::installTerminateHandler();
+}
+
+void debug::setCoreDumpsEnabled(bool enabled)
+{
+    rlimit lim{};
+    if (getrlimit(RLIMIT_CORE, &lim) != 0)
+    {
+        return;
+    }
+    lim.rlim_cur = enabled ? lim.rlim_max : 0;
+    setrlimit(RLIMIT_CORE, &lim);
 }
 
 auto debug::isRunningUnderDebugger() -> bool

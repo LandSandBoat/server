@@ -33,6 +33,7 @@
 
 #include <cstdio>
 #include <cstdlib>
+#include <atomic>
 #include <string>
 #include <vector>
 
@@ -41,6 +42,8 @@ namespace
 
 DWORD  mainThreadId     = 0;
 HANDLE mainThreadHandle = nullptr;
+
+std::atomic<bool> minidumpEnabled{ false };
 
 // SEH codes that must NOT be treated as crashes: pass them through to their real
 // handlers with EXCEPTION_CONTINUE_SEARCH.
@@ -141,9 +144,9 @@ LONG WINAPI unhandledExceptionFilter(PEXCEPTION_POINTERS info)
 
     if (debug::beginCrashReport())
     {
-        // Write the minidump first (it snapshots all threads), then capture the main
-        // thread's stack for the tombstone (nullopt when the fault is on the main thread).
-        const auto dumpPath  = writeMiniDump(info);
+        // Write the minidump first (it snapshots all threads) when opted in, then capture the
+        // main thread's stack for the tombstone (nullopt when the fault is on the main thread).
+        const auto dumpPath  = minidumpEnabled.load(std::memory_order_acquire) ? writeMiniDump(info) : std::nullopt;
         const auto mainTrace = debug::captureMainThreadTrace();
 
         // The filter runs on the faulting thread's stack, so an ordinary unwind here
@@ -171,6 +174,11 @@ void debug::init()
 
     // Unhandled C++ exceptions -> tombstone.
     debug::installTerminateHandler();
+}
+
+void debug::setCoreDumpsEnabled(bool enabled)
+{
+    minidumpEnabled.store(enabled, std::memory_order_release);
 }
 
 auto debug::isRunningUnderDebugger() -> bool
