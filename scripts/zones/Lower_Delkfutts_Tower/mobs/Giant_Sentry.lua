@@ -3,6 +3,8 @@
 --  Mob: Giant Sentry
 -- Note: PH for Hippolytos and Eurymedon
 -----------------------------------
+mixins = { require('scripts/mixins/families/gigas_bst') }
+-----------------------------------
 local ID = zones[xi.zone.LOWER_DELKFUTTS_TOWER]
 -----------------------------------
 ---@type TMobEntity

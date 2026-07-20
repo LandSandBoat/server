@@ -3,6 +3,8 @@
 --  Mob: Gigas Kettlemaster
 -- Note: PH for Ophion
 -----------------------------------
+mixins = { require('scripts/mixins/families/gigas_bst') }
+-----------------------------------
 local ID = zones[xi.zone.MIDDLE_DELKFUTTS_TOWER]
 -----------------------------------
 ---@type TMobEntity

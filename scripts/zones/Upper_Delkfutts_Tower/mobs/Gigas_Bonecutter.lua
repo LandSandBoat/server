@@ -3,6 +3,8 @@
 --  Mob: Gigas Bonecutter
 -- Note: PH for Enkelados
 -----------------------------------
+mixins = { require('scripts/mixins/families/gigas_bst') }
+-----------------------------------
 local ID = zones[xi.zone.UPPER_DELKFUTTS_TOWER]
 -----------------------------------
 ---@type TMobEntity

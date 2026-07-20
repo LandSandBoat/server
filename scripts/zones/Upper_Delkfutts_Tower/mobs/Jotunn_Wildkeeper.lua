@@ -2,6 +2,8 @@
 -- Area: Upper Delkfutt's Tower
 --  Mob: Jotunn Wildkeeper
 -----------------------------------
+mixins = { require('scripts/mixins/families/gigas_bst') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 
