@@ -123,7 +123,6 @@ void debug::init()
 {
     debug::registerMainThread();
 
-
     // Fatal signals we turn into a tombstone (then re-raise so the process still dies with the
     // signal, dumping a core only if core dumps were opted in).
     std::signal(SIGABRT, crashSignalHandler);

@@ -43,7 +43,12 @@
 #define RELEASE
 #endif
 
-// CMake build type
+// The configure-time CMAKE_BUILD_TYPE (empty on multi-config generators).
+#ifndef XI_CMAKE_BUILD_TYPE
+#define XI_CMAKE_BUILD_TYPE ""
+#endif
+
+// The config actually compiled ($<CONFIG>).
 #ifndef XI_BUILD_TYPE
 #define XI_BUILD_TYPE "unknown"
 #endif

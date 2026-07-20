@@ -38,6 +38,7 @@
 #endif
 
 #include <csignal>
+#include <string_view>
 #include <thread>
 
 namespace
@@ -87,6 +88,21 @@ Application::Application(const ApplicationConfig& appConfig, int argc, char** ar
 #else
     ShowInfo("32-bit environment detected");
 #endif
+
+    constexpr std::string_view builtBuildType = XI_BUILD_TYPE;
+    constexpr std::string_view cmakeBuildType = XI_CMAKE_BUILD_TYPE;
+    if (cmakeBuildType.empty())
+    {
+        ShowInfoFmt("Build type: {} (multi-config generator; config selected at build time)", builtBuildType);
+    }
+    else if (cmakeBuildType == builtBuildType)
+    {
+        ShowInfoFmt("Build type: {}", builtBuildType);
+    }
+    else
+    {
+        ShowWarningFmt("Build type: {}, but configured with CMAKE_BUILD_TYPE={}; the built binaries do NOT match the configured build type!", builtBuildType, cmakeBuildType);
+    }
 
     consoleService_ = std::make_unique<ConsoleService>(*this);
 }

@@ -31,9 +31,9 @@
 #include <dbghelp.h>
 #include <shlobj_core.h>
 
+#include <atomic>
 #include <cstdio>
 #include <cstdlib>
-#include <atomic>
 #include <string>
 #include <vector>
 
