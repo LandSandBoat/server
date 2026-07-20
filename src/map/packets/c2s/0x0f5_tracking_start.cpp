@@ -46,9 +46,6 @@ void GP_CLI_COMMAND_TRACKING_START::process(MapSession* PSession, CCharEntity* P
     // Only allow players to track targets that are actually scannable, and within their wide scan range
     if (target->isWideScannable() && dist <= charutils::getWideScanRange(PChar))
     {
-        PChar->WideScanTarget = EntityID_t{
-            .id     = target->id,
-            .targid = target->targid
-        };
+        PChar->WideScanTarget = target->entityId();
     }
 }
