@@ -43,7 +43,7 @@ mission.sections =
                 onTrade = function(player, npc, trade)
                     local requiredItems = mission:getVar(player, 'Option')
 
-                    if npcUtil.tradeHasExactly(trade, { missionItems[requiredItems] }) then
+                    if npcUtil.tradeMatches(trade, { missionItems[requiredItems] }) then
                         return mission:progressEvent(167, 8, 0, 5, 0)
                     end
                 end,
@@ -59,7 +59,7 @@ mission.sections =
             {
                 [167] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
             },

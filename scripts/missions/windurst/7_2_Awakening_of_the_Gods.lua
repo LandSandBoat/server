@@ -181,7 +181,7 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.item.CURSED_KEY) and
+                        npcUtil.tradeMatches(trade, { { xi.item.CURSED_KEY, 1 } }) and
                         player:getZPos() < 332 and
                         player:getMissionStatus(mission.areaId) >= 3
                     then
@@ -193,7 +193,7 @@ mission.sections =
             onEventFinish =
             {
                 [23] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    player:tradeComplete()
                     player:setPos(340, 0, 333)
                     player:delKeyItem(xi.ki.BLANK_BOOK_OF_THE_GODS)
                     player:setMissionStatus(mission.areaId, 5)

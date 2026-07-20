@@ -56,7 +56,7 @@ mission.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:getMissionStatus(mission.areaId) == 5 and
-                        npcUtil.tradeHasExactly(trade, xi.item.ONZ_OF_MYTHRIL_SAND)
+                        npcUtil.tradeMatches(trade, { { xi.item.ONZ_OF_MYTHRIL_SAND, 1 } })
                     then
                         return mission:progressEvent(255)
                     end
@@ -67,7 +67,7 @@ mission.sections =
             {
                 [255] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                         player:setMissionStatus(mission.areaId, 7)
                         player:addMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS)
                     end

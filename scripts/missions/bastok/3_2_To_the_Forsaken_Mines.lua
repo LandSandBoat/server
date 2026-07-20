@@ -28,7 +28,7 @@ local handleAcceptMission = function(player, csid, option, npc)
 end
 
 local handleMissionTrade = function(player, npc, trade)
-    if npcUtil.tradeHasExactly(trade, xi.item.GLOCOLITE) then
+    if npcUtil.tradeMatches(trade, { { xi.item.GLOCOLITE, 1 } }) then
         if player:hasCompletedMission(mission.areaId, mission.missionId) then
             return mission:progressEvent(1006)
         else
@@ -39,7 +39,7 @@ end
 
 local handleTradeEventFinish = function(player, csid, option, npc)
     if mission:complete(player) then
-        player:confirmTrade()
+        player:tradeComplete()
     end
 end
 
@@ -126,11 +126,11 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.item.SLICE_OF_HARE_MEAT) and
+                        npcUtil.tradeMatches(trade, { { xi.item.SLICE_OF_HARE_MEAT, 1 } }) and
                         not player:findItem(xi.item.GLOCOLITE) and
                         npcUtil.popFromQM(player, npc, gusgenID.mob.BLIND_MOBY, { hide = 180 })
                     then
-                        player:confirmTrade()
+                        player:tradeComplete()
                         return mission:messageSpecial(gusgenID.text.YOU_PUT_ITEM_DOWN, xi.item.SLICE_OF_HARE_MEAT)
                     else
                         return mission:messageSpecial(gusgenID.text.NOTHING_SEEMS_HAPPENING)

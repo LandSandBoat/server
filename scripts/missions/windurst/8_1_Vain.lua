@@ -168,7 +168,7 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.item.CURSE_WAND) and
+                        npcUtil.tradeMatches(trade, { { xi.item.CURSE_WAND, 1 } }) and
                         player:getMissionStatus(mission.areaId) == 3 and
                         player:hasKeyItem(xi.ki.MAGIC_DRAINED_STAR_SEEKER)
                     then
@@ -203,7 +203,7 @@ mission.sections =
                 end,
 
                 [120] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    player:tradeComplete()
                     player:setMissionStatus(mission.areaId, 4)
                 end,
             },

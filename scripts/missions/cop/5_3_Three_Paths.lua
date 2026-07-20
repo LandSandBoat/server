@@ -219,7 +219,7 @@ mission.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:getMissionStatus(mission.areaId, xi.mission.status.COP.LOUVERANCE) == 11 and
-                        npcUtil.tradeHasExactly(trade, xi.item.GOLD_KEY)
+                        npcUtil.tradeMatches(trade, { { xi.item.GOLD_KEY, 1 } })
                     then
                         return mission:progressEvent(3)
                     end
@@ -229,7 +229,7 @@ mission.sections =
             onEventFinish =
             {
                 [3] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    player:tradeComplete()
                     -- NOTE: This event transports you to the BCNM exit, and is handled by the client.
                     -- POS: -87.410 180 499.929 127 13
                     player:setMissionStatus(mission.areaId, 12, xi.mission.status.COP.LOUVERANCE)

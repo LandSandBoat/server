@@ -127,7 +127,7 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     for itemId, signatureValue in pairs(orcItems) do
-                        if npcUtil.tradeHasExactly(trade, itemId) then
+                        if npcUtil.tradeMatches(trade, { { itemId, 1 } }) then
                             mission:setLocalVar(player, 'numSignatures', signatureValue)
 
                             return mission:progressEvent(136, itemId)
@@ -168,7 +168,7 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.item.ANGLERS_CASSOULET) and
+                        npcUtil.tradeMatches(trade, { { xi.item.ANGLERS_CASSOULET, 1 } }) and
                         mission:isVarBitsSet(player, 'Remind', 0)
                     then
                         return mission:progressEvent(135)
@@ -286,7 +286,7 @@ mission.sections =
             ['Rongelouts_N_Distaud'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.GNOLE_CLAW) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.GNOLE_CLAW, 1 } }) then
                         return mission:progressEvent(144)
                     end
                 end,
@@ -312,8 +312,8 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasOnly(trade, xi.item.BUNCH_OF_GYSAHL_GREENS) and
-                        mission:isVarBitsSet(player, 'Remind', 3)
+                        mission:isVarBitsSet(player, 'Remind', 3) and
+                        npcUtil.tradeHasOnly(trade, xi.item.BUNCH_OF_GYSAHL_GREENS)
                     then
                         -- TODO: This formula is estimated; however, a trade of a single gysahl green
                         -- awards 5 signatures.  While not aligning with Wiki, adding a bonus to that
@@ -457,26 +457,26 @@ mission.sections =
                 end,
 
                 [133] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    player:tradeComplete()
 
                     local numSignatures = mission:getLocalVar(player, 'numSignatures')
                     completePetition(player, 17, numSignatures)
                 end,
 
                 [134] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    player:tradeComplete()
 
                     local numSignatures = mission:getLocalVar(player, 'numSignatures')
                     completePetition(player, 16, numSignatures)
                 end,
 
                 [135] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    player:tradeComplete()
                     completePetition(player, 14, 12)
                 end,
 
                 [136] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    player:tradeComplete()
 
                     local numSignatures = mission:getLocalVar(player, 'numSignatures')
                     completePetition(player, 15, numSignatures)
@@ -493,7 +493,7 @@ mission.sections =
                 end,
 
                 [144] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    player:tradeComplete()
 
                     if option == 1 then
                         completePetition(player, 18, 35)

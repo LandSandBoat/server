@@ -93,6 +93,12 @@ mission.sections =
         {
             ['Ambrotien'] =
             {
+                onTrade = function(player, npc, trade)
+                    if npcUtil.tradeMatches(trade, { { xi.item.CRYSTAL_BASS, 1 } }) then
+                        return mission:progressEvent(2030)
+                    end
+                end,
+
                 onTrigger = function(player, npc)
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
@@ -102,16 +108,16 @@ mission.sections =
                         return mission:progressEvent(2031)
                     end
                 end,
-
-                onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.CRYSTAL_BASS) then
-                        return mission:progressEvent(2030)
-                    end
-                end,
             },
 
             ['Endracion'] =
             {
+                onTrade = function(player, npc, trade)
+                    if npcUtil.tradeMatches(trade, { { xi.item.CRYSTAL_BASS, 1 } }) then
+                        return mission:progressEvent(1030)
+                    end
+                end,
+
                 onTrigger = function(player, npc)
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
@@ -121,23 +127,17 @@ mission.sections =
                         return mission:progressEvent(1031)
                     end
                 end,
-
-                onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.CRYSTAL_BASS) then
-                        return mission:progressEvent(1030)
-                    end
-                end,
             },
 
             onEventFinish =
             {
                 [1030] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    player:tradeComplete()
                     player:setMissionStatus(mission.areaId, 2)
                 end,
 
                 [2030] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    player:tradeComplete()
                     player:setMissionStatus(mission.areaId, 2)
                 end,
             },
@@ -147,6 +147,12 @@ mission.sections =
         {
             ['Grilau'] =
             {
+                onTrade = function(player, npc, trade)
+                    if npcUtil.tradeMatches(trade, { { xi.item.CRYSTAL_BASS, 1 } }) then
+                        return mission:progressEvent(1030)
+                    end
+                end,
+
                 onTrigger = function(player, npc)
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
@@ -156,18 +162,12 @@ mission.sections =
                         return mission:progressEvent(1031)
                     end
                 end,
-
-                onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.CRYSTAL_BASS) then
-                        return mission:progressEvent(1030)
-                    end
-                end,
             },
 
             onEventFinish =
             {
                 [1030] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    player:tradeComplete()
                     player:setMissionStatus(mission.areaId, 2)
                 end,
             },
@@ -184,30 +184,30 @@ mission.sections =
         {
             ['Ambrotien'] =
             {
-                onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 0 then
-                        return mission:messageText(southernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 68):setPriority(1000)
+                onTrade = function(player, npc, trade)
+                    if npcUtil.tradeMatches(trade, { { xi.item.CRYSTAL_BASS, 1 } }) then
+                        return mission:progressEvent(2013)
                     end
                 end,
 
-                onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.CRYSTAL_BASS) then
-                        return mission:progressEvent(2013)
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 0 then
+                        return mission:messageText(southernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 68):setPriority(1000)
                     end
                 end,
             },
 
             ['Endracion'] =
             {
-                onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 0 then
-                        return mission:messageText(southernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 68):setPriority(1000)
+                onTrade = function(player, npc, trade)
+                    if npcUtil.tradeMatches(trade, { { xi.item.CRYSTAL_BASS, 1 } }) then
+                        return mission:progressEvent(1013)
                     end
                 end,
 
-                onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.CRYSTAL_BASS) then
-                        return mission:progressEvent(1013)
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 0 then
+                        return mission:messageText(southernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 68):setPriority(1000)
                     end
                 end,
             },
@@ -216,13 +216,13 @@ mission.sections =
             {
                 [1013] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
 
                 [2013] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
             },
@@ -232,15 +232,15 @@ mission.sections =
         {
             ['Grilau'] =
             {
-                onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 0 then
-                        return mission:messageText(northernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 68):setPriority(1000)
+                onTrade = function(player, npc, trade)
+                    if npcUtil.tradeMatches(trade, { { xi.item.CRYSTAL_BASS, 1 } }) then
+                        return mission:progressEvent(1013)
                     end
                 end,
 
-                onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.CRYSTAL_BASS) then
-                        return mission:progressEvent(1013)
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 0 then
+                        return mission:messageText(northernSandoriaID.text.ORIGINAL_MISSION_OFFSET + 68):setPriority(1000)
                     end
                 end,
             },
@@ -249,7 +249,7 @@ mission.sections =
             {
                 [1013] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
             },

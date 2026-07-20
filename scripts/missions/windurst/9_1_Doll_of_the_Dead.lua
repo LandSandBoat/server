@@ -131,7 +131,7 @@ mission.sections =
 
                     if
                         (missionStatus == 4 or missionStatus == 5) and
-                        npcUtil.tradeHasExactly(trade, xi.item.CLUMP_OF_GOOBBUE_HUMUS)
+                        npcUtil.tradeMatches(trade, { { xi.item.CLUMP_OF_GOOBBUE_HUMUS, 1 } }) -- NOTE: No associated trade completion?
                     then
                         return mission:progressEvent(13)
                     end

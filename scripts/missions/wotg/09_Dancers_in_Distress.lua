@@ -119,7 +119,7 @@ mission.sections =
 
                     if
                         not mission:getMustZone(player) and
-                        npcUtil.tradeHasExactly(trade, quizItems[chosenItemIndex])
+                        npcUtil.tradeMatches(trade, { { quizItems[chosenItemIndex], 1 } })
                     then
                         return mission:progressEvent(3, 0, 0, 0, 0, 0, 0, 0, chosenItemIndex)
                     end
@@ -136,7 +136,7 @@ mission.sections =
             {
                 [3] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
             },

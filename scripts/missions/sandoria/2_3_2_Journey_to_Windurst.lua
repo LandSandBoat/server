@@ -134,7 +134,7 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, { { xi.item.PARANA_SHIELD, 2 } }) and
+                        npcUtil.tradeMatches(trade, { { xi.item.PARANA_SHIELD, 2 } }) and
                         player:getMissionStatus(mission.areaId) == 6
                     then
                         return mission:progressEvent(457) -- Has delivered shield
@@ -156,7 +156,7 @@ mission.sections =
             {
                 [457] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                         player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_ABROAD)
                         player:setMissionStatus(mission.areaId, 7)
                     end
