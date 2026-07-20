@@ -60,10 +60,7 @@ mission.sections =
             onEventFinish =
             {
                 [3070] = function(player, csid, option, npc)
-                    if mission:complete(player) then
-                        player:setCharVar('Mission[4][11]Timer', VanadielUniqueDay() + 1)
-                        player:setLocalVar('Mission[4][11]mustZone', 1)
-                    end
+                    mission:complete(player)
                 end,
             },
         },

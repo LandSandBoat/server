@@ -103,7 +103,7 @@ mission.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:getMissionStatus(mission.areaId) == 1 and
-                        npcUtil.tradeHasExactly(trade, xi.item.FADED_CRYSTAL)
+                        npcUtil.tradeMatches(trade, { { xi.item.FADED_CRYSTAL, 1 } })
                     then
                         return mission:progressEvent(506)
                     end
@@ -147,7 +147,7 @@ mission.sections =
 
                 [506] = function(player, csid, option, npc)
                     if option == 0 then
-                        player:confirmTrade()
+                        player:tradeComplete()
                         npcUtil.giveKeyItem(player, xi.ki.C_L_REPORT)
                     end
                 end,

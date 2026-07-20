@@ -41,9 +41,9 @@ mission.sections =
                         not player:hasKeyItem(xi.ki.PSOXJA_PASS) and
                         mission:getVar(player, 'Status') == 2 and
                         (
-                            npcUtil.tradeHasExactly(trade, xi.item.CARMINE_CHIP) or
-                            npcUtil.tradeHasExactly(trade, xi.item.CYAN_CHIP) or
-                            npcUtil.tradeHasExactly(trade, xi.item.GRAY_CHIP)
+                            npcUtil.tradeMatches(trade, { { xi.item.CARMINE_CHIP, 1 } }) or
+                            npcUtil.tradeMatches(trade, { { xi.item.CYAN_CHIP, 1 } }) or
+                            npcUtil.tradeMatches(trade, { { xi.item.GRAY_CHIP, 1 } })
                         )
                     then
                         -- ToDo Uncaptured CS 51 seems to imply you traded the wrong item
@@ -86,7 +86,7 @@ mission.sections =
             onEventFinish =
             {
                 [52] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    player:tradeComplete()
 
                     player:addGil(xi.settings.main.GIL_RATE * 500) -- Silent since the gil reward is baked into the CS.
                     npcUtil.giveKeyItem(player, xi.ki.PSOXJA_PASS)

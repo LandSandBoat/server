@@ -35,7 +35,7 @@ mission.sections =
                 onTrade = function(player, npc, trade)
                     local requiredTrade = itemOptions[mission:getVar(player, 'Option')]
 
-                    if npcUtil.tradeHasExactly(trade, { requiredTrade }) then
+                    if npcUtil.tradeMatches(trade, { requiredTrade }) then
                         -- NOTE: First parameter is dependent on RotZ completion status regarding Kam'lanaut living.  With minimal requirements,
                         -- this was '1', while with RotZ completed this was '3'
 
@@ -54,7 +54,7 @@ mission.sections =
             {
                 [17] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
             },

@@ -26,7 +26,7 @@ mission.sections =
             ['Veridical_Conflux'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.PUNCH_BUG) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.PUNCH_BUG, 1 } }) then
                         return mission:progressEvent(35, 64, 23, 1756, 0, 0, 0, 0, 0)
                     end
                 end,
@@ -38,7 +38,7 @@ mission.sections =
             {
                 [35] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
             },

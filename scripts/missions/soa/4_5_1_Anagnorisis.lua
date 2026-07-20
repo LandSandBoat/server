@@ -50,7 +50,7 @@ mission.sections =
                 onTrade = function(player, npc, trade)
                     local rewardItem = findRewardItem(player)
 
-                    if npcUtil.tradeHasExactly(trade, rewardItem) then
+                    if npcUtil.tradeMatches(trade, { { rewardItem, 1 } }) then
                         return mission:progressEvent(1544, rewardItem, 23, 2964, 975, 4063, 1999, 1999, 4)
                     end
                 end,
@@ -68,7 +68,7 @@ mission.sections =
             {
                 [1544] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
 

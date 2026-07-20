@@ -26,7 +26,7 @@ mission.sections =
             ['Uu_Zhoumo'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.ASPIR_KNIFE) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.ASPIR_KNIFE, 1 } }) then
                         return mission:progressEvent(41)
                     end
                 end,
@@ -51,7 +51,7 @@ mission.sections =
                 end,
 
                 [41] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    player:tradeComplete()
                     player:delKeyItem(xi.ki.DULL_SWORD)
                     player:setMissionStatus(mission.areaId, 6)
                 end,

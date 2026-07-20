@@ -19,9 +19,7 @@ mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and
-                not mission:getMustZone(player) and
-                VanadielUniqueDay() >= mission:getVar(player, 'Timer')
+            return currentMission == mission.missionId
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -41,7 +39,7 @@ mission.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:getMissionStatus(mission.areaId) == 1 and
-                        npcUtil.tradeHasExactly(trade, xi.item.VIAL_OF_JODYS_ACID)
+                        npcUtil.tradeMatches(trade, { { xi.item.VIAL_OF_JODYS_ACID, 1 } })
                     then
                         return mission:progressEvent(279)
                     end
@@ -66,7 +64,7 @@ mission.sections =
 
                 [279] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
             },

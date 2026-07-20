@@ -27,7 +27,7 @@ local handleTradeEventFinish = function(player, csid, option, npc)
 
     local pathId = player:getMissionStatus(mission.areaId)
 
-    player:confirmTrade()
+    player:tradeComplete()
     mission:complete(player)
     player:setMissionStatus(mission.areaId, pathId)
 end
@@ -45,7 +45,7 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, { { xi.item.CLUMP_OF_BEE_POLLEN, 3 } }) and
+                        npcUtil.tradeMatches(trade, { { xi.item.CLUMP_OF_BEE_POLLEN, 3 } }) and
                         player:getMissionStatus(mission.areaId) == 1
                     then
                         return mission:progressEvent(178, 0, 0, 0, 0, 0, 0, player:hasJob(0) and 1 or 0)
@@ -69,7 +69,7 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, { { xi.item.MANDRAGORA_DEWDROP, 3 } }) and
+                        npcUtil.tradeMatches(trade, { { xi.item.MANDRAGORA_DEWDROP, 3 } }) and
                         player:getMissionStatus(mission.areaId) == 2
                     then
                         return mission:progressEvent(370, 0, 0, 0, 0, 0, 0, player:hasJob(0) and 1 or 0)

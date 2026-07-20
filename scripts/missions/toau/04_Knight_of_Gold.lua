@@ -28,8 +28,8 @@ mission.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:getMissionStatus(mission.areaId) == 1 and
-                        (npcUtil.tradeHasExactly(trade, { { 'gil', 1000 } }) or
-                        npcUtil.tradeHasExactly(trade, xi.item.IMPERIAL_BRONZE_PIECE))
+                        (npcUtil.tradeMatches(trade, { { xi.item.GIL, 1000 } }) or
+                        npcUtil.tradeMatches(trade, { { xi.item.IMPERIAL_BRONZE_PIECE, 1 } }))
                     then
                         return mission:progressEvent(3022, { text_table = 0 })
                     end
@@ -84,7 +84,7 @@ mission.sections =
             onEventFinish =
             {
                 [3022] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    player:tradeComplete()
                     player:setMissionStatus(mission.areaId, 2)
                 end,
 

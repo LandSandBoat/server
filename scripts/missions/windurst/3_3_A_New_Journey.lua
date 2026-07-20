@@ -84,7 +84,7 @@ mission.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:getMissionStatus(mission.areaId) == 2 and
-                        npcUtil.tradeHasExactly(trade, xi.item.DELKFUTT_KEY)
+                        npcUtil.tradeMatches(trade, { { xi.item.DELKFUTT_KEY, 1 } })
                     then
                         return mission:progressCutscene(2)
                     end
@@ -107,7 +107,7 @@ mission.sections =
                     player:setMissionStatus(mission.areaId, 3)
 
                     if not player:hasKeyItem(xi.ki.DELKFUTT_KEY) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                         npcUtil.giveKeyItem(player, xi.ki.DELKFUTT_KEY)
                     end
                 end,

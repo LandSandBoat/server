@@ -90,7 +90,7 @@ mission.sections =
             ['Alois'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.LIZARD_EGG) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.LIZARD_EGG, 1 } }) then
                         if not player:hasCompletedMission(mission.areaId, mission.missionId) then
                             return mission:progressEvent(372)
                         else
@@ -106,13 +106,13 @@ mission.sections =
             {
                 [372] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
 
                 [373] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
             },

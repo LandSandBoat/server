@@ -22,7 +22,7 @@ local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_P
 
 mission.reward =
 {
-    gil = 40000,
+    gil  = 40000,
     rank = 7,
 }
 
@@ -130,7 +130,7 @@ mission.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:getMissionStatus(mission.areaId) == 2 and
-                        npcUtil.tradeHasExactly(trade, xi.item.FRAG_ROCK)
+                        npcUtil.tradeMatches(trade, { { xi.item.FRAG_ROCK, 1 } })
                     then
                         return mission:progressEvent(99)
                     end
@@ -150,7 +150,7 @@ mission.sections =
                 end,
 
                 [99] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    player:tradeComplete()
                     player:setMissionStatus(mission.areaId, 3)
                 end,
             },
@@ -163,10 +163,10 @@ mission.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:getMissionStatus(mission.areaId) == 2 and
-                        npcUtil.tradeHasExactly(trade, xi.item.CHUNK_OF_ADAMAN_ORE) and
+                        npcUtil.tradeMatches(trade, { { xi.item.CHUNK_OF_ADAMAN_ORE, 1 } }) and
                         npcUtil.popFromQM(player, npc, { ifritsCauldronID.mob.PIRATES_COVE_NMS, ifritsCauldronID.mob.PIRATES_COVE_NMS + 1 }, { claim = false, hide = 900 })
                     then
-                        player:confirmTrade()
+                        player:tradeComplete()
                         GetMobByID(ifritsCauldronID.mob.PIRATES_COVE_NMS):lookAt(player:getPos()) -- Salamander
                         GetMobByID(ifritsCauldronID.mob.PIRATES_COVE_NMS + 1):updateClaim(player) -- Magma
                         return mission:messageSpecial(ifritsCauldronID.text.BAD_FEELING_ABOUT_PLACE)
