@@ -69,8 +69,10 @@ constexpr auto compilerString() -> const char*
 #if defined(__clang__)
     return "Clang " __clang_version__;
 #elif defined(__GNUC__)
+    // cppcheck-suppress unknownMacro
     return "GCC " XI_STRINGIFY(__GNUC__) "." XI_STRINGIFY(__GNUC_MINOR__) "." XI_STRINGIFY(__GNUC_PATCHLEVEL__);
 #elif defined(_MSC_VER)
+    // cppcheck-suppress unknownMacro
     return "MSVC " XI_STRINGIFY(_MSC_VER);
 #else
     return "Unknown";
