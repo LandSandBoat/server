@@ -66,13 +66,13 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         return calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.criticalHit, damage
     end
 
-    -- Regular
-    local dmg = (target:getCE(player) + target:getVE(player)) / 6
-    -- tp affects enmity multiplier, 1.0 at 1k, 1.5 at 2k, 2.0 at 3k. Gorget/Belt adds 100 tp each.
+    -- Calculate damage based on target's CE and VE, clamped to the global damage cap.
+    damage = utils.clamp((target:getCE(player) + target:getVE(player)) / 6, 0, globalDamageCap)
+
+    -- TP affects enmity multiplier, 1.0 at 1k, 1.5 at 2k, 2.0 at 3k. Gorget/Belt adds 100 tp each.
     params.enmityMult = params.enmityMult + (tp + xi.combat.physical.calculateFTPBonus(player) * 1000 - 1000) / 2000
     params.enmityMult = utils.clamp(params.enmityMult, 1, 2) -- necessary because of Gorget/Belt bonus
 
-    damage = dmg
     damage = math.floor(damage * xi.combat.damage.calculateDamageAdjustment(target, false, false, false, true))
     damage = math.floor(damage * xi.spells.damage.calculateAbsorption(target, xi.element.NONE, false, false, false, true))
     damage = math.floor(damage * xi.spells.damage.calculateNullification(target, xi.element.NONE, false, false, false, true))
@@ -82,7 +82,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         damage = damage * (100 + player:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)) / 100
     end
 
-    damage = utils.clamp(damage, 0, globalDamageCap)
     calcParams.finalDmg = damage
 
     if damage > 0 then
