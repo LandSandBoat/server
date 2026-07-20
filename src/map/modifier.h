@@ -81,6 +81,7 @@ enum class Mod
     DARK_SLEEP_RES_RANK  = 1166,
     BLIND_RES_RANK       = 1167,
     STUN_RES_RANK        = 1186,
+    GRAVITY_RES_RANK     = 1210,
 
     ATT  = 23, // Attack
     RATT = 24, // Ranged Attack
@@ -1170,7 +1171,7 @@ enum class Mod
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1210 and onward
+    // SPARE IDs: 1211 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

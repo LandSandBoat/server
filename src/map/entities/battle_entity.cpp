@@ -1973,6 +1973,8 @@ void CBattleEntity::savePetModifiers()
         Mod::LIGHT_SLEEP_RES_RANK,
         Mod::DARK_SLEEP_RES_RANK,
         Mod::BLIND_RES_RANK,
+        Mod::STUN_RES_RANK,
+        Mod::GRAVITY_RES_RANK,
     };
 
     // update the template mods so the dynamic mods are not overwritten

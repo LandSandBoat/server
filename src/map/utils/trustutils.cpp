@@ -139,6 +139,8 @@ struct TrustData
     int8 light_sleep_res_rank{};
     int8 dark_sleep_res_rank{};
     int8 blind_res_rank{};
+    int8 stun_res_rank{};
+    int8 gravity_res_rank{};
 };
 
 HashMap<uint16, std::unique_ptr<TrustData>> g_PTrustData;
@@ -243,7 +245,8 @@ void BuildTrustData(uint32 TrustID)
                                        "mob_resistances.paralyze_res_rank, mob_resistances.bind_res_rank, "
                                        "mob_resistances.silence_res_rank, mob_resistances.slow_res_rank, "
                                        "mob_resistances.poison_res_rank, mob_resistances.light_sleep_res_rank, "
-                                       "mob_resistances.dark_sleep_res_rank, mob_resistances.blind_res_rank "
+                                       "mob_resistances.dark_sleep_res_rank, mob_resistances.blind_res_rank, "
+                                       "mob_resistances.stun_res_rank, mob_resistances.gravity_res_rank "
                                        "FROM spell_list, mob_pools, mob_species_system, mob_resistances "
                                        "WHERE spell_list.spellid = ? "
                                        "AND (spell_list.spellid + 5000) = mob_pools.poolid "
@@ -338,6 +341,8 @@ void BuildTrustData(uint32 TrustID)
             data->light_sleep_res_rank = rset->get<int8>("light_sleep_res_rank");
             data->dark_sleep_res_rank  = rset->get<int8>("dark_sleep_res_rank");
             data->blind_res_rank       = rset->get<int8>("blind_res_rank");
+            data->stun_res_rank        = rset->get<int8>("stun_res_rank");
+            data->gravity_res_rank     = rset->get<int8>("gravity_res_rank");
 
             g_PTrustData[TrustID] = std::move(data);
         }

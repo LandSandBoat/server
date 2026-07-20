@@ -75,7 +75,7 @@ auto CInstanceLoader::LoadInstance() const -> CInstance*
                                  "slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, "
                                  "magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, "
                                  "fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, "
-                                 "paralyze_res_rank, bind_res_rank, silence_res_rank, slow_res_rank, poison_res_rank, light_sleep_res_rank, dark_sleep_res_rank, blind_res_rank, "
+                                 "paralyze_res_rank, bind_res_rank, silence_res_rank, slow_res_rank, poison_res_rank, light_sleep_res_rank, dark_sleep_res_rank, blind_res_rank, stun_res_rank, gravity_res_rank, "
                                  "Element, mob_pools.speciesid, name_prefix, entityFlags, animationsub, "
                                  "(mob_species_system.HP / 100) AS hp_scale, (mob_species_system.MP / 100) AS mp_scale, hasSpellScript, spellList, mob_groups.poolid, "
                                  "allegiance, namevis, aggro, mob_pools.roamflag, mob_pools.skill_list_id, mob_pools.true_detection, detects, "
@@ -187,6 +187,8 @@ auto CInstanceLoader::LoadInstance() const -> CInstance*
             PMob->setModifier(Mod::LIGHT_SLEEP_RES_RANK, rset->get<int8>("light_sleep_res_rank"));
             PMob->setModifier(Mod::DARK_SLEEP_RES_RANK, rset->get<int8>("dark_sleep_res_rank"));
             PMob->setModifier(Mod::BLIND_RES_RANK, rset->get<int8>("blind_res_rank"));
+            PMob->setModifier(Mod::STUN_RES_RANK, rset->get<int8>("stun_res_rank"));
+            PMob->setModifier(Mod::GRAVITY_RES_RANK, rset->get<int8>("gravity_res_rank"));
 
             PMob->m_Element     = rset->get<uint8>("Element");
             PMob->m_Species     = rset->get<uint16>("speciesid");
