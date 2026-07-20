@@ -139,6 +139,7 @@ jobs:
         run: |
           sudo apt-get update && sudo apt-get install --assume-yes --no-install-recommends --quiet \
             binutils-dev \
+            libdwarf-dev \
             libluajit-5.1-dev \
             libmariadb-dev-compat \
             libssl-dev \
