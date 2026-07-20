@@ -278,7 +278,7 @@ auto debug::captureMainThreadTrace() -> Maybe<cpptrace::stacktrace>
     cpptrace::raw_trace raw;
     raw.frames = std::move(frames);
 
-    const auto stack = raw.resolve();
+    auto stack = raw.resolve();
     if (stack.empty())
     {
         return std::nullopt;

@@ -280,7 +280,7 @@ auto debug::captureMainThreadTrace() -> Maybe<cpptrace::stacktrace>
         return std::nullopt;
     }
 
-    const auto stack = mainThreadRaw.resolve();
+    auto stack = mainThreadRaw.resolve();
     if (stack.empty())
     {
         return std::nullopt;
