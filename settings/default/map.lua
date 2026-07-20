@@ -87,6 +87,9 @@ xi.settings.map =
     -- Minimum level at which experience points can be lost
     EXP_LOSS_LEVEL = 31,
 
+    -- Enable/Disable pre-Abyssea experience point loss tiers. set true with EXP_LOSS_LEVEL = 4, for pre-Abyssea experience point loss behavior. https://wiki.ffo.jp/html/15196.html
+    USE_PRE_ABYSSEA_EXP_LOSS_TIERS = false,
+
     -- Minimum level at which regional influence is lost in conquest when a player dies
     -- Level 5 and below don't lose influence: http://wiki.ffo.jp/html/498.html
     MINIMUM_LEVEL_CONQUEST_INFUENCE_LOSS = 6,
