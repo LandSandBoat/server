@@ -72,6 +72,7 @@ xi.mod =
     DARK_SLEEP_RES_RANK             = 1166,
     BLIND_RES_RANK                  = 1167,
     STUN_RES_RANK                   = 1186,
+    GRAVITY_RES_RANK                = 1210,
 
     ATT                             = 23,
     RATT                            = 24,

@@ -237,6 +237,8 @@ struct Pet_t
     int8 light_sleep_res_rank;
     int8 dark_sleep_res_rank;
     int8 blind_res_rank;
+    int8 stun_res_rank;
+    int8 gravity_res_rank;
 
     Pet_t()
     : PetID(0)
@@ -297,6 +299,8 @@ struct Pet_t
     , light_sleep_res_rank(0)
     , dark_sleep_res_rank(0)
     , blind_res_rank(0)
+    , stun_res_rank(0)
+    , gravity_res_rank(0)
     {
     }
 };
