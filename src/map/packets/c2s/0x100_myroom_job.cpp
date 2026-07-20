@@ -22,6 +22,7 @@
 #include "0x100_myroom_job.h"
 
 #include "ai/ai_container.h"
+#include "ai/states/item_state.h"
 #include "ai/states/magic_state.h"
 #include "entities/char_entity.h"
 #include "items/item_weapon.h"
@@ -164,8 +165,8 @@ void GP_CLI_COMMAND_MYROOM_JOB::process(MapSession* PSession, CCharEntity* PChar
 
     PChar->StatusEffectContainer->DelStatusEffectsByFlag(xi::StatusEffectFlag::Dispelable | xi::StatusEffectFlag::Roll | xi::StatusEffectFlag::OnJobchange);
 
-    // Changing jobs interrupts any spell being cast.
-    if (PChar->PAI->IsCurrentState<CMagicState>())
+    // Changing jobs interrupts any spell being cast or item being used
+    if (PChar->PAI->IsCurrentState<CMagicState>() || PChar->PAI->IsCurrentState<CItemState>())
     {
         PChar->PAI->InterruptStates();
     }
