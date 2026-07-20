@@ -2368,7 +2368,7 @@ void CBattleEntity::Die()
     {
         PAI->EventHandler.triggerListener("DEATH", this);
     }
-    SetBattleTargetID(0);
+    setBattleTarget(std::nullopt);
 }
 
 void CBattleEntity::processActionEffectFlags(const action_t& action) const
@@ -3615,7 +3615,7 @@ void CBattleEntity::OnDisengage(CAttackState& s)
 {
     TracyZoneScoped;
 
-    m_battleTarget = 0;
+    setBattleTarget(std::nullopt);
     if (animation == ANIMATION_ATTACK)
     {
         animation = ANIMATION_NONE;
@@ -3628,9 +3628,14 @@ void CBattleEntity::OnChangeTarget(CBattleEntity* PTarget)
 {
 }
 
-CBattleEntity* CBattleEntity::GetBattleTarget()
+void CBattleEntity::setBattleTarget(const Maybe<EntityID_t>& target)
 {
-    return static_cast<CBattleEntity*>(GetEntity(GetBattleTargetID()));
+    battleTarget_ = target.value_or(EntityID_t{});
+}
+
+auto CBattleEntity::GetBattleTarget() const -> CBattleEntity*
+{
+    return battleTarget_.resolve<CBattleEntity>();
 }
 
 bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
@@ -4065,7 +4070,7 @@ void CBattleEntity::PostTick()
 
 uint16 CBattleEntity::GetBattleTargetID() const
 {
-    return m_battleTarget;
+    return battleTarget_.targid;
 }
 
 bool CBattleEntity::hasEnmityEXPENSIVE() const
