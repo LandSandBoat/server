@@ -248,6 +248,13 @@ auto CItemState::Update(const timer::time_point tick) -> bool
 
 void CItemState::Cleanup(timer::time_point tick)
 {
+    if (!IsCompleted() && !m_interrupted && m_PItem)
+    {
+        ActionInterrupts::ItemInterrupt(m_PEntity);
+        m_PEntity->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, m_PItem->getID(), 0, MsgBasic::ItemFailsToActivate);
+        m_interrupted = true;
+    }
+
     m_PEntity->UContainer->Clean();
 
     if (tx_ && tx_->isOpen())
