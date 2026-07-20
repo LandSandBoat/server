@@ -64,10 +64,6 @@ INSERT INTO `mob_pool_mods` VALUES (459,430,20,0); -- QUAD_ATTACK: 20
 
 -- Bugbby
 INSERT INTO `mob_pool_mods` VALUES (559,62,-50,0);   -- ATTP: -50
--- Byakko
-INSERT INTO `mob_pool_mods` VALUES (592,3,100,1);  -- MP_BASE: 100
-INSERT INTO `mob_pool_mods` VALUES (592,68,15,0);  -- EVA: 15
-INSERT INTO `mob_pool_mods` VALUES (592,302,45,0); -- TRIPLE_ATTACK: 45
 
 -- Cerberus
 INSERT INTO `mob_pool_mods` VALUES (680,1,322,0);   -- DEF: 322
