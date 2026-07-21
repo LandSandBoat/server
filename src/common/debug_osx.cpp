@@ -21,19 +21,10 @@
 
 #ifdef __APPLE__
 #include <csignal>
-#include <sys/ptrace.h>
 #include <sys/resource.h>
 #include <sys/sysctl.h>
 #include <sys/types.h>
 #include <sys/ucontext.h>
-
-#ifndef PTRACE_TRACEME
-#define PTRACE_TRACEME 0
-#endif // PTRACE_TRACEME
-
-#ifndef PTRACE_DETACH
-#define PTRACE_DETACH 17
-#endif // PTRACE_DETACH
 
 #include <common/debug.h>
 #include <common/tombstone.h>

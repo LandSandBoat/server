@@ -21,7 +21,6 @@
 
 #ifdef __linux__
 #include <csignal>
-#include <sys/ptrace.h>
 #include <sys/resource.h>
 #include <sys/types.h>
 
@@ -31,12 +30,14 @@
 #include <cpptrace/cpptrace.hpp>
 
 #include <atomic>
+#include <charconv>
 #include <climits>
 #include <cstring>
 #include <ctime>
 #include <fstream>
 #include <iterator>
 #include <pthread.h>
+#include <string_view>
 #include <tuple>
 #include <unistd.h>
 
@@ -153,18 +154,30 @@ void debug::setCoreDumpsEnabled(bool enabled)
 auto debug::isRunningUnderDebugger() -> bool
 {
     static bool isCheckedAlready = false;
-
-    bool underDebugger = false;
+    static bool underDebugger    = false;
 
     if (!isCheckedAlready)
     {
-        if (ptrace(PTRACE_TRACEME, 0, 1, 0) < 0)
+        std::ifstream file("/proc/self/status");
+        std::string   line;
+        while (std::getline(file, line))
         {
-            underDebugger = true;
-        }
-        else
-        {
-            ptrace(PTRACE_DETACH, 0, 1, 0);
+            constexpr auto key = std::string_view("TracerPid:");
+            if (line.starts_with(key))
+            {
+                auto value = std::string_view(line).substr(key.size());
+                if (const auto start = value.find_first_not_of(" \t"); start != std::string_view::npos)
+                {
+                    value = value.substr(start);
+
+                    int pid = 0;
+                    if (std::from_chars(value.data(), value.data() + value.size(), pid).ec == std::errc())
+                    {
+                        underDebugger = pid != 0;
+                    }
+                }
+                break;
+            }
         }
 
         isCheckedAlready = true;
