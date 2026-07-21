@@ -45,13 +45,16 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 1 and
-                        npcUtil.tradeHasExactly(trade, xi.item.PICKAXE)
+                        npcUtil.tradeMatches(trade, { { xi.item.PICKAXE, 1 } })
                     then
                         return quest:progressEvent(8)
                     elseif
                         not player:needToZone() and
                         quest:getVar(player, 'Prog') == 2 and
-                        npcUtil.tradeHas(trade, { xi.item.MYTHRIL_PICK, xi.item.MYTHRIL_PICK_HQ }, true)
+                        (
+                            npcUtil.tradeMatches(trade, { { xi.item.MYTHRIL_PICK, 1 } }) or
+                            npcUtil.tradeMatches(trade, { { xi.item.MYTHRIL_PICK_HQ, 1 } })
+                        )
                     then
                         return quest:progressEvent(9, { [0] = trade:getItemId() })
                     end
@@ -72,7 +75,11 @@ quest.sections =
                 [9] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:tradeComplete()
-                        npcUtil.giveKeyItem(player, xi.ki.MAP_OF_MOUNT_ZHAYOLM)
+                        if player:hasKeyItem(xi.ki.MAP_OF_MOUNT_ZHAYOLM) then
+                            npcUtil.giveCurrency(player, 'gil', 2000)
+                        else
+                            npcUtil.giveKeyItem(player, xi.ki.MAP_OF_MOUNT_ZHAYOLM)
+                        end
                     end
                 end,
             },
