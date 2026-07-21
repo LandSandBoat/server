@@ -1364,7 +1364,7 @@ xi.data.guildShops =
             { id = xi.item.FLASK_OF_SILENCING_POTION, initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 4500,   restockRate = 0 },
             { id = xi.item.FLASK_OF_ECHO_DROPS,       initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 4000,   restockRate = 0 },
             { id = xi.item.JAR_OF_FIRESAND,           initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 22400,  restockRate = 0 },
-            { id = xi.item.FLASH_OF_VITRIOL,          initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 2400,   restockRate = 0 },
+            { id = xi.item.FLASK_OF_VITRIOL,          initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 2400,   restockRate = 0 },
             { id = xi.item.JAR_OF_BLACK_INK,          initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 3800,   restockRate = 0 },
             { id = xi.item.FLASK_OF_DEODORIZER,       initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 4800,   restockRate = 0 },
             { id = xi.item.POTION,                    initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 4550,   restockRate = 0 },
@@ -2330,7 +2330,7 @@ xi.data.guildShops =
             { id = xi.item.FLASK_OF_SILENCING_POTION,   initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 4500,   restockRate = 0 }, -- buyMax from Maymunah; targetStock assumed
             { id = xi.item.FLASK_OF_ECHO_DROPS,         initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 4000,   restockRate = 0 }, -- targetStock assumed
             { id = xi.item.JAR_OF_FIRESAND,             initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 22400,  restockRate = 0 }, -- targetStock assumed
-            { id = xi.item.FLASH_OF_VITRIOL,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 2400,   restockRate = 0 }, -- targetStock assumed
+            { id = xi.item.FLASK_OF_VITRIOL,            initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 2400,   restockRate = 0 }, -- targetStock assumed
             { id = xi.item.INFERNO_AXE,                 initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 8725,   restockRate = 0 }, -- targetStock assumed
             { id = xi.item.INFERNO_SWORD,               initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 122080, restockRate = 0 }, -- targetStock assumed
             { id = xi.item.ACID_DAGGER,                 initial = 0,   maxStock = 60,  targetStock = 45,  buyMax = 51510,  restockRate = 0 }, -- targetStock assumed

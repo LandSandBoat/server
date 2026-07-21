@@ -305,7 +305,7 @@ xi.shop.generalGuildStock =
         { xi.item.BOTTLE_OF_AHRIMAN_TEARS,       200, xi.craftRank.INITIATE   },
         { xi.item.LOOP_OF_GLASS_FIBER,          1200, xi.craftRank.NOVICE     },
         { xi.item.JAR_OF_FIRESAND,              5000, xi.craftRank.NOVICE     },
-        { xi.item.FLASH_OF_VITRIOL,              700, xi.craftRank.APPRENTICE },
+        { xi.item.FLASK_OF_VITRIOL,              700, xi.craftRank.APPRENTICE },
         { xi.item.BOTTLE_OF_SIEGLINDE_PUTTY,    4000, xi.craftRank.APPRENTICE },
         { xi.item.DRYAD_ROOT,                   1800, xi.craftRank.APPRENTICE },
         { xi.item.LOOP_OF_CARBON_FIBER,         1900, xi.craftRank.JOURNEYMAN },
