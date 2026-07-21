@@ -65,11 +65,6 @@ INSERT INTO `mob_pool_mods` VALUES (459,430,20,0); -- QUAD_ATTACK: 20
 -- Bugbby
 INSERT INTO `mob_pool_mods` VALUES (559,62,-50,0);   -- ATTP: -50
 
--- Cerberus
-INSERT INTO `mob_pool_mods` VALUES (680,1,322,0);   -- DEF: 322
-INSERT INTO `mob_pool_mods` VALUES (680,31,200,0);  -- MEVA: 200
-INSERT INTO `mob_pool_mods` VALUES (680,251,-50,0); -- STUNRES: -50
-
 -- Citipati
 INSERT INTO `mob_pool_mods` VALUES (733,302,5,0); -- TRIPLE_ATTACK: 5
 

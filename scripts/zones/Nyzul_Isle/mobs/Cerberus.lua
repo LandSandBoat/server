@@ -31,6 +31,26 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 15)
 end
 
+entity.onMobMobskillChoose = function(mob, target, skillId)
+    local skillList =
+    {
+        xi.mobSkill.ULULATION,
+        xi.mobSkill.MAGMA_HOPLON,
+    }
+
+    if target:isInfront(mob, 128) then
+        table.insert(skillList, xi.mobSkill.LAVA_SPIT)
+        table.insert(skillList, xi.mobSkill.SULFUROUS_BREATH)
+        table.insert(skillList, xi.mobSkill.SCORCHING_LASH)
+    end
+
+    if mob:getHPP() < 25 then
+        table.insert(skillList, xi.mobSkill.GATES_OF_HADES)
+    end
+
+    return skillList[math.randomInt(1, #skillList)]
+end
+
 entity.onMobFight = function(mob, target)
     if mob:getHPP() > 25 then
         mob:setMod(xi.mod.REGAIN, 10)

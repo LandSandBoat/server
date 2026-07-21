@@ -1027,7 +1027,10 @@ xi.mobSkill =
     FIRESPIT                      = 1733,
 
     LAVA_SPIT                     = 1785,
-
+    SULFUROUS_BREATH              = 1786,
+    SCORCHING_LASH                = 1787,
+    ULULATION                     = 1788,
+    MAGMA_HOPLON                  = 1789,
     GATES_OF_HADES                = 1790,
 
     VAMPIRIC_ROOT                 = 1793,
@@ -1053,6 +1056,7 @@ xi.mobSkill =
     PIT_AMBUSH_2                  = 1844,
     MANDIBULAR_BITE_2             = 1845,
 
+    ROAR_CERBERUS                 = 1892,
     -- SPIRIT_SURGE                  = 1893,
 
     FIRESPIT_BLUE_MAMOOLJA        = 1923, -- Ignores shadows

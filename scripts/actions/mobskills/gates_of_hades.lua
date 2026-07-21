@@ -8,11 +8,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getHPP() < 25 then -- TODO: Move to mob scripts?
-        return 0
-    end
-
-    return 1
+    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
