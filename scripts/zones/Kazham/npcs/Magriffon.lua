@@ -4,8 +4,6 @@
 -- Involved in Quest: Gullible's Travels, Even More Gullible's Travels,
 -- Location: (I-7)
 -----------------------------------
-local ID = zones[xi.zone.KAZHAM]
------------------------------------
 ---@type TNpcEntity
 local entity = {}
 
@@ -16,12 +14,9 @@ local pathNodes =
 }
 
 entity.onSpawn = function(npc)
-    -- Ensure that the correct Magriffon is given pathing information.
-    if npc:getID() == ID.npc.MAGRIFFON then
-        npc:initNpcAi()
-        npc:setPos(xi.path.first(pathNodes))
-        npc:pathThrough(pathNodes, xi.path.flag.PATROL)
-    end
+    npc:initNpcAi()
+    npc:setPos(xi.path.first(pathNodes))
+    npc:pathThrough(pathNodes, xi.path.flag.PATROL)
 end
 
 entity.onTrade = function(player, npc, trade)
@@ -41,7 +36,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local gulliblesTravelsStatus = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.GULLIBLES_TRAVELS)
-    local evenmoreTravelsStatus = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.EVEN_MORE_GULLIBLES_TRAVELS)
+    local evenmoreTravelsStatus  = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.EVEN_MORE_GULLIBLES_TRAVELS)
 
     if gulliblesTravelsStatus == xi.questStatus.QUEST_ACCEPTED then
         local magriffonGilRequest = player:getCharVar('MAGRIFFON_GIL_REQUEST')
