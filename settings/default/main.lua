@@ -157,6 +157,9 @@ xi.settings.main =
     -- VIT:DEF ratio. Applies to everything but mobs and charmed mobs. Those are hardcoded to 0.5.
     PLAYER_ALLIES_VIT_DEF_MULTIPLIER = 1.5, -- 1.5: 1 VIT = 1.5 DEF. This has been 0.5 in previous eras.
 
+    -- Ranged Attack Free Phase Delay (in milliseconds) - The delay before a ranged attack can be executed after the player puts away their weapon. Default is 500 milliseconds. (Use 1200 for pre-2012 setting)
+    RANGED_ATTACK_FREE_PHASE_DELAY = 500,
+
     USE_ADOULIN_WEAPON_SKILL_CHANGES = true,  -- true/false. Change to toggle new Adoulin weapon skill damage calculations
     DISABLE_PARTY_EXP_PENALTY        = false, -- true/false.
     ENABLE_IMMUNOBREAK               = true,  -- true/false. Allow/Disallow immunobreaks to happen.

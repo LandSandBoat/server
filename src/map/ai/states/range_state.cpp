@@ -26,6 +26,7 @@
 #include "action/action.h"
 #include "action/interrupts.h"
 #include "ai/ai_container.h"
+#include "common/settings.h"
 #include "entities/char_entity.h"
 #include "entities/trust_entity.h"
 #include "enums/action/category.h"
@@ -72,6 +73,9 @@ CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid)
         throw CStateInitException(m_errorMsg->copy());
     }
 
+    // Configured in main. default : 500ms
+    m_freePhaseTimePlayer = std::chrono::milliseconds(settings::get<uint32>("main.RANGED_ATTACK_FREE_PHASE_DELAY"));
+
     // https://www.bg-wiki.com/ffxi/Delay#Ranged_Delay
     // GetRangedDelayReduction is 2 of the 3 steps of `Ranged Weapon Delay x (1 - Snapshot) x (1 - Velocity Shot) x (1 - Rapid Shot)`
     // If Rapid Shot fires it will do the third multiplicative step
@@ -115,7 +119,7 @@ CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid)
 
         if (distance(m_PEntity->loc.p, PTarget->loc.p) <= m_PEntity->GetMeleeRange(PTarget))
         {
-            m_freePhaseTime = 6500ms + std::chrono::milliseconds(xirand::GetRandomNumber(0, 1500)); // Seems to have a random factor on to when it can shoot next. 1 or 2 melee auto attacks
+            m_freePhaseTimeMob = 6500ms + std::chrono::milliseconds(xirand::GetRandomNumber(0, 1500)); // Seems to have a random factor on to when it can shoot next. 1 or 2 melee auto attacks
         }
     }
 
@@ -206,7 +210,7 @@ bool CRangeState::Update(timer::time_point tick)
         }
         else if (auto* PMob = dynamic_cast<CMobEntity*>(m_PEntity))
         {
-            PMob->m_LastRangedAttackTime = GetEntryTime() + m_aimTime + m_freePhaseTime;
+            PMob->m_LastRangedAttackTime = GetEntryTime() + m_aimTime + m_freePhaseTimeMob;
         }
         return true;
     }
@@ -284,7 +288,7 @@ bool CRangeState::CanUseRangedAttack(CBattleEntity* PTarget, bool isEndOfAttack)
     // make sure player is waiting the appropriate time between ranged attacks
     if (auto PChar = dynamic_cast<CCharEntity*>(m_PEntity))
     {
-        if (m_PEntity->PAI->getTick() - PChar->m_LastRangedAttackTime < m_freePhaseTime)
+        if (m_PEntity->PAI->getTick() - PChar->m_LastRangedAttackTime < m_freePhaseTimePlayer)
         {
             m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget, 0, 0, MsgBasic::WaitLonger);
             return false;
