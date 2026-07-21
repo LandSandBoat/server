@@ -1754,6 +1754,17 @@ void LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
         return;
     }
 
+    // Ensure a stowed automaton frame always matches the current automaton frame of the master.
+    if (PMaster->objtype == TYPE_PC &&
+        (PetID == PETID_HARLEQUINFRAME || PetID == PETID_VALOREDGEFRAME || PetID == PETID_SHARPSHOTFRAME || PetID == PETID_STORMWAKERFRAME))
+    {
+        const auto frameEquipped = static_cast<CCharEntity*>(PMaster)->getAutomatonFrame();
+        if (frameEquipped >= AutomatonFrame::Harlequin && frameEquipped <= AutomatonFrame::Stormwaker)
+        {
+            PetID = static_cast<uint32>(PETID_HARLEQUINFRAME) + static_cast<uint32>(frameEquipped) - static_cast<uint32>(AutomatonFrame::Harlequin);
+        }
+    }
+
     auto maybePetData = std::find_if(
         g_PPetList.begin(),
         g_PPetList.end(),
