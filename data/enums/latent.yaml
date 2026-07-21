@@ -71,3 +71,5 @@ values:
   mainjob: 62 # mainjob - PARAM: JOBTYPE
   in_adoulin: 63
   in_garrison: 64 # while in an active Garrison
+  sanction_food_bonus: 65 # While in besieged region
+  sigil_food_bonus: 66 # While in campaign region

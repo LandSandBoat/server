@@ -14,7 +14,8 @@ effectObject.onEffectGain = function(target, effect)
     elseif power == 2 then
         target:addLatent(xi.latent.SANCTION_REFRESH_BONUS, 75, xi.mod.REFRESH, 1)
     elseif power == 3 then
-        target:addMod(xi.mod.FOOD_DURATION, 100)
+        -- TODO: Power varies with Imperial defense level
+        target:addLatent(xi.latent.SANCTION_FOOD_BONUS, 0, xi.mod.FOOD_DURATION, 100)
     end
 end
 
@@ -30,7 +31,7 @@ effectObject.onEffectLose = function(target, effect)
     elseif power == 2 then
         target:delLatent(xi.latent.SANCTION_REFRESH_BONUS, 75, xi.mod.REFRESH, 1)
     elseif power == 3 then
-        target:delMod(xi.mod.FOOD_DURATION, 100)
+        target:delLatent(xi.latent.SANCTION_FOOD_BONUS, 0, xi.mod.FOOD_DURATION, 100)
     end
 end
 

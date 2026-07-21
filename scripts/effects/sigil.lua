@@ -18,7 +18,8 @@ effectObject.onEffectGain = function(target, effect)
     end
 
     if utils.mask.getBit(power, 3) then
-        target:addMod(xi.mod.FOOD_DURATION, 100)
+        -- TODO: Power varies with controlled areas
+        target:addLatent(xi.latent.SIGIL_FOOD_BONUS, 0, xi.mod.FOOD_DURATION, 100)
     end
 
     if utils.mask.getBit(power, 4) then
@@ -45,7 +46,7 @@ effectObject.onEffectLose = function(target, effect)
     end
 
     if utils.mask.getBit(power, 3) then
-        target:delMod(xi.mod.FOOD_DURATION, 100)
+        target:delLatent(xi.latent.SIGIL_FOOD_BONUS, 0, xi.mod.FOOD_DURATION, 100)
     end
 
     if utils.mask.getBit(power, 4) then
