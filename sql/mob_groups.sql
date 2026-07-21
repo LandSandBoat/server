@@ -12085,7 +12085,7 @@ INSERT INTO `mob_groups` VALUES (33,6118,165,'Dazbog',0,128,0,0,0,1,NULL);
 -- ------------------------------------------------------------
 
 INSERT INTO `mob_groups` VALUES (1,4349,166,'Wind_Bats',300,0,82,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (2,443,166,'Blade_Bat',300,0,461,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (2,8169,166,'Blade_Bat',300,0,461,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (3,6412,166,'Oil_Slick',300,0,15,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (4,1737,166,'Goblin_Thug',300,0,1170,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (5,1744,166,'Goblin_Weaver',300,0,1183,0,0,0,NULL);
