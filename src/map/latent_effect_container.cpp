@@ -327,6 +327,8 @@ void CLatentEffectContainer::CheckLatentsStatusEffect()
                 case xi::Latent::WeatherElement:
                 case xi::Latent::NationControl:
                 case xi::Latent::InGarrison:
+                case xi::Latent::SanctionFoodBonus:
+                case xi::Latent::SigilFoodBonus:
                     return ProcessLatentEffect(latentEffect);
                     break;
                 default:
@@ -677,6 +679,8 @@ void CLatentEffectContainer::CheckLatentsZone()
                 case xi::Latent::NationControl:
                 case xi::Latent::NationCitizen:
                 case xi::Latent::ZoneHomeNation:
+                case xi::Latent::SanctionFoodBonus:
+                case xi::Latent::SigilFoodBonus:
                     return ProcessLatentEffect(latentEffect);
                     break;
                 default:
@@ -860,6 +864,16 @@ auto CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
                          m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::RONFAURE_FRONT &&
                          m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::VALDEAUNIA_FRONT &&
                          ((float)m_POwner->health.mp / m_POwner->health.maxmp) * 100 < latentEffect.GetConditionsValue();
+            break;
+        case xi::Latent::SanctionFoodBonus:
+            expression = m_POwner->loc.zone != nullptr &&
+                         m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::WEST_AHT_URHGAN &&
+                         m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::ALZADAAL;
+            break;
+        case xi::Latent::SigilFoodBonus:
+            expression = m_POwner->loc.zone != nullptr &&
+                         m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::RONFAURE_FRONT &&
+                         m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::VALDEAUNIA_FRONT;
             break;
         case xi::Latent::StatusEffectActive:
             expression = m_POwner->StatusEffectContainer->HasStatusEffect(static_cast<xi::StatusEffect>(latentEffect.GetConditionsValue()));
