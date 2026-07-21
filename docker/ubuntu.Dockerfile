@@ -19,6 +19,7 @@ apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     binutils \
     ca-certificates \
     git \
+    libdwarf1 \
     libzmq5 \
     lua5.1 \
     luajit \
@@ -74,12 +75,14 @@ apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     ccache \
     cmake \
     g++-$GCC_VERSION \
+    libdwarf-dev \
     libluajit-5.1-dev \
     libmariadb-dev-compat \
     libssl-dev \
     libzmq3-dev \
     make \
     ninja-build \
+    pkg-config \
     python3-dev \
     python3-venv \
     zlib1g-dev \

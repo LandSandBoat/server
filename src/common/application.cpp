@@ -29,7 +29,6 @@
 #include "settings.h"
 
 #ifdef _WIN32
-#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
 #include <timeapi.h>
@@ -39,6 +38,7 @@
 #endif
 
 #include <csignal>
+#include <string_view>
 #include <thread>
 
 namespace
@@ -78,6 +78,8 @@ Application::Application(const ApplicationConfig& appConfig, int argc, char** ar
     // It is safe to use the logging macros and settings from this point on
     //
 
+    debug::setCoreDumpsEnabled(settings::get<bool>("main.GENERATE_CORE_DUMP"));
+
     ShowInfoFmt("=======================================================================");
     ShowInfoFmt("Begin {}-server init...", serverName_);
 
@@ -86,6 +88,21 @@ Application::Application(const ApplicationConfig& appConfig, int argc, char** ar
 #else
     ShowInfo("32-bit environment detected");
 #endif
+
+    constexpr std::string_view builtBuildType = XI_BUILD_TYPE;
+    constexpr std::string_view cmakeBuildType = XI_CMAKE_BUILD_TYPE;
+    if (cmakeBuildType.empty())
+    {
+        ShowInfoFmt("Build type: {} (multi-config generator; config selected at build time)", builtBuildType);
+    }
+    else if (cmakeBuildType == builtBuildType)
+    {
+        ShowInfoFmt("Build type: {}", builtBuildType);
+    }
+    else
+    {
+        ShowWarningFmt("Build type: {}, but configured with CMAKE_BUILD_TYPE={}; the built binaries do NOT match the configured build type!", builtBuildType, cmakeBuildType);
+    }
 
     consoleService_ = std::make_unique<ConsoleService>(*this);
 }
@@ -136,7 +153,7 @@ void Application::registerSignalHandlers()
 #ifdef _WIN32
     signals_.add(SIGBREAK);
     // Don't register crash signals with ASIO on Windows - they need to reach SEH
-    // for WheatyExceptionReport to generate crash dumps
+    // for our unhandled-exception filter to write the tombstone and minidump
 #endif
 #ifndef _WIN32
     signals_.add(SIGXFSZ);

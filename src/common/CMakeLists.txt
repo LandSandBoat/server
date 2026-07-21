@@ -50,6 +50,7 @@ set(COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/types/maybe.h
     ${CMAKE_CURRENT_SOURCE_DIR}/types/variant.h
     ${CMAKE_CURRENT_SOURCE_DIR}/debug.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/debug.cpp
     $<$<PLATFORM_ID:Linux>:${CMAKE_CURRENT_SOURCE_DIR}/debug_linux.cpp>
     $<$<PLATFORM_ID:Darwin>:${CMAKE_CURRENT_SOURCE_DIR}/debug_osx.cpp>
     $<$<PLATFORM_ID:Windows>:${CMAKE_CURRENT_SOURCE_DIR}/debug_windows.cpp>
@@ -74,6 +75,8 @@ set(COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/settings.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/settings.h
     ${CMAKE_CURRENT_SOURCE_DIR}/timer.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/tombstone.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tombstone.h
     ${CMAKE_CURRENT_SOURCE_DIR}/tracy.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tracy.h
     ${CMAKE_CURRENT_SOURCE_DIR}/xirand.h
@@ -85,8 +88,6 @@ set(COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/vana_time.h
     ${CMAKE_CURRENT_SOURCE_DIR}/version.cpp # auto-generated
     ${CMAKE_CURRENT_SOURCE_DIR}/version.h
-    $<$<PLATFORM_ID:Windows>:${CMAKE_CURRENT_SOURCE_DIR}/WheatyExceptionReport.cpp>
-    $<$<PLATFORM_ID:Windows>:${CMAKE_CURRENT_SOURCE_DIR}/WheatyExceptionReport.h>
     ${CMAKE_CURRENT_SOURCE_DIR}/zlib.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/zlib.h
     PARENT_SCOPE

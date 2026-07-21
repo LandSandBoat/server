@@ -32,6 +32,7 @@ set(CMAKE_POLICY_DEFAULT_CMP0069 NEW)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_SCAN_FOR_MODULES OFF)
 set(LINKER_LANGUAGE CXX)
 set(USE_FOLDERS ON)
 
@@ -140,20 +141,30 @@ endif()
 add_library(project_options INTERFACE)
 target_compile_features(project_options INTERFACE cxx_std_23)
 
+# Windows-only preprocessor defines for our first-party code ONLY.
+if(WIN32)
+    target_compile_definitions(project_options INTERFACE
+        NOMINMAX
+        WIN32_LEAN_AND_MEAN
+        _CRT_SECURE_NO_WARNINGS
+    )
+endif()
+
 # Link this 'library' to use the warnings specified in CompilerWarnings.cmake
 add_library(project_warnings INTERFACE)
 set_project_warnings(project_warnings)
 
-# Globally define SOL_ALL_SAFETIES_ON so sol can be included anywhere
-# If SOL_NO_CHECK_NUMBER_PRECISION is defined, turns off number precision and integer
-# precision fitting when pushing numbers into sol
-# add_compile_definitions() comes with CMake 3.12
-add_definitions(
-    -DSOL_ALL_SAFETIES_ON=1
-    -DSOL_NO_CHECK_NUMBER_PRECISION=1
-    -DSOL_DEFAULT_PASS_ON_ERROR=1
-    -DSOL_PRINT_ERRORS=0
-    -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG
+add_compile_definitions(
+    # Globally define SOL_ALL_SAFETIES_ON so sol can be included anywhere.
+    SOL_ALL_SAFETIES_ON=1
+    # If SOL_NO_CHECK_NUMBER_PRECISION is defined, turns off number precision and integer
+    # precision fitting when pushing numbers into sol.
+    SOL_NO_CHECK_NUMBER_PRECISION=1
+    SOL_DEFAULT_PASS_ON_ERROR=1
+    SOL_PRINT_ERRORS=0
+    SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG
+    XI_CMAKE_BUILD_TYPE="${CMAKE_BUILD_TYPE}"
+    XI_BUILD_TYPE="$<CONFIG>"
 )
 
 # For external libs

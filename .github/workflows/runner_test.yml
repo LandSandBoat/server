@@ -80,6 +80,7 @@ jobs:
           sudo apt-get update && sudo apt-get install --assume-yes --no-install-recommends --quiet \
             binutils \
             git \
+            libdwarf1 \
             libmariadb-dev-compat \
             libzmq5 \
             lua5.1 \

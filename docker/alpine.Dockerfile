@@ -12,6 +12,7 @@ apk --update-cache add \
     bash \
     binutils \
     git \
+    libdwarf \
     lua5.1-dev \
     luajit \
     mariadb-client \
@@ -65,6 +66,7 @@ apk --update-cache add \
     ccache \
     cmake \
     g++ \
+    libdwarf-dev \
     linux-headers \
     luajit-dev \
     make \

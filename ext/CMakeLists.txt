@@ -308,6 +308,34 @@ CPMAddPackage(
     SYSTEM ON
 ) # defines: function2 (aliased to Fn, see src/common/types/fn.h)
 
+# How cpptrace turns a crash address into function + file:line, per platform:
+set(CPPTRACE_SYMBOL_OPTIONS "")
+if(APPLE)
+    # macOS binaries carry a "debug map" pointing at the .o files rather than embedded DWARF;
+    # atos resolves against the staged .dSYM (see set_target_output_directory) and is fast.
+    list(APPEND CPPTRACE_SYMBOL_OPTIONS
+        "CPPTRACE_GET_SYMBOLS_WITH_LIBDWARF OFF"
+        "CPPTRACE_GET_SYMBOLS_WITH_ADDR2LINE ON"
+    )
+elseif(UNIX)
+    # Linux: resolve in-process with libdwarf.
+    list(APPEND CPPTRACE_SYMBOL_OPTIONS
+        "CPPTRACE_GET_SYMBOLS_WITH_ADDR2LINE OFF"
+        "CPPTRACE_GET_SYMBOLS_WITH_LIBDWARF ON"
+        "CPPTRACE_USE_EXTERNAL_LIBDWARF ON"
+        "CPPTRACE_FIND_LIBDWARF_WITH_PKGCONFIG ON"
+    )
+endif()
+
+CPMAddPackage(
+    NAME cpptrace
+    GITHUB_REPOSITORY jeremy-rifkin/cpptrace
+    GIT_TAG v1.0.4
+    SYSTEM ON
+    OPTIONS
+        ${CPPTRACE_SYMBOL_OPTIONS}
+) # defines: cpptrace::cpptrace
+
 set(SHARED_EXTERNAL_LIBS
     fmt::fmt
     spdlog
@@ -325,25 +353,14 @@ set(SHARED_EXTERNAL_LIBS
     utf8cpp
     unordered_dense::unordered_dense
     function2
+    cpptrace::cpptrace
 )
 
-if(WIN32)
-    # add wepoll for epoll support on windows
-    add_subdirectory(wepoll)
-
-    list(APPEND SHARED_EXTERNAL_LIBS
-        wepoll
-    )
-
-# backwards needs these to add to linker
-elseif(APPLE)
-    # MacOS has bfd built in clang
+if(APPLE)
     list(APPEND SHARED_EXTERNAL_LIBS
         dl
     )
 elseif(UNIX)
-    # Linux needs bfd as it's not native like MacOS
-    # bfd may link zstd
     list(APPEND SHARED_EXTERNAL_LIBS
         bfd
         dl

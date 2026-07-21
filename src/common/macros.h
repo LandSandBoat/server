@@ -43,6 +43,16 @@
 #define RELEASE
 #endif
 
+// The configure-time CMAKE_BUILD_TYPE (empty on multi-config generators).
+#ifndef XI_CMAKE_BUILD_TYPE
+#define XI_CMAKE_BUILD_TYPE ""
+#endif
+
+// The config actually compiled ($<CONFIG>).
+#ifndef XI_BUILD_TYPE
+#define XI_BUILD_TYPE "unknown"
+#endif
+
 // define a break macro for debugging
 #define XI_DEBUG_BREAK_IF(_CONDITION_) \
     static_assert(false, "Use of XI_DEBUG_BREAK_IF is deprecated. Check your conditions and log appropriately instead.")
@@ -67,6 +77,17 @@
 #define XI_UNREACHABLE() std::abort()
 #else
 #define XI_UNREACHABLE() std::unreachable()
+#endif
+
+// Stringify a macro's expanded value, e.g. XI_STRINGIFY(__GNUC__) -> "13".
+#define XI_STRINGIFY2(x) #x
+#define XI_STRINGIFY(x)  XI_STRINGIFY2(x)
+
+// Keep a function out of the inliner (even under LTO) so it stays a real frame in a stack trace.
+#if defined(_MSC_VER)
+#define XI_NOINLINE __declspec(noinline)
+#else
+#define XI_NOINLINE __attribute__((noinline))
 #endif
 
 //

@@ -51,8 +51,6 @@ if(MSVC)
     list(APPEND FLAGS_AND_DEFINES
         -D_CONSOLE
         -D_MBCS
-        -DNOMINMAX
-        -D_CRT_SECURE_NO_WARNINGS
         -D_CRT_NONSTDC_NO_DEPRECATE
         # TODO: This is being overwritten by /Ob0
         # /Ob2 # Inline Function Expansion
@@ -78,7 +76,7 @@ if(MSVC)
         )
     endif()
 
-    link_libraries(WS2_32 dbghelp Shlwapi winmm)
+    link_libraries(ws2_32 dbghelp shlwapi winmm shell32 user32)
 endif()
 
 if(UNIX)
@@ -114,6 +112,25 @@ function(set_target_output_directory target)
     if(MSVC)
         add_custom_command(TARGET ${target} POST_BUILD
             COMMAND "$<$<CONFIG:Debug,RelWithDebInfo>:${CMAKE_COMMAND};-E;copy_if_different;$<TARGET_PDB_FILE:${target}>;${CMAKE_SOURCE_DIR}/$<TARGET_PDB_FILE_NAME:${target}>>"
+            COMMAND_EXPAND_LISTS
+            VERBATIM)
+    endif()
+
+    if(APPLE)
+        # Under LTO the linker merges codegen objects into temp files and deletes after linking.
+        # We need to preserve those for the next step!
+        # -object_path_lto persists those codegen objects to a real, per-target directory so
+        # dsymutil can gather their DWARF into the .dSYM.
+        if(CMAKE_INTERPROCEDURAL_OPTIMIZATION)
+            set(lto_object_dir "${CMAKE_BINARY_DIR}/lto-objects/${target}")
+            file(MAKE_DIRECTORY "${lto_object_dir}")
+            target_link_options(${target} PRIVATE "-Wl,-object_path_lto,${lto_object_dir}")
+        endif()
+
+        # dsymutil consolidates the DWARF into a self-contained .dSYM that travels with the
+        # binary, and atos picks it up automatically.
+        add_custom_command(TARGET ${target} POST_BUILD
+            COMMAND "$<$<CONFIG:Debug,RelWithDebInfo>:dsymutil;$<TARGET_FILE:${target}>;-o;${CMAKE_SOURCE_DIR}/$<TARGET_FILE_NAME:${target}>.dSYM>"
             COMMAND_EXPAND_LISTS
             VERBATIM)
     endif()
