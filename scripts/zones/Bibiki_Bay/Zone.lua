@@ -27,6 +27,12 @@ zoneObject.onZoneIn = function(player, prevZone)
     return -1
 end
 
+zoneObject.onZoneOut = function(player)
+    if player:getStatus() ~= xi.status.SHUTDOWN then
+        xi.clamming.removeKit(player)
+    end
+end
+
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
     xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
