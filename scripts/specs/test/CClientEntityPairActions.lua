@@ -216,6 +216,17 @@ end
 function CClientEntityPairActions:setLockstyle(mode, items)
 end
 
+---@class EquipSetItem
+---@field index integer Inventory slot within the container
+---@field kind xi.slot Equipment slot to equip into
+---@field container? xi.inventoryLocation Source container (defaults to inventory)
+
+---Send an equipset packet to equip a list of items, targeting a specific copy by slot
+---@param entries EquipSetItem[] Items to equip
+---@return nil
+function CClientEntityPairActions:equipSet(entries)
+end
+
 ---Start a synthesis. Inventory slots are resolved automatically.
 ---@param crystal xi.item Crystal item ID
 ---@param ingredients xi.item[] Ingredient item IDs (1..8)
