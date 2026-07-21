@@ -1039,38 +1039,41 @@ table =
 }
 --]]
 ---@param target CBaseEntity
----@param table table
+---@param params table
 ---@return boolean
-function utils.drawIn(target, table)
-    if table.position then
-        local nextDrawIn = target:getLocalVar('[Draw-In]WaitTime')
-        local conditions = table.conditions and table.conditions or { true }
-        for _, condition in ipairs(conditions) do
-            if condition then
-                if nextDrawIn > 0 then
-                    if GetSystemTime() > nextDrawIn then
-                        local position = {}
-                        if table.position then
-                            position.x   = table.position.x and table.position.x or table.position[1]
-                            position.y   = table.position.y and table.position.y or table.position[2]
-                            position.z   = table.position.z and table.position.z or table.position[3]
-                            position.rot = table.position.rot and table.position.rot or table.position[4]
-                        end
+function utils.drawIn(target, params)
+    if not params.position then
+        target:setLocalVar('[Draw-In]WaitTime', 0)
+        return false
+    end
 
-                        local offset  = table.offset and table.offset or 0
-                        local degrees = table.degrees and table.degrees or 0
-
-                        DrawIn(target, position, offset, degrees)
-                        target:setLocalVar('[Draw-In]WaitTime', 0)
-                        return true
+    local nextDrawIn = target:getLocalVar('[Draw-In]WaitTime')
+    local conditions = params.conditions and params.conditions or { true }
+    for _, condition in ipairs(conditions) do
+        if condition then
+            if nextDrawIn > 0 then
+                if GetSystemTime() > nextDrawIn then
+                    local position = {}
+                    if params.position then
+                        position.x   = params.position.x and params.position.x or params.position[1]
+                        position.y   = params.position.y and params.position.y or params.position[2]
+                        position.z   = params.position.z and params.position.z or params.position[3]
+                        position.rot = params.position.rot and params.position.rot or params.position[4]
                     end
 
-                    return false
-                else
-                    local wait = table.wait and table.wait or 1
-                    target:setLocalVar('[Draw-In]WaitTime', GetSystemTime() + wait)
-                    return false
+                    local offset  = params.offset and params.offset or 0
+                    local degrees = params.degrees and params.degrees or 0
+
+                    DrawIn(target, position, offset, degrees)
+                    target:setLocalVar('[Draw-In]WaitTime', 0)
+                    return true
                 end
+
+                return false
+            else
+                local wait = params.wait and params.wait or 1
+                target:setLocalVar('[Draw-In]WaitTime', GetSystemTime() + wait)
+                return false
             end
         end
     end

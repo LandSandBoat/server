@@ -1920,7 +1920,7 @@ INSERT INTO `mob_skills` VALUES (1856,1600,'omega_javelin',0,0.0,7.0,2000,1500,4
 -- INSERT INTO `mob_skills` VALUES (1889,1633,'spirit_vacuum',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1890,1634,'sound_vacuum',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1891,1218,'provoke',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1892,1229,'.',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0); -- This is a unnamed skill for the Cerberus "Howl" Animation
+INSERT INTO `mob_skills` VALUES (1892,1229,'roar_cerberus',0,0.0,7.0,2000,0,1,4,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1893,438,'spirit_surge',0,0.0,7.0,2000,0,1,2,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1894,1241,'potent_lunge',0,0.0,7.0,2000,1500,4,0,0,3,0,0,0);
 INSERT INTO `mob_skills` VALUES (1895,1242,'overthrow',0,0.0,7.0,2000,1500,4,0,0,6,0,0,0);
