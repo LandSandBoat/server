@@ -403,7 +403,6 @@ local function handleSingleRangedHit(mob, target, baseHitDamage, params)
     local hitGuarded               = xi.combat.physical.isGuarded(target, mob) and not params.skipGuard
     local isCritical               = false
     local hitBlocked               = false
-    local blockedWithShieldMastery = false
     local hitInfo                  = defaultHitInfo(hitNumber)
 
     ----------------------------------
@@ -451,10 +450,6 @@ local function handleSingleRangedHit(mob, target, baseHitDamage, params)
         hitBlocked = true
 
         hitDamage = hitDamage - xi.combat.physical.getDamageReductionForBlock(target, mob, hitDamage)
-
-        if target:getMod(xi.mod.SHIELD_MASTERY_TP) > 0 then
-            blockedWithShieldMastery = true
-        end
     end
 
     hitDamage = math.floor(hitDamage * xi.combat.damage.physicalElementSDT(target, params.damageType))
@@ -478,10 +473,6 @@ local function handleSingleRangedHit(mob, target, baseHitDamage, params)
 
     if hitDamage > 0 then
         target:trySkillUp(xi.skill.EVASION, target:getMainLvl())
-
-        if not blockedWithShieldMastery then
-            target:tryHitInterrupt(mob)
-        end
     end
 
     ----------------------------------
