@@ -82,6 +82,7 @@ apt-get update && apt-get install --assume-yes --no-install-recommends --quiet \
     libzmq3-dev \
     make \
     ninja-build \
+    pkg-config \
     python3-dev \
     python3-venv \
     zlib1g-dev \
