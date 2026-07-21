@@ -41,6 +41,9 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     if target:isInfront(mob, 128) then
         table.insert(skillList, xi.mobSkill.LAVA_SPIT)
         table.insert(skillList, xi.mobSkill.SULFUROUS_BREATH)
+    end
+
+    if target:isBehind(mob, 128) then
         table.insert(skillList, xi.mobSkill.SCORCHING_LASH)
     end
 
