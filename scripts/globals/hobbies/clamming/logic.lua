@@ -64,7 +64,7 @@ xi.clamming.nodeOnTrigger = function(player, npc)
         return
     end
 
-    if GetSystemTime() < player:getLocalVar('[Clam]Delay') then
+    if GetSystemTime() < player:getLocalVar('[Clam]Delay' .. npc:getName()) then
         player:messageSpecial(ID.text.IT_LOOKS_LIKE_SOMEONE)
         return
     end
@@ -146,7 +146,7 @@ xi.clamming.nodeOnEventUpdate = function(player, csid, option, npc)
 
     -- Update delay and weight, no matter the result.
     player:setCharVar('[Clam]KitWeight', kitWeight + itemWeight)
-    player:setLocalVar('[Clam]Delay', GetSystemTime() + 10)
+    player:setLocalVar('[Clam]Delay' .. npc:getName(), GetSystemTime() + 16)
 end
 
 xi.clamming.nodeOnEventFinish = function(player, csid, option, npc)
