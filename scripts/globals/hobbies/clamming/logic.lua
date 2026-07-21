@@ -45,6 +45,17 @@ local function resetVariables(player)
     end
 end
 
+-- Leaving Bibiki Bay for another zone drops the clamming kit and its bucket contents.
+xi.clamming.removeKit = function(player)
+    if not player:hasKeyItem(xi.ki.CLAMMING_KIT) then
+        return
+    end
+
+    player:delKeyItem(xi.ki.CLAMMING_KIT)
+    resetVariables(player)
+    player:messageSpecial(ID.text.YOU_DROPPED_THE, xi.ki.CLAMMING_KIT)
+end
+
 -----------------------------------
 -- Clamming Point public functions.
 -----------------------------------
