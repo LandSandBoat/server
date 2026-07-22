@@ -12,21 +12,20 @@ itemObject.onItemDrop = function(target, item, recycleBin)
 end
 
 itemObject.onItemEquip = function(target, item)
-    target:addListener('DEFEATED_MOB', 'CHAOSBRINGER_KILLS', function(mob, player, optParams)
+    target:addListener('ATTACK', 'CHAOSBRINGER_ATTACK', function(attacker, attackTarget, action)
         if
-            (player:getQuestStatus(xi.questLog.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS) == xi.questStatus.QUEST_ACCEPTED or
-            player:getQuestStatus(xi.questLog.BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH) == xi.questStatus.QUEST_ACCEPTED) and
-            target:getCharVar('ChaosbringerKills') < 200 and
-            optParams.isKiller and
-            not optParams.isWeaponSkillKill
+            attackTarget:getHP() == 0 and
+            (attacker:getQuestStatus(xi.questLog.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS) == xi.questStatus.QUEST_ACCEPTED or
+            attacker:getQuestStatus(xi.questLog.BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH) == xi.questStatus.QUEST_ACCEPTED) and
+            attacker:getCharVar('ChaosbringerKills') < 200
         then
-            player:incrementCharVar('ChaosbringerKills', 1)
+            attacker:incrementCharVar('ChaosbringerKills', 1)
         end
     end)
 end
 
 itemObject.onItemUnequip = function(target, item)
-    target:removeListener('CHAOSBRINGER_KILLS')
+    target:removeListener('CHAOSBRINGER_ATTACK')
 end
 
 return itemObject
