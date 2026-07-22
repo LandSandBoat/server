@@ -1917,7 +1917,7 @@ auto CZoneEntities::charTick(CCharEntity* PChar, timer::time_point tick) -> Task
         }
     }
 
-    if (PChar->requestedZoneChange || PChar->requestedWarp || PChar->status == xi::Status::Shutdown)
+    if (PChar->requestedZoneChange || PChar->requestedWarp != WarpRequest::None || PChar->status == xi::Status::Shutdown)
     {
         m_charsToChangeZone.insert(PChar);
     }
@@ -2096,13 +2096,15 @@ auto CZoneEntities::ZoneServer(timer::time_point tick) -> Task<void>
             charutils::ForceLogout(PChar);
             shouldErase = true;
         }
-        else if (PChar->requestedWarp)
+        else if (PChar->requestedWarp != WarpRequest::None)
         {
             const bool ready = co_await zoneutils::IsZoneReady(scheduler_, config_, PChar->profile.home_point.destination);
             if (ready)
             {
                 PChar->clearPacketList();
-                if (charutils::HomePoint(PChar, PChar->isDead()))
+
+                const bool revive = PChar->requestedWarp == WarpRequest::HomePoint && PChar->isDead();
+                if (charutils::HomePoint(PChar, revive))
                 {
                     shouldErase = true;
                 }

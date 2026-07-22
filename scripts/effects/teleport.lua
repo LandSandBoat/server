@@ -16,6 +16,11 @@ effectObject.onEffectLose = function(target, effect)
         return
     end
 
+    if target:isDead() then
+        -- Retail doesn't port you if you are dead early into the animation.
+        return
+    end
+
     local destination = effect:getPower()
 
     if target:isMob() then

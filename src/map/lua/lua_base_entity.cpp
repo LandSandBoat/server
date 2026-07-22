@@ -3629,7 +3629,7 @@ void CLuaBaseEntity::warp()
 
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        PChar->requestedWarp = true;
+        PChar->requestedWarp = WarpRequest::Warp;
 
         // Save pet if any
         if (PChar->shouldPetPersistThroughZoning())
