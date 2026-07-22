@@ -278,12 +278,6 @@ void GP_CLI_COMMAND_MAPRECT::process(MapSession* PSession, CCharEntity* PChar) c
                     PChar->loc.destination = PZoneLine->destinationZoneId;
                     PChar->loc.p           = PZoneLine->nextSpawnPosition();
 
-                    // Snap to navmesh for elevation on uneven zonelines
-                    if (PDestination)
-                    {
-                        PDestination->navMesh()->snapToValidPosition(PChar->loc.p);
-                    }
-
                     charutils::SavePrevZoneLineID(PChar, PZoneLine->zoneLineId);
                 }
             }
