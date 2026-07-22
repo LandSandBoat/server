@@ -11,7 +11,7 @@ itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, it
 
     local pTable =
     {
-        chance          = 22, -- Observed rate is 21% which is close to (0.22 * .95) = 21%~ (resist roll failure)
+        chance          = xi.additionalEffect.linearProcRate(dStat, 48, 1, 32),
         basePower       = 40 + utils.clamp(dStat, -3, 16) + utils.clamp(math.floor((dStat - 16) / 2), 0, 16),
         attackType      = xi.attackType.PHYSICAL,
         physicalElement = xi.damageType.SLASHING,
