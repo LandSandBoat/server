@@ -45,7 +45,7 @@ quest.sections =
             ['Goraow'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.QUADAV_HELM) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.QUADAV_HELM, 1 } }) then
                         return quest:progressEvent(107)
                     end
                 end,
@@ -54,13 +54,13 @@ quest.sections =
             onEventFinish =
             {
                 [107] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    if quest:complete(player) then
+                        player:tradeComplete()
 
-                    if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then
-                        player:addFame(xi.fameArea.BASTOK, 112)
+                        if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then
+                            player:addFame(xi.fameArea.BASTOK, 112)
+                        end
                     end
-
-                    quest:complete(player)
                 end,
             },
         },

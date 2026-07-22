@@ -46,7 +46,7 @@ quest.sections =
             ['Baldric'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.PINCH_OF_VALKURM_SUNSAND) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.PINCH_OF_VALKURM_SUNSAND, 1 } }) then
                         return quest:progressEvent(555)
                     end
                 end,
@@ -56,7 +56,7 @@ quest.sections =
             {
                 [555] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                         quest:setMustZone(player)
                     end
                 end,
@@ -81,7 +81,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 1 and
-                        npcUtil.tradeHasExactly(trade, xi.item.PINCH_OF_VALKURM_SUNSAND)
+                        npcUtil.tradeMatches(trade, { { xi.item.PINCH_OF_VALKURM_SUNSAND, 1 } })
                     then
                         return quest:progressEvent(555)
                     end
@@ -105,7 +105,7 @@ quest.sections =
 
                 [555] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                         quest:setMustZone(player)
                     end
                 end,

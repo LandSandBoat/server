@@ -53,8 +53,8 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.item.STRIP_OF_MEAT_JERKY) and
-                        quest:getVar(player, 'Prog') == 3
+                        quest:getVar(player, 'Prog') == 3 and
+                        npcUtil.tradeMatches(trade, { { xi.item.STRIP_OF_MEAT_JERKY, 1 } })
                     then
                         return quest:progressEvent(113)
                     end
@@ -84,7 +84,7 @@ quest.sections =
 
                 [113] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
             },

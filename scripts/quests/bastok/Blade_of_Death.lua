@@ -69,8 +69,8 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.item.CHAOSBRINGER) and
-                        player:getCharVar('ChaosbringerKills') >= 200
+                        player:getCharVar('ChaosbringerKills') >= 200 and
+                        npcUtil.tradeMatches(trade, { { xi.item.CHAOSBRINGER, 1 } })
                     then
                         return quest:progressEvent(10)
                     end
@@ -81,7 +81,7 @@ quest.sections =
             {
                 [10] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                         player:delKeyItem(xi.ki.LETTER_FROM_ZEID)
                     end
                 end,

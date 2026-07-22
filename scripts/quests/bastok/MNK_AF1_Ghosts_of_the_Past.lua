@@ -88,7 +88,7 @@ quest.sections =
             ['Oggbi'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.MINERS_PENDANT) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.MINERS_PENDANT, 1 } }) then
                         return quest:progressEvent(232)
                     end
                 end,
@@ -98,7 +98,7 @@ quest.sections =
             {
                 [232] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
 
                         xi.quest.setMustZone(player, xi.questLog.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING)
                     end

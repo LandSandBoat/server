@@ -46,7 +46,7 @@ quest.sections =
             ['Yazan'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.SAND_BAT_FANG) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.SAND_BAT_FANG, 1 } }) then
                         return quest:progressEvent(193)
                     end
                 end,
@@ -65,13 +65,13 @@ quest.sections =
             onEventFinish =
             {
                 [193] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    if quest:complete(player) then
+                        player:tradeComplete()
 
-                    if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then
-                        player:addFame(xi.fameArea.BASTOK, 112)
+                        if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then
+                            player:addFame(xi.fameArea.BASTOK, 112)
+                        end
                     end
-
-                    quest:complete(player)
                 end,
             },
         },

@@ -54,7 +54,7 @@ quest.sections =
             ['Black_Mud'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.CANTEEN_OF_DRACHENFALL_WATER) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.CANTEEN_OF_DRACHENFALL_WATER, 1 } }) then
                         return quest:progressEvent(103)
                     end
                 end,
@@ -77,7 +77,7 @@ quest.sections =
 
                 [103] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
             },
@@ -89,10 +89,10 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.item.BRASS_CANTEEN) and
+                        npcUtil.tradeMatches(trade, { { xi.item.BRASS_CANTEEN, 1 } }) and
                         npcUtil.giveItem(player, xi.item.CANTEEN_OF_DRACHENFALL_WATER)
                     then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
             },

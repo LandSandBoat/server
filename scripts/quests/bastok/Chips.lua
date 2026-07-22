@@ -64,7 +64,7 @@ quest.sections =
             ['Cid'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { xi.item.CARMINE_CHIP, xi.item.CYAN_CHIP, xi.item.GRAY_CHIP }) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.CARMINE_CHIP, 1 }, { xi.item.CYAN_CHIP, 1 }, { xi.item.GRAY_CHIP, 1 } }) then
                         if
                             player:getFreeSlotsCount() == 0 or
                             player:hasItem(xi.item.CCB_POLYMER)
@@ -81,7 +81,7 @@ quest.sections =
             {
                 [883] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
             },
@@ -98,7 +98,7 @@ quest.sections =
             ['Cid'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { xi.item.CARMINE_CHIP, xi.item.CYAN_CHIP, xi.item.GRAY_CHIP }) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.CARMINE_CHIP, 1 }, { xi.item.CYAN_CHIP, 1 }, { xi.item.GRAY_CHIP, 1 } }) then
                         if
                             player:getFreeSlotsCount() == 0 or
                             player:hasItem(xi.item.CCB_POLYMER)
@@ -115,7 +115,7 @@ quest.sections =
             {
                 [884] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
             },

@@ -45,7 +45,7 @@ quest.sections =
             ['Gudav'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.DOG_COLLAR) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.DOG_COLLAR, 1 } }) then
                         return quest:progressEvent(112)
                     end
                 end,
@@ -55,7 +55,7 @@ quest.sections =
             {
                 [112] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                         if player:hasKeyItem(xi.ki.MAP_OF_THE_GUSGEN_MINES) then
                             player:addExp(2000)
                         else

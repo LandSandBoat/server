@@ -48,7 +48,7 @@ quest.sections =
             ['Detzo'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.MYTHRIL_SALLET) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.MYTHRIL_SALLET, 1 } }) then
                         return quest:progressEvent(94)
                     end
                 end,

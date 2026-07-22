@@ -45,7 +45,7 @@ quest.sections =
             ['Pavvke'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.SILVER_NAME_TAG) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.SILVER_NAME_TAG, 1 } }) then
                         if player:hasCompletedQuest(quest.areaId, quest.questId) then
                             return quest:progressEvent(92)
                         else
@@ -59,7 +59,7 @@ quest.sections =
             {
                 [91] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
 
                         player:addFame(xi.fameArea.BASTOK, 112)
                     end
@@ -67,7 +67,7 @@ quest.sections =
 
                 [92] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
             },

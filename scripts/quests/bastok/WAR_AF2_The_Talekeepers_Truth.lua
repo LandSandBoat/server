@@ -79,12 +79,12 @@ quest.sections =
 
                     if
                         questProgress == 0 and
-                        npcUtil.tradeHasExactly(trade, xi.item.MOTTLED_QUADAV_EGG)
+                        npcUtil.tradeMatches(trade, { { xi.item.MOTTLED_QUADAV_EGG, 1 } })
                     then
                         return quest:progressEvent(162)
                     elseif
                         questProgress == 1 and
-                        npcUtil.tradeHasExactly(trade, xi.item.PARASITE_SKIN)
+                        npcUtil.tradeMatches(trade, { { xi.item.PARASITE_SKIN, 1 } })
                     then
                         return quest:progressEvent(164)
                     end
@@ -108,13 +108,13 @@ quest.sections =
             onEventFinish =
             {
                 [162] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    player:tradeComplete()
 
                     quest:setVar(player, 'Prog', 1)
                 end,
 
                 [164] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    player:tradeComplete()
 
                     quest:setVar(player, 'Prog', 2)
                     quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)

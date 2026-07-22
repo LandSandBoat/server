@@ -55,13 +55,13 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.item.VIAL_OF_QUADAV_MAGE_BLOOD) and
                         quest:getVar(player, 'Prog') == 0 and
                         not GetMobByID(middleDelkfuttsID.mob.BLADE_OF_EVIL_OFFSET + 0):isSpawned() and
                         not GetMobByID(middleDelkfuttsID.mob.BLADE_OF_EVIL_OFFSET + 1):isSpawned() and
-                        not GetMobByID(middleDelkfuttsID.mob.BLADE_OF_EVIL_OFFSET + 2):isSpawned()
+                        not GetMobByID(middleDelkfuttsID.mob.BLADE_OF_EVIL_OFFSET + 2):isSpawned() and
+                        npcUtil.tradeMatches(trade, { { xi.item.VIAL_OF_QUADAV_MAGE_BLOOD, 1 } })
                     then
-                        player:confirmTrade()
+                        player:tradeComplete()
                         SpawnMob(middleDelkfuttsID.mob.BLADE_OF_EVIL_OFFSET + 0):updateClaim(player)
                         SpawnMob(middleDelkfuttsID.mob.BLADE_OF_EVIL_OFFSET + 1):updateEnmity(player)
                         SpawnMob(middleDelkfuttsID.mob.BLADE_OF_EVIL_OFFSET + 2):updateEnmity(player)

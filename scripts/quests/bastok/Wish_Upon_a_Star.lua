@@ -82,10 +82,10 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         not player:hasItem(xi.item.FALLEN_STAR) and
-                        npcUtil.tradeHas(trade, xi.item.HATCHET)
+                        npcUtil.tradeMatches(trade, { { xi.item.HATCHET, 1 } }) -- TODO: This should use actual HELM system.
                     then
                         if npcUtil.giveItem(player, xi.item.FALLEN_STAR, { silent = true, fromTrade = true }) then
-                            player:confirmTrade()
+                            player:tradeComplete()
                             return quest:progressEvent(205, xi.item.FALLEN_STAR)
                         end
                     end
@@ -100,10 +100,10 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         not player:hasItem(xi.item.FALLEN_STAR) and
-                        npcUtil.tradeHas(trade, xi.item.HATCHET)
+                        npcUtil.tradeMatches(trade, { { xi.item.HATCHET, 1 } }) -- TODO: This should use actual HELM system.
                     then
                         if npcUtil.giveItem(player, xi.item.FALLEN_STAR, { silent = true, fromTrade = true }) then
-                            player:confirmTrade()
+                            player:tradeComplete()
                             return quest:progressEvent(10, xi.item.FALLEN_STAR)
                         end
                     end
@@ -116,7 +116,7 @@ quest.sections =
             ['Enu'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.FALLEN_STAR) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.FALLEN_STAR, 1 } }) then
                         local isNight = VanadielTOTD() == xi.time.NIGHT or VanadielTOTD() == xi.time.MIDNIGHT
 
                         if
@@ -137,7 +137,7 @@ quest.sections =
             {
                 [334] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
             },

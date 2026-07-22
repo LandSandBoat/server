@@ -38,7 +38,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 2 and
-                        npcUtil.tradeHasExactly(trade, xi.item.GINGER_COOKIE)
+                        npcUtil.tradeMatches(trade, { { xi.item.GINGER_COOKIE, 1 } })
                     then
                         return quest:progressEvent(172)
                     end
@@ -71,7 +71,7 @@ quest.sections =
                 end,
 
                 [172] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    player:tradeComplete()
 
                     quest:begin(player)
                     quest:setVar(player, 'Prog', 0)

@@ -54,10 +54,10 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         not player:hasItem(xi.item.GERWITZS_AXE) and
-                        npcUtil.tradeHasExactly(trade, xi.item.DARKSTEEL_INGOT) and
+                        npcUtil.tradeMatches(trade, { { xi.item.DARKSTEEL_INGOT, 1 } }) and
                         npcUtil.popFromQM(player, npc, ordellesID.mob.DARK_PUPPET_OFFSET, { hide = 0 })
                     then
-                        player:confirmTrade()
+                        player:tradeComplete()
 
                         return quest:messageSpecial(ordellesID.text.SENSE_A_FOUL_PRESENCE)
                     end
@@ -69,10 +69,10 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         not player:hasItem(xi.item.GERWITZS_SWORD) and
-                        npcUtil.tradeHasExactly(trade, xi.item.GERWITZS_AXE) and
+                        npcUtil.tradeMatches(trade, { { xi.item.GERWITZS_AXE, 1 } }) and
                         npcUtil.popFromQM(player, npc, ordellesID.mob.DARK_PUPPET_OFFSET + 1, { hide = 0 })
                     then
-                        player:confirmTrade()
+                        player:tradeComplete()
 
                         return quest:messageSpecial(ordellesID.text.SENSE_A_FOUL_PRESENCE)
                     end
@@ -83,10 +83,10 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.item.GERWITZS_SWORD) and
+                        npcUtil.tradeMatches(trade, { { xi.item.GERWITZS_SWORD, 1 } }) and
                         npcUtil.popFromQM(player, npc, ordellesID.mob.DARK_PUPPET_OFFSET + 2, { hide = 0 })
                     then
-                        player:confirmTrade()
+                        player:tradeComplete()
 
                         return quest:messageSpecial(ordellesID.text.SENSE_A_FOUL_PRESENCE)
                     end

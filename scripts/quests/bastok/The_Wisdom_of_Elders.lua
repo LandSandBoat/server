@@ -45,7 +45,7 @@ quest.sections =
             ['Benita'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.PINCH_OF_BOMB_ASH) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.PINCH_OF_BOMB_ASH, 1 } }) then
                         return quest:progressEvent(176)
                     end
                 end,
@@ -63,7 +63,7 @@ quest.sections =
 
                 [176] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
             },

@@ -46,7 +46,7 @@ quest.sections =
             ['Malene'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.STEAM_CLOCK) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.STEAM_CLOCK, 1 } }) then
                         return quest:progressEvent(104)
                     end
                 end,
@@ -57,8 +57,9 @@ quest.sections =
             onEventFinish =
             {
                 [104] = function(player, csid, option, npc)
-                    player:confirmTrade()
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        player:tradeComplete()
+                    end
                 end,
             },
         },

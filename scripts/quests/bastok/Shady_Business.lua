@@ -31,7 +31,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHas(trade, { { xi.item.CHUNK_OF_ZINC_ORE, 4 } }) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.CHUNK_OF_ZINC_ORE, 4 } }) then
                         return quest:progressEvent(91)
                     end
                 end,
@@ -49,7 +49,7 @@ quest.sections =
 
                 [91] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
 

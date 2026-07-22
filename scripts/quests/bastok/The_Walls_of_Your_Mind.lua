@@ -70,7 +70,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.KNUCKLES_OF_TRIALS) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.KNUCKLES_OF_TRIALS, 1 } }) then
                         local wsPoints = trade:getItem(0):getWeaponskillPoints()
 
                         if wsPoints < 300 then
@@ -95,7 +95,7 @@ quest.sections =
                 end,
 
                 [289] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    player:tradeComplete()
                     npcUtil.giveKeyItem(player, xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                 end,
 

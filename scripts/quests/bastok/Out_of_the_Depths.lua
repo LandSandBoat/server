@@ -175,7 +175,7 @@ quest.sections =
                         quest:getVar(player, 'Prog') == 2 and
                         bombAshCount > 0
                     then
-                        if npcUtil.tradeHas(trade, { { xi.item.PINCH_OF_HOARY_BOMB_ASH, bombAshCount } }) then
+                        if npcUtil.tradeMatches(trade, { { xi.item.PINCH_OF_HOARY_BOMB_ASH, bombAshCount } }) then
                             -- Player has traded 1, 2, 3 or 4 ash and does not have associated KI.
                             if
                                 (bombAshCount == 4 and not player:hasKeyItem(xi.ki.PEELING_HAIRPIN)) or
@@ -185,9 +185,9 @@ quest.sections =
                             then
                                 return quest:progressCutscene(4, 0, 0, bombAshCount) -- Both selections return option = #bombAsh
 
-                        -- Depending on where the player is in the quest this interaction changes
-                        elseif bombAshCount == 1 and option == 15 then
-                            return quest:progressCutscene(4, 5, 4, 1, 1, dustyTome) -- Selection 1 returns 1 selection 2 returns 5
+                            -- Depending on where the player is in the quest this interaction changes
+                            elseif bombAshCount == 1 and option == 15 then
+                                return quest:progressCutscene(4, 5, 4, 1, 1, dustyTome) -- Selection 1 returns 1 selection 2 returns 5
 
                             -- Player has the key item for the number of ash traded
                             else
@@ -208,23 +208,23 @@ quest.sections =
 
                 [4] = function(player, csid, option, npc)
                     if option == 1 then
-                        player:confirmTrade()
+                        player:tradeComplete()
                         npcUtil.giveKeyItem(player, xi.ki.DUSTY_TOME)
                     elseif option == 2 then
-                        player:confirmTrade()
+                        player:tradeComplete()
                         npcUtil.giveKeyItem(player, xi.ki.POINTED_JUG)
                     elseif option == 3 then
-                        player:confirmTrade()
+                        player:tradeComplete()
                         npcUtil.giveKeyItem(player, xi.ki.CRACKED_CLUB)
                     elseif option == 4 then
-                        player:confirmTrade()
+                        player:tradeComplete()
                         npcUtil.giveKeyItem(player, xi.ki.PEELING_HAIRPIN)
                     elseif option == 5 and quest:getVar(player, 'Option') == 15 then
-                        player:confirmTrade()
+                        player:tradeComplete()
                         npcUtil.giveKeyItem(player, xi.ki.OLD_NAMETAG)
                         quest:setVar(player, 'Prog', 3)
                     elseif option == 6 then
-                        player:confirmTrade()
+                        player:tradeComplete()
                         player:messageSpecial(oldtonID.text.REFUSES_TO_GIVE_ANOTHER)
                     end
                 end,
