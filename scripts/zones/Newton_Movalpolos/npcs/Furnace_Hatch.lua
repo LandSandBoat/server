@@ -19,7 +19,7 @@ entity.onTrade = function(player, npc, trade)
             local door = GetNPCByID(i)
 
             if door then
-                door:setAnimation((door:getAnimation() == xi.anim.OPEN_DOOR) and xi.anim.CLOSE_DOOR or xi.anim.OPEN_DOOR)
+                door:setAnimation((door:getAnimation() == xi.animation.OPEN_DOOR) and xi.animation.CLOSE_DOOR or xi.animation.OPEN_DOOR)
             end
         end
     else

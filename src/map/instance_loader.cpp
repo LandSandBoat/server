@@ -24,12 +24,12 @@
 #include "instance_loader.h"
 #include "zone_instance.h"
 
+#include "data/enums/mob_mod.h"
 #include "entities/mob_entity.h"
 #include "entities/npc_entity.h"
 #include "instance.h"
 #include "items/item_weapon.h"
 #include "lua/luautils.h"
-#include "mob_modifier.h"
 #include "mob_spell_list.h"
 
 #include "utils/instanceutils.h"
@@ -218,19 +218,19 @@ auto CInstanceLoader::LoadInstance() const -> CInstance*
             // If a special instanced mob aggros, it should always aggro regardless of level.
             if ((PMob->m_Type & xi::MobType::Event) != xi::MobType::Normal)
             {
-                PMob->setMobMod(MOBMOD_ALWAYS_AGGRO, aggro);
+                PMob->setMobMod(xi::MobMod::AlwaysAggro, aggro);
             }
 
             PMob->m_MobSkillList  = rset->get<uint16>("skill_list_id");
             PMob->m_TrueDetection = rset->get<bool>("true_detection");
-            PMob->setMobMod(MOBMOD_DETECTION, rset->get<int16>("detects"));
-            PMob->setMobMod(MOBMOD_CHARMABLE, rset->get<int16>("charmable"));
+            PMob->setMobMod(xi::MobMod::Detection, rset->get<int16>("detects"));
+            PMob->setMobMod(xi::MobMod::Charmable, rset->get<int16>("charmable"));
 
             // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
             // can be set in in their onInitialize
             if ((PMob->m_Type & xi::MobType::Event) != xi::MobType::Normal || (PMob->m_Type & xi::MobType::Fished) != xi::MobType::Normal || (PMob->m_Type & xi::MobType::Battlefield) != xi::MobType::Normal || (PMob->m_Type & xi::MobType::Notorious) != xi::MobType::Normal)
             {
-                PMob->setMobMod(MOBMOD_CHARMABLE, 0);
+                PMob->setMobMod(xi::MobMod::Charmable, 0);
             }
 
             // must be here first to define mobmods
@@ -271,7 +271,7 @@ auto CInstanceLoader::LoadInstance() const -> CInstance*
             PNpc->baseSpeed      = rset->get<uint8>("speed");
             PNpc->animationSpeed = rset->get<uint8>("speedsub");
             PNpc->UpdateSpeed();
-            PNpc->animation    = rset->get<uint8>("animation");
+            PNpc->animation    = rset->get<xi::Animation>("animation");
             PNpc->animationsub = rset->get<uint8>("animationsub");
 
             PNpc->namevis = rset->get<xi::NameVis>("namevis");

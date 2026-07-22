@@ -25,6 +25,7 @@
 #include "common/lua.h"
 #include <string>
 
+#include "data/enums/animation.h"
 #include "data/enums/status_effect.h"
 
 enum class QuestLog : uint8_t;
@@ -43,7 +44,7 @@ public:
     auto inZone(ZONEID expectedZone) -> CLuaTestEntityAssertions&;
     auto hasLocalVar(const std::string& varName, uint32 expectedValue) -> CLuaTestEntityAssertions&;
     auto hasEffect(xi::StatusEffect effectId) -> CLuaTestEntityAssertions&;
-    auto hasAnimation(uint8 animation) -> CLuaTestEntityAssertions&;
+    auto hasAnimation(xi::Animation animation) -> CLuaTestEntityAssertions&;
     auto hasNationRank(uint8 expectedRank) -> CLuaTestEntityAssertions&;
     auto hasKI(KeyItem keyItemId) -> CLuaTestEntityAssertions&;
     auto hasMission(MissionLog logId, uint16 expectedMission) -> CLuaTestEntityAssertions&;

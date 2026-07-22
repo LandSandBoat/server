@@ -10,7 +10,7 @@ local ID = zones[xi.zone.CASTLE_OZTROJA]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if npc:getAnimation() == xi.anim.CLOSE_DOOR then
+    if npc:getAnimation() == xi.animation.CLOSE_DOOR then
         player:messageSpecial(ID.text.ITS_LOCKED)
     end
 end

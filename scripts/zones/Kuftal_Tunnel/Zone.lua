@@ -66,7 +66,7 @@ zoneObject.onGameHour = function(zone)
     if
         boulder and
         validCycles and
-        boulder:getAnimation() == xi.anim.CLOSE_DOOR
+        boulder:getAnimation() == xi.animation.CLOSE_DOOR
     then
         if
             moonCycle == validCycles[1] or

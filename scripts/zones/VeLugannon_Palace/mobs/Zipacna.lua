@@ -272,7 +272,7 @@ local pathNodes =
 
 local setZipPath = function(mob, door, currPath)
     if door then
-        if door:getAnimation() == xi.anim.OPEN_DOOR then
+        if door:getAnimation() == xi.animation.OPEN_DOOR then
             if currentDirection == pathingDirection.TO_EAST then
                 mob:pathThrough(pathNodes[currPath + 1], xi.path.flag.COORDS)
                 if currPath + 1 == paths.YELLOW_TO_BASEMENT then

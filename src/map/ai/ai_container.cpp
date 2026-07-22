@@ -535,12 +535,12 @@ bool CAIContainer::IsSpawned()
 
 bool CAIContainer::IsRoaming()
 {
-    return PEntity->animation == ANIMATION_NONE;
+    return PEntity->animation == xi::Animation::None;
 }
 
 bool CAIContainer::IsEngaged()
 {
-    return PEntity->animation == ANIMATION_ATTACK;
+    return PEntity->animation == xi::Animation::Attack;
 }
 
 bool CAIContainer::IsUntargetable()

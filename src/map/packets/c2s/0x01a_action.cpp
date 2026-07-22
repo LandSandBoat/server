@@ -107,7 +107,7 @@ auto GP_CLI_COMMAND_ACTION::validate(MapSession* PSession, const CCharEntity* PC
                     case GP_CLI_COMMAND_ACTION_ACTIONID::MonsterSkill: // MonsterSkill is entirely assumed
                     {
                         pv.blockedBy({ BlockedState::Healing, BlockedState::Crafting, BlockedState::Fishing, BlockedState::PreventAction, BlockedState::Mounted })
-                            .mustEqual(PChar->animation == ANIMATION_NONE || PChar->animation == ANIMATION_ATTACK, true, "Character in invalid animation state.");
+                            .mustEqual(PChar->animation == xi::Animation::None || PChar->animation == xi::Animation::Attack, true, "Character in invalid animation state.");
                         break;
                     }
                     case GP_CLI_COMMAND_ACTION_ACTIONID::Fish:
@@ -230,8 +230,8 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
 
                             if (PDelayedTrust && PDelayedChar && PDelayedTrust->PMaster == PDelayedChar)
                             {
-                                // For some reason they use ANIMATION_DEATH to play the special despawn.
-                                PDelayedTrust->animation = ANIMATION_DEATH;
+                                // For some reason they use xi::Animation::Death to play the special despawn.
+                                PDelayedTrust->animation = xi::Animation::Death;
                                 PDelayedTrust->updatemask |= UPDATE_HP;
 
                                 PDelayedChar->RemoveTrust(PDelayedTrust);
@@ -456,7 +456,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
         break;
         case GP_CLI_COMMAND_ACTION_ACTIONID::Dismount:
         {
-            PChar->animation = ANIMATION_NONE;
+            PChar->animation = xi::Animation::None;
             PChar->updatemask |= UPDATE_HP;
             PChar->StatusEffectContainer->DelStatusEffectSilent(xi::StatusEffect::Mounted);
         }
@@ -531,7 +531,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
         {
             const auto mountKeyItem = static_cast<KeyItem>(static_cast<uint16_t>(KeyItem::CHOCOBO_COMPANION) + this->Mount.MountId);
 
-            if (PChar->animation != ANIMATION_NONE || PChar->StatusEffectContainer->HasPreventActionEffect())
+            if (PChar->animation != xi::Animation::None || PChar->StatusEffectContainer->HasPreventActionEffect())
             {
                 PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CannotPerformAction);
             }

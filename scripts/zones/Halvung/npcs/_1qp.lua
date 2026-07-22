@@ -27,7 +27,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getZPos() <= 79.75 and npc:getAnimation() == xi.anim.CLOSE_DOOR then -- from inside the door
+    -- from inside the door
+    if
+        player:getZPos() <= 79.75 and
+        npc:getAnimation() == xi.animation.CLOSE_DOOR
+    then
         npc:openDoor()
     else
         player:messageSpecial(ID.text.WIDE_TRENCH)

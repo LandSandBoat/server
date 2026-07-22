@@ -177,13 +177,13 @@ auto CPetController::DoRoamTick(timer::time_point tick) -> Task<void>
 
 bool CPetController::PetIsHealing()
 {
-    const auto isMasterHealing = PPet->PMaster->animation == ANIMATION_HEALING;
-    const auto isPetHealing    = PPet->animation == ANIMATION_HEALING;
+    const auto isMasterHealing = PPet->PMaster->animation == xi::Animation::Healing;
+    const auto isPetHealing    = PPet->animation == xi::Animation::Healing;
 
     if (isMasterHealing && !isPetHealing && !PPet->StatusEffectContainer->HasPreventActionEffect())
     {
         // Animation down
-        PPet->animation = ANIMATION_HEALING;
+        PPet->animation = xi::Animation::Healing;
         PPet->StatusEffectContainer->AddStatusEffect(xi::StatusEffect::Healing, 0, 0, std::chrono::seconds(settings::get<uint8>("map.HEALING_TICK_DELAY")), 0s);
         PPet->updatemask |= UPDATE_HP;
         return true;
@@ -191,7 +191,7 @@ bool CPetController::PetIsHealing()
     else if (!isMasterHealing && isPetHealing)
     {
         // Animation up
-        PPet->animation = ANIMATION_NONE;
+        PPet->animation = xi::Animation::None;
         PPet->StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Healing);
         PPet->updatemask |= UPDATE_HP;
         return false;

@@ -9,7 +9,7 @@ local ID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if npc:getAnimation() == xi.anim.CLOSE_DOOR then
+    if npc:getAnimation() == xi.animation.CLOSE_DOOR then
         if player:getZPos() > 137 then
             npc:openDoor(3.2)
         else

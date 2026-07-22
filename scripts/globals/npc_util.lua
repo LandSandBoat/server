@@ -1045,27 +1045,27 @@ function npcUtil.fishingAnimation(npc, phaseDuration, func)
     npc:timer(phaseDuration * 1000, function(npcArg)
         local anims =
         {
-            [xi.anim.FISHING_NPC] = { duration = 5, nextAnim = { xi.anim.FISHING_START } },
-            [xi.anim.FISHING_START] = { duration = 10, nextAnim = { xi.anim.FISHING_FISH } },
-            [xi.anim.FISHING_FISH] =
+            [xi.animation.FISHING_NPC] = { duration = 5, nextAnim = { xi.animation.FISHING_START } },
+            [xi.animation.FISHING_START] = { duration = 10, nextAnim = { xi.animation.FISHING_FISH } },
+            [xi.animation.FISHING_FISH] =
             {
                 duration = 10,
                 nextAnim =
                 {
-                    xi.anim.FISHING_CAUGHT,
-                    xi.anim.FISHING_ROD_BREAK,
-                    xi.anim.FISHING_LINE_BREAK,
+                    xi.animation.FISHING_CAUGHT,
+                    xi.animation.FISHING_ROD_BREAK,
+                    xi.animation.FISHING_LINE_BREAK,
                 }
             },
 
-            [xi.anim.FISHING_ROD_BREAK] = { duration = 3, nextAnim = { xi.anim.FISHING_NPC } },
-            [xi.anim.FISHING_LINE_BREAK] = { duration = 3, nextAnim = { xi.anim.FISHING_NPC } },
-            [xi.anim.FISHING_CAUGHT] = { duration = 5, nextAnim = { xi.anim.FISHING_NPC } },
-            [xi.anim.FISHING_STOP] = { duration = 3, nextAnim = { xi.anim.FISHING_NPC } },
+            [xi.animation.FISHING_ROD_BREAK] = { duration = 3, nextAnim = { xi.animation.FISHING_NPC } },
+            [xi.animation.FISHING_LINE_BREAK] = { duration = 3, nextAnim = { xi.animation.FISHING_NPC } },
+            [xi.animation.FISHING_CAUGHT] = { duration = 5, nextAnim = { xi.animation.FISHING_NPC } },
+            [xi.animation.FISHING_STOP] = { duration = 3, nextAnim = { xi.animation.FISHING_NPC } },
         }
 
         local anim = anims[npcArg:getAnimation()]
-        local nextAnimationId = xi.anim.FISHING_NPC
+        local nextAnimationId = xi.animation.FISHING_NPC
         local nextAnimationDuration = 10
         local nextAnim = nil
         if anim then

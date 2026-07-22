@@ -47,7 +47,7 @@ void Transport_Ship::animateSetup(uint8 animationID, vanadiel_time::time_point h
 {
     if (animationID > 0)
     {
-        this->npc->animation = animationID;
+        this->npc->animation = static_cast<xi::Animation>(animationID);
     }
 
     this->npc->SetLocalVar("TransportTimestamp", earth_time::vanadiel_timestamp(vanadiel_time::to_earth_time(horizonTime)));
@@ -71,7 +71,7 @@ void TransportZone_Town::openDoor(bool sendPacket) const
         return;
     }
 
-    this->npcDoor->animation = ANIMATION_OPEN_DOOR;
+    this->npcDoor->animation = xi::Animation::OpenDoor;
 
     if (sendPacket)
     {
@@ -86,7 +86,7 @@ void TransportZone_Town::closeDoor(bool sendPacket) const
         return;
     }
 
-    this->npcDoor->animation = ANIMATION_CLOSE_DOOR;
+    this->npcDoor->animation = xi::Animation::CloseDoor;
 
     if (sendPacket)
     {
@@ -101,13 +101,13 @@ void TransportZone_Town::depart() const
 
 void Elevator_t::openDoor(CNpcEntity* npc) const
 {
-    npc->animation = ANIMATION_OPEN_DOOR;
+    npc->animation = xi::Animation::OpenDoor;
     zoneutils::GetZone(this->zoneID)->UpdateEntityPacket(npc, ENTITY_SPAWN, UPDATE_ALL_MOB, true);
 }
 
 void Elevator_t::closeDoor(CNpcEntity* npc) const
 {
-    npc->animation = ANIMATION_CLOSE_DOOR;
+    npc->animation = xi::Animation::CloseDoor;
     zoneutils::GetZone(this->zoneID)->UpdateEntityPacket(npc, ENTITY_SPAWN, UPDATE_ALL_MOB, true);
 }
 
@@ -470,11 +470,11 @@ void CTransportHandler::insertElevator(Elevator_t elevator)
 
     // Initialize the elevator into the correct state based on
     // its animation value in the database.
-    if (elevator.Elevator->animation == ANIMATION_ELEVATOR_DOWN)
+    if (elevator.Elevator->animation == xi::Animation::ElevatorDown)
     {
         elevator.state = STATE_ELEVATOR_BOTTOM;
     }
-    else if (elevator.Elevator->animation == ANIMATION_ELEVATOR_UP)
+    else if (elevator.Elevator->animation == xi::Animation::ElevatorUp)
     {
         elevator.state = STATE_ELEVATOR_TOP;
     }
@@ -493,8 +493,8 @@ void CTransportHandler::insertElevator(Elevator_t elevator)
     // Ensure that the doors start in the correct positions
     // regardless of their values in the database.
 
-    elevator.LowerDoor->animation = (elevator.state == STATE_ELEVATOR_TOP) ? ANIMATION_CLOSE_DOOR : ANIMATION_OPEN_DOOR;
-    elevator.UpperDoor->animation = (elevator.state == STATE_ELEVATOR_TOP) ? ANIMATION_OPEN_DOOR : ANIMATION_CLOSE_DOOR;
+    elevator.LowerDoor->animation = (elevator.state == STATE_ELEVATOR_TOP) ? xi::Animation::CloseDoor : xi::Animation::OpenDoor;
+    elevator.UpperDoor->animation = (elevator.state == STATE_ELEVATOR_TOP) ? xi::Animation::OpenDoor : xi::Animation::CloseDoor;
 
     ElevatorList.emplace_back(elevator);
 }
@@ -532,13 +532,13 @@ void CTransportHandler::startElevator(Elevator_t* elevator)
     if (elevator->state == STATE_ELEVATOR_TOP)
     {
         elevator->state               = STATE_ELEVATOR_DESCEND;
-        elevator->Elevator->animation = elevator->animationsReversed ? ANIMATION_ELEVATOR_UP : ANIMATION_ELEVATOR_DOWN;
+        elevator->Elevator->animation = elevator->animationsReversed ? xi::Animation::ElevatorUp : xi::Animation::ElevatorDown;
         elevator->closeDoor(elevator->UpperDoor);
     }
     else if (elevator->state == STATE_ELEVATOR_BOTTOM)
     {
         elevator->state               = STATE_ELEVATOR_ASCEND;
-        elevator->Elevator->animation = elevator->animationsReversed ? ANIMATION_ELEVATOR_DOWN : ANIMATION_ELEVATOR_UP;
+        elevator->Elevator->animation = elevator->animationsReversed ? xi::Animation::ElevatorDown : xi::Animation::ElevatorUp;
         elevator->closeDoor(elevator->LowerDoor);
     }
     else

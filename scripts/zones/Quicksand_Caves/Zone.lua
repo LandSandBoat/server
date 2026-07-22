@@ -113,7 +113,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         if
             totalWeight >= 3 and
             plate:getLocalVar('opening') == 0 and
-            door:getAnimation() == xi.anim.CLOSE_DOOR
+            door:getAnimation() == xi.animation.CLOSE_DOOR
         then
             SendEntityVisualPacket(plate:getID(), 'unlc') -- Play the light animation
             plate:setLocalVar('opening', 1)

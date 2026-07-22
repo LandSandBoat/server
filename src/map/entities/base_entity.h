@@ -30,6 +30,7 @@
 #include "packets/basic.h"
 
 #include "data/enums/allegiance.h"
+#include "data/enums/animation.h"
 #include "data/enums/entity_flags.h"
 #include "data/enums/name_vis.h"
 #include "data/enums/spawn_animation.h"
@@ -52,57 +53,6 @@ enum ENTITYTYPE : uint8
 };
 
 DECLARE_FORMAT_AS_UNDERLYING(ENTITYTYPE);
-
-enum ANIMATIONTYPE : uint8
-{
-    ANIMATION_NONE    = 0,
-    ANIMATION_ATTACK  = 1,
-    ANIMATION_DESPAWN = 2,
-    ANIMATION_DEATH   = 3,
-    ANIMATION_EVENT   = 4,
-    ANIMATION_CHOCOBO = 5,
-    ANIMATION_FISHING = 6,
-    // Healing                      = 7,
-    ANIMATION_OPEN_DOOR     = 8,
-    ANIMATION_CLOSE_DOOR    = 9,
-    ANIMATION_ELEVATOR_UP   = 10,
-    ANIMATION_ELEVATOR_DOWN = 11,
-    // seems to be WALLHACK                     = 28,
-    // seems to be WALLHACK also..              = 31,
-    ANIMATION_HEALING                = 33,
-    ANIMATION_FISHING_FISH_OLD       = 38,
-    ANIMATION_FISHING_CAUGHT_OLD     = 39,
-    ANIMATION_FISHING_ROD_BREAK_OLD  = 40,
-    ANIMATION_FISHING_LINE_BREAK_OLD = 41,
-    ANIMATION_FISHING_MONSTER_OLD    = 42,
-    ANIMATION_FISHING_STOP_OLD       = 43,
-    ANIMATION_SYNTH                  = 44,
-    ANIMATION_SIT                    = 47,
-    ANIMATION_RANGED                 = 48,
-    ANIMATION_FISHING_START_OLD      = 50,
-    ANIMATION_FISHING_START          = 56,
-    ANIMATION_FISHING_FISH           = 57,
-    ANIMATION_FISHING_CAUGHT         = 58,
-    ANIMATION_FISHING_ROD_BREAK      = 59,
-    ANIMATION_FISHING_LINE_BREAK     = 60,
-    ANIMATION_FISHING_MONSTER        = 61,
-    ANIMATION_FISHING_STOP           = 62,
-    // 63 through 72 are used with /sitchair
-    ANIMATION_SITCHAIR_0  = 63,
-    ANIMATION_SITCHAIR_1  = 64,
-    ANIMATION_SITCHAIR_2  = 65,
-    ANIMATION_SITCHAIR_3  = 66,
-    ANIMATION_SITCHAIR_4  = 67,
-    ANIMATION_SITCHAIR_5  = 68,
-    ANIMATION_SITCHAIR_6  = 69,
-    ANIMATION_SITCHAIR_7  = 70,
-    ANIMATION_SITCHAIR_8  = 71,
-    ANIMATION_SITCHAIR_9  = 72,
-    ANIMATION_SITCHAIR_10 = 73,
-    // 74 through 83 sitting on air (guessing future use for more chairs..)
-    ANIMATION_MOUNT = 85,
-    // ANIMATION_TRUST              = 90 // This is the animation for a trust NPC spawning in.
-};
 
 enum MOUNTTYPE : uint8
 {
@@ -253,7 +203,7 @@ public:
     look_t         look;           //
     look_t         mainlook;       // only used if mob use changeSkin() or player /lockstyle
     location_t     loc;            // Location of entity
-    uint8          animation;      // animation
+    xi::Animation  animation;      // animation
     uint8          animationsub;   // Additional animation parameter
     uint8          baseSpeed;      // base movement speed
     uint8          animationSpeed; // speed of movement animation

@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.animation
+
+values:
+  none: 0
+  attack: 1
+  despawn: 2
+  death: 3
+  event: 4
+  chocobo: 5
+  fishing: 6
+  open_door: 8
+  close_door: 9
+  elevator_up: 10
+  elevator_down: 11
+  fishing_npc: 32
+  healing: 33
+  fishing_fish: 38
+  fishing_caught: 39
+  fishing_rod_break: 40
+  fishing_line_break: 41
+  fishing_monster: 42
+  fishing_stop: 43
+  synth: 44
+  sit: 47
+  ranged: 48
+  fishing_start: 50
+  new_fishing_start: 56
+  new_fishing_fish: 57
+  new_fishing_caught: 58
+  new_fishing_rod_break: 59
+  new_fishing_line_break: 60
+  new_fishing_monster: 61
+  new_fishing_stop: 62
+  # 63 through 73 are used with /sitchair
+  sitchair_0: 63
+  sitchair_1: 64
+  sitchair_2: 65
+  sitchair_3: 66
+  sitchair_4: 67
+  sitchair_5: 68
+  sitchair_6: 69
+  sitchair_7: 70
+  sitchair_8: 71
+  sitchair_9: 72
+  sitchair_10: 73
+  mount: 85
+  trust: 90 # trust NPC spawn-in animation

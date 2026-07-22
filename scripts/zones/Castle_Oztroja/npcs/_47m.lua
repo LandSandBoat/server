@@ -16,11 +16,11 @@ entity.onTrigger = function(player, npc)
         return
     end
 
-    if brassDoor:getAnimation() == xi.anim.OPEN_DOOR then -- Door is already open
+    if brassDoor:getAnimation() == xi.animation.OPEN_DOOR then -- Door is already open
         return
     end
 
-    if npc:getAnimation() == xi.anim.OPEN_DOOR then -- Torch is already lit
+    if npc:getAnimation() == xi.animation.OPEN_DOOR then -- Torch is already lit
         return
     end
 

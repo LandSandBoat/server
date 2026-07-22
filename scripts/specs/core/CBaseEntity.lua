@@ -1368,11 +1368,11 @@ function CBaseEntity:setCostume2(costume)
 end
 
 ---@nodiscard
----@return integer
+---@return xi.animation
 function CBaseEntity:getAnimation()
 end
 
----@param animation integer
+---@param animation xi.animation
 ---@return nil
 function CBaseEntity:setAnimation(animation)
 end
@@ -3965,24 +3965,24 @@ function CBaseEntity:setMobSkillAttack(listId)
 end
 
 ---@nodiscard
----@param mobModID integer
+---@param mobModID xi.mobMod
 ---@return integer
 function CBaseEntity:getMobMod(mobModID)
 end
 
----@param mobModID integer
+---@param mobModID xi.mobMod
 ---@param value integer
 ---@return nil
 function CBaseEntity:setMobMod(mobModID, value)
 end
 
----@param mobModID integer
+---@param mobModID xi.mobMod
 ---@param value integer
 ---@return nil
 function CBaseEntity:addMobMod(mobModID, value)
 end
 
----@param mobModID integer
+---@param mobModID xi.mobMod
 ---@param value integer
 ---@return nil
 function CBaseEntity:delMobMod(mobModID, value)

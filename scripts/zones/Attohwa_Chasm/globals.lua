@@ -38,10 +38,10 @@ local attohwaChasmGlobal =
         local newTimer = math.randomInt(30, 40)
 
         if GetSystemTime() >= timer then
-            if npc:getAnimation() == xi.anim.CLOSE_DOOR then
-                npc:setAnimation(xi.anim.OPEN_DOOR)
+            if npc:getAnimation() == xi.animation.CLOSE_DOOR then
+                npc:setAnimation(xi.animation.OPEN_DOOR)
             else
-                npc:setAnimation(xi.anim.CLOSE_DOOR)
+                npc:setAnimation(xi.animation.CLOSE_DOOR)
             end
 
             npc:setLocalVar('timer', GetSystemTime() + newTimer)

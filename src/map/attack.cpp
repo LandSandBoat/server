@@ -22,10 +22,10 @@
 #include "attack.h"
 #include "ai/ai_container.h"
 #include "attackround.h"
+#include "data/enums/mob_mod.h"
 #include "entities/battle_entity.h"
 #include "items/item_weapon.h"
 #include "job_points.h"
-#include "mob_modifier.h"
 #include "status_effect_container.h"
 #include "utils/puppetutils.h"
 
@@ -631,7 +631,7 @@ void CAttack::ProcessDamage()
             int32       fSTR          = battleutils::GetFSTR(m_attacker, m_victim, slot);
             REGION_TYPE regionID      = m_attacker->loc.zone->GetRegionID();
 
-            if (static_cast<CMobEntity*>(m_attacker)->getMobMod(MOBMOD_NO_H2H_PENALTY) == 0)
+            if (static_cast<CMobEntity*>(m_attacker)->getMobMod(xi::MobMod::NoH2hPenalty) == 0)
             {
                 if (regionID <= REGION_TYPE::LIMBUS) // Pre TOAU zones
                 {

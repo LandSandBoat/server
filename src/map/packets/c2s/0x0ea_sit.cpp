@@ -40,13 +40,13 @@ void GP_CLI_COMMAND_SIT::process(MapSession* PSession, CCharEntity* PChar) const
     switch (static_cast<GP_CLI_COMMAND_SIT_MODE>(this->Mode))
     {
         case GP_CLI_COMMAND_SIT_MODE::Toggle:
-            PChar->animation = PChar->animation == ANIMATION_SIT ? ANIMATION_NONE : ANIMATION_SIT;
+            PChar->animation = PChar->animation == xi::Animation::Sit ? xi::Animation::None : xi::Animation::Sit;
             break;
         case GP_CLI_COMMAND_SIT_MODE::On:
-            PChar->animation = ANIMATION_SIT;
+            PChar->animation = xi::Animation::Sit;
             break;
         case GP_CLI_COMMAND_SIT_MODE::Off:
-            PChar->animation = ANIMATION_NONE;
+            PChar->animation = xi::Animation::None;
             break;
     }
 

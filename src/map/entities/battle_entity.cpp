@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -42,11 +42,11 @@
 #include "ai/states/weaponskill_state.h"
 #include "attack.h"
 #include "attackround.h"
+#include "data/enums/mob_mod.h"
 #include "entities/char_entity.h"
 #include "items/item_weapon.h"
 #include "job_points.h"
 #include "lua/luautils.h"
-#include "mob_modifier.h"
 #include "notoriety_container.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "recast_container.h"
@@ -116,7 +116,7 @@ bool CBattleEntity::IsDualWielding()
 {
     if (objtype == TYPE_MOB)
     {
-        return static_cast<CMobEntity*>(this)->getMobMod(MOBMOD_DUAL_WIELD) != 0;
+        return static_cast<CMobEntity*>(this)->getMobMod(xi::MobMod::DualWield) != 0;
     }
 
     return m_dualWield;
@@ -216,12 +216,12 @@ bool CBattleEntity::isAsleep()
 
 auto CBattleEntity::isMounted() const -> bool
 {
-    return (animation == ANIMATION_CHOCOBO || animation == ANIMATION_MOUNT);
+    return (animation == xi::Animation::Chocobo || animation == xi::Animation::Mount);
 }
 
 bool CBattleEntity::isSitting()
 {
-    return (animation == ANIMATION_HEALING || animation == ANIMATION_SIT || (animation >= ANIMATION_SITCHAIR_0 && animation <= ANIMATION_SITCHAIR_10));
+    return (animation == xi::Animation::Healing || animation == xi::Animation::Sit || (animation >= xi::Animation::Sitchair0 && animation <= xi::Animation::Sitchair10));
 }
 
 /************************************************************************
@@ -411,9 +411,9 @@ uint8 CBattleEntity::UpdateSpeed(bool run)
                 if (auto* mobEntity = dynamic_cast<CMobEntity*>(this))
                 {
                     // mob has a custom multiplier
-                    if (mobEntity->getMobMod(MOBMOD_RUN_SPEED_MULT) > 0)
+                    if (mobEntity->getMobMod(xi::MobMod::RunSpeedMult) > 0)
                     {
-                        multiplier = mobEntity->getMobMod(MOBMOD_RUN_SPEED_MULT) / 100.0f;
+                        multiplier = mobEntity->getMobMod(xi::MobMod::RunSpeedMult) / 100.0f;
                     }
 
                     // if some weight penalty (like gravity) then cut the multiplier
@@ -515,7 +515,7 @@ auto CBattleEntity::GetWeaponDelay(bool tp) -> uint32
             bool specialAttackList = false;
             if (auto* mobEntity = dynamic_cast<CMobEntity*>(this))
             {
-                if (mobEntity->getMobMod(MOBMODIFIER::MOBMOD_ATTACK_SKILL_LIST) != 0)
+                if (mobEntity->getMobMod(xi::MobMod::AttackSkillList) != 0)
                 {
                     specialAttackList = true;
                 }
@@ -631,18 +631,18 @@ uint16 CBattleEntity::GetMainWeaponDmg()
 
         if (auto* PMob = dynamic_cast<CMobEntity*>(this))
         {
-            weaponDamageOffset = PMob->getMobMod(MOBMOD_DAMAGE_OFFSET);
+            weaponDamageOffset = PMob->getMobMod(xi::MobMod::DamageOffset);
             damageMultiplier   = PMob->m_dmgMult / 100.0f;
 
             // Add this mod to increase a mobs damage by a base amount
-            if (PMob->getMobMod(MOBMOD_BASE_DAMAGE_MODIFIER) != 0)
+            if (PMob->getMobMod(xi::MobMod::BaseDamageModifier) != 0)
             {
-                baseDamageModifier = PMob->getMobMod(MOBMOD_BASE_DAMAGE_MODIFIER);
+                baseDamageModifier = PMob->getMobMod(xi::MobMod::BaseDamageModifier);
             }
 
-            if (PMob->getMobMod(MOBMOD_BASE_DAMAGE_MULTIPLIER) != 0)
+            if (PMob->getMobMod(xi::MobMod::BaseDamageMultiplier) != 0)
             {
-                damageMultiplier = PMob->getMobMod(MOBMOD_BASE_DAMAGE_MULTIPLIER) / 100.0f;
+                damageMultiplier = PMob->getMobMod(xi::MobMod::BaseDamageMultiplier) / 100.0f;
             }
         }
 
@@ -724,18 +724,18 @@ uint16 CBattleEntity::GetSubWeaponDmg()
 
         if (auto* PMob = dynamic_cast<CMobEntity*>(this))
         {
-            weaponDamageOffset = PMob->getMobMod(MOBMOD_DAMAGE_OFFSET);
+            weaponDamageOffset = PMob->getMobMod(xi::MobMod::DamageOffset);
             damageMultiplier   = PMob->m_dmgMult / 100.0f;
 
             // Add this mod to increase a mobs damage by a base amount
-            if (PMob->getMobMod(MOBMOD_BASE_DAMAGE_MODIFIER) != 0)
+            if (PMob->getMobMod(xi::MobMod::BaseDamageModifier) != 0)
             {
-                baseDamageModifier = PMob->getMobMod(MOBMOD_BASE_DAMAGE_MODIFIER);
+                baseDamageModifier = PMob->getMobMod(xi::MobMod::BaseDamageModifier);
             }
 
-            if (PMob->getMobMod(MOBMOD_BASE_DAMAGE_MULTIPLIER) != 0)
+            if (PMob->getMobMod(xi::MobMod::BaseDamageMultiplier) != 0)
             {
-                damageMultiplier = PMob->getMobMod(MOBMOD_BASE_DAMAGE_MULTIPLIER) / 100.0f;
+                damageMultiplier = PMob->getMobMod(xi::MobMod::BaseDamageMultiplier) / 100.0f;
             }
         }
 
@@ -783,18 +783,18 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
 
         if (auto* PMob = dynamic_cast<CMobEntity*>(this))
         {
-            weaponDamageOffset = PMob->getMobMod(MOBMOD_RANGED_DAMAGE_OFFSET);
+            weaponDamageOffset = PMob->getMobMod(xi::MobMod::RangedDamageOffset);
             damageMultiplier   = PMob->m_dmgMult / 100.0f;
 
             // Add this mod to increase a mobs damage by a base amount
-            if (PMob->getMobMod(MOBMOD_BASE_DAMAGE_MODIFIER) != 0)
+            if (PMob->getMobMod(xi::MobMod::BaseDamageModifier) != 0)
             {
-                baseDamageModifier = PMob->getMobMod(MOBMOD_BASE_DAMAGE_MODIFIER);
+                baseDamageModifier = PMob->getMobMod(xi::MobMod::BaseDamageModifier);
             }
 
-            if (PMob->getMobMod(MOBMOD_BASE_DAMAGE_MULTIPLIER) != 0)
+            if (PMob->getMobMod(xi::MobMod::BaseDamageMultiplier) != 0)
             {
-                damageMultiplier = PMob->getMobMod(MOBMOD_BASE_DAMAGE_MULTIPLIER) / 100.0f;
+                damageMultiplier = PMob->getMobMod(xi::MobMod::BaseDamageMultiplier) / 100.0f;
             }
         }
 
@@ -2317,7 +2317,7 @@ bool CBattleEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
                 // like fire-absorbing mobs casting Fire IV on themselves
                 else if (auto* PMobInitiator = dynamic_cast<CMobEntity*>(PInitiator))
                 {
-                    return PMobInitiator->getMobMod(MOBMODIFIER::MOBMOD_SKIP_ALLEGIANCE_CHECK) == 1;
+                    return PMobInitiator->getMobMod(xi::MobMod::SkipAllegianceCheck) == 1;
                 }
             }
 
@@ -2341,7 +2341,7 @@ void CBattleEntity::Spawn()
 {
     TracyZoneScoped;
 
-    animation = ANIMATION_NONE;
+    animation = xi::Animation::None;
     HideName(false);
     CBaseEntity::Spawn();
     m_OwnerID.clean();
@@ -3618,9 +3618,9 @@ void CBattleEntity::OnDisengage(CAttackState& s)
     TracyZoneScoped;
 
     setBattleTarget(std::nullopt);
-    if (animation == ANIMATION_ATTACK)
+    if (animation == xi::Animation::Attack)
     {
-        animation = ANIMATION_NONE;
+        animation = xi::Animation::None;
     }
     updatemask |= UPDATE_HP;
     PAI->EventHandler.triggerListener("DISENGAGE", this);
@@ -3764,7 +3764,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                         else if (PTarget->objtype == TYPE_MOB && targ_weapon && targ_weapon->getSkillType() == xi::SkillType::HandToHand) // This is how Attack Round checks for h2h penalty
                         {
                             REGION_TYPE regionID = PTarget->loc.zone->GetRegionID();
-                            if (static_cast<CMobEntity*>(PTarget)->getMobMod(MOBMOD_NO_H2H_PENALTY) == 0)
+                            if (static_cast<CMobEntity*>(PTarget)->getMobMod(xi::MobMod::NoH2hPenalty) == 0)
                             {
                                 if (regionID <= REGION_TYPE::LIMBUS) // Pre TOAU zones
                                 {
@@ -4011,7 +4011,7 @@ void CBattleEntity::OnEngage(CAttackState& state)
 {
     TracyZoneScoped;
 
-    animation = ANIMATION_ATTACK;
+    animation = xi::Animation::Attack;
     updatemask |= UPDATE_HP;
     PAI->EventHandler.triggerListener("ENGAGE", this, state.GetTarget());
 }

@@ -40,7 +40,7 @@ entity.onMobDespawn = function(mob)
         local lantern = GetNPCByID(npcId)
 
         if lantern then
-            lantern:setAnimation(xi.anim.CLOSE_DOOR) -- Turn off the light
+            lantern:setAnimation(xi.animation.CLOSE_DOOR) -- Turn off the light
         end
     end
 end

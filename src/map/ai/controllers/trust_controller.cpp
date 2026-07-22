@@ -24,11 +24,11 @@
 #include "ai/helpers/gambits_container.h"
 #include "ai/states/magic_state.h"
 #include "ai/states/range_state.h"
+#include "data/enums/mob_mod.h"
 #include "enmity_container.h"
 #include "entities/char_entity.h"
 #include "entities/trust_entity.h"
 #include "items/item_weapon.h"
-#include "mob_modifier.h"
 #include "player_controller.h"
 #include "recast_container.h"
 #include "utils/charutils.h"
@@ -82,7 +82,7 @@ CTrustController::~CTrustController()
 void CTrustController::Despawn()
 {
     POwner->PMaster   = nullptr;
-    POwner->animation = ANIMATION_DESPAWN;
+    POwner->animation = xi::Animation::Despawn;
     CMobController::Despawn();
 }
 
@@ -106,7 +106,7 @@ auto CTrustController::Tick(timer::time_point tick) -> Task<void>
         co_return;
     }
 
-    const bool nonCombatFollowTrust = PTrust->getMobMod(MOBMOD_TRUST_DISTANCE) == TRUST_MOVEMENT_TYPE::NON_COMBAT;
+    const bool nonCombatFollowTrust = PTrust->getMobMod(xi::MobMod::TrustDistance) == TRUST_MOVEMENT_TYPE::NON_COMBAT;
 
     if (PTrust->PMaster->PAI->IsEngaged() && nonCombatFollowTrust)
     {
@@ -186,7 +186,7 @@ auto CTrustController::DoCombatTick(timer::time_point tick) -> Task<void>
 
             PTrust->PAI->PathFind->LookAt(PTarget->loc.p);
 
-            int16 movementDistance = PTrust->getMobMod(MOBMOD_TRUST_DISTANCE);
+            int16 movementDistance = PTrust->getMobMod(xi::MobMod::TrustDistance);
 
             switch (movementDistance)
             {

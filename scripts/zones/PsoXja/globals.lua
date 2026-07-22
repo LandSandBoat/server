@@ -18,7 +18,7 @@ psoXjaGlobal.attemptPickLock = function(player, npc, trade, correctSideOfDoor)
     )
 
     if
-        npc:getAnimation() == xi.anim.CLOSE_DOOR and
+        npc:getAnimation() == xi.animation.CLOSE_DOOR and
         correctSideOfDoor and
         isThf and
         tradedLockTool
@@ -47,7 +47,7 @@ end
     correctSideOfDoor (boolean) true if player is clicking from the near(gargoyle)-side of gate
     ..............................................................................................]]
 psoXjaGlobal.attemptOpenDoor = function(player, npc, correctSideOfDoor)
-    if npc:getAnimation() == xi.anim.CLOSE_DOOR then
+    if npc:getAnimation() == xi.animation.CLOSE_DOOR then
         if correctSideOfDoor then
             local offset = npc:getID() - ID.npc.STONE_DOOR_OFFSET
             local gargoyle = ID.mob.GARGOYLE_OFFSET + offset

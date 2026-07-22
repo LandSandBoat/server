@@ -21,7 +21,7 @@ local function lightLamp(player, npc, option)
         local remaining = quest:getVar(player, 'Count') - 1
         quest:setVar(player, 'Count', remaining)
 
-        npc:setAnimation(xi.anim.OPEN_DOOR)
+        npc:setAnimation(xi.animation.OPEN_DOOR)
 
         if remaining == 0 then
             local zone = player:getZone()
@@ -49,9 +49,9 @@ local function getLampParam(player, npc)
             (timer == date and hour >= 18) or -- Same day flagged
             (timer + 1 == date and hour < 1)  -- Day after it was flagged
         then
-            if npcAnimation == xi.anim.OPEN_DOOR then
+            if npcAnimation == xi.animation.OPEN_DOOR then
                 return 2 -- The lamp is already lit.
-            elseif npcAnimation == xi.anim.CLOSE_DOOR then
+            elseif npcAnimation == xi.animation.CLOSE_DOOR then
                 return 1 -- Light the lamp? Yes/No
             end
         elseif
@@ -62,7 +62,7 @@ local function getLampParam(player, npc)
         end
 
     -- The lamp is lit.
-    elseif npcAnimation == xi.anim.OPEN_DOOR then
+    elseif npcAnimation == xi.animation.OPEN_DOOR then
         return 5
 
     -- You examine the lamp. It seems that it must be lit manually.
@@ -152,7 +152,7 @@ xi.quest.communityServiceCleanup = function(zone)
         local lamp = GetNPCByID(ID.npc.STREETLAMP_OFFSET + i)
 
         if lamp then
-            lamp:setAnimation(xi.anim.CLOSE_DOOR)
+            lamp:setAnimation(xi.animation.CLOSE_DOOR)
         end
     end
 end

@@ -29,7 +29,7 @@ function content:setupBattlefield(battlefield)
     local tileOffset = shroudedMawID.npc.DARKNESS_NAMED_TILE_OFFSET + (battlefield:getArea() - 1) * 8
 
     for tileId = tileOffset, tileOffset + 7 do
-        GetNPCByID(tileId):setAnimation(xi.anim.CLOSE_DOOR)
+        GetNPCByID(tileId):setAnimation(xi.animation.CLOSE_DOOR)
     end
 end
 

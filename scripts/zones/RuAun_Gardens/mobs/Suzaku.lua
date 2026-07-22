@@ -27,7 +27,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:messageText(mob, ID.text.SKY_GOD_OFFSET + 7) -- Spawn message
-    GetNPCByID(ID.npc.PORTAL_OFFSET + 11):setAnimation(xi.anim.CLOSE_DOOR)
+    GetNPCByID(ID.npc.PORTAL_OFFSET + 11):setAnimation(xi.animation.CLOSE_DOOR)
 
     mob:setMod(xi.mod.PARALYZE_RES_RANK, 4)
     mob:setMod(xi.mod.SLOW_RES_RANK, 4)
@@ -72,7 +72,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    GetNPCByID(ID.npc.PORTAL_OFFSET + 11):setAnimation(xi.anim.OPEN_DOOR)
+    GetNPCByID(ID.npc.PORTAL_OFFSET + 11):setAnimation(xi.animation.OPEN_DOOR)
 end
 
 return entity

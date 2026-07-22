@@ -1140,7 +1140,7 @@ void startSynth(CCharEntity* PChar, const SynthOffer& offer)
         }
     }
 
-    PChar->animation = ANIMATION_SYNTH;
+    PChar->animation = xi::Animation::Synth;
     PChar->updatemask |= UPDATE_HP;
     PChar->pushPacket<CCharStatusPacket>(PChar);
     PChar->startSynth(static_cast<xi::SkillType>(skillType));
@@ -1150,11 +1150,11 @@ void startSynth(CCharEntity* PChar, const SynthOffer& offer)
 
 void sendSynthDone(CCharEntity* PChar)
 {
-    // forceSynthCritFail already ran, the transaction is gone -- clear the ANIMATION_SYNTH flag and bail.
+    // forceSynthCritFail already ran, the transaction is gone -- clear the xi::Animation::Synth flag and bail.
     auto* synthTransaction = PChar->activeTransaction<SynthTransaction>();
     if (!synthTransaction)
     {
-        PChar->animation = ANIMATION_NONE;
+        PChar->animation = xi::Animation::None;
         PChar->updatemask |= UPDATE_HP;
         PChar->pushPacket<CCharStatusPacket>(PChar);
         return;
@@ -1174,7 +1174,7 @@ void sendSynthDone(CCharEntity* PChar)
     std::ignore = synthTransaction->commit();
     PChar->removeTransaction(synthTransaction);
 
-    PChar->animation = ANIMATION_NONE;
+    PChar->animation = xi::Animation::None;
     PChar->updatemask |= UPDATE_HP;
     PChar->pushPacket<CCharStatusPacket>(PChar);
 }
@@ -1212,7 +1212,7 @@ void doSynthCriticalFail(CCharEntity* PChar)
     std::ignore = synthTransaction->commit();
     PChar->removeTransaction(synthTransaction);
 
-    PChar->animation = ANIMATION_NONE;
+    PChar->animation = xi::Animation::None;
     PChar->updatemask |= UPDATE_HP;
     PChar->pushPacket<CCharStatusPacket>(PChar);
 }

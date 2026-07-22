@@ -7,7 +7,7 @@ local ID = zones[xi.zone.RUAUN_GARDENS]
 local zoneObject = {}
 
 local function handleClosingPortal(player, eventId, npcId)
-    if GetNPCByID(npcId):getAnimation() == xi.anim.OPEN_DOOR then
+    if GetNPCByID(npcId):getAnimation() == xi.animation.OPEN_DOOR then
         player:startOptionalCutscene(eventId, { cs_option = 0, canSkip = true })
     end
 end

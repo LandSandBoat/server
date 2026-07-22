@@ -27,7 +27,7 @@
 #include "ai/helpers/targetfind.h"
 #include "ai/states/ability_state.h"
 #include "ai/states/petskill_state.h"
-#include "mob_modifier.h"
+#include "data/enums/mob_mod.h"
 #include "packets/pet_sync.h"
 #include "utils/battleutils.h"
 #include "utils/messageutils.h"
@@ -260,8 +260,8 @@ void CPetEntity::Spawn()
     // we need to skip CMobEntity's spawn because it calculates stats (and our stats are already calculated)
     if (PMaster && PMaster->objtype == TYPE_PC && m_EcoSystem == xi::Ecosystem::Elemental)
     {
-        this->defaultMobMod(MOBMOD_MAGIC_DELAY, 12);
-        this->defaultMobMod(MOBMOD_MAGIC_COOL, 48);
+        this->defaultMobMod(xi::MobMod::MagicDelay, 12);
+        this->defaultMobMod(xi::MobMod::MagicCool, 48);
         mobutils::GetAvailableSpells(this);
     }
 

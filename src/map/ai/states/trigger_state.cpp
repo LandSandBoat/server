@@ -34,10 +34,10 @@ bool CTriggerState::Update(timer::time_point tick)
     if (!IsCompleted())
     {
         auto* PChar = dynamic_cast<CCharEntity*>(GetTarget());
-        if (PChar && door && m_PEntity->animation == ANIMATION_CLOSE_DOOR)
+        if (PChar && door && m_PEntity->animation == xi::Animation::CloseDoor)
         {
             close                = true;
-            m_PEntity->animation = ANIMATION_OPEN_DOOR;
+            m_PEntity->animation = xi::Animation::OpenDoor;
             m_PEntity->updatemask |= UPDATE_HP;
         }
         Complete();
@@ -46,7 +46,7 @@ bool CTriggerState::Update(timer::time_point tick)
     {
         if (tick > GetEntryTime() + 7s)
         {
-            m_PEntity->animation = ANIMATION_CLOSE_DOOR;
+            m_PEntity->animation = xi::Animation::CloseDoor;
             m_PEntity->updatemask |= UPDATE_HP;
             return true;
         }
