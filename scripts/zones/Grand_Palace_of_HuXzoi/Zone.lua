@@ -49,7 +49,7 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     if
         player:getLocalVar('isTeleporting') == 0 and
-        player:getAnimation() == xi.anim.NONE
+        player:getAnimation() == xi.animation.NONE
     then
         -- prevent 2cs at same time
         player:startOptionalCutscene(149 + triggerArea:getTriggerAreaID(), { cs_option = 0, canSkip = true }) -- Confirmed to wipe enmity.

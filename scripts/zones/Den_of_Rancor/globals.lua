@@ -12,7 +12,7 @@ local denOfRancorGlobal =
     onTradeLanternChamber = function(player, npc, trade)
         if
             trade:getItemQty(xi.item.RANCOR_FLAME) > 0 and
-            npc:getAnimation() == xi.anim.OPEN_DOOR
+            npc:getAnimation() == xi.animation.OPEN_DOOR
         then
             player:messageSpecial(ID.text.LANTERN_OFFSET + 7) -- already lit
         else
@@ -51,7 +51,7 @@ local denOfRancorGlobal =
     onTradeLanternHaku = function(player, npc, trade)
         if
             trade:getItemQty(xi.item.RANCOR_FLAME) > 0 and
-            npc:getAnimation() == xi.anim.OPEN_DOOR
+            npc:getAnimation() == xi.animation.OPEN_DOOR
         then
             player:messageSpecial(ID.text.LANTERN_OFFSET + 7) -- already lit
         else
@@ -91,7 +91,7 @@ local denOfRancorGlobal =
 
         if
             trade:getItemQty(itemId) > 0 and  -- Flame of Crimson or Blue Rancor
-            npc:getAnimation() == xi.anim.OPEN_DOOR
+            npc:getAnimation() == xi.animation.OPEN_DOOR
         then
             player:messageSpecial(ID.text.LANTERN_OFFSET + 7) -- already lit
         else
@@ -124,7 +124,7 @@ local denOfRancorGlobal =
     end,
 
     onTriggerLantern = function(player, npc)
-        if npc:getAnimation() == xi.anim.OPEN_DOOR then
+        if npc:getAnimation() == xi.animation.OPEN_DOOR then
             player:messageSpecial(ID.text.LANTERN_OFFSET + 7) -- already lit
         else
             player:messageSpecial(ID.text.LANTERN_OFFSET + 20) -- unlit

@@ -344,7 +344,7 @@ auto LoadNPCList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                                     PNpc->baseSpeed      = rset->get<uint8>("speed");    // Overwrites baseentity.cpp's defined baseSpeed
                                     PNpc->UpdateSpeed();
 
-                                    PNpc->animation    = rset->get<uint8>("animation");
+                                    PNpc->animation    = rset->get<xi::Animation>("animation");
                                     PNpc->animationsub = rset->get<uint8>("animationsub");
 
                                     PNpc->namevis = rset->get<xi::NameVis>("namevis");

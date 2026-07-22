@@ -16,10 +16,10 @@ effectObject.onEffectGain = function(target, effect)
         mountId == xi.mount.NOBLE_CHOCOBO
     then
         target:changeMusic(4, 212)
-        animation = xi.anim.CHOCOBO
+        animation = xi.animation.CHOCOBO
     else
         target:changeMusic(4, 84)
-        animation = xi.anim.MOUNT
+        animation = xi.animation.MOUNT
     end
 
     if not target:isInEvent() then
@@ -40,7 +40,7 @@ end
 
 effectObject.onEffectLose = function(target, effect)
     if not target:isInEvent() then -- Paranoia safety check
-        target:setAnimation(xi.anim.NONE)
+        target:setAnimation(xi.animation.NONE)
     end
 
     -- Remove CharVars from player participating in chocobo riding game

@@ -913,7 +913,7 @@ void IPCClient::handleMessage_EntityInformationResponse(const IPP& ipp, const ip
             PChar->updatemask   = 0;
 
             PChar->status    = xi::Status::Disappear;
-            PChar->animation = ANIMATION_NONE;
+            PChar->animation = xi::Animation::None;
 
             PChar->clearPacketList();
 
@@ -946,7 +946,7 @@ void IPCClient::handleMessage_SendPlayerToLocation(const IPP& ipp, const ipc::Se
         PChar->updatemask   = 0;
 
         PChar->status    = xi::Status::Disappear;
-        PChar->animation = ANIMATION_NONE;
+        PChar->animation = xi::Animation::None;
 
         PChar->clearPacketList();
 

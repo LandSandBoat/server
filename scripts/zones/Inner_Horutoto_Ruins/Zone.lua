@@ -50,13 +50,13 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         [1] = function()  -- Red Circle
             if player:getMainJob() == xi.job.RDM and triggerArea:addCount(1) == 1 then
                 if red then
-                    red:setAnimation(xi.anim.OPEN_DOOR)
+                    red:setAnimation(xi.animation.OPEN_DOOR)
                     red:entityAnimationPacket(xi.animationString.OPEN_DOOR)
                 end
 
                 if
-                    white and white:getAnimation() == xi.anim.OPEN_DOOR and
-                    black and black:getAnimation() == xi.anim.OPEN_DOOR
+                    white and white:getAnimation() == xi.animation.OPEN_DOOR and
+                    black and black:getAnimation() == xi.animation.OPEN_DOOR
                 then
                     GetNPCByID(circle + 3):openDoor(30)
                     GetNPCByID(circle + 4):openDoor(30)
@@ -67,13 +67,13 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         [2] = function()  -- White Circle
             if player:getMainJob() == xi.job.WHM and triggerArea:addCount(1) == 1 then
                 if white then
-                    white:setAnimation(xi.anim.OPEN_DOOR)
+                    white:setAnimation(xi.animation.OPEN_DOOR)
                     white:entityAnimationPacket(xi.animationString.OPEN_DOOR)
                 end
 
                 if
-                    red and red:getAnimation() == xi.anim.OPEN_DOOR and
-                    black and black:getAnimation() == xi.anim.OPEN_DOOR
+                    red and red:getAnimation() == xi.animation.OPEN_DOOR and
+                    black and black:getAnimation() == xi.animation.OPEN_DOOR
                 then
                     GetNPCByID(circle + 3):openDoor(30)
                     GetNPCByID(circle + 4):openDoor(30)
@@ -84,13 +84,13 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         [3] = function()  -- Black Circle
             if player:getMainJob() == xi.job.BLM and triggerArea:addCount(1) == 1 then
                 if black then
-                    black:setAnimation(xi.anim.OPEN_DOOR)
+                    black:setAnimation(xi.animation.OPEN_DOOR)
                     black:entityAnimationPacket(xi.animationString.OPEN_DOOR)
                 end
 
                 if
-                    red and red:getAnimation() == xi.anim.OPEN_DOOR and
-                    white and white:getAnimation() == xi.anim.OPEN_DOOR
+                    red and red:getAnimation() == xi.animation.OPEN_DOOR and
+                    white and white:getAnimation() == xi.animation.OPEN_DOOR
                 then
                     GetNPCByID(circle + 3):openDoor(30)
                     GetNPCByID(circle + 4):openDoor(30)
@@ -118,7 +118,7 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
                 player:getMainJob() == xi.job.RDM and
                 triggerArea:delCount(1) == 0
             then
-                red:setAnimation(xi.anim.CLOSE_DOOR)
+                red:setAnimation(xi.animation.CLOSE_DOOR)
                 red:entityAnimationPacket(xi.animationString.CLOSE_DOOR)
             end
         end,
@@ -129,7 +129,7 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
                 player:getMainJob() == xi.job.WHM and
                 triggerArea:delCount(1) == 0
             then
-                white:setAnimation(xi.anim.CLOSE_DOOR)
+                white:setAnimation(xi.animation.CLOSE_DOOR)
                 white:entityAnimationPacket(xi.animationString.CLOSE_DOOR)
             end
         end,
@@ -140,7 +140,7 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
                 player:getMainJob() == xi.job.BLM and
                 triggerArea:delCount(1) == 0
             then
-                black:setAnimation(xi.anim.CLOSE_DOOR)
+                black:setAnimation(xi.animation.CLOSE_DOOR)
                 black:entityAnimationPacket(xi.animationString.CLOSE_DOOR)
             end
         end,

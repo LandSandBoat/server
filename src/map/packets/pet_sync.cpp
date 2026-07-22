@@ -49,7 +49,7 @@ CPetSyncPacket::CPetSyncPacket(CCharEntity* PChar)
         ref<uint8>(0x0E)  = PChar->PPet->GetHPP();
         ref<uint8>(0x0F)  = PChar->PPet->GetMPP();
         ref<uint16>(0x10) = PChar->PPet->health.tp;
-        if (PChar->PPet->animation == ANIMATION_ATTACK)
+        if (PChar->PPet->animation == xi::Animation::Attack)
         {
             ref<uint32>(0x14) = PChar->PPet->GetBattleTarget()->id;
         }

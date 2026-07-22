@@ -12,9 +12,9 @@ entity.onTrigger = function(player, npc)
 
     if
         player:getZPos() < -72 and
-        npc:getAnimation() == xi.anim.CLOSE_DOOR and
+        npc:getAnimation() == xi.animation.CLOSE_DOOR and
         brassDoor and
-        brassDoor:getAnimation() == xi.anim.CLOSE_DOOR
+        brassDoor:getAnimation() == xi.animation.CLOSE_DOOR
     then
         npc:openDoor(6.5)
         -- Should be a ~1 second delay here before the door opens

@@ -11,7 +11,7 @@ entity.onTrigger = function(player, npc)
         npcUtil.giveKeyItem(player, xi.ki.OLD_RING)
     end
 
-    if npc:getAnimation() == xi.anim.CLOSE_DOOR then
+    if npc:getAnimation() == xi.animation.CLOSE_DOOR then
         npc:openDoor()
     end
 end

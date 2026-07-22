@@ -1425,37 +1425,37 @@ int32 LoseCatch(CCharEntity* PChar, uint8 FailType)
     switch (FailType)
     {
         case FISHINGFAILTYPE_LINESNAP:
-            PChar->animation = ANIMATION_FISHING_LINE_BREAK;
+            PChar->animation = xi::Animation::NewFishingLineBreak;
             PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LINEBREAK);
             break;
         case FISHINGFAILTYPE_RODBREAK:
-            PChar->animation = ANIMATION_FISHING_ROD_BREAK;
+            PChar->animation = xi::Animation::NewFishingRodBreak;
             PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_RODBREAK);
             break;
         case FISHINGFAILTYPE_RODBREAK_TOOBIG:
-            PChar->animation = ANIMATION_FISHING_ROD_BREAK;
+            PChar->animation = xi::Animation::NewFishingRodBreak;
             PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_RODBREAK_TOOBIG);
             break;
         case FISHINGFAILTYPE_RODBREAK_TOOHEAVY:
-            PChar->animation = ANIMATION_FISHING_ROD_BREAK;
+            PChar->animation = xi::Animation::NewFishingRodBreak;
             PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_RODBREAK_TOOHEAVY);
             break;
         case FISHINGFAILTYPE_LOST_TOOSMALL:
-            PChar->animation = ANIMATION_FISHING_STOP;
+            PChar->animation = xi::Animation::NewFishingStop;
             PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST_TOOSMALL);
             break;
         case FISHINGFAILTYPE_LOST_LOWSKILL:
-            PChar->animation = ANIMATION_FISHING_STOP;
+            PChar->animation = xi::Animation::NewFishingStop;
             PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST_LOWSKILL);
             break;
         case FISHINGFAILTYPE_LOST_TOOBIG:
-            PChar->animation = ANIMATION_FISHING_STOP;
+            PChar->animation = xi::Animation::NewFishingStop;
             PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST_TOOBIG);
             break;
         case FISHINGFAILTYPE_LOST:
         case FISHINGFAILTYPE_NONE:
         default:
-            PChar->animation = ANIMATION_FISHING_STOP;
+            PChar->animation = xi::Animation::NewFishingStop;
             PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST);
             break;
     }
@@ -1466,7 +1466,7 @@ int32 LoseCatch(CCharEntity* PChar, uint8 FailType)
 int32 CatchNothing(CCharEntity* PChar, uint8 FailType)
 {
     uint16 messageOffset = GetMessageOffset(PChar->getZone());
-    PChar->animation     = ANIMATION_FISHING_STOP;
+    PChar->animation     = xi::Animation::NewFishingStop;
     PChar->updatemask |= UPDATE_HP;
 
     PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, messageOffset + FISHMESSAGEOFFSET_NOCATCH);
@@ -1477,7 +1477,7 @@ int32 CatchNothing(CCharEntity* PChar, uint8 FailType)
 int32 CatchFish(CCharEntity* PChar, uint16 FishID, BigFish bigFish, uint16 length, uint16 weight, uint8 Count = 1)
 {
     uint16 MessageOffset = GetMessageOffset(PChar->getZone());
-    PChar->animation     = ANIMATION_FISHING_CAUGHT;
+    PChar->animation     = xi::Animation::NewFishingCaught;
     PChar->updatemask |= UPDATE_HP;
 
     if (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0)
@@ -1487,7 +1487,7 @@ int32 CatchFish(CCharEntity* PChar, uint16 FishID, BigFish bigFish, uint16 lengt
         if (Fish == nullptr)
         {
             ShowError("Invalid ItemID %i for fished item", FishID);
-            PChar->animation = ANIMATION_FISHING_STOP;
+            PChar->animation = xi::Animation::NewFishingStop;
             PChar->updatemask |= UPDATE_HP;
             PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST);
             return 0;
@@ -1524,7 +1524,7 @@ int32 CatchFish(CCharEntity* PChar, uint16 FishID, BigFish bigFish, uint16 lengt
 int32 CatchItem(CCharEntity* PChar, uint16 ItemID, uint8 Count = 1)
 {
     uint16 MessageOffset = GetMessageOffset(PChar->getZone());
-    PChar->animation     = ANIMATION_FISHING_CAUGHT;
+    PChar->animation     = xi::Animation::NewFishingCaught;
     PChar->updatemask |= UPDATE_HP;
 
     if (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0)
@@ -1532,7 +1532,7 @@ int32 CatchItem(CCharEntity* PChar, uint16 ItemID, uint8 Count = 1)
         if (xi::items::lookup(ItemID) == nullptr)
         {
             ShowError("Invalid ItemID %i for fished item", ItemID);
-            PChar->animation = ANIMATION_FISHING_STOP;
+            PChar->animation = xi::Animation::NewFishingStop;
             PChar->updatemask |= UPDATE_HP;
             PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST);
             return 0;
@@ -1568,7 +1568,7 @@ int32 CatchMonster(CCharEntity* PChar, uint32 MobID)
     if (!PMob || !mob)
     {
         ShowError("Invalid MobID %i for fished monster", MobID);
-        PChar->animation = ANIMATION_FISHING_STOP;
+        PChar->animation = xi::Animation::NewFishingStop;
         PChar->updatemask |= UPDATE_HP;
         PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST);
         return 0;
@@ -1576,13 +1576,13 @@ int32 CatchMonster(CCharEntity* PChar, uint32 MobID)
 
     if (PMob->isAlive() || (mob->questOnly && PMob->GetLocalVar("catchable") == 0))
     {
-        PChar->animation = ANIMATION_FISHING_STOP;
+        PChar->animation = xi::Animation::NewFishingStop;
         PChar->updatemask |= UPDATE_HP;
         PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST);
         return 0;
     }
 
-    PChar->animation = ANIMATION_FISHING_MONSTER;
+    PChar->animation = xi::Animation::NewFishingMonster;
     PChar->updatemask |= UPDATE_HP;
     PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_TALKNUMNAME>(PChar, MessageOffset + FISHMESSAGEOFFSET_MONSTER));
 
@@ -1629,13 +1629,13 @@ int32 CatchChest(CCharEntity* PChar, uint32 NpcID, uint8 distance, int8 angle)
     if (Chest == nullptr)
     {
         ShowError("Invalid NpcID %i for fished chest", NpcID);
-        PChar->animation = ANIMATION_FISHING_STOP;
+        PChar->animation = xi::Animation::NewFishingStop;
         PChar->updatemask |= UPDATE_HP;
         PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST);
         return 0;
     }
 
-    PChar->animation = ANIMATION_FISHING_CAUGHT;
+    PChar->animation = xi::Animation::NewFishingCaught;
     PChar->updatemask |= UPDATE_HP;
     PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_TALKNUMNAME>(PChar, MessageOffset + FISHMESSAGEOFFSET_CATCH_CHEST));
 
@@ -1895,11 +1895,11 @@ void FishingSkillup(CCharEntity* PChar, uint8 catchLevel, uint8 successType)
  ************************************************************************/
 void InterruptFishing(CCharEntity* PChar)
 {
-    if (PChar->animation == ANIMATION_FISHING_FISH)
+    if (PChar->animation == xi::Animation::NewFishingFish)
     {
         BaitLoss(PChar, RemoveFly::No, SendUpdate::Yes);
     }
-    PChar->animation = ANIMATION_NONE;
+    PChar->animation = xi::Animation::None;
     PChar->updatemask |= UPDATE_ALL_CHAR;
 
     UnhookMob(PChar, Lost::No);
@@ -1969,7 +1969,7 @@ void StartFishing(CCharEntity* PChar)
         PChar->hookedFish->successtype = FISHINGSUCCESSTYPE_NONE;
 
         // If in the middle of something else, can't fish
-        if (PChar->animation != ANIMATION_NONE)
+        if (PChar->animation != xi::Animation::None)
         {
             PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_CANNOTFISH_MOMENT);
             PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::CannotUseCommandAtTheMoment);
@@ -2005,7 +2005,7 @@ void StartFishing(CCharEntity* PChar)
         if (rod != nullptr && bait != nullptr)
         {
             PChar->hookDelay = GetHookTime(PChar);
-            PChar->animation = ANIMATION_FISHING_START;
+            PChar->animation = xi::Animation::NewFishingStart;
             PChar->updatemask |= UPDATE_HP;
         }
         else
@@ -2685,7 +2685,7 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
     {
         ShowWarning("Fishing is currently disabled, but somehow we have someone commencing a fishing action");
         // Unlikely anyone can get here legit, since we already disabled "startFishing"
-        PChar->animation = ANIMATION_FISHING_STOP;
+        PChar->animation = xi::Animation::NewFishingStop;
         return;
     }
 
@@ -2764,7 +2764,7 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
                 PChar->pushPacket<GP_SERV_COMMAND_SCHEDULOR>(PChar, PChar, FourCC::Sweating);
                 PChar->updatemask |= UPDATE_HP;
                 // send the fishing packet
-                PChar->animation = ANIMATION_FISHING_FISH;
+                PChar->animation = xi::Animation::NewFishingFish;
                 PChar->pushPacket<GP_SERV_COMMAND_FISH>(response->stamina, response->regen, response->response, response->attackdmg, response->delay, response->heal, response->timelimit, response->hooksense, response->special);
             }
             else
@@ -2832,7 +2832,7 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
             {
                 // you lost the catch due to lack of skill
                 // lose bait but keep lure
-                PChar->animation = ANIMATION_FISHING_LINE_BREAK;
+                PChar->animation = xi::Animation::NewFishingLineBreak;
                 PChar->updatemask |= UPDATE_HP;
                 BaitLoss(PChar, RemoveFly::No, SendUpdate::Yes);
                 PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST_LOWSKILL);
@@ -2845,7 +2845,7 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
             else if (stamina <= 0x64)
             {
                 // message: "Your line breaks!"
-                PChar->animation = ANIMATION_FISHING_LINE_BREAK;
+                PChar->animation = xi::Animation::NewFishingLineBreak;
                 PChar->updatemask |= UPDATE_HP;
                 BaitLoss(PChar, RemoveFly::Yes, SendUpdate::Yes);
                 PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LINEBREAK);
@@ -2858,7 +2858,7 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
             else if (stamina <= 0x100)
             {
                 // message: "You give up!"
-                PChar->animation = ANIMATION_FISHING_STOP;
+                PChar->animation = xi::Animation::NewFishingStop;
                 PChar->updatemask |= UPDATE_HP;
                 PChar->lastCastTime = 0;
 
@@ -2876,7 +2876,7 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
             else
             {
                 // message: "You lost your catch!"
-                PChar->animation = ANIMATION_FISHING_STOP;
+                PChar->animation = xi::Animation::NewFishingStop;
                 PChar->updatemask |= UPDATE_HP;
                 BaitLoss(PChar, RemoveFly::No, SendUpdate::Yes);
                 PChar->pushPacket<GP_SERV_COMMAND_TALKNUM>(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST);
@@ -2919,7 +2919,7 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
                 PChar->hookedFish = nullptr;
             }
 
-            PChar->animation = ANIMATION_NONE;
+            PChar->animation = xi::Animation::None;
             PChar->updatemask |= UPDATE_HP;
         }
 

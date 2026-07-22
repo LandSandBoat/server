@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -216,12 +216,12 @@ bool CBattleEntity::isAsleep()
 
 auto CBattleEntity::isMounted() const -> bool
 {
-    return (animation == ANIMATION_CHOCOBO || animation == ANIMATION_MOUNT);
+    return (animation == xi::Animation::Chocobo || animation == xi::Animation::Mount);
 }
 
 bool CBattleEntity::isSitting()
 {
-    return (animation == ANIMATION_HEALING || animation == ANIMATION_SIT || (animation >= ANIMATION_SITCHAIR_0 && animation <= ANIMATION_SITCHAIR_10));
+    return (animation == xi::Animation::Healing || animation == xi::Animation::Sit || (animation >= xi::Animation::Sitchair0 && animation <= xi::Animation::Sitchair10));
 }
 
 /************************************************************************
@@ -2341,7 +2341,7 @@ void CBattleEntity::Spawn()
 {
     TracyZoneScoped;
 
-    animation = ANIMATION_NONE;
+    animation = xi::Animation::None;
     HideName(false);
     CBaseEntity::Spawn();
     m_OwnerID.clean();
@@ -3618,9 +3618,9 @@ void CBattleEntity::OnDisengage(CAttackState& s)
     TracyZoneScoped;
 
     setBattleTarget(std::nullopt);
-    if (animation == ANIMATION_ATTACK)
+    if (animation == xi::Animation::Attack)
     {
-        animation = ANIMATION_NONE;
+        animation = xi::Animation::None;
     }
     updatemask |= UPDATE_HP;
     PAI->EventHandler.triggerListener("DISENGAGE", this);
@@ -4011,7 +4011,7 @@ void CBattleEntity::OnEngage(CAttackState& state)
 {
     TracyZoneScoped;
 
-    animation = ANIMATION_ATTACK;
+    animation = xi::Animation::Attack;
     updatemask |= UPDATE_HP;
     PAI->EventHandler.triggerListener("ENGAGE", this, state.GetTarget());
 }

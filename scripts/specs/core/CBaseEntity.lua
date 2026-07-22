@@ -1368,11 +1368,11 @@ function CBaseEntity:setCostume2(costume)
 end
 
 ---@nodiscard
----@return integer
+---@return xi.animation
 function CBaseEntity:getAnimation()
 end
 
----@param animation integer
+---@param animation xi.animation
 ---@return nil
 function CBaseEntity:setAnimation(animation)
 end

@@ -598,7 +598,7 @@ void monstrosity::HandleDeathMenu(CCharEntity* PChar, const GP_CLI_COMMAND_ACTIO
 
     PChar->health.hp = PChar->GetMaxHP();
     PChar->health.mp = PChar->GetMaxMP();
-    PChar->animation = ANIMATION_NONE;
+    PChar->animation = xi::Animation::None;
 
     PChar->updatemask |= UPDATE_HP;
 

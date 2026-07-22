@@ -324,8 +324,8 @@ public:
     void   setCostume(uint16 costume);
     uint16 getCostume2();
     void   setCostume2(uint16 costume);
-    uint8  getAnimation();
-    void   setAnimation(uint8 animation);
+    auto   getAnimation() -> xi::Animation;
+    void   setAnimation(xi::Animation animation);
     uint8  getAnimationSub();
     void   setAnimationSub(uint8 animationsub, const sol::object& sendUpdate);
     void   setSpawnAnimation(xi::SpawnAnimation spawnAnimation);

@@ -53,16 +53,16 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     local gate = GetNPCByID(gateId)
 
     -- Logic when standing on the lever.
-    GetNPCByID(ID.npc.BANISHING_GATE_OFFSET + triggerAreaID):setAnimation(xi.anim.OPEN_DOOR)
+    GetNPCByID(ID.npc.BANISHING_GATE_OFFSET + triggerAreaID):setAnimation(xi.animation.OPEN_DOOR)
 
     -- If all 4 levers of a set are down, open related gate for varying times
     if
         gate and
-        GetNPCByID(gateId):getAnimation() == xi.anim.CLOSE_DOOR and -- Avoid spamming if already open
-        GetNPCByID(gateId + 1):getAnimation() == xi.anim.OPEN_DOOR and
-        GetNPCByID(gateId + 2):getAnimation() == xi.anim.OPEN_DOOR and
-        GetNPCByID(gateId + 3):getAnimation() == xi.anim.OPEN_DOOR and
-        GetNPCByID(gateId + 4):getAnimation() == xi.anim.OPEN_DOOR
+        GetNPCByID(gateId):getAnimation() == xi.animation.CLOSE_DOOR and -- Avoid spamming if already open
+        GetNPCByID(gateId + 1):getAnimation() == xi.animation.OPEN_DOOR and
+        GetNPCByID(gateId + 2):getAnimation() == xi.animation.OPEN_DOOR and
+        GetNPCByID(gateId + 3):getAnimation() == xi.animation.OPEN_DOOR and
+        GetNPCByID(gateId + 4):getAnimation() == xi.animation.OPEN_DOOR
     then
         -- Default open time is 30 seconds for gate 1
         local time = 30
@@ -93,7 +93,7 @@ end
 -- However, if a lever is activated while it's related door is open, the lever will remain activated until the door closes.
 
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
-    GetNPCByID(ID.npc.BANISHING_GATE_OFFSET + triggerArea:getTriggerAreaID()):setAnimation(xi.anim.CLOSE_DOOR)
+    GetNPCByID(ID.npc.BANISHING_GATE_OFFSET + triggerArea:getTriggerAreaID()):setAnimation(xi.animation.CLOSE_DOOR)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

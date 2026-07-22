@@ -90,11 +90,11 @@ entity.onMobSpawn = function(mob)
                 local tileId = baseOffset + index
                 local tile = GetNPCByID(tileId)
 
-                if tile and tile:getAnimation() == xi.anim.CLOSE_DOOR then
+                if tile and tile:getAnimation() == xi.animation.CLOSE_DOOR then
                     SendEntityVisualPacket(tileId, tileDropAnimations[index + 1][instance + 1])
                     SendEntityVisualPacket(tileId, 's123')
                     tile:timer(5000, function(tileArg)
-                        tileArg:setAnimation(xi.anim.OPEN_DOOR)
+                        tileArg:setAnimation(xi.animation.OPEN_DOOR)
                     end)
                 end
             end

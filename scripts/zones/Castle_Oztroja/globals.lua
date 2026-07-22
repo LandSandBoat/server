@@ -21,9 +21,9 @@ local oztrojaGlobal =
         repeat
             numOpen = 0
             for i = 0, 3 do
-                local correctState = xi.anim.OPEN_DOOR + math.randomInt(0, 1)
+                local correctState = xi.animation.OPEN_DOOR + math.randomInt(0, 1)
                 combo[i] = correctState
-                if correctState == xi.anim.OPEN_DOOR then
+                if correctState == xi.animation.OPEN_DOOR then
                     numOpen = numOpen + 1
                 end
             end
@@ -35,7 +35,7 @@ local oztrojaGlobal =
             local hintLever = GetNPCByID(ID.npc.HINT_HANDLE_OFFSET + i)
 
             if realLever and hintLever then
-                realLever:setAnimation(xi.anim.CLOSE_DOOR)
+                realLever:setAnimation(xi.animation.CLOSE_DOOR)
                 hintLever:setAnimation(combo[i])
             end
         end
@@ -72,10 +72,10 @@ local oztrojaGlobal =
         ..............................................................................................]]
     handleOnTrigger = function(npc)
         -- toggle the lever
-        if npc:getAnimation() == xi.anim.CLOSE_DOOR then
-            npc:setAnimation(xi.anim.OPEN_DOOR)
+        if npc:getAnimation() == xi.animation.CLOSE_DOOR then
+            npc:setAnimation(xi.animation.OPEN_DOOR)
         else
-            npc:setAnimation(xi.anim.CLOSE_DOOR)
+            npc:setAnimation(xi.animation.CLOSE_DOOR)
         end
 
         npc:timer(1500, function(npcArg)
@@ -97,7 +97,7 @@ local oztrojaGlobal =
             if comboFound then
                 GetNPCByID(ID.npc.HANDLE_DOOR_FLOOR_2):openDoor(6)
                 for i = 0, 3 do
-                    GetNPCByID(ID.npc.HANDLE_DOOR_FLOOR_2 + 2 + i):setAnimation(xi.anim.CLOSE_DOOR)
+                    GetNPCByID(ID.npc.HANDLE_DOOR_FLOOR_2 + 2 + i):setAnimation(xi.animation.CLOSE_DOOR)
                 end
             end
         end)

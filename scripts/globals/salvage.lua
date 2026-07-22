@@ -190,7 +190,7 @@ xi.salvage.unsealDoors = function(instance, indexID)
 end
 
 xi.salvage.openBossDoor = function(npc)
-    if npc:getAnimation() == xi.anim.CLOSE_DOOR then
+    if npc:getAnimation() == xi.animation.CLOSE_DOOR then
         local instance = npc:getInstance()
 
         npc:openDoor(15)

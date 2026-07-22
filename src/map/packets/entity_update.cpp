@@ -338,7 +338,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
             if (updatemask & UPDATE_HP)
             {
                 ref<uint8>(0x1E) = 0x64; // HPP: 100
-                ref<uint8>(0x1F) = PEntity->animation;
+                ref<uint8>(0x1F) = static_cast<uint8>(PEntity->animation);
                 ref<uint8>(0x2A) |= PEntity->animationsub;
 
                 ref<uint32>(0x21) = static_cast<uint32>(PNpc->m_flags);
@@ -377,7 +377,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
             if (updatemask & UPDATE_HP)
             {
                 ref<uint8>(0x1E) = PMob->GetHPP();
-                ref<uint8>(0x1F) = PEntity->animation;
+                ref<uint8>(0x1F) = static_cast<uint8>(PEntity->animation);
                 ref<uint8>(0x2A) |= PEntity->animationsub;
 
                 ref<uint32>(0x21) = static_cast<uint32>(PMob->m_flags);
@@ -398,7 +398,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
                     ref<uint8>(0x28) |= 0x20;
                 }
 
-                ref<uint8>(0x28) |= PMob->health.hp > 0 && PMob->animation == ANIMATION_DEATH ? 0x08 : 0;
+                ref<uint8>(0x28) |= PMob->health.hp > 0 && PMob->animation == xi::Animation::Death ? 0x08 : 0;
                 ref<uint8>(0x28) |= PMob->status == xi::Status::Normal && PMob->objtype == TYPE_MOB ? 0x40 : 0; // Make the entity triggerable if a mob and normal status
                 ref<uint8>(0x29) = static_cast<uint8>(PEntity->allegiance);
                 ref<uint8>(0x2B) = static_cast<uint8>(PEntity->namevis);

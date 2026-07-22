@@ -30,7 +30,7 @@ local countUnlitBraziers = function()
 
     for i = 0, 6 do
         local brazier = GetNPCByID(ID.npc.CANDLE_OFFSET + i)
-        if brazier and brazier:getAnimation() == xi.anim.OPEN_DOOR then
+        if brazier and brazier:getAnimation() == xi.animation.OPEN_DOOR then
             numberNotLit = numberNotLit - 1
         end
     end
@@ -39,11 +39,11 @@ local countUnlitBraziers = function()
 end
 
 local lightBrazier = function(player, npc)
-    npc:setAnimation(xi.anim.OPEN_DOOR)
+    npc:setAnimation(xi.animation.OPEN_DOOR)
 
     --unlight brazier after five minutes
     npc:timer(300000, function()
-        npc:setAnimation(xi.anim.CLOSE_DOOR)
+        npc:setAnimation(xi.animation.CLOSE_DOOR)
     end)
 
     player:messageSpecial(ID.text.THE_BRAZIER_IS_LIT)
@@ -61,7 +61,7 @@ end
 local eldiemeGlobal = {
     -- Click on any of the intersection gates
     gateOnTrigger = function(player, npc)
-        if npc:getAnimation() == xi.anim.CLOSE_DOOR then
+        if npc:getAnimation() == xi.animation.CLOSE_DOOR then
             if player:hasKeyItem(xi.ki.MAGICKED_ASTROLABE) then
                 npc:openDoor(8)
             else
@@ -75,8 +75,8 @@ local eldiemeGlobal = {
         -- toggle gates between open and close animations
         -- gates are grouped in groups of five. even numbered groups share one animation, while odd numbered groups share the other.
 
-        local animEven = (npc:getAnimation() == xi.anim.OPEN_DOOR) and xi.anim.CLOSE_DOOR or xi.anim.OPEN_DOOR
-        local animOdd  = (npc:getAnimation() == xi.anim.OPEN_DOOR) and xi.anim.OPEN_DOOR or xi.anim.CLOSE_DOOR
+        local animEven = (npc:getAnimation() == xi.animation.OPEN_DOOR) and xi.animation.CLOSE_DOOR or xi.animation.OPEN_DOOR
+        local animOdd  = (npc:getAnimation() == xi.animation.OPEN_DOOR) and xi.animation.OPEN_DOOR or xi.animation.CLOSE_DOOR
 
         for i = 0, 19 do
             local group = math.floor(i / 5)
@@ -102,7 +102,7 @@ local eldiemeGlobal = {
     end,
 
     handleCandleTrigger = function(player, npc)
-        if npc:getAnimation() == xi.anim.OPEN_DOOR then
+        if npc:getAnimation() == xi.animation.OPEN_DOOR then
             player:messageSpecial(ID.text.BRAZIER_ACTIVE)
         elseif GetSystemTime() > GetServerVariable('[ELDIEME]TimeToRespawnSkulls') then
             player:messageSpecial(ID.text.BRAZIER_OUT, 0, xi.item.FLINT_STONE)

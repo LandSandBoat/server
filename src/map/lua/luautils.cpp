@@ -2465,7 +2465,7 @@ int32 OnTrigger(CCharEntity* PChar, CBaseEntity* PNpc)
     LogWith({ "npc", { { "name", PNpc->getName() }, { "id", PNpc->id } } });
 
     // Clicking objects does nothing if the player is mid synthesis
-    if (PChar->animation == ANIMATION_SYNTH)
+    if (PChar->animation == xi::Animation::Synth)
     {
         return 0;
     }

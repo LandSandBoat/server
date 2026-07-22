@@ -43,7 +43,7 @@ CDeathState::CDeathState(CBattleEntity* PEntity, timer::duration death_time)
 {
     m_PEntity->StatusEffectContainer->DelStatusEffectsByFlag(xi::StatusEffectFlag::Death, EffectNotice::Silent);
 
-    m_PEntity->animation = ANIMATION_DEATH;
+    m_PEntity->animation = xi::Animation::Death;
     m_PEntity->updatemask |= UPDATE_HP;
     if (m_PEntity->PAI->PathFind)
     {
@@ -85,7 +85,7 @@ bool CDeathState::Update(timer::time_point tick)
         // exit state after 2 seconds on raise
         if (m_raiseAccepted && IsCompleted() && tick > m_raiseAcceptedTime + 2s)
         {
-            m_PEntity->animation = ANIMATION_NONE; // TODO: should this be set in acceptRaise or after 2 seconds?
+            m_PEntity->animation = xi::Animation::None; // TODO: should this be set in acceptRaise or after 2 seconds?
             m_PEntity->updatemask |= UPDATE_HP;
 
             return true;

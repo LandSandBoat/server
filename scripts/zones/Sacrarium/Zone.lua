@@ -22,7 +22,7 @@ local changeLabyrinthDoors = function()
 
     local doors = labyrinthDoorsByDay[VanadielDayOfTheWeek()]
     for i = 0, 17 do
-        GetNPCByID(ID.npc.LABYRINTH_OFFSET + i):setAnimation(xi.anim.OPEN_DOOR + doors[i + 1])
+        GetNPCByID(ID.npc.LABYRINTH_OFFSET + i):setAnimation(xi.animation.OPEN_DOOR + doors[i + 1])
     end
 end
 

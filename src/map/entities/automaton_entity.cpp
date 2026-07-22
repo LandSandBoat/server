@@ -226,7 +226,7 @@ void CAutomatonEntity::Spawn()
     updatemask |= UPDATE_HP;
     PAI->Reset();
     PAI->EventHandler.triggerListener("SPAWN", this);
-    animation = ANIMATION_NONE;
+    animation = xi::Animation::None;
     m_OwnerID.clean();
     HideName(false);
     luautils::OnMobSpawn(this);

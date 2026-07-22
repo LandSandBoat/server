@@ -3487,9 +3487,9 @@ auto TakeSkillchainDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, in
     {
         case TYPE_PC:
         {
-            if (PDefender->animation == ANIMATION_SIT || (PDefender->animation >= ANIMATION_SITCHAIR_0 && PDefender->animation <= ANIMATION_SITCHAIR_10))
+            if (PDefender->animation == xi::Animation::Sit || (PDefender->animation >= xi::Animation::Sitchair0 && PDefender->animation <= xi::Animation::Sitchair10))
             {
-                PDefender->animation = ANIMATION_NONE;
+                PDefender->animation = xi::Animation::None;
                 PDefender->updatemask |= UPDATE_HP;
             }
             break;
@@ -3549,20 +3549,20 @@ void MakeEntityStandUp(CBattleEntity* PEntity)
     {
         CCharEntity* PPlayer = ((CCharEntity*)PEntity);
 
-        if (PPlayer->animation == ANIMATION_HEALING)
+        if (PPlayer->animation == xi::Animation::Healing)
         {
             PPlayer->StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Healing);
             PPlayer->updatemask |= UPDATE_HP;
         }
-        else if (PPlayer->animation == ANIMATION_SIT || (PPlayer->animation >= ANIMATION_SITCHAIR_0 && PPlayer->animation <= ANIMATION_SITCHAIR_10))
+        else if (PPlayer->animation == xi::Animation::Sit || (PPlayer->animation >= xi::Animation::Sitchair0 && PPlayer->animation <= xi::Animation::Sitchair10))
         {
-            PPlayer->animation = ANIMATION_NONE;
+            PPlayer->animation = xi::Animation::None;
             PPlayer->updatemask |= UPDATE_HP;
 
             CPetEntity* PPet = dynamic_cast<CPetEntity*>(PPlayer->PPet);
             if (PPet && (PPet->getPetType() == PET_TYPE::WYVERN || PPet->getPetType() == PET_TYPE::AUTOMATON))
             {
-                PPet->animation = ANIMATION_NONE;
+                PPet->animation = xi::Animation::None;
                 PPet->updatemask |= UPDATE_HP;
             }
         }
@@ -4102,7 +4102,7 @@ void applyCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim, timer::duration
         PCharmer->PPet->charmTime = timer::now() + charmTime;
 
         // this will make him transition back to roaming if sleeping
-        PCharmer->PPet->animation = ANIMATION_NONE;
+        PCharmer->PPet->animation = xi::Animation::None;
         PCharmer->updatemask |= UPDATE_HP;
 
         if (PChar)

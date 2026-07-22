@@ -32,12 +32,12 @@ auto GP_CLI_COMMAND_CAMP::validate(MapSession* PSession, const CCharEntity* PCha
         .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus, BlockedState::Crafting, BlockedState::PreventAction, BlockedState::Engaged })
         .oneOf<GP_CLI_COMMAND_REQLOGOUT_MODE>(this->Mode)
         .mustNotEqual(
-            PChar->animation == ANIMATION_HEALING &&
+            PChar->animation == xi::Animation::Healing &&
                 this->Mode == static_cast<uint32_t>(GP_CLI_COMMAND_CAMP_MODE::On),
             true,
             "Requested healing when already healing")
         .mustNotEqual(
-            PChar->animation != ANIMATION_HEALING &&
+            PChar->animation != xi::Animation::Healing &&
                 this->Mode == static_cast<uint32_t>(GP_CLI_COMMAND_CAMP_MODE::Off),
             true,
             "Requested stop healing when not healing");
@@ -66,7 +66,7 @@ void GP_CLI_COMMAND_CAMP::process(MapSession* PSession, CCharEntity* PChar) cons
     switch (static_cast<GP_CLI_COMMAND_CAMP_MODE>(this->Mode))
     {
         case GP_CLI_COMMAND_CAMP_MODE::Toggle:
-            if (PChar->animation == ANIMATION_HEALING)
+            if (PChar->animation == xi::Animation::Healing)
             {
                 disableHealing();
             }

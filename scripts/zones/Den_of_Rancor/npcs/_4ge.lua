@@ -38,9 +38,9 @@ entity.onTrade = function(player, npc, trade)
 
         if
             lantern and
-            lantern:getAnimation() == xi.anim.CLOSE_DOOR
+            lantern:getAnimation() == xi.animation.CLOSE_DOOR
         then
-            lantern:setAnimation(xi.anim.OPEN_DOOR) -- light lantern
+            lantern:setAnimation(xi.animation.OPEN_DOOR) -- light lantern
             player:messageSpecial(denOfRancorID.text.ONE_OF_THE_LANTERNS + npcId - offset)
             if npcId == offset + 3 then
                 player:messageSpecial(denOfRancorID.text.TANSFORMED_INTO_A_MONSTER)
@@ -62,7 +62,7 @@ entity.onTrigger = function(player, npc)
 
         if
             lantern and
-            lantern:getAnimation() == xi.anim.OPEN_DOOR
+            lantern:getAnimation() == xi.animation.OPEN_DOOR
         then
             count = count + 1
         end

@@ -966,7 +966,7 @@ auto LoadChar(Scheduler& scheduler, MapConfig config, const uint32 charId) -> st
     // Order matters as this uses merits and JP gifts.
     puppetutils::LoadAutomaton(PChar);
 
-    PChar->animation = (HP == 0 ? ANIMATION_DEATH : ANIMATION_NONE);
+    PChar->animation = (HP == 0 ? xi::Animation::Death : xi::Animation::None);
 
     PChar->StatusEffectContainer->LoadStatusEffects();
 
@@ -7485,7 +7485,7 @@ auto HomePoint(CCharEntity* PChar, bool resetHPMP) -> bool
     PChar->loc.destination = PChar->profile.home_point.destination;
 
     PChar->status    = xi::Status::Disappear;
-    PChar->animation = ANIMATION_NONE;
+    PChar->animation = xi::Animation::None;
     PChar->updatemask |= UPDATE_HP;
 
     PChar->clearPacketList();
@@ -8087,9 +8087,9 @@ void removeCharFromZone(CCharEntity* PChar)
 
     PChar->WideScanTarget = std::nullopt;
 
-    if (PChar->animation == ANIMATION_ATTACK)
+    if (PChar->animation == xi::Animation::Attack)
     {
-        PChar->animation = ANIMATION_NONE;
+        PChar->animation = xi::Animation::None;
         PChar->updatemask |= UPDATE_HP;
     }
 

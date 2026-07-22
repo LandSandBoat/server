@@ -581,7 +581,7 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
         charutils::forceSynthCritFail("DecreaseZoneCounter", PChar);
     }
 
-    if (PChar->animation == ANIMATION_SYNTH)
+    if (PChar->animation == xi::Animation::Synth)
     {
         synthutils::sendSynthDone(PChar);
     }

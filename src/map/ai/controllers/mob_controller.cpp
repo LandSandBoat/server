@@ -1451,7 +1451,7 @@ auto CMobController::Disengage() -> bool
     PMob->m_OwnerID.clean();
     PMob->updatemask |= (UPDATE_STATUS | UPDATE_HP);
     PMob->SetCallForHelpFlag(false);
-    PMob->animation = ANIMATION_NONE;
+    PMob->animation = xi::Animation::None;
     // https://www.bluegartr.com/threads/108198-Random-Facts-Thread-Traits-and-Stats-(Player-and-Monster)?p=5670209&viewfull=1#post5670209
     PMob->m_THLvl          = 0;
     PMob->m_GilfinderLevel = 0; // Assumed to work like TH

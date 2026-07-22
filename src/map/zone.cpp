@@ -1048,7 +1048,7 @@ void CZone::CharZoneIn(CCharEntity* PChar)
 
     if (PChar->isMounted() && !CanUseMisc(xi::ZoneMisc::Mount))
     {
-        PChar->animation = ANIMATION_NONE;
+        PChar->animation = xi::Animation::None;
         PChar->StatusEffectContainer->DelStatusEffectSilent(xi::StatusEffect::Mounted);
     }
 

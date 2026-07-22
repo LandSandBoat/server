@@ -271,7 +271,7 @@ auto CInstanceLoader::LoadInstance() const -> CInstance*
             PNpc->baseSpeed      = rset->get<uint8>("speed");
             PNpc->animationSpeed = rset->get<uint8>("speedsub");
             PNpc->UpdateSpeed();
-            PNpc->animation    = rset->get<uint8>("animation");
+            PNpc->animation    = rset->get<xi::Animation>("animation");
             PNpc->animationsub = rset->get<uint8>("animationsub");
 
             PNpc->namevis = rset->get<xi::NameVis>("namevis");

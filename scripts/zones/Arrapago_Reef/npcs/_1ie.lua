@@ -9,7 +9,7 @@ local ID = zones[xi.zone.ARRAPAGO_REEF]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npc:getAnimation() == xi.anim.CLOSE_DOOR then
+    if npc:getAnimation() == xi.animation.CLOSE_DOOR then
         if npcUtil.tradeHas(trade, xi.item.LAMIAN_FANG_KEY) then
             npc:openDoor()
             player:messageSpecial(ID.text.KEY_BREAKS, xi.item.LAMIAN_FANG_KEY)
@@ -55,13 +55,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getZPos() < 120 and npc:getAnimation() == xi.anim.CLOSE_DOOR then
+    if player:getZPos() < 120 and npc:getAnimation() == xi.animation.CLOSE_DOOR then
         if player:getMainJob() == xi.job.THF then
             player:messageSpecial(ID.text.DOOR_IS_LOCKED2, xi.item.LAMIAN_FANG_KEY, xi.item.SET_OF_THIEFS_TOOLS) -- message only THF's get
         else
             player:messageSpecial(ID.text.DOOR_IS_LOCKED, xi.item.LAMIAN_FANG_KEY)
         end
-    elseif player:getZPos() >= 120 and npc:getAnimation() == xi.anim.CLOSE_DOOR then
+    elseif player:getZPos() >= 120 and npc:getAnimation() == xi.animation.CLOSE_DOOR then
         player:messageSpecial(ID.text.YOU_UNLOCK_DOOR) -- message from 'inside' of door
         npc:openDoor()
     end

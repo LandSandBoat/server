@@ -29,7 +29,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.SILENCE_RES_RANK, 10)
 
     mob:messageText(mob, ID.text.SKY_GOD_OFFSET + 11) -- Spawn message
-    GetNPCByID(ID.npc.PORTAL_OFFSET + 8):setAnimation(xi.anim.CLOSE_DOOR)
+    GetNPCByID(ID.npc.PORTAL_OFFSET + 8):setAnimation(xi.animation.CLOSE_DOOR)
 
     -- Sky gods wait 10 seconds after spawning to start casting
     mob:setMagicCastingEnabled(false)
@@ -58,7 +58,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    GetNPCByID(ID.npc.PORTAL_OFFSET + 8):setAnimation(xi.anim.OPEN_DOOR)
+    GetNPCByID(ID.npc.PORTAL_OFFSET + 8):setAnimation(xi.animation.OPEN_DOOR)
 end
 
 return entity

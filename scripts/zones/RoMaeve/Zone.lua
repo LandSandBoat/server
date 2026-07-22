@@ -21,7 +21,7 @@ local function handleFullMoon()
     end
 
     -- Determine what the animation/status of the NPCs should be.
-    local doorStatus = shouldDoorsOpen and xi.anim.OPEN_DOOR or xi.anim.CLOSE_DOOR
+    local doorStatus = shouldDoorsOpen and xi.animation.OPEN_DOOR or xi.animation.CLOSE_DOOR
 
     -- Loop over the affected NPCs: Moongates, bridges and fountain
     for i = ID.npc.MOONGATE_OFFSET, ID.npc.MOONGATE_OFFSET + 7 do

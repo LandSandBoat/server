@@ -212,8 +212,8 @@ end
 
 xi.promyvion.handlePortal = function(player, npcId, eventId)
     if
-        player:getAnimation() == xi.anim.NONE and
-        GetNPCByID(npcId):getAnimation() == xi.anim.OPEN_DOOR
+        player:getAnimation() == xi.animation.NONE and
+        GetNPCByID(npcId):getAnimation() == xi.animation.OPEN_DOOR
     then
         player:startOptionalCutscene(eventId, { cs_option = 0, canSkip = true })
     end
@@ -266,7 +266,7 @@ xi.promyvion.receptacleOnMobSpawn = function(mob)
     -- Handle decoration: Fade-in.
     local decoration = GetNPCByID(mob:getID() - 1)
     if decoration then
-        decoration:updateToEntireZone(xi.status.NORMAL, xi.anim.NONE)
+        decoration:updateToEntireZone(xi.status.NORMAL, xi.animation.NONE)
     end
 end
 
@@ -374,7 +374,7 @@ xi.promyvion.receptacleOnMobDespawn = function(mob)
     if decoration then
         decoration:entityAnimationPacket(xi.animationString.STATUS_DISAPPEAR)
         decoration:timer(2500, function(decorationArg)
-            decorationArg:updateToEntireZone(xi.status.CUTSCENE_ONLY, xi.anim.DESPAWN)
+            decorationArg:updateToEntireZone(xi.status.CUTSCENE_ONLY, xi.animation.DESPAWN)
             decorationArg:entityAnimationPacket(xi.animationString.STATUS_VISIBLE)
         end)
     end

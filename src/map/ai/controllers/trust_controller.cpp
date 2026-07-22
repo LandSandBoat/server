@@ -82,7 +82,7 @@ CTrustController::~CTrustController()
 void CTrustController::Despawn()
 {
     POwner->PMaster   = nullptr;
-    POwner->animation = ANIMATION_DESPAWN;
+    POwner->animation = xi::Animation::Despawn;
     CMobController::Despawn();
 }
 

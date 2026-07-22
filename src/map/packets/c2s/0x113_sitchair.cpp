@@ -41,19 +41,19 @@ void GP_CLI_COMMAND_SITCHAIR::process(MapSession* PSession, CCharEntity* PChar) 
 
     if (this->Mode == static_cast<uint8>(GP_CLI_COMMAND_SITCHAIR_MODE::Off))
     {
-        PChar->animation = ANIMATION_NONE;
+        PChar->animation = xi::Animation::None;
         PChar->updatemask |= UPDATE_HP;
         return;
     }
 
-    uint8 chairId = this->ChairId + ANIMATION_SITCHAIR_0;
+    uint8 chairId = this->ChairId + static_cast<uint8>(xi::Animation::Sitchair0);
 
     // Validate key item ownership for 64 through 83
-    if (chairId != ANIMATION_SITCHAIR_0 && !charutils::hasKeyItem(PChar, static_cast<KeyItem>(chairId + 0xACA)))
+    if (chairId != static_cast<uint8>(xi::Animation::Sitchair0) && !charutils::hasKeyItem(PChar, static_cast<KeyItem>(chairId + 0xACA)))
     {
-        chairId = ANIMATION_SITCHAIR_0;
+        chairId = static_cast<uint8>(xi::Animation::Sitchair0);
     }
 
-    PChar->animation = PChar->animation == chairId ? static_cast<uint8>(ANIMATION_NONE) : chairId;
+    PChar->animation = PChar->animation == static_cast<xi::Animation>(chairId) ? xi::Animation::None : static_cast<xi::Animation>(chairId);
     PChar->updatemask |= UPDATE_HP;
 }

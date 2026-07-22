@@ -561,14 +561,14 @@ bool CCharEntity::hasAutoTargetEnabled() const
 
 auto CCharEntity::isCrafting() const -> bool
 {
-    return animation == ANIMATION_SYNTH || this->activeTransaction<SynthTransaction>();
+    return animation == xi::Animation::Synth || this->activeTransaction<SynthTransaction>();
 }
 
 auto CCharEntity::isFishing() const -> bool
 {
-    return (animation >= ANIMATION_FISHING_FISH && animation <= ANIMATION_FISHING_STOP) ||
-           animation == ANIMATION_FISHING_START_OLD ||
-           animation == ANIMATION_FISHING_START;
+    return (animation >= xi::Animation::NewFishingFish && animation <= xi::Animation::NewFishingStop) ||
+           animation == xi::Animation::FishingStart ||
+           animation == xi::Animation::NewFishingStart;
 }
 
 void CCharEntity::setPetZoningInfo()
@@ -2976,16 +2976,16 @@ void CCharEntity::tryStartNextEvent()
             {
                 case MOUNT_CHOCOBO:
                 case MOUNT_NOBLE_CHOCOBO:
-                    animation = ANIMATION_CHOCOBO;
+                    animation = xi::Animation::Chocobo;
                     break;
                 default:
-                    animation = ANIMATION_MOUNT;
+                    animation = xi::Animation::Mount;
                     break;
             }
         }
         else
         {
-            animation = this->isDead() ? ANIMATION_DEATH : ANIMATION_NONE;
+            animation = this->isDead() ? xi::Animation::Death : xi::Animation::None;
         }
 
         sendServerStatus_ = true;
@@ -3000,7 +3000,7 @@ void CCharEntity::tryStartNextEvent()
     eventPreparation->reset();
 
     m_Substate = CHAR_SUBSTATE::SUBSTATE_IN_CS;
-    if (animation == ANIMATION_HEALING)
+    if (animation == xi::Animation::Healing)
     {
         StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Healing);
     }
@@ -3038,7 +3038,7 @@ void CCharEntity::tryStartNextEvent()
         pushPacket<GP_SERV_COMMAND_EVENTSTR>(this, currentEvent);
     }
 
-    animation = ANIMATION_EVENT;
+    animation = xi::Animation::Event;
     updatemask |= UPDATE_POS; // TODO: decouple from this. We want the 250ms post-tick processing.
     sendServerStatus_ = true; // sendServerStatus_ is somewhat like an update mask on its own
 }
