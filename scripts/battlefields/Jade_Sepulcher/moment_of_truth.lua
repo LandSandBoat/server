@@ -19,6 +19,19 @@ local content = BattlefieldQuest:new({
     requiredValue = 4,
 })
 
+function content:onBattlefieldWin(player, battlefield)
+    local status = player:getQuestStatus(self.questArea, self.quest)
+
+    if status == xi.questStatus.QUEST_ACCEPTED then
+        player:setLocalVar('battlefieldWin', battlefield:getID())
+    end
+
+    local _, clearTime, partySize = battlefield:getRecord()
+    local canSkipCS               = status == xi.questStatus.QUEST_COMPLETED and 1 or 0
+
+    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), player:getZoneID(), self.index, canSkipCS, 2)
+end
+
 content.groups =
 {
     {
