@@ -109,7 +109,7 @@ quest.sections =
             ['Wahid'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.SIRENS_TEAR) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.SIRENS_TEAR, 1 } }) then
                         return quest:progressEvent(82)
                     end
                 end,
@@ -122,7 +122,7 @@ quest.sections =
                     -- CLuaBaseEntity::completeQuest() will only actually complete the quest the
                     -- first time the player finishes this.
                     if quest:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
             },

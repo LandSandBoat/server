@@ -83,8 +83,8 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHas(trade, xi.item.CHUNK_OF_ZINC_ORE) and
-                        not player:hasKeyItem(xi.ki.PALBOROUGH_MINES_LOGS)
+                        not player:hasKeyItem(xi.ki.PALBOROUGH_MINES_LOGS) and
+                        npcUtil.tradeMatches(trade, { { xi.item.CHUNK_OF_ZINC_ORE, 1 } })
                     then
                         return quest:progressEvent(3)
                     end
@@ -94,7 +94,7 @@ quest.sections =
             onEventFinish =
             {
                 [3] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    player:tradeComplete()
                     npcUtil.giveKeyItem(player, xi.ki.PALBOROUGH_MINES_LOGS)
                 end,
             },

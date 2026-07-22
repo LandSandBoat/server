@@ -48,7 +48,7 @@ quest.sections =
             ['Paujean'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { xi.item.LUMBERING_HORN, xi.item.RAMPAGING_HORN }) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.LUMBERING_HORN, 1 }, { xi.item.RAMPAGING_HORN, 1 } }) then
                         return quest:progressEvent(196)
                     end
                 end,
@@ -60,7 +60,7 @@ quest.sections =
             {
                 [196] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
             },

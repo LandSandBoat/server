@@ -48,7 +48,7 @@ quest.sections =
             ['Horatius'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.DANGRUF_STONE) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.DANGRUF_STONE, 1 } }) then
                         return quest:progressEvent(101)
                     end
                 end,
@@ -58,7 +58,7 @@ quest.sections =
             {
                 [101] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
             },

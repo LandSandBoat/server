@@ -44,7 +44,7 @@ quest.sections =
             ['Corann'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.QUADAV_BACKPLATE) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.QUADAV_BACKPLATE, 1 } }) then
                         return quest:progressEvent(81)
                     end
                 end,
@@ -54,7 +54,7 @@ quest.sections =
             {
                 [81] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
             },

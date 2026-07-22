@@ -60,7 +60,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.GARHADA_TEAK_LUMBER) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.GARHADA_TEAK_LUMBER, 1 } }) then
                         return quest:event(865)
                     end
                 end,
@@ -69,9 +69,10 @@ quest.sections =
             onEventFinish =
             {
                 [865] = function(player, csid, option, npc)
-                    player:confirmTrade()
-                    xi.quest.setMustZone(player, xi.questLog.BASTOK, xi.quest.id.bastok.HYPER_ACTIVE)
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        player:tradeComplete()
+                        xi.quest.setMustZone(player, xi.questLog.BASTOK, xi.quest.id.bastok.HYPER_ACTIVE)
+                    end
                 end,
             },
         },

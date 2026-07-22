@@ -145,7 +145,7 @@ quest.sections =
             ['Brygid'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, optionToItems[quest:getVar(player, 'Option')][2]) then
+                    if npcUtil.tradeMatches(trade, { { optionToItems[quest:getVar(player, 'Option')][2], 1 } }) then
                         return quest:progressEvent(383)
                     end
                 end,
@@ -196,7 +196,7 @@ quest.sections =
 
                 [383] = function(player, csid, option, npc)
                     if npcUtil.giveItem(player, optionToItems[quest:getVar(player, 'Option')][1]) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                         quest:complete(player)
                     end
                 end,

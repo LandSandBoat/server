@@ -85,7 +85,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') >= 7 and
-                        npcUtil.tradeHas(trade, { xi.item.BOTTLE_OF_AHRIMAN_TEARS })
+                        npcUtil.tradeMatches(trade, { { xi.item.BOTTLE_OF_AHRIMAN_TEARS, 1 } })
                     then
                         return quest:progressEvent(44)
                     end
@@ -131,7 +131,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 1 and
-                        npcUtil.tradeHas(trade, { xi.item.MISAREAUX_GARLIC })
+                        npcUtil.tradeMatches(trade, { { xi.item.MISAREAUX_GARLIC, 1 } })
                     then
                         return quest:progressEvent(99, 1, 1, 3, 0, xi.item.MISAREAUX_GARLIC)
                     end
@@ -258,7 +258,7 @@ quest.sections =
             ['Tarnotik'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHas(trade, { xi.item.BOTTLE_OF_AHRIMAN_TEARS }) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.BOTTLE_OF_AHRIMAN_TEARS, 1 } }) then
                         return quest:event(44)
                     end
                 end,

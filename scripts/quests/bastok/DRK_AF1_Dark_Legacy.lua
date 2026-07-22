@@ -116,11 +116,11 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.item.YAGUDO_CHERRY) and
+                        quest:getVar(player, 'Prog') == 2 and
                         not GetMobByID(giddeusID.mob.VAA_HUJA_THE_ERUDITE):isSpawned() and
-                        quest:getVar(player, 'Prog') == 2
+                        npcUtil.tradeMatches(trade, { { xi.item.YAGUDO_CHERRY, 1 } })
                     then
-                        player:confirmTrade()
+                        player:tradeComplete()
                         SpawnMob(giddeusID.mob.VAA_HUJA_THE_ERUDITE):updateClaim(player)
 
                         return quest:messageSpecial(giddeusID.text.SENSE_OF_FOREBODING)
@@ -141,9 +141,9 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.item.YAGUDO_CHERRY) and
                         quest:getVar(player, 'Prog') == 2 and
-                        quest:getVar(player, 'Option') == 0
+                        quest:getVar(player, 'Option') == 0 and
+                        npcUtil.tradeMatches(trade, { { xi.item.YAGUDO_CHERRY, 1 } })
                     then
                         return quest:progressEvent(62)
                     end
@@ -168,7 +168,7 @@ quest.sections =
             onEventFinish =
             {
                 [62] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    player:tradeComplete()
 
                     quest:setVar(player, 'Option', 1)
                 end,

@@ -21,12 +21,12 @@ local tradeItemData =
 {
     [xi.item.SLEEPSHROOM] = { 201, 12, 24 }, -- 18:00 ~ 06:00
     [xi.item.TREANT_BULB] = { 201,  0,  6 }, -- 06:00 ~ 12:00
-    [xi.item.WILD_ONION]  = { 202,  6, 12 }, -- 12:00 ~ 18:00
+    [xi.item.WILD_ONION ] = { 202,  6, 12 }, -- 12:00 ~ 18:00
 }
 
 local function tradeEventFinish(player, gilReward, additionalFame)
     if quest:complete(player) then
-        player:confirmTrade()
+        player:tradeComplete()
 
         npcUtil.giveCurrency(player, 'gil', gilReward)
         player:addFame(xi.fameArea.BASTOK, additionalFame)
@@ -66,7 +66,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if not quest:getMustZone(player) then
                         for itemId, itemData in pairs(tradeItemData) do
-                            if npcUtil.tradeHasExactly(trade, itemId) then
+                            if npcUtil.tradeMatches(trade, { { itemId, 1 } }) then
                                 local timeOffset = VanadielHour() - 6
 
                                 if timeOffset < 0 then

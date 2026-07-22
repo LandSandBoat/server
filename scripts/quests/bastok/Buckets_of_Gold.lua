@@ -47,7 +47,7 @@ quest.sections =
             ['Foss'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.item.RUSTY_BUCKET, 5 } }) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.RUSTY_BUCKET, 5 } }) then
                         return quest:progressEvent(272)
                     end
                 end,
@@ -56,15 +56,15 @@ quest.sections =
             onEventFinish =
             {
                 [272] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    if quest:complete(player) then
+                        player:tradeComplete()
 
-                    -- From previous implementation, award 75 fame (67 + 8) on first completion,
-                    -- and 8 fame for any subsequent trade.
-                    if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then
-                        player:addFame(xi.fameArea.BASTOK, 67)
+                        -- From previous implementation, award 75 fame (67 + 8) on first completion,
+                        -- and 8 fame for any subsequent trade.
+                        if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then
+                            player:addFame(xi.fameArea.BASTOK, 67)
+                        end
                     end
-
-                    quest:complete(player)
                 end,
             },
         },

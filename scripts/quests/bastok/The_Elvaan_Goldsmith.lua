@@ -49,7 +49,7 @@ quest.sections =
             ['Michea'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.COPPER_INGOT) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.COPPER_INGOT, 1 } }) then
                         return quest:progressEvent(216)
                     end
                 end,
@@ -61,7 +61,7 @@ quest.sections =
             {
                 [216] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
 
                         quest:setMustZone(player)
                     end

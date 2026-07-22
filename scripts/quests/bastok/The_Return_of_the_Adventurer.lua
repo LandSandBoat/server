@@ -47,7 +47,7 @@ quest.sections =
             ['Gwill'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.item.STICK_OF_CINNAMON) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.STICK_OF_CINNAMON, 1 } }) then
                         return quest:progressEvent(243)
                     end
                 end,
@@ -57,7 +57,7 @@ quest.sections =
             {
                 [243] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:confirmTrade()
+                        player:tradeComplete()
                     end
                 end,
             },

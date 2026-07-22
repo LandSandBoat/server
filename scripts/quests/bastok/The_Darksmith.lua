@@ -45,7 +45,7 @@ quest.sections =
             ['Mighty_Fist'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.item.CHUNK_OF_DARKSTEEL_ORE, 2 } }) then
+                    if npcUtil.tradeMatches(trade, { { xi.item.CHUNK_OF_DARKSTEEL_ORE, 2 } }) then
                         return quest:progressEvent(566)
                     end
                 end,
@@ -66,15 +66,15 @@ quest.sections =
                 end,
 
                 [566] = function(player, csid, option, npc)
-                    player:confirmTrade()
+                    if quest:complete(player) then
+                        player:tradeComplete()
 
-                    -- From previous implementation, award 30 fame (25 + 5) on first completion,
-                    -- and 5 fame for any subsequent trade.
-                    if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then
-                        player:addFame(xi.fameArea.BASTOK, 25)
+                        -- From previous implementation, award 30 fame (25 + 5) on first completion,
+                        -- and 5 fame for any subsequent trade.
+                        if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then
+                            player:addFame(xi.fameArea.BASTOK, 25)
+                        end
                     end
-
-                    quest:complete(player)
                 end,
             },
         },
