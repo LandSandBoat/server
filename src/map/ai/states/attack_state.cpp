@@ -63,6 +63,10 @@ bool CAttackState::Update(timer::time_point tick)
     {
         return true;
     }
+
+    // Subtract on every tick, including the one we swing on, or each swing costs an extra tick.
+    m_attackTime -= (m_PEntity->PAI->getTick() - m_PEntity->PAI->getPrevTick());
+
     if (AttackReady())
     {
         if (CanAttack(PTarget))
@@ -94,10 +98,10 @@ bool CAttackState::Update(timer::time_point tick)
             return true;
         }
     }
-    else
-    {
-        m_attackTime -= (m_PEntity->PAI->getTick() - m_PEntity->PAI->getPrevTick());
-    }
+
+    // Don't bank time while we can't swing. Sits after the swing so leftover time carries.
+    m_attackTime = std::max<timer::duration>(m_attackTime, 0ms);
+
     return false;
 }
 
@@ -183,5 +187,5 @@ bool CAttackState::CanAttack(CBattleEntity* PTarget)
 
 bool CAttackState::AttackReady()
 {
-    return m_attackTime < 0ms && m_PEntity->isAlive();
+    return m_attackTime <= 0ms && m_PEntity->isAlive();
 }
