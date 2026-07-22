@@ -131,7 +131,7 @@ xi.spells.enhancing.calculateSongPower = function(caster, target, spell, spellId
     if caster:isPC() then
         -- Add ranged skill level ONLY if it's an instrument.
         local rangeType    = caster:getWeaponSkillType(xi.slot.RANGED)
-        local isInstrument = rangeType == xi.skill.WIND_INSTRUMENT and rangeType == xi.skill.STRING_INSTRUMENT
+        local isInstrument = rangeType == xi.skill.WIND_INSTRUMENT or rangeType == xi.skill.STRING_INSTRUMENT
 
         singingLvl = isInstrument and singingLvl + caster:getSkillLevel(rangeType) or singingLvl
     else
