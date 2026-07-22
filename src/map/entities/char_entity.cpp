@@ -225,7 +225,7 @@ CCharEntity::CCharEntity()
     PRecastContainer       = std::make_unique<CCharRecastContainer>(this);
     PLatentEffectContainer = new CLatentEffectContainer(this);
 
-    requestedWarp       = false;
+    requestedWarp       = WarpRequest::None;
     requestedZoneChange = false;
 
     retriggerLatents = false;
@@ -2139,7 +2139,7 @@ void CCharEntity::OnDeathTimer()
     TracyZoneScoped;
 
     charutils::SetCharVar(this, "expLost", 0);
-    requestedWarp = true; // zone entities will warp us on the next tick
+    requestedWarp = WarpRequest::HomePoint; // zone entities will warp us on the next tick
 }
 
 void CCharEntity::OnRaise()

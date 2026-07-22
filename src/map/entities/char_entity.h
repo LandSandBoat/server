@@ -228,6 +228,13 @@ enum CHAR_PERSIST : uint8
     EFFECTS  = 0x04,
 };
 
+enum class WarpRequest : uint8
+{
+    None      = 0,
+    Warp      = 1, // Warp carrying existing state
+    HomePoint = 2, // Warp but revive
+};
+
 enum class CharRace : uint8
 {
     HumeMale       = 1,
@@ -445,8 +452,8 @@ public:
     // currency_t        m_currency;                 // conquest points, imperial standing points etc
     teleport_t teleport{}; // Outposts, Runic Portals, Homepoints, Survival Guides, Maws, etc.
 
-    bool requestedWarp       = false; // used in CLuaBaseEntity::warp(). This will be processed after the player's tick to warp.
-    bool requestedZoneChange = false; // used in CLueBaseEntity::setPos(). This will be processed after the player's tick to change zones.
+    WarpRequest requestedWarp       = WarpRequest::None; // see WarpRequest. This will be processed after the player's tick to warp.
+    bool        requestedZoneChange = false;             // used in CLueBaseEntity::setPos(). This will be processed after the player's tick to change zones.
 
     uint8 GetGender();
 

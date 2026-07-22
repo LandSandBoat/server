@@ -7397,7 +7397,7 @@ auto SendToZone(CCharEntity* PChar, uint16 zoneId) -> bool
     }
 
     PChar->requestedZoneChange = true;
-    PChar->requestedWarp       = false; // a previous warp can get us here, which could infinitely loop. So un-request warp.
+    PChar->requestedWarp       = WarpRequest::None; // a previous warp can get us here, which could infinitely loop. So un-request warp.
 
     PChar->PSession->zone_ipp = {};
     PChar->pushPacket<GP_SERV_COMMAND_LOGOUT>(GP_GAME_LOGOUT_STATE::ZONECHANGE, IPP(ipp));
@@ -7463,7 +7463,7 @@ auto HomePoint(CCharEntity* PChar, bool resetHPMP) -> bool
     if (zoneutils::IsZoneAtPlayerCap(PChar->profile.home_point.destination, PChar->m_GMlevel > 0))
     {
         PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::CouldNotEnter);
-        PChar->requestedWarp = false;
+        PChar->requestedWarp = WarpRequest::None;
         return false;
     }
 

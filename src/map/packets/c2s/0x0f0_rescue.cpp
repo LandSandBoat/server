@@ -52,5 +52,5 @@ void GP_CLI_COMMAND_RESCUE::process(MapSession* PSession, CCharEntity* PChar) co
     ShowInfoFmt("{} requested self-unstuck, warping them to their Home Point.", PChar->getName());
     const auto cooldown = settings::get<uint32>("map.SELF_UNSTUCK_COOLDOWN");
     charutils::SetCharVar(PChar, "[GM]SelfUnstuck", 1, earth_time::timestamp() + cooldown);
-    PChar->requestedWarp = true;
+    PChar->requestedWarp = WarpRequest::HomePoint;
 }
