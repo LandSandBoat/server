@@ -24,6 +24,8 @@
 #include "instance.h"
 #include "zone.h"
 
+#include <common/types/flat_hash_map.h>
+
 class CZoneInstance : public CZone
 {
 public:
@@ -37,6 +39,8 @@ public:
     virtual CCharEntity* GetCharByName(const std::string& name) override; // finds the player if exists in zone
     virtual CCharEntity* GetCharByID(uint32 id) override;
     virtual CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1) override; // get a pointer to any entity in the zone
+
+    auto getInstanceByRunId(uint32 runId) const -> CInstance*;
 
     virtual void SpawnPCs(CCharEntity* PChar) override;
     virtual void SpawnMOBs(CCharEntity* PChar) override;
@@ -83,5 +87,6 @@ public:
 private:
     typedef std::vector<std::unique_ptr<CInstance>> instanceList_t;
 
-    instanceList_t m_InstanceList;
+    instanceList_t                  m_InstanceList;
+    FlatHashMap<uint32, CInstance*> instancesByRun_;
 };

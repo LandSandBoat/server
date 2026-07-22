@@ -1416,7 +1416,7 @@ void DetachPet(CBattleEntity* PMaster)
             {
                 PMob->PEnmityContainer->UpdateEnmity(PChar, 0, 0);
                 // need to set battle target to prevent mob enmity clear if in attack state when uncharming
-                PMob->SetBattleTargetID(PChar->targid);
+                PMob->setBattleTarget(PChar->entityId());
             }
             else
             {
@@ -1432,7 +1432,7 @@ void DetachPet(CBattleEntity* PMaster)
             if ((state && state->GetAbility()->getID() == ABILITY_LEAVE) || PChar->isDead())
             {
                 PMob->PEnmityContainer->Clear();
-                PMob->SetBattleTargetID(0);
+                PMob->setBattleTarget(std::nullopt);
                 PMob->m_OwnerID.clean();
                 PMob->updatemask |= UPDATE_STATUS;
             }

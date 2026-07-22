@@ -51,7 +51,9 @@ public:
 
     void RegisterChar(CCharEntity*);
 
-    uint16             GetID() const;
+    uint16 GetID() const;
+    auto   runId() const -> uint32;
+
     uint8              GetLevelCap() const;
     const std::string& GetName();
     position_t         GetEntryLoc();                          // Get entry location
@@ -92,6 +94,7 @@ public:
 private:
     void LoadInstance();
 
+    uint32              runId_{ 0 };
     uint32              m_instanceid{ 0 };
     uint16              m_entrance{ 0 };
     std::string         m_instanceName;

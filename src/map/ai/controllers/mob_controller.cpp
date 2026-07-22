@@ -129,13 +129,13 @@ auto CMobController::TryDeaggro() -> bool
         PTarget = PMob->PEnmityContainer->GetHighestEnmity();
         if (PTarget)
         {
-            PMob->SetBattleTargetID(PTarget->targid);
+            PMob->setBattleTarget(PTarget->entityId());
             // Reset deaggro time so that the mob is given time to actually try to path towards the new highest enmity target
             TapDeaggroTime();
         }
         else
         {
-            PMob->SetBattleTargetID(0);
+            PMob->setBattleTarget(std::nullopt);
         }
 
         return TryDeaggro();

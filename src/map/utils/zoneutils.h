@@ -31,6 +31,7 @@
 
 class CBaseEntity;
 class CCharEntity;
+class CInstance;
 class CNpcEntity;
 
 namespace zoneutils
@@ -72,6 +73,7 @@ auto GetCurrentContinent(uint16 zoneId) -> CONTINENT_TYPE;
 auto GetWeatherElement(xi::Weather weather) -> int;
 
 auto GetZone(uint16 zoneId) -> CZone*;
+auto GetInstanceByRunId(uint16 zoneId, uint32 runId) -> CInstance*; // the live instance of a run, or nullptr if that run has ended
 auto GetEntity(uint32 id, uint8 filter = -1) -> CBaseEntity*;
 auto GetCharByName(const std::string& name) -> CCharEntity*;
 auto GetCharFromWorld(uint32 charId, uint16 targId) -> CCharEntity*;  // returns pointer to character by id and target id

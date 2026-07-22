@@ -571,7 +571,7 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
         }
         if (PCurrentMob->GetBattleTargetID() == PChar->targid)
         {
-            PCurrentMob->SetBattleTargetID(0);
+            PCurrentMob->setBattleTarget(std::nullopt);
         }
     }
 

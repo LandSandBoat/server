@@ -114,6 +114,12 @@ auto GetZone(uint16 zoneId) -> CZone*
     return nullptr;
 }
 
+auto GetInstanceByRunId(const uint16 zoneId, const uint32 runId) -> CInstance*
+{
+    auto* PZoneInstance = dynamic_cast<CZoneInstance*>(GetZone(zoneId));
+    return PZoneInstance ? PZoneInstance->getInstanceByRunId(runId) : nullptr;
+}
+
 auto GetEntity(const uint32 id, const uint8 filter) -> CBaseEntity*
 {
     const uint16 DynamicEntityStart = 0x700;

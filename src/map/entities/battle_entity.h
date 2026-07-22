@@ -23,6 +23,7 @@
 #define _BATTLEENTITY_H
 
 #include "common/types/hash_map.h"
+#include "common/types/maybe.h"
 
 #include <set>
 #include <type_traits>
@@ -351,12 +352,8 @@ public:
     virtual void Die();
     uint16       GetBattleTargetID() const;
 
-    void SetBattleTargetID(uint16 id)
-    {
-        m_battleTarget = id;
-    }
-
-    CBattleEntity* GetBattleTarget();
+    void setBattleTarget(const Maybe<EntityID_t>& target);
+    auto GetBattleTarget() const -> CBattleEntity*;
 
     bool hasEnmityEXPENSIVE() const; // Returns true if own notoriety container is not empty or mob in zone has entity listed as battle target
 
@@ -439,7 +436,7 @@ private:
     JOBTYPE           m_sjob;
     uint8             m_mlvl; // CURRENT level of the main job
     uint8             m_slvl; // CURRENT level of the sub job
-    uint16            m_battleTarget{ 0 };
+    EntityID_t        battleTarget_{};
     timer::time_point m_battleStartTime;
     uint16            m_battleID = 0; // Current battle the entity is participating in. Battle ID must match in order for entities to interact with each other.
 

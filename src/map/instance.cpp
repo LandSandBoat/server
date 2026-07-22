@@ -19,6 +19,7 @@
 ===========================================================================
 */
 
+#include <atomic>
 #include <filesystem>
 #include <thread>
 
@@ -39,6 +40,10 @@ CInstance::CInstance(Scheduler& scheduler, MapConfig config, CZone* zone, uint32
 {
     TracyZoneScoped;
 
+    static std::atomic<uint32> nextRunId{ 1 };
+
+    runId_ = nextRunId.fetch_add(1, std::memory_order_relaxed);
+
     m_wipeTimer     = m_startTime;
     m_lastTimeCheck = m_startTime;
 
@@ -53,6 +58,11 @@ CInstance::~CInstance()
 uint16 CInstance::GetID() const
 {
     return m_instanceid;
+}
+
+auto CInstance::runId() const -> uint32
+{
+    return runId_;
 }
 
 uint32 CInstance::GetProgress() const

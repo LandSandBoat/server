@@ -240,7 +240,7 @@ bool CAIContainer::Internal_ChangeTarget(uint16 targetid)
     {
         if (IsEngaged() || targetid == 0)
         {
-            entity->SetBattleTargetID(targetid);
+            entity->setBattleTarget(EntityID_t(entity->GetEntity(targetid)));
             return true;
         }
         else
@@ -256,7 +256,7 @@ bool CAIContainer::Internal_Disengage()
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
     if (entity)
     {
-        entity->SetBattleTargetID(0);
+        entity->setBattleTarget(std::nullopt);
         return true;
     }
     return false;

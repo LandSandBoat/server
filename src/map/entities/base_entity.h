@@ -25,6 +25,7 @@
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
 #include "common/timer.h"
+#include "entities/entity_id.h"
 #include "los_cache.h"
 #include "packets/basic.h"
 
@@ -161,26 +162,7 @@ enum UPDATETYPE : uint8
     UPDATE_DESPAWN  = 0x20,
 };
 
-// TODO: It is possible to make this structure part of the class, instead of the current ID and Targid, but without the clean() method.
-struct EntityID_t
-{
-    // TODO: Add a constructor that takes an id and targid.
-    // TODO: Clean with a destructor.
-    void clean()
-    {
-        id     = 0;
-        targid = 0;
-    }
-
-    // TODO: Globally rename targid to index, zoneIndex, etc.
-
-    uint32 id;     // "Long" global ID of the entity. Built from 0x10000000 | (zoneId << 16) | targid.
-    uint16 targid; // The "index" of the entity in the current zone. Used for local targeting and referencing.
-
-    // TODO: Store the zoneId of this entity's zone. We can then use the targid (index) and the zoneId to build the global id.
-    // TODO: Store an incremental u64 as a UUID for the entity for disambiguation in the case of dynamic entities that might have the same targid.
-};
-
+class CBaseEntity;
 class CAIContainer;
 class CBattlefield;
 class CInstance;
@@ -259,6 +241,8 @@ public:
 
     bool IsDynamicEntity() const;
 
+    auto           serial() const -> uint64;
+    auto           entityId() const -> EntityID_t;
     uint32         id;             // global identifier unique on the server
     uint16         targid;         // local identifier unique to the zone
     ENTITYTYPE     objtype;        // Type of entity
@@ -298,6 +282,9 @@ protected:
     uint8                         speed; // speed of movement
 
     LineOfSightCache losCache_;
+
+private:
+    uint64 serial_{ 0 };
 };
 
 #endif // _BASEENTITY_H

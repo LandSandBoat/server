@@ -7,6 +7,8 @@ set(ENTITY_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/battle_entity.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_entity.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_entity.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/entity_id.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/entity_id.h
     ${CMAKE_CURRENT_SOURCE_DIR}/fellow_entity.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/fellow_entity.h
     ${CMAKE_CURRENT_SOURCE_DIR}/mob_entity.cpp

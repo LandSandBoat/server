@@ -90,6 +90,14 @@ CBaseEntity* CZoneInstance::GetEntity(uint16 targid, uint8 filter)
     return PEntity;
 }
 
+auto CZoneInstance::getInstanceByRunId(uint32 runId) const -> CInstance*
+{
+    TracyZoneScoped;
+
+    const auto it = instancesByRun_.find(runId);
+    return it != instancesByRun_.end() ? it->second : nullptr;
+}
+
 void CZoneInstance::InsertMOB(CBaseEntity* PMob)
 {
     TracyZoneScoped;
@@ -408,6 +416,8 @@ auto CZoneInstance::ZoneServer(timer::time_point tick) -> Task<void>
     {
         ShowDebug("[CZoneInstance] ZoneServer cleaned up Instance %s", PInstance->GetName());
 
+        instancesByRun_.erase(PInstance->runId());
+
         m_InstanceList.erase(
             std::find_if(
                 m_InstanceList.begin(),
@@ -587,5 +597,9 @@ CInstance* CZoneInstance::CreateInstance(uint32 instanceid)
     TracyZoneScoped;
 
     m_InstanceList.emplace_back(std::make_unique<CInstance>(scheduler_, config_, this, instanceid));
-    return m_InstanceList.back().get();
+
+    auto* PInstance = m_InstanceList.back().get();
+    instancesByRun_.emplace(PInstance->runId(), PInstance);
+
+    return PInstance;
 }
