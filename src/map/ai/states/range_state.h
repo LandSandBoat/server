@@ -59,11 +59,13 @@ protected:
     bool         CanUseRangedAttack(CBattleEntity* PTarget, bool isEndOfAttack);
     bool         HasMoved();
 
+    // This will likely need to be re-adjusted when states tick more precisely. Changed in 2012. https://wiki.ffo.jp/html/1734.html
 private:
     CBattleEntity* const m_PEntity;
-    timer::duration      m_aimTime{};                  // The calculated "phase 1" delay based on weapon and job trait reductions
-    timer::duration      m_returnWeaponDelay = 1000ms; // Phase 2: Putting the weapon back after a shot (time between shot and being able to move)
-    timer::duration      m_freePhaseTime     = 1100ms; // Phase 3: The cooldown after a ranged attack is executed. (time after being able to move befer you stop getting "you must wait longer" when attempting to Range Attack again)
+    timer::duration      m_aimTime{};                  // Phase 1: Delay based on weapon and job trait reductions. 120 delay = 1000 milliseconds.
+    timer::duration      m_returnWeaponDelay = 800ms;  // Phase 2: Time to be locked in place while putting your weapon away after a shot.
+    timer::duration      m_freePhaseTimeMob  = 1100ms; // Phase 3 (mobs/trusts): Cooldown before a ranged attack can fire again.
+    timer::duration      m_freePhaseTimePlayer{};      // Phase 3 (players): Cooldown before a ranged attack can fire again, set from RANGED_ATTACK_FREE_PHASE_DELAY (Default 500ms)
     bool                 m_rapidShot{ false };
     position_t           m_startPos;
     bool                 m_isOutOfRange{ false }; // True if target moved out of range during aim time
