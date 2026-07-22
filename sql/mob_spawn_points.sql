@@ -1528,7 +1528,7 @@ INSERT INTO `mob_spawn_points` VALUES (16806158,0,'Corse','Corse',40,66,67,-393.
 INSERT INTO `mob_spawn_points` VALUES (16806159,0,'Monarch_Ogrefly','Monarch Ogrefly',31,65,67,-328.588,-4.705,-22.888,134,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (16806160,0,'Mummy','Mummy',38,62,64,-315.843,-4.239,-27.163,161,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (16806161,0,'Corse','Corse',40,66,67,-327.956,-12.811,45.807,157,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (16806162,0,'Citipati','Citipati',41,67,70,-327.763,-12.408,40.206,101,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (16806162,0,'Citipati','Citipati',41,67,70,-327.763,-12.408,40.206,101,20,4);
 INSERT INTO `mob_spawn_points` VALUES (16806163,0,'Tracker_Antlion','Tracker Antlion',33,71,73,-441.809,-4.232,33.199,85,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (16806164,0,'Sand_Lizard','Sand Lizard',30,66,68,-452.792,-4.406,7.103,197,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (16806165,0,'Mummy','Mummy',38,62,64,-469.216,-4.373,2.275,14,NULL,NULL);

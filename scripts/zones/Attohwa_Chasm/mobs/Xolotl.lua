@@ -105,6 +105,16 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
+    -- The pets' own dawn despawn relies on their roam tick, which stops running
+    -- once they are stuck following a despawned Xolotl. Clean up any pet that is
+    -- not engaged so they never outlive him (engaged pets persist, per retail).
+    for _, petId in ipairs(pets) do
+        local pet = GetMobByID(petId)
+        if pet and pet:isSpawned() and pet:isAlive() and not pet:isEngaged() then
+            DespawnMob(petId)
+        end
+    end
+
     -- Only set long respawn timer if killed, not if naturally despawned at dawn
     if mob:getLocalVar('killed') == 1 then
         mob:setRespawnTime(math.randomInt(75600, 86400))
