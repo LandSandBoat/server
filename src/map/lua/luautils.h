@@ -190,6 +190,33 @@ void OnEntityLoad(CBaseEntity* PEntity);
 
 void LoadExpDifficultyCurves(const sol::table& expToDifficultyTable, const uint8 incrediblyEasyPreyLevel, const uint16 incrediblyEasyPreyMinExp);
 
+// Base experience values, indexed by [levelDifference + 44][(charLevel - 1) / 5] for level differences -44 to +15.
+using ExperiencePointsTable = std::array<std::array<uint16, 20>, 60>;
+
+struct CalcExpInput
+{
+    uint32 baseExp            = 0;
+    uint8  mobDifficulty      = 0;
+    uint8  memberLevel        = 0;
+    uint8  highestMemberLevel = 0;
+    uint8  partySize          = 0;
+    uint32 memberTNL          = 0;
+    uint32 highestMemberTNL   = 0;
+    uint8  regionId           = 0;
+    uint16 chainNumber        = 0;
+    bool   chainActive        = false;
+};
+
+struct CalcExpResult
+{
+    uint32 exp         = 0;
+    bool   wasChained  = false;
+    uint16 chainWindow = 0;
+};
+
+auto SetupExperiencePoints() -> Maybe<ExperiencePointsTable>; // Validate functions and set up the base experience points table.
+auto CalculateExperiencePoints(CCharEntity* PMember, CMobEntity* PMob, const CalcExpInput& input) -> Maybe<CalcExpResult>;
+
 void PopulateIDLookupsByFilename(Maybe<std::string> maybeFilename = std::nullopt);
 void PopulateIDLookupsByZone(Maybe<xi::ZoneId> maybeZoneId = std::nullopt);
 

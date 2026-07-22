@@ -237,8 +237,6 @@ bool hasMogLockerAccess(const CCharEntity* PChar);              // true if have 
 
 uint8 getQuestStatus(CCharEntity* PChar, uint8 log, uint8 quest); // Get Quest status (used in FishingUtils.cpp, allows to fish quest specific mobs, like PLD AF NM)
 
-float AddExpBonus(CCharEntity* PChar, float exp);
-
 void RemoveAllEquipment(CCharEntity* PChar);
 
 void OpenSendBox(CCharEntity* PChar, uint8 action, uint8 boxtype);

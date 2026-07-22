@@ -1146,6 +1146,62 @@ void LoadExpDifficultyCurves(const sol::table& expToDifficultyTable, const uint8
     charutils::SetExpDifficultyCurve(expDifficultyTable, iep);
 }
 
+auto SetupExperiencePoints() -> Maybe<ExperiencePointsTable>
+{
+    TracyZoneScoped;
+
+    if (!detail::findGlobalLuaFunction("xi.experiencePoints.calculate").valid())
+    {
+        ShowError("xi.experiencePoints.calculate function is not valid; experience points will not be calculated!");
+        return std::nullopt;
+    }
+
+    const sol::table baseTable = lua["xi"]["experiencePoints"]["baseTable"];
+    if (!baseTable.valid())
+    {
+        ShowError("xi.experiencePoints.baseTable is not valid; experience points will not be calculated!");
+        return std::nullopt;
+    }
+
+    ExperiencePointsTable expTable{};
+    for (int32 dLevel = -44; dLevel <= 15; ++dLevel)
+    {
+        const sol::table row = baseTable[dLevel];
+        if (!row.valid() || row.size() != 20)
+        {
+            ShowError("xi.experiencePoints.baseTable is missing a valid row for level difference %d.", dLevel);
+            return std::nullopt;
+        }
+
+        for (uint32 y = 0; y < 20; ++y)
+        {
+            expTable[dLevel + 44][y] = row[y + 1].get<uint16>();
+        }
+    }
+
+    return expTable;
+}
+
+auto CalculateExperiencePoints(CCharEntity* PMember, CMobEntity* PMob, const CalcExpInput& input) -> Maybe<CalcExpResult>
+{
+    TracyZoneScoped;
+
+    auto data = lua.create_table_with("baseExp", input.baseExp, "mobDifficulty", input.mobDifficulty, "memberLevel", input.memberLevel, "highestMemberLevel", input.highestMemberLevel, "partySize", input.partySize);
+    data.set("memberTNL", input.memberTNL, "highestMemberTNL", input.highestMemberTNL, "regionId", input.regionId, "chainNumber", input.chainNumber, "chainActive", input.chainActive);
+
+    const auto result = callGlobal<sol::table>("xi.experiencePoints.calculate", PMember, PMob, data);
+    if (!result.valid())
+    {
+        return std::nullopt;
+    }
+
+    CalcExpResult calcResult{};
+    calcResult.exp         = result["exp"].get_or(0);
+    calcResult.wasChained  = result["chainActive"].get_or(false);
+    calcResult.chainWindow = result["chainWindow"].get_or(0);
+    return calcResult;
+}
+
 void PopulateIDLookups(const xi::ZoneId zoneId, const std::string& zoneName)
 {
     TracyZoneScoped;
