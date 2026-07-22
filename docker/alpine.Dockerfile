@@ -71,9 +71,10 @@ apk --update-cache add \
     luajit-dev \
     make \
     mariadb-dev \
+    ninja-build \
+    ninja-is-really-ninja \
     openssl-dev \
     python3-dev \
-    samurai \
     zeromq-dev \
     zlib-dev \
     zstd-dev
