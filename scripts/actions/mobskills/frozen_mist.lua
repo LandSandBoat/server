@@ -31,7 +31,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     -- Ice aura that provides special stoneskin that absorbs only physical damage
     skill:setFinalAnimationSub(1)
     mob:delStatusEffectSilent(xi.effect.STONESKIN)
-    mob:addStatusEffect(xi.effect.STONESKIN, { duration = 180, origin = mob, subType = 1, subPower = 1500 })
+    mob:addStatusEffect(xi.effect.STONESKIN, { power = 1500, duration = 180, subType = 1, origin = mob })
 
     return info.damage
 end

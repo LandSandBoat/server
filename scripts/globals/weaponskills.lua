@@ -287,7 +287,11 @@ end
 -- luacheck: ignore 561
 xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action, wsParams, calcParams)
     local targetLvl = target:getMainLvl()
-    local targetHp  = target:getHP() + target:getMod(xi.mod.STONESKIN)
+    local targetHp  = target:getHP()
+    local stoneskin = target:getStatusEffect(xi.effect.STONESKIN)
+    if stoneskin then
+        targetHp = targetHp + stoneskin:getPower()
+    end
 
     -- Obtains alpha, used for working out WSC on legacy servers. Retail has no alpha anymore as of 2014 Weaponskill functions
     local alpha = 1

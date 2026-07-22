@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -1660,10 +1660,6 @@ void CStatusEffectContainer::SaveStatusEffects(bool logout)
             else if (PStatusEffect->GetStatusID() == xi::StatusEffect::Blink)
             {
                 PStatusEffect->SetPower(m_POwner->getMod(xi::Mod::BLINK));
-            }
-            else if (PStatusEffect->GetStatusID() == xi::StatusEffect::Stoneskin)
-            {
-                PStatusEffect->SetPower(m_POwner->getMod(xi::Mod::STONESKIN));
             }
 
             uint32 duration = 0;

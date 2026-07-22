@@ -272,21 +272,20 @@ function utils.handleStoneskin(actor, damage, attackType)
     end
 
     -- Early return: Stoneskin can't mitigate any more damage.
-    local stoneskinRemaining = actor:getMod(xi.mod.STONESKIN)
+    local stoneskinRemaining = effect:getPower()
     if stoneskinRemaining <= 0 then
         return damage
     end
 
     -- Absorb all damage.
     if stoneskinRemaining > damage then
-        actor:delMod(xi.mod.STONESKIN, damage)
+        effect:setPower(stoneskinRemaining - damage)
 
         return 0
 
     -- Wear off if mitigated damage exceeds stoneskin.
     else
         actor:delStatusEffect(xi.effect.STONESKIN)
-        actor:setMod(xi.mod.STONESKIN, 0)
 
         return utils.clamp(damage - stoneskinRemaining, 0, 99999)
     end
