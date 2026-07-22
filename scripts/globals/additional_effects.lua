@@ -653,3 +653,15 @@ xi.additionalEffect.spikes = function(attacker, defender, damage, spikeEffect, p
     }
     ]]
 end
+
+---@param dStat number
+---@param dStatCap number
+---@param startingRate number
+---@param cappedRate number
+---@return number
+xi.additionalEffect.linearProcRate = function(dStat, dStatCap, startingRate, cappedRate)
+    local rate = (cappedRate / dStatCap) * math.min(dStat, dStatCap)
+
+    -- Minimum of 1% is observed on drain weapons. Needs more testing.
+    return math.max(math.floor(rate), 1) -- Rate is ultimately used against a random roll of integers so this is mostly just to indicate it's a whole percent.
+end

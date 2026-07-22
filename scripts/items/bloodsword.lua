@@ -1,6 +1,6 @@
 -----------------------------------
--- ID: 17651
--- Item: Dainslaif
+-- ID: 16580
+-- Item: Bloodsword
 -- Additional effect: en-drain
 -----------------------------------
 ---@type TItem
