@@ -20,8 +20,8 @@
 */
 
 #include "attackround.h"
+#include "data/enums/mob_mod.h"
 #include "items/item_weapon.h"
-#include "mob_modifier.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "status_effect_container.h"
 
@@ -60,7 +60,7 @@ CAttackRound::CAttackRound(CBattleEntity* attacker, CBattleEntity* defender)
             bool h2hSingleSwing = false;
             if (dynamic_cast<CMobEntity*>(m_attacker))
             {
-                h2hSingleSwing = static_cast<CMobEntity*>(m_attacker)->getMobMod(MOBMOD_H2H_SINGLE_SWING) > 0;
+                h2hSingleSwing = static_cast<CMobEntity*>(m_attacker)->getMobMod(xi::MobMod::H2hSingleSwing) > 0;
             }
 
             CreateAttacks(PMain, LEFTATTACK);
@@ -258,7 +258,7 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
     // If the attacker is a mobentity or derived from mobentity, check to see if it has any special mutli-hit capabilties
     if (dynamic_cast<CMobEntity*>(m_attacker))
     {
-        auto multiHitMax = (uint8) static_cast<CMobEntity*>(m_attacker)->getMobMod(MOBMOD_MULTI_HIT);
+        auto multiHitMax = (uint8) static_cast<CMobEntity*>(m_attacker)->getMobMod(xi::MobMod::MultiHit);
 
         if (multiHitMax > 0)
         {

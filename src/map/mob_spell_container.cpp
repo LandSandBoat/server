@@ -23,7 +23,7 @@
 
 #include "entities/pet_entity.h"
 
-#include "mob_modifier.h"
+#include "data/enums/mob_mod.h"
 #include "mob_spell_container.h"
 #include "recast_container.h"
 #include "status_effect_container.h"
@@ -733,7 +733,7 @@ bool CMobSpellContainer::HasMPSpells() const
 Maybe<SpellID> CMobSpellContainer::GetAggroSpell()
 {
     // high chance to return ga spell
-    if (HasGaSpells() && xirand::GetRandomNumber(100) < m_PMob->getMobMod(MOBMOD_GA_CHANCE))
+    if (HasGaSpells() && xirand::GetRandomNumber(100) < m_PMob->getMobMod(xi::MobMod::GaChance))
     {
         return GetGaSpell();
     }
@@ -745,14 +745,14 @@ Maybe<SpellID> CMobSpellContainer::GetAggroSpell()
 Maybe<SpellID> CMobSpellContainer::GetSpell()
 {
     // prioritize curing if health low enough
-    if (HasHealSpells() && m_PMob->GetHPP() <= m_PMob->getMobMod(MOBMOD_HP_HEAL_CHANCE) &&
-        xirand::GetRandomNumber(100) < m_PMob->getMobMod(MOBMOD_HEAL_CHANCE))
+    if (HasHealSpells() && m_PMob->GetHPP() <= m_PMob->getMobMod(xi::MobMod::HpHealChance) &&
+        xirand::GetRandomNumber(100) < m_PMob->getMobMod(xi::MobMod::HealChance))
     {
         return GetHealSpell();
     }
 
     // almost always use na if I can
-    if (HasNaSpells() && xirand::GetRandomNumber(100) < m_PMob->getMobMod(MOBMOD_NA_CHANCE))
+    if (HasNaSpells() && xirand::GetRandomNumber(100) < m_PMob->getMobMod(xi::MobMod::NaChance))
     {
         // will return -1 if no proper na spell exists
         auto naSpell = GetNaSpell();
@@ -763,18 +763,18 @@ Maybe<SpellID> CMobSpellContainer::GetSpell()
     }
 
     // try something really destructive
-    if (HasSevereSpells() && xirand::GetRandomNumber(100) < m_PMob->getMobMod(MOBMOD_SEVERE_SPELL_CHANCE))
+    if (HasSevereSpells() && xirand::GetRandomNumber(100) < m_PMob->getMobMod(xi::MobMod::SevereSpellChance))
     {
         return GetSevereSpell();
     }
 
     // try ga spell
-    if (HasGaSpells() && xirand::GetRandomNumber(100) < m_PMob->getMobMod(MOBMOD_GA_CHANCE))
+    if (HasGaSpells() && xirand::GetRandomNumber(100) < m_PMob->getMobMod(xi::MobMod::GaChance))
     {
         return GetGaSpell();
     }
 
-    if (HasBuffSpells() && xirand::GetRandomNumber(100) < m_PMob->getMobMod(MOBMOD_BUFF_CHANCE))
+    if (HasBuffSpells() && xirand::GetRandomNumber(100) < m_PMob->getMobMod(xi::MobMod::BuffChance))
     {
         return GetBuffSpell();
     }

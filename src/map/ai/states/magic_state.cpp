@@ -27,12 +27,12 @@
 #include "ai/controllers/pet_controller.h"
 #include "ai/states/inactive_state.h"
 #include "common/utils.h"
+#include "data/enums/mob_mod.h"
 #include "enmity_container.h"
 #include "entities/battle_entity.h"
 #include "entities/mob_entity.h"
 #include "job_points.h"
 #include "lua/luautils.h"
-#include "mob_modifier.h"
 #include "packets/s2c/0x028_battle2.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "spell.h"
@@ -48,7 +48,7 @@ CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid,
 {
     if (auto PMob = dynamic_cast<CMobEntity*>(m_PEntity))
     {
-        if (PMob->getMobMod(MOBMOD_NO_SPELL_COST) > 0)
+        if (PMob->getMobMod(xi::MobMod::NoSpellCost) > 0)
         {
             m_flags |= MAGICFLAGS_IGNORE_MP;
         }

@@ -32,6 +32,7 @@
 #include "data/enums/behavior.h"
 #include "data/enums/claim_type.h"
 #include "data/enums/detects.h"
+#include "data/enums/mob_mod.h"
 #include "data/enums/mob_type.h"
 #include "data/enums/roam_flag.h"
 #include "data/enums/spawn_type.h"
@@ -99,13 +100,13 @@ public:
     auto GetEligibleSeals() -> std::vector<uint16>;
     auto GetEligibleGeodes() const -> std::vector<uint16>;
 
-    void  setMobMod(uint16 type, int16 value);
-    int16 getMobMod(uint16 type);
-    void  addMobMod(uint16 type, int16 value);
-    void  defaultMobMod(uint16 type, int16 value); // set value if value has not been already set
-    void  resetMobMod(uint16 type);                // resets mob mod to original value
-    void  saveMobModifiers();                      // save current state of modifiers
-    void  restoreMobModifiers();                   // restore to saved state
+    void  setMobMod(xi::MobMod type, int16 value);
+    int16 getMobMod(xi::MobMod type);
+    void  addMobMod(xi::MobMod type, int16 value);
+    void  defaultMobMod(xi::MobMod type, int16 value); // set value if value has not been already set
+    void  resetMobMod(xi::MobMod type);                // resets mob mod to original value
+    void  saveMobModifiers();                          // save current state of modifiers
+    void  restoreMobModifiers();                       // restore to saved state
 
     void SetCallForHelpFlag(bool call);
     bool GetCallForHelpFlag() const;
@@ -234,8 +235,8 @@ protected:
 
 private:
     timer::time_point                     m_DespawnTimer{ timer::time_point::min() }; // Despawn Timer to despawn mob after set duration
-    HashMap<int, int16>                   m_mobModStat;
-    HashMap<int, int16>                   m_mobModStatSave;
+    HashMap<xi::MobMod, int16>            m_mobModStat;
+    HashMap<xi::MobMod, int16>            m_mobModStatSave;
     HashMap<uint16, std::array<float, 3>> m_fTPModifierOverrides;
     static constexpr float                roam_home_distance{ 60.f };
     SpawnSlot*                            spawnSlot = nullptr;

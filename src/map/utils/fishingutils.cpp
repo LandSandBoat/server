@@ -47,6 +47,7 @@
 
 #include "battleutils.h"
 #include "charutils.h"
+#include "data/enums/mob_mod.h"
 #include "data/enums/weather.h"
 #include "enums/chat_message_type.h"
 #include "enums/four_cc.h"
@@ -54,7 +55,6 @@
 #include "enums/msg_std.h"
 #include "item_container.h"
 #include "itemutils.h"
-#include "mob_modifier.h"
 #include "packets/c2s/0x110_fishing_2.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "status_effect_container.h"
@@ -1596,8 +1596,8 @@ int32 CatchMonster(CCharEntity* PChar, uint32 MobID)
 
     PMob->m_SpawnPoint = m;
     PMob->Spawn();
-    PMob->setMobMod(MOBMOD_CHARMABLE, 0);
-    PMob->setMobMod(MOBMOD_IDLE_DESPAWN, 180);
+    PMob->setMobMod(xi::MobMod::Charmable, 0);
+    PMob->setMobMod(xi::MobMod::IdleDespawn, 180);
     PMob->SetDespawnTime(180s);
     PMob->SetLocalVar("hooked", 0);
 
@@ -1612,7 +1612,7 @@ int32 CatchMonster(CCharEntity* PChar, uint32 MobID)
 
     // PMob->SetLocalVar("QuestBattleID", PChar->GetLocalVar("QuestBattleID"));
     // PChar->StatusEffectContainer->CopyConfrontationEffect(PMob);
-    if ((mob->log < 255 && mob->quest < 255) || mob->questOnly || (PMob->m_TrueDetection && (static_cast<xi::Detects>(PMob->getMobMod(MOBMOD_DETECTION)) & xi::Detects::Scent) != xi::Detects::None) || !PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Sneak))
+    if ((mob->log < 255 && mob->quest < 255) || mob->questOnly || (PMob->m_TrueDetection && (static_cast<xi::Detects>(PMob->getMobMod(xi::MobMod::Detection)) & xi::Detects::Scent) != xi::Detects::None) || !PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Sneak))
     {
         PMob->PAI->Engage(PChar->targid);
         battleutils::ClaimMob(PMob, (CBattleEntity*)PChar);

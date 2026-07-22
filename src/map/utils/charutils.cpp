@@ -66,6 +66,7 @@
 #include "ability.h"
 #include "alliance.h"
 #include "conquest_system.h"
+#include "data/enums/mob_mod.h"
 #include "grades.h"
 #include "ipc_client.h"
 #include "item_container.h"
@@ -73,7 +74,6 @@
 #include "latent_effect_container.h"
 #include "linkshell.h"
 #include "map_networking.h"
-#include "mob_modifier.h"
 #include "nominate_manager.h"
 #include "recast_container.h"
 #include "roe.h"
@@ -5053,9 +5053,9 @@ void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
 
                     exp *= GetPlayerShareMultiplier(pcinzone, isInSignetZone || isInSanctionZone);
 
-                    if (PMob->getMobMod(MOBMOD_EXP_BONUS))
+                    if (PMob->getMobMod(xi::MobMod::ExpBonus))
                     {
-                        const float monsterbonus = 1.0f + PMob->getMobMod(MOBMOD_EXP_BONUS) / 100.0f;
+                        const float monsterbonus = 1.0f + PMob->getMobMod(xi::MobMod::ExpBonus) / 100.0f;
                         exp *= monsterbonus;
                     }
 

@@ -70,6 +70,7 @@
 #include "action/interrupts.h"
 #include "blue_spell.h"
 #include "conquest_system.h"
+#include "data/enums/mob_mod.h"
 #include "enums/recast.h"
 #include "ipc_client.h"
 #include "item_container.h"
@@ -81,7 +82,6 @@
 #include "job_points.h"
 #include "latent_effect_container.h"
 #include "linkshell.h"
-#include "mob_modifier.h"
 #include "mobskill.h"
 #include "modifier.h"
 #include "notoriety_container.h"
@@ -2067,7 +2067,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         {
             if (auto* PMob = dynamic_cast<CMobEntity*>(PBattleEntity))
             {
-                if (PMob->getMobMod(MOBMOD_ABILITY_RESPONSE) && PMob->getZone() == this->getZone())
+                if (PMob->getMobMod(xi::MobMod::AbilityResponse) && PMob->getZone() == this->getZone())
                 {
                     luautils::OnPlayerAbilityUse(PMob, this, PAbility);
                 }
@@ -2103,7 +2103,7 @@ bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
 
     if (auto* PMob = dynamic_cast<CMobEntity*>(PBattleTarget))
     {
-        if (PMob->getMobMod(MOBMOD_CLAIM_TYPE) == static_cast<int16>(xi::ClaimType::NonExclusive))
+        if (PMob->getMobMod(xi::MobMod::ClaimType) == static_cast<int16>(xi::ClaimType::NonExclusive))
         {
             return true;
         }

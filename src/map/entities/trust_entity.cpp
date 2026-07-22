@@ -29,8 +29,8 @@
 #include "ai/helpers/targetfind.h"
 #include "ai/states/magic_state.h"
 #include "ai/states/weaponskill_state.h"
+#include "data/enums/mob_mod.h"
 #include "enmity_container.h"
-#include "mob_modifier.h"
 #include "packets/entity_set_name.h"
 #include "packets/s2c/0x0df_group_attr.h"
 #include "recast_container.h"
@@ -75,7 +75,7 @@ auto CTrustEntity::trustID() -> uint32
 
 auto CTrustEntity::shieldSize() -> int8
 {
-    const auto shieldSizeMod = static_cast<int8>(getMobMod(MOBMOD_TRUST_SHIELD_SIZE));
+    const auto shieldSizeMod = static_cast<int8>(getMobMod(xi::MobMod::TrustShieldSize));
     return shieldSizeMod > 0 ? shieldSizeMod : kTrustDefaultShieldSize;
 }
 

@@ -3965,24 +3965,24 @@ function CBaseEntity:setMobSkillAttack(listId)
 end
 
 ---@nodiscard
----@param mobModID integer
+---@param mobModID xi.mobMod
 ---@return integer
 function CBaseEntity:getMobMod(mobModID)
 end
 
----@param mobModID integer
+---@param mobModID xi.mobMod
 ---@param value integer
 ---@return nil
 function CBaseEntity:setMobMod(mobModID, value)
 end
 
----@param mobModID integer
+---@param mobModID xi.mobMod
 ---@param value integer
 ---@return nil
 function CBaseEntity:addMobMod(mobModID, value)
 end
 
----@param mobModID integer
+---@param mobModID xi.mobMod
 ---@param value integer
 ---@return nil
 function CBaseEntity:delMobMod(mobModID, value)

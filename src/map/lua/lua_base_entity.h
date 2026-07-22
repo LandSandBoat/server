@@ -24,6 +24,7 @@
 
 #include "common/cbasetypes.h"
 #include "data/enums/entity_flags.h"
+#include "data/enums/mob_mod.h"
 #include "enums/mission_log.h"
 #include "luautils.h"
 #include "packets/s2c/0x009_message.h"
@@ -905,10 +906,10 @@ public:
     void setMobAbilityEnabled(bool state);   // halt/resumes mob skills
     void setMobSkillAttack(int16 listId);    // enable/disable using mobskills as regular attacks
 
-    int16 getMobMod(uint16 mobModID);
-    void  setMobMod(uint16 mobModID, int16 value);
-    void  addMobMod(uint16 mobModID, int16 value);
-    void  delMobMod(uint16 mobModID, int16 value);
+    int16 getMobMod(xi::MobMod mobModID);
+    void  setMobMod(xi::MobMod mobModID, int16 value);
+    void  addMobMod(xi::MobMod mobModID, int16 value);
+    void  delMobMod(xi::MobMod mobModID, int16 value);
 
     auto getfTPModifierOverride(uint16 skillId) -> sol::object;
     void setfTPModifierOverride(uint16 skillId, float ftp1, float ftp2, float ftp3);

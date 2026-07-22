@@ -100,7 +100,6 @@ set(MAP_CORE_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/maze.h
     ${CMAKE_CURRENT_SOURCE_DIR}/merit.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/merit.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/mob_modifier.h
     ${CMAKE_CURRENT_SOURCE_DIR}/mob_spell_container.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/mob_spell_container.h
     ${CMAKE_CURRENT_SOURCE_DIR}/mob_spell_list.cpp

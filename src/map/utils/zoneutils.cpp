@@ -27,6 +27,7 @@
 #include "campaign_system.h"
 #include "common/logging.h"
 #include "conquest_system.h"
+#include "data/enums/mob_mod.h"
 #include "data/enums/weather.h"
 #include "entities/mob_entity.h"
 #include "entities/npc_entity.h"
@@ -34,7 +35,6 @@
 #include "itemutils.h"
 #include "lua/luautils.h"
 #include "map_networking.h"
-#include "mob_modifier.h"
 #include "mob_spell_list.h"
 #include "mobutils.h"
 #include "spawn_handler.h"
@@ -589,7 +589,7 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
 
                                     if (PMob->animationsub != 0)
                                     {
-                                        PMob->setMobMod(MOBMOD_SPAWN_ANIMATIONSUB, PMob->animationsub);
+                                        PMob->setMobMod(xi::MobMod::SpawnAnimationsub, PMob->animationsub);
                                     }
 
                                     // Setup HP / MP Stat Percentage Boost
@@ -610,9 +610,9 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                                     PMob->m_MobSkillList = rset->get<uint16>("skill_list_id");
 
                                     PMob->m_TrueDetection = rset->get<bool>("true_detection");
-                                    PMob->setMobMod(MOBMOD_DETECTION, rset->get<uint16>("detects"));
+                                    PMob->setMobMod(xi::MobMod::Detection, rset->get<uint16>("detects"));
 
-                                    PMob->setMobMod(MOBMOD_CHARMABLE, rset->get<uint16>("charmable"));
+                                    PMob->setMobMod(xi::MobMod::Charmable, rset->get<uint16>("charmable"));
 
                                     // Add mob to spawn slot if it has one
                                     uint32 slotId      = rset->getOrDefault<uint32>("spawnslotid", 0);
@@ -638,7 +638,7 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                                         (PMob->m_Type & xi::MobType::Notorious) != xi::MobType::Normal ||
                                         (zoneType & xi::ZoneType::Dynamis) != xi::ZoneType::Unknown)
                                     {
-                                        PMob->setMobMod(MOBMOD_CHARMABLE, 0);
+                                        PMob->setMobMod(xi::MobMod::Charmable, 0);
                                     }
 
                                     // must be here first to define mobmods
