@@ -32492,13 +32492,14 @@ INSERT INTO `item_mods` VALUES (16579,9,2);  -- DEX: 2
 INSERT INTO `item_mods` VALUES (16579,10,2); -- VIT: 2
 
 -- Bloodsword
-INSERT INTO `item_mods` VALUES (16580,8,4);   -- STR: 4
-INSERT INTO `item_mods` VALUES (16580,9,4);   -- DEX: 4
-INSERT INTO `item_mods` VALUES (16580,10,-8); -- VIT: -8
-INSERT INTO `item_mods` VALUES (16580,11,4);  -- AGI: 4
-INSERT INTO `item_mods` VALUES (16580,12,4);  -- INT: 4
-INSERT INTO `item_mods` VALUES (16580,13,-8); -- MND: -8
-INSERT INTO `item_mods` VALUES (16580,14,-8); -- CHR: -8
+INSERT INTO `item_mods` VALUES (16580,8,4);    -- STR: 4
+INSERT INTO `item_mods` VALUES (16580,9,4);    -- DEX: 4
+INSERT INTO `item_mods` VALUES (16580,10,-8);  -- VIT: -8
+INSERT INTO `item_mods` VALUES (16580,11,4);   -- AGI: 4
+INSERT INTO `item_mods` VALUES (16580,12,4);   -- INT: 4
+INSERT INTO `item_mods` VALUES (16580,13,-8);  -- MND: -8
+INSERT INTO `item_mods` VALUES (16580,14,-8);  -- CHR: -8
+INSERT INTO `item_mods` VALUES (16580,1181,1); -- ITEM_ADDEFFECT_SCRIPTED: 1
 
 -- Holy Sword
 INSERT INTO `item_mods` VALUES (16581,431,1);  -- ITEM_ADDEFFECT_TYPE: DAMAGE
