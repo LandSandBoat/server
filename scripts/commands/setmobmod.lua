@@ -31,12 +31,15 @@ commandObj.onTrigger = function(player, modifier, amount)
     local target = player:getCursorTarget()
 
     if not target or target:isNPC() then
-        error(player, 'No valid target found. Place cursor on a mob. ')
+        error(player, 'No valid target found. Place cursor on a mob or pet.')
         return
     end
 
-    if not target:isMob() then
-        error(player, 'No valid target found. Place cursor on a mob. ')
+    if
+        target:isPC() or
+        target:isNPC()
+    then
+        error(player, 'Current target is not a Mob/Pet. Only Mobs/Pets can have mob mods.')
         return
     end
 
