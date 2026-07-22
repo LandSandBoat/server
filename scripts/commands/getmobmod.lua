@@ -44,8 +44,17 @@ commandObj.onTrigger = function(player, id)
 
     -- validate target
     local effectTarget = player:getCursorTarget()
-    if not effectTarget or not effectTarget:isMob() then
-        error(player, 'Current target is not a MOB, which can not have mob mods.')
+
+    if not effectTarget then
+        error(player, 'No valid target found. Place cursor on a mob or pet')
+        return
+    end
+
+    if
+        effectTarget:isPC() or
+        effectTarget:isNPC()
+    then
+        error(player, 'Current target is not a Mob/Pet. Only Mobs/Pets can have mob mods.')
         return
     end
 
