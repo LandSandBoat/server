@@ -2,8 +2,6 @@
 -- Area: Arrapago Reef
 --  Mob: Reserve Draugar
 -----------------------------------
-mixins = { require('scripts/mixins/weapon_break') }
------------------------------------
 ---@type TMobEntity
 local entity = {}
 
