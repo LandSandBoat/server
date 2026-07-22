@@ -160,7 +160,7 @@ void TryLearningSpells(CCharEntity* PChar, CMobEntity* PMob)
             // make sure the difference between spell skill and player is at most 31 points
             if (playerSkillLvl >= skillLvlForSpell - 31)
             {
-                auto chanceToLearn = 33 + PBlueMage->getMod(Mod::BLUE_LEARN_CHANCE);
+                auto chanceToLearn = 33 + PBlueMage->getMod(xi::Mod::BLUE_LEARN_CHANCE);
                 if (xirand::GetRandomNumber(100) < chanceToLearn)
                 {
                     if (charutils::addSpell(PBlueMage, static_cast<uint16>(PSpell->getID())))
@@ -425,7 +425,7 @@ void CalculateTraits(CCharEntity* PChar)
     TraitList_t*           PTraitsList = traits::GetTraits(JOB_BLU);
     std::map<uint8, uint8> points;
     std::vector<CTrait*>   traitsToAdd;
-    auto                   traitTierBonus = PChar->getMod(Mod::BLUE_JOB_TRAIT_BONUS);
+    auto                   traitTierBonus = PChar->getMod(xi::Mod::BLUE_JOB_TRAIT_BONUS);
 
     for (unsigned char m_SetBlueSpell : PChar->m_SetBlueSpells)
     {
@@ -503,22 +503,22 @@ void CalculateTraits(CCharEntity* PChar)
         // Gilfinder upgrades to Treasure Hunter
         if (PBluTraitA->getMod() != PBluTraitB->getMod())
         {
-            if (PBluTraitA->getMod() == Mod::DOUBLE_ATTACK && PBluTraitB->getMod() == Mod::TRIPLE_ATTACK)
+            if (PBluTraitA->getMod() == xi::Mod::DOUBLE_ATTACK && PBluTraitB->getMod() == xi::Mod::TRIPLE_ATTACK)
             {
                 return true;
             }
 
-            if (PBluTraitA->getMod() == Mod::TRIPLE_ATTACK && PBluTraitB->getMod() == Mod::DOUBLE_ATTACK)
+            if (PBluTraitA->getMod() == xi::Mod::TRIPLE_ATTACK && PBluTraitB->getMod() == xi::Mod::DOUBLE_ATTACK)
             {
                 return true;
             }
 
-            if (PBluTraitA->getMod() == Mod::GILFINDER && PBluTraitB->getMod() == Mod::TREASURE_HUNTER)
+            if (PBluTraitA->getMod() == xi::Mod::GILFINDER && PBluTraitB->getMod() == xi::Mod::TREASURE_HUNTER)
             {
                 return true;
             }
 
-            if (PBluTraitA->getMod() == Mod::TREASURE_HUNTER && PBluTraitB->getMod() == Mod::GILFINDER)
+            if (PBluTraitA->getMod() == xi::Mod::TREASURE_HUNTER && PBluTraitB->getMod() == xi::Mod::GILFINDER)
             {
                 return true;
             }

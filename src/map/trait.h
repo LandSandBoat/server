@@ -180,7 +180,7 @@ public:
         return m_level;
     }
 
-    Mod getMod() const
+    xi::Mod getMod() const
     {
         return m_mod;
     }
@@ -210,7 +210,7 @@ public:
         m_level = level;
     }
 
-    void setMod(const Mod mod)
+    void setMod(const xi::Mod mod)
     {
         m_mod = mod;
     }
@@ -231,13 +231,13 @@ public:
     }
 
 private:
-    uint16 m_id{ 0 };
-    uint8  m_job{ 0 };
-    uint8  m_level{ 0 };
-    Mod    m_mod{ Mod::NONE };
-    int16  m_value{ 0 };
-    uint8  m_rank{ 0 };
-    uint32 m_meritId{ 0 };
+    uint16  m_id{ 0 };
+    uint8   m_job{ 0 };
+    uint8   m_level{ 0 };
+    xi::Mod m_mod{ xi::Mod::NONE };
+    int16   m_value{ 0 };
+    uint8   m_rank{ 0 };
+    uint32  m_meritId{ 0 };
 };
 
 typedef std::vector<CTrait*> TraitList_t;

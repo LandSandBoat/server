@@ -97,7 +97,7 @@ CPetSkillState::CPetSkillState(CPetEntity* PEntity, uint16 targid, uint16 wsid)
 
         // Wyverns immediately emit a skill interrupt packet.
         // This looks like a hack but is retail accurate.
-        if (PEntity->petID() == PETID_WYVERN && PEntity->getMod(Mod::WYVERN_SHOW_READYING) == 0)
+        if (PEntity->petID() == PETID_WYVERN && PEntity->getMod(xi::Mod::WYVERN_SHOW_READYING) == 0)
         {
             ActionInterrupts::WyvernSkillReady(PEntity);
         }

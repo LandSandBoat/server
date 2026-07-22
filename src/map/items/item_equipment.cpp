@@ -249,7 +249,7 @@ bool CItemEquipment::isEquippableByRace(uint8 race) const
     // this is needed because many equips allow a subset of races
     // for example Steppe Belt allows both taru-male and taru-female
     // also note the default mod value of 0 denotes all races can wear
-    auto raceMod      = getModifier(Mod::EQUIPMENT_ONLY_RACE);
+    auto raceMod      = getModifier(xi::Mod::EQUIPMENT_ONLY_RACE);
     bool isEquippable = true;
 
     // if a positive mod (so some race restriction(s) exist) then check against the char race
@@ -290,7 +290,7 @@ void CItemEquipment::setScriptType(uint16 ScriptType)
 // add item modifier
 void CItemEquipment::addModifier(CModifier modifier)
 {
-    if (IsShield() && modifier.getModID() == Mod::DEF)
+    if (IsShield() && modifier.getModID() == xi::Mod::DEF)
     {
         // reduction calc source: www.bluegartr.com/threads/84830-Shield-Asstery
         // http://www.ffxiah.com/forum/topic/21671/paladin-faq-info-and-trade-studies/33/ <~Aegis and Ochain
@@ -318,7 +318,7 @@ void CItemEquipment::addModifier(CModifier modifier)
     modList.emplace_back(modifier);
 }
 
-int16 CItemEquipment::getModifier(Mod mod) const
+int16 CItemEquipment::getModifier(xi::Mod mod) const
 {
     int16 totalAmount = 0;
     for (const auto& i : modList)
@@ -336,13 +336,13 @@ void CItemEquipment::addPetModifier(CPetModifier modifier)
     petModList.emplace_back(modifier);
 }
 
-void CItemEquipment::addLatent(xi::Latent ConditionsID, uint16 ConditionsValue, Mod ModValue, int16 ModPower)
+void CItemEquipment::addLatent(xi::Latent ConditionsID, uint16 ConditionsValue, xi::Mod ModValue, int16 ModPower)
 {
     itemLatent latent{ ConditionsID, ConditionsValue, ModValue, ModPower };
     latentList.emplace_back(latent);
 }
 
-bool CItemEquipment::delModifier(Mod mod, int16 modValue)
+bool CItemEquipment::delModifier(xi::Mod mod, int16 modValue)
 {
     // clang-format off
     auto it = std::find_if(modList.begin(), modList.end(), [mod, modValue](const CModifier& compare)
@@ -360,7 +360,7 @@ bool CItemEquipment::delModifier(Mod mod, int16 modValue)
     return true;
 }
 
-bool CItemEquipment::delPetModifier(Mod mod, PetModType petType, int16 modValue)
+bool CItemEquipment::delPetModifier(xi::Mod mod, PetModType petType, int16 modValue)
 {
     // clang-format off
     auto it = std::find_if(petModList.begin(), petModList.end(), [mod, petType, modValue](const CPetModifier& compare)
@@ -467,9 +467,9 @@ void CItemEquipment::SetAugmentMod(uint16 type, uint8 value)
 
     for (const auto& augmentData : augmentDataModifiers)
     {
-        uint8 multiplier = augmentData.multiplier;
-        Mod   modId      = static_cast<Mod>(augmentData.modId);
-        int16 modValue   = augmentData.value;
+        uint8   multiplier = augmentData.multiplier;
+        xi::Mod modId      = static_cast<xi::Mod>(augmentData.modId);
+        int16   modValue   = augmentData.value;
 
         // type is 0 unless mod is for pets
         uint8      isPet   = augmentData.isPet;
@@ -481,7 +481,7 @@ void CItemEquipment::SetAugmentMod(uint16 type, uint8 value)
         modValue = (modValue > 0 ? modValue + value : modValue - value) * (multiplier > 1 ? multiplier : 1);
 
         // Skip unimplemented augments modifiers
-        if (modId == Mod::NONE)
+        if (modId == xi::Mod::NONE)
         {
             continue;
         }

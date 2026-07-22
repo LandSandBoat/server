@@ -86,7 +86,7 @@ void CAutomatonEntity::burdenTick()
     {
         if (burden > 0)
         {
-            burden -= std::clamp<uint8>(1 + PMaster->getMod(Mod::BURDEN_DECAY) + this->getMod(Mod::BURDEN_DECAY), 1, burden);
+            burden -= std::clamp<uint8>(1 + PMaster->getMod(xi::Mod::BURDEN_DECAY) + this->getMod(xi::Mod::BURDEN_DECAY), 1, burden);
         }
     }
 }
@@ -109,7 +109,7 @@ void CAutomatonEntity::setBurdenArray(const std::array<uint8, 8> burdenArray)
 auto CAutomatonEntity::addBurden(const uint8 element, int8 burden) -> uint8
 {
     // Handle Kenkonken Suppress Overload
-    if (PMaster->getMod(Mod::SUPPRESS_OVERLOAD) > 0)
+    if (PMaster->getMod(xi::Mod::SUPPRESS_OVERLOAD) > 0)
     {
         // TODO: Retail research, this is a best guess
         burden /= 3;
@@ -120,7 +120,7 @@ auto CAutomatonEntity::addBurden(const uint8 element, int8 burden) -> uint8
     if (burden > 0)
     {
         // check for overload
-        const int16 thresh = 30 + PMaster->getMod(Mod::OVERLOAD_THRESH);
+        const int16 thresh = 30 + PMaster->getMod(xi::Mod::OVERLOAD_THRESH);
         if (burden_[element] > thresh)
         {
             if (xirand::GetRandomNumber(100) < (burden_[element] - thresh + 5))
@@ -135,7 +135,7 @@ auto CAutomatonEntity::addBurden(const uint8 element, int8 burden) -> uint8
 
 auto CAutomatonEntity::overloadChance(const uint8 element) const -> uint8
 {
-    const int16 thresh = 30 + PMaster->getMod(Mod::OVERLOAD_THRESH);
+    const int16 thresh = 30 + PMaster->getMod(xi::Mod::OVERLOAD_THRESH);
 
     return std::clamp(burden_[element] - thresh + 5, 0, 255);
 }

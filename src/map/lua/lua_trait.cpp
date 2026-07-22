@@ -46,7 +46,7 @@ auto CLuaTrait::getLevel() const -> uint8
     return trait_->getLevel();
 }
 
-auto CLuaTrait::getMod() const -> Mod
+auto CLuaTrait::getMod() const -> xi::Mod
 {
     return trait_->getMod();
 }

@@ -101,7 +101,7 @@ void CAttack::SetCritical(bool value)
                 int32 meritValue = PChar->PMeritPoints->GetMeritValue(MERIT_SANGE, PChar);
 
                 // Add N ranged attack * merit level during Sange effect
-                bonusRatt += PChar->getMod(Mod::ENHANCES_SANGE) * meritValue;
+                bonusRatt += PChar->getMod(xi::Mod::ENHANCES_SANGE) * meritValue;
             }
         }
         m_damageRatio = battleutils::GetRangedDamageRatio(m_attacker, m_victim, m_isCritical, bonusRatt);
@@ -455,7 +455,7 @@ bool CAttack::CheckCounter()
 
     uint16 seiganChance = 0;
 
-    if (m_victim->objtype == TYPE_PC && m_victim->getMod(Mod::SEIGAN_COUNTER_BONUS) > 0)
+    if (m_victim->objtype == TYPE_PC && m_victim->getMod(xi::Mod::SEIGAN_COUNTER_BONUS) > 0)
     {
         // counter check (rate AND your hit rate makes it land, else its just a regular hit)
         // having seigan active gives chance to counter at 25% of the zanshin proc rate
@@ -466,7 +466,7 @@ bool CAttack::CheckCounter()
 
         if (hasValidSeigan)
         {
-            seiganChance = PChar->getMod(Mod::ZANSHIN) + PChar->PMeritPoints->GetMeritValue(MERIT_ZASHIN_ATTACK_RATE, PChar);
+            seiganChance = PChar->getMod(xi::Mod::ZANSHIN) + PChar->PMeritPoints->GetMeritValue(MERIT_ZASHIN_ATTACK_RATE, PChar);
             seiganChance = std::clamp<uint16>(seiganChance, 0, 100);
             seiganChance /= 4;
         }
@@ -475,7 +475,7 @@ bool CAttack::CheckCounter()
     // Do not counter if PD is up
     if (!m_attacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::PerfectDodge))
     {
-        if ((xirand::GetRandomNumber(100) < std::clamp<uint16>(m_victim->getMod(Mod::COUNTER) + meritCounter, 0, 80) ||
+        if ((xirand::GetRandomNumber(100) < std::clamp<uint16>(m_victim->getMod(xi::Mod::COUNTER) + meritCounter, 0, 80) ||
              xirand::GetRandomNumber(100) < seiganChance) &&
             facing(m_victim->loc.p, m_attacker->loc.p, 64))
         {
@@ -599,14 +599,14 @@ void CAttack::ProcessDamage()
         (behind(m_attacker->loc.p, m_victim->loc.p, 64) || m_attacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Hide) ||
          m_victim->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Doubt)))
     {
-        m_bonusBasePhysicalDamage += static_cast<float>(m_attacker->DEX()) * (1.0f + std::max(m_attacker->getMod(Mod::SNEAK_ATK_DEX) / 100.0f, 0.f));
+        m_bonusBasePhysicalDamage += static_cast<float>(m_attacker->DEX()) * (1.0f + std::max(m_attacker->getMod(xi::Mod::SNEAK_ATK_DEX) / 100.0f, 0.f));
         m_isSA = true;
     }
 
     // Trick attack.
     if (m_attacker->GetMJob() == JOB_THF && m_isFirstSwing && m_attackRound->GetTAEntity() != nullptr)
     {
-        m_bonusBasePhysicalDamage += static_cast<float>(m_attacker->AGI()) * (1.0f + std::max(m_attacker->getMod(Mod::TRICK_ATK_AGI) / 100.0f, 0.f));
+        m_bonusBasePhysicalDamage += static_cast<float>(m_attacker->AGI()) * (1.0f + std::max(m_attacker->getMod(xi::Mod::TRICK_ATK_AGI) / 100.0f, 0.f));
         m_isTA = true;
     }
 
@@ -648,7 +648,7 @@ void CAttack::ProcessDamage()
             if (m_attackType == PHYSICAL_ATTACK_TYPE::KICK) // Per Jimmy Kick damage adds in fSTR after the two penalties
             {
                 float kickPenalty = 2.0f / 3.0f; // per Jimmy, 2/3rds penalty for kicks
-                kickDamage        = m_attacker->getMod(Mod::KICK_DMG);
+                kickDamage        = m_attacker->getMod(xi::Mod::KICK_DMG);
 
                 m_damage = (m_damage + kickDamage) * mobH2HPenalty * kickPenalty + fSTR;
             }
@@ -663,7 +663,7 @@ void CAttack::ProcessDamage()
         }
         else if (m_attackType == PHYSICAL_ATTACK_TYPE::KICK) // Players use this calculation.
         {
-            kickDamage = m_naturalH2hDamage + m_attacker->getMod(Mod::KICK_DMG); // KICK_DMG includes weapon dmg if footwork is active
+            kickDamage = m_naturalH2hDamage + m_attacker->getMod(xi::Mod::KICK_DMG); // KICK_DMG includes weapon dmg if footwork is active
             m_damage   = std::max(kickDamage + m_bonusBasePhysicalDamage + battleutils::GetFSTR(m_attacker, m_victim, slot), 0);
             m_damage   = std::floor<uint32>(m_damage * m_damageRatio);
         }
@@ -702,11 +702,11 @@ void CAttack::ProcessDamage()
     // Apply "Double Attack" damage and "Triple Attack" damage mods
     if (m_attackType == PHYSICAL_ATTACK_TYPE::DOUBLE && m_attacker->objtype == TYPE_PC)
     {
-        m_damage = std::floor<uint32>(m_damage * 1.0f + std::max(m_attacker->getMod(Mod::DOUBLE_ATTACK_DMG) / 100.0f, 0.f));
+        m_damage = std::floor<uint32>(m_damage * 1.0f + std::max(m_attacker->getMod(xi::Mod::DOUBLE_ATTACK_DMG) / 100.0f, 0.f));
     }
     else if (m_attackType == PHYSICAL_ATTACK_TYPE::TRIPLE && m_attacker->objtype == TYPE_PC)
     {
-        m_damage = std::floor<uint32>(m_damage * 1.0f + std::max(m_attacker->getMod(Mod::TRIPLE_ATTACK_DMG) / 100.0f, 0.f));
+        m_damage = std::floor<uint32>(m_damage * 1.0f + std::max(m_attacker->getMod(xi::Mod::TRIPLE_ATTACK_DMG) / 100.0f, 0.f));
     }
 
     // Soul eater.
@@ -730,15 +730,15 @@ void CAttack::ProcessDamage()
     }
 
     // Apply Sneak Attack Augment Mod
-    if (m_attacker->getMod(Mod::AUGMENTS_SA) > 0 && IsSneakAttack() && m_attacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::SneakAttack))
+    if (m_attacker->getMod(xi::Mod::AUGMENTS_SA) > 0 && IsSneakAttack() && m_attacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::SneakAttack))
     {
-        m_damage = std::floor<uint32>(m_damage * (1.0f + std::max(m_attacker->getMod(Mod::AUGMENTS_SA) / 100.0f, 0.f)));
+        m_damage = std::floor<uint32>(m_damage * (1.0f + std::max(m_attacker->getMod(xi::Mod::AUGMENTS_SA) / 100.0f, 0.f)));
     }
 
     // Apply Trick Attack Augment Mod
-    if (m_attacker->getMod(Mod::AUGMENTS_TA) > 0 && IsTrickAttack() && m_attacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::TrickAttack))
+    if (m_attacker->getMod(xi::Mod::AUGMENTS_TA) > 0 && IsTrickAttack() && m_attacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::TrickAttack))
     {
-        m_damage = std::floor<uint32>(m_damage * (1.0f + std::max(m_attacker->getMod(Mod::AUGMENTS_TA) / 100.0f, 0.f)));
+        m_damage = std::floor<uint32>(m_damage * (1.0f + std::max(m_attacker->getMod(xi::Mod::AUGMENTS_TA) / 100.0f, 0.f)));
     }
 
     // low level mobs can get negative fSTR so low they crater their (base weapon damage + fstr) to below 0.
@@ -801,7 +801,7 @@ void CAttack::ProcessDamage()
             float remainder     = effect->GetSubPower() / 100.0f;
 
             // Calculate bonuses from Enhances Restraint, Job Point upgrades, and remainder from previous hit
-            boostPerRound = (boostPerRound * (1 + m_attacker->getMod(Mod::ENHANCES_RESTRAINT) / 100.0f) * (1 + jpBonus / 100.0f)) + remainder;
+            boostPerRound = (boostPerRound * (1 + m_attacker->getMod(xi::Mod::ENHANCES_RESTRAINT) / 100.0f) * (1 + jpBonus / 100.0f)) + remainder;
 
             // Calculate new remainder and multiply by 100 so significant digits aren't lost
             // Floor Boost per Round
@@ -816,7 +816,7 @@ void CAttack::ProcessDamage()
 
             effect->SetPower(effect->GetPower() + boostPerRound);
             effect->SetSubPower(remainder);
-            m_attacker->addModifier(Mod::ALL_WSDMG_FIRST_HIT, boostPerRound);
+            m_attacker->addModifier(xi::Mod::ALL_WSDMG_FIRST_HIT, boostPerRound);
         }
     }
 }

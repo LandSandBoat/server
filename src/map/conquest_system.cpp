@@ -112,7 +112,7 @@ void AddInfluencePoints(int points, unsigned int nation, REGION_TYPE region)
 
 void GainInfluencePoints(CCharEntity* PChar, uint32 points)
 {
-    points += (uint32)(PChar->getMod(Mod::CONQUEST_REGION_BONUS) / 100.0);
+    points += (uint32)(PChar->getMod(xi::Mod::CONQUEST_REGION_BONUS) / 100.0);
     conquest::AddInfluencePoints(points, PChar->profile.nation, PChar->loc.zone->GetRegionID());
 }
 
@@ -658,7 +658,7 @@ uint32 AddConquestPoints(CCharEntity* PChar, uint32 exp)
         // 15% otherwise
 
         double percentage = PChar->profile.nation == GetRegionOwner(region) ? 0.1 : 0.15;
-        percentage += PChar->getMod(Mod::CONQUEST_BONUS) / 100.0;
+        percentage += PChar->getMod(xi::Mod::CONQUEST_BONUS) / 100.0;
         uint32 points = (uint32)(exp * percentage);
 
         charutils::AddPoints(PChar, charutils::GetConquestPointsName(PChar).c_str(), points);

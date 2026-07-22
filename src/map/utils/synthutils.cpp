@@ -421,33 +421,33 @@ auto resolveRecipe(CCharEntity* PChar, const SynthOffer& offer) -> bool
 // Used in: LOCAL handleSynthResult
 auto getSynthDifficulty(CCharEntity* PChar, uint8 skillID) -> int16
 {
-    Mod ModID = Mod::NONE;
+    xi::Mod ModID = xi::Mod::NONE;
 
     switch (static_cast<xi::SkillType>(skillID))
     {
         case xi::SkillType::Woodworking:
-            ModID = Mod::WOOD;
+            ModID = xi::Mod::WOOD;
             break;
         case xi::SkillType::Smithing:
-            ModID = Mod::SMITH;
+            ModID = xi::Mod::SMITH;
             break;
         case xi::SkillType::Goldsmithing:
-            ModID = Mod::GOLDSMITH;
+            ModID = xi::Mod::GOLDSMITH;
             break;
         case xi::SkillType::Clothcraft:
-            ModID = Mod::CLOTH;
+            ModID = xi::Mod::CLOTH;
             break;
         case xi::SkillType::Leathercraft:
-            ModID = Mod::LEATHER;
+            ModID = xi::Mod::LEATHER;
             break;
         case xi::SkillType::Bonecraft:
-            ModID = Mod::BONE;
+            ModID = xi::Mod::BONE;
             break;
         case xi::SkillType::Alchemy:
-            ModID = Mod::ALCHEMY;
+            ModID = xi::Mod::ALCHEMY;
             break;
         case xi::SkillType::Cooking:
-            ModID = Mod::COOK;
+            ModID = xi::Mod::COOK;
             break;
         default:
             break;
@@ -462,33 +462,33 @@ auto getSynthDifficulty(CCharEntity* PChar, uint8 skillID) -> int16
 // Used in: LOCAL handleSynthResult
 auto canSynthesizeHQ(CCharEntity* PChar, uint8 skillID) -> bool
 {
-    Mod ModID = Mod::NONE;
+    xi::Mod ModID = xi::Mod::NONE;
 
     switch (static_cast<xi::SkillType>(skillID))
     {
         case xi::SkillType::Woodworking:
-            ModID = Mod::SYNTH_ANTI_HQ_WOODWORKING;
+            ModID = xi::Mod::SYNTH_ANTI_HQ_WOODWORKING;
             break;
         case xi::SkillType::Smithing:
-            ModID = Mod::SYNTH_ANTI_HQ_SMITHING;
+            ModID = xi::Mod::SYNTH_ANTI_HQ_SMITHING;
             break;
         case xi::SkillType::Goldsmithing:
-            ModID = Mod::SYNTH_ANTI_HQ_GOLDSMITHING;
+            ModID = xi::Mod::SYNTH_ANTI_HQ_GOLDSMITHING;
             break;
         case xi::SkillType::Clothcraft:
-            ModID = Mod::SYNTH_ANTI_HQ_CLOTHCRAFT;
+            ModID = xi::Mod::SYNTH_ANTI_HQ_CLOTHCRAFT;
             break;
         case xi::SkillType::Leathercraft:
-            ModID = Mod::SYNTH_ANTI_HQ_LEATHERCRAFT;
+            ModID = xi::Mod::SYNTH_ANTI_HQ_LEATHERCRAFT;
             break;
         case xi::SkillType::Bonecraft:
-            ModID = Mod::SYNTH_ANTI_HQ_BONECRAFT;
+            ModID = xi::Mod::SYNTH_ANTI_HQ_BONECRAFT;
             break;
         case xi::SkillType::Alchemy:
-            ModID = Mod::SYNTH_ANTI_HQ_ALCHEMY;
+            ModID = xi::Mod::SYNTH_ANTI_HQ_ALCHEMY;
             break;
         case xi::SkillType::Cooking:
-            ModID = Mod::SYNTH_ANTI_HQ_COOKING;
+            ModID = xi::Mod::SYNTH_ANTI_HQ_COOKING;
             break;
         default:
             break;
@@ -556,7 +556,7 @@ auto calculateSynthResult(CCharEntity* PChar) -> uint8
             finalHQTier = currentHQTier;
         }
 
-        successRate = successRate + static_cast<double>(PChar->getMod(Mod::SYNTH_SUCCESS_RATE));
+        successRate = successRate + static_cast<double>(PChar->getMod(xi::Mod::SYNTH_SUCCESS_RATE));
 
         // Crafting ring handling.
         if (!canSynthesizeHQ(PChar, skillID))
@@ -613,7 +613,7 @@ auto calculateSynthResult(CCharEntity* PChar) -> uint8
     }
 
     // See: https://www.bluegartr.com/threads/130586-CraftyMath-v2-Post-September-2017-Update page 3.
-    chanceHQ = (chanceHQ + 100.0 * static_cast<double>(PChar->getMod(Mod::SYNTH_HQ_RATE)) / 512.0) * settings::get<double>("map.CRAFT_HQ_CHANCE_MULTIPLIER");
+    chanceHQ = (chanceHQ + 100.0 * static_cast<double>(PChar->getMod(xi::Mod::SYNTH_HQ_RATE)) / 512.0) * settings::get<double>("map.CRAFT_HQ_CHANCE_MULTIPLIER");
 
     // Limit max hq chance
     chanceHQ = std::min(chanceHQ, 80.0);
@@ -681,7 +681,7 @@ auto calculateDesynthResult(CCharEntity* PChar) -> uint8
             successRate = 40.0;
         }
 
-        successRate = successRate + static_cast<double>(PChar->getMod(Mod::SYNTH_SUCCESS_RATE_DESYNTHESIS));
+        successRate = successRate + static_cast<double>(PChar->getMod(xi::Mod::SYNTH_SUCCESS_RATE_DESYNTHESIS));
 
         // Crafting ring handling.
         if (!canSynthesizeHQ(PChar, skillID))
@@ -713,7 +713,7 @@ auto calculateDesynthResult(CCharEntity* PChar) -> uint8
     }
 
     // See: https://www.bluegartr.com/threads/130586-CraftyMath-v2-Post-September-2017-Update page 3.
-    double chanceHQ = (60.0 + 100.0 * static_cast<double>(PChar->getMod(Mod::SYNTH_HQ_RATE)) / 512.0) * settings::get<double>("map.CRAFT_HQ_CHANCE_MULTIPLIER");
+    double chanceHQ = (60.0 + 100.0 * static_cast<double>(PChar->getMod(xi::Mod::SYNTH_HQ_RATE)) / 512.0) * settings::get<double>("map.CRAFT_HQ_CHANCE_MULTIPLIER");
 
     // Limit max hq chance
     chanceHQ = std::min(chanceHQ, 80.0);
@@ -788,9 +788,9 @@ void handleMaterialLoss(CCharEntity* PChar)
 
     uint8 currentCraft = craftState.failingSkill();
 
-    const int16 breakGlobalReduction    = PChar->getMod(Mod::SYNTH_MATERIAL_LOSS);
-    const int16 breakElementalReduction = PChar->getMod(static_cast<Mod>(static_cast<int32>(Mod::SYNTH_MATERIAL_LOSS_FIRE) + craftState.element()));
-    const int16 breakTypeReduction      = PChar->getMod(static_cast<Mod>(static_cast<int32>(Mod::SYNTH_MATERIAL_LOSS_WOODWORKING) + currentCraft - static_cast<uint8>(xi::SkillType::Woodworking)));
+    const int16 breakGlobalReduction    = PChar->getMod(xi::Mod::SYNTH_MATERIAL_LOSS);
+    const int16 breakElementalReduction = PChar->getMod(static_cast<xi::Mod>(static_cast<int32>(xi::Mod::SYNTH_MATERIAL_LOSS_FIRE) + craftState.element()));
+    const int16 breakTypeReduction      = PChar->getMod(static_cast<xi::Mod>(static_cast<int32>(xi::Mod::SYNTH_MATERIAL_LOSS_WOODWORKING) + currentCraft - static_cast<uint8>(xi::SkillType::Woodworking)));
     int16       synthDifficulty         = getSynthDifficulty(PChar, currentCraft);
 
     synthDifficulty = std::max<int16>(synthDifficulty, 0);
@@ -951,7 +951,7 @@ void doSynthSkillUp(CCharEntity* PChar)
         }
 
         // Apply synthesis skill gain rate modifier before synthesis fail modifier
-        const double modSynthSkillGain = static_cast<double>(PChar->getMod(Mod::SYNTH_SKILL_GAIN)) / 100.0;
+        const double modSynthSkillGain = static_cast<double>(PChar->getMod(xi::Mod::SYNTH_SKILL_GAIN)) / 100.0;
         skillUpChance                  = skillUpChance + modSynthSkillGain;
 
         // Apply setting multiplier.

@@ -90,7 +90,7 @@ CRangeState::CRangeState(CBattleEntity* PEntity, const uint16 targid)
         // Don't apply Rapid Shot to throwing weapons
         if (!isThrowing)
         {
-            auto chance{ m_PEntity->getMod(Mod::RAPID_SHOT) };
+            auto chance{ m_PEntity->getMod(xi::Mod::RAPID_SHOT) };
 
             if (auto* PChar = dynamic_cast<CCharEntity*>(m_PEntity))
             {

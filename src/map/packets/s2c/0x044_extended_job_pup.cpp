@@ -68,11 +68,11 @@ GP_SERV_COMMAND_EXTENDED_JOB::PUP::PUP(CCharEntity* PChar, const bool mjob)
 
     const int32  meritbonus = PChar->PMeritPoints->GetMeritValue(MERIT_AUTOMATON_SKILLS, PChar);
     const uint16 ameCap     = puppetutils::getSkillCap(PChar, xi::SkillType::AutomatonMelee, jobLevel);
-    const uint16 ameBonus   = PChar->getMod(Mod::AUTO_MELEE_SKILL) + meritbonus;
+    const uint16 ameBonus   = PChar->getMod(xi::Mod::AUTO_MELEE_SKILL) + meritbonus;
     const uint16 araCap     = puppetutils::getSkillCap(PChar, xi::SkillType::AutomatonRanged, jobLevel);
-    const uint16 araBonus   = PChar->getMod(Mod::AUTO_RANGED_SKILL) + meritbonus;
+    const uint16 araBonus   = PChar->getMod(xi::Mod::AUTO_RANGED_SKILL) + meritbonus;
     const uint16 amaCap     = puppetutils::getSkillCap(PChar, xi::SkillType::AutomatonMagic, jobLevel);
-    const uint16 amaBonus   = PChar->getMod(Mod::AUTO_MAGIC_SKILL) + meritbonus;
+    const uint16 amaBonus   = PChar->getMod(xi::Mod::AUTO_MAGIC_SKILL) + meritbonus;
 
     packet.MeleeSkill     = std::min(ameCap, PChar->GetSkill(xi::SkillType::AutomatonMelee)) + ameBonus;
     packet.MeleeSkillCap  = ameCap + ameBonus;
@@ -96,19 +96,19 @@ GP_SERV_COMMAND_EXTENDED_JOB::PUP::PUP(CCharEntity* PChar, const bool mjob)
     if (PAutomaton)
     {
         packet.STR      = PAutomaton->stats.STR;
-        packet.BonusSTR = PAutomaton->getMod(Mod::STR);
+        packet.BonusSTR = PAutomaton->getMod(xi::Mod::STR);
         packet.DEX      = PAutomaton->stats.DEX;
-        packet.BonusDEX = PAutomaton->getMod(Mod::DEX);
+        packet.BonusDEX = PAutomaton->getMod(xi::Mod::DEX);
         packet.VIT      = PAutomaton->stats.VIT;
-        packet.BonusVIT = PAutomaton->getMod(Mod::VIT);
+        packet.BonusVIT = PAutomaton->getMod(xi::Mod::VIT);
         packet.AGI      = PAutomaton->stats.AGI;
-        packet.BonusAGI = PAutomaton->getMod(Mod::AGI);
+        packet.BonusAGI = PAutomaton->getMod(xi::Mod::AGI);
         packet.INT      = PAutomaton->stats.INT;
-        packet.BonusINT = PAutomaton->getMod(Mod::INT);
+        packet.BonusINT = PAutomaton->getMod(xi::Mod::INT);
         packet.MND      = PAutomaton->stats.MND;
-        packet.BonusMND = PAutomaton->getMod(Mod::MND);
+        packet.BonusMND = PAutomaton->getMod(xi::Mod::MND);
         packet.CHR      = PAutomaton->stats.CHR;
-        packet.BonusCHR = PAutomaton->getMod(Mod::CHR);
+        packet.BonusCHR = PAutomaton->getMod(xi::Mod::CHR);
     }
     else
     {
@@ -121,5 +121,5 @@ GP_SERV_COMMAND_EXTENDED_JOB::PUP::PUP(CCharEntity* PChar, const bool mjob)
         packet.CHR = PChar->automatonInfo_.automatonStats.CHR;
     }
 
-    packet.BonusElementalCapacity = PChar->getMod(Mod::AUTO_ELEM_CAPACITY);
+    packet.BonusElementalCapacity = PChar->getMod(xi::Mod::AUTO_ELEM_CAPACITY);
 }

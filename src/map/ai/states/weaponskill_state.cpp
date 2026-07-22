@@ -111,13 +111,13 @@ void CWeaponSkillState::SpendCost()
     {
         tp = m_PEntity->health.tp;
 
-        if (m_PEntity->getMod(Mod::WS_NO_DEPLETE) <= xirand::GetRandomNumber(100))
+        if (m_PEntity->getMod(xi::Mod::WS_NO_DEPLETE) <= xirand::GetRandomNumber(100))
         {
             m_PEntity->addTP(-tp);
         }
     }
 
-    if (xirand::GetRandomNumber(100) < m_PEntity->getMod(Mod::CONSERVE_TP))
+    if (xirand::GetRandomNumber(100) < m_PEntity->getMod(xi::Mod::CONSERVE_TP))
     {
         m_PEntity->addTP(xirand::GetRandomNumber(10, 200));
     }
@@ -155,7 +155,7 @@ auto CWeaponSkillState::Update(const timer::time_point tick) -> bool
                 const uint16 WSBonus = m_PEntity->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Restraint)->GetPower();
                 m_PEntity->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Restraint)->SetPower(0);
                 m_PEntity->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Restraint)->SetSubPower(0);
-                m_PEntity->delModifier(Mod::ALL_WSDMG_FIRST_HIT, WSBonus);
+                m_PEntity->delModifier(xi::Mod::ALL_WSDMG_FIRST_HIT, WSBonus);
             }
 
             if (action.actiontype == ActionCategory::SkillFinish) // category changes upon being out of range. This does not count for RoE and delay is not increased beyond the normal delay.

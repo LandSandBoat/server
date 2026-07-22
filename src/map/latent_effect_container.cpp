@@ -96,12 +96,12 @@ bool CLatentEffectContainer::HasAllLatentsActive(uint8 slot)
     return allActive;
 }
 
-void CLatentEffectContainer::AddLatentEffect(xi::Latent conditionID, uint16 conditionValue, Mod modID, int16 modValue)
+void CLatentEffectContainer::AddLatentEffect(xi::Latent conditionID, uint16 conditionValue, xi::Mod modID, int16 modValue)
 {
     m_LatentEffectList.emplace_back(m_POwner, conditionID, conditionValue, MAX_SLOTTYPE, modID, modValue);
 }
 
-auto CLatentEffectContainer::DelLatentEffect(xi::Latent conditionID, uint16 conditionValue, Mod modID, int16 modValue) -> bool
+auto CLatentEffectContainer::DelLatentEffect(xi::Latent conditionID, uint16 conditionValue, xi::Mod modID, int16 modValue) -> bool
 {
     // Find and remove the first instance of the latent matching the parameters
     for (auto iter = m_LatentEffectList.begin(); iter != m_LatentEffectList.end(); ++iter)

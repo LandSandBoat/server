@@ -44,7 +44,7 @@ public:
     auto getID() const -> uint16;
     auto getJob() const -> uint8;
     auto getLevel() const -> uint8;
-    auto getMod() const -> Mod;
+    auto getMod() const -> xi::Mod;
     auto getValue() const -> int16;
     auto getRank() const -> uint8;
     auto getMeritID() const -> uint32;
