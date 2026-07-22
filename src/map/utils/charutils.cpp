@@ -5060,17 +5060,18 @@ void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
                     }
 
                     // Per monster caps pulled from: https://ffxiclopedia.fandom.com/wiki/Experience_Points
+                    const float expCapMultiplier = settings::get<float>("map.EXP_CAP_MULTIPLIER");
                     if (memberlevel <= 50)
                     {
-                        exp = std::fmin(exp, 400.0f);
+                        exp = std::fmin(exp, 400.0f * expCapMultiplier);
                     }
                     else if (memberlevel <= 60)
                     {
-                        exp = std::fmin(exp, 500.0f);
+                        exp = std::fmin(exp, 500.0f * expCapMultiplier);
                     }
                     else
                     {
-                        exp = std::fmin(exp, 600.0f);
+                        exp = std::fmin(exp, 600.0f * expCapMultiplier);
                     }
 
                     if (mobCheck > EMobDifficulty::DecentChallenge)

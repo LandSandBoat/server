@@ -75,6 +75,10 @@ xi.settings.map =
     -- When set to 10, if you are level 65 or below in a party with a level 75, you will receive no EXP.
     EXP_PARTY_GAP_NO_EXP = 0,
 
+    -- Multiplier that adjusts the cap on the amount of experience points a player can earn from a single monster.
+    -- Use .5 for WoTG experience points caps.
+    EXP_CAP_MULTIPLIER = 1.0,
+
     -- Capacity Point Settings
     CAPACITY_RATE = 1.0,
 
