@@ -26,7 +26,7 @@ describe('Death during a pending Warp effect', function()
         assert(player:getZoneID() == xi.zone.WEST_RONFAURE, 'death must not warp the player')
     end)
 
-    it('warps a corpse home but leaves it dead', function()
+    it('death cancels a pending Warp; the corpse stays where it fell', function()
         player:addStatusEffect(xi.effect.TELEPORT, { power = xi.teleport.id.WARP, duration = 60, origin = player })
         assert(player:hasStatusEffect(xi.effect.TELEPORT), 'precondition: Warp effect is active')
 
@@ -36,7 +36,19 @@ describe('Death during a pending Warp effect', function()
 
         settle()
 
-        assert(player:getZoneID() == xi.zone.PORT_SAN_DORIA, 'the Warp should carry the player to their home point')
+        assert(player:getZoneID() == xi.zone.WEST_RONFAURE, 'dying during the animation cancels the port')
+        assert(player:isDead(), 'player should still be dead')
+    end)
+
+    it('a warp resolving on a corpse arrives dead, not revived', function()
+        player:setHP(0)
+        xi.test.world:tickEntity(player)
+        assert(player:isDead(), 'precondition: player is dead')
+
+        player:warp() -- direct warp on a corpse, bypassing the teleport effect guard
+        settle()
+
+        assert(player:getZoneID() == xi.zone.PORT_SAN_DORIA, 'the warp should carry the player home')
         assert(player:isDead(), 'player must arrive dead, not revived')
     end)
 end)
