@@ -14,6 +14,7 @@ zoneObject.onInstanceZoneIn = function(player, instance)
     end
 
     local pos = player:getPos()
+
     if pos.x == 0 and pos.y == 0 and pos.z == 0 then
         local entrypos = instance:getEntryPos()
         player:setPos(entrypos.x, entrypos.y, entrypos.z, entrypos.rot)
@@ -29,11 +30,16 @@ end
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 102 then
         local instance = player:getInstance()
+
+        -- The instance may already be cleaned up by the time the client
+        -- finishes the failure cutscene. Always warp this player out.
         if not instance then
+            player:setPos(0, 0, 0, 0, xi.zone.BHAFLAU_THICKETS)
             return
         end
 
         local chars = instance:getChars()
+
         for _, entity in pairs(chars) do
             entity:setPos(0, 0, 0, 0, xi.zone.BHAFLAU_THICKETS)
         end

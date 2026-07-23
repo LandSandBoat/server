@@ -31,16 +31,8 @@ zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =
     {
         [xi.assault.mission.IMPERIAL_AGENT_RESCUE] =
         {
-            MOBS_START =
-            {
-                17047553, 17047554, 17047556, 17047557, 17047559, 17047560, 17047561, 17047563, 17047564, 17047565, 17047566,
-                GATE_1 = 17047567, GATE_2 = 17047568, GATE_3 = 17047569,
-            },
-
-            GATES      =
-            {
-                17047567, 17047568, 17047569,
-            },
+            MAMOOL_JA_WARDER = GetFirstID('Mamool_Ja_Warder_whm'),
+            DILAPIDATED_GATE = GetFirstID('Dilapidated_Gate'),
         },
 
         [xi.assault.mission.PREEMPTIVE_STRIKE] =
@@ -60,7 +52,7 @@ zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =
         BRUJEEL         = GetFirstID('Brujeel'),
         DOOR_1          = GetFirstID('_ju3'), -- north
         DOOR_2          = GetFirstID('_ju5'), -- southwest
-        DOOR_3          = GetFirstID('_ju7'), -- southest
+        DOOR_3          = GetFirstID('_ju7'), -- southeast
         POT_HATCH       = GetFirstID('_jul'),
     },
 }
