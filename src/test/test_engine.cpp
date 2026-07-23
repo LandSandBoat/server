@@ -254,6 +254,36 @@ auto TestEngine::executeTestCase(const TestCase& testCase, const HookContext& co
     // Notify reporters of test start
     reporters_.onTestStart(suite, testCase);
 
+    auto result = runTestCaseOnce(testCase, context, suite);
+
+    // Re-run failing tests up to retryCount times. A test that fails then passes is flaky.
+    std::vector<TestAttempt> attempts{ { result.status, result.duration, result.errorMessage } };
+
+    size_t retries = 0;
+    while (result.status == TestStatus::Failed && retries < testConfig_.retryCount)
+    {
+        retries++;
+        DebugTestFmt("  Retrying failed test '{}' (attempt {}/{})", testCase.name(), retries, testConfig_.retryCount);
+        result = runTestCaseOnce(testCase, context, suite);
+        attempts.push_back({ result.status, result.duration, result.errorMessage });
+    }
+
+    result.retries = retries;
+    result.flaky   = retries > 0 && result.status == TestStatus::Passed;
+    if (retries > 0)
+    {
+        result.retryAttempts = std::move(attempts);
+    }
+
+    reporters_.onTestEnd(result);
+    return result.status == TestStatus::Passed;
+}
+
+auto TestEngine::runTestCaseOnce(const TestCase& testCase, const HookContext& context, const TestSuite& suite) const -> TestResult
+{
+    TracyZoneScoped;
+    TracyZoneString(fmt::format("{} :: {}", suite.fullName(), testCase.name()));
+
     // Track timing
     auto startTime = std::chrono::steady_clock::now();
 
@@ -317,7 +347,7 @@ auto TestEngine::executeTestCase(const TestCase& testCase, const HookContext& co
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
 
     // Create test result
-    TestResult testResult{
+    return TestResult{
         .suiteName    = suite.fullName(),
         .testName     = testCase.name(),
         .status       = status,
@@ -326,9 +356,6 @@ auto TestEngine::executeTestCase(const TestCase& testCase, const HookContext& co
         .logs         = logs,
         .filePath     = suite.sourceFile()
     };
-
-    reporters_.onTestEnd(testResult);
-    return status == TestStatus::Passed;
 }
 
 auto TestEngine::runBeforeHooks(const HookContext& context, const std::string& testName) const -> Maybe<std::string>

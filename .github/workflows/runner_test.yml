@@ -168,7 +168,7 @@ jobs:
         if: ${{ inputs.xi_test }}
         id: xi_test
         continue-on-error: true
-        run: ./xi_test --keep-going --output tests.ctrf.json
+        run: ./xi_test --keep-going --retry 5 --output tests.ctrf.json
 
       - name: Publish Test Report
         if: ${{ !cancelled() && inputs.xi_test }}

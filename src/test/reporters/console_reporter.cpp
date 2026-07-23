@@ -101,6 +101,12 @@ void ConsoleReporter::onTestEnd(const TestResult& result)
             label = "       OK ";
             color = termcolor::green;
             passedTests_++;
+            if (result.flaky)
+            {
+                flakyTests_++;
+                flakyResults_.push_back(result);
+            }
+
             break;
         case TestStatus::Failed:
             label = "  FAILED  ";
@@ -122,7 +128,16 @@ void ConsoleReporter::onTestEnd(const TestResult& result)
     // Status line
     std::cout << color << "[" << label << "]" << termcolor::reset << " "
               << result.suiteName << "::" << result.testName
-              << " (" << formatDuration(result.duration) << ")\n";
+              << " (" << formatDuration(result.duration) << ")";
+
+    if (result.flaky)
+    {
+        std::cout << termcolor::yellow
+                  << fmt::format(" FLAKY (passed after {} {})", result.retries, result.retries == 1 ? "retry" : "retries")
+                  << termcolor::reset;
+    }
+
+    std::cout << "\n";
 
     // Error message
     if (result.status == TestStatus::Failed && !result.errorMessage.empty())
@@ -164,6 +179,20 @@ void ConsoleReporter::onRunComplete(std::chrono::milliseconds totalDuration)
     if (skippedTests_ > 0)
     {
         std::cout << termcolor::yellow << "[ SKIPPED  ]" << termcolor::reset << " " << pluralize(skippedTests_, "test") << ".\n";
+    }
+
+    // Flaky tests listing
+    if (flakyTests_ > 0)
+    {
+        std::cout << termcolor::yellow << "[  FLAKY   ]" << termcolor::reset << " "
+                  << pluralize(flakyTests_, "test") << ", listed below:\n";
+
+        for (const auto& flake : flakyResults_)
+        {
+            std::cout << termcolor::yellow << "[  FLAKY   ]" << termcolor::reset << " "
+                      << flake.suiteName << "::" << flake.testName
+                      << " (passed after " << flake.retries << (flake.retries == 1 ? " retry" : " retries") << ")\n";
+        }
     }
 
     // Failed tests listing
