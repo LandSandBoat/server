@@ -1,6 +1,8 @@
 -----------------------------------
 -- Zone: Ordelles Caves (193)
 -----------------------------------
+local ID = zones[xi.zone.ORDELLES_CAVES]
+-----------------------------------
 ---@type TZone
 local zoneObject = {}
 
@@ -33,6 +35,27 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
+end
+
+zoneObject.onGameHour = function(zone)
+    local qmRSE = GetNPCByID(ID.npc.QM_RSE)
+    if not qmRSE then
+        return
+    end
+
+    local currentRSELocation = VanadielRSELocation()
+    local rseEventActive     = qmRSE:getLocalVar('rseEventActive')
+
+    if currentRSELocation ~= 0 then
+        qmRSE:setLocalVar('rseEventActive', 0)
+        qmRSE:setStatus(xi.status.DISAPPEAR)
+        return
+    end
+
+    if rseEventActive == 0 then
+        qmRSE:setLocalVar('rseEventActive', 1)
+        qmRSE:setStatus(xi.status.NORMAL)
+    end
 end
 
 return zoneObject
