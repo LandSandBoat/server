@@ -5330,6 +5330,12 @@ void AddTraits(CBattleEntity* PEntity, TraitList_t* traitList, uint8 level)
                 }
             }
 
+            // Allow scripts to filter traits per entity and zone
+            if (add && !luautils::callGlobal<bool>("xi.traits.canApplyTrait", PTrait, PEntity, PEntity->loc.zone))
+            {
+                add = false;
+            }
+
             if (add)
             {
                 PEntity->addTrait(PTrait);
