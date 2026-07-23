@@ -46,6 +46,7 @@
 #include <map/lua/lua_spell.h>
 #include <map/lua/lua_statuseffect.h>
 #include <map/lua/lua_trade_container.h>
+#include <map/lua/lua_trait.h>
 #include <map/lua/lua_treasure_pool.h>
 #include <map/lua/lua_trigger_area.h>
 #include <map/lua/lua_weaponskill.h>
@@ -377,6 +378,7 @@ void init(IPP mapIPP, bool isRunningInCI)
     CLuaSpell::Register();
     CLuaStatusEffect::Register();
     CLuaTradeContainer::Register();
+    CLuaTrait::Register();
     CLuaTreasurePool::Register();
     CLuaZone::Register();
     CLuaItem::Register();

@@ -194,6 +194,10 @@ class CLuaTradeContainer;
 class CTradeContainer;
 SOL_BIND_DEC(CLuaTradeContainer, CTradeContainer);
 
+class CLuaTrait;
+class CTrait;
+SOL_BIND_DEC(CLuaTrait, CTrait);
+
 class CLuaTriggerArea;
 class ITriggerArea;
 SOL_BIND_DEC(CLuaTriggerArea, ITriggerArea);
