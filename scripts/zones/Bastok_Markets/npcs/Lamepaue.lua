@@ -101,9 +101,10 @@ entity.onTrigger = function(player, npc)
         otherQuests = otherQuests - 32768  -- VW Op. #126: Qufim Incursion
     end
 
-    if player:hasCompletedQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.RECORDS_OF_EMINENCE) then
-        otherQuests = otherQuests - 65536  -- Records of Eminence
-    end
+-- *This quest, as of the time this script was written, is not yet defined.
+--     if player:hasCompletedQuest(**Unknown**, RECORDS_OF_EMINENCE) then
+--         otherQuests = otherQuests - 65536  -- Records of Eminence
+--     end
 
 -- *This quest, as of the time this script was written, is not yet defined.
 --     if player:hasCompletedQuest(**Unknown**, TRUST_MUMOR) then
@@ -148,8 +149,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if player:getLocalVar('Lamepaue_PlayCutscene') < 2 then
-        if csid == 24 then    -- Records of Eminence CS returns option 1 when you listen to Isakoth rather than walk away, making Fetichism CS play afterward without this line.
-        elseif option == 1 then        -- Fetichism.
+        if option == 1 then        -- Fetichism.
             player:startEvent(1008)
         elseif option == 2 then        -- To the Forsaken Mines.
             player:startEvent(1010)
@@ -213,8 +213,8 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:startEvent(12)
         elseif option == 79 then        -- VW Op. #126: Qufim Incursion
             player:startEvent(258)
-        elseif option == 80 then        -- Records of Eminence
-            player:startEvent(24, 1)    -- Retail always plays the 'you haven't started the tutorial' variant of the CS on rewatch.
+--        elseif option == 80 then        -- Records of Eminence
+--            player:startEvent(CSID)
 --        elseif option == 81 then        -- Trust (Mumor)
 --            player:startEvent(CSID)
 --        elseif option == 82 then        -- Unity Concord (pt.1)
