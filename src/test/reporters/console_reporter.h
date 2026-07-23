@@ -44,6 +44,8 @@ private:
     size_t                  passedTests_{};
     size_t                  failedTests_{};
     size_t                  skippedTests_{};
+    size_t                  flakyTests_{};
     size_t                  suiteTestCount_{};
     std::vector<TestResult> failedResults_{};
+    std::vector<TestResult> flakyResults_{};
 };

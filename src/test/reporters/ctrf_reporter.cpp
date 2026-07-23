@@ -74,7 +74,22 @@ void CTRFReporter::onRunComplete(std::chrono::milliseconds totalDuration)
     auto       startMs    = std::chrono::duration_cast<std::chrono::milliseconds>(runStartTime_.time_since_epoch()).count();
     auto       stopMs     = std::chrono::duration_cast<std::chrono::milliseconds>(runEndTime.time_since_epoch()).count();
 
-    size_t                passed = 0, failed = 0, skipped = skippedCount_;
+    const auto statusToString = [](const TestStatus status) -> std::string
+    {
+        switch (status)
+        {
+            case TestStatus::Passed:
+                return "passed";
+            case TestStatus::Failed:
+                return "failed";
+            case TestStatus::Skipped:
+                return "skipped";
+        }
+
+        return "other";
+    };
+
+    size_t                passed = 0, failed = 0, skipped = skippedCount_, flaky = 0;
     std::vector<CTRFTest> tests;
 
     for (const auto& result : results_)
@@ -92,15 +107,34 @@ void CTRFReporter::onRunComplete(std::chrono::milliseconds totalDuration)
                 break;
         }
 
+        if (result.flaky)
+        {
+            flaky++;
+        }
+
+        std::vector<CTRFRetryAttempt> retryAttempts;
+        for (size_t i = 0; i < result.retryAttempts.size(); ++i)
+        {
+            const auto& attempt = result.retryAttempts[i];
+            retryAttempts.push_back({
+                .attempt  = i + 1, // 1 = first execution
+                .status   = statusToString(attempt.status),
+                .duration = attempt.duration.count(),
+                .message  = attempt.status == TestStatus::Failed ? attempt.errorMessage : "",
+            });
+        }
+
         CTRFTest test{
-            .name     = result.testName,
-            .status   = result.status == TestStatus::Passed ? "passed" : result.status == TestStatus::Failed ? "failed"
-                                                                                                             : "skipped",
-            .duration = result.duration.count(),
-            .suite    = result.suiteName,
-            .filePath = result.filePath,
-            .output   = result.logs,
-            .trace    = result.status == TestStatus::Failed ? result.errorMessage : ""
+            .name          = result.testName,
+            .status        = statusToString(result.status),
+            .duration      = result.duration.count(),
+            .suite         = result.suiteName,
+            .filePath      = result.filePath,
+            .output        = result.logs,
+            .trace         = result.status == TestStatus::Failed ? result.errorMessage : "",
+            .flaky         = result.flaky,
+            .retries       = result.retries,
+            .retryAttempts = std::move(retryAttempts),
         };
 
         tests.push_back(std::move(test));
@@ -119,6 +153,7 @@ void CTRFReporter::onRunComplete(std::chrono::milliseconds totalDuration)
                 .skipped = skipped,
                 .pending = 0,
                 .other   = 0,
+                .flaky   = flaky,
                 .start   = startMs,
                 .stop    = stopMs,
             },

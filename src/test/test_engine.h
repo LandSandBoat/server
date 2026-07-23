@@ -47,6 +47,7 @@ struct TestConfig
     std::string                   output;
     bool                          keepGoing{ false };
     bool                          watch{ false };
+    size_t                        retryCount{ 0 };
     FilterConfig                  filters;
 };
 
@@ -85,6 +86,7 @@ private:
     auto executeSuite(const TestSuite& suite, HookContext context) -> TestResults;
     void reportSetupTeardownFailure(const TestSuite& suite, const std::string& functionName, const std::string& errorMessage) const;
     auto executeTestCase(const TestCase& testCase, const HookContext& context, const TestSuite& suite) const -> bool;
+    auto runTestCaseOnce(const TestCase& testCase, const HookContext& context, const TestSuite& suite) const -> TestResult;
     auto runBeforeHooks(const HookContext& context, const std::string& testName) const -> Maybe<std::string>;
     void runAfterHooks(const HookContext& context, const std::string& testName) const;
 

@@ -29,6 +29,13 @@ enum class TestStatus : uint8_t;
 class TestSuite;
 class TestCase;
 
+struct TestAttempt
+{
+    TestStatus                status;
+    std::chrono::milliseconds duration;
+    std::string               errorMessage;
+};
+
 struct TestResult
 {
     std::string               suiteName;
@@ -38,6 +45,9 @@ struct TestResult
     std::string               errorMessage;
     std::vector<std::string>  logs;
     std::string               filePath;
+    bool                      flaky{ false };
+    size_t                    retries{ 0 };
+    std::vector<TestAttempt>  retryAttempts;
 };
 
 class TestReporter

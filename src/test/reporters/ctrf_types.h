@@ -43,19 +43,31 @@ struct CTRFSummary
     size_t  skipped;
     size_t  pending;
     size_t  other;
+    size_t  flaky;
     int64_t start;
     int64_t stop;
 };
 
+struct CTRFRetryAttempt
+{
+    size_t      attempt; // 1 = first execution
+    std::string status;
+    int64_t     duration;
+    std::string message;
+};
+
 struct CTRFTest
 {
-    std::string              name;
-    std::string              status;
-    int64_t                  duration;
-    std::string              suite;
-    std::string              filePath;
-    std::vector<std::string> output; // Will be serialized as "stdout" in JSON
-    std::string              trace;
+    std::string                   name;
+    std::string                   status;
+    int64_t                       duration;
+    std::string                   suite;
+    std::string                   filePath;
+    std::vector<std::string>      output; // Will be serialized as "stdout" in JSON
+    std::string                   trace;
+    bool                          flaky;
+    size_t                        retries;
+    std::vector<CTRFRetryAttempt> retryAttempts;
 };
 
 struct CTRFResults
@@ -75,7 +87,9 @@ struct CTRFReport
 // cppcheck-suppress unknownMacro
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(CTRFTool, name, version)
 // cppcheck-suppress unknownMacro
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(CTRFSummary, tests, passed, failed, skipped, pending, other, start, stop)
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(CTRFSummary, tests, passed, failed, skipped, pending, other, flaky, start, stop)
+// cppcheck-suppress unknownMacro
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(CTRFRetryAttempt, attempt, status, duration, message)
 
 // Custom serialization for CTRFTest to map 'output' to 'stdout' in JSON
 inline void to_json(nlohmann::json& j, const CTRFTest& t)
@@ -87,7 +101,10 @@ inline void to_json(nlohmann::json& j, const CTRFTest& t)
         { "suite", t.suite },
         { "filePath", t.filePath },
         { "stdout", t.output }, // Map C++ 'output' field to JSON 'stdout'
-        { "trace", t.trace }
+        { "trace", t.trace },
+        { "flaky", t.flaky },
+        { "retries", t.retries },
+        { "retryAttempts", t.retryAttempts }
     };
 }
 
@@ -103,6 +120,18 @@ inline void from_json(const nlohmann::json& j, CTRFTest& t)
         j.at("stdout").get_to(t.output);
     }
     j.at("trace").get_to(t.trace);
+    if (j.contains("flaky"))
+    {
+        j.at("flaky").get_to(t.flaky);
+    }
+    if (j.contains("retries"))
+    {
+        j.at("retries").get_to(t.retries);
+    }
+    if (j.contains("retryAttempts"))
+    {
+        j.at("retryAttempts").get_to(t.retryAttempts);
+    }
 }
 
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(CTRFResults, tool, summary, tests)

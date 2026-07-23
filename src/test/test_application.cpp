@@ -26,6 +26,8 @@
 
 #include <spdlog/async.h>
 
+#include <algorithm>
+#include <cstdlib>
 #include <string>
 
 namespace
@@ -84,6 +86,10 @@ auto appConfig() -> ApplicationConfig
             ArgumentDefinition{
                 .name        = "--output",
                 .description = "Output file for test results. Use .json extension for CTRF format.",
+            },
+            ArgumentDefinition{
+                .name        = "--retry",
+                .description = "Re-run each failing test up to this many times; a test that then passes is reported as flaky.",
             },
         },
     };
@@ -145,12 +151,19 @@ auto TestApplication::run() -> bool
             // Prepare TestEngine with MapEngine and WorldEngine
             //
 
+            size_t retryCount = 0;
+            if (const auto retryArg = args().present<std::string>("--retry"))
+            {
+                retryCount = static_cast<size_t>(std::max(0, std::atoi(retryArg->c_str())));
+            }
+
             TestConfig testConfig{
                 .loggerSink = sink_,
                 .verbose    = args().get<bool>("--verbose"),
                 .output     = args().present<std::string>("--output").value_or(""),
                 .keepGoing  = args().get<bool>("--keep-going"),
                 .watch      = args().get<bool>("--watch"),
+                .retryCount = retryCount,
                 .filters    = {
                     .includePatterns = args().get<std::vector<std::string>>("--file"),
                     .excludePatterns = args().get<std::vector<std::string>>("--no-file"),
