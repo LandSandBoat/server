@@ -188,6 +188,10 @@ describe('Gardening', function()
                         gotOre = true
                         break
                     end
+
+                    -- A full mog safe blocks the next sowing.
+                    player:delContainerItems(xi.inv.MOGSAFE)
+                    stockSafe(player, xi.item.EARTHEN_FLOWERPOT)
                 end
 
                 assert(gotOre, string.format('expected %s feed to yield %s ore', feedEntry.element, feedEntry.element))

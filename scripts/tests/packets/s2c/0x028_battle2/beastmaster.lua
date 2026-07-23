@@ -7,17 +7,16 @@ local packets =
     {
         test = function(player, mob)
             stub('xi.mobskills.mobPhysicalMove', { damage = 1, hitsLanded = 1, isCritical = false })
-            local pmob = player.entities:moveTo('Clipper')
             player:changeJob(xi.job.BST)
             player:spawnPet(xi.petId.COLDBLOOD_COMO)
             local pet = player:getPet()
             assert(pet)
-            pet:engage(pmob:getTargID())
+            pet:engage(mob:getTargID())
             xi.test.world:tickEntity(pet)
             xi.test.world:skipTime(5)
             player.actions:useAbility(player, xi.jobAbility.TAIL_BLOW)
             xi.test.world:skipTime(5)
-            xi.test.world:tickEntity(pmob)
+            xi.test.world:tickEntity(mob)
             xi.test.world:skipTime(5)
         end,
 
