@@ -496,9 +496,10 @@ void CMobEntity::setMobMod(xi::MobMod type, int16 value)
     m_mobModStat[type] = value;
 }
 
-int16 CMobEntity::getMobMod(xi::MobMod type)
+auto CMobEntity::getMobMod(xi::MobMod type) const -> int16
 {
-    return m_mobModStat[type];
+    const auto it = m_mobModStat.find(type);
+    return it != m_mobModStat.end() ? it->second : 0;
 }
 
 void CMobEntity::addMobMod(xi::MobMod type, int16 value)
