@@ -22,15 +22,23 @@
 #include "state.h"
 #include "entities/base_entity.h"
 
-CState::CState(CBaseEntity* PEntity, uint16 _targid)
+CStateInitException::CStateInitException(std::unique_ptr<CBasicPacket> _msg)
+: std::exception()
+, packet(std::move(_msg))
+{
+}
+
+void CState::TryInterrupt(CBattleEntity* PAttacker)
+{
+}
+
+CState::CState(CBaseEntity* PEntity, const uint16 _targid)
 : m_PEntity(PEntity)
 , m_targid(_targid)
 {
-    // TODO: determine if this should go here;
-    // m_PTarget = m_PEntity->GetEntity(_targid);
 }
 
-void CState::UpdateTarget(uint16 targid)
+void CState::UpdateTarget(const uint16 targid)
 {
     m_PTarget = m_PEntity->GetEntity(targid);
 }
@@ -40,12 +48,12 @@ void CState::UpdateTarget(CBaseEntity* target)
     m_PTarget = target;
 }
 
-CBaseEntity* CState::GetTarget() const
+auto CState::GetTarget() const -> CBaseEntity*
 {
     return m_PTarget;
 }
 
-uint16 CState::GetTargetID() const
+auto CState::GetTargetID() const -> uint16
 {
     return m_targid;
 }
@@ -55,20 +63,9 @@ void CState::Complete()
     m_completed = true;
 }
 
-timer::time_point CState::GetEntryTime() const
+auto CState::GetEntryTime() const -> timer::time_point
 {
     return m_entryTime;
-}
-
-bool CState::WasExitDelayed()
-{
-    return m_wasDelayed;
-}
-
-void CState::DelayExitTime(std::chrono::milliseconds delayMilliseconds)
-{
-    m_entryTime += delayMilliseconds;
-    m_wasDelayed = true;
 }
 
 void CState::ResetEntryTime()
@@ -76,21 +73,21 @@ void CState::ResetEntryTime()
     m_entryTime = timer::now();
 }
 
-void CState::SetTarget(uint16 _targid)
+void CState::SetTarget(const uint16 targid)
 {
-    if (!m_PTarget || _targid != m_targid || (m_PTarget && m_PTarget->targid != _targid))
+    if (!m_PTarget || targid != m_targid || (m_PTarget && m_PTarget->targid != targid))
     {
-        m_targid = _targid;
-        UpdateTarget(_targid);
+        m_targid = targid;
+        UpdateTarget(targid);
     }
 }
 
-bool CState::HasErrorMsg() const
+auto CState::HasErrorMsg() const -> bool
 {
     return m_errorMsg != nullptr;
 }
 
-auto CState::GetErrorMsg() -> std::unique_ptr<CBasicPacket>
+auto CState::GetErrorMsg() const -> std::unique_ptr<CBasicPacket>
 {
     if (HasErrorMsg())
     {
@@ -102,13 +99,13 @@ auto CState::GetErrorMsg() -> std::unique_ptr<CBasicPacket>
     return std::unique_ptr<CBasicPacket>();
 }
 
-bool CState::DoUpdate(timer::time_point tick)
+auto CState::DoUpdate(const timer::time_point tick) -> bool
 {
     UpdateTarget(m_targid);
     return Update(tick);
 }
 
-bool CState::IsCompleted() const
+auto CState::IsCompleted() const -> bool
 {
     return m_completed;
 }

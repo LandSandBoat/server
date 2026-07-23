@@ -156,12 +156,12 @@ CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abili
     }
 }
 
-CAbility* CAbilityState::GetAbility()
+auto CAbilityState::GetAbility() const -> CAbility*
 {
     return m_PAbility.get();
 }
 
-void CAbilityState::ApplyEnmity()
+void CAbilityState::ApplyEnmity() const
 {
     auto* PTarget = GetTarget();
     if (PTarget)
@@ -182,12 +182,12 @@ void CAbilityState::ApplyEnmity()
     }
 }
 
-bool CAbilityState::CanChangeState()
+auto CAbilityState::CanChangeState() -> bool
 {
     return IsCompleted();
 }
 
-bool CAbilityState::Update(timer::time_point tick)
+auto CAbilityState::Update(const timer::time_point tick) -> bool
 {
     // Rotate towards target during ability
     if (m_castTime > 0s && tick < GetEntryTime() + m_castTime)
@@ -242,7 +242,7 @@ bool CAbilityState::Update(timer::time_point tick)
     return false;
 }
 
-bool CAbilityState::CanUseAbility()
+auto CAbilityState::CanUseAbility() const -> bool
 {
     CAbility*    PAbility = GetAbility();
     CBaseEntity* PTarget  = GetTarget();
@@ -336,4 +336,18 @@ bool CAbilityState::CanUseAbility()
         // TODO: should luautils::OnAbilityCheck go here too?
     }
     return true;
+}
+
+auto CAbilityState::CanFollowPath() -> bool
+{
+    return true;
+}
+
+auto CAbilityState::CanInterrupt() -> bool
+{
+    return true;
+}
+
+void CAbilityState::Cleanup(timer::time_point tick)
+{
 }

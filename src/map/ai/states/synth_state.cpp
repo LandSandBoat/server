@@ -26,7 +26,7 @@
 #include "ai/ai_container.h"
 #include "utils/synthutils.h"
 
-CSynthState::CSynthState(CCharEntity* PChar, xi::SkillType skill)
+CSynthState::CSynthState(CCharEntity* PChar, const xi::SkillType skill)
 : CState(PChar, PChar->targid)
 , m_PEntity(PChar)
 {
@@ -61,7 +61,7 @@ CSynthState::CSynthState(CCharEntity* PChar, xi::SkillType skill)
     }
 }
 
-bool CSynthState::Update(timer::time_point tick)
+auto CSynthState::Update(timer::time_point tick) -> bool
 {
     // Exit state if dead
     if (m_PEntity->isDead())
@@ -75,30 +75,32 @@ bool CSynthState::Update(timer::time_point tick)
         synthutils::sendSynthDone(m_PEntity);
         return true;
     }
-    else
-    {
-        m_synthFinishTime -= (m_PEntity->PAI->getTick() - m_PEntity->PAI->getPrevTick());
-    }
+
+    m_synthFinishTime -= (m_PEntity->PAI->getTick() - m_PEntity->PAI->getPrevTick());
     return false;
 }
 
-void CSynthState::Cleanup(timer::time_point tick)
+void CSynthState::Cleanup(const timer::time_point tick)
 {
     std::ignore = tick;
 }
 
-void CSynthState::UpdateTarget(CBaseEntity* target)
+auto CSynthState::SynthReady() const -> bool
 {
-    std::ignore = target;
+    return m_synthFinishTime <= 0ms && m_PEntity->isAlive();
 }
 
-// stub
-void CSynthState::UpdateTarget(uint16 targid)
+auto CSynthState::CanChangeState() -> bool
 {
-    std::ignore = targid;
+    return false;
 }
 
-bool CSynthState::SynthReady()
+auto CSynthState::CanFollowPath() -> bool
 {
-    return m_synthFinishTime < 0ms && m_PEntity->isAlive();
+    return false;
+}
+
+auto CSynthState::CanInterrupt() -> bool
+{
+    return false;
 }

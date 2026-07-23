@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CRANGE_STATE_H
-#define _CRANGE_STATE_H
+#pragma once
 
 #include "state.h"
 
@@ -29,35 +28,18 @@ class CRangeState : public CState
 public:
     CRangeState(CBattleEntity* PEntity, uint16 targid);
 
-    void SpendCost();
-
-    bool IsRapidShot()
-    {
-        return m_rapidShot;
-    }
-
-    bool IsOutOfRange()
-    {
-        return m_isOutOfRange;
-    }
+    void SpendCost() const;
+    auto IsRapidShot() const -> bool;
+    auto IsOutOfRange() const -> bool;
 
 protected:
-    virtual bool CanChangeState() override;
-
-    virtual bool CanFollowPath() override
-    {
-        return false;
-    }
-
-    virtual bool CanInterrupt() override
-    {
-        return true;
-    }
-
-    virtual bool Update(timer::time_point tick) override;
-    virtual void Cleanup(timer::time_point tick) override;
-    bool         CanUseRangedAttack(CBattleEntity* PTarget, bool isEndOfAttack);
-    bool         HasMoved();
+    auto CanChangeState() -> bool override;
+    auto CanFollowPath() -> bool override;
+    auto CanInterrupt() -> bool override;
+    auto Update(timer::time_point tick) -> bool override;
+    void Cleanup(timer::time_point tick) override;
+    auto CanUseRangedAttack(CBattleEntity* PTarget, bool isEndOfAttack) -> bool;
+    auto HasMoved() const -> bool;
 
     // This will likely need to be re-adjusted when states tick more precisely. Changed in 2012. https://wiki.ffo.jp/html/1734.html
 private:
@@ -70,5 +52,3 @@ private:
     position_t           m_startPos;
     bool                 m_isOutOfRange{ false }; // True if target moved out of range during aim time
 };
-
-#endif

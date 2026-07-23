@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CMAGIC_STATE_H
-#define _CMAGIC_STATE_H
+#pragma once
 
 #include "spell.h"
 #include "state.h"
@@ -38,44 +37,25 @@ class CMagicState : public CState
 {
 public:
     CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid, uint8 flags = 0);
-    virtual bool Update(timer::time_point tick) override;
-    virtual void Cleanup(timer::time_point tick) override;
-    virtual bool CanChangeState() override;
 
-    virtual bool CanFollowPath() override
-    {
-        return false;
-    }
-
-    virtual bool CanInterrupt() override
-    {
-        return true;
-    }
-
-    CSpell*      GetSpell();
-    virtual void TryInterrupt(CBattleEntity* PAttacker) override;
-
-    void            SpendCost();
-    timer::duration GetRecast();
-    void            ApplyEnmity(CBattleEntity* PTarget, int ce, int ve);
-    void            ApplyMagicCoverEnmity(CBattleEntity* PCoverAbilityTarget, CBattleEntity* PCoverAbilityUser, CMobEntity* PMob);
-
-    void SetInstantCast(const bool bInstantCast)
-    {
-        m_instantCast = bInstantCast;
-    }
-
-    bool IsInstantCast()
-    {
-        return m_instantCast;
-    }
+    auto Update(timer::time_point tick) -> bool override;
+    void Cleanup(timer::time_point tick) override;
+    auto CanChangeState() -> bool override;
+    auto CanFollowPath() -> bool override;
+    auto CanInterrupt() -> bool override;
+    auto GetSpell() const -> CSpell*;
+    void TryInterrupt(CBattleEntity* PAttacker) override;
+    void SpendCost();
+    auto GetRecast() const -> timer::duration;
+    void ApplyEnmity(CBattleEntity* PTarget, int ce, int ve) const;
+    void ApplyMagicCoverEnmity(CBattleEntity* PCoverAbilityTarget, CBattleEntity* PCoverAbilityUser, CMobEntity* PMob) const;
+    void SetInstantCast(bool bInstantCast);
+    auto IsInstantCast() const -> bool;
 
 protected:
-    bool CanCastSpell(CBattleEntity* PTarget, bool isEndOfCast);
-
-    bool HasCost();
-
-    bool HasMoved();
+    auto CanCastSpell(CBattleEntity* PTarget, bool isEndOfCast) -> bool;
+    auto HasCost() -> bool;
+    auto HasMoved() const -> bool;
 
     CBattleEntity* const    m_PEntity;
     std::unique_ptr<CSpell> m_PSpell;
@@ -85,5 +65,3 @@ protected:
     bool                    m_instantCast{ false };
     uint8                   m_flags{ 0 };
 };
-
-#endif

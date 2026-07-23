@@ -46,7 +46,7 @@ CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid,
 , m_PSpell(nullptr)
 , m_flags(flags)
 {
-    if (auto PMob = dynamic_cast<CMobEntity*>(m_PEntity))
+    if (const auto* PMob = dynamic_cast<CMobEntity*>(m_PEntity))
     {
         if (PMob->getMobMod(xi::MobMod::NoSpellCost) > 0)
         {
@@ -138,11 +138,11 @@ CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid,
     m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
 }
 
-bool CMagicState::Update(timer::time_point tick)
+auto CMagicState::Update(timer::time_point tick) -> bool
 {
-    action_t action;
-    auto*    PTarget = m_PEntity->IsValidTarget(m_targid, m_PSpell->getValidTarget(), m_errorMsg);
-    auto     msg     = MsgBasic::IsInterrupted;
+    action_t   action;
+    auto*      PTarget = m_PEntity->IsValidTarget(m_targid, m_PSpell->getValidTarget(), m_errorMsg);
+    const auto msg     = MsgBasic::IsInterrupted;
 
     auto isTargetValid = [&]()
     {
@@ -329,17 +329,17 @@ void CMagicState::Cleanup(timer::time_point tick)
     }
 }
 
-bool CMagicState::CanChangeState()
+auto CMagicState::CanChangeState() -> bool
 {
     return false;
 }
 
-CSpell* CMagicState::GetSpell()
+auto CMagicState::GetSpell() const -> CSpell*
 {
     return m_PSpell.get();
 }
 
-bool CMagicState::CanCastSpell(CBattleEntity* PTarget, bool isEndOfCast)
+auto CMagicState::CanCastSpell(CBattleEntity* PTarget, bool isEndOfCast) -> bool
 {
     auto ret = m_PEntity->CanUseSpell(GetSpell());
 
@@ -435,7 +435,7 @@ bool CMagicState::CanCastSpell(CBattleEntity* PTarget, bool isEndOfCast)
     return true;
 }
 
-bool CMagicState::HasCost()
+auto CMagicState::HasCost() -> bool
 {
     if (m_PSpell->getSpellGroup() == SPELLGROUP_NINJUTSU)
     {
@@ -492,7 +492,7 @@ void CMagicState::SpendCost()
     }
 }
 
-timer::duration CMagicState::GetRecast()
+auto CMagicState::GetRecast() const -> timer::duration
 {
     if (!m_PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Chainspell) && !m_PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Spontaneity) &&
         !m_instantCast)
@@ -502,7 +502,7 @@ timer::duration CMagicState::GetRecast()
     return 0s;
 }
 
-void CMagicState::ApplyEnmity(CBattleEntity* PTarget, int ce, int ve)
+void CMagicState::ApplyEnmity(CBattleEntity* PTarget, int ce, int ve) const
 {
     bool enmityApplied = false;
 
@@ -618,7 +618,7 @@ void CMagicState::ApplyEnmity(CBattleEntity* PTarget, int ce, int ve)
     }
 }
 
-bool CMagicState::HasMoved()
+auto CMagicState::HasMoved() const -> bool
 {
     // non-players can't get interrupted via movement due to edge case shenanigans seen from SE
     if (m_PEntity->objtype != TYPE_PC)
@@ -639,7 +639,27 @@ void CMagicState::TryInterrupt(CBattleEntity* PAttacker)
     }
 }
 
-void CMagicState::ApplyMagicCoverEnmity(CBattleEntity* PCoverAbilityTarget, CBattleEntity* PCoverAbilityUser, CMobEntity* PMob)
+void CMagicState::ApplyMagicCoverEnmity(CBattleEntity* PCoverAbilityTarget, CBattleEntity* PCoverAbilityUser, CMobEntity* PMob) const
 {
     PMob->PEnmityContainer->UpdateEnmityFromCover(PCoverAbilityTarget, PCoverAbilityUser);
+}
+
+auto CMagicState::CanFollowPath() -> bool
+{
+    return false;
+}
+
+auto CMagicState::CanInterrupt() -> bool
+{
+    return true;
+}
+
+void CMagicState::SetInstantCast(const bool bInstantCast)
+{
+    m_instantCast = bInstantCast;
+}
+
+auto CMagicState::IsInstantCast() const -> bool
+{
+    return m_instantCast;
 }

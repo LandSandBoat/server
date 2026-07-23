@@ -29,7 +29,7 @@
 #include "packets/s2c/0x058_assist.h"
 #include "utils/battleutils.h"
 
-CAttackState::CAttackState(CBattleEntity* PEntity, uint16 targid)
+CAttackState::CAttackState(CBattleEntity* PEntity, const uint16 targid)
 : CState(PEntity, targid)
 , m_PEntity(PEntity)
 {
@@ -56,7 +56,7 @@ CAttackState::CAttackState(CBattleEntity* PEntity, uint16 targid)
     }
 }
 
-bool CAttackState::Update(timer::time_point tick)
+auto CAttackState::Update(timer::time_point tick) -> bool
 {
     auto* PTarget = static_cast<CBattleEntity*>(GetTarget());
     if (!PTarget || PTarget->isDead())
@@ -174,9 +174,9 @@ void CAttackState::UpdateTarget(uint16 targid)
     CState::UpdateTarget(m_PEntity->GetBattleTargetID());
 }
 
-bool CAttackState::CanAttack(CBattleEntity* PTarget)
+auto CAttackState::CanAttack(CBattleEntity* PTarget) -> bool
 {
-    auto ret = m_PEntity->CanAttack(PTarget, m_errorMsg);
+    const auto ret = m_PEntity->CanAttack(PTarget, m_errorMsg);
 
     if (ret && !m_errorMsg)
     {
@@ -185,7 +185,22 @@ bool CAttackState::CanAttack(CBattleEntity* PTarget)
     return ret;
 }
 
-bool CAttackState::AttackReady()
+auto CAttackState::AttackReady() const -> bool
 {
     return m_attackTime <= 0ms && m_PEntity->isAlive();
+}
+
+auto CAttackState::CanChangeState() -> bool
+{
+    return true;
+}
+
+auto CAttackState::CanFollowPath() -> bool
+{
+    return true;
+}
+
+auto CAttackState::CanInterrupt() -> bool
+{
+    return false;
 }

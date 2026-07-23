@@ -31,7 +31,7 @@
 namespace
 {
 
-static const timer::duration TIME_TO_SEND_RERAISE_MENU = 8s;
+static constexpr timer::duration TIME_TO_SEND_RERAISE_MENU = 8s;
 
 }
 
@@ -51,7 +51,7 @@ CDeathState::CDeathState(CBattleEntity* PEntity, timer::duration death_time)
     }
 }
 
-bool CDeathState::Update(timer::time_point tick)
+auto CDeathState::Update(timer::time_point tick) -> bool
 {
     if (m_PEntity->objtype != TYPE_PC)
     {
@@ -61,10 +61,10 @@ bool CDeathState::Update(timer::time_point tick)
         }
         else
         {
-            auto time = GetEntryTime() + m_deathTime - std::chrono::seconds(m_PEntity->getMod(Mod::DESPAWN_TIME_REDUCTION));
+            const auto time = GetEntryTime() + m_deathTime - std::chrono::seconds(m_PEntity->getMod(Mod::DESPAWN_TIME_REDUCTION));
             if (tick > time)
             {
-                auto* PMob = dynamic_cast<CMobEntity*>(m_PEntity);
+                const auto* PMob = dynamic_cast<CMobEntity*>(m_PEntity);
                 // RAISABLE mobs should stay in death state indefinitely until raised
                 if (PMob && ((PMob->m_Behavior & xi::Behavior::Raisable) != xi::Behavior::None))
                 {
@@ -78,9 +78,8 @@ bool CDeathState::Update(timer::time_point tick)
     }
     else
     {
-        CCharEntity* PChar = static_cast<CCharEntity*>(m_PEntity);
-
-        auto time = GetEntryTime() + m_deathTime - std::chrono::seconds(m_PEntity->getMod(Mod::DESPAWN_TIME_REDUCTION));
+        auto*      PChar = static_cast<CCharEntity*>(m_PEntity);
+        const auto time  = GetEntryTime() + m_deathTime - std::chrono::seconds(m_PEntity->getMod(Mod::DESPAWN_TIME_REDUCTION));
 
         // exit state after 2 seconds on raise
         if (m_raiseAccepted && IsCompleted() && tick > m_raiseAcceptedTime + 2s)
@@ -123,4 +122,23 @@ void CDeathState::acceptRaise()
     m_raiseAcceptedTime = timer::now();
     m_raiseAccepted     = true;
     Complete();
+}
+
+void CDeathState::Cleanup(timer::time_point tick)
+{
+}
+
+auto CDeathState::CanChangeState() -> bool
+{
+    return false;
+}
+
+auto CDeathState::CanFollowPath() -> bool
+{
+    return false;
+}
+
+auto CDeathState::CanInterrupt() -> bool
+{
+    return false;
 }

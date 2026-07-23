@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CABILITY_STATE_H
-#define _CABILITY_STATE_H
+#pragma once
 
 #include "ability.h"
 #include "state.h"
@@ -30,35 +29,19 @@ class CAbilityState : public CState
 public:
     CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abilityid);
 
-    CAbility* GetAbility();
-
-    void ApplyEnmity();
+    auto GetAbility() const -> CAbility*;
+    void ApplyEnmity() const;
 
 protected:
-    virtual bool CanChangeState() override;
-
-    virtual bool CanFollowPath() override
-    {
-        return true;
-    }
-
-    virtual bool CanInterrupt() override
-    {
-        return true;
-    }
-
-    virtual bool Update(timer::time_point tick) override;
-
-    virtual void Cleanup(timer::time_point tick) override
-    {
-    }
-
-    bool CanUseAbility();
+    auto CanChangeState() -> bool override;
+    auto CanFollowPath() -> bool override;
+    auto CanInterrupt() -> bool override;
+    auto Update(timer::time_point tick) -> bool override;
+    void Cleanup(timer::time_point tick) override;
+    auto CanUseAbility() const -> bool;
 
 private:
     timer::duration           m_castTime{ 0s };
     CBattleEntity* const      m_PEntity;
     std::unique_ptr<CAbility> m_PAbility;
 };
-
-#endif

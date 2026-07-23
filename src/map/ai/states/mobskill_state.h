@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CMOBSKILL_TATE_H
-#define _CMOBSKILL_TATE_H
+#pragma once
 
 #include "mobskill.h"
 #include "state.h"
@@ -32,32 +31,17 @@ class CMobSkillState : public CState
 public:
     CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsid, Maybe<timer::duration> castTimeOverride);
 
-    CMobSkill* GetSkill();
-
-    int16 GetSpentTP()
-    {
-        return m_spentTP;
-    }
+    auto GetSkill() const -> CMobSkill*;
+    auto GetSpentTP() const -> int16;
 
 protected:
-    virtual bool CanChangeState() override
-    {
-        return false;
-    }
+    auto CanChangeState() -> bool override;
+    auto CanFollowPath() -> bool override;
+    auto CanInterrupt() -> bool override;
 
-    virtual bool CanFollowPath() override
-    {
-        return false;
-    }
-
-    virtual bool CanInterrupt() override
-    {
-        return true;
-    }
-
-    virtual bool Update(timer::time_point tick) override;
-    virtual void Cleanup(timer::time_point tick) override;
-    void         SpendCost();
+    auto Update(timer::time_point tick) -> bool override;
+    void Cleanup(timer::time_point tick) override;
+    void SpendCost();
 
 private:
     CBattleEntity* const       m_PEntity;
@@ -69,5 +53,3 @@ private:
 
     void reduceTpOnInterrupt() const;
 };
-
-#endif

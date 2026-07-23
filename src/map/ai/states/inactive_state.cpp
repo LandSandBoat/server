@@ -36,9 +36,9 @@ CInactiveState::CInactiveState(CBaseEntity* PEntity, timer::duration _duration, 
     }
 }
 
-bool CInactiveState::Update(timer::time_point tick)
+auto CInactiveState::Update(timer::time_point tick) -> bool
 {
-    auto* PBattleEntity{ dynamic_cast<CBattleEntity*>(m_PEntity) };
+    const auto* PBattleEntity{ dynamic_cast<CBattleEntity*>(m_PEntity) };
     if (PBattleEntity && m_duration == 0ms)
     {
         if (PBattleEntity->isDead())
@@ -58,4 +58,24 @@ bool CInactiveState::Update(timer::time_point tick)
 
 void CInactiveState::Cleanup(timer::time_point tick)
 {
+}
+
+auto CInactiveState::GetUntargetable() const -> bool
+{
+    return m_untargetable;
+}
+
+auto CInactiveState::CanChangeState() -> bool
+{
+    return m_canChangeState;
+}
+
+auto CInactiveState::CanFollowPath() -> bool
+{
+    return false;
+}
+
+auto CInactiveState::CanInterrupt() -> bool
+{
+    return false;
 }

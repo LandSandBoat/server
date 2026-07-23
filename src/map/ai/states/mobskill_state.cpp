@@ -36,7 +36,7 @@
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
 
-CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsid, Maybe<timer::duration> castTimeOverride)
+CMobSkillState::CMobSkillState(CBattleEntity* PEntity, const uint16 targid, const uint16 wsid, const Maybe<timer::duration> castTimeOverride)
 : CState(PEntity, targid)
 , m_PEntity(PEntity)
 , m_spentTP(0)
@@ -135,7 +135,7 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsi
     }
 }
 
-CMobSkill* CMobSkillState::GetSkill()
+auto CMobSkillState::GetSkill() const -> CMobSkill*
 {
     return m_PSkill.get();
 }
@@ -170,7 +170,7 @@ void CMobSkillState::SpendCost()
     }
 }
 
-bool CMobSkillState::Update(timer::time_point tick)
+auto CMobSkillState::Update(const timer::time_point tick) -> bool
 {
     // Reset the state for the current skill attempt
     m_skillSuccess = false;
@@ -305,4 +305,24 @@ void CMobSkillState::reduceTpOnInterrupt() const
             }
         }
     }
+}
+
+auto CMobSkillState::GetSpentTP() const -> int16
+{
+    return m_spentTP;
+}
+
+auto CMobSkillState::CanChangeState() -> bool
+{
+    return false;
+}
+
+auto CMobSkillState::CanFollowPath() -> bool
+{
+    return false;
+}
+
+auto CMobSkillState::CanInterrupt() -> bool
+{
+    return true;
 }
