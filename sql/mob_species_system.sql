@@ -110,7 +110,7 @@ INSERT INTO `mob_species_system` VALUES (55,'Knight',24,'Caturae',3,'Arcana',40,
 INSERT INTO `mob_species_system` VALUES (56,'Pawn',24,'Caturae',3,'Arcana',40,100,100,4,3,4,5,4,4,3,1,3,1,3,0.0,1,0);
 INSERT INTO `mob_species_system` VALUES (57,'Queen',24,'Caturae',3,'Arcana',40,100,100,4,3,4,5,4,4,3,1,3,1,3,0.0,1,0);
 INSERT INTO `mob_species_system` VALUES (58,'Rook',24,'Caturae',3,'Arcana',40,100,100,4,3,4,5,4,4,3,1,3,1,3,0.0,1,0);
-INSERT INTO `mob_species_system` VALUES (59,'Cluster',25,'Cluster',3,'Arcana',40,100,100,4,3,3,4,4,4,3,1,3,1,3,1.0,1,0);
+INSERT INTO `mob_species_system` VALUES (59,'Cluster',25,'Cluster',3,'Arcana',40,100,100,4,3,3,4,4,4,3,1,3,1,3,1.0,33,0);
 INSERT INTO `mob_species_system` VALUES (60,'Doll',26,'Doll',3,'Arcana',40,100,100,4,3,3,5,4,4,3,1,3,1,3,2.0,32,0);
 INSERT INTO `mob_species_system` VALUES (61,'Gargoyles',26,'Doll',3,'Arcana',40,100,100,4,3,3,5,4,4,3,1,3,1,3,2.0,32,0);
 INSERT INTO `mob_species_system` VALUES (62,'Evil_Weapon',27,'Evil_Weapon',3,'Arcana',40,100,100,6,3,5,4,1,4,2,1,3,1,3,3.0,34,0);
