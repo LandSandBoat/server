@@ -26,11 +26,6 @@ UPDATE traits SET level = 55 WHERE name = 'max hp boost' AND job = 2 AND rank = 
 UPDATE traits SET level = 70 WHERE name = 'max hp boost' AND job = 2 AND rank = 4;
 
 ------------------------------------
--- White Mage
--- Source: https://forum.square-enix.com/ffxi/threads/46531-Mar-26-2015-%28JST%29-Version-Update
-------------------------------------
-
-------------------------------------
 -- Paladin
 ------------------------------------
 

@@ -1,13 +1,12 @@
 ------------------------------------
--- Seekers of Adoulin Job SQL Adjustments
--- This module reverts relevant SQL tables for jobs to their pre-Abyssea values
-------------------------------------
--- Source : https://forum.square-enix.com/ffxi/threads/35228-July-9-2013-%28JST%29-Version-Update
+-- Seekers of Adoulin Spell SQL Adjustments
+-- This module reverts relevant SQL tables for jobs to their pre-SoA values
 ------------------------------------
 
 ------------------------------------
 -- Elemental Magic Adjustments (RDM / BLM / SCH related)
 -- Reverts MP cost, cast time, and recast time for Tier I-IV elemental nukes, Tier I-III -ga nukes, and Ancient Magic I & II
+-- Source : https://forum.square-enix.com/ffxi/threads/35228-July-9-2013-%28JST%29-Version-Update
 ------------------------------------
 
 -- Earth
@@ -75,3 +74,20 @@ UPDATE spell_list SET mpCost = 193, castTime = 6000,  recastTime = 26000 WHERE n
 UPDATE spell_list SET mpCost = 322, castTime = 7750,  recastTime = 34000 WHERE name = 'thundaga_iii';
 UPDATE spell_list SET mpCost = 352, castTime = 18500, recastTime = 43250 WHERE name = 'burst';
 UPDATE spell_list SET mpCost = 287, recastTime = 90000 WHERE name = 'burst_ii';
+
+------------------------------------
+-- Dark Magic Adjustments
+-- Reverts cast time of absorb spells back to a 2 second cast time
+-- Source : https://forum.square-enix.com/ffxi/threads/43706-Aug-12-2014-%28JST%29-Version-Update
+------------------------------------
+
+UPDATE spell_list SET castTime = 2000 WHERE name = 'absorb-acc';
+UPDATE spell_list SET castTime = 2000 WHERE name = 'absorb-attri';
+UPDATE spell_list SET castTime = 2000 WHERE name = 'absorb-str';
+UPDATE spell_list SET castTime = 2000 WHERE name = 'absorb-dex';
+UPDATE spell_list SET castTime = 2000 WHERE name = 'absorb-vit';
+UPDATE spell_list SET castTime = 2000 WHERE name = 'absorb-agi';
+UPDATE spell_list SET castTime = 2000 WHERE name = 'absorb-int';
+UPDATE spell_list SET castTime = 2000 WHERE name = 'absorb-mnd';
+UPDATE spell_list SET castTime = 2000 WHERE name = 'absorb-chr';
+UPDATE spell_list SET castTime = 2000 WHERE name = 'absorb-tp';
