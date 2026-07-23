@@ -231,24 +231,24 @@ INSERT INTO `mob_species_mods` VALUES (219,54,1000,1); -- GIL_BONUS: 1000
 INSERT INTO `mob_species_mods` VALUES (219,62,20,0);   -- ATTP: 20
 
 -- Dynamisstatue-Goblin
-INSERT INTO `mob_species_mods` VALUES (126,23,2047,1); -- IMMUNITY: 2047
-INSERT INTO `mob_species_mods` VALUES (126,56,-1,1);   -- HP_STANDBACK: -1
-INSERT INTO `mob_species_mods` VALUES (126,73,100,0);  -- STORETP: 100
+INSERT INTO `mob_species_mods` VALUES (478,23,2047,1); -- IMMUNITY: 2047
+INSERT INTO `mob_species_mods` VALUES (478,56,-1,1);   -- HP_STANDBACK: -1
+INSERT INTO `mob_species_mods` VALUES (478,73,100,0);  -- STORETP: 100
 
 -- Dynamisstatue-Orc
-INSERT INTO `mob_species_mods` VALUES (139,23,2047,1); -- IMMUNITY: 2047
-INSERT INTO `mob_species_mods` VALUES (139,56,-1,1);   -- HP_STANDBACK: -1
-INSERT INTO `mob_species_mods` VALUES (139,73,100,0);  -- STORETP: 100
+INSERT INTO `mob_species_mods` VALUES (479,23,2047,1); -- IMMUNITY: 2047
+INSERT INTO `mob_species_mods` VALUES (479,56,-1,1);   -- HP_STANDBACK: -1
+INSERT INTO `mob_species_mods` VALUES (479,73,100,0);  -- STORETP: 100
 
 -- Dynamisstatue-Quadav
-INSERT INTO `mob_species_mods` VALUES (150,23,2047,1); -- IMMUNITY: 2047
-INSERT INTO `mob_species_mods` VALUES (150,56,-1,1);   -- HP_STANDBACK: -1
-INSERT INTO `mob_species_mods` VALUES (150,73,100,0);  -- STORETP: 100
+INSERT INTO `mob_species_mods` VALUES (480,23,2047,1); -- IMMUNITY: 2047
+INSERT INTO `mob_species_mods` VALUES (480,56,-1,1);   -- HP_STANDBACK: -1
+INSERT INTO `mob_species_mods` VALUES (480,73,100,0);  -- STORETP: 100
 
 -- Dynamisstatue-Yagudo
-INSERT INTO `mob_species_mods` VALUES (168,23,2047,1); -- IMMUNITY: 2047
-INSERT INTO `mob_species_mods` VALUES (168,56,-1,1);   -- HP_STANDBACK: -1
-INSERT INTO `mob_species_mods` VALUES (168,73,100,0);  -- STORETP: 100
+INSERT INTO `mob_species_mods` VALUES (481,23,2047,1); -- IMMUNITY: 2047
+INSERT INTO `mob_species_mods` VALUES (481,56,-1,1);   -- HP_STANDBACK: -1
+INSERT INTO `mob_species_mods` VALUES (481,73,100,0);  -- STORETP: 100
 
 -- Lizard-Ice
 INSERT INTO `mob_species_mods` VALUES (308,36,60,1); -- ROAM_COOL: 60
