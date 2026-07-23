@@ -222,10 +222,8 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
 
     -- fSTR
     local fStr = calculatefSTR(caster:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT))
-    if fStr > 22 then
-        if params.ignorefstrcap == nil then -- Smite of Rage / Grand Slam don't have this cap applied
-            fStr = 22
-        end
+    if params.ignorefstrcap == nil then -- Smite of Rage / Grand Slam don't have this cap applied
+        fStr = math.min(fStr, 22)
     end
 
     -- Multiplier, bonus WSC
@@ -233,7 +231,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     local bonusWSC   = 0
 
     -- BLU AF3 bonus (triples the base WSC when it procs)
-    if  math.randomInt(1, 100) <= caster:getMod(xi.mod.AUGMENT_BLU_MAGIC) then
+    if math.randomInt(1, 100) <= caster:getMod(xi.mod.AUGMENT_BLU_MAGIC) then
         bonusWSC = 2
     end
 
@@ -353,6 +351,10 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
 
     if hitslanded == 0 then
         spell:setMsg(xi.msg.basic.MAGIC_FAIL)
+    end
+
+    if anyCrit and hitslanded > 0 then
+        target:triggerListener('CRITICAL_TAKE', target, caster)
     end
 
     spell:setCritical(anyCrit)

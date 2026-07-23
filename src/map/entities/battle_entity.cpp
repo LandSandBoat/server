@@ -3430,6 +3430,16 @@ void CBattleEntity::OnRangedAttack(CRangeState& state, action_t& action)
             .isCritical = wasCritical,
         });
 
+        // Critical hit.
+        if (wasCritical && PTarget->objtype == TYPE_MOB)
+        {
+            // Listener (hook)
+            PTarget->PAI->EventHandler.triggerListener("CRITICAL_TAKE", PTarget, this);
+
+            // Binding
+            luautils::OnCriticalHit(PTarget, this);
+        }
+
         // Absorb message
         if (actionResult.param < 0)
         {
