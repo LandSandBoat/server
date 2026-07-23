@@ -1031,6 +1031,16 @@ void CBattlefield::setPlayerEntered(CCharEntity* PChar, bool entered)
     }
 
     effect->SetTier(entered ? 1 : 0);
+
+    // Persist the battlefield id when the player enters the arena. The Battlefield status
+    // effect is removed during the win/cleanup sequence, so if a player disconnects during
+    // the post-win loot window the effect no longer exists on relog and the normal eject
+    // logic in CZone::CharZoneIn cannot detect them. This charvar survives the relog and is
+    // used there to send them to the exit. It is cleared on any normal (non-disconnect) leave.
+    if (entered)
+    {
+        PChar->setCharVar("battlefieldRecoveryId", effect->GetPower());
+    }
 }
 
 bool CBattlefield::hasPlayerEntered(CCharEntity* PChar)
