@@ -352,6 +352,7 @@ public:
     virtual void Die();
     uint16       GetBattleTargetID() const;
 
+    auto battleTarget() const -> EntityID_t;
     void setBattleTarget(const Maybe<EntityID_t>& target);
     auto GetBattleTarget() const -> CBattleEntity*;
 
@@ -367,10 +368,13 @@ public:
     }
 
     /* Returns whether to call Attack or not (which includes error messages) */
-    virtual bool           CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg);
-    virtual CBattleEntity* IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg);
-    virtual void           OnEngage(CAttackState&);
-    virtual void           OnDisengage(CAttackState&);
+    virtual bool CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg);
+
+    virtual auto IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*;
+    virtual auto IsValidTarget(EntityID_t target, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*;
+
+    virtual void OnEngage(CAttackState&);
+    virtual void OnDisengage(CAttackState&);
     /* Casting */
     virtual void OnCastFinished(CMagicState&, action_t&);
     virtual void OnCastInterrupted(CMagicState&, action_t&, MsgBasic msg, bool blockedCast);

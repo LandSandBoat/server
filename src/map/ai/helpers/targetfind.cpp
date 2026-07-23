@@ -687,10 +687,13 @@ bool CTargetFind::isWithinRange(position_t* pos, float range)
     return distance(m_PBattleEntity->loc.p, *pos) <= range;
 }
 
-CBattleEntity* CTargetFind::getValidTarget(uint16 actionTargetID, uint16 validTargetFlags)
+auto CTargetFind::getValidTarget(const uint16 actionTargetID, const uint16 validTargetFlags) const -> CBattleEntity*
 {
-    CBattleEntity* PTarget = (CBattleEntity*)m_PBattleEntity->GetEntity(actionTargetID, TYPE_MOB | TYPE_PC | TYPE_PET | TYPE_TRUST);
+    return getValidTarget(dynamic_cast<CBattleEntity*>(m_PBattleEntity->GetEntity(actionTargetID, TYPE_MOB | TYPE_PC | TYPE_PET | TYPE_TRUST)), validTargetFlags);
+}
 
+auto CTargetFind::getValidTarget(CBattleEntity* PTarget, const uint16 validTargetFlags) const -> CBattleEntity*
+{
     if (PTarget == nullptr)
     {
         return nullptr;

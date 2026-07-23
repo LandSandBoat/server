@@ -3639,6 +3639,11 @@ void CBattleEntity::OnChangeTarget(CBattleEntity* PTarget)
 {
 }
 
+auto CBattleEntity::battleTarget() const -> EntityID_t
+{
+    return battleTarget_;
+}
+
 void CBattleEntity::setBattleTarget(const Maybe<EntityID_t>& target)
 {
     battleTarget_ = target.value_or(EntityID_t{});
@@ -4008,12 +4013,19 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
     return true;
 }
 
-CBattleEntity* CBattleEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg)
+auto CBattleEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*
 {
     TracyZoneScoped;
 
     auto* PTarget = PAI->TargetFind->getValidTarget(targid, validTargetFlags);
     return PTarget;
+}
+
+auto CBattleEntity::IsValidTarget(EntityID_t target, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*
+{
+    TracyZoneScoped;
+
+    return PAI->TargetFind->getValidTarget(target.resolve<CBattleEntity>(), validTargetFlags);
 }
 
 void CBattleEntity::OnEngage(CAttackState& state)
