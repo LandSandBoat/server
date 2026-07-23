@@ -19,10 +19,17 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local battleTime = mob:getBattleTime()
-    if battleTime - mob:getLocalVar('lastImplodeTime') >= 9 then
+    local currentTime     = GetSystemTime()
+    local lastImplodeTime = mob:getLocalVar('lastImplodeTime')
+
+    if lastImplodeTime == 0 then
+        mob:setLocalVar('lastImplodeTime', currentTime)
+        return
+    end
+
+    if currentTime - lastImplodeTime >= 9 then
         mob:useMobAbility(xi.mobSkill.IMPLOSION)
-        mob:setLocalVar('lastImplodeTime', battleTime)
+        mob:setLocalVar('lastImplodeTime', currentTime)
     end
 end
 

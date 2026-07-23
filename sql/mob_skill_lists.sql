@@ -4359,7 +4359,12 @@ INSERT INTO `mob_skill_lists` VALUES ('FOMOR_HAND_TO_HAND',2100,251); -- aegis_s
 INSERT INTO `mob_skill_lists` VALUES ('FOMOR_HAND_TO_HAND',2100,252); -- dancing_chains
 INSERT INTO `mob_skill_lists` VALUES ('FOMOR_HAND_TO_HAND',2100,253); -- barbed_crescent
 
--- Next ID : 2101
+INSERT INTO `mob_skill_lists` VALUES ('Shadow_Lord',2101,668); -- kick_back
+INSERT INTO `mob_skill_lists` VALUES ('Shadow_Lord',2101,671); -- umbra_smash
+INSERT INTO `mob_skill_lists` VALUES ('Shadow_Lord',2101,672); -- giga_slash
+INSERT INTO `mob_skill_lists` VALUES ('Shadow_Lord',2101,673); -- dark_nova
+
+-- Next ID : 2102
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date

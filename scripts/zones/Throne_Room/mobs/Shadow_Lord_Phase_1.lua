@@ -27,7 +27,7 @@ local function changeStance(mob, stance)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 8)
 
     -- Save data.
-    mob:setLocalVar('changeTime', mob:getBattleTime())
+    mob:setLocalVar('changeTime', GetSystemTime())
     mob:setLocalVar('changeHP', mob:getHP())
 end
 
@@ -67,13 +67,15 @@ entity.onMobSpawn = function(mob)
     mob:delStatusEffectSilent(xi.effect.ARROW_SHIELD)
     mob:delStatusEffectSilent(xi.effect.MAGIC_SHIELD)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
+    mob:setMobMod(xi.mobMod.NO_SPELL_COST, 1)
     mob:setMod(xi.mod.DESPAWN_TIME_REDUCTION, 14)
 end
 
 entity.onMobFight = function(mob, target)
     -- Once he's under 50% HP, start changing immunities and attack patterns
-    local changeTime = mob:getLocalVar('changeTime')
-    local changeHP   = mob:getLocalVar('changeHP')
+    local currentTime = GetSystemTime()
+    local changeTime  = mob:getLocalVar('changeTime')
+    local changeHP    = mob:getLocalVar('changeHP')
 
     switch (mob:getAnimationSub()): caseof
     {
@@ -88,7 +90,7 @@ entity.onMobFight = function(mob, target)
         [1] = function()
             if
                 mob:getHP() <= changeHP - 1000 or
-                mob:getBattleTime() - changeTime > 300
+                currentTime - changeTime > 300
             then
                 changeStance(mob, 2) -- Change to physical stance.
             end
@@ -98,7 +100,7 @@ entity.onMobFight = function(mob, target)
         [2] = function()
             if
                 mob:getHP() <= changeHP - 1000 or
-                mob:getBattleTime() - changeTime > 300
+                currentTime - changeTime > 300
             then
                 mob:useMobAbility(xi.mobSkill.DARK_NOVA)
                 changeStance(mob, 1) -- Change to magical stance.
