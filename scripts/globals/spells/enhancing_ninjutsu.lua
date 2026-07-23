@@ -15,7 +15,7 @@ local column =
     EFFECT_WILL_OVERWRITE = 5,
 }
 -- Table variables.
-local pTable =
+xi.spells.enhancing.ninjutsuPTable = -- PHOENIX OVERRIDE. TODO: Revert if magic tables are exposed on LSB
 {
 -- Structure:            [spellId] = { Tier, Main_Effect, Power, Duration, Always_Overwrite },
     [xi.magic.spell.GEKKA_ICHI   ] = { 1, xi.effect.ENMITY_BOOST,     30, 300, true  },
@@ -30,6 +30,8 @@ local pTable =
     [xi.magic.spell.UTSUSEMI_SAN ] = { 1, xi.effect.COPY_IMAGE,        5,   0, false },
     [xi.magic.spell.YAIN_ICHI    ] = { 1, xi.effect.PAX,              15, 300, true  },
 }
+
+local pTable = xi.spells.enhancing.ninjutsuPTable -- PHOENIX OVERRIDE. TODO: Revert if magic tables are exposed on LSB
 
 -- Ninjutsu Potency function.
 xi.spells.enhancing.calculateNinjutsuPower = function(caster, target, spell, spellId, tier, spellEffect)

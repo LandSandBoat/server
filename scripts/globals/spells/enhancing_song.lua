@@ -25,7 +25,7 @@ local column =
 }
 
 -- Table variables.
-local pTable =
+xi.spells.enhancing.songPTable = -- PHOENIX OVERRIDE. TODO: Revert if magic tables are exposed on LSB
 {
 --                                          1     2                 3                         4                       5                         6                     7     8    9    10   11  12
 -- Structure:                 [spellId] = { Tier, Main Effect,      subEffect,                Main Modifier,          Merit Effect,             Job-Point Effect,     power Sreq Pcap Mult Div SVP },
@@ -116,6 +116,8 @@ local pTable =
     [xi.magic.spell.FOE_SIRVENTE      ] = { 1, xi.effect.SIRVENTE,  xi.mod.AUGMENT_SONG_STAT, 0,                      0,                        0,                   35,   0,  35,   1,  0, true  },
     [xi.magic.spell.ADVENTURERS_DIRGE ] = { 1, xi.effect.DIRGE,     xi.mod.AUGMENT_SONG_STAT, 0,                      0,                        0,                   32,   0,  32,   0,  0, true  },
 }
+
+local pTable = xi.spells.enhancing.songPTable -- PHOENIX OVERRIDE. TODO: Revert if magic tables are exposed on LSB
 
 -- Enhancing Song Potency function. (1/2)
 xi.spells.enhancing.calculateSongPower = function(caster, target, spell, spellId, tier, songEffect, instrumentBoost, soulVoicePower)

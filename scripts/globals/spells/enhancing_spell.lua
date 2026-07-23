@@ -23,7 +23,7 @@ local column =
 }
 
 -- Table variables.
-local pTable =
+xi.spells.enhancing.spellPTable = -- PHOENIX OVERRIDE. TODO: Revert if magic tables are exposed on LSB
 {
 --                                     1     2            3            4           5              6          7                 8
 -- Structure:            [spellId] = { Tier, Main_Effect, Spell_Level, Base_Power, Base_Duration, Composure, Always_Overwrite, Tick_Seconds },
@@ -191,6 +191,8 @@ local pTable =
     [xi.magic.spell.TEMPER       ] = { 1, xi.effect.MULTI_STRIKES, 95,    5,  180, true,  false, 0 },
     [xi.magic.spell.TEMPER_II    ] = { 2, xi.effect.MULTI_STRIKES, 99,    5,  180, true,  false, 0 },
 }
+
+local pTable = xi.spells.enhancing.spellPTable -- PHOENIX OVERRIDE. TODO: Revert if magic tables are exposed on LSB
 
 -- Enhancing Spell Base Potency function.
 xi.spells.enhancing.calculateEnhancingBasePower = function(caster, target, spell, spellId, spellEffect)
