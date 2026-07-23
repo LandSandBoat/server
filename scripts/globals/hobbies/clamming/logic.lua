@@ -93,7 +93,8 @@ xi.clamming.nodeOnEventUpdate = function(player, csid, option, npc)
     -- Check "Incidents"
     local kitSize        = player:getCharVar('[Clam]KitSize')
     local kitWeight      = player:getCharVar('[Clam]KitWeight')
-    local incidentChance = player:getMod(xi.mod.CLAMMING_REDUCED_INCIDENTS) > 0 and 5 or 10
+    -- 37% measured no-gear. Gear value set weak on purpose until a capture is provided.
+    local incidentChance = player:getMod(xi.mod.CLAMMING_REDUCED_INCIDENTS) > 0 and 36 or 37
     if
         kitSize == 200 and
         math.randomInt(1, 100) <= incidentChance
@@ -108,21 +109,19 @@ xi.clamming.nodeOnEventUpdate = function(player, csid, option, npc)
         return
     end
 
-    -- Fetch loot list and select rate column.
-    local lootList   = xi.clamming.lootTable[npc:getName()]
-    local rateColumn = player:getMod(xi.mod.CLAMMING_IMPROVED_RESULTS) > 0 and 1 or 0
-
-    -- Calculate total loot rate.
-    local rateSum    = 0
+    -- Roll a clammed item from the current capacity weighted table.
+    -- TODO: "Improved results" gear effect unverified
+    local lootList = xi.clamming.lootTable[kitSize]
+    local rateSum  = 0
     for i = 1, #lootList do
-        rateSum = rateSum + lootList[i][2 + rateColumn]
+        rateSum = rateSum + lootList[i][2]
     end
 
-    -- Roll based on rate sum and decide clammed item.
-    local itemId     = 0
+    local itemId     = lootList[#lootList][1]
     local randomRoll = math.randomInt(1, rateSum)
     for i = 1, #lootList do
-        if lootList[i][2 + rateColumn] <= randomRoll then
+        randomRoll = randomRoll - lootList[i][2]
+        if randomRoll <= 0 then
             itemId = lootList[i][1]
             break
         end
