@@ -275,6 +275,23 @@ void CLuaSimulation::seed() const
     xirand::seed();
 }
 
+/************************************************************************
+ *  Function: resetWeather()
+ *  Purpose : Clears weather set by a previous test.
+ *  Notes   : Zone weather is global and automated weather is disabled under
+ *            test, so without this a setWeather() call leaks into every
+ *            later test in that zone.
+ ************************************************************************/
+
+void CLuaSimulation::resetWeather() const
+{
+    zoneutils::ForEachZone(
+        [](CZone* PZone)
+        {
+            PZone->SetWeather(xi::Weather::None);
+        });
+}
+
 // Moves all clients session clock and process pending packets
 void CLuaSimulation::processClientUpdates() const
 {

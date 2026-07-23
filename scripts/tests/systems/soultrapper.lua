@@ -64,33 +64,22 @@ describe('Soultrapper', function()
     end)
 
     it('truncates long mob names to match retail encoding', function()
-        -- Thunder_Elemental -> Thunder_Element -> ThunderElement
-        local stormPlayer = xi.test.world:spawnPlayer(
-        {
-            job = xi.job.SMN,
-            level = 75,
-            zone = xi.zone.RUAUN_GARDENS,
-        })
+        -- Goobbue_Parasite -> Goobbue_Parasit -> GoobbueParasit
+        player:gotoZone(xi.zone.THE_SANCTUARY_OF_ZITAH)
+        local mob = player.entities:moveTo('Goobbue_Parasite')
 
-        stormPlayer:setUnkillable(true)
-        stormPlayer:addItem(xi.item.SOULTRAPPER_2000)
-        stormPlayer:addItem(xi.item.BLANK_SOUL_PLATE, 1)
-        stormPlayer:equipItem(xi.item.SOULTRAPPER_2000)
-        stormPlayer:equipItem(xi.item.BLANK_SOUL_PLATE)
-
-        stormPlayer:setWeather(xi.weather.THUNDER)
-        local elemental = stormPlayer.entities:moveTo('Thunder_Elemental')
-        elemental:spawn()
         xi.test.world:skipTime(31)
-        stormPlayer.actions:useItem(elemental, stormPlayer:findItem(xi.item.SOULTRAPPER_2000):getSlotID())
+        player.actions:useItem(mob, player:findItem(xi.item.SOULTRAPPER_2000):getSlotID())
         xi.test.world:skipTime(1)
-        xi.test.world:tickEntity(stormPlayer)
+        xi.test.world:tickEntity(player)
 
-        local plate = stormPlayer:findItem(xi.item.SOUL_PLATE)
+        local plate = player:findItem(xi.item.SOUL_PLATE)
         assert(plate)
 
         local ex = plate:getExData()
-        assert(ex.signature == 'ThunderElement')
+        assert(ex.signature == 'GoobbueParasit',
+            string.format('expected signature GoobbueParasit, got %s (target %s id %d alive %s)',
+                tostring(ex.signature), mob:getName(), mob:getID(), tostring(mob:isAlive())))
     end)
 
     it('can be reused when cooldown reaches 0', function()

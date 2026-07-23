@@ -287,9 +287,10 @@ auto TestEngine::runTestCaseOnce(const TestCase& testCase, const HookContext& co
     // Track timing
     auto startTime = std::chrono::steady_clock::now();
 
-    // Clean simulation state, reset PRNG seed and clear logs before each test
+    // Clean simulation state, reset PRNG seed and weather, and clear logs before each test
     DebugTestFmt("  Cleaning simulation state for test: {}", testCase.name());
     simulation_->seed();
+    simulation_->resetWeather();
     testConfig_.loggerSink->clear();
 
     auto                     status = TestStatus::Passed;
