@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CATTACK_STATE_H
-#define _CATTACK_STATE_H
+#pragma once
 
 #include "state.h"
 
@@ -28,40 +27,20 @@ class CAttackState : public CState
 {
 public:
     CAttackState(CBattleEntity* PEntity, uint16 targid);
-
-    // state logic done per tick - returns whether to exit the state or not
-    virtual bool Update(timer::time_point tick) override;
-
-    virtual void Cleanup(timer::time_point tick) override;
-
-    // whether the state can be changed by normal means
-    virtual bool CanChangeState() override
-    {
-        return true;
-    }
-
-    virtual bool CanFollowPath() override
-    {
-        return true;
-    }
-
-    virtual bool CanInterrupt() override
-    {
-        return false;
-    }
-
+    auto Update(timer::time_point tick) -> bool override;
+    void Cleanup(timer::time_point tick) override;
+    auto CanChangeState() -> bool override;
+    auto CanFollowPath() -> bool override;
+    auto CanInterrupt() -> bool override;
     void ResetAttackTimer();
 
 protected:
-    virtual void UpdateTarget(uint16 = 0) override;
-    virtual void UpdateTarget(CBaseEntity* target) override;
-    bool         CanAttack(CBattleEntity* PTarget);
-
-    bool AttackReady();
+    void UpdateTarget(uint16 = 0) override;
+    void UpdateTarget(CBaseEntity* target) override;
+    auto CanAttack(CBattleEntity* PTarget) -> bool;
+    auto AttackReady() const -> bool;
 
 private:
     CBattleEntity* const m_PEntity;
     timer::duration      m_attackTime{ 2s };
 };
-
-#endif

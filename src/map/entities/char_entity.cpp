@@ -2343,11 +2343,23 @@ auto CCharEntity::OnItemFinish(CItemState& state, action_t& action) -> bool
     return true;
 }
 
-CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg)
+auto CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*
 {
     TracyZoneScoped;
 
-    auto* PTarget = CBattleEntity::IsValidTarget(targid, validTargetFlags, errMsg);
+    return applyTargetRestrictions(GetEntity(targid, TYPE_MOB | TYPE_PC | TYPE_PET | TYPE_TRUST), validTargetFlags, errMsg);
+}
+
+auto CCharEntity::IsValidTarget(EntityID_t target, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*
+{
+    TracyZoneScoped;
+
+    return applyTargetRestrictions(target.resolve(), validTargetFlags, errMsg);
+}
+
+auto CCharEntity::applyTargetRestrictions(CBaseEntity* PResolved, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*
+{
+    auto* PTarget = PAI->TargetFind->getValidTarget(dynamic_cast<CBattleEntity*>(PResolved), validTargetFlags);
     if (PTarget)
     {
         if (PTarget->objtype == TYPE_PC && charutils::IsAidBlocked(this, static_cast<CCharEntity*>(PTarget)))
@@ -2376,7 +2388,7 @@ CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags
     else
     {
         // Check if target is a BEHAVIOR_NO_ASSIST mob with player allegiance
-        auto* PEntity = GetEntity(targid, TYPE_MOB | TYPE_PC | TYPE_PET | TYPE_TRUST);
+        auto* PEntity = PResolved;
         if (PEntity && PEntity->objtype == TYPE_MOB && static_cast<CMobEntity*>(PEntity)->allegiance == xi::Allegiance::Player &&
             ((static_cast<CMobEntity*>(PEntity)->m_Behavior & xi::Behavior::NoAssist) != xi::Behavior::None))
         {
@@ -2394,7 +2406,7 @@ void CCharEntity::Die()
 {
     TracyZoneScoped;
 
-    if (auto* PLastAttacker = GetEntity(lastAttackerId_.targid); PLastAttacker && PLastAttacker->id == lastAttackerId_.id)
+    if (auto* PLastAttacker = lastAttackerId_.resolve())
     {
         loc.zone->PushPacket(this, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PLastAttacker, this, 0, 0, MsgBasic::PlayerDefeatedBy));
     }

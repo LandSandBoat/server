@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CSPAWN_STATE_H
-#define _CSPAWN_STATE_H
+#pragma once
 
 #include "state.h"
 
@@ -28,22 +27,12 @@ class CDespawnState : public CState
 {
 public:
     CDespawnState(CBaseEntity* PEntity, bool instantDespawn);
-    virtual bool Update(timer::time_point tick) override;
-    virtual void Cleanup(timer::time_point tick) override;
-    virtual bool CanChangeState() override;
-
-    virtual bool CanFollowPath() override
-    {
-        return false;
-    }
-
-    virtual bool CanInterrupt() override
-    {
-        return false;
-    }
+    auto Update(timer::time_point tick) -> bool override;
+    void Cleanup(timer::time_point tick) override;
+    auto CanChangeState() -> bool override;
+    auto CanFollowPath() -> bool override;
+    auto CanInterrupt() -> bool override;
 
 private:
     timer::time_point despawnTime_;
 };
-
-#endif

@@ -213,7 +213,7 @@ auto CItemState::Update(const timer::time_point tick) -> bool
         {
             m_PEntity->PAI->EventHandler.triggerListener("ITEM_USE", m_PEntity, m_PItem, &action);
 
-            bool consumed = FinishItem(action);
+            const bool consumed = FinishItem(action);
             if (consumed)
             {
                 m_PItem = nullptr;
@@ -267,7 +267,7 @@ void CItemState::Cleanup(timer::time_point tick)
         m_PItem->setSubType(ITEM_UNLOCKED);
     }
 
-    auto* PItem = m_PEntity->getStorage(m_location)->GetItem(m_slot);
+    const auto* PItem = m_PEntity->getStorage(m_location)->GetItem(m_slot);
 
     if (PItem && PItem == m_PItem)
     {
@@ -293,8 +293,6 @@ void CItemState::TryInterrupt(CBattleEntity* PTarget)
     {
         return;
     }
-
-    // todo: interrupt on being hit
 
     if (PTarget)
     {
@@ -379,4 +377,14 @@ auto CItemState::HasMoved() const -> bool
 {
     return floorf(m_startPos.x * 10 + 0.5f) / 10 != floorf(m_PEntity->loc.p.x * 10 + 0.5f) / 10 ||
            floorf(m_startPos.z * 10 + 0.5f) / 10 != floorf(m_PEntity->loc.p.z * 10 + 0.5f) / 10;
+}
+
+auto CItemState::CanFollowPath() -> bool
+{
+    return false;
+}
+
+auto CItemState::CanInterrupt() -> bool
+{
+    return m_interruptable;
 }

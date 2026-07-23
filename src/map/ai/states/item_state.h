@@ -35,31 +35,21 @@ class CItemState : public CState
 public:
     CItemState(CCharEntity* PEntity, uint16 targid, uint8 loc, uint8 slotid);
     ~CItemState() override;
+
     void UpdateTarget(CBaseEntity* target) override;
     void UpdateTarget(uint16 targid) override;
     auto Update(timer::time_point tick) -> bool override;
     void Cleanup(timer::time_point tick) override;
     auto CanChangeState() -> bool override;
-
-    auto CanFollowPath() -> bool override
-    {
-        return false;
-    }
-
-    auto CanInterrupt() -> bool override
-    {
-        return m_interruptable;
-    }
-
+    auto CanFollowPath() -> bool override;
+    auto CanInterrupt() -> bool override;
     void TryInterrupt(CBattleEntity* PTarget) override;
-
-    CItemUsable* GetItem() const;
-
+    auto GetItem() const -> CItemUsable*;
     void InterruptItem(action_t& action);
     auto FinishItem(action_t& action) -> bool;
 
 protected:
-    bool HasMoved() const;
+    auto HasMoved() const -> bool;
 
     CCharEntity*        m_PEntity;
     CItemUsable*        m_PItem;

@@ -725,19 +725,20 @@ public:
     void SetMoghancement(uint16 moghancementID);
 
     /* State callbacks */
-    bool           CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) override;
-    bool           OnAttack(CAttackState&, action_t&) override;
-    bool           OnAttackError(CAttackState&) override;
-    CBattleEntity* IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) override;
-    void           OnChangeTarget(CBattleEntity* PNewTarget) override;
-    void           OnEngage(CAttackState&) override;
-    void           OnDisengage(CAttackState&) override;
-    void           OnCastFinished(CMagicState&, action_t&) override;
-    void           OnCastInterrupted(CMagicState&, action_t&, MsgBasic msg, bool blockedCast) override;
-    void           OnWeaponSkillFinished(CWeaponSkillState&, action_t&) override;
-    void           OnAbility(CAbilityState&, action_t&) override;
-    void           OnDeathTimer() override;
-    void           OnRaise() override;
+    bool CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) override;
+    bool OnAttack(CAttackState&, action_t&) override;
+    bool OnAttackError(CAttackState&) override;
+    auto IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity* override;
+    auto IsValidTarget(EntityID_t target, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity* override;
+    void OnChangeTarget(CBattleEntity* PNewTarget) override;
+    void OnEngage(CAttackState&) override;
+    void OnDisengage(CAttackState&) override;
+    void OnCastFinished(CMagicState&, action_t&) override;
+    void OnCastInterrupted(CMagicState&, action_t&, MsgBasic msg, bool blockedCast) override;
+    void OnWeaponSkillFinished(CWeaponSkillState&, action_t&) override;
+    void OnAbility(CAbilityState&, action_t&) override;
+    void OnDeathTimer() override;
+    void OnRaise() override;
 
     auto OnItemFinish(CItemState&, action_t&) -> bool;
 
@@ -764,6 +765,8 @@ protected:
     void changeMoghancement(uint16 moghancementID, bool isAdding);
 
 private:
+    auto applyTargetRestrictions(CBaseEntity* PResolved, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*;
+
     CCraftState                               craftState_{};
     std::vector<std::unique_ptr<Transaction>> transactions_;
 

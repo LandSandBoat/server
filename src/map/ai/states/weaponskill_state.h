@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CWEAPONSKILL_STATE_H
-#define _CWEAPONSKILL_STATE_H
+#pragma once
 
 #include "state.h"
 #include "weapon_skill.h"
@@ -30,32 +29,16 @@ class CWeaponSkillState : public CState
 public:
     CWeaponSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsid);
 
-    CWeaponSkill* GetSkill();
-
-    int16 GetSpentTP()
-    {
-        return m_spent;
-    }
+    auto GetSkill() const -> CWeaponSkill*;
+    auto GetSpentTP() const -> int16;
 
 protected:
-    virtual bool CanChangeState() override
-    {
-        return false;
-    }
-
-    virtual bool CanFollowPath() override
-    {
-        return false;
-    }
-
-    virtual bool CanInterrupt() override
-    {
-        return true;
-    }
-
-    virtual bool Update(timer::time_point tick) override;
-    virtual void Cleanup(timer::time_point tick) override;
-    void         SpendCost();
+    auto CanChangeState() -> bool override;
+    auto CanFollowPath() -> bool override;
+    auto CanInterrupt() -> bool override;
+    auto Update(timer::time_point tick) -> bool override;
+    void Cleanup(timer::time_point tick) override;
+    void SpendCost();
 
 private:
     CBattleEntity* const          m_PEntity;
@@ -63,5 +46,3 @@ private:
     timer::time_point             m_finishTime;
     int16                         m_spent{ 0 };
 };
-
-#endif

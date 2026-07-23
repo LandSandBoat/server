@@ -496,9 +496,10 @@ void CMobEntity::setMobMod(xi::MobMod type, int16 value)
     m_mobModStat[type] = value;
 }
 
-int16 CMobEntity::getMobMod(xi::MobMod type)
+auto CMobEntity::getMobMod(xi::MobMod type) const -> int16
 {
-    return m_mobModStat[type];
+    const auto it = m_mobModStat.find(type);
+    return it != m_mobModStat.end() ? it->second : 0;
 }
 
 void CMobEntity::addMobMod(xi::MobMod type, int16 value)
@@ -1285,7 +1286,7 @@ void CMobEntity::Die()
     {
         if (static_cast<CMobEntity*>(PEntity)->isDead())
         {
-            if (auto* PLastAttacker = GetEntity(lastAttackerId_.targid); PLastAttacker && PLastAttacker->id == lastAttackerId_.id)
+            if (auto* PLastAttacker = lastAttackerId_.resolve())
             {
                 loc.zone->PushPacket(this, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PLastAttacker, this, 0, 0, MsgBasic::DefeatsTarget));
             }

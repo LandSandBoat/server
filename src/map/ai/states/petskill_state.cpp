@@ -106,7 +106,7 @@ CPetSkillState::CPetSkillState(CPetEntity* PEntity, uint16 targid, uint16 wsid)
     SpendCost();
 }
 
-CPetSkill* CPetSkillState::GetPetSkill()
+auto CPetSkillState::GetPetSkill() const -> CPetSkill*
 {
     return m_PSkill.get();
 }
@@ -120,7 +120,7 @@ void CPetSkillState::SpendCost()
     }
 }
 
-bool CPetSkillState::Update(timer::time_point tick)
+auto CPetSkillState::Update(const timer::time_point tick) -> bool
 {
     // Reset the state for the current skill attempt
     m_skillSuccess = false;
@@ -216,4 +216,24 @@ void CPetSkillState::Cleanup(timer::time_point tick)
     {
         m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", m_PEntity, m_PSkill->getID(), IsCompleted());
     }
+}
+
+auto CPetSkillState::GetSpentTP() const -> int16
+{
+    return m_spentTP;
+}
+
+auto CPetSkillState::CanChangeState() -> bool
+{
+    return false;
+}
+
+auto CPetSkillState::CanFollowPath() -> bool
+{
+    return false;
+}
+
+auto CPetSkillState::CanInterrupt() -> bool
+{
+    return true;
 }

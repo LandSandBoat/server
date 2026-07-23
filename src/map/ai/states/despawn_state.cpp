@@ -27,24 +27,24 @@
 #include "spawn_handler.h"
 #include "zone.h"
 
-CDespawnState::CDespawnState(CBaseEntity* _PEntity, bool instantDespawn)
-: CState(_PEntity, _PEntity->targid)
+CDespawnState::CDespawnState(CBaseEntity* PEntity, const bool instantDespawn)
+: CState(PEntity, PEntity->targid)
 , despawnTime_(timer::now() + (instantDespawn ? 0s : 3s))
 {
-    if (!instantDespawn && (_PEntity->status != xi::Status::Disappear && !((static_cast<CMobEntity*>(_PEntity)->m_Behavior & xi::Behavior::NoDespawn) != xi::Behavior::None)))
+    if (!instantDespawn && (PEntity->status != xi::Status::Disappear && !((static_cast<CMobEntity*>(PEntity)->m_Behavior & xi::Behavior::NoDespawn) != xi::Behavior::None)))
     {
-        _PEntity->loc.zone->PushPacket(_PEntity, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_SCHEDULOR>(_PEntity, _PEntity, FourCC::FadeOut));
+        PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_SCHEDULOR>(PEntity, PEntity, FourCC::FadeOut));
     }
 
-    if (auto* PMob = dynamic_cast<CMobEntity*>(_PEntity); PMob && PMob->m_AllowRespawn && PMob->loc.zone != nullptr)
+    if (auto* PMob = dynamic_cast<CMobEntity*>(PEntity); PMob && PMob->m_AllowRespawn && PMob->loc.zone != nullptr)
     {
         PMob->loc.zone->spawnHandler().registerForRespawn(PMob);
     }
 }
 
-bool CDespawnState::Update(timer::time_point tick)
+auto CDespawnState::Update(const timer::time_point tick) -> bool
 {
-    if (!IsCompleted() && !((static_cast<CMobEntity*>(m_PEntity)->m_Behavior & xi::Behavior::NoDespawn) != xi::Behavior::None))
+    if (!IsCompleted() && (static_cast<CMobEntity*>(m_PEntity)->m_Behavior & xi::Behavior::NoDespawn) == xi::Behavior::None)
     {
         if (tick >= despawnTime_)
         {
@@ -59,7 +59,17 @@ void CDespawnState::Cleanup(timer::time_point tick)
 {
 }
 
-bool CDespawnState::CanChangeState()
+auto CDespawnState::CanChangeState() -> bool
+{
+    return false;
+}
+
+auto CDespawnState::CanFollowPath() -> bool
+{
+    return false;
+}
+
+auto CDespawnState::CanInterrupt() -> bool
 {
     return false;
 }

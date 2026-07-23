@@ -23,17 +23,17 @@
 
 #include "entities/char_entity.h"
 
-CTriggerState::CTriggerState(CBaseEntity* PEntity, uint16 targid, bool door)
+CTriggerState::CTriggerState(CBaseEntity* PEntity, const uint16 targid, const bool door)
 : CState(PEntity, targid)
 , door(door)
 {
 }
 
-bool CTriggerState::Update(timer::time_point tick)
+auto CTriggerState::Update(const timer::time_point tick) -> bool
 {
     if (!IsCompleted())
     {
-        auto* PChar = dynamic_cast<CCharEntity*>(GetTarget());
+        const auto* PChar = dynamic_cast<CCharEntity*>(GetTarget());
         if (PChar && door && m_PEntity->animation == xi::Animation::CloseDoor)
         {
             close                = true;
@@ -58,12 +58,21 @@ bool CTriggerState::Update(timer::time_point tick)
     return false;
 }
 
-bool CTriggerState::CanChangeState()
+auto CTriggerState::CanChangeState() -> bool
 {
     return false;
 }
 
-bool CTriggerState::CanFollowPath()
+auto CTriggerState::CanFollowPath() -> bool
 {
     return false;
+}
+
+auto CTriggerState::CanInterrupt() -> bool
+{
+    return false;
+}
+
+void CTriggerState::Cleanup(timer::time_point tick)
+{
 }

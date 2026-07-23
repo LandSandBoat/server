@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CDEATH_STATE_H
-#define _CDEATH_STATE_H
+#pragma once
 
 #include "state.h"
 
@@ -29,29 +28,11 @@ class CDeathState : public CState
 public:
     CDeathState(CBattleEntity* PEntity, timer::duration death_time);
 
-    // state logic done per tick - returns whether to exit the state or not
-    virtual bool Update(timer::time_point tick) override;
-
-    virtual void Cleanup(timer::time_point tick) override
-    {
-    }
-
-    // whether the state can be changed by normal means
-    virtual bool CanChangeState() override
-    {
-        return false;
-    }
-
-    virtual bool CanFollowPath() override
-    {
-        return false;
-    }
-
-    virtual bool CanInterrupt() override
-    {
-        return false;
-    }
-
+    auto Update(timer::time_point tick) -> bool override;
+    void Cleanup(timer::time_point tick) override;
+    auto CanChangeState() -> bool override;
+    auto CanFollowPath() -> bool override;
+    auto CanInterrupt() -> bool override;
     void allowSendRaise();
     void acceptRaise();
 
@@ -63,5 +44,3 @@ private:
     timer::time_point    m_raiseTime;
     timer::time_point    m_raiseAcceptedTime;
 };
-
-#endif
