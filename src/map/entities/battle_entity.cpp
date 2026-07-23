@@ -1029,8 +1029,7 @@ auto CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullpt
 
     if (attacker)
     {
-        lastAttackerId_.id     = attacker->id;
-        lastAttackerId_.targid = attacker->targid;
+        lastAttackerId_ = EntityID_t(attacker);
     }
     else
     {

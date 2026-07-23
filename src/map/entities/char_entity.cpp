@@ -2394,7 +2394,7 @@ void CCharEntity::Die()
 {
     TracyZoneScoped;
 
-    if (auto* PLastAttacker = GetEntity(lastAttackerId_.targid); PLastAttacker && PLastAttacker->id == lastAttackerId_.id)
+    if (auto* PLastAttacker = lastAttackerId_.resolve())
     {
         loc.zone->PushPacket(this, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PLastAttacker, this, 0, 0, MsgBasic::PlayerDefeatedBy));
     }
