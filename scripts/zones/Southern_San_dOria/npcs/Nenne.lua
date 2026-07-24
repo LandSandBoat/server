@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Northern San d'Oria
+-- Area: Southern San d'Oria
 --  NPC: Nenne
 -- Starts and Finishes Quest: To Cure a Cough
 -- !pos -114 -6 102 230
