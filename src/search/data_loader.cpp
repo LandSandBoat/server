@@ -25,18 +25,12 @@
 #include "common/logging.h"
 #include "common/mmo.h"
 #include "common/settings.h"
+#include "data/enums/job.h"
 
 #include <algorithm>
 
 #include "data_loader.h"
 #include "search.h"
-
-namespace
-{
-
-uint8 JOB_MON = 23;
-
-} // namespace
 
 CDataLoader::CDataLoader()
 {
@@ -361,7 +355,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
 
             PPlayer->flags2 = PPlayer->flags1;
 
-            if (PPlayer->mjob == JOB_MON || PPlayer->sjob == JOB_MON)
+            if (PPlayer->mjob == static_cast<uint8>(xi::Job::MON) || PPlayer->sjob == static_cast<uint8>(xi::Job::MON))
             {
                 PPlayer->mjob = 0;
                 PPlayer->sjob = 0;

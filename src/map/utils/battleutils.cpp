@@ -123,28 +123,28 @@ void LoadSkillTable()
         const auto SkillID = std::clamp<uint8>(rset->get<uint8>("skillid"), 0, MAX_SKILLTYPE - 1);
 
         // NOTE: Skip over Monstrosity, they re-use other jobs ranks
-        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_WAR] = std::clamp<uint8>(rset->get<uint8>("war"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_MNK] = std::clamp<uint8>(rset->get<uint8>("mnk"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_WHM] = std::clamp<uint8>(rset->get<uint8>("whm"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_BLM] = std::clamp<uint8>(rset->get<uint8>("blm"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_RDM] = std::clamp<uint8>(rset->get<uint8>("rdm"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_THF] = std::clamp<uint8>(rset->get<uint8>("thf"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_PLD] = std::clamp<uint8>(rset->get<uint8>("pld"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_DRK] = std::clamp<uint8>(rset->get<uint8>("drk"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_BST] = std::clamp<uint8>(rset->get<uint8>("bst"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_BRD] = std::clamp<uint8>(rset->get<uint8>("brd"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_RNG] = std::clamp<uint8>(rset->get<uint8>("rng"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_SAM] = std::clamp<uint8>(rset->get<uint8>("sam"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_NIN] = std::clamp<uint8>(rset->get<uint8>("nin"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_DRG] = std::clamp<uint8>(rset->get<uint8>("drg"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_SMN] = std::clamp<uint8>(rset->get<uint8>("smn"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_BLU] = std::clamp<uint8>(rset->get<uint8>("blu"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_COR] = std::clamp<uint8>(rset->get<uint8>("cor"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_PUP] = std::clamp<uint8>(rset->get<uint8>("pup"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_DNC] = std::clamp<uint8>(rset->get<uint8>("dnc"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_SCH] = std::clamp<uint8>(rset->get<uint8>("sch"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_GEO] = std::clamp<uint8>(rset->get<uint8>("geo"), 0, 11);
-        g_SkillRanks[static_cast<uint8>(SkillID)][JOB_RUN] = std::clamp<uint8>(rset->get<uint8>("run"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::WAR)] = std::clamp<uint8>(rset->get<uint8>("war"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::MNK)] = std::clamp<uint8>(rset->get<uint8>("mnk"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::WHM)] = std::clamp<uint8>(rset->get<uint8>("whm"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::BLM)] = std::clamp<uint8>(rset->get<uint8>("blm"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::RDM)] = std::clamp<uint8>(rset->get<uint8>("rdm"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::THF)] = std::clamp<uint8>(rset->get<uint8>("thf"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::PLD)] = std::clamp<uint8>(rset->get<uint8>("pld"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::DRK)] = std::clamp<uint8>(rset->get<uint8>("drk"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::BST)] = std::clamp<uint8>(rset->get<uint8>("bst"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::BRD)] = std::clamp<uint8>(rset->get<uint8>("brd"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::RNG)] = std::clamp<uint8>(rset->get<uint8>("rng"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::SAM)] = std::clamp<uint8>(rset->get<uint8>("sam"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::NIN)] = std::clamp<uint8>(rset->get<uint8>("nin"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::DRG)] = std::clamp<uint8>(rset->get<uint8>("drg"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::SMN)] = std::clamp<uint8>(rset->get<uint8>("smn"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::BLU)] = std::clamp<uint8>(rset->get<uint8>("blu"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::COR)] = std::clamp<uint8>(rset->get<uint8>("cor"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::PUP)] = std::clamp<uint8>(rset->get<uint8>("pup"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::DNC)] = std::clamp<uint8>(rset->get<uint8>("dnc"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::SCH)] = std::clamp<uint8>(rset->get<uint8>("sch"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::GEO)] = std::clamp<uint8>(rset->get<uint8>("geo"), 0, 11);
+        g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(xi::Job::RUN)] = std::clamp<uint8>(rset->get<uint8>("run"), 0, 11);
     }
 }
 
@@ -317,9 +317,9 @@ void FreePetSkillList()
  *                                                                       *
  ************************************************************************/
 
-uint8 GetSkillRank(xi::SkillType SkillID, JOBTYPE JobID)
+auto GetSkillRank(xi::SkillType SkillID, xi::Job JobID) -> uint8
 {
-    return g_SkillRanks[static_cast<uint8>(SkillID)][JobID];
+    return g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(JobID)];
 }
 
 /************************************************************************
@@ -328,7 +328,7 @@ uint8 GetSkillRank(xi::SkillType SkillID, JOBTYPE JobID)
  *                                                                       *
  ************************************************************************/
 
-uint16 GetMaxSkill(xi::SkillType SkillID, JOBTYPE JobID, uint8 level)
+auto GetMaxSkill(xi::SkillType SkillID, xi::Job JobID, uint8 level) -> uint16
 {
     // The skill_caps table is 0-indexed, so our maximum level should one lower
     // than the size of the array.
@@ -346,7 +346,7 @@ uint16 GetMaxSkill(xi::SkillType SkillID, JOBTYPE JobID, uint8 level)
         ShowDebug("battleutils::GetMaxSkill() received level value greater than array size! (Received: %d, Clamped to: %d)", level, maxLevel);
     }
 
-    return g_SkillTable[std::clamp<uint8>(level, 0, maxLevel)][g_SkillRanks[static_cast<uint8>(SkillID)][JobID]];
+    return g_SkillTable[std::clamp<uint8>(level, 0, maxLevel)][g_SkillRanks[static_cast<uint8>(SkillID)][static_cast<uint8>(JobID)]];
 }
 
 uint16 GetMaxSkill(uint8 rank, uint8 level)
@@ -697,7 +697,7 @@ int32 CalculateEnspellDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender,
 
     // 2) Composure bonus: only RDM main, only Tier I/II elemental (Fire..Water)
     if (PChar &&
-        PChar->GetMJob() == JOB_RDM &&
+        PChar->GetMJob() == xi::Job::RDM &&
         PAttacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Composure) &&
         (Tier == 1 || Tier == 2) &&
         (element >= 1 && element <= 6))
@@ -1208,7 +1208,7 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
                 finaldamage > 0 &&
                 isFirstSwing &&
                 PDefender->objtype == TYPE_MOB &&
-                PChar->GetMJob() == JOB_THF &&
+                PChar->GetMJob() == xi::Job::THF &&
                 PChar->hasTrait(TRAITTYPE::TRAIT_TREASURE_HUNTER)) // TH trait as a requirement is assumed, but likely. Could this just be a level 15 check instead?
             {
                 auto PMob = dynamic_cast<CMobEntity*>(PDefender);
@@ -2538,7 +2538,7 @@ uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ig
             critHitRate = 100;
         }
     }
-    else if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_THF && charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_ASSASSIN) &&
+    else if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == xi::Job::THF && charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_ASSASSIN) &&
              (!ignoreSneakTrickAttack) && PAttacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::TrickAttack))
     {
         CBattleEntity* taChar = battleutils::getAvailableTrickAttackChar(PAttacker, PDefender);
@@ -3593,7 +3593,7 @@ bool HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool)
 
         if (ERROR_SLOTID == (SlotID = PChar->getStorage(LOC_INVENTORY)->SearchItem(toolID)))
         {
-            if (PChar->GetMJob() == JOB_NIN)
+            if (PChar->GetMJob() == xi::Job::NIN)
             {
                 switch (toolID)
                 {
@@ -3925,7 +3925,7 @@ uint16 doSoulEaterEffect(CCharEntity* m_PChar, uint32 damage)
         {
             m_PChar->addHP(-HandleStoneskin(m_PChar, (int32)(bonusDamage * stalwartSoulBonus)));
 
-            if (m_PChar->GetMJob() == JOB_DRK)
+            if (m_PChar->GetMJob() == xi::Job::DRK)
             {
                 damage += bonusDamage;
             }
@@ -3960,7 +3960,7 @@ uint8 getStoreTPbonusFromMerit(CBattleEntity* PEntity)
 {
     if (PEntity->objtype == TYPE_PC)
     {
-        if (((CCharEntity*)PEntity)->GetMJob() == JOB_SAM)
+        if (((CCharEntity*)PEntity)->GetMJob() == xi::Job::SAM)
         {
             return ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MERIT_STORE_TP_EFFECT, (CCharEntity*)PEntity);
         }
@@ -4021,7 +4021,7 @@ uint8 getBarrageShotCount(CBattleEntity* PBattleEntity)
     */
 
     // TODO: verify all RNG trusts that use Barrage have RNG main job
-    uint16 lvl       = PBattleEntity->GetMJob() == JOB_RNG ? PBattleEntity->GetMLevel() : PBattleEntity->GetSLevel();
+    uint16 lvl       = PBattleEntity->GetMJob() == xi::Job::RNG ? PBattleEntity->GetMLevel() : PBattleEntity->GetSLevel();
     uint8  shotCount = 0;
 
     if (lvl < 30)
@@ -5033,7 +5033,7 @@ void DoWildCardToEntity(CCharEntity* PCaster, CCharEntity* PTarget, const uint8 
         case 5: // Resets Lv1 1HRs and restores 50% MP
             // Wild Card is excluded.
             // TODO: COR Job Points allow Wild Card to reset itself 1-20% of the time
-            if (PTarget->GetMJob() != JOB_COR)
+            if (PTarget->GetMJob() != xi::Job::COR)
             {
                 PTarget->PRecastContainer->Del(RECAST_ABILITY, Recast::Special);
             }
@@ -5048,7 +5048,7 @@ void DoWildCardToEntity(CCharEntity* PCaster, CCharEntity* PTarget, const uint8 
             PTarget->PRecastContainer->Del(RECAST_ABILITY, Recast::Special2);
             // Wild Card is excluded.
             // TODO: COR Job Points allow Wild Card to reset itself 1-20% of the time
-            if (PTarget->GetMJob() != JOB_COR)
+            if (PTarget->GetMJob() != xi::Job::COR)
             {
                 PTarget->PRecastContainer->Del(RECAST_ABILITY, Recast::Special);
             }
@@ -5777,7 +5777,7 @@ timer::duration CalculateSpellRecastTime(CBattleEntity* PEntity, CSpell* PSpell)
     {
         if (PSpell->getAOE() == SPELLAOE_RADIAL_MANI && PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Manifestation))
         {
-            if (PEntity->GetMJob() == JOB_SCH)
+            if (PEntity->GetMJob() == xi::Job::SCH)
             {
                 recast *= 2;
             }
@@ -5818,7 +5818,7 @@ timer::duration CalculateSpellRecastTime(CBattleEntity* PEntity, CSpell* PSpell)
     {
         if (PSpell->getAOE() == SPELLAOE_RADIAL_ACCE && PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Accession))
         {
-            if (PEntity->GetMJob() == JOB_SCH)
+            if (PEntity->GetMJob() == xi::Job::SCH)
             {
                 recast *= 2;
             }

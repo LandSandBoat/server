@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+    case:       screaming
+  lua:
+    table: xi.job
+
+values:
+  none: 0
+  war:  1
+  mnk:  2
+  whm:  3
+  blm:  4
+  rdm:  5
+  thf:  6
+  pld:  7
+  drk:  8
+  bst:  9
+  brd:  10
+  rng:  11
+  sam:  12
+  nin:  13
+  drg:  14
+  smn:  15
+  blu:  16
+  cor:  17
+  pup:  18
+  dnc:  19
+  sch:  20
+  geo:  21
+  run:  22
+  mon:  23 # NOTE: MON is not a full job

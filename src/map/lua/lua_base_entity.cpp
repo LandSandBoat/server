@@ -5378,7 +5378,7 @@ bool CLuaBaseEntity::canEquipItem(uint16 itemID, const sol::object& chkLevel)
         return false;
     }
 
-    if (!(PItem->getJobs() & (1 << (PChar->GetMJob() - 1))))
+    if (!(PItem->getJobs() & (1 << (static_cast<uint8>(PChar->GetMJob()) - 1))))
     {
         return false;
     }
@@ -6909,12 +6909,12 @@ uint32 CLuaBaseEntity::getTimeCreated()
  *  Notes   :
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getMainJob()
+auto CLuaBaseEntity::getMainJob() -> xi::Job
 {
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
         ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
-        return 0;
+        return xi::Job::NONE;
     }
 
     return static_cast<CBattleEntity*>(m_PBaseEntity)->GetMJob();
@@ -6927,12 +6927,12 @@ uint8 CLuaBaseEntity::getMainJob()
  *  Notes   :
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getSubJob()
+auto CLuaBaseEntity::getSubJob() -> xi::Job
 {
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
         ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
-        return 0;
+        return xi::Job::NONE;
     }
 
     return static_cast<CBattleEntity*>(m_PBaseEntity)->GetSJob();
@@ -6949,7 +6949,7 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
 {
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        JOBTYPE prevjob = PChar->GetMJob();
+        xi::Job prevjob = PChar->GetMJob();
 
         PChar->resetPetZoningInfo();
 
@@ -6959,14 +6959,14 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
         charutils::ApplyAllEquipMods(PChar);
         puppetutils::LoadAutomaton(PChar);
 
-        if (newJob == JOB_BLU)
+        if (newJob == static_cast<uint8>(xi::Job::BLU))
         {
-            if (prevjob != JOB_BLU)
+            if (prevjob != xi::Job::BLU)
             {
                 blueutils::LoadSetSpells(PChar);
             }
         }
-        else if (PChar->GetSJob() != JOB_BLU)
+        else if (PChar->GetSJob() != xi::Job::BLU)
         {
             blueutils::UnequipAllBlueSpells(PChar);
         }
@@ -7018,58 +7018,58 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
         PWeapon->setDelay(240);
         PWeapon->setBaseDelay(240);
 
-        switch (newJob)
+        switch (static_cast<xi::Job>(newJob))
         {
-            case JOB_MNK:
-            case JOB_PUP:
+            case xi::Job::MNK:
+            case xi::Job::PUP:
                 PWeapon->setSkillType(xi::SkillType::HandToHand);
                 PWeapon->setBaseDelay(480);
                 PWeapon->setDelay(480);
                 break;
-            case JOB_THF:
-            case JOB_BRD:
-            case JOB_RNG:
-            case JOB_COR:
+            case xi::Job::THF:
+            case xi::Job::BRD:
+            case xi::Job::RNG:
+            case xi::Job::COR:
                 PWeapon->setSkillType(xi::SkillType::Dagger);
                 break;
-            case JOB_RDM:
-            case JOB_PLD:
-            case JOB_BLU:
+            case xi::Job::RDM:
+            case xi::Job::PLD:
+            case xi::Job::BLU:
                 PWeapon->setSkillType(xi::SkillType::Sword);
                 break;
-            case JOB_RUN:
+            case xi::Job::RUN:
                 PWeapon->setSkillType(xi::SkillType::GreatSword);
                 PWeapon->setDelay(480);
                 PWeapon->setBaseDelay(480);
                 break;
-            case JOB_WAR:
-            case JOB_BST:
+            case xi::Job::WAR:
+            case xi::Job::BST:
                 PWeapon->setSkillType(xi::SkillType::Axe);
                 break;
-            case JOB_DRK:
+            case xi::Job::DRK:
                 PWeapon->setSkillType(xi::SkillType::Scythe);
                 PWeapon->setDelay(480);
                 PWeapon->setBaseDelay(480);
                 break;
-            case JOB_DRG:
+            case xi::Job::DRG:
                 PWeapon->setSkillType(xi::SkillType::Polearm);
                 PWeapon->setDelay(480);
                 PWeapon->setBaseDelay(480);
                 break;
-            case JOB_NIN:
+            case xi::Job::NIN:
                 PWeapon->setSkillType(xi::SkillType::Katana);
                 break;
-            case JOB_SAM:
+            case xi::Job::SAM:
                 PWeapon->setSkillType(xi::SkillType::GreatKatana);
                 PWeapon->setDelay(480);
                 PWeapon->setBaseDelay(480);
                 break;
-            case JOB_WHM:
-            case JOB_BLM:
-            case JOB_GEO:
+            case xi::Job::WHM:
+            case xi::Job::BLM:
+            case xi::Job::GEO:
                 PWeapon->setSkillType(xi::SkillType::Club);
                 break;
-            case JOB_SMN:
+            case xi::Job::SMN:
                 PWeapon->setSkillType(xi::SkillType::Staff);
                 PWeapon->setDelay(480);
                 PWeapon->setBaseDelay(480);
@@ -7110,7 +7110,7 @@ void CLuaBaseEntity::changesJob(uint8 subJob)
     puppetutils::LoadAutomaton(PChar);
     charutils::UpdateSubJob(PChar);
 
-    if (subJob == JOB_BLU)
+    if (subJob == static_cast<uint8>(xi::Job::BLU))
     {
         blueutils::LoadSetSpells(PChar);
     }
@@ -7141,18 +7141,18 @@ void CLuaBaseEntity::unlockJob(uint8 JobID)
 
     if (JobID < MAX_JOBTYPE)
     {
-        PChar->jobs.unlocked |= (1 << JobID);
+        PChar->jobs.unlocked |= (1 << static_cast<uint8>(JobID));
 
-        if (JobID == JOB_NON)
+        if (JobID == static_cast<uint8>(xi::Job::NONE))
         {
-            JobID = JOB_WAR;
+            JobID = static_cast<uint8>(xi::Job::WAR);
         }
-        if (PChar->jobs.job[JobID] == 0)
+        if (PChar->jobs.job[static_cast<uint8>(JobID)] == 0)
         {
-            PChar->jobs.job[JobID] = 1;
+            PChar->jobs.job[static_cast<uint8>(JobID)] = 1;
         }
 
-        charutils::SaveCharJob(PChar, static_cast<JOBTYPE>(JobID));
+        charutils::SaveCharJob(PChar, static_cast<xi::Job>(JobID));
         PChar->pushPacket<GP_SERV_COMMAND_JOB_INFO>(PChar);
     }
 }
@@ -7171,10 +7171,10 @@ bool CLuaBaseEntity::hasJob(uint8 job)
         return false;
     }
 
-    JOBTYPE JobID = static_cast<JOBTYPE>(job);
+    xi::Job JobID = static_cast<xi::Job>(job);
     auto*   PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    return (PChar->jobs.unlocked >> JobID) & 1;
+    return (PChar->jobs.unlocked >> static_cast<uint8>(JobID)) & 1;
 }
 
 /************************************************************************
@@ -7226,7 +7226,7 @@ uint8 CLuaBaseEntity::getJobLevel(uint8 JobID)
     }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    return PChar->jobs.job[JobID];
+    return PChar->jobs.job[static_cast<uint8>(JobID)];
 }
 
 /************************************************************************
@@ -7254,9 +7254,9 @@ void CLuaBaseEntity::setLevel(uint8 level)
     {
         charutils::RemoveAllEquipMods(PChar);
         PChar->SetMLevel(level);
-        PChar->jobs.job[PChar->GetMJob()] = level;
-        PChar->SetSLevel(PChar->jobs.job[PChar->GetSJob()]);
-        PChar->jobs.exp[PChar->GetMJob()] = charutils::GetExpNEXTLevel(PChar->jobs.job[PChar->GetMJob()]) - 1;
+        PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())] = level;
+        PChar->SetSLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetSJob())]);
+        PChar->jobs.exp[static_cast<uint8>(PChar->GetMJob())] = charutils::GetExpNEXTLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())]) - 1;
         charutils::ApplyAllEquipMods(PChar);
 
         charutils::SetStyleLock(PChar, false);
@@ -7314,9 +7314,9 @@ void CLuaBaseEntity::setsLevel(uint8 slevel)
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    PChar->jobs.job[PChar->GetSJob()] = slevel;
-    PChar->SetSLevel(PChar->jobs.job[PChar->GetSJob()]);
-    PChar->jobs.exp[PChar->GetSJob()] = charutils::GetExpNEXTLevel(PChar->jobs.job[PChar->GetSJob()]) - 1;
+    PChar->jobs.job[static_cast<uint8>(PChar->GetSJob())] = slevel;
+    PChar->SetSLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetSJob())]);
+    PChar->jobs.exp[static_cast<uint8>(PChar->GetSJob())] = charutils::GetExpNEXTLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetSJob())]) - 1;
 
     charutils::SetStyleLock(PChar, false);
     jobpointutils::RefreshGiftMods(PChar);
@@ -7411,13 +7411,13 @@ uint8 CLuaBaseEntity::levelRestriction(const sol::object& level)
 
         uint8 NewMLevel = 0;
 
-        if (PChar->m_LevelRestriction != 0 && PChar->m_LevelRestriction < PChar->jobs.job[PChar->GetMJob()])
+        if (PChar->m_LevelRestriction != 0 && PChar->m_LevelRestriction < PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())])
         {
             NewMLevel = PChar->m_LevelRestriction;
         }
         else
         {
-            NewMLevel = PChar->jobs.job[PChar->GetMJob()];
+            NewMLevel = PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())];
         }
 
         if (PChar->GetMLevel() != NewMLevel)
@@ -7429,7 +7429,7 @@ uint8 CLuaBaseEntity::levelRestriction(const sol::object& level)
             }
             charutils::RemoveAllEquipMods(PChar);
             PChar->SetMLevel(NewMLevel);
-            PChar->SetSLevel(PChar->jobs.job[PChar->GetSJob()]);
+            PChar->SetSLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetSJob())]);
 
             charutils::ApplyAllEquipMods(PChar);
             blueutils::ValidateBlueSpells(PChar);
@@ -7549,7 +7549,7 @@ void CLuaBaseEntity::addWyvernJobTraits(uint8 jobID, uint8 level)
     // Under no circumstances should this be called for anything but a dragoon pet wyvern
     if (PPet && PPet->getPetType() == PET_TYPE::WYVERN)
     {
-        battleutils::AddTraits(PPet, traits::GetTraits(jobID), level);
+        battleutils::AddTraits(PPet, traits::GetTraits(static_cast<xi::Job>(jobID)), level);
     }
     else
     {
@@ -9582,12 +9582,12 @@ void CLuaBaseEntity::delJobPoints(uint8 jobID, uint16 amount)
  *  Example : player:getJobPoints(17)
  *  Notes   : Used in NPC Oboro
  ************************************************************************/
-uint16 CLuaBaseEntity::getJobPoints(JOBTYPE jobID)
+auto CLuaBaseEntity::getJobPoints(xi::Job jobID) -> uint16
 {
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
         CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-        return PChar->PJobPoints->GetJobPointsByJob(jobID);
+        return PChar->PJobPoints->GetJobPointsByJob(static_cast<uint8>(jobID));
     }
     return 0;
 }
@@ -9609,7 +9609,7 @@ void CLuaBaseEntity::masterJob()
 
     CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    auto jpCategory = 0x020 * PChar->GetMJob();
+    auto jpCategory = 0x020 * static_cast<uint8>(PChar->GetMJob());
     for (auto i = jpCategory; i < jpCategory + 0xA; i++)
     {
         auto points       = PChar->PJobPoints->GetJobPointType((JOBPOINT_TYPE)i);
@@ -10952,7 +10952,7 @@ void CLuaBaseEntity::setSkillLevel(uint8 SkillID, uint16 SkillAmount)
 uint16 CLuaBaseEntity::getMaxSkillLevel(uint8 level, uint8 jobId, uint8 skillId)
 {
     auto skill = static_cast<xi::SkillType>(skillId);
-    auto job   = static_cast<JOBTYPE>(jobId);
+    auto job   = static_cast<xi::Job>(jobId);
 
     return battleutils::GetMaxSkill(skill, job, level);
 }
@@ -11669,14 +11669,14 @@ bool CLuaBaseEntity::hasPartyJob(uint8 job)
     {
         if (auto* PTarget = dynamic_cast<CCharEntity*>(member))
         {
-            if (PTarget->GetMJob() == job)
+            if (static_cast<uint8>(PTarget->GetMJob()) == job)
             {
                 return true;
             }
 
             for (auto* PTrust : PTarget->PTrusts)
             {
-                if (PTrust->GetMJob() == job)
+                if (static_cast<uint8>(PTrust->GetMJob()) == job)
                 {
                     return true;
                 }

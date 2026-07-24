@@ -186,15 +186,15 @@ uint16 GetBaseSkill(CMobEntity* PMob, uint8 rank)
     switch (rank)
     {
         case 1:
-            return battleutils::GetMaxSkill(xi::SkillType::GreatAxe, JOB_WAR, mlvl); // A+ Skill (1)
+            return battleutils::GetMaxSkill(xi::SkillType::GreatAxe, xi::Job::WAR, mlvl); // A+ Skill (1)
         case 2:
-            return battleutils::GetMaxSkill(xi::SkillType::Staff, JOB_WAR, mlvl); // B Skill (2)
+            return battleutils::GetMaxSkill(xi::SkillType::Staff, xi::Job::WAR, mlvl); // B Skill (2)
         case 3:
-            return battleutils::GetMaxSkill(xi::SkillType::Evasion, JOB_WAR, mlvl); // C Skill (3)
+            return battleutils::GetMaxSkill(xi::SkillType::Evasion, xi::Job::WAR, mlvl); // C Skill (3)
         case 4:
-            return battleutils::GetMaxSkill(xi::SkillType::Archery, JOB_WAR, mlvl); // D Skill (4)
+            return battleutils::GetMaxSkill(xi::SkillType::Archery, xi::Job::WAR, mlvl); // D Skill (4)
         case 5:
-            return battleutils::GetMaxSkill(xi::SkillType::Throwing, JOB_MNK, mlvl); // E Skill (5)
+            return battleutils::GetMaxSkill(xi::SkillType::Throwing, xi::Job::MNK, mlvl); // E Skill (5)
     }
 
     ShowError("mobutils::GetBaseSkill rank (%d) is out of bounds for mob (%u) ", rank, PMob->id);
@@ -671,8 +671,8 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
     }
 
     bool         isNM     = (PMob->m_Type & xi::MobType::Notorious) != xi::MobType::Normal;
-    JOBTYPE      mJob     = PMob->GetMJob();
-    JOBTYPE      sJob     = PMob->GetSJob();
+    xi::Job      mJob     = PMob->GetMJob();
+    xi::Job      sJob     = PMob->GetSJob();
     uint8        mLvl     = PMob->GetMLevel();
     uint8        sLvl     = PMob->GetSLevel();
     xi::ZoneType zoneType = PMob->loc.zone->GetTypeMask();
@@ -739,14 +739,14 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
 
         switch (mJob)
         {
-            case JOB_PLD:
-            case JOB_WHM:
-            case JOB_BLM:
-            case JOB_RDM:
-            case JOB_DRK:
-            case JOB_BLU:
-            case JOB_SCH:
-            case JOB_SMN:
+            case xi::Job::PLD:
+            case xi::Job::WHM:
+            case xi::Job::BLM:
+            case xi::Job::RDM:
+            case xi::Job::DRK:
+            case xi::Job::BLU:
+            case xi::Job::SCH:
+            case xi::Job::SMN:
                 hasMp = true;
                 break;
             default:
@@ -755,14 +755,14 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
 
         switch (sJob)
         {
-            case JOB_PLD:
-            case JOB_WHM:
-            case JOB_BLM:
-            case JOB_RDM:
-            case JOB_DRK:
-            case JOB_BLU:
-            case JOB_SCH:
-            case JOB_SMN:
+            case xi::Job::PLD:
+            case xi::Job::WHM:
+            case xi::Job::BLM:
+            case xi::Job::RDM:
+            case xi::Job::DRK:
+            case xi::Job::BLU:
+            case xi::Job::SCH:
+            case xi::Job::SMN:
                 hasMp = true;
                 break;
             default:
@@ -811,7 +811,7 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
     ((CItemWeapon*)PMob->m_Weapons[SLOT_RANGED])->setDamage(GetBaseWeaponDamage(PMob, SLOT_RANGED));
 
     // reduce weapon delay of MNK
-    if (PMob->GetMJob() == JOB_MNK)
+    if (PMob->GetMJob() == xi::Job::MNK)
     {
         ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->resetDelay();
     }
@@ -945,7 +945,7 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
     }
 
     // Assume base guard for MNK and PUP mobs is the same as parry (Rank C)
-    if ((PMob->GetMJob() == JOB_MNK || PMob->GetMJob() == JOB_PUP) && PMob->getMobMod(xi::MobMod::CannotGuard) == 0)
+    if ((PMob->GetMJob() == xi::Job::MNK || PMob->GetMJob() == xi::Job::PUP) && PMob->getMobMod(xi::MobMod::CannotGuard) == 0)
     {
         PMob->WorkingSkills.skill[static_cast<uint8>(xi::SkillType::Guard)] = GetBaseSkill(PMob, 3);
     }
@@ -1042,11 +1042,11 @@ void SetupRangedAttack(CMobEntity* PMob)
 
 void SetupJob(CMobEntity* PMob)
 {
-    JOBTYPE mJob = PMob->GetMJob();
-    JOBTYPE sJob = PMob->GetSJob();
-    JOBTYPE job{};
+    xi::Job mJob = PMob->GetMJob();
+    xi::Job sJob = PMob->GetSJob();
+    xi::Job job{};
 
-    if (grade::GetJobGrade(mJob, 1) > 0 || mJob == JOB_NIN || mJob == JOB_BRD) // Check if main job is a caster.
+    if (grade::GetJobGrade(mJob, 1) > 0 || mJob == xi::Job::NIN || mJob == xi::Job::BRD) // Check if main job is a caster.
     {
         job = mJob;
     }
@@ -1058,56 +1058,56 @@ void SetupJob(CMobEntity* PMob)
     // This switch falls back to a subjob if a mainjob isn't matched, and is mainly magic stuff
     switch (job)
     {
-        case JOB_BLM:
+        case xi::Job::BLM:
             PMob->defaultMobMod(xi::MobMod::MagicCool, 35);
             PMob->defaultMobMod(xi::MobMod::GaChance, 40);
             PMob->defaultMobMod(xi::MobMod::BuffChance, 15);
             PMob->defaultMobMod(xi::MobMod::SevereSpellChance, 20);
             break;
-        case JOB_PLD:
+        case xi::Job::PLD:
             PMob->defaultMobMod(xi::MobMod::MagicCool, 35);
             PMob->defaultMobMod(xi::MobMod::MagicDelay, 7);
             break;
-        case JOB_DRK:
+        case xi::Job::DRK:
             PMob->defaultMobMod(xi::MobMod::MagicCool, 35);
             PMob->defaultMobMod(xi::MobMod::MagicDelay, 7);
             break;
-        case JOB_WHM:
+        case xi::Job::WHM:
             PMob->defaultMobMod(xi::MobMod::MagicCool, 35);
             PMob->defaultMobMod(xi::MobMod::MagicDelay, 10);
             break;
-        case JOB_BRD:
+        case xi::Job::BRD:
             PMob->defaultMobMod(xi::MobMod::MagicCool, 35);
             PMob->defaultMobMod(xi::MobMod::GaChance, 25);
             PMob->defaultMobMod(xi::MobMod::BuffChance, 60);
             PMob->defaultMobMod(xi::MobMod::MagicDelay, 10);
             break;
-        case JOB_RDM:
+        case xi::Job::RDM:
             PMob->defaultMobMod(xi::MobMod::MagicCool, 35);
             PMob->defaultMobMod(xi::MobMod::GaChance, 15);
             PMob->defaultMobMod(xi::MobMod::BuffChance, 40);
             PMob->defaultMobMod(xi::MobMod::MagicDelay, 10);
             break;
-        case JOB_SMN:
+        case xi::Job::SMN:
             PMob->defaultMobMod(xi::MobMod::MagicCool, 70);
             PMob->defaultMobMod(xi::MobMod::BuffChance, 100); // SMN only has "buffs"
             break;
-        case JOB_NIN:
+        case xi::Job::NIN:
             PMob->defaultMobMod(xi::MobMod::SpecialCool, 9);
             PMob->defaultMobMod(xi::MobMod::MagicCool, 35);
             PMob->defaultMobMod(xi::MobMod::BuffChance, 20);
             PMob->defaultMobMod(xi::MobMod::MagicDelay, 7);
             break;
-        case JOB_BLU:
+        case xi::Job::BLU:
             PMob->defaultMobMod(xi::MobMod::MagicCool, 35);
             break;
-        case JOB_SCH:
+        case xi::Job::SCH:
             PMob->defaultMobMod(xi::MobMod::MagicCool, 35);
             break;
-        case JOB_GEO:
+        case xi::Job::GEO:
             PMob->defaultMobMod(xi::MobMod::MagicCool, 35);
             break;
-        case JOB_RUN:
+        case xi::Job::RUN:
             PMob->defaultMobMod(xi::MobMod::MagicCool, 35);
             break;
         default:
@@ -1117,7 +1117,7 @@ void SetupJob(CMobEntity* PMob)
     // This switch is mainjob only and contains mainly non magic related stuff
     switch (mJob)
     {
-        case JOB_THF:
+        case xi::Job::THF:
             // thfs drop more gil
             if (PMob->m_EcoSystem == xi::Ecosystem::Beastmen)
             {
@@ -1125,7 +1125,7 @@ void SetupJob(CMobEntity* PMob)
                 PMob->defaultMobMod(xi::MobMod::GilBonus, 150);
             }
             break;
-        case JOB_RNG:
+        case xi::Job::RNG:
             if (PMob->m_Family == 57) // Gigas
             {
                 PMob->defaultMobMod(xi::MobMod::SpecialSkill, 658); // Catapult only used while at range
@@ -1164,7 +1164,7 @@ void SetupJob(CMobEntity* PMob)
             PMob->defaultMobMod(xi::MobMod::SpecialCool, 12);
             PMob->defaultMobMod(xi::MobMod::HpStandback, 70);
             break;
-        case JOB_NIN:
+        case xi::Job::NIN:
             if (PMob->m_Family == 131) // Aern
             {
                 PMob->defaultMobMod(xi::MobMod::SpecialSkill, 1388);
@@ -1191,15 +1191,15 @@ void SetupJob(CMobEntity* PMob)
 
             PMob->defaultMobMod(xi::MobMod::HpStandback, 70);
             break;
-        case JOB_BST:
+        case xi::Job::BST:
             PMob->defaultMobMod(xi::MobMod::SpecialCool, 70);
             PMob->defaultMobMod(xi::MobMod::SpecialSkill, 1017);
             break;
-        case JOB_PUP:
+        case xi::Job::PUP:
             PMob->defaultMobMod(xi::MobMod::SpecialSkill, 1901);
             PMob->defaultMobMod(xi::MobMod::SpecialCool, 720);
             break;
-        case JOB_BLM:
+        case xi::Job::BLM:
             // We don't want to do the mages stand-back part from subjob, so we have it here
             PMob->defaultMobMod(xi::MobMod::StandbackCool, 12);
             PMob->defaultMobMod(xi::MobMod::HpStandback, 70);
@@ -1279,14 +1279,14 @@ void SetupPetSkills(CMobEntity* PMob)
     }
 }
 
-uint8 JobSkillRankToBaseEvaRank(JOBTYPE mjob, JOBTYPE sjob)
+auto JobSkillRankToBaseEvaRank(xi::Job mjob, xi::Job sjob) -> uint8
 {
     // Pick the best rank between the two jobs
     // Lower is better
     uint8 mainEvasionSkillRank = battleutils::GetSkillRank(xi::SkillType::Evasion, mjob);
     uint8 subEvasionSkillRank  = battleutils::GetSkillRank(xi::SkillType::Evasion, sjob);
 
-    if (sjob == JOB_NON)
+    if (sjob == xi::Job::NONE)
     {
         subEvasionSkillRank = mainEvasionSkillRank;
     }

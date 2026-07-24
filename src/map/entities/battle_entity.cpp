@@ -71,8 +71,8 @@ CBattleEntity::CBattleEntity()
     m_mlvl = 0;
     m_slvl = 0;
 
-    m_mjob = JOB_WAR;
-    m_sjob = JOB_WAR;
+    m_mjob = xi::Job::WAR;
+    m_sjob = xi::Job::WAR;
 
     m_magicEvasion = 0;
 
@@ -1663,7 +1663,7 @@ uint16 CBattleEntity::EVA()
     return std::max(1, evasion + (this->objtype == TYPE_MOB || (this->objtype == TYPE_PET && !isAutomaton) ? 0 : getMod(xi::Mod::EVA))); // The mod for a pet or mob is already calclated in the above so return 0
 }
 
-JOBTYPE CBattleEntity::GetMJob() const
+auto CBattleEntity::GetMJob() const -> xi::Job
 {
     return m_mjob;
 }
@@ -1673,11 +1673,11 @@ uint8 CBattleEntity::GetMLevel() const
     return m_mlvl;
 }
 
-JOBTYPE CBattleEntity::GetSJob(bool ignoreRestriction) const
+auto CBattleEntity::GetSJob(bool ignoreRestriction) const -> xi::Job
 {
     if (!ignoreRestriction && StatusEffectContainer->HasStatusEffect({ xi::StatusEffect::Obliviscence, xi::StatusEffect::SjRestriction }))
     {
-        return JOB_NON;
+        return xi::Job::NONE;
     }
 
     return m_sjob;
@@ -1701,7 +1701,7 @@ void CBattleEntity::SetMJob(uint8 mjob)
         return;
     }
 
-    m_mjob = (JOBTYPE)mjob;
+    m_mjob = static_cast<xi::Job>(mjob);
 }
 
 void CBattleEntity::SetSJob(uint8 sjob)
@@ -1712,7 +1712,7 @@ void CBattleEntity::SetSJob(uint8 sjob)
         return;
     }
 
-    m_sjob = (JOBTYPE)sjob;
+    m_sjob = static_cast<xi::Job>(sjob);
 }
 
 void CBattleEntity::SetMLevel(uint8 mlvl)
@@ -3795,7 +3795,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                         // Needs verification, as there appears to be conflicting information regarding an attack bonus based on DEX
                         // vs a base damage increase.
                         float attBonus = 1.0f;
-                        if (PTarget->objtype == TYPE_PC && PTarget->GetMJob() == JOB_MNK && PTarget->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Counterstance))
+                        if (PTarget->objtype == TYPE_PC && PTarget->GetMJob() == xi::Job::MNK && PTarget->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Counterstance))
                         {
                             auto* PChar        = static_cast<CCharEntity*>(PTarget);
                             float csJpModifier = static_cast<float>(PChar->PJobPoints->GetJobPointValue(JP_COUNTERSTANCE_EFFECT) * 2);

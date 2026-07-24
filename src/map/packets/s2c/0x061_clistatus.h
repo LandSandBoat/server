@@ -23,7 +23,7 @@
 
 #include "base.h"
 
-enum JOBTYPE : uint8;
+#include "data/enums/job.h"
 class CCharEntity;
 
 struct unityinfo_t
@@ -46,9 +46,9 @@ struct CLISTATUS
 {
     int32_t       hpmax;                 // PS2: hpmax
     int32_t       mpmax;                 // PS2: mpmax
-    JOBTYPE       mjob_no;               // PS2: mjob_no
+    xi::Job       mjob_no;               // PS2: mjob_no
     uint8_t       mjob_lv;               // PS2: mjob_lv
-    JOBTYPE       sjob_no;               // PS2: sjob_no
+    xi::Job       sjob_no;               // PS2: sjob_no
     uint8_t       sjob_lv;               // PS2: sjob_lv
     int16_t       exp_now;               // PS2: exp_now
     int16_t       exp_next;              // PS2: exp_next

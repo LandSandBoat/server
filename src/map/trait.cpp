@@ -85,13 +85,13 @@ void LoadTraitsList()
     {
         auto* PTrait = new CBlueTrait(rset->get<uint8>("trait_category"), rset->get<uint8>("traitid"), rset->get<bool>("job_points_only"));
 
-        PTrait->setJob(JOB_BLU);
+        PTrait->setJob(static_cast<int8>(xi::Job::BLU));
         PTrait->setRank(rset->get<uint8>("tier"));
         PTrait->setPoints(rset->get<uint8>("trait_points_needed"));
         PTrait->setMod(rset->get<xi::Mod>("modifier"));
         PTrait->setValue(rset->get<int16>("value"));
 
-        PTraitsList[JOB_BLU].emplace_back(PTrait);
+        PTraitsList[static_cast<uint8>(xi::Job::BLU)].emplace_back(PTrait);
     }
 }
 
@@ -114,15 +114,15 @@ void ClearTraitsList()
  *                                                                       *
  ************************************************************************/
 
-TraitList_t* GetTraits(uint8 JobID)
+auto GetTraits(xi::Job JobID) -> TraitList_t*
 {
-    if (JobID >= MAX_JOBTYPE)
+    if (static_cast<uint8>(JobID) >= MAX_JOBTYPE)
     {
-        ShowWarning("JobID (%d) exceeds MAX_JOBTYPE.", JobID);
+        ShowWarning("JobID (%d) exceeds MAX_JOBTYPE.", static_cast<uint8>(JobID));
         return nullptr;
     }
 
-    return &PTraitsList[JobID];
+    return &PTraitsList[static_cast<uint8>(JobID)];
 }
 
 }; // namespace traits

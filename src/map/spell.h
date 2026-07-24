@@ -1180,7 +1180,7 @@ public:
 
     uint16             getTotalTargets() const;
     SpellID            getID();
-    uint8              getJob(JOBTYPE JobID);
+    auto               getJob(xi::Job JobID) -> uint8;
     uint16             getMPCost() const;
     timer::duration    getCastTime() const;
     timer::duration    getRecastTime() const;
@@ -1304,6 +1304,6 @@ CSpell* GetSpellByMonsterSkillId(uint16 SkillID);
 CSpell* GetSpell(SpellID SpellID);
 bool    CanUseSpell(CBattleEntity* PCaster, SpellID SpellID);
 bool    CanUseSpell(CBattleEntity* PCaster, CSpell* PSpell);
-bool    CanUseSpellWith(SpellID spellId, JOBTYPE job, uint8 level);
+bool    CanUseSpellWith(SpellID spellId, xi::Job job, uint8 level);
 
 }; // namespace spell

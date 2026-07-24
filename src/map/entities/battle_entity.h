@@ -38,6 +38,7 @@
 #include "data/enums/damage_type.h"
 #include "data/enums/ecosystem.h"
 #include "data/enums/immunity.h"
+#include "data/enums/job.h"
 #include "data/enums/skill_type.h"
 #include "party.h"
 #include "trait.h"
@@ -54,36 +55,7 @@ enum class DEATH_TYPE : uint8
 };
 DECLARE_FORMAT_AS_UNDERLYING(DEATH_TYPE);
 
-enum JOBTYPE : uint8
-{
-    JOB_NON = 0,
-    JOB_WAR = 1,
-    JOB_MNK = 2,
-    JOB_WHM = 3,
-    JOB_BLM = 4,
-    JOB_RDM = 5,
-    JOB_THF = 6,
-    JOB_PLD = 7,
-    JOB_DRK = 8,
-    JOB_BST = 9,
-    JOB_BRD = 10,
-    JOB_RNG = 11,
-    JOB_SAM = 12,
-    JOB_NIN = 13,
-    JOB_DRG = 14,
-    JOB_SMN = 15,
-    JOB_BLU = 16,
-    JOB_COR = 17,
-    JOB_PUP = 18,
-    JOB_DNC = 19,
-    JOB_SCH = 20,
-    JOB_GEO = 21,
-    JOB_RUN = 22,
-    JOB_MON = 23, // NOTE: MON is not a full job
-};
-
 #define MAX_JOBTYPE 24
-DECLARE_FORMAT_AS_UNDERLYING(JOBTYPE);
 
 #define MAX_SKILLTYPE 64
 
@@ -228,10 +200,10 @@ public:
     auto isMounted() const -> bool;
     bool isSitting();
 
-    JOBTYPE GetMJob() const;
-    JOBTYPE GetSJob(bool ignoreRestriction = false) const;
-    uint8   GetMLevel() const;
-    uint8   GetSLevel() const;
+    auto  GetMJob() const -> xi::Job;
+    auto  GetSJob(bool ignoreRestriction = false) const -> xi::Job;
+    uint8 GetMLevel() const;
+    uint8 GetSLevel() const;
 
     void SetMJob(uint8 mjob);
     void SetSJob(uint8 sjob);
@@ -436,8 +408,8 @@ public:
     std::unique_ptr<CNotorietyContainer>    PNotorietyContainer;
 
 private:
-    JOBTYPE           m_mjob;
-    JOBTYPE           m_sjob;
+    xi::Job           m_mjob;
+    xi::Job           m_sjob;
     uint8             m_mlvl; // CURRENT level of the main job
     uint8             m_slvl; // CURRENT level of the sub job
     EntityID_t        battleTarget_{};

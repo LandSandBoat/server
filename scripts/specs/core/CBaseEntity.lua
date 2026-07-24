@@ -1560,12 +1560,12 @@ function CBaseEntity:getTimeCreated()
 end
 
 ---@nodiscard
----@return integer
+---@return xi.job
 function CBaseEntity:getMainJob()
 end
 
 ---@nodiscard
----@return integer
+---@return xi.job
 function CBaseEntity:getSubJob()
 end
 

@@ -37,12 +37,12 @@ auto GP_CLI_COMMAND_EXTENDED_JOB::validate(MapSession* PSession, const CCharEnti
                   .blockedBy({ BlockedState::InEvent });
 
     // Packet is used for 3 different systems. Validation differs based on the job.
-    if ((PChar->GetMJob() == JOB_BLU || PChar->GetSJob() == JOB_BLU) && this->Data.bluData.JobIndex == JOB_BLU)
+    if ((PChar->GetMJob() == xi::Job::BLU || PChar->GetSJob() == xi::Job::BLU) && this->Data.bluData.JobIndex == static_cast<uint8>(xi::Job::BLU))
     {
         // Case 1: Blue Mage spells
         // TODO: Check if they own the spell they are trying to equip.
     }
-    else if (((PChar->GetMJob() == JOB_PUP || PChar->GetSJob() == JOB_PUP) && this->Data.pupData.JobIndex == JOB_PUP))
+    else if (((PChar->GetMJob() == xi::Job::PUP || PChar->GetSJob() == xi::Job::PUP) && this->Data.pupData.JobIndex == static_cast<uint8>(xi::Job::PUP)))
     {
         // Case 2: Puppetmaster attachments
         pv.mustEqual(dynamic_cast<CAutomatonEntity*>(PChar->PPet), nullptr, "Player has a deployed automaton.");
@@ -94,7 +94,7 @@ auto GP_CLI_COMMAND_EXTENDED_JOB::validate(MapSession* PSession, const CCharEnti
 
 void GP_CLI_COMMAND_EXTENDED_JOB::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    if ((PChar->GetMJob() == JOB_BLU || PChar->GetSJob() == JOB_BLU) && this->Data.bluData.JobIndex == JOB_BLU)
+    if ((PChar->GetMJob() == xi::Job::BLU || PChar->GetSJob() == xi::Job::BLU) && this->Data.bluData.JobIndex == static_cast<uint8>(xi::Job::BLU))
     {
         const auto bluData = this->Data.bluData;
 
@@ -202,7 +202,7 @@ void GP_CLI_COMMAND_EXTENDED_JOB::process(MapSession* PSession, CCharEntity* PCh
             }
         }
     }
-    else if ((PChar->GetMJob() == JOB_PUP || PChar->GetSJob() == JOB_PUP) && this->Data.pupData.JobIndex == JOB_PUP)
+    else if ((PChar->GetMJob() == xi::Job::PUP || PChar->GetSJob() == xi::Job::PUP) && this->Data.pupData.JobIndex == static_cast<uint8>(xi::Job::PUP))
     {
         const auto pupData = this->Data.pupData;
 

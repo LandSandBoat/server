@@ -61,9 +61,9 @@ GP_SERV_COMMAND_GROUP_LIST::GP_SERV_COMMAND_GROUP_LIST(const CCharEntity* PChar,
 
         if (!PChar->isAnon())
         {
-            packet.mjob_no = PChar->GetMJob();
+            packet.mjob_no = static_cast<uint8_t>(PChar->GetMJob());
             packet.mjob_lv = PChar->GetMLevel();
-            packet.sjob_no = PChar->GetSJob();
+            packet.sjob_no = static_cast<uint8_t>(PChar->GetSJob());
             packet.sjob_lv = PChar->GetSLevel();
         }
     }
@@ -95,9 +95,9 @@ GP_SERV_COMMAND_GROUP_LIST::GP_SERV_COMMAND_GROUP_LIST(const CTrustEntity* PTrus
     packet.MemberNumber = MemberNumber;
     packet.Hpp          = PTrust->GetHPP();
     packet.Mpp          = PTrust->GetMPP();
-    packet.mjob_no      = PTrust->GetMJob();
+    packet.mjob_no      = static_cast<uint8_t>(PTrust->GetMJob());
     packet.mjob_lv      = PTrust->GetMLevel();
-    packet.sjob_no      = PTrust->GetSJob();
+    packet.sjob_no      = static_cast<uint8_t>(PTrust->GetSJob());
     packet.sjob_lv      = PTrust->GetSLevel();
 
     const auto nameSize       = std::min<size_t>(PTrust->getName().size(), sizeof(packet.Name));

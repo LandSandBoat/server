@@ -492,8 +492,8 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
     // add mob pool mods ahead of applying stats
     mobutils::AddSqlModifiers(PTrust);
 
-    JOBTYPE mJob = PTrust->GetMJob();
-    JOBTYPE sJob = PTrust->GetSJob();
+    xi::Job mJob = PTrust->GetMJob();
+    xi::Job sJob = PTrust->GetSJob();
     uint8   mLvl = PTrust->GetMLevel();
     uint8   sLvl = PTrust->GetSLevel();
 

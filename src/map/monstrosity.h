@@ -53,8 +53,8 @@ public:
     uint8 NamePrefix1;
     uint8 NamePrefix2;
 
-    JOBTYPE MainJob;
-    JOBTYPE SubJob;
+    xi::Job MainJob;
+    xi::Job SubJob;
     uint32  CurrentExp;
 
     std::array<uint16, 12> EquippedInstincts{ 0 };

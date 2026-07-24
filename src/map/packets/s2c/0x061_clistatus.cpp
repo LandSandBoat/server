@@ -39,8 +39,8 @@ GP_SERV_COMMAND_CLISTATUS::GP_SERV_COMMAND_CLISTATUS(CCharEntity* PChar)
     packet.statusdata.mjob_lv  = PChar->GetMLevel();
     packet.statusdata.sjob_no  = PChar->GetSJob();
     packet.statusdata.sjob_lv  = PChar->GetSLevel();
-    packet.statusdata.exp_now  = PChar->jobs.exp[PChar->GetMJob()];
-    packet.statusdata.exp_next = charutils::GetExpNEXTLevel(PChar->jobs.job[PChar->GetMJob()]);
+    packet.statusdata.exp_now  = PChar->jobs.exp[static_cast<uint8>(PChar->GetMJob())];
+    packet.statusdata.exp_next = charutils::GetExpNEXTLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())]);
 
     std::memcpy(packet.statusdata.bp_base, &PChar->stats, sizeof(packet.statusdata.bp_base));
 

@@ -182,7 +182,7 @@ uint8 CLuaSpell::getFlag()
     return m_PLuaSpell->getFlag();
 }
 
-uint8 CLuaSpell::getLevel(JOBTYPE jobId)
+auto CLuaSpell::getLevel(xi::Job jobId) -> uint8
 {
     return m_PLuaSpell->getJob(jobId);
 }

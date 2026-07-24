@@ -63,9 +63,9 @@ SpellID CSpell::getID()
     return m_ID;
 }
 
-uint8 CSpell::getJob(JOBTYPE JobID)
+auto CSpell::getJob(xi::Job JobID) -> uint8
 {
-    return (m_job[JobID] == CANNOT_USE_SPELL ? 255 : m_job[JobID]);
+    return (m_job[static_cast<uint8>(JobID)] == CANNOT_USE_SPELL ? 255 : m_job[static_cast<uint8>(JobID)]);
 }
 
 void CSpell::setJob(const std::array<uint8, MAX_JOBTYPE>& jobs)
@@ -722,7 +722,7 @@ bool CanUseSpell(CBattleEntity* PCaster, CSpell* spell)
                         usable = false;
                     }
                 }
-                if (PCaster->GetMJob() == JOB_SCH)
+                if (PCaster->GetMJob() == xi::Job::SCH)
                 {
                     if (requirements & SPELLREQ_ADDENDUM_BLACK)
                     {
@@ -770,7 +770,7 @@ bool CanUseSpell(CBattleEntity* PCaster, CSpell* spell)
                         usable = false;
                     }
                 }
-                if (PCaster->GetSJob() == JOB_SCH)
+                if (PCaster->GetSJob() == xi::Job::SCH)
                 {
                     if (requirements & SPELLREQ_ADDENDUM_BLACK)
                     {
@@ -837,7 +837,7 @@ bool CanUseSpell(CBattleEntity* PCaster, CSpell* spell)
 
 // This is a utility method for mobutils, when we want to work out if we can give monsters a spell
 // but they are on an odd job (e.g. PLDs getting -ga3)
-bool CanUseSpellWith(SpellID spellId, JOBTYPE job, uint8 level)
+auto CanUseSpellWith(SpellID spellId, xi::Job job, uint8 level) -> bool
 {
     if (GetSpell(spellId) != nullptr)
     {

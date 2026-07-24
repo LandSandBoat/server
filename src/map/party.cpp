@@ -1293,7 +1293,7 @@ void CParty::DisableSync()
 void CParty::RefreshSync()
 {
     CCharEntity* sync      = (CCharEntity*)m_PSyncTarget;
-    uint8        syncLevel = sync->jobs.job[sync->GetMJob()];
+    uint8        syncLevel = sync->jobs.job[static_cast<uint8>(sync->GetMJob())];
     if (syncLevel < 10)
     {
         SetSyncTarget("", MsgStd::LevelSyncRemoveLowLevel);
@@ -1309,13 +1309,13 @@ void CParty::RefreshSync()
 
         uint8 NewMLevel = 0;
 
-        if (syncLevel < member->jobs.job[member->GetMJob()])
+        if (syncLevel < member->jobs.job[static_cast<uint8>(member->GetMJob())])
         {
             NewMLevel = syncLevel;
         }
         else
         {
-            NewMLevel = member->jobs.job[member->GetMJob()];
+            NewMLevel = member->jobs.job[static_cast<uint8>(member->GetMJob())];
         }
 
         CStatusEffect* syncEffect = member->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::LevelSync);
@@ -1329,7 +1329,7 @@ void CParty::RefreshSync()
             charutils::RemoveAllEquipMods(member);
             member->m_LevelRestriction = NewMLevel;
             member->SetMLevel(NewMLevel);
-            member->SetSLevel(member->jobs.job[member->GetSJob()]);
+            member->SetSLevel(member->jobs.job[static_cast<uint8>(member->GetSJob())]);
             charutils::ApplyAllEquipMods(member);
 
             blueutils::ValidateBlueSpells(member);

@@ -374,12 +374,12 @@ public:
     uint32 getTimeCreated();
 
     // Player Jobs and Levels
-    uint8 getMainJob();
-    uint8 getSubJob();
-    void  changeJob(uint8 newJob);
-    void  changesJob(uint8 subJob);
-    void  unlockJob(uint8 JobID);
-    bool  hasJob(uint8 job);
+    auto getMainJob() -> xi::Job;
+    auto getSubJob() -> xi::Job;
+    void changeJob(uint8 newJob);
+    void changesJob(uint8 subJob);
+    void unlockJob(uint8 JobID);
+    bool hasJob(uint8 job);
 
     uint8 getMainLvl();
     uint8 getSubLvl();
@@ -478,7 +478,7 @@ public:
     void   setJobPoints(uint16 amount);
     void   addJobPoints(uint8 jobID, uint16 amount);
     void   delJobPoints(uint8 jobID, uint16 amount);
-    uint16 getJobPoints(JOBTYPE jobID);
+    auto   getJobPoints(xi::Job jobID) -> uint16;
     void   setCapacityPoints(uint16 amount);
     void   masterJob();
 

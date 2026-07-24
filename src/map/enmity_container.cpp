@@ -180,7 +180,7 @@ void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, 
         int16 GFlevel = PEntity->getMod(xi::Mod::GILFINDER); // Is there a cap? Theoretical GF level cap could be GF 8 for 128/256 + 8*16 = 256/256
 
         // Enforce TH8 as max for THF main and TH4 as non-THF main
-        if (PEntity->GetMJob() != JOB_THF)
+        if (PEntity->GetMJob() != xi::Job::THF)
         {
             THlevel = std::min<int16>(4, PEntity->getMod(xi::Mod::TREASURE_HUNTER));
         }

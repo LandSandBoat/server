@@ -191,8 +191,8 @@ int32 hasWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration o
 int32 delWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to delete weapon skill
 bool  canUseWeaponSkill(CCharEntity* PChar, uint16 wsid);
 
-void SaveCharJob(const CCharEntity* PChar, JOBTYPE job); // save the level for the selected character's jobs
-void SaveCharExp(const CCharEntity* PChar, JOBTYPE job); // save experience for the selected character’s chosen job
+void SaveCharJob(const CCharEntity* PChar, xi::Job job); // save the level for the selected character's jobs
+void SaveCharExp(const CCharEntity* PChar, xi::Job job); // save experience for the selected character’s chosen job
 void SaveCharEquip(CCharEntity* PChar);                  // preserve the character’s equipment and appearance
 void SaveCharLook(CCharEntity* PChar);                   // saves a character's appearance based on style locking
 void SaveCharPosition(CCharEntity* PChar);               // save the character's position (x/y/z)
@@ -275,7 +275,7 @@ void  IncrementCharVar(CCharEntity* PChar, const std::string& var, int32 value);
 auto FetchCharVar(uint32 charId, const std::string& var) -> std::pair<int32, uint32>;
 void PersistCharVar(uint32 charId, const std::string& var, int32 value, uint32 expiry = 0);
 
-uint16 getWideScanRange(JOBTYPE job, uint8 level);
+auto   getWideScanRange(xi::Job job, uint8 level) -> uint16;
 uint16 getWideScanRange(CCharEntity* PChar);
 
 void SendTimerPacket(CCharEntity* PChar, uint32 seconds);

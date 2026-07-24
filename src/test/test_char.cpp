@@ -145,7 +145,7 @@ auto TestChar::create(const uint16_t zoneId) -> std::unique_ptr<TestChar>
 
     char_mini mini = {
         .m_name   = {},
-        .m_mjob   = JOB_WAR,
+        .m_mjob   = static_cast<uint8>(xi::Job::WAR),
         .m_zone   = zoneId,
         .m_nation = NATION_SANDORIA,
     };

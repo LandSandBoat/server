@@ -147,9 +147,9 @@ uint8 CWeaponSkill::getUnlockId() const
     return m_unlockId;
 }
 
-uint8 CWeaponSkill::getJob(JOBTYPE job)
+auto CWeaponSkill::getJob(xi::Job job) -> uint8
 {
-    return m_Job[job];
+    return m_Job[static_cast<uint8>(job)];
 }
 
 uint16 CWeaponSkill::getSkillLevel() const
