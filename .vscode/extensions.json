@@ -13,6 +13,7 @@
         "jeff-hykin.better-cpp-syntax",
         "bierner.github-markdown-preview",
         "esbenp.prettier-vscode",
-        "redhat.vscode-yaml"
+        "redhat.vscode-yaml",
+        "jkillian.custom-local-formatters"
     ]
 }
