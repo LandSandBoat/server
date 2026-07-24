@@ -523,6 +523,7 @@ function Battlefield:register()
                 [32002] = utils.bind(Battlefield.redirectEventCall, 'onEventFinishLeave'),
                 [32003] = utils.bind(Battlefield.redirectEventCall, 'onEventFinishExit'),
                 [32004] = utils.bind(Battlefield.redirectEventCall, 'onEventFinishBattlefield'),
+                [32005] = utils.bind(Battlefield.redirectEventCall, 'onEventFinishBattlefield'),
             }
         })
         self.hasListeners = true

@@ -39,6 +39,12 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
             local currentMission = player:getCurrentMission(pNation)
 
             if
+                pNation == 0 and
+                currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and
+                player:getMissionStatus(pNation) == 0
+            then
+                player:startEvent(54) -- Bacherume turns the player away until the Rites of Succession cutscene is viewed.
+            elseif
                 (pNation == 0 and player:getRank(player:getNation()) >= 2) or
                 (pNation > 0 and player:hasCompletedMission(pNation, 5)) or
                 (currentMission >= 5 and currentMission <= 9) or

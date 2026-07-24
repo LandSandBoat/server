@@ -21,14 +21,21 @@ local content = BattlefieldMission:new({
     mission               = xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT,
     missionStatusArea     = xi.mission.log_id.SANDORIA,
     requiredMissionStatus = 3,
+    -- TODO: On retail the loss event plays with params { [0] = 70, [2] = 4, [6] = zone } and mode
+    -- flags 4360 (captured), displaying "You were unable to protect Prince Trion. Now leaving the
+    -- battlefield." during the exit fade.  Sending the params works, but repeat viewers get a
+    -- client-side skip prompt, and declining it softlocks the client: the reply to the resulting
+    -- GP_CLI_COMMAND_EVENTENDXZY update sends position packets retail does not (unhandled updates
+    -- default to a position update in luautils::OnEventUpdate).  Add lossEventParams once that
+    -- reply is fixed.
 })
 
 function content:onEventFinishBattlefield(player, csid, option, npc)
     local playerCoords =
     {
-        [1] = { -400, -201,  419, 61 },
-        [2] = {    0,   -1,   10, 61 },
-        [3] = {  399,  198, -381, 57 },
+        [1] = { -398.196, -201.625,  416.836, 68 },
+        [2] = {    1.877,   -1.625,   16.935, 68 },
+        [3] = {  401.832,  198.375, -382.841, 68 },
     }
 
     local trionCoords =
@@ -112,10 +119,25 @@ content.groups =
 
         superlink = true,
         allDeath  = function(battlefield, mob)
-            local players = battlefield:getPlayers()
+            -- Simultaneous kills invoke this once per death; play the cutscene only once.
+            if battlefield:getLocalVar('arrivalCS') == 1 then
+                return
+            end
+
+            battlefield:setLocalVar('arrivalCS', 1)
+
+            local battlefieldArea = battlefield:getArea()
+            local players         = battlefield:getPlayers()
 
             for _, player in pairs(players) do
-                player:startEvent(32004, 0, 0, 4)
+                if
+                    player:getCharVar('Mission[0][23]Intro') == 1 or
+                    player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT)
+                then
+                    player:startEvent(32005, battlefieldArea, 0, 4, 0, 15)
+                else
+                    player:startEvent(32004, battlefieldArea, 0, 4)
+                end
             end
         end,
     },
@@ -142,8 +164,9 @@ content.groups =
             },
         },
 
-        spawned  = false,
-        allDeath = function(battlefield, mob)
+        spawned   = false,
+        superlink = true,
+        allDeath  = function(battlefield, mob)
             battlefield:setStatus(xi.battlefield.status.WON)
         end,
     },

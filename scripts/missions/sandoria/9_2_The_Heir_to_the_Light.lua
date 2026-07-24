@@ -9,8 +9,6 @@
 -- (_6h4) Great Hall     : !pos 0 -1 13 233
 -- _5a0: Heavy Stone Dr  : !pos -39 4.823 20 190
 -----------------------------------
-local chateauID = zones[xi.zone.CHATEAU_DORAGUILLE]
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT)
 
@@ -125,7 +123,7 @@ mission.sections =
                     elseif missionStatus > 5 then
                         return mission:progressEvent(30)
                     elseif missionStatus > 4 then
-                        return mission:messageText(chateauID.text.HEIR_TO_LIGHT_EXTRA)
+                        return mission:progressEvent(28)
                     elseif missionStatus > 1 then
                         return mission:progressEvent(29)
                     end
@@ -204,6 +202,9 @@ mission.sections =
                     mission:complete(player)
                     mission:setVar(player, 'Option', 1)
 
+                    -- The M8-2 Prince cutscenes are superseded; reset their var for cleanliness.
+                    player:setCharVar('Mission[0][21]Option', 0)
+
                     if not npcUtil.giveItem(player, xi.item.SAN_DORIAN_FLAG) then
                         mission:setVar(player, 'Flag', 1)
                     end
@@ -217,10 +218,23 @@ mission.sections =
 
         [xi.zone.NORTHERN_SAN_DORIA] =
         {
+            -- The cathedral is preparing for the Rites of Succession.
+            ['Arnau'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 0 then
+                        return mission:event(4)
+                    end
+                end,
+            },
+
             ['_6fc'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) > 5 then
+                    if
+                        player:getMissionStatus(mission.areaId) > 5 and
+                        mission:getVar(player, 'Papal') == 0
+                    then
                         return mission:progressEvent(50)
                     end
                 end,
@@ -245,6 +259,10 @@ mission.sections =
                 [1] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 1)
                 end,
+
+                [50] = function(player, csid, option, npc)
+                    mission:setVar(player, 'Papal', 1)
+                end
             },
         },
 
@@ -276,6 +294,10 @@ mission.sections =
                         player:setMissionStatus(mission.areaId, 4)
                     end
                 end,
+
+                [32004] = function(player, csid, option, npc)
+                    mission:setVar(player, 'Intro', 1)
+                end,
             },
         },
 
@@ -299,7 +321,7 @@ mission.sections =
         },
     },
 
-    -- Player has completed this mission
+    -- Player has completed this mission.
     {
         check = function(player, currentMission, missionStatus, vars)
             return player:hasCompletedMission(mission.areaId, mission.missionId)
@@ -351,13 +373,24 @@ mission.sections =
 
         [xi.zone.NORTHERN_SAN_DORIA] =
         {
+            -- Viewable once; re-examining the door reports it locked, per its default action.
             ['_6fc'] =
             {
                 onTrigger = function(player, npc)
-                    if mission:getVar(player, 'Option') == 1 then
+                    if
+                        mission:getVar(player, 'Option') == 1 and
+                        mission:getVar(player, 'Papal') == 0
+                    then
                         return mission:progressEvent(50)
                     end
                 end,
+            },
+
+            onEventFinish =
+            {
+                [50] = function(player, csid, option, npc)
+                    mission:setVar(player, 'Papal', 1)
+                end
             },
         },
 
@@ -373,6 +406,7 @@ mission.sections =
             {
                 [0] = function(player, csid, option, npc)
                     mission:setVar(player, 'Option', 0)
+                    mission:setVar(player, 'Papal', 0)
                 end,
             },
         },

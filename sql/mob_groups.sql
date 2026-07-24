@@ -8033,11 +8033,11 @@ INSERT INTO `mob_groups` VALUES (37,743,105,'Clipper',300,0,93,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (38,5852,105,'Eyegouger',0,32,3063,4000,0,0,'WOTG');
 INSERT INTO `mob_groups` VALUES (39,1267,105,'Evil_Weapon',300,0,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (40,5758,105,'Prankster_Maverix',0,32,1610,5500,0,0,'WOTG');
-INSERT INTO `mob_groups` VALUES (41,66,105,'Ahtu',0,128,33,2500,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (41,66,105,'Ahtu',0,128,33,2750,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (42,6658,105,'Goblin_Digger',300,0,1040,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (43,3800,105,'Sturmtiger',0,128,0,6800,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (44,3809,105,'Suparna',0,128,0,10000,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (45,3810,105,'Suparna_Fledgling',0,128,0,8000,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (44,3809,105,'Suparna',0,128,0,6000,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (45,3810,105,'Suparna_Fledgling',0,128,0,5000,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (46,322,105,'Badshah',0,128,0,1200,1200,0,NULL);
 INSERT INTO `mob_groups` VALUES (47,3745,105,'Sprite',0,128,2001,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (48,2375,105,'Lanky_Lenglen',300,0,0,0,0,0,NULL);
@@ -14089,14 +14089,14 @@ INSERT INTO `mob_groups` VALUES (33,6897,205,'Coca',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (1,223,206,'Archlich_Taberquoan',0,128,0,8300,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (2,127,206,'Ancient_Sorcerer',0,128,0,2000,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (3,129,206,'Ancient_Warrior',0,128,0,100,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (4,4294,206,'Warlord_Rojgnoj',0,128,0,6000,6000,0,NULL);
-INSERT INTO `mob_groups` VALUES (5,3385,206,'Rojgnojs_Left_Hand',0,128,0,4000,4000,0,NULL);
-INSERT INTO `mob_groups` VALUES (6,3386,206,'Rojgnojs_Right_Hand',0,128,0,4000,4000,0,NULL);
-INSERT INTO `mob_groups` VALUES (7,4483,206,'Yukvok_of_Clan_Death',0,128,0,3000,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (8,4132,206,'Vangknok_of_Clan_Death',0,128,0,1500,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (9,3315,206,'Rallbrog_of_Clan_Death',0,128,0,1500,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (10,4374,206,'Worgbut_of_Clan_Death',0,128,0,1500,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (11,938,206,'Death_Clan_Destroyer',0,128,0,7400,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (4,4294,206,'Warlord_Rojgnoj',0,128,0,7000,6000,0,NULL);
+INSERT INTO `mob_groups` VALUES (5,3385,206,'Rojgnojs_Left_Hand',0,128,0,4150,4000,0,NULL);
+INSERT INTO `mob_groups` VALUES (6,3386,206,'Rojgnojs_Right_Hand',0,128,0,4200,4000,0,NULL);
+INSERT INTO `mob_groups` VALUES (7,4483,206,'Yukvok_of_Clan_Death',0,128,0,3500,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (8,4132,206,'Vangknok_of_Clan_Death',0,128,0,1460,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (9,3315,206,'Rallbrog_of_Clan_Death',0,128,0,1490,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (10,4374,206,'Worgbut_of_Clan_Death',0,128,0,1600,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (11,938,206,'Death_Clan_Destroyer',0,128,0,8300,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (12,5408,206,'Maat_pld',0,128,0,2400,1000,0,NULL);
 INSERT INTO `mob_groups` VALUES (13,5409,206,'Maat_drk',0,128,0,3300,1000,0,NULL);
 INSERT INTO `mob_groups` VALUES (14,5413,206,'Maat_brd',0,128,0,2300,0,0,NULL);
@@ -14160,7 +14160,7 @@ INSERT INTO `mob_groups` VALUES (71,1050,206,'Disfaurit_B_DAurphe',0,128,0,0,0,0
 INSERT INTO `mob_groups` VALUES (72,2147,206,'Jeumouque_B_DAurphe',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (73,0,206,'Ullegore',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (74,0,206,'Mumor',0,128,0,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (75,4006,206,'Trion',0,128,0,1500,0,1,NULL); -- ally
+INSERT INTO `mob_groups` VALUES (75,4006,206,'Trion',0,128,0,1400,0,1,NULL); -- ally
 INSERT INTO `mob_groups` VALUES (76,7292,206,'Generic_Doll',0,128,0,2200,2200,0,NULL);
 INSERT INTO `mob_groups` VALUES (77,7293,206,'Generic_Doll',0,128,0,2200,2200,0,NULL);
 
