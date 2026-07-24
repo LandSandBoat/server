@@ -62,6 +62,7 @@ zones[xi.zone.MAZE_OF_SHAKHRAMI] =
     },
     npc =
     {
+        QM_RSE             = GetFirstID('qm1'),
         FOSSIL_ROCK_OFFSET = GetFirstID('Fossil_Rock'),
         TREASURE_CHEST     = GetFirstID('Treasure_Chest'),
         EXCAVATION         = GetTableOfIDs('Excavation_Point'),
