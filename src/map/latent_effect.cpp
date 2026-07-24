@@ -126,6 +126,12 @@ bool CLatentEffect::ModOnItemOnly(xi::Mod modID)
     return false;
 }
 
+bool CLatentEffect::SkillMod(xi::Mod modID)
+{
+    return (modID >= xi::Mod::HTH && modID <= xi::Mod::STAFF) ||
+           (modID >= xi::Mod::AUTO_MELEE_SKILL && modID <= xi::Mod::HANDBELL_SKILL);
+}
+
 bool CLatentEffect::Activate()
 {
     if (!IsActivated())
@@ -148,6 +154,12 @@ bool CLatentEffect::Activate()
         else
         {
             m_POwner->addModifier(m_ModValue, m_ModPower);
+
+            if (SkillMod(GetModValue()))
+            {
+                CCharEntity* PChar = static_cast<CCharEntity*>(m_POwner);
+                charutils::BuildingCharSkillsTable(PChar);
+            }
         }
 
         m_Activated = true;
@@ -175,6 +187,12 @@ bool CLatentEffect::Deactivate()
         else
         {
             m_POwner->delModifier(m_ModValue, m_ModPower);
+
+            if (SkillMod(GetModValue()))
+            {
+                CCharEntity* PChar = static_cast<CCharEntity*>(m_POwner);
+                charutils::BuildingCharSkillsTable(PChar);
+            }
         }
 
         m_Activated = false;

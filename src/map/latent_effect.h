@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -61,6 +61,7 @@ public:
     void SetModValue(xi::Mod value);
     void SetModPower(int16 power);
     bool ModOnItemOnly(xi::Mod modID);
+    bool SkillMod(xi::Mod modID);
     bool Activate();
     bool Deactivate();
 
