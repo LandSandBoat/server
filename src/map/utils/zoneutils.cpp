@@ -314,13 +314,6 @@ auto LoadNPCList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
                         {
                             while (rset->next())
                             {
-                                // If there is no content tag, the NPC will always be loaded
-                                const auto contentTag = rset->getOrDefault<std::string>("content_tag", "");
-                                if (!luautils::IsContentEnabled(contentTag))
-                                {
-                                    continue;
-                                }
-
                                 const auto NpcID = rset->get<uint32>("npcid");
 
                                 if (!((PZone->GetTypeMask() & xi::ZoneType::Instanced) != xi::ZoneType::Unknown))
@@ -355,6 +348,21 @@ auto LoadNPCList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
 
                                     PNpc->name_prefix = rset->get<uint8>("name_prefix");
                                     PNpc->setWidescan(rset->get<uint8>("widescan"));
+
+                                    // If there is no content tag, the NPC will be loaded but not spawned
+                                    // We load them because certain CS require NPCs that may be flagged as content tagged and the client may request them through a CHARREQ packet
+                                    const auto contentTag = rset->getOrDefault<std::string>("content_tag", "");
+                                    if (!luautils::IsContentEnabled(contentTag))
+                                    {
+                                        // TODO: set some invisible flags so the client can't render them?
+                                        PNpc->loc.p.x = 0.f;
+                                        PNpc->loc.p.y = 0.f;
+                                        PNpc->loc.p.z = 0.f;
+
+                                        PNpc->status = xi::Status::Disappear;
+
+                                        PNpc->setWidescan(false);
+                                    }
 
                                     PZone->InsertNPC(PNpc);
                                 }
