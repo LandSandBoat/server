@@ -92,6 +92,33 @@ void GP_CLI_COMMAND_CHARREQ2::process(MapSession* PSession, CCharEntity* PChar) 
         if (dist > CHARREQ2_SYNC_RANGE)
         {
             ShowWarningFmt("GP_CLI_COMMAND_CHARREQ2 from {}: target {} ({}) is {:.1f}y away (beyond {}y)", PChar->getName(), PTarget->getName(), PTarget->id, dist, CHARREQ2_SYNC_RANGE);
+
+            // The client is asking about an entity the server no longer tracks as visible
+            // to it (a stale record from before it left range). Answering with an update
+            // sustains the record and the client re-requests forever; answer with a despawn
+            // so it drops the record. Grid sync respawns the entity when back in range.
+            const auto* spawnList = [&]() -> const SpawnIDList_t*
+            {
+                switch (PTarget->objtype)
+                {
+                    case TYPE_PC:
+                        return &PChar->SpawnPCList;
+                    case TYPE_MOB:
+                        return &PChar->SpawnMOBList;
+                    case TYPE_PET:
+                        return &PChar->SpawnPETList;
+                    case TYPE_TRUST:
+                        return &PChar->SpawnTRUSTList;
+                    default:
+                        return &PChar->SpawnNPCList;
+                }
+            }();
+
+            if (spawnList->find(PTarget->id) == spawnList->end())
+            {
+                PChar->updateEntityPacket(PTarget, ENTITY_DESPAWN, UPDATE_NONE);
+                continue;
+            }
         }
 
         if (PTarget->objtype == TYPE_PC)
