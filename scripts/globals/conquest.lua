@@ -753,11 +753,6 @@ local expRings =
     [xi.item.EMPEROR_BAND] = { chargesWhenFull = 3, costPerCharge = 200 },
 }
 
-local function conquestRanking()
-    -- computes part of argument 3 for gate guard events. represents the conquest standing of the 3 nations. Verified.
-    return GetNationRank(xi.nation.SANDORIA) + 4 * GetNationRank(xi.nation.BASTOK) + 16 * GetNationRank(xi.nation.WINDURST)
-end
-
 xi.conquest.toggleRegionalNPCs = function(zone)
     -- Show/Hide regional NPCs
     -- If there is a draw or a 1st place Alliance, those NPCs won't be available anywhere.
@@ -1411,7 +1406,7 @@ xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, gu
     -- JEUNO OVERSEERS
     elseif guardType == xi.conquest.guard.CITY and guardNation == xi.nation.OTHER then
         local a1 = getArg1(player, guardNation, guardType)
-        local a3 = conquestRanking()
+        local a3 = GetConquestBalance()
         local a6 = getArg6(player)
         local a7 = player:getCP()
 
@@ -1421,7 +1416,7 @@ xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, gu
     elseif guardType <= xi.conquest.guard.FOREIGN then
         local a1 = getArg1(player, guardNation, guardType)
         local a2 = getExForceAvailable(player, npc, guardNation)
-        local a3 = conquestRanking()
+        local a3 = GetConquestBalance()
         local a4 = suppliesAvailableBitmask(player, guardNation)
         local a5 = player:getTeleport(guardNation)
         local a6 = getArg6(player)
