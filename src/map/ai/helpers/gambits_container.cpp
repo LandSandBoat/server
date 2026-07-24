@@ -548,7 +548,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
                 // Use the pre resolved spell if present, otherwise fall back
                 if (resolvedSpells[i].has_value())
                 {
-                    controller->Cast(target->targid, resolvedSpells[i].value());
+                    controller->Cast(target->entityId(), resolvedSpells[i].value());
                     executedAnyAction = true;
                 }
                 else
@@ -559,7 +559,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
                         auto spell_id = POwner->SpellContainer->GetAvailable(static_cast<SpellID>(action.select_arg));
                         if (spell_id.has_value())
                         {
-                            controller->Cast(target->targid, spell_id.value());
+                            controller->Cast(target->entityId(), spell_id.value());
                             executedAnyAction = true;
                         }
                     }
@@ -568,7 +568,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
                         auto spell_id = POwner->SpellContainer->GetBestAvailable(static_cast<SPELLFAMILY>(action.select_arg));
                         if (spell_id.has_value())
                         {
-                            controller->Cast(target->targid, spell_id.value());
+                            controller->Cast(target->entityId(), spell_id.value());
                             executedAnyAction = true;
                         }
                     }
@@ -578,7 +578,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
                         auto  spell_id = POwner->SpellContainer->GetBestIndiSpell(PMaster);
                         if (spell_id.has_value())
                         {
-                            controller->Cast(target->targid, spell_id.value());
+                            controller->Cast(target->entityId(), spell_id.value());
                             executedAnyAction = true;
                         }
                     }
@@ -589,7 +589,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
                         target         = PMaster;
                         if (spell_id.has_value())
                         {
-                            controller->Cast(target->targid, spell_id.value());
+                            controller->Cast(target->entityId(), spell_id.value());
                             executedAnyAction = true;
                         }
                     }
@@ -599,7 +599,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
                         auto spell_id      = POwner->SpellContainer->GetBestAgainstTargetWeakness(target, spell_to_cast);
                         if (spell_id.has_value())
                         {
-                            controller->Cast(target->targid, spell_id.value());
+                            controller->Cast(target->entityId(), spell_id.value());
                             executedAnyAction = true;
                         }
                     }
@@ -636,7 +636,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
 
                             if (maybeSpellId.has_value())
                             {
-                                controller->Cast(target->targid, maybeSpellId.value());
+                                controller->Cast(target->entityId(), maybeSpellId.value());
                                 executedAnyAction = true;
                             }
                         }
@@ -646,7 +646,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
                         auto spell_id = POwner->SpellContainer->GetStormDay();
                         if (spell_id.has_value())
                         {
-                            controller->Cast(target->targid, spell_id.value());
+                            controller->Cast(target->entityId(), spell_id.value());
                             executedAnyAction = true;
                         }
                     }
@@ -655,7 +655,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
                         auto spell_id = POwner->SpellContainer->GetHelixDay();
                         if (spell_id.has_value())
                         {
-                            controller->Cast(target->targid, spell_id.value());
+                            controller->Cast(target->entityId(), spell_id.value());
                             executedAnyAction = true;
                         }
                     }
@@ -665,7 +665,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
                         auto           spell_id     = POwner->SpellContainer->EnSpellAgainstTargetWeakness(battleTarget);
                         if (spell_id.has_value())
                         {
-                            controller->Cast(POwner->targid, spell_id.value());
+                            controller->Cast(POwner->entityId(), spell_id.value());
                             executedAnyAction = true;
                         }
                     }
@@ -674,7 +674,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
                         auto spell_id = POwner->SpellContainer->StormDayAgainstTargetWeakness(target);
                         if (spell_id.has_value())
                         {
-                            controller->Cast(POwner->targid, spell_id.value());
+                            controller->Cast(POwner->entityId(), spell_id.value());
                             executedAnyAction = true;
                         }
                     }
@@ -683,7 +683,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
                         auto spell_id = POwner->SpellContainer->StormDayAgainstTargetWeakness(target);
                         if (spell_id.has_value())
                         {
-                            controller->Cast(target->targid, spell_id.value());
+                            controller->Cast(target->entityId(), spell_id.value());
                             executedAnyAction = true;
                         }
                     }
@@ -692,7 +692,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
                         auto spell_id = POwner->SpellContainer->GetSpell();
                         if (spell_id.has_value())
                         {
-                            controller->Cast(target->targid, spell_id.value());
+                            controller->Cast(target->entityId(), spell_id.value());
                             executedAnyAction = true;
                         }
                     }
@@ -735,7 +735,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
 
                         if (spell_id.has_value())
                         {
-                            controller->Cast(target->targid, spell_id.value());
+                            controller->Cast(target->entityId(), spell_id.value());
                             executedAnyAction = true;
                         }
                     }

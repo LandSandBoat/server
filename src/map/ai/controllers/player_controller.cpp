@@ -48,22 +48,21 @@ auto CPlayerController::Tick(timer::time_point /*tick*/) -> Task<void>
     co_return;
 }
 
-auto CPlayerController::Cast(uint16 targid, SpellID spellid) -> bool
+auto CPlayerController::Cast(const EntityID_t target, SpellID spellid) -> bool
 {
     auto* PChar = static_cast<CCharEntity*>(POwner);
     if (canAct() && !PChar->PRecastContainer->HasRecast(RECAST_MAGIC, static_cast<Recast>(spellid), 0s))
     {
-        if (auto target = PChar->GetEntity(targid); target && target->PAI->IsUntargetable())
+        if (const auto PTarget = target.resolve<CBattleEntity>(); PTarget && PTarget->PAI->IsUntargetable())
         {
             return false;
         }
-        return CController::Cast(targid, spellid);
+
+        return CController::Cast(target, spellid);
     }
-    else
-    {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToCast);
-        return false;
-    }
+
+    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToCast);
+    return false;
 }
 
 auto CPlayerController::Engage(uint16 targid) -> bool

@@ -48,7 +48,7 @@ public:
     CAIContainer(const CAIContainer&)            = delete;
     CAIContainer& operator=(const CAIContainer&) = delete;
 
-    bool Cast(uint16 targid, SpellID spellid);
+    bool Cast(EntityID_t target, SpellID spellid);
     bool Engage(uint16 targid);
     bool ChangeTarget(uint16 targid);
     bool Disengage();

@@ -18964,11 +18964,11 @@ void CLuaBaseEntity::castSpell(const sol::object& spell, const sol::object& enti
 
             if (targid)
             {
-                PEntity->PAI->Cast(targid, spellid);
+                PEntity->PAI->Cast(EntityID_t(PEntity->GetEntity(targid)), spellid);
             }
             else if (PMobEntity)
             {
-                PEntity->PAI->Cast(PMobEntity->GetBattleTargetID(), spellid);
+                PEntity->PAI->Cast(PMobEntity->battleTarget(), spellid);
             }
         }));
         // clang-format on

@@ -31,7 +31,7 @@ public:
     ~CPlayerCharmController() override;
 
     auto Tick(timer::time_point tick) -> Task<void> override;
-    auto Cast(uint16 targid, SpellID spellid) -> bool override;
+    auto Cast(EntityID_t target, SpellID spellid) -> bool override;
     auto ChangeTarget(uint16 targid) -> bool override;
     auto WeaponSkill(uint16 targid, uint16 wsid) -> bool override;
     auto Ability(uint16 targid, uint16 abilityid) -> bool override;

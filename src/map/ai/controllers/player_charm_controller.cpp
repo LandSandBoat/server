@@ -115,7 +115,7 @@ void CPlayerCharmController::DoRoamTick(timer::time_point tick) const
     }
 }
 
-auto CPlayerCharmController::Cast(uint16 targid, SpellID spellid) -> bool
+auto CPlayerCharmController::Cast(const EntityID_t target, SpellID spellid) -> bool
 {
     return false;
 }

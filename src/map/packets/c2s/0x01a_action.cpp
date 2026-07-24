@@ -290,7 +290,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
             // clang-format on
 
             const auto spellId = static_cast<SpellID>(this->CastMagic.SpellId);
-            PChar->PAI->Cast(this->ActIndex, spellId);
+            PChar->PAI->Cast(EntityID_t(PChar->GetEntity(this->ActIndex)), spellId);
 
             // target offset used only for luopan placement as of now
             if (spellId >= SpellID::Geo_Regen && spellId <= SpellID::Geo_Gravity)

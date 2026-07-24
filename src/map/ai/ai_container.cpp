@@ -61,11 +61,11 @@ CAIContainer::CAIContainer(CBaseEntity*                   _PEntity,
 {
 }
 
-bool CAIContainer::Cast(uint16 targid, SpellID spellid)
+bool CAIContainer::Cast(EntityID_t target, SpellID spellid)
 {
     if (Controller)
     {
-        return Controller->Cast(targid, spellid);
+        return Controller->Cast(target, spellid);
     }
     return false;
 }

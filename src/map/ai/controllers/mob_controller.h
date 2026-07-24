@@ -52,7 +52,7 @@ public:
     auto         CanAggroTarget(CBattleEntity*) const -> bool;
     void         TapDeaggroTime();
     void         TapDeclaimTime();
-    auto         Cast(uint16 targid, SpellID spellid) -> bool override;
+    auto         Cast(EntityID_t target, SpellID spellid) -> bool override;
     void         SetFollowTarget(CBaseEntity* PTarget, FollowType followType);
     auto         HasFollowTarget() const -> bool;
     void         ClearFollowTarget();

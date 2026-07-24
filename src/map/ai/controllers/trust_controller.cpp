@@ -587,24 +587,22 @@ auto CTrustController::RangedAttack(uint16 targid) -> bool
     return false;
 }
 
-auto CTrustController::Cast(uint16 targid, SpellID spellid) -> bool
+auto CTrustController::Cast(const EntityID_t target, SpellID spellid) -> bool
 {
     TracyZoneScoped;
 
-    FaceTarget(targid);
+    FaceTarget(target.targid);
 
-    if (static_cast<CMobEntity*>(POwner)->PRecastContainer->Has(RECAST_MAGIC, static_cast<Recast>(spellid)))
+    if (POwner->PRecastContainer->Has(RECAST_MAGIC, static_cast<Recast>(spellid)))
     {
         return false;
     }
 
     auto* PSpell = spell::GetSpell(spellid);
-    if (PSpell->getValidTarget() == TARGET_SELF)
-    {
-        targid = POwner->targid;
-    }
 
-    const auto PTarget      = static_cast<CBattleEntity*>(POwner->GetEntity(targid, TYPE_MOB | TYPE_PC | TYPE_PET | TYPE_TRUST));
+    const auto castTarget = PSpell->getValidTarget() == TARGET_SELF ? EntityID_t(POwner) : target;
+
+    const auto PTarget      = castTarget.resolve<CBattleEntity>();
     const auto PSpellFamily = PSpell->getSpellFamily();
     bool       canCast      = true;
 
@@ -632,7 +630,7 @@ auto CTrustController::Cast(uint16 targid, SpellID spellid) -> bool
                 }
                 if (PSpell->isCure())
                 {
-                    if (PTarget == MTarget && PTarget->GetHPP() > 50)
+                    if (PTarget && PTarget == MTarget && PTarget->GetHPP() > 50)
                     {
                         canCast = false;
                     }
@@ -661,7 +659,7 @@ auto CTrustController::Cast(uint16 targid, SpellID spellid) -> bool
         return false;
     }
 
-    return CMobController::Cast(targid, spellid);
+    return CMobController::Cast(castTarget, spellid);
 }
 
 auto CTrustController::GetTopEnmity() const -> CBattleEntity*

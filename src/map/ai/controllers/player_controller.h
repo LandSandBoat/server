@@ -33,7 +33,7 @@ public:
     virtual ~CPlayerController();
 
     auto Tick(timer::time_point tick) -> Task<void> override;
-    auto Cast(uint16 targid, SpellID spellid) -> bool override;
+    auto Cast(EntityID_t target, SpellID spellid) -> bool override;
     auto Engage(uint16 targid) -> bool override;
     auto ChangeTarget(uint16 targid) -> bool override;
     auto Disengage() -> bool override;

@@ -363,7 +363,7 @@ auto CMobController::TryCastSpell() -> bool
     // We need this because CastSpell has its own targetfind and PCastTarget is not used for it.
     if (maybeTargetOverride.has_value() && PCastTarget)
     {
-        Cast(PCastTarget->targid, chosenSpellId.value());
+        Cast(PCastTarget->entityId(), chosenSpellId.value());
     }
     else
     {
@@ -499,12 +499,12 @@ void CMobController::TapDeclaimTime()
     m_DeclaimTime = m_Tick;
 }
 
-auto CMobController::Cast(const uint16 targid, const SpellID spellid) -> bool
+auto CMobController::Cast(const EntityID_t target, const SpellID spellid) -> bool
 {
     TracyZoneScoped;
 
-    FaceTarget(targid);
-    return CController::Cast(targid, spellid);
+    FaceTarget(target.targid);
+    return CController::Cast(target, spellid);
 }
 
 void CMobController::SetFollowTarget(CBaseEntity* PTarget, const FollowType followType)
@@ -955,7 +955,7 @@ void CMobController::CastSpell(SpellID spellid)
 
         if (PCastTarget)
         {
-            Cast(PCastTarget->targid, spellid);
+            Cast(PCastTarget->entityId(), spellid);
         }
     }
 }

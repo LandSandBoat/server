@@ -46,11 +46,11 @@ void CController::Reset()
 {
 }
 
-auto CController::Cast(const uint16 targid, const SpellID spellid) -> bool
+auto CController::Cast(const EntityID_t target, const SpellID spellid) -> bool
 {
     if (POwner)
     {
-        return POwner->PAI->Internal_Cast(targid, spellid);
+        return POwner->PAI->Internal_Cast(target.targid, spellid);
     }
     return false;
 }
