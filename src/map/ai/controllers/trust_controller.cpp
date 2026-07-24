@@ -543,7 +543,7 @@ void CTrustController::PathOutToDistance(const CBattleEntity* PTarget, const flo
     }
     else
     {
-        FaceTarget(PTarget->targid);
+        FaceTarget(PTarget->entityId());
         m_InTransit = false;
     }
 }
@@ -577,7 +577,7 @@ auto CTrustController::RangedAttack(uint16 targid) -> bool
 
     if (m_Tick - m_LastRangedAttackTime > rangedDelay && !m_InTransit)
     {
-        FaceTarget(PTarget->targid);
+        FaceTarget(PTarget->entityId());
         if (POwner->PAI->CanChangeState() && POwner->PAI->Internal_RangedAttack(targid))
         {
             m_LastRangedAttackTime = m_Tick;
@@ -591,7 +591,7 @@ auto CTrustController::Cast(const EntityID_t target, SpellID spellid) -> bool
 {
     TracyZoneScoped;
 
-    FaceTarget(target.targid);
+    FaceTarget(target);
 
     if (POwner->PRecastContainer->Has(RECAST_MAGIC, static_cast<Recast>(spellid)))
     {

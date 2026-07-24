@@ -503,7 +503,7 @@ auto CMobController::Cast(const EntityID_t target, const SpellID spellid) -> boo
 {
     TracyZoneScoped;
 
-    FaceTarget(target.targid);
+    FaceTarget(target);
     return CController::Cast(target, spellid);
 }
 
@@ -1212,7 +1212,7 @@ auto CMobController::DoCombatTick(timer::time_point tick) -> Task<void>
         {
             if (PTarget != nullptr)
             {
-                FaceTarget(PTarget->targid);
+                FaceTarget(PTarget->entityId());
                 if (POwner->PAI->Internal_RangedAttack(PTarget->targid))
                 {
                     TapDeaggroTime();
@@ -1243,18 +1243,22 @@ auto CMobController::DoBuffTick() -> bool
     return TryCastSpell();
 }
 
-void CMobController::FaceTarget(const uint16 targid) const
+void CMobController::FaceTarget(const EntityID_t& target) const
 {
     TracyZoneScoped;
 
-    const uint16 resolvedTargid = targid != 0 ? targid : PMob->GetBattleTargetID();
-    const auto*  maybeTarget    = PMob->GetEntity(resolvedTargid);
-    if ((PMob->m_Behavior & xi::Behavior::NoTurn) == xi::Behavior::None && maybeTarget)
+    const auto* PTarget = target.isSet() ? target.resolve() : PMob->GetBattleTarget();
+    if ((PMob->m_Behavior & xi::Behavior::NoTurn) == xi::Behavior::None && PTarget)
     {
-        PMob->PAI->PathFind->LookAt(maybeTarget->loc.p);
+        PMob->PAI->PathFind->LookAt(PTarget->loc.p);
     }
 
     PMob->UpdateSpeed();
+}
+
+void CMobController::FaceTarget(const uint16 targid) const
+{
+    FaceTarget(EntityID_t(PMob->GetEntity(targid)));
 }
 
 void CMobController::HandleEnmity()
@@ -1326,7 +1330,7 @@ void CMobController::HandleEnmity()
 
         if (PTarget)
         {
-            FaceTarget(PTarget->targid);
+            FaceTarget(PTarget->entityId());
         }
     }
 }

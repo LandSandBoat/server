@@ -71,7 +71,8 @@ protected:
     virtual void Move();
     virtual auto DoCombatTick(timer::time_point tick) -> Task<void>;
     virtual auto DoBuffTick() -> bool;
-    void         FaceTarget(uint16 targid = 0) const;
+    void         FaceTarget(const EntityID_t& target = {}) const;
+    void         FaceTarget(uint16 targid) const;
     virtual void HandleEnmity();
     virtual auto DoRoamTick(timer::time_point tick) -> Task<void>;
     void         Wait(timer::duration _duration);
