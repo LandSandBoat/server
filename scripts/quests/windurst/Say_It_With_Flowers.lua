@@ -10,6 +10,11 @@ local watersID   = zones[xi.zone.WINDURST_WATERS]
 
 local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
 
+quest.reward =
+{
+    title = xi.title.CUPIDS_FLORIST,
+}
+
 local flowerList =
 {
     [0] = { itemId = xi.item.CARNATION,  gil = 300 },
