@@ -8,10 +8,10 @@ meta:
     table: xi.mobType
 
 values:
-  normal: 0x00
-  unused: 0x01 # available for use
-  notorious: 0x02
-  fished: 0x04
-  called: 0x08
+  normal:      0x00
+  unused:      0x01 # available for use
+  notorious:   0x02
+  fished:      0x04
+  called:      0x08
   battlefield: 0x10
-  event: 0x20
+  event:       0x20

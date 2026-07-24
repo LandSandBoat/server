@@ -7,5 +7,5 @@ meta:
     table: xi.spawnAnimation
 
 values:
-  normal: 0
+  normal:  0
   special: 1

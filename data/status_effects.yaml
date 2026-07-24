@@ -4,7 +4,7 @@ meta:
   enum:
     cpp:
       underlying: uint16_t
-      class: StatusEffect
+      class:      StatusEffect
     lua:
       table: xi.effect
 
@@ -20,23 +20,23 @@ status_effects:
     id: 1
     flags:
       - no_cancel
-    overwrite: always
-    min_duration: 1
+    overwrite:           always
+    min_duration:        1
     wear_off_message_id: 204
 
   sleep_i:
-    id: 2
+    id:   2
     name: sleep
     flags:
       - damage
       - death
       - no_cancel
-    exclusion_group: sleep_i
-    negative: sleep_ii
-    overwrite: higher
-    block: lullaby
-    element: dark
-    min_duration: 1
+    exclusion_group:     sleep_i
+    negative:            sleep_ii
+    overwrite:           higher
+    block:               lullaby
+    element:             dark
+    min_duration:        1
     wear_off_message_id: 204
 
   poison:
@@ -45,9 +45,9 @@ status_effects:
       - death
       - waltzable
       - no_cancel
-    overwrite: never
-    element: water
-    min_duration: 1
+    overwrite:           never
+    element:             water
+    min_duration:        1
     wear_off_message_id: 204
 
   paralysis:
@@ -56,9 +56,9 @@ status_effects:
       - death
       - waltzable
       - no_cancel
-    overwrite: higher
-    element: ice
-    min_duration: 1
+    overwrite:           higher
+    element:             ice
+    min_duration:        1
     wear_off_message_id: 204
 
   blindness:
@@ -67,9 +67,9 @@ status_effects:
       - death
       - waltzable
       - no_cancel
-    overwrite: higher
-    element: dark
-    min_duration: 1
+    overwrite:           higher
+    element:             dark
+    min_duration:        1
     wear_off_message_id: 204
 
   silence:
@@ -78,9 +78,9 @@ status_effects:
       - death
       - waltzable
       - no_cancel
-    overwrite: never
-    element: wind
-    min_duration: 1
+    overwrite:           never
+    element:             wind
+    min_duration:        1
     wear_off_message_id: 204
 
   petrification:
@@ -88,11 +88,11 @@ status_effects:
     flags:
       - death
       - no_cancel
-    exclusion_group: petrification
-    overwrite: never
-    block: stun
-    element: earth
-    min_duration: 1
+    exclusion_group:     petrification
+    overwrite:           never
+    block:               stun
+    element:             earth
+    min_duration:        1
     wear_off_message_id: 204
 
   disease:
@@ -102,23 +102,23 @@ status_effects:
       - no_rest
       - waltzable
       - no_cancel
-    exclusion_group: disease
-    overwrite: never
-    element: fire
-    min_duration: 1
+    exclusion_group:     disease
+    overwrite:           never
+    element:             fire
+    min_duration:        1
     wear_off_message_id: 204
 
   curse_i:
-    id: 9
+    id:   9
     name: curse
     flags:
       - death
       - waltzable
       - no_cancel
-    exclusion_group: curse_i
-    overwrite: never
-    element: dark
-    min_duration: 1
+    exclusion_group:     curse_i
+    overwrite:           never
+    element:             dark
+    min_duration:        1
     wear_off_message_id: 204
 
   stun:
@@ -127,10 +127,10 @@ status_effects:
       - erasable
       - death
       - no_cancel
-    overwrite: never
-    block: petrification
-    element: thunder
-    min_duration: 1
+    overwrite:           never
+    block:               petrification
+    element:             thunder
+    min_duration:        1
     wear_off_message_id: 204
 
   bind:
@@ -140,9 +140,9 @@ status_effects:
       - death
       - waltzable
       - no_cancel
-    overwrite: never
-    element: ice
-    min_duration: 1
+    overwrite:           never
+    element:             ice
+    min_duration:        1
     wear_off_message_id: 204
 
   weight:
@@ -152,10 +152,10 @@ status_effects:
       - death
       - waltzable
       - no_cancel
-    negative: flee
-    overwrite: higher
-    element: wind
-    min_duration: 1
+    negative:            flee
+    overwrite:           higher
+    element:             wind
+    min_duration:        1
     wear_off_message_id: 204
 
   slow:
@@ -165,19 +165,19 @@ status_effects:
       - death
       - waltzable
       - no_cancel
-    negative: haste
-    overwrite: higher
-    element: earth
+    negative:     haste
+    overwrite:    higher
+    element:      earth
     min_duration: 1
 
   charm_i:
-    id: 14
+    id:   14
     name: charm
     flags:
       - death
       - no_cancel
-    overwrite: never
-    element: light
+    overwrite:           never
+    element:             light
     wear_off_message_id: 204
 
   doom:
@@ -185,9 +185,9 @@ status_effects:
     flags:
       - death
       - no_cancel
-    overwrite: never
-    element: dark
-    min_duration: 1
+    overwrite:           never
+    element:             dark
+    min_duration:        1
     wear_off_message_id: 204
 
   amnesia:
@@ -195,19 +195,19 @@ status_effects:
     flags:
       - death
       - no_cancel
-    overwrite: never
-    element: fire
-    min_duration: 1
+    overwrite:           never
+    element:             fire
+    min_duration:        1
     wear_off_message_id: 204
 
   charm_ii:
-    id: 17
+    id:   17
     name: charm
     flags:
       - death
       - no_cancel
-    overwrite: never
-    element: light
+    overwrite:           never
+    element:             light
     wear_off_message_id: 204
 
   gradual_petrification:
@@ -215,37 +215,37 @@ status_effects:
     flags:
       - death
       - no_cancel
-    exclusion_group: petrification
-    overwrite: never
-    element: earth
-    min_duration: 1
+    exclusion_group:     petrification
+    overwrite:           never
+    element:             earth
+    min_duration:        1
     wear_off_message_id: 204
 
   sleep_ii:
-    id: 19
+    id:   19
     name: sleep
     flags:
       - damage
       - death
       - no_cancel
-    exclusion_group: sleep_i
-    overwrite: higher
-    element: dark
-    min_duration: 1
+    exclusion_group:     sleep_i
+    overwrite:           higher
+    element:             dark
+    min_duration:        1
     wear_off_message_id: 204
 
   # Zombie
   curse_ii:
-    id: 20
+    id:   20
     name: curse
     flags:
       - death
       - no_rest
       - no_cancel
-    exclusion_group: curse_i
-    overwrite: never
-    element: dark
-    min_duration: 1
+    exclusion_group:     curse_i
+    overwrite:           never
+    element:             dark
+    min_duration:        1
     wear_off_message_id: 204
 
   addle:
@@ -256,8 +256,8 @@ status_effects:
       - on_zone
       - waltzable
       - no_cancel
-    overwrite: never
-    element: fire
+    overwrite:    never
+    element:      fire
     min_duration: 1
 
   intimidate:
@@ -265,8 +265,8 @@ status_effects:
     flags:
       - death
       - no_cancel
-    overwrite: never
-    min_duration: 1
+    overwrite:           never
+    min_duration:        1
     wear_off_message_id: 204
 
   kaustra:
@@ -275,7 +275,7 @@ status_effects:
       - death
       - on_zone
       - no_cancel
-    negative: embrava
+    negative:            embrava
     wear_off_message_id: 204
 
   terror:
@@ -283,9 +283,9 @@ status_effects:
     flags:
       - death
       - no_cancel
-    exclusion_group: petrification
-    element: dark
-    min_duration: 1
+    exclusion_group:     petrification
+    element:             dark
+    min_duration:        1
     wear_off_message_id: 204
 
   mute:
@@ -293,10 +293,10 @@ status_effects:
     flags:
       - death
       - no_cancel
-    overwrite: never
-    remove: silence
-    element: wind
-    min_duration: 1
+    overwrite:           never
+    remove:              silence
+    element:             wind
+    min_duration:        1
     wear_off_message_id: 204
 
   bane:
@@ -305,10 +305,10 @@ status_effects:
       - death
       - waltzable
       - no_cancel
-    overwrite: never
-    remove: curse_i
-    element: dark
-    min_duration: 1
+    overwrite:           never
+    remove:              curse_i
+    element:             dark
+    min_duration:        1
     wear_off_message_id: 204
 
   plague:
@@ -318,10 +318,10 @@ status_effects:
       - no_rest
       - waltzable
       - no_cancel
-    exclusion_group: disease
-    overwrite: never
-    element: fire
-    min_duration: 1
+    exclusion_group:     disease
+    overwrite:           never
+    element:             fire
+    min_duration:        1
     wear_off_message_id: 204
 
   flee:
@@ -331,7 +331,7 @@ status_effects:
       - empathy
       - death
     negative: weight
-    element: wind
+    element:  wind
 
   haste:
     id: 33
@@ -340,7 +340,7 @@ status_effects:
       - empathy
       - death
     negative: slow
-    element: wind
+    element:  wind
     sort_key: 100
 
   blaze_spikes:
@@ -350,8 +350,8 @@ status_effects:
       - empathy
       - death
     exclusion_group: blaze_spikes
-    element: fire
-    sort_key: 800
+    element:         fire
+    sort_key:        800
 
   ice_spikes:
     id: 35
@@ -360,8 +360,8 @@ status_effects:
       - empathy
       - death
     exclusion_group: blaze_spikes
-    element: ice
-    sort_key: 800
+    element:         ice
+    sort_key:        800
 
   blink:
     id: 36
@@ -370,9 +370,9 @@ status_effects:
       - empathy
       - death
     exclusion_group: blink
-    block: copy_image
-    element: wind
-    sort_key: 50
+    block:           copy_image
+    element:         wind
+    sort_key:        50
 
   stoneskin:
     id: 37
@@ -381,8 +381,8 @@ status_effects:
       - empathy
       - death
     overwrite: tier_higher
-    element: earth
-    sort_key: 600
+    element:   earth
+    sort_key:  600
 
   shock_spikes:
     id: 38
@@ -391,8 +391,8 @@ status_effects:
       - empathy
       - death
     exclusion_group: blaze_spikes
-    element: thunder
-    sort_key: 800
+    element:         thunder
+    sort_key:        800
 
   aquaveil:
     id: 39
@@ -400,7 +400,7 @@ status_effects:
       - dispelable
       - empathy
       - death
-    element: water
+    element:  water
     sort_key: 650
 
   protect:
@@ -409,7 +409,7 @@ status_effects:
       - dispelable
       - empathy
       - death
-    element: light
+    element:  light
     sort_key: 200
 
   shell:
@@ -418,7 +418,7 @@ status_effects:
       - dispelable
       - empathy
       - death
-    element: light
+    element:  light
     sort_key: 250
 
   regen:
@@ -427,7 +427,7 @@ status_effects:
       - dispelable
       - empathy
       - death
-    element: light
+    element:  light
     sort_key: 700
 
   refresh:
@@ -436,7 +436,7 @@ status_effects:
       - dispelable
       - empathy
       - death
-    element: light
+    element:  light
     sort_key: 750
 
   mighty_strikes:
@@ -503,7 +503,7 @@ status_effects:
       - on_zone
       - on_jobchange
     exclusion_group: enfire
-    element: dark
+    element:         dark
 
   soul_voice:
     id: 52
@@ -620,8 +620,8 @@ status_effects:
     flags:
       - dispelable
       - death
-    remove: blink
-    element: wind
+    remove:   blink
+    element:  wind
     sort_key: 50
 
   third_eye:
@@ -637,7 +637,7 @@ status_effects:
       - dispelable
       - empathy
       - death
-    remove: blood_rage
+    remove:   blood_rage
     sort_key: 400
 
   invisible:
@@ -652,8 +652,8 @@ status_effects:
       - detectable
       - logout
     overwrite: never
-    element: wind
-    sort_key: 850
+    element:   wind
+    sort_key:  850
 
   deodorize:
     id: 70
@@ -665,8 +665,8 @@ status_effects:
       - detectable
       - logout
     overwrite: never
-    element: wind
-    sort_key: 1100
+    element:   wind
+    sort_key:  1100
 
   sneak:
     id: 71
@@ -678,8 +678,8 @@ status_effects:
       - detectable
       - logout
     overwrite: never
-    element: wind
-    sort_key: 1150
+    element:   wind
+    sort_key:  1150
 
   sharpshot:
     id: 72
@@ -758,7 +758,7 @@ status_effects:
       - death
       - on_zone
     negative: str_down
-    element: fire
+    element:  fire
 
   dex_boost:
     id: 81
@@ -768,7 +768,7 @@ status_effects:
       - death
       - on_zone
     negative: dex_down
-    element: thunder
+    element:  thunder
 
   vit_boost:
     id: 82
@@ -778,7 +778,7 @@ status_effects:
       - death
       - on_zone
     negative: vit_down
-    element: earth
+    element:  earth
 
   agi_boost:
     id: 83
@@ -788,7 +788,7 @@ status_effects:
       - death
       - on_zone
     negative: agi_down
-    element: wind
+    element:  wind
 
   int_boost:
     id: 84
@@ -798,7 +798,7 @@ status_effects:
       - death
       - on_zone
     negative: int_down
-    element: ice
+    element:  ice
 
   mnd_boost:
     id: 85
@@ -808,7 +808,7 @@ status_effects:
       - death
       - on_zone
     negative: mnd_down
-    element: water
+    element:  water
 
   chr_boost:
     id: 86
@@ -818,7 +818,7 @@ status_effects:
       - death
       - on_zone
     negative: chr_down
-    element: light
+    element:  light
 
   trick_attack:
     id: 87
@@ -836,7 +836,7 @@ status_effects:
       - death
       - on_zone
     negative: max_hp_down
-    element: light
+    element:  light
 
   max_mp_boost:
     id: 89
@@ -846,7 +846,7 @@ status_effects:
       - death
       - on_zone
     negative: max_mp_down
-    element: dark
+    element:  dark
 
   accuracy_boost:
     id: 90
@@ -856,7 +856,7 @@ status_effects:
       - death
       - on_zone
     negative: accuracy_down
-    element: thunder
+    element:  thunder
 
   attack_boost:
     id: 91
@@ -866,7 +866,7 @@ status_effects:
       - death
       - on_zone
     negative: attack_down
-    element: fire
+    element:  fire
 
   evasion_boost:
     id: 92
@@ -876,7 +876,7 @@ status_effects:
       - death
       - on_zone
     negative: evasion_down
-    element: wind
+    element:  wind
 
   defense_boost:
     id: 93
@@ -886,7 +886,7 @@ status_effects:
       - death
       - on_zone
     negative: defense_down
-    element: earth
+    element:  earth
 
   enfire:
     id: 94
@@ -896,9 +896,9 @@ status_effects:
       - death
       - on_zone
     exclusion_group: enfire
-    negative: blood_weapon
-    element: fire
-    sort_key: 1200
+    negative:        blood_weapon
+    element:         fire
+    sort_key:        1200
 
   enblizzard:
     id: 95
@@ -908,9 +908,9 @@ status_effects:
       - death
       - on_zone
     exclusion_group: enfire
-    negative: blood_weapon
-    element: ice
-    sort_key: 1200
+    negative:        blood_weapon
+    element:         ice
+    sort_key:        1200
 
   enaero:
     id: 96
@@ -920,9 +920,9 @@ status_effects:
       - death
       - on_zone
     exclusion_group: enfire
-    negative: blood_weapon
-    element: wind
-    sort_key: 1200
+    negative:        blood_weapon
+    element:         wind
+    sort_key:        1200
 
   enstone:
     id: 97
@@ -932,9 +932,9 @@ status_effects:
       - death
       - on_zone
     exclusion_group: enfire
-    negative: blood_weapon
-    element: earth
-    sort_key: 1200
+    negative:        blood_weapon
+    element:         earth
+    sort_key:        1200
 
   enthunder:
     id: 98
@@ -944,9 +944,9 @@ status_effects:
       - death
       - on_zone
     exclusion_group: enfire
-    negative: blood_weapon
-    element: thunder
-    sort_key: 1200
+    negative:        blood_weapon
+    element:         thunder
+    sort_key:        1200
 
   enwater:
     id: 99
@@ -956,9 +956,9 @@ status_effects:
       - death
       - on_zone
     exclusion_group: enfire
-    negative: blood_weapon
-    element: water
-    sort_key: 1200
+    negative:        blood_weapon
+    element:         water
+    sort_key:        1200
 
   barfire:
     id: 100
@@ -967,8 +967,8 @@ status_effects:
       - empathy
       - death
     exclusion_group: barfire
-    element: water
-    sort_key: 500
+    element:         water
+    sort_key:        500
 
   barblizzard:
     id: 101
@@ -977,8 +977,8 @@ status_effects:
       - empathy
       - death
     exclusion_group: barfire
-    element: fire
-    sort_key: 500
+    element:         fire
+    sort_key:        500
 
   baraero:
     id: 102
@@ -987,8 +987,8 @@ status_effects:
       - empathy
       - death
     exclusion_group: barfire
-    element: ice
-    sort_key: 500
+    element:         ice
+    sort_key:        500
 
   barstone:
     id: 103
@@ -997,8 +997,8 @@ status_effects:
       - empathy
       - death
     exclusion_group: barfire
-    element: wind
-    sort_key: 500
+    element:         wind
+    sort_key:        500
 
   barthunder:
     id: 104
@@ -1007,8 +1007,8 @@ status_effects:
       - empathy
       - death
     exclusion_group: barfire
-    element: earth
-    sort_key: 500
+    element:         earth
+    sort_key:        500
 
   barwater:
     id: 105
@@ -1017,8 +1017,8 @@ status_effects:
       - empathy
       - death
     exclusion_group: barfire
-    element: thunder
-    sort_key: 500
+    element:         thunder
+    sort_key:        500
 
   barsleep:
     id: 106
@@ -1027,8 +1027,8 @@ status_effects:
       - empathy
       - death
     exclusion_group: barsleep
-    element: light
-    sort_key: 500
+    element:         light
+    sort_key:        500
 
   barpoison:
     id: 107
@@ -1037,8 +1037,8 @@ status_effects:
       - empathy
       - death
     exclusion_group: barsleep
-    element: thunder
-    sort_key: 500
+    element:         thunder
+    sort_key:        500
 
   barparalyze:
     id: 108
@@ -1047,8 +1047,8 @@ status_effects:
       - empathy
       - death
     exclusion_group: barsleep
-    element: fire
-    sort_key: 500
+    element:         fire
+    sort_key:        500
 
   barblind:
     id: 109
@@ -1057,8 +1057,8 @@ status_effects:
       - empathy
       - death
     exclusion_group: barsleep
-    element: light
-    sort_key: 500
+    element:         light
+    sort_key:        500
 
   barsilence:
     id: 110
@@ -1067,8 +1067,8 @@ status_effects:
       - empathy
       - death
     exclusion_group: barsleep
-    element: ice
-    sort_key: 500
+    element:         ice
+    sort_key:        500
 
   barpetrify:
     id: 111
@@ -1077,8 +1077,8 @@ status_effects:
       - empathy
       - death
     exclusion_group: barsleep
-    element: wind
-    sort_key: 500
+    element:         wind
+    sort_key:        500
 
   barvirus:
     id: 112
@@ -1087,8 +1087,8 @@ status_effects:
       - empathy
       - death
     exclusion_group: barsleep
-    element: water
-    sort_key: 500
+    element:         water
+    sort_key:        500
 
   reraise:
     id: 113
@@ -1096,7 +1096,7 @@ status_effects:
       - empathy
       - death
       - on_jobchange
-    element: light
+    element:  light
     sort_key: 900
 
   cover:
@@ -1119,7 +1119,7 @@ status_effects:
       - dispelable
       - death
       - on_zone
-    element: light
+    element:  light
     sort_key: 1050
 
   warding_circle:
@@ -1137,7 +1137,7 @@ status_effects:
       - death
 
   str_boost_ii:
-    id: 119
+    id:   119
     name: str_boost
     flags:
       - dispelable
@@ -1148,7 +1148,7 @@ status_effects:
     element: fire
 
   dex_boost_ii:
-    id: 120
+    id:   120
     name: dex_boost
     flags:
       - dispelable
@@ -1159,7 +1159,7 @@ status_effects:
     element: thunder
 
   vit_boost_ii:
-    id: 121
+    id:   121
     name: vit_boost
     flags:
       - dispelable
@@ -1170,7 +1170,7 @@ status_effects:
     element: earth
 
   agi_boost_ii:
-    id: 122
+    id:   122
     name: agi_boost
     flags:
       - dispelable
@@ -1181,7 +1181,7 @@ status_effects:
     element: wind
 
   int_boost_ii:
-    id: 123
+    id:   123
     name: int_boost
     flags:
       - dispelable
@@ -1192,7 +1192,7 @@ status_effects:
     element: ice
 
   mnd_boost_ii:
-    id: 124
+    id:   124
     name: mnd_boost
     flags:
       - dispelable
@@ -1203,7 +1203,7 @@ status_effects:
     element: water
 
   chr_boost_ii:
-    id: 125
+    id:   125
     name: chr_boost
     flags:
       - dispelable
@@ -1235,8 +1235,8 @@ status_effects:
       - death
       - waltzable
       - no_cancel
-    block: drown
-    remove: frost
+    block:   drown
+    remove:  frost
     element: fire
 
   frost:
@@ -1246,8 +1246,8 @@ status_effects:
       - death
       - waltzable
       - no_cancel
-    block: burn
-    remove: choke
+    block:   burn
+    remove:  choke
     element: ice
 
   choke:
@@ -1257,8 +1257,8 @@ status_effects:
       - death
       - waltzable
       - no_cancel
-    block: frost
-    remove: rasp
+    block:   frost
+    remove:  rasp
     element: wind
 
   rasp:
@@ -1268,8 +1268,8 @@ status_effects:
       - death
       - waltzable
       - no_cancel
-    block: choke
-    remove: shock
+    block:   choke
+    remove:  shock
     element: earth
 
   shock:
@@ -1279,8 +1279,8 @@ status_effects:
       - death
       - waltzable
       - no_cancel
-    block: rasp
-    remove: drown
+    block:   rasp
+    remove:  drown
     element: thunder
 
   drown:
@@ -1290,8 +1290,8 @@ status_effects:
       - death
       - waltzable
       - no_cancel
-    block: shock
-    remove: burn
+    block:   shock
+    remove:  burn
     element: water
 
   dia:
@@ -1301,9 +1301,9 @@ status_effects:
       - death
       - waltzable
       - no_cancel
-    negative: dia
+    negative:  dia
     overwrite: higher
-    element: light
+    element:   light
 
   bio:
     id: 135
@@ -1312,9 +1312,9 @@ status_effects:
       - death
       - waltzable
       - no_cancel
-    negative: dia
+    negative:  dia
     overwrite: higher
-    element: dark
+    element:   dark
 
   str_down:
     id: 136
@@ -1323,7 +1323,7 @@ status_effects:
       - death
       - waltzable
       - no_cancel
-    remove: str_boost
+    remove:  str_boost
     element: water
 
   dex_down:
@@ -1333,7 +1333,7 @@ status_effects:
       - death
       - waltzable
       - no_cancel
-    remove: dex_boost
+    remove:  dex_boost
     element: earth
 
   vit_down:
@@ -1343,7 +1343,7 @@ status_effects:
       - death
       - waltzable
       - no_cancel
-    remove: vit_boost
+    remove:  vit_boost
     element: wind
 
   agi_down:
@@ -1353,7 +1353,7 @@ status_effects:
       - death
       - waltzable
       - no_cancel
-    remove: agi_boost
+    remove:  agi_boost
     element: ice
 
   int_down:
@@ -1363,7 +1363,7 @@ status_effects:
       - death
       - waltzable
       - no_cancel
-    remove: int_boost
+    remove:  int_boost
     element: fire
 
   mnd_down:
@@ -1373,7 +1373,7 @@ status_effects:
       - death
       - waltzable
       - no_cancel
-    remove: mnd_boost
+    remove:  mnd_boost
     element: thunder
 
   chr_down:
@@ -1383,7 +1383,7 @@ status_effects:
       - death
       - waltzable
       - no_cancel
-    remove: chr_boost
+    remove:  chr_boost
     element: dark
 
   level_restriction:
@@ -1400,7 +1400,7 @@ status_effects:
       - death
       - waltzable
       - no_cancel
-    remove: max_hp_boost
+    remove:  max_hp_boost
     element: dark
 
   max_mp_down:
@@ -1410,7 +1410,7 @@ status_effects:
       - death
       - waltzable
       - no_cancel
-    remove: max_mp_boost
+    remove:  max_mp_boost
     element: light
 
   accuracy_down:
@@ -1421,7 +1421,7 @@ status_effects:
       - on_zone
       - waltzable
       - no_cancel
-    remove: accuracy_boost
+    remove:  accuracy_boost
     element: earth
 
   attack_down:
@@ -1432,7 +1432,7 @@ status_effects:
       - on_zone
       - waltzable
       - no_cancel
-    remove: attack_boost
+    remove:  attack_boost
     element: water
 
   evasion_down:
@@ -1443,7 +1443,7 @@ status_effects:
       - on_zone
       - waltzable
       - no_cancel
-    remove: evasion_boost
+    remove:  evasion_boost
     element: ice
 
   defense_down:
@@ -1454,7 +1454,7 @@ status_effects:
       - on_zone
       - waltzable
       - no_cancel
-    remove: defense_boost
+    remove:  defense_boost
     element: wind
 
   physical_shield:
@@ -1486,7 +1486,7 @@ status_effects:
       - death
       - no_cancel
     exclusion_group: blaze_spikes
-    sort_key: 800
+    sort_key:        800
 
   shining_ruby:
     id: 154
@@ -1511,8 +1511,8 @@ status_effects:
       - on_zone
       - waltzable
       - no_cancel
-    overwrite: higher
-    element: light
+    overwrite:           higher
+    element:             light
     wear_off_message_id: 204
 
   sj_restriction:
@@ -1555,7 +1555,7 @@ status_effects:
       - death
       - on_zone
       - no_cancel
-    overwrite: ignore_duplicate
+    overwrite:           ignore_duplicate
     wear_off_message_id: 204
 
   azure_lore:
@@ -1637,7 +1637,7 @@ status_effects:
       - empathy
       - death
     exclusion_group: blaze_spikes
-    sort_key: 800
+    sort_key:        800
 
   magic_acc_down:
     id: 174
@@ -1671,7 +1671,7 @@ status_effects:
     wear_off_message_id: 204
 
   encumbrance_ii:
-    id: 177
+    id:   177
     name: encumbrance
     flags:
       - on_zone
@@ -1793,8 +1793,8 @@ status_effects:
       - song
       - no_cancel
     overwrite: higher
-    element: light
-    sort_key: 2000
+    element:   light
+    sort_key:  2000
 
   lullaby:
     id: 193
@@ -1805,12 +1805,12 @@ status_effects:
       - song
       - no_cancel
     exclusion_group: sleep_i
-    negative: sleep_ii
-    overwrite: never
-    block: sleep_i
-    element: light
-    min_duration: 1
-    sort_key: 2000
+    negative:        sleep_ii
+    overwrite:       never
+    block:           sleep_i
+    element:         light
+    min_duration:    1
+    sort_key:        2000
 
   elegy:
     id: 194
@@ -1820,7 +1820,7 @@ status_effects:
       - on_zone
       - song
       - no_cancel
-    element: earth
+    element:  earth
     sort_key: 2000
 
   paeon:
@@ -1833,8 +1833,8 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    element: light
-    sort_key: 2000
+    element:   light
+    sort_key:  2000
 
   ballad:
     id: 196
@@ -1846,8 +1846,8 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    element: light
-    sort_key: 2000
+    element:   light
+    sort_key:  2000
 
   minne:
     id: 197
@@ -1859,8 +1859,8 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    element: earth
-    sort_key: 2000
+    element:   earth
+    sort_key:  2000
 
   minuet:
     id: 198
@@ -1872,8 +1872,8 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    element: fire
-    sort_key: 2000
+    element:   fire
+    sort_key:  2000
 
   madrigal:
     id: 199
@@ -1885,8 +1885,8 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    element: thunder
-    sort_key: 2000
+    element:   thunder
+    sort_key:  2000
 
   prelude:
     id: 200
@@ -1898,7 +1898,7 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 2000
+    sort_key:  2000
 
   mambo:
     id: 201
@@ -1910,7 +1910,7 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 2000
+    sort_key:  2000
 
   aubade:
     id: 202
@@ -1922,7 +1922,7 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 2000
+    sort_key:  2000
 
   pastoral:
     id: 203
@@ -1934,7 +1934,7 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 2000
+    sort_key:  2000
 
   hum:
     id: 204
@@ -1945,7 +1945,7 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 2000
+    sort_key:  2000
 
   fantasia:
     id: 205
@@ -1957,7 +1957,7 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 2000
+    sort_key:  2000
 
   operetta:
     id: 206
@@ -1969,7 +1969,7 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 2000
+    sort_key:  2000
 
   capriccio:
     id: 207
@@ -1981,7 +1981,7 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 2000
+    sort_key:  2000
 
   serenade:
     id: 208
@@ -1992,7 +1992,7 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 2000
+    sort_key:  2000
 
   round:
     id: 209
@@ -2004,7 +2004,7 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 2000
+    sort_key:  2000
 
   gavotte:
     id: 210
@@ -2016,7 +2016,7 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 2000
+    sort_key:  2000
 
   fugue:
     id: 211
@@ -2027,7 +2027,7 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 2000
+    sort_key:  2000
 
   rhapsody:
     id: 212
@@ -2038,7 +2038,7 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 2000
+    sort_key:  2000
 
   aria:
     id: 213
@@ -2049,7 +2049,7 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 2000
+    sort_key:  2000
 
   march:
     id: 214
@@ -2061,7 +2061,7 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 2000
+    sort_key:  2000
 
   etude:
     id: 215
@@ -2073,7 +2073,7 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 2000
+    sort_key:  2000
 
   carol:
     id: 216
@@ -2085,7 +2085,7 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 2000
+    sort_key:  2000
 
   threnody:
     id: 217
@@ -2097,7 +2097,7 @@ status_effects:
       - song
       - no_cancel
     overwrite: higher
-    sort_key: 2000
+    sort_key:  2000
 
   hymnus:
     id: 218
@@ -2109,7 +2109,7 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 2000
+    sort_key:  2000
 
   mazurka:
     id: 219
@@ -2134,7 +2134,7 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 2000
+    sort_key:  2000
 
   dirge:
     id: 221
@@ -2146,7 +2146,7 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 2000
+    sort_key:  2000
 
   scherzo:
     id: 222
@@ -2158,7 +2158,7 @@ status_effects:
       - song
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 2000
+    sort_key:  2000
 
   nocturne:
     id: 223
@@ -2167,7 +2167,7 @@ status_effects:
       - on_zone
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 2000
+    sort_key:  2000
 
   store_tp:
     id: 227
@@ -2206,14 +2206,14 @@ status_effects:
       - on_jobchange
 
   auto_regen:
-    id: 233
+    id:   233
     name: auto-regen
     flags:
       - death
     overwrite: ignore_duplicate
 
   auto_refresh:
-    id: 234
+    id:   234
     name: auto-refresh
     flags:
       - death
@@ -2292,7 +2292,7 @@ status_effects:
     exclusion_group: imagery_1
 
   imagery_1:
-    id: 244
+    id:   244
     name: imagery
     flags:
       - death
@@ -2300,7 +2300,7 @@ status_effects:
     exclusion_group: imagery_1
 
   imagery_2:
-    id: 245
+    id:   245
     name: imagery
     flags:
       - death
@@ -2308,7 +2308,7 @@ status_effects:
     exclusion_group: imagery_1
 
   imagery_3:
-    id: 246
+    id:   246
     name: imagery
     flags:
       - death
@@ -2316,7 +2316,7 @@ status_effects:
     exclusion_group: imagery_1
 
   imagery_4:
-    id: 247
+    id:   247
     name: imagery
     flags:
       - death
@@ -2324,7 +2324,7 @@ status_effects:
     exclusion_group: imagery_1
 
   imagery_5:
-    id: 248
+    id:   248
     name: imagery
     flags:
       - death
@@ -2397,7 +2397,7 @@ status_effects:
       - no_rest
 
   encumbrance_i:
-    id: 259
+    id:   259
     name: encumbrance
     flags:
       - no_cancel
@@ -2515,8 +2515,8 @@ status_effects:
       - death
       - on_zone
     exclusion_group: enfire
-    negative: blood_weapon
-    element: light
+    negative:        blood_weapon
+    element:         light
 
   auspice:
     id: 275
@@ -2525,8 +2525,8 @@ status_effects:
       - on_zone
       - on_jobchange
     exclusion_group: enfire
-    negative: blood_weapon
-    element: light
+    negative:        blood_weapon
+    element:         light
 
   confrontation:
     id: 276
@@ -2545,8 +2545,8 @@ status_effects:
       - death
       - on_zone
     exclusion_group: enfire
-    negative: blood_weapon
-    element: fire
+    negative:        blood_weapon
+    element:         fire
 
   enblizzard_ii:
     id: 278
@@ -2556,8 +2556,8 @@ status_effects:
       - death
       - on_zone
     exclusion_group: enfire
-    negative: blood_weapon
-    element: ice
+    negative:        blood_weapon
+    element:         ice
 
   enaero_ii:
     id: 279
@@ -2567,8 +2567,8 @@ status_effects:
       - death
       - on_zone
     exclusion_group: enfire
-    negative: blood_weapon
-    element: wind
+    negative:        blood_weapon
+    element:         wind
 
   enstone_ii:
     id: 280
@@ -2578,8 +2578,8 @@ status_effects:
       - death
       - on_zone
     exclusion_group: enfire
-    negative: blood_weapon
-    element: earth
+    negative:        blood_weapon
+    element:         earth
 
   enthunder_ii:
     id: 281
@@ -2589,8 +2589,8 @@ status_effects:
       - death
       - on_zone
     exclusion_group: enfire
-    negative: blood_weapon
-    element: thunder
+    negative:        blood_weapon
+    element:         thunder
 
   enwater_ii:
     id: 282
@@ -2600,8 +2600,8 @@ status_effects:
       - death
       - on_zone
     exclusion_group: enfire
-    negative: blood_weapon
-    element: water
+    negative:        blood_weapon
+    element:         water
 
   perfect_defense:
     id: 283
@@ -2631,7 +2631,7 @@ status_effects:
       - empathy
       - death
     exclusion_group: barsleep
-    sort_key: 500
+    sort_key:        500
 
   atma:
     id: 287
@@ -2649,8 +2649,8 @@ status_effects:
       - death
       - on_zone
     exclusion_group: enfire
-    negative: blood_weapon
-    element: dark
+    negative:        blood_weapon
+    element:         dark
 
   enmity_boost:
     id: 289
@@ -2721,7 +2721,7 @@ status_effects:
     block: poison
 
   crit_hit_evasion_down:
-    id: 298
+    id:   298
     name: critical_hit_evasion_down
     flags:
       - erasable
@@ -2747,7 +2747,7 @@ status_effects:
       - on_jobchange
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 3000
+    sort_key:  3000
 
   ice_maneuver:
     id: 301
@@ -2759,7 +2759,7 @@ status_effects:
       - on_jobchange
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 3000
+    sort_key:  3000
 
   wind_maneuver:
     id: 302
@@ -2771,7 +2771,7 @@ status_effects:
       - on_jobchange
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 3000
+    sort_key:  3000
 
   earth_maneuver:
     id: 303
@@ -2783,7 +2783,7 @@ status_effects:
       - on_jobchange
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 3000
+    sort_key:  3000
 
   thunder_maneuver:
     id: 304
@@ -2795,7 +2795,7 @@ status_effects:
       - on_jobchange
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 3000
+    sort_key:  3000
 
   water_maneuver:
     id: 305
@@ -2807,7 +2807,7 @@ status_effects:
       - on_jobchange
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 3000
+    sort_key:  3000
 
   light_maneuver:
     id: 306
@@ -2819,7 +2819,7 @@ status_effects:
       - on_jobchange
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 3000
+    sort_key:  3000
 
   dark_maneuver:
     id: 307
@@ -2831,10 +2831,10 @@ status_effects:
       - on_jobchange
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 3000
+    sort_key:  3000
 
   double_up_chance:
-    id: 308
+    id:   308
     name: double-up_chance
     flags:
       - death
@@ -2850,7 +2850,7 @@ status_effects:
       - on_zone
       - no_cancel
     overwrite: ignore_duplicate
-    sort_key: 2050
+    sort_key:  2050
 
   fighters_roll:
     id: 310
@@ -3525,7 +3525,7 @@ status_effects:
       - no_cancel
 
   finishing_move_1:
-    id: 381
+    id:   381
     name: finishing_move
     flags:
       - death
@@ -3534,7 +3534,7 @@ status_effects:
       - no_cancel
 
   finishing_move_2:
-    id: 382
+    id:   382
     name: finishing_move
     flags:
       - death
@@ -3543,7 +3543,7 @@ status_effects:
       - no_cancel
 
   finishing_move_3:
-    id: 383
+    id:   383
     name: finishing_move
     flags:
       - death
@@ -3552,7 +3552,7 @@ status_effects:
       - no_cancel
 
   finishing_move_4:
-    id: 384
+    id:   384
     name: finishing_move
     flags:
       - death
@@ -3561,7 +3561,7 @@ status_effects:
       - no_cancel
 
   finishing_move_5:
-    id: 385
+    id:   385
     name: finishing_move
     flags:
       - death
@@ -3976,31 +3976,31 @@ status_effects:
       - on_jobchange
 
   copy_image_2:
-    id: 444
+    id:   444
     name: copy_image
     flags:
       - death
       - on_jobchange
     exclusion_group: blink
-    sort_key: 50
+    sort_key:        50
 
   copy_image_3:
-    id: 445
+    id:   445
     name: copy_image
     flags:
       - death
       - on_jobchange
     exclusion_group: blink
-    sort_key: 50
+    sort_key:        50
 
   copy_image_4:
-    id: 446
+    id:   446
     name: copy_image
     flags:
       - death
       - on_jobchange
     exclusion_group: blink
-    sort_key: 50
+    sort_key:        50
 
   multi_shots:
     id: 447
@@ -4040,7 +4040,7 @@ status_effects:
       - no_cancel
 
   divine_caress_i:
-    id: 453
+    id:   453
     name: divine_caress
     flags:
       - death
@@ -4081,7 +4081,7 @@ status_effects:
       - on_jobchange
 
   divine_caress_ii:
-    id: 459
+    id:   459
     name: divine_caress
     flags:
       - death
@@ -4236,7 +4236,7 @@ status_effects:
 
   # DRK 95
   scarlet_delirium_1:
-    id: 480
+    id:   480
     name: scarlet_delirium
     flags:
       - death
@@ -4531,7 +4531,7 @@ status_effects:
       - on_jobchange
       - no_cancel
     overwrite: ignore_duplicate
-    element: fire
+    element:   fire
 
   gelus:
     id: 524
@@ -4543,7 +4543,7 @@ status_effects:
       - on_jobchange
       - no_cancel
     overwrite: ignore_duplicate
-    element: ice
+    element:   ice
 
   flabra:
     id: 525
@@ -4555,7 +4555,7 @@ status_effects:
       - on_jobchange
       - no_cancel
     overwrite: ignore_duplicate
-    element: wind
+    element:   wind
 
   tellus:
     id: 526
@@ -4567,7 +4567,7 @@ status_effects:
       - on_jobchange
       - no_cancel
     overwrite: ignore_duplicate
-    element: earth
+    element:   earth
 
   sulpor:
     id: 527
@@ -4579,7 +4579,7 @@ status_effects:
       - on_jobchange
       - no_cancel
     overwrite: ignore_duplicate
-    element: thunder
+    element:   thunder
 
   unda:
     id: 528
@@ -4591,7 +4591,7 @@ status_effects:
       - on_jobchange
       - no_cancel
     overwrite: ignore_duplicate
-    element: water
+    element:   water
 
   lux:
     id: 529
@@ -4603,7 +4603,7 @@ status_effects:
       - on_jobchange
       - no_cancel
     overwrite: ignore_duplicate
-    element: light
+    element:   light
 
   tenebrae:
     id: 530
@@ -4615,7 +4615,7 @@ status_effects:
       - on_jobchange
       - no_cancel
     overwrite: ignore_duplicate
-    element: dark
+    element:   dark
 
   vallation:
     id: 531
@@ -4639,7 +4639,7 @@ status_effects:
       - on_jobchange
 
   embolden:
-    id: 534
+    id:   534
     name: embolden
     flags:
       - death
@@ -4951,8 +4951,8 @@ status_effects:
       - empathy
       - death
     exclusion_group: blaze_spikes
-    element: water
-    sort_key: 800
+    element:         water
+    sort_key:        800
 
   fast_cast:
     id: 574
@@ -5031,7 +5031,7 @@ status_effects:
       - on_jobchange
 
   costume_ii:
-    id: 585
+    id:   585
     name: costume
     flags:
       - death
@@ -5052,7 +5052,7 @@ status_effects:
       - on_zone
 
   finishing_move_6:
-    id: 588
+    id:   588
     name: finishing_move
     flags:
       - death
@@ -5181,8 +5181,8 @@ status_effects:
       - empathy
       - death
     exclusion_group: blaze_spikes
-    element: wind
-    sort_key: 800
+    element:         wind
+    sort_key:        800
 
   clod_spikes:
     id: 606
@@ -5191,8 +5191,8 @@ status_effects:
       - empathy
       - death
     exclusion_group: blaze_spikes
-    element: earth
-    sort_key: 800
+    element:         earth
+    sort_key:        800
 
   glint_spikes:
     id: 607
@@ -5201,8 +5201,8 @@ status_effects:
       - empathy
       - death
     exclusion_group: blaze_spikes
-    element: light
-    sort_key: 800
+    element:         light
+    sort_key:        800
 
   negate_virus:
     id: 608
@@ -5226,7 +5226,7 @@ status_effects:
       - on_zone
 
   magic_evasion_boost:
-    id: 611
+    id:   611
     name: magic_evasion_boost
     flags:
       - death
@@ -5254,7 +5254,7 @@ status_effects:
       - hide_timer
 
   boost_ii:
-    id: 615
+    id:   615
     name: boost
     flags:
       - attack
@@ -5475,7 +5475,7 @@ status_effects:
 
   # (Unimplemented)
   prowess_crystal_yield:
-    id: 779
+    id:   779
     name: prowess_crystal_yeild
     flags:
       - on_zone
@@ -5625,7 +5625,7 @@ status_effects:
 
   # Elemental resistance down
   elementalres_down:
-    id: 802
+    id:   802
     name: elemental_resistance_down
     flags:
       - death
