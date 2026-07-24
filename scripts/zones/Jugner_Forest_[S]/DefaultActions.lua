@@ -9,4 +9,5 @@ return {
     ['Gate Sentry']        = { event = 253 },
     ['Glowing_Pebbles']    = { messageSpecial = ID.text.YOU_FIND_SPARKLING_STONE },
     ['Mossy_Stump']        = { messageSpecial = ID.text.NO_RESPONSE },
+    ['Stone_Monument']     = { event = 900 },
 }
