@@ -41,7 +41,7 @@ CPlayerCharmController::~CPlayerCharmController()
     POwner->allegiance = xi::Allegiance::Player;
 }
 
-auto CPlayerCharmController::Tick(timer::time_point tick) -> Task<void>
+auto CPlayerCharmController::Tick(const timer::time_point tick) -> Task<void>
 {
     m_Tick = tick;
 
@@ -61,7 +61,7 @@ auto CPlayerCharmController::Tick(timer::time_point tick) -> Task<void>
     }
 }
 
-void CPlayerCharmController::DoCombatTick(timer::time_point tick)
+void CPlayerCharmController::DoCombatTick(timer::time_point tick) const
 {
     if (!POwner->PMaster->PAI->IsEngaged())
     {
@@ -90,7 +90,7 @@ void CPlayerCharmController::DoCombatTick(timer::time_point tick)
     }
 }
 
-void CPlayerCharmController::DoRoamTick(timer::time_point tick)
+void CPlayerCharmController::DoRoamTick(timer::time_point tick) const
 {
     if (POwner->PMaster->PAI->IsEngaged())
     {
@@ -113,4 +113,29 @@ void CPlayerCharmController::DoRoamTick(timer::time_point tick)
             }
         }
     }
+}
+
+auto CPlayerCharmController::Cast(uint16 targid, SpellID spellid) -> bool
+{
+    return false;
+}
+
+auto CPlayerCharmController::ChangeTarget(uint16 targid) -> bool
+{
+    return false;
+}
+
+auto CPlayerCharmController::WeaponSkill(uint16 targid, uint16 wsid) -> bool
+{
+    return false;
+}
+
+auto CPlayerCharmController::Ability(uint16 targid, uint16 abilityid) -> bool
+{
+    return false;
+}
+
+auto CPlayerCharmController::RangedAttack(uint16 targid) -> bool
+{
+    return false;
 }

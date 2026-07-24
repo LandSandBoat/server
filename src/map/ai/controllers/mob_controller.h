@@ -37,33 +37,30 @@ class CMobController : public CController
 public:
     CMobController(CMobEntity* PEntity);
 
-    virtual auto Tick(timer::time_point tick) -> Task<void> override;
-    virtual auto Disengage() -> bool override;
-    virtual auto Engage(uint16 targid) -> bool override;
-    virtual void Despawn() override;
-    virtual void Reset() override;
+    auto Tick(timer::time_point tick) -> Task<void> override;
+    auto Disengage() -> bool override;
+    auto Engage(uint16 targid) -> bool override;
+    void Despawn() override;
+    void Reset() override;
 
     virtual auto MobSkill(uint16 targid, uint16 wsid, Maybe<timer::duration> castTimeOverride) -> bool;
-    virtual auto Ability(uint16 targid, uint16 abilityid) -> bool override;
+    auto         Ability(uint16 targid, uint16 abilityid) -> bool override;
     auto         MobSkill(int listId = 0) -> bool;
     auto         TryCastSpell() -> bool;
     auto         TrySpecialSkill() -> bool;
-
     auto         CanFollowTarget(CBattleEntity*) const -> bool;
     auto         CanAggroTarget(CBattleEntity*) const -> bool;
     void         TapDeaggroTime();
     void         TapDeclaimTime();
-    virtual auto Cast(uint16 targid, SpellID spellid) -> bool override;
+    auto         Cast(uint16 targid, SpellID spellid) -> bool override;
     void         SetFollowTarget(CBaseEntity* PTarget, FollowType followType);
     auto         HasFollowTarget() const -> bool;
     void         ClearFollowTarget();
     auto         CheckHide(const CBattleEntity* PTarget) const -> bool;
-
-    void OnCastStopped(CMagicState& state, action_t& action);
+    void         OnCastStopped(CMagicState& state, action_t& action);
 
 protected:
     virtual auto TryDeaggro() -> bool;
-
     virtual void TryLink();
     auto         CanDetectTarget(CBattleEntity* PTarget, bool forceSight = false) const -> bool;
     auto         CanPursueTarget(const CBattleEntity* PTarget) const -> bool;
@@ -72,12 +69,10 @@ protected:
     virtual auto CanCastSpells(IgnoreRecastsAndCosts ignoreRecastsAndCosts) -> bool;
     void         CastSpell(SpellID spellid);
     virtual void Move();
-
     virtual auto DoCombatTick(timer::time_point tick) -> Task<void>;
     virtual auto DoBuffTick() -> bool;
     void         FaceTarget(uint16 targid = 0) const;
     virtual void HandleEnmity();
-
     virtual auto DoRoamTick(timer::time_point tick) -> Task<void>;
     void         Wait(timer::duration _duration);
     void         FollowRoamPath();

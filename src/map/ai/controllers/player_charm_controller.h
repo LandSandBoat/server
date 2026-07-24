@@ -18,11 +18,9 @@
 
 ===========================================================================
 */
+#pragma once
 
 #include "player_controller.h"
-
-#ifndef _PLAYERCHARMCONTROLLER_H
-#define _PLAYERCHARMCONTROLLER_H
 
 class CCharEntity;
 
@@ -30,39 +28,17 @@ class CPlayerCharmController : public CPlayerController
 {
 public:
     CPlayerCharmController(CCharEntity*);
-    virtual ~CPlayerCharmController();
+    ~CPlayerCharmController() override;
 
-    virtual auto Tick(timer::time_point tick) -> Task<void> override;
-
-    virtual bool Cast(uint16 targid, SpellID spellid) override
-    {
-        return false;
-    }
-
-    virtual bool ChangeTarget(uint16 targid) override
-    {
-        return false;
-    }
-
-    virtual bool WeaponSkill(uint16 targid, uint16 wsid) override
-    {
-        return false;
-    }
-
-    virtual bool Ability(uint16 targid, uint16 abilityid) override
-    {
-        return false;
-    }
-
-    virtual bool RangedAttack(uint16 targid) override
-    {
-        return false;
-    }
+    auto Tick(timer::time_point tick) -> Task<void> override;
+    auto Cast(uint16 targid, SpellID spellid) -> bool override;
+    auto ChangeTarget(uint16 targid) -> bool override;
+    auto WeaponSkill(uint16 targid, uint16 wsid) -> bool override;
+    auto Ability(uint16 targid, uint16 abilityid) -> bool override;
+    auto RangedAttack(uint16 targid) -> bool override;
 
 private:
     static constexpr float RoamDistance{ 2.1f };
-    void                   DoCombatTick(timer::time_point tick);
-    void                   DoRoamTick(timer::time_point tick);
+    void                   DoCombatTick(timer::time_point tick) const;
+    void                   DoRoamTick(timer::time_point tick) const;
 };
-
-#endif // _PLAYERCONTROLLER
