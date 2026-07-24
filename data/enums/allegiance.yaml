@@ -7,10 +7,10 @@ meta:
     table: xi.allegiance
 
 values:
-  mob: 0
-  player: 1
+  mob:       0
+  player:    1
   san_doria: 2
-  bastok: 3
-  windurst: 4
-  wyverns: 5
-  griffons: 6
+  bastok:    3
+  windurst:  4
+  wyverns:   5
+  griffons:  6

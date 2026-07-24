@@ -8,7 +8,7 @@ meta:
     table: xi.nameVis
 
 values:
-  none: 0x00
-  icon: 0x01 # (I) Icon next to name
-  hide_name: 0x08
+  none:        0x00
+  icon:        0x01 # (I) Icon next to name
+  hide_name:   0x08
   ghost_phase: 0x80

@@ -7,9 +7,9 @@ meta:
     table: xi.attackType
 
 values:
-  none: 0
+  none:     0
   physical: 1
-  magical: 2
-  ranged: 3
-  breath: 4
-  special: 5
+  magical:  2
+  ranged:   3
+  breath:   4
+  special:  5

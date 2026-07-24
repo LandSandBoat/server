@@ -2,6 +2,7 @@ mariadb
 gitpython
 pylint
 pyyaml
+ruamel.yaml
 colorama
 zmq
 black

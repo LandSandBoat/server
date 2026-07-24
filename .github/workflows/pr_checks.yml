@@ -196,31 +196,50 @@ jobs:
         id: changed
         run: |
           mapfile -t changed_files < changed-files.txt
-          data_files=()
+          yaml_files=()
+          other_files=()
           for f in "${changed_files[@]}"; do
-            if [[ $f == data/* ]]; then
-              data_files+=("$f")
+            if [[ $f == data/*.yaml || $f == data/*.yml ]]; then
+              yaml_files+=("$f")
+            elif [[ $f == data/* ]]; then
+              other_files+=("$f")
             fi
           done
-          echo "files=${data_files[*]}" >> "$GITHUB_OUTPUT"
-          echo "Changed data files: ${data_files[*]}"
+          echo "yaml=${yaml_files[*]}" >> "$GITHUB_OUTPUT"
+          echo "other=${other_files[*]}" >> "$GITHUB_OUTPUT"
+          echo "Changed YAML: ${yaml_files[*]}"
+          echo "Changed other: ${other_files[*]}"
 
       - uses: actions/checkout@v6
-        if: steps.changed.outputs.files != ''
+        if: steps.changed.outputs.yaml != '' || steps.changed.outputs.other != ''
+
+      - name: Setup Python
+        if: steps.changed.outputs.yaml != ''
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+
+      - name: Install Python dependencies
+        if: steps.changed.outputs.yaml != ''
+        run: python -m pip install pyyaml ruamel.yaml
+
+      - name: Check YAML formatting
+        if: steps.changed.outputs.yaml != ''
+        run: python tools/yaml/format.py ${{ steps.changed.outputs.yaml }} --check
 
       - name: Cache prettier results
-        if: steps.changed.outputs.files != ''
+        if: steps.changed.outputs.other != ''
         uses: actions/cache@v5
         with:
           path: /tmp/prettier-cache
-          key: prettier-cache-${{ hashFiles('data/**/*.yaml', 'data/**/*.json') }}
+          key: prettier-cache-${{ hashFiles('data/**/*.json') }}
           restore-keys: prettier-cache-
 
       - name: Run prettier
-        if: steps.changed.outputs.files != ''
+        if: steps.changed.outputs.other != ''
         run: |
           set +e
-          FAILED=$(npx --yes prettier@3 --cache --cache-strategy content --cache-location /tmp/prettier-cache --list-different ${{ steps.changed.outputs.files }})
+          FAILED=$(npx --yes prettier@3 --cache --cache-strategy content --cache-location /tmp/prettier-cache --list-different ${{ steps.changed.outputs.other }})
           set -e
           if [ -z "$FAILED" ]; then
             echo "All files use Prettier code style!"

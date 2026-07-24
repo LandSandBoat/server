@@ -7,6 +7,6 @@ meta:
     table: xi.claimType
 
 values:
-  exclusive: 0 # Regular exclusive claim behavior. Only one entity and related group can attack.
+  exclusive:     0 # Regular exclusive claim behavior. Only one entity and related group can attack.
   non_exclusive: 1 # Regular claim behavior but multiple unrelated entities can attack and compete for claim. Rewards distributed to last claiming entity.
-  unclaimable: 2 # Mob cannot be claimed. Multiple unrelated entities can attack. Rewards will not be distributed.
+  unclaimable:   2 # Mob cannot be claimed. Multiple unrelated entities can attack. Rewards will not be distributed.
