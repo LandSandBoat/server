@@ -70,7 +70,7 @@ local function advancedImageSupport(player, effectId)
     if effectId == xi.effect.FISHING_IMAGERY then
         player:addStatusEffect(effectId, { power = 2, duration = 7200, origin = player })
     else
-        player:addStatusEffect(effectId, { power = 3, duration = 480, origin = player, subType = 10 })
+        player:addStatusEffect(effectId, { power = 3, duration = 480, origin = player, subPower = 10 })
     end
 end
 
