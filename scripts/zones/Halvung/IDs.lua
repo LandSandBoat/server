@@ -1,4 +1,4 @@
------------------------------------
+﻿-----------------------------------
 -- Area: Halvung
 -----------------------------------
 zones = zones or {}
@@ -19,6 +19,8 @@ zones[xi.zone.HALVUNG] =
         KEY_BREAKS                    = 7379, -- The <item> breaks!
         PARTY_MEMBERS_HAVE_FALLEN     = 7803, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7810, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        BEGINS_PUSHING_THE_LEVER      = 7928, -- <player> begins pushing the lever!
+        RELEASES_THE_LEVER            = 7931, -- <player> releases the lever.
         WIDE_TRENCH                   = 7934, -- There is a wide trench around the gate here. There are three keyholes of differing sizes inside the trench.
         MINING_IS_POSSIBLE_HERE       = 7957, -- Mining is possible here if you have <item>.
         BLUE_FLAMES                   = 8004, -- You can see blue flames flickering from a hole in the ground here...
