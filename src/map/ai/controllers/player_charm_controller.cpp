@@ -135,7 +135,7 @@ auto CPlayerCharmController::Ability(uint16 targid, uint16 abilityid) -> bool
     return false;
 }
 
-auto CPlayerCharmController::RangedAttack(uint16 targid) -> bool
+auto CPlayerCharmController::RangedAttack(const EntityID_t target) -> bool
 {
     return false;
 }

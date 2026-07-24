@@ -56,7 +56,7 @@ public:
     bool MobSkill(uint16 targid, uint16 wsid, Maybe<timer::duration> castTimeOverride);
     bool PetSkill(uint16 targid, uint16 wsid);
     bool Ability(uint16 targid, uint16 abilityid);
-    bool RangedAttack(uint16 targid);
+    bool RangedAttack(const EntityID_t& target) const;
     bool Trigger(CCharEntity* player);
     bool UseItem(uint16 targid, uint8 loc, uint8 slotid);
     bool Inactive(timer::duration _duration, bool canChangeState);

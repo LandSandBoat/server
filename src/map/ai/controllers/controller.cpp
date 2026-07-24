@@ -91,11 +91,11 @@ auto CController::WeaponSkill(const uint16 targid, const uint16 wsid) -> bool
     return false;
 }
 
-auto CController::RangedAttack(const uint16 targid) -> bool
+auto CController::RangedAttack(const EntityID_t target) -> bool
 {
     if (POwner)
     {
-        return POwner->PAI->Internal_RangedAttack(targid);
+        return POwner->PAI->Internal_RangedAttack(target.targid);
     }
     return false;
 }

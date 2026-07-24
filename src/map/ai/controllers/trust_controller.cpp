@@ -565,7 +565,7 @@ auto CTrustController::Ability(uint16 targid, uint16 abilityid) -> bool
     return false;
 }
 
-auto CTrustController::RangedAttack(uint16 targid) -> bool
+auto CTrustController::RangedAttack(const EntityID_t target) -> bool
 {
     TracyZoneScoped;
 
@@ -578,7 +578,7 @@ auto CTrustController::RangedAttack(uint16 targid) -> bool
     if (m_Tick - m_LastRangedAttackTime > rangedDelay && !m_InTransit)
     {
         FaceTarget(PTarget->entityId());
-        if (POwner->PAI->CanChangeState() && POwner->PAI->Internal_RangedAttack(targid))
+        if (POwner->PAI->CanChangeState() && POwner->PAI->Internal_RangedAttack(target.targid))
         {
             m_LastRangedAttackTime = m_Tick;
         }

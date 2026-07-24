@@ -413,7 +413,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
         break;
         case GP_CLI_COMMAND_ACTION_ACTIONID::Shoot:
         {
-            PChar->PAI->RangedAttack(this->ActIndex);
+            PChar->PAI->RangedAttack(EntityID_t(PChar->GetEntity(this->ActIndex)));
         }
         break;
         case GP_CLI_COMMAND_ACTION_ACTIONID::ChocoboDig:

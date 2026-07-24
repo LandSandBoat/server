@@ -540,7 +540,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
 
             if (action.reaction == G_REACTION::RATTACK)
             {
-                controller->RangedAttack(target->targid);
+                controller->RangedAttack(target->entityId());
                 executedAnyAction = true;
             }
             else if (action.reaction == G_REACTION::MA)

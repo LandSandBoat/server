@@ -231,21 +231,20 @@ auto CPlayerController::Ability(const uint16 targid, const uint16 abilityid) -> 
     }
 }
 
-auto CPlayerController::RangedAttack(uint16 targid) -> bool
+auto CPlayerController::RangedAttack(const EntityID_t target) -> bool
 {
     auto* PChar = static_cast<CCharEntity*>(POwner);
     if (canAct() && PChar->PAI->CanChangeState())
     {
-        if (auto target = PChar->GetEntity(targid); target && target->PAI->IsUntargetable())
+        if (auto PTarget = target.resolve<CBattleEntity>(); PTarget && PTarget->PAI->IsUntargetable())
         {
             return false;
         }
-        return PChar->PAI->Internal_RangedAttack(targid);
+
+        return PChar->PAI->Internal_RangedAttack(target.targid);
     }
-    else
-    {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::WaitLonger);
-    }
+
+    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::WaitLonger);
     return false;
 }
 

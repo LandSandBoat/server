@@ -46,7 +46,7 @@ public:
     virtual auto ChangeTarget(uint16 targid) -> bool;
     virtual auto Disengage() -> bool;
     virtual auto WeaponSkill(uint16 targid, uint16 wsid) -> bool;
-    virtual auto RangedAttack(uint16 targid) -> bool;
+    virtual auto RangedAttack(EntityID_t target) -> bool;
 
     virtual auto Ability(uint16 targid, uint16 abilityid) -> bool;
 

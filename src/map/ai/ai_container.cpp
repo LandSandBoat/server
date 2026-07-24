@@ -135,12 +135,13 @@ bool CAIContainer::Ability(uint16 targid, uint16 abilityid)
     return false;
 }
 
-bool CAIContainer::RangedAttack(uint16 targid)
+auto CAIContainer::RangedAttack(const EntityID_t& target) const -> bool
 {
     if (Controller)
     {
-        return Controller->RangedAttack(targid);
+        return Controller->RangedAttack(target);
     }
+
     return false;
 }
 

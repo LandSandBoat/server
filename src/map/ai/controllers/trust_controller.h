@@ -45,7 +45,7 @@ public:
     void Despawn() override;
     auto Ability(uint16 targid, uint16 abilityid) -> bool override;
     auto Cast(EntityID_t target, SpellID spellid) -> bool override;
-    auto RangedAttack(uint16 targid) -> bool override;
+    auto RangedAttack(EntityID_t target) -> bool override;
 
     static constexpr float RoamDistance    = { 3.0f };
     static constexpr float SpawnDistance   = { 3.0f };
