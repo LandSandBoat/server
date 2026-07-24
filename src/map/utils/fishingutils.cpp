@@ -461,7 +461,7 @@ uint8 CalculateHookTime(CCharEntity* PChar, Legendary legendary, uint32 legendar
         hookTime += 30;
     }
 
-    if (PChar->getMod(Mod::ALBATROSS_RING_EFFECT) > 0)
+    if (PChar->getMod(xi::Mod::ALBATROSS_RING_EFFECT) > 0)
     {
         hookTime += 30;
     }
@@ -684,7 +684,7 @@ uint8 CalculateDelay(CCharEntity* PChar, uint8 baseDelay, uint8 sizeType, rod_t*
         delay += rod->lgDelayBonus;
     }
 
-    if (PChar->getMod(Mod::PENGUIN_RING_EFFECT) > 0)
+    if (PChar->getMod(xi::Mod::PENGUIN_RING_EFFECT) > 0)
     {
         delay += 2;
     }
@@ -706,7 +706,7 @@ uint8 CalculateMovement(CCharEntity* PChar, uint8 baseMove, uint8 sizeType, rod_
         movement += rod->lgMoveBonus;
     }
 
-    if (PChar->getMod(Mod::PENGUIN_RING_EFFECT) > 0)
+    if (PChar->getMod(xi::Mod::PENGUIN_RING_EFFECT) > 0)
     {
         movement += 2;
     }
@@ -1059,7 +1059,7 @@ bool IsLiveBait(bait_t* bait)
 
 uint8 GetFishingSkill(CCharEntity* PChar)
 {
-    return static_cast<uint8>(std::floor(PChar->RealSkills.skill[static_cast<uint8>(xi::SkillType::Fishing)] / 10) + PChar->getMod(Mod::FISH));
+    return static_cast<uint8>(std::floor(PChar->RealSkills.skill[static_cast<uint8>(xi::SkillType::Fishing)] / 10) + PChar->getMod(xi::Mod::FISH));
 }
 
 uint8 GetBaitPower(bait_t* bait, fish_t* fish)
@@ -2907,7 +2907,7 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
                 // No skillups for items or mobs.
                 if (PChar->hookedFish->catchtype == FISHINGCATCHTYPE_SMALLFISH || PChar->hookedFish->catchtype == FISHINGCATCHTYPE_BIGFISH)
                 {
-                    uint16 skillUpChances = 1 + PChar->getMod(Mod::PELICAN_RING_EFFECT);
+                    uint16 skillUpChances = 1 + PChar->getMod(xi::Mod::PELICAN_RING_EFFECT);
 
                     for (int i = 0; i < skillUpChances; i++)
                     {

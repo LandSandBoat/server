@@ -245,7 +245,7 @@ void CAutomatonController::Move()
 
 auto CAutomatonController::TryAction() -> bool
 {
-    if (m_Tick > m_LastActionTime + (m_actionCooldown - std::chrono::milliseconds(PAutomaton->getMod(Mod::AUTO_DECISION_DELAY) * 10)))
+    if (m_Tick > m_LastActionTime + (m_actionCooldown - std::chrono::milliseconds(PAutomaton->getMod(xi::Mod::AUTO_DECISION_DELAY) * 10)))
     {
         m_LastActionTime = m_Tick;
         PAutomaton->PAI->EventHandler.triggerListener("AUTOMATON_AI_TICK", PAutomaton, PTarget);
@@ -261,7 +261,7 @@ auto CAutomatonController::TryShieldBash() -> bool
     CState* PState = PTarget->PAI->GetCurrentState();
 
     if (m_shieldbashCooldown > 0s && PState && PState->CanInterrupt() &&
-        m_Tick > m_LastShieldBashTime + (m_shieldbashCooldown - std::chrono::seconds(PAutomaton->getMod(Mod::AUTO_SHIELD_BASH_DELAY))))
+        m_Tick > m_LastShieldBashTime + (m_shieldbashCooldown - std::chrono::seconds(PAutomaton->getMod(xi::Mod::AUTO_SHIELD_BASH_DELAY))))
     {
         return MobSkill(PTarget->targid, m_ShieldBashAbility, std::nullopt);
     }
@@ -273,7 +273,7 @@ auto CAutomatonController::TrySpellcast(const CurrentManeuvers& maneuvers) -> bo
 {
     // Apparently the automaton has nothing in its spell list, so CanCastSpells must ignore spell lists and recasts?
     if (!PAutomaton->PMaster || m_magicCooldown == 0s ||
-        m_Tick <= m_LastMagicTime + (m_magicCooldown + std::chrono::seconds(PAutomaton->getMod(Mod::AUTO_MAGIC_COOLDOWN))) || !CanCastSpells(IgnoreRecastsAndCosts::Yes))
+        m_Tick <= m_LastMagicTime + (m_magicCooldown + std::chrono::seconds(PAutomaton->getMod(xi::Mod::AUTO_MAGIC_COOLDOWN))) || !CanCastSpells(IgnoreRecastsAndCosts::Yes))
     {
         return false;
     }
@@ -433,7 +433,7 @@ auto CAutomatonController::TrySpellcast(const CurrentManeuvers& maneuvers) -> bo
 auto CAutomatonController::TryHeal(const CurrentManeuvers& maneuvers) -> bool
 {
     if (!PAutomaton->PMaster || m_healCooldown == 0s ||
-        m_Tick <= m_LastHealTime + (m_healCooldown - std::chrono::seconds(PAutomaton->getMod(Mod::AUTO_HEALING_DELAY))))
+        m_Tick <= m_LastHealTime + (m_healCooldown - std::chrono::seconds(PAutomaton->getMod(xi::Mod::AUTO_HEALING_DELAY))))
     {
         return false;
     }
@@ -455,7 +455,7 @@ auto CAutomatonController::TryHeal(const CurrentManeuvers& maneuvers) -> bool
             break;
     }
 
-    threshold                  = std::clamp<float>(threshold + PAutomaton->getMod(Mod::AUTO_HEALING_THRESHOLD), 30.0f, 90.0f);
+    threshold                  = std::clamp<float>(threshold + PAutomaton->getMod(xi::Mod::AUTO_HEALING_THRESHOLD), 30.0f, 90.0f);
     CBattleEntity* PCastTarget = nullptr;
 
     bool          haveHate   = false;
@@ -662,15 +662,15 @@ auto CAutomatonController::TryElemental(const CurrentManeuvers& maneuvers) -> bo
         tier = 3;
     }
 
-    if (PAutomaton->getMod(Mod::AUTO_SCAN_RESISTS))
+    if (PAutomaton->getMod(xi::Mod::AUTO_SCAN_RESISTS))
     {
         std::vector<std::pair<SpellID, int16>> reslist{
-            std::make_pair(SpellID::Fire, PTarget->getMod(Mod::FIRE_RES_RANK)),
-            std::make_pair(SpellID::Blizzard, PTarget->getMod(Mod::ICE_RES_RANK)),
-            std::make_pair(SpellID::Aero, PTarget->getMod(Mod::WIND_RES_RANK)),
-            std::make_pair(SpellID::Stone, PTarget->getMod(Mod::EARTH_RES_RANK)),
-            std::make_pair(SpellID::Thunder, PTarget->getMod(Mod::THUNDER_RES_RANK)),
-            std::make_pair(SpellID::Water, PTarget->getMod(Mod::WATER_RES_RANK)),
+            std::make_pair(SpellID::Fire, PTarget->getMod(xi::Mod::FIRE_RES_RANK)),
+            std::make_pair(SpellID::Blizzard, PTarget->getMod(xi::Mod::ICE_RES_RANK)),
+            std::make_pair(SpellID::Aero, PTarget->getMod(xi::Mod::WIND_RES_RANK)),
+            std::make_pair(SpellID::Stone, PTarget->getMod(xi::Mod::EARTH_RES_RANK)),
+            std::make_pair(SpellID::Thunder, PTarget->getMod(xi::Mod::THUNDER_RES_RANK)),
+            std::make_pair(SpellID::Water, PTarget->getMod(xi::Mod::WATER_RES_RANK)),
         };
         std::ranges::stable_sort(reslist, resistanceComparator);
         for (std::pair<SpellID, int16>& res : reslist)
@@ -1564,7 +1564,7 @@ auto CAutomatonController::TryTPMove() -> bool
         CMobSkill* PWSkill          = nullptr;
         int8       currentManeuvers = -1;
 
-        bool attemptChain = (PAutomaton->getMod(Mod::AUTO_TP_EFFICIENCY) != 0);
+        bool attemptChain = (PAutomaton->getMod(xi::Mod::AUTO_TP_EFFICIENCY) != 0);
 
         if (attemptChain)
         {
@@ -1599,7 +1599,7 @@ auto CAutomatonController::TryTPMove() -> bool
             }
         }
 
-        if (!attemptChain || (currentManeuvers == -1 && PAutomaton->PMaster && PAutomaton->PMaster->health.tp < PAutomaton->getMod(Mod::AUTO_TP_EFFICIENCY)))
+        if (!attemptChain || (currentManeuvers == -1 && PAutomaton->PMaster && PAutomaton->PMaster->health.tp < PAutomaton->getMod(xi::Mod::AUTO_TP_EFFICIENCY)))
         {
             for (auto* PSkill : validSkills)
             {
@@ -1632,7 +1632,7 @@ auto CAutomatonController::TryRangedAttack() -> bool // TODO: Find the animation
     if (PAutomaton->frame() == AutomatonFrame::Sharpshot)
     {
         timer::duration minDelay   = PAutomaton->head() == AutomatonHead::Sharpshot ? 5s : 10s;
-        timer::duration attackTime = m_rangedCooldown - std::chrono::seconds(PAutomaton->getMod(Mod::AUTO_RANGED_DELAY));
+        timer::duration attackTime = m_rangedCooldown - std::chrono::seconds(PAutomaton->getMod(xi::Mod::AUTO_RANGED_DELAY));
 
         if (m_rangedCooldown > 0s && m_Tick > m_LastRangedTime + std::max(attackTime, minDelay))
         {

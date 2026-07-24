@@ -298,7 +298,7 @@ public:
     int8  getShieldSize();
     int16 getShieldDefense();
 
-    void addGearSetMod(uint8 setId, Mod modId, uint16 modValue);
+    void addGearSetMod(uint8 setId, xi::Mod modId, uint16 modValue);
     void clearGearSetMods();
 
     // Storing
@@ -721,8 +721,8 @@ public:
     void  setMod(uint16 modID, int16 value);
     void  delMod(uint16 modID, int16 value);
     void  printAllMods();
-    int16 getMaxGearMod(Mod modId);
-    int16 getGearModFromSlot(uint8 slot, Mod modId);
+    int16 getMaxGearMod(xi::Mod modId);
+    int16 getGearModFromSlot(uint8 slot, xi::Mod modId);
 
     void addLatent(uint16 condID, uint16 conditionValue, uint16 mID, int16 modValue);
     auto delLatent(uint16 condID, uint16 conditionValue, uint16 mID, int16 modValue) -> bool;

@@ -225,7 +225,7 @@ void CLuaStatusEffect::setStartTime(uint32 time)
 
 void CLuaStatusEffect::addMod(uint16 mod, int16 amount)
 {
-    m_PLuaStatusEffect->addMod(static_cast<Mod>(mod), amount);
+    m_PLuaStatusEffect->addMod(static_cast<xi::Mod>(mod), amount);
 }
 
 //======================================================//

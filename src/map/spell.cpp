@@ -612,7 +612,7 @@ void LoadSpellList()
     FOR_DB_MULTIPLE_RESULTS(rset)
     {
         const auto spellId = rset->get<uint16>("spellId");
-        const auto modID   = rset->get<Mod>("modId");
+        const auto modID   = rset->get<xi::Mod>("modId");
         const auto value   = rset->get<int16>("value");
 
         if (PSpellList[spellId])

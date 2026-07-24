@@ -157,8 +157,8 @@ uint16 CLuaItem::getReqLvl()
 
 int16 CLuaItem::getMod(uint16 modID)
 {
-    auto* PItem = static_cast<const CItemEquipment*>(m_readItem);
-    Mod   mod   = static_cast<Mod>(modID);
+    auto*   PItem = static_cast<const CItemEquipment*>(m_readItem);
+    xi::Mod mod   = static_cast<xi::Mod>(modID);
 
     return PItem->getModifier(mod);
 }
@@ -170,8 +170,8 @@ void CLuaItem::addMod(uint16 modID, int16 power)
         return;
     }
 
-    auto* PItem = static_cast<CItemEquipment*>(m_writeItem);
-    Mod   mod   = static_cast<Mod>(modID);
+    auto*   PItem = static_cast<CItemEquipment*>(m_writeItem);
+    xi::Mod mod   = static_cast<xi::Mod>(modID);
 
     PItem->addModifier(CModifier(mod, power));
 }
@@ -183,8 +183,8 @@ void CLuaItem::delMod(uint16 modID, int16 power)
         return;
     }
 
-    auto* PItem = static_cast<CItemEquipment*>(m_writeItem);
-    Mod   mod   = static_cast<Mod>(modID);
+    auto*   PItem = static_cast<CItemEquipment*>(m_writeItem);
+    xi::Mod mod   = static_cast<xi::Mod>(modID);
 
     PItem->addModifier(CModifier(mod, -power));
 }

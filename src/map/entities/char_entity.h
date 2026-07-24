@@ -173,9 +173,9 @@ struct UnlockedAttachments_t
 
 struct GearSetMod_t
 {
-    uint8  setId;
-    Mod    modId;
-    uint16 modValue;
+    uint8   setId;
+    xi::Mod modId;
+    uint16  modValue;
 };
 
 enum CHAR_HISTORY

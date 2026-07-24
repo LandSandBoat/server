@@ -134,7 +134,7 @@ float CEnmityContainer::CalculateEnmityBonus(CBattleEntity* PEntity)
 {
     TracyZoneScoped;
 
-    int enmityBonus = PEntity->getMod(Mod::ENMITY);
+    int enmityBonus = PEntity->getMod(xi::Mod::ENMITY);
 
     if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
     {
@@ -176,13 +176,13 @@ void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, 
     // Apply TH only if this was a direct action
     if (directAction)
     {
-        int16 THlevel = std::min<int16>(8, PEntity->getMod(Mod::TREASURE_HUNTER));
-        int16 GFlevel = PEntity->getMod(Mod::GILFINDER); // Is there a cap? Theoretical GF level cap could be GF 8 for 128/256 + 8*16 = 256/256
+        int16 THlevel = std::min<int16>(8, PEntity->getMod(xi::Mod::TREASURE_HUNTER));
+        int16 GFlevel = PEntity->getMod(xi::Mod::GILFINDER); // Is there a cap? Theoretical GF level cap could be GF 8 for 128/256 + 8*16 = 256/256
 
         // Enforce TH8 as max for THF main and TH4 as non-THF main
         if (PEntity->GetMJob() != JOB_THF)
         {
-            THlevel = std::min<int16>(4, PEntity->getMod(Mod::TREASURE_HUNTER));
+            THlevel = std::min<int16>(4, PEntity->getMod(xi::Mod::TREASURE_HUNTER));
         }
 
         if (m_EnmityHolder->m_THLvl < THlevel)
@@ -448,7 +448,7 @@ void CEnmityContainer::UpdateEnmityFromAttack(CBattleEntity* PEntity, int32 Dama
 
     if (auto enmity_obj = m_EnmityList.find(PEntity->id); enmity_obj != m_EnmityList.end())
     {
-        float reduction = (100.0f - std::min<int16>(PEntity->getMod(Mod::ENMITY_LOSS_REDUCTION), 100)) / 100.0f;
+        float reduction = (100.0f - std::min<int16>(PEntity->getMod(xi::Mod::ENMITY_LOSS_REDUCTION), 100)) / 100.0f;
         int32 CE        = (int32)(-1800.0f * Damage / PEntity->GetMaxHP() * reduction);
 
         enmity_obj->second.CE = std::clamp(enmity_obj->second.CE + CE, 0, EnmityCap);

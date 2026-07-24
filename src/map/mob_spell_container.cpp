@@ -195,11 +195,11 @@ Maybe<SpellID> CMobSpellContainer::GetBestIndiSpell(CBattleEntity* PTarget)
     auto mTarget       = PTarget->GetBattleTarget();
     auto hitrate       = battleutils::GetHitRate(PTarget, mTarget);
     bool accBuffNeeded = hitrate < 65 ? true : false;
-    auto mInt          = PTarget->getMod(Mod::INT);
-    auto tInt          = mTarget->getMod(Mod::INT);
+    auto mInt          = PTarget->getMod(xi::Mod::INT);
+    auto tInt          = mTarget->getMod(xi::Mod::INT);
     auto intDiff       = mInt - tInt + 10;
-    auto macc          = PTarget->getMod(Mod::MACC);
-    auto tMaeva        = mTarget->getMod(Mod::MEVA);
+    auto macc          = PTarget->getMod(xi::Mod::MACC);
+    auto tMaeva        = mTarget->getMod(xi::Mod::MEVA);
     auto mSkill        = PTarget->GetSkill(xi::SkillType::ElementalMagic);
     auto maccFromInt   = mInt;
 
@@ -344,14 +344,14 @@ Maybe<SpellID> CMobSpellContainer::GetBestAgainstTargetWeakness(CBattleEntity* P
     // clang-format off
     std::vector<int16> resistances
     {
-        PTarget->getMod(Mod::FIRE_RES_RANK),
-        PTarget->getMod(Mod::ICE_RES_RANK),
-        PTarget->getMod(Mod::WIND_RES_RANK),
-        PTarget->getMod(Mod::EARTH_RES_RANK),
-        PTarget->getMod(Mod::THUNDER_RES_RANK),
-        PTarget->getMod(Mod::WATER_RES_RANK),
-        PTarget->getMod(Mod::LIGHT_RES_RANK),
-        PTarget->getMod(Mod::DARK_RES_RANK),
+        PTarget->getMod(xi::Mod::FIRE_RES_RANK),
+        PTarget->getMod(xi::Mod::ICE_RES_RANK),
+        PTarget->getMod(xi::Mod::WIND_RES_RANK),
+        PTarget->getMod(xi::Mod::EARTH_RES_RANK),
+        PTarget->getMod(xi::Mod::THUNDER_RES_RANK),
+        PTarget->getMod(xi::Mod::WATER_RES_RANK),
+        PTarget->getMod(xi::Mod::LIGHT_RES_RANK),
+        PTarget->getMod(xi::Mod::DARK_RES_RANK),
     };
     // clang-format on
 
@@ -419,14 +419,14 @@ Maybe<SpellID> CMobSpellContainer::EnSpellAgainstTargetWeakness(CBattleEntity* P
     // clang-format off
     std::vector<int16> resistances
     {
-        PTarget->getMod(Mod::FIRE_RES_RANK),
-        PTarget->getMod(Mod::ICE_RES_RANK),
-        PTarget->getMod(Mod::WIND_RES_RANK),
-        PTarget->getMod(Mod::EARTH_RES_RANK),
-        PTarget->getMod(Mod::THUNDER_RES_RANK),
-        PTarget->getMod(Mod::WATER_RES_RANK),
-        PTarget->getMod(Mod::LIGHT_RES_RANK),
-        PTarget->getMod(Mod::DARK_RES_RANK),
+        PTarget->getMod(xi::Mod::FIRE_RES_RANK),
+        PTarget->getMod(xi::Mod::ICE_RES_RANK),
+        PTarget->getMod(xi::Mod::WIND_RES_RANK),
+        PTarget->getMod(xi::Mod::EARTH_RES_RANK),
+        PTarget->getMod(xi::Mod::THUNDER_RES_RANK),
+        PTarget->getMod(xi::Mod::WATER_RES_RANK),
+        PTarget->getMod(xi::Mod::LIGHT_RES_RANK),
+        PTarget->getMod(xi::Mod::DARK_RES_RANK),
     };
     // clang-format on
 
@@ -476,14 +476,14 @@ Maybe<SpellID> CMobSpellContainer::StormDayAgainstTargetWeakness(CBattleEntity* 
     // clang-format off
     std::vector<int16> resistances
     {
-        PTarget->getMod(Mod::FIRE_RES_RANK),
-        PTarget->getMod(Mod::ICE_RES_RANK),
-        PTarget->getMod(Mod::WIND_RES_RANK),
-        PTarget->getMod(Mod::EARTH_RES_RANK),
-        PTarget->getMod(Mod::THUNDER_RES_RANK),
-        PTarget->getMod(Mod::WATER_RES_RANK),
-        PTarget->getMod(Mod::LIGHT_RES_RANK),
-        PTarget->getMod(Mod::DARK_RES_RANK),
+        PTarget->getMod(xi::Mod::FIRE_RES_RANK),
+        PTarget->getMod(xi::Mod::ICE_RES_RANK),
+        PTarget->getMod(xi::Mod::WIND_RES_RANK),
+        PTarget->getMod(xi::Mod::EARTH_RES_RANK),
+        PTarget->getMod(xi::Mod::THUNDER_RES_RANK),
+        PTarget->getMod(xi::Mod::WATER_RES_RANK),
+        PTarget->getMod(xi::Mod::LIGHT_RES_RANK),
+        PTarget->getMod(xi::Mod::DARK_RES_RANK),
     };
     // clang-format on
 
@@ -543,14 +543,14 @@ Maybe<SpellID> CMobSpellContainer::HelixAgainstTargetWeakness(CBattleEntity* PTa
     // clang-format off
     std::vector<int16> resistances
     {
-        PTarget->getMod(Mod::FIRE_RES_RANK),
-        PTarget->getMod(Mod::ICE_RES_RANK),
-        PTarget->getMod(Mod::WIND_RES_RANK),
-        PTarget->getMod(Mod::EARTH_RES_RANK),
-        PTarget->getMod(Mod::THUNDER_RES_RANK),
-        PTarget->getMod(Mod::WATER_RES_RANK),
-        PTarget->getMod(Mod::LIGHT_RES_RANK),
-        PTarget->getMod(Mod::DARK_RES_RANK),
+        PTarget->getMod(xi::Mod::FIRE_RES_RANK),
+        PTarget->getMod(xi::Mod::ICE_RES_RANK),
+        PTarget->getMod(xi::Mod::WIND_RES_RANK),
+        PTarget->getMod(xi::Mod::EARTH_RES_RANK),
+        PTarget->getMod(xi::Mod::THUNDER_RES_RANK),
+        PTarget->getMod(xi::Mod::WATER_RES_RANK),
+        PTarget->getMod(xi::Mod::LIGHT_RES_RANK),
+        PTarget->getMod(xi::Mod::DARK_RES_RANK),
     };
     // clang-format on
 

@@ -352,7 +352,7 @@ auto CLuaTestEntityAssertions::hasItem(const uint16 itemId) -> CLuaTestEntityAss
  *  Notes   :
  ************************************************************************/
 
-auto CLuaTestEntityAssertions::hasModifier(const Mod modifierId, int32 expectedValue) -> CLuaTestEntityAssertions&
+auto CLuaTestEntityAssertions::hasModifier(const xi::Mod modifierId, int32 expectedValue) -> CLuaTestEntityAssertions&
 {
     auto actualValue = entity_->getMod(static_cast<uint16>(modifierId));
 

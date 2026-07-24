@@ -568,7 +568,7 @@ void CLuaBattlefield::addGroups(const sol::table& groups, bool hasMultipleArenas
 
                 for (const auto& modifier : mods.get<sol::table>())
                 {
-                    PMob->setModifier(modifier.first.as<Mod>(), modifier.second.as<uint16>());
+                    PMob->setModifier(modifier.first.as<xi::Mod>(), modifier.second.as<uint16>());
                 }
                 PMob->saveModifiers();
             }

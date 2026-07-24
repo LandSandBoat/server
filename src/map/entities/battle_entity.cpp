@@ -93,10 +93,10 @@ CBattleEntity::CBattleEntity()
     PRecastContainer      = std::make_unique<CRecastContainer>(this);
     PNotorietyContainer   = std::make_unique<CNotorietyContainer>(this);
 
-    m_modStat[Mod::SLASH_SDT]  = 0;
-    m_modStat[Mod::PIERCE_SDT] = 0;
-    m_modStat[Mod::HTH_SDT]    = 0;
-    m_modStat[Mod::IMPACT_SDT] = 0;
+    m_modStat[xi::Mod::SLASH_SDT]  = 0;
+    m_modStat[xi::Mod::PIERCE_SDT] = 0;
+    m_modStat[xi::Mod::HTH_SDT]    = 0;
+    m_modStat[xi::Mod::IMPACT_SDT] = 0;
 
     m_Immunity   = xi::Immunity::None;
     isCharmed    = false;
@@ -234,18 +234,18 @@ void CBattleEntity::UpdateHealth()
 {
     TracyZoneScoped;
 
-    float weaknessPower = (100.0f + getMod(Mod::WEAKNESS_PCT)) / 100.0f;
-    float cursePower    = (100.0f + getMod(Mod::CURSE_PCT)) / 100.0f;
-    float HPPPower      = (100.0f + getMod(Mod::HPP)) / 100.0f;
-    float MPPPower      = (100.0f + getMod(Mod::MPP)) / 100.0f;
+    float weaknessPower = (100.0f + getMod(xi::Mod::WEAKNESS_PCT)) / 100.0f;
+    float cursePower    = (100.0f + getMod(xi::Mod::CURSE_PCT)) / 100.0f;
+    float HPPPower      = (100.0f + getMod(xi::Mod::HPP)) / 100.0f;
+    float MPPPower      = (100.0f + getMod(xi::Mod::MPP)) / 100.0f;
 
     // Calculate "base" hp/mp with weakness, curse, HP mods. Raw HP/MP mods from food are post-curse.
     // Note: Afflictor was noted to use exactly 75/256 for curse power
-    int32 baseHPBonus = std::floor((std::floor((health.maxhp + getMod(Mod::BASE_HP)) * weaknessPower) + getMod(Mod::HP)) * cursePower) + getMod(Mod::FOOD_HP);
-    int32 baseMPBonus = std::floor((std::floor((health.maxmp + getMod(Mod::BASE_MP)) * weaknessPower) + getMod(Mod::MP)) * cursePower) + getMod(Mod::FOOD_MP);
+    int32 baseHPBonus = std::floor((std::floor((health.maxhp + getMod(xi::Mod::BASE_HP)) * weaknessPower) + getMod(xi::Mod::HP)) * cursePower) + getMod(xi::Mod::FOOD_HP);
+    int32 baseMPBonus = std::floor((std::floor((health.maxmp + getMod(xi::Mod::BASE_MP)) * weaknessPower) + getMod(xi::Mod::MP)) * cursePower) + getMod(xi::Mod::FOOD_MP);
 
     // Resolve HP/MP conversion
-    int32 HPMPConvertDiff = getMod(Mod::CONVMPTOHP) - getMod(Mod::CONVHPTOMP);
+    int32 HPMPConvertDiff = getMod(xi::Mod::CONVMPTOHP) - getMod(xi::Mod::CONVHPTOMP);
     int32 convertHP       = 0;
     int32 convertMP       = 0;
 
@@ -267,8 +267,8 @@ void CBattleEntity::UpdateHealth()
     baseMPBonus = std::floor((baseMPBonus + convertMP) * MPPPower);
 
     // Food is additive at the end
-    float foodHPBonus = std::min<int16>(baseHPBonus * getMod(Mod::FOOD_HPP) / 100, getMod(Mod::FOOD_HP_CAP));
-    float foodMPBonus = std::min<int16>(baseMPBonus * getMod(Mod::FOOD_MPP) / 100, getMod(Mod::FOOD_MP_CAP));
+    float foodHPBonus = std::min<int16>(baseHPBonus * getMod(xi::Mod::FOOD_HPP) / 100, getMod(xi::Mod::FOOD_HP_CAP));
+    float foodMPBonus = std::min<int16>(baseMPBonus * getMod(xi::Mod::FOOD_MPP) / 100, getMod(xi::Mod::FOOD_MP_CAP));
 
     health.modhp = baseHPBonus + foodHPBonus;
     health.modmp = baseMPBonus + foodMPBonus;
@@ -343,46 +343,46 @@ uint8 CBattleEntity::UpdateSpeed(bool run)
     if (isMounted())
     {
         outputSpeed = settings::get<uint8>("map.MOUNT_SPEED") / 2;
-        outputSpeed *= 1.0f + static_cast<float>(getMod(Mod::MOUNT_MOVE)) / 100.0f;
+        outputSpeed *= 1.0f + static_cast<float>(getMod(xi::Mod::MOUNT_MOVE)) / 100.0f;
     }
-    else if (baseSpeed == 0 || getMod(Mod::MOVE_SPEED_OVERRIDE) < 0)
+    else if (baseSpeed == 0 || getMod(xi::Mod::MOVE_SPEED_OVERRIDE) < 0)
     {
         outputSpeed = 0;
     }
-    else if (getMod(Mod::MOVE_SPEED_OVERRIDE) > 0)
+    else if (getMod(xi::Mod::MOVE_SPEED_OVERRIDE) > 0)
     {
         // GM speed bypass.
         // Speed cap can be bypassed. Ex. Feast of swords. GM speed.
         // TODO: Find exceptions. Add them here.
-        outputSpeed = getMod(Mod::MOVE_SPEED_OVERRIDE);
+        outputSpeed = getMod(xi::Mod::MOVE_SPEED_OVERRIDE);
     }
     else
     {
         // Gear penalties.
-        int8 additiveMods = static_cast<int8>(getMod(Mod::MOVE_SPEED_STACKABLE));
+        int8 additiveMods = static_cast<int8>(getMod(xi::Mod::MOVE_SPEED_STACKABLE));
 
         // Gravity and Curse. They seem additive to each other and the sum seems to be multiplicative.
-        float weightFactor = std::clamp<float>(1.0f - static_cast<float>(getMod(Mod::MOVE_SPEED_WEIGHT_PENALTY)) / 100.0f, 0.1f, 1.0f);
+        float weightFactor = std::clamp<float>(1.0f - static_cast<float>(getMod(xi::Mod::MOVE_SPEED_WEIGHT_PENALTY)) / 100.0f, 0.1f, 1.0f);
 
         // Flee.
-        float fleeFactor = std::clamp<float>(1.0f + static_cast<float>(getMod(Mod::MOVE_SPEED_FLEE)) / 10000.0f, 1.0f, 2.0f);
+        float fleeFactor = std::clamp<float>(1.0f + static_cast<float>(getMod(xi::Mod::MOVE_SPEED_FLEE)) / 10000.0f, 1.0f, 2.0f);
 
         // Cheer KI's
-        float cheerFactor = (99.0f + static_cast<float>(getMod(Mod::MOVE_SPEED_CHEER))) / 99.0f;
+        float cheerFactor = (99.0f + static_cast<float>(getMod(xi::Mod::MOVE_SPEED_CHEER))) / 99.0f;
 
         // Bolter's Roll. Additive
-        uint8 boltersRollEffect = static_cast<uint8>(getMod(Mod::MOVE_SPEED_BOLTERS_ROLL));
+        uint8 boltersRollEffect = static_cast<uint8>(getMod(xi::Mod::MOVE_SPEED_BOLTERS_ROLL));
 
         // Positive movement speed from gear and from Atmas. Only highest applies. Multiplicative to base speed.
         float gearFactor = 1.0f;
 
         if (objtype == TYPE_PC)
         {
-            gearFactor = std::clamp<float>(1.0f + static_cast<float>(getMaxGearMod(Mod::MOVE_SPEED_GEAR_BONUS)) / 100.0f, 1.0f, 1.25f);
+            gearFactor = std::clamp<float>(1.0f + static_cast<float>(getMaxGearMod(xi::Mod::MOVE_SPEED_GEAR_BONUS)) / 100.0f, 1.0f, 1.25f);
         }
 
         // Quickening and Mazurka. They share a cap. Additive.
-        uint8 mazurkaQuickeningEffect = std::clamp<uint8>(getMod(Mod::MOVE_SPEED_QUICKENING) + getMod(Mod::MOVE_SPEED_MAZURKA), 0, 10);
+        uint8 mazurkaQuickeningEffect = std::clamp<uint8>(getMod(xi::Mod::MOVE_SPEED_QUICKENING) + getMod(xi::Mod::MOVE_SPEED_MAZURKA), 0, 10);
 
         // We have all the modifiers needed. Calculate final speed.
         // This MUST BE DONE IN THIS ORDER. Using int8 data type, we use that to floor.
@@ -418,7 +418,7 @@ uint8 CBattleEntity::UpdateSpeed(bool run)
 
                     // if some weight penalty (like gravity) then cut the multiplier
                     // (for mobs with default boost of 2.5 then boost becomes 1.20)
-                    if (mobEntity->getMod(Mod::MOVE_SPEED_WEIGHT_PENALTY) > 0)
+                    if (mobEntity->getMod(xi::Mod::MOVE_SPEED_WEIGHT_PENALTY) > 0)
                     {
                         multiplier *= 0.48f;
                     }
@@ -439,7 +439,7 @@ uint8 CBattleEntity::UpdateSpeed(bool run)
 
 bool CBattleEntity::CanRest()
 {
-    return !getMod(Mod::REGEN_DOWN) && !StatusEffectContainer->HasStatusEffectByFlag(xi::StatusEffectFlag::NoRest);
+    return !getMod(xi::Mod::REGEN_DOWN) && !StatusEffectContainer->HasStatusEffectByFlag(xi::StatusEffectFlag::NoRest);
 }
 
 bool CBattleEntity::Rest(float rate)
@@ -474,7 +474,7 @@ auto CBattleEntity::GetWeaponDelay(bool tp) -> uint32
 
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
     {
-        uint16 weaponDelay = weapon->getDelay() + getMod(Mod::DELAY);
+        uint16 weaponDelay = weapon->getDelay() + getMod(xi::Mod::DELAY);
 
         // Flat bonuses/Penalties (Bonuses would be negative in value)
         int16 martialArts = 0;
@@ -482,13 +482,13 @@ auto CBattleEntity::GetWeaponDelay(bool tp) -> uint32
         // Multipliers
         float dualWieldMultiplier = 1.0f;
         float hasteMultiplier     = 1.0f;
-        float delayModMultiplier  = 1.0f + getMod(Mod::DELAYP) / 100.0f;
+        float delayModMultiplier  = 1.0f + getMod(xi::Mod::DELAYP) / 100.0f;
 
         // H2H (Mobs do not benefit from Martial Arts)
         // TODO: Do Trusts benefit from Martial Arts?
         if (weapon->isHandToHand() && objtype != TYPE_MOB)
         {
-            martialArts = getMod(Mod::MARTIAL_ARTS) * 1000 / 60; // TODO: Job points?
+            martialArts = getMod(xi::Mod::MARTIAL_ARTS) * 1000 / 60; // TODO: Job points?
         }
 
         // Sub-weapon
@@ -496,7 +496,7 @@ auto CBattleEntity::GetWeaponDelay(bool tp) -> uint32
                  subweapon && subweapon->getDmgType() > xi::DamageType::None && subweapon->getDmgType() < xi::DamageType::HandToHand)
         {
             weaponDelay         = weaponDelay + subweapon->getDelay();
-            dualWieldMultiplier = 1.0f - getMod(Mod::DUAL_WIELD) / 100.0f;
+            dualWieldMultiplier = 1.0f - getMod(xi::Mod::DUAL_WIELD) / 100.0f;
         }
 
         // Handle Hundred Fists directly.
@@ -523,13 +523,13 @@ auto CBattleEntity::GetWeaponDelay(bool tp) -> uint32
 
             if (!specialAttackList)
             {
-                float hasteMagic   = getMod(Mod::HASTE_MAGIC) / 10000.0f;
-                float hasteAbility = getMod(Mod::HASTE_ABILITY) / 10000.0f;
-                float hasteGear    = getMod(Mod::HASTE_GEAR) / 10000.0f;
+                float hasteMagic   = getMod(xi::Mod::HASTE_MAGIC) / 10000.0f;
+                float hasteAbility = getMod(xi::Mod::HASTE_ABILITY) / 10000.0f;
+                float hasteGear    = getMod(xi::Mod::HASTE_GEAR) / 10000.0f;
 
                 if (weapon->isTwoHanded())
                 {
-                    hasteAbility = hasteAbility + getMod(Mod::TWOHAND_HASTE_ABILITY) / 10000.0f;
+                    hasteAbility = hasteAbility + getMod(xi::Mod::TWOHAND_HASTE_ABILITY) / 10000.0f;
                 }
 
                 hasteMagic   = std::clamp<float>(hasteMagic, -1.0f, 0.4375f);
@@ -592,12 +592,12 @@ int16 CBattleEntity::GetRangedWeaponDelay(bool forTPCalc)
 
     // multiple the base delays by 1000 so final delays are in ms
     // divide by 120 to convert the delays to actual times
-    delay = (delay - getMod(Mod::RANGED_DELAY)) * 1000 / 120;
+    delay = (delay - getMod(xi::Mod::RANGED_DELAY)) * 1000 / 120;
 
     // apply haste and delay reductions that don't affect tp
     if (!forTPCalc)
     {
-        delay = delay * ((100.0f + getMod(Mod::RANGED_DELAYP)) / 100.0f);
+        delay = delay * ((100.0f + getMod(xi::Mod::RANGED_DELAYP)) / 100.0f);
     }
     return delay;
 }
@@ -625,7 +625,7 @@ uint16 CBattleEntity::GetMainWeaponDmg()
 
         int32 weaponDamage       = weapon->getDamage();
         int32 baseDamageModifier = 0;
-        int32 damageModifier     = getMod(Mod::MAIN_DMG_RATING);
+        int32 damageModifier     = getMod(xi::Mod::MAIN_DMG_RATING);
         float damageMultiplier   = 1.0f;
         int32 weaponDamageOffset = 0;
 
@@ -659,20 +659,20 @@ uint16 CBattleEntity::GetMainWeaponDmg()
 
         if (PPetEntity->getPetType() == PET_TYPE::AUTOMATON)
         {
-            return std::floor((GetSkill(xi::SkillType::AutomatonMelee) / 8.7f) * 2.0f + 3.0f) + getMod(Mod::MAIN_DMG_RATING);
+            return std::floor((GetSkill(xi::SkillType::AutomatonMelee) / 8.7f) * 2.0f + 3.0f) + getMod(xi::Mod::MAIN_DMG_RATING);
         }
         else if (PPetEntity->getPetType() == PET_TYPE::WYVERN)
         {
             // Accurate for lvl 75 circa 2006~2008ish
             // Unknown if this ever changed
-            return std::floor(GetMLevel() / 2) + 3 + getMod(Mod::MAIN_DMG_RATING);
+            return std::floor(GetMLevel() / 2) + 3 + getMod(xi::Mod::MAIN_DMG_RATING);
         }
         else if (PPetEntity->getPetType() == PET_TYPE::AVATAR)
         {
             auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]);
 
             int32 weaponDamage   = weapon->getDamage();
-            int32 damageModifier = getMod(Mod::MAIN_DMG_RATING);
+            int32 damageModifier = getMod(xi::Mod::MAIN_DMG_RATING);
 
             weaponDamage += damageModifier;
             weaponDamage = std::clamp<int32>(weaponDamage, 1, 65535);
@@ -682,7 +682,7 @@ uint16 CBattleEntity::GetMainWeaponDmg()
         else // jugs
         {
             // Formula looks fake...
-            return petutils::GetJugWeaponDamage(PPetEntity) + getMod(Mod::MAIN_DMG_RATING);
+            return petutils::GetJugWeaponDamage(PPetEntity) + getMod(xi::Mod::MAIN_DMG_RATING);
         }
     }
 
@@ -696,11 +696,11 @@ uint16 CBattleEntity::GetMainWeaponDmg()
             dmg *= GetMLevel() * 3;
             dmg /= 4;
             dmg /= weapon->getReqLvl();
-            return dmg + weapon->getModifier(Mod::DMG_RATING) + getMod(Mod::MAIN_DMG_RATING);
+            return dmg + weapon->getModifier(xi::Mod::DMG_RATING) + getMod(xi::Mod::MAIN_DMG_RATING);
         }
         else
         {
-            return weapon->getDamage() + weapon->getModifier(Mod::DMG_RATING) + getMod(Mod::MAIN_DMG_RATING);
+            return weapon->getDamage() + weapon->getModifier(xi::Mod::DMG_RATING) + getMod(xi::Mod::MAIN_DMG_RATING);
         }
     }
     return 0;
@@ -718,7 +718,7 @@ uint16 CBattleEntity::GetSubWeaponDmg()
 
         int32 weaponDamage       = weapon->getDamage();
         int32 baseDamageModifier = 0;
-        int32 damageModifier     = getMod(Mod::SUB_DMG_RATING);
+        int32 damageModifier     = getMod(xi::Mod::SUB_DMG_RATING);
         float damageMultiplier   = 1.0f;
         int32 weaponDamageOffset = 0;
 
@@ -755,11 +755,11 @@ uint16 CBattleEntity::GetSubWeaponDmg()
             dmg *= GetMLevel() * 3;
             dmg /= 4;
             dmg /= weapon->getReqLvl();
-            return dmg + weapon->getModifier(Mod::DMG_RATING) + getMod(Mod::SUB_DMG_RATING);
+            return dmg + weapon->getModifier(xi::Mod::DMG_RATING) + getMod(xi::Mod::SUB_DMG_RATING);
         }
         else
         {
-            return weapon->getDamage() + weapon->getModifier(Mod::DMG_RATING) + getMod(Mod::SUB_DMG_RATING);
+            return weapon->getDamage() + weapon->getModifier(xi::Mod::DMG_RATING) + getMod(xi::Mod::SUB_DMG_RATING);
         }
     }
     return 0;
@@ -777,7 +777,7 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
 
         int32 weaponDamage       = weapon->getDamage();
         int32 baseDamageModifier = 0;
-        int32 damageModifier     = getMod(Mod::RANGED_DMG_RATING);
+        int32 damageModifier     = getMod(xi::Mod::RANGED_DMG_RATING);
         float damageMultiplier   = 1.0f;
         int32 weaponDamageOffset = 0;
 
@@ -811,20 +811,20 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
 
         if (PPetEntity->getPetType() == PET_TYPE::AUTOMATON)
         {
-            return std::floor((GetSkill(xi::SkillType::AutomatonRanged) / 8.7f) * 2.0f + 3.0f) + getMod(Mod::RANGED_DMG_RATING);
+            return std::floor((GetSkill(xi::SkillType::AutomatonRanged) / 8.7f) * 2.0f + 3.0f) + getMod(xi::Mod::RANGED_DMG_RATING);
         }
         else if (PPetEntity->getPetType() == PET_TYPE::WYVERN)
         {
             // Accurate for lvl 75 circa 2006~2008ish
             // Unknown if this ever changed
-            return std::floor(GetMLevel() / 2) + 3 + getMod(Mod::RANGED_DMG_RATING);
+            return std::floor(GetMLevel() / 2) + 3 + getMod(xi::Mod::RANGED_DMG_RATING);
         }
         else if (PPetEntity->getPetType() == PET_TYPE::AVATAR)
         {
             auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_RANGED]);
 
             int32 weaponDamage   = weapon->getDamage();
-            int32 damageModifier = getMod(Mod::RANGED_DMG_RATING);
+            int32 damageModifier = getMod(xi::Mod::RANGED_DMG_RATING);
 
             weaponDamage += damageModifier;
             weaponDamage = std::clamp<int32>(weaponDamage, 1, 65535);
@@ -834,7 +834,7 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
         else // jugs
         {
             // Formula looks fake...
-            return petutils::GetJugWeaponDamage(PPetEntity) + getMod(Mod::RANGED_DMG_RATING);
+            return petutils::GetJugWeaponDamage(PPetEntity) + getMod(xi::Mod::RANGED_DMG_RATING);
         }
     }
 
@@ -846,11 +846,11 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
             scaleddmg *= GetMLevel() * 3;
             scaleddmg /= 4;
             scaleddmg /= weapon->getReqLvl();
-            dmg += scaleddmg + weapon->getModifier(Mod::DMG_RATING);
+            dmg += scaleddmg + weapon->getModifier(xi::Mod::DMG_RATING);
         }
         else
         {
-            dmg += weapon->getDamage() + weapon->getModifier(Mod::DMG_RATING);
+            dmg += weapon->getDamage() + weapon->getModifier(xi::Mod::DMG_RATING);
         }
     }
     if (auto* ammo = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_AMMO]))
@@ -861,14 +861,14 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
             scaleddmg *= GetMLevel() * 3;
             scaleddmg /= 4;
             scaleddmg /= ammo->getReqLvl();
-            dmg += scaleddmg + ammo->getModifier(Mod::DMG_RATING);
+            dmg += scaleddmg + ammo->getModifier(xi::Mod::DMG_RATING);
         }
         else
         {
-            dmg += ammo->getDamage() + ammo->getModifier(Mod::DMG_RATING);
+            dmg += ammo->getDamage() + ammo->getModifier(xi::Mod::DMG_RATING);
         }
     }
-    return dmg + getMod(Mod::RANGED_DMG_RATING);
+    return dmg + getMod(xi::Mod::RANGED_DMG_RATING);
 }
 
 // https://www.bg-wiki.com/ffxi/Weapon_Rank
@@ -878,8 +878,8 @@ uint16 CBattleEntity::GetMainWeaponRank()
 
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
     {
-        wDamage += weapon->getModifier(Mod::MAIN_DMG_RANK); // Special case for latents like Destroyers. They always have the unlocked base damage for wrank purposes.
-        wDamage -= weapon->getModifier(Mod::DMG_RATING);    // Company sword, Maneater, etc don't boost weapon rank
+        wDamage += weapon->getModifier(xi::Mod::MAIN_DMG_RANK); // Special case for latents like Destroyers. They always have the unlocked base damage for wrank purposes.
+        wDamage -= weapon->getModifier(xi::Mod::DMG_RATING);    // Company sword, Maneater, etc don't boost weapon rank
         // apply the H2H formula adjustment only to players
         // as mobs use H2H for dual wield and thus further research is needed
         if (objtype == TYPE_PC && weapon->getSkillType() == xi::SkillType::HandToHand)
@@ -896,8 +896,8 @@ uint16 CBattleEntity::GetSubWeaponRank()
 
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_SUB]))
     {
-        wDamage += weapon->getModifier(Mod::MAIN_DMG_RANK); // Special case for latents like Destroyers. They always have the unlocked base damage for wrank purposes.
-        wDamage -= weapon->getModifier(Mod::DMG_RATING);    // Company sword, Maneater, etc don't boost weapon rank
+        wDamage += weapon->getModifier(xi::Mod::MAIN_DMG_RANK); // Special case for latents like Destroyers. They always have the unlocked base damage for wrank purposes.
+        wDamage -= weapon->getModifier(xi::Mod::DMG_RATING);    // Company sword, Maneater, etc don't boost weapon rank
     }
 
     return wDamage / 9;
@@ -927,7 +927,7 @@ uint16 CBattleEntity::GetRangedWeaponRank()
             wDamage = weapon->getDamage();
         }
 
-        wDamage += weapon->getModifier(Mod::RANGED_DMG_RANK);
+        wDamage += weapon->getModifier(xi::Mod::RANGED_DMG_RANK);
     }
 
     return wDamage / 9;
@@ -944,7 +944,7 @@ int16 CBattleEntity::addTP(int16 tp)
     // When adding TP, we must adjust for Inhibit TP effect, which reduces TP gain.
     if (tp > 0)
     {
-        float tpReducePercent = this->getMod(Mod::INHIBIT_TP) / 100.0f;
+        float tpReducePercent = this->getMod(xi::Mod::INHIBIT_TP) / 100.0f;
         tp                    = (int16)(tp - (tp * tpReducePercent));
 
         float TPMulti = 1.0;
@@ -1071,9 +1071,9 @@ auto CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullpt
         }
     }
 
-    if (getMod(Mod::ABSORB_DMG_TO_MP) > 0)
+    if (getMod(xi::Mod::ABSORB_DMG_TO_MP) > 0)
     {
-        int16 absorbedMP = (int16)(amount * getMod(Mod::ABSORB_DMG_TO_MP) / 100);
+        int16 absorbedMP = (int16)(amount * getMod(xi::Mod::ABSORB_DMG_TO_MP) / 100);
         if (absorbedMP > 0)
         {
             addMP(absorbedMP);
@@ -1090,47 +1090,47 @@ uint16 CBattleEntity::STR()
     // Hasso gives STR only if main weapon is two handed
     if (weapon && weapon->isTwoHanded())
     {
-        return std::clamp(stats.STR + getMod(Mod::STR) + getMod(Mod::TWOHAND_STR), 0, 999);
+        return std::clamp(stats.STR + getMod(xi::Mod::STR) + getMod(xi::Mod::TWOHAND_STR), 0, 999);
     }
-    return std::clamp(stats.STR + getMod(Mod::STR), 0, 999);
+    return std::clamp(stats.STR + getMod(xi::Mod::STR), 0, 999);
 }
 
 uint16 CBattleEntity::DEX()
 {
-    return std::clamp(stats.DEX + getMod(Mod::DEX), 0, 999);
+    return std::clamp(stats.DEX + getMod(xi::Mod::DEX), 0, 999);
 }
 
 uint16 CBattleEntity::VIT()
 {
-    return std::clamp(stats.VIT + getMod(Mod::VIT), 0, 999);
+    return std::clamp(stats.VIT + getMod(xi::Mod::VIT), 0, 999);
 }
 
 uint16 CBattleEntity::AGI()
 {
-    return std::clamp(stats.AGI + getMod(Mod::AGI), 0, 999);
+    return std::clamp(stats.AGI + getMod(xi::Mod::AGI), 0, 999);
 }
 
 uint16 CBattleEntity::INT()
 {
-    return std::clamp(stats.INT + getMod(Mod::INT), 0, 999);
+    return std::clamp(stats.INT + getMod(xi::Mod::INT), 0, 999);
 }
 
 uint16 CBattleEntity::MND()
 {
-    return std::clamp(stats.MND + getMod(Mod::MND), 0, 999);
+    return std::clamp(stats.MND + getMod(xi::Mod::MND), 0, 999);
 }
 
 uint16 CBattleEntity::CHR()
 {
-    return std::clamp(stats.CHR + getMod(Mod::CHR), 0, 999);
+    return std::clamp(stats.CHR + getMod(xi::Mod::CHR), 0, 999);
 }
 
 uint16 CBattleEntity::ATT(SLOTTYPE slot)
 {
     TracyZoneScoped;
 
-    int32 ATT           = 8 + getMod(Mod::ATT);
-    auto  ATTP          = getMod(Mod::ATTP);
+    int32 ATT           = 8 + getMod(xi::Mod::ATT);
+    auto  ATTP          = getMod(xi::Mod::ATTP);
     auto* weapon        = dynamic_cast<CItemWeapon*>(m_Weapons[slot]);
     float strMultiplier = 0.5;
 
@@ -1164,7 +1164,7 @@ uint16 CBattleEntity::ATT(SLOTTYPE slot)
 
     if (this->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Endark))
     {
-        ATT += this->getMod(Mod::ENSPELL_DMG);
+        ATT += this->getMod(xi::Mod::ENSPELL_DMG);
     }
 
     if (this->objtype & TYPE_PC)
@@ -1176,7 +1176,7 @@ uint16 CBattleEntity::ATT(SLOTTYPE slot)
             // Smite applies (bonus ATTP) when using 2H or H2H weapons
             if (weapon->isTwoHanded() || weapon->isHandToHand())
             {
-                ATTP += static_cast<int32>(this->getMod(Mod::SMITE) / 256.0f * 100); // Divide Smite value by 256
+                ATTP += static_cast<int32>(this->getMod(xi::Mod::SMITE) / 256.0f * 100); // Divide Smite value by 256
             }
         }
     }
@@ -1198,12 +1198,12 @@ uint16 CBattleEntity::ATT(SLOTTYPE slot)
 
             if (thisTarget != nullptr && (int8)getEcoStrBonusFunc(this->m_EcoSystem, thisTarget->m_EcoSystem) > 0)
             {
-                ATTP += this->getMod(Mod::ENHANCES_MONSTER_CORRELATION);
+                ATTP += this->getMod(xi::Mod::ENHANCES_MONSTER_CORRELATION);
             }
         }
     }
     // use max to prevent underflow
-    return std::max(1, ATT + (ATT * ATTP / 100) + std::min<int16>((ATT * getMod(Mod::FOOD_ATTP) / 100), getMod(Mod::FOOD_ATT_CAP)));
+    return std::max(1, ATT + (ATT * ATTP / 100) + std::min<int16>((ATT * getMod(xi::Mod::FOOD_ATTP) / 100), getMod(xi::Mod::FOOD_ATT_CAP)));
 }
 
 auto CBattleEntity::RATT(uint16 bonusAtt) -> uint16
@@ -1270,9 +1270,9 @@ auto CBattleEntity::RATT(uint16 bonusAtt) -> uint16
     }
     // mobs and pets don't have "skill level" -- it's baked into m_modStat[Mod::RATT]
 
-    int32 RATT = 8 + skillLevel + bonusAtt + getMod(Mod::RATT) + battleutils::GetRangedAttackBonuses(this) + std::floor(STR() * strMultiplier);
+    int32 RATT = 8 + skillLevel + bonusAtt + getMod(xi::Mod::RATT) + battleutils::GetRangedAttackBonuses(this) + std::floor(STR() * strMultiplier);
     // use max to prevent any underflow
-    return std::max<int16>(1, RATT + (RATT * getMod(Mod::RATTP) / 100.f) + std::min<int16>((RATT * getMod(Mod::FOOD_RATTP) / 100.f), getMod(Mod::FOOD_RATT_CAP)));
+    return std::max<int16>(1, RATT + (RATT * getMod(xi::Mod::RATTP) / 100.f) + std::min<int16>((RATT * getMod(xi::Mod::FOOD_RATTP) / 100.f), getMod(xi::Mod::FOOD_RATT_CAP)));
 }
 
 inline uint32 GetAccFromSkill(uint32 skill)
@@ -1347,7 +1347,7 @@ auto CBattleEntity::RACC(uint16 bonusAcc) -> uint16
 
         RACC = GetAccFromSkill(skillLevel);
 
-        RACC += getMod(Mod::RACC);
+        RACC += getMod(xi::Mod::RACC);
         RACC += bonusAcc;
         RACC += battleutils::GetRangedAccuracyBonuses(this);
         RACC += std::floor(AGI() * settings::get<float>("main.RANGED_AGI_ACCURACY_MULTIPLIER"));
@@ -1358,7 +1358,7 @@ auto CBattleEntity::RACC(uint16 bonusAcc) -> uint16
 
         RACC = GetAccFromSkill(skillLevel);
         RACC += std::floor(AGI() * 0.5);
-        RACC += getMod(Mod::ACC) + bonusAcc;
+        RACC += getMod(xi::Mod::ACC) + bonusAcc;
 
         // Tandem Strike is listed here in ACC call but no clue if it works for automatons or RACC in general
     }
@@ -1370,18 +1370,18 @@ auto CBattleEntity::RACC(uint16 bonusAcc) -> uint16
 
         RACC = GetAccFromSkill(std::max({ archery_acc, marksmanship_acc, throwing_acc }));
         RACC += std::floor(AGI() * 0.75); // 0.75 needs verification
-        RACC += getMod(Mod::RACC) + bonusAcc;
+        RACC += getMod(xi::Mod::RACC) + bonusAcc;
     }
     else // pets, mobs
     {
-        RACC = getMod(Mod::RACC) + bonusAcc;
+        RACC = getMod(xi::Mod::RACC) + bonusAcc;
 
         // TODO: does this work for ranged accuracy?
         if (petutils::IsTandemActive(this))
         {
             if (this->PMaster && this->PMaster->objtype == TYPE_PC)
             {
-                RACC += this->PMaster->getMod(Mod::TANDEM_STRIKE_POWER);
+                RACC += this->PMaster->getMod(xi::Mod::TANDEM_STRIKE_POWER);
             }
         }
 
@@ -1400,7 +1400,7 @@ auto CBattleEntity::RACC(uint16 bonusAcc) -> uint16
 
                 if (thisTarget != nullptr && (int8)getEcoStrBonusFunc(this->m_EcoSystem, thisTarget->m_EcoSystem) > 0)
                 {
-                    RACC += this->getMod(Mod::ENHANCES_MONSTER_CORRELATION);
+                    RACC += this->getMod(xi::Mod::ENHANCES_MONSTER_CORRELATION);
                 }
             }
         }
@@ -1408,7 +1408,7 @@ auto CBattleEntity::RACC(uint16 bonusAcc) -> uint16
         RACC = RACC + std::floor(AGI() / 2);
     }
     // use max to prevent underflow
-    return std::max(1, RACC + std::min<int16>(((100 + getMod(Mod::FOOD_RACCP) * RACC) / 100), getMod(Mod::FOOD_RACC_CAP)));
+    return std::max(1, RACC + std::min<int16>(((100 + getMod(xi::Mod::FOOD_RACCP) * RACC) / 100), getMod(xi::Mod::FOOD_RACC_CAP)));
 }
 
 uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
@@ -1482,22 +1482,22 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
             dexMultiplier = settings::get<float>("main.TWO_HANDED_DEX_ACCURACY_MULTIPLIER");
 
             ACC += std::floor(DEX() * dexMultiplier);
-            ACC += getMod(Mod::TWOHAND_ACC);
+            ACC += getMod(xi::Mod::TWOHAND_ACC);
         }
         else
         {
             ACC += std::floor(DEX() * dexMultiplier);
         }
-        ACC = (ACC + getMod(Mod::ACC) + offsetAccuracy);
+        ACC = (ACC + getMod(xi::Mod::ACC) + offsetAccuracy);
 
         if (this->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Enlight))
         {
-            ACC += this->getMod(Mod::ENSPELL_DMG);
+            ACC += this->getMod(xi::Mod::ENSPELL_DMG);
         }
 
         if (petutils::IsTandemActive(this))
         {
-            ACC += this->getMod(Mod::TANDEM_STRIKE_POWER);
+            ACC += this->getMod(xi::Mod::TANDEM_STRIKE_POWER);
         }
 
         auto* PChar = dynamic_cast<CCharEntity*>(this);
@@ -1506,7 +1506,7 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
             ACC += PChar->PMeritPoints->GetMeritValue(MERIT_ACCURACY, PChar);
         }
 
-        ACC = ACC + std::min<int16>((ACC * getMod(Mod::FOOD_ACCP) / 100.f), getMod(Mod::FOOD_ACC_CAP));
+        ACC = ACC + std::min<int16>((ACC * getMod(xi::Mod::FOOD_ACCP) / 100.f), getMod(xi::Mod::FOOD_ACC_CAP));
         return std::max<int16>(0, ACC);
     }
     else if (this->objtype == TYPE_PET && ((CPetEntity*)this)->getPetType() == PET_TYPE::AUTOMATON)
@@ -1515,35 +1515,35 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
 
         ACC = GetAccFromSkill(skillLevel);
         ACC += std::floor(DEX() * 0.5);
-        ACC += getMod(Mod::ACC) + offsetAccuracy;
+        ACC += getMod(xi::Mod::ACC) + offsetAccuracy;
 
         if (this->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Enlight))
         {
-            ACC += this->getMod(Mod::ENSPELL_DMG);
+            ACC += this->getMod(xi::Mod::ENSPELL_DMG);
         }
 
         if (petutils::IsTandemActive(this))
         {
             if (this->PMaster && this->PMaster->objtype == TYPE_PC)
             {
-                ACC += this->PMaster->getMod(Mod::TANDEM_STRIKE_POWER);
+                ACC += this->PMaster->getMod(xi::Mod::TANDEM_STRIKE_POWER);
             }
         }
     }
     else
     {
-        ACC = getMod(Mod::ACC) + offsetAccuracy;
+        ACC = getMod(xi::Mod::ACC) + offsetAccuracy;
 
         if (this->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Enlight))
         {
-            ACC += this->getMod(Mod::ENSPELL_DMG);
+            ACC += this->getMod(xi::Mod::ENSPELL_DMG);
         }
 
         if (petutils::IsTandemActive(this))
         {
             if (this->PMaster && this->PMaster->objtype == TYPE_PC)
             {
-                ACC += this->PMaster->getMod(Mod::TANDEM_STRIKE_POWER);
+                ACC += this->PMaster->getMod(xi::Mod::TANDEM_STRIKE_POWER);
             }
         }
         if (this->objtype == TYPE_PET)
@@ -1560,14 +1560,14 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
 
                 if (thisTarget != nullptr && (int8)getEcoStrBonusFunc(this->m_EcoSystem, thisTarget->m_EcoSystem) > 0)
                 {
-                    ACC += this->getMod(Mod::ENHANCES_MONSTER_CORRELATION);
+                    ACC += this->getMod(xi::Mod::ENHANCES_MONSTER_CORRELATION);
                 }
             }
         }
         ACC = ACC + std::floor(DEX() / 2);
     }
 
-    return std::max(1, ACC + std::min<int16>(((100 + getMod(Mod::FOOD_ACCP) * ACC) / 100), getMod(Mod::FOOD_ACC_CAP)));
+    return std::max(1, ACC + std::min<int16>(((100 + getMod(xi::Mod::FOOD_ACCP) * ACC) / 100), getMod(xi::Mod::FOOD_ACC_CAP)));
 }
 
 uint16 CBattleEntity::DEF()
@@ -1613,7 +1613,7 @@ uint16 CBattleEntity::DEF()
         }
     }
 
-    DEF += getMod(Mod::DEF);
+    DEF += getMod(xi::Mod::DEF);
 
     if (this->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Counterstance, 0))
     {
@@ -1627,14 +1627,14 @@ uint16 CBattleEntity::DEF()
                 DEF += PMinne->GetPower();
             }
 
-            return std::max(1, DEF + (DEF * getMod(Mod::DEFP) / 100) + std::min<int16>((DEF * getMod(Mod::FOOD_DEFP) / 100), getMod(Mod::FOOD_DEF_CAP)));
+            return std::max(1, DEF + (DEF * getMod(xi::Mod::DEFP) / 100) + std::min<int16>((DEF * getMod(xi::Mod::FOOD_DEFP) / 100), getMod(xi::Mod::FOOD_DEF_CAP)));
         }
 
         return DEF / 2;
     }
 
     // use max to prevent underflow
-    return std::max(1, DEF + (DEF * getMod(Mod::DEFP) / 100) + std::min<int16>((DEF * getMod(Mod::FOOD_DEFP) / 100), getMod(Mod::FOOD_DEF_CAP)));
+    return std::max(1, DEF + (DEF * getMod(xi::Mod::DEFP) / 100) + std::min<int16>((DEF * getMod(xi::Mod::FOOD_DEFP) / 100), getMod(xi::Mod::FOOD_DEF_CAP)));
 }
 
 uint16 CBattleEntity::EVA()
@@ -1645,7 +1645,7 @@ uint16 CBattleEntity::EVA()
 
     if (this->objtype == TYPE_MOB || (this->objtype == TYPE_PET && !isAutomaton))
     {
-        evasion = getMod(Mod::EVA); // Mobs and pets base evasion is based off the EVA mod
+        evasion = getMod(xi::Mod::EVA); // Mobs and pets base evasion is based off the EVA mod
     }
     else // Players and automatons use xi::SkillType::Evasion
     {
@@ -1660,7 +1660,7 @@ uint16 CBattleEntity::EVA()
 
     evasion += AGI() / 2;
 
-    return std::max(1, evasion + (this->objtype == TYPE_MOB || (this->objtype == TYPE_PET && !isAutomaton) ? 0 : getMod(Mod::EVA))); // The mod for a pet or mob is already calclated in the above so return 0
+    return std::max(1, evasion + (this->objtype == TYPE_MOB || (this->objtype == TYPE_PET && !isAutomaton) ? 0 : getMod(xi::Mod::EVA))); // The mod for a pet or mob is already calclated in the above so return 0
 }
 
 JOBTYPE CBattleEntity::GetMJob() const
@@ -1780,9 +1780,9 @@ uint8 CBattleEntity::GetDeathType()
  *                                                                      *
  ************************************************************************/
 
-void CBattleEntity::addModifier(Mod type, int16 amount)
+void CBattleEntity::addModifier(xi::Mod type, int16 amount)
 {
-    if (type != Mod::NONE)
+    if (type != xi::Mod::NONE)
     {
         m_modStat[type] += amount;
     }
@@ -1794,7 +1794,7 @@ void CBattleEntity::addModifiers(std::vector<CModifier>* modList)
 
     for (auto modifier : *modList)
     {
-        if (modifier.getModID() != Mod::NONE)
+        if (modifier.getModID() != xi::Mod::NONE)
         {
             m_modStat[modifier.getModID()] += modifier.getModAmount();
         }
@@ -1811,9 +1811,9 @@ void CBattleEntity::addEquipModifiers(std::vector<CModifier>* modList, uint8 ite
         {
             if (slotid == SLOT_SUB)
             {
-                if (i.getModID() == Mod::MAIN_DMG_RANK)
+                if (i.getModID() == xi::Mod::MAIN_DMG_RANK)
                 {
-                    m_modStat[Mod::SUB_DMG_RANK] += i.getModAmount();
+                    m_modStat[xi::Mod::SUB_DMG_RANK] += i.getModAmount();
                 }
                 else
                 {
@@ -1833,30 +1833,30 @@ void CBattleEntity::addEquipModifiers(std::vector<CModifier>* modList, uint8 ite
             int16 modAmount = GetMLevel() * i.getModAmount();
             switch (i.getModID())
             {
-                case Mod::DEF:
-                case Mod::MAIN_DMG_RATING:
-                case Mod::SUB_DMG_RATING:
-                case Mod::RANGED_DMG_RATING:
+                case xi::Mod::DEF:
+                case xi::Mod::MAIN_DMG_RATING:
+                case xi::Mod::SUB_DMG_RATING:
+                case xi::Mod::RANGED_DMG_RATING:
                     modAmount *= 3;
                     modAmount /= 4;
                     break;
-                case Mod::HP:
-                case Mod::MP:
+                case xi::Mod::HP:
+                case xi::Mod::MP:
                     modAmount /= 2;
                     break;
-                case Mod::STR:
-                case Mod::DEX:
-                case Mod::VIT:
-                case Mod::AGI:
-                case Mod::INT:
-                case Mod::MND:
-                case Mod::CHR:
-                case Mod::ATT:
-                case Mod::RATT:
-                case Mod::ACC:
-                case Mod::RACC:
-                case Mod::MATT:
-                case Mod::MACC:
+                case xi::Mod::STR:
+                case xi::Mod::DEX:
+                case xi::Mod::VIT:
+                case xi::Mod::AGI:
+                case xi::Mod::INT:
+                case xi::Mod::MND:
+                case xi::Mod::CHR:
+                case xi::Mod::ATT:
+                case xi::Mod::RATT:
+                case xi::Mod::ACC:
+                case xi::Mod::RACC:
+                case xi::Mod::MATT:
+                case xi::Mod::MACC:
                     modAmount /= 3;
                     break;
                 default:
@@ -1866,9 +1866,9 @@ void CBattleEntity::addEquipModifiers(std::vector<CModifier>* modList, uint8 ite
             modAmount /= itemLevel;
             if (slotid == SLOT_SUB)
             {
-                if (i.getModID() == Mod::MAIN_DMG_RANK)
+                if (i.getModID() == xi::Mod::MAIN_DMG_RANK)
                 {
-                    m_modStat[Mod::SUB_DMG_RANK] += modAmount;
+                    m_modStat[xi::Mod::SUB_DMG_RANK] += modAmount;
                 }
                 else
                 {
@@ -1889,9 +1889,9 @@ void CBattleEntity::addEquipModifiers(std::vector<CModifier>* modList, uint8 ite
  *                                                                      *
  ************************************************************************/
 
-void CBattleEntity::setModifier(Mod type, int16 amount)
+void CBattleEntity::setModifier(xi::Mod type, int16 amount)
 {
-    if (type != Mod::NONE)
+    if (type != xi::Mod::NONE)
     {
         m_modStat[type] = amount;
     }
@@ -1903,7 +1903,7 @@ void CBattleEntity::setModifiers(std::vector<CModifier>* modList)
 
     for (auto& i : *modList)
     {
-        if (i.getModID() != Mod::NONE)
+        if (i.getModID() != xi::Mod::NONE)
         {
             m_modStat[i.getModID()] = i.getModAmount();
         }
@@ -1916,9 +1916,9 @@ void CBattleEntity::setModifiers(std::vector<CModifier>* modList)
  *                                                                      *
  ************************************************************************/
 
-void CBattleEntity::delModifier(Mod type, int16 amount)
+void CBattleEntity::delModifier(xi::Mod type, int16 amount)
 {
-    if (type != Mod::NONE)
+    if (type != xi::Mod::NONE)
     {
         m_modStat[type] -= amount;
     }
@@ -1937,43 +1937,43 @@ void CBattleEntity::restoreModifiers()
 void CBattleEntity::savePetModifiers()
 {
     // these mods are set dynamically based on pet type
-    const std::vector<Mod> petModsToUpdate = {
+    const std::vector<xi::Mod> petModsToUpdate = {
         // Physical SDT
-        Mod::SLASH_SDT,
-        Mod::PIERCE_SDT,
-        Mod::HTH_SDT,
-        Mod::IMPACT_SDT,
+        xi::Mod::SLASH_SDT,
+        xi::Mod::PIERCE_SDT,
+        xi::Mod::HTH_SDT,
+        xi::Mod::IMPACT_SDT,
         // Uncapped Magic
-        Mod::UDMGMAGIC,
+        xi::Mod::UDMGMAGIC,
         // Element SDT
-        Mod::FIRE_SDT,
-        Mod::ICE_SDT,
-        Mod::WIND_SDT,
-        Mod::EARTH_SDT,
-        Mod::THUNDER_SDT,
-        Mod::WATER_SDT,
-        Mod::LIGHT_SDT,
-        Mod::DARK_SDT,
+        xi::Mod::FIRE_SDT,
+        xi::Mod::ICE_SDT,
+        xi::Mod::WIND_SDT,
+        xi::Mod::EARTH_SDT,
+        xi::Mod::THUNDER_SDT,
+        xi::Mod::WATER_SDT,
+        xi::Mod::LIGHT_SDT,
+        xi::Mod::DARK_SDT,
         // Element RES_RANK
-        Mod::FIRE_RES_RANK,
-        Mod::ICE_RES_RANK,
-        Mod::WIND_RES_RANK,
-        Mod::EARTH_RES_RANK,
-        Mod::THUNDER_RES_RANK,
-        Mod::WATER_RES_RANK,
-        Mod::LIGHT_RES_RANK,
-        Mod::DARK_RES_RANK,
+        xi::Mod::FIRE_RES_RANK,
+        xi::Mod::ICE_RES_RANK,
+        xi::Mod::WIND_RES_RANK,
+        xi::Mod::EARTH_RES_RANK,
+        xi::Mod::THUNDER_RES_RANK,
+        xi::Mod::WATER_RES_RANK,
+        xi::Mod::LIGHT_RES_RANK,
+        xi::Mod::DARK_RES_RANK,
         // Status RES_RANK
-        Mod::PARALYZE_RES_RANK,
-        Mod::BIND_RES_RANK,
-        Mod::SILENCE_RES_RANK,
-        Mod::SLOW_RES_RANK,
-        Mod::POISON_RES_RANK,
-        Mod::LIGHT_SLEEP_RES_RANK,
-        Mod::DARK_SLEEP_RES_RANK,
-        Mod::BLIND_RES_RANK,
-        Mod::STUN_RES_RANK,
-        Mod::GRAVITY_RES_RANK,
+        xi::Mod::PARALYZE_RES_RANK,
+        xi::Mod::BIND_RES_RANK,
+        xi::Mod::SILENCE_RES_RANK,
+        xi::Mod::SLOW_RES_RANK,
+        xi::Mod::POISON_RES_RANK,
+        xi::Mod::LIGHT_SLEEP_RES_RANK,
+        xi::Mod::DARK_SLEEP_RES_RANK,
+        xi::Mod::BLIND_RES_RANK,
+        xi::Mod::STUN_RES_RANK,
+        xi::Mod::GRAVITY_RES_RANK,
     };
 
     // update the template mods so the dynamic mods are not overwritten
@@ -2009,9 +2009,9 @@ void CBattleEntity::delEquipModifiers(std::vector<CModifier>* modList, uint8 ite
         {
             if (slotid == SLOT_SUB)
             {
-                if (i.getModID() == Mod::MAIN_DMG_RANK)
+                if (i.getModID() == xi::Mod::MAIN_DMG_RANK)
                 {
-                    m_modStat[Mod::SUB_DMG_RANK] -= i.getModAmount();
+                    m_modStat[xi::Mod::SUB_DMG_RANK] -= i.getModAmount();
                 }
                 else
                 {
@@ -2031,30 +2031,30 @@ void CBattleEntity::delEquipModifiers(std::vector<CModifier>* modList, uint8 ite
             int16 modAmount = GetMLevel() * i.getModAmount();
             switch (i.getModID())
             {
-                case Mod::DEF:
-                case Mod::MAIN_DMG_RATING:
-                case Mod::SUB_DMG_RATING:
-                case Mod::RANGED_DMG_RATING:
+                case xi::Mod::DEF:
+                case xi::Mod::MAIN_DMG_RATING:
+                case xi::Mod::SUB_DMG_RATING:
+                case xi::Mod::RANGED_DMG_RATING:
                     modAmount *= 3;
                     modAmount /= 4;
                     break;
-                case Mod::HP:
-                case Mod::MP:
+                case xi::Mod::HP:
+                case xi::Mod::MP:
                     modAmount /= 2;
                     break;
-                case Mod::STR:
-                case Mod::DEX:
-                case Mod::VIT:
-                case Mod::AGI:
-                case Mod::INT:
-                case Mod::MND:
-                case Mod::CHR:
-                case Mod::ATT:
-                case Mod::RATT:
-                case Mod::ACC:
-                case Mod::RACC:
-                case Mod::MATT:
-                case Mod::MACC:
+                case xi::Mod::STR:
+                case xi::Mod::DEX:
+                case xi::Mod::VIT:
+                case xi::Mod::AGI:
+                case xi::Mod::INT:
+                case xi::Mod::MND:
+                case xi::Mod::CHR:
+                case xi::Mod::ATT:
+                case xi::Mod::RATT:
+                case xi::Mod::ACC:
+                case xi::Mod::RACC:
+                case xi::Mod::MATT:
+                case xi::Mod::MACC:
                     modAmount /= 3;
                     break;
                 default:
@@ -2064,9 +2064,9 @@ void CBattleEntity::delEquipModifiers(std::vector<CModifier>* modList, uint8 ite
             modAmount /= itemLevel;
             if (slotid == SLOT_SUB)
             {
-                if (i.getModID() == Mod::MAIN_DMG_RANK)
+                if (i.getModID() == xi::Mod::MAIN_DMG_RANK)
                 {
-                    m_modStat[Mod::SUB_DMG_RANK] -= modAmount;
+                    m_modStat[xi::Mod::SUB_DMG_RANK] -= modAmount;
                 }
                 else
                 {
@@ -2087,11 +2087,11 @@ void CBattleEntity::delEquipModifiers(std::vector<CModifier>* modList, uint8 ite
  *                                                                      *
  ************************************************************************/
 
-int16 CBattleEntity::getMod(Mod modID)
+int16 CBattleEntity::getMod(xi::Mod modID)
 {
     TracyZoneScoped;
 
-    if (modID == Mod::NONE)
+    if (modID == xi::Mod::NONE)
     {
         return 0;
     }
@@ -2105,11 +2105,11 @@ int16 CBattleEntity::getMod(Mod modID)
  *  Get the highest value of the specified modifier across all gear     *
  *                                                                      *
  ************************************************************************/
-int16 CBattleEntity::getMaxGearMod(Mod modID)
+int16 CBattleEntity::getMaxGearMod(xi::Mod modID)
 {
     TracyZoneScoped;
 
-    if (modID == Mod::NONE)
+    if (modID == xi::Mod::NONE)
     {
         return 0;
     }
@@ -2141,7 +2141,7 @@ int16 CBattleEntity::getMaxGearMod(Mod modID)
     return maxModValue;
 }
 
-void CBattleEntity::addPetModifier(Mod type, PetModType petmod, int16 amount)
+void CBattleEntity::addPetModifier(xi::Mod type, PetModType petmod, int16 amount)
 {
     TracyZoneScoped;
 
@@ -2154,7 +2154,7 @@ void CBattleEntity::addPetModifier(Mod type, PetModType petmod, int16 amount)
     }
 }
 
-void CBattleEntity::setPetModifier(Mod type, PetModType petmod, int16 amount)
+void CBattleEntity::setPetModifier(xi::Mod type, PetModType petmod, int16 amount)
 {
     TracyZoneScoped;
 
@@ -2167,7 +2167,7 @@ void CBattleEntity::setPetModifier(Mod type, PetModType petmod, int16 amount)
     }
 }
 
-void CBattleEntity::delPetModifier(Mod type, PetModType petmod, int16 amount)
+void CBattleEntity::delPetModifier(xi::Mod type, PetModType petmod, int16 amount)
 {
     TracyZoneScoped;
 
@@ -3261,7 +3261,7 @@ void CBattleEntity::OnRangedAttack(CRangeState& state, action_t& action)
     bool  hitOccured   = false; // Track if there was a successful hit
     bool  wasCritical  = false; // Track if the hit was critical
     bool  isBarrage    = StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Barrage, 0);
-    bool  isSange      = isChar && StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Sange) && getMod(Mod::SANGE_MULTI_HIT) > 0; // Pre-SoA Sange logic check, applied in SoA module
+    bool  isSange      = isChar && StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Sange) && getMod(xi::Mod::SANGE_MULTI_HIT) > 0; // Pre-SoA Sange logic check, applied in SoA module
 
     // Player Barrage check
     if (isChar && !ammoThrowing && !rangedThrowing && isBarrage)
@@ -3274,7 +3274,7 @@ void CBattleEntity::OnRangedAttack(CRangeState& state, action_t& action)
     }
     else if (isChar && ammoThrowing && isSange)
     {
-        int32 shadows = std::clamp<int32>(getMod(Mod::UTSUSEMI), 0, 7);
+        int32 shadows = std::clamp<int32>(getMod(xi::Mod::UTSUSEMI), 0, 7);
         StatusEffectContainer->DelStatusEffect(xi::StatusEffect::CopyImage);
 
         hitCount += static_cast<uint8>(shadows);
@@ -3284,11 +3284,11 @@ void CBattleEntity::OnRangedAttack(CRangeState& state, action_t& action)
             hitCount = PAmmo->getQuantity();
         }
     }
-    else if ((isChar || isTrust) && StatusEffectContainer->HasStatusEffect(xi::StatusEffect::TripleShot) && xirand::GetRandomNumber(100) < getMod(Mod::TRIPLE_SHOT_RATE))
+    else if ((isChar || isTrust) && StatusEffectContainer->HasStatusEffect(xi::StatusEffect::TripleShot) && xirand::GetRandomNumber(100) < getMod(xi::Mod::TRIPLE_SHOT_RATE))
     {
         hitCount = 3;
     }
-    else if ((isChar || isTrust) && StatusEffectContainer->HasStatusEffect(xi::StatusEffect::DoubleShot) && xirand::GetRandomNumber(100) < getMod(Mod::DOUBLE_SHOT_RATE))
+    else if ((isChar || isTrust) && StatusEffectContainer->HasStatusEffect(xi::StatusEffect::DoubleShot) && xirand::GetRandomNumber(100) < getMod(xi::Mod::DOUBLE_SHOT_RATE))
     {
         hitCount = 2;
     }
@@ -3345,7 +3345,7 @@ void CBattleEntity::OnRangedAttack(CRangeState& state, action_t& action)
 
         if (isChar)
         {
-            uint16 recycleChance = getMod(Mod::RECYCLE);
+            uint16 recycleChance = getMod(xi::Mod::RECYCLE);
             if (charutils::hasTrait(PChar, TRAIT_RECYCLE))
             {
                 recycleChance += PChar->PMeritPoints->GetMeritValue(MERIT_RECYCLE, PChar);
@@ -3356,7 +3356,7 @@ void CBattleEntity::OnRangedAttack(CRangeState& state, action_t& action)
             if (StatusEffectContainer->HasStatusEffect(xi::StatusEffect::UnlimitedShot))
             {
                 recycleChance = 100;
-                if (hitOccured || getMod(Mod::RETAIN_UNLIMITED_SHOT) <= 0)
+                if (hitOccured || getMod(xi::Mod::RETAIN_UNLIMITED_SHOT) <= 0)
                 {
                     StatusEffectContainer->DelStatusEffect(xi::StatusEffect::UnlimitedShot);
                 }
@@ -3463,8 +3463,8 @@ void CBattleEntity::OnRangedAttack(CRangeState& state, action_t& action)
                     return true;
                 }
 
-                bool hasGlobalAdditionalEffect     = battleutils::GetScaledItemModifier(this, weapon, Mod::ITEM_ADDEFFECT_TYPE) > 0;     // additional_effect.lua
-                bool hasItemScriptAdditionalEffect = battleutils::GetScaledItemModifier(this, weapon, Mod::ITEM_ADDEFFECT_SCRIPTED) > 0; // scripts/items/{}.lua
+                bool hasGlobalAdditionalEffect     = battleutils::GetScaledItemModifier(this, weapon, xi::Mod::ITEM_ADDEFFECT_TYPE) > 0;     // additional_effect.lua
+                bool hasItemScriptAdditionalEffect = battleutils::GetScaledItemModifier(this, weapon, xi::Mod::ITEM_ADDEFFECT_SCRIPTED) > 0; // scripts/items/{}.lua
 
                 if (hasGlobalAdditionalEffect && hasItemScriptAdditionalEffect)
                 {
@@ -3539,7 +3539,7 @@ void CBattleEntity::OnRangedAttack(CRangeState& state, action_t& action)
     {
         battleutils::RemoveAmmo(PChar, ammoConsumed);
 
-        if (getMod(Mod::RETAIN_CAMOUFLAGE) > 0)
+        if (getMod(xi::Mod::RETAIN_CAMOUFLAGE) > 0)
         {
             int16 retainChance     = 40;
             uint8 rotAllowance     = 25;
@@ -3805,7 +3805,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                         }
 
                         float DamageRatio     = battleutils::GetDamageRatio(PTarget, this, attack.IsCritical(), attBonus, skilltype, SLOT_MAIN, false);
-                        int32 extraCounterDMG = PTarget->getMod(Mod::COUNTER_DAMAGE);
+                        int32 extraCounterDMG = PTarget->getMod(xi::Mod::COUNTER_DAMAGE);
                         int32 damage          = std::max(PTarget->GetMainWeaponDmg() + naturalh2hDMG + extraCounterDMG + battleutils::GetFSTR(PTarget, this, SLOT_MAIN), 0);
                         damage                = std::floor(damage * mobH2HPenalty * DamageRatio);
 
@@ -3873,7 +3873,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                         auto PEffect = PTarget->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::EvasionDown);
 
                         // When Feint's evasion down effect is on, the target can get "debuffed" with TREASURE_HUNTER_PROC +25% * level above first on Feint
-                        PEffect->addMod(Mod::TREASURE_HUNTER_PROC, PFeintEffect->GetSubPower());
+                        PEffect->addMod(xi::Mod::TREASURE_HUNTER_PROC, PFeintEffect->GetSubPower());
                     }
                     StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Feint);
                 }
@@ -3959,14 +3959,14 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         // try zanshin only on single swing attack rounds - it is last priority in the multi-hit order
         if (attack.IsFirstSwing() && attackRound.GetAttackSwingCount() == 1)
         {
-            uint16 zanshinChance = this->getMod(Mod::ZANSHIN) + battleutils::GetMeritValue(this, MERIT_ZASHIN_ATTACK_RATE);
+            uint16 zanshinChance = this->getMod(xi::Mod::ZANSHIN) + battleutils::GetMeritValue(this, MERIT_ZASHIN_ATTACK_RATE);
             zanshinChance        = std::clamp<uint16>(zanshinChance, 0, 100);
 
             // zanshin may only proc on a missed/guarded/countered swing or as SAM main with hasso up (at 25% of the base zanshin rate)
             const bool missedOrCountered = actionResult.resolution != ActionResolution::Hit || actionResult.spikesEffect == ActionReactKind::Counter;
             const bool normalZanshinProc = missedOrCountered && xirand::GetRandomNumber(100) < zanshinChance;
 
-            const bool isSamWithHasso   = this->getMod(Mod::HASSO_ZANSHIN_BONUS) > 0 && this->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Hasso);
+            const bool isSamWithHasso   = this->getMod(xi::Mod::HASSO_ZANSHIN_BONUS) > 0 && this->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Hasso);
             const bool hassoZanshinProc = isSamWithHasso && xirand::GetRandomNumber(100) < zanshinChance / 4;
 
             if (normalZanshinProc || hassoZanshinProc)

@@ -2354,7 +2354,7 @@ bool EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 conta
     }
 
     if ((PChar->m_EquipBlock & (1 << equipSlotID)) || !(PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) ||
-        (PItem->getSuperiorLevel() > PChar->getMod(Mod::SUPERIOR_LEVEL)) ||
+        (PItem->getSuperiorLevel() > PChar->getMod(xi::Mod::SUPERIOR_LEVEL)) ||
         (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()])) ||
         !PItem->isEquippableByRace(PChar->look.race))
     {
@@ -3541,7 +3541,7 @@ void BuildingCharWeaponSkills(CCharEntity* PChar)
             // As of writing, the only unlockable weapons are: wsnm, ksnm, nyzul vigil weapons
             if (PItem && (!PItem->isUnlockable() || PItem->isUnlocked()))
             {
-                std::get<1>(slot) = battleutils::GetScaledItemModifier(PChar, PItem, Mod::ADDS_WEAPONSKILL);
+                std::get<1>(slot) = battleutils::GetScaledItemModifier(PChar, PItem, xi::Mod::ADDS_WEAPONSKILL);
             }
         }
     }
@@ -3811,11 +3811,11 @@ int16 ArtsBonusSkill(CCharEntity* PChar, xi::SkillType SkillID)
 
     if (PChar->StatusEffectContainer->HasStatusEffect({ xi::StatusEffect::LightArts, xi::StatusEffect::AddendumWhite }))
     {
-        skillBonus += PChar->getMod(Mod::LIGHT_ARTS_SKILL);
+        skillBonus += PChar->getMod(xi::Mod::LIGHT_ARTS_SKILL);
     }
     else
     {
-        skillBonus += PChar->getMod(Mod::DARK_ARTS_SKILL);
+        skillBonus += PChar->getMod(xi::Mod::DARK_ARTS_SKILL);
     }
 
     return skillBonus;
@@ -3900,7 +3900,7 @@ void BuildingCharSkillsTable(CCharEntity* PChar)
         meritIndex++;
 
         // Add 79 to get the modifier ID
-        skillBonus += PChar->getMod(static_cast<Mod>(i + 79)); // This can be a negative value. Example: Shiva's Shotel.
+        skillBonus += PChar->getMod(static_cast<xi::Mod>(i + 79)); // This can be a negative value. Example: Shiva's Shotel.
 
         uint8 mainSkillRank = battleutils::GetSkillRank((xi::SkillType)i, PChar->GetMJob());
         uint8 subSkillRank  = battleutils::GetSkillRank((xi::SkillType)i, PChar->GetSJob());
@@ -4054,10 +4054,10 @@ void BuildingCharTraitsTable(CCharEntity* PChar)
         blueutils::CalculateTraits(PChar);
     }
 
-    PChar->delModifier(Mod::MEVA, PChar->m_magicEvasion);
+    PChar->delModifier(xi::Mod::MEVA, PChar->m_magicEvasion);
 
     PChar->m_magicEvasion = battleutils::GetMaxSkill(12, mlvl); // Player MEVA is Rank G
-    PChar->addModifier(Mod::MEVA, PChar->m_magicEvasion);
+    PChar->addModifier(xi::Mod::MEVA, PChar->m_magicEvasion);
 }
 
 /************************************************************************
@@ -4124,11 +4124,11 @@ void TrySkillUP(CCharEntity* PChar, xi::SkillType SkillID, uint8 lvl, bool force
         if ((rawSkillID >= 1 && rawSkillID <= 12) || (rawSkillID >= 25 && rawSkillID <= 31))
         // if should effect automaton replace the above with: (SkillID >= 1 && SkillID <= 31)
         {
-            SkillUpChance *= ((100.0f + PChar->getMod(Mod::COMBAT_SKILLUP_RATE)) / 100.0f);
+            SkillUpChance *= ((100.0f + PChar->getMod(xi::Mod::COMBAT_SKILLUP_RATE)) / 100.0f);
         }
         else if (rawSkillID >= 32 && rawSkillID <= 44)
         {
-            SkillUpChance *= ((100.0f + PChar->getMod(Mod::MAGIC_SKILLUP_RATE)) / 100.0f);
+            SkillUpChance *= ((100.0f + PChar->getMod(xi::Mod::MAGIC_SKILLUP_RATE)) / 100.0f);
         }
 
         if (Diff > 0 && (random < SkillUpChance || forceSkillUp))
@@ -4693,7 +4693,7 @@ void SetExpDifficultyCurve(std::vector<std::pair<uint16, EMobDifficulty>>& curve
 
 EMobDifficulty CheckMob(uint8 charlvl, CBattleEntity* PMob)
 {
-    auto moblvl = PMob ? PMob->GetMLevel() + PMob->getMod(Mod::EXP_LVL_MOD) : -1;
+    auto moblvl = PMob ? PMob->GetMLevel() + PMob->getMod(xi::Mod::EXP_LVL_MOD) : -1;
 
     uint32 baseExp = GetBaseExp(charlvl, moblvl);
 
@@ -4817,7 +4817,7 @@ void DistributeGil(CCharEntity* PChar, CMobEntity* PMob)
         gil = gil * multiplier;
     }
 
-    int16 killshotBonus = PChar->getMod(Mod::MOGHANCEMENT_GIL_BONUS_P);
+    int16 killshotBonus = PChar->getMod(xi::Mod::MOGHANCEMENT_GIL_BONUS_P);
     if (killshotBonus > 0)
     {
         double multiplier = (100.0 + killshotBonus) / 100.0;
@@ -5013,7 +5013,7 @@ void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
 
             bool chainactive = false;
 
-            const int16 moblevel    = PMob->GetMLevel() + PMob->getMod(Mod::EXP_LVL_MOD);
+            const int16 moblevel    = PMob->GetMLevel() + PMob->getMod(xi::Mod::EXP_LVL_MOD);
             const uint8 memberlevel = GetExpLevel(PMember);
 
             EMobDifficulty mobCheck = CheckMob(maxlevel, PMob);
@@ -5445,7 +5445,7 @@ uint16 AddCapacityBonus(CCharEntity* PChar, uint16 capacityPoints)
 
     // Mod::CAPACITY_BONUS is currently used for JP Gifts, and can easily be used elsewhere
     // This value is stored as uint, as a whole number percentage value
-    rawBonus += PChar->getMod(Mod::CAPACITY_BONUS);
+    rawBonus += PChar->getMod(xi::Mod::CAPACITY_BONUS);
 
     // Unity Concord Ranking: 2 * (Unity Ranking - 1)
     uint8 unity = PChar->profile.unity_leader;
@@ -6796,7 +6796,7 @@ float AddExpBonus(CCharEntity* PChar, float exp)
         }
     }
 
-    bonus += (int32)(exp * ((PChar->getMod(Mod::EXP_BONUS) + rovBonus) / 100.0f));
+    bonus += (int32)(exp * ((PChar->getMod(xi::Mod::EXP_BONUS) + rovBonus) / 100.0f));
 
     if (bonus + (int32)exp < 0)
     {

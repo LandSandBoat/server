@@ -265,22 +265,22 @@ uint32 CheckForDamageMultiplier(CCharEntity* PChar, CItemWeapon* PWeapon, uint32
     {
         case PHYSICAL_ATTACK_TYPE::RANGED:
         case PHYSICAL_ATTACK_TYPE::RAPID_SHOT:
-            occ_do_triple_dmg = PChar->getMod(Mod::REM_OCC_DO_TRIPLE_DMG_RANGED) / 10;
-            occ_do_double_dmg = PChar->getMod(Mod::REM_OCC_DO_DOUBLE_DMG_RANGED) / 10;
+            occ_do_triple_dmg = PChar->getMod(xi::Mod::REM_OCC_DO_TRIPLE_DMG_RANGED) / 10;
+            occ_do_double_dmg = PChar->getMod(xi::Mod::REM_OCC_DO_DOUBLE_DMG_RANGED) / 10;
             break;
         case PHYSICAL_ATTACK_TYPE::NORMAL:
             if (weaponSlot == SLOT_MAIN) // Only applies to mainhand
             {
-                occ_do_triple_dmg = PChar->getMod(Mod::REM_OCC_DO_TRIPLE_DMG) / 10;
-                occ_do_double_dmg = PChar->getMod(Mod::REM_OCC_DO_DOUBLE_DMG) / 10;
+                occ_do_triple_dmg = PChar->getMod(xi::Mod::REM_OCC_DO_TRIPLE_DMG) / 10;
+                occ_do_double_dmg = PChar->getMod(xi::Mod::REM_OCC_DO_DOUBLE_DMG) / 10;
             }
             break;
         default:
             break;
     }
 
-    float occ_extra_dmg        = battleutils::GetScaledItemModifier(PChar, PWeapon, Mod::OCC_DO_EXTRA_DMG) / 100.0f;
-    int16 occ_extra_dmg_chance = battleutils::GetScaledItemModifier(PChar, PWeapon, Mod::EXTRA_DMG_CHANCE) / 10;
+    float occ_extra_dmg        = battleutils::GetScaledItemModifier(PChar, PWeapon, xi::Mod::OCC_DO_EXTRA_DMG) / 100.0f;
+    int16 occ_extra_dmg_chance = battleutils::GetScaledItemModifier(PChar, PWeapon, xi::Mod::EXTRA_DMG_CHANCE) / 10;
 
     if (allowProc)
     {
@@ -309,31 +309,31 @@ uint32 CheckForDamageMultiplier(CCharEntity* PChar, CItemWeapon* PWeapon, uint32
     switch (attackType)
     {
         case PHYSICAL_ATTACK_TYPE::ZANSHIN:
-            if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::ZANSHIN_DOUBLE_DAMAGE))
+            if (xirand::GetRandomNumber(100) < PChar->getMod(xi::Mod::ZANSHIN_DOUBLE_DAMAGE))
             {
                 return originalDamage * 2;
             }
             break;
         case PHYSICAL_ATTACK_TYPE::TRIPLE:
-            if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::TA_TRIPLE_DMG_RATE))
+            if (xirand::GetRandomNumber(100) < PChar->getMod(xi::Mod::TA_TRIPLE_DMG_RATE))
             {
                 return originalDamage * 3;
             }
             break;
         case PHYSICAL_ATTACK_TYPE::DOUBLE:
-            if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::DA_DOUBLE_DMG_RATE))
+            if (xirand::GetRandomNumber(100) < PChar->getMod(xi::Mod::DA_DOUBLE_DMG_RATE))
             {
                 return originalDamage * 2;
             }
             break;
         case PHYSICAL_ATTACK_TYPE::RAPID_SHOT:
-            if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::RAPID_SHOT_DOUBLE_DAMAGE))
+            if (xirand::GetRandomNumber(100) < PChar->getMod(xi::Mod::RAPID_SHOT_DOUBLE_DAMAGE))
             {
                 return originalDamage * 2;
             }
             break;
         case PHYSICAL_ATTACK_TYPE::SAMBA:
-            if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::SAMBA_DOUBLE_DAMAGE))
+            if (xirand::GetRandomNumber(100) < PChar->getMod(xi::Mod::SAMBA_DOUBLE_DAMAGE))
             {
                 return originalDamage * 2;
             }

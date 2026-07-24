@@ -61,7 +61,7 @@ auto CDeathState::Update(timer::time_point tick) -> bool
         }
         else
         {
-            const auto time = GetEntryTime() + m_deathTime - std::chrono::seconds(m_PEntity->getMod(Mod::DESPAWN_TIME_REDUCTION));
+            const auto time = GetEntryTime() + m_deathTime - std::chrono::seconds(m_PEntity->getMod(xi::Mod::DESPAWN_TIME_REDUCTION));
             if (tick > time)
             {
                 const auto* PMob = dynamic_cast<CMobEntity*>(m_PEntity);
@@ -79,7 +79,7 @@ auto CDeathState::Update(timer::time_point tick) -> bool
     else
     {
         auto*      PChar = static_cast<CCharEntity*>(m_PEntity);
-        const auto time  = GetEntryTime() + m_deathTime - std::chrono::seconds(m_PEntity->getMod(Mod::DESPAWN_TIME_REDUCTION));
+        const auto time  = GetEntryTime() + m_deathTime - std::chrono::seconds(m_PEntity->getMod(xi::Mod::DESPAWN_TIME_REDUCTION));
 
         // exit state after 2 seconds on raise
         if (m_raiseAccepted && IsCompleted() && tick > m_raiseAcceptedTime + 2s)

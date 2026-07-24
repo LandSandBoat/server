@@ -272,7 +272,7 @@ auto CStatusEffect::SetEffectName(std::string name) -> void
     name_ = std::move(name);
 }
 
-auto CStatusEffect::addMod(Mod modType, int16 amount) -> void
+auto CStatusEffect::addMod(xi::Mod modType, int16 amount) -> void
 {
     // Since an effect's mod list is only applied to entity when adding the effect
     // we need to add the mod to the entity manually if the effect is already applied
@@ -292,7 +292,7 @@ auto CStatusEffect::addMod(Mod modType, int16 amount) -> void
     modList_.emplace_back(modType, amount);
 }
 
-auto CStatusEffect::setMod(Mod modType, int16 value) -> void
+auto CStatusEffect::setMod(xi::Mod modType, int16 value) -> void
 {
     for (auto& i : modList_)
     {

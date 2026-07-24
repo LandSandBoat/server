@@ -69,7 +69,7 @@ void LoadTraitsList()
         PTrait->setJob(rset->get<int8>("job"));
         PTrait->setLevel(rset->get<uint8>("level"));
         PTrait->setRank(rset->get<uint8>("rank"));
-        PTrait->setMod(rset->get<Mod>("modifier"));
+        PTrait->setMod(rset->get<xi::Mod>("modifier"));
         PTrait->setValue(rset->get<int16>("value"));
         PTrait->setMeritId(rset->get<uint32>("meritid"));
 
@@ -88,7 +88,7 @@ void LoadTraitsList()
         PTrait->setJob(JOB_BLU);
         PTrait->setRank(rset->get<uint8>("tier"));
         PTrait->setPoints(rset->get<uint8>("trait_points_needed"));
-        PTrait->setMod(rset->get<Mod>("modifier"));
+        PTrait->setMod(rset->get<xi::Mod>("modifier"));
         PTrait->setValue(rset->get<int16>("value"));
 
         PTraitsList[JOB_BLU].emplace_back(PTrait);

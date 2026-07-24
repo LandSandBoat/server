@@ -432,7 +432,7 @@ void LoadItemList()
     FOR_DB_MULTIPLE_RESULTS(rset)
     {
         const auto ItemID = rset->get<uint16>("itemId");
-        const auto modID  = rset->get<Mod>("modId");
+        const auto modID  = rset->get<xi::Mod>("modId");
         const auto value  = rset->get<int16>("value");
 
         if (auto* tpl = itemTemplates[ItemID].get(); tpl != nullptr && tpl->isType(ITEM_EQUIPMENT))
@@ -448,7 +448,7 @@ void LoadItemList()
     FOR_DB_MULTIPLE_RESULTS(rset)
     {
         const auto ItemID  = rset->get<uint16>("itemId");
-        const auto modID   = rset->get<Mod>("modId");
+        const auto modID   = rset->get<xi::Mod>("modId");
         const auto value   = rset->get<int16>("value");
         const auto petType = rset->get<PetModType>("petType");
 
@@ -465,7 +465,7 @@ void LoadItemList()
     FOR_DB_MULTIPLE_RESULTS(rset)
     {
         const auto ItemID      = rset->get<uint16>("itemId");
-        const auto modID       = rset->get<Mod>("modId");
+        const auto modID       = rset->get<xi::Mod>("modId");
         const auto value       = rset->get<int16>("value");
         const auto latentId    = rset->get<xi::Latent>("latentId");
         const auto latentParam = rset->get<uint16>("latentParam");

@@ -303,7 +303,7 @@ void RefreshGiftMods(CCharEntity* PChar)
             break;
         }
 
-        currentGifts->emplace_back(static_cast<Mod>(gift.modId), gift.value);
+        currentGifts->emplace_back(static_cast<xi::Mod>(gift.modId), gift.value);
     }
 
     PChar->addModifiers(currentGifts);

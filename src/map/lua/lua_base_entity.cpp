@@ -5599,7 +5599,7 @@ int16 CLuaBaseEntity::getShieldDefense()
  *  Notes   : Used exclusively in scripts/globals/gear_sets.lua
  ************************************************************************/
 
-void CLuaBaseEntity::addGearSetMod(uint8 setId, Mod modId, uint16 modValue)
+void CLuaBaseEntity::addGearSetMod(uint8 setId, xi::Mod modId, uint16 modValue)
 {
     CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
 
@@ -7444,7 +7444,7 @@ uint8 CLuaBaseEntity::levelRestriction(const sol::object& level)
             PChar->updatemask |= UPDATE_HP;
 
             // Update the character's Automaton capacity bonus regardless if the pet is out or not
-            PChar->setAutomatonElementalCapacityBonus(PChar->getMod(Mod::AUTO_ELEM_CAPACITY));
+            PChar->setAutomatonElementalCapacityBonus(PChar->getMod(xi::Mod::AUTO_ELEM_CAPACITY));
 
             if (PChar->status != xi::Status::Disappear)
             {
@@ -14055,7 +14055,7 @@ auto CLuaBaseEntity::addStatusEffect(const xi::StatusEffect effectId, sol::table
 
     if (effectId == xi::StatusEffect::Food)
     {
-        if (const auto durationModifier = PBattleEntity->getMod(Mod::FOOD_DURATION))
+        if (const auto durationModifier = PBattleEntity->getMod(xi::Mod::FOOD_DURATION))
         {
             effectDuration += std::chrono::floor<std::chrono::milliseconds>(effectDuration * (durationModifier / 100.0f));
         }
@@ -14679,7 +14679,7 @@ void CLuaBaseEntity::addMod(uint16 type, int16 amount)
         return;
     }
 
-    PBattleEntity->addModifier(static_cast<Mod>(type), amount);
+    PBattleEntity->addModifier(static_cast<xi::Mod>(type), amount);
 }
 
 /************************************************************************
@@ -14702,7 +14702,7 @@ int16 CLuaBaseEntity::getMod(uint16 modID)
         return 0;
     }
 
-    return static_cast<CBattleEntity*>(m_PBaseEntity)->getMod(static_cast<Mod>(modID));
+    return static_cast<CBattleEntity*>(m_PBaseEntity)->getMod(static_cast<xi::Mod>(modID));
 }
 
 /************************************************************************
@@ -14725,7 +14725,7 @@ void CLuaBaseEntity::setMod(uint16 modID, int16 value)
         return;
     }
 
-    static_cast<CBattleEntity*>(m_PBaseEntity)->setModifier(static_cast<Mod>(modID), value);
+    static_cast<CBattleEntity*>(m_PBaseEntity)->setModifier(static_cast<xi::Mod>(modID), value);
 }
 
 /************************************************************************
@@ -14748,7 +14748,7 @@ void CLuaBaseEntity::delMod(uint16 modID, int16 value)
         return;
     }
 
-    static_cast<CBattleEntity*>(m_PBaseEntity)->delModifier(static_cast<Mod>(modID), value);
+    static_cast<CBattleEntity*>(m_PBaseEntity)->delModifier(static_cast<xi::Mod>(modID), value);
 }
 
 /************************************************************************
@@ -14769,7 +14769,7 @@ void CLuaBaseEntity::printAllMods()
     const auto longestEnumLength = [&]()
     {
         std::size_t longest = 0U;
-        for (auto modId : magic_enum::enum_values<Mod>())
+        for (auto modId : magic_enum::enum_values<xi::Mod>())
         {
             if (auto length = magic_enum::enum_name(modId).size(); length > longest)
             {
@@ -14781,7 +14781,7 @@ void CLuaBaseEntity::printAllMods()
 
     auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
     ShowInfo(fmt::format("{}'s ({}) mods:", PEntity->getName(), PEntity->id).c_str());
-    for (const auto& modId : magic_enum::enum_values<Mod>())
+    for (const auto& modId : magic_enum::enum_values<xi::Mod>())
     {
         if (const auto& value = PEntity->getMod(modId); value != 0)
         {
@@ -14805,7 +14805,7 @@ void CLuaBaseEntity::addLatent(uint16 condID, uint16 conditionValue, uint16 mID,
     }
 
     xi::Latent conditionID = static_cast<xi::Latent>(condID);
-    Mod        modID       = static_cast<Mod>(mID);
+    xi::Mod    modID       = static_cast<xi::Mod>(mID);
 
     static_cast<CCharEntity*>(m_PBaseEntity)->PLatentEffectContainer->AddLatentEffect(conditionID, conditionValue, modID, modValue);
 }
@@ -14826,7 +14826,7 @@ auto CLuaBaseEntity::delLatent(uint16 condID, uint16 conditionValue, uint16 mID,
     }
 
     xi::Latent conditionID = static_cast<xi::Latent>(condID);
-    Mod        modID       = static_cast<Mod>(mID);
+    xi::Mod    modID       = static_cast<xi::Mod>(mID);
 
     return static_cast<CCharEntity*>(m_PBaseEntity)->PLatentEffectContainer->DelLatentEffect(conditionID, conditionValue, modID, modValue);
 }
@@ -14856,7 +14856,7 @@ bool CLuaBaseEntity::hasAllLatentsActive(uint8 slot)
  *  Notes   :
  ************************************************************************/
 
-int16 CLuaBaseEntity::getMaxGearMod(Mod modId)
+int16 CLuaBaseEntity::getMaxGearMod(xi::Mod modId)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -14865,7 +14865,7 @@ int16 CLuaBaseEntity::getMaxGearMod(Mod modId)
         return 0;
     }
 
-    return static_cast<CCharEntity*>(m_PBaseEntity)->getMaxGearMod(static_cast<Mod>(modId));
+    return static_cast<CCharEntity*>(m_PBaseEntity)->getMaxGearMod(static_cast<xi::Mod>(modId));
 }
 
 /************************************************************************
@@ -14874,7 +14874,7 @@ int16 CLuaBaseEntity::getMaxGearMod(Mod modId)
  *  Example : local maxValue = player:getMaxGearMod(xi.mod.GEOMANCY_BONUS)
  *  Notes   :
  ************************************************************************/
-int16 CLuaBaseEntity::getGearModFromSlot(uint8 slot, Mod modId)
+int16 CLuaBaseEntity::getGearModFromSlot(uint8 slot, xi::Mod modId)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -15037,7 +15037,7 @@ auto CLuaBaseEntity::addBardSong(CLuaBaseEntity* PEntity, xi::StatusEffect effec
             maxSongs = 1;
         }
 
-        maxSongs += PCaster->getMod(Mod::MAXIMUM_SONGS_BONUS);
+        maxSongs += PCaster->getMod(xi::Mod::MAXIMUM_SONGS_BONUS);
     }
 
     return PBattle->StatusEffectContainer->ApplyBardEffect(PEffect, maxSongs);
@@ -15190,51 +15190,51 @@ uint16 CLuaBaseEntity::getStat(uint16 statId, sol::variadic_args va)
     auto*  PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
     uint16 value   = 0;
 
-    switch (static_cast<Mod>(statId))
+    switch (static_cast<xi::Mod>(statId))
     {
-        case Mod::STR:
+        case xi::Mod::STR:
             value = PEntity->STR();
             break;
-        case Mod::DEX:
+        case xi::Mod::DEX:
             value = PEntity->DEX();
             break;
-        case Mod::VIT:
+        case xi::Mod::VIT:
             value = PEntity->VIT();
             break;
-        case Mod::AGI:
+        case xi::Mod::AGI:
             value = PEntity->AGI();
             break;
-        case Mod::INT:
+        case xi::Mod::INT:
             value = PEntity->INT();
             break;
-        case Mod::MND:
+        case xi::Mod::MND:
             value = PEntity->MND();
             break;
-        case Mod::CHR:
+        case xi::Mod::CHR:
             value = PEntity->CHR();
             break;
-        case Mod::ATT:
+        case xi::Mod::ATT:
         {
             SLOTTYPE weaponSlot = va[0].is<uint32>() ? va[0].as<SLOTTYPE>() : SLOTTYPE::SLOT_MAIN;
             value               = PEntity->ATT(weaponSlot);
         }
         break;
-        case Mod::ACC:
+        case xi::Mod::ACC:
         {
             uint8_t attackNumber = va[0].is<uint8>() ? va[0].as<uint8>() : 0;
             value                = PEntity->ACC(attackNumber, 0);
         }
         break;
-        case Mod::RATT:
+        case xi::Mod::RATT:
             value = PEntity->RATT();
             break;
-        case Mod::RACC:
+        case xi::Mod::RACC:
             value = PEntity->RACC();
             break;
-        case Mod::DEF:
+        case xi::Mod::DEF:
             value = PEntity->DEF();
             break;
-        case Mod::EVA:
+        case xi::Mod::EVA:
             value = PEntity->EVA();
             break;
         default:
@@ -16792,7 +16792,7 @@ void CLuaBaseEntity::addPetMod(uint16 modID, int16 amount)
         return;
     }
 
-    static_cast<CBattleEntity*>(m_PBaseEntity)->addPetModifier(static_cast<Mod>(modID), PetModType::All, amount);
+    static_cast<CBattleEntity*>(m_PBaseEntity)->addPetModifier(static_cast<xi::Mod>(modID), PetModType::All, amount);
 }
 
 /************************************************************************
@@ -16810,7 +16810,7 @@ void CLuaBaseEntity::setPetMod(uint16 modID, int16 amount)
         return;
     }
 
-    static_cast<CBattleEntity*>(m_PBaseEntity)->setPetModifier(static_cast<Mod>(modID), PetModType::All, amount);
+    static_cast<CBattleEntity*>(m_PBaseEntity)->setPetModifier(static_cast<xi::Mod>(modID), PetModType::All, amount);
 }
 
 /************************************************************************
@@ -16828,7 +16828,7 @@ void CLuaBaseEntity::delPetMod(uint16 modID, int16 amount)
         return;
     }
 
-    static_cast<CBattleEntity*>(m_PBaseEntity)->delPetModifier(static_cast<Mod>(modID), PetModType::All, amount);
+    static_cast<CBattleEntity*>(m_PBaseEntity)->delPetModifier(static_cast<xi::Mod>(modID), PetModType::All, amount);
 }
 
 /************************************************************************

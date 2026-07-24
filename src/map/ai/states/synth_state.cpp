@@ -33,28 +33,28 @@ CSynthState::CSynthState(CCharEntity* PChar, const xi::SkillType skill)
     switch (skill)
     {
         case xi::SkillType::Woodworking:
-            m_synthFinishTime -= std::chrono::milliseconds(PChar->getMod(Mod::SYNTH_SPEED_WOODWORKING));
+            m_synthFinishTime -= std::chrono::milliseconds(PChar->getMod(xi::Mod::SYNTH_SPEED_WOODWORKING));
             break;
         case xi::SkillType::Smithing:
-            m_synthFinishTime -= std::chrono::milliseconds(PChar->getMod(Mod::SYNTH_SPEED_SMITHING));
+            m_synthFinishTime -= std::chrono::milliseconds(PChar->getMod(xi::Mod::SYNTH_SPEED_SMITHING));
             break;
         case xi::SkillType::Goldsmithing:
-            m_synthFinishTime -= std::chrono::milliseconds(PChar->getMod(Mod::SYNTH_SPEED_GOLDSMITHING));
+            m_synthFinishTime -= std::chrono::milliseconds(PChar->getMod(xi::Mod::SYNTH_SPEED_GOLDSMITHING));
             break;
         case xi::SkillType::Clothcraft:
-            m_synthFinishTime -= std::chrono::milliseconds(PChar->getMod(Mod::SYNTH_SPEED_CLOTHCRAFT));
+            m_synthFinishTime -= std::chrono::milliseconds(PChar->getMod(xi::Mod::SYNTH_SPEED_CLOTHCRAFT));
             break;
         case xi::SkillType::Leathercraft:
-            m_synthFinishTime -= std::chrono::milliseconds(PChar->getMod(Mod::SYNTH_SPEED_LEATHERCRAFT));
+            m_synthFinishTime -= std::chrono::milliseconds(PChar->getMod(xi::Mod::SYNTH_SPEED_LEATHERCRAFT));
             break;
         case xi::SkillType::Bonecraft:
-            m_synthFinishTime -= std::chrono::milliseconds(PChar->getMod(Mod::SYNTH_SPEED_BONECRAFT));
+            m_synthFinishTime -= std::chrono::milliseconds(PChar->getMod(xi::Mod::SYNTH_SPEED_BONECRAFT));
             break;
         case xi::SkillType::Alchemy:
-            m_synthFinishTime -= std::chrono::milliseconds(PChar->getMod(Mod::SYNTH_SPEED_ALCHEMY));
+            m_synthFinishTime -= std::chrono::milliseconds(PChar->getMod(xi::Mod::SYNTH_SPEED_ALCHEMY));
             break;
         case xi::SkillType::Cooking:
-            m_synthFinishTime -= std::chrono::milliseconds(PChar->getMod(Mod::SYNTH_SPEED_COOKING));
+            m_synthFinishTime -= std::chrono::milliseconds(PChar->getMod(xi::Mod::SYNTH_SPEED_COOKING));
             break;
         default:
             break;

@@ -144,7 +144,7 @@ void monstrosity::LoadStaticData()
         {
             while (rset->next())
             {
-                const auto mod = rset->get<Mod>("modId");
+                const auto mod = rset->get<xi::Mod>("modId");
                 const auto val = rset->get<int16>("value");
                 entry.mods.emplace_back(mod, val);
             }

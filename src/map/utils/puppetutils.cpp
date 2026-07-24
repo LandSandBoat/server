@@ -172,7 +172,7 @@ void LoadAutomaton(CCharEntity* PChar)
             }
 
             // Add the elemental bonus before we set the head and frame
-            PChar->setAutomatonElementalCapacityBonus(PChar->getMod(Mod::AUTO_ELEM_CAPACITY));
+            PChar->setAutomatonElementalCapacityBonus(PChar->getMod(xi::Mod::AUTO_ELEM_CAPACITY));
 
             setHead(PChar, tempEquip.head);
             setFrame(PChar, tempEquip.frame);
@@ -560,7 +560,7 @@ void TrySkillUP(CAutomatonEntity* PAutomaton, xi::SkillType SkillID, uint8 lvl)
             SkillUpChance = 0.5;
         }
 
-        SkillUpChance *= ((100.0f + PAutomaton->getMod(Mod::COMBAT_SKILLUP_RATE)) / 100.0f);
+        SkillUpChance *= ((100.0f + PAutomaton->getMod(xi::Mod::COMBAT_SKILLUP_RATE)) / 100.0f);
 
         if (Diff > 0 && random < SkillUpChance)
         {
