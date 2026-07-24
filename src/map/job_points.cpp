@@ -121,7 +121,7 @@ void CJobPoints::RaiseJobPoint(JOBPOINT_TYPE jpType)
 
 uint16 CJobPoints::GetJobPoints()
 {
-    return m_jobPoints[m_PChar->GetMJob()].currentJp;
+    return m_jobPoints[static_cast<uint8>(m_PChar->GetMJob())].currentJp;
 }
 
 uint16 CJobPoints::GetJobPointsByJob(uint8 jobID) const
@@ -191,7 +191,7 @@ void CJobPoints::DelJobPoints(const uint8 jobID, int16 amount)
 
 uint16 CJobPoints::GetJobPointsSpent() const
 {
-    return m_jobPoints[m_PChar->GetMJob()].totalJpSpent;
+    return m_jobPoints[static_cast<uint8>(m_PChar->GetMJob())].totalJpSpent;
 }
 
 JobPoints_t* CJobPoints::GetAllJobPoints()
@@ -201,7 +201,7 @@ JobPoints_t* CJobPoints::GetAllJobPoints()
 
 bool CJobPoints::AddCapacityPoints(uint16 amount)
 {
-    uint32 adjustedCapacity = m_jobPoints[m_PChar->GetMJob()].capacityPoints + amount * settings::get<float>("map.CAPACITY_RATE");
+    uint32 adjustedCapacity = m_jobPoints[static_cast<uint8>(m_PChar->GetMJob())].capacityPoints + amount * settings::get<float>("map.CAPACITY_RATE");
     uint16 currentJobPoints = this->GetJobPoints();
 
     if (adjustedCapacity >= 30000)
@@ -233,7 +233,7 @@ bool CJobPoints::AddCapacityPoints(uint16 amount)
 
 uint32 CJobPoints::GetCapacityPoints()
 {
-    return m_jobPoints[m_PChar->GetMJob()].capacityPoints;
+    return m_jobPoints[static_cast<uint8>(m_PChar->GetMJob())].capacityPoints;
 }
 
 void CJobPoints::SetCapacityPoints(uint16 amount)
@@ -253,7 +253,7 @@ void CJobPoints::SetCapacityPoints(uint16 amount)
 
 uint8 CJobPoints::GetJobPointValue(JOBPOINT_TYPE jpType)
 {
-    if (IsJobPointExist(jpType) && m_PChar->GetMLevel() >= 99 && m_PChar->GetMJob() == JobPointsCategoryIndexByJpType(jpType))
+    if (IsJobPointExist(jpType) && m_PChar->GetMLevel() >= 99 && static_cast<uint8>(m_PChar->GetMJob()) == JobPointsCategoryIndexByJpType(jpType))
     {
         return GetJobPointType(jpType)->value;
     }
@@ -310,9 +310,9 @@ void RefreshGiftMods(CCharEntity* PChar)
 
     // Add JP Spells
     bool sendUpdate = false;
-    switch (jobId)
+    switch (static_cast<xi::Job>(jobId))
     {
-        case JOB_BLM:
+        case xi::Job::BLM:
             if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, (uint16)SpellID::Fire_VI))
             {
                 for (const SpellID elementalSpell : { SpellID::Fire_VI,
@@ -346,7 +346,7 @@ void RefreshGiftMods(CCharEntity* PChar)
             }
             break;
 
-        case JOB_BRD:
+        case xi::Job::BRD:
             if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, (uint16)SpellID::Fire_Threnody_II))
             {
                 for (const SpellID threnodySpell : { SpellID::Fire_Threnody_II,
@@ -366,7 +366,7 @@ void RefreshGiftMods(CCharEntity* PChar)
             }
             break;
 
-        case JOB_DRK:
+        case xi::Job::DRK:
             if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, (uint16)SpellID::Endark_II))
             {
                 charutils::addSpell(PChar, (uint16)SpellID::Endark_II);
@@ -384,7 +384,7 @@ void RefreshGiftMods(CCharEntity* PChar)
             }
             break;
 
-        case JOB_GEO:
+        case xi::Job::GEO:
             if (totalJpSpent >= 100)
             {
                 for (const SpellID elementalSpell : { SpellID::Fire_V,
@@ -431,7 +431,7 @@ void RefreshGiftMods(CCharEntity* PChar)
             }
             break;
 
-        case JOB_NIN:
+        case xi::Job::NIN:
             if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, (uint16)SpellID::Utsusemi_San))
             {
                 charutils::addSpell(PChar, (uint16)SpellID::Utsusemi_San);
@@ -441,7 +441,7 @@ void RefreshGiftMods(CCharEntity* PChar)
             }
             break;
 
-        case JOB_PLD:
+        case xi::Job::PLD:
             if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, (uint16)SpellID::Enlight_II))
             {
                 charutils::addSpell(PChar, (uint16)SpellID::Enlight_II);
@@ -451,7 +451,7 @@ void RefreshGiftMods(CCharEntity* PChar)
             }
             break;
 
-        case JOB_RDM:
+        case xi::Job::RDM:
             if (totalJpSpent >= 100)
             {
                 for (const SpellID elementalSpell : { SpellID::Fire_V,
@@ -499,7 +499,7 @@ void RefreshGiftMods(CCharEntity* PChar)
             }
             break;
 
-        case JOB_RUN:
+        case xi::Job::RUN:
             if (totalJpSpent >= 550 && !charutils::hasSpell(PChar, (uint16)SpellID::Temper))
             {
                 charutils::addSpell(PChar, (uint16)SpellID::Temper);
@@ -509,7 +509,7 @@ void RefreshGiftMods(CCharEntity* PChar)
             }
             break;
 
-        case JOB_WHM:
+        case xi::Job::WHM:
             if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, (uint16)SpellID::Reraise_IV))
             {
                 charutils::addSpell(PChar, (uint16)SpellID::Reraise_IV);
@@ -525,6 +525,8 @@ void RefreshGiftMods(CCharEntity* PChar)
 
                 sendUpdate = true;
             }
+            break;
+        default:
             break;
     }
 

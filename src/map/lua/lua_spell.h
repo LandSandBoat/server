@@ -64,7 +64,7 @@ public:
     uint8  getSpellGroup();
     uint8  getSpellFamily();
     uint8  getFlag();
-    uint8  getLevel(JOBTYPE jobId);
+    auto   getLevel(xi::Job jobId) -> uint8;
     uint32 getCastTime();
     uint32 getPrimaryTargetID();
     auto   getKnockback() const -> Knockback;

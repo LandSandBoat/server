@@ -217,8 +217,8 @@ GP_SERV_COMMAND_LOGIN::GP_SERV_COMMAND_LOGIN(CCharEntity* PChar, const EventInfo
     std::memcpy(packet.name, nameStr.data(), std::min(nameStr.size(), sizeof(packet.name)));
 
     packet.Dancer = {
-        .mjob_no = PChar->GetMJob(),
-        .sjob_no = PChar->GetSJob(),
+        .mjob_no = static_cast<uint8_t>(PChar->GetMJob()),
+        .sjob_no = static_cast<uint8_t>(PChar->GetSJob()),
         .hpmax   = PChar->GetMaxHP(),
         .mpmax   = PChar->GetMaxMP(),
         .sjobflg = static_cast<uint8_t>(PChar->jobs.unlocked & 1),
@@ -227,7 +227,7 @@ GP_SERV_COMMAND_LOGIN::GP_SERV_COMMAND_LOGIN(CCharEntity* PChar, const EventInfo
     std::memcpy(&packet.Dancer.bp_base, &PChar->stats, 14);
     std::memcpy(&packet.ConfData, &PChar->playerConfig, sizeof(SAVE_CONF_PKT));
 
-    if (PChar->GetMJob() == JOB_MON)
+    if (PChar->GetMJob() == xi::Job::MON)
     {
         monstrosity::ReadMonstrosityData(PChar);
     }

@@ -29,7 +29,7 @@
 
 CAbility::CAbility(uint16 id)
 : m_ID(id)
-, m_Job(JOB_NON)
+, m_Job(xi::Job::NONE)
 , m_level(0)
 , m_animationID(0)
 , m_range(0)
@@ -71,7 +71,7 @@ uint16 CAbility::getID() const
     return m_ID;
 }
 
-void CAbility::setJob(JOBTYPE Job)
+void CAbility::setJob(xi::Job Job)
 {
     m_Job = Job;
 }
@@ -91,7 +91,7 @@ void CAbility::setPostActionEffectCleanup(xi::StatusEffect effectToCleanup)
     m_cleanupEffect = effectToCleanup;
 }
 
-JOBTYPE CAbility::getJob()
+auto CAbility::getJob() -> xi::Job
 {
     return m_Job;
 }
@@ -277,7 +277,7 @@ namespace ability
 {
 
 std::map<uint16, std::unique_ptr<CAbility>> PAbilityList;    // Complete Abilities List
-std::map<JOBTYPE, std::vector<CAbility*>>   PAbilitiesByJob; // Abilities by Job
+std::map<xi::Job, std::vector<CAbility*>>   PAbilitiesByJob; // Abilities by Job
 std::vector<std::unique_ptr<Charge_t>>      PChargesList;    // Abilities with charges
 
 /************************************************************************
@@ -333,7 +333,7 @@ void LoadAbilitiesList()
             const auto& PAbility    = PAbilityList[abilityId];
 
             PAbility->setName(rset->get<std::string>("name"));
-            PAbility->setJob(rset->get<JOBTYPE>("job"));
+            PAbility->setJob(rset->get<xi::Job>("job"));
             PAbility->setLevel(rset->get<uint8>("level"));
             PAbility->setValidTarget(rset->get<uint16>("validTarget"));
             PAbility->setRecastTime(std::chrono::seconds(rset->get<uint16>("recastTime")));
@@ -370,7 +370,7 @@ void LoadAbilitiesList()
         {
             auto PCharge        = std::make_unique<Charge_t>();
             PCharge->ID         = rset2->get<uint16>("recastId");
-            PCharge->job        = static_cast<JOBTYPE>(rset2->get<uint8>("job"));
+            PCharge->job        = rset2->get<xi::Job>("job");
             PCharge->level      = rset2->get<uint8>("level");
             PCharge->maxCharges = rset2->get<uint8>("maxCharges");
             PCharge->chargeTime = std::chrono::seconds(rset2->get<uint32>("chargeTime"));
@@ -403,76 +403,76 @@ CAbility* GetAbility(uint16 AbilityID)
  *                                                                       *
  ************************************************************************/
 
-CAbility* GetTwoHourAbility(JOBTYPE JobID)
+auto GetTwoHourAbility(xi::Job JobID) -> CAbility*
 {
-    if (JobID >= JOB_WAR || JobID <= MAX_JOBTYPE)
+    if (static_cast<uint8>(JobID) >= static_cast<uint8>(xi::Job::WAR) || static_cast<uint8>(JobID) <= MAX_JOBTYPE)
     {
         switch (JobID)
         {
-            case JOB_WAR:
+            case xi::Job::WAR:
                 return GetAbility(ABILITY_MIGHTY_STRIKES);
                 break;
-            case JOB_MNK:
+            case xi::Job::MNK:
                 return GetAbility(ABILITY_HUNDRED_FISTS);
                 break;
-            case JOB_WHM:
+            case xi::Job::WHM:
                 return GetAbility(ABILITY_BENEDICTION);
                 break;
-            case JOB_BLM:
+            case xi::Job::BLM:
                 return GetAbility(ABILITY_MANAFONT);
                 break;
-            case JOB_RDM:
+            case xi::Job::RDM:
                 return GetAbility(ABILITY_CHAINSPELL);
                 break;
-            case JOB_THF:
+            case xi::Job::THF:
                 return GetAbility(ABILITY_PERFECT_DODGE);
                 break;
-            case JOB_PLD:
+            case xi::Job::PLD:
                 return GetAbility(ABILITY_INVINCIBLE);
                 break;
-            case JOB_DRK:
+            case xi::Job::DRK:
                 return GetAbility(ABILITY_BLOOD_WEAPON);
                 break;
-            case JOB_BST:
+            case xi::Job::BST:
                 return GetAbility(ABILITY_FAMILIAR);
                 break;
-            case JOB_BRD:
+            case xi::Job::BRD:
                 return GetAbility(ABILITY_SOUL_VOICE);
                 break;
-            case JOB_RNG:
+            case xi::Job::RNG:
                 return GetAbility(ABILITY_EAGLE_EYE_SHOT);
                 break;
-            case JOB_SAM:
+            case xi::Job::SAM:
                 return GetAbility(ABILITY_MEIKYO_SHISUI);
                 break;
-            case JOB_NIN:
+            case xi::Job::NIN:
                 return GetAbility(ABILITY_MIJIN_GAKURE);
                 break;
-            case JOB_DRG:
+            case xi::Job::DRG:
                 return GetAbility(ABILITY_SPIRIT_SURGE);
                 break;
-            case JOB_SMN:
+            case xi::Job::SMN:
                 return GetAbility(ABILITY_ASTRAL_FLOW);
                 break;
-            case JOB_BLU:
+            case xi::Job::BLU:
                 return GetAbility(ABILITY_AZURE_LORE);
                 break;
-            case JOB_COR:
+            case xi::Job::COR:
                 return GetAbility(ABILITY_WILD_CARD);
                 break;
-            case JOB_PUP:
+            case xi::Job::PUP:
                 return GetAbility(ABILITY_OVERDRIVE);
                 break;
-            case JOB_DNC:
+            case xi::Job::DNC:
                 return GetAbility(ABILITY_TRANCE);
                 break;
-            case JOB_SCH:
+            case xi::Job::SCH:
                 return GetAbility(ABILITY_TABULA_RASA);
                 break;
-            case JOB_GEO:
+            case xi::Job::GEO:
                 return GetAbility(ABILITY_BOLSTER);
                 break;
-            case JOB_RUN:
+            case xi::Job::RUN:
                 return GetAbility(ABILITY_ELEMENTAL_SFORZO);
                 break;
             default:
@@ -480,7 +480,7 @@ CAbility* GetTwoHourAbility(JOBTYPE JobID)
         }
     }
 
-    ShowWarning("Attempt to get two hour ability with invalid JOBTYPE %d.", JobID);
+    ShowWarning("Attempt to get two hour ability with invalid JOBTYPE %d.", static_cast<uint8>(JobID));
     return nullptr;
 }
 
@@ -489,8 +489,8 @@ bool CanLearnAbility(CBattleEntity* PUser, uint16 AbilityID)
     auto* PAbility = GetAbility(AbilityID);
     if (PAbility)
     {
-        uint8 Job    = PAbility->getJob();
-        uint8 JobLvl = PAbility->getLevel();
+        const auto Job    = PAbility->getJob();
+        uint8      JobLvl = PAbility->getLevel();
 
         return ((PUser->GetMJob() == Job && PUser->GetMLevel() >= JobLvl) || (PUser->GetSJob() == Job && PUser->GetSLevel() >= JobLvl));
     }
@@ -503,7 +503,7 @@ bool CanLearnAbility(CBattleEntity* PUser, uint16 AbilityID)
  *                                                                       *
  ************************************************************************/
 
-std::vector<CAbility*> GetAbilities(JOBTYPE JobID)
+auto GetAbilities(xi::Job JobID) -> std::vector<CAbility*>
 {
     return PAbilitiesByJob[JobID];
 }

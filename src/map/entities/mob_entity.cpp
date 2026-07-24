@@ -1274,7 +1274,7 @@ void CMobEntity::Die()
 
     PEnmityContainer->Clear();
     PAI->ClearStateStack();
-    if (PPet != nullptr && PPet->isAlive() && GetMJob() == JOB_SMN)
+    if (PPet != nullptr && PPet->isAlive() && GetMJob() == xi::Job::SMN)
     {
         PPet->Die();
     }

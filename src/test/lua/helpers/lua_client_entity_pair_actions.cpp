@@ -136,7 +136,7 @@ void CLuaClientEntityPairActions::setBlueSpells(const sol::table& spellIds) cons
         const auto offsettedId               = static_cast<uint8>(spellId - 0x200);
         const auto packet                    = parent_->packets().createPacket<GP_CLI_COMMAND_EXTENDED_JOB>();
         auto*      bluPacket                 = packet->as<GP_CLI_COMMAND_EXTENDED_JOB>();
-        bluPacket->Data.bluData.JobIndex     = JOB_BLU;
+        bluPacket->Data.bluData.JobIndex     = static_cast<uint8_t>(xi::Job::BLU);
         bluPacket->Data.bluData.SpellId      = offsettedId;
         bluPacket->Data.bluData.Spells[slot] = offsettedId;
 

@@ -342,13 +342,13 @@ void LoadJugStats(CPetEntity* PMob, Pet_t* petStats)
 
     switch (PMob->GetMJob())
     {
-        case JOB_PLD:
-        case JOB_WHM:
-        case JOB_BLM:
-        case JOB_RDM:
-        case JOB_DRK:
-        case JOB_BLU:
-        case JOB_SCH:
+        case xi::Job::PLD:
+        case xi::Job::WHM:
+        case xi::Job::BLM:
+        case xi::Job::RDM:
+        case xi::Job::DRK:
+        case xi::Job::BLU:
+        case xi::Job::SCH:
             PMob->health.maxmp = (int16)(15.2 * pow(lvl, 1.1075) * petStats->MPscale);
             break;
         default:
@@ -372,7 +372,7 @@ void LoadJugStats(CPetEntity* PMob, Pet_t* petStats)
     static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDamage(GetJugWeaponDamage(PMob));
 
     // reduce weapon delay of MNK
-    if (PMob->GetMJob() == JOB_MNK)
+    if (PMob->GetMJob() == xi::Job::MNK)
     {
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->resetDelay();
     }
@@ -704,7 +704,7 @@ void LoadAutomatonStats(CCharEntity* PMaster, CPetEntity* PPet, Pet_t* petStats,
         }
 
         // Add Job Point Stat Bonuses
-        if (PMaster->GetMJob() == JOB_PUP)
+        if (PMaster->GetMJob() == xi::Job::PUP)
         {
             PPet->addModifier(xi::Mod::ATT, PMaster->getMod(xi::Mod::PET_ATK_DEF));
             PPet->addModifier(xi::Mod::DEF, PMaster->getMod(xi::Mod::PET_ATK_DEF));
@@ -737,7 +737,7 @@ void LoadAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
     uint8 grade = 0;
 
     uint8   mlvl = PPet->GetMLevel();
-    JOBTYPE mjob = PPet->GetMJob();
+    xi::Job mjob = PPet->GetMJob();
     uint8   race = 3; // Tarutaru - wait what??
 
     // Calculate HP gain from main job
@@ -871,7 +871,7 @@ void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
 
     uint8 mLvl = PMaster->GetMLevel();
 
-    if (PMaster->GetMJob() == JOB_SMN)
+    if (PMaster->GetMJob() == xi::Job::SMN)
     {
         mLvl += PMaster->getMod(xi::Mod::AVATAR_LVL_BONUS);
 
@@ -885,7 +885,7 @@ void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
         }
         PPet->SetMLevel(mLvl);
     }
-    else if (PMaster->GetSJob() == JOB_SMN)
+    else if (PMaster->GetSJob() == xi::Job::SMN)
     {
         mLvl = PMaster->GetSLevel();
 
@@ -935,12 +935,12 @@ void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
 
     // Set B+ weapon skill (assumed capped for level derp)
     // attack is madly high for avatars (roughly x2)
-    PPet->setModifier(xi::Mod::ATT, 2 * battleutils::GetMaxSkill(xi::SkillType::Club, JOB_WHM, mLvl > 99 ? 99 : mLvl));
-    PPet->setModifier(xi::Mod::ACC, battleutils::GetMaxSkill(xi::SkillType::Club, JOB_WHM, mLvl > 99 ? 99 : mLvl));
+    PPet->setModifier(xi::Mod::ATT, 2 * battleutils::GetMaxSkill(xi::SkillType::Club, xi::Job::WHM, mLvl > 99 ? 99 : mLvl));
+    PPet->setModifier(xi::Mod::ACC, battleutils::GetMaxSkill(xi::SkillType::Club, xi::Job::WHM, mLvl > 99 ? 99 : mLvl));
 
     // Set E evasion and def
-    PPet->setModifier(xi::Mod::EVA, battleutils::GetMaxSkill(xi::SkillType::Throwing, JOB_WHM, mLvl > 99 ? 99 : mLvl));
-    PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(xi::SkillType::Throwing, JOB_WHM, mLvl > 99 ? 99 : mLvl));
+    PPet->setModifier(xi::Mod::EVA, battleutils::GetMaxSkill(xi::SkillType::Throwing, xi::Job::WHM, mLvl > 99 ? 99 : mLvl));
+    PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(xi::SkillType::Throwing, xi::Job::WHM, mLvl > 99 ? 99 : mLvl));
 
     // cap all magic skills so they play nice with spell scripts
     for (int i = static_cast<int>(xi::SkillType::DivineMagic); i <= static_cast<int>(xi::SkillType::BlueMagic); i++)
@@ -978,7 +978,7 @@ void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
     }
 
     // SMN Job Gift Bonuses, DRG and PUP handled in their respective functions
-    if (PMaster->GetMJob() == JOB_SMN)
+    if (PMaster->GetMJob() == xi::Job::SMN)
     {
         PPet->addModifier(xi::Mod::ATT, PMaster->getMod(xi::Mod::PET_ATK_DEF));
         PPet->addModifier(xi::Mod::DEF, PMaster->getMod(xi::Mod::PET_ATK_DEF));
@@ -998,12 +998,12 @@ void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
 void CalculateWyvernStats(CBattleEntity* PMaster, CPetEntity* PPet)
 {
     // set the wyvern job based on master's SJ
-    if (PMaster->GetSJob() != JOB_NON)
+    if (PMaster->GetSJob() != xi::Job::NONE)
     {
-        PPet->SetSJob(PMaster->GetSJob());
+        PPet->SetSJob(static_cast<uint8>(PMaster->GetSJob()));
     }
 
-    PPet->SetMJob(JOB_DRG);
+    PPet->SetMJob(static_cast<uint8>(xi::Job::DRG));
     // https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#About_the_Wyvern
     uint8 mLvl = PMaster->GetMLevel();
     uint8 iLvl = std::clamp(charutils::getMainhandItemLevel(static_cast<CCharEntity*>(PMaster)) - 99, 0, 20);
@@ -1015,11 +1015,11 @@ void CalculateWyvernStats(CBattleEntity* PMaster, CPetEntity* PPet)
     static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay(320);
     static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage((uint16)(floor(mLvl / 2) + 3));
     // Set A+ weapon skill
-    PPet->setModifier(xi::Mod::ATT, battleutils::GetMaxSkill(xi::SkillType::GreatAxe, JOB_WAR, mLvl > 99 ? 99 : mLvl));
-    PPet->setModifier(xi::Mod::ACC, battleutils::GetMaxSkill(xi::SkillType::GreatAxe, JOB_WAR, mLvl > 99 ? 99 : mLvl));
+    PPet->setModifier(xi::Mod::ATT, battleutils::GetMaxSkill(xi::SkillType::GreatAxe, xi::Job::WAR, mLvl > 99 ? 99 : mLvl));
+    PPet->setModifier(xi::Mod::ACC, battleutils::GetMaxSkill(xi::SkillType::GreatAxe, xi::Job::WAR, mLvl > 99 ? 99 : mLvl));
     // Set D evasion and def
-    PPet->setModifier(xi::Mod::EVA, battleutils::GetMaxSkill(xi::SkillType::HandToHand, JOB_WAR, mLvl > 99 ? 99 : mLvl));
-    PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(xi::SkillType::HandToHand, JOB_WAR, mLvl > 99 ? 99 : mLvl));
+    PPet->setModifier(xi::Mod::EVA, battleutils::GetMaxSkill(xi::SkillType::HandToHand, xi::Job::WAR, mLvl > 99 ? 99 : mLvl));
+    PPet->setModifier(xi::Mod::DEF, battleutils::GetMaxSkill(xi::SkillType::HandToHand, xi::Job::WAR, mLvl > 99 ? 99 : mLvl));
 
     // https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#Combat_Stats
     // innate -40 % DT, which does not contribute to the -50 % cap (this is a unique attribute to pets having a "higher" DT cap)
@@ -1041,7 +1041,7 @@ void CalculateWyvernStats(CBattleEntity* PMaster, CPetEntity* PPet)
             PPet->addModifier(xi::Mod::HP, jpValue * 10);
         }
 
-        if (PMaster->GetMJob() == JOBTYPE::JOB_DRG)
+        if (PMaster->GetMJob() == xi::Job::DRG)
         {
             PPet->addModifier(xi::Mod::ACC, PMaster->getMod(xi::Mod::PET_ACC_EVA));
             PPet->addModifier(xi::Mod::EVA, PMaster->getMod(xi::Mod::PET_ACC_EVA));
@@ -1105,7 +1105,7 @@ void CalculateAutomatonStats(CBattleEntity* PMaster, CBattleEntity* PPet)
     if (CCharEntity* PChar = dynamic_cast<CCharEntity*>(PMaster))
     {
         // TODO: AUTOMATON_LEVEL_BONUS will raise the level of the automaton, but stats will be capped to 99. Needs retail captures.
-        uint8 mainLevel = PMaster->GetMJob() == JOB_PUP ? PMaster->GetMLevel() + PMaster->getMod(xi::Mod::AUTOMATON_LVL_BONUS) : PMaster->GetSLevel();
+        uint8 mainLevel = PMaster->GetMJob() == xi::Job::PUP ? PMaster->GetMLevel() + PMaster->getMod(xi::Mod::AUTOMATON_LVL_BONUS) : PMaster->GetSLevel();
 
         uint32 petID = 0;
         if (PAutomaton)
@@ -1781,7 +1781,7 @@ void LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
 
     auto* PPetData = *maybePetData;
 
-    if (PMaster->GetMJob() != JOB_DRG && PetID == PETID_WYVERN)
+    if (PMaster->GetMJob() != xi::Job::DRG && PetID == PETID_WYVERN)
     {
         return;
     }

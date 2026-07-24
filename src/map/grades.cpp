@@ -151,9 +151,9 @@ std::array<std::array<float, 3>, 8> MobHPScale = { {
 namespace grade
 {
 
-uint8 GetJobGrade(JOBTYPE job, uint8 stat)
+auto GetJobGrade(xi::Job job, uint8 stat) -> uint8
 {
-    return JobGrades[job][stat];
+    return JobGrades[static_cast<uint8>(job)][stat];
 }
 
 uint8 GetRaceGrades(uint8 race, uint8 stat)

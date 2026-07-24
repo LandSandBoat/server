@@ -217,18 +217,18 @@ Maybe<SpellID> CMobSpellContainer::GetBestIndiSpell(CBattleEntity* PTarget)
 
     switch (mJob)
     {
-        case JOB_WAR:
-        case JOB_MNK:
-        case JOB_THF:
-        case JOB_DRK:
-        case JOB_BST:
-        case JOB_RNG:
-        case JOB_SAM:
-        case JOB_DRG:
-        case JOB_BLU:
-        case JOB_COR:
-        case JOB_PUP:
-        case JOB_DNC:
+        case xi::Job::WAR:
+        case xi::Job::MNK:
+        case xi::Job::THF:
+        case xi::Job::DRK:
+        case xi::Job::BST:
+        case xi::Job::RNG:
+        case xi::Job::SAM:
+        case xi::Job::DRG:
+        case xi::Job::BLU:
+        case xi::Job::COR:
+        case xi::Job::PUP:
+        case xi::Job::DNC:
         {
             if (accBuffNeeded)
             {
@@ -241,18 +241,18 @@ Maybe<SpellID> CMobSpellContainer::GetBestIndiSpell(CBattleEntity* PTarget)
             subChoice = SpellID::Indi_Regen;
             break;
         }
-        case JOB_WHM:
-        case JOB_BRD:
-        case JOB_SMN:
-        case JOB_GEO:
+        case xi::Job::WHM:
+        case xi::Job::BRD:
+        case xi::Job::SMN:
+        case xi::Job::GEO:
         {
             choice    = SpellID::Indi_Refresh;
             subChoice = SpellID::Indi_Refresh;
             break;
         }
-        case JOB_BLM:
-        case JOB_RDM:
-        case JOB_SCH:
+        case xi::Job::BLM:
+        case xi::Job::RDM:
+        case xi::Job::SCH:
         {
             if (mAccBuffNeeded)
             {
@@ -265,9 +265,9 @@ Maybe<SpellID> CMobSpellContainer::GetBestIndiSpell(CBattleEntity* PTarget)
             subChoice = SpellID::Indi_Refresh;
             break;
         }
-        case JOB_PLD:
-        case JOB_RUN:
-        case JOB_NIN:
+        case xi::Job::PLD:
+        case xi::Job::RUN:
+        case xi::Job::NIN:
         {
             choice    = SpellID::Indi_Haste;
             subChoice = SpellID::Indi_Regen;
@@ -300,36 +300,36 @@ Maybe<SpellID> CMobSpellContainer::GetBestEntrustedSpell(CBattleEntity* PTarget)
 
     switch (mastersJob)
     {
-        case JOB_WAR:
-        case JOB_MNK:
-        case JOB_THF:
-        case JOB_DRK:
-        case JOB_BST:
-        case JOB_RNG:
-        case JOB_SAM:
-        case JOB_DRG:
-        case JOB_BLU:
-        case JOB_COR:
-        case JOB_PUP:
-        case JOB_DNC:
+        case xi::Job::WAR:
+        case xi::Job::MNK:
+        case xi::Job::THF:
+        case xi::Job::DRK:
+        case xi::Job::BST:
+        case xi::Job::RNG:
+        case xi::Job::SAM:
+        case xi::Job::DRG:
+        case xi::Job::BLU:
+        case xi::Job::COR:
+        case xi::Job::PUP:
+        case xi::Job::DNC:
             choice = SpellID::Indi_Frailty;
             break;
-        case JOB_WHM:
-        case JOB_BRD:
-        case JOB_SMN:
+        case xi::Job::WHM:
+        case xi::Job::BRD:
+        case xi::Job::SMN:
             choice = SpellID::Indi_Acumen;
             break;
-        case JOB_BLM:
-        case JOB_RDM:
-        case JOB_SCH:
-        case JOB_PLD:
-        case JOB_RUN:
+        case xi::Job::BLM:
+        case xi::Job::RDM:
+        case xi::Job::SCH:
+        case xi::Job::PLD:
+        case xi::Job::RUN:
             choice = SpellID::Indi_Refresh;
             break;
-        case JOB_NIN:
+        case xi::Job::NIN:
             choice = SpellID::Indi_Regen;
             break;
-        case JOB_GEO:
+        case xi::Job::GEO:
             break;
         default:
             break;

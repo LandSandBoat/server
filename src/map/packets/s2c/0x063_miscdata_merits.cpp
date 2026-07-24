@@ -39,7 +39,7 @@ GP_SERV_COMMAND_MISCDATA::MERITS::MERITS(CCharEntity* PChar)
     packet.bluBonus    = 0;
 
     // Add BLU spell point bonus
-    if (PChar->GetMJob() == JOB_BLU)
+    if (PChar->GetMJob() == xi::Job::BLU)
     {
         uint8 bluePointBonus = 0;
 
@@ -56,10 +56,10 @@ GP_SERV_COMMAND_MISCDATA::MERITS::MERITS(CCharEntity* PChar)
         packet.bluBonus = bluePointBonus;
     }
 
-    const bool atMaxLevelLimit = PChar->jobs.job[PChar->GetMJob()] >= PChar->jobs.genkai;
-    const bool hasCappedXp     = PChar->jobs.exp[PChar->GetMJob()] == (charutils::GetExpNEXTLevel(PChar->jobs.job[PChar->GetMJob()]) - 1);
+    const bool atMaxLevelLimit = PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())] >= PChar->jobs.genkai;
+    const bool hasCappedXp     = PChar->jobs.exp[static_cast<uint8>(PChar->GetMJob())] == (charutils::GetExpNEXTLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())]) - 1);
 
-    packet.canUseMeritMode     = PChar->jobs.job[PChar->GetMJob()] >= 75 && charutils::hasKeyItem(PChar, KeyItem::LIMIT_BREAKER);
+    packet.canUseMeritMode     = PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())] >= 75 && charutils::hasKeyItem(PChar, KeyItem::LIMIT_BREAKER);
     packet.xpCappedOrMeritMode = (atMaxLevelLimit && hasCappedXp) || PChar->MeritMode;
     packet.meritModeEnabled    = packet.canUseMeritMode && PChar->MeritMode;
     packet.maxMeritPoints      = settings::get<uint8>("map.MAX_MERIT_POINTS") + PChar->PMeritPoints->GetMeritValue(MERIT_MAX_MERIT, PChar);

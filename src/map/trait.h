@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "data/enums/job.h"
 
 #include "modifier.h"
 
@@ -248,6 +249,6 @@ namespace traits
 void LoadTraitsList();
 void ClearTraitsList();
 
-TraitList_t* GetTraits(uint8 JobID);
+auto GetTraits(xi::Job JobID) -> TraitList_t*;
 
 }; // namespace traits

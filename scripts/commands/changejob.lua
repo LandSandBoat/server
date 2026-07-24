@@ -24,7 +24,7 @@ commandObj.onTrigger = function(player, jobId, level, master)
     end
 
     jobId = tonumber(jobId) or xi.job[string.upper(jobId)]
-    if jobId == nil or jobId <= 0 or jobId >= xi.MAX_JOB_TYPE then
+    if jobId == nil or jobId <= 0 or jobId > xi.job.MON then
         error(player, 'Invalid jobID.  Use job short name, e.g. WAR, or its equivalent numeric ID.')
         return
     end

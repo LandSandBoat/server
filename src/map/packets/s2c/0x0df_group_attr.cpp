@@ -44,9 +44,9 @@ GP_SERV_COMMAND_GROUP_ATTR::GP_SERV_COMMAND_GROUP_ATTR(CCharEntity* PChar)
 
     if (!PChar->isAnon())
     {
-        packet.mjob_no         = PChar->GetMJob();
+        packet.mjob_no         = static_cast<uint8_t>(PChar->GetMJob());
         packet.mjob_lv         = PChar->GetMLevel();
-        packet.sjob_no         = PChar->GetSJob();
+        packet.sjob_no         = static_cast<uint8_t>(PChar->GetSJob());
         packet.sjob_lv         = PChar->GetSLevel();
         packet.masterjob_lv    = 0;
         packet.masterjob_flags = 0;
@@ -64,8 +64,8 @@ GP_SERV_COMMAND_GROUP_ATTR::GP_SERV_COMMAND_GROUP_ATTR(CTrustEntity* PTrust)
     packet.ActIndex = PTrust->targid;
     packet.Hpp      = PTrust->GetHPP();
     packet.Mpp      = PTrust->GetMPP();
-    packet.mjob_no  = PTrust->GetMJob();
+    packet.mjob_no  = static_cast<uint8_t>(PTrust->GetMJob());
     packet.mjob_lv  = PTrust->GetMLevel();
-    packet.sjob_no  = PTrust->GetSJob();
+    packet.sjob_no  = static_cast<uint8_t>(PTrust->GetSJob());
     packet.sjob_lv  = PTrust->GetSLevel();
 }

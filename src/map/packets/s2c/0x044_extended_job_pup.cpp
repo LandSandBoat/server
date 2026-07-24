@@ -33,7 +33,7 @@ GP_SERV_COMMAND_EXTENDED_JOB::PUP::PUP(CCharEntity* PChar, const bool mjob)
     const auto  PAutomaton = dynamic_cast<CAutomatonEntity*>(PChar->PPet);
     const uint8 jobLevel   = mjob ? PChar->GetMLevel() : PChar->GetSLevel();
 
-    packet.Job            = JOB_PUP;
+    packet.Job            = static_cast<uint8_t>(xi::Job::PUP);
     packet.IsSubJob       = !mjob;
     packet.Head           = PChar->getAutomatonHead();
     packet.Frame          = PChar->getAutomatonFrame();

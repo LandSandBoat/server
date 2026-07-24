@@ -322,32 +322,32 @@ private:
 
     HashMap<std::string, timer::time_point> m_timerConditionLastTrigger;
 
-    std::set<JOBTYPE> melee_jobs = {
-        JOB_WAR,
-        JOB_MNK,
-        JOB_THF,
-        JOB_PLD,
-        JOB_DRK,
-        JOB_BST,
-        JOB_SAM,
-        JOB_NIN,
-        JOB_DRG,
-        JOB_BLU,
-        JOB_PUP,
-        JOB_DNC,
-        JOB_RUN,
+    std::set<xi::Job> melee_jobs = {
+        xi::Job::WAR,
+        xi::Job::MNK,
+        xi::Job::THF,
+        xi::Job::PLD,
+        xi::Job::DRK,
+        xi::Job::BST,
+        xi::Job::SAM,
+        xi::Job::NIN,
+        xi::Job::DRG,
+        xi::Job::BLU,
+        xi::Job::PUP,
+        xi::Job::DNC,
+        xi::Job::RUN,
     };
 
-    std::set<JOBTYPE> caster_jobs = {
-        JOB_WHM,
-        JOB_BLM,
-        JOB_RDM,
-        JOB_BRD,
-        JOB_SMN,
-        JOB_BLU,
-        JOB_SCH,
-        JOB_GEO,
-        JOB_RUN,
+    std::set<xi::Job> caster_jobs = {
+        xi::Job::WHM,
+        xi::Job::BLM,
+        xi::Job::RDM,
+        xi::Job::BRD,
+        xi::Job::SMN,
+        xi::Job::BLU,
+        xi::Job::SCH,
+        xi::Job::GEO,
+        xi::Job::RUN,
     };
 };
 

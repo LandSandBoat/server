@@ -130,7 +130,7 @@ void LoadAutomaton(CCharEntity* PChar)
     {
         db::extractFromBlob(rset, "unlocked_attachments", PChar->m_unlockedAttachments);
 
-        if (PChar->GetMJob() == JOB_PUP || PChar->GetSJob() == JOB_PUP)
+        if (PChar->GetMJob() == xi::Job::PUP || PChar->GetSJob() == xi::Job::PUP)
         {
             if (const auto name = rset->get<std::string>("name"); !name.empty())
             {
@@ -212,7 +212,7 @@ void SaveAttachments(CCharEntity* PChar)
 
 void SaveAutomaton(CCharEntity* PChar)
 {
-    if (PChar->GetMJob() == JOBTYPE::JOB_PUP || PChar->GetSJob() == JOBTYPE::JOB_PUP)
+    if (PChar->GetMJob() == xi::Job::PUP || PChar->GetSJob() == xi::Job::PUP)
     {
         db::preparedStmt("UPDATE char_pet SET "
                          "equipped_attachments = ? "

@@ -680,7 +680,7 @@ enum ABILITY
 struct Charge_t
 {
     uint16          ID;         // recastId
-    JOBTYPE         job;        // job
+    xi::Job         job;        // job
     uint8           level;      // level
     uint8           maxCharges; // maximum number of stored charges
     timer::duration chargeTime; // time required to restore one charge
@@ -704,7 +704,7 @@ public:
 
     uint16          getID() const;
     uint16          getMobSkillID() const;
-    JOBTYPE         getJob();
+    auto            getJob() -> xi::Job;
     uint8           getLevel() const;
     auto            getAnimationID() const -> ActionAnimation;
     timer::duration getAnimationTime();
@@ -724,7 +724,7 @@ public:
     auto            getPostActionEffectCleanup() -> xi::StatusEffect;
 
     void setID(uint16 id);
-    void setJob(JOBTYPE Job);
+    void setJob(xi::Job Job);
     void setLevel(uint8 level);
     void setAnimationID(uint16 animationID);
     void setAnimationTime(timer::duration time);
@@ -748,7 +748,7 @@ public:
 
 private:
     uint16           m_ID;
-    JOBTYPE          m_Job;
+    xi::Job          m_Job;
     uint8            m_level;
     uint16           m_animationID;
     timer::duration  m_animationTime{};
@@ -782,11 +782,11 @@ void LoadAbilitiesList();
 
 CAbility* GetAbility(uint16 AbilityID);
 
-CAbility* GetTwoHourAbility(JOBTYPE JobID);
+auto      GetTwoHourAbility(xi::Job JobID) -> CAbility*;
 bool      CanLearnAbility(CBattleEntity* PUser, uint16 AbilityID);
 Charge_t* GetCharge(CBattleEntity* PUser, uint16 chargeID);
 
-std::vector<CAbility*> GetAbilities(JOBTYPE JobID);
+auto GetAbilities(xi::Job JobID) -> std::vector<CAbility*>;
 
 }; // namespace ability
 

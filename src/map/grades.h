@@ -29,7 +29,7 @@
 namespace grade
 {
 
-uint8 GetJobGrade(JOBTYPE job, uint8 stat);
+auto  GetJobGrade(xi::Job job, uint8 stat) -> uint8;
 uint8 GetRaceGrades(uint8 race, uint8 stat);
 
 float GetHPScale(uint8 rank, uint8 scale);

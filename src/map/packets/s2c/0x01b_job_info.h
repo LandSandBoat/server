@@ -23,17 +23,17 @@
 
 #include "base.h"
 
-enum JOBTYPE : uint8;
+#include "data/enums/job.h"
 class CCharEntity;
 
 struct GP_MYROOM_DANCER
 {
     uint16_t mon_no;
     uint16_t face_no;
-    JOBTYPE  mjob_no;
+    xi::Job  mjob_no;
     uint8_t  hair_no;
     uint8_t  size;
-    JOBTYPE  sjob_no;
+    xi::Job  sjob_no;
     uint32_t get_job_flag;
     int8_t   job_lev[16];
     uint16_t bp_base[7];
