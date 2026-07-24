@@ -18,12 +18,13 @@ xi.combat.damage.souleaterAddition = function(actor)
     local souleaterEffect        = actor:getMaxGearMod(xi.mod.SOULEATER_EFFECT) / 100
     local souleaterEffectII      = actor:getMod(xi.mod.SOULEATER_EFFECT_II) / 100
     local stalwartSoulMultiplier = 1 - actor:getMod(xi.mod.STALWART_SOUL) / 100
-    local bonusDamage            = math.floor(actor:getHP() * (0.1 + souleaterEffect + souleaterEffectII))
+    local soulEaterResistance    = 1 -- TODO: Add soul eater resistance for AV and others.
+    local bonusDamage            = math.floor(actor:getHP() * (0.1 + souleaterEffect + souleaterEffectII) * soulEaterResistance)
 
     if bonusDamage > 0 then
         local selfDamage = bonusDamage * stalwartSoulMultiplier
 
-        selfDamage = utils.handleStoneskin(actor, selfDamage)
+        selfDamage = utils.handleStoneskin(actor, selfDamage, xi.attackType.NONE)
 
         actor:delHP(selfDamage)
 

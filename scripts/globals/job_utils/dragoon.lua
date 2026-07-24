@@ -378,15 +378,13 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability, action)
 
     -- Handle Stoneskin.
     local stoneskinPower = 0
-
-    if player:hasStatusEffect(xi.effect.STONESKIN) then
-        stoneskinPower = player:getMod(xi.mod.STONESKIN)
+    local stoneskin      = player:getStatusEffect(xi.effect.STONESKIN)
+    if stoneskin then
+        stoneskinPower = stoneskin:getPower()
 
         -- If stoneskin is more powerfull than the amount to be drained.
         if stoneskinPower > drainamount then
-            local effect = player:getStatusEffect(xi.effect.STONESKIN)
-            effect:setPower(effect:getPower() - drainamount) -- Fixes the status effect so when it ends it uses the new power instead of old.
-            player:delMod(xi.mod.STONESKIN, drainamount)     -- Removes the amount from the mod.
+            stoneskin:setPower(stoneskinPower - drainamount) -- Fixes the status effect so when it ends it uses the new power instead of old.
 
         -- If stoneskin is as powerful or less than the amount to be drained.
         else

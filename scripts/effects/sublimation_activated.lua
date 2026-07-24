@@ -29,13 +29,14 @@ effectObject.onEffectTick = function(target, effect)
         target:getMerit(xi.merit.MAX_SUBLIMATION) * 10 + target:getJobPointLevel(xi.jp.SUBLIMATION_EFFECT) * 3
 
     if target:getHPP() >= 51 then
-        if target:hasStatusEffect(xi.effect.STONESKIN) then
-            local skin = target:getMod(xi.mod.STONESKIN)
-            if skin >= dmg then --absorb all damage
-                target:delMod(xi.mod.STONESKIN, dmg)
+        local stoneskin = target:getStatusEffect(xi.effect.STONESKIN)
+        if stoneskin then
+            local stoneskinPower = stoneskin:getPower()
+            if stoneskinPower > dmg then
+                stoneskin:setPower(stoneskinPower - dmg)
             else
                 target:delStatusEffect(xi.effect.STONESKIN)
-                target:takeDamage(dmg - skin)
+                target:takeDamage(dmg - stoneskinPower)
                 if target:getHPP() < 51 then
                     complete = true
                 end

@@ -356,11 +356,16 @@ local function handleSinglePhysicalHit(mob, target, baseHitDamage, params)
     -- TODO: Fan Dance Reduction
 
     -- Pre phalanx check - if stoneskin breaks we can get TP from shield mastery
-    if
-        blockedWithShieldMastery and
-        math.max(hitDamage - target:getMod(xi.mod.STONESKIN), 0) > 0
-    then
-        target:addTP(target:getMod(xi.mod.SHIELD_MASTERY_TP))
+    if blockedWithShieldMastery then
+        local stoneskin      = target:getStatusEffect(xi.effect.STONESKIN)
+        local stoneskinPower = 0
+        if stoneskin then
+            stoneskinPower = stoneskin:getPower()
+        end
+
+        if hitDamage - stoneskinPower > 0 then
+            target:addTP(target:getMod(xi.mod.SHIELD_MASTERY_TP))
+        end
     end
 
     hitDamage = utils.handlePhalanx(target, hitDamage)
@@ -1772,7 +1777,7 @@ xi.mobskills.handleHybridDamage = function(mob, target, physicalDamage, element)
     magicDamage = math.floor(magicDamage * 0.5)
 
     magicDamage = utils.handleOneForAll(target, magicDamage)
-    magicDamage = utils.handleStoneskin(target, magicDamage)
+    magicDamage = utils.handleStoneskin(target, magicDamage, xi.attackType.MAGICAL)
 
     return magicDamage
 end

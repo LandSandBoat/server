@@ -8,7 +8,7 @@ effectObject.onEffectGain = function(target, effect)
 end
 
 effectObject.onEffectTick = function(target, effect)
-    local dmg = utils.handleStoneskin(target, effect:getPower())
+    local dmg = utils.handleStoneskin(target, effect:getPower(), xi.attackType.NONE)
 
     if dmg > 0 then
         target:takeDamage(dmg)

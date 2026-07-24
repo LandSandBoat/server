@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -2096,12 +2096,20 @@ auto TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHYS
             }
 
             // Shield Mastery
-            if (std::max(damage - PDefender->getMod(xi::Mod::STONESKIN), 0) > 0 &&
-                PDefender->getMod(xi::Mod::SHIELD_MASTERY_TP))
+            if (PDefender->getMod(xi::Mod::SHIELD_MASTERY_TP))
             {
-                // If the attack was blocked and has shield mastery, add shield mastery TP bonus
-                // unblocked damage (before block but as if affected by phalanx) must be greater than zero
-                PDefender->addTP(PDefender->getMod(xi::Mod::SHIELD_MASTERY_TP));
+                int32 stoneskinPower = 0;
+                if (PDefender->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Stoneskin))
+                {
+                    stoneskinPower = PDefender->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Stoneskin)->GetPower();
+                }
+
+                if (damage - stoneskinPower > 0)
+                {
+                    // If the attack was blocked and has shield mastery, add shield mastery TP bonus
+                    // unblocked damage (before block but as if affected by phalanx) must be greater than zero
+                    PDefender->addTP(PDefender->getMod(xi::Mod::SHIELD_MASTERY_TP));
+                }
             }
 
             if (const auto PChar = dynamic_cast<CCharEntity*>(PDefender))
@@ -4618,6 +4626,16 @@ int32 HandleOneForAll(CBattleEntity* PDefender, int32 damage)
 
 int32 HandleStoneskin(CBattleEntity* PDefender, int32 damage, xi::AttackType attackType)
 {
+    if (damage <= 0)
+    {
+        return damage;
+    }
+
+    if (!PDefender->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Stoneskin))
+    {
+        return damage;
+    }
+
     // subType 1 = physical/ranged only, 2 = magical only (frozen_mist / hydro_wave / Rampart)
     if (attackType != xi::AttackType::None)
     {
@@ -4641,20 +4659,15 @@ int32 HandleStoneskin(CBattleEntity* PDefender, int32 damage, xi::AttackType att
         }
     }
 
-    int16 skin = PDefender->getMod(xi::Mod::STONESKIN);
-    if (damage > 0 && skin > 0)
+    int16 stoneskinPower = PDefender->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Stoneskin)->GetPower();
+    if (stoneskinPower > damage)
     {
-        if (skin > damage)
-        {
-            PDefender->delModifier(xi::Mod::STONESKIN, damage);
-            return 0;
-        }
-
-        PDefender->StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Stoneskin);
-        return damage - skin;
+        PDefender->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Stoneskin)->SetPower(stoneskinPower - damage);
+        return 0;
     }
 
-    return damage;
+    PDefender->StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Stoneskin);
+    return damage - stoneskinPower;
 }
 
 auto HandleSevereDamage(CBattleEntity* PDefender, int32 damage, bool isPhysical) -> int32

@@ -558,7 +558,7 @@ local function calculateSwipeLungeDamage(player, target, skillModifier, gearBonu
     if damage > 0 then
         damage = utils.clamp(utils.handlePhalanx(target, damage), 0, 99999)
         damage = utils.clamp(utils.handleOneForAll(target, damage), 0, 99999)
-        damage = utils.clamp(utils.handleStoneskin(target, damage), -99999, 99999)
+        damage = utils.handleStoneskin(target, damage, xi.attackType.MAGICAL)
     end
 
     return damage

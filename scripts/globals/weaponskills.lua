@@ -258,7 +258,7 @@ local function calculateHybridMagicDamage(tp, physicaldmg, attacker, target, wsP
     if magicdmg > 0 then -- handle nonzero damage if previous function does not absorb or nullify
         magicdmg = utils.handlePhalanx(target, magicdmg)
         magicdmg = utils.handleOneForAll(target, magicdmg)
-        magicdmg = utils.handleStoneskin(target, magicdmg)
+        magicdmg = utils.handleStoneskin(target, magicdmg, xi.attackType.MAGICAL)
     end
 
     return math.floor(magicdmg)
@@ -287,7 +287,11 @@ end
 -- luacheck: ignore 561
 xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action, wsParams, calcParams)
     local targetLvl = target:getMainLvl()
-    local targetHp  = target:getHP() + target:getMod(xi.mod.STONESKIN)
+    local targetHp  = target:getHP()
+    local stoneskin = target:getStatusEffect(xi.effect.STONESKIN)
+    if stoneskin then
+        targetHp = targetHp + stoneskin:getPower()
+    end
 
     -- Obtains alpha, used for working out WSC on legacy servers. Retail has no alpha anymore as of 2014 Weaponskill functions
     local alpha = 1
@@ -895,7 +899,7 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
 
         dmg = utils.handlePhalanx(target, dmg)
         dmg = utils.handleOneForAll(target, dmg)
-        dmg = utils.handleStoneskin(target, dmg)
+        dmg = utils.handleStoneskin(target, dmg, xi.attackType.MAGICAL)
 
         dmg = dmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     else

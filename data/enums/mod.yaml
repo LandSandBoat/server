@@ -440,7 +440,6 @@ values:
   elemental_debuff_effect: 1150 # Increase stat reduction by N, and DoT by N/2 HP per tick
   # Red Mage
   blink:             299  # Tracks blink shadows
-  stoneskin:         300  # Tracks stoneskin HP pool
   phalanx:           301  # Tracks direct damage reduction
   enf_mag_potency:   290  # Increases Enfeebling magic potency %
   enf_mag_duration:  1151 # Increases enfeebling magic duration %
@@ -1273,4 +1272,4 @@ values:
 
   # The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
   # 570 through 825 used by WS DMG mods these are not spares.
-  # SPARE IDs: 1212 and onward
+  # SPARE IDs: 300 and 1212 and onward

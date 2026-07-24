@@ -136,7 +136,7 @@ xi.combat.action.executeSpikesDamage = function(actor, target, fedData)
     if damage > 0 then
         damage = utils.clamp(utils.handlePhalanx(params.aeTarget, damage), 0, 99999)
         damage = utils.clamp(utils.handleOneForAll(params.aeTarget, damage), 0, 99999)
-        damage = utils.clamp(utils.handleStoneskin(params.aeTarget, damage), 0, 99999)
+        damage = utils.handleStoneskin(params.aeTarget, damage, params.attackType)
     end
 
     -- Drain HP, MP or TP
