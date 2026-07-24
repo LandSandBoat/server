@@ -80,7 +80,7 @@ INSERT INTO `blue_traits` VALUES (13,4,6,29,12,2,0);     -- Magic Defense Bonus 
 INSERT INTO `blue_traits` VALUES (13,6,6,29,14,3,0);     -- Magic Defense Bonus (3)
 INSERT INTO `blue_traits` VALUES (13,8,6,29,16,4,1);     -- Magic Defense Bonus (4) (JP only)
 INSERT INTO `blue_traits` VALUES (13,10,6,29,18,5,1);    -- Magic Defense Bonus (5) (JP only)
-INSERT INTO `blue_traits` VALUES (14,2,10,369,1,1,0);    -- Auto Refresh (1) -- Only tier available to BLU
+INSERT INTO `blue_traits` VALUES (14,8,10,369,1,1,0);    -- Auto Refresh (1) -- Only tier available to BLU
 INSERT INTO `blue_traits` VALUES (15,2,7,1095,30,1,0);   -- Max HP Boost (1)
 INSERT INTO `blue_traits` VALUES (15,4,7,1095,60,2,0);   -- Max HP Boost (2)
 INSERT INTO `blue_traits` VALUES (15,6,7,1095,120,3,0);  -- Max HP Boost (3)
