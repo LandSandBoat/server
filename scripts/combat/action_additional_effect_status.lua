@@ -18,6 +18,7 @@ local defaultsTable =
     [xi.effect.DEFENSE_DOWN ] = { xi.subEffect.DEFENSE_DOWN,    xi.msg.basic.ADD_EFFECT_STATUS },
     [xi.effect.EVASION_DOWN ] = { xi.subEffect.EVASION_DOWN,    xi.msg.basic.ADD_EFFECT_STATUS },
     [xi.effect.KO           ] = { xi.subEffect.DEATH,           xi.msg.basic.ADD_EFFECT_STATUS },
+    [xi.effect.MUTE         ] = { xi.subEffect.SILENCE,         xi.msg.basic.ADD_EFFECT_STATUS },
     [xi.effect.NONE         ] = { xi.subEffect.DARKNESS_DAMAGE, xi.msg.basic.ADD_EFFECT_DISPEL },
     [xi.effect.PARALYSIS    ] = { xi.subEffect.PARALYSIS,       xi.msg.basic.ADD_EFFECT_STATUS },
     [xi.effect.PETRIFICATION] = { xi.subEffect.PETRIFY,         xi.msg.basic.ADD_EFFECT_STATUS },
