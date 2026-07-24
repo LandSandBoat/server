@@ -47,50 +47,6 @@ CPetController::CPetController(CMobEntity* _PPet)
     SetWeaponSkillEnabled(false);
 }
 
-auto CPetController::Tick(timer::time_point tick) -> Task<void>
-{
-    TracyZoneScoped;
-    TracyZoneString(PPet->getName());
-
-    bool isPlayerPet = PPet->objtype == TYPE_PET || (PPet->objtype == TYPE_MOB && PPet->PMaster && PPet->PMaster->objtype == TYPE_PC);
-
-    // if a player pet then check if a charmed mob or jug pet and if it should despawn
-    if (isPlayerPet)
-    {
-        // if a charmed mob and charm time is up then despawn
-        if (PPet->isCharmed && tick > PPet->charmTime)
-        {
-            petutils::DespawnPet(PPet->PMaster);
-            co_return;
-        }
-
-        // if a jug pet and the current time > jug spawn time + jug duration then despawn
-        auto* PPetEntity = dynamic_cast<CPetEntity*>(PPet);
-        if (PPetEntity && PPetEntity->isAlive() && PPetEntity->getPetType() == PET_TYPE::JUG_PET)
-        {
-            if (tick > PPetEntity->getJugSpawnTime() + PPetEntity->getJugDuration())
-            {
-                petutils::DespawnPet(PPetEntity->PMaster);
-                co_return;
-            }
-        }
-    }
-
-    co_await CMobController::Tick(tick);
-}
-
-// Light Spirit is the only elemental spirit that is allowed to cast out of combat.
-auto CPetController::DoBuffTick() -> bool
-{
-    const auto* PPetEntity = dynamic_cast<CPetEntity*>(PPet);
-    if (!PPetEntity || PPetEntity->petID() != PETID_LIGHTSPIRIT)
-    {
-        return false;
-    }
-
-    return CMobController::DoBuffTick();
-}
-
 auto CPetController::DoRoamTick(timer::time_point tick) -> Task<void>
 {
     TracyZoneScoped;
@@ -175,7 +131,21 @@ auto CPetController::DoRoamTick(timer::time_point tick) -> Task<void>
     co_return;
 }
 
-bool CPetController::PetIsHealing()
+auto CPetController::PetSkill(const uint16 targid, uint16 abilityid) const -> bool
+{
+    TracyZoneScoped;
+
+    if (POwner)
+    {
+        FaceTarget(targid);
+        PPet->PAI->EventHandler.triggerListener("WEAPONSKILL_BEFORE_USE", PPet, abilityid);
+        return POwner->PAI->Internal_PetSkill(targid, abilityid);
+    }
+
+    return false;
+}
+
+auto CPetController::PetIsHealing() const -> bool
 {
     const auto isMasterHealing = PPet->PMaster->animation == xi::Animation::Healing;
     const auto isPetHealing    = PPet->animation == xi::Animation::Healing;
@@ -200,7 +170,55 @@ bool CPetController::PetIsHealing()
     return isMasterHealing;
 }
 
-bool CPetController::TryDeaggro()
+auto CPetController::Tick(const timer::time_point tick) -> Task<void>
+{
+    TracyZoneScoped;
+    TracyZoneString(PPet->getName());
+
+    bool isPlayerPet = PPet->objtype == TYPE_PET || (PPet->objtype == TYPE_MOB && PPet->PMaster && PPet->PMaster->objtype == TYPE_PC);
+
+    // if a player pet then check if a charmed mob or jug pet and if it should despawn
+    if (isPlayerPet)
+    {
+        // if a charmed mob and charm time is up then despawn
+        if (PPet->isCharmed && tick > PPet->charmTime)
+        {
+            petutils::DespawnPet(PPet->PMaster);
+            co_return;
+        }
+
+        // if a jug pet and the current time > jug spawn time + jug duration then despawn
+        auto* PPetEntity = dynamic_cast<CPetEntity*>(PPet);
+        if (PPetEntity && PPetEntity->isAlive() && PPetEntity->getPetType() == PET_TYPE::JUG_PET)
+        {
+            if (tick > PPetEntity->getJugSpawnTime() + PPetEntity->getJugDuration())
+            {
+                petutils::DespawnPet(PPetEntity->PMaster);
+                co_return;
+            }
+        }
+    }
+
+    co_await CMobController::Tick(tick);
+}
+
+// Light Spirit is the only elemental spirit that is allowed to cast out of combat.
+auto CPetController::DoBuffTick() -> bool
+{
+    const auto* PPetEntity = dynamic_cast<CPetEntity*>(PPet);
+    if (!PPetEntity || PPetEntity->petID() != PETID_LIGHTSPIRIT)
+    {
+        return false;
+    }
+
+    return CMobController::DoBuffTick();
+}
+
+void CPetController::HandleEnmity()
+{
+}
+
+auto CPetController::TryDeaggro() -> bool
 {
     if (PTarget == nullptr)
     {
@@ -218,27 +236,17 @@ bool CPetController::TryDeaggro()
     return false;
 }
 
-bool CPetController::Ability(uint16 targid, uint16 abilityid)
+void CPetController::TryLink()
+{
+}
+
+auto CPetController::Ability(const uint16 targid, const uint16 abilityid) -> bool
 {
     TracyZoneScoped;
 
     if (PPet->PAI->CanChangeState())
     {
         return PPet->PAI->Internal_Ability(targid, abilityid);
-    }
-
-    return false;
-}
-
-bool CPetController::PetSkill(uint16 targid, uint16 abilityid)
-{
-    TracyZoneScoped;
-
-    if (POwner)
-    {
-        FaceTarget(targid);
-        PPet->PAI->EventHandler.triggerListener("WEAPONSKILL_BEFORE_USE", PPet, abilityid);
-        return POwner->PAI->Internal_PetSkill(targid, abilityid);
     }
 
     return false;

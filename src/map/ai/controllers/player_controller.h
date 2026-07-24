@@ -18,11 +18,9 @@
 
 ===========================================================================
 */
+#pragma once
 
 #include "controller.h"
-
-#ifndef _PLAYERCONTROLLER_H
-#define _PLAYERCONTROLLER_H
 
 class CCharEntity;
 class CWeaponSkill;
@@ -32,34 +30,30 @@ class CPlayerController : public CController
 public:
     CPlayerController(CCharEntity*);
 
-    virtual ~CPlayerController()
-    {
-    }
+    virtual ~CPlayerController();
 
-    virtual auto Tick(timer::time_point tick) -> Task<void> override;
+    auto Tick(timer::time_point tick) -> Task<void> override;
+    auto Cast(uint16 targid, SpellID spellid) -> bool override;
+    auto Engage(uint16 targid) -> bool override;
+    auto ChangeTarget(uint16 targid) -> bool override;
+    auto Disengage() -> bool override;
+    auto WeaponSkill(uint16 targid, uint16 wsid) -> bool override;
+    auto Ability(uint16 targid, uint16 abilityid) -> bool override;
+    auto RangedAttack(uint16 targid) -> bool override;
+    auto UseItem(uint16 targid, uint8 loc, uint8 slotid) -> bool;
 
-    virtual bool Cast(uint16 targid, SpellID spellid) override;
-    virtual bool Engage(uint16 targid) override;
-    virtual bool ChangeTarget(uint16 targid) override;
-    virtual bool Disengage() override;
-    virtual bool WeaponSkill(uint16 targid, uint16 wsid) override;
+    auto getLastAttackTime() -> timer::time_point;
+    void setLastAttackTime(timer::time_point);
 
-    virtual bool Ability(uint16 targid, uint16 abilityid) override;
-    virtual bool RangedAttack(uint16 targid) override;
-    virtual bool UseItem(uint16 targid, uint8 loc, uint8 slotid);
+    auto getLastSpellFinishedTime() -> timer::time_point;
+    void setLastSpellFinishedTime(timer::time_point);
 
-    timer::time_point getLastAttackTime();
-    void              setLastAttackTime(timer::time_point);
+    void setLastErrMsgTime(timer::time_point);
+    auto getLastErrMsgTime() -> timer::time_point;
 
-    timer::time_point getLastSpellFinishedTime();
-    void              setLastSpellFinishedTime(timer::time_point);
+    auto getLastWeaponSkill() -> CWeaponSkill*;
 
-    void              setLastErrMsgTime(timer::time_point);
-    timer::time_point getLastErrMsgTime();
-
-    CWeaponSkill* getLastWeaponSkill();
-
-    bool canAct();
+    auto canAct() -> bool;
 
 protected:
     timer::time_point m_lastAttackTime{ timer::now() };
@@ -67,5 +61,3 @@ protected:
     timer::time_point m_errMsgTime{ timer::now() };
     CWeaponSkill*     m_lastWeaponSkill{ nullptr };
 };
-
-#endif // _PLAYERCONTROLLER

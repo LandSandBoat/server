@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _PET_CONTROLLER_H
-#define _PET_CONTROLLER_H
+#pragma once
 
 #include "mob_controller.h"
 
@@ -30,29 +29,19 @@ public:
     CPetController(CMobEntity* PPet);
 
     static constexpr float PetRoamDistance{ 2.1f };
-    virtual auto           DoRoamTick(timer::time_point tick) -> Task<void> override;
-    bool                   PetSkill(uint16 targid, uint16 abilityid);
+    auto                   DoRoamTick(timer::time_point tick) -> Task<void> override;
+    auto                   PetSkill(uint16 targid, uint16 abilityid) const -> bool;
 
 protected:
-    bool PetIsHealing();
+    auto PetIsHealing() const -> bool;
 
-    virtual auto Tick(timer::time_point tick) -> Task<void> override;
-    virtual auto DoBuffTick() -> bool override;
-
-    virtual void HandleEnmity() override
-    {
-    }
-
-    virtual bool TryDeaggro() override;
-
-    virtual void TryLink() override
-    {
-    }
-
-    virtual bool Ability(uint16 targid, uint16 abilityid) override;
+    auto Tick(timer::time_point tick) -> Task<void> override;
+    auto DoBuffTick() -> bool override;
+    void HandleEnmity() override;
+    auto TryDeaggro() -> bool override;
+    void TryLink() override;
+    auto Ability(uint16 targid, uint16 abilityid) -> bool override;
 
 private:
     CMobEntity* const PPet;
 };
-
-#endif // _AI_CONTROLLER_H

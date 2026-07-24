@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _TRUSTCONTROLLER_H
-#define _TRUSTCONTROLLER_H
+#pragma once
 
 #include <memory>
 
@@ -44,20 +43,17 @@ public:
 
     auto Tick(timer::time_point) -> Task<void> override;
     void Despawn() override;
-
-    bool Ability(uint16 targid, uint16 abilityid) override;
-    bool Cast(uint16 targid, SpellID spellid) override;
-
-    bool RangedAttack(uint16 targid) override;
+    auto Ability(uint16 targid, uint16 abilityid) -> bool override;
+    auto Cast(uint16 targid, SpellID spellid) -> bool override;
+    auto RangedAttack(uint16 targid) -> bool override;
 
     static constexpr float RoamDistance    = { 3.0f };
     static constexpr float SpawnDistance   = { 3.0f };
     static constexpr float CastingDistance = { 15.0f };
     static constexpr float WarpDistance    = { 30.0f };
 
-    CBattleEntity* GetTopEnmity();
-
-    uint8 GetPartyPosition();
+    auto GetTopEnmity() const -> CBattleEntity*;
+    auto GetPartyPosition() const -> uint8;
 
     std::unique_ptr<gambits::CGambitsContainer> m_GambitsContainer;
 
@@ -65,8 +61,8 @@ private:
     auto DoCombatTick(timer::time_point tick) -> Task<void> override;
     auto DoRoamTick(timer::time_point tick) -> Task<void> override;
     auto DoNonCombatTick(timer::time_point tick) -> Task<void>;
-    void Declump(CCharEntity* PMaster, CBattleEntity* PTarget);
-    void PathOutToDistance(CBattleEntity* PTarget, float amount);
+    void Declump(const CCharEntity* PMaster, const CBattleEntity* PTarget) const;
+    void PathOutToDistance(const CBattleEntity* PTarget, float amount);
 
     CBattleEntity* m_LastTopEnmity;
 
@@ -81,5 +77,3 @@ private:
 
     timer::time_point m_LastRangedAttackTime;
 };
-
-#endif // _TRUSTCONTROLLER

@@ -30,6 +30,10 @@ CController::CController(CBattleEntity* _POwner)
 {
 }
 
+CController::~CController()
+{
+}
+
 void CController::Despawn()
 {
     if (POwner)
@@ -42,7 +46,7 @@ void CController::Reset()
 {
 }
 
-bool CController::Cast(uint16 targid, SpellID spellid)
+auto CController::Cast(const uint16 targid, const SpellID spellid) -> bool
 {
     if (POwner)
     {
@@ -51,7 +55,7 @@ bool CController::Cast(uint16 targid, SpellID spellid)
     return false;
 }
 
-bool CController::Engage(uint16 targid)
+auto CController::Engage(const uint16 targid) -> bool
 {
     if (POwner)
     {
@@ -60,7 +64,7 @@ bool CController::Engage(uint16 targid)
     return false;
 }
 
-bool CController::ChangeTarget(uint16 targid)
+auto CController::ChangeTarget(const uint16 targid) -> bool
 {
     if (POwner)
     {
@@ -69,7 +73,7 @@ bool CController::ChangeTarget(uint16 targid)
     return false;
 }
 
-bool CController::Disengage()
+auto CController::Disengage() -> bool
 {
     if (POwner)
     {
@@ -78,7 +82,7 @@ bool CController::Disengage()
     return false;
 }
 
-bool CController::WeaponSkill(uint16 targid, uint16 wsid)
+auto CController::WeaponSkill(const uint16 targid, const uint16 wsid) -> bool
 {
     if (POwner)
     {
@@ -87,7 +91,7 @@ bool CController::WeaponSkill(uint16 targid, uint16 wsid)
     return false;
 }
 
-bool CController::RangedAttack(uint16 targid)
+auto CController::RangedAttack(const uint16 targid) -> bool
 {
     if (POwner)
     {
@@ -96,42 +100,47 @@ bool CController::RangedAttack(uint16 targid)
     return false;
 }
 
-bool CController::IsAutoAttackEnabled() const
+auto CController::Ability(uint16 targid, uint16 abilityid) -> bool
+{
+    return false;
+}
+
+auto CController::IsAutoAttackEnabled() const -> bool
 {
     return m_AutoAttackEnabled;
 }
 
-void CController::SetAutoAttackEnabled(bool enabled)
+void CController::SetAutoAttackEnabled(const bool enabled)
 {
     m_AutoAttackEnabled = enabled;
 }
 
-bool CController::IsRangedAttackEnabled() const
+auto CController::IsRangedAttackEnabled() const -> bool
 {
     return m_RangedAttackEnabled;
 }
 
-void CController::SetRangedAttackEnabled(bool enabled)
+void CController::SetRangedAttackEnabled(const bool enabled)
 {
     m_RangedAttackEnabled = enabled;
 }
 
-bool CController::IsWeaponSkillEnabled() const
+auto CController::IsWeaponSkillEnabled() const -> bool
 {
     return m_WeaponSkillEnabled;
 }
 
-void CController::SetWeaponSkillEnabled(bool enabled)
+void CController::SetWeaponSkillEnabled(const bool enabled)
 {
     m_WeaponSkillEnabled = enabled;
 }
 
-bool CController::IsMagicCastingEnabled() const
+auto CController::IsMagicCastingEnabled() const -> bool
 {
     return m_MagicCastingEnabled;
 }
 
-void CController::SetMagicCastingEnabled(bool enabled)
+void CController::SetMagicCastingEnabled(const bool enabled)
 {
     m_MagicCastingEnabled = enabled;
 }
