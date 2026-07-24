@@ -390,8 +390,7 @@ local packets =
     },
     ['Mob dies mid-ready'] =
     {
-        test = function(player)
-            local mob = player.entities:moveTo('Clipper')
+        test = function(player, mob)
             mob:useMobAbility(xi.mobSkill.BIG_SCISSORS_1, player, 10)
             xi.test.world:tickEntity(mob)
             mob:setHP(0)              -- Kill mob while in "ready" state
