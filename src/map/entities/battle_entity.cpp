@@ -1029,7 +1029,7 @@ auto CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullpt
 
     if (attacker)
     {
-        lastAttackerId_ = EntityID_t(attacker);
+        lastAttackerId_ = EntityId(attacker);
     }
     else
     {
@@ -3639,14 +3639,14 @@ void CBattleEntity::OnChangeTarget(CBattleEntity* PTarget)
 {
 }
 
-auto CBattleEntity::battleTarget() const -> EntityID_t
+auto CBattleEntity::battleTarget() const -> EntityId
 {
     return battleTarget_;
 }
 
-void CBattleEntity::setBattleTarget(const Maybe<EntityID_t>& target)
+void CBattleEntity::setBattleTarget(const Maybe<EntityId>& target)
 {
-    battleTarget_ = target.value_or(EntityID_t{});
+    battleTarget_ = target.value_or(EntityId{});
 }
 
 auto CBattleEntity::GetBattleTarget() const -> CBattleEntity*
@@ -4021,7 +4021,7 @@ auto CBattleEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags, std::u
     return PTarget;
 }
 
-auto CBattleEntity::IsValidTarget(EntityID_t target, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*
+auto CBattleEntity::IsValidTarget(EntityId target, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*
 {
     TracyZoneScoped;
 

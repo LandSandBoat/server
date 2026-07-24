@@ -609,7 +609,7 @@ auto CAutomatonController::CanCastSpells(const IgnoreRecastsAndCosts ignoreRecas
     return PAutomaton->PAI->CanChangeState();
 }
 
-auto CAutomatonController::Cast(const EntityID_t target, SpellID spellid) -> bool
+auto CAutomatonController::Cast(const EntityId target, SpellID spellid) -> bool
 {
     if (!automaton::CanUseSpell(PAutomaton, spellid) || PAutomaton->PRecastContainer->HasRecast(RECAST_MAGIC, static_cast<Recast>(spellid), 0s))
     {

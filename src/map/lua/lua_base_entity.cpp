@@ -18964,7 +18964,7 @@ void CLuaBaseEntity::castSpell(const sol::object& spell, const sol::object& enti
 
             if (targid)
             {
-                PEntity->PAI->Cast(EntityID_t(PEntity->GetEntity(targid)), spellid);
+                PEntity->PAI->Cast(EntityId(PEntity->GetEntity(targid)), spellid);
             }
             else if (PMobEntity)
             {
@@ -18998,12 +18998,12 @@ void CLuaBaseEntity::castSpell(const sol::object& spell, const sol::object& enti
 
 void CLuaBaseEntity::useJobAbility(uint16 skillID, const sol::object& pet)
 {
-    EntityID_t targetId{};
+    EntityId targetId{};
 
     if ((pet != sol::lua_nil) && pet.is<CLuaBaseEntity*>())
     {
         CLuaBaseEntity* PLuaBaseEntity = pet.as<CLuaBaseEntity*>();
-        targetId                       = EntityID_t(PLuaBaseEntity->m_PBaseEntity);
+        targetId                       = EntityId(PLuaBaseEntity->m_PBaseEntity);
     }
 
     // clang-format off
@@ -19053,9 +19053,9 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
         return;
     }
 
-    auto       skillid{ va.get<uint16>(0) };
-    EntityID_t targetId{};
-    auto*      PMobSkill{ battleutils::GetMobSkill(skillid) };
+    auto     skillid{ va.get<uint16>(0) };
+    EntityId targetId{};
+    auto*    PMobSkill{ battleutils::GetMobSkill(skillid) };
 
     if (!PMobSkill)
     {
@@ -19065,7 +19065,7 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
     if (va.size() >= 2)
     {
         CLuaBaseEntity* PLuaBaseEntity = va.get<CLuaBaseEntity*>(1);
-        targetId                       = PLuaBaseEntity ? EntityID_t(PLuaBaseEntity->m_PBaseEntity) : EntityID_t{};
+        targetId                       = PLuaBaseEntity ? EntityId(PLuaBaseEntity->m_PBaseEntity) : EntityId{};
     }
 
     Maybe<timer::duration> castTimeOverride = std::nullopt;
@@ -19141,7 +19141,7 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
 
 void CLuaBaseEntity::usePetAbility(uint16 skillId, const sol::object& target) const
 {
-    EntityID_t targetId{};
+    EntityId targetId{};
 
     // Don't queue an ability if we're not in auto attack state or no state
     if (!m_PBaseEntity->PAI->IsCurrentState<CAttackState>() && !m_PBaseEntity->PAI->IsStateStackEmpty())
@@ -19163,7 +19163,7 @@ void CLuaBaseEntity::usePetAbility(uint16 skillId, const sol::object& target) co
     if ((target != sol::lua_nil) && target.is<CLuaBaseEntity*>())
     {
         const auto* PLuaBaseEntity = target.as<CLuaBaseEntity*>();
-        targetId                   = EntityID_t(PLuaBaseEntity->m_PBaseEntity);
+        targetId                   = EntityId(PLuaBaseEntity->m_PBaseEntity);
     }
 
     // clang-format off

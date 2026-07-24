@@ -115,7 +115,7 @@ void CPlayerCharmController::DoRoamTick(timer::time_point tick) const
     }
 }
 
-auto CPlayerCharmController::Cast(const EntityID_t target, SpellID spellid) -> bool
+auto CPlayerCharmController::Cast(const EntityId target, SpellID spellid) -> bool
 {
     return false;
 }
@@ -135,7 +135,7 @@ auto CPlayerCharmController::Ability(uint16 targid, uint16 abilityid) -> bool
     return false;
 }
 
-auto CPlayerCharmController::RangedAttack(const EntityID_t target) -> bool
+auto CPlayerCharmController::RangedAttack(const EntityId target) -> bool
 {
     return false;
 }

@@ -29,17 +29,17 @@ class CBaseEntity;
 
 // A resolvable reference to an entity.
 // Holds enough context to find the entity again at a later time in a safe fashion.
-struct EntityID_t
+struct EntityId
 {
-    EntityID_t() = default;
-    explicit EntityID_t(const CBaseEntity* PEntity);
+    EntityId() = default;
+    explicit EntityId(const CBaseEntity* PEntity);
 
     void clean();
     auto isSet() const -> bool;
     auto isDynamic() const -> bool;
 
     // Compare two entity IDs for equality. Dynamic entities use the auto-incrementing serial.
-    auto operator==(const EntityID_t& other) const -> bool;
+    auto operator==(const EntityId& other) const -> bool;
     auto operator==(const CBaseEntity* PEntity) const -> bool;
 
     // TODO: Globally rename targid to index, zoneIndex, etc.

@@ -565,7 +565,7 @@ auto CTrustController::Ability(uint16 targid, uint16 abilityid) -> bool
     return false;
 }
 
-auto CTrustController::RangedAttack(const EntityID_t target) -> bool
+auto CTrustController::RangedAttack(const EntityId target) -> bool
 {
     TracyZoneScoped;
 
@@ -587,7 +587,7 @@ auto CTrustController::RangedAttack(const EntityID_t target) -> bool
     return false;
 }
 
-auto CTrustController::Cast(const EntityID_t target, SpellID spellid) -> bool
+auto CTrustController::Cast(const EntityId target, SpellID spellid) -> bool
 {
     TracyZoneScoped;
 
@@ -600,7 +600,7 @@ auto CTrustController::Cast(const EntityID_t target, SpellID spellid) -> bool
 
     auto* PSpell = spell::GetSpell(spellid);
 
-    const auto castTarget = PSpell->getValidTarget() == TARGET_SELF ? EntityID_t(POwner) : target;
+    const auto castTarget = PSpell->getValidTarget() == TARGET_SELF ? EntityId(POwner) : target;
 
     const auto PTarget      = castTarget.resolve<CBattleEntity>();
     const auto PSpellFamily = PSpell->getSpellFamily();

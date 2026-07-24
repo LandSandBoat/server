@@ -48,7 +48,7 @@ auto CPlayerController::Tick(timer::time_point /*tick*/) -> Task<void>
     co_return;
 }
 
-auto CPlayerController::Cast(const EntityID_t target, SpellID spellid) -> bool
+auto CPlayerController::Cast(const EntityId target, SpellID spellid) -> bool
 {
     auto* PChar = static_cast<CCharEntity*>(POwner);
     if (canAct() && !PChar->PRecastContainer->HasRecast(RECAST_MAGIC, static_cast<Recast>(spellid), 0s))
@@ -231,7 +231,7 @@ auto CPlayerController::Ability(const uint16 targid, const uint16 abilityid) -> 
     }
 }
 
-auto CPlayerController::RangedAttack(const EntityID_t target) -> bool
+auto CPlayerController::RangedAttack(const EntityId target) -> bool
 {
     auto* PChar = static_cast<CCharEntity*>(POwner);
     if (canAct() && PChar->PAI->CanChangeState())

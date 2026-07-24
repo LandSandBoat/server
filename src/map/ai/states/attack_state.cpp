@@ -33,7 +33,7 @@ CAttackState::CAttackState(CBattleEntity* PEntity, const uint16 targid)
 : CState(PEntity, targid)
 , m_PEntity(PEntity)
 {
-    PEntity->setBattleTarget(EntityID_t(PEntity->GetEntity(targid)));
+    PEntity->setBattleTarget(EntityId(PEntity->GetEntity(targid)));
     PEntity->SetBattleStartTime(timer::now());
     CAttackState::UpdateTarget();
 
@@ -136,7 +136,7 @@ void CAttackState::UpdateTarget(uint16 targid)
         PNewTarget = m_PEntity->IsValidTarget(newTarget, TARGET_ENEMY, m_errorMsg);
         if (!PNewTarget)
         {
-            newTarget          = EntityID_t{};
+            newTarget          = EntityId{};
             CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PEntity);
             if (PChar && PChar->hasAutoTargetEnabled())
             {
@@ -146,9 +146,9 @@ void CAttackState::UpdateTarget(uint16 targid)
                         distance(PChar->loc.p, PPotentialTarget.second->loc.p) <= 10)
                     {
                         std::unique_ptr<CBasicPacket> errMsg;
-                        if (PChar->IsValidTarget(EntityID_t(PPotentialTarget.second), TARGET_ENEMY, errMsg))
+                        if (PChar->IsValidTarget(EntityId(PPotentialTarget.second), TARGET_ENEMY, errMsg))
                         {
-                            newTarget = EntityID_t(PPotentialTarget.second);
+                            newTarget = EntityId(PPotentialTarget.second);
                             PChar->pushPacket<GP_SERV_COMMAND_ASSIST>(PChar, static_cast<CBattleEntity*>(PPotentialTarget.second));
                             break;
                         }

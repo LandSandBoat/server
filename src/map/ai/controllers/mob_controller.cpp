@@ -499,7 +499,7 @@ void CMobController::TapDeclaimTime()
     m_DeclaimTime = m_Tick;
 }
 
-auto CMobController::Cast(const EntityID_t target, const SpellID spellid) -> bool
+auto CMobController::Cast(const EntityId target, const SpellID spellid) -> bool
 {
     TracyZoneScoped;
 
@@ -1243,7 +1243,7 @@ auto CMobController::DoBuffTick() -> bool
     return TryCastSpell();
 }
 
-void CMobController::FaceTarget(const EntityID_t& target) const
+void CMobController::FaceTarget(const EntityId& target) const
 {
     TracyZoneScoped;
 
@@ -1258,7 +1258,7 @@ void CMobController::FaceTarget(const EntityID_t& target) const
 
 void CMobController::FaceTarget(const uint16 targid) const
 {
-    FaceTarget(EntityID_t(PMob->GetEntity(targid)));
+    FaceTarget(EntityId(PMob->GetEntity(targid)));
 }
 
 void CMobController::HandleEnmity()

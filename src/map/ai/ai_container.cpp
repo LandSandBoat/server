@@ -61,7 +61,7 @@ CAIContainer::CAIContainer(CBaseEntity*                   _PEntity,
 {
 }
 
-bool CAIContainer::Cast(EntityID_t target, SpellID spellid)
+bool CAIContainer::Cast(EntityId target, SpellID spellid)
 {
     if (Controller)
     {
@@ -135,7 +135,7 @@ bool CAIContainer::Ability(uint16 targid, uint16 abilityid)
     return false;
 }
 
-auto CAIContainer::RangedAttack(const EntityID_t& target) const -> bool
+auto CAIContainer::RangedAttack(const EntityId& target) const -> bool
 {
     if (Controller)
     {
@@ -241,7 +241,7 @@ bool CAIContainer::Internal_ChangeTarget(uint16 targetid)
     {
         if (IsEngaged() || targetid == 0)
         {
-            entity->setBattleTarget(EntityID_t(entity->GetEntity(targetid)));
+            entity->setBattleTarget(EntityId(entity->GetEntity(targetid)));
             return true;
         }
         else

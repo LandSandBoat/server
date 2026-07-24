@@ -52,7 +52,7 @@ public:
     auto         CanAggroTarget(CBattleEntity*) const -> bool;
     void         TapDeaggroTime();
     void         TapDeclaimTime();
-    auto         Cast(EntityID_t target, SpellID spellid) -> bool override;
+    auto         Cast(EntityId target, SpellID spellid) -> bool override;
     void         SetFollowTarget(CBaseEntity* PTarget, FollowType followType);
     auto         HasFollowTarget() const -> bool;
     void         ClearFollowTarget();
@@ -71,7 +71,7 @@ protected:
     virtual void Move();
     virtual auto DoCombatTick(timer::time_point tick) -> Task<void>;
     virtual auto DoBuffTick() -> bool;
-    void         FaceTarget(const EntityID_t& target = {}) const;
+    void         FaceTarget(const EntityId& target = {}) const;
     void         FaceTarget(uint16 targid) const;
     virtual void HandleEnmity();
     virtual auto DoRoamTick(timer::time_point tick) -> Task<void>;

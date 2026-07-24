@@ -192,7 +192,7 @@ public:
     bool IsDynamicEntity() const;
 
     auto           serial() const -> uint64;
-    auto           entityId() const -> EntityID_t;
+    auto           entityId() const -> EntityId;
     uint32         id;             // global identifier unique on the server
     uint16         targid;         // local identifier unique to the zone
     ENTITYTYPE     objtype;        // Type of entity

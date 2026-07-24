@@ -48,7 +48,7 @@ public:
     CAIContainer(const CAIContainer&)            = delete;
     CAIContainer& operator=(const CAIContainer&) = delete;
 
-    bool Cast(EntityID_t target, SpellID spellid);
+    bool Cast(EntityId target, SpellID spellid);
     bool Engage(uint16 targid);
     bool ChangeTarget(uint16 targid);
     bool Disengage();
@@ -56,7 +56,7 @@ public:
     bool MobSkill(uint16 targid, uint16 wsid, Maybe<timer::duration> castTimeOverride);
     bool PetSkill(uint16 targid, uint16 wsid);
     bool Ability(uint16 targid, uint16 abilityid);
-    bool RangedAttack(const EntityID_t& target) const;
+    bool RangedAttack(const EntityId& target) const;
     bool Trigger(CCharEntity* player);
     bool UseItem(uint16 targid, uint8 loc, uint8 slotid);
     bool Inactive(timer::duration _duration, bool canChangeState);

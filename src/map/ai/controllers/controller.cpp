@@ -46,7 +46,7 @@ void CController::Reset()
 {
 }
 
-auto CController::Cast(const EntityID_t target, const SpellID spellid) -> bool
+auto CController::Cast(const EntityId target, const SpellID spellid) -> bool
 {
     if (POwner)
     {
@@ -91,7 +91,7 @@ auto CController::WeaponSkill(const uint16 targid, const uint16 wsid) -> bool
     return false;
 }
 
-auto CController::RangedAttack(const EntityID_t target) -> bool
+auto CController::RangedAttack(const EntityId target) -> bool
 {
     if (POwner)
     {
