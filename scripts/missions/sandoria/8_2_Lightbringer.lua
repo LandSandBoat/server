@@ -280,14 +280,13 @@ mission.sections =
         },
     },
 
-    -- Optional dialogue after completing the Mission.  Prince cutscenes are once events, and the
-    -- 'Option' mission variable needs to be reset on accepting the next mission.  We could have started
-    -- with bits set, but should a player skip these, it'd persist forever.
+    -- Optional once-per-character Prince cutscenes, available from completing the Mission until
+    -- The Heir to the Light begins.  The 'Option' mission variable is cleared on M9-2 completion.
     {
         check = function(player, currentMission, missionStatus, vars)
             return player:hasCompletedMission(mission.areaId, mission.missionId) and
                 player:getRank(mission.areaId) == 9 and
-                player:getRankPoints() == 0
+                currentMission ~= xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT
         end,
 
         [xi.zone.CHATEAU_DORAGUILLE] =
@@ -310,10 +309,6 @@ mission.sections =
                 end
             },
 
-            ['Aramaviont'] = mission:messageText(chateauID.text.LIGHTBRINGER_EXTRA + 1),
-            ['Milchupain'] = mission:messageText(chateauID.text.LIGHTBRINGER_EXTRA + 3),
-            ['Rahal']      = mission:event(42):replaceDefault(),
-
             onEventFinish =
             {
                 [63] = function(player, csid, option, npc)
@@ -324,6 +319,22 @@ mission.sections =
                     mission:setVarBit(player, 'Option', 1)
                 end,
             },
+        },
+    },
+
+    -- Optional dialogue immediately after completing the Mission.
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return player:hasCompletedMission(mission.areaId, mission.missionId) and
+                player:getRank(mission.areaId) == 9 and
+                player:getRankPoints() == 0
+        end,
+
+        [xi.zone.CHATEAU_DORAGUILLE] =
+        {
+            ['Aramaviont'] = mission:messageText(chateauID.text.LIGHTBRINGER_EXTRA + 1),
+            ['Milchupain'] = mission:messageText(chateauID.text.LIGHTBRINGER_EXTRA + 3),
+            ['Rahal']      = mission:event(42):replaceDefault(),
         },
     },
 }

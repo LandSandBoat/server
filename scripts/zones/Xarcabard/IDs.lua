@@ -37,6 +37,7 @@ zones[xi.zone.XARCABARD] =
         PERENNIAL_SNOW_WAIT            = 7745,  -- The <keyitem> you buried is not yet purified.
         CAVERN_CONTINUES               = 7800,  -- The cavern continues on for quite a distance.
         NOTHING_MORE                   = 7801,  -- There is nothing more to be done here.
+        SOMETHING_BURIED               = 7829,  -- It looks like something was buried here.
         YOU_CANNOT_ENTER_DYNAMIS       = 7867,  -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).
         PLAYERS_HAVE_NOT_REACHED_LEVEL = 7869,  -- Players who have not reached level <number> are prohibited from entering Dynamis.
         DYNA_NPC_DEFAULT_MESSAGE       = 7906,  -- There is a symbol carved into the rock here.

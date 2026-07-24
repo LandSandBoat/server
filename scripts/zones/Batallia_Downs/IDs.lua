@@ -28,6 +28,7 @@ zones[xi.zone.BATALLIA_DOWNS] =
         SPARKLING_LIGHT               = 7363,  -- The ground is sparkling with a strange light.
         SOMEONE_DUG                   = 7450,  -- Someone or something has dug a hole here.
         SENSE_AN_EVIL_PRESENCE        = 7451,  -- You sense an evil presence.
+        SOMEONE_HAS_BURIED            = 7452,  -- Someone has buried something here.
         SENSE_SOMETHING_LURKING       = 7453,  -- You sense something lurking close by!
         NO_GRASS_GROWING_HERE         = 7502,  -- There is no grass growing here...
         YOU_ARE_BEING_ATTACKED        = 7639,  -- You are being attacked!
