@@ -291,7 +291,7 @@ bool CAIContainer::Internal_MobSkill(const EntityId& target, uint16 wsid, Maybe<
             return false;
         }
 
-        return ChangeState<CMobSkillState>(entity, target.targid, wsid, castTimeOverride);
+        return ChangeState<CMobSkillState>(entity, target, wsid, castTimeOverride);
     }
     return false;
 }
