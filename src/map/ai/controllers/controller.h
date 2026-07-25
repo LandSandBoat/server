@@ -47,8 +47,7 @@ public:
     virtual auto Disengage() -> bool;
     virtual auto WeaponSkill(uint16 targid, uint16 wsid) -> bool;
     virtual auto RangedAttack(EntityId target) -> bool;
-
-    virtual auto Ability(uint16 targid, uint16 abilityid) -> bool;
+    virtual auto Ability(EntityId target, uint16 abilityid) -> bool;
 
     auto IsAutoAttackEnabled() const -> bool;
     void SetAutoAttackEnabled(bool);

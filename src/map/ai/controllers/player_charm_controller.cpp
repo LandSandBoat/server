@@ -130,7 +130,7 @@ auto CPlayerCharmController::WeaponSkill(uint16 targid, uint16 wsid) -> bool
     return false;
 }
 
-auto CPlayerCharmController::Ability(uint16 targid, uint16 abilityid) -> bool
+auto CPlayerCharmController::Ability(EntityId target, uint16 abilityid) -> bool
 {
     return false;
 }

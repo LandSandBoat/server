@@ -190,7 +190,7 @@ auto CPlayerController::WeaponSkill(uint16 targid, uint16 wsid) -> bool
     return false;
 }
 
-auto CPlayerController::Ability(const uint16 targid, const uint16 abilityid) -> bool
+auto CPlayerController::Ability(EntityId target, const uint16 abilityid) -> bool
 {
     auto* PChar = static_cast<CCharEntity*>(POwner);
     if (canAct() && PChar->PAI->CanChangeState())
@@ -218,17 +218,17 @@ auto CPlayerController::Ability(const uint16 targid, const uint16 abilityid) -> 
             PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, static_cast<uint32>(std::max<int64>(timer::count_seconds(currentRecast), 0)), 0, MsgBasic::TimeLeft);
             return false;
         }
-        if (auto target = PChar->GetEntity(targid); target && target->PAI->IsUntargetable())
+
+        if (const auto PTarget = target.resolve<CBattleEntity>(); PTarget && PTarget->PAI->IsUntargetable())
         {
             return false;
         }
-        return PChar->PAI->Internal_Ability(targid, abilityid);
+
+        return PChar->PAI->Internal_Ability(target.targid, abilityid);
     }
-    else
-    {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToUseJobAbility);
-        return false;
-    }
+
+    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToUseJobAbility);
+    return false;
 }
 
 auto CPlayerController::RangedAttack(const EntityId target) -> bool

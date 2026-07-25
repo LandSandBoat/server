@@ -100,7 +100,7 @@ auto CController::RangedAttack(const EntityId target) -> bool
     return false;
 }
 
-auto CController::Ability(uint16 targid, uint16 abilityid) -> bool
+auto CController::Ability(EntityId target, uint16 abilityid) -> bool
 {
     return false;
 }

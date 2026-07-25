@@ -180,7 +180,7 @@ auto CMobController::MobSkill(const uint16 targid, uint16 wsid, const Maybe<time
     return false;
 }
 
-auto CMobController::Ability(const uint16 targid, uint16 abilityid) -> bool
+auto CMobController::Ability(EntityId target, uint16 abilityid) -> bool
 {
     if (PMob->PRecastContainer->HasRecast(RECAST_ABILITY, static_cast<Recast>(abilityid), 0s))
     {
@@ -189,7 +189,7 @@ auto CMobController::Ability(const uint16 targid, uint16 abilityid) -> bool
 
     if (POwner->PAI->CanChangeState())
     {
-        return POwner->PAI->Internal_Ability(targid, abilityid);
+        return POwner->PAI->Internal_Ability(target.targid, abilityid);
     }
 
     return false;

@@ -55,7 +55,7 @@ public:
     bool WeaponSkill(uint16 targid, uint16 wsid);
     bool MobSkill(uint16 targid, uint16 wsid, Maybe<timer::duration> castTimeOverride);
     bool PetSkill(uint16 targid, uint16 wsid);
-    bool Ability(uint16 targid, uint16 abilityid);
+    bool Ability(const EntityId& target, uint16 abilityid) const;
     bool RangedAttack(const EntityId& target) const;
     bool Trigger(CCharEntity* player);
     bool UseItem(uint16 targid, uint8 loc, uint8 slotid);

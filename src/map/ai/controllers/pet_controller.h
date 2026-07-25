@@ -40,7 +40,7 @@ protected:
     void HandleEnmity() override;
     auto TryDeaggro() -> bool override;
     void TryLink() override;
-    auto Ability(uint16 targid, uint16 abilityid) -> bool override;
+    auto Ability(EntityId target, uint16 abilityid) -> bool override;
 
 private:
     CMobEntity* const PPet;

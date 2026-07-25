@@ -19009,13 +19009,13 @@ void CLuaBaseEntity::useJobAbility(uint16 skillID, const sol::object& pet)
     // clang-format off
     m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true, [targetId, skillID](auto PEntity)
     {
-        if (auto* PTarget = targetId.resolve<CBattleEntity>())
+        if (targetId.resolve<CBattleEntity>())
         {
-            PEntity->PAI->Ability(PTarget->targid, skillID);
+            PEntity->PAI->Ability(targetId, skillID);
         }
         else if (dynamic_cast<CMobEntity*>(PEntity))
         {
-            PEntity->PAI->Ability(static_cast<CMobEntity*>(PEntity)->GetBattleTargetID(), skillID);
+            PEntity->PAI->Ability(static_cast<CMobEntity*>(PEntity)->battleTarget(), skillID);
         }
     }));
     // clang-format on

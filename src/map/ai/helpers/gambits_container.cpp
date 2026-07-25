@@ -804,7 +804,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
                             if (tpCost != 0 && currentTP >= tpCost)
                             {
                                 PAbility = PWaltzAbility;
-                                controller->Ability(target->targid, PAbility->getID());
+                                controller->Ability(target->entityId(), PAbility->getID());
                                 executedAnyAction = true;
                             }
                         }
@@ -824,7 +824,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
                 {
                     if (target != nullptr)
                     {
-                        controller->Ability(target->targid, PAbility->getID());
+                        controller->Ability(target->entityId(), PAbility->getID());
                         executedAnyAction = true;
                     }
                 }
@@ -894,7 +894,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
 
                     if (tpCost != 0 && (currentTP >= tpCost))
                     {
-                        controller->Ability(target->targid, PAbility->getID());
+                        controller->Ability(target->entityId(), PAbility->getID());
                         executedAnyAction = true;
                     }
                 }
@@ -939,7 +939,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
                             ability = ABILITY_IGNIS;
                             break;
                     }
-                    controller->Ability(target->targid, ability);
+                    controller->Ability(target->entityId(), ability);
                     executedAnyAction = true;
                 }
             }

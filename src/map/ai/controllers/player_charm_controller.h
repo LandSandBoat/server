@@ -34,7 +34,7 @@ public:
     auto Cast(EntityId target, SpellID spellid) -> bool override;
     auto ChangeTarget(uint16 targid) -> bool override;
     auto WeaponSkill(uint16 targid, uint16 wsid) -> bool override;
-    auto Ability(uint16 targid, uint16 abilityid) -> bool override;
+    auto Ability(EntityId target, uint16 abilityid) -> bool override;
     auto RangedAttack(EntityId target) -> bool override;
 
 private:

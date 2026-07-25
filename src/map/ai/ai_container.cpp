@@ -126,12 +126,13 @@ bool CAIContainer::PetSkill(uint16 targid, uint16 wsid)
     return false;
 }
 
-bool CAIContainer::Ability(uint16 targid, uint16 abilityid)
+auto CAIContainer::Ability(const EntityId& target, const uint16 abilityid) const -> bool
 {
     if (Controller)
     {
-        return Controller->Ability(targid, abilityid);
+        return Controller->Ability(target, abilityid);
     }
+
     return false;
 }
 

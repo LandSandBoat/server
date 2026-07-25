@@ -44,7 +44,7 @@ public:
     void Reset() override;
 
     virtual auto MobSkill(uint16 targid, uint16 wsid, Maybe<timer::duration> castTimeOverride) -> bool;
-    auto         Ability(uint16 targid, uint16 abilityid) -> bool override;
+    auto         Ability(EntityId target, uint16 abilityid) -> bool override;
     auto         MobSkill(int listId = 0) -> bool;
     auto         TryCastSpell() -> bool;
     auto         TrySpecialSkill() -> bool;

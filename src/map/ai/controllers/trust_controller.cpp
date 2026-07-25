@@ -548,7 +548,7 @@ void CTrustController::PathOutToDistance(const CBattleEntity* PTarget, const flo
     }
 }
 
-auto CTrustController::Ability(uint16 targid, uint16 abilityid) -> bool
+auto CTrustController::Ability(const EntityId target, uint16 abilityid) -> bool
 {
     TracyZoneScoped;
 
@@ -559,7 +559,7 @@ auto CTrustController::Ability(uint16 targid, uint16 abilityid) -> bool
 
     if (POwner->PAI->CanChangeState())
     {
-        return POwner->PAI->Internal_Ability(targid, abilityid);
+        return POwner->PAI->Internal_Ability(target.targid, abilityid);
     }
 
     return false;

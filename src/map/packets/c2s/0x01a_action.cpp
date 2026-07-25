@@ -357,7 +357,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
                 }
             }
 
-            PChar->PAI->Ability(this->ActIndex, this->JobAbility.SkillId);
+            PChar->PAI->Ability(EntityId(PChar->GetEntity(this->ActIndex)), this->JobAbility.SkillId);
         }
         break;
         case GP_CLI_COMMAND_ACTION_ACTIONID::HomepointMenu:
