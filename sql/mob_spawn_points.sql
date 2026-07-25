@@ -215,29 +215,29 @@ INSERT INTO `mob_spawn_points` VALUES (17006610,0,'Debaucher','Debaucher',3,77,7
 INSERT INTO `mob_spawn_points` VALUES (17006611,0,'Debaucher','Debaucher',3,77,79,-472.284,-10.180,-65.855,118,NULL,NULL);
 
 -- Requiem assault entrance @ -470 -9.695 -325 rot 192
-INSERT INTO `mob_spawn_points` VALUES (17006612,0,'Putrid_Immortal_Guard','Putrid Immortal Guard',5,77,78,-434.051,-5.076,-260.724,0,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17006613,0,'Putrid_Immortal_Guard','Putrid Immortal Guard',5,77,78,-455.689,-8.171,-265.212,60,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17006614,0,'Batteilant_Bhoot','Batteilant Bhoot',6,77,78,-510.939,-16.193,-178.466,86,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17006615,0,'Batteilant_Bhoot','Batteilant Bhoot',6,77,78,-508.779,-16.297,-175.037,110,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17006616,0,'Darkling_Draugar','Darkling Draugar',7,77,78,-509.631,-18.504,-142.899,5,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17006617,0,'Draconic_Draugar','Draconic Draugar',8,77,78,-504.532,-15.733,-143.145,146,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17006618,0,'Draugars_Wyvern','Draugar\'s Wyvern',9,77,78,-504.532,-15.733,-143.145,146,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17006619,0,'Darkling_Draugar','Darkling Draugar',7,77,78,-544.832,-16.103,-142.699,253,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17006620,0,'Darkling_Draugar','Darkling Draugar',7,77,78,-535.468,-15.760,-142.838,238,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17006621,0,'Draconic_Draugar','Draconic Draugar',8,77,78,-531.053,-16.308,-209.619,254,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17006622,0,'Draugars_Wyvern','Draugar\'s Wyvern',9,77,78,-531.053,-16.308,-209.619,254,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17006623,0,'Draconic_Draugar','Draconic Draugar',8,77,78,-536.109,-15.914,-209.807,181,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17006624,0,'Draugars_Wyvern','Draugar\'s Wyvern',9,77,78,-536.109,-15.914,-209.807,181,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17006625,0,'Batteilant_Bhoot','Batteilant Bhoot',6,77,78,-389.755,-16.314,-340.165,26,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17006626,0,'Batteilant_Bhoot','Batteilant Bhoot',6,77,78,-380.747,-16.141,-339.757,227,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17006627,0,'Darkling_Draugar','Darkling Draugar',7,77,78,-421.740,-15.771,-414.019,85,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17006628,0,'Draconic_Draugar','Draconic Draugar',8,77,78,-410.189,-18.512,-417.184,128,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17006629,0,'Draugars_Wyvern','Draugar\'s Wyvern',9,77,78,-410.189,-18.512,-417.184,128,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17006630,0,'Darkling_Draugar','Darkling Draugar',7,77,78,-380.327,-15.837,-372.303,69,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17006631,0,'Draconic_Draugar','Draconic Draugar',8,77,78,-373.480,-17.073,-377.010,128,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17006632,0,'Draugars_Wyvern','Draugar\'s Wyvern',9,77,78,-373.480,-17.073,-377.010,128,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17006633,0,'Darkling_Draugar','Darkling Draugar',7,77,78,-345.461,-15.811,-330.613,116,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17006634,0,'Darkling_Draugar','Darkling Draugar',7,77,78,-348.444,-17.535,-337.023,129,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17006612,0,'Putrid_Immortal_Guard','Putrid Immortal Guard',5,77,78,-457.040,-4,-246.077,0,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17006613,0,'Putrid_Immortal_Guard','Putrid Immortal Guard',5,77,78,-408.519,-4,-251.947,60,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17006614,0,'Batteilant_Bhoot','Batteilant Bhoot',6,77,78,-504.290,-16,-173.434,86,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17006615,0,'Batteilant_Bhoot','Batteilant Bhoot',6,77,78,-500.721,-16,-179.234,110,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17006616,0,'Darkling_Draugar','Darkling Draugar',7,77,78,-500.316,-16,-152.359,5,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17006617,0,'Draconic_Draugar','Draconic Draugar',8,77,78,-497.619,-15,-151.957,146,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17006618,0,'Draugars_Wyvern','Draugar\'s Wyvern',9,77,78,-497.312,-15,-151.963,146,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17006619,0,'Darkling_Draugar','Darkling Draugar',7,77,78,-536.161,-15,-149.194,253,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17006620,0,'Darkling_Draugar','Darkling Draugar',7,77,78,-543.870,-15,-143.138,238,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17006621,0,'Draconic_Draugar','Draconic Draugar',8,77,78,-544.212,-16,-218.202,254,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17006622,0,'Draugars_Wyvern','Draugar\'s Wyvern',9,77,78,-544.248,-16,-219.370,254,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17006623,0,'Draconic_Draugar','Draconic Draugar',8,77,78,-537.587,-15,-222.606,181,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17006624,0,'Draugars_Wyvern','Draugar\'s Wyvern',9,77,78,-541.089,-16,-220.088,181,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17006625,0,'Batteilant_Bhoot','Batteilant Bhoot',6,77,78,-390.345,-16,-342.977,26,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17006626,0,'Batteilant_Bhoot','Batteilant Bhoot',6,77,78,-375.967,-16,-341.988,227,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17006627,0,'Darkling_Draugar','Darkling Draugar',7,77,78,-429.400,-16,-406.097,85,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17006628,0,'Draconic_Draugar','Draconic Draugar',8,77,78,-424.283,-15,-416.811,128,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17006629,0,'Draugars_Wyvern','Draugar\'s Wyvern',9,77,78,-421.279,-15,-412.320,128,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17006630,0,'Darkling_Draugar','Darkling Draugar',7,77,78,-380.364,-16,-368.956,69,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17006631,0,'Draconic_Draugar','Draconic Draugar',8,77,78,-380.809,-15,-372.245,128,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17006632,0,'Draugars_Wyvern','Draugar\'s Wyvern',9,77,78,-380.089,-15,-369.237,128,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17006633,0,'Darkling_Draugar','Darkling Draugar',7,77,78,-339.267,-15,-344.779,116,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17006634,0,'Darkling_Draugar','Darkling Draugar',7,77,78,-347.896,-15,-331.318,129,NULL,NULL);
 
 -- Saving Private Ryaff entrance @ 20 -15.643 548 rot 64
 INSERT INTO `mob_spawn_points` VALUES (17006635,0,'Cursed_Chigoe','Cursed Chigoe',10,77,78,-58.320,-15.850,571.903,196,NULL,NULL);

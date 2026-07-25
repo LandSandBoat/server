@@ -5,11 +5,23 @@
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobEngage = function(mob, target)
+entity.onMobSpawn = function(mob)
     local instance = mob:getInstance()
-    local mobID = mob:getID()
+    local petId    = mob:getID() + 1
+    local pet      = GetMobByID(petId, instance)
+    mob:setMobMod(xi.mobMod.NO_LINK, 1)
+    mob:setMaxMP(4150)
+    mob:setHP(4150)
+    if pet then
+        mob:setPet(pet)
+    end
+end
 
-    SpawnMob(mobID + 1, instance):updateEnmity(target)
+entity.onMobFight = function(mob, target)
+    local pet = GetMobByID(mob:getID() + 1, mob:getInstance())
+    if pet and pet:getCurrentAction() == xi.action.category.ROAMING then
+        pet:updateEnmity(target)
+    end
 end
 
 entity.onMobDespawn = function(mob)
