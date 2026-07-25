@@ -27,7 +27,7 @@
 #include "utils/synthutils.h"
 
 CSynthState::CSynthState(CCharEntity* PChar, const xi::SkillType skill)
-: CState(PChar, PChar->targid)
+: CState(PChar, PChar->entityId())
 , m_PEntity(PChar)
 {
     switch (skill)
