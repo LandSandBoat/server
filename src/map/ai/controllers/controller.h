@@ -41,14 +41,13 @@ public:
     virtual auto Tick(timer::time_point tick) -> Task<void> = 0;
     virtual void Despawn();
     virtual void Reset();
-    virtual auto Cast(uint16 targid, SpellID spellid) -> bool;
+    virtual auto Cast(EntityId target, SpellID spellid) -> bool;
     virtual auto Engage(uint16 targid) -> bool;
     virtual auto ChangeTarget(uint16 targid) -> bool;
     virtual auto Disengage() -> bool;
-    virtual auto WeaponSkill(uint16 targid, uint16 wsid) -> bool;
-    virtual auto RangedAttack(uint16 targid) -> bool;
-
-    virtual auto Ability(uint16 targid, uint16 abilityid) -> bool;
+    virtual auto WeaponSkill(EntityId target, uint16 wsid) -> bool;
+    virtual auto RangedAttack(EntityId target) -> bool;
+    virtual auto Ability(EntityId target, uint16 abilityid) -> bool;
 
     auto IsAutoAttackEnabled() const -> bool;
     void SetAutoAttackEnabled(bool);

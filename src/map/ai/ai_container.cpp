@@ -61,11 +61,11 @@ CAIContainer::CAIContainer(CBaseEntity*                   _PEntity,
 {
 }
 
-bool CAIContainer::Cast(uint16 targid, SpellID spellid)
+bool CAIContainer::Cast(EntityId target, SpellID spellid)
 {
     if (Controller)
     {
-        return Controller->Cast(targid, spellid);
+        return Controller->Cast(target, spellid);
     }
     return false;
 }
@@ -97,11 +97,11 @@ bool CAIContainer::Disengage()
     return false;
 }
 
-bool CAIContainer::WeaponSkill(uint16 targid, uint16 wsid)
+auto CAIContainer::WeaponSkill(const EntityId& target, const uint16 wsid) const -> bool
 {
     if (Controller)
     {
-        return Controller->WeaponSkill(targid, wsid);
+        return Controller->WeaponSkill(target, wsid);
     }
     return false;
 }
@@ -126,21 +126,23 @@ bool CAIContainer::PetSkill(uint16 targid, uint16 wsid)
     return false;
 }
 
-bool CAIContainer::Ability(uint16 targid, uint16 abilityid)
+auto CAIContainer::Ability(const EntityId& target, const uint16 abilityid) const -> bool
 {
     if (Controller)
     {
-        return Controller->Ability(targid, abilityid);
+        return Controller->Ability(target, abilityid);
     }
+
     return false;
 }
 
-bool CAIContainer::RangedAttack(uint16 targid)
+auto CAIContainer::RangedAttack(const EntityId& target) const -> bool
 {
     if (Controller)
     {
-        return Controller->RangedAttack(targid);
+        return Controller->RangedAttack(target);
     }
+
     return false;
 }
 
@@ -240,7 +242,7 @@ bool CAIContainer::Internal_ChangeTarget(uint16 targetid)
     {
         if (IsEngaged() || targetid == 0)
         {
-            entity->setBattleTarget(EntityID_t(entity->GetEntity(targetid)));
+            entity->setBattleTarget(EntityId(entity->GetEntity(targetid)));
             return true;
         }
         else

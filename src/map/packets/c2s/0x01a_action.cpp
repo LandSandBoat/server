@@ -290,7 +290,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
             // clang-format on
 
             const auto spellId = static_cast<SpellID>(this->CastMagic.SpellId);
-            PChar->PAI->Cast(this->ActIndex, spellId);
+            PChar->PAI->Cast(EntityId(PChar->GetEntity(this->ActIndex)), spellId);
 
             // target offset used only for luopan placement as of now
             if (spellId >= SpellID::Geo_Regen && spellId <= SpellID::Geo_Gravity)
@@ -342,7 +342,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
                 return;
             }
 
-            PChar->PAI->WeaponSkill(this->ActIndex, this->Weaponskill.SkillId);
+            PChar->PAI->WeaponSkill(EntityId(PChar->GetEntity(this->ActIndex)), this->Weaponskill.SkillId);
         }
         break;
         case GP_CLI_COMMAND_ACTION_ACTIONID::JobAbility:
@@ -357,7 +357,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
                 }
             }
 
-            PChar->PAI->Ability(this->ActIndex, this->JobAbility.SkillId);
+            PChar->PAI->Ability(EntityId(PChar->GetEntity(this->ActIndex)), this->JobAbility.SkillId);
         }
         break;
         case GP_CLI_COMMAND_ACTION_ACTIONID::HomepointMenu:
@@ -413,7 +413,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
         break;
         case GP_CLI_COMMAND_ACTION_ACTIONID::Shoot:
         {
-            PChar->PAI->RangedAttack(this->ActIndex);
+            PChar->PAI->RangedAttack(EntityId(PChar->GetEntity(this->ActIndex)));
         }
         break;
         case GP_CLI_COMMAND_ACTION_ACTIONID::ChocoboDig:

@@ -240,13 +240,13 @@ void CPetController::TryLink()
 {
 }
 
-auto CPetController::Ability(const uint16 targid, const uint16 abilityid) -> bool
+auto CPetController::Ability(const EntityId target, const uint16 abilityid) -> bool
 {
     TracyZoneScoped;
 
     if (PPet->PAI->CanChangeState())
     {
-        return PPet->PAI->Internal_Ability(targid, abilityid);
+        return PPet->PAI->Internal_Ability(target.targid, abilityid);
     }
 
     return false;

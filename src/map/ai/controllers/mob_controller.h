@@ -44,7 +44,7 @@ public:
     void Reset() override;
 
     virtual auto MobSkill(uint16 targid, uint16 wsid, Maybe<timer::duration> castTimeOverride) -> bool;
-    auto         Ability(uint16 targid, uint16 abilityid) -> bool override;
+    auto         Ability(EntityId target, uint16 abilityid) -> bool override;
     auto         MobSkill(int listId = 0) -> bool;
     auto         TryCastSpell() -> bool;
     auto         TrySpecialSkill() -> bool;
@@ -52,7 +52,7 @@ public:
     auto         CanAggroTarget(CBattleEntity*) const -> bool;
     void         TapDeaggroTime();
     void         TapDeclaimTime();
-    auto         Cast(uint16 targid, SpellID spellid) -> bool override;
+    auto         Cast(EntityId target, SpellID spellid) -> bool override;
     void         SetFollowTarget(CBaseEntity* PTarget, FollowType followType);
     auto         HasFollowTarget() const -> bool;
     void         ClearFollowTarget();
@@ -71,7 +71,8 @@ protected:
     virtual void Move();
     virtual auto DoCombatTick(timer::time_point tick) -> Task<void>;
     virtual auto DoBuffTick() -> bool;
-    void         FaceTarget(uint16 targid = 0) const;
+    void         FaceTarget(const EntityId& target = {}) const;
+    void         FaceTarget(uint16 targid) const;
     virtual void HandleEnmity();
     virtual auto DoRoamTick(timer::time_point tick) -> Task<void>;
     void         Wait(timer::duration _duration);

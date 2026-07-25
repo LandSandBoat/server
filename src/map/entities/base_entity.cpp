@@ -228,9 +228,9 @@ auto CBaseEntity::serial() const -> uint64
     return serial_;
 }
 
-auto CBaseEntity::entityId() const -> EntityID_t
+auto CBaseEntity::entityId() const -> EntityId
 {
-    return EntityID_t{ this };
+    return EntityId{ this };
 }
 
 void CBaseEntity::SendZoneUpdate()

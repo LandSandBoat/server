@@ -291,7 +291,7 @@ class CItemState;
 class CItemUsable;
 
 typedef FlatHashMap<uint32, CBaseEntity*> SpawnIDList_t;
-typedef std::vector<EntityID_t>           BazaarList_t;
+typedef std::vector<EntityId>             BazaarList_t;
 
 struct ItemLocation
 {
@@ -494,7 +494,7 @@ public:
     CLatentEffectContainer* PLatentEffectContainer;
     bool                    retriggerLatents; // used to retrigger all latent effects if some event requires them to be retriggered
 
-    EntityID_t      guildShopNpc_{}; // Lua-driven guild shop NPC the PC last opened
+    EntityId        guildShopNpc_{}; // Lua-driven guild shop NPC the PC last opened
     CItemContainer* getStorage(uint8 locationId) const;
 
     CTradeContainer* TradeContainer; // Container used specifically for trading.
@@ -568,7 +568,7 @@ public:
     //     : instead of checking for entityId.id != 0, etc.
     // TODO: We don't want to replace this with just an ID, because in the future EntityID_t will be able to
     //     : disambiguate between entities who have been rebuilt (players, dynamic entities) and have the same ID.
-    Maybe<EntityID_t> WideScanTarget;
+    Maybe<EntityId> WideScanTarget;
 
     // NOTE: These are all keyed by id
     SpawnIDList_t SpawnPCList;    // list of visible characters
@@ -580,9 +580,9 @@ public:
     void SetName(const std::string& name); // set the name of character, limited to 15 characters
 
     timer::time_point lastTradeInvite{};
-    EntityID_t        TradePending{};    // Character ID offering trade
-    EntityID_t        InvitePending{};   // Character ID sending party invite
-    EntityID_t        BazaarID{};        // Pointer to the bazaar we are browsing.
+    EntityId          TradePending{};    // Character ID offering trade
+    EntityId          InvitePending{};   // Character ID sending party invite
+    EntityId          BazaarID{};        // Pointer to the bazaar we are browsing.
     BazaarList_t      BazaarCustomers{}; // Array holding the IDs of the current customers
 
     std::unique_ptr<monstrosity::MonstrosityData_t> m_PMonstrosity;
@@ -729,7 +729,7 @@ public:
     bool OnAttack(CAttackState&, action_t&) override;
     bool OnAttackError(CAttackState&) override;
     auto IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity* override;
-    auto IsValidTarget(EntityID_t target, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity* override;
+    auto IsValidTarget(EntityId target, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity* override;
     void OnChangeTarget(CBattleEntity* PNewTarget) override;
     void OnEngage(CAttackState&) override;
     void OnDisengage(CAttackState&) override;

@@ -543,12 +543,12 @@ void CTrustController::PathOutToDistance(const CBattleEntity* PTarget, const flo
     }
     else
     {
-        FaceTarget(PTarget->targid);
+        FaceTarget(PTarget->entityId());
         m_InTransit = false;
     }
 }
 
-auto CTrustController::Ability(uint16 targid, uint16 abilityid) -> bool
+auto CTrustController::Ability(const EntityId target, uint16 abilityid) -> bool
 {
     TracyZoneScoped;
 
@@ -559,13 +559,13 @@ auto CTrustController::Ability(uint16 targid, uint16 abilityid) -> bool
 
     if (POwner->PAI->CanChangeState())
     {
-        return POwner->PAI->Internal_Ability(targid, abilityid);
+        return POwner->PAI->Internal_Ability(target.targid, abilityid);
     }
 
     return false;
 }
 
-auto CTrustController::RangedAttack(uint16 targid) -> bool
+auto CTrustController::RangedAttack(const EntityId target) -> bool
 {
     TracyZoneScoped;
 
@@ -577,8 +577,8 @@ auto CTrustController::RangedAttack(uint16 targid) -> bool
 
     if (m_Tick - m_LastRangedAttackTime > rangedDelay && !m_InTransit)
     {
-        FaceTarget(PTarget->targid);
-        if (POwner->PAI->CanChangeState() && POwner->PAI->Internal_RangedAttack(targid))
+        FaceTarget(PTarget->entityId());
+        if (POwner->PAI->CanChangeState() && POwner->PAI->Internal_RangedAttack(target.targid))
         {
             m_LastRangedAttackTime = m_Tick;
         }
@@ -587,24 +587,22 @@ auto CTrustController::RangedAttack(uint16 targid) -> bool
     return false;
 }
 
-auto CTrustController::Cast(uint16 targid, SpellID spellid) -> bool
+auto CTrustController::Cast(const EntityId target, SpellID spellid) -> bool
 {
     TracyZoneScoped;
 
-    FaceTarget(targid);
+    FaceTarget(target);
 
-    if (static_cast<CMobEntity*>(POwner)->PRecastContainer->Has(RECAST_MAGIC, static_cast<Recast>(spellid)))
+    if (POwner->PRecastContainer->Has(RECAST_MAGIC, static_cast<Recast>(spellid)))
     {
         return false;
     }
 
     auto* PSpell = spell::GetSpell(spellid);
-    if (PSpell->getValidTarget() == TARGET_SELF)
-    {
-        targid = POwner->targid;
-    }
 
-    const auto PTarget      = static_cast<CBattleEntity*>(POwner->GetEntity(targid, TYPE_MOB | TYPE_PC | TYPE_PET | TYPE_TRUST));
+    const auto castTarget = PSpell->getValidTarget() == TARGET_SELF ? EntityId(POwner) : target;
+
+    const auto PTarget      = castTarget.resolve<CBattleEntity>();
     const auto PSpellFamily = PSpell->getSpellFamily();
     bool       canCast      = true;
 
@@ -632,7 +630,7 @@ auto CTrustController::Cast(uint16 targid, SpellID spellid) -> bool
                 }
                 if (PSpell->isCure())
                 {
-                    if (PTarget == MTarget && PTarget->GetHPP() > 50)
+                    if (PTarget && PTarget == MTarget && PTarget->GetHPP() > 50)
                     {
                         canCast = false;
                     }
@@ -661,7 +659,7 @@ auto CTrustController::Cast(uint16 targid, SpellID spellid) -> bool
         return false;
     }
 
-    return CMobController::Cast(targid, spellid);
+    return CMobController::Cast(castTarget, spellid);
 }
 
 auto CTrustController::GetTopEnmity() const -> CBattleEntity*

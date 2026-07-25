@@ -324,8 +324,8 @@ public:
     virtual void Die();
     uint16       GetBattleTargetID() const;
 
-    auto battleTarget() const -> EntityID_t;
-    void setBattleTarget(const Maybe<EntityID_t>& target);
+    auto battleTarget() const -> EntityId;
+    void setBattleTarget(const Maybe<EntityId>& target);
     auto GetBattleTarget() const -> CBattleEntity*;
 
     bool hasEnmityEXPENSIVE() const; // Returns true if own notoriety container is not empty or mob in zone has entity listed as battle target
@@ -343,7 +343,7 @@ public:
     virtual bool CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg);
 
     virtual auto IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*;
-    virtual auto IsValidTarget(EntityID_t target, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*;
+    virtual auto IsValidTarget(EntityId target, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity*;
 
     virtual void OnEngage(CAttackState&);
     virtual void OnDisengage(CAttackState&);
@@ -393,12 +393,12 @@ public:
 
     TraitList_t TraitList;
 
-    EntityID_t m_OwnerID{}; // ID of the attacking entity (after death will store the ID of the entity that dealt the final blow)
+    EntityId m_OwnerID{}; // ID of the attacking entity (after death will store the ID of the entity that dealt the final blow)
 
     CParty*           PParty;
     CBattleEntity*    PPet;
     CBattleEntity*    PMaster; // Owner/owner of the entity (applies to all combat entities)
-    EntityID_t        lastAttackerId_{};
+    EntityId          lastAttackerId_{};
     timer::time_point LastAttacked;
     timer::time_point m_LastRangedAttackTime{}; // Used to track ranged attack delay and prevent attacks that are too close together
     battlehistory_t   BattleHistory{};          // Stores info related to most recent combat actions taken towards this entity.
@@ -412,7 +412,7 @@ private:
     xi::Job           m_sjob;
     uint8             m_mlvl; // CURRENT level of the main job
     uint8             m_slvl; // CURRENT level of the sub job
-    EntityID_t        battleTarget_{};
+    EntityId          battleTarget_{};
     timer::time_point m_battleStartTime;
     uint16            m_battleID = 0; // Current battle the entity is participating in. Battle ID must match in order for entities to interact with each other.
 

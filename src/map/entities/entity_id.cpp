@@ -26,7 +26,7 @@
 #include "utils/zoneutils.h"
 #include "zone.h"
 
-EntityID_t::EntityID_t(const CBaseEntity* PEntity)
+EntityId::EntityId(const CBaseEntity* PEntity)
 {
     if (PEntity == nullptr)
     {
@@ -41,27 +41,27 @@ EntityID_t::EntityID_t(const CBaseEntity* PEntity)
     objtype       = PEntity->objtype;
 }
 
-void EntityID_t::clean()
+void EntityId::clean()
 {
-    *this = EntityID_t{};
+    *this = EntityId{};
 }
 
-auto EntityID_t::isSet() const -> bool
+auto EntityId::isSet() const -> bool
 {
     return targid != 0;
 }
 
-auto EntityID_t::isDynamic() const -> bool
+auto EntityId::isDynamic() const -> bool
 {
     return targid >= 0x700;
 }
 
-auto EntityID_t::operator==(const EntityID_t& other) const -> bool
+auto EntityId::operator==(const EntityId& other) const -> bool
 {
     return isDynamic() ? serial == other.serial : id == other.id;
 }
 
-auto EntityID_t::operator==(const CBaseEntity* PEntity) const -> bool
+auto EntityId::operator==(const CBaseEntity* PEntity) const -> bool
 {
     if (PEntity == nullptr)
     {
@@ -71,7 +71,7 @@ auto EntityID_t::operator==(const CBaseEntity* PEntity) const -> bool
     return PEntity->IsDynamicEntity() ? serial == PEntity->serial() : id == PEntity->id;
 }
 
-auto EntityID_t::resolveEntity() const -> CBaseEntity*
+auto EntityId::resolveEntity() const -> CBaseEntity*
 {
     if (targid == 0 || serial == 0)
     {

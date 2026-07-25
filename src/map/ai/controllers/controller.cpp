@@ -46,11 +46,11 @@ void CController::Reset()
 {
 }
 
-auto CController::Cast(const uint16 targid, const SpellID spellid) -> bool
+auto CController::Cast(const EntityId target, const SpellID spellid) -> bool
 {
     if (POwner)
     {
-        return POwner->PAI->Internal_Cast(targid, spellid);
+        return POwner->PAI->Internal_Cast(target.targid, spellid);
     }
     return false;
 }
@@ -82,25 +82,25 @@ auto CController::Disengage() -> bool
     return false;
 }
 
-auto CController::WeaponSkill(const uint16 targid, const uint16 wsid) -> bool
+auto CController::WeaponSkill(const EntityId target, const uint16 wsid) -> bool
 {
     if (POwner)
     {
-        return POwner->PAI->Internal_WeaponSkill(targid, wsid);
+        return POwner->PAI->Internal_WeaponSkill(target.targid, wsid);
     }
     return false;
 }
 
-auto CController::RangedAttack(const uint16 targid) -> bool
+auto CController::RangedAttack(const EntityId target) -> bool
 {
     if (POwner)
     {
-        return POwner->PAI->Internal_RangedAttack(targid);
+        return POwner->PAI->Internal_RangedAttack(target.targid);
     }
     return false;
 }
 
-auto CController::Ability(uint16 targid, uint16 abilityid) -> bool
+auto CController::Ability(EntityId target, uint16 abilityid) -> bool
 {
     return false;
 }

@@ -48,22 +48,21 @@ auto CPlayerController::Tick(timer::time_point /*tick*/) -> Task<void>
     co_return;
 }
 
-auto CPlayerController::Cast(uint16 targid, SpellID spellid) -> bool
+auto CPlayerController::Cast(const EntityId target, SpellID spellid) -> bool
 {
     auto* PChar = static_cast<CCharEntity*>(POwner);
     if (canAct() && !PChar->PRecastContainer->HasRecast(RECAST_MAGIC, static_cast<Recast>(spellid), 0s))
     {
-        if (auto target = PChar->GetEntity(targid); target && target->PAI->IsUntargetable())
+        if (const auto PTarget = target.resolve<CBattleEntity>(); PTarget && PTarget->PAI->IsUntargetable())
         {
             return false;
         }
-        return CController::Cast(targid, spellid);
+
+        return CController::Cast(target, spellid);
     }
-    else
-    {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToCast);
-        return false;
-    }
+
+    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToCast);
+    return false;
 }
 
 auto CPlayerController::Engage(uint16 targid) -> bool
@@ -113,7 +112,7 @@ auto CPlayerController::Disengage() -> bool
     return CController::Disengage();
 }
 
-auto CPlayerController::WeaponSkill(uint16 targid, uint16 wsid) -> bool
+auto CPlayerController::WeaponSkill(EntityId target, uint16 wsid) -> bool
 {
     auto* PChar = static_cast<CCharEntity*>(POwner);
     if (canAct() && PChar->PAI->CanChangeState())
@@ -161,7 +160,7 @@ auto CPlayerController::WeaponSkill(uint16 targid, uint16 wsid) -> bool
 
         std::unique_ptr<CBasicPacket> errMsg;
 
-        auto* PTarget = PChar->IsValidTarget(targid, battleutils::isValidSelfTargetWeaponskill(wsid) ? TARGET_SELF : TARGET_ENEMY, errMsg);
+        auto* PTarget = PChar->IsValidTarget(target, battleutils::isValidSelfTargetWeaponskill(wsid) ? TARGET_SELF : TARGET_ENEMY, errMsg);
         if (PTarget)
         {
             if (PTarget->PAI->IsUntargetable())
@@ -177,7 +176,7 @@ auto CPlayerController::WeaponSkill(uint16 targid, uint16 wsid) -> bool
 
             m_lastWeaponSkill = PWeaponSkill;
 
-            return CController::WeaponSkill(targid, wsid);
+            return CController::WeaponSkill(target, wsid);
         }
         else if (errMsg)
         {
@@ -191,7 +190,7 @@ auto CPlayerController::WeaponSkill(uint16 targid, uint16 wsid) -> bool
     return false;
 }
 
-auto CPlayerController::Ability(const uint16 targid, const uint16 abilityid) -> bool
+auto CPlayerController::Ability(EntityId target, const uint16 abilityid) -> bool
 {
     auto* PChar = static_cast<CCharEntity*>(POwner);
     if (canAct() && PChar->PAI->CanChangeState())
@@ -219,34 +218,33 @@ auto CPlayerController::Ability(const uint16 targid, const uint16 abilityid) -> 
             PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, static_cast<uint32>(std::max<int64>(timer::count_seconds(currentRecast), 0)), 0, MsgBasic::TimeLeft);
             return false;
         }
-        if (auto target = PChar->GetEntity(targid); target && target->PAI->IsUntargetable())
+
+        if (const auto PTarget = target.resolve<CBattleEntity>(); PTarget && PTarget->PAI->IsUntargetable())
         {
             return false;
         }
-        return PChar->PAI->Internal_Ability(targid, abilityid);
+
+        return PChar->PAI->Internal_Ability(target.targid, abilityid);
     }
-    else
-    {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToUseJobAbility);
-        return false;
-    }
+
+    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToUseJobAbility);
+    return false;
 }
 
-auto CPlayerController::RangedAttack(uint16 targid) -> bool
+auto CPlayerController::RangedAttack(const EntityId target) -> bool
 {
     auto* PChar = static_cast<CCharEntity*>(POwner);
     if (canAct() && PChar->PAI->CanChangeState())
     {
-        if (auto target = PChar->GetEntity(targid); target && target->PAI->IsUntargetable())
+        if (auto PTarget = target.resolve<CBattleEntity>(); PTarget && PTarget->PAI->IsUntargetable())
         {
             return false;
         }
-        return PChar->PAI->Internal_RangedAttack(targid);
+
+        return PChar->PAI->Internal_RangedAttack(target.targid);
     }
-    else
-    {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::WaitLonger);
-    }
+
+    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::WaitLonger);
     return false;
 }
 

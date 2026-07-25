@@ -548,27 +548,27 @@ auto CAutomatonController::TryHeal(const CurrentManeuvers& maneuvers) -> bool
     if (PCastTarget)
     {
         const auto missinghp = PCastTarget->GetMaxHP() - PCastTarget->health.hp;
-        if (missinghp > 850 && Cast(PCastTarget->targid, SpellID::Cure_VI))
+        if (missinghp > 850 && Cast(PCastTarget->entityId(), SpellID::Cure_VI))
         {
             return true;
         }
-        else if (missinghp > 600 && Cast(PCastTarget->targid, SpellID::Cure_V))
+        else if (missinghp > 600 && Cast(PCastTarget->entityId(), SpellID::Cure_V))
         {
             return true;
         }
-        else if (missinghp > 350 && Cast(PCastTarget->targid, SpellID::Cure_IV))
+        else if (missinghp > 350 && Cast(PCastTarget->entityId(), SpellID::Cure_IV))
         {
             return true;
         }
-        else if (missinghp > 190 && Cast(PCastTarget->targid, SpellID::Cure_III))
+        else if (missinghp > 190 && Cast(PCastTarget->entityId(), SpellID::Cure_III))
         {
             return true;
         }
-        else if (missinghp > 120 && Cast(PCastTarget->targid, SpellID::Cure_II))
+        else if (missinghp > 120 && Cast(PCastTarget->entityId(), SpellID::Cure_II))
         {
             return true;
         }
-        else if (Cast(PCastTarget->targid, SpellID::Cure))
+        else if (Cast(PCastTarget->entityId(), SpellID::Cure))
         {
             return true;
         }
@@ -609,14 +609,14 @@ auto CAutomatonController::CanCastSpells(const IgnoreRecastsAndCosts ignoreRecas
     return PAutomaton->PAI->CanChangeState();
 }
 
-auto CAutomatonController::Cast(const uint16 targid, SpellID spellid) -> bool
+auto CAutomatonController::Cast(const EntityId target, SpellID spellid) -> bool
 {
     if (!automaton::CanUseSpell(PAutomaton, spellid) || PAutomaton->PRecastContainer->HasRecast(RECAST_MAGIC, static_cast<Recast>(spellid), 0s))
     {
         return false;
     }
 
-    return CPetController::Cast(targid, spellid);
+    return CPetController::Cast(target, spellid);
 }
 
 auto CAutomatonController::MobSkill(const uint16 targid, uint16 wsid, const Maybe<timer::duration> castTimeOverride) -> bool
@@ -743,7 +743,7 @@ auto CAutomatonController::TryElemental(const CurrentManeuvers& maneuvers) -> bo
     {
         for (SpellID& id : castPriority)
         {
-            if (Cast(PTarget->targid, static_cast<SpellID>(static_cast<uint16>(id) + i)))
+            if (Cast(PTarget->entityId(), static_cast<SpellID>(static_cast<uint16>(id) + i)))
             {
                 return true;
             }
@@ -751,7 +751,7 @@ auto CAutomatonController::TryElemental(const CurrentManeuvers& maneuvers) -> bo
 
         for (SpellID& id : defaultPriority)
         {
-            if (Cast(PTarget->targid, static_cast<SpellID>(static_cast<uint16>(id) + i)))
+            if (Cast(PTarget->entityId(), static_cast<SpellID>(static_cast<uint16>(id) + i)))
             {
                 return true;
             }
@@ -1112,7 +1112,7 @@ auto CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers) -> boo
 
     for (SpellID& id : castPriority)
     {
-        if (automaton::CanUseEnfeeble(PTarget, id) && Cast(PTarget->targid, id))
+        if (automaton::CanUseEnfeeble(PTarget, id) && Cast(PTarget->entityId(), id))
         {
             return true;
         }
@@ -1120,7 +1120,7 @@ auto CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers) -> boo
 
     for (SpellID& id : defaultPriority)
     {
-        if (automaton::CanUseEnfeeble(PTarget, id) && Cast(PTarget->targid, id))
+        if (automaton::CanUseEnfeeble(PTarget, id) && Cast(PTarget->entityId(), id))
         {
             return true;
         }
@@ -1153,7 +1153,7 @@ auto CAutomatonController::TryStatusRemoval(const CurrentManeuvers& maneuvers) -
 
     for (SpellID& id : castPriority)
     {
-        if (Cast(PAutomaton->PMaster->targid, id))
+        if (Cast(PAutomaton->PMaster->entityId(), id))
         {
             return true;
         }
@@ -1176,7 +1176,7 @@ auto CAutomatonController::TryStatusRemoval(const CurrentManeuvers& maneuvers) -
 
     for (SpellID& id : castPriority)
     {
-        if (Cast(PAutomaton->targid, id))
+        if (Cast(PAutomaton->entityId(), id))
         {
             return true;
         }
@@ -1205,7 +1205,7 @@ auto CAutomatonController::TryStatusRemoval(const CurrentManeuvers& maneuvers) -
 
                 for (auto id : castPriority)
                 {
-                    if (Cast(member->targid, id))
+                    if (Cast(member->entityId(), id))
                     {
                         return true;
                     }
@@ -1226,7 +1226,7 @@ auto CAutomatonController::TryEnhance() -> bool
 
     if (PAutomaton->head() == AutomatonHead::Spiritreaver)
     {
-        return Cast(PAutomaton->targid, SpellID::Dread_Spikes);
+        return Cast(PAutomaton->entityId(), SpellID::Dread_Spikes);
     }
 
     uint16 highestEnmity = 0;
@@ -1470,19 +1470,19 @@ auto CAutomatonController::TryEnhance() -> bool
     // No info on how this spell worked
     if ((members - protectcount) >= 4)
     {
-        Cast(PAutomaton->targid, SpellID::Protectra_V);
+        Cast(PAutomaton->entityId(), SpellID::Protectra_V);
     }
 
     // No info on how this spell worked
     if ((members - shellcount) >= 4)
     {
-        Cast(PAutomaton->targid, SpellID::Shellra_V);
+        Cast(PAutomaton->entityId(), SpellID::Shellra_V);
     }
 
     if (PRegenTarget &&
         !(PRegenTarget->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Regen) || PRegenTarget->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::GeoRegen)))
     {
-        if (Cast(PRegenTarget->targid, SpellID::Regen_III) || Cast(PRegenTarget->targid, SpellID::Regen_II) || Cast(PRegenTarget->targid, SpellID::Regen))
+        if (Cast(PRegenTarget->entityId(), SpellID::Regen_III) || Cast(PRegenTarget->entityId(), SpellID::Regen_II) || Cast(PRegenTarget->entityId(), SpellID::Regen))
         {
             return true;
         }
@@ -1490,9 +1490,9 @@ auto CAutomatonController::TryEnhance() -> bool
 
     if (PProtectTarget)
     {
-        if (Cast(PProtectTarget->targid, SpellID::Protect_V) || Cast(PProtectTarget->targid, SpellID::Protect_IV) ||
-            Cast(PProtectTarget->targid, SpellID::Protect_III) || Cast(PProtectTarget->targid, SpellID::Protect_II) ||
-            Cast(PProtectTarget->targid, SpellID::Protect))
+        if (Cast(PProtectTarget->entityId(), SpellID::Protect_V) || Cast(PProtectTarget->entityId(), SpellID::Protect_IV) ||
+            Cast(PProtectTarget->entityId(), SpellID::Protect_III) || Cast(PProtectTarget->entityId(), SpellID::Protect_II) ||
+            Cast(PProtectTarget->entityId(), SpellID::Protect))
         {
             return true;
         }
@@ -1500,8 +1500,8 @@ auto CAutomatonController::TryEnhance() -> bool
 
     if (PShellTarget)
     {
-        if (Cast(PShellTarget->targid, SpellID::Shell_V) || Cast(PShellTarget->targid, SpellID::Shell_IV) || Cast(PShellTarget->targid, SpellID::Shell_III) ||
-            Cast(PShellTarget->targid, SpellID::Shell_II) || Cast(PShellTarget->targid, SpellID::Shell))
+        if (Cast(PShellTarget->entityId(), SpellID::Shell_V) || Cast(PShellTarget->entityId(), SpellID::Shell_IV) || Cast(PShellTarget->entityId(), SpellID::Shell_III) ||
+            Cast(PShellTarget->entityId(), SpellID::Shell_II) || Cast(PShellTarget->entityId(), SpellID::Shell))
         {
             return true;
         }
@@ -1509,7 +1509,7 @@ auto CAutomatonController::TryEnhance() -> bool
 
     if (PHasteTarget)
     {
-        if (Cast(PHasteTarget->targid, SpellID::Haste_II) || Cast(PHasteTarget->targid, SpellID::Haste))
+        if (Cast(PHasteTarget->entityId(), SpellID::Haste_II) || Cast(PHasteTarget->entityId(), SpellID::Haste))
         {
             return true;
         }
@@ -1517,7 +1517,7 @@ auto CAutomatonController::TryEnhance() -> bool
 
     if (PStoneSkinTarget)
     {
-        if (Cast(PStoneSkinTarget->targid, SpellID::Stoneskin))
+        if (Cast(PStoneSkinTarget->entityId(), SpellID::Stoneskin))
         {
             return true;
         }
@@ -1525,7 +1525,7 @@ auto CAutomatonController::TryEnhance() -> bool
 
     if (PPhalanxTarget)
     {
-        if (Cast(PPhalanxTarget->targid, SpellID::Phalanx))
+        if (Cast(PPhalanxTarget->entityId(), SpellID::Phalanx))
         {
             return true;
         }
