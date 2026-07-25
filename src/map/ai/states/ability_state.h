@@ -27,7 +27,7 @@
 class CAbilityState : public CState
 {
 public:
-    CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abilityid);
+    CAbilityState(CBattleEntity* PEntity, const EntityId& target, uint16 abilityid);
 
     auto GetAbility() const -> CAbility*;
     void ApplyEnmity() const;

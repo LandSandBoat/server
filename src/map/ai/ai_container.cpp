@@ -321,7 +321,7 @@ bool CAIContainer::Internal_Ability(const EntityId& target, uint16 abilityid)
             return false;
         }
 
-        return ChangeState<CAbilityState>(entity, target.targid, abilityid);
+        return ChangeState<CAbilityState>(entity, target, abilityid);
     }
     return false;
 }
