@@ -23,10 +23,7 @@ if not xi.module.isContentEnabled('ROV') then
     -- Stoneskin onEffectGain: Add defense buff when displayed as RAMPART
     m:addOverride('xi.effects.stoneskin.onEffectGain', function(target, effect)
         if effect:getIcon() == xi.effect.RAMPART then
-            effect:addMod(xi.mod.STONESKIN, effect:getSubPower())
             effect:addMod(xi.mod.DEF, effect:getPower())
-        else
-            effect:addMod(xi.mod.STONESKIN, effect:getPower())
         end
     end)
 end
