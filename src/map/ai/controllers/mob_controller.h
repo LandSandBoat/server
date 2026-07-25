@@ -43,7 +43,7 @@ public:
     void Despawn() override;
     void Reset() override;
 
-    virtual auto MobSkill(uint16 targid, uint16 wsid, Maybe<timer::duration> castTimeOverride) -> bool;
+    virtual auto MobSkill(EntityId target, uint16 wsid, Maybe<timer::duration> castTimeOverride) -> bool;
     auto         Ability(EntityId target, uint16 abilityid) -> bool override;
     auto         MobSkill(int listId = 0) -> bool;
     auto         TryCastSpell() -> bool;
@@ -72,7 +72,6 @@ protected:
     virtual auto DoCombatTick(timer::time_point tick) -> Task<void>;
     virtual auto DoBuffTick() -> bool;
     void         FaceTarget(const EntityId& target = {}) const;
-    void         FaceTarget(uint16 targid) const;
     virtual void HandleEnmity();
     virtual auto DoRoamTick(timer::time_point tick) -> Task<void>;
     void         Wait(timer::duration _duration);

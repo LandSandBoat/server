@@ -559,7 +559,7 @@ auto CTrustController::Ability(const EntityId target, uint16 abilityid) -> bool
 
     if (POwner->PAI->CanChangeState())
     {
-        return POwner->PAI->Internal_Ability(target.targid, abilityid);
+        return POwner->PAI->Internal_Ability(target, abilityid);
     }
 
     return false;
@@ -578,7 +578,7 @@ auto CTrustController::RangedAttack(const EntityId target) -> bool
     if (m_Tick - m_LastRangedAttackTime > rangedDelay && !m_InTransit)
     {
         FaceTarget(PTarget->entityId());
-        if (POwner->PAI->CanChangeState() && POwner->PAI->Internal_RangedAttack(target.targid))
+        if (POwner->PAI->CanChangeState() && POwner->PAI->Internal_RangedAttack(target))
         {
             m_LastRangedAttackTime = m_Tick;
         }

@@ -698,7 +698,7 @@ void CLuaClientEntityPairActions::skillchain(CLuaBaseEntity* target, sol::variad
     {
         PChar->health.tp = 3000;
 
-        PChar->PAI->Internal_WeaponSkill(PMob->targid, wsIds[i]);
+        PChar->PAI->Internal_WeaponSkill(EntityId(PMob), wsIds[i]);
         parent_->simulation()->skipTime(2);
 
         if (i >= 1)

@@ -50,7 +50,7 @@ auto CController::Cast(const EntityId target, const SpellID spellid) -> bool
 {
     if (POwner)
     {
-        return POwner->PAI->Internal_Cast(target.targid, spellid);
+        return POwner->PAI->Internal_Cast(target, spellid);
     }
     return false;
 }
@@ -86,7 +86,7 @@ auto CController::WeaponSkill(const EntityId target, const uint16 wsid) -> bool
 {
     if (POwner)
     {
-        return POwner->PAI->Internal_WeaponSkill(target.targid, wsid);
+        return POwner->PAI->Internal_WeaponSkill(target, wsid);
     }
     return false;
 }
@@ -95,7 +95,7 @@ auto CController::RangedAttack(const EntityId target) -> bool
 {
     if (POwner)
     {
-        return POwner->PAI->Internal_RangedAttack(target.targid);
+        return POwner->PAI->Internal_RangedAttack(target);
     }
     return false;
 }

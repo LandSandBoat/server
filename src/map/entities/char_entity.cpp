@@ -1964,18 +1964,18 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 actionResult.animation        = ActionAnimation::PetSkillStart;
                 actionResult.resolution       = ActionResolution::Hit;
 
-                auto PPetTarget = PTarget->targid;
+                auto PPetTarget = PTarget->entityId();
 
                 // set primary target for jug ready abilities (JA targets the player, but the pet acts like a mob and makes its own decision on the skill target)
                 if (PPetEntity->getPetType() == PET_TYPE::JUG_PET)
                 {
                     if (PPetSkill->getValidTargets() & TARGET_ENEMY)
                     {
-                        PPetTarget = PPetEntity->GetBattleTargetID();
+                        PPetTarget = PPetEntity->battleTarget();
                     }
                     else
                     {
-                        PPetTarget = PPetEntity->targid;
+                        PPetTarget = PPetEntity->entityId();
                     }
                 }
 

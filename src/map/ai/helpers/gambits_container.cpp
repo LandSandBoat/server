@@ -947,7 +947,7 @@ auto CGambitsContainer::Tick(timer::time_point tick) -> Task<void>
             {
                 if (action.select == G_SELECT::SPECIFIC)
                 {
-                    controller->MobSkill(target->targid, action.select_arg, std::nullopt);
+                    controller->MobSkill(target->entityId(), action.select_arg, std::nullopt);
                     executedAnyAction = true;
                 }
             }
@@ -1836,7 +1836,7 @@ bool CGambitsContainer::TryTrustSkill()
             {
                 target = POwner->GetBattleTarget();
             }
-            controller->MobSkill(target->targid, chosen_skill->skill_id, std::nullopt);
+            controller->MobSkill(target->entityId(), chosen_skill->skill_id, std::nullopt);
         }
         return true;
     }

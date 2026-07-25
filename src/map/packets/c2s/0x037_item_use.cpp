@@ -104,7 +104,7 @@ void GP_CLI_COMMAND_ITEM_USE::process(MapSession* PSession, CCharEntity* PChar) 
     // TODO: Using a charged item on a non-eligible target (i.e. Soultrapper): Cannot use the <item> on <target>.
     if (PChar->UContainer->GetType() != UCONTAINER_USEITEM)
     {
-        PChar->PAI->UseItem(this->ActIndex, this->Category, this->PropertyItemIndex);
+        PChar->PAI->UseItem(EntityId(PChar->GetEntity(this->ActIndex)), this->Category, this->PropertyItemIndex);
     }
     else
     {
