@@ -105,6 +105,17 @@ UPDATE zone_settings
 SET misc = misc | @MISC_MAZURKA
 WHERE (zonetype & (@TYPE_CITY | @TYPE_OUTDOORS)) <> 0;
 
+-- Pianissimo: Revert learned level from 20 to 45
+-- Source: https://forum.square-enix.com/ffxi/threads/29150-December-13-2012-%28JST%29-Version-Update
+UPDATE abilities SET level = 45 WHERE name = 'pianissimo';
+
+-- Nightingale: Revert recast from 10 to 20 minutes
+-- Source: https://www.bg-wiki.com/ffxi/Version_Update_(03/26/2012)
+UPDATE abilities SET recastTime = 1200 WHERE name = 'nightingale';
+
+-- Troubadour: Revert recast from 10 to 20 minutes
+UPDATE abilities SET recastTime = 1200 WHERE name = 'troubadour';
+
 ------------------------------------
 -- Samurai
 -- Source: https://www.bg-wiki.com/ffxi/Version_Update_(02/13/2012)

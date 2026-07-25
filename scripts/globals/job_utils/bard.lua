@@ -35,13 +35,13 @@ xi.job_utils.bard.usePianissimo = function(player, target, ability)
     return xi.effect.PIANISSIMO
 end
 
-xi.job_utils.bard.useNightingale = function(player, target, ability)
+xi.job_utils.bard.useNightingale = function(player, target, ability, action)
     player:addStatusEffect(xi.effect.NIGHTINGALE, { duration = 60, origin = player })
 
     return xi.effect.NIGHTINGALE
 end
 
-xi.job_utils.bard.useTroubadour = function(player, target, ability)
+xi.job_utils.bard.useTroubadour = function(player, target, ability, action)
     player:addStatusEffect(xi.effect.TROUBADOUR, { duration = 60, origin = player })
 
     return xi.effect.TROUBADOUR
