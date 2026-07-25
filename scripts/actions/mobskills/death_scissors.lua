@@ -21,11 +21,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     params.shadowBehavior   = xi.mobskills.shadowBehavior.NUMSHADOWS_1
     params.attackMultiplier = { 2.5, 2.5, 2.5 }
     params.canCrit          = true
-    params.criticalChance   = { 0.10, 0.20, 0.25 } -- TODO: Capture crit rate
-
-    if mob:getPool() == xi.mobPool.KING_VINEGARROON then
-        params.criticalChance = { 1.00, 1.00, 1.00 }
-    end
+    params.criticalChance   = { 1.00, 1.00, 1.00 }
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 
