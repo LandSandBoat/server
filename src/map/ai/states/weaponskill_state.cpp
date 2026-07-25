@@ -34,8 +34,8 @@
 #include "utils/zoneutils.h"
 #include "weapon_skill.h"
 
-CWeaponSkillState::CWeaponSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsid)
-: CState(PEntity, targid)
+CWeaponSkillState::CWeaponSkillState(CBattleEntity* PEntity, const EntityId& target, const uint16 wsid)
+: CState(PEntity, target)
 , m_PEntity(PEntity)
 {
     auto* skill = battleutils::GetWeaponSkill(wsid);

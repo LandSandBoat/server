@@ -276,7 +276,7 @@ bool CAIContainer::Internal_WeaponSkill(const EntityId& target, uint16 wsid)
             return false;
         }
 
-        return ChangeState<CWeaponSkillState>(entity, target.targid, wsid);
+        return ChangeState<CWeaponSkillState>(entity, target, wsid);
     }
     return false;
 }
