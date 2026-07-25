@@ -1,8 +1,8 @@
 -----------------------------------
 -- Area: Dragons Aery
---  NPC: qm0 (???)
+--  NPC: qm_fafnir (???)
 -- Spawns Fafnir or Nidhogg
--- !pos -81 32 2 178
+-- !pos 82 6 42 154
 -----------------------------------
 local ID = zones[xi.zone.DRAGONS_AERY]
 -----------------------------------

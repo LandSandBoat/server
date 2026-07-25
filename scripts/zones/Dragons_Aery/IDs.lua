@@ -29,7 +29,7 @@ zones[xi.zone.DRAGONS_AERY] =
     },
     npc =
     {
-        FAFNIR_QM = GetFirstID('qm0'),
+        FAFNIR_QM = GetFirstID('qm_fafnir'),
     },
 }
 

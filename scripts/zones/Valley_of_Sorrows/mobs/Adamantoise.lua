@@ -2,7 +2,6 @@
 -- Area: Valley of Sorrows
 --  HNM: Adamantoise
 -----------------------------------
-local ID = zones[xi.zone.VALLEY_OF_SORROWS]
 mixins =
 {
     require('scripts/mixins/rage'),
@@ -29,9 +28,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    -- Despawn the ???
-    GetNPCByID(ID.npc.ADAMANTOISE_QM):setStatus(xi.status.DISAPPEAR)
-
     mob:setMod(xi.mod.DEF, 4112)
     mob:setMod(xi.mod.ATT, 450)
     mob:setMod(xi.mod.DMGMAGIC, -3500)
@@ -43,11 +39,6 @@ entity.onMobDeath = function(mob, player, optParams)
     if player then
         player:addTitle(xi.title.TORTOISE_TORTURER)
     end
-end
-
-entity.onMobDespawn = function(mob)
-    -- Respawn the ???
-    GetNPCByID(ID.npc.ADAMANTOISE_QM):updateNPCHideTime(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
 end
 
 return entity

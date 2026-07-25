@@ -2,7 +2,6 @@
 -- Area: Dragons Aery
 --  HNM: Nidhogg
 -----------------------------------
-local ID = zones[xi.zone.DRAGONS_AERY]
 mixins = { require('scripts/mixins/rage') }
 -----------------------------------
 ---@type TMobEntity
@@ -26,8 +25,6 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.REGAIN, 100) -- Ability every 30 seconds below 25% HP
     mob:setMod(xi.mod.REGEN, 20) -- 1% every 90s
     mob:setMod(xi.mod.STUN_RES_RANK, 10)
-    -- Despawn the ???
-    GetNPCByID(ID.npc.FAFNIR_QM):setStatus(xi.status.DISAPPEAR)
 end
 
 entity.onMobFight = function(mob, target)
@@ -68,11 +65,6 @@ entity.onMobDeath = function(mob, player, optParams)
     if player then
         player:addTitle(xi.title.NIDHOGG_SLAYER)
     end
-end
-
-entity.onMobDespawn = function(mob)
-    -- Respawn the ???
-    GetNPCByID(ID.npc.FAFNIR_QM):updateNPCHideTime(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
 end
 
 return entity

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Behemoth's Dominion
---  NPC: qm2 (???)
+--  NPC: qm_behemoth (???)
 -- Spawns Behemoth or King Behemoth
 -- !pos -267 -19 74 127
 -----------------------------------

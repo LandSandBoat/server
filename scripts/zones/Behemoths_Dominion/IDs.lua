@@ -49,7 +49,7 @@ zones[xi.zone.BEHEMOTHS_DOMINION] =
     },
     npc =
     {
-        BEHEMOTH_QM      = GetFirstID('qm2'),
+        BEHEMOTH_QM      = GetFirstID('qm_behemoth'),
         CERMET_HEADSTONE = GetFirstID('Cermet_Headstone'),
     },
 }
