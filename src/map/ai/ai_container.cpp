@@ -361,7 +361,7 @@ bool CAIContainer::Internal_UseItem(const EntityId& target, uint8 loc, uint8 slo
             return false;
         }
 
-        return ChangeState<CItemState>(entity, target.targid, loc, slotid);
+        return ChangeState<CItemState>(entity, target, loc, slotid);
     }
     return false;
 }

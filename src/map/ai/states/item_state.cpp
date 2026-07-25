@@ -44,8 +44,8 @@
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
 
-CItemState::CItemState(CCharEntity* PEntity, const uint16 targid, const uint8 loc, const uint8 slotid)
-: CState(PEntity, targid)
+CItemState::CItemState(CCharEntity* PEntity, const EntityId& target, const uint8 loc, const uint8 slotid)
+: CState(PEntity, target)
 , m_PEntity(PEntity)
 , m_PItem(nullptr)
 , m_location(loc)
@@ -86,7 +86,7 @@ CItemState::CItemState(CCharEntity* PEntity, const uint16 targid, const uint8 lo
         throw CStateInitException(std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, 0, 0, MsgBasic::UnableToUseItem));
     }
 
-    UpdateTarget(PEntity->IsValidTarget(targid, m_PItem->getValidTarget(), m_errorMsg));
+    UpdateTarget(PEntity->IsValidTarget(target, m_PItem->getValidTarget(), m_errorMsg));
     auto* PTarget = GetTarget();
 
     if (!PTarget || this->HasErrorMsg())
