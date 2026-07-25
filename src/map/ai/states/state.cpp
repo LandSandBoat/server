@@ -55,6 +55,11 @@ auto CState::GetTarget() const -> CBaseEntity*
 
 auto CState::GetTargetID() const -> uint16
 {
+    if (target_.isSet())
+    {
+        return target_.targid;
+    }
+
     return m_targid;
 }
 

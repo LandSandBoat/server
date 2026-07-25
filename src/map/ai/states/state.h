@@ -78,9 +78,10 @@ protected:
     std::unique_ptr<CBasicPacket> m_errorMsg;
 
     CBaseEntity* const m_PEntity;
-    uint16             m_targid{ 0 };
 
 private:
+    uint16            m_targid{ 0 };
+    EntityId          target_{};
     CBaseEntity*      m_PTarget{ nullptr };
     bool              m_completed{ false };
     timer::time_point m_entryTime{ timer::now() };
