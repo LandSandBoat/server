@@ -40,6 +40,7 @@ public:
 class CState
 {
 public:
+    CState(CBaseEntity* PEntity, const EntityId& target);
     CState(CBaseEntity* PEntity, uint16 _targid);
 
     virtual ~CState() = default;
@@ -64,6 +65,7 @@ public:
     virtual auto CanInterrupt() -> bool = 0;
     auto         IsCompleted() const -> bool;
     void         ResetEntryTime();
+    void         SetTarget(const EntityId& target);
 
 protected:
     // state logic done per tick - returns whether to exit the state or not

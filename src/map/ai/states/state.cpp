@@ -32,6 +32,13 @@ void CState::TryInterrupt(CBattleEntity* PAttacker)
 {
 }
 
+CState::CState(CBaseEntity* PEntity, const EntityId& target)
+: m_PEntity(PEntity)
+, m_targid(target.targid)
+, target_(target)
+{
+}
+
 CState::CState(CBaseEntity* PEntity, const uint16 _targid)
 : m_PEntity(PEntity)
 , m_targid(_targid)
@@ -76,6 +83,16 @@ auto CState::GetEntryTime() const -> timer::time_point
 void CState::ResetEntryTime()
 {
     m_entryTime = timer::now();
+}
+
+void CState::SetTarget(const EntityId& target)
+{
+    if (!target_.isSet() || target_ != target)
+    {
+        target_ = target;
+        m_targid = target.targid;
+        UpdateTarget(target.targid);
+    }
 }
 
 void CState::SetTarget(const uint16 targid)
