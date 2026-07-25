@@ -306,7 +306,7 @@ bool CAIContainer::Internal_PetSkill(const EntityId& target, uint16 abilityid)
             return false;
         }
 
-        return ChangeState<CPetSkillState>(entity, target.targid, abilityid);
+        return ChangeState<CPetSkillState>(entity, target, abilityid);
     }
     return false;
 }
