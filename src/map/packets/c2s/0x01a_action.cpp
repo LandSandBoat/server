@@ -342,7 +342,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
                 return;
             }
 
-            PChar->PAI->WeaponSkill(this->ActIndex, this->Weaponskill.SkillId);
+            PChar->PAI->WeaponSkill(EntityId(PChar->GetEntity(this->ActIndex)), this->Weaponskill.SkillId);
         }
         break;
         case GP_CLI_COMMAND_ACTION_ACTIONID::JobAbility:

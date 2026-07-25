@@ -52,7 +52,7 @@ public:
     bool Engage(uint16 targid);
     bool ChangeTarget(uint16 targid);
     bool Disengage();
-    bool WeaponSkill(uint16 targid, uint16 wsid);
+    bool WeaponSkill(const EntityId& target, uint16 wsid) const;
     bool MobSkill(uint16 targid, uint16 wsid, Maybe<timer::duration> castTimeOverride);
     bool PetSkill(uint16 targid, uint16 wsid);
     bool Ability(const EntityId& target, uint16 abilityid) const;

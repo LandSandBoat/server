@@ -37,7 +37,7 @@ public:
     auto Engage(uint16 targid) -> bool override;
     auto ChangeTarget(uint16 targid) -> bool override;
     auto Disengage() -> bool override;
-    auto WeaponSkill(uint16 targid, uint16 wsid) -> bool override;
+    auto WeaponSkill(EntityId target, uint16 wsid) -> bool override;
     auto Ability(EntityId target, uint16 abilityid) -> bool override;
     auto RangedAttack(EntityId target) -> bool override;
     auto UseItem(uint16 targid, uint8 loc, uint8 slotid) -> bool;

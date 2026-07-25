@@ -97,11 +97,11 @@ bool CAIContainer::Disengage()
     return false;
 }
 
-bool CAIContainer::WeaponSkill(uint16 targid, uint16 wsid)
+auto CAIContainer::WeaponSkill(const EntityId& target, const uint16 wsid) const -> bool
 {
     if (Controller)
     {
-        return Controller->WeaponSkill(targid, wsid);
+        return Controller->WeaponSkill(target, wsid);
     }
     return false;
 }

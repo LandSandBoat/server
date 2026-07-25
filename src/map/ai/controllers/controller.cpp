@@ -82,11 +82,11 @@ auto CController::Disengage() -> bool
     return false;
 }
 
-auto CController::WeaponSkill(const uint16 targid, const uint16 wsid) -> bool
+auto CController::WeaponSkill(const EntityId target, const uint16 wsid) -> bool
 {
     if (POwner)
     {
-        return POwner->PAI->Internal_WeaponSkill(targid, wsid);
+        return POwner->PAI->Internal_WeaponSkill(target.targid, wsid);
     }
     return false;
 }

@@ -1824,7 +1824,7 @@ bool CGambitsContainer::TryTrustSkill()
             {
                 target = POwner->GetBattleTarget();
             }
-            controller->WeaponSkill(target->targid, PWeaponSkill->getID());
+            controller->WeaponSkill(target->entityId(), PWeaponSkill->getID());
         }
         else // Mobskill
         {

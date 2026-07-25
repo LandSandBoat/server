@@ -112,7 +112,7 @@ auto CPlayerController::Disengage() -> bool
     return CController::Disengage();
 }
 
-auto CPlayerController::WeaponSkill(uint16 targid, uint16 wsid) -> bool
+auto CPlayerController::WeaponSkill(EntityId target, uint16 wsid) -> bool
 {
     auto* PChar = static_cast<CCharEntity*>(POwner);
     if (canAct() && PChar->PAI->CanChangeState())
@@ -160,7 +160,7 @@ auto CPlayerController::WeaponSkill(uint16 targid, uint16 wsid) -> bool
 
         std::unique_ptr<CBasicPacket> errMsg;
 
-        auto* PTarget = PChar->IsValidTarget(targid, battleutils::isValidSelfTargetWeaponskill(wsid) ? TARGET_SELF : TARGET_ENEMY, errMsg);
+        auto* PTarget = PChar->IsValidTarget(target, battleutils::isValidSelfTargetWeaponskill(wsid) ? TARGET_SELF : TARGET_ENEMY, errMsg);
         if (PTarget)
         {
             if (PTarget->PAI->IsUntargetable())
@@ -176,7 +176,7 @@ auto CPlayerController::WeaponSkill(uint16 targid, uint16 wsid) -> bool
 
             m_lastWeaponSkill = PWeaponSkill;
 
-            return CController::WeaponSkill(targid, wsid);
+            return CController::WeaponSkill(target, wsid);
         }
         else if (errMsg)
         {

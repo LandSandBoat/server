@@ -125,7 +125,7 @@ auto CPlayerCharmController::ChangeTarget(uint16 targid) -> bool
     return false;
 }
 
-auto CPlayerCharmController::WeaponSkill(uint16 targid, uint16 wsid) -> bool
+auto CPlayerCharmController::WeaponSkill(EntityId target, uint16 wsid) -> bool
 {
     return false;
 }
