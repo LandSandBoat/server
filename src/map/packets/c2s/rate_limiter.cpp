@@ -21,23 +21,51 @@
 
 #include "rate_limiter.h"
 
+#include "common/logging.h"
+#include "common/lua.h"
+
 #include "entities/char_entity.h"
+#include "enums/packet_c2s.h"
 
-using namespace std::chrono_literals;
-
-// TODO: Move these to settings once the settings system supports nested tables.
 PacketRateLimiter::PacketRateLimiter()
 {
-    rateLimits_[0x017] = 1s;    // Invalid NPC Information Response
-    rateLimits_[0x03B] = 1s;    // Mannequin Equip
-    rateLimits_[0x05D] = 1s;    // Emotes
-    rateLimits_[0x083] = 250ms; // Vendor Shop Purchase
-    rateLimits_[0x0AA] = 250ms; // Guild Shop Purchase
-    rateLimits_[0x0B7] = 1s;    // Assist Channel
-    rateLimits_[0x0F4] = 1s;    // Wide Scan
-    rateLimits_[0x0F5] = 1s;    // Wide Scan Track
-    rateLimits_[0x11B] = 2s;    // Set Job Master Display
-    rateLimits_[0x11D] = 2s;    // Jump
+    const auto limits = lua["xi"]["settings"]["network"]["PACKET_RATE_LIMITS"].get_or_create<sol::table>();
+    if (limits.empty())
+    {
+        ShowWarning("network.PACKET_RATE_LIMITS is missing or empty, no packets will be rate limited");
+        return;
+    }
+
+    for (const auto& [keyObj, valueObj] : limits)
+    {
+        if (keyObj.get_type() != sol::type::string || valueObj.get_type() != sol::type::number)
+        {
+            ShowWarning("PACKET_RATE_LIMITS: expected entries of the form <packet name> = <milliseconds>, ignoring entry");
+            continue;
+        }
+
+        const auto packetName    = keyObj.as<std::string>();
+        const auto maybePacketId = magic_enum::enum_cast<PacketC2S>(packetName);
+        if (!maybePacketId.has_value())
+        {
+            ShowWarningFmt("PACKET_RATE_LIMITS: unknown packet name {}, ignoring entry", packetName);
+            continue;
+        }
+
+        const auto milliseconds = valueObj.as<double>();
+        if (milliseconds < 0.0)
+        {
+            ShowWarningFmt("PACKET_RATE_LIMITS: negative duration for {}, ignoring entry", packetName);
+            continue;
+        }
+
+        if (milliseconds == 0.0)
+        {
+            continue;
+        }
+
+        rateLimits_[static_cast<uint16>(*maybePacketId)] = std::chrono::milliseconds(static_cast<int64>(milliseconds));
+    }
 }
 
 auto PacketRateLimiter::isLimited(CCharEntity* PChar, uint16 packetId) -> bool
