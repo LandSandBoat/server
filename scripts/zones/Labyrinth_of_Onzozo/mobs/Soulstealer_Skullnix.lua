@@ -65,10 +65,8 @@ entity.spawnPoints =
 
 entity.phList =
 {
-    [ID.mob.SOULSTEALER_SKULLNIX + 20] = ID.mob.SOULSTEALER_SKULLNIX, -- Goblin_Shepherd:  38.347 5.500 178.050
-    [ID.mob.SOULSTEALER_SKULLNIX + 25] = ID.mob.SOULSTEALER_SKULLNIX, -- Goblin_Shepherd:  41.150 5.026 204.483
-    [ID.mob.SOULSTEALER_SKULLNIX + 16] = ID.mob.SOULSTEALER_SKULLNIX, -- Goblin_Mercenary: 43.103 5.677 181.977
-    [ID.mob.SOULSTEALER_SKULLNIX + 13] = ID.mob.SOULSTEALER_SKULLNIX, -- Goblin_Bandit:    5.096 3.930 166.865
+    [ID.mob.SOULSTEALER_SKULLNIX + 11] = ID.mob.SOULSTEALER_SKULLNIX, -- Goblin_Alchemist: 13.729 4.814 166.295
+    [ID.mob.SOULSTEALER_SKULLNIX + 19] = ID.mob.SOULSTEALER_SKULLNIX, -- Goblin_Bandit:    29.024 3.474 185.723
 }
 
 entity.onMobInitialize = function(mob)

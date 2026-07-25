@@ -34,12 +34,6 @@ zones[xi.zone.RANGUEMONT_PASS] =
     {
         GLOOM_EYE    = GetFirstID('Gloom_Eye'),
         HYAKUME      = GetFirstID('Hyakume'),
-        TAISAIJIN_PH =
-        {
-            17457213, -- -18.325 1.830 -114.932
-            17457214, -- -5.188 11.730 -141.503
-            17457215, -- 59.15 -120 50
-        },
         TAISAIJIN    = GetFirstID('Taisaijin'),
         TROS         = GetFirstID('Tros'),
     },

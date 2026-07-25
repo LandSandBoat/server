@@ -28,22 +28,31 @@ end
 
 entity.onMobDespawn = function(mob)
     local phIndex = mob:getLocalVar('phIndex')
-    local ph = GetMobByID(ID.mob.TAISAIJIN_PH[phIndex])
+
+    -- Taisaijin can spawn outside of the grow system with no placeholder index, so pick one at random.
+    if
+        phIndex < 1 or
+        phIndex > 3
+    then
+        phIndex = math.randomInt(1, 3)
+    end
+
+    local currentPH = GetMobByID(ID.mob.TAISAIJIN - phIndex)
 
     -- allow current placeholder to respawn
-    if ph then
+    if currentPH then
         DisallowRespawn(mob:getID(), true)
-        DisallowRespawn(ph:getID(), false)
-        ph:setRespawnTime(GetMobRespawnTime(ph:getID()))
+        DisallowRespawn(ID.mob.TAISAIJIN - phIndex, false)
+        currentPH:setRespawnTime(GetMobRespawnTime(ID.mob.TAISAIJIN - phIndex))
     end
 
     -- pick next placeholder
     phIndex = (phIndex % 3) + 1
-    ph = GetMobByID(ID.mob.TAISAIJIN_PH[phIndex])
+    local nextPH  = GetMobByID(ID.mob.TAISAIJIN - phIndex)
 
-    if ph then
-        ph:setLocalVar('timeToGrow', GetSystemTime() + math.randomInt(86400, 259200)) -- 1 to 3 days
-        ph:setLocalVar('phIndex', phIndex)
+    if nextPH then
+        nextPH:setLocalVar('timeToGrow', GetSystemTime() + math.randomInt(86400, 259200)) -- 1 to 3 days
+        nextPH:setLocalVar('phIndex', phIndex)
     end
 end
 

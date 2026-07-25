@@ -7,14 +7,15 @@ local ID = zones[xi.zone.RANGUEMONT_PASS]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    -- pick a random Taisaijin PH and set its do not disturb time
-    local phIndex = math.randomInt(1, 3)
-    local ph = GetMobByID(ID.mob.TAISAIJIN_PH[phIndex])
-
-    if ph then
-        ph:setLocalVar('timeToGrow', GetSystemTime() + math.randomInt(86400, 259200)) -- 1 to 3 days
-        ph:setLocalVar('phIndex', phIndex)
+    -- Pick a random Taisaijin PH and set its do not disturb time
+    local offset      = math.randomInt(1, 3)
+    local taisaijinPH = GetMobByID(ID.mob.TAISAIJIN - offset)
+    if not taisaijinPH then
+        return
     end
+
+    taisaijinPH:setLocalVar('timeToGrow', GetSystemTime() + math.randomInt(86400, 259200)) -- 1 to 3 days
+    taisaijinPH:setLocalVar('phIndex', offset)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
