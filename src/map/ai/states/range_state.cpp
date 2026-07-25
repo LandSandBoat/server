@@ -37,11 +37,11 @@
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
 
-CRangeState::CRangeState(CBattleEntity* PEntity, const uint16 targid)
-: CState(PEntity, targid)
+CRangeState::CRangeState(CBattleEntity* PEntity, const EntityId& target)
+: CState(PEntity, target)
 , m_PEntity(PEntity)
 {
-    auto* PTarget = m_PEntity->IsValidTarget(GetTargetID(), TARGET_ENEMY, m_errorMsg);
+    auto* PTarget = m_PEntity->IsValidTarget(target, TARGET_ENEMY, m_errorMsg);
 
     if (!PTarget || this->HasErrorMsg())
     {

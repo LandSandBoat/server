@@ -36,7 +36,7 @@ enum MAGICFLAGS
 class CMagicState : public CState
 {
 public:
-    CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid, uint8 flags = 0);
+    CMagicState(CBattleEntity* PEntity, const EntityId& target, SpellID spellid, uint8 flags = 0);
 
     auto Update(timer::time_point tick) -> bool override;
     void Cleanup(timer::time_point tick) override;

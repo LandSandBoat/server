@@ -232,7 +232,7 @@ bool CAIContainer::Internal_Cast(EntityId target, SpellID spellid)
             return false;
         }
 
-        return ChangeState<CMagicState>(entity, target.targid, spellid);
+        return ChangeState<CMagicState>(entity, target, spellid);
     }
     return false;
 }
@@ -336,7 +336,7 @@ bool CAIContainer::Internal_RangedAttack(const EntityId& target)
             return false;
         }
 
-        return ChangeState<CRangeState>(entity, target.targid);
+        return ChangeState<CRangeState>(entity, target);
     }
     return false;
 }
