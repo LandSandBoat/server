@@ -1,8 +1,6 @@
 -----------------------------------
 -- Global file for magic based skills magic hit rate.
 -----------------------------------
--- NOTE: Remove dependency to magic burst by feeding if its a magic burst directly. Then move file to scripts/combat/basic.
------------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.magicHitRate = xi.combat.magicHitRate or {}
@@ -281,7 +279,7 @@ end
 
 -- Magic Accuracy from Magic Burst.
 local function magicAccuracyFromMagicBurst(target, params)
-    if params.actorStat == 0 then
+    if params.magicalElement == xi.element.NONE then
         return 0
     end
 
@@ -537,19 +535,7 @@ local function validateParameters(actor, target, fedData)
     return params
 end
 
-xi.combat.magicHitRate.calculateResistRate = function(actor, target, spellGroup, skillType, skillRank, actionElement, statUsed, effectId, bonusMacc)
-    local fedData = -- Temporal measure: Table fed parameters. TODO: Feed a table to this function directly.
-    {
-        effectId       = utils.defaultIfNil(effectId, 0),
-        magicalElement = utils.defaultIfNil(actionElement, 0),
-        bonusMacc      = utils.defaultIfNil(bonusMacc, 0),
-        magicBurstTier = utils.defaultIfNil(xi.combat.magicBurst.getMagicBurstTier(target, actionElement), 0),
-        actorStat      = utils.defaultIfNil(statUsed, 0),
-        skillType      = utils.defaultIfNil(skillType, 0),
-        skillRank      = utils.defaultIfNil(skillRank, 0),
-        spellGroup     = utils.defaultIfNil(spellGroup, 0),
-    }
-
+xi.combat.magicHitRate.calculateResistRate = function(actor, target, fedData)
     -- Validate fed parameters.
     local params = validateParameters(actor, target, fedData)
 

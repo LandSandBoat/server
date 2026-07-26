@@ -1109,15 +1109,24 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local skillType       = spell:getSkillType()
     local spellGroup      = spell:getSpellGroup()
     local statUsed        = xi.spells.damage.pTable[spellId][column.STAT_USED]
-    local bonusMacc       = xi.spells.damage.pTable[spellId][column.BONUS_MACC] + cardinalChantBonus(caster, target, xi.direction.SOUTH, spellId, skillType)
     local forceDayWeather = xi.spells.damage.pTable[spellId][column.FORCE_DAY_WEATHER]
+
+    local maccParams =
+    {
+        magicBurstTier = canMBurst and magicBurstTier or 0,
+        magicalElement = spellElement,
+        actorStat      = statUsed,
+        skillType      = skillType,
+        spellGroup     = spellGroup,
+        bonusMacc      = xi.spells.damage.pTable[spellId][column.BONUS_MACC] + cardinalChantBonus(caster, target, xi.direction.SOUTH, spellId, skillType),
+    }
 
     -- Calculate base damage and the rest of damage multipliers.
     local spellDamage                 = xi.spells.damage.calculateBaseDamage(caster, target, spellId, spellGroup, skillType, statUsed)
     local multipleTargetReduction     = xi.spells.damage.calculateMTDR(caster, spell)
     local elementalStaffBonus         = xi.spells.damage.calculateElementalStaffBonus(caster, spellElement)
     local elementalAffinityBonus      = xi.spells.damage.calculateElementalAffinityBonus(caster, spellElement)
-    local resistTier                  = not absorb and xi.combat.magicHitRate.calculateResistRate(caster, target, spellGroup, skillType, 0, spellElement, statUsed, 0, bonusMacc) or 1
+    local resistTier                  = not absorb and xi.combat.magicHitRate.calculateResistRate(caster, target, maccParams) or 1
     local additionalResistTier        = not absorb and xi.spells.damage.calculateAdditionalResistTier(caster, target, spellElement) or 1
     local magicBurst                  = canMBurst and xi.spells.damage.calculateIfMagicBurst(caster, target, spellElement, magicBurstTier) or 1
     local magicBurstBonus             = canMBurst and xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spellId, skillType, spellElement) or 1

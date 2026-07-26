@@ -21,7 +21,6 @@ itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, it
         limitUndead     = true,
         drainHP         = true,
         overDrain       = true,
-        animation       = xi.subEffect.DARKNESS_DAMAGE,
     }
 
     return xi.combat.action.executeAddEffectDamage(actor, target, pTable)

@@ -243,10 +243,17 @@ local function calculateHybridMagicDamage(tp, physicaldmg, attacker, target, wsP
         wsd = wsd + attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)
     end
 
+    local maccParams =
+    {
+        magicalElement = wsParams.ele,
+        skillType      = wsParams.skill,
+        bonusMacc      = calcParams.bonusAcc,
+    }
+
     magicdmg = math.floor(magicdmg * (100 + wsd) / 100)
     magicdmg = math.floor(addBonusesAbility(attacker, wsParams.ele, target, magicdmg, wsParams))
     magicdmg = math.floor(magicdmg + calcParams.bonusfTP * physicaldmg)
-    magicdmg = math.floor(magicdmg * xi.combat.magicHitRate.calculateResistRate(attacker, target, 0, wsParams.skill, 0, wsParams.ele, 0, 0, calcParams.bonusAcc))
+    magicdmg = math.floor(magicdmg * xi.combat.magicHitRate.calculateResistRate(attacker, target, maccParams))
     magicdmg = math.floor(magicdmg * xi.combat.damage.calculateDamageAdjustment(target, false, true, false, false))
     magicdmg = math.floor(target:handleSevereDamage(magicdmg, false))
 
@@ -877,13 +884,20 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
             bonusdmg = bonusdmg + attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)
         end
 
+        local maccParams =
+        {
+            magicalElement = wsParams.ele,
+            skillType      = wsParams.skill,
+            bonusMacc      = gearAcc,
+        }
+
         -- Add in bonusdmg
         dmg = dmg * (100 + bonusdmg) / 100 -- Apply our "all hits" WS dmg bonuses
         dmg = dmg + dmg * attacker:getMod(xi.mod.ALL_WSDMG_FIRST_HIT) / 100 -- Add in our "first hit" WS dmg bonus
 
         -- Calculate magical bonuses and reductions
         dmg = math.floor(addBonusesAbility(attacker, wsParams.ele, target, dmg, wsParams))
-        dmg = math.floor(dmg * xi.combat.magicHitRate.calculateResistRate(attacker, target, 0, wsParams.skill, 0, wsParams.ele, 0, 0, gearAcc))
+        dmg = math.floor(dmg * xi.combat.magicHitRate.calculateResistRate(attacker, target, maccParams))
         dmg = math.floor(dmg * xi.combat.damage.calculateDamageAdjustment(target, false, true, false, false))
         dmg = math.floor(target:handleSevereDamage(dmg, false))
 

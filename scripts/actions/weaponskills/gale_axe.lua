@@ -30,9 +30,15 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local effectId      = xi.effect.CHOKE
     local actionElement = xi.element.WIND
     local power         = 5
-    local skillType     = xi.skill.AXE
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
-    local duration      = math.floor(60 * resist)
+    local maccParams =
+    {
+        effectId       = xi.effect.CHOKE,
+        magicalElement = xi.element.WIND,
+        skillType      = xi.skill.AXE,
+    }
+
+    local resist   = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
+    local duration = math.floor(60 * resist)
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
     return tpHits, extraHits, criticalHit, damage

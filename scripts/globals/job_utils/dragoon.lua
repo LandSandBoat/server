@@ -692,12 +692,18 @@ xi.job_utils.dragoon.useDamageBreath = function(wyvern, target, skill, action, d
         wyvern:addTP(strafeMeritPower * 5) -- add 50 TP per merit with augmented AF2 legs
     end
 
-    local bonusMacc       = strafeMeritPower + master:getMod(xi.mod.WYVERN_BREATH_MACC)
     local element         = damageType - xi.damageType.ELEMENTAL
     local skillchainCount = xi.combat.magicBurst.getMagicBurstTier(target, element)
 
     -- Breath accuracy is directly affected by a wyvern's current HP, but no data exists.
-    local resist              = xi.combat.magicHitRate.calculateResistRate(wyvern, target, 0, 0, 0, element, 0, 0, bonusMacc)
+    local maccParams =
+    {
+        magicalElement = damageType - xi.damageType.ELEMENTAL,
+        magicBurstTier = skillchainCount,
+        bonusMacc      = strafeMeritPower + master:getMod(xi.mod.WYVERN_BREATH_MACC),
+    }
+
+    local resist              = xi.combat.magicHitRate.calculateResistRate(wyvern, target, maccParams)
     local sdt                 = xi.combat.damage.magicalElementSDT(target, element)
     local absorb              = xi.spells.damage.calculateAbsorption(target, element, false, true, false, true)
     local nullify             = xi.spells.damage.calculateNullification(target, element, false, true, false, true)

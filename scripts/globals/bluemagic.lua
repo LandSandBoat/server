@@ -410,7 +410,16 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     -- Final D value
     local finalDamage    = (initialD + wsc) * (params.multiplier + azureBonus + correlationMultiplier) + statBonus
 
-    finalDamage = math.floor(finalDamage * xi.combat.magicHitRate.calculateResistRate(caster, target, spellGroup, skillType, 0, spellElement, params.attribute, 0, 0))
+    local maccParams =
+    {
+        magicalElement = spellElement,
+        magicBurstTier = skillchainCount,
+        actorStat      = params.attribute,
+        skillType      = skillType,
+        spellGroup     = spellGroup,
+    }
+
+    finalDamage = math.floor(finalDamage * xi.combat.magicHitRate.calculateResistRate(caster, target, maccParams))
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateElementalStaffBonus(caster, spellElement))
     finalDamage = math.floor(finalDamage * xi.combat.damage.magicalElementSDT(target, spellElement))
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateDayAndWeather(caster, spellElement, false))
@@ -468,7 +477,16 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap
     local skillType       = xi.skill.BLUE_MAGIC
     local skillchainCount = xi.combat.magicBurst.getMagicBurstTier(target, spellElement)
 
-    finalDamage = math.floor(finalDamage * xi.combat.magicHitRate.calculateResistRate(caster, target, spellGroup, skillType, 0, spellElement, params.attribute, 0, 0))
+    local maccParams =
+    {
+        magicalElement = spellElement,
+        magicBurstTier = skillchainCount,
+        actorStat      = params.attribute,
+        skillType      = skillType,
+        spellGroup     = spellGroup,
+    }
+
+    finalDamage = math.floor(finalDamage * xi.combat.magicHitRate.calculateResistRate(caster, target, maccParams))
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateElementalStaffBonus(caster, spellElement))
     finalDamage = math.floor(finalDamage * xi.combat.damage.magicalElementSDT(target, spellElement))
     finalDamage = math.floor(finalDamage * xi.spells.damage.calculateDayAndWeather(caster, spellElement, false))
@@ -548,6 +566,13 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
     local attackType   = params.attackType or xi.attackType.NONE
     local damageType   = params.damageType or xi.damageType.NONE
 
+    local maccParams =
+    {
+        magicalElement = spellElement,
+        skillType      = xi.skill.BLUE_MAGIC,
+        spellGroup     = spellFamily,
+    }
+
     -- Multipliers
     local correlationMultiplier       = xi.combat.damage.ecosystemMultiplier(caster, target, params.ecosystem or 0)
     local breathSDT                   = 1 + caster:getMod(xi.mod.BREATH_DMG_DEALT) / 100
@@ -556,7 +581,7 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
     local targetMagicDamageAdjustment = xi.combat.damage.calculateDamageAdjustment(target, false, false, false, true)
     local elementalStaffBonus         = xi.spells.damage.calculateElementalStaffBonus(caster, spellElement)
     local elementalAffinityBonus      = xi.spells.damage.calculateElementalAffinityBonus(caster, spellElement)
-    local resistTier                  = xi.combat.magicHitRate.calculateResistRate(caster, target, spellFamily, xi.skill.BLUE_MAGIC, 0, spellElement, 0, 0, 0)
+    local resistTier                  = xi.combat.magicHitRate.calculateResistRate(caster, target, maccParams)
     local additionalResistTier        = xi.spells.damage.calculateAdditionalResistTier(caster, target, spellElement)
     local elementalSDT                = xi.combat.damage.magicalElementSDT(target, spellElement)
     local dayAndWeather               = xi.spells.damage.calculateDayAndWeather(caster, spellElement, false)
@@ -726,7 +751,16 @@ xi.spells.blue.useEnfeeblingSpell = function(caster, target, spell, params)
     end
 
     -- Early return: Regular resist.
-    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, 0, xi.skill.BLUE_MAGIC, 0, spellElement, xi.mod.INT, 0, 0)
+    local skillchainCount = xi.combat.magicBurst.getMagicBurstTier(target, spellElement)
+    local maccParams =
+    {
+        magicalElement = spellElement,
+        magicBurstTier = skillchainCount,
+        actorStat      = xi.mod.INT,
+        skillType      = xi.skill.BLUE_MAGIC,
+    }
+
+    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, maccParams)
     if resist < params.resistThreshold then
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         return effect
@@ -734,8 +768,6 @@ xi.spells.blue.useEnfeeblingSpell = function(caster, target, spell, params)
 
     if target:addStatusEffect(effect, { power = params.power, duration = math.floor(params.duration * resist), origin = caster, tick = params.tick }) then
         -- Add "Magic Burst!" message
-        local skillchainCount = xi.combat.magicBurst.getMagicBurstTier(target, spellElement)
-
         if skillchainCount > 0 then
             spell:setMsg(xi.msg.basic.MAGIC_BURST_ENFEEB_IS)
             caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)
@@ -790,7 +822,14 @@ xi.spells.blue.applyBlueAdditionalEffect = function(caster, target, params, effe
     end
 
     -- Calculate resist and early return.
-    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, 0, xi.skill.BLUE_MAGIC, 0, element, stat, 0, 0)
+    local maccParams =
+    {
+        magicalElement = element,
+        actorStat      = stat,
+        skillType      = xi.skill.BLUE_MAGIC,
+    }
+
+    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, maccParams)
 
     if resist <= 0.25 then
         return

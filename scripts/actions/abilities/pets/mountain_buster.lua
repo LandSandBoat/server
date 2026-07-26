@@ -33,7 +33,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
 
         local effectTable =
         {
-            [1] = { effectId = xi.effect.BIND, power = 1, duration = math.randomInt(13, 60), origin = pet }, -- TODO: Get additional captures.
+            [1] = { effectId = xi.effect.BIND, power = 1, duration = math.randomInt(13, 60) }, -- TODO: Get additional captures.
         }
 
         xi.combat.action.executeMobskillStatusEffect(pet, target, petskill, effectTable, { messageBypass = true })

@@ -24,7 +24,17 @@ spellObject.onSpellCast = function(caster, target, spell)
     local resistThreshold = 0.5
     local returnEffect    = xi.effect.DEFENSE_DOWN
 
-    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), xi.skill.BLUE_MAGIC, 0, spell:getElement(), xi.mod.INT, xi.effect.DEFENSE_DOWN, 0)
+    local params =
+    {
+        effectId       = xi.effect.DEFENSE_DOWN,
+        magicalElement = spell:getElement(),
+        actorStat      = xi.mod.INT,
+        skillType      = xi.skill.BLUE_MAGIC,
+        spellGroup     = spell:getSpellGroup(),
+    }
+
+    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, params)
+
     if resist >= resistThreshold then
 
         local actionOne = target:addStatusEffect(xi.effect.DEFENSE_DOWN, { power = 10, duration = duration * resist, origin = caster })

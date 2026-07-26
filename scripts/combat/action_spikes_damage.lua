@@ -43,7 +43,7 @@ local function validateParameters(actor, target, fedData)
     params.actorStat       = fedData.actorStat or 0
     params.targetStat      = fedData.targetStat or params.actorStat        -- Currently unused. For future use.
     params.skillRank       = fedData.skillRank or 0
-    params.macc            = fedData.macc or 0
+    params.bonusMacc       = fedData.bonusMacc or 0
 
     -- Multiplier properties.
     params.canMAB          = fedData.canMAB or false
@@ -91,7 +91,7 @@ xi.combat.action.executeSpikesDamage = function(actor, target, fedData)
     end
 
     -- Early return: Effect is resisted.
-    local multiplierResist = params.canResist and xi.combat.magicHitRate.calculateResistRate(actor, params.aeTarget, 0, 0, params.skillRank, params.magicalElement, params.actorStat, 0, params.macc) or 1
+    local multiplierResist = params.canResist and xi.combat.magicHitRate.calculateResistRate(actor, params.aeTarget, params) or 1
     if multiplierResist < params.lowestResist then
         return 0, 0, 0
     end

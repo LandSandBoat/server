@@ -11,7 +11,14 @@ end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     mob:setLocalVar('nuclearWaste', 1)
-    local resist = xi.combat.magicHitRate.calculateResistRate(mob, target, 0, 0, 0, xi.element.NONE, xi.mod.INT, xi.effect.ELEMENTALRES_DOWN, 0)
+
+    local params =
+    {
+        effectId  = xi.effect.ELEMENTALRES_DOWN,
+        actorStat = xi.mod.INT,
+    }
+
+    local resist = xi.combat.magicHitRate.calculateResistRate(mob, target, params)
     if resist >= 0.25 then
         target:addStatusEffect(xi.effect.ELEMENTALRES_DOWN, { power = 50, duration = 60, origin = mob, icon = 0 })
         skill:setMsg(xi.msg.basic.NONE)

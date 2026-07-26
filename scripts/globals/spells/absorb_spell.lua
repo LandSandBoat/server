@@ -28,7 +28,16 @@ xi.spells.absorb.doAbsorbStatSpell = function(caster, target, spell)
     local enfeeblingEffect = xi.spells.absorb.absorbStatData[spellId].downEffect
 
     -- Calculate resistance (2 state effects: Either No resist, half resist or full resist)
-    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, xi.magic.spellGroup.BLACK, xi.skill.DARK_MAGIC, 0, xi.element.DARK, xi.mod.INT, enfeeblingEffect, 0)
+    local maccParams =
+    {
+        effectId       = enfeeblingEffect,
+        magicalElement = xi.element.DARK,
+        actorStat      = xi.mod.INT,
+        skillType      = xi.skill.DARK_MAGIC,
+        spellGroup     = xi.magic.spellGroup.BLACK,
+    }
+
+    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, maccParams)
     if resist < 0.5 then
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         return 0
@@ -123,8 +132,16 @@ xi.spells.absorb.doDrainingSpell = function(caster, target, spell)
     local minDamagePotential = math.floor(maxDamagePotential * xi.spells.absorb.absorbPointsData[spellId][4])
     local baseDamage         = math.randomInt(minDamagePotential, maxDamagePotential)
 
+    local maccParams =
+    {
+        magicalElement = xi.element.DARK,
+        actorStat      = xi.mod.INT,
+        skillType      = xi.skill.DARK_MAGIC,
+        spellGroup     = xi.magic.spellGroup.BLACK,
+    }
+
     -- Multipliers.
-    local resistTier             = xi.combat.magicHitRate.calculateResistRate(caster, target, xi.magic.spellGroup.BLACK, xi.skill.DARK_MAGIC, 0, xi.element.DARK, xi.mod.INT, 0, 0)
+    local resistTier             = xi.combat.magicHitRate.calculateResistRate(caster, target, maccParams)
     local additionalResistTier   = xi.spells.damage.calculateAdditionalResistTier(caster, target, xi.element.DARK)
     local sdt                    = xi.combat.damage.magicalElementSDT(target, xi.element.DARK)
     local elementalStaffBonus    = xi.spells.damage.calculateElementalStaffBonus(caster, xi.element.DARK)
@@ -235,8 +252,16 @@ xi.spells.absorb.doAbsorbTPSpell = function(caster, target, spell)
     -- Base damage.
     local baseDamage = targetTP * 30 / 100
 
+    local maccParams =
+    {
+        magicalElement = xi.element.DARK,
+        actorStat      = xi.mod.INT,
+        skillType      = xi.skill.DARK_MAGIC,
+        spellGroup     = xi.magic.spellGroup.BLACK,
+    }
+
     -- Multipliers.
-    local resistTier           = xi.combat.magicHitRate.calculateResistRate(caster, target, xi.magic.spellGroup.BLACK, xi.skill.DARK_MAGIC, 0, xi.element.DARK, xi.mod.INT, 0, 0)
+    local resistTier           = xi.combat.magicHitRate.calculateResistRate(caster, target, maccParams)
     local additionalResistTier = xi.spells.damage.calculateAdditionalResistTier(caster, target, xi.element.DARK)
     local sdt                  = xi.combat.damage.magicalElementSDT(target, xi.element.DARK)
     local elementalStaffBonus  = xi.spells.damage.calculateElementalStaffBonus(caster, xi.element.DARK)

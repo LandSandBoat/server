@@ -62,7 +62,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     local effectTable =
     {
-        [1] = { effectId = xi.effect.BURN, power = power, tick = 3, duration = 180, tier = 1, },
+        [1] = { effectId = xi.effect.BURN, power = power, tick = 3, duration = 180, tier = 1 },
     }
 
     return xi.combat.action.executeMobskillStatusEffect(mob, target, skill, effectTable, {})

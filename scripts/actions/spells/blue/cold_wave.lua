@@ -22,13 +22,23 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.ecosystem = xi.ecosystem.ARCANA
-    params.effect = xi.effect.FROST
+    params.effect    = xi.effect.FROST
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
     local tick = 3
     local duration = 60
     local resistThreshold = 0.5
-    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), xi.skill.BLUE_MAGIC, 0, spell:getElement(), xi.mod.INT, xi.effect.FROST, 0)
+
+    local maccParams =
+    {
+        effectId       = xi.effect.FROST,
+        magicalElement = spell:getElement(),
+        actorStat      = xi.mod.INT,
+        skillType      = xi.skill.BLUE_MAGIC,
+        spellGroup     = spell:getSpellGroup(),
+    }
+
+    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, maccParams)
 
     -- Cannot apply if target has Burn
     if target:getStatusEffect(xi.effect.BURN) ~= nil then

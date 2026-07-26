@@ -77,7 +77,7 @@ end
 
 -- Applies resistance for additional effects
 function applyResistanceAddEffect(actor, target, element, bonusMacc)
-    return xi.combat.magicHitRate.calculateResistRate(actor, target, 0, xi.skill.NONE, 0, element, 0, 0, bonusMacc)
+    return xi.combat.magicHitRate.calculateResistRate(actor, target, { magicalElement = element, bonusMacc = bonusMacc })
 end
 
 function addBonusesAbility(caster, ele, target, dmg, params)

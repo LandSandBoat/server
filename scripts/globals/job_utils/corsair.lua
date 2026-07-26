@@ -1011,8 +1011,14 @@ xi.job_utils.corsair.useElementalShot = function(actor, target, ability, action)
     target:updateClaim(actor)
 
     -- Calculate resist rate.
-    local bonusAcc = actor:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + actor:getMod(xi.mod.QUICK_DRAW_MACC)
-    local resist   = xi.combat.magicHitRate.calculateResistRate(actor, target, 0, xi.skill.MARKSMANSHIP, 0,  data.element, xi.mod.AGI, 0, bonusAcc)
+    local params =
+    {
+        skillType      = xi.skill.MARKSMANSHIP,
+        magicalElement = data.element,
+        actorStat      = xi.mod.AGI,
+        bonusAcc       = actor:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + actor:getMod(xi.mod.QUICK_DRAW_MACC),
+    }
+    local resist   = xi.combat.magicHitRate.calculateResistRate(actor, target, params)
 
     -- Handle damage.
     local damage = 0

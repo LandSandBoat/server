@@ -23,7 +23,17 @@ spellObject.onSpellCast = function(caster, target, spell)
     local duration     = 30
     local returnEffect = xi.effect.BLINDNESS
 
-    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), xi.skill.BLUE_MAGIC, 0, spell:getElement(), xi.mod.INT, xi.effect.BLINDNESS, 0)
+    local params =
+    {
+        effectId       = xi.effect.BLINDNESS,
+        magicalElement = spell:getElement(),
+        actorStat      = xi.mod.INT,
+        skillType      = xi.skill.BLUE_MAGIC,
+        spellGroup     = spell:getSpellGroup(),
+    }
+
+    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, params)
+
     if resist >= 0.5 then
 
         spell:setMsg(xi.msg.basic.MAGIC_TP_REDUCE) -- this doesn't seem to do much

@@ -13,10 +13,11 @@ end
 entity.onAdditionalEffect = function(mob, target, damage)
     local pTable =
     {
-        chance       = 25,
-        absorbEffect = true,
-        animation    = xi.subEffect.STATUS_DRAIN,
-        message      = xi.msg.basic.NONE,
+        chance         = 25,
+        magicalElement = xi.element.DARK,
+        absorbEffect   = true,
+        animation      = xi.subEffect.STATUS_DRAIN,
+        message        = xi.msg.basic.NONE,
     }
 
     return xi.combat.action.executeAddEffectDispel(mob, target, pTable)

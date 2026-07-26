@@ -46,8 +46,8 @@ end
 entity.onAdditionalEffect = function(mob, target, damage)
     local pTable =
     {
-        chance  = 25,
-        element = xi.element.DARK,
+        chance         = 25,
+        magicalElement = xi.element.DARK,
     }
 
     return xi.combat.action.executeAddEffectDispel(mob, target, pTable)

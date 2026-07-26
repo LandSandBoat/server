@@ -39,7 +39,15 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.chr_wsc = 0.0
 
     local damage = xi.spells.blue.useMagicalSpell(caster, target, spell, params)
-    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), xi.skill.BLUE_MAGIC, 0, spell:getElement(), xi.mod.INT, 0, 0)
+    local maccParams =
+    {
+        magicalElement = spell:getElement(),
+        actorStat      = xi.mod.INT,
+        skillType      = xi.skill.BLUE_MAGIC,
+        spellGroup     = spell:getSpellGroup(),
+    }
+
+    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, maccParams)
 
     if resist >= 0.5 then
         target:addStatusEffect(xi.effect.DEFENSE_DOWN, { power = 5, duration = 90 * resist, origin = caster })

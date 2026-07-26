@@ -1,7 +1,6 @@
 -----------------------------------
 -- Global file for skillchain calculations.
 -----------------------------------
-require('scripts/combat/magic_hit_rate')
 require('scripts/globals/spells/damage_spell')
 -----------------------------------
 xi = xi or {}

@@ -1005,15 +1005,15 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, action, skillParams)
     local shadowsToRemove      = utils.defaultIfNil(skillParams.shadowBehavior, xi.mobskills.shadowBehavior.NUMSHADOWS_1)
     local mATTBonusfTP         = utils.defaultIfNil(skillParams.mATTBonus, { 0, 0, 0 })
     local mACCBonusfTP         = utils.defaultIfNil(skillParams.mACCBonus, { 0, 0, 0 })
-    local skipDamageAdjustment = utils.defaultIfNil(skillParams.skipDamageAdjustment and true, false)
-    local skipMagicBonusDiff   = utils.defaultIfNil(skillParams.skipMagicBonusDiff and true, false)
-    local skipStoneskin        = utils.defaultIfNil(skillParams.skipStoneSkin and true, false)
+    local skipDamageAdjustment = utils.defaultIfNil(skillParams.skipDamageAdjustment, false)
+    local skipMagicBonusDiff   = utils.defaultIfNil(skillParams.skipMagicBonusDiff, false)
+    local skipStoneskin        = utils.defaultIfNil(skillParams.skipStoneSkin, false)
     -- TODO: handle different types of Stoneskin(Magical, Physical, Agnostic)
     local resistTierOverride   = utils.defaultIfNil(skillParams.resistTierOverride, 0)
     local dStatMultiplier      = utils.defaultIfNil(skillParams.dStatMultiplier, 0)
     local dStatAttackerMod     = utils.defaultIfNil(skillParams.dStatAttackerMod, xi.mod.INT)
-    local dStatDefenderMod     = utils.defaultIfNil(skillParams.dStatDefenderMod, xi.mod.INT)
-    local canMagicBurst        = utils.defaultIfNil(skillParams.canMagicBurst and true, false)
+    local dStatDefenderMod     = utils.defaultIfNil(skillParams.dStatDefenderMod, dStatAttackerMod)
+    local canMagicBurst        = utils.defaultIfNil(skillParams.canMagicBurst, false)
     local primaryMessage       = utils.defaultIfNil(skillParams.primaryMessage, xi.msg.basic.DAMAGE)
 
     -- If a stat_wSC is not specified in skill script, it will default to 0. (Sanitized in xi.combat.physical.calculateWSC)
@@ -1026,10 +1026,10 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, action, skillParams)
     local chrWSC = skillParams.chr_wSC
 
     -- Initialize returnInfo params
-    returnInfo.damage              = 0
-    returnInfo.hitsLanded          = 0
-    returnInfo.attackType          = attackType
-    returnInfo.damageType          = damageType
+    returnInfo.damage     = 0
+    returnInfo.hitsLanded = 0
+    returnInfo.attackType = attackType
+    returnInfo.damageType = damageType
 
     -- Set skill's default message.
     skill:setMsg(primaryMessage)
@@ -1096,15 +1096,7 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, action, skillParams)
     end
 
     -- Calculate if skill will be absorbed or nullified.
-    local absorbDamage  = 1
-    local nullifyDamage = 1
-
-    if attackType == xi.attackType.BREATH then
-        nullifyDamage  = xi.spells.damage.calculateNullification(target, actionElement, false, false, false, true)
-    else
-        nullifyDamage  = xi.spells.damage.calculateNullification(target, actionElement, false, true, false, false)
-    end
-
+    local nullifyDamage = xi.spells.damage.calculateNullification(target, actionElement, false, attackType ~= xi.attackType.BREATH, false, attackType == xi.attackType.BREATH)
     if nullifyDamage == 0 then
         -- Note: Nullification takes precedence over elemental absorption.
         -- Note: We still count nullifies as a "hit" since additional status effects tied to the skill itself will still apply.
@@ -1114,11 +1106,7 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, action, skillParams)
         return returnInfo
     end
 
-    if attackType == xi.attackType.BREATH then
-        absorbDamage  = xi.spells.damage.calculateAbsorption(target, actionElement, false, false, false, true)
-    else
-        absorbDamage  = xi.spells.damage.calculateAbsorption(target, actionElement, false, true, false, false)
-    end
+    local absorbDamage = xi.spells.damage.calculateAbsorption(target, actionElement, false, attackType ~= xi.attackType.BREATH, false, attackType == xi.attackType.BREATH)
 
     ----------------------------------
     -- Calculate MACC/Resists/Damage Adjustments
@@ -1152,35 +1140,35 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, action, skillParams)
     -- If skill was not absorbed, calculate resist and damage adjustments.
     -- Note: Elemental absorb mechanics such as Liement are calculated BEFORE resist/damage adjustments (such as shell/magic bursts).
     if absorbDamage > 0 then
-        resistTier = xi.combat.magicHitRate.calculateResistRate(mob, target, 0, 0, 0, actionElement, dStatAttackerMod, 0, mAccuracyBonus)
+        local skillchainCount = canMagicBurst and xi.combat.magicBurst.getMagicBurstTier(target, actionElement) or 0
+
+        local maccParams =
+        {
+            magicalElement = actionElement,
+            magicBurstTier = skillchainCount,
+            actorStat      = dStatAttackerMod,
+            targetStat     = dStatDefenderMod,
+            bonusMacc      = mAccuracyBonus,
+        }
+
+        resistTier = xi.combat.magicHitRate.calculateResistRate(mob, target, maccParams)
 
         if mob:isAvatar() then
             bloodPactMultiplier = 1 + mob:getMod(xi.mod.BP_DAMAGE) / 100
         end
 
-        if
-            not skipDamageAdjustment and
-            attackType == xi.attackType.BREATH
-        then
-            -- Damage Adjustment for breath damage
-            magicDamageAdjustment = xi.combat.damage.calculateDamageAdjustment(target, false, false, false, true)
-        elseif not skipDamageAdjustment then
-            -- Damage Adjustment for Magical damage.
-            magicDamageAdjustment = xi.combat.damage.calculateDamageAdjustment(target, false, true, false, false)
+        if not skipDamageAdjustment then
+            magicDamageAdjustment = xi.combat.damage.calculateDamageAdjustment(target, false, attackType ~= xi.attackType.BREATH, false, attackType == xi.attackType.BREATH)
         end
 
-        if canMagicBurst then
-            local skillchainCount = xi.combat.magicBurst.getMagicBurstTier(target, actionElement)
+        if skillchainCount > 0 then
+            -- TODO: Glyphic Bracers magic burst modifiers. https://www.bg-wiki.com/ffxi/Glyphic_Bracers
+            magicBurst      = xi.spells.damage.calculateIfMagicBurst(mob, target, actionElement, skillchainCount)
+            magicBurstBonus = xi.spells.damage.calculateIfMagicBurstBonus(mob, target, 0, 0, actionElement)
 
-            if skillchainCount > 0 then
-                -- TODO: Glyphic Bracers magic burst modifiers. https://www.bg-wiki.com/ffxi/Glyphic_Bracers
-                magicBurst      = xi.spells.damage.calculateIfMagicBurst(mob, target, actionElement, skillchainCount)
-                magicBurstBonus = xi.spells.damage.calculateIfMagicBurstBonus(mob, target, 0, 0, actionElement)
-
-                -- TODO: petskills currently seem to be searching for a mobskillID rather than the petskill ID which causes the magic burst to display the wrong message. Use JA_MAGIC_BURST for now.
-                -- skill:setMsg(xi.msg.basic.PET_MAGIC_BURST)
-                skill:setMsg(xi.msg.basic.JA_MAGIC_BURST)
-            end
+            -- TODO: petskills currently seem to be searching for a mobskillID rather than the petskill ID which causes the magic burst to display the wrong message. Use JA_MAGIC_BURST for now.
+            -- skill:setMsg(xi.msg.basic.PET_MAGIC_BURST)
+            skill:setMsg(xi.msg.basic.JA_MAGIC_BURST)
         end
     end
 
@@ -1356,23 +1344,30 @@ xi.mobskills.mobBreathMove = function(mob, target, skill, action, skillParams)
     -- If skill was not absorbed, calculate resist and damage adjustments.
     -- Note: Elemental absorb mechanics such as Liement are calculated BEFORE resist/damage adjustments (such as shell/magic bursts).
     if absorbDamage > 0 then
-        if canMagicBurst then
-            local skillchainCount = xi.combat.magicBurst.getMagicBurstTier(target, actionElement)
+        local skillchainCount = canMagicBurst and xi.combat.magicBurst.getMagicBurstTier(target, actionElement) or 0
 
-            if skillchainCount > 0 then
-                if mob:isPet() and mob:getMaster() ~= nil then
-                    mAccuracyBonus = mAccuracyBonus + 25 -- TODO: This is based off a previous function. Would eventually like to get a capture for this.
+        if skillchainCount > 0 then
+            if mob:isPet() and mob:getMaster() ~= nil then
+                mAccuracyBonus = mAccuracyBonus + 25 -- TODO: This is based off a previous function. Would eventually like to get a capture for this.
 
-                    -- TODO: Do jug pet breaths gain damage or only an accuracy bonus?
-                    -- magicBurst      = xi.spells.damage.calculateIfMagicBurst(mob, target, actionElement, skillchainCount)
-                    -- magicBurstBonus = xi.spells.damage.calculateIfMagicBurstBonus(mob, target, 0, 0, actionElement)
+                -- TODO: Do jug pet breaths gain damage or only an accuracy bonus?
+                -- magicBurst      = xi.spells.damage.calculateIfMagicBurst(mob, target, actionElement, skillchainCount)
+                -- magicBurstBonus = xi.spells.damage.calculateIfMagicBurstBonus(mob, target, 0, 0, actionElement)
 
-                    skill:setMsg(xi.msg.basic.PET_MAGIC_BURST)
-                end
+                skill:setMsg(xi.msg.basic.PET_MAGIC_BURST)
             end
         end
 
-        resistRate             = xi.combat.magicHitRate.calculateResistRate(mob, target, 0, 0, xi.skillRank.A_PLUS, actionElement, resistStat, 0, mAccuracyBonus)
+        local maccParams =
+        {
+            magicalElement = actionElement,
+            magicBurstTier = skillchainCount,
+            actorStat      = resistStat,
+            skillRank      = xi.skillRank.A_PLUS,
+            bonusMacc      = mAccuracyBonus,
+        }
+
+        resistRate             = xi.combat.magicHitRate.calculateResistRate(mob, target, maccParams)
         breathDamageAdjustment = xi.combat.damage.calculateDamageAdjustment(target, false, false, false, true)
     end
 
@@ -1583,7 +1578,15 @@ xi.mobskills.mobStatusEffectMove = function(mob, target, typeEffect, power, tick
         end
 
         local element    = mob:getStatusEffectElement(typeEffect) -- TODO: Do something.
-        local resistRate = xi.combat.magicHitRate.calculateResistRate(mob, target, 0, 0, 0, element, xi.mod.INT, typeEffect, 0)
+
+        local maccParams =
+        {
+            effectId       = typeEffect,
+            magicalElement = element,
+            actorStat      = xi.mod.INT,
+        }
+
+        local resistRate = xi.combat.magicHitRate.calculateResistRate(mob, target, maccParams)
         if resistRate >= 0.25 then
             local totalDuration = math.floor(duration * resistRate)
             target:addStatusEffect(typeEffect, { power = power, duration = totalDuration, origin = mob, tick = tick, subType = subType, subPower = subPower, tier = tier })
@@ -1722,28 +1725,23 @@ xi.mobskills.handleShadowConsumption = function(target, skill, params, shadowsTo
 end
 
 xi.mobskills.calculatePetMagicAccuracyBonus = function(mob, target, actionElement)
-    local petAccBonus = 0
-
-    if mob:isPet() and mob:getMaster() ~= nil then
-        local master = mob:getMaster()
-
-        if mob:isAvatar() then
-            local masterSkillLevel    = master:getSkillLevel(xi.skill.SUMMONING_MAGIC)
-            local masterMaxSkillLevel = master:getMaxSkillLevel(mob:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC)
-
-            petAccBonus = utils.clamp(masterSkillLevel - masterMaxSkillLevel, 0, 200)
-        end
-
-        local skillchainCount = xi.combat.magicBurst.getMagicBurstTier(target, actionElement)
-        if
-            mob:getPetID() > 0 and
-            skillchainCount > 0
-        then
-            petAccBonus = petAccBonus + 25
-        end
+    if not mob:isPet() then
+        return 0
     end
 
-    return petAccBonus
+    if not mob:isAvatar() then
+        return 0
+    end
+
+    local master = mob:getMaster()
+    if not mob:getMaster() then
+        return 0
+    end
+
+    local masterSkillLevel    = master:getSkillLevel(xi.skill.SUMMONING_MAGIC)
+    local masterMaxSkillLevel = master:getMaxSkillLevel(mob:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC)
+
+    return utils.clamp(masterSkillLevel - masterMaxSkillLevel, 0, 200)
 end
 
 xi.mobskills.handleHybridDamage = function(mob, target, physicalDamage, element)
@@ -1761,8 +1759,15 @@ xi.mobskills.handleHybridDamage = function(mob, target, physicalDamage, element)
     -- Note: Elemental absorb mechanics such as Liement are calculated BEFORE resist/damage adjustments (such as shell/magic bursts).
 
     if absorbDamage > 0 then
+        local maccParams =
+        {
+            magicalElement = element,
+            actorStat      = xi.mod.INT,
+            bonusMacc      = petAccBonus,
+        }
+
+        resist                = xi.combat.magicHitRate.calculateResistRate(mob, target, maccParams)
         sdt                   = xi.combat.damage.magicalElementSDT(target, element)
-        resist                = xi.combat.magicHitRate.calculateResistRate(mob, target, 0, 0, 0, element, xi.mod.INT, 0, petAccBonus)
         magicDamageAdjustment = xi.combat.damage.calculateDamageAdjustment(target, false, true, false, false)
     end
 
