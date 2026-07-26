@@ -80,7 +80,7 @@ protected:
     auto         IsSpecialSkillReady(float currentDistance) const -> bool;
     auto         IsSpellReady(const float& currentDistance, const float& meleeRange) const -> bool;
 
-    auto target() const -> CBattleEntity*;
+    auto target() const -> EntityId;
     void setTarget(CBaseEntity* PTarget);
     auto followTarget() const -> CBaseEntity*;
 

@@ -44,7 +44,7 @@ public:
 
     virtual ~CState() = default;
 
-    auto GetTarget() const -> CBaseEntity*;
+    auto target() const -> EntityId;
 
     auto HasErrorMsg() const -> bool;
     auto GetErrorMsg() const -> std::unique_ptr<CBasicPacket>;
@@ -70,7 +70,6 @@ protected:
     virtual auto Update(timer::time_point tick) -> bool = 0;
     virtual void UpdateTarget(const EntityId& target);
 
-    auto target() const -> EntityId;
     void Complete();
     auto GetEntryTime() const -> timer::time_point;
 

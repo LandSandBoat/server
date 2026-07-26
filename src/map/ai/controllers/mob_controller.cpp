@@ -48,9 +48,9 @@ CMobController::CMobController(CMobEntity* PEntity)
 {
 }
 
-auto CMobController::target() const -> CBattleEntity*
+auto CMobController::target() const -> EntityId
 {
-    return target_.resolve<CBattleEntity>();
+    return target_;
 }
 
 void CMobController::setTarget(CBaseEntity* PTarget)
@@ -214,7 +214,7 @@ auto CMobController::MobSkill(int listId) -> bool
 {
     TracyZoneScoped;
 
-    auto* PTarget = target();
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     if (!PTarget)
     {
@@ -286,7 +286,7 @@ auto CMobController::TryCastSpell() -> bool
 {
     TracyZoneScoped;
 
-    auto* PTarget = target();
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     if (!CanCastSpells(IgnoreRecastsAndCosts::No))
     {
@@ -395,7 +395,7 @@ auto CMobController::TrySpecialSkill() -> bool
 {
     TracyZoneScoped;
 
-    auto* PTarget = target();
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     // get my special skill
     CMobSkill*     PSpecialSkill  = battleutils::GetMobSkill(PMob->getMobMod(xi::MobMod::SpecialSkill));
@@ -593,7 +593,7 @@ auto CMobController::TryDeaggro() -> bool
 {
     TracyZoneScoped;
 
-    auto* PTarget = target();
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     if (PTarget == nullptr && (PMob->PEnmityContainer != nullptr && PMob->PEnmityContainer->GetHighestEnmity() == nullptr))
     {
@@ -633,7 +633,7 @@ void CMobController::TryLink()
 {
     TracyZoneScoped;
 
-    auto* PTarget = target();
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     if (PTarget == nullptr)
     {
@@ -932,7 +932,7 @@ void CMobController::CastSpell(SpellID spellid)
 {
     TracyZoneScoped;
 
-    auto* PTarget = target();
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     const CSpell* PSpell = spell::GetSpell(spellid);
     if (PSpell == nullptr)
@@ -993,7 +993,7 @@ void CMobController::Move()
 {
     TracyZoneScoped;
 
-    auto* PTarget = target();
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     if (!PMob->PAI->CanFollowPath())
     {
@@ -1191,7 +1191,7 @@ auto CMobController::DoCombatTick(timer::time_point tick) -> Task<void>
 
     TryLink();
 
-    auto* PTarget       = target();
+    auto* PTarget       = target().resolve<CBattleEntity>();
     auto* PFollowTarget = followTarget();
 
     PMob->PAI->EventHandler.triggerListener("COMBAT_TICK", PMob);
@@ -1295,7 +1295,7 @@ void CMobController::HandleEnmity()
 {
     TracyZoneScoped;
 
-    auto* PTarget = target();
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     PMob->PEnmityContainer->DecayEnmity();
     auto* PHighestEnmityTarget{ PMob->PEnmityContainer->GetHighestEnmity() };
@@ -1383,7 +1383,7 @@ auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
     {
         // i'm claimed by someone and want to be fighting them
         setTarget(static_cast<CBattleEntity*>(PMob->GetEntity(PMob->m_OwnerID.targid, TYPE_PC | TYPE_MOB | TYPE_PET | TYPE_TRUST)));
-        auto* PTarget = target();
+        auto* PTarget = target().resolve<CBattleEntity>();
 
         if (PTarget != nullptr)
         {
@@ -1666,7 +1666,7 @@ auto CMobController::CanMoveForward(const float currentDistance) -> bool
 {
     TracyZoneScoped;
 
-    auto* PTarget = target();
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     uint16 standbackRange = 20;
 

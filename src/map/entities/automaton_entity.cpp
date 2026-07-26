@@ -176,7 +176,7 @@ void CAutomatonEntity::OnCastFinished(CMagicState& state, action_t& action)
     CMobEntity::OnCastFinished(state, action);
 
     auto* PSpell  = state.GetSpell();
-    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PTarget = state.target().resolve<CBattleEntity>();
 
     PRecastContainer->Add(RECAST_MAGIC, static_cast<Recast>(PSpell->getID()), action.recast);
 
@@ -201,7 +201,7 @@ void CAutomatonEntity::OnMobSkillFinished(CMobSkillState& state, action_t& actio
     CMobEntity::OnMobSkillFinished(state, action);
 
     auto* PSkill  = state.GetSkill();
-    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PTarget = state.target().resolve<CBattleEntity>();
 
     if (PTarget && PTarget->objtype == TYPE_MOB && PTarget->allegiance != xi::Allegiance::Player)
     {

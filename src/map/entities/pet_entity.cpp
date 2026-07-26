@@ -301,7 +301,7 @@ void CPetEntity::loadPetZoningInfo()
 void CPetEntity::OnAbility(CAbilityState& state, action_t& action)
 {
     auto* PAbility = state.GetAbility();
-    auto* PTarget  = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PTarget  = state.target().resolve<CBattleEntity>();
 
     std::unique_ptr<CBasicPacket> errMsg;
     if (PTarget && IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))
@@ -387,7 +387,7 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
     TracyZoneScoped;
 
     auto* PSkill  = state.GetPetSkill();
-    auto* PTarget = dynamic_cast<CBattleEntity*>(state.GetTarget());
+    auto* PTarget = state.target().resolve<CBattleEntity>();
 
     if (PTarget == nullptr)
     {
@@ -602,7 +602,7 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
         battleutils::DirtyExp(PTargetFound, this);
     }
 
-    PTarget = dynamic_cast<CBattleEntity*>(state.GetTarget()); // TODO: why is this recast here? can state change between now and the original cast?
+    PTarget = state.target().resolve<CBattleEntity>(); // TODO: why is this recast here? can state change between now and the original cast?
 
     if (PTarget)
     {

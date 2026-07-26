@@ -130,7 +130,7 @@ auto CTrustController::DoCombatTick(timer::time_point tick) -> Task<void>
     CCharEntity*  PMaster = static_cast<CCharEntity*>(POwner->PMaster);
     CMobEntity*   PMob    = dynamic_cast<CMobEntity*>(PMaster->GetBattleTarget());
     setTarget(POwner->GetBattleTarget());
-    auto* PTarget = target();
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     if (!PMaster->PAI->IsEngaged())
     {
@@ -266,7 +266,7 @@ auto CTrustController::DoNonCombatTick(const timer::time_point tick) -> Task<voi
 
     // Keep COMBAT_TICK target valid for listeners/gambits.
     setTarget(PMaster->GetBattleTarget());
-    auto* PTarget = target();
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     // Non-combat trust follow order:
     // - first trust follows master
@@ -615,7 +615,7 @@ auto CTrustController::Cast(const EntityId target, SpellID spellid) -> bool
             if (MState)
             {
                 const auto MSpell       = MState->GetSpell();
-                const auto MTarget      = MState->GetTarget();
+                const auto MTarget      = MState->target().resolve();
                 const auto MSpellFamily = MSpell->getSpellFamily();
                 const auto MSpellID     = MSpell->getID();
 

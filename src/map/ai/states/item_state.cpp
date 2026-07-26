@@ -317,7 +317,7 @@ auto CItemState::GetItem() const -> CItemUsable*
 
 void CItemState::InterruptItem(action_t& action)
 {
-    TryInterrupt(static_cast<CBattleEntity*>(GetTarget()));
+    TryInterrupt(target().resolve<CBattleEntity>());
 
     if (m_interrupted)
     {

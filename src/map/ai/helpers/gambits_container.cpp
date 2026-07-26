@@ -1354,7 +1354,7 @@ auto CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, const G
                 if (triggerTarget->PAI->IsCurrentState<CMagicState>())
                 {
                     auto spellElement  = static_cast<CMagicState*>(triggerTarget->PAI->GetCurrentState())->GetSpell()->getElement();
-                    auto targetID      = static_cast<CMagicState*>(triggerTarget->PAI->GetCurrentState())->GetTarget()->id;
+                    auto targetID      = static_cast<CMagicState*>(triggerTarget->PAI->GetCurrentState())->target().resolve()->id;
                     bool isElementalMA = spellElement >= ELEMENT_FIRE && spellElement <= ELEMENT_WATER;
                     if (targetID == POwner->id && isElementalMA)
                     {

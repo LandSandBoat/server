@@ -1201,15 +1201,15 @@ void CMobEntity::OnEngage(CAttackState& state)
     TracyZoneScoped;
 
     CBattleEntity::OnEngage(state);
-    luautils::OnMobEngage(this, state.GetTarget());
+    luautils::OnMobEngage(this, state.target().resolve());
     unsigned int range = this->getMobMod(xi::MobMod::AlliHate);
     if (range != 0)
     {
-        CBaseEntity* PTarget = state.GetTarget();
+        CBaseEntity* PTarget = state.target().resolve();
         CBaseEntity* PPet    = nullptr;
         if (PTarget->objtype == TYPE_PET)
         {
-            PPet    = state.GetTarget();
+            PPet    = state.target().resolve();
             PTarget = ((CPetEntity*)PTarget)->PMaster;
         }
 

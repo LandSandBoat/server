@@ -234,7 +234,7 @@ auto CAutomatonController::DoCombatTick(timer::time_point tick) -> Task<void>
 
 void CAutomatonController::Move()
 {
-    auto* PTarget = target();
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     if ((shouldStandBack() && !isWithinDistance(PAutomaton->loc.p, PTarget->loc.p, 15.0f)) ||
         (PAutomaton->health.mp < 8 && PAutomaton->health.maxmp > 8))
@@ -247,7 +247,7 @@ void CAutomatonController::Move()
 
 auto CAutomatonController::TryAction() -> bool
 {
-    auto* PTarget = target();
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     if (m_Tick > m_LastActionTime + (m_actionCooldown - std::chrono::milliseconds(PAutomaton->getMod(xi::Mod::AUTO_DECISION_DELAY) * 10)))
     {
@@ -262,7 +262,7 @@ auto CAutomatonController::TryAction() -> bool
 
 auto CAutomatonController::TryShieldBash() -> bool
 {
-    auto* PTarget = target();
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     CState* PState = PTarget->PAI->GetCurrentState();
 
@@ -277,7 +277,7 @@ auto CAutomatonController::TryShieldBash() -> bool
 
 auto CAutomatonController::TrySpellcast(const CurrentManeuvers& maneuvers) -> bool
 {
-    auto* PTarget = target();
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     // Apparently the automaton has nothing in its spell list, so CanCastSpells must ignore spell lists and recasts?
     if (!PAutomaton->PMaster || m_magicCooldown == 0s ||
@@ -440,7 +440,7 @@ auto CAutomatonController::TrySpellcast(const CurrentManeuvers& maneuvers) -> bo
 
 auto CAutomatonController::TryHeal(const CurrentManeuvers& maneuvers) -> bool
 {
-    auto* PTarget = target();
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     if (!PAutomaton->PMaster || m_healCooldown == 0s ||
         m_Tick <= m_LastHealTime + (m_healCooldown - std::chrono::seconds(PAutomaton->getMod(xi::Mod::AUTO_HEALING_DELAY))))
@@ -640,7 +640,7 @@ auto CAutomatonController::MobSkill(const EntityId target, uint16 wsid, const Ma
 
 auto CAutomatonController::TryElemental(const CurrentManeuvers& maneuvers) -> bool
 {
-    auto* PTarget = target();
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     if (!PAutomaton->PMaster || m_elementalCooldown == 0s || m_Tick <= m_LastElementalTime + m_elementalCooldown)
     {
@@ -775,7 +775,7 @@ auto CAutomatonController::TryElemental(const CurrentManeuvers& maneuvers) -> bo
 
 auto CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers) -> bool
 {
-    auto* PTarget = target();
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     if (!PAutomaton->PMaster || m_enfeebleCooldown == 0s || m_Tick <= m_LastEnfeebleTime + m_enfeebleCooldown)
     {
@@ -1233,7 +1233,7 @@ auto CAutomatonController::TryStatusRemoval(const CurrentManeuvers& maneuvers) -
 
 auto CAutomatonController::TryEnhance() -> bool
 {
-    auto* PTarget = target();
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     if (!PAutomaton->PMaster || m_enhanceCooldown == 0s || m_Tick <= m_LastEnhanceTime + m_enhanceCooldown)
     {
@@ -1552,7 +1552,7 @@ auto CAutomatonController::TryEnhance() -> bool
 
 auto CAutomatonController::TryTPMove() -> bool
 {
-    auto* PTarget = target();
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     if (PAutomaton->health.tp >= 1000)
     {
@@ -1647,7 +1647,7 @@ auto CAutomatonController::TryTPMove() -> bool
 
 auto CAutomatonController::TryRangedAttack() -> bool // TODO: Find the animation for its ranged attack
 {
-    auto* PTarget = target();
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     if (PAutomaton->frame() == AutomatonFrame::Sharpshot)
     {
@@ -1665,7 +1665,7 @@ auto CAutomatonController::TryRangedAttack() -> bool // TODO: Find the animation
 
 auto CAutomatonController::TryAttachment() -> bool
 {
-    auto* PTarget = target();
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     if (!PAutomaton->PAI->CanChangeState())
     {

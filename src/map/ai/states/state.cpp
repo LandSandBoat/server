@@ -42,11 +42,6 @@ void CState::UpdateTarget(const EntityId& target)
 {
 }
 
-auto CState::GetTarget() const -> CBaseEntity*
-{
-    return target_.resolve();
-}
-
 auto CState::target() const -> EntityId
 {
     return target_;
