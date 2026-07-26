@@ -103,11 +103,11 @@ auto CMobController::Disengage() -> bool
     return CController::Disengage();
 }
 
-auto CMobController::Engage(const uint16 targid) -> bool
+auto CMobController::Engage(const EntityId& target) -> bool
 {
     TracyZoneScoped;
 
-    const auto ret = CController::Engage(targid);
+    const auto ret = CController::Engage(target);
     if (ret)
     {
         m_firstSpell = true;
@@ -135,7 +135,7 @@ auto CMobController::Engage(const uint16 targid) -> bool
         // Pet should also fight the target if they can
         if (PMob->PPet && !PMob->PPet->PAI->IsEngaged())
         {
-            PMob->PPet->PAI->Engage(targid);
+            PMob->PPet->PAI->Engage(target);
         }
     }
     return ret;
@@ -656,7 +656,7 @@ void CMobController::TryLink()
     // my pet should help as well
     if (PMob->PPet != nullptr && PMob->PPet->PAI->IsRoaming())
     {
-        PMob->PPet->PAI->Engage(PTarget->targid);
+        PMob->PPet->PAI->Engage(PTarget->entityId());
     }
 
     // Handle linking if they are close enough. This party scan is the hot part of
@@ -695,7 +695,7 @@ void CMobController::TryLink()
 
             if (PPartyMember->PAI->IsRoaming() && PPartyMember->CanLink(&PMob->loc.p, PMob->getMobMod(xi::MobMod::Superlink)))
             {
-                PPartyMember->PAI->Engage(PTarget->targid);
+                PPartyMember->PAI->Engage(PTarget->entityId());
             }
         }
     }
@@ -707,7 +707,7 @@ void CMobController::TryLink()
 
         if (PMaster->PAI->IsRoaming() && PMaster->CanLink(&PMob->loc.p, PMob->getMobMod(xi::MobMod::Superlink)))
         {
-            PMaster->PAI->Engage(PTarget->targid);
+            PMaster->PAI->Engage(PTarget->entityId());
         }
     }
 }
@@ -1337,7 +1337,7 @@ auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
     // If there's someone on our enmity list, go from roaming -> engaging
     if (PMob->PEnmityContainer->GetHighestEnmity() != nullptr && (PMob->m_roamFlags & xi::RoamFlag::Ignore) == xi::RoamFlag::None)
     {
-        Engage(PMob->PEnmityContainer->GetHighestEnmity()->targid);
+        Engage(PMob->PEnmityContainer->GetHighestEnmity()->entityId());
         co_return;
     }
     else if (PMob->m_OwnerID.id != 0 && (PMob->m_roamFlags & xi::RoamFlag::Ignore) == xi::RoamFlag::None)
@@ -1347,7 +1347,7 @@ auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
 
         if (PTarget != nullptr)
         {
-            Engage(PTarget->targid);
+            Engage(PTarget->entityId());
         }
 
         co_return;

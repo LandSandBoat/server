@@ -94,7 +94,7 @@ void CPlayerCharmController::DoRoamTick(timer::time_point tick) const
 {
     if (POwner->PMaster->PAI->IsEngaged())
     {
-        POwner->PAI->Internal_Engage(POwner->PMaster->GetBattleTargetID());
+        POwner->PAI->Internal_Engage(POwner->PMaster->battleTarget());
     }
 
     float currentDistance = distance(POwner->loc.p, POwner->PMaster->loc.p);

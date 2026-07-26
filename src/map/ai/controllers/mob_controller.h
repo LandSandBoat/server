@@ -39,7 +39,7 @@ public:
 
     auto Tick(timer::time_point tick) -> Task<void> override;
     auto Disengage() -> bool override;
-    auto Engage(uint16 targid) -> bool override;
+    auto Engage(const EntityId& target) -> bool override;
     void Despawn() override;
     void Reset() override;
 

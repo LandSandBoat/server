@@ -65,12 +65,12 @@ auto CPlayerController::Cast(const EntityId target, SpellID spellid) -> bool
     return false;
 }
 
-auto CPlayerController::Engage(uint16 targid) -> bool
+auto CPlayerController::Engage(const EntityId& target) -> bool
 {
     // TODO: pet engage/disengage
     std::unique_ptr<CBasicPacket> errMsg;
     auto*                         PChar   = static_cast<CCharEntity*>(POwner);
-    auto*                         PTarget = PChar->IsValidTarget(targid, TARGET_ENEMY, errMsg);
+    auto*                         PTarget = PChar->IsValidTarget(target, TARGET_ENEMY, errMsg);
 
     if (PTarget)
     {
@@ -78,7 +78,7 @@ auto CPlayerController::Engage(uint16 targid) -> bool
         {
             if (m_lastAttackTime + std::chrono::milliseconds(PChar->GetWeaponDelay(false)) < timer::now())
             {
-                if (CController::Engage(targid))
+                if (CController::Engage(target))
                 {
                     PChar->PLatentEffectContainer->CheckLatentsWeaponDraw(true);
                     PChar->pushPacket<GP_SERV_COMMAND_ASSIST>(PChar, PTarget);

@@ -177,7 +177,7 @@ auto CPetSkillState::Update(const timer::time_point tick) -> bool
                     PBattleTarget->allegiance != m_PEntity->allegiance)
                 {
                     // Re-engage the target after blood pact
-                    m_PEntity->PAI->Engage(PTarget->targid);
+                    m_PEntity->PAI->Engage(PTarget->entityId());
                 }
             }
         }

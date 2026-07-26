@@ -61,7 +61,7 @@ CAIContainer::CAIContainer(CBaseEntity*                   _PEntity,
 {
 }
 
-auto CAIContainer::Cast(EntityId target, SpellID spellid) const -> bool
+auto CAIContainer::Cast(const EntityId& target, SpellID spellid) const -> bool
 {
     if (Controller)
     {
@@ -70,16 +70,16 @@ auto CAIContainer::Cast(EntityId target, SpellID spellid) const -> bool
     return false;
 }
 
-auto CAIContainer::Engage(uint16 targid) const -> bool
+auto CAIContainer::Engage(const EntityId& target) const -> bool
 {
     if (Controller)
     {
-        return Controller->Engage(targid);
+        return Controller->Engage(target);
     }
     return false;
 }
 
-auto CAIContainer::ChangeTarget(uint16 targid) const -> bool
+auto CAIContainer::ChangeTarget(const uint16 targid) const -> bool
 {
     if (Controller)
     {
@@ -184,16 +184,16 @@ auto CAIContainer::Untargetable(timer::duration _duration, bool canChangeState) 
     return ForceChangeState<CInactiveState>(PEntity, _duration, canChangeState, true);
 }
 
-auto CAIContainer::Internal_Engage(uint16 targetid) -> bool
+auto CAIContainer::Internal_Engage(EntityId target) -> bool
 {
     // TODO: pet engage/disengage
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
 
     if (entity && entity->PAI->IsEngaged())
     {
-        if (entity->GetBattleTargetID() != targetid)
+        if (entity->battleTarget() != target)
         {
-            ChangeTarget(targetid);
+            ChangeTarget(target.targid);
             return true;
         }
         return false;
@@ -206,7 +206,7 @@ auto CAIContainer::Internal_Engage(uint16 targetid) -> bool
         //  Allow entity with prevent action effect to very briefly switch to the attack state to be properly engaged
         if (CanChangeState() || (GetCurrentState() && GetCurrentState()->IsCompleted()) || entity->StatusEffectContainer->HasPreventActionEffect(true))
         {
-            if (ForceChangeState<CAttackState>(entity, targetid))
+            if (ForceChangeState<CAttackState>(entity, target))
             {
                 entity->OnEngage(*static_cast<CAttackState*>(GetCurrentState()));
 
@@ -249,7 +249,7 @@ auto CAIContainer::Internal_ChangeTarget(const uint16 targetid) const -> bool
         }
         else
         {
-            return Engage(targetid);
+            return Engage(EntityId(entity->GetEntity(targetid)));
         }
     }
     return false;

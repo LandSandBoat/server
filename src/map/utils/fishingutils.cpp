@@ -1614,7 +1614,7 @@ int32 CatchMonster(CCharEntity* PChar, uint32 MobID)
     // PChar->StatusEffectContainer->CopyConfrontationEffect(PMob);
     if ((mob->log < 255 && mob->quest < 255) || mob->questOnly || (PMob->m_TrueDetection && (static_cast<xi::Detects>(PMob->getMobMod(xi::MobMod::Detection)) & xi::Detects::Scent) != xi::Detects::None) || !PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Sneak))
     {
-        PMob->PAI->Engage(PChar->targid);
+        PMob->PAI->Engage(PChar->entityId());
         battleutils::ClaimMob(PMob, (CBattleEntity*)PChar);
     }
 

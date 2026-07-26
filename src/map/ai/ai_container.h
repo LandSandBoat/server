@@ -48,8 +48,8 @@ public:
     CAIContainer(const CAIContainer&)            = delete;
     CAIContainer& operator=(const CAIContainer&) = delete;
 
-    auto Cast(EntityId target, SpellID spellid) const -> bool;
-    auto Engage(uint16 targid) const -> bool;
+    auto Cast(const EntityId& target, SpellID spellid) const -> bool;
+    auto Engage(const EntityId& target) const -> bool;
     auto ChangeTarget(uint16 targid) const -> bool;
     auto Disengage() const -> bool;
     auto WeaponSkill(const EntityId& target, uint16 wsid) const -> bool;
@@ -66,7 +66,7 @@ public:
     // Internal Controller functions
     //
 
-    auto Internal_Engage(uint16 targetid) -> bool;
+    auto Internal_Engage(EntityId target) -> bool;
     auto Internal_Cast(EntityId target, SpellID spellid) -> bool;
     auto Internal_ChangeTarget(uint16 targetid) const -> bool;
     auto Internal_Disengage() const -> bool;

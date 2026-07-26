@@ -380,7 +380,7 @@ auto CTrustController::DoRoamTick(timer::time_point tick) -> Task<void>
 
     if (PMaster->PAI->IsEngaged() && trustEngageCondition && POwner->GetModelId() != modelID_Cornelia)
     {
-        POwner->PAI->Internal_Engage(PMaster->GetBattleTargetID());
+        POwner->PAI->Internal_Engage(PMaster->battleTarget());
     }
 
     const uint8          currentPartyPos = GetPartyPosition();
