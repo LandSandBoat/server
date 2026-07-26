@@ -484,9 +484,9 @@ CBattleEntity* CEnmityContainer::GetHighestEnmity()
             {
                 // Deal with ties by preferring current battle target
                 // Check if there is a tie, the current highest entity is valid, the mob has a battle target,
-                if (Enmity == HighestEnmity && highest != m_EnmityList.end() && m_EnmityHolder->GetBattleTargetID() != 0 &&
+                if (Enmity == HighestEnmity && highest != m_EnmityList.end() && m_EnmityHolder->battleTarget().isSet() &&
                     // the current highest entity is the current battle target
-                    highest->second.PEnmityOwner && highest->second.PEnmityOwner->targid == m_EnmityHolder->GetBattleTargetID())
+                    highest->second.PEnmityOwner && m_EnmityHolder->battleTarget() == highest->second.PEnmityOwner)
                 {
                     continue;
                 }

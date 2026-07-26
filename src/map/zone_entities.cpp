@@ -569,7 +569,7 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
             PCurrentMob->m_OwnerID.clean();
             PCurrentMob->updatemask |= UPDATE_STATUS;
         }
-        if (PCurrentMob->GetBattleTargetID() == PChar->targid)
+        if (PCurrentMob->battleTarget() == PChar)
         {
             PCurrentMob->setBattleTarget(std::nullopt);
         }

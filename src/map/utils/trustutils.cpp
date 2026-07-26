@@ -362,8 +362,8 @@ auto LoadTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntity*
 
     auto* PTrust = new CTrustEntity(PMaster, trustData->trustID, IsPassiveTrust{ trustData->isPassiveTrust });
 
-    PTrust->loc              = PMaster->loc;
-    PTrust->m_OwnerID.UniqueNo     = PMaster->id;
+    PTrust->loc                = PMaster->loc;
+    PTrust->m_OwnerID.UniqueNo = PMaster->id;
     PTrust->m_OwnerID.ActIndex = PMaster->targid;
 
     // spawn me randomly around master

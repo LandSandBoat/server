@@ -72,7 +72,7 @@ auto CAttackState::Update(timer::time_point tick) -> bool
         if (CanAttack(PTarget))
         {
             // CanAttack may have set target id to 0 (disengage from out of range)
-            if (m_PEntity->GetBattleTargetID() == 0)
+            if (!m_PEntity->battleTarget().isSet())
             {
                 return true;
             }
@@ -93,7 +93,7 @@ auto CAttackState::Update(timer::time_point tick) -> bool
         {
             m_PEntity->HandleErrorMessage(m_errorMsg);
         }
-        if (m_PEntity->GetBattleTargetID() == 0)
+        if (!m_PEntity->battleTarget().isSet())
         {
             return true;
         }

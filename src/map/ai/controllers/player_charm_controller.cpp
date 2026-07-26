@@ -69,7 +69,7 @@ void CPlayerCharmController::DoCombatTick(timer::time_point tick) const
     {
         POwner->PAI->Internal_Disengage();
     }
-    if (POwner->PMaster->GetBattleTargetID() != POwner->GetBattleTargetID())
+    if (POwner->PMaster->battleTarget() != POwner->battleTarget())
     {
         POwner->PAI->Internal_ChangeTarget(POwner->PMaster->battleTarget());
     }

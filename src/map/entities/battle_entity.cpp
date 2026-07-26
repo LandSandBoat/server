@@ -4092,11 +4092,6 @@ void CBattleEntity::PostTick()
     }
 }
 
-uint16 CBattleEntity::GetBattleTargetID() const
-{
-    return battleTarget_.ActIndex;
-}
-
 bool CBattleEntity::hasEnmityEXPENSIVE() const
 {
     // TODO: This check seems to always fail for pets?
@@ -4117,7 +4112,7 @@ bool CBattleEntity::hasEnmityEXPENSIVE() const
                                      return;
                                  }
                                  // Account for charmed mobs attacking normal mobs, etc
-                                 if (PMob->GetBattleTargetID() == targid && PMob->allegiance != allegiance)
+                                 if (PMob->battleTarget().ActIndex == targid && PMob->allegiance != allegiance)
                                  {
                                      isTargeted = true;
                                      return;

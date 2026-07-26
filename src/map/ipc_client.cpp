@@ -488,7 +488,7 @@ void IPCClient::handleMessage_PartyInvite(const IPP& ipp, const ipc::PartyInvite
             return;
         }
 
-        PInvitee->InvitePending.UniqueNo     = message.inviterId;
+        PInvitee->InvitePending.UniqueNo = message.inviterId;
         PInvitee->InvitePending.ActIndex = message.inviterTargId;
 
         PInvitee->pushPacket(std::make_unique<GP_SERV_COMMAND_GROUP_SOLICIT_REQ>(message.inviterId, message.inviterTargId, message.inviterName, message.inviteType));

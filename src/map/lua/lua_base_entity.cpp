@@ -18818,7 +18818,7 @@ auto CLuaBaseEntity::getTarget() -> CBaseEntity*
         return nullptr;
     }
 
-    auto* PBattleTarget{ m_PBaseEntity->GetEntity(static_cast<CBattleEntity*>(m_PBaseEntity)->GetBattleTargetID()) };
+    auto* PBattleTarget{ static_cast<CBattleEntity*>(m_PBaseEntity)->battleTarget().resolve() };
 
     if (PBattleTarget)
     {

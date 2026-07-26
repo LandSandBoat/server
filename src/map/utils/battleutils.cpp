@@ -4231,7 +4231,7 @@ void ClaimMob(CBattleEntity* PDefender, CBattleEntity* PAttacker, bool passing)
                 {
                     if (battleutils::HasClaim(PAttacker, PDefender))
                     { // mob is currently claimed by your alliance, update ownership
-                        mob->m_OwnerID.UniqueNo     = PAttacker->id;
+                        mob->m_OwnerID.UniqueNo = PAttacker->id;
                         mob->m_OwnerID.ActIndex = PAttacker->targid;
                         if (PDefender->isAlive())
                         { // ignore killing blow
@@ -4243,7 +4243,7 @@ void ClaimMob(CBattleEntity* PDefender, CBattleEntity* PAttacker, bool passing)
                     { // mob is unclaimed
                         if (PDefender->isDead())
                         { // always give rewards on the killing blow
-                            mob->m_OwnerID.UniqueNo     = PAttacker->id;
+                            mob->m_OwnerID.UniqueNo = PAttacker->id;
                             mob->m_OwnerID.ActIndex = PAttacker->targid;
                             return;
                         }
@@ -4763,7 +4763,7 @@ void assistTarget(CCharEntity* PChar, uint16 TargID)
     CBattleEntity* EntityToAssist = (CBattleEntity*)PChar->GetEntity(TargID, TYPE_MOB | TYPE_PC);
     if (EntityToAssist != nullptr)
     {
-        if (EntityToAssist->objtype == TYPE_PC && EntityToAssist->GetBattleTargetID() != 0)
+        if (EntityToAssist->objtype == TYPE_PC && EntityToAssist->battleTarget().isSet())
         {
             // get that players engaged target
             CBattleEntity* EntityToLockon = EntityToAssist->GetBattleTarget();
@@ -4773,7 +4773,7 @@ void assistTarget(CCharEntity* PChar, uint16 TargID)
                 PChar->pushPacket<GP_SERV_COMMAND_ASSIST>(PChar, EntityToLockon);
             }
         }
-        else if (EntityToAssist->GetBattleTargetID() != 0)
+        else if (EntityToAssist->battleTarget().isSet())
         {
             // lock on to the new target!
             PChar->pushPacket<GP_SERV_COMMAND_ASSIST>(PChar, EntityToAssist->GetBattleTarget());

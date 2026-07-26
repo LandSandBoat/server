@@ -2033,7 +2033,7 @@ bool IsTandemActive(CBattleEntity* PAttacker)
     if (
         tandemPartner->PAI->IsEngaged() &&
         tandemPartner->GetBattleTarget() != nullptr &&
-        tandemPartner->GetBattleTargetID() == PAttacker->GetBattleTargetID())
+        tandemPartner->battleTarget() == PAttacker->battleTarget())
     {
         return true;
     }

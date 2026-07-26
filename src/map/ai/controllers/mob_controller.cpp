@@ -643,7 +643,7 @@ void CMobController::TryLink()
     // Handle pets that act as bodyguards for their master. Will defend the master if they are being attacked.
     // Will not switch targets if they are already engaged.
     // Atomos, Alexander, and Odin are exempt from this behavior.
-    if (PTarget->PPet != nullptr && PTarget->PPet->GetBattleTargetID() == 0)
+    if (PTarget->PPet != nullptr && !PTarget->PPet->battleTarget().isSet())
     {
         bool isBodyguard = false;
 
@@ -777,7 +777,7 @@ auto CMobController::CanDetectTarget(CBattleEntity* PTarget, const bool forceSig
         }
     }
 
-    const bool isTargetAndInRange = PMob->GetBattleTargetID() == PTarget->targid && currentDistance <= PMob->GetMeleeRange(PTarget);
+    const bool isTargetAndInRange = PMob->battleTarget() == PTarget && currentDistance <= PMob->GetMeleeRange(PTarget);
 
     if (detectSight && !hasInvisible && currentDistance < PMob->getMobMod(xi::MobMod::SightRange) && facing(PMob->loc.p, PTarget->loc.p, 64))
     {
@@ -1304,7 +1304,7 @@ void CMobController::HandleEnmity()
     {
         ChangeTarget(static_cast<CMobEntity*>(PMob->GetEntity(PMob->getMobMod(xi::MobMod::ShareTarget), TYPE_MOB))->battleTarget());
 
-        if (!PMob->GetBattleTargetID())
+        if (!PMob->battleTarget().isSet())
         {
             if (PHighestEnmityTarget)
             {

@@ -884,7 +884,7 @@ bool CBattlefield::CheckInProgress()
     ForEachEnemy([&](const CMobEntity* PMob)
                  {
                      // Any entry in enmity list or currently chasing someone
-                     if (!PMob->PEnmityContainer->GetEnmityList()->empty() || PMob->GetBattleTargetID())
+                     if (!PMob->PEnmityContainer->GetEnmityList()->empty() || PMob->battleTarget().isSet())
                      {
                          if (m_Status == BATTLEFIELD_STATUS_OPEN)
                          {
