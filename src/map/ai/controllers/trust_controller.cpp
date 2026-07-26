@@ -57,7 +57,6 @@ enum TRUST_MOVEMENT_TYPE : int8
 CTrustController::CTrustController(CCharEntity* PChar, CTrustEntity* PTrust)
 : CMobController(PTrust)
 , m_GambitsContainer(std::make_unique<gambits::CGambitsContainer>(PTrust))
-, m_LastTopEnmity(nullptr)
 , m_failedRepositionAttempts(0)
 , m_InTransit(false)
 {
@@ -76,7 +75,6 @@ CTrustController::~CTrustController()
 
     POwner->allegiance = xi::Allegiance::Player;
     POwner->status     = xi::Status::Disappear;
-    m_LastTopEnmity    = nullptr;
 }
 
 void CTrustController::Despawn()
@@ -137,7 +135,6 @@ auto CTrustController::DoCombatTick(timer::time_point tick) -> Task<void>
     if (!PMaster->PAI->IsEngaged())
     {
         PTrust->PAI->Internal_Disengage();
-        m_LastTopEnmity = nullptr;
         m_CombatEndTime = m_Tick;
     }
 
@@ -163,7 +160,6 @@ auto CTrustController::DoCombatTick(timer::time_point tick) -> Task<void>
         if (hasEnmity)
         {
             PTrust->PAI->Internal_ChangeTarget(PMaster->battleTarget());
-            m_LastTopEnmity = nullptr;
         }
     }
 

@@ -64,8 +64,6 @@ private:
     void Declump(const CCharEntity* PMaster, const CBattleEntity* PTarget) const;
     void PathOutToDistance(const CBattleEntity* PTarget, float amount);
 
-    CBattleEntity* m_LastTopEnmity;
-
     timer::time_point m_LastRepositionTime;
     uint8             m_failedRepositionAttempts;
     bool              m_InTransit;
