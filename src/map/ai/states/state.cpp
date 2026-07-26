@@ -34,7 +34,6 @@ void CState::TryInterrupt(CBattleEntity* PAttacker)
 
 CState::CState(CBaseEntity* PEntity, const EntityId& target)
 : m_PEntity(PEntity)
-, m_targid(target.targid)
 , target_(target)
 {
 }
@@ -56,12 +55,7 @@ auto CState::GetTarget() const -> CBaseEntity*
 
 auto CState::GetTargetID() const -> uint16
 {
-    if (target_.isSet())
-    {
-        return target_.targid;
-    }
-
-    return m_targid;
+    return target_.targid;
 }
 
 void CState::Complete()
@@ -83,8 +77,7 @@ void CState::SetTarget(const EntityId& target)
 {
     if (!target_.isSet() || target_ != target)
     {
-        target_  = target;
-        m_targid = target.targid;
+        target_ = target;
         UpdateTarget(target.targid);
     }
 }
@@ -108,7 +101,7 @@ auto CState::GetErrorMsg() const -> std::unique_ptr<CBasicPacket>
 
 auto CState::DoUpdate(const timer::time_point tick) -> bool
 {
-    UpdateTarget(m_targid);
+    UpdateTarget(target_.targid);
     return Update(tick);
 }
 

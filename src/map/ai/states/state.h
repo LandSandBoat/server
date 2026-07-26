@@ -80,7 +80,6 @@ protected:
     CBaseEntity* const m_PEntity;
 
 private:
-    uint16            m_targid{ 0 };
     EntityId          target_{};
     CBaseEntity*      m_PTarget{ nullptr };
     bool              m_completed{ false };
