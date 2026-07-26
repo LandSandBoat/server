@@ -15,7 +15,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     params.baseDamage       = mob:getWeaponDmg()
     params.numHits          = 1
-    params.fTP              = { 4.0, 4.0, 4.0 }
+    params.fTP              = { 3.5, 3.5, 3.5 }
     params.attackType       = xi.attackType.PHYSICAL
     params.damageType       = xi.damageType.SLASHING
     params.shadowBehavior   = xi.mobskills.shadowBehavior.NUMSHADOWS_1
