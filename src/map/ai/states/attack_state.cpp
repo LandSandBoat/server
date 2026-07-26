@@ -163,7 +163,7 @@ void CAttackState::UpdateTarget(uint16 targid)
         if (targid != 0)
         {
             m_PEntity->OnChangeTarget(PNewTarget);
-            SetTarget(newTarget.targid);
+            SetTarget(newTarget);
             if (!PNewTarget)
             {
                 m_errorMsg.reset();

@@ -46,7 +46,6 @@ public:
     virtual ~CState() = default;
 
     auto GetTarget() const -> CBaseEntity*;
-    void SetTarget(uint16 targid);
 
     auto HasErrorMsg() const -> bool;
     auto GetErrorMsg() const -> std::unique_ptr<CBasicPacket>;

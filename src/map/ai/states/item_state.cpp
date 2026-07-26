@@ -172,7 +172,7 @@ void CItemState::UpdateTarget(CBaseEntity* target)
 void CItemState::UpdateTarget(const uint16 targid)
 {
     CState::UpdateTarget(targid);
-    CState::SetTarget(targid);
+    CState::SetTarget(EntityId(m_PEntity->GetEntity(targid)));
 
     if (!m_PItem)
     {

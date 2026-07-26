@@ -89,18 +89,9 @@ void CState::SetTarget(const EntityId& target)
 {
     if (!target_.isSet() || target_ != target)
     {
-        target_ = target;
+        target_  = target;
         m_targid = target.targid;
         UpdateTarget(target.targid);
-    }
-}
-
-void CState::SetTarget(const uint16 targid)
-{
-    if (!m_PTarget || targid != m_targid || (m_PTarget && m_PTarget->targid != targid))
-    {
-        m_targid = targid;
-        UpdateTarget(targid);
     }
 }
 
