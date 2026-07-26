@@ -37,7 +37,7 @@ CAttackState::CAttackState(CBattleEntity* PEntity, const EntityId& target)
     PEntity->SetBattleStartTime(timer::now());
     CAttackState::UpdateTarget();
 
-    if (!GetTarget() || m_errorMsg)
+    if (!m_PEntity->GetBattleTarget() || m_errorMsg)
     {
         PEntity->setBattleTarget(std::nullopt);
         if (this->HasErrorMsg())
@@ -58,7 +58,7 @@ CAttackState::CAttackState(CBattleEntity* PEntity, const EntityId& target)
 
 auto CAttackState::Update(timer::time_point tick) -> bool
 {
-    auto* PTarget = static_cast<CBattleEntity*>(GetTarget());
+    auto* PTarget = m_PEntity->GetBattleTarget();
     if (!PTarget || PTarget->isDead())
     {
         return true;
@@ -118,14 +118,6 @@ void CAttackState::ResetAttackTimer()
     m_attackTime = std::chrono::milliseconds(m_PEntity->GetWeaponDelay(false));
 }
 
-void CAttackState::UpdateTarget(CBaseEntity* target)
-{
-    if (target != nullptr)
-    {
-        CAttackState::UpdateTarget(target->targid);
-    }
-}
-
 void CAttackState::UpdateTarget(uint16 targid)
 {
     m_errorMsg.reset();
@@ -171,7 +163,6 @@ void CAttackState::UpdateTarget(uint16 targid)
             }
         }
     }
-    CState::UpdateTarget(m_PEntity->GetBattleTarget());
 }
 
 auto CAttackState::CanAttack(CBattleEntity* PTarget) -> bool

@@ -37,7 +37,6 @@ public:
 
 protected:
     void UpdateTarget(uint16 = 0) override;
-    void UpdateTarget(CBaseEntity* target) override;
     auto CanAttack(CBattleEntity* PTarget) -> bool;
     auto AttackReady() const -> bool;
 

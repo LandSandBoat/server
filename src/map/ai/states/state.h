@@ -68,8 +68,9 @@ public:
 protected:
     // state logic done per tick - returns whether to exit the state or not
     virtual auto Update(timer::time_point tick) -> bool = 0;
+
+    // Per-tick hook; base does nothing, attack/item override to retarget or re-validate.
     virtual void UpdateTarget(uint16 targid);
-    virtual void UpdateTarget(CBaseEntity* target);
 
     auto GetTargetID() const -> uint16;
     void Complete();
@@ -81,7 +82,6 @@ protected:
 
 private:
     EntityId          target_{};
-    CBaseEntity*      m_PTarget{ nullptr };
     bool              m_completed{ false };
     timer::time_point m_entryTime{ timer::now() };
 };

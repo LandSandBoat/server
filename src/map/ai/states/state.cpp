@@ -40,17 +40,11 @@ CState::CState(CBaseEntity* PEntity, const EntityId& target)
 
 void CState::UpdateTarget(const uint16 targid)
 {
-    m_PTarget = m_PEntity->GetEntity(targid);
-}
-
-void CState::UpdateTarget(CBaseEntity* target)
-{
-    m_PTarget = target;
 }
 
 auto CState::GetTarget() const -> CBaseEntity*
 {
-    return m_PTarget;
+    return target_.resolve();
 }
 
 auto CState::GetTargetID() const -> uint16
