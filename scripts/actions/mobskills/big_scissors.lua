@@ -16,10 +16,12 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     params.baseDamage     = mob:getWeaponDmg()
     params.numHits        = 1
-    params.fTP            = { 2.0, 2.0, 2.0 }
+    params.fTP            = { 1.0, 1.0, 1.0 }
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.SLASHING
     params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    params.canCrit          = true
+    params.criticalChance   = { 1.00, 1.00, 1.00 }
 
     -- TODO: Nightmare Crab - Ignores shadows
 
