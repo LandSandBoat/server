@@ -20,7 +20,15 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local stolen = 0
-    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), xi.skill.BLUE_MAGIC, 0, spell:getElement(), xi.mod.INT, 0, 0)
+    local params =
+    {
+        magicalElement = spell:getElement(),
+        actorStat      = xi.mod.INT,
+        skillType      = xi.skill.BLUE_MAGIC,
+        spellGroup     = spell:getSpellGroup(),
+    }
+
+    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, params)
 
     if resist >= 0.5 then
         stolen = caster:stealStatusEffect(target)

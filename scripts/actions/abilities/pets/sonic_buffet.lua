@@ -35,8 +35,16 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     end
 
     -- Note: This dispel is Wind based rather than Dark.
-    local resist = xi.combat.magicHitRate.calculateResistRate(pet, target, 0, 0, 0, xi.element.WIND, 0, 0, 0)
-    if resist > 0.0625 then -- Is there _any_ circumstance wherein a dispel adds a message? Based on testing it seems the ability is magic damage only visibly.
+    local maccParams =
+    {
+        effectId       = xi.effect.NONE,
+        magicalElement = xi.element.WIND,
+        bonusMacc      = xi.summon.getSummoningSkillOverCap(pet),
+        actorStat      = xi.mod.INT,
+    }
+
+    local resist = xi.combat.magicHitRate.calculateResistRate(pet, target, maccParams)
+    if resist >= 0.5 then
         target:dispelStatusEffect()
     end
 

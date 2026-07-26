@@ -182,7 +182,14 @@ xi.additionalEffect.procFunctions[xi.additionalEffect.procType.DEBUFF] = functio
     end
 
     -- Early return: Regular resist rate.
-    local resistRate = xi.combat.magicHitRate.calculateResistRate(actor, target, 0, 0, xi.skillRank.A, actionElement, xi.mod.INT, effectId, 0)
+    local maccParams =
+    {
+        effectId       = effectId,
+        skillRank      = xi.skillRank.A,
+        magicalElement = actionElement,
+        actorStat      = xi.mod.INT,
+    }
+    local resistRate = xi.combat.magicHitRate.calculateResistRate(actor, target, maccParams)
     if resistRate < 0.5 then
         return 0, 0, 0
     end

@@ -9,8 +9,8 @@ local itemObject = {}
 itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, item)
     local pTable =
     {
-        chance  = 10,
-        element = xi.element.DARK,
+        chance         = 10,
+        magicalElement = xi.element.DARK,
     }
 
     return xi.combat.action.executeAddEffectDispel(actor, target, pTable)

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Global file for mobskills that apply status effects.
 -----------------------------------
-require('scripts/combat/magic_hit_rate')
------------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.action = xi.combat.action or {}
@@ -25,20 +23,21 @@ local function validateEffectParameters(fedData)
     local params = {}
 
     -- Status effect application parameters.
-    params.effectId   = fedData.effectId or 0
-    params.power      = fedData.power or 0
-    params.tick       = fedData.tick or 0
-    params.duration   = fedData.duration or 0
-    params.subType    = fedData.subType or 0
-    params.subPower   = fedData.subPower or 0
-    params.tier       = fedData.tier or 0
+    params.effectId       = fedData.effectId or 0
+    params.power          = fedData.power or 0
+    params.tick           = fedData.tick or 0
+    params.duration       = fedData.duration or 0
+    params.subType        = fedData.subType or 0
+    params.subPower       = fedData.subPower or 0
+    params.tier           = fedData.tier or 0
 
     -- Calculation parameters.
-    params.element    = fedData.element or xi.data.statusEffect.getAssociatedElement(params.effectId, xi.element.NONE)
-    params.rank       = fedData.rank or xi.skillRank.A_PLUS -- The skill rank used for macc.
-    params.stat       = fedData.stat or xi.mod.INT          -- Stat used for macc.
-    params.macc       = fedData.macc or 0                   -- Flat macc bonus addition.
-    params.resistRate = fedData.resistRate or 0
+    params.magicalElement = fedData.magicalElement or xi.data.statusEffect.getAssociatedElement(params.effectId, xi.element.NONE)
+    params.skillRank      = fedData.skillRank or xi.skillRank.A_PLUS -- The skill rank used for macc.
+    params.actorStat      = fedData.actorStat or xi.mod.INT          -- Stat used for macc.
+    params.targetStat     = fedData.targetStat or params.actorStat
+    params.bonusMacc      = fedData.bonusMacc or 0                   -- Flat macc bonus addition.
+    params.resistRate     = fedData.resistRate or 0
 
     return params
 end
@@ -68,7 +67,7 @@ local function handleStatusEffect(actor, target, params)
     end
 
     -- Check immunity.
-    if xi.data.statusEffect.isTargetImmune(target, params.effectId, params.element) then
+    if xi.data.statusEffect.isTargetImmune(target, params.effectId, params.magicalElement) then
         return step.IMMUNE_CHECK
 
     -- Check resist traits.
@@ -81,7 +80,7 @@ local function handleStatusEffect(actor, target, params)
     end
 
     -- Calculate resist state.
-    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(actor, target, 0, 0, params.rank, params.element, params.stat, params.effectId, params.macc)
+    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(actor, target, params)
     if not xi.data.statusEffect.isResistRateSuccessfull(params.effectId, resistanceRate, params.resistRate) then
         return step.RESIST_RATE_CHECK
     end

@@ -47,7 +47,7 @@ entity.onSpikesDamage = function(mob, target, damage)
         canResistExtra  = true,
     }
 
-    return xi.combat.action.executeAddEffectDamage(mob, target, pTable)
+    return xi.combat.action.executeSpikesDamage(mob, target, pTable)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

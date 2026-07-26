@@ -387,14 +387,23 @@ xi.job_utils.dancer.useDesperateFlourishAbility = function(player, target, abili
         (player:hasStatusEffect(xi.effect.SNEAK_ATTACK) and player:isBehind(target))
     then
         infoValue = actionInfo[ability:getID()][2]
-        local resistRate = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, xi.skillRank.A_PLUS, xi.element.WIND, xi.mod.INT, xi.effect.WEIGHT, 0)
+
+        local maccParams =
+        {
+            effectId       = xi.effect.WEIGHT,
+            magicalElement = xi.element.WIND,
+            skillRank      = xi.skillRank.A_PLUS,
+            actorStat      = xi.mod.INT,
+        }
+
+        local resistRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
 
         if
-            not xi.data.statusEffect.isTargetImmune(target, xi.effect.WEIGHT, xi.element.WIND) and -- Check immunity.
-            not xi.data.statusEffect.isTargetResistant(player, target, xi.effect.WEIGHT) and       -- Check resistance trigger.
-            not xi.data.statusEffect.isEffectNullified(target, xi.effect.WEIGHT, 0) and               -- Check conflicting effect.
-            resistRate > 0.25 and                                                                  -- Check actual resistance.
-            target:addStatusEffect(xi.effect.WEIGHT, { power = 50, duration = 60 * resistRate, origin = player })                       -- Check effect power.
+            not xi.data.statusEffect.isTargetImmune(target, xi.effect.WEIGHT, xi.element.WIND) and                -- Check immunity.
+            not xi.data.statusEffect.isTargetResistant(player, target, xi.effect.WEIGHT) and                      -- Check resistance trigger.
+            not xi.data.statusEffect.isEffectNullified(target, xi.effect.WEIGHT, 0) and                           -- Check conflicting effect.
+            resistRate > 0.25 and                                                                                 -- Check actual resistance.
+            target:addStatusEffect(xi.effect.WEIGHT, { power = 50, duration = 60 * resistRate, origin = player }) -- Check effect power.
         then
             ability:setMsg(xi.msg.basic.JA_ENFEEB_IS)
         else
@@ -444,8 +453,16 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
         action:recordDamage(target, xi.attackType.PHYSICAL, dmg)
 
         -- Effect
-        local bonusMacc  = player:getMod(xi.mod.VFLOURISH_MACC)
-        local resistRate = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, xi.skillRank.A_PLUS, xi.element.THUNDER, xi.mod.INT, xi.effect.STUN, bonusMacc)
+        local maccParams =
+        {
+            effectId       = xi.effect.STUN,
+            magicalElement = xi.element.THUNDER,
+            skillRank      = xi.skillRank.A_PLUS,
+            actorStat      = xi.mod.INT,
+            bonusMacc      = player:getMod(xi.mod.VFLOURISH_MACC),
+        }
+
+        local resistRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
 
         if
             not xi.data.statusEffect.isTargetImmune(target, xi.effect.STUN, xi.element.THUNDER) and -- Check immunity.

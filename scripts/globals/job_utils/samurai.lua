@@ -215,9 +215,17 @@ xi.job_utils.samurai.useBladeBash = function(player, target, ability, action)
         not xi.data.statusEffect.isTargetResistant(player, target, xi.effect.STUN) and
         not xi.data.statusEffect.isEffectNullified(target, xi.effect.STUN, 0)
     then
-        local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, xi.skillRank.A_PLUS, xi.element.THUNDER, xi.mod.INT, xi.effect.STUN, 0)
-        if xi.data.statusEffect.isResistRateSuccessfull(xi.effect.STUN, resistanceRate, 0) then
-            target:addStatusEffect(xi.effect.STUN, { power = 1, duration = 6 * resistanceRate, origin = player })
+        local stunMaccParams =
+        {
+            effectId       = xi.effect.STUN,
+            magicalElement = xi.element.THUNDER,
+            skillRank      = xi.skillRank.A_PLUS,
+            actorStat      = xi.mod.INT,
+        }
+
+        local stunResistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, stunMaccParams)
+        if xi.data.statusEffect.isResistRateSuccessfull(xi.effect.STUN, stunResistanceRate, 0) then
+            target:addStatusEffect(xi.effect.STUN, { power = 1, duration = 6 * stunResistanceRate, origin = player })
         end
     end
 
@@ -227,9 +235,17 @@ xi.job_utils.samurai.useBladeBash = function(player, target, ability, action)
         not xi.data.statusEffect.isTargetResistant(player, target, xi.effect.PLAGUE) and
         not xi.data.statusEffect.isEffectNullified(target, xi.effect.PLAGUE, 0)
     then
-        local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, xi.skillRank.A_PLUS, xi.element.FIRE, xi.mod.INT, xi.effect.PLAGUE, 0)
-        if xi.data.statusEffect.isResistRateSuccessfull(xi.effect.PLAGUE, resistanceRate, 0) then
-            local duration = (15 + player:getMerit(xi.merit.BLADE_BASH)) * resistanceRate
+        local plagueMaccParams =
+        {
+            effectId       = xi.effect.PLAGUE,
+            magicalElement = xi.element.FIRE,
+            skillRank      = xi.skillRank.A_PLUS,
+            actorStat      = xi.mod.INT,
+        }
+
+        local plagueResistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, plagueMaccParams)
+        if xi.data.statusEffect.isResistRateSuccessfull(xi.effect.PLAGUE, plagueResistanceRate, 0) then
+            local duration = (15 + player:getMerit(xi.merit.BLADE_BASH)) * plagueResistanceRate
             target:addStatusEffect(xi.effect.PLAGUE, { power = 5, duration = duration, origin = player })
         end
     end

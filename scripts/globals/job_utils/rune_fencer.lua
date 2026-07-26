@@ -514,12 +514,13 @@ xi.job_utils.rune_fencer.onBattutaEffectLose = function(target, effect)
 end
 
 local function getSwipeLungeDamageMultipliers(player, target, element, bonusMacc) -- get these multipliers once and store them
-    local multipliers = {}
+    local skillchainCount = xi.combat.magicBurst.getMagicBurstTier(target, element)
+    local multipliers     = {}
 
     multipliers.eleStaffBonus       = xi.spells.damage.calculateElementalStaffBonus(player, element)
     multipliers.eleAffinityBonus    = xi.spells.damage.calculateElementalAffinityBonus(player, element)
     multipliers.SDT                 = xi.combat.damage.magicalElementSDT(target, element)
-    multipliers.resist              = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, 0, element, 0, 0, bonusMacc)
+    multipliers.resist              = xi.combat.magicHitRate.calculateResistRate(player, target, { magicalElement = element, magicBurstTier = skillchainCount, bonusMacc = bonusMacc })
     multipliers.dayAndWeather       = xi.spells.damage.calculateDayAndWeather(player, element, false)
     multipliers.magicBonusDiff      = xi.spells.damage.calculateMagicBonusDiff(player, target, 0, 0, element, 0)
     multipliers.TMDA                = xi.combat.damage.calculateDamageAdjustment(target, false, true, false, false)
@@ -527,8 +528,6 @@ local function getSwipeLungeDamageMultipliers(player, target, element, bonusMacc
     multipliers.nullify             = xi.spells.damage.calculateNullification(target, element, false, true, false, false)
     multipliers.magicBurst          = 1
     multipliers.magicBurstBonus     = 1
-
-    local skillchainCount = xi.combat.magicBurst.getMagicBurstTier(target, element)
 
     if skillchainCount > 0 then
         multipliers.magicBurst      = xi.spells.damage.calculateIfMagicBurst(player, target, element, skillchainCount)

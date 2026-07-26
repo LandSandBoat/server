@@ -28,8 +28,15 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     end
 
     -- Check resistance.
-    local bonusMacc  = xi.summon.getSummoningSkillOverCap(pet)
-    local resistRate = xi.combat.magicHitRate.calculateResistRate(pet, target, 0, 0, 0, xi.element.DARK, xi.mod.INT, xi.effect.SLEEP_I, bonusMacc)
+    local params =
+    {
+        effectId       = xi.effect.SLEEP_I,
+        magicalElement = xi.element.DARK,
+        bonusMacc      = xi.summon.getSummoningSkillOverCap(pet),
+        actorStat      = xi.mod.INT,
+    }
+
+    local resistRate = xi.combat.magicHitRate.calculateResistRate(pet, target, params)
     if resistRate < 0.5 then
         petskill:setMsg(xi.msg.basic.JA_MISS_2) -- resist message
         return xi.effect.SLEEP_I

@@ -475,7 +475,7 @@ xi.job_utils.beastmaster.useTame = function(player, target, ability)
         return 0
     end
 
-    local resist = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, 0, xi.element.NONE, xi.mod.INT, 0, 0)
+    local resist = xi.combat.magicHitRate.calculateResistRate(player, target, { actorStat = xi.mod.INT })
 
     if resist <= 0.25 then
         ability:setMsg(xi.msg.basic.JA_MISS_2)
@@ -749,7 +749,15 @@ xi.job_utils.beastmaster.useFeralHowl = function(player, target, ability, action
         ability:setMsg(xi.msg.basic.JA_MISS_2)
     else
         -- modAcc returns 5 per merit level (5, 10, 15, 20, 25), providing 5% accuracy bonus per merit
-        local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, xi.skillRank.B_MINUS, xi.element.DARK, xi.mod.CHR, xi.effect.TERROR, modAcc)
+        local params =
+        {
+            effectId       = xi.effect.TERROR,
+            skillRank      = xi.skillRank.B_MINUS,
+            magicalElement = xi.element.DARK,
+            actorStat      = xi.mod.CHR,
+            bonusMacc      = modAcc,
+        }
+        local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, params)
 
         if xi.data.statusEffect.isResistRateSuccessfull(xi.effect.TERROR, resistanceRate, 0) then
             target:addStatusEffect(xi.effect.TERROR, { power = 1, duration = duration * resistanceRate, origin = player })

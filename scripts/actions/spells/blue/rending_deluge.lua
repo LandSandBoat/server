@@ -42,8 +42,18 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
 
-    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), xi.skill.BLUE_MAGIC, 0, spell:getElement(), xi.mod.INT, xi.effect.NONE, 0)
-    if resist > 0.0625 then
+    local maccParams =
+    {
+        effectId       = xi.effect.NONE,
+        magicalElement = spell:getElement(),
+        actorStat      = xi.mod.INT,
+        skillType      = xi.skill.BLUE_MAGIC,
+        spellGroup     = spell:getSpellGroup(),
+    }
+
+    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, maccParams)
+
+    if resist >= 0.5 then
         target:dispelStatusEffect()
     end
 

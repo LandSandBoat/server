@@ -1,8 +1,6 @@
 -----------------------------------
 -- Global file for additional effects (Status Effects)
 -----------------------------------
-require('scripts/combat/magic_hit_rate')
------------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.action = xi.combat.action or {}
@@ -58,11 +56,11 @@ local function validateParameters(actor, target, fedData)
     params.resistRate      = fedData.resistRate or 0
 
     -- Action properties.
-    params.element         = fedData.element or xi.element.NONE     -- None, Fire, Ice, Wind, Earth, Thunder, Water, Light, Dark.
+    params.magicalElement  = fedData.magicalElement or xi.data.statusEffect.getAssociatedElement(params.effectId, xi.element.NONE)
     params.actorStat       = fedData.actorStat or 0
-    params.targetStat      = fedData.targetStat or params.actorStat        -- Currently unused. For future use.
+    params.targetStat      = fedData.targetStat or params.actorStat
     params.skillRank       = fedData.skillRank or xi.skillRank.A_PLUS
-    params.macc            = fedData.macc or 0
+    params.bonusMacc       = fedData.bonusMacc or 0
 
     -- Optional behavior.
     params.resetEmnity     = fedData.resetEmnity or false -- Currently unused. For future use.
@@ -156,7 +154,7 @@ xi.combat.action.executeAddEffectEnfeeblement = function(actor, target, fedData)
     end
 
     -- Early return: Target is immune.
-    if xi.data.statusEffect.isTargetImmune(params.aeTarget, params.effectId, params.element) then
+    if xi.data.statusEffect.isTargetImmune(params.aeTarget, params.effectId, params.magicalElement) then
         return 0, 0, 0
     end
 
@@ -171,7 +169,7 @@ xi.combat.action.executeAddEffectEnfeeblement = function(actor, target, fedData)
     end
 
     -- Early return: Resist rate too high.
-    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(actor, params.aeTarget, 0, 0, params.skillRank, params.element, params.actorStat, params.effectId, params.macc)
+    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(actor, params.aeTarget, params)
     if not xi.data.statusEffect.isResistRateSuccessfull(params.effectId, resistanceRate, params.resistRate) then
         return 0, 0, 0
     end
@@ -211,7 +209,7 @@ xi.combat.action.executeAddEffectDispel = function(actor, target, fedData)
     end
 
     -- Early return: Resist rate too high.
-    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(actor, params.aeTarget, 0, 0, params.skillRank, params.element, params.actorStat, params.effectId, params.macc)
+    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(actor, params.aeTarget, params)
     if not xi.data.statusEffect.isResistRateSuccessfull(params.effectId, resistanceRate, params.resistRate) then
         return 0, 0, 0
     end

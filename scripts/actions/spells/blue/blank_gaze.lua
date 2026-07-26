@@ -21,7 +21,15 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local effect = xi.effect.NONE
-    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), xi.skill.BLUE_MAGIC, 0, xi.element.LIGHT, xi.mod.INT, xi.effect.NONE, 0)
+    local params =
+    {
+        magicalElement = spell:getElement(),
+        actorStat      = xi.mod.INT,
+        skillType      = xi.skill.BLUE_MAGIC,
+        spellGroup     = spell:getSpellGroup(),
+    }
+
+    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, params)
 
     if resist >= 0.25 then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

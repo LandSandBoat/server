@@ -35,7 +35,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
 
         local effectTable =
         {
-            [1] = { effectId = xi.effect.STUN, power = 1, duration = 12, origin = pet },
+            [1] = { effectId = xi.effect.STUN, power = 1, duration = 12 },
         }
 
         xi.combat.action.executeMobskillStatusEffect(pet, target, petskill, effectTable, { messageBypass = true })

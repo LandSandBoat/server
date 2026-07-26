@@ -12,10 +12,10 @@ end
 entity.onAdditionalEffect = function(mob, target, damage)
     local pTable =
     {
-        chance   = 10,
-        effectId = xi.effect.MUTE,
-        element  = xi.element.WIND,
-        duration = 3600,
+        chance         = 10,
+        effectId       = xi.effect.MUTE,
+        magicalElement = xi.element.WIND,
+        duration       = 3600,
     }
 
     return xi.combat.action.executeAddEffectEnfeeblement(mob, target, pTable)

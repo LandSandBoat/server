@@ -35,9 +35,15 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local effectId      = xi.effect.MAGIC_EVASION_DOWN
     local actionElement = xi.element.THUNDER
     local power         = 10
-    local skillType     = xi.skill.SWORD
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
-    local duration      = math.floor(60 * resist) -- TODO: Chance of lowering magic evasion varies with TP.
+    local maccParams =
+    {
+        effectId       = xi.effect.MAGIC_EVASION_DOWN,
+        magicalElement = xi.element.THUNDER,
+        skillType      = xi.skill.SWORD,
+    }
+
+    local resist   = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
+    local duration = math.floor(60 * resist) -- TODO: Chance of lowering magic evasion varies with TP.
     xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
 
     return tpHits, extraHits, criticalHit, damage

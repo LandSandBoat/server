@@ -30,12 +30,16 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
         xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, 60)
 
-        -- TODO: Capture/verify this mechanic. If real, check to see if it can resist. We should probably make a new function for this is it can be resisted.
-        -- Due to conflicting information, making the dispel resistable.  Correct/tweak if wrong.
-        -- Dispel has no status effect or resistance gear, so 0s instead of nulls.
-        local resistRate = xi.combat.magicHitRate.calculateResistRate(mob, target, 0, 0, 0, xi.element.LIGHT, xi.mod.INT, xi.effect.NONE, 0)
+        local maccParams =
+        {
+            effectId       = xi.effect.NONE,
+            magicalElement = xi.element.LIGHT,
+            actorStat      = xi.mod.INT,
+        }
 
-        if resistRate >= 0.25 then
+        local resistRate = xi.combat.magicHitRate.calculateResistRate(mob, target, maccParams)
+
+        if resistRate >= 0.5 then
             target:dispelStatusEffect()
         end
     end

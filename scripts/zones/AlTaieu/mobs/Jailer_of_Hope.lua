@@ -102,10 +102,10 @@ end
 entity.onAdditionalEffect = function(mob, target, damage)
     local pTable =
     {
-        chance   = 65,
-        effectId = xi.effect.STUN,
-        element  = xi.element.THUNDER,
-        duration = math.randomInt(4, 8),
+        chance         = 65,
+        effectId       = xi.effect.STUN,
+        magicalElement = xi.element.THUNDER,
+        duration       = math.randomInt(4, 8),
     }
 
     return xi.combat.action.executeAddEffectEnfeeblement(mob, target, pTable)

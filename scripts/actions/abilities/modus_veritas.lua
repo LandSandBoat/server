@@ -14,32 +14,31 @@ end
 
 abilityObject.onUseAbility = function(player, target, ability)
     local helix = target:getStatusEffect(xi.effect.HELIX)
-
-    if helix ~= nil then
-        local mvPower = helix:getSubPower()
-        local resist  = xi.combat.magicHitRate.calculateResistRate(player, target, 0, xi.skill.ELEMENTAL_MAGIC, 0, xi.element.NONE, 0, 0, 0)
-        -- Doesn't work against NMs apparently
-        if mvPower > 0 or resist < 0.25 or target:isNM() then -- Don't let Modus Veritas stack to prevent abuse
-            ability:setMsg(xi.msg.basic.JA_MISS) --Miss
-            return 0
-        else
-            -- Double power and halve remaining time
-            local mvMerits           = player:getMerit(xi.merit.MODUS_VERITAS_DURATION)
-            local durationMultiplier = 0.5 + (0.05 * mvMerits)
-            mvPower = mvPower + 1
-
-            local helixPower = helix:getPower() * 2 + (3 * player:getJobPointLevel(xi.jp.MODUS_VERITAS_EFFECT))
-            local duration   = helix:getDuration()
-            local remaining  = math.floor(helix:getTimeRemaining() / 1000) -- from milliseconds
-
-            duration = (duration-remaining) + math.floor(remaining * durationMultiplier)
-            helix:setSubPower(mvPower)
-            helix:setPower(helixPower)
-            helix:setDuration(duration * 1000) -- back to milliseconds
-        end
-    else
+    if not helix then
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT_2) -- No effect
+        return 0
     end
+
+    local mvPower = helix:getSubPower()
+    local params  = { skillType = xi.skill.ELEMENTAL_MAGIC }
+    local resist  = xi.combat.magicHitRate.calculateResistRate(player, target, params)
+
+    -- Doesn't work against NMs apparently
+    if mvPower > 0 or resist < 0.25 or target:isNM() then -- Don't let Modus Veritas stack to prevent abuse
+        ability:setMsg(xi.msg.basic.JA_MISS) --Miss
+        return 0
+    end
+
+    -- Double power and halve remaining time
+    local durationMultiplier = 0.5 + 0.05 * player:getMerit(xi.merit.MODUS_VERITAS_DURATION)
+    local helixPower         = 2 * helix:getPower() + 3 * player:getJobPointLevel(xi.jp.MODUS_VERITAS_EFFECT)
+    local duration           = helix:getDuration()
+    local remaining          = math.floor(helix:getTimeRemaining() / 1000) -- from milliseconds
+
+    duration = duration - remaining + math.floor(remaining * durationMultiplier)
+    helix:setSubPower(mvPower + 1)
+    helix:setPower(helixPower)
+    helix:setDuration(duration * 1000) -- back to milliseconds
 end
 
 return abilityObject

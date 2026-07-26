@@ -25,7 +25,15 @@ spellObject.onSpellCast = function(caster, target, spell)
         [7] = { xi.effect.CHR_DOWN, xi.mod.CHR },
     }
 
-    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, spell:getSpellGroup(), 0, 0, xi.element.DARK, xi.mod.INT, 0, 0)
+    local params =
+    {
+        magicalElement = xi.element.DARK,
+        actorStat      = xi.mod.INT,
+        skillType      = xi.skill.ELEMENTAL_MAGIC,
+        spellGroup     = spell:getSpellGroup(),
+    }
+
+    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, params)
 
     for i = 1, 7 do
         local effectId = effectTable[i][1]
