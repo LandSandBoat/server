@@ -41,7 +41,6 @@ class CState
 {
 public:
     CState(CBaseEntity* PEntity, const EntityId& target);
-    CState(CBaseEntity* PEntity, uint16 _targid);
 
     virtual ~CState() = default;
 
