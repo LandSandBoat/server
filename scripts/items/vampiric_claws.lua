@@ -1,0 +1,30 @@
+-----------------------------------
+-- ID: 17510
+-- Item: Vampiric Claws
+-- Additional effect: en-drain
+-----------------------------------
+---@type TItem
+local itemObject = {}
+
+itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, item)
+    local dStat = actor:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+
+    local pTable =
+    {
+        chance          = 16, -- 16% flat, no scaling on proc rate.
+        basePower       = 8 + utils.clamp(dStat, -3, 16) + utils.clamp(math.floor((dStat - 16) / 2), 0, 16),
+        attackType      = xi.attackType.PHYSICAL,
+        physicalElement = xi.damageType.SLASHING,
+        magicalElement  = xi.element.DARK,
+        canResist       = true,
+        lowestResist    = 0.5,
+        limitUndead     = true,
+        drainHP         = true,
+        overDrain       = true,
+        animation       = xi.subEffect.DARKNESS_DAMAGE,
+    }
+
+    return xi.combat.action.executeAddEffectDamage(actor, target, pTable)
+end
+
+return itemObject
