@@ -21,6 +21,10 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     params.shadowBehavior     = xi.mobskills.shadowBehavior.WIPE_SHADOWS
     params.guaranteedFirstHit = true
     params.skipPDIF           = true
+    params.skipFSTR           = true
+    params.skipParry          = true
+    params.skipGuard          = true
+    params.skipBlock          = true
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 
