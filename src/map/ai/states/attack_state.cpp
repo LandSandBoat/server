@@ -155,7 +155,7 @@ void CAttackState::UpdateTarget(uint16 targid)
                     }
                 }
             }
-            m_PEntity->PAI->ChangeTarget(newTarget.targid);
+            m_PEntity->PAI->ChangeTarget(newTarget);
         }
     }
     if (targid != newTarget.targid)

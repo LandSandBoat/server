@@ -1266,13 +1266,13 @@ void CMobController::HandleEnmity()
 
     if (PMob->getMobMod(xi::MobMod::ShareTarget) > 0 && PMob->GetEntity(PMob->getMobMod(xi::MobMod::ShareTarget), TYPE_MOB))
     {
-        ChangeTarget(static_cast<CMobEntity*>(PMob->GetEntity(PMob->getMobMod(xi::MobMod::ShareTarget), TYPE_MOB))->GetBattleTargetID());
+        ChangeTarget(static_cast<CMobEntity*>(PMob->GetEntity(PMob->getMobMod(xi::MobMod::ShareTarget), TYPE_MOB))->battleTarget());
 
         if (!PMob->GetBattleTargetID())
         {
             if (PHighestEnmityTarget)
             {
-                ChangeTarget(PHighestEnmityTarget->targid);
+                ChangeTarget(PHighestEnmityTarget->entityId());
             }
         }
     }
@@ -1280,7 +1280,7 @@ void CMobController::HandleEnmity()
     {
         if (PHighestEnmityTarget)
         {
-            ChangeTarget(PHighestEnmityTarget->targid);
+            ChangeTarget(PHighestEnmityTarget->entityId());
         }
     }
 
@@ -1321,7 +1321,7 @@ void CMobController::HandleEnmity()
 
         if (PNewTarget)
         {
-            ChangeTarget(PNewTarget->targid);
+            ChangeTarget(PNewTarget->entityId());
         }
 
         if (PTarget)

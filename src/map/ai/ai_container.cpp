@@ -79,11 +79,11 @@ auto CAIContainer::Engage(const EntityId& target) const -> bool
     return false;
 }
 
-auto CAIContainer::ChangeTarget(const uint16 targid) const -> bool
+auto CAIContainer::ChangeTarget(const EntityId& target) const -> bool
 {
     if (Controller)
     {
-        return Controller->ChangeTarget(targid);
+        return Controller->ChangeTarget(target);
     }
     return false;
 }
@@ -193,7 +193,7 @@ auto CAIContainer::Internal_Engage(EntityId target) -> bool
     {
         if (entity->battleTarget() != target)
         {
-            ChangeTarget(target.targid);
+            ChangeTarget(target);
             return true;
         }
         return false;
@@ -237,19 +237,19 @@ auto CAIContainer::Internal_Cast(EntityId target, SpellID spellid) -> bool
     return false;
 }
 
-auto CAIContainer::Internal_ChangeTarget(const uint16 targetid) const -> bool
+auto CAIContainer::Internal_ChangeTarget(const EntityId& target) const -> bool
 {
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
     if (entity)
     {
-        if (IsEngaged() || targetid == 0)
+        if (IsEngaged() || !target.isSet())
         {
-            entity->setBattleTarget(EntityId(entity->GetEntity(targetid)));
+            entity->setBattleTarget(target);
             return true;
         }
         else
         {
-            return Engage(EntityId(entity->GetEntity(targetid)));
+            return Engage(target);
         }
     }
     return false;

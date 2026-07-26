@@ -18848,7 +18848,7 @@ void CLuaBaseEntity::updateTarget()
 
     if (PTarget)
     {
-        PMobEntity->PAI->ChangeTarget(PTarget->targid);
+        PMobEntity->PAI->ChangeTarget(PTarget->entityId());
     }
 }
 

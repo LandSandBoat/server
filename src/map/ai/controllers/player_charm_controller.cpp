@@ -69,7 +69,7 @@ void CPlayerCharmController::DoCombatTick(timer::time_point tick) const
     }
     if (POwner->PMaster->GetBattleTargetID() != POwner->GetBattleTargetID())
     {
-        POwner->PAI->Internal_ChangeTarget(POwner->PMaster->GetBattleTargetID());
+        POwner->PAI->Internal_ChangeTarget(POwner->PMaster->battleTarget());
     }
     auto* PTarget{ POwner->GetBattleTarget() };
     if (PTarget)
@@ -120,7 +120,7 @@ auto CPlayerCharmController::Cast(const EntityId target, SpellID spellid) -> boo
     return false;
 }
 
-auto CPlayerCharmController::ChangeTarget(uint16 targid) -> bool
+auto CPlayerCharmController::ChangeTarget(const EntityId& target) -> bool
 {
     return false;
 }

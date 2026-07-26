@@ -35,7 +35,7 @@ public:
     auto Tick(timer::time_point tick) -> Task<void> override;
     auto Cast(EntityId target, SpellID spellid) -> bool override;
     auto Engage(const EntityId& target) -> bool override;
-    auto ChangeTarget(uint16 targid) -> bool override;
+    auto ChangeTarget(const EntityId& target) -> bool override;
     auto Disengage() -> bool override;
     auto WeaponSkill(EntityId target, uint16 wsid) -> bool override;
     auto Ability(EntityId target, uint16 abilityid) -> bool override;

@@ -161,7 +161,7 @@ auto CTrustController::DoCombatTick(timer::time_point tick) -> Task<void>
 
         if (hasEnmity)
         {
-            PTrust->PAI->Internal_ChangeTarget(PMaster->GetBattleTargetID());
+            PTrust->PAI->Internal_ChangeTarget(PMaster->battleTarget());
             m_LastTopEnmity = nullptr;
         }
     }

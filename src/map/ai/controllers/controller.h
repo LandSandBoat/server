@@ -43,7 +43,7 @@ public:
     virtual void Reset();
     virtual auto Cast(EntityId target, SpellID spellid) -> bool;
     virtual auto Engage(const EntityId& target) -> bool;
-    virtual auto ChangeTarget(uint16 targid) -> bool;
+    virtual auto ChangeTarget(const EntityId& target) -> bool;
     virtual auto Disengage() -> bool;
     virtual auto WeaponSkill(EntityId target, uint16 wsid) -> bool;
     virtual auto RangedAttack(EntityId target) -> bool;

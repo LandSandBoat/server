@@ -50,7 +50,7 @@ public:
 
     auto Cast(const EntityId& target, SpellID spellid) const -> bool;
     auto Engage(const EntityId& target) const -> bool;
-    auto ChangeTarget(uint16 targid) const -> bool;
+    auto ChangeTarget(const EntityId& target) const -> bool;
     auto Disengage() const -> bool;
     auto WeaponSkill(const EntityId& target, uint16 wsid) const -> bool;
     auto MobSkill(const EntityId& target, uint16 wsid, Maybe<timer::duration> castTimeOverride) const -> bool;
@@ -68,7 +68,7 @@ public:
 
     auto Internal_Engage(EntityId target) -> bool;
     auto Internal_Cast(EntityId target, SpellID spellid) -> bool;
-    auto Internal_ChangeTarget(uint16 targetid) const -> bool;
+    auto Internal_ChangeTarget(const EntityId& target) const -> bool;
     auto Internal_Disengage() const -> bool;
     auto Internal_WeaponSkill(const EntityId& target, uint16 wsid) -> bool;
     auto Internal_MobSkill(const EntityId& target, uint16 wsid, Maybe<timer::duration> castTimeOverride) -> bool;

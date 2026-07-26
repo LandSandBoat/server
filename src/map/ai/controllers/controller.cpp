@@ -64,11 +64,11 @@ auto CController::Engage(const EntityId& target) -> bool
     return false;
 }
 
-auto CController::ChangeTarget(const uint16 targid) -> bool
+auto CController::ChangeTarget(const EntityId& target) -> bool
 {
     if (POwner)
     {
-        return POwner->PAI->Internal_ChangeTarget(targid);
+        return POwner->PAI->Internal_ChangeTarget(target);
     }
     return false;
 }
