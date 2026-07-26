@@ -17,9 +17,7 @@ itemObject.onItemUse = function(target, user)
         power = power + 1
     end
 
-    if not target:hasStatusEffect(xi.effect.REFRESH) then
-        target:addStatusEffect(xi.effect.REFRESH, { power = power, duration = 90, origin = user, tick = 3 })
-    else
+    if not target:addStatusEffect(xi.effect.REFRESH, { power = power, duration = 90, origin = user, tick = 3 }) then
         target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
 end

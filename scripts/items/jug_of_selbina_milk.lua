@@ -11,13 +11,9 @@ itemObject.onItemCheck = function(target, item, caster)
 end
 
 itemObject.onItemUse = function(target, user)
-    if not target:hasStatusEffect(xi.effect.REGEN) then
-        if target:getEquipID(xi.slot.BODY) == 14520 then -- Dream Robe +1
-            target:addStatusEffect(xi.effect.REGEN, { power = 1, duration = 150, origin = user, tick = 3 })
-        else
-            target:addStatusEffect(xi.effect.REGEN, { power = 1, duration = 120, origin = user, tick = 3 })
-        end
-    else
+    local duration = target:getEquipID(xi.slot.BODY) == xi.item.DREAM_ROBE_P1 and 150 or 120
+
+    if not target:addStatusEffect(xi.effect.REGEN, { power = 1, duration = duration, origin = user, tick = 3 }) then
         target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
 end
