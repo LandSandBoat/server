@@ -33,7 +33,7 @@ EntityId::EntityId(const CBaseEntity* PEntity)
         return;
     }
 
-    id            = PEntity->id;
+    UniqueNo            = PEntity->id;
     targid        = PEntity->targid;
     zoneId        = PEntity->loc.zone ? static_cast<uint16>(PEntity->loc.zone->GetID()) : uint16{ 0 };
     instanceRunId = PEntity->PInstance ? PEntity->PInstance->runId() : uint32{ 0 };
@@ -58,7 +58,7 @@ auto EntityId::isDynamic() const -> bool
 
 auto EntityId::operator==(const EntityId& other) const -> bool
 {
-    return isDynamic() ? serial == other.serial : id == other.id;
+    return isDynamic() ? serial == other.serial : UniqueNo == other.UniqueNo;
 }
 
 auto EntityId::operator==(const CBaseEntity* PEntity) const -> bool
@@ -68,7 +68,7 @@ auto EntityId::operator==(const CBaseEntity* PEntity) const -> bool
         return !isSet();
     }
 
-    return PEntity->IsDynamicEntity() ? serial == PEntity->serial() : id == PEntity->id;
+    return PEntity->IsDynamicEntity() ? serial == PEntity->serial() : UniqueNo == PEntity->id;
 }
 
 auto EntityId::resolveEntity() const -> CBaseEntity*

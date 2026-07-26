@@ -51,7 +51,7 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
     }
 
     auto* PTarget = static_cast<CCharEntity*>(PEntity);
-    if (PTarget->id != PChar->BazaarID.id)
+    if (PTarget->id != PChar->BazaarID.UniqueNo)
     {
         return;
     }
@@ -190,7 +190,7 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
                 continue;
             }
 
-            if (auto* PCustomer = static_cast<CCharEntity*>(PEntity); PCustomer->id == PTarget->BazaarCustomers[i].id)
+            if (auto* PCustomer = static_cast<CCharEntity*>(PEntity); PCustomer->id == PTarget->BazaarCustomers[i].UniqueNo)
             {
                 if (PCustomer->id != PChar->id)
                 {

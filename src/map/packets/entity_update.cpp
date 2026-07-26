@@ -413,7 +413,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
 
             if (updatemask & UPDATE_STATUS)
             {
-                ref<uint32>(0x2C) = PMob->m_OwnerID.id;
+                ref<uint32>(0x2C) = PMob->m_OwnerID.UniqueNo;
             }
 
             if (updatemask & UPDATE_NAME)

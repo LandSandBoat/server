@@ -50,8 +50,8 @@ void GP_CLI_COMMAND_TRADE_RES::process(MapSession* PSession, CCharEntity* PChar)
     auto* PTarget = static_cast<CCharEntity*>(PChar->GetEntity(PChar->TradePending.targid, TYPE_PC));
 
     if (!PTarget ||
-        PChar->TradePending.id != PTarget->id ||
-        PTarget->TradePending.id != PChar->id)
+        PChar->TradePending.UniqueNo != PTarget->id ||
+        PTarget->TradePending.UniqueNo != PChar->id)
     {
         ShowWarningFmt("GP_CLI_COMMAND_TRADE_RES: Could not find trade targets.");
         return;

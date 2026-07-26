@@ -96,7 +96,7 @@ void GP_CLI_COMMAND_COMBINE_ASK::process(MapSession* PSession, CCharEntity* PCha
     auto* PTarget = static_cast<CCharEntity*>(PChar->GetEntity(PChar->TradePending.targid, TYPE_PC));
 
     // Clear pending trades on synthesis start
-    if (PTarget && PChar->TradePending.id == PTarget->id)
+    if (PTarget && PChar->TradePending.UniqueNo == PTarget->id)
     {
         PChar->TradePending.clean();
         PTarget->TradePending.clean();

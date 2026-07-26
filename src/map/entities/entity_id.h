@@ -43,7 +43,7 @@ struct EntityId
     auto operator==(const CBaseEntity* PEntity) const -> bool;
 
     // TODO: Globally rename targid to index, zoneIndex, etc.
-    uint32 id{ 0 };            // "Long" global ID of the entity. Built from 0x10000000 | (zoneId << 16) | targid.
+    uint32 UniqueNo{ 0 };      // "Long" global ID of the entity. Built from 0x10000000 | (zoneId << 16) | targid.
     uint16 targid{ 0 };        // The "index" of the entity in the current zone. Used for local targeting and referencing.
     uint16 zoneId{ 0 };        // Zone the entity was in when this reference was taken.
     uint32 instanceRunId{ 0 }; // Live instance the entity was in, 0 if it was not instanced.

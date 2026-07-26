@@ -1379,7 +1379,7 @@ auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
         Engage(PMob->PEnmityContainer->GetHighestEnmity()->entityId());
         co_return;
     }
-    else if (PMob->m_OwnerID.id != 0 && (PMob->m_roamFlags & xi::RoamFlag::Ignore) == xi::RoamFlag::None)
+    else if (PMob->m_OwnerID.UniqueNo != 0 && (PMob->m_roamFlags & xi::RoamFlag::Ignore) == xi::RoamFlag::None)
     {
         // i'm claimed by someone and want to be fighting them
         setTarget(static_cast<CBattleEntity*>(PMob->GetEntity(PMob->m_OwnerID.targid, TYPE_PC | TYPE_MOB | TYPE_PET | TYPE_TRUST)));

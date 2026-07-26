@@ -41,7 +41,7 @@ void GP_CLI_COMMAND_BAZAAR_CLOSE::process(MapSession* PSession, CCharEntity* PCh
             continue;
         }
 
-        if (auto* PCustomer = static_cast<CCharEntity*>(PEntity); PCustomer->id == PChar->BazaarCustomers[i].id)
+        if (auto* PCustomer = static_cast<CCharEntity*>(PEntity); PCustomer->id == PChar->BazaarCustomers[i].UniqueNo)
         {
             PCustomer->pushPacket<GP_SERV_COMMAND_BAZAAR_CLOSE>(PChar);
 

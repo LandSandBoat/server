@@ -448,7 +448,7 @@ bool CTargetFind::isMobOwner(CBattleEntity* PTarget)
         return true;
     }
 
-    if (PTarget->m_OwnerID.id == 0 || PTarget->m_OwnerID.id == findMaster(m_PBattleEntity)->id)
+    if (PTarget->m_OwnerID.UniqueNo == 0 || PTarget->m_OwnerID.UniqueNo == findMaster(m_PBattleEntity)->id)
     {
         return true;
     }
@@ -466,7 +466,7 @@ bool CTargetFind::isMobOwner(CBattleEntity* PTarget)
     // clang-format off
     findMaster(m_PBattleEntity)->ForAlliance([&found, &PTarget](CBattleEntity* PMember)
     {
-        if (PMember->id == PTarget->m_OwnerID.id)
+        if (PMember->id == PTarget->m_OwnerID.UniqueNo)
         {
             found = true;
         }

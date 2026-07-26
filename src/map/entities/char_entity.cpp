@@ -2096,7 +2096,7 @@ bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
         return false;
     }
 
-    if (PBattleTarget->m_OwnerID.id == 0 || PBattleTarget->m_OwnerID.id == this->id || PBattleTarget->objtype == TYPE_PC)
+    if (PBattleTarget->m_OwnerID.UniqueNo == 0 || PBattleTarget->m_OwnerID.UniqueNo == this->id || PBattleTarget->objtype == TYPE_PC)
     {
         return true;
     }
@@ -2114,7 +2114,7 @@ bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
     // clang-format off
     ForAlliance([&PBattleTarget, &found](CBattleEntity* PEntity)
     {
-        if (PEntity->id == PBattleTarget->m_OwnerID.id)
+        if (PEntity->id == PBattleTarget->m_OwnerID.UniqueNo)
         {
             found = true;
         }

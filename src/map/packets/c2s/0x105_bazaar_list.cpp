@@ -29,7 +29,7 @@ auto GP_CLI_COMMAND_BAZAAR_LIST::validate(MapSession* PSession, const CCharEntit
 {
     return PacketValidator(PChar)
         .blockedBy({ BlockedState::InEvent })
-        .mustEqual(PChar->BazaarID.id, 0, "Character already has a Bazaar ID")
+        .mustEqual(PChar->BazaarID.UniqueNo, 0, "Character already has a Bazaar ID")
         .mustEqual(PChar->BazaarID.targid, 0, "Character already has a Bazaar Target ID");
 }
 
@@ -39,7 +39,7 @@ void GP_CLI_COMMAND_BAZAAR_LIST::process(MapSession* PSession, CCharEntity* PCha
 
     if (PTarget != nullptr && PTarget->id == this->UniqueNo && PTarget->hasBazaar())
     {
-        PChar->BazaarID.id     = PTarget->id;
+        PChar->BazaarID.UniqueNo     = PTarget->id;
         PChar->BazaarID.targid = PTarget->targid;
 
         auto EntityID = PChar->entityId();
