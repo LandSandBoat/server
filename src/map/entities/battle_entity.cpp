@@ -2351,7 +2351,7 @@ void CBattleEntity::Die()
 {
     TracyZoneScoped;
 
-    if (CBaseEntity* PKiller = GetEntity(m_OwnerID.ActIndex))
+    if (CBaseEntity* PKiller = m_OwnerID.resolve())
     {
         static_cast<CBattleEntity*>(PKiller)->ForAlliance(
             [this](CBattleEntity* PMember)

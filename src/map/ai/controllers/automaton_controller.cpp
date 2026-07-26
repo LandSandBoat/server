@@ -191,7 +191,7 @@ auto CAutomatonController::DoCombatTick(timer::time_point tick) -> Task<void>
         co_return;
     }
 
-    setTarget(static_cast<CBattleEntity*>(PAutomaton->GetEntity(PAutomaton->GetBattleTargetID())));
+    setTarget(PAutomaton->battleTarget().resolve<CBattleEntity>());
 
     if (TryDeaggro())
     {

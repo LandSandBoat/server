@@ -89,7 +89,7 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, const EntityId& target, c
         // For self-centered AoE damaging moves, show battle target in readies message
         // For true self-target buffs (TARGET_SELF), show self
         const bool isSelfBuff    = skill->getValidTargets() == TARGET_SELF;
-        auto*      PActionTarget = isSelfBuff ? m_PEntity : (isSelfCenteredAoE ? m_PEntity->GetBattleTarget() : m_PEntity->GetEntity(target.ActIndex));
+        auto*      PActionTarget = isSelfBuff ? m_PEntity : (isSelfCenteredAoE ? m_PEntity->GetBattleTarget() : target.resolve());
         if (!PActionTarget)
         {
             PActionTarget = m_PEntity;

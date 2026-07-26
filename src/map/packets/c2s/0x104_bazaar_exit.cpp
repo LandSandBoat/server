@@ -33,7 +33,7 @@ auto GP_CLI_COMMAND_BAZAAR_EXIT::validate(MapSession* PSession, const CCharEntit
 
 void GP_CLI_COMMAND_BAZAAR_EXIT::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    auto* PEntity = PChar->GetEntity(PChar->BazaarID.ActIndex, TYPE_PC);
+    auto* PEntity = PChar->BazaarID.resolve<CCharEntity>();
     if (!PEntity)
     {
         return;

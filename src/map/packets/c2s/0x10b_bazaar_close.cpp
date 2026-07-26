@@ -35,7 +35,7 @@ void GP_CLI_COMMAND_BAZAAR_CLOSE::process(MapSession* PSession, CCharEntity* PCh
 {
     for (std::size_t i = 0; i < PChar->BazaarCustomers.size(); ++i)
     {
-        auto* PEntity = PChar->GetEntity(PChar->BazaarCustomers[i].ActIndex, TYPE_PC);
+        auto* PEntity = PChar->BazaarCustomers[i].resolve<CCharEntity>();
         if (!PEntity)
         {
             continue;

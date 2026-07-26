@@ -1169,7 +1169,7 @@ auto CMobController::DoCombatTick(timer::time_point tick) -> Task<void>
 
     if (PMob->m_OwnerID.ActIndex != 0)
     {
-        auto* POwner = dynamic_cast<CCharEntity*>(PMob->GetEntity(PMob->m_OwnerID.ActIndex));
+        auto* POwner = PMob->m_OwnerID.resolve<CCharEntity>();
         if (POwner && POwner->PClaimedMob != static_cast<CBattleEntity*>(PMob))
         {
             if (m_Tick >= m_DeclaimTime + 3s)
@@ -1181,7 +1181,7 @@ auto CMobController::DoCombatTick(timer::time_point tick) -> Task<void>
     }
 
     HandleEnmity();
-    setTarget(static_cast<CBattleEntity*>(PMob->GetEntity(PMob->GetBattleTargetID())));
+    setTarget(PMob->battleTarget().resolve<CBattleEntity>());
 
     if (TryDeaggro())
     {
@@ -1382,7 +1382,7 @@ auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
     else if (PMob->m_OwnerID.UniqueNo != 0 && (PMob->m_roamFlags & xi::RoamFlag::Ignore) == xi::RoamFlag::None)
     {
         // i'm claimed by someone and want to be fighting them
-        setTarget(static_cast<CBattleEntity*>(PMob->GetEntity(PMob->m_OwnerID.ActIndex, TYPE_PC | TYPE_MOB | TYPE_PET | TYPE_TRUST)));
+        setTarget(PMob->m_OwnerID.resolve<CBattleEntity>());
         auto* PTarget = target().resolve<CBattleEntity>();
 
         if (PTarget != nullptr)

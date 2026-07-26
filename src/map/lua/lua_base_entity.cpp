@@ -2819,7 +2819,7 @@ auto CLuaBaseEntity::openGuildShop(CLuaBaseEntity* PNpc, uint8 open, uint8 close
 
     const auto* PNpcEntity = PNpc->GetBaseEntity();
 
-    PChar->guildShopNpc_.UniqueNo     = PNpcEntity->id;
+    PChar->guildShopNpc_.UniqueNo = PNpcEntity->id;
     PChar->guildShopNpc_.ActIndex = PNpcEntity->targid;
     PChar->pushPacket<GP_SERV_COMMAND_GUILD_OPEN>(status, open, close, holiday.value_or(0));
 
@@ -13930,7 +13930,7 @@ auto CLuaBaseEntity::getMasterThreatMob(const sol::object& rangeOverride) -> CBa
     }
 
     const auto maxDistance = rangeOverride.is<float>() ? rangeOverride.as<float>() : 22.0f;
-    auto*      PMastersTarget{ PMaster->GetEntity(PMaster->GetBattleTargetID()) };
+    auto*      PMastersTarget{ PMaster->battleTarget().resolve() };
 
     auto isMasterTopEnmityOnMob = [PMaster](CMobEntity* PMob) -> bool
     {
@@ -13976,7 +13976,7 @@ auto CLuaBaseEntity::getMasterThreatMob(const sol::object& rangeOverride) -> CBa
             continue;
         }
 
-        auto* PTarget            = PMob->GetEntity(PMob->GetBattleTargetID());
+        auto* PTarget            = PMob->battleTarget().resolve();
         bool  isTargetingMaster  = PTarget && PTarget->id == PMaster->id;
         bool  masterHasTopEnmity = isMasterTopEnmityOnMob(PMob);
 
