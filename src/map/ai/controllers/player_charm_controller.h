@@ -41,4 +41,6 @@ private:
     static constexpr float RoamDistance{ 2.1f };
     void                   DoCombatTick(timer::time_point tick) const;
     void                   DoRoamTick(timer::time_point tick) const;
+
+    EntityId charmer_{};
 };

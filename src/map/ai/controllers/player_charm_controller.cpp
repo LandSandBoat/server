@@ -27,6 +27,7 @@
 
 CPlayerCharmController::CPlayerCharmController(CCharEntity* PChar)
 : CPlayerController(PChar)
+, charmer_(PChar->PMaster)
 {
     POwner->PAI->PathFind = std::make_unique<CPathFind>(PChar);
 }
@@ -45,7 +46,8 @@ auto CPlayerCharmController::Tick(const timer::time_point tick) -> Task<void>
 {
     m_Tick = tick;
 
-    if (POwner->PMaster == nullptr || !POwner->PMaster->isAlive())
+    auto* PMaster = charmer_.resolve<CBattleEntity>();
+    if (PMaster == nullptr || !PMaster->isAlive())
     {
         POwner->StatusEffectContainer->DelStatusEffect(xi::StatusEffect::CharmI);
         co_return;
