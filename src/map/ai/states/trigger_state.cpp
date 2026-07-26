@@ -33,7 +33,7 @@ auto CTriggerState::Update(const timer::time_point tick) -> bool
 {
     if (!IsCompleted())
     {
-        const auto* PChar = dynamic_cast<CCharEntity*>(GetTarget());
+        const auto* PChar = target().resolve<CCharEntity>();
         if (PChar && door && m_PEntity->animation == xi::Animation::CloseDoor)
         {
             close                = true;

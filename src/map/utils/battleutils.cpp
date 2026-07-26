@@ -4143,10 +4143,9 @@ void applyCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim, timer::duration
 
         static_cast<CCharEntity*>(PVictim)->ClearTrusts();
 
-        PVictim->PAI->SetController(std::make_unique<CPlayerCharmController>(static_cast<CCharEntity*>(PVictim)));
-
         battleutils::RelinquishClaim(static_cast<CCharEntity*>(PVictim));
         PVictim->PMaster = PCharmer;
+        PVictim->PAI->SetController(std::make_unique<CPlayerCharmController>(static_cast<CCharEntity*>(PVictim)));
         PVictim->updatemask |= UPDATE_ALL_CHAR;
 
         // Prevent auto attacks for a little bit to simulate retail

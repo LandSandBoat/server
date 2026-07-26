@@ -2439,7 +2439,7 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
     TracyZoneScoped;
 
     auto*          PSpell          = state.GetSpell();
-    auto*          PActionTarget   = static_cast<CBattleEntity*>(state.GetTarget());
+    auto*          PActionTarget   = state.target().resolve<CBattleEntity>();
     CBattleEntity* POriginalTarget = PActionTarget;
     bool           IsMagicCovered  = false;
 
@@ -2750,7 +2750,8 @@ void CBattleEntity::OnCastInterrupted(CMagicState& state, action_t& action, MsgB
         if (!blockedCast)
         {
             // For some reason, despite the system supporting interrupted message in the action packet (like auto attacks, JA), an 0x029 message is sent for spells.
-            loc.zone->PushPacket(this, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, state.GetTarget() ? state.GetTarget() : this, 0, 0, msg));
+            auto* PMsgTarget = state.target().resolve();
+            loc.zone->PushPacket(this, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, PMsgTarget ? PMsgTarget : this, 0, 0, msg));
         }
 
         luautils::OnSpellInterrupted(this, PSpell);
@@ -2760,7 +2761,7 @@ void CBattleEntity::OnCastInterrupted(CMagicState& state, action_t& action, MsgB
 void CBattleEntity::OnAbility(CAbilityState& state, action_t& action)
 {
     auto* PAbility = state.GetAbility();
-    auto* PTarget  = dynamic_cast<CBattleEntity*>(state.GetTarget());
+    auto* PTarget  = state.target().resolve<CBattleEntity>();
     if (!PTarget)
     {
         return;
@@ -2873,7 +2874,7 @@ void CBattleEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& ac
 void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 {
     auto* PSkill  = state.GetSkill();
-    auto* PTarget = dynamic_cast<CBattleEntity*>(state.GetTarget());
+    auto* PTarget = state.target().resolve<CBattleEntity>();
 
     if (PTarget == nullptr)
     {
@@ -3161,7 +3162,7 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         }
     }
 
-    PTarget = dynamic_cast<CBattleEntity*>(state.GetTarget()); // TODO: why is this recast here? can state change between now and the original cast?
+    PTarget = state.target().resolve<CBattleEntity>(); // TODO: why is this recast here? can state change between now and the original cast?
 
     if (PTarget)
     {
@@ -3201,7 +3202,7 @@ void CBattleEntity::OnRangedAttack(CRangeState& state, action_t& action)
 {
     TracyZoneScoped;
 
-    auto* PTarget = dynamic_cast<CBattleEntity*>(state.GetTarget());
+    auto* PTarget = state.target().resolve<CBattleEntity>();
     if (!PTarget)
     {
         return;
@@ -3658,7 +3659,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 {
     TracyZoneScoped;
 
-    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PTarget = state.target().resolve<CBattleEntity>();
 
     battleutils::ClaimMob(PTarget, this); // Mobs get claimed whether or not your attack actually is intimidated/paralyzed
     PTarget->LastAttacked = timer::now();
@@ -4034,7 +4035,7 @@ void CBattleEntity::OnEngage(CAttackState& state)
 
     animation = xi::Animation::Attack;
     updatemask |= UPDATE_HP;
-    PAI->EventHandler.triggerListener("ENGAGE", this, state.GetTarget());
+    PAI->EventHandler.triggerListener("ENGAGE", this, state.target().resolve());
 }
 
 void CBattleEntity::TryHitInterrupt(CBattleEntity* PAttacker)

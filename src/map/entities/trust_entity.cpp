@@ -229,7 +229,7 @@ void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& act
     CBattleEntity::OnWeaponSkillFinished(state, action);
 
     auto* PWeaponSkill  = state.GetSkill();
-    auto* PBattleTarget = dynamic_cast<CBattleEntity*>(state.GetTarget());
+    auto* PBattleTarget = state.target().resolve<CBattleEntity>();
     if (!PBattleTarget)
     {
         return;

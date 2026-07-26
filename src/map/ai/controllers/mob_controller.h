@@ -80,14 +80,18 @@ protected:
     auto         IsSpecialSkillReady(float currentDistance) const -> bool;
     auto         IsSpellReady(const float& currentDistance, const float& meleeRange) const -> bool;
 
-    CBattleEntity* PTarget{ nullptr };
+    auto target() const -> EntityId;
+    void setTarget(CBaseEntity* PTarget);
+    auto followTarget() const -> CBaseEntity*;
 
     static constexpr float FollowRoamDistance{ 4.0f };
     static constexpr float FollowRunAwayDistance{ 4.0f };
-    CBaseEntity*           PFollowTarget{ nullptr };
 
 private:
     CMobEntity* const PMob;
+
+    EntityId target_{};
+    EntityId followTarget_{};
 
     timer::time_point m_LastActionTime;
     timer::time_point m_nextMagicTime;

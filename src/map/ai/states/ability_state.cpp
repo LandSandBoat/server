@@ -163,7 +163,7 @@ auto CAbilityState::GetAbility() const -> CAbility*
 
 void CAbilityState::ApplyEnmity() const
 {
-    auto* PTarget = GetTarget();
+    auto* PTarget = target().resolve();
     if (PTarget)
     {
         if (m_PAbility->getValidTarget() & TARGET_ENEMY && PTarget->allegiance != m_PEntity->allegiance)
@@ -192,7 +192,7 @@ auto CAbilityState::Update(const timer::time_point tick) -> bool
     // Rotate towards target during ability
     if (m_castTime > 0s && tick < GetEntryTime() + m_castTime)
     {
-        CBaseEntity* PTarget = GetTarget();
+        CBaseEntity* PTarget = target().resolve();
         if (PTarget)
         {
             battleutils::turnTowardsTarget(m_PEntity, PTarget);
@@ -209,7 +209,7 @@ auto CAbilityState::Update(const timer::time_point tick) -> bool
 
         action_t action{};
         m_PEntity->OnAbility(*this, action);
-        m_PEntity->PAI->EventHandler.triggerListener("ABILITY_USE", m_PEntity, GetTarget(), m_PAbility.get(), &action);
+        m_PEntity->PAI->EventHandler.triggerListener("ABILITY_USE", m_PEntity, target().resolve(), m_PAbility.get(), &action);
         // Only send packet if action was populated (e.g. interrupts return early)
         if (!action.targets.empty())
         {
@@ -245,7 +245,7 @@ auto CAbilityState::Update(const timer::time_point tick) -> bool
 auto CAbilityState::CanUseAbility() const -> bool
 {
     CAbility*    PAbility = GetAbility();
-    CBaseEntity* PTarget  = GetTarget();
+    CBaseEntity* PTarget  = target().resolve();
 
     std::unique_ptr<CBasicPacket> errMsg;
 

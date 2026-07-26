@@ -1061,7 +1061,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
             continue;
         }
 
-        CBaseEntity* PTarget = PState->GetTarget();
+        CBaseEntity* PTarget = PState->target().resolve();
         if (PTarget && PTarget->objtype == TYPE_PC && PTarget->id != PChar->id)
         {
             scoreBonus[PTarget->id] += CHARACTER_SYNC_DISTANCE_SWAP_THRESHOLD;

@@ -48,6 +48,21 @@ CMobController::CMobController(CMobEntity* PEntity)
 {
 }
 
+auto CMobController::target() const -> EntityId
+{
+    return target_;
+}
+
+void CMobController::setTarget(CBaseEntity* PTarget)
+{
+    target_ = EntityId(PTarget);
+}
+
+auto CMobController::followTarget() const -> CBaseEntity*
+{
+    return followTarget_.resolve();
+}
+
 auto CMobController::Tick(const timer::time_point tick) -> Task<void>
 {
     TracyZoneScoped;
@@ -112,7 +127,7 @@ auto CMobController::Engage(const EntityId& target) -> bool
     {
         m_firstSpell = true;
 
-        if (PFollowTarget != nullptr && m_followType == FollowType::Roam)
+        if (followTarget() != nullptr && m_followType == FollowType::Roam)
         {
             ClearFollowTarget();
         }
@@ -162,7 +177,7 @@ void CMobController::Reset()
     PMob->m_neutral = true;
     m_NeutralTime   = m_Tick;
 
-    PTarget = nullptr;
+    setTarget(nullptr);
     ClearFollowTarget();
 }
 
@@ -198,6 +213,8 @@ auto CMobController::Ability(const EntityId target, uint16 abilityid) -> bool
 auto CMobController::MobSkill(int listId) -> bool
 {
     TracyZoneScoped;
+
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     if (!PTarget)
     {
@@ -268,6 +285,8 @@ auto CMobController::MobSkill(int listId) -> bool
 auto CMobController::TryCastSpell() -> bool
 {
     TracyZoneScoped;
+
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     if (!CanCastSpells(IgnoreRecastsAndCosts::No))
     {
@@ -376,6 +395,8 @@ auto CMobController::TrySpecialSkill() -> bool
 {
     TracyZoneScoped;
 
+    auto* PTarget = target().resolve<CBattleEntity>();
+
     // get my special skill
     CMobSkill*     PSpecialSkill  = battleutils::GetMobSkill(PMob->getMobMod(xi::MobMod::SpecialSkill));
     CBattleEntity* PAbilityTarget = nullptr;
@@ -433,7 +454,7 @@ auto CMobController::TrySpecialSkill() -> bool
 
 auto CMobController::CanFollowTarget(CBattleEntity* PTarget) const -> bool
 {
-    return !PMob->m_neutral && ((PMob->m_roamFlags & xi::RoamFlag::Follow) != xi::RoamFlag::None) && PFollowTarget == nullptr && m_followType == FollowType::None && CanAggroTarget(PTarget);
+    return !PMob->m_neutral && ((PMob->m_roamFlags & xi::RoamFlag::Follow) != xi::RoamFlag::None) && followTarget() == nullptr && m_followType == FollowType::None && CanAggroTarget(PTarget);
 }
 
 auto CMobController::CanAggroTarget(CBattleEntity* PTarget) const -> bool
@@ -509,6 +530,7 @@ auto CMobController::Cast(const EntityId target, const SpellID spellid) -> bool
 
 void CMobController::SetFollowTarget(CBaseEntity* PTarget, const FollowType followType)
 {
+    auto* PFollowTarget = followTarget();
     if (PFollowTarget == PTarget && m_followType == followType)
     {
         return;
@@ -530,13 +552,13 @@ void CMobController::SetFollowTarget(CBaseEntity* PTarget, const FollowType foll
         }
     }
 
-    PFollowTarget = PTarget;
+    followTarget_ = EntityId(PTarget);
     m_followType  = followType;
 }
 
 auto CMobController::HasFollowTarget() const -> bool
 {
-    if (PFollowTarget && m_followType != FollowType::None)
+    if (followTarget() && m_followType != FollowType::None)
     {
         return true;
     }
@@ -546,8 +568,8 @@ auto CMobController::HasFollowTarget() const -> bool
 
 void CMobController::ClearFollowTarget()
 {
-    PFollowTarget = nullptr;
-    m_followType  = FollowType::None;
+    followTarget_.clean();
+    m_followType = FollowType::None;
 }
 
 auto CMobController::CheckHide(const CBattleEntity* PTarget) const -> bool
@@ -571,6 +593,8 @@ auto CMobController::TryDeaggro() -> bool
 {
     TracyZoneScoped;
 
+    auto* PTarget = target().resolve<CBattleEntity>();
+
     if (PTarget == nullptr && (PMob->PEnmityContainer != nullptr && PMob->PEnmityContainer->GetHighestEnmity() == nullptr))
     {
         return true;
@@ -587,6 +611,7 @@ auto CMobController::TryDeaggro() -> bool
             PMob->PEnmityContainer->Clear(PTarget->id);
         }
         PTarget = PMob->PEnmityContainer->GetHighestEnmity();
+        setTarget(PTarget);
         if (PTarget)
         {
             PMob->setBattleTarget(PTarget->entityId());
@@ -607,6 +632,8 @@ auto CMobController::TryDeaggro() -> bool
 void CMobController::TryLink()
 {
     TracyZoneScoped;
+
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     if (PTarget == nullptr)
     {
@@ -905,6 +932,8 @@ void CMobController::CastSpell(SpellID spellid)
 {
     TracyZoneScoped;
 
+    auto* PTarget = target().resolve<CBattleEntity>();
+
     const CSpell* PSpell = spell::GetSpell(spellid);
     if (PSpell == nullptr)
     {
@@ -963,6 +992,8 @@ void CMobController::CastSpell(SpellID spellid)
 void CMobController::Move()
 {
     TracyZoneScoped;
+
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     if (!PMob->PAI->CanFollowPath())
     {
@@ -1150,7 +1181,7 @@ auto CMobController::DoCombatTick(timer::time_point tick) -> Task<void>
     }
 
     HandleEnmity();
-    PTarget = static_cast<CBattleEntity*>(PMob->GetEntity(PMob->GetBattleTargetID()));
+    setTarget(static_cast<CBattleEntity*>(PMob->GetEntity(PMob->GetBattleTargetID())));
 
     if (TryDeaggro())
     {
@@ -1159,6 +1190,9 @@ auto CMobController::DoCombatTick(timer::time_point tick) -> Task<void>
     }
 
     TryLink();
+
+    auto* PTarget       = target().resolve<CBattleEntity>();
+    auto* PFollowTarget = followTarget();
 
     PMob->PAI->EventHandler.triggerListener("COMBAT_TICK", PMob);
     luautils::OnMobFight(PMob, PTarget);
@@ -1261,18 +1295,20 @@ void CMobController::HandleEnmity()
 {
     TracyZoneScoped;
 
+    auto* PTarget = target().resolve<CBattleEntity>();
+
     PMob->PEnmityContainer->DecayEnmity();
     auto* PHighestEnmityTarget{ PMob->PEnmityContainer->GetHighestEnmity() };
 
     if (PMob->getMobMod(xi::MobMod::ShareTarget) > 0 && PMob->GetEntity(PMob->getMobMod(xi::MobMod::ShareTarget), TYPE_MOB))
     {
-        ChangeTarget(static_cast<CMobEntity*>(PMob->GetEntity(PMob->getMobMod(xi::MobMod::ShareTarget), TYPE_MOB))->GetBattleTargetID());
+        ChangeTarget(static_cast<CMobEntity*>(PMob->GetEntity(PMob->getMobMod(xi::MobMod::ShareTarget), TYPE_MOB))->battleTarget());
 
         if (!PMob->GetBattleTargetID())
         {
             if (PHighestEnmityTarget)
             {
-                ChangeTarget(PHighestEnmityTarget->targid);
+                ChangeTarget(PHighestEnmityTarget->entityId());
             }
         }
     }
@@ -1280,7 +1316,7 @@ void CMobController::HandleEnmity()
     {
         if (PHighestEnmityTarget)
         {
-            ChangeTarget(PHighestEnmityTarget->targid);
+            ChangeTarget(PHighestEnmityTarget->entityId());
         }
     }
 
@@ -1321,7 +1357,7 @@ void CMobController::HandleEnmity()
 
         if (PNewTarget)
         {
-            ChangeTarget(PNewTarget->targid);
+            ChangeTarget(PNewTarget->entityId());
         }
 
         if (PTarget)
@@ -1334,6 +1370,9 @@ void CMobController::HandleEnmity()
 auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
 {
     TracyZoneScopedC(0x00FF00);
+
+    auto* PFollowTarget = followTarget();
+
     // If there's someone on our enmity list, go from roaming -> engaging
     if (PMob->PEnmityContainer->GetHighestEnmity() != nullptr && (PMob->m_roamFlags & xi::RoamFlag::Ignore) == xi::RoamFlag::None)
     {
@@ -1343,7 +1382,8 @@ auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
     else if (PMob->m_OwnerID.id != 0 && (PMob->m_roamFlags & xi::RoamFlag::Ignore) == xi::RoamFlag::None)
     {
         // i'm claimed by someone and want to be fighting them
-        PTarget = static_cast<CBattleEntity*>(PMob->GetEntity(PMob->m_OwnerID.targid, TYPE_PC | TYPE_MOB | TYPE_PET | TYPE_TRUST));
+        setTarget(static_cast<CBattleEntity*>(PMob->GetEntity(PMob->m_OwnerID.targid, TYPE_PC | TYPE_MOB | TYPE_PET | TYPE_TRUST)));
+        auto* PTarget = target().resolve<CBattleEntity>();
 
         if (PTarget != nullptr)
         {
@@ -1625,6 +1665,8 @@ void CMobController::FollowRoamPath()
 auto CMobController::CanMoveForward(const float currentDistance) -> bool
 {
     TracyZoneScoped;
+
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     uint16 standbackRange = 20;
 

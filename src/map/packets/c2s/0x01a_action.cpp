@@ -408,7 +408,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
         break;
         case GP_CLI_COMMAND_ACTION_ACTIONID::ChangeTarget:
         {
-            PChar->PAI->ChangeTarget(this->ActIndex);
+            PChar->PAI->ChangeTarget(EntityId(PChar->GetEntity(this->ActIndex)));
         }
         break;
         case GP_CLI_COMMAND_ACTION_ACTIONID::Shoot:

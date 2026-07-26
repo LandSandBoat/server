@@ -41,11 +41,10 @@ class CState
 {
 public:
     CState(CBaseEntity* PEntity, const EntityId& target);
-    CState(CBaseEntity* PEntity, uint16 _targid);
 
     virtual ~CState() = default;
 
-    auto GetTarget() const -> CBaseEntity*;
+    auto target() const -> EntityId;
 
     auto HasErrorMsg() const -> bool;
     auto GetErrorMsg() const -> std::unique_ptr<CBasicPacket>;
@@ -69,10 +68,8 @@ public:
 protected:
     // state logic done per tick - returns whether to exit the state or not
     virtual auto Update(timer::time_point tick) -> bool = 0;
-    virtual void UpdateTarget(uint16 targid);
-    virtual void UpdateTarget(CBaseEntity* target);
+    virtual void UpdateTarget(const EntityId& target);
 
-    auto GetTargetID() const -> uint16;
     void Complete();
     auto GetEntryTime() const -> timer::time_point;
 
@@ -81,9 +78,7 @@ protected:
     CBaseEntity* const m_PEntity;
 
 private:
-    uint16            m_targid{ 0 };
     EntityId          target_{};
-    CBaseEntity*      m_PTarget{ nullptr };
     bool              m_completed{ false };
     timer::time_point m_entryTime{ timer::now() };
 };

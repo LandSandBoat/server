@@ -102,9 +102,9 @@ auto CPlayerController::Engage(const EntityId& target) -> bool
     return false;
 }
 
-auto CPlayerController::ChangeTarget(uint16 targid) -> bool
+auto CPlayerController::ChangeTarget(const EntityId& target) -> bool
 {
-    return CController::ChangeTarget(targid);
+    return CController::ChangeTarget(target);
 }
 
 auto CPlayerController::Disengage() -> bool

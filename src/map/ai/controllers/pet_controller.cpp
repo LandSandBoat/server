@@ -220,6 +220,8 @@ void CPetController::HandleEnmity()
 
 auto CPetController::TryDeaggro() -> bool
 {
+    auto* PTarget = target().resolve<CBattleEntity>();
+
     if (PTarget == nullptr)
     {
         return true;

@@ -178,7 +178,7 @@ auto CMobSkillState::Update(const timer::time_point tick) -> bool
     // Rotate towards target during ability // TODO : add force param to turnTowardsTarget on certain TP moves like Petro Eyes
     if (m_castTime > 0s && tick < GetEntryTime() + m_castTime)
     {
-        if (CBaseEntity* PTarget = GetTarget())
+        if (CBaseEntity* PTarget = target().resolve())
         {
             battleutils::turnTowardsTarget(m_PEntity, PTarget);
         }
@@ -224,7 +224,7 @@ auto CMobSkillState::Update(const timer::time_point tick) -> bool
 
     if (IsCompleted() && tick > m_finishTime)
     {
-        auto* PTarget = GetTarget();
+        auto* PTarget = target().resolve();
         if (m_skillSuccess && PTarget && PTarget->objtype == TYPE_MOB && PTarget != m_PEntity && m_PEntity->allegiance == xi::Allegiance::Player)
         {
             bool withMaster = m_PEntity->objtype == TYPE_PET || (m_PEntity->objtype == TYPE_MOB && m_PEntity->isCharmed);

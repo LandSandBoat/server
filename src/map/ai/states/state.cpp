@@ -34,40 +34,17 @@ void CState::TryInterrupt(CBattleEntity* PAttacker)
 
 CState::CState(CBaseEntity* PEntity, const EntityId& target)
 : m_PEntity(PEntity)
-, m_targid(target.targid)
 , target_(target)
 {
 }
 
-CState::CState(CBaseEntity* PEntity, const uint16 _targid)
-: m_PEntity(PEntity)
-, m_targid(_targid)
+void CState::UpdateTarget(const EntityId& target)
 {
 }
 
-void CState::UpdateTarget(const uint16 targid)
+auto CState::target() const -> EntityId
 {
-    m_PTarget = m_PEntity->GetEntity(targid);
-}
-
-void CState::UpdateTarget(CBaseEntity* target)
-{
-    m_PTarget = target;
-}
-
-auto CState::GetTarget() const -> CBaseEntity*
-{
-    return m_PTarget;
-}
-
-auto CState::GetTargetID() const -> uint16
-{
-    if (target_.isSet())
-    {
-        return target_.targid;
-    }
-
-    return m_targid;
+    return target_;
 }
 
 void CState::Complete()
@@ -89,9 +66,8 @@ void CState::SetTarget(const EntityId& target)
 {
     if (!target_.isSet() || target_ != target)
     {
-        target_  = target;
-        m_targid = target.targid;
-        UpdateTarget(target.targid);
+        target_ = target;
+        UpdateTarget(target);
     }
 }
 
@@ -114,7 +90,7 @@ auto CState::GetErrorMsg() const -> std::unique_ptr<CBasicPacket>
 
 auto CState::DoUpdate(const timer::time_point tick) -> bool
 {
-    UpdateTarget(m_targid);
+    UpdateTarget(target_);
     return Update(tick);
 }
 

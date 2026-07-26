@@ -36,20 +36,19 @@ public:
     CItemState(CCharEntity* PEntity, const EntityId& target, uint8 loc, uint8 slotid);
     ~CItemState() override;
 
-    void UpdateTarget(CBaseEntity* target) override;
-    void UpdateTarget(uint16 targid) override;
     auto Update(timer::time_point tick) -> bool override;
     void Cleanup(timer::time_point tick) override;
     auto CanChangeState() -> bool override;
     auto CanFollowPath() -> bool override;
     auto CanInterrupt() -> bool override;
-    void TryInterrupt(CBattleEntity* PTarget) override;
+    void TryInterrupt(CBattleEntity* PAttacker) override;
     auto GetItem() const -> CItemUsable*;
     void InterruptItem(action_t& action);
     auto FinishItem(action_t& action) -> bool;
 
 protected:
     auto HasMoved() const -> bool;
+    auto validatedTarget() -> CBaseEntity*;
 
     CCharEntity*        m_PEntity;
     CItemUsable*        m_PItem;

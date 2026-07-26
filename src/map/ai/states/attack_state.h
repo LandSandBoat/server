@@ -36,8 +36,7 @@ public:
     void ResetAttackTimer();
 
 protected:
-    void UpdateTarget(uint16 = 0) override;
-    void UpdateTarget(CBaseEntity* target) override;
+    void UpdateTarget(const EntityId& target = {}) override;
     auto CanAttack(CBattleEntity* PTarget) -> bool;
     auto AttackReady() const -> bool;
 

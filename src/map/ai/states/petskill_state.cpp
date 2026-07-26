@@ -147,7 +147,7 @@ auto CPetSkillState::Update(const timer::time_point tick) -> bool
 
     if (IsCompleted() && tick > m_finishTime)
     {
-        auto* PTarget = GetTarget();
+        auto* PTarget = target().resolve();
         if (m_skillSuccess && PTarget && PTarget->objtype == TYPE_MOB && PTarget != m_PEntity && m_PEntity->allegiance != PTarget->allegiance)
         {
             // This generates enmity for the master when using a pet skill, excluding Automatons.

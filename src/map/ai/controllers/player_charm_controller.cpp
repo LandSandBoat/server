@@ -27,6 +27,7 @@
 
 CPlayerCharmController::CPlayerCharmController(CCharEntity* PChar)
 : CPlayerController(PChar)
+, charmer_(PChar->PMaster)
 {
     POwner->PAI->PathFind = std::make_unique<CPathFind>(PChar);
 }
@@ -45,7 +46,8 @@ auto CPlayerCharmController::Tick(const timer::time_point tick) -> Task<void>
 {
     m_Tick = tick;
 
-    if (POwner->PMaster == nullptr || !POwner->PMaster->isAlive())
+    auto* PMaster = charmer_.resolve<CBattleEntity>();
+    if (PMaster == nullptr || !PMaster->isAlive())
     {
         POwner->StatusEffectContainer->DelStatusEffect(xi::StatusEffect::CharmI);
         co_return;
@@ -69,7 +71,7 @@ void CPlayerCharmController::DoCombatTick(timer::time_point tick) const
     }
     if (POwner->PMaster->GetBattleTargetID() != POwner->GetBattleTargetID())
     {
-        POwner->PAI->Internal_ChangeTarget(POwner->PMaster->GetBattleTargetID());
+        POwner->PAI->Internal_ChangeTarget(POwner->PMaster->battleTarget());
     }
     auto* PTarget{ POwner->GetBattleTarget() };
     if (PTarget)
@@ -120,7 +122,7 @@ auto CPlayerCharmController::Cast(const EntityId target, SpellID spellid) -> boo
     return false;
 }
 
-auto CPlayerCharmController::ChangeTarget(uint16 targid) -> bool
+auto CPlayerCharmController::ChangeTarget(const EntityId& target) -> bool
 {
     return false;
 }

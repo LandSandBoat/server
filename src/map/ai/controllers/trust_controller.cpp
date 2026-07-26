@@ -57,7 +57,6 @@ enum TRUST_MOVEMENT_TYPE : int8
 CTrustController::CTrustController(CCharEntity* PChar, CTrustEntity* PTrust)
 : CMobController(PTrust)
 , m_GambitsContainer(std::make_unique<gambits::CGambitsContainer>(PTrust))
-, m_LastTopEnmity(nullptr)
 , m_failedRepositionAttempts(0)
 , m_InTransit(false)
 {
@@ -76,7 +75,6 @@ CTrustController::~CTrustController()
 
     POwner->allegiance = xi::Allegiance::Player;
     POwner->status     = xi::Status::Disappear;
-    m_LastTopEnmity    = nullptr;
 }
 
 void CTrustController::Despawn()
@@ -131,12 +129,12 @@ auto CTrustController::DoCombatTick(timer::time_point tick) -> Task<void>
     CTrustEntity* PTrust  = static_cast<CTrustEntity*>(POwner);
     CCharEntity*  PMaster = static_cast<CCharEntity*>(POwner->PMaster);
     CMobEntity*   PMob    = dynamic_cast<CMobEntity*>(PMaster->GetBattleTarget());
-    PTarget               = POwner->GetBattleTarget();
+    setTarget(POwner->GetBattleTarget());
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     if (!PMaster->PAI->IsEngaged())
     {
         PTrust->PAI->Internal_Disengage();
-        m_LastTopEnmity = nullptr;
         m_CombatEndTime = m_Tick;
     }
 
@@ -161,8 +159,7 @@ auto CTrustController::DoCombatTick(timer::time_point tick) -> Task<void>
 
         if (hasEnmity)
         {
-            PTrust->PAI->Internal_ChangeTarget(PMaster->GetBattleTargetID());
-            m_LastTopEnmity = nullptr;
+            PTrust->PAI->Internal_ChangeTarget(PMaster->battleTarget());
         }
     }
 
@@ -268,7 +265,8 @@ auto CTrustController::DoNonCombatTick(const timer::time_point tick) -> Task<voi
     }
 
     // Keep COMBAT_TICK target valid for listeners/gambits.
-    PTarget = PMaster->GetBattleTarget();
+    setTarget(PMaster->GetBattleTarget());
+    auto* PTarget = target().resolve<CBattleEntity>();
 
     // Non-combat trust follow order:
     // - first trust follows master
@@ -577,7 +575,7 @@ auto CTrustController::RangedAttack(const EntityId target) -> bool
 
     if (m_Tick - m_LastRangedAttackTime > rangedDelay && !m_InTransit)
     {
-        FaceTarget(PTarget->entityId());
+        FaceTarget(target);
         if (POwner->PAI->CanChangeState() && POwner->PAI->Internal_RangedAttack(target))
         {
             m_LastRangedAttackTime = m_Tick;
@@ -617,7 +615,7 @@ auto CTrustController::Cast(const EntityId target, SpellID spellid) -> bool
             if (MState)
             {
                 const auto MSpell       = MState->GetSpell();
-                const auto MTarget      = MState->GetTarget();
+                const auto MTarget      = MState->target().resolve();
                 const auto MSpellFamily = MSpell->getSpellFamily();
                 const auto MSpellID     = MSpell->getID();
 

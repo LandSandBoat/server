@@ -1461,7 +1461,7 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
     TracyZoneScoped;
 
     auto* PSpell  = state.GetSpell();
-    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PTarget = state.target().resolve<CBattleEntity>();
 
     // not ideal, since Trick Attack character (taChar) is also calculated on the lua side for the base spell.
     // Only blue spells that act as a physical WS can TA.
@@ -1645,7 +1645,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
     CBattleEntity::OnWeaponSkillFinished(state, action);
 
     auto* PWeaponSkill  = state.GetSkill();
-    auto* PBattleTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PBattleTarget = state.target().resolve<CBattleEntity>();
 
     int16 tp = state.GetSpentTP();
     tp       = battleutils::CalculateWeaponSkillTP(this, PWeaponSkill, tp);
@@ -1796,7 +1796,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         findFlags |= FINDFLAGS_DEAD;
     }
 
-    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PTarget = state.target().resolve<CBattleEntity>();
     PAI->TargetFind->reset();
     PAI->TargetFind->findSingleTarget(PTarget, findFlags, PAbility->getValidTarget());
 
@@ -2243,7 +2243,7 @@ auto CCharEntity::OnItemFinish(CItemState& state, action_t& action) -> bool
 {
     TracyZoneScoped;
 
-    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PTarget = state.target().resolve<CBattleEntity>();
     auto* PItem   = state.GetItem();
 
     if (!PItem->isType(ITEM_EQUIPMENT) && (PItem->getQuantity() < 1 || PItem->getReserve() > 0))

@@ -135,7 +135,7 @@ auto CWeaponSkillState::Update(const timer::time_point tick) -> bool
 
     if (m_PEntity->isAlive() && !IsCompleted())
     {
-        CBattleEntity* PTarget = dynamic_cast<CBattleEntity*>(GetTarget());
+        CBattleEntity* PTarget = target().resolve<CBattleEntity>();
         action_t       action;
 
         if (PTarget && PTarget->isAlive())
