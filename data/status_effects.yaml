@@ -2096,8 +2096,7 @@ status_effects:
       - no_loss_message
       - song
       - no_cancel
-    overwrite: higher
-    sort_key:  2000
+    sort_key: 2000
 
   hymnus:
     id: 218
