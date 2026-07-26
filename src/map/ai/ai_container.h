@@ -53,12 +53,12 @@ public:
     bool ChangeTarget(uint16 targid);
     bool Disengage();
     bool WeaponSkill(const EntityId& target, uint16 wsid) const;
-    bool MobSkill(uint16 targid, uint16 wsid, Maybe<timer::duration> castTimeOverride);
-    bool PetSkill(uint16 targid, uint16 wsid);
+    bool MobSkill(const EntityId& target, uint16 wsid, Maybe<timer::duration> castTimeOverride);
+    bool PetSkill(const EntityId& target, uint16 wsid) const;
     bool Ability(const EntityId& target, uint16 abilityid) const;
     bool RangedAttack(const EntityId& target) const;
     bool Trigger(CCharEntity* player);
-    bool UseItem(uint16 targid, uint8 loc, uint8 slotid);
+    bool UseItem(const EntityId& target, uint8 loc, uint8 slotid) const;
     bool Inactive(timer::duration _duration, bool canChangeState);
     bool Untargetable(timer::duration _duration, bool canChangeState); // Used to make owner entity untargetable & inactionable in TargetFind for _duration
 
@@ -67,16 +67,16 @@ public:
     //
 
     bool Internal_Engage(uint16 targetid);
-    bool Internal_Cast(uint16 targetid, SpellID spellid);
+    bool Internal_Cast(EntityId target, SpellID spellid);
     bool Internal_ChangeTarget(uint16 targetid);
-    bool Internal_Disengage();
-    bool Internal_WeaponSkill(uint16 targid, uint16 wsid);
-    bool Internal_MobSkill(uint16 targid, uint16 wsid, Maybe<timer::duration> castTimeOverride);
-    bool Internal_PetSkill(uint16 targid, uint16 abilityid);
-    bool Internal_Ability(uint16 targetid, uint16 abilityid);
-    bool Internal_RangedAttack(uint16 targetid);
+    bool Internal_Disengage() const;
+    bool Internal_WeaponSkill(const EntityId& target, uint16 wsid);
+    bool Internal_MobSkill(const EntityId& target, uint16 wsid, Maybe<timer::duration> castTimeOverride);
+    bool Internal_PetSkill(const EntityId& target, uint16 abilityid);
+    bool Internal_Ability(const EntityId& target, uint16 abilityid);
+    bool Internal_RangedAttack(const EntityId& target);
     bool Internal_Die(timer::duration);
-    bool Internal_UseItem(uint16 targetid, uint8 loc, uint8 slotid);
+    bool Internal_UseItem(const EntityId& target, uint8 loc, uint8 slotid);
     bool Internal_Despawn(bool instantDespawn = false);
     bool Internal_Synth(xi::SkillType synthSkill);
     bool Accept_Raise();

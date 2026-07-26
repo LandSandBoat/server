@@ -30,7 +30,7 @@ public:
 
     static constexpr float PetRoamDistance{ 2.1f };
     auto                   DoRoamTick(timer::time_point tick) -> Task<void> override;
-    auto                   PetSkill(uint16 targid, uint16 abilityid) const -> bool;
+    auto                   PetSkill(const EntityId& target, uint16 abilityid) const -> bool;
 
 protected:
     auto PetIsHealing() const -> bool;

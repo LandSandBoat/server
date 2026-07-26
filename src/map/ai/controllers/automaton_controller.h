@@ -72,7 +72,7 @@ protected:
     void setMagicCooldowns();
     auto CanCastSpells(IgnoreRecastsAndCosts ignoreRecastsAndCosts) -> bool override;
     auto Cast(EntityId target, SpellID spellid) -> bool override;
-    auto MobSkill(uint16 targid, uint16 wsid, Maybe<timer::duration> castTimeOverride) -> bool override;
+    auto MobSkill(EntityId target, uint16 wsid, Maybe<timer::duration> castTimeOverride) -> bool override;
 
 private:
     auto TryAction() -> bool;

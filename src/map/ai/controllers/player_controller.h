@@ -40,7 +40,7 @@ public:
     auto WeaponSkill(EntityId target, uint16 wsid) -> bool override;
     auto Ability(EntityId target, uint16 abilityid) -> bool override;
     auto RangedAttack(EntityId target) -> bool override;
-    auto UseItem(uint16 targid, uint8 loc, uint8 slotid) -> bool;
+    auto UseItem(const EntityId& target, uint8 loc, uint8 slotid) -> bool;
 
     auto getLastAttackTime() -> timer::time_point;
     void setLastAttackTime(timer::time_point);

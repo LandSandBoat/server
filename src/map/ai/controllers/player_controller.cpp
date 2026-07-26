@@ -224,7 +224,7 @@ auto CPlayerController::Ability(EntityId target, const uint16 abilityid) -> bool
             return false;
         }
 
-        return PChar->PAI->Internal_Ability(target.targid, abilityid);
+        return PChar->PAI->Internal_Ability(target, abilityid);
     }
 
     PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToUseJobAbility);
@@ -236,28 +236,29 @@ auto CPlayerController::RangedAttack(const EntityId target) -> bool
     auto* PChar = static_cast<CCharEntity*>(POwner);
     if (canAct() && PChar->PAI->CanChangeState())
     {
-        if (auto PTarget = target.resolve<CBattleEntity>(); PTarget && PTarget->PAI->IsUntargetable())
+        if (const auto PTarget = target.resolve<CBattleEntity>(); PTarget && PTarget->PAI->IsUntargetable())
         {
             return false;
         }
 
-        return PChar->PAI->Internal_RangedAttack(target.targid);
+        return PChar->PAI->Internal_RangedAttack(target);
     }
 
     PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::WaitLonger);
     return false;
 }
 
-auto CPlayerController::UseItem(const uint16 targid, const uint8 loc, const uint8 slotid) -> bool
+auto CPlayerController::UseItem(const EntityId& target, const uint8 loc, const uint8 slotid) -> bool
 {
-    auto* PChar = static_cast<CCharEntity*>(POwner);
+    const auto* PChar = static_cast<CCharEntity*>(POwner);
     if (canAct() && PChar->PAI->CanChangeState())
     {
-        if (auto target = PChar->GetEntity(targid); target && target->PAI->IsUntargetable())
+        if (const auto PTarget = target.resolve<CBattleEntity>(); PTarget && PTarget->PAI->IsUntargetable())
         {
             return false;
         }
-        return PChar->PAI->Internal_UseItem(targid, loc, slotid);
+
+        return PChar->PAI->Internal_UseItem(target, loc, slotid);
     }
     return false;
 }

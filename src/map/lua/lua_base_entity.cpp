@@ -19098,7 +19098,7 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
             float currentDistance = distance(mobObj->loc.p, PTarget->loc.p);
             if (ignoreDistance || currentDistance <= PMobSkill->getDistance())
             {
-                PEntity->PAI->MobSkill(PTarget->targid, skillid, castTimeOverride);
+                PEntity->PAI->MobSkill(targetId, skillid, castTimeOverride);
             }
         }
         // does not have a specified target so default to current battle target
@@ -19107,7 +19107,7 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
             // Self-centered AoE uses self as target
             if (PMobSkill->getAoe() == static_cast<uint8>(AOE_RADIUS::ATTACKER))
             {
-                PEntity->PAI->MobSkill(PEntity->targid, skillid, castTimeOverride);
+                PEntity->PAI->MobSkill(PEntity->entityId(), skillid, castTimeOverride);
             }
             else if (PMobSkill->getValidTargets() & TARGET_ENEMY)
             {
@@ -19118,13 +19118,13 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
                     float currentDistance = distance(mobObj->loc.p, defaultTarget->loc.p);
                     if (ignoreDistance || currentDistance <= PMobSkill->getDistance())
                     {
-                        PEntity->PAI->MobSkill(defaultTarget->targid, skillid, castTimeOverride);
+                        PEntity->PAI->MobSkill(defaultTarget->entityId(), skillid, castTimeOverride);
                     }
                 }
             }
             else if (PMobSkill->getValidTargets() & TARGET_SELF)
             {
-                PEntity->PAI->MobSkill(PEntity->targid, skillid, castTimeOverride);
+                PEntity->PAI->MobSkill(PEntity->entityId(), skillid, castTimeOverride);
             }
         }
     }));
@@ -19169,13 +19169,14 @@ void CLuaBaseEntity::usePetAbility(uint16 skillId, const sol::object& target) co
     // clang-format off
     m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true, [targetId, skillId](auto PEntity)
     {
-        if (auto* PTarget = targetId.resolve<CBattleEntity>())
+        // TODO: Is the resolution here relevant?
+        if (targetId.resolve<CBattleEntity>())
         {
-            PEntity->PAI->PetSkill(PTarget->targid, skillId);
+            PEntity->PAI->PetSkill(targetId, skillId);
         }
         else if (dynamic_cast<CMobEntity*>(PEntity))
         {
-            PEntity->PAI->PetSkill(static_cast<CMobEntity*>(PEntity)->GetBattleTargetID(), skillId);
+            PEntity->PAI->PetSkill(static_cast<CMobEntity*>(PEntity)->battleTarget(), skillId);
         }
     }));
     // clang-format on

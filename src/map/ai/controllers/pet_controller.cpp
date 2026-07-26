@@ -131,15 +131,15 @@ auto CPetController::DoRoamTick(timer::time_point tick) -> Task<void>
     co_return;
 }
 
-auto CPetController::PetSkill(const uint16 targid, uint16 abilityid) const -> bool
+auto CPetController::PetSkill(const EntityId& target, uint16 abilityid) const -> bool
 {
     TracyZoneScoped;
 
     if (POwner)
     {
-        FaceTarget(targid);
+        FaceTarget(target);
         PPet->PAI->EventHandler.triggerListener("WEAPONSKILL_BEFORE_USE", PPet, abilityid);
-        return POwner->PAI->Internal_PetSkill(targid, abilityid);
+        return POwner->PAI->Internal_PetSkill(target, abilityid);
     }
 
     return false;
@@ -246,7 +246,7 @@ auto CPetController::Ability(const EntityId target, const uint16 abilityid) -> b
 
     if (PPet->PAI->CanChangeState())
     {
-        return PPet->PAI->Internal_Ability(target.targid, abilityid);
+        return PPet->PAI->Internal_Ability(target, abilityid);
     }
 
     return false;

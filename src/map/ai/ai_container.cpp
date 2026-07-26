@@ -106,22 +106,22 @@ auto CAIContainer::WeaponSkill(const EntityId& target, const uint16 wsid) const 
     return false;
 }
 
-bool CAIContainer::MobSkill(uint16 targid, uint16 wsid, Maybe<timer::duration> castTimeOverride)
+bool CAIContainer::MobSkill(const EntityId& target, uint16 wsid, Maybe<timer::duration> castTimeOverride)
 {
     auto* AIController = dynamic_cast<CMobController*>(Controller.get());
     if (AIController)
     {
-        return AIController->MobSkill(targid, wsid, castTimeOverride);
+        return AIController->MobSkill(target, wsid, castTimeOverride);
     }
     return false;
 }
 
-bool CAIContainer::PetSkill(uint16 targid, uint16 wsid)
+bool CAIContainer::PetSkill(const EntityId& target, uint16 wsid) const
 {
     auto* AIController = dynamic_cast<CPetController*>(Controller.get());
     if (AIController)
     {
-        return AIController->PetSkill(targid, wsid);
+        return AIController->PetSkill(target, wsid);
     }
     return false;
 }
@@ -163,13 +163,14 @@ bool CAIContainer::Trigger(CCharEntity* player)
     return false;
 }
 
-bool CAIContainer::UseItem(uint16 targid, uint8 loc, uint8 slotid)
+bool CAIContainer::UseItem(const EntityId& target, uint8 loc, uint8 slotid) const
 {
     auto* PlayerController = dynamic_cast<CPlayerController*>(PEntity->PAI->GetController());
     if (PlayerController)
     {
-        return PlayerController->UseItem(targid, loc, slotid);
+        return PlayerController->UseItem(target, loc, slotid);
     }
+
     return false;
 }
 
@@ -221,21 +222,22 @@ bool CAIContainer::Internal_Engage(uint16 targetid)
     return false;
 }
 
-bool CAIContainer::Internal_Cast(uint16 targetid, SpellID spellid)
+bool CAIContainer::Internal_Cast(EntityId target, SpellID spellid)
 {
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
     if (entity)
     {
-        if (auto* target = entity->GetEntity(targetid); target && target->PAI->IsUntargetable())
+        if (const auto* PTarget = target.resolve<CBattleEntity>(); PTarget && PTarget->PAI->IsUntargetable())
         {
             return false;
         }
-        return ChangeState<CMagicState>(entity, targetid, spellid);
+
+        return ChangeState<CMagicState>(entity, target.targid, spellid);
     }
     return false;
 }
 
-bool CAIContainer::Internal_ChangeTarget(uint16 targetid)
+auto CAIContainer::Internal_ChangeTarget(const uint16 targetid) -> bool
 {
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
     if (entity)
@@ -253,7 +255,7 @@ bool CAIContainer::Internal_ChangeTarget(uint16 targetid)
     return false;
 }
 
-bool CAIContainer::Internal_Disengage()
+auto CAIContainer::Internal_Disengage() const -> bool
 {
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
     if (entity)
@@ -264,72 +266,77 @@ bool CAIContainer::Internal_Disengage()
     return false;
 }
 
-bool CAIContainer::Internal_WeaponSkill(uint16 targid, uint16 wsid)
+bool CAIContainer::Internal_WeaponSkill(const EntityId& target, uint16 wsid)
 {
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
     if (entity)
     {
-        if (auto* target = entity->GetEntity(targid); target && target->PAI->IsUntargetable())
+        if (const auto* PTarget = target.resolve<CBattleEntity>(); PTarget && PTarget->PAI->IsUntargetable())
         {
             return false;
         }
-        return ChangeState<CWeaponSkillState>(entity, targid, wsid);
+
+        return ChangeState<CWeaponSkillState>(entity, target.targid, wsid);
     }
     return false;
 }
 
-bool CAIContainer::Internal_MobSkill(uint16 targid, uint16 wsid, Maybe<timer::duration> castTimeOverride)
+bool CAIContainer::Internal_MobSkill(const EntityId& target, uint16 wsid, Maybe<timer::duration> castTimeOverride)
 {
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
     if (entity)
     {
-        if (auto* target = entity->GetEntity(targid); target && target->PAI->IsUntargetable())
+        if (const auto* PTarget = target.resolve<CBattleEntity>(); PTarget && PTarget->PAI->IsUntargetable())
         {
             return false;
         }
-        return ChangeState<CMobSkillState>(entity, targid, wsid, castTimeOverride);
+
+        return ChangeState<CMobSkillState>(entity, target.targid, wsid, castTimeOverride);
     }
     return false;
 }
 
-bool CAIContainer::Internal_PetSkill(uint16 targid, uint16 abilityid)
+bool CAIContainer::Internal_PetSkill(const EntityId& target, uint16 abilityid)
 {
     auto* entity = dynamic_cast<CPetEntity*>(PEntity);
     if (entity)
     {
-        if (auto* target = entity->GetEntity(targid); target && target->PAI->IsUntargetable())
+        if (const auto* PTarget = target.resolve<CBattleEntity>(); PTarget && PTarget->PAI->IsUntargetable())
         {
             return false;
         }
-        return ChangeState<CPetSkillState>(entity, targid, abilityid);
+
+        return ChangeState<CPetSkillState>(entity, target.targid, abilityid);
     }
     return false;
 }
 
-bool CAIContainer::Internal_Ability(uint16 targetid, uint16 abilityid)
+bool CAIContainer::Internal_Ability(const EntityId& target, uint16 abilityid)
 {
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
     if (entity)
     {
-        if (auto* target = entity->GetEntity(targetid); target && target->PAI->IsUntargetable())
+        if (const auto* PTarget = target.resolve<CBattleEntity>(); PTarget && PTarget->PAI->IsUntargetable())
         {
             return false;
         }
-        return ChangeState<CAbilityState>(entity, targetid, abilityid);
+
+        return ChangeState<CAbilityState>(entity, target.targid, abilityid);
     }
     return false;
 }
 
-bool CAIContainer::Internal_RangedAttack(uint16 targetid)
+bool CAIContainer::Internal_RangedAttack(const EntityId& target)
 {
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
     if (entity)
     {
-        if (auto* target = entity->GetEntity(targetid); target && target->PAI->IsUntargetable())
+        if (const auto* PTarget = target.resolve<CBattleEntity>(); PTarget && PTarget->PAI->IsUntargetable())
         {
             return false;
         }
-        return ChangeState<CRangeState>(entity, targetid);
+
+        return ChangeState<CRangeState>(entity, target.targid);
     }
     return false;
 }
@@ -344,12 +351,17 @@ bool CAIContainer::Internal_Die(timer::duration deathTime)
     return false;
 }
 
-bool CAIContainer::Internal_UseItem(uint16 targetid, uint8 loc, uint8 slotid)
+bool CAIContainer::Internal_UseItem(const EntityId& target, uint8 loc, uint8 slotid)
 {
     auto* entity = dynamic_cast<CCharEntity*>(PEntity);
     if (entity)
     {
-        return ChangeState<CItemState>(entity, targetid, loc, slotid);
+        if (const auto* PTarget = target.resolve<CBattleEntity>(); PTarget && PTarget->PAI->IsUntargetable())
+        {
+            return false;
+        }
+
+        return ChangeState<CItemState>(entity, target.targid, loc, slotid);
     }
     return false;
 }
