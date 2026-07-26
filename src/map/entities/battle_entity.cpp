@@ -2351,7 +2351,7 @@ void CBattleEntity::Die()
 {
     TracyZoneScoped;
 
-    if (CBaseEntity* PKiller = GetEntity(m_OwnerID.targid))
+    if (CBaseEntity* PKiller = GetEntity(m_OwnerID.ActIndex))
     {
         static_cast<CBattleEntity*>(PKiller)->ForAlliance(
             [this](CBattleEntity* PMember)
@@ -4094,7 +4094,7 @@ void CBattleEntity::PostTick()
 
 uint16 CBattleEntity::GetBattleTargetID() const
 {
-    return battleTarget_.targid;
+    return battleTarget_.ActIndex;
 }
 
 bool CBattleEntity::hasEnmityEXPENSIVE() const

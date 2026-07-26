@@ -65,7 +65,7 @@ auto GP_CLI_COMMAND_TRADE_LIST::validate(MapSession* PSession, const CCharEntity
 
 void GP_CLI_COMMAND_TRADE_LIST::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    auto* PTarget = static_cast<CCharEntity*>(PChar->GetEntity(PChar->TradePending.targid, TYPE_PC));
+    auto* PTarget = static_cast<CCharEntity*>(PChar->GetEntity(PChar->TradePending.ActIndex, TYPE_PC));
 
     if (!PTarget ||
         PTarget->id != PChar->TradePending.UniqueNo ||

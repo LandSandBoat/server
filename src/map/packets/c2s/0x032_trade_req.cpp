@@ -92,7 +92,7 @@ void GP_CLI_COMMAND_TRADE_REQ::process(MapSession* PSession, CCharEntity* PChar)
 
     const timer::time_point currentTime     = timer::now();
     const auto              lastTargetTrade = currentTime - PTarget->lastTradeInvite;
-    if ((PTarget->TradePending.targid != 0 && lastTargetTrade < 60s) || PTarget->UContainer->GetType() == UCONTAINER_TRADE)
+    if ((PTarget->TradePending.ActIndex != 0 && lastTargetTrade < 60s) || PTarget->UContainer->GetType() == UCONTAINER_TRADE)
     {
         // Can't trade with someone who's already got a pending trade before timeout
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PTarget, GP_ITEM_TRADE_RES_KIND::ErrYouTrade);
@@ -119,10 +119,10 @@ void GP_CLI_COMMAND_TRADE_REQ::process(MapSession* PSession, CCharEntity* PChar)
 
     PChar->lastTradeInvite     = currentTime;
     PChar->TradePending.UniqueNo     = this->UniqueNo;
-    PChar->TradePending.targid = this->ActIndex;
+    PChar->TradePending.ActIndex = this->ActIndex;
 
     PTarget->lastTradeInvite     = currentTime;
     PTarget->TradePending.UniqueNo     = PChar->id;
-    PTarget->TradePending.targid = PChar->targid;
+    PTarget->TradePending.ActIndex = PChar->targid;
     PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_REQ>(PChar);
 }

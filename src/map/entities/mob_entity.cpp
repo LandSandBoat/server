@@ -766,7 +766,7 @@ void CMobEntity::DistributeRewards()
 {
     TracyZoneScoped;
 
-    CCharEntity* PChar = (CCharEntity*)GetEntity(m_OwnerID.targid, TYPE_PC);
+    CCharEntity* PChar = (CCharEntity*)GetEntity(m_OwnerID.ActIndex, TYPE_PC);
 
     if (PChar != nullptr && PChar->id == m_OwnerID.UniqueNo)
     {

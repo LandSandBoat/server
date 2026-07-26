@@ -33,8 +33,8 @@ EntityId::EntityId(const CBaseEntity* PEntity)
         return;
     }
 
-    UniqueNo            = PEntity->id;
-    targid        = PEntity->targid;
+    UniqueNo      = PEntity->id;
+    ActIndex      = PEntity->targid;
     zoneId        = PEntity->loc.zone ? static_cast<uint16>(PEntity->loc.zone->GetID()) : uint16{ 0 };
     instanceRunId = PEntity->PInstance ? PEntity->PInstance->runId() : uint32{ 0 };
     serial        = PEntity->serial();
@@ -48,12 +48,12 @@ void EntityId::clean()
 
 auto EntityId::isSet() const -> bool
 {
-    return targid != 0;
+    return ActIndex != 0;
 }
 
 auto EntityId::isDynamic() const -> bool
 {
-    return targid >= 0x700;
+    return ActIndex >= 0x700;
 }
 
 auto EntityId::operator==(const EntityId& other) const -> bool
@@ -73,7 +73,7 @@ auto EntityId::operator==(const CBaseEntity* PEntity) const -> bool
 
 auto EntityId::resolveEntity() const -> CBaseEntity*
 {
-    if (targid == 0 || serial == 0)
+    if (ActIndex == 0 || serial == 0)
     {
         return nullptr;
     }
@@ -93,11 +93,11 @@ auto EntityId::resolveEntity() const -> CBaseEntity*
             return nullptr;
         }
 
-        PEntity = PInstance->GetEntity(targid, objtype);
+        PEntity = PInstance->GetEntity(ActIndex, objtype);
     }
     else
     {
-        PEntity = PZone->GetEntity(targid, objtype);
+        PEntity = PZone->GetEntity(ActIndex, objtype);
     }
 
     // Verify that we retrieved the exact same entity (dynamic entities).

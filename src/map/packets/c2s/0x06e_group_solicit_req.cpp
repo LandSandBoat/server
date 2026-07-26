@@ -118,7 +118,7 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
                     }
 
                     PInvitee->InvitePending.UniqueNo     = PInviter->id;
-                    PInvitee->InvitePending.targid = PInviter->targid;
+                    PInvitee->InvitePending.ActIndex = PInviter->targid;
 
                     PInvitee->pushPacket<GP_SERV_COMMAND_GROUP_SOLICIT_REQ>(inviteeCharId, inviteeTargId, PInviter->getName(), PartyKind::Party);
 
@@ -204,7 +204,7 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
                     }
 
                     PInvitee->InvitePending.UniqueNo     = PInviter->id;
-                    PInvitee->InvitePending.targid = PInviter->targid;
+                    PInvitee->InvitePending.ActIndex = PInviter->targid;
 
                     PInvitee->pushPacket<GP_SERV_COMMAND_GROUP_SOLICIT_REQ>(inviteeCharId, inviteeTargId, PInviter->getName(), PartyKind::Alliance);
 

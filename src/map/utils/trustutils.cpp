@@ -364,7 +364,7 @@ auto LoadTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntity*
 
     PTrust->loc              = PMaster->loc;
     PTrust->m_OwnerID.UniqueNo     = PMaster->id;
-    PTrust->m_OwnerID.targid = PMaster->targid;
+    PTrust->m_OwnerID.ActIndex = PMaster->targid;
 
     // spawn me randomly around master
     PTrust->loc.p = nearPosition(PMaster->loc.p, CTrustController::SpawnDistance + (PMaster->PTrusts.size() * CTrustController::SpawnDistance), (float)M_PI);

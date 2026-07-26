@@ -44,7 +44,7 @@ auto GP_CLI_COMMAND_BAZAAR_BUY::validate(MapSession* PSession, const CCharEntity
 
 void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    auto* PEntity = PChar->GetEntity(PChar->BazaarID.targid, TYPE_PC);
+    auto* PEntity = PChar->GetEntity(PChar->BazaarID.ActIndex, TYPE_PC);
     if (!PEntity)
     {
         return;
@@ -184,7 +184,7 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
         }
         for (std::size_t i = 0; i < PTarget->BazaarCustomers.size(); ++i)
         {
-            PEntity = PTarget->GetEntity(PTarget->BazaarCustomers[i].targid, TYPE_PC);
+            PEntity = PTarget->GetEntity(PTarget->BazaarCustomers[i].ActIndex, TYPE_PC);
             if (!PEntity)
             {
                 continue;
