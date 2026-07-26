@@ -36,8 +36,8 @@
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
 
-CMobSkillState::CMobSkillState(CBattleEntity* PEntity, const uint16 targid, const uint16 wsid, const Maybe<timer::duration> castTimeOverride)
-: CState(PEntity, targid)
+CMobSkillState::CMobSkillState(CBattleEntity* PEntity, const EntityId& target, const uint16 wsid, const Maybe<timer::duration> castTimeOverride)
+: CState(PEntity, target)
 , m_PEntity(PEntity)
 , m_spentTP(0)
 {
@@ -55,7 +55,7 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, const uint16 targid, cons
     // Self-centered AoE: validate mob can target itself, but keep original targid for allegiance
     const bool   isSelfCenteredAoE = skill->getAoe() == static_cast<uint8>(AOE_RADIUS::ATTACKER);
     const uint16 validTargets      = isSelfCenteredAoE ? static_cast<uint16>(TARGET_SELF) : skill->getValidTargets();
-    const uint16 validateTargid    = isSelfCenteredAoE ? m_PEntity->targid : targid;
+    const uint16 validateTargid    = isSelfCenteredAoE ? m_PEntity->targid : target.targid;
     auto*        PTarget           = m_PEntity->IsValidTarget(validateTargid, validTargets, m_errorMsg);
 
     if (!PTarget || this->HasErrorMsg())
@@ -71,7 +71,7 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, const uint16 targid, cons
     }
 
     // Store original targid - for self-centered AoE this preserves battle target for allegiance checks
-    SetTarget(targid);
+    SetTarget(target);
 
     m_PSkill = std::make_unique<CMobSkill>(*skill);
 
@@ -89,7 +89,7 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, const uint16 targid, cons
         // For self-centered AoE damaging moves, show battle target in readies message
         // For true self-target buffs (TARGET_SELF), show self
         const bool isSelfBuff    = skill->getValidTargets() == TARGET_SELF;
-        auto*      PActionTarget = isSelfBuff ? m_PEntity : (isSelfCenteredAoE ? m_PEntity->GetBattleTarget() : m_PEntity->GetEntity(targid));
+        auto*      PActionTarget = isSelfBuff ? m_PEntity : (isSelfCenteredAoE ? m_PEntity->GetBattleTarget() : m_PEntity->GetEntity(target.targid));
         if (!PActionTarget)
         {
             PActionTarget = m_PEntity;

@@ -26,7 +26,7 @@
 class CRangeState : public CState
 {
 public:
-    CRangeState(CBattleEntity* PEntity, uint16 targid);
+    CRangeState(CBattleEntity* PEntity, const EntityId& target);
 
     void SpendCost() const;
     auto IsRapidShot() const -> bool;

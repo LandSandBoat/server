@@ -29,7 +29,7 @@ class CPetEntity;
 class CPetSkillState : public CState
 {
 public:
-    CPetSkillState(CPetEntity* PEntity, uint16 targid, uint16 wsid);
+    CPetSkillState(CPetEntity* PEntity, const EntityId& target, uint16 wsid);
 
     auto GetPetSkill() const -> CPetSkill*;
     auto GetSpentTP() const -> int16;

@@ -55,11 +55,11 @@ auto CController::Cast(const EntityId target, const SpellID spellid) -> bool
     return false;
 }
 
-auto CController::Engage(const uint16 targid) -> bool
+auto CController::Engage(const EntityId& target) -> bool
 {
     if (POwner)
     {
-        return POwner->PAI->Internal_Engage(targid);
+        return POwner->PAI->Internal_Engage(target);
     }
     return false;
 }

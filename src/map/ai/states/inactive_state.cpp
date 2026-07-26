@@ -24,8 +24,8 @@
 #include "entities/battle_entity.h"
 #include "status_effect_container.h"
 
-CInactiveState::CInactiveState(CBaseEntity* PEntity, timer::duration _duration, bool canChangeState, bool untargetable)
-: CState(PEntity, 0)
+CInactiveState::CInactiveState(CBaseEntity* PEntity, const timer::duration _duration, const bool canChangeState, const bool untargetable)
+: CState(PEntity, PEntity->entityId())
 , m_duration(_duration)
 , m_canChangeState(canChangeState)
 , m_untargetable(untargetable)
@@ -36,7 +36,7 @@ CInactiveState::CInactiveState(CBaseEntity* PEntity, timer::duration _duration, 
     }
 }
 
-auto CInactiveState::Update(timer::time_point tick) -> bool
+auto CInactiveState::Update(const timer::time_point tick) -> bool
 {
     const auto* PBattleEntity{ dynamic_cast<CBattleEntity*>(m_PEntity) };
     if (PBattleEntity && m_duration == 0ms)

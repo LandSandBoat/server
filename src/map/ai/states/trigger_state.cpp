@@ -23,8 +23,8 @@
 
 #include "entities/char_entity.h"
 
-CTriggerState::CTriggerState(CBaseEntity* PEntity, const uint16 targid, const bool door)
-: CState(PEntity, targid)
+CTriggerState::CTriggerState(CBaseEntity* PEntity, const EntityId& target, const bool door)
+: CState(PEntity, target)
 , door(door)
 {
 }

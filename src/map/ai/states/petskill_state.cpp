@@ -33,8 +33,8 @@
 #include "utils/battleutils.h"
 #include "utils/petutils.h"
 
-CPetSkillState::CPetSkillState(CPetEntity* PEntity, uint16 targid, uint16 wsid)
-: CState(PEntity, targid)
+CPetSkillState::CPetSkillState(CPetEntity* PEntity, const EntityId& target, uint16 wsid)
+: CState(PEntity, target)
 , m_PEntity(PEntity)
 , m_spentTP(0)
 {
@@ -49,7 +49,7 @@ CPetSkillState::CPetSkillState(CPetEntity* PEntity, uint16 targid, uint16 wsid)
         throw CStateInitException(nullptr);
     }
 
-    auto* PTarget = m_PEntity->IsValidTarget(m_targid, skill->getValidTargets(), m_errorMsg);
+    const auto* PTarget = m_PEntity->IsValidTarget(target, skill->getValidTargets(), m_errorMsg);
 
     if (!PTarget || this->HasErrorMsg())
     {
@@ -177,7 +177,7 @@ auto CPetSkillState::Update(const timer::time_point tick) -> bool
                     PBattleTarget->allegiance != m_PEntity->allegiance)
                 {
                     // Re-engage the target after blood pact
-                    m_PEntity->PAI->Engage(PTarget->targid);
+                    m_PEntity->PAI->Engage(PTarget->entityId());
                 }
             }
         }

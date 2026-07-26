@@ -33,7 +33,7 @@ struct action_t;
 class CItemState : public CState
 {
 public:
-    CItemState(CCharEntity* PEntity, uint16 targid, uint8 loc, uint8 slotid);
+    CItemState(CCharEntity* PEntity, const EntityId& target, uint8 loc, uint8 slotid);
     ~CItemState() override;
 
     void UpdateTarget(CBaseEntity* target) override;

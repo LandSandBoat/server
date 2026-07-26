@@ -40,8 +40,8 @@
 #include "utils/battleutils.h"
 #include "utils/zoneutils.h"
 
-CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid, uint8 flags)
-: CState(PEntity, targid)
+CMagicState::CMagicState(CBattleEntity* PEntity, const EntityId& target, SpellID spellid, uint8 flags)
+: CState(PEntity, target)
 , m_PEntity(PEntity)
 , m_PSpell(nullptr)
 , m_flags(flags)
@@ -62,7 +62,7 @@ CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid,
 
     m_PSpell = PSpell->clone();
 
-    auto* PTarget = m_PEntity->IsValidTarget(m_targid, m_PSpell->getValidTarget(), m_errorMsg);
+    auto* PTarget = m_PEntity->IsValidTarget(target, m_PSpell->getValidTarget(), m_errorMsg);
     if (!PTarget || this->HasErrorMsg())
     {
         if (this->HasErrorMsg())
@@ -141,7 +141,7 @@ CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid,
 auto CMagicState::Update(timer::time_point tick) -> bool
 {
     action_t   action;
-    auto*      PTarget = m_PEntity->IsValidTarget(m_targid, m_PSpell->getValidTarget(), m_errorMsg);
+    auto*      PTarget = m_PEntity->IsValidTarget(GetTargetID(), m_PSpell->getValidTarget(), m_errorMsg);
     const auto msg     = MsgBasic::IsInterrupted;
 
     auto isTargetValid = [&]()

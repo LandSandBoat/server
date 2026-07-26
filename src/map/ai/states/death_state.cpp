@@ -36,7 +36,7 @@ static constexpr timer::duration TIME_TO_SEND_RERAISE_MENU = 8s;
 }
 
 CDeathState::CDeathState(CBattleEntity* PEntity, timer::duration death_time)
-: CState(PEntity, PEntity->targid)
+: CState(PEntity, PEntity->entityId())
 , m_PEntity(PEntity)
 , m_deathTime(death_time)
 , m_raiseTime(GetEntryTime() + TIME_TO_SEND_RERAISE_MENU)
@@ -51,7 +51,7 @@ CDeathState::CDeathState(CBattleEntity* PEntity, timer::duration death_time)
     }
 }
 
-auto CDeathState::Update(timer::time_point tick) -> bool
+auto CDeathState::Update(const timer::time_point tick) -> bool
 {
     if (m_PEntity->objtype != TYPE_PC)
     {

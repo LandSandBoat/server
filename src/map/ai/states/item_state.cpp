@@ -44,8 +44,8 @@
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
 
-CItemState::CItemState(CCharEntity* PEntity, const uint16 targid, const uint8 loc, const uint8 slotid)
-: CState(PEntity, targid)
+CItemState::CItemState(CCharEntity* PEntity, const EntityId& target, const uint8 loc, const uint8 slotid)
+: CState(PEntity, target)
 , m_PEntity(PEntity)
 , m_PItem(nullptr)
 , m_location(loc)
@@ -86,7 +86,7 @@ CItemState::CItemState(CCharEntity* PEntity, const uint16 targid, const uint8 lo
         throw CStateInitException(std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, 0, 0, MsgBasic::UnableToUseItem));
     }
 
-    UpdateTarget(PEntity->IsValidTarget(targid, m_PItem->getValidTarget(), m_errorMsg));
+    UpdateTarget(PEntity->IsValidTarget(target, m_PItem->getValidTarget(), m_errorMsg));
     auto* PTarget = GetTarget();
 
     if (!PTarget || this->HasErrorMsg())
@@ -172,7 +172,7 @@ void CItemState::UpdateTarget(CBaseEntity* target)
 void CItemState::UpdateTarget(const uint16 targid)
 {
     CState::UpdateTarget(targid);
-    CState::SetTarget(targid);
+    CState::SetTarget(EntityId(m_PEntity->GetEntity(targid)));
 
     if (!m_PItem)
     {
@@ -192,7 +192,7 @@ void CItemState::UpdateTarget(const uint16 targid)
         m_errorMsg.reset();
 
         // Call CBattleEntity's simpler IsValidTarget()
-        CState::UpdateTarget(m_PEntity->CBattleEntity::IsValidTarget(m_targid, m_PItem->getValidTarget(), m_errorMsg));
+        CState::UpdateTarget(m_PEntity->CBattleEntity::IsValidTarget(GetTargetID(), m_PItem->getValidTarget(), m_errorMsg));
     }
 }
 
@@ -202,7 +202,7 @@ auto CItemState::Update(const timer::time_point tick) -> bool
     {
         m_interrupted   = false;
         m_interruptable = false;
-        UpdateTarget(m_PEntity->IsValidTarget(m_targid, m_PItem->getValidTarget(), m_errorMsg));
+        UpdateTarget(m_PEntity->IsValidTarget(GetTargetID(), m_PItem->getValidTarget(), m_errorMsg));
 
         action_t action{};
 
@@ -300,7 +300,7 @@ void CItemState::TryInterrupt(CBattleEntity* PTarget)
     }
     else
     {
-        UpdateTarget(m_PEntity->IsValidTarget(m_targid, m_PItem->getValidTarget(), m_errorMsg));
+        UpdateTarget(m_PEntity->IsValidTarget(GetTargetID(), m_PItem->getValidTarget(), m_errorMsg));
     }
 
     auto msg = MsgBasic::CannotUseItems;

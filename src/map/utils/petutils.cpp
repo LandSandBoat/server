@@ -206,7 +206,7 @@ void AttackTarget(CBattleEntity* PMaster, CBattleEntity* PTarget)
 
     if (!PPet->StatusEffectContainer->HasPreventActionEffect())
     {
-        PPet->PAI->Engage(PTarget->targid);
+        PPet->PAI->Engage(PTarget->entityId());
     }
 }
 

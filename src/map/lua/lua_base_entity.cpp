@@ -12910,7 +12910,7 @@ void CLuaBaseEntity::engage(uint16 requestedTarget)
     auto* PBattle = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (PBattle && requestedTarget > 0)
     {
-        PBattle->PAI->Engage(requestedTarget);
+        PBattle->PAI->Engage(EntityId(PBattle->GetEntity(requestedTarget)));
     }
 }
 
@@ -13629,7 +13629,7 @@ void CLuaBaseEntity::updateEnmity(CLuaBaseEntity* PEntity)
 
     if (PEntity != nullptr && PEntity->GetBaseEntity()->objtype != TYPE_NPC)
     {
-        m_PBaseEntity->PAI->Engage(PEntity->GetBaseEntity()->targid);
+        m_PBaseEntity->PAI->Engage(PEntity->GetBaseEntity()->entityId());
     }
 }
 

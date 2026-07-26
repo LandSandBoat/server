@@ -29,7 +29,7 @@ class CBattleEntity;
 class CMobSkillState : public CState
 {
 public:
-    CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsid, Maybe<timer::duration> castTimeOverride);
+    CMobSkillState(CBattleEntity* PEntity, const EntityId& target, uint16 wsid, Maybe<timer::duration> castTimeOverride);
 
     auto GetSkill() const -> CMobSkill*;
     auto GetSpentTP() const -> int16;

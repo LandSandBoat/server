@@ -48,73 +48,73 @@ public:
     CAIContainer(const CAIContainer&)            = delete;
     CAIContainer& operator=(const CAIContainer&) = delete;
 
-    bool Cast(EntityId target, SpellID spellid);
-    bool Engage(uint16 targid);
-    bool ChangeTarget(uint16 targid);
-    bool Disengage();
-    bool WeaponSkill(const EntityId& target, uint16 wsid) const;
-    bool MobSkill(const EntityId& target, uint16 wsid, Maybe<timer::duration> castTimeOverride);
-    bool PetSkill(const EntityId& target, uint16 wsid) const;
-    bool Ability(const EntityId& target, uint16 abilityid) const;
-    bool RangedAttack(const EntityId& target) const;
-    bool Trigger(CCharEntity* player);
-    bool UseItem(const EntityId& target, uint8 loc, uint8 slotid) const;
-    bool Inactive(timer::duration _duration, bool canChangeState);
-    bool Untargetable(timer::duration _duration, bool canChangeState); // Used to make owner entity untargetable & inactionable in TargetFind for _duration
+    auto Cast(const EntityId& target, SpellID spellid) const -> bool;
+    auto Engage(const EntityId& target) const -> bool;
+    auto ChangeTarget(uint16 targid) const -> bool;
+    auto Disengage() const -> bool;
+    auto WeaponSkill(const EntityId& target, uint16 wsid) const -> bool;
+    auto MobSkill(const EntityId& target, uint16 wsid, Maybe<timer::duration> castTimeOverride) const -> bool;
+    auto PetSkill(const EntityId& target, uint16 wsid) const -> bool;
+    auto Ability(const EntityId& target, uint16 abilityid) const -> bool;
+    auto RangedAttack(const EntityId& target) const -> bool;
+    auto Trigger(CCharEntity* player) -> bool;
+    auto UseItem(const EntityId& target, uint8 loc, uint8 slotid) const -> bool;
+    auto Inactive(timer::duration _duration, bool canChangeState) -> bool;
+    auto Untargetable(timer::duration _duration, bool canChangeState) -> bool; // Used to make owner entity untargetable & inactionable in TargetFind for _duration
 
     //
     // Internal Controller functions
     //
 
-    bool Internal_Engage(uint16 targetid);
-    bool Internal_Cast(EntityId target, SpellID spellid);
-    bool Internal_ChangeTarget(uint16 targetid);
-    bool Internal_Disengage() const;
-    bool Internal_WeaponSkill(const EntityId& target, uint16 wsid);
-    bool Internal_MobSkill(const EntityId& target, uint16 wsid, Maybe<timer::duration> castTimeOverride);
-    bool Internal_PetSkill(const EntityId& target, uint16 abilityid);
-    bool Internal_Ability(const EntityId& target, uint16 abilityid);
-    bool Internal_RangedAttack(const EntityId& target);
-    bool Internal_Die(timer::duration);
-    bool Internal_UseItem(const EntityId& target, uint8 loc, uint8 slotid);
-    bool Internal_Despawn(bool instantDespawn = false);
-    bool Internal_Synth(xi::SkillType synthSkill);
-    bool Accept_Raise();
+    auto Internal_Engage(EntityId target) -> bool;
+    auto Internal_Cast(EntityId target, SpellID spellid) -> bool;
+    auto Internal_ChangeTarget(uint16 targetid) const -> bool;
+    auto Internal_Disengage() const -> bool;
+    auto Internal_WeaponSkill(const EntityId& target, uint16 wsid) -> bool;
+    auto Internal_MobSkill(const EntityId& target, uint16 wsid, Maybe<timer::duration> castTimeOverride) -> bool;
+    auto Internal_PetSkill(const EntityId& target, uint16 abilityid) -> bool;
+    auto Internal_Ability(const EntityId& target, uint16 abilityid) -> bool;
+    auto Internal_RangedAttack(const EntityId& target) -> bool;
+    auto Internal_Die(timer::duration) -> bool;
+    auto Internal_UseItem(const EntityId& target, uint8 loc, uint8 slotid) -> bool;
+    auto Internal_Despawn(bool instantDespawn = false) -> bool;
+    auto Internal_Synth(xi::SkillType synthSkill) -> bool;
+    auto Accept_Raise() -> bool;
 
-    void    Reset();
-    auto    Tick(timer::time_point tick) -> Task<void>;
-    CState* GetCurrentState();
-    bool    IsStateStackEmpty();
-    void    ClearStateStack();
-    void    InterruptStates();
+    void Reset();
+    auto Tick(timer::time_point tick) -> Task<void>;
+    auto GetCurrentState() const -> CState*;
+    auto IsStateStackEmpty() const -> bool;
+    void ClearStateStack();
+    void InterruptStates();
 
     // Pop the top state if it's the expected state
     template <typename State>
-    bool PopState();
+    auto PopState() -> bool;
 
     // Or have each state return a static number/string that Lua can use as well, in case this is not sufficient
     template <typename State, typename = std::enable_if_t<std::is_base_of<CState, State>::value>>
-    bool IsCurrentState();
+    auto IsCurrentState() -> bool;
 
-    bool IsSpawned();
-    bool IsRoaming();
-    bool IsEngaged();
-    bool IsUntargetable();
+    auto IsSpawned() const -> bool;
+    auto IsRoaming() const -> bool;
+    auto IsEngaged() const -> bool;
+    auto IsUntargetable() const -> bool;
 
     // whether AI is currently able to change state from external means
-    bool CanChangeState();
-    bool CanFollowPath();
+    auto CanChangeState() const -> bool;
+    auto CanFollowPath() const -> bool;
 
-    void         SetController(std::unique_ptr<CController> controller);
-    CController* GetController();
+    void SetController(std::unique_ptr<CController> controller);
+    auto GetController() const -> CController*;
 
-    timer::time_point getTick();
-    timer::time_point getPrevTick();
+    auto getTick() const -> timer::time_point;
+    auto getPrevTick() const -> timer::time_point;
 
     void Despawn();
 
     void QueueAction(queueAction_t&&);
-    bool QueueEmpty();
+    auto QueueEmpty() const -> bool;
     void ClearActionQueue();
     void ClearTimerQueue();
     void checkQueueImmediately();
@@ -140,10 +140,10 @@ protected:
     void CheckCompletedStates();
 
     template <typename T, typename... Args>
-    bool ChangeState(Args&&... args);
+    auto ChangeState(Args&&... args) -> bool;
 
     template <typename T, typename... Args>
-    bool ForceChangeState(Args&&... args);
+    auto ForceChangeState(Args&&... args) -> bool;
 
 private:
     // Suspend the current state (if any) beneath `next`, then make `next` current.
@@ -152,7 +152,7 @@ private:
     // Finish with the current state and resume the one suspended beneath it (or go idle).
     void resumeNextState();
 
-    size_t stateCount() const;
+    auto stateCount() const -> size_t;
 
     // The state the entity is currently in (null == idle). It lives here rather than on
     // the stack so it can never be freed from underneath its own DoUpdate; m_stateStack
@@ -168,7 +168,7 @@ private:
 //
 
 template <typename State>
-bool CAIContainer::PopState()
+auto CAIContainer::PopState() -> bool
 {
     if (IsCurrentState<State>())
     {
@@ -180,13 +180,13 @@ bool CAIContainer::PopState()
 }
 
 template <typename State, typename>
-bool CAIContainer::IsCurrentState()
+auto CAIContainer::IsCurrentState() -> bool
 {
     return dynamic_cast<State*>(GetCurrentState());
 }
 
 template <typename T, typename... Args>
-bool CAIContainer::ChangeState(Args&&... args)
+auto CAIContainer::ChangeState(Args&&... args) -> bool
 {
     if (stateCount() > 10)
     {
@@ -214,7 +214,7 @@ bool CAIContainer::ChangeState(Args&&... args)
 }
 
 template <typename T, typename... Args>
-bool CAIContainer::ForceChangeState(Args&&... args)
+auto CAIContainer::ForceChangeState(Args&&... args) -> bool
 {
     if (stateCount() > 10)
     {

@@ -847,7 +847,7 @@ void CZoneEntities::tapMobAggro(CCharEntity* PChar, CMobEntity* PCurrentMob)
     bool validAggro = mobCheck > EMobDifficulty::TooWeak || PChar->isSitting() || PCurrentMob->getMobMod(xi::MobMod::AlwaysAggro);
     if (validAggro && PController->CanAggroTarget(PChar))
     {
-        PCurrentMob->PAI->Engage(PChar->targid);
+        PCurrentMob->PAI->Engage(PChar->entityId());
     }
 }
 
@@ -1760,7 +1760,7 @@ auto CZoneEntities::mobAggroCheck(CMobEntity* PMob, timer::time_point tick) -> T
             CMobController* PController = static_cast<CMobController*>(PCurrentMob->PAI->GetController());
             if (PController != nullptr && PController->CanAggroTarget(PMob))
             {
-                PCurrentMob->PAI->Engage(PMob->targid);
+                PCurrentMob->PAI->Engage(PMob->entityId());
             }
         }
     };

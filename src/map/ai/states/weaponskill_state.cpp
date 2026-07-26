@@ -34,8 +34,8 @@
 #include "utils/zoneutils.h"
 #include "weapon_skill.h"
 
-CWeaponSkillState::CWeaponSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsid)
-: CState(PEntity, targid)
+CWeaponSkillState::CWeaponSkillState(CBattleEntity* PEntity, const EntityId& target, const uint16 wsid)
+: CState(PEntity, target)
 , m_PEntity(PEntity)
 {
     auto* skill = battleutils::GetWeaponSkill(wsid);
@@ -45,7 +45,7 @@ CWeaponSkillState::CWeaponSkillState(CBattleEntity* PEntity, uint16 targid, uint
     }
 
     const auto targetFlags = battleutils::isValidSelfTargetWeaponskill(wsid) ? TARGET_SELF : TARGET_ENEMY;
-    auto*      PTarget     = m_PEntity->IsValidTarget(m_targid, targetFlags, m_errorMsg);
+    auto*      PTarget     = m_PEntity->IsValidTarget(target, targetFlags, m_errorMsg);
 
     if (!PTarget || this->HasErrorMsg())
     {

@@ -42,7 +42,7 @@ public:
     virtual void Despawn();
     virtual void Reset();
     virtual auto Cast(EntityId target, SpellID spellid) -> bool;
-    virtual auto Engage(uint16 targid) -> bool;
+    virtual auto Engage(const EntityId& target) -> bool;
     virtual auto ChangeTarget(uint16 targid) -> bool;
     virtual auto Disengage() -> bool;
     virtual auto WeaponSkill(EntityId target, uint16 wsid) -> bool;

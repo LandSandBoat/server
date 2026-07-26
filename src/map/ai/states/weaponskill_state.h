@@ -27,7 +27,7 @@
 class CWeaponSkillState : public CState
 {
 public:
-    CWeaponSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsid);
+    CWeaponSkillState(CBattleEntity* PEntity, const EntityId& target, uint16 wsid);
 
     auto GetSkill() const -> CWeaponSkill*;
     auto GetSpentTP() const -> int16;

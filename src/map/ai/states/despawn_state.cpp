@@ -28,7 +28,7 @@
 #include "zone.h"
 
 CDespawnState::CDespawnState(CBaseEntity* PEntity, const bool instantDespawn)
-: CState(PEntity, PEntity->targid)
+: CState(PEntity, PEntity->entityId())
 , despawnTime_(timer::now() + (instantDespawn ? 0s : 3s))
 {
     if (!instantDespawn && (PEntity->status != xi::Status::Disappear && !((static_cast<CMobEntity*>(PEntity)->m_Behavior & xi::Behavior::NoDespawn) != xi::Behavior::None)))

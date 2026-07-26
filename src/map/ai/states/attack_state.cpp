@@ -29,11 +29,11 @@
 #include "packets/s2c/0x058_assist.h"
 #include "utils/battleutils.h"
 
-CAttackState::CAttackState(CBattleEntity* PEntity, const uint16 targid)
-: CState(PEntity, targid)
+CAttackState::CAttackState(CBattleEntity* PEntity, const EntityId& target)
+: CState(PEntity, target)
 , m_PEntity(PEntity)
 {
-    PEntity->setBattleTarget(EntityId(PEntity->GetEntity(targid)));
+    PEntity->setBattleTarget(target);
     PEntity->SetBattleStartTime(timer::now());
     CAttackState::UpdateTarget();
 
@@ -163,7 +163,7 @@ void CAttackState::UpdateTarget(uint16 targid)
         if (targid != 0)
         {
             m_PEntity->OnChangeTarget(PNewTarget);
-            SetTarget(newTarget.targid);
+            SetTarget(newTarget);
             if (!PNewTarget)
             {
                 m_errorMsg.reset();

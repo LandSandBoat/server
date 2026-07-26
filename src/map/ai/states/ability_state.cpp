@@ -98,8 +98,8 @@ auto PetSkillDistanceCheck(CCharEntity* PChar, CBaseEntity* PTarget, const CAbil
 
 } // namespace
 
-CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abilityid)
-: CState(PEntity, targid)
+CAbilityState::CAbilityState(CBattleEntity* PEntity, const EntityId& target, const uint16 abilityid)
+: CState(PEntity, target)
 , m_PEntity(PEntity)
 {
     CAbility* PAbility = ability::GetAbility(abilityid);
@@ -108,7 +108,7 @@ CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abili
     {
         throw CStateInitException(std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, 0, 0, MsgBasic::UnableToUseJobAbility));
     }
-    auto* PTarget = m_PEntity->IsValidTarget(m_targid, PAbility->getValidTarget(), m_errorMsg);
+    auto* PTarget = m_PEntity->IsValidTarget(target, PAbility->getValidTarget(), m_errorMsg);
 
     if (!PTarget || this->HasErrorMsg())
     {
@@ -121,7 +121,7 @@ CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abili
             throw CStateInitException(std::make_unique<CBasicPacket>());
         }
     }
-    SetTarget(PTarget->targid);
+    SetTarget(target);
     m_PAbility = std::make_unique<CAbility>(*PAbility);
     m_castTime = PAbility->getCastTime();
 

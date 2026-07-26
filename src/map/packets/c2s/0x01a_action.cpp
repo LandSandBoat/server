@@ -271,7 +271,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
                 PChar->StatusEffectContainer->DelStatusEffectSilent(xi::StatusEffect::Mounted);
             }
 
-            PChar->PAI->Engage(this->ActIndex);
+            PChar->PAI->Engage(EntityId(PChar->GetEntity(this->ActIndex)));
         }
         break;
         case GP_CLI_COMMAND_ACTION_ACTIONID::CastMagic:
