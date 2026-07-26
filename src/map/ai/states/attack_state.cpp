@@ -118,7 +118,7 @@ void CAttackState::ResetAttackTimer()
     m_attackTime = std::chrono::milliseconds(m_PEntity->GetWeaponDelay(false));
 }
 
-void CAttackState::UpdateTarget(uint16 targid)
+void CAttackState::UpdateTarget(const EntityId& target)
 {
     m_errorMsg.reset();
     auto           newTarget{ m_PEntity->battleTarget() };
@@ -150,9 +150,9 @@ void CAttackState::UpdateTarget(uint16 targid)
             m_PEntity->PAI->ChangeTarget(newTarget);
         }
     }
-    if (targid != newTarget.targid)
+    if (target != newTarget)
     {
-        if (targid != 0)
+        if (target.isSet())
         {
             m_PEntity->OnChangeTarget(PNewTarget);
             SetTarget(newTarget);

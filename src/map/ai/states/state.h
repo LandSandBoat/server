@@ -68,11 +68,9 @@ public:
 protected:
     // state logic done per tick - returns whether to exit the state or not
     virtual auto Update(timer::time_point tick) -> bool = 0;
+    virtual void UpdateTarget(const EntityId& target);
 
-    // Per-tick hook; base does nothing, attack/item override to retarget or re-validate.
-    virtual void UpdateTarget(uint16 targid);
-
-    auto GetTargetID() const -> uint16;
+    auto target() const -> EntityId;
     void Complete();
     auto GetEntryTime() const -> timer::time_point;
 

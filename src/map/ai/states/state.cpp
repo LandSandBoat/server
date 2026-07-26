@@ -38,7 +38,7 @@ CState::CState(CBaseEntity* PEntity, const EntityId& target)
 {
 }
 
-void CState::UpdateTarget(const uint16 targid)
+void CState::UpdateTarget(const EntityId& target)
 {
 }
 
@@ -47,9 +47,9 @@ auto CState::GetTarget() const -> CBaseEntity*
     return target_.resolve();
 }
 
-auto CState::GetTargetID() const -> uint16
+auto CState::target() const -> EntityId
 {
-    return target_.targid;
+    return target_;
 }
 
 void CState::Complete()
@@ -72,7 +72,7 @@ void CState::SetTarget(const EntityId& target)
     if (!target_.isSet() || target_ != target)
     {
         target_ = target;
-        UpdateTarget(target.targid);
+        UpdateTarget(target);
     }
 }
 
@@ -95,7 +95,7 @@ auto CState::GetErrorMsg() const -> std::unique_ptr<CBasicPacket>
 
 auto CState::DoUpdate(const timer::time_point tick) -> bool
 {
-    UpdateTarget(target_.targid);
+    UpdateTarget(target_);
     return Update(tick);
 }
 

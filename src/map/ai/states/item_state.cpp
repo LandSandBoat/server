@@ -167,14 +167,14 @@ auto CItemState::validatedTarget() -> CBaseEntity*
         return nullptr;
     }
 
-    auto* PTarget = m_PEntity->IsValidTarget(GetTargetID(), m_PItem->getValidTarget(), m_errorMsg);
+    auto* PTarget = m_PEntity->IsValidTarget(target(), m_PItem->getValidTarget(), m_errorMsg);
 
     // Soultrappers work on mobs claimed by anyone, so re-check with the base IsValidTarget
     // (which ignores claim) and clear the resulting "already claimed" error.
     if (PTarget && m_PItem->isSoultrapper())
     {
         m_errorMsg.reset();
-        PTarget = m_PEntity->CBattleEntity::IsValidTarget(GetTargetID(), m_PItem->getValidTarget(), m_errorMsg);
+        PTarget = m_PEntity->CBattleEntity::IsValidTarget(target(), m_PItem->getValidTarget(), m_errorMsg);
     }
 
     return PTarget;

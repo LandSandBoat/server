@@ -141,7 +141,7 @@ CMagicState::CMagicState(CBattleEntity* PEntity, const EntityId& target, SpellID
 auto CMagicState::Update(timer::time_point tick) -> bool
 {
     action_t   action;
-    auto*      PTarget = m_PEntity->IsValidTarget(GetTargetID(), m_PSpell->getValidTarget(), m_errorMsg);
+    auto*      PTarget = m_PEntity->IsValidTarget(target(), m_PSpell->getValidTarget(), m_errorMsg);
     const auto msg     = MsgBasic::IsInterrupted;
 
     auto isTargetValid = [&]()
