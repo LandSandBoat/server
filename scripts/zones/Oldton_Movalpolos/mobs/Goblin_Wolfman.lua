@@ -21,7 +21,8 @@ end
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 200)
     mob:setMod(xi.mod.DELAYP, 0)
-    mob:setMobMod(xi.mobMod.MAGIC_COOL, 75) -- Can cast Stun every minute
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 75) -- Can cast Stun every minute.
+    mob:setMod(xi.mod.DARK_SLEEP_RES_RANK, 11) -- TODO: Also has petrify resistance of at least rank 7 (immunobreak) whenever that functionality is implemented.
 end
 
 entity.onMobWeaponSkill = function(mob, target, skill, action)
