@@ -2819,8 +2819,7 @@ auto CLuaBaseEntity::openGuildShop(CLuaBaseEntity* PNpc, uint8 open, uint8 close
 
     const auto* PNpcEntity = PNpc->GetBaseEntity();
 
-    PChar->guildShopNpc_.UniqueNo = PNpcEntity->id;
-    PChar->guildShopNpc_.ActIndex = PNpcEntity->targid;
+    PChar->guildShopNpc_ = EntityId(PNpcEntity);
     PChar->pushPacket<GP_SERV_COMMAND_GUILD_OPEN>(status, open, close, holiday.value_or(0));
 
     return isOpen;

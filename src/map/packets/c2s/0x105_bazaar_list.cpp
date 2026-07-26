@@ -39,8 +39,7 @@ void GP_CLI_COMMAND_BAZAAR_LIST::process(MapSession* PSession, CCharEntity* PCha
 
     if (PTarget != nullptr && PTarget->id == this->UniqueNo && PTarget->hasBazaar())
     {
-        PChar->BazaarID.UniqueNo = PTarget->id;
-        PChar->BazaarID.ActIndex = PTarget->targid;
+        PChar->BazaarID = EntityId(PTarget);
 
         auto EntityID = PChar->entityId();
 

@@ -4231,8 +4231,7 @@ void ClaimMob(CBattleEntity* PDefender, CBattleEntity* PAttacker, bool passing)
                 {
                     if (battleutils::HasClaim(PAttacker, PDefender))
                     { // mob is currently claimed by your alliance, update ownership
-                        mob->m_OwnerID.UniqueNo = PAttacker->id;
-                        mob->m_OwnerID.ActIndex = PAttacker->targid;
+                        mob->m_OwnerID = EntityId(PAttacker);
                         if (PDefender->isAlive())
                         { // ignore killing blow
                             mob->updatemask |= UPDATE_STATUS;
@@ -4243,8 +4242,7 @@ void ClaimMob(CBattleEntity* PDefender, CBattleEntity* PAttacker, bool passing)
                     { // mob is unclaimed
                         if (PDefender->isDead())
                         { // always give rewards on the killing blow
-                            mob->m_OwnerID.UniqueNo = PAttacker->id;
-                            mob->m_OwnerID.ActIndex = PAttacker->targid;
+                            mob->m_OwnerID = EntityId(PAttacker);
                             return;
                         }
                         CBattleEntity* highestClaim = mob->PEnmityContainer->GetHighestEnmity();
@@ -4257,8 +4255,7 @@ void ClaimMob(CBattleEntity* PDefender, CBattleEntity* PAttacker, bool passing)
                             {
                                 if (!highestClaim || highestClaim == PMember || highestClaim == PMember->PPet)
                                 { // someone in your alliance is top of hate list, claim for your alliance
-                                    mob->m_OwnerID.UniqueNo     = PAttacker->id;
-                                    mob->m_OwnerID.ActIndex = PAttacker->targid;
+                                    mob->m_OwnerID = EntityId(PAttacker);
                                     if (PDefender->isAlive())
                                     { // ignore killing blow
                                         mob->updatemask |= UPDATE_STATUS;

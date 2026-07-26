@@ -117,12 +117,10 @@ void GP_CLI_COMMAND_TRADE_REQ::process(MapSession* PSession, CCharEntity* PChar)
         }
     }
 
-    PChar->lastTradeInvite       = currentTime;
-    PChar->TradePending.UniqueNo = this->UniqueNo;
-    PChar->TradePending.ActIndex = this->ActIndex;
+    PChar->lastTradeInvite = currentTime;
+    PChar->TradePending    = EntityId(PTarget);
 
-    PTarget->lastTradeInvite       = currentTime;
-    PTarget->TradePending.UniqueNo = PChar->id;
-    PTarget->TradePending.ActIndex = PChar->targid;
+    PTarget->lastTradeInvite = currentTime;
+    PTarget->TradePending    = EntityId(PChar);
     PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_REQ>(PChar);
 }
