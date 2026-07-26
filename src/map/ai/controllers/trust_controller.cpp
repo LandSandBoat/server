@@ -131,7 +131,8 @@ auto CTrustController::DoCombatTick(timer::time_point tick) -> Task<void>
     CTrustEntity* PTrust  = static_cast<CTrustEntity*>(POwner);
     CCharEntity*  PMaster = static_cast<CCharEntity*>(POwner->PMaster);
     CMobEntity*   PMob    = dynamic_cast<CMobEntity*>(PMaster->GetBattleTarget());
-    PTarget               = POwner->GetBattleTarget();
+    setTarget(POwner->GetBattleTarget());
+    auto* PTarget = target();
 
     if (!PMaster->PAI->IsEngaged())
     {
@@ -268,7 +269,8 @@ auto CTrustController::DoNonCombatTick(const timer::time_point tick) -> Task<voi
     }
 
     // Keep COMBAT_TICK target valid for listeners/gambits.
-    PTarget = PMaster->GetBattleTarget();
+    setTarget(PMaster->GetBattleTarget());
+    auto* PTarget = target();
 
     // Non-combat trust follow order:
     // - first trust follows master
@@ -577,7 +579,7 @@ auto CTrustController::RangedAttack(const EntityId target) -> bool
 
     if (m_Tick - m_LastRangedAttackTime > rangedDelay && !m_InTransit)
     {
-        FaceTarget(PTarget->entityId());
+        FaceTarget(target);
         if (POwner->PAI->CanChangeState() && POwner->PAI->Internal_RangedAttack(target))
         {
             m_LastRangedAttackTime = m_Tick;
