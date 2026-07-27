@@ -4222,7 +4222,7 @@ void ClaimMob(CBattleEntity* PDefender, CBattleEntity* PAttacker, bool passing)
             if (!battleTarget || battleTarget == PDefender || battleTarget != attacker->PClaimedMob || PDefender->isDead())
             {
                 if (PDefender->isAlive() && attacker->PClaimedMob && attacker->PClaimedMob != PDefender && attacker->PClaimedMob->isAlive() &&
-                    attacker->PClaimedMob->m_OwnerID.id == attacker->id)
+                    attacker->PClaimedMob->m_OwnerID.UniqueNo == attacker->id)
                 { // unclaim any other living mobs owned by attacker
                     static_cast<CMobController*>(attacker->PClaimedMob->PAI->GetController())->TapDeclaimTime();
                     attacker->PClaimedMob = nullptr;
@@ -4231,8 +4231,7 @@ void ClaimMob(CBattleEntity* PDefender, CBattleEntity* PAttacker, bool passing)
                 {
                     if (battleutils::HasClaim(PAttacker, PDefender))
                     { // mob is currently claimed by your alliance, update ownership
-                        mob->m_OwnerID.id     = PAttacker->id;
-                        mob->m_OwnerID.targid = PAttacker->targid;
+                        mob->m_OwnerID = EntityId(PAttacker);
                         if (PDefender->isAlive())
                         { // ignore killing blow
                             mob->updatemask |= UPDATE_STATUS;
@@ -4243,8 +4242,7 @@ void ClaimMob(CBattleEntity* PDefender, CBattleEntity* PAttacker, bool passing)
                     { // mob is unclaimed
                         if (PDefender->isDead())
                         { // always give rewards on the killing blow
-                            mob->m_OwnerID.id     = PAttacker->id;
-                            mob->m_OwnerID.targid = PAttacker->targid;
+                            mob->m_OwnerID = EntityId(PAttacker);
                             return;
                         }
                         CBattleEntity* highestClaim = mob->PEnmityContainer->GetHighestEnmity();
@@ -4257,8 +4255,7 @@ void ClaimMob(CBattleEntity* PDefender, CBattleEntity* PAttacker, bool passing)
                             {
                                 if (!highestClaim || highestClaim == PMember || highestClaim == PMember->PPet)
                                 { // someone in your alliance is top of hate list, claim for your alliance
-                                    mob->m_OwnerID.id     = PAttacker->id;
-                                    mob->m_OwnerID.targid = PAttacker->targid;
+                                    mob->m_OwnerID = EntityId(PAttacker);
                                     if (PDefender->isAlive())
                                     { // ignore killing blow
                                         mob->updatemask |= UPDATE_STATUS;
@@ -4313,7 +4310,7 @@ void DirtyExp(CBattleEntity* PDefender, CBattleEntity* PAttacker)
 void RelinquishClaim(CCharEntity* PChar)
 {
     CBattleEntity* mob = PChar->PClaimedMob;
-    if (mob && mob->isAlive() && mob->m_OwnerID.id == PChar->id)
+    if (mob && mob->isAlive() && mob->m_OwnerID.UniqueNo == PChar->id)
     { // if we currently own a mob
         bool found = false;
         // clang-format off
@@ -4763,7 +4760,7 @@ void assistTarget(CCharEntity* PChar, uint16 TargID)
     CBattleEntity* EntityToAssist = (CBattleEntity*)PChar->GetEntity(TargID, TYPE_MOB | TYPE_PC);
     if (EntityToAssist != nullptr)
     {
-        if (EntityToAssist->objtype == TYPE_PC && EntityToAssist->GetBattleTargetID() != 0)
+        if (EntityToAssist->objtype == TYPE_PC && EntityToAssist->battleTarget().isSet())
         {
             // get that players engaged target
             CBattleEntity* EntityToLockon = EntityToAssist->GetBattleTarget();
@@ -4773,7 +4770,7 @@ void assistTarget(CCharEntity* PChar, uint16 TargID)
                 PChar->pushPacket<GP_SERV_COMMAND_ASSIST>(PChar, EntityToLockon);
             }
         }
-        else if (EntityToAssist->GetBattleTargetID() != 0)
+        else if (EntityToAssist->battleTarget().isSet())
         {
             // lock on to the new target!
             PChar->pushPacket<GP_SERV_COMMAND_ASSIST>(PChar, EntityToAssist->GetBattleTarget());
@@ -5377,7 +5374,7 @@ bool HasClaim(CBattleEntity* PEntity, CBattleEntity* PTarget)
         PMaster = PEntity->PMaster;
     }
 
-    if (PTarget->m_OwnerID.id == PMaster->id)
+    if (PTarget->m_OwnerID.UniqueNo == PMaster->id)
     {
         return true;
     }
@@ -5387,7 +5384,7 @@ bool HasClaim(CBattleEntity* PEntity, CBattleEntity* PTarget)
     // clang-format off
         PMaster->ForAlliance([&PTarget, &found](CBattleEntity* PChar)
         {
-            if (PChar->id == PTarget->m_OwnerID.id)
+            if (PChar->id == PTarget->m_OwnerID.UniqueNo)
             {
                 found = true;
             }

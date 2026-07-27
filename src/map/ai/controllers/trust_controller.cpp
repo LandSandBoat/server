@@ -138,7 +138,7 @@ auto CTrustController::DoCombatTick(timer::time_point tick) -> Task<void>
         m_CombatEndTime = m_Tick;
     }
 
-    if (PMaster && PMob && PTrust->GetBattleTargetID() != PMaster->GetBattleTargetID())
+    if (PMaster && PMob && PTrust->battleTarget() != PMaster->battleTarget())
     {
         auto  masterID   = PMaster->id;
         auto* enmityList = PMob->PEnmityContainer->GetEnmityList();

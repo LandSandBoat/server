@@ -33,17 +33,17 @@ auto GP_CLI_COMMAND_BAZAAR_EXIT::validate(MapSession* PSession, const CCharEntit
 
 void GP_CLI_COMMAND_BAZAAR_EXIT::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    auto* PEntity = PChar->GetEntity(PChar->BazaarID.targid, TYPE_PC);
+    auto* PEntity = PChar->BazaarID.resolve<CCharEntity>();
     if (!PEntity)
     {
         return;
     }
 
-    if (auto* PTarget = static_cast<CCharEntity*>(PEntity); PTarget->id == PChar->BazaarID.id)
+    if (auto* PTarget = static_cast<CCharEntity*>(PEntity); PTarget->id == PChar->BazaarID.UniqueNo)
     {
         for (std::size_t i = 0; i < PTarget->BazaarCustomers.size(); ++i)
         {
-            if (PTarget->BazaarCustomers[i].id == PChar->id)
+            if (PTarget->BazaarCustomers[i].UniqueNo == PChar->id)
             {
                 PTarget->BazaarCustomers.erase(PTarget->BazaarCustomers.begin() + i--);
             }

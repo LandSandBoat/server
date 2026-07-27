@@ -96,7 +96,7 @@ void GP_CLI_COMMAND_POS::process(MapSession* PSession, CCharEntity* PChar) const
         PChar->WideScanTarget,
         [&](const auto& wideScanTarget)
         {
-            if (const auto* PWideScanEntity = PChar->GetEntity(wideScanTarget.targid, TYPE_MOB | TYPE_NPC))
+            if (const auto* PWideScanEntity = wideScanTarget.resolve())
             {
                 PChar->pushPacket<GP_SERV_COMMAND_TRACKING_POS>(PWideScanEntity);
 

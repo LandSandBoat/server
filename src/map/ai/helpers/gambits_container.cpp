@@ -1454,7 +1454,7 @@ auto CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, const G
                                 continue;
                             }
 
-                            const bool targetingMaster        = (PZoneMob->GetBattleTargetID() == PMaster->targid);
+                            const bool targetingMaster        = (PZoneMob->battleTarget() == PMaster);
                             const bool isMastersCurrentTarget = (PZoneMob->id == PMob->id);
                             const bool hostile                = (PZoneMob->allegiance != PMaster->allegiance);
 

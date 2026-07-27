@@ -35,13 +35,13 @@ void GP_CLI_COMMAND_BAZAAR_CLOSE::process(MapSession* PSession, CCharEntity* PCh
 {
     for (std::size_t i = 0; i < PChar->BazaarCustomers.size(); ++i)
     {
-        auto* PEntity = PChar->GetEntity(PChar->BazaarCustomers[i].targid, TYPE_PC);
+        auto* PEntity = PChar->BazaarCustomers[i].resolve<CCharEntity>();
         if (!PEntity)
         {
             continue;
         }
 
-        if (auto* PCustomer = static_cast<CCharEntity*>(PEntity); PCustomer->id == PChar->BazaarCustomers[i].id)
+        if (auto* PCustomer = static_cast<CCharEntity*>(PEntity); PCustomer->id == PChar->BazaarCustomers[i].UniqueNo)
         {
             PCustomer->pushPacket<GP_SERV_COMMAND_BAZAAR_CLOSE>(PChar);
 

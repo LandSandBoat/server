@@ -643,7 +643,7 @@ void CMobController::TryLink()
     // Handle pets that act as bodyguards for their master. Will defend the master if they are being attacked.
     // Will not switch targets if they are already engaged.
     // Atomos, Alexander, and Odin are exempt from this behavior.
-    if (PTarget->PPet != nullptr && PTarget->PPet->GetBattleTargetID() == 0)
+    if (PTarget->PPet != nullptr && !PTarget->PPet->battleTarget().isSet())
     {
         bool isBodyguard = false;
 
@@ -777,7 +777,7 @@ auto CMobController::CanDetectTarget(CBattleEntity* PTarget, const bool forceSig
         }
     }
 
-    const bool isTargetAndInRange = PMob->GetBattleTargetID() == PTarget->targid && currentDistance <= PMob->GetMeleeRange(PTarget);
+    const bool isTargetAndInRange = PMob->battleTarget() == PTarget && currentDistance <= PMob->GetMeleeRange(PTarget);
 
     if (detectSight && !hasInvisible && currentDistance < PMob->getMobMod(xi::MobMod::SightRange) && facing(PMob->loc.p, PTarget->loc.p, 64))
     {
@@ -1167,9 +1167,9 @@ auto CMobController::DoCombatTick(timer::time_point tick) -> Task<void>
 {
     TracyZoneScopedC(0xFF0000);
 
-    if (PMob->m_OwnerID.targid != 0)
+    if (PMob->m_OwnerID.ActIndex != 0)
     {
-        auto* POwner = dynamic_cast<CCharEntity*>(PMob->GetEntity(PMob->m_OwnerID.targid));
+        auto* POwner = PMob->m_OwnerID.resolve<CCharEntity>();
         if (POwner && POwner->PClaimedMob != static_cast<CBattleEntity*>(PMob))
         {
             if (m_Tick >= m_DeclaimTime + 3s)
@@ -1181,7 +1181,7 @@ auto CMobController::DoCombatTick(timer::time_point tick) -> Task<void>
     }
 
     HandleEnmity();
-    setTarget(static_cast<CBattleEntity*>(PMob->GetEntity(PMob->GetBattleTargetID())));
+    setTarget(PMob->battleTarget().resolve<CBattleEntity>());
 
     if (TryDeaggro())
     {
@@ -1304,7 +1304,7 @@ void CMobController::HandleEnmity()
     {
         ChangeTarget(static_cast<CMobEntity*>(PMob->GetEntity(PMob->getMobMod(xi::MobMod::ShareTarget), TYPE_MOB))->battleTarget());
 
-        if (!PMob->GetBattleTargetID())
+        if (!PMob->battleTarget().isSet())
         {
             if (PHighestEnmityTarget)
             {
@@ -1379,10 +1379,10 @@ auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
         Engage(PMob->PEnmityContainer->GetHighestEnmity()->entityId());
         co_return;
     }
-    else if (PMob->m_OwnerID.id != 0 && (PMob->m_roamFlags & xi::RoamFlag::Ignore) == xi::RoamFlag::None)
+    else if (PMob->m_OwnerID.UniqueNo != 0 && (PMob->m_roamFlags & xi::RoamFlag::Ignore) == xi::RoamFlag::None)
     {
         // i'm claimed by someone and want to be fighting them
-        setTarget(static_cast<CBattleEntity*>(PMob->GetEntity(PMob->m_OwnerID.targid, TYPE_PC | TYPE_MOB | TYPE_PET | TYPE_TRUST)));
+        setTarget(PMob->m_OwnerID.resolve<CBattleEntity>());
         auto* PTarget = target().resolve<CBattleEntity>();
 
         if (PTarget != nullptr)

@@ -322,7 +322,6 @@ public:
 
     virtual void Spawn() override;
     virtual void Die();
-    uint16       GetBattleTargetID() const;
 
     auto battleTarget() const -> EntityId;
     void setBattleTarget(const Maybe<EntityId>& target);

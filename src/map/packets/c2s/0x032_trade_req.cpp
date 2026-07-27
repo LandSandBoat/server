@@ -77,7 +77,7 @@ void GP_CLI_COMMAND_TRADE_REQ::process(MapSession* PSession, CCharEntity* PChar)
         return;
     }
 
-    if (PTarget->TradePending.id == PChar->id)
+    if (PTarget->TradePending.UniqueNo == PChar->id)
     {
         ShowDebug("%s has already sent a trade request to %s", PChar->getName(), PTarget->getName());
         return;
@@ -92,7 +92,7 @@ void GP_CLI_COMMAND_TRADE_REQ::process(MapSession* PSession, CCharEntity* PChar)
 
     const timer::time_point currentTime     = timer::now();
     const auto              lastTargetTrade = currentTime - PTarget->lastTradeInvite;
-    if ((PTarget->TradePending.targid != 0 && lastTargetTrade < 60s) || PTarget->UContainer->GetType() == UCONTAINER_TRADE)
+    if ((PTarget->TradePending.ActIndex != 0 && lastTargetTrade < 60s) || PTarget->UContainer->GetType() == UCONTAINER_TRADE)
     {
         // Can't trade with someone who's already got a pending trade before timeout
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PTarget, GP_ITEM_TRADE_RES_KIND::ErrYouTrade);
@@ -102,11 +102,11 @@ void GP_CLI_COMMAND_TRADE_REQ::process(MapSession* PSession, CCharEntity* PChar)
     // This block usually doesn't trigger,
     // The client is generally forced to send a trade cancel packet via a cancel yes/no menu,
     // resulting in an outgoing 0x033 with 0x04 set to 0x01 for their old trade target, but sometimes the menu does not happen and a cancel is sent instead.
-    if (PChar->TradePending.id != 0)
+    if (PChar->TradePending.UniqueNo != 0)
     {
         // Tell previous trader we don't want their business
-        auto* POldTradeTarget = static_cast<CCharEntity*>(PChar->GetEntity(PChar->TradePending.id, TYPE_PC));
-        if (POldTradeTarget && POldTradeTarget->id == PChar->TradePending.id)
+        auto* POldTradeTarget = static_cast<CCharEntity*>(PChar->GetEntity(PChar->TradePending.UniqueNo, TYPE_PC));
+        if (POldTradeTarget && POldTradeTarget->id == PChar->TradePending.UniqueNo)
         {
             POldTradeTarget->TradePending.clean();
             PChar->TradePending.clean();
@@ -117,12 +117,10 @@ void GP_CLI_COMMAND_TRADE_REQ::process(MapSession* PSession, CCharEntity* PChar)
         }
     }
 
-    PChar->lastTradeInvite     = currentTime;
-    PChar->TradePending.id     = this->UniqueNo;
-    PChar->TradePending.targid = this->ActIndex;
+    PChar->lastTradeInvite = currentTime;
+    PChar->TradePending    = EntityId(PTarget);
 
-    PTarget->lastTradeInvite     = currentTime;
-    PTarget->TradePending.id     = PChar->id;
-    PTarget->TradePending.targid = PChar->targid;
+    PTarget->lastTradeInvite = currentTime;
+    PTarget->TradePending    = EntityId(PChar);
     PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_REQ>(PChar);
 }

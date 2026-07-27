@@ -59,17 +59,17 @@ auto GP_CLI_COMMAND_TRADE_LIST::validate(MapSession* PSession, const CCharEntity
 {
     return PacketValidator(PChar)
         .blockedBy({ BlockedState::InEvent, BlockedState::Monstrosity })
-        .mustNotEqual(PChar->TradePending.id, 0, "No trade target")
+        .mustNotEqual(PChar->TradePending.UniqueNo, 0, "No trade target")
         .range("TradeIndex", this->TradeIndex, 0, 8);
 }
 
 void GP_CLI_COMMAND_TRADE_LIST::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    auto* PTarget = static_cast<CCharEntity*>(PChar->GetEntity(PChar->TradePending.targid, TYPE_PC));
+    auto* PTarget = PChar->TradePending.resolve<CCharEntity>();
 
     if (!PTarget ||
-        PTarget->id != PChar->TradePending.id ||
-        PChar->id != PTarget->TradePending.id)
+        PTarget->id != PChar->TradePending.UniqueNo ||
+        PChar->id != PTarget->TradePending.UniqueNo)
     {
         ShowWarningFmt("GP_CLI_COMMAND_TRADE_LIST: Could not find trade targets.");
         return;

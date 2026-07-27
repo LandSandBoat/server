@@ -22,9 +22,11 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/types/maybe.h"
 
 #include <type_traits>
 
+enum ENTITYTYPE : uint8;
 class CBaseEntity;
 
 // A resolvable reference to an entity.
@@ -42,14 +44,12 @@ struct EntityId
     auto operator==(const EntityId& other) const -> bool;
     auto operator==(const CBaseEntity* PEntity) const -> bool;
 
-    // TODO: Globally rename targid to index, zoneIndex, etc.
-    uint32 id{ 0 };            // "Long" global ID of the entity. Built from 0x10000000 | (zoneId << 16) | targid.
-    uint16 targid{ 0 };        // The "index" of the entity in the current zone. Used for local targeting and referencing.
-    uint16 zoneId{ 0 };        // Zone the entity was in when this reference was taken.
-    uint32 instanceRunId{ 0 }; // Live instance the entity was in, 0 if it was not instanced.
-    uint64 serial{ 0 };        // Never-reused per-process counter, telling a rebuilt entity from the
-                               // one that held the slot before it. Only dynamic entities need it.
-    uint8 objtype{ 0 };        // What kind of entity this is.
+    uint32        UniqueNo{ 0 }; // "Long" global ID of the entity. Built from 0x10000000 | (zoneId << 16) | ActIndex. Formerly known as "id"
+    uint16        ActIndex{ 0 }; // The "index" of the entity in the current zone. Used for local targeting and referencing. Formerly known as "targid".
+    uint16        zoneId{ 0 };   // Zone the entity was in when this reference was taken.
+    Maybe<uint32> instanceRunId; // Live instance the entity was in, nullopt if it was not instanced.
+    uint64        serial{ 0 };   // Never-reused per-process counter, telling a rebuilt entity from the one that held the slot before it. Only dynamic entities need it.
+    ENTITYTYPE    objtype{ 0 };  // What kind of entity this is.
 
     // Look the entity up again, or nullptr if it is gone
     //

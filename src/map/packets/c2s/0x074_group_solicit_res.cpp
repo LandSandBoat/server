@@ -39,7 +39,7 @@ auto GP_CLI_COMMAND_GROUP_SOLICIT_RES::validate(MapSession* PSession, const CCha
 
 void GP_CLI_COMMAND_GROUP_SOLICIT_RES::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    if (CCharEntity* PInviter = zoneutils::GetCharFromWorld(PChar->InvitePending.id, PChar->InvitePending.targid); PInviter != nullptr)
+    if (CCharEntity* PInviter = zoneutils::GetCharFromWorld(PChar->InvitePending.UniqueNo, PChar->InvitePending.ActIndex); PInviter != nullptr)
     {
         // This switch statement only occurs when both the invitee and inviter are on the same process
         switch (static_cast<GP_CLI_COMMAND_GROUP_SOLICIT_RES_RES>(this->Res))
@@ -135,8 +135,8 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_RES::process(MapSession* PSession, CCharEntity
         message::send(ipc::PartyInviteResponse{
             .inviteeId     = PChar->id,
             .inviteeTargId = PChar->targid,
-            .inviterId     = PChar->InvitePending.id,
-            .inviterTargId = PChar->InvitePending.targid,
+            .inviterId     = PChar->InvitePending.UniqueNo,
+            .inviterTargId = PChar->InvitePending.ActIndex,
             .inviteAnswer  = this->Res,
         });
     }

@@ -55,7 +55,7 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, const EntityId& target, c
     // Self-centered AoE: validate mob can target itself, but keep original targid for allegiance
     const bool   isSelfCenteredAoE = skill->getAoe() == static_cast<uint8>(AOE_RADIUS::ATTACKER);
     const uint16 validTargets      = isSelfCenteredAoE ? static_cast<uint16>(TARGET_SELF) : skill->getValidTargets();
-    const uint16 validateTargid    = isSelfCenteredAoE ? m_PEntity->targid : target.targid;
+    const uint16 validateTargid    = isSelfCenteredAoE ? m_PEntity->targid : target.ActIndex;
     auto*        PTarget           = m_PEntity->IsValidTarget(validateTargid, validTargets, m_errorMsg);
 
     if (!PTarget || this->HasErrorMsg())
@@ -89,7 +89,7 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, const EntityId& target, c
         // For self-centered AoE damaging moves, show battle target in readies message
         // For true self-target buffs (TARGET_SELF), show self
         const bool isSelfBuff    = skill->getValidTargets() == TARGET_SELF;
-        auto*      PActionTarget = isSelfBuff ? m_PEntity : (isSelfCenteredAoE ? m_PEntity->GetBattleTarget() : m_PEntity->GetEntity(target.targid));
+        auto*      PActionTarget = isSelfBuff ? m_PEntity : (isSelfCenteredAoE ? m_PEntity->GetBattleTarget() : target.resolve());
         if (!PActionTarget)
         {
             PActionTarget = m_PEntity;

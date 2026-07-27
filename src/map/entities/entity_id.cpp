@@ -33,10 +33,10 @@ EntityId::EntityId(const CBaseEntity* PEntity)
         return;
     }
 
-    id            = PEntity->id;
-    targid        = PEntity->targid;
+    UniqueNo      = PEntity->id;
+    ActIndex      = PEntity->targid;
     zoneId        = PEntity->loc.zone ? static_cast<uint16>(PEntity->loc.zone->GetID()) : uint16{ 0 };
-    instanceRunId = PEntity->PInstance ? PEntity->PInstance->runId() : uint32{ 0 };
+    instanceRunId = PEntity->PInstance ? Maybe<uint32>(PEntity->PInstance->runId()) : std::nullopt;
     serial        = PEntity->serial();
     objtype       = PEntity->objtype;
 }
@@ -48,17 +48,17 @@ void EntityId::clean()
 
 auto EntityId::isSet() const -> bool
 {
-    return targid != 0;
+    return ActIndex != 0;
 }
 
 auto EntityId::isDynamic() const -> bool
 {
-    return targid >= 0x700;
+    return ActIndex >= 0x700;
 }
 
 auto EntityId::operator==(const EntityId& other) const -> bool
 {
-    return isDynamic() ? serial == other.serial : id == other.id;
+    return isDynamic() ? serial == other.serial : UniqueNo == other.UniqueNo;
 }
 
 auto EntityId::operator==(const CBaseEntity* PEntity) const -> bool
@@ -68,12 +68,12 @@ auto EntityId::operator==(const CBaseEntity* PEntity) const -> bool
         return !isSet();
     }
 
-    return PEntity->IsDynamicEntity() ? serial == PEntity->serial() : id == PEntity->id;
+    return PEntity->IsDynamicEntity() ? serial == PEntity->serial() : UniqueNo == PEntity->id;
 }
 
 auto EntityId::resolveEntity() const -> CBaseEntity*
 {
-    if (targid == 0 || serial == 0)
+    if (ActIndex == 0 || serial == 0)
     {
         return nullptr;
     }
@@ -85,19 +85,19 @@ auto EntityId::resolveEntity() const -> CBaseEntity*
     }
 
     CBaseEntity* PEntity = nullptr;
-    if (instanceRunId != 0)
+    if (instanceRunId)
     {
-        auto* PInstance = zoneutils::GetInstanceByRunId(zoneId, instanceRunId);
+        auto* PInstance = zoneutils::GetInstanceByRunId(zoneId, *instanceRunId);
         if (PInstance == nullptr)
         {
             return nullptr;
         }
 
-        PEntity = PInstance->GetEntity(targid, objtype);
+        PEntity = PInstance->GetEntity(ActIndex, objtype);
     }
     else
     {
-        PEntity = PZone->GetEntity(targid, objtype);
+        PEntity = PZone->GetEntity(ActIndex, objtype);
     }
 
     // Verify that we retrieved the exact same entity (dynamic entities).

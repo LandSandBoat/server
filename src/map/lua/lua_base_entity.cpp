@@ -2819,8 +2819,7 @@ auto CLuaBaseEntity::openGuildShop(CLuaBaseEntity* PNpc, uint8 open, uint8 close
 
     const auto* PNpcEntity = PNpc->GetBaseEntity();
 
-    PChar->guildShopNpc_.id     = PNpcEntity->id;
-    PChar->guildShopNpc_.targid = PNpcEntity->targid;
+    PChar->guildShopNpc_ = EntityId(PNpcEntity);
     PChar->pushPacket<GP_SERV_COMMAND_GUILD_OPEN>(status, open, close, holiday.value_or(0));
 
     return isOpen;
@@ -13930,7 +13929,7 @@ auto CLuaBaseEntity::getMasterThreatMob(const sol::object& rangeOverride) -> CBa
     }
 
     const auto maxDistance = rangeOverride.is<float>() ? rangeOverride.as<float>() : 22.0f;
-    auto*      PMastersTarget{ PMaster->GetEntity(PMaster->GetBattleTargetID()) };
+    auto*      PMastersTarget{ PMaster->battleTarget().resolve() };
 
     auto isMasterTopEnmityOnMob = [PMaster](CMobEntity* PMob) -> bool
     {
@@ -13976,7 +13975,7 @@ auto CLuaBaseEntity::getMasterThreatMob(const sol::object& rangeOverride) -> CBa
             continue;
         }
 
-        auto* PTarget            = PMob->GetEntity(PMob->GetBattleTargetID());
+        auto* PTarget            = PMob->battleTarget().resolve();
         bool  isTargetingMaster  = PTarget && PTarget->id == PMaster->id;
         bool  masterHasTopEnmity = isMasterTopEnmityOnMob(PMob);
 
@@ -18818,7 +18817,7 @@ auto CLuaBaseEntity::getTarget() -> CBaseEntity*
         return nullptr;
     }
 
-    auto* PBattleTarget{ m_PBaseEntity->GetEntity(static_cast<CBattleEntity*>(m_PBaseEntity)->GetBattleTargetID()) };
+    auto* PBattleTarget{ static_cast<CBattleEntity*>(m_PBaseEntity)->battleTarget().resolve() };
 
     if (PBattleTarget)
     {

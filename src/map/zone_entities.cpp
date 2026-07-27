@@ -564,12 +564,12 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
     FOR_EACH_PAIR_CAST_SECOND(CMobEntity*, PCurrentMob, m_mobList)
     {
         PCurrentMob->PEnmityContainer->LogoutReset(PChar->id);
-        if (PCurrentMob->m_OwnerID.id == PChar->id)
+        if (PCurrentMob->m_OwnerID.UniqueNo == PChar->id)
         {
             PCurrentMob->m_OwnerID.clean();
             PCurrentMob->updatemask |= UPDATE_STATUS;
         }
-        if (PCurrentMob->GetBattleTargetID() == PChar->targid)
+        if (PCurrentMob->battleTarget() == PChar)
         {
             PCurrentMob->setBattleTarget(std::nullopt);
         }
