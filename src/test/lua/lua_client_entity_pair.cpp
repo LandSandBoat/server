@@ -83,7 +83,7 @@ void CLuaClientEntityPair::tick()
  *  Notes   : Will error if player is in an event during zoning
  ************************************************************************/
 
-void CLuaClientEntityPair::gotoZone(ZONEID zoneId, sol::optional<sol::table> pos)
+void CLuaClientEntityPair::gotoZone(xi::ZoneId zoneId, sol::optional<sol::table> pos)
 {
     doGotoZone(zoneId, std::move(pos), false);
 }
@@ -95,12 +95,12 @@ void CLuaClientEntityPair::gotoZone(ZONEID zoneId, sol::optional<sol::table> pos
  *  Notes   : Errors if the player is in an event.
  ************************************************************************/
 
-void CLuaClientEntityPair::gotoMogHouse(ZONEID zoneId)
+void CLuaClientEntityPair::gotoMogHouse(xi::ZoneId zoneId)
 {
     doGotoZone(zoneId, sol::nullopt, true);
 }
 
-void CLuaClientEntityPair::doGotoZone(ZONEID zoneId, sol::optional<sol::table> pos, bool mogHouse)
+void CLuaClientEntityPair::doGotoZone(xi::ZoneId zoneId, sol::optional<sol::table> pos, bool mogHouse)
 {
     // Check if player is in an event
     if (testChar_->entity()->isInEvent())

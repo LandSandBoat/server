@@ -28,6 +28,8 @@
 #include "common/cbasetypes.h"
 #include "common/timer.h"
 
+#include "data/enums/zone.h"
+
 #include <common/types/fn.h>
 #include <common/types/hash_map.h>
 
@@ -133,7 +135,7 @@ public:
 
     uint16                        GetID() const;
     CZone*                        GetZone() const;
-    uint16                        GetZoneID() const;
+    auto                          GetZoneID() const -> xi::ZoneId;
     const std::string&            GetName() const;
     const BattlefieldInitiator_t& GetInitiator() const;
     uint8                         GetArea() const;

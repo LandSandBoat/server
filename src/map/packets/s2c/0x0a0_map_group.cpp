@@ -35,7 +35,7 @@ GP_SERV_COMMAND_MAP_GROUP::GP_SERV_COMMAND_MAP_GROUP(const CCharEntity* PChar)
     auto& packet = this->data();
 
     packet.UniqueID = PChar->id;
-    packet.zone     = PChar->getZone();
+    packet.zone     = static_cast<int16>(PChar->getZone());
     packet.x        = PChar->loc.p.x;
     packet.y        = PChar->loc.p.y;
     packet.z        = PChar->loc.p.z;

@@ -28,11 +28,11 @@
 #include "data/enums/animation.h"
 #include "data/enums/mod.h"
 #include "data/enums/status_effect.h"
+#include "data/enums/zone.h"
 
 enum class QuestLog : uint8_t;
 enum class MissionLog : uint8_t;
 enum class KeyItem : uint16_t;
-enum ZONEID : uint16;
 class CLuaTestEntity;
 
 class CLuaTestEntityAssertions
@@ -41,7 +41,7 @@ public:
     CLuaTestEntityAssertions(CLuaTestEntity* entity, bool negate = false);
     ~CLuaTestEntityAssertions() = default;
 
-    auto inZone(ZONEID expectedZone) -> CLuaTestEntityAssertions&;
+    auto inZone(xi::ZoneId expectedZone) -> CLuaTestEntityAssertions&;
     auto hasLocalVar(const std::string& varName, uint32 expectedValue) -> CLuaTestEntityAssertions&;
     auto hasEffect(xi::StatusEffect effectId) -> CLuaTestEntityAssertions&;
     auto hasAnimation(xi::Animation animation) -> CLuaTestEntityAssertions&;

@@ -484,7 +484,7 @@ auto CMobController::CanAggroTarget(CBattleEntity* PTarget) const -> bool
 
         // Do not aggro if a normal CoP Fomor and the player has low enough fomor hate
         if (PMob->m_Family == 172 && (PMob->m_Type & xi::MobType::Notorious) == xi::MobType::Normal &&
-            (PMob->getZone() >= ZONE_LUFAISE_MEADOWS && PMob->getZone() <= ZONE_SACRARIUM) &&
+            (PMob->getZone() >= xi::ZoneId::LufaiseMeadows && PMob->getZone() <= xi::ZoneId::Sacrarium) &&
             PTarget->objtype == TYPE_PC)
         {
             if (static_cast<CCharEntity*>(PTarget)->getCharVar("FOMOR_HATE") < 8)

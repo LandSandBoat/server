@@ -160,7 +160,7 @@ sol::table CLuaZone::getMobs()
     return table;
 }
 
-ZONEID CLuaZone::getID()
+auto CLuaZone::getID() -> xi::ZoneId
 {
     return m_pLuaZone->GetID();
 }
@@ -405,7 +405,7 @@ void CLuaZone::Register()
 
 std::ostream& operator<<(std::ostream& os, const CLuaZone& zone)
 {
-    std::string id = zone.m_pLuaZone ? std::to_string(zone.m_pLuaZone->GetID()) : "nullptr";
+    std::string id = zone.m_pLuaZone ? std::to_string(static_cast<uint16>(zone.m_pLuaZone->GetID())) : "nullptr";
     return os << "CLuaZone(" << id << ")";
 }
 

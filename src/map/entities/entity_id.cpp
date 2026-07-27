@@ -35,7 +35,7 @@ EntityId::EntityId(const CBaseEntity* PEntity)
 
     UniqueNo      = PEntity->id;
     ActIndex      = PEntity->targid;
-    zoneId        = PEntity->loc.zone ? static_cast<uint16>(PEntity->loc.zone->GetID()) : uint16{ 0 };
+    zoneId        = PEntity->loc.zone ? PEntity->loc.zone->GetID() : xi::ZoneId::Unknown;
     instanceRunId = PEntity->PInstance ? Maybe<uint32>(PEntity->PInstance->runId()) : std::nullopt;
     serial        = PEntity->serial();
     objtype       = PEntity->objtype;

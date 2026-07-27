@@ -35,7 +35,7 @@ GP_SERV_COMMAND_CHAT_STD::GP_SERV_COMMAND_CHAT_STD(const CCharEntity* PChar, con
 
     const std::string& name = sender.empty() ? PChar->getName() : sender;
     packet.Kind             = MessageType;
-    packet.Data             = PChar->getZone();
+    packet.Data             = static_cast<uint16>(PChar->getZone());
     if (PChar->visibleGmLevel >= 3 && sender.empty())
     {
         packet.Attr = 0x01;
@@ -45,7 +45,7 @@ GP_SERV_COMMAND_CHAT_STD::GP_SERV_COMMAND_CHAT_STD(const CCharEntity* PChar, con
     std::memcpy(packet.Mes, message.data(), messageSize);
 }
 
-GP_SERV_COMMAND_CHAT_STD::GP_SERV_COMMAND_CHAT_STD(const std::string& name, const uint16 zone, const CHAT_MESSAGE_TYPE MessageType, const std::string& message, const uint8 gmLevel)
+GP_SERV_COMMAND_CHAT_STD::GP_SERV_COMMAND_CHAT_STD(const std::string& name, const xi::ZoneId zone, const CHAT_MESSAGE_TYPE MessageType, const std::string& message, const uint8 gmLevel)
 {
     auto& packet = this->data();
 
@@ -54,7 +54,7 @@ GP_SERV_COMMAND_CHAT_STD::GP_SERV_COMMAND_CHAT_STD(const std::string& name, cons
     this->setSize(roundUpToNearestFour(packetSize));
 
     packet.Kind = MessageType;
-    packet.Data = zone;
+    packet.Data = static_cast<uint16>(zone);
     if (gmLevel >= 3 && name.empty())
     {
         packet.Attr = 0x01;

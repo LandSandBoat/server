@@ -74,7 +74,7 @@ constexpr std::uint16_t WeatherCycle = 2160;
 
 #include <map/ximesh/ximesh.h>
 
-CZone::CZone(Scheduler& scheduler, MapConfig config, ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction)
+CZone::CZone(Scheduler& scheduler, MapConfig config, xi::ZoneId ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction)
 : scheduler_(scheduler)
 , config_(config)
 , navMesh_{ std::make_unique<NullNavMesh>() }
@@ -123,7 +123,7 @@ CZone::~CZone()
     m_zoneLineList.clear();
 }
 
-auto CZone::GetID() const -> ZONEID
+auto CZone::GetID() const -> xi::ZoneId
 {
     return m_zoneID;
 }
@@ -357,11 +357,11 @@ void CZone::LoadZoneLines()
         auto* zl = new zoneLine_t;
 
         zl->zoneLineId              = rset->get<uint32>("zonelineid");
-        zl->originZoneId            = rset->get<ZONEID>("from_zone");
+        zl->originZoneId            = rset->get<xi::ZoneId>("from_zone");
         zl->originPos.x             = rset->get<float>("from_pos_x");
         zl->originPos.y             = rset->get<float>("from_pos_y");
         zl->originPos.z             = rset->get<float>("from_pos_z");
-        zl->destinationZoneId       = rset->get<ZONEID>("to_zone");
+        zl->destinationZoneId       = rset->get<xi::ZoneId>("to_zone");
         zl->destinationPos.x        = rset->get<float>("to_pos_x");
         zl->destinationPos.y        = rset->get<float>("to_pos_y");
         zl->destinationPos.z        = rset->get<float>("to_pos_z");
@@ -627,7 +627,7 @@ void CZone::onEntityMoved(CBaseEntity* PEntity)
     m_zoneEntities->onEntityMoved(PEntity);
 }
 
-void CZone::TransportDepart(uint16 boundary, uint16 prevZoneId, uint16 transportId)
+void CZone::TransportDepart(const uint16 boundary, const xi::ZoneId prevZoneId, const uint16 transportId)
 {
     m_zoneEntities->TransportDepart(boundary, prevZoneId, transportId);
 }
@@ -1043,7 +1043,7 @@ void CZone::CharZoneIn(CCharEntity* PChar)
     TracyZoneScoped;
 
     PChar->loc.zone        = this;
-    PChar->loc.destination = 0;
+    PChar->loc.destination = xi::ZoneId::Unknown;
     PChar->clearTriggerAreas();
 
     if (PChar->isMounted() && !CanUseMisc(xi::ZoneMisc::Mount))
@@ -1137,7 +1137,8 @@ void CZone::CharZoneIn(CCharEntity* PChar)
     }
 
     // Mark current zone as visited
-    PChar->m_ZonesVisitedList[PChar->getZone() >> 3] |= (1 << (PChar->getZone() % 8));
+    const auto visitedZone = static_cast<uint16>(PChar->getZone());
+    PChar->m_ZonesVisitedList[visitedZone >> 3] |= (1 << (visitedZone % 8));
 
     monstrosity::HandleZoneIn(PChar);
 

@@ -39,7 +39,7 @@ CTargetFind::CTargetFind(CBattleEntity* PBattleEntity)
 , m_PBattleEntity(PBattleEntity)
 , m_PMasterTarget(nullptr)
 , m_PTarget(nullptr)
-, m_zone(0)
+, m_zone(xi::ZoneId::Unknown)
 , m_findType{}
 , m_findFlags(0)
 , m_targetFlags(0)
@@ -59,7 +59,7 @@ void CTargetFind::reset()
     m_targets.clear();
     m_conal           = false;
     m_radius          = 0.0f;
-    m_zone            = 0;
+    m_zone            = xi::ZoneId::Unknown;
     m_findFlags       = FINDFLAGS_NONE;
     m_selfCenteredAoE = false;
 

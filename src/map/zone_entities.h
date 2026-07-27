@@ -86,7 +86,7 @@ public:
 
     void FindPartyForMob(CBaseEntity* PEntity); // looking for a party for the monster
 
-    void TransportDepart(uint16 boundary, uint16 prevZoneId, uint16 transportId); // ship/boat is leaving, passengers need to be collected
+    void TransportDepart(uint16 boundary, xi::ZoneId prevZoneId, uint16 transportId); // ship/boat is leaving, passengers need to be collected
 
     void WeatherChange(xi::Weather weather);
     void MusicChange(xi::MusicSlot slotId, uint16 trackId);

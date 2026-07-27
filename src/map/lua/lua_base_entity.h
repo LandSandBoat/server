@@ -201,10 +201,10 @@ public:
     auto  isToEntitysRight(const CLuaBaseEntity* target, const sol::object& angleArg) -> bool; // true if you're to the right side of the input target (from target's perspective)
 
     auto   getZone(const sol::object& arg0) -> CZone*;
-    uint16 getZoneID();
+    auto   getZoneID() -> xi::ZoneId;
     auto   getZoneName() -> std::string;
     bool   hasVisitedZone(uint16 zone);
-    uint16 getPreviousZone();
+    auto   getPreviousZone() -> xi::ZoneId;
     uint32 getPreviousZoneLineID();
     uint8  getCurrentRegion();
     uint8  getContinentID();

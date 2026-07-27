@@ -257,7 +257,7 @@ void  SetPoints(CCharEntity* PChar, const char* type, int32 amount);
 int32 GetPoints(CCharEntity* PChar, const char* type);
 void  SetUnityLeader(CCharEntity* PChar, uint8 leaderID);
 auto  GetConquestPointsName(CCharEntity* PChar) -> std::string;
-auto  SendToZone(CCharEntity* PChar, uint16 zoneId) -> bool;
+auto  SendToZone(CCharEntity* PChar, xi::ZoneId zoneId) -> bool;
 void  SendDisconnect(CCharEntity* PChar);
 void  ForceLogout(CCharEntity* PChar);
 void  ForceRezone(CCharEntity* PChar);

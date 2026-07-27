@@ -89,7 +89,7 @@ CZone* CBattlefield::GetZone() const
     return m_Zone;
 }
 
-uint16 CBattlefield::GetZoneID() const
+auto CBattlefield::GetZoneID() const -> xi::ZoneId
 {
     return m_Zone->GetID();
 }

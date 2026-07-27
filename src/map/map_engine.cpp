@@ -415,7 +415,7 @@ auto MapEngine::statistics() const -> MapStatistics&
     return *mapStatistics_;
 }
 
-auto MapEngine::zones() const -> std::map<uint16, CZone*>&
+auto MapEngine::zones() const -> std::map<xi::ZoneId, CZone*>&
 {
     return g_PZoneList;
 }

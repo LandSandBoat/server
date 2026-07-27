@@ -48,7 +48,7 @@ auto GP_CLI_COMMAND_EXTENDED_JOB::validate(MapSession* PSession, const CCharEnti
         pv.mustEqual(dynamic_cast<CAutomatonEntity*>(PChar->PPet), nullptr, "Player has a deployed automaton.");
         // TODO: Check if they own the attachments they are trying to equip.
     }
-    else if (PChar->loc.zone->GetID() == ZONE_FERETORY && PChar->m_PMonstrosity != nullptr)
+    else if (PChar->loc.zone->GetID() == xi::ZoneId::Feretory && PChar->m_PMonstrosity != nullptr)
     {
         // Case 3: Monstrosity equipment change
         if (this->Data.monData.Flags0.SpeciesFlag)
@@ -245,7 +245,7 @@ void GP_CLI_COMMAND_EXTENDED_JOB::process(MapSession* PSession, CCharEntity* PCh
         charutils::SendExtendedJobPackets(PChar);
         puppetutils::SaveAutomaton(PChar);
     }
-    else if (PChar->loc.zone->GetID() == ZONE_FERETORY && PChar->m_PMonstrosity != nullptr)
+    else if (PChar->loc.zone->GetID() == xi::ZoneId::Feretory && PChar->m_PMonstrosity != nullptr)
     {
         monstrosity::HandleEquipChangePacket(PChar, this->Data.monData);
     }

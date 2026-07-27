@@ -697,8 +697,8 @@ void CLatentEffectContainer::CheckLatentsZone()
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsWeather()
 {
-    uint16 zoneId = m_POwner->getZone();
-    CZone* PZone  = zoneutils::GetZone(zoneId);
+    const auto zoneId = m_POwner->getZone();
+    CZone*     PZone  = zoneutils::GetZone(zoneId);
 
     if (PZone == nullptr)
     {
@@ -784,8 +784,8 @@ auto CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
     }
 
     // this gets the current zone ID or destination zone ID if zoning
-    uint16 playerZoneID = m_POwner->getZone();
-    if (playerZoneID == 0)
+    const auto playerZoneID = m_POwner->getZone();
+    if (playerZoneID == xi::ZoneId::Unknown)
     {
         return false;
     }
@@ -982,7 +982,7 @@ auto CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
             }
             break;
         case xi::Latent::Zone:
-            expression = latentEffect.GetConditionsValue() == m_POwner->getZone();
+            expression = latentEffect.GetConditionsValue() == static_cast<uint16>(m_POwner->getZone());
             break;
         case xi::Latent::SynthTrainee:
         {

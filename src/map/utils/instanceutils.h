@@ -25,6 +25,7 @@
 #include "common/database.h"
 #include "common/ipp.h"
 #include "common/scheduler.h"
+#include "data/enums/zone.h"
 
 #include "map_config.h"
 
@@ -37,7 +38,7 @@ struct InstanceData_t
 {
     uint16        id;
     std::string   instance_name;
-    uint16        instance_zone;
+    xi::ZoneId    instance_zone;
     std::string   instance_zone_name;
     uint16        entrance_zone;
     std::string   entrance_zone_name;
@@ -54,7 +55,7 @@ struct InstanceData_t
 
     InstanceData_t()
     : id(0)
-    , instance_zone(0)
+    , instance_zone(xi::ZoneId::Unknown)
     , entrance_zone(0)
     , time_limit(0)
     , start_x(0.f)

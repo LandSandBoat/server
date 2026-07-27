@@ -83,8 +83,8 @@ ModsList_t* GetMobSpawnMods(uint32 mobId, bool create = false);
 void AddSqlModifiers(CMobEntity* PMob);
 
 void SetSpellList(CMobEntity*, uint16);
-auto InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* = nullptr) -> CMobEntity*;
-auto InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZoneId) -> CMobEntity*;
+auto InstantiateAlly(uint32 groupid, xi::ZoneId zoneID, CInstance* = nullptr) -> CMobEntity*;
+auto InstantiateDynamicMob(uint32 groupid, xi::ZoneId groupZoneId, xi::ZoneId targetZoneId) -> CMobEntity*;
 void WeaknessTrigger(CBaseEntity* PTarget, WeaknessType level);
 
 }; // namespace mobutils

@@ -191,11 +191,11 @@ void OnEntityLoad(CBaseEntity* PEntity);
 void LoadExpDifficultyCurves(const sol::table& expToDifficultyTable, const uint8 incrediblyEasyPreyLevel, const uint16 incrediblyEasyPreyMinExp);
 
 void PopulateIDLookupsByFilename(Maybe<std::string> maybeFilename = std::nullopt);
-void PopulateIDLookupsByZone(Maybe<uint16> maybeZoneId = std::nullopt);
+void PopulateIDLookupsByZone(Maybe<xi::ZoneId> maybeZoneId = std::nullopt);
 
 void SendEntityVisualPacket(uint32 npcId, const char* command);
 void InitInteractionGlobal();
-auto GetZone(uint16 zoneId) -> CZone*;
+auto GetZone(xi::ZoneId zoneId) -> CZone*;
 auto GetItemByID(uint32 itemId) -> const CItem*;
 auto GetItemFlagsByID(uint32 itemId) -> ItemFlag;
 auto GetItemLevelRequirementsByID(uint32 itemId) -> uint8;
@@ -210,7 +210,7 @@ uint8 GetNationRank(uint8 nation);
 uint8 GetConquestBalance();
 bool  IsConquestAlliance();
 void  SetRegionalConquestOverseers(uint8 regionID); // Update NPC Conquest Guard
-void  SendLuaFuncStringToZone(uint16 requestingZoneId, uint16 executorZoneId, const std::string& str);
+void  SendLuaFuncStringToZone(xi::ZoneId requestingZoneId, xi::ZoneId executorZoneId, const std::string& str);
 
 void UpdateSanrakusMobs(); // Update sanraku's (ZNM) subject of interest and recommended fauna
 void ZNMPopPriceDecay();   // Price of ZNM pop items decay over time
@@ -273,25 +273,25 @@ void  SetCharVar(uint32 charId, const std::string& varName, int32 value, const s
 void  ClearCharVarFromAll(const std::string& varName);                                               // Deletes a specific player variable from all players
 void  Terminate();                                                                                   // Logs off all characters and terminates the server
 
-int32 GetTextIDVariable(uint16 ZoneID, const char* variable); // Load the value of the TextID variable of the specified zone
-bool  IsContentEnabled(const std::string& content);
+auto GetTextIDVariable(xi::ZoneId ZoneID, const char* variable) -> int32; // Load the value of the TextID variable of the specified zone
+bool IsContentEnabled(const std::string& content);
 
 void OnGameDay(CZone* PZone);
 void OnGameHour(CZone* PZone);
-void OnZoneWeatherChange(uint16 zoneId, xi::Weather weather);
-void OnTOTDChange(uint16 ZoneID, uint8 TOTD);
+void OnZoneWeatherChange(xi::ZoneId zoneId, xi::Weather weather);
+void OnTOTDChange(xi::ZoneId ZoneID, uint8 TOTD);
 
 void OnGameIn(CCharEntity* PChar, bool zoning);
 void OnZoneIn(CCharEntity* PChar);
 void OnZoneOut(CCharEntity* PChar);
 void AfterZoneIn(CBaseEntity* PChar);
-void OnZoneInitialize(uint16 ZoneID);
+void OnZoneInitialize(xi::ZoneId ZoneID);
 void OnZoneTick(CZone* PZone);
 
 void OnTriggerAreaEnter(CCharEntity* PChar, const std::unique_ptr<ITriggerArea>& PTriggerArea); // when player enters a trigger area in a zone
 void OnTriggerAreaLeave(CCharEntity* PChar, const std::unique_ptr<ITriggerArea>& PTriggerArea); // when player leaves a trigger area in a zone
 
-void OnTransportEvent(CCharEntity* PChar, uint16 prevZoneId, uint16 transportId);
+void OnTransportEvent(CCharEntity* PChar, xi::ZoneId prevZoneId, uint16 transportId);
 void OnTimeTrigger(CNpcEntity* PNpc, uint8 triggerID);
 void OnConquestUpdate(CZone* PZone, ConquestUpdate type, uint8 influence, uint8 owner, uint8 ranking, bool isConquestAlliance); // conquest update (hourly or tally)
 
@@ -395,16 +395,16 @@ bool OnCanUseSpell(CBattleEntity* PChar, CSpell* Spell); // triggers when CanUse
 
 auto GetCachedInstanceScript(uint16 instanceId) -> sol::table;
 
-void  OnInstanceZoneIn(CCharEntity* PChar, CInstance* PInstance);
-void  AfterInstanceRegister(CBaseEntity* PChar);                             // triggers after a character is registered and zoned into an instance (the first time)
-int32 OnInstanceLoadFailed(CZone* PZone);                                    // triggers when an instance load is failed (ie. instance no longer exists)
-void  OnInstanceTimeUpdate(CZone* PZone, CInstance* PInstance, uint32 time); // triggers every second for an instance
-void  OnInstanceFailure(CInstance* PInstance);                               // triggers when an instance is failed
-void  OnInstanceCreatedCallback(CCharEntity* PChar, CInstance* PInstance);   // triggers when an instance is created (per character - waiting outside for entry)
-void  OnInstanceCreated(CInstance* PInstance);                               // triggers when an instance is created (instance setup)
-void  OnInstanceProgressUpdate(CInstance* PInstance);
-void  OnInstanceStageChange(CInstance* PInstance);
-void  OnInstanceComplete(CInstance* PInstance);
+void OnInstanceZoneIn(CCharEntity* PChar, CInstance* PInstance);
+void AfterInstanceRegister(CBaseEntity* PChar);                             // triggers after a character is registered and zoned into an instance (the first time)
+auto OnInstanceLoadFailed(CZone* PZone) -> xi::ZoneId;                      // triggers when an instance load is failed (ie. instance no longer exists)
+void OnInstanceTimeUpdate(CZone* PZone, CInstance* PInstance, uint32 time); // triggers every second for an instance
+void OnInstanceFailure(CInstance* PInstance);                               // triggers when an instance is failed
+void OnInstanceCreatedCallback(CCharEntity* PChar, CInstance* PInstance);   // triggers when an instance is created (per character - waiting outside for entry)
+void OnInstanceCreated(CInstance* PInstance);                               // triggers when an instance is created (instance setup)
+void OnInstanceProgressUpdate(CInstance* PInstance);
+void OnInstanceStageChange(CInstance* PInstance);
+void OnInstanceComplete(CInstance* PInstance);
 
 uint32 GetMobRespawnTime(uint32 mobid);
 void   DisallowRespawn(uint32 mobid, bool allowRespawn);

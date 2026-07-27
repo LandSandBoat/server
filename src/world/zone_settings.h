@@ -23,6 +23,7 @@
 
 #include <common/cbasetypes.h>
 
+#include "data/enums/zone.h"
 #include "data/enums/zone_misc.h"
 #include <common/database.h>
 #include <common/ipp.h>
@@ -39,9 +40,9 @@ class ZoneSettings final
 private:
     struct ZoneSettingsEntry final
     {
-        uint16 zoneid{};
-        IPP    ipp{};
-        uint32 misc{};
+        xi::ZoneId zoneid{};
+        IPP        ipp{};
+        uint32     misc{};
     };
 
 public:
@@ -65,7 +66,7 @@ public:
             const uint64 port = rset->get<uint64>("zoneport");
 
             ZoneSettingsEntry zone_settings{};
-            zone_settings.zoneid = rset->get<uint16>("zoneid");
+            zone_settings.zoneid = rset->get<xi::ZoneId>("zoneid");
             zone_settings.ipp    = IPP(ip, port);
             zone_settings.misc   = rset->get<uint32>("misc");
 
@@ -91,8 +92,8 @@ public:
 
     // TODO: Properly encapsulate this
     // private:
-    HashMap<uint16, ZoneSettingsEntry> zoneSettingsMap_;
-    std::vector<IPP>                   mapEndpoints_;
-    std::vector<IPP>                   yellMapEndpoints_;
-    std::vector<IPP>                   assistMapEndpoints_;
+    HashMap<xi::ZoneId, ZoneSettingsEntry> zoneSettingsMap_;
+    std::vector<IPP>                       mapEndpoints_;
+    std::vector<IPP>                       yellMapEndpoints_;
+    std::vector<IPP>                       assistMapEndpoints_;
 };

@@ -35,6 +35,7 @@
 #include "data/enums/name_vis.h"
 #include "data/enums/spawn_animation.h"
 #include "data/enums/status.h"
+#include "data/enums/zone.h"
 
 #include <map>
 #include <memory>
@@ -121,15 +122,15 @@ class CZone;
 struct location_t
 {
     position_t p;           // Position of entity
-    uint16     destination; // Destination zone while zoning
+    xi::ZoneId destination; // Destination zone while zoning
     CZone*     zone;        // Current zone
-    uint16     prevzone;    // Previous zone (Not used for monsters and NPCs)
+    xi::ZoneId prevzone;    // Previous zone (Not used for monsters and NPCs)
     uint16     boundary;    // A certain area in the zone in which the entity is located (used by characters and transport)
 
     location_t()
-    : destination(0)
+    : destination(xi::ZoneId::Unknown)
     , zone(nullptr)
-    , prevzone(0)
+    , prevzone(xi::ZoneId::Unknown)
     , boundary(0)
     {
     }
@@ -153,10 +154,10 @@ public:
     virtual const std::string& getName() const; // Internal name of entity
     virtual const std::string& getPacketName(); // Name of entity sent to the client
 
-    uint16        getZone() const; // Current zone
-    float         GetXPos() const; // Position of co-ordinate X
-    float         GetYPos() const; // Position of co-ordinate Y
-    float         GetZPos() const; // Position of co-ordinate Z
+    auto          getZone() const -> xi::ZoneId; // Current zone
+    float         GetXPos() const;               // Position of co-ordinate X
+    float         GetYPos() const;               // Position of co-ordinate Y
+    float         GetZPos() const;               // Position of co-ordinate Z
     uint8         GetRotPos() const;
     uint8         GetSpeed() const;
     virtual uint8 UpdateSpeed(bool run = false);

@@ -100,7 +100,7 @@ HTTPServer::HTTPServer(Scheduler& scheduler)
                 {
                     auto   maybeZoneId = req.matches[1].str();
                     uint16 zoneId      = std::strtol(maybeZoneId.c_str(), nullptr, 10);
-                    if (zoneId && zoneId < ZONEID::MAX_ZONEID)
+                    if (zoneId && zoneId < MAX_ZONEID)
                     {
                         LockingUpdate();
                         apiDataCache_.read(

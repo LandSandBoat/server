@@ -56,7 +56,7 @@ public:
     auto         getPlayers() -> sol::table;
     auto         getNPCs() -> sol::table;
     auto         getMobs() -> sol::table;
-    ZONEID       getID();
+    auto         getID() -> xi::ZoneId;
     auto         getName() -> const std::string&;
     REGION_TYPE  getRegionID();
     xi::ZoneType getTypeMask();

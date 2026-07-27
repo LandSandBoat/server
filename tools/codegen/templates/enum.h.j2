@@ -19,6 +19,12 @@ enum class {{ cls_name }} : {{ underlying }}
     {{ "%-*s"|format(enum_width, cpp_names[key]) }} = {{ "0x%08x"|format(val) if is_flags else val }},
 {% endfor %}
 };
+
+// Lets fmt/spdlog format the enum as its underlying value.
+inline auto format_as({{ cls_name }} value)
+{
+    return std::to_underlying(value);
+}
 } // namespace xi
 {% if is_flags %}
 

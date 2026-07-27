@@ -102,7 +102,7 @@ void TestChar::clean(uint32 charId /* = 0 */)
     }
 }
 
-auto TestChar::create(const uint16_t zoneId) -> std::unique_ptr<TestChar>
+auto TestChar::create(const xi::ZoneId zoneId) -> std::unique_ptr<TestChar>
 {
     uint32_t accId  = 0;
     uint32_t charId = 0;
