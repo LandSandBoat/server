@@ -37,6 +37,7 @@ zones[xi.zone.LA_THEINE_PLATEAU] =
         ALREADY_HAVE_ALL_FRAGS        = 7610,  -- You have obtained all of the fragments. You must hurry to the ruins of the ancient shrine!
         FOUND_ALL_FRAGS               = 7611,  -- You have obtained <keyitem>! You now have all 8 fragments of light!
         ZILART_MONUMENT               = 7612,  -- It is an ancient Zilart monument.
+        MUST_MOVE_CLOSER              = 7626,  -- You will have to move closer to remove the <keyitem>.
         ITEMS_ITEMS_LA_LA             = 7757,  -- You can hear a strange voice... Items, items, la la la la la
         GOBLIN_SLIPPED_AWAY           = 7763,  -- The Goblin slipped away when you were not looking...
         TELEPOINT_HAS_BEEN_SHATTERED  = 7773,  -- The telepoint has been shattered into a thousand pieces...

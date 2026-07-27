@@ -40,6 +40,7 @@ zones[xi.zone.THE_SANCTUARY_OF_ZITAH] =
         FOUND_ALL_FRAGS               = 7764,  -- You have obtained <keyitem>! You now have all 8 fragments of light!
         ZILART_MONUMENT               = 7765,  -- It is an ancient Zilart monument.
         AIR_REMAINS_STAGNANT          = 7777,  -- The air in this area remains stagnant. You begin to feel sick... It would be wise to leave immediately.
+        MUST_MOVE_CLOSER              = 7779,  -- You will have to move closer to remove the <keyitem>.
         LOOKS_LIKE_STURDY_BRANCH      = 7787,  -- This looks like a sturdy branch. You will need <item> to cut it off.
         BEAUTIFUL_STURDY_BRANCH       = 7788,  -- It is a beautiful, sturdy branch.
         SENSE_STRONG_EVIL_PRESENCE    = 7790,  -- You can sense a strong, evil presence!

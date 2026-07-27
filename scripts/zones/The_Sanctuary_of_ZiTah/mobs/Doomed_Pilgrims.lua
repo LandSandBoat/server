@@ -16,6 +16,12 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
 end
 
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 350)
+    mob:setMod(xi.mod.ICE_RES_RANK, 6)
+    mob:setMod(xi.mod.EARTH_RES_RANK, 6)
+end
+
 entity.onMobDisengage = function(mob)
     DespawnMob(mob:getID(), 120)
 end
