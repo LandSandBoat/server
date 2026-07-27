@@ -21,7 +21,7 @@
 
 #include "0x05f_music.h"
 
-GP_SERV_COMMAND_MUSIC::GP_SERV_COMMAND_MUSIC(const MusicSlot slotId, const uint16 trackId)
+GP_SERV_COMMAND_MUSIC::GP_SERV_COMMAND_MUSIC(const xi::MusicSlot slotId, const uint16 trackId)
 {
     auto& packet = this->data();
 

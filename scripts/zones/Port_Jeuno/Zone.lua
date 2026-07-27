@@ -17,8 +17,8 @@ zoneObject.onZoneIn = function(player, prevZone)
         (month == 12 and day >= 5) or
         (month == 1 and day <= 5)
     then
-        player:changeMusic(0, 239)
-        player:changeMusic(1, 239)
+        player:changeMusic(xi.musicSlot.ZONE_DAY, 239)
+        player:changeMusic(xi.musicSlot.ZONE_NIGHT, 239)
     end
 
     if

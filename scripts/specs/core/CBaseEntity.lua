@@ -618,7 +618,7 @@ end
 function CBaseEntity:setWeather(weatherType)
 end
 
----@param blockID integer
+---@param blockID xi.musicSlot
 ---@param musicTrackID integer
 ---@return nil
 function CBaseEntity:changeMusic(blockID, musicTrackID)

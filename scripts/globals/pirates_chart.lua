@@ -106,10 +106,10 @@ local function removeFromConfrontation(player)
     end
 
     player:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
-    player:changeMusic(0, 0)
-    player:changeMusic(1, 0)
-    player:changeMusic(2, 101)
-    player:changeMusic(3, 102)
+    player:changeMusic(xi.musicSlot.ZONE_DAY, 0)
+    player:changeMusic(xi.musicSlot.ZONE_NIGHT, 0)
+    player:changeMusic(xi.musicSlot.COMBAT_SOLO, 101)
+    player:changeMusic(xi.musicSlot.COMBAT_PARTY, 102)
     player:setLocalVar('pChartActive', 0)
 end
 
@@ -315,10 +315,10 @@ xi.piratesChart.onEventUpdate = function(player, csid, option, npc)
 
         npc:setLocalVar('pChartMemberID_' .. idx, memberID)
 
-        member:changeMusic(0, 136)
-        member:changeMusic(1, 136)
-        member:changeMusic(2, 136)
-        member:changeMusic(3, 136)
+        member:changeMusic(xi.musicSlot.ZONE_DAY, 136)
+        member:changeMusic(xi.musicSlot.ZONE_NIGHT, 136)
+        member:changeMusic(xi.musicSlot.COMBAT_SOLO, 136)
+        member:changeMusic(xi.musicSlot.COMBAT_PARTY, 136)
         member:delStatusEffectsByFlag(xi.effectFlag.DISPELABLE)
         member:delStatusEffect(xi.effect.RERAISE)
         member:delContainerItems(xi.inv.TEMPITEMS)

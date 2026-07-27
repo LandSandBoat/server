@@ -40,8 +40,8 @@ xi.events.starlightCelebration.setMusic = function(musicId)
             -- Set the music for players already in the zone (this is wiped when
             -- they zone out)
             for _, player in pairs(zone:getPlayers()) do
-                player:changeMusic(0, musicId)
-                player:changeMusic(1, musicId)
+                player:changeMusic(xi.musicSlot.ZONE_DAY, musicId)
+                player:changeMusic(xi.musicSlot.ZONE_NIGHT, musicId)
             end
         end
     end

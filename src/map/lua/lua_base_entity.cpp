@@ -2735,7 +2735,7 @@ void CLuaBaseEntity::setWeather(xi::Weather weatherType)
  *  Notes   : Used for mounting Chocobo and changing Jeuno music in Winter
  ************************************************************************/
 
-void CLuaBaseEntity::changeMusic(MusicSlot slotId, uint16 trackId) const
+void CLuaBaseEntity::changeMusic(xi::MusicSlot slotId, uint16 trackId) const
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {

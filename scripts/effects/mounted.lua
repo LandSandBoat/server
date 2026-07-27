@@ -15,10 +15,10 @@ effectObject.onEffectGain = function(target, effect)
         mountId == xi.mount.CHOCOBO or
         mountId == xi.mount.NOBLE_CHOCOBO
     then
-        target:changeMusic(4, 212)
+        target:changeMusic(xi.musicSlot.MOUNT, 212)
         animation = xi.animation.CHOCOBO
     else
-        target:changeMusic(4, 84)
+        target:changeMusic(xi.musicSlot.MOUNT, 84)
         animation = xi.animation.MOUNT
     end
 

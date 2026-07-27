@@ -231,7 +231,7 @@ xi.moghouse.trySetMusic = function(player)
     if #possibleSongs > 0 then
         -- This needs a moment before music changes can take effect
         player:timer(1000, function(playerArg)
-            playerArg:changeMusic(6, utils.randomEntry(possibleSongs))
+            playerArg:changeMusic(xi.musicSlot.MOG_HOUSE, utils.randomEntry(possibleSongs))
         end)
     end
 end
