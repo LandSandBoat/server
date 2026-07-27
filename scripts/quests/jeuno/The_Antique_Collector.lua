@@ -13,8 +13,6 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_ANTIQUE_COLLECT
 quest.reward =
 {
     exp      = 2000,
-    fame     = 30,
-    fameArea = xi.fameArea.JEUNO,
     gil      = 2000,
     keyItem  = xi.ki.MAP_OF_DELKFUTTS_TOWER,
     title    = xi.title.TRADER_OF_ANTIQUITIES,
@@ -65,6 +63,9 @@ quest.sections =
             {
                 [15] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 10)
+                        player:addFame(xi.fameArea.BASTOK, 10)
+                        player:addFame(xi.fameArea.WINDURST, 10)
                         player:confirmTrade()
                     end
                 end,

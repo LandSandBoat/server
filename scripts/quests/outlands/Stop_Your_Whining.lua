@@ -14,7 +14,7 @@ quest.reward =
 {
     item = xi.item.SCROLL_OF_HOJO_ICHI,
     fameArea = xi.fameArea.NORG,
-    fame = 75,
+    fame = 40,
     title = xi.title.APPRENTICE_SOMMELIER,
 }
 

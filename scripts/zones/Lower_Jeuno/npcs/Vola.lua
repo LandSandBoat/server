@@ -63,7 +63,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addTitle(xi.title.BROWN_BELT)
             player:addItem(xi.item.BROWN_BELT)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.BROWN_BELT)
-            player:addFame(xi.fameArea.NORG, 125)
+            player:addFame(xi.fameArea.NORG, 30)
             player:tradeComplete()
             player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.FISTFUL_OF_FURY)
         end

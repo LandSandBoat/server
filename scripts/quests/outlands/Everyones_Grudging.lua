@@ -10,7 +10,9 @@ local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.EVERYONES_GRU
 
 quest.reward =
 {
-    gil = 11000,
+    fame     = 60,
+    fameArea = xi.fameArea.WINDURST,
+    gil      = 11000,
 }
 
 quest.sections =

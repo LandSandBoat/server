@@ -36,7 +36,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.CHOCOBILIOUS)
     elseif
         csid == 231 and
-        npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.CHOCOBILIOUS, { fame = 220, gil = 1500, var = 'ChocobiliousQuest' })
+        npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.CHOCOBILIOUS, { fame = 20, fameArea = xi.fameArea.WINDURST, gil = 1500, var = 'ChocobiliousQuest' })
     then
         player:needToZone(true)
     end

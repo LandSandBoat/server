@@ -9,7 +9,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.MEAN_MACHINE)
 
 quest.reward =
 {
-    fame     = 120,
+    fame     = 20,
     fameArea = xi.fameArea.BASTOK,
     item     = xi.item.SCROLL_OF_WARP,
 }

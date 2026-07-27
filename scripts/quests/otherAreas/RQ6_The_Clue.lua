@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_CLUE
 
 quest.reward =
 {
-    fame     = 120,
+    fame     = 50,
     fameArea = xi.fameArea.WINDURST,
     title    = xi.title.FOUR_STAR_PURVEYOR,
     gil      = 3000,

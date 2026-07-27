@@ -36,7 +36,7 @@ function content:onEventFinishWin(player, csid, option, npc)
         npcUtil.giveItem(player, xi.item.SCROLL_OF_INSTANT_WARP)
     end
 
-    player:addFame(xi.fameArea.WINDURST, 30)
+    player:addFame(xi.fameArea.WINDURST, 20)
     player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_FIRE)
 end
 

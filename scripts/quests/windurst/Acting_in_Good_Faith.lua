@@ -16,7 +16,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.ACTING_IN_GOO
 
 quest.reward =
 {
-    fame     = 30,
+    fame     = 40,
     fameArea = xi.fameArea.WINDURST,
     item     = xi.item.SCROLL_OF_TELEPORT_MEA,
     title    = xi.title.PILGRIM_TO_MEA,

@@ -68,6 +68,9 @@ entity.onEventFinish = function(player, csid, option, npc)
         -- Complete quest
         player:setCharVar('[QUEST]FullSpeedAhead', 0)
         player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.FULL_SPEED_AHEAD)
+        player:addFame(xi.fameArea.SANDORIA, 7)
+        player:addFame(xi.fameArea.BASTOK, 7)
+        player:addFame(xi.fameArea.WINDURST, 7)
         npcUtil.giveKeyItem(player, xi.ki.TRAINERS_WHISTLE)
         npcUtil.giveKeyItem(player, xi.ki.RAPTOR_COMPANION)
     elseif csid == 10227 then

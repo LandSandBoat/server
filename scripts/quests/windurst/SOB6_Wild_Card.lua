@@ -8,7 +8,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.WILD_CARD)
 
 quest.reward =
 {
-    fame     = 10,
+    fame     = 60,
     fameArea = xi.fameArea.WINDURST,
     title    = xi.title.DREAM_DWELLER,
 }

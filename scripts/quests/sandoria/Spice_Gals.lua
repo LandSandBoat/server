@@ -83,7 +83,6 @@ quest.sections =
             {
                 [725] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:addFame(xi.fameArea.SANDORIA, 40)
                         player:delKeyItem(xi.ki.RIVERNEWORT)
                         quest:setVar(player, 'Wait', NextConquestTally())
                     end

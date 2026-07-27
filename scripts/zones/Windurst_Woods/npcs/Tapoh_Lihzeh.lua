@@ -63,9 +63,9 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.PAYING_LIP_SERVICE)
     elseif csid == 479 then
         if player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.PAYING_LIP_SERVICE) == xi.questStatus.QUEST_ACCEPTED then
-            npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.PAYING_LIP_SERVICE, { fame = 60, title = xi.title.KISSER_MAKE_UPPER })
+            npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.PAYING_LIP_SERVICE, { fame = 10, title = xi.title.KISSER_MAKE_UPPER })
         else
-            player:addFame(xi.fameArea.WINDURST, 8)
+            player:addFame(xi.fameArea.WINDURST, 10)
         end
 
         if option == 1 then -- remi_shell

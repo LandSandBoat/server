@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.ALTANAS_SORROW)
 
 quest.reward =
 {
-    fame     = 30,
+    fame     = 40,
     fameArea = xi.fameArea.BASTOK,
     item     = xi.item.SCROLL_OF_TELEPORT_DEM,
     title    = xi.title.PILGRIM_TO_DEM,

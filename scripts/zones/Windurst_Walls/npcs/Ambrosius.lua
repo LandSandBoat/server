@@ -76,39 +76,39 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 52 then
         player:tradeComplete()
         player:addGil(xi.settings.main.GIL_RATE * 50)
-        player:addFame(xi.fameArea.WINDURST, 80)
+        player:addFame(xi.fameArea.WINDURST, 10)
         player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KOS_TWICE)
     elseif csid == 53 then
         player:tradeComplete()
         player:addGil(xi.settings.main.GIL_RATE * 150)
-        player:addFame(xi.fameArea.WINDURST, 80)
+        player:addFame(xi.fameArea.WINDURST, 10)
         player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KOS_TWICE)
     elseif csid == 54 then
         player:tradeComplete()
         player:addGil(xi.settings.main.GIL_RATE * 250)
-        player:addFame(xi.fameArea.WINDURST, 80)
+        player:addFame(xi.fameArea.WINDURST, 10)
         player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KOS_TWICE)
     elseif csid == 55 then
         player:tradeComplete()
         player:addGil(xi.settings.main.GIL_RATE * 500)
-        player:addFame(xi.fameArea.WINDURST, 80)
+        player:addFame(xi.fameArea.WINDURST, 10)
         player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KOS_TWICE)
     elseif csid == 57 then
         player:tradeComplete()
         player:addGil(xi.settings.main.GIL_RATE * 50)
-        player:addFame(xi.fameArea.WINDURST, 5)
+        player:addFame(xi.fameArea.WINDURST, 10)
     elseif csid == 58 then
         player:tradeComplete()
         player:addGil(xi.settings.main.GIL_RATE * 150)
-        player:addFame(xi.fameArea.WINDURST, 15)
+        player:addFame(xi.fameArea.WINDURST, 10)
     elseif csid == 59 then
         player:tradeComplete()
         player:addGil(xi.settings.main.GIL_RATE * 250)
-        player:addFame(xi.fameArea.WINDURST, 25)
+        player:addFame(xi.fameArea.WINDURST, 10)
     elseif csid == 60 then
         player:tradeComplete()
         player:addGil(xi.settings.main.GIL_RATE * 500)
-        player:addFame(xi.fameArea.WINDURST, 50)
+        player:addFame(xi.fameArea.WINDURST, 10)
     end
 end
 

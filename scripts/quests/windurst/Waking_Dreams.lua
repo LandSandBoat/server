@@ -104,6 +104,7 @@ quest.sections =
                     end
 
                     if quest:complete(player) then
+                        player:addFame(xi.fameArea.WINDURST, 60)
                         player:delKeyItem(xi.ki.WHISPER_OF_DREAMS)
                         player:setCharVar('Darkness_Named_date', JstMidnight())
                         quest:setMustZone(player)

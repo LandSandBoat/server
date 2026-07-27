@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.OUT_OF_ONES_SHELL
 
 quest.reward =
 {
-    fame     = 120,
+    fame     = 20,
     fameArea = xi.fameArea.BASTOK,
     item     = xi.item.MONKS_HEADGEAR,
     title    = xi.title.SHELL_OUTER,

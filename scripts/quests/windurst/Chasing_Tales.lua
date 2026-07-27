@@ -13,7 +13,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.CHASING_TALES
 
 quest.reward =
 {
-    fame = 120,
+    fame = 30,
     fameArea = xi.fameArea.WINDURST,
     gil = 2800,
     title = xi.title.SAVIOR_OF_KNOWLEDGE,

@@ -9,7 +9,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.CURSES_FOILED
 
 quest.reward =
 {
-    fame     = 90,
+    fame     = 20,
     fameArea = xi.fameArea.WINDURST,
     item     = xi.item.MISERY_STAFF,
     title    = xi.title.HEXER_VEXER,

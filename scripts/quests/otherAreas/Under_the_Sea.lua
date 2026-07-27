@@ -14,9 +14,8 @@ local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.UNDER_TH
 
 quest.reward =
 {
-    item     = xi.item.AMBER_EARRING,
-    title    = xi.title.LIL_CUPID,
-    fameArea = xi.fameArea.SELBINA_RABAO,
+    item  = xi.item.AMBER_EARRING,
+    title = xi.title.LIL_CUPID,
 }
 
 quest.sections =
@@ -116,6 +115,8 @@ quest.sections =
 
                 [37] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 10)
+                        player:addFame(xi.fameArea.BASTOK, 10)
                         player:delKeyItem(xi.ki.ETCHED_RING)
                     end
                 end,

@@ -11,8 +11,6 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAIT)
 
 quest.reward =
 {
-    fame     = 50,
-    fameArea = xi.fameArea.JEUNO,
 }
 
 -- Event 10045 is the global event used in all Limit break quest from 6 to 10.

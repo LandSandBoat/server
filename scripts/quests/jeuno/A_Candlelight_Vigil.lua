@@ -9,8 +9,6 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.A_CANDLELIGHT_VIGIL
 
 quest.reward =
 {
-    fame     = 30,
-    fameArea = xi.fameArea.JEUNO,
     item     = xi.item.FLOWER_NECKLACE,
     title    = xi.title.ACTIVIST_FOR_KINDNESS,
 }
@@ -80,6 +78,9 @@ quest.sections =
             {
                 [194] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 13)
+                        player:addFame(xi.fameArea.BASTOK, 13)
+                        player:addFame(xi.fameArea.WINDURST, 13)
                         player:delKeyItem(xi.ki.HOLY_CANDLE)
                         player:setLocalVar('Quest[3][66]mustZone', 1)
                     end

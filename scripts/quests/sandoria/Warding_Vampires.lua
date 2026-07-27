@@ -10,7 +10,9 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPI
 
 quest.reward =
 {
-    title = xi.title.VAMPIRE_HUNTER_D_MINUS,
+    fame     = 16,
+    fameArea = xi.fameArea.SANDORIA,
+    title    = xi.title.VAMPIRE_HUNTER_D_MINUS,
 }
 
 quest.sections =
@@ -73,7 +75,7 @@ quest.sections =
                     if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES) == xi.questStatus.QUEST_ACCEPTED then
                         quest:complete(player)
                     else
-                        player:addFame(xi.fameArea.SANDORIA, 5)
+                        player:addFame(xi.fameArea.SANDORIA, 16)
                     end
 
                     npcUtil.giveCurrency(player, 'gil', 900)

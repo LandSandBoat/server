@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.FOREVER_TO_HOLD)
 
 quest.reward =
 {
-    fame     = 80,
+    fame     = 20,
     fameArea = xi.fameArea.BASTOK,
     gil      = 300,
     title    = xi.title.QIJIS_FRIEND,

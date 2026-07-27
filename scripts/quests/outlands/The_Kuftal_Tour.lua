@@ -10,10 +10,8 @@ local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_KUFTAL_TO
 
 quest.reward =
 {
-    fame     = 30,
-    fameArea = xi.fameArea.SELBINA_RABAO,
-    gil      = 8000,
-    title    = xi.title.KUFTAL_TOURIST,
+    gil   = 8000,
+    title = xi.title.KUFTAL_TOURIST,
 }
 
 quest.sections =
@@ -88,6 +86,8 @@ quest.sections =
             {
                 [75] = function(player, csid, option, npc)
                     quest:complete(player)
+                    player:addFame(xi.fameArea.SANDORIA, 10)
+                    player:addFame(xi.fameArea.BASTOK, 10)
                 end,
             },
         },

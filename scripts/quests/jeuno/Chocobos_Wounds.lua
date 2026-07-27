@@ -12,8 +12,6 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.CHOCOBOS_WOUNDS)
 
 quest.reward =
 {
-    fame     = 30,
-    fameArea = xi.fameArea.JEUNO,
     keyItem  = xi.ki.CHOCOBO_LICENSE,
     title    = xi.title.CHOCOBO_TRAINER,
 }
@@ -177,6 +175,9 @@ quest.sections =
 
                 [64] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 7)
+                        player:addFame(xi.fameArea.BASTOK, 7)
+                        player:addFame(xi.fameArea.WINDURST, 7)
                         player:confirmTrade()
                     end
                 end,

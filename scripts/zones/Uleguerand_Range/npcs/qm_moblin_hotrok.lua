@@ -66,6 +66,8 @@ entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 10 and
         npcUtil.completeQuest(player, xi.questLog.SANDORIA, xi.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY, {
+            fame = 80,
+            fameArea = xi.fameArea.SANDORIA,
             keyItem = xi.ki.MAP_OF_THE_ULEGUERAND_RANGE,
             gil = 2000,
             exp = 2000

@@ -36,10 +36,8 @@ local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.CHASING_DREAM
 
 quest.reward =
 {
-    fame     = 30,
-    item     = xi.item.VENERER_RING,
-    fameArea = xi.fameArea.SELBINA_RABAO,
-    gil      = 4000,
+    item = xi.item.VENERER_RING,
+    gil  = 4000,
 }
 
 local handleFlask = function(player)
@@ -347,7 +345,10 @@ quest.sections =
             onEventFinish =
             {
                 [121] = function(player, csid, option, npc)
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 10)
+                        player:addFame(xi.fameArea.BASTOK, 10)
+                    end
                 end,
             },
         },

@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.A_LADYS_HEART)
 
 quest.reward =
 {
-    fame     = 120,
+    fame     = 0,
     fameArea = xi.fameArea.BASTOK,
 }
 

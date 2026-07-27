@@ -128,7 +128,9 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('theLostCardianVar', 0)
         npcUtil.giveCurrency(player, 'gil', 2100)
         npcUtil.giveKeyItem(player, xi.ki.TWO_OF_SWORDS)
-        player:addFame(xi.fameArea.JEUNO, 30)
+        player:addFame(xi.fameArea.SANDORIA, 7)
+        player:addFame(xi.fameArea.BASTOK, 7)
+        player:addFame(xi.fameArea.WINDURST, 7)
         player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN)
         player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) -- Start next quest "THE_KING_CARDIAN"
     elseif csid == 33 and option == 1 then

@@ -37,16 +37,16 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('PamamaVar', 0)
     elseif csid == 71 then
         local pamamas = player:getCharVar('PamamaVar')
-        if pamamas == 1 then --First completion of quest; set title, complete quest, and give higher fame
+        if pamamas == 1 then --First completion of quest; set title and complete quest
             npcUtil.giveCurrency(player, 'gil', 5000)
             player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
-            player:addFame(xi.fameArea.WINDURST, 100)
+            player:addFame(xi.fameArea.WINDURST, 16)
             player:addTitle(xi.title.KAZHAM_CALLER)
             player:setCharVar('PamamaVar', 0)
             player:needToZone(true)
-        elseif pamamas == 2 then --Repeats of quest; give only gil and less fame
+        elseif pamamas == 2 then --Repeats of quest
             npcUtil.giveCurrency(player, 'gil', 5000)
-            player:addFame(xi.fameArea.WINDURST, 30)
+            player:addFame(xi.fameArea.WINDURST, 16)
             player:setCharVar('PamamaVar', 0)
             player:needToZone(true)
         end

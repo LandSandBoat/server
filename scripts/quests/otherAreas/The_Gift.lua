@@ -11,9 +11,8 @@ local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_GIFT
 
 quest.reward =
 {
-    item     = xi.item.SLEEP_DAGGER,
-    title    = xi.title.SAVIOR_OF_LOVE,
-    fameArea = xi.fameArea.SELBINA_RABAO,
+    item  = xi.item.SLEEP_DAGGER,
+    title = xi.title.SAVIOR_OF_LOVE,
 }
 
 quest.sections =
@@ -65,6 +64,8 @@ quest.sections =
             {
                 [72] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 10)
+                        player:addFame(xi.fameArea.BASTOK, 10)
                         player:confirmTrade()
                     end
                 end,

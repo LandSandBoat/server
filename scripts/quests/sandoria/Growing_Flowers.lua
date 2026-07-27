@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.GROWING_FLOWE
 
 quest.reward =
 {
-    fame     = 120,
+    fame     = 0,
     fameArea = xi.fameArea.SANDORIA,
 }
 

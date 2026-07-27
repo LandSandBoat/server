@@ -12,11 +12,10 @@ local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_RESC
 
 quest.reward =
 {
-    exp      = 2000,
-    gil      = 5000,
-    fameArea = xi.fameArea.SELBINA_RABAO,
-    keyItem  = xi.ki.MAP_OF_THE_RANGUEMONT_PASS,
-    title    = xi.title.HONORARY_CITIZEN_OF_SELBINA,
+    exp     = 2000,
+    gil     = 5000,
+    keyItem = xi.ki.MAP_OF_THE_RANGUEMONT_PASS,
+    title   = xi.title.HONORARY_CITIZEN_OF_SELBINA,
 }
 
 quest.sections =
@@ -64,6 +63,8 @@ quest.sections =
             {
                 [81] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 10)
+                        player:addFame(xi.fameArea.BASTOK, 10)
                         player:delKeyItem(xi.ki.TRADERS_SACK)
                     end
                 end,

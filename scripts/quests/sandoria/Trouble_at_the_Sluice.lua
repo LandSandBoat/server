@@ -11,7 +11,9 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.TROUBLE_AT_TH
 
 quest.reward =
 {
-    item = xi.item.HEAVY_AXE,
+    fame     = 30,
+    fameArea = xi.fameArea.SANDORIA,
+    item     = xi.item.HEAVY_AXE,
 }
 
 quest.sections =

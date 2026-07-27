@@ -61,7 +61,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:delKeyItem(xi.ki.BROKEN_WAND)
         player:addTitle(xi.title.HAKKURU_RINKURUS_BENEFACTOR)
         npcUtil.giveCurrency(player, 'gil', 6000)
-        player:addFame(xi.fameArea.WINDURST, 150)
+        player:addFame(xi.fameArea.WINDURST, 40)
         player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.MAKING_AMENS)
     end
 end

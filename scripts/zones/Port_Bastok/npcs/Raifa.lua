@@ -39,7 +39,8 @@ entity.onEventFinish = function(player, csid, option, npc)
             gil = 5000,
             item = 4198,
             title = xi.title.CERULEAN_SOLDIER,
-            fame = 80,
+            fame = 20,
+            fameArea = xi.fameArea.BASTOK,
             var = 'EcoStatus'
         })
     then

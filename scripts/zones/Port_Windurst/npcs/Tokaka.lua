@@ -43,7 +43,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         if somethingFishy == xi.questStatus.QUEST_ACCEPTED then
             player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
-            player:addFame(xi.fameArea.WINDURST, 60)
+            player:addFame(xi.fameArea.WINDURST, 10)
         else
             player:addFame(xi.fameArea.WINDURST, 10)
         end

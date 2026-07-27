@@ -8,7 +8,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.CRYING_OVER_O
 
 quest.reward =
 {
-    fame     = 120,
+    fame     = 50,
     fameArea = xi.fameArea.WINDURST,
 }
 

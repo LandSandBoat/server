@@ -36,7 +36,7 @@ function content:onEventFinishWin(player, csid, option, npc)
         npcUtil.giveItem(player, xi.item.SCROLL_OF_INSTANT_WARP)
     end
 
-    player:addFame(xi.fameArea.BASTOK, 30)
+    player:addFame(xi.fameArea.BASTOK, 20)
     player:completeQuest(xi.questLog.BASTOK, xi.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH)
 end
 

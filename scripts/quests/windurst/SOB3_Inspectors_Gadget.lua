@@ -8,7 +8,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.INSPECTORS_GA
 
 quest.reward =
 {
-    fame     = 10,
+    fame     = 20,
     fameArea = xi.fameArea.WINDURST,
     item     = xi.item.HEKO_OBI,
     title    = xi.title.FAKE_MOUSTACHED_INVESTIGATOR,

@@ -10,7 +10,9 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_SETTING_S
 
 quest.reward =
 {
-    gil = 10000,
+    fame     = 50,
+    fameArea = xi.fameArea.SANDORIA,
+    gil      = 10000,
 }
 
 quest.sections =

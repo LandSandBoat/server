@@ -16,7 +16,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.STAMP_HUNT)
 
 quest.reward =
 {
-    fame = 50,
+    fame = 20,
     fameArea = xi.fameArea.BASTOK,
     item = xi.item.LEATHER_GORGET,
     title = xi.title.STAMPEDER,

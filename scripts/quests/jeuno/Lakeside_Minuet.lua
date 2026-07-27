@@ -14,8 +14,6 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.LAKESIDE_MINUET)
 
 quest.reward =
 {
-    fame = 30,
-    fameArea = xi.fameArea.JEUNO,
     title = xi.title.TROUPE_BRILIOTH_DANCER,
 }
 
@@ -106,6 +104,9 @@ quest.sections =
 
                 [10118] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 7)
+                        player:addFame(xi.fameArea.BASTOK, 7)
+                        player:addFame(xi.fameArea.WINDURST, 7)
                         player:unlockJob(xi.job.DNC)
                         player:messageSpecial(upperJeunoID.text.UNLOCK_DANCER)
                         player:delKeyItem(xi.ki.STARDUST_PEBBLE)

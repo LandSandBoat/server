@@ -9,7 +9,7 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.LIZARD_SKINS)
 
 quest.reward =
 {
-    fame = 30,
+    fame = 10,
     fameArea = xi.fameArea.SANDORIA,
     -- Repeatable Items handled within the Trigger:
     -- item = xi.item.LIZARD_GLOVES,
@@ -97,7 +97,7 @@ quest.sections =
                         if not player:hasCompletedQuest(quest.areaId, quest.questId) then
                             quest:complete(player)
                         else
-                            player:addFame(xi.fameArea.SANDORIA, 5)
+                            player:addFame(xi.fameArea.SANDORIA, 10)
                         end
                     end
                 end,

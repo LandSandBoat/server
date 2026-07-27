@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.HEARTS_OF_MYTHRIL
 
 quest.reward =
 {
-    fame     = 80,
+    fame     = 20,
     fameArea = xi.fameArea.BASTOK,
     item     = xi.item.SITABAKI,
     title    = xi.title.PURSUER_OF_THE_PAST,

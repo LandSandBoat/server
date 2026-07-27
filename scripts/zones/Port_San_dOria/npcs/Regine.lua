@@ -54,9 +54,11 @@ entity.onEventFinish = function(player, csid, option, npc)
         npcUtil.completeQuest(
             player, xi.questLog.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE,
             {
-                gil = 440,
-                title = xi.title.ADVERTISING_EXECUTIVE,
-                var = '[ffr]deliveryMask',
+                fame     = 20,
+                fameArea = xi.fameArea.SANDORIA,
+                gil      = 440,
+                title    = xi.title.ADVERTISING_EXECUTIVE,
+                var      = '[ffr]deliveryMask',
             }
         )
 

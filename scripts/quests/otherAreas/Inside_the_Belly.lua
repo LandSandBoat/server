@@ -672,12 +672,16 @@ quest.sections =
                     giveReward(player)
 
                     quest:complete(player)
+                    player:addFame(xi.fameArea.SANDORIA, 10)
+                    player:addFame(xi.fameArea.BASTOK, 10)
                 end,
 
                 [167] = function(player, csid, option, npc)
                     giveReward(player)
 
                     quest:complete(player)
+                    player:addFame(xi.fameArea.SANDORIA, 10)
+                    player:addFame(xi.fameArea.BASTOK, 10)
                 end,
             },
         },

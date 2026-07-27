@@ -9,7 +9,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.LOVERS_IN_THE_DUS
 
 quest.reward =
 {
-    fame     = 120,
+    fame     = 70,
     fameArea = xi.fameArea.BASTOK,
     item     = xi.item.SIREN_FLUTE,
 }

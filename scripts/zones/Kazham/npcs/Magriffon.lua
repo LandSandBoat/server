@@ -100,7 +100,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         npcUtil.giveKeyItem(player, xi.ki.TREASURE_MAP)
     elseif csid == 152 then
         player:setCharVar('EVEN_MORE_GULLIBLES_PROGRESS', 0)
-        player:addFame(xi.fameArea.WINDURST, 30)
+        player:addFame(xi.fameArea.WINDURST, 70)
         player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.EVEN_MORE_GULLIBLES_TRAVELS)
     end
 end

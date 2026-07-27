@@ -11,8 +11,6 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BEASTMA
 
 quest.reward =
 {
-    fame     = 30,
-    fameArea = xi.fameArea.JEUNO,
     keyItem  = xi.ki.JOB_GESTURE_BEASTMASTER,
     title    = xi.title.ANIMAL_TRAINER,
 }
@@ -36,6 +34,9 @@ quest.sections =
                     player:unlockJob(xi.job.BST)
                     player:messageSpecial(upperJeunoID.text.YOU_CAN_NOW_BECOME_A_BEASTMASTER)
                     quest:complete(player)
+                    player:addFame(xi.fameArea.SANDORIA, 7)
+                    player:addFame(xi.fameArea.BASTOK, 7)
+                    player:addFame(xi.fameArea.WINDURST, 7)
                 end,
             },
         },

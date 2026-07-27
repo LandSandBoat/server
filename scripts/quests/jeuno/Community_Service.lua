@@ -10,8 +10,6 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.COMMUNITY_SERVICE)
 
 quest.reward =
 {
-    fame     = 30,
-    fameArea = xi.fameArea.JEUNO,
     title    = xi.title.TORCHBEARER,
 }
 
@@ -369,6 +367,9 @@ quest.sections =
                     zone:setLocalVar('commServiceComp', 1)
                     zone:setLocalVar('commServicePlayer', player:getID())
                     quest:complete(player)
+                    player:addFame(xi.fameArea.SANDORIA, 7)
+                    player:addFame(xi.fameArea.BASTOK, 7)
+                    player:addFame(xi.fameArea.WINDURST, 7)
 
                     if option == 1 then
                         npcUtil.giveKeyItem(player, xi.ki.LAMP_LIGHTERS_MEMBERSHIP_CARD)

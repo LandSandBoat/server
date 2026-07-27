@@ -10,8 +10,10 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.SLEEPLESS_NIG
 
 quest.reward =
 {
-    gil   = 5000,
-    title = xi.title.SHEEPS_MILK_DELIVERER,
+    fame     = 20,
+    fameArea = xi.fameArea.SANDORIA,
+    gil      = 5000,
+    title    = xi.title.SHEEPS_MILK_DELIVERER,
 }
 
 quest.sections =

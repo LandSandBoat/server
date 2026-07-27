@@ -47,9 +47,9 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('GiohAijhriSpokenTo', 0)
 
         if player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING) == xi.questStatus.QUEST_ACCEPTED then
-            npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING, { item = 17154, fame = 80, fameArea = xi.fameArea.WINDURST, title = xi.title.BOND_FIXER })
+            npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING, { item = 17154, fame = 16, fameArea = xi.fameArea.WINDURST, title = xi.title.BOND_FIXER })
         else
-            player:addFame(xi.fameArea.WINDURST, 10)
+            player:addFame(xi.fameArea.WINDURST, 16)
             npcUtil.giveCurrency(player, 'gil', 900)
         end
     elseif csid == 488 then

@@ -12,7 +12,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.ROCK_RACKETEE
 
 quest.reward =
 {
-    fame  = 40,
+    fame  = 30,
     fameArea = xi.fameArea.WINDURST,
 }
 

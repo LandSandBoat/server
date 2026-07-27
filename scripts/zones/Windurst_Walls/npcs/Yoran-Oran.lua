@@ -44,11 +44,11 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addGil(xi.settings.main.GIL_RATE * 200)
         player:confirmTrade()
     elseif csid == 252 then
-        npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.MANDRAGORA_MAD, { fame = 25, fameArea = xi.fameArea.WINDURST })
+        npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.MANDRAGORA_MAD, { fame = 10, fameArea = xi.fameArea.WINDURST })
         player:addGil(xi.settings.main.GIL_RATE * 250)
         player:confirmTrade()
     elseif csid == 253 then
-        npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.MANDRAGORA_MAD, { fame = 50, fameArea = xi.fameArea.WINDURST })
+        npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.MANDRAGORA_MAD, { fame = 22, fameArea = xi.fameArea.WINDURST })
         player:addGil(xi.settings.main.GIL_RATE * 1200)
         player:confirmTrade()
     elseif csid == 254 then
@@ -56,7 +56,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addGil(xi.settings.main.GIL_RATE * 120)
         player:confirmTrade()
     elseif csid == 255 then
-        npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.MANDRAGORA_MAD, { fame = 100, fameArea = xi.fameArea.WINDURST })
+        npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.MANDRAGORA_MAD, { fame = 36, fameArea = xi.fameArea.WINDURST })
         player:addGil(xi.settings.main.GIL_RATE * 5500)
         player:confirmTrade()
     end

@@ -14,7 +14,9 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.SHARPENING_TH
 
 quest.reward =
 {
-    item = xi.item.HONOR_SWORD,
+    fame     = 20,
+    fameArea = xi.fameArea.SANDORIA,
+    item     = xi.item.HONOR_SWORD,
 }
 
 quest.sections =

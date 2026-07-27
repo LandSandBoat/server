@@ -28,8 +28,6 @@ local params =
 
     reward =
     {
-        fame = 30,
-        fameArea = xi.fameArea.JEUNO,
         title = nil,
     },
 }

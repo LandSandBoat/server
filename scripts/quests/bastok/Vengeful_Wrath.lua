@@ -9,6 +9,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.VENGEFUL_WRATH)
 
 quest.reward =
 {
+    fame     = 16,
     fameArea = xi.fameArea.BASTOK,
     gil      = 900,
     title    = xi.title.AVENGER,
@@ -56,10 +57,6 @@ quest.sections =
                 [107] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:tradeComplete()
-
-                        if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then
-                            player:addFame(xi.fameArea.BASTOK, 112)
-                        end
                     end
                 end,
             },

@@ -9,9 +9,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.SHADY_BUSINESS)
 
 quest.reward =
 {
-    fame     = 80,
-    fameArea = xi.fameArea.NORG,
-    gil      = 350,
+    gil = 350,
 }
 
 quest.sections =
@@ -49,6 +47,7 @@ quest.sections =
 
                 [91] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:addFame(xi.fameArea.NORG, 30)
                         player:tradeComplete()
                     end
                 end,

@@ -36,7 +36,8 @@ function content:onEventFinishWin(player, csid, option, npc)
         npcUtil.giveItem(player, xi.item.SCROLL_OF_INSTANT_WARP)
     end
 
-    player:addFame(xi.fameArea.SELBINA_RABAO, 30)
+    player:addFame(xi.fameArea.SANDORIA, 10)
+    player:addFame(xi.fameArea.BASTOK, 10)
     player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WIND)
 end
 

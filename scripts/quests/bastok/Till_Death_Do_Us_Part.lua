@@ -9,7 +9,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.TILL_DEATH_DO_US_
 
 quest.reward =
 {
-    fame     = 160,
+    fame     = 30,
     fameArea = xi.fameArea.BASTOK,
     gil      = 2000,
     title    = xi.title.QIJIS_RIVAL,

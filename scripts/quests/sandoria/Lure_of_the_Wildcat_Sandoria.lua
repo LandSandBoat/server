@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_W
 
 quest.reward =
 {
-    fame     = 150,
+    fame     = 0,
     fameArea = xi.fameArea.SANDORIA,
     keyItem  = xi.ki.RED_INVITATION_CARD,
 }

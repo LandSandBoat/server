@@ -13,7 +13,7 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_
 
 quest.reward =
 {
-    fame     = 30,
+    fame     = 20,
     fameArea = xi.fameArea.SANDORIA,
     item     = xi.item.LAUAN_SHIELD,
     title    = xi.title.COURIER_EXTRAORDINAIRE,

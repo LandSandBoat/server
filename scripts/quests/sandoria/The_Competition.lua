@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_COMPETITI
 
 quest.reward =
 {
-    fame     = 30,
+    fame     = 10,
     fameArea = xi.fameArea.SANDORIA,
     item     = xi.item.LU_SHANGS_FISHING_ROD,
     keyItem  = xi.ki.TESTIMONIAL,
@@ -101,7 +101,7 @@ quest.sections =
                     player:tradeComplete()
                     player:setCharVar('carpsTraded', player:getLocalVar('FishTraded')) -- As per captures this char var persists for the life of the character
                     npcUtil.giveCurrency(player, 'gil', player:getLocalVar('GilToReward'))
-                    player:addFame(xi.fameArea.SANDORIA, 30)
+                    player:addFame(xi.fameArea.SANDORIA, 10)
                 end,
 
                 [307] = function(player, csid, option, npc)
@@ -170,7 +170,7 @@ quest.sections =
                     player:tradeComplete()
                     player:setCharVar('carpsTraded', player:getLocalVar('FishTraded'))  -- As per captures this char var persists for the life of the character
                     npcUtil.giveCurrency(player, 'gil', player:getLocalVar('GilToReward'))
-                    player:addFame(xi.fameArea.SANDORIA, 30)
+                    player:addFame(xi.fameArea.SANDORIA, 10)
                 end,
             },
         },

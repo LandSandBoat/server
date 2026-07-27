@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.GUEST_OF_HAUTEUR)
 
 quest.reward =
 {
-    fame     = 80,
+    fame     = 30,
     fameArea = xi.fameArea.BASTOK,
     item     = xi.item.TARGE,
 }

@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.STARDUST)
 
 quest.reward =
 {
-    fame     = 110,
+    fame     = 10,
     fameArea = xi.fameArea.BASTOK,
     gil      = 300,
 }

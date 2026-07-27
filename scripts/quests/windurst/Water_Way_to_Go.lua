@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.WATER_WAY_TO_
 
 quest.reward =
 {
-    fame = 40,
+    fame = 16,
     fameArea = xi.fameArea.WINDURST,
 }
 

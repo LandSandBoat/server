@@ -15,6 +15,7 @@ quest.reward =
     exp      = 2000,
     gil      = 2000,
     keyItem  = xi.ki.MAP_OF_BOSTAUNIEUX_OUBLIETTE,
+    fame     = 40,
     fameArea = xi.fameArea.WINDURST,
 }
 

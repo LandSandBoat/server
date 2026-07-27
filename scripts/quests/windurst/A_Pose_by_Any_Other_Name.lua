@@ -43,7 +43,7 @@ local poseGear =
 
 quest.reward =
 {
-    fame = 75,
+    fame = 20,
     fameArea = xi.fameArea.WINDURST,
     item = xi.item.COPY_OF_ANCIENT_BLOOD,
     title = xi.title.SUPER_MODEL,

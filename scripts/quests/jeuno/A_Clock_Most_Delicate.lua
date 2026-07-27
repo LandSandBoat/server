@@ -10,8 +10,6 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.A_CLOCK_MOST_DELICA
 
 quest.reward =
 {
-    fame     = 30,
-    fameArea = xi.fameArea.JEUNO,
     gil      = 1200,
     item     = xi.item.ENGINEERS_GLOVES,
     title    = xi.title.PROFESSIONAL_LOAFER,
@@ -96,6 +94,9 @@ quest.sections =
             {
                 [202] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 17)
+                        player:addFame(xi.fameArea.BASTOK, 17)
+                        player:addFame(xi.fameArea.WINDURST, 17)
                         player:delKeyItem(xi.ki.CLOCK_TOWER_OIL)
                     end
                 end,

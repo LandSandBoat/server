@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.PAST_PERFECT)
 quest.reward =
 {
     item     = xi.item.SCALE_MAIL,
-    fame     = 110,
+    fame     = 20,
     fameArea = xi.fameArea.BASTOK,
 }
 

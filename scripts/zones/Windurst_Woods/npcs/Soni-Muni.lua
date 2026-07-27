@@ -58,7 +58,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_AMAZIN_SCORPIO)
     elseif
         csid == 484 and
-        npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.THE_AMAZIN_SCORPIO, { fame = 80, title = xi.title.GREAT_GRAPPLER_SCORPIO, gil = 1500 })
+        npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.THE_AMAZIN_SCORPIO, { fame = 20, fameArea = xi.fameArea.WINDURST, title = xi.title.GREAT_GRAPPLER_SCORPIO, gil = 1500 })
     then
         player:confirmTrade()
     end

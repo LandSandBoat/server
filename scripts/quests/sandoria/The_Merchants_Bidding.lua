@@ -57,9 +57,7 @@ quest.sections =
             {
                 [89] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:addFame(xi.fameArea.SANDORIA, 30)
-                    else
-                        player:addFame(xi.fameArea.SANDORIA, 5)
+                        player:addFame(xi.fameArea.SANDORIA, 10)
                     end
 
                     npcUtil.giveCurrency(player, 'gil', 120)

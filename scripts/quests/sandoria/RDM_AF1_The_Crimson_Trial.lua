@@ -14,7 +14,7 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_T
 quest.reward =
 {
     item     = xi.item.FENCING_DEGEN,
-    fame     = 30,
+    fame     = 20,
     fameArea = xi.fameArea.SANDORIA,
 }
 

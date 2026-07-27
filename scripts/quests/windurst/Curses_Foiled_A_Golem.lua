@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.CURSES_FOILED
 
 quest.reward =
 {
-    fame     = 120,
+    fame     = 40,
     fameArea = xi.fameArea.WINDURST,
     item     = xi.item.SCROLL_OF_WARP_II,
     title    = xi.title.DOCTOR_SHANTOTTOS_FLAVOR_OF_THE_MONTH,

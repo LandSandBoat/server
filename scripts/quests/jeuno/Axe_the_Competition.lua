@@ -11,8 +11,6 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.AXE_THE_COMPETITION
 
 quest.reward =
 {
-    fame = 30,
-    fameArea = xi.fameArea.JEUNO,
 }
 
 quest.sections =
@@ -100,6 +98,9 @@ quest.sections =
 
                 [17] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 7)
+                        player:addFame(xi.fameArea.BASTOK, 7)
+                        player:addFame(xi.fameArea.WINDURST, 7)
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)

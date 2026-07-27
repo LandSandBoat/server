@@ -93,12 +93,15 @@ quest.sections =
             {
                 [527] = function(player, csid, option, npc)
                     local gilReward = 100
+                    local fameReward = 10
 
                     if option == 0 then
                         gilReward = 200
+                        fameReward = 20
                     end
 
                     npcUtil.giveCurrency(player, 'gil', gilReward)
+                    player:addFame(xi.fameArea.SANDORIA, fameReward)
                     quest:complete(player)
                 end,
             },

@@ -13,7 +13,7 @@ local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_BASI
 
 quest.reward =
 {
-    fame     = 120,
+    fame     = 60,
     fameArea = xi.fameArea.WINDURST,
     item     = xi.item.TEA_SET,
     title    = xi.title.FIVE_STAR_PURVEYOR,

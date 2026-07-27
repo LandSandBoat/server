@@ -15,7 +15,7 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.DISTANT_LOYAL
 
 quest.reward =
 {
-    fame     = 30,
+    fame     = 40,
     fameArea = xi.fameArea.SANDORIA,
     item     = xi.item.WHITE_CAPE,
 }

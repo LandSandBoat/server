@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.FLOWER_CHILD)
 
 quest.reward =
 {
-    fame     = 120,
+    fame     = 0,
     fameArea = xi.fameArea.WINDURST,
 }
 

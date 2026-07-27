@@ -99,7 +99,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:delKeyItem(xi.ki.SEALED_IRON_BOX)
             player:addItem(xi.item.SCROLL_OF_TONKO_ICHI) -- Scroll of Tonko: Ichi
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_TONKO_ICHI)
-            player:addFame(xi.fameArea.NORG, 50)
+            player:addFame(xi.fameArea.NORG, 30)
             player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.ITS_NOT_YOUR_VAULT)
         end
     end

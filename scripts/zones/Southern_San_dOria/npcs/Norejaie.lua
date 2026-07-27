@@ -39,7 +39,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             gil = 5000,
             item = 4198,
             title = xi.title.VERMILLION_VENTURER,
-            fame = 80,
+            fame = 20,
             var = 'EcoStatus'
         })
     then

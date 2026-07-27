@@ -9,8 +9,6 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.CANDLE_MAKING)
 
 quest.reward =
 {
-    fame     = 30,
-    fameArea = xi.fameArea.JEUNO,
     keyItem  = xi.ki.HOLY_CANDLE,
     title    = xi.title.BELIEVER_OF_ALTANA,
 }
@@ -60,6 +58,9 @@ quest.sections =
             {
                 [37] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 13)
+                        player:addFame(xi.fameArea.BASTOK, 13)
+                        player:addFame(xi.fameArea.WINDURST, 13)
                         player:confirmTrade()
                     end
                 end,

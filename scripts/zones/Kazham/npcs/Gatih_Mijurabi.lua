@@ -35,6 +35,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.MITHRAN_STONE)
         else
             player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.PERSONAL_HYGIENE)
+            player:addFame(xi.fameArea.WINDURST, 70)
             player:addItem(xi.item.MITHRAN_STONE)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.MITHRAN_STONE)
         end

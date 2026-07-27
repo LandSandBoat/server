@@ -16,7 +16,9 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOS
 
 quest.reward =
 {
-    gil = 1500,
+    fame     = 20,
+    fameArea = xi.fameArea.SANDORIA,
+    gil      = 1500,
 }
 
 quest.sections =

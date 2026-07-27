@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
 
 quest.reward =
 {
-    fame     = 30,
+    fame     = 60,
     fameArea = xi.fameArea.BASTOK,
 }
 

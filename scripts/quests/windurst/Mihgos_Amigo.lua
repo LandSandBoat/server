@@ -9,9 +9,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.MIHGOS_AMIGO)
 
 quest.reward =
 {
-    fame     = 60,
-    fameArea = xi.fameArea.NORG,
-    title    = xi.title.CAT_BURGLAR_GROUPIE,
+    title = xi.title.CAT_BURGLAR_GROUPIE,
 }
 
 quest.sections =
@@ -78,6 +76,7 @@ quest.sections =
                 [88] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:confirmTrade()
+                        player:addFame(xi.fameArea.NORG, 30)
                         player:addGil(200) -- "Obtained X gil." Text is baked into the CS, so gil needs to be given outside of the quest rewards.
                     end
                 end,
@@ -122,6 +121,7 @@ quest.sections =
                     if quest:complete(player) then
                         player:confirmTrade()
                         quest:setMustZone(player)
+                        player:addFame(xi.fameArea.NORG, 15)
                         player:addGil(200) -- "Obtained X gil." Text is baked into the CS, so gil needs to be given outside of the quest rewards.
                     end
                 end,

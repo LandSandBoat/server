@@ -60,7 +60,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         if npcUtil.giveItem(player, xi.item.SCROLL_OF_TELEPORT_HOLLA) then
             player:addTitle(xi.title.PILGRIM_TO_HOLLA)
             player:needToZone(true)
-            player:addFame(xi.fameArea.SANDORIA, 30)
+            player:addFame(xi.fameArea.SANDORIA, 40)
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.HEALING_THE_LAND)
         end
     elseif csid == 685 and option == 0 then
@@ -68,7 +68,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 687 then
         if npcUtil.giveItem(player, xi.item.SCROLL_OF_TELEPORT_VAHZL) then
             player:delKeyItem(xi.ki.FEIYIN_MAGIC_TOME)
-            player:addFame(xi.fameArea.SANDORIA, 30)
+            player:addFame(xi.fameArea.SANDORIA, 40)
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.SORCERY_OF_THE_NORTH)
         end
     end

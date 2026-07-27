@@ -58,10 +58,9 @@ quest.sections =
                 [36] = function(player, csid, option, npc)
                     if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.STARTING_A_FLAME) == xi.questStatus.QUEST_ACCEPTED then
                         quest:complete(player)
-                    else
-                        player:addFame(xi.fameArea.SANDORIA, 5)
                     end
 
+                    player:addFame(xi.fameArea.SANDORIA, 10)
                     npcUtil.giveCurrency(player, 'gil', 100)
                     player:confirmTrade()
                 end,

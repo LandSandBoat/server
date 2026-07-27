@@ -106,7 +106,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_2000)
     elseif csid == 292 then
         player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_2000)
-        player:addFame(xi.fameArea.WINDURST, 80)
+        player:addFame(xi.fameArea.WINDURST, 20)
         player:addTitle(xi.title.CARDIAN_TUTOR)
         player:addGil(xi.settings.main.GIL_RATE * 200)
         player:confirmTrade()
@@ -116,7 +116,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.LEGENDARY_PLAN_B)
     elseif
         csid == 314 and
-        npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.LEGENDARY_PLAN_B, { item = xi.item.SCENTLESS_ARMLETS, gil = 700 })
+        npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.LEGENDARY_PLAN_B, { item = xi.item.SCENTLESS_ARMLETS, gil = 700, fame = 30, fameArea = xi.fameArea.WINDURST })
     then
         player:confirmTrade()
         player:needToZone(true)
@@ -126,7 +126,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_3000)
     elseif
         csid == 657 and
-        npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_3000, { fame = 10, gil = 600 })
+        npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_3000, { fame = 40, gil = 600 })
     then
         player:confirmTrade()
     end

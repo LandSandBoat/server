@@ -44,7 +44,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.A_POTTERS_PREFERENCE)
     elseif csid == 113 then --quest completed
         player:confirmTrade()
-        player:addFame(xi.fameArea.WINDURST, 120)
+        player:addFame(xi.fameArea.WINDURST, 60)
         npcUtil.giveCurrency(player, 'gil', 2160)
         player:setCharVar('QuestAPotterPrefeRepeat_var', 0)
         player:setCharVar('QuestAPotterPrefeCompDay_var', VanadielUniqueDay())

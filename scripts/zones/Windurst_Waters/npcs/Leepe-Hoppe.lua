@@ -191,7 +191,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addTitle(xi.title.HEIR_OF_THE_NEW_MOON)
         player:delKeyItem(xi.ki.WHISPER_OF_THE_MOON)
         player:setCharVar('MoonlitPath_date', JstMidnight())
-        player:addFame(xi.fameArea.WINDURST, 30)
+        player:addFame(xi.fameArea.WINDURST, 60)
 
         if player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH) == xi.questStatus.QUEST_ACCEPTED then
             player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH)
@@ -234,6 +234,8 @@ entity.onEventFinish = function(player, csid, option, npc)
         npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.TUNING_OUT, {
             item = xi.item.CACHE_NEZ, -- Cache-Nez
             title = xi.title.FRIEND_OF_THE_HELMED,
+            fame = 40,
+            fameArea = xi.fameArea.WINDURST,
         })
     then
         player:setCharVar('TuningOut_Progress', 0) -- zero when quest is done

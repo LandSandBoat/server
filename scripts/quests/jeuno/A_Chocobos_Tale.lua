@@ -14,8 +14,6 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.A_CHOCOBOS_TALE)
 
 quest.reward =
 {
-    fame     = 30,
-    fameArea = xi.fameArea.JEUNO,
     gil      = 5200,
     title    = xi.title.CHOCOBO_LOVE_GURU,
 }
@@ -89,6 +87,9 @@ quest.sections =
             {
                 [10017] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 7)
+                        player:addFame(xi.fameArea.BASTOK, 7)
+                        player:addFame(xi.fameArea.WINDURST, 7)
                         player:delKeyItem(xi.ki.SILVER_COMETS_COLLAR)
                     end
                 end,

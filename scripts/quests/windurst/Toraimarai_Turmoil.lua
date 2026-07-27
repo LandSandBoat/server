@@ -14,7 +14,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.TORAIMARAI_TU
 quest.reward =
 {
     gil      = 4500,
-    fame     = 100,
+    fame     = 16,
     fameArea = xi.fameArea.WINDURST,
     title    = xi.title.CERTIFIED_RHINOSTERY_VENTURER,
 }
@@ -120,7 +120,7 @@ quest.sections =
                     if quest:getVar(player, 'Prog') == 1 then
                         quest:setVar(player, 'Prog', 0)
                         player:confirmTrade()
-                        player:addFame(xi.fameArea.WINDURST, 50)
+                        player:addFame(xi.fameArea.WINDURST, 16)
                         npcUtil.giveCurrency(player, 'gil', 4500)
                     end
                 end,

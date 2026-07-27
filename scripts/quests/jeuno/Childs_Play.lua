@@ -9,8 +9,6 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.CHILDS_PLAY)
 
 quest.reward =
 {
-    fame     = 30,
-    fameArea = xi.fameArea.JEUNO,
     keyItem  = xi.ki.WONDER_MAGIC_SET,
     title    = xi.title.TRADER_OF_MYSTERIES,
 }
@@ -58,6 +56,9 @@ quest.sections =
             {
                 [1] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 7)
+                        player:addFame(xi.fameArea.BASTOK, 7)
+                        player:addFame(xi.fameArea.WINDURST, 7)
                         player:confirmTrade()
                     end
                 end,

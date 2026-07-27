@@ -82,6 +82,8 @@ quest.sections =
                 [883] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:tradeComplete()
+                        player:addFame(xi.fameArea.SANDORIA, 5)
+                        player:addFame(xi.fameArea.BASTOK, 5)
                     end
                 end,
             },
@@ -116,6 +118,8 @@ quest.sections =
                 [884] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:tradeComplete()
+                        player:addFame(xi.fameArea.SANDORIA, 5)
+                        player:addFame(xi.fameArea.BASTOK, 5)
                     end
                 end,
             },

@@ -9,8 +9,8 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.BEAUTY_AND_THE_GA
 
 quest.reward =
 {
-    fame     = 75,
-    fameArea = xi.fameArea.BASTOK,
+    fame     = 30,
+    fameArea = xi.fameArea.NORG,
     item     = xi.item.BRONZE_KNIFE,
 }
 

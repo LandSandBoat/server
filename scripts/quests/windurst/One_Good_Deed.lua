@@ -12,10 +12,12 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.ONE_GOOD_DEED
 
 quest.reward =
 {
-    exp     = 2000,
-    gil     = 3200,
-    keyItem = xi.ki.MAP_OF_THE_ATTOHWA_CHASM,
-    title   = xi.title.DEED_VERIFIER,
+    fame     = 50,
+    fameArea = xi.fameArea.WINDURST,
+    exp      = 2000,
+    gil      = 3200,
+    keyItem  = xi.ki.MAP_OF_THE_ATTOHWA_CHASM,
+    title    = xi.title.DEED_VERIFIER,
 }
 
 quest.sections =

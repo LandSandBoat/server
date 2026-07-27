@@ -10,8 +10,6 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.NORTHWARD)
 quest.reward =
 {
     exp      = 2000,
-    fame     = 30,
-    fameArea = xi.fameArea.JEUNO,
     gil      = 2000,
     keyItem  = xi.ki.MAP_OF_CASTLE_ZVAHL,
     title    = xi.title.ENVOY_TO_THE_NORTH,
@@ -62,6 +60,9 @@ quest.sections =
             {
                 [61] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 13)
+                        player:addFame(xi.fameArea.BASTOK, 13)
+                        player:addFame(xi.fameArea.WINDURST, 13)
                         player:confirmTrade()
                     end
                 end,

@@ -14,7 +14,7 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_TIMELY_VISI
 
 quest.reward =
 {
-    fame = 60,
+    fame = 40,
     fameArea = xi.fameArea.SANDORIA,
     item = xi.item.MEDIEVAL_COLLAR,
     title = xi.title.OBSIDIAN_STORM,

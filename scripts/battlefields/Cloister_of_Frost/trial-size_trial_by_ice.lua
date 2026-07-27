@@ -36,7 +36,7 @@ function content:onEventFinishWin(player, csid, option, npc)
         npcUtil.giveItem(player, xi.item.SCROLL_OF_INSTANT_WARP)
     end
 
-    player:addFame(xi.fameArea.SANDORIA, 30)
+    player:addFame(xi.fameArea.SANDORIA, 20)
     player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE)
 end
 

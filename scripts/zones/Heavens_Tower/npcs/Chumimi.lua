@@ -120,7 +120,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         if npcUtil.giveItem(player, xi.item.WIZARDS_SABOTS) then
             player:setCharVar('recollectionsQuest', 0)
             player:delKeyItem(xi.ki.FOE_FINDER_MK_I)
-            player:addFame(xi.fameArea.WINDURST, 40)
+            player:addFame(xi.fameArea.WINDURST, 20)
             player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.RECOLLECTIONS)
         end
     elseif csid == 276 then
@@ -131,6 +131,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 281 then
         if npcUtil.giveItem(player, xi.item.WIZARDS_PETASOS) then
             player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
+            player:addFame(xi.fameArea.WINDURST, 20)
             player:addTitle(xi.title.PARAGON_OF_BLACK_MAGE_EXCELLENCE)
             player:delKeyItem(xi.ki.SLUICE_SURVEYOR_MK_I)
         end
