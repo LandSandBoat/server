@@ -36,7 +36,7 @@ EntityId::EntityId(const CBaseEntity* PEntity)
     UniqueNo      = PEntity->id;
     ActIndex      = PEntity->targid;
     zoneId        = PEntity->loc.zone ? static_cast<uint16>(PEntity->loc.zone->GetID()) : uint16{ 0 };
-    instanceRunId = PEntity->PInstance ? PEntity->PInstance->runId() : uint32{ 0 };
+    instanceRunId = PEntity->PInstance ? Maybe<uint32>(PEntity->PInstance->runId()) : std::nullopt;
     serial        = PEntity->serial();
     objtype       = PEntity->objtype;
 }
@@ -85,9 +85,9 @@ auto EntityId::resolveEntity() const -> CBaseEntity*
     }
 
     CBaseEntity* PEntity = nullptr;
-    if (instanceRunId != 0)
+    if (instanceRunId)
     {
-        auto* PInstance = zoneutils::GetInstanceByRunId(zoneId, instanceRunId);
+        auto* PInstance = zoneutils::GetInstanceByRunId(zoneId, *instanceRunId);
         if (PInstance == nullptr)
         {
             return nullptr;
