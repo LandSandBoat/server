@@ -29,31 +29,31 @@
 #include "packets/s2c/0x058_assist.h"
 #include "utils/battleutils.h"
 
-CAttackState::CAttackState(CBattleEntity* PEntity, const EntityId& target)
+CAttackState::CAttackState(xi::Badge<CState>, CBattleEntity* PEntity, const EntityId& target)
 : CState(PEntity, target)
 , m_PEntity(PEntity)
 {
-    PEntity->setBattleTarget(target);
-    PEntity->SetBattleStartTime(timer::now());
+    // Capture constructor arguments into members and nothing else. All other logic goes into init().
+}
+
+auto CAttackState::init() -> StateErrorOr<void>
+{
+    m_PEntity->setBattleTarget(target());
+    m_PEntity->SetBattleStartTime(timer::now());
     CAttackState::UpdateTarget();
 
     if (!m_PEntity->GetBattleTarget() || m_errorMsg)
     {
-        PEntity->setBattleTarget(std::nullopt);
-        if (this->HasErrorMsg())
-        {
-            throw CStateInitException(m_errorMsg->copy());
-        }
-        else
-        {
-            throw CStateInitException(std::make_unique<CBasicPacket>());
-        }
+        m_PEntity->setBattleTarget(std::nullopt);
+        return refuseWithErrorMsg();
     }
 
-    if (PEntity->PAI->PathFind)
+    if (m_PEntity->PAI->PathFind)
     {
-        PEntity->PAI->PathFind->Clear();
+        m_PEntity->PAI->PathFind->Clear();
     }
+
+    return Success();
 }
 
 auto CAttackState::Update(timer::time_point tick) -> bool

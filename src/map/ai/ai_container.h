@@ -146,8 +146,9 @@ protected:
     auto ForceChangeState(Args&&... args) -> bool;
 
 private:
-    // Suspend the current state (if any) beneath `next`, then make `next` current.
-    void enterState(std::unique_ptr<CState> next);
+    // Initialize `next`. If it accepts, suspend the current state beneath it and make
+    // `next` current. Returns true if the entity entered the state.
+    auto enterState(std::unique_ptr<CState> next) -> bool;
 
     // Finish with the current state and resume the one suspended beneath it (or go idle).
     void resumeNextState();
@@ -196,18 +197,8 @@ auto CAIContainer::ChangeState(Args&&... args) -> bool
 
     if (CanChangeState())
     {
-        try
-        {
-            CheckCompletedStates();
-
-            // Construct first: if it throws, the current state is left untouched.
-            enterState(std::make_unique<T>(std::forward<Args>(args)...));
-            return true;
-        }
-        catch (CStateInitException& e)
-        {
-            PEntity->HandleErrorMessage(e.packet);
-        }
+        CheckCompletedStates();
+        return enterState(CState::make<T>(std::forward<Args>(args)...));
     }
 
     return false;
@@ -222,18 +213,6 @@ auto CAIContainer::ForceChangeState(Args&&... args) -> bool
         return false;
     }
 
-    try
-    {
-        CheckCompletedStates();
-
-        // Construct first: if it throws, the current state is left untouched.
-        enterState(std::make_unique<T>(std::forward<Args>(args)...));
-        return true;
-    }
-    catch (CStateInitException& e)
-    {
-        PEntity->HandleErrorMessage(e.packet);
-    }
-
-    return false;
+    CheckCompletedStates();
+    return enterState(CState::make<T>(std::forward<Args>(args)...));
 }

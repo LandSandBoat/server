@@ -27,7 +27,9 @@
 class CWeaponSkillState : public CState
 {
 public:
-    CWeaponSkillState(CBattleEntity* PEntity, const EntityId& target, uint16 wsid);
+    CWeaponSkillState(xi::Badge<CState>, CBattleEntity* PEntity, const EntityId& target, uint16 wsid);
+
+    auto init() -> StateErrorOr<void> override;
 
     auto GetSkill() const -> CWeaponSkill*;
     auto GetSpentTP() const -> int16;
@@ -41,7 +43,10 @@ protected:
     void SpendCost();
 
 private:
-    CBattleEntity* const          m_PEntity;
+    // Shadows CState::m_PEntity
+    CBattleEntity* const m_PEntity;
+
+    const uint16                  m_wsid;
     std::unique_ptr<CWeaponSkill> m_PSkill;
     timer::time_point             m_finishTime;
     int16                         m_spent{ 0 };

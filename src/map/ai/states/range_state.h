@@ -26,7 +26,9 @@
 class CRangeState : public CState
 {
 public:
-    CRangeState(CBattleEntity* PEntity, const EntityId& target);
+    CRangeState(xi::Badge<CState>, CBattleEntity* PEntity, const EntityId& target);
+
+    auto init() -> StateErrorOr<void> override;
 
     void SpendCost() const;
     auto IsRapidShot() const -> bool;
@@ -43,12 +45,14 @@ protected:
 
     // This will likely need to be re-adjusted when states tick more precisely. Changed in 2012. https://wiki.ffo.jp/html/1734.html
 private:
+    // Shadows CState::m_PEntity
     CBattleEntity* const m_PEntity;
-    timer::duration      m_aimTime{};                  // Phase 1: Delay based on weapon and job trait reductions. 120 delay = 1000 milliseconds.
-    timer::duration      m_returnWeaponDelay = 800ms;  // Phase 2: Time to be locked in place while putting your weapon away after a shot.
-    timer::duration      m_freePhaseTimeMob  = 1100ms; // Phase 3 (mobs/trusts): Cooldown before a ranged attack can fire again.
-    timer::duration      m_freePhaseTimePlayer{};      // Phase 3 (players): Cooldown before a ranged attack can fire again, set from RANGED_ATTACK_FREE_PHASE_DELAY (Default 500ms)
-    bool                 m_rapidShot{ false };
-    position_t           m_startPos;
-    bool                 m_isOutOfRange{ false }; // True if target moved out of range during aim time
+
+    timer::duration m_aimTime{};                  // Phase 1: Delay based on weapon and job trait reductions. 120 delay = 1000 milliseconds.
+    timer::duration m_returnWeaponDelay = 800ms;  // Phase 2: Time to be locked in place while putting your weapon away after a shot.
+    timer::duration m_freePhaseTimeMob  = 1100ms; // Phase 3 (mobs/trusts): Cooldown before a ranged attack can fire again.
+    timer::duration m_freePhaseTimePlayer{};      // Phase 3 (players): Cooldown before a ranged attack can fire again, set from RANGED_ATTACK_FREE_PHASE_DELAY (Default 500ms)
+    bool            m_rapidShot{ false };
+    position_t      m_startPos;
+    bool            m_isOutOfRange{ false }; // True if target moved out of range during aim time
 };

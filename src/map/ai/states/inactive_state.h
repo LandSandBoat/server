@@ -26,7 +26,9 @@
 class CInactiveState : public CState
 {
 public:
-    CInactiveState(CBaseEntity* PEntity, timer::duration _duration, bool canChangeState, bool untargetable);
+    CInactiveState(xi::Badge<CState>, CBaseEntity* PEntity, timer::duration _duration, bool canChangeState, bool untargetable);
+
+    auto init() -> StateErrorOr<void> override;
 
     auto GetUntargetable() const -> bool;
 

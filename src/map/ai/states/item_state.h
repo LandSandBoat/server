@@ -33,8 +33,10 @@ struct action_t;
 class CItemState : public CState
 {
 public:
-    CItemState(CCharEntity* PEntity, const EntityId& target, uint8 loc, uint8 slotid);
+    CItemState(xi::Badge<CState>, CCharEntity* PEntity, const EntityId& target, uint8 loc, uint8 slotid);
     ~CItemState() override;
+
+    auto init() -> StateErrorOr<void> override;
 
     auto Update(timer::time_point tick) -> bool override;
     void Cleanup(timer::time_point tick) override;
@@ -50,7 +52,9 @@ protected:
     auto HasMoved() const -> bool;
     auto validatedTarget() -> CBaseEntity*;
 
-    CCharEntity*        m_PEntity;
+    // Shadows CState::m_PEntity
+    CCharEntity* const m_PEntity;
+
     CItemUsable*        m_PItem;
     uint8               m_location;
     uint8               m_slot;

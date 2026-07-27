@@ -22,12 +22,6 @@
 #include "state.h"
 #include "entities/base_entity.h"
 
-CStateInitException::CStateInitException(std::unique_ptr<CBasicPacket> _msg)
-: std::exception()
-, packet(std::move(_msg))
-{
-}
-
 void CState::TryInterrupt(CBattleEntity* PAttacker)
 {
 }
@@ -69,6 +63,17 @@ void CState::SetTarget(const EntityId& target)
         target_ = target;
         UpdateTarget(target);
     }
+}
+
+auto CState::refuseWithErrorMsg() const -> Error<std::unique_ptr<CBasicPacket>>
+{
+    if (m_errorMsg)
+    {
+        return Error{ m_errorMsg->copy() };
+    }
+
+    // The check failed but left no reason behind.
+    return RefuseSilently();
 }
 
 auto CState::HasErrorMsg() const -> bool

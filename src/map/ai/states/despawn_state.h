@@ -26,7 +26,10 @@
 class CDespawnState : public CState
 {
 public:
-    CDespawnState(CBaseEntity* PEntity, bool instantDespawn);
+    CDespawnState(xi::Badge<CState>, CBaseEntity* PEntity, bool instantDespawn);
+
+    auto init() -> StateErrorOr<void> override;
+
     auto Update(timer::time_point tick) -> bool override;
     void Cleanup(timer::time_point tick) override;
     auto CanChangeState() -> bool override;
@@ -34,5 +37,6 @@ public:
     auto CanInterrupt() -> bool override;
 
 private:
+    const bool        instantDespawn_;
     timer::time_point despawnTime_;
 };

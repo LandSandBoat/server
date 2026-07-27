@@ -37,40 +37,31 @@
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
 
-CRangeState::CRangeState(CBattleEntity* PEntity, const EntityId& target)
+CRangeState::CRangeState(xi::Badge<CState>, CBattleEntity* PEntity, const EntityId& target)
 : CState(PEntity, target)
 , m_PEntity(PEntity)
 {
-    auto* PTarget = m_PEntity->IsValidTarget(target, TARGET_ENEMY, m_errorMsg);
+    // Capture constructor arguments into members and nothing else. All other logic goes into init().
+}
+
+auto CRangeState::init() -> StateErrorOr<void>
+{
+    auto* PTarget = m_PEntity->IsValidTarget(target(), TARGET_ENEMY, m_errorMsg);
 
     if (!PTarget || this->HasErrorMsg())
     {
-        if (this->HasErrorMsg())
-        {
-            throw CStateInitException(m_errorMsg->copy());
-        }
-        else
-        {
-            throw CStateInitException(std::make_unique<CBasicPacket>());
-        }
+        return refuseWithErrorMsg();
     }
 
     if (!CanUseRangedAttack(PTarget, false))
     {
-        if (this->HasErrorMsg())
-        {
-            throw CStateInitException(m_errorMsg->copy());
-        }
-        else
-        {
-            throw CStateInitException(std::make_unique<CBasicPacket>());
-        }
+        return refuseWithErrorMsg();
     }
 
     if (distance(m_PEntity->loc.p, PTarget->loc.p) > m_PEntity->GetRangedAttackRange())
     {
         m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget, 0, 0, MsgBasic::TooFarAway);
-        throw CStateInitException(m_errorMsg->copy());
+        return refuseWithErrorMsg();
     }
 
     // Configured in main. default : 500ms
@@ -144,6 +135,8 @@ CRangeState::CRangeState(CBattleEntity* PEntity, const EntityId& target)
 
     m_PEntity->PAI->EventHandler.triggerListener("RANGE_START", m_PEntity, &action);
     m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
+
+    return Success();
 }
 
 void CRangeState::SpendCost() const

@@ -27,7 +27,9 @@
 class CSynthState : public CState
 {
 public:
-    CSynthState(CCharEntity* PChar, xi::SkillType skill);
+    CSynthState(xi::Badge<CState>, CCharEntity* PChar, xi::SkillType skill);
+
+    auto init() -> StateErrorOr<void> override;
 
     auto Update(timer::time_point tick) -> bool override;
     void Cleanup(timer::time_point tick) override;
@@ -39,6 +41,9 @@ protected:
     auto SynthReady() const -> bool;
 
 private:
+    // Shadows CState::m_PEntity
     CCharEntity* const m_PEntity;
-    timer::duration    m_synthFinishTime{ 16s };
+
+    const xi::SkillType m_skill;
+    timer::duration     m_synthFinishTime{ 16s };
 };

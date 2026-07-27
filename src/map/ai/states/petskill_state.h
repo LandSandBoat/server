@@ -29,7 +29,9 @@ class CPetEntity;
 class CPetSkillState : public CState
 {
 public:
-    CPetSkillState(CPetEntity* PEntity, const EntityId& target, uint16 wsid);
+    CPetSkillState(xi::Badge<CState>, CPetEntity* PEntity, const EntityId& target, uint16 wsid);
+
+    auto init() -> StateErrorOr<void> override;
 
     auto GetPetSkill() const -> CPetSkill*;
     auto GetSpentTP() const -> int16;
@@ -43,7 +45,10 @@ protected:
     void SpendCost();
 
 private:
-    CPetEntity* const          m_PEntity;
+    // Shadows CState::m_PEntity
+    CPetEntity* const m_PEntity;
+
+    const uint16               m_wsid;
     std::unique_ptr<CPetSkill> m_PSkill;
     timer::time_point          m_finishTime;
     timer::duration            m_castTime{};

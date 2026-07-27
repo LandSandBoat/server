@@ -36,7 +36,9 @@ enum MAGICFLAGS
 class CMagicState : public CState
 {
 public:
-    CMagicState(CBattleEntity* PEntity, const EntityId& target, SpellID spellid, uint8 flags = 0);
+    CMagicState(xi::Badge<CState>, CBattleEntity* PEntity, const EntityId& target, SpellID spellid, uint8 flags = 0);
+
+    auto init() -> StateErrorOr<void> override;
 
     auto Update(timer::time_point tick) -> bool override;
     void Cleanup(timer::time_point tick) override;
@@ -57,7 +59,10 @@ protected:
     auto HasCost() -> bool;
     auto HasMoved() const -> bool;
 
-    CBattleEntity* const    m_PEntity;
+    // Shadows CState::m_PEntity
+    CBattleEntity* const m_PEntity;
+
+    const SpellID           m_spellId;
     std::unique_ptr<CSpell> m_PSpell;
     timer::duration         m_castTime{};
     position_t              m_startPos;

@@ -27,7 +27,9 @@
 class CAbilityState : public CState
 {
 public:
-    CAbilityState(CBattleEntity* PEntity, const EntityId& target, uint16 abilityid);
+    CAbilityState(xi::Badge<CState>, CBattleEntity* PEntity, const EntityId& target, uint16 abilityid);
+
+    auto init() -> StateErrorOr<void> override;
 
     auto GetAbility() const -> CAbility*;
     void ApplyEnmity() const;
@@ -41,7 +43,10 @@ protected:
     auto CanUseAbility() const -> bool;
 
 private:
+    // Shadows CState::m_PEntity
+    CBattleEntity* const m_PEntity;
+
     timer::duration           m_castTime{ 0s };
-    CBattleEntity* const      m_PEntity;
+    const uint16              m_abilityId;
     std::unique_ptr<CAbility> m_PAbility;
 };

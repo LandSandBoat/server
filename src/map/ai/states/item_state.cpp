@@ -44,14 +44,19 @@
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
 
-CItemState::CItemState(CCharEntity* PEntity, const EntityId& target, const uint8 loc, const uint8 slotid)
+CItemState::CItemState(xi::Badge<CState>, CCharEntity* PEntity, const EntityId& target, const uint8 loc, const uint8 slotid)
 : CState(PEntity, target)
 , m_PEntity(PEntity)
 , m_PItem(nullptr)
 , m_location(loc)
 , m_slot(slotid)
 {
-    auto* PItem = dynamic_cast<CItemUsable*>(m_PEntity->getStorage(loc)->GetItem(slotid));
+    // Capture constructor arguments into members and nothing else. All other logic goes into init().
+}
+
+auto CItemState::init() -> StateErrorOr<void>
+{
+    auto* PItem = dynamic_cast<CItemUsable*>(m_PEntity->getStorage(m_location)->GetItem(m_slot));
     m_PItem     = PItem;
 
     if (m_PItem && m_PItem->isType(ITEM_USABLE))
@@ -83,21 +88,14 @@ CItemState::CItemState(CCharEntity* PEntity, const EntityId& target, const uint8
 
     if (!m_PItem)
     {
-        throw CStateInitException(std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, 0, 0, MsgBasic::UnableToUseItem));
+        return Error{ std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, 0, 0, MsgBasic::UnableToUseItem) };
     }
 
     auto* PTarget = validatedTarget();
 
     if (!PTarget || this->HasErrorMsg())
     {
-        if (this->HasErrorMsg())
-        {
-            throw CStateInitException(m_errorMsg->copy());
-        }
-        else
-        {
-            throw CStateInitException(std::make_unique<CBasicPacket>());
-        }
+        return refuseWithErrorMsg();
     }
 
     auto [error, param, value] = luautils::OnItemCheck(PTarget, m_PItem, m_PEntity);
@@ -105,7 +103,7 @@ CItemState::CItemState(CCharEntity* PEntity, const EntityId& target, const uint8
     {
         if (error == -1)
         {
-            throw CStateInitException(nullptr);
+            return RefuseSilently();
         }
         else
         {
@@ -113,7 +111,7 @@ CItemState::CItemState(CCharEntity* PEntity, const EntityId& target, const uint8
             {
                 param = m_PItem->hasFlag(ItemFlag::Scroll) ? m_PItem->getSubID() : m_PItem->getID();
             }
-            throw CStateInitException(std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget ? PTarget : m_PEntity, param, value, static_cast<MsgBasic>(error)));
+            return Error{ std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget ? PTarget : m_PEntity, param, value, static_cast<MsgBasic>(error)) };
         }
     }
 
@@ -156,6 +154,8 @@ CItemState::CItemState(CCharEntity* PEntity, const EntityId& target, const uint8
 
     m_PEntity->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(m_PItem, ItemLockFlg::NoSelect);
     m_PEntity->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(m_PEntity);
+
+    return Success();
 }
 
 CItemState::~CItemState() = default;
