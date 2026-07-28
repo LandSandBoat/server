@@ -304,7 +304,7 @@ local function magicAccuracyFromWeatherElement(actor, params)
     local applyPenalties = false
 
     if
-        math.randomInt(1, 100) <= 33 or                     -- Random. Applies to both bonuses and penalties.
+        math.randomInt(1, 100) <= 33 or                  -- Random. Applies to both bonuses and penalties.
         actor:getMod(xi.mod.FORCE_DW_BONUS_PENALTY) >= 1 -- Hachirin-no-Obi forces both bonuses and penalties.
     then
         applyBonuses   = true
@@ -365,22 +365,14 @@ local function magicAccuracyFromFoodMultiplier(actor)
 end
 
 local function magicAccuracyFromSoulVoiceMultiplier(actor, params)
-    local effectTable =
-    set{
-        xi.effect.SLEEP_I, -- Lullabies
-        xi.effect.NONE,    -- Magic Finale
-        xi.effect.CHARM_I  -- Maiden's Virellai
-    }
+    if not params.soulVoiceMacc then
+        return 1
+    end
 
-    if
-        effectTable[params.effectId] and
-        params.skillType == xi.skill.SINGING
-    then
-        if actor:hasStatusEffect(xi.effect.SOUL_VOICE) then
-            return 2
-        elseif actor:hasStatusEffect(xi.effect.MARCATO) then
-            return 1.5
-        end
+    if actor:hasStatusEffect(xi.effect.SOUL_VOICE) then
+        return 2
+    elseif actor:hasStatusEffect(xi.effect.MARCATO) then
+        return 1.5
     end
 
     return 1
@@ -525,6 +517,9 @@ local function validateParameters(actor, target, fedData)
     params.skillType          = fedData.skillType or 0
     params.skillRank          = fedData.skillRank or 0
     params.spellGroup         = fedData.spellGroup or 0
+
+    -- Steps.
+    params.soulVoiceMacc      = fedData.soulVoiceMacc or false -- Allow Soul Voice or Marcato MACC multiplier.
 
     -- Initialize future parameters.
     params.resistanceRank     = 0

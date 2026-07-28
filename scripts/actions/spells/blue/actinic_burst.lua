@@ -21,17 +21,22 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local params = {}
-    params.ecosystem       = xi.ecosystem.LUMINION
-    params.effect          = xi.effect.FLASH
-    params.power           = 0 -- Power is handled in hit rate calculations
-    params.tick            = 0
-    params.duration        = 16 -- This may be randomized, but the data was from Brenner
-    params.resistThreshold = 0.25
-    params.isGaze          = false
-    params.isConal         = false
+    local params =
+    {
+        effectId       = xi.effect.FLASH,
+        power          = 0,
+        duration       = 12,
+        tier           = 1,
+        magicalElement = xi.element.LIGHT,
+        actorStat      = xi.mod.MND,
+        skillType      = xi.skill.BLUE_MAGIC,
+        spellGroup     = xi.magic.spellGroup.BLUE,
+        ecosystem      = xi.ecosystem.LUMINION,
+        bonusMacc      = 512,
+        fealty         = true,
+    }
 
-    return xi.spells.blue.useEnfeeblingSpell(caster, target, spell, params)
+    return xi.combat.action.executeSpellEnfeeblement(caster, target, spell, params)
 end
 
 return spellObject

@@ -19,14 +19,6 @@ local column =
 local pTable =
 {
     -- [Spell ID                         ] = { Effect,           Tier,  Base,  Cap, Dur, Modifier               },
-    -- Requiem: https://www.bg-wiki.com/ffxi/Category:Requiem
-    [xi.magic.spell.FOE_REQUIEM          ] = { xi.effect.REQUIEM,  1,     1,   300,  64, xi.mod.REQUIEM_EFFECT  },
-    [xi.magic.spell.FOE_REQUIEM_II       ] = { xi.effect.REQUIEM,  2,     2,   300,  80, xi.mod.REQUIEM_EFFECT  },
-    [xi.magic.spell.FOE_REQUIEM_III      ] = { xi.effect.REQUIEM,  3,     3,   300,  96, xi.mod.REQUIEM_EFFECT  },
-    [xi.magic.spell.FOE_REQUIEM_IV       ] = { xi.effect.REQUIEM,  4,     4,   300, 112, xi.mod.REQUIEM_EFFECT  },
-    [xi.magic.spell.FOE_REQUIEM_V        ] = { xi.effect.REQUIEM,  5,     5,   300, 128, xi.mod.REQUIEM_EFFECT  },
-    [xi.magic.spell.FOE_REQUIEM_VI       ] = { xi.effect.REQUIEM,  6,     6,   300, 144, xi.mod.REQUIEM_EFFECT  },
-    [xi.magic.spell.FOE_REQUIEM_VII      ] = { xi.effect.REQUIEM,  7,     8,   300, 160, xi.mod.REQUIEM_EFFECT  },
     -- Lullaby: https://www.bg-wiki.com/ffxi/Category:Lullaby
     [xi.magic.spell.FOE_LULLABY          ] = { xi.effect.SLEEP_I,  1,     1,     1,  30, xi.mod.LULLABY_EFFECT  },
     [xi.magic.spell.FOE_LULLABY_II       ] = { xi.effect.SLEEP_I,  1,     1,     1,  60, xi.mod.LULLABY_EFFECT  },
@@ -67,9 +59,7 @@ local pTable =
 xi.spells.enfeebling.calculateSongPower = function(caster, spellEffect, basePower, gearBoost)
     local power = basePower
 
-    if spellEffect == xi.effect.REQUIEM then
-        power = power + utils.clamp(gearBoost - 1, 0, 20) + caster:getJobPointLevel(xi.jp.REQUIEM_EFFECT) * 3
-    elseif spellEffect == xi.effect.ELEGY then
+    if spellEffect == xi.effect.ELEGY then
         power = power + math.floor(gearBoost * 25.6) * 10000 / 1024
     elseif spellEffect == xi.effect.THRENODY then
         power = power + gearBoost * 5
@@ -82,7 +72,6 @@ xi.spells.enfeebling.calculateSongPower = function(caster, spellEffect, basePowe
     set{
         xi.effect.ELEGY,
         xi.effect.NOCTURNE,
-        xi.effect.REQUIEM,
         xi.effect.THRENODY
     }
 
