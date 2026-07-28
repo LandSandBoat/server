@@ -23,7 +23,7 @@ values:
   severe_spell_chance:    13 # % chance to use a severe spell like death or impact
   skill_list:             14 # uses given mob skill list
   mug_gil:                15 # amount gil carried for mugging
-  detection:              16 # Overrides mob family's detection method. In order to set to override to none an unused bit must be set such as xi::Detects::None1.
+  detection:              16 # Overrides mob family's detection method. 0 means the mob detects nothing.
   no_despawn:             17 # do not despawn when too far from spawn. Gob Diggers have this.
   var:                    18 # temp var for whatever. Gets cleared on spawn
   can_shield_block:       19 # toggle shield use for mobs without physical shields (trusts)
