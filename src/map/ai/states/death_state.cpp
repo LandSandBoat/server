@@ -35,11 +35,16 @@ static constexpr timer::duration TIME_TO_SEND_RERAISE_MENU = 8s;
 
 }
 
-CDeathState::CDeathState(CBattleEntity* PEntity, timer::duration death_time)
+CDeathState::CDeathState(xi::Badge<CState>, CBattleEntity* PEntity, timer::duration death_time)
 : CState(PEntity, PEntity->entityId())
 , m_PEntity(PEntity)
 , m_deathTime(death_time)
 , m_raiseTime(GetEntryTime() + TIME_TO_SEND_RERAISE_MENU)
+{
+    // Capture constructor arguments into members and nothing else. All other logic goes into init().
+}
+
+auto CDeathState::init() -> StateErrorOr<void>
 {
     m_PEntity->StatusEffectContainer->DelStatusEffectsByFlag(xi::StatusEffectFlag::Death, EffectNotice::Silent);
 
@@ -49,6 +54,8 @@ CDeathState::CDeathState(CBattleEntity* PEntity, timer::duration death_time)
     {
         m_PEntity->PAI->PathFind->Clear();
     }
+
+    return Success();
 }
 
 auto CDeathState::Update(const timer::time_point tick) -> bool

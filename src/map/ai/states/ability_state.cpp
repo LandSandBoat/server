@@ -98,37 +98,35 @@ auto PetSkillDistanceCheck(CCharEntity* PChar, CBaseEntity* PTarget, const CAbil
 
 } // namespace
 
-CAbilityState::CAbilityState(CBattleEntity* PEntity, const EntityId& target, const uint16 abilityid)
+CAbilityState::CAbilityState(xi::Badge<CState>, CBattleEntity* PEntity, const EntityId& target, const uint16 abilityid)
 : CState(PEntity, target)
 , m_PEntity(PEntity)
+, m_abilityId(abilityid)
 {
-    CAbility* PAbility = ability::GetAbility(abilityid);
+    // Capture constructor arguments into members and nothing else. All other logic goes into init().
+}
+
+auto CAbilityState::init() -> StateErrorOr<void>
+{
+    CAbility* PAbility = ability::GetAbility(m_abilityId);
 
     if (!PAbility)
     {
-        throw CStateInitException(std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, 0, 0, MsgBasic::UnableToUseJobAbility));
+        return Error{ std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, 0, 0, MsgBasic::UnableToUseJobAbility) };
     }
-    auto* PTarget = m_PEntity->IsValidTarget(target, PAbility->getValidTarget(), m_errorMsg);
+    auto* PTarget = m_PEntity->IsValidTarget(target(), PAbility->getValidTarget(), m_errorMsg);
 
     if (!PTarget || this->HasErrorMsg())
     {
-        if (this->HasErrorMsg())
-        {
-            throw CStateInitException(m_errorMsg->copy());
-        }
-        else
-        {
-            throw CStateInitException(std::make_unique<CBasicPacket>());
-        }
+        return refuseWithErrorMsg();
     }
-    SetTarget(target);
     m_PAbility = std::make_unique<CAbility>(*PAbility);
     m_castTime = PAbility->getCastTime();
 
     if (m_castTime > 0s && CanUseAbility())
     {
         action_t action{
-            .actorId    = PEntity->id,
+            .actorId    = m_PEntity->id,
             .actiontype = ActionCategory::AbilityStart,
             .targets    = {
                 {
@@ -144,7 +142,7 @@ CAbilityState::CAbilityState(CBattleEntity* PEntity, const EntityId& target, con
             }
         };
 
-        PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
+        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
         m_PEntity->PAI->EventHandler.triggerListener("ABILITY_START", m_PEntity, PAbility);
 
         // face toward target
@@ -154,6 +152,8 @@ CAbilityState::CAbilityState(CBattleEntity* PEntity, const EntityId& target, con
     {
         m_PEntity->PAI->EventHandler.triggerListener("ABILITY_START", m_PEntity, PAbility);
     }
+
+    return Success();
 }
 
 auto CAbilityState::GetAbility() const -> CAbility*

@@ -26,7 +26,9 @@
 class CDeathState : public CState
 {
 public:
-    CDeathState(CBattleEntity* PEntity, timer::duration death_time);
+    CDeathState(xi::Badge<CState>, CBattleEntity* PEntity, timer::duration death_time);
+
+    auto init() -> StateErrorOr<void> override;
 
     auto Update(timer::time_point tick) -> bool override;
     void Cleanup(timer::time_point tick) override;
@@ -37,10 +39,12 @@ public:
     void acceptRaise();
 
 private:
+    // Shadows CState::m_PEntity
     CBattleEntity* const m_PEntity;
-    timer::duration      m_deathTime;
-    bool                 m_raiseSent{ false };
-    bool                 m_raiseAccepted{ false };
-    timer::time_point    m_raiseTime;
-    timer::time_point    m_raiseAcceptedTime;
+
+    timer::duration   m_deathTime;
+    bool              m_raiseSent{ false };
+    bool              m_raiseAccepted{ false };
+    timer::time_point m_raiseTime;
+    timer::time_point m_raiseAcceptedTime;
 };

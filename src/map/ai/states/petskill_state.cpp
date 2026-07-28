@@ -33,34 +33,33 @@
 #include "utils/battleutils.h"
 #include "utils/petutils.h"
 
-CPetSkillState::CPetSkillState(CPetEntity* PEntity, const EntityId& target, uint16 wsid)
+CPetSkillState::CPetSkillState(xi::Badge<CState>, CPetEntity* PEntity, const EntityId& target, uint16 wsid)
 : CState(PEntity, target)
 , m_PEntity(PEntity)
+, m_wsid(wsid)
 , m_spentTP(0)
 {
-    auto* skill = battleutils::GetPetSkill(wsid);
+    // Capture constructor arguments into members and nothing else. All other logic goes into init().
+}
+
+auto CPetSkillState::init() -> StateErrorOr<void>
+{
+    auto* skill = battleutils::GetPetSkill(m_wsid);
     if (!skill)
     {
-        throw CStateInitException(nullptr);
+        return RefuseSilently();
     }
 
     if (m_PEntity->StatusEffectContainer->HasStatusEffect({ xi::StatusEffect::Amnesia, xi::StatusEffect::Impairment }))
     {
-        throw CStateInitException(nullptr);
+        return RefuseSilently();
     }
 
-    const auto* PTarget = m_PEntity->IsValidTarget(target, skill->getValidTargets(), m_errorMsg);
+    const auto* PTarget = m_PEntity->IsValidTarget(target(), skill->getValidTargets(), m_errorMsg);
 
     if (!PTarget || this->HasErrorMsg())
     {
-        if (this->HasErrorMsg())
-        {
-            throw CStateInitException(m_errorMsg->copy());
-        }
-        else
-        {
-            throw CStateInitException(std::make_unique<CBasicPacket>());
-        }
+        return refuseWithErrorMsg();
     }
 
     m_PSkill = std::make_unique<CPetSkill>(*skill);
@@ -97,13 +96,15 @@ CPetSkillState::CPetSkillState(CPetEntity* PEntity, const EntityId& target, uint
 
         // Wyverns immediately emit a skill interrupt packet.
         // This looks like a hack but is retail accurate.
-        if (PEntity->petID() == PETID_WYVERN && PEntity->getMod(xi::Mod::WYVERN_SHOW_READYING) == 0)
+        if (m_PEntity->petID() == PETID_WYVERN && m_PEntity->getMod(xi::Mod::WYVERN_SHOW_READYING) == 0)
         {
-            ActionInterrupts::WyvernSkillReady(PEntity);
+            ActionInterrupts::WyvernSkillReady(m_PEntity);
         }
     }
     m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_ENTER", m_PEntity, m_PSkill->getID());
     SpendCost();
+
+    return Success();
 }
 
 auto CPetSkillState::GetPetSkill() const -> CPetSkill*

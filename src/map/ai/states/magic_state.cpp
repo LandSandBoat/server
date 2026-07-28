@@ -40,11 +40,17 @@
 #include "utils/battleutils.h"
 #include "utils/zoneutils.h"
 
-CMagicState::CMagicState(CBattleEntity* PEntity, const EntityId& target, SpellID spellid, uint8 flags)
+CMagicState::CMagicState(xi::Badge<CState>, CBattleEntity* PEntity, const EntityId& target, SpellID spellid, uint8 flags)
 : CState(PEntity, target)
 , m_PEntity(PEntity)
+, m_spellId(spellid)
 , m_PSpell(nullptr)
 , m_flags(flags)
+{
+    // Capture constructor arguments into members and nothing else. All other logic goes into init().
+}
+
+auto CMagicState::init() -> StateErrorOr<void>
 {
     if (const auto* PMob = dynamic_cast<CMobEntity*>(m_PEntity))
     {
@@ -54,43 +60,29 @@ CMagicState::CMagicState(CBattleEntity* PEntity, const EntityId& target, SpellID
         }
     }
 
-    auto* PSpell = spell::GetSpell(spellid);
+    auto* PSpell = spell::GetSpell(m_spellId);
     if (PSpell == nullptr)
     {
-        throw CStateInitException(std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, static_cast<uint16>(spellid), 0, MsgBasic::CannotCastSpell));
+        return Error{ std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, static_cast<uint16>(m_spellId), 0, MsgBasic::CannotCastSpell) };
     }
 
     m_PSpell = PSpell->clone();
 
-    auto* PTarget = m_PEntity->IsValidTarget(target, m_PSpell->getValidTarget(), m_errorMsg);
+    auto* PTarget = m_PEntity->IsValidTarget(target(), m_PSpell->getValidTarget(), m_errorMsg);
     if (!PTarget || this->HasErrorMsg())
     {
-        if (this->HasErrorMsg())
-        {
-            throw CStateInitException(m_errorMsg->copy());
-        }
-        else
-        {
-            throw CStateInitException(std::make_unique<CBasicPacket>());
-        }
+        return refuseWithErrorMsg();
     }
 
     if (!CanCastSpell(PTarget, false))
     {
-        if (HasErrorMsg())
-        {
-            throw CStateInitException(m_errorMsg->copy());
-        }
-        else
-        {
-            throw CStateInitException(std::make_unique<CBasicPacket>());
-        }
+        return refuseWithErrorMsg();
     }
 
     auto errorMsg = luautils::OnMagicCastingCheck(m_PEntity, PTarget, GetSpell());
     if (errorMsg)
     {
-        throw CStateInitException(std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget, static_cast<uint16>(m_PSpell->getID()), 0, errorMsg == 1 ? MsgBasic::CannotCastSpell : static_cast<MsgBasic>(errorMsg)));
+        return Error{ std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget, static_cast<uint16>(m_PSpell->getID()), 0, errorMsg == 1 ? MsgBasic::CannotCastSpell : static_cast<MsgBasic>(errorMsg)) };
     }
 
     m_castTime = battleutils::CalculateSpellCastTime(m_PEntity, this);
@@ -114,7 +106,7 @@ CMagicState::CMagicState(CBattleEntity* PEntity, const EntityId& target, SpellID
                 .results = {
                     {
                         .param     = static_cast<int32_t>(m_PSpell->getID()),
-                        .messageID = PEntity->objtype != TYPE_PC ? MsgBasic::StartsCastingSelf : MsgBasic::StartsCastingTarget,
+                        .messageID = m_PEntity->objtype != TYPE_PC ? MsgBasic::StartsCastingSelf : MsgBasic::StartsCastingTarget,
                     },
                 },
             },
@@ -136,6 +128,8 @@ CMagicState::CMagicState(CBattleEntity* PEntity, const EntityId& target, SpellID
     }
 
     m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
+
+    return Success();
 }
 
 auto CMagicState::Update(timer::time_point tick) -> bool

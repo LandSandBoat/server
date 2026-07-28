@@ -34,34 +34,33 @@
 #include "utils/zoneutils.h"
 #include "weapon_skill.h"
 
-CWeaponSkillState::CWeaponSkillState(CBattleEntity* PEntity, const EntityId& target, const uint16 wsid)
+CWeaponSkillState::CWeaponSkillState(xi::Badge<CState>, CBattleEntity* PEntity, const EntityId& target, const uint16 wsid)
 : CState(PEntity, target)
 , m_PEntity(PEntity)
+, m_wsid(wsid)
 {
-    auto* skill = battleutils::GetWeaponSkill(wsid);
+    // Capture constructor arguments into members and nothing else. All other logic goes into init().
+}
+
+auto CWeaponSkillState::init() -> StateErrorOr<void>
+{
+    auto* skill = battleutils::GetWeaponSkill(m_wsid);
     if (!skill)
     {
-        throw CStateInitException(std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PEntity, PEntity, 0, 0, MsgBasic::CannotUseWeaponskill));
+        return Error{ std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, 0, 0, MsgBasic::CannotUseWeaponskill) };
     }
 
-    const auto targetFlags = battleutils::isValidSelfTargetWeaponskill(wsid) ? TARGET_SELF : TARGET_ENEMY;
-    auto*      PTarget     = m_PEntity->IsValidTarget(target, targetFlags, m_errorMsg);
+    const auto targetFlags = battleutils::isValidSelfTargetWeaponskill(m_wsid) ? TARGET_SELF : TARGET_ENEMY;
+    auto*      PTarget     = m_PEntity->IsValidTarget(target(), targetFlags, m_errorMsg);
 
     if (!PTarget || this->HasErrorMsg())
     {
-        if (this->HasErrorMsg())
-        {
-            throw CStateInitException(m_errorMsg->copy());
-        }
-        else
-        {
-            throw CStateInitException(std::make_unique<CBasicPacket>());
-        }
+        return refuseWithErrorMsg();
     }
 
     if (!m_PEntity->CanSeeTarget(PTarget))
     {
-        throw CStateInitException(std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget, 0, 0, MsgBasic::CannotPerformAction));
+        return Error{ std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget, 0, 0, MsgBasic::CannotPerformAction) };
     }
 
     m_PSkill = std::make_unique<CWeaponSkill>(*skill);
@@ -84,6 +83,8 @@ CWeaponSkillState::CWeaponSkillState(CBattleEntity* PEntity, const EntityId& tar
     };
 
     m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
+
+    return Success();
 }
 
 auto CWeaponSkillState::GetSkill() const -> CWeaponSkill*

@@ -23,24 +23,59 @@
 #pragma once
 
 #include "common/timer.h"
+#include "common/types/badge.h"
+#include "common/types/error_or.h"
 #include "entities/base_entity.h"
 #include "packets/basic.h"
+
+#include <concepts>
 #include <memory>
 
 class CBattleEntity;
 
-class CStateInitException : public std::exception
-{
-public:
-    explicit CStateInitException(std::unique_ptr<CBasicPacket> _msg);
+//
+// StateErrorOr<T>
+//
+//   The result of entering a state.
+//
+//       return Success();
+//       return Error{ std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(...) };
+//       return RefuseSilently();
+//
+template <typename T>
+using StateErrorOr = ErrorOr<T, std::unique_ptr<CBasicPacket>>;
 
-    std::unique_ptr<CBasicPacket> packet;
-};
+//
+// RefuseSilently()
+//
+//   Refuse to enter a state without telling the entity why.
+//
+inline auto RefuseSilently() -> Error<std::unique_ptr<CBasicPacket>>
+{
+    // Despite being a whole lot of words, this is essentially just nullptr.
+    return Error{ std::unique_ptr<CBasicPacket>{ nullptr } };
+}
 
 class CState
 {
 public:
-    CState(CBaseEntity* PEntity, const EntityId& target);
+    //
+    // The only way to create a state.
+    //
+    //   Every state constructor takes a Badge<CState>, and only this function can make
+    //   one.
+    //
+    template <typename T, typename... Args>
+        requires std::derived_from<T, CState>
+    static auto make(Args&&... args) -> std::unique_ptr<T>
+    {
+        return std::unique_ptr<T>(new T(xi::Badge<CState>{}, std::forward<Args>(args)...));
+    }
+
+    virtual auto init() -> StateErrorOr<void>
+    {
+        return Success();
+    }
 
     virtual ~CState() = default;
 
@@ -66,6 +101,10 @@ public:
     void         SetTarget(const EntityId& target);
 
 protected:
+    CState(CBaseEntity* PEntity, const EntityId& target);
+
+    auto refuseWithErrorMsg() const -> Error<std::unique_ptr<CBasicPacket>>;
+
     // state logic done per tick - returns whether to exit the state or not
     virtual auto Update(timer::time_point tick) -> bool = 0;
     virtual void UpdateTarget(const EntityId& target);

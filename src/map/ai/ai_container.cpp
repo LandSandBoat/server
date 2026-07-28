@@ -371,14 +371,24 @@ auto CAIContainer::GetCurrentState() const -> CState*
     return m_currentState.get();
 }
 
-void CAIContainer::enterState(std::unique_ptr<CState> next)
+auto CAIContainer::enterState(std::unique_ptr<CState> next) -> bool
 {
+    // init() decides whether the entity may enter the state. If it refuses, drop the new
+    // state and keep the current one.
+    if (auto result = next->init(); !result)
+    {
+        PEntity->HandleErrorMessage(result.error());
+        return false;
+    }
+
     // Suspend the state we're leaving beneath the new one, which becomes current.
     if (m_currentState)
     {
         m_stateStack.push(std::move(m_currentState));
     }
     m_currentState = std::move(next);
+
+    return true;
 }
 
 void CAIContainer::resumeNextState()

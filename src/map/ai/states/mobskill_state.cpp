@@ -36,48 +36,47 @@
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
 
-CMobSkillState::CMobSkillState(CBattleEntity* PEntity, const EntityId& target, const uint16 wsid, const Maybe<timer::duration> castTimeOverride)
+CMobSkillState::CMobSkillState(xi::Badge<CState>, CBattleEntity* PEntity, const EntityId& target, const uint16 wsid, const Maybe<timer::duration> castTimeOverride)
 : CState(PEntity, target)
 , m_PEntity(PEntity)
+, m_wsid(wsid)
+, m_castTimeOverride(castTimeOverride)
 , m_spentTP(0)
 {
-    auto* skill = battleutils::GetMobSkill(wsid);
+    // Capture constructor arguments into members and nothing else. All other logic goes into init().
+}
+
+auto CMobSkillState::init() -> StateErrorOr<void>
+{
+    auto* skill = battleutils::GetMobSkill(m_wsid);
     if (!skill)
     {
-        throw CStateInitException(nullptr);
+        return RefuseSilently();
     }
 
     if (m_PEntity->StatusEffectContainer->HasStatusEffect({ xi::StatusEffect::Amnesia, xi::StatusEffect::Impairment }))
     {
-        throw CStateInitException(nullptr);
+        return RefuseSilently();
     }
 
     // Self-centered AoE: validate mob can target itself, but keep original targid for allegiance
     const bool   isSelfCenteredAoE = skill->getAoe() == static_cast<uint8>(AOE_RADIUS::ATTACKER);
     const uint16 validTargets      = isSelfCenteredAoE ? static_cast<uint16>(TARGET_SELF) : skill->getValidTargets();
-    const uint16 validateTargid    = isSelfCenteredAoE ? m_PEntity->targid : target.ActIndex;
+    const uint16 validateTargid    = isSelfCenteredAoE ? m_PEntity->targid : target().ActIndex;
     auto*        PTarget           = m_PEntity->IsValidTarget(validateTargid, validTargets, m_errorMsg);
 
     if (!PTarget || this->HasErrorMsg())
     {
-        if (this->HasErrorMsg())
-        {
-            throw CStateInitException(m_errorMsg->copy());
-        }
-        else
-        {
-            throw CStateInitException(std::make_unique<CBasicPacket>());
-        }
+        return refuseWithErrorMsg();
     }
 
-    // Store original targid - for self-centered AoE this preserves battle target for allegiance checks
-    SetTarget(target);
-
+    // target() still holds the original targid, not validateTargid. For self-centered AoE
+    // that preserves the battle target for allegiance checks.
     m_PSkill = std::make_unique<CMobSkill>(*skill);
 
-    if (castTimeOverride.has_value())
+    if (m_castTimeOverride.has_value())
     {
-        m_castTime = castTimeOverride.value();
+        m_castTime = m_castTimeOverride.value();
     }
     else
     {
@@ -89,7 +88,7 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, const EntityId& target, c
         // For self-centered AoE damaging moves, show battle target in readies message
         // For true self-target buffs (TARGET_SELF), show self
         const bool isSelfBuff    = skill->getValidTargets() == TARGET_SELF;
-        auto*      PActionTarget = isSelfBuff ? m_PEntity : (isSelfCenteredAoE ? m_PEntity->GetBattleTarget() : target.resolve());
+        auto*      PActionTarget = isSelfBuff ? m_PEntity : (isSelfCenteredAoE ? m_PEntity->GetBattleTarget() : target().resolve());
         if (!PActionTarget)
         {
             PActionTarget = m_PEntity;
@@ -133,6 +132,8 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, const EntityId& target, c
     {
         DoUpdate(GetEntryTime());
     }
+
+    return Success();
 }
 
 auto CMobSkillState::GetSkill() const -> CMobSkill*

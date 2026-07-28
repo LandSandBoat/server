@@ -26,7 +26,7 @@
 class CTriggerState : public CState
 {
 public:
-    CTriggerState(CBaseEntity* PEntity, const EntityId& target, bool door);
+    CTriggerState(xi::Badge<CState>, CBaseEntity* PEntity, const EntityId& target, bool door);
 
     auto Update(timer::time_point tick) -> bool override;
     void Cleanup(timer::time_point tick) override;

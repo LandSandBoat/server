@@ -31,9 +31,9 @@
 //
 // ErrorOr<T, E = std::string>
 //
-//   An alias for std::expected (C++23): either a T (the success value) or an E
+//   An alias for std::expected: either a T (the success value) or an E
 //   describing why it couldn't be produced. Prefer this over out-params,
-//   sentinel values, or Maybe<T> when the caller needs to know *why* something
+//   sentinel values, or Maybe<T> when the caller needs to know why something
 //   failed, not just that it did.
 //
 //   Return a success value directly, and an error via Error():
@@ -44,26 +44,57 @@
 //           {
 //               return Error("empty position string");
 //           }
+//
 //           return position_t{ ... };
 //       }
-//
-//   Callers can branch (`if (result) { result->x; }` / `result.error()`), or use
-//   the monadic ops (and_then/transform/or_else) to chain without branching.
 //
 
 template <typename T, typename E = std::string>
 using ErrorOr = std::expected<T, E>;
 
-// Construct the error side of an ErrorOr: `return Error("reason");`
+//
+// Error<E>
+//
+//   The error side of an ErrorOr. Return one to fail:
+//
+//       return Error("could not open the file");
+//
+//   E comes from the argument, then converts to the function's error type. A
+//   std::unique_ptr<Derived> can therefore satisfy an error type of std::unique_ptr<Base>.
+//
 template <typename E = std::string>
-auto Error(E error) -> std::unexpected<E>
-{
-    return std::unexpected<E>{ std::move(error) };
-}
+using Error = std::unexpected<E>;
 
-inline auto Error(const char* message) -> std::unexpected<std::string>
+//
+// Success()
+//
+//   The success side of an ErrorOr<void, E>, for functions that report a failure reason
+//   but have nothing to return when they work:
+//
+//       auto init() -> ErrorOr<void>
+//       {
+//           if (somethingWrong)
+//           {
+//               return Error("...");
+//           }
+//
+//           return Success();
+//       }
+//
+//   It reads better than `return {};`, which says nothing about which side you mean.
+//
+struct SuccessType
 {
-    return std::unexpected<std::string>{ message };
+    template <typename E>
+    constexpr operator ErrorOr<void, E>() const // NOLINT(google-explicit-constructor)
+    {
+        return ErrorOr<void, E>{};
+    }
+};
+
+constexpr auto Success() -> SuccessType
+{
+    return {};
 }
 
 // } // namespace xi

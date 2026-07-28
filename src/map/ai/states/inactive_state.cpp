@@ -24,16 +24,23 @@
 #include "entities/battle_entity.h"
 #include "status_effect_container.h"
 
-CInactiveState::CInactiveState(CBaseEntity* PEntity, const timer::duration _duration, const bool canChangeState, const bool untargetable)
+CInactiveState::CInactiveState(xi::Badge<CState>, CBaseEntity* PEntity, const timer::duration _duration, const bool canChangeState, const bool untargetable)
 : CState(PEntity, PEntity->entityId())
 , m_duration(_duration)
 , m_canChangeState(canChangeState)
 , m_untargetable(untargetable)
 {
-    if (!canChangeState)
+    // Capture constructor arguments into members and nothing else. All other logic goes into init().
+}
+
+auto CInactiveState::init() -> StateErrorOr<void>
+{
+    if (!m_canChangeState)
     {
-        PEntity->PAI->InterruptStates();
+        m_PEntity->PAI->InterruptStates();
     }
+
+    return Success();
 }
 
 auto CInactiveState::Update(const timer::time_point tick) -> bool

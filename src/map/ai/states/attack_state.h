@@ -26,7 +26,9 @@
 class CAttackState : public CState
 {
 public:
-    CAttackState(CBattleEntity* PEntity, const EntityId& target);
+    CAttackState(xi::Badge<CState>, CBattleEntity* PEntity, const EntityId& target);
+
+    auto init() -> StateErrorOr<void> override;
 
     auto Update(timer::time_point tick) -> bool override;
     void Cleanup(timer::time_point tick) override;
@@ -41,6 +43,8 @@ protected:
     auto AttackReady() const -> bool;
 
 private:
+    // Shadows CState::m_PEntity
     CBattleEntity* const m_PEntity;
-    timer::duration      m_attackTime{ 2s };
+
+    timer::duration m_attackTime{ 2s };
 };
