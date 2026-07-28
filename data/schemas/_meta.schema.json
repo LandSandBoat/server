@@ -7,35 +7,58 @@
   "unevaluatedProperties": false,
   "properties": {
     "enum": {
-      "type": "object",
-      "unevaluatedProperties": false,
-      "required": ["cpp"],
-      "description": "Emit a typed enum derived from a top-level section of the data file.",
-      "properties": {
-        "cpp": {
-          "type": "object",
-          "unevaluatedProperties": false,
-          "required": ["underlying", "class"],
-          "properties": {
-            "underlying": { "type": "string" },
-            "class": { "type": "string", "pattern": "^[A-Z][A-Za-z0-9]*$" },
-            "case": { "type": "string", "enum": ["pascal", "screaming"], "default": "pascal" }
+      "type": "array",
+      "minItems": 1,
+      "description": "Enums to emit from this file, one per entry.",
+      "items": {
+        "type": "object",
+        "unevaluatedProperties": false,
+        "required": ["cpp"],
+        "properties": {
+          "cpp": {
+            "type": "object",
+            "description": "The C++ enum to be generated.",
+            "unevaluatedProperties": false,
+            "required": ["underlying", "class"],
+            "properties": {
+              "underlying": {
+                "type": "string",
+                "description": "Underlying integer type of the C++ enum."
+              },
+              "class": {
+                "type": "string",
+                "pattern": "^[A-Z][A-Za-z0-9]*$",
+                "description": "Name of the C++ enum class."
+              },
+              "case": {
+                "type": "string",
+                "enum": ["pascal", "screaming"],
+                "default": "pascal",
+                "description": "Casing of the C++ member names."
+              }
+            }
+          },
+          "lua": {
+            "type": "object",
+            "description": "Emit the enum as a Lua table.",
+            "unevaluatedProperties": false,
+            "properties": {
+              "table": {
+                "type": "string",
+                "pattern": "^xi\\.[A-Za-z][A-Za-z0-9_]*$",
+                "description": "The fully qualified global Lua table name to be created for the enum."
+              }
+            }
+          },
+          "section": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*([.](\\*|[a-z][a-z0-9_]*))*$",
+            "description": "Dotted path to the section holding the entries; `*` matches every entry at that level (`ecosystems.*.families` = the families of every ecosystem). Defaults to the filename."
+          },
+          "name_from": {
+            "type": "string",
+            "description": "Dot-path to a string inside each entry, slugged into the member name (e.g. `name.en`). When set, the YAML key is the integer id."
           }
-        },
-        "lua": {
-          "type": "object",
-          "unevaluatedProperties": false,
-          "properties": {
-            "table": { "type": "string", "pattern": "^xi\\.[A-Za-z][A-Za-z0-9_]*$" }
-          }
-        },
-        "section": {
-          "type": "string",
-          "description": "Which top-level YAML section to walk. Defaults to the filename."
-        },
-        "name_from": {
-          "type": "string",
-          "description": "Dot-path inside each entry to a string that gets slugged into the enum value name (e.g., `name.en`). When set, the YAML key is treated as the integer id."
         }
       }
     }
