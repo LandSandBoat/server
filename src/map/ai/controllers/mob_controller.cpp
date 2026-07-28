@@ -811,12 +811,8 @@ auto CMobController::CanDetectTarget(CBattleEntity* PTarget, const bool forceSig
         return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
     }
 
-    if (((detects & xi::Detects::Weaponskill) != xi::Detects::None) && PTarget->PAI->IsCurrentState<CWeaponSkillState>())
-    {
-        return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
-    }
-
-    if (((detects & xi::Detects::Jobability) != xi::Detects::None) && PTarget->PAI->IsCurrentState<CAbilityState>())
+    if (((detects & xi::Detects::Ability) != xi::Detects::None) &&
+        (PTarget->PAI->IsCurrentState<CWeaponSkillState>() || PTarget->PAI->IsCurrentState<CAbilityState>()))
     {
         return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
     }

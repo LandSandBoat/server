@@ -1024,11 +1024,6 @@ void CalculateMobStats(CMobEntity* PMob, bool recover)
     {
         ShowError("mobutils::CalculateMobStats Mob (%s, %d) with magic but no cool down set!", PMob->getName(), PMob->id);
     }
-
-    if (PMob->getMobMod(xi::MobMod::Detection) == 0)
-    {
-        ShowError("mobutils::CalculateMobStats Mob (%s, %d, %d) has no detection methods!", PMob->getName(), PMob->id, PMob->m_Species);
-    }
 }
 
 void SetupRangedAttack(CMobEntity* PMob)
