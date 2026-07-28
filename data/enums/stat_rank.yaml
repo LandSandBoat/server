@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.statRank
+
+values:
+  none: 0
+  a:    1
+  b:    2
+  c:    3
+  d:    4
+  e:    5
+  f:    6
+  g:    7
