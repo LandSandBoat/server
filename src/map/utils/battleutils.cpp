@@ -3675,10 +3675,15 @@ bool HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool)
 
             uint16 chance = (PChar->getMod(xi::Mod::NINJA_TOOL) + meritBonus);
 
-            if (ConsumeTool && xirand::GetRandomNumber(100) > chance)
+            if (ConsumeTool)
             {
-                charutils::UpdateItem(PChar, LOC_INVENTORY, SlotID, -1);
-                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
+                const bool expertiseProc = xirand::GetRandomNumber(100) < chance;
+
+                if (!expertiseProc)
+                {
+                    charutils::UpdateItem(PChar, LOC_INVENTORY, SlotID, -1);
+                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
+                }
             }
         }
     }

@@ -3366,13 +3366,18 @@ void CBattleEntity::OnRangedAttack(CRangeState& state, action_t& action)
             StatusEffectContainer->DelStatusEffect(xi::StatusEffect::FlashyShot);
             StatusEffectContainer->DelStatusEffect(xi::StatusEffect::StealthShot);
 
-            if (PAmmo != nullptr && xirand::GetRandomNumber(100) > recycleChance)
+            if (PAmmo != nullptr)
             {
-                ++ammoConsumed;
-                charutils::TrackArrowUsageForScavenge(PChar, PAmmo);
-                if (PAmmo->getQuantity() == i)
+                const bool recycleProc = xirand::GetRandomNumber(100) < recycleChance;
+
+                if (!recycleProc)
                 {
-                    hitCount = i;
+                    ++ammoConsumed;
+                    charutils::TrackArrowUsageForScavenge(PChar, PAmmo);
+                    if (PAmmo->getQuantity() == i)
+                    {
+                        hitCount = i;
+                    }
                 }
             }
         }

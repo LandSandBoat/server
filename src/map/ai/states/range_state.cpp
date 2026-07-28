@@ -53,6 +53,9 @@ auto CRangeState::init() -> StateErrorOr<void>
         return refuseWithErrorMsg();
     }
 
+    // Configured in main : Default is 500ms
+    m_freePhaseTimePlayer = std::chrono::milliseconds(settings::get<uint32>("main.RANGED_ATTACK_FREE_PHASE_DELAY"));
+
     if (!CanUseRangedAttack(PTarget, false))
     {
         return refuseWithErrorMsg();
@@ -64,9 +67,6 @@ auto CRangeState::init() -> StateErrorOr<void>
         return refuseWithErrorMsg();
     }
 
-    // Configured in main. default : 500ms
-    m_freePhaseTimePlayer = std::chrono::milliseconds(settings::get<uint32>("main.RANGED_ATTACK_FREE_PHASE_DELAY"));
-
     // https://www.bg-wiki.com/ffxi/Delay#Ranged_Delay
     // GetRangedDelayReduction is 2 of the 3 steps of `Ranged Weapon Delay x (1 - Snapshot) x (1 - Velocity Shot) x (1 - Rapid Shot)`
     // If Rapid Shot fires it will do the third multiplicative step
@@ -77,8 +77,9 @@ auto CRangeState::init() -> StateErrorOr<void>
     if (m_PEntity->objtype == TYPE_PC || m_PEntity->objtype == TYPE_TRUST)
     {
         const CItemWeapon* weapon     = dynamic_cast<CItemWeapon*>(m_PEntity->m_Weapons[SLOT_RANGED]);
-        const bool         isThrowing = weapon && weapon->isThrowing();
-        // Don't apply Rapid Shot to throwing weapons
+        const CItemWeapon* ammo       = dynamic_cast<CItemWeapon*>(m_PEntity->m_Weapons[SLOT_AMMO]);
+        const bool         isThrowing = (weapon && weapon->isThrowing()) || (ammo && ammo->isThrowing());
+        // Do not apply Rapid Shot to throwing weapons (Covers both Chakrams and Shurikens)
         if (!isThrowing)
         {
             auto chance{ m_PEntity->getMod(xi::Mod::RAPID_SHOT) };
