@@ -63309,15 +63309,15 @@ INSERT INTO `mob_spawn_points` VALUES (17461483,0,'Trion','Trion',27,139,139,100
 -- ------------------------------------------------------------
 
 -- Through the Quicksand Caves (ZM6)
-INSERT INTO `mob_spawn_points` VALUES (17465345,0,'Centurio_V-III','Centurio V-III',1,70,70,-2.000,100.000,-238.000,68,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17465346,0,'Triarius_V-VIII','Triarius V-VIII',2,68,68,2.000,100.000,-238.000,68,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17465347,0,'Princeps_V-XI','Princeps V-XI',3,68,68,0.100,100.000,-238.000,68,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17465348,0,'Centurio_V-III','Centurio V-III',1,70,70,-1.975,0.000,2.081,68,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17465349,0,'Triarius_V-VIII','Triarius V-VIII',2,68,68,2.025,0.000,2.081,68,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17465350,0,'Princeps_V-XI','Princeps V-XI',3,68,68,0.125,0.000,2.081,68,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17465351,0,'Centurio_V-III','Centurio V-III',1,70,70,-1.945,-100.000,242.335,68,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17465352,0,'Triarius_V-VIII','Triarius V-VIII',2,68,68,2.055,-100.000,242.335,68,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17465353,0,'Princeps_V-XI','Princeps V-XI',3,68,68,0.155,-100.000,242.335,68,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17465345,0,'Centurio_V-III','Centurio V-III',1,70,70,-4.000,100.325,-240.000,64,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17465346,0,'Triarius_V-VIII','Triarius V-VIII',2,68,68,4.000,100.325,-240.000,64,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17465347,0,'Princeps_V-XI','Princeps V-XI',3,68,68,0.000,100.325,-240.000,64,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17465348,0,'Centurio_V-III','Centurio V-III',1,70,70,-3.975,0.325,0.081,64,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17465349,0,'Triarius_V-VIII','Triarius V-VIII',2,68,68,4.025,0.325,0.081,64,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17465350,0,'Princeps_V-XI','Princeps V-XI',3,68,68,0.025,0.325,0.081,64,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17465351,0,'Centurio_V-III','Centurio V-III',1,70,70,-3.945,-99.675,240.335,64,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17465352,0,'Triarius_V-VIII','Triarius V-VIII',2,68,68,4.055,-99.675,240.335,64,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17465353,0,'Princeps_V-XI','Princeps V-XI',3,68,68,0.055,-99.675,240.335,64,NULL,NULL);
 
 -- Shattering Stars
 INSERT INTO `mob_spawn_points` VALUES (17465354,0,'Maat_sam','Maat',4,70,70,0.000,100.826,-240.000,64,NULL,NULL); -- Maat (SAM arena 1)
