@@ -534,7 +534,7 @@ INSERT INTO `mob_species_system` VALUES (479,'Orc_Statue',205,'Statue',22,'Weapo
 INSERT INTO `mob_species_system` VALUES (480,'Quadav_Statue',205,'Statue',22,'Weapons',20,100,100,3,3,3,3,2,2,3,1,3,1,3,0.0,1,0);
 INSERT INTO `mob_species_system` VALUES (481,'Yagudo_Statue',205,'Statue',22,'Weapons',20,100,100,3,3,3,3,2,2,3,1,3,1,3,0.0,1,0);
 INSERT INTO `mob_species_system` VALUES (482,'Ultima',206,'Ultima',22,'Weapons',20,100,100,3,3,3,3,3,3,3,1,3,1,3,0.0,3,0);
-INSERT INTO `mob_species_system` VALUES (483,'Mammet',34,'Mammet',3,'Arcana',40,100,100,1,4,4,3,4,4,4,1,3,1,4,5.0,34,0);
+INSERT INTO `mob_species_system` VALUES (483,'Mammet',208,'Mammet',3,'Arcana',40,100,100,1,4,4,3,4,4,4,1,3,1,4,5.0,34,0);
 INSERT INTO `mob_species_system` VALUES (484,'Unclassified',207,'Unclassified',0,'Unclassified',40,100,100,3,3,3,3,3,3,3,1,3,1,3,0.0,2,0);
 /*!40000 ALTER TABLE `mob_species_system` ENABLE KEYS */;
 UNLOCK TABLES;
