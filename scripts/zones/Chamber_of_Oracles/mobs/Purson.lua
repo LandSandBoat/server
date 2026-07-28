@@ -26,15 +26,20 @@ entity.onMobEngage = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getLocalVar('BloodWeaponTimer') < GetSystemTime() then
-        mob:useMobAbility(xi.mobSkill.BLOOD_WEAPON_1) -- Blood Weapon
-        mob:setLocalVar('BloodWeaponTimer', GetSystemTime() + 40) -- Will use Blood Weapon every 40 seconds.
+    if xi.combat.behavior.isEntityBusy(mob) then
+        return
     end
+
+    if mob:getLocalVar('BloodWeaponTimer') > GetSystemTime() then
+        return
+    end
+
+    mob:useMobAbility(xi.mobSkill.BLOOD_WEAPON_1) -- Blood Weapon
+    mob:setLocalVar('BloodWeaponTimer', GetSystemTime() + 40) -- Will use Blood Weapon every 40 seconds.
 end
 
 entity.onMobSkillTarget = function(target, mob, skill) -- Will reset enmity on main target when using Great Whirlwind
-    local skillID = skill:getID()
-    if skillID == xi.mobSkill.GREAT_WHIRLWIND_1 then
+    if skill:getID() == xi.mobSkill.GREAT_WHIRLWIND_1 then
         mob:resetEnmity(target)
     end
 end

@@ -20,16 +20,16 @@ mission.reward =
 local function handleActiveOnTrigger(player, keyItemId, statusIncrease)
     local missionStatus = player:getMissionStatus(xi.mission.log_id.ZILART)
 
-    if player:hasKeyItem(keyItemId) then
-        player:delKeyItem(keyItemId)
+    if missionStatus == 255 then -- Execute cutscene if the player is interrupted.
+        return mission:event(1)
+    elseif bit.band(missionStatus, statusIncrease) == 0 then
+        -- Fragments are not removed until the final cutscene ends.
         player:setMissionStatus(xi.mission.log_id.ZILART, missionStatus + statusIncrease)
         player:messageSpecial(oraclesID.text.YOU_PLACE_THE, keyItemId)
 
         if player:getMissionStatus(xi.mission.log_id.ZILART) == 255 then
             return mission:event(1)
         end
-    elseif missionStatus == 255 then -- Execute cutscene if the player is interrupted.
-        return mission:event(1)
     else
         return mission:messageSpecial(oraclesID.text.IS_SET_IN_THE_PEDESTAL, keyItemId)
     end
@@ -124,6 +124,10 @@ mission.sections =
             onEventFinish =
             {
                 [1] = function(player, csid, option, npc)
+                    for fragment = xi.ki.FIRE_FRAGMENT, xi.ki.DARK_FRAGMENT do
+                        player:delKeyItem(fragment)
+                    end
+
                     mission:complete(player)
                 end,
             },

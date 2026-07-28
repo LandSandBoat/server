@@ -9,10 +9,10 @@ mixins = { require('scripts/mixins/job_special') }
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
+entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.LIGHT_SLEEP_RES_RANK, 8)
     mob:setMod(xi.mod.DARK_SLEEP_RES_RANK, 8)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
 end
 
 entity.onMobSpellChoose = function(mob, target, spellId)
@@ -36,10 +36,10 @@ entity.onMobSpellChoose = function(mob, target, spellId)
         [16] = { xi.magic.spell.POISONGA_II,  target, false, xi.action.type.ENFEEBLING_TARGET,     xi.effect.POISON,       0, 100 },
         [17] = { xi.magic.spell.BIO_II,       target, false, xi.action.type.ENFEEBLING_TARGET,     xi.effect.BIO,          4, 100 },
         [18] = { xi.magic.spell.BLIND,        target, false, xi.action.type.ENFEEBLING_TARGET,     xi.effect.BLINDNESS,    0, 100 },
-        [19] = { xi.magic.spell.SLEEP,        target, false, xi.action.type.ENFEEBLING_TARGET,     xi.effect.SLEEP_I,      0,  25 },
-        [20] = { xi.magic.spell.SLEEP_II,     target, false, xi.action.type.ENFEEBLING_TARGET,     xi.effect.SLEEP_I,      0,  25 },
-        [21] = { xi.magic.spell.SLEEPGA,      target, false, xi.action.type.ENFEEBLING_TARGET,     xi.effect.SLEEP_I,      0,  25 },
-        [22] = { xi.magic.spell.SLEEPGA_II,   target, false, xi.action.type.ENFEEBLING_TARGET,     xi.effect.SLEEP_I,      0,  25 },
+        [19] = { xi.magic.spell.SLEEP,        target, false, xi.action.type.ENFEEBLING_TARGET,     xi.effect.SLEEP_I,      1,  25 },
+        [20] = { xi.magic.spell.SLEEP_II,     target, false, xi.action.type.ENFEEBLING_TARGET,     xi.effect.SLEEP_I,      2,  25 },
+        [21] = { xi.magic.spell.SLEEPGA,      target, false, xi.action.type.ENFEEBLING_TARGET,     xi.effect.SLEEP_I,      1,  25 },
+        [22] = { xi.magic.spell.SLEEPGA_II,   target, false, xi.action.type.ENFEEBLING_TARGET,     xi.effect.SLEEP_I,      2,  25 },
         [23] = { xi.magic.spell.BLAZE_SPIKES, mob,    false, xi.action.type.ENHANCING_FORCE_SELF,  xi.effect.BLAZE_SPIKES, 0, 100 },
     }
 

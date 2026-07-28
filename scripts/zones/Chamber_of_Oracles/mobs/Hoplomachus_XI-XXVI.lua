@@ -9,7 +9,7 @@ mixins = { require('scripts/mixins/job_special') }
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobInitialize = function(mob)
+entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
     mob:setMod(xi.mod.DARK_SLEEP_RES_RANK, 8)
     mob:setMod(xi.mod.LIGHT_SLEEP_RES_RANK, 8)

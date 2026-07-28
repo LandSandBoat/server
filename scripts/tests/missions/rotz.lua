@@ -228,7 +228,6 @@ describe('Rise of the Zilart', function()
             for idx, info in ipairs(pedestalsFragmentsTable) do
                 player.assert:hasKI(info[1])
                 player.entities:gotoAndTrigger(info[2])
-                player.assert.no:hasKI(info[1])
 
                 if idx ~= #pedestalsFragmentsTable then
                     -- Is not the last pedestal, so just a message is given
@@ -237,6 +236,11 @@ describe('Rise of the Zilart', function()
                     -- Clicking the last pedestal starts cutscene
                     player.events:expect({ eventId = 1 })
                 end
+            end
+
+            -- Assert no elemental fragment KIs.
+            for idx, info in ipairs(pedestalsFragmentsTable) do
+                player.assert.no:hasKI(info[1])
             end
 
             player.assert:hasKI(xi.ki.PRISMATIC_FRAGMENT)
