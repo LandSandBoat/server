@@ -559,8 +559,9 @@ void data_session::read_func()
                 viewSession->socket_.lowest_layer().close(closeEc);
                 session.view_session = nullptr;
 
-                session.incrementKeyValue = 0;     // Reset incremented key after inserting into db
-                generatedCharInfo         = false; // Reset this so next time we log out it regenerates the char info
+                session.incrementKeyValue  = 0;     // Reset incremented key after inserting into db
+                session.justCreatedNewChar = false; // The client only advances its key for character creation once
+                generatedCharInfo          = false; // Reset this so next time we log out it regenerates the char info
 
                 const auto payload = ipc::toBytesWithHeader(ipc::CharZone{
                     .charId            = charid,
