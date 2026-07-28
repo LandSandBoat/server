@@ -11,7 +11,7 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    params.baseDamage     = mob:getWeaponDmg()
+    params.baseDamage     = mob:getRangedDmg()
     params.numHits        = 1
     params.fTP            = { 9.0, 9.0, 9.0 } -- TODO: Capture fTPs
     params.attackType     = xi.attackType.PHYSICAL

@@ -506,7 +506,7 @@ xi.mobskills.mobRangedMove = function(mob, target, skill, action, skillParams)
     -- Sanitizes skillParams and sets defaults for any params not explicitly set in mob skill scripts.
     local params = normalizePhysicalSkillParams(skillParams)
 
-    local damage = params.baseDamage or mob:getWeaponDmg()
+    local damage = params.baseDamage or mob:getRangedDmg()
 
     -- Initialize return structure
     returnInfo.damage           = 0

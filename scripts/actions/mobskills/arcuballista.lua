@@ -13,7 +13,7 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    params.baseDamage       = mob:getWeaponDmg()
+    params.baseDamage       = mob:getRangedDmg()
     params.numHits          = 1
     params.fTP              = { 2.5, 3.0, 4.0 }
     params.accuracyModifier = { 100, 100, 100 }
