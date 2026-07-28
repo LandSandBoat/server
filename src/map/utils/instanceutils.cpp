@@ -88,7 +88,7 @@ auto LoadInstances(const std::vector<uint16>& instanceIds) -> void
         // Main data
         data.id            = rset->get<uint16>("instanceid");
         data.instance_name = rset->get<std::string>("instance_name");
-        data.instance_zone = rset->get<uint16>("instance_zone");
+        data.instance_zone = rset->get<xi::ZoneId>("instance_zone");
         data.entrance_zone = rset->get<uint16>("entrance_zone");
         data.time_limit    = rset->get<uint16>("time_limit");
         data.start_x       = rset->get<float>("start_x");

@@ -43,7 +43,7 @@ void GP_CLI_COMMAND_CHARREQ::process(MapSession* PSession, CCharEntity* PChar) c
     CBaseEntity* PEntity = PChar->GetEntity(this->ActIndex, TYPE_NPC | TYPE_PC | TYPE_SHIP);
     if (!PEntity)
     {
-        const auto fullId = ((4096 + PChar->getZone()) << 12) + this->ActIndex;
+        const auto fullId = ((4096 + static_cast<uint16>(PChar->getZone())) << 12) + this->ActIndex;
         ShowWarningFmt("Could not look up entity <{}, {}> in zone <{} ({})>",
                        this->ActIndex,
                        fullId,

@@ -18,7 +18,6 @@ set(ENUMS_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/key_items.h
     ${CMAKE_CURRENT_SOURCE_DIR}/loot_recast.h
     ${CMAKE_CURRENT_SOURCE_DIR}/mission_log.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/music_slot.h
     ${CMAKE_CURRENT_SOURCE_DIR}/msg_basic.h
     ${CMAKE_CURRENT_SOURCE_DIR}/msg_std.h
     ${CMAKE_CURRENT_SOURCE_DIR}/packet_c2s.h

@@ -335,7 +335,7 @@ void data_session::read_func()
 
             uint32 ZoneIP   = 0;
             uint16 ZonePort = 0;
-            uint16 ZoneID   = 0;
+            auto   ZoneID   = xi::ZoneId::Unknown;
             uint16 PrevZone = 0;
             uint16 gmlevel  = 0;
 
@@ -348,7 +348,7 @@ void data_session::read_func()
 
             if (rset && rset->rowsCount() && rset->next())
             {
-                ZoneID   = rset->get<uint16>("zoneid");
+                ZoneID   = rset->get<xi::ZoneId>("zoneid");
                 PrevZone = rset->get<uint16>("pos_prevzone");
                 gmlevel  = rset->get<uint16>("gmlevel");
 

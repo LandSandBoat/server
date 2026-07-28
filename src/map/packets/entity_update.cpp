@@ -392,7 +392,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
                 // Giga hack -- mobs in Pso'Xja for some reason are less "visible"
                 // Set CliPriorityFlag to force them to render on the client if they receive 0x00Es
                 // TODO: make this a MOBMOD or some other way to set this flag without hardcoding.
-                if (PMob->getZone() == ZONEID::ZONE_PSOXJA)
+                if (PMob->getZone() == xi::ZoneId::Psoxja)
                 {
                     // Enable CliPriorityFlag
                     ref<uint8>(0x28) |= 0x20;

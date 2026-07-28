@@ -399,7 +399,7 @@ void CCharUpdatePacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 
             packet->GrapIDTbl[0] = PChar->m_PMonstrosity->Look;
             packet->GrapIDTbl[8] = 0xFFFF;
             // Sword & Shield icon only shows outside of the Feretory
-            if (PChar->m_PMonstrosity->Belligerency && PChar->loc.zone->GetID() != ZONE_FERETORY)
+            if (PChar->m_PMonstrosity->Belligerency && PChar->loc.zone->GetID() != xi::ZoneId::Feretory)
             {
                 packet->Flags3.BallistaTeam |= 0x08; // 0x18?
             }

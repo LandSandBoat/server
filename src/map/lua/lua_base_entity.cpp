@@ -1664,7 +1664,7 @@ bool CLuaBaseEntity::needToZone(const sol::object& arg0)
 
         if (writeZoning)
         {
-            PChar->setCharVar("[generic]mustZone", PChar->getZone());
+            PChar->setCharVar("[generic]mustZone", static_cast<int32>(PChar->getZone()));
             return true;
         }
 
@@ -2735,7 +2735,7 @@ void CLuaBaseEntity::setWeather(xi::Weather weatherType)
  *  Notes   : Used for mounting Chocobo and changing Jeuno music in Winter
  ************************************************************************/
 
-void CLuaBaseEntity::changeMusic(MusicSlot slotId, uint16 trackId) const
+void CLuaBaseEntity::changeMusic(xi::MusicSlot slotId, uint16 trackId) const
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -3100,7 +3100,7 @@ auto CLuaBaseEntity::getZone(const sol::object& arg0) -> CZone*
     {
         return m_PBaseEntity->loc.zone;
     }
-    else if (m_PBaseEntity->loc.destination && (arg0 != sol::lua_nil) && arg0.is<bool>() && arg0.as<bool>() != false)
+    else if (m_PBaseEntity->loc.destination != xi::ZoneId::Unknown && (arg0 != sol::lua_nil) && arg0.is<bool>() && arg0.as<bool>() != false)
     {
         return zoneutils::GetZone(m_PBaseEntity->loc.destination);
     }
@@ -3115,7 +3115,7 @@ auto CLuaBaseEntity::getZone(const sol::object& arg0) -> CZone*
  *  Notes   :
  ************************************************************************/
 
-uint16 CLuaBaseEntity::getZoneID()
+auto CLuaBaseEntity::getZoneID() -> xi::ZoneId
 {
     return m_PBaseEntity->getZone();
 }
@@ -3164,7 +3164,7 @@ bool CLuaBaseEntity::hasVisitedZone(uint16 zone)
  *  Notes   : Useful for returning players to their last position
  ************************************************************************/
 
-uint16 CLuaBaseEntity::getPreviousZone()
+auto CLuaBaseEntity::getPreviousZone() -> xi::ZoneId
 {
     return m_PBaseEntity->loc.prevzone;
 }
@@ -3578,8 +3578,8 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
 
         if (va[4].is<double>())
         {
-            auto zoneid = va[4].as<uint16>();
-            if (zoneid >= MAX_ZONEID)
+            const auto zoneid = va[4].as<xi::ZoneId>();
+            if (static_cast<uint16>(zoneid) >= MAX_ZONEID)
             {
                 return;
             }
@@ -4214,14 +4214,14 @@ void CLuaBaseEntity::resetPlayer(const char* charName)
                      "boundary = ?, "
                      "moghouse = ? "
                      "WHERE charid = ?",
-                     ZONE_LOWER_JEUNO, // pos_zone
-                     ZONE_LOWER_JEUNO, // prev zone
-                     86,               // rotation
-                     33.464f,          // x
-                     -5.000f,          // y
-                     69.162f,          // z
-                     0,                // boundary,
-                     0,                // moghouse,
+                     xi::ZoneId::LowerJeuno, // pos_zone
+                     xi::ZoneId::LowerJeuno, // prev zone
+                     86,                     // rotation
+                     33.464f,                // x
+                     -5.000f,                // y
+                     69.162f,                // z
+                     0,                      // boundary,
+                     0,                      // moghouse,
                      id);
 
     ShowDebug("Player reset was successful.");

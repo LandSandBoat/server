@@ -92,7 +92,7 @@ GP_SERV_COMMAND_GROUP_TBL::GP_SERV_COMMAND_GROUP_TBL(CParty* PParty, const bool 
                     packet.GroupTbl[i].AllianceRFlg      = 0;
                     packet.GroupTbl[i].unknown06         = 0;
                     packet.GroupTbl[i].unknown07         = 0;
-                    packet.GroupTbl[i].ZoneNo            = PTrust->getZone();
+                    packet.GroupTbl[i].ZoneNo            = static_cast<uint16>(PTrust->getZone());
                     i++;
                 }
             }

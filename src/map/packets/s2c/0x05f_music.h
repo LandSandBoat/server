@@ -22,7 +22,7 @@
 #pragma once
 
 #include "base.h"
-#include "enums/music_slot.h"
+#include "data/enums/music_slot.h"
 
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x005F
 // This packet is sent by the server to update a music file to be played.
@@ -31,9 +31,9 @@ class GP_SERV_COMMAND_MUSIC final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COM
 public:
     struct PacketData
     {
-        MusicSlot Slot;
-        uint16_t  MusicNum;
+        xi::MusicSlot Slot;
+        uint16_t      MusicNum;
     };
 
-    GP_SERV_COMMAND_MUSIC(MusicSlot slotId, uint16 trackId);
+    GP_SERV_COMMAND_MUSIC(xi::MusicSlot slotId, uint16 trackId);
 };

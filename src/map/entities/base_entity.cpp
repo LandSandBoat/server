@@ -98,9 +98,9 @@ const std::string& CBaseEntity::getPacketName()
     return packetName;
 }
 
-uint16 CBaseEntity::getZone() const
+auto CBaseEntity::getZone() const -> xi::ZoneId
 {
-    return loc.zone != nullptr ? (uint16)loc.zone->GetID() : (uint16)loc.destination;
+    return loc.zone != nullptr ? loc.zone->GetID() : loc.destination;
 }
 
 float CBaseEntity::GetXPos() const

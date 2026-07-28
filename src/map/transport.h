@@ -103,7 +103,7 @@ struct Elevator_t
     uint8 id;
     uint8 state;
 
-    uint16                    zoneID;
+    xi::ZoneId                zoneID;
     vanadiel_time::time_point lastTrigger;
 
     vanadiel_time::duration interval;

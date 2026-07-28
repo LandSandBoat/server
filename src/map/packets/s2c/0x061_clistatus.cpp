@@ -75,7 +75,7 @@ GP_SERV_COMMAND_CLISTATUS::GP_SERV_COMMAND_CLISTATUS(CCharEntity* PChar)
     packet.statusdata.designation = PChar->profile.title;
     packet.statusdata.rank        = PChar->profile.rank[PChar->profile.nation];
     packet.statusdata.rankbar     = PChar->profile.rankpoints;
-    packet.statusdata.BindZoneNo  = PChar->profile.home_point.destination;
+    packet.statusdata.BindZoneNo  = static_cast<uint16>(PChar->profile.home_point.destination);
     packet.statusdata.nation      = PChar->profile.nation;
 
     packet.statusdata.su_lv        = PChar->getMod(xi::Mod::SUPERIOR_LEVEL);

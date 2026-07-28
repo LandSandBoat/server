@@ -109,7 +109,7 @@ void CLuaClientEntityPairBCNM::expectWin(sol::optional<sol::table> params) const
 
 void CLuaClientEntityPairBCNM::enter(const sol::object& npcQuery, const uint16 bcnmId, sol::optional<sol::table> items) const
 {
-    const uint16 zoneId = parent_->getZoneID();
+    const auto zoneId = parent_->getZoneID();
 
     sol::table                contentsByZone = lua["xi"]["battlefield"]["contentsByZone"];
     sol::optional<sol::table> zoneContent    = contentsByZone[zoneId];

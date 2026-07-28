@@ -48,7 +48,7 @@ uint16 CLuaBattlefield::getID()
     return m_PLuaBattlefield->GetID();
 }
 
-uint16 CLuaBattlefield::getZoneID()
+auto CLuaBattlefield::getZoneID() -> xi::ZoneId
 {
     return m_PLuaBattlefield->GetZoneID();
 }

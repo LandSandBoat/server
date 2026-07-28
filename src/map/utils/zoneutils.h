@@ -41,15 +41,15 @@ namespace detail
 
 struct LazyLoadState
 {
-    bool               enabled{ false };
-    bool               asyncMode{ false };
-    std::set<uint16>   managedZones{};
-    std::queue<uint16> loadQueue{};
+    bool                   enabled{ false };
+    bool                   asyncMode{ false };
+    std::set<xi::ZoneId>   managedZones{};
+    std::queue<xi::ZoneId> loadQueue{};
 };
 
 } // namespace detail
 
-auto LoadZones(Scheduler& scheduler, MapConfig config, const std::vector<uint16>& zoneIds) -> Task<void>;
+auto LoadZones(Scheduler& scheduler, MapConfig config, const std::vector<xi::ZoneId>& zoneIds) -> Task<void>;
 auto LoadZoneList(Scheduler& scheduler, MapConfig config) -> Task<void>;
 auto Initialize(Scheduler& scheduler, MapConfig config) -> Task<void>;
 auto ProcessLoadQueue(Scheduler& scheduler, MapConfig config) -> Task<void>;
@@ -59,35 +59,35 @@ auto IsLazyLoadingEnabled() -> bool;
 // TODO:
 // This shouldn't have side effects, it should be const and the caller should be responsible
 // for requesting the zone is loaded if it isn't ready.
-auto IsZoneReady(Scheduler& scheduler, MapConfig config, uint16 zoneId) -> Task<bool>;
+auto IsZoneReady(Scheduler& scheduler, MapConfig config, xi::ZoneId zoneId) -> Task<bool>;
 
-auto GetManagedZones() -> std::vector<std::pair<uint16, std::string>>;
+auto GetManagedZones() -> std::vector<std::pair<xi::ZoneId, std::string>>;
 void FreeZoneList();
 void InitializeWeather();
 void TOTDChange(vanadiel_time::TOTD TOTD);
 void SavePlayTime();
 
-auto GetCurrentRegion(uint16 zoneId) -> REGION_TYPE;
-auto GetCurrentContinent(uint16 zoneId) -> CONTINENT_TYPE;
+auto GetCurrentRegion(xi::ZoneId zoneId) -> REGION_TYPE;
+auto GetCurrentContinent(xi::ZoneId zoneId) -> CONTINENT_TYPE;
 
 auto GetWeatherElement(xi::Weather weather) -> int;
 
-auto GetZone(uint16 zoneId) -> CZone*;
-auto GetInstanceByRunId(uint16 zoneId, uint32 runId) -> CInstance*; // the live instance of a run, or nullptr if that run has ended
+auto GetZone(xi::ZoneId zoneId) -> CZone*;
+auto GetInstanceByRunId(xi::ZoneId zoneId, uint32 runId) -> CInstance*; // the live instance of a run, or nullptr if that run has ended
 auto GetEntity(uint32 id, uint8 filter = -1) -> CBaseEntity*;
 auto GetCharByName(const std::string& name) -> CCharEntity*;
 auto GetCharFromWorld(uint32 charId, uint16 targId) -> CCharEntity*;  // returns pointer to character by id and target id
 auto GetChar(uint32 charId) -> CCharEntity*;                          // returns pointer to character by id
 auto GetCharToUpdate(uint32 primary, uint32 ternary) -> CCharEntity*; // returns pointer to preferred char to update for party changes
-auto GetZonesAssignedToThisProcess(IPP mapIPP) -> std::vector<uint16>;
-auto IsZoneAssignedToThisProcess(IPP mapIPP, ZONEID zoneId) -> bool;
+auto GetZonesAssignedToThisProcess(IPP mapIPP) -> std::vector<xi::ZoneId>;
+auto IsZoneAssignedToThisProcess(IPP mapIPP, xi::ZoneId zoneId) -> bool;
 void ForEachZone(FnRef<void(CZone*)> func);
-void ForEachZone(const std::vector<uint16>& zoneIds, FnRef<void(CZone*)> func);
-auto GetZoneIPP(uint16 zoneId) -> uint64;                      // returns IPP for zone ID
-auto CanZoneUseMisc(uint16 zoneId, xi::ZoneMisc misc) -> bool; // DB-backed misc check; works for zones on other processes
-auto IsZoneAtPlayerCap(uint16 zoneId, bool isGM) -> bool;      // returns true if the zone is at capacity and the entry should be denied
-auto IsResidentialArea(const CCharEntity* PChar) -> bool;      // returns whether or not the area is a residential zone
-auto IsAlwaysOutOfNationControl(REGION_TYPE region) -> bool;   // returns true if a region should never trigger "in areas outside own nation's control" latent effect; false otherwise.
+void ForEachZone(const std::vector<xi::ZoneId>& zoneIds, FnRef<void(CZone*)> func);
+auto GetZoneIPP(xi::ZoneId zoneId) -> uint64;                      // returns IPP for zone ID
+auto CanZoneUseMisc(xi::ZoneId zoneId, xi::ZoneMisc misc) -> bool; // DB-backed misc check; works for zones on other processes
+auto IsZoneAtPlayerCap(xi::ZoneId zoneId, bool isGM) -> bool;      // returns true if the zone is at capacity and the entry should be denied
+auto IsResidentialArea(const CCharEntity* PChar) -> bool;          // returns whether or not the area is a residential zone
+auto IsAlwaysOutOfNationControl(REGION_TYPE region) -> bool;       // returns true if a region should never trigger "in areas outside own nation's control" latent effect; false otherwise.
 
 void AfterZoneIn(CBaseEntity* PEntity); // triggers after a player has finished zoning in
 

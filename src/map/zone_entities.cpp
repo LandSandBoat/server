@@ -420,7 +420,7 @@ void CZoneEntities::FindPartyForMob(CBaseEntity* PEntity)
     }
 }
 
-void CZoneEntities::TransportDepart(uint16 boundary, uint16 prevZoneId, uint16 transport)
+void CZoneEntities::TransportDepart(uint16 boundary, xi::ZoneId prevZoneId, uint16 transport)
 {
     TracyZoneScoped;
 
@@ -475,7 +475,7 @@ void CZoneEntities::WeatherChange(xi::Weather weather)
     }
 }
 
-void CZoneEntities::MusicChange(MusicSlot slotId, uint16 trackId)
+void CZoneEntities::MusicChange(xi::MusicSlot slotId, uint16 trackId)
 {
     TracyZoneScoped;
 
@@ -660,7 +660,7 @@ void CZoneEntities::AssignDynamicTargIDandLongID(CBaseEntity* PEntity)
     // We found our targid, the next dynamic entity will want to start searching at +1 of this.
     m_nextDynamicTargID = targid + 1;
 
-    auto id = 0x01000000 | (m_zone->GetID() << 0x0C) | (targid + 0x0100);
+    auto id = 0x01000000 | (static_cast<uint32>(m_zone->GetID()) << 0x0C) | (targid + 0x0100);
 
     m_dynamicTargIds.insert(targid);
 
@@ -1045,7 +1045,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
     TracyZoneScoped;
 
     // TODO: This is a temporary fix so that Feretory and Mog Garden _seem_ like a solo zones.
-    if (PChar->loc.zone->GetID() == ZONE_FERETORY || PChar->loc.zone->GetID() == ZONE_MOG_GARDEN)
+    if (PChar->loc.zone->GetID() == xi::ZoneId::Feretory || PChar->loc.zone->GetID() == xi::ZoneId::MogGarden)
     {
         return;
     }
@@ -2110,7 +2110,7 @@ auto CZoneEntities::ZoneServer(timer::time_point tick) -> Task<void>
                 }
             }
         }
-        else if (PChar->loc.destination != 0xFFFF)
+        else if (PChar->loc.destination != ZONE_NO_DESTINATION)
         {
             const bool ready = co_await zoneutils::IsZoneReady(scheduler_, config_, PChar->loc.destination);
             if (ready)

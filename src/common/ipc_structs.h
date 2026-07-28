@@ -25,6 +25,8 @@
 
 #include "common/regional_event.h"
 
+#include "data/enums/zone.h"
+
 #include "map/enums/chat_message_type.h"
 #include "map/enums/msg_std.h"
 #include "map/enums/party_kind.h"
@@ -47,8 +49,8 @@ struct AccountLogin
 
 struct CharZone
 {
-    uint32 charId{};
-    uint16 destinationZoneId{};
+    uint32     charId{};
+    xi::ZoneId destinationZoneId{};
 };
 
 struct CharVarUpdate
@@ -65,7 +67,7 @@ struct ChatMessageTell
     std::string senderName{};
     std::string recipientName{};
     std::string message{};
-    uint16      zoneId{};
+    xi::ZoneId  zoneId{};
     uint8       gmLevel{};
 };
 
@@ -75,7 +77,7 @@ struct ChatMessageParty
     uint32            senderId{};
     std::string       senderName{};
     std::string       message{};
-    uint16            zoneId{};
+    xi::ZoneId        zoneId{};
     uint8             gmLevel{};
     CHAT_MESSAGE_TYPE messageType{ MESSAGE_PARTY };
 };
@@ -86,7 +88,7 @@ struct ChatMessageAlliance
     uint32            senderId{};
     std::string       senderName{};
     std::string       message{};
-    uint16            zoneId{};
+    xi::ZoneId        zoneId{};
     uint8             gmLevel{};
     CHAT_MESSAGE_TYPE messageType{ MESSAGE_PARTY };
 };
@@ -97,7 +99,7 @@ struct ChatMessageLinkshell
     uint32      senderId{};
     std::string senderName{};
     std::string message{};
-    uint16      zoneId{};
+    xi::ZoneId  zoneId{};
     uint8       gmLevel{};
 };
 
@@ -107,7 +109,7 @@ struct ChatMessageUnity
     uint32            senderId{};
     std::string       senderName{};
     std::string       message{};
-    uint16            zoneId{};
+    xi::ZoneId        zoneId{};
     uint8             gmLevel{};
     CHAT_MESSAGE_TYPE messageType{ MESSAGE_UNITY };
 };
@@ -117,7 +119,7 @@ struct ChatMessageYell
     uint32            senderId{};
     std::string       senderName{};
     std::string       message{};
-    uint16            zoneId{};
+    xi::ZoneId        zoneId{};
     uint8             gmLevel{};
     CHAT_MESSAGE_TYPE messageType{ MESSAGE_YELL };
 };
@@ -140,7 +142,7 @@ struct ChatMessageServerMessage
     uint32            senderId{};
     std::string       senderName{};
     std::string       message{};
-    uint16            zoneId{};
+    xi::ZoneId        zoneId{};
     uint8             gmLevel{};
     CHAT_MESSAGE_TYPE messageType{ MESSAGE_SYSTEM_1 };
     bool              skipSender{};
@@ -243,8 +245,8 @@ struct LinkshellSetMessage
 
 struct LuaFunction
 {
-    uint16      requesterZoneId{};
-    uint16      executorZoneId{};
+    xi::ZoneId  requesterZoneId{};
+    xi::ZoneId  executorZoneId{};
     std::string funcString{};
 };
 
@@ -293,23 +295,23 @@ struct EntityInformationResponse
     uint8  entityType{};
     bool   warp{};
 
-    uint16 zoneId{};
-    float  x{};
-    float  y{};
-    float  z{};
-    uint8  rot{};
-    uint32 moghouseId{};
+    xi::ZoneId zoneId{};
+    float      x{};
+    float      y{};
+    float      z{};
+    uint8      rot{};
+    uint32     moghouseId{};
 };
 
 struct SendPlayerToLocation
 {
-    uint32 targetId{};
-    uint16 zoneId{};
-    float  x{};
-    float  y{};
-    float  z{};
-    uint8  rot{};
-    uint32 moghouseId{};
+    uint32     targetId{};
+    xi::ZoneId zoneId{};
+    float      x{};
+    float      y{};
+    float      z{};
+    uint8      rot{};
+    uint32     moghouseId{};
 };
 
 struct AssistChannelEvent
@@ -325,7 +327,7 @@ struct GMCallRequest
     uint32                             charId{};
     std::string                        charName{};
     uint32                             accId{};
-    uint16                             zoneId{};
+    xi::ZoneId                         zoneId{};
     float                              posX{};
     float                              posY{};
     float                              posZ{};

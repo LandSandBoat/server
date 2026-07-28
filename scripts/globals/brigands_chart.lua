@@ -35,10 +35,10 @@ local function resetEvent()
         if player and player:getLocalVar('bChartActive') == 1 then
             player:setLocalVar('bChartActive', 0)
             player:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
-            player:changeMusic(0, 0)
-            player:changeMusic(1, 0)
-            player:changeMusic(2, 101)
-            player:changeMusic(3, 102)
+            player:changeMusic(xi.musicSlot.ZONE_DAY, 0)
+            player:changeMusic(xi.musicSlot.ZONE_NIGHT, 0)
+            player:changeMusic(xi.musicSlot.COMBAT_SOLO, 101)
+            player:changeMusic(xi.musicSlot.COMBAT_PARTY, 102)
         end
 
         qm1:resetLocalVars()
@@ -117,10 +117,10 @@ xi.brigandsChart.onEventUpdate = function(player, csid, option, npc)
         npc:setLocalVar('bChartSpawnerID', player:getID())
 
         player:setLocalVar('bChartActive', 1)
-        player:changeMusic(0, 136)
-        player:changeMusic(1, 136)
-        player:changeMusic(2, 136)
-        player:changeMusic(3, 136)
+        player:changeMusic(xi.musicSlot.ZONE_DAY, 136)
+        player:changeMusic(xi.musicSlot.ZONE_NIGHT, 136)
+        player:changeMusic(xi.musicSlot.COMBAT_SOLO, 136)
+        player:changeMusic(xi.musicSlot.COMBAT_PARTY, 136)
         player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, { power = 20, origin = player }) -- level restriction removed by event end
     end
 end

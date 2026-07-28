@@ -100,8 +100,8 @@ local function setShipMusic(zone, musicId)
     zone:setBackgroundMusicNight(musicId)
 
     for _, player in pairs(zone:getPlayers()) do
-        player:changeMusic(0, musicId) -- Day
-        player:changeMusic(1, musicId) -- Night
+        player:changeMusic(xi.musicSlot.ZONE_DAY, musicId)
+        player:changeMusic(xi.musicSlot.ZONE_NIGHT, musicId)
     end
 end
 

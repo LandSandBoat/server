@@ -22,6 +22,9 @@
 #pragma once
 
 #include "base.h"
+
+#include "data/enums/zone.h"
+
 #include <string>
 
 class CCharEntity;
@@ -70,7 +73,7 @@ public:
         // 4 bytes padding after the name (itself rounded to nearest 4 bytes)
     };
 
-    GP_SERV_COMMAND_GROUP_LIST(const CCharEntity* PChar, uint8_t MemberNumber, uint16_t memberflags, uint16_t ZoneID);
+    GP_SERV_COMMAND_GROUP_LIST(const CCharEntity* PChar, uint8_t MemberNumber, uint16_t memberflags, xi::ZoneId ZoneID);
     GP_SERV_COMMAND_GROUP_LIST(const CTrustEntity* PTrust, uint8_t MemberNumber);
-    GP_SERV_COMMAND_GROUP_LIST(uint32_t id, const std::string& name, uint16_t memberFlags, uint8_t MemberNumber, uint16_t ZoneID);
+    GP_SERV_COMMAND_GROUP_LIST(uint32_t id, const std::string& name, uint16_t memberFlags, uint8_t MemberNumber, xi::ZoneId ZoneID);
 };

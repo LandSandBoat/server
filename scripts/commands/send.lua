@@ -356,7 +356,7 @@ commandObj.onTrigger = function(player, bytes)
         if tonumber(dest) ~= nil then
             -- destination is a zone ID.
             zone = tonumber(dest)
-            if zone < 0 or zone >= xi.zone.MAX_ZONE then
+            if zone < 0 or zone > xi.zone.GWORA_THRONE_ROOM then
                 error(player, 'Invalid zone ID.')
                 return
             end

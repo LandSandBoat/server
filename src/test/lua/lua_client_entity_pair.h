@@ -28,11 +28,11 @@
 #include "helpers/lua_client_entity_pair_packets.h"
 #include "lua_test_entity.h"
 
+#include "data/enums/zone.h"
+
 #include <memory>
 
 #include <common/types/maybe.h>
-
-enum ZONEID : uint16;
 
 class CLuaSimulation;
 class TestChar;
@@ -45,8 +45,8 @@ public:
     ~CLuaClientEntityPair() override;
 
     void tick();
-    void gotoZone(ZONEID zoneId, sol::optional<sol::table> pos);
-    void gotoMogHouse(ZONEID zoneId);
+    void gotoZone(xi::ZoneId zoneId, sol::optional<sol::table> pos);
+    void gotoMogHouse(xi::ZoneId zoneId);
     auto isPendingZone() const -> bool;
     auto getItemInvSlot(uint16 itemId, uint8 quantity) const -> Maybe<uint16>;
     void claimAndKillMob(const sol::object& mobQuery, sol::optional<sol::table> params);
@@ -66,7 +66,7 @@ public:
     static void Register();
 
 private:
-    void doGotoZone(ZONEID zoneId, sol::optional<sol::table> pos, bool mogHouse);
+    void doGotoZone(xi::ZoneId zoneId, sol::optional<sol::table> pos, bool mogHouse);
 
     std::unique_ptr<TestChar> testChar_;
     CLuaSimulation*           simulation_;

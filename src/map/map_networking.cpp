@@ -39,7 +39,7 @@
 #include "zone.h"
 #include "zone_entities.h"
 
-extern std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
+extern std::map<xi::ZoneId, CZone*> g_PZoneList; // Global array of pointers for zones
 
 MapNetworking::MapNetworking(Scheduler& scheduler, MapStatistics& mapStatistics, MapConfig config)
 : scheduler_(scheduler)

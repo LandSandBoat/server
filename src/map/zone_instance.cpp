@@ -28,7 +28,7 @@
 #include "utils/charutils.h"
 #include "utils/zoneutils.h"
 
-CZoneInstance::CZoneInstance(Scheduler& scheduler, MapConfig config, ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction)
+CZoneInstance::CZoneInstance(Scheduler& scheduler, MapConfig config, xi::ZoneId ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction)
 : CZone(scheduler, config, ZoneID, RegionID, ContinentID, levelRestriction)
 {
     TracyZoneScoped;
@@ -148,7 +148,7 @@ void CZoneInstance::FindPartyForMob(CBaseEntity* PEntity)
     }
 }
 
-void CZoneInstance::TransportDepart(uint16 boundary, uint16 prevZoneId, uint16 transportId)
+void CZoneInstance::TransportDepart(uint16 boundary, xi::ZoneId prevZoneId, uint16 transportId)
 {
     TracyZoneScoped;
 
@@ -249,7 +249,7 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
                         .c_str());
 
         // instance no longer exists: put them outside (at exit)
-        uint16 zoneid = luautils::OnInstanceLoadFailed(this);
+        auto zoneid = luautils::OnInstanceLoadFailed(this);
 
         CZone* PZone = zoneutils::GetZone(zoneid);
         // At this stage, can only send the player to a zone on this map server

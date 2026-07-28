@@ -13,6 +13,14 @@ local mobType =
     SPECIAL = 3,
 }
 
+local chamberMusicSlots =
+{
+    xi.musicSlot.ZONE_DAY,
+    xi.musicSlot.ZONE_NIGHT,
+    xi.musicSlot.COMBAT_SOLO,
+    xi.musicSlot.COMBAT_PARTY,
+}
+
 local function playersCount(players)
     local count = 0
     for _ in pairs(players) do
@@ -475,8 +483,8 @@ xi.einherjar.onChamberEnter = function(chamberData, player, reconnecting)
     player:addListener('DEATH', 'EINHERJAR_DEATH', utils.bind(onPlayerDeath, chamberData))
     -- TODO: Add to chamber treasure pool
 
-    for i = 0, 3 do
-        player:changeMusic(i, 0x8F)
+    for _, slot in ipairs(chamberMusicSlots) do
+        player:changeMusic(slot, 0x8F)
     end
 
     chamberData.players[playerId] = player
@@ -541,8 +549,8 @@ xi.einherjar.onChamberExit = function(chamberData, player, isZoningOut)
         -- TODO: Remove from chamber treasure pool
         -- TODO: If last player to leave pool, pool is forcefully flushed
 
-        for i = 0, 3 do
-            player:changeMusic(i, 0x0)
+        for _, slot in ipairs(chamberMusicSlots) do
+            player:changeMusic(slot, 0x0)
         end
     end
 end

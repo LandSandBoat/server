@@ -100,7 +100,7 @@ auto IPCServer::getIPPForCharName(const std::string& charName) -> Maybe<IPP>
     return std::nullopt;
 }
 
-auto IPCServer::getIPPForZoneId(uint16 zoneId) -> Maybe<IPP>
+auto IPCServer::getIPPForZoneId(const xi::ZoneId zoneId) -> Maybe<IPP>
 {
     TracyZoneScoped;
 
@@ -274,7 +274,7 @@ void IPCServer::rerouteMessageToCharName(const std::string& charName, const auto
     }
 }
 
-void IPCServer::rerouteMessageToZoneId(uint16 zoneId, const auto& message)
+void IPCServer::rerouteMessageToZoneId(const xi::ZoneId zoneId, const auto& message)
 {
     TracyZoneScoped;
 
@@ -405,7 +405,7 @@ void IPCServer::handleMessage_CharZone(const IPP& ipp, const ipc::CharZone& mess
     TracyZoneScoped;
 
     // Update cache
-    if (message.destinationZoneId == 0xFFFF)
+    if (message.destinationZoneId == ZONE_NO_DESTINATION)
     {
         characterCache_.removeCharacter(message.charId);
     }
@@ -620,8 +620,8 @@ void IPCServer::handleMessage_KillSession(const IPP& ipp, const ipc::KillSession
     // Get zone ID from query and try to send to _just_ the previous zone
     if (rset && rset->rowsCount() && rset->next())
     {
-        const auto prevZoneID = rset->get<uint32>("pos_prevzone");
-        const auto nextZoneID = rset->get<uint32>("pos_zone");
+        const auto prevZoneID = rset->get<xi::ZoneId>("pos_prevzone");
+        const auto nextZoneID = rset->get<xi::ZoneId>("pos_zone");
 
         if (prevZoneID != nextZoneID)
         {
@@ -688,7 +688,7 @@ void IPCServer::handleMessage_EntityInformationRequest(const IPP& ipp, const ipc
     }
     else
     {
-        const auto zoneId = (message.targetId >> 12) & 0x0FFF;
+        const auto zoneId = static_cast<xi::ZoneId>((message.targetId >> 12) & 0x0FFF);
         rerouteMessageToZoneId(zoneId, message);
     }
 }

@@ -43,9 +43,9 @@ private:
 
     struct APIDataCache
     {
-        uint32                                 activeSessionCount;
-        uint32                                 activeUniqueIPCount;
-        std::array<uint32, ZONEID::MAX_ZONEID> zonePlayerCounts;
+        uint32                         activeSessionCount;
+        uint32                         activeUniqueIPCount;
+        std::array<uint32, MAX_ZONEID> zonePlayerCounts;
     };
 
     SynchronizedShared<APIDataCache> apiDataCache_;

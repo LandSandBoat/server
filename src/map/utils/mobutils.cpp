@@ -155,7 +155,7 @@ uint16 GetBaseWeaponDamage(CMobEntity* PMob, uint16 slot)
 
     // Normal mobs in beginner zones have the offset lowered by 1.
     // Excluded NMs for now for things like Voidwatch Mobs.
-    if (mobZoneId != 0 && PMob->m_Type != xi::MobType::Notorious && (mobZoneId == ZONE_WEST_RONFAURE || mobZoneId == ZONE_EAST_RONFAURE || mobZoneId == ZONE_NORTH_GUSTABERG || mobZoneId == ZONE_SOUTH_GUSTABERG || mobZoneId == ZONE_WEST_SARUTABARUTA || mobZoneId == ZONE_EAST_SARUTABARUTA))
+    if (mobZoneId != xi::ZoneId::Unknown && PMob->m_Type != xi::MobType::Notorious && (mobZoneId == xi::ZoneId::WestRonfaure || mobZoneId == xi::ZoneId::EastRonfaure || mobZoneId == xi::ZoneId::NorthGustaberg || mobZoneId == xi::ZoneId::SouthGustaberg || mobZoneId == xi::ZoneId::WestSarutabaruta || mobZoneId == xi::ZoneId::EastSarutabaruta))
     {
         offset -= 1;
         rangedOffset -= 1;
@@ -453,101 +453,101 @@ uint16 GetSubJobStats(uint8 rank, uint16 level, uint16 stat)
  ************************************************************************/
 bool CheckSubJobZone(CMobEntity* PMob)
 {
-    auto zoneId = PMob->getZone();
-    if (zoneId != 0 && (zoneId == ZONE_WEST_RONFAURE ||
-                        zoneId == ZONE_EAST_RONFAURE ||
-                        zoneId == ZONE_LA_THEINE_PLATEAU ||
-                        zoneId == ZONE_VALKURM_DUNES ||
-                        zoneId == ZONE_JUGNER_FOREST ||
-                        zoneId == ZONE_BATALLIA_DOWNS ||
-                        zoneId == ZONE_NORTH_GUSTABERG ||
-                        zoneId == ZONE_SOUTH_GUSTABERG ||
-                        zoneId == ZONE_KONSCHTAT_HIGHLANDS ||
-                        zoneId == ZONE_PASHHOW_MARSHLANDS ||
-                        zoneId == ZONE_ROLANBERRY_FIELDS ||
-                        zoneId == ZONE_BEAUCEDINE_GLACIER ||
-                        zoneId == ZONE_XARCABARD ||
-                        zoneId == ZONE_CAPE_TERIGGAN ||
-                        zoneId == ZONE_EASTERN_ALTEPA_DESERT ||
-                        zoneId == ZONE_WEST_SARUTABARUTA ||
-                        zoneId == ZONE_EAST_SARUTABARUTA ||
-                        zoneId == ZONE_TAHRONGI_CANYON ||
-                        zoneId == ZONE_BUBURIMU_PENINSULA ||
-                        zoneId == ZONE_MERIPHATAUD_MOUNTAINS ||
-                        zoneId == ZONE_SAUROMUGUE_CHAMPAIGN ||
-                        zoneId == ZONE_THE_SANCTUARY_OF_ZITAH ||
-                        zoneId == ZONE_ROMAEVE ||
-                        zoneId == ZONE_YUHTUNGA_JUNGLE ||
-                        zoneId == ZONE_YHOATOR_JUNGLE ||
-                        zoneId == ZONE_WESTERN_ALTEPA_DESERT ||
-                        zoneId == ZONE_QUFIM_ISLAND ||
-                        zoneId == ZONE_BEHEMOTHS_DOMINION ||
-                        zoneId == ZONE_VALLEY_OF_SORROWS ||
-                        zoneId == ZONE_HORLAIS_PEAK ||
-                        zoneId == ZONE_GHELSBA_OUTPOST ||
-                        zoneId == ZONE_FORT_GHELSBA ||
-                        zoneId == ZONE_YUGHOTT_GROTTO ||
-                        zoneId == ZONE_PALBOROUGH_MINES ||
-                        zoneId == ZONE_WAUGHROON_SHRINE ||
-                        zoneId == ZONE_GIDDEUS ||
-                        zoneId == ZONE_BALGAS_DAIS ||
-                        zoneId == ZONE_BEADEAUX ||
-                        zoneId == ZONE_QULUN_DOME ||
-                        zoneId == ZONE_DAVOI ||
-                        zoneId == ZONE_MONASTIC_CAVERN ||
-                        zoneId == ZONE_CASTLE_OZTROJA ||
-                        zoneId == ZONE_ALTAR_ROOM ||
-                        zoneId == ZONE_THE_BOYAHDA_TREE ||
-                        zoneId == ZONE_DRAGONS_AERY ||
-                        zoneId == ZONE_MIDDLE_DELKFUTTS_TOWER ||
-                        zoneId == ZONE_UPPER_DELKFUTTS_TOWER ||
-                        zoneId == ZONE_TEMPLE_OF_UGGALEPIH ||
-                        zoneId == ZONE_DEN_OF_RANCOR ||
-                        zoneId == ZONE_CASTLE_ZVAHL_BAILEYS ||
-                        zoneId == ZONE_CASTLE_ZVAHL_KEEP ||
-                        zoneId == ZONE_SACRIFICIAL_CHAMBER ||
-                        zoneId == ZONE_THRONE_ROOM ||
-                        zoneId == ZONE_RANGUEMONT_PASS ||
-                        zoneId == ZONE_BOSTAUNIEUX_OUBLIETTE ||
-                        zoneId == ZONE_CHAMBER_OF_ORACLES ||
-                        zoneId == ZONE_TORAIMARAI_CANAL ||
-                        zoneId == ZONE_FULL_MOON_FOUNTAIN ||
-                        zoneId == ZONE_ZERUHN_MINES ||
-                        zoneId == ZONE_KORROLOKA_TUNNEL ||
-                        zoneId == ZONE_KUFTAL_TUNNEL ||
-                        zoneId == ZONE_SEA_SERPENT_GROTTO ||
-                        zoneId == ZONE_VELUGANNON_PALACE ||
-                        zoneId == ZONE_THE_SHRINE_OF_RUAVITAU ||
-                        zoneId == ZONE_STELLAR_FULCRUM ||
-                        zoneId == ZONE_LALOFF_AMPHITHEATER ||
-                        zoneId == ZONE_THE_CELESTIAL_NEXUS ||
-                        zoneId == ZONE_LOWER_DELKFUTTS_TOWER ||
-                        zoneId == ZONE_KING_RANPERRES_TOMB ||
-                        zoneId == ZONE_DANGRUF_WADI ||
-                        zoneId == ZONE_INNER_HORUTOTO_RUINS ||
-                        zoneId == ZONE_ORDELLES_CAVES ||
-                        zoneId == ZONE_OUTER_HORUTOTO_RUINS ||
-                        zoneId == ZONE_THE_ELDIEME_NECROPOLIS ||
-                        zoneId == ZONE_GUSGEN_MINES ||
-                        zoneId == ZONE_CRAWLERS_NEST ||
-                        zoneId == ZONE_MAZE_OF_SHAKHRAMI ||
-                        zoneId == ZONE_GARLAIGE_CITADEL ||
-                        zoneId == ZONE_CLOISTER_OF_GALES ||
-                        zoneId == ZONE_CLOISTER_OF_STORMS ||
-                        zoneId == ZONE_CLOISTER_OF_FROST ||
-                        zoneId == ZONE_FEIYIN ||
-                        zoneId == ZONE_IFRITS_CAULDRON ||
-                        zoneId == ZONE_QUBIA_ARENA ||
-                        zoneId == ZONE_CLOISTER_OF_FLAMES ||
-                        zoneId == ZONE_QUICKSAND_CAVES ||
-                        zoneId == ZONE_CLOISTER_OF_TREMORS ||
-                        zoneId == ZONE_CLOISTER_OF_TIDES ||
-                        zoneId == ZONE_GUSTAV_TUNNEL ||
-                        zoneId == ZONE_LABYRINTH_OF_ONZOZO ||
-                        zoneId == ZONE_SHIP_BOUND_FOR_SELBINA ||
-                        zoneId == ZONE_SHIP_BOUND_FOR_MHAURA ||
-                        zoneId == ZONE_SHIP_BOUND_FOR_SELBINA_PIRATES ||
-                        zoneId == ZONE_SHIP_BOUND_FOR_MHAURA_PIRATES))
+    const auto zoneId = PMob->getZone();
+    if (zoneId != xi::ZoneId::Unknown && (zoneId == xi::ZoneId::WestRonfaure ||
+                                          zoneId == xi::ZoneId::EastRonfaure ||
+                                          zoneId == xi::ZoneId::LaTheinePlateau ||
+                                          zoneId == xi::ZoneId::ValkurmDunes ||
+                                          zoneId == xi::ZoneId::JugnerForest ||
+                                          zoneId == xi::ZoneId::BatalliaDowns ||
+                                          zoneId == xi::ZoneId::NorthGustaberg ||
+                                          zoneId == xi::ZoneId::SouthGustaberg ||
+                                          zoneId == xi::ZoneId::KonschtatHighlands ||
+                                          zoneId == xi::ZoneId::PashhowMarshlands ||
+                                          zoneId == xi::ZoneId::RolanberryFields ||
+                                          zoneId == xi::ZoneId::BeaucedineGlacier ||
+                                          zoneId == xi::ZoneId::Xarcabard ||
+                                          zoneId == xi::ZoneId::CapeTeriggan ||
+                                          zoneId == xi::ZoneId::EasternAltepaDesert ||
+                                          zoneId == xi::ZoneId::WestSarutabaruta ||
+                                          zoneId == xi::ZoneId::EastSarutabaruta ||
+                                          zoneId == xi::ZoneId::TahrongiCanyon ||
+                                          zoneId == xi::ZoneId::BuburimuPeninsula ||
+                                          zoneId == xi::ZoneId::MeriphataudMountains ||
+                                          zoneId == xi::ZoneId::SauromugueChampaign ||
+                                          zoneId == xi::ZoneId::TheSanctuaryOfZitah ||
+                                          zoneId == xi::ZoneId::Romaeve ||
+                                          zoneId == xi::ZoneId::YuhtungaJungle ||
+                                          zoneId == xi::ZoneId::YhoatorJungle ||
+                                          zoneId == xi::ZoneId::WesternAltepaDesert ||
+                                          zoneId == xi::ZoneId::QufimIsland ||
+                                          zoneId == xi::ZoneId::BehemothsDominion ||
+                                          zoneId == xi::ZoneId::ValleyOfSorrows ||
+                                          zoneId == xi::ZoneId::HorlaisPeak ||
+                                          zoneId == xi::ZoneId::GhelsbaOutpost ||
+                                          zoneId == xi::ZoneId::FortGhelsba ||
+                                          zoneId == xi::ZoneId::YughottGrotto ||
+                                          zoneId == xi::ZoneId::PalboroughMines ||
+                                          zoneId == xi::ZoneId::WaughroonShrine ||
+                                          zoneId == xi::ZoneId::Giddeus ||
+                                          zoneId == xi::ZoneId::BalgasDais ||
+                                          zoneId == xi::ZoneId::Beadeaux ||
+                                          zoneId == xi::ZoneId::QulunDome ||
+                                          zoneId == xi::ZoneId::Davoi ||
+                                          zoneId == xi::ZoneId::MonasticCavern ||
+                                          zoneId == xi::ZoneId::CastleOztroja ||
+                                          zoneId == xi::ZoneId::AltarRoom ||
+                                          zoneId == xi::ZoneId::TheBoyahdaTree ||
+                                          zoneId == xi::ZoneId::DragonsAery ||
+                                          zoneId == xi::ZoneId::MiddleDelkfuttsTower ||
+                                          zoneId == xi::ZoneId::UpperDelkfuttsTower ||
+                                          zoneId == xi::ZoneId::TempleOfUggalepih ||
+                                          zoneId == xi::ZoneId::DenOfRancor ||
+                                          zoneId == xi::ZoneId::CastleZvahlBaileys ||
+                                          zoneId == xi::ZoneId::CastleZvahlKeep ||
+                                          zoneId == xi::ZoneId::SacrificialChamber ||
+                                          zoneId == xi::ZoneId::ThroneRoom ||
+                                          zoneId == xi::ZoneId::RanguemontPass ||
+                                          zoneId == xi::ZoneId::BostaunieuxOubliette ||
+                                          zoneId == xi::ZoneId::ChamberOfOracles ||
+                                          zoneId == xi::ZoneId::ToraimaraiCanal ||
+                                          zoneId == xi::ZoneId::FullMoonFountain ||
+                                          zoneId == xi::ZoneId::ZeruhnMines ||
+                                          zoneId == xi::ZoneId::KorrolokaTunnel ||
+                                          zoneId == xi::ZoneId::KuftalTunnel ||
+                                          zoneId == xi::ZoneId::SeaSerpentGrotto ||
+                                          zoneId == xi::ZoneId::VelugannonPalace ||
+                                          zoneId == xi::ZoneId::TheShrineOfRuavitau ||
+                                          zoneId == xi::ZoneId::StellarFulcrum ||
+                                          zoneId == xi::ZoneId::LaloffAmphitheater ||
+                                          zoneId == xi::ZoneId::TheCelestialNexus ||
+                                          zoneId == xi::ZoneId::LowerDelkfuttsTower ||
+                                          zoneId == xi::ZoneId::KingRanperresTomb ||
+                                          zoneId == xi::ZoneId::DangrufWadi ||
+                                          zoneId == xi::ZoneId::InnerHorutotoRuins ||
+                                          zoneId == xi::ZoneId::OrdellesCaves ||
+                                          zoneId == xi::ZoneId::OuterHorutotoRuins ||
+                                          zoneId == xi::ZoneId::TheEldiemeNecropolis ||
+                                          zoneId == xi::ZoneId::GusgenMines ||
+                                          zoneId == xi::ZoneId::CrawlersNest ||
+                                          zoneId == xi::ZoneId::MazeOfShakhrami ||
+                                          zoneId == xi::ZoneId::GarlaigeCitadel ||
+                                          zoneId == xi::ZoneId::CloisterOfGales ||
+                                          zoneId == xi::ZoneId::CloisterOfStorms ||
+                                          zoneId == xi::ZoneId::CloisterOfFrost ||
+                                          zoneId == xi::ZoneId::Feiyin ||
+                                          zoneId == xi::ZoneId::IfritsCauldron ||
+                                          zoneId == xi::ZoneId::QubiaArena ||
+                                          zoneId == xi::ZoneId::CloisterOfFlames ||
+                                          zoneId == xi::ZoneId::QuicksandCaves ||
+                                          zoneId == xi::ZoneId::CloisterOfTremors ||
+                                          zoneId == xi::ZoneId::CloisterOfTides ||
+                                          zoneId == xi::ZoneId::GustavTunnel ||
+                                          zoneId == xi::ZoneId::LabyrinthOfOnzozo ||
+                                          zoneId == xi::ZoneId::ShipBoundForSelbina ||
+                                          zoneId == xi::ZoneId::ShipBoundForMhaura ||
+                                          zoneId == xi::ZoneId::ShipBoundForSelbinaPirates ||
+                                          zoneId == xi::ZoneId::ShipBoundForMhauraPirates))
     {
         return true;
     }
@@ -1365,11 +1365,11 @@ void SetupDungeonInstanceMob(CMobEntity* PMob)
     PMob->SetDespawnTime(0s);
     PMob->setMobMod(xi::MobMod::NoDespawn, 1);
     // Salvage and Nyzul
-    if (PMob->getZone() >= ZONE_ZHAYOLM_REMNANTS && PMob->getZone() <= ZONE_NYZUL_ISLE)
+    if (PMob->getZone() >= xi::ZoneId::ZhayolmRemnants && PMob->getZone() <= xi::ZoneId::NyzulIsle)
     {
         // Salvage and Nyzul mobs can not be charmed
         PMob->setMobMod(xi::MobMod::Charmable, 0);
-        if (PMob->getZone() != ZONE_NYZUL_ISLE)
+        if (PMob->getZone() != xi::ZoneId::NyzulIsle)
         {
             PMob->setMobMod(xi::MobMod::CheckAsNm, 1);
         }
@@ -1438,7 +1438,7 @@ void InitializeMob(CMobEntity* PMob)
 
     if (PMob->m_maxLevel == 0 && PMob->m_minLevel == 0)
     {
-        if (PMob->getZone() >= 1 && PMob->getZone() <= 252)
+        if (const auto mobZone = static_cast<uint16>(PMob->getZone()); mobZone >= 1 && mobZone <= 252)
         {
             ShowError("Mob %s level is 0! zoneid %d, poolid %d", PMob->getName(), PMob->getZone(), PMob->m_Pool);
         }
@@ -1676,7 +1676,7 @@ void AddSqlModifiers(CMobEntity* PMob)
     }
 }
 
-auto InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* instance) -> CMobEntity*
+auto InstantiateAlly(const uint32 groupid, const xi::ZoneId zoneID, CInstance* instance) -> CMobEntity*
 {
     CMobEntity* PMob = nullptr;
 
@@ -1860,7 +1860,7 @@ auto InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* instance) -> CMob
     return PMob;
 }
 
-auto InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZoneId) -> CMobEntity*
+auto InstantiateDynamicMob(const uint32 groupid, const xi::ZoneId groupZoneId, const xi::ZoneId targetZoneId) -> CMobEntity*
 {
     auto* PMob = new CMobEntity();
 

@@ -49,7 +49,7 @@
 
 #include <fmt/ranges.h>
 
-std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
+std::map<xi::ZoneId, CZone*> g_PZoneList; // Global array of pointers for zones
 
 namespace zoneutils
 {
@@ -104,7 +104,7 @@ void SavePlayTime()
     ShowDebug("Player playtime saving finished");
 }
 
-auto GetZone(uint16 zoneId) -> CZone*
+auto GetZone(const xi::ZoneId zoneId) -> CZone*
 {
     if (g_PZoneList.contains(zoneId))
     {
@@ -114,7 +114,7 @@ auto GetZone(uint16 zoneId) -> CZone*
     return nullptr;
 }
 
-auto GetInstanceByRunId(const uint16 zoneId, const uint32 runId) -> CInstance*
+auto GetInstanceByRunId(const xi::ZoneId zoneId, const uint32 runId) -> CInstance*
 {
     auto* PZoneInstance = dynamic_cast<CZoneInstance*>(GetZone(zoneId));
     return PZoneInstance ? PZoneInstance->getInstanceByRunId(runId) : nullptr;
@@ -123,7 +123,7 @@ auto GetInstanceByRunId(const uint16 zoneId, const uint32 runId) -> CInstance*
 auto GetEntity(const uint32 id, const uint8 filter) -> CBaseEntity*
 {
     const uint16 DynamicEntityStart = 0x700;
-    const uint16 zoneID             = (id >> 12) & 0x0FFF;
+    const auto   zoneID             = static_cast<xi::ZoneId>((id >> 12) & 0x0FFF);
     if (CZone* PZone = GetZone(zoneID))
     {
         return PZone->GetEntity(static_cast<uint16>(id & 0x00000800 ? (id & 0x7FF) + DynamicEntityStart : id & 0xFFF), filter);
@@ -149,7 +149,7 @@ auto GetCharFromWorld(const uint32 charId, const uint16 targId) -> CCharEntity*
 {
     for (auto [zoneId, PZone] : g_PZoneList)
     {
-        if (zoneId == 0)
+        if (zoneId == xi::ZoneId::Unknown)
         {
             continue;
         }
@@ -218,7 +218,7 @@ auto GetCharToUpdate(uint32 primary, uint32 tertiary) -> CCharEntity*
     return PTertiary;
 }
 
-auto GetZonesAssignedToThisProcess(const IPP mapIPP) -> std::vector<uint16>
+auto GetZonesAssignedToThisProcess(const IPP mapIPP) -> std::vector<xi::ZoneId>
 {
     const auto ip    = mapIPP.getIP();
     const auto ipStr = mapIPP.getIPString();
@@ -233,21 +233,21 @@ auto GetZonesAssignedToThisProcess(const IPP mapIPP) -> std::vector<uint16>
                                         ipStr,
                                         port);
 
-    std::vector<uint16> zonesOnThisProcess;
+    std::vector<xi::ZoneId> zonesOnThisProcess;
 
     const auto rset = db::preparedStmt(zonesQuery);
     if (rset && rset->rowsCount())
     {
         while (rset->next())
         {
-            zonesOnThisProcess.emplace_back(rset->get<uint16>("zoneid"));
+            zonesOnThisProcess.emplace_back(rset->get<xi::ZoneId>("zoneid"));
         }
     }
 
     return zonesOnThisProcess;
 }
 
-auto IsZoneAssignedToThisProcess(const IPP mapIPP, const ZONEID zoneId) -> bool
+auto IsZoneAssignedToThisProcess(const IPP mapIPP, const xi::ZoneId zoneId) -> bool
 {
     for (const auto zone : GetZonesAssignedToThisProcess(mapIPP))
     {
@@ -266,7 +266,7 @@ auto IsZoneAssignedToThisProcess(const IPP mapIPP, const ZONEID zoneId) -> bool
  *                                                                       *
  ************************************************************************/
 
-auto LoadNPCList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Task<void>
+auto LoadNPCList(Scheduler& scheduler, const std::vector<xi::ZoneId>& zoneIds) -> Task<void>
 {
     TracyZoneScoped;
 
@@ -401,7 +401,7 @@ auto LoadNPCList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
  *                                                                       *
  ************************************************************************/
 
-auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Task<void>
+auto LoadMOBList(Scheduler& scheduler, const std::vector<xi::ZoneId>& zoneIds) -> Task<void>
 {
     TracyZoneScoped;
 
@@ -743,7 +743,7 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<uint16>& zoneIds) -> Ta
  *                                                                       *
  ************************************************************************/
 
-auto CreateZone(Scheduler& scheduler, MapConfig config, uint16 ZoneID) -> CZone*
+auto CreateZone(Scheduler& scheduler, MapConfig config, const xi::ZoneId ZoneID) -> CZone*
 {
     const auto query = "SELECT zonetype, restriction FROM zone_settings "
                        "WHERE zoneid = ? LIMIT 1";
@@ -756,10 +756,10 @@ auto CreateZone(Scheduler& scheduler, MapConfig config, uint16 ZoneID) -> CZone*
 
         if ((zoneType & xi::ZoneType::Instanced) != xi::ZoneType::Unknown)
         {
-            return new CZoneInstance(scheduler, config, static_cast<ZONEID>(ZoneID), GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID), restriction);
+            return new CZoneInstance(scheduler, config, ZoneID, GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID), restriction);
         }
 
-        return new CZone(scheduler, config, static_cast<ZONEID>(ZoneID), GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID), restriction);
+        return new CZone(scheduler, config, ZoneID, GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID), restriction);
     }
 
     ShowCritical("zoneutils::CreateZone: Cannot load zone settings (%u)", ZoneID);
@@ -772,9 +772,9 @@ auto CreateZone(Scheduler& scheduler, MapConfig config, uint16 ZoneID) -> CZone*
  *                                                                       *
  ************************************************************************/
 
-auto LoadZones(Scheduler& scheduler, MapConfig config, const std::vector<uint16>& zoneIds) -> Task<void>
+auto LoadZones(Scheduler& scheduler, MapConfig config, const std::vector<xi::ZoneId>& zoneIds) -> Task<void>
 {
-    std::vector<uint16> zonesIdsToLoad;
+    std::vector<xi::ZoneId> zonesIdsToLoad;
 
     for (const auto zoneId : zoneIds)
     {
@@ -797,11 +797,11 @@ auto LoadZones(Scheduler& scheduler, MapConfig config, const std::vector<uint16>
         g_PZoneList[zoneId] = CreateZone(scheduler, config, zoneId);
     }
 
-    if (!g_PZoneList.contains(0))
+    if (!g_PZoneList.contains(xi::ZoneId::Unknown))
     {
         // False positive: "performance: Searching before insertion is not necessary."
         // cppcheck-suppress stlFindInsert
-        g_PZoneList[0] = CreateZone(scheduler, config, 0);
+        g_PZoneList[xi::ZoneId::Unknown] = CreateZone(scheduler, config, xi::ZoneId::Unknown);
     }
 
     // Phase 1: Load ximeshes (navmesh build depends on ximesh)
@@ -910,9 +910,9 @@ auto IsLazyLoadingEnabled() -> bool
 // Returns all zones managed by this process (ID and name)
 // - Lazy mode: queries database for zone names
 // - Immediate mode: uses already-loaded zone objects
-auto GetManagedZones() -> std::vector<std::pair<uint16, std::string>>
+auto GetManagedZones() -> std::vector<std::pair<xi::ZoneId, std::string>>
 {
-    std::vector<std::pair<uint16, std::string>> result;
+    std::vector<std::pair<xi::ZoneId, std::string>> result;
 
     // Lazy loading enabled: fetch from database
     if (!lazyLoad.managedZones.empty())
@@ -922,7 +922,7 @@ auto GetManagedZones() -> std::vector<std::pair<uint16, std::string>>
         const auto rset  = db::preparedStmt(query);
         FOR_DB_MULTIPLE_RESULTS(rset)
         {
-            result.emplace_back(rset->get<uint16>("zoneid"), rset->get<std::string>("name"));
+            result.emplace_back(rset->get<xi::ZoneId>("zoneid"), rset->get<std::string>("name"));
         }
     }
     // Lazy loading disabled: use loaded zone objects
@@ -940,7 +940,7 @@ auto GetManagedZones() -> std::vector<std::pair<uint16, std::string>>
 // TODO:
 // This shouldn't have side effects, it should be const and the caller should be responsible
 // for requesting the zone is loaded if it isn't ready.
-auto IsZoneReady(Scheduler& scheduler, MapConfig config, uint16 zoneId) -> Task<bool>
+auto IsZoneReady(Scheduler& scheduler, MapConfig config, xi::ZoneId zoneId) -> Task<bool>
 {
     // Zone already loaded, or lazy loading disabled (all zones loaded at startup)
     if (GetZone(zoneId) || !lazyLoad.enabled)
@@ -972,304 +972,306 @@ auto IsZoneReady(Scheduler& scheduler, MapConfig config, uint16 zoneId) -> Task<
  *                                                                       *
  ************************************************************************/
 
-auto GetCurrentRegion(const uint16 zoneId) -> REGION_TYPE
+auto GetCurrentRegion(const xi::ZoneId zoneId) -> REGION_TYPE
 {
     switch (zoneId)
     {
-        case ZONE_BOSTAUNIEUX_OUBLIETTE:
-        case ZONE_EAST_RONFAURE:
-        case ZONE_FORT_GHELSBA:
-        case ZONE_GHELSBA_OUTPOST:
-        case ZONE_HORLAIS_PEAK:
-        case ZONE_KING_RANPERRES_TOMB:
-        case ZONE_WEST_RONFAURE:
-        case ZONE_YUGHOTT_GROTTO:
+        case xi::ZoneId::BostaunieuxOubliette:
+        case xi::ZoneId::EastRonfaure:
+        case xi::ZoneId::FortGhelsba:
+        case xi::ZoneId::GhelsbaOutpost:
+        case xi::ZoneId::HorlaisPeak:
+        case xi::ZoneId::KingRanperresTomb:
+        case xi::ZoneId::WestRonfaure:
+        case xi::ZoneId::YughottGrotto:
             return REGION_TYPE::RONFAURE;
-        case ZONE_GUSGEN_MINES:
-        case ZONE_KONSCHTAT_HIGHLANDS:
-        case ZONE_LA_THEINE_PLATEAU:
-        case ZONE_ORDELLES_CAVES:
-        case ZONE_SELBINA:
-        case ZONE_VALKURM_DUNES:
+        case xi::ZoneId::GusgenMines:
+        case xi::ZoneId::KonschtatHighlands:
+        case xi::ZoneId::LaTheinePlateau:
+        case xi::ZoneId::OrdellesCaves:
+        case xi::ZoneId::Selbina:
+        case xi::ZoneId::ValkurmDunes:
             return REGION_TYPE::ZULKHEIM;
-        case ZONE_BATALLIA_DOWNS:
-        case ZONE_CARPENTERS_LANDING:
-        case ZONE_DAVOI:
-        case ZONE_THE_ELDIEME_NECROPOLIS:
-        case ZONE_JUGNER_FOREST:
-        case ZONE_MONASTIC_CAVERN:
-        case ZONE_PHANAUET_CHANNEL:
+        case xi::ZoneId::BatalliaDowns:
+        case xi::ZoneId::CarpentersLanding:
+        case xi::ZoneId::Davoi:
+        case xi::ZoneId::TheEldiemeNecropolis:
+        case xi::ZoneId::JugnerForest:
+        case xi::ZoneId::MonasticCavern:
+        case xi::ZoneId::PhanauetChannel:
             return REGION_TYPE::NORVALLEN;
-        case ZONE_DANGRUF_WADI:
-        case ZONE_KORROLOKA_TUNNEL:
-        case ZONE_NORTH_GUSTABERG:
-        case ZONE_PALBOROUGH_MINES:
-        case ZONE_SOUTH_GUSTABERG:
-        case ZONE_WAUGHROON_SHRINE:
-        case ZONE_ZERUHN_MINES:
+        case xi::ZoneId::DangrufWadi:
+        case xi::ZoneId::KorrolokaTunnel:
+        case xi::ZoneId::NorthGustaberg:
+        case xi::ZoneId::PalboroughMines:
+        case xi::ZoneId::SouthGustaberg:
+        case xi::ZoneId::WaughroonShrine:
+        case xi::ZoneId::ZeruhnMines:
             return REGION_TYPE::GUSTABERG;
-        case ZONE_BEADEAUX:
-        case ZONE_CRAWLERS_NEST:
-        case ZONE_PASHHOW_MARSHLANDS:
-        case ZONE_QULUN_DOME:
-        case ZONE_ROLANBERRY_FIELDS:
+        case xi::ZoneId::Beadeaux:
+        case xi::ZoneId::CrawlersNest:
+        case xi::ZoneId::PashhowMarshlands:
+        case xi::ZoneId::QulunDome:
+        case xi::ZoneId::RolanberryFields:
             return REGION_TYPE::DERFLAND;
-        case ZONE_BALGAS_DAIS:
-        case ZONE_EAST_SARUTABARUTA:
-        case ZONE_FULL_MOON_FOUNTAIN:
-        case ZONE_GIDDEUS:
-        case ZONE_INNER_HORUTOTO_RUINS:
-        case ZONE_OUTER_HORUTOTO_RUINS:
-        case ZONE_TORAIMARAI_CANAL:
-        case ZONE_WEST_SARUTABARUTA:
+        case xi::ZoneId::BalgasDais:
+        case xi::ZoneId::EastSarutabaruta:
+        case xi::ZoneId::FullMoonFountain:
+        case xi::ZoneId::Giddeus:
+        case xi::ZoneId::InnerHorutotoRuins:
+        case xi::ZoneId::OuterHorutotoRuins:
+        case xi::ZoneId::ToraimaraiCanal:
+        case xi::ZoneId::WestSarutabaruta:
             return REGION_TYPE::SARUTABARUTA;
-        case ZONE_BIBIKI_BAY:
-        case ZONE_BUBURIMU_PENINSULA:
-        case ZONE_LABYRINTH_OF_ONZOZO:
-        case ZONE_MANACLIPPER:
-        case ZONE_MAZE_OF_SHAKHRAMI:
-        case ZONE_MHAURA:
-        case ZONE_TAHRONGI_CANYON:
+        case xi::ZoneId::BibikiBay:
+        case xi::ZoneId::BuburimuPeninsula:
+        case xi::ZoneId::LabyrinthOfOnzozo:
+        case xi::ZoneId::Manaclipper:
+        case xi::ZoneId::MazeOfShakhrami:
+        case xi::ZoneId::Mhaura:
+        case xi::ZoneId::TahrongiCanyon:
             return REGION_TYPE::KOLSHUSHU;
-        case ZONE_ALTAR_ROOM:
-        case ZONE_ATTOHWA_CHASM:
-        case ZONE_BONEYARD_GULLY:
-        case ZONE_CASTLE_OZTROJA:
-        case ZONE_GARLAIGE_CITADEL:
-        case ZONE_MERIPHATAUD_MOUNTAINS:
-        case ZONE_SAUROMUGUE_CHAMPAIGN:
+        case xi::ZoneId::AltarRoom:
+        case xi::ZoneId::AttohwaChasm:
+        case xi::ZoneId::BoneyardGully:
+        case xi::ZoneId::CastleOztroja:
+        case xi::ZoneId::GarlaigeCitadel:
+        case xi::ZoneId::MeriphataudMountains:
+        case xi::ZoneId::SauromugueChampaign:
             return REGION_TYPE::ARAGONEU;
-        case ZONE_BEAUCEDINE_GLACIER:
-        case ZONE_CLOISTER_OF_FROST:
-        case ZONE_FEIYIN:
-        case ZONE_PSOXJA:
-        case ZONE_QUBIA_ARENA:
-        case ZONE_RANGUEMONT_PASS:
-        case ZONE_THE_SHROUDED_MAW:
+        case xi::ZoneId::BeaucedineGlacier:
+        case xi::ZoneId::CloisterOfFrost:
+        case xi::ZoneId::Feiyin:
+        case xi::ZoneId::Psoxja:
+        case xi::ZoneId::QubiaArena:
+        case xi::ZoneId::RanguemontPass:
+        case xi::ZoneId::TheShroudedMaw:
             return REGION_TYPE::FAUREGANDI;
-        case ZONE_BEARCLAW_PINNACLE:
-        case ZONE_CASTLE_ZVAHL_BAILEYS:
-        case ZONE_CASTLE_ZVAHL_KEEP:
-        case ZONE_THRONE_ROOM:
-        case ZONE_ULEGUERAND_RANGE:
-        case ZONE_XARCABARD:
+        case xi::ZoneId::BearclawPinnacle:
+        case xi::ZoneId::CastleZvahlBaileys:
+        case xi::ZoneId::CastleZvahlKeep:
+        case xi::ZoneId::ThroneRoom:
+        case xi::ZoneId::UleguerandRange:
+        case xi::ZoneId::Xarcabard:
             return REGION_TYPE::VALDEAUNIA;
-        case ZONE_BEHEMOTHS_DOMINION:
-        case ZONE_LOWER_DELKFUTTS_TOWER:
-        case ZONE_MIDDLE_DELKFUTTS_TOWER:
-        case ZONE_QUFIM_ISLAND:
-        case ZONE_STELLAR_FULCRUM:
-        case ZONE_UPPER_DELKFUTTS_TOWER:
+        case xi::ZoneId::BehemothsDominion:
+        case xi::ZoneId::LowerDelkfuttsTower:
+        case xi::ZoneId::MiddleDelkfuttsTower:
+        case xi::ZoneId::QufimIsland:
+        case xi::ZoneId::StellarFulcrum:
+        case xi::ZoneId::UpperDelkfuttsTower:
             return REGION_TYPE::QUFIMISLAND;
-        case ZONE_THE_BOYAHDA_TREE:
-        case ZONE_CLOISTER_OF_STORMS:
-        case ZONE_DRAGONS_AERY:
-        case ZONE_HALL_OF_THE_GODS:
-        case ZONE_ROMAEVE:
-        case ZONE_THE_SANCTUARY_OF_ZITAH:
+        case xi::ZoneId::TheBoyahdaTree:
+        case xi::ZoneId::CloisterOfStorms:
+        case xi::ZoneId::DragonsAery:
+        case xi::ZoneId::HallOfTheGods:
+        case xi::ZoneId::Romaeve:
+        case xi::ZoneId::TheSanctuaryOfZitah:
             return REGION_TYPE::LITELOR;
-        case ZONE_CLOISTER_OF_TREMORS:
-        case ZONE_EASTERN_ALTEPA_DESERT:
-        case ZONE_CHAMBER_OF_ORACLES:
-        case ZONE_QUICKSAND_CAVES:
-        case ZONE_RABAO:
-        case ZONE_WESTERN_ALTEPA_DESERT:
+        case xi::ZoneId::CloisterOfTremors:
+        case xi::ZoneId::EasternAltepaDesert:
+        case xi::ZoneId::ChamberOfOracles:
+        case xi::ZoneId::QuicksandCaves:
+        case xi::ZoneId::Rabao:
+        case xi::ZoneId::WesternAltepaDesert:
             return REGION_TYPE::KUZOTZ;
-        case ZONE_CAPE_TERIGGAN:
-        case ZONE_CLOISTER_OF_GALES:
-        case ZONE_GUSTAV_TUNNEL:
-        case ZONE_KUFTAL_TUNNEL:
-        case ZONE_VALLEY_OF_SORROWS:
+        case xi::ZoneId::CapeTeriggan:
+        case xi::ZoneId::CloisterOfGales:
+        case xi::ZoneId::GustavTunnel:
+        case xi::ZoneId::KuftalTunnel:
+        case xi::ZoneId::ValleyOfSorrows:
             return REGION_TYPE::VOLLBOW;
-        case ZONE_KAZHAM:
-        case ZONE_NORG:
-        case ZONE_SEA_SERPENT_GROTTO:
-        case ZONE_YUHTUNGA_JUNGLE:
+        case xi::ZoneId::Kazham:
+        case xi::ZoneId::Norg:
+        case xi::ZoneId::SeaSerpentGrotto:
+        case xi::ZoneId::YuhtungaJungle:
             return REGION_TYPE::ELSHIMO_LOWLANDS;
-        case ZONE_CLOISTER_OF_FLAMES:
-        case ZONE_CLOISTER_OF_TIDES:
-        case ZONE_DEN_OF_RANCOR:
-        case ZONE_IFRITS_CAULDRON:
-        case ZONE_SACRIFICIAL_CHAMBER:
-        case ZONE_TEMPLE_OF_UGGALEPIH:
-        case ZONE_YHOATOR_JUNGLE:
+        case xi::ZoneId::CloisterOfFlames:
+        case xi::ZoneId::CloisterOfTides:
+        case xi::ZoneId::DenOfRancor:
+        case xi::ZoneId::IfritsCauldron:
+        case xi::ZoneId::SacrificialChamber:
+        case xi::ZoneId::TempleOfUggalepih:
+        case xi::ZoneId::YhoatorJungle:
             return REGION_TYPE::ELSHIMO_UPLANDS;
-        case ZONE_THE_CELESTIAL_NEXUS:
-        case ZONE_LALOFF_AMPHITHEATER:
-        case ZONE_RUAUN_GARDENS:
-        case ZONE_THE_SHRINE_OF_RUAVITAU:
-        case ZONE_VELUGANNON_PALACE:
+        case xi::ZoneId::TheCelestialNexus:
+        case xi::ZoneId::LaloffAmphitheater:
+        case xi::ZoneId::RuaunGardens:
+        case xi::ZoneId::TheShrineOfRuavitau:
+        case xi::ZoneId::VelugannonPalace:
             return REGION_TYPE::TULIA;
-        case ZONE_MINE_SHAFT_2716:
-        case ZONE_NEWTON_MOVALPOLOS:
-        case ZONE_OLDTON_MOVALPOLOS:
+        case xi::ZoneId::MineShaft2716:
+        case xi::ZoneId::NewtonMovalpolos:
+        case xi::ZoneId::OldtonMovalpolos:
             return REGION_TYPE::MOVALPOLOS;
-        case ZONE_LUFAISE_MEADOWS:
-        case ZONE_MISAREAUX_COAST:
-        case ZONE_MONARCH_LINN:
-        case ZONE_PHOMIUNA_AQUEDUCTS:
-        case ZONE_RIVERNE_SITE_A01:
-        case ZONE_RIVERNE_SITE_B01:
-        case ZONE_SACRARIUM:
-        case ZONE_SEALIONS_DEN:
+        case xi::ZoneId::LufaiseMeadows:
+        case xi::ZoneId::MisareauxCoast:
+        case xi::ZoneId::MonarchLinn:
+        case xi::ZoneId::PhomiunaAqueducts:
+        case xi::ZoneId::RiverneSiteA01:
+        case xi::ZoneId::RiverneSiteB01:
+        case xi::ZoneId::Sacrarium:
+        case xi::ZoneId::SealionsDen:
             return REGION_TYPE::TAVNAZIA;
-        case ZONE_TAVNAZIAN_SAFEHOLD:
+        case xi::ZoneId::TavnazianSafehold:
             return REGION_TYPE::TAVNAZIAN_MARQ;
-        case ZONE_SOUTHERN_SANDORIA:
-        case ZONE_NORTHERN_SANDORIA:
-        case ZONE_PORT_SANDORIA:
-        case ZONE_CHATEAU_DORAGUILLE:
+        case xi::ZoneId::SouthernSanDoria:
+        case xi::ZoneId::NorthernSanDoria:
+        case xi::ZoneId::PortSanDoria:
+        case xi::ZoneId::ChateauDoraguille:
             return REGION_TYPE::SANDORIA;
-        case ZONE_BASTOK_MINES:
-        case ZONE_BASTOK_MARKETS:
-        case ZONE_PORT_BASTOK:
-        case ZONE_METALWORKS:
+        case xi::ZoneId::BastokMines:
+        case xi::ZoneId::BastokMarkets:
+        case xi::ZoneId::PortBastok:
+        case xi::ZoneId::Metalworks:
             return REGION_TYPE::BASTOK;
-        case ZONE_WINDURST_WATERS:
-        case ZONE_WINDURST_WALLS:
-        case ZONE_PORT_WINDURST:
-        case ZONE_WINDURST_WOODS:
-        case ZONE_HEAVENS_TOWER:
+        case xi::ZoneId::WindurstWaters:
+        case xi::ZoneId::WindurstWalls:
+        case xi::ZoneId::PortWindurst:
+        case xi::ZoneId::WindurstWoods:
+        case xi::ZoneId::HeavensTower:
             return REGION_TYPE::WINDURST;
-        case ZONE_RULUDE_GARDENS:
-        case ZONE_UPPER_JEUNO:
-        case ZONE_LOWER_JEUNO:
-        case ZONE_PORT_JEUNO:
+        case xi::ZoneId::RuludeGardens:
+        case xi::ZoneId::UpperJeuno:
+        case xi::ZoneId::LowerJeuno:
+        case xi::ZoneId::PortJeuno:
             return REGION_TYPE::JEUNO;
-        case ZONE_DYNAMIS_BASTOK:
-        case ZONE_DYNAMIS_BEAUCEDINE:
-        case ZONE_DYNAMIS_BUBURIMU:
-        case ZONE_DYNAMIS_JEUNO:
-        case ZONE_DYNAMIS_QUFIM:
-        case ZONE_DYNAMIS_SAN_DORIA:
-        case ZONE_DYNAMIS_TAVNAZIA:
-        case ZONE_DYNAMIS_VALKURM:
-        case ZONE_DYNAMIS_WINDURST:
-        case ZONE_DYNAMIS_XARCABARD:
+        case xi::ZoneId::DynamisBastok:
+        case xi::ZoneId::DynamisBeaucedine:
+        case xi::ZoneId::DynamisBuburimu:
+        case xi::ZoneId::DynamisJeuno:
+        case xi::ZoneId::DynamisQufim:
+        case xi::ZoneId::DynamisSanDoria:
+        case xi::ZoneId::DynamisTavnazia:
+        case xi::ZoneId::DynamisValkurm:
+        case xi::ZoneId::DynamisWindurst:
+        case xi::ZoneId::DynamisXarcabard:
             return REGION_TYPE::DYNAMIS;
-        case ZONE_PROMYVION_DEM:
-        case ZONE_PROMYVION_HOLLA:
-        case ZONE_PROMYVION_MEA:
-        case ZONE_PROMYVION_VAHZL:
-        case ZONE_SPIRE_OF_DEM:
-        case ZONE_SPIRE_OF_HOLLA:
-        case ZONE_SPIRE_OF_MEA:
-        case ZONE_SPIRE_OF_VAHZL:
-        case ZONE_HALL_OF_TRANSFERENCE:
+        case xi::ZoneId::PromyvionDem:
+        case xi::ZoneId::PromyvionHolla:
+        case xi::ZoneId::PromyvionMea:
+        case xi::ZoneId::PromyvionVahzl:
+        case xi::ZoneId::SpireOfDem:
+        case xi::ZoneId::SpireOfHolla:
+        case xi::ZoneId::SpireOfMea:
+        case xi::ZoneId::SpireOfVahzl:
+        case xi::ZoneId::HallOfTransference:
             return REGION_TYPE::PROMYVION;
-        case ZONE_ALTAIEU:
-        case ZONE_EMPYREAL_PARADOX:
-        case ZONE_THE_GARDEN_OF_RUHMET:
-        case ZONE_GRAND_PALACE_OF_HUXZOI:
+        case xi::ZoneId::Altaieu:
+        case xi::ZoneId::EmpyrealParadox:
+        case xi::ZoneId::TheGardenOfRuhmet:
+        case xi::ZoneId::GrandPalaceOfHuxzoi:
             return REGION_TYPE::LUMORIA;
-        case ZONE_APOLLYON:
-        case ZONE_TEMENOS:
+        case xi::ZoneId::Apollyon:
+        case xi::ZoneId::Temenos:
             return REGION_TYPE::LIMBUS;
-        case ZONE_AL_ZAHBI:
-        case ZONE_AHT_URHGAN_WHITEGATE:
-        case ZONE_BHAFLAU_THICKETS:
-        case ZONE_THE_COLOSSEUM:
+        case xi::ZoneId::AlZahbi:
+        case xi::ZoneId::AhtUrhganWhitegate:
+        case xi::ZoneId::BhaflauThickets:
+        case xi::ZoneId::TheColosseum:
             return REGION_TYPE::WEST_AHT_URHGAN;
-        case ZONE_MAMOOL_JA_TRAINING_GROUNDS:
-        case ZONE_MAMOOK:
-        case ZONE_WAJAOM_WOODLANDS:
-        case ZONE_AYDEEWA_SUBTERRANE:
-        case ZONE_JADE_SEPULCHER:
+        case xi::ZoneId::MamoolJaTrainingGrounds:
+        case xi::ZoneId::Mamook:
+        case xi::ZoneId::WajaomWoodlands:
+        case xi::ZoneId::AydeewaSubterrane:
+        case xi::ZoneId::JadeSepulcher:
             return REGION_TYPE::MAMOOL_JA_SAVAGE;
-        case ZONE_HALVUNG:
-        case ZONE_MOUNT_ZHAYOLM:
-        case ZONE_LEBROS_CAVERN:
-        case ZONE_NAVUKGO_EXECUTION_CHAMBER:
+        case xi::ZoneId::Halvung:
+        case xi::ZoneId::MountZhayolm:
+        case xi::ZoneId::LebrosCavern:
+        case xi::ZoneId::NavukgoExecutionChamber:
             return REGION_TYPE::HALVUNG;
-        case ZONE_ARRAPAGO_REEF:
-        case ZONE_CAEDARVA_MIRE:
-        case ZONE_LEUJAOAM_SANCTUM:
-        case ZONE_NASHMAU:
-        case ZONE_HAZHALM_TESTING_GROUNDS:
-        case ZONE_TALACCA_COVE:
-        case ZONE_PERIQIA:
+        case xi::ZoneId::ArrapagoReef:
+        case xi::ZoneId::CaedarvaMire:
+        case xi::ZoneId::LeujaoamSanctum:
+        case xi::ZoneId::Nashmau:
+        case xi::ZoneId::HazhalmTestingGrounds:
+        case xi::ZoneId::TalaccaCove:
+        case xi::ZoneId::Periqia:
             return REGION_TYPE::ARRAPAGO;
-        case ZONE_NYZUL_ISLE:
-        case ZONE_ARRAPAGO_REMNANTS:
-        case ZONE_ALZADAAL_UNDERSEA_RUINS:
-        case ZONE_BHAFLAU_REMNANTS:
-        case ZONE_SILVER_SEA_REMNANTS:
-        case ZONE_ZHAYOLM_REMNANTS:
+        case xi::ZoneId::NyzulIsle:
+        case xi::ZoneId::ArrapagoRemnants:
+        case xi::ZoneId::AlzadaalUnderseaRuins:
+        case xi::ZoneId::BhaflauRemnants:
+        case xi::ZoneId::SilverSeaRemnants:
+        case xi::ZoneId::ZhayolmRemnants:
             return REGION_TYPE::ALZADAAL;
-        case ZONE_SOUTHERN_SAN_DORIA_S:
-        case ZONE_EAST_RONFAURE_S:
+        case xi::ZoneId::SouthernSanDoriaS:
+        case xi::ZoneId::EastRonfaureS:
             return REGION_TYPE::RONFAURE_FRONT;
-        case ZONE_BASTOK_MARKETS_S:
-        case ZONE_NORTH_GUSTABERG_S:
-        case ZONE_RUHOTZ_SILVERMINES:
-        case ZONE_GRAUBERG_S:
+        case xi::ZoneId::BastokMarketsS:
+        case xi::ZoneId::NorthGustabergS:
+        case xi::ZoneId::RuhotzSilvermines:
+        case xi::ZoneId::GraubergS:
             return REGION_TYPE::GUSTABERG_FRONT;
-        case ZONE_WINDURST_WATERS_S:
-        case ZONE_WEST_SARUTABARUTA_S:
-        case ZONE_GHOYUS_REVERIE:
-        case ZONE_FORT_KARUGO_NARUGO_S:
+        case xi::ZoneId::WindurstWatersS:
+        case xi::ZoneId::WestSarutabarutaS:
+        case xi::ZoneId::GhoyusReverie:
+        case xi::ZoneId::FortKarugoNarugoS:
             return REGION_TYPE::SARUTA_FRONT;
-        case ZONE_BATALLIA_DOWNS_S:
-        case ZONE_JUGNER_FOREST_S:
-        case ZONE_LA_VAULE_S:
-        case ZONE_EVERBLOOM_HOLLOW:
-        case ZONE_THE_ELDIEME_NECROPOLIS_S:
+        case xi::ZoneId::BatalliaDownsS:
+        case xi::ZoneId::JugnerForestS:
+        case xi::ZoneId::LaVauleS:
+        case xi::ZoneId::EverbloomHollow:
+        case xi::ZoneId::TheEldiemeNecropolisS:
             return REGION_TYPE::NORVALLEN_FRONT;
-        case ZONE_ROLANBERRY_FIELDS_S:
-        case ZONE_PASHHOW_MARSHLANDS_S:
-        case ZONE_CRAWLERS_NEST_S:
-        case ZONE_BEADEAUX_S:
-        case ZONE_VUNKERL_INLET_S:
+        case xi::ZoneId::RolanberryFieldsS:
+        case xi::ZoneId::PashhowMarshlandsS:
+        case xi::ZoneId::CrawlersNestS:
+        case xi::ZoneId::BeadeauxS:
+        case xi::ZoneId::VunkerlInletS:
             return REGION_TYPE::DERFLAND_FRONT;
-        case ZONE_SAUROMUGUE_CHAMPAIGN_S:
-        case ZONE_MERIPHATAUD_MOUNTAINS_S:
-        case ZONE_CASTLE_OZTROJA_S:
-        case ZONE_GARLAIGE_CITADEL_S:
+        case xi::ZoneId::SauromugueChampaignS:
+        case xi::ZoneId::MeriphataudMountainsS:
+        case xi::ZoneId::CastleOztrojaS:
+        case xi::ZoneId::GarlaigeCitadelS:
             return REGION_TYPE::ARAGONEAU_FRONT;
-        case ZONE_BEAUCEDINE_GLACIER_S:
+        case xi::ZoneId::BeaucedineGlacierS:
             return REGION_TYPE::FAUREGANDI_FRONT;
-        case ZONE_XARCABARD_S:
-        case ZONE_CASTLE_ZVAHL_BAILEYS_S:
-        case ZONE_CASTLE_ZVAHL_KEEP_S:
-        case ZONE_THRONE_ROOM_S:
+        case xi::ZoneId::XarcabardS:
+        case xi::ZoneId::CastleZvahlBaileysS:
+        case xi::ZoneId::CastleZvahlKeepS:
+        case xi::ZoneId::ThroneRoomS:
             return REGION_TYPE::VALDEAUNIA_FRONT;
-        case ZONE_ABYSSEA_ALTEPA:
-        case ZONE_ABYSSEA_ATTOHWA:
-        case ZONE_ABYSSEA_EMPYREAL_PARADOX:
-        case ZONE_ABYSSEA_GRAUBERG:
-        case ZONE_ABYSSEA_KONSCHTAT:
-        case ZONE_ABYSSEA_LA_THEINE:
-        case ZONE_ABYSSEA_MISAREAUX:
-        case ZONE_ABYSSEA_TAHRONGI:
-        case ZONE_ABYSSEA_ULEGUERAND:
-        case ZONE_ABYSSEA_VUNKERL:
+        case xi::ZoneId::AbysseaAltepa:
+        case xi::ZoneId::AbysseaAttohwa:
+        case xi::ZoneId::AbysseaEmpyrealParadox:
+        case xi::ZoneId::AbysseaGrauberg:
+        case xi::ZoneId::AbysseaKonschtat:
+        case xi::ZoneId::AbysseaLaTheine:
+        case xi::ZoneId::AbysseaMisareaux:
+        case xi::ZoneId::AbysseaTahrongi:
+        case xi::ZoneId::AbysseaUleguerand:
+        case xi::ZoneId::AbysseaVunkerl:
             return REGION_TYPE::ABYSSEA;
-        case ZONE_WALK_OF_ECHOES:
+        case xi::ZoneId::WalkOfEchoes:
             return REGION_TYPE::THE_THRESHOLD;
-        case ZONE_DIORAMA_ABDHALJS_GHELSBA:
-        case ZONE_ABDHALJS_ISLE_PURGONORGO:
-        case ZONE_MAQUETTE_ABDHALJS_LEGION_A:
-        case ZONE_MAQUETTE_ABDHALJS_LEGION_B:
+        case xi::ZoneId::DioramaAbdhaljsGhelsba:
+        case xi::ZoneId::AbdhaljsIslePurgonorgo:
+        case xi::ZoneId::MaquetteAbdhaljsLegionA:
+        case xi::ZoneId::MaquetteAbdhaljsLegionB:
             return REGION_TYPE::ABDHALJS;
-        case ZONE_WESTERN_ADOULIN:
-        case ZONE_EASTERN_ADOULIN:
-        case ZONE_RALA_WATERWAYS:
-        case ZONE_RALA_WATERWAYS_U:
+        case xi::ZoneId::WesternAdoulin:
+        case xi::ZoneId::EasternAdoulin:
+        case xi::ZoneId::RalaWaterways:
+        case xi::ZoneId::RalaWaterwaysU:
             return REGION_TYPE::ADOULIN_ISLANDS;
-        case ZONE_CEIZAK_BATTLEGROUNDS:
-        case ZONE_FORET_DE_HENNETIEL:
-        case ZONE_SIH_GATES:
-        case ZONE_MOH_GATES:
-        case ZONE_CIRDAS_CAVERNS:
-        case ZONE_CIRDAS_CAVERNS_U:
-        case ZONE_YAHSE_HUNTING_GROUNDS:
-        case ZONE_MORIMAR_BASALT_FIELDS:
+        case xi::ZoneId::CeizakBattlegrounds:
+        case xi::ZoneId::ForetDeHennetiel:
+        case xi::ZoneId::SihGates:
+        case xi::ZoneId::MohGates:
+        case xi::ZoneId::CirdasCaverns:
+        case xi::ZoneId::CirdasCavernsU:
+        case xi::ZoneId::YahseHuntingGrounds:
+        case xi::ZoneId::MorimarBasaltFields:
             return REGION_TYPE::EAST_ULBUKA;
+        default:
+            break;
     }
     return REGION_TYPE::UNKNOWN;
 }
 
-auto GetCurrentContinent(const uint16 zoneId) -> CONTINENT_TYPE
+auto GetCurrentContinent(const xi::ZoneId zoneId) -> CONTINENT_TYPE
 {
     return GetCurrentRegion(zoneId) != REGION_TYPE::UNKNOWN ? CONTINENT_TYPE::THE_MIDDLE_LANDS : CONTINENT_TYPE::OTHER_AREAS;
 }
@@ -1333,7 +1335,7 @@ void ForEachZone(FnRef<void(CZone*)> func)
     }
 }
 
-void ForEachZone(const std::vector<uint16>& zoneIds, FnRef<void(CZone*)> func)
+void ForEachZone(const std::vector<xi::ZoneId>& zoneIds, FnRef<void(CZone*)> func)
 {
     for (auto zoneId : zoneIds)
     {
@@ -1344,7 +1346,7 @@ void ForEachZone(const std::vector<uint16>& zoneIds, FnRef<void(CZone*)> func)
     }
 }
 
-auto GetZoneIPP(uint16 zoneId) -> uint64
+auto GetZoneIPP(xi::ZoneId zoneId) -> uint64
 {
     uint64 ipp = 0;
 
@@ -1366,7 +1368,7 @@ auto GetZoneIPP(uint16 zoneId) -> uint64
     return ipp;
 }
 
-auto CanZoneUseMisc(uint16 zoneId, xi::ZoneMisc misc) -> bool
+auto CanZoneUseMisc(xi::ZoneId zoneId, xi::ZoneMisc misc) -> bool
 {
     const auto rset = db::preparedStmt("SELECT misc FROM zone_settings WHERE zoneid = ?", zoneId);
     FOR_DB_SINGLE_RESULT(rset)
@@ -1379,7 +1381,7 @@ auto CanZoneUseMisc(uint16 zoneId, xi::ZoneMisc misc) -> bool
     return false;
 }
 
-auto IsZoneAtPlayerCap(uint16 zoneId, bool isGM) -> bool
+auto IsZoneAtPlayerCap(xi::ZoneId zoneId, bool isGM) -> bool
 {
     const auto cap = settings::get<uint16>("map.ZONE_PLAYER_CAP");
     if (cap == 0)

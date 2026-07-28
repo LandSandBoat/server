@@ -876,12 +876,11 @@ void handleSynthFail(CCharEntity* PChar)
     }
 
     // Push "Synthesis failed" messages.
-    uint16 currentZone = PChar->loc.zone->GetID();
+    const auto currentZone = PChar->loc.zone->GetID();
 
-    if (currentZone &&
-        currentZone != ZONE_MONORAIL_PRE_RELEASE &&
-        currentZone != ZONE_49 &&
-        currentZone < MAX_ZONEID)
+    if (currentZone != xi::ZoneId::Unknown &&
+        currentZone != xi::ZoneId::None &&
+        static_cast<uint16>(currentZone) < MAX_ZONEID)
     {
         PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_COMBINE_INF>(PChar, SynthesisResult::Failed));
     }
@@ -1197,12 +1196,11 @@ void doSynthCriticalFail(CCharEntity* PChar)
     }
 
     // Push "Synthesis failed" messages.
-    uint16 currentZone = PChar->loc.zone->GetID();
+    const auto currentZone = PChar->loc.zone->GetID();
 
-    if (currentZone &&
-        currentZone != ZONE_MONORAIL_PRE_RELEASE &&
-        currentZone != ZONE_49 &&
-        currentZone < MAX_ZONEID)
+    if (currentZone != xi::ZoneId::Unknown &&
+        currentZone != xi::ZoneId::None &&
+        static_cast<uint16>(currentZone) < MAX_ZONEID)
     {
         PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_COMBINE_INF>(PChar, SynthesisResult::InterruptedCritical));
     }

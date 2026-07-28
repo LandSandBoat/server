@@ -484,8 +484,8 @@ auto LoadChar(Scheduler& scheduler, MapConfig config, const uint32 charId) -> st
         PChar->targid = 0x400;
         PChar->SetName(rset->get<std::string>("charname").c_str());
 
-        PChar->loc.destination  = rset->get<uint16>("pos_zone");
-        PChar->loc.prevzone     = rset->get<uint16>("pos_prevzone");
+        PChar->loc.destination  = rset->get<xi::ZoneId>("pos_zone");
+        PChar->loc.prevzone     = rset->get<xi::ZoneId>("pos_prevzone");
         PChar->m_PrevZonelineID = rset->get<uint32>("pos_prevzonelineid");
 
         PChar->loc.p.rotation = rset->get<uint8>("pos_rot");
@@ -496,7 +496,7 @@ auto LoadChar(Scheduler& scheduler, MapConfig config, const uint32 charId) -> st
         PChar->loc.boundary   = rset->get<uint16>("boundary");
         PChar->accid          = rset->get<uint32>("accid");
 
-        PChar->profile.home_point.destination = rset->get<uint16>("home_zone");
+        PChar->profile.home_point.destination = rset->get<xi::ZoneId>("home_zone");
         PChar->profile.home_point.p.rotation  = rset->get<uint8>("home_rot");
         PChar->profile.home_point.p.x         = rset->get<float>("home_x");
         PChar->profile.home_point.p.y         = rset->get<float>("home_y");
@@ -5354,8 +5354,8 @@ void DistributeCapacityPoints(CCharEntity* PChar, CMobEntity* PMob)
 
     // TODO: Capacity Points cannot be gained in Abyssea or Reives.  In addition, Gates areas,
     //       Ra'Kaznar, Escha, and Reisenjima reduce party penalty for capacity points earned.
-    ZONEID zone     = PChar->loc.zone->GetID();
-    uint8  mobLevel = PMob->GetMLevel();
+    xi::ZoneId zone     = PChar->loc.zone->GetID();
+    uint8      mobLevel = PMob->GetMLevel();
 
     PChar->ForAlliance(
         [&PMob, &zone, &mobLevel](CBattleEntity* PPartyMember)
@@ -5767,7 +5767,7 @@ void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScr
         // TODO: WOTG Expansion Sigil
 
         // Cruor Drops in Abyssea zones.
-        uint16 Pzone = PChar->getZone();
+        const auto Pzone = PChar->getZone();
         if (zoneutils::GetCurrentRegion(Pzone) == REGION_TYPE::ABYSSEA)
         {
             uint16 TextID = luautils::GetTextIDVariable(Pzone, "CRUOR_OBTAINED");
@@ -6830,13 +6830,13 @@ auto hasMogLockerAccess(const CCharEntity* PChar) -> bool
 
                 // Either in your own MH in Al Zahbi or Whitegate
                 if (PChar->m_moghouseID == PChar->id &&
-                    (zoneId == ZONE_AL_ZAHBI || zoneId == ZONE_AHT_URHGAN_WHITEGATE))
+                    (zoneId == xi::ZoneId::AlZahbi || zoneId == xi::ZoneId::AhtUrhganWhitegate))
                 {
                     return true;
                 }
 
                 // Or in Nashmau where a Nomad Moogle is present.
-                if (zoneId == ZONE_NASHMAU)
+                if (zoneId == xi::ZoneId::Nashmau)
                 {
                     return true;
                 }
@@ -7344,7 +7344,7 @@ std::string GetConquestPointsName(CCharEntity* PChar)
     }
 }
 
-auto SendToZone(CCharEntity* PChar, uint16 zoneId) -> bool
+auto SendToZone(CCharEntity* PChar, const xi::ZoneId zoneId) -> bool
 {
     TracyZoneScoped;
 
@@ -7420,7 +7420,7 @@ void SendDisconnect(CCharEntity* PChar)
     SaveCharPosition(PChar);
     PChar->clearPacketList();
 
-    PChar->loc.destination     = 0xFFFF;
+    PChar->loc.destination     = ZONE_NO_DESTINATION;
     PChar->status              = xi::Status::Shutdown;
     PChar->requestedZoneChange = true;
 

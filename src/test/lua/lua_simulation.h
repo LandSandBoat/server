@@ -24,6 +24,8 @@
 #include "common/cbasetypes.h"
 #include "lua_client_entity_pair.h"
 
+#include "data/enums/zone.h"
+
 #include <sol/forward.hpp>
 
 enum class TickType : uint8_t;
@@ -33,7 +35,6 @@ class CLuaBaseEntity;
 
 enum class REGION_TYPE : uint8;
 enum NATION_TYPE : uint8;
-enum ZONEID : uint16;
 
 enum class ClientScope : uint8_t
 {
@@ -72,7 +73,7 @@ public:
     void resetWeather() const;
     void setSetupContext(bool inSetup);
     auto spawnPlayer(sol::optional<sol::table> params) -> CLuaClientEntityPair*;
-    auto getSpawnSlot(ZONEID zoneId, uint32 slotId) const -> sol::table;
+    auto getSpawnSlot(xi::ZoneId zoneId, uint32 slotId) const -> sol::table;
 
     static void Register();
 

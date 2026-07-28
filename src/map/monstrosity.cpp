@@ -327,7 +327,7 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
     // NOTE: Whenever you log in as a MON, you'll have Gestation - even if you've previously clicked it off.
     // TODO: Check this is true in Belligerency.
     // TODO: There are more conditions to handle here?
-    if (PChar->loc.zone->GetID() != ZONE_FERETORY)
+    if (PChar->loc.zone->GetID() != xi::ZoneId::Feretory)
     {
         auto duration = PChar->m_PMonstrosity->Belligerency ? 1min : 18h;
 

@@ -167,16 +167,16 @@ local optionToSongLookup =
 }
 
 xi.symphonic_curator.onEventUpdate = function(player, csid, option, npc)
-    player:changeMusic(6, optionToSongLookup[option])
+    player:changeMusic(xi.musicSlot.MOG_HOUSE, optionToSongLookup[option])
 end
 
 xi.symphonic_curator.onEventFinish = function(player, csid, option, npc)
     if option == 0 then
         -- Reset
-        player:changeMusic(6, player:getLocalVar('Symphonic_Curator_Music'))
+        player:changeMusic(xi.musicSlot.MOG_HOUSE, player:getLocalVar('Symphonic_Curator_Music'))
     else
         -- Confirmed, set
         player:setLocalVar('Symphonic_Curator_Music', optionToSongLookup[option])
-        player:changeMusic(6, optionToSongLookup[option])
+        player:changeMusic(xi.musicSlot.MOG_HOUSE, optionToSongLookup[option])
     end
 end

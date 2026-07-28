@@ -333,7 +333,7 @@ CCharEntity::~CCharEntity()
         StatusEffectContainer->DelStatusEffectSilent(xi::StatusEffect::LevelRestriction);
     }
 
-    if (PParty && loc.destination != 0 && !inMogHouse())
+    if (PParty && loc.destination != xi::ZoneId::Unknown && !inMogHouse())
     {
         if (PParty->m_PAlliance)
         {

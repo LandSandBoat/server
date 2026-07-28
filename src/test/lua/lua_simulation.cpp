@@ -504,7 +504,7 @@ auto CLuaSimulation::spawnPlayer(sol::optional<sol::table> params) -> CLuaClient
 {
     TracyZoneScoped;
 
-    uint16               zoneId = ZONE_GM_HOME;
+    auto                 zoneId = xi::ZoneId::GmHome;
     sol::optional<uint8> job;
     sol::optional<uint8> level;
     bool                 isNewPlayer = false;
@@ -513,7 +513,7 @@ auto CLuaSimulation::spawnPlayer(sol::optional<sol::table> params) -> CLuaClient
     {
         const sol::table& paramTable = params.value();
 
-        zoneId      = paramTable.get_or("zone", ZONE_GM_HOME);
+        zoneId      = static_cast<xi::ZoneId>(paramTable.get_or("zone", static_cast<uint16>(xi::ZoneId::GmHome)));
         job         = paramTable.get<sol::optional<uint8>>("job");
         level       = paramTable.get<sol::optional<uint8>>("level");
         isNewPlayer = paramTable.get_or("new", false);
@@ -597,7 +597,7 @@ void CLuaSimulation::setSetupContext(const bool inSetup)
  *  Notes   : Throws an error if slot not found.
  ************************************************************************/
 
-auto CLuaSimulation::getSpawnSlot(const ZONEID zoneId, const uint32 slotId) const -> sol::table
+auto CLuaSimulation::getSpawnSlot(const xi::ZoneId zoneId, const uint32 slotId) const -> sol::table
 {
     auto result = lua.create_table();
 

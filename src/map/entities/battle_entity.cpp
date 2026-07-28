@@ -168,14 +168,14 @@ bool CBattleEntity::isInAdoulin()
 {
     if (loc.zone != nullptr)
     {
-        ZONEID zoneid = loc.zone->GetID();
+        xi::ZoneId zoneid = loc.zone->GetID();
         switch (zoneid)
         {
-            case ZONEID::ZONE_WESTERN_ADOULIN:
-            case ZONEID::ZONE_EASTERN_ADOULIN:
-            case ZONEID::ZONE_MOG_GARDEN:
-            case ZONEID::ZONE_SILVER_KNIFE:
-            case ZONEID::ZONE_CELENNIA_MEMORIAL_LIBRARY:
+            case xi::ZoneId::WesternAdoulin:
+            case xi::ZoneId::EasternAdoulin:
+            case xi::ZoneId::MogGarden:
+            case xi::ZoneId::SilverKnife:
+            case xi::ZoneId::CelenniaMemorialLibrary:
                 return true;
             default:
                 break;

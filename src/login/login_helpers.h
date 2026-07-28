@@ -23,6 +23,8 @@
 
 #include <map>
 
+#include "data/enums/zone.h"
+
 #include <common/mmo.h>
 #include <common/utils.h>
 
@@ -86,7 +88,7 @@ bool isStringMalformed(const std::string& str, std::size_t max_length);
 
 auto validateCharacterName(const std::string& name) -> Maybe<std::string>;
 
-auto isZoneAtPlayerCap(uint16 zoneId, bool isGM) -> bool;
+auto isZoneAtPlayerCap(xi::ZoneId zoneId, bool isGM) -> bool;
 
 session_t& get_authenticated_session(const std::string& ipAddr, const std::string& sessionHash);
 

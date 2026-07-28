@@ -140,14 +140,14 @@ void CTransportHandler::InitializeTransport(IPP mapIPP)
         TransportZone_Town zoneTown;
 
         zoneTown.ship.transportId = rset->get<uint8>("id");
-        zoneTown.ship.dock.zone   = zoneutils::GetZone((rset->get<uint32>("transport") >> 12) & 0x0FFF);
+        zoneTown.ship.dock.zone   = zoneutils::GetZone(static_cast<xi::ZoneId>((rset->get<uint32>("transport") >> 12) & 0x0FFF));
 
         zoneTown.ship.dock.p.x        = rset->get<float>("dock_x");
         zoneTown.ship.dock.p.y        = rset->get<float>("dock_y");
         zoneTown.ship.dock.p.z        = rset->get<float>("dock_z");
         zoneTown.ship.dock.p.rotation = rset->get<uint8>("dock_rot");
         zoneTown.ship.dock.boundary   = rset->get<uint16>("boundary");
-        zoneTown.ship.dock.prevzone   = rset->get<uint8>("zone");
+        zoneTown.ship.dock.prevzone   = rset->get<xi::ZoneId>("zone");
 
         auto npcDoorId   = rset->get<uint32>("door");
         zoneTown.npcDoor = nullptr;
@@ -210,9 +210,9 @@ void CTransportHandler::InitializeTransport(IPP mapIPP)
     {
         TransportZone_Voyage voyageZone{};
 
-        auto voyageZoneId     = rset->get<uint16>("zone");
+        auto voyageZoneId     = rset->get<xi::ZoneId>("zone");
         voyageZone.voyageZone = nullptr;
-        if (voyageZoneId > 0)
+        if (voyageZoneId != xi::ZoneId::Unknown)
         {
             voyageZone.voyageZone = zoneutils::GetZone(voyageZoneId);
         }
@@ -230,7 +230,7 @@ void CTransportHandler::InitializeTransport(IPP mapIPP)
 
             voyageZoneList.emplace_back(voyageZone);
         }
-        else if (voyageZoneId > 0)
+        else if (voyageZoneId != xi::ZoneId::Unknown)
         {
             ShowErrorFmt("TransportZone {}: zone not found", rset->get<uint16>("zone"));
         }

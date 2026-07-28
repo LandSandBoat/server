@@ -268,7 +268,7 @@ session_t& get_authenticated_session(const std::string& ipAddr, const std::strin
     return authenticatedSessions_[ipAddr][sessionHash]; // NOTE: Will construct if doesn't exist
 }
 
-auto isZoneAtPlayerCap(uint16 zoneId, bool isGM) -> bool
+auto isZoneAtPlayerCap(const xi::ZoneId zoneId, const bool isGM) -> bool
 {
     const auto cap = settings::get<uint16>("map.ZONE_PLAYER_CAP");
     if (cap == 0)
@@ -515,9 +515,9 @@ int32 createCharacter(session_t& session, uint8* buf, lpkt_chr_info_sub2& charIn
         return -1;
     }
 
-    std::vector<uint32> bastokStartingZones   = { 0xEA, 0xEB, 0xEC };
-    std::vector<uint32> sandoriaStartingZones = { 0xE6, 0xE7, 0xE8 };
-    std::vector<uint32> windurstStartingZones = { 0xEE, 0xF0, 0xF1 };
+    const std::vector<xi::ZoneId> bastokStartingZones   = { xi::ZoneId::BastokMines, xi::ZoneId::BastokMarkets, xi::ZoneId::PortBastok };
+    const std::vector<xi::ZoneId> sandoriaStartingZones = { xi::ZoneId::SouthernSanDoria, xi::ZoneId::NorthernSanDoria, xi::ZoneId::PortSanDoria };
+    const std::vector<xi::ZoneId> windurstStartingZones = { xi::ZoneId::WindurstWaters, xi::ZoneId::PortWindurst, xi::ZoneId::WindurstWoods };
 
     switch (createchar.m_nation)
     {

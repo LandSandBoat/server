@@ -354,7 +354,7 @@ CCharStatusPacket::CCharStatusPacket(CCharEntity* PChar)
         packet->monstrosity_name_id2 = PChar->m_PMonstrosity->NamePrefix2;
 
         // Sword & Shield icon only shows outside of the Feretory
-        if (PChar->m_PMonstrosity->Belligerency && PChar->loc.zone->GetID() != ZONE_FERETORY)
+        if (PChar->m_PMonstrosity->Belligerency && PChar->loc.zone->GetID() != xi::ZoneId::Feretory)
         {
             packet->Flags2.BallistaFlg |= 0x08; // 0x18?
         }

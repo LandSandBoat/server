@@ -26,13 +26,14 @@
 #include "common/timer.h"
 #include "common/types/fn.h"
 
+#include "data/enums/music_slot.h"
+
 #include "entities/base_entity.h"
 #include "entities/char_entity.h"
 #include "entities/mob_entity.h"
 #include "entities/npc_entity.h"
 #include "entities/pet_entity.h"
 #include "entities/trust_entity.h"
-#include "enums/music_slot.h"
 
 #include "spatial_grid.h"
 
@@ -85,10 +86,10 @@ public:
 
     void FindPartyForMob(CBaseEntity* PEntity); // looking for a party for the monster
 
-    void TransportDepart(uint16 boundary, uint16 prevZoneId, uint16 transportId); // ship/boat is leaving, passengers need to be collected
+    void TransportDepart(uint16 boundary, xi::ZoneId prevZoneId, uint16 transportId); // ship/boat is leaving, passengers need to be collected
 
     void WeatherChange(xi::Weather weather);
-    void MusicChange(MusicSlot slotId, uint16 trackId);
+    void MusicChange(xi::MusicSlot slotId, uint16 trackId);
 
     void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, const std::unique_ptr<CBasicPacket>&); // send a global package within the zone
 

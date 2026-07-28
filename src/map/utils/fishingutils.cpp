@@ -63,44 +63,68 @@
 namespace fishingutils
 {
 
-uint16                                            MessageOffset[MAX_ZONEID];
-fishing_area_pool                                 FishingPools[MAX_ZONEID];
-std::map<uint32, fish_t*>                         FishList;
-std::map<uint16, std::vector<uint32>>             ChestList;
-std::map<uint16, rod_t*>                          FishingRods;
-std::map<uint16, bait_t*>                         FishingBaits;
-std::map<uint16, std::map<uint32, fishmob_t*>>    FishZoneMobList;       // zoneid, mobid, mob
-std::map<uint16, std::map<uint8, fishingarea_t*>> FishingAreaList;       // zoneid, areaid, area
-std::map<uint16, std::map<uint8, uint16>>         FishingCatchLists;     // zoneid, areaid, groupid
-std::map<uint16, std::map<uint32, uint16>>        FishingGroups;         // groupid, fishid, rarity
-std::map<uint16, std::map<uint32, uint8>>         FishingBaitAffinities; // baitid, fishid, power
+std::map<xi::ZoneId, uint16>                          MessageOffset;
+std::map<xi::ZoneId, fishing_area_pool>               FishingPools;
+std::map<uint32, fish_t*>                             FishList;
+std::map<xi::ZoneId, std::vector<uint32>>             ChestList;
+std::map<uint16, rod_t*>                              FishingRods;
+std::map<uint16, bait_t*>                             FishingBaits;
+std::map<xi::ZoneId, std::map<uint32, fishmob_t*>>    FishZoneMobList;       // zoneid, mobid, mob
+std::map<xi::ZoneId, std::map<uint8, fishingarea_t*>> FishingAreaList;       // zoneid, areaid, area
+std::map<xi::ZoneId, std::map<uint8, uint16>>         FishingCatchLists;     // zoneid, areaid, groupid
+std::map<uint16, std::map<uint32, uint16>>            FishingGroups;         // groupid, fishid, rarity
+std::map<uint16, std::map<uint32, uint8>>             FishingBaitAffinities; // baitid, fishid, power
 
 /************************************************************************
  *                                                                       *
  *                            CATCH POOLS                                *
  *                                                                       *
  ************************************************************************/
-void ReduceFishPool(uint16 zoneId, uint8 areaId, uint16 fishId)
+namespace
+{
+
+auto findFishStock(const xi::ZoneId zoneId, const uint8 areaId, const uint16 fishId) -> fish_pool*
+{
+    const auto zoneIter = FishingPools.find(zoneId);
+    if (zoneIter == FishingPools.end())
+    {
+        return nullptr;
+    }
+
+    const auto areaIter = zoneIter->second.catchPools.find(areaId);
+    if (areaIter == zoneIter->second.catchPools.end())
+    {
+        return nullptr;
+    }
+
+    const auto stockIter = areaIter->second.stock.find(fishId);
+    return stockIter != areaIter->second.stock.end() ? &stockIter->second : nullptr;
+}
+
+auto isFishPoolDepleted(const xi::ZoneId zoneId, const uint8 areaId, const uint16 fishId) -> bool
+{
+    const auto* stock = findFishStock(zoneId, areaId, fishId);
+    return stock == nullptr || stock->quantity == 0;
+}
+
+} // namespace
+
+void ReduceFishPool(const xi::ZoneId zoneId, const uint8 areaId, const uint16 fishId)
 {
     if (FishList[fishId] && FishList[fishId]->quest_only)
     {
         return;
     }
 
-    if (FishingPools[zoneId].catchPools.count(areaId) && FishingPools[zoneId].catchPools[areaId].stock.count(fishId))
+    if (auto* stock = findFishStock(zoneId, areaId, fishId); stock != nullptr && stock->quantity > 0)
     {
-        uint16 qty = FishingPools[zoneId].catchPools[areaId].stock[fishId].quantity;
-
-        if (qty > 0)
-        {
-            FishingPools[zoneId].catchPools[areaId].stock[fishId].quantity = (qty - 1);
-        }
+        stock->quantity -= 1;
     }
 }
 
 void RestockFishingAreas()
 {
-    for (auto& FishingPool : FishingPools)
+    for (auto& FishingPool : FishingPools | std::views::values)
     {
         for (const auto& a : FishingPool.catchPools)
         {
@@ -125,9 +149,9 @@ void CreateFishingPools()
                                        "JOIN fishing_catch fc USING(groupid)");
     FOR_DB_MULTIPLE_RESULTS(rset)
     {
-        const auto zoneId = rset->get<uint16>("zoneid");
-        auto       areaId = rset->get<uint8>("areaid");
-        auto       fishId = rset->get<uint16>("fishid");
+        const auto zoneId = rset->get<xi::ZoneId>("zoneid");
+        const auto areaId = rset->get<uint8>("areaid");
+        const auto fishId = rset->get<uint16>("fishid");
         const auto pSize  = rset->get<uint16>("pool_size");
         const auto rRate  = rset->get<uint16>("restock_rate");
 
@@ -1072,7 +1096,7 @@ uint8 GetBaitPower(bait_t* bait, fish_t* fish)
     return 0;
 }
 
-std::map<fish_t*, uint16> GetFishPool(uint16 zoneID, uint8 areaID, uint16 BaitID)
+auto GetFishPool(const xi::ZoneId zoneID, const uint8 areaID, const uint16 BaitID) -> std::map<fish_t*, uint16>
 {
     std::map<fish_t*, uint16> pool;
     uint16                    groupId = FishingCatchLists[zoneID][areaID];
@@ -1088,7 +1112,7 @@ std::map<fish_t*, uint16> GetFishPool(uint16 zoneID, uint8 areaID, uint16 BaitID
     return pool;
 }
 
-std::vector<fish_t*> GetItemPool(uint16 zoneID, uint8 areaID)
+auto GetItemPool(const xi::ZoneId zoneID, const uint8 areaID) -> std::vector<fish_t*>
 {
     std::vector<fish_t*> pool;
     uint16               groupId = FishingCatchLists[zoneID][areaID];
@@ -1104,7 +1128,7 @@ std::vector<fish_t*> GetItemPool(uint16 zoneID, uint8 areaID)
     return pool;
 }
 
-std::vector<fishmob_t*> GetMobPool(uint16 zoneId)
+auto GetMobPool(const xi::ZoneId zoneId) -> std::vector<fishmob_t*>
 {
     std::vector<fishmob_t*> pool;
 
@@ -1122,7 +1146,7 @@ std::vector<fishmob_t*> GetMobPool(uint16 zoneId)
     return pool;
 }
 
-std::vector<uint32> GetChestPool(uint16 zoneId)
+auto GetChestPool(const xi::ZoneId zoneId) -> std::vector<uint32>
 {
     std::vector<uint32> pool;
 
@@ -1137,9 +1161,10 @@ std::vector<uint32> GetChestPool(uint16 zoneId)
     return pool;
 }
 
-uint16 GetMessageOffset(uint16 ZoneID)
+auto GetMessageOffset(const xi::ZoneId ZoneID) -> uint16
 {
-    return MessageOffset[ZoneID];
+    const auto it = MessageOffset.find(ZoneID);
+    return it != MessageOffset.end() ? it->second : 0;
 }
 
 auto IsFish(const CItem* fish) -> bool
@@ -1286,7 +1311,7 @@ fishingarea_t* GetFishingArea(CCharEntity* PChar)
         return nullptr;
     }
 
-    int16        zoneId = PChar->getZone();
+    const auto   zoneId = PChar->getZone();
     position_t   p      = PChar->loc.p;
     areavector_t loc    = { p.x, p.y, p.z };
 
@@ -2182,7 +2207,7 @@ fishresponse_t* FishingCheck(CCharEntity* PChar, uint8 fishingSkill, rod_t* rod,
             // uint16 baitPower = fish.second; //@TODO: implement this in later patch
             if ((fishingSkill >= fishIter->maxSkill || fishIter->maxSkill - fishingSkill <= 100) && (fishIter->reqKeyItem == KeyItem::NONE || charutils::hasKeyItem(PChar, fishIter->reqKeyItem)))
             { // Key item okay
-                if (!fishIter->quest_only && FishingPools[PChar->getZone()].catchPools[area->areaId].stock[fishIter->fishID].quantity == 0)
+                if (!fishIter->quest_only && isFishPoolDepleted(PChar->getZone(), area->areaId, fishIter->fishID))
                 {
                     NoCatchList.insert(fishIter->fishID);
                 }
@@ -2220,7 +2245,7 @@ fishresponse_t* FishingCheck(CCharEntity* PChar, uint8 fishingSkill, rod_t* rod,
                 }
                 else
                 {
-                    if (!item->quest_only && FishingPools[PChar->getZone()].catchPools[area->areaId].stock[item->fishID].quantity == 0)
+                    if (!item->quest_only && isFishPoolDepleted(PChar->getZone(), area->areaId, item->fishID))
                     {
                         NoCatchList.insert(item->fishID);
                     }
@@ -2406,7 +2431,7 @@ fishresponse_t* FishingCheck(CCharEntity* PChar, uint8 fishingSkill, rod_t* rod,
         ItemPoolWeight = 0;
     }
 
-    if (PChar->getZone() == ZONE_BUBURIMU_PENINSULA && PChar->GetLocalVar("bChartActive") == 1)
+    if (PChar->getZone() == xi::ZoneId::BuburimuPeninsula && PChar->GetLocalVar("bChartActive") == 1)
     {
         MobHookPool.clear();
 
@@ -2443,7 +2468,7 @@ fishresponse_t* FishingCheck(CCharEntity* PChar, uint8 fishingSkill, rod_t* rod,
     if (!ChestPool.empty())
     {
         // Brigand's Chart Quest
-        if (PChar->getZone() == ZONE_BUBURIMU_PENINSULA && PChar->GetLocalVar("bChartActive") == 1)
+        if (PChar->getZone() == xi::ZoneId::BuburimuPeninsula && PChar->GetLocalVar("bChartActive") == 1)
         {
             for (uint32 chestId : ChestPool)
             {
@@ -2463,7 +2488,7 @@ fishresponse_t* FishingCheck(CCharEntity* PChar, uint8 fishingSkill, rod_t* rod,
     }
 
     // Pirate's Chart quest pool weighting: Catch items.
-    if (PChar->getZone() == ZONE_VALKURM_DUNES && PChar->GetLocalVar("pChartActive") == 1 && area->areaId == 2)
+    if (PChar->getZone() == xi::ZoneId::ValkurmDunes && PChar->GetLocalVar("pChartActive") == 1 && area->areaId == 2)
     {
         FishPoolWeight  = 0;
         ItemPoolWeight  = 100;
@@ -2473,7 +2498,7 @@ fishresponse_t* FishingCheck(CCharEntity* PChar, uint8 fishingSkill, rod_t* rod,
     }
 
     // Brigand's Chart quest pool weighting: Catch chests.
-    else if (PChar->getZone() == ZONE_BUBURIMU_PENINSULA && PChar->GetLocalVar("bChartActive") == 1)
+    else if (PChar->getZone() == xi::ZoneId::BuburimuPeninsula && PChar->GetLocalVar("bChartActive") == 1)
     {
         FishPoolWeight  = 0;
         ItemPoolWeight  = 0;
@@ -2705,13 +2730,13 @@ void FishingAction(CCharEntity* PChar, const GP_CLI_COMMAND_FISHING_2_MODE mode,
             fishingarea_t*  fishingArea = GetFishingArea(PChar);
             fishresponse_t* response    = nullptr;
 
-            if (PChar->getZone() == ZONE_VALKURM_DUNES && PChar->GetLocalVar("pChartActive") == 1)
+            if (PChar->getZone() == xi::ZoneId::ValkurmDunes && PChar->GetLocalVar("pChartActive") == 1)
             {
-                fishingArea = FishingAreaList[ZONE_VALKURM_DUNES][2];
+                fishingArea = FishingAreaList[xi::ZoneId::ValkurmDunes][2];
             }
-            else if (PChar->getZone() == ZONE_BUBURIMU_PENINSULA && PChar->GetLocalVar("bChartActive") == 1)
+            else if (PChar->getZone() == xi::ZoneId::BuburimuPeninsula && PChar->GetLocalVar("bChartActive") == 1)
             {
-                fishingArea = FishingAreaList[ZONE_BUBURIMU_PENINSULA][2];
+                fishingArea = FishingAreaList[xi::ZoneId::BuburimuPeninsula][2];
             }
 
             if (PChar->hookedFish != nullptr)
@@ -3000,7 +3025,7 @@ void LoadFishingAreas()
         fishingArea->center.z   = rset->get<float>("center_z");
         fishingArea->radius     = rset->get<uint8>("bound_radius");
         fishingArea->areaName   = rset->get<std::string>("name");
-        fishingArea->zoneId     = rset->get<uint32>("zoneid");
+        fishingArea->zoneId     = rset->get<xi::ZoneId>("zoneid");
         fishingArea->difficulty = rset->get<uint8>("difficulty");
 
         FishingAreaList[fishingArea->zoneId][fishingArea->areaId] = fishingArea;
@@ -3078,7 +3103,7 @@ void LoadChests()
     FOR_DB_MULTIPLE_RESULTS(rset)
     {
         uint32 chestId = rset->get<uint32>("npcid");
-        uint16 zoneId  = rset->get<uint32>("zoneid");
+        auto   zoneId  = rset->get<xi::ZoneId>("zoneid");
         ChestList[zoneId].emplace_back(chestId);
     }
 }
@@ -3113,7 +3138,7 @@ void LoadFishMobs()
         mob->reqKeyItem = rset->get<uint16>("required_keyitem");
         mob->reqBaitId  = rset->get<uint16>("required_baitid");
         mob->areaId     = rset->get<uint8>("areaid");
-        mob->zoneId     = rset->get<uint16>("zoneid");
+        mob->zoneId     = rset->get<xi::ZoneId>("zoneid");
         mob->questOnly  = rset->get<bool>("quest_only");
         mob->minLength  = rset->get<uint16>("min_length");
         mob->maxLength  = rset->get<uint16>("max_length");
@@ -3214,7 +3239,7 @@ void LoadFishingCatchLists()
                                        "FROM fishing_catch");
     FOR_DB_MULTIPLE_RESULTS(rset)
     {
-        const auto zoneId = rset->get<uint16>("zoneid");
+        const auto zoneId = rset->get<xi::ZoneId>("zoneid");
         const auto areaId = rset->get<uint8>("areaid");
 
         FishingCatchLists[zoneId][areaId] = rset->get<uint16>("groupid");

@@ -19,7 +19,11 @@ end
 
 commandObj.onTrigger = function(player, typeId, songId)
     -- validate typeId
-    if typeId == nil or typeId < 0 or typeId > 7 then
+    if
+        typeId == nil or
+        typeId < xi.musicSlot.ZONE_DAY or
+        typeId > xi.musicSlot.FISHING
+    then
         error(player, 'Invalid type ID.')
         return
     end

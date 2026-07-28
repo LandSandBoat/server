@@ -29,7 +29,7 @@
 class CZoneInstance : public CZone
 {
 public:
-    CZoneInstance(Scheduler& scheduler, MapConfig config, ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction);
+    CZoneInstance(Scheduler& scheduler, MapConfig config, xi::ZoneId ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction);
     ~CZoneInstance() override;
 
     DISALLOW_COPY_AND_MOVE(CZoneInstance);
@@ -62,7 +62,7 @@ public:
 
     virtual void FindPartyForMob(CBaseEntity* PEntity) override; // looking for a party for the monster
 
-    virtual void TransportDepart(uint16 boundary, uint16 prevZoneId, uint16 transportId) override; // ship/boat is leaving, passengers need to be collected
+    virtual void TransportDepart(uint16 boundary, xi::ZoneId prevZoneId, uint16 transportId) override; // ship/boat is leaving, passengers need to be collected
 
     virtual void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, const std::unique_ptr<CBasicPacket>&) override; // send a global package within the zone
 

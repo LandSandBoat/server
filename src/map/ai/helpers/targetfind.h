@@ -136,10 +136,10 @@ protected:
     CBattleEntity* m_PMasterTarget; // mater of target
     CBattleEntity* m_PTarget;       // first target
 
-    uint16    m_zone;
-    FIND_TYPE m_findType;
-    uint8     m_findFlags;   // what to search for
-    uint16    m_targetFlags; // targetflags to reject potentially bad targets
+    xi::ZoneId m_zone;
+    FIND_TYPE  m_findType;
+    uint8      m_findFlags;   // what to search for
+    uint16     m_targetFlags; // targetflags to reject potentially bad targets
 
     // conal vars
     bool        m_conal;

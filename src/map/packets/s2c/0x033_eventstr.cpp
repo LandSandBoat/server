@@ -46,7 +46,7 @@ GP_SERV_COMMAND_EVENTSTR::GP_SERV_COMMAND_EVENTSTR(const CCharEntity* PChar, Eve
 
     packet.UniqueNo  = npcServerID;
     packet.ActIndex  = npcLocalID;
-    packet.EventNum  = PChar->getZone();
+    packet.EventNum  = static_cast<uint16>(PChar->getZone());
     packet.EventPara = eventInfo->eventId;
     packet.Mode      = (eventInfo->eventFlags != 0) ? (eventInfo->eventFlags & 0xFFFF) : 8;
 

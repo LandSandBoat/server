@@ -23,6 +23,8 @@
 
 #include "cbasetypes.h"
 #include "timer.h"
+
+#include "data/enums/zone.h"
 #include "xi.h"
 
 #include <array>
@@ -436,9 +438,9 @@ class char_mini
 public:
     int8 m_name[16];
 
-    uint8  m_mjob;
-    uint16 m_zone;
-    uint8  m_nation;
+    uint8      m_mjob;
+    xi::ZoneId m_zone;
+    uint8      m_nation;
 
     look_t m_look;
 };
