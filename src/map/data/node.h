@@ -26,6 +26,7 @@
 #include "common/macros.h"
 
 #include <concepts>
+#include <optional>
 #include <string>
 #include <string_view>
 #include <type_traits>
@@ -147,6 +148,25 @@ public:
         return Node{ B::child(node_, key) }.template as<T>();
     }
 
+    // Leaves `out` alone when the key is absent, keeping its default.
+    template <class T>
+    void readInto(T& out, const std::string_view key) const
+    {
+        if (has(key))
+        {
+            out = child(key).template as<T>();
+        }
+    }
+
+    template <class T>
+    void readInto(std::optional<T>& out, const std::string_view key) const
+    {
+        if (has(key))
+        {
+            out = child(key).template as<T>();
+        }
+    }
+
     template <class T>
     auto as() const -> T
     {
@@ -233,5 +253,12 @@ public:
 private:
     B::node_t node_;
 };
+
+// The children of `node[key]`, empty when that key is absent or isn't a map.
+template <NodeBackend B>
+auto childrenOf(const Node<B> node, const std::string_view key) -> std::vector<Node<B>>
+{
+    return node.has(key) && node.child(key).isMap() ? node.child(key).children() : std::vector<Node<B>>{};
+}
 
 } // namespace xi::data

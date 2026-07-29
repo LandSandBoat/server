@@ -2,8 +2,16 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+{% if has_maps %}
+
+#include <common/types/hash_map.h>
+{% endif %}
+
 {% for inc in enum_includes %}
 #include "data/enums/{{ inc }}.h"
+{% endfor %}
+{% for inc in shared_includes %}
+#include "data/{{ inc }}.h"
 {% endfor %}
 
 #include <string>

@@ -9,7 +9,7 @@ from typing import Any
 import yaml
 from jsonschema import Draft202012Validator
 
-from .common import ROOT
+from .common import ENUMS_DIR, ROOT
 from .yaml_loaders import LineLoader, node_line
 
 
@@ -22,17 +22,24 @@ def validate_data_yamls(schemas_dir: Path, keyset_dir: Path, build_root: Path) -
             for p in [
                 Path(__file__),
                 *schemas_dir.glob("*.schema.json"),
-                *schemas_dir.glob("_*.schema.json"),
                 *keyset_dir.glob("*.codegen.json"),
             ]
         ),
         default=0.0,
     )
 
+    # codegen scans data/ recursively, so every file it reads needs a schema.
+    schema_by_data: dict[Path, Path] = {}
+    for schema_path in sorted(schemas_dir.glob("*.schema.json")):
+        schema_by_data[ROOT / "data" / f"{schema_path.stem.removesuffix('.schema')}.yaml"] = schema_path
+
+    for data_path in sorted((ROOT / "data").rglob("*.yaml")):
+        if not data_path.is_relative_to(ENUMS_DIR) and data_path not in schema_by_data:
+            raise SystemExit(f"{data_path.relative_to(ROOT).as_posix()}: no schema in data/schemas, so nothing validates it")
+
     all_errors: list[tuple[Path, int, Any]] = []
     root_by_file: dict[Path, Any] = {}
-    for schema_path in sorted(schemas_dir.glob("*.schema.json")):
-        data_path = ROOT / "data" / f"{schema_path.stem.removesuffix('.schema')}.yaml"
+    for data_path, schema_path in sorted(schema_by_data.items()):
         if not data_path.exists():
             continue
         stamp = build_root / "generated" / f".validated.{data_path.stem}.stamp"
@@ -73,7 +80,8 @@ def build_registry(schemas_dir: Path, keyset_dir: Path) -> Any:
         with p.open(encoding="utf-8") as f:
             doc = json.load(f)
         reg = reg.with_resource(uri=f"enums/{p.name}", resource=Resource(contents=doc, specification=DRAFT202012))
-    for p in schemas_dir.glob("_*.schema.json"):
+    # Registered by filename, since any schema may be $ref'd by another.
+    for p in schemas_dir.glob("*.schema.json"):
         with p.open(encoding="utf-8") as f:
             doc = json.load(f)
         reg = reg.with_resource(uri=p.name, resource=Resource(contents=doc, specification=DRAFT202012))
@@ -112,6 +120,7 @@ def norm_path(absolute_path: list[Any]) -> str:
 
 
 _REQUIRED_RE = re.compile(r"'([^']+)' is a required property")
+_QUOTED_RE = re.compile(r"'([^']+)'")
 
 
 def short_error(err: Any) -> str:
@@ -167,12 +176,33 @@ def print_errors(all_errors: list[tuple[Path, int, Any]], root_by_file: dict[Pat
     """Suppress type errors paired with an enum error (same cause); same for unevaluatedProperties paired with oneOf."""
     suppress_type: set[tuple[Path, tuple[Any, ...]]] = set()
     suppress_uneval: set[tuple[Path, tuple[Any, ...]]] = set()
+    error_paths: set[tuple[Path, tuple[Any, ...]]] = set()
+    for fpath, _line, err in all_errors:
+        error_paths.add((fpath, tuple(err.absolute_path)))
+
     for fpath, _line, err in all_errors:
         loc = (fpath, tuple(err.absolute_path))
         if err.validator == "enum":
             suppress_type.add(loc)
         elif err.validator == "oneOf":
             suppress_uneval.add(loc)
+        elif err.validator == "unevaluatedProperties":
+            # A bad value inside an `allOf` mixin resurfaces here as "not allowed".
+            # Drop only the keys that already have an error of their own.
+            base = tuple(err.absolute_path)
+            explained = set()
+            for other_file, other_path in error_paths:
+                if other_file == fpath and len(other_path) > len(base) and other_path[:len(base)] == base:
+                    explained.add(other_path[len(base)])
+
+            named = _QUOTED_RE.findall(err.message)
+            unexplained = [prop for prop in named if prop not in explained]
+            if not unexplained:
+                suppress_uneval.add(loc)
+            elif len(unexplained) < len(named):
+                quoted = ", ".join(repr(p) for p in unexplained)
+                was = "was" if len(unexplained) == 1 else "were"
+                err.message = f"Unevaluated properties are not allowed ({quoted} {was} unexpected)"
 
     groups: dict[tuple[Path, str, str], list[tuple[int, Any]]] = defaultdict(list)
     for fpath, line, err in all_errors:

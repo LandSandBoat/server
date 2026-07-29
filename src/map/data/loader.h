@@ -65,3 +65,8 @@ inline auto LoadStatusEffects()
 {
     return xi::data::loadDataSet<xi::data::StatusEffectData, xi::data::backends::YAMLBackend>("status_effects");
 }
+
+inline auto LoadEcosystem()
+{
+    return xi::data::loadDataSet<xi::data::EcosystemData, xi::data::backends::YAMLBackend>("ecosystem");
+}
