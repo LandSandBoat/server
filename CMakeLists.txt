@@ -224,7 +224,7 @@ if(NOT CODEGEN_DEPS_EXIT_CODE EQUAL 0)
 endif()
 
 add_custom_target(data_codegen
-    COMMAND ${Python_EXECUTABLE} -m tools.codegen ${CMAKE_BINARY_DIR}
+    COMMAND ${Python_EXECUTABLE} -m tools.codegen ${CMAKE_BINARY_DIR} --validate
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     BYPRODUCTS
         ${CMAKE_BINARY_DIR}/generated/.codegen.stamp
@@ -236,7 +236,7 @@ add_custom_target(data_codegen
 if(NOT EXISTS ${CMAKE_BINARY_DIR}/generated/.codegen.stamp)
     message(STATUS "Bootstrapping data codegen")
     execute_process(
-        COMMAND ${Python_EXECUTABLE} -m tools.codegen ${CMAKE_BINARY_DIR}
+        COMMAND ${Python_EXECUTABLE} -m tools.codegen ${CMAKE_BINARY_DIR} --validate
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         RESULT_VARIABLE CODEGEN_EXIT_CODE
     )
