@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.MAKING_AMENDS
 quest.reward =
 {
     fameArea = xi.fameArea.WINDURST,
-    fame     = 75,
+    fame     = 30,
     title    = xi.title.QUICK_FIXER,
 }
 

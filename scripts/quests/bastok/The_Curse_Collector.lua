@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_CURSE_COLLECT
 
 quest.reward =
 {
-    fame     = 30,
+    fame     = 40,
     fameArea = xi.fameArea.BASTOK,
     item     = xi.item.POISON_CESTI,
 }

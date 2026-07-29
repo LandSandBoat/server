@@ -9,8 +9,6 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD)
 
 quest.reward =
 {
-    fame     = 20,
-    fameArea = xi.fameArea.JEUNO,
     item     = xi.item.BARBAROI_AXE,
 }
 
@@ -105,6 +103,9 @@ quest.sections =
             {
                 [138] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 7)
+                        player:addFame(xi.fameArea.BASTOK, 7)
+                        player:addFame(xi.fameArea.WINDURST, 7)
                         player:delKeyItem(xi.ki.GUIDING_BELL)
                     end
                 end,

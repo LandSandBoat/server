@@ -10,9 +10,10 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.INTERMEDIATE_
 
 quest.reward =
 {
-    item  = xi.item.SCROLL_OF_MAGES_BALLAD,
-    fame  = 80,
-    title = xi.title.SECOND_RATE_ORGANIZER,
+    item     = xi.item.SCROLL_OF_MAGES_BALLAD,
+    fame     = 30,
+    fameArea = xi.fameArea.SANDORIA,
+    title    = xi.title.SECOND_RATE_ORGANIZER,
 }
 
 quest.sections =

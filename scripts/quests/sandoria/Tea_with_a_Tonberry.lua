@@ -15,8 +15,10 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.TEA_WITH_A_TO
 
 quest.reward =
 {
-    item = xi.item.WILLPOWER_TORQUE,
-    title = xi.title.TALKS_WITH_TONBERRIES,
+    fame     = 40,
+    fameArea = xi.fameArea.SANDORIA,
+    item     = xi.item.WILLPOWER_TORQUE,
+    title    = xi.title.TALKS_WITH_TONBERRIES,
 }
 
 quest.sections =

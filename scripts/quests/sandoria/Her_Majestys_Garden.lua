@@ -10,7 +10,9 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.HER_MAJESTYS_
 
 quest.reward =
 {
-    keyItem = xi.ki.MAP_OF_THE_NORTHLANDS_AREA,
+    fame     = 40,
+    fameArea = xi.fameArea.SANDORIA,
+    keyItem  = xi.ki.MAP_OF_THE_NORTHLANDS_AREA,
 }
 
 quest.sections =

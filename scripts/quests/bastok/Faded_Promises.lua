@@ -12,8 +12,8 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.FADED_PROMISES)
 
 quest.reward =
 {
-    fame     = 10,
-    fameArea = xi.fameArea.BASTOK,
+    fame     = 20,
+    fameArea = xi.fameArea.NORG,
     item     = xi.item.FUKURO,
     title    = xi.title.ASSASSIN_REJECT,
 }

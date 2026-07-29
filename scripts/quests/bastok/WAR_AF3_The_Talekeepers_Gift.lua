@@ -13,7 +13,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_G
 
 quest.reward =
 {
-    fame     = 60,
+    fame     = 20,
     fameArea = xi.fameArea.BASTOK,
     item     = xi.item.FIGHTERS_LORICA,
     title    = xi.title.PARAGON_OF_WARRIOR_EXCELLENCE,

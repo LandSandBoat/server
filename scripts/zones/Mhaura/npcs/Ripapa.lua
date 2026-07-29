@@ -117,7 +117,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_LIGHTNING)
             player:delKeyItem(xi.ki.WHISPER_OF_STORMS) --Whisper of Storms, as a trade for the above rewards
             player:setCharVar('TrialByLightning_date', JstMidnight())
-            player:addFame(xi.fameArea.WINDURST, 30)
+            player:addFame(xi.fameArea.WINDURST, 60)
             player:completeQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
         end
     elseif csid == 10022 or csid == 10023 then

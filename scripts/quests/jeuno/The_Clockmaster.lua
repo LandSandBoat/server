@@ -10,8 +10,6 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_CLOCKMASTER)
 
 quest.reward =
 {
-    fame     = 30,
-    fameArea = xi.fameArea.JEUNO,
     item     = xi.item.TIME_HAMMER,
     title    = xi.title.TIMEKEEPER,
 }
@@ -37,7 +35,11 @@ quest.sections =
             onEventFinish =
             {
                 [152] = function(player, csid, option, npc)
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 17)
+                        player:addFame(xi.fameArea.BASTOK, 17)
+                        player:addFame(xi.fameArea.WINDURST, 17)
+                    end
                 end,
             },
         },

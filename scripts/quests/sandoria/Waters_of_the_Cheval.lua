@@ -12,7 +12,7 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.WATERS_OF_THE
 
 quest.reward =
 {
-    fame       = 30,
+    fame       = 20,
     fameArea   = xi.fameArea.SANDORIA,
     item       = xi.item.WING_PENDANT,
     itemParams = { fromTrade = true },

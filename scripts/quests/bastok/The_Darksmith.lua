@@ -9,7 +9,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_DARKSMITH)
 
 quest.reward =
 {
-    fame     = 5,
+    fame     = 16,
     fameArea = xi.fameArea.BASTOK,
     gil      = 8000,
 }
@@ -68,12 +68,6 @@ quest.sections =
                 [566] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:tradeComplete()
-
-                        -- From previous implementation, award 30 fame (25 + 5) on first completion,
-                        -- and 5 fame for any subsequent trade.
-                        if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then
-                            player:addFame(xi.fameArea.BASTOK, 25)
-                        end
                     end
                 end,
             },

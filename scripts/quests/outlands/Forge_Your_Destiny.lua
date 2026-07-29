@@ -17,7 +17,7 @@ local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DE
 
 quest.reward =
 {
-    fame     = 30,
+    fame     = 20,
     fameArea = xi.fameArea.NORG,
     item     = xi.item.MUMEITO,
     keyItem  = xi.ki.JOB_GESTURE_SAMURAI,

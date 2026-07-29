@@ -9,9 +9,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.GOURMET)
 
 quest.reward =
 {
-    fame     = 30,
-    fameArea = xi.fameArea.BASTOK,
-    title    = xi.title.MOMMYS_HELPER,
+    title = xi.title.MOMMYS_HELPER,
 }
 
 -- Table Format: { eventId, timeMin, timeMax }
@@ -24,12 +22,11 @@ local tradeItemData =
     [xi.item.WILD_ONION ] = { 202,  6, 12 }, -- 12:00 ~ 18:00
 }
 
-local function tradeEventFinish(player, gilReward, additionalFame)
+local function tradeEventFinish(player, gilReward)
     if quest:complete(player) then
         player:tradeComplete()
-
         npcUtil.giveCurrency(player, 'gil', gilReward)
-        player:addFame(xi.fameArea.BASTOK, additionalFame)
+        player:addFame(xi.fameArea.BASTOK, 10)
         quest:setMustZone(player)
     end
 end
@@ -98,15 +95,15 @@ quest.sections =
             onEventFinish =
             {
                 [201] = function(player, csid, option, npc)
-                    tradeEventFinish(player, 200, 30)
+                    tradeEventFinish(player, 200)
                 end,
 
                 [202] = function(player, csid, option, npc)
-                    tradeEventFinish(player, 350, 90)
+                    tradeEventFinish(player, 350)
                 end,
 
                 [203] = function(player, csid, option, npc)
-                    tradeEventFinish(player, 100, 0)
+                    tradeEventFinish(player, 100)
                 end,
             },
         },

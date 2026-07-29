@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.LIKE_SHINING_
 quest.reward =
 {
     fameArea = xi.fameArea.NORG,
-    fame     = 100,
+    fame     = 30,
     title    = xi.title.LOOKS_GOOD_IN_LEGGINGS,
     item     = xi.item.SCROLL_OF_DOKUMORI_ICHI,
 }

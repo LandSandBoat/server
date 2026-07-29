@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.MAKING_THE_GR
 
 quest.reward =
 {
-    fame     = 75,
+    fame     = 30,
     fameArea = xi.fameArea.WINDURST,
     item     = xi.item.SCROLL_OF_ASPIR,
 }

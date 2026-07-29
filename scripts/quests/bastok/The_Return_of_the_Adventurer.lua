@@ -9,7 +9,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_RETURN_OF_THE
 
 quest.reward =
 {
-    fame     = 80,
+    fame     = 30,
     fameArea = xi.fameArea.BASTOK,
     item     = xi.item.COTTON_HEADBAND,
     title    = xi.title.KULATZ_BRIDGE_COMPANION,

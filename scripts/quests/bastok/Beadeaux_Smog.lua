@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.BEADEAUX_SMOG)
 
 quest.reward =
 {
-    fame = 30,
+    fame = 40,
     fameArea = xi.fameArea.BASTOK,
     title = xi.title.BEADEAUX_SURVEYOR,
 }

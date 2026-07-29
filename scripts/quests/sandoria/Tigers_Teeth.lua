@@ -11,7 +11,7 @@ quest.reward =
 {
     gil   = 2100,
     title = xi.title.FANG_FINDER,
-    fame  = 30,
+    fame  = 16,
 }
 
 quest.sections =
@@ -96,7 +96,7 @@ quest.sections =
                     then
                         quest:setLocalVar(player, 'Option', 0)
                         player:confirmTrade()
-                        player:addFame(xi.fameArea.SANDORIA, 5)
+                        player:addFame(xi.fameArea.SANDORIA, 16)
                     end
                 end,
             },

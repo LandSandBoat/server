@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.ORASTERY_WOES
 
 quest.reward =
 {
-    fame = 30,
+    fame = 20,
     fameArea = xi.fameArea.WINDURST,
 }
 

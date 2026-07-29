@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_SAHAGINS_
 
 quest.reward =
 {
-    fame     = 75,
+    fame     = 40,
     fameArea = xi.fameArea.NORG,
     item     = xi.item.SCROLL_OF_UTSUSEMI_ICHI,
     title    = xi.title.TREASURE_HOUSE_RANSACKER,

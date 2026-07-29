@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.SECRET_OF_THE
 
 quest.reward =
 {
-    fame     = 75,
+    fame     = 30,
     fameArea = xi.fameArea.NORG,
     item     = xi.item.SCROLL_OF_JUBAKU_ICHI,
     title    = xi.title.CRACKER_OF_THE_SECRET_CODE,

@@ -9,7 +9,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_COLD_LIGHT_OF
 
 quest.reward =
 {
-    fame     = 30,
+    fame     = 10,
     fameArea = xi.fameArea.BASTOK,
     gil      = 500,
 }

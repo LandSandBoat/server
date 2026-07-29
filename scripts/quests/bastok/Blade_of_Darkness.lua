@@ -12,7 +12,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS
 
 quest.reward =
 {
-    fame     = 30,
+    fame     = 20,
     fameArea = xi.fameArea.BASTOK,
     title    = xi.title.DARK_SIDER,
 }

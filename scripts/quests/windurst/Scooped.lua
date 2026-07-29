@@ -9,7 +9,9 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.SCOOPED)
 
 quest.reward =
 {
-    gil = 1500,
+    fame     = 20,
+    fameArea = xi.fameArea.WINDURST,
+    gil      = 1500,
 }
 
 quest.sections =

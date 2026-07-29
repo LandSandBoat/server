@@ -15,8 +15,6 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHAD
 
 quest.reward =
 {
-    fame     = 30,
-    fameArea = xi.fameArea.JEUNO,
     item     = xi.item.BEAST_GAITERS,
 }
 
@@ -202,7 +200,11 @@ quest.sections =
             onEventFinish =
             {
                 [135] = function(player, csid, option, npc)
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 7)
+                        player:addFame(xi.fameArea.BASTOK, 7)
+                        player:addFame(xi.fameArea.WINDURST, 7)
+                    end
                 end,
 
                 [144] = function(player, csid, option, npc)

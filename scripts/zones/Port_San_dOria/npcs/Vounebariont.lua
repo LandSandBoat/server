@@ -33,9 +33,9 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 514 then
         if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS) == xi.questStatus.QUEST_ACCEPTED then
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS)
-            player:addFame(xi.fameArea.SANDORIA, 30)
+            player:addFame(xi.fameArea.SANDORIA, 16)
         else
-            player:addFame(xi.fameArea.SANDORIA, 5)
+            player:addFame(xi.fameArea.SANDORIA, 16)
         end
 
         player:tradeComplete()

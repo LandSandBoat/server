@@ -19,7 +19,7 @@ end
 
 quest.reward =
 {
-    fame     = 10,
+    fame     = 30,
     fameArea = xi.fameArea.WINDURST,
     title    = xi.title.STAR_ONION_BRIGADIER,
 }

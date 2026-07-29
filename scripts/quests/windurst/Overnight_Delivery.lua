@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.OVERNIGHT_DEL
 
 quest.reward =
 {
-    fame = 100,
+    fame = 20,
     fameArea = xi.fameArea.WINDURST,
     item = xi.item.POWER_GI,
 }

@@ -10,7 +10,9 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.FEAR_OF_THE_D
 
 quest.reward =
 {
-    gil = 200,
+    fame     = 10,
+    fameArea = xi.fameArea.SANDORIA,
+    gil      = 200,
 }
 
 quest.sections =
@@ -57,7 +59,7 @@ quest.sections =
                         quest:complete(player)
                     else
                         npcUtil.giveCurrency(player, 'gil', 200)
-                        player:addFame(xi.fameArea.SANDORIA, 5)
+                        player:addFame(xi.fameArea.SANDORIA, 10)
                     end
 
                     player:confirmTrade()

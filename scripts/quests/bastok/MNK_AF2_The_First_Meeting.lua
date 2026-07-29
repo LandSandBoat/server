@@ -12,7 +12,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING
 
 quest.reward =
 {
-    fame     = 40,
+    fame     = 20,
     fameArea = xi.fameArea.BASTOK,
     item     = xi.item.TEMPLE_GAITERS,
 }

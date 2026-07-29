@@ -14,8 +14,10 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_PURCHASE_OF
 
 quest.reward =
 {
-    item  = xi.item.ELM_STAFF,
-    title = xi.title.ARMS_TRADER,
+    fame     = 20,
+    fameArea = xi.fameArea.SANDORIA,
+    item     = xi.item.ELM_STAFF,
+    title    = xi.title.ARMS_TRADER,
 }
 
 quest.sections =

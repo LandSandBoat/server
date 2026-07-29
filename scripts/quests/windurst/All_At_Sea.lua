@@ -10,7 +10,9 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.ALL_AT_SEA)
 
 quest.reward =
 {
-    item = xi.item.LEATHER_RING,
+    fame     = 30,
+    fameArea = xi.fameArea.WINDURST,
+    item     = xi.item.LEATHER_RING,
 }
 
 quest.sections =

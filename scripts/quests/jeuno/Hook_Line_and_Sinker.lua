@@ -64,6 +64,9 @@ quest.sections =
             {
                 [10042] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 7)
+                        player:addFame(xi.fameArea.BASTOK, 7)
+                        player:addFame(xi.fameArea.WINDURST, 7)
                         player:confirmTrade()
                     end
                 end,

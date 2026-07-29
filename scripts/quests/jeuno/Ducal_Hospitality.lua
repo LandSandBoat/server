@@ -71,8 +71,6 @@ local questItemSets =
 
 quest.reward =
 {
-    fame = 50,
-    fameArea = xi.fameArea.JEUNO,
     gil = 4000,
     title = xi.title.DUCAL_DUPE,
 }
@@ -163,6 +161,9 @@ quest.sections =
             {
                 [10058] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 5)
+                        player:addFame(xi.fameArea.BASTOK, 5)
+                        player:addFame(xi.fameArea.WINDURST, 5)
                         player:confirmTrade()
                         quest:setMustZone(player)
                     end
@@ -245,7 +246,9 @@ quest.sections =
                         quest:setMustZone(player)
                         quest:setVar(player, 'ItemSet', 0)
                         npcUtil.giveCurrency(player, 'gil', 4000)
-                        player:addFame(xi.fameArea.JEUNO, 50)
+                        player:addFame(xi.fameArea.SANDORIA, 5)
+                        player:addFame(xi.fameArea.BASTOK, 5)
+                        player:addFame(xi.fameArea.WINDURST, 5)
                     end
                 end,
             },

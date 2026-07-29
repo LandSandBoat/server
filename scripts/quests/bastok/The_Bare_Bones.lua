@@ -12,7 +12,7 @@ quest.reward =
 {
     keyItem = xi.ki.MAP_OF_THE_DANGRUF_WADI,
     fameArea = xi.fameArea.BASTOK,
-    fame = 60,
+    fame = 20,
     exp = 2000,
 }
 

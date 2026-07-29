@@ -12,8 +12,6 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BARD)
 
 quest.reward =
 {
-    fame     = 30,
-    fameArea = xi.fameArea.JEUNO,
     gil      = 3000,
     keyItem  = xi.ki.JOB_GESTURE_BARD,
     title    = xi.title.WANDERING_MINSTREL,
@@ -50,6 +48,9 @@ quest.sections =
                     player:unlockJob(xi.job.BRD)
                     player:messageSpecial(valkrumID.text.UNLOCK_BARD)
                     quest:complete(player)
+                    player:addFame(xi.fameArea.SANDORIA, 7)
+                    player:addFame(xi.fameArea.BASTOK, 7)
+                    player:addFame(xi.fameArea.WINDURST, 7)
                 end,
             },
         },

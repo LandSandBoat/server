@@ -81,6 +81,7 @@ quest.sections =
 
                 [50] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:addFame(xi.fameArea.WINDURST, 16)
                         player:delKeyItem(xi.ki.RIPPED_FINAL_FANTASY_PAINTING)
                         quest:setMustZone(player)
                     end
@@ -236,6 +237,7 @@ quest.sections =
 
                 [57] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:addFame(xi.fameArea.WINDURST, 16)
                         player:delKeyItem(xi.ki.RIPPED_FINAL_FANTASY_PAINTING)
                         quest:setMustZone(player)
                     end

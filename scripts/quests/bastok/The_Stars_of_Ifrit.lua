@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_STARS_OF_IFRI
 
 quest.reward =
 {
-    fame     = 100,
+    fame     = 30,
     fameArea = xi.fameArea.BASTOK,
     gil      = 2100,
     title    = xi.title.STAR_OF_IFRIT,

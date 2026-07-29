@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.CIDS_SECRET)
 
 quest.reward =
 {
-    fame     = 30,
+    fame     = 40,
     fameArea = xi.fameArea.BASTOK,
     item     = xi.item.RAM_MANTLE,
 }

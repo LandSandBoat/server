@@ -12,7 +12,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.EARLY_BIRD_CA
 
 quest.reward =
 {
-    fame = 120,
+    fame = 20,
     fameArea = xi.fameArea.WINDURST,
     gil = 1500,
     title = xi.title.SAVIOR_OF_KNOWLEDGE,

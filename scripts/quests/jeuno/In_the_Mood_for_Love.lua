@@ -11,8 +11,6 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.IN_THE_MOOD_FOR_LOV
 quest.reward =
 {
     gil = 4800,
-    fame = 30,
-    fameArea = xi.fameArea.JEUNO,
     title = xi.title.PICK_UP_ARTIST,
 }
 
@@ -60,6 +58,9 @@ quest.sections =
             {
                 [10036] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 7)
+                        player:addFame(xi.fameArea.BASTOK, 7)
+                        player:addFame(xi.fameArea.WINDURST, 7)
                         player:confirmTrade()
                         quest:setVar(player, 'Option', 1)
                     end

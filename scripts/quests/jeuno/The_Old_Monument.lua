@@ -83,6 +83,9 @@ quest.sections =
                     player:messageSpecial(buburimuID.text.SONG_RUNES_WRITING, xi.item.SHEET_OF_PARCHMENT)
 
                     if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 7)
+                        player:addFame(xi.fameArea.BASTOK, 7)
+                        player:addFame(xi.fameArea.WINDURST, 7)
                         player:confirmTrade()
                     end
                 end,

@@ -10,8 +10,10 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLO
 
 quest.reward =
 {
-    item = xi.item.CUNNING_EARRING,
-    gil  = 3500,
+    fame     = 30,
+    fameArea = xi.fameArea.SANDORIA,
+    item     = xi.item.CUNNING_EARRING,
+    gil      = 3500,
 }
 
 quest.sections =

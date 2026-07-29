@@ -48,11 +48,13 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addItem(xi.item.DOTANUKI) -- Dotanuki
         player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.DOTANUKI)
         player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
-        player:addFame(xi.fameArea.SELBINA_RABAO, 60)
+        player:addFame(xi.fameArea.SANDORIA, 5)
+        player:addFame(xi.fameArea.BASTOK, 5)
     elseif csid == 4 then --Subsequent completions
         player:tradeComplete()
         npcUtil.giveCurrency(player, 'gil', 1800)
-        player:addFame(xi.fameArea.SELBINA_RABAO, 30)
+        player:addFame(xi.fameArea.SANDORIA, 5)
+        player:addFame(xi.fameArea.BASTOK, 5)
     end
 end
 

@@ -10,9 +10,10 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.INTRODUCTION_
 
 quest.reward =
 {
-    item  = xi.item.SHELL_RING,
-    fame  = 80,
-    title = xi.title.THIRD_RATE_ORGANIZER,
+    item     = xi.item.SHELL_RING,
+    fame     = 20,
+    fameArea = xi.fameArea.SANDORIA,
+    title    = xi.title.THIRD_RATE_ORGANIZER,
 }
 
 quest.sections =

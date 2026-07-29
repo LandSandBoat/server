@@ -106,7 +106,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             npcUtil.giveCurrency(player, 'gil', 4800)
             player:addItem(xi.item.NEW_MOON_ARMLETS)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.NEW_MOON_ARMLETS)
-            player:addFame(xi.fameArea.WINDURST, 150)
+            player:addFame(xi.fameArea.WINDURST, 50)
             player:addTitle(xi.title.DOCTOR_SHANTOTTOS_GUINEA_PIG)
             player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.WONDER_WANDS)
         end

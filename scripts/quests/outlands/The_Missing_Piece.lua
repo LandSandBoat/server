@@ -136,7 +136,10 @@ quest.sections =
                 end,
 
                 [705] = function(player, csid, option, npc)
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 20)
+                        player:addFame(xi.fameArea.BASTOK, 20)
+                    end
                 end,
             },
         },

@@ -9,7 +9,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.A_FOREMANS_BEST_F
 
 quest.reward =
 {
-    fame     = 60,
+    fame     = 20,
     fameArea = xi.fameArea.BASTOK,
 }
 

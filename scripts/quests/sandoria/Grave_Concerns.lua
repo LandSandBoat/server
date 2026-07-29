@@ -17,6 +17,7 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERN
 
 quest.reward =
 {
+    fame     = 20,
     fameArea = xi.fameArea.SANDORIA,
     gil      = 560,
     title    = xi.title.ROYAL_GRAVE_KEEPER,

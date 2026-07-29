@@ -8,7 +8,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.TRUTH_JUSTICE
 
 quest.reward =
 {
-    fame     = 10,
+    fame     = 20,
     fameArea = xi.fameArea.WINDURST,
     item     = xi.item.JUSTICE_BADGE,
     title    = xi.title.STAR_ONION_BRIGADE_MEMBER,

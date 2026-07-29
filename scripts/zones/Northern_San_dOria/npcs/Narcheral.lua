@@ -28,7 +28,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addItem(xi.item.HEALERS_BLIAUT)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.HEALERS_BLIAUT) -- Healer's Bliaut
             player:tradeComplete()
-            player:addFame(xi.fameArea.SANDORIA, 60)
+            player:addFame(xi.fameArea.SANDORIA, 20)
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.PIEUJES_DECISION)
         end
     end

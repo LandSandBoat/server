@@ -33,9 +33,11 @@ function content:onEventFinishWin(player, csid, option, npc)
         player:messageSpecial(ghelsbaID.text.YOU_CAN_NOW_BECOME_A_DRAGOON)
 
         npcUtil.completeQuest(player, xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST, {
-            title   = xi.title.HEIR_TO_THE_HOLY_CREST,
-            keyItem = xi.ki.JOB_GESTURE_DRAGOON,
-            var     = 'TheHolyCrest_Event',
+            fame     = 20,
+            fameArea = xi.fameArea.SANDORIA,
+            title    = xi.title.HEIR_TO_THE_HOLY_CREST,
+            keyItem  = xi.ki.JOB_GESTURE_DRAGOON,
+            var      = 'TheHolyCrest_Event',
         })
     end
 end

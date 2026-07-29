@@ -10,8 +10,10 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.LUFETS_LAKE_S
 
 quest.reward =
 {
-    gil   = 600,
-    title = xi.title.BEAN_CUISINE_SALTER,
+    fame     = 10,
+    fameArea = xi.fameArea.SANDORIA,
+    gil      = 600,
+    title    = xi.title.BEAN_CUISINE_SALTER,
 }
 
 quest.sections =

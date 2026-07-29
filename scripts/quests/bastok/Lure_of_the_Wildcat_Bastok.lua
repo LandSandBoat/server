@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDC
 
 quest.reward =
 {
-    fame     = 150,
+    fame     = 0,
     fameArea = xi.fameArea.BASTOK,
     keyItem  = xi.ki.BLUE_INVITATION_CARD,
 }

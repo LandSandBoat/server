@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.A_FLASH_IN_THE_PA
 
 quest.reward =
 {
-    fame     = 75,
+    fame     = 10,
     fameArea = xi.fameArea.BASTOK,
     gil      = 100,
 }

@@ -12,7 +12,9 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.LET_SLEEPING_
 
 quest.reward =
 {
-    item = xi.item.HYPNO_STAFF,
+    fame     = 40,
+    fameArea = xi.fameArea.WINDURST,
+    item     = xi.item.HYPNO_STAFF,
 }
 
 quest.sections =

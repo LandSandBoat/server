@@ -33,7 +33,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 620 then
         if npcUtil.giveItem(player, xi.item.COTTON_CAPE) then
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.GATES_TO_PARADISE)
-            player:addFame(xi.fameArea.SANDORIA, 30)
+            player:addFame(xi.fameArea.SANDORIA, 20)
             player:addTitle(xi.title.THE_PIOUS_ONE)
             player:delKeyItem(xi.ki.SCRIPTURE_OF_WATER)
         end

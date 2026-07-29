@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.LOVE_AND_ICE)
 
 quest.reward =
 {
-    fame     = 120,
+    fame     = 50,
     fameArea = xi.fameArea.BASTOK,
     item     = xi.item.LAMIA_HARP,
     title    = xi.title.SORROW_DROWNER,

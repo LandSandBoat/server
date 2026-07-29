@@ -208,7 +208,7 @@ quest.sections =
                 [653] = function(player, csid, option, npc)
                     quest:complete(player)
                     npcUtil.giveCurrency(player, 'gil', 1000)
-                    player:addFame(xi.fameArea.NORG, 30)
+                    player:addFame(xi.fameArea.NORG, 20)
                 end,
 
                 [654] = function(player, csid, option, npc)

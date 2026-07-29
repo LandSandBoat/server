@@ -8,7 +8,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.KNOW_ONES_ONI
 
 quest.reward =
 {
-    fame     = 10,
+    fame     = 20,
     fameArea = xi.fameArea.WINDURST,
     item     = xi.item.SCROLL_OF_BLAZE_SPIKES,
     title    = xi.title.SOB_SUPER_HERO,

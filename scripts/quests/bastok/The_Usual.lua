@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_USUAL)
 
 quest.reward =
 {
-    fame     = 30,
+    fame     = 50,
     fameArea = xi.fameArea.BASTOK,
     item     = xi.item.SPEED_BOW,
     title    = xi.title.STEAMING_SHEEP_REGULAR,

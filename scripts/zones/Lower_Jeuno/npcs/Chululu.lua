@@ -124,7 +124,9 @@ entity.onEventFinish = function(player, csid, option, npc)
 
     elseif csid == 200 then
         player:addTitle(xi.title.CARD_COLLECTOR)
-        player:addFame(xi.fameArea.JEUNO, 30)
+        player:addFame(xi.fameArea.SANDORIA, 7)
+        player:addFame(xi.fameArea.BASTOK, 7)
+        player:addFame(xi.fameArea.WINDURST, 7)
         player:tradeComplete()
         player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS)
 
@@ -170,15 +172,24 @@ entity.onEventFinish = function(player, csid, option, npc)
                 var = { 'AllInTheCards_date' }
             })
         then
+            player:addFame(xi.fameArea.SANDORIA, 16)
+            player:addFame(xi.fameArea.BASTOK, 16)
+            player:addFame(xi.fameArea.WINDURST, 16)
             player:confirmTrade()
         end
 
     elseif csid == 197 then
-        npcUtil.completeQuest(player, xi.questLog.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY, {
-            gil = 6000,
-            item = xi.item.CHAIN_CHOKER,
-            var = { 'RubbishDayVar' }
-        })
+        if
+            npcUtil.completeQuest(player, xi.questLog.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY, {
+                gil = 6000,
+                item = xi.item.CHAIN_CHOKER,
+                var = { 'RubbishDayVar' }
+            })
+        then
+            player:addFame(xi.fameArea.SANDORIA, 13)
+            player:addFame(xi.fameArea.BASTOK, 13)
+            player:addFame(xi.fameArea.WINDURST, 13)
+        end
     end
 end
 

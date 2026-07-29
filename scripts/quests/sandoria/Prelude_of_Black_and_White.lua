@@ -11,8 +11,9 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.PRELUDE_OF_BL
 
 quest.reward =
 {
-    item = xi.item.HEALERS_DUCKBILLS,
-    fame = 40,
+    item     = xi.item.HEALERS_DUCKBILLS,
+    fame     = 20,
+    fameArea = xi.fameArea.SANDORIA,
 }
 
 quest.sections =

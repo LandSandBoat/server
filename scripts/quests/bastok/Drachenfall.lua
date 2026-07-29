@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.DRACHENFALL)
 
 quest.reward =
 {
-    fame = 120,
+    fame = 20,
     fameArea = xi.fameArea.BASTOK,
     gil = 2000,
     title = xi.title.DRACHENFALL_ASCETIC,

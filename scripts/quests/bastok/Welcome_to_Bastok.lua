@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.WELCOME_TO_BASTOK
 
 quest.reward =
 {
-    fame     = 80,
+    fame     = 20,
     fameArea = xi.fameArea.BASTOK,
     item     = xi.item.SPATHA,
     title    = xi.title.BASTOK_WELCOMING_COMMITTEE,

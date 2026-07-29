@@ -16,8 +16,6 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS)
 
 quest.reward =
 {
-    fame = 50,
-    fameArea = xi.fameArea.JEUNO,
 }
 
 quest.sections =

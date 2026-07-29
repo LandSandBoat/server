@@ -12,8 +12,6 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL)
 
 quest.reward =
 {
-    fame     = 30,
-    fameArea = xi.fameArea.JEUNO,
     title    = xi.title.FORTUNE_TELLER_IN_TRAINING,
 }
 
@@ -67,6 +65,9 @@ quest.sections =
             {
                 [196] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 16)
+                        player:addFame(xi.fameArea.BASTOK, 16)
+                        player:addFame(xi.fameArea.WINDURST, 16)
                         player:confirmTrade()
                     end
                 end,

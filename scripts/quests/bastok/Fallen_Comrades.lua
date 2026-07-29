@@ -9,7 +9,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES)
 
 quest.reward =
 {
-    fame     = 8,
+    fame     = 10,
     fameArea = xi.fameArea.BASTOK,
     gil      = 550,
 }
@@ -60,14 +60,13 @@ quest.sections =
                 [91] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:tradeComplete()
-
-                        player:addFame(xi.fameArea.BASTOK, 112)
                     end
                 end,
 
                 [92] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:tradeComplete()
+                        player:addFame(xi.fameArea.BASTOK, 10)
                     end
                 end,
             },

@@ -40,7 +40,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 10001 then
         player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER)
         npcUtil.giveKeyItem(player, xi.ki.SUPER_SOUP_POT)
-        player:addFame(xi.fameArea.WINDURST, 30)
+        player:addFame(xi.fameArea.WINDURST, 40)
         player:tradeComplete()
     end
 end

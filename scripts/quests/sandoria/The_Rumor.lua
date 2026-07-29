@@ -10,7 +10,9 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_RUMOR)
 
 quest.reward =
 {
-    item = xi.item.SCROLL_OF_DRAIN,
+    fame     = 30,
+    fameArea = xi.fameArea.SANDORIA,
+    item     = xi.item.SCROLL_OF_DRAIN,
 }
 
 quest.sections =

@@ -11,7 +11,9 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
 
 quest.reward =
 {
-    gil = 900,
+    fame     = 16,
+    fameArea = xi.fameArea.SANDORIA,
+    gil      = 900,
 }
 
 quest.sections =
@@ -172,7 +174,7 @@ quest.sections =
                     quest:setVar(player, 'Prog', 0)
                     player:confirmTrade()
                     npcUtil.giveCurrency(player, 'gil', 900)
-                    player:addFame(xi.quest.fameArea.SANDORIA, 5)
+                    player:addFame(xi.fameArea.SANDORIA, 16)
                 end,
             },
         },

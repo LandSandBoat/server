@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.LURE_OF_THE_W
 
 quest.reward =
 {
-    fame     = 150,
+    fame     = 0,
     fameArea = xi.fameArea.WINDURST,
     keyItem  = xi.ki.GREEN_INVITATION_CARD,
 }

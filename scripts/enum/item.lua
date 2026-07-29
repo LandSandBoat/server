@@ -3942,6 +3942,7 @@ xi.item =
     SCROLL_OF_PHALANX_II                = 6571,
     MAATS_CONCOCTION                    = 6597,
     MAATS_MIX                           = 6598,
+    ROLANBERRY_854_CE                   = 6603,
     POPPER_II                           = 6684,
     LUNGO_NANGOS_THESIS                 = 6703,
     HARLEQUIN_HEAD                      = 8193,

@@ -37,6 +37,9 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 96 then
         if npcUtil.giveItem(player, xi.item.CHORAL_JUSTAUCORPS) then
             player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
+            player:addFame(xi.fameArea.SANDORIA, 7)
+            player:addFame(xi.fameArea.BASTOK, 7)
+            player:addFame(xi.fameArea.WINDURST, 7)
             player:addTitle(xi.title.PARAGON_OF_BARD_EXCELLENCE)
             player:setCharVar('circleTime', 0)
         end

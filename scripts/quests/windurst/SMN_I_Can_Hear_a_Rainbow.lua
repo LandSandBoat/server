@@ -107,7 +107,7 @@ end
 
 quest.reward =
 {
-    fame     = 30,
+    fame     = 20,
     fameArea = xi.fameArea.WINDURST,
     title    = xi.title.RAINBOW_WEAVER,
 }

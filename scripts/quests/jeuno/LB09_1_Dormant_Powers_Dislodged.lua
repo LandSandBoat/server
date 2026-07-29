@@ -31,8 +31,6 @@ local itemWantedTable =
 
 quest.reward =
 {
-    fame     = 50,
-    fameArea = xi.fameArea.JEUNO,
     keyItem  = xi.ki.SOUL_GEM,
 }
 

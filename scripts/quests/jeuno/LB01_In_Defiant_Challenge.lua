@@ -75,8 +75,6 @@ end
 
 quest.reward =
 {
-    fame     = 30,
-    fameArea = xi.fameArea.JEUNO,
     title    = xi.title.HORIZON_BREAKER,
 }
 

@@ -10,8 +10,6 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON)
 
 quest.reward =
 {
-    fame     = 30,
-    fameArea = xi.fameArea.JEUNO,
     gil      = 2100,
     item     = xi.item.BEAST_WHISTLE,
     title    = xi.title.LIFE_SAVER,
@@ -62,7 +60,11 @@ quest.sections =
             onEventFinish =
             {
                 [163] = function(player, csid, option, npc)
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 7)
+                        player:addFame(xi.fameArea.BASTOK, 7)
+                        player:addFame(xi.fameArea.WINDURST, 7)
+                    end
                 end,
             },
         },

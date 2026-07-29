@@ -87,7 +87,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addItem(xi.item.GALLANT_LEGGINGS)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.GALLANT_LEGGINGS) -- Gallant Leggings
             player:setCharVar('aBoysDreamCS', 0)
-            player:addFame(xi.fameArea.SANDORIA, 40)
+            player:addFame(xi.fameArea.SANDORIA, 20)
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_BOYS_DREAM)
         end
     elseif csid == 90 and option == 1 then
@@ -100,7 +100,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addItem(xi.item.GALLANT_SURCOAT)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.GALLANT_SURCOAT) -- Gallant Surcoat
             player:setCharVar('UnderOathCS', 9)
-            player:addFame(xi.fameArea.SANDORIA, 60)
+            player:addFame(xi.fameArea.SANDORIA, 20)
             player:setTitle(xi.title.PARAGON_OF_PALADIN_EXCELLENCE)
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
         end

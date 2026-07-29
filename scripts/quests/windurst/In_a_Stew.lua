@@ -11,7 +11,9 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.IN_A_STEW)
 
 quest.reward =
 {
-    gil = 900,
+    fame     = 10,
+    fameArea = xi.fameArea.WINDURST,
+    gil      = 900,
 }
 
 quest.sections =

@@ -40,7 +40,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 118 then
         player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.EVERYONES_GRUDGE)
         player:tradeComplete()
-        player:addFame(xi.fameArea.NORG, 80)
+        player:addFame(xi.fameArea.NORG, 20)
         npcUtil.giveKeyItem(player, xi.ki.TONBERRY_PRIEST_KEY)
         player:setCharVar('EveryonesGrudgeStarted', 0)
         player:addTitle(xi.title.HONORARY_DOCTORATE_MAJORING_IN_TONBERRIES)

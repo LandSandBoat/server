@@ -15,7 +15,7 @@ local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.YOU_CALL_THAT
 
 quest.reward =
 {
-    fame     = 75,
+    fame     = 60,
     fameArea = xi.fameArea.WINDURST,
     gil      = 7200,
     title    = xi.title.YA_DONE_GOOD

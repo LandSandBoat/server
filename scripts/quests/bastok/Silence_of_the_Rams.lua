@@ -11,8 +11,8 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.SILENCE_OF_THE_RA
 
 quest.reward =
 {
-    fame     = 125,
-    fameArea = xi.fameArea.BASTOK,
+    fame     = 20,
+    fameArea = xi.fameArea.NORG,
     item     = xi.item.PURPLE_BELT,
     title    = xi.title.PURPLE_BELT,
 }

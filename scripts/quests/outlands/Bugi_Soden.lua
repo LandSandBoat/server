@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.BUGI_SODEN)
 
 quest.reward =
 {
-    fame = 30,
+    fame = 20,
     fameArea = xi.fameArea.NORG,
 }
 

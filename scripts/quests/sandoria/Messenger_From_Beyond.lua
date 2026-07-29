@@ -12,8 +12,9 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.MESSENGER_FRO
 
 quest.reward =
 {
-    item = xi.item.BLESSED_HAMMER,
-    fame = 20,
+    item     = xi.item.BLESSED_HAMMER,
+    fame     = 20,
+    fameArea = xi.fameArea.SANDORIA,
 }
 
 quest.sections =

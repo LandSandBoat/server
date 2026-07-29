@@ -39,8 +39,10 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.DONATE_TO_RECYCLING)
     elseif
         csid == 21 and
-        npcUtil.completeQuest(player, xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.DONATE_TO_RECYCLING, { item = xi.item.WASTEBASKET, fame_area = xi.fameArea.SELBINA_RABAO, title = xi.title.ECOLOGIST })
+        npcUtil.completeQuest(player, xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.DONATE_TO_RECYCLING, { item = xi.item.WASTEBASKET, title = xi.title.ECOLOGIST })
     then
+        player:addFame(xi.fameArea.SANDORIA, 10)
+        player:addFame(xi.fameArea.BASTOK, 10)
         player:confirmTrade()
     end
 end

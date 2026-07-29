@@ -11,9 +11,8 @@ local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_REAL
 
 quest.reward =
 {
-    item     = xi.item.GLASS_FIBER_FISHING_ROD,
-    title    = xi.title.THE_LOVE_DOCTOR,
-    fameArea = xi.fameArea.SELBINA_RABAO,
+    item  = xi.item.GLASS_FIBER_FISHING_ROD,
+    title = xi.title.THE_LOVE_DOCTOR,
 }
 
 quest.sections =
@@ -65,6 +64,8 @@ quest.sections =
             {
                 [75] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 10)
+                        player:addFame(xi.fameArea.BASTOK, 10)
                         player:confirmTrade()
                     end
                 end,

@@ -10,15 +10,15 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.MOM_THE_ADVENTURE
 
 quest.reward =
 {
-    fame     = 20,
+    fame     = 10,
     fameArea = xi.fameArea.BASTOK,
     title    = xi.title.RINGBEARER,
 }
 
 local handleEventFinish = function(player, csid, option, npc)
-    if quest:complete(player) then
-        local gilReward = csid == 233 and 200 or 100
+    local gilReward = csid == 233 and 200 or 100
 
+    if quest:complete(player) then
         player:delKeyItem(xi.ki.LETTER_FROM_ROH_LATTEH)
         npcUtil.giveCurrency(player, 'gil', gilReward)
         quest:setMustZone(player)

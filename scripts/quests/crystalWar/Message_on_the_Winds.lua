@@ -12,7 +12,9 @@ local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.MESSAGE_
 
 quest.reward =
 {
-    item = xi.item.SMART_GRENADE,
+    fame     = 20,
+    fameArea = xi.fameArea.BASTOK,
+    item     = xi.item.SMART_GRENADE,
 }
 
 quest.sections =

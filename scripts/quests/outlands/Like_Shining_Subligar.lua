@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHININ
 quest.reward =
 {
     fameArea = xi.fameArea.NORG,
-    fame     = 100,
+    fame     = 30,
     title    = xi.title.LOOKS_SUBLIME_IN_A_SUBLIGAR,
     item     = xi.item.SCROLL_OF_KURAYAMI_ICHI,
 }

@@ -76,7 +76,9 @@ entity.onEventFinish = function(player, csid, option, npc)
             npcUtil.giveCurrency(player, 'gil', 3000)
             player:addItem(xi.item.MYTHRIL_RING)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.MYTHRIL_RING)
-            player:addFame(xi.fameArea.JEUNO, 30)
+            player:addFame(xi.fameArea.SANDORIA, 13)
+            player:addFame(xi.fameArea.BASTOK, 13)
+            player:addFame(xi.fameArea.WINDURST, 13)
             player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.COOKS_PRIDE)
         end
     end

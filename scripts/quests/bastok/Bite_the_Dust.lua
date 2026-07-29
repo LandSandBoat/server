@@ -9,7 +9,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.BITE_THE_DUST)
 
 quest.reward =
 {
-    fame     = 8,
+    fame     = 10,
     fameArea = xi.fameArea.BASTOK,
     gil      = 350,
     title    = xi.title.SAND_BLASTER,
@@ -67,10 +67,6 @@ quest.sections =
                 [193] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:tradeComplete()
-
-                        if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then
-                            player:addFame(xi.fameArea.BASTOK, 112)
-                        end
                     end
                 end,
             },

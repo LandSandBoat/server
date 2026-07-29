@@ -50,7 +50,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET)
         end
 
-        player:addFame(xi.fameArea.NORG, 40)
+        player:addFame(xi.fameArea.NORG, 30)
         player:addTitle(xi.title.BLACK_MARKETEER)
         player:startEvent(20)
     elseif csid == 18 then
@@ -59,7 +59,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET)
         end
 
-        player:addFame(xi.fameArea.NORG, 50)
+        player:addFame(xi.fameArea.NORG, 40)
         player:addTitle(xi.title.BLACK_MARKETEER)
         player:startEvent(20)
     elseif csid == 19 then
@@ -68,7 +68,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET)
         end
 
-        player:addFame(xi.fameArea.NORG, 80)
+        player:addFame(xi.fameArea.NORG, 50)
         player:addTitle(xi.title.BLACK_MARKETEER)
         player:startEvent(20)
     end

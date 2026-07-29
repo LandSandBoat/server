@@ -13,7 +13,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_SIRENS_TEAR)
 
 quest.reward =
 {
-    fame = 120,
+    fame = 10,
     fameArea = xi.fameArea.BASTOK,
     gil = 150,
     title = xi.title.TEARJERKER,

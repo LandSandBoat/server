@@ -14,8 +14,6 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.WHENCE_BLOWS_THE_WI
 
 quest.reward =
 {
-    fame = 50,
-    fameArea = xi.fameArea.JEUNO,
     title = xi.title.SKY_BREAKER,
 }
 

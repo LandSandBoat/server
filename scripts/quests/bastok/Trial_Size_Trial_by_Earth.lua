@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.TRIAL_SIZE_TRIAL_
 
 quest.reward =
 {
-    fame     = 30,
+    fame     = 20,
     fameArea = xi.fameArea.BASTOK,
     item     = xi.item.SCROLL_OF_INSTANT_WARP,
 }

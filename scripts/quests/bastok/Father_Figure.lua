@@ -9,7 +9,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.FATHER_FIGURE)
 
 quest.reward =
 {
-    fame     = 120,
+    fame     = 20,
     fameArea = xi.fameArea.BASTOK,
     gil      = 2200,
 }

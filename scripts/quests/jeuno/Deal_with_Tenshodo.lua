@@ -9,8 +9,8 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.DEAL_WITH_TENSHODO)
 
 quest.reward =
 {
-    fame     = 30,
-    fameArea = xi.fameArea.JEUNO,
+    fame     = 50,
+    fameArea = xi.fameArea.NORG,
     keyItem  = xi.ki.CLOCK_TOWER_OIL,
     title    = xi.title.TRADER_OF_RENOWN,
 }

@@ -27,7 +27,7 @@ end
 
 quest.reward =
 {
-    fame     = 10,
+    fame     = 60,
     fameArea = xi.fameArea.WINDURST,
     item     = xi.item.PROMISE_BADGE,
 }

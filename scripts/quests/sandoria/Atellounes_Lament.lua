@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.ATELLOUNES_LA
 
 quest.reward =
 {
-    fame = 30,
+    fame = 20,
     fameArea = xi.fameArea.SANDORIA,
     item = xi.item.TRAINEE_GLOVES,
 }

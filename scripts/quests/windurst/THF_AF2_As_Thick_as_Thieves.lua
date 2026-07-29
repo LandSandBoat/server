@@ -24,7 +24,9 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.AS_THICK_AS_T
 
 quest.reward =
 {
-    item = xi.item.ROGUES_BONNET,
+    fame     = 20,
+    fameArea = xi.fameArea.WINDURST,
+    item     = xi.item.ROGUES_BONNET,
 }
 
 local function isNaked(player)

@@ -12,11 +12,7 @@ local selbinaID = zones[xi.zone.SELBINA]
 
 local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.TEST_MY_METTLE)
 
-quest.reward =
-{
-    fame     = 30,
-    fameArea = xi.fameArea.SELBINA_RABAO,
-}
+quest.reward = {}
 
 local betAmounts =
 {
@@ -149,6 +145,8 @@ quest.sections =
                     if quest:complete(player) then
                         player:confirmTrade()
                         npcUtil.giveCurrency(player, 'gil', rewardedGil)
+                        player:addFame(xi.fameArea.SANDORIA, 5)
+                        player:addFame(xi.fameArea.BASTOK, 5)
                         quest:setVar(player, 'Repeat', JstMidnight())
                     end
                 end,

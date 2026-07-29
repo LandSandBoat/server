@@ -12,7 +12,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH)
 
 quest.reward =
 {
-    fame     = 60,
+    fame     = 20,
     fameArea = xi.fameArea.BASTOK,
     item     = xi.item.TEMPLE_HOSE,
     title    = xi.title.PARAGON_OF_MONK_EXCELLENCE,

@@ -13,7 +13,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.GROCERIES)
 
 quest.reward =
 {
-    fame     = 75,
+    fame     = 10,
     fameArea = xi.fameArea.BASTOK,
     item     = xi.item.RABBIT_MANTLE,
 }
@@ -76,7 +76,7 @@ quest.sections =
             onEventFinish =
             {
                 [112] = function(player, csid, option, npc)
-                    player:addFame(xi.fameArea.BASTOK, 8)
+                    player:addFame(xi.fameArea.BASTOK, 10)
                     npcUtil.giveCurrency(player, 'gil', 10)
 
                     quest:setVar(player, 'Prog', 0)
