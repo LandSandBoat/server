@@ -24,7 +24,19 @@ mission.sections =
 
         [xi.zone.HALL_OF_THE_GODS] =
         {
-            ['_6z0'] = mission:messageSpecial(hallID.text.DEPRESSION_A_CLUE),
+            ['_6z0'] =
+            {
+                onTrigger = function(player, npc)
+                    player:messageText(npc, hallID.text.DEPRESSION_A_CLUE, false, 6)
+
+                    return mission:noAction()
+                end,
+            },
+        },
+
+        [xi.zone.LOWER_JEUNO] =
+        {
+            ['Aldo'] = mission:event(24),
         },
 
         [xi.zone.NORG] =

@@ -1,8 +1,7 @@
 -----------------------------------
 -- Great Wheel
 -- Family: Humanoid (Kam'lanaught / Trust: Mildaurion)
--- Description: Damages enemies in an area of effect. Additional Effect: Enmity Reset
--- Note: Skill used by "Trust: Mildaurion" also inflicts knockback.
+-- Description: Damages enemies in an area of effect with knockback. Additional Effect: Enmity Reset
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
