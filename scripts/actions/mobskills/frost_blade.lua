@@ -12,7 +12,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.ENBLIZZARD, 65, 0, 30))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.ENBLIZZARD, 65, 0, 1800)) -- Lasts until replaced or dispelled.
 
     return xi.effect.ENBLIZZARD
 end

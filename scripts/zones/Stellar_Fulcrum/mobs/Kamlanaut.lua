@@ -25,6 +25,8 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 15)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
     mob:setMobMod(xi.mobMod.DETECTION, xi.detects.HEARING)
     mob:setMobMod(xi.mobMod.SOUND_RANGE, 15)
 end
@@ -38,7 +40,7 @@ entity.onMobFight = function(mob, target)
         local skill = math.randomInt(823, 828)
         mob:setLocalVar('currentTP', mob:getTP())
         mob:useMobAbility(skill)
-        mob:setLocalVar('nextEnSkill', GetSystemTime() + 20)
+        mob:setLocalVar('nextEnSkill', GetSystemTime() + math.randomInt(25, 30))
     end
 end
 
@@ -67,21 +69,13 @@ entity.onMobWeaponSkill = function(mob, target, skill, action)
     end
 end
 
-entity.onMobSpellChoose = function(mob, target)
+entity.onMobSpellChoose = function(mob, target, spellId)
     local spellList =
     {
-        [1] = { xi.magic.spell.SLOWGA,    target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.SLOW,      3, 100 },
-        [2] = { xi.magic.spell.SILENCEGA, target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.SILENCE,   0, 100 },
-        [3] = { xi.magic.spell.PARALYGA,  target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.PARALYSIS, 0, 100 },
-        [4] = { xi.magic.spell.GRAVIGA,   target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.WEIGHT,    0, 100 },
+        [1] = { xi.magic.spell.SLOWGA,    target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.SLOW,    3, 100 },
+        [2] = { xi.magic.spell.SILENCEGA, target, false, xi.action.type.ENFEEBLING_TARGET, xi.effect.SILENCE, 0, 100 },
+        [3] = { xi.magic.spell.DISPELGA,  target, false, xi.action.type.NONE,              nil,               0, 100 }, -- He always uses dispel, even if the player isn't buffed.
     }
-
-    if
-        target:hasStatusEffectByFlag(xi.effectFlag.DISPELABLE) and
-        mob:isEngaged()
-    then
-        table.insert(spellList, #spellList + 1, { xi.magic.spell.DISPELGA, target, false, xi.action.type.NONE, nil, 100 })
-    end
 
     return xi.combat.behavior.chooseAction(mob, target, nil, spellList)
 end

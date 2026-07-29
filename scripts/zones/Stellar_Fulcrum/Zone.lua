@@ -5,8 +5,8 @@
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerCuboidTriggerArea(1, -522, -2, -49, -517, -1, -43) -- To Upper Delkfutt's Tower
-    zone:registerCuboidTriggerArea(2,  318, -3,   2,  322,  1,   6) -- Exit BCNM to ?
+    zone:registerCuboidTriggerArea(1, -522, -2, -49, -517, -1, -43) -- To Upper Delkfutt's Tower (west room)
+    zone:registerCuboidTriggerArea(2,  318, -3,   2,  322,  1,   6) -- To Upper Delkfutt's Tower (east room)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
@@ -38,7 +38,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         end,
 
         [2] = function()
-            player:startEvent(8)
+            player:startEvent(9)
         end,
     }
 end
@@ -52,6 +52,8 @@ end
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 8 and option == 1 then
         player:setPos(-370, -178, -40, 243, 158)
+    elseif csid == 9 and option == 1 then
+        player:setPos(-228.91, -175.99, -43.1, 89, 158)
     end
 end
 

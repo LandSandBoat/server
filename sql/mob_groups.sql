@@ -12824,7 +12824,7 @@ INSERT INTO `mob_groups` VALUES (37,4712,178,'Xuan_Wu',0,128,0,0,5000,0,NULL);
 -- Stellar_Fulcrum (Zone 179)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,2184,179,'Kamlanaut',0,128,0,15000,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (1,2184,179,'Kamlanaut',0,128,0,13500,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (2,4006,179,'Trion',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (3,4249,179,'Volker',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (4,75,179,'Ajido-Marujido',0,128,0,0,0,0,NULL);

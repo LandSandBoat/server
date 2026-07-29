@@ -22,8 +22,14 @@ mission.sections =
             return currentMission == mission.missionId
         end,
 
+        [xi.zone.LOWER_JEUNO] =
+        {
+            ['Aldo'] = mission:event(24),
+        },
+
         [xi.zone.NORG] =
         {
+            ['_700']      = mission:event(5):replaceDefault(),
             ['Gilgamesh'] = mission:event(10),
             ['Kamui']     = mission:event(11),
         },
