@@ -26,10 +26,20 @@ m:addOverride('xi.actions.weaponskills.wasp_sting.onUseWeaponSkill', function(pl
     local effectId      = xi.effect.POISON
     local actionElement = xi.element.WATER
     local power         = 1
-    local skillType     = xi.skill.DAGGER
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
-    local duration      = math.floor((75 + 15 * tp / 1000) * resist)
-    xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
+    local maccParams    =
+    {
+        effectId       = effectId,
+        magicalElement = actionElement,
+        skillType      = xi.skill.DAGGER,
+    }
+
+    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
+
+    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 0) then
+        local duration = math.floor((75 + 15 * tp / 1000) * resistanceRate)
+
+        xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
+    end
 
     return tpHits, extraHits, criticalHit, damage
 end)
@@ -63,13 +73,21 @@ m:addOverride('xi.actions.weaponskills.shadowstitch.onUseWeaponSkill', function(
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     -- Handle status effect
-    if math.randomInt(1, 100) <= xi.weaponskills.fTP(tp, { 50, 75, 100 }) then
-        local effectId      = xi.effect.BIND
-        local actionElement = xi.element.ICE
-        local power         = 1
-        local skillType     = xi.skill.DAGGER
-        local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
-        local duration      = math.floor((5 + tp / 200) * resist)
+    local effectId      = xi.effect.BIND
+    local actionElement = xi.element.ICE
+    local power         = 1
+    local maccParams    =
+    {
+        effectId       = effectId,
+        magicalElement = actionElement,
+        skillType      = xi.skill.DAGGER,
+        bonusMacc      = xi.weaponskills.fTP(tp, { 25, 50, 100 }),
+    }
+
+    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
+
+    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 0) then
+        local duration = math.floor((5 + tp / 200) * resistanceRate)
 
         xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
     end
@@ -92,10 +110,20 @@ m:addOverride('xi.actions.weaponskills.viper_bite.onUseWeaponSkill', function(pl
     local effectId      = xi.effect.POISON
     local actionElement = xi.element.WATER
     local power         = 3
-    local skillType     = xi.skill.DAGGER
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
-    local duration      = math.floor((30 + 6 * tp / 100) * resist)
-    xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
+    local maccParams    =
+    {
+        effectId       = effectId,
+        magicalElement = actionElement,
+        skillType      = xi.skill.DAGGER,
+    }
+
+    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
+
+    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 0) then
+        local duration = math.floor((30 + 6 * tp / 100) * resistanceRate)
+
+        xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
+    end
 
     return tpHits, extraHits, criticalHit, damage
 end)
@@ -270,13 +298,21 @@ m:addOverride('xi.actions.weaponskills.mordant_rime.onUseWeaponSkill', function(
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
     -- Handle status effect
-    if math.randomInt(1, 100) <= xi.weaponskills.fTP(tp, { 50, 75, 100 }) then
-        local effectId      = xi.effect.WEIGHT
-        local actionElement = xi.element.WIND
-        local power         = 25
-        local skillType     = xi.skill.DAGGER
-        local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
-        local duration      = math.floor(60 * resist)
+    local effectId      = xi.effect.WEIGHT
+    local actionElement = xi.element.WIND
+    local power         = 25
+    local maccParams    =
+    {
+        effectId       = effectId,
+        magicalElement = actionElement,
+        skillType      = xi.skill.DAGGER,
+        bonusMacc      = xi.weaponskills.fTP(tp, { 25, 50, 100 }),
+    }
+
+    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
+
+    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 0) then
+        local duration = math.floor(60 * resistanceRate)
 
         xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
     end

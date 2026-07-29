@@ -26,10 +26,20 @@ m:addOverride('xi.actions.weaponskills.shield_break.onUseWeaponSkill', function(
     local effectId      = xi.effect.EVASION_DOWN
     local actionElement = xi.element.ICE
     local power         = 40
-    local skillType     = xi.skill.GREAT_AXE
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
-    local duration      = math.floor((120 + 6 * tp / 100) * resist)
-    xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
+    local maccParams    =
+    {
+        effectId       = effectId,
+        magicalElement = actionElement,
+        skillType      = xi.skill.GREAT_AXE,
+    }
+
+    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
+
+    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 0) then
+        local duration = math.floor((120 + 6 * tp / 100) * resistanceRate)
+
+        xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
+    end
 
     return tpHits, extraHits, criticalHit, damage
 end)
@@ -72,10 +82,20 @@ m:addOverride('xi.actions.weaponskills.armor_break.onUseWeaponSkill', function(p
     local effectId      = xi.effect.DEFENSE_DOWN
     local actionElement = xi.element.WIND
     local power         = 25
-    local skillType     = xi.skill.GREAT_AXE
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
-    local duration      = math.floor((120 + 6 * tp / 100) * resist)
-    xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
+    local maccParams    =
+    {
+        effectId       = effectId,
+        magicalElement = actionElement,
+        skillType      = xi.skill.GREAT_AXE,
+    }
+
+    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
+
+    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 0) then
+        local duration = math.floor((120 + 6 * tp / 100) * resistanceRate)
+
+        xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
+    end
 
     return tpHits, extraHits, criticalHit, damage
 end)
@@ -106,10 +126,20 @@ m:addOverride('xi.actions.weaponskills.weapon_break.onUseWeaponSkill', function(
     local effectId      = xi.effect.ATTACK_DOWN
     local actionElement = xi.element.WATER
     local power         = 25
-    local skillType     = xi.skill.GREAT_AXE
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
-    local duration      = math.floor((120 + 6 * tp / 100) * resist)
-    xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
+    local maccParams    =
+    {
+        effectId       = effectId,
+        magicalElement = actionElement,
+        skillType      = xi.skill.GREAT_AXE,
+    }
+
+    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
+
+    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 0) then
+        local duration = math.floor((120 + 6 * tp / 100) * resistanceRate)
+
+        xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
+    end
 
     return tpHits, extraHits, criticalHit, damage
 end)
@@ -137,7 +167,6 @@ m:addOverride('xi.actions.weaponskills.full_break.onUseWeaponSkill', function(pl
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     -- Handle status effects.
-    local skillType     = xi.skill.GREAT_AXE
     local effects =
     {
         [1] = { xi.effect.ATTACK_DOWN,   xi.element.WATER, 12.5 },
@@ -149,9 +178,20 @@ m:addOverride('xi.actions.weaponskills.full_break.onUseWeaponSkill', function(pl
         local effectId      = effects[index][1]
         local actionElement = effects[index][2]
         local power         = effects[index][3]
-        local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
-        local duration      = math.floor((120 + 6 * tp / 100) * resist)
-        xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
+        local maccParams    =
+        {
+            effectId       = effectId,
+            magicalElement = actionElement,
+            skillType      = xi.skill.GREAT_AXE,
+        }
+
+        local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
+
+        if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 0) then
+            local duration = math.floor((120 + 6 * tp / 100) * resistanceRate)
+
+            xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
+        end
     end
 
     return tpHits, extraHits, criticalHit, damage
@@ -185,10 +225,20 @@ m:addOverride('xi.actions.weaponskills.metatron_torment.onUseWeaponSkill', funct
     local effectId      = xi.effect.DEFENSE_DOWN
     local actionElement = xi.element.WIND
     local power         = 19
-    local skillType     = xi.skill.GREAT_AXE
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
-    local duration      = math.floor(120 * resist)
-    xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
+    local maccParams    =
+    {
+        effectId       = effectId,
+        magicalElement = actionElement,
+        skillType      = xi.skill.GREAT_AXE,
+    }
+
+    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
+
+    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 0) then
+        local duration = math.floor(120 * resistanceRate)
+
+        xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
+    end
 
     return tpHits, extraHits, criticalHit, damage
 end)

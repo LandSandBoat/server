@@ -43,10 +43,20 @@ m:addOverride('xi.actions.weaponskills.blade_retsu.onUseWeaponSkill', function(p
     local effectId      = xi.effect.PARALYSIS
     local actionElement = xi.element.ICE
     local power         = utils.clamp(30 + 3 * (player:getMainLvl() - target:getMainLvl()), 5, 35)
-    local skillType     = xi.skill.KATANA
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
-    local duration      = math.floor(xi.weaponskills.fTP(tp, { 30, 60, 120 }) * resist)
-    xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
+    local maccParams    =
+    {
+        effectId       = effectId,
+        magicalElement = actionElement,
+        skillType      = xi.skill.KATANA,
+    }
+
+    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
+
+    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 0) then
+        local duration = math.floor(xi.weaponskills.fTP(tp, { 30, 60, 120 }) * resistanceRate)
+
+        xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
+    end
 
     return tpHits, extraHits, criticalHit, damage
 end)
@@ -184,10 +194,20 @@ m:addOverride('xi.actions.weaponskills.blade_metsu.onUseWeaponSkill', function(p
     local effectId      = xi.effect.PARALYSIS
     local actionElement = xi.element.ICE
     local power         = 10
-    local skillType     = xi.skill.KATANA
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
-    local duration      = math.floor(60 * resist)
-    xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
+    local maccParams    =
+    {
+        effectId       = effectId,
+        magicalElement = actionElement,
+        skillType      = xi.skill.KATANA,
+    }
+
+    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
+
+    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 0) then
+        local duration = math.floor(60 * resistanceRate)
+
+        xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
+    end
 
     return tpHits, extraHits, criticalHit, damage
 end)
@@ -212,10 +232,20 @@ m:addOverride('xi.actions.weaponskills.blade_kamu.onUseWeaponSkill', function(pl
     local effectId      = xi.effect.ACCURACY_DOWN
     local actionElement = xi.element.EARTH
     local power         = 10
-    local skillType     = xi.skill.KATANA
-    local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
-    local duration      = math.floor(6 * tp / 100 * resist)
-    xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
+    local maccParams    =
+    {
+        effectId       = effectId,
+        magicalElement = actionElement,
+        skillType      = xi.skill.KATANA,
+    }
+
+    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
+
+    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 0) then
+        local duration = math.floor(6 * tp / 100 * resistanceRate)
+
+        xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
+    end
 
     return tpHits, extraHits, criticalHit, damage
 end)

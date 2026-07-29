@@ -324,8 +324,17 @@ if not xi.module.isContentEnabled('ABYSSEA') then
         target:updateClaim(actor)
 
         -- Calculate resist rate.
-        local bonusAcc = actor:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + actor:getMod(xi.mod.QUICK_DRAW_MACC)
-        local resist   = xi.combat.magicHitRate.calculateResistRate(actor, target, 0, xi.skill.MARKSMANSHIP, 0,  data.element, xi.mod.AGI, 0, bonusAcc)
+        local bonusAcc   = actor:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + actor:getMod(xi.mod.QUICK_DRAW_MACC)
+        local maccParams =
+        {
+            effectId       = data.applyEffectId or 0,
+            magicalElement = data.element,
+            skillType      = xi.skill.MARKSMANSHIP,
+            actorStat      = xi.mod.AGI,
+            bonusMacc      = bonusAcc,
+        }
+
+        local resist = xi.combat.magicHitRate.calculateResistRate(actor, target, maccParams)
 
         -- Handle damage.
         local damage = 0

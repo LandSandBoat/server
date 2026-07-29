@@ -29,7 +29,15 @@ if not xi.module.isContentEnabled('ABYSSEA') then
             not xi.data.statusEffect.isTargetResistant(player, target, xi.effect.TERROR) and
             not xi.data.statusEffect.isEffectNullified(target, xi.effect.TERROR, 0)
         then
-            local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, xi.skillRank.B_MINUS, xi.element.DARK, xi.mod.CHR, xi.effect.TERROR)
+            local maccParams =
+            {
+                effectId       = xi.effect.TERROR,
+                magicalElement = xi.element.DARK,
+                skillRank      = xi.skillRank.B_MINUS,
+                actorStat      = xi.mod.CHR,
+            }
+
+            local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
 
             if xi.data.statusEffect.isResistRateSuccessfull(xi.effect.TERROR, resistanceRate, 0) then
                 target:addStatusEffect(xi.effect.TERROR, { power = 1, duration = 10 * resistanceRate, origin = player })

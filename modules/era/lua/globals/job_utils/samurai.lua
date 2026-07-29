@@ -48,7 +48,15 @@ m:addOverride('xi.job_utils.samurai.useBladeBash', function(player, target, abil
         not xi.data.statusEffect.isTargetResistant(player, target, xi.effect.STUN) and
         not xi.data.statusEffect.isEffectNullified(target, xi.effect.STUN, 0)
     then
-        local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, xi.skillRank.A_PLUS, xi.element.THUNDER, xi.mod.INT, xi.effect.STUN, 0)
+        local maccParams =
+        {
+            effectId       = xi.effect.STUN,
+            magicalElement = xi.element.THUNDER,
+            skillRank      = xi.skillRank.A_PLUS,
+            actorStat      = xi.mod.INT,
+        }
+
+        local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
         if xi.data.statusEffect.isResistRateSuccessfull(xi.effect.STUN, resistanceRate, 0) then
             target:addStatusEffect(xi.effect.STUN, { power = 1, duration = 6 * resistanceRate, origin = player })
         end
@@ -60,7 +68,15 @@ m:addOverride('xi.job_utils.samurai.useBladeBash', function(player, target, abil
         not xi.data.statusEffect.isTargetResistant(player, target, xi.effect.PLAGUE) and
         not xi.data.statusEffect.isEffectNullified(target, xi.effect.PLAGUE, 0)
     then
-        local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, xi.skillRank.A_PLUS, xi.element.FIRE, xi.mod.INT, xi.effect.PLAGUE, 0)
+        local maccParams =
+        {
+            effectId       = xi.effect.PLAGUE,
+            magicalElement = xi.element.FIRE,
+            skillRank      = xi.skillRank.A_PLUS,
+            actorStat      = xi.mod.INT,
+        }
+
+        local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
         if xi.data.statusEffect.isResistRateSuccessfull(xi.effect.PLAGUE, resistanceRate, 0) then
             target:addStatusEffect(xi.effect.PLAGUE, { power = 5, duration = 15 * resistanceRate, origin = player })
         end

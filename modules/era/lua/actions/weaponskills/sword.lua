@@ -72,13 +72,21 @@ m:addOverride('xi.actions.weaponskills.flat_blade.onUseWeaponSkill', function(pl
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     -- Handle status effect
-    if math.randomInt(1, 100) <= xi.weaponskills.fTP(tp, { 50, 75, 100 }) then
-        local effectId      = xi.effect.STUN
-        local actionElement = xi.element.THUNDER
-        local power         = 1
-        local skillType     = xi.skill.SWORD
-        local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
-        local duration      = math.floor(4 * resist)
+    local effectId      = xi.effect.STUN
+    local actionElement = xi.element.THUNDER
+    local power         = 1
+    local maccParams    =
+    {
+        effectId       = effectId,
+        magicalElement = actionElement,
+        skillType      = xi.skill.SWORD,
+        bonusMacc      = xi.weaponskills.fTP(tp, { 25, 50, 100 }),
+    }
+
+    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
+
+    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 0) then
+        local duration = math.floor(4 * resistanceRate)
 
         xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
     end
@@ -352,13 +360,21 @@ m:addOverride('xi.actions.weaponskills.death_blossom.onUseWeaponSkill', function
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     -- Handle status effect
-    if math.randomInt(1, 100) <= xi.weaponskills.fTP(tp, { 50, 75, 100 }) then
-        local effectId      = xi.effect.MAGIC_EVASION_DOWN
-        local actionElement = xi.element.THUNDER
-        local power         = 10
-        local skillType     = xi.skill.SWORD
-        local resist        = xi.combat.magicHitRate.calculateResistRate(player, target, 0, skillType, 0, actionElement, 0, effectId, 0)
-        local duration      = math.floor(60 * resist)
+    local effectId      = xi.effect.MAGIC_EVASION_DOWN
+    local actionElement = xi.element.THUNDER
+    local power         = 10
+    local maccParams    =
+    {
+        effectId       = effectId,
+        magicalElement = actionElement,
+        skillType      = xi.skill.SWORD,
+        bonusMacc      = xi.weaponskills.fTP(tp, { 25, 50, 100 }),
+    }
+
+    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
+
+    if xi.data.statusEffect.isResistRateSuccessfull(effectId, resistanceRate, 0) then
+        local duration = math.floor(60 * resistanceRate)
 
         xi.weaponskills.handleWeaponskillEffect(player, target, effectId, actionElement, damage, power, duration)
     end
