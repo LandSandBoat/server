@@ -227,6 +227,9 @@ void CLuaZone::rebuildNavmesh(const sol::table& table)
     config.filterLowHangingObstacles    = table.get_or("filterLowHangingObstacles", config.filterLowHangingObstacles);
     config.filterLedgeSpans             = table.get_or("filterLedgeSpans", config.filterLedgeSpans);
     config.filterWalkableLowHeightSpans = table.get_or("filterWalkableLowHeightSpans", config.filterWalkableLowHeightSpans);
+    config.generateOffMeshLinks         = table.get_or("generateOffMeshLinks", config.generateOffMeshLinks);
+    config.offMeshMaxDrop               = table.get_or("offMeshMaxDrop", config.offMeshMaxDrop);
+    config.offMeshHorizReach            = table.get_or("offMeshHorizReach", config.offMeshHorizReach);
 
     if (const auto ySkipPlanes = table.get<sol::optional<sol::table>>("ySkipPlanes"))
     {

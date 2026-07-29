@@ -34,11 +34,11 @@ struct NavMeshSkipSphere
 struct NavMeshConfig
 {
     float cellSize{ 0.5f };               // Previous xiNavmeshes value: 0.4
-    float cellHeight{ 0.4f };             // Previous xiNavmeshes value: 0.2
+    float cellHeight{ 0.2f };             // Previous xiNavmeshes value: 0.2
     float walkableSlopeAngle{ 46.0f };    // Previous xiNavmeshes value: 46.0
     float agentHeight{ 2.0f };            // Previous xiNavmeshes value: 1.8
     float agentRadius{ 0.5f };            // Previous xiNavmeshes value: 0.3
-    float agentMaxClimb{ 0.6f };          // Previous xiNavmeshes value: 0.6
+    float agentMaxClimb{ 1.0f };          // Previous xiNavmeshes value: 0.6
     float maxEdgeLen{ 0.0f };             // Previous xiNavmeshes value: 12.0
     float maxSimplificationError{ 1.3f }; // Previous xiNavmeshes value: 1.3
     int   minRegionArea{ 8 };             // Previous xiNavmeshes value: 8
@@ -63,4 +63,9 @@ struct NavMeshConfig
     // remove stray geometry parked far outside the playable area, which would otherwise
     // inflate the world bounds and with them the tile grid.
     std::vector<NavMeshSkipSphere> skipSpheres{};
+
+    // Auto-generate off-mesh drop/step links across ledges Recast severs; zone-wide.
+    bool  generateOffMeshLinks{ true };
+    float offMeshMaxDrop{ 5.0f };    // largest vertical drop (wu) a link may bridge
+    float offMeshHorizReach{ 3.0f }; // largest horizontal ledge->landing offset (wu)
 };
