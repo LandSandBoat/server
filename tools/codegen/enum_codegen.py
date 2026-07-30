@@ -83,41 +83,77 @@ def emit_pure_enum(yaml_path: Path) -> dict[str, Any]:
     }
 
 
-def emit_table_enum(yaml_path: Path) -> dict[str, Any] | None:
-    """Same return shape as `emit_pure_enum`. Returns None when the file has no `meta.enum:` block."""
+def resolve_sections(doc: dict[str, Any], path: str) -> list[dict[str, Any]]:
+    """Every section the path names; `*` steps through all entries at that level (`ecosystems.*.families`)."""
+    nodes: list[dict[str, Any]] = [doc]
+    for part in path.split("."):
+        nxt: list[dict[str, Any]] = []
+        for node in nodes:
+            if part == "*":
+                nxt.extend(v for v in node.values() if isinstance(v, dict))
+            else:
+                child = node.get(part)
+                if isinstance(child, dict):
+                    nxt.append(child)
+        nodes = nxt
+    return nodes
+
+
+def emit_table_enums(yaml_path: Path) -> list[dict[str, Any]]:
+    """One entry per `meta.enum:` block. Members emit in id order."""
     with yaml_path.open(encoding="utf-8") as f:
         doc = yaml.load(f, Loader=FastLoader)
 
     if not isinstance(doc, dict):
-        return None
+        return []
     meta_enum = (doc.get("meta") or {}).get("enum")
     if not meta_enum:
-        return None
+        return []
 
-    section_name = meta_enum.get("section") or yaml_path.stem
-    section = doc.get(section_name) or {}
-    if not section:
-        raise ValueError(f"{yaml_path}: no '{section_name}' section to derive enum from")
-
-    values = derive_values(yaml_path, section, meta_enum.get("name_from"))
-
-    cpp = meta_enum.get("cpp") or {}
-    cls_name = cpp["class"]
     source_name = str(yaml_path.relative_to(ENUMS_DIR.parents[1])).replace("\\", "/")
-    return {
-        "name": pascal_to_snake(cls_name),
-        "values": values,
-        "source_name": source_name,
-        "header": render_header(
-            source_name=source_name,
-            cls_name=cls_name,
-            underlying=cpp.get("underlying", "uint32_t"),
-            is_flags=False,
-            case=cpp.get("case", "pascal"),
-            values=values,
-        ),
-        "lua": lua_block(meta_enum.get("lua"), source_name, False, values),
-    }
+    out: list[dict[str, Any]] = []
+    for block in meta_enum:
+        path = block.get("section") or yaml_path.stem
+        sections = resolve_sections(doc, path)
+        if not sections:
+            raise ValueError(f"{yaml_path}: section path '{path}' matched nothing")
+
+        values: dict[str, int] = {}
+        for section in sections:
+            for key, value in derive_values(yaml_path, section, block.get("name_from")).items():
+                if key in values:
+                    raise ValueError(f"{yaml_path}: '{path}' yields duplicate key '{key}' "
+                                     f"(ids {values[key]} and {value}); keys must be unique across the tree")
+                values[key] = value
+
+        # Disallow duplicate IDs
+        by_id: dict[int, list[str]] = {}
+        for key, value in values.items():
+            by_id.setdefault(value, []).append(key)
+        collisions = {v: ks for v, ks in by_id.items() if len(ks) > 1}
+        if collisions:
+            raise ValueError(f"{yaml_path}: '{path}' reuses ids across entries: "
+                             + "; ".join(f"{v} -> {ks}" for v, ks in sorted(collisions.items())))
+
+        values = dict(sorted(values.items(), key=lambda kv: kv[1]))
+
+        cpp = block.get("cpp") or {}
+        cls_name = cpp["class"]
+        out.append({
+            "name": pascal_to_snake(cls_name),
+            "values": values,
+            "source_name": source_name,
+            "header": render_header(
+                source_name=source_name,
+                cls_name=cls_name,
+                underlying=cpp.get("underlying", "uint32_t"),
+                is_flags=False,
+                case=cpp.get("case", "pascal"),
+                values=values,
+            ),
+            "lua": lua_block(block.get("lua"), source_name, False, values),
+        })
+    return out
 
 
 def derive_values(yaml_path: Path, section: dict[str, Any], name_from: str | None) -> dict[str, int]:

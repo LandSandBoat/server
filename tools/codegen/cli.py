@@ -4,7 +4,7 @@ from pathlib import Path
 
 from .common import ENUMS_DIR, ROOT, TEMPLATES_DIR, write_if_changed
 from .data_codegen import SchemaWalker
-from .enum_codegen import emit_pure_enum, emit_table_enum
+from .enum_codegen import emit_pure_enum, emit_table_enums
 from .validate import validate_data_yamls
 
 
@@ -54,10 +54,8 @@ def main():
     for p in sorted((ROOT / "data").rglob("*.yaml")):
         if p.is_relative_to(ENUMS_DIR):
             continue
-        print(f"scanning {p.relative_to(ROOT).as_posix()} for embedded enum ...", flush=True)
-        result = emit_table_enum(p)
-        if result is not None:
-            enums.append(result)
+        print(f"scanning {p.relative_to(ROOT).as_posix()} for embedded enums ...", flush=True)
+        enums.extend(emit_table_enums(p))
 
     for e in enums:
         write_if_changed(out_dir / (e["name"] + ".h"), e["header"])
@@ -77,6 +75,9 @@ def main():
     walker = SchemaWalker()
     data_names: list[str] = []
     for schema_path in sorted(schemas_dir.glob("*.schema.json")):
+        # _meta describes the `meta:` block; its $defs are fragments, not records.
+        if schema_path.name == "_meta.schema.json":
+            continue
         print(f"rendering {schema_path.relative_to(ROOT).as_posix()} ...", flush=True)
         result = walker.emit(schema_path)
         if result is None:

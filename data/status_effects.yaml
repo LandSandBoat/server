@@ -2,11 +2,11 @@
 
 meta:
   enum:
-    cpp:
-      underlying: uint16_t
-      class:      StatusEffect
-    lua:
-      table: xi.effect
+    - cpp:
+        underlying: uint16_t
+        class:      StatusEffect
+      lua:
+        table: xi.effect
 
 status_effects:
   ko:
