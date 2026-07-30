@@ -48,7 +48,7 @@ if not xi.module.isContentEnabled('WOTG') then
     -- Source: https://www.bg-wiki.com/ffxi/Version_Update_(07/20/2009)
     m:addOverride('xi.job_utils.ninja.useMijinGakure', function(player, target, ability, action)
         local dmg        = math.floor(player:getHP() * 0.8)
-        local resist     = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, 0, xi.element.NONE, xi.mod.INT, 0, 0)
+        local resist     = xi.combat.magicHitRate.calculateResistRate(player, target, { magicalElement = xi.element.NONE, actorStat = xi.mod.INT })
         local tmdaFactor = xi.combat.damage.calculateDamageAdjustment(target, false, true, false, false)
         local jpFactor   = 1 + player:getJobPointLevel(xi.jp.MIJIN_GAKURE_EFFECT) * 0.03
 
