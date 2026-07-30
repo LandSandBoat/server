@@ -208,7 +208,7 @@ xi.mix.fomorParty.onPartySpawn = function(mob)
             local follower = GetMobByID(followerID)
 
             if follower then
-                local respawnTime = follower:getRespawnTime()
+                local respawnTime = GetMobRespawnTime(followerID)
 
                 if respawnTime ~= 0 then
                     DisallowRespawn(followerID, false)
@@ -321,7 +321,7 @@ xi.mix.fomorParty.onPartyDeath = function(mob)
 
         -- Last member of the party died - sync all members to this mob's respawn time
         if allDead then
-            local respawnTime = mob:getRespawnTime()
+            local respawnTime = GetMobRespawnTime(mob:getID())
             for _, memberID in ipairs(party.members) do
                 local member = GetMobByID(memberID)
                 if member then
