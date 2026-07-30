@@ -29,7 +29,7 @@ public:
     CPartyListPacket(uint32 partyid, uint32 Total);
     ~CPartyListPacket() = default;
 
-    void AddPlayer(SearchEntity* PPlayer);
+    void AddPlayer(const SearchEntity& player);
 
     auto GetData() -> uint8*;
     auto GetSize() const -> uint16;

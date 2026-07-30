@@ -332,13 +332,13 @@ void SearchHandler::HandleGroupListRequest()
 
     if (partyid != 0 || allianceid != 0)
     {
-        const std::list<SearchEntity*> PartyList = PDataLoader.GetPartyList(partyid, allianceid);
+        const auto PartyList = PDataLoader.GetPartyList(partyid, allianceid);
 
         CPartyListPacket PPartyPacket(partyid, static_cast<uint32>(PartyList.size()));
 
-        for (auto& it : PartyList)
+        for (const auto& player : PartyList)
         {
-            PPartyPacket.AddPlayer(it);
+            PPartyPacket.AddPlayer(player);
         }
 
         uint16_t length = PPartyPacket.GetSize();
@@ -348,15 +348,15 @@ void SearchHandler::HandleGroupListRequest()
     }
     else if (linkshellid1 != 0 || linkshellid2 != 0)
     {
-        const uint32             linkshellid   = linkshellid1 == 0 ? linkshellid2 : linkshellid1;
-        std::list<SearchEntity*> LinkshellList = PDataLoader.GetLinkshellList(linkshellid);
+        const uint32 linkshellid   = linkshellid1 == 0 ? linkshellid2 : linkshellid1;
+        const auto   LinkshellList = PDataLoader.GetLinkshellList(linkshellid);
 
         const uint32 totalResults  = static_cast<uint32>(LinkshellList.size());
         uint32       currentResult = 0;
 
         // Iterate through the linkshell list, splitting up the results into
         // smaller chunks.
-        std::list<SearchEntity*>::iterator it = LinkshellList.begin();
+        auto it = LinkshellList.begin();
 
         do
         {
@@ -414,7 +414,7 @@ void SearchHandler::HandleSearchRequest()
     const CDataLoader PDataLoader;
     int               totalCount = 0;
 
-    std::list<SearchEntity*> SearchList = PDataLoader.GetPlayersList(sr, &totalCount);
+    const auto SearchList = PDataLoader.GetPlayersList(sr, &totalCount);
 
     const uint32 totalResults  = static_cast<uint32>(SearchList.size());
     uint32       currentResult = 0;
@@ -490,8 +490,8 @@ void SearchHandler::HandleAuctionHouseRequest()
     OrderByString.append(" item_basic.itemid");
     const char* OrderByArray = OrderByString.data();
 
-    const CDataLoader                    PDataLoader;
-    const std::vector<AuctionHouseItem*> ItemList = PDataLoader.GetAHItemsToCategory(AHCatID, OrderByArray);
+    const CDataLoader PDataLoader;
+    const auto        ItemList = PDataLoader.GetAHItemsToCategory(AHCatID, OrderByArray);
 
     const uint8 PacketsCount = static_cast<uint8>((ItemList.size() / 20) + (ItemList.size() % 20 != 0) + (ItemList.empty()));
 
@@ -519,9 +519,9 @@ void SearchHandler::HandleAuctionHouseHistory()
     const uint16 ItemID = ref<uint16>(buffer_.data(), 0x12);
     const uint8  stack  = ref<uint8>(buffer_.data(), 0x15);
 
-    const CDataLoader                       PDataLoader;
-    const std::vector<AuctionHouseHistory*> HistoryList = PDataLoader.GetAHItemHistory(ItemID, stack != 0);
-    const AuctionHouseItem                  item        = PDataLoader.GetAHItemFromItemID(ItemID);
+    const CDataLoader      PDataLoader;
+    const auto             HistoryList = PDataLoader.GetAHItemHistory(ItemID, stack != 0);
+    const AuctionHouseItem item        = PDataLoader.GetAHItemFromItemID(ItemID);
 
     CAHHistoryPacket PAHPacket = CAHHistoryPacket(item, stack);
 

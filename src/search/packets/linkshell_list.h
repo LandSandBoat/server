@@ -29,7 +29,7 @@ public:
     CLinkshellListPacket(uint32 linkshellid, uint32 Total);
     ~CLinkshellListPacket() = default;
 
-    auto AddPlayer(SearchEntity* PPlayer) -> bool;
+    auto AddPlayer(const SearchEntity& player) -> bool;
     void SetFinal();
 
     auto GetData() -> uint8*;

@@ -45,9 +45,9 @@ CDataLoader::~CDataLoader()
  *                                                                       *
  ************************************************************************/
 
-auto CDataLoader::GetAHItemHistory(uint16 ItemID, bool stack) const -> std::vector<AuctionHouseHistory*>
+auto CDataLoader::GetAHItemHistory(uint16 ItemID, bool stack) const -> std::vector<AuctionHouseHistory>
 {
-    std::vector<AuctionHouseHistory*> HistoryList;
+    std::vector<AuctionHouseHistory> HistoryList;
 
     const auto rset = db::preparedStmt("SELECT sale, sell_date, seller_name, buyer_name "
                                        "FROM auction_house "
@@ -61,15 +61,15 @@ auto CDataLoader::GetAHItemHistory(uint16 ItemID, bool stack) const -> std::vect
     {
         while (rset->next())
         {
-            AuctionHouseHistory* PAHHistory = new AuctionHouseHistory;
+            AuctionHouseHistory history{};
 
-            PAHHistory->Price = rset->get<uint32>("sale");
-            PAHHistory->Data  = rset->get<uint32>("sell_date");
+            history.Price = rset->get<uint32>("sale");
+            history.Data  = rset->get<uint32>("sell_date");
 
-            PAHHistory->Name1 = rset->get<std::string>("seller_name");
-            PAHHistory->Name2 = rset->get<std::string>("buyer_name");
+            history.Name1 = rset->get<std::string>("seller_name");
+            history.Name2 = rset->get<std::string>("buyer_name");
 
-            HistoryList.emplace_back(PAHHistory);
+            HistoryList.emplace_back(std::move(history));
         }
         std::reverse(HistoryList.begin(), HistoryList.end());
     }
@@ -82,11 +82,11 @@ auto CDataLoader::GetAHItemHistory(uint16 ItemID, bool stack) const -> std::vect
  *                                                                       *
  ************************************************************************/
 
-auto CDataLoader::GetAHItemsToCategory(uint8 ahCategoryID, const std::string& orderByString) const -> std::vector<AuctionHouseItem*>
+auto CDataLoader::GetAHItemsToCategory(uint8 ahCategoryID, const std::string& orderByString) const -> std::vector<AuctionHouseItem>
 {
     ShowDebugFmt("Try find category: {}", ahCategoryID);
 
-    std::vector<AuctionHouseItem*> ItemList;
+    std::vector<AuctionHouseItem> ItemList;
 
     const auto rset = [&]()
     {
@@ -118,20 +118,20 @@ auto CDataLoader::GetAHItemsToCategory(uint8 ahCategoryID, const std::string& or
 
     FOR_DB_MULTIPLE_RESULTS(rset)
     {
-        AuctionHouseItem* PAHItem = new AuctionHouseItem;
+        AuctionHouseItem item{};
 
-        PAHItem->ItemID = rset->get<uint16>("itemid");
+        item.ItemID = rset->get<uint16>("itemid");
 
-        PAHItem->SingleAmount = rset->getOrDefault<uint32>("COUNT(*)-SUM(stack)", 0);
-        PAHItem->StackAmount  = rset->getOrDefault<uint32>("SUM(stack)", 0);
-        PAHItem->Category     = ahCategoryID;
+        item.SingleAmount = rset->getOrDefault<uint32>("COUNT(*)-SUM(stack)", 0);
+        item.StackAmount  = rset->getOrDefault<uint32>("SUM(stack)", 0);
+        item.Category     = ahCategoryID;
 
         if (rset->get<uint32>("stackSize") == 1)
         {
-            PAHItem->StackAmount = -1;
+            item.StackAmount = -1;
         }
 
-        ItemList.emplace_back(PAHItem);
+        ItemList.emplace_back(item);
     }
 
     return ItemList;
@@ -197,10 +197,10 @@ auto CDataLoader::GetPlayersCount(const SearchRequest& sr) const -> uint32
  *          Job ID is 0 for none specified.                              *
  ************************************************************************/
 
-auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::list<SearchEntity*>
+auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::vector<SearchEntity>
 {
-    std::list<SearchEntity*> PlayersList;
-    std::string              filterQry;
+    std::vector<SearchEntity> PlayersList;
+    std::string               filterQry;
 
     if (sr.jobid > 0 && sr.jobid < 21)
     {
@@ -256,35 +256,35 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::lis
         int visibleResults = 0; // capped at first 20
         while (rset->next())
         {
-            SearchEntity* PPlayer = new SearchEntity();
+            SearchEntity player{};
 
-            PPlayer->name = rset->get<std::string>("charname");
+            player.name = rset->get<std::string>("charname");
 
-            PPlayer->id       = rset->get<uint32>("charid");
-            PPlayer->zone     = rset->get<uint16>("pos_zone");
-            PPlayer->prevzone = rset->get<uint16>("pos_prevzone");
-            PPlayer->nation   = rset->get<uint8>("nation");
-            PPlayer->mjob     = rset->get<uint8>("mjob");
-            PPlayer->sjob     = rset->get<uint8>("sjob");
-            PPlayer->mlvl     = rset->get<uint8>("mlvl");
-            PPlayer->slvl     = rset->get<uint8>("slvl");
-            PPlayer->race     = rset->get<uint8>("race");
+            player.id       = rset->get<uint32>("charid");
+            player.zone     = rset->get<uint16>("pos_zone");
+            player.prevzone = rset->get<uint16>("pos_prevzone");
+            player.nation   = rset->get<uint8>("nation");
+            player.mjob     = rset->get<uint8>("mjob");
+            player.sjob     = rset->get<uint8>("sjob");
+            player.mlvl     = rset->get<uint8>("mlvl");
+            player.slvl     = rset->get<uint8>("slvl");
+            player.race     = rset->get<uint8>("race");
 
             // TODO: Use a nation enum?
-            switch (PPlayer->nation)
+            switch (player.nation)
             {
                 case 0:
-                    PPlayer->rank = rset->get<uint8>("rank_sandoria");
+                    player.rank = rset->get<uint8>("rank_sandoria");
                     break;
                 case 1:
-                    PPlayer->rank = rset->get<uint8>("rank_bastok");
+                    player.rank = rset->get<uint8>("rank_bastok");
                     break;
                 case 2:
-                    PPlayer->rank = rset->get<uint8>("rank_windurst");
+                    player.rank = rset->get<uint8>("rank_windurst");
                     break;
                 default:
-                    ShowWarningFmt("Inconsistent player nation allegiance : {}", PPlayer->nation);
-                    PPlayer->rank = static_cast<uint8>(0U);
+                    ShowWarningFmt("Inconsistent player nation allegiance : {}", player.nation);
+                    player.rank = static_cast<uint8>(0U);
                     break;
             }
 
@@ -292,69 +292,69 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::lis
             SAVE_CONF playerSettings = {};
             std::memcpy(&playerSettings, &settingsInt, sizeof(uint32));
 
-            PPlayer->zone          = (PPlayer->zone == 0 ? PPlayer->prevzone : PPlayer->zone);
-            PPlayer->languages     = rset->get<uint8>("languages");
-            PPlayer->mentor        = playerSettings.MentorFlg;
-            PPlayer->linkshellid1  = rset->get<uint32>("linkshellid1");
-            PPlayer->linkshellid2  = rset->get<uint32>("linkshellid2");
-            PPlayer->seacom_type   = rset->get<uint8>("seacom_type");
-            PPlayer->disconnecting = rset->get<bool>("disconnecting");
-            PPlayer->gmHidden      = rset->get<bool>("gmHiddenEnabled");
-            PPlayer->muted         = rset->get<bool>("muted");
-            PPlayer->unityLeader   = rset->get<uint8>("unity_leader");
-            const auto partyid     = rset->getOrDefault<uint32>("partyid", 0);
+            player.zone          = (player.zone == 0 ? player.prevzone : player.zone);
+            player.languages     = rset->get<uint8>("languages");
+            player.mentor        = playerSettings.MentorFlg;
+            player.linkshellid1  = rset->get<uint32>("linkshellid1");
+            player.linkshellid2  = rset->get<uint32>("linkshellid2");
+            player.seacom_type   = rset->get<uint8>("seacom_type");
+            player.disconnecting = rset->get<bool>("disconnecting");
+            player.gmHidden      = rset->get<bool>("gmHiddenEnabled");
+            player.muted         = rset->get<bool>("muted");
+            player.unityLeader   = rset->get<uint8>("unity_leader");
+            const auto partyid   = rset->getOrDefault<uint32>("partyid", 0);
 
-            if (PPlayer->mentor)
+            if (player.mentor)
             {
-                PPlayer->flags1 |= 0x0001;
+                player.flags1 |= 0x0001;
             }
 
-            if (partyid == PPlayer->id)
+            if (partyid == player.id)
             {
-                PPlayer->flags1 |= 0x0008;
+                player.flags1 |= 0x0008;
             }
 
-            if (PPlayer->seacom_type)
+            if (player.seacom_type)
             {
-                PPlayer->flags1 |= 0x0010;
+                player.flags1 |= 0x0010;
             }
 
             if (playerSettings.AwayFlg)
             {
-                PPlayer->flags1 |= 0x0100;
+                player.flags1 |= 0x0100;
             }
 
-            if (PPlayer->disconnecting)
+            if (player.disconnecting)
             {
-                PPlayer->flags1 |= 0x0800;
+                player.flags1 |= 0x0800;
             }
 
             if (partyid != 0)
             {
-                PPlayer->flags1 |= 0x2000;
+                player.flags1 |= 0x2000;
             }
 
             if (playerSettings.AnonymityFlg)
             {
-                PPlayer->flags1 |= 0x4000;
+                player.flags1 |= 0x4000;
             }
 
             if (playerSettings.InviteFlg)
             {
-                PPlayer->flags1 |= 0x8000;
+                player.flags1 |= 0x8000;
             }
 
-            if (PPlayer->muted)
+            if (player.muted)
             {
-                PPlayer->flags1 |= 0x20000000;
+                player.flags1 |= 0x20000000;
             }
 
-            PPlayer->flags2 = PPlayer->flags1;
+            player.flags2 = player.flags1;
 
-            if (PPlayer->mjob == static_cast<uint8>(xi::Job::MON) || PPlayer->sjob == static_cast<uint8>(xi::Job::MON))
+            if (player.mjob == static_cast<uint8>(xi::Job::MON) || player.sjob == static_cast<uint8>(xi::Job::MON))
             {
-                PPlayer->mjob = 0;
-                PPlayer->sjob = 0;
+                player.mjob = 0;
+                player.sjob = 0;
             }
 
             // filter by linkshell ID
@@ -367,7 +367,7 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::lis
                     continue;
                 }
 
-                if (PPlayer->linkshellid1 != searchedLsId && PPlayer->linkshellid2 != searchedLsId)
+                if (player.linkshellid1 != searchedLsId && player.linkshellid2 != searchedLsId)
                 {
                     // Current player does not match the given LS ID
                     continue;
@@ -375,20 +375,20 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::lis
             }
 
             // filter anon players if job/nation/race/rank/level search
-            if ((PPlayer->flags1 & 0x4000) &&
+            if ((player.flags1 & 0x4000) &&
                 (sr.jobid > 0 || sr.nation != 255 || sr.race != 255 || sr.minRank > 0 || sr.maxRank > 0 || sr.minlvl > 0 || sr.maxlvl > 0))
             {
                 continue;
             }
 
             // filter by job
-            if (sr.jobid > 0 && sr.jobid != PPlayer->mjob)
+            if (sr.jobid > 0 && sr.jobid != player.mjob)
             {
                 continue;
             }
 
             // filter by nation
-            if (sr.nation != 255 && sr.nation != PPlayer->nation)
+            if (sr.nation != 255 && sr.nation != player.nation)
             {
                 continue;
             }
@@ -397,27 +397,27 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::lis
             if (sr.race != 255)
             {
                 // hume (male/female)
-                if (sr.race == 0 && (PPlayer->race != 1 && PPlayer->race != 2))
+                if (sr.race == 0 && (player.race != 1 && player.race != 2))
                 {
                     continue;
                     // elvaan (male/female)
                 }
-                if (sr.race == 1 && (PPlayer->race != 3 && PPlayer->race != 4))
+                if (sr.race == 1 && (player.race != 3 && player.race != 4))
                 {
                     continue;
                     // tarutaru (male/female)
                 }
-                if (sr.race == 2 && (PPlayer->race != 5 && PPlayer->race != 6))
+                if (sr.race == 2 && (player.race != 5 && player.race != 6))
                 {
                     continue;
                     // mithra (female only)
                 }
-                else if (sr.race == 3 && PPlayer->race != 7)
+                else if (sr.race == 3 && player.race != 7)
                 {
                     continue;
                     // galka (male only)
                 }
-                else if (sr.race == 4 && PPlayer->race != 8)
+                else if (sr.race == 4 && player.race != 8)
                 {
                     continue;
                 }
@@ -426,7 +426,7 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::lis
             // filter by rank
             if (sr.minRank > 0 && sr.maxRank >= sr.minRank)
             {
-                if (PPlayer->rank < sr.minRank || PPlayer->rank > sr.maxRank)
+                if (player.rank < sr.minRank || player.rank > sr.maxRank)
                 {
                     continue;
                 }
@@ -438,12 +438,12 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::lis
                 // Check if unity ID is set (bits 22+)
                 if (uint32_t searchUnityId = sr.flags >> 22; searchUnityId != 0)
                 {
-                    if (PPlayer->unityLeader != searchUnityId)
+                    if (player.unityLeader != searchUnityId)
                     {
                         continue;
                     }
                 }
-                else if (!(PPlayer->flags2 & sr.flags))
+                else if (!(player.flags2 & sr.flags))
                 {
                     // Normal bitwise check for other flags (bits 0-21)
                     continue;
@@ -453,7 +453,7 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::lis
             // filter by level
             if (sr.minlvl > 0 && sr.maxlvl >= sr.minlvl)
             {
-                if (PPlayer->mlvl < sr.minlvl || PPlayer->mlvl > sr.maxlvl)
+                if (player.mlvl < sr.minlvl || player.mlvl > sr.maxlvl)
                 {
                     continue;
                 }
@@ -463,7 +463,7 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::lis
             if (sr.nameLen > 0)
             {
                 std::string dbname;
-                dbname.insert(0, PPlayer->name);
+                dbname.insert(0, player.name);
 
                 // can't be this name, too long
                 if (sr.nameLen > dbname.length())
@@ -474,7 +474,7 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::lis
                 for (int i = 0; i < sr.nameLen; i++)
                 {
                     // convert to lowercase for both
-                    if (tolower(sr.name[i]) != tolower(PPlayer->name[i]))
+                    if (tolower(sr.name[i]) != tolower(player.name[i]))
                     {
                         validName = false;
                         break;
@@ -486,14 +486,14 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::lis
                 }
             }
 
-            if (PPlayer->gmHidden)
+            if (player.gmHidden)
             {
                 continue;
             }
 
             if (visibleResults < 40)
             {
-                PlayersList.emplace_back(PPlayer);
+                PlayersList.emplace_back(std::move(player));
                 visibleResults++;
             }
             totalResults++;
@@ -514,9 +514,9 @@ auto CDataLoader::GetPlayersList(SearchRequest sr, int* count) const -> std::lis
  *                                                                       *
  ************************************************************************/
 
-auto CDataLoader::GetPartyList(uint32 PartyID, uint32 AllianceID) const -> std::list<SearchEntity*>
+auto CDataLoader::GetPartyList(uint32 PartyID, uint32 AllianceID) const -> std::vector<SearchEntity>
 {
-    std::list<SearchEntity*> PartyList;
+    std::vector<SearchEntity> PartyList;
 
     auto rset = db::preparedStmt("SELECT charid, partyid, charname, pos_zone, nation, rank_sandoria, rank_bastok, rank_windurst, race, settings, mjob, sjob, mlvl, slvl, languages, seacom_type, disconnecting "
                                  "FROM accounts_sessions "
@@ -533,33 +533,33 @@ auto CDataLoader::GetPartyList(uint32 PartyID, uint32 AllianceID) const -> std::
                                  (!PartyID ? AllianceID : PartyID));
     FOR_DB_MULTIPLE_RESULTS(rset)
     {
-        SearchEntity* PPlayer = new SearchEntity();
+        SearchEntity player{};
 
-        PPlayer->name   = rset->get<std::string>("charname");
-        PPlayer->id     = rset->get<uint32>("charid");
-        PPlayer->zone   = rset->get<uint16>("pos_zone");
-        PPlayer->nation = rset->get<uint8>("nation");
-        PPlayer->mjob   = rset->get<uint8>("mjob");
-        PPlayer->sjob   = rset->get<uint8>("sjob");
-        PPlayer->mlvl   = rset->get<uint8>("mlvl");
-        PPlayer->slvl   = rset->get<uint8>("slvl");
-        PPlayer->race   = rset->get<uint8>("race");
+        player.name   = rset->get<std::string>("charname");
+        player.id     = rset->get<uint32>("charid");
+        player.zone   = rset->get<uint16>("pos_zone");
+        player.nation = rset->get<uint8>("nation");
+        player.mjob   = rset->get<uint8>("mjob");
+        player.sjob   = rset->get<uint8>("sjob");
+        player.mlvl   = rset->get<uint8>("mlvl");
+        player.slvl   = rset->get<uint8>("slvl");
+        player.race   = rset->get<uint8>("race");
 
         // TODO: Use a nation enum?
-        switch (PPlayer->nation)
+        switch (player.nation)
         {
             case 0:
-                PPlayer->rank = rset->get<uint8>("rank_sandoria");
+                player.rank = rset->get<uint8>("rank_sandoria");
                 break;
             case 1:
-                PPlayer->rank = rset->get<uint8>("rank_bastok");
+                player.rank = rset->get<uint8>("rank_bastok");
                 break;
             case 2:
-                PPlayer->rank = rset->get<uint8>("rank_windurst");
+                player.rank = rset->get<uint8>("rank_windurst");
                 break;
             default:
-                ShowWarningFmt("Inconsistent player nation allegiance : {}", PPlayer->nation);
-                PPlayer->rank = static_cast<uint8>(0U);
+                ShowWarningFmt("Inconsistent player nation allegiance : {}", player.nation);
+                player.rank = static_cast<uint8>(0U);
                 break;
         }
 
@@ -567,47 +567,47 @@ auto CDataLoader::GetPartyList(uint32 PartyID, uint32 AllianceID) const -> std::
         SAVE_CONF playerSettings = {};
         std::memcpy(&playerSettings, &settingsInt, sizeof(uint32));
 
-        PPlayer->languages     = rset->get<uint8>("languages");
-        PPlayer->mentor        = playerSettings.MentorFlg;
-        PPlayer->seacom_type   = rset->get<uint8>("seacom_type");
-        PPlayer->disconnecting = rset->get<bool>("disconnecting");
+        player.languages     = rset->get<uint8>("languages");
+        player.mentor        = playerSettings.MentorFlg;
+        player.seacom_type   = rset->get<uint8>("seacom_type");
+        player.disconnecting = rset->get<bool>("disconnecting");
 
-        if (PPlayer->mentor)
+        if (player.mentor)
         {
-            PPlayer->flags1 |= 0x0001;
+            player.flags1 |= 0x0001;
         }
-        if (PartyID == PPlayer->id)
+        if (PartyID == player.id)
         {
-            PPlayer->flags1 |= 0x0008;
+            player.flags1 |= 0x0008;
         }
-        if (PPlayer->seacom_type)
+        if (player.seacom_type)
         {
-            PPlayer->flags1 |= 0x0010;
+            player.flags1 |= 0x0010;
         }
         if (playerSettings.AwayFlg)
         {
-            PPlayer->flags1 |= 0x0100;
+            player.flags1 |= 0x0100;
         }
-        if (PPlayer->disconnecting)
+        if (player.disconnecting)
         {
-            PPlayer->flags1 |= 0x0800;
+            player.flags1 |= 0x0800;
         }
         if (PartyID != 0)
         {
-            PPlayer->flags1 |= 0x2000;
+            player.flags1 |= 0x2000;
         }
         if (playerSettings.AnonymityFlg)
         {
-            PPlayer->flags1 |= 0x4000;
+            player.flags1 |= 0x4000;
         }
         if (playerSettings.InviteFlg)
         {
-            PPlayer->flags1 |= 0x8000;
+            player.flags1 |= 0x8000;
         }
 
-        PPlayer->flags2 = PPlayer->flags1;
+        player.flags2 = player.flags1;
 
-        PartyList.emplace_back(PPlayer);
+        PartyList.emplace_back(std::move(player));
     }
     return PartyList;
 }
@@ -618,9 +618,9 @@ auto CDataLoader::GetPartyList(uint32 PartyID, uint32 AllianceID) const -> std::
  *                                                                       *
  ************************************************************************/
 
-auto CDataLoader::GetLinkshellList(uint32 LinkshellID) const -> std::list<SearchEntity*>
+auto CDataLoader::GetLinkshellList(uint32 LinkshellID) const -> std::vector<SearchEntity>
 {
-    std::list<SearchEntity*> LinkshellList;
+    std::vector<SearchEntity> LinkshellList;
 
     auto rset = db::preparedStmt("SELECT charid, partyid, charname, pos_zone, nation, rank_sandoria, rank_bastok, rank_windurst, race, settings, mjob, sjob, "
                                  "mlvl, slvl, linkshellid1, linkshellid2, "
@@ -639,41 +639,41 @@ auto CDataLoader::GetLinkshellList(uint32 LinkshellID) const -> std::list<Search
                                  LinkshellID);
     FOR_DB_MULTIPLE_RESULTS(rset)
     {
-        SearchEntity* PPlayer = new SearchEntity();
+        SearchEntity player{};
 
-        PPlayer->name   = rset->get<std::string>("charname");
-        PPlayer->id     = rset->get<uint32>("charid");
-        PPlayer->zone   = rset->get<uint16>("pos_zone");
-        PPlayer->nation = rset->get<uint8>("nation");
-        PPlayer->mjob   = rset->get<uint8>("mjob");
-        PPlayer->sjob   = rset->get<uint8>("sjob");
-        PPlayer->mlvl   = rset->get<uint8>("mlvl");
-        PPlayer->slvl   = rset->get<uint8>("slvl");
-        PPlayer->race   = rset->get<uint8>("race");
+        player.name   = rset->get<std::string>("charname");
+        player.id     = rset->get<uint32>("charid");
+        player.zone   = rset->get<uint16>("pos_zone");
+        player.nation = rset->get<uint8>("nation");
+        player.mjob   = rset->get<uint8>("mjob");
+        player.sjob   = rset->get<uint8>("sjob");
+        player.mlvl   = rset->get<uint8>("mlvl");
+        player.slvl   = rset->get<uint8>("slvl");
+        player.race   = rset->get<uint8>("race");
 
         // TODO: Use a nation enum?
-        switch (PPlayer->nation)
+        switch (player.nation)
         {
             case 0:
-                PPlayer->rank = rset->get<uint8>("rank_sandoria");
+                player.rank = rset->get<uint8>("rank_sandoria");
                 break;
             case 1:
-                PPlayer->rank = rset->get<uint8>("rank_bastok");
+                player.rank = rset->get<uint8>("rank_bastok");
                 break;
             case 2:
-                PPlayer->rank = rset->get<uint8>("rank_windurst");
+                player.rank = rset->get<uint8>("rank_windurst");
                 break;
             default:
-                ShowWarningFmt("Inconsistent player nation allegiance : {}", PPlayer->nation);
-                PPlayer->rank = static_cast<uint8>(0U);
+                ShowWarningFmt("Inconsistent player nation allegiance : {}", player.nation);
+                player.rank = static_cast<uint8>(0U);
                 break;
         }
 
-        PPlayer->linkshellid1   = rset->get<uint32>("linkshellid1");
-        PPlayer->linkshellid2   = rset->get<uint32>("linkshellid2");
-        PPlayer->linkshellrank1 = rset->get<uint8>("linkshellrank1");
-        PPlayer->linkshellrank2 = rset->get<uint8>("linkshellrank2");
-        PPlayer->disconnecting  = rset->get<bool>("disconnecting");
+        player.linkshellid1   = rset->get<uint32>("linkshellid1");
+        player.linkshellid2   = rset->get<uint32>("linkshellid2");
+        player.linkshellrank1 = rset->get<uint8>("linkshellrank1");
+        player.linkshellrank2 = rset->get<uint8>("linkshellrank2");
+        player.disconnecting  = rset->get<bool>("disconnecting");
 
         const auto partyid = rset->getOrDefault<uint32>("partyid", 0);
 
@@ -681,36 +681,36 @@ auto CDataLoader::GetLinkshellList(uint32 LinkshellID) const -> std::list<Search
         SAVE_CONF playerSettings = {};
         std::memcpy(&playerSettings, &settingsInt, sizeof(uint32));
 
-        if (partyid == PPlayer->id)
+        if (partyid == player.id)
         {
-            PPlayer->flags1 |= 0x0008;
+            player.flags1 |= 0x0008;
         }
         if (playerSettings.AwayFlg)
         {
-            PPlayer->flags1 |= 0x0100;
+            player.flags1 |= 0x0100;
         }
 
-        if (PPlayer->disconnecting)
+        if (player.disconnecting)
         {
-            PPlayer->flags1 |= 0x0800;
+            player.flags1 |= 0x0800;
         }
 
         if (partyid != 0)
         {
-            PPlayer->flags1 |= 0x2000;
+            player.flags1 |= 0x2000;
         }
         if (playerSettings.AnonymityFlg)
         {
-            PPlayer->flags1 |= 0x4000;
+            player.flags1 |= 0x4000;
         }
         if (playerSettings.InviteFlg)
         {
-            PPlayer->flags1 |= 0x8000;
+            player.flags1 |= 0x8000;
         }
 
-        PPlayer->flags2 = PPlayer->flags1;
+        player.flags2 = player.flags1;
 
-        LinkshellList.emplace_back(PPlayer);
+        LinkshellList.emplace_back(std::move(player));
     }
 
     return LinkshellList;

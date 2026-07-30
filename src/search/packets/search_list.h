@@ -28,7 +28,7 @@ class CSearchListPacket
 public:
     CSearchListPacket(uint32 Total);
 
-    auto AddPlayer(SearchEntity* PPlayer) -> bool;
+    auto AddPlayer(const SearchEntity& player) -> bool;
     void SetFinal();
 
     auto GetData() -> uint8*;

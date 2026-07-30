@@ -23,7 +23,7 @@
 
 #include "common/cbasetypes.h"
 
-#include <list>
+#include <vector>
 
 struct SearchRequest;
 
@@ -84,12 +84,12 @@ public:
     ~CDataLoader();
 
     auto GetPlayersCount(const SearchRequest& sr) const -> uint32;
-    auto GetAHItemHistory(uint16 ItemID, bool stack) const -> std::vector<AuctionHouseHistory*>;
-    auto GetPartyList(uint32 PartyID, uint32 AllianceID) const -> std::list<SearchEntity*>;
-    auto GetLinkshellList(uint32 LinkshellID) const -> std::list<SearchEntity*>;
-    auto GetPlayersList(SearchRequest sr, int* count) const -> std::list<SearchEntity*>;
+    auto GetAHItemHistory(uint16 ItemID, bool stack) const -> std::vector<AuctionHouseHistory>;
+    auto GetPartyList(uint32 PartyID, uint32 AllianceID) const -> std::vector<SearchEntity>;
+    auto GetLinkshellList(uint32 LinkshellID) const -> std::vector<SearchEntity>;
+    auto GetPlayersList(SearchRequest sr, int* count) const -> std::vector<SearchEntity>;
     auto GetSearchComment(uint32 playerId) const -> std::string;
-    auto GetAHItemsToCategory(uint8 ahCategoryID, const std::string& orderByString) const -> std::vector<AuctionHouseItem*>;
+    auto GetAHItemsToCategory(uint8 ahCategoryID, const std::string& orderByString) const -> std::vector<AuctionHouseItem>;
     auto GetAHItemFromItemID(uint16 ItemID) const -> AuctionHouseItem;
     void ExpireAHItems(uint16 expireAgeInDays) const;
 };

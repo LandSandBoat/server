@@ -46,15 +46,13 @@ CAHItemsListPacket::CAHItemsListPacket(const uint16 offset)
  *                                                                       *
  ************************************************************************/
 
-void CAHItemsListPacket::AddItem(AuctionHouseItem* item)
+void CAHItemsListPacket::AddItem(const AuctionHouseItem& item)
 {
-    ref<uint16>(m_PData, (0x18 + 0x0A * m_count) + 0) = item->ItemID;
-    ref<uint32>(m_PData, (0x18 + 0x0A * m_count) + 2) = item->SingleAmount;
-    ref<uint32>(m_PData, (0x18 + 0x0A * m_count) + 6) = item->StackAmount;
+    ref<uint16>(m_PData, (0x18 + 0x0A * m_count) + 0) = item.ItemID;
+    ref<uint32>(m_PData, (0x18 + 0x0A * m_count) + 2) = item.SingleAmount;
+    ref<uint32>(m_PData, (0x18 + 0x0A * m_count) + 6) = item.StackAmount;
 
     m_count++;
-
-    destroy(item);
 }
 
 /************************************************************************

@@ -28,7 +28,7 @@ class CAHHistoryPacket
 public:
     CAHHistoryPacket(AuctionHouseItem item, uint8 stack);
 
-    void AddItem(AuctionHouseHistory* item);
+    void AddItem(const AuctionHouseHistory& item);
 
     auto GetData() -> uint8*;
     auto GetSize() const -> uint16;

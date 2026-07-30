@@ -28,7 +28,7 @@ class CAHItemsListPacket
 public:
     CAHItemsListPacket(uint16 offset);
 
-    void AddItem(AuctionHouseItem* item);
+    void AddItem(const AuctionHouseItem& item);
     void SetItemCount(uint16 count);
 
     auto GetData() -> uint8*;

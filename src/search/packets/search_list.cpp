@@ -39,7 +39,7 @@ CSearchListPacket::CSearchListPacket(const uint32 Total)
 }
 
 // A maximum of 20 characters can be added to a single packet.
-auto CSearchListPacket::AddPlayer(SearchEntity* PPlayer) -> bool
+auto CSearchListPacket::AddPlayer(const SearchEntity& player) -> bool
 {
     const uint32 size_offset = m_offset / 8;
     if ((sizeof(m_data) - size_offset) < (20 + 67))
@@ -49,43 +49,43 @@ auto CSearchListPacket::AddPlayer(SearchEntity* PPlayer) -> bool
 
     m_offset += 8;
 
-    const auto length = std::min(PPlayer->name.size(), size_t(15));
+    const auto length = std::min(player.name.size(), size_t(15));
     m_offset          = packBitsLE(m_data, static_cast<uint64>(SearchType::Name), m_offset, 5);
     m_offset          = packBitsLE(m_data, length, m_offset, 4);
 
     for (std::size_t c = 0; c < length; ++c)
     {
-        m_offset = packBitsLE(m_data, PPlayer->name[c], m_offset, 7);
+        m_offset = packBitsLE(m_data, player.name[c], m_offset, 7);
     }
 
     m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Area), m_offset, 5);
-    m_offset = packBitsLE(m_data, PPlayer->zone, m_offset, 10);
+    m_offset = packBitsLE(m_data, player.zone, m_offset, 10);
 
-    if (!(PPlayer->flags1 & 0x4000))
+    if (!(player.flags1 & 0x4000))
     {
         m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Nation), m_offset, 5);
-        m_offset = packBitsLE(m_data, PPlayer->nation, m_offset, 2);
+        m_offset = packBitsLE(m_data, player.nation, m_offset, 2);
 
         m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Job), m_offset, 5);
-        m_offset = packBitsLE(m_data, PPlayer->mjob, m_offset, 5);
-        m_offset = packBitsLE(m_data, PPlayer->sjob, m_offset, 5);
+        m_offset = packBitsLE(m_data, player.mjob, m_offset, 5);
+        m_offset = packBitsLE(m_data, player.sjob, m_offset, 5);
 
         m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Level), m_offset, 5);
-        m_offset = packBitsLE(m_data, PPlayer->mlvl, m_offset, 8);
-        m_offset = packBitsLE(m_data, PPlayer->slvl, m_offset, 8);
+        m_offset = packBitsLE(m_data, player.mlvl, m_offset, 8);
+        m_offset = packBitsLE(m_data, player.slvl, m_offset, 8);
 
         m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Race), m_offset, 5);
-        m_offset = packBitsLE(m_data, PPlayer->race, m_offset, 4);
+        m_offset = packBitsLE(m_data, player.race, m_offset, 4);
 
         m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Rank), m_offset, 5);
-        m_offset = packBitsLE(m_data, PPlayer->rank, m_offset, 8);
+        m_offset = packBitsLE(m_data, player.rank, m_offset, 8);
     }
 
     m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Flags1), m_offset, 5);
-    m_offset = packBitsLE(m_data, PPlayer->flags1, m_offset, 16);
+    m_offset = packBitsLE(m_data, player.flags1, m_offset, 16);
 
     m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Id), m_offset, 5);
-    m_offset = packBitsLE(m_data, PPlayer->id, m_offset, 20);
+    m_offset = packBitsLE(m_data, player.id, m_offset, 20);
 
     // m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::LinkshellRank),  m_offset, 5);
     // m_offset = packBitsLE(m_data, 0, m_offset,8);
@@ -93,17 +93,17 @@ auto CSearchListPacket::AddPlayer(SearchEntity* PPlayer) -> bool
     m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Unknown0E), m_offset, 5);
     m_offset = packBitsLE(m_data, 0, m_offset, 32);
 
-    if (PPlayer->seacom_type != 0)
+    if (player.seacom_type != 0)
     {
         m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Comment), m_offset, 5);
-        m_offset = packBitsLE(m_data, PPlayer->seacom_type, m_offset, 32);
+        m_offset = packBitsLE(m_data, player.seacom_type, m_offset, 32);
     }
 
     m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Flags2), m_offset, 5);
-    m_offset = packBitsLE(m_data, PPlayer->flags2, m_offset, 32);
+    m_offset = packBitsLE(m_data, player.flags2, m_offset, 32);
 
     m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Language), m_offset, 5);
-    m_offset = packBitsLE(m_data, PPlayer->languages, m_offset, 16);
+    m_offset = packBitsLE(m_data, player.languages, m_offset, 16);
 
     if (m_offset % 8 > 0)
     {
@@ -112,8 +112,6 @@ auto CSearchListPacket::AddPlayer(SearchEntity* PPlayer) -> bool
 
     ref<uint8>(m_data, size_offset) = m_offset / 8 - size_offset - 1; // Entity data size
     ref<uint16>(m_data, (0x08))     = m_offset / 8;                   // Size of the data to send
-
-    destroy(PPlayer);
 
     return true;
 }
