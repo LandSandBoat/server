@@ -19,12 +19,17 @@
 ===========================================================================
 */
 
-#ifndef _SEARCH_H_
-#define _SEARCH_H_
+#pragma once
 
 #include "common/cbasetypes.h"
 
-struct search_req
+// md5 hash + blowfish key appended by SearchHandler::encrypt()
+inline constexpr uint32 searchPacketTrailerSize = 0x10 + 0x04;
+
+// Worst case packed entity entry; largest real entry is linkshell at 64 bytes
+inline constexpr uint32 searchEntryMaxSize = 67;
+
+struct SearchRequest
 {
     uint16        zoneid[15];
     uint8         jobid;
@@ -41,13 +46,13 @@ struct search_req
     uint8         commentType;
 };
 
-class searchPacket
+class SearchPacket
 {
 public:
     // max size of search packet is 1024 in packets
     static constexpr uint16_t max_size = 1024;
 
-    searchPacket(uint8_t* buffer, uint16_t length)
+    SearchPacket(const uint8_t* buffer, const uint16_t length)
     {
         if (length > max_size)
         {
@@ -60,12 +65,12 @@ public:
         size = length;
     }
 
-    uint16_t getSize()
+    auto getSize() const -> uint16_t
     {
         return size;
     }
 
-    uint8_t* getData()
+    auto getData() -> uint8_t*
     {
         return buff_.data();
     }
@@ -74,5 +79,3 @@ private:
     std::array<uint8_t, max_size> buff_;
     uint16_t                      size;
 };
-
-#endif

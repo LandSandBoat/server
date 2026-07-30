@@ -34,7 +34,7 @@
  *                                                                       *
  ************************************************************************/
 
-CAHItemsListPacket::CAHItemsListPacket(uint16 offset)
+CAHItemsListPacket::CAHItemsListPacket(const uint16 offset)
 : m_offset(offset)
 {
     ref<uint8>(m_PData, (0x0B)) = 0x95; // packet type
@@ -46,15 +46,13 @@ CAHItemsListPacket::CAHItemsListPacket(uint16 offset)
  *                                                                       *
  ************************************************************************/
 
-void CAHItemsListPacket::AddItem(ahItem* item)
+void CAHItemsListPacket::AddItem(const AuctionHouseItem& item)
 {
-    ref<uint16>(m_PData, (0x18 + 0x0A * m_count) + 0) = item->ItemID;
-    ref<uint32>(m_PData, (0x18 + 0x0A * m_count) + 2) = item->SingleAmount;
-    ref<uint32>(m_PData, (0x18 + 0x0A * m_count) + 6) = item->StackAmount;
+    ref<uint16>(m_PData, (0x18 + 0x0A * m_count) + 0) = item.ItemID;
+    ref<uint32>(m_PData, (0x18 + 0x0A * m_count) + 2) = item.SingleAmount;
+    ref<uint32>(m_PData, (0x18 + 0x0A * m_count) + 6) = item.StackAmount;
 
     m_count++;
-
-    destroy(item);
 }
 
 /************************************************************************
@@ -63,7 +61,7 @@ void CAHItemsListPacket::AddItem(ahItem* item)
  *                                                                       *
  ************************************************************************/
 
-void CAHItemsListPacket::SetItemCount(uint16 count)
+void CAHItemsListPacket::SetItemCount(const uint16 count)
 {
     ref<uint16>(m_PData, (0x0E)) = count;
 
@@ -84,7 +82,7 @@ void CAHItemsListPacket::SetItemCount(uint16 count)
  *                                                                       *
  ************************************************************************/
 
-uint8* CAHItemsListPacket::GetData()
+auto CAHItemsListPacket::GetData() -> uint8*
 {
     return m_PData;
 }
@@ -95,7 +93,7 @@ uint8* CAHItemsListPacket::GetData()
  *                                                                       *
  ************************************************************************/
 
-uint16 CAHItemsListPacket::GetSize() const
+auto CAHItemsListPacket::GetSize() const -> uint16
 {
     return 0x18 + 0x0A * m_count + 28;
 }

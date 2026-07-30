@@ -22,13 +22,14 @@
 #include "common/utils.h"
 
 #include "data_loader.h"
-#include "search_list.h"
-
-#include <cstring>
-
+#include "enums/search_type.h"
 #include "linkshell_list.h"
+#include "search.h"
 
-CLinkshellListPacket::CLinkshellListPacket(uint32 linkshellid, uint32 Total)
+#include <algorithm>
+#include <cstddef>
+
+CLinkshellListPacket::CLinkshellListPacket(const uint32 linkshellid, const uint32 Total)
 : m_offset(192)
 {
     ref<uint8>(m_data, (0x0A)) = 0x00; // is final packet
@@ -43,77 +44,77 @@ CLinkshellListPacket::CLinkshellListPacket(uint32 linkshellid, uint32 Total)
  *                                                                       *
  ************************************************************************/
 
-bool CLinkshellListPacket::AddPlayer(SearchEntity* PPlayer)
+auto CLinkshellListPacket::AddPlayer(const SearchEntity& player) -> bool
 {
-    uint32 size_offset = m_offset / 8;
-    if ((sizeof(m_data) - size_offset) < (20 + 67))
+    const uint32 size_offset = m_offset / 8;
+    if ((sizeof(m_data) - size_offset) < (searchPacketTrailerSize + searchEntryMaxSize))
     {
         return false; // not enough space available, worst case.
     }
 
     m_offset += 8;
 
-    m_offset = packBitsLE(m_data, SEARCH_NAME, m_offset, 5);
+    m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Name), m_offset, 5);
 
-    auto length = std::min(PPlayer->name.size(), size_t(15));
-    m_offset    = packBitsLE(m_data, length, m_offset, 4);
+    const auto length = std::min(player.name.size(), size_t(15));
+    m_offset          = packBitsLE(m_data, length, m_offset, 4);
 
     for (std::size_t c = 0; c < length; ++c)
     {
-        m_offset = packBitsLE(m_data, PPlayer->name[c], m_offset, 7);
+        m_offset = packBitsLE(m_data, player.name[c], m_offset, 7);
     }
 
-    m_offset = packBitsLE(m_data, 1, m_offset, 5);
-    m_offset = packBitsLE(m_data, PPlayer->zone, m_offset, 10);
+    m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Area), m_offset, 5);
+    m_offset = packBitsLE(m_data, player.zone, m_offset, 10);
 
-    if (!(PPlayer->flags1 & 0x4000))
+    if (!(player.flags1 & 0x4000))
     {
-        m_offset = packBitsLE(m_data, SEARCH_NATION, m_offset, 5);
-        m_offset = packBitsLE(m_data, PPlayer->nation, m_offset, 2);
+        m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Nation), m_offset, 5);
+        m_offset = packBitsLE(m_data, player.nation, m_offset, 2);
 
-        m_offset = packBitsLE(m_data, SEARCH_JOB, m_offset, 5);
-        m_offset = packBitsLE(m_data, PPlayer->mjob, m_offset, 5);
-        m_offset = packBitsLE(m_data, PPlayer->sjob, m_offset, 5);
+        m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Job), m_offset, 5);
+        m_offset = packBitsLE(m_data, player.mjob, m_offset, 5);
+        m_offset = packBitsLE(m_data, player.sjob, m_offset, 5);
 
-        m_offset = packBitsLE(m_data, SEARCH_LEVEL, m_offset, 5);
-        m_offset = packBitsLE(m_data, PPlayer->mlvl, m_offset, 8);
-        m_offset = packBitsLE(m_data, PPlayer->slvl, m_offset, 8);
+        m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Level), m_offset, 5);
+        m_offset = packBitsLE(m_data, player.mlvl, m_offset, 8);
+        m_offset = packBitsLE(m_data, player.slvl, m_offset, 8);
 
-        m_offset = packBitsLE(m_data, SEARCH_RACE, m_offset, 5);
-        m_offset = packBitsLE(m_data, PPlayer->race, m_offset, 4);
+        m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Race), m_offset, 5);
+        m_offset = packBitsLE(m_data, player.race, m_offset, 4);
 
-        m_offset = packBitsLE(m_data, SEARCH_RANK, m_offset, 5);
-        m_offset = packBitsLE(m_data, PPlayer->rank, m_offset, 8);
+        m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Rank), m_offset, 5);
+        m_offset = packBitsLE(m_data, player.rank, m_offset, 8);
     }
 
-    m_offset = packBitsLE(m_data, SEARCH_FLAGS1, m_offset, 5);
-    m_offset = packBitsLE(m_data, PPlayer->flags1, m_offset, 16);
+    m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Flags1), m_offset, 5);
+    m_offset = packBitsLE(m_data, player.flags1, m_offset, 16);
 
-    m_offset = packBitsLE(m_data, SEARCH_ID, m_offset, 5);
-    m_offset = packBitsLE(m_data, PPlayer->id, m_offset, 20);
+    m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Id), m_offset, 5);
+    m_offset = packBitsLE(m_data, player.id, m_offset, 20);
 
-    m_offset = packBitsLE(m_data, SEARCH_LINKSHELLRANK, m_offset, 5);
-    m_offset = packBitsLE(m_data, PPlayer->linkshellrank1, m_offset, 8); // 2=sack, 1=holder, 3=pearl
-    m_offset = packBitsLE(m_data, PPlayer->linkshellrank2, m_offset, 8);
+    m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::LinkshellRank), m_offset, 5);
+    m_offset = packBitsLE(m_data, player.linkshellrank1, m_offset, 8); // 2=sack, 1=holder, 3=pearl
+    m_offset = packBitsLE(m_data, player.linkshellrank2, m_offset, 8);
     m_offset = packBitsLE(m_data, 0, m_offset, 8); // linkshellrank3
-    m_offset = packBitsLE(m_data, PPlayer->linkshellid1, m_offset, 32);
-    m_offset = packBitsLE(m_data, PPlayer->linkshellid2, m_offset, 32);
+    m_offset = packBitsLE(m_data, player.linkshellid1, m_offset, 32);
+    m_offset = packBitsLE(m_data, player.linkshellid2, m_offset, 32);
     m_offset = packBitsLE(m_data, 0, m_offset, 32); // linkshellid3
 
-    m_offset = packBitsLE(m_data, SEARCH_UNK0x0E, m_offset, 5);
+    m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Unknown0E), m_offset, 5);
     m_offset = packBitsLE(m_data, 0, m_offset, 32);
 
-    if (PPlayer->seacom_type != 0)
+    if (player.seacom_type != 0)
     {
-        m_offset = packBitsLE(m_data, SEARCH_COMMENT, m_offset, 5);
-        m_offset = packBitsLE(m_data, PPlayer->seacom_type, m_offset, 32);
+        m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Comment), m_offset, 5);
+        m_offset = packBitsLE(m_data, player.seacom_type, m_offset, 32);
     }
 
-    m_offset = packBitsLE(m_data, SEARCH_FLAGS2, m_offset, 5);
-    m_offset = packBitsLE(m_data, PPlayer->flags2, m_offset, 32);
+    m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Flags2), m_offset, 5);
+    m_offset = packBitsLE(m_data, player.flags2, m_offset, 32);
 
-    m_offset = packBitsLE(m_data, SEARCH_LANGUAGE, m_offset, 5);
-    m_offset = packBitsLE(m_data, PPlayer->languages, m_offset, 16);
+    m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Language), m_offset, 5);
+    m_offset = packBitsLE(m_data, player.languages, m_offset, 16);
 
     if (m_offset % 8 > 0)
     {
@@ -122,8 +123,6 @@ bool CLinkshellListPacket::AddPlayer(SearchEntity* PPlayer)
 
     ref<uint8>(m_data, size_offset) = m_offset / 8 - size_offset - 1; // Entity data size
     ref<uint16>(m_data, (0x08))     = m_offset / 8;                   // Size of the data to send
-
-    destroy(PPlayer);
 
     return true;
 }
@@ -145,7 +144,7 @@ void CLinkshellListPacket::SetFinal()
  *                                                                       *
  ************************************************************************/
 
-uint8* CLinkshellListPacket::GetData()
+auto CLinkshellListPacket::GetData() -> uint8*
 {
     return m_data;
 }
@@ -156,7 +155,7 @@ uint8* CLinkshellListPacket::GetData()
  *                                                                       *
  ************************************************************************/
 
-uint16 CLinkshellListPacket::GetSize() const
+auto CLinkshellListPacket::GetSize() const -> uint16
 {
-    return m_offset / 8 + 20;
+    return m_offset / 8 + searchPacketTrailerSize;
 }

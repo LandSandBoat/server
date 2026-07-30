@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CAHITEMSLISTPACKET_H_
-#define _CAHITEMSLISTPACKET_H_
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -29,11 +28,11 @@ class CAHItemsListPacket
 public:
     CAHItemsListPacket(uint16 offset);
 
-    void AddItem(ahItem* item);
+    void AddItem(const AuctionHouseItem& item);
     void SetItemCount(uint16 count);
 
-    uint8* GetData();
-    uint16 GetSize() const;
+    auto GetData() -> uint8*;
+    auto GetSize() const -> uint16;
 
 private:
     uint8  m_count{};
@@ -41,5 +40,3 @@ private:
 
     uint8 m_PData[256]{};
 };
-
-#endif

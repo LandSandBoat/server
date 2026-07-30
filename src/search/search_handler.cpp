@@ -26,7 +26,12 @@
 #include "common/utils.h"
 
 #include "data_loader.h"
+#include "enums/search_type.h"
 
+#include <algorithm>
+#include <cstddef>
+#include <cstring>
+#include <iterator>
 #include <map>
 #include <unordered_set>
 
@@ -131,7 +136,7 @@ auto SearchHandler::run() -> Task<void>
     socket_.lowest_layer().close(ec);
 }
 
-void SearchHandler::decrypt(uint16_t length)
+void SearchHandler::decrypt(const uint16_t length)
 {
     DebugSocketsFmt("Decrypting packet from IP {} ({} bytes)", ipAddress_, length);
 
@@ -154,7 +159,7 @@ void SearchHandler::decrypt(uint16_t length)
     ref<uint32>(key, 20) = ref<uint32>(buffer_.data(), length - 0x18);
 }
 
-void SearchHandler::encrypt(uint16_t length)
+void SearchHandler::encrypt(const uint16_t length)
 {
     DebugSocketsFmt("Encrypting packet for IP {} ({} bytes)", ipAddress_, length);
 
@@ -163,7 +168,7 @@ void SearchHandler::encrypt(uint16_t length)
 
     md5(reinterpret_cast<uint8*>(key), blowfish_.hash, 24);
 
-    blowfish_init((int8*)blowfish_.hash, 16, blowfish_.P, blowfish_.S[0]);
+    blowfish_init(reinterpret_cast<int8*>(blowfish_.hash), 16, blowfish_.P, blowfish_.S[0]);
 
     md5(buffer_.data() + 8, buffer_.data() + length - 0x18 + 0x04, length - 0x18 - 0x04);
 
@@ -178,7 +183,7 @@ void SearchHandler::encrypt(uint16_t length)
     memcpy(&buffer_[length] - 0x04, key + 16, 4);
 }
 
-bool SearchHandler::validatePacket(uint16_t length)
+auto SearchHandler::validatePacket(const uint16_t length) -> bool
 {
     DebugSocketsFmt("Validating packet from IP {} ({} bytes)", ipAddress_, length);
 
@@ -205,7 +210,7 @@ bool SearchHandler::validatePacket(uint16_t length)
     return true;
 }
 
-inline std::string searchTypeToString(uint8 type)
+inline auto searchTypeToString(const uint8 type) -> std::string
 {
     switch (type)
     {
@@ -230,7 +235,7 @@ inline std::string searchTypeToString(uint8 type)
     }
 }
 
-void SearchHandler::read_func(uint16_t length)
+void SearchHandler::read_func(const uint16_t length)
 {
     if (length != ref<uint16>(buffer_.data(), 0x00) || length < 28)
     {
@@ -291,7 +296,7 @@ void SearchHandler::read_func(uint16_t length)
  *                                                                       *
  ************************************************************************/
 
-void DebugPrintPacket(char* data, uint16_t size)
+void DebugPrintPacket(const uint8* data, const uint16_t size)
 {
     if (!settings::get<bool>("logging.DEBUG_PACKETS"))
     {
@@ -301,7 +306,7 @@ void DebugPrintPacket(char* data, uint16_t size)
     std::string outStr = "\n";
     for (int32 y = 0; y < size; y++)
     {
-        outStr += fmt::format("{:02X} ", (uint8)data[y]);
+        outStr += fmt::format("{:02X} ", data[y]);
         if (((y + 1) % 16) == 0)
         {
             outStr += "\n";
@@ -319,43 +324,50 @@ void DebugPrintPacket(char* data, uint16_t size)
 
 void SearchHandler::HandleGroupListRequest()
 {
-    uint32 partyid      = ref<uint32>(buffer_.data(), 0x10);
-    uint32 allianceid   = ref<uint32>(buffer_.data(), 0x14);
-    uint32 linkshellid1 = ref<uint32>(buffer_.data(), 0x18);
-    uint32 linkshellid2 = ref<uint32>(buffer_.data(), 0x1C);
+    uint32       partyid      = ref<uint32>(buffer_.data(), 0x10);
+    const uint32 allianceid   = ref<uint32>(buffer_.data(), 0x14);
+    uint32       linkshellid1 = ref<uint32>(buffer_.data(), 0x18);
+    uint32       linkshellid2 = ref<uint32>(buffer_.data(), 0x1C);
 
     ShowInfoFmt("SEARCH::PartyID = {}", partyid);
     ShowInfoFmt("SEARCH::LinkshellIDs = {}, {}", linkshellid1, linkshellid2);
 
-    CDataLoader PDataLoader;
+    const CDataLoader PDataLoader;
 
     if (partyid != 0 || allianceid != 0)
     {
-        std::list<SearchEntity*> PartyList = PDataLoader.GetPartyList(partyid, allianceid);
+        const auto PartyList = PDataLoader.GetPartyList(partyid, allianceid);
 
-        CPartyListPacket PPartyPacket(partyid, (uint32)PartyList.size());
+        CPartyListPacket PPartyPacket(partyid, static_cast<uint32>(PartyList.size()));
 
-        for (auto& it : PartyList)
+        std::size_t membersSent = 0;
+        for (const auto& player : PartyList)
         {
-            PPartyPacket.AddPlayer(it);
+            if (!PPartyPacket.AddPlayer(player))
+            {
+                ShowWarningFmt("Party list packet full, sent {} of {} members for party {}", membersSent, PartyList.size(), partyid);
+                break;
+            }
+
+            membersSent++;
         }
 
         uint16_t length = PPartyPacket.GetSize();
 
-        DebugPrintPacket((char*)PPartyPacket.GetData(), length);
+        DebugPrintPacket(PPartyPacket.GetData(), length);
         searchPackets_.emplace_back(PPartyPacket.GetData(), length);
     }
     else if (linkshellid1 != 0 || linkshellid2 != 0)
     {
-        uint32                   linkshellid   = linkshellid1 == 0 ? linkshellid2 : linkshellid1;
-        std::list<SearchEntity*> LinkshellList = PDataLoader.GetLinkshellList(linkshellid);
+        const uint32 linkshellid   = linkshellid1 == 0 ? linkshellid2 : linkshellid1;
+        const auto   LinkshellList = PDataLoader.GetLinkshellList(linkshellid);
 
-        uint32 totalResults  = (uint32)LinkshellList.size();
-        uint32 currentResult = 0;
+        const uint32 totalResults  = static_cast<uint32>(LinkshellList.size());
+        uint32       currentResult = 0;
 
         // Iterate through the linkshell list, splitting up the results into
         // smaller chunks.
-        std::list<SearchEntity*>::iterator it = LinkshellList.begin();
+        auto it = LinkshellList.begin();
 
         do
         {
@@ -363,7 +375,7 @@ void SearchHandler::HandleGroupListRequest()
 
             while (currentResult < totalResults)
             {
-                bool success = PLinkshellPacket.AddPlayer(*it);
+                const bool success = PLinkshellPacket.AddPlayer(*it);
                 if (!success)
                 {
                     break;
@@ -380,7 +392,7 @@ void SearchHandler::HandleGroupListRequest()
 
             uint16_t length = PLinkshellPacket.GetSize();
 
-            DebugPrintPacket((char*)PLinkshellPacket.GetData(), length);
+            DebugPrintPacket(PLinkshellPacket.GetData(), length);
             searchPackets_.emplace_back(PLinkshellPacket.GetData(), length);
 
         } while (currentResult < totalResults);
@@ -389,10 +401,10 @@ void SearchHandler::HandleGroupListRequest()
 
 void SearchHandler::HandleSearchComment()
 {
-    uint32 playerId = ref<uint32>(buffer_.data(), 0x10);
+    const uint32 playerId = ref<uint32>(buffer_.data(), 0x10);
 
-    CDataLoader PDataLoader;
-    std::string comment = PDataLoader.GetSearchComment(playerId);
+    const CDataLoader PDataLoader;
+    const std::string comment = PDataLoader.GetSearchComment(playerId);
     if (comment.empty())
     {
         return;
@@ -402,25 +414,25 @@ void SearchHandler::HandleSearchComment()
 
     uint16_t length = commentPacket.GetSize();
 
-    DebugPrintPacket((char*)commentPacket.GetData(), length);
+    DebugPrintPacket(commentPacket.GetData(), length);
     searchPackets_.emplace_back(commentPacket.GetData(), length);
 }
 
 void SearchHandler::HandleSearchRequest()
 {
-    const search_req sr = _HandleSearchRequest();
+    const SearchRequest sr = _HandleSearchRequest();
 
-    CDataLoader PDataLoader;
-    int         totalCount = 0;
+    const CDataLoader PDataLoader;
+    int               totalCount = 0;
 
-    std::list<SearchEntity*> SearchList = PDataLoader.GetPlayersList(sr, &totalCount);
+    const auto SearchList = PDataLoader.GetPlayersList(sr, &totalCount);
 
-    uint32 totalResults  = (uint32)SearchList.size();
-    uint32 currentResult = 0;
+    const uint32 totalResults  = static_cast<uint32>(SearchList.size());
+    uint32       currentResult = 0;
 
     // Iterate through the search list, splitting up the results into
     // smaller chunks.
-    std::list<SearchEntity*>::iterator it = SearchList.begin();
+    auto it = SearchList.begin();
 
     do
     {
@@ -445,7 +457,7 @@ void SearchHandler::HandleSearchRequest()
 
         uint16_t length = PSearchPacket.GetSize();
 
-        DebugPrintPacket((char*)PSearchPacket.GetData(), length);
+        DebugPrintPacket(PSearchPacket.GetData(), length);
         searchPackets_.emplace_back(PSearchPacket.GetData(), length);
 
     } while (currentResult < totalResults);
@@ -453,7 +465,7 @@ void SearchHandler::HandleSearchRequest()
 
 void SearchHandler::HandleAuctionHouseRequest()
 {
-    uint8 AHCatID = ref<uint8>(buffer_.data(), 0x16);
+    const uint8 AHCatID = ref<uint8>(buffer_.data(), 0x16);
 
     // 2 - level
     // 3 - race
@@ -464,7 +476,7 @@ void SearchHandler::HandleAuctionHouseRequest()
     // 8 - resistance
     // 9 - name
     std::string OrderByString = "ORDER BY";
-    uint8       paramCount    = ref<uint8>(buffer_.data(), 0x12);
+    const uint8 paramCount    = ref<uint8>(buffer_.data(), 0x12);
     for (uint8 i = 0; i < paramCount; ++i) // Item sort options
     {
         uint8 param = ref<uint32>(buffer_.data(), 0x18 + 8 * i);
@@ -489,25 +501,27 @@ void SearchHandler::HandleAuctionHouseRequest()
     OrderByString.append(" item_basic.itemid");
     const char* OrderByArray = OrderByString.data();
 
-    CDataLoader          PDataLoader;
-    std::vector<ahItem*> ItemList = PDataLoader.GetAHItemsToCategory(AHCatID, OrderByArray);
+    const CDataLoader PDataLoader;
+    const auto        ItemList = PDataLoader.GetAHItemsToCategory(AHCatID, OrderByArray);
 
-    uint8 PacketsCount = (uint8)((ItemList.size() / 20) + (ItemList.size() % 20 != 0) + (ItemList.empty()));
+    const std::size_t itemListSize = ItemList.size();
+    const std::size_t PacketsCount = (itemListSize / 20) + (itemListSize % 20 != 0) + (itemListSize == 0);
 
-    for (uint8 i = 0; i < PacketsCount; ++i)
+    for (std::size_t i = 0; i < PacketsCount; ++i)
     {
-        CAHItemsListPacket PAHPacket(20 * i);
-        uint16             itemListSize = static_cast<uint16>(ItemList.size());
+        const std::size_t firstItem = 20 * i;
 
-        PAHPacket.SetItemCount(itemListSize);
+        CAHItemsListPacket PAHPacket(static_cast<uint16>(firstItem));
 
-        for (uint16 y = 20 * i; (y != 20 * (i + 1)) && (y < itemListSize); ++y)
+        PAHPacket.SetItemCount(static_cast<uint16>(itemListSize));
+
+        for (std::size_t y = firstItem; (y < firstItem + 20) && (y < itemListSize); ++y)
         {
             PAHPacket.AddItem(ItemList.at(y));
         }
 
-        uint16_t length = PAHPacket.GetSize();
-        DebugPrintPacket((char*)PAHPacket.GetData(), length);
+        const uint16_t length = PAHPacket.GetSize();
+        DebugPrintPacket(PAHPacket.GetData(), length);
 
         searchPackets_.emplace_back(PAHPacket.GetData(), length);
     }
@@ -515,31 +529,31 @@ void SearchHandler::HandleAuctionHouseRequest()
 
 void SearchHandler::HandleAuctionHouseHistory()
 {
-    uint16 ItemID = ref<uint16>(buffer_.data(), 0x12);
-    uint8  stack  = ref<uint8>(buffer_.data(), 0x15);
+    const uint16 ItemID = ref<uint16>(buffer_.data(), 0x12);
+    const uint8  stack  = ref<uint8>(buffer_.data(), 0x15);
 
-    CDataLoader             PDataLoader;
-    std::vector<ahHistory*> HistoryList = PDataLoader.GetAHItemHistory(ItemID, stack != 0);
-    ahItem                  item        = PDataLoader.GetAHItemFromItemID(ItemID);
+    const CDataLoader      PDataLoader;
+    const auto             HistoryList = PDataLoader.GetAHItemHistory(ItemID, stack != 0);
+    const AuctionHouseItem item        = PDataLoader.GetAHItemFromItemID(ItemID);
 
     CAHHistoryPacket PAHPacket = CAHHistoryPacket(item, stack);
 
-    for (auto& i : HistoryList)
+    for (const auto& i : HistoryList)
     {
         PAHPacket.AddItem(i);
     }
 
     uint16_t length = PAHPacket.GetSize();
 
-    DebugPrintPacket((char*)PAHPacket.GetData(), length);
+    DebugPrintPacket(PAHPacket.GetData(), length);
     searchPackets_.emplace_back(PAHPacket.GetData(), length);
 }
 
-search_req SearchHandler::_HandleSearchRequest()
+auto SearchHandler::_HandleSearchRequest() -> SearchRequest
 {
     // This function constructs a `search_req` based on which query should be sent to the database.
     // The results from the database will eventually be sent to the client.
-    search_req sr;
+    SearchRequest sr;
 
     uint32 bitOffset = 0;
 
@@ -578,26 +592,26 @@ search_req SearchHandler::_HandleSearchRequest()
             break;
         }
 
-        uint8 EntryType = (uint8)unpackBitsLE(&buffer_[0x11], bitOffset, 5);
+        const auto EntryType = static_cast<SearchType>(unpackBitsLE(&buffer_[0x11], bitOffset, 5));
         bitOffset += 5;
 
-        if ((EntryType != SEARCH_FRIEND) && (EntryType != SEARCH_LINKSHELL) && (EntryType != SEARCH_LINKSHELL2) && (EntryType != SEARCH_COMMENT) && (EntryType != SEARCH_FLAGS2))
+        if ((EntryType != SearchType::Friend) && (EntryType != SearchType::Linkshell) && (EntryType != SearchType::Linkshell2) && (EntryType != SearchType::Comment) && (EntryType != SearchType::Flags2))
         {
             if ((bitOffset + 3) >= workloadBits) // so 0000000 at the end does not get interpreted as name entry
             {
                 bitOffset = workloadBits;
                 break;
             }
-            sortDescending = (unsigned char)unpackBitsLE(&buffer_[0x11], bitOffset, 1);
+            sortDescending = static_cast<unsigned char>(unpackBitsLE(&buffer_[0x11], bitOffset, 1));
             bitOffset += 1;
 
-            isPresent = (unsigned char)unpackBitsLE(&buffer_[0x11], bitOffset, 1);
+            isPresent = static_cast<unsigned char>(unpackBitsLE(&buffer_[0x11], bitOffset, 1));
             bitOffset += 1;
         }
 
         switch (EntryType)
         {
-            case SEARCH_NAME:
+            case SearchType::Name:
             {
                 if (isPresent == 0x1) // Name send
                 {
@@ -606,20 +620,27 @@ search_req SearchHandler::_HandleSearchRequest()
                         bitOffset = workloadBits;
                         break;
                     }
-                    nameLen       = (unsigned char)unpackBitsLE(&buffer_[0x11], bitOffset, 5);
-                    name[nameLen] = '\0';
-
+                    // 5-bit field (0-31) clamped to name's 15 chars; still consume every char
+                    const uint8 rawNameLen = static_cast<uint8>(unpackBitsLE(&buffer_[0x11], bitOffset, 5));
                     bitOffset += 5;
 
-                    for (unsigned char i = 0; i < nameLen; i++)
+                    nameLen       = std::min<uint8>(rawNameLen, sizeof(name) - 1);
+                    name[nameLen] = '\0';
+
+                    for (uint8 i = 0; i < rawNameLen; i++)
                     {
-                        name[i] = (char)unpackBitsLE(&buffer_[0x11], bitOffset, 7);
+                        const auto nameChar = static_cast<char>(unpackBitsLE(&buffer_[0x11], bitOffset, 7));
                         bitOffset += 7;
+
+                        if (i < nameLen)
+                        {
+                            name[i] = nameChar;
+                        }
                     }
                 }
                 break;
             }
-            case SEARCH_AREA: // Area Code Entry - 10 bit
+            case SearchType::Area: // Area Code Entry - 10 bit
             {
                 if (isPresent == 0) // no more Area entries
                 {
@@ -627,17 +648,23 @@ search_req SearchHandler::_HandleSearchRequest()
                 }
                 else // 8 Bit = 1 Byte per Area Code
                 {
-                    areas[areaCount] = (uint16)unpackBitsLE(&buffer_[0x11], bitOffset, 10);
-                    areaCount++;
+                    const auto area = static_cast<uint16>(unpackBitsLE(&buffer_[0x11], bitOffset, 10));
                     bitOffset += 10;
+
+                    // client controls entry count; only store while areas[] has room
+                    if (areaCount < std::size(areas))
+                    {
+                        areas[areaCount] = area;
+                        areaCount++;
+                    }
                 }
                 break;
             }
-            case SEARCH_NATION: // Country - 2 bit
+            case SearchType::Nation: // Country - 2 bit
             {
                 if (isPresent == 0x1)
                 {
-                    unsigned char country = (unsigned char)unpackBitsLE(&buffer_[0x11], bitOffset, 2);
+                    unsigned char country = static_cast<unsigned char>(unpackBitsLE(&buffer_[0x11], bitOffset, 2));
                     bitOffset += 2;
                     nationid = country;
 
@@ -645,34 +672,34 @@ search_req SearchHandler::_HandleSearchRequest()
                 }
                 break;
             }
-            case SEARCH_JOB: // Job - 5 bit
+            case SearchType::Job: // Job - 5 bit
             {
                 if (isPresent == 0x1)
                 {
-                    unsigned char job = (unsigned char)unpackBitsLE(&buffer_[0x11], bitOffset, 5);
+                    unsigned char job = static_cast<unsigned char>(unpackBitsLE(&buffer_[0x11], bitOffset, 5));
                     bitOffset += 5;
                     jobid = job;
                 }
                 break;
             }
-            case SEARCH_LEVEL: // Level- 16 bit
+            case SearchType::Level: // Level- 16 bit
             {
                 if (isPresent == 0x1)
                 {
-                    unsigned char fromLvl = (unsigned char)unpackBitsLE(&buffer_[0x11], bitOffset, 8);
+                    unsigned char fromLvl = static_cast<unsigned char>(unpackBitsLE(&buffer_[0x11], bitOffset, 8));
                     bitOffset += 8;
-                    unsigned char toLvl = (unsigned char)unpackBitsLE(&buffer_[0x11], bitOffset, 8);
+                    unsigned char toLvl = static_cast<unsigned char>(unpackBitsLE(&buffer_[0x11], bitOffset, 8));
                     bitOffset += 8;
                     minLvl = fromLvl;
                     maxLvl = toLvl;
                 }
                 break;
             }
-            case SEARCH_RACE: // Race - 4 bit
+            case SearchType::Race: // Race - 4 bit
             {
                 if (isPresent == 0x1)
                 {
-                    unsigned char race = (unsigned char)unpackBitsLE(&buffer_[0x11], bitOffset, 4);
+                    unsigned char race = static_cast<unsigned char>(unpackBitsLE(&buffer_[0x11], bitOffset, 4));
                     bitOffset += 4;
                     raceid = race;
 
@@ -681,14 +708,14 @@ search_req SearchHandler::_HandleSearchRequest()
                 ShowInfoFmt("SortByRace: {}.", (sortDescending == 0x00) ? "ascending" : "descending");
                 break;
             }
-            case SEARCH_RANK: // Rank - 2 byte
+            case SearchType::Rank: // Rank - 2 byte
             {
                 if (isPresent == 0x1)
                 {
-                    unsigned char fromRank = (unsigned char)unpackBitsLE(&buffer_[0x11], bitOffset, 8);
+                    unsigned char fromRank = static_cast<unsigned char>(unpackBitsLE(&buffer_[0x11], bitOffset, 8));
                     bitOffset += 8;
                     minRank              = fromRank;
-                    unsigned char toRank = (unsigned char)unpackBitsLE(&buffer_[0x11], bitOffset, 8);
+                    unsigned char toRank = static_cast<unsigned char>(unpackBitsLE(&buffer_[0x11], bitOffset, 8));
                     bitOffset += 8;
                     maxRank = toRank;
 
@@ -697,9 +724,9 @@ search_req SearchHandler::_HandleSearchRequest()
                 ShowInfoFmt("SortByRank: {}.", (sortDescending == 0x00) ? "ascending" : "descending");
                 break;
             }
-            case SEARCH_COMMENT: // 4 Byte
+            case SearchType::Comment: // 4 Byte
             {
-                commentType = (uint8)unpackBitsLE(&buffer_[0x11], bitOffset, 32);
+                commentType = static_cast<uint8>(unpackBitsLE(&buffer_[0x11], bitOffset, 32));
                 bitOffset += 32;
 
                 ShowInfoFmt("Comment Entry found. ({}).", hex8ToString(commentType));
@@ -707,7 +734,7 @@ search_req SearchHandler::_HandleSearchRequest()
             }
             // the following 4 Entries were generated with /sea (ballista|friend|linkshell|away|inv)
             // so they may be off
-            case SEARCH_LINKSHELL: // 4 Byte
+            case SearchType::Linkshell: // 4 Byte
             {
                 sr.lsId = static_cast<uint32>(unpackBitsLE(&buffer_[0x11], bitOffset, 32));
                 bitOffset += 32;
@@ -715,7 +742,7 @@ search_req SearchHandler::_HandleSearchRequest()
                 ShowInfoFmt("Linkshell Entry found. Value: {}", hex32ToString(sr.lsId.value()));
                 break;
             }
-            case SEARCH_LINKSHELL2: // 4 Byte
+            case SearchType::Linkshell2: // 4 Byte
             {
                 sr.lsId = static_cast<uint32>(unpackBitsLE(&buffer_[0x11], bitOffset, 32));
                 bitOffset += 32;
@@ -723,16 +750,16 @@ search_req SearchHandler::_HandleSearchRequest()
                 ShowInfoFmt("Linkshell2 Entry found. Value: {}", hex32ToString(sr.lsId.value()));
                 break;
             }
-            case SEARCH_FRIEND: // Friend Packet, 0 byte
+            case SearchType::Friend: // Friend Packet, 0 byte
             {
                 ShowInfoFmt("Friend Entry found.");
                 break;
             }
-            case SEARCH_FLAGS1: // Flag Entry #1, 2 byte,
+            case SearchType::Flags1: // Flag Entry #1, 2 byte,
             {
                 if (isPresent == 0x1)
                 {
-                    unsigned short flags1 = (unsigned short)unpackBitsLE(&buffer_[0x11], bitOffset, 16);
+                    unsigned short flags1 = static_cast<unsigned short>(unpackBitsLE(&buffer_[0x11], bitOffset, 16));
                     bitOffset += 16;
 
                     ShowInfoFmt("Flag Entry #1 ({}) found. Sorting: ({}).", hex16ToString(flags1), (sortDescending == 0x00) ? "ascending" : "descending");
@@ -742,9 +769,9 @@ search_req SearchHandler::_HandleSearchRequest()
                 ShowInfoFmt("SortByFlags: {}", (sortDescending == 0 ? "ascending" : "descending"));
                 break;
             }
-            case SEARCH_FLAGS2: // Flag Entry #2 - 4 byte
+            case SearchType::Flags2: // Flag Entry #2 - 4 byte
             {
-                unsigned int flags2 = (unsigned int)unpackBitsLE(&buffer_[0x11], bitOffset, 32);
+                unsigned int flags2 = static_cast<unsigned int>(unpackBitsLE(&buffer_[0x11], bitOffset, 32));
 
                 bitOffset += 32;
                 flags = flags2;
@@ -752,7 +779,7 @@ search_req SearchHandler::_HandleSearchRequest()
             }
             default:
             {
-                ShowInfoFmt("Unknown Search Param {}!", EntryType);
+                ShowInfoFmt("Unknown Search Param {}!", static_cast<uint8>(EntryType));
                 break;
             }
         }
@@ -784,7 +811,7 @@ search_req SearchHandler::_HandleSearchRequest()
     // For example: "/blacklist delete Name" and "/sea all Name"
 }
 
-uint16_t SearchHandler::getNumSessionsInUse(const std::string& ipAddressStr)
+auto SearchHandler::getNumSessionsInUse(const std::string& ipAddressStr) const -> uint16_t
 {
     DebugSocketsFmt("Checking if IP is in use: {}", ipAddressStr);
 
@@ -809,7 +836,7 @@ uint16_t SearchHandler::getNumSessionsInUse(const std::string& ipAddressStr)
         });
 }
 
-void SearchHandler::removeFromUsedIPAddresses(const std::string& ipAddressStr)
+void SearchHandler::removeFromUsedIPAddresses(const std::string& ipAddressStr) const
 {
     DebugSocketsFmt("Removing IP from active set: {}", ipAddressStr);
 
@@ -842,7 +869,7 @@ void SearchHandler::removeFromUsedIPAddresses(const std::string& ipAddressStr)
         });
 }
 
-void SearchHandler::addToUsedIPAddresses(const std::string& ipAddressStr)
+void SearchHandler::addToUsedIPAddresses(const std::string& ipAddressStr) const
 {
     DebugSocketsFmt("Adding IP to active set: {}", ipAddressStr);
 

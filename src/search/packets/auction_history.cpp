@@ -18,15 +18,16 @@
 
 ===========================================================================
 */
-#include <cstring>
-
 #include "common/utils.h"
 
 #include "data_loader.h"
 
 #include "auction_history.h"
 
-CAHHistoryPacket::CAHHistoryPacket(ahItem item, uint8 stack)
+#include <algorithm>
+#include <cstring>
+
+CAHHistoryPacket::CAHHistoryPacket(const AuctionHouseItem item, const uint8 stack)
 {
     // Comments and RE by atom0s
     ref<uint8>(m_PData, 0x0A)  = 0x80;        // flags, may be int8 as it's checked against negative.
@@ -41,20 +42,18 @@ CAHHistoryPacket::CAHHistoryPacket(ahItem item, uint8 stack)
     ref<uint16>(m_PData, 0x1E) = item.Category;
 }
 
-void CAHHistoryPacket::AddItem(ahHistory* item)
+void CAHHistoryPacket::AddItem(const AuctionHouseHistory& item)
 {
     if (m_count < 10)
     {
-        ref<uint32>(m_PData, (0x20 + 40 * m_count) + 0x00) = item->Price;
-        ref<uint32>(m_PData, (0x20 + 40 * m_count) + 0x04) = item->Data;
+        ref<uint32>(m_PData, (0x20 + 40 * m_count) + 0x00) = item.Price;
+        ref<uint32>(m_PData, (0x20 + 40 * m_count) + 0x04) = item.Data;
 
-        std::memcpy(m_PData + 0x20 + 40 * m_count + 0x08, item->Name1.c_str(), 15);
-        std::memcpy(m_PData + 0x20 + 40 * m_count + 0x18, item->Name2.c_str(), 15);
+        std::memcpy(m_PData + 0x20 + 40 * m_count + 0x08, item.Name1.c_str(), std::min(item.Name1.size(), size_t(15)));
+        std::memcpy(m_PData + 0x20 + 40 * m_count + 0x18, item.Name2.c_str(), std::min(item.Name2.size(), size_t(15)));
 
         ref<uint16>(m_PData, (0x08)) = 0x20 + 40 * ++m_count;
     }
-
-    destroy(item);
 }
 
 /************************************************************************
@@ -63,7 +62,7 @@ void CAHHistoryPacket::AddItem(ahHistory* item)
  *                                                                       *
  ************************************************************************/
 
-uint8* CAHHistoryPacket::GetData()
+auto CAHHistoryPacket::GetData() -> uint8*
 {
     return m_PData;
 }
@@ -74,7 +73,7 @@ uint8* CAHHistoryPacket::GetData()
  *                                                                       *
  ************************************************************************/
 
-uint16 CAHHistoryPacket::GetSize() const
+auto CAHHistoryPacket::GetSize() const -> uint16
 {
     return 0x20 + 40 * m_count + 28;
 }

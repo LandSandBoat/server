@@ -19,16 +19,15 @@
 ===========================================================================
 */
 
-#ifndef _CDATALOADER_H_
-#define _CDATALOADER_H_
+#pragma once
 
 #include "common/cbasetypes.h"
 
-#include <list>
+#include <vector>
 
-struct search_req;
+struct SearchRequest;
 
-struct ahItem
+struct AuctionHouseItem
 {
     uint16 ItemID;
     uint32 SingleAmount;
@@ -36,7 +35,7 @@ struct ahItem
     uint16 Category;
 };
 
-struct ahHistory
+struct AuctionHouseHistory
 {
     uint32      Price;
     uint32      Data;
@@ -84,16 +83,13 @@ public:
     CDataLoader();
     ~CDataLoader();
 
-    uint32 GetPlayersCount(const search_req& sr);
-
-    std::vector<ahHistory*>  GetAHItemHistory(uint16 ItemID, bool stack);
-    std::list<SearchEntity*> GetPartyList(uint32 PartyID, uint32 AllianceID);
-    std::list<SearchEntity*> GetLinkshellList(uint32 LinkshellID);
-    std::list<SearchEntity*> GetPlayersList(search_req sr, int* count);
-    std::string              GetSearchComment(uint32 playerId);
-    std::vector<ahItem*>     GetAHItemsToCategory(uint8 ahCategoryID, const std::string& orderByString);
-    ahItem                   GetAHItemFromItemID(uint16 ItemID);
-    void                     ExpireAHItems(uint16 expireAgeInDays);
+    auto GetPlayersCount(const SearchRequest& sr) const -> uint32;
+    auto GetAHItemHistory(uint16 ItemID, bool stack) const -> std::vector<AuctionHouseHistory>;
+    auto GetPartyList(uint32 PartyID, uint32 AllianceID) const -> std::vector<SearchEntity>;
+    auto GetLinkshellList(uint32 LinkshellID) const -> std::vector<SearchEntity>;
+    auto GetPlayersList(SearchRequest sr, int* count) const -> std::vector<SearchEntity>;
+    auto GetSearchComment(uint32 playerId) const -> std::string;
+    auto GetAHItemsToCategory(uint8 ahCategoryID, const std::string& orderByString) const -> std::vector<AuctionHouseItem>;
+    auto GetAHItemFromItemID(uint16 ItemID) const -> AuctionHouseItem;
+    void ExpireAHItems(uint16 expireAgeInDays) const;
 };
-
-#endif

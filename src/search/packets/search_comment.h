@@ -29,8 +29,8 @@ class SearchCommentPacket
 public:
     SearchCommentPacket(uint32 playerId, const std::string& comment);
 
-    uint8* GetData();
-    uint16 GetSize();
+    auto GetData() -> uint8*;
+    auto GetSize() const -> uint16;
 
 private:
     uint8 data[204]{};

@@ -19,24 +19,21 @@
 ===========================================================================
 */
 
-#ifndef _CAHHISTORYPACKET_H_
-#define _CAHHISTORYPACKET_H_
+#pragma once
 
 #include "common/cbasetypes.h"
 
 class CAHHistoryPacket
 {
 public:
-    CAHHistoryPacket(ahItem item, uint8 stack);
+    CAHHistoryPacket(AuctionHouseItem item, uint8 stack);
 
-    void AddItem(ahHistory* item);
+    void AddItem(const AuctionHouseHistory& item);
 
-    uint8* GetData();
-    uint16 GetSize() const;
+    auto GetData() -> uint8*;
+    auto GetSize() const -> uint16;
 
 private:
     uint8 m_count{};
     uint8 m_PData[475]{};
 };
-
-#endif

@@ -19,47 +19,22 @@
 ===========================================================================
 */
 
-#ifndef _CSEARCHLISTPACKET_H_
-#define _CSEARCHLISTPACKET_H_
+#pragma once
 
 #include "common/cbasetypes.h"
-
-enum SEARCHTYPE
-{
-    SEARCH_NAME          = 0x00, // 00000
-    SEARCH_AREA          = 0x01, // 00001
-    SEARCH_NATION        = 0x02, // 00010
-    SEARCH_JOB           = 0x03, // 00011
-    SEARCH_LEVEL         = 0x04, // 00100
-    SEARCH_RACE          = 0x05, // 00101
-    SEARCH_FLAGS1        = 0x06, // 00110
-    SEARCH_ID            = 0x08, // 01000
-    SEARCH_PARTY         = 0x0A, // 01010
-    SEARCH_LINKSHELL     = 0x0B, // 01011
-    SEARCH_FRIEND        = 0x0C, // 01100
-    SEARCH_LINKSHELLRANK = 0x0D, // 01101
-    SEARCH_UNK0x0E       = 0x0E, // 01110
-    SEARCH_RANK          = 0x10, // 10000
-    SEARCH_COMMENT       = 0x11, // 10001
-    SEARCH_LINKSHELL2    = 0x13, // 10011
-    SEARCH_FLAGS2        = 0x16, // 10110
-    SEARCH_LANGUAGE      = 0x17, // 10111
-};
 
 class CSearchListPacket
 {
 public:
     CSearchListPacket(uint32 Total);
 
-    bool AddPlayer(SearchEntity* PPlayer);
+    auto AddPlayer(const SearchEntity& player) -> bool;
     void SetFinal();
 
-    uint8* GetData();
-    uint16 GetSize() const;
+    auto GetData() -> uint8*;
+    auto GetSize() const -> uint16;
 
 private:
     uint32 m_offset{};
     uint8  m_data[1024]{};
 };
-
-#endif
