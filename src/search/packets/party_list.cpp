@@ -24,6 +24,10 @@
 #include "data_loader.h"
 #include "enums/search_type.h"
 #include "party_list.h"
+#include "search.h"
+
+#include <algorithm>
+#include <cstddef>
 
 CPartyListPacket::CPartyListPacket(const uint32 partyid, const uint32 Total)
 : m_offset(192)
@@ -40,14 +44,19 @@ CPartyListPacket::CPartyListPacket(const uint32 partyid, const uint32 Total)
  *                                                                       *
  ************************************************************************/
 
-void CPartyListPacket::AddPlayer(const SearchEntity& player)
+auto CPartyListPacket::AddPlayer(const SearchEntity& player) -> bool
 {
     const uint32 size_offset = m_offset / 8;
+    if ((sizeof(m_data) - size_offset) < (searchPacketTrailerSize + searchEntryMaxSize))
+    {
+        return false; // not enough space available, worst case.
+    }
+
     m_offset += 8;
 
     m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Name), m_offset, 5);
 
-    const auto length = player.name.size();
+    const auto length = std::min(player.name.size(), size_t(15));
     m_offset          = packBitsLE(m_data, length, m_offset, 4);
 
     for (std::size_t c = 0; c < length; ++c)
@@ -109,6 +118,8 @@ void CPartyListPacket::AddPlayer(const SearchEntity& player)
 
     ref<uint8>(m_data, size_offset) = m_offset / 8 - size_offset - 1; // Entity data size
     ref<uint16>(m_data, (0x08))     = m_offset / 8;                   // Size of the data to send
+
+    return true;
 }
 
 /************************************************************************
@@ -130,5 +141,5 @@ auto CPartyListPacket::GetData() -> uint8*
 
 auto CPartyListPacket::GetSize() const -> uint16
 {
-    return m_offset / 8 + 20;
+    return m_offset / 8 + searchPacketTrailerSize;
 }

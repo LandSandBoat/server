@@ -23,6 +23,12 @@
 
 #include "common/cbasetypes.h"
 
+// md5 hash + blowfish key appended by SearchHandler::encrypt()
+inline constexpr uint32 searchPacketTrailerSize = 0x10 + 0x04;
+
+// Worst case packed entity entry; largest real entry is linkshell at 64 bytes
+inline constexpr uint32 searchEntryMaxSize = 67;
+
 struct SearchRequest
 {
     uint16        zoneid[15];

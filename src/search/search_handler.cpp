@@ -28,6 +28,10 @@
 #include "data_loader.h"
 #include "enums/search_type.h"
 
+#include <algorithm>
+#include <cstddef>
+#include <cstring>
+#include <iterator>
 #include <map>
 #include <unordered_set>
 
@@ -336,9 +340,16 @@ void SearchHandler::HandleGroupListRequest()
 
         CPartyListPacket PPartyPacket(partyid, static_cast<uint32>(PartyList.size()));
 
+        std::size_t membersSent = 0;
         for (const auto& player : PartyList)
         {
-            PPartyPacket.AddPlayer(player);
+            if (!PPartyPacket.AddPlayer(player))
+            {
+                ShowWarningFmt("Party list packet full, sent {} of {} members for party {}", membersSent, PartyList.size(), partyid);
+                break;
+            }
+
+            membersSent++;
         }
 
         uint16_t length = PPartyPacket.GetSize();
@@ -493,21 +504,23 @@ void SearchHandler::HandleAuctionHouseRequest()
     const CDataLoader PDataLoader;
     const auto        ItemList = PDataLoader.GetAHItemsToCategory(AHCatID, OrderByArray);
 
-    const uint8 PacketsCount = static_cast<uint8>((ItemList.size() / 20) + (ItemList.size() % 20 != 0) + (ItemList.empty()));
+    const std::size_t itemListSize = ItemList.size();
+    const std::size_t PacketsCount = (itemListSize / 20) + (itemListSize % 20 != 0) + (itemListSize == 0);
 
-    for (uint8 i = 0; i < PacketsCount; ++i)
+    for (std::size_t i = 0; i < PacketsCount; ++i)
     {
-        CAHItemsListPacket PAHPacket(20 * i);
-        const uint16       itemListSize = static_cast<uint16>(ItemList.size());
+        const std::size_t firstItem = 20 * i;
 
-        PAHPacket.SetItemCount(itemListSize);
+        CAHItemsListPacket PAHPacket(static_cast<uint16>(firstItem));
 
-        for (uint16 y = 20 * i; (y != 20 * (i + 1)) && (y < itemListSize); ++y)
+        PAHPacket.SetItemCount(static_cast<uint16>(itemListSize));
+
+        for (std::size_t y = firstItem; (y < firstItem + 20) && (y < itemListSize); ++y)
         {
             PAHPacket.AddItem(ItemList.at(y));
         }
 
-        uint16_t length = PAHPacket.GetSize();
+        const uint16_t length = PAHPacket.GetSize();
         DebugPrintPacket(PAHPacket.GetData(), length);
 
         searchPackets_.emplace_back(PAHPacket.GetData(), length);
@@ -607,15 +620,22 @@ auto SearchHandler::_HandleSearchRequest() -> SearchRequest
                         bitOffset = workloadBits;
                         break;
                     }
-                    nameLen       = static_cast<unsigned char>(unpackBitsLE(&buffer_[0x11], bitOffset, 5));
-                    name[nameLen] = '\0';
-
+                    // 5-bit field (0-31) clamped to name's 15 chars; still consume every char
+                    const uint8 rawNameLen = static_cast<uint8>(unpackBitsLE(&buffer_[0x11], bitOffset, 5));
                     bitOffset += 5;
 
-                    for (unsigned char i = 0; i < nameLen; i++)
+                    nameLen       = std::min<uint8>(rawNameLen, sizeof(name) - 1);
+                    name[nameLen] = '\0';
+
+                    for (uint8 i = 0; i < rawNameLen; i++)
                     {
-                        name[i] = static_cast<char>(unpackBitsLE(&buffer_[0x11], bitOffset, 7));
+                        const auto nameChar = static_cast<char>(unpackBitsLE(&buffer_[0x11], bitOffset, 7));
                         bitOffset += 7;
+
+                        if (i < nameLen)
+                        {
+                            name[i] = nameChar;
+                        }
                     }
                 }
                 break;
@@ -628,9 +648,15 @@ auto SearchHandler::_HandleSearchRequest() -> SearchRequest
                 }
                 else // 8 Bit = 1 Byte per Area Code
                 {
-                    areas[areaCount] = static_cast<uint16>(unpackBitsLE(&buffer_[0x11], bitOffset, 10));
-                    areaCount++;
+                    const auto area = static_cast<uint16>(unpackBitsLE(&buffer_[0x11], bitOffset, 10));
                     bitOffset += 10;
+
+                    // client controls entry count; only store while areas[] has room
+                    if (areaCount < std::size(areas))
+                    {
+                        areas[areaCount] = area;
+                        areaCount++;
+                    }
                 }
                 break;
             }

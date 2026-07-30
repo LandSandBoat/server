@@ -27,6 +27,7 @@
 #include "data/enums/job.h"
 
 #include <algorithm>
+#include <cstring>
 
 #include "data_loader.h"
 #include "search.h"
@@ -745,9 +746,15 @@ void CDataLoader::ExpireAHItems(uint16 expireAgeInDays) const
                                          "T0.itemid = T1.itemid WHERE T0.buyer_name IS NULL AND T0.date <= ?",
                                          cutoff);
 
+    if (!rset0)
+    {
+        ShowErrorFmt("Failed to query expired auction house listings");
+        return;
+    }
+
     const auto expiredAuctions = rset0->rowsCount();
 
-    if (rset0 && expiredAuctions > 0)
+    if (expiredAuctions > 0)
     {
         std::vector<ListingToExpire> listingsToExpire;
         while (rset0->next())

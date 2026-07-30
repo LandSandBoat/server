@@ -24,6 +24,10 @@
 #include "data_loader.h"
 #include "enums/search_type.h"
 #include "linkshell_list.h"
+#include "search.h"
+
+#include <algorithm>
+#include <cstddef>
 
 CLinkshellListPacket::CLinkshellListPacket(const uint32 linkshellid, const uint32 Total)
 : m_offset(192)
@@ -43,7 +47,7 @@ CLinkshellListPacket::CLinkshellListPacket(const uint32 linkshellid, const uint3
 auto CLinkshellListPacket::AddPlayer(const SearchEntity& player) -> bool
 {
     const uint32 size_offset = m_offset / 8;
-    if ((sizeof(m_data) - size_offset) < (20 + 67))
+    if ((sizeof(m_data) - size_offset) < (searchPacketTrailerSize + searchEntryMaxSize))
     {
         return false; // not enough space available, worst case.
     }
@@ -153,5 +157,5 @@ auto CLinkshellListPacket::GetData() -> uint8*
 
 auto CLinkshellListPacket::GetSize() const -> uint16
 {
-    return m_offset / 8 + 20;
+    return m_offset / 8 + searchPacketTrailerSize;
 }

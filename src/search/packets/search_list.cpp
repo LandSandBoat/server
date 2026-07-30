@@ -23,8 +23,10 @@
 
 #include "data_loader.h"
 #include "enums/search_type.h"
+#include "search.h"
 #include "search_list.h"
 
+#include <algorithm>
 #include <cstring>
 
 CSearchListPacket::CSearchListPacket(const uint32 Total)
@@ -42,7 +44,7 @@ CSearchListPacket::CSearchListPacket(const uint32 Total)
 auto CSearchListPacket::AddPlayer(const SearchEntity& player) -> bool
 {
     const uint32 size_offset = m_offset / 8;
-    if ((sizeof(m_data) - size_offset) < (20 + 67))
+    if ((sizeof(m_data) - size_offset) < (searchPacketTrailerSize + searchEntryMaxSize))
     {
         return false; // not enough space available, worst case.
     }
@@ -146,5 +148,5 @@ auto CSearchListPacket::GetData() -> uint8*
 
 auto CSearchListPacket::GetSize() const -> uint16
 {
-    return m_offset / 8 + 20;
+    return m_offset / 8 + searchPacketTrailerSize;
 }
