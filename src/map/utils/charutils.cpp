@@ -547,7 +547,6 @@ auto LoadChar(Scheduler& scheduler, MapConfig config, const uint32 charId) -> st
                "fame_bastok,"
                "fame_windurst,"
                "fame_norg, "
-               "fame_jeuno, "
                "fame_aby_konschtat, "
                "fame_aby_tahrongi, "
                "fame_aby_latheine, "
@@ -575,17 +574,16 @@ auto LoadChar(Scheduler& scheduler, MapConfig config, const uint32 charId) -> st
         PChar->profile.fame[1]      = rset->get<uint16>("fame_bastok");
         PChar->profile.fame[2]      = rset->get<uint16>("fame_windurst");
         PChar->profile.fame[3]      = rset->get<uint16>("fame_norg");
-        PChar->profile.fame[4]      = rset->get<uint16>("fame_jeuno");
-        PChar->profile.fame[5]      = rset->get<uint16>("fame_aby_konschtat");
-        PChar->profile.fame[6]      = rset->get<uint16>("fame_aby_tahrongi");
-        PChar->profile.fame[7]      = rset->get<uint16>("fame_aby_latheine");
-        PChar->profile.fame[8]      = rset->get<uint16>("fame_aby_misareaux");
-        PChar->profile.fame[9]      = rset->get<uint16>("fame_aby_vunkerl");
-        PChar->profile.fame[10]     = rset->get<uint16>("fame_aby_attohwa");
-        PChar->profile.fame[11]     = rset->get<uint16>("fame_aby_altepa");
-        PChar->profile.fame[12]     = rset->get<uint16>("fame_aby_grauberg");
-        PChar->profile.fame[13]     = rset->get<uint16>("fame_aby_uleguerand");
-        PChar->profile.fame[14]     = rset->get<uint16>("fame_adoulin");
+        PChar->profile.fame[4]      = rset->get<uint16>("fame_aby_konschtat");
+        PChar->profile.fame[5]      = rset->get<uint16>("fame_aby_tahrongi");
+        PChar->profile.fame[6]      = rset->get<uint16>("fame_aby_latheine");
+        PChar->profile.fame[7]      = rset->get<uint16>("fame_aby_misareaux");
+        PChar->profile.fame[8]      = rset->get<uint16>("fame_aby_vunkerl");
+        PChar->profile.fame[9]      = rset->get<uint16>("fame_aby_attohwa");
+        PChar->profile.fame[10]     = rset->get<uint16>("fame_aby_altepa");
+        PChar->profile.fame[11]     = rset->get<uint16>("fame_aby_grauberg");
+        PChar->profile.fame[12]     = rset->get<uint16>("fame_aby_uleguerand");
+        PChar->profile.fame[13]     = rset->get<uint16>("fame_adoulin");
         PChar->profile.unity_leader = rset->get<uint8>("unity_leader");
     }
 
@@ -5963,7 +5961,6 @@ void SaveFame(CCharEntity* PChar)
                      "fame_bastok = ?,"
                      "fame_windurst = ?,"
                      "fame_norg = ?,"
-                     "fame_jeuno = ?,"
                      "fame_aby_konschtat = ?,"
                      "fame_aby_tahrongi = ?,"
                      "fame_aby_latheine = ?,"
@@ -5989,7 +5986,6 @@ void SaveFame(CCharEntity* PChar)
                      PChar->profile.fame[11],
                      PChar->profile.fame[12],
                      PChar->profile.fame[13],
-                     PChar->profile.fame[14],
                      PChar->id);
 }
 

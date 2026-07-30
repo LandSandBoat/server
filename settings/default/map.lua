@@ -78,9 +78,6 @@ xi.settings.map =
     -- Capacity Point Settings
     CAPACITY_RATE = 1.0,
 
-    -- For old fame calculation use .25
-    FAME_MULTIPLIER = 1.00,
-
     -- Percentage of experience normally lost to keep upon death. 0 means full loss, where 1 means no loss.
     EXP_RETAIN = 0,
 

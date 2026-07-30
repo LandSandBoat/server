@@ -21,9 +21,9 @@ local startingRaceInfo =
 
 local startingNationInfo =
 {
-    [xi.nation.SANDORIA] = { ring = xi.item.SAN_DORIAN_RING,  map = xi.ki.MAP_OF_THE_SAN_DORIA_AREA },
-    [xi.nation.BASTOK  ] = { ring = xi.item.BASTOKAN_RING,    map = xi.ki.MAP_OF_THE_BASTOK_AREA    },
-    [xi.nation.WINDURST] = { ring = xi.item.WINDURSTIAN_RING, map = xi.ki.MAP_OF_THE_WINDURST_AREA  },
+    [xi.nation.SANDORIA] = { ring = xi.item.SAN_DORIAN_RING,  map = xi.ki.MAP_OF_THE_SAN_DORIA_AREA, fameArea = xi.fameArea.SANDORIA },
+    [xi.nation.BASTOK  ] = { ring = xi.item.BASTOKAN_RING,    map = xi.ki.MAP_OF_THE_BASTOK_AREA,    fameArea = xi.fameArea.BASTOK   },
+    [xi.nation.WINDURST] = { ring = xi.item.WINDURSTIAN_RING, map = xi.ki.MAP_OF_THE_WINDURST_AREA,  fameArea = xi.fameArea.WINDURST },
 }
 
 local startingJobGear =
@@ -77,6 +77,13 @@ xi.player.charCreate = function(player)
     -- add nation- and race-specific ring
     if nation == raceInfo.homeNation and not player:hasItem(nationInfo.ring) then
         player:addItem(nationInfo.ring)
+    end
+
+    -- Add starting fame: 7 for the nation the player starts in
+    -- Add 3 for the races home nation
+    if player:getFame(nationInfo.fameArea) == 0 then
+        player:addFame(nationInfo.fameArea, 70)
+        player:addFame(startingNationInfo[raceInfo.homeNation].fameArea, 30)
     end
 
     -- unlock advanced jobs

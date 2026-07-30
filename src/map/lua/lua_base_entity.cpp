@@ -7810,24 +7810,23 @@ uint16 CLuaBaseEntity::getFame(const sol::object& areaObj)
 
     if (fameArea <= 15)
     {
-        float fameMultiplier = settings::get<float>("map.FAME_MULTIPLIER");
-        auto* PChar          = static_cast<CCharEntity*>(m_PBaseEntity);
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
         switch (fameArea)
         {
             case 0: // San d'Oria
             case 1: // Bastok
             case 2: // Windurst
-                fame = static_cast<uint16>(PChar->profile.fame[fameArea] * fameMultiplier);
+                fame = PChar->profile.fame[fameArea];
                 break;
-            case 3: // Jeuno
-                fame = static_cast<uint16>(PChar->profile.fame[4] + ((PChar->profile.fame[0] + PChar->profile.fame[1] + PChar->profile.fame[2]) * fameMultiplier / 3));
+            case 3: // Jeuno - derived: all three nations / 2
+                fame = (PChar->profile.fame[0] + PChar->profile.fame[1] + PChar->profile.fame[2]) / 2;
                 break;
-            case 4: // Selbina / Rabao
-                fame = static_cast<uint16>((PChar->profile.fame[0] + PChar->profile.fame[1]) * fameMultiplier / 2);
+            case 4: // Selbina / Rabao - derived: San d'Oria + Bastok * 2/3
+                fame = (PChar->profile.fame[0] + PChar->profile.fame[1]) * 2 / 3;
                 break;
             case 5: // Norg
-                fame = static_cast<uint16>(PChar->profile.fame[3] * fameMultiplier);
+                fame = PChar->profile.fame[3];
                 break;
             // Abyssea
             case 6:  // Konschtat
@@ -7839,10 +7838,10 @@ uint16 CLuaBaseEntity::getFame(const sol::object& areaObj)
             case 12: // Altepa
             case 13: // Grauberg
             case 14: // Uleguerand
-                fame = static_cast<uint16>(PChar->profile.fame[fameArea - 1] * fameMultiplier);
+                fame = PChar->profile.fame[fameArea - 2];
                 break;
             case 15: // Adoulin
-                fame = static_cast<uint16>(PChar->profile.fame[14] * fameMultiplier);
+                fame = PChar->profile.fame[13];
                 break;
         }
     }
@@ -7851,7 +7850,7 @@ uint16 CLuaBaseEntity::getFame(const sol::object& areaObj)
         ShowError("Lua::getFame: fameArea %i is invalid", fameArea);
     }
 
-    return fame;
+    return std::min<uint16>(fame, 2500); // Fame cap is 2500
 }
 
 /************************************************************************
@@ -7883,12 +7882,11 @@ void CLuaBaseEntity::addFame(const sol::object& areaObj, uint16 fame)
                 PChar->profile.fame[fameArea] += fame;
                 break;
             case 3: // Jeuno
-                PChar->profile.fame[4] += fame;
-                break;
+                ShowWarning("Lua::addFame: Jeuno fame is derived from nation fame and cannot be awarded directly");
+                return;
             case 4: // Selbina / Rabao
-                PChar->profile.fame[0] += fame;
-                PChar->profile.fame[1] += fame;
-                break;
+                ShowWarning("Lua::addFame: Selbina/Rabao fame is derived from nation fame and cannot be awarded directly");
+                return;
             case 5: // Norg
                 PChar->profile.fame[3] += fame;
                 break;
@@ -7902,12 +7900,19 @@ void CLuaBaseEntity::addFame(const sol::object& areaObj, uint16 fame)
             case 12: // Altepa
             case 13: // Grauberg
             case 14: // Uleguerand
-                PChar->profile.fame[fameArea - 1] += fame;
+                PChar->profile.fame[fameArea - 2] += fame;
                 break;
             case 15: // Adoulin
-                PChar->profile.fame[14] += fame;
+                PChar->profile.fame[13] += fame;
                 break;
         }
+
+        // Enforce fame cap
+        for (auto& storedFame : PChar->profile.fame)
+        {
+            storedFame = std::min<uint16>(storedFame, 2500); // Fame cap is 2500
+        }
+
         charutils::SaveFame(PChar);
     }
     else
@@ -7937,6 +7942,9 @@ void CLuaBaseEntity::setFame(const sol::object& areaObj, uint16 fame)
     {
         auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
+        // Stop the user from adding more than 2500 fame
+        fame = std::min<uint16>(fame, 2500); // Fame cap is 2500
+
         switch (fameArea)
         {
             case 0: // San d'Oria
@@ -7944,13 +7952,12 @@ void CLuaBaseEntity::setFame(const sol::object& areaObj, uint16 fame)
             case 2: // Windurst
                 PChar->profile.fame[fameArea] = fame;
                 break;
-            case 3: // Jeuno
-                PChar->profile.fame[4] = fame;
-                break;
-            case 4: // Selbina / Rabao
-                PChar->profile.fame[0] = fame;
-                PChar->profile.fame[1] = fame;
-                break;
+            case 3: // Jeuno - derived from the three nations
+                ShowWarning("Lua::setFame: Jeuno fame is derived from nation fame and cannot be set directly");
+                return;
+            case 4: // Selbina / Rabao - derived from San d'Oria and Bastok
+                ShowWarning("Lua::setFame: Selbina/Rabao fame is derived from nation fame and cannot be set directly");
+                return;
             case 5: // Norg
                 PChar->profile.fame[3] = fame;
                 break;
@@ -7964,10 +7971,10 @@ void CLuaBaseEntity::setFame(const sol::object& areaObj, uint16 fame)
             case 12: // Altepa
             case 13: // Grauberg
             case 14: // Uleguerand
-                PChar->profile.fame[fameArea - 1] = fame;
+                PChar->profile.fame[fameArea - 2] = fame;
                 break;
             case 15: // Adoulin
-                PChar->profile.fame[14] = fame;
+                PChar->profile.fame[13] = fame;
                 break;
         }
 
@@ -8001,37 +8008,11 @@ uint8 CLuaBaseEntity::getFameLevel(const sol::object& areaObj)
     {
         uint16 fame = this->getFame(areaObj);
 
-        if (fame >= 613)
+        // Rank thresholds live in xi.data.fame.rankPoints
+        fameLevel = luautils::callGlobal<uint8>("xi.data.fame.getRankFromPoints", fame);
+        if (fameLevel == 0)
         {
-            fameLevel = 9;
-        }
-        else if (fame >= 550)
-        {
-            fameLevel = 8;
-        }
-        else if (fame >= 488)
-        {
-            fameLevel = 7;
-        }
-        else if (fame >= 425)
-        {
-            fameLevel = 6;
-        }
-        else if (fame >= 325)
-        {
-            fameLevel = 5;
-        }
-        else if (fame >= 225)
-        {
-            fameLevel = 4;
-        }
-        else if (fame >= 125)
-        {
-            fameLevel = 3;
-        }
-        else if (fame >= 50)
-        {
-            fameLevel = 2;
+            fameLevel = 1; // Lua error fallback
         }
 
         if ((fameArea >= 6) && (fameArea <= 14) && (fameLevel >= 6))

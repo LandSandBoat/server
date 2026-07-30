@@ -54,15 +54,22 @@ commandObj.onTrigger = function(player, famezone, level, target)
         return
     end
 
-    local fameBaseValues = { 0, 50, 125, 225, 325, 425, 488, 550, 613 }
-    local fameMultiplier = xi.settings.map.FAME_MULTIPLIER
+    if famezone == xi.fameArea.JEUNO then
+        error(player, 'Jeuno fame is derived from the three nations; set San d\'Oria, Bastok and Windurst fame instead.')
+        return
+    elseif famezone == xi.fameArea.SELBINA_RABAO then
+        error(player, 'Selbina/Rabao fame is derived from San d\'Oria and Bastok; set those instead.')
+        return
+    end
+
+    local fameBaseValues = xi.data.fame.rankPoints
 
     if level > 6 and (famezone >= 6 and famezone <= 14) then -- Abyssea fame caps at level 6
         level = 6
         error(player, 'Abyssea fame capped at level 6. Setting to level 6.')
     end
 
-    targ:setFame(famezone, fameBaseValues[level] / fameMultiplier)
+    targ:setFame(famezone, fameBaseValues[level])
     player:printToPlayer(string.format('Set %s\'s fame for fame area %i (%s) to %i (Level %i).', targ:getName(), famezone, fameZoneNames[famezone], fameBaseValues[level], level))
 end
 

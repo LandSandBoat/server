@@ -94,8 +94,8 @@ struct profile_t
     uint16 mhflag;
 
     uint16     title;
-    uint16     fame[15];
-    uint8      rank[3]; // RANK in three kingdoms
+    uint16     fame[14]; // 0-2 nations, 3 Norg, 4-12 Abyssea, 13 Adoulin (Jeuno and Selbina/Rabao fame are derived)
+    uint8      rank[3];  // RANK in three kingdoms
     uint16     rankpoints;
     location_t home_point;
     uint8      campaign_allegiance;

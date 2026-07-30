@@ -59,7 +59,7 @@ commandObj.onTrigger = function(player, target, famezone)
         return
     end
 
-    local fameBaseValues = { 0, 50, 125, 225, 325, 425, 488, 550, 613 }
+    local fameBaseValues = xi.data.fame.rankPoints
     local fame = player:getFame(famezone)
     local level = player:getFameLevel(famezone)
 
