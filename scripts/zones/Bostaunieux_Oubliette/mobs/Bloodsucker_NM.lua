@@ -66,7 +66,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MAX, 6000)
     mob:addImmunity(xi.immunity.TERROR)
     xi.mob.updateNMSpawnPoint(mob)
-    mob:setRespawnTime(3600)
+    mob:setRespawnTime(3600) -- 1 hour
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
