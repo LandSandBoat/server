@@ -114,7 +114,10 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY)
     elseif
         csid == 325 and
-        npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY, { gil = 5000 })
+        npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY, {
+            gil   = 5000,
+            title = xi.title.DELIVERER_OF_TEARFUL_NEWS
+        })
     then
         player:confirmTrade()
 
