@@ -20,7 +20,6 @@ CREATE TABLE IF NOT EXISTS `char_profile` (
   `fame_bastok` smallint(5) unsigned NOT NULL DEFAULT '0',
   `fame_windurst` smallint(5) unsigned NOT NULL DEFAULT '0',
   `fame_norg` smallint(5) unsigned NOT NULL DEFAULT '0',
-  `fame_jeuno` smallint(5) unsigned NOT NULL DEFAULT '0',
   `fame_aby_konschtat` smallint(5) unsigned NOT NULL DEFAULT '0',
   `fame_aby_tahrongi` smallint(5) unsigned NOT NULL DEFAULT '0',
   `fame_aby_latheine` smallint(5) unsigned NOT NULL DEFAULT '0',

@@ -9,9 +9,7 @@ local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.OPEN_SESAME)
 
 quest.reward =
 {
-    fameArea = xi.fameArea.SELBINA_RABAO,
-    fame     = 30,
-    keyItem  = xi.ki.LOADSTONE,
+    keyItem = xi.ki.LOADSTONE,
 }
 
 local tradeOptions =
@@ -74,6 +72,8 @@ quest.sections =
             {
                 [22] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:addFame(xi.fameArea.SANDORIA, 15)
+                        player:addFame(xi.fameArea.BASTOK, 15)
                         player:tradeComplete()
                     end
                 end,
