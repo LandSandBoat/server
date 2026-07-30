@@ -37,6 +37,9 @@
 #include "notoriety_container.h"
 #include "petutils.h"
 
+#include "data/loader.h"
+#include "mobutils.h"
+
 #include "puppetutils.h"
 #include "status_effect_container.h"
 
@@ -69,25 +72,10 @@ void LoadPetList()
                        "minLevel, "
                        "maxLevel, "
                        "time, "
-                       "ecosystemID, "
                        "mob_pools.speciesid, "
                        "mob_pools.mJob, "
                        "mob_pools.sJob, "
                        "pet_list.element, "
-                       "(mob_species_system.HP / 100) AS hp_scale, "
-                       "(mob_species_system.MP / 100) AS mp_scale, "
-                       "mob_species_system.speed, "
-                       "mob_species_system.STR, "
-                       "mob_species_system.DEX, "
-                       "mob_species_system.VIT, "
-                       "mob_species_system.AGI, "
-                       "mob_species_system.INT, "
-                       "mob_species_system.MND, "
-                       "mob_species_system.CHR, "
-                       "mob_species_system.DEF, "
-                       "mob_species_system.ATT, "
-                       "mob_species_system.ACC, "
-                       "mob_species_system.EVA, "
                        "hasSpellScript, spellList, "
                        "slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, "
                        "magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, "
@@ -95,8 +83,8 @@ void LoadPetList()
                        "paralyze_res_rank, bind_res_rank, silence_res_rank, slow_res_rank, poison_res_rank, light_sleep_res_rank, dark_sleep_res_rank, blind_res_rank, stun_res_rank, gravity_res_rank, "
                        "cmbDelay, name_prefix, mob_pools.skill_list_id, damageType, "
                        "mob_pools.modelSize, mob_pools.modelHitboxSize "
-                       "FROM pet_list, mob_pools, mob_resistances, mob_species_system "
-                       "WHERE pet_list.poolid = mob_pools.poolid AND mob_resistances.resist_id = mob_pools.resist_id AND mob_pools.speciesid = mob_species_system.speciesID";
+                       "FROM pet_list, mob_pools, mob_resistances "
+                       "WHERE pet_list.poolid = mob_pools.poolid AND mob_resistances.resist_id = mob_pools.resist_id";
 
     const auto rset = db::preparedStmt(query);
     FOR_DB_MULTIPLE_RESULTS(rset)
@@ -112,28 +100,17 @@ void LoadPetList()
         Pet->time            = std::chrono::seconds(rset->get<uint32>("time"));
         Pet->modelSize       = rset->getOrDefault<uint8>("modelSize", 0);
         Pet->modelHitboxSize = std::max<float>(0.0f, rset->getOrDefault<float>("modelHitboxSize", 0) / 10.f);
-        Pet->EcoSystem       = rset->get<xi::Ecosystem>("ecosystemID");
         Pet->m_Species       = rset->get<uint16>("speciesid");
         Pet->mJob            = rset->get<uint8>("mJob");
         Pet->sJob            = rset->get<uint8>("sJob");
         Pet->m_Element       = rset->get<uint8>("element");
 
-        Pet->HPscale = rset->get<float>("hp_scale");
-        Pet->MPscale = rset->get<float>("mp_scale");
+        const auto& species = mobutils::GetSpeciesData(Pet->m_Species);
 
-        Pet->speed = rset->get<uint8>("speed");
+        Pet->EcoSystem = species.Ecosystem;
+        Pet->speed     = species.MobAttributes.Speed;
 
-        Pet->strRank = rset->get<uint8>("STR");
-        Pet->dexRank = rset->get<uint8>("DEX");
-        Pet->vitRank = rset->get<uint8>("VIT");
-        Pet->agiRank = rset->get<uint8>("AGI");
-        Pet->intRank = rset->get<uint8>("INT");
-        Pet->mndRank = rset->get<uint8>("MND");
-        Pet->chrRank = rset->get<uint8>("CHR");
-        Pet->defRank = rset->get<uint8>("DEF");
-        Pet->attRank = rset->get<uint8>("ATT");
-        Pet->accRank = rset->get<uint8>("ACC");
-        Pet->evaRank = rset->get<uint8>("EVA");
+        mobutils::ApplyStatRanks(*Pet, species.MobAttributes.Stats);
 
         Pet->hasSpellScript = rset->get<bool>("hasSpellScript");
         Pet->spellList      = rset->get<uint8>("spellList");

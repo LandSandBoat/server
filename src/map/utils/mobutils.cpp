@@ -27,6 +27,7 @@
 #include "ai/ai_container.h"
 #include "battleutils.h"
 #include "data/enums/mob_mod.h"
+#include "data/loader.h"
 #include "grades.h"
 #include "instance.h"
 #include "items/item_weapon.h"
@@ -45,6 +46,79 @@ namespace mobutils
 ModsMap_t mobSpeciesModsList;
 ModsMap_t mobPoolModsList;
 ModsMap_t mobSpawnModsList;
+
+namespace
+{
+
+HashMap<uint16, SpeciesInfo> speciesData;
+
+} // namespace
+
+void LoadSpeciesData()
+{
+    speciesData.clear();
+
+    for (const auto& [ecosystemId, ecosystem] : LoadEcosystem())
+    {
+        xi::data::MobAttributesData ecosystemAttributes{};
+        xi::data::applyOverrides(ecosystemAttributes, ecosystem.MobAttributes);
+
+        for (const auto& [familyId, family] : ecosystem.Families)
+        {
+            auto familyAttributes = ecosystemAttributes;
+            xi::data::applyOverrides(familyAttributes, family.MobAttributes);
+
+            for (const auto& [speciesId, species] : family.Species)
+            {
+                SpeciesInfo info{ ecosystemId, familyId, familyAttributes };
+                xi::data::applyOverrides(info.MobAttributes, species.MobAttributes);
+
+                const auto id = static_cast<uint16>(speciesId);
+                if (!speciesData.try_emplace(id, info).second)
+                {
+                    throw std::runtime_error(fmt::format("data/ecosystem.yaml: duplicate species id {}", id));
+                }
+            }
+        }
+    }
+}
+
+void ApplySpecies(CMobEntity* PMob)
+{
+    const auto& species    = GetSpeciesData(PMob->m_Species);
+    const auto& attributes = species.MobAttributes;
+
+    PMob->m_EcoSystem = species.Ecosystem;
+    PMob->m_Family    = static_cast<uint16>(species.Family);
+    PMob->m_Element   = static_cast<uint8>(attributes.Element);
+
+    PMob->baseSpeed      = attributes.Speed;
+    PMob->animationSpeed = attributes.Speed;
+    PMob->UpdateSpeed();
+
+    ApplyStatRanks(*PMob, attributes.Stats);
+
+    PMob->setMobMod(xi::MobMod::Detection, static_cast<uint16>(attributes.Detects));
+
+    // Clear charmable flag on special mobs
+    const bool special = (PMob->m_Type & xi::MobType::Event) != xi::MobType::Normal ||
+                         (PMob->m_Type & xi::MobType::Fished) != xi::MobType::Normal ||
+                         (PMob->m_Type & xi::MobType::Battlefield) != xi::MobType::Normal ||
+                         (PMob->m_Type & xi::MobType::Notorious) != xi::MobType::Normal;
+
+    PMob->setMobMod(xi::MobMod::Charmable, attributes.Charmable && !special ? 1 : 0);
+}
+
+auto GetSpeciesData(const uint16 speciesId) -> const SpeciesInfo&
+{
+    const auto it = speciesData.find(speciesId);
+    if (it == speciesData.end())
+    {
+        throw std::runtime_error(fmt::format("mobutils::GetSpeciesData: unknown speciesID {}", speciesId));
+    }
+
+    return it->second;
+}
 
 /************************************************************************
  *                                                                       *
@@ -1680,24 +1754,19 @@ auto InstantiateAlly(const uint32 groupid, const xi::ZoneId zoneID, CInstance* i
                                        "mob_spawn_points.minLevel, mob_spawn_points.maxLevel, modelid, mJob, "
                                        "sJob, cmbSkill, cmbDmgMult, cmbDelay, "
                                        "behavior, links, mobType, immunity, "
-                                       "ecosystemID, speed, STR, "
-                                       "DEX, VIT, AGI, `INT`, "
-                                       "MND, CHR, EVA, DEF, "
-                                       "ATT, ACC, slash_sdt, pierce_sdt, "
+                                       "slash_sdt, pierce_sdt, "
                                        "h2h_sdt, impact_sdt, magical_sdt, "
                                        "fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, "
                                        "fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, "
                                        "paralyze_res_rank, bind_res_rank, silence_res_rank, slow_res_rank, poison_res_rank, light_sleep_res_rank, dark_sleep_res_rank, blind_res_rank, stun_res_rank, gravity_res_rank, "
-                                       "Element, "
                                        "mob_pools.speciesid, name_prefix, entityFlags, animationsub, "
-                                       "(mob_species_system.HP / 100) AS hp_scale, (mob_species_system.MP / 100) AS mp_scale, hasSpellScript, spellList, "
+                                       "hasSpellScript, spellList, "
                                        "mob_groups.poolid, allegiance, namevis, aggro, "
-                                       "mob_pools.skill_list_id, mob_pools.true_detection, mob_species_system.detects, "
+                                       "mob_pools.skill_list_id, mob_pools.true_detection, "
                                        "mob_pools.modelSize, mob_pools.modelHitboxSize "
                                        "FROM mob_groups INNER JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid "
                                        "INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
                                        "INNER JOIN mob_resistances ON mob_pools.resist_id = mob_resistances.resist_id "
-                                       "INNER JOIN mob_species_system ON mob_pools.speciesid = mob_species_system.speciesID "
                                        "WHERE mob_groups.groupid = ? AND mob_groups.zoneid = ?",
                                        groupid,
                                        zoneID);
@@ -1732,27 +1801,10 @@ auto InstantiateAlly(const uint32 groupid, const xi::ZoneId zoneID, CInstance* i
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDelay(rset->get<uint16>("cmbDelay"));
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setBaseDelay(rset->get<uint16>("cmbDelay"));
 
-        PMob->m_Behavior  = rset->get<xi::Behavior>("behavior");
-        PMob->m_Link      = rset->get<uint8>("links");
-        PMob->m_Type      = rset->get<xi::MobType>("mobType");
-        PMob->m_Immunity  = rset->get<xi::Immunity>("immunity");
-        PMob->m_EcoSystem = rset->get<xi::Ecosystem>("ecosystemID");
-
-        PMob->baseSpeed      = rset->get<uint8>("speed"); // Overwrites baseentity.cpp's defined baseSpeed
-        PMob->animationSpeed = rset->get<uint8>("speed"); // Overwrites baseentity.cpp's defined animationSpeed
-        PMob->UpdateSpeed();
-
-        PMob->strRank = rset->get<uint8>("STR");
-        PMob->dexRank = rset->get<uint8>("DEX");
-        PMob->vitRank = rset->get<uint8>("VIT");
-        PMob->agiRank = rset->get<uint8>("AGI");
-        PMob->intRank = rset->get<uint8>("INT");
-        PMob->mndRank = rset->get<uint8>("MND");
-        PMob->chrRank = rset->get<uint8>("CHR");
-        PMob->evaRank = rset->get<uint8>("EVA");
-        PMob->defRank = rset->get<uint8>("DEF");
-        PMob->attRank = rset->get<uint8>("ATT");
-        PMob->accRank = rset->get<uint8>("ACC");
+        PMob->m_Behavior = rset->get<xi::Behavior>("behavior");
+        PMob->m_Link     = rset->get<uint8>("links");
+        PMob->m_Type     = rset->get<xi::MobType>("mobType");
+        PMob->m_Immunity = rset->get<xi::Immunity>("immunity");
 
         PMob->setModifier(xi::Mod::SLASH_SDT, rset->get<int16>("slash_sdt"));
         PMob->setModifier(xi::Mod::PIERCE_SDT, rset->get<int16>("pierce_sdt"));
@@ -1790,19 +1842,16 @@ auto InstantiateAlly(const uint32 groupid, const xi::ZoneId zoneID, CInstance* i
         PMob->setModifier(xi::Mod::STUN_RES_RANK, rset->get<int8>("stun_res_rank"));
         PMob->setModifier(xi::Mod::GRAVITY_RES_RANK, rset->get<int8>("gravity_res_rank"));
 
-        PMob->m_Element     = rset->get<uint8>("Element");
         PMob->m_Species     = rset->get<uint16>("speciesid");
         PMob->m_name_prefix = rset->get<uint8>("name_prefix");
-        PMob->m_flags       = rset->get<xi::EntityFlags>("entityFlags");
+        ApplySpecies(PMob);
+        PMob->setMobMod(xi::MobMod::Charmable, 0); // Allies are never charmable
+        PMob->m_flags = rset->get<xi::EntityFlags>("entityFlags");
 
         // Special sub animation for Mob (yovra, jailer of love, phuabo)
         // yovra 1: On top/in the sky, 2: , 3: On top/in the sky
         // phuabo 1: Underwater, 2: Out of the water, 3: Goes back underwater
         PMob->animationsub = rset->get<uint32>("animationsub");
-
-        // Setup HP / MP Stat Percentage Boost
-        PMob->HPscale = rset->get<float>("hp_scale");
-        PMob->MPscale = rset->get<float>("mp_scale");
 
         PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(rset->get<uint16>("spellList"));
 
@@ -1815,7 +1864,6 @@ auto InstantiateAlly(const uint32 groupid, const xi::ZoneId zoneID, CInstance* i
         PMob->m_Aggro         = rset->get<bool>("aggro");
         PMob->m_MobSkillList  = rset->get<uint16>("skill_list_id");
         PMob->m_TrueDetection = rset->get<bool>("true_detection");
-        PMob->setMobMod(xi::MobMod::Detection, rset->get<int16>("detects"));
 
         if (instance)
         {
@@ -1864,23 +1912,19 @@ auto InstantiateDynamicMob(const uint32 groupid, const xi::ZoneId groupZoneId, c
                                        "modelid, mJob, "
                                        "sJob, cmbSkill, cmbDmgMult, cmbDelay, "
                                        "behavior, links, mobType, immunity, "
-                                       "ecosystemID, speed, STR, "
-                                       "DEX, VIT, AGI, `INT`, "
-                                       "MND, CHR, EVA, DEF, "
-                                       "ATT, ACC, slash_sdt, pierce_sdt, "
+                                       "slash_sdt, pierce_sdt, "
                                        "h2h_sdt, impact_sdt, magical_sdt, fire_sdt, "
                                        "ice_sdt, wind_sdt, earth_sdt, lightning_sdt, "
                                        "water_sdt, light_sdt, dark_sdt, fire_res_rank, "
                                        "ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, "
-                                       "water_res_rank, light_res_rank, dark_res_rank, Element, "
+                                       "water_res_rank, light_res_rank, dark_res_rank, "
                                        "mob_pools.speciesid, name_prefix, entityFlags, animationsub, "
-                                       "(mob_species_system.HP / 100) AS hp_scale, (mob_species_system.MP / 100) AS mp_scale, hasSpellScript, spellList, "
+                                       "hasSpellScript, spellList, "
                                        "mob_groups.poolid, allegiance, namevis, aggro, "
                                        "mob_pools.modelSize, mob_pools.modelHitboxSize, "
-                                       "mob_pools.skill_list_id, mob_pools.true_detection, mob_species_system.detects "
+                                       "mob_pools.skill_list_id, mob_pools.true_detection "
                                        "FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid "
                                        "INNER JOIN mob_resistances ON mob_pools.resist_id = mob_resistances.resist_id "
-                                       "INNER JOIN mob_species_system ON mob_pools.speciesid = mob_species_system.speciesID "
                                        "WHERE mob_groups.groupid = ? AND mob_groups.zoneid = ?",
                                        groupid,
                                        groupZoneId);
@@ -1909,27 +1953,10 @@ auto InstantiateDynamicMob(const uint32 groupid, const xi::ZoneId groupZoneId, c
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDelay(rset->get<uint16>("cmbDelay"));
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setBaseDelay(rset->get<uint16>("cmbDelay"));
 
-        PMob->m_Behavior  = rset->get<xi::Behavior>("behavior");
-        PMob->m_Link      = rset->get<uint8>("links");
-        PMob->m_Type      = rset->get<xi::MobType>("mobType");
-        PMob->m_Immunity  = rset->get<xi::Immunity>("immunity");
-        PMob->m_EcoSystem = rset->get<xi::Ecosystem>("ecosystemID");
-
-        PMob->baseSpeed      = rset->get<uint8>("speed"); // Overwrites baseentity.cpp's defined baseSpeed
-        PMob->animationSpeed = rset->get<uint8>("speed"); // Overwrites baseentity.cpp's defined animationSpeed
-        PMob->UpdateSpeed();
-
-        PMob->strRank = rset->get<uint8>("STR");
-        PMob->dexRank = rset->get<uint8>("DEX");
-        PMob->vitRank = rset->get<uint8>("VIT");
-        PMob->agiRank = rset->get<uint8>("AGI");
-        PMob->intRank = rset->get<uint8>("INT");
-        PMob->mndRank = rset->get<uint8>("MND");
-        PMob->chrRank = rset->get<uint8>("CHR");
-        PMob->evaRank = rset->get<uint8>("EVA");
-        PMob->defRank = rset->get<uint8>("DEF");
-        PMob->attRank = rset->get<uint8>("ATT");
-        PMob->accRank = rset->get<uint8>("ACC");
+        PMob->m_Behavior = rset->get<xi::Behavior>("behavior");
+        PMob->m_Link     = rset->get<uint8>("links");
+        PMob->m_Type     = rset->get<xi::MobType>("mobType");
+        PMob->m_Immunity = rset->get<xi::Immunity>("immunity");
 
         PMob->setModifier(xi::Mod::SLASH_SDT, rset->get<int16>("slash_sdt"));
         PMob->setModifier(xi::Mod::PIERCE_SDT, rset->get<int16>("pierce_sdt"));
@@ -1956,16 +1983,12 @@ auto InstantiateDynamicMob(const uint32 groupid, const xi::ZoneId groupZoneId, c
         PMob->setModifier(xi::Mod::LIGHT_RES_RANK, rset->get<int8>("light_res_rank"));
         PMob->setModifier(xi::Mod::DARK_RES_RANK, rset->get<int8>("dark_res_rank"));
 
-        PMob->m_Element     = rset->get<uint8>("Element");
         PMob->m_Species     = rset->get<uint16>("speciesid");
         PMob->m_name_prefix = rset->get<uint8>("name_prefix");
-        PMob->m_flags       = rset->get<xi::EntityFlags>("entityFlags");
+        ApplySpecies(PMob);
+        PMob->m_flags = rset->get<xi::EntityFlags>("entityFlags");
 
         PMob->animationsub = rset->get<uint32>("animationsub");
-
-        // Setup HP / MP Stat Percentage Boost
-        PMob->HPscale = rset->get<float>("hp_scale");
-        PMob->MPscale = rset->get<float>("mp_scale");
 
         PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(rset->get<uint16>("spellList"));
 
@@ -1978,7 +2001,6 @@ auto InstantiateDynamicMob(const uint32 groupid, const xi::ZoneId groupZoneId, c
         PMob->m_Aggro         = rset->get<bool>("aggro");
         PMob->m_MobSkillList  = rset->get<uint16>("skill_list_id");
         PMob->m_TrueDetection = rset->get<bool>("true_detection");
-        PMob->setMobMod(xi::MobMod::Detection, rset->get<int16>("detects"));
 
         mobutils::InitializeMob(PMob);
         mobutils::AddSqlModifiers(PMob);
