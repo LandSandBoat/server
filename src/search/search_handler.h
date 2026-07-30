@@ -21,7 +21,6 @@
 
 #pragma once
 
-#include <asio/ts/buffer.hpp>
 #include <asio/ts/internet.hpp>
 #include <common/logging.h>
 #include <deque>
@@ -56,11 +55,11 @@ public:
 private:
     void read_func(uint16_t length);
 
-    uint16_t getNumSessionsInUse(const std::string& ipAddressStr);
-    void     addToUsedIPAddresses(const std::string& ipAddressStr);
-    void     removeFromUsedIPAddresses(const std::string& ipAddressStr);
+    auto getNumSessionsInUse(const std::string& ipAddressStr) const -> uint16_t;
+    void addToUsedIPAddresses(const std::string& ipAddressStr) const;
+    void removeFromUsedIPAddresses(const std::string& ipAddressStr) const;
 
-    bool validatePacket(uint16_t length);
+    auto validatePacket(uint16_t length) -> bool;
     void decrypt(uint16_t length);
     void encrypt(uint16_t length);
 
@@ -70,11 +69,11 @@ private:
     void HandleAuctionHouseRequest();
     void HandleAuctionHouseHistory();
 
-    auto _HandleSearchRequest() -> search_req;
+    auto _HandleSearchRequest() -> SearchRequest;
 
     Scheduler&               scheduler_;
     blowfish_t               blowfish_;
-    std::deque<searchPacket> searchPackets_;
+    std::deque<SearchPacket> searchPackets_;
 
     std::string             ipAddress_;
     asio::ip::tcp::socket   socket_;

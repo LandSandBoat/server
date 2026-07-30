@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CPARTYLISTPACKET_H_
-#define _CPARTYLISTPACKET_H_
+#pragma once
 
 #include "common/cbasetypes.h"
 
@@ -32,13 +31,11 @@ public:
 
     void AddPlayer(SearchEntity* PPlayer);
 
-    uint8* GetData();
-    uint16 GetSize() const;
+    auto GetData() -> uint8*;
+    auto GetSize() const -> uint16;
 
 private:
     uint32 m_offset{};
 
     uint8 m_data[1024]{};
 };
-
-#endif

@@ -21,7 +21,6 @@
 
 #pragma once
 
-#include <asio/ts/buffer.hpp>
 #include <asio/ts/internet.hpp>
 #include <common/logging.h>
 
@@ -31,7 +30,7 @@
 class SearchListener
 {
 public:
-    SearchListener(Scheduler& scheduler, unsigned int port, SynchronizedShared<std::unordered_set<std::string>>& ipWhitelist)
+    SearchListener(Scheduler& scheduler, const unsigned int port, SynchronizedShared<std::unordered_set<std::string>>& ipWhitelist)
     : scheduler_(scheduler)
     , acceptor_(scheduler_.mainContext(), asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port))
     , ipWhitelist_(ipWhitelist)
@@ -51,7 +50,7 @@ private:
 
             if (!ec)
             {
-                auto handler = std::make_shared<SearchHandler>(scheduler_, std::move(socket), ipInFlight_, ipWhitelist_);
+                const auto handler = std::make_shared<SearchHandler>(scheduler_, std::move(socket), ipInFlight_, ipWhitelist_);
                 scheduler_.postToMainThread(handler->run());
             }
             else

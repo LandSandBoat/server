@@ -22,12 +22,12 @@
 #include "common/utils.h"
 
 #include "data_loader.h"
+#include "enums/search_type.h"
+#include "search_list.h"
 
 #include <cstring>
 
-#include "search_list.h"
-
-CSearchListPacket::CSearchListPacket(uint32 Total)
+CSearchListPacket::CSearchListPacket(const uint32 Total)
 : m_offset(192)
 {
     memset(m_data, 0, sizeof(m_data));
@@ -39,9 +39,9 @@ CSearchListPacket::CSearchListPacket(uint32 Total)
 }
 
 // A maximum of 20 characters can be added to a single packet.
-bool CSearchListPacket::AddPlayer(SearchEntity* PPlayer)
+auto CSearchListPacket::AddPlayer(SearchEntity* PPlayer) -> bool
 {
-    uint32 size_offset = m_offset / 8;
+    const uint32 size_offset = m_offset / 8;
     if ((sizeof(m_data) - size_offset) < (20 + 67))
     {
         return false; // not enough space available, worst case.
@@ -49,60 +49,60 @@ bool CSearchListPacket::AddPlayer(SearchEntity* PPlayer)
 
     m_offset += 8;
 
-    auto length = std::min(PPlayer->name.size(), size_t(15));
-    m_offset    = packBitsLE(m_data, SEARCH_NAME, m_offset, 5);
-    m_offset    = packBitsLE(m_data, length, m_offset, 4);
+    const auto length = std::min(PPlayer->name.size(), size_t(15));
+    m_offset          = packBitsLE(m_data, static_cast<uint64>(SearchType::Name), m_offset, 5);
+    m_offset          = packBitsLE(m_data, length, m_offset, 4);
 
     for (std::size_t c = 0; c < length; ++c)
     {
         m_offset = packBitsLE(m_data, PPlayer->name[c], m_offset, 7);
     }
 
-    m_offset = packBitsLE(m_data, SEARCH_AREA, m_offset, 5);
+    m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Area), m_offset, 5);
     m_offset = packBitsLE(m_data, PPlayer->zone, m_offset, 10);
 
     if (!(PPlayer->flags1 & 0x4000))
     {
-        m_offset = packBitsLE(m_data, SEARCH_NATION, m_offset, 5);
+        m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Nation), m_offset, 5);
         m_offset = packBitsLE(m_data, PPlayer->nation, m_offset, 2);
 
-        m_offset = packBitsLE(m_data, SEARCH_JOB, m_offset, 5);
+        m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Job), m_offset, 5);
         m_offset = packBitsLE(m_data, PPlayer->mjob, m_offset, 5);
         m_offset = packBitsLE(m_data, PPlayer->sjob, m_offset, 5);
 
-        m_offset = packBitsLE(m_data, SEARCH_LEVEL, m_offset, 5);
+        m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Level), m_offset, 5);
         m_offset = packBitsLE(m_data, PPlayer->mlvl, m_offset, 8);
         m_offset = packBitsLE(m_data, PPlayer->slvl, m_offset, 8);
 
-        m_offset = packBitsLE(m_data, SEARCH_RACE, m_offset, 5);
+        m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Race), m_offset, 5);
         m_offset = packBitsLE(m_data, PPlayer->race, m_offset, 4);
 
-        m_offset = packBitsLE(m_data, SEARCH_RANK, m_offset, 5);
+        m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Rank), m_offset, 5);
         m_offset = packBitsLE(m_data, PPlayer->rank, m_offset, 8);
     }
 
-    m_offset = packBitsLE(m_data, SEARCH_FLAGS1, m_offset, 5);
+    m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Flags1), m_offset, 5);
     m_offset = packBitsLE(m_data, PPlayer->flags1, m_offset, 16);
 
-    m_offset = packBitsLE(m_data, SEARCH_ID, m_offset, 5);
+    m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Id), m_offset, 5);
     m_offset = packBitsLE(m_data, PPlayer->id, m_offset, 20);
 
-    // m_offset = packBitsLE(m_data, SEARCH_LINKSHELLRANK,  m_offset, 5);
+    // m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::LinkshellRank),  m_offset, 5);
     // m_offset = packBitsLE(m_data, 0, m_offset,8);
 
-    m_offset = packBitsLE(m_data, SEARCH_UNK0x0E, m_offset, 5);
+    m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Unknown0E), m_offset, 5);
     m_offset = packBitsLE(m_data, 0, m_offset, 32);
 
     if (PPlayer->seacom_type != 0)
     {
-        m_offset = packBitsLE(m_data, SEARCH_COMMENT, m_offset, 5);
+        m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Comment), m_offset, 5);
         m_offset = packBitsLE(m_data, PPlayer->seacom_type, m_offset, 32);
     }
 
-    m_offset = packBitsLE(m_data, SEARCH_FLAGS2, m_offset, 5);
+    m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Flags2), m_offset, 5);
     m_offset = packBitsLE(m_data, PPlayer->flags2, m_offset, 32);
 
-    m_offset = packBitsLE(m_data, SEARCH_LANGUAGE, m_offset, 5);
+    m_offset = packBitsLE(m_data, static_cast<uint64>(SearchType::Language), m_offset, 5);
     m_offset = packBitsLE(m_data, PPlayer->languages, m_offset, 16);
 
     if (m_offset % 8 > 0)
@@ -135,7 +135,7 @@ void CSearchListPacket::SetFinal()
  *                                                                       *
  ************************************************************************/
 
-uint8* CSearchListPacket::GetData()
+auto CSearchListPacket::GetData() -> uint8*
 {
     return m_data;
 }
@@ -146,7 +146,7 @@ uint8* CSearchListPacket::GetData()
  *                                                                       *
  ************************************************************************/
 
-uint16 CSearchListPacket::GetSize() const
+auto CSearchListPacket::GetSize() const -> uint16
 {
     return m_offset / 8 + 20;
 }

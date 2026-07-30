@@ -23,7 +23,7 @@
 
 #include "common/utils.h"
 
-SearchCommentPacket::SearchCommentPacket(uint32 playerId, const std::string& comment)
+SearchCommentPacket::SearchCommentPacket(const uint32 playerId, const std::string& comment)
 {
     ref<uint8>(data, 0x08) = 154;  // Search comment packet size
     ref<uint8>(data, 0x0A) = 0x80; // Search server packet
@@ -45,12 +45,12 @@ SearchCommentPacket::SearchCommentPacket(uint32 playerId, const std::string& com
     data[0x9A] = 0;
 }
 
-uint8* SearchCommentPacket::GetData()
+auto SearchCommentPacket::GetData() -> uint8*
 {
     return data;
 }
 
-uint16 SearchCommentPacket::GetSize()
+auto SearchCommentPacket::GetSize() const -> uint16
 {
     return 204;
 }

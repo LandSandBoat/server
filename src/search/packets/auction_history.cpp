@@ -26,7 +26,7 @@
 
 #include "auction_history.h"
 
-CAHHistoryPacket::CAHHistoryPacket(ahItem item, uint8 stack)
+CAHHistoryPacket::CAHHistoryPacket(const AuctionHouseItem item, const uint8 stack)
 {
     // Comments and RE by atom0s
     ref<uint8>(m_PData, 0x0A)  = 0x80;        // flags, may be int8 as it's checked against negative.
@@ -41,7 +41,7 @@ CAHHistoryPacket::CAHHistoryPacket(ahItem item, uint8 stack)
     ref<uint16>(m_PData, 0x1E) = item.Category;
 }
 
-void CAHHistoryPacket::AddItem(ahHistory* item)
+void CAHHistoryPacket::AddItem(AuctionHouseHistory* item)
 {
     if (m_count < 10)
     {
@@ -63,7 +63,7 @@ void CAHHistoryPacket::AddItem(ahHistory* item)
  *                                                                       *
  ************************************************************************/
 
-uint8* CAHHistoryPacket::GetData()
+auto CAHHistoryPacket::GetData() -> uint8*
 {
     return m_PData;
 }
@@ -74,7 +74,7 @@ uint8* CAHHistoryPacket::GetData()
  *                                                                       *
  ************************************************************************/
 
-uint16 CAHHistoryPacket::GetSize() const
+auto CAHHistoryPacket::GetSize() const -> uint16
 {
     return 0x20 + 40 * m_count + 28;
 }

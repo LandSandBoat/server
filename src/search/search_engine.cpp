@@ -80,6 +80,6 @@ void SearchEngine::onExpireAll(std::vector<std::string>& inputs) const
 
 void SearchEngine::expireAH(const Maybe<uint16> days) const
 {
-    CDataLoader data;
+    const CDataLoader data;
     data.ExpireAHItems(days.value_or(0));
 }
