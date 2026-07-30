@@ -25,6 +25,18 @@
 namespace xi::data
 {
 
+{% for ov in overrides %}
+template <class B>
+auto populate(const Node<B> node, std::type_identity<{{ ov.struct_name }}>) -> {{ ov.struct_name }}
+{
+    {{ ov.struct_name }} out{};
+{% for f in ov.fields %}
+    node.readInto(out.{{ f.cpp_name }}, "{{ f.yaml_name }}");
+{% endfor %}
+    return out;
+}
+
+{% endfor %}
 {% for pod in pods %}
 template <class B>
 auto populate(const Node<B> node, std::type_identity<{{ pod.struct_name }}>) -> {{ pod.struct_name }}

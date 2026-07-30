@@ -86,10 +86,17 @@ def main():
 
     enum_names = {enum["name"] for enum in enums}
 
+    # A `$defs` shape marked x-partial also gets an all-optional struct.
+    partials: set[tuple[str, str]] = set()
+    for schema_path, schema in schemas.items():
+        source = SchemaWalker.source_of(schema_path)
+        for defs_name, shape in (schema.get("$defs") or {}).items():
+            if shape.get("x-partial"):
+                partials.add((source, defs_name))
 
     for schema_path, schema in sorted(schemas.items()):
         print(f"rendering {schema_path.relative_to(ROOT).as_posix()} ...", flush=True)
-        result = walker.emit(schema_path, schema, enum_names)
+        result = walker.emit(schema_path, schema, enum_names, partials)
         if result is None:
             continue
         write_if_changed(data_out_dir / (result["name"] + ".h"), result["pod"])

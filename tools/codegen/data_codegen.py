@@ -93,6 +93,16 @@ class SchemaWalker:
         return file_part.replace(".schema.json", ""), defs_name, snake_to_pascal(defs_name) + "Data"
 
     @staticmethod
+    def source_of(schema_path: Path) -> str:
+        """`data/schemas/mob_attributes.schema.json` -> `mob_attributes`, the name its headers get."""
+        return schema_path.stem.replace(".schema", "")
+
+    @staticmethod
+    def overrides_name(struct: str) -> str:
+        """`StatRanksData` -> `StatRanksOverrides`; only the suffix, so `DataTableData` survives."""
+        return struct.removesuffix("Data") + "Overrides"
+
+    @staticmethod
     def int_cpp_type(schema: dict[str, Any]) -> str:
         """Narrowest C++ int type that covers [minimum, maximum]."""
         minimum, maximum = schema.get("minimum"), schema.get("maximum")
@@ -223,7 +233,7 @@ class SchemaWalker:
 
         return None
 
-    def build_pod(self, defs_name: str, defs: dict[str, Any]) -> dict[str, Any]:
+    def build_pod(self, defs_name: str, defs: dict[str, Any], *, own: str, partials: set[tuple[str, str]]) -> dict[str, Any]:
         """`allOf` entries are mixins: their keys sit on this record's node, so each becomes a contained struct."""
         schema = defs[defs_name]
         fields = []
@@ -232,8 +242,10 @@ class SchemaWalker:
             if not mixin:
                 raise ValueError(f"{defs_name}: allOf entries must be a $ref to a $defs record")
             shared, mixin_name, struct = mixin
+            partial = (shared or own, mixin_name) in partials
             fields.append(Field(yaml_name="", cpp_name=snake_to_pascal(mixin_name),
-                                cpp_type=struct, populator="mixin", defs_name=mixin_name, struct_name=struct, defs_source=shared))
+                                cpp_type=self.overrides_name(struct) if partial else struct,
+                                populator="mixin", defs_name=mixin_name, struct_name=struct, defs_source=shared))
 
         props = schema.get("properties") or {}
         for prop_name, prop_schema in props.items():
@@ -263,7 +275,8 @@ class SchemaWalker:
             node = self.first_section(props)
         return levels
 
-    def emit(self, schema_path: Path, schema: dict[str, Any], enum_names: set[str]) -> dict[str, Any] | None:
+    def emit(self, schema_path: Path, schema: dict[str, Any], enum_names: set[str],
+             partials: set[tuple[str, str]]) -> dict[str, Any] | None:
         """One POD per `$defs`. A file with a top-level section also gets the loop that reads it."""
         defs = schema.get("$defs") or {}
         if not defs:
@@ -274,9 +287,10 @@ class SchemaWalker:
         for depth, (_section, defs_name) in enumerate(levels):
             depth_of[defs_name] = depth
 
+        own  = self.source_of(schema_path)
         pods: dict[str, dict[str, Any]] = {}
         for defs_name in defs:
-            pod = self.build_pod(defs_name, defs)
+            pod = self.build_pod(defs_name, defs, own=own, partials=partials)
             self.retype_ids(pod, defs_name, nested=len(levels) > 1, depth_of=depth_of, enum_names=enum_names)
             pods[defs_name] = pod
 
@@ -303,6 +317,8 @@ class SchemaWalker:
                 main_pod["discriminator_enum"] = disc.enum_class
 
         return self.render(schema_path, ordered, main_pod=main_pod,
+                           overrides=[self.overrides_of(pod, own, partials) for pod in ordered
+                                      if (own, pod["defs_name"]) in partials],
                            section_name=levels[0][0] if levels else None)
 
     def retype_ids(self, pod: dict[str, Any], own: str, *,
@@ -324,9 +340,36 @@ class SchemaWalker:
 
         pod["cpp_type_width"] = max((len(field.cpp_type) for field in pod["fields"]), default=0)
 
+    @staticmethod
+    def overrides_of(pod: dict[str, Any], own: str, partials: set[tuple[str, str]]) -> dict[str, Any]:
+        """The twin that says what a level literally wrote: every field optional, no defaults."""
+        fields = []
+        for field in pod["fields"]:
+            if field.populator == "record_map":
+                raise SystemExit(f"{own}.schema.json: '{pod['defs_name']}' is an override and holds a section; "
+                                 f"there is no merge rule for a map of records")
+
+            inner = field.cpp_type
+            if field.populator in ("record", "mixin"):
+                if (field.defs_source or own, field.defs_name) not in partials:
+                    raise SystemExit(f"{own}.schema.json: '{pod['defs_name']}' is an override, so its "
+                                     f"'{field.yaml_name}' record must be marked x-partial too")
+
+                inner = SchemaWalker.overrides_name(inner)
+
+            fields.append({"cpp_name": field.cpp_name, "yaml_name": field.yaml_name,
+                           "populator": field.populator, "cpp_type": f"std::optional<{inner}>"})
+        return {
+            "struct_name": SchemaWalker.overrides_name(pod["struct_name"]),
+            "data_struct_name": pod["struct_name"],
+            "fields": fields,
+            "cpp_type_width": max(len(entry["cpp_type"]) for entry in fields),
+            "cpp_name_width": max(len(entry["cpp_name"]) for entry in fields),
+        }
+
     def render(self, schema_path: Path, pods: list[dict[str, Any]], *, main_pod: dict[str, Any],
                **extra: Any) -> dict[str, Any]:
-        name = schema_path.stem.replace(".schema", "")
+        name = self.source_of(schema_path)
 
         fields: list[Field] = []
         for pod in pods:
