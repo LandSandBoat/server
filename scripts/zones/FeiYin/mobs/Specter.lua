@@ -17,10 +17,10 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.NORTHERN_SHADOW, 5, 57600) -- 16 hours
-    xi.mob.phOnDespawn(mob, ID.mob.EASTERN_SHADOW, 5, 36000) -- 10 hours
-    xi.mob.phOnDespawn(mob, ID.mob.WESTERN_SHADOW, 5, 36000) -- 10 hours
-    xi.mob.phOnDespawn(mob, ID.mob.SOUTHERN_SHADOW, 5, 57600) -- 16 hours
+    xi.mob.phOnDespawn(mob, ID.mob.NORTHERN_SHADOW, 10, math.randomInt(3600, 7200)) -- 1 to 2 hours
+    xi.mob.phOnDespawn(mob, ID.mob.EASTERN_SHADOW, 10, math.randomInt(3600, 7200)) -- 1 to 2 hours
+    xi.mob.phOnDespawn(mob, ID.mob.WESTERN_SHADOW, 10, math.randomInt(3600, 7200)) -- 1 to 2 hours
+    xi.mob.phOnDespawn(mob, ID.mob.SOUTHERN_SHADOW, 10, math.randomInt(3600, 7200)) -- 1 to 2 hours
 end
 
 return entity

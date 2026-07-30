@@ -66,9 +66,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    local params = {}
-    params.SpawnPoints = pelicanSpawnPoints
-    xi.mob.phOnDespawn(mob, ID.mob.PELICAN, 5, 10800, params) -- 4 hours
+    xi.mob.phOnDespawn(mob, ID.mob.PELICAN, 10, 14400, { spawnPoints = pelicanSpawnPoints }) -- 4 hours
 end
 
 return entity

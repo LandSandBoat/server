@@ -35,6 +35,10 @@ entity.onMobSpawn = function(mob)
         mobArg:hideName(false)
         mobArg:setUntargetable(false)
     end)
+
+    -- The zone script's setRespawnTime leaves him allowed to respawn on a short timer, which
+    -- would pop him again every few minutes. Only a successful roll may bring Almighty Apkallu back.
+    DisallowRespawn(mob:getID(), true)
 end
 
 entity.onMobDespawn = function(mob)
