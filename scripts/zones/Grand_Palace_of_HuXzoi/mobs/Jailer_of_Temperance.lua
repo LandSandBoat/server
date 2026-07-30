@@ -2,6 +2,7 @@
 -- Area: Grand Palace of Hu'Xzoi
 --   NM: Jailer of Temperance
 -----------------------------------
+local ID           = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
 local huxzoiGlobal = require('scripts/zones/Grand_Palace_of_HuXzoi/globals')
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
@@ -128,10 +129,23 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
 end
 
 entity.onMobDespawn = function(mob)
-    local ph = mob:getLocalVar('ph')
-    DisallowRespawn(mob:getID(), true)
-    DisallowRespawn(ph, false)
-    GetMobByID(ph):setRespawnTime(GetMobRespawnTime(ph))
+    local phId = mob:getLocalVar('ph')
+
+    -- Temperance can spawn outside of the zdei system with no placeholder set, so pick one at random.
+    if phId == 0 then
+        local phTable = ID.mob.JAILER_OF_TEMPERANCE_PH
+        phId = phTable[math.randomInt(1, #phTable)]
+    end
+
+    local ph = GetMobByID(phId)
+
+    -- allow the placeholder to respawn
+    if ph then
+        DisallowRespawn(mob:getID(), true)
+        DisallowRespawn(phId, false)
+        ph:setRespawnTime(GetMobRespawnTime(phId))
+    end
+
     mob:setLocalVar('pop', GetSystemTime() + 900) -- 15 mins
     huxzoiGlobal.pickTemperancePH()
 end

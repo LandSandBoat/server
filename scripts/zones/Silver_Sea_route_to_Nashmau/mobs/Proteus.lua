@@ -16,6 +16,10 @@ end
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 100)
     mob:setMod(xi.mod.ACC, 250)
+
+    -- The zone script's setRespawnTime leaves him allowed to respawn on a short timer, which
+    -- would pop him again every few minutes. Only a successful roll may bring Proteus back.
+    DisallowRespawn(mob:getID(), true)
 end
 
 entity.onMobDespawn = function(mob)
