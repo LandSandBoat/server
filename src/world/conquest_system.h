@@ -60,6 +60,8 @@ public:
 
 private:
     bool updateInfluencePoints(int points, unsigned int nation, REGION_TYPE region);
+    void addMobKills(int32 count, REGION_TYPE region);
+    void addPlayerHomepoints(int32 count, REGION_TYPE region);
 
     auto getRegionalInfluences() -> const std::vector<influence_t>;
     auto getRegionControls() -> const std::vector<region_control_t>;

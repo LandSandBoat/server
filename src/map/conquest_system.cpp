@@ -105,6 +105,28 @@ void AddInfluencePoints(int points, unsigned int nation, REGION_TYPE region)
     });
 }
 
+void AddMobKills(int32 count, REGION_TYPE region)
+{
+    message::send(ipc::ConquestEvent{
+        .type    = ConquestMessage::M2W_AddMobKills,
+        .payload = ipc::toBytes(ConquestAddCounter{
+            .count  = count,
+            .region = static_cast<uint8>(region),
+        }),
+    });
+}
+
+void AddPlayerHomepoints(int32 count, REGION_TYPE region)
+{
+    message::send(ipc::ConquestEvent{
+        .type    = ConquestMessage::M2W_AddPlayerHomepoints,
+        .payload = ipc::toBytes(ConquestAddCounter{
+            .count  = count,
+            .region = static_cast<uint8>(region),
+        }),
+    });
+}
+
 /************************************************************************
  *    GainInfluencePoints                                               *
  *    +1 point for nation                                               *
@@ -114,73 +136,6 @@ void GainInfluencePoints(CCharEntity* PChar, uint32 points)
 {
     points += (uint32)(PChar->getMod(xi::Mod::CONQUEST_REGION_BONUS) / 100.0);
     conquest::AddInfluencePoints(points, PChar->profile.nation, PChar->loc.zone->GetRegionID());
-}
-
-/************************************************************************
- *    LoseInfluencePoints                                                *
- *    -x point for nation                                               *
- *    +x point for beastmen                                              *
- ************************************************************************/
-
-void LoseInfluencePoints(CCharEntity* PChar)
-{
-    // http://wiki.ffo.jp/html/498.html
-    if (PChar->GetMLevel() < settings::get<uint8>("map.MINIMUM_LEVEL_CONQUEST_INFUENCE_LOSS"))
-    {
-        return;
-    }
-
-    REGION_TYPE region = PChar->loc.zone->GetRegionID();
-    int         points = 0;
-
-    switch (region)
-    {
-        case REGION_TYPE::RONFAURE:
-        case REGION_TYPE::GUSTABERG:
-        case REGION_TYPE::SARUTABARUTA:
-        {
-            points = 10;
-            break;
-        }
-        case REGION_TYPE::ZULKHEIM:
-        case REGION_TYPE::KOLSHUSHU:
-        case REGION_TYPE::NORVALLEN:
-        case REGION_TYPE::DERFLAND:
-        case REGION_TYPE::ARAGONEU:
-        {
-            points = 50;
-            break;
-        }
-        case REGION_TYPE::QUFIMISLAND:
-        case REGION_TYPE::LITELOR:
-        case REGION_TYPE::KUZOTZ:
-        case REGION_TYPE::ELSHIMO_LOWLANDS:
-        {
-            points = 75;
-            break;
-        }
-        case REGION_TYPE::VOLLBOW:
-        case REGION_TYPE::VALDEAUNIA:
-        case REGION_TYPE::FAUREGANDI:
-        case REGION_TYPE::ELSHIMO_UPLANDS:
-        {
-            points = 300;
-            break;
-        }
-        case REGION_TYPE::TULIA:
-        case REGION_TYPE::MOVALPOLOS:
-        case REGION_TYPE::TAVNAZIA:
-        {
-            points = 600;
-            break;
-        }
-        default:
-        {
-            break;
-        }
-    }
-
-    conquest::AddInfluencePoints(points, NATION_BEASTMEN, region);
 }
 
 /************************************************************************

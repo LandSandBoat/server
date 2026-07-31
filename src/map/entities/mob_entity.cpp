@@ -773,6 +773,13 @@ void CMobEntity::DistributeRewards()
         StatusEffectContainer->KillAllStatusEffect();
         PChar->m_charHistory.enemiesDefeated++;
 
+        // Add mob kill for Beastmen influence
+        if (PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Signet) &&
+            loc.zone->GetRegionID() <= REGION_TYPE::TAVNAZIA)
+        {
+            conquest::AddMobKills(1, loc.zone->GetRegionID());
+        }
+
         // NOTE: this is called for all alliance / party members!
         luautils::OnMobDeath(this, PChar);
 
