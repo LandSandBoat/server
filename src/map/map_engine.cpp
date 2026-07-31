@@ -186,6 +186,7 @@ auto MapEngine::init() -> Task<void>
     charutils::LoadExpTable();
     traits::LoadTraitsList();
     effects::LoadEffectsParameters();
+    mobutils::LoadSpeciesData();
     battleutils::LoadSkillTable();
     meritNameSpace::LoadMeritsList();
     ability::LoadAbilitiesList();

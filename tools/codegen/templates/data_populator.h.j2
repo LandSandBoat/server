@@ -4,87 +4,96 @@
 #include "data/{{ name }}.h"
 #include "data/load.h"
 #include "data/node.h"
+{% if has_maps or section_name %}
+
+#include <common/types/hash_map.h>
+{% endif %}
+
 {% for inc in enum_includes %}
 #include "data/enums/{{ inc }}.h"
+{% endfor %}
+{% for inc in shared_includes %}
+#include "data/{{ inc }}_populator.h"
 {% endfor %}
 
 #include <fmt/format.h>
 #include <stdexcept>
+#include <string>
 #include <type_traits>
-#include <unordered_map>
+#include <utility>
 
 namespace xi::data
 {
 
-{% for pod in pods if not pod.is_main %}
+{% for ov in overrides %}
+template <class B>
+auto populate(const Node<B> node, std::type_identity<{{ ov.struct_name }}>) -> {{ ov.struct_name }}
+{
+    {{ ov.struct_name }} out{};
+{% for f in ov.fields %}
+    node.readInto(out.{{ f.cpp_name }}, "{{ f.yaml_name }}");
+{% endfor %}
+    return out;
+}
+
+{% endfor %}
+{% for pod in pods %}
 template <class B>
 auto populate(const Node<B> node, std::type_identity<{{ pod.struct_name }}>) -> {{ pod.struct_name }}
 {
-    return {{ pod.struct_name }}{
+    {{ pod.struct_name }} out{};
 {% for f in pod.fields %}
-{% if f.default %}
-        .{{ f.cpp_name }} = node.has("{{ f.yaml_name }}") ? node.template read<{{ f.cpp_type }}>("{{ f.yaml_name }}") : {{ f.cpp_type }}{ {{- f.default -}} },
+{% if f.populator == "typed_id" %}
+    out.{{ f.cpp_name }} = static_cast<{{ f.cpp_type }}>(node.template read<{{ f.struct_name }}>("{{ f.yaml_name }}"));
+{% elif f.populator == "name_key" %}
+    out.{{ f.cpp_name }} = node.has("{{ f.yaml_name }}") ? node.template read<std::string>("{{ f.yaml_name }}") : std::string(node.key());
+{% elif f.populator == "mixin" %}
+    out.{{ f.cpp_name }} = populate(node, std::type_identity<{{ f.cpp_type }}>{});
+{% elif f.populator == "record_map" %}
+    for (const auto {{ f.yaml_name }}Node : childrenOf(node, "{{ f.yaml_name }}"))
+    {
+        auto {{ f.yaml_name }}Value = populate({{ f.yaml_name }}Node, std::type_identity<{{ f.struct_name }}>{});
+        insertUnique(out.{{ f.cpp_name }}, {{ f.yaml_name }}Value.Id, std::move({{ f.yaml_name }}Value), "{{ source }}", "{{ f.yaml_name }}");
+    }
 {% else %}
-        .{{ f.cpp_name }} = node.template read<{{ f.cpp_type }}>("{{ f.yaml_name }}"),
+    node.readInto(out.{{ f.cpp_name }}, "{{ f.yaml_name }}");
 {% endif %}
 {% endfor %}
-    };
+{% if pod.variant_arms %}
+    switch (out.{{ pod.discriminator_field }})
+    {
+{% for arm in pod.variant_arms if arm.struct_name %}
+        case xi::{{ pod.discriminator_enum }}::{{ arm.cpp_name }}:
+            out.Payload = node.template read<{{ arm.struct_name }}>("{{ arm.yaml_key }}");
+            break;
+{% endfor %}
+{% for arm in pod.variant_arms if not arm.struct_name %}
+        case xi::{{ pod.discriminator_enum }}::{{ arm.cpp_name }}:
+            break;
+{% endfor %}
+        default:
+            throw std::runtime_error(fmt::format("{{ pod.struct_name }}: unhandled discriminator '{}' for id {}",
+                                                 EnumTraits<xi::{{ pod.discriminator_enum }}>::toName(out.{{ pod.discriminator_field }}),
+                                                 static_cast<uint32>(out.Id)));
+    }
+{% endif %}
+    return out;
 }
 
 {% endfor %}
+{% if section_name %}
 template <class B>
-auto populate(const Node<B> node, std::type_identity<{{ main_pod.struct_name }}>) -> {{ main_pod.struct_name }}
+auto populateMap(const Node<B> root, std::type_identity<{{ main_pod.struct_name }}>) -> HashMap<decltype({{ main_pod.struct_name }}::Id), {{ main_pod.struct_name }}>
 {
-    return {{ main_pod.struct_name }}{
-{% for f in main_pod.fields %}
-{% if f.yaml_name == "id" %}
-{% elif f.yaml_name == "name" and main_pod.name_default_from_key %}
-        .Name = node.has("name") ? node.template read<std::string>("name") : std::string(node.key()),
-{% elif f.default %}
-        .{{ f.cpp_name }} = node.has("{{ f.yaml_name }}") ? node.template read<{{ f.cpp_type }}>("{{ f.yaml_name }}") : {{ f.cpp_type }}{ {{- f.default -}} },
-{% else %}
-        .{{ f.cpp_name }} = node.template read<{{ f.cpp_type }}>("{{ f.yaml_name }}"),
-{% endif %}
-{% endfor %}
-    };
+    HashMap<decltype({{ main_pod.struct_name }}::Id), {{ main_pod.struct_name }}> out;
+    for (const auto node : childrenOf(root, "{{ section_name }}"))
+    {
+        auto value = populate(node, std::type_identity<{{ main_pod.struct_name }}>{});
+        insertUnique(out, value.Id, std::move(value), "{{ source }}", "{{ section_name }}");
+    }
+
+    return out;
 }
 
-template <class B>
-auto populateMap(const Node<B> root, std::type_identity<{{ main_pod.struct_name }}>) -> std::unordered_map<decltype({{ main_pod.struct_name }}::Id), {{ main_pod.struct_name }}>
-{
-    return populateMapDriver<{{ main_pod.struct_name }}, B>(
-        root,
-        "{{ section_name }}",
-{% if main_pod.key_source == "yaml_field" %}
-        IdSource::YAMLField,
-{% else %}
-        IdSource::YAMLKey,
 {% endif %}
-        "{{ source }}",
-        [](const Node<B> child, const auto id) {
-            auto data = populate(child, std::type_identity<{{ main_pod.struct_name }}>{});
-            data.Id   = id;
-{% if main_pod.variant_arms %}
-            switch (data.{{ main_pod.discriminator_field }})
-            {
-{% for arm in main_pod.variant_arms if arm.struct_name %}
-                case xi::{{ main_pod.discriminator_enum }}::{{ arm.cpp_name }}:
-                    data.Payload = child.template read<{{ arm.struct_name }}>("{{ arm.yaml_key }}");
-                    break;
-{% endfor %}
-{% for arm in main_pod.variant_arms if not arm.struct_name %}
-                case xi::{{ main_pod.discriminator_enum }}::{{ arm.cpp_name }}:
-                    break;
-{% endfor %}
-                default:
-                    throw std::runtime_error(fmt::format(
-                        "{{ main_pod.struct_name }}: unhandled discriminator '{}' for id {}",
-                        EnumTraits<xi::{{ main_pod.discriminator_enum }}>::toName(data.{{ main_pod.discriminator_field }}),
-                        data.Id));
-            }
-{% endif %}
-            return data;
-        });
-}
-
 } // namespace xi::data

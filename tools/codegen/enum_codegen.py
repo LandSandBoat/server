@@ -18,7 +18,7 @@ from .yaml_loaders import FastLoader
 def render_header(*, source_name: str, cls_name: str, underlying: str, is_flags: bool, case: str, values: dict[str, int]) -> str:
     if case not in CASE_FNS:
         raise ValueError(f"unknown enum case {case!r}; expected one of {sorted(CASE_FNS)}")
-    cpp_names = {k: CASE_FNS[case](k) for k in values}
+    cpp_names = {name: CASE_FNS[case](name) for name in values}
     return ENV.get_template("enum.h.j2").render(
         source_name=source_name,
         cls_name=cls_name,
@@ -26,21 +26,21 @@ def render_header(*, source_name: str, cls_name: str, underlying: str, is_flags:
         is_flags=is_flags,
         values=values,
         cpp_names=cpp_names,
-        enum_width=max(len(n) for n in cpp_names.values()),
-        quote_width=max(len(k) for k in values) + 2,
+        enum_width=max(len(cpp_name) for cpp_name in cpp_names.values()),
+        quote_width=max(len(name) for name in values) + 2,
     )
 
 
 def render_lua(*, source_name: str, lua_table: str, is_flags: bool, values: dict[str, int]) -> str:
     """Identifiers are the YAML key uppercased: `no_erase` -> `NO_ERASE`."""
-    lua_names = {k: k.upper() for k in values}
+    lua_names = {name: name.upper() for name in values}
     return ENV.get_template("enum.lua.j2").render(
         source_name=source_name,
         lua_table=lua_table,
         is_flags=is_flags,
         values=values,
         lua_names=lua_names,
-        name_width=max(len(n) for n in lua_names.values()),
+        name_width=max(len(lua_name) for lua_name in lua_names.values()),
     )
 
 
@@ -87,15 +87,16 @@ def resolve_sections(doc: dict[str, Any], path: str) -> list[dict[str, Any]]:
     """Every section the path names; `*` steps through all entries at that level (`ecosystems.*.families`)."""
     nodes: list[dict[str, Any]] = [doc]
     for part in path.split("."):
-        nxt: list[dict[str, Any]] = []
+        next_nodes: list[dict[str, Any]] = []
         for node in nodes:
             if part == "*":
-                nxt.extend(v for v in node.values() if isinstance(v, dict))
+                next_nodes.extend(child for child in node.values() if isinstance(child, dict))
             else:
                 child = node.get(part)
                 if isinstance(child, dict):
-                    nxt.append(child)
-        nodes = nxt
+                    next_nodes.append(child)
+
+        nodes = next_nodes
     return nodes
 
 
@@ -127,15 +128,16 @@ def emit_table_enums(yaml_path: Path) -> list[dict[str, Any]]:
                 values[key] = value
 
         # Disallow duplicate IDs
-        by_id: dict[int, list[str]] = {}
-        for key, value in values.items():
-            by_id.setdefault(value, []).append(key)
-        collisions = {v: ks for v, ks in by_id.items() if len(ks) > 1}
+        names_by_id: dict[int, list[str]] = {}
+        for name, value in values.items():
+            names_by_id.setdefault(value, []).append(name)
+
+        collisions = {value: names for value, names in names_by_id.items() if len(names) > 1}
         if collisions:
             raise ValueError(f"{yaml_path}: '{path}' reuses ids across entries: "
-                             + "; ".join(f"{v} -> {ks}" for v, ks in sorted(collisions.items())))
+                             + "; ".join(f"{value} -> {names}" for value, names in sorted(collisions.items())))
 
-        values = dict(sorted(values.items(), key=lambda kv: kv[1]))
+        values = dict(sorted(values.items(), key=lambda name_and_value: name_and_value[1]))
 
         cpp = block.get("cpp") or {}
         cls_name = cpp["class"]

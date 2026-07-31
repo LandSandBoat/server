@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ecosystem.schema.json",
+  "title": "Ecosystem",
+  "description": "The ecosystem -> family -> species tree. Every level takes mob_attributes.",
+  "type": "object",
+  "unevaluatedProperties": false,
+  "required": ["ecosystems"],
+
+  "properties": {
+    "meta": { "$ref": "_meta.schema.json" },
+    "ecosystems": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z][a-z0-9_]*$" },
+      "additionalProperties": { "$ref": "#/$defs/ecosystem" }
+    }
+  },
+
+  "$defs": {
+    "ecosystem": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "required": ["id"],
+      "allOf": [{ "$ref": "mob_attributes.schema.json#/$defs/mob_attributes" }],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255,
+          "description": "Unique ecosystem ID. To be deprecated."
+        },
+        "families": {
+          "type": "object",
+          "description": "A family part of this ecosystem. Name must be unique across all ecosystems.",
+          "propertyNames": { "pattern": "^[a-z][a-z0-9_]*$" },
+          "additionalProperties": { "$ref": "#/$defs/family" }
+        }
+      }
+    },
+
+    "family": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "required": ["id"],
+      "allOf": [{ "$ref": "mob_attributes.schema.json#/$defs/mob_attributes" }],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535,
+          "description": "Unique family ID. To be deprecated."
+        },
+        "species": {
+          "type": "object",
+          "description": "A species part of this family. Name must be unique across all ecosystems.",
+          "propertyNames": { "pattern": "^[a-z][a-z0-9_]*$" },
+          "additionalProperties": { "$ref": "#/$defs/species" }
+        }
+      }
+    },
+
+    "species": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "required": ["id"],
+      "allOf": [{ "$ref": "mob_attributes.schema.json#/$defs/mob_attributes" }],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535,
+          "description": "Unique species ID. To be deprecated."
+        }
+      }
+    }
+  }
+}

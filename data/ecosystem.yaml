@@ -1,0 +1,4023 @@
+# yaml-language-server: $schema=schemas/ecosystem.schema.json
+
+meta:
+  enum:
+    - section: ecosystems
+      cpp:
+        class:      Ecosystem
+        underlying: uint8_t
+      lua:
+        table: xi.ecosystem
+
+    - section: ecosystems.*.families
+      cpp:
+        class:      Family
+        underlying: uint16_t
+      lua:
+        table: xi.mobFamily
+
+    - section: ecosystems.*.families.*.species
+      cpp:
+        class:      Species
+        underlying: uint16_t
+      lua:
+        table: xi.mobSpecies
+
+ecosystems:
+  unclassified:
+    id: 0
+    families:
+      unclassified:
+        id: 207
+        species:
+          unclassified:
+            id: 484
+            detects:
+              - hearing
+
+  amorph:
+    id: 1
+    families:
+      acuex:
+        id:      1
+        element: water
+        stats:
+          str: d
+          dex: d
+          agi: d
+          int: d
+          mnd: d
+          chr: e
+        detects:
+          - hearing
+        species:
+          acuex:
+            id: 1
+          yecuex:
+            id: 2
+      botuli:
+        id: 2
+        species:
+          botulus:
+            id:      3
+            element: water
+            stats:
+              str: d
+              dex: d
+              agi: d
+              int: d
+              mnd: d
+              chr: e
+            detects:
+              - sight
+              - ability
+      flan:
+        id:      3
+        element: water
+        stats:
+          str: e
+          dex: d
+          vit: d
+          agi: d
+          mnd: e
+        detects:
+          - sight
+          - ability
+        speed: 32
+        species:
+          blancmage:
+            id: 4
+          flan:
+            id: 5
+          gold_flan:
+            id: 6
+      hecteyes:
+        id: 4
+        species:
+          hecteye:
+            id:      7
+            element: dark
+            stats:
+              str: e
+              dex: d
+              vit: d
+              agi: d
+              mnd: d
+              chr: d
+            detects:
+              - hearing
+            charmable: true
+      leech:
+        id:      5
+        element: water
+        stats:
+          str: d
+          dex: d
+          vit: e
+          agi: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+        charmable: true
+        species:
+          leech:
+            id: 8
+          obdella:
+            id: 9
+          parasite:
+            id: 10
+      plovid:
+        id:      6
+        element: water
+        stats:
+          str: d
+          dex: d
+          vit: d
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - sight
+          - hearing
+        species:
+          golden_plovid:
+            id: 11
+          plovid:
+            id: 12
+      sandworm:
+        id:      7
+        element: earth
+        stats:
+          str: d
+          dex: d
+          vit: d
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+        species:
+          gigaworm:
+            id: 13
+          sandworm:
+            id: 14
+      slime:
+        id:      8
+        element: water
+        stats:
+          str: d
+          dex: d
+          vit: d
+          agi: e
+          int: d
+          chr: d
+        detects:
+          - hearing
+          - scent
+        charmable: true
+        species:
+          boil:
+            id: 15
+          clot:
+            id: 16
+          scum:
+            id: 17
+          slime:
+            id: 18
+      slug:
+        id: 9
+        species:
+          slug:
+            id:      19
+            element: water
+            stats:
+              str: d
+              dex: d
+              vit: d
+              agi: d
+              int: d
+              mnd: d
+              chr: d
+            detects:
+              - hearing
+            charmable: true
+      worm:
+        id:      10
+        element: earth
+        stats:
+          str: d
+          dex: d
+          vit: e
+          agi: d
+          mnd: d
+          chr: e
+          eva: e
+        detects:
+          - hearing
+        speed:     0
+        charmable: true
+        species:
+          entozoon:
+            id: 20
+          morion:
+            id: 21
+          red_worm:
+            id: 22
+          worm:
+            id: 23
+
+  aquan:
+    id: 2
+    families:
+      crab:
+        id:      11
+        element: water
+        stats:
+          str: d
+          dex: d
+          agi: e
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+        charmable: true
+        species:
+          carrier_crab:
+            id: 24
+          crab:
+            id: 25
+          krabkatoa:
+            id: 26
+          locus_crab:
+            id: 27
+          volcanic_crabs:
+            id: 28
+      craklaw:
+        id: 12
+        species:
+          craklaw:
+            id:      29
+            element: water
+            stats:
+              str: d
+              dex: d
+              agi: e
+              int: d
+              mnd: d
+              chr: d
+            detects:
+              - hearing
+      frog:
+        id:      13
+        element: water
+        stats:
+          str: e
+          dex: e
+          vit: e
+          agi: a
+          int: a
+          mnd: f
+          def: a
+          eva: e
+        detects:
+          - hearing
+        species:
+          akagin:
+            id: 30
+          ginkoro:
+            id: 31
+          toad:
+            id: 32
+      orobon:
+        id:      14
+        element: water
+        stats:
+          str: a
+          dex: d
+          vit: b
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+        speed: 32
+        species:
+          ogrebon:
+            id: 33
+          orobon:
+            id: 34
+      pteraketos:
+        id:      15
+        element: water
+        stats:
+          str: a
+          dex: d
+          vit: b
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+        species:
+          pteraketo:
+            id: 35
+          white_pteraketos:
+            id: 36
+      pugil:
+        id:      16
+        element: water
+        detects:
+          - hearing
+        charmable: true
+        species:
+          jagil:
+            id: 37
+            stats:
+              dex: d
+              vit: d
+              int: d
+              mnd: d
+              chr: e
+              eva: d
+          pugil:
+            id: 38
+            stats:
+              str: d
+              dex: d
+              vit: d
+              int: d
+              mnd: d
+              chr: e
+      rockfin:
+        id: 17
+        species:
+          rockfin:
+            id:      39
+            element: water
+            stats:
+              vit: a
+            detects:
+              - hearing
+      ruszor:
+        id: 18
+        species:
+          ruszor:
+            id:      40
+            element: ice
+            stats:
+              dex: e
+              vit: d
+              agi: d
+              int: d
+              mnd: d
+              chr: d
+            detects:
+              - sight
+      sea_monk:
+        id:      19
+        element: water
+        stats:
+          dex: e
+          vit: d
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+        charmable: true
+        species:
+          azure_sea_monk:
+            id: 41
+          sea_monk:
+            id: 42
+      uragnite:
+        id:      20
+        element: water
+        stats:
+          str: d
+          dex: d
+          vit: d
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+        charmable: true
+        species:
+          limascabra:
+            id: 43
+          uragnite:
+            id: 44
+
+  arcana:
+    id: 3
+    families:
+      acrolith:
+        id: 21
+        species:
+          acrolith:
+            id: 45
+            stats:
+              agi: d
+              int: b
+              mnd: f
+              chr: d
+            detects:
+              - hearing
+              - magic
+      bomb:
+        id: 22
+        stats:
+          str: b
+          vit: d
+          agi: d
+          int: e
+          mnd: d
+        detects:
+          - sight
+          - magic
+        species:
+          bomb:
+            id:      46
+            element: fire
+          djinn:
+            id:      47
+            element: fire
+          snoll:
+            id:      48
+            element: ice
+      cardian:
+        id: 23
+        stats:
+          str: d
+          vit: d
+          agi: e
+          int: d
+          mnd: d
+          eva: e
+        detects:
+          - hearing
+          - magic
+        species:
+          batons:
+            id:      49
+            element: earth
+          coins:
+            id:      50
+            element: light
+          cups:
+            id:      51
+            element: water
+          swords:
+            id:      52
+            element: fire
+      caturae:
+        id: 24
+        stats:
+          str: d
+          vit: d
+          agi: e
+          int: d
+          mnd: d
+        detects:
+          - sight
+        species:
+          bishop:
+            id: 53
+          king:
+            id: 54
+          knight:
+            id: 55
+          pawn:
+            id: 56
+          queen:
+            id: 57
+          rook:
+            id: 58
+      cluster:
+        id: 25
+        species:
+          cluster:
+            id:      59
+            element: fire
+            stats:
+              str: d
+              agi: d
+              int: d
+              mnd: d
+            detects:
+              - sight
+      doll:
+        id:      26
+        element: ice
+        stats:
+          str: d
+          agi: e
+          int: d
+          mnd: d
+        detects:
+          - magic
+        species:
+          doll:
+            id: 60
+          gargoyles:
+            id: 61
+      evil_weapon:
+        id: 27
+        species:
+          evil_weapon:
+            id:      62
+            element: wind
+            stats:
+              str: f
+              vit: e
+              agi: d
+              int: a
+              mnd: d
+              chr: b
+            detects:
+              - hearing
+              - magic
+      golem:
+        id:      28
+        element: light
+        stats:
+          str: a
+          agi: e
+        detects:
+          - sight
+          - magic
+        species:
+          golem:
+            id: 63
+          red_golems:
+            id: 64
+      grimoire:
+        id: 29
+        stats:
+          str: d
+          vit: d
+          agi: e
+          int: d
+          mnd: d
+        detects:
+          - hearing
+        species:
+          grimoire:
+            id: 65
+          sentient_tome:
+            id: 66
+      khimaira:
+        id:      30
+        element: thunder
+        stats:
+          str: d
+          int: d
+        detects:
+          - sight
+          - hearing
+        species:
+          khimaira:
+            id: 67
+          khrysokhimaira:
+            id: 68
+      magic_pot:
+        id:      31
+        element: light
+        stats:
+          str: d
+          vit: d
+          agi: e
+          int: b
+        detects:
+          - magic
+        species:
+          magic_pot:
+            id: 69
+          millstones:
+            id: 70
+      marolith:
+        id:      32
+        element: earth
+        stats:
+          str: a
+          agi: e
+        detects:
+          - sight
+          - magic
+        species:
+          marolith:
+            id: 71
+          mirulith:
+            id: 72
+      mimic:
+        id: 33
+        species:
+          mimic:
+            id: 73
+            stats:
+              str: d
+              vit: b
+              agi: b
+              int: b
+              mnd: b
+              chr: f
+            detects:
+              - hearing
+              - magic
+            speed: 0
+      spheroid:
+        id:      34
+        element: thunder
+        detects:
+          - hearing
+          - magic
+        species:
+          spheroid:
+            id: 74
+            stats:
+              str: e
+              vit: g
+              agi: a
+              int: b
+              mnd: e
+      mammet:
+        id:      208
+        element: thunder
+        detects:
+          - hearing
+          - magic
+        species:
+          mammet:
+            id: 483
+            stats:
+              str: a
+              dex: d
+              vit: d
+              int: d
+              mnd: d
+              chr: d
+              eva: d
+
+  archaic_machine:
+    id: 4
+    families:
+      chariot:
+        id: 35
+        stats:
+          str: a
+          mnd: e
+          chr: d
+        detects:
+          - hearing
+          - magic
+        species:
+          chariot:
+            id: 75
+          long_armed_chariot:
+            id: 76
+          shielded_chariot:
+            id: 77
+      gear:
+        id: 36
+        stats:
+          str: b
+          vit: d
+          agi: e
+          mnd: e
+          chr: e
+          eva: e
+        detects:
+          - sight
+          - hearing
+          - magic
+        species:
+          cog:
+            id: 78
+          gear:
+            id: 79
+          triple_cog:
+            id: 80
+          triple_gear:
+            id: 81
+      iron_giant:
+        id:      37
+        element: fire
+        stats:
+          str: b
+          mnd: f
+          chr: e
+        detects:
+          - sight
+          - hearing
+        species:
+          iron_giant:
+            id: 82
+          metal_head:
+            id: 83
+      rampart:
+        id: 38
+        species:
+          rampart:
+            id: 84
+            stats:
+              mnd: e
+              chr: e
+            detects:
+              - hearing
+              - magic
+
+  beast:
+    id: 5
+    families:
+      behemoth:
+        id:      39
+        element: water
+        detects:
+          - sight
+        species:
+          behemoth:
+            id: 85
+          elasmoth:
+            id: 86
+          skormoth:
+            id: 87
+      buffalo:
+        id: 40
+        species:
+          buffalo:
+            id:      88
+            element: ice
+            stats:
+              str: d
+              dex: d
+              vit: d
+              agi: d
+              int: d
+              mnd: d
+              chr: d
+            detects:
+              - sight
+      cehuetzi:
+        id: 41
+        species:
+          cehuetzi:
+            id:      89
+            element: thunder
+            stats:
+              str: a
+              dex: a
+              vit: d
+              agi: b
+              mnd: f
+              chr: e
+            detects:
+              - hearing
+            speed: 60
+      cerberus:
+        id:      42
+        element: fire
+        stats:
+          str: a
+          dex: a
+          agi: a
+          int: a
+          mnd: a
+          chr: b
+        detects:
+          - hearing
+        speed: 80
+        species:
+          cerberus:
+            id: 90
+          orthrus:
+            id: 91
+      coeurl:
+        id:      43
+        element: thunder
+        stats:
+          str: d
+          vit: e
+          agi: d
+          mnd: e
+          chr: d
+        detects:
+          - sight
+          - scent
+        speed:     60
+        charmable: true
+        species:
+          coeurl:
+            id: 92
+          collared_lynx:
+            id: 93
+          lynx:
+            id: 94
+      dhalmel:
+        id: 44
+        species:
+          dhalmel:
+            id:      95
+            element: earth
+            stats:
+              dex: d
+              vit: d
+              agi: e
+              int: d
+              mnd: d
+              chr: d
+            detects:
+              - sight
+              - scent
+            charmable: true
+      gnole:
+        id: 45
+        species:
+          gnole:
+            id:      96
+            element: dark
+            stats:
+              dex: b
+              vit: a
+              agi: f
+              int: f
+              mnd: d
+              chr: e
+            detects:
+              - sight
+              - scent
+      manticore:
+        id:      46
+        element: wind
+        stats:
+          str: b
+          dex: e
+          vit: b
+          agi: e
+          int: d
+          mnd: d
+          chr: f
+        detects:
+          - sight
+          - scent
+        speed: 50
+        species:
+          legendary_manticore:
+            id: 97
+          manticore:
+            id: 98
+      marid:
+        id: 47
+        species:
+          marid:
+            id:      99
+            element: earth
+            stats:
+              dex: e
+              vit: a
+              agi: f
+              chr: d
+            detects:
+              - sight
+              - scent
+      opo_opo:
+        id: 48
+        species:
+          opo_opo:
+            id:      100
+            element: thunder
+            stats:
+              str: e
+              dex: b
+              vit: e
+              agi: b
+              int: f
+              mnd: f
+              chr: b
+            detects:
+              - sight
+              - scent
+            charmable: true
+      raaz:
+        id:      49
+        element: thunder
+        stats:
+          dex: d
+          agi: d
+          int: f
+          mnd: e
+          chr: e
+        detects:
+          - hearing
+        speed: 60
+        species:
+          fazz:
+            id: 101
+          raaz:
+            id: 102
+      rabbit:
+        id:      50
+        element: earth
+        stats:
+          str: d
+          vit: d
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - sight
+          - scent
+        charmable: true
+        species:
+          alabaster_rabbit:
+            id: 103
+          lapinion:
+            id: 104
+          onyx_rabbit:
+            id: 105
+          rabbit:
+            id: 106
+      ram:
+        id:      51
+        element: earth
+        stats:
+          dex: d
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - sight
+          - scent
+        species:
+          ovim:
+            id: 107
+          ram:
+            id: 108
+      sheep:
+        id:      52
+        element: earth
+        stats:
+          dex: d
+          vit: d
+          agi: d
+          int: e
+          mnd: d
+          chr: d
+        charmable: true
+        species:
+          karakul:
+            id: 109
+            detects:
+              - sight
+          lucerewe:
+            id: 110
+            detects:
+              - sight
+              - scent
+          sheep:
+            id: 111
+            detects:
+              - sight
+              - scent
+      tiger:
+        id:      53
+        element: thunder
+        stats:
+          str: d
+          vit: d
+          agi: d
+          int: f
+          mnd: d
+          chr: d
+        speed:     60
+        charmable: true
+        species:
+          legendary_tigers:
+            id: 112
+            detects:
+              - sight
+          smilodon:
+            id: 113
+            detects:
+              - sight
+              - scent
+          tiger:
+            id: 114
+            detects:
+              - sight
+              - scent
+      yztarg:
+        id:      54
+        element: earth
+        stats:
+          str: b
+        detects:
+          - sight
+          - lowhp
+          - scent
+        species:
+          red_yztarg:
+            id: 115
+          yztarg:
+            id: 116
+
+  beastmen:
+    id: 6
+    families:
+      antica:
+        id: 55
+        species:
+          antica:
+            id:      117
+            element: dark
+            stats:
+              str: a
+              dex: b
+              vit: e
+              agi: d
+              int: d
+              mnd: f
+              chr: d
+            detects:
+              - hearing
+              - scent
+      bugbear:
+        id: 56
+        species:
+          bugbear:
+            id:      118
+            element: thunder
+            stats:
+              str: g
+              dex: b
+              vit: e
+              agi: b
+              int: d
+              mnd: d
+              chr: d
+              eva: b
+            detects:
+              - sight
+      gigas:
+        id:      57
+        element: ice
+        stats:
+          str: a
+          dex: b
+          vit: a
+          agi: e
+          int: f
+          mnd: d
+        detects:
+          - sight
+        species:
+          berglisi:
+            id: 119
+          giants:
+            id: 120
+          gigas:
+            id: 121
+          hecatoncheirs:
+            id: 122
+          jotunn:
+            id: 123
+      goblin:
+        id: 58
+        stats:
+          str: d
+          dex: b
+          vit: e
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - sight
+        species:
+          armored_goblin:
+            id:      124
+            element: thunder
+          armored_moblin:
+            id:      125
+            element: thunder
+          goblin:
+            id:      126
+            element: fire
+          moblin:
+            id:      127
+            element: fire
+      lamiae:
+        id:      59
+        element: water
+        stats:
+          str: e
+          dex: b
+          vit: b
+          agi: d
+          int: b
+          mnd: b
+          chr: b
+        detects:
+          - sight
+        species:
+          experimental:
+            id: 128
+          lamiae:
+            id: 129
+          medusa:
+            id: 130
+          merrow:
+            id: 131
+      mamool_ja:
+        id:      60
+        element: wind
+        stats:
+          str: d
+          dex: b
+          vit: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - sight
+        species:
+          knight_ja:
+            id: 132
+          sage:
+            id: 133
+          two_headed:
+            id: 134
+          warrior:
+            id: 135
+      meeble:
+        id: 61
+        species:
+          meeble:
+            id:      136
+            element: thunder
+            stats:
+              str: d
+              dex: b
+              agi: b
+              int: d
+              mnd: b
+              chr: d
+            detects:
+              - sight
+      moogle:
+        id: 62
+        stats:
+          str: d
+          dex: b
+          vit: e
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+        species:
+          king_mog:
+            id: 137
+          moogle:
+            id: 138
+      orc:
+        id:      63
+        element: fire
+        stats:
+          str: b
+          dex: b
+          vit: d
+          agi: d
+          int: f
+          mnd: e
+        detects:
+          - sight
+          - scent
+        species:
+          orc:
+            id: 139
+          red_orc:
+            id: 140
+          warchief:
+            id: 141
+          white_orc:
+            id: 142
+      orcish_warmachine:
+        id: 64
+        species:
+          orcish_warmachine:
+            id:      143
+            element: fire
+            stats:
+              str: b
+              dex: b
+              vit: d
+              int: f
+              mnd: e
+              chr: d
+            detects:
+              - sight
+      poroggo:
+        id:      65
+        element: water
+        detects:
+          - hearing
+        species:
+          blue_poroggo:
+            id: 144
+            stats:
+              str: e
+              dex: e
+              vit: e
+              agi: a
+              int: a
+              mnd: e
+              eva: d
+          green_poroggo:
+            id: 145
+            stats:
+              str: d
+              dex: e
+              vit: b
+              agi: d
+              int: b
+              mnd: e
+              chr: g
+              def: a
+          red_poroggo:
+            id: 146
+            stats:
+              str: e
+              dex: e
+              vit: e
+              agi: a
+              int: a
+              mnd: e
+              eva: d
+      qiqirn:
+        id:      66
+        element: earth
+        stats:
+          str: e
+          dex: b
+          vit: e
+          int: e
+          mnd: d
+          chr: d
+        detects:
+          - sight
+          - scent
+        species:
+          qiqirn:
+            id: 147
+          qiqirn_child:
+            id: 148
+      quadav:
+        id:      67
+        element: water
+        stats:
+          str: b
+          dex: b
+          vit: d
+          agi: d
+          int: e
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+          - scent
+        species:
+          golden_quadav:
+            id: 149
+          quadav:
+            id: 150
+      sahagin:
+        id:      68
+        element: water
+        stats:
+          str: d
+          dex: b
+          vit: d
+          agi: b
+          int: d
+          mnd: d
+        detects:
+          - hearing
+        species:
+          blue_sahagin:
+            id: 151
+          yellow_sahagin:
+            id: 152
+      shadow_lord:
+        id: 69
+        species:
+          shadow_lord:
+            id: 153
+            stats:
+              str: a
+              dex: a
+              vit: a
+              agi: a
+              int: a
+              mnd: a
+              chr: a
+            detects:
+              - sight
+      siege_turret:
+        id: 70
+        stats:
+          str: d
+          dex: d
+          vit: d
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - sight
+        species:
+          orcish_turret:
+            id: 154
+          quadav_turret:
+            id: 155
+          yagudo_turret:
+            id: 156
+      tonberry:
+        id:      71
+        element: light
+        stats:
+          str: d
+          vit: e
+          agi: b
+          int: e
+          mnd: e
+          chr: d
+        detects:
+          - sight
+        species:
+          cryptonberry:
+            id: 157
+          kingberry:
+            id: 158
+          tonberry:
+            id: 159
+          wantonberry:
+            id: 160
+      troll:
+        id:      72
+        element: fire
+        stats:
+          str: a
+          vit: b
+          agi: e
+          int: e
+          chr: d
+        detects:
+          - sight
+        species:
+          destroyer:
+            id: 161
+          general:
+            id: 162
+          troll:
+            id: 163
+      velkk:
+        id:      73
+        element: dark
+        stats:
+          str: a
+          vit: b
+          agi: e
+          int: e
+          chr: d
+        detects:
+          - sight
+          - scent
+        species:
+          blue_velkk:
+            id: 164
+          red_velkk:
+            id: 165
+      yagudo:
+        id:      74
+        element: wind
+        stats:
+          str: d
+          int: d
+          mnd: e
+        detects:
+          - sight
+        species:
+          armored_yagudo:
+            id: 166
+          manifest:
+            id: 167
+          yagudo:
+            id: 168
+
+  bird:
+    id: 7
+    families:
+      amphiptere:
+        id: 75
+        stats:
+          str: d
+          vit: e
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - sight
+        species:
+          amphiptere:
+            id: 169
+          sanguipteres:
+            id: 170
+      apkallu:
+        id:      76
+        element: water
+        stats:
+          str: d
+          vit: e
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+          eva: b
+        detects:
+          - sight
+          - hearing
+        species:
+          apkallu:
+            id: 171
+          inguza:
+            id: 172
+      bat:
+        id:      77
+        element: wind
+        stats:
+          str: d
+          dex: d
+          vit: e
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+        charmable: true
+        species:
+          bat:
+            id: 173
+          vermilion_bat:
+            id: 174
+      bird:
+        id:      78
+        element: fire
+        stats:
+          str: d
+          dex: d
+          vit: e
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - sight
+        charmable: true
+        species:
+          bird:
+            id: 175
+          crow:
+            id: 176
+      cockatrice:
+        id:      79
+        element: earth
+        detects:
+          - sight
+        species:
+          cockatrice:
+            id: 177
+            stats:
+              str: d
+              dex: e
+              agi: d
+              int: d
+              mnd: d
+              chr: d
+          ziz:
+            id: 178
+            stats:
+              str: e
+              dex: e
+              agi: d
+              int: d
+              mnd: d
+              chr: d
+              eva: e
+      colibri:
+        id:      80
+        element: wind
+        stats:
+          str: e
+          dex: e
+          vit: e
+          agi: e
+          int: a
+          mnd: a
+          chr: a
+          eva: d
+        detects:
+          - sight
+        speed:     60
+        charmable: true
+        species:
+          colibri:
+            id: 179
+          toucalibri:
+            id: 180
+      flock_bat:
+        id:      81
+        element: wind
+        stats:
+          str: d
+          dex: d
+          vit: e
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+        charmable: true
+        species:
+          flock_bat:
+            id: 181
+          flock_vermillion_bats:
+            id: 182
+          triple_flock:
+            id: 183
+      harpeia:
+        id:      82
+        element: wind
+        detects:
+          - hearing
+        speed: 60
+        species:
+          harpeia:
+            id: 184
+          pink_harpeia:
+            id: 185
+          white_harpeia:
+            id: 186
+      hippogryph:
+        id: 83
+        species:
+          hippogryph:
+            id:      187
+            element: wind
+            stats:
+              str: d
+              dex: d
+              vit: d
+              agi: d
+              int: d
+              mnd: d
+              chr: d
+              eva: a
+            detects:
+              - sight
+            speed: 60
+      greater_bird:
+        id:      84
+        element: light
+        stats:
+          def: b
+        detects:
+          - sight
+        species:
+          gagana:
+            id: 188
+          legendary_roc:
+            id: 189
+          roc:
+            id: 190
+      tulfaire:
+        id:      85
+        element: wind
+        detects:
+          - sight
+          - hearing
+        species:
+          blue_tulfaire:
+            id: 191
+          tulfaire:
+            id: 192
+      waktza:
+        id:      86
+        element: fire
+        detects:
+          - scent
+        species:
+          black_waktza:
+            id: 193
+          waktza:
+            id: 194
+
+  demon:
+    id: 8
+    families:
+      ahriman:
+        id:      87
+        element: dark
+        stats:
+          str: d
+          vit: d
+          agi: d
+          mnd: e
+          chr: d
+        detects:
+          - sight
+          - hearing
+        species:
+          ahriman:
+            id: 195
+          akoman:
+            id: 196
+          shadow_eyes:
+            id: 197
+      demon:
+        id:      88
+        element: dark
+        stats:
+          str: d
+          vit: d
+          agi: d
+          mnd: f
+        speed: 50
+        species:
+          crystal_demon:
+            id: 198
+            detects:
+              - sight
+          demon:
+            id: 199
+            detects:
+              - sight
+          golden_demon:
+            id: 200
+            detects:
+              - sight
+          kindred:
+            id: 201
+            detects:
+              - sight
+              - scent
+          red_demon:
+            id: 202
+            detects:
+              - sight
+      dvergr:
+        id:      89
+        element: dark
+        detects:
+          - sight
+        species:
+          dokkalfar:
+            id: 203
+            stats:
+              str: d
+              vit: d
+              agi: d
+              mnd: f
+          dvergr:
+            id: 204
+            stats:
+              str: d
+              int: a
+              mnd: e
+              chr: d
+          warden:
+            id: 205
+            stats:
+              str: d
+              vit: d
+              agi: d
+              mnd: f
+      gallu:
+        id: 90
+        stats:
+          str: d
+          vit: d
+          agi: d
+          mnd: f
+        detects:
+          - hearing
+        speed: 70
+        species:
+          gallu:
+            id: 206
+          white_gallu:
+            id: 207
+      gargouille:
+        id:      91
+        element: dark
+        stats:
+          str: d
+          vit: d
+          agi: d
+          mnd: f
+        detects:
+          - sight
+          - hearing
+          - scent
+        species:
+          gargouille:
+            id: 208
+          vodoriga:
+            id: 209
+      imp:
+        id:      92
+        element: dark
+        stats:
+          str: e
+          vit: d
+          mnd: g
+          eva: e
+        detects:
+          - sight
+          - hearing
+        speed: 50
+        species:
+          devilet:
+            id: 210
+          horned_imp:
+            id: 211
+          imp:
+            id: 212
+          white_imp:
+            id: 213
+      soulflayer:
+        id:      93
+        element: water
+        stats:
+          str: e
+          vit: e
+          agi: f
+          int: a
+          mnd: a
+          chr: e
+          eva: e
+        detects:
+          - hearing
+          - magic
+          - ability
+          - scent
+        species:
+          black_robe_flayer:
+            id: 214
+          soulflayer:
+            id: 215
+      taurus:
+        id:      94
+        element: dark
+        stats:
+          str: a
+          vit: e
+          agi: e
+          int: e
+          eva: b
+        detects:
+          - sight
+        species:
+          falxitaur:
+            id: 216
+          taurus:
+            id: 217
+
+  dragon:
+    id: 9
+    families:
+      dragon:
+        id:      95
+        element: dark
+        stats:
+          str: a
+          chr: d
+        detects:
+          - hearing
+        species:
+          dahak:
+            id: 218
+          dragon:
+            id: 219
+          purple_dragon:
+            id: 220
+      hydra:
+        id: 96
+        stats:
+          str: b
+          vit: a
+          agi: b
+          int: a
+          mnd: e
+        detects:
+          - hearing
+        species:
+          alfard:
+            id: 221
+          hydra:
+            id:      222
+            element: water
+      puk:
+        id:      97
+        element: wind
+        stats:
+          str: f
+          vit: e
+          agi: b
+          int: b
+          chr: e
+          eva: d
+        detects:
+          - sight
+          - hearing
+        charmable: true
+        species:
+          peapuk:
+            id: 223
+          puk:
+            id: 224
+      wyrm:
+        id: 98
+        stats:
+          str: b
+          dex: a
+          agi: b
+          int: a
+          mnd: f
+          chr: b
+        species:
+          black_feathered:
+            id:      225
+            element: fire
+            detects:
+              - sight
+          black_wyrm:
+            id:      226
+            element: fire
+            detects:
+              - sight
+          blue_wyrm:
+            id:      227
+            element: ice
+            detects:
+              - sight
+              - hearing
+          dark_wyrm:
+            id:      228
+            element: dark
+            detects:
+              - sight
+              - hearing
+          earth_wyrm:
+            id:      229
+            element: earth
+            detects:
+              - sight
+          orange_wyrm:
+            id:      230
+            element: fire
+            detects:
+              - sight
+          white_feathered:
+            id:      231
+            element: fire
+            detects:
+              - sight
+      wyvern:
+        id: 99
+        stats:
+          str: d
+          agi: d
+          int: b
+          mnd: e
+          chr: e
+        detects:
+          - sight
+        speed: 70
+        species:
+          ajattara:
+            id:      232
+            element: wind
+          legendary_wyvern:
+            id:      233
+            element: water
+          red_wyvern:
+            id:      234
+            element: water
+          wyvern:
+            id:      235
+            element: water
+      wyvern_pet:
+        id: 100
+        stats:
+          str: d
+          agi: d
+          int: b
+          mnd: e
+          chr: e
+        detects:
+          - sight
+        speed: 70
+        species:
+          blue_wyvern:
+            id: 236
+          shadow_wyvern:
+            id: 237
+      zilant:
+        id: 101
+        species:
+          zilant:
+            id:      238
+            element: dark
+            detects:
+              - hearing
+            speed: 50
+
+  elemental:
+    id: 10
+    families:
+      avatar:
+        id: 102
+        stats:
+          str: d
+          dex: d
+          vit: d
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        species:
+          alexander:
+            id: 239
+            detects:
+              - sight
+              - magic
+          atomos:
+            id: 240
+            detects:
+              - sight
+              - magic
+          bahamut:
+            id: 241
+            detects:
+              - sight
+          cait_sith:
+            id: 242
+            detects:
+              - sight
+          carbuncle:
+            id: 243
+            detects:
+              - sight
+              - magic
+          chaos:
+            id: 244
+            detects:
+              - sight
+              - magic
+          diabolos:
+            id: 245
+            detects:
+              - sight
+              - magic
+          fenrir:
+            id: 246
+            detects:
+              - sight
+              - magic
+            speed: 80
+          garuda:
+            id: 247
+            detects:
+              - sight
+              - magic
+          ifrit:
+            id: 248
+            detects:
+              - sight
+              - magic
+          leviathan:
+            id: 249
+            detects:
+              - sight
+              - magic
+          odin:
+            id: 250
+            detects:
+              - sight
+              - magic
+          phoenix:
+            id: 251
+            detects:
+              - sight
+              - magic
+          ramuh:
+            id: 252
+            detects:
+              - sight
+              - magic
+          shiva:
+            id: 253
+            detects:
+              - sight
+              - magic
+          siren:
+            id: 254
+            detects:
+              - sight
+              - magic
+          titan:
+            id: 255
+            detects:
+              - sight
+              - magic
+      elemental:
+        id: 103
+        stats:
+          str: d
+          dex: d
+          vit: d
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+          eva: e
+        detects:
+          - magic
+        species:
+          air_elemental:
+            id:      256
+            element: wind
+          baelfyr:
+            id: 257
+          byrgen:
+            id: 258
+          dark_elemental:
+            id:      259
+            element: dark
+          earth_elemental:
+            id:      260
+            element: earth
+          fire_elemental:
+            id:      261
+            element: fire
+          gefyrst:
+            id: 262
+          ice_elemental:
+            id:      263
+            element: ice
+          light_elemental:
+            id:      264
+            element: light
+          thunder_elemental:
+            id:      265
+            element: thunder
+          ungeweder:
+            id: 266
+          water_elemental:
+            id:      267
+            element: water
+      heartwing:
+        id: 104
+        species:
+          heartwing:
+            id: 268
+            stats:
+              str: d
+              dex: d
+              vit: d
+              agi: d
+              int: d
+              mnd: d
+              chr: d
+            detects:
+              - magic
+              - scent
+      macuil:
+        id: 105
+        stats:
+          str: d
+          dex: d
+          vit: d
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - sight
+          - hearing
+        species:
+          fragmented_macuil:
+            id: 269
+          macuil:
+            id: 270
+      monoceros:
+        id: 106
+        stats:
+          str: d
+          dex: d
+          vit: d
+          agi: a
+          int: b
+          mnd: d
+          chr: d
+        detects:
+          - sight
+          - magic
+        species:
+          alicorn:
+            id: 271
+          monoceros:
+            id: 272
+      pixie:
+        id:      107
+        element: wind
+        stats:
+          str: d
+          dex: d
+          vit: d
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - sight
+        species:
+          danaid:
+            id: 273
+          pixie:
+            id: 274
+          undeen:
+            id: 275
+          veela:
+            id: 276
+      porxie:
+        id: 108
+        species:
+          porxie:
+            id:      277
+            element: wind
+            stats:
+              str: d
+              dex: d
+              vit: d
+              agi: d
+              int: d
+              mnd: d
+              chr: d
+            detects:
+              - sight
+      umbril:
+        id: 109
+        stats:
+          str: d
+          dex: d
+          vit: d
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - sight
+          - magic
+        species:
+          lava_umbril:
+            id: 278
+          umbril:
+            id: 279
+
+  empty:
+    id: 11
+    families:
+      craver:
+        id: 110
+        stats:
+          str: e
+          vit: a
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+        speed: 50
+        species:
+          apex_craver:
+            id: 280
+          craver:
+            id: 281
+      gorger:
+        id: 111
+        stats:
+          str: d
+          vit: b
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+        speed: 50
+        species:
+          apex_gorger:
+            id: 282
+          gorger:
+            id: 283
+      receptacle:
+        id: 112
+        species:
+          receptacle:
+            id: 284
+            stats:
+              str: d
+              dex: d
+              vit: d
+              agi: d
+              int: d
+              mnd: d
+              chr: d
+            detects:
+              - scent
+            speed: 0
+      seether:
+        id: 113
+        stats:
+          str: b
+          vit: b
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+        speed: 50
+        species:
+          apex_seether:
+            id: 285
+          seether:
+            id: 286
+      thinker:
+        id: 114
+        stats:
+          str: d
+          vit: b
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+        speed: 50
+        species:
+          apex_thinker:
+            id: 287
+          thinker:
+            id: 288
+      wanderer:
+        id: 115
+        stats:
+          str: d
+          vit: e
+          agi: e
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+        speed: 50
+        species:
+          apex_wanderer:
+            id: 289
+          wanderer:
+            id: 290
+      weeper:
+        id: 116
+        stats:
+          str: d
+          vit: e
+          agi: e
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+        speed: 50
+        species:
+          apex_weeper:
+            id: 291
+          weeper:
+            id: 292
+
+  humanoid:
+    id: 12
+    families:
+      elvaan:
+        id: 117
+        species:
+          elvaan:
+            id: 293
+            stats:
+              str: f
+              dex: d
+              vit: e
+              int: a
+              mnd: e
+              chr: d
+            detects:
+              - sight
+      galka:
+        id: 118
+        species:
+          galks:
+            id: 294
+            stats:
+              str: b
+              dex: e
+              agi: f
+              int: f
+              mnd: b
+              chr: d
+            detects:
+              - sight
+      hume:
+        id: 119
+        species:
+          humes:
+            id: 295
+            stats:
+              str: d
+              dex: d
+              vit: d
+              agi: d
+              int: d
+              mnd: d
+              chr: d
+            detects:
+              - sight
+      mithra:
+        id: 120
+        species:
+          mithra:
+            id: 296
+            stats:
+              dex: d
+              vit: a
+              agi: e
+              int: e
+              mnd: d
+              chr: f
+            detects:
+              - sight
+      tarutaru:
+        id: 121
+        species:
+          tarutaru:
+            id: 297
+            stats:
+              str: e
+              dex: a
+              vit: e
+              agi: b
+              int: d
+              mnd: e
+              chr: f
+            detects:
+              - sight
+
+  lizard:
+    id: 13
+    families:
+      adamantoise:
+        id:      122
+        element: earth
+        stats:
+          str: b
+          dex: d
+          vit: a
+          agi: d
+          int: a
+          mnd: a
+          chr: a
+          def: b
+        speed: 30
+        species:
+          adamantoise:
+            id: 298
+            detects:
+              - hearing
+          ferromantoise:
+            id: 299
+            detects:
+              - hearing
+          legendary_adamantoise:
+            id: 300
+            detects:
+              - sight
+              - hearing
+      bugard:
+        id:      123
+        element: fire
+        stats:
+          str: d
+          dex: d
+          vit: d
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+        species:
+          abyssobugard:
+            id: 301
+          bugard:
+            id: 302
+      eft:
+        id:      124
+        element: fire
+        stats:
+          str: d
+          dex: d
+          vit: d
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+        charmable: true
+        species:
+          eft:
+            id: 303
+          tarichuk:
+            id: 304
+      gabbrath:
+        id: 125
+        species:
+          gabbrath:
+            id:      305
+            element: fire
+            stats:
+              str: d
+              vit: e
+              agi: d
+              int: d
+              mnd: d
+              chr: d
+            detects:
+              - scent
+            speed: 30
+      lizard:
+        id: 126
+        stats:
+          str: d
+          vit: e
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+        charmable: true
+        species:
+          ash_lizard:
+            id:      306
+            element: fire
+          hill_lizard:
+            id:      307
+            element: fire
+          snow_lizard:
+            id:      308
+            element: ice
+      matamata:
+        id:      127
+        element: fire
+        stats:
+          str: d
+          vit: e
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - sight
+          - hearing
+        speed: 30
+        species:
+          matamata:
+            id: 309
+          white_matamata:
+            id: 310
+      peiste:
+        id:      128
+        element: water
+        stats:
+          str: d
+          vit: e
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - sight
+        species:
+          far_east_peiste:
+            id: 311
+          peiste:
+            id: 312
+          sibilus:
+            id: 313
+      raptor:
+        id:      129
+        element: fire
+        detects:
+          - hearing
+          - scent
+        speed:     50
+        charmable: true
+        species:
+          lindwurm:
+            id: 314
+            stats:
+              str: d
+              dex: d
+              vit: e
+              int: d
+              mnd: d
+              chr: d
+              eva: a
+          raptor:
+            id: 315
+            stats:
+              str: d
+              dex: d
+              vit: e
+              int: d
+              mnd: d
+              chr: d
+          ruby_raptors:
+            id: 316
+            stats:
+              str: d
+              dex: d
+              vit: e
+              int: d
+              mnd: d
+              chr: d
+              eva: a
+      wivre:
+        id:      130
+        element: earth
+        stats:
+          str: a
+          dex: e
+          vit: a
+          agi: f
+          int: e
+          mnd: e
+          chr: d
+        detects:
+          - sight
+          - hearing
+          - scent
+        species:
+          mamool_ja_riden:
+            id: 317
+          unusual_wivre:
+            id: 318
+          wivre:
+            id: 319
+
+  luminian:
+    id: 14
+    families:
+      aern:
+        id: 131
+        species:
+          aern:
+            id: 320
+            stats:
+              str: b
+              dex: b
+              int: a
+              mnd: a
+              chr: a
+            detects:
+              - sight
+              - hearing
+      euvhi:
+        id: 132
+        species:
+          euvhi:
+            id: 321
+            stats:
+              str: d
+              vit: d
+              agi: d
+              int: d
+              mnd: d
+              chr: a
+            detects:
+              - hearing
+      hpemde:
+        id: 133
+        species:
+          hpemde:
+            id: 322
+            stats:
+              str: g
+              vit: d
+              agi: d
+              int: d
+              mnd: d
+              chr: e
+            detects:
+              - hearing
+      phuabo:
+        id: 134
+        species:
+          phuabo:
+            id: 323
+            stats:
+              str: a
+              vit: d
+              agi: a
+              int: a
+            detects:
+              - hearing
+            speed: 70
+      wynav:
+        id: 135
+        species:
+          wynav:
+            id: 324
+            stats:
+              str: d
+              agi: d
+              int: b
+              mnd: e
+              chr: e
+            detects:
+              - sight
+      xzomit:
+        id: 136
+        stats:
+          str: d
+          vit: e
+          agi: f
+          mnd: e
+          chr: d
+        detects:
+          - sight
+        speed: 50
+        species:
+          xzomit:
+            id: 325
+          xzomit_child:
+            id: 326
+      yovra:
+        id: 137
+        species:
+          yovra:
+            id: 327
+            stats:
+              str: b
+              vit: d
+              agi: f
+              int: f
+              mnd: f
+              chr: f
+            detects:
+              - hearing
+
+  luminion:
+    id: 15
+    families:
+      ghrah:
+        id: 138
+        stats:
+          str: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+        species:
+          bird_ghrah:
+            id: 328
+          spider_ghrah:
+            id: 329
+      zdei:
+        id: 139
+        stats:
+          str: f
+          vit: d
+          agi: d
+          int: d
+          mnd: d
+        detects:
+          - sight
+        species:
+          green_zdei:
+            id: 330
+          zdei:
+            id: 331
+
+  plantoid:
+    id: 16
+    families:
+      belladonna:
+        id:      140
+        element: earth
+        stats:
+          str: d
+          dex: d
+          vit: d
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+        species:
+          belladonna:
+            id: 332
+          white_belladonna:
+            id: 333
+      cactaur:
+        id:      141
+        element: water
+        stats:
+          str: b
+          dex: e
+          vit: e
+          int: e
+          mnd: e
+        detects:
+          - hearing
+        charmable: true
+        species:
+          sabotender:
+            id: 334
+          sabotender_florido:
+            id: 335
+      flytrap:
+        id: 142
+        species:
+          flytrap:
+            id:      336
+            element: wind
+            stats:
+              str: d
+              dex: d
+              vit: d
+              agi: d
+              int: d
+              mnd: d
+              chr: d
+            detects:
+              - hearing
+            charmable: true
+      funguar:
+        id:      143
+        element: dark
+        stats:
+          dex: d
+          vit: d
+          agi: d
+          int: e
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+        charmable: true
+        species:
+          coppercap:
+            id: 337
+          funguar:
+            id: 338
+          mycelar:
+            id: 339
+      goobbue:
+        id: 144
+        species:
+          goobbue:
+            id:      340
+            element: water
+            stats:
+              dex: d
+              vit: b
+              agi: d
+              int: d
+              mnd: d
+              chr: d
+            detects:
+              - hearing
+      leafkin:
+        id:      145
+        element: earth
+        stats:
+          str: d
+          dex: d
+          vit: d
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - sight
+        species:
+          cirrus:
+            id: 341
+          leafkin:
+            id: 342
+          rosalia:
+            id: 343
+          tulittia:
+            id: 344
+      mandragora:
+        id:      146
+        element: earth
+        stats:
+          str: e
+          vit: d
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+          eva: b
+        detects:
+          - hearing
+        charmable: true
+        species:
+          adenium:
+            id: 345
+          ake_ome:
+            id: 346
+          citrullus:
+            id: 347
+          korrigan:
+            id: 348
+          lycopodium:
+            id: 349
+          mandragora:
+            id: 350
+          pachypodium:
+            id: 351
+      morbol:
+        id:      147
+        element: earth
+        stats:
+          str: d
+          dex: b
+          vit: d
+          agi: d
+          int: d
+          mnd: e
+          chr: d
+        detects:
+          - hearing
+        species:
+          ameretat:
+            id: 352
+          morbol:
+            id: 353
+          morbol_menace:
+            id: 354
+          purbol:
+            id: 355
+          scarce_morbol:
+            id: 356
+      panopt:
+        id: 148
+        species:
+          panopt:
+            id:      357
+            element: wind
+            stats:
+              str: d
+              dex: d
+              agi: d
+              int: d
+              mnd: d
+              chr: e
+            detects:
+              - sight
+              - hearing
+      rafflesia:
+        id:      149
+        element: earth
+        stats:
+          str: d
+          dex: d
+          agi: d
+          int: d
+          mnd: d
+          chr: e
+        detects:
+          - hearing
+        species:
+          mitrastema:
+            id: 358
+          rafflesia:
+            id: 359
+      sapling:
+        id: 150
+        species:
+          sapling:
+            id:      360
+            element: earth
+            stats:
+              str: d
+              dex: d
+              agi: d
+              int: d
+              mnd: d
+              chr: e
+            detects:
+              - hearing
+            charmable: true
+      snapweed:
+        id:      151
+        element: earth
+        stats:
+          str: d
+          dex: d
+          vit: d
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+          - scent
+        species:
+          jewelweed:
+            id: 361
+          snapweed:
+            id: 362
+      treant:
+        id:      152
+        element: earth
+        stats:
+          str: d
+          dex: d
+          agi: d
+          int: d
+          mnd: d
+          chr: e
+        detects:
+          - hearing
+        species:
+          fall_treant:
+            id: 363
+          spring_treant:
+            id: 364
+          summer_treant:
+            id: 365
+          treant:
+            id: 366
+          winter_treant:
+            id: 367
+      yggdreant:
+        id:      153
+        element: earth
+        stats:
+          str: d
+          dex: d
+          agi: d
+          int: d
+          mnd: d
+          chr: e
+        detects:
+          - hearing
+        species:
+          white_yggdreant:
+            id: 368
+          yggdreant:
+            id: 369
+
+  supreme_beings:
+    id: 17
+    families:
+      altana:
+        id: 156
+        species:
+          altana:
+            id: 380
+            stats:
+              str: b
+              dex: b
+              vit: b
+              agi: b
+              int: b
+              mnd: b
+              chr: b
+            detects:
+              - sight
+            speed: 50
+      aminon:
+        id: 157
+        species:
+          aminon:
+            id: 381
+            stats:
+              str: b
+              dex: b
+              vit: b
+              agi: b
+              int: b
+              mnd: b
+              chr: b
+            detects:
+              - sight
+            speed: 50
+      automaton:
+        id: 158
+        species:
+          automaton:
+            id: 382
+            stats:
+              str: d
+              dex: d
+              vit: d
+              agi: d
+              int: d
+              mnd: d
+              chr: d
+            detects:
+              - sight
+      cloud_of_darkness:
+        id: 159
+        species:
+          cloud_of_darkness:
+            id:      383
+            element: dark
+            stats:
+              str: b
+              dex: b
+              vit: b
+              agi: b
+              int: b
+              mnd: b
+              chr: b
+            detects:
+              - sight
+              - hearing
+            speed: 50
+      hades:
+        id: 160
+        species:
+          hades:
+            id: 384
+            stats:
+              str: b
+              dex: b
+              vit: b
+              agi: b
+              int: b
+              mnd: b
+              chr: b
+            detects:
+              - sight
+              - hearing
+            speed: 50
+      metus:
+        id: 161
+        species:
+          metus:
+            id: 385
+            stats:
+              str: b
+              dex: b
+              vit: b
+              agi: b
+              int: b
+              mnd: b
+              chr: b
+            detects:
+              - sight
+              - hearing
+            speed: 50
+      plouton:
+        id: 162
+        species:
+          plouton:
+            id: 386
+            stats:
+              str: b
+              dex: b
+              vit: b
+              agi: b
+              int: b
+              mnd: b
+              chr: b
+            detects:
+              - sight
+              - hearing
+            speed: 50
+      promathia:
+        id: 163
+        species:
+          promathia:
+            id: 387
+            stats:
+              str: b
+              dex: b
+              vit: b
+              agi: b
+              int: b
+              mnd: b
+              chr: b
+            detects:
+              - sight
+              - hearing
+            speed: 50
+      provenance_watcher:
+        id: 164
+        species:
+          provenance_watcher:
+            id: 388
+            stats:
+              str: b
+              dex: b
+              vit: b
+              agi: b
+              int: b
+              mnd: b
+              chr: b
+            detects:
+              - sight
+              - hearing
+            speed: 50
+      sempurne:
+        id: 165
+        species:
+          sempurne:
+            id: 389
+            stats:
+              str: b
+              dex: b
+              vit: b
+              agi: b
+              int: b
+              mnd: b
+              chr: b
+            detects:
+              - sight
+            speed: 50
+      shinryu:
+        id: 166
+        species:
+          shinryu:
+            id: 390
+            stats:
+              str: b
+              dex: b
+              vit: b
+              agi: b
+              int: b
+              mnd: b
+              chr: b
+            detects:
+              - sight
+            speed: 50
+
+  undead:
+    id: 18
+    families:
+      corpselight:
+        id:      167
+        element: dark
+        stats:
+          str: d
+          dex: d
+          vit: d
+          agi: b
+          int: d
+          mnd: a
+          chr: g
+          def: d
+          eva: e
+        detects:
+          - hearing
+          - lowhp
+        species:
+          corpselight:
+            id: 391
+          crowned_corpselight:
+            id: 392
+          psychopomp:
+            id: 393
+      corse:
+        id:      168
+        element: dark
+        stats:
+          str: d
+          dex: d
+          vit: d
+          int: d
+          mnd: d
+          chr: f
+        detects:
+          - hearing
+          - lowhp
+        species:
+          corse:
+            id: 394
+          golden_hat_corse:
+            id: 395
+          kumakatok:
+            id: 396
+      defiant:
+        id: 169
+        species:
+          defiant:
+            id:      397
+            element: dark
+            stats:
+              str: d
+              dex: d
+              vit: d
+              agi: d
+              int: d
+              mnd: d
+              chr: d
+            detects:
+              - hearing
+              - lowhp
+      doomed:
+        id: 170
+        species:
+          doomed:
+            id:      398
+            element: dark
+            stats:
+              str: d
+              dex: d
+              agi: d
+              int: d
+              mnd: e
+            detects:
+              - hearing
+              - lowhp
+      dullahan:
+        id:      171
+        element: dark
+        stats:
+          str: d
+          dex: d
+          vit: d
+          agi: b
+          int: d
+          chr: f
+        detects:
+          - hearing
+          - lowhp
+        species:
+          dullahan:
+            id: 399
+          infernal_knight:
+            id: 400
+      fomor:
+        id:      172
+        element: dark
+        detects:
+          - hearing
+          - lowhp
+          - ability
+        species:
+          ephramadian:
+            id: 401
+            stats:
+              str: d
+              dex: d
+              vit: d
+              agi: d
+              int: d
+              mnd: d
+          fallen:
+            id: 402
+            stats:
+              str: d
+              dex: d
+              vit: d
+              agi: d
+              int: d
+              mnd: d
+          fomor:
+            id: 403
+            stats:
+              str: d
+              dex: d
+              vit: d
+              agi: d
+              int: d
+              mnd: d
+          hydra_fomor:
+            id: 404
+            stats:
+              str: d
+              dex: d
+              vit: d
+              agi: e
+              int: d
+              mnd: d
+          spectre:
+            id: 405
+            stats:
+              str: d
+              dex: d
+              vit: d
+              agi: d
+              int: d
+              mnd: d
+          valkyr:
+            id: 406
+            stats:
+              str: d
+              dex: d
+              vit: d
+              agi: d
+              int: d
+              mnd: d
+      ghost:
+        id:      173
+        element: ice
+        stats:
+          str: d
+          dex: d
+          vit: d
+          agi: d
+          mnd: e
+        detects:
+          - hearing
+          - lowhp
+        species:
+          bhoot:
+            id: 407
+          ghost:
+            id: 408
+      hound:
+        id: 174
+        species:
+          hound:
+            id:      409
+            element: dark
+            stats:
+              str: d
+              dex: d
+              vit: d
+              agi: d
+              int: d
+              mnd: e
+              def: d
+              eva: d
+            detects:
+              - hearing
+              - lowhp
+      naraka:
+        id:      175
+        element: ice
+        detects:
+          - hearing
+          - lowhp
+        species:
+          green_naraka:
+            id: 410
+          naraka:
+            id: 411
+          white_naraka:
+            id: 412
+      qutrub:
+        id:      176
+        element: dark
+        stats:
+          agi: e
+          int: d
+          mnd: e
+          chr: f
+        detects:
+          - sight
+          - hearing
+          - lowhp
+        species:
+          adorned_qutrub:
+            id: 413
+          qutrub:
+            id: 414
+      shadow:
+        id: 177
+        species:
+          shadow:
+            id:      415
+            element: dark
+            stats:
+              str: d
+              dex: d
+              int: d
+              mnd: d
+            detects:
+              - hearing
+              - lowhp
+      skeleton:
+        id:      178
+        element: earth
+        detects:
+          - hearing
+          - lowhp
+        species:
+          draugar:
+            id: 416
+            stats:
+              vit: d
+              agi: d
+              int: d
+              mnd: e
+              chr: d
+              eva: a
+          gasha:
+            id: 417
+            stats:
+              str: d
+              vit: d
+              agi: d
+              int: d
+              mnd: e
+              chr: d
+          robed_skeletons:
+            id: 418
+            stats:
+              str: d
+              vit: d
+              agi: d
+              int: d
+              mnd: e
+              chr: d
+          skeleton:
+            id: 419
+            stats:
+              str: d
+              vit: d
+              agi: d
+              int: d
+              mnd: e
+              chr: d
+      vampyr:
+        id:      179
+        element: dark
+        stats:
+          str: d
+          vit: b
+          agi: d
+          int: b
+          mnd: e
+          chr: g
+          def: a
+        detects:
+          - sight
+          - hearing
+          - lowhp
+        species:
+          strigoi:
+            id: 420
+          vampyr:
+            id: 421
+
+  vermin:
+    id: 19
+    families:
+      antlion:
+        id:      180
+        element: dark
+        stats:
+          str: d
+          dex: d
+          vit: d
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+        charmable: true
+        species:
+          antlion:
+            id: 422
+          formiceros:
+            id: 423
+          pitlion:
+            id: 424
+      bee:
+        id:      181
+        element: wind
+        stats:
+          str: e
+          dex: d
+          vit: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - sight
+          - scent
+        charmable: true
+        species:
+          blue_bee:
+            id: 425
+          pephredo:
+            id: 426
+          red_bee:
+            id: 427
+          yellow_bee:
+            id: 428
+      beetle:
+        id:      182
+        element: earth
+        stats:
+          vit: b
+          agi: e
+          int: e
+          mnd: e
+          chr: e
+        detects:
+          - sight
+          - scent
+        charmable: true
+        species:
+          beetle:
+            id: 429
+          black_beetles:
+            id: 430
+          elytra:
+            id: 431
+      bztavian:
+        id: 183
+        species:
+          bztavian:
+            id:      432
+            element: wind
+            stats:
+              str: d
+              vit: d
+              agi: b
+              int: d
+              mnd: d
+              chr: e
+            detects:
+              - hearing
+      chapuli:
+        id:      184
+        element: earth
+        stats:
+          str: d
+          vit: d
+          agi: b
+          int: d
+          mnd: d
+          chr: e
+        detects:
+          - sight
+        charmable: true
+        species:
+          caeferli:
+            id: 433
+          chapuli:
+            id: 434
+      chigoe:
+        id:      185
+        element: earth
+        stats:
+          str: g
+          dex: a
+          vit: g
+          agi: a
+          int: a
+          mnd: g
+          chr: g
+        detects:
+          - sight
+          - hearing
+        species:
+          chigoe:
+            id: 435
+          djigga:
+            id: 436
+      crawler:
+        id: 186
+        stats:
+          str: d
+          dex: d
+          agi: e
+          int: d
+          mnd: d
+          chr: d
+          def: e
+        charmable: true
+        species:
+          crawler:
+            id:      437
+            element: earth
+            detects:
+              - hearing
+          defoliator:
+            id:      438
+            element: earth
+            detects:
+              - hearing
+          eruca:
+            id:      439
+            element: fire
+            detects:
+              - hearing
+              - scent
+          lugcrawler:
+            id:      440
+            element: earth
+            detects:
+              - hearing
+      diremite:
+        id:      187
+        element: wind
+        stats:
+          str: d
+          dex: d
+          vit: d
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+        charmable: true
+        species:
+          arundimite:
+            id: 441
+          diremite:
+            id: 442
+      fly:
+        id:      188
+        element: wind
+        stats:
+          str: e
+          dex: d
+          vit: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+        charmable: true
+        species:
+          apex_flys:
+            id: 443
+          fly:
+            id: 444
+          vermilion_fly:
+            id: 445
+      gnat:
+        id:      189
+        element: dark
+        stats:
+          str: d
+          vit: d
+          agi: b
+          int: d
+          mnd: d
+          chr: e
+        detects:
+          - sight
+        species:
+          croc:
+            id: 446
+          gnat:
+            id: 447
+          midge:
+            id: 448
+      ladybug:
+        id:      190
+        element: wind
+        stats:
+          vit: g
+          int: e
+          mnd: e
+          chr: e
+        detects:
+          - sight
+          - scent
+        charmable: true
+        species:
+          ladybug:
+            id: 449
+          luckybug:
+            id: 450
+      lucani:
+        id: 191
+        species:
+          lucani:
+            id:      451
+            element: earth
+            stats:
+              dex: e
+              vit: d
+              agi: d
+              int: d
+              mnd: d
+              chr: d
+            detects:
+              - sight
+      mantid:
+        id:      192
+        element: earth
+        stats:
+          dex: e
+          vit: d
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - sight
+        species:
+          golden_mantid:
+            id: 452
+          green_mantid:
+            id: 453
+          red_mantid:
+            id: 454
+          white_mantid:
+            id: 455
+      mosquito:
+        id: 193
+        species:
+          mosquito:
+            id:      456
+            element: wind
+            stats:
+              dex: e
+              vit: d
+              agi: d
+              int: d
+              mnd: d
+              chr: d
+            detects:
+              - sight
+      scorpion:
+        id:      194
+        element: earth
+        stats:
+          dex: e
+          vit: d
+          agi: d
+          int: d
+          mnd: d
+          chr: d
+        detects:
+          - hearing
+          - scent
+        charmable: true
+        species:
+          clawed_scolopendrid:
+            id: 457
+          great_scorpion:
+            id: 458
+          scolopendrid:
+            id: 459
+          scorpion:
+            id: 460
+      spider:
+        id:      195
+        element: earth
+        stats:
+          str: e
+          dex: b
+          vit: e
+          agi: d
+          chr: f
+        detects:
+          - hearing
+        charmable: true
+        species:
+          anansi:
+            id: 461
+          arachne:
+            id: 462
+          attercop:
+            id: 463
+          spider:
+            id: 464
+      twitherym:
+        id:      196
+        element: wind
+        stats:
+          str: f
+          dex: d
+          vit: e
+          agi: b
+          int: d
+          mnd: d
+          chr: d
+          eva: d
+        detects:
+          - sight
+        charmable: true
+        species:
+          brown_fluturini:
+            id: 465
+          brown_twitherym:
+            id: 466
+          fluturini:
+            id: 467
+          twitherym:
+            id: 468
+      wamoura:
+        id:      197
+        element: fire
+        stats:
+          str: e
+          dex: e
+          vit: a
+          agi: e
+          int: e
+          mnd: e
+          chr: e
+        detects:
+          - hearing
+          - magic
+        species:
+          coral_wamoura:
+            id: 469
+          wamoura:
+            id: 470
+      wamouracampa:
+        id: 198
+        species:
+          wamouracampa:
+            id:      471
+            element: fire
+            stats:
+              str: e
+              dex: e
+              vit: a
+              agi: e
+              int: e
+              mnd: e
+              chr: e
+            detects:
+              - hearing
+
+  voragean:
+    id: 20
+    families:
+      amoeban:
+        id: 199
+        species:
+          amoeban:
+            id: 472
+            detects:
+              - magic
+      clionidae:
+        id: 200
+        species:
+          clionid:
+            id: 473
+            detects:
+              - lowhp
+      limule:
+        id: 201
+        species:
+          limule:
+            id: 474
+            detects:
+              - hearing
+      murex:
+        id: 202
+        species:
+          murex:
+            id: 475
+            detects:
+              - magic
+              - ability
+
+  structures:
+    id: 21
+    families:
+      structures:
+        id: 154
+        detects:
+          - hearing
+        species:
+          belfrys:
+            id: 370
+            stats:
+              vit: a
+          boxxes:
+            id: 371
+            stats:
+              vit: a
+          exoplates:
+            id: 372
+            stats:
+              vit: a
+          fortalices:
+            id: 373
+            stats:
+              vit: a
+          fortifications:
+            id: 374
+            stats:
+              vit: a
+          gyre:
+            id: 375
+          mirrors:
+            id: 376
+            stats:
+              vit: a
+          rocks:
+            id: 377
+            stats:
+              vit: a
+          sculptures:
+            id: 378
+            stats:
+              vit: a
+      tubes:
+        id: 155
+        species:
+          tubes:
+            id: 379
+            stats:
+              vit: a
+            detects:
+              - hearing
+
+  weapons:
+    id: 22
+    families:
+      animated_weapons:
+        id: 203
+        species:
+          animated_weapons:
+            id: 476
+            stats:
+              str: a
+              dex: a
+              vit: a
+              agi: a
+              int: a
+              mnd: a
+              chr: a
+              def: a
+            detects:
+              - hearing
+      omega:
+        id: 204
+        species:
+          omega:
+            id: 477
+            detects:
+              - sight
+              - hearing
+      statue:
+        id: 205
+        stats:
+          int: b
+          mnd: b
+        detects:
+          - sight
+        speed: 20
+        species:
+          goblin_statue:
+            id: 478
+          orc_statue:
+            id: 479
+          quadav_statue:
+            id: 480
+          yagudo_statue:
+            id: 481
+      ultima:
+        id: 206
+        species:
+          ultima:
+            id: 482
+            detects:
+              - sight
+              - hearing
+            speed: 20

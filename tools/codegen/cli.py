@@ -16,16 +16,15 @@ def inputs_newer_than(stamp: Path) -> bool:
     inputs = [
         *Path(__file__).parent.glob("*.py"),
         *TEMPLATES_DIR.glob("*.j2"),
-        *ENUMS_DIR.glob("*.yaml"),
         *schemas_dir.glob("*.schema.json"),
         *(schemas_dir / "enums").glob("*.codegen.json"),
-        *(ROOT / "data").glob("*.yaml"),
+        *(ROOT / "data").rglob("*.yaml"),
     ]
-    return any(p.stat().st_mtime > stamp_mtime for p in inputs)
+    return any(input_path.stat().st_mtime > stamp_mtime for input_path in inputs)
 
 
 def main():
-    """No-op if stamp is newer than input files and `--validate` wasn't passed."""
+    """Rendering is skipped while the stamp is newer than every input; `--validate` always runs."""
     parser = argparse.ArgumentParser()
     parser.add_argument("build_dir")
     parser.add_argument(
@@ -36,50 +35,68 @@ def main():
     args = parser.parse_args()
 
     build_root = Path(args.build_dir)
+    schemas_dir = ROOT / "data" / "schemas"
+    keyset_dir = schemas_dir / "enums"
     stamp = build_root / "generated" / ".codegen.stamp"
-    if not inputs_newer_than(stamp) and not args.validate:
+    if not inputs_newer_than(stamp):
+        if args.validate:
+            validate_data_yamls(schemas_dir, keyset_dir, build_root)
         return
 
     out_dir = build_root / "generated" / "data" / "enums"
     data_out_dir = build_root / "generated" / "data"
     lua_out_dir = ROOT / "scripts" / "enum"
-    keyset_dir = ROOT / "data" / "schemas" / "enums"
-    for d in (out_dir, data_out_dir, lua_out_dir, keyset_dir):
-        d.mkdir(parents=True, exist_ok=True)
+    for directory in (out_dir, data_out_dir, lua_out_dir, keyset_dir):
+        directory.mkdir(parents=True, exist_ok=True)
 
     # Enums: pure (data/enums/*.yaml) + table-derived (meta.enum: inside a data file).
     enums: list[dict] = []
-    for p in sorted(ENUMS_DIR.glob("*.yaml")):
-        enums.append(emit_pure_enum(p))
-    for p in sorted((ROOT / "data").rglob("*.yaml")):
-        if p.is_relative_to(ENUMS_DIR):
+    for enum_path in sorted(ENUMS_DIR.glob("*.yaml")):
+        enums.append(emit_pure_enum(enum_path))
+    for data_path in sorted((ROOT / "data").rglob("*.yaml")):
+        if data_path.is_relative_to(ENUMS_DIR):
             continue
-        print(f"scanning {p.relative_to(ROOT).as_posix()} for embedded enums ...", flush=True)
-        enums.extend(emit_table_enums(p))
 
-    for e in enums:
-        write_if_changed(out_dir / (e["name"] + ".h"), e["header"])
-        if e["lua"]:
-            write_if_changed(lua_out_dir / (e["lua"]["name"] + ".codegen.lua"), e["lua"]["content"])
+        print(f"scanning {data_path.relative_to(ROOT).as_posix()} for embedded enums ...", flush=True)
+        enums.extend(emit_table_enums(data_path))
+
+    for enum in enums:
+        write_if_changed(out_dir / (enum["name"] + ".h"), enum["header"])
+        if enum["lua"]:
+            write_if_changed(lua_out_dir / (enum["lua"]["name"] + ".codegen.lua"), enum["lua"]["content"])
         # Keyset schema lets other schemas $ref the list of valid values for IDE completion + CI checks.
         keyset = {
             "$schema": "https://json-schema.org/draft/2020-12/schema",
-            "$id": f"enums/{e['name']}.codegen.json",
-            "description": f"GENERATED from {e['source_name']}. Do not edit.",
+            "$id": f"enums/{enum['name']}.codegen.json",
+            "description": f"GENERATED from {enum['source_name']}. Do not edit.",
             "type": "string",
-            "enum": list(e["values"].keys()),
+            "enum": list(enum["values"].keys()),
         }
-        write_if_changed(keyset_dir / (e["name"] + ".codegen.json"), json.dumps(keyset, indent=2) + "\n")
+        write_if_changed(keyset_dir / (enum["name"] + ".codegen.json"), json.dumps(keyset, indent=2) + "\n")
 
-    schemas_dir = ROOT / "data" / "schemas"
     walker = SchemaWalker()
     data_names: list[str] = []
+
+    schemas: dict[Path, dict] = {}
     for schema_path in sorted(schemas_dir.glob("*.schema.json")):
         # _meta describes the `meta:` block; its $defs are fragments, not records.
         if schema_path.name == "_meta.schema.json":
             continue
+        schemas[schema_path] = SchemaWalker.load_schema(schema_path)
+
+    enum_names = {enum["name"] for enum in enums}
+
+    # A `$defs` shape marked x-partial also gets an all-optional struct.
+    partials: set[tuple[str, str]] = set()
+    for schema_path, schema in schemas.items():
+        source = SchemaWalker.source_of(schema_path)
+        for defs_name, shape in (schema.get("$defs") or {}).items():
+            if shape.get("x-partial"):
+                partials.add((source, defs_name))
+
+    for schema_path, schema in sorted(schemas.items()):
         print(f"rendering {schema_path.relative_to(ROOT).as_posix()} ...", flush=True)
-        result = walker.emit(schema_path)
+        result = walker.emit(schema_path, schema, enum_names, partials)
         if result is None:
             continue
         write_if_changed(data_out_dir / (result["name"] + ".h"), result["pod"])
@@ -87,9 +104,9 @@ def main():
         data_names.append(result["name"])
 
     manifest_lines = ["// GENERATED by tools/codegen. Do not edit.", "#pragma once", ""]
-    for name in sorted(data_names):
-        manifest_lines.append(f'#include "data/{name}.h"')
-        manifest_lines.append(f'#include "data/{name}_populator.h"')
+    for data_name in sorted(data_names):
+        manifest_lines.append(f'#include "data/{data_name}.h"')
+        manifest_lines.append(f'#include "data/{data_name}_populator.h"')
     write_if_changed(data_out_dir / "all.h", "\n".join(manifest_lines) + "\n")
 
     stamp.parent.mkdir(parents=True, exist_ok=True)

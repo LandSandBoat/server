@@ -28,7 +28,6 @@
 
 #include "data/node.h"
 
-#include <charconv>
 #include <fmt/format.h>
 #include <fstream>
 #include <span>
@@ -43,69 +42,38 @@
 namespace xi::data
 {
 
-// Describe where the "primary key" of the object is located.
-enum class IdSource
+template <class M, class K, class V>
+void insertUnique(M& map, const K key, V&& value, const std::string_view source, const std::string_view section)
 {
-    YAMLField, // The `id:` field is used as PK
-    YAMLKey,   // The map key itself is the PK
-};
+    if (!map.try_emplace(key, std::forward<V>(value)).second)
+    {
+        throw std::runtime_error(fmt::format("{}: duplicate id {} in '{}'", source, static_cast<uint32>(key), section));
+    }
+}
 
-// Shared body for codegen'd populateMaps; per-type bits go in populateOne.
-// Data backend is provided at compilation time, we just want something that deals with a tree-like structure
-template <class T, class B, class PopulateOne>
-auto populateMapDriver(const Node<B> root, const std::string_view sectionName, const IdSource idSource, const std::string_view source, PopulateOne populateOne) -> HashMap<decltype(T::Id), T>
+// Patch 'out' with the given 'overrides' content
+// Used for schemas declaring 'x-partial' with clear inheritance semantics.
+//
+// 'forEachField' is provided by codegen for the templated types.
+template <class Data, class Overrides>
+void applyOverrides(Data& out, const Overrides& overrides)
 {
-    using KeyT = decltype(T::Id);
+    forEachField(out, overrides, [](auto& field, const auto& written)
+                 {
+                     if (!written)
+                     {
+                         return;
+                     }
 
-    HashMap<KeyT, T> result;
-
-    // Section is the top level key where the records are stored
-    if (!root.has(sectionName))
-    {
-        return result;
-    }
-
-    const auto section = root.child(sectionName);
-    if (!section.isMap())
-    {
-        return result;
-    }
-
-    // Iterate every record and hand off the final parsing to the codegen'd specialization.
-    for (const auto child : section.children())
-    {
-        // First figure out where the primary key is stored
-        KeyT id{};
-        if (idSource == IdSource::YAMLField)
-        {
-            // Nested id property is the primary key
-            //
-            // weakness:
-            //   id: 1 < HERE
-            id = child.template read<KeyT>("id");
-        }
-        else
-        {
-            // Map key IS the primary key
-            //
-            // 16555: < HERE
-            //   name: { en: ridill }
-            const std::string_view keyStr = child.key();
-            const auto             ec     = std::from_chars(keyStr.data(), keyStr.data() + keyStr.size(), id).ec;
-            if (ec != std::errc{})
-            {
-                throw std::runtime_error(fmt::format("{}: bad integer key '{}' in section '{}'", source, keyStr, sectionName));
-            }
-        }
-
-        T data = populateOne(child, id);                          // Ask the specialized function to parse the record
-        if (!result.try_emplace(data.Id, std::move(data)).second) // Any duplicate is a hard fail
-        {
-            throw std::runtime_error(fmt::format("{}: duplicate id {} in section '{}'", source, data.Id, sectionName));
-        }
-    }
-
-    return result;
+                     if constexpr (requires { field = *written; }) // Take assignable values as is, lists replaced whole
+                     {
+                         field = *written;
+                     }
+                     else
+                     {
+                         applyOverrides(field, *written); // Recurse into nested maps
+                     }
+                 });
 }
 
 // Must be specialized by codegen, else it's a compile-time failure
@@ -119,7 +87,7 @@ auto loadAllOf(const std::string_view corePath, const std::span<const std::strin
 {
     const auto slurp = [](std::string_view path) -> std::string
     {
-        std::ifstream in(std::string{ path }, std::ios::binary);
+        const std::ifstream in(std::string{ path }, std::ios::binary);
         if (!in.is_open())
         {
             throw std::runtime_error(fmt::format("cannot open {}", path));

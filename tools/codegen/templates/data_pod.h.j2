@@ -2,10 +2,21 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+{% if has_maps %}
+
+#include <common/types/hash_map.h>
+{% endif %}
+
 {% for inc in enum_includes %}
 #include "data/enums/{{ inc }}.h"
 {% endfor %}
+{% for inc in shared_includes %}
+#include "data/{{ inc }}.h"
+{% endfor %}
 
+{% if overrides %}
+#include <optional>
+{% endif %}
 #include <string>
 #include <vector>
 {% if main_pod.variant_arms %}
@@ -42,4 +53,23 @@ struct {{ main_pod.struct_name }}
 {% endif %}
 };
 
+{% for ov in overrides %}
+// Only what a level wrote. Unset means inherit.
+struct {{ ov.struct_name }}
+{
+{% for f in ov.fields %}
+    {{ "%-*s"|format(ov.cpp_type_width, f.cpp_type) }} {{ f.cpp_name }};
+{% endfor %}
+};
+
+// Pairs each field with its override. The caller decides how to apply them.
+template <class Fn>
+void forEachField({{ ov.data_struct_name }}& out, const {{ ov.struct_name }}& overrides, Fn&& fn)
+{
+{% for f in ov.fields %}
+    fn(out.{{ "%-*s"|format(ov.cpp_name_width + 1, f.cpp_name + ",") }} overrides.{{ f.cpp_name }});
+{% endfor %}
+}
+
+{% endfor %}
 } // namespace xi::data
