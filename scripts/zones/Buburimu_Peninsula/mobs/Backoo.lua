@@ -7,16 +7,14 @@
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.TERROR)
     mob:addImmunity(xi.immunity.PLAGUE)
+end
 
-    local hour = VanadielHour()
-    if hour >= 6 and hour < 16 then
-        DisallowRespawn(mob:getID(), false)
-    end
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
@@ -28,7 +26,9 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setRespawnTime(math.randomInt(3600, 5400)) -- 60-90 minute respawn, depending on if it's daytime
+    -- 60-90 minute respawn. The spawn window holds a repop that lands past
+    -- 16:00 until the next morning.
+    mob:setRespawnTime(math.randomInt(3600, 5400))
 end
 
 return entity
