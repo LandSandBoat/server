@@ -1700,27 +1700,27 @@ function CBaseEntity:delTitle(titleID)
 end
 
 ---@nodiscard
----@param areaObj table|integer
+---@param area xi.fameArea
 ---@return integer
-function CBaseEntity:getFame(areaObj)
+function CBaseEntity:getFame(area)
 end
 
----@param areaObj table|integer
+---@param area xi.fameArea
 ---@param fame integer
 ---@return nil
-function CBaseEntity:addFame(areaObj, fame)
+function CBaseEntity:addFame(area, fame)
 end
 
----@param areaObj table|integer
+---@param area xi.fameArea
 ---@param fame integer
 ---@return nil
-function CBaseEntity:setFame(areaObj, fame)
+function CBaseEntity:setFame(area, fame)
 end
 
 ---@nodiscard
----@param areaObj table|integer
+---@param area xi.fameArea
 ---@return integer
-function CBaseEntity:getFameLevel(areaObj)
+function CBaseEntity:getFameLevel(area)
 end
 
 ---@nodiscard
