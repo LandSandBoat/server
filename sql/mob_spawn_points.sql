@@ -40796,7 +40796,7 @@ INSERT INTO `mob_spawn_points` VALUES (17227968,0,'Midnight_Wings','Midnight Win
 INSERT INTO `mob_spawn_points` VALUES (17227969,0,'Midnight_Wings','Midnight Wings',21,22,23,5.551,-15.261,-175.506,127,20,6);
 INSERT INTO `mob_spawn_points` VALUES (17227970,0,'Midnight_Wings','Midnight Wings',21,22,23,42.119,-15.519,-174.449,127,19,5);
 INSERT INTO `mob_spawn_points` VALUES (17227971,0,'Midnight_Wings','Midnight Wings',21,22,23,-8.722,-15.518,-183.142,127,18,4);
-INSERT INTO `mob_spawn_points` VALUES (17227972,0,'Black_Triple_Stars','Black Triple Stars',31,26,27,5.000,-15.000,-142.000,127,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17227972,0,'Black_Triple_Stars','Black Triple Stars',31,26,27,5.000,-15.000,-142.000,127,18,6);
 INSERT INTO `mob_spawn_points` VALUES (17227973,0,'Goblin_Mugger','Goblin Mugger',22,26,27,-66.749,-8.112,-177.084,127,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17227974,13,'Goblin_Pathfinder','Goblin Pathfinder',23,31,32,-89.561,-7.541,-194.824,127,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17227975,0,'Goblins_Bee','Goblin\'s Bee',24,23,25,1.000,1.000,1.000,0,NULL,NULL);
@@ -40816,7 +40816,7 @@ INSERT INTO `mob_spawn_points` VALUES (17227988,0,'Midnight_Wings','Midnight Win
 INSERT INTO `mob_spawn_points` VALUES (17227989,0,'Midnight_Wings','Midnight Wings',21,22,23,81.784,-15.991,-310.662,108,19,5);
 INSERT INTO `mob_spawn_points` VALUES (17227990,0,'Midnight_Wings','Midnight Wings',21,22,23,47.666,-15.005,-212.265,45,18,4);
 INSERT INTO `mob_spawn_points` VALUES (17227991,0,'Midnight_Wings','Midnight Wings',21,22,23,83.638,-15.754,-296.826,30,20,6);
-INSERT INTO `mob_spawn_points` VALUES (17227992,0,'Black_Triple_Stars','Black Triple Stars',31,26,27,76.000,-15.000,-209.000,127,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17227992,0,'Black_Triple_Stars','Black Triple Stars',31,26,27,76.000,-15.000,-209.000,127,18,6);
 INSERT INTO `mob_spawn_points` VALUES (17227993,0,'Berry_Grub','Berry Grub',10,27,28,48.333,-24.076,-127.291,127,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17227994,0,'Berry_Grub','Berry Grub',10,27,28,119.000,-24.000,-284.000,58,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17227995,0,'Berry_Grub','Berry Grub',10,27,28,259.110,-31.674,-225.993,127,NULL,NULL);
@@ -44200,7 +44200,7 @@ INSERT INTO `mob_spawn_points` VALUES (17260609,6,'Zombie','Zombie',12,20,21,-42
 INSERT INTO `mob_spawn_points` VALUES (17260610,7,'Zombie','Zombie',12,20,21,-482.997,-16.383,-223.502,127,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17260611,8,'Ghoul','Ghoul',13,20,21,-361.735,-8.500,-202.387,127,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17260612,0,'Will-o-the-Wisp','Will-o\'-the-Wisp',14,25,27,-444.580,-8.890,-189.219,217,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17260613,0,'Backoo','Backoo',55,37,37,-409.210,-7.740,-219.861,227,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17260613,0,'Backoo','Backoo',55,37,37,-409.210,-7.740,-219.861,227,6,16);
 INSERT INTO `mob_spawn_points` VALUES (17260614,0,'Bogy','Bogy',15,23,24,-357.743,-0.392,-322.516,55,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17260615,0,'Bogy','Bogy',15,23,24,-359.172,-0.142,-325.244,127,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17260616,9,'Goblin_Ambusher','Goblin Ambusher',9,18,19,-194.742,-9.064,-84.503,21,NULL,NULL);
@@ -63134,7 +63134,7 @@ INSERT INTO `mob_spawn_points` VALUES (17461311,0,'Garm','Garm',8,64,66,-64.503,
 INSERT INTO `mob_spawn_points` VALUES (17461312,0,'Garm','Garm',8,64,66,-67.164,-0.003,-137.894,222,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17461313,0,'Garm','Garm',8,64,66,-59.881,0.033,-149.115,34,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17461314,1,'Garm','Garm',8,64,66,-64.340,0.010,-145.718,126,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17461315,0,'Shii','Shii',12,70,71,-58.681,-0.500,-134.123,31,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17461315,0,'Shii','Shii',12,70,71,-58.681,-0.500,-134.123,31,18,6);
 INSERT INTO `mob_spawn_points` VALUES (17461316,0,'Funnel_Bats','Funnel Bats',4,52,55,-94.299,0.016,-182.361,60,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17461317,0,'Dark_Aspic','Dark Aspic',9,52,54,-95.255,0.949,-178.594,243,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17461318,0,'Funnel_Bats','Funnel Bats',4,52,55,-61.474,0.559,-162.786,220,NULL,NULL);
@@ -63290,7 +63290,7 @@ INSERT INTO `mob_spawn_points` VALUES (17461467,0,'Bloodsucker','Bloodsucker',21
 INSERT INTO `mob_spawn_points` VALUES (17461468,0,'Bloodsucker','Bloodsucker',21,65,68,-58.546,17.000,-159.800,63,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17461469,0,'Gespenst','Gespenst',28,68,70,-54.623,16.999,-146.783,84,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17461470,2,'Gespenst','Gespenst',28,68,70,-40.852,16.996,-178.257,39,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17461471,0,'Manes','Manes',23,72,73,-60.400,17.000,-138.000,60,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17461471,0,'Manes','Manes',23,72,73,-60.400,17.000,-138.000,60,18,6);
 INSERT INTO `mob_spawn_points` VALUES (17461472,0,'Bloodsucker','Bloodsucker',21,65,68,-17.073,16.985,-142.532,22,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17461473,0,'Bloodsucker','Bloodsucker',21,65,68,-16.466,16.923,-156.272,61,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17461474,0,'Bloodsucker','Bloodsucker',21,65,68,-6.624,16.955,-139.502,204,NULL,NULL);

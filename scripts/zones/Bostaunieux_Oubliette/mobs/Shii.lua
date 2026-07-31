@@ -67,23 +67,31 @@ entity.phList =
     [ID.mob.SHII - 5]  = ID.mob.SHII, -- Confirmed on retail
 }
 
-entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1) -- "has an Additional Effect: Terror in melee attacks"
+entity.onMobSpawn = function(mob)
+    mob:setLocalVar('killed', 0)
     mob:setMod(xi.mod.REGEN, 20) -- "also has an Auto Regen of medium strength" (guessing 20)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1) -- "has an Additional Effect: Terror in melee attacks"
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TERROR)
 end
 
-entity.onMobRoam = function(mob)
-    if VanadielHour() >= 6 and VanadielHour() < 18 then -- Despawn if its day
-        DespawnMob(mob:getID())
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
+        mob:setLocalVar('killed', 1)
     end
+
+    xi.hunts.checkHunt(mob, player, 179)
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-    xi.hunts.checkHunt(mob, player, 179)
+entity.onMobDespawn = function(mob)
+    -- Only a kill starts the lottery cooldown. A natural despawn at the end of
+    -- the spawn window skips it, so placeholders can pop the NM again the same
+    -- or next night.
+    if mob:getLocalVar('killed') == 0 then
+        mob:setLocalVar('doNotInvokeCooldown', 1)
+    end
 end
 
 return entity

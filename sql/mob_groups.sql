@@ -8999,7 +8999,7 @@ INSERT INTO `mob_groups` VALUES (51,3148,118,'Pixie',0,128,2001,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (52,2213,118,'Ketos',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (53,4734,118,'Botulus_Rex',0,128,0,0,9999,0,NULL);
 INSERT INTO `mob_groups` VALUES (54,1642,118,'Goblin_Bounty_Hunter',300,0,1030,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (55,5344,118,'Backoo',0,128,3140,2700,0,0,'WOTG');
+INSERT INTO `mob_groups` VALUES (55,5344,118,'Backoo',0,0,3140,2700,0,0,'WOTG');
 INSERT INTO `mob_groups` VALUES (56,3608,118,'Shoal_Pugil',300,0,248,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (57,5733,118,'Snipper',300,0,482,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (58,4853,118,'Abyssdiver',0,128,0,0,0,0,NULL);

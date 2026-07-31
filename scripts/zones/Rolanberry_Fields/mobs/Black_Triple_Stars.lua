@@ -30,19 +30,28 @@ entity.phList =
     [ID.mob.BLACK_TRIPLE_STARS[2] - 4] = ID.mob.BLACK_TRIPLE_STARS[2], -- Confirmed on retail (south)
 }
 
-entity.onMobRoam = function(mob)
-    if VanadielHour() >= 6 and VanadielHour() < 18 then -- Despawn if its day
-        DespawnMob(mob:getID())
-    end
+entity.onMobSpawn = function(mob)
+    mob:setLocalVar('killed', 0)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
+        mob:setLocalVar('killed', 1)
+    end
+
     xi.magian.onMobDeath(mob, player, optParams, set{ 3 })
     xi.hunts.checkHunt(mob, player, 215)
 end
 
 entity.onMobDespawn = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
+
+    -- Only a kill starts the lottery cooldown. A natural despawn at the end of
+    -- the spawn window skips it, so placeholders can pop the NM again the same
+    -- or next night.
+    if mob:getLocalVar('killed') == 0 then
+        mob:setLocalVar('doNotInvokeCooldown', 1)
+    end
 end
 
 return entity
