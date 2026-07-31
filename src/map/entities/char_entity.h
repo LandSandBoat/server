@@ -77,6 +77,25 @@ struct jobs_t
     uint8  genkai;           // the maximum genkai level achieved
 };
 
+// Jeuno and Selbina/Rabao fame are derived
+struct Fame
+{
+    uint16 Sandoria;
+    uint16 Bastok;
+    uint16 Windurst;
+    uint16 Norg;
+    uint16 AbysseaKonschtat;
+    uint16 AbysseaTahrongi;
+    uint16 AbysseaLaTheine;
+    uint16 AbysseaMisareaux;
+    uint16 AbysseaVunkerl;
+    uint16 AbysseaAttohwa;
+    uint16 AbysseaAltepa;
+    uint16 AbysseaGrauberg;
+    uint16 AbysseaUleguerand;
+    uint16 Adoulin;
+};
+
 struct profile_t
 {
     uint8 nation; // Your Nation Allegiance.
@@ -94,8 +113,8 @@ struct profile_t
     uint16 mhflag;
 
     uint16     title;
-    uint16     fame[14]; // 0-2 nations, 3 Norg, 4-12 Abyssea, 13 Adoulin (Jeuno and Selbina/Rabao fame are derived)
-    uint8      rank[3];  // RANK in three kingdoms
+    Fame       fame{};
+    uint8      rank[3]; // RANK in three kingdoms
     uint16     rankpoints;
     location_t home_point;
     uint8      campaign_allegiance;

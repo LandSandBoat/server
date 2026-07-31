@@ -24,6 +24,7 @@
 
 #include "common/cbasetypes.h"
 #include "data/enums/entity_flags.h"
+#include "data/enums/fame_area.h"
 #include "data/enums/mob_mod.h"
 #include "data/enums/music_slot.h"
 #include "enums/mission_log.h"
@@ -406,10 +407,10 @@ public:
     void   setTitle(uint16 titleID);
     void   delTitle(uint16 titleID);
 
-    uint16 getFame(const sol::object& areaObj);
-    void   addFame(const sol::object& areaObj, uint16 fame);
-    void   setFame(const sol::object& areaObj, uint16 fame);
-    uint8  getFameLevel(const sol::object& areaObj); // Gets Fame Level for specified nation
+    auto getFame(xi::FameArea area) const -> uint16;
+    void addFame(xi::FameArea area, uint16 fame);
+    void setFame(xi::FameArea area, uint16 fame);
+    auto getFameLevel(xi::FameArea area) const -> uint8; // Gets Fame Level for specified nation
 
     uint8  getRank(uint8 nation);
     void   setRank(uint8 rank);

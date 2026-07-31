@@ -570,20 +570,23 @@ auto LoadChar(Scheduler& scheduler, MapConfig config, const uint32 charId) -> st
         PChar->profile.rank[1] = rset->get<uint8>("rank_bastok");
         PChar->profile.rank[2] = rset->get<uint8>("rank_windurst");
 
-        PChar->profile.fame[0]      = rset->get<uint16>("fame_sandoria");
-        PChar->profile.fame[1]      = rset->get<uint16>("fame_bastok");
-        PChar->profile.fame[2]      = rset->get<uint16>("fame_windurst");
-        PChar->profile.fame[3]      = rset->get<uint16>("fame_norg");
-        PChar->profile.fame[4]      = rset->get<uint16>("fame_aby_konschtat");
-        PChar->profile.fame[5]      = rset->get<uint16>("fame_aby_tahrongi");
-        PChar->profile.fame[6]      = rset->get<uint16>("fame_aby_latheine");
-        PChar->profile.fame[7]      = rset->get<uint16>("fame_aby_misareaux");
-        PChar->profile.fame[8]      = rset->get<uint16>("fame_aby_vunkerl");
-        PChar->profile.fame[9]      = rset->get<uint16>("fame_aby_attohwa");
-        PChar->profile.fame[10]     = rset->get<uint16>("fame_aby_altepa");
-        PChar->profile.fame[11]     = rset->get<uint16>("fame_aby_grauberg");
-        PChar->profile.fame[12]     = rset->get<uint16>("fame_aby_uleguerand");
-        PChar->profile.fame[13]     = rset->get<uint16>("fame_adoulin");
+        PChar->profile.fame = {
+            .Sandoria          = rset->get<uint16>("fame_sandoria"),
+            .Bastok            = rset->get<uint16>("fame_bastok"),
+            .Windurst          = rset->get<uint16>("fame_windurst"),
+            .Norg              = rset->get<uint16>("fame_norg"),
+            .AbysseaKonschtat  = rset->get<uint16>("fame_aby_konschtat"),
+            .AbysseaTahrongi   = rset->get<uint16>("fame_aby_tahrongi"),
+            .AbysseaLaTheine   = rset->get<uint16>("fame_aby_latheine"),
+            .AbysseaMisareaux  = rset->get<uint16>("fame_aby_misareaux"),
+            .AbysseaVunkerl    = rset->get<uint16>("fame_aby_vunkerl"),
+            .AbysseaAttohwa    = rset->get<uint16>("fame_aby_attohwa"),
+            .AbysseaAltepa     = rset->get<uint16>("fame_aby_altepa"),
+            .AbysseaGrauberg   = rset->get<uint16>("fame_aby_grauberg"),
+            .AbysseaUleguerand = rset->get<uint16>("fame_aby_uleguerand"),
+            .Adoulin           = rset->get<uint16>("fame_adoulin")
+        };
+
         PChar->profile.unity_leader = rset->get<uint8>("unity_leader");
     }
 
@@ -5972,20 +5975,20 @@ void SaveFame(CCharEntity* PChar)
                      "fame_aby_uleguerand = ?,"
                      "fame_adoulin = ? "
                      "WHERE charid = ?",
-                     PChar->profile.fame[0],
-                     PChar->profile.fame[1],
-                     PChar->profile.fame[2],
-                     PChar->profile.fame[3],
-                     PChar->profile.fame[4],
-                     PChar->profile.fame[5],
-                     PChar->profile.fame[6],
-                     PChar->profile.fame[7],
-                     PChar->profile.fame[8],
-                     PChar->profile.fame[9],
-                     PChar->profile.fame[10],
-                     PChar->profile.fame[11],
-                     PChar->profile.fame[12],
-                     PChar->profile.fame[13],
+                     PChar->profile.fame.Sandoria,
+                     PChar->profile.fame.Bastok,
+                     PChar->profile.fame.Windurst,
+                     PChar->profile.fame.Norg,
+                     PChar->profile.fame.AbysseaKonschtat,
+                     PChar->profile.fame.AbysseaTahrongi,
+                     PChar->profile.fame.AbysseaLaTheine,
+                     PChar->profile.fame.AbysseaMisareaux,
+                     PChar->profile.fame.AbysseaVunkerl,
+                     PChar->profile.fame.AbysseaAttohwa,
+                     PChar->profile.fame.AbysseaAltepa,
+                     PChar->profile.fame.AbysseaGrauberg,
+                     PChar->profile.fame.AbysseaUleguerand,
+                     PChar->profile.fame.Adoulin,
                      PChar->id);
 }
 
