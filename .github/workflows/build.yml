@@ -109,8 +109,8 @@ jobs:
           #   publish: false
           - build_type: Release
             os: alpine
-            compiler: clang
-            compiler_version: 22
+            compiler: gcc
+            compiler_version: 15
             clang_format_version: 22
             tracy: false
             build_modules: false
