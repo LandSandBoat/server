@@ -16,7 +16,8 @@ local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS
 
 quest.reward =
 {
-    item = xi.item.IMMORTALS_SCIMITAR,
+    item  = xi.item.IMMORTALS_SCIMITAR,
+    title = xi.title.BRANDED_BY_THE_FIVE_SERPENTS,
 }
 
 local brandKeyItems =
