@@ -8289,7 +8289,7 @@ INSERT INTO `mob_groups` VALUES (4,5133,109,'Thread_Leech_fished',0,128,895,0,0,
 INSERT INTO `mob_groups` VALUES (5,5733,109,'Snipper',300,0,482,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (6,1445,109,'Gadfly',300,0,923,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (7,486,109,'Bog_Bunny',300,0,326,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (8,2877,109,'Night_Bats',300,2,82,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (8,2815,109,'Night_Bats',300,2,82,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (9,433,109,'Black_Bat',300,2,461,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (10,487,109,'Bog_Dog',300,1,328,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (11,3901,109,'Thread_Leech',300,0,2405,0,0,0,NULL);
@@ -9011,7 +9011,7 @@ INSERT INTO `mob_groups` VALUES (58,4853,118,'Abyssdiver',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (1,6356,119,'Wandering_Sapling',300,0,2618,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (2,2163,119,'Jubjub',300,0,43,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (3,1956,119,'Hill_Lizard',300,0,1317,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (4,2877,119,'Night_Bats',300,2,82,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (4,2815,119,'Night_Bats',300,2,82,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (5,433,119,'Black_Bat',300,2,461,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (6,4345,119,'Will-o-the-Wisp',300,8,569,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (7,3497,119,'Scavenging_Hound',300,1,226,0,0,0,NULL);
@@ -9126,7 +9126,7 @@ INSERT INTO `mob_groups` VALUES (26,1666,120,'Goblin_Gambler',300,0,1081,0,0,0,N
 INSERT INTO `mob_groups` VALUES (27,1715,120,'Goblin_Smithy',300,0,1162,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (28,1710,120,'Goblin_Shaman',300,0,1148,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (29,1160,120,'Earth_Elemental',300,4,733,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (30,3424,120,'Sabertooth_Tiger',300,0,2138,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (30,3209,120,'Sabertooth_Tiger',300,0,2138,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (31,2966,120,'Old_Sabertooth',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (32,3485,120,'Sauromugue_Skink',300,0,2935,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (33,5873,120,'Thunderclaw_Thuban',5400,0,3079,4000,0,0,'WOTG');
