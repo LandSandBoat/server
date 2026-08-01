@@ -5008,6 +5008,7 @@ void CLuaBaseEntity::createShop(uint8 size, const sol::object& arg1)
     if (arg1 != sol::lua_nil && arg1.is<double>())
     {
         PChar->Container->setType(arg1.as<uint8>());
+        PChar->Container->setShopFameArea(arg1.as<uint8>());
     }
 }
 

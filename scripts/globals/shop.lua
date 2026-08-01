@@ -17,6 +17,67 @@ local southSandyID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 local watersID     = zones[xi.zone.WINDURST_WATERS]
 local woodsID      = zones[xi.zone.WINDURST_WOODS]
 
+-----------------------------------
+-- Fame price ranks
+-- Retail nation fame caps at 250, we store it at 2500 because of decimal values
+-- https://wiki.ffo.jp/html/30558.html
+--
+-- Retail formulas (0-250 fame)
+-- Nations:       ceil(6 + (nation of vendor) / 10 - (nation 2 + nation 3) / 40) | floor((2400 + (nation of vendor) * 4 - (nation 2 + nation 3) + 399) / 400)
+-- Selbina/Rabao: ceil(6 + sandoria / 20 + bastok / 20 - windurst / 20)          | floor((1200 + sandoria + bastok - windurst + 199) / 200)
+-- Norg:          ceil(6 + norg / 10 - (sandoria + bastok + windurst) / 120)     | floor((7200 + norg * 12 - (sandoria + bastok + windurst) + 1199) / 1200)
+-- Jeuno, Aht Urhgan and Tavnazia have no price rank so we default to rank 11
+-----------------------------------
+
+local nationFameAreas =
+{
+    xi.fameArea.SANDORIA,
+    xi.fameArea.BASTOK,
+    xi.fameArea.WINDURST,
+}
+
+-- Grabs price rank which are 1-21
+local getPriceRank = function(player, fameArea)
+    local rank         = 11 -- Standard price rank
+    local minPriceRank = 1  -- Buy x1.10, sell x0.975
+    local maxPriceRank = 21 -- Buy x0.90, sell x1.025
+
+    if
+        fameArea == xi.fameArea.SANDORIA or
+        fameArea == xi.fameArea.BASTOK or
+        fameArea == xi.fameArea.WINDURST
+    then
+        local otherFame = 0
+        for _, nation in ipairs(nationFameAreas) do
+            if nation ~= fameArea then
+                otherFame = otherFame + player:getFame(nation)
+            end
+        end
+
+        rank = math.floor((2400 + player:getFame(fameArea) * 4 - otherFame + 399) / 400)
+    elseif fameArea == xi.fameArea.SELBINA_RABAO then
+        local totalFame = player:getFame(xi.fameArea.SANDORIA) + player:getFame(xi.fameArea.BASTOK) - player:getFame(xi.fameArea.WINDURST)
+
+        rank = math.floor((1200 + totalFame + 199) / 200)
+    elseif fameArea == xi.fameArea.NORG then
+        local nationFame = player:getFame(xi.fameArea.SANDORIA) + player:getFame(xi.fameArea.BASTOK) + player:getFame(xi.fameArea.WINDURST)
+
+        rank = math.floor((7200 + player:getFame(xi.fameArea.NORG) * 12 - nationFame + 1199) / 1200)
+    end
+
+    return math.max(minPriceRank, math.min(maxPriceRank, rank))
+end
+
+---Price the vendor pays the player
+---@param player CBaseEntity
+---@param itemId xi.item
+---@param fameArea xi.fameArea
+---@return integer
+xi.shop.onSellPriceCheck = function(player, itemId, fameArea)
+    local priceRank = getPriceRank(player, fameArea)
+    return math.floor(GetReadOnlyItem(itemId):getBasePrice() * (priceRank + 389) / 400)
+end
+
 -- send general shop dialog to player
 -- stock cuts off after 16 items. if you add more, extras will not display
 -- stock is of form { itemId1, price1, itemId2, price2, ... }
@@ -25,7 +86,7 @@ xi.shop.general = function(player, stock, log)
     local priceMultiplier = 1
 
     if log then
-        priceMultiplier = (1 + (0.20 * (9 - player:getFameLevel(log)) / 8)) * xi.settings.main.SHOP_PRICE
+        priceMultiplier = xi.settings.main.SHOP_PRICE
     else
         log = -1
     end
@@ -33,7 +94,14 @@ xi.shop.general = function(player, stock, log)
     player:createShop(#stock, log)
 
     for _, stockItem in ipairs(stock) do
-        player:addShopItem(stockItem[1], math.floor(stockItem[2] * priceMultiplier), stockItem[3])
+        local price = stockItem[2]
+
+        -- Nation fame price rank adjustment
+        if log ~= -1 then
+            price = math.max(1, math.floor(price * (111 - getPriceRank(player, log)) / 100))
+        end
+
+        player:addShopItem(stockItem[1], math.floor(price * priceMultiplier), stockItem[3])
     end
 
     player:sendMenu(xi.menuType.SHOP)

@@ -22,6 +22,7 @@
 #include "0x084_shop_sell_req.h"
 
 #include "entities/char_entity.h"
+#include "lua/luautils.h"
 #include "packets/s2c/0x03d_shop_sell.h"
 #include "trade_container.h"
 
@@ -41,6 +42,10 @@ void GP_CLI_COMMAND_SHOP_SELL_REQ::process(MapSession* PSession, CCharEntity* PC
         quantity = std::min(quantity, PItem->getQuantity());
         // Store item-to-sell in the last slot of the shop container
         PChar->Container->setItem(PChar->Container->getExSize(), this->ItemNo, this->ItemIndex, quantity);
-        PChar->pushPacket<GP_SERV_COMMAND_SHOP_SELL>(this->ItemIndex, PItem->getBasePrice());
+
+        // Fame adjusted price
+        const auto sellPrice = luautils::callGlobal<uint32>("xi.shop.onSellPriceCheck", PChar, this->ItemNo, PChar->Container->getShopFameArea());
+
+        PChar->pushPacket<GP_SERV_COMMAND_SHOP_SELL>(this->ItemIndex, sellPrice);
     }
 }
