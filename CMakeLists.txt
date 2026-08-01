@@ -207,14 +207,14 @@ if (NOT IPC_EXIT_CODE EQUAL 0)
 endif()
 
 execute_process(
-    COMMAND ${Python_EXECUTABLE} -c "import jinja2, jsonschema, yaml"
+    COMMAND ${Python_EXECUTABLE} -c "import jinja2, jsonschema; from ruamel.yaml import YAML"
     RESULT_VARIABLE CODEGEN_DEPS_EXIT_CODE
     OUTPUT_QUIET
     ERROR_QUIET
 )
 if(NOT CODEGEN_DEPS_EXIT_CODE EQUAL 0)
     message(FATAL_ERROR
-        "Codegen requires the Python packages jinja2, jsonschema, and pyyaml, "
+        "Codegen requires the Python packages jinja2, jsonschema, and ruamel.yaml, "
         "but they are not installed for the interpreter CMake selected:\n"
         "    ${Python_EXECUTABLE}\n"
         "Install them by running this command exactly as shown (the interpreter path "
@@ -223,27 +223,26 @@ if(NOT CODEGEN_DEPS_EXIT_CODE EQUAL 0)
     )
 endif()
 
-add_custom_target(data_codegen
-    COMMAND ${Python_EXECUTABLE} -m tools.codegen ${CMAKE_BINARY_DIR} --validate
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-    BYPRODUCTS
-        ${CMAKE_BINARY_DIR}/generated/.codegen.stamp
-        ${CMAKE_BINARY_DIR}/generated/data/all.h
-    USES_TERMINAL
-    VERBATIM
-)
-
-if(NOT EXISTS ${CMAKE_BINARY_DIR}/generated/.codegen.stamp)
-    message(STATUS "Bootstrapping data codegen")
+set(ENUM_CODEGEN_STAMP ${CMAKE_BINARY_DIR}/generated/.enum_codegen.stamp)
+if(NOT EXISTS ${ENUM_CODEGEN_STAMP})
+    message(STATUS "Bootstrapping enum codegen")
     execute_process(
-        COMMAND ${Python_EXECUTABLE} -m tools.codegen ${CMAKE_BINARY_DIR} --validate
+        COMMAND ${Python_EXECUTABLE} -m tools.codegen ${CMAKE_BINARY_DIR}
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         RESULT_VARIABLE CODEGEN_EXIT_CODE
     )
     if(NOT CODEGEN_EXIT_CODE EQUAL 0)
-        message(FATAL_ERROR "Bootstrap codegen failed")
+        message(FATAL_ERROR "Enum codegen failed")
     endif()
 endif()
+
+add_custom_target(enum_codegen
+    COMMAND ${Python_EXECUTABLE} -m tools.codegen ${CMAKE_BINARY_DIR}
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    BYPRODUCTS ${ENUM_CODEGEN_STAMP}
+    USES_TERMINAL
+    VERBATIM
+)
 
 include_directories(${CMAKE_BINARY_DIR}/generated) # Globally include the build/generated directory
 

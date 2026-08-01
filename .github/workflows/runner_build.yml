@@ -193,7 +193,7 @@ jobs:
 
       - name: Install Python codegen deps
         if: ${{ env.SKIP_BUILD != 'true' }}
-        run: python -m pip install jinja2 jsonschema pyyaml
+        run: python -m pip install jinja2 jsonschema ruamel.yaml
 
       - name: Enable modules
         if: ${{ inputs.build_modules && env.SKIP_BUILD != 'true' }}

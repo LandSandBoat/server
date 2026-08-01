@@ -22,51 +22,40 @@
 #pragma once
 
 #include "common/logging.h"
-
-#include <common/types/hash_map.h>
-
-#include "data/all.h" // Automatically generated manifest with every struct/populators
-#include "data/backends/yaml.h"
+#include "data/yaml/merge.h"
 #include "utils/moduleutils.h"
 
 #include <chrono>
+#include <exception>
 #include <fmt/format.h>
-#include <string_view>
+#include <string>
 
 namespace xi::data
 {
 
-// Load `data/<path><B::kExtension>` dataset.
-// Enabled modules with matching filenames get loaded and deep merged into the dataset
-template <class T, NodeBackend B>
-auto loadDataSet(std::string_view dataPath) -> HashMap<decltype(T::Id), T>
+template <class Dataset>
+auto loadDataset() -> typename Dataset::Records
 {
+    const auto dataPath = Dataset::kDataPath;
     const auto start    = std::chrono::steady_clock::now();
-    const auto corePath = fmt::format("data/{}{}", dataPath, B::kExtension);
-    const auto modules  = moduleutils::GetDataModules(dataPath, B::kExtension); // Collect all module files matching EXACTLY the same dataPath
-    auto       result   = loadAllOf<T, B>(corePath, modules);                   // Load main dataset with modules patches applied
-    const auto ms       = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start).count();
+    const auto corePath = fmt::format("data/{}.yaml", dataPath);
+    const auto modules  = moduleutils::GetDataModules(dataPath, ".yaml");
 
-    const auto moduleSuffix = modules.empty()
-                                  ? std::string{}
-                                  : fmt::format("  +{} module{}", modules.size(), modules.size() == 1 ? "" : "s");
-
-    ShowInfoFmt("[data] {} {} entries loaded in {}ms{}",
-                dataPath,
-                result.size(),
-                ms,
-                moduleSuffix);
-    return result;
+    try
+    {
+        auto       result       = Dataset::decode(loadMergedYaml(corePath, modules));
+        const auto ms           = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start).count();
+        const auto moduleSuffix = modules.empty()
+                                      ? std::string{}
+                                      : fmt::format("  +{} module{}", modules.size(), modules.size() == 1 ? "" : "s");
+        ShowInfoFmt("[data] {} {} entries loaded in {}ms{}", dataPath, result.size(), ms, moduleSuffix);
+        return result;
+    }
+    catch (const std::exception& error)
+    {
+        ShowErrorFmt("loadDataset({}) failed: {}", corePath, error.what());
+        throw;
+    }
 }
 
 } // namespace xi::data
-
-inline auto LoadStatusEffects()
-{
-    return xi::data::loadDataSet<xi::data::StatusEffectData, xi::data::backends::YAMLBackend>("status_effects");
-}
-
-inline auto LoadEcosystem()
-{
-    return xi::data::loadDataSet<xi::data::EcosystemData, xi::data::backends::YAMLBackend>("ecosystem");
-}

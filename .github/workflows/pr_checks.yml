@@ -133,51 +133,64 @@ jobs:
           echo "Lua Language Server failed. See summary for details."
           exit 1
 
-  Schema_Validation:
+  Data_Validation:
     needs: Sanity_Checks
     name: Data validation
     runs-on: ubuntu-latest
+    container:
+      image: ${{ vars.DEVTOOLS_IMAGE || 'ghcr.io/landsandboat/devtools:ubuntu' }}
     defaults:
       run:
         shell: bash
+    env:
+      CPM_SOURCE_CACHE: /tmp/data-schema-cpm
     steps:
       - name: Download Changed Files
         uses: actions/download-artifact@v8
         with:
           name: changed-files
 
-      - name: Check for data/ or codegen changes
+      - name: Check for data schema changes
         id: changed
         run: |
           mapfile -t changed_files < changed-files.txt
           touched=false
-          for f in "${changed_files[@]}"; do
-            if [[ $f == data/* || $f == tools/codegen/* ]]; then
-              touched=true
-              break
-            fi
+          for changed_file in "${changed_files[@]}"; do
+            case "$changed_file" in
+              data/*|tools/codegen/*|src/map/data/*|src/common/enum_traits.h|*CMakeLists.txt)
+                touched=true
+                break
+                ;;
+            esac
           done
           echo "touched=$touched" >> "$GITHUB_OUTPUT"
-          echo "Touched: $touched"
 
       - uses: actions/checkout@v6
         if: steps.changed.outputs.touched == 'true'
 
-      - name: Setup Python
-        if: steps.changed.outputs.touched == 'true'
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.14"
-
       - name: Install Python dependencies
         if: steps.changed.outputs.touched == 'true'
-        run: python -m pip install jinja2 jsonschema pyyaml
+        run: python -m pip install --upgrade -r ./tools/requirements.txt
 
-      - name: Run codegen --validate
+      - name: Restore CPM source cache
+        if: steps.changed.outputs.touched == 'true'
+        uses: actions/cache@v5
+        with:
+          path: /tmp/data-schema-cpm
+          key: data-schema-cpm-${{ runner.os }}-${{ hashFiles('CMakeLists.txt', 'cmake/**', 'ext/CMakeLists.txt') }}
+          restore-keys: data-schema-cpm-${{ runner.os }}-
+
+      - name: Configure schema compiler
         if: steps.changed.outputs.touched == 'true'
         run: |
-          mkdir -p "$RUNNER_TEMP/codegen-out"
-          python -m tools.codegen "$RUNNER_TEMP/codegen-out" --validate
+          cmake -G Ninja -S . -B build-data-schema \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DPCH_ENABLE=OFF \
+            -DTRACY_ENABLE=OFF
+
+      - name: Generate and validate data schemas
+        if: steps.changed.outputs.touched == 'true'
+        run: cmake --build build-data-schema --target data_schema_check
 
   Formatting:
     needs: Sanity_Checks

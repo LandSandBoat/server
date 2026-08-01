@@ -53,20 +53,26 @@ inline constexpr bool isFlagEnum = false;
 namespace enum_detail
 {
 
+// Slug -> enum when present.
+template <class E>
+auto findByName(const std::string_view name, const std::span<const std::pair<std::string_view, E>> entries) -> const E*
+{
+    static const HashMap<std::string_view, E> table{ entries.begin(), entries.end() };
+
+    const auto it = table.find(name);
+    return it == table.end() ? nullptr : &it->second;
+}
+
 // Slug -> enum. Throws on miss; typeName goes in the message.
 template <class E>
 auto fromName(const std::string_view name, const std::span<const std::pair<std::string_view, E>> entries, const std::string_view typeName) -> E
 {
-    // Lazy-init on first call, reused after.
-    static const HashMap<std::string_view, E> table{ entries.begin(), entries.end() };
-
-    const auto it = table.find(name);
-    if (it == table.end())
+    if (const auto* value = findByName(name, entries))
     {
-        throw std::runtime_error(fmt::format("'{}' is not a valid {} enum value", name, typeName));
+        return *value;
     }
 
-    return it->second;
+    throw std::runtime_error(fmt::format("'{}' is not a valid {} enum value", name, typeName));
 }
 
 template <class E>

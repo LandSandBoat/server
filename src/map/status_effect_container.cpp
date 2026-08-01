@@ -32,6 +32,7 @@ When a status effect is gained twice on a player. It can do one or more of the f
 #include "common/logging.h"
 
 #include "common/timer.h"
+#include "data/datasets/status_effects/dataset.h"
 #include "data/enums/weather.h"
 
 #include <common/types/hash_map.h>
@@ -68,6 +69,8 @@ When a status effect is gained twice on a player. It can do one or more of the f
 namespace effects
 {
 
+using StatusEffectsDataset = xi::data::datasets::status_effects::Dataset;
+
 // Default effect of statuses are overwrite if equal or higher
 struct EffectParams_t
 {
@@ -93,7 +96,7 @@ void LoadEffectsParameters()
         EffectsParams[static_cast<uint16>(i)].Flag = xi::StatusEffectFlag::None;
     }
 
-    for (const auto& [id, data] : LoadStatusEffects())
+    for (const auto& [id, data] : xi::data::loadDataset<StatusEffectsDataset>())
     {
         if (id >= MAX_EFFECTID)
         {

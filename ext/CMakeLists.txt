@@ -129,16 +129,19 @@ if(earcut_hpp_ADDED) # header-only
     target_include_directories(earcut_hpp SYSTEM INTERFACE ${earcut_hpp_SOURCE_DIR}/include/)
 endif()
 
+# The pinned Glaze fix requires CMake 3.31, so expose its headers without adding its CMake project.
 CPMAddPackage(
-    NAME rapidyaml
-    GITHUB_REPOSITORY biojppm/rapidyaml
-    GIT_TAG v0.15.2
-    SYSTEM ON
-    OPTIONS
-        "RYML_BUILD_TOOLS OFF"
-        "RYML_BUILD_API OFF"
-        "RYML_INSTALL OFF"
-) # defines: ryml
+    NAME glaze
+    GITHUB_REPOSITORY stephenberry/glaze
+    GIT_TAG 2f6f5dcfe1a689bf79b443d83434fab264ce0a21
+    DOWNLOAD_ONLY ON
+)
+if(glaze_ADDED)
+    add_library(glaze_glaze INTERFACE)
+    add_library(glaze::glaze ALIAS glaze_glaze)
+    target_compile_features(glaze_glaze INTERFACE cxx_std_23)
+    target_include_directories(glaze_glaze SYSTEM INTERFACE ${glaze_SOURCE_DIR}/include/)
+endif()
 
 CPMAddPackage(
     NAME argparse
@@ -378,7 +381,6 @@ set(MAP_ONLY_EXTERNAL_LIBS
     RecastNavigation::Detour
     fast_obj
     earcut_hpp
-    ryml
     zlibstatic
 )
 

@@ -235,13 +235,48 @@ target_link_libraries(xi_map_settings INTERFACE
     project_options
 )
 
+add_library(xi_data_core STATIC ${DATA_CORE_SOURCES})
+add_dependencies(xi_data_core enum_codegen)
+target_include_directories(xi_data_core PUBLIC
+    ${CMAKE_SOURCE_DIR}
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
+target_link_libraries(xi_data_core
+    PUBLIC
+        project_options
+        fmt::fmt
+        magic_enum
+        unordered_dense::unordered_dense
+    PRIVATE
+        project_warnings
+        glaze::glaze
+)
+
+add_executable(xi_data_schema ${DATA_SCHEMA_SOURCES})
+target_link_libraries(xi_data_schema
+    PRIVATE
+        xi_data_core
+        project_warnings
+        glaze::glaze
+)
+set_target_output_directory(xi_data_schema)
+
+add_custom_target(data_schema_check ALL
+    COMMAND $<TARGET_FILE:xi_data_schema> --verify-data
+    COMMAND ${Python_EXECUTABLE} -m tools.codegen ${CMAKE_BINARY_DIR} --validate
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    DEPENDS xi_data_schema
+    USES_TERMINAL
+)
+
 if(TRACY_ENABLE)
     target_link_libraries(xi_map_settings INTERFACE TracyClient)
     target_compile_definitions(xi_map_settings INTERFACE TRACY_ENABLE)
 endif()
 
 function(configure_map_lib target)
-    add_dependencies(${target} data_codegen)
+    add_dependencies(${target} enum_codegen)
     target_link_libraries(${target}
         PUBLIC
             xi_map_settings
@@ -258,10 +293,11 @@ add_library(xi_map_battle STATIC
     ${ITEM_SOURCES}
     ${ACTION_SOURCES}
     ${AI_SOURCES}
-    ${DATA_SOURCES}
+    ${DATA_MAP_SOURCES}
     ${ENUMS_SOURCES}
 )
 configure_map_lib(xi_map_battle)
+target_link_libraries(xi_map_battle PUBLIC xi_data_core)
 
 add_library(xi_map_entities STATIC ${ENTITY_SOURCES})
 configure_map_lib(xi_map_entities)

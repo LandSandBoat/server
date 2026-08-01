@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -50,6 +50,8 @@ ModsMap_t mobSpawnModsList;
 namespace
 {
 
+using EcosystemsDataset = xi::data::datasets::ecosystems::Dataset;
+
 HashMap<uint16, SpeciesInfo> speciesData;
 
 } // namespace
@@ -58,7 +60,7 @@ void LoadSpeciesData()
 {
     speciesData.clear();
 
-    for (const auto& [ecosystemId, ecosystem] : LoadEcosystem())
+    for (const auto& [ecosystemId, ecosystem] : xi::data::loadDataset<EcosystemsDataset>())
     {
         xi::data::MobAttributesData ecosystemAttributes{};
         xi::data::applyOverrides(ecosystemAttributes, ecosystem.MobAttributes);
@@ -76,7 +78,7 @@ void LoadSpeciesData()
                 const auto id = static_cast<uint16>(speciesId);
                 if (!speciesData.try_emplace(id, info).second)
                 {
-                    throw std::runtime_error(fmt::format("data/ecosystem.yaml: duplicate species id {}", id));
+                    throw std::runtime_error(fmt::format("data/ecosystems.yaml: duplicate species id {}", id));
                 }
             }
         }
