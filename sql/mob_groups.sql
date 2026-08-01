@@ -12468,7 +12468,7 @@ INSERT INTO `mob_groups` VALUES (8,771,173,'Combat',300,0,386,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (9,2146,173,'Jelly',300,0,1407,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (10,3912,173,'Thunder_Elemental',780,4,2410,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (11,3523,173,'Sea_Monk',300,0,504,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (12,1807,173,'Greater_Pugil',300,0,279,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (12,1797,173,'Greater_Pugil',300,0,279,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (13,743,173,'Clipper',300,0,483,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (14,4309,173,'Water_Elemental',780,4,2629,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (15,639,173,'Cargo_Crab_Colin',0,32,416,2100,0,0,NULL);
@@ -13804,7 +13804,7 @@ INSERT INTO `mob_groups` VALUES (42,251,196,'Aroma_Fly',0,128,0,2550,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (43,5311,196,'Lorbulcrud',0,128,0,0,99999,0,NULL);
 INSERT INTO `mob_groups` VALUES (44,6552,196,'Ghoul_blm',300,0,962,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (45,6570,196,'Wight_blm',300,0,2653,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (46,1807,196,'Greater_Pugil',300,0,1232,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (46,1797,196,'Greater_Pugil',300,0,1232,0,0,0,NULL);
 
 -- ------------------------------------------------------------
 -- Crawlers_Nest (Zone 197)
