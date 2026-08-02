@@ -27,6 +27,7 @@ zones[xi.zone.GARLAIGE_CITADEL] =
         SPARKLING_LIGHT               = 7282,  -- The ground is sparkling with a strange light.
         A_GATE_OF_STURDY_STEEL        = 7294,  -- A gate of sturdy steel.
         OPEN_WITH_THE_RIGHT_KEY       = 7300,  -- You might be able to open it with the right key.
+        GARLAIGE_KEY_BROKE            = 7301,  -- The <item> broke...
         BANISHING_GATES               = 7309,  -- The first banishing gate begins to open...
         BANISHING_GATES_CLOSING       = 7312,  -- The first banishing gate starts to close.
         YOU_FIND_NOTHING              = 7316,  -- You find nothing special.
