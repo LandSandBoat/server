@@ -144,8 +144,20 @@ quest.sections =
                     then
                         player:tradeComplete()
                         quest:setVar(player, 'Prog', 5)
-                        npc:setStatus(xi.status.DISAPPEAR)
-                        npc:updateNPCHideTime(900) -- Tebhi disappears for 15min
+
+                        -- Tebhi stops and faces the player when traded, then fades away.
+                        npc:clearPath(true)
+                        npc:facePlayer(player, false)
+                        npc:setLocalVar('respawnTime', GetSystemTime() + 180)
+                        npc:timer(2000, function(npcArg)
+                            npcArg:entityAnimationPacket(xi.animationString.STATUS_DISAPPEAR)
+                        end)
+
+                        npc:timer(4000, function(npcArg)
+                            npcArg:setStatus(xi.status.CUTSCENE_ONLY)
+                            npcArg:continuePath()
+                        end)
+
                         return quest:messageSpecial(castleOzID.text.TEBHI_ACCEPTS, xi.item.BEAST_COLLAR)
                     end
                 end,
@@ -165,6 +177,46 @@ quest.sections =
                     end
                 end,
             },
+
+            onZoneIn = function(player, prevZone)
+                -- Tebhi only spawns if a player on this part of the quest zones in.
+                if quest:getVar(player, 'Prog') ~= 4 then
+                    return
+                end
+
+                local tebhi = GetNPCByID(castleOzID.npc.TEBHI)
+
+                if not tebhi then
+                    return
+                end
+
+                -- Attach a listener to each player to ensure Tebhi reappears if multiple people are on the quest.
+                -- Listener cleans up when player zones out or progresses past this step.
+                player:addListener('TICK', 'TEBHI_RESPAWN', function(playerArg)
+                    -- Not in the zone anymore, or not on this step - clean up listener and return.
+                    if
+                        playerArg:getZoneID() ~= xi.zone.CASTLE_OZTROJA or
+                        quest:getVar(playerArg, 'Prog') ~= 4
+                    then
+                        playerArg:removeListener('TEBHI_RESPAWN')
+                        return
+                    end
+
+                    -- Tebhi is already up, return.
+                    if tebhi:getStatus() == xi.status.NORMAL then
+                        return
+                    end
+
+                    -- Not time to respawn Tebhi, return.
+                    if GetSystemTime() < tebhi:getLocalVar('respawnTime') then
+                        return
+                    end
+
+                    -- If we make it here, spawn Tebhi.
+                    tebhi:setStatus(xi.status.NORMAL)
+                    tebhi:entityAnimationPacket(xi.animationString.STATUS_VISIBLE)
+                end)
+            end,
         },
 
         [xi.zone.UPPER_JEUNO] =
