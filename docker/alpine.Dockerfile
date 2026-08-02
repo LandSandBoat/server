@@ -127,6 +127,7 @@ if [[ $COMPILER == clang* || $ENABLE_CLANG_TIDY == ON ]]; then
         clang$LLVM_VERSION \
         clang$LLVM_VERSION-extra-tools \
         compiler-rt \
+        lld$LLVM_VERSION \
         llvm$LLVM_VERSION
     apk cache clean
 fi
@@ -162,6 +163,7 @@ cp -p /xiadmin/build/xi_* /server/ 2> /dev/null || true
 if [[ $COMPILER == clang* || $ENABLE_CLANG_TIDY == ON ]]; then
     export CC=/usr/bin/clang-$LLVM_VERSION
     export CXX=/usr/bin/clang++-$LLVM_VERSION
+    export LDFLAGS="-fuse-ld=lld"
 fi
 
 cmake -G Ninja -S /server -B /xiadmin/build --fresh \
