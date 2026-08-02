@@ -20,9 +20,6 @@ UPDATE `abilities` SET `range` = 6.0 WHERE `name` = 'martyr';
 -- Source: https://www.bg-wiki.com/ffxi/Version_Update_(03/11/2008)
 UPDATE `abilities` SET `recastTime` = 180 WHERE `name` = 'reward';
 
--- Reward merit: Revert value to 6 seconds per level
-UPDATE `merits` SET `value` = 6 WHERE `name` = 'reward';
-
 -- Sic: Allow use with jug pets in addition to charmed mobs
 -- Source: https://www.bg-wiki.com/ffxi/Version_Update_(11/09/2009)
 UPDATE `abilities` SET `addType` = 192 WHERE `name` = 'sic';
