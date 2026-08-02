@@ -2,11 +2,7 @@
 -- Area: Temple of Uggalepih
 --   NM: Crimson-toothed Pawberry
 -----------------------------------
-mixins =
-{
-    require('scripts/mixins/families/tonberry'),
-    require('scripts/mixins/job_special')
-}
+mixins = { require('scripts/mixins/families/tonberry') }
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
@@ -28,7 +24,31 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:useMobAbility(xi.mobSkill.ASTRAL_FLOW_1)
+    mob:setLocalVar('[2hour]HPP', math.randomInt(40, 50))
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+end
+
+entity.onMobFight = function(mob, target)
+    if xi.combat.behavior.isEntityBusy(mob) then
+        return
+    end
+
+    if mob:getHPP() >= mob:getLocalVar('[2hour]HPP') then
+        return
+    end
+
+    local currentTime = GetSystemTime()
+    if mob:getLocalVar('[2hour]Time') == 0 then
+        mob:setLocalVar('[2hour]Time', currentTime)
+    end
+
+    if currentTime < mob:getLocalVar('[2hour]Time') then
+        return
+    end
+
+    -- Handle 2 Hour
+    mob:useMobAbility(xi.mobSkill.ASTRAL_FLOW_1)
+    mob:setLocalVar('[2hour]Time', currentTime + 60)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
