@@ -21,6 +21,16 @@
 
 #pragma once
 
+#include <array>
+#include <vector>
+
+// A world-space sphere used to carve stray triangles out of the collision data.
+struct NavMeshSkipSphere
+{
+    std::array<float, 3> center{};
+    float                radius{};
+};
+
 struct NavMeshConfig
 {
     float cellSize{ 0.5f };               // Previous xiNavmeshes value: 0.4
@@ -41,4 +51,16 @@ struct NavMeshConfig
     bool filterLowHangingObstacles{ true };
     bool filterLedgeSpans{ true };
     bool filterWalkableLowHeightSpans{ true };
+
+    // World-space Y planes to strip from the gathered collision triangles. A triangle
+    // is discarded when all three vertices lie on one of these planes (within a small
+    // tolerance). Used to remove phantom collision planes from bad zone geometry;
+    // sloped or non-flat triangles near a listed Y are unaffected.
+    std::vector<float> ySkipPlanes{};
+
+    // World-space spheres to carve out of the gathered collision triangles. A triangle
+    // is discarded when all three vertices lie inside one of these spheres. Used to
+    // remove stray geometry parked far outside the playable area, which would otherwise
+    // inflate the world bounds and with them the tile grid.
+    std::vector<NavMeshSkipSphere> skipSpheres{};
 };

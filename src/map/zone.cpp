@@ -466,6 +466,63 @@ void CZone::LoadZoneSettings()
     }
 }
 
+namespace
+{
+
+// TODO: These should be baked into per-zone navmesh configs, and should be assumed to have been
+//     : already applied to the xiNavmeshes submodule repo.
+void applyZoneNavMeshOverrides(const xi::ZoneId zoneId, NavMeshConfig& config)
+{
+    // Ceizak Battlegrounds carries a small island of stray triangles parked around
+    // Z = -9932912, roughly ten million units outside a zone whose grid only covers
+    // +/- 640 x 600. Left in, it stretches the world bounds and with them the tile
+    // grid: 38x310421 tiles, nearly all empty, taking over three minutes to walk.
+    if (zoneId == xi::ZoneId::CeizakBattlegrounds && config.skipSpheres.empty())
+    {
+        config.skipSpheres = {
+            NavMeshSkipSphere{ .center = { -496.0f, -6.5f, -9932914.5f }, .radius = 100.0f },
+        };
+    }
+
+    // An explicitly-supplied list (e.g. from !rebuildnavmesh) wins over the
+    // per-zone defaults below.
+    if (!config.ySkipPlanes.empty())
+    {
+        return;
+    }
+
+    //
+    // For some reason, there are staggered flat planes below the regularly navigable areas.
+    // These were observed by hand, and then given these exceptions.
+    //
+
+    if (zoneId == xi::ZoneId::NewtonMovalpolos)
+    {
+        config.ySkipPlanes = { 48.0f, 52.0f, 56.0f };
+    }
+
+    if (zoneId == xi::ZoneId::OldtonMovalpolos)
+    {
+        config.ySkipPlanes = { 32.0f, 40.0f, 48.0f, 52.0f, 56.0f, 60.0f };
+    }
+
+    // Similar to above, all the Cloisters have big flat planes below the regular
+    // navigable areas. Cloisters are BCNM zones with 3x staggered copies of the
+    // arena, so the plane repeats at each copy's altitude.
+    const auto isCloister = zoneId == xi::ZoneId::CloisterOfFlames ||
+                            zoneId == xi::ZoneId::CloisterOfFrost ||
+                            zoneId == xi::ZoneId::CloisterOfGales ||
+                            zoneId == xi::ZoneId::CloisterOfStorms ||
+                            zoneId == xi::ZoneId::CloisterOfTides ||
+                            zoneId == xi::ZoneId::CloisterOfTremors;
+    if (isCloister)
+    {
+        config.ySkipPlanes = { -60.0f, 0.0f, 60.0f };
+    }
+}
+
+} // namespace
+
 auto CZone::LoadNavMesh() -> Task<void>
 {
     auto       navMesh = std::make_unique<CNavMesh>(static_cast<uint16>(GetID()));
@@ -479,7 +536,11 @@ auto CZone::LoadNavMesh() -> Task<void>
 
     NavMeshBuilder builder(*xiMesh_);
 
-    auto* dtNavMesh = co_await builder.buildAsync(scheduler_, getName(), static_cast<uint16>(GetID()), NavMeshConfig{});
+    auto config = NavMeshConfig{};
+
+    applyZoneNavMeshOverrides(GetID(), config);
+
+    auto* dtNavMesh = co_await builder.buildAsync(scheduler_, getName(), static_cast<uint16>(GetID()), config);
     if (dtNavMesh && navMesh->installNavMesh(dtNavMesh))
     {
         navMesh->save(file);
@@ -490,11 +551,14 @@ auto CZone::LoadNavMesh() -> Task<void>
     DebugNavmesh("CZone::LoadNavMesh: Build failed for zone (%s)", getName().c_str());
 }
 
-void CZone::RebuildNavMesh(const NavMeshConfig& config)
+void CZone::RebuildNavMesh(const NavMeshConfig& configIn)
 {
     const auto  zoneName  = getName();
     const auto  zoneID    = static_cast<uint16>(GetID());
     const auto* xiMeshPtr = xiMesh_.get();
+
+    auto config = configIn;
+    applyZoneNavMeshOverrides(GetID(), config);
 
     scheduler_.postToMainThread(
         [this, zoneName, zoneID, config, xiMeshPtr]() -> Task<void>
