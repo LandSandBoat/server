@@ -73,12 +73,19 @@ public:
     explicit NavMeshBuilder(const IXiMesh& xiMesh);
 
     void getWorldBounds(float* bmin, float* bmax) const;
-    void gatherTrianglesInAABB(const float* bmin, const float* bmax, GatheredMesh& out) const;
+
+    void getFilteredWorldBounds(const NavMeshConfig& config, float* bmin, float* bmax) const;
+
+    void gatherTrianglesInAABB(const float* bmin, const float* bmax, GatheredMesh& out, const std::vector<float>& ySkipPlanes = {}, const std::vector<NavMeshSkipSphere>& skipSpheres = {}) const;
+
     auto buildAsync(Scheduler& scheduler, const std::string& zoneName, uint16 zoneID, const NavMeshConfig& config) -> Task<dtNavMesh*>;
 
 private:
     auto buildTile(int tx, int ty, const rcConfig& cfg, const NavMeshConfig& config, float tileWorldSize) const -> TileResult;
     auto worldToCell(float x, float z) const -> CellCoord;
+
+    static auto onYSkipPlane(float y0, float y1, float y2, const std::vector<float>& ySkipPlanes) -> bool;
+    static auto insideSkipSphere(const float* v0, const float* v1, const float* v2, const std::vector<NavMeshSkipSphere>& skipSpheres) -> bool;
 
     struct PreTransformedBlock
     {

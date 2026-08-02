@@ -128,6 +128,12 @@ local config =
 
     -- Remove walkable spans where the ceiling is lower than agentHeight.
     filterWalkableLowHeightSpans = true,
+
+    -- World-space Y planes to strip from the collision data before rasterization.
+    -- ySkipPlanes = { -60.0, 0.0, 60.0 },
+
+    -- World-space spheres to carve out of the collision data before rasterization.
+    -- skipSpheres = { { x = -496.0, y = -6.5, z = -9932914.5, radius = 100.0 } },
 }
 
 commandObj.onTrigger = function(player)

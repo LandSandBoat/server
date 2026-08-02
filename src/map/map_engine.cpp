@@ -269,6 +269,14 @@ auto MapEngine::init() -> Task<void>
         scheduler_.postToWorkerThread(watchdogWatcher());
     }
 
+    // If this was a "--rebuild-navmeshes" run, we're using xi_map more like a tool. So, bail
+    // out now.
+    if (config_.rebuildNavmeshes)
+    {
+        ShowInfo("Navmeshes rebuilt, exiting...");
+        std::exit(0);
+    }
+
 #ifdef TRACY_ENABLE
     ShowInfo("*** TRACY IS ENABLED ***");
 #endif // TRACY_ENABLE

@@ -33,6 +33,7 @@
 #include <algorithm>
 #include <array>
 #include <cmath>
+#include <map>
 #include <unordered_set>
 
 namespace
@@ -47,6 +48,11 @@ constexpr int    DT_TOTAL_REF_BITS      = 22;     // dtNavMesh total bits for ti
 
 // FFXI dat format constant (not tunable)
 constexpr float XIMESH_CELL_SIZE = 4.0f; // Each ximesh grid cell covers 4x4 world units
+
+// A triangle counts as lying on a ySkipPlanes plane when all three vertex Ys are
+// within this distance of it. Phantom planes sit at exact values post-transform,
+// so this only needs to absorb float noise.
+constexpr float Y_SKIP_PLANE_TOLERANCE = 0.01f;
 
 constexpr std::size_t TILE_BATCH_SIZE = 32;
 
@@ -135,7 +141,89 @@ void NavMeshBuilder::getWorldBounds(float* bmin, float* bmax) const
     bmax[2] = worldBmax_[2];
 }
 
-void NavMeshBuilder::gatherTrianglesInAABB(const float* bmin, const float* bmax, GatheredMesh& out) const
+// A triangle sits on a skip plane when all three vertices are within tolerance of it.
+// Requiring all three leaves sloped geometry that merely crosses the plane alone.
+auto NavMeshBuilder::onYSkipPlane(const float y0, const float y1, const float y2, const std::vector<float>& ySkipPlanes) -> bool
+{
+    return std::any_of(
+        ySkipPlanes.begin(),
+        ySkipPlanes.end(),
+        [&](const float plane)
+        {
+            return std::abs(y0 - plane) <= Y_SKIP_PLANE_TOLERANCE &&
+                   std::abs(y1 - plane) <= Y_SKIP_PLANE_TOLERANCE &&
+                   std::abs(y2 - plane) <= Y_SKIP_PLANE_TOLERANCE;
+        });
+}
+
+// A triangle is carved out when all three vertices fall inside a skip sphere.
+// Requiring all three leaves geometry that merely clips the sphere alone.
+auto NavMeshBuilder::insideSkipSphere(const float* v0, const float* v1, const float* v2, const std::vector<NavMeshSkipSphere>& skipSpheres) -> bool
+{
+    const auto contains = [](const NavMeshSkipSphere& sphere, const float* vertex)
+    {
+        const auto dx = vertex[0] - sphere.center[0];
+        const auto dy = vertex[1] - sphere.center[1];
+        const auto dz = vertex[2] - sphere.center[2];
+
+        const auto dx2 = dx * dx;
+        const auto dy2 = dy * dy;
+        const auto dz2 = dz * dz;
+
+        return (dx2 + dy2 + dz2) <= (sphere.radius * sphere.radius);
+    };
+
+    return std::any_of(
+        skipSpheres.begin(),
+        skipSpheres.end(),
+        [&](const NavMeshSkipSphere& sphere)
+        {
+            return contains(sphere, v0) && contains(sphere, v1) && contains(sphere, v2);
+        });
+}
+
+void NavMeshBuilder::getFilteredWorldBounds(const NavMeshConfig& config, float* bmin, float* bmax) const
+{
+    if (config.ySkipPlanes.empty() && config.skipSpheres.empty())
+    {
+        getWorldBounds(bmin, bmax);
+        return;
+    }
+
+    for (int axis = 0; axis < 3; ++axis)
+    {
+        bmin[axis] = FloatMax;
+        bmax[axis] = FloatLowest;
+    }
+
+    const auto& blocks = xiMesh_->blocks();
+
+    for (const auto& [key, ptb] : preTransformed_)
+    {
+        const auto& block = blocks[key >> 16];
+
+        for (std::size_t tri = 0; tri < block.metas.size(); ++tri)
+        {
+            const auto* v0 = &ptb.worldVerts[static_cast<std::size_t>(block.indices[tri * 3 + 0]) * 3];
+            const auto* v1 = &ptb.worldVerts[static_cast<std::size_t>(block.indices[tri * 3 + 1]) * 3];
+            const auto* v2 = &ptb.worldVerts[static_cast<std::size_t>(block.indices[tri * 3 + 2]) * 3];
+
+            if (onYSkipPlane(v0[1], v1[1], v2[1], config.ySkipPlanes) ||
+                insideSkipSphere(v0, v1, v2, config.skipSpheres))
+            {
+                continue;
+            }
+
+            for (int axis = 0; axis < 3; ++axis)
+            {
+                bmin[axis] = std::min({ bmin[axis], v0[axis], v1[axis], v2[axis] });
+                bmax[axis] = std::max({ bmax[axis], v0[axis], v1[axis], v2[axis] });
+            }
+        }
+    }
+}
+
+void NavMeshBuilder::gatherTrianglesInAABB(const float* bmin, const float* bmax, GatheredMesh& out, const std::vector<float>& ySkipPlanes, const std::vector<NavMeshSkipSphere>& skipSpheres) const
 {
     out.verts.clear();
     out.indices.clear();
@@ -185,6 +273,19 @@ void NavMeshBuilder::gatherTrianglesInAABB(const float* bmin, const float* bmax,
 
                 for (std::size_t tri = 0; tri < block.metas.size(); ++tri)
                 {
+                    if (!ySkipPlanes.empty() || !skipSpheres.empty())
+                    {
+                        const auto* v0 = &ptb.worldVerts[static_cast<std::size_t>(block.indices[tri * 3 + 0]) * 3];
+                        const auto* v1 = &ptb.worldVerts[static_cast<std::size_t>(block.indices[tri * 3 + 1]) * 3];
+                        const auto* v2 = &ptb.worldVerts[static_cast<std::size_t>(block.indices[tri * 3 + 2]) * 3];
+
+                        if (onYSkipPlane(v0[1], v1[1], v2[1], ySkipPlanes) ||
+                            insideSkipSphere(v0, v1, v2, skipSpheres))
+                        {
+                            continue;
+                        }
+                    }
+
                     const auto i0 = vertexBase + block.indices[tri * 3 + 0];
                     const auto i1 = vertexBase + block.indices[tri * 3 + 1];
                     const auto i2 = vertexBase + block.indices[tri * 3 + 2];
@@ -234,7 +335,7 @@ auto NavMeshBuilder::buildTile(const int tx, const int ty, const rcConfig& cfg, 
     const float gatherBmax[3] = { expandedBmax[0], -expandedBmin[1], -expandedBmin[2] };
 
     GatheredMesh tileMesh;
-    gatherTrianglesInAABB(gatherBmin, gatherBmax, tileMesh);
+    gatherTrianglesInAABB(gatherBmin, gatherBmax, tileMesh, config.ySkipPlanes, config.skipSpheres);
     if (tileMesh.verts.empty())
     {
         return {};
@@ -475,7 +576,7 @@ auto NavMeshBuilder::buildAsync(Scheduler& scheduler, const std::string& zoneNam
 
     float worldBmin[3];
     float worldBmax[3];
-    getWorldBounds(worldBmin, worldBmax);
+    getFilteredWorldBounds(config, worldBmin, worldBmax);
 
     // No geometry was gathered (empty or null ximesh) - nothing to build.
     if (worldBmin[0] > worldBmax[0])
