@@ -22,6 +22,7 @@ zones[xi.zone.FEIYIN] =
         MEMBERS_LEVELS_ARE_RESTRICTED      = 7206,  -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET             = 7251,  -- You can't fish here.
         CHEST_UNLOCKED                     = 7383,  -- You unlock the chest!
+        DRIED_UP_FOUNTAIN                  = 7391,  -- There is a dried up fountain here.
         YOU_FIND_NOTHING                   = 7422,  -- You find nothing.
         EVIL_PRESENCE                      = 7423,  -- You feel a conspicuously evil presence.
         SOUL_OF_TAVNAZIA                   = 7424,  -- You are able to make out the blurred letters. The soul of Tavnazia will never perish.
