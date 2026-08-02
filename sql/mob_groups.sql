@@ -11118,7 +11118,7 @@ INSERT INTO `mob_groups` VALUES (70,0,146,'Naji',0,128,0,0,0,0,NULL);
 
 INSERT INTO `mob_groups` VALUES (1,2965,147,'Old_Quadav',600,0,1850,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (2,791,147,'Copper_Quadav',600,0,513,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (3,2373,147,'Land_Pugil',600,0,975,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (3,2634,147,'Land_Pugil',600,0,975,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (4,525,147,'Brass_Quadav',600,0,353,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (5,427,147,'BiGho_Headtaker',0,32,2851,1050,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (6,2987,147,'Ooze',600,0,1867,0,0,0,NULL);
@@ -11155,7 +11155,7 @@ INSERT INTO `mob_groups` VALUES (36,2377,147,'Larva',720,0,256,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (37,2664,147,'Mimic',0,128,1677,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (38,7089,147,'Magnes_Quadav_NM',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (39,7090,147,'Nickel_Quadav_NM',0,128,0,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (40,7182,147,'Land_Pugil',600,0,975,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (40,2661,147,'Land_Pugil',600,0,975,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (41,7183,147,'Gloop',840,0,1007,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (42,7184,147,'Big_Jaw',720,0,279,0,0,0,NULL);
 
