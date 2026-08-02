@@ -215,9 +215,15 @@ xi.besieged.onEventFinish = function(player, csid, option, npc)
     local imperialStanding = player:getCurrency('imperial_standing')
     local mercenaryRank    = xi.besieged.getMercenaryRank(player)
 
+    -- Must have completed ToAU Mission 2.
+    if mercenaryRank == 0 then
+        return
+    end
+
     -- Sanction
     if option == 0 or option == 16 or option == 32 or option == 48 then
         local sanctionCost = 100
+
         if option == 0 then
             sanctionCost = 0
         end
@@ -229,7 +235,7 @@ xi.besieged.onEventFinish = function(player, csid, option, npc)
         local duration = getSanctionDuration(player)
         local subPower = 0 -- getImperialDefenseStats()
 
-        player:delCurrency('imperial_standing', 100)
+        player:delCurrency('imperial_standing', sanctionCost)
         player:delStatusEffectsByFlag(xi.effectFlag.INFLUENCE, true)
         player:addStatusEffect(xi.effect.SANCTION, { power = option / 16, duration = duration, origin = player, subType = subPower })
         player:messageSpecial(ID.text.SANCTION)
