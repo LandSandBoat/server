@@ -74,7 +74,7 @@ auto transform(const std::array<float, 9>& rot, const std::array<float, 3>& tran
 // Where a walkable surface sits below within the drop window, link the ledge down to it.
 // Landings come only from this tile's own detail mesh, so both endpoints are real polys.
 // Detour space, Y up.
-auto buildOffMeshConnections(const rcPolyMesh& pmesh, const rcPolyMeshDetail& dmesh, const NavMeshConfig& config, const int tileX, const int tileY) -> TileOffMeshConnections
+auto buildOffMeshConnections(const rcPolyMesh& pmesh, const rcPolyMeshDetail& dmesh, const NavMeshConfig& config, const int tileX, const int tileY, const std::vector<std::array<float, 9>>& barriers) -> TileOffMeshConnections
 {
     TileOffMeshConnections out;
 
@@ -206,6 +206,76 @@ auto buildOffMeshConnections(const rcPolyMesh& pmesh, const rcPolyMeshDetail& dm
         return found;
     };
 
+    // barrier triangles reduced to xz segments + a Y span, to veto links that clip through walls
+    struct BarrierWall
+    {
+        float x1, z1, x2, z2, yMin, yMax;
+    };
+
+    std::vector<BarrierWall> walls;
+    walls.reserve(barriers.size());
+    for (const auto& b : barriers)
+    {
+        const float* v[3] = { &b[0], &b[3], &b[6] };
+
+        int   bi = 0;
+        int   bj = 1;
+        float bd = -1.0f;
+        for (int i = 0; i < 3; ++i)
+        {
+            for (int j = i + 1; j < 3; ++j)
+            {
+                const float dx = v[i][0] - v[j][0];
+                const float dz = v[i][2] - v[j][2];
+                const float dd = dx * dx + dz * dz;
+                if (dd > bd)
+                {
+                    bd = dd;
+                    bi = i;
+                    bj = j;
+                }
+            }
+        }
+
+        walls.push_back(BarrierWall{ v[bi][0], v[bi][2], v[bj][0], v[bj][2], std::min({ v[0][1], v[1][1], v[2][1] }), std::max({ v[0][1], v[1][1], v[2][1] }) });
+    }
+
+    // segment (a -> b) crosses segment (c -> d) in the xz-plane
+    const auto segmentsCrossXZ = [](const float* a, const float* b, float cx, float cz, float dx, float dz) -> bool
+    {
+        const auto side = [](float px, float pz, float qx, float qz, float rx, float rz)
+        {
+            return (rz - pz) * (qx - px) - (rx - px) * (qz - pz);
+        };
+
+        const float d1 = side(cx, cz, dx, dz, a[0], a[2]);
+        const float d2 = side(cx, cz, dx, dz, b[0], b[2]);
+        const float d3 = side(a[0], a[2], b[0], b[2], cx, cz);
+        const float d4 = side(a[0], a[2], b[0], b[2], dx, dz);
+        return (d1 > 0.0f) != (d2 > 0.0f) && (d3 > 0.0f) != (d4 > 0.0f);
+    };
+
+    // only a wall rising more than a climb-height above the ledge blocks the drop; one sitting at
+    // the ledge is its own drop-face, which must not veto the link. detour Y is up-positive
+    const auto crossesBarrier = [&](const float* start, const float* end) -> bool
+    {
+        const float ledgeY = std::max(start[1], end[1]);
+        for (const auto& w : walls)
+        {
+            if (w.yMax <= ledgeY + config.agentMaxClimb)
+            {
+                continue;
+            }
+
+            if (segmentsCrossXZ(start, end, w.x1, w.z1, w.x2, w.z2))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    };
+
     std::vector<OffMeshCandidate> candidates;
     for (int p = 0; p < pmesh.npolys; ++p)
     {
@@ -300,9 +370,18 @@ auto buildOffMeshConnections(const rcPolyMesh& pmesh, const rcPolyMeshDetail& dm
                 continue;
             }
 
+            const float start[3] = { edgeMid[0] - outwardX * linkRadius, ledgeY, edgeMid[2] - outwardZ * linkRadius }; // pulled just inside the source poly
+            const float end[3]   = { landingX, landingY, landingZ };
+
+            // drop through a wall/rail, not an open ledge
+            if (crossesBarrier(start, end))
+            {
+                continue;
+            }
+
             candidates.push_back(OffMeshCandidate{
-                .start = { edgeMid[0] - outwardX * linkRadius, ledgeY, edgeMid[2] - outwardZ * linkRadius }, // pulled just inside the source poly
-                .end   = { landingX, landingY, landingZ },
+                .start = { start[0], start[1], start[2] },
+                .end   = { end[0], end[1], end[2] },
             });
         }
     }
@@ -800,9 +879,26 @@ auto NavMeshBuilder::buildTile(const int tx, const int ty, const rcConfig& cfg, 
     // Auto-generated off-mesh connections (drop / step links across ledges)
     //
 
-    const auto offMesh = config.generateOffMeshLinks
-                             ? buildOffMeshConnections(*pmesh, *dmesh, config, tx, ty)
-                             : TileOffMeshConnections{};
+    TileOffMeshConnections offMesh;
+    if (config.generateOffMeshLinks)
+    {
+        // barrier triangles (detour space) so off-mesh links can't route through walls/rails
+        std::vector<std::array<float, 9>> barriers;
+        for (int i = 0; i < numTris; ++i)
+        {
+            if (tileMesh.areas[i] != RC_NULL_AREA)
+            {
+                continue;
+            }
+
+            const int i0 = tileMesh.indices[i * 3 + 0];
+            const int i1 = tileMesh.indices[i * 3 + 1];
+            const int i2 = tileMesh.indices[i * 3 + 2];
+            barriers.push_back({ tileMesh.verts[i0 * 3 + 0], tileMesh.verts[i0 * 3 + 1], tileMesh.verts[i0 * 3 + 2], tileMesh.verts[i1 * 3 + 0], tileMesh.verts[i1 * 3 + 1], tileMesh.verts[i1 * 3 + 2], tileMesh.verts[i2 * 3 + 0], tileMesh.verts[i2 * 3 + 1], tileMesh.verts[i2 * 3 + 2] });
+        }
+
+        offMesh = buildOffMeshConnections(*pmesh, *dmesh, config, tx, ty, barriers);
+    }
 
     //
     // Build Detour tile data
@@ -821,11 +917,11 @@ auto NavMeshBuilder::buildTile(const int tx, const int ty, const rcConfig& cfg, 
         .detailVertsCount = dmesh->nverts,
         .detailTris       = dmesh->tris,
         .detailTriCount   = dmesh->ntris,
-        .offMeshConVerts  = offMesh.count ? offMesh.verts.data() : nullptr,
-        .offMeshConRad    = offMesh.count ? offMesh.rad.data() : nullptr,
-        .offMeshConFlags  = offMesh.count ? offMesh.flags.data() : nullptr,
-        .offMeshConAreas  = offMesh.count ? offMesh.areas.data() : nullptr,
-        .offMeshConDir    = offMesh.count ? offMesh.dir.data() : nullptr,
+        .offMeshConVerts  = offMesh.verts.data(),
+        .offMeshConRad    = offMesh.rad.data(),
+        .offMeshConFlags  = offMesh.flags.data(),
+        .offMeshConAreas  = offMesh.areas.data(),
+        .offMeshConDir    = offMesh.dir.data(),
         .offMeshConUserID = nullptr, // unused; Detour defaults ids when null
         .offMeshConCount  = offMesh.count,
         .userId           = 0,

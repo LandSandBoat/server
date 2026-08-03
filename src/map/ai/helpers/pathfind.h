@@ -128,6 +128,9 @@ private:
     // finds a random path around the given point
     bool FindRandomPath(const position_t& start, float maxRadius, uint8 maxTurns, xi::RoamFlag roamFlags);
 
+    // stop distance for the current point; only the destination stops short
+    auto StopDistanceForCurrentPoint() const -> float;
+
     void AddPoints(std::vector<pathpoint_t>&& points, bool reverse = false);
 
     void FinishedPath();

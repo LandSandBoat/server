@@ -244,6 +244,7 @@ void CPathFind::PrunePathWithin(float within)
     }
 
     position_t targetPoint = m_points.back().position;
+    auto*      navMesh     = m_POwner->loc.zone->navMesh();
 
     while (m_points.size() > 1)
     {
@@ -253,6 +254,17 @@ void CPathFind::PrunePathWithin(float within)
         {
             break;
         }
+
+        // only drop the point if the line it opens up is walkable the whole way
+        const position_t& shortcutFrom = m_points.size() > 2 ? m_points[m_points.size() - 3].position : m_POwner->loc.p;
+
+        float reachable[3]{};
+        if (!navMesh->findFurthestValidPoint(shortcutFrom, targetPoint, reachable) ||
+            !isWithinDistance(targetPoint, position_t{ reachable[0], reachable[1], reachable[2], 0, 0 }, 1.0f, true))
+        {
+            break;
+        }
+
         m_points.erase(m_points.end() - 2);
     }
 }
@@ -360,14 +372,21 @@ void CPathFind::StepTo(const position_t& pos, bool run)
     float distanceTo   = distance(m_POwner->loc.p, pos);
     float diff_y       = pos.y - m_POwner->loc.p.y;
 
+    const float stopDistance = StopDistanceForCurrentPoint();
+
     // face point mob is moving towards
     LookAt(pos);
 
-    if (distanceTo <= m_distanceFromPoint + stepDistance)
-    {
-        m_distanceMoved += distanceTo - m_distanceFromPoint;
+    // step along the exact bearing; loc.p.rotation is a byte and lags behind LookAt()
+    const float horizontalToPoint = distance(m_POwner->loc.p, pos, true) + FLT_EPSILON;
+    const float directionX        = (pos.x - m_POwner->loc.p.x) / horizontalToPoint;
+    const float directionZ        = (pos.z - m_POwner->loc.p.z) / horizontalToPoint;
 
-        if (m_distanceFromPoint == 0)
+    if (distanceTo <= stopDistance + stepDistance)
+    {
+        m_distanceMoved += distanceTo - stopDistance;
+
+        if (stopDistance == 0)
         {
             m_POwner->loc.p.x = pos.x;
             m_POwner->loc.p.y = pos.y;
@@ -375,10 +394,8 @@ void CPathFind::StepTo(const position_t& pos, bool run)
         }
         else
         {
-            float radians = (1 - (float)m_POwner->loc.p.rotation / 256) * 2 * (float)M_PI;
-
-            m_POwner->loc.p.x += cosf(radians) * (distanceTo - m_distanceFromPoint);
-            m_POwner->loc.p.z += sinf(radians) * (distanceTo - m_distanceFromPoint);
+            m_POwner->loc.p.x += directionX * (distanceTo - stopDistance);
+            m_POwner->loc.p.z += directionZ * (distanceTo - stopDistance);
             if (abs(diff_y) > .5f)
             {
                 // Don't step too far vertically by simply utilizing the slope
@@ -399,10 +416,8 @@ void CPathFind::StepTo(const position_t& pos, bool run)
     {
         m_distanceMoved += stepDistance;
         // take a step towards target point
-        float radians = (1 - (float)m_POwner->loc.p.rotation / 256) * 2 * (float)M_PI;
-
-        m_POwner->loc.p.x += cosf(radians) * stepDistance;
-        m_POwner->loc.p.z += sinf(radians) * stepDistance;
+        m_POwner->loc.p.x += directionX * stepDistance;
+        m_POwner->loc.p.z += directionZ * stepDistance;
         if (abs(diff_y) > .5f)
         {
             // Don't step too far vertically by simply utilizing the slope
@@ -557,14 +572,26 @@ bool CPathFind::IsPatrolling()
 
 bool CPathFind::AtPoint(const position_t& pos)
 {
-    if (m_distanceFromPoint == 0)
+    const float stopDistance = StopDistanceForCurrentPoint();
+
+    if (stopDistance == 0)
     {
         return isWithinDistance(m_POwner->loc.p, pos, 0.1f);
     }
     else
     {
-        return isWithinDistance(m_POwner->loc.p, pos, m_distanceFromPoint + 0.2f);
+        return isWithinDistance(m_POwner->loc.p, pos, stopDistance + 0.2f);
     }
+}
+
+auto CPathFind::StopDistanceForCurrentPoint() const -> float
+{
+    if (m_currentPoint >= static_cast<int16>(m_points.size()) - 1)
+    {
+        return m_distanceFromPoint;
+    }
+
+    return 0.0f;
 }
 
 bool CPathFind::InWater()
