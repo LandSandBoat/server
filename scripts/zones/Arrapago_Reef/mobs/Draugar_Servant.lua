@@ -3,6 +3,8 @@
 --  Mob: Draugar Servant
 -- Note: PH for Bloody Bones
 -----------------------------------
+mixins = { require('scripts/mixins/drg_wyvern') }
+-----------------------------------
 local ID = zones[xi.zone.ARRAPAGO_REEF]
 -----------------------------------
 ---@type TMobEntity

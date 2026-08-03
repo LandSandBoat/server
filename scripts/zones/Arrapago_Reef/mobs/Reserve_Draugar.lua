@@ -2,6 +2,8 @@
 -- Area: Arrapago Reef
 --  Mob: Reserve Draugar
 -----------------------------------
+mixins = { require('scripts/mixins/drg_wyvern') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

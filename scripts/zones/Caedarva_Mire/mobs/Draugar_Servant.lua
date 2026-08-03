@@ -2,6 +2,8 @@
 -- Area: Caedarva Mire
 --  Mob: Draugar_Servant
 -----------------------------------
+mixins = { require('scripts/mixins/drg_wyvern') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 
