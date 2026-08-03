@@ -8313,6 +8313,7 @@ xi.item =
     MILITARY_SPEAR                      = 18090,
     MIGHTY_LANCE                        = 18091,
     BOURDONASSE                         = 18092,
+    DISPEL_COUSE                        = 18095,
     GONDO_SHIZUNORI                     = 18097,
     MARTIAL_LANCE                       = 18098,
     STONE_SPLITTER                      = 18099,

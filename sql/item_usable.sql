@@ -2869,7 +2869,7 @@ INSERT INTO `item_usable` VALUES (18035,'deathbone_knife',1,3,0,0,100,30,600,0);
 INSERT INTO `item_usable` VALUES (18060,'blizzard_scythe',4,2,0,0,50,30,600,0);
 INSERT INTO `item_usable` VALUES (18062,'lucent_scythe',1,3,0,0,50,30,1800,0);
 INSERT INTO `item_usable` VALUES (18067,'keen_zaghnal',1,3,0,0,50,30,1800,0);
-INSERT INTO `item_usable` VALUES (18095,'dispel_couse',4,6,0,0,50,30,30,0);
+INSERT INTO `item_usable` VALUES (18095,'dispel_couse',4,6,10,0,50,30,10,0);
 INSERT INTO `item_usable` VALUES (18107,'ponderous_lance',4,2,0,0,50,30,600,0);
 INSERT INTO `item_usable` VALUES (18108,'lucent_lance',1,3,0,0,50,30,1800,0);
 INSERT INTO `item_usable` VALUES (18117,'gimlet_spear',1,3,0,0,50,30,1800,0);
