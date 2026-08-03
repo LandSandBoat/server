@@ -4,13 +4,10 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_deodorizer_duration'
-
+local m = Module:new('era_deodorizer_duration')
 if xi.module.isContentEnabled('ABYSSEA') then
-    return { name = moduleName }
+    return
 end
-
-local m = Module:new(moduleName)
 
 m:addOverride('xi.items.flask_of_deodorizer.onItemUse', function(target, user)
     if not target:hasStatusEffect(xi.effect.DEODORIZE) then
@@ -19,5 +16,3 @@ m:addOverride('xi.items.flask_of_deodorizer.onItemUse', function(target, user)
         target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
 end)
-
-return m

@@ -48,5 +48,3 @@ m:addOverride('xi.actions.spells.songs.raptor_mazurka.onSpellCast', function(cas
     mazurkaProvoke(caster, target, spell, raptorMazurkaPower)
     return songEffect
 end)
-
-return m

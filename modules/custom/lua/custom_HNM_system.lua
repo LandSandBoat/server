@@ -173,5 +173,3 @@ hnmSystem:addOverride('xi.zones.Behemoths_Dominion.npcs.qm2.onTrade', function(p
         player:confirmTrade()
     end
 end)
-
-return hnmSystem

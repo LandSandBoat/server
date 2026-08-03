@@ -3,8 +3,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'al_zahbi_vendors_adjust'
-local m = Module:new(moduleName)
+local m = Module:new('al_zahbi_vendors_adjust')
 
 if not xi.module.isContentEnabled('WOTG') then
     -- Zafif: Remove Reprisal
@@ -57,5 +56,3 @@ if not xi.module.isContentEnabled('WOTG') then
         xi.shop.general(player, stock)
     end)
 end
-
-return m

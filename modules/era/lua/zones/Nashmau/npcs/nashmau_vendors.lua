@@ -3,8 +3,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'nashmau_vendors_adjust'
-local m = Module:new(moduleName)
+local m = Module:new('nashmau_vendors_adjust')
 
 if not xi.module.isContentEnabled('SOA') then
     -- Yoyoroon: Removes many PUP attachments
@@ -93,5 +92,3 @@ if not xi.module.isContentEnabled('ABYSSEA') then
         xi.shop.general(player, stock)
     end)
 end
-
-return m

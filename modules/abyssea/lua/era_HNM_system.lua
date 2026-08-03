@@ -421,5 +421,3 @@ hnmSystem:addOverride('xi.zones.Behemoths_Dominion.mobs.King_Behemoth.onMobDespa
     xi.mob.updateNMSpawnPoint(behemothDomID.mob.BEHEMOTH, behemothSpawnPoints)
     GetMobByID(behemothDomID.mob.BEHEMOTH):setRespawnTime(randomPopTime)
 end)
-
-return hnmSystem

@@ -3,14 +3,12 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_job_utils_thief'
+local m = Module:new('era_job_utils_thief')
 
 -- If Abyssea or later is enabled, no changes.
 if xi.module.isContentEnabled('ABYSSEA') then
-    return { name = moduleName }
+    return
 end
-
-local m = Module:new(moduleName)
 
 -- Assassin's Charge: Remove Quadruple Attack
 m:addOverride('xi.effects.assassins_charge.onEffectGain', function(target, effect)
@@ -34,5 +32,3 @@ m:addOverride('xi.job_utils.thief.useFeint', function(player, target, ability, a
 
     player:addStatusEffect(xi.effect.FEINT, { power = 150, duration = 60, origin = player })
 end)
-
-return m

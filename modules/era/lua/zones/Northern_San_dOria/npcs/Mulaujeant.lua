@@ -15,13 +15,11 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_quest_missionary_man'
+local m = Module:new('era_quest_missionary_man')
 
 if xi.module.isContentEnabled('SOA') then
-    return { name = moduleName }
+    return
 end
-
-local m = Module:new(moduleName)
 
 m:addOverride('xi.zones.Northern_San_dOria.npcs.Mulaujeant.onEventFinish', function(player, csid, option, npc)
     if csid == 698 then
@@ -35,5 +33,3 @@ m:addOverride('xi.zones.Northern_San_dOria.npcs.Mulaujeant.onEventFinish', funct
         npcUtil.giveKeyItem(player, xi.ki.SUBLIME_STATUE_OF_THE_GODDESS)
     end
 end)
-
-return m

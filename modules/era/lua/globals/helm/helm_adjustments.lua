@@ -9,7 +9,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_helm_adjustments'
+Module:new('era_helm_adjustments')
 
 local removalsByContent =
 {
@@ -99,5 +99,3 @@ for _, entry in ipairs(removalsByContent) do
         applyRemovals(entry.removals)
     end
 end
-
-return { name = moduleName }

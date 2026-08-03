@@ -3,8 +3,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'dohdjuma_adjust'
-local m = Module:new(moduleName)
+local m = Module:new('dohdjuma_adjust')
 
 if not xi.module.isContentEnabled('ABYSSEA') then
     m:addOverride('xi.zones.Selbina.npcs.Dohdjuma.onTrigger', function(player, npc)
@@ -26,5 +25,3 @@ if not xi.module.isContentEnabled('ABYSSEA') then
         xi.shop.general(player, stock, xi.fameArea.SELBINA_RABAO)
     end)
 end
-
-return m

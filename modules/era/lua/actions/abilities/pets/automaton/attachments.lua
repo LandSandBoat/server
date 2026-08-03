@@ -6,13 +6,11 @@ require('modules/module_utils')
 require('scripts/globals/automaton')
 -----------------------------------
 
-local moduleName = 'attachments'
+local m = Module:new('attachments')
 
 if xi.module.isContentEnabled('ABYSSEA') then
-    return { name = moduleName }
+    return
 end
-
-local m = Module:new(moduleName)
 
 -- Reduces Enmity boost from Strobe                                 : https://wiki.ffo.jp/html/8610.html
 -- Reduces Store TP from Inhibitor                                  : https://wiki.ffo.jp/html/8625.html
@@ -548,5 +546,3 @@ m:addOverride('xi.actions.abilities.pets.automaton.economizer.onAutomatonAbility
 
     return automaton:addMP(mpRecovered)
 end)
-
-return m

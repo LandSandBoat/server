@@ -4,6 +4,10 @@
 xi = xi or {}
 xi.module = xi.module or {}
 
+-- Module:new adds every Module it creates to this list automatically
+-- That means this is the new registration point for modules
+xi.module.registry = xi.module.registry or {}
+
 --
 -- applyOverride: Provides the "super" functionality for overriding functions
 --
@@ -43,6 +47,14 @@ xi.module.modifyInteractionEntry = function(filename, modifyFunc)
     InteractionGlobal.lookup:removeContainer(res) -- Remove the resource from the container
     modifyFunc(res) -- Run function to modify resource
     InteractionGlobal.lookup:addContainer(res) -- Re-add resource to container
+end
+
+-- Registration point for command modules
+xi.module.registerCommand = function(name, commandObj)
+    printf('Registering module command: !%s', name)
+
+    xi.commands = xi.commands or {}
+    xi.commands[name] = commandObj
 end
 
 xi.module.isContentEnabled = function(contentTag)
@@ -92,6 +104,8 @@ function Module:new(name)
     obj.name = name
     obj.overrides = {}
     obj.enabled = false
+
+    table.insert(xi.module.registry, obj)
 
     return obj
 end

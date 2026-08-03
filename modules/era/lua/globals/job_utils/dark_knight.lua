@@ -3,8 +3,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_job_utils_dark_knight'
-local m = Module:new(moduleName)
+local m = Module:new('era_job_utils_dark_knight')
 
 -----------------------------------
 -- Seekers of Adoulin Era
@@ -96,11 +95,3 @@ if not xi.module.isContentEnabled('WOTG') then
         effect:addMod(xi.mod.ARCANA_KILLER, effect:getPower())
     end)
 end
-
--- Return a real module only when a content gate registered overrides.
--- Otherwise return a data-only table to avoid a "No overrides found" loader warning.
-if #m.overrides > 0 then
-    return m
-end
-
-return { name = moduleName }

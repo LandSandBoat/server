@@ -3,8 +3,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'rabao_vendors_adjust'
-local m = Module:new(moduleName)
+local m = Module:new('rabao_vendors_adjust')
 
 if not xi.module.isContentEnabled('ABYSSEA') then
     -- Brave Ox: Remove post-era scrolls (Cure VI, Protect V, Shell V, Crusade)
@@ -73,5 +72,3 @@ if not xi.module.isContentEnabled('ABYSSEA') then
         xi.shop.general(player, stock)
     end)
 end
-
-return m

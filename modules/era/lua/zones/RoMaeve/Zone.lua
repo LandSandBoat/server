@@ -11,13 +11,11 @@ xi.module.ensureTable('xi.zones.RoMaeve')
 -----------------------------------
 local ID = zones[xi.zone.ROMAEVE]
 -----------------------------------
-local moduleName = 'era_moongate_time'
+local m = Module:new('era_moongate_time')
 
 if xi.module.isContentEnabled('ROV') then
-    return { name = moduleName }
+    return
 end
-
-local m = Module:new(moduleName)
 
 local function activateRoMaeve(zone)
     local validMoon    = (getVanadielMoonCycle() == xi.moonCycle.FULL_MOON)
@@ -65,5 +63,3 @@ m:addOverride('xi.zones.RoMaeve.Zone.onGameHour', function(zone)
     super(zone)
     activateRoMaeve(zone)
 end)
-
-return m

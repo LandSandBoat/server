@@ -6,13 +6,11 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'soa_avatar_base_damage'
+local m = Module:new('soa_avatar_base_damage')
 
 if xi.module.isContentEnabled('SOA') then
-    return { name = moduleName }
+    return
 end
-
-local m = Module:new(moduleName)
 
 m:addOverride('xi.pets.avatar.calculateAvatarWeaponDamage', function(pet)
     local weaponDamage = (pet:getMainLvl() + 2) / 2
@@ -20,5 +18,3 @@ m:addOverride('xi.pets.avatar.calculateAvatarWeaponDamage', function(pet)
     pet:setDamage(weaponDamage, xi.slot.MAIN)
     pet:setDamage(weaponDamage, xi.slot.RANGED)
 end)
-
-return m

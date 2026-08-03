@@ -1,7 +1,9 @@
 -----------------------------------
 -- Module: Summoner spirit perpetuation cost helpers
 -----------------------------------
-local moduleName = 'era_job_utils_summoner'
+require('modules/module_utils')
+-----------------------------------
+Module:new('era_job_utils_summoner')
 
 xi.job_utils.summoner = xi.job_utils.summoner or {}
 
@@ -51,5 +53,3 @@ xi.job_utils.summoner.applySpiritPerpetuationCost = function(caster)
         caster:setMod(xi.mod.AVATAR_PERPETUATION, math.max(0, baseCost - meritReduction))
     end
 end
-
-return { name = moduleName }

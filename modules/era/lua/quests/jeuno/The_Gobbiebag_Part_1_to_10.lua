@@ -5,13 +5,11 @@
 require('modules/module_utils')
 require('scripts/quests/jeuno/helpers')
 -----------------------------------
-local moduleName = 'era_gobbiebag_fame_requirements'
+local m = Module:new('era_gobbiebag_fame_requirements')
 
 if xi.module.isContentEnabled('SOA') then
-    return { name = moduleName }
+    return
 end
-
-local m = Module:new(moduleName)
 
 local eraFameRequirements =
 {
@@ -32,5 +30,3 @@ m:addOverride('xi.jeuno.helpers.GobbiebagQuest.new', function(self, params)
 
     return super(self, params)
 end)
-
-return m

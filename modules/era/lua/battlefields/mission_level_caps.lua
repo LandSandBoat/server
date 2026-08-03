@@ -6,13 +6,11 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'cop_level_caps'
+local m = Module:new('cop_level_caps')
 
 if xi.module.isContentEnabled('ABYSSEA') then
-    return { name = moduleName }
+    return
 end
-
-local m = Module:new(moduleName)
 
 -- Apply level caps after server initialization when all battlefields are loaded
 m:addOverride('xi.server.onServerStart', function()
@@ -56,5 +54,3 @@ m:addOverride('xi.server.onServerStart', function()
         end
     end
 end)
-
-return m

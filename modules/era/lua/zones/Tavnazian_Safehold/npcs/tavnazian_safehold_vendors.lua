@@ -3,8 +3,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'tavnazian_safehold_vendors_adjust'
-local m = Module:new(moduleName)
+local m = Module:new('tavnazian_safehold_vendors_adjust')
 
 if not xi.module.isContentEnabled('SOA') then
     -- Nilerouche: Removes OOE spell scrolls from stock
@@ -61,5 +60,3 @@ if not xi.module.isContentEnabled('SOA') then
         xi.shop.general(player, stock)
     end)
 end
-
-return m

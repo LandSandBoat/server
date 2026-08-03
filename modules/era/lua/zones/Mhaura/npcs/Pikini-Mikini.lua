@@ -3,8 +3,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'mhaura_vendors_adjust'
-local m = Module:new(moduleName)
+local m = Module:new('mhaura_vendors_adjust')
 
 if not xi.module.isContentEnabled('SOA') then
     m:addOverride('xi.zones.Mhaura.npcs.Pikini-Mikini.onTrigger', function(player, npc)
@@ -28,5 +27,3 @@ if not xi.module.isContentEnabled('SOA') then
         xi.shop.general(player, stock, xi.fameArea.WINDURST)
     end)
 end
-
-return m

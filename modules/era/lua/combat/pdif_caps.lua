@@ -4,10 +4,10 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'original_pdif_caps'
+Module:new('original_pdif_caps')
 
 if xi.module.isContentEnabled('WOTG') then
-    return { name = moduleName }
+    return
 end
 
 xi.combat.physical.pDifWeaponCapTable[xi.skill.HAND_TO_HAND    ] = 2
@@ -28,5 +28,3 @@ xi.combat.physical.pDifWeaponCapTable[xi.skill.AUTOMATON_MAGIC ] = 2
 xi.combat.physical.pDifWeaponCapTable[xi.skill.ARCHERY         ] = 3
 xi.combat.physical.pDifWeaponCapTable[xi.skill.MARKSMANSHIP    ] = 3
 xi.combat.physical.pDifWeaponCapTable[xi.skill.THROWING        ] = 3
-
-return { name = moduleName }

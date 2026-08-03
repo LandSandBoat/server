@@ -1,5 +1,7 @@
 -----------------------------------
--- Data file consumed by job_adjustments.lua for Scavenge zone pools
+-- Data file consumed by job_utils/ranger.lua for Scavenge zone pools
+-- Not a module: the loader ignores return values, so this plain table is
+-- only ever seen by the modules that require() this file.
 -- Source: https://ffxiclopedia.fandom.com/wiki/Scavenge/Items
 -----------------------------------
 

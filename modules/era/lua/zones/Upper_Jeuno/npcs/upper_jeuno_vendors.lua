@@ -3,8 +3,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'upper_jeuno_vendors_adjust'
-local m = Module:new(moduleName)
+local m = Module:new('upper_jeuno_vendors_adjust')
 
 if not xi.module.isContentEnabled('ROV') then
     -- Antonia: Remove job point related weapons from stock
@@ -71,5 +70,3 @@ if not xi.module.isContentEnabled('ROV') then
         xi.shop.general(player, stock)
     end)
 end
-
-return m

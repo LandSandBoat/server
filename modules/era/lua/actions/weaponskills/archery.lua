@@ -4,13 +4,11 @@
 require('modules/module_utils')
 -----------------------------------
 
-local moduleName = 'toau_archery'
+local m = Module:new('toau_archery')
 
 if xi.module.isContentEnabled('WOTG') then
-    return { name = moduleName }
+    return
 end
-
-local m = Module:new(moduleName)
 
 -----------------------------------
 -- Flaming Arrow
@@ -162,5 +160,3 @@ m:addOverride('xi.actions.weaponskills.namas_arrow.onUseWeaponSkill', function(p
 
     return tpHits, extraHits, criticalHit, damage
 end)
-
-return m

@@ -5,13 +5,11 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_skillchain'
+local m = Module:new('era_skillchain')
 
 if xi.module.isContentEnabled('SOA') then
-    return { name = moduleName }
+    return
 end
-
-local m = Module:new(moduleName)
 
 local chainMultipliers =
 {
@@ -128,5 +126,3 @@ m:addOverride('xi.combat.skillchain.calculateSkillchainDamage', function(actor, 
 
     return finalDamage
 end)
-
-return m

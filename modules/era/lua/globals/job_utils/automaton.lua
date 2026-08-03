@@ -8,13 +8,11 @@ require('modules/module_utils')
 require('scripts/globals/automaton')
 require('scripts/globals/pets/automaton')
 -----------------------------------
-local moduleName = 'automaton_global'
+local m = Module:new('automaton_global')
 
 if not xi.module.isContentEnabled('WOTG') then
-    return { name = moduleName }
+    return
 end
-
-local m = Module:new(moduleName)
 
 local maneuverList =
 {
@@ -104,5 +102,3 @@ m:addOverride('xi.automaton.onUseManeuver', function(player, target, ability, ac
 
     return target:getOverloadChance(element)
 end)
-
-return m

@@ -239,6 +239,11 @@ void LoadLuaModules(IPP mapIPP)
 
     const auto currentPort = mapIPP.getPort() == 0 ? settings::get<uint16>("network.MAP_PORT") : mapIPP.getPort();
 
+    lua[sol::create_if_nil]["xi"]["module"]["registry"] = lua.create_table();
+
+    sol::table registry = lua["xi"]["module"]["registry"];
+
+    // Start loading modules
     for (const auto& entry : expandedList)
     {
         const auto path = std::filesystem::path(entry).relative_path();
@@ -248,84 +253,71 @@ void LoadLuaModules(IPP mapIPP)
             continue;
         }
 
-        const auto filename = path.filename().generic_string();
-        const auto res      = lua.safe_script_file(path.generic_string());
+        const auto registrySizeBefore = registry.size();
+
+        const auto res = lua.safe_script_file(path.generic_string());
         if (!res.valid())
         {
             const sol::error err = res;
-            ShowError("Failed to load module: %s", filename);
+            ShowError("Failed to load module: %s", path.filename().generic_string());
             ShowError(err.what());
             continue;
         }
 
-        if (res.get_type() != sol::type::table)
+        // Tells you where the module came from
+        for (auto i = registrySizeBefore + 1; i <= registry.size(); ++i)
         {
-            ShowError("Failed to load module: Invalid object returned from: %s", filename);
-            continue;
+            registry[i]["filename"] = path.filename().generic_string();
         }
+    }
 
-        const sol::table table = res;
+    // Process everything now
+    for (std::size_t i = 1; i <= registry.size(); ++i)
+    {
+        const sol::table module = registry[i];
 
-        if (table["cmdprops"].valid() && table["onTrigger"].valid())
+        const auto moduleName = module.get_or("name", std::string{});
+        const auto filename   = module.get_or("filename", std::string{});
+        ShowInfo(fmt::format("=== Module: {} ===", moduleName));
+
+        bool anyPortFiltered = false;
+
+        const auto declaredOverrides = module.get_or("overrides", std::vector<sol::table>{});
+
+        const auto prevOverrideCount = overrides.size();
+        for (auto& override : declaredOverrides)
         {
-            const auto commandName = path.stem().generic_string();
-            ShowInfo(fmt::format("Registering module command: !{}", commandName));
-            lua[sol::create_if_nil]["xi"]["commands"][commandName] = table;
-            continue;
-        }
+            const auto name  = override["name"].get<std::string>();
+            const auto func  = override["func"];
+            const auto parts = split(name, ".");
 
-        if (table["overrides"].valid())
-        {
-            const auto moduleName = table.get_or("name", std::string{});
-            ShowInfo(fmt::format("=== Module: {} ===", moduleName));
+            DebugModules(fmt::format("Preparing override: {}", name));
 
-            bool anyPortFiltered = false;
-
-            const auto prevOverrideCount = overrides.size();
-            for (auto& override : table.get_or("overrides", std::vector<sol::table>{}))
+            if (parts.size() >= 3 && parts[0] == "xi" && parts[1] == "zones")
             {
-                const auto name  = override["name"].get<std::string>();
-                const auto func  = override["func"];
-                const auto parts = split(name, ".");
-
-                DebugModules(fmt::format("Preparing override: {}", name));
-
-                // Multi-process: skip overrides targeting zones on a different port
-                if (parts.size() >= 3 && parts[0] == "xi" && parts[1] == "zones")
+                const auto& zoneName = parts[2];
+                const auto  portIt   = zoneSettingsPorts.find(zoneName);
+                if (portIt != zoneSettingsPorts.end() && portIt->second != currentPort)
                 {
-                    const auto& zoneName = parts[2];
-                    const auto  portIt   = zoneSettingsPorts.find(zoneName);
-                    if (portIt != zoneSettingsPorts.end() && portIt->second != currentPort)
-                    {
-                        DebugModules(fmt::format("{} exists on a different port ({}), skipping", zoneName, portIt->second));
-                        anyPortFiltered = true;
-                        continue;
-                    }
+                    DebugModules(fmt::format("{} exists on a different port ({}), skipping", zoneName, portIt->second));
+                    anyPortFiltered = true;
+                    continue;
                 }
-
-                overrides.emplace(name.substr(0, name.rfind('.')),
-                                  Override{
-                                      .filename     = filename,
-                                      .overrideName = name,
-                                      .nameParts    = parts,
-                                      .func         = func,
-                                  });
             }
 
-            // Only warn if no overrides were added AND none were intentionally skipped
-            // due to targeting zones on a different map process port.
-            if (!anyPortFiltered && overrides.size() == prevOverrideCount)
-            {
-                ShowError("No overrides found in module: %s", filename);
-            }
-
-            // NOTE: This continue is for the expandedList loop
-            // TODO: Flatten all of this surrounding logic so it's less fragile
-            continue;
+            overrides.emplace(name.substr(0, name.rfind('.')),
+                              Override{
+                                  .filename     = filename,
+                                  .overrideName = name,
+                                  .nameParts    = parts,
+                                  .func         = func,
+                              });
         }
 
-        // TODO: Differentiate invalid table vs data-only table in modules directory
-        // ShowError("Failed to find valid table fields in module: %s", filename);
+        if (!anyPortFiltered && overrides.size() == prevOverrideCount)
+        {
+            DebugModules(fmt::format("No overrides registered in module (data-only or content-gated): {}", filename));
+        }
     }
 }
 

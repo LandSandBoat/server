@@ -3,8 +3,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_job_utils_corsair'
-local m = Module:new(moduleName)
+local m = Module:new('era_job_utils_corsair')
 
 -----------------------------------
 -- Rhapsodies of Vana'diel Era
@@ -382,9 +381,3 @@ if not xi.module.isContentEnabled('ABYSSEA') then
         return damage
     end)
 end
-
-if #m.overrides > 0 then
-    return m
-end
-
-return { name = moduleName }

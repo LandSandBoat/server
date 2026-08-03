@@ -3,8 +3,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'port_windurst_vendors_adjust'
-local m = Module:new(moduleName)
+local m = Module:new('port_windurst_vendors_adjust')
 
 if not xi.module.isContentEnabled('ABYSSEA') then
     -- Hohbiba-Mubiba: Rework inventory for era stock and conquest standing requirements
@@ -105,5 +104,3 @@ if not xi.module.isContentEnabled('ABYSSEA') then
         xi.shop.nation(player, stock, xi.nation.WINDURST)
     end)
 end
-
-return m

@@ -4,13 +4,11 @@
 require('modules/module_utils')
 -----------------------------------
 
-local moduleName = 'toau_sword'
+local m = Module:new('toau_sword')
 
 if xi.module.isContentEnabled('WOTG') then
-    return { name = moduleName }
+    return
 end
-
-local m = Module:new(moduleName)
 
 -----------------------------------
 -- Fast Blade
@@ -398,5 +396,3 @@ m:addOverride('xi.actions.weaponskills.expiacion.onUseWeaponSkill', function(pla
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
     return tpHits, extraHits, criticalHit, damage
 end)
-
-return m

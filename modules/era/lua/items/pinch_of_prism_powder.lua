@@ -4,13 +4,10 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_prism_powder_duration'
-
+local m = Module:new('era_prism_powder_duration')
 if xi.module.isContentEnabled('ABYSSEA') then
-    return { name = moduleName }
+    return
 end
-
-local m = Module:new(moduleName)
 
 m:addOverride('xi.items.pinch_of_prism_powder.onItemUse', function(target, user)
     if target:hasStatusEffect(xi.effect.INVISIBLE) then
@@ -19,5 +16,3 @@ m:addOverride('xi.items.pinch_of_prism_powder.onItemUse', function(target, user)
 
     target:addStatusEffect(xi.effect.INVISIBLE, { power = 1, duration = math.floor(math.random(90, 360) * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER), origin = user, tick = 10 })
 end)
-
-return m

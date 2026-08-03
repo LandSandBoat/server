@@ -4,13 +4,11 @@
 require('modules/module_utils')
 -----------------------------------
 
-local moduleName = 'toau_hand_to_hand'
+local m = Module:new('toau_hand_to_hand')
 
 if xi.module.isContentEnabled('WOTG') then
-    return { name = moduleName }
+    return
 end
-
-local m = Module:new(moduleName)
 
 -----------------------------------
 -- Combo
@@ -212,5 +210,3 @@ m:addOverride('xi.actions.weaponskills.stringing_pummel.onUseWeaponSkill', funct
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
     return tpHits, extraHits, criticalHit, damage
 end)
-
-return m

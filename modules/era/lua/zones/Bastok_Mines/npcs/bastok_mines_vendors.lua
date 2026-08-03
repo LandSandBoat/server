@@ -3,8 +3,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'bastok_mines_vendors_adjust'
-local m = Module:new(moduleName)
+local m = Module:new('bastok_mines_vendors_adjust')
 
 if not xi.module.isContentEnabled('ABYSSEA') then
     -- Boytz: Remove Republic Waystone from stock
@@ -90,5 +89,3 @@ if not xi.module.isContentEnabled('ABYSSEA') then
         xi.shop.nation(player, stock, xi.nation.BASTOK)
     end)
 end
-
-return m

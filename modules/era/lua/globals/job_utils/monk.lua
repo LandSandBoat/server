@@ -3,14 +3,12 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_job_utils_monk'
+local m = Module:new('era_job_utils_monk')
 
 -- If RoV or later is enabled, no changes.
 if xi.module.isContentEnabled('ROV') then
-    return { name = moduleName }
+    return
 end
-
-local m = Module:new(moduleName)
 
 -- Focus: Revert to flat +20 ACC only
 m:addOverride('xi.effects.focus.onEffectGain', function(target, effect)
@@ -104,5 +102,3 @@ end)
 --     effect:addMod(xi.mod.STORETP, 180)
 --     effect:addMod(xi.mod.HASTE_MAGIC, -6000)
 -- end)
-
-return m

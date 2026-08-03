@@ -3,8 +3,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'kazham_vendors_adjust'
-local m = Module:new(moduleName)
+local m = Module:new('kazham_vendors_adjust')
 
 if not xi.module.isContentEnabled('ABYSSEA') then
     -- Toji Mumosulah: Removes OOE spell scrolls from stock
@@ -73,5 +72,3 @@ if not xi.module.isContentEnabled('ABYSSEA') then
         xi.shop.general(player, stock, xi.fameArea.WINDURST)
     end)
 end
-
-return m

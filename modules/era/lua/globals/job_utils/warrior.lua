@@ -3,14 +3,12 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_job_utils_warrior'
+local m = Module:new('era_job_utils_warrior')
 
 -- If Abyssea or later is enabled, no changes.
 if xi.module.isContentEnabled('ABYSSEA') then
-    return { name = moduleName }
+    return
 end
-
-local m = Module:new(moduleName)
 
 -- Warrior's Charge: Remove Triple Attack bonus
 m:addOverride('xi.effects.warriors_charge.onEffectGain', function(target, effect)
@@ -26,5 +24,3 @@ m:addOverride('xi.job_utils.warrior.useWarriorsCharge', function(player, target,
 
     return xi.effect.WARRIORS_CHARGE
 end)
-
-return m

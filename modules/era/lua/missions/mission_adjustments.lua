@@ -3,8 +3,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_mission_adjustments'
-local m = Module:new(moduleName)
+local m = Module:new('era_mission_adjustments')
 
 -- Keep sections in the previous module init order.
 if not xi.module.isContentEnabled('ROV') then
@@ -292,11 +291,3 @@ if not xi.module.isContentEnabled('SOA') then
         end)
     end)
 end
-
--- Return a real module only when a content gate registered overrides.
--- Otherwise return a data-only table to avoid a "No overrides found" loader warning.
-if #m.overrides > 0 then
-    return m
-end
-
-return { name = moduleName }

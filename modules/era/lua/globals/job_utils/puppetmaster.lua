@@ -3,12 +3,10 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_job_utils_puppetmaster'
-
-local m = Module:new(moduleName)
+local m = Module:new('era_job_utils_puppetmaster')
 
 if xi.module.isContentEnabled('ABYSSEA') then
-    return { name = moduleName }
+    return
 end
 
 -- Overdrive: Revert duration from 180 to 60 seconds : https://wiki.ffo.jp/html/954.html
@@ -138,5 +136,3 @@ m:addOverride('xi.job_utils.puppetmaster.onAbilityUseRepair', function(player, t
 
     ability:setMsg(xi.msg.basic.USES_JA)
 end)
-
-return m

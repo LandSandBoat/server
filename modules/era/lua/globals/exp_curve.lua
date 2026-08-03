@@ -7,13 +7,11 @@
 require('modules/module_utils')
 -----------------------------------
 
-local moduleName = 'original_exp_curve'
+local m = Module:new('original_exp_curve')
 
 if xi.module.isContentEnabled('WOTG') then
-    return { name = moduleName }
+    return
 end
-
-local m = Module:new(moduleName)
 
 m:addOverride('xi.expDifficultyCurve.loadExpDifficultyCurve', function()
     local incrediblyEasyPreyLevel  = 255
@@ -35,5 +33,3 @@ m:addOverride('xi.expDifficultyCurve.loadExpDifficultyCurve', function()
     -- Load into C++
     LoadExpDifficultyCurves(expToDifficultyTable, incrediblyEasyPreyLevel, incrediblyEasyPreyMinExp)
 end)
-
-return m

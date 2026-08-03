@@ -168,5 +168,3 @@ end
 for _, entry in pairs(nmsToShield) do
     m:addOverride(string.format('xi.zones.%s.mobs.%s.onMobInitialize', entry[1], entry[2]), overrideFunc)
 end
-
-return m

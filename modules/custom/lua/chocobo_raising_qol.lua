@@ -46,5 +46,3 @@ m:addOverride('xi.server.onServerStart', function()
     -- Original: Leads to absolute max of: 17 + (4 * 9): 53 -> clamped to 45
     -- New: Leads to absolute max of: 20 + (5 * 9): 65 -> clamped to 60
 end)
-
-return m

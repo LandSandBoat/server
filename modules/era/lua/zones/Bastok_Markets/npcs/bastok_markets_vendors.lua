@@ -3,8 +3,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'bastok_markets_vendors_adjust'
-local m = Module:new(moduleName)
+local m = Module:new('bastok_markets_vendors_adjust')
 
 if not xi.module.isContentEnabled('ROV') then
     -- Harmodios: Rework stock for in era items and conquest standing requirements
@@ -178,5 +177,3 @@ if not xi.module.isContentEnabled('WOTG') then
         xi.shop.nation(player, stock, xi.nation.BASTOK)
     end)
 end
-
-return m

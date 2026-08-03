@@ -3,8 +3,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_job_utils_beastmaster'
-local m = Module:new(moduleName)
+local m = Module:new('era_job_utils_beastmaster')
 
 if not xi.module.isContentEnabled('ABYSSEA') then
     -- Reward: Override pet food healing values to pre-Abyssea values
@@ -99,11 +98,3 @@ if not xi.module.isContentEnabled('WOTG') then
         end
     end)
 end
-
--- Return a real module only when a content gate registered overrides.
--- Otherwise return a data-only table to avoid a "No overrides found" loader warning.
-if #m.overrides > 0 then
-    return m
-end
-
-return { name = moduleName }

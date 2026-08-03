@@ -3,8 +3,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_job_utils_dragoon'
-local m = Module:new(moduleName)
+local m = Module:new('era_job_utils_dragoon')
 
 -- Keep these sections in the old module init order: ROV -> SOA -> ABYSSEA -> WOTG.
 -- Expansion settings are cumulative, so each section only checks its own expansion.
@@ -548,11 +547,3 @@ if not xi.module.isContentEnabled('WOTG') then
         master:removeListener('PET_WYVERN_EXP')
     end)
 end
-
--- Return a real module only when a content gate registered overrides.
--- Otherwise return a data-only table to avoid a "No overrides found" loader warning.
-if #m.overrides > 0 then
-    return m
-end
-
-return { name = moduleName }

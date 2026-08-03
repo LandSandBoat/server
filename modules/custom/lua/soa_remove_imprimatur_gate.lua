@@ -10,5 +10,3 @@ m:addOverride('xi.soa.helpers.imprimaturGate', function(player, gateAmount)
     -- Ignore the spending and fame requirements, just return true
     return true
 end)
-
-return m

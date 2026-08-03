@@ -7,13 +7,13 @@
 require('modules/module_utils')
 require('scripts/globals/treasure')
 -----------------------------------
-local moduleName = 'pre_rmt_drops'
+-- NOTE: When re-enabling the override below, capture the module again:
+-- local m = Module:new('pre_rmt_drops')
+Module:new('pre_rmt_drops')
 
 if xi.module.isContentEnabled('COP') then
-    return { name = moduleName }
+    return
 end
-
-return { name = moduleName }
 
 --[[
 -- This Module is disabled until the new treasure system is tested an appropiate amount of time.

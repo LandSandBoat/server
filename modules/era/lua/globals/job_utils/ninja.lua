@@ -3,8 +3,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_job_utils_ninja'
-local m = Module:new(moduleName)
+local m = Module:new('era_job_utils_ninja')
 
 -- Register RoV reverts only before RoV content is enabled.
 if not xi.module.isContentEnabled('ROV') then
@@ -63,11 +62,3 @@ if not xi.module.isContentEnabled('WOTG') then
         return dmg
     end)
 end
-
--- Return a real module only when a content gate registered overrides.
--- Otherwise return a data-only table to avoid a "No overrides found" loader warning.
-if #m.overrides > 0 then
-    return m
-end
-
-return { name = moduleName }

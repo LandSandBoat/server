@@ -3,12 +3,10 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'wotg_automaton'
-
-local m = Module:new(moduleName)
+local m = Module:new('wotg_automaton')
 
 if xi.module.isContentEnabled('ABYSSEA') then
-    return { name = moduleName }
+    return
 end
 
 -----------------------------------
@@ -301,5 +299,3 @@ m:addOverride('xi.actions.abilities.pets.automaton.string_clipper.onAutomatonAbi
 
     return info.damage
 end)
-
-return m

@@ -3,8 +3,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'windurst_woods_vendors_adjust'
-local m = Module:new(moduleName)
+local m = Module:new('windurst_woods_vendors_adjust')
 
 if not xi.module.isContentEnabled('ABYSSEA') then
     -- Mono Nchaa: Rework stock for in era items and conquest standing requirements
@@ -61,5 +60,3 @@ if not xi.module.isContentEnabled('ABYSSEA') then
         xi.shop.nation(player, stock, xi.nation.WINDURST)
     end)
 end
-
-return m

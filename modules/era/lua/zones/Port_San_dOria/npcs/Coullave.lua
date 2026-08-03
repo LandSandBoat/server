@@ -4,13 +4,11 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'coullave_shop_adjust'
+local m = Module:new('coullave_shop_adjust')
 
 if xi.module.isContentEnabled('WOTG') then
-    return { name = moduleName }
+    return
 end
-
-local m = Module:new(moduleName)
 
 m:addOverride('xi.zones.Port_San_dOria.npcs.Coullave.onTrigger', function(player, npc)
     local stock =
@@ -33,5 +31,3 @@ m:addOverride('xi.zones.Port_San_dOria.npcs.Coullave.onTrigger', function(player
     player:showText(npc, zones[xi.zone.PORT_SAN_DORIA].text.COULLAVE_SHOP_DIALOG)
     xi.shop.nation(player, stock, xi.nation.SANDORIA)
 end)
-
-return m

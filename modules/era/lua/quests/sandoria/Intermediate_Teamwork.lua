@@ -7,13 +7,10 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_quest_intermediate_teamwork'
-
+local m = Module:new('era_quest_intermediate_teamwork')
 if xi.module.isContentEnabled('ROV') then
-    return { name = moduleName }
+    return
 end
-
-local m = Module:new(moduleName)
 
 m:addOverride('xi.server.onServerStart', function()
     super()
@@ -75,5 +72,3 @@ m:addOverride('xi.server.onServerStart', function()
         end
     end)
 end)
-
-return m

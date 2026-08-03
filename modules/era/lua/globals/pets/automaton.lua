@@ -4,13 +4,11 @@
 require('modules/module_utils')
 require('scripts/globals/pets/automaton')
 -----------------------------------
-local moduleName = 'automaton_pet'
+local m = Module:new('automaton_pet')
 
 if xi.module.isContentEnabled('SOA') then
-    return { name = moduleName }
+    return
 end
-
-local m = Module:new(moduleName)
 
 -- Sets Maneuver Duration back to 60 seconds, without scaling time while in combat : https://wiki.ffo.jp/html/32936.html
 m:addOverride('xi.pets.automaton.onMobSpawn', function(mob)
@@ -43,7 +41,7 @@ end
 applyEraFrameHPReductions()
 
 if xi.module.isContentEnabled('ABYSSEA') then
-    return { name = moduleName }
+    return
 end
 
 -- Adds Frame Specific DT Taken Modifiers. / Removes Valoredge Block : https://wiki.ffo.jp/html/19739.html / https://wiki.ffo.jp/html/31705.html
@@ -88,7 +86,7 @@ xi.pets.automaton.skillCaps.heads[xi.automaton.head.SHARPSHOT ][xi.skill.AUTOMAT
 xi.pets.automaton.skillCaps.heads[xi.automaton.head.STORMWAKER][xi.skill.AUTOMATON_MAGIC ] = -1
 
 if xi.module.isContentEnabled('WOTG') then
-    return { name = moduleName }
+    return
 end
 
 -- Removes Frame Specific DT Taken Modifiers for Automaton Frames & Removes Valoredge Block : https://wiki.ffo.jp/html/19739.html / https://wiki.ffo.jp/html/31705.html
@@ -96,5 +94,3 @@ xi.pets.automaton.frameMods[xi.automaton.frame.HARLEQUIN ] = {}
 xi.pets.automaton.frameMods[xi.automaton.frame.VALOREDGE ] = {}
 xi.pets.automaton.frameMods[xi.automaton.frame.SHARPSHOT ] = {}
 xi.pets.automaton.frameMods[xi.automaton.frame.STORMWAKER] = {}
-
-return m

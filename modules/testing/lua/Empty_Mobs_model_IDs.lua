@@ -144,5 +144,3 @@ m:addOverride('xi.zones.GM_Home.Zone.onInitialize', function(zone)
         mob:spawn()
     end
 end)
-
-return m

@@ -3,14 +3,12 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_job_utils_samurai'
+local m = Module:new('era_job_utils_samurai')
 
 -- If Abyssea or later is enabled, no changes.
 if xi.module.isContentEnabled('ABYSSEA') then
-    return { name = moduleName }
+    return
 end
-
-local m = Module:new(moduleName)
 
 -- Warding Circle: Revert duration from 3 minutes to 1 minute
 -- Source: https://www.bg-wiki.com/ffxi/Version_Update_(02/13/2012)
@@ -129,5 +127,3 @@ m:addOverride('xi.effects.seigan.onEffectGain', function(target, effect)
 
     effect:addMod(xi.mod.DEF, jpValue * 3)
 end)
-
-return m

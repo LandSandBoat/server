@@ -3,8 +3,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'northern_san_doria_vendors_adjust'
-local m = Module:new(moduleName)
+local m = Module:new('northern_san_doria_vendors_adjust')
 
 if not xi.module.isContentEnabled('ABYSSEA') then
     -- Arlenne: Rework stock for in era items and conquest standing requirements
@@ -74,5 +73,3 @@ if not xi.module.isContentEnabled('ABYSSEA') then
         xi.shop.nation(player, stock, xi.nation.SANDORIA)
     end)
 end
-
-return m

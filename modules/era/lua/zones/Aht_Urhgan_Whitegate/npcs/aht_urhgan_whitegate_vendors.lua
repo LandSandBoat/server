@@ -3,8 +3,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'aht_urhgan_whitegate_vendors_adjust'
-local m = Module:new(moduleName)
+local m = Module:new('aht_urhgan_whitegate_vendors_adjust')
 
 if not xi.module.isContentEnabled('ABYSSEA') then
     -- Gavrie: Remove Automaton Oil +3 from shop inventory
@@ -72,5 +71,3 @@ if not xi.module.isContentEnabled('SOA') then
         xi.shop.general(player, stock)
     end)
 end
-
-return m

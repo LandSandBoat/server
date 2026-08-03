@@ -4,13 +4,11 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'solby_maholby_shop_adjust'
+local m = Module:new('solby_maholby_shop_adjust')
 
 if xi.module.isContentEnabled('SOA') then
-    return { name = moduleName }
+    return
 end
-
-local m = Module:new(moduleName)
 
 m:addOverride('xi.zones.Norg.npcs.Solby-Maholby.onTrigger', function(player, npc)
     local stock =
@@ -22,5 +20,3 @@ m:addOverride('xi.zones.Norg.npcs.Solby-Maholby.onTrigger', function(player, npc
     player:showText(npc, zones[xi.zone.NORG].text.SOLBYMAHOLBY_SHOP_DIALOG, 0, 0, 0, 0, true, false)
     xi.shop.general(player, stock)
 end)
-
-return m

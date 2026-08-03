@@ -4,13 +4,11 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'disable_magicked_astrolabe'
+local m = Module:new('disable_magicked_astrolabe')
 
 if xi.module.isContentEnabled('SOA') then
-    return { name = moduleName }
+    return
 end
-
-local m = Module:new(moduleName)
 
 m:addOverride('xi.zones.Windurst_Waters.npcs.Churano-Shurano.onTrigger', function(player, npc)
     player:startEvent(280)
@@ -21,5 +19,3 @@ end)
 
 m:addOverride('xi.zones.Windurst_Waters.npcs.Churano-Shurano.onEventFinish', function(player, csid, option, npc)
 end)
-
-return m

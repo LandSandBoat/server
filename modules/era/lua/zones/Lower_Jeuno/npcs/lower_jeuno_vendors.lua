@@ -3,8 +3,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'lower_jeuno_vendors_adjust'
-local m = Module:new(moduleName)
+local m = Module:new('lower_jeuno_vendors_adjust')
 
 if not xi.module.isContentEnabled('SOA') then
     -- Pawkrix: Remove Bowl of Goblin Stew 880 from stock
@@ -199,5 +198,3 @@ if not xi.module.isContentEnabled('ROV') then
         end
     end)
 end
-
-return m
