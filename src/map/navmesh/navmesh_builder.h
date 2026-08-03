@@ -65,6 +65,24 @@ struct TileResult
     int            ty{};
     unsigned char* data{};
     int            dataSize{};
+    int            offMeshCount{};
+};
+
+// Off-mesh links for one tile, in the SoA layout dtNavMeshCreateParams wants.
+struct TileOffMeshConnections
+{
+    std::vector<float>          verts; // 6 floats per link: start xyz, end xyz (Detour space)
+    std::vector<float>          rad;
+    std::vector<unsigned short> flags;
+    std::vector<unsigned char>  areas;
+    std::vector<unsigned char>  dir;
+    int                         count{};
+};
+
+struct OffMeshCandidate
+{
+    float start[3];
+    float end[3];
 };
 
 class NavMeshBuilder

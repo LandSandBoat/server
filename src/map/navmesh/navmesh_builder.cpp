@@ -26,6 +26,7 @@
 
 #include <map/ximesh/iximesh.h>
 
+#include <DetourCommon.h>
 #include <DetourNavMesh.h>
 #include <DetourNavMeshBuilder.h>
 #include <Recast.h>
@@ -41,7 +42,7 @@ namespace
 
 // Recast/Detour constants (not tunable)
 constexpr uint16 SAMPLE_POLYFLAGS_WALK  = 0x0001; // RecastDemo/Include/Sample.h
-constexpr int    TILE_BORDER_PADDING    = 3;      // Extra cells beyond walkableRadius for tile stitching (Sample_TileMesh.cpp)
+constexpr int    TILE_BORDER_PADDING    = 8;      // Extra cells beyond walkableRadius for tile stitching; <8 leaves eroded seam gaps on continuous terrain
 constexpr float  MIN_DETAIL_SAMPLE_DIST = 0.9f;   // Recast clamps non-zero detailSampleDist to >= 0.9
 constexpr int    DT_MAX_TILE_BITS       = 14;     // dtNavMesh max bits for tile indexing
 constexpr int    DT_TOTAL_REF_BITS      = 22;     // dtNavMesh total bits for tile + poly refs
@@ -56,6 +57,10 @@ constexpr float Y_SKIP_PLANE_TOLERANCE = 0.01f;
 
 constexpr std::size_t TILE_BATCH_SIZE = 32;
 
+// Off-mesh link generation limits
+constexpr int   OFFMESH_MAX_PER_TILE = 256;  // hard cap; excess dropped with a warning
+constexpr float OFFMESH_DEDUP_DIST   = 1.0f; // links whose start AND end are within this are dupes
+
 auto transform(const std::array<float, 9>& rot, const std::array<float, 3>& trans, const float* vertex) -> std::array<float, 3>
 {
     return {
@@ -63,6 +68,368 @@ auto transform(const std::array<float, 9>& rot, const std::array<float, 3>& tran
         rot[1] * vertex[0] + rot[4] * vertex[1] + rot[7] * vertex[2] + trans[1],
         rot[2] * vertex[0] + rot[5] * vertex[1] + rot[8] * vertex[2] + trans[2],
     };
+}
+
+// Scan each walkable poly's ledge (border) edges.
+// Where a walkable surface sits below within the drop window, link the ledge down to it.
+// Landings come only from this tile's own detail mesh, so both endpoints are real polys.
+// Detour space, Y up.
+auto buildOffMeshConnections(const rcPolyMesh& pmesh, const rcPolyMeshDetail& dmesh, const NavMeshConfig& config, const int tileX, const int tileY, const std::vector<std::array<float, 9>>& barriers) -> TileOffMeshConnections
+{
+    TileOffMeshConnections out;
+
+    const int    vertsPerPoly = pmesh.nvp;
+    const float  cellSize     = pmesh.cs;
+    const float  cellHeight   = pmesh.ch;
+    const float* boundsMin    = pmesh.bmin;
+    const float  minDrop      = config.agentMaxClimb; // below this Recast already connects in-mesh
+    const float  maxDrop      = config.offMeshMaxDrop;
+    const float  maxReach     = std::max(config.offMeshHorizReach, config.agentRadius);
+    const float  linkRadius   = std::max(config.agentRadius, cellSize);
+
+    const auto polyVertToWorld = [&](const int vertIndex, float* outXyz)
+    {
+        outXyz[0] = boundsMin[0] + pmesh.verts[vertIndex * 3 + 0] * cellSize;
+        outXyz[1] = boundsMin[1] + pmesh.verts[vertIndex * 3 + 1] * cellHeight;
+        outXyz[2] = boundsMin[2] + pmesh.verts[vertIndex * 3 + 2] * cellSize;
+    };
+
+    // Union-find of walk-connected polys; skip a link whose landing shares the source poly's component.
+    std::vector<int> parent(pmesh.npolys);
+    for (int p = 0; p < pmesh.npolys; ++p)
+    {
+        parent[p] = p;
+    }
+
+    const auto findRoot = [&](int x) -> int
+    {
+        while (parent[x] != x)
+        {
+            parent[x] = parent[parent[x]];
+            x         = parent[x];
+        }
+        return x;
+    };
+
+    for (int p = 0; p < pmesh.npolys; ++p)
+    {
+        const unsigned short* poly = &pmesh.polys[p * 2 * vertsPerPoly];
+        for (int j = 0; j < vertsPerPoly; ++j)
+        {
+            if (poly[j] == RC_MESH_NULL_IDX)
+            {
+                break;
+            }
+
+            const unsigned short neighborPoly = poly[vertsPerPoly + j];
+            if (neighborPoly == RC_MESH_NULL_IDX || (neighborPoly & 0x8000)) // border or tile portal, not internal
+            {
+                continue;
+            }
+
+            const int rootA = findRoot(p);
+            const int rootB = findRoot(neighborPoly);
+            if (rootA != rootB)
+            {
+                parent[rootA] = rootB;
+            }
+        }
+    }
+
+    // Per-poly xz-AABB of the detail surface, to cull the height search.
+    struct PolyAABB
+    {
+        float xmin, xmax, zmin, zmax;
+    };
+
+    std::vector<PolyAABB> aabb(pmesh.npolys);
+    for (int p = 0; p < pmesh.npolys; ++p)
+    {
+        const int detailBase      = dmesh.meshes[p * 4 + 0];
+        const int detailVertCount = dmesh.meshes[p * 4 + 1];
+        auto      box             = PolyAABB{ FloatMax, FloatLowest, FloatMax, FloatLowest };
+        for (int i = 0; i < detailVertCount; ++i)
+        {
+            const float* vert = &dmesh.verts[(detailBase + i) * 3];
+            box.xmin          = std::min(box.xmin, vert[0]);
+            box.xmax          = std::max(box.xmax, vert[0]);
+            box.zmin          = std::min(box.zmin, vert[2]);
+            box.zmax          = std::max(box.zmax, vert[2]);
+        }
+        aabb[p] = box;
+    }
+
+    // Highest walkable detail-surface Y at (x, z) within [loY, hiY], excluding srcPoly, plus the poly it lands on (used by the same-component skip below).
+    const auto sampleBelow = [&](const float x, const float z, const float loY, const float hiY, const int srcPoly, float& outY, int& outPoly) -> bool
+    {
+        bool  found = false;
+        float best  = FloatLowest;
+        for (int p = 0; p < pmesh.npolys; ++p)
+        {
+            if (p == srcPoly || pmesh.areas[p] != RC_WALKABLE_AREA)
+            {
+                continue;
+            }
+
+            const auto& box = aabb[p];
+            if (x < box.xmin - 0.01f || x > box.xmax + 0.01f || z < box.zmin - 0.01f || z > box.zmax + 0.01f)
+            {
+                continue;
+            }
+
+            const int detailBase = dmesh.meshes[p * 4 + 0];
+            const int triBase    = dmesh.meshes[p * 4 + 2];
+            const int triCount   = dmesh.meshes[p * 4 + 3];
+            for (int t = 0; t < triCount; ++t)
+            {
+                const unsigned char* tri = &dmesh.tris[(triBase + t) * 4];
+                const float*         va  = &dmesh.verts[(detailBase + tri[0]) * 3];
+                const float*         vb  = &dmesh.verts[(detailBase + tri[1]) * 3];
+                const float*         vc  = &dmesh.verts[(detailBase + tri[2]) * 3];
+
+                const float probe[3] = { x, 0.0f, z };
+                float       y        = 0.0f;
+                if (dtClosestHeightPointTriangle(probe, va, vb, vc, y) && y >= loY && y <= hiY && y > best)
+                {
+                    best    = y;
+                    found   = true;
+                    outPoly = p;
+                }
+            }
+        }
+
+        if (found)
+        {
+            outY = best;
+        }
+
+        return found;
+    };
+
+    // barrier triangles reduced to xz segments + a Y span, to veto links that clip through walls
+    struct BarrierWall
+    {
+        float x1, z1, x2, z2, yMin, yMax;
+    };
+
+    std::vector<BarrierWall> walls;
+    walls.reserve(barriers.size());
+    for (const auto& b : barriers)
+    {
+        const float* v[3] = { &b[0], &b[3], &b[6] };
+
+        int   bi = 0;
+        int   bj = 1;
+        float bd = -1.0f;
+        for (int i = 0; i < 3; ++i)
+        {
+            for (int j = i + 1; j < 3; ++j)
+            {
+                const float dx = v[i][0] - v[j][0];
+                const float dz = v[i][2] - v[j][2];
+                const float dd = dx * dx + dz * dz;
+                if (dd > bd)
+                {
+                    bd = dd;
+                    bi = i;
+                    bj = j;
+                }
+            }
+        }
+
+        walls.push_back(BarrierWall{ v[bi][0], v[bi][2], v[bj][0], v[bj][2], std::min({ v[0][1], v[1][1], v[2][1] }), std::max({ v[0][1], v[1][1], v[2][1] }) });
+    }
+
+    // segment (a -> b) crosses segment (c -> d) in the xz-plane
+    const auto segmentsCrossXZ = [](const float* a, const float* b, float cx, float cz, float dx, float dz) -> bool
+    {
+        const auto side = [](float px, float pz, float qx, float qz, float rx, float rz)
+        {
+            return (rz - pz) * (qx - px) - (rx - px) * (qz - pz);
+        };
+
+        const float d1 = side(cx, cz, dx, dz, a[0], a[2]);
+        const float d2 = side(cx, cz, dx, dz, b[0], b[2]);
+        const float d3 = side(a[0], a[2], b[0], b[2], cx, cz);
+        const float d4 = side(a[0], a[2], b[0], b[2], dx, dz);
+        return (d1 > 0.0f) != (d2 > 0.0f) && (d3 > 0.0f) != (d4 > 0.0f);
+    };
+
+    // only a wall rising more than a climb-height above the ledge blocks the drop; one sitting at
+    // the ledge is its own drop-face, which must not veto the link. detour Y is up-positive
+    const auto crossesBarrier = [&](const float* start, const float* end) -> bool
+    {
+        const float ledgeY = std::max(start[1], end[1]);
+        for (const auto& w : walls)
+        {
+            if (w.yMax <= ledgeY + config.agentMaxClimb)
+            {
+                continue;
+            }
+
+            if (segmentsCrossXZ(start, end, w.x1, w.z1, w.x2, w.z2))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    };
+
+    std::vector<OffMeshCandidate> candidates;
+    for (int p = 0; p < pmesh.npolys; ++p)
+    {
+        if (pmesh.areas[p] != RC_WALKABLE_AREA)
+        {
+            continue;
+        }
+
+        const unsigned short* poly = &pmesh.polys[p * 2 * vertsPerPoly];
+
+        int   vertCount   = 0;
+        float centroid[3] = { 0.0f, 0.0f, 0.0f };
+        for (int j = 0; j < vertsPerPoly; ++j)
+        {
+            if (poly[j] == RC_MESH_NULL_IDX)
+            {
+                break;
+            }
+
+            float worldVert[3];
+            polyVertToWorld(poly[j], worldVert);
+            centroid[0] += worldVert[0];
+            centroid[1] += worldVert[1];
+            centroid[2] += worldVert[2];
+            vertCount++;
+        }
+
+        if (vertCount < 3)
+        {
+            continue;
+        }
+
+        centroid[0] /= static_cast<float>(vertCount);
+        centroid[1] /= static_cast<float>(vertCount);
+        centroid[2] /= static_cast<float>(vertCount);
+
+        for (int j = 0; j < vertCount; ++j)
+        {
+            // Only ledge edges: RC_MESH_NULL_IDX is a solid border; internal neighbours and tile-portal edges (0x8000) are skipped.
+            if (poly[vertsPerPoly + j] != RC_MESH_NULL_IDX)
+            {
+                continue;
+            }
+
+            float edgeA[3];
+            float edgeB[3];
+            polyVertToWorld(poly[j], edgeA);
+            polyVertToWorld(poly[(j + 1) % vertCount], edgeB);
+            float edgeMid[3];
+            dtVlerp(edgeMid, edgeA, edgeB, 0.5f);
+
+            // Outward direction (away from the poly centroid), in the xz-plane.
+            float       outwardX   = edgeMid[0] - centroid[0];
+            float       outwardZ   = edgeMid[2] - centroid[2];
+            const float outwardLen = std::sqrt(outwardX * outwardX + outwardZ * outwardZ);
+            if (outwardLen < 1e-4f)
+            {
+                continue;
+            }
+
+            outwardX /= outwardLen;
+            outwardZ /= outwardLen;
+
+            const float ledgeY       = edgeMid[1];
+            float       landingX     = 0.0f;
+            float       landingY     = 0.0f;
+            float       landingZ     = 0.0f;
+            int         landingPoly  = -1;
+            bool        foundLanding = false;
+            for (float reach = linkRadius; reach <= maxReach + 1e-3f; reach += 0.5f)
+            {
+                const float probeX = edgeMid[0] + outwardX * reach;
+                const float probeZ = edgeMid[2] + outwardZ * reach;
+
+                if (sampleBelow(probeX, probeZ, ledgeY - maxDrop, ledgeY - minDrop, p, landingY, landingPoly))
+                {
+                    landingX     = probeX;
+                    landingZ     = probeZ;
+                    foundLanding = true;
+                    break; // nearest landing wins
+                }
+            }
+
+            if (!foundLanding)
+            {
+                continue;
+            }
+
+            // Skip when the landing is already walk-reachable within this tile.
+            if (findRoot(landingPoly) == findRoot(p))
+            {
+                continue;
+            }
+
+            const float start[3] = { edgeMid[0] - outwardX * linkRadius, ledgeY, edgeMid[2] - outwardZ * linkRadius }; // pulled just inside the source poly
+            const float end[3]   = { landingX, landingY, landingZ };
+
+            // drop through a wall/rail, not an open ledge
+            if (crossesBarrier(start, end))
+            {
+                continue;
+            }
+
+            candidates.push_back(OffMeshCandidate{
+                .start = { start[0], start[1], start[2] },
+                .end   = { end[0], end[1], end[2] },
+            });
+        }
+    }
+
+    // Drop near-duplicate links (a long ledge spans many edges -> parallel dupes).
+    const auto closeBy = [](const float* a, const float* b) -> bool
+    {
+        return dtVdistSqr(a, b) < OFFMESH_DEDUP_DIST * OFFMESH_DEDUP_DIST;
+    };
+
+    std::vector<OffMeshCandidate> unique;
+    for (const auto& c : candidates)
+    {
+        const bool dupe = std::any_of(unique.begin(), unique.end(), [&](const OffMeshCandidate& u)
+                                      {
+                                          return closeBy(c.start, u.start) && closeBy(c.end, u.end);
+                                      });
+        if (!dupe)
+        {
+            unique.push_back(c);
+        }
+    }
+
+    // Cap per tile, logging what was dropped rather than truncating silently.
+    if (static_cast<int>(unique.size()) > OFFMESH_MAX_PER_TILE)
+    {
+        ShowWarningFmt("NavMeshBuilder: tile ({}, {}) generated {} off-mesh links, capping at {}",
+                       tileX,
+                       tileY,
+                       unique.size(),
+                       OFFMESH_MAX_PER_TILE);
+        unique.resize(OFFMESH_MAX_PER_TILE);
+    }
+
+    out.count = static_cast<int>(unique.size());
+    out.verts.reserve(static_cast<std::size_t>(out.count) * 6);
+    for (const auto& c : unique)
+    {
+        out.verts.insert(out.verts.end(), { c.start[0], c.start[1], c.start[2], c.end[0], c.end[1], c.end[2] });
+    }
+
+    // All links are walkable and two-way (mirroring retail mob pathing).
+    out.rad.assign(out.count, linkRadius);
+    out.flags.assign(out.count, SAMPLE_POLYFLAGS_WALK);
+    out.areas.assign(out.count, RC_WALKABLE_AREA);
+    out.dir.assign(out.count, DT_OFFMESH_CON_BIDIR);
+
+    return out;
 }
 
 } // namespace
@@ -509,6 +876,31 @@ auto NavMeshBuilder::buildTile(const int tx, const int ty, const rcConfig& cfg, 
     }
 
     //
+    // Auto-generated off-mesh connections (drop / step links across ledges)
+    //
+
+    TileOffMeshConnections offMesh;
+    if (config.generateOffMeshLinks)
+    {
+        // barrier triangles (detour space) so off-mesh links can't route through walls/rails
+        std::vector<std::array<float, 9>> barriers;
+        for (int i = 0; i < numTris; ++i)
+        {
+            if (tileMesh.areas[i] != RC_NULL_AREA)
+            {
+                continue;
+            }
+
+            const int i0 = tileMesh.indices[i * 3 + 0];
+            const int i1 = tileMesh.indices[i * 3 + 1];
+            const int i2 = tileMesh.indices[i * 3 + 2];
+            barriers.push_back({ tileMesh.verts[i0 * 3 + 0], tileMesh.verts[i0 * 3 + 1], tileMesh.verts[i0 * 3 + 2], tileMesh.verts[i1 * 3 + 0], tileMesh.verts[i1 * 3 + 1], tileMesh.verts[i1 * 3 + 2], tileMesh.verts[i2 * 3 + 0], tileMesh.verts[i2 * 3 + 1], tileMesh.verts[i2 * 3 + 2] });
+        }
+
+        offMesh = buildOffMeshConnections(*pmesh, *dmesh, config, tx, ty, barriers);
+    }
+
+    //
     // Build Detour tile data
     //
 
@@ -525,13 +917,13 @@ auto NavMeshBuilder::buildTile(const int tx, const int ty, const rcConfig& cfg, 
         .detailVertsCount = dmesh->nverts,
         .detailTris       = dmesh->tris,
         .detailTriCount   = dmesh->ntris,
-        .offMeshConVerts  = nullptr,
-        .offMeshConRad    = nullptr,
-        .offMeshConFlags  = nullptr,
-        .offMeshConAreas  = nullptr,
-        .offMeshConDir    = nullptr,
-        .offMeshConUserID = nullptr,
-        .offMeshConCount  = 0,
+        .offMeshConVerts  = offMesh.verts.data(),
+        .offMeshConRad    = offMesh.rad.data(),
+        .offMeshConFlags  = offMesh.flags.data(),
+        .offMeshConAreas  = offMesh.areas.data(),
+        .offMeshConDir    = offMesh.dir.data(),
+        .offMeshConUserID = nullptr, // unused; Detour defaults ids when null
+        .offMeshConCount  = offMesh.count,
         .userId           = 0,
         .tileX            = tx,
         .tileY            = ty,
@@ -561,10 +953,11 @@ auto NavMeshBuilder::buildTile(const int tx, const int ty, const rcConfig& cfg, 
     rcFreePolyMeshDetail(dmesh);
 
     return {
-        .tx       = tx,
-        .ty       = ty,
-        .data     = navData,
-        .dataSize = navDataSize,
+        .tx           = tx,
+        .ty           = ty,
+        .data         = navData,
+        .dataSize     = navDataSize,
+        .offMeshCount = offMesh.count,
     };
 }
 
@@ -714,7 +1107,8 @@ auto NavMeshBuilder::buildAsync(Scheduler& scheduler, const std::string& zoneNam
     // Add tiles to navmesh (addTile is not thread-safe)
     //
 
-    auto tilesBuilt = 0;
+    auto tilesBuilt  = 0;
+    auto offMeshCons = 0;
     for (const auto& result : results)
     {
         if (result.data)
@@ -726,6 +1120,7 @@ auto NavMeshBuilder::buildAsync(Scheduler& scheduler, const std::string& zoneNam
                 continue;
             }
             tilesBuilt++;
+            offMeshCons += result.offMeshCount;
         }
     }
 
@@ -739,6 +1134,6 @@ auto NavMeshBuilder::buildAsync(Scheduler& scheduler, const std::string& zoneNam
     const auto endTime    = timer::now();
     const auto durationMs = timer::count_milliseconds(endTime - startTime);
 
-    ShowInfoFmt("Built {} nav tiles in {}x{} grid for {} ({}) in {}ms", tilesBuilt, tw, th, zoneName, zoneID, durationMs);
+    ShowInfoFmt("Built {} nav tiles ({} off-mesh links) in {}x{} grid for {} ({}) in {}ms", tilesBuilt, offMeshCons, tw, th, zoneName, zoneID, durationMs);
     co_return navMesh;
 }

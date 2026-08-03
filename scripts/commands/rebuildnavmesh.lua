@@ -23,7 +23,7 @@ local config =
     --
     -- Docs:
     -- The y-axis cell size to use for fields. [Limit: > 0] [Units: wu]
-    cellHeight = 0.4,
+    cellHeight = 0.2,
 
     -- Slopes steeper than this angle (in degrees) are marked as unwalkable.
     --
@@ -53,7 +53,7 @@ local config =
     --
     -- Docs:
     -- Maximum ledge height that is considered to still be traversable. [Limit: >=0] [Units: vx]
-    agentMaxClimb = 0.6,
+    agentMaxClimb = 1.0,
 
     -- Maximum length of a single contour edge (in wu). Long edges are split
     -- at this length. 0 = no limit (edges can be any length).
@@ -134,6 +134,12 @@ local config =
 
     -- World-space spheres to carve out of the collision data before rasterization.
     -- skipSpheres = { { x = -496.0, y = -6.5, z = -9932914.5, radius = 100.0 } },
+
+    -- Largest vertical drop (world units) a link may bridge.
+    offMeshMaxDrop = 5.0,
+
+    -- Largest horizontal ledge->landing offset (world units) to search.
+    offMeshHorizReach = 3.0,
 }
 
 commandObj.onTrigger = function(player)
