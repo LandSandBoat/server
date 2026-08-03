@@ -77,6 +77,7 @@ zones[xi.zone.CASTLE_OZTROJA] =
         BRASS_DOOR_FLOOR_4_H7  = GetFirstID('_477'),
         TRAP_DOOR_FLOOR_4      = GetFirstID('_478'),
         HINT_HANDLE_OFFSET     = GetFirstID('_47q'),
+        TEBHI                  = GetFirstID('Tebhi'),
         TREASURE_CHEST         = GetFirstID('Treasure_Chest'),
         TREASURE_COFFER        = GetFirstID('Treasure_Coffer'),
     },
