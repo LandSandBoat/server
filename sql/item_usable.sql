@@ -2597,7 +2597,7 @@ INSERT INTO `item_usable` VALUES (11788,'jesters_hat',3,2.25,0,0,1,30,600,0);
 INSERT INTO `item_usable` VALUES (11811,'destrier_beret',1,1,0,0,1,30,3600,0);
 INSERT INTO `item_usable` VALUES (11861,'hikogami_yukata',1,2,0,0,1,30,86400,0);
 INSERT INTO `item_usable` VALUES (11862,'himegami_yukata',1,2,0,0,1,30,86400,0);
-INSERT INTO `item_usable` VALUES (12406,'coated_shield',1,2,0,0,20,30,1800,0);
+INSERT INTO `item_usable` VALUES (12406,'coated_shield',1,2,10,0,20,30,1800,0);
 INSERT INTO `item_usable` VALUES (12408,'absorbing_shield',4,2,0,0,20,30,3600,0);
 INSERT INTO `item_usable` VALUES (12411,'dominus_shield',1,10,0,0,15,30,180,0);
 INSERT INTO `item_usable` VALUES (13078,'portafurnace',1,5,0,0,1,15,60,0); -- TODO: verify animation
