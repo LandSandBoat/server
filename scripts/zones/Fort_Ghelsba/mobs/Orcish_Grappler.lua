@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Fort Ghelsba
---  Mob: Orcish Fodder
+--  Mob: Orcish Grappler
 -- Note: PH for Hundredscar Hajwaj
 -----------------------------------
 local ID = zones[xi.zone.FORT_GHELSBA]
