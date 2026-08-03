@@ -2,7 +2,11 @@
 -- Area: Bhaflau Thickets
 --  Mob: Mamool Ja Pikeman
 -----------------------------------
-mixins = { require('scripts/mixins/weapon_break') }
+mixins =
+{
+    require('scripts/mixins/weapon_break'),
+    require('scripts/mixins/drg_wyvern'),
+}
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
