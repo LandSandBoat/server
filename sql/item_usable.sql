@@ -2803,7 +2803,7 @@ INSERT INTO `item_usable` VALUES (16047,'norg_earring',1,8,79,0,30,30,3600,0);
 INSERT INTO `item_usable` VALUES (16048,'safehold_earring',1,8,79,0,30,30,3600,0);
 INSERT INTO `item_usable` VALUES (16049,'empire_earring',1,8,79,0,30,30,3600,0);
 INSERT INTO `item_usable` VALUES (16050,'nashmau_earring',1,8,79,0,30,30,3600,0);
-INSERT INTO `item_usable` VALUES (16071,'kawahori_kabuto',1,2,0,0,50,30,1800,0);
+INSERT INTO `item_usable` VALUES (16071,'kawahori_kabuto',1,2,70,0,50,30,1800,0);
 INSERT INTO `item_usable` VALUES (16077,'megrim_crown',1,8,0,0,50,30,2700,0);
 INSERT INTO `item_usable` VALUES (16078,'blissful_chapeau',1,4,32,0,30,30,600,0);
 INSERT INTO `item_usable` VALUES (16118,'moogle_cap',1,8,79,0,1,30,72000,1);
