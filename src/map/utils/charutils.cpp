@@ -2345,8 +2345,7 @@ void RemoveSub(CCharEntity* PChar)
 
 bool EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID)
 {
-    CItemEquipment* PItem   = dynamic_cast<CItemEquipment*>(PChar->getStorage(containerID)->GetItem(slotID));
-    CItemEquipment* oldItem = PChar->getEquip((SLOTTYPE)equipSlotID);
+    CItemEquipment* PItem = dynamic_cast<CItemEquipment*>(PChar->getStorage(containerID)->GetItem(slotID));
 
     if (PItem == nullptr)
     {
@@ -2360,20 +2359,6 @@ bool EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 conta
         !PItem->isEquippableByRace(PChar->look.race))
     {
         return false;
-    }
-
-    if (equipSlotID == SLOT_MAIN)
-    {
-        if (!(slotID == PItem->getSlotID() && oldItem && (oldItem->isType(ITEM_WEAPON) && PItem->isType(ITEM_WEAPON)) &&
-              (static_cast<CItemWeapon*>(PItem)->isTwoHanded() && static_cast<CItemWeapon*>(oldItem)->isTwoHanded())))
-        {
-            CItemEquipment* PSubItem = PChar->getEquip(SLOT_SUB);
-
-            if (PSubItem != nullptr && PSubItem->isType(ITEM_EQUIPMENT) && (!PSubItem->IsShield()))
-            {
-                RemoveSub(PChar);
-            }
-        }
     }
 
     UnequipItem(PChar, equipSlotID, Recalculate::No);
@@ -2463,7 +2448,16 @@ bool EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 conta
                         }
                         break;
                         default:
-                            break;
+                        {
+                            // one-handed main: keep a dual-wield weapon or shield, but drop a grip
+                            auto*      PSubWeapon = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_SUB));
+                            const bool subIsGrip  = PSubWeapon != nullptr && PSubWeapon->getSkillType() == xi::SkillType::None;
+                            if (subIsGrip)
+                            {
+                                UnequipItem(PChar, SLOT_SUB, Recalculate::No);
+                            }
+                        }
+                        break;
                     }
                     if (PChar->PAI->IsEngaged())
                     {
