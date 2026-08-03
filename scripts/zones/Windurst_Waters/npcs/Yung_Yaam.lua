@@ -1,25 +1,28 @@
 -----------------------------------
 -- Area: Windurst Waters
 --  NPC: Yung Yaam
--- Involved In Quest: Wondering Minstrel
--- !pos -63 -4 27 238
+-- !pos -66 -4 27 238
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrigger = function(player, npc)
-    local wonderingstatus = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
-    local fame = player:getFameLevel(xi.fameArea.WINDURST)
-    if wonderingstatus <= 1 and fame >= 5 then
-        player:startEvent(637)                        -- WONDERING_MINSTREL: Quest Available / Quest Accepted
-    elseif
-        wonderingstatus == xi.questStatus.QUEST_COMPLETED and
-        player:needToZone()
-    then
-        player:startEvent(643)                      -- WONDERING_MINSTREL: Quest After
-    else
-        player:startEvent(609)                      -- Standard Conversation
-    end
+-- She waits tables along the north wall, working her way down the row and then
+-- walking straight back to the far end to start again. At each table she turns to
+-- face it and stands there for about nine seconds before moving on.
+local pathNodes =
+{
+    { x = -65.622, y = -3.800, z = 27.019, wait = 100 },
+    { rotation = 142, wait = 9000 },
+    { x = -60.774, y = -3.500, z = 25.870, wait = 100 },
+    { rotation = 236, wait = 9000 },
+    { x = -57.604, y = -3.500, z = 24.064, wait = 100 },
+    { rotation = 226, wait = 9000 },
+}
+
+entity.onSpawn = function(npc)
+    npc:initNpcAi()
+    npc:setPos(xi.path.first(pathNodes))
+    npc:pathThrough(pathNodes, xi.path.flag.PATROL)
 end
 
 return entity
