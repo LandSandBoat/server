@@ -42,7 +42,7 @@ namespace
 
 // Recast/Detour constants (not tunable)
 constexpr uint16 SAMPLE_POLYFLAGS_WALK  = 0x0001; // RecastDemo/Include/Sample.h
-constexpr int    TILE_BORDER_PADDING    = 3;      // Extra cells beyond walkableRadius for tile stitching (Sample_TileMesh.cpp)
+constexpr int    TILE_BORDER_PADDING    = 8;      // Extra cells beyond walkableRadius for tile stitching; <8 leaves eroded seam gaps on continuous terrain
 constexpr float  MIN_DETAIL_SAMPLE_DIST = 0.9f;   // Recast clamps non-zero detailSampleDist to >= 0.9
 constexpr int    DT_MAX_TILE_BITS       = 14;     // dtNavMesh max bits for tile indexing
 constexpr int    DT_TOTAL_REF_BITS      = 22;     // dtNavMesh total bits for tile + poly refs
