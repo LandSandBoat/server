@@ -8,17 +8,17 @@ local commandObj = {}
 commandObj.cmdprops =
 {
     permission = 1,
-    parameters = ''
+    parameters = 'i'
 }
 
-commandObj.onTrigger = function(player)
+commandObj.onTrigger = function(player, ignoreInvisibleBoundaries)
     local target = player:getCursorTarget()
     if not target then
         player:printToPlayer('No cursor target provided')
         return
     end
 
-    local str = player:canSee(target) and 'CAN' or 'CANNOT'
+    local str = player:canSee(target, ignoreInvisibleBoundaries == 1) and 'CAN' or 'CANNOT'
     player:printToPlayer(string.format('%s %s see %s', player:getName(), str, target:getName()))
 end
 

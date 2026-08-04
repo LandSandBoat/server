@@ -28,8 +28,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setCarefulPathing(true)
-
     for i = 0, 5 do
         if GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + i):getLocalVar('hasProfessorMariselle') == 1 then
             mob:setLocalVar('spawnLocation', i)

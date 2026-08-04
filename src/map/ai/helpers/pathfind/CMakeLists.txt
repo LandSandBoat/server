@@ -1,0 +1,17 @@
+set(PATHFIND_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/chunked_path.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/chunked_path.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/entity_path_owner.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/entity_path_owner.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/path.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/path.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/path_builder.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/path_builder.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/path_owner.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/pathfind.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/pathfind.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/pathfind_step.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/pathfind_step.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/pathfind_types.h
+    PARENT_SCOPE
+)

@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2026 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -21,5 +21,14 @@
 
 #pragma once
 
-// Umbrella header for convenience
-#include "pathfind/pathfind.h"
+struct position_t;
+
+namespace pathfind
+{
+
+// Advance `pos` one tick toward `target`, settling `stopShort` yalms short of it.
+// Callers pass the path's stop-short only for the final waypoint so corners are rounded, not cut.
+// Returns the distance advanced and faces `pos` toward `target`.
+auto stepTowards(position_t& pos, const position_t& target, float stepDistance, float stopShort) -> float;
+
+} // namespace pathfind

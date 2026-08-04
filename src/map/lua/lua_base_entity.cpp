@@ -2127,7 +2127,7 @@ void CLuaBaseEntity::pathTo(float x, float y, float z, const sol::object& flags)
 
     if (m_PBaseEntity->PAI->PathFind)
     {
-        uint8 pathFlags = (flags != sol::lua_nil) ? flags.as<uint8>() : static_cast<uint8>(PATHFLAG_RUN | PATHFLAG_WALLHACK | PATHFLAG_SCRIPT);
+        uint8 pathFlags = (flags != sol::lua_nil) ? flags.as<uint8>() : static_cast<uint8>(PATHFLAG_RUN | PATHFLAG_SCRIPT);
 
         m_PBaseEntity->PAI->PathFind->PathTo(point, pathFlags);
     }
@@ -2370,27 +2370,12 @@ void CLuaBaseEntity::unfollow()
 }
 
 /************************************************************************
- *  Function: setCarefulPathing(...)
- *  Purpose : Enables or disables careful pathing for an entity.
- *  Example : mob:setCarefulPathing(true)
- *  Notes   : !!! THIS IS VERY EXPENSIVE !!!. Only use this as a last resort!
- ************************************************************************/
-
-void CLuaBaseEntity::setCarefulPathing(bool careful)
-{
-    if (m_PBaseEntity->PAI->PathFind)
-    {
-        m_PBaseEntity->PAI->PathFind->SetCarefulPathing(careful);
-    }
-}
-
-/************************************************************************
  *  Function: canSee(...)
  *  Purpose : Execute a raycast between ENTITY_HEIGHT and the found at target's feet
  *  Example : player:canSee(mob)
  ************************************************************************/
 
-bool CLuaBaseEntity::canSee(const CLuaBaseEntity* PTarget)
+bool CLuaBaseEntity::canSee(const CLuaBaseEntity* PTarget, const sol::object& ignoreInvisibleBoundaries)
 {
     if (!PTarget)
     {
@@ -2398,7 +2383,17 @@ bool CLuaBaseEntity::canSee(const CLuaBaseEntity* PTarget)
         return false;
     }
 
-    return m_PBaseEntity->CanSeeTarget(PTarget->GetBaseEntity());
+    bool flag = (ignoreInvisibleBoundaries != sol::lua_nil) ? ignoreInvisibleBoundaries.as<bool>() : true;
+
+    constexpr float ENTITY_HEIGHT = 2.0f;
+
+    const auto& loc             = m_PBaseEntity->loc;
+    const auto& targetPointBase = PTarget->GetBaseEntity()->loc.p;
+
+    const auto src = Vector3{ loc.p.x, loc.p.y - ENTITY_HEIGHT, loc.p.z };
+    const auto dst = Vector3{ targetPointBase.x, targetPointBase.y - ENTITY_HEIGHT, targetPointBase.z };
+
+    return !m_PBaseEntity->loc.zone->xiMesh()->rayIntersect(src, dst, IgnoreTransparentBarriers(flag));
 }
 
 /************************************************************************
@@ -20390,7 +20385,6 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("follow", CLuaBaseEntity::follow);
     SOL_REGISTER("hasFollowTarget", CLuaBaseEntity::hasFollowTarget);
     SOL_REGISTER("unfollow", CLuaBaseEntity::unfollow);
-    SOL_REGISTER("setCarefulPathing", CLuaBaseEntity::setCarefulPathing);
     SOL_REGISTER("canSee", CLuaBaseEntity::canSee);
     SOL_REGISTER("inWater", CLuaBaseEntity::inWater);
 

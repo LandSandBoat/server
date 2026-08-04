@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2026 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -21,5 +21,34 @@
 
 #pragma once
 
-// Umbrella header for convenience
-#include "pathfind/pathfind.h"
+#include <optional>
+#include <utility>
+
+// A lazily-memoized value.
+template <typename T>
+class Cached
+{
+public:
+    template <typename Fn>
+    auto getOrCompute(Fn&& fn) -> const T&
+    {
+        if (!value_.has_value())
+        {
+            value_ = std::forward<Fn>(fn)();
+        }
+        return *value_;
+    }
+
+    auto hasValue() const -> bool
+    {
+        return value_.has_value();
+    }
+
+    void reset()
+    {
+        value_.reset();
+    }
+
+private:
+    std::optional<T> value_;
+};

@@ -105,3 +105,4 @@ values:
   follow_stop_range:      95 # Distance the followers attempt to stop at once their leader stops moving. Applied to followers.
   trust_shield_size:      96 # TRUSTS ONLY: Set the size of the mob's shield. 3 = Default size, only used for trusts that use shields.
   bodyguard:              97 # Charmed mob defends its master similar to an avatar. (Maiden's Virelai)
+  no_stuck_teleport:      98 # Disable the stuck-repath teleport fallback for this mob (terrain avoidance is intentional for this encounter).

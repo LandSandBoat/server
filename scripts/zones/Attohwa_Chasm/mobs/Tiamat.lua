@@ -97,7 +97,6 @@ local function checkEnrage(mob)
 end
 
 entity.onMobInitialize = function(mob)
-    mob:setCarefulPathing(true) -- Used for drawin
     mob:setMobMod(xi.mobMod.AOE_HIT_ALL, 1)
 
     xi.mob.updateNMSpawnPoint(mob)

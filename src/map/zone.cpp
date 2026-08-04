@@ -51,8 +51,6 @@ constexpr std::uint16_t WeatherCycle = 2160;
 #include "enums/loot_recast.h"
 #include "ipc_client.h"
 #include "latent_effect_container.h"
-#include "map/navmesh/navmesh.h"
-#include "map/navmesh/navmesh_builder.h"
 #include "map_engine.h"
 #include "monstrosity.h"
 #include "nominate_manager.h"
@@ -72,7 +70,13 @@ constexpr std::uint16_t WeatherCycle = 2160;
 #include "utils/charutils.h"
 #include "utils/moduleutils.h"
 
+#include <map/navmesh/detour_navmesh.h>
+#include <map/navmesh/navmesh.h>
+#include <map/navmesh/navmesh_builder.h>
+#include <map/navmesh/null_navmesh.h>
+#include <map/ximesh/null_ximesh.h>
 #include <map/ximesh/ximesh.h>
+#include <map/ximesh/ximesh_impl.h>
 
 CZone::CZone(Scheduler& scheduler, MapConfig config, xi::ZoneId ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction)
 : scheduler_(scheduler)
@@ -525,7 +529,7 @@ void applyZoneNavMeshOverrides(const xi::ZoneId zoneId, NavMeshConfig& config)
 
 auto CZone::LoadNavMesh() -> Task<void>
 {
-    auto       navMesh = std::make_unique<CNavMesh>(static_cast<uint16>(GetID()));
+    auto       navMesh = std::make_unique<DetourNavMesh>(static_cast<uint16>(GetID()));
     const auto file    = fmt::format("navmeshes/{}.nav", getName());
 
     if (!config_.rebuildNavmeshes && navMesh->load(file))
@@ -566,7 +570,7 @@ void CZone::RebuildNavMesh(const NavMeshConfig& configIn)
             NavMeshBuilder builder(*xiMeshPtr);
 
             auto* dtNavMesh = co_await builder.buildAsync(scheduler_, zoneName, zoneID, config);
-            auto  navMesh   = std::make_unique<CNavMesh>(zoneID);
+            auto  navMesh   = std::make_unique<DetourNavMesh>(zoneID);
             if (dtNavMesh && navMesh->installNavMesh(dtNavMesh))
             {
                 navMesh->save(fmt::format("navmeshes/{}.nav", zoneName));
@@ -575,12 +579,12 @@ void CZone::RebuildNavMesh(const NavMeshConfig& configIn)
         });
 }
 
-auto CZone::navMesh() const -> INavMesh*
+auto CZone::navMesh() const -> NavMesh*
 {
     return navMesh_.get();
 }
 
-auto CZone::xiMesh() const -> IXiMesh*
+auto CZone::xiMesh() const -> XiMesh*
 {
     return xiMesh_.get();
 }
@@ -635,7 +639,7 @@ void CZone::LoadXiMesh()
     {
         try
         {
-            xiMesh_ = std::make_unique<XiMesh>(file);
+            xiMesh_ = std::make_unique<XiMeshImpl>(file);
         }
         catch (const std::exception& e)
         {

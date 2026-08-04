@@ -1,3 +1,5 @@
+add_subdirectory(pathfind)
+
 set(AI_HELPER_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/action_queue.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/action_queue.h
@@ -5,8 +7,8 @@ set(AI_HELPER_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/event_handler.h
     ${CMAKE_CURRENT_SOURCE_DIR}/gambits_container.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/gambits_container.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/pathfind.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/pathfind.h
+    ${PATHFIND_SOURCES}
     ${CMAKE_CURRENT_SOURCE_DIR}/targetfind.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/targetfind.h
     PARENT_SCOPE

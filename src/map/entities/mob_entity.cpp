@@ -1169,31 +1169,48 @@ bool CMobEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>
 {
     TracyZoneScoped;
 
-    auto skill_list_id{ getMobMod(xi::MobMod::AttackSkillList) };
-    if (skill_list_id)
+    // Refuse the attack while the navmesh route is far longer than the straight line, until we have walked the detour.
+    if (PAI->PathFind && PAI->PathFind->IsFollowingPath() && !PAI->PathFind->IsPathDirect())
     {
-        auto attack_range{ GetMeleeRange(PTarget) };
-        auto skillList{ battleutils::GetMobSkillList(skill_list_id) };
+        return false;
+    }
 
-        if (!skillList.empty())
+    const bool canAttackInRange = [&]() -> bool
+    {
+        auto skill_list_id{ getMobMod(xi::MobMod::AttackSkillList) };
+        if (skill_list_id)
         {
-            auto* skill{ battleutils::GetMobSkill(skillList.front()) };
-            if (skill)
+            auto attack_range{ GetMeleeRange(PTarget) };
+            auto skillList{ battleutils::GetMobSkillList(skill_list_id) };
+
+            if (!skillList.empty())
             {
-                attack_range = modelHitboxSize + skill->getDistance() + PTarget->modelHitboxSize;
+                auto* skill{ battleutils::GetMobSkill(skillList.front()) };
+                if (skill)
+                {
+                    attack_range = modelHitboxSize + skill->getDistance() + PTarget->modelHitboxSize;
+                }
             }
+
+            bool  autoAttackEnabled  = PAI->GetController()->IsAutoAttackEnabled();
+            float distanceFromTarget = distance(loc.p, PTarget->loc.p);
+            bool  tooFar             = distanceFromTarget > attack_range;
+
+            return !tooFar && autoAttackEnabled;
         }
+        else
+        {
+            return CBattleEntity::CanAttack(PTarget, errMsg);
+        }
+    }();
 
-        bool  autoAttackEnabled  = PAI->GetController()->IsAutoAttackEnabled();
-        float distanceFromTarget = distance(loc.p, PTarget->loc.p);
-        bool  tooFar             = distanceFromTarget > attack_range;
-
-        return !tooFar && autoAttackEnabled;
-    }
-    else
+    // Refuse to swing without line of sight, so a mob against thin geometry cannot attack through it.
+    if (canAttackInRange && !CanSeeTarget(PTarget))
     {
-        return CBattleEntity::CanAttack(PTarget, errMsg);
+        return false;
     }
+
+    return canAttackInRange;
 }
 
 void CMobEntity::OnEngage(CAttackState& state)

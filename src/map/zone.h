@@ -34,8 +34,6 @@
 
 #include "battlefield_handler.h"
 #include "campaign_handler.h"
-#include "map/navmesh/inavmesh.h"
-#include "map/navmesh/navmesh_config.h"
 #include "map_config.h"
 #include "packets/basic.h"
 #include "spawn_slot.h"
@@ -43,7 +41,9 @@
 
 #include <map/weather_container.h>
 
-#include <map/ximesh/iximesh.h>
+#include <map/navmesh/navmesh.h>
+#include <map/navmesh/navmesh_config.h>
+#include <map/ximesh/ximesh.h>
 
 #include <common/types/hash_map.h>
 #include <list>
@@ -59,7 +59,7 @@
 #include "data/enums/zone_misc.h"
 #include "data/enums/zone_type.h"
 class XiMesh;
-class CNavMesh;
+class NavMesh;
 class SpawnHandler;
 
 #define MAX_ZONEID 300
@@ -334,8 +334,8 @@ public:
     auto campaignHandler() const -> CCampaignHandler*;
     auto battlefieldHandler() const -> CBattlefieldHandler*;
 
-    auto navMesh() const -> INavMesh*;
-    auto xiMesh() const -> IXiMesh*;
+    auto navMesh() const -> NavMesh*;
+    auto xiMesh() const -> XiMesh*;
 
     auto LoadNavMesh() -> Task<void>;
     void RebuildNavMesh(const NavMeshConfig& config = {});
@@ -362,8 +362,8 @@ private:
     void LoadZoneLines();
     void LoadZoneWeather();
 
-    std::unique_ptr<INavMesh> navMesh_;
-    std::unique_ptr<IXiMesh>  xiMesh_;
+    std::unique_ptr<NavMesh> navMesh_;
+    std::unique_ptr<XiMesh>  xiMesh_;
 
     xi::ZoneId     m_zoneID;
     xi::ZoneType   m_zoneType;
