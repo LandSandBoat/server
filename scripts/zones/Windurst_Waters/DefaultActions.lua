@@ -6,6 +6,7 @@ return {
     ['Akkeke']           = { event = 427 },
     ['Anja-Enja']        = { event = 278 },
     ['Aora-Uora']        = { event = 378 },
+    ['Aramu-Paramu']     = { event = 607 },
     ['Arukoko']          = { event = 509 },
     ['Bulolo']           = { event = 566 },
     ['Caliburn']         = { event = 599 },
@@ -92,4 +93,5 @@ return {
     ['Tsuran-Botaran']   = { event = 578 },
     ['Yohra-Ora']        = { event = 565 },
     ['Yomotsutsu']       = { event = 579 },
+    ['Yung_Yaam']        = { event = 609 },
 }
