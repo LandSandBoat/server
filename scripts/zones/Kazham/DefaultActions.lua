@@ -37,6 +37,7 @@ return {
     ['Pula_Rhatti']       = { event = 92 },
     ['Qhio_Plittibhi']    = { event = 154 },
     ['Romaa_Mihgo']       = { event = 263 },
+    ['Ronta-Onta']        = { event = 274 },
     ['Roropp']            = { text = ID.text.OPO_OPO },
     ['Soun_Abralah']      = { event = 101 },
     ['Swift']             = { text = ID.text.SUSPICIOUS_CHARACTERS }, -- TODO: Confirm old event was for quest "A Discerning Eye"
