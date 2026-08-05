@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Chululu
--- Starts and Finishes Quests: Rubbish Day, All in the Cards
+-- Starts and Finishes Quests: All in the Cards
 -- Optional Cutscene at end of Quest: Searching for the Right Words
 -- !pos -13 -6 -42 245
 -----------------------------------
@@ -23,36 +23,6 @@ entity.onTrigger = function(player, npc)
     local cdate             = player:getCharVar('AllInTheCards_date')
 
     if
-        collectTarutCards == xi.questStatus.QUEST_COMPLETED and
-        rubbishDay == xi.questStatus.QUEST_AVAILABLE and
-        player:getCharVar('RubbishDay_day') ~= VanadielUniqueDay()
-    then
-        -- prog = player:getCharVar('RubbishDay_prog')
-        -- if prog <= 2 then
-        --     player:startEvent(199) -- Required to get compatibility 3x on 3 diff game days before quest is kicked off
-        -- elseif prog == 3 then
-        player:startEvent(198) -- Start quest "Rubbish Day" with option
-        -- end
-
-    elseif
-        collectTarutCards == xi.questStatus.QUEST_COMPLETED and
-        rubbishDay == xi.questStatus.QUEST_AVAILABLE
-    then
-        player:startEvent(57) -- Standard dialog between 2 quests
-
-    elseif
-        rubbishDay == xi.questStatus.QUEST_ACCEPTED and
-        player:getCharVar('RubbishDayVar') == 0
-    then
-        player:startEvent(49) -- During quest 'Rubbish Day'
-
-    elseif
-        rubbishDay == xi.questStatus.QUEST_ACCEPTED and
-        player:getCharVar('RubbishDayVar') == 1
-    then
-        player:startEvent(197) -- Finish quest 'Rubbish Day'
-
-    elseif
         player:getFameLevel(xi.fameArea.JEUNO) >= 4 and
         collectTarutCards == xi.questStatus.QUEST_COMPLETED and
         allInTheCards == xi.questStatus.QUEST_AVAILABLE
@@ -87,17 +57,7 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 199 and option == 0 then
-        player:incrementCharVar('RubbishDay_prog', 1)
-        player:setCharVar('RubbishDay_day', VanadielUniqueDay()) -- new vanadiel day
-
-    elseif csid == 198 and option == 0 then
-        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY)
-        npcUtil.giveKeyItem(player, xi.ki.MAGIC_TRASH)
-        player:setCharVar('RubbishDay_prog', 0)
-        player:setCharVar('RubbishDay_day', VanadielUniqueDay())
-
-    elseif
+    if
         (csid == 10110 or csid == 10112 or csid == 10113) and
         option == 0 and
         player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS) == xi.questStatus.QUEST_COMPLETED
@@ -134,19 +94,6 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addFame(xi.fameArea.BASTOK, 16)
             player:addFame(xi.fameArea.WINDURST, 16)
             player:confirmTrade()
-        end
-
-    elseif csid == 197 then
-        if
-            npcUtil.completeQuest(player, xi.questLog.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY, {
-                gil = 6000,
-                item = xi.item.CHAIN_CHOKER,
-                var = { 'RubbishDayVar' }
-            })
-        then
-            player:addFame(xi.fameArea.SANDORIA, 13)
-            player:addFame(xi.fameArea.BASTOK, 13)
-            player:addFame(xi.fameArea.WINDURST, 13)
         end
     end
 end
