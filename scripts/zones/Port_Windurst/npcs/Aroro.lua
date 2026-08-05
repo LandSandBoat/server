@@ -8,22 +8,22 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        { xi.item.SCROLL_OF_STONE,      70, 3 },
-        { xi.item.SCROLL_OF_WATER,     162, 3 },
-        { xi.item.SCROLL_OF_AERO,      374, 3 },
-        { xi.item.SCROLL_OF_FIRE,      967, 3 },
-        { xi.item.SCROLL_OF_BLIZZARD, 1830, 3 },
-        { xi.item.SCROLL_OF_THUNDER,  3768, 3 },
-        { xi.item.SCROLL_OF_POISON,     95, 2 },
-        { xi.item.SCROLL_OF_BIO,       416, 2 },
-        { xi.item.SCROLL_OF_BLIND,     128, 1 },
-        { xi.item.SCROLL_OF_SLEEP,    2600, 2 },
-        { xi.item.SCROLL_OF_BURN,     5366, 3 },
-        { xi.item.SCROLL_OF_FROST,    4261, 3 },
-        { xi.item.SCROLL_OF_CHOKE,    2600, 3 },
-        { xi.item.SCROLL_OF_RASP,     2111, 3 },
-        { xi.item.SCROLL_OF_SHOCK,    1575, 3 },
-        { xi.item.SCROLL_OF_DROWN,    7356, 3 },
+        { xi.item.SCROLL_OF_STONE,      67, 3 },
+        { xi.item.SCROLL_OF_WATER,     156, 3 },
+        { xi.item.SCROLL_OF_AERO,      360, 3 },
+        { xi.item.SCROLL_OF_FIRE,      930, 3 },
+        { xi.item.SCROLL_OF_BLIZZARD, 1760, 3 },
+        { xi.item.SCROLL_OF_THUNDER,  3624, 3 },
+        { xi.item.SCROLL_OF_POISON,     92, 2 },
+        { xi.item.SCROLL_OF_BIO,       400, 2 },
+        { xi.item.SCROLL_OF_BLIND,     124, 1 },
+        { xi.item.SCROLL_OF_SLEEP,    2500, 2 },
+        { xi.item.SCROLL_OF_BURN,     5160, 3 },
+        { xi.item.SCROLL_OF_FROST,    4098, 3 },
+        { xi.item.SCROLL_OF_CHOKE,    2500, 3 },
+        { xi.item.SCROLL_OF_RASP,     2030, 3 },
+        { xi.item.SCROLL_OF_SHOCK,    1515, 3 },
+        { xi.item.SCROLL_OF_DROWN,    7074, 3 },
     }
 
     player:showText(npc, zones[xi.zone.PORT_WINDURST].text.ARORO_SHOP_DIALOG)

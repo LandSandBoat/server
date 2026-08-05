@@ -8,22 +8,22 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        { xi.item.HEMP_GORGET,     1123, 3 },
-        { xi.item.BEETLE_GORGET,   4854, 1 },
-        { xi.item.DOUBLET,         2854, 3 },
-        { xi.item.ROBE,             249, 3 },
-        { xi.item.LEATHER_VEST,     698, 3 },
-        { xi.item.TUNIC,           1456, 3 },
-        { xi.item.COTTON_DOUBLET, 14277, 2 },
-        { xi.item.LINEN_ROBE,      3208, 3 },
-        { xi.item.GLOVES,          1575, 3 },
-        { xi.item.CUFFS,            137, 3 },
-        { xi.item.LEATHER_GLOVES,   374, 3 },
-        { xi.item.MITTS,            681, 3 },
-        { xi.item.COTTON_GLOVES,   7737, 2 },
-        { xi.item.LINEN_CUFFS,     1814, 3 },
-        { xi.item.BONE_MASK,       4068, 2 },
-        { xi.item.BEETLE_MASK,     7943, 1 },
+        { xi.item.HEMP_GORGET,     1080, 3 },
+        { xi.item.BEETLE_GORGET,   4668, 1 },
+        { xi.item.DOUBLET,         2745, 3 },
+        { xi.item.ROBE,             240, 3 },
+        { xi.item.LEATHER_VEST,     672, 3 },
+        { xi.item.TUNIC,           1400, 3 },
+        { xi.item.COTTON_DOUBLET, 13728, 2 },
+        { xi.item.LINEN_ROBE,      3085, 3 },
+        { xi.item.GLOVES,          1515, 3 },
+        { xi.item.CUFFS,            132, 3 },
+        { xi.item.LEATHER_GLOVES,   360, 3 },
+        { xi.item.MITTS,            655, 3 },
+        { xi.item.COTTON_GLOVES,   7440, 2 },
+        { xi.item.LINEN_CUFFS,     1745, 3 },
+        { xi.item.BONE_MASK,       3912, 2 },
+        { xi.item.BEETLE_MASK,     7638, 1 },
 
     }
 

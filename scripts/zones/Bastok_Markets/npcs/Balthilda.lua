@@ -10,16 +10,16 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        { xi.item.POETS_CIRCLET, 2173, 3 },
-        { xi.item.TUNIC,         1470, 3 },
-        { xi.item.LINEN_ROBE,    3239, 3 },
-        { xi.item.MITTS,          687, 3 },
-        { xi.item.LINEN_CUFFS,   1832, 3 },
-        { xi.item.SLACKS,         981, 3 },
-        { xi.item.LINEN_SLOPS,   2646, 3 },
-        { xi.item.SOLEA,          635, 3 },
-        { xi.item.HOLLY_CLOGS,   1706, 3 },
-        { xi.item.LEATHER_RING,  1312, 3 },
+        { xi.item.POETS_CIRCLET, 2070, 3 },
+        { xi.item.TUNIC,         1400, 3 },
+        { xi.item.LINEN_ROBE,    3085, 3 },
+        { xi.item.MITTS,          655, 3 },
+        { xi.item.LINEN_CUFFS,   1745, 3 },
+        { xi.item.SLACKS,         935, 3 },
+        { xi.item.LINEN_SLOPS,   2520, 3 },
+        { xi.item.SOLEA,          605, 3 },
+        { xi.item.HOLLY_CLOGS,   1625, 3 },
+        { xi.item.LEATHER_RING,  1250, 3 },
     }
 
     player:showText(npc, zones[xi.zone.BASTOK_MARKETS].text.BALTHILDA_SHOP_DIALOG)

@@ -8,10 +8,10 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        { xi.item.FISH_MITHKABOB, 1134 },
-        { xi.item.BLACKENED_FROG, 3576 },
-        { xi.item.ROAST_MUSHROOM,  361 },
-        { xi.item.EEL_KABOB,      3150 },
+        { xi.item.FISH_MITHKABOB, 1080 },
+        { xi.item.BLACKENED_FROG, 3406 },
+        { xi.item.ROAST_MUSHROOM,  344 },
+        { xi.item.EEL_KABOB,      3000 },
     }
 
     player:showText(npc, zones[xi.zone.KAZHAM].text.NUHCELODENKI_SHOP_DIALOG)

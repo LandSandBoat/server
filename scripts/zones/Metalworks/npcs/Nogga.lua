@@ -8,10 +8,10 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        { xi.item.BOMB_ARM,                  787, 2 },
-        { xi.item.GRENADE,                  1264, 3 },
-        { xi.item.FLASQUE_OF_CATALYTIC_OIL,  105, 3 },
-        { xi.item.PINCH_OF_SOOT,             661, 1 },
+        { xi.item.BOMB_ARM,                  750, 2 },
+        { xi.item.GRENADE,                  1204, 3 },
+        { xi.item.FLASQUE_OF_CATALYTIC_OIL,  100, 3 },
+        { xi.item.PINCH_OF_SOOT,             630, 1 },
     }
 
     player:showText(npc, zones[xi.zone.METALWORKS].text.NOGGA_SHOP_DIALOG)

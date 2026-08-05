@@ -15,22 +15,22 @@ local m = Module:new(moduleName)
 m:addOverride('xi.zones.Windurst_Waters.npcs.Orez-Ebrez.onTrigger', function(player, npc)
     local stock =
     {
-        { xi.item.HEADGEAR,          2013, 3 },
-        { xi.item.CIRCLET,            166, 2 },
-        { xi.item.POETS_CIRCLET,     2152, 2 },
-        { xi.item.HACHIMAKI,          858, 3 },
-        { xi.item.COTTON_HEADBAND,   2080, 3 },
-        { xi.item.BRONZE_CAP,         174, 3 },
-        { xi.item.COTTON_HEADGEAR,   9274, 2 },
-        { xi.item.LEATHER_BANDANA,    457, 2 },
-        { xi.item.FLAX_HEADBAND,    16640, 2 },
-        { xi.item.COTTON_HACHIMAKI,  5079, 2 },
-        { xi.item.BRASS_CAP,         1700, 3 },
-        { xi.item.WOOL_HAT,         12623, 2 },
-        { xi.item.RED_CAP,          20800, 1 },
-        { xi.item.SOIL_HACHIMAKI,   13927, 1 },
-        { xi.item.BEETLE_MASK,       7943, 1 },
-        { xi.item.BONE_MASK,         4068, 2 },
+        { xi.item.HEADGEAR,          1936, 3 },
+        { xi.item.CIRCLET,            160, 2 },
+        { xi.item.POETS_CIRCLET,     2070, 2 },
+        { xi.item.HACHIMAKI,          825, 3 },
+        { xi.item.COTTON_HEADBAND,   2000, 3 },
+        { xi.item.BRONZE_CAP,         168, 3 },
+        { xi.item.COTTON_HEADGEAR,   8918, 2 },
+        { xi.item.LEATHER_BANDANA,    440, 2 },
+        { xi.item.FLAX_HEADBAND,    16000, 2 },
+        { xi.item.COTTON_HACHIMAKI,  4884, 2 },
+        { xi.item.BRASS_CAP,         1635, 3 },
+        { xi.item.WOOL_HAT,         12138, 2 },
+        { xi.item.RED_CAP,          20000, 1 },
+        { xi.item.SOIL_HACHIMAKI,   13392, 1 },
+        { xi.item.BEETLE_MASK,       7638, 1 },
+        { xi.item.BONE_MASK,         3912, 2 },
     }
 
     player:showText(npc, zones[xi.zone.WINDURST_WATERS].text.OREZEBREZ_SHOP_DIALOG)

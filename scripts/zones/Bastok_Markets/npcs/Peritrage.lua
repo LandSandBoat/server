@@ -9,17 +9,17 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        { xi.item.BRONZE_AXE,      331, 3 },
-        { xi.item.BRASS_AXE,      1638, 3 },
-        { xi.item.BATTLEAXE,     12757, 1 },
-        { xi.item.BUTTERFLY_AXE,   705, 3 },
-        { xi.item.GREATAXE,       4777, 3 },
-        { xi.item.BRONZE_KNIFE,    172, 3 },
-        { xi.item.KNIFE,          2546, 3 },
-        { xi.item.KUKRI,          6458, 1 },
-        { xi.item.BRONZE_DAGGER,   163, 3 },
-        { xi.item.BRASS_DAGGER,    976, 3 },
-        { xi.item.DAGGER,         2131, 3 },
+        { xi.item.BRONZE_AXE,      316, 3 },
+        { xi.item.BRASS_AXE,      1560, 3 },
+        { xi.item.BATTLEAXE,     12150, 1 },
+        { xi.item.BUTTERFLY_AXE,   672, 3 },
+        { xi.item.GREATAXE,       4550, 3 },
+        { xi.item.BRONZE_KNIFE,    164, 3 },
+        { xi.item.KNIFE,          2425, 3 },
+        { xi.item.KUKRI,          6151, 1 },
+        { xi.item.BRONZE_DAGGER,   156, 3 },
+        { xi.item.BRASS_DAGGER,    930, 3 },
+        { xi.item.DAGGER,         2030, 3 },
     }
 
     player:showText(npc, zones[xi.zone.BASTOK_MARKETS].text.PERITRAGE_SHOP_DIALOG)

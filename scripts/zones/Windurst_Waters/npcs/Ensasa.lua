@@ -12,18 +12,18 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        { xi.item.EARTHEN_FLOWERPOT,        1040, 3 },
-        { xi.item.TARUTARU_STOOL,           1023, 3 },
-        { xi.item.YELLOW_JAR,                515, 2 },
-        { xi.item.TARUTARU_FOLDING_SCREEN,  3996, 1 },
+        { xi.item.EARTHEN_FLOWERPOT,        1000, 3 },
+        { xi.item.TARUTARU_STOOL,           984, 3 },
+        { xi.item.YELLOW_JAR,                496, 2 },
+        { xi.item.TARUTARU_FOLDING_SCREEN,  3843, 1 },
         { xi.item.WOODEN_ARROW,                4, 2 },
         { xi.item.BONE_ARROW,                  5, 3 },
         { xi.item.CROSSBOW_BOLT,               6, 2 },
-        { xi.item.SCROLL_OF_EARTH_THRENODY,  320, 3 },
-        { xi.item.SCROLL_OF_FIRE_THRENODY,   728, 3 },
-        { xi.item.WHITE_JAR,                5397, 3 },
-        { xi.item.BUNDLE_OF_RIVER_FOLIAGE,   665, 3 },
-        { xi.item.BUNDLE_OF_SEA_FOLIAGE,     665, 3 },
+        { xi.item.SCROLL_OF_EARTH_THRENODY,  308, 3 },
+        { xi.item.SCROLL_OF_FIRE_THRENODY,   700, 3 },
+        { xi.item.WHITE_JAR,                5190, 3 },
+        { xi.item.BUNDLE_OF_RIVER_FOLIAGE,   640, 3 },
+        { xi.item.BUNDLE_OF_SEA_FOLIAGE,     640, 3 },
         { xi.item.LUGWORM,                    12, 3 },
         { xi.item.LITTLE_WORM,                 4, 3 },
     }

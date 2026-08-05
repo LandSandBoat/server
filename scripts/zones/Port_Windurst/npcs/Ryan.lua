@@ -8,21 +8,21 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        { xi.item.BRONZE_AXE,       328 },
-        { xi.item.BRONZE_SWORD,     278 },
+        { xi.item.BRONZE_AXE,       316 },
+        { xi.item.BRONZE_SWORD,     268 },
         { xi.item.CROSSBOW_BOLT,      6 },
-        { xi.item.BRONZE_HARNESS,   266 },
-        { xi.item.BRASS_HARNESS,   2584 },
-        { xi.item.BRONZE_MITTENS,   145 },
-        { xi.item.BRASS_MITTENS,   1419 },
-        { xi.item.BRONZE_SUBLIGAR,  216 },
-        { xi.item.BRASS_SUBLIGAR,  2080 },
-        { xi.item.BRONZE_LEGGINGS,  133 },
-        { xi.item.BRASS_LEGGINGS,  1289 },
-        { xi.item.KENPOGI,         1294 },
-        { xi.item.TEKKO,            712 },
-        { xi.item.SITABAKI,        1034 },
-        { xi.item.KYAHAN,           660 },
+        { xi.item.BRONZE_HARNESS,   256 },
+        { xi.item.BRASS_HARNESS,   2485 },
+        { xi.item.BRONZE_MITTENS,   140 },
+        { xi.item.BRASS_MITTENS,   1365 },
+        { xi.item.BRONZE_SUBLIGAR,  208 },
+        { xi.item.BRASS_SUBLIGAR,  2000 },
+        { xi.item.BRONZE_LEGGINGS,  128 },
+        { xi.item.BRASS_LEGGINGS,  1240 },
+        { xi.item.KENPOGI,         1245 },
+        { xi.item.TEKKO,            685 },
+        { xi.item.SITABAKI,        995 },
+        { xi.item.KYAHAN,           635 },
     }
 
     player:showText(npc, zones[xi.zone.PORT_WINDURST].text.RYAN_SHOP_DIALOG)

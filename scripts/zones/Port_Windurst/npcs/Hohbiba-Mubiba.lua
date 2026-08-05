@@ -8,20 +8,20 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        { xi.item.MAPLE_WAND,       54, 3 },
-        { xi.item.WILLOW_WAND,     384, 3 },
-        { xi.item.YEW_WAND,       1628, 1 },
-        { xi.item.BRONZE_ROD,      104, 3 },
-        { xi.item.BRASS_ROD,       717, 3 },
-        { xi.item.ASH_CLUB,         74, 3 },
-        { xi.item.CHESTNUT_CLUB,  1809, 3 },
-        { xi.item.BONE_CUDGEL,    5591, 2 },
-        { xi.item.ASH_STAFF,        66, 3 },
-        { xi.item.HOLLY_STAFF,     660, 3 },
-        { xi.item.ELM_STAFF,      3750, 1 },
-        { xi.item.ASH_POLE,        436, 3 },
-        { xi.item.HOLLY_POLE,     5279, 2 },
-        { xi.item.ELM_POLE,      18969, 1 },
+        { xi.item.MAPLE_WAND,       52, 3 },
+        { xi.item.WILLOW_WAND,     370, 3 },
+        { xi.item.YEW_WAND,       1566, 1 },
+        { xi.item.BRONZE_ROD,      100, 3 },
+        { xi.item.BRASS_ROD,       690, 3 },
+        { xi.item.ASH_CLUB,         72, 3 },
+        { xi.item.CHESTNUT_CLUB,  1740, 3 },
+        { xi.item.BONE_CUDGEL,    5376, 2 },
+        { xi.item.ASH_STAFF,        63, 3 },
+        { xi.item.HOLLY_STAFF,     635, 3 },
+        { xi.item.ELM_STAFF,      3606, 1 },
+        { xi.item.ASH_POLE,        420, 3 },
+        { xi.item.HOLLY_POLE,     5076, 2 },
+        { xi.item.ELM_POLE,      18240, 1 },
     }
 
     player:showText(npc, zones[xi.zone.PORT_WINDURST].text.HOHBIBAMUBIBA_SHOP_DIALOG)

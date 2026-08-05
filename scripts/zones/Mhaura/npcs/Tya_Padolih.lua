@@ -9,16 +9,16 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        { xi.item.SCROLL_OF_REGEN,       4492 },
-        { xi.item.SCROLL_OF_REGEN_II,    8143 },
-        { xi.item.SCROLL_OF_SLEEPGA,    11648 },
-        { xi.item.SCROLL_OF_BARAMNESIA, 31449 },
-        { xi.item.SCROLL_OF_BARAMNESRA, 31449 },
-        { xi.item.SCROLL_OF_INVISIBLE,   5984 },
-        { xi.item.SCROLL_OF_SNEAK,       2600 },
-        { xi.item.SCROLL_OF_DEODORIZE,   1346 },
-        { xi.item.SCROLL_OF_DISTRACT,   20384 },
-        { xi.item.SCROLL_OF_FRAZZLE,    28304 },
+        { xi.item.SCROLL_OF_REGEN,       4320 },
+        { xi.item.SCROLL_OF_REGEN_II,    7830 },
+        { xi.item.SCROLL_OF_SLEEPGA,    11200 },
+        { xi.item.SCROLL_OF_BARAMNESIA, 30240 },
+        { xi.item.SCROLL_OF_BARAMNESRA, 30240 },
+        { xi.item.SCROLL_OF_INVISIBLE,   5754 },
+        { xi.item.SCROLL_OF_SNEAK,       2500 },
+        { xi.item.SCROLL_OF_DEODORIZE,   1295 },
+        { xi.item.SCROLL_OF_DISTRACT,   19600 },
+        { xi.item.SCROLL_OF_FRAZZLE,    27216 },
     }
 
     player:showText(npc, zones[xi.zone.MHAURA].text.TYAPADOLIH_SHOP_DIALOG)

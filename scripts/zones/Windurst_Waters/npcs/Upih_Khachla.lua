@@ -12,25 +12,25 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        { xi.item.PINCH_OF_DRIED_MARJORAM,   49, 3 },
-        { xi.item.CHAMOMILE,                135, 2 },
-        { xi.item.WIJNRUIT,                 124, 1 },
-        { xi.item.FLASK_OF_EYE_DROPS,      2698, 3 },
-        { xi.item.ANTIDOTE,                 328, 3 },
-        { xi.item.FLASK_OF_ECHO_DROPS,      832, 2 },
-        { xi.item.POTION,                   946, 1 },
-        { xi.item.ETHER,                   5025, 2 },
-        { xi.item.GRENADE,                 1252, 1 },
-        { xi.item.PINCH_OF_TWINKLE_POWDER,  400, 3 },
-        { xi.item.ONZ_OF_DESALINATOR,      4576, 3 },
-        { xi.item.ONZ_OF_SALINATOR,        4576, 3 },
-        { xi.item.PICKAXE,                  208, 3 },
-        { xi.item.SICKLE,                   312, 3 },
+        { xi.item.PINCH_OF_DRIED_MARJORAM,   48, 3 },
+        { xi.item.CHAMOMILE,                130, 2 },
+        { xi.item.WIJNRUIT,                 120, 1 },
+        { xi.item.FLASK_OF_EYE_DROPS,      2595, 3 },
+        { xi.item.ANTIDOTE,                 316, 3 },
+        { xi.item.FLASK_OF_ECHO_DROPS,      800, 2 },
+        { xi.item.POTION,                   910, 1 },
+        { xi.item.ETHER,                   4832, 2 },
+        { xi.item.GRENADE,                 1204, 1 },
+        { xi.item.PINCH_OF_TWINKLE_POWDER,  385, 3 },
+        { xi.item.ONZ_OF_DESALINATOR,      4400, 3 },
+        { xi.item.ONZ_OF_SALINATOR,        4400, 3 },
+        { xi.item.PICKAXE,                  200, 3 },
+        { xi.item.SICKLE,                   300, 3 },
     }
 
     -- Thief's tools.
     if GetNationRank(player:getNation()) >= 2 then -- Player nation rank 2 or 3.
-        table.insert(stock, { xi.item.SET_OF_THIEFS_TOOLS, 4158, 3 })
+        table.insert(stock, { xi.item.SET_OF_THIEFS_TOOLS, 3999, 3 })
     end
 
     -- Living Key.
@@ -41,7 +41,7 @@ entity.onTrigger = function(player, npc)
         (windyNationRank == sandyNationRank and windyNationRank == bastokNationRank) or                       -- All 3 nations tied.
         (windyNationRank ~= sandyNationRank and windyNationRank ~= bastokNationRank and windyNationRank == 3) -- Nation not tied and nation last.
     then
-        table.insert(stock, { xi.item.LIVING_KEY, 5520, 3 })
+        table.insert(stock, { xi.item.LIVING_KEY, 5308, 3 })
     end
 
     player:showText(npc, zones[xi.zone.WINDURST_WATERS].text.UPIHKHACHLA_SHOP_DIALOG)
