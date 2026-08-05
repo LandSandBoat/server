@@ -1,5 +1,6 @@
 -----------------------------------
 -- Old NM Respawn Timers
+-- Date : 2013-11-04 (One day prior to the November 5, 2013 version update)
 -- Reverts the respawn timers of multiple notorious monsters to their
 -- values prior to the November 5, 2013 version update, which reduced
 -- them across the original areas:
@@ -17,11 +18,18 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
+
+local moduleName = 'era_old_nm_respawn_timers'
+
+if xi.module.isContentEnabled('SOA') then
+    return { name = moduleName }
+end
+
 local shakhramiID = zones[xi.zone.MAZE_OF_SHAKHRAMI]
 local feiyinID    = zones[xi.zone.FEIYIN]
 local bostauID    = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
 -----------------------------------
-local m = Module:new('old_nm_respawn_timers')
+local m = Module:new(moduleName)
 
 -----------------------------------
 -- Simple timed NMs
