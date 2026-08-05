@@ -401,6 +401,7 @@ end
 --  - allowSubjob: Determines if character subjobs are enabled or disabled upon entry. Defaults to true. (optional)
 --  - hasWipeGrace: Grants players a 3 minute grace period on a full wipe before ejecting them. Defaults to true. (optional)
 --  - canLoseExp: Determines if a character loses experience points upon death while inside the battlefield. Defaults to true. (optional)
+--  - cleanupDebuffs: Removes negative status effects from players upon victory. Defaults to false. (optional)
 --  - showTimer: Show the time remaining in the battlefield in the UI for the player. Defaults to true. (optional)
 --  - delayToExit: Amount of time to wait before exiting the battlefield. Defaults to 5 seconds. (optional)
 --  - requiredItems: Items required to be traded to enter the battlefield.
@@ -440,10 +441,11 @@ function Battlefield:new(data)
     obj.grantXPLockout   = data.grantXPLockout
     obj.levelCap         = data.levelCap or 0
     obj.allowSubjob      = (data.allowSubjob == nil or data.allowSubjob) or false
-    obj.allowTrusts      = data.allowTrusts and data.allowTrusts or false
+    obj.allowTrusts      = data.allowTrusts or false
     obj.hasWipeGrace     = (data.hasWipeGrace == nil or data.hasWipeGrace) or false
-    obj.isMission        = data.isMission and data.isMission or false
+    obj.isMission        = data.isMission or false
     obj.canLoseExp       = (data.canLoseExp == nil or data.canLoseExp) or false
+    obj.cleanupDebuffs   = data.cleanupDebuffs or false
     obj.showTimer        = (data.showTimer == nil or data.showTimer) or false
     obj.delayToExit      = data.delayToExit or 5
     obj.requiredItems    = data.requiredItems or {}
@@ -1186,6 +1188,13 @@ end
 
 ---@diagnostic disable-next-line: duplicate-set-field
 function Battlefield:onBattlefieldLeave(player, battlefield, leavecode)
+    if
+        self.cleanupDebuffs and
+        leavecode == xi.battlefield.leaveCode.WON
+    then
+        player:delStatusEffectsByFlag(xi.effectFlag.ERASABLE + xi.effectFlag.WALTZABLE)
+    end
+
     if leavecode == xi.battlefield.leaveCode.WON then
         self:onBattlefieldWin(player, battlefield)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
