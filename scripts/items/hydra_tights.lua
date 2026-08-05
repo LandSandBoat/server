@@ -1,27 +1,28 @@
 -----------------------------------
 -- ID: 15596
 -- Item: Hydra Tights
--- Item Effect: 10% haste
--- Duration: 3 minutes
+-- Item Effect: Haste +10% (Magic)
+-- Duration: 3 Minutes
+-- Stacks with Haste (spell)
 -----------------------------------
 ---@type TItem
 local itemObject = {}
 
-itemObject.onItemCheck = function(target, user)
-    if target:getStatusEffectBySource(xi.effect.HASTE, xi.effectSourceType.EQUIPPED_ITEM, xi.item.HYDRA_TIGHTS) ~= nil then
-        target:delStatusEffect(xi.effect.HASTE, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.HYDRA_TIGHTS)
-    end
-
+itemObject.onItemCheck = function(target, item, caster)
     return 0
 end
 
 itemObject.onItemUse = function(target, user)
     if target:hasEquipped(xi.item.HYDRA_TIGHTS) then
-        if not target:hasStatusEffect(xi.effect.HASTE) then
-            target:addStatusEffect(xi.effect.HASTE, { duration = 180, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.HYDRA_TIGHTS })
+        local effect = target:getStatusEffectBySource(xi.effect.ENCHANTMENT, xi.effectSourceType.EQUIPPED_ITEM, xi.item.HYDRA_TIGHTS)
+        if effect then
+            effect:resetStartTime()
+            effect:setIcon(xi.effect.HASTE)
         else
-            target:messageBasic(xi.msg.basic.NO_EFFECT)
+            target:addStatusEffect(xi.effect.ENCHANTMENT, { duration = 180, icon = xi.effect.HASTE, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.HYDRA_TIGHTS, flag = xi.effectFlag.NO_LOSS_MESSAGE })
         end
+
+        target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.HASTE)
     end
 end
 
@@ -29,7 +30,12 @@ itemObject.onEffectGain = function(target, effect)
     effect:addMod(xi.mod.HASTE_MAGIC, 1000)
 end
 
+itemObject.onItemUnequip = function(target, item)
+    target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.HYDRA_TIGHTS)
+end
+
 itemObject.onEffectLose = function(target, effect)
+    target:messageBasic(xi.msg.basic.STATUS_WEARS_OFF, xi.effect.HASTE)
 end
 
 return itemObject
