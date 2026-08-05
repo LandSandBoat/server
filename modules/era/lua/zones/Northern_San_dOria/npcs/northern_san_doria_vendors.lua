@@ -11,21 +11,21 @@ if not xi.module.isContentEnabled('ABYSSEA') then
     m:addOverride('xi.zones.Northern_San_dOria.npcs.Arlenne.onTrigger', function(player, npc)
         local stock =
         {
-            { xi.item.MAPLE_WAND,       54, 3 },
-            { xi.item.WILLOW_WAND,     384, 2 },
-            { xi.item.YEW_WAND,       1628, 1 },
-            { xi.item.ASH_STAFF,        66, 3 },
-            { xi.item.HOLLY_STAFF,     660, 2 },
-            { xi.item.ELM_STAFF,      3750, 1 },
-            { xi.item.HOLLY_POLE,     5279, 2 },
-            { xi.item.ELM_POLE,      18969, 1 },
-            { xi.item.BRONZE_ZAGHNAL,  357, 3 },
-            { xi.item.BRASS_ZAGHNAL,  2938, 2 },
-            { xi.item.ZAGHNAL,       13041, 1 },
-            { xi.item.BRONZE_SPEAR,    932, 3 },
-            { xi.item.BRASS_SPEAR,    5408, 2 },
-            { xi.item.SPEAR,         18345, 1 },
-            { xi.item.LANCE,         19156, 1 },
+            { xi.item.MAPLE_WAND,       52, 3 },
+            { xi.item.WILLOW_WAND,     370, 2 },
+            { xi.item.YEW_WAND,       1566, 1 },
+            { xi.item.ASH_STAFF,        63, 3 },
+            { xi.item.HOLLY_STAFF,     635, 2 },
+            { xi.item.ELM_STAFF,      3606, 1 },
+            { xi.item.HOLLY_POLE,     5076, 2 },
+            { xi.item.ELM_POLE,      18240, 1 },
+            { xi.item.BRONZE_ZAGHNAL,  344, 3 },
+            { xi.item.BRASS_ZAGHNAL,  2825, 2 },
+            { xi.item.ZAGHNAL,       12540, 1 },
+            { xi.item.BRONZE_SPEAR,    880, 3 },
+            { xi.item.BRASS_SPEAR,    5200, 2 },
+            { xi.item.SPEAR,         17640, 1 },
+            { xi.item.LANCE,         18420, 1 },
         }
 
         player:showText(npc, zones[xi.zone.NORTHERN_SAN_DORIA].text.ARLENNE_SHOP_DIALOG)
@@ -36,16 +36,16 @@ if not xi.module.isContentEnabled('ABYSSEA') then
     m:addOverride('xi.zones.Northern_San_dOria.npcs.Tavourine.onTrigger', function(player, npc)
         local stock =
         {
-            { xi.item.BRONZE_KNIFE,       170, 2 },
-            { xi.item.KNIFE,             2522, 1 },
-            { xi.item.BRONZE_ROD,         104, 3 },
-            { xi.item.BRASS_ROD,          717, 2 },
-            { xi.item.ROD,               2758, 1 },
-            { xi.item.BRONZE_MACE,        195, 3 },
-            { xi.item.MACE,              5041, 2 },
-            { xi.item.BRONZE_AXE,         328, 2 },
-            { xi.item.CLAYMORE,          2828, 2 },
-            { xi.item.MYTHRIL_CLAYMORE, 43680, 1 },
+            { xi.item.BRONZE_KNIFE,       164, 2 },
+            { xi.item.KNIFE,             2425, 1 },
+            { xi.item.BRONZE_ROD,         100, 3 },
+            { xi.item.BRASS_ROD,          690, 2 },
+            { xi.item.ROD,               2652, 1 },
+            { xi.item.BRONZE_MACE,        188, 3 },
+            { xi.item.MACE,              4848, 2 },
+            { xi.item.BRONZE_AXE,         316, 2 },
+            { xi.item.CLAYMORE,          2720, 2 },
+            { xi.item.MYTHRIL_CLAYMORE, 42000, 1 },
         }
 
         player:showText(npc, zones[xi.zone.NORTHERN_SAN_DORIA].text.TAVOURINE_SHOP_DIALOG)
@@ -56,18 +56,18 @@ if not xi.module.isContentEnabled('ABYSSEA') then
     m:addOverride('xi.zones.Northern_San_dOria.npcs.Pirvidiauce.onTrigger', function(player, npc)
         local stock =
         {
-            { xi.item.CERAMIC_FLOWERPOT,    1040, 3 },
-            { xi.item.PILE_OF_RED_GRAVEL,   2293, 3 },
-            { xi.item.ASH_CLOGS,             128, 3 },
-            { xi.item.HOLLY_CLOGS,          1690, 2 },
-            { xi.item.CHESTNUT_SABOTS,      9547, 1 },
+            { xi.item.CERAMIC_FLOWERPOT,    1000, 3 },
+            { xi.item.PILE_OF_RED_GRAVEL,   2205, 3 },
+            { xi.item.ASH_CLOGS,             124, 3 },
+            { xi.item.HOLLY_CLOGS,          1625, 2 },
+            { xi.item.CHESTNUT_SABOTS,      9180, 1 },
             { xi.item.WOODEN_ARROW,            4, 3 },
             { xi.item.CROSSBOW_BOLT,           6, 2 },
-            { xi.item.FLASK_OF_EYE_DROPS,   2698, 3 },
-            { xi.item.ANTIDOTE,              328, 3 },
-            { xi.item.FLASK_OF_ECHO_DROPS,   832, 2 },
-            { xi.item.POTION,                946, 1 },
-            { xi.item.ETHER,                5025, 1 },
+            { xi.item.FLASK_OF_EYE_DROPS,   2595, 3 },
+            { xi.item.ANTIDOTE,              316, 3 },
+            { xi.item.FLASK_OF_ECHO_DROPS,   800, 2 },
+            { xi.item.POTION,                910, 1 },
+            { xi.item.ETHER,                4832, 1 },
         }
 
         player:showText(npc, zones[xi.zone.NORTHERN_SAN_DORIA].text.PIRVIDIAUCE_SHOP_DIALOG)

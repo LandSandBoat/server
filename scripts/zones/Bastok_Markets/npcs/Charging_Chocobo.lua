@@ -9,20 +9,20 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        { xi.item.BRONZE_SUBLIGAR,    218, 3 },
-        { xi.item.SCALE_CUISSES,     1879, 3 },
-        { xi.item.BRASS_CUISSES,    16228, 2 },
-        { xi.item.CUISSES,          39690, 2 },
-        { xi.item.MYTHRIL_CUISSES,  66399, 1 },
-        { xi.item.BRONZE_LEGGINGS,    134, 3 },
-        { xi.item.SCALE_GREAVES,     1139, 3 },
-        { xi.item.BRASS_GREAVES,     9609, 2 },
-        { xi.item.PLATE_LEGGINGS,   24948, 2 },
-        { xi.item.MYTHRIL_LEGGINGS, 41527, 1 },
-        { xi.item.GORGET,           19278, 2 },
-        { xi.item.LEATHER_BELT,       446, 3 },
-        { xi.item.SILVER_BELT,      11995, 3 },
-        { xi.item.SWORDBELT,        22651, 1 },
+        { xi.item.BRONZE_SUBLIGAR,    208, 3 },
+        { xi.item.SCALE_CUISSES,     1790, 3 },
+        { xi.item.BRASS_CUISSES,    15456, 2 },
+        { xi.item.CUISSES,          37800, 2 },
+        { xi.item.MYTHRIL_CUISSES,  63238, 1 },
+        { xi.item.BRONZE_LEGGINGS,    128, 3 },
+        { xi.item.SCALE_GREAVES,     1085, 3 },
+        { xi.item.BRASS_GREAVES,     9152, 2 },
+        { xi.item.PLATE_LEGGINGS,   23760, 2 },
+        { xi.item.MYTHRIL_LEGGINGS, 39550, 1 },
+        { xi.item.GORGET,           18360, 2 },
+        { xi.item.LEATHER_BELT,       425, 3 },
+        { xi.item.SILVER_BELT,      11424, 3 },
+        { xi.item.SWORDBELT,        21573, 1 },
     }
 
     player:showText(npc, zones[xi.zone.BASTOK_MARKETS].text.CHARGINGCHOCOBO_SHOP_DIALOG)

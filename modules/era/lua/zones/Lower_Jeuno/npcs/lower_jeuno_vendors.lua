@@ -134,6 +134,28 @@ if not xi.module.isContentEnabled('ABYSSEA') then
         xi.shop.general(player, stock)
     end)
 
+    -- Chetak: Rework Wool Cap and Bracers prices for in era values
+    m:addOverride('xi.zones.Lower_Jeuno.npcs.Chetak.onTrigger', function(player, npc)
+        local stock =
+        {
+            { xi.item.RED_CAP,       20000 },
+            { xi.item.WOOL_CAP,      45760 },
+            { xi.item.WOOL_HAT,      12138 },
+            { xi.item.GAMBISON,      32500 },
+            { xi.item.CLOAK,         33212 },
+            { xi.item.WOOL_GAMBISON, 68640 },
+            { xi.item.WOOL_ROBE,     18088 },
+            { xi.item.BLACK_TUNIC,   10356 },
+            { xi.item.BRACERS,       16900 },
+            { xi.item.LINEN_MITTS,   15732 },
+            { xi.item.WOOL_CUFFS,    10234 },
+            { xi.item.WHITE_MITTS,    4830 },
+        }
+
+        player:showText(npc, zones[xi.zone.LOWER_JEUNO].text.ORTHONS_GARMENT_SHOP_DIALOG)
+        xi.shop.general(player, stock)
+    end)
+
     -- Yoskolo: Removed OOE Sentinels Scherzo from stock
     m:addOverride('xi.zones.Lower_Jeuno.npcs.Yoskolo.onTrigger', function(player, npc)
         local stock =
@@ -157,6 +179,24 @@ if not xi.module.isContentEnabled('ABYSSEA') then
 
         player:showText(npc, zones[xi.zone.LOWER_JEUNO].text.YOSKOLO_SHOP_DIALOG)
         xi.shop.general(player, stock)
+    end)
+end
+
+if not xi.module.isContentEnabled('ROV') then
+    -- Ghebi Damomohe: Remove Chunk of Bronzite from stock, added post-ROV
+    m:addOverride('xi.zones.Lower_Jeuno.npcs.Ghebi_Damomohe.onEventFinish', function(player, csid, option, npc)
+        if csid == 106 and option == 0 then
+            local stock =
+            {
+                { xi.item.RICE_BALL,        160 },
+                { xi.item.EEL_KABOB,       3000 },
+                { xi.item.GARLIC_CRACKER,     4 },
+            }
+
+            xi.shop.general(player, stock, xi.fameArea.NORG)
+        else
+            super(player, csid, option, npc)
+        end
     end)
 end
 

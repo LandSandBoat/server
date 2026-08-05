@@ -8,22 +8,22 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        { xi.item.BRONZE_SUBLIGAR,     218, 3 },
-        { xi.item.BRASS_SUBLIGAR,     2100, 2 },
-        { xi.item.IRON_SUBLIGAR,     26357, 1 },
-        { xi.item.LEATHER_TROUSERS,    562, 2 },
-        { xi.item.LIZARD_TROUSERS,    5656, 1 },
-        { xi.item.CHAIN_HOSE,        13230, 3 },
-        { xi.item.BRONZE_LEGGINGS,     134, 3 },
-        { xi.item.BRASS_LEGGINGS,     1302, 2 },
-        { xi.item.LEGGINGS,          16373, 1 },
-        { xi.item.LEATHER_HIGHBOOTS,   352, 2 },
-        { xi.item.LIZARD_LEDELSENS,   3575, 1 },
-        { xi.item.GREAVES,            8127, 3 },
-        { xi.item.MAPLE_SHIELD,        635, 3 },
-        { xi.item.LAUAN_SHIELD,        126, 3 },
-        { xi.item.TARGE,             12642, 2 },
-        { xi.item.BUCKLER,           35658, 1 },
+        { xi.item.BRONZE_SUBLIGAR,     208, 3 },
+        { xi.item.BRASS_SUBLIGAR,     2000, 2 },
+        { xi.item.IRON_SUBLIGAR,     25102, 1 },
+        { xi.item.LEATHER_TROUSERS,    536, 2 },
+        { xi.item.LIZARD_TROUSERS,    5387, 1 },
+        { xi.item.CHAIN_HOSE,        12600, 3 },
+        { xi.item.BRONZE_LEGGINGS,     128, 3 },
+        { xi.item.BRASS_LEGGINGS,     1240, 2 },
+        { xi.item.LEGGINGS,          15594, 1 },
+        { xi.item.LEATHER_HIGHBOOTS,   336, 2 },
+        { xi.item.LIZARD_LEDELSENS,   3405, 1 },
+        { xi.item.GREAVES,            7740, 3 },
+        { xi.item.MAPLE_SHIELD,        605, 3 },
+        { xi.item.LAUAN_SHIELD,        120, 3 },
+        { xi.item.TARGE,             12040, 2 },
+        { xi.item.BUCKLER,           33960, 1 },
     }
 
     player:showText(npc, zones[xi.zone.BASTOK_MINES].text.ZEMEDARS_SHOP_DIALOG)

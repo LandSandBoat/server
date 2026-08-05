@@ -30,17 +30,17 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        { xi.item.LOAF_OF_IRON_BREAD,         104, 3 },
+        { xi.item.LOAF_OF_IRON_BREAD,         100, 3 },
         { xi.item.BRETZEL,                     24, 2 },
-        { xi.item.LOAF_OF_PUMPERNICKEL,       166, 1 },
-        { xi.item.BAKED_POPOTO,               332, 3 },
-        { xi.item.SAUSAGE,                    162, 2 },
-        { xi.item.BOWL_OF_PEBBLE_SOUP,        208, 3 },
-        { xi.item.BOWL_OF_EGG_SOUP,          3432, 1 },
+        { xi.item.LOAF_OF_PUMPERNICKEL,       160, 1 },
+        { xi.item.BAKED_POPOTO,               320, 3 },
+        { xi.item.SAUSAGE,                    156, 2 },
+        { xi.item.BOWL_OF_PEBBLE_SOUP,        200, 3 },
+        { xi.item.BOWL_OF_EGG_SOUP,          3300, 1 },
         { xi.item.FLASK_OF_DISTILLED_WATER,    12, 3 },
-        { xi.item.BOTTLE_OF_MELON_JUICE,     1144, 2 },
-        { xi.item.BOTTLE_OF_PINEAPPLE_JUICE,  416, 1 },
-        { xi.item.SLICE_OF_ROAST_MUTTON,      748, 2 },
+        { xi.item.BOTTLE_OF_MELON_JUICE,     1100, 2 },
+        { xi.item.BOTTLE_OF_PINEAPPLE_JUICE,  400, 1 },
+        { xi.item.SLICE_OF_ROAST_MUTTON,      720, 2 },
     }
 
     player:showText(npc, zones[xi.zone.PORT_BASTOK].text.MELLOA_SHOP_DIALOG)

@@ -12,11 +12,11 @@ entity.onTrigger = function(player, npc)
     {
         { xi.item.LUGWORM,                        12, 2, },
         { xi.item.LITTLE_WORM,                     4, 3, },
-        { xi.item.BAMBOO_FISHING_ROD,            561, 1, },
-        { xi.item.YEW_FISHING_ROD,               245, 2, },
-        { xi.item.WILLOW_FISHING_ROD,             74, 3, },
-        { xi.item.SCROLL_OF_LIGHT_THRENODY,      124, 3, },
-        { xi.item.SCROLL_OF_LIGHTNING_THRENODY, 1431, 3, },
+        { xi.item.BAMBOO_FISHING_ROD,            540, 1, },
+        { xi.item.YEW_FISHING_ROD,               236, 2, },
+        { xi.item.WILLOW_FISHING_ROD,             72, 3, },
+        { xi.item.SCROLL_OF_LIGHT_THRENODY,      120, 3, },
+        { xi.item.SCROLL_OF_LIGHTNING_THRENODY, 1376, 3, },
     }
 
     player:showText(npc, ID.text.LUSIANE_SHOP_DIALOG)

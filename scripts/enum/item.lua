@@ -4320,6 +4320,7 @@ xi.item =
     AMBUSCADE_CHIT_LEGGEAR_P1           = 9946,
     AMBUSCADE_CHIT_FOOTGEAR_P1          = 9947,
     AMBUSCADE_CHIT_RING                 = 9948,
+    CHUNK_OF_BRONZITE                   = 10036,
     FAFNIRS_SCALE                       = 10037,
     KIRINS_MANE                         = 10038,
     IRON_GIANT_SHARD                    = 10039,

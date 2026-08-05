@@ -9,13 +9,13 @@ entity.onTrigger = function(player, npc)
     local stock =
     {
         { xi.item.FLASK_OF_DISTILLED_WATER,   12 },
-        { xi.item.FLASK_OF_EYE_DROPS,       2724 },
-        { xi.item.ANTIDOTE,                  331 },
-        { xi.item.FLASK_OF_ECHO_DROPS,       840 },
-        { xi.item.POTION,                    955 },
-        { xi.item.ETHER,                    5073 },
-        { xi.item.VIAL_OF_FIEND_BLOOD,       635 },
-        { xi.item.PINCH_OF_POISON_DUST,      336 },
+        { xi.item.FLASK_OF_EYE_DROPS,       2595 },
+        { xi.item.ANTIDOTE,                  316 },
+        { xi.item.FLASK_OF_ECHO_DROPS,       800 },
+        { xi.item.POTION,                    910 },
+        { xi.item.ETHER,                    4832 },
+        { xi.item.VIAL_OF_FIEND_BLOOD,       605 },
+        { xi.item.PINCH_OF_POISON_DUST,      320 },
     }
 
     player:showText(npc, zones[xi.zone.KAZHAM].text.PAHYALOLOHOIV_SHOP_DIALOG)
