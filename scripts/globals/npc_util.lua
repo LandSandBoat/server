@@ -582,7 +582,7 @@ function npcUtil.giveReward(player, params)
     end
 
     if params['fame'] == nil then
-        params['fame'] = 30
+        params['fame'] = 20
     end
 
     if

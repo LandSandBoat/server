@@ -49,7 +49,7 @@ commandObj.onTrigger = function(player, famezone, level, target)
     if level == nil then
         player:printToPlayer(string.format('Fame Zone %s: %s - No other parameters requested.', famezone, fameZoneNames[famezone]))
         return
-    elseif level < 0 or level > 9 then
+    elseif level < 1 or level > 9 then
         error(player, 'You must provide a fame level from 1 to 9.')
         return
     end
