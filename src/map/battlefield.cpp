@@ -284,6 +284,8 @@ void CBattlefield::ApplyLevelRestrictions(CCharEntity* PChar) const
 
         PChar->StatusEffectContainer->DelStatusEffectsByFlag(xi::StatusEffectFlag::Dispelable, EffectNotice::Silent);
         PChar->StatusEffectContainer->DelStatusEffectSilent(xi::StatusEffect::Reraise);
+        PChar->health.tp = 0;
+        PChar->updatemask |= UPDATE_HP;
         PChar->StatusEffectContainer->AddStatusEffect(xi::StatusEffect::LevelRestriction, static_cast<uint16>(xi::StatusEffect::LevelRestriction), cap, 0s, 0s);
     }
     else
