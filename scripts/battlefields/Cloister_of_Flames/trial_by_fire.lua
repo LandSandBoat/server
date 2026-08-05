@@ -18,11 +18,6 @@ local content = BattlefieldQuest:new({
     quest     = xi.quest.id.outlands.TRIAL_BY_FIRE,
 })
 
-function content:onEventFinishWin(player, csid, option, npc)
-    player:addTitle(xi.title.HEIR_OF_THE_GREAT_FIRE)
-    npcUtil.giveKeyItem(player, xi.ki.WHISPER_OF_FLAMES)
-end
-
 content.groups =
 {
     {
