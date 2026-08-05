@@ -94,8 +94,8 @@ local isHolidayToday = function(shop)
 end
 
 ---A rejected result: zeroed itemNo/count with a Trade reason code.
-local rejected = function(trade)
-    return { itemNo = 0, count = 0, trade = trade }
+local rejected = function(tradeCode)
+    return { itemNo = 0, count = 0, tradeCode = tradeCode }
 end
 
 ---Rolls the shop to the current day: restock/trim each item to targetStock, lock prices.
@@ -165,7 +165,7 @@ end
 ---@param npc CBaseEntity
 ---@param itemId xi.item
 ---@param quantity integer
----@return { itemNo: integer, count: integer, trade: integer }
+---@return { itemNo: integer, count: integer, tradeCode: integer }
 xi.guildShops.onPlayerBuy = function(player, npc, itemId, quantity)
     local shop = shopFor(npc)
 
@@ -211,7 +211,7 @@ xi.guildShops.onPlayerBuy = function(player, npc, itemId, quantity)
     item.stock = item.stock - quantity
 
     -- Hand off result to core for packet purposes
-    return { itemNo = itemId, count = item.stock, trade = quantity }
+    return { itemNo = itemId, count = item.stock, tradeCode = quantity }
 end
 
 ---Items the shop offers today.
@@ -248,7 +248,7 @@ end
 ---@param npc CBaseEntity
 ---@param itemId xi.item
 ---@param quantity integer
----@return { itemNo: integer, count: integer, trade: integer, sold: integer, price: integer }
+---@return { itemNo: integer, count: integer, sold: integer?, price: integer?, tradeCode: integer? }
 xi.guildShops.onPlayerSell = function(player, npc, itemId, quantity)
     local shop = shopFor(npc)
 
@@ -264,37 +264,19 @@ xi.guildShops.onPlayerSell = function(player, npc, itemId, quantity)
     end
 
     -- Get current item state
-    local state  = rollShopDay(npc, shop)
-    local item   = state.items[itemId]
+    local state = rollShopDay(npc, shop)
+    local item  = state.items[itemId]
 
-    -- Cap the purchase to the least of requested quantity or remaining stock
-    local want   = math.min(quantity, cfg.maxStock - item.stock)
-
-    -- Packet does NOT provide specific inventory slots, we have to iterate the player inventory ourselves
-    -- The sale can potentially span multiple stacks
-    local stacks = player:findItems(itemId, xi.inventoryLocation.INVENTORY)
-    local sold   = 0
-    for _ = 1, #stacks do
-        local front = player:findItems(itemId, xi.inventoryLocation.INVENTORY)[1]
-        local take  = front and math.min(want - sold, front:getQuantity() - front:getReservedValue()) or 0
-        if take <= 0 then
-            break
-        end
-
-        player:delItem(itemId, take)
-        sold = sold + take
-    end
-
+    -- Cap the purchase to the least of offered quantity or remaining stock
+    local sold  = math.min(quantity, cfg.maxStock - item.stock)
     if sold <= 0 then
         return rejected(-4)
     end
 
-    player:addGil(item.sellPrice * sold)
     item.stock = item.stock + sold
 
-    -- Return sale status to core for packet and audit purposes.
-    local trade = (sold < quantity) and -1 or sold
-    return { itemNo = itemId, count = item.stock, trade = trade, sold = sold, price = item.sellPrice }
+    -- Return sale status to core for payout, packet and audit purposes.
+    return { itemNo = itemId, count = item.stock, sold = sold, price = item.sellPrice }
 end
 
 ---Items the shop buys.

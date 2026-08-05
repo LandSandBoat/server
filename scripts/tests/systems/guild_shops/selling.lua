@@ -103,4 +103,60 @@ describe('Guild shop selling', function()
         open()
         assert(offeredToday(notOffered), 'not offered the next day')
     end)
+
+    local arrows = xi.item.WOODEN_ARROW
+
+    local function openArrowShop()
+        player = xi.test.world:spawnPlayer({ zone = xi.zone.AL_ZAHBI })
+        xi.test.world:setVanaDay(xi.day.EARTHSDAY) -- Dehbi Moshal closes on Firesday
+        xi.test.world:setVanaTime(8, 0)
+        player.entities:gotoAndTrigger('Dehbi_Moshal')
+    end
+
+    it('refuses to sell an equipped stack', function()
+        openArrowShop()
+        player:addItem(arrows, 99)
+        player:equipItem(arrows)
+
+        local gil = player:getGil()
+
+        local reply = sell(arrows, 12)
+
+        assert(reply.trade == 0xFC, 'equipped sale not rejected: trade ' .. tostring(reply.trade))
+        assert(player:getGil() == gil, 'gil paid for an equipped stack')
+        assert(player:getItemCount(arrows) == 99, 'equipped stack was taken')
+    end)
+
+    it('releases the claim when the shop refuses', function()
+        openArrowShop()
+        player:addItem(offered, 5) -- this shop does not carry ore
+
+        local gil = player:getGil()
+
+        local reply = sell(offered, 5)
+
+        assert(reply.trade == 0xFC, 'refusal not flagged: trade ' .. tostring(reply.trade))
+        assert(player:getGil() == gil, 'gil paid for a refused sale')
+        assert(player:getItemCount(offered) == 5, 'refused item was taken')
+
+        local stack = player:findItems(offered, xi.inventoryLocation.INVENTORY)[1]
+        assert(stack:state() == xi.itemState.FREE, 'stack left locked after the refusal')
+    end)
+
+    it('sells the free stack and skips the equipped one', function()
+        openArrowShop()
+        player:addItem(arrows, 99) -- full stack, so the next add starts a new one
+        player:equipItem(arrows)
+        player:addItem(arrows, 12)
+
+        local before = sellList()[arrows]
+        local gil    = player:getGil()
+
+        local reply = sell(arrows, 20)
+
+        assert(reply.trade == 0xFF, 'partial fill not flagged: trade ' .. tostring(reply.trade))
+        assert(player:getGil() == gil + before.price * 12, 'gil off for 12 sold')
+        assert(player:getItemCount(arrows) == 99, 'equipped stack not left alone')
+        assert(sellList()[arrows].count == before.count + 12, 'stock not +12')
+    end)
 end)

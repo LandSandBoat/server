@@ -23,6 +23,7 @@
 
 #include "common/settings.h"
 #include "entities/char_entity.h"
+#include "items/transactions/guild_sell.h"
 #include "lua/luautils.h"
 #include "packets/s2c/0x084_guild_sell.h"
 #include "utils/itemutils.h"
@@ -80,22 +81,55 @@ void GP_CLI_COMMAND_GUILD_SELL::process(MapSession* PSession, CCharEntity* PChar
         return;
     }
 
-    if (auto* PNpc = zoneutils::GetEntity(PChar->guildShopNpc_.UniqueNo, TYPE_NPC))
+    auto* PNpc = zoneutils::GetEntity(PChar->guildShopNpc_.UniqueNo, TYPE_NPC);
+    if (!PNpc)
     {
-        const auto result = luautils::callGlobal<sol::table>("xi.guildShops.onPlayerSell", PChar, PNpc, this->ItemNo, this->ItemNum);
-        if (result.valid())
-        {
-            const auto itemNo = result.get_or("itemNo", uint16{ 0 });
-            const auto count  = result.get_or("count", uint8{ 0 });
-            const auto trade  = result.get_or("trade", int32{ 0 });
-            const auto sold   = result.get_or("sold", uint8{ 0 });
-            const auto price  = result.get_or("price", uint32{ 0 });
-            PChar->pushPacket<GP_SERV_COMMAND_GUILD_SELL>(PChar, count, itemNo, static_cast<uint8>(trade));
-
-            if (sold > 0)
-            {
-                auditSale(*PSession->scheduler, PChar, itemNo, price, sold);
-            }
-        }
+        PChar->pushPacket<GP_SERV_COMMAND_GUILD_SELL>(PChar, 0, 0, static_cast<uint8>(-4));
+        return;
     }
+
+    // Lock the player's stacks before quoting: the shop only ever buys what we could claim.
+    const auto transaction = GuildSellTransaction::start(PChar, this->ItemNo, this->PropertyItemIndex, this->ItemNum);
+    if (!transaction || transaction->claimed() == 0)
+    {
+        PChar->pushPacket<GP_SERV_COMMAND_GUILD_SELL>(PChar, 0, 0, static_cast<uint8>(-4));
+        return;
+    }
+
+    const auto result = luautils::callGlobal<sol::table>("xi.guildShops.onPlayerSell", PChar, PNpc, this->ItemNo, transaction->claimed());
+    if (!result.valid())
+    {
+        PChar->pushPacket<GP_SERV_COMMAND_GUILD_SELL>(PChar, 0, 0, static_cast<uint8>(-4));
+        return;
+    }
+
+    const auto itemNo = result.get_or("itemNo", uint16{ 0 });
+    const auto count  = result.get_or("count", uint8{ 0 });
+    const auto sold   = result.get_or("sold", uint8{ 0 });
+    const auto price  = result.get_or("price", uint32{ 0 });
+
+    // less sold than asked for is a partial fill, refusals keep the script's own code
+    auto tradeCode = int32{ sold };
+    if (sold == 0)
+    {
+        tradeCode = result.get_or("tradeCode", int32{ -4 });
+    }
+    else if (sold < this->ItemNum)
+    {
+        tradeCode = -1;
+    }
+
+    if (sold > 0)
+    {
+        transaction->setPayout(sold, price);
+        if (!transaction->commit())
+        {
+            PChar->pushPacket<GP_SERV_COMMAND_GUILD_SELL>(PChar, 0, 0, static_cast<uint8>(-4));
+            return;
+        }
+
+        auditSale(*PSession->scheduler, PChar, itemNo, price, sold);
+    }
+
+    PChar->pushPacket<GP_SERV_COMMAND_GUILD_SELL>(PChar, count, itemNo, static_cast<uint8>(tradeCode));
 }
