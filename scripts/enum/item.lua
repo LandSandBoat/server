@@ -5430,6 +5430,7 @@ xi.item =
     MAGICIANS_SHIELD                    = 12403,
     ELEGANT_SHIELD                      = 12404,
     JENNET_SHIELD                       = 12405,
+    COATED_SHIELD                       = 12406,
     PALMERINS_SHIELD                    = 12407,
     ABSORBING_SHIELD                    = 12408,
     TURTLE_SHIELD                       = 12414,
