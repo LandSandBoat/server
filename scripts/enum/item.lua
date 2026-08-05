@@ -187,6 +187,7 @@ xi.item =
     WILD_RABBIT_TAIL                    = 542,
     RUSTY_KEY                           = 543,
     PILE_OF_ANSWER_SHEETS               = 544,
+    SHELLING_PIECE                      = 545,
     STARFALL_TEAR                       = 546,
     TOMB_GUARDS_WATERSKIN               = 547,
     TENSHODO_INVITE                     = 548,
