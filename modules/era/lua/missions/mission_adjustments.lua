@@ -223,6 +223,73 @@ if not xi.module.isContentEnabled('SOA') then
                 end
             end
         end)
+
+        -----------------------------------
+        -- San d'Oria Mission 6-2 "Ranperre's Final Rest": Restores the JST midnight wait for the gate guards to decipher the ancient book.
+        -- The June 17, 2014 version update decreased the required wait.
+        -- Source: https://forum.square-enix.com/ffxi/threads/42614-Jun-17-2014-%28JST%29-Version-Update
+        -----------------------------------
+        xi.module.modifyInteractionEntry('scripts/missions/sandoria/6_2_Ranperres_Final_Rest', function(mission)
+            local southern = mission.sections[2][xi.zone.SOUTHERN_SAN_DORIA]
+            local northern = mission.sections[2][xi.zone.NORTHERN_SAN_DORIA]
+
+            local handoverEvents =
+            {
+                { section = southern, eventId = 1035 },
+                { section = southern, eventId = 1036 },
+                { section = northern, eventId = 1035 },
+            }
+
+            local gateGuards =
+            {
+                { section = southern, name = 'Ambrotien', waitEvent = 1038 },
+                { section = southern, name = 'Endracion', waitEvent = 1037 },
+                { section = northern, name = 'Grilau', waitEvent = 1037 },
+            }
+
+            -- Start the timer when the book is handed to a gate guard.
+            for _, handover in ipairs(handoverEvents) do
+                local baseHandler = handover.section.onEventFinish[handover.eventId]
+
+                handover.section.onEventFinish[handover.eventId] = function(player, csid, option, npc)
+                    baseHandler(player, csid, option, npc)
+                    mission:setVar(player, 'Timer', 1, JstMidnight())
+                end
+            end
+
+            -- Hold players at the "still deciphering" dialogue until the timer expires.
+            for _, guard in ipairs(gateGuards) do
+                local baseOnTrigger = guard.section[guard.name].onTrigger
+
+                guard.section[guard.name].onTrigger = function(player, npc)
+                    if
+                        player:getMissionStatus(mission.areaId) == 4 and
+                        mission:getVar(player, 'Timer') ~= 0
+                    then
+                        return mission:progressEvent(guard.waitEvent)
+                    end
+
+                    return baseOnTrigger(player, npc)
+                end
+            end
+        end)
+
+        -----------------------------------
+        -- San d'Oria Mission 8-1 "Coming of Age": Restores the JST midnight wait before the final cutscene in Northern San d'Oria.
+        -- The July 8, 2014 version update reduced the wait to one Earth minute.
+        -- Source: https://forum.square-enix.com/ffxi/threads/43135-Jul-8-2014-%28JST%29-Version-Update
+        -----------------------------------
+        xi.module.modifyInteractionEntry('scripts/missions/sandoria/8_1_Coming_of_Age', function(mission)
+            local chateau = mission.sections[2][xi.zone.CHATEAU_DORAGUILLE]
+
+            -- Copy of the base handler with the one minute wait extended to JST midnight
+            chateau.onEventFinish[102] = function(player, csid, option, npc)
+                if mission:complete(player) then
+                    mission:setVar(player, 'Progress', JstMidnight())
+                    player:delKeyItem(xi.ki.DROPS_OF_AMNIO)
+                end
+            end
+        end)
     end)
 end
 
