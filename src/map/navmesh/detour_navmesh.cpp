@@ -337,6 +337,8 @@ auto DetourNavMesh::findPath(const position_t& start, const position_t& end) -> 
         return std::nullopt;
     }
 
+    const bool detourPartial = (status & DT_PARTIAL_RESULT) != 0;
+
     if (pathPolyCount <= 0)
     {
         ShowError("DetourNavMesh::findPath Unable to generate polys for path (%f, %f, %f)->(%f, %f, %f) (%u)",
@@ -368,12 +370,18 @@ auto DetourNavMesh::findPath(const position_t& start, const position_t& end) -> 
     const float  dy      = pathEnd[1] - wantEnd[1];
     const float  dz      = pathEnd[2] - wantEnd[2];
 
+    // A straight corridor yields two points however far short it stopped, so the count says nothing about arrival.
     bool isPartial = false;
-    if (straightPathCount > 2 && dx * dx + dy * dy + dz * dz > 5.0f * 5.0f)
+    if (detourPartial && dx * dx + dy * dy + dz * dz > 5.0f * 5.0f)
     {
         DebugNavmesh("DetourNavMesh::findPath Partial path detected! (%u)", zoneID_);
         isPartial = true;
-        straightPathCount -= 1;
+
+        // Trimming a two-point path would leave only the start.
+        if (straightPathCount > 2)
+        {
+            straightPathCount -= 1;
+        }
     }
 
     // straightPathCount == 1: only the start position was produced - no usable path
