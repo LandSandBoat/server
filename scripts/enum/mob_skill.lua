@@ -703,8 +703,8 @@ xi.mobSkill =
 
     GOBLIN_DICE_RESET             = 1109,
 
-    EES_YAGUDO                    = 1121,
-    EES_QUADAV                    = 1122,
+    EES_QUADAV                    = 1121,
+    EES_YAGUDO                    = 1122,
 
     DYNAMIC_IMPLOSION             = 1127,
     TRANSFUSION                   = 1128,
