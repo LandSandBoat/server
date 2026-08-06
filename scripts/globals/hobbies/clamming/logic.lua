@@ -55,6 +55,25 @@ xi.clamming.removeKit = function(player)
     player:messageSpecial(ID.text.YOU_DROPPED_THE, xi.ki.CLAMMING_KIT)
 end
 
+-- High tide while the moon waxes, low tide while it wanes.
+local highTidePhases =
+set{
+    xi.moonCycle.NEW_MOON,
+    xi.moonCycle.LESSER_WAXING_CRESCENT,
+    xi.moonCycle.GREATER_WAXING_CRESCENT,
+    xi.moonCycle.FIRST_QUARTER,
+    xi.moonCycle.LESSER_WAXING_GIBBOUS,
+    xi.moonCycle.GREATER_WAXING_GIBBOUS,
+}
+
+local function getTideColumn()
+    if highTidePhases[getVanadielMoonCycle()] then
+        return 3
+    end
+
+    return 2
+end
+
 -----------------------------------
 -- Clamming Point public functions.
 -----------------------------------
@@ -93,8 +112,8 @@ xi.clamming.nodeOnEventUpdate = function(player, csid, option, npc)
     -- Check "Incidents"
     local kitSize        = player:getCharVar('[Clam]KitSize')
     local kitWeight      = player:getCharVar('[Clam]KitWeight')
-    -- 37% measured no-gear. Gear value set weak on purpose until a capture is provided.
-    local incidentChance = player:getMod(xi.mod.CLAMMING_REDUCED_INCIDENTS) > 0 and 36 or 37
+    -- 37% base, reduced to 32% by the swimsuit body piece.
+    local incidentChance = player:getMod(xi.mod.CLAMMING_REDUCED_INCIDENTS) > 0 and 32 or 37
     if
         kitSize == 200 and
         math.randomInt(1, 100) <= incidentChance
@@ -109,12 +128,12 @@ xi.clamming.nodeOnEventUpdate = function(player, csid, option, npc)
         return
     end
 
-    -- Roll a clammed item from the current capacity weighted table.
-    -- TODO: "Improved results" gear effect unverified
-    local lootList = xi.clamming.lootTable[kitSize]
-    local rateSum  = 0
+    -- Roll a clammed item from the current tide and capacity weighted table.
+    local lootList   = xi.clamming.lootTable[kitSize]
+    local rateColumn = getTideColumn()
+    local rateSum    = 0
     for i = 1, #lootList do
-        rateSum = rateSum + lootList[i][2]
+        rateSum = rateSum + lootList[i][rateColumn]
     end
 
     local itemId     = lootList[#lootList][1]
@@ -144,8 +163,10 @@ xi.clamming.nodeOnEventUpdate = function(player, csid, option, npc)
     end
 
     -- Update delay and weight, no matter the result.
+    -- 16s base dig cooldown, reduced to 10s by the swimsuit legs piece.
+    local digDelay = player:getMod(xi.mod.CLAMMING_IMPROVED_RESULTS) > 0 and 10 or 16
     player:setCharVar('[Clam]KitWeight', kitWeight + itemWeight)
-    player:setLocalVar('[Clam]Delay' .. npc:getName(), GetSystemTime() + 16)
+    player:setLocalVar('[Clam]Delay' .. npc:getName(), GetSystemTime() + digDelay)
 end
 
 xi.clamming.nodeOnEventFinish = function(player, csid, option, npc)
