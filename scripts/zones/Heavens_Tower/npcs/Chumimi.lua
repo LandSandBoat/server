@@ -43,9 +43,9 @@ entity.onTrigger = function(player, npc)
         mJob == xi.job.BLM and
         mLvl >= xi.settings.main.AF1_QUEST_LEVEL
     then
-        player:startEvent(260, 0, 613, 0, 0, 0, xi.item.GLOWSTONE) -- Start Quest "The Three Magi" --- NOTE: 5th parameter is "Meteorites" but he doesn't exist ---
+        player:startEvent(260, 0, 613, 0, 0, xi.item.METEORITE, xi.item.GLOWSTONE) -- Start Quest "The Three Magi"
     elseif theThreeMagi == xi.questStatus.QUEST_ACCEPTED then
-        player:startEvent(261, 0, 0, 0, 0, 0, xi.item.GLOWSTONE) -- During Quest "The Three Magi"
+        player:startEvent(261, 0, 0, 0, 0, xi.item.METEORITE, xi.item.GLOWSTONE) -- During Quest "The Three Magi"
     elseif
         theThreeMagi == xi.questStatus.QUEST_COMPLETED and
         recollections == xi.questStatus.QUEST_AVAILABLE and
