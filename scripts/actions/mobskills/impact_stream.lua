@@ -32,7 +32,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         local power = 50 + 5 * math.floor((skill:getTP() - 1000) / 1000)
 
         xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DEFENSE_DOWN, power, 0, 60) -- TODO: Capture duration
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, 4)
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, math.randomInt(8, 10))
     end
 
     return info.damage
