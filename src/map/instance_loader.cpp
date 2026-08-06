@@ -257,37 +257,37 @@ auto CInstanceLoader::LoadInstance() const -> CInstance*
             m_PInstance->InsertNPC(PNpc);
         }
 
-        // clang-format off
+        // Cache every entity script before running any handler.
+        // Entities may rely on one-another.
+        m_PInstance->ForEachMob(
+            [](CMobEntity* PMob)
+            {
+                luautils::OnEntityLoad(PMob);
+            });
+
+        m_PInstance->ForEachNpc(
+            [](CNpcEntity* PNpc)
+            {
+                luautils::OnEntityLoad(PNpc);
+            });
+
         // Finish setting up Mobs
-        m_PInstance->ForEachMob([&](CMobEntity* PMob)
-        {
-            luautils::OnMobInitialize(PMob);
-            m_PInstance->FindPartyForMob(PMob);
-            luautils::ApplyMixins(PMob);
-            ((CMobEntity*)PMob)->saveModifiers();
-            ((CMobEntity*)PMob)->saveMobModifiers();
+        m_PInstance->ForEachMob(
+            [&](CMobEntity* PMob)
+            {
+                luautils::OnMobInitialize(PMob);
+                m_PInstance->FindPartyForMob(PMob);
+                luautils::ApplyMixins(PMob);
+                PMob->saveModifiers();
+                PMob->saveMobModifiers();
+            });
 
-            // Add to cache
-            luautils::LoadLuaObjectFromFile(
-                fmt::format("./scripts/zones/{}/mobs/{}.lua",
-                            PMob->loc.zone->getName(),
-                            PMob->getName()));
-        });
-        // clang-format on
-
-        // clang-format off
         // Finish setting up NPCs
-        m_PInstance->ForEachNpc([&](CNpcEntity* PNpc)
-        {
-            luautils::OnNpcSpawn(PNpc);
-
-            // Add to cache
-            luautils::LoadLuaObjectFromFile(
-                fmt::format("./scripts/zones/{}/npcs/{}.lua",
-                            PNpc->loc.zone->getName(),
-                            PNpc->getName()));
-        });
-        // clang-format on
+        m_PInstance->ForEachNpc(
+            [](CNpcEntity* PNpc)
+            {
+                luautils::OnNpcSpawn(PNpc);
+            });
 
         // Cache Instance script (TODO: This will be done multiple times, don't do that)
         luautils::LoadLuaObjectFromFile(instanceutils::GetInstanceData(m_PInstance->GetID()).filename);
