@@ -31,10 +31,4 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.HP_DRAIN, { chance = 25, power = 347 })
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-    if player:getCharVar('circleTime') == 7 then
-        player:setCharVar('circleTime', 8) -- Set flag so that final CS will show when you interact with alter again
-    end
-end
-
 return entity
