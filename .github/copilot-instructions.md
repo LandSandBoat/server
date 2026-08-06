@@ -1,0 +1,4 @@
+# Instructions for AI coding agents
+
+Read [`documentation/ai_agents/README.md`](../documentation/ai_agents/README.md) before you
+change anything. It states what this project expects from AI-assisted work.
