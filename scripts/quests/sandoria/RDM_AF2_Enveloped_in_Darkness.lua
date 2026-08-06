@@ -1,5 +1,5 @@
 -----------------------------------
--- Enveloped in Darkness
+-- Enveloped in Darkness (RDM AF2)
 -- Variable Prefix: [0][85]
 -----------------------------------
 -- ZONE                 NPC          POS
