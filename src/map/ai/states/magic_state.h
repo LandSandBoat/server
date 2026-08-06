@@ -66,6 +66,7 @@ protected:
     std::unique_ptr<CSpell> m_PSpell;
     timer::duration         m_castTime{};
     position_t              m_startPos;
+    bool                    m_startedMoving{ false };
     bool                    m_interrupted{ false };
     bool                    m_instantCast{ false };
     uint8                   m_flags{ 0 };

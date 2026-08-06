@@ -621,6 +621,7 @@ public:
     position_t m_ActionOffsetPos{}; // action offset position from the action packet(currently only used for repositioning of luopans)
 
     location_t m_previousLocation{};
+    float      m_lastMoveDistance{};
 
     uint32 m_PrevZonelineID; // The ID of the previous zoneline the player went through.
 
