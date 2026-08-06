@@ -120,7 +120,7 @@ auto Path::pruneTailWithin(float within) -> void
     }
 
     // Drop waypoints within `within` of the destination so the entity stops short of the destination tile.
-    const position_t& destinationPos = points_.back().position;
+    const position_t destinationPos = points_.back().position;
     while (points_.size() > 1)
     {
         const position_t& penultimate = points_[points_.size() - 2].position;
