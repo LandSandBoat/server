@@ -114,7 +114,7 @@ xi.combat.action.executeAddEffectDamage = function(actor, target, fedData)
     end
 
     -- Early return: No proc.
-    if math.randomInt(1, 100) > params.chance then
+    if math.randomInt(1, 10000) > params.chance * 100 then -- proc rates from add effect weapons have at least 2 digits of precision based on testing. input is 0-100 so this should be ok
         return 0, 0, 0
     end
 

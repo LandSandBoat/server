@@ -564,5 +564,5 @@ xi.additionalEffect.linearProcRate = function(dStat, dStatCap, startingRate, cap
     local rate = ((cappedRate - startingRate) / dStatCap) * math.min(dStat, dStatCap) + startingRate
 
     -- Minimum of 1% is observed on drain weapons. Needs more testing.
-    return math.max(math.floor(rate), 1) -- Rate is ultimately used against a random roll of integers so this is mostly just to indicate it's a whole percent.
+    return math.max(rate, 1)
 end
