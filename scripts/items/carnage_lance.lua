@@ -11,7 +11,7 @@ itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, it
 
     local pTable =
     {
-        chance          = xi.additionalEffect.linearProcRate(dStat, 48, 8, 12),
+        chance          = xi.additionalEffect.linearProcRate(dStat, 32, 7, 9), -- TODO: get more samples
         basePower       = 8 + utils.clamp(dStat, -3, 16) + utils.clamp(math.floor((dStat - 16) / 2), 0, 16),
         attackType      = xi.attackType.PHYSICAL,
         physicalElement = xi.damageType.PIERCING,

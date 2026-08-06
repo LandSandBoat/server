@@ -11,7 +11,7 @@ itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, it
 
     local pTable =
     {
-        chance          = xi.additionalEffect.linearProcRate(dStat, 48, 22, 29),                              -- TODO: This actually caps above dINT 48 for proc rate
+        chance          = xi.additionalEffect.linearProcRate(dStat, 48, 15, 18),                              -- TODO: This actually caps above dINT 48 for proc rate
         basePower       = 30 + utils.clamp(dStat, -3, 16) + utils.clamp(math.floor((dStat - 16) / 2), 0, 16), -- TODO: check the scaling formula
         attackType      = xi.attackType.PHYSICAL,
         physicalElement = xi.damageType.BLUNT,
