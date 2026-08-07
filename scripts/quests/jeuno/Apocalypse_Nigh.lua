@@ -162,6 +162,7 @@ quest.sections =
                         quest:getVar(player, 'Prog') == 3
                     then
                         quest:setVar(player, 'Prog', 4)
+                        quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
                     end
                 end,
             },
@@ -189,7 +190,6 @@ quest.sections =
             {
                 [10057] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 5)
-                    quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
                 end,
             },
         },
