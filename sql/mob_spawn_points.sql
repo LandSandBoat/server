@@ -78891,7 +78891,7 @@ INSERT INTO `mob_spawn_points` VALUES (17678347,0,'Phantom','Phantom',9,22,25,-7
 INSERT INTO `mob_spawn_points` VALUES (17678348,0,'Thunder_Elemental','Thunder Elemental',10,0,0,-8.090,-7.270,16.010,152,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17678349,0,'Water_Elemental','Water Elemental',11,27,29,4.930,-7.270,16.550,148,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17678350,0,'Sea_Horror','Sea Horror',12,60,62,-0.230,-7.660,2.860,7,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17678351,0,'Enagakure','Enagakure',13,55,55,1.000,-7.000,13.000,60,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17678351,0,'Enagakure','Enagakure',13,55,55,8.199,-7.663,19.189,0,20,4);
 
 -- ------------------------------------------------------------
 -- Ship Bound for Mhaura (Zone 221)
@@ -78990,7 +78990,7 @@ INSERT INTO `mob_spawn_points` VALUES (17707022,0,'Crossbones','Crossbones',11,2
 INSERT INTO `mob_spawn_points` VALUES (17707023,0,'Crossbones','Crossbones',11,28,31,7.177,-7.309,17.648,54,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17707024,0,'Ship_Wight','Ship Wight',12,36,39,-0.725,-7.312,23.111,60,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17707025,0,'Blackbeard','Blackbeard',13,67,68,-0.725,-7.312,23.111,60,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17707026,0,'Enagakure','Enagakure',14,55,55,1.000,-7.000,13.000,60,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17707026,0,'Enagakure','Enagakure',14,55,55,8.199,-7.663,19.189,0,20,4);
 
 -- ------------------------------------------------------------
 -- Ship Bound for Mhaura Pirates (Zone 228)

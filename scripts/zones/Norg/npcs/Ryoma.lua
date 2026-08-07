@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Norg
 --  NPC: Ryoma
--- Start and Finish Quest: 20 in Pirate Years, I'll Take the Big Box, True Will, Bugi Soden
+-- Start and Finish Quest: 20 in Pirate Years, True Will
 -- !pos -23 0 -9 252
 -----------------------------------
 local ID = zones[xi.zone.NORG]
@@ -27,14 +27,6 @@ entity.onTrigger = function(player, npc)
         player:hasKeyItem(xi.ki.TRICK_BOX)
     then
         player:startEvent(134) -- Finish Quest "20 in Pirate Years"
-    elseif
-        twentyInPirateYears == xi.questStatus.QUEST_COMPLETED and
-        illTakeTheBigBox == xi.questStatus.QUEST_AVAILABLE and
-        mJob == xi.job.NIN and
-        mLvl >= 50 and
-        not player:needToZone()
-    then
-        player:startEvent(135) -- Start Quest "I'll Take the Big Box"
     elseif
         illTakeTheBigBox == xi.questStatus.QUEST_COMPLETED and
         trueWill == xi.questStatus.QUEST_AVAILABLE
@@ -68,8 +60,6 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addFame(xi.fameArea.NORG, 20)
             player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)
         end
-    elseif csid == 135 then
-        player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX)
     elseif csid == 136 then
         player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRUE_WILL)
     elseif csid == 137 then
