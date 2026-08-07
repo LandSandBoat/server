@@ -73,10 +73,18 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('sandpitsUsed', 0)
 
     mob:addListener('WEAPONSKILL_STATE_EXIT', 'TUCHULCHA_SANDPIT', function(tuchulcha, skillId, wasExecuted)
-        if
-            skillId == xi.mobSkill.SANDPIT_1 and
-            tuchulcha:getLocalVar('sandpitTriggered') == 1
-        then
+        if skillId ~= xi.mobSkill.SANDPIT_1 then
+            return
+        end
+
+        -- Reset enmity and remove all negative status effects from Tuchulcha and her allies when she burrows underground.
+        for _, member in pairs(tuchulcha:getBattlefield():getAllies()) do
+            tuchulcha:resetEnmity(member)
+        end
+
+        tuchulcha:delStatusEffectsByFlag(xi.effectFlag.ERASABLE)
+
+        if tuchulcha:getLocalVar('sandpitTriggered') == 1 then
             -- Prevent further teleports until the next triggered Sandpit.
             tuchulcha:setLocalVar('sandpitTriggered', 0)
 
@@ -137,7 +145,7 @@ entity.onMobFight = function(mob, target)
         mob:setLocalVar('sandpitsUsed', pit + 1)
 
         -- Every 25% HP, use Sandpit to burrow to a new location.
-        mob:useMobAbility(xi.mobSkill.SANDPIT_1, nil, 1)
+        mob:useMobAbility(xi.mobSkill.SANDPIT_1, nil, 1, true)
         mob:setLocalVar('sandpitTriggered', 1) -- Protect against multiple teleports.
 
         -- We inject this action after a short delay to create the "dust cloud" effect.

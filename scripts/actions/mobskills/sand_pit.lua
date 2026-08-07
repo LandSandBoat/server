@@ -41,16 +41,6 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
                 SpawnMob(spawnId):updateEnmity(target)
             end
         end
-    elseif poolID == 4046 then
-        -- Tuchulcha (Sheep in Antlion's Clothing)
-        -- Resets all enmity
-        local allies = mob:getBattlefield():getAllies()
-        for _, enmAlly in pairs(allies) do
-            mob:resetEnmity(enmAlly)
-        end
-
-        -- Removes all enfeebling effects
-        mob:delStatusEffectsByFlag(xi.effectFlag.ERASABLE)
     end
 
     return xi.effect.BIND
