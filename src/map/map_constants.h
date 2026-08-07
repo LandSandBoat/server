@@ -23,6 +23,7 @@
 
 #include <array>
 #include <chrono>
+#include <cstddef>
 #include <cstdint>
 
 using namespace std::chrono_literals;
@@ -63,6 +64,9 @@ static constexpr auto kGarbageCollectionInterval = 15min;
 
 // The rate at which we persist any outstanding changes to volatile server vars
 static constexpr auto kPersistVolatileServerVarsInterval = 1min;
+
+// The rate at which we flush dirty characters to the database
+static constexpr auto kPersistSweepInterval = 5s;
 
 // The rate at which we pump the ZMQ queues
 static constexpr auto kIPCPumpInterval = 100ms;

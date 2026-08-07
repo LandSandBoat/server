@@ -27,6 +27,7 @@
 #include <set>
 #include <utility>
 
+#include "persist_batch.h"
 #include "status_effect.h"
 
 /************************************************************************
@@ -101,8 +102,9 @@ public:
     void TickEffects(timer::time_point tick);
     void TickRegen(timer::time_point tick);
 
-    void LoadStatusEffects();                    // We load the character effects
-    void SaveStatusEffects(bool logout = false); // We keep the character effects
+    void LoadStatusEffects();                       // We load the character effects
+    void DropEffectsForTransition(IsLogout logout); // Remove the effects that don't survive a zone change or logout
+    auto BuildPersistRows(IsLogout logout) -> std::vector<PersistedEffect>;
 
     auto  GetEffectsCount(xi::StatusEffect ID) -> uint8;               // We get the number of effects with the specified ID
     auto  GetEffectsCountWithFlag(xi::StatusEffectFlag flag) -> uint8; // We get the number of effects with the specified flag
@@ -201,5 +203,7 @@ namespace effects
 void        LoadEffectsParameters();
 uint16      GetEffectElement(uint16 effect);
 std::string GetEffectName(uint16 effect);
+
+void SaveEffectRows(const std::vector<uint32>& replaceFor, const std::vector<PersistedEffect>& rows);
 
 }; // namespace effects

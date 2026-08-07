@@ -82,7 +82,6 @@ constexpr auto CHARACTER_SYNC_LIMIT_MAX               = 32U;
 constexpr auto CHARACTER_SYNC_DISTANCE_SWAP_THRESHOLD = 30U;
 constexpr auto CHARACTER_SYNC_PARTY_SIGNIFICANCE      = 100000U;
 constexpr auto CHARACTER_SYNC_ALLI_SIGNIFICANCE       = 10000U;
-constexpr auto PERSIST_CHECK_CHARACTERS               = 20U;
 constexpr auto INTERMEDIATE_CONTAINER_RESERVE_SIZE    = 16U;
 
 inline bool isWithinVerticalDistance(CBaseEntity* source, CBaseEntity* target)
@@ -2154,39 +2153,8 @@ auto CZoneEntities::ZoneServer(timer::time_point tick) -> Task<void>
         m_EffectCheckTime = m_EffectCheckTime + 3s > tick ? m_EffectCheckTime + 3s : tick + 3s;
     }
 
-    if (tick > m_charPersistTime && !m_charTargIds.empty())
-    {
-        m_charPersistTime = tick + 1s;
-
-        std::set<uint16>::iterator charTargIdIter = m_charTargIds.lower_bound(m_lastCharPersistTargId);
-        if (charTargIdIter == m_charTargIds.end())
-        {
-            charTargIdIter = m_charTargIds.begin();
-        }
-
-        size_t maxChecks = std::min<size_t>(m_charTargIds.size(), PERSIST_CHECK_CHARACTERS);
-
-        for (size_t i = 0; i < maxChecks; i++)
-        {
-            CCharEntity* PChar = static_cast<CCharEntity*>(m_charList[*charTargIdIter]);
-            ++charTargIdIter;
-            if (charTargIdIter == m_charTargIds.end())
-            {
-                charTargIdIter = m_charTargIds.begin();
-            }
-
-            if (PChar && PChar->PersistData(tick))
-            {
-                // We only want to persist at most 1 character per zone tick
-                break;
-            }
-        }
-        m_lastCharPersistTargId = *charTargIdIter;
-    }
-
     if (tick > m_computeTime && !m_charTargIds.empty())
     {
-        // Tick time is irregular to avoid consistently happening at the same time as char persistence
         m_computeTime = tick + 567ms;
 
         std::set<uint16>::iterator charTargIdIter = m_charTargIds.lower_bound(m_lastCharComputeTargId);

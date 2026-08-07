@@ -26,6 +26,7 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
 namespace db
 {
@@ -43,6 +44,11 @@ public:
 
     // Execute as an UPDATE-like query, returning a rows-affected result set.
     virtual auto executeUpdate(const std::string& query) -> std::unique_ptr<ResultSet> = 0;
+
+    // Execute every parameter set in `params` in one round trip, using MariaDB's bulk array binding.
+    //
+    // Row-major, one value per placeholder. Numeric columns only; strings and blobs throw.
+    virtual auto executeBulkUpdate(const std::string& query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> = 0;
 };
 
 } // namespace db

@@ -39,6 +39,7 @@
 #include "map_statistics.h"
 #include "mob_spell_list.h"
 #include "monstrosity.h"
+#include "persist_batch.h"
 #include "roe.h"
 #include "spell.h"
 #include "status_effect_container.h"
@@ -239,6 +240,13 @@ auto MapEngine::init() -> Task<void>
         persistVolatileServerVarsToken_ = scheduler_.intervalOnMainThread(kPersistVolatileServerVarsInterval, serverutils::PersistVolatileServerVars);
         pumpIPCToken_                   = scheduler_.intervalOnMainThread(kIPCPumpInterval, message::handle_incoming);
         flushStatisticsToken_           = scheduler_.intervalOnMainThread(kTimeServerTickInterval, std::bind(&MapNetworking::flushStatistics, networking_.get()));
+
+        persistSweepToken_ = scheduler_.intervalOnMainThread(
+            kPersistSweepInterval,
+            [this]() -> Task<void>
+            {
+                co_await persistSweep();
+            });
     }
 
     zoneutils::TOTDChange(vanadiel_time::get_totd()); // This tells the zones to spawn stuff based on time of day conditions (such as undead at night)
@@ -366,6 +374,35 @@ void MapEngine::garbageCollect() const
     TracyZoneScoped;
 
     luautils::garbageCollectFull();
+}
+
+auto MapEngine::persistSweep() -> Task<void>
+{
+    TracyZoneScoped;
+
+    PersistBatch batch;
+
+    zoneutils::ForEachZone(
+        [&](CZone* PZone)
+        {
+            PZone->ForEachChar(
+                [&](CCharEntity* PChar)
+                {
+                    // mid-teardown characters are written by persist::flush instead
+                    if (PChar->status == xi::Status::Disappear || PChar->status == xi::Status::Shutdown)
+                    {
+                        return;
+                    }
+
+                    batch.add(PChar);
+                });
+        });
+
+    co_await scheduler_.spawnOnWorkerThread(
+        [batch = std::move(batch)]() mutable
+        {
+            batch.write();
+        });
 }
 
 void MapEngine::onStats(std::vector<std::string>& inputs) const

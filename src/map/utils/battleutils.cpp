@@ -5942,7 +5942,6 @@ bool RemoveAmmo(CCharEntity* PChar, int quantity)
             uint8 slot = eloc ? eloc->Slot : 0;
             uint8 loc  = eloc ? static_cast<uint8>(eloc->Container) : 0;
             charutils::UnequipItem(PChar, SLOT_AMMO);
-            PChar->RequestPersist(CHAR_PERSIST::EQUIP);
             charutils::UpdateItem(PChar, loc, slot, -quantity);
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
             return true;

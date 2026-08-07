@@ -85,13 +85,21 @@ auto db::CachingDatabase::getState() -> detail::ConnectionState&
     return state;
 }
 
-auto db::CachingDatabase::execute(const std::string& rawQuery, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
+// Find-or-prepare the cached statement for this query on the given connection.
+auto db::CachingDatabase::prepareCached(detail::ConnectionState& connState, const std::string& rawQuery) -> PreparedStatement&
 {
-    TracyZoneScoped;
-    TracyZoneString(rawQuery);
+    auto it = connState.statements.find(rawQuery);
+    if (it == connState.statements.end())
+    {
+        it = connState.statements.emplace(rawQuery, connState.connection->prepare(rawQuery)).first;
+    }
 
-    const auto queryType = detail::validateQueryLeadingKeyword(rawQuery);
-    if (queryType == ResultSetType::Invalid)
+    return *it->second;
+}
+
+auto db::CachingDatabase::runWithRetry(const std::string& rawQuery, const Fn<std::unique_ptr<ResultSet>(detail::ConnectionState&) const>& operation) -> std::unique_ptr<ResultSet>
+{
+    if (detail::validateQueryLeadingKeyword(rawQuery) == ResultSetType::Invalid)
     {
         ShowErrorFmt("Invalid query: {}", rawQuery);
         return nullptr;
@@ -105,31 +113,6 @@ auto db::CachingDatabase::execute(const std::string& rawQuery, const std::vector
 
     auto& state = getState();
 
-    const auto operation = [&](detail::ConnectionState& connState) -> std::unique_ptr<ResultSet>
-    {
-        // Lazily prepare-and-cache the statement for this query.
-        auto it = connState.statements.find(rawQuery);
-        if (it == connState.statements.end())
-        {
-            it = connState.statements.emplace(rawQuery, connState.connection->prepare(rawQuery)).first;
-        }
-
-        DebugSQLFmt("preparedStmt: {}", rawQuery);
-
-        const auto& stmt = it->second;
-
-        // NOTE: Everything is 1-indexed.
-        int counter = 0;
-        for (const auto& param : params)
-        {
-            stmt->bind(++counter, param);
-        }
-
-        const auto queryTimer = makeQueryTimer(rawQuery);
-
-        return (queryType == ResultSetType::Select) ? stmt->executeQuery(rawQuery) : stmt->executeUpdate(rawQuery);
-    };
-
     const auto queryRetryCount = 1 + settings::get<uint32>("network.SQL_QUERY_RETRY_COUNT");
     for (auto i = 0U; i < queryRetryCount; ++i)
     {
@@ -141,6 +124,7 @@ auto db::CachingDatabase::execute(const std::string& rawQuery, const std::vector
                 state.statements.clear();
                 state.connection = createConnection();
             }
+
             return operation(state);
         }
         catch (const std::exception& e)
@@ -157,6 +141,56 @@ auto db::CachingDatabase::execute(const std::string& rawQuery, const std::vector
     ShowCritical("Query Failed after %d retries: %s", queryRetryCount, rawQuery.c_str());
     std::this_thread::sleep_for(1s);
     std::terminate();
+}
+
+auto db::CachingDatabase::execute(const std::string& rawQuery, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
+{
+    TracyZoneScoped;
+    TracyZoneString(rawQuery);
+
+    const auto queryType = detail::validateQueryLeadingKeyword(rawQuery);
+
+    const auto operation = [&](detail::ConnectionState& connState) -> std::unique_ptr<ResultSet>
+    {
+        auto& stmt = prepareCached(connState, rawQuery);
+
+        DebugSQLFmt("preparedStmt: {}", rawQuery);
+
+        // NOTE: Everything is 1-indexed.
+        int counter = 0;
+        for (const auto& param : params)
+        {
+            stmt.bind(++counter, param);
+        }
+
+        const auto queryTimer = makeQueryTimer(rawQuery);
+
+        if (queryType == ResultSetType::Select)
+        {
+            return stmt.executeQuery(rawQuery);
+        }
+
+        return stmt.executeUpdate(rawQuery);
+    };
+
+    return runWithRetry(rawQuery, operation);
+}
+
+auto db::CachingDatabase::executeBulk(const std::string& rawQuery, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
+{
+    TracyZoneScoped;
+    TracyZoneString(rawQuery);
+
+    const auto operation = [&](detail::ConnectionState& connState) -> std::unique_ptr<ResultSet>
+    {
+        auto& stmt = prepareCached(connState, rawQuery);
+
+        const auto queryTimer = makeQueryTimer(rawQuery);
+
+        return stmt.executeBulkUpdate(rawQuery, params);
+    };
+
+    return runWithRetry(rawQuery, operation);
 }
 
 auto db::CachingDatabase::getSchema() -> std::string
