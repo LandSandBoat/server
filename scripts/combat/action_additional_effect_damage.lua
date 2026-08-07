@@ -50,6 +50,7 @@ local function validateParameters(actor, target, fedData)
     params.targetStat      = fedData.targetStat or params.actorStat        -- Currently unused. For future use.
     params.skillRank       = fedData.skillRank or xi.skillRank.A_PLUS
     params.bonusMacc       = fedData.bonusMacc or 0
+    params.useAmmo         = fedData.useAmmo or false                      -- Remove ammo if proc is successful (See Battery/Pump/Fan weapons)
 
     -- Multiplier properties.
     params.canMAB          = fedData.canMAB or false
@@ -200,6 +201,10 @@ xi.combat.action.executeAddEffectDamage = function(actor, target, fedData)
         damage               = params.overDrain and damage or utils.clamp(damage, 0, params.aeTarget:getTP())
         params.messageDamage = xi.msg.basic.ADD_EFFECT_TP_DRAIN
         actor:addTP(damage)
+    end
+
+    if params.messageDamage ~= 0 and params.useAmmo then
+        actor:removeAmmo(1)
     end
 
     -- Handle target damage listeners and other core-side stuff.
