@@ -3033,6 +3033,10 @@ void CCharEntity::tryStartNextEvent()
 
     // Set hidden status based on event data
     m_isPCHidden = currentEvent->isHidden;
+    if (m_isPCHidden)
+    {
+        updatemask |= UPDATE_HP;
+    }
 
     if (currentEvent->strings.empty())
     {
