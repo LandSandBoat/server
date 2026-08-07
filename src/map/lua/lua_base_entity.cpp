@@ -5266,10 +5266,10 @@ void CLuaBaseEntity::confirmTrade() const
                 uint32 confirmedItems = PChar->TradeContainer->getConfirmedStatus(slotID);
                 auto   quantity       = (int32)std::min<uint32>(PChar->TradeContainer->getQuantity(slotID), confirmedItems);
 
+                PItem->setReserve(0);
+
                 if (confirmedItems > 0)
                 {
-                    PItem->setReserve(PItem->getReserve() - quantity);
-
                     uint8 invSlotID = PChar->TradeContainer->getInvSlotID(slotID);
                     if (static_cast<uint32>(quantity) >= PChar->TradeContainer->getItem(slotID)->getQuantity())
                     {
@@ -5278,10 +5278,6 @@ void CLuaBaseEntity::confirmTrade() const
                     }
 
                     charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -quantity);
-                }
-                else
-                {
-                    PItem->setReserve(0);
                 }
             }
         }

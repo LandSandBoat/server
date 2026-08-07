@@ -124,7 +124,7 @@ auto CLuaItem::state() const -> ItemState
     return m_readItem->state();
 }
 
-void CLuaItem::setReservedValue(uint8 reserved)
+void CLuaItem::setReservedValue(uint32 reserved)
 {
     if (!m_writeItem)
     {
@@ -134,7 +134,7 @@ void CLuaItem::setReservedValue(uint8 reserved)
     m_writeItem->setReserve(reserved);
 }
 
-uint8 CLuaItem::getReservedValue()
+auto CLuaItem::getReservedValue() -> uint32
 {
     return m_readItem->getReserve();
 }
