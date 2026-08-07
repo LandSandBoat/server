@@ -28,11 +28,9 @@ zoneObject.onZoneIn = function(player, prevZone)
     if
         enagakure and
         not enagakure:isSpawned() and
-        VanadielUniqueDay() > enagakure:getLocalVar('despawnDay') and
-        hour < 4 and
-        hour >= 20 and
+        (hour >= 20 or hour < 4) and
         player:hasKeyItem(xi.ki.SEANCE_STAFF) and
-        player:getCharVar('Enagakure_Killed') == 0
+        xi.quest.getVar(player, xi.questLog.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX, 'Prog') == 4
     then
         SpawnMob(ID.mob.ENAGAKURE)
     end
@@ -54,32 +52,23 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
 zoneObject.onGameHour = function(zone)
-    -- Enagakure pop mechanics.
+    -- Enagakure pop mechanics. It appears at night for anyone already aboard, so the
+    -- check also runs here; the spawn point's window handles the despawn.
     local enagakure = GetMobByID(ID.mob.ENAGAKURE)
     local hour      = VanadielHour()
 
-    if enagakure then
-        if enagakure:isSpawned() then
+    if
+        enagakure and
+        not enagakure:isSpawned() and
+        (hour >= 20 or hour < 4)
+    then
+        for _, player in pairs(zone:getPlayers()) do
             if
-                hour >= 4 and hour < 20 and -- Not night-time.
-                not enagakure:isEngaged()   -- Not engaged.
+                player:hasKeyItem(xi.ki.SEANCE_STAFF) and
+                xi.quest.getVar(player, xi.questLog.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX, 'Prog') == 4
             then
-                DespawnMob(ID.mob.ENAGAKURE)
-            end
-        else
-            if
-                hour < 4 and hour >= 20 and                               -- Night-time.
-                VanadielUniqueDay() > enagakure:getLocalVar('despawnDay') -- Can spawn today.
-            then
-                for _, player in pairs(zone:getPlayers()) do
-                    if
-                        player:hasKeyItem(xi.ki.SEANCE_STAFF) and
-                        player:getCharVar('Enagakure_Killed') == 0
-                    then
-                        SpawnMob(ID.mob.ENAGAKURE)
-                        break
-                    end
-                end
+                SpawnMob(ID.mob.ENAGAKURE)
+                break
             end
         end
     end

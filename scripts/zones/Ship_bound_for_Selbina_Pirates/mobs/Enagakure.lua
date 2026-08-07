@@ -19,17 +19,4 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.ICE_RES_RANK, 4)
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-    if
-        player:hasKeyItem(xi.ki.SEANCE_STAFF) and
-        player:getCharVar('Enagakure_Killed') == 0
-    then
-        player:setCharVar('Enagakure_Killed', 1)
-    end
-end
-
-entity.onMobDespawn = function(mob)
-    mob:setLocalVar('despawnDay', VanadielUniqueDay())
-end
-
 return entity

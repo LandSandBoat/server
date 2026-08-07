@@ -42,13 +42,6 @@ zoneObject.onZoneIn = function(player, prevZone)
         end
     end
 
-    if
-        player:hasKeyItem(xi.ki.SEANCE_STAFF) and
-        player:getCharVar('Enagakure_Killed') == 1
-    then
-        cs = { 1101 }
-    end
-
     return cs
 end
 
@@ -85,13 +78,6 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
         local zone          = player:getZone()
         local destinationId = zone and zone:getLocalVar('[Pirate]Zone') or xi.zone.SHIP_BOUND_FOR_MHAURA
         player:setPos(0, 0, 0, 0, destinationId)
-
-    -- Quest logic. TODO: Convert quest to interaction.
-    elseif
-        csid == 1101 and
-        npcUtil.completeQuest(player, xi.questLog.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX, { item = 14226, fame = 20, fameArea = xi.fameArea.NORG, var = { 'Enagakure_Killed', 'illTakeTheBigBoxCS' } })
-    then
-        player:delKeyItem(xi.ki.SEANCE_STAFF)
     end
 end
 
