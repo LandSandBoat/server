@@ -113,9 +113,10 @@ auto CMobController::Disengage() -> bool
     PMob->m_neutral  = true;
     m_NeutralTime    = m_Tick;
 
-    rePathCooldownEnd_ = timer::time_point::min();
-    lastRePathTarget_  = {};
-    stuckRePathCount_  = 0;
+    rePathCooldownEnd_  = timer::time_point::min();
+    lastRePathTarget_   = {};
+    lastRePathDistance_ = 10000.0f;
+    stuckRePathCount_   = 0;
 
     lastDirectProbeTarget_.clean();
     lastDirectProbePos_       = {};
@@ -153,10 +154,11 @@ auto CMobController::Engage(const EntityId& target) -> bool
         return false;
     }
 
-    m_firstSpell       = true;
-    rePathCooldownEnd_ = timer::time_point::min();
-    lastRePathTarget_  = {};
-    stuckRePathCount_  = 0;
+    m_firstSpell        = true;
+    rePathCooldownEnd_  = timer::time_point::min();
+    lastRePathTarget_   = {};
+    lastRePathDistance_ = 10000.0f;
+    stuckRePathCount_   = 0;
 
     lastDirectProbeTarget_.clean();
     lastDirectProbePos_       = {};
@@ -215,9 +217,10 @@ void CMobController::Reset()
     ClearFollowTarget();
 
     // Clear pathing state so a respawned mob doesn't inherit stale re-path / direct-probe caches.
-    rePathCooldownEnd_ = timer::time_point::min();
-    lastRePathTarget_  = {};
-    stuckRePathCount_  = 0;
+    rePathCooldownEnd_  = timer::time_point::min();
+    lastRePathTarget_   = {};
+    lastRePathDistance_ = 10000.0f;
+    stuckRePathCount_   = 0;
 
     lastDirectProbeTarget_.clean();
     lastDirectProbePos_       = {};
@@ -1213,7 +1216,7 @@ void CMobController::Move()
             lastDirectProbeTargetPos_ = PTarget->loc.p;
 
             const auto projectedPosition = nearPosition(PTarget->loc.p, 0, rotationToRadian(worldAngle(PMob->loc.p, PTarget->loc.p)));
-            PMob->PAI->PathFind->PathTo(projectedPosition, PATHFLAG_RUN);
+            PMob->PAI->PathFind->PathInRange(projectedPosition, closeDistance, PATHFLAG_RUN);
             lastDirectProbeWasDirect_ = PMob->PAI->PathFind->IsPathDirect();
             if (lastDirectProbeWasDirect_)
             {
@@ -1255,6 +1258,16 @@ void CMobController::Move()
         return;
     }
 
+    // If the mob is following a path and is close enough to the target, and it can see the target, then clear the path and face the target
+    // When a mob is close enough to you but around a corner we need it to walk around the corner to see you again then stop again once it has a visual on you
+    if (isFollowingPath && currentDistance <= closeDistance && CanSeeTargetCached())
+    {
+        PMob->PAI->PathFind->Clear();
+        stuckRePathCount_ = 0;
+        FaceTarget();
+        return;
+    }
+
     // Re-path against attackRange, with lost sight on its own short leash so the mob keeps trying without hammering findPath.
     bool needNewPath   = false;
     bool isStuckRepath = false;
@@ -1270,14 +1283,19 @@ void CMobController::Move()
         const bool cooldownDone    = m_Tick >= rePathCooldownEnd_;
         const bool losCooldownDone = m_Tick >= lostSightRePathCooldownEnd_;
 
+        // If the mob is stuck and has made no movement at all since the last re-path then we need to teleport to the target
+        // Losing sight does not count as being stuck
+        const bool noProgress = currentDistance > lastRePathDistance_ - 1.0f;
+
         targetMoved   = !isWithinDistance(lastRePathTarget_, PTarget->loc.p, attackRange);
         needNewPath   = (outOfRange && (targetMoved || cooldownDone)) || (lostLOS && (targetMoved || losCooldownDone));
-        isStuckRepath = needNewPath && !targetMoved && cooldownDone;
+        isStuckRepath = needNewPath && !targetMoved && cooldownDone && noProgress;
     }
 
     if (needNewPath)
     {
         lastRePathTarget_           = PTarget->loc.p;
+        lastRePathDistance_         = currentDistance;
         rePathCooldownEnd_          = m_Tick + kRePathCooldown;
         lostSightRePathCooldownEnd_ = m_Tick + kLostSightRePathCooldown;
 
@@ -1299,8 +1317,12 @@ void CMobController::Move()
         }
         else
         {
+            // Since we are missing mobs respecting LOS we need to make sure they are allowed to path around corners when they cant see them
+            // PathInRange needs a stop distance check of 0 when the mob cant see the target so it paths to it
+            const float stopDistance = CanSeeTargetCached() ? closeDistance : 0.0f;
+
             const auto projectedPosition = nearPosition(PTarget->loc.p, 0, rotationToRadian(worldAngle(PMob->loc.p, PTarget->loc.p)));
-            PMob->PAI->PathFind->PathTo(projectedPosition, PATHFLAG_RUN);
+            PMob->PAI->PathFind->PathInRange(projectedPosition, stopDistance, PATHFLAG_RUN);
         }
     }
 
