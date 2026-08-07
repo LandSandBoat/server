@@ -164,16 +164,19 @@ auto CRangeState::Update(const timer::time_point tick) -> bool
 
         action_t action{};
         auto*    cast_errorMsg = dynamic_cast<GP_SERV_COMMAND_BATTLE_MESSAGE*>(m_errorMsg.get());
-        if (m_errorMsg && (!cast_errorMsg || cast_errorMsg->getMessageId() != MsgBasic::CannotSee))
+
+        // Target is untargetable (e.g., Super Jump, Worm roaming, Antlion burrowing etc.)
+        if (PTarget && PTarget->PAI->IsUntargetable())
+        {
+            InterruptRangedAttack(action);
+        }
+        else if (m_errorMsg && (!cast_errorMsg || cast_errorMsg->getMessageId() != MsgBasic::CannotSee))
         {
             if (auto* PChar = dynamic_cast<CCharEntity*>(m_PEntity))
             {
                 PChar->pushPacket(m_errorMsg->copy());
             }
-            // reset aim time so interrupted players only have to wait the correct 2.7s until next shot
-            m_aimTime = 0s;
-            ActionInterrupts::RangedInterrupt(m_PEntity);
-            m_PEntity->PAI->EventHandler.triggerListener("RANGE_STATE_EXIT", m_PEntity, nullptr, &action);
+            InterruptRangedAttack(action);
         }
         else
         {
@@ -297,6 +300,14 @@ auto CRangeState::CanUseRangedAttack(CBattleEntity* PTarget, const bool isEndOfA
     }
 
     return true;
+}
+
+void CRangeState::InterruptRangedAttack(action_t& action)
+{
+    // reset aim time so interrupted players only have to wait the correct 2s until next shot
+    m_aimTime = 0s;
+    ActionInterrupts::RangedInterrupt(m_PEntity);
+    m_PEntity->PAI->EventHandler.triggerListener("RANGE_STATE_EXIT", m_PEntity, nullptr, &action);
 }
 
 auto CRangeState::HasMoved() const -> bool
