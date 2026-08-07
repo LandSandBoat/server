@@ -22,7 +22,7 @@ quest.sections =
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT) and
                 player:getFameLevel(xi.fameArea.WINDURST) >= 2 and
-                player:getLocalVar('Quest[2][14]mustZone') == 0
+                not xi.quest.getMustZone(player, xi.questLog.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT)
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -104,10 +104,10 @@ quest.sections =
                         if vanadielHour < 6 or vanadielHour >= 18 then
                             return quest:progressEvent(141)
                         else
-                            return quest:progressEvent(144)
+                            return quest:event(144)
                         end
                     else
-                        return quest:progressEvent(142)
+                        return quest:event(142)
                     end
                 end,
             },
@@ -191,7 +191,7 @@ quest.sections =
                 [348] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:delKeyItem(xi.ki.SMALL_BAG)
-                        player:setLocalVar('Quest[2][16]mustZone', 1)
+                        quest:setMustZone(player)
                     end
                 end,
             },
@@ -206,7 +206,10 @@ quest.sections =
         [xi.zone.MHAURA] =
         {
             ['Kotan-Purutan'] = quest:event(143):replaceDefault(),
+        },
 
+        [xi.zone.WINDURST_WATERS] =
+        {
             ['Ohbiru-Dohbiru'] =
             {
                 onTrigger = function(player, npc)
@@ -215,10 +218,7 @@ quest.sections =
                     end
                 end,
             },
-        },
 
-        [xi.zone.WINDURST_WATERS] =
-        {
             ['Kenapa-Keppa'] =
             {
                 onTrigger = function(player, npc)
