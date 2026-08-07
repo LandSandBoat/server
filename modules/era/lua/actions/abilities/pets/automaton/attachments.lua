@@ -494,7 +494,7 @@ local activationThresholds =
     [3] = 60,
 }
 
-m:addOverride('xi.actions.abilities.pets.automaton.economizer.onEquip', function(pet)
+m:addOverride('xi.actions.abilities.pets.attachments.economizer.onEquip', function(pet)
     pet:addListener('AUTOMATON_ATTACHMENT_CHECK', 'ATTACHMENT_ECONOMIZER', function(automaton, target)
         -- If Economizer is still on cooldown, do nothing.
         if automaton:hasRecast(xi.recast.ABILITY, xi.mobSkill.ECONOMIZER_AUTOMATON) then
