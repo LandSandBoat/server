@@ -248,7 +248,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     wsc       = wsc + wsc * bonusWSC -- Bonus WSC from AF3/CA
 
     -- Monster correlation
-    local correlationMultiplier = xi.combat.damage.ecosystemMultiplier(caster, target, params.ecosystem or 0)
+    local correlationBonus = xi.combat.damage.ecosystemMultiplier(caster, target, params.ecosystem or 0) - 1
 
     -- Azure Lore
     if caster:getStatusEffect(xi.effect.AZURE_LORE) then
@@ -325,9 +325,9 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
 
             -- Add it to our final damage
             if hitsdone == 0 then
-                finaldmg = finaldmg + finalD * (multiplier + correlationMultiplier) * pdif -- first hit gets full multiplier
+                finaldmg = finaldmg + finalD * (multiplier + correlationBonus) * pdif -- first hit gets full multiplier
             else
-                finaldmg = finaldmg + finalD * (1 + correlationMultiplier) * pdif
+                finaldmg = finaldmg + finalD * (1 + correlationBonus) * pdif
             end
 
             hitslanded        = hitslanded + 1
@@ -398,7 +398,7 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     end
 
     -- Monster correlation
-    local correlationMultiplier = xi.combat.damage.ecosystemMultiplier(caster, target, params.ecosystem or 0)
+    local correlationBonus = xi.combat.damage.ecosystemMultiplier(caster, target, params.ecosystem or 0) - 1
 
     -- Data
     local spellId         = spell:getID()
@@ -408,7 +408,7 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     local skillchainCount = xi.combat.magicBurst.getMagicBurstTier(target, spellElement)
 
     -- Final D value
-    local finalDamage    = (initialD + wsc) * (params.multiplier + azureBonus + correlationMultiplier) + statBonus
+    local finalDamage    = (initialD + wsc) * (params.multiplier + azureBonus + correlationBonus) + statBonus
 
     local maccParams =
     {
