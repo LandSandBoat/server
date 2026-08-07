@@ -44,7 +44,7 @@ end
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.CHARMABLE, 1)
     mob:setMobMod(xi.mobMod.SOUND_RANGE, 30)
-    mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 500)
+    mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 10)
     mob:setMobMod(xi.mobMod.ROAM_RATE, 10)
     mob:setRoamFlags(xi.roamFlag.WORM)
 end
