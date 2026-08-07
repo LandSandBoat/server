@@ -24,6 +24,9 @@ describe('confirmTrade & confirmItem', function()
         player:addItem(xi.item.BARRAGE_TURBINE, 2)
         player:addItem(xi.item.BARRIER_MODULE_II)
 
+        local turbineAttachment = player:findItem(xi.item.BARRAGE_TURBINE, xi.inventoryLocation.INVENTORY):getSubID()
+        local moduleAttachment  = player:findItem(xi.item.BARRIER_MODULE_II, xi.inventoryLocation.INVENTORY):getSubID()
+
         player.actions:tradeNpc('Tateeya',
             {
                 {
@@ -37,9 +40,7 @@ describe('confirmTrade & confirmItem', function()
             },
             { eventId = 651 })
 
-        -- TODO: this should probably use hasAttachment but it fails for some reason?
-        -- use "failure to unlock attachment" as "hasAttachment"
-        assert(player:unlockAttachment(xi.item.BARRAGE_TURBINE) == false, 'barrage turbine is unlocked')
+        assert(player:hasAttachment(turbineAttachment), 'barrage turbine is unlocked')
 
         local turbine = player:findItem(xi.item.BARRAGE_TURBINE, xi.inventoryLocation.INVENTORY)
 
@@ -65,9 +66,7 @@ describe('confirmTrade & confirmItem', function()
             },
             { eventId = 651 })
 
-        -- TODO: this should probably use hasAttachment but it fails for some reason?
-        -- use "failure to unlock attachment" as "hasAttachment"
-        assert(player:unlockAttachment(xi.item.BARRIER_MODULE_II) == false, 'barrier module II is unlocked')
+        assert(player:hasAttachment(moduleAttachment), 'barrier module II is unlocked')
 
         -- pointer should be stale - search for the barrier module again
         barrierModule = player:findItem(xi.item.BARRIER_MODULE_II, xi.inventoryLocation.INVENTORY)
@@ -88,5 +87,27 @@ describe('confirmTrade & confirmItem', function()
                 }
             },
             { eventId = 652 })
+    end)
+
+    it('does not leave a reserve when only part of a stack is confirmed', function()
+        player.entities:gotoAndTrigger('Tateeya', { eventId = 650 })
+
+        player:addItem(xi.item.BARRAGE_TURBINE, 2)
+
+        -- Tateeya confirms a single item out of the traded stack
+        player.actions:tradeNpc('Tateeya',
+            {
+                {
+                    itemId   = xi.item.BARRAGE_TURBINE,
+                    quantity = 2,
+                }
+            },
+            { eventId = 651 })
+
+        local turbine = player:findItem(xi.item.BARRAGE_TURBINE, xi.inventoryLocation.INVENTORY)
+
+        assert(turbine, 'player still has a barrage turbine in inventory')
+        assert(turbine:getQuantity() == 1, 'only the confirmed turbine was taken')
+        assert(turbine:getReservedValue() == 0, 'the leftover turbine is not reserved')
     end)
 end)
