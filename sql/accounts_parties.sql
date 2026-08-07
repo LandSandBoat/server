@@ -23,6 +23,8 @@ CREATE TABLE `accounts_parties` (
   `allianceid` int(10) unsigned NOT NULL DEFAULT '0',
   `timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`charid`),
+  KEY `idx_accounts_parties_partyid` (`partyid`),
+  KEY `idx_accounts_parties_allianceid` (`allianceid`),
   FOREIGN KEY (`charid`) REFERENCES accounts_sessions(`charid`)
     ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
