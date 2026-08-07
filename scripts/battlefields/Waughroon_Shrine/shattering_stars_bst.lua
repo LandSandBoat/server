@@ -6,16 +6,17 @@ local waughroonID = zones[xi.zone.WAUGHROON_SHRINE]
 -----------------------------------
 
 local content = Battlefield:new({
-    zoneId        = xi.zone.WAUGHROON_SHRINE,
-    battlefieldId = xi.battlefield.id.SHATTERING_STARS_BST,
-    maxPlayers    = 1,
-    levelCap      = xi.settings.main.MAX_LEVEL,
-    allowSubjob   = false,
-    timeLimit     = utils.minutes(10),
-    index         = 8,
-    entryNpc      = 'BC_Entrance',
-    exitNpc       = 'Burning_Circle',
-    requiredItems = { xi.item.BEASTMASTERS_TESTIMONY, wearMessage = waughroonID.text.TESTIMONY_WEARS, wornMessage = waughroonID.text.TESTIMONY_IS_TORN },
+    zoneId         = xi.zone.WAUGHROON_SHRINE,
+    battlefieldId  = xi.battlefield.id.SHATTERING_STARS_BST,
+    maxPlayers     = 1,
+    levelCap       = xi.settings.main.MAX_LEVEL,
+    allowSubjob    = false,
+    cleanupDebuffs = true,
+    timeLimit      = utils.minutes(10),
+    index          = 8,
+    entryNpc       = 'BC_Entrance',
+    exitNpc        = 'Burning_Circle',
+    requiredItems  = { xi.item.BEASTMASTERS_TESTIMONY, wearMessage = waughroonID.text.TESTIMONY_WEARS, wornMessage = waughroonID.text.TESTIMONY_IS_TORN },
 })
 
 function content:entryRequirement(player, npc, isRegistrant, trade)

@@ -6,16 +6,17 @@ local horlaisID = zones[xi.zone.HORLAIS_PEAK]
 -----------------------------------
 
 local content = Battlefield:new({
-    zoneId        = xi.zone.HORLAIS_PEAK,
-    battlefieldId = xi.battlefield.id.SHATTERING_STARS_RNG,
-    maxPlayers    = 1,
-    levelCap      = xi.settings.main.MAX_LEVEL,
-    allowSubjob   = false,
-    timeLimit     = utils.minutes(10),
-    index         = 7,
-    entryNpc      = 'BC_Entrance',
-    exitNpc       = 'Burning_Circle',
-    requiredItems = { xi.item.RANGERS_TESTIMONY, wearMessage = horlaisID.text.TESTIMONY_WEARS, wornMessage = horlaisID.text.TESTIMONY_IS_TORN },
+    zoneId         = xi.zone.HORLAIS_PEAK,
+    battlefieldId  = xi.battlefield.id.SHATTERING_STARS_RNG,
+    maxPlayers     = 1,
+    levelCap       = xi.settings.main.MAX_LEVEL,
+    allowSubjob    = false,
+    cleanupDebuffs = true,
+    timeLimit      = utils.minutes(10),
+    index          = 7,
+    entryNpc       = 'BC_Entrance',
+    exitNpc        = 'Burning_Circle',
+    requiredItems  = { xi.item.RANGERS_TESTIMONY, wearMessage = horlaisID.text.TESTIMONY_WEARS, wornMessage = horlaisID.text.TESTIMONY_IS_TORN },
 })
 
 function content:entryRequirement(player, npc, isRegistrant, trade)

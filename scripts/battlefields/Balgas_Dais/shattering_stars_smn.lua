@@ -6,16 +6,17 @@ local balgasID = zones[xi.zone.BALGAS_DAIS]
 -----------------------------------
 
 local content = Battlefield:new({
-    zoneId        = xi.zone.BALGAS_DAIS,
-    battlefieldId = xi.battlefield.id.SHATTERING_STARS_SMN,
-    maxPlayers    = 1,
-    levelCap      = xi.settings.main.MAX_LEVEL,
-    allowSubjob   = false,
-    timeLimit     = utils.minutes(10),
-    index         = 7,
-    entryNpc      = 'BC_Entrance',
-    exitNpc       = 'Burning_Circle',
-    requiredItems = { xi.item.SUMMONERS_TESTIMONY, wearMessage = balgasID.text.TESTIMONY_WEARS, wornMessage = balgasID.text.TESTIMONY_IS_TORN },
+    zoneId         = xi.zone.BALGAS_DAIS,
+    battlefieldId  = xi.battlefield.id.SHATTERING_STARS_SMN,
+    maxPlayers     = 1,
+    levelCap       = xi.settings.main.MAX_LEVEL,
+    allowSubjob    = false,
+    cleanupDebuffs = true,
+    timeLimit      = utils.minutes(10),
+    index          = 7,
+    entryNpc       = 'BC_Entrance',
+    exitNpc        = 'Burning_Circle',
+    requiredItems  = { xi.item.SUMMONERS_TESTIMONY, wearMessage = balgasID.text.TESTIMONY_WEARS, wornMessage = balgasID.text.TESTIMONY_IS_TORN },
 })
 
 function content:entryRequirement(player, npc, isRegistrant, trade)
