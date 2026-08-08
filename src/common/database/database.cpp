@@ -21,8 +21,6 @@
 
 #include <common/database/database.h>
 
-#include <common/database/query_validation.h>
-
 #include <common/logging.h>
 #include <common/macros.h>
 #include <common/utils.h>
@@ -35,105 +33,6 @@
 #include <chrono>
 #include <thread>
 using namespace std::chrono_literals;
-
-auto db::detail::validateQueryLeadingKeyword(const std::string& query) -> ResultSetType
-{
-    auto parts = split(to_upper(query), " ");
-
-    std::vector<std::string> cleanedParts;
-    for (const auto& part : parts)
-    {
-        if (!part.empty() && part != "\n")
-        {
-            cleanedParts.push_back(trim(trim(part), "\n"));
-        }
-    }
-    parts = std::move(cleanedParts);
-
-    if (parts.empty())
-    {
-        return ResultSetType::Invalid;
-    }
-
-    const auto keyword = parts[0];
-    if (keyword == "SELECT")
-    {
-        return ResultSetType::Select;
-    }
-    else if (keyword == "INSERT")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "UPDATE")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "DELETE")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "REPLACE")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "CREATE")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "ALTER")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "DROP")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "TRUNCATE")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "SET")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "SHOW")
-    {
-        return ResultSetType::Select;
-    }
-    else if (keyword == "START")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "COMMIT")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "ROLLBACK")
-    {
-        return ResultSetType::Update;
-    }
-
-    // Else
-    return ResultSetType::Invalid;
-}
-
-auto db::detail::validateQueryContent(const std::string& query) -> bool
-{
-    // NOTE: We shouldn't be checking for the presence of '%', as this
-    //     : is the SQL wildcard character.
-
-    if (query.contains("{}"))
-    {
-        return false;
-    }
-
-    if (query.contains(';'))
-    {
-        return false;
-    }
-
-    return true;
-}
 
 auto db::escapeString(std::string_view str) -> std::string
 {

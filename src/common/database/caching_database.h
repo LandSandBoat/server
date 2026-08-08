@@ -38,11 +38,19 @@ namespace db
 namespace detail
 {
 
+// A prepared statement together with its query classification, computed once when the
+// statement is first prepared so cached executions skip re-validating the query text.
+struct CachedStatement
+{
+    std::unique_ptr<PreparedStatement> statement;
+    ResultSetType                      type;
+};
+
 // Per-(thread, backend) connection state: the live connection plus its prepared-statement cache.
 struct ConnectionState
 {
-    std::unique_ptr<Connection>                              connection;
-    HashMap<std::string, std::unique_ptr<PreparedStatement>> statements;
+    std::unique_ptr<Connection>           connection;
+    HashMap<std::string, CachedStatement> statements;
 
     // open transaction on this connection
     bool inTransaction{ false };
@@ -70,9 +78,11 @@ private:
     auto getState() -> detail::ConnectionState&;
 
     // Find-or-prepare the cached statement for this query on the given connection.
-    auto prepareCached(detail::ConnectionState& connState, const std::string& query) -> PreparedStatement&;
+    //
+    // Returns nullptr if the query text is rejected.
+    auto prepareCached(detail::ConnectionState& connState, const std::string& query) -> detail::CachedStatement*;
 
-    // Validate the query, then run `operation` on this thread's connection, retrying on connection loss.
+    // Run `operation` on this thread's connection, retrying on connection loss.
     //
     // Terminates if the connection can't be re-established.
     auto runWithRetry(const std::string& query, const Fn<std::unique_ptr<ResultSet>(detail::ConnectionState&) const>& operation) -> std::unique_ptr<ResultSet>;
