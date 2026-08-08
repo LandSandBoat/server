@@ -44,6 +44,7 @@ return {
     ['Pursuivant']       = { event = 304 },
     ['Qiji']             = { event = 33 },
     ['Rafaela']          = { event = 22 },
+    ['Raifa']            = { event = 279 },
     ['Ravorara']         = { event = 310 },
     ['Rin']              = { event = 36 },
     ['Romilda']          = { event = 34 },

@@ -37,6 +37,7 @@ zones[xi.zone.MAZE_OF_SHAKHRAMI] =
         YOU_LOST_THE                  = 7287,  -- You lost the <item>.
         MIGHT_BE_ABLE_TO_OPEN         = 7290,  -- You might be able to open it if you had the key.
         CRUBLES_TO_DUST               = 7291,  -- The <item> crumbles into dust.
+        OINTMENT_DRAWS_MONSTERS       = 7323,  -- The ointment's odor draws out the monsters!
         CHEST_UNLOCKED                = 7378,  -- You unlock the chest!
         MINING_IS_POSSIBLE_HERE       = 7386,  -- Mining is possible here if you have <item>.
         ITEMS_ITEMS_LA_LA             = 7396,  -- You can hear a strange voice... Items, items, la la la la la
