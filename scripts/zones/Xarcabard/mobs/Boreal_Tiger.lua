@@ -5,6 +5,7 @@
 -- !pos 341 -29 370 112
 -----------------------------------
 local ID = zones[xi.zone.XARCABARD]
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
@@ -85,7 +86,15 @@ end
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+    mob:setMod(xi.mod.COUNTER, 45)
+    mob:setMod(xi.mod.REFRESH, 500) -- Never seem to run out of MP.
     mob:setBaseSpeed(baseSpeed)
+    xi.mix.jobSpecial.config(mob, {
+        specials =
+        {
+            { id = xi.mobSkill.MIGHTY_STRIKES_1, hpp = math.randomInt(30, 80) },
+        },
+    })
     -- Failsafe to make sure NPC is down when NM is up
     if xi.settings.main.OLDSCHOOL_G2 then
         GetNPCByID(ID.npc.BOREAL_TIGER_QM):showNPC(0)
