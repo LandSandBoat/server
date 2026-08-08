@@ -390,10 +390,10 @@ INSERT INTO `mob_skills` VALUES (358,826,'heavy_whisk',4,0.0,7.0,2000,1500,4,0,0
 INSERT INTO `mob_skills` VALUES (359,827,'bionic_boost',0,0.0,7.0,2000,1500,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (360,828,'flying_hip_press',1,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (361,829,'earth_shock',1,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (362,830,'double_claw',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (362,830,'double_claw',0,0.0,7.0,2000,800,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (363,831,'grapple',4,0.0,12.5,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (364,832,'filamented_hold',4,0.0,12.5,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (365,833,'spinning_top',1,0.0,15.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (365,833,'spinning_top',1,0.0,15.0,2000,800,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (366,110,'tail_blow',0,0.0,7.0,2183,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (367,111,'fireball',2,0.0,11.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (368,112,'blockhead',0,0.0,7.0,1633,1000,4,0,0,1,0,0,0);
@@ -1389,7 +1389,7 @@ INSERT INTO `mob_skills` VALUES (1357,1008,'tidal_dive',1,0.0,15.0,5500,1000,4,0
 INSERT INTO `mob_skills` VALUES (1358,1009,'plasma_charge',0,0.0,7.0,2833,1000,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1359,855,'chthonian_ray',4,0.0,25.0,2000,2800,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1360,855,'apocalyptic_ray',4,0.0,10.0,2000,2800,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1361,1105,'viscid_secretion',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1361,832,'viscid_secretion',4,0.0,12.5,2000,1300,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1362,37,'wild_ginseng',0,0.0,7.0,2000,2600,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1363,822,'hungry_crunch',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1364,848,'mighty_snort',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);

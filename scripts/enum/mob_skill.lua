@@ -215,7 +215,9 @@ xi.mobSkill =
     BIONIC_BOOST                  =  359,
     FLYING_HIP_PRESS              =  360,
     EARTH_SHOCK                   =  361,
+    DOUBLE_CLAW_1                 =  362,
 
+    SPINNING_TOP_1                =  365,
     TAIL_BLOW_1                   =  366,
     FIREBALL_1                    =  367,
     BLOCKHEAD_1                   =  368,
@@ -858,7 +860,7 @@ xi.mobSkill =
     PLASMA_CHARGE                 = 1358,
     CHTHONIAN_RAY                 = 1359,
     APOCALYPTIC_RAY               = 1360,
-
+    VISCID_SECRETION              = 1361,
     WILD_GINSENG                  = 1362,
     HUNGRY_CRUNCH                 = 1363,
 
