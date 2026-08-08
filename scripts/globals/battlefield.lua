@@ -406,7 +406,8 @@ end
 --  - delayToExit: Amount of time to wait before exiting the battlefield. Defaults to 5 seconds. (optional)
 --  - requiredItems: Items required to be traded to enter the battlefield.
 --                   Needs to be in the format of { itemid, quantity, useMessage = ID.text.*, wearMessage = ID.text.*, wornMessage = ID.text.* }. (optional)
---  - requiredKeyItems: Key items required to be able to enter the battlefield - these are removed upon entry unless 'keep = true' (optional)
+--  - requiredKeyItems: Key items required to be able to enter the battlefield - these are removed upon entry unless 'keep = true'.
+--                      Set 'onlyInitiator' to true to only require the initiator of the battlefield to have the key item. (optional)
 --  - title: Title given to players upon victory (optional)
 --  - grantXP: Amount of XP to grant upon victory (optional)
 --  - grantXPLockout: If true, players can only receive the grantXP once per day, resetting at JST midnight. (optional)
@@ -587,27 +588,38 @@ function Battlefield:checkRequirements(player, npc, isRegistrant, trade)
         return false
     end
 
-    for _, keyItem in ipairs(self.requiredKeyItems) do
-        if type(keyItem) == 'table' then
+    -- Everyone must hold the required key items by default.
+    -- Note : Key items are not consumed here, only checked, consumption is handled in onBattlefieldEnter
+    local needsKeyItems = true
 
-            -- Only need one from the group
-            local hasAny = false
+    -- Battlefields flagged 'onlyInitiator' only require them from the battlefield initiator to enter.
+    if self.requiredKeyItems.onlyInitiator then
+        needsKeyItems = isRegistrant
+    end
 
-            for _, subitem in ipairs(keyItem) do
-                if player:hasKeyItem(subitem) then
-                    hasAny = true
+    if needsKeyItems then
+        for _, keyItem in ipairs(self.requiredKeyItems) do
+            if type(keyItem) == 'table' then
 
-                    break
+                -- Some battlefields may be entered with one of several key items. (e.g. Requiem of Sin)
+                local hasAnyKeyItem = false
+
+                for _, subitem in ipairs(keyItem) do
+                    if player:hasKeyItem(subitem) then
+                        hasAnyKeyItem = true
+
+                        break
+                    end
                 end
-            end
 
-            if not hasAny then
-                return false
-            end
+                if not hasAnyKeyItem then
+                    return false
+                end
 
-        else
-            if not player:hasKeyItem(keyItem) then
-                return false
+            else
+                if not player:hasKeyItem(keyItem) then
+                    return false
+                end
             end
         end
     end
@@ -1077,6 +1089,8 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
 
     local initiatorId, _ = battlefield:getInitiator()
 
+    -- Handle key item consumption. Runs for every player that enters the battlefield.
+    -- If onlyInitiator is true, then only the player that registered the battlefield will have their key item consumed.
     if
         #self.requiredKeyItems > 0 and
         (not self.requiredKeyItems.onlyInitiator or player:getID() == initiatorId)

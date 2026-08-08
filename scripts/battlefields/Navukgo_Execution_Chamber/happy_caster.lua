@@ -14,7 +14,7 @@ local content = Battlefield:new({
     index            = 1,
     entryNpc         = '_1s0',
     exitNpcs         = { '_1s1', '_1s2', '_1s3' },
-    requiredKeyItems = { xi.ki.SECRET_IMPERIAL_ORDER, message = ID.text.IMPERIAL_ORDER_BREAKS },
+    requiredKeyItems = { xi.ki.SECRET_IMPERIAL_ORDER, onlyInitiator = true, message = ID.text.IMPERIAL_ORDER_BREAKS },
 })
 
 content:addEssentialMobs({ 'Two-faced_Flan' })
