@@ -116,7 +116,10 @@ auto db::ResultSet::isNull(std::string_view key) const -> bool
     const auto index = rawColumnIndex(key);
     if (!index.has_value())
     {
-        // An absent column reads the same as a NULL one; get()/getOrDefault() report it.
+        // A column the query never produced is a call-site bug, not a NULL value. Report it,
+        // then read as NULL like before so callers keep their fallback behaviour.
+        ShowErrorFmt("ResultSet::isNull: unknown column {}", key);
+        ShowErrorFmt("Query: {}", query_);
         return true;
     }
 
@@ -135,6 +138,8 @@ auto db::ResultSet::getBlobBytes(std::string_view key) const -> std::string
     const auto index = rawColumnIndex(key);
     if (!index.has_value())
     {
+        ShowErrorFmt("ResultSet::getBlobBytes: unknown column {}", key);
+        ShowErrorFmt("Query: {}", query_);
         return {};
     }
 

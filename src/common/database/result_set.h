@@ -285,7 +285,11 @@ auto ResultSet::get(std::string_view key) const -> T
     const auto index = rawColumnIndex(key);
     if (!index.has_value())
     {
-        DebugSQLFmt("ResultSet::get: unknown column {} (Query: {})", key, query_);
+        // A NULL cell is legitimate data and stays quiet, but a column the query never produced
+        // is a bug at the call site (typo, or the query lost a column). Say so instead of
+        // silently returning zeros.
+        ShowErrorFmt("ResultSet::get: unknown column {}", key);
+        ShowErrorFmt("Query: {}", query_);
         return T{};
     }
 
