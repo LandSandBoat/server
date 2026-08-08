@@ -248,7 +248,7 @@ auto db::LibMariaDBPreparedStatement::ensureSchema() -> void
     schemaInitialized_ = true;
 }
 
-auto db::LibMariaDBPreparedStatement::fetchRows() -> std::vector<LibMariaDBResultSet::Row>
+auto db::LibMariaDBPreparedStatement::fetchCells() -> std::vector<LibMariaDBResultSet::Cell>
 {
     const std::size_t ncol = kinds_.size();
     if (ncol == 0)
@@ -301,8 +301,9 @@ auto db::LibMariaDBPreparedStatement::fetchRows() -> std::vector<LibMariaDBResul
         throw detail::libmariadb::Error(mysql_stmt_errno(stmt_), mysql_stmt_error(stmt_));
     }
 
-    std::vector<LibMariaDBResultSet::Row> rows;
-    rows.reserve(static_cast<std::size_t>(mysql_stmt_num_rows(stmt_)));
+    // One flat row-major grid: a whole result set costs one cell allocation, not one per row.
+    std::vector<LibMariaDBResultSet::Cell> cells;
+    cells.reserve(static_cast<std::size_t>(mysql_stmt_num_rows(stmt_)) * ncol);
 
     for (;;)
     {
@@ -317,12 +318,12 @@ auto db::LibMariaDBPreparedStatement::fetchRows() -> std::vector<LibMariaDBResul
         }
 
         // rc == 0 (success) or MYSQL_DATA_TRUNCATED
-        LibMariaDBResultSet::Row row(ncol);
         for (std::size_t i = 0; i < ncol; ++i)
         {
+            auto& cell = cells.emplace_back();
+
             if (nulls[i] != 0)
             {
-                row[i] = std::monostate{};
                 continue;
             }
 
@@ -332,21 +333,21 @@ auto db::LibMariaDBPreparedStatement::fetchRows() -> std::vector<LibMariaDBResul
                 {
                     int64 value = 0;
                     std::memcpy(&value, buffers[i].data(), sizeof(value));
-                    row[i] = value;
+                    cell = value;
                     break;
                 }
                 case CellKind::UInt64:
                 {
                     uint64 value = 0;
                     std::memcpy(&value, buffers[i].data(), sizeof(value));
-                    row[i] = value;
+                    cell = value;
                     break;
                 }
                 case CellKind::Double:
                 {
                     double value = 0.0;
                     std::memcpy(&value, buffers[i].data(), sizeof(value));
-                    row[i] = value;
+                    cell = value;
                     break;
                 }
                 case CellKind::Text:
@@ -373,21 +374,19 @@ auto db::LibMariaDBPreparedStatement::fetchRows() -> std::vector<LibMariaDBResul
                             throw detail::libmariadb::Error(mysql_stmt_errno(stmt_), mysql_stmt_error(stmt_));
                         }
 
-                        row[i] = std::string(big.data(), actualLen);
+                        cell = std::string(big.data(), actualLen);
                     }
                     else
                     {
-                        row[i] = std::string(buffers[i].data(), actualLen);
+                        cell = std::string(buffers[i].data(), actualLen);
                     }
                     break;
                 }
             }
         }
-
-        rows.push_back(std::move(row));
     }
 
-    return rows;
+    return cells;
 }
 
 auto db::LibMariaDBPreparedStatement::executeQuery(const std::string& query) -> std::unique_ptr<ResultSet>
@@ -402,10 +401,10 @@ auto db::LibMariaDBPreparedStatement::executeQuery(const std::string& query) -> 
         }
 
         ensureSchema();
-        auto rows = fetchRows();
+        auto cells = fetchCells();
 
         resetBindings();
-        return std::make_unique<LibMariaDBResultSet>(query, schema_, std::move(rows));
+        return std::make_unique<LibMariaDBResultSet>(query, schema_, std::move(cells));
     }
     catch (...)
     {

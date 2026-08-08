@@ -25,11 +25,20 @@
 #include <type_traits>
 #include <utility>
 
-db::LibMariaDBResultSet::LibMariaDBResultSet(const std::string& query, std::shared_ptr<const ColumnSchema> schema, std::vector<Row> rows)
+db::LibMariaDBResultSet::LibMariaDBResultSet(const std::string& query, std::shared_ptr<const ColumnSchema> schema, std::vector<Cell> cells)
 : ResultSet(query, ResultSetType::Select)
 , schema_(std::move(schema))
-, rows_(std::move(rows))
+, cells_(std::move(cells))
 {
+    if (schema_ != nullptr)
+    {
+        columnCount_ = schema_->names.size();
+    }
+
+    if (columnCount_ != 0)
+    {
+        rowCount_ = cells_.size() / columnCount_;
+    }
 }
 
 db::LibMariaDBResultSet::LibMariaDBResultSet(std::size_t rowsAffected, const std::string& query)
@@ -40,22 +49,17 @@ db::LibMariaDBResultSet::LibMariaDBResultSet(std::size_t rowsAffected, const std
 auto db::LibMariaDBResultSet::rawNext() -> bool
 {
     ++cursor_;
-    return cursor_ >= 0 && static_cast<std::size_t>(cursor_) < rows_.size();
+    return cursor_ >= 0 && static_cast<std::size_t>(cursor_) < rowCount_;
 }
 
 auto db::LibMariaDBResultSet::rawRowsCount() const -> std::size_t
 {
-    return rows_.size();
+    return rowCount_;
 }
 
 auto db::LibMariaDBResultSet::rawColumnCount() const -> std::size_t
 {
-    if (schema_ == nullptr)
-    {
-        return 0;
-    }
-
-    return schema_->names.size();
+    return columnCount_;
 }
 
 auto db::LibMariaDBResultSet::rawColumnIndex(std::string_view key) const -> std::optional<std::size_t>
@@ -159,18 +163,12 @@ auto db::LibMariaDBResultSet::cellAt(std::size_t index) const -> const Cell&
 {
     static const Cell nullCell{};
 
-    if (cursor_ < 0 || static_cast<std::size_t>(cursor_) >= rows_.size())
+    if (cursor_ < 0 || static_cast<std::size_t>(cursor_) >= rowCount_ || index >= columnCount_)
     {
         return nullCell;
     }
 
-    const auto& row = rows_[static_cast<std::size_t>(cursor_)];
-    if (index >= row.size())
-    {
-        return nullCell;
-    }
-
-    return row[index];
+    return cells_[static_cast<std::size_t>(cursor_) * columnCount_ + index];
 }
 
 auto db::LibMariaDBResultSet::toInt64(const Cell& cell) -> int64

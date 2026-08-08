@@ -47,10 +47,11 @@ class LibMariaDBResultSet final : public ResultSet
 {
 public:
     using Cell = std::variant<std::monostate, int64, uint64, double, std::string>;
-    using Row  = std::vector<Cell>;
 
     // SELECT-like result. The schema is shared (and owned) across all result sets of one statement.
-    LibMariaDBResultSet(const std::string& query, std::shared_ptr<const ColumnSchema> schema, std::vector<Row> rows);
+    // Cells are one flat row-major grid (rows x schema columns), so a whole result set costs one
+    // cell allocation rather than one per row.
+    LibMariaDBResultSet(const std::string& query, std::shared_ptr<const ColumnSchema> schema, std::vector<Cell> cells);
 
     // UPDATE-like result.
     LibMariaDBResultSet(std::size_t rowsAffected, const std::string& query);
@@ -86,8 +87,10 @@ private:
     static auto toText(const Cell& cell) -> std::string;
 
     std::shared_ptr<const ColumnSchema> schema_;
-    std::vector<Row>                    rows_;
-    std::ptrdiff_t                      cursor_ = -1;
+    std::vector<Cell>                   cells_;
+    std::size_t                         columnCount_ = 0;
+    std::size_t                         rowCount_    = 0;
+    std::ptrdiff_t                      cursor_      = -1;
 };
 
 } // namespace db

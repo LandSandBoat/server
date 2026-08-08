@@ -80,7 +80,7 @@ private:
     auto applyBindings() -> void;
     auto resetBindings() -> void;
     auto ensureSchema() -> void;
-    auto fetchRows() -> std::vector<LibMariaDBResultSet::Row>;
+    auto fetchCells() -> std::vector<LibMariaDBResultSet::Cell>;
 
     MYSQL_STMT* stmt_;
 
