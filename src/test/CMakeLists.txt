@@ -63,6 +63,7 @@ endif()
 add_executable(xi_test
     ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/data_binding_tests.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/database_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/ecosystems_tree_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/entity_list_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/rng_runtime_tests.cpp
