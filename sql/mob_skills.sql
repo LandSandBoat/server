@@ -1472,9 +1472,9 @@ INSERT INTO `mob_skills` VALUES (1438,94,'blood_pact',0,0.0,7.0,2000,0,1,0,0,0,0
 INSERT INTO `mob_skills` VALUES (1441,1065,'actinic_burst',1,0.0,10.0,2300,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1442,1066,'core_meltdown',1,0.0,15.0,4233,4000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1443,1061,'hexidiscs',4,0.0,7.0,3750,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1444,1062,'vorpal_blade',0,0.0,7.0,2000,3333,4,0,0,0,0,0,0); -- Only used in human form
+INSERT INTO `mob_skills` VALUES (1444,1062,'vorpal_blade',0,0.0,7.0,3333,1000,4,0,0,0,0,0,0); -- Only used in human form
 INSERT INTO `mob_skills` VALUES (1445,1063,'damnation_dive',4,0.0,10.0,3166,2000,4,0,0,0,0,0,0); -- Only used in bird form.
-INSERT INTO `mob_skills` VALUES (1446,1064,'sickle_slash',0,0.0,7.0,1800,1000,4,0,0,0,0,0,0); -- Only used in spider form.
+INSERT INTO `mob_skills` VALUES (1446,1064,'sickle_slash_ghrah',0,0.0,7.0,1800,1000,4,0,0,0,0,0,0); -- Only used in spider form.
 INSERT INTO `mob_skills` VALUES (1447,1070,'vertical_cleave',0,0.0,7.0,2866,2000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1448,1071,'efflorescent_foetor',4,0.0,10.0,2866,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1449,1072,'stupor_spores',1,0.0,10.0,2400,1000,4,0,0,0,0,0,0);
@@ -1492,7 +1492,7 @@ INSERT INTO `mob_skills` VALUES (1460,847,'auto_attack_geush',0,0.0,7.0,2000,0,4
 -- INSERT INTO `mob_skills` VALUES (1461,1059,'shield_bash',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1462,1060,'shield_bash',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1463,1074,'reactor_cool',0,0.0,7.0,3666,1000,1,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1464,1075,'optic_induration_charge',0,0.0,7.0,3266,0,1,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1464,1075,'optic_induration_charge',0,0.0,7.0,5000,0,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1465,1076,'optic_induration',4,0.0,15.0,1500,800,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1466,1077,'static_filament',4,0.0,10.0,4616,2000,4,0,0,0,0,0,0); -- bar form only
 INSERT INTO `mob_skills` VALUES (1467,1078,'decayed_filament',1,0.0,8.0,5333,2000,4,0,0,0,0,0,0); -- bar form only

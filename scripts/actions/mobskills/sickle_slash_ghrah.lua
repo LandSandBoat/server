@@ -1,13 +1,20 @@
 -----------------------------------
 -- Sickle Slash
--- Family: Spider
--- Description: Deals critical damage. Attack multiplier varies with TP.
+-- Family: Ghrah
+-- Description: Deals heavy damage.  Attack multiplier varies with TP.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    return 0
+    if
+        mob:getFamily() == xi.mobFamily.GHRAH and -- TODO: Set proper skill lists for Ghrah.
+        mob:getAnimationSub() ~= 2
+    then
+        return 1
+    else
+        return 0
+    end
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
@@ -19,9 +26,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     params.attackType       = xi.attackType.PHYSICAL
     params.damageType       = xi.damageType.BLUNT
     params.shadowBehavior   = xi.mobskills.shadowBehavior.NUMSHADOWS_1
-    params.attackMultiplier = { 0.5, 1.5, 2.5 }
-    params.canCrit          = true
-    params.criticalChance   = { 1.0, 1.0, 1.0 }
+    params.attackMultiplier = { 1.5, 2.0, 2.5 }
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 

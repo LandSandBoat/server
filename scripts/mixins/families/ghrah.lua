@@ -216,6 +216,7 @@ g_mixins.families.ghrah = function(ghrahMob)
         local skin = math.randomInt(1161, 1168)
         mob:setModelId(skin)
         mob:setAnimationSub(0)
+        mob:setMagicCastingEnabled(false)
         mob:setAggressive(false)
         mob:setLocalVar('changeTime', GetSystemTime() + math.randomInt(40, 60)) -- Stagger first change
         mob:setLocalVar('targetForm', getTargetForm(mob))
@@ -237,10 +238,18 @@ g_mixins.families.ghrah = function(ghrahMob)
         handleFormChange(mob)
     end)
 
+    ghrahMob:addListener('ENGAGE', 'GHRAH_ENGAGE', function(mob)
+        mob:setMagicCastingEnabled(true) -- Enable casting when engaging
+    end)
+
     ghrahMob:addListener('COMBAT_TICK', 'GHRAH_COMBAT', function(mob)
         if not xi.combat.behavior.isEntityBusy(mob) then
             handleFormChange(mob)
         end
+    end)
+
+    ghrahMob:addListener('DISENGAGE', 'GHRAH_DISENGAGE', function(mob)
+        mob:setMagicCastingEnabled(false) -- Disable casting when idle
     end)
 end
 
