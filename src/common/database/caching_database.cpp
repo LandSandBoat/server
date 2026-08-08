@@ -117,6 +117,15 @@ auto db::CachingDatabase::runWithRetry(const std::string& rawQuery, const Fn<std
 {
     auto& state = getState();
 
+    // A transaction on this connection was severed by a reconnect. Refuse the rest of it, up to and
+    // including its COMMIT/ROLLBACK, so none of its statements silently auto-commit on the fresh
+    // connection.
+    if (state.transactionBroken)
+    {
+        ShowErrorFmt("Refusing to run a query from a transaction that was severed by a reconnect: {}", rawQuery);
+        return nullptr;
+    }
+
     const auto queryRetryCount = 1 + settings::get<uint32>("network.SQL_QUERY_RETRY_COUNT");
     for (auto i = 0U; i < queryRetryCount; ++i)
     {
@@ -145,6 +154,14 @@ auto db::CachingDatabase::runWithRetry(const std::string& rawQuery, const Fn<std
             {
                 ShowErrorFmt("Connection lost mid-transaction, not retrying: {}", rawQuery);
                 ShowErrorFmt("{}", e.what());
+
+                // The server has already rolled the transaction back. Drop the dead connection and
+                // poison the transaction, so the statements that follow it fail here rather than
+                // run, one by one, on a fresh auto-committing connection.
+                state.statements.clear();
+                state.connection        = nullptr;
+                state.transactionBroken = true;
+
                 return nullptr;
             }
         }
@@ -215,7 +232,15 @@ auto db::CachingDatabase::executeBulk(const std::string& rawQuery, const std::ve
 
 void db::CachingDatabase::setInTransaction(bool value)
 {
-    getState().inTransaction = value;
+    auto& state = getState();
+
+    state.inTransaction = value;
+
+    // Whether it committed or was severed, the transaction is over; the next one starts clean.
+    if (!value)
+    {
+        state.transactionBroken = false;
+    }
 }
 
 auto db::CachingDatabase::getSchema() -> std::string

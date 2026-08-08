@@ -54,6 +54,11 @@ struct ConnectionState
 
     // open transaction on this connection
     bool inTransaction{ false };
+
+    // Set when the connection is lost while a transaction is open. Every statement up to and
+    // including the transaction's COMMIT/ROLLBACK is refused, so no work silently escapes onto a
+    // fresh auto-committing connection; it clears when the transaction closes.
+    bool transactionBroken{ false };
 };
 
 } // namespace detail
