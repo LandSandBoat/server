@@ -31,6 +31,7 @@
 
 #include <memory>
 #include <string>
+#include <string_view>
 
 namespace db
 {
@@ -68,8 +69,8 @@ class CachingDatabase : public Database
 public:
     CachingDatabase();
 
-    auto execute(const std::string& query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> override;
-    auto executeBulk(const std::string& query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> override;
+    auto execute(std::string_view query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> override;
+    auto executeBulk(std::string_view query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> override;
 
     void setInTransaction(bool value) override;
 
@@ -91,12 +92,12 @@ private:
     // Find-or-prepare the cached statement for this query on the given connection.
     //
     // Returns nullptr if the query text is rejected.
-    auto prepareCached(detail::ConnectionState& connState, const std::string& query) -> detail::CachedStatement*;
+    auto prepareCached(detail::ConnectionState& connState, std::string_view query) -> detail::CachedStatement*;
 
     // Run `operation` on this thread's connection, retrying on connection loss.
     //
     // Terminates if the connection can't be re-established.
-    auto runWithRetry(const std::string& query, const Fn<std::unique_ptr<ResultSet>(detail::ConnectionState&) const>& operation) -> std::unique_ptr<ResultSet>;
+    auto runWithRetry(std::string_view query, const Fn<std::unique_ptr<ResultSet>(detail::ConnectionState&) const>& operation) -> std::unique_ptr<ResultSet>;
 };
 
 } // namespace db

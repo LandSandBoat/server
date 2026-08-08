@@ -30,6 +30,7 @@
 #include <memory>
 #include <optional>
 #include <string>
+#include <string_view>
 #include <type_traits>
 #include <utility>
 #include <vector>
@@ -129,6 +130,10 @@ auto lowerBoundValue(std::vector<BoundValue>& params, T&& value) -> void
         params.emplace_back(std::in_place_type<float>, static_cast<float>(value));
     }
     else if constexpr (std::is_same_v<U, std::string>)
+    {
+        params.emplace_back(std::in_place_type<std::string>, value);
+    }
+    else if constexpr (std::is_same_v<U, std::string_view>)
     {
         params.emplace_back(std::in_place_type<std::string>, value);
     }

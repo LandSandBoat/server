@@ -51,10 +51,10 @@ public:
     // SELECT-like result. The schema is shared (and owned) across all result sets of one statement.
     // Cells are one flat row-major grid (rows x schema columns), so a whole result set costs one
     // cell allocation rather than one per row.
-    LibMariaDBResultSet(const std::string& query, std::shared_ptr<const ColumnSchema> schema, std::vector<Cell> cells);
+    LibMariaDBResultSet(std::string_view query, std::shared_ptr<const ColumnSchema> schema, std::vector<Cell> cells);
 
     // UPDATE-like result.
-    LibMariaDBResultSet(std::size_t rowsAffected, const std::string& query);
+    LibMariaDBResultSet(std::size_t rowsAffected, std::string_view query);
 
 protected:
     auto rawNext() -> bool override;

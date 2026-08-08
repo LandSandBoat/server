@@ -23,6 +23,7 @@
 #include <common/database/blob.h>
 #include <common/database/database.h>
 #include <common/database/libmariadb/libmariadb_result_set.h>
+#include <common/database/query_string.h>
 #include <common/database/query_validation.h>
 #include <common/database/result_set.h>
 
@@ -32,6 +33,7 @@
 #include <memory>
 #include <optional>
 #include <string>
+#include <string_view>
 #include <utility>
 #include <variant>
 #include <vector>
@@ -63,6 +65,15 @@ static_assert(db::detail::validateQueryLeadingKeyword("SELECTX") == ResultSetTyp
 static_assert(db::detail::validateQueryContent("SELECT name FROM chars WHERE charid = ?"));
 static_assert(!db::detail::validateQueryContent("SELECT 1; DROP TABLE chars"));
 static_assert(!db::detail::validateQueryContent("SELECT {} FROM chars"));
+
+//
+// Placeholder counting backs the compile-time '?' count vs argument count check.
+//
+
+static_assert(db::detail::countPlaceholders("SELECT * FROM t") == 0);
+static_assert(db::detail::countPlaceholders("... WHERE a = ? AND b = ?") == 2);
+static_assert(db::detail::countPlaceholders("... WHERE name = '?'") == 0);         // '?' inside quotes is data
+static_assert(db::detail::countPlaceholders("... WHERE a = '\\?' OR b = ?") == 1); // escaped quote, then a real one
 
 enum class TestJob : uint16
 {
@@ -151,6 +162,30 @@ TEST_CASE("parameter lowering picks the matching BoundValue alternative", "[data
     CHECK(std::get<double>(params[10]) == 2.25);
     CHECK(std::get<std::string>(params[11]) == "str");
     CHECK(std::get<std::string>(params[12]) == "cstr");
+}
+
+TEST_CASE("parameter lowering accepts a string_view without a copy at the call site", "[database]")
+{
+    const auto params = db::detail::lowerBoundValues(std::string_view("kupo"));
+
+    REQUIRE(params.size() == 1);
+    CHECK(std::get<std::string>(params[0]) == "kupo");
+}
+
+TEST_CASE("QueryString validates a literal and carries its text", "[database]")
+{
+    // Constructed from a string literal: the leading keyword, forbidden characters, and the
+    // placeholder count (one '?' against one bound argument) are all checked at compile time.
+    const db::QueryString<uint32> validated("SELECT name FROM chars WHERE charid = ?");
+    CHECK(validated.text() == "SELECT name FROM chars WHERE charid = ?");
+
+    // Runtime-built text takes the unchecked path; the layer validates it at prepare time.
+    const std::string       dynamic = "SELECT 1";
+    const db::QueryString<> runtimeQuery{ std::string_view(dynamic) };
+    CHECK(runtimeQuery.text() == "SELECT 1");
+
+    const db::QueryString<> marked{ db::runtime("SELECT 2") };
+    CHECK(marked.text() == "SELECT 2");
 }
 
 TEST_CASE("parameter lowering decays enums to their underlying type", "[database]")

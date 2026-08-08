@@ -25,8 +25,8 @@
 #include <type_traits>
 #include <utility>
 
-db::LibMariaDBResultSet::LibMariaDBResultSet(const std::string& query, std::shared_ptr<const ColumnSchema> schema, std::vector<Cell> cells)
-: ResultSet(query, ResultSetType::Select)
+db::LibMariaDBResultSet::LibMariaDBResultSet(std::string_view query, std::shared_ptr<const ColumnSchema> schema, std::vector<Cell> cells)
+: ResultSet(std::string(query), ResultSetType::Select)
 , schema_(std::move(schema))
 , cells_(std::move(cells))
 {
@@ -41,8 +41,8 @@ db::LibMariaDBResultSet::LibMariaDBResultSet(const std::string& query, std::shar
     }
 }
 
-db::LibMariaDBResultSet::LibMariaDBResultSet(std::size_t rowsAffected, const std::string& query)
-: ResultSet(query, ResultSetType::Update, rowsAffected)
+db::LibMariaDBResultSet::LibMariaDBResultSet(std::size_t rowsAffected, std::string_view query)
+: ResultSet(std::string(query), ResultSetType::Update, rowsAffected)
 {
 }
 

@@ -174,7 +174,7 @@ auto db::LibMariaDBPreparedStatement::bind(int index, const BoundValue& value) -
                     b.buffer_type = MYSQL_TYPE_DOUBLE;
                 }
 
-                b.is_unsigned = std::is_unsigned_v<U> ? 1 : 0;
+                b.is_unsigned = std::is_unsigned_v<U>;
             }
         },
         value);
@@ -230,7 +230,15 @@ auto db::LibMariaDBPreparedStatement::ensureSchema() -> void
                 case MYSQL_TYPE_INT24:
                 case MYSQL_TYPE_LONGLONG:
                 case MYSQL_TYPE_YEAR:
-                    kinds_.push_back((fields[i].flags & UNSIGNED_FLAG) ? CellKind::UInt64 : CellKind::Int64);
+                    kinds_.push_back([&]
+                                     {
+                                         if (fields[i].flags & UNSIGNED_FLAG)
+                                         {
+                                             return CellKind::UInt64;
+                                         }
+
+                                         return CellKind::Int64;
+                                     }());
                     break;
                 case MYSQL_TYPE_FLOAT:
                 case MYSQL_TYPE_DOUBLE:
@@ -275,7 +283,7 @@ auto db::LibMariaDBPreparedStatement::fetchCells() -> std::vector<LibMariaDBResu
             case CellKind::UInt64:
                 buffers[i].resize(sizeof(int64));
                 outBinds[i].buffer_type = MYSQL_TYPE_LONGLONG;
-                outBinds[i].is_unsigned = (kinds_[i] == CellKind::UInt64) ? 1 : 0;
+                outBinds[i].is_unsigned = kinds_[i] == CellKind::UInt64;
                 break;
             case CellKind::Double:
                 buffers[i].resize(sizeof(double));
@@ -389,7 +397,7 @@ auto db::LibMariaDBPreparedStatement::fetchCells() -> std::vector<LibMariaDBResu
     return cells;
 }
 
-auto db::LibMariaDBPreparedStatement::executeQuery(const std::string& query) -> std::unique_ptr<ResultSet>
+auto db::LibMariaDBPreparedStatement::executeQuery(std::string_view query) -> std::unique_ptr<ResultSet>
 {
     try
     {
@@ -413,7 +421,7 @@ auto db::LibMariaDBPreparedStatement::executeQuery(const std::string& query) -> 
     }
 }
 
-auto db::LibMariaDBPreparedStatement::executeBulkUpdate(const std::string& query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
+auto db::LibMariaDBPreparedStatement::executeBulkUpdate(std::string_view query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
 {
     TracyZoneScoped;
 
@@ -501,7 +509,7 @@ auto db::LibMariaDBPreparedStatement::executeBulkUpdate(const std::string& query
     return std::make_unique<LibMariaDBResultSet>(static_cast<std::size_t>(mysql_stmt_affected_rows(stmt_)), query);
 }
 
-auto db::LibMariaDBPreparedStatement::executeUpdate(const std::string& query) -> std::unique_ptr<ResultSet>
+auto db::LibMariaDBPreparedStatement::executeUpdate(std::string_view query) -> std::unique_ptr<ResultSet>
 {
     try
     {

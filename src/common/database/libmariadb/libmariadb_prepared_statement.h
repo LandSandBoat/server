@@ -64,9 +64,9 @@ public:
     LibMariaDBPreparedStatement& operator=(const LibMariaDBPreparedStatement&) = delete;
 
     auto bind(int index, const BoundValue& value) -> void override;
-    auto executeQuery(const std::string& query) -> std::unique_ptr<ResultSet> override;
-    auto executeUpdate(const std::string& query) -> std::unique_ptr<ResultSet> override;
-    auto executeBulkUpdate(const std::string& query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> override;
+    auto executeQuery(std::string_view query) -> std::unique_ptr<ResultSet> override;
+    auto executeUpdate(std::string_view query) -> std::unique_ptr<ResultSet> override;
+    auto executeBulkUpdate(std::string_view query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> override;
 
 private:
     enum class CellKind
