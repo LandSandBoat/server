@@ -35,6 +35,7 @@ zones[xi.zone.ORDELLES_CAVES] =
         GERWITZS_AXE_DIALOG           = 7438,  -- Mine axe shall rend thy throat!
         GERWITZS_SWORD_DIALOG         = 7439,  -- Mine sword shall pierce thy tongue!
         GERWITZS_SOUL_DIALOG          = 7440,  -- Long have I waited. I will tell all...
+        OINTMENT_DRAWS_CREATURE       = 7456,  -- The ointment's odor draws out a creature!
         PLAYER_OBTAINS_ITEM           = 8401,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM         = 8402,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM      = 8403,  -- <name> obtains the temporary item: <item>!

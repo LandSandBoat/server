@@ -48,6 +48,7 @@ return {
     ['Library_book1']    = { event = 367 },
     ['Library_book2']    = { event = 368 },
     ['Library_book3']    = { event = 369 },
+    ['Lumomo']           = { event = 819 },
     ['Majiji']           = { event = 435 },
     ['Mashishi']         = { event = 513 },
     ['Mashuu-Ajuu']      = { event = 429 },

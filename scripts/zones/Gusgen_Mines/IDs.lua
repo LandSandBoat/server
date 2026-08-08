@@ -36,6 +36,7 @@ zones[xi.zone.GUSGEN_MINES] =
         IS_ON_THIS_SEAL               = 7408,  -- <item> is on this seal.
         SMALL_OPENING                 = 7409,  -- There is a small opening here.
         YOU_CANNOT_EVEN_DIG           = 7410,  -- You cannot even dig it open with <item>.
+        OINTMENT_DRAWS_MONSTERS       = 7426,  -- The ointment's odor draws out the monsters!
         PLAYER_OBTAINS_ITEM           = 8321,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM         = 8322,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM      = 8323,  -- <name> obtains the temporary item: <item>!
