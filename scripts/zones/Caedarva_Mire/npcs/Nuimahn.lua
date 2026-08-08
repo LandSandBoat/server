@@ -26,6 +26,9 @@ entity.onTrigger = function(player, npc)
         if player:hasKeyItem(xi.ki.CAPTAIN_WILDCAT_BADGE) then -- entering
             player:messageSpecial(ID.text.YOU_HAVE_A_BADGE, xi.ki.CAPTAIN_WILDCAT_BADGE)
             player:startEvent(203)
+        elseif player:hasKeyItem(xi.ki.REMNANTS_PERMIT) then
+            player:messageSpecial(ID.text.YOU_HAVE_A_BADGE, xi.ki.REMNANTS_PERMIT)
+            player:startEvent(203)
         else
             player:startEvent(202)
         end
