@@ -18,17 +18,7 @@ local attributesDown =
 }
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    local skillList = mob:getMobMod(xi.mobMod.SKILL_LIST)
-    local mobhp = mob:getHPP()
-
-    if
-        (skillList == 54 and mobhp < 25) or
-        (skillList == 727 and mob:getAnimationSub() == 1)
-    then
-        return 0
-    else
-        return 1
-    end
+    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)

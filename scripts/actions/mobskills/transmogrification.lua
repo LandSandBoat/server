@@ -17,7 +17,7 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.PHYSICAL_SHIELD, 2, 0, 30))
 
-    return 0
+    return xi.effect.PHYSICAL_SHIELD
 end
 
 return mobskillObject

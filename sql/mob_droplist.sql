@@ -12878,10 +12878,12 @@ INSERT INTO `mob_droplist` VALUES (1584,0,0,1000,637,@VCOMMON);   -- Vial Of Sli
 
 -- ZoneID:  31 - Mammet-19 Epsilon
 -- ZoneID:  32 - Mammet-22 Zeta
-INSERT INTO `mob_droplist` VALUES (1585,0,0,1000,5264,@RARE); -- Bottle Of Yellow Liquid (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (1585,0,0,1000,5264,@VCOMMON); -- Bottle Of Yellow Liquid (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (1585,0,0,1000,5264,@COMMON);  -- Bottle Of Yellow Liquid (Common, 15%)
 
 -- ZoneID:  31 - Mammet-800
-INSERT INTO `mob_droplist` VALUES (1586,0,0,1000,5264,@ALWAYS); -- Bottle Of Yellow Liquid (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (1586,0,0,1000,5264,@ALWAYS);  -- Bottle Of Yellow Liquid (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (1586,0,0,1000,5264,@VCOMMON); -- Bottle Of Yellow Liquid (Very Common, 24%)
 
 -- ZoneID:  52 - Mamool Ja Blusterer
 -- ZoneID:  52 - Mamool Ja Philosopher
