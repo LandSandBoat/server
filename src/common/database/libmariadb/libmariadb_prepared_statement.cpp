@@ -115,7 +115,11 @@ auto db::LibMariaDBPreparedStatement::bind(int index, const BoundValue& value) -
         [&](const auto& v)
         {
             using U = std::remove_cvref_t<decltype(v)>;
-            if constexpr (std::is_same_v<U, std::shared_ptr<BlobWrapper>>)
+            if constexpr (std::is_same_v<U, std::monostate>)
+            {
+                b.buffer_type = MYSQL_TYPE_NULL;
+            }
+            else if constexpr (std::is_same_v<U, std::shared_ptr<BlobWrapper>>)
             {
                 auto& buffer = paramBuffers_.emplace_back(v->data.get(), v->data.get() + v->size);
                 // Guarantee a non-null data() pointer: libmariadb binds a null buffer as SQL NULL,
@@ -156,6 +160,10 @@ auto db::LibMariaDBPreparedStatement::bind(int index, const BoundValue& value) -
                 else if constexpr (std::is_same_v<U, int32> || std::is_same_v<U, uint32>)
                 {
                     b.buffer_type = MYSQL_TYPE_LONG;
+                }
+                else if constexpr (std::is_same_v<U, int64> || std::is_same_v<U, uint64>)
+                {
+                    b.buffer_type = MYSQL_TYPE_LONGLONG;
                 }
                 else if constexpr (std::is_same_v<U, float>)
                 {
