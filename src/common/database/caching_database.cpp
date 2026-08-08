@@ -32,6 +32,7 @@
 #include <common/types/fn.h>
 #include <common/types/hash_map.h>
 
+#include <atomic>
 #include <chrono>
 #include <thread>
 using namespace std::chrono_literals;
@@ -40,8 +41,11 @@ namespace
 {
 
 // Per-(thread, backend instance) connection state. thread_local keeps each worker thread on its own
-// connection; keying by the backend pointer lets multiple backends coexist in one process.
-thread_local HashMap<const db::CachingDatabase*, db::detail::ConnectionState> tlsStates;
+// connection; keying by the backend's serial id lets multiple backends coexist in one process.
+thread_local HashMap<uint64, db::detail::ConnectionState> tlsStates;
+
+// Handed out one per backend, and never reused.
+std::atomic<uint64> nextBackendId{ 1 };
 
 bool timersEnabled = false;
 
@@ -71,11 +75,16 @@ auto makeQueryTimer(const std::string& query) -> xi::final_action<Fn<void()>>
 
 } // namespace
 
+db::CachingDatabase::CachingDatabase()
+: id_(nextBackendId++)
+{
+}
+
 auto db::CachingDatabase::getState() -> detail::ConnectionState&
 {
     TracyZoneScoped;
 
-    auto& state = tlsStates[this];
+    auto& state = tlsStates[id_];
     if (state.connection == nullptr)
     {
         state.connection = createConnection();

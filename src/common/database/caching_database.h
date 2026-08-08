@@ -66,6 +66,8 @@ struct ConnectionState
 class CachingDatabase : public Database
 {
 public:
+    CachingDatabase();
+
     auto execute(const std::string& query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> override;
     auto executeBulk(const std::string& query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> override;
 
@@ -79,6 +81,10 @@ protected:
     virtual auto createConnection() -> std::unique_ptr<Connection> = 0;
 
 private:
+    // Identifies this backend in the per-thread state map. A serial number rather than `this`, so
+    // that a later backend allocated at a dead one's address cannot inherit its connection.
+    const uint64 id_;
+
     // The calling thread's connection state for this backend, connecting lazily on first use.
     auto getState() -> detail::ConnectionState&;
 
