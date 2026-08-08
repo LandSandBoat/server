@@ -103,6 +103,10 @@ auto preparedStmt(Scheduler& scheduler, const std::string& rawQuery, Args&&... a
 template <typename T, typename ProjectFn>
 void executeBulk(const std::string& query, const std::vector<T>& rows, ProjectFn project);
 
+// Build a "?, ?, ?" list with count placeholders, for IN (...) clauses whose values are bound
+// from a std::vector parameter: preparedStmt binds one parameter per vector element.
+[[nodiscard]] auto placeholders(std::size_t count) -> std::string;
+
 auto getDatabaseSchema() -> std::string;
 
 auto getDatabaseVersion() -> std::string;

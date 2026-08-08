@@ -32,6 +32,25 @@
 #include <thread>
 using namespace std::chrono_literals;
 
+auto db::placeholders(std::size_t count) -> std::string
+{
+    if (count == 0)
+    {
+        return {};
+    }
+
+    std::string result;
+    result.reserve(count * 3 - 2);
+
+    result += '?';
+    for (std::size_t i = 1; i < count; ++i)
+    {
+        result += ", ?";
+    }
+
+    return result;
+}
+
 auto db::getDatabaseSchema() -> std::string
 {
     TracyZoneScoped;

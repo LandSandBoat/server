@@ -75,6 +75,15 @@ auto lowerBoundValue(std::vector<BoundValue>& params, T&& value) -> void
             params.emplace_back(std::in_place_type<std::monostate>);
         }
     }
+    else if constexpr (is_std_vector_v<U>)
+    {
+        // A vector binds one parameter per element, in order, for IN (...) lists built with
+        // db::placeholders(). The query must carry a matching number of '?' holes.
+        for (const auto& element : value)
+        {
+            lowerBoundValue(params, element);
+        }
+    }
     else if constexpr (std::is_same_v<U, int32>)
     {
         params.emplace_back(std::in_place_type<int32>, static_cast<int32>(value));

@@ -24,6 +24,7 @@
 #include <array>
 #include <optional>
 #include <type_traits>
+#include <vector>
 
 namespace db::detail
 {
@@ -61,6 +62,19 @@ struct is_optional<std::optional<T>> : std::true_type
 
 template <typename T>
 inline constexpr bool is_optional_v = is_optional<T>::value;
+
+template <typename T>
+struct is_std_vector : std::false_type
+{
+};
+
+template <typename T, typename Alloc>
+struct is_std_vector<std::vector<T, Alloc>> : std::true_type
+{
+};
+
+template <typename T>
+inline constexpr bool is_std_vector_v = is_std_vector<T>::value;
 
 template <typename T>
 struct is_standard_trivial : std::bool_constant<std::is_standard_layout_v<T> && std::is_trivial_v<T>>

@@ -1012,29 +1012,31 @@ void LoadSpells(CCharEntity* PChar)
     {
         if (luautils::IsContentEnabled(expansion))
         {
-            enabledExpansions.push_back(fmt::format("\"{}\"", expansion));
+            enabledExpansions.emplace_back(expansion);
         }
     }
 
-    std::string condition = "spell_list.content_tag IS NULL";
-
-    if (!enabledExpansions.empty())
+    // The expansion tags travel as bound parameters; only the placeholder count is formatted
+    // into the query text.
+    const auto condition = [&]
     {
-        condition = fmt::format("spell_list.content_tag IN ({}) OR spell_list.content_tag IS NULL", fmt::join(enabledExpansions, ","));
-    }
+        if (enabledExpansions.empty())
+        {
+            return std::string("spell_list.content_tag IS NULL");
+        }
+
+        return fmt::format("spell_list.content_tag IN ({}) OR spell_list.content_tag IS NULL", db::placeholders(enabledExpansions.size()));
+    }();
 
     // Select all player spells from enabled expansions
-    //
-    // NOTE: We normally don't want to build a prepared statement with fmt::format,
-    //     : but this query is entirely internal, so it's OK.
-    auto query = fmt::format("SELECT char_spells.spellid "
-                             "FROM char_spells "
-                             "JOIN spell_list "
-                             "ON spell_list.spellid = char_spells.spellid "
-                             "WHERE charid = ? AND ({})",
-                             condition);
+    const auto query = fmt::format("SELECT char_spells.spellid "
+                                   "FROM char_spells "
+                                   "JOIN spell_list "
+                                   "ON spell_list.spellid = char_spells.spellid "
+                                   "WHERE charid = ? AND ({})",
+                                   condition);
 
-    auto rset = db::preparedStmt(query, PChar->id);
+    auto rset = db::preparedStmt(query, PChar->id, enabledExpansions);
     if (rset && rset->rowsCount())
     {
         while (rset->next())
