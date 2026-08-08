@@ -59,30 +59,28 @@ auto db::checkCharset() -> void
 
     // Check that the SQL charset is what we require
     const auto rset = preparedStmt("SELECT @@character_set_database, @@collation_database");
-    if (rset && rset->rowsCount())
+
+    bool foundError = false;
+    for (const auto& row : db::rows(rset))
     {
-        bool foundError = false;
-        while (rset->next())
+        const auto charsetSetting   = row.get<std::string>(0);
+        const auto collationSetting = row.get<std::string>(1);
+        if (!starts_with(charsetSetting, "utf8") || !starts_with(collationSetting, "utf8"))
         {
-            const auto charsetSetting   = rset->get<std::string>(0);
-            const auto collationSetting = rset->get<std::string>(1);
-            if (!starts_with(charsetSetting, "utf8") || !starts_with(collationSetting, "utf8"))
-            {
-                foundError = true;
+            foundError = true;
 
-                ShowWarning(
-                    fmt::format("Unexpected character_set or collation setting in database: {}: {}. Expected utf8*.",
-                                charsetSetting,
-                                collationSetting)
-                        .c_str());
-            }
+            ShowWarning(
+                fmt::format("Unexpected character_set or collation setting in database: {}: {}. Expected utf8*.",
+                            charsetSetting,
+                            collationSetting)
+                    .c_str());
         }
+    }
 
-        if (foundError)
-        {
-            ShowWarning("Non utf8 charset can result in data reads and writes being corrupted!");
-            ShowWarning("Non utf8 collation can be indicative that the database was not set up per required specifications.");
-        }
+    if (foundError)
+    {
+        ShowWarning("Non utf8 charset can result in data reads and writes being corrupted!");
+        ShowWarning("Non utf8 collation can be indicative that the database was not set up per required specifications.");
     }
 }
 
@@ -207,16 +205,12 @@ auto db::getTableColumnNames(const std::string& tableName) -> std::vector<std::s
     TracyZoneScoped;
 
     const auto rset = db::preparedStmt("SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_NAME = ? AND TABLE_SCHEMA = ?", tableName, db::getDatabaseSchema());
-    if (rset && rset->rowsCount())
-    {
-        std::vector<std::string> columnNames;
-        while (rset->next())
-        {
-            columnNames.emplace_back(rset->get<std::string>(0));
-        }
 
-        return columnNames;
+    std::vector<std::string> columnNames;
+    for (const auto& row : db::rows(rset))
+    {
+        columnNames.emplace_back(row.get<std::string>(0));
     }
 
-    return {};
+    return columnNames;
 }

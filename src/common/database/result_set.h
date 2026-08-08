@@ -28,9 +28,11 @@
 #include <common/database/traits.h>
 
 #include <algorithm>
+#include <cstddef>
 #include <cstring>
 #include <exception>
 #include <iterator>
+#include <memory>
 #include <optional>
 #include <string>
 #include <string_view>
@@ -119,6 +121,14 @@ public:
     template <typename T>
     auto getOrDefault(uint32 index, T defaultValue) const -> T;
 
+    // Get the value of the associated key, or std::nullopt if the column is absent or NULL.
+    template <typename T>
+    auto tryGet(std::string_view key) const -> std::optional<T>;
+
+    // Get the value of the 0-indexed column, or std::nullopt if the column is absent or NULL.
+    template <typename T>
+    auto tryGet(uint32 index) const -> std::optional<T>;
+
 protected:
     // The raw accessors are 0-indexed. Names resolve to indices exactly once, in the public
     // key-based methods, so per-cell access does no string hashing.
@@ -151,6 +161,93 @@ private:
     template <typename T>
     auto getAtIndex(std::size_t index) const -> T;
 };
+
+// Single-pass input iterator over a result set's rows. Each dereference yields the result set
+// itself, positioned at the current row; read cells with row.get<T>(...).
+class RowIterator
+{
+public:
+    using iterator_concept = std::input_iterator_tag;
+    using value_type       = ResultSet;
+    using difference_type  = std::ptrdiff_t;
+
+    RowIterator() = default;
+
+    explicit RowIterator(ResultSet* resultSet)
+    : resultSet_(resultSet)
+    {
+        advance();
+    }
+
+    auto operator*() const -> const ResultSet&
+    {
+        return *resultSet_;
+    }
+
+    auto operator++() -> RowIterator&
+    {
+        advance();
+        return *this;
+    }
+
+    auto operator++(int) -> void
+    {
+        advance();
+    }
+
+    auto operator==(std::default_sentinel_t) const -> bool
+    {
+        return resultSet_ == nullptr;
+    }
+
+private:
+    auto advance() -> void
+    {
+        if (resultSet_ != nullptr && !resultSet_->next())
+        {
+            resultSet_ = nullptr;
+        }
+    }
+
+    ResultSet* resultSet_ = nullptr;
+};
+
+class RowRange
+{
+public:
+    explicit RowRange(ResultSet* resultSet)
+    : resultSet_(resultSet)
+    {
+    }
+
+    auto begin() const -> RowIterator
+    {
+        return RowIterator(resultSet_);
+    }
+
+    auto end() const -> std::default_sentinel_t
+    {
+        return {};
+    }
+
+private:
+    ResultSet* resultSet_ = nullptr;
+};
+
+// Iterate the rows of a query result: `for (const auto& row : db::rows(rset))`.
+//
+// A null result set (failed query) or a non-SELECT result yields an empty range, so this replaces
+// the null-check-and-while boilerplate around preparedStmt() results. Iteration is single-pass:
+// it advances the result set's cursor.
+inline auto rows(const std::unique_ptr<ResultSet>& rset) -> RowRange
+{
+    if (rset == nullptr || rset->type() != ResultSetType::Select)
+    {
+        return RowRange(nullptr);
+    }
+
+    return RowRange(rset.get());
+}
 
 //
 // Out-of-line template definitions
@@ -341,6 +438,43 @@ auto ResultSet::getOrDefault(const uint32 index, T defaultValue) const -> T
     if (rawIsNull(index))
     {
         return defaultValue;
+    }
+
+    return getAtIndex<T>(index);
+}
+
+template <typename T>
+auto ResultSet::tryGet(std::string_view key) const -> std::optional<T>
+{
+    if (type_ != ResultSetType::Select)
+    {
+        ShowErrorFmt("ResultSet::tryGet: Invalid type {}", static_cast<int>(type_));
+        ShowErrorFmt("Query: {}", query_);
+        return std::nullopt;
+    }
+
+    const auto index = rawColumnIndex(key);
+    if (!index.has_value() || rawIsNull(*index))
+    {
+        return std::nullopt;
+    }
+
+    return getAtIndex<T>(*index);
+}
+
+template <typename T>
+auto ResultSet::tryGet(const uint32 index) const -> std::optional<T>
+{
+    if (type_ != ResultSetType::Select)
+    {
+        ShowErrorFmt("ResultSet::tryGet: Invalid type {}", static_cast<int>(type_));
+        ShowErrorFmt("Query: {}", query_);
+        return std::nullopt;
+    }
+
+    if (index >= rawColumnCount() || rawIsNull(index))
+    {
+        return std::nullopt;
     }
 
     return getAtIndex<T>(index);
