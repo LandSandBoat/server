@@ -101,10 +101,10 @@ auto db::ResultSet::columnName(uint32 index) const -> std::string
         return {};
     }
 
-    return rawColumnLabel(index + 1);
+    return rawColumnLabel(index);
 }
 
-auto db::ResultSet::isNull(const std::string& key) const -> bool
+auto db::ResultSet::isNull(std::string_view key) const -> bool
 {
     if (type_ != ResultSetType::Select)
     {
@@ -113,10 +113,17 @@ auto db::ResultSet::isNull(const std::string& key) const -> bool
         return false;
     }
 
-    return rawIsNull(key);
+    const auto index = rawColumnIndex(key);
+    if (!index.has_value())
+    {
+        // An absent column reads the same as a NULL one; get()/getOrDefault() report it.
+        return true;
+    }
+
+    return rawIsNull(*index);
 }
 
-auto db::ResultSet::getBlobBytes(const std::string& key) const -> std::string
+auto db::ResultSet::getBlobBytes(std::string_view key) const -> std::string
 {
     if (type_ != ResultSetType::Select)
     {
@@ -125,5 +132,11 @@ auto db::ResultSet::getBlobBytes(const std::string& key) const -> std::string
         return {};
     }
 
-    return rawGetBlobBytes(key);
+    const auto index = rawColumnIndex(key);
+    if (!index.has_value())
+    {
+        return {};
+    }
+
+    return rawGetBlobBytes(*index);
 }
