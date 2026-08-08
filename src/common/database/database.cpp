@@ -28,76 +28,9 @@
 
 #include <common/types/fn.h>
 
-#include <common/types/hash_map.h>
-
 #include <chrono>
 #include <thread>
 using namespace std::chrono_literals;
-
-auto db::escapeString(std::string_view str) -> std::string
-{
-    static const HashMap<char, std::string> replacements = {
-        // Replacement map similar to str_replace in PHP
-        { '\\', "\\\\" },
-        { '\0', "\\0" },
-        { '\n', "\\n" },
-        { '\r', "\\r" },
-        { '\'', "\\'" },
-        { '\"', "\\\"" },
-        { '\x1a', "\\Z" },
-
-        // Extras
-        { '\b', "\\b" },
-        { '%', "\\%" },
-        { '|', "\\|" },
-        { ';', "\\;" },
-    };
-
-    std::string escapedStr;
-
-    for (size_t i = 0; i < str.size(); ++i)
-    {
-        const char c = str[i];
-
-        // Emulate original strlen-based SqlConnection::EscapeString
-        if (c == '\0')
-        {
-            break;
-        }
-
-        const auto it = replacements.find(c);
-        if (it != replacements.end())
-        {
-            escapedStr += it->second;
-        }
-        else
-        {
-            escapedStr += c;
-        }
-    }
-
-    return escapedStr;
-}
-
-auto db::escapeString(const std::string& str) -> std::string
-{
-    if (str.empty())
-    {
-        return {};
-    }
-
-    return db::escapeString(std::string_view(str));
-}
-
-auto db::escapeString(const char* str) -> std::string
-{
-    if (str == nullptr)
-    {
-        return {};
-    }
-
-    return db::escapeString(std::string_view(str));
-}
 
 auto db::getDatabaseSchema() -> std::string
 {

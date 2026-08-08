@@ -37,9 +37,9 @@ auto GP_CLI_COMMAND_ASSIST_CHANNEL::validate(MapSession* PSession, const CCharEn
 
 void GP_CLI_COMMAND_ASSIST_CHANNEL::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    const auto safeName = db::escapeString(asStringFromUntrustedSource(this->sName, sizeof(this->sName)));
+    const auto victimName = asStringFromUntrustedSource(this->sName, sizeof(this->sName));
 
-    const auto victimId = charutils::getCharIdFromName(safeName);
+    const auto victimId = charutils::getCharIdFromName(victimName);
     if (!victimId)
     {
         PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::AnErrorHasOccured);

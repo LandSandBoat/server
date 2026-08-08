@@ -103,10 +103,6 @@ auto preparedStmt(Scheduler& scheduler, const std::string& rawQuery, Args&&... a
 template <typename T, typename ProjectFn>
 void executeBulk(const std::string& query, const std::vector<T>& rows, ProjectFn project);
 
-auto escapeString(std::string_view str) -> std::string;
-auto escapeString(const std::string& str) -> std::string;
-auto escapeString(const char* str) -> std::string;
-
 auto getDatabaseSchema() -> std::string;
 
 auto getDatabaseVersion() -> std::string;
