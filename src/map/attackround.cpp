@@ -443,7 +443,6 @@ void CAttackRound::ProcFollowUpAttacks()
                                 if (PAmmo->getQuantity() == 1)
                                 {
                                     charutils::UnequipItem(PChar, SLOT_AMMO);
-                                    PChar->RequestPersist(CHAR_PERSIST::EQUIP);
                                 }
 
                                 charutils::UpdateItem(PChar, loc, slot, -1);

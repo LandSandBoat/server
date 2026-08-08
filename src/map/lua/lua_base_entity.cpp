@@ -5420,7 +5420,6 @@ void CLuaBaseEntity::equipItem(const uint16 itemID, const sol::object& container
         if (const auto* PItem = dynamic_cast<CItemEquipment*>(PChar->getStorage(containerID)->GetItem(slotId)))
         {
             charutils::EquipItem(PChar, slotId, equipSlot.is<uint8>() ? equipSlot.as<uint8>() : PItem->getSlotType(), containerID);
-            PChar->RequestPersist(CHAR_PERSIST::EQUIP);
         }
     }
 }

@@ -74,6 +74,8 @@ void GP_CLI_COMMAND_POS::process(MapSession* PSession, CCharEntity* PChar) const
     {
         PChar->updatemask |= UPDATE_POS; // Indicate that we want to update this PChar's PChar->loc or targID
 
+        PChar->setPersist(CharPersist::Position);
+
         if (PChar->loc.zone != nullptr)
         {
             PChar->loc.zone->onEntityMoved(PChar);

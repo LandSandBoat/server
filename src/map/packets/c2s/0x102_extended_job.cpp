@@ -22,6 +22,7 @@
 #include "0x102_extended_job.h"
 
 #include "blue_spell.h"
+#include "entities/automaton_entity.h"
 #include "entities/char_entity.h"
 #include "packets/s2c/0x061_clistatus.h"
 #include "packets/s2c/0x0ac_command_data.h"

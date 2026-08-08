@@ -61,7 +61,7 @@ void GP_CLI_COMMAND_LOCKSTYLE::process(MapSession* PSession, CCharEntity* PChar)
             if (PChar->getStyleLocked())
             {
                 charutils::SetStyleLock(PChar, false);
-                PChar->RequestPersist(CHAR_PERSIST::EQUIP);
+                PChar->setPersist(CharPersist::Look);
                 updateClientAppearance(PChar);
             }
         }
@@ -194,7 +194,7 @@ void GP_CLI_COMMAND_LOCKSTYLE::process(MapSession* PSession, CCharEntity* PChar)
                 PChar->pushPacket<GP_SERV_COMMAND_LOCKSTYLE_ERROR>(failedItemIds);
             }
 
-            PChar->RequestPersist(CHAR_PERSIST::EQUIP);
+            PChar->setPersist(CharPersist::Look);
             updateClientAppearance(PChar);
         }
         break;
@@ -202,7 +202,7 @@ void GP_CLI_COMMAND_LOCKSTYLE::process(MapSession* PSession, CCharEntity* PChar)
         {
             charutils::SetStyleLock(PChar, true);
             charutils::UpdateRemovedSlotsLookForLockStyle(PChar);
-            PChar->RequestPersist(CHAR_PERSIST::EQUIP);
+            PChar->setPersist(CharPersist::Look);
             updateClientAppearance(PChar);
         }
         break;

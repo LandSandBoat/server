@@ -21,6 +21,9 @@
 
 #include <common/database/libmariadb/libmariadb_prepared_statement.h>
 
+#include <common/types/fn.h>
+#include <common/xi.h>
+
 #include <cstring>
 #include <memory>
 #include <string>
@@ -35,6 +38,32 @@ namespace
 // Initial per-column fetch buffer for text columns. Larger values (blobs, long strings) are pulled
 // in full with a follow-up mysql_stmt_fetch_column once the real length is known.
 constexpr unsigned long kInitialColumnBuffer = 256;
+
+// Signedness comes from the storage type, so only the width matters here.
+template <typename T>
+constexpr auto fieldTypeFor() -> enum_field_types
+{
+    if constexpr (std::is_same_v<T, float>)
+    {
+        return MYSQL_TYPE_FLOAT;
+    }
+    else if constexpr (std::is_same_v<T, double>)
+    {
+        return MYSQL_TYPE_DOUBLE;
+    }
+    else if constexpr (sizeof(T) == 1)
+    {
+        return MYSQL_TYPE_TINY;
+    }
+    else if constexpr (sizeof(T) == 2)
+    {
+        return MYSQL_TYPE_SHORT;
+    }
+    else
+    {
+        return MYSQL_TYPE_LONG;
+    }
+}
 
 } // namespace
 
@@ -375,6 +404,94 @@ auto db::LibMariaDBPreparedStatement::executeQuery(const std::string& query) -> 
         resetBindings();
         throw;
     }
+}
+
+auto db::LibMariaDBPreparedStatement::executeBulkUpdate(const std::string& query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
+{
+    TracyZoneScoped;
+
+    const auto columnCount = static_cast<std::size_t>(mysql_stmt_param_count(stmt_));
+    if (params.empty() || columnCount == 0)
+    {
+        return std::make_unique<LibMariaDBResultSet>(std::size_t{ 0 }, query);
+    }
+
+    if (params.size() % columnCount != 0)
+    {
+        throw std::runtime_error(fmt::format("bulk binding got {} values for a {}-placeholder statement", params.size(), columnCount));
+    }
+
+    const auto rowCount = params.size() / columnCount;
+
+    // MariaDB wants one contiguous typed array per column, so transpose the row-major parameters.
+    // The first row fixes each column's type and every later row has to match it.
+    std::vector<std::vector<char>> storage(columnCount);
+    std::vector<MYSQL_BIND>        binds(columnCount);
+
+    for (std::size_t column = 0; column < columnCount; ++column)
+    {
+        std::visit(
+            [&]<typename U>(const U&)
+            {
+                if constexpr (std::is_arithmetic_v<U>)
+                {
+                    // vector<bool> has no usable data(), so booleans travel as TINY.
+                    using Cell = std::conditional_t<std::is_same_v<U, bool>, uint8, U>;
+
+                    storage[column].resize(sizeof(Cell) * rowCount);
+
+                    auto* cells = reinterpret_cast<Cell*>(storage[column].data());
+                    for (std::size_t row = 0; row < rowCount; ++row)
+                    {
+                        const auto* cell = std::get_if<U>(&params[row * columnCount + column]);
+                        if (cell == nullptr)
+                        {
+                            throw std::runtime_error(fmt::format("bulk binding needs one type per column, row {} differs at column {}", row, column));
+                        }
+
+                        cells[row] = static_cast<Cell>(*cell);
+                    }
+
+                    binds[column].buffer      = cells;
+                    binds[column].buffer_type = fieldTypeFor<Cell>();
+                    binds[column].is_unsigned = std::is_unsigned_v<Cell>;
+                }
+                else
+                {
+                    // Strings and blobs would need a stride buffer and a length array; nothing bulk-writes them.
+                    throw std::runtime_error("bulk binding supports numeric columns only");
+                }
+            },
+            params[column]);
+    }
+
+    // The statement is cached and reused, so the array size must never outlive this call.
+    // A stale one would make the next single-row execute read past its parameters.
+    const auto restoreArraySize = xi::finally<Fn<void()>>(
+        [this]()
+        {
+            constexpr unsigned int one = 1;
+            mysql_stmt_attr_set(stmt_, STMT_ATTR_ARRAY_SIZE, &one);
+            resetBindings();
+        });
+
+    const auto arraySize = static_cast<unsigned int>(rowCount);
+    if (mysql_stmt_attr_set(stmt_, STMT_ATTR_ARRAY_SIZE, &arraySize) != 0)
+    {
+        throw detail::libmariadb::Error(mysql_stmt_errno(stmt_), mysql_stmt_error(stmt_));
+    }
+
+    if (mysql_stmt_bind_param(stmt_, binds.data()) != 0)
+    {
+        throw detail::libmariadb::Error(mysql_stmt_errno(stmt_), mysql_stmt_error(stmt_));
+    }
+
+    if (mysql_stmt_execute(stmt_) != 0)
+    {
+        throw detail::libmariadb::Error(mysql_stmt_errno(stmt_), mysql_stmt_error(stmt_));
+    }
+
+    return std::make_unique<LibMariaDBResultSet>(static_cast<std::size_t>(mysql_stmt_affected_rows(stmt_)), query);
 }
 
 auto db::LibMariaDBPreparedStatement::executeUpdate(const std::string& query) -> std::unique_ptr<ResultSet>

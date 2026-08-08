@@ -64,7 +64,9 @@
 #include "packets/s2c/0x05a_motionmes.h"
 #include "packets/s2c/0x0f9_res.h"
 
+#include "persist_batch.h"
 #include "utils/battleutils.h"
+
 #include "utils/charutils.h"
 #include "utils/instanceutils.h"
 #include "utils/itemutils.h"
@@ -4789,8 +4791,7 @@ void Terminate()
             PZone->ForEachChar(
                 [](CCharEntity* PChar)
                 {
-                    PChar->PersistData();
-                    charutils::SaveCharPosition(PChar);
+                    persist::flush(PChar, IsLogout::Yes);
                     charutils::SaveCharStats(PChar);
                     charutils::SaveCharExp(PChar, PChar->GetMJob());
                 });

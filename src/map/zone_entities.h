@@ -166,9 +166,6 @@ private:
     timer::time_point m_computeTime{ timer::now() };
     uint16            m_lastCharComputeTargId{ 0 };
 
-    timer::time_point m_charPersistTime{ timer::now() };
-    uint16            m_lastCharPersistTargId{ 0 };
-
     //
     // Intermediate collections for use inside ZoneServer
     //

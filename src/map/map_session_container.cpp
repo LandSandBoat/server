@@ -22,6 +22,7 @@
 #include "map_session_container.h"
 
 #include "map_session.h"
+#include "persist_batch.h"
 #include "status_effect_container.h"
 
 #include "entities/char_entity.h"
@@ -248,7 +249,8 @@ void MapSessionContainer::cleanupSessions(IPP mapIPP)
                     // Player session is attached to this map process and has stopped responding.
                     if (!otherMap)
                     {
-                        map_session_data->PChar->StatusEffectContainer->SaveStatusEffects(true);
+                        persist::flush(PChar, IsLogout::Yes);
+
                         db::preparedStmt("DELETE FROM accounts_sessions WHERE charid = ?", map_session_data->charID);
 
                         // Save position if d/c or logout/shutdown

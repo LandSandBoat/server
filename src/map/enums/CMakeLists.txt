@@ -8,6 +8,7 @@ set(ENUMS_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/action/react_kind.h
     ${CMAKE_CURRENT_SOURCE_DIR}/action/resolution.h
     ${CMAKE_CURRENT_SOURCE_DIR}/automaton.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/char_persist.h
     ${CMAKE_CURRENT_SOURCE_DIR}/chat_message_area.h
     ${CMAKE_CURRENT_SOURCE_DIR}/chat_message_type.h
     ${CMAKE_CURRENT_SOURCE_DIR}/emote.h
