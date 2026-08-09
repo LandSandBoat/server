@@ -37,6 +37,7 @@ When a status effect is gained twice on a player. It can do one or more of the f
 #include <common/database.h>
 #include <common/types/hash_map.h>
 
+#include <algorithm>
 #include <array>
 #include <cstring>
 
@@ -2055,9 +2056,13 @@ void CStatusEffectContainer::TickRegen(timer::time_point tick)
             PChar = (CCharEntity*)m_POwner;
         }
 
-        int16 regen   = m_POwner->getMod(xi::Mod::REGEN);
+        // Regen / Refresh are clamped to 0 so that negative values don't drain HP/MP from the player.
+        // A busted Dancer(Regen) or Evoker(Refresh) carry negative values but do not cause the player to lose HP/MP.
+        // Negative values will only counteract a positive regen or refresh value.
+        // This is an abnormal way of handling this, for intentional degens, use REGEN_DOWN or REFRESH_DOWN instead.
+        int16 regen   = std::max<int16>(m_POwner->getMod(xi::Mod::REGEN), 0);
         int16 poison  = m_POwner->getMod(xi::Mod::REGEN_DOWN);
-        int16 refresh = m_POwner->getMod(xi::Mod::REFRESH) - m_POwner->getMod(xi::Mod::REFRESH_DOWN);
+        int16 refresh = std::max<int16>(m_POwner->getMod(xi::Mod::REFRESH), 0) - m_POwner->getMod(xi::Mod::REFRESH_DOWN);
         int16 regain  = m_POwner->getMod(xi::Mod::REGAIN) - m_POwner->getMod(xi::Mod::REGAIN_DOWN);
         m_POwner->addHP(regen);
 
