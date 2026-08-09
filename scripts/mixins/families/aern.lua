@@ -78,6 +78,8 @@ g_mixins.families.aern = function(aernMob)
 
     -- Prevent BSTs and SMNs from summoning pets while idle
     aernMob:addListener('SPAWN', 'AERN_SPAWN', function(mob)
+        mob:setMagicCastingEnabled(false)
+
         if mob:getMainJob() == xi.job.BST then
             mob:setMobMod(xi.mobMod.SPECIAL_SKILL, 0)
         elseif mob:getMainJob() == xi.job.SMN then
@@ -99,7 +101,6 @@ g_mixins.families.aern = function(aernMob)
 
     -- Despawn pets when Aern is out of combat
     aernMob:addListener('ROAM_TICK', 'AERN_ROAM', function(mob)
-        mob:setMagicCastingEnabled(false) -- Disable casting when idle
         mob:setAnimationSub(1)
 
         local pet = mob:getPet()
@@ -151,6 +152,10 @@ g_mixins.families.aern = function(aernMob)
                 toggleBracelets(mob)
             end
         end
+    end)
+
+    aernMob:addListener('DISENGAGE', 'AERN_DISENGAGE', function(mob)
+        mob:setMagicCastingEnabled(false) -- Disable casting when idle
     end)
 
     aernMob:addListener('DEATH', 'AERN_DEATH', function(mob, killer)
