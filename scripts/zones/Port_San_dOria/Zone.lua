@@ -18,7 +18,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     then
         if prevZone == xi.zone.SAN_DORIA_JEUNO_AIRSHIP then
             player:setPos(-1.000, 0.000, 44.000, 128)
-            return { 702, -1, bit.bor(xi.cutsceneFlag.UNKNOWN_1, xi.cutsceneFlag.NO_PCS) }
+            return { 702, -1, bit.bor(xi.cutsceneFlag.RESET_CAMERA, xi.cutsceneFlag.NO_PCS) }
         end
     end
 
@@ -37,7 +37,7 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
 zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
-    player:startEvent(700, { isHidden = true, flags = xi.cutsceneFlag.UNKNOWN_7 })
+    player:startEvent(700, { isHidden = true, flags = xi.cutsceneFlag.NO_IDLE_WAIT })
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

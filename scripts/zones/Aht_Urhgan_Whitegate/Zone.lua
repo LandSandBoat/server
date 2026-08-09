@@ -28,13 +28,13 @@ zoneObject.onZoneIn = function(player, prevZone)
     then
         if prevZone == xi.zone.OPEN_SEA_ROUTE_TO_AL_ZAHBI then
             player:setPos(-11, 2, -142, 192)
-            return { 201, -1, bit.bor(xi.cutsceneFlag.UNKNOWN_1, xi.cutsceneFlag.NO_PCS) }
+            return { 201, -1, bit.bor(xi.cutsceneFlag.RESET_CAMERA, xi.cutsceneFlag.NO_PCS) }
         elseif
             prevZone == xi.zone.SILVER_SEA_ROUTE_TO_AL_ZAHBI or
             prevZone == xi.zone.SILVER_SEA_ROUTE_TO_NASHMAU
         then
             player:setPos(11, 2, 142, 64)
-            return { 204, -1, bit.bor(xi.cutsceneFlag.UNKNOWN_1, xi.cutsceneFlag.NO_PCS) }
+            return { 204, -1, bit.bor(xi.cutsceneFlag.RESET_CAMERA, xi.cutsceneFlag.NO_PCS) }
         end
     end
 
@@ -75,7 +75,7 @@ zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
         if player:hasKeyItem(xi.ki.FERRY_TICKET) then
             player:startEvent(200, {
                 isHidden = true,
-                flags    = bit.bor(xi.cutsceneFlag.UNKNOWN_1, xi.cutsceneFlag.UNKNOWN_7),
+                flags    = bit.bor(xi.cutsceneFlag.RESET_CAMERA, xi.cutsceneFlag.NO_IDLE_WAIT),
             })
         else
             player:setPos(-11, 2, -142, 192)
@@ -89,7 +89,7 @@ zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
         if player:hasKeyItem(xi.ki.SILVER_SEA_FERRY_TICKET) then
             player:startEvent(203, {
                 isHidden = true,
-                flags    = bit.bor(xi.cutsceneFlag.UNKNOWN_1, xi.cutsceneFlag.UNKNOWN_7),
+                flags    = bit.bor(xi.cutsceneFlag.RESET_CAMERA, xi.cutsceneFlag.NO_IDLE_WAIT),
             })
         else
             player:setPos(11, 2, 142, 64)

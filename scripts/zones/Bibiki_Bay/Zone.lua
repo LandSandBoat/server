@@ -59,12 +59,12 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 12 then
         player:startEvent(10, {
             isHidden = true,
-            flags    = bit.bor(xi.cutsceneFlag.UNKNOWN_1, xi.cutsceneFlag.NO_PCS),
+            flags    = bit.bor(xi.cutsceneFlag.RESET_CAMERA, xi.cutsceneFlag.NO_PCS),
         }) -- arrive at Sunset Docks CS
     elseif csid == 13 then
         player:startEvent(11, {
             isHidden = true,
-            flags    = bit.bor(xi.cutsceneFlag.UNKNOWN_1, xi.cutsceneFlag.NO_PCS),
+            flags    = bit.bor(xi.cutsceneFlag.RESET_CAMERA, xi.cutsceneFlag.NO_PCS),
         }) -- arrive at Purgonorgo Isle CS
     elseif csid == 14 or csid == 16 then
         player:setPos(0, 0, 0, 0, xi.zone.MANACLIPPER)

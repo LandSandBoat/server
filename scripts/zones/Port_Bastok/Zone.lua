@@ -40,7 +40,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     then
         if prevZone == xi.zone.BASTOK_JEUNO_AIRSHIP then
             player:setPos(-36.000, 7.000, -58.000, 194)
-            return { 73, -1, bit.bor(xi.cutsceneFlag.UNKNOWN_1, xi.cutsceneFlag.NO_PCS) }
+            return { 73, -1, bit.bor(xi.cutsceneFlag.RESET_CAMERA, xi.cutsceneFlag.NO_PCS) }
         end
     end
 
@@ -57,10 +57,10 @@ zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
     player:startEvent(71, {
         isHidden = true,
         flags    = bit.bor(
-            xi.cutsceneFlag.UNKNOWN_1,
+            xi.cutsceneFlag.RESET_CAMERA,
             xi.cutsceneFlag.NO_PCS,
-            xi.cutsceneFlag.UNKNOWN_3,
-            xi.cutsceneFlag.UNKNOWN_7
+            xi.cutsceneFlag.SEND_POSITION,
+            xi.cutsceneFlag.NO_IDLE_WAIT
         ),
     })
 end

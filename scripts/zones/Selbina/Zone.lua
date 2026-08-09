@@ -35,7 +35,7 @@ zoneObject.onZoneIn = function(player, prevZone)
             (prevZone == xi.zone.SHIP_BOUND_FOR_SELBINA or
             prevZone == xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES)
         then
-            cs = { 202, -1, bit.bor(xi.cutsceneFlag.UNKNOWN_1, xi.cutsceneFlag.NO_PCS) }
+            cs = { 202, -1, bit.bor(xi.cutsceneFlag.RESET_CAMERA, xi.cutsceneFlag.NO_PCS) }
             player:setPos(32.500, -2.500, -45.500, 192)
         else
             player:setPos(17.981, -16.806, 99.83, 64)
@@ -59,9 +59,9 @@ zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
         player:startEvent(200, {
             isHidden = true,
             flags    = bit.bor(
-                xi.cutsceneFlag.UNKNOWN_1,
+                xi.cutsceneFlag.RESET_CAMERA,
                 xi.cutsceneFlag.NO_PCS,
-                xi.cutsceneFlag.UNKNOWN_7
+                xi.cutsceneFlag.NO_IDLE_WAIT
             ),
         })
     else

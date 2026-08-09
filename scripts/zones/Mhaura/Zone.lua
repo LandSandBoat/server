@@ -45,7 +45,7 @@ zoneObject.onZoneIn = function(player, prevZone)
             prevZone == xi.zone.OPEN_SEA_ROUTE_TO_MHAURA or
             prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES)
         then
-            cs = { 202, -1, bit.bor(xi.cutsceneFlag.UNKNOWN_1, xi.cutsceneFlag.NO_PCS) }
+            cs = { 202, -1, bit.bor(xi.cutsceneFlag.RESET_CAMERA, xi.cutsceneFlag.NO_PCS) }
             player:setPos(14.960, -3.430, 18.423, 192)
         else
             player:setPos(0.003, -6.252, 117.971, 65)
@@ -76,9 +76,9 @@ zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
             player:startEvent(200, {
                 isHidden = true,
                 flags    = bit.bor(
-                    xi.cutsceneFlag.UNKNOWN_1,
+                    xi.cutsceneFlag.RESET_CAMERA,
                     xi.cutsceneFlag.NO_PCS,
-                    xi.cutsceneFlag.UNKNOWN_7
+                    xi.cutsceneFlag.NO_IDLE_WAIT
                 ),
             })
         else
@@ -90,9 +90,9 @@ zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
             player:startEvent(200, {
                 isHidden = true,
                 flags    = bit.bor(
-                    xi.cutsceneFlag.UNKNOWN_1,
+                    xi.cutsceneFlag.RESET_CAMERA,
                     xi.cutsceneFlag.NO_PCS,
-                    xi.cutsceneFlag.UNKNOWN_7
+                    xi.cutsceneFlag.NO_IDLE_WAIT
                 ),
             })
         else
