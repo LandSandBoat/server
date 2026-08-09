@@ -37,6 +37,7 @@
 #include <string>
 #include <string_view>
 #include <type_traits>
+#include <utility>
 
 // @note Bind parameters in database-land are 1-indexed; result-set columns are 0-indexed.
 namespace db
@@ -374,7 +375,7 @@ auto ResultSet::get(std::string_view key) const -> T
 {
     if (type_ != ResultSetType::Select)
     {
-        ShowErrorFmt("ResultSet::get: Invalid type {}", static_cast<int>(type_));
+        ShowErrorFmt("ResultSet::get: Invalid type {}", std::to_underlying(type_));
         ShowErrorFmt("Query: {}", query_);
         return T{};
     }
@@ -398,7 +399,7 @@ auto ResultSet::get(const uint32 index) const -> T
 {
     if (type_ != ResultSetType::Select)
     {
-        ShowErrorFmt("ResultSet::get: Invalid type {}", static_cast<int>(type_));
+        ShowErrorFmt("ResultSet::get: Invalid type {}", std::to_underlying(type_));
         ShowErrorFmt("Query: {}", query_);
         return T{};
     }
@@ -411,7 +412,7 @@ auto ResultSet::getOrDefault(std::string_view key, T defaultValue) const -> T
 {
     if (type_ != ResultSetType::Select)
     {
-        ShowErrorFmt("ResultSet::getOrDefault: Invalid type {}", static_cast<int>(type_));
+        ShowErrorFmt("ResultSet::getOrDefault: Invalid type {}", std::to_underlying(type_));
         ShowErrorFmt("Query: {}", query_);
         return defaultValue;
     }
@@ -430,7 +431,7 @@ auto ResultSet::getOrDefault(const uint32 index, T defaultValue) const -> T
 {
     if (type_ != ResultSetType::Select)
     {
-        ShowErrorFmt("ResultSet::getOrDefault: Invalid type {}", static_cast<int>(type_));
+        ShowErrorFmt("ResultSet::getOrDefault: Invalid type {}", std::to_underlying(type_));
         ShowErrorFmt("Query: {}", query_);
         return defaultValue;
     }
@@ -448,7 +449,7 @@ auto ResultSet::tryGet(std::string_view key) const -> std::optional<T>
 {
     if (type_ != ResultSetType::Select)
     {
-        ShowErrorFmt("ResultSet::tryGet: Invalid type {}", static_cast<int>(type_));
+        ShowErrorFmt("ResultSet::tryGet: Invalid type {}", std::to_underlying(type_));
         ShowErrorFmt("Query: {}", query_);
         return std::nullopt;
     }
@@ -467,7 +468,7 @@ auto ResultSet::tryGet(const uint32 index) const -> std::optional<T>
 {
     if (type_ != ResultSetType::Select)
     {
-        ShowErrorFmt("ResultSet::tryGet: Invalid type {}", static_cast<int>(type_));
+        ShowErrorFmt("ResultSet::tryGet: Invalid type {}", std::to_underlying(type_));
         ShowErrorFmt("Query: {}", query_);
         return std::nullopt;
     }
