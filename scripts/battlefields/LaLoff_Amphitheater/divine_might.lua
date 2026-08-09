@@ -19,9 +19,10 @@ local content = Battlefield:new({
     requiredItems = { xi.item.ARK_PENTASPHERE, wearMessage = laLoffID.text.THE_SEAL_FADES, wornMessage = { laLoffID.text.INK_HAS_FADED, xi.item.ARK_PENTASPHERE } },
 })
 
+-- Players must be on the quest or have completed the quest to enter the battlefield.
 function content:entryRequirement(player, npc, isRegistrant, trade)
-    return player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) == xi.questStatus.QUEST_ACCEPTED or
-        player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT) == xi.questStatus.QUEST_ACCEPTED
+    return player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) >= xi.questStatus.QUEST_ACCEPTED or
+        player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT) >= xi.questStatus.QUEST_ACCEPTED
 end
 
 content.groups =

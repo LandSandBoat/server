@@ -18,7 +18,14 @@ local content = BattlefieldQuest:new({
     quest         = xi.quest.id.sandoria.THE_HOLY_CREST,
 })
 
+-- Players must be on the quest with the key item or have completed the quest to enter the battlefield.
 function content:entryRequirement(player, npc, isRegistrant, trade)
+    local questStatus = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST)
+
+    if questStatus == xi.questStatus.QUEST_COMPLETED then
+        return true
+    end
+
     return player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
 end
 

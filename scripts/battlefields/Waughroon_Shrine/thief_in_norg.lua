@@ -14,13 +14,22 @@ local content = BattlefieldQuest:new({
     index            = 4,
     entryNpc         = 'BC_Entrance',
     exitNpc          = 'Burning_Circle',
-    requiredItems    = { xi.item.BANISHING_CHARM },
+    requiredItems    = { xi.item.BANISHING_CHARM, keep = true }, -- Banishing Charm is not consumed on entry, but is required to enter the battlefield.
 
     questArea     = xi.questLog.OUTLANDS,
     quest         = xi.quest.id.outlands.A_THIEF_IN_NORG,
     requiredVar   = 'Quest[5][142]Prog',
     requiredValue = 6,
 })
+
+-- Only the battlefield registrant needs to have the required item and quest state to initiate the battlefield.
+function content:checkRequirements(player, npc, isRegistrant, trade)
+    if isRegistrant then
+        return BattlefieldQuest.checkRequirements(self, player, npc, isRegistrant, trade)
+    end
+
+    return self:isValidEntry(player, npc)
+end
 
 content.groups =
 {

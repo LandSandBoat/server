@@ -14,13 +14,22 @@ local content = BattlefieldQuest:new({
     index            = 1,
     entryNpc         = 'LP_Entrance',
     exitNpc          = 'Lightning_Protocrystal',
-    requiredItems    = { xi.item.LIGHTNING_PENDULUM },
+    requiredItems    = { xi.item.LIGHTNING_PENDULUM, keep = true }, -- Lightning Pendulum is not consumed on entry, but is required to enter the battlefield.
 
     questArea     = xi.questLog.WINDURST,
     quest         = xi.quest.id.windurst.CARBUNCLE_DEBACLE,
     requiredVar   = 'CarbuncleDebacleProgress',
     requiredValue = 3,
 })
+
+-- Only the battlefield registrant needs to have the required item and quest state to initiate the battlefield.
+function content:checkRequirements(player, npc, isRegistrant, trade)
+    if isRegistrant then
+        return BattlefieldQuest.checkRequirements(self, player, npc, isRegistrant, trade)
+    end
+
+    return self:isValidEntry(player, npc)
+end
 
 function content:onEventFinishWin(player, csid, option, npc)
     if player:getCharVar('CarbuncleDebacleProgress') == 3 then

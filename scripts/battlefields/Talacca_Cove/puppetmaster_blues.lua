@@ -16,8 +16,17 @@ local content = BattlefieldQuest:new({
     exitNpcs         = { '_1l1', '_1l2', '_1l3' },
     questArea        = xi.questLog.AHT_URHGAN,
     quest            = xi.quest.id.ahtUrhgan.PUPPETMASTER_BLUES,
-    requiredKeyItems = { xi.ki.TOGGLE_SWITCH, xi.ki.VALKENGS_MEMORY_CHIP },
+    requiredKeyItems = { xi.ki.TOGGLE_SWITCH, xi.ki.VALKENGS_MEMORY_CHIP, keep = true }, -- Key items are not consumed on entry, but are required to enter the battlefield.
 })
+
+-- Only the battlefield registrant needs to have the required item and quest state to initiate the battlefield.
+function content:checkRequirements(player, npc, isRegistrant, trade)
+    if isRegistrant then
+        return BattlefieldQuest.checkRequirements(self, player, npc, isRegistrant, trade)
+    end
+
+    return self:isValidEntry(player, npc)
+end
 
 content.groups =
 {
