@@ -67,6 +67,11 @@ public:
 
     // The version of the database driver, ie. MariaDB Connector/C++ 1.0.3.
     virtual auto getDriverVersion() -> std::string = 0;
+
+    // suppresses the reconnect-and-retry path while a transaction is open
+    virtual void setInTransaction(bool)
+    {
+    }
 };
 
 // Get the active database backend.

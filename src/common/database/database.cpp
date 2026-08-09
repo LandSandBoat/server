@@ -26,6 +26,9 @@
 #include <common/logging.h>
 #include <common/macros.h>
 #include <common/utils.h>
+#include <common/xi.h>
+
+#include <common/types/fn.h>
 
 #include <common/types/hash_map.h>
 
@@ -362,6 +365,14 @@ auto db::transaction(const Fn<void() const>& transactionFn) -> bool
 
     if (db::setAutoCommit(false) && db::transactionStart())
     {
+        // covers COMMIT/ROLLBACK too
+        db::getDatabase().setInTransaction(true);
+        const auto transactionScope = xi::finally<Fn<void()>>(
+            []() -> void
+            {
+                db::getDatabase().setInTransaction(false);
+            });
+
         try
         {
             transactionFn();

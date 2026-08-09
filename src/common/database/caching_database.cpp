@@ -135,6 +135,14 @@ auto db::CachingDatabase::runWithRetry(const std::string& rawQuery, const Fn<std
                 ShowErrorFmt("{}", e.what());
                 return nullptr;
             }
+
+            // reconnect starts in autocommit, retrying would commit this statement on its own
+            if (state.inTransaction)
+            {
+                ShowErrorFmt("Connection lost mid-transaction, not retrying: {}", rawQuery);
+                ShowErrorFmt("{}", e.what());
+                return nullptr;
+            }
         }
     }
 
@@ -191,6 +199,11 @@ auto db::CachingDatabase::executeBulk(const std::string& rawQuery, const std::ve
     };
 
     return runWithRetry(rawQuery, operation);
+}
+
+void db::CachingDatabase::setInTransaction(bool value)
+{
+    getState().inTransaction = value;
 }
 
 auto db::CachingDatabase::getSchema() -> std::string
