@@ -90,6 +90,10 @@ public:
     void   setLocalVar(const std::string& var, uint32 val);
     void   clearLocalVarsWithPrefix(const std::string& prefix);
     void   resetLocalVars();
+
+    auto getData() const -> sol::table;
+    void resetData() const;
+
     void   clearVarsWithPrefix(const std::string& prefix);
     uint32 getLastOnline(); // Returns the unix timestamp of last time the player logged out or zoned
 
