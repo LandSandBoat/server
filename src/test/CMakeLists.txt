@@ -1,8 +1,7 @@
 add_subdirectory(lua)
 add_subdirectory(reporters)
 
-# Catch2 hosts the C++ unit tests that run during xi_test startup, before the
-# Lua test engine boots (see main.cpp).
+# Catch2 hosts the C++ unit tests, which live in their own xi_unit_test binary.
 CPMAddPackage(
     NAME Catch2
     GITHUB_REPOSITORY catchorg/Catch2
@@ -57,16 +56,8 @@ else()
     set(resource "${CMAKE_SOURCE_DIR}/res/testserver.rc")
 endif()
 
-# Catch2 test TUs must live in the executable, not xi_test_lib: their tests are
-# registered by static initializers, which the linker drops for unreferenced
-# object files in a static library.
 add_executable(xi_test
     ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/tests/data_binding_tests.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/tests/database_tests.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/tests/ecosystems_tree_tests.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/tests/entity_list_tests.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/tests/rng_runtime_tests.cpp
     ${resource})
 
 set(TEST_LIB_SOURCES ${SOURCES})
@@ -105,10 +96,30 @@ target_include_directories(xi_test_lib
 
 target_link_libraries(xi_test
     PUBLIC
-        xi_test_lib
-        Catch2::Catch2)
+        xi_test_lib)
 
 set_target_output_directory(xi_test)
+
+# Every C++ unit test lives here. xi_test is the Lua suite: it boots a server and talks to a live
+# database, so it costs minutes. These tests need neither and finish in well under a second.
+#
+# Catch2 test TUs must live in the executable, not in a static library: their tests are registered
+# by static initializers, which the linker drops for unreferenced object files.
+add_executable(xi_unit_test
+    ${CMAKE_CURRENT_SOURCE_DIR}/unit_test_main.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/data_binding_tests.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/database_tests.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/ecosystems_tree_tests.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/entity_list_tests.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/rng_runtime_tests.cpp)
+
+target_link_libraries(xi_unit_test
+    PRIVATE
+        xi_test_lib
+        Catch2::Catch2
+        project_warnings)
+
+set_target_output_directory(xi_unit_test)
 
 if(TRACY_ENABLE)
     target_link_libraries(xi_test_lib PUBLIC TracyClient)
