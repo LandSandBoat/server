@@ -5959,13 +5959,22 @@ void SaveCharPositions(const std::vector<CharPosition>& rows)
 {
     TracyZoneScoped;
 
-    // not an upsert: `chars` has a BEFORE INSERT trigger that fires even on update
-    db::executeBulk(
-        "UPDATE chars SET pos_rot = ?, pos_x = ?, pos_y = ?, pos_z = ?, boundary = ? WHERE charid = ?",
-        rows,
-        [](const CharPosition& row)
+    if (rows.empty())
+    {
+        return;
+    }
+
+    db::transaction(
+        [&]()
         {
-            return std::make_tuple(row.rotation, row.x, row.y, row.z, row.boundary, row.charid);
+            // not an upsert: `chars` has a BEFORE INSERT trigger that fires even on update
+            db::executeBulk(
+                "UPDATE chars SET pos_rot = ?, pos_x = ?, pos_y = ?, pos_z = ?, boundary = ? WHERE charid = ?",
+                rows,
+                [](const CharPosition& row)
+                {
+                    return std::make_tuple(row.rotation, row.x, row.y, row.z, row.boundary, row.charid);
+                });
         });
 }
 
