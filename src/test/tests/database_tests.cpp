@@ -235,12 +235,11 @@ TEST_CASE("parameter lowering wraps trivially-copyable structs as blobs", "[data
 
     REQUIRE(params.size() == 1);
 
-    const auto& wrapper = std::get<std::shared_ptr<db::BlobWrapper>>(params[0]);
-    REQUIRE(wrapper != nullptr);
-    CHECK(wrapper->size == sizeof(TestBlob));
-    CHECK(wrapper->data[0] == 1);
-    CHECK(wrapper->data[1] == 2);
-    CHECK(wrapper->data[2] == 3);
+    const auto& bound = std::get<db::Blob>(params[0]);
+    REQUIRE(bound.bytes.size() == sizeof(TestBlob));
+    CHECK(bound.bytes[0] == 1);
+    CHECK(bound.bytes[1] == 2);
+    CHECK(bound.bytes[2] == 3);
 }
 
 TEST_CASE("result set reads cells by key and by index", "[database]")

@@ -25,7 +25,6 @@
 
 #include <common/database/blob.h>
 
-#include <memory>
 #include <string>
 #include <variant>
 
@@ -48,6 +47,6 @@ using BoundValue = std::variant<
     float,
     double,
     std::string,
-    std::shared_ptr<BlobWrapper>>;
+    Blob>;
 
 } // namespace db

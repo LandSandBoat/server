@@ -148,7 +148,7 @@ auto lowerBoundValue(std::vector<BoundValue>& params, T&& value) -> void
     }
     else if constexpr (is_blob_v<U>)
     {
-        params.emplace_back(std::in_place_type<std::shared_ptr<BlobWrapper>>, BlobWrapper::create(value));
+        params.emplace_back(std::in_place_type<Blob>, makeBlob(value));
     }
     else
     {

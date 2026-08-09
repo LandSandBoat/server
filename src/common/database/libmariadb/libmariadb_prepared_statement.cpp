@@ -119,13 +119,13 @@ auto db::LibMariaDBPreparedStatement::bind(int index, const BoundValue& value) -
             {
                 b.buffer_type = MYSQL_TYPE_NULL;
             }
-            else if constexpr (std::is_same_v<U, std::shared_ptr<BlobWrapper>>)
+            else if constexpr (std::is_same_v<U, Blob>)
             {
-                auto& buffer = paramBuffers_.emplace_back(v->data.get(), v->data.get() + v->size);
+                auto& buffer = paramBuffers_.emplace_back(v.bytes);
                 // Guarantee a non-null data() pointer: libmariadb binds a null buffer as SQL NULL,
                 // so an empty blob must still point at valid (zero-length) storage to bind as ''.
                 buffer.reserve(1);
-                auto& length    = paramLengths_.emplace_back(static_cast<unsigned long>(v->size));
+                auto& length    = paramLengths_.emplace_back(static_cast<unsigned long>(v.bytes.size()));
                 b.buffer_type   = MYSQL_TYPE_BLOB;
                 b.buffer        = buffer.data();
                 b.buffer_length = static_cast<unsigned long>(buffer.size());
