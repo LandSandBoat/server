@@ -33,6 +33,7 @@
 #include <fmt/format.h>
 
 #include <memory>
+#include <stdexcept>
 #include <string>
 #include <string_view>
 #include <tuple>
@@ -91,6 +92,9 @@ auto preparedStmt(Scheduler& scheduler, const std::string& rawQuery, Args&&... a
 //
 // `project` turns one row into a tuple of values, one per placeholder, and every row must yield the same types.
 // Numeric columns only.
+//
+// Throws if the statement fails.
+// Call it inside db::transaction, which turns the throw into a rollback.
 template <typename T, typename ProjectFn>
 void executeBulk(const std::string& query, const std::vector<T>& rows, ProjectFn project);
 
@@ -165,7 +169,10 @@ void executeBulk(const std::string& query, const std::vector<T>& rows, ProjectFn
             project(row));
     }
 
-    getDatabase().executeBulk(query, params);
+    if (!getDatabase().executeBulk(query, params))
+    {
+        throw std::runtime_error(fmt::format("bulk statement failed after {} rows: {}", rows.size(), query));
+    }
 }
 
 template <typename... Args>
