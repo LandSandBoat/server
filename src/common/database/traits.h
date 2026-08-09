@@ -84,6 +84,8 @@ struct is_standard_trivial : std::bool_constant<std::is_standard_layout_v<T> && 
 template <typename T>
 inline constexpr bool is_standard_trivial_v = is_standard_trivial<T>::value;
 
+// What binds as a blob: an aggregate that can be copied byte for byte. Fundamental types are
+// excluded because they bind as numbers.
 template <typename T>
 inline constexpr bool is_blob = (is_std_array_v<T> || std::is_array_v<T> || is_standard_trivial_v<T>) && !std::is_fundamental_v<T>;
 

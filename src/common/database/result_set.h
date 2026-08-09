@@ -45,9 +45,9 @@ namespace db
 
 enum class ResultSetType
 {
-    Select,  // We can query the rset for data
-    Update,  // The rset only has rowsCount()/rowsAffected() populated
-    Invalid, // The query is invalid and we can't do anything with it
+    Select,  // Rows can be read from the result set
+    Update,  // Only rowsCount()/rowsAffected() are populated
+    Invalid, // The query was rejected; there is nothing to read
 };
 
 // Copy raw blob bytes over a trivially-copyable destination, zero-filling any tail the
@@ -57,7 +57,9 @@ auto copyBlobBytes(std::string_view bytes, T& destination) -> void
 {
     static_assert(std::is_trivially_copyable_v<T>, "T must be trivially copyable");
 
-    // Zero-initialize the destination object
+    // Clear the destination first, so a blob shorter than T leaves zeros behind rather than
+    // whatever the caller's object held. Arrays and types that cannot be assigned to need their
+    // own way of being cleared.
     if constexpr (std::is_array_v<T>)
     {
         using Element = std::remove_extent_t<T>;
@@ -72,11 +74,9 @@ auto copyBlobBytes(std::string_view bytes, T& destination) -> void
         std::fill_n(reinterpret_cast<uint8*>(&destination), sizeof(T), 0);
     }
 
-    // Copy the blob into the destination object
     std::memcpy(&destination, bytes.data(), std::min(sizeof(T), bytes.size()));
 }
 
-// Forward declaration so ResultSet::get<T>() can reference it.
 template <typename WrapperPtrT, typename T>
 auto extractFromBlob(const WrapperPtrT& rset, std::string_view blobKey, T& destination) -> void;
 
@@ -106,27 +106,30 @@ public:
     // Unlike get<std::string>, this preserves embedded nulls and the full length.
     auto getBlobBytes(std::string_view key) const -> std::string;
 
-    // Get the value of the associated key.
+    // Get the value of the associated key. A NULL cell reads as T{}. So does an unknown column,
+    // which is logged as well: it means the call site and the query disagree.
     template <typename T>
     auto get(std::string_view key) const -> T;
 
-    // Get the value of the 0-indexed column.
+    // As above, by 0-indexed column.
     template <typename T>
     auto get(uint32 index) const -> T;
 
-    // Get the value of the associated key, or the default value if it is null/not-populated.
+    // Get the value of the associated key, or the default value if the cell is NULL or the
+    // column is absent.
     template <typename T>
     auto getOrDefault(std::string_view key, T defaultValue) const -> T;
 
-    // Get the value of the 0-indexed column, or the default value if it is null/not-populated.
+    // As above, by 0-indexed column.
     template <typename T>
     auto getOrDefault(uint32 index, T defaultValue) const -> T;
 
-    // Get the value of the associated key, or std::nullopt if the column is absent or NULL.
+    // Get the value of the associated key, or std::nullopt if the cell is NULL or the column is
+    // absent. Unlike get(), neither case is reported as an error.
     template <typename T>
     auto tryGet(std::string_view key) const -> std::optional<T>;
 
-    // Get the value of the 0-indexed column, or std::nullopt if the column is absent or NULL.
+    // As above, by 0-indexed column.
     template <typename T>
     auto tryGet(uint32 index) const -> std::optional<T>;
 
@@ -257,7 +260,7 @@ inline auto rows(const std::unique_ptr<ResultSet>& rset) -> RowRange
 template <typename T>
 auto ResultSet::getAtIndex(const std::size_t index) const -> T
 {
-    // Enum support: use underlying type to select database accessor
+    // An enum reads through the accessor for its underlying type.
     using UnderlyingT = detail::enum_decay_t<T>;
     UnderlyingT value{};
 
@@ -276,11 +279,8 @@ auto ResultSet::getAtIndex(const std::size_t index) const -> T
         }
     }
 
-    //
-    // If the backend gets an invalid, incorrectly sized, or incorrectly signed value, it will throw
-    // an exception. So we'll wrap the whole extraction step in try/catch.
-    //
-
+    // The backend throws if the cell holds a value that is invalid, the wrong size, or the wrong
+    // signedness for UnderlyingT.
     try
     {
         if constexpr (std::is_same_v<UnderlyingT, int64>)
@@ -493,8 +493,7 @@ auto extractFromBlob(const WrapperPtrT& rset, std::string_view blobKey, T& desti
     // TODO: static_assert(std::is_trivial_v<T>, "T must be trivial");
     static_assert(std::is_trivially_copyable_v<T>, "T must be trivially copyable");
 
-    // If we read a null blob we will get back garbage data.
-    // This will introduce difficult to track down crashes.
+    // A NULL blob reads back as garbage, and the crashes that follow are hard to trace.
     if (!rset->isNull(blobKey))
     {
         // getBlobBytes preserves the full length (including embedded nulls), unlike get<std::string>,

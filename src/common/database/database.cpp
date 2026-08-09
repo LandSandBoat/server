@@ -76,7 +76,6 @@ auto db::checkCharset() -> void
 {
     TracyZoneScoped;
 
-    // Check that the SQL charset is what we require
     const auto rset = preparedStmt("SELECT @@character_set_database, @@collation_database");
 
     bool foundError = false;
@@ -187,7 +186,8 @@ auto db::transaction(const Fn<void() const>& transactionFn) -> bool
         return false;
     }
 
-    // covers COMMIT/ROLLBACK too
+    // Stays set through the COMMIT/ROLLBACK below: those must not be retried on a fresh
+    // connection either.
     db::getDatabase().setInTransaction(true);
     const auto transactionScope = xi::finally<Fn<void()>>(
         []() -> void

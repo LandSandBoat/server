@@ -36,7 +36,7 @@ class Connection
 public:
     virtual ~Connection() = default;
 
-    // Prepare (or fail) a statement for this connection.
+    // Prepare a statement for this connection. Throws if the server rejects the query text.
     virtual auto prepare(std::string_view query) -> std::unique_ptr<PreparedStatement> = 0;
 
     // The connected database/schema name, ie. xidb.

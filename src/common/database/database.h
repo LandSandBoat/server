@@ -69,7 +69,7 @@ public:
     // The version of the database driver, ie. MariaDB Connector/C++ 1.0.3.
     virtual auto getDriverVersion() -> std::string = 0;
 
-    // suppresses the reconnect-and-retry path while a transaction is open
+    // Suppress the reconnect-and-retry path while a transaction is open.
     virtual void setInTransaction(bool)
     {
     }
@@ -82,13 +82,13 @@ auto getDatabase() -> Database&;
 // default backend.
 auto setDatabase(Database* database) -> void;
 
-// @brief Execute a prepared statement with the given query string and arguments.
-// @param query The query string to execute. A string literal is validated at compile time
-//        (leading keyword, forbidden characters, '?' count vs argument count); wrap runtime-built
-//        text in db::runtime(...).
-// @param args The arguments to bind to the prepared statement.
-// @return A unique pointer to the result set of the query.
-// @note If the query hasn't been seen before it will generate a prepared statement for it to be used immediately and in the future.
+// Execute a prepared statement with the given query string and arguments.
+//
+// A string-literal query is validated at compile time: leading keyword, forbidden characters, and
+// '?' count against argument count. Wrap runtime-built text in db::runtime(...).
+//
+// A query seen for the first time is prepared, then cached on the connection and reused.
+//
 // @note Bind parameters are 1-indexed; result-set columns are 0-indexed.
 template <typename... Args>
 auto preparedStmt(QueryString<std::type_identity_t<Args>...> query, Args&&... args) -> std::unique_ptr<ResultSet>;
