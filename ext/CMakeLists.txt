@@ -9,7 +9,7 @@ add_subdirectory(sol)
 # CPM Modules
 if(TRACY_ENABLE)
     # Tracy version tag, without the leading 'v'
-    set(TRACY_VERSION 0.13.1)
+    set(TRACY_VERSION 0.14.0)
 
     # Download client library
     CPMAddPackage(
