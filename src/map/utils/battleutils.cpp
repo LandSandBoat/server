@@ -5034,6 +5034,11 @@ void DoWildCardToEntity(CCharEntity* PCaster, CCharEntity* PTarget, const uint8 
     // No matter the roll, all basic abilities are reset
     PTarget->PRecastContainer->ResetAbilities();
 
+    if (roll >= 3)
+    {
+        PTarget->updatemask |= UPDATE_HP;
+    }
+
     switch (roll)
     {
         case 3: // 3 grants 1000 TP
