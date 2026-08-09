@@ -13,7 +13,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 125)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
     mob:setMod(xi.mod.DEFP, 35)
     mob:setMod(xi.mod.STORETP, 62)
@@ -37,10 +37,6 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getTP() >= 2000 then
-        mob:useMobAbility()
-    end
-
     if mob:getHPP() > 35 then
         mob:setMod(xi.mod.REGAIN, 0)
     else

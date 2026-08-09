@@ -54,8 +54,10 @@ function content:onBattlefieldWin(player, battlefield)
         player:setLocalVar('newPromy', 1)
     end
 
+    local repeatClear = self:checkSkipCutscene(player) and 1 or 0
+
     player:setLocalVar('battlefieldWin', battlefield:getID())
-    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), player:getZoneID(), self.index, 0, arg8)
+    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), player:getZoneID(), self.index, repeatClear, arg8)
 end
 
 content.groups =
