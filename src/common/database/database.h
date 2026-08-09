@@ -116,9 +116,6 @@ auto getDriverVersion() -> std::string;
 auto checkCharset() -> void;
 auto checkTriggers() -> void;
 
-auto setAutoCommit(bool value) -> bool;
-auto getAutoCommit() -> bool;
-
 auto transactionStart() -> bool;
 auto transactionCommit() -> bool;
 auto transactionRollback() -> bool;

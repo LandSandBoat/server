@@ -189,34 +189,6 @@ auto db::checkTriggers() -> void
     }
 }
 
-auto db::setAutoCommit(bool value) -> bool
-{
-    TracyZoneScoped;
-
-    if (!db::preparedStmt("SET @@autocommit = ?", value ? 1 : 0))
-    {
-        ShowError("Failed to set autocommit value");
-        return false;
-    }
-
-    return true;
-}
-
-auto db::getAutoCommit() -> bool
-{
-    TracyZoneScoped;
-
-    const auto rset = db::preparedStmt("SELECT @@autocommit");
-    FOR_DB_SINGLE_RESULT(rset)
-    {
-        return rset->get<uint32>(0) == 1;
-    }
-
-    ShowError("Failed to get autocommit status");
-
-    return false;
-}
-
 auto db::transactionStart() -> bool
 {
     TracyZoneScoped;
