@@ -123,8 +123,8 @@ auto IPCServer::getIPPsForParty(uint32 partyId) -> std::vector<IPP>
 
     // TODO: Simplify query now that there's alliance versions?
     const auto query = "SELECT server_addr, server_port, MIN(charid) FROM accounts_sessions JOIN accounts_parties USING (charid) "
-                       "WHERE IF (allianceid <> 0, allianceid = (SELECT MAX(allianceid) FROM accounts_parties WHERE partyid = ?), "
-                       "partyid = ?) GROUP BY server_addr, server_port";
+                       "WHERE (allianceid <> 0 AND allianceid = (SELECT MAX(allianceid) FROM accounts_parties WHERE partyid = ?)) "
+                       "OR (allianceid = 0 AND partyid = ?) GROUP BY server_addr, server_port";
 
     const auto rset = db::preparedStmt(query, partyId, partyId);
     if (rset && rset->rowsCount())

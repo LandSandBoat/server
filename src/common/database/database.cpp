@@ -26,6 +26,9 @@
 #include <common/logging.h>
 #include <common/macros.h>
 #include <common/utils.h>
+#include <common/xi.h>
+
+#include <common/types/fn.h>
 
 #include <common/types/hash_map.h>
 
@@ -358,32 +361,40 @@ auto db::transaction(const Fn<void() const>& transactionFn) -> bool
 {
     TracyZoneScoped;
 
-    const bool wasAutoCommitOn = db::getAutoCommit();
-
-    if (db::setAutoCommit(false) && db::transactionStart())
+    if (!db::transactionStart())
     {
-        try
-        {
-            transactionFn();
-            db::transactionCommit();
-        }
-        catch (const std::exception& e)
-        {
-            ShowCritical("Transaction failed: Rolling back!");
-            ShowCritical("Transaction failed: %s", e.what());
-
-            db::transactionRollback();
-            db::setAutoCommit(wasAutoCommitOn);
-            return false;
-        }
-    }
-    else
-    {
-        db::setAutoCommit(wasAutoCommitOn);
         return false;
     }
 
-    db::setAutoCommit(wasAutoCommitOn);
+    // covers COMMIT/ROLLBACK too
+    db::getDatabase().setInTransaction(true);
+    const auto transactionScope = xi::finally<Fn<void()>>(
+        []() -> void
+        {
+            db::getDatabase().setInTransaction(false);
+        });
+
+    try
+    {
+        transactionFn();
+    }
+    catch (const std::exception& e)
+    {
+        ShowCritical("Transaction failed: Rolling back!");
+        ShowCritical("Transaction failed: %s", e.what());
+
+        db::transactionRollback();
+        return false;
+    }
+
+    if (!db::transactionCommit())
+    {
+        ShowCritical("Transaction failed: COMMIT failed, rolling back!");
+
+        db::transactionRollback();
+        return false;
+    }
+
     return true;
 }
 
