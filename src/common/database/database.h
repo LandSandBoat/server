@@ -127,10 +127,9 @@ auto enableTimers() -> void;
 
 // Execute a transaction with the given transaction function.
 //
-// Will handle maintenance of the autocommit state and rollback the transaction if the transaction
-// function throws. Otherwise will commit the transaction on successful completion of the function.
+// Rolls back if the transaction function throws, otherwise commits.
 //
-// Returns true if the transaction was successful and committed or false if it was rolled back.
+// Returns true only if the COMMIT itself succeeded.
 auto transaction(const Fn<void() const>& transactionFn) -> bool;
 
 auto getTableColumnNames(const std::string& tableName) -> std::vector<std::string>;
