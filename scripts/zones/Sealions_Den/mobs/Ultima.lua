@@ -10,12 +10,16 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.TERROR)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMobMod(xi.mobMod.NO_REST, 1)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 10)
 end
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 125)
-    mob:setMod(xi.mod.ATTP, 30)
     mob:setMod(xi.mod.REGAIN, 150)
+    mob:setMod(xi.mod.ATTP, 30)
+    mob:setMod(xi.mod.DEF, 270)
+    mob:setMod(xi.mod.MDEF, 10)
     mob:setLocalVar('phase', 1) -- Set to 1 for readability
 end
 

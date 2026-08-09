@@ -1252,8 +1252,8 @@ INSERT INTO `mob_groups` VALUES (16,1160,31,'Earth_Elemental',0,128,733,0,0,0,NU
 -- ------------------------------------------------------------
 
 INSERT INTO `mob_groups` VALUES (1,2500,32,'Mammet-22_Zeta',0,128,1585,4000,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (2,2973,32,'Omega',0,128,0,14000,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (3,4083,32,'Ultima',0,128,0,15000,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (2,2973,32,'Omega',0,128,0,15500,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (3,4083,32,'Ultima',0,128,0,15500,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (4,3875,32,'Tenzen',0,128,0,15000,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (5,2492,32,'Makki-Chebukki',0,128,0,50000,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (6,2293,32,'Kukki-Chebukki',0,128,0,50000,0,0,NULL);
