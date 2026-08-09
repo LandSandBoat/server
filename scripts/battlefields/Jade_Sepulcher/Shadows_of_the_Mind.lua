@@ -14,7 +14,7 @@ local content = Battlefield:new({
     index            = 1,
     entryNpc         = '_1v0',
     exitNpcs         = { '_1v1', '_1v2', '_1v3' },
-    requiredKeyItems = { xi.ki.SECRET_IMPERIAL_ORDER, message = ID.text.IMPERIAL_ORDER_BREAKS },
+    requiredKeyItems = { xi.ki.SECRET_IMPERIAL_ORDER, onlyInitiator = true, message = ID.text.IMPERIAL_ORDER_BREAKS },
 })
 
 content.groups = {

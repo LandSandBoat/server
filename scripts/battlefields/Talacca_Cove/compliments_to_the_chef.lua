@@ -14,7 +14,7 @@ local content = Battlefield:new({
     index            = 1,
     entryNpc         = '_1l0',
     exitNpcs         = { '_1l1', '_1l2', '_1l3' },
-    requiredKeyItems = { xi.ki.SECRET_IMPERIAL_ORDER, message = ID.text.IMPERIAL_ORDER_BREAKS },
+    requiredKeyItems = { xi.ki.SECRET_IMPERIAL_ORDER, onlyInitiator = true, message = ID.text.IMPERIAL_ORDER_BREAKS },
 })
 
 content:addEssentialMobs({ 'Angler_Orobon' })
