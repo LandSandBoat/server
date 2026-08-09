@@ -152,7 +152,9 @@ quest.sections =
                     quest:setVar(player, 'Prog', 3)
                 end,
 
+                -- The title comes with this cutscene, not the battlefield win.
                 [7] = function(player, csid, option, npc)
+                    player:addTitle(xi.title.BREAKER_OF_THE_CHAINS)
                     player:setPos(-.0745, -10, -465.1132, 63, xi.zone.ALTAIEU)
                 end,
 

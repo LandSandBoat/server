@@ -38993,7 +38993,7 @@ INSERT INTO `mob_spawn_points` VALUES (17215491,0,'Land_Crab','Land Crab',3,5,8,
 INSERT INTO `mob_spawn_points` VALUES (17215492,0,'Mole_Crab','Mole Crab',4,7,8,1.000,1.000,1.000,0,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17215493,0,'Passage_Crab','Passage Crab',5,9,10,1.000,1.000,1.000,0,NULL,NULL);
 
-INSERT INTO `mob_spawn_points` VALUES (17215494,0,'Bubbly_Bernie','Bubbly Bernie',6,9,10,745.000,-2.000,-671.000,22,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17215494,0,'Bubbly_Bernie','Bubbly Bernie',6,9,10,758.276,-1.579,-688.066,22,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17215495,1,'Huge_Hornet','Huge Hornet',7,1,1,519.620,-1.317,-330.270,37,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17215496,2,'Huge_Hornet','Huge Hornet',7,1,1,540.734,-0.629,-333.375,127,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17215497,0,'Huge_Hornet','Huge Hornet',7,1,1,566.213,2.295,-374.238,98,NULL,NULL);

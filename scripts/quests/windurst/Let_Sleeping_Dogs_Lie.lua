@@ -262,8 +262,10 @@ quest.sections =
                     quest:complete(player)
                 end,
 
+                -- The title comes with the spoiled ending, not with the reward.
                 [499] = function(player, csid, option, npc)
                     if option == 2 then
+                        player:addTitle(xi.title.SPOILSPORT)
                         quest:setVar(player, 'Prog', 4)
                     end
                 end,
