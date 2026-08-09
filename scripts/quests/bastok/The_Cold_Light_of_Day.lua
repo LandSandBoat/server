@@ -12,6 +12,7 @@ quest.reward =
     fame     = 10,
     fameArea = xi.fameArea.BASTOK,
     gil      = 500,
+    title    = xi.title.CRAB_CRUSHER,
 }
 
 quest.sections =

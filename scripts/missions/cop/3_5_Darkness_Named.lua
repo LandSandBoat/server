@@ -149,7 +149,6 @@ mission.sections =
                         player:getLocalVar('battlefieldWin') == xi.battlefield.id.DARKNESS_NAMED and
                         mission:getVar(player, 'Status') == 4
                     then
-                        player:addTitle(xi.title.TRANSIENT_DREAMER)
                         mission:setVar(player, 'Status', 5)
                     end
                 end,

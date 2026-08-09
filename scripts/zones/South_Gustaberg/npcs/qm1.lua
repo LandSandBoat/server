@@ -10,16 +10,30 @@ local ID = zones[xi.zone.SOUTH_GUSTABERG]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
+    -- tradeMatches does not confirm the quus. tradeHas would leave it reserved on a refused pop.
     if
-        (npcUtil.tradeHas(trade, xi.item.QUUS_1) or npcUtil.tradeHas(trade, xi.item.QUUS_2)) and
-        npcUtil.popFromQM(player, npc, ID.mob.BUBBLY_BERNIE, { hide = 0 })
+        not npcUtil.tradeMatches(trade, { { xi.item.QUUS_1, 1 } }) and
+        not npcUtil.tradeMatches(trade, { { xi.item.QUUS_2, 1 } })
     then
-        player:confirmTrade()
+        return
     end
+
+    -- The corpse blocks the pop for 15 seconds after he dies.
+    if not npcUtil.popFromQM(player, npc, ID.mob.BUBBLY_BERNIE, { hide = 0 }) then
+        return player:messageSpecial(ID.text.NOTHING_SEEMS_HAPPENING)
+    end
+
+    player:tradeComplete()
+
+    return player:messageSpecial(ID.text.YOU_PUT_ITEM_DOWN, xi.item.QUUS_1)
 end
 
 entity.onTrigger = function(player, npc)
-    player:messageSpecial(ID.text.MONSTER_TRACKS)
+    if GetMobByID(ID.mob.BUBBLY_BERNIE):isSpawned() then
+        player:messageSpecial(ID.text.MONSTER_TRACKS_FRESH)
+    else
+        player:messageSpecial(ID.text.MONSTER_TRACKS)
+    end
 end
 
 return entity

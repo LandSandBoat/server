@@ -8164,7 +8164,7 @@ INSERT INTO `mob_groups` VALUES (3,6771,107,'Land_Crab_fished',0,128,481,0,0,0,N
 INSERT INTO `mob_groups` VALUES (4,2722,107,'Mole_Crab',0,128,93,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (5,3102,107,'Passage_Crab',0,128,93,0,0,0,NULL);
 
-INSERT INTO `mob_groups` VALUES (6,551,107,'Bubbly_Bernie',0,128,2848,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (6,551,107,'Bubbly_Bernie',0,128,2848,170,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (7,2000,107,'Huge_Hornet',60,0,1334,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (8,4053,107,'Tunnel_Worm',60,0,2496,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (9,1038,107,'Ding_Bats',180,2,82,0,0,0,NULL);
