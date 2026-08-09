@@ -3832,6 +3832,11 @@ end
 function CBaseEntity:setRespawnTime(seconds)
 end
 
+---@nodiscard
+---@return table
+function CBaseEntity:getSpawnSlotMobs()
+end
+
 ---@param groupID integer
 ---@return nil
 function CBaseEntity:instantiateMob(groupID)

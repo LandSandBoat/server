@@ -55,6 +55,7 @@
 #include "recast_container.h"
 #include "roe.h"
 #include "spawn_handler.h"
+#include "spawn_slot.h"
 #include "spell.h"
 #include "status_effect.h"
 #include "status_effect_container.h"
@@ -18052,6 +18053,37 @@ void CLuaBaseEntity::setRespawnTime(const uint32 seconds) const
 }
 
 /************************************************************************
+ *  Function: getSpawnSlotMobs()
+ *  Purpose : Returns a table of all the mobs that share a slot. Used for NM lottery mobs
+ *  Example : mob:getSpawnSlotMobs()
+ *  Notes   : Returns an empty table if the mob is not in a spawn slot
+ ************************************************************************/
+
+auto CLuaBaseEntity::getSpawnSlotMobs() -> sol::table
+{
+    sol::table table = lua.create_table();
+
+    if (m_PBaseEntity->objtype != TYPE_MOB)
+    {
+        ShowWarning("Attempting to get spawn slot members for invalid entity type (%s).", m_PBaseEntity->getName());
+        return table;
+    }
+
+    if (SpawnSlot* slot = static_cast<CMobEntity*>(m_PBaseEntity)->GetSpawnSlot())
+    {
+        for (const auto& entry : slot->GetEntries())
+        {
+            if (entry.mob)
+            {
+                table.add(entry.mob->id);
+            }
+        }
+    }
+
+    return table;
+}
+
+/************************************************************************
  *  Function: instantiateMob()
  *  Purpose : Used for spawning a new mob - is this for Monstrosity prep?
  *  Example : None available
@@ -21080,6 +21112,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setSpawn", CLuaBaseEntity::setSpawn);
     SOL_REGISTER("getRespawnTime", CLuaBaseEntity::getRespawnTime);
     SOL_REGISTER("setRespawnTime", CLuaBaseEntity::setRespawnTime);
+    SOL_REGISTER("getSpawnSlotMobs", CLuaBaseEntity::getSpawnSlotMobs);
 
     SOL_REGISTER("instantiateMob", CLuaBaseEntity::instantiateMob);
 
