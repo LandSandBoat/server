@@ -20,7 +20,7 @@ zoneObject.onZoneIn = function(player, prevZone)
             player:hasKeyItem(xi.ki.SILVER_SEA_FERRY_TICKET) and
             prevZone == xi.zone.SILVER_SEA_ROUTE_TO_NASHMAU
         then
-            cs = { 201, -1, bit.bor(xi.cutsceneFlag.UNKNOWN_1, xi.cutsceneFlag.NO_PCS) }
+            cs = { 201, -1, bit.bor(xi.cutsceneFlag.RESET_CAMERA, xi.cutsceneFlag.NO_PCS) }
             player:setPos(11, 2, -102, 128)
         else
             player:setPos(40.658, -7.527, -24.001, 128)
@@ -42,9 +42,9 @@ zoneObject.onTransportEvent = function(player, prevZoneId, transportId)
             player:startEvent(200, {
                 isHidden = true,
                 flags    = bit.bor(
-                    xi.cutsceneFlag.UNKNOWN_1,
+                    xi.cutsceneFlag.RESET_CAMERA,
                     xi.cutsceneFlag.NO_PCS,
-                    xi.cutsceneFlag.UNKNOWN_7
+                    xi.cutsceneFlag.NO_IDLE_WAIT
                 ),
             })
         else

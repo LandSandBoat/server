@@ -21,9 +21,9 @@ quest.sections =
             {
                 function(player, prevZone)
                     local cutsceneFlags = bit.bor(
-                        xi.cutsceneFlag.UNKNOWN_1,
+                        xi.cutsceneFlag.RESET_CAMERA,
                         xi.cutsceneFlag.NO_PCS,
-                        xi.cutsceneFlag.UNKNOWN_2
+                        xi.cutsceneFlag.OPENING_MODE
                     )
 
                     return { 0, -1, cutsceneFlags } -- CS 0 is not a typo.
@@ -38,9 +38,9 @@ quest.sections =
                     -- TODO: research if there was some purpose to the zoning.
 
                     local cutsceneFlags = bit.bor(
-                        xi.cutsceneFlag.UNKNOWN_1,
+                        xi.cutsceneFlag.RESET_CAMERA,
                         xi.cutsceneFlag.NO_PCS,
-                        xi.cutsceneFlag.UNKNOWN_2
+                        xi.cutsceneFlag.OPENING_MODE
                     )
 
                     player:startEvent(7, { flags = cutsceneFlags })
@@ -68,9 +68,9 @@ quest.sections =
             {
                 function(player, prevZone)
                     local cutsceneFlags = bit.bor(
-                        xi.cutsceneFlag.UNKNOWN_1,
+                        xi.cutsceneFlag.RESET_CAMERA,
                         xi.cutsceneFlag.NO_PCS,
-                        xi.cutsceneFlag.UNKNOWN_2
+                        xi.cutsceneFlag.OPENING_MODE
                     )
                     return { 1, -1, cutsceneFlags }
                 end
@@ -100,9 +100,9 @@ quest.sections =
             {
                 function(player, prevZone)
                     local cutsceneFlags = bit.bor(
-                        xi.cutsceneFlag.UNKNOWN_1,
+                        xi.cutsceneFlag.RESET_CAMERA,
                         xi.cutsceneFlag.NO_PCS,
-                        xi.cutsceneFlag.UNKNOWN_2
+                        xi.cutsceneFlag.OPENING_MODE
                     )
                     return { 1, -1, cutsceneFlags }
                 end
@@ -132,9 +132,9 @@ quest.sections =
             {
                 function(player, prevZone)
                     local cutsceneFlags = bit.bor(
-                        xi.cutsceneFlag.UNKNOWN_1,
+                        xi.cutsceneFlag.RESET_CAMERA,
                         xi.cutsceneFlag.NO_PCS,
-                        xi.cutsceneFlag.UNKNOWN_2
+                        xi.cutsceneFlag.OPENING_MODE
                     )
 
                     return { 535, -1, cutsceneFlags }
@@ -165,9 +165,9 @@ quest.sections =
             {
                 function(player, prevZone)
                     local cutsceneFlags = bit.bor(
-                        xi.cutsceneFlag.UNKNOWN_1,
+                        xi.cutsceneFlag.RESET_CAMERA,
                         xi.cutsceneFlag.NO_PCS,
-                        xi.cutsceneFlag.UNKNOWN_2
+                        xi.cutsceneFlag.OPENING_MODE
                     )
 
                     return { 503, -1, cutsceneFlags }
@@ -198,9 +198,9 @@ quest.sections =
             {
                 function(player, prevZone)
                     local cutsceneFlags = bit.bor(
-                        xi.cutsceneFlag.UNKNOWN_1,
+                        xi.cutsceneFlag.RESET_CAMERA,
                         xi.cutsceneFlag.NO_PCS,
-                        xi.cutsceneFlag.UNKNOWN_2
+                        xi.cutsceneFlag.OPENING_MODE
                     )
 
                     return { 500, -1, cutsceneFlags }
@@ -231,10 +231,10 @@ quest.sections =
             {
                 function(player, prevZone)
                     local cutsceneFlags = bit.bor(
-                        xi.cutsceneFlag.UNKNOWN_1,
+                        xi.cutsceneFlag.RESET_CAMERA,
                         xi.cutsceneFlag.NO_PCS,
                         xi.cutsceneFlag.NO_NPCS,
-                        xi.cutsceneFlag.UNKNOWN_2
+                        xi.cutsceneFlag.OPENING_MODE
                     )
 
                     return { 531, -1, cutsceneFlags }
@@ -276,10 +276,10 @@ quest.sections =
             {
                 function(player, prevZone)
                     local cutsceneFlags = bit.bor(
-                        xi.cutsceneFlag.UNKNOWN_1,
+                        xi.cutsceneFlag.RESET_CAMERA,
                         xi.cutsceneFlag.NO_PCS,
                         xi.cutsceneFlag.NO_NPCS,
-                        xi.cutsceneFlag.UNKNOWN_2
+                        xi.cutsceneFlag.OPENING_MODE
                     )
                     return { 367, -1, cutsceneFlags }
                 end
@@ -309,9 +309,9 @@ quest.sections =
             {
                 function(player, prevZone)
                     local cutsceneFlags = bit.bor(
-                        xi.cutsceneFlag.UNKNOWN_1,
+                        xi.cutsceneFlag.RESET_CAMERA,
                         xi.cutsceneFlag.NO_PCS,
-                        xi.cutsceneFlag.UNKNOWN_2
+                        xi.cutsceneFlag.OPENING_MODE
                     )
 
                     return { 305, -1, cutsceneFlags }

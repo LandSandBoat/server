@@ -217,7 +217,7 @@ mission.sections =
 
                     local cutsceneFlags = bit.bor(
                         xi.cutsceneFlag.NO_PCS,
-                        xi.cutsceneFlag.UNKNOWN_2
+                        xi.cutsceneFlag.OPENING_MODE
                     )
 
                     return { 443, -1, cutsceneFlags }

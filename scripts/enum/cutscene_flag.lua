@@ -7,20 +7,21 @@ xi = xi or {}
 ---@enum xi.cutsceneFlag
 xi.cutsceneFlag =
 {
-    UNKNOWN_1       = 0x0001, -- Commonly set, effect unknown
-    NO_PCS          = 0x0002, -- Do not display other Player Characters
-    UNKNOWN_3       = 0x0004, -- Unknown
-    UNKNOWN_4       = 0x0008, -- Unknown
-    NO_NPCS         = 0x0010, -- Do not display NPCs and Mobs
-    UNKNOWN_5       = 0x0020, -- Unknown
-    UNKNOWN_6       = 0x0040, -- Unknown
-    UNKNOWN_2       = 0x0080, -- Commonly set, effect unknown
-    UNKNOWN_7       = 0x0100, -- Unknown (possibly camera related)
-    UNKNOWN_8       = 0x0200, -- Unknown
-    UNKNOWN_9       = 0x0400, -- Unknown
-    UNKNOWN_10      = 0x0800, -- Unknown
-    UNKNOWN_11      = 0x1000, -- Unknown
-    UNKNOWN_12      = 0x2000, -- Unknown
-    UNKNOWN_13      = 0x4000, -- Unknown
-    UNKNOWN_14      = 0x8000, -- Unknown
+    RESET_CAMERA        = 0x00000001, -- On end: restore player pos from server pos, reset camera behind player
+    NO_PCS              = 0x00000002, -- Do not display Player Characters not in the event
+    SEND_POSITION       = 0x00000004, -- Keep tracking/sending player position while the event moves them
+    UNKNOWN_0008        = 0x00000008, -- Unknown usage. Often set but the client doesn't use it.
+    NO_NPCS             = 0x00000010, -- Do not display NPCs and Mobs not in the event
+    NO_PARTICIPANT_ANIM = 0x00000020, -- Drop scheduler packets whose caster or target is in the event
+    NO_DIALOGUE         = 0x00000040, -- Suppress server chat/dialogue text (TalkNum family)
+    OPENING_MODE        = 0x00000080, -- Zone-in only: opening cutscene mode
+    NO_IDLE_WAIT        = 0x00000100, -- Start immediately, skip the "actors must be idle/unlocked" gate
+    KEEP_ACTOR_COLOR    = 0x00000200, -- Don't reset actor color to 0x80808080 on event start
+    NO_BATTLE_ANIM      = 0x00000400, -- Drop battle actions where caster or target is in the event
+    NO_MAGIC_ANIM       = 0x00000800, -- Drop all scheduler packets for the whole event
+    ALLOW_OWN_ACTION    = 0x00001000, -- Let your own action animations play
+    IGNORE_UNLOCK       = 0x00002000, -- Ignore the server's event-unlock message (possibly unused - client forces it)
+    UNUSED_4000         = 0x00004000, -- Never read by the client
+    GROUND_SNAP_ON_END  = 0x00008000, -- Re-seat actors onto the terrain when the event ends
+    HIDE_TARGET_WINDOW  = 0x00010000, -- Suppresses the "targetwi" HUD window for the event
 }

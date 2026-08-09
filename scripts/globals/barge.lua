@@ -386,7 +386,7 @@ xi.barge.onZoneIn = function(player, prevZone)
         local bargeDestinationData = dockEventData[bargeDestinationId] or dockEventData[destinations.CENTRAL_LANDING]
         player:setPos(bargeDestinationData.arrivalPos)
 
-        return { bargeDestinationData.arrivalCsId, -1, bit.bor(xi.cutsceneFlag.UNKNOWN_1, xi.cutsceneFlag.NO_PCS) }
+        return { bargeDestinationData.arrivalCsId, -1, bit.bor(xi.cutsceneFlag.RESET_CAMERA, xi.cutsceneFlag.NO_PCS) }
     end
 
     return -1
@@ -424,10 +424,10 @@ xi.barge.onTransportEvent = function(player, zoneId, transportId)
             [2] = 0, -- Important to be set to 0
             isHidden = true,
             flags = bit.bor(
-                xi.cutsceneFlag.UNKNOWN_1,
+                xi.cutsceneFlag.RESET_CAMERA,
                 xi.cutsceneFlag.NO_PCS,
-                xi.cutsceneFlag.UNKNOWN_4,
-                xi.cutsceneFlag.UNKNOWN_7
+                xi.cutsceneFlag.UNKNOWN_0008,
+                xi.cutsceneFlag.NO_IDLE_WAIT
             ),
         })
     elseif player:hasKeyItem(xi.ki.BARGE_MULTI_TICKET) then
@@ -447,10 +447,10 @@ xi.barge.onTransportEvent = function(player, zoneId, transportId)
             [2] = usesLeft + 1, -- This expects the number of uses before it get decremented
             isHidden = true,
             flags = bit.bor(
-                xi.cutsceneFlag.UNKNOWN_1,
+                xi.cutsceneFlag.RESET_CAMERA,
                 xi.cutsceneFlag.NO_PCS,
-                xi.cutsceneFlag.UNKNOWN_4,
-                xi.cutsceneFlag.UNKNOWN_7
+                xi.cutsceneFlag.UNKNOWN_0008,
+                xi.cutsceneFlag.NO_IDLE_WAIT
             ),
         })
     else
