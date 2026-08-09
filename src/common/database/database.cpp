@@ -365,7 +365,15 @@ auto db::transaction(const Fn<void() const>& transactionFn) -> bool
         try
         {
             transactionFn();
-            db::transactionCommit();
+
+            if (!db::transactionCommit())
+            {
+                ShowCritical("Transaction failed: COMMIT failed, rolling back!");
+
+                db::transactionRollback();
+                db::setAutoCommit(wasAutoCommitOn);
+                return false;
+            }
         }
         catch (const std::exception& e)
         {
