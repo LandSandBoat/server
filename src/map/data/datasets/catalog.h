@@ -23,6 +23,8 @@
 
 #include "data/datasets/ecosystems/dataset.h"
 #include "data/datasets/ecosystems/yaml.h"
+#include "data/datasets/merits/dataset.h"
+#include "data/datasets/merits/yaml.h"
 #include "data/datasets/status_effects/dataset.h"
 #include "data/datasets/status_effects/yaml.h"
 
@@ -53,6 +55,6 @@ struct DatasetCatalog
     }
 };
 
-using Catalog = DatasetCatalog<status_effects::Dataset, ecosystems::Dataset>;
+using Catalog = DatasetCatalog<status_effects::Dataset, ecosystems::Dataset, merits::Dataset>;
 
 } // namespace xi::data::datasets

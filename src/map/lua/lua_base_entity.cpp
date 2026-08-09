@@ -9404,7 +9404,7 @@ int32 CLuaBaseEntity::getMerit(uint16 merit)
     {
         auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-        return PChar->PMeritPoints->GetMeritValue(static_cast<MERIT_TYPE>(merit), PChar);
+        return PChar->PMeritPoints->GetMeritValue(static_cast<xi::Merit>(merit), PChar);
     }
 
     return 0;

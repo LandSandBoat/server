@@ -1776,7 +1776,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
         if (PAbility->getMeritModID() > 0 && !(PAbility->getAddType() & ADDTYPE_MERIT))
         {
-            recastReduction = std::chrono::seconds(PMeritPoints->GetMeritValue((MERIT_TYPE)PAbility->getMeritModID(), this));
+            recastReduction = std::chrono::seconds(PMeritPoints->GetMeritValue(static_cast<xi::Merit>(PAbility->getMeritModID()), this));
 
             if (PAbility->getID() == ABILITY_THIRD_EYE && StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Seigan))
             {
@@ -1796,7 +1796,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             //  Can't assign merits via ability ID for Sic/Ready due to shenanigans
             if (PAbility->getRecastId() == Recast::Sic) // Sic/Ready recast ID
             {
-                recastReduction = std::chrono::seconds(PMeritPoints->GetMeritValue(MERIT_SIC_RECAST, this));
+                recastReduction = std::chrono::seconds(PMeritPoints->GetMeritValue(xi::Merit::SicRecast, this));
             }
             else if (PAbility->getRecastId() == Recast::Strategems)
             {

@@ -1,0 +1,421 @@
+# Adjust retail merits to mirror merits as they existed in ToAU.
+#
+# Temporary location for this module, please rework it according to the various expansions.
+
+merits:
+  upgrade_costs:
+    hp_mp:            [1, 2, 3, 4, 5, 5, 5, 5]
+    attributes:       [3, 6, 9, 9, 9]
+    defensive_skills: [1, 2, 3, 3]
+    others:           [1, 2, 3, 4]
+    job_group_2:      [3, 4, 5]
+
+  categories:
+    weapon_skills: # Disable upgrades to unlock Weapon Skills
+      max_upgrades: 0
+
+    hp_mp:
+      max_upgrades: 8
+      merits:
+        max_merit: # Disable Max Merit
+          max_upgrades: 0
+
+    attributes:
+      max_upgrades: 5
+
+    combat_skills:
+      max_upgrades: 20
+
+    magic_skills:
+      max_upgrades: 16
+      merits:
+        geomancy_skill:
+          max_upgrades: 0
+        handbell_skill:
+          max_upgrades: 0
+
+    others:
+      max_upgrades: 8
+
+    war_group_2:
+      max_upgrades: 6
+      merits:
+        warriors_charge:
+          value: 150
+
+    mnk_group_2:
+      max_upgrades: 6
+
+    whm_group_2:
+      max_upgrades: 6
+      merits: # Readd the merited spells and drop the replacement merits.
+        protectra_v:
+          id:           0x0884
+          value:        5
+          upgrade_cost: job_group_2
+          spell:        protectra_v
+        shellra_v:
+          id:           0x0886
+          value:        2
+          upgrade_cost: job_group_2
+          spell:        shellra_v
+        animus_solace:
+          max_upgrades: 0
+        animus_misery:
+          max_upgrades: 0
+        martyr:
+          value: 150
+        devotion:
+          value: 150
+
+    blm_group_2:
+      max_upgrades: 6
+      merits: # Readd the merited spells and drop the replacement merits.
+        flare_ii:
+          id:           0x08C0
+          value:        1
+          upgrade_cost: job_group_2
+          spell:        flare_ii
+        freeze_ii:
+          id:           0x08C2
+          value:        1
+          upgrade_cost: job_group_2
+          spell:        freeze_ii
+        tornado_ii:
+          id:           0x08C4
+          value:        1
+          upgrade_cost: job_group_2
+          spell:        tornado_ii
+        quake_ii:
+          id:           0x08C6
+          value:        1
+          upgrade_cost: job_group_2
+          spell:        quake_ii
+        burst_ii:
+          id:           0x08C8
+          value:        1
+          upgrade_cost: job_group_2
+          spell:        burst_ii
+        flood_ii:
+          id:           0x08CA
+          value:        1
+          upgrade_cost: job_group_2
+          spell:        flood_ii
+        ancient_magic_atk_bonus:
+          max_upgrades: 0
+        ancient_magic_burst_dmg:
+          max_upgrades: 0
+        elemental_magic_accuracy:
+          max_upgrades: 0
+        elemental_debuff_duration:
+          max_upgrades: 0
+        elemental_debuff_effect:
+          max_upgrades: 0
+        aspir_absorption_amount:
+          max_upgrades: 0
+
+    rdm_group_1:
+      merits:
+        fire_magic_accuracy:
+          value: 3
+        ice_magic_accuracy:
+          value: 3
+        wind_magic_accuracy:
+          value: 3
+        earth_magic_accuracy:
+          value: 3
+        lightning_magic_accuracy:
+          value: 3
+        water_magic_accuracy:
+          value: 3
+
+    rdm_group_2:
+      max_upgrades: 6
+      merits: # Readd the merited spells and drop the replacement merits.
+        dia_iii:
+          id:           0x0900
+          value:        30
+          upgrade_cost: job_group_2
+          spell:        dia_iii
+        slow_ii:
+          id:           0x0902
+          value:        1
+          upgrade_cost: job_group_2
+          spell:        slow_ii
+        paralyze_ii:
+          id:           0x0904
+          value:        1
+          upgrade_cost: job_group_2
+          spell:        paralyze_ii
+        phalanx_ii:
+          id:           0x0906
+          value:        3
+          upgrade_cost: job_group_2
+          spell:        phalanx_ii
+        bio_iii:
+          id:           0x0908
+          value:        30
+          upgrade_cost: job_group_2
+          spell:        bio_iii
+        blind_ii:
+          id:           0x090A
+          value:        1
+          upgrade_cost: job_group_2
+          spell:        blind_ii
+        enfeebling_magic_duration:
+          max_upgrades: 0
+        magic_accuracy:
+          max_upgrades: 0
+        enhancing_magic_duration:
+          max_upgrades: 0
+        immunobreak_chance:
+          max_upgrades: 0
+        enspell_damage:
+          max_upgrades: 0
+        accuracy:
+          max_upgrades: 0
+
+    thf_group_2:
+      max_upgrades: 6
+      merits:
+        assassins_charge:
+          value: 150
+        feint:
+          value: 120
+
+    pld_group_1:
+      merits:
+        shield_bash_recast:
+          value: 10
+        holy_circle_recast:
+          value: 20
+
+    pld_group_2:
+      max_upgrades: 6
+      merits:
+        fealty:
+          value: 150
+        chivalry:
+          value: 150
+
+    drk_group_1:
+      merits:
+        arcane_circle_recast:
+          value: 20
+        weapon_bash_effect:
+          value: 10
+
+    drk_group_2:
+      max_upgrades: 6
+      merits:
+        dark_seal:
+          value: 150
+        diabolic_eye:
+          value: 150
+        desperate_blows:
+          value: 5
+
+    bst_group_1:
+      merits:
+        sic_recast:
+          value: 4
+
+    bst_group_2:
+      max_upgrades: 6
+      merits:
+        feral_howl:
+          value: 150
+        killer_instinct:
+          value: 150
+
+    brd_group_1:
+      merits:
+        minne_effect:
+          value: 1
+
+    brd_group_2:
+      max_upgrades: 6
+      merits: # Readd the merited spells and drop the replacement merits.
+        foe_sirvente:
+          id:           0x0A44
+          value:        5
+          upgrade_cost: job_group_2
+          spell:        foe_sirvente
+        adventurers_dirge:
+          id:           0x0A46
+          value:        10
+          upgrade_cost: job_group_2
+          spell:        adventurers_dirge
+        con_anima:
+          max_upgrades: 0
+        con_brio:
+          max_upgrades: 0
+        nightingale:
+          value: 150
+        troubadour:
+          value: 150
+
+    rng_group_1:
+      merits:
+        scavenge_effect:
+          value: 10
+
+    rng_group_2:
+      max_upgrades: 6
+      merits:
+        flashy_shot:
+          value: 150
+
+    sam_group_1:
+      merits:
+        warding_circle_recast:
+          value: 20
+
+    sam_group_2:
+      max_upgrades: 6
+      merits:
+        shikikoyo:
+          value: 150
+        blade_bash:
+          value: 150
+
+    nin_group_2:
+      max_upgrades: 6
+      merits: # Readd the merited spells and drop the replacement merits.
+        katon_san:
+          id:           0x0B04
+          value:        5
+          upgrade_cost: job_group_2
+          spell:        katon_san
+        hyoton_san:
+          id:           0x0B06
+          value:        5
+          upgrade_cost: job_group_2
+          spell:        hyoton_san
+        huton_san:
+          id:           0x0B08
+          value:        5
+          upgrade_cost: job_group_2
+          spell:        huton_san
+        doton_san:
+          id:           0x0B0A
+          value:        5
+          upgrade_cost: job_group_2
+          spell:        doton_san
+        raiton_san:
+          id:           0x0B0C
+          value:        5
+          upgrade_cost: job_group_2
+          spell:        raiton_san
+        suiton_san:
+          id:           0x0B0E
+          value:        5
+          upgrade_cost: job_group_2
+          spell:        suiton_san
+        yonin_effect:
+          max_upgrades: 0
+        innin_effect:
+          max_upgrades: 0
+        nin_magic_accuracy:
+          max_upgrades: 0
+        nin_magic_bonus:
+          max_upgrades: 0
+        sange:
+          value: 150
+
+    drg_group_1:
+      merits:
+        ancient_circle_recast:
+          value: 20
+        jump_recast:
+          value: 3
+        high_jump_recast:
+          value: 6
+        spirit_link_recast:
+          value: 6
+
+    drg_group_2:
+      max_upgrades: 6
+      merits:
+        deep_breathing:
+          value: 150
+        strafe_effect:
+          value: 5
+
+    smn_group_1:
+      merits:
+        summoning_magic_cast_time:
+          value: 1
+
+    smn_group_2:
+      max_upgrades: 6
+
+    blu_group_1:
+      merits:
+        monster_correlation:
+          value: 1
+
+    blu_group_2:
+      max_upgrades: 6
+      merits:
+        diffusion:
+          value: 150
+
+    cor_group_2:
+      max_upgrades: 6
+      merits:
+        snake_eye:
+          value: 150
+        fold:
+          value: 150
+
+    pup_group_1:
+      merits: # These merits have kept their ID but were renamed - we'll patch what each merit does but keep the retail name
+        automaton_skills:
+          skills: [automaton_melee]
+        maintenance_recast:
+          value:  2
+          skills: [automaton_ranged]
+        repair_effect:
+          skills: [automaton_magic]
+
+    pup_group_2:
+      max_upgrades: 6
+      merits:
+        role_reversal:
+          value: 30
+        ventriloquy:
+          value: 15
+
+    dnc_group_2:
+      max_upgrades: 6
+      merits:
+        saber_dance:
+          value: 30
+        fan_dance:
+          value: 30
+
+    sch_group_1:
+      merits:
+        modus_veritas_duration:
+          value: 10
+
+    sch_group_2:
+      max_upgrades: 6
+      merits:
+        enlightenment:
+          value: 75
+        stormsurge:
+          value: 3
+
+    geo_group_1:
+      max_upgrades: 0
+
+    geo_group_2:
+      max_upgrades: 0
+
+    run_group_1:
+      max_upgrades: 0
+
+    run_group_2:
+      max_upgrades: 0

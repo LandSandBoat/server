@@ -62,7 +62,7 @@ GP_SERV_COMMAND_MERIT::GP_SERV_COMMAND_MERIT(CCharEntity* PChar)
 }
 
 // Constructor for single merit update
-GP_SERV_COMMAND_MERIT::GP_SERV_COMMAND_MERIT(const CCharEntity* PChar, const MERIT_TYPE merit)
+GP_SERV_COMMAND_MERIT::GP_SERV_COMMAND_MERIT(const CCharEntity* PChar, const xi::Merit merit)
 {
     auto& packet = this->data();
 

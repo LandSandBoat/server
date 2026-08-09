@@ -53,5 +53,5 @@ public:
     GP_SERV_COMMAND_MERIT(CCharEntity* PChar);
 
     // Constructor for single merit update
-    GP_SERV_COMMAND_MERIT(const CCharEntity* PChar, MERIT_TYPE merit);
+    GP_SERV_COMMAND_MERIT(const CCharEntity* PChar, xi::Merit merit);
 };

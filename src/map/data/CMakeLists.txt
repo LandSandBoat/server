@@ -17,6 +17,7 @@ set(DATA_CORE_SOURCES
 
 add_data_dataset(status_effects)
 add_data_dataset(ecosystems)
+add_data_dataset(merits)
 
 set(DATA_CORE_SOURCES ${DATA_CORE_SOURCES} PARENT_SCOPE)
 

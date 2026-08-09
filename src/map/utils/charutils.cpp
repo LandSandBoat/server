@@ -222,11 +222,11 @@ void CalculateStats(CCharEntity* PChar)
 
     uint8 grade = 0;
 
-    uint8      mlvl        = PChar->GetMLevel();
-    uint8      slvl        = PChar->GetSLevel();
-    xi::Job    mjob        = PChar->GetMJob();
-    xi::Job    sjob        = PChar->GetSJob();
-    MERIT_TYPE statMerit[] = { MERIT_STR, MERIT_DEX, MERIT_VIT, MERIT_AGI, MERIT_INT, MERIT_MND, MERIT_CHR };
+    uint8     mlvl        = PChar->GetMLevel();
+    uint8     slvl        = PChar->GetSLevel();
+    xi::Job   mjob        = PChar->GetMJob();
+    xi::Job   sjob        = PChar->GetSJob();
+    xi::Merit statMerit[] = { xi::Merit::Str, xi::Merit::Dex, xi::Merit::Vit, xi::Merit::Agi, xi::Merit::Int, xi::Merit::Mnd, xi::Merit::Chr };
 
     // We have to make sure we don't leave the job as JOB_MON - we CANNOT generate stats for it.
     if (mjob == xi::Job::MON || sjob == xi::Job::MON)
@@ -319,7 +319,7 @@ void CalculateStats(CCharEntity* PChar)
         sJobStat = sJobStat / 2;
     }
 
-    uint16 MeritBonus   = PChar->PMeritPoints->GetMeritValue(MERIT_MAX_HP, PChar);
+    uint16 MeritBonus   = PChar->PMeritPoints->GetMeritValue(xi::Merit::MaxHp, PChar);
     PChar->health.maxhp = (int16)(raceStat + jobStat + bonusStat + sJobStat + MeritBonus);
 
     // The beginning of the MP
@@ -362,7 +362,7 @@ void CalculateStats(CCharEntity* PChar)
         sJobStat = (grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * (slvl - 1)) / settings::get<float>("map.SJ_MP_DIVISOR");
     }
 
-    MeritBonus          = PChar->PMeritPoints->GetMeritValue(MERIT_MAX_MP, PChar);
+    MeritBonus          = PChar->PMeritPoints->GetMeritValue(xi::Merit::MaxMp, PChar);
     PChar->health.maxmp = (int16)(raceStat + jobStat + sJobStat + MeritBonus); // MP calculation result
 
     // Start calculating Stats
@@ -3703,7 +3703,7 @@ void BuildingCharAbilityTable(CCharEntity* PChar)
                 auto            maxCharges = 0;
                 if (charge)
                 {
-                    chargeTime = charge->chargeTime - std::chrono::seconds(PChar->PMeritPoints->GetMeritValue((MERIT_TYPE)charge->merit, PChar));
+                    chargeTime = charge->chargeTime - std::chrono::seconds(PChar->PMeritPoints->GetMeritValue(static_cast<xi::Merit>(charge->merit), PChar));
                     maxCharges = charge->maxCharges;
                 }
                 if (!PChar->PRecastContainer->Has(RECAST_ABILITY, PAbility->getRecastId()))
@@ -3743,7 +3743,7 @@ void BuildingCharAbilityTable(CCharEntity* PChar)
                     auto            maxCharges = 0;
                     if (charge)
                     {
-                        chargeTime = charge->chargeTime - std::chrono::seconds(PChar->PMeritPoints->GetMeritValue((MERIT_TYPE)charge->merit, PChar));
+                        chargeTime = charge->chargeTime - std::chrono::seconds(PChar->PMeritPoints->GetMeritValue(static_cast<xi::Merit>(charge->merit), PChar));
                         maxCharges = charge->maxCharges;
                     }
                     if (!PChar->PRecastContainer->Has(RECAST_ABILITY, PAbility->getRecastId()))
@@ -3846,45 +3846,6 @@ int16 ArtsBonusSkill(CCharEntity* PChar, xi::SkillType SkillID)
 // TODO: This whole thing should eventually get a refactored to be less dependent on arbitrary ordering of modifier IDs and conditionals on skill ranges.
 void BuildingCharSkillsTable(CCharEntity* PChar)
 {
-    MERIT_TYPE skillMerit[] = { MERIT_H2H,
-                                MERIT_DAGGER,
-                                MERIT_SWORD,
-                                MERIT_GSWORD,
-                                MERIT_AXE,
-                                MERIT_GAXE,
-                                MERIT_SCYTHE,
-                                MERIT_POLEARM,
-                                MERIT_KATANA,
-                                MERIT_GKATANA,
-                                MERIT_CLUB,
-                                MERIT_STAFF,
-                                MERIT_AUTOMATON_SKILLS,
-                                MERIT_AUTOMATON_SKILLS,
-                                MERIT_AUTOMATON_SKILLS,
-                                MERIT_ARCHERY,
-                                MERIT_MARKSMANSHIP,
-                                MERIT_THROWING,
-                                MERIT_GUARDING,
-                                MERIT_EVASION,
-                                MERIT_SHIELD,
-                                MERIT_PARRYING,
-                                MERIT_DIVINE,
-                                MERIT_HEALING,
-                                MERIT_ENHANCING,
-                                MERIT_ENFEEBLING,
-                                MERIT_ELEMENTAL,
-                                MERIT_DARK,
-                                MERIT_SUMMONING,
-                                MERIT_NINJITSU,
-                                MERIT_SINGING,
-                                MERIT_STRING,
-                                MERIT_WIND,
-                                MERIT_BLUE,
-                                MERIT_GEO,
-                                MERIT_HANDBELL };
-
-    uint8 meritIndex = 0;
-
     bool automatonSkillUpdated = false;
 
     // Iterate over skill IDs (offsetting by 79 to get modifier ID)
@@ -3911,8 +3872,10 @@ void BuildingCharSkillsTable(CCharEntity* PChar)
             maxMainSkill = battleutils::GetMaxSkill(1, PChar->GetMLevel()); // A+ capped down to the Automaton's rating
         }
 
-        skillBonus += PChar->PMeritPoints->GetMeritValue(skillMerit[meritIndex], PChar);
-        meritIndex++;
+        if (const auto skillMerit = meritNameSpace::GetSkillMerit(static_cast<xi::SkillType>(i)))
+        {
+            skillBonus += PChar->PMeritPoints->GetMeritValue(*skillMerit, PChar);
+        }
 
         // Add 79 to get the modifier ID
         skillBonus += PChar->getMod(static_cast<xi::Mod>(i + 79)); // This can be a negative value. Example: Shiva's Shotel.
@@ -7031,13 +6994,13 @@ auto CheckAbilityAddtype(CCharEntity* PChar, const CAbility* PAbility) -> bool
 {
     if (PAbility->getAddType() & ADDTYPE_MERIT)
     {
-        if (!PChar->PMeritPoints->GetMerit(static_cast<MERIT_TYPE>(PAbility->getMeritModID())))
+        if (!PChar->PMeritPoints->GetMerit(static_cast<xi::Merit>(PAbility->getMeritModID())))
         {
             ShowWarning("charutils::CheckAbilityAddtype: Attempt to add invalid Merit Ability (%d).", PAbility->getMeritModID());
             return false;
         }
 
-        if (!(PChar->PMeritPoints->GetMerit(static_cast<MERIT_TYPE>(PAbility->getMeritModID()))->count > 0))
+        if (!(PChar->PMeritPoints->GetMerit(static_cast<xi::Merit>(PAbility->getMeritModID()))->count > 0))
         {
             return false;
         }

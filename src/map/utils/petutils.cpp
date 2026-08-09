@@ -407,7 +407,7 @@ void LoadAutomatonStats(CCharEntity* PMaster, CPetEntity* PPet, Pet_t* petStats,
     tempSkills.elemental       = amaSkill;
     tempSkills.dark            = amaSkill;
 
-    int32 meritbonus = PMaster->PMeritPoints->GetMeritValue(MERIT_AUTOMATON_SKILLS, PMaster);
+    int32 meritbonus = PMaster->PMeritPoints->GetMeritValue(xi::Merit::AutomatonSkills, PMaster);
 
     // If skill rank is 0, merit bonus needs to be added to be displayed like retail does
     if (puppetutils::getSkillCap(PMaster, xi::SkillType::AutomatonRanged, mlvl) == 0)
@@ -942,10 +942,10 @@ void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
     if (PMaster->objtype == TYPE_PC)
     {
         CCharEntity* PChar = static_cast<CCharEntity*>(PMaster);
-        PPet->addModifier(xi::Mod::MATT, PChar->PMeritPoints->GetMeritValue(MERIT_AVATAR_MAGICAL_ATTACK, PChar));
-        PPet->addModifier(xi::Mod::ATT, PChar->PMeritPoints->GetMeritValue(MERIT_AVATAR_PHYSICAL_ATTACK, PChar));
-        PPet->addModifier(xi::Mod::MACC, PChar->PMeritPoints->GetMeritValue(MERIT_AVATAR_MAGICAL_ACCURACY, PChar));
-        PPet->addModifier(xi::Mod::ACC, PChar->PMeritPoints->GetMeritValue(MERIT_AVATAR_PHYSICAL_ACCURACY, PChar));
+        PPet->addModifier(xi::Mod::MATT, PChar->PMeritPoints->GetMeritValue(xi::Merit::AvatarMagicalAttack, PChar));
+        PPet->addModifier(xi::Mod::ATT, PChar->PMeritPoints->GetMeritValue(xi::Merit::AvatarPhysicalAttack, PChar));
+        PPet->addModifier(xi::Mod::MACC, PChar->PMeritPoints->GetMeritValue(xi::Merit::AvatarMagicalAccuracy, PChar));
+        PPet->addModifier(xi::Mod::ACC, PChar->PMeritPoints->GetMeritValue(xi::Merit::AvatarPhysicalAccuracy, PChar));
 
         PPet->addModifier(xi::Mod::ACC, PChar->PJobPoints->GetJobPointValue(JP_SUMMON_ACC_BONUS));
         PPet->addModifier(xi::Mod::MACC, PChar->PJobPoints->GetJobPointValue(JP_SUMMON_MAGIC_ACC_BONUS));
@@ -1056,7 +1056,7 @@ void CalculateJugPetStats(CBattleEntity* PMaster, CPetEntity* PPet)
 
     // Increase the pet's level cal by the bonus given by BEAST AFFINITY merits.
     CCharEntity* PChar = static_cast<CCharEntity*>(PMaster);
-    highestLvl += PChar->PMeritPoints->GetMeritValue(MERIT_BEAST_AFFINITY, PChar);
+    highestLvl += PChar->PMeritPoints->GetMeritValue(xi::Merit::BeastAffinity, PChar);
 
     // And cap it to the master's level or weapon ilvl, whichever is greater
     auto capLevel = std::max(PMaster->GetMLevel(), PMaster->m_Weapons[SLOT_MAIN]->getILvl());
@@ -1118,13 +1118,13 @@ void CalculateAutomatonStats(CBattleEntity* PMaster, CBattleEntity* PPet)
         {
             if (PMaster->objtype == TYPE_PC)
             {
-                PPet->addModifier(xi::Mod::ATTP, PChar->PMeritPoints->GetMeritValue(MERIT_OPTIMIZATION, PChar));
-                PPet->addModifier(xi::Mod::DEFP, PChar->PMeritPoints->GetMeritValue(MERIT_OPTIMIZATION, PChar));
-                PPet->addModifier(xi::Mod::MATT, PChar->PMeritPoints->GetMeritValue(MERIT_OPTIMIZATION, PChar));
-                PPet->addModifier(xi::Mod::ACC, PChar->PMeritPoints->GetMeritValue(MERIT_FINE_TUNING, PChar));
-                PPet->addModifier(xi::Mod::RACC, PChar->PMeritPoints->GetMeritValue(MERIT_FINE_TUNING, PChar));
-                PPet->addModifier(xi::Mod::EVA, PChar->PMeritPoints->GetMeritValue(MERIT_FINE_TUNING, PChar));
-                PPet->addModifier(xi::Mod::MDEF, PChar->PMeritPoints->GetMeritValue(MERIT_FINE_TUNING, PChar));
+                PPet->addModifier(xi::Mod::ATTP, PChar->PMeritPoints->GetMeritValue(xi::Merit::Optimization, PChar));
+                PPet->addModifier(xi::Mod::DEFP, PChar->PMeritPoints->GetMeritValue(xi::Merit::Optimization, PChar));
+                PPet->addModifier(xi::Mod::MATT, PChar->PMeritPoints->GetMeritValue(xi::Merit::Optimization, PChar));
+                PPet->addModifier(xi::Mod::ACC, PChar->PMeritPoints->GetMeritValue(xi::Merit::FineTuning, PChar));
+                PPet->addModifier(xi::Mod::RACC, PChar->PMeritPoints->GetMeritValue(xi::Merit::FineTuning, PChar));
+                PPet->addModifier(xi::Mod::EVA, PChar->PMeritPoints->GetMeritValue(xi::Merit::FineTuning, PChar));
+                PPet->addModifier(xi::Mod::MDEF, PChar->PMeritPoints->GetMeritValue(xi::Merit::FineTuning, PChar));
             }
 
             FinalizePetStatistics(PMaster, PAutomaton);

@@ -22,135 +22,88 @@
 #include "merit.h"
 #include "entities/char_entity.h"
 
+#include "data/datasets/merits/dataset.h"
+#include "data/loader.h"
 #include "packets/s2c/0x0aa_magic_data.h"
 #include "packets/s2c/0x0ac_command_data.h"
 #include "utils/charutils.h"
 
-// clang-format off
-static uint8 upgrade[10][45] = {
-    { 1, 2, 3, 4, 5, 5, 5, 5, 5, 7, 7, 7, 9, 9, 9 },           // HP-MP
-    { 3, 6, 9, 9, 9, 12, 12, 12, 12, 15, 15, 15, 15, 18, 18 }, // Attributes
-    { 1, 2, 3, 3, 3, 3, 3, 3 },                                // Combat Skills
-    { 1, 2, 3, 3, 3, 3, 3, 3 },                                // Defensive Skills
-    { 1, 2, 3, 3, 3, 3, 3, 3 },                                // Magic Skills
-    { 1, 2, 3, 4, 5 },                                         // Others
-    { 1, 2, 3, 4, 5 },                                         // Job Group 1
-    { 3, 4, 5, 5, 5 },                                         // Job Group 2
-    { 20, 22, 24, 27, 30 },                                    // Weapon Skills
-    { 1, 3, 5, 7, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39,
-      42, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 48, 48, 48,
-      48, 48, 48, 48, 48, 48, 48, 51, 51, 51, 51, 51, 51, 51,
-      51, 51 } // Max merits
-};
-// clang-format on
+#include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <utility>
 
 #define MAX_LIMIT_POINTS 10000
 
-// TODO: Transfer all this to the database
-
-// clang-format off
-static uint8 cap[100] = {
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,           // 00-09  0
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,           // 10-19  1
-    2, 2, 2, 2, 2, 2, 2, 2, 2, 2,           // 20-29  2
-    3, 3, 3, 3, 3, 3, 3, 3, 3, 3,           // 30-39  3
-    4, 4, 4, 4, 4, 4, 4, 4, 4, 4,           // 40-49  4
-    5, 5, 5, 5, 5,                          // 50-54  5
-    6, 6, 6, 6, 6,                          // 55-59  6
-    7, 7, 7, 7, 7,                          // 60-64  7
-    8, 8, 8, 8, 8,                          // 65-69  8
-    9, 9, 9, 9, 9,                          // 70-74  9
-    10, 10, 10, 10, 10,                     // 75-79 10
-    15, 15, 15, 15, 15, 15, 15, 15, 15, 15, // 80-89 15
-    15, 15, 15, 15, 15, 15, 15, 15, 15, 15, // 90-99 15
-};
-// clang-format on
-
-struct MeritCategoryInfo_t
+namespace
 {
-    int8  MeritsInCat; // number of elements in a group
-    uint8 MaxPoints;   // the maximum number of points that can be put into a group
-    uint8 UpgradeID;   // group index in upgrade array
-};
 
-// clang-format off
-static const MeritCategoryInfo_t meritCatInfo[] = {
-    { 3, 75, 0 },   // MCATEGORY_HP_MP       catNumber 00 (HP 15, MP 15, Max_merits 45)
-    { 7, 105, 1 },  // MCATEGORY_ATTRIBUTES  catNumber 01
-    { 19, 152, 2 }, // MCATEGORY_COMBAT      catNumber 02
-    { 14, 112, 4 }, // MCATEGORY_MAGIC       catNumber 03
-    { 5, 10, 5 },   // MCATEGORY_OTHERS      catNumber 04
+using MeritsDataset = xi::data::datasets::merits::Dataset;
 
-    { 5, 10, 6 }, // MCATEGORY_WAR_1       catNumber 05
-    { 5, 10, 6 }, // MCATEGORY_MNK_1       catNumber 06
-    { 5, 10, 6 }, // MCATEGORY_WHM_1       catNumber 07
-    { 7, 10, 6 }, // MCATEGORY_BLM_1       catNumber 08
-    { 7, 10, 6 }, // MCATEGORY_RDM_1       catNumber 09
-    { 5, 10, 6 }, // MCATEGORY_THF_1       catNumber 10
-    { 5, 10, 6 }, // MCATEGORY_PLD_1       catNumber 11
-    { 5, 10, 6 }, // MCATEGORY_DRK_1       catNumber 12
-    { 5, 10, 6 }, // MCATEGORY_BST_1       catNumber 13
-    { 5, 10, 6 }, // MCATEGORY_BRD_1       catNumber 14
-    { 5, 10, 6 }, // MCATEGORY_RNG_1       catNumber 15
-    { 5, 10, 6 }, // MCATEGORY_SAM_1       catNumber 16
-    { 7, 10, 6 }, // MCATEGORY_NIN_1       catNumber 17
-    { 5, 10, 6 }, // MCATEGORY_DRG_1       catNumber 18
-    { 5, 10, 6 }, // MCATEGORY_SMN_1       catNumber 19
-    { 5, 10, 6 }, // MCATEGORY_BLU_1       catNumber 20
-    { 5, 10, 6 }, // MCATEGORY_COR_1       catNumber 21
-    { 5, 10, 6 }, // MCATEGORY_PUP_1       catNumber 22
-    { 4, 10, 6 }, // MCATEGORY_DNC_1       catNumber 23
-    { 4, 10, 6 }, // MCATEGORY_SCH_1       catNumber 24
+xi::data::Merits                                        meritData{};
+std::unordered_map<uint16, xi::data::MeritCategoryData> categoryById;
+std::unordered_map<uint16, uint16>                      meritIndexById;
+Merit_t                                                 meritDefaults[kMeritPacketSlots]{};
 
-    { 14, 15, 8 }, // MCATEGORY_WS          catNumber 25
+auto loadNameLookup(const std::string& query, const std::string& column) -> std::unordered_map<std::string, uint16>
+{
+    std::unordered_map<std::string, uint16> lookup;
 
-    { 5, 10, 6 }, // MCATEGORY_GEO_1       catNumber 26
-    { 5, 10, 6 }, // MCATEGORY_RUN_1       catNumber 27
+    const auto rset = db::preparedStmt(query);
+    FOR_DB_MULTIPLE_RESULTS(rset)
+    {
+        const auto value = rset->getOrDefault<uint16>(column, 0);
+        if (value != 0)
+        {
+            lookup.emplace(rset->get<std::string>("name"), value);
+        }
+    }
 
-    { 0, 0, 8 }, // MCATEGORY_UNK_0       catNumber 28
-    { 0, 0, 8 }, // MCATEGORY_UNK_1       catNumber 29
-    { 0, 0, 8 }, // MCATEGORY_UNK_2       catNumber 30
+    return lookup;
+}
 
-    { 4, 10, 7 },  // MCATEGORY_WAR_2       catNumber 31
-    { 4, 10, 7 },  // MCATEGORY_MNK_2       catNumber 32
-    { 6, 10, 7 },  // MCATEGORY_WHM_2       catNumber 33
-    { 12, 10, 7 }, // MCATEGORY_BLM_2       catNumber 34
-    { 12, 10, 7 }, // MCATEGORY_RDM_2       catNumber 35
-    { 4, 10, 7 },  // MCATEGORY_THF_2       catNumber 36
-    { 4, 10, 7 },  // MCATEGORY_PLD_2       catNumber 37
-    { 4, 10, 7 },  // MCATEGORY_DRK_2       catNumber 38
-    { 4, 10, 7 },  // MCATEGORY_BST_2       catNumber 39
-    { 6, 10, 7 },  // MCATEGORY_BRD_2       catNumber 40
-    { 4, 10, 7 },  // MCATEGORY_RNG_2       catNumber 41
-    { 4, 10, 7 },  // MCATEGORY_SAM_2       catNumber 42
-    { 12, 10, 7 }, // MCATEGORY_NIN_2       catNumber 43
-    { 4, 10, 7 },  // MCATEGORY_DRG_2       catNumber 44
-    { 6, 10, 7 },  // MCATEGORY_SMN_2       catNumber 45
-    { 4, 10, 7 },  // MCATEGORY_BLU_2       catNumber 46
-    { 4, 10, 7 },  // MCATEGORY_COR_2       catNumber 47
-    { 4, 10, 7 },  // MCATEGORY_PUP_2       catNumber 48
-    { 4, 10, 7 },  // MCATEGORY_DNC_2       catNumber 49
-    { 6, 10, 7 },  // MCATEGORY_SHC_2       catNumber 50
+// a merit grants only what it names, so sharing a name with a spell grants nothing
+auto resolveGrant(const std::unordered_map<std::string, uint16>& lookup,
+                  const std::string&                             declared,
+                  const std::string&                             merit,
+                  const std::string_view                         table) -> uint16
+{
+    if (declared.empty())
+    {
+        return 0;
+    }
 
-    { 0, 0, 7 }, // MCATEGORY_UNK_3       catNumber 51
+    const auto match = lookup.find(declared);
+    if (match == lookup.end())
+    {
+        ShowErrorFmt("merit {} names '{}', which is not in {}", merit, declared, table);
+        return 0;
+    }
 
-    { 4, 10, 7 }, // MCATEGORY_GEO_2       catNumber 52
-    { 4, 10, 7 }, // MCATEGORY_RUN_2       catNumber 53
-};
-// clang-format on
+    return match->second;
+}
 
-#define GetMeritCategory(merit) (((merit) >> 6) - 1)    // get category from merit
-#define GetMeritID(merit)       (((merit) & 0x3F) >> 1) // get the offset in the category from merit
+auto nextUpgradeCost(const Merit_t& merit) -> uint8
+{
+    if (merit.costs == nullptr || merit.upgrade == 0)
+    {
+        return 0;
+    }
+
+    return merit.costs[std::min<uint8>(merit.count, merit.upgrade - 1)];
+}
+
+// the id with its in-category offset masked off
+constexpr auto categoryOf(const xi::Merit merit) -> uint16
+{
+    return static_cast<uint16>(merit) & 0xFFC0;
+}
+
+} // namespace
 
 CMeritPoints::CMeritPoints(CCharEntity* PChar)
 {
-    if (sizeof(merits) != sizeof(meritNameSpace::GMeritsTemplate))
-    {
-        ShowWarning("Size mismatch between merits and GMeritsTemplate for %s.", PChar->getName());
-        return;
-    }
-
-    std::memcpy(merits, meritNameSpace::GMeritsTemplate, sizeof(merits));
+    std::memcpy(merits, meritDefaults, sizeof(merits));
 
     m_PChar = PChar;
     LoadMeritPoints(PChar->id);
@@ -159,29 +112,12 @@ CMeritPoints::CMeritPoints(CCharEntity* PChar)
     m_MeritPoints = 0;
 }
 
-void CMeritPoints::LoadMeritPoints(uint32 charid)
+void CMeritPoints::LoadMeritPoints(const uint32 charid)
 {
-    uint8       catNumber   = 0;
-    const uint8 maxCatCount = 54;
-
-    for (uint16 i = 0; i < MERITS_COUNT; ++i)
+    for (auto& merit : merits)
     {
-        if ((catNumber < maxCatCount && i == meritNameSpace::groupOffset[catNumber]) || (catNumber > 27 && catNumber < 31) || catNumber == 51) // Increment category number if known (or known unknown)
-        {
-            if ((catNumber > 27 && catNumber < 31) || catNumber == 51) // 28-30 and 51 are UNK.
-            {
-                Categories[catNumber] = &merits[163]; // point these to valid merits to prevent crash
-            }
-            else
-            {
-                Categories[catNumber] = &merits[i];
-            }
-
-            catNumber++;
-        }
-
-        merits[i].count = 0;
-        merits[i].next  = upgrade[merits[i].upgradeid][merits[i].count];
+        merit.count = 0;
+        merit.next  = nextUpgradeCost(merit);
     }
 
     const auto rset = db::preparedStmt("SELECT meritid, upgrades FROM char_merit WHERE charid = ?", charid);
@@ -189,14 +125,15 @@ void CMeritPoints::LoadMeritPoints(uint32 charid)
     {
         const auto meritID  = rset->get<uint32>("meritid");
         const auto upgrades = rset->get<uint32>("upgrades");
-        for (auto& merit : merits)
+        const auto index    = meritIndexById.find(static_cast<uint16>(meritID));
+        if (index == meritIndexById.end())
         {
-            if (merit.id == meritID)
-            {
-                merit.count = upgrades;
-                merit.next  = upgrade[merit.upgradeid][merit.count];
-            }
+            continue;
         }
+
+        auto& merit = merits[index->second];
+        merit.count = static_cast<uint8>(std::min<uint32>(upgrades, merit.upgrade));
+        merit.next  = nextUpgradeCost(merit);
     }
 }
 
@@ -225,31 +162,33 @@ void CMeritPoints::SaveMeritPoints(const uint32 charid)
     }
 }
 
-uint16 CMeritPoints::GetLimitPoints() const
+auto CMeritPoints::GetLimitPoints() const -> uint16
 {
     return m_LimitPoints;
 }
 
-uint8 CMeritPoints::GetMeritPoints() const
+auto CMeritPoints::GetMeritPoints() const -> uint8
 {
     return m_MeritPoints;
 }
 
-uint16 CMeritPoints::GetMeritCountInSameCategory(MERIT_TYPE merit)
+auto CMeritPoints::GetMeritCountInSameCategory(const xi::Merit merit) const -> uint16
 {
     if (!this->IsMeritExist(merit))
     {
         return 0;
     }
 
-    Merit_t* PMerit = Categories[GetMeritCategory(merit)];
+    const auto category = categoryById.find(categoryOf(merit));
+    if (category == categoryById.end())
+    {
+        return 0;
+    }
 
     uint16 total = 0;
-
-    for (int i = 0; i < meritCatInfo[GetMeritCategory(merit)].MeritsInCat; ++i)
+    for (uint8 i = 0; i < category->second.Count; ++i)
     {
-        total += PMerit->count;
-        PMerit++;
+        total += merits[category->second.Offset + i].count;
     }
 
     return total;
@@ -257,20 +196,20 @@ uint16 CMeritPoints::GetMeritCountInSameCategory(MERIT_TYPE merit)
 
 // true - If merit was added
 
-bool CMeritPoints::AddLimitPoints(uint16 points)
+auto CMeritPoints::AddLimitPoints(const uint16 points) -> bool
 {
     m_LimitPoints += points;
 
     if (m_LimitPoints >= MAX_LIMIT_POINTS)
     {
         // check if player has reached cap
-        if (m_MeritPoints == settings::get<uint8>("map.MAX_MERIT_POINTS") + GetMeritValue(MERIT_MAX_MERIT, m_PChar))
+        if (m_MeritPoints == settings::get<uint8>("map.MAX_MERIT_POINTS") + GetMeritValue(xi::Merit::MaxMerit, m_PChar))
         {
             m_LimitPoints = MAX_LIMIT_POINTS - 1;
             return false;
         }
 
-        uint8 MeritPoints = std::min(m_MeritPoints + m_LimitPoints / MAX_LIMIT_POINTS, settings::get<uint8>("map.MAX_MERIT_POINTS") + GetMeritValue(MERIT_MAX_MERIT, m_PChar));
+        uint8 MeritPoints = std::min(m_MeritPoints + m_LimitPoints / MAX_LIMIT_POINTS, settings::get<uint8>("map.MAX_MERIT_POINTS") + GetMeritValue(xi::Merit::MaxMerit, m_PChar));
 
         m_LimitPoints = m_LimitPoints % MAX_LIMIT_POINTS;
 
@@ -283,14 +222,14 @@ bool CMeritPoints::AddLimitPoints(uint16 points)
     return false;
 }
 
-void CMeritPoints::SetLimitPoints(uint16 points)
+void CMeritPoints::SetLimitPoints(const uint16 points)
 {
     m_LimitPoints = std::min<uint16>(points, MAX_LIMIT_POINTS - 1);
 }
 
-void CMeritPoints::SetMeritPoints(uint16 points)
+void CMeritPoints::SetMeritPoints(const uint16 points)
 {
-    m_MeritPoints = std::min<uint8>((uint8)points, settings::get<uint8>("map.MAX_MERIT_POINTS") + GetMeritValue(MERIT_MAX_MERIT, m_PChar));
+    m_MeritPoints = std::min<uint8>(static_cast<uint8>(points), settings::get<uint8>("map.MAX_MERIT_POINTS") + GetMeritValue(xi::Merit::MaxMerit, m_PChar));
 }
 
 /************************************************************************
@@ -300,18 +239,9 @@ void CMeritPoints::SetMeritPoints(uint16 points)
  *                                                                       *
  ************************************************************************/
 
-bool CMeritPoints::IsMeritExist(MERIT_TYPE merit)
+auto CMeritPoints::IsMeritExist(const xi::Merit merit) const -> bool
 {
-    if ((int16)merit < MCATEGORY_START)
-    {
-        return false;
-    }
-    if ((int16)merit >= MCATEGORY_COUNT)
-    {
-        return false;
-    }
-
-    if ((GetMeritID(merit)) >= meritCatInfo[GetMeritCategory(merit)].MeritsInCat)
+    if (!meritIndexById.contains(static_cast<uint16>(merit)))
     {
         return false;
     }
@@ -319,14 +249,14 @@ bool CMeritPoints::IsMeritExist(MERIT_TYPE merit)
     return true;
 }
 
-const Merit_t* CMeritPoints::GetMerit(MERIT_TYPE merit)
+auto CMeritPoints::GetMerit(const xi::Merit merit) -> const Merit_t*
 {
     return GetMeritPointer(merit);
 }
 
-const Merit_t* CMeritPoints::GetMeritByIndex(uint16 index)
+auto CMeritPoints::GetMeritByIndex(const uint16 index) const -> const Merit_t*
 {
-    if (index >= MERITS_COUNT)
+    if (index >= kMeritPacketSlots)
     {
         ShowWarning("Invalid Merit Index (%d) passed to function.", index);
         return nullptr;
@@ -335,16 +265,18 @@ const Merit_t* CMeritPoints::GetMeritByIndex(uint16 index)
     return &merits[index];
 }
 
-Merit_t* CMeritPoints::GetMeritPointer(MERIT_TYPE merit)
+auto CMeritPoints::GetMeritPointer(const xi::Merit merit) -> Merit_t*
 {
-    if (IsMeritExist(merit))
+    const auto index = meritIndexById.find(static_cast<uint16>(merit));
+    if (index == meritIndexById.end())
     {
-        return &Categories[GetMeritCategory(merit)][GetMeritID(merit)];
+        return nullptr;
     }
-    return nullptr;
+
+    return &merits[index->second];
 }
 
-void CMeritPoints::RaiseMerit(MERIT_TYPE merit)
+void CMeritPoints::RaiseMerit(const xi::Merit merit)
 {
     Merit_t* PMerit = GetMeritPointer(merit);
     if (!PMerit)
@@ -352,11 +284,16 @@ void CMeritPoints::RaiseMerit(MERIT_TYPE merit)
         return;
     }
 
-    if (m_MeritPoints >= PMerit->next && PMerit->count < PMerit->upgrade && GetMeritCountInSameCategory(merit) < meritCatInfo[GetMeritCategory(merit)].MaxPoints)
+    const auto category = categoryById.find(categoryOf(merit));
+    if (category == categoryById.end())
+    {
+        return;
+    }
+
+    if (m_MeritPoints >= PMerit->next && PMerit->count < PMerit->upgrade && GetMeritCountInSameCategory(merit) < category->second.MaxUpgrades)
     {
         m_MeritPoints -= PMerit->next;
 
-        PMerit->next = upgrade[PMerit->upgradeid][PMerit->count + 1];
         if (PMerit->spellid != 0)
         {
             if (charutils::addSpell(m_PChar, PMerit->spellid))
@@ -381,7 +318,7 @@ void CMeritPoints::RaiseMerit(MERIT_TYPE merit)
     }
 }
 
-void CMeritPoints::LowerMerit(MERIT_TYPE merit)
+void CMeritPoints::LowerMerit(const xi::Merit merit)
 {
     Merit_t* PMerit = GetMeritPointer(merit);
     if (!PMerit)
@@ -391,7 +328,8 @@ void CMeritPoints::LowerMerit(MERIT_TYPE merit)
 
     if (PMerit->count > 0)
     {
-        PMerit->next = upgrade[meritCatInfo[GetMeritCategory(merit)].UpgradeID][--PMerit->count];
+        --PMerit->count;
+        PMerit->next = nextUpgradeCost(*PMerit);
     }
 
     if (PMerit->spellid != 0 && PMerit->count == 0)
@@ -415,20 +353,29 @@ void CMeritPoints::LowerMerit(MERIT_TYPE merit)
     }
 }
 
-int32 CMeritPoints::GetMeritValue(MERIT_TYPE merit, CCharEntity* PChar)
+auto CMeritPoints::GetMeritValue(const xi::Merit merit, const CCharEntity* PChar) -> int32
 {
-    Merit_t* PMerit     = GetMeritPointer(merit);
-    uint16   meritValue = 0;
+    const Merit_t* PMerit     = GetMeritPointer(merit);
+    uint16         meritValue = 0;
 
     if (PMerit)
     {
-        if (PMerit->catid < 5 || (PMerit->jobs & (1 << (static_cast<uint8>(PChar->GetMJob()) - 1)) && PChar->GetMLevel() >= 75))
+        // general categories apply to every job, the rest need the merit's job at 75+
+        if (PMerit->category <= xi::MeritCategory::Others ||
+            (PMerit->jobs & (1 << (static_cast<uint8>(PChar->GetMJob()) - 1)) && PChar->GetMLevel() >= 75))
         {
-            meritValue = merit == MERIT_MAX_MERIT ? PMerit->count : std::min(PMerit->count, cap[PChar->GetMLevel()]);
+            if (merit == xi::Merit::MaxMerit)
+            {
+                meritValue = PMerit->count;
+            }
+            else
+            {
+                meritValue = std::min(PMerit->count, meritData.LevelCaps[PChar->GetMLevel()]);
+            }
         }
 
-        if (PMerit->catid == 25 && PChar->GetMLevel() < 96)
-        { // categoryID 25 is for merit weaponskills, which only apply if the player is lv 96+
+        if (PMerit->category == xi::MeritCategory::WeaponSkills && PChar->GetMLevel() < 96)
+        {
             meritValue = 0;
         }
 
@@ -441,60 +388,64 @@ int32 CMeritPoints::GetMeritValue(MERIT_TYPE merit, CCharEntity* PChar)
 namespace meritNameSpace
 {
 
-Merit_t GMeritsTemplate[MERITS_COUNT]         = {};    // global list of merits and their properties
-int16   groupOffset[MCATEGORY_COUNT / 64 - 1] = { 0 }; // the first merit offset of each category
+auto GetSkillMerit(const xi::SkillType skill) -> std::optional<xi::Merit>
+{
+    const auto match = meritData.MeritBySkill.find(skill);
+    if (match == meritData.MeritBySkill.end())
+    {
+        return std::nullopt;
+    }
+
+    return match->second;
+}
 
 void LoadMeritsList()
 {
-    const auto rset = db::preparedStmt("SELECT m.meritid, m.value, m.jobs, m.upgrade, m.upgradeid, m.catagoryid, sl.spellid, ws.unlock_id "
-                                       "FROM merits m "
-                                       "LEFT JOIN spell_list sl ON m.name = sl.name "
-                                       "LEFT JOIN weapon_skills ws ON m.name = ws.name "
-                                       "ORDER BY m.meritid ASC LIMIT ?",
-                                       MERITS_COUNT);
+    meritData = xi::data::loadDataset<MeritsDataset>();
+    meritIndexById.clear();
 
-    // issue with unknown catagories causing massive confusion
-
-    uint16 index            = 0; // global merit template count (to 255)
-    uint8  catIndex         = 0; // global merit category count (to 51)
-    int8   previousCatIndex = 0; // will be set on every loop, used for detecting a category change
-    int8   catMeritIndex    = 0; // counts number of merits in a category
-
-    FOR_DB_MULTIPLE_RESULTS(rset)
+    if (meritData.Entries.size() > kMeritPacketSlots)
     {
-        Merit_t Merit = {}; // creat a new merit template.
-
-        Merit.id         = rset->get<uint16>("meritid"); // set data from db.
-        Merit.value      = rset->get<uint32>("value");
-        Merit.jobs       = rset->get<uint32>("jobs");
-        Merit.upgrade    = rset->get<uint32>("upgrade");
-        Merit.upgradeid  = rset->get<uint8>("upgradeid");
-        Merit.catid      = rset->get<uint8>("catagoryid");
-        Merit.next       = upgrade[Merit.upgradeid][0];
-        Merit.spellid    = rset->getOrDefault<uint16>("spellid", 0);
-        Merit.wsunlockid = rset->getOrDefault<uint16>("unlock_id", 0);
-
-        GMeritsTemplate[index] = Merit; // add the merit to the array
-
-        previousCatIndex = Merit.catid; // previousCatIndex is set on everyloop to detect a catogory change.
-
-        if (previousCatIndex != catIndex) // check for category change.
-        {
-            groupOffset[catIndex] = index - catMeritIndex; // set index offset, first merit of each group.
-            catIndex++;                                    // now on next category.
-            catMeritIndex = 0;                             // reset the merit category count to 0.
-
-            if (previousCatIndex != catIndex)
-            { // this deals with the problem with unknown catagories.
-                catIndex = previousCatIndex;
-            }
-        }
-
-        catMeritIndex++; // next index within category.
-        index++;         // next global template index.
+        ShowErrorFmt("data/merits.yaml holds {} merits, but only {} fit the client's slots", meritData.Entries.size(), kMeritPacketSlots);
+        return;
     }
 
-    groupOffset[catIndex] = index - catMeritIndex; // add the last offset manually since loop finishes before hand.
+    const auto spells    = loadNameLookup("SELECT name, spellid FROM spell_list", "spellid");
+    const auto wsUnlocks = loadNameLookup("SELECT name, unlock_id FROM weapon_skills", "unlock_id");
+
+    categoryById.clear();
+    for (const auto& category : meritData.Categories)
+    {
+        categoryById[std::to_underlying(category.Id)] = category;
+    }
+
+    for (uint16 index = 0; index < meritData.Entries.size(); ++index)
+    {
+        const auto& entry = meritData.Entries[index];
+        const auto  name  = std::string{ xi::data::EnumTraits<xi::Merit>::toName(entry.Id) };
+
+        uint32 jobs{};
+        for (const auto job : entry.Jobs)
+        {
+            jobs |= 1u << (std::to_underlying(job) - 1);
+        }
+
+        Merit_t merit{
+            .value      = entry.Value,
+            .upgrade    = entry.MaxUpgrades,
+            .jobs       = jobs,
+            .category   = entry.Category,
+            .spellid    = resolveGrant(spells, entry.Spell, name, "spell_list"),
+            .wsunlockid = resolveGrant(wsUnlocks, entry.WeaponSkill, name, "weapon_skills"),
+            .costs      = entry.UpgradeCosts.data(),
+        };
+
+        merit.id   = std::to_underlying(entry.Id);
+        merit.next = nextUpgradeCost(merit);
+
+        meritDefaults[index]     = merit;
+        meritIndexById[merit.id] = index;
+    }
 }
 
 }; // namespace meritNameSpace
