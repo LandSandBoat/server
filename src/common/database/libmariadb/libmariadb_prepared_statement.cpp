@@ -471,10 +471,15 @@ auto db::LibMariaDBPreparedStatement::executeBulkUpdate(std::string_view query, 
                     binds[column].buffer_type = fieldTypeFor<Cell>();
                     binds[column].is_unsigned = std::is_unsigned_v<Cell>;
                 }
+                else if constexpr (std::is_same_v<U, std::monostate>)
+                {
+                    // Sending NULL would need a per-row is_null array alongside the value array.
+                    throw std::runtime_error(fmt::format("bulk binding cannot send NULL, at column {}", column));
+                }
                 else
                 {
                     // Strings and blobs would need a stride buffer and a length array; nothing bulk-writes them.
-                    throw std::runtime_error("bulk binding supports numeric columns only");
+                    throw std::runtime_error(fmt::format("bulk binding supports numeric columns only, at column {}", column));
                 }
             },
             params[column]);
