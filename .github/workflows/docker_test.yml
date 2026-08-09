@@ -112,6 +112,10 @@ jobs:
               f.write("renamer\n")
           EOF
 
+      # The C++ unit tests need no database and no server, so they run before either exists.
+      - name: Run xi_unit_test
+        run: docker exec test-server /bin/bash -c './xi_unit_test'
+
       - name: Initialize database
         id: init_db
         run: docker exec test-server /bin/bash -c 'python ./tools/dbtool.py update'

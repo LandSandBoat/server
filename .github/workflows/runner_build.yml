@@ -250,6 +250,7 @@ jobs:
           rm -f build/src/map/xi_map*
           rm -f build/src/search/xi_search*
           rm -f build/src/test/xi_test*
+          rm -f build/src/test/xi_unit_test*
           rm -f build/src/world/xi_world*
 
       - name: Cache build

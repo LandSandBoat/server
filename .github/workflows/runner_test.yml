@@ -161,6 +161,11 @@ jobs:
               f.write("renamer\n")
           EOF
 
+      # The C++ unit tests need no database and no server, so they run before either exists.
+      # A failure here fails the job: it means the code under test is broken, not the fixtures.
+      - name: Run xi_unit_test
+        run: ./xi_unit_test
+
       - name: Initialize database
         run: python ./tools/dbtool.py update
 
