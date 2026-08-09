@@ -300,42 +300,75 @@ auto CPathFind::FollowPath(timer::time_point tick) -> void
         return;
     }
 
-    // Walk through waypoints already arrived at, stopping at the first one still to step toward.
-    pathpoint_t targetPoint{};
+    // Update speed before taking the budget.
+    const bool speedChange = owner_->baseSpeed() != owner_->updateSpeed((pathFlags_ & PATHFLAG_RUN) != 0);
+
+    float       budget   = StepBudget();
+    position_t& ownerPos = owner_->position();
+
+    // Use the whole tick's movement, even past several waypoints.
     while (!path_.consumed())
     {
-        targetPoint = path_.current();
+        const pathpoint_t targetPoint  = path_.current();
+        const bool        isFinalPoint = path_.atLastIndex();
 
-        // Only the final waypoint stops short; corners must be hit precisely or we clip the wall the navmesh inset us from.
-        const bool isFinalPoint = path_.atLastIndex();
-        if (!AtPoint(targetPoint.position, isFinalPoint))
+        // Arrived at the waypoint.
+        if (AtPoint(targetPoint.position, isFinalPoint))
+        {
+            onPoint_ = true;
+
+            if (targetPoint.setRotation)
+            {
+                ownerPos.rotation = targetPoint.position.rotation;
+                owner_->markPositionDirty();
+            }
+
+            if (targetPoint.wait != 0s)
+            {
+                // Stop here until the wait elapses; the next FollowPath() resumes.
+                timeAtPoint_ = tick + targetPoint.wait;
+                break;
+            }
+
+            owner_->onPathPoint();
+            path_.advance();
+            continue;
+        }
+
+        // Out of movement for this tick.
+        if (budget <= 0.0f)
         {
             break;
         }
 
-        onPoint_ = true;
-
-        if (targetPoint.setRotation)
+        // Stop short only for the last waypoint so corners are hit precisely.
+        const float stopShort = [&]() -> float
         {
-            owner_->position().rotation = targetPoint.position.rotation;
-            owner_->markPositionDirty();
-        }
+            if (path_.atOrPastLastIndex())
+            {
+                return distanceFromPoint_;
+            }
 
-        if (targetPoint.wait != 0s)
-        {
-            // Stop here until the wait elapses; the next FollowPath() resumes.
-            timeAtPoint_ = tick + targetPoint.wait;
-            return;
-        }
+            return 0.0f;
+        }();
 
-        owner_->onPathPoint();
-        path_.advance();
+        const float moved = pathfind::stepTowards(ownerPos, targetPoint.position, budget, stopShort);
+        distanceMoved_ += moved;
+        budget -= moved;
     }
 
-    // Stop short only for the last waypoint so corners are rounded precisely.
-    const bool  steppingToFinal = path_.atOrPastLastIndex();
-    const float stopShort       = steppingToFinal ? distanceFromPoint_ : 0.0f;
-    StepToInternal(targetPoint.position, pathFlags_ & PATHFLAG_RUN, stopShort);
+    // Movement counter for the client's animation.
+    if (speedChange)
+    {
+        ownerPos.moving += 0x28;
+    }
+    else
+    {
+        ownerPos.moving += 0x35;
+    }
+
+    ownerPos.moving %= 0x2000;
+    owner_->markPositionDirty();
 
     if (path_.consumed())
     {
@@ -351,13 +384,8 @@ auto CPathFind::StepTo(const position_t& pos, bool run) -> void
     StepToInternal(pos, run, distanceFromPoint_);
 }
 
-auto CPathFind::StepToInternal(const position_t& pos, bool run, float stopShort) -> void
+auto CPathFind::StepBudget() const -> float
 {
-    TracyZoneScoped;
-    TracyZoneString(owner_->name());
-
-    const bool speedChange = owner_->baseSpeed() != owner_->updateSpeed(run);
-
     // Worms underground get a synthetic speed (their normal speed is 0).
     const float speed = [&]() -> float
     {
@@ -370,7 +398,16 @@ auto CPathFind::StepToInternal(const position_t& pos, bool run, float stopShort)
         return static_cast<float>(baseSpeed);
     }();
 
-    const float stepDistance = speed * kYalmsPerSecondPerSpeed * std::chrono::duration<float>(kLogicUpdateInterval).count();
+    return speed * kYalmsPerSecondPerSpeed * std::chrono::duration<float>(kLogicUpdateInterval).count();
+}
+
+auto CPathFind::StepToInternal(const position_t& pos, bool run, float stopShort) -> void
+{
+    TracyZoneScoped;
+    TracyZoneString(owner_->name());
+
+    const bool  speedChange  = owner_->baseSpeed() != owner_->updateSpeed(run);
+    const float stepDistance = StepBudget();
 
     // Kinematics live in pathfind_step so tests can exercise the exact math; stepTowards() also faces the owner.
     position_t& ownerPos = owner_->position();
