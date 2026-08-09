@@ -177,6 +177,20 @@ auto db::transactionRollback() -> bool
     return true;
 }
 
+namespace
+{
+
+// True while a db::transaction body is running on this thread. Saved and restored rather than
+// cleared, so a nested db::transaction leaves the outer one's window intact.
+thread_local bool tlsFailuresThrow = false;
+
+} // namespace
+
+auto db::detail::failuresThrow() noexcept -> bool
+{
+    return tlsFailuresThrow;
+}
+
 auto db::transaction(const Fn<void() const>& transactionFn) -> bool
 {
     TracyZoneScoped;
@@ -209,6 +223,15 @@ auto db::transaction(const Fn<void() const>& transactionFn) -> bool
 
     try
     {
+        // Scoped to the body alone: the COMMIT and ROLLBACK below have to be able to fail without
+        // throwing out of this function.
+        tlsFailuresThrow              = true;
+        const auto restoreFailureMode = xi::finally<Fn<void()>>(
+            []() -> void
+            {
+                tlsFailuresThrow = false;
+            });
+
         transactionFn();
     }
     catch (const std::exception& e)

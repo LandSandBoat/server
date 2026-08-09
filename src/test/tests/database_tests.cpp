@@ -40,6 +40,7 @@
 #include <stdexcept>
 #include <string>
 #include <string_view>
+#include <tuple>
 #include <utility>
 #include <variant>
 #include <vector>
@@ -136,6 +137,13 @@ public:
     auto execute(std::string_view query, const std::vector<db::BoundValue>& /*params*/) -> std::unique_ptr<db::ResultSet> override
     {
         queries.emplace_back(query);
+
+        // nullptr is how the layer reports a failed statement.
+        if (query == failOn)
+        {
+            return nullptr;
+        }
+
         return std::make_unique<db::LibMariaDBResultSet>(std::size_t{ 1 }, query);
     }
 
@@ -177,21 +185,30 @@ public:
 
     std::vector<std::string> queries;
 
+    // The one statement this backend reports as failed.
+    std::string failOn;
+
 private:
     bool inTransaction_{ false };
 };
 
-TEST_CASE("a nested transaction joins the one already open", "[database]")
+// Install `fake` as the active backend for the rest of the enclosing scope.
+[[nodiscard]] auto useBackend(RecordingDatabase& fake) -> xi::final_action<Fn<void()>>
 {
-    RecordingDatabase fake;
-
     auto* const previous = &db::getDatabase();
     db::setDatabase(&fake);
-    const auto restore = xi::finally<Fn<void()>>(
+
+    return xi::finally<Fn<void()>>(
         [previous]() -> void
         {
             db::setDatabase(previous);
         });
+}
+
+TEST_CASE("a nested transaction joins the one already open", "[database]")
+{
+    RecordingDatabase fake;
+    const auto        backend = useBackend(fake);
 
     auto innerRan = false;
 
@@ -217,14 +234,7 @@ TEST_CASE("a nested transaction joins the one already open", "[database]")
 TEST_CASE("a throw from a nested transaction rolls the outer one back", "[database]")
 {
     RecordingDatabase fake;
-
-    auto* const previous = &db::getDatabase();
-    db::setDatabase(&fake);
-    const auto restore = xi::finally<Fn<void()>>(
-        [previous]() -> void
-        {
-            db::setDatabase(previous);
-        });
+    const auto        backend = useBackend(fake);
 
     const auto committed = db::transaction(
         [&]() -> void
@@ -237,6 +247,85 @@ TEST_CASE("a throw from a nested transaction rolls the outer one back", "[databa
         });
 
     CHECK_FALSE(committed);
+    CHECK(fake.count("COMMIT") == 0);
+    CHECK(fake.count("ROLLBACK") == 1);
+}
+
+TEST_CASE("a failed statement inside a transaction rolls it back", "[database]")
+{
+    RecordingDatabase fake;
+    const auto        backend = useBackend(fake);
+
+    fake.failOn = "UPDATE chars SET nameflags = ? WHERE charid = ?";
+
+    auto reachedTheEnd = false;
+
+    const auto committed = db::transaction(
+        [&]() -> void
+        {
+            std::ignore = db::preparedStmt("UPDATE chars SET nameflags = ? WHERE charid = ?", 1, 2);
+
+            // The point of the mechanism: without it, the failure above is dropped and this line
+            // runs, so the COMMIT keeps everything except the statement that failed.
+            reachedTheEnd = true;
+        });
+
+    CHECK_FALSE(committed);
+    CHECK_FALSE(reachedTheEnd);
+    CHECK(fake.count("COMMIT") == 0);
+    CHECK(fake.count("ROLLBACK") == 1);
+}
+
+TEST_CASE("a failed statement outside a transaction just returns nullptr", "[database]")
+{
+    RecordingDatabase fake;
+    const auto        backend = useBackend(fake);
+
+    fake.failOn = "UPDATE chars SET nameflags = ? WHERE charid = ?";
+
+    CHECK(db::preparedStmt("UPDATE chars SET nameflags = ? WHERE charid = ?", 1, 2) == nullptr);
+}
+
+TEST_CASE("a failed COMMIT rolls back instead of throwing out", "[database]")
+{
+    RecordingDatabase fake;
+    const auto        backend = useBackend(fake);
+
+    fake.failOn = "COMMIT";
+
+    const auto committed = db::transaction(
+        [&]() -> void
+        {
+            std::ignore = db::preparedStmt("UPDATE chars SET nameflags = ? WHERE charid = ?", 1, 2);
+        });
+
+    CHECK_FALSE(committed);
+    CHECK(fake.count("ROLLBACK") == 1);
+}
+
+TEST_CASE("a failed statement in a nested transaction rolls back the outer one", "[database]")
+{
+    RecordingDatabase fake;
+    const auto        backend = useBackend(fake);
+
+    fake.failOn = "DELETE FROM char_effects WHERE charid = ?";
+
+    auto outerReachedTheEnd = false;
+
+    const auto committed = db::transaction(
+        [&]() -> void
+        {
+            db::transaction(
+                [&]() -> void
+                {
+                    std::ignore = db::preparedStmt("DELETE FROM char_effects WHERE charid = ?", 1);
+                });
+
+            outerReachedTheEnd = true;
+        });
+
+    CHECK_FALSE(committed);
+    CHECK_FALSE(outerReachedTheEnd);
     CHECK(fake.count("COMMIT") == 0);
     CHECK(fake.count("ROLLBACK") == 1);
 }

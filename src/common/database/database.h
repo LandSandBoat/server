@@ -119,6 +119,17 @@ void executeBulk(detail::BulkQueryString<T, ProjectFn> query, const std::vector<
 // from a std::vector parameter: preparedStmt binds one parameter per vector element.
 [[nodiscard]] auto placeholders(std::size_t count) -> std::string;
 
+namespace detail
+{
+
+// True while a db::transaction body is running on this thread.
+//
+// A statement that fails in that window throws, so db::transaction rolls the whole thing back.
+// Outside a transaction a failed statement still just returns nullptr, as it always has.
+[[nodiscard]] auto failuresThrow() noexcept -> bool;
+
+} // namespace detail
+
 auto getDatabaseSchema() -> std::string;
 
 auto getDatabaseVersion() -> std::string;
@@ -154,7 +165,17 @@ auto preparedStmt(QueryString<std::type_identity_t<Args>...> query, Args&&... ar
     TracyZoneStringView(query.text());
 
     const auto params = detail::lowerBoundValues(std::forward<Args>(args)...);
-    return getDatabase().execute(query.text(), params);
+
+    auto rset = getDatabase().execute(query.text(), params);
+
+    // Inside a transaction, carrying on past a failed statement means committing the statements
+    // around it. Throw instead, so db::transaction rolls back.
+    if (rset == nullptr && detail::failuresThrow())
+    {
+        throw std::runtime_error(fmt::format("statement failed inside a transaction: {}", query.text()));
+    }
+
+    return rset;
 }
 
 template <typename T, typename ProjectFn>
