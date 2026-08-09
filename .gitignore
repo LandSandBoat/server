@@ -274,3 +274,5 @@ clang_tidy_summary.md
 # YAML codegen
 *.codegen.json
 *.codegen.lua
+/data/schemas/*.schema.json
+!/data/schemas/_*.schema.json

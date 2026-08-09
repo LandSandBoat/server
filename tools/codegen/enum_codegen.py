@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Any
 
-import yaml
+from ruamel.yaml import YAML
 
 from .common import (
     CASE_FNS,
@@ -12,7 +12,8 @@ from .common import (
     slug,
     snake_to_pascal,
 )
-from .yaml_loaders import FastLoader
+
+YAML_LOADER = YAML(typ="safe")
 
 
 def render_header(*, source_name: str, cls_name: str, underlying: str, is_flags: bool, case: str, values: dict[str, int]) -> str:
@@ -56,7 +57,7 @@ def lua_block(lua_meta: dict[str, Any] | None, source_name: str, is_flags: bool,
 
 def emit_pure_enum(yaml_path: Path) -> dict[str, Any]:
     with yaml_path.open(encoding="utf-8") as f:
-        doc = yaml.load(f, Loader=FastLoader)
+        doc = YAML_LOADER.load(f)
 
     meta = doc.get("meta") or {}
     values = doc.get("values") or {}
@@ -103,7 +104,7 @@ def resolve_sections(doc: dict[str, Any], path: str) -> list[dict[str, Any]]:
 def emit_table_enums(yaml_path: Path) -> list[dict[str, Any]]:
     """One entry per `meta.enum:` block. Members emit in id order."""
     with yaml_path.open(encoding="utf-8") as f:
-        doc = yaml.load(f, Loader=FastLoader)
+        doc = YAML_LOADER.load(f)
 
     if not isinstance(doc, dict):
         return []

@@ -493,7 +493,7 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
 
     // HP/MP ========================
     // This is the same system as used in charutils.cpp, but modified
-    // to use parts from data/ecosystem.yaml instead of hardcoded player
+    // to use parts from data/ecosystems.yaml instead of hardcoded player
     // race tables.
 
     // http://ffxi-stat-calc.sourceforge.net/cgi-bin/ffxistats.cgi?mode=document

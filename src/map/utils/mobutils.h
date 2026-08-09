@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -25,9 +25,9 @@
 
 #include <common/types/hash_map.h>
 
+#include "data/datasets/ecosystems/dataset.h"
 #include "data/enums/ecosystem.h"
 #include "data/enums/family.h"
-#include "data/mob_attributes.h"
 #include "entities/mob_entity.h"
 #include "modifier.h"
 

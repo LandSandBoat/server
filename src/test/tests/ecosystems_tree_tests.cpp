@@ -19,9 +19,9 @@
 ===========================================================================
 */
 
-// Inheritance rules for data/ecosystem.yaml.
+// Inheritance rules for data/ecosystems.yaml.
 
-#include "map/data/backends/yaml.h"
+#include "map/data/datasets/ecosystems/dataset.h"
 #include "map/data/loader.h"
 #include "map/utils/mobutils.h"
 
@@ -32,8 +32,7 @@
 namespace
 {
 
-using Backend = xi::data::backends::YAMLBackend;
-using Node    = xi::data::Node<Backend>;
+using EcosystemsDataset = xi::data::datasets::ecosystems::Dataset;
 
 // Every species in the file, resolved through LoadSpeciesData.
 auto species()
@@ -43,7 +42,7 @@ auto species()
         mobutils::LoadSpeciesData();
 
         HashMap<xi::Species, mobutils::SpeciesInfo> flat;
-        for (const auto& [ecosystemId, ecosystem] : LoadEcosystem())
+        for (const auto& [ecosystemId, ecosystem] : xi::data::loadDataset<EcosystemsDataset>())
         {
             for (const auto& [familyId, family] : ecosystem.Families)
             {
@@ -86,7 +85,7 @@ TEST_CASE("ecosystem tree: a species inherits what it does not write", "[data][e
     CHECK(goldFlan.MobAttributes.Stats.Eva == xi::StatRank::C);
 }
 
-TEST_CASE("ecosystem tree: unwritten fields fall back to the schema default", "[data][ecosystem]")
+TEST_CASE("ecosystem tree: unwritten fields fall back to the runtime default", "[data][ecosystem]")
 {
     // Nothing in the acuex chain writes speed or charmable.
     const auto it = species()->find(xi::Species::Acuex);
@@ -109,19 +108,30 @@ TEST_CASE("ecosystem tree: every species knows the family it sits under", "[data
 
 TEST_CASE("ecosystem tree: a partial stats block inherits its siblings", "[data][ecosystem]")
 {
-    Backend::Tree family{ std::string{ R"(
-stats:
-  str: e
-  vit: d
-)" } };
-    Backend::Tree lone{ std::string{ R"(
-stats:
-  vit: a
-)" } };
+    const auto  parsed = EcosystemsDataset::decode(R"(
+ecosystems:
+  amorph:
+    id: 1
+    families:
+      flan:
+        id: 3
+        attributes:
+          stats:
+            str: e
+            vit: d
+        species:
+          gold_flan:
+            id: 6
+            attributes:
+              stats:
+                vit: a
+)");
+    const auto& family = parsed.at(xi::Ecosystem::Amorph).Families.at(xi::Family::Flan);
+    const auto& lone   = family.Species.at(xi::Species::GoldFlan);
 
     xi::data::MobAttributesData resolved{};
-    xi::data::applyOverrides(resolved, populate(Node{ family.root() }, std::type_identity<xi::data::MobAttributesOverrides>{}));
-    xi::data::applyOverrides(resolved, populate(Node{ lone.root() }, std::type_identity<xi::data::MobAttributesOverrides>{}));
+    xi::data::applyOverrides(resolved, family.MobAttributes);
+    xi::data::applyOverrides(resolved, lone.MobAttributes);
 
     CHECK(resolved.Stats.Vit == xi::StatRank::A); // set by the species
     CHECK(resolved.Stats.Str == xi::StatRank::E); // inherited, not reset by the partial map
@@ -130,13 +140,16 @@ stats:
 
 TEST_CASE("ecosystem tree: a level records only what it wrote", "[data][ecosystem]")
 {
-    Backend::Tree level{ std::string{ R"(
-speed: 32
-stats:
-  vit: a
-)" } };
-
-    const auto wrote = populate(Node{ level.root() }, std::type_identity<xi::data::MobAttributesOverrides>{});
+    const auto  parsed = EcosystemsDataset::decode(R"(
+ecosystems:
+  amorph:
+    id: 1
+    attributes:
+      speed: 32
+      stats:
+        vit: a
+)");
+    const auto& wrote  = parsed.at(xi::Ecosystem::Amorph).MobAttributes;
 
     CHECK(wrote.Speed == 32);
     CHECK(!wrote.Charmable.has_value()); // absent, not `false`
