@@ -14,13 +14,22 @@ local content = BattlefieldQuest:new({
     index            = 1,
     entryNpc         = 'IP_Entrance',
     exitNpc          = 'Ice_Protocrystal',
-    requiredItems    = { xi.item.ICE_PENDULUM },
+    requiredItems    = { xi.item.ICE_PENDULUM, keep = true },
 
     questArea     = xi.questLog.WINDURST,
     quest         = xi.quest.id.windurst.CLASS_REUNION,
     requiredVar   = 'ClassReunionProgress',
     requiredValue = 5,
 })
+
+-- Only the battlefield registrant needs to have the required item and quest state to initiate the battlefield.
+function content:checkRequirements(player, npc, isRegistrant, trade)
+    if isRegistrant then
+        return BattlefieldQuest.checkRequirements(self, player, npc, isRegistrant, trade)
+    end
+
+    return self:isValidEntry(player, npc)
+end
 
 function content:onEventFinishWin(player, csid, option, npc)
     if player:getCharVar('ClassReunionProgress') == 5 then

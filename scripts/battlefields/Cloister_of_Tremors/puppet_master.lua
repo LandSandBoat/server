@@ -23,6 +23,15 @@ local content = BattlefieldQuest:new({
     quest     = xi.quest.id.windurst.THE_PUPPET_MASTER,
 })
 
+-- Only the battlefield registrant needs to have the required item and quest state to initiate the battlefield.
+function content:checkRequirements(player, npc, isRegistrant, trade)
+    if isRegistrant then
+        return BattlefieldQuest.checkRequirements(self, player, npc, isRegistrant, trade)
+    end
+
+    return self:isValidEntry(player, npc)
+end
+
 content.groups =
 {
     {
