@@ -73,6 +73,12 @@ public:
     virtual void setInTransaction(bool)
     {
     }
+
+    // Whether this thread's connection already has a transaction open.
+    [[nodiscard]] virtual auto isInTransaction() -> bool
+    {
+        return false;
+    }
 };
 
 // Get the active database backend.

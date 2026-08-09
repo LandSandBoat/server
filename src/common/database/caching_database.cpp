@@ -255,6 +255,11 @@ void db::CachingDatabase::setInTransaction(bool value)
     }
 }
 
+auto db::CachingDatabase::isInTransaction() -> bool
+{
+    return getState().inTransaction;
+}
+
 auto db::CachingDatabase::getSchema() -> std::string
 {
     TracyZoneScoped;

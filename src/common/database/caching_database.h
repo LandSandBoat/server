@@ -74,6 +74,8 @@ public:
 
     void setInTransaction(bool value) override;
 
+    [[nodiscard]] auto isInTransaction() -> bool override;
+
     auto getSchema() -> std::string override;
     auto getVersion() -> std::string override;
     auto getDriverVersion() -> std::string override;

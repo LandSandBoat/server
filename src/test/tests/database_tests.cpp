@@ -27,11 +27,17 @@
 #include <common/database/query_validation.h>
 #include <common/database/result_set.h>
 
+#include <common/xi.h>
+
+#include <common/types/fn.h>
+
 #include <catch2/catch_test_macros.hpp>
 
+#include <algorithm>
 #include <cstdint>
 #include <memory>
 #include <optional>
+#include <stdexcept>
 #include <string>
 #include <string_view>
 #include <utility>
@@ -120,6 +126,119 @@ auto makeSelectResultSet() -> std::unique_ptr<db::ResultSet>
     cells.emplace_back(std::string("\x01\x00\x02", 3));
 
     return std::make_unique<db::LibMariaDBResultSet>("SELECT id, name, hp, ratio, data FROM test", std::move(schema), std::move(cells));
+}
+
+// A backend that records the statements it is asked to run, so transaction control flow can be
+// checked without a server.
+class RecordingDatabase final : public db::Database
+{
+public:
+    auto execute(std::string_view query, const std::vector<db::BoundValue>& /*params*/) -> std::unique_ptr<db::ResultSet> override
+    {
+        queries.emplace_back(query);
+        return std::make_unique<db::LibMariaDBResultSet>(std::size_t{ 1 }, query);
+    }
+
+    auto executeBulk(std::string_view query, const std::vector<db::BoundValue>& /*params*/) -> std::unique_ptr<db::ResultSet> override
+    {
+        queries.emplace_back(query);
+        return std::make_unique<db::LibMariaDBResultSet>(std::size_t{ 1 }, query);
+    }
+
+    auto getSchema() -> std::string override
+    {
+        return "test";
+    }
+
+    auto getVersion() -> std::string override
+    {
+        return "test";
+    }
+
+    auto getDriverVersion() -> std::string override
+    {
+        return "test";
+    }
+
+    void setInTransaction(bool value) override
+    {
+        inTransaction_ = value;
+    }
+
+    auto isInTransaction() -> bool override
+    {
+        return inTransaction_;
+    }
+
+    auto count(std::string_view query) const -> std::size_t
+    {
+        return static_cast<std::size_t>(std::ranges::count(queries, query));
+    }
+
+    std::vector<std::string> queries;
+
+private:
+    bool inTransaction_{ false };
+};
+
+TEST_CASE("a nested transaction joins the one already open", "[database]")
+{
+    RecordingDatabase fake;
+
+    auto* const previous = &db::getDatabase();
+    db::setDatabase(&fake);
+    const auto restore = xi::finally<Fn<void()>>(
+        [previous]() -> void
+        {
+            db::setDatabase(previous);
+        });
+
+    auto innerRan = false;
+
+    const auto committed = db::transaction(
+        [&]() -> void
+        {
+            db::transaction(
+                [&]() -> void
+                {
+                    innerRan = true;
+                });
+        });
+
+    CHECK(committed);
+    CHECK(innerRan);
+
+    // A second START TRANSACTION would have committed the outer one behind its back.
+    CHECK(fake.count("START TRANSACTION") == 1);
+    CHECK(fake.count("COMMIT") == 1);
+    CHECK(fake.count("ROLLBACK") == 0);
+}
+
+TEST_CASE("a throw from a nested transaction rolls the outer one back", "[database]")
+{
+    RecordingDatabase fake;
+
+    auto* const previous = &db::getDatabase();
+    db::setDatabase(&fake);
+    const auto restore = xi::finally<Fn<void()>>(
+        [previous]() -> void
+        {
+            db::setDatabase(previous);
+        });
+
+    const auto committed = db::transaction(
+        [&]() -> void
+        {
+            db::transaction(
+                [&]() -> void
+                {
+                    throw std::runtime_error("inner failed");
+                });
+        });
+
+    CHECK_FALSE(committed);
+    CHECK(fake.count("COMMIT") == 0);
+    CHECK(fake.count("ROLLBACK") == 1);
 }
 
 TEST_CASE("placeholders builds the IN-list hole text", "[database]")

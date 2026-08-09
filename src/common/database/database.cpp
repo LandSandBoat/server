@@ -181,6 +181,18 @@ auto db::transaction(const Fn<void() const>& transactionFn) -> bool
 {
     TracyZoneScoped;
 
+    // MySQL has no nested transactions: a second START TRANSACTION commits the one already open,
+    // so the outer transaction would lose its atomicity exactly when the inner one is meant to
+    // protect it. Join the open transaction instead, and let the outer call decide the outcome.
+    //
+    // Exceptions are deliberately not caught here. Swallowing one would let the outer transaction
+    // commit work the inner call already reported as failed.
+    if (db::getDatabase().isInTransaction())
+    {
+        transactionFn();
+        return true;
+    }
+
     if (!db::transactionStart())
     {
         return false;
