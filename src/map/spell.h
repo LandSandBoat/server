@@ -1202,7 +1202,6 @@ public:
     timer::duration    getModifiedRecast() const;
     float              getRadius() const;
     uint8              getRequirements() const;
-    uint16             getMeritId() const;
     uint8              getFlag() const;
     const std::string& getContentTag();
     float              getRange() const;
@@ -1246,7 +1245,6 @@ public:
     void setCE(int32 ce);
     void setVE(int32 ve);
     void setRequirements(uint8 requirements);
-    void setMeritId(uint16 meritId);
     void setModifiedRecast(timer::duration mrec);
     void setFlag(uint8 flag);
     void setContentTag(const std::string& contentTag);
@@ -1289,7 +1287,6 @@ private:
     std::string                    m_name;                            // spell name
     timer::duration                m_modifiedRecastTime{};            // recast time after modifications
     uint8                          m_requirements{};                  // requirements before being able to cast spell
-    uint16                         m_meritId{};                       // associated merit (if applicable)
     uint8                          m_flag{};
     std::string                    m_contentTag{};
 };

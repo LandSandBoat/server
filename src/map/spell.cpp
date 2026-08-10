@@ -382,16 +382,6 @@ void CSpell::setRequirements(uint8 requirements)
     m_requirements = requirements;
 }
 
-uint16 CSpell::getMeritId() const
-{
-    return m_meritId;
-}
-
-void CSpell::setMeritId(uint16 meritId)
-{
-    m_meritId = meritId;
-}
-
 uint8 CSpell::getFlag() const
 {
     return m_flag;
@@ -618,22 +608,6 @@ void LoadSpellList()
         if (PSpellList[spellId])
         {
             static_cast<CBlueSpell*>(PSpellList[spellId])->addModifier(CModifier(modID, value));
-        }
-    }
-
-    rset = db::preparedStmt("SELECT spellId, meritId, content_tag "
-                            "FROM spell_list INNER JOIN merits ON spell_list.name = merits.name");
-    FOR_DB_MULTIPLE_RESULTS(rset)
-    {
-        if (!luautils::IsContentEnabled(rset->getOrDefault<std::string>("content_tag", "")))
-        {
-            continue;
-        }
-
-        const auto spellId = rset->get<uint16>("spellId");
-        if (PSpellList[spellId])
-        {
-            PSpellList[spellId]->setMeritId(rset->get<uint16>("meritId"));
         }
     }
 }
