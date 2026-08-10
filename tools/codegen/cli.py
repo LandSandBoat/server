@@ -14,6 +14,7 @@ def enum_inputs_newer_than(stamp: Path) -> bool:
         *Path(__file__).parent.glob("*.py"),
         *TEMPLATES_DIR.glob("*.j2"),
         *(ROOT / "data").rglob("*.yaml"),
+        *ROOT.glob("modules/*/data/*.yaml"),
     ]
     return any(input_path.stat().st_mtime > stamp_mtime for input_path in inputs)
 

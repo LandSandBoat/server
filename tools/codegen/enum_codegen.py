@@ -7,6 +7,7 @@ from .common import (
     CASE_FNS,
     ENUMS_DIR,
     ENV,
+    ROOT,
     dotpath_get,
     pascal_to_snake,
     slug,
@@ -101,16 +102,47 @@ def resolve_sections(doc: dict[str, Any], path: str) -> list[dict[str, Any]]:
     return nodes
 
 
+def union_into(target: Any, patch: Any) -> None:
+    """Add whatever `patch` has and `target` lacks, recursing into mappings.
+
+    Never removes: an entry one module deletes still exists for the others.
+    """
+    if not isinstance(patch, dict) or not isinstance(target, dict):
+        return
+
+    for key, value in patch.items():
+        if value is None:
+            continue
+
+        if isinstance(value, dict):
+            target.setdefault(key, {})
+            union_into(target[key], value)
+        elif key not in target:
+            target[key] = value
+
+
+def module_copies(yaml_path: Path) -> list[Path]:
+    """Every module's copy of this data file, enabled or not."""
+    return sorted(ROOT.glob(f"modules/*/data/{yaml_path.name}"))
+
+
 def emit_table_enums(yaml_path: Path) -> list[dict[str, Any]]:
     """One entry per `meta.enum:` block. Members emit in id order."""
     with yaml_path.open(encoding="utf-8") as f:
         doc = YAML_LOADER.load(f)
+
+    for module_path in module_copies(yaml_path):
+        with module_path.open(encoding="utf-8") as f:
+            union_into(doc, YAML_LOADER.load(f))
 
     if not isinstance(doc, dict):
         return []
     meta_enum = (doc.get("meta") or {}).get("enum")
     if not meta_enum:
         return []
+
+    with yaml_path.open(encoding="utf-8") as f:
+        core_doc = YAML_LOADER.load(f)
 
     source_name = str(yaml_path.relative_to(ENUMS_DIR.parents[1])).replace("\\", "/")
     out: list[dict[str, Any]] = []
@@ -128,12 +160,18 @@ def emit_table_enums(yaml_path: Path) -> list[dict[str, Any]]:
                                      f"(ids {values[key]} and {value}); keys must be unique across the tree")
                 values[key] = value
 
-        # Disallow duplicate IDs
+        # Names this file defines, before any module is folded in.
+        own: dict[str, int] = {}
+        for section in resolve_sections(core_doc, path):
+            own.update(derive_values(yaml_path, section, block.get("name_from")))
+
         names_by_id: dict[int, list[str]] = {}
         for name, value in values.items():
             names_by_id.setdefault(value, []).append(name)
 
-        collisions = {value: names for value, names in names_by_id.items() if len(names) > 1}
+        # Modules that never run together can reuse a slot, so only a collision inside this file is a mistake.
+        collisions = {value: names for value, names in names_by_id.items()
+                      if len([name for name in names if name in own]) > 1}
         if collisions:
             raise ValueError(f"{yaml_path}: '{path}' reuses ids across entries: "
                              + "; ".join(f"{value} -> {names}" for value, names in sorted(collisions.items())))
