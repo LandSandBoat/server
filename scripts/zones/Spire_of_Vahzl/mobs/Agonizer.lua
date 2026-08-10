@@ -2,6 +2,8 @@
 -- Area: Spire of Vahzl
 --  Mob: Agonizer
 -----------------------------------
+mixins = { require('scripts/mixins/families/empty_terroanima') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

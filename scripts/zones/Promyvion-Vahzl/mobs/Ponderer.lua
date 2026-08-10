@@ -2,6 +2,8 @@
 -- Area: Promyvion - Vahzl
 --   NM: Ponderer
 -----------------------------------
+mixins = { require('scripts/mixins/families/empty_terroanima') }
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
 

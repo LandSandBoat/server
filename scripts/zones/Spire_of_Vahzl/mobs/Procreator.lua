@@ -2,7 +2,11 @@
 -- Area: Spire of Vahzl
 --  Mob: Procreator
 -----------------------------------
-mixins = { require('scripts/mixins/families/gorger_nm') }
+mixins =
+{
+    require('scripts/mixins/families/gorger_nm'),
+    require('scripts/mixins/families/empty_terroanima'),
+}
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
