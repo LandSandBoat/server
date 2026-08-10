@@ -26,6 +26,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 1 then
+                        -- TODO: This isn't necesarily true. We have proof showing that is both needed and not needed. More info is necesary.
                         if not mission:getMustZone(player) then
                             -- Trivia: There is a copy of this CS, but as a flashback, with Falzum instead of your character. CS: 3030
                             -- TODO: Maybe it's used?
@@ -45,7 +46,7 @@ mission.sections =
             {
                 [73] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 1)
-                    mission:setMustZone(player)
+                    mission:setMustZone(player) -- TODO: This isn't necesarily true. We have proof showing that is both needed and not needed. More info is necesary.
                 end,
 
                 [3020] = function(player, csid, option, npc)
