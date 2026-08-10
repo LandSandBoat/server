@@ -78,7 +78,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             item = xi.item.EYE_OF_NEPT
         end
 
-        if player:getFreeSlotsCount() == 0 and (option ~= 5 or option ~= 6) then
+        if player:getFreeSlotsCount() == 0 and (option ~= 5 and option ~= 6) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item)
         else
             if option == 5 then
