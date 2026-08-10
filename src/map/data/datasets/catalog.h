@@ -21,6 +21,8 @@
 
 #pragma once
 
+#include "data/datasets/animation_locks/dataset.h"
+#include "data/datasets/animation_locks/yaml.h"
 #include "data/datasets/ecosystems/dataset.h"
 #include "data/datasets/ecosystems/yaml.h"
 #include "data/datasets/merits/dataset.h"
@@ -55,6 +57,6 @@ struct DatasetCatalog
     }
 };
 
-using Catalog = DatasetCatalog<status_effects::Dataset, ecosystems::Dataset, merits::Dataset>;
+using Catalog = DatasetCatalog<animation_locks::Dataset, status_effects::Dataset, ecosystems::Dataset, merits::Dataset>;
 
 } // namespace xi::data::datasets
