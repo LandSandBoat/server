@@ -105,6 +105,34 @@ void CLuaTestEntity::respawn() const
 }
 
 /************************************************************************
+ *  Function: setLevelRange()
+ *  Purpose : Fix the level a mob rolls when it spawns
+ *  Example : mob:setLevelRange(28, 28)
+ *  Notes   : Spawn() draws the level from [minLevel, maxLevel], so a mob with a
+ *          : range gets different stats depending on the shared RNG stream.
+ *          : Collapse the range to pin the stats.
+ ************************************************************************/
+void CLuaTestEntity::setLevelRange(const uint8 minLevel, const uint8 maxLevel) const
+{
+    auto* mob = dynamic_cast<CMobEntity*>(m_PBaseEntity);
+    if (!mob)
+    {
+        TestError("setLevelRange() can only be called on mob entities, not on {}",
+                  static_cast<uint8>(m_PBaseEntity->objtype));
+        return;
+    }
+
+    if (minLevel == 0 || maxLevel < minLevel)
+    {
+        TestError("setLevelRange({}, {}) is not a valid level range for {}", minLevel, maxLevel, mob->getName());
+        return;
+    }
+
+    mob->m_minLevel = minLevel;
+    mob->m_maxLevel = maxLevel;
+}
+
+/************************************************************************
  *  Function: assert_()
  *  Purpose : Get assertion helper for this entity
  *  Example : entity.assert:isAlive()
@@ -120,5 +148,6 @@ void CLuaTestEntity::Register()
     SOL_REGISTER("setEntity", CLuaTestEntity::setEntity);
     SOL_REGISTER("despawn", CLuaTestEntity::despawn);
     SOL_REGISTER("respawn", CLuaTestEntity::respawn);
+    SOL_REGISTER("setLevelRange", CLuaTestEntity::setLevelRange);
     SOL_READONLY("assert", CLuaTestEntity::assert_);
 }

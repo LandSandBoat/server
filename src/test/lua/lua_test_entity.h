@@ -35,6 +35,7 @@ public:
     virtual void setEntity(CBaseEntity* entity);
     void         despawn() const;
     void         respawn() const;
+    void         setLevelRange(uint8 minLevel, uint8 maxLevel) const;
     auto         assert_() -> CLuaTestEntityAssertions;
 
     static void Register();

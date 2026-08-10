@@ -26,3 +26,11 @@ end
 ---@return nil
 function CTestEntity:despawn()
 end
+
+---Collapse a mob's spawn level range so its stats are deterministic across runs.
+---Will raise an error if called on non-mob entities or if the range is invalid.
+---@param minLevel integer The minimum level to roll
+---@param maxLevel integer The maximum level to roll
+---@return nil
+function CTestEntity:setLevelRange(minLevel, maxLevel)
+end

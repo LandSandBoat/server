@@ -31,7 +31,10 @@ describe('Blue Magic monster correlation', function()
         player:addSpell(xi.magic.spell.FOOT_KICK)
         player.actions:setBlueSpells({ xi.magic.spell.FOOT_KICK })
 
+        -- The Clipper spawns at level 28 or 29, so its VIT, its DEF, and the damage below all
+        -- depend on the shared RNG stream. Pin the level.
         mob = player.entities:moveTo(17293357)
+        mob:setLevelRange(28, 28)
         mob:respawn()
         mob.assert:isAlive()
     end)
