@@ -66,7 +66,7 @@ CASES = {
           n: 3
         """,
     ),
-    "drops null-valued keys": (
+    "keeps null-valued keys": (
         """
         item:
           name: a
@@ -77,6 +77,8 @@ CASES = {
         """
         item:
           name:  a
+          alias: null
+          empty: null
           count: 3
         """,
     ),
