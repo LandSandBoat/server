@@ -1,13 +1,13 @@
 -----------------------------------
--- ID: 18077
--- Item: Spark Spear +1
--- Additional effect: lightning damage depending on ammo
+-- ID: 18370
+-- Item: Gust Tongue
+-- Additional effect: wind damage depending on ammo
 -----------------------------------
 ---@type TItem
 local itemObject = {}
 
 itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, item)
-    local damageRange = xi.additionalEffect.getConsumableAmmoItemDamageRange(xi.element.THUNDER, actor:getEquipID(xi.slot.AMMO))
+    local damageRange = xi.additionalEffect.getConsumableAmmoItemDamageRange(xi.element.WIND, actor:getEquipID(xi.slot.AMMO))
 
     if not damageRange then
         return 0, 0, 0
@@ -15,10 +15,10 @@ itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, it
 
     local pTable =
     {
-        chance          = 20,
+        chance          = 22,
         basePower       = math.randomInt(damageRange[1], damageRange[2]),
         attackType      = xi.attackType.MAGICAL,
-        magicalElement  = xi.element.THUNDER,
+        magicalElement  = xi.element.WIND,
         canMAB          = false,
         canResist       = true,
         lowestResist    = 0.5,

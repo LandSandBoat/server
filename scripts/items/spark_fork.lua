@@ -7,7 +7,7 @@
 local itemObject = {}
 
 itemObject.onItemAdditionalEffect = function(actor, target, baseAttackDamage, item)
-    local damageRange = xi.additionalEffect.getConsumableAmmoItemDamageRange(actor:getEquipID(xi.slot.AMMO))
+    local damageRange = xi.additionalEffect.getConsumableAmmoItemDamageRange(xi.element.THUNDER, actor:getEquipID(xi.slot.AMMO))
 
     if not damageRange then
         return 0, 0, 0
