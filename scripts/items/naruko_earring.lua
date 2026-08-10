@@ -3,22 +3,36 @@
 -- Item: Naruko Earring
 -- Item Effect: Enmity +10
 -- Duration: 3 Minutes
+-- https://wiki.ffo.jp/html/10069.html
+-- TODO: Capture Icon
 -----------------------------------
 ---@type TItem
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, item, caster)
-    if target:getStatusEffectBySource(xi.effect.ENMITY_BOOST, xi.effectSourceType.EQUIPPED_ITEM, xi.item.NARUKO_EARRING) ~= nil then
-        target:delStatusEffect(xi.effect.ENMITY_BOOST, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.NARUKO_EARRING)
-    end
-
     return 0
 end
 
 itemObject.onItemUse = function(target, user)
     if target:hasEquipped(xi.item.NARUKO_EARRING) then
-        target:addStatusEffect(xi.effect.ENMITY_BOOST, { power = 10, duration = 180, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.NARUKO_EARRING })
+        local effect = target:getStatusEffectBySource(xi.effect.ENCHANTMENT, xi.effectSourceType.EQUIPPED_ITEM, xi.item.NARUKO_EARRING)
+        if effect then
+            effect:resetStartTime()
+        else
+            target:addStatusEffect(xi.effect.ENCHANTMENT, { duration = 180, origin = user, sourceType = xi.effectSourceType.EQUIPPED_ITEM, sourceTypeParam = xi.item.NARUKO_EARRING })
+        end
     end
+end
+
+itemObject.onEffectGain = function(target, effect)
+    effect:addMod(xi.mod.ENMITY, 10)
+end
+
+itemObject.onItemUnequip = function(target, item)
+    target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.effectSourceType.EQUIPPED_ITEM, xi.item.NARUKO_EARRING)
+end
+
+itemObject.onEffectLose = function(target, effect)
 end
 
 return itemObject
