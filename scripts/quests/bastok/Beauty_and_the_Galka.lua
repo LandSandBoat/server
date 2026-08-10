@@ -52,14 +52,14 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 1 then
-                        return quest:progressEvent(6) -- Denied Cornelia's request.
+                        return quest:progressEvent(7) -- Cornelia told the player of Parraggoh's predicament.
                     end
                 end,
             },
 
             onEventFinish =
             {
-                [6] = function(player, csid, option, npc)
+                [7] = function(player, csid, option, npc)
                     if option == 0 then
                         quest:begin(player)
                     end
@@ -106,7 +106,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.PALBOROUGH_MINES_LOGS) then
-                        return quest:progressEvent(10)
+                        return quest:progressEvent(10, quest:getVar(player, 'Prog'))
                     elseif math.randomInt(1, 100) <= 50 then
                         return quest:event(8)
                     else
