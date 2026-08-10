@@ -834,16 +834,16 @@ INSERT INTO `mob_groups` VALUES (1,3172,22,'Ponderer',0,128,0,3850,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (2,3206,22,'Propagator',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (3,2947,22,'Offspring',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (4,3699,22,'Solicitor',0,128,0,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (5,6651,22,'Wanderer',960,0,2192,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (6,6652,22,'Weeper',960,0,2636,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (5,7290,22,'Wanderer',960,0,2192,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (6,7291,22,'Weeper',960,0,2636,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (7,2048,22,'Apex_Idle_Drifter',960,0,0,260000,0,0,'ABYSSEA'); -- TODO: Confirm MP/drop table
 INSERT INTO `mob_groups` VALUES (8,6649,22,'Thinker',960,0,2399,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (9,6644,22,'Gorger',960,0,1208,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (10,6643,22,'Craver',960,0,527,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (11,6647,22,'Memory_Receptacle',300,0,0,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (12,6650,22,'Stray',0,128,0,0,0,0,NULL);
--- 13 free
--- 14 free
+INSERT INTO `mob_groups` VALUES (11,6647,22,'Memory_Receptacle',300,0,0,5200,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (12,6650,22,'Stray',0,128,0,450,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (13,8170,22,'Stray_Weeper',0,128,0,450,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (14,8171,22,'Stray_Seether',0,128,0,450,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (15,6648,22,'Seether',960,0,2194,0,0,0,NULL);
 -- 16 free
 -- 17 free
