@@ -117,9 +117,15 @@ void GP_CLI_COMMAND_TRADE_LIST::process(MapSession* PSession, CCharEntity* PChar
 
     if (PItem->isType(ITEM_LINKSHELL))
     {
+        const auto asLinkshell = [](CItemEquipment* PEquipped) -> CItemLinkshell*
+        {
+            auto* PLinkshell = reinterpret_cast<CItemLinkshell*>(PEquipped);
+            return (PLinkshell && PLinkshell->isType(ITEM_LINKSHELL)) ? PLinkshell : nullptr;
+        };
+
         auto* PItemLinkshell  = static_cast<CItemLinkshell*>(PItem);
-        auto* PItemLinkshell1 = reinterpret_cast<CItemLinkshell*>(PChar->getEquip(SLOT_LINK1));
-        auto* PItemLinkshell2 = reinterpret_cast<CItemLinkshell*>(PChar->getEquip(SLOT_LINK2));
+        auto* PItemLinkshell1 = asLinkshell(PChar->getEquip(SLOT_LINK1));
+        auto* PItemLinkshell2 = asLinkshell(PChar->getEquip(SLOT_LINK2));
         if ((!PItemLinkshell1 && !PItemLinkshell2) || ((!PItemLinkshell1 || PItemLinkshell1->GetLSID() != PItemLinkshell->GetLSID()) &&
                                                        (!PItemLinkshell2 || PItemLinkshell2->GetLSID() != PItemLinkshell->GetLSID())))
         {

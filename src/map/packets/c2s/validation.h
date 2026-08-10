@@ -226,6 +226,8 @@ public:
     auto hasLinkshellRank(uint8_t slot, LSTYPE rank) -> PacketValidator&;
     // Character zone must allow specified flag. GMs can bypass this check.
     auto hasZoneMiscFlag(xi::ZoneMisc flag) -> PacketValidator&;
+    // Container id must be one getStorage() can resolve. Does not imply access; use oneOf with an explicit set for that.
+    auto isValidContainer(const std::string& fieldName, uint32 containerId) -> PacketValidator&;
     // Character must be the party leader
     auto isPartyLeader() -> PacketValidator&;
     // Character must be the alliance leader

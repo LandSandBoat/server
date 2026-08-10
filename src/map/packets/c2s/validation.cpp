@@ -23,6 +23,7 @@
 
 #include "ai/ai_container.h"
 #include "entities/char_entity.h"
+#include "item_container.h"
 #include "items/item_linkshell.h"
 #include "status_effect_container.h"
 #include "utils/charutils.h"
@@ -148,6 +149,21 @@ auto PacketValidator::hasZoneMiscFlag(const xi::ZoneMisc flag) -> PacketValidato
     if (PChar_->m_GMlevel == 0 && !PChar_->loc.zone->CanUseMisc(flag))
     {
         result_.addError(std::format("Zone {} does not allow misc flag {}.", PChar_->loc.zone->getName(), static_cast<uint16_t>(flag)));
+    }
+
+    return *this;
+}
+
+auto PacketValidator::isValidContainer(const std::string& fieldName, const uint32 containerId) -> PacketValidator&
+{
+    if (!result_.valid())
+    {
+        return *this;
+    }
+
+    if (containerId >= MAX_CONTAINER_ID || !PChar_->getStorage(static_cast<uint8>(containerId)))
+    {
+        result_.addError(std::format("{} value {} is not a valid container.", fieldName, containerId));
     }
 
     return *this;

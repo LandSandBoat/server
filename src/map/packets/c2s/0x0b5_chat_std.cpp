@@ -115,7 +115,7 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
     const auto messageLength              = std::min<std::size_t>((header.size * 4) - 0x6, sizeof(this->Str));
     const auto rawMessage                 = asStringFromUntrustedSource(this->Str, messageLength);
     const auto firstChar                  = rawMessage[0];
-    const auto rawMessageWithoutFirstChar = rawMessage.substr(1);
+    const auto rawMessageWithoutFirstChar = rawMessage.empty() ? std::string() : rawMessage.substr(1);
 
     // Handle possible !commands
     if (firstChar == '!' && !jailutils::InPrison(PChar))

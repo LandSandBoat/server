@@ -31,6 +31,8 @@
 #include "utils/jailutils.h"
 #include "utils/synthutils.h"
 
+#include <array>
+
 namespace
 {
 
@@ -145,10 +147,10 @@ void GP_CLI_COMMAND_COMBINE_ASK::process(MapSession* PSession, CCharEntity* PCha
     }
 
     SynthOffer offer{
-        .crystal = { this->Crystal, this->CrystalIdx },
+        .crystal = { .itemId = this->Crystal, .invSlot = this->CrystalIdx },
     };
 
-    std::vector<uint8> slotQty(MAX_CONTAINER_SIZE);
+    std::array<uint8, 256> slotQty{};
     for (int32 slotId = 0; slotId < this->Items; ++slotId)
     {
         const uint16 itemId    = this->ItemNo[slotId];
@@ -170,7 +172,7 @@ void GP_CLI_COMMAND_COMBINE_ASK::process(MapSession* PSession, CCharEntity* PCha
             continue;
         }
 
-        offer.ingredients[slotId] = { itemId, invSlotId };
+        offer.ingredients[slotId] = { .itemId = itemId, .invSlot = invSlotId };
     }
 
     synthutils::startSynth(PChar, offer);
