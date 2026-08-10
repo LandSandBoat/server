@@ -68,6 +68,7 @@ add_executable(xi_test
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/entity_list_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/rng_runtime_tests.cpp
     ${resource})
+add_dependencies(xi_test data_schema_generate)
 
 set(TEST_LIB_SOURCES ${SOURCES})
 add_library(xi_test_lib
