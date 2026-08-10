@@ -6536,6 +6536,7 @@ xi.item =
     MANA_RING                           = 14651,
     PROTEAN_RING                        = 14652,
     VARIABLE_RING                       = 14653,
+    POISONA_RING                        = 14654,
     VENERER_RING                        = 14655,
     DUCAL_GUARDS_RING                   = 14657,
     BOWYER_RING                         = 14660,

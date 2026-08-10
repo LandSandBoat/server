@@ -2311,7 +2311,7 @@ void UnequipItem(CCharEntity* PChar, uint8 equipSlotID, Recalculate recalculate)
             break;
         }
 
-        luautils::OnItemUnequip(PChar, PItem);
+        luautils::OnItemUnequip(PChar, PItem, equipSlotID);
 
         PChar->inventorySyncState().queueEquipChange(LOC_INVENTORY, 0, static_cast<SLOTTYPE>(equipSlotID), PItem, Equipping::No);
 

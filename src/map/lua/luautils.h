@@ -321,7 +321,7 @@ int32 OnItemUse(CBaseEntity* PUser, CBaseEntity* PTarget, CItem* PItem, action_t
 auto  OnItemCheck(CBaseEntity* PTarget, CItem* PItem, CBaseEntity* PCaster = nullptr) -> std::tuple<int32, int32, int32>;
 void  OnItemDrop(CBaseEntity* PUser, CItem* PItem, IsRecycleBin recycleBin = IsRecycleBin::No);
 void  OnItemEquip(CBaseEntity* PUser, CItem* PItem);
-void  OnItemUnequip(CBaseEntity* PUser, CItem* PItem);
+void  OnItemUnequip(CBaseEntity* PUser, CItem* PItem, uint8 equipSlotID);
 void  CheckForGearSet(CBaseEntity* PTarget);
 
 int32 OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell);

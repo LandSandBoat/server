@@ -3035,7 +3035,21 @@ int32 OnItemUse(CBaseEntity* PUser, CBaseEntity* PTarget, CItem* PItem, action_t
         charutils::RemoveInvisible(PChar);
     }
 
-    auto result = onItemUse(PTarget, PUser, PItem, action);
+    // If the item being used is equipped, pass the equipment slot to the Lua script.
+    sol::object equipSlotID = sol::lua_nil;
+    if (const auto* PChar = dynamic_cast<CCharEntity*>(PUser))
+    {
+        for (uint8 slotID = SLOT_MAIN; slotID <= SLOT_BACK; ++slotID)
+        {
+            if (PChar->getEquip(static_cast<SLOTTYPE>(slotID)) == PItem)
+            {
+                equipSlotID = sol::make_object(lua, slotID);
+                break;
+            }
+        }
+    }
+
+    auto result = onItemUse(PTarget, PUser, PItem, action, equipSlotID);
     if (!result.valid())
     {
         sol::error err = result;
@@ -3089,7 +3103,7 @@ void OnItemEquip(CBaseEntity* PUser, CItem* PItem)
     }
 }
 
-void OnItemUnequip(CBaseEntity* PUser, CItem* PItem)
+void OnItemUnequip(CBaseEntity* PUser, CItem* PItem, uint8 equipSlotID)
 {
     TracyZoneScoped;
 
@@ -3101,7 +3115,7 @@ void OnItemUnequip(CBaseEntity* PUser, CItem* PItem)
         return;
     }
 
-    auto result = onItemUnequip(PUser, PItem);
+    auto result = onItemUnequip(PUser, PItem, equipSlotID);
     if (!result.valid())
     {
         sol::error err = result;
