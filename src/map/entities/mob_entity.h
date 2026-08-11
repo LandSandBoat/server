@@ -97,7 +97,7 @@ public:
     bool CanDropGil();    // mob has gil to drop
     bool CanStealGil();   // can steal gil from mob
     void ResetGilPurse(); // reset total gil held
-    auto GetEligibleSeals() -> std::vector<uint16>;
+    auto GetEligibleSeals() const -> std::vector<uint16>;
     auto GetEligibleGeodes() const -> std::vector<uint16>;
 
     void setMobMod(xi::MobMod type, int16 value);
