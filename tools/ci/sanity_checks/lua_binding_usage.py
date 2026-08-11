@@ -33,6 +33,11 @@ def main():
 
     function_names.append("skip_to_next")
 
+    # Module framework methods, defined in modules/module_utils.lua
+    function_names.append("addOverride")
+    function_names.append("addOverrideByEra")
+    function_names.append("setEnabled")
+
     # Add exceptions for interaction, battle frameworks, and other user Lua types
     function_names.append("new")
     function_names.append("event")

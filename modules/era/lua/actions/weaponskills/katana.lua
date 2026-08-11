@@ -4,13 +4,7 @@
 require('modules/module_utils')
 -----------------------------------
 
-local moduleName = 'toau_katana'
-
-if xi.module.isContentEnabled('WOTG') then
-    return { name = moduleName }
-end
-
-local m = Module:new(moduleName)
+local m = Module:new('toau_katana', xi.pre(xi.expansion.WOTG))
 
 -----------------------------------
 -- Blade: Rin
@@ -249,5 +243,3 @@ m:addOverride('xi.actions.weaponskills.blade_kamu.onUseWeaponSkill', function(pl
 
     return tpHits, extraHits, criticalHit, damage
 end)
-
-return m

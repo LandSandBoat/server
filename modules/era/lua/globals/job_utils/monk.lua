@@ -3,16 +3,10 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_job_utils_monk'
-
--- If RoV or later is enabled, no changes.
-if xi.module.isContentEnabled('ROV') then
-    return { name = moduleName }
-end
-
-local m = Module:new(moduleName)
+local m = Module:new('era_job_utils_monk', xi.pre(xi.expansion.ROV))
 
 -- Focus: Revert to flat +20 ACC only
+-- TODO: find a patch note or source for this change
 m:addOverride('xi.effects.focus.onEffectGain', function(target, effect)
     local bonusPower = effect:getPower()
 
@@ -20,6 +14,7 @@ m:addOverride('xi.effects.focus.onEffectGain', function(target, effect)
 end)
 
 -- Dodge: Revert to flat +20 EVA only
+-- TODO: find a patch note or source for this change
 m:addOverride('xi.effects.dodge.onEffectGain', function(target, effect)
     local bonusPower = effect:getPower()
 
@@ -27,6 +22,7 @@ m:addOverride('xi.effects.dodge.onEffectGain', function(target, effect)
 end)
 
 -- Focus: Revert duration from 30 to 120 seconds
+-- TODO: find a patch note or source for this change
 m:addOverride('xi.job_utils.monk.useFocus', function(player, target, ability)
     local focusMod = target:getMod(xi.mod.FOCUS_EFFECT)
     player:addStatusEffect(xi.effect.FOCUS, { power = focusMod, duration = 120, origin = player })
@@ -35,6 +31,7 @@ m:addOverride('xi.job_utils.monk.useFocus', function(player, target, ability)
 end)
 
 -- Dodge: Revert duration from 30 to 120 seconds
+-- TODO: find a patch note or source for this change
 m:addOverride('xi.job_utils.monk.useDodge', function(player, target, ability)
     local dodgeMod = target:getMod(xi.mod.DODGE_EFFECT)
     player:addStatusEffect(xi.effect.DODGE, { power = dodgeMod, duration = 120, origin = player })
@@ -43,6 +40,7 @@ m:addOverride('xi.job_utils.monk.useDodge', function(player, target, ability)
 end)
 
 -- Chakra: Revert to VIT * 2 healing only
+-- TODO: find a patch note or source for this change
 m:addOverride('xi.job_utils.monk.useChakra', function(player, target, ability)
     local chakraRemoval = player:getMod(xi.mod.CHAKRA_REMOVAL)
 
@@ -104,5 +102,3 @@ end)
 --     effect:addMod(xi.mod.STORETP, 180)
 --     effect:addMod(xi.mod.HASTE_MAGIC, -6000)
 -- end)
-
-return m

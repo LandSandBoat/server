@@ -9,56 +9,50 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_helm_adjustments'
+local m = Module:new('era_helm_adjustments')
 
 local removalsByContent =
 {
+    ABYSSEA =
     {
-        contentTag = 'ABYSSEA',
-        removals =
+        [xi.helmType.LOGGING] =
         {
-            [xi.helmType.LOGGING] =
+            [xi.zone.YHOATOR_JUNGLE] =
             {
-                [xi.zone.YHOATOR_JUNGLE] =
-                {
-                    xi.item.BUTTERPEAR,
-                    xi.item.AQUILARIA_LOG,
-                    xi.item.KAPOR_LOG,
-                },
+                xi.item.BUTTERPEAR,
+                xi.item.AQUILARIA_LOG,
+                xi.item.KAPOR_LOG,
+            },
 
-                [xi.zone.YUHTUNGA_JUNGLE] =
-                {
-                    xi.item.AQUILARIA_LOG,
-                },
+            [xi.zone.YUHTUNGA_JUNGLE] =
+            {
+                xi.item.AQUILARIA_LOG,
             },
         },
     },
 
+    WOTG =
     {
-        contentTag = 'WOTG',
-        removals =
+        [xi.helmType.HARVESTING] =
         {
-            [xi.helmType.HARVESTING] =
+            [xi.zone.BHAFLAU_THICKETS] =
             {
-                [xi.zone.BHAFLAU_THICKETS] =
-                {
-                    xi.item.EASTERN_GINGER_ROOT,
-                },
+                xi.item.EASTERN_GINGER_ROOT,
+            },
 
-                [xi.zone.GIDDEUS] =
-                {
-                    xi.item.SPRIG_OF_DYERS_WOAD,
-                },
+            [xi.zone.GIDDEUS] =
+            {
+                xi.item.SPRIG_OF_DYERS_WOAD,
+            },
 
-                [xi.zone.WAJAOM_WOODLANDS] =
-                {
-                    xi.item.EASTERN_GINGER_ROOT,
-                },
+            [xi.zone.WAJAOM_WOODLANDS] =
+            {
+                xi.item.EASTERN_GINGER_ROOT,
+            },
 
-                [xi.zone.WEST_SARUTABARUTA] =
-                {
-                    xi.item.SPRIG_OF_DYERS_WOAD,
-                },
+            [xi.zone.WEST_SARUTABARUTA] =
+            {
+                xi.item.SPRIG_OF_DYERS_WOAD,
             },
         },
     },
@@ -94,10 +88,16 @@ local applyRemovals = function(removals)
     end
 end
 
-for _, entry in ipairs(removalsByContent) do
-    if not xi.module.isContentEnabled(entry.contentTag) then
-        applyRemovals(entry.removals)
-    end
-end
+m:addOverrideByEra('xi.server.onServerStart', {
+    [xi.expansion.ABYSSEA] = function()
+        super()
 
-return { name = moduleName }
+        applyRemovals(removalsByContent.ABYSSEA)
+    end,
+
+    [xi.expansion.WOTG] = function()
+        super()
+
+        applyRemovals(removalsByContent.WOTG)
+    end,
+})

@@ -5,13 +5,7 @@
 require('modules/module_utils')
 -----------------------------------
 
-local moduleName = 'hastega'
-
-if xi.module.isContentEnabled('WOTG') then
-    return { name = moduleName }
-end
-
-local m = Module:new(moduleName)
+local m = Module:new('hastega', xi.pre(xi.expansion.WOTG))
 
 m:addOverride('xi.actions.abilities.pets.hastega.onPetAbility', function(target, pet, petskill, summoner, action)
     local duration = 180
@@ -33,5 +27,3 @@ m:addOverride('xi.actions.abilities.pets.hastega.onPetAbility', function(target,
 
     return typeEffect
 end)
-
-return m

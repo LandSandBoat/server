@@ -3,16 +3,10 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_job_utils_white_mage'
-
--- If Abyssea or later is enabled, no changes.
-if xi.module.isContentEnabled('ABYSSEA') then
-    return { name = moduleName }
-end
-
-local m = Module:new(moduleName)
+local m = Module:new('era_job_utils_white_mage', xi.pre(xi.expansion.ABYSSEA))
 
 -- Martyr: Apply merit recast reduction, remove merit healing bonus
+-- TODO: find a patch note or source for this change
 m:addOverride('xi.job_utils.white_mage.useMartyr', function(player, target, ability, action)
     local recastReduction = player:getMerit(xi.merit.MARTYR) - 150
     action:setRecast(action:getRecast() - recastReduction)
@@ -30,6 +24,7 @@ m:addOverride('xi.job_utils.white_mage.useMartyr', function(player, target, abil
 end)
 
 -- Devotion: Apply merit recast reduction, remove merit MP bonus
+-- TODO: find a patch note or source for this change
 m:addOverride('xi.job_utils.white_mage.useDevotion', function(player, target, ability, action)
     local recastReduction = player:getMerit(xi.merit.DEVOTION) - 150
     action:setRecast(action:getRecast() - recastReduction)
@@ -45,5 +40,3 @@ m:addOverride('xi.job_utils.white_mage.useDevotion', function(player, target, ab
 
     return healMP
 end)
-
-return m

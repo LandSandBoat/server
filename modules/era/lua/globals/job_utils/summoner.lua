@@ -1,9 +1,11 @@
 -----------------------------------
 -- Module: Summoner spirit perpetuation cost helpers
+-- The override target does not exist in the base scripts; declaring it here
+-- creates it for the other era modules that call it.
 -----------------------------------
-local moduleName = 'era_job_utils_summoner'
-
-xi.job_utils.summoner = xi.job_utils.summoner or {}
+require('modules/module_utils')
+-----------------------------------
+local m = Module:new('era_job_utils_summoner')
 
 -- Perpetuation cost breakpoints for elemental spirits, in ascending level order.
 -- Source: https://forum.square-enix.com/ffxi/threads/22099-March-27-2012-%28JST%29-Version-Update
@@ -38,7 +40,7 @@ local function getSpiritPerpetuationCost(level)
     return spiritPerpTresholds[#spiritPerpTresholds].cost
 end
 
-xi.job_utils.summoner.applySpiritPerpetuationCost = function(caster)
+m:addOverride('xi.job_utils.summoner.applySpiritPerpetuationCost', function(caster)
     local pet = caster:getPet()
     if
         pet and
@@ -50,6 +52,4 @@ xi.job_utils.summoner.applySpiritPerpetuationCost = function(caster)
 
         caster:setMod(xi.mod.AVATAR_PERPETUATION, math.max(0, baseCost - meritReduction))
     end
-end
-
-return { name = moduleName }
+end)

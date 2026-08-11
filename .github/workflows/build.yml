@@ -26,7 +26,7 @@ jobs:
       clang_tidy: true
 
   Runner_Build:
-    name: ${{ matrix.save_cache && 'Cache Build' || 'Build' }}
+    name: ${{ matrix.build_modules && 'Modules Build' || (matrix.save_cache && 'Cache Build' || 'Build') }}
     strategy:
       fail-fast: false
       matrix:
@@ -70,6 +70,17 @@ jobs:
             tracy: false
             build_modules: false
             save_cache: true
+            upload_artifact: false
+            clang_tidy: false
+          # Compiles the cpp modules. Debug reuses the ubuntu cache build's
+          # warm cache and never enables IPO/LTO, so this is the cheapest slot.
+          - build_type: Debug
+            runner: ubuntu-26.04
+            compiler: gcc
+            compiler_version: 15
+            tracy: false
+            build_modules: true
+            save_cache: false
             upload_artifact: false
             clang_tidy: false
     uses: ./.github/workflows/runner_build.yml

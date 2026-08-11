@@ -5,13 +5,7 @@
 require('modules/module_utils')
 -----------------------------------
 
-local moduleName = 'abyssea_avatar_bloodpacts'
-
-if xi.module.isContentEnabled('ABYSSEA') then
-    return { name = moduleName }
-end
-
-local m = Module:new(moduleName)
+local m = Module:new('abyssea_avatar_bloodpacts', xi.pre(xi.expansion.ABYSSEA))
 
 -----------------------------------
 -- Shining Ruby
@@ -293,5 +287,3 @@ m:addOverride('xi.actions.abilities.pets.dream_shroud.onPetAbility', function(ta
 
     return 0
 end)
-
-return m

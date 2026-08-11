@@ -6,16 +6,8 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'physical_hit_rate'
-
-if xi.module.isContentEnabled('SOA') then
-    return { name = moduleName }
-end
-
-local m = Module:new(moduleName)
+local m = Module:new('physical_hit_rate', xi.pre(xi.expansion.SOA))
 
 m:addOverride('xi.combat.physicalHitRate.getPhysicalHitRateCap', function(attacker, slot)
     return 0.95
 end)
-
-return m

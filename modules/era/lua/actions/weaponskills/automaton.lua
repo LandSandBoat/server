@@ -3,17 +3,12 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'wotg_automaton'
-
-local m = Module:new(moduleName)
-
-if xi.module.isContentEnabled('ABYSSEA') then
-    return { name = moduleName }
-end
+local m = Module:new('wotg_automaton', xi.pre(xi.expansion.ABYSSEA))
 
 -----------------------------------
 -- Arcuballista
 -----------------------------------
+-- TODO: find a patch note or source for this change
 m:addOverride('xi.actions.abilities.pets.automaton.arcuballista.onAutomatonAbility', function(target, automaton, skill, master, action)
     local params = {}
 
@@ -43,6 +38,7 @@ end)
 -----------------------------------
 -- Armor Piercer
 -----------------------------------
+-- TODO: find a patch note or source for this change
 m:addOverride('xi.actions.abilities.pets.automaton.armor_piercer.onAutomatonAbility', function(target, automaton, skill, master, action)
     local params = {}
 
@@ -73,6 +69,7 @@ end)
 -----------------------------------
 -- Bone Crusher
 -----------------------------------
+-- TODO: find a patch note or source for this change
 m:addOverride('xi.actions.abilities.pets.automaton.bone_crusher.onAutomatonAbility', function(target, automaton, skill, master, action)
     local params = {}
 
@@ -104,6 +101,7 @@ end)
 -----------------------------------
 -- Cannibal Blade
 -----------------------------------
+-- TODO: find a patch note or source for this change
 m:addOverride('xi.actions.abilities.pets.automaton.cannibal_blade.onAutomatonAbility', function(target, automaton, skill, master, action)
     local params = {}
 
@@ -138,6 +136,7 @@ end)
 -----------------------------------
 -- Chimera Ripper
 -----------------------------------
+-- TODO: find a patch note or source for this change
 m:addOverride('xi.actions.abilities.pets.automaton.chimera_ripper.onAutomatonAbility', function(target, automaton, skill, master, action)
     local params = {}
 
@@ -164,6 +163,7 @@ end)
 -----------------------------------
 -- Daze
 -----------------------------------
+-- TODO: find a patch note or source for this change
 m:addOverride('xi.actions.abilities.pets.automaton.daze.onAutomatonAbility', function(target, automaton, skill, master, action)
     local params = {}
 
@@ -195,6 +195,7 @@ end)
 -----------------------------------
 -- Knockout
 -----------------------------------
+-- TODO: find a patch note or source for this change
 m:addOverride('xi.actions.abilities.pets.automaton.knockout.onAutomatonAbility', function(target, automaton, skill, master, action)
     local params = {}
 
@@ -222,6 +223,7 @@ end)
 -----------------------------------
 -- Magic Mortar
 -----------------------------------
+-- TODO: find a patch note or source for this change
 m:addOverride('xi.actions.abilities.pets.automaton.magic_mortar.onAutomatonAbility', function(target, automaton, skill, master, action)
     local params = {}
 
@@ -251,6 +253,7 @@ end)
 -----------------------------------
 -- Slapstick
 -----------------------------------
+-- TODO: find a patch note or source for this change
 m:addOverride('xi.actions.abilities.pets.automaton.slapstick.onAutomatonAbility', function(target, automaton, skill, master, action)
     local params = {}
 
@@ -277,6 +280,7 @@ end)
 -----------------------------------
 -- String Clipper
 -----------------------------------
+-- TODO: find a patch note or source for this change
 m:addOverride('xi.actions.abilities.pets.automaton.string_clipper.onAutomatonAbility', function(target, automaton, skill, master, action)
     local params = {}
 
@@ -301,5 +305,3 @@ m:addOverride('xi.actions.abilities.pets.automaton.string_clipper.onAutomatonAbi
 
     return info.damage
 end)
-
-return m

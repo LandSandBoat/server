@@ -6,13 +6,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'cop_signet'
-
-if xi.module.isContentEnabled('TOAU') then
-    return { name = moduleName }
-end
-
-local m = Module:new(moduleName)
+local m = Module:new('cop_signet', xi.pre(xi.expansion.TOAU))
 
 m:addOverride('xi.effects.signet.onEffectGain', function(target, effect)
     target:addLatent(xi.latent.SIGNET_BONUS, 0, xi.mod.DEF, 0)
@@ -50,5 +44,3 @@ m:addOverride('xi.effects.healing.onEffectTick', function(target, effect)
         end
     end
 end)
-
-return m

@@ -3,13 +3,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_job_utils_puppetmaster'
-
-local m = Module:new(moduleName)
-
-if xi.module.isContentEnabled('ABYSSEA') then
-    return { name = moduleName }
-end
+local m = Module:new('era_job_utils_puppetmaster', xi.pre(xi.expansion.ABYSSEA))
 
 -- Overdrive: Revert duration from 180 to 60 seconds : https://wiki.ffo.jp/html/954.html
 m:addOverride('xi.job_utils.puppetmaster.onAbilityUseOverdrive', function(player, target, ability, action)
@@ -122,6 +116,7 @@ local oilData =
 }
 
 -- Repair: Remove the initial burst heal, leaving only the Regen and status removal effects
+-- TODO: find a patch note or source for this change
 m:addOverride('xi.job_utils.puppetmaster.onAbilityUseRepair', function(player, target, ability, action)
     local pet = player:getPet()
     if not pet then
@@ -148,5 +143,3 @@ m:addOverride('xi.job_utils.puppetmaster.onAbilityUseRepair', function(player, t
 
     ability:setMsg(xi.msg.basic.USES_JA)
 end)
-
-return m
