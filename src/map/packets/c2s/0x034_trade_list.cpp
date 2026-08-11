@@ -68,7 +68,6 @@ void GP_CLI_COMMAND_TRADE_LIST::process(MapSession* PSession, CCharEntity* PChar
     auto* PTarget = PChar->TradePending.resolve<CCharEntity>();
 
     if (!PTarget ||
-        PTarget->id != PChar->TradePending.UniqueNo ||
         PChar->id != PTarget->TradePending.UniqueNo)
     {
         ShowWarningFmt("GP_CLI_COMMAND_TRADE_LIST: Could not find trade targets.");

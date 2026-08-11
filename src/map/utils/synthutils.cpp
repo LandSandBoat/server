@@ -1106,8 +1106,6 @@ void doSynthSkillUp(CCharEntity* PChar)
  ************************/
 void startSynth(CCharEntity* PChar, const SynthOffer& offer)
 {
-    PChar->m_LastSynthTime = timer::now();
-
     if (!resolveRecipe(PChar, offer))
     {
         return;
@@ -1120,6 +1118,8 @@ void startSynth(CCharEntity* PChar, const SynthOffer& offer)
         PChar->pushPacket<GP_SERV_COMMAND_COMBINE_ANS>(PChar, SynthesisResult::CancelBadRecipe);
         return;
     }
+
+    PChar->m_LastSynthTime = timer::now();
 
     const auto effect = crystalProps(offer.crystal.itemId).effect;
 
