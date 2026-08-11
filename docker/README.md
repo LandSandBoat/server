@@ -120,7 +120,7 @@ x-common: &common
 
 services:
   database:
-    image: mariadb:lts
+    image: mariadb:12.3
     restart: always
     command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_general_ci']
     environment:
@@ -212,14 +212,14 @@ docker build -f docker/ubuntu.Dockerfile .
 The Dockerfiles support a few [build args](https://docs.docker.com/build/building/variables/#arg-usage-example), use these if you want to use a different compiler/version/user/etc:
 
 ```
-BASE_TAG=24.04
+BASE_TAG=26.04
 UNAME=xiadmin
 UGROUP=xiadmin
 UID=1000
 GID=1000
 COMPILER=gcc
-GCC_VERSION=14
-LLVM_VERSION=20
+GCC_VERSION=15
+LLVM_VERSION=22
 CMAKE_BUILD_TYPE=Release
 TRACY_ENABLE=OFF
 ENABLE_CLANG_TIDY=OFF

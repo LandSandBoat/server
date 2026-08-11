@@ -4,16 +4,29 @@ on:
   push:
     branches:
       - base
+    # These are submodules, so a bump changes the gitlink path itself, not anything beneath it.
     paths:
-      - './navmeshes/**'
-      - './ximeshes/**'
+      - 'navmeshes'
+      - 'ximeshes'
       - '.gitmodules'
+      - 'docker/meshes.Dockerfile'
   workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  # Queue rather than cancel: a cancelled run leaves its revision tag unpublished.
+  cancel-in-progress: false
 
 jobs:
   Meshes_Build:
     name: Build and Publish ximeshes Docker Image
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     env:
       # Placeholder value. Actual value set in the first step.
       REPO_OWNER: 'landsandboat'
@@ -25,7 +38,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
         with:
+          fetch-depth: 1
           submodules: true
+
+      # Consumers need to know whether an image matches the meshes their branch pins.
+      - name: Compute meshes revision
+        id: meshes_rev
+        run: echo "rev=$(git ls-tree HEAD navmeshes ximeshes | sha256sum | cut -c1-12)" >>${GITHUB_OUTPUT}
 
       - name: Login to GHCR
         uses: docker/login-action@v4
@@ -44,6 +63,7 @@ jobs:
           images: ghcr.io/${{ env.REPO_OWNER }}/ximeshes
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=${{ steps.meshes_rev.outputs.rev }}
           labels: |
             org.opencontainers.image.authors=LandSandBoat & EdenServer Dev Teams
             org.opencontainers.image.title=FFXI Meshes

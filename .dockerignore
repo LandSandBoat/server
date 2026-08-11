@@ -1,5 +1,3 @@
-sql/backups/*.sql
-
 # .gitignore (with edits: .vscode and modules/init.txt are needed in Docker context to avoid "-dirty" tag in builds)
 
 # Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
@@ -262,3 +260,8 @@ __pycache__
 sanity_checks_summary.md
 changed-files.txt
 clang_tidy_summary.md
+
+sql/backups/*.sql
+
+navmeshes/
+ximeshes/
