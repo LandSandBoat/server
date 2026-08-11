@@ -1,8 +1,12 @@
 -----------------------------------
--- An Empty Vessel
+-- An Empty Vessel (BLU Unlock)
 -----------------------------------
 -- Log ID: 6, Quest ID: 5
 -- Waoud : !pos 65 -6 -78 50
+-----------------------------------
+-- Every wait on Waoud needs a Vana'diel day change and a zone, in either order.
+-- Event 69 does not spend the day's divination.
+-- Refusing Yasfel deletes the quest. Accepting and refusing warp the player to different spots.
 -----------------------------------
 local whitegateID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
@@ -34,9 +38,10 @@ quest.sections =
             ['Waoud'] =
             {
                 onTrigger = function(player, npc)
-                    local lastDivination = quest:getVar(player, 'Timer')
-
-                    if lastDivination <= VanadielUniqueDay() then
+                    if
+                        not quest:getMustZone(player) and
+                        quest:getVar(player, 'Timer') <= VanadielUniqueDay()
+                    then
                         return quest:progressEvent(60, player:getGil())
                     else
                         return quest:event(63)
@@ -79,12 +84,16 @@ quest.sections =
             onEventFinish =
             {
                 [60] = function(player, csid, option, npc)
+                    quest:setLocalVar(player, 'numCorrect', 0)
+
                     if option == 50 then
                         quest:begin(player)
                         quest:setMustZone(player)
                         quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+
+                    -- Divination completed without an offer.
                     elseif
-                        option == 1 and
+                        option == 45 and
                         player:getGil() >= 1000
                     then
                         quest:setMustZone(player)
@@ -110,11 +119,12 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     local requiredItem = quest:getVar(player, 'Option')
 
+                    -- The item is not taken. Yasfel asks for it again in Aydeewa.
                     if
                         quest:getVar(player, 'Prog') == 1 and
-                        npcUtil.tradeHasExactly(trade, requiredItemList[requiredItem])
+                        npcUtil.tradeMatches(trade, { { requiredItemList[requiredItem], 1 } })
                     then
-                        return quest:progressEvent(67, requiredItemList[requiredItem])
+                        return quest:progressEvent(67, { [6] = requiredItem })
                     end
                 end,
 
@@ -126,7 +136,7 @@ quest.sections =
                         quest:getVar(player, 'Timer') <= VanadielUniqueDay()
                     then
                         if questProgress == 0 then
-                            return quest:progressEvent(65, { [6] = quest:getVar(player, 'Option') })
+                            return quest:progressEvent(65)
                         elseif questProgress == 1 then
                             return quest:event(66, { [6] = quest:getVar(player, 'Option') })
                         elseif questProgress == 2 then
@@ -138,17 +148,13 @@ quest.sections =
                 end,
             },
 
-            onEventUpdate =
-            {
-                [65] = function(player, csid, option, npc)
-                    if option == 2 then
-                        quest:setVar(player, 'Prog', 1)
-                    end
-                end,
-            },
-
             onEventFinish =
             {
+                -- Event 65 has no menu. The hint follows on the next conversation.
+                [65] = function(player, csid, option, npc)
+                    quest:setVar(player, 'Prog', 1)
+                end,
+
                 [67] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 2)
                 end,
@@ -181,17 +187,21 @@ quest.sections =
                             player:addKeyItem(xi.ki.MARK_OF_ZAHAK)
                             player:addKeyItem(xi.ki.JOB_GESTURE_BLUE_MAGE)
 
+                            -- quest:complete() wipes quest vars.
                             quest:setVar(player, 'completeEvent', 1)
                         end
-                    else
+
+                        player:setPos(148, -2, 0, 128, xi.zone.AHT_URHGAN_WHITEGATE)
+
+                    -- Player refused Yasfel.
+                    elseif option == 7 then
                         quest:setVar(player, 'Prog', 0)
                         quest:setVar(player, 'Timer', 0)
                         quest:setVar(player, 'Option', 0)
 
                         player:delQuest(quest.areaId, quest.questId)
+                        player:setPos(-17.5, -6, 39.6, 171, xi.zone.AHT_URHGAN_WHITEGATE)
                     end
-
-                    player:setPos(148, -2, 0, 130, 50)
                 end,
             },
         },
@@ -209,11 +219,10 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'completeEvent') == 1 then
                         return quest:progressEvent(69)
-                    elseif quest:getVar(player, 'Timer') <= VanadielUniqueDay() then
-                        -- The timer for Divinations is reused throughout more quests, and continues to persist
-                        -- for Blue Mages when talking to Waoud (once per day).  Use this Timer to track throughout
-                        -- the remaining series.
-
+                    elseif
+                        not quest:getMustZone(player) and
+                        quest:getVar(player, 'Timer') <= VanadielUniqueDay()
+                    then
                         return quest:event(78, player:getGil())
                     else
                         return quest:event(63)
@@ -235,14 +244,12 @@ quest.sections =
                 [69] = function(player, csid, option, npc)
                     if option == 1 then
                         quest:setVar(player, 'completeEvent', 0)
-
-                        quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
-                        xi.quest.setMustZone(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS)
                     end
                 end,
 
                 [78] = function(player, csid, option, npc)
                     if option == 1 and player:getGil() >= 1000 then
+                        quest:setMustZone(player)
                         quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
 
                         player:delGil(1000)

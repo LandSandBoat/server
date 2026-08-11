@@ -1,5 +1,5 @@
 -----------------------------------
--- Beginnings
+-- Beginnings (BLU AF1)
 -----------------------------------
 -- Log ID: 6, Quest ID: 21
 -- Waoud   : !pos 65 -6 -78 50
@@ -8,6 +8,11 @@
 -- Nahshib : !pos -274.334 -9.287 -64.255 79
 -- Nareema : !pos 518.387 -24.707 -467.297 79
 -- Waudeen : !pos 673.882 -23.995 367.604 61
+-----------------------------------
+-- Omens opens one minute after this quest completes.
+-- The June 7, 2016 version update shortened the wait from one Earth day.
+--
+-- Source: https://forum.square-enix.com/ffxi/threads/50760-Jun.-7-2016-(JST)-Version-Update
 -----------------------------------
 local whitegateID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
@@ -53,27 +58,13 @@ quest.sections =
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
-            ['Waoud'] =
-            {
-                onTrigger = function(player, npc)
-                    local lastDivination = xi.quest.getVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, 'Timer')
-
-                    if
-                        lastDivination <= VanadielUniqueDay() and
-                        not quest:getMustZone(player)
-                    then
-                        return quest:progressEvent(705)
-                    end
-                end,
-            },
+            ['Waoud'] = quest:progressEvent(705),
 
             onEventFinish =
             {
                 [705] = function(player, csid, option, npc)
                     if option == 1 then
                         quest:begin(player)
-
-                        xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, 'Timer', VanadielUniqueDay() + 1)
                     end
                 end,
             },
@@ -91,11 +82,9 @@ quest.sections =
             ['Waoud'] =
             {
                 onTrigger = function(player, npc)
-                    local lastDivination = xi.quest.getVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, 'Timer')
-
                     if hasRequiredBrands(player) then
                         return quest:progressEvent(707)
-                    elseif lastDivination <= VanadielUniqueDay() then
+                    else
                         return quest:progressEvent(706, player:getGil())
                     end
                 end,
@@ -110,15 +99,13 @@ quest.sections =
                     then
                         player:delGil(1000)
                         player:messageSpecial(whitegateID.text.PAY_DIVINATION)
-
-                        xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, 'Timer', VanadielUniqueDay() + 1)
                     end
                 end,
 
                 [707] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, 'Timer', VanadielUniqueDay() + 1)
                         xi.quest.setMustZone(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS)
+                        xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS, 'Timer', GetSystemTime() + 60) -- 1 minute wait time
                     end
                 end,
             },
