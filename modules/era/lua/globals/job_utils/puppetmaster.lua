@@ -111,6 +111,16 @@ local function removeStatusEffects(pet, amountToRemove)
     return effectsRemoved
 end
 
+-- Before the June 2015 update, oils restored half as much HP per tick for twice as long.
+-- https://forum.square-enix.com/ffxi/threads/47481-Jun-25-2015-%28JST%29-Version-Update
+local oilData =
+{
+    [xi.item.CAN_OF_AUTOMATON_OIL   ] = { regen = 10, duration =  30 },
+    [xi.item.CAN_OF_AUTOMATON_OIL_P1] = { regen = 20, duration =  60 },
+    [xi.item.CAN_OF_AUTOMATON_OIL_P2] = { regen = 30, duration =  90 },
+    [xi.item.CAN_OF_AUTOMATON_OIL_P3] = { regen = 40, duration = 120 },
+}
+
 -- Repair: Remove the initial burst heal, leaving only the Regen and status removal effects
 m:addOverride('xi.job_utils.puppetmaster.onAbilityUseRepair', function(player, target, ability, action)
     local pet = player:getPet()
@@ -121,7 +131,7 @@ m:addOverride('xi.job_utils.puppetmaster.onAbilityUseRepair', function(player, t
     -- Self-cast ability but reports on pet
     action:ID(player:getID(), pet:getID())
 
-    local oilEquipped = xi.job_utils.puppetmaster.oilData[player:getEquipID(xi.slot.AMMO)]
+    local oilEquipped = oilData[player:getEquipID(xi.slot.AMMO)]
     local regenAmount = oilEquipped.regen
     local regenTime   = oilEquipped.duration
 
