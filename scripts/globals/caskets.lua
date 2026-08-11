@@ -90,52 +90,6 @@ local casketInfo =
 }
 
 -----------------------------------
--- Desc: Helper function for making it easier to read time between spawns.
--- TODO: Simplify and deprecate this function, as its only used in timeElapsedCheck
------------------------------------
-local function convertTime(rawTime)
-    local rawSeconds = tonumber(rawTime)
-    local timeTable  = { '', '', '' }
-
-    timeTable[1] = string.format('%02.f', math.floor(rawSeconds / 3600))
-    timeTable[2] = string.format('%02.f', math.floor(rawSeconds / 60 - timeTable[1] * 60))
-    timeTable[3] = string.format('%02.f', math.floor(rawSeconds - timeTable[1] * 3600 - timeTable[2] * 60))
-
-    return timeTable
-end
-
------------------------------------
--- Desc: Check for time elapsed since last spawned
--- NOTE: will NOT allow a spawn if time since last spanwed is under 5 mins.
------------------------------------
-local function timeElapsedCheck(npc)
-    local spawnTime = GetSystemTime() + 360000 -- Default time in case no var set.
-    local timeTable = { 0, 0, 0 }              -- Hours, Minutes, Seconds.
-
-    if npc == nil then
-        return false
-    end
-
-    if npc:getLocalVar('[caskets]SPAWNTIME') then
-        spawnTime = npc:getLocalVar('[caskets]SPAWNTIME')
-    end
-
-    local lastSpawned = GetSystemTime() - spawnTime
-
-    timeTable = convertTime(lastSpawned)
-
-    if
-        tonumber(timeTable[1]) >= 01 or
-        tonumber(timeTable[1]) < 01 and
-        tonumber(timeTable[2]) >= 05
-    then
-        return true
-    end
-
-    return false
-end
-
------------------------------------
 -- Desc: Grabs an id for a casket if one is available if not, no casket will spawn.
 -----------------------------------
 local function getCasketID(mob)
@@ -151,15 +105,16 @@ local function getCasketID(mob)
     local baseChestId = caskets[1]:getID()
     local chestId     = 0
 
+    -- retail reuses a casket id as soon as its previous chest is gone
     for i = baseChestId, baseChestId + 15 do
-        if timeElapsedCheck(GetNPCByID(i)) then
-            if
-                GetNPCByID(i):getLocalVar('[caskets]SPAWNSTATUS') == casketInfo.spawnStatus.DESPAWNED or
-                GetNPCByID(i):getLocalVar('[caskets]SPAWNSTATUS') == 0
-            then
-                chestId = i
-                break
-            end
+        local casket = GetNPCByID(i)
+
+        if
+            casket ~= nil and
+            casket:getLocalVar('[caskets]SPAWNSTATUS') == casketInfo.spawnStatus.DESPAWNED
+        then
+            chestId = i
+            break
         end
     end
 
@@ -222,9 +177,18 @@ end
 -- Desc: Despawn a chest and reset its local var's
 -----------------------------------
 local function removeChest(npc)
-    npc:setAnimationSub(0, false)
-    npc:setStatus(xi.status.DISAPPEAR)
-    npc:resetLocalVars()
+    -- Clear the initially queued despawn timer, else it may occur on an unrelated relocated spawn.
+    npc:clearTimerQueue()
+
+    npc:setUntargetable(true)
+    npc:entityAnimationPacket(xi.animationString.STATUS_DISAPPEAR)
+
+    -- Vars are kept until the entity is gone so the slot can't be reused mid fade out.
+    npc:timer(2000, function(despawningNpc)
+        despawningNpc:setAnimationSub(0, false)
+        despawningNpc:setStatus(xi.status.DISAPPEAR)
+        despawningNpc:resetLocalVars()
+    end)
 end
 
 -----------------------------------
@@ -275,6 +239,8 @@ local function setCasketData(player, x, y, z, r, npc, partyID, mobLvl)
     npc:setLocalVar('[caskets]SPAWNTIME', GetSystemTime())
     npc:setPos(x, y, z, r)
     npc:setStatus(xi.status.NORMAL)
+    npc:setUntargetable(false)
+    npc:hideName(false)
     npc:entityAnimationPacket(xi.animationString.STATUS_VISIBLE)
     npc:setModelId(chestStyle)
     sendChestDropMessage(player)
