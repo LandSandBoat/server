@@ -38,7 +38,7 @@ jobs:
       REPO: 'landsandboat/server'
     services:
       database:
-        image: mariadb:lts
+        image: mariadb:12.3
         env:
           MARIADB_DATABASE: ${{ env.XI_NETWORK_SQL_DATABASE }}
           MARIADB_USER: ${{ env.XI_NETWORK_SQL_LOGIN }}

@@ -19,7 +19,7 @@ on:
         description: 'Version of clang-format to use for devtools (sanity checks).'
         required: false
         type: string
-        default: '20'
+        default: '22'
       build_type:
         description: 'CMake build type.'
         required: true
@@ -54,10 +54,15 @@ jobs:
   Docker_Build:
     name: ${{ format('docker-{0}, {1}{2}, {3}', inputs.os, inputs.compiler, inputs.compiler_version, inputs.build_type) }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     env:
       BUILDX_NO_DEFAULT_ATTESTATIONS: 1 # https://github.com/orgs/community/discussions/45969
-      build_id: ${{ format('build-{0}-{1}-{2}-tracy{3}-pch{4}', inputs.os, inputs.compiler, inputs.build_type, inputs.tracy && 'ON' || 'OFF', inputs.build_type == 'Debug' && 'OFF' || 'ON') }}
-      ccache_id: ${{ format('ccache-{0}-{1}-{2}-tracy{3}-pch{4}', inputs.os, inputs.compiler, inputs.build_type, inputs.tracy && 'ON' || 'OFF', inputs.build_type == 'Debug' && 'OFF' || 'ON') }}
+      # Passed to the Dockerfile as BUILD_CACHE_ID, and must stay equal to the mount ids it derives.
+      cache_id: ${{ format('{0}{1}-{2}-tracy{3}-pch{4}', inputs.compiler, inputs.compiler_version, inputs.build_type, inputs.tracy && 'ON' || 'OFF', inputs.build_type == 'Debug' && 'OFF' || 'ON') }}
+      build_id: ${{ format('build-{0}-{1}{2}-{3}-tracy{4}-pch{5}', inputs.os, inputs.compiler, inputs.compiler_version, inputs.build_type, inputs.tracy && 'ON' || 'OFF', inputs.build_type == 'Debug' && 'OFF' || 'ON') }}
+      ccache_id: ${{ format('ccache-{0}-{1}{2}-{3}-tracy{4}-pch{5}', inputs.os, inputs.compiler, inputs.compiler_version, inputs.build_type, inputs.tracy && 'ON' || 'OFF', inputs.build_type == 'Debug' && 'OFF' || 'ON') }}
       # Placeholder values. Actual values set in the first step.
       REPO_OWNER: 'landsandboat'
       REPO: 'landsandboat/server'
@@ -95,8 +100,8 @@ jobs:
         if: ${{ !inputs.save_cache }}
         uses: actions/cache/restore@v5
         env:
-          cmake_hash: ${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
-          source_hash: ${{ hashFiles('src/**/*', 'ext/**/*') }}
+          cmake_hash: ${{ hashFiles('**/CMakeLists.txt', '**/*.cmake', 'docker/*.Dockerfile') }}
+          source_hash: ${{ hashFiles('src/**/*', 'ext/**/*', 'data/**/*', 'tools/codegen/**/*') }}
         with:
           path: |
             ${{ format('/tmp/{0}', env.build_id) }}
@@ -110,8 +115,8 @@ jobs:
         if: ${{ inputs.save_cache }}
         uses: actions/cache@v5
         env:
-          cmake_hash: ${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
-          source_hash: ${{ hashFiles('src/**/*', 'ext/**/*') }}
+          cmake_hash: ${{ hashFiles('**/CMakeLists.txt', '**/*.cmake', 'docker/*.Dockerfile') }}
+          source_hash: ${{ hashFiles('src/**/*', 'ext/**/*', 'data/**/*', 'tools/codegen/**/*') }}
         with:
           path: |
             ${{ format('/tmp/{0}', env.build_id) }}
@@ -166,7 +171,7 @@ jobs:
           context: .
           file: ${{ format('./docker/{0}.Dockerfile', inputs.os) }}
           target: devtools
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          platforms: linux/amd64
           build-args: |
             LLVM_VERSION=${{ inputs.clang_format_version }}
           push: true
@@ -181,10 +186,14 @@ jobs:
           tags: ${{ steps.docker-meta.outputs.tags }}
           labels: ${{ steps.docker-meta.outputs.labels }}
           annotations: ${{ steps.docker-meta.outputs.annotations }}
-          platforms: linux/amd64${{ (inputs.publish && vars.PUBLISH_DOCKER != '') && ',linux/arm64,linux/arm/v7' || '' }}
+          # amd64 only. The base stage is pinned to $BUILDPLATFORM, so arm manifests were
+          # published with amd64 layers. Adding arm64 back means native runners plus a
+          # manifest merge, not another entry here.
+          platforms: linux/amd64
           build-args: |
             COMPILER=${{ inputs.compiler }}
             ${{ format('{0}={1}', startsWith(inputs.compiler, 'gcc') && 'GCC_VERSION' || 'LLVM_VERSION', inputs.compiler_version) }}
+            BUILD_CACHE_ID=${{ env.cache_id }}
             CMAKE_BUILD_TYPE=${{ inputs.build_type }}
             TRACY_ENABLE=${{ inputs.tracy && 'ON' || 'OFF' }}
             PCH_ENABLE=${{ inputs.build_type == 'Debug' && 'OFF' || 'ON' }}

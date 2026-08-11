@@ -19,7 +19,7 @@ x-common: &common
 
 services:
   database:
-    image: mariadb:lts
+    image: mariadb:12.3
     restart: always
     command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_general_ci']
     environment:

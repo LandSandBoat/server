@@ -20,7 +20,7 @@ on:
         required: true
         type: string
       save_cache:
-        description: 'Cache build and Python virtual environment.'
+        description: 'Warm the branch-scoped sccache that PR builds read from.'
         required: false
         type: boolean
         default: false
@@ -58,9 +58,14 @@ jobs:
       run:
         shell: bash
     env:
-      SCCACHE_DIR: ${{ format('{0}/build/sccache', github.workspace) }}
-      SCCACHE_CACHE_SIZE: "1G"
+      # Per-object entries in the GHA cache. A restored build tree would be faster on a
+      # hit, but ninja cannot tell which compiler produced the objects it finds, and four
+      # multi-GB trees evicted each other out of the 10GB repo budget anyway.
+      SCCACHE_GHA_ENABLED: "true"
+      CPM_SOURCE_CACHE: ${{ format('{0}/.cpm-cache', github.workspace) }}
       SKIP_BUILD: false
+      HOMEBREW_NO_AUTO_UPDATE: 1
+      HOMEBREW_NO_INSTALL_CLEANUP: 1
     steps:
       - name: Download changed files artifact
         if: ${{ inputs.optional_build }}
@@ -68,9 +73,10 @@ jobs:
         with:
           name: changed-files
 
+      # Only the optional_build path needs bash 4 for mapfile; the runner ships bash 3.2.
       - name: Install bash (macOS)
-        if: ${{ runner.os == 'macOS' }}
-        run: brew update && brew install --quiet bash
+        if: ${{ runner.os == 'macOS' && inputs.optional_build }}
+        run: brew install --quiet bash
 
       - name: Check for changed source files
         id: check-changes
@@ -179,6 +185,17 @@ jobs:
         with:
           arch: x64
 
+      # sccache keys on the compiler itself, so this is diagnostic only: it names the
+      # toolchain in the log when a runner image bump changes it underneath us.
+      - name: Log toolchain
+        if: ${{ env.SKIP_BUILD != 'true' }}
+        run: |
+          if [[ "$RUNNER_OS" == "Windows" ]]; then
+            cl.exe 2>&1 | head -1
+          else
+            "${CXX:-c++}" --version | head -1
+          fi || true
+
       - name: Setup sccache
         if: ${{ env.SKIP_BUILD != 'true' }}
         uses: mozilla-actions/sccache-action@v0.0.10
@@ -206,18 +223,16 @@ jobs:
               f.write("renamer\n")
           EOF
 
-      - name: Restore build cache
+      # Roughly 20 CPM packages are git-cloned at configure time. They used to survive
+      # inside the cached build tree; this keeps them out of the network path.
+      - name: Cache CPM sources
         if: ${{ env.SKIP_BUILD != 'true' }}
-        id: restore_build
-        uses: actions/cache/restore@v5
-        env:
-          cmake_hash: ${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
-          source_hash: ${{ hashFiles('src/**/*', 'ext/**/*') }}
+        uses: actions/cache@v5
         with:
-          path: build
-          key: ${{ format('buildcache-{0}-{1}{2}-{3}-{4}-{5}', runner.os, inputs.compiler, inputs.compiler_version, inputs.build_type, env.cmake_hash, env.source_hash) }}
+          path: .cpm-cache
+          key: ${{ format('cpm-{0}-{1}', runner.os, hashFiles('CMakeLists.txt', 'cmake/**', 'ext/CMakeLists.txt')) }}
           restore-keys: |
-            ${{ format('buildcache-{0}-{1}{2}-{3}-{4}-', runner.os, inputs.compiler, inputs.compiler_version, inputs.build_type, env.cmake_hash) }}
+            ${{ format('cpm-{0}-', runner.os) }}
 
       - name: Configure CMake
         if: ${{ env.SKIP_BUILD != 'true' }}
@@ -234,6 +249,16 @@ jobs:
         if: ${{ env.SKIP_BUILD != 'true' }}
         run: cmake --build build | tee build.log
 
+      - name: Compiler cache stats
+        if: ${{ !cancelled() && env.SKIP_BUILD != 'true' }}
+        run: |
+          {
+            echo "### sccache: ${{ inputs.runner }}, ${{ inputs.compiler }}${{ inputs.compiler_version }}, ${{ inputs.build_type }}"
+            echo '```'
+            sccache --show-stats || echo "(sccache unavailable)"
+            echo '```'
+          } >> $GITHUB_STEP_SUMMARY
+
       - name: Upload artifact
         if: ${{ inputs.upload_artifact && env.SKIP_BUILD != 'true' }}
         uses: actions/upload-artifact@v7
@@ -242,22 +267,6 @@ jobs:
           path: |
             xi_*
             tracy.tar.gz
-
-      - name: Remove exes from build cache
-        if: ${{ inputs.save_cache && env.SKIP_BUILD != 'true' && steps.restore_build.outputs.cache-hit != 'true' }}
-        run: |
-          rm -f build/src/login/xi_connect*
-          rm -f build/src/map/xi_map*
-          rm -f build/src/search/xi_search*
-          rm -f build/src/test/xi_test*
-          rm -f build/src/world/xi_world*
-
-      - name: Cache build
-        if: ${{ inputs.save_cache && env.SKIP_BUILD != 'true' && steps.restore_build.outputs.cache-hit != 'true' }}
-        uses: actions/cache/save@v5
-        with:
-          path: build
-          key: ${{ steps.restore_build.outputs.cache-primary-key }}
 
       - name: Summarize Clang Tidy Build
         if: ${{ inputs.clang_tidy && env.SKIP_BUILD != 'true' }}
