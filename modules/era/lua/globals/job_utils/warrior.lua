@@ -3,21 +3,16 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_job_utils_warrior'
-
--- If Abyssea or later is enabled, no changes.
-if xi.module.isContentEnabled('ABYSSEA') then
-    return { name = moduleName }
-end
-
-local m = Module:new(moduleName)
+local m = Module:new('era_job_utils_warrior', xi.pre(xi.expansion.ABYSSEA))
 
 -- Warrior's Charge: Remove Triple Attack bonus
+-- TODO: find a patch note or source for this change
 m:addOverride('xi.effects.warriors_charge.onEffectGain', function(target, effect)
     effect:addMod(xi.mod.DOUBLE_ATTACK, 100)
 end)
 
 -- Warrior's Charge: Apply merit recast reduction
+-- TODO: find a patch note or source for this change
 m:addOverride('xi.job_utils.warrior.useWarriorsCharge', function(player, target, ability, action)
     local recastReduction = player:getMerit(xi.merit.WARRIORS_CHARGE) - 150
     action:setRecast(action:getRecast() - recastReduction)
@@ -26,5 +21,3 @@ m:addOverride('xi.job_utils.warrior.useWarriorsCharge', function(player, target,
 
     return xi.effect.WARRIORS_CHARGE
 end)
-
-return m

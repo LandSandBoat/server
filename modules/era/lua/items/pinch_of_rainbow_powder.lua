@@ -4,13 +4,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_rainbow_powder_duration'
-
-if xi.module.isContentEnabled('ABYSSEA') then
-    return { name = moduleName }
-end
-
-local m = Module:new(moduleName)
+local m = Module:new('era_rainbow_powder_duration', xi.pre(xi.expansion.ABYSSEA))
 
 m:addOverride('xi.items.pinch_of_rainbow_powder.onItemUse', function(target, user)
     if target:hasStatusEffect(xi.effect.INVISIBLE) then
@@ -19,5 +13,3 @@ m:addOverride('xi.items.pinch_of_rainbow_powder.onItemUse', function(target, use
 
     target:addStatusEffect(xi.effect.INVISIBLE, { power = 1, duration = math.floor(180 * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER), origin = user, tick = 10 })
 end)
-
-return m

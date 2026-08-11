@@ -73,5 +73,3 @@ m:addOverride('npcUtil.completeMission', function(player, logId, missionId, para
 
     return result
 end)
-
-return m

@@ -59,5 +59,3 @@ for _, entry in pairs(nmsToPersist) do
         end
     end)
 end
-
-return m

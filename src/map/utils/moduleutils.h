@@ -110,6 +110,9 @@ auto OnIncomingPacket(MapSession* PSession, CCharEntity* PChar, CBasicPacket& pa
 
 void LoadLuaModules(IPP mapIPP);
 void CleanupLuaModules();
+
+// Empties both Lua module registries.
+void ClearLuaModuleRegistries();
 void TryApplyLuaModules(const std::vector<std::string>& parts, bool isReload = false);
 void TryApplyRemainingLuaModules();
 auto GetDataModules(const std::string_view name, const std::string_view extension) -> std::vector<std::string>;

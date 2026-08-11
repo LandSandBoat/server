@@ -107,5 +107,3 @@ m:addOverride('npcUtil.completeQuest', function(player, area, quest, params)
     return result
 end)
 ]]
-
-return m

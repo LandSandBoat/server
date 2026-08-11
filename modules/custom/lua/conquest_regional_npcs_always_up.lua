@@ -35,5 +35,3 @@ m:addOverride('xi.conquest.toggleRegionalNPCs', function(zone)
         end
     end
 end)
-
-return m

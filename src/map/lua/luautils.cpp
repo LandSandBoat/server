@@ -834,12 +834,9 @@ void LoadLuaObjectFromFile(const std::string& filename, bool overwriteCurrentEnt
             return;
         }
 
-        // Commands are a special case, since they are not a "true" module
-        const sol::table cmdTable = result;
-        if (cmdTable["cmdprops"].valid() && cmdTable["onTrigger"].valid())
-        {
-            lua[sol::create_if_nil]["xi"]["commands"][parts.back()] = cmdTable;
-        }
+        // Modules self-register on execution, and the registries were drained
+        // at startup, so drop this re-run's entries.
+        moduleutils::ClearLuaModuleRegistries();
 
         ShowInfo("[FileWatcher] RE-RUNNING MODULE FILE %s", filename);
         return;

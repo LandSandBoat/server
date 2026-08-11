@@ -5,13 +5,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_effect_level_restriction'
-
-if xi.module.isContentEnabled('ABYSSEA') then
-    return { name = moduleName }
-end
-
-local m = Module:new(moduleName)
+local m = Module:new('era_effect_level_restriction', xi.pre(xi.expansion.ABYSSEA))
 
 m:addOverride('xi.effects.level_restriction.onEffectGain', function(target, effect)
     super(target, effect)
@@ -22,5 +16,3 @@ m:addOverride('xi.effects.level_restriction.onEffectLose', function(target, effe
     super(target, effect)
     xi.job_utils.summoner.applySpiritPerpetuationCost(target)
 end)
-
-return m

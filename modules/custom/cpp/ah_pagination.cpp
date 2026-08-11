@@ -1,10 +1,10 @@
-﻿/************************************************************************
- * Auction House Pagination
- *
- * This allows players to list and view more than the client-restricted 7
- * entries. This works by using multiple pages of 6 entries and pages
- * through them every time the player opens their AH listing page.
- ************************************************************************/
+﻿//
+// Auction House Pagination
+//
+//   This allows players to list and view more than the client-restricted 7
+//   entries. This works by using multiple pages of 6 entries and pages
+//   through them every time the player opens their AH listing page.
+//
 
 #include "map/utils/moduleutils.h"
 

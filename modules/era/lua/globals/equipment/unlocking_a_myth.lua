@@ -7,13 +7,7 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'unlocking_a_myth'
-
-if xi.module.isContentEnabled('ABYSSEA') then
-    return { name = moduleName }
-end
-
-local m = Module:new(moduleName)
+local m = Module:new('unlocking_a_myth', xi.pre(xi.expansion.ABYSSEA))
 
 local weaponList =
 {
@@ -64,5 +58,3 @@ for _, weaponName in ipairs(weaponList) do
         item:setWeaponskillPointsNeeded(xi.equipment.vigilWeaponRequiredWsPoints(target))
     end)
 end
-
-return m

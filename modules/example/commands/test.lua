@@ -2,6 +2,8 @@
 -- func: test
 -- desc: A test command module
 -----------------------------------
+require('modules/module_utils')
+-----------------------------------
 ---@type TCommand
 local commandObj = {}
 
@@ -20,4 +22,4 @@ commandObj.onTrigger = function(player)
     double_print(player, 'Test print')
 end
 
-return commandObj
+xi.module.registerCommand('test', commandObj)

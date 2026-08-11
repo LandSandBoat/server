@@ -201,9 +201,8 @@ jobs:
           python3 <<EOF
           with open("modules/init.txt", "w") as f:
               f.write("custom\n")
-              f.write("era\n")
+              f.write("era/lua\n")
               f.write("example\n")
-              f.write("renamer\n")
           EOF
 
       - name: Restore build cache

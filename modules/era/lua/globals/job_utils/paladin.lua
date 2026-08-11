@@ -3,13 +3,12 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_job_utils_paladin'
-local m = Module:new(moduleName)
+local m = Module:new('era_job_utils_paladin')
 
--- Register RoV reverts only before RoV content is enabled.
-if not xi.module.isContentEnabled('ROV') then
-    -- Rampart: Revert to a magical damage stoneskin effect for party members
-    m:addOverride('xi.job_utils.paladin.useRampart', function(player, target, ability)
+-- Rampart: Revert to a magical damage stoneskin effect for party members
+-- TODO: find a patch note or source for this change
+m:addOverrideByEra('xi.job_utils.paladin.useRampart', {
+    [xi.expansion.ROV] = function(player, target, ability)
         local duration    = 30 + player:getMod(xi.mod.RAMPART_DURATION)
         local stoneskinHP = player:getStat(xi.mod.VIT) * 2
         local defense     = player:getMainLvl() == 75 and 23 or 21
@@ -18,21 +17,22 @@ if not xi.module.isContentEnabled('ROV') then
         target:addStatusEffect(xi.effect.STONESKIN, { power = defense, duration = duration, origin   = player, icon = xi.effect.RAMPART, subType  = 2, subPower = stoneskinHP })
 
         return xi.effect.RAMPART
-    end)
+    end,
+})
 
-    -- Stoneskin onEffectGain: Add defense buff when displayed as RAMPART
-    m:addOverride('xi.effects.stoneskin.onEffectGain', function(target, effect)
+-- Stoneskin onEffectGain: Add defense buff when displayed as RAMPART
+m:addOverrideByEra('xi.effects.stoneskin.onEffectGain', {
+    [xi.expansion.ROV] = function(target, effect)
         if effect:getIcon() == xi.effect.RAMPART then
             effect:addMod(xi.mod.DEF, effect:getPower())
         end
-    end)
-end
+    end,
+})
 
--- Register Abyssea reverts only before Abyssea content is enabled.
-if not xi.module.isContentEnabled('ABYSSEA') then
-    -- Holy Circle: Revert duration from 3 minutes to 1 minute
-    -- Source: https://www.bg-wiki.com/ffxi/Version_Update_(02/13/2012)
-    m:addOverride('xi.job_utils.paladin.useHolyCircle', function(player, target, ability)
+-- Holy Circle: Revert duration from 3 minutes to 1 minute
+-- Source: https://www.bg-wiki.com/ffxi/Version_Update_(02/13/2012)
+m:addOverrideByEra('xi.job_utils.paladin.useHolyCircle', {
+    [xi.expansion.ABYSSEA] = function(player, target, ability)
         local duration = 60 + player:getMod(xi.mod.HOLY_CIRCLE_DURATION)
         local power    = 15
 
@@ -45,10 +45,13 @@ if not xi.module.isContentEnabled('ABYSSEA') then
         target:addStatusEffect(xi.effect.HOLY_CIRCLE, { power = power, duration = duration, origin = player })
 
         return xi.effect.HOLY_CIRCLE
-    end)
+    end,
+})
 
-    -- Chivalry: Remove increased MP bonus from merits and reduces cooldown per merit
-    m:addOverride('xi.job_utils.paladin.useChivalry', function(player, target, ability, action)
+-- Chivalry: Remove increased MP bonus from merits and reduces cooldown per merit
+-- TODO: find a patch note or source for this change
+m:addOverrideByEra('xi.job_utils.paladin.useChivalry', {
+    [xi.expansion.ABYSSEA] = function(player, target, ability, action)
         local recastReduction = player:getMerit(xi.merit.CHIVALRY) - 150
         action:setRecast(action:getRecast() - recastReduction)
 
@@ -60,10 +63,13 @@ if not xi.module.isContentEnabled('ABYSSEA') then
         target:setTP(0)
 
         return target:addMP(amount)
-    end)
+    end,
+})
 
-    -- Fealty: Remove duration increase per merit and reduces cooldown per merit
-    m:addOverride('xi.job_utils.paladin.useFealty', function(player, target, ability, action)
+-- Fealty: Remove duration increase per merit and reduces cooldown per merit
+-- TODO: find a patch note or source for this change
+m:addOverrideByEra('xi.job_utils.paladin.useFealty', {
+    [xi.expansion.ABYSSEA] = function(player, target, ability, action)
         local recastReduction = player:getMerit(xi.merit.FEALTY) - 150
         action:setRecast(action:getRecast() - recastReduction)
 
@@ -74,10 +80,13 @@ if not xi.module.isContentEnabled('ABYSSEA') then
         player:addStatusEffect(xi.effect.FEALTY, { power = 1, duration = duration, origin = player })
 
         return xi.effect.FEALTY
-    end)
+    end,
+})
 
-    -- Shield Bash: Remove shield size damage bonuses and job point additions
-    m:addOverride('xi.job_utils.paladin.useShieldBash', function(player, target, ability)
+-- Shield Bash: Remove shield size damage bonuses and job point additions
+-- TODO: find a patch note or source for this change
+m:addOverrideByEra('xi.job_utils.paladin.useShieldBash', {
+    [xi.expansion.ABYSSEA] = function(player, target, ability)
         local damage = math.floor(player:getMainLvl() * 0.28)
 
         -- Main job factors
@@ -120,13 +129,5 @@ if not xi.module.isContentEnabled('ABYSSEA') then
         ability:setMsg(xi.msg.basic.JA_DAMAGE)
 
         return damage
-    end)
-end
-
--- Return a real module only when a content gate registered overrides.
--- Otherwise return a data-only table to avoid a "No overrides found" loader warning.
-if #m.overrides > 0 then
-    return m
-end
-
-return { name = moduleName }
+    end,
+})

@@ -3,22 +3,17 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_job_utils_dragoon'
-local m = Module:new(moduleName)
+local m = Module:new('era_job_utils_dragoon')
 
--- Keep these sections in the old module init order: ROV -> SOA -> ABYSSEA -> WOTG.
--- Expansion settings are cumulative, so each section only checks its own expansion.
--- When multiple sections register the same target, the later section matches the
--- older era and should register after the newer one.
+-- Each override declares one implementation per era, keyed by xi.expansion.
+-- A case applies when its content is disabled. The loader orders cases
+-- newest era first, so the oldest applicable era ends up outermost and its
+-- super chain reaches back through the newer reverts.
 
------------------------------------
--- Rhapsodies of Vana'diel Era
------------------------------------
--- RoV enabled means the post-RoV breath, Spirit Link, and wyvern level-up behavior should stay in place.
-if not xi.module.isContentEnabled('ROV') then
-    -- Healing Breath: Revert to consume TP and formula based on TP usage
-    -- Source: https://forum.square-enix.com/ffxi/threads/52969
-    m:addOverride('xi.job_utils.dragoon.useHealingBreath', function(wyvern, target, skill, action)
+-- Healing Breath: Revert to consume TP and formula based on TP usage
+-- Source: https://forum.square-enix.com/ffxi/threads/52969
+m:addOverrideByEra('xi.job_utils.dragoon.useHealingBreath', {
+    [xi.expansion.ROV] = function(wyvern, target, skill, action)
         local healingBreathTable =
         {
             --                                    { base, multiplier }
@@ -65,22 +60,26 @@ if not xi.module.isContentEnabled('ROV') then
         end
 
         return totalHPRestored
-    end)
+    end,
+})
 
-    -- Elemental Breath: Revert to consume TP on breath usage
-    -- Source: https://forum.square-enix.com/ffxi/threads/48564-Sep-16-2015-%28JST%29-Version-Update
-    m:addOverride('xi.job_utils.dragoon.useDamageBreath', function(wyvern, target, skill, action, damageType)
+-- Elemental Breath: Revert to consume TP on breath usage
+-- Source: https://forum.square-enix.com/ffxi/threads/48564-Sep-16-2015-%28JST%29-Version-Update
+m:addOverrideByEra('xi.job_utils.dragoon.useDamageBreath', {
+    [xi.expansion.ROV] = function(wyvern, target, skill, action, damageType)
         local result = super(wyvern, target, skill, action, damageType)
 
         wyvern:setTP(0)
 
         return result
-    end)
+    end,
+})
 
+m:addOverrideByEra('xi.job_utils.dragoon.useSpiritLink', {
     -- Spirit Link: Revert to pre-September 2015 healing formula.
     -- Source: https://forum.square-enix.com/ffxi/threads/48564-Sep-16-2015-%28JST%29-Version-Update
     -- Formula taken from: https://wiki.ffo.jp/html/15079.html
-    m:addOverride('xi.job_utils.dragoon.useSpiritLink', function(player, target, ability, action)
+    [xi.expansion.ROV] = function(player, target, ability, action)
         local wyvern      = player:getPet()
         local playerHP    = player:getHP()
         local petTP       = wyvern:getTP()
@@ -136,232 +135,12 @@ if not xi.module.isContentEnabled('ROV') then
         action:ID(player:getID(), wyvern:getID())
 
         return wyvern:addHP(healPet) -- add the hp to wyvern
-    end)
-
-    -- Wyvern EXP: Revert WS Damage bonus from wyvern level-ups
-    -- Source: https://forum.square-enix.com/ffxi/threads/55997-October.-10-2019-%28JST%29-Version-Update
-    m:addOverride('xi.job_utils.dragoon.addWyvernExp', function(player, exp)
-        local wyvern      = player:getPet()
-        local prevExp     = wyvern:getLocalVar('wyvern_exp')
-        local numLevelUps = 0
-
-        if prevExp < 1000 then
-            local currentExp = exp
-            if prevExp + currentExp > 1000 then
-                currentExp = 1000 - prevExp
-            end
-
-            numLevelUps = math.floor((prevExp + currentExp) / 200) - math.floor(prevExp / 200)
-
-            if numLevelUps ~= 0 then
-                local wyvernAttributeIncreaseEffectJP = player:getJobPointLevel(xi.jp.WYVERN_ATTR_BONUS)
-                local wyvernBonusDA = player:getMod(xi.mod.WYVERN_ATTRIBUTE_DA)
-
-                wyvern:addMod(xi.mod.ACC, 6 * numLevelUps)
-                wyvern:addMod(xi.mod.HPP, 6 * numLevelUps)
-                wyvern:addMod(xi.mod.ATTP, 5 * numLevelUps)
-
-                wyvern:updateHealth()
-                wyvern:setHP(wyvern:getMaxHP())
-
-                player:messageBasic(xi.msg.basic.STATUS_INCREASED, 0, 0, wyvern)
-
-                player:addMod(xi.mod.ATT, wyvernAttributeIncreaseEffectJP * numLevelUps)
-                player:addMod(xi.mod.DEF, wyvernAttributeIncreaseEffectJP * numLevelUps)
-                player:addMod(xi.mod.ATTP, 4 * numLevelUps)
-                player:addMod(xi.mod.DEFP, 4 * numLevelUps)
-                player:addMod(xi.mod.HASTE_ABILITY, 200 * numLevelUps)
-                player:addMod(xi.mod.DOUBLE_ATTACK, wyvernBonusDA * numLevelUps)
-            end
-
-            wyvern:setLocalVar('wyvern_exp', prevExp + exp)
-            wyvern:setLocalVar('level_Ups', wyvern:getLocalVar('level_Ups') + numLevelUps)
-        end
-
-        return numLevelUps
-    end)
-
-    -- Wyvern Level Removal: Match addWyvernExp by omitting ALL_WSDMG_ALL_HITS
-    m:addOverride('xi.pets.wyvern.removeWyvernLevels', function(mob)
-        local master  = mob:getMaster()
-        local numLvls = mob:getLocalVar('level_Ups')
-
-        if numLvls ~= 0 then
-            local wyvernAttributeIncreaseEffectJP = master:getJobPointLevel(xi.jp.WYVERN_ATTR_BONUS)
-            local wyvernBonusDA = master:getMod(xi.mod.WYVERN_ATTRIBUTE_DA)
-
-            master:delMod(xi.mod.ATT, wyvernAttributeIncreaseEffectJP * numLvls)
-            master:delMod(xi.mod.DEF, wyvernAttributeIncreaseEffectJP * numLvls)
-            master:delMod(xi.mod.ATTP, 4 * numLvls)
-            master:delMod(xi.mod.DEFP, 4 * numLvls)
-            master:delMod(xi.mod.HASTE_ABILITY, 200 * numLvls)
-            master:delMod(xi.mod.DOUBLE_ATTACK, wyvernBonusDA * numLvls)
-        end
-    end)
-end
-
------------------------------------
--- Seekers of Adoulin Era
------------------------------------
--- SoA enabled means the post-SoA Spirit Surge and wyvern level-up behavior should stay in place.
-if not xi.module.isContentEnabled('SOA') then
-    -- Spirit Surge: Removes ATK and DEF bonuses
-    -- Source: https://forum.square-enix.com/ffxi/threads/44090-Sep-9-2014-%28JST%29-Version-Update
-    m:addOverride('xi.effects.spirit_surge.onEffectGain', function(target, effect)
-        effect:addMod(xi.mod.HP, effect:getPower())
-        target:updateHealth()
-
-        effect:addMod(xi.mod.STR, effect:getSubPower())
-        effect:addMod(xi.mod.ACC, 50)
-        effect:addMod(xi.mod.HASTE_ABILITY, 2500)
-        effect:addMod(xi.mod.MAIN_DMG_RATING, target:getJobPointLevel(xi.jp.SPIRIT_SURGE_EFFECT))
-    end)
-
-    -- Wyvern Breath: Show readying animation to match the reverted 3-second prepare time
-    -- Source: https://forum.square-enix.com/ffxi/threads/44090-Sep-9-2014-%28JST%29-Version-Update
-    m:addOverride('xi.pets.wyvern.onMobSpawn', function(mob)
-        super(mob)
-
-        mob:addMod(xi.mod.WYVERN_SHOW_READYING, 1)
-    end)
-
-    -- Wyvern Levelup: Remove player stat transfers from wyvern levelups
-    -- Source: https://www.bg-wiki.com/ffxi/Version_Update_(04/29/2013)
-    m:addOverride('xi.job_utils.dragoon.addWyvernExp', function(player, exp)
-        local wyvern      = player:getPet()
-        local prevExp     = wyvern:getLocalVar('wyvern_exp')
-        local numLevelUps = 0
-
-        if prevExp < 1000 then
-            -- cap exp at 1000 to prevent wyvern leveling up many times from large exp awards
-            local currentExp = exp
-            if prevExp + currentExp > 1000 then
-                currentExp = 1000 - prevExp
-            end
-
-            numLevelUps = math.floor((prevExp + currentExp) / 200) - math.floor(prevExp / 200)
-
-            if numLevelUps ~= 0 then
-                wyvern:addMod(xi.mod.ACC, 6 * numLevelUps)
-                wyvern:addMod(xi.mod.HPP, 6 * numLevelUps)
-                wyvern:addMod(xi.mod.ATTP, 5 * numLevelUps)
-
-                wyvern:updateHealth()
-                wyvern:setHP(wyvern:getMaxHP())
-
-                player:messageBasic(xi.msg.basic.STATUS_INCREASED, 0, 0, wyvern)
-            end
-
-            wyvern:setLocalVar('wyvern_exp', prevExp + exp)
-            wyvern:setLocalVar('level_Ups', wyvern:getLocalVar('level_Ups') + numLevelUps)
-        end
-
-        return numLevelUps
-    end)
-end
-
------------------------------------
--- Abyssea Era
------------------------------------
-
-if not xi.module.isContentEnabled('ABYSSEA') then
-    -- Ancient Circle: Revert duration from 3 minutes to 1 minute
-    -- Source: https://www.bg-wiki.com/ffxi/Version_Update_(02/13/2012)
-    m:addOverride('xi.job_utils.dragoon.useAncientCircle', function(player, target, ability)
-        local duration = 60 + player:getMod(xi.mod.ANCIENT_CIRCLE_DURATION)
-        local power    = 15
-
-        if player:getMainJob() ~= xi.job.DRG then
-            power = 5
-        end
-
-        power = power + player:getMod(xi.mod.ANCIENT_CIRCLE_POTENCY)
-
-        ability:setMsg(xi.msg.basic.USES_ABILITY_FORTIFIED_DRAGONS)
-
-        target:addStatusEffect(xi.effect.ANCIENT_CIRCLE, { power = power, duration = duration, origin = player })
-
-        return xi.effect.ANCIENT_CIRCLE
-    end)
-
-    -- Spirit Surge: Revert haste to be HASTE_MAGIC instead of HASTE_ABILITY
-    -- Also removes ATK and DEF bonuses which are removed in SoA module
-    -- Source: https://www.bg-wiki.com/ffxi/Version_Update_(02/13/2012)
-    m:addOverride('xi.effects.spirit_surge.onEffectGain', function(target, effect)
-        effect:addMod(xi.mod.HP, effect:getPower())
-        target:updateHealth()
-
-        effect:addMod(xi.mod.STR, effect:getSubPower())
-        effect:addMod(xi.mod.ACC, 50)
-        effect:addMod(xi.mod.HASTE_MAGIC, 2500)
-        effect:addMod(xi.mod.MAIN_DMG_RATING, target:getJobPointLevel(xi.jp.SPIRIT_SURGE_EFFECT))
-    end)
-
-    -- Spirit Surge + Super Jump: Revert enmity reduction from 100% to 50%
-    -- Source: https://www.bg-wiki.com/ffxi/Version_Update_(03/26/2012)
-    m:addOverride('xi.job_utils.dragoon.superJumpSurgeEffect', function(player, target)
-        if player:hasStatusEffect(xi.effect.SPIRIT_SURGE) then
-            local minDistance = 9999
-            local closestPartyMember = nil
-
-            -- Find the closest party member
-            local party = player:getPartyWithTrusts()
-            for _, member in pairs(party) do
-                local distance = member:checkDistance(player)
-                if
-                    member:getID() ~= player:getID() and
-                    not member:isDead() and
-                    (distance < minDistance or closestPartyMember == nil)
-                then
-                    closestPartyMember = member
-                    minDistance = distance
-                end
-            end
-
-            -- TODO: verify conditions for how close the dragoon needs to be to the mob, if at all
-            if
-                closestPartyMember and
-                closestPartyMember:isBehind(player) and
-                (player:checkDistance(target) < closestPartyMember:checkDistance(target))
-            then
-                if target:isMob() then
-                    target:lowerEnmity(closestPartyMember, 50)
-                end
-            end
-        end
-    end)
-
-    -- Deep Breathing: Apply merit recast reduction instead of breath power bonus
-    -- Source: https://www.bg-wiki.com/ffxi/Version_Update_(03/26/2012)
-    m:addOverride('xi.job_utils.dragoon.useDeepBreathing', function(player, target, ability, action)
-        local recastReduction = player:getMerit(xi.merit.DEEP_BREATHING) - 150
-        action:setRecast(action:getRecast() - recastReduction)
-
-        local wyvern = player:getPet()
-
-        if wyvern and wyvern:getPetID() == xi.petId.WYVERN then
-            wyvern:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, { duration = 180, origin = player })
-        end
-    end)
-
-    -- Deep Breathing Bonus: Remove merit scaling, use flat base bonus only
-    m:addOverride('xi.job_utils.dragoon.getDeepBreathingBonus', function(wyvern, master, isHealing)
-        local bonus = 0
-        local hadEffect = wyvern:hasStatusEffect(xi.effect.MAGIC_ATK_BOOST)
-
-        if hadEffect then
-            bonus = isHealing and 37.5 or 0.75
-
-            wyvern:delStatusEffect(xi.effect.MAGIC_ATK_BOOST)
-        end
-
-        return bonus
-    end)
+    end,
 
     -- Spirit Link: Revert TP transfer from wyvern to master and removes regen
     -- TP Transfer Source: https://www.bg-wiki.com/ffxi/Version_Update_(06/21/2010)
     -- Regen Source: https://www.bg-wiki.com/ffxi/Version_Update_(03/26/2012)
-    m:addOverride('xi.job_utils.dragoon.useSpiritLink', function(player, target, ability, action)
+    [xi.expansion.ABYSSEA] = function(player, target, ability, action)
         local wyvern      = player:getPet()
         local playerHP    = player:getHP()
 
@@ -415,49 +194,154 @@ if not xi.module.isContentEnabled('ABYSSEA') then
         action:ID(player:getID(), wyvern:getID())
 
         return wyvern:addHP(healPet) -- add the hp to wyvern
-    end)
+    end,
+})
 
-    -- Empathy: Revert Spirit Link granting wyvern 200 EXP per Empathy merit level
-    -- Source: https://www.bg-wiki.com/ffxi/Version_Update_(05/15/2012)
-    m:addOverride('xi.job_utils.dragoon.applyEmpathyBonus', function(player, wyvern)
-        local empathyTotal = player:getMerit(xi.merit.EMPATHY)
+m:addOverrideByEra('xi.job_utils.dragoon.addWyvernExp', {
+    -- Wyvern EXP: Revert WS Damage bonus from wyvern level-ups
+    -- Source: https://forum.square-enix.com/ffxi/threads/55997-October.-10-2019-%28JST%29-Version-Update
+    [xi.expansion.ROV] = function(player, exp)
+        local wyvern      = player:getPet()
+        local prevExp     = wyvern:getLocalVar('wyvern_exp')
+        local numLevelUps = 0
 
-        if empathyTotal > 0 then
-            local validEffects = {}
-            local i            = 0
-            local effects      = player:getStatusEffects()
-            local copyi        = 0
-
-            for _, effect in pairs(effects) do
-                if effect:hasEffectFlag(xi.effectFlag.EMPATHY) then
-                    validEffects[i + 1] = effect
-                    i = i + 1
-                end
+        if prevExp < 1000 then
+            local currentExp = exp
+            if prevExp + currentExp > 1000 then
+                currentExp = 1000 - prevExp
             end
 
-            if i < empathyTotal then
-                empathyTotal = i
-            elseif i > empathyTotal then
-                validEffects = xi.job_utils.dragoon.cutEmpathyEffectTable(validEffects, i, empathyTotal)
+            numLevelUps = math.floor((prevExp + currentExp) / 200) - math.floor(prevExp / 200)
+
+            if numLevelUps ~= 0 then
+                local wyvernAttributeIncreaseEffectJP = player:getJobPointLevel(xi.jp.WYVERN_ATTR_BONUS)
+                local wyvernBonusDA = player:getMod(xi.mod.WYVERN_ATTRIBUTE_DA)
+
+                wyvern:addMod(xi.mod.ACC, 6 * numLevelUps)
+                wyvern:addMod(xi.mod.HPP, 6 * numLevelUps)
+                wyvern:addMod(xi.mod.ATTP, 5 * numLevelUps)
+
+                wyvern:updateHealth()
+                wyvern:setHP(wyvern:getMaxHP())
+
+                player:messageBasic(xi.msg.basic.STATUS_INCREASED, 0, 0, wyvern)
+
+                player:addMod(xi.mod.ATT, wyvernAttributeIncreaseEffectJP * numLevelUps)
+                player:addMod(xi.mod.DEF, wyvernAttributeIncreaseEffectJP * numLevelUps)
+                player:addMod(xi.mod.ATTP, 4 * numLevelUps)
+                player:addMod(xi.mod.DEFP, 4 * numLevelUps)
+                player:addMod(xi.mod.HASTE_ABILITY, 200 * numLevelUps)
+                player:addMod(xi.mod.DOUBLE_ATTACK, wyvernBonusDA * numLevelUps)
             end
 
-            local copyEffect = nil
-            while copyi < empathyTotal do
-                copyEffect = validEffects[copyi + 1]
-                if wyvern:hasStatusEffect(copyEffect:getEffectType()) then
-                    wyvern:delStatusEffectSilent(copyEffect:getEffectType())
-                end
-
-                wyvern:copyStatusEffect(copyEffect)
-                copyi = copyi + 1
-            end
+            wyvern:setLocalVar('wyvern_exp', prevExp + exp)
+            wyvern:setLocalVar('level_Ups', wyvern:getLocalVar('level_Ups') + numLevelUps)
         end
-    end)
+
+        return numLevelUps
+    end,
+
+    -- Wyvern Levelup: Remove player stat transfers from wyvern levelups
+    -- Source: https://www.bg-wiki.com/ffxi/Version_Update_(04/29/2013)
+    [xi.expansion.SOA] = function(player, exp)
+        local wyvern      = player:getPet()
+        local prevExp     = wyvern:getLocalVar('wyvern_exp')
+        local numLevelUps = 0
+
+        if prevExp < 1000 then
+            -- cap exp at 1000 to prevent wyvern leveling up many times from large exp awards
+            local currentExp = exp
+            if prevExp + currentExp > 1000 then
+                currentExp = 1000 - prevExp
+            end
+
+            numLevelUps = math.floor((prevExp + currentExp) / 200) - math.floor(prevExp / 200)
+
+            if numLevelUps ~= 0 then
+                wyvern:addMod(xi.mod.ACC, 6 * numLevelUps)
+                wyvern:addMod(xi.mod.HPP, 6 * numLevelUps)
+                wyvern:addMod(xi.mod.ATTP, 5 * numLevelUps)
+
+                wyvern:updateHealth()
+                wyvern:setHP(wyvern:getMaxHP())
+
+                player:messageBasic(xi.msg.basic.STATUS_INCREASED, 0, 0, wyvern)
+            end
+
+            wyvern:setLocalVar('wyvern_exp', prevExp + exp)
+            wyvern:setLocalVar('level_Ups', wyvern:getLocalVar('level_Ups') + numLevelUps)
+        end
+
+        return numLevelUps
+    end,
+
+    -- Wyvern: Revert experience points Wyvern system
+    -- Source: https://www.bg-wiki.com/ffxi/Version_Update_(03/11/2008)
+    [xi.expansion.WOTG] = function(player, exp)
+        return 0
+    end,
+})
+
+-- Wyvern Level Removal: Match addWyvernExp by omitting ALL_WSDMG_ALL_HITS
+m:addOverrideByEra('xi.pets.wyvern.removeWyvernLevels', {
+    [xi.expansion.ROV] = function(mob)
+        local master  = mob:getMaster()
+        local numLvls = mob:getLocalVar('level_Ups')
+
+        if numLvls ~= 0 then
+            local wyvernAttributeIncreaseEffectJP = master:getJobPointLevel(xi.jp.WYVERN_ATTR_BONUS)
+            local wyvernBonusDA = master:getMod(xi.mod.WYVERN_ATTRIBUTE_DA)
+
+            master:delMod(xi.mod.ATT, wyvernAttributeIncreaseEffectJP * numLvls)
+            master:delMod(xi.mod.DEF, wyvernAttributeIncreaseEffectJP * numLvls)
+            master:delMod(xi.mod.ATTP, 4 * numLvls)
+            master:delMod(xi.mod.DEFP, 4 * numLvls)
+            master:delMod(xi.mod.HASTE_ABILITY, 200 * numLvls)
+            master:delMod(xi.mod.DOUBLE_ATTACK, wyvernBonusDA * numLvls)
+        end
+    end,
+})
+
+m:addOverrideByEra('xi.effects.spirit_surge.onEffectGain', {
+    -- Spirit Surge: Removes ATK and DEF bonuses
+    -- Source: https://forum.square-enix.com/ffxi/threads/44090-Sep-9-2014-%28JST%29-Version-Update
+    [xi.expansion.SOA] = function(target, effect)
+        effect:addMod(xi.mod.HP, effect:getPower())
+        target:updateHealth()
+
+        effect:addMod(xi.mod.STR, effect:getSubPower())
+        effect:addMod(xi.mod.ACC, 50)
+        effect:addMod(xi.mod.HASTE_ABILITY, 2500)
+        effect:addMod(xi.mod.MAIN_DMG_RATING, target:getJobPointLevel(xi.jp.SPIRIT_SURGE_EFFECT))
+    end,
+
+    -- Spirit Surge: Revert haste to be HASTE_MAGIC instead of HASTE_ABILITY
+    -- Also removes ATK and DEF bonuses which are removed in SoA case
+    -- Source: https://www.bg-wiki.com/ffxi/Version_Update_(02/13/2012)
+    [xi.expansion.ABYSSEA] = function(target, effect)
+        effect:addMod(xi.mod.HP, effect:getPower())
+        target:updateHealth()
+
+        effect:addMod(xi.mod.STR, effect:getSubPower())
+        effect:addMod(xi.mod.ACC, 50)
+        effect:addMod(xi.mod.HASTE_MAGIC, 2500)
+        effect:addMod(xi.mod.MAIN_DMG_RATING, target:getJobPointLevel(xi.jp.SPIRIT_SURGE_EFFECT))
+    end,
+})
+
+m:addOverrideByEra('xi.pets.wyvern.onMobSpawn', {
+    -- Wyvern Breath: Show readying animation to match the reverted 3-second prepare time
+    -- Source: https://forum.square-enix.com/ffxi/threads/44090-Sep-9-2014-%28JST%29-Version-Update
+    [xi.expansion.SOA] = function(mob)
+        super(mob)
+
+        mob:addMod(xi.mod.WYVERN_SHOW_READYING, 1)
+    end,
 
     -- Wyvern Spawn: Revert innate -40% DT and reduce status breath table
     -- DT Source: https://www.bg-wiki.com/ffxi/Version_Update_(09/19/2011)
     -- Status Breath Source: https://www.bg-wiki.com/ffxi/Version_Update_(02/13/2012)
-    m:addOverride('xi.pets.wyvern.onMobSpawn', function(mob)
+    [xi.expansion.ABYSSEA] = function(mob)
         super(mob)
 
         local master = mob:getMaster()
@@ -526,33 +410,140 @@ if not xi.module.isContentEnabled('ABYSSEA') then
                 end
             end)
         end
-    end)
-end
-
------------------------------------
--- Wings of the Goddess Era
------------------------------------
-
-if not xi.module.isContentEnabled('WOTG') then
-    -- Wyvern: Revert experience points Wyvern system
-    -- Source: https://www.bg-wiki.com/ffxi/Version_Update_(03/11/2008)
-    m:addOverride('xi.job_utils.dragoon.addWyvernExp', function(player, exp)
-        return 0
-    end)
+    end,
 
     -- Wyvern Spawn: Remove EXPERIENCE_POINTS listener that feeds wyvern EXP system
-    m:addOverride('xi.pets.wyvern.onMobSpawn', function(mob)
+    [xi.expansion.WOTG] = function(mob)
         super(mob)
 
         local master = mob:getMaster()
         master:removeListener('PET_WYVERN_EXP')
-    end)
-end
+    end,
+})
 
--- Return a real module only when a content gate registered overrides.
--- Otherwise return a data-only table to avoid a "No overrides found" loader warning.
-if #m.overrides > 0 then
-    return m
-end
+-- Ancient Circle: Revert duration from 3 minutes to 1 minute
+-- Source: https://www.bg-wiki.com/ffxi/Version_Update_(02/13/2012)
+m:addOverrideByEra('xi.job_utils.dragoon.useAncientCircle', {
+    [xi.expansion.ABYSSEA] = function(player, target, ability)
+        local duration = 60 + player:getMod(xi.mod.ANCIENT_CIRCLE_DURATION)
+        local power    = 15
 
-return { name = moduleName }
+        if player:getMainJob() ~= xi.job.DRG then
+            power = 5
+        end
+
+        power = power + player:getMod(xi.mod.ANCIENT_CIRCLE_POTENCY)
+
+        ability:setMsg(xi.msg.basic.USES_ABILITY_FORTIFIED_DRAGONS)
+
+        target:addStatusEffect(xi.effect.ANCIENT_CIRCLE, { power = power, duration = duration, origin = player })
+
+        return xi.effect.ANCIENT_CIRCLE
+    end,
+})
+
+-- Spirit Surge + Super Jump: Revert enmity reduction from 100% to 50%
+-- Source: https://www.bg-wiki.com/ffxi/Version_Update_(03/26/2012)
+m:addOverrideByEra('xi.job_utils.dragoon.superJumpSurgeEffect', {
+    [xi.expansion.ABYSSEA] = function(player, target)
+        if player:hasStatusEffect(xi.effect.SPIRIT_SURGE) then
+            local minDistance = 9999
+            local closestPartyMember = nil
+
+            -- Find the closest party member
+            local party = player:getPartyWithTrusts()
+            for _, member in pairs(party) do
+                local distance = member:checkDistance(player)
+                if
+                    member:getID() ~= player:getID() and
+                    not member:isDead() and
+                    (distance < minDistance or closestPartyMember == nil)
+                then
+                    closestPartyMember = member
+                    minDistance = distance
+                end
+            end
+
+            -- TODO: verify conditions for how close the dragoon needs to be to the mob, if at all
+            if
+                closestPartyMember and
+                closestPartyMember:isBehind(player) and
+                (player:checkDistance(target) < closestPartyMember:checkDistance(target))
+            then
+                if target:isMob() then
+                    target:lowerEnmity(closestPartyMember, 50)
+                end
+            end
+        end
+    end,
+})
+
+-- Deep Breathing: Apply merit recast reduction instead of breath power bonus
+-- Source: https://www.bg-wiki.com/ffxi/Version_Update_(03/26/2012)
+m:addOverrideByEra('xi.job_utils.dragoon.useDeepBreathing', {
+    [xi.expansion.ABYSSEA] = function(player, target, ability, action)
+        local recastReduction = player:getMerit(xi.merit.DEEP_BREATHING) - 150
+        action:setRecast(action:getRecast() - recastReduction)
+
+        local wyvern = player:getPet()
+
+        if wyvern and wyvern:getPetID() == xi.petId.WYVERN then
+            wyvern:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, { duration = 180, origin = player })
+        end
+    end,
+})
+
+-- Deep Breathing Bonus: Remove merit scaling, use flat base bonus only
+m:addOverrideByEra('xi.job_utils.dragoon.getDeepBreathingBonus', {
+    [xi.expansion.ABYSSEA] = function(wyvern, master, isHealing)
+        local bonus = 0
+        local hadEffect = wyvern:hasStatusEffect(xi.effect.MAGIC_ATK_BOOST)
+
+        if hadEffect then
+            bonus = isHealing and 37.5 or 0.75
+
+            wyvern:delStatusEffect(xi.effect.MAGIC_ATK_BOOST)
+        end
+
+        return bonus
+    end,
+})
+
+-- Empathy: Revert Spirit Link granting wyvern 200 EXP per Empathy merit level
+-- Source: https://www.bg-wiki.com/ffxi/Version_Update_(05/15/2012)
+m:addOverrideByEra('xi.job_utils.dragoon.applyEmpathyBonus', {
+    [xi.expansion.ABYSSEA] = function(player, wyvern)
+        local empathyTotal = player:getMerit(xi.merit.EMPATHY)
+
+        if empathyTotal > 0 then
+            local validEffects = {}
+            local i            = 0
+            local effects      = player:getStatusEffects()
+            local copyi        = 0
+
+            for _, effect in pairs(effects) do
+                if effect:hasEffectFlag(xi.effectFlag.EMPATHY) then
+                    validEffects[i + 1] = effect
+                    i = i + 1
+                end
+            end
+
+            if i < empathyTotal then
+                empathyTotal = i
+            elseif i > empathyTotal then
+                validEffects = xi.job_utils.dragoon.cutEmpathyEffectTable(validEffects, i, empathyTotal)
+            end
+
+            local copyEffect = nil
+            while copyi < empathyTotal do
+                copyEffect = validEffects[copyi + 1]
+                if wyvern:hasStatusEffect(copyEffect:getEffectType()) then
+                    wyvern:delStatusEffectSilent(copyEffect:getEffectType())
+                end
+
+                wyvern:copyStatusEffect(copyEffect)
+                copyi = copyi + 1
+            end
+        end
+    end,
+})

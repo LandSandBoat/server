@@ -6,18 +6,10 @@
 -----------------------------------
 require('modules/module_utils')
 -----------------------------------
-local moduleName = 'era_effect_composure'
-
-if xi.module.isContentEnabled('ROV') then
-    return { name = moduleName }
-end
-
-local m = Module:new(moduleName)
+local m = Module:new('era_effect_composure', xi.pre(xi.expansion.ROV))
 
 m:addOverride('xi.effects.composure.onEffectGain', function(target, effect)
     local power = math.floor(target:getMainLvl() / 5)
 
     effect:addMod(xi.mod.ACC, power)
 end)
-
-return m

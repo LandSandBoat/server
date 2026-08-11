@@ -4,13 +4,7 @@
 require('modules/module_utils')
 -----------------------------------
 
-local moduleName = 'toau_axe'
-
-if xi.module.isContentEnabled('WOTG') then
-    return { name = moduleName }
-end
-
-local m = Module:new(moduleName)
+local m = Module:new('toau_axe', xi.pre(xi.expansion.WOTG))
 
 -----------------------------------
 -- Raging Axe
@@ -227,5 +221,3 @@ m:addOverride('xi.actions.weaponskills.primal_rend.onUseWeaponSkill', function(p
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
     return tpHits, extraHits, criticalHit, damage
 end)
-
-return m
