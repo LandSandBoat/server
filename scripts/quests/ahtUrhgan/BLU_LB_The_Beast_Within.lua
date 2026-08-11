@@ -1,8 +1,13 @@
 -----------------------------------
--- The Beast Within
+-- The Beast Within (BLU LB)
 -----------------------------------
 -- Log ID: 6, Quest ID: 40
 -- Waoud: !pos 65 -6 -78 50
+-----------------------------------
+-- Opens one minute after Transformations completes.
+-- The June 7, 2016 version update shortened the wait from one Earth day.
+--
+-- Source: https://forum.square-enix.com/ffxi/threads/50760-Jun.-7-2016-(JST)-Version-Update
 -----------------------------------
 local whitegateID     = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 local jadeSepulcherID = zones[xi.zone.JADE_SEPULCHER]
@@ -30,6 +35,10 @@ quest.sections =
             ['Waoud'] =
             {
                 onTrigger = function(player, npc)
+                    if GetSystemTime() < quest:getVar(player, 'Timer') then
+                        return
+                    end
+
                     return quest:progressEvent(760)
                 end,
             },
