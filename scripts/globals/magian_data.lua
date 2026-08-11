@@ -11783,6 +11783,487 @@ xi.magian.trials =
         },
     },
 
+    -- Trial of the Magians: job emote trials, undertaken from the Green Magian Moogle's
+    -- menu.  The moogle hands out the unaugmented neck piece; trading it back together with
+    -- the job's item completes the trial and returns the augmented version.
+    -- TODO: textOffset is unverified for all of these, and reward augments are only filled
+    -- in for BLU so far.
+
+    [4424] = -- WAR
+    {
+        previousTrial = 0,
+        requiredJob   = xi.job.WAR,
+        requiredItem  =
+        {
+            itemId = xi.item.FIGHTERS_TORQUE,
+        },
+
+        textOffset  = 1137,
+        tradeItem   = xi.item.BULB_OF_SHAMAN_GARLIC,
+        numRequired = 1,
+
+        rewardItem =
+        {
+            itemId       = xi.item.FIGHTERS_TORQUE,
+            itemAugments =
+            {
+                [1] = { 23, 2 }, -- Accuracy +3
+                [2] = { 25, 2 }, -- Attack +3
+            },
+        },
+    },
+
+    [4425] = -- MNK
+    {
+        previousTrial = 0,
+        requiredJob   = xi.job.MNK,
+        requiredItem  =
+        {
+            itemId = xi.item.TEMPLE_TORQUE,
+        },
+
+        textOffset  = 1138,
+        tradeItem   = xi.item.CUP_OF_DHALMEL_SALIVA,
+        numRequired = 1,
+
+        rewardItem =
+        {
+            itemId       = xi.item.TEMPLE_TORQUE,
+            itemAugments =
+            {
+                [1] = { 23, 2 }, -- Accuracy +3
+                [2] = { 195, 1 }, -- "Subtle Blow" +2
+            },
+        },
+    },
+
+    [4426] = -- WHM
+    {
+        previousTrial = 0,
+        requiredJob   = xi.job.WHM,
+        requiredItem  =
+        {
+            itemId = xi.item.HEALERS_TORQUE,
+        },
+
+        textOffset  = 1139,
+        tradeItem   = xi.item.CATHEDRAL_TAPESTRY,
+        numRequired = 1,
+
+        rewardItem =
+        {
+            itemId       = xi.item.HEALERS_TORQUE,
+            itemAugments =
+            {
+                [1] = { 329, 0 }, -- Cure Potency +1%
+            },
+        },
+    },
+
+    [4427] = -- BLM
+    {
+        previousTrial = 0,
+        requiredJob   = xi.job.BLM,
+        requiredItem  =
+        {
+            itemId = xi.item.WIZARDS_TORQUE,
+        },
+
+        textOffset  = 1140,
+        tradeItem   = xi.item.MAGICKED_SKULL,
+        numRequired = 1,
+
+        rewardItem =
+        {
+            itemId       = xi.item.WIZARDS_TORQUE,
+            itemAugments =
+            {
+                [1] = { 516, 0 }, -- INT +1
+                [2] = { 133, 0 }, -- "Magic Atk. Bonus" +1
+            },
+        },
+    },
+
+    [4428] = -- RDM
+    {
+        previousTrial = 0,
+        requiredJob   = xi.job.RDM,
+        requiredItem  =
+        {
+            itemId = xi.item.WARLOCKS_TORQUE,
+        },
+
+        textOffset  = 1141,
+        tradeItem   = xi.item.BLOODY_ROBE,
+        numRequired = 1,
+
+        rewardItem =
+        {
+            itemId       = xi.item.WARLOCKS_TORQUE,
+            itemAugments =
+            {
+                [1] = { 517, 0 }, -- MND +1
+                [2] = {  35, 0 }, -- Magic Accuracy +1
+            },
+        },
+    },
+
+    [4429] = -- THF
+    {
+        previousTrial = 0,
+        requiredJob   = xi.job.THF,
+        requiredItem  =
+        {
+            itemId = xi.item.ROGUES_TORQUE,
+        },
+
+        textOffset  = 1142,
+        tradeItem   = xi.item.PINCH_OF_YUHTUNGA_SULFUR,
+        numRequired = 1,
+
+        rewardItem =
+        {
+            itemId       = xi.item.ROGUES_TORQUE,
+            itemAugments =
+            {
+                [1] = { 23, 2 }, -- Accuracy +3
+                [2] = { 31, 2 }, -- Evasion +3
+            },
+        },
+    },
+
+    [4430] = -- PLD
+    {
+        previousTrial = 0,
+        requiredJob   = xi.job.PLD,
+        requiredItem  =
+        {
+            itemId = xi.item.GALLANT_TORQUE,
+        },
+
+        textOffset  = 1143,
+        tradeItem   = xi.item.PINCH_OF_VALKURM_SUNSAND,
+        numRequired = 1,
+
+        rewardItem =
+        {
+            itemId       = xi.item.GALLANT_TORQUE,
+            itemAugments =
+            {
+                [1] = { 1, 17 }, -- HP +18
+            },
+        },
+    },
+
+    [4431] = -- DRK
+    {
+        previousTrial = 0,
+        requiredJob   = xi.job.DRK,
+        requiredItem  =
+        {
+            itemId = xi.item.CHAOS_TORQUE,
+        },
+
+        textOffset  = 1144,
+        tradeItem   = xi.item.ODD_POSTCARD,
+        numRequired = 1,
+
+        rewardItem =
+        {
+            itemId       = xi.item.CHAOS_TORQUE,
+            itemAugments =
+            {
+                [1] = { 512, 2 }, -- STR +3
+                [2] = {  25, 2 }, -- Attack +3
+            },
+        },
+    },
+
+    [4432] = -- BST
+    {
+        previousTrial = 0,
+        requiredJob   = xi.job.BST,
+        requiredItem  =
+        {
+            itemId = xi.item.BEAST_TORQUE,
+        },
+
+        textOffset  = 1145,
+        tradeItem   = xi.item.WILD_RABBIT_TAIL,
+        numRequired = 1,
+
+        rewardItem =
+        {
+            itemId       = xi.item.BEAST_TORQUE,
+            itemAugments =
+            {
+                [1] = { 512, 2 }, -- STR +3
+                [2] = {  97, 2 }, -- Pet: Attack +3 Ranged Attack +3
+            },
+        },
+    },
+
+    [4433] = -- BRD
+    {
+        previousTrial = 0,
+        requiredJob   = xi.job.BRD,
+        requiredItem  =
+        {
+            itemId = xi.item.CHORAL_TORQUE,
+        },
+
+        textOffset  = 1146,
+        tradeItem   = xi.item.SIRENS_TEAR,
+        numRequired = 1,
+
+        rewardItem =
+        {
+            itemId       = xi.item.CHORAL_TORQUE,
+            itemAugments =
+            {
+                [1] = { 296, 0 }, -- Singing skill +1
+            },
+        },
+    },
+
+    [4434] = -- RNG
+    {
+        previousTrial = 0,
+        requiredJob   = xi.job.RNG,
+        requiredItem  =
+        {
+            itemId = xi.item.HUNTERS_TORQUE,
+        },
+
+        textOffset  = 1147,
+        tradeItem   = xi.item.SEEDSPALL_ASTRUM,
+        numRequired = 1,
+
+        rewardItem =
+        {
+            itemId       = xi.item.HUNTERS_TORQUE,
+            itemAugments =
+            {
+                [1] = { 515, 2 }, -- AGI +3
+                [2] = { 517, 2 }, -- MND +3
+            },
+        },
+    },
+
+    [4435] = -- SAM
+    {
+        previousTrial = 0,
+        requiredJob   = xi.job.SAM,
+        requiredItem  =
+        {
+            itemId = xi.item.MYOCHIN_SHUSA,
+        },
+
+        textOffset  = 1148,
+        tradeItem   = xi.item.CRAB_APRON,
+        numRequired = 1,
+
+        rewardItem =
+        {
+            itemId       = xi.item.MYOCHIN_SHUSA,
+            itemAugments =
+            {
+                [1] = {  25, 2 }, -- Attack +3
+                [2] = { 142, 0 }, -- "Store TP" +1
+            },
+        },
+    },
+
+    [4436] = -- NIN
+    {
+        previousTrial = 0,
+        requiredJob   = xi.job.NIN,
+        requiredItem  =
+        {
+            itemId = xi.item.NINJA_SHUSA,
+        },
+
+        textOffset  = 1149,
+        tradeItem   = xi.item.PIECE_OF_EASTERN_PAPER,
+        numRequired = 1,
+
+        rewardItem =
+        {
+            itemId       = xi.item.NINJA_SHUSA,
+            itemAugments =
+            {
+                [1] = { 513, 2 }, -- DEX +3
+                [2] = {  23, 2 }, -- Accuracy +3
+            },
+        },
+    },
+
+    [4437] = -- DRG
+    {
+        previousTrial = 0,
+        requiredJob   = xi.job.DRG,
+        requiredItem  =
+        {
+            itemId = xi.item.DRACHEN_TORQUE,
+        },
+
+        textOffset  = 1150,
+        tradeItem   = xi.item.DAMSELFLY_WORM,
+        numRequired = 1,
+
+        rewardItem =
+        {
+            itemId       = xi.item.DRACHEN_TORQUE,
+            itemAugments =
+            {
+                [1] = { 512, 2 }, -- STR +3
+                [2] = { 514, 2 }, -- VIT +3
+            },
+        },
+    },
+
+    [4438] = -- SMN
+    {
+        previousTrial = 0,
+        requiredJob   = xi.job.SMN,
+        requiredItem  =
+        {
+            itemId = xi.item.EVOKERS_TORQUE,
+        },
+
+        textOffset  = 1151,
+        tradeItem   = xi.item.DAMP_ENVELOPE,
+        numRequired = 1,
+
+        rewardItem =
+        {
+            itemId       = xi.item.EVOKERS_TORQUE,
+            itemAugments =
+            {
+                [1] = { 9, 14 }, -- MP +15
+            },
+        },
+    },
+
+    [4439] = -- BLU
+    {
+        previousTrial = 0,
+        requiredJob   = xi.job.BLU,
+        requiredItem  =
+        {
+            itemId = xi.item.MAGUS_TORQUE,
+        },
+
+        textOffset  = 1152,
+        tradeItem   = xi.item.TWO_LEAF_MANDRAGORA_BUD,
+        numRequired = 1,
+
+        rewardItem =
+        {
+            itemId       = xi.item.MAGUS_TORQUE,
+            itemAugments =
+            {
+                [1] = {  9, 9 }, -- MP +10
+                [2] = { 35, 0 }, -- Magic Accuracy +1
+            },
+        },
+    },
+
+    [4440] = -- COR
+    {
+        previousTrial = 0,
+        requiredJob   = xi.job.COR,
+        requiredItem  =
+        {
+            itemId = xi.item.CORSAIRS_TORQUE,
+        },
+
+        textOffset  = 1153,
+        tradeItem   = xi.item.HANDFUL_OF_COUNTERFEIT_GIL,
+        numRequired = 1,
+
+        rewardItem =
+        {
+            itemId       = xi.item.CORSAIRS_TORQUE,
+            itemAugments =
+            {
+                [1] = { 27, 2 }, -- Ranged Accuracy +3
+                [2] = { 29, 2 }, -- Ranged Attack +3
+            },
+        },
+    },
+
+    [4441] = -- PUP
+    {
+        previousTrial = 0,
+        requiredJob   = xi.job.PUP,
+        requiredItem  =
+        {
+            itemId = xi.item.PUPPETRY_TORQUE,
+        },
+
+        textOffset  = 1154,
+        tradeItem   = xi.item.NYUMOMO_DOLL,
+        numRequired = 1,
+
+        rewardItem =
+        {
+            itemId       = xi.item.PUPPETRY_TORQUE,
+            itemAugments =
+            {
+                [1] = { 513, 2 }, -- DEX +3
+                [2] = {  96, 2 }, -- Pet: Accuracy +3 Ranged Accuracy +3
+            },
+        },
+    },
+
+    [4442] = -- DNC
+    {
+        previousTrial = 0,
+        requiredJob   = xi.job.DNC,
+        requiredItem  =
+        {
+            itemId = xi.item.DANCERS_TORQUE,
+        },
+
+        textOffset  = 1155,
+        tradeItem   = xi.item.TORN_EPISTLE,
+        numRequired = 1,
+
+        rewardItem =
+        {
+            itemId       = xi.item.DANCERS_TORQUE,
+            itemAugments =
+            {
+                [1] = { 513, 2 }, -- DEX +3
+                [2] = { 518, 2 }, -- CHR +3
+            },
+        },
+    },
+
+    [4443] = -- SCH
+    {
+        previousTrial = 0,
+        requiredJob   = xi.job.SCH,
+        requiredItem  =
+        {
+            itemId = xi.item.SCHOLARS_TORQUE,
+        },
+
+        textOffset  = 1156,
+        tradeItem   = xi.item.COPY_OF_THE_CASTLE_FLOOR_PLANS,
+        numRequired = 1,
+
+        rewardItem =
+        {
+            itemId       = xi.item.SCHOLARS_TORQUE,
+            itemAugments =
+            {
+                [1] = { 131, 0 }, -- Magic Accuracy +1 "Magic Atk. Bonus" +1
+            },
+        },
+    },
+
     [4448] =
     {
         previousTrial = 4403,

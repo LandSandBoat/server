@@ -13,11 +13,31 @@ xi.magian = xi.magian or {}
 -- data unless returned via getPlayerTrialData().
 xi.magian.playerCache = xi.magian.playerCache or {}
 
+-- Per-moogle configuration.  Indices, in order:
+--  [1] event: player level is too low (nil to skip the check entirely)
+--  [2] event: player does not yet hold this moogle's trial log
+--  [3] event: main menu, showing the player's active trials
+--  [4] event: an item was traded, offering the trials available for it
+--  [5] event: status of a selected trial
+--  [6] event: a trial is complete, handing over the reward
+--  [7] item type this moogle accepts
+--  [8] minimum level required to use this moogle
+--  [9] key item acting as this moogle's trial log
+--  [10] key item this moogle also accepts, but never hands out
 local magianMoogleInfo =
 {
-    ['Magian_Moogle_Blue']   = {   nil, 10141, 10142, 10143, 10144, 10148, xi.itemType.ARMOR  },
-    ['Magian_Moogle_Orange'] = { 10121, 10122, 10123, 10124, 10125, 10129, xi.itemType.WEAPON },
+    ['Magian_Moogle_Blue']   = {   nil, 10141, 10142, 10143, 10144, 10148, xi.itemType.ARMOR,  75, xi.ki.MAGIAN_TRIAL_LOG,    nil                    },
+    ['Magian_Moogle_Orange'] = { 10121, 10122, 10123, 10124, 10125, 10129, xi.itemType.WEAPON, 75, xi.ki.MAGIAN_TRIAL_LOG,    nil                    },
+    ['Magian_Moogle_Green']  = { 10151, 10160, 10152, 10153, 10156, 10158, xi.itemType.ARMOR,  30, xi.ki.MAGIAN_LEARNERS_LOG, xi.ki.MAGIAN_TRIAL_LOG },
 }
+
+-- A moogle's own log, entry 9, is the one it hands out.  Entry 10 is a log it also
+-- accepts but never gives: the Trial Log lets a player use the Green moogle without
+-- being given a Learner's Log.
+local function hasMagianLog(player, moogleData)
+    return player:hasKeyItem(moogleData[9]) or
+        (moogleData[10] ~= nil and player:hasKeyItem(moogleData[10]))
+end
 
 -- Returns a table of data containing the player's currently active trials, and caches this data
 -- keyed by player ID into xi.magian.playerCache.
@@ -352,7 +372,7 @@ xi.magian.magianOnTrade = function(player, npc, trade)
     local trialData          = xi.magian.trials[trialId]
 
     if
-        player:hasKeyItem(xi.ki.MAGIAN_TRIAL_LOG) and
+        hasMagianLog(player, moogleData) and
         trade:getSlotCount() == 1 and
         itemObj:isType(moogleData[7])
     then
@@ -419,15 +439,24 @@ xi.magian.magianOnTrigger = function(player, npc)
 
     if
         moogleData[1] and
-        player:getMainLvl() < 75
+        player:getMainLvl() < moogleData[8]
     then
         player:startEvent(moogleData[1])
-    elseif not player:hasKeyItem(xi.ki.MAGIAN_TRIAL_LOG) then
+    elseif not hasMagianLog(player, moogleData) then
         player:startEvent(moogleData[2])
     else
         local packedData, numActiveTrials = packActiveTrials(player)
+        local eligibleJobs                = 0
 
-        player:startEvent(moogleData[3], packedData[1], packedData[2], packedData[3], packedData[4], packedData[5], 0, 0, numActiveTrials)
+        -- Trials for jobs the player has not levelled far enough are hidden from the list.
+        -- The mask marks the entries to omit, so the bit is set for ineligible jobs.
+        for job = xi.job.WAR, xi.job.SCH do
+            if player:getJobLevel(job) < moogleData[8] then
+                eligibleJobs = bit.bor(eligibleJobs, bit.lshift(1, job))
+            end
+        end
+
+        player:startEvent(moogleData[3], packedData[1], packedData[2], packedData[3], packedData[4], packedData[5], eligibleJobs, 0, numActiveTrials)
     end
 end
 
@@ -442,6 +471,7 @@ xi.magian.magianEventUpdate = function(player, csid, option, npc)
 
             local augParam1, augParam2 = unpack(packAugmentParameters(trialData.requiredItem.itemAugments))
             local tradeItem            = getRequiredTradeItem(trialId)
+
             player:updateEvent(2, augParam1, augParam2, trialData.requiredItem.itemId, 0, tradeItem, trialData.textOffset)
         end,
 
@@ -503,6 +533,11 @@ xi.magian.magianEventUpdate = function(player, csid, option, npc)
             if trialSlot then
                 player:updateEvent(0, 0, 0, 0, 0, trialSlot)
                 updatePlayerTrial(player, trialSlot, 0, 0)
+
+                -- Recorded so the event's finish handler knows the trial was retired rather
+                -- than continued: both finish identically, and the cached trial data is not
+                -- refreshed in between.
+                player:setLocalVar('magianRetiredTrial', trialId)
             end
         end,
 
@@ -570,6 +605,19 @@ xi.magian.magianEventUpdate = function(player, csid, option, npc)
                 player:updateEvent(0)
             end
         end,
+
+        -- Item details shown on the completion event.  Unlike the other lookups this payload
+        -- carries no trial id, so it is taken from the stored trial instead.
+        [15] = function()
+            local trialId   = player:getLocalVar('storeTrialId')
+            local trialData = xi.magian.trials[trialId]
+
+            if trialData then
+                local augParam1, augParam2 = unpack(packAugmentParameters(trialData.requiredItem.itemAugments))
+
+                player:updateEvent(2, augParam1, augParam2, trialData.requiredItem.itemId, 0, getRequiredTradeItem(trialId), trialData.textOffset)
+            end
+        end,
     }
 end
 
@@ -581,7 +629,41 @@ xi.magian.magianOnEventFinish = function(player, csid, option, npc)
         csid == moogleData[2] and
         option == 1
     then
-        npcUtil.giveKeyItem(player, xi.ki.MAGIAN_TRIAL_LOG)
+        npcUtil.giveKeyItem(player, moogleData[9])
+    elseif
+        csid == moogleData[3] and
+        finishType == 7
+    then
+        -- Trial undertaken from the moogle's menu rather than by trading an item in.  The
+        -- moogle supplies the required item itself, already inscribed.  The client sends the
+        -- chosen trial in the same position as the traded-item path.
+        local trialId   = bit.rshift(option, 8)
+        local trialData = xi.magian.trials[trialId]
+
+        if trialData then
+            -- Trials tied to a job are only offered for jobs the player has levelled far
+            -- enough.  TODO: retail omits ineligible trials from the list entirely rather
+            -- than refusing them on selection; replicating that needs capture data for how
+            -- the list is built, so this refuses at the point of acceptance instead.
+            if
+                trialData.requiredJob and
+                player:getJobLevel(trialData.requiredJob) < moogleData[8]
+            then
+                return
+            end
+
+            -- The moogle supplies the item here rather than handing back one that was traded
+            -- in, so refuse when there is nowhere to put it.  Registering the trial without
+            -- granting the item would leave it active and uncompletable.
+            if player:getFreeSlotsCount() == 0 then
+                player:messageSpecial(ruludeID.text.ITEM_CANNOT_BE_OBTAINED, trialData.requiredItem.itemId)
+
+                return
+            end
+
+            xi.magian.giveRequiredItem(player, trialId, true)
+            updatePlayerTrial(player, getAvailableTrialSlot(player), trialId, 0)
+        end
     elseif csid == moogleData[4] then
         -- Trial Item Traded without Trial Inscribed
 
@@ -623,6 +705,22 @@ xi.magian.magianOnEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ruludeID.text.RETURN_MAGIAN_ITEM, trialInfo.requiredItem.itemId)
 
             player:setLocalVar('storeTrialId', 0)
+        elseif finishType == 5 then
+            -- Hand the traded item back.  Continuing and retiring both finish this way and
+            -- carry no trial id, so the stored trial is used, and update type 6 flags which
+            -- of the two happened.  The item keeps its inscription only if the trial is being
+            -- continued.
+            local trialId   = player:getLocalVar('storeTrialId')
+            local trialInfo = xi.magian.trials[trialId]
+            local retired   = player:getLocalVar('magianRetiredTrial') == trialId
+
+            if trialInfo then
+                xi.magian.giveRequiredItem(player, trialId, not retired)
+                player:messageSpecial(ruludeID.text.RETURN_MAGIAN_ITEM, trialInfo.requiredItem.itemId)
+            end
+
+            player:setLocalVar('magianRetiredTrial', 0)
+            player:setLocalVar('storeTrialId', 0)
         elseif
             finishType == 8 or
             finishType == 11
@@ -642,7 +740,10 @@ xi.magian.magianOnEventFinish = function(player, csid, option, npc)
         end
     elseif
         csid == moogleData[6] and
-        finishType == 0
+        (
+            finishType == 0 or
+            finishType == 15
+        )
     then
         -- Complete Active Trial
         local trialId    = player:getLocalVar('storeTrialId')
