@@ -839,6 +839,51 @@ void CLuaBaseEntity::resetLocalVars()
 }
 
 /************************************************************************
+ *  Function: getData()
+ *  Purpose : Returns this entity's data table, to read and write freely
+ *  Example : local data    = mob:getData()
+ *            data.duration = 150
+ *  Notes   : Reading creates the table. Mobs, pets and trusts lose it on
+ *            spawn, so onMobInitialize is too early to write to it.
+ ************************************************************************/
+
+auto CLuaBaseEntity::getData() const -> sol::table
+{
+    if (m_PBaseEntity == nullptr)
+    {
+        ShowError("CLuaBaseEntity::getData() - Entity called is nullptr.");
+        return sol::lua_nil;
+    }
+
+    // Not const: that would block the move on return and copy the registry reference.
+    auto table = luautils::detail::getEntityDataTable(m_PBaseEntity, luautils::detail::CreateEntityData::Yes);
+    if (!table.valid())
+    {
+        // Returning an empty table here would swallow every write the caller makes.
+        ShowError("CLuaBaseEntity::getData: no data store for %s (objtype %d)",
+                  m_PBaseEntity->getName(),
+                  static_cast<int>(m_PBaseEntity->objtype));
+
+        return sol::lua_nil;
+    }
+
+    return table;
+}
+
+/************************************************************************
+ *  Function: resetData()
+ *  Purpose : Drops everything stored for this entity
+ *  Example : mob:resetData()
+ *  Notes   : Done automatically when a mob, pet or trust spawns, and when
+ *            any entity is destroyed.
+ ************************************************************************/
+
+void CLuaBaseEntity::resetData() const
+{
+    luautils::resetEntityData(m_PBaseEntity);
+}
+
+/************************************************************************
  *  Function: clearVarsWithPrefix()
  *  Purpose : Deletes all variables from a player with the given prefix.
  *  Example : player:clearVarsWithPrefix(quest)
@@ -20352,6 +20397,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setLocalVar", CLuaBaseEntity::setLocalVar);
     SOL_REGISTER("clearLocalVarsWithPrefix", CLuaBaseEntity::clearLocalVarsWithPrefix);
     SOL_REGISTER("resetLocalVars", CLuaBaseEntity::resetLocalVars);
+    SOL_REGISTER("getData", CLuaBaseEntity::getData);
+    SOL_REGISTER("resetData", CLuaBaseEntity::resetData);
     SOL_REGISTER("clearVarsWithPrefix", CLuaBaseEntity::clearVarsWithPrefix);
     SOL_REGISTER("getLastOnline", CLuaBaseEntity::getLastOnline);
 

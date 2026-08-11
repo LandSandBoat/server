@@ -157,6 +157,26 @@ HashMap<uint32, sol::table>  customMenuContext;
 
 LuaCache luaCache;
 
+// The xi.entityData root, or nil when nothing has been stored yet. Every step is type checked:
+// a script is free to leave a non-table at either name, and raising out of ~CBaseEntity() would
+// take the process with it.
+auto entityDataRoot() -> sol::table
+{
+    const auto xiTable = lua["xi"].get<sol::optional<sol::table>>();
+    if (!xiTable)
+    {
+        return sol::lua_nil;
+    }
+
+    const auto root = (*xiTable)["entityData"].get<sol::optional<sol::table>>();
+    if (!root)
+    {
+        return sol::lua_nil;
+    }
+
+    return *root;
+}
+
 } // namespace
 
 namespace detail
@@ -186,6 +206,39 @@ auto findGlobalLuaFunction(const std::string& funcName) -> sol::function
     }
 
     return sol::lua_nil;
+}
+
+auto getEntityDataTable(CBaseEntity* PEntity, CreateEntityData create) -> sol::table
+{
+    TracyZoneScoped;
+
+    if (PEntity == nullptr || !lua.lua_state())
+    {
+        return sol::lua_nil;
+    }
+
+    if (create)
+    {
+        // The no-argument get_or_create only builds a table when the key is missing.
+        auto xiTable = lua["xi"].get_or_create<sol::table>();
+        auto root    = xiTable["entityData"].get_or_create<sol::table>();
+
+        return root[PEntity->serial()].get_or_create<sol::table>();
+    }
+
+    const auto root = entityDataRoot();
+    if (!root.valid())
+    {
+        return sol::lua_nil;
+    }
+
+    const auto bucket = root[PEntity->serial()].get<sol::optional<sol::table>>();
+    if (!bucket)
+    {
+        return sol::lua_nil;
+    }
+
+    return *bucket;
 }
 
 } // namespace detail
@@ -689,6 +742,27 @@ sol::function getEntityCachedFunction(CBaseEntity* PEntity, const std::string& f
             }
             return sol::lua_nil;
         });
+}
+
+void resetEntityData(CBaseEntity* PEntity)
+{
+    TracyZoneScoped;
+
+    // Runs from ~CBaseEntity(). Zone teardown frees entities before the state is closed, so the
+    // state check is belt and braces rather than the thing that makes this safe.
+    if (PEntity == nullptr || !lua.lua_state())
+    {
+        return;
+    }
+
+    // Not const: sol only exposes the assigning proxy on a mutable table.
+    auto root = entityDataRoot();
+    if (!root.valid())
+    {
+        return;
+    }
+
+    root[PEntity->serial()] = sol::lua_nil;
 }
 
 sol::function getSpellCachedFunction(CSpell* PSpell, std::string funcName)
