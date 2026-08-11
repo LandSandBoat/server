@@ -74,6 +74,7 @@ enum ITEMID : uint16
     EVOLITH                        = 2783,
     KINDREDS_CREST                 = 2955,
     HIGH_KINDREDS_CREST            = 2956,
+    SACRED_KINDREDS_CREST          = 2957,
     MOKUJIN                        = 2970,
     INOSHISHINOFUDA                = 2971,
     SHIKANOFUDA                    = 2972,
