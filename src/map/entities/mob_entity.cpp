@@ -1049,7 +1049,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     }
 
     xi::ZoneType zoneType  = zoneutils::GetZone(PChar->getZone())->GetTypeMask();
-    bool         validZone = !((this->m_Type & xi::MobType::Battlefield) != xi::MobType::Normal) && !((zoneType & xi::ZoneType::Dynamis) != xi::ZoneType::Unknown);
+    bool         validZone = !((this->m_Type & xi::MobType::Battlefield) != xi::MobType::Normal) && !((zoneType & xi::ZoneType::Dynamis) != xi::ZoneType::Unknown) && loc.zone->GetRegionID() != REGION_TYPE::LUMORIA;
 
     // Check if mob can drop seals -- mobmod to disable drops, zone type isnt battlefield/dynamis, mob is stronger than Too Weak, or mobmod for EXP bonus is -100 or lower (-100% exp)
     if (!getMobMod(xi::MobMod::NoDrops) && validZone && charutils::CheckMob(m_HiPCLvl, this) > EMobDifficulty::TooWeak && getMobMod(xi::MobMod::ExpBonus) > -100)
