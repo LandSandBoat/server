@@ -152,6 +152,8 @@ end
 
 xi.cop.helpers.spireEventFinish = function(mission, player, csid, option, npc)
     if player:getLocalVar('newPromy') == 1 then
+        player:setLocalVar('newPromy', 0)
+
         -- This variable is an offset based on a 0-indexed version promyvionCrags table.
         local promyvionId = (player:getZoneID() - 17) / 2
         local teleportLocation = xi.teleport.id.EXITPROMHOLLA + promyvionId
