@@ -1,5 +1,5 @@
 -----------------------------------
--- Yomi Okuri
+-- Yomi Okuri (SAM AF2)
 -----------------------------------
 -- Log ID: 5, Quest ID: 141
 -- Jaucribaix      : !pos 91 -7 -8 252
@@ -35,7 +35,14 @@ quest.sections =
             ['Jaucribaix'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(quest:getMustZone(player) and 142 or 146)
+                    if
+                        quest:getMustZone(player) or
+                        GetSystemTime() < quest:getVar(player, 'Timer')
+                    then
+                        return quest:event(142)
+                    end
+
+                    return quest:progressEvent(146)
                 end,
             },
 
@@ -55,84 +62,6 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED
         end,
-
-        [xi.zone.NORG] =
-        {
-            ['Jaucribaix'] =
-            {
-                onTrigger = function(player, npc)
-                    local questProgress = quest:getVar(player, 'Prog')
-
-                    if questProgress <= 3 then
-                        return quest:progressEvent(player:hasKeyItem(xi.ki.YOMOTSU_FEATHER) and 152 or 147)
-                    elseif questProgress == 4 then
-                        return quest:progressEvent(player:needToZone() and 153 or 154)
-                    elseif player:hasKeyItem(xi.ki.YOMOTSU_HIRASAKA) then
-                        return quest:progressEvent(155)
-                    elseif player:hasKeyItem(xi.ki.FADED_YOMOTSU_HIRASAKA) then
-                        return quest:progressEvent(156)
-                    end
-                end,
-            },
-
-            ['Washu'] =
-            {
-                onTrade = function(player, npc, trade)
-                    if
-                        quest:getVar(player, 'Stage') == 0 and
-                        not player:hasKeyItem(xi.ki.WASHUS_TASTY_WURST) and
-                        not player:hasKeyItem(xi.ki.YOMOTSU_FEATHER) and
-                        npcUtil.tradeHasExactly(trade, { xi.item.HECTEYES_EYE, xi.item.BASTORE_SARDINE_1, xi.item.SLICE_OF_GIANT_SHEEP_MEAT, xi.item.FROST_TURNIP })
-                    then
-                        return quest:progressEvent(150)
-                    end
-                end,
-
-                onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 1 then
-                        return quest:progressEvent(148)
-                    elseif player:hasKeyItem(xi.ki.WASHUS_TASTY_WURST) then
-                        return quest:progressEvent(151)
-                    elseif
-                        quest:getVar(player, 'Stage') == 0 and
-                        not player:hasKeyItem(xi.ki.WASHUS_TASTY_WURST)
-                    then
-                        return quest:progressEvent(149)
-                    end
-                end,
-            },
-
-            onEventFinish =
-            {
-                [148] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 2)
-                end,
-
-                [150] = function(player, csid, option, npc)
-                    player:confirmTrade()
-                    npcUtil.giveKeyItem(player, xi.ki.WASHUS_TASTY_WURST)
-                    quest:setVar(player, 'Prog', 3)
-                end,
-
-                [152] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.YOMOTSU_FEATHER)
-                    quest:setVar(player, 'Prog', 4)
-                    quest:setMustZone(player)
-                end,
-
-                [154] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.YOMOTSU_HIRASAKA)
-                    quest:setVar(player, 'Prog', 5)
-                end,
-
-                [156] = function(player, csid, option, npc)
-                    if quest:complete(player) then
-                        player:delKeyItem(xi.ki.FADED_YOMOTSU_HIRASAKA)
-                        player:setLocalVar('Quest[5][142]mustZone', 1)
-                    end
-                end,
-            },
-        },
 
         [xi.zone.LABYRINTH_OF_ONZOZO] =
         {
@@ -173,6 +102,97 @@ quest.sections =
 
                 [1] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.YOMOTSU_FEATHER)
+                end,
+            },
+        },
+
+        [xi.zone.NORG] =
+        {
+            ['Jaucribaix'] =
+            {
+                onTrigger = function(player, npc)
+                    local questProgress = quest:getVar(player, 'Prog')
+
+                    if questProgress <= 3 then
+                        if not player:hasKeyItem(xi.ki.YOMOTSU_FEATHER) then
+                            return quest:event(147)
+                        end
+
+                        return quest:progressEvent(152)
+                    elseif questProgress == 4 then
+                        if
+                            quest:getMustZone(player) or
+                            GetSystemTime() < quest:getVar(player, 'Wait')
+                        then
+                            return quest:event(153)
+                        end
+
+                        return quest:progressEvent(154)
+                    elseif player:hasKeyItem(xi.ki.YOMOTSU_HIRASAKA) then
+                        return quest:event(155)
+                    elseif player:hasKeyItem(xi.ki.FADED_YOMOTSU_HIRASAKA) then
+                        return quest:progressEvent(156)
+                    end
+                end,
+            },
+
+            ['Washu'] =
+            {
+                onTrade = function(player, npc, trade)
+                    if
+                        quest:getVar(player, 'Stage') == 0 and
+                        not player:hasKeyItem(xi.ki.WASHUS_TASTY_WURST) and
+                        not player:hasKeyItem(xi.ki.YOMOTSU_FEATHER) and
+                        npcUtil.tradeMatches(trade, { { xi.item.HECTEYES_EYE, 1 }, { xi.item.BASTORE_SARDINE_1, 1 }, { xi.item.SLICE_OF_GIANT_SHEEP_MEAT, 1 }, { xi.item.FROST_TURNIP, 1 } })
+                    then
+                        return quest:progressEvent(150)
+                    end
+                end,
+
+                onTrigger = function(player, npc)
+                    if quest:getVar(player, 'Prog') == 1 then
+                        return quest:progressEvent(148)
+                    elseif player:hasKeyItem(xi.ki.WASHUS_TASTY_WURST) then
+                        return quest:event(151)
+                    elseif
+                        quest:getVar(player, 'Stage') == 0 and
+                        not player:hasKeyItem(xi.ki.WASHUS_TASTY_WURST)
+                    then
+                        return quest:event(149)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [148] = function(player, csid, option, npc)
+                    quest:setVar(player, 'Prog', 2)
+                end,
+
+                [150] = function(player, csid, option, npc)
+                    player:tradeComplete()
+                    npcUtil.giveKeyItem(player, xi.ki.WASHUS_TASTY_WURST)
+                    quest:setVar(player, 'Prog', 3)
+                end,
+
+                [152] = function(player, csid, option, npc)
+                    player:delKeyItem(xi.ki.YOMOTSU_FEATHER)
+                    quest:setVar(player, 'Prog', 4)
+                    quest:setMustZone(player)
+                    quest:setVar(player, 'Wait', GetSystemTime() + 60) -- 1 minute wait time
+                end,
+
+                [154] = function(player, csid, option, npc)
+                    npcUtil.giveKeyItem(player, xi.ki.YOMOTSU_HIRASAKA)
+                    quest:setVar(player, 'Prog', 5)
+                end,
+
+                [156] = function(player, csid, option, npc)
+                    if quest:complete(player) then
+                        player:delKeyItem(xi.ki.FADED_YOMOTSU_HIRASAKA)
+                        xi.quest.setMustZone(player, xi.questLog.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG)
+                        xi.quest.setVar(player, xi.questLog.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG, 'Timer', GetSystemTime() + 60) -- 1 minute wait time
+                    end
                 end,
             },
         },
