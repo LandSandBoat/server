@@ -182,6 +182,8 @@ message(STATUS "TRACY_ENABLE: ${TRACY_ENABLE}")
 
 add_subdirectory(ext)
 
+# After add_subdirectory(ext) so third-party targets never inherit CMAKE_CXX_CLANG_TIDY.
+# Dependencies pulled in later have to be wrapped in suspend_clang_tidy()/resume_clang_tidy().
 include(ClangTidy)
 include(Fuzzing)
 
