@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Format data YAML: ruamel round-trip to normalize structure (2-space indent,
-single quotes, flow spacing, drop null keys), then a text pass to align
+single quotes, flow spacing), then a text pass to align
 value/comment columns per contiguous block.
 
 Usage: python3 tools/yaml/format.py [paths...] [--check]
@@ -77,17 +77,9 @@ class FormatError(Exception):
     """A file could not be safely formatted; reported per-file, never fatal."""
 
 
-def drop_null_keys(node):
-    """Recursively delete null-valued mapping keys in place; sequence items are
-    left alone (dropping them would shift indices)."""
-    if isinstance(node, dict):
-        for key in [k for k, v in node.items() if v is None]:
-            del node[key]
-        for value in node.values():
-            drop_null_keys(value)
-    elif isinstance(node, list):
-        for value in node:
-            drop_null_keys(value)
+def represent_none(dumper, _data):
+    """Emit `null` spelled out; a bare key is not read back as a deletion."""
+    return dumper.represent_scalar("tag:yaml.org,2002:null", "null")
 
 
 def normalize(text):
@@ -95,8 +87,8 @@ def normalize(text):
     ruamel.indent(mapping=2, sequence=4, offset=2)
     ruamel.width = 4096  # never wrap
     ruamel.preserve_quotes = False  # normalize quote style
+    ruamel.representer.add_representer(type(None), represent_none)
     data = ruamel.load(text)
-    drop_null_keys(data)
     buf = StringIO()
     ruamel.dump(data, buf)
     return buf.getvalue()
@@ -217,8 +209,6 @@ def format_text(text):
         return text  # empty or comment-only
     result = align(normalize(text))
     after = parse_docs(result, "formatting produced invalid YAML")
-    drop_null_keys(before)  # nulls are dropped above; ignore them in the compare
-    drop_null_keys(after)
     if before != after:
         raise FormatError("formatting altered document semantics")
     return result

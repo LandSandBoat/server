@@ -66,7 +66,7 @@ GP_SERV_COMMAND_EXTENDED_JOB::PUP::PUP(CCharEntity* PChar, const bool mjob)
         packet.MaxMP = PChar->automatonInfo_.automatonHealth.maxmp;
     }
 
-    const int32  meritbonus = PChar->PMeritPoints->GetMeritValue(MERIT_AUTOMATON_SKILLS, PChar);
+    const int32  meritbonus = PChar->PMeritPoints->GetMeritValue(xi::Merit::AutomatonSkills, PChar);
     const uint16 ameCap     = puppetutils::getSkillCap(PChar, xi::SkillType::AutomatonMelee, jobLevel);
     const uint16 ameBonus   = PChar->getMod(xi::Mod::AUTO_MELEE_SKILL) + meritbonus;
     const uint16 araCap     = puppetutils::getSkillCap(PChar, xi::SkillType::AutomatonRanged, jobLevel);

@@ -258,7 +258,7 @@ timer::duration CalculateSpellRecastTime(CBattleEntity*, CSpell*);
 bool            CanAffordSpell(CBattleEntity* PEntity, CSpell* PSpell, uint8 flags = 0);
 int16           CalculateWeaponSkillTP(CBattleEntity*, CWeaponSkill*, int16);
 bool            RemoveAmmo(CCharEntity*, int quantity = 1);
-int32           GetMeritValue(CBattleEntity*, MERIT_TYPE);
+int32           GetMeritValue(CBattleEntity*, xi::Merit);
 
 int32 GetScaledItemModifier(CBattleEntity*, CItemEquipment*, xi::Mod);
 auto  GetSpikesDamageType(ActionReactKind spikesType) -> xi::DamageType;

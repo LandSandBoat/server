@@ -99,7 +99,7 @@ void CAttack::SetCritical(bool value)
 
             if (sangeEffect && PChar && PChar->PMeritPoints)
             {
-                int32 meritValue = PChar->PMeritPoints->GetMeritValue(MERIT_SANGE, PChar);
+                int32 meritValue = PChar->PMeritPoints->GetMeritValue(xi::Merit::Sange, PChar);
 
                 // Add N ranged attack * merit level during Sange effect
                 bonusRatt += PChar->getMod(xi::Mod::ENHANCES_SANGE) * meritValue;
@@ -320,7 +320,7 @@ uint8 CAttack::GetHitRate()
             CCharEntity*         PChar       = dynamic_cast<CCharEntity*>(m_attacker);
             if (sangeEffect && PChar && PChar->PMeritPoints)
             {
-                int32 meritValue = PChar->PMeritPoints->GetMeritValue(MERIT_SANGE, PChar);
+                int32 meritValue = PChar->PMeritPoints->GetMeritValue(xi::Merit::Sange, PChar);
 
                 accBonus += (meritValue - 1) * 25; // add 25 acc per merit past the first (you have to merit Sange to even have the status effect, so this will never be negative acc bonus)
             }
@@ -451,7 +451,7 @@ bool CAttack::CheckCounter()
     {
         auto* PChar = static_cast<CCharEntity*>(m_victim);
 
-        meritCounter = PChar->PMeritPoints->GetMeritValue(MERIT_COUNTER_RATE, PChar);
+        meritCounter = PChar->PMeritPoints->GetMeritValue(xi::Merit::CounterRate, PChar);
     }
 
     uint16 seiganChance = 0;
@@ -467,7 +467,7 @@ bool CAttack::CheckCounter()
 
         if (hasValidSeigan)
         {
-            seiganChance = PChar->getMod(xi::Mod::ZANSHIN) + PChar->PMeritPoints->GetMeritValue(MERIT_ZASHIN_ATTACK_RATE, PChar);
+            seiganChance = PChar->getMod(xi::Mod::ZANSHIN) + PChar->PMeritPoints->GetMeritValue(xi::Merit::ZanshinAttackRate, PChar);
             seiganChance = std::clamp<uint16>(seiganChance, 0, 100);
             seiganChance /= 4;
         }

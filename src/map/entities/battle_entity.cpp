@@ -1503,7 +1503,7 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint16 offsetAccuracy)
         auto* PChar = dynamic_cast<CCharEntity*>(this);
         if (PChar)
         {
-            ACC += PChar->PMeritPoints->GetMeritValue(MERIT_ACCURACY, PChar);
+            ACC += PChar->PMeritPoints->GetMeritValue(xi::Merit::Accuracy, PChar);
         }
 
         ACC = ACC + std::min<int16>((ACC * getMod(xi::Mod::FOOD_ACCP) / 100.f), getMod(xi::Mod::FOOD_ACC_CAP));
@@ -3349,7 +3349,7 @@ void CBattleEntity::OnRangedAttack(CRangeState& state, action_t& action)
             uint16 recycleChance = getMod(xi::Mod::RECYCLE);
             if (charutils::hasTrait(PChar, TRAIT_RECYCLE))
             {
-                recycleChance += PChar->PMeritPoints->GetMeritValue(MERIT_RECYCLE, PChar);
+                recycleChance += PChar->PMeritPoints->GetMeritValue(xi::Merit::Recycle, PChar);
             }
 
             recycleChance += PChar->PJobPoints->GetJobPointValue(JP_AMMO_CONSUMPTION);
@@ -3965,7 +3965,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         // try zanshin only on single swing attack rounds - it is last priority in the multi-hit order
         if (attack.IsFirstSwing() && attackRound.GetAttackSwingCount() == 1)
         {
-            uint16 zanshinChance = this->getMod(xi::Mod::ZANSHIN) + battleutils::GetMeritValue(this, MERIT_ZASHIN_ATTACK_RATE);
+            uint16 zanshinChance = this->getMod(xi::Mod::ZANSHIN) + battleutils::GetMeritValue(this, xi::Merit::ZanshinAttackRate);
             zanshinChance        = std::clamp<uint16>(zanshinChance, 0, 100);
 
             // zanshin may only proc on a missed/guarded/countered swing or as SAM main with hasso up (at 25% of the base zanshin rate)

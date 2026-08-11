@@ -137,7 +137,7 @@ m:addOverride('xi.job_utils.puppetmaster.onAbilityUseRepair', function(player, t
 
     removeStatusEffects(pet, player:getMod(xi.mod.REPAIR_EFFECT))
 
-    local bonus = 1 + player:getMerit(xi.merit.REPAIR_EFFECT) / 100 + player:getMod(xi.mod.REPAIR_POTENCY) / 100
+    local bonus = 1 + player:getMod(xi.mod.REPAIR_POTENCY) / 100
     regenAmount = regenAmount * bonus
 
     pet:wakeUp()

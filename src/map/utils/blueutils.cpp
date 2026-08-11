@@ -319,7 +319,7 @@ uint8 GetTotalBlueMagicPoints(CCharEntity* PChar)
         uint8 points = std::clamp(((level - 1) / 10) * 5 + 10, 0, 55);
         if (level >= 75)
         {
-            points = points + PChar->PMeritPoints->GetMeritValue(MERIT_ASSIMILATION, PChar);
+            points = points + PChar->PMeritPoints->GetMeritValue(xi::Merit::Assimilation, PChar);
         }
 
         if (level >= 99)

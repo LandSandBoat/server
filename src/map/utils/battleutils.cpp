@@ -521,7 +521,7 @@ int32 CalculateEnspellDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender,
         auto* PChar = dynamic_cast<CCharEntity*>(PAttacker);
         if (PChar)
         {
-            damage += PChar->PMeritPoints->GetMeritValue(MERIT_ENSPELL_DAMAGE, PChar);
+            damage += PChar->PMeritPoints->GetMeritValue(xi::Merit::EnspellDamage, PChar);
         }
     }
     else if (Tier == 2)
@@ -554,7 +554,7 @@ int32 CalculateEnspellDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender,
         auto* PChar = dynamic_cast<CCharEntity*>(PAttacker);
         if (PChar)
         {
-            damage += PChar->PMeritPoints->GetMeritValue(MERIT_ENSPELL_DAMAGE, PChar) * 2;
+            damage += PChar->PMeritPoints->GetMeritValue(xi::Merit::EnspellDamage, PChar) * 2;
         }
     }
     else if (Tier == 3) // enlight or endark
@@ -1937,7 +1937,7 @@ bool TryInterruptSpell(CBattleEntity* PAttacker, CBattleEntity* PDefender, CSpel
         }
 
         // Fetch player-only interruption rate reduction from merits.
-        meritReduction = ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_SPELL_INTERUPTION_RATE, (CCharEntity*)PDefender);
+        meritReduction = ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(xi::Merit::SpellInterruptionRate, (CCharEntity*)PDefender);
     }
 
     // SIRD reduces the interrupt after all the calculations are done -- as evidenced by the infamous "102% SIRD" builds.
@@ -2002,7 +2002,7 @@ auto TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHYS
         // Merit value of 1 is +5%, so 60% normal power
         if (PAttacker->objtype == TYPE_PC)
         {
-            formlessMod += ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_FORMLESS_STRIKES, (CCharEntity*)PAttacker);
+            formlessMod += ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(xi::Merit::FormlessStrikes, (CCharEntity*)PAttacker);
         }
 
         damage = damage * formlessMod / 100;
@@ -2561,7 +2561,7 @@ uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ig
         if (PAttacker->objtype == TYPE_PC)
         {
             CCharEntity* PCharAttacker = static_cast<CCharEntity*>(PAttacker);
-            critHitRate += PCharAttacker->PMeritPoints->GetMeritValue(MERIT_CRIT_HIT_RATE, PCharAttacker);
+            critHitRate += PCharAttacker->PMeritPoints->GetMeritValue(xi::Merit::CritHitRate, PCharAttacker);
 
             // Add Fencer crit hit rate
             CItemWeapon*    PMain      = dynamic_cast<CItemWeapon*>(PCharAttacker->m_Weapons[SLOT_MAIN]);
@@ -2577,7 +2577,7 @@ uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ig
 
         if (PDefender->objtype == TYPE_PC)
         {
-            critHitRate -= ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_ENEMY_CRIT_RATE, (CCharEntity*)PDefender);
+            critHitRate -= ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(xi::Merit::EnemyCritRate, (CCharEntity*)PDefender);
         }
 
         // Check for Innin crit rate bonus from behind target
@@ -2663,12 +2663,12 @@ uint8 GetRangedCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender)
     if (PAttacker->objtype == TYPE_PC)
     {
         CCharEntity* PCharAttacker = static_cast<CCharEntity*>(PAttacker);
-        critHitRate += PCharAttacker->PMeritPoints->GetMeritValue(MERIT_CRIT_HIT_RATE, PCharAttacker);
+        critHitRate += PCharAttacker->PMeritPoints->GetMeritValue(xi::Merit::CritHitRate, PCharAttacker);
     }
 
     if (PDefender->objtype == TYPE_PC)
     {
-        critHitRate -= ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_ENEMY_CRIT_RATE, (CCharEntity*)PDefender);
+        critHitRate -= ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(xi::Merit::EnemyCritRate, (CCharEntity*)PDefender);
     }
 
     // Check for Innin crit rate bonus from behind target
@@ -3004,11 +3004,11 @@ uint8 CheckMultiHits(CBattleEntity* PEntity, CItemWeapon* PWeapon)
         // merit chance only applies if player has the job trait
         if (charutils::hasTrait(PChar, TRAIT_TRIPLE_ATTACK))
         {
-            tripleAttack += PChar->PMeritPoints->GetMeritValue(MERIT_TRIPLE_ATTACK_RATE, (CCharEntity*)PEntity);
+            tripleAttack += PChar->PMeritPoints->GetMeritValue(xi::Merit::TripleAttackRate, (CCharEntity*)PEntity);
         }
         if (charutils::hasTrait(PChar, TRAIT_DOUBLE_ATTACK))
         {
-            doubleAttack += PChar->PMeritPoints->GetMeritValue(MERIT_DOUBLE_ATTACK_RATE, (CCharEntity*)PEntity);
+            doubleAttack += PChar->PMeritPoints->GetMeritValue(xi::Merit::DoubleAttackRate, (CCharEntity*)PEntity);
         }
     }
 
@@ -3037,7 +3037,7 @@ uint8 CheckMultiHits(CBattleEntity* PEntity, CItemWeapon* PWeapon)
             uint16 zanshin = PEntity->getMod(xi::Mod::ZANSHIN);
             if (PEntity->objtype == TYPE_PC)
             {
-                zanshin += ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MERIT_ZASHIN_ATTACK_RATE, (CCharEntity*)PEntity);
+                zanshin += ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(xi::Merit::ZanshinAttackRate, (CCharEntity*)PEntity);
             }
 
             if (xirand::GetRandomNumber(100) < (zanshin / 4))
@@ -3670,7 +3670,7 @@ bool HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool)
 
             if (charutils::hasTrait(PChar, TRAIT_NINJA_TOOL_EXPERT))
             {
-                meritBonus = PChar->PMeritPoints->GetMeritValue(MERIT_NINJA_TOOL_EXPERTISE, PChar);
+                meritBonus = PChar->PMeritPoints->GetMeritValue(xi::Merit::NinjaToolExpertise, PChar);
             }
 
             uint16 chance = (PChar->getMod(xi::Mod::NINJA_TOOL) + meritBonus);
@@ -3975,7 +3975,7 @@ uint8 getStoreTPbonusFromMerit(CBattleEntity* PEntity)
     {
         if (((CCharEntity*)PEntity)->GetMJob() == xi::Job::SAM)
         {
-            return ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MERIT_STORE_TP_EFFECT, (CCharEntity*)PEntity);
+            return ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(xi::Merit::StoreTpEffect, (CCharEntity*)PEntity);
         }
     }
     return 0;
@@ -3994,7 +3994,7 @@ int32 getOverWhelmDamageBonus(CBattleEntity* PAttacker, CBattleEntity* PDefender
         // must be in front of mob
         if (infront(PChar->loc.p, PDefender->loc.p, 64))
         {
-            uint8 meritCount = PChar->PMeritPoints->GetMeritValue(MERIT_OVERWHELM, PChar);
+            uint8 meritCount = PChar->PMeritPoints->GetMeritValue(xi::Merit::Overwhelm, PChar);
             float tmpDamage  = static_cast<float>(damage);
 
             switch (meritCount)
@@ -5121,7 +5121,7 @@ bool DoRandomDealToEntity(CCharEntity* PChar, CBattleEntity* PTarget)
         return false;
     }
 
-    uint8 loadedDeck       = PChar->PMeritPoints->GetMeritValue(MERIT_LOADED_DECK, PChar);
+    uint8 loadedDeck       = PChar->PMeritPoints->GetMeritValue(xi::Merit::LoadedDeck, PChar);
     uint8 loadedDeckChance = 50 + loadedDeck;
     uint8 resetTwoChance   = std::min<int8>(PChar->getMod(xi::Mod::RANDOM_DEAL_BONUS), 50);
 
@@ -5224,7 +5224,7 @@ int16 GetRangedDelayReduction(CBattleEntity* battleEntity, int16 delay)
     {
         if (charutils::hasTrait(PChar, TRAIT_SNAPSHOT))
         {
-            SnapShotReductionPercent += PChar->PMeritPoints->GetMeritValue(MERIT_SNAPSHOT, PChar);
+            SnapShotReductionPercent += PChar->PMeritPoints->GetMeritValue(xi::Merit::Snapshot, PChar);
         }
     }
 
@@ -5309,7 +5309,7 @@ void AddTraits(CBattleEntity* PEntity, TraitList_t* traitList, uint8 level)
                     {
                         if (PExistingTrait->getMeritID() > 0)
                         {
-                            if (PChar->PMeritPoints->GetMerit((MERIT_TYPE)PExistingTrait->getMeritID())->count == 0)
+                            if (PChar->PMeritPoints->GetMerit(static_cast<xi::Merit>(PExistingTrait->getMeritID()))->count == 0)
                             {
                                 PEntity->delTrait(PExistingTrait);
                                 break;
@@ -5343,7 +5343,7 @@ void AddTraits(CBattleEntity* PEntity, TraitList_t* traitList, uint8 level)
             // Don't add traits that aren't merited yet
             if (PChar)
             {
-                if (PTrait->getMeritID() > 0 && PChar->PMeritPoints->GetMerit((MERIT_TYPE)PTrait->getMeritID())->count == 0)
+                if (PTrait->getMeritID() > 0 && PChar->PMeritPoints->GetMerit(static_cast<xi::Merit>(PTrait->getMeritID()))->count == 0)
                 {
                     add = false;
                 }
@@ -5514,7 +5514,7 @@ timer::duration CalculateSpellCastTime(CBattleEntity* PEntity, CMagicState* PMag
         if (PEntity->objtype == TYPE_PC && settings::get<bool>("main.ENABLE_SMN_MAGIC_CAST_TIME_MERIT"))
         {
             auto* PChar = static_cast<CCharEntity*>(PEntity);
-            amount += std::chrono::floor<std::chrono::milliseconds>(base * 0.01 * PChar->PMeritPoints->GetMeritValue(MERIT_SUMMONING_MAGIC_CAST_TIME, PChar));
+            amount += std::chrono::floor<std::chrono::milliseconds>(base * 0.01 * PChar->PMeritPoints->GetMeritValue(xi::Merit::SummoningMagicCastTime, PChar));
         }
 
         if (cast > amount)
@@ -5538,7 +5538,7 @@ timer::duration CalculateSpellCastTime(CBattleEntity* PEntity, CMagicState* PMag
         if (PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Nightingale))
         {
             if (PEntity->objtype == TYPE_PC &&
-                xirand::GetRandomNumber(100) < ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MERIT_NIGHTINGALE, (CCharEntity*)PEntity) - 25)
+                xirand::GetRandomNumber(100) < ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(xi::Merit::Nightingale, (CCharEntity*)PEntity) - 25)
             {
                 return 0s;
             }
@@ -5570,7 +5570,7 @@ timer::duration CalculateSpellCastTime(CBattleEntity* PEntity, CMagicState* PMag
         fastCast += PEntity->getMod(xi::Mod::CURE_CAST_TIME);
         if (PEntity->objtype == TYPE_PC)
         {
-            fastCast += ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MERIT_CURE_CAST_TIME, (CCharEntity*)PEntity);
+            fastCast += ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(xi::Merit::CureCastTime, (CCharEntity*)PEntity);
         }
     }
     else if (PSpell->getSkillType() == xi::SkillType::Geomancy && PEntity->objtype == TYPE_PC)
@@ -5743,13 +5743,13 @@ timer::duration CalculateSpellRecastTime(CBattleEntity* PEntity, CSpell* PSpell)
             auto* PChar = static_cast<CCharEntity*>(PEntity);
             if (PSpell->getID() == SpellID::Magic_Finale) // apply Finale recast merits
             {
-                recast -= std::chrono::seconds(PChar->PMeritPoints->GetMeritValue(MERIT_FINALE_RECAST, PChar));
+                recast -= std::chrono::seconds(PChar->PMeritPoints->GetMeritValue(xi::Merit::FinaleRecast, PChar));
             }
 
             if (PSpell->getID() == SpellID::Foe_Lullaby || PSpell->getID() == SpellID::Foe_Lullaby_II || PSpell->getID() == SpellID::Horde_Lullaby ||
                 PSpell->getID() == SpellID::Horde_Lullaby_II) // apply Lullaby recast merits
             {
-                recast -= std::chrono::seconds(PChar->PMeritPoints->GetMeritValue(MERIT_LULLABY_RECAST, PChar));
+                recast -= std::chrono::seconds(PChar->PMeritPoints->GetMeritValue(xi::Merit::LullabyRecast, PChar));
             }
         }
         recast -= std::chrono::seconds(PEntity->getMod(xi::Mod::SONG_RECAST_DELAY));
@@ -5962,7 +5962,7 @@ bool RemoveAmmo(CCharEntity* PChar, int quantity)
     return false;
 }
 
-int32 GetMeritValue(CBattleEntity* PEntity, MERIT_TYPE merit)
+int32 GetMeritValue(CBattleEntity* PEntity, xi::Merit merit)
 {
     if (PEntity->objtype == TYPE_PC)
     {

@@ -285,19 +285,19 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
         // Merit chance only applies if player has the job trait
         if (charutils::hasTrait(PChar, TRAIT_TRIPLE_ATTACK))
         {
-            tripleAttack += PChar->PMeritPoints->GetMeritValue(MERIT_TRIPLE_ATTACK_RATE, PChar);
+            tripleAttack += PChar->PMeritPoints->GetMeritValue(xi::Merit::TripleAttackRate, PChar);
         }
 
         // Ambush Augment adds +1% Triple Attack per merit (need to satisfy conditions for Ambush)
         if (charutils::hasTrait(PChar, TRAIT_AMBUSH) && PChar->getMod(xi::Mod::AUGMENTS_AMBUSH) > 0 &&
             abs(m_defender->loc.p.rotation - m_attacker->loc.p.rotation) < 23)
         {
-            tripleAttack += PChar->PMeritPoints->GetMerit(MERIT_AMBUSH)->count;
+            tripleAttack += PChar->PMeritPoints->GetMerit(xi::Merit::Ambush)->count;
         }
 
         if (charutils::hasTrait(PChar, TRAIT_DOUBLE_ATTACK))
         {
-            doubleAttack += PChar->PMeritPoints->GetMeritValue(MERIT_DOUBLE_ATTACK_RATE, PChar);
+            doubleAttack += PChar->PMeritPoints->GetMeritValue(xi::Merit::DoubleAttackRate, PChar);
         }
         // TODO: Quadruple attack merits when SE release them.
 
@@ -500,7 +500,7 @@ void CAttackRound::CreateKickAttacks()
 
         if (m_attacker->GetMJob() == xi::Job::MNK && m_attacker->objtype == TYPE_PC) // MNK (Main job)
         {
-            kickAttack += ((CCharEntity*)m_attacker)->PMeritPoints->GetMeritValue(MERIT_KICK_ATTACK_RATE, (CCharEntity*)m_attacker);
+            kickAttack += ((CCharEntity*)m_attacker)->PMeritPoints->GetMeritValue(xi::Merit::KickAttackRate, (CCharEntity*)m_attacker);
         }
 
         kickAttack = std::clamp<uint16>(kickAttack, 0, 100);

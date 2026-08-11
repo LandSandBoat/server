@@ -45,7 +45,7 @@ GP_SERV_COMMAND_MISCDATA::MERITS::MERITS(CCharEntity* PChar)
 
         if (PChar->GetMLevel() >= 75)
         {
-            bluePointBonus += PChar->PMeritPoints->GetMeritValue(MERIT_ASSIMILATION, PChar);
+            bluePointBonus += PChar->PMeritPoints->GetMeritValue(xi::Merit::Assimilation, PChar);
         }
 
         if (PChar->GetMLevel() >= 99)
@@ -62,5 +62,5 @@ GP_SERV_COMMAND_MISCDATA::MERITS::MERITS(CCharEntity* PChar)
     packet.canUseMeritMode     = PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())] >= 75 && charutils::hasKeyItem(PChar, KeyItem::LIMIT_BREAKER);
     packet.xpCappedOrMeritMode = (atMaxLevelLimit && hasCappedXp) || PChar->MeritMode;
     packet.meritModeEnabled    = packet.canUseMeritMode && PChar->MeritMode;
-    packet.maxMeritPoints      = settings::get<uint8>("map.MAX_MERIT_POINTS") + PChar->PMeritPoints->GetMeritValue(MERIT_MAX_MERIT, PChar);
+    packet.maxMeritPoints      = settings::get<uint8>("map.MAX_MERIT_POINTS") + PChar->PMeritPoints->GetMeritValue(xi::Merit::MaxMerit, PChar);
 }

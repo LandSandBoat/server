@@ -1,0 +1,1530 @@
+# yaml-language-server: $schema=schemas/merits.schema.json
+
+meta:
+  enum:
+    - section: merits.categories
+      cpp:
+        class:      MeritCategory
+        underlying: uint16_t
+      lua:
+        table: xi.meritCategory
+
+    - section: merits.categories.*.merits
+      cpp:
+        class:      Merit
+        underlying: uint16_t
+      lua:
+        table: xi.merit
+
+merits:
+  upgrade_costs:
+    hp_mp:            [1, 2, 3, 4, 5, 5, 5, 5, 5, 7, 7, 7, 9, 9, 9]
+    attributes:       [3, 6, 9, 9, 9, 12, 12, 12, 12, 15, 15, 15, 15, 18, 18]
+    combat_skills:    [1, 2, 3, 3, 3, 3, 3, 3]
+    defensive_skills: [1, 2, 3, 3, 3, 3, 3, 3]
+    magic_skills:     [1, 2, 3, 3, 3, 3, 3, 3]
+    others:           [1, 2, 3, 4, 5]
+    job_group_1:      [1, 2, 3, 4, 5]
+    job_group_2:      [3, 4, 5, 5, 5]
+    weapon_skills:    [20, 22, 24, 27, 30]
+    max_merits:       [1, 3, 5, 7, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 51, 51, 51, 51, 51, 51, 51, 51, 51]
+
+  # How many upgrades of a merit count toward its effect, by character level. Each entry applies until the next one.
+  level_caps:
+    - {level: 0, cap: 0}
+    - {level: 10, cap: 1}
+    - {level: 20, cap: 2}
+    - {level: 30, cap: 3}
+    - {level: 40, cap: 4}
+    - {level: 50, cap: 5}
+    - {level: 55, cap: 6}
+    - {level: 60, cap: 7}
+    - {level: 65, cap: 8}
+    - {level: 70, cap: 9}
+    - {level: 75, cap: 10}
+    - {level: 80, cap: 15}
+
+  categories:
+    hp_mp:
+      id:           0x0040
+      max_upgrades: 75
+      merits:
+        max_hp:
+          id:           0x0040
+          value:        10
+          upgrade_cost: hp_mp
+        max_mp:
+          id:           0x0042
+          value:        10
+          upgrade_cost: hp_mp
+        max_merit:
+          id:           0x0044
+          value:        1
+          upgrade_cost: max_merits
+
+    attributes:
+      id:           0x0080
+      max_upgrades: 105
+      merits:
+        str:
+          id:           0x0080
+          value:        1
+          upgrade_cost: attributes
+        dex:
+          id:           0x0082
+          value:        1
+          upgrade_cost: attributes
+        vit:
+          id:           0x0084
+          value:        1
+          upgrade_cost: attributes
+        agi:
+          id:           0x0086
+          value:        1
+          upgrade_cost: attributes
+        int:
+          id:           0x0088
+          value:        1
+          upgrade_cost: attributes
+        mnd:
+          id:           0x008A
+          value:        1
+          upgrade_cost: attributes
+        chr:
+          id:           0x008C
+          value:        1
+          upgrade_cost: attributes
+
+    combat_skills:
+      id:           0x00C0
+      max_upgrades: 152
+      merits:
+        hand_to_hand_skill:
+          id:           0x00C0
+          value:        2
+          upgrade_cost: combat_skills
+          skills:       [hand_to_hand]
+          jobs:         [war, mnk, thf, nin, pup, dnc]
+        dagger_skill:
+          id:           0x00C2
+          value:        2
+          upgrade_cost: combat_skills
+          skills:       [dagger]
+          jobs:         [war, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, cor, pup, dnc, sch]
+        sword_skill:
+          id:           0x00C4
+          value:        2
+          upgrade_cost: combat_skills
+          skills:       [sword]
+          jobs:         [war, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, blu, cor, dnc]
+        great_sword_skill:
+          id:           0x00C6
+          value:        2
+          upgrade_cost: combat_skills
+          skills:       [great_sword]
+          jobs:         [war, pld, drk]
+        axe_skill:
+          id:           0x00C8
+          value:        2
+          upgrade_cost: combat_skills
+          skills:       [axe]
+          jobs:         [war, drk, bst, rng]
+        great_axe_skill:
+          id:           0x00CA
+          value:        2
+          upgrade_cost: combat_skills
+          skills:       [great_axe]
+          jobs:         [war, drk]
+        scythe_skill:
+          id:           0x00CC
+          value:        2
+          upgrade_cost: combat_skills
+          skills:       [scythe]
+          jobs:         [war, blm, drk, bst]
+        polearm_skill:
+          id:           0x00CE
+          value:        2
+          upgrade_cost: combat_skills
+          skills:       [polearm]
+          jobs:         [war, pld, sam, drg]
+        katana_skill:
+          id:           0x00D0
+          value:        2
+          upgrade_cost: combat_skills
+          skills:       [katana]
+          jobs:         [nin]
+        great_katana_skill:
+          id:           0x00D2
+          value:        2
+          upgrade_cost: combat_skills
+          skills:       [great_katana]
+          jobs:         [sam, nin]
+        club_skill:
+          id:           0x00D4
+          value:        2
+          upgrade_cost: combat_skills
+          skills:       [club]
+          jobs:         [war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, blu, pup, sch]
+        staff_skill:
+          id:           0x00D6
+          value:        2
+          upgrade_cost: combat_skills
+          skills:       [staff]
+          jobs:         [war, mnk, whm, blm, pld, brd, drg, smn, sch]
+        archery_skill:
+          id:           0x00D8
+          value:        2
+          upgrade_cost: combat_skills
+          skills:       [archery]
+          jobs:         [war, rdm, thf, rng, sam, nin]
+        marksmanship_skill:
+          id:           0x00DA
+          value:        2
+          upgrade_cost: combat_skills
+          skills:       [marksmanship]
+          jobs:         [war, thf, drk, rng, nin, cor]
+        throwing_skill:
+          id:           0x00DC
+          value:        2
+          upgrade_cost: combat_skills
+          skills:       [throwing]
+          jobs:         [war, mnk, whm, blm, rdm, thf, brd, rng, sam, nin, cor, pup, dnc, sch]
+        guarding_skill:
+          id:           0x00DE
+          value:        2
+          upgrade_cost: defensive_skills
+          skills:       [guard]
+          jobs:         [mnk, pup]
+        evasion_skill:
+          id:           0x00E0
+          value:        2
+          upgrade_cost: defensive_skills
+          skills:       [evasion]
+        shield_skill:
+          id:           0x00E2
+          value:        2
+          upgrade_cost: defensive_skills
+          skills:       [shield]
+          jobs:         [war, whm, rdm, thf, pld, bst]
+        parrying_skill:
+          id:           0x00E4
+          value:        2
+          upgrade_cost: defensive_skills
+          skills:       [parry]
+          jobs:         [war, mnk, rdm, thf, pld, drk, bst, brd, sam, nin, drg, blu, cor, pup, dnc, sch]
+
+    magic_skills:
+      id:           0x0100
+      max_upgrades: 112
+      merits:
+        divine_magic_skill:
+          id:           0x0100
+          value:        2
+          upgrade_cost: magic_skills
+          skills:       [divine_magic]
+          jobs:         [whm, rdm, pld, sch]
+        healing_magic_skill:
+          id:           0x0102
+          value:        2
+          upgrade_cost: magic_skills
+          skills:       [healing_magic]
+          jobs:         [whm, rdm, pld, sch]
+        enhancing_magic_skill:
+          id:           0x0104
+          value:        2
+          upgrade_cost: magic_skills
+          skills:       [enhancing_magic]
+          jobs:         [whm, blm, rdm, pld, sch]
+        enfeebling_magic_skill:
+          id:           0x0106
+          value:        2
+          upgrade_cost: magic_skills
+          skills:       [enfeebling_magic]
+          jobs:         [whm, blm, rdm, drk, sch]
+        elemental_magic_skill:
+          id:           0x0108
+          value:        2
+          upgrade_cost: magic_skills
+          skills:       [elemental_magic]
+          jobs:         [blm, rdm, drk, sch]
+        dark_magic_skill:
+          id:           0x010A
+          value:        2
+          upgrade_cost: magic_skills
+          skills:       [dark_magic]
+          jobs:         [blm, rdm, drk, sch]
+        summoning_magic_skill:
+          id:           0x010C
+          value:        2
+          upgrade_cost: magic_skills
+          skills:       [summoning_magic]
+          jobs:         [smn]
+        ninjutsu_skill:
+          id:           0x010E
+          value:        2
+          upgrade_cost: magic_skills
+          skills:       [ninjutsu]
+          jobs:         [nin]
+        singing_skill:
+          id:           0x0110
+          value:        2
+          upgrade_cost: magic_skills
+          skills:       [singing]
+          jobs:         [brd]
+        string_instrument_skill:
+          id:           0x0112
+          value:        2
+          upgrade_cost: magic_skills
+          skills:       [string_instrument]
+          jobs:         [brd]
+        wind_instrument_skill:
+          id:           0x0114
+          value:        2
+          upgrade_cost: magic_skills
+          skills:       [wind_instrument]
+          jobs:         [brd]
+        blue_magic_skill:
+          id:           0x0116
+          value:        2
+          upgrade_cost: magic_skills
+          skills:       [blue_magic]
+          jobs:         [blu]
+        geomancy_skill:
+          id:           0x0118
+          value:        2
+          upgrade_cost: magic_skills
+          skills:       [geomancy]
+          jobs:         [geo]
+        handbell_skill:
+          id:           0x011A
+          value:        2
+          upgrade_cost: magic_skills
+          skills:       [handbell]
+          jobs:         [geo]
+
+    others:
+      id:           0x0140
+      max_upgrades: 10
+      merits:
+        enmity_increase:
+          id:           0x0140
+          value:        1
+          upgrade_cost: others
+        enmity_decrease:
+          id:           0x0142
+          value:        1
+          upgrade_cost: others
+        crit_hit_rate:
+          id:           0x0144
+          value:        1
+          upgrade_cost: others
+        enemy_crit_rate:
+          id:           0x0146
+          value:        1
+          upgrade_cost: others
+        spell_interruption_rate:
+          id:           0x0148
+          value:        2
+          upgrade_cost: others
+
+    weapon_skills:
+      id:           0x0680
+      max_upgrades: 15
+      merits:
+        shijin_spiral:
+          id:           0x0680
+          value:        3
+          upgrade_cost: weapon_skills
+          weapon_skill: shijin_spiral
+          jobs:         [mnk, pup]
+        exenterator:
+          id:           0x0682
+          value:        3
+          upgrade_cost: weapon_skills
+          weapon_skill: exenterator
+          jobs:         [war, rdm, thf, bst, brd, rng, nin, cor, dnc]
+        requiescat:
+          id:           0x0684
+          value:        3
+          upgrade_cost: weapon_skills
+          weapon_skill: requiescat
+          jobs:         [war, rdm, pld, drk, brd, sam, nin, drg, blu, cor]
+        resolution:
+          id:           0x0686
+          value:        3
+          upgrade_cost: weapon_skills
+          weapon_skill: resolution
+          jobs:         [war, pld, drk]
+        ruinator:
+          id:           0x0688
+          value:        3
+          upgrade_cost: weapon_skills
+          weapon_skill: ruinator
+          jobs:         [war, drk, bst, rng]
+        upheaval:
+          id:           0x068A
+          value:        3
+          upgrade_cost: weapon_skills
+          weapon_skill: upheaval
+          jobs:         [war, drk]
+        entropy:
+          id:           0x068C
+          value:        3
+          upgrade_cost: weapon_skills
+          weapon_skill: entropy
+          jobs:         [war, drk, bst]
+        stardiver:
+          id:           0x068E
+          value:        3
+          upgrade_cost: weapon_skills
+          weapon_skill: stardiver
+          jobs:         [war, sam, drg]
+        blade_shun:
+          id:           0x0690
+          value:        3
+          upgrade_cost: weapon_skills
+          weapon_skill: blade_shun
+          jobs:         [nin]
+        tachi_shoha:
+          id:           0x0692
+          value:        3
+          upgrade_cost: weapon_skills
+          weapon_skill: tachi_shoha
+          jobs:         [sam]
+        realmrazer:
+          id:           0x0694
+          value:        3
+          upgrade_cost: weapon_skills
+          weapon_skill: realmrazer
+          jobs:         [war, mnk, whm, blm, pld, smn, blu, sch]
+        shattersoul:
+          id:           0x0696
+          value:        3
+          upgrade_cost: weapon_skills
+          weapon_skill: shattersoul
+          jobs:         [war, mnk, whm, blm, pld, brd, drg, smn, sch]
+        apex_arrow:
+          id:           0x0698
+          value:        3
+          upgrade_cost: weapon_skills
+          weapon_skill: apex_arrow
+          jobs:         [rng, sam]
+        last_stand:
+          id:           0x069A
+          value:        3
+          upgrade_cost: weapon_skills
+          weapon_skill: last_stand
+          jobs:         [thf, rng, cor]
+
+    war_group_1:
+      id:           0x0180
+      max_upgrades: 10
+      jobs:         [war]
+      merits:
+        berserk_recast:
+          id:           0x0180
+          value:        10
+          upgrade_cost: job_group_1
+        defender_recast:
+          id:           0x0182
+          value:        6
+          upgrade_cost: job_group_1
+        warcry_recast:
+          id:           0x0184
+          value:        10
+          upgrade_cost: job_group_1
+        aggressor_recast:
+          id:           0x0186
+          value:        10
+          upgrade_cost: job_group_1
+        double_attack_rate:
+          id:           0x0188
+          value:        1
+          upgrade_cost: job_group_1
+
+    war_group_2:
+      id:           0x0800
+      max_upgrades: 10
+      jobs:         [war]
+      merits:
+        warriors_charge:
+          id:           0x0800
+          value:        5
+          upgrade_cost: job_group_2
+        tomahawk:
+          id:           0x0802
+          value:        15
+          upgrade_cost: job_group_2
+        savagery:
+          id:           0x0804
+          value:        100
+          upgrade_cost: job_group_2
+        aggressive_aim:
+          id:           0x0806
+          value:        4
+          upgrade_cost: job_group_2
+
+    mnk_group_1:
+      id:           0x01C0
+      max_upgrades: 10
+      jobs:         [mnk]
+      merits:
+        focus_recast:
+          id:           0x01C0
+          value:        4
+          upgrade_cost: job_group_1
+        dodge_recast:
+          id:           0x01C2
+          value:        4
+          upgrade_cost: job_group_1
+        chakra_recast:
+          id:           0x01C4
+          value:        6
+          upgrade_cost: job_group_1
+        counter_rate:
+          id:           0x01C6
+          value:        1
+          upgrade_cost: job_group_1
+        kick_attack_rate:
+          id:           0x01C8
+          value:        1
+          upgrade_cost: job_group_1
+
+    mnk_group_2:
+      id:           0x0840
+      max_upgrades: 10
+      jobs:         [mnk]
+      merits:
+        mantra:
+          id:           0x0840
+          value:        4
+          upgrade_cost: job_group_2
+        formless_strikes:
+          id:           0x0842
+          value:        5
+          upgrade_cost: job_group_2
+        invigorate:
+          id:           0x0844
+          value:        24
+          upgrade_cost: job_group_2
+        penance:
+          id:           0x0846
+          value:        20
+          upgrade_cost: job_group_2
+
+    whm_group_1:
+      id:           0x0200
+      max_upgrades: 10
+      jobs:         [whm]
+      merits:
+        divine_seal_recast:
+          id:           0x0200
+          value:        20
+          upgrade_cost: job_group_1
+        cure_cast_time:
+          id:           0x0202
+          value:        4
+          upgrade_cost: job_group_1
+        bar_spell_effect:
+          id:           0x0204
+          value:        2
+          upgrade_cost: job_group_1
+        banish_effect:
+          id:           0x0206
+          value:        2
+          upgrade_cost: job_group_1
+        regen_effect:
+          id:           0x0208
+          value:        1
+          upgrade_cost: job_group_1
+
+    whm_group_2:
+      id:           0x0880
+      max_upgrades: 10
+      jobs:         [whm]
+      merits:
+        martyr:
+          id:           0x0880
+          value:        5
+          upgrade_cost: job_group_2
+        devotion:
+          id:           0x0882
+          value:        5
+          upgrade_cost: job_group_2
+        animus_solace:
+          id:           0x0888
+          value:        2
+          upgrade_cost: job_group_2
+        animus_misery:
+          id:           0x088A
+          value:        5
+          upgrade_cost: job_group_2
+
+    blm_group_1:
+      id:           0x0240
+      max_upgrades: 10
+      jobs:         [blm]
+      merits:
+        elemental_seal_recast:
+          id:           0x0240
+          value:        20
+          upgrade_cost: job_group_1
+        fire_magic_potency:
+          id:           0x0242
+          value:        2
+          upgrade_cost: job_group_1
+        ice_magic_potency:
+          id:           0x0244
+          value:        2
+          upgrade_cost: job_group_1
+        wind_magic_potency:
+          id:           0x0246
+          value:        2
+          upgrade_cost: job_group_1
+        earth_magic_potency:
+          id:           0x0248
+          value:        2
+          upgrade_cost: job_group_1
+        lightning_magic_potency:
+          id:           0x024A
+          value:        2
+          upgrade_cost: job_group_1
+        water_magic_potency:
+          id:           0x024C
+          value:        2
+          upgrade_cost: job_group_1
+
+    blm_group_2:
+      id:           0x08C0
+      max_upgrades: 10
+      jobs:         [blm]
+      merits:
+        ancient_magic_atk_bonus:
+          id:           0x08CC
+          value:        3
+          upgrade_cost: job_group_2
+        ancient_magic_burst_dmg:
+          id:           0x08CE
+          value:        3
+          upgrade_cost: job_group_2
+        elemental_magic_accuracy:
+          id:           0x08D0
+          value:        5
+          upgrade_cost: job_group_2
+        elemental_debuff_duration:
+          id:           0x08D2
+          value:        12
+          upgrade_cost: job_group_2
+        elemental_debuff_effect:
+          id:           0x08D4
+          value:        1
+          upgrade_cost: job_group_2
+        aspir_absorption_amount:
+          id:           0x08D6
+          value:        4
+          upgrade_cost: job_group_2
+
+    rdm_group_1:
+      id:           0x0280
+      max_upgrades: 10
+      jobs:         [rdm]
+      merits:
+        convert_recast:
+          id:           0x0280
+          value:        20
+          upgrade_cost: job_group_1
+        fire_magic_accuracy:
+          id:           0x0282
+          value:        2
+          upgrade_cost: job_group_1
+        ice_magic_accuracy:
+          id:           0x0284
+          value:        2
+          upgrade_cost: job_group_1
+        wind_magic_accuracy:
+          id:           0x0286
+          value:        2
+          upgrade_cost: job_group_1
+        earth_magic_accuracy:
+          id:           0x0288
+          value:        2
+          upgrade_cost: job_group_1
+        lightning_magic_accuracy:
+          id:           0x028A
+          value:        2
+          upgrade_cost: job_group_1
+        water_magic_accuracy:
+          id:           0x028C
+          value:        2
+          upgrade_cost: job_group_1
+
+    rdm_group_2:
+      id:           0x0900
+      max_upgrades: 10
+      jobs:         [rdm]
+      merits:
+        enfeebling_magic_duration:
+          id:           0x090C
+          value:        6
+          upgrade_cost: job_group_2
+        magic_accuracy:
+          id:           0x090E
+          value:        5
+          upgrade_cost: job_group_2
+        enhancing_magic_duration:
+          id:           0x0910
+          value:        6
+          upgrade_cost: job_group_2
+        immunobreak_chance:
+          id:           0x0912
+          value:        3
+          upgrade_cost: job_group_2
+        enspell_damage:
+          id:           0x0914
+          value:        3
+          upgrade_cost: job_group_2
+        accuracy:
+          id:           0x0916
+          value:        5
+          upgrade_cost: job_group_2
+
+    thf_group_1:
+      id:           0x02C0
+      max_upgrades: 10
+      jobs:         [thf]
+      merits:
+        flee_recast:
+          id:           0x02C0
+          value:        10
+          upgrade_cost: job_group_1
+        hide_recast:
+          id:           0x02C2
+          value:        10
+          upgrade_cost: job_group_1
+        sneak_attack_recast:
+          id:           0x02C4
+          value:        2
+          upgrade_cost: job_group_1
+        trick_attack_recast:
+          id:           0x02C6
+          value:        2
+          upgrade_cost: job_group_1
+        triple_attack_rate:
+          id:           0x02C8
+          value:        1
+          upgrade_cost: job_group_1
+
+    thf_group_2:
+      id:           0x0940
+      max_upgrades: 10
+      jobs:         [thf]
+      merits:
+        assassins_charge:
+          id:           0x0940
+          value:        5
+          upgrade_cost: job_group_2
+        feint:
+          id:           0x0942
+          value:        25
+          upgrade_cost: job_group_2
+        aura_steal:
+          id:           0x0944
+          value:        20
+          upgrade_cost: job_group_2
+        ambush:
+          id:           0x0946
+          value:        3
+          upgrade_cost: job_group_2
+
+    pld_group_1:
+      id:           0x0300
+      max_upgrades: 10
+      jobs:         [pld]
+      merits:
+        shield_bash_recast:
+          id:           0x0300
+          value:        2
+          upgrade_cost: job_group_1
+        holy_circle_recast:
+          id:           0x0302
+          value:        10
+          upgrade_cost: job_group_1
+        sentinel_recast:
+          id:           0x0304
+          value:        10
+          upgrade_cost: job_group_1
+        cover_effect_length:
+          id:           0x0306
+          value:        4
+          upgrade_cost: job_group_1
+        rampart_recast:
+          id:           0x0308
+          value:        10
+          upgrade_cost: job_group_1
+
+    pld_group_2:
+      id:           0x0980
+      max_upgrades: 10
+      jobs:         [pld]
+      merits:
+        fealty:
+          id:           0x0980
+          value:        5
+          upgrade_cost: job_group_2
+        chivalry:
+          id:           0x0982
+          value:        5
+          upgrade_cost: job_group_2
+        iron_will:
+          id:           0x0984
+          value:        19
+          upgrade_cost: job_group_2
+        guardian:
+          id:           0x0986
+          value:        19
+          upgrade_cost: job_group_2
+
+    drk_group_1:
+      id:           0x0340
+      max_upgrades: 10
+      jobs:         [drk]
+      merits:
+        souleater_recast:
+          id:           0x0340
+          value:        12
+          upgrade_cost: job_group_1
+        arcane_circle_recast:
+          id:           0x0342
+          value:        10
+          upgrade_cost: job_group_1
+        last_resort_recast:
+          id:           0x0344
+          value:        10
+          upgrade_cost: job_group_1
+        last_resort_effect:
+          id:           0x0346
+          value:        2
+          upgrade_cost: job_group_1
+        weapon_bash_effect:
+          id:           0x0348
+          value:        6
+          upgrade_cost: job_group_1
+
+    drk_group_2:
+      id:           0x09C0
+      max_upgrades: 10
+      jobs:         [drk]
+      merits:
+        dark_seal:
+          id:           0x09C0
+          value:        10
+          upgrade_cost: job_group_2
+        diabolic_eye:
+          id:           0x09C2
+          value:        1
+          upgrade_cost: job_group_2
+        muted_soul:
+          id:           0x09C4
+          value:        10
+          upgrade_cost: job_group_2
+        desperate_blows:
+          id:           0x09C6
+          value:        200
+          upgrade_cost: job_group_2
+
+    bst_group_1:
+      id:           0x0380
+      max_upgrades: 10
+      jobs:         [bst]
+      merits:
+        killer_effects:
+          id:           0x0380
+          value:        1
+          upgrade_cost: job_group_1
+        reward_recast:
+          id:           0x0382
+          value:        3
+          upgrade_cost: job_group_1
+        call_beast_recast:
+          id:           0x0384
+          value:        10
+          upgrade_cost: job_group_1
+        sic_recast:
+          id:           0x0386
+          value:        2
+          upgrade_cost: job_group_1
+        tame_recast:
+          id:           0x0388
+          value:        20
+          upgrade_cost: job_group_1
+
+    bst_group_2:
+      id:           0x0A00
+      max_upgrades: 10
+      jobs:         [bst]
+      merits:
+        feral_howl:
+          id:           0x0A00
+          value:        5
+          upgrade_cost: job_group_2
+        killer_instinct:
+          id:           0x0A02
+          value:        10
+          upgrade_cost: job_group_2
+        beast_affinity:
+          id:           0x0A04
+          value:        2
+          upgrade_cost: job_group_2
+        beast_healer:
+          id:           0x0A06
+          value:        1
+          upgrade_cost: job_group_2
+
+    brd_group_1:
+      id:           0x03C0
+      max_upgrades: 10
+      jobs:         [brd]
+      merits:
+        lullaby_recast:
+          id:           0x03C0
+          value:        1
+          upgrade_cost: job_group_1
+        finale_recast:
+          id:           0x03C2
+          value:        1
+          upgrade_cost: job_group_1
+        minne_effect:
+          id:           0x03C4
+          value:        2
+          upgrade_cost: job_group_1
+        minuet_effect:
+          id:           0x03C6
+          value:        1
+          upgrade_cost: job_group_1
+        madrigal_effect:
+          id:           0x03C8
+          value:        1
+          upgrade_cost: job_group_1
+
+    brd_group_2:
+      id:           0x0A40
+      max_upgrades: 10
+      jobs:         [brd]
+      merits:
+        nightingale:
+          id:           0x0A40
+          value:        25
+          upgrade_cost: job_group_2
+        troubadour:
+          id:           0x0A42
+          value:        25
+          upgrade_cost: job_group_2
+        con_anima:
+          id:           0x0A48
+          value:        1
+          upgrade_cost: job_group_2
+        con_brio:
+          id:           0x0A4A
+          value:        1
+          upgrade_cost: job_group_2
+
+    rng_group_1:
+      id:           0x0400
+      max_upgrades: 10
+      jobs:         [rng]
+      merits:
+        scavenge_effect:
+          id:           0x0400
+          value:        5
+          upgrade_cost: job_group_1
+        camouflage_recast:
+          id:           0x0402
+          value:        10
+          upgrade_cost: job_group_1
+        sharpshot_recast:
+          id:           0x0404
+          value:        10
+          upgrade_cost: job_group_1
+        unlimited_shot_recast:
+          id:           0x0406
+          value:        6
+          upgrade_cost: job_group_1
+        rapid_shot_rate:
+          id:           0x0408
+          value:        1
+          upgrade_cost: job_group_1
+
+    rng_group_2:
+      id:           0x0A80
+      max_upgrades: 10
+      jobs:         [rng]
+      merits:
+        stealth_shot:
+          id:           0x0A80
+          value:        10
+          upgrade_cost: job_group_2
+        flashy_shot:
+          id:           0x0A82
+          value:        5
+          upgrade_cost: job_group_2
+        snapshot:
+          id:           0x0A84
+          value:        2
+          upgrade_cost: job_group_2
+        recycle:
+          id:           0x0A86
+          value:        5
+          upgrade_cost: job_group_2
+
+    sam_group_1:
+      id:           0x0440
+      max_upgrades: 10
+      jobs:         [sam]
+      merits:
+        third_eye_recast:
+          id:           0x0440
+          value:        2
+          upgrade_cost: job_group_1
+        warding_circle_recast:
+          id:           0x0442
+          value:        10
+          upgrade_cost: job_group_1
+        store_tp_effect:
+          id:           0x0444
+          value:        2
+          upgrade_cost: job_group_1
+        meditate_recast:
+          id:           0x0446
+          value:        6
+          upgrade_cost: job_group_1
+        zanshin_attack_rate:
+          id:           0x0448
+          value:        1
+          upgrade_cost: job_group_1
+
+    sam_group_2:
+      id:           0x0AC0
+      max_upgrades: 10
+      jobs:         [sam]
+      merits:
+        shikikoyo:
+          id:           0x0AC0
+          value:        12
+          upgrade_cost: job_group_2
+        blade_bash:
+          id:           0x0AC2
+          value:        15
+          upgrade_cost: job_group_2
+        ikishoten:
+          id:           0x0AC4
+          value:        30
+          upgrade_cost: job_group_2
+        overwhelm:
+          id:           0x0AC6
+          value:        1
+          upgrade_cost: job_group_2
+
+    nin_group_1:
+      id:           0x0480
+      max_upgrades: 10
+      jobs:         [nin]
+      merits:
+        subtle_blow_effect:
+          id:           0x0480
+          value:        1
+          upgrade_cost: job_group_1
+        katon_effect:
+          id:           0x0482
+          value:        2
+          upgrade_cost: job_group_1
+        hyoton_effect:
+          id:           0x0484
+          value:        2
+          upgrade_cost: job_group_1
+        huton_effect:
+          id:           0x0486
+          value:        2
+          upgrade_cost: job_group_1
+        doton_effect:
+          id:           0x0488
+          value:        2
+          upgrade_cost: job_group_1
+        raiton_effect:
+          id:           0x048A
+          value:        2
+          upgrade_cost: job_group_1
+        suiton_effect:
+          id:           0x048C
+          value:        2
+          upgrade_cost: job_group_1
+
+    nin_group_2:
+      id:           0x0B00
+      max_upgrades: 10
+      jobs:         [nin]
+      merits:
+        sange:
+          id:           0x0B00
+          value:        1
+          upgrade_cost: job_group_2
+        ninja_tool_expertise:
+          id:           0x0B02
+          value:        5
+          upgrade_cost: job_group_2
+        yonin_effect:
+          id:           0x0B10
+          value:        50
+          upgrade_cost: job_group_2
+        innin_effect:
+          id:           0x0B12
+          value:        1
+          upgrade_cost: job_group_2
+        nin_magic_accuracy:
+          id:           0x0B14
+          value:        5
+          upgrade_cost: job_group_2
+        nin_magic_bonus:
+          id:           0x0B16
+          value:        4
+          upgrade_cost: job_group_2
+
+    drg_group_1:
+      id:           0x04C0
+      max_upgrades: 10
+      jobs:         [drg]
+      merits:
+        ancient_circle_recast:
+          id:           0x04C0
+          value:        10
+          upgrade_cost: job_group_1
+        jump_recast:
+          id:           0x04C2
+          value:        2
+          upgrade_cost: job_group_1
+        high_jump_recast:
+          id:           0x04C4
+          value:        4
+          upgrade_cost: job_group_1
+        super_jump_recast:
+          id:           0x04C6
+          value:        6
+          upgrade_cost: job_group_1
+        spirit_link_recast:
+          id:           0x04C8
+          value:        3
+          upgrade_cost: job_group_1
+
+    drg_group_2:
+      id:           0x0B40
+      max_upgrades: 10
+      jobs:         [drg]
+      merits:
+        deep_breathing:
+          id:           0x0B40
+          value:        1
+          upgrade_cost: job_group_2
+        angon:
+          id:           0x0B42
+          value:        15
+          upgrade_cost: job_group_2
+        empathy:
+          id:           0x0B44
+          value:        1
+          upgrade_cost: job_group_2
+        strafe_effect:
+          id:           0x0B46
+          value:        10
+          upgrade_cost: job_group_2
+
+    smn_group_1:
+      id:           0x0500
+      max_upgrades: 10
+      jobs:         [smn]
+      merits:
+        avatar_physical_accuracy:
+          id:           0x0500
+          value:        3
+          upgrade_cost: job_group_1
+        avatar_physical_attack:
+          id:           0x0502
+          value:        2
+          upgrade_cost: job_group_1
+        avatar_magical_accuracy:
+          id:           0x0504
+          value:        3
+          upgrade_cost: job_group_1
+        avatar_magical_attack:
+          id:           0x0506
+          value:        2
+          upgrade_cost: job_group_1
+        summoning_magic_cast_time:
+          id:           0x0508
+          value:        5
+          upgrade_cost: job_group_1
+
+    smn_group_2:
+      id:           0x0B80
+      max_upgrades: 10
+      jobs:         [smn]
+      merits:
+        meteor_strike:
+          id:           0x0B80
+          value:        400
+          upgrade_cost: job_group_2
+        heavenly_strike:
+          id:           0x0B82
+          value:        400
+          upgrade_cost: job_group_2
+        wind_blade:
+          id:           0x0B84
+          value:        400
+          upgrade_cost: job_group_2
+        geocrush:
+          id:           0x0B86
+          value:        400
+          upgrade_cost: job_group_2
+        thunderstorm:
+          id:           0x0B88
+          value:        400
+          upgrade_cost: job_group_2
+        grandfall:
+          id:           0x0B8A
+          value:        400
+          upgrade_cost: job_group_2
+
+    blu_group_1:
+      id:           0x0540
+      max_upgrades: 10
+      jobs:         [blu]
+      merits:
+        chain_affinity_recast:
+          id:           0x0540
+          value:        4
+          upgrade_cost: job_group_1
+        burst_affinity_recast:
+          id:           0x0542
+          value:        4
+          upgrade_cost: job_group_1
+        monster_correlation:
+          id:           0x0544
+          value:        4
+          upgrade_cost: job_group_1
+        physical_potency:
+          id:           0x0546
+          value:        2
+          upgrade_cost: job_group_1
+        magical_accuracy:
+          id:           0x0548
+          value:        2
+          upgrade_cost: job_group_1
+
+    blu_group_2:
+      id:           0x0BC0
+      max_upgrades: 10
+      jobs:         [blu]
+      merits:
+        convergence:
+          id:           0x0BC0
+          value:        5
+          upgrade_cost: job_group_2
+        diffusion:
+          id:           0x0BC2
+          value:        5
+          upgrade_cost: job_group_2
+        enchainment:
+          id:           0x0BC4
+          value:        100
+          upgrade_cost: job_group_2
+        assimilation:
+          id:           0x0BC6
+          value:        1
+          upgrade_cost: job_group_2
+
+    cor_group_1:
+      id:           0x0580
+      max_upgrades: 10
+      jobs:         [cor]
+      merits:
+        phantom_roll_recast:
+          id:           0x0580
+          value:        2
+          upgrade_cost: job_group_1
+        quick_draw_recast:
+          id:           0x0582
+          value:        2
+          upgrade_cost: job_group_1
+        quick_draw_accuracy:
+          id:           0x0584
+          value:        2
+          upgrade_cost: job_group_1
+        random_deal_recast:
+          id:           0x0586
+          value:        40
+          upgrade_cost: job_group_1
+        bust_duration:
+          id:           0x0588
+          value:        10
+          upgrade_cost: job_group_1
+
+    cor_group_2:
+      id:           0x0C00
+      max_upgrades: 10
+      jobs:         [cor]
+      merits:
+        snake_eye:
+          id:           0x0C00
+          value:        10
+          upgrade_cost: job_group_2
+        fold:
+          id:           0x0C02
+          value:        10
+          upgrade_cost: job_group_2
+        winning_streak:
+          id:           0x0C04
+          value:        20
+          upgrade_cost: job_group_2
+        loaded_deck:
+          id:           0x0C06
+          value:        10
+          upgrade_cost: job_group_2
+
+    pup_group_1:
+      id:           0x05C0
+      max_upgrades: 10
+      jobs:         [pup]
+      merits:
+        automaton_skills:
+          id:           0x05C0
+          value:        2
+          upgrade_cost: job_group_1
+          skills:       [automaton_melee, automaton_ranged, automaton_magic]
+        maintenance_recast:
+          id:           0x05C2
+          value:        3
+          upgrade_cost: job_group_1
+        repair_effect:
+          id:           0x05C4
+          value:        2
+          upgrade_cost: job_group_1
+        activate_recast:
+          id:           0x05C6
+          value:        40
+          upgrade_cost: job_group_1
+        repair_recast:
+          id:           0x05C8
+          value:        3
+          upgrade_cost: job_group_1
+
+    pup_group_2:
+      id:           0x0C40
+      max_upgrades: 10
+      jobs:         [pup]
+      merits:
+        role_reversal:
+          id:           0x0C40
+          value:        5
+          upgrade_cost: job_group_2
+        ventriloquy:
+          id:           0x0C42
+          value:        5
+          upgrade_cost: job_group_2
+        fine_tuning:
+          id:           0x0C44
+          value:        5
+          upgrade_cost: job_group_2
+        optimization:
+          id:           0x0C46
+          value:        5
+          upgrade_cost: job_group_2
+
+    dnc_group_1:
+      id:           0x0600
+      max_upgrades: 10
+      jobs:         [dnc]
+      merits:
+        step_accuracy:
+          id:           0x0600
+          value:        3
+          upgrade_cost: job_group_1
+        haste_samba_effect:
+          id:           0x0602
+          value:        100
+          upgrade_cost: job_group_1
+        reverse_flourish_effect:
+          id:           0x0604
+          value:        3
+          upgrade_cost: job_group_1
+        building_flourish_effect:
+          id:           0x0606
+          value:        1
+          upgrade_cost: job_group_1
+
+    dnc_group_2:
+      id:           0x0C80
+      max_upgrades: 10
+      jobs:         [dnc]
+      merits:
+        saber_dance:
+          id:           0x0C80
+          value:        5
+          upgrade_cost: job_group_2
+        fan_dance:
+          id:           0x0C82
+          value:        5
+          upgrade_cost: job_group_2
+        no_foot_rise:
+          id:           0x0C84
+          value:        1
+          upgrade_cost: job_group_2
+        closed_position:
+          id:           0x0C86
+          value:        3
+          upgrade_cost: job_group_2
+
+    sch_group_1:
+      id:           0x0640
+      max_upgrades: 10
+      jobs:         [sch]
+      merits:
+        grimoire_recast:
+          id:           0x0640
+          value:        2
+          upgrade_cost: job_group_1
+        modus_veritas_duration:
+          id:           0x0642
+          value:        1
+          upgrade_cost: job_group_1
+        helix_magic_acc_att:
+          id:           0x0644
+          value:        1
+          upgrade_cost: job_group_1
+        max_sublimation:
+          id:           0x0646
+          value:        10
+          upgrade_cost: job_group_1
+
+    sch_group_2:
+      id:           0x0CC0
+      max_upgrades: 10
+      jobs:         [sch]
+      merits:
+        altruism:
+          id:           0x0CC0
+          value:        5
+          upgrade_cost: job_group_2
+        focalization:
+          id:           0x0CC2
+          value:        5
+          upgrade_cost: job_group_2
+        tranquility:
+          id:           0x0CC4
+          value:        10
+          upgrade_cost: job_group_2
+        equanimity:
+          id:           0x0CC6
+          value:        10
+          upgrade_cost: job_group_2
+        enlightenment:
+          id:           0x0CC8
+          value:        5
+          upgrade_cost: job_group_2
+        stormsurge:
+          id:           0x0CCA
+          value:        1
+          upgrade_cost: job_group_2
+
+    geo_group_1:
+      id:           0x06C0
+      max_upgrades: 10
+      jobs:         [geo]
+      merits:
+        full_circle_effect:
+          id:           0x06C0
+          value:        1
+          upgrade_cost: job_group_1
+        ecliptic_att_recast:
+          id:           0x06C2
+          value:        10
+          upgrade_cost: job_group_1
+        life_cycle_recast:
+          id:           0x06C4
+          value:        20
+          upgrade_cost: job_group_1
+        blaze_of_glory_recast:
+          id:           0x06C6
+          value:        20
+          upgrade_cost: job_group_1
+        dematerialize_recast:
+          id:           0x06C8
+          value:        20
+          upgrade_cost: job_group_1
+
+    geo_group_2:
+      id:           0x0D40
+      max_upgrades: 10
+      jobs:         [geo]
+      merits:
+        mending_halation:
+          id:           0x0D40
+          value:        1
+          upgrade_cost: job_group_2
+        radial_arcana:
+          id:           0x0D42
+          value:        1
+          upgrade_cost: job_group_2
+        curative_recantation:
+          id:           0x0D44
+          value:        1
+          upgrade_cost: job_group_2
+        primeval_zeal:
+          id:           0x0D46
+          value:        10
+          upgrade_cost: job_group_2
+
+    run_group_1:
+      id:           0x0700
+      max_upgrades: 10
+      jobs:         [run]
+      merits:
+        rune_enhance:
+          id:           0x0700
+          value:        2
+          upgrade_cost: job_group_1
+        vallation_effect:
+          id:           0x0702
+          value:        1
+          upgrade_cost: job_group_1
+        lunge_effect:
+          id:           0x0704
+          value:        3
+          upgrade_cost: job_group_1
+        pflug_effect:
+          id:           0x0706
+          value:        1
+          upgrade_cost: job_group_1
+        gambit_effect:
+          id:           0x0708
+          value:        10
+          upgrade_cost: job_group_1
+
+    run_group_2:
+      id:           0x0D80
+      max_upgrades: 10
+      jobs:         [run]
+      merits:
+        battuta:
+          id:           0x0D80
+          value:        4
+          upgrade_cost: job_group_2
+        rayke:
+          id:           0x0D82
+          value:        3
+          upgrade_cost: job_group_2
+        inspiration:
+          id:           0x0D84
+          value:        10
+          upgrade_cost: job_group_2
+        sleight_of_sword:
+          id:           0x0D86
+          value:        5
+          upgrade_cost: job_group_2

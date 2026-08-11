@@ -264,13 +264,20 @@ target_link_libraries(xi_data_schema
 )
 set_target_output_directory(xi_data_schema)
 
-add_custom_target(data_schema_check ALL
+add_custom_target(data_schema_generate ALL
     COMMAND $<TARGET_FILE:xi_data_schema> --verify-data
-    COMMAND ${Python_EXECUTABLE} -m tools.codegen ${CMAKE_BINARY_DIR} --validate
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     DEPENDS xi_data_schema
     USES_TERMINAL
 )
+
+add_custom_target(data_schema_check
+    COMMAND ${Python_EXECUTABLE} -m tools.codegen ${CMAKE_BINARY_DIR} --validate
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    USES_TERMINAL
+)
+add_dependencies(data_schema_check data_schema_generate)
+add_dependencies(xi_map data_schema_generate)
 
 if(TRACY_ENABLE)
     target_link_libraries(xi_map_settings INTERFACE TracyClient)

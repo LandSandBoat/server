@@ -86,7 +86,7 @@ auto CRangeState::init() -> StateErrorOr<void>
 
             if (auto* PChar = dynamic_cast<CCharEntity*>(m_PEntity))
             {
-                chance += PChar->PMeritPoints->GetMeritValue(MERIT_RAPID_SHOT_RATE, PChar);
+                chance += PChar->PMeritPoints->GetMeritValue(xi::Merit::RapidShotRate, PChar);
             }
 
             // Don't bother if we cant even proc
