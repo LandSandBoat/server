@@ -337,6 +337,7 @@ void init(IPP mapIPP, bool isRunningInCI)
     lua.set_function("GetSynergyRecipeByTrade", &luautils::GetSynergyRecipeByTrade);
     lua.set_function("ReloadSynthRecipes", &synthutils::LoadSynthRecipes);
     lua.set_function("LoadExpDifficultyCurves", &luautils::LoadExpDifficultyCurves);
+    lua.set_function("ReloadExperienceData", &charutils::LoadExpTable);
 
     // Fishing Contest Functions
     lua.set_function("GetFishingContest", &luautils::GetFishingContest);
