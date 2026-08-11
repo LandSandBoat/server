@@ -25,136 +25,150 @@
 #include <type_traits>
 #include <utility>
 
-db::LibMariaDBResultSet::LibMariaDBResultSet(const std::string& query, std::shared_ptr<const ColumnSchema> schema, std::vector<Row> rows)
-: ResultSet(query, ResultSetType::Select)
+db::LibMariaDBResultSet::LibMariaDBResultSet(std::string_view query, std::shared_ptr<const ColumnSchema> schema, std::vector<Cell> cells)
+: ResultSet(std::string(query), ResultSetType::Select)
 , schema_(std::move(schema))
-, rows_(std::move(rows))
+, cells_(std::move(cells))
 {
+    if (schema_ != nullptr)
+    {
+        columnCount_ = schema_->names.size();
+    }
+
+    if (columnCount_ != 0)
+    {
+        rowCount_ = cells_.size() / columnCount_;
+    }
 }
 
-db::LibMariaDBResultSet::LibMariaDBResultSet(std::size_t rowsAffected, const std::string& query)
-: ResultSet(query, ResultSetType::Update, rowsAffected)
+db::LibMariaDBResultSet::LibMariaDBResultSet(std::size_t rowsAffected, std::string_view query)
+: ResultSet(std::string(query), ResultSetType::Update, rowsAffected)
 {
 }
 
 auto db::LibMariaDBResultSet::rawNext() -> bool
 {
     ++cursor_;
-    return cursor_ >= 0 && static_cast<std::size_t>(cursor_) < rows_.size();
+    return cursor_ >= 0 && static_cast<std::size_t>(cursor_) < rowCount_;
 }
 
 auto db::LibMariaDBResultSet::rawRowsCount() const -> std::size_t
 {
-    return rows_.size();
+    return rowCount_;
 }
 
 auto db::LibMariaDBResultSet::rawColumnCount() const -> std::size_t
 {
-    return schema_ ? schema_->names.size() : 0;
+    return columnCount_;
 }
 
-auto db::LibMariaDBResultSet::rawIsNull(const std::string& key) const -> bool
+auto db::LibMariaDBResultSet::rawColumnIndex(std::string_view key) const -> std::optional<std::size_t>
 {
-    return std::holds_alternative<std::monostate>(cellAt(key));
-}
-
-auto db::LibMariaDBResultSet::rawColumnLabel(uint32 index) const -> std::string
-{
-    // index is 1-based.
-    if (schema_ && index >= 1 && static_cast<std::size_t>(index) <= schema_->names.size())
+    if (schema_ == nullptr)
     {
-        return schema_->names[index - 1];
-    }
-    return {};
-}
-
-auto db::LibMariaDBResultSet::rawGetInt64(const std::string& key) const -> int64
-{
-    return toInt64(cellAt(key));
-}
-
-auto db::LibMariaDBResultSet::rawGetUInt64(const std::string& key) const -> uint64
-{
-    return toUInt64(cellAt(key));
-}
-
-auto db::LibMariaDBResultSet::rawGetInt32(const std::string& key) const -> int32
-{
-    return static_cast<int32>(toInt64(cellAt(key)));
-}
-
-auto db::LibMariaDBResultSet::rawGetUInt32(const std::string& key) const -> uint32
-{
-    return static_cast<uint32>(toUInt64(cellAt(key)));
-}
-
-auto db::LibMariaDBResultSet::rawGetInt16(const std::string& key) const -> int16
-{
-    return static_cast<int16>(toInt64(cellAt(key)));
-}
-
-auto db::LibMariaDBResultSet::rawGetUInt16(const std::string& key) const -> uint16
-{
-    return static_cast<uint16>(toUInt64(cellAt(key)));
-}
-
-auto db::LibMariaDBResultSet::rawGetInt8(const std::string& key) const -> int8
-{
-    return static_cast<int8>(toInt64(cellAt(key)));
-}
-
-auto db::LibMariaDBResultSet::rawGetUInt8(const std::string& key) const -> uint8
-{
-    return static_cast<uint8>(toUInt64(cellAt(key)));
-}
-
-auto db::LibMariaDBResultSet::rawGetBool(const std::string& key) const -> bool
-{
-    return toInt64(cellAt(key)) != 0;
-}
-
-auto db::LibMariaDBResultSet::rawGetFloat(const std::string& key) const -> float
-{
-    return static_cast<float>(toDouble(cellAt(key)));
-}
-
-auto db::LibMariaDBResultSet::rawGetDouble(const std::string& key) const -> double
-{
-    return toDouble(cellAt(key));
-}
-
-auto db::LibMariaDBResultSet::rawGetString(const std::string& key) const -> std::string
-{
-    return toText(cellAt(key));
-}
-
-auto db::LibMariaDBResultSet::rawGetBlobBytes(const std::string& key) const -> std::string
-{
-    // Blob/text columns are stored as a std::string holding the full bytes.
-    return toText(cellAt(key));
-}
-
-auto db::LibMariaDBResultSet::cellAt(const std::string& key) const -> const Cell&
-{
-    static const Cell nullCell{};
-
-    if (!schema_)
-    {
-        return nullCell;
+        return std::nullopt;
     }
 
     const auto it = schema_->index.find(key);
     if (it == schema_->index.end())
     {
-        return nullCell;
+        return std::nullopt;
     }
 
-    if (cursor_ < 0 || static_cast<std::size_t>(cursor_) >= rows_.size())
+    return it->second;
+}
+
+auto db::LibMariaDBResultSet::rawColumnLabel(std::size_t index) const -> std::string
+{
+    if (schema_ != nullptr && index < schema_->names.size())
+    {
+        return schema_->names[index];
+    }
+
+    return {};
+}
+
+auto db::LibMariaDBResultSet::rawIsNull(std::size_t index) const -> bool
+{
+    return std::holds_alternative<std::monostate>(cellAt(index));
+}
+
+auto db::LibMariaDBResultSet::rawGetInt64(std::size_t index) const -> int64
+{
+    return toInt64(cellAt(index));
+}
+
+auto db::LibMariaDBResultSet::rawGetUInt64(std::size_t index) const -> uint64
+{
+    return toUInt64(cellAt(index));
+}
+
+auto db::LibMariaDBResultSet::rawGetInt32(std::size_t index) const -> int32
+{
+    return static_cast<int32>(toInt64(cellAt(index)));
+}
+
+auto db::LibMariaDBResultSet::rawGetUInt32(std::size_t index) const -> uint32
+{
+    return static_cast<uint32>(toUInt64(cellAt(index)));
+}
+
+auto db::LibMariaDBResultSet::rawGetInt16(std::size_t index) const -> int16
+{
+    return static_cast<int16>(toInt64(cellAt(index)));
+}
+
+auto db::LibMariaDBResultSet::rawGetUInt16(std::size_t index) const -> uint16
+{
+    return static_cast<uint16>(toUInt64(cellAt(index)));
+}
+
+auto db::LibMariaDBResultSet::rawGetInt8(std::size_t index) const -> int8
+{
+    return static_cast<int8>(toInt64(cellAt(index)));
+}
+
+auto db::LibMariaDBResultSet::rawGetUInt8(std::size_t index) const -> uint8
+{
+    return static_cast<uint8>(toUInt64(cellAt(index)));
+}
+
+auto db::LibMariaDBResultSet::rawGetBool(std::size_t index) const -> bool
+{
+    return toInt64(cellAt(index)) != 0;
+}
+
+auto db::LibMariaDBResultSet::rawGetFloat(std::size_t index) const -> float
+{
+    return static_cast<float>(toDouble(cellAt(index)));
+}
+
+auto db::LibMariaDBResultSet::rawGetDouble(std::size_t index) const -> double
+{
+    return toDouble(cellAt(index));
+}
+
+auto db::LibMariaDBResultSet::rawGetString(std::size_t index) const -> std::string
+{
+    return toText(cellAt(index));
+}
+
+auto db::LibMariaDBResultSet::rawGetBlobBytes(std::size_t index) const -> std::string
+{
+    // Blob/text columns are stored as a std::string holding the full bytes.
+    return toText(cellAt(index));
+}
+
+auto db::LibMariaDBResultSet::cellAt(std::size_t index) const -> const Cell&
+{
+    static const Cell nullCell{};
+
+    if (cursor_ < 0 || static_cast<std::size_t>(cursor_) >= rowCount_ || index >= columnCount_)
     {
         return nullCell;
     }
 
-    return rows_[cursor_][it->second];
+    return cells_[static_cast<std::size_t>(cursor_) * columnCount_ + index];
 }
 
 auto db::LibMariaDBResultSet::toInt64(const Cell& cell) -> int64

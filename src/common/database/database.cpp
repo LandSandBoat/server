@@ -21,8 +21,6 @@
 
 #include <common/database/database.h>
 
-#include <common/database/query_validation.h>
-
 #include <common/logging.h>
 #include <common/macros.h>
 #include <common/utils.h>
@@ -30,174 +28,27 @@
 
 #include <common/types/fn.h>
 
-#include <common/types/hash_map.h>
-
 #include <chrono>
 #include <thread>
 using namespace std::chrono_literals;
 
-auto db::detail::validateQueryLeadingKeyword(const std::string& query) -> ResultSetType
+auto db::placeholders(std::size_t count) -> std::string
 {
-    auto parts = split(to_upper(query), " ");
-
-    std::vector<std::string> cleanedParts;
-    for (const auto& part : parts)
-    {
-        if (!part.empty() && part != "\n")
-        {
-            cleanedParts.push_back(trim(trim(part), "\n"));
-        }
-    }
-    parts = std::move(cleanedParts);
-
-    if (parts.empty())
-    {
-        return ResultSetType::Invalid;
-    }
-
-    const auto keyword = parts[0];
-    if (keyword == "SELECT")
-    {
-        return ResultSetType::Select;
-    }
-    else if (keyword == "INSERT")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "UPDATE")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "DELETE")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "REPLACE")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "CREATE")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "ALTER")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "DROP")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "TRUNCATE")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "SET")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "SHOW")
-    {
-        return ResultSetType::Select;
-    }
-    else if (keyword == "START")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "COMMIT")
-    {
-        return ResultSetType::Update;
-    }
-    else if (keyword == "ROLLBACK")
-    {
-        return ResultSetType::Update;
-    }
-
-    // Else
-    return ResultSetType::Invalid;
-}
-
-auto db::detail::validateQueryContent(const std::string& query) -> bool
-{
-    // NOTE: We shouldn't be checking for the presence of '%', as this
-    //     : is the SQL wildcard character.
-
-    if (query.contains("{}"))
-    {
-        return false;
-    }
-
-    if (query.contains(';'))
-    {
-        return false;
-    }
-
-    return true;
-}
-
-auto db::escapeString(std::string_view str) -> std::string
-{
-    static const HashMap<char, std::string> replacements = {
-        // Replacement map similar to str_replace in PHP
-        { '\\', "\\\\" },
-        { '\0', "\\0" },
-        { '\n', "\\n" },
-        { '\r', "\\r" },
-        { '\'', "\\'" },
-        { '\"', "\\\"" },
-        { '\x1a', "\\Z" },
-
-        // Extras
-        { '\b', "\\b" },
-        { '%', "\\%" },
-        { '|', "\\|" },
-        { ';', "\\;" },
-    };
-
-    std::string escapedStr;
-
-    for (size_t i = 0; i < str.size(); ++i)
-    {
-        const char c = str[i];
-
-        // Emulate original strlen-based SqlConnection::EscapeString
-        if (c == '\0')
-        {
-            break;
-        }
-
-        const auto it = replacements.find(c);
-        if (it != replacements.end())
-        {
-            escapedStr += it->second;
-        }
-        else
-        {
-            escapedStr += c;
-        }
-    }
-
-    return escapedStr;
-}
-
-auto db::escapeString(const std::string& str) -> std::string
-{
-    if (str.empty())
+    if (count == 0)
     {
         return {};
     }
 
-    return db::escapeString(std::string_view(str));
-}
+    std::string result;
+    result.reserve(count * 3 - 2);
 
-auto db::escapeString(const char* str) -> std::string
-{
-    if (str == nullptr)
+    result += '?';
+    for (std::size_t i = 1; i < count; ++i)
     {
-        return {};
+        result += ", ?";
     }
 
-    return db::escapeString(std::string_view(str));
+    return result;
 }
 
 auto db::getDatabaseSchema() -> std::string
@@ -225,32 +76,29 @@ auto db::checkCharset() -> void
 {
     TracyZoneScoped;
 
-    // Check that the SQL charset is what we require
     const auto rset = preparedStmt("SELECT @@character_set_database, @@collation_database");
-    if (rset && rset->rowsCount())
+
+    bool foundError = false;
+    for (const auto& row : db::rows(rset))
     {
-        bool foundError = false;
-        while (rset->next())
+        const auto charsetSetting   = row.get<std::string>(0);
+        const auto collationSetting = row.get<std::string>(1);
+        if (!starts_with(charsetSetting, "utf8") || !starts_with(collationSetting, "utf8"))
         {
-            const auto charsetSetting   = rset->get<std::string>(0);
-            const auto collationSetting = rset->get<std::string>(1);
-            if (!starts_with(charsetSetting, "utf8") || !starts_with(collationSetting, "utf8"))
-            {
-                foundError = true;
+            foundError = true;
 
-                ShowWarning(
-                    fmt::format("Unexpected character_set or collation setting in database: {}: {}. Expected utf8*.",
-                                charsetSetting,
-                                collationSetting)
-                        .c_str());
-            }
+            ShowWarning(
+                fmt::format("Unexpected character_set or collation setting in database: {}: {}. Expected utf8*.",
+                            charsetSetting,
+                            collationSetting)
+                    .c_str());
         }
+    }
 
-        if (foundError)
-        {
-            ShowWarning("Non utf8 charset can result in data reads and writes being corrupted!");
-            ShowWarning("Non utf8 collation can be indicative that the database was not set up per required specifications.");
-        }
+    if (foundError)
+    {
+        ShowWarning("Non utf8 charset can result in data reads and writes being corrupted!");
+        ShowWarning("Non utf8 collation can be indicative that the database was not set up per required specifications.");
     }
 }
 
@@ -288,34 +136,6 @@ auto db::checkTriggers() -> void
         std::this_thread::sleep_for(1s);
         std::terminate();
     }
-}
-
-auto db::setAutoCommit(bool value) -> bool
-{
-    TracyZoneScoped;
-
-    if (!db::preparedStmt("SET @@autocommit = ?", value ? 1 : 0))
-    {
-        ShowError("Failed to set autocommit value");
-        return false;
-    }
-
-    return true;
-}
-
-auto db::getAutoCommit() -> bool
-{
-    TracyZoneScoped;
-
-    const auto rset = db::preparedStmt("SELECT @@autocommit");
-    FOR_DB_SINGLE_RESULT(rset)
-    {
-        return rset->get<uint32>(0) == 1;
-    }
-
-    ShowError("Failed to get autocommit status");
-
-    return false;
 }
 
 auto db::transactionStart() -> bool
@@ -357,16 +177,43 @@ auto db::transactionRollback() -> bool
     return true;
 }
 
+namespace
+{
+
+// True while a db::transaction body is running on this thread. Saved and restored rather than
+// cleared, so a nested db::transaction leaves the outer one's window intact.
+thread_local bool tlsFailuresThrow = false;
+
+} // namespace
+
+auto db::detail::failuresThrow() noexcept -> bool
+{
+    return tlsFailuresThrow;
+}
+
 auto db::transaction(const Fn<void() const>& transactionFn) -> bool
 {
     TracyZoneScoped;
+
+    // MySQL has no nested transactions: a second START TRANSACTION commits the one already open,
+    // so the outer transaction would lose its atomicity exactly when the inner one is meant to
+    // protect it. Join the open transaction instead, and let the outer call decide the outcome.
+    //
+    // Exceptions are deliberately not caught here. Swallowing one would let the outer transaction
+    // commit work the inner call already reported as failed.
+    if (db::getDatabase().isInTransaction())
+    {
+        transactionFn();
+        return true;
+    }
 
     if (!db::transactionStart())
     {
         return false;
     }
 
-    // covers COMMIT/ROLLBACK too
+    // Stays set through the COMMIT/ROLLBACK below: those must not be retried on a fresh
+    // connection either.
     db::getDatabase().setInTransaction(true);
     const auto transactionScope = xi::finally<Fn<void()>>(
         []() -> void
@@ -376,6 +223,15 @@ auto db::transaction(const Fn<void() const>& transactionFn) -> bool
 
     try
     {
+        // Scoped to the body alone: the COMMIT and ROLLBACK below have to be able to fail without
+        // throwing out of this function.
+        tlsFailuresThrow              = true;
+        const auto restoreFailureMode = xi::finally<Fn<void()>>(
+            []() -> void
+            {
+                tlsFailuresThrow = false;
+            });
+
         transactionFn();
     }
     catch (const std::exception& e)
@@ -403,16 +259,12 @@ auto db::getTableColumnNames(const std::string& tableName) -> std::vector<std::s
     TracyZoneScoped;
 
     const auto rset = db::preparedStmt("SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_NAME = ? AND TABLE_SCHEMA = ?", tableName, db::getDatabaseSchema());
-    if (rset && rset->rowsCount())
-    {
-        std::vector<std::string> columnNames;
-        while (rset->next())
-        {
-            columnNames.emplace_back(rset->get<std::string>(0));
-        }
 
-        return columnNames;
+    std::vector<std::string> columnNames;
+    for (const auto& row : db::rows(rset))
+    {
+        columnNames.emplace_back(row.get<std::string>(0));
     }
 
-    return {};
+    return columnNames;
 }

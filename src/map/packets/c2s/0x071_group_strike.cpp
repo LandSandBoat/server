@@ -63,7 +63,7 @@ auto GP_CLI_COMMAND_GROUP_STRIKE::validate(MapSession* PSession, const CCharEnti
 
 void GP_CLI_COMMAND_GROUP_STRIKE::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    const auto victimName = db::escapeString(asStringFromUntrustedSource(this->sName, sizeof(this->sName)));
+    const auto victimName = asStringFromUntrustedSource(this->sName, sizeof(this->sName));
 
     switch (static_cast<GP_CLI_COMMAND_GROUP_STRIKE_KIND>(this->Kind))
     {

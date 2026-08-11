@@ -28,26 +28,57 @@
 #include <common/database/traits.h>
 
 #include <algorithm>
+#include <cstddef>
 #include <cstring>
 #include <exception>
 #include <iterator>
+#include <memory>
+#include <optional>
 #include <string>
+#include <string_view>
 #include <type_traits>
+#include <utility>
 
-// @note Everything in database-land is 1-indexed, not 0-indexed.
+// @note Bind parameters in database-land are 1-indexed; result-set columns are 0-indexed.
 namespace db
 {
 
 enum class ResultSetType
 {
-    Select,  // We can query the rset for data
-    Update,  // The rset only has rowsCount()/rowsAffected() populated
-    Invalid, // The query is invalid and we can't do anything with it
+    Select,  // Rows can be read from the result set
+    Update,  // Only rowsCount()/rowsAffected() are populated
+    Invalid, // The query was rejected; there is nothing to read
 };
 
-// Forward declaration so ResultSet::get<T>() can reference it.
+// Copy raw blob bytes over a trivially-copyable destination, zero-filling any tail the
+// blob does not cover.
+template <typename T>
+auto copyBlobBytes(std::string_view bytes, T& destination) -> void
+{
+    static_assert(std::is_trivially_copyable_v<T>, "T must be trivially copyable");
+
+    // Clear the destination first, so a blob shorter than T leaves zeros behind rather than
+    // whatever the caller's object held. Arrays and types that cannot be assigned to need their
+    // own way of being cleared.
+    if constexpr (std::is_array_v<T>)
+    {
+        using Element = std::remove_extent_t<T>;
+        std::fill(std::begin(destination), std::end(destination), Element{});
+    }
+    else if constexpr (std::is_assignable_v<T&, T>)
+    {
+        destination = T{};
+    }
+    else
+    {
+        std::fill_n(reinterpret_cast<uint8*>(&destination), sizeof(T), 0);
+    }
+
+    std::memcpy(&destination, bytes.data(), std::min(sizeof(T), bytes.size()));
+}
+
 template <typename WrapperPtrT, typename T>
-auto extractFromBlob(const WrapperPtrT& rset, const std::string& blobKey, T& destination) -> void;
+auto extractFromBlob(const WrapperPtrT& rset, std::string_view blobKey, T& destination) -> void;
 
 class ResultSet
 {
@@ -69,153 +100,245 @@ public:
 
     auto columnName(uint32 index) const -> std::string;
 
-    auto isNull(const std::string& key) const -> bool;
+    auto isNull(std::string_view key) const -> bool;
 
     // Get the raw, untruncated bytes of a blob column.
     // Unlike get<std::string>, this preserves embedded nulls and the full length.
-    auto getBlobBytes(const std::string& key) const -> std::string;
+    auto getBlobBytes(std::string_view key) const -> std::string;
 
-    // Get the value of the associated key.
+    // Get the value of the associated key. A NULL cell reads as T{}. So does an unknown column,
+    // which is logged as well: it means the call site and the query disagree.
     template <typename T>
-    auto get(const std::string& key) const -> T;
+    auto get(std::string_view key) const -> T;
 
-    // Get the value of the 0-indexed column.
+    // As above, by 0-indexed column.
     template <typename T>
     auto get(uint32 index) const -> T;
 
-    // Get the value of the associated key, or the default value if it is null/not-populated.
+    // Get the value of the associated key, or the default value if the cell is NULL or the
+    // column is absent.
     template <typename T>
-    auto getOrDefault(const std::string& key, T defaultValue) const -> T;
+    auto getOrDefault(std::string_view key, T defaultValue) const -> T;
 
-    // Get the value of the 0-indexed column, or the default value if it is null/not-populated.
+    // As above, by 0-indexed column.
     template <typename T>
     auto getOrDefault(uint32 index, T defaultValue) const -> T;
 
-protected:
-    virtual auto rawNext() -> bool                                 = 0;
-    virtual auto rawRowsCount() const -> std::size_t               = 0;
-    virtual auto rawColumnCount() const -> std::size_t             = 0;
-    virtual auto rawIsNull(const std::string& key) const -> bool   = 0;
-    virtual auto rawColumnLabel(uint32 index) const -> std::string = 0;
+    // Get the value of the associated key, or std::nullopt if the cell is NULL or the column is
+    // absent. Unlike get(), neither case is reported as an error.
+    template <typename T>
+    auto tryGet(std::string_view key) const -> std::optional<T>;
 
-    virtual auto rawGetInt64(const std::string& key) const -> int64           = 0;
-    virtual auto rawGetUInt64(const std::string& key) const -> uint64         = 0;
-    virtual auto rawGetInt32(const std::string& key) const -> int32           = 0;
-    virtual auto rawGetUInt32(const std::string& key) const -> uint32         = 0;
-    virtual auto rawGetInt16(const std::string& key) const -> int16           = 0;
-    virtual auto rawGetUInt16(const std::string& key) const -> uint16         = 0;
-    virtual auto rawGetInt8(const std::string& key) const -> int8             = 0;
-    virtual auto rawGetUInt8(const std::string& key) const -> uint8           = 0;
-    virtual auto rawGetBool(const std::string& key) const -> bool             = 0;
-    virtual auto rawGetFloat(const std::string& key) const -> float           = 0;
-    virtual auto rawGetDouble(const std::string& key) const -> double         = 0;
-    virtual auto rawGetString(const std::string& key) const -> std::string    = 0;
-    virtual auto rawGetBlobBytes(const std::string& key) const -> std::string = 0;
+    // As above, by 0-indexed column.
+    template <typename T>
+    auto tryGet(uint32 index) const -> std::optional<T>;
+
+protected:
+    // The raw accessors are 0-indexed. Names resolve to indices exactly once, in the public
+    // key-based methods, so per-cell access does no string hashing.
+    virtual auto rawNext() -> bool                                                        = 0;
+    virtual auto rawRowsCount() const -> std::size_t                                      = 0;
+    virtual auto rawColumnCount() const -> std::size_t                                    = 0;
+    virtual auto rawColumnIndex(std::string_view key) const -> std::optional<std::size_t> = 0;
+    virtual auto rawColumnLabel(std::size_t index) const -> std::string                   = 0;
+    virtual auto rawIsNull(std::size_t index) const -> bool                               = 0;
+
+    virtual auto rawGetInt64(std::size_t index) const -> int64           = 0;
+    virtual auto rawGetUInt64(std::size_t index) const -> uint64         = 0;
+    virtual auto rawGetInt32(std::size_t index) const -> int32           = 0;
+    virtual auto rawGetUInt32(std::size_t index) const -> uint32         = 0;
+    virtual auto rawGetInt16(std::size_t index) const -> int16           = 0;
+    virtual auto rawGetUInt16(std::size_t index) const -> uint16         = 0;
+    virtual auto rawGetInt8(std::size_t index) const -> int8             = 0;
+    virtual auto rawGetUInt8(std::size_t index) const -> uint8           = 0;
+    virtual auto rawGetBool(std::size_t index) const -> bool             = 0;
+    virtual auto rawGetFloat(std::size_t index) const -> float           = 0;
+    virtual auto rawGetDouble(std::size_t index) const -> double         = 0;
+    virtual auto rawGetString(std::size_t index) const -> std::string    = 0;
+    virtual auto rawGetBlobBytes(std::size_t index) const -> std::string = 0;
 
     std::string   query_;
     ResultSetType type_;
     std::size_t   rowsAffected_{ 0 };
+
+private:
+    template <typename T>
+    auto getAtIndex(std::size_t index) const -> T;
 };
+
+// Single-pass input iterator over a result set's rows. Each dereference yields the result set
+// itself, positioned at the current row; read cells with row.get<T>(...).
+class RowIterator
+{
+public:
+    using iterator_concept = std::input_iterator_tag;
+    using value_type       = ResultSet;
+    using difference_type  = std::ptrdiff_t;
+
+    RowIterator() = default;
+
+    explicit RowIterator(ResultSet* resultSet)
+    : resultSet_(resultSet)
+    {
+        advance();
+    }
+
+    auto operator*() const -> const ResultSet&
+    {
+        return *resultSet_;
+    }
+
+    auto operator++() -> RowIterator&
+    {
+        advance();
+        return *this;
+    }
+
+    auto operator++(int) -> void
+    {
+        advance();
+    }
+
+    auto operator==(std::default_sentinel_t) const -> bool
+    {
+        return resultSet_ == nullptr;
+    }
+
+private:
+    auto advance() -> void
+    {
+        if (resultSet_ != nullptr && !resultSet_->next())
+        {
+            resultSet_ = nullptr;
+        }
+    }
+
+    ResultSet* resultSet_ = nullptr;
+};
+
+class RowRange
+{
+public:
+    explicit RowRange(ResultSet* resultSet)
+    : resultSet_(resultSet)
+    {
+    }
+
+    auto begin() const -> RowIterator
+    {
+        return RowIterator(resultSet_);
+    }
+
+    auto end() const -> std::default_sentinel_t
+    {
+        return {};
+    }
+
+private:
+    ResultSet* resultSet_ = nullptr;
+};
+
+// Iterate the rows of a query result: `for (const auto& row : db::rows(rset))`.
+//
+// A null result set (failed query) or a non-SELECT result yields an empty range, so this replaces
+// the null-check-and-while boilerplate around preparedStmt() results. Iteration is single-pass:
+// it advances the result set's cursor.
+inline auto rows(const std::unique_ptr<ResultSet>& rset) -> RowRange
+{
+    if (rset == nullptr || rset->type() != ResultSetType::Select)
+    {
+        return RowRange(nullptr);
+    }
+
+    return RowRange(rset.get());
+}
 
 //
 // Out-of-line template definitions
 //
 
 template <typename T>
-auto ResultSet::get(const std::string& key) const -> T
+auto ResultSet::getAtIndex(const std::size_t index) const -> T
 {
-    if (type_ != ResultSetType::Select)
-    {
-        ShowErrorFmt("ResultSet::get: Invalid type {}", static_cast<int>(type_));
-        ShowErrorFmt("Query: {}", query_);
-        return T{};
-    }
-
-    // Enum support: use underlying type to select database accessor
+    // An enum reads through the accessor for its underlying type.
     using UnderlyingT = detail::enum_decay_t<T>;
     UnderlyingT value{};
 
-    if constexpr (!detail::is_blob_v<UnderlyingT>)
+    if (rawIsNull(index))
     {
-        if (rawIsNull(key))
+        // NULL is legitimate data (e.g. LEFT JOIN columns); callers wanting a fallback should
+        // use getOrDefault(). Note it at debug level rather than spamming errors.
+        DebugSQLFmt("ResultSet::get: column {} is null (Query: {})", index, query_);
+        if constexpr (std::is_enum_v<T>)
         {
-            // NULL is legitimate data (e.g. LEFT JOIN columns); callers wanting a fallback should
-            // use getOrDefault(). Note it at debug level rather than spamming errors.
-            DebugSQLFmt("ResultSet::get: key {} is null (Query: {})", key, query_);
-            if constexpr (std::is_enum_v<T>)
-            {
-                return static_cast<T>(value);
-            }
-            else
-            {
-                return value;
-            }
+            return static_cast<T>(value);
+        }
+        else
+        {
+            return value;
         }
     }
 
-    //
-    // If the backend gets an invalid, incorrectly sized, or incorrectly signed value, it will throw
-    // an exception. So we'll wrap the whole extraction step in try/catch.
-    //
-
+    // The backend throws if the cell holds a value that is invalid, the wrong size, or the wrong
+    // signedness for UnderlyingT.
     try
     {
         if constexpr (std::is_same_v<UnderlyingT, int64>)
         {
-            value = static_cast<UnderlyingT>(rawGetInt64(key));
+            value = static_cast<UnderlyingT>(rawGetInt64(index));
         }
         else if constexpr (std::is_same_v<UnderlyingT, uint64>)
         {
-            value = static_cast<UnderlyingT>(rawGetUInt64(key));
+            value = static_cast<UnderlyingT>(rawGetUInt64(index));
         }
         else if constexpr (std::is_same_v<UnderlyingT, int32>)
         {
-            value = static_cast<UnderlyingT>(rawGetInt32(key));
+            value = static_cast<UnderlyingT>(rawGetInt32(index));
         }
         else if constexpr (std::is_same_v<UnderlyingT, uint32>)
         {
-            value = static_cast<UnderlyingT>(rawGetUInt32(key));
+            value = static_cast<UnderlyingT>(rawGetUInt32(index));
         }
         else if constexpr (std::is_same_v<UnderlyingT, int16>)
         {
-            value = static_cast<UnderlyingT>(rawGetInt16(key));
+            value = static_cast<UnderlyingT>(rawGetInt16(index));
         }
         else if constexpr (std::is_same_v<UnderlyingT, uint16>)
         {
-            value = static_cast<UnderlyingT>(rawGetUInt16(key));
+            value = static_cast<UnderlyingT>(rawGetUInt16(index));
         }
         else if constexpr (std::is_same_v<UnderlyingT, int8>)
         {
-            value = static_cast<UnderlyingT>(rawGetInt8(key));
+            value = static_cast<UnderlyingT>(rawGetInt8(index));
         }
         else if constexpr (std::is_same_v<UnderlyingT, uint8>)
         {
-            value = static_cast<UnderlyingT>(rawGetUInt8(key));
+            value = static_cast<UnderlyingT>(rawGetUInt8(index));
         }
         else if constexpr (std::is_same_v<UnderlyingT, bool>)
         {
-            value = static_cast<UnderlyingT>(rawGetBool(key));
+            value = static_cast<UnderlyingT>(rawGetBool(index));
         }
         else if constexpr (std::is_same_v<UnderlyingT, double>)
         {
-            value = static_cast<UnderlyingT>(rawGetDouble(key));
+            value = static_cast<UnderlyingT>(rawGetDouble(index));
         }
         else if constexpr (std::is_same_v<UnderlyingT, float>)
         {
-            value = static_cast<UnderlyingT>(rawGetFloat(key));
+            value = static_cast<UnderlyingT>(rawGetFloat(index));
         }
         else if constexpr (std::is_same_v<UnderlyingT, std::string>)
         {
-            value = rawGetString(key);
+            value = rawGetString(index);
         }
         else if constexpr (std::is_same_v<UnderlyingT, size_t>)
         {
             // NOTE: Preserves the historical behaviour of reading size_t as a 32-bit unsigned value.
-            value = static_cast<UnderlyingT>(rawGetUInt32(key));
+            value = static_cast<UnderlyingT>(rawGetUInt32(index));
         }
         else if constexpr (detail::is_blob_v<UnderlyingT>)
         {
-            extractFromBlob(this, key, value);
+            copyBlobBytes(rawGetBlobBytes(index), value);
         }
         else
         {
@@ -225,14 +348,14 @@ auto ResultSet::get(const std::string& key) const -> T
     catch (std::exception& e)
     {
         ShowErrorFmt("ResultSet::get: Error: {}", e.what());
-        ShowErrorFmt("Key: {}", key);
+        ShowErrorFmt("Column: {}", index);
         ShowErrorFmt("Query: {}", query_);
         return T{};
     }
     catch (...)
     {
         ShowErrorFmt("ResultSet::get: Unknown error");
-        ShowErrorFmt("Key: {}", key);
+        ShowErrorFmt("Column: {}", index);
         ShowErrorFmt("Query: {}", query_);
         return T{};
     }
@@ -248,34 +371,59 @@ auto ResultSet::get(const std::string& key) const -> T
 }
 
 template <typename T>
-auto ResultSet::get(const uint32 index) const -> T
+auto ResultSet::get(std::string_view key) const -> T
 {
     if (type_ != ResultSetType::Select)
     {
-        ShowErrorFmt("ResultSet::get: Invalid type {}", static_cast<int>(type_));
+        ShowErrorFmt("ResultSet::get: Invalid type {}", std::to_underlying(type_));
         ShowErrorFmt("Query: {}", query_);
         return T{};
     }
 
-    return get<T>(rawColumnLabel(index + 1));
+    const auto index = rawColumnIndex(key);
+    if (!index.has_value())
+    {
+        // A NULL cell is legitimate data and stays quiet, but a column the query never produced
+        // is a bug at the call site (typo, or the query lost a column). Say so instead of
+        // silently returning zeros.
+        ShowErrorFmt("ResultSet::get: unknown column {}", key);
+        ShowErrorFmt("Query: {}", query_);
+        return T{};
+    }
+
+    return getAtIndex<T>(*index);
 }
 
 template <typename T>
-auto ResultSet::getOrDefault(const std::string& key, T defaultValue) const -> T
+auto ResultSet::get(const uint32 index) const -> T
 {
     if (type_ != ResultSetType::Select)
     {
-        ShowErrorFmt("ResultSet::getOrDefault: Invalid type {}", static_cast<int>(type_));
+        ShowErrorFmt("ResultSet::get: Invalid type {}", std::to_underlying(type_));
+        ShowErrorFmt("Query: {}", query_);
+        return T{};
+    }
+
+    return getAtIndex<T>(index);
+}
+
+template <typename T>
+auto ResultSet::getOrDefault(std::string_view key, T defaultValue) const -> T
+{
+    if (type_ != ResultSetType::Select)
+    {
+        ShowErrorFmt("ResultSet::getOrDefault: Invalid type {}", std::to_underlying(type_));
         ShowErrorFmt("Query: {}", query_);
         return defaultValue;
     }
 
-    if (rawIsNull(key))
+    const auto index = rawColumnIndex(key);
+    if (!index.has_value() || rawIsNull(*index))
     {
         return defaultValue;
     }
 
-    return get<T>(key);
+    return getAtIndex<T>(*index);
 }
 
 template <typename T>
@@ -283,12 +431,54 @@ auto ResultSet::getOrDefault(const uint32 index, T defaultValue) const -> T
 {
     if (type_ != ResultSetType::Select)
     {
-        ShowErrorFmt("ResultSet::getOrDefault: Invalid type {}", static_cast<int>(type_));
+        ShowErrorFmt("ResultSet::getOrDefault: Invalid type {}", std::to_underlying(type_));
         ShowErrorFmt("Query: {}", query_);
         return defaultValue;
     }
 
-    return getOrDefault<T>(rawColumnLabel(index + 1), defaultValue);
+    if (rawIsNull(index))
+    {
+        return defaultValue;
+    }
+
+    return getAtIndex<T>(index);
+}
+
+template <typename T>
+auto ResultSet::tryGet(std::string_view key) const -> std::optional<T>
+{
+    if (type_ != ResultSetType::Select)
+    {
+        ShowErrorFmt("ResultSet::tryGet: Invalid type {}", std::to_underlying(type_));
+        ShowErrorFmt("Query: {}", query_);
+        return std::nullopt;
+    }
+
+    const auto index = rawColumnIndex(key);
+    if (!index.has_value() || rawIsNull(*index))
+    {
+        return std::nullopt;
+    }
+
+    return getAtIndex<T>(*index);
+}
+
+template <typename T>
+auto ResultSet::tryGet(const uint32 index) const -> std::optional<T>
+{
+    if (type_ != ResultSetType::Select)
+    {
+        ShowErrorFmt("ResultSet::tryGet: Invalid type {}", std::to_underlying(type_));
+        ShowErrorFmt("Query: {}", query_);
+        return std::nullopt;
+    }
+
+    if (index >= rawColumnCount() || rawIsNull(index))
+    {
+        return std::nullopt;
+    }
+
+    return getAtIndex<T>(index);
 }
 
 // @brief Extract a struct from a blob column.
@@ -296,42 +486,23 @@ auto ResultSet::getOrDefault(const uint32 index, T defaultValue) const -> T
 // @param blobKey The key of the blob in the result set.
 // @param destination The struct to extract the blob into.
 template <typename WrapperPtrT, typename T>
-auto extractFromBlob(const WrapperPtrT& rset, const std::string& blobKey, T& destination) -> void
+auto extractFromBlob(const WrapperPtrT& rset, std::string_view blobKey, T& destination) -> void
 {
     TracyZoneScoped;
 
     // TODO: static_assert(std::is_trivial_v<T>, "T must be trivial");
     static_assert(std::is_trivially_copyable_v<T>, "T must be trivially copyable");
 
-    // If we read a null blob we will get back garbage data.
-    // This will introduce difficult to track down crashes.
+    // A NULL blob reads back as garbage, and the crashes that follow are hard to trace.
     if (!rset->isNull(blobKey))
     {
         // getBlobBytes preserves the full length (including embedded nulls), unlike get<std::string>,
         // which would truncate the blob result.
-        const auto blobStr = rset->getBlobBytes(blobKey);
-
+        //
         // Login server creates new chars with null blobs. Map server then initializes.
         // We don't want to overwrite the initialized map data with null blobs / 0 values.
         // See: login_helpers.cpp saveCharacter() and charutils::LoadChar
-
-        // Zero-initialize the destination object
-        if constexpr (std::is_array_v<T>)
-        {
-            using Element = std::remove_extent_t<T>;
-            std::fill(std::begin(destination), std::end(destination), Element{});
-        }
-        else if constexpr (std::is_assignable_v<T&, T>)
-        {
-            destination = T{};
-        }
-        else
-        {
-            std::fill_n(reinterpret_cast<uint8_t*>(&destination), sizeof(T), 0);
-        }
-
-        // Copy the blob into the destination object
-        std::memcpy(&destination, blobStr.data(), std::min(sizeof(T), blobStr.size()));
+        copyBlobBytes(rset->getBlobBytes(blobKey), destination);
     }
 }
 

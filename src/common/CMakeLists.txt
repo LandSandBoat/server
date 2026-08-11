@@ -21,7 +21,6 @@ set(COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/database.h
     ${CMAKE_CURRENT_SOURCE_DIR}/database/active_database.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/database/binding.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/database/blob.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/database/blob.h
     ${CMAKE_CURRENT_SOURCE_DIR}/database/bound_value.h
     ${CMAKE_CURRENT_SOURCE_DIR}/database/caching_database.cpp

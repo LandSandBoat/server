@@ -44,7 +44,7 @@ auto GP_CLI_COMMAND_BLACK_EDIT::validate(MapSession* PSession, const CCharEntity
 
 void GP_CLI_COMMAND_BLACK_EDIT::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    const auto name = db::escapeString(asStringFromUntrustedSource(this->Data.Name, 15));
+    const auto name = asStringFromUntrustedSource(this->Data.Name, 15);
 
     const auto [charid, accid] = charutils::getCharIdAndAccountIdFromName(name);
     if (!charid)

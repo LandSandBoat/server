@@ -65,6 +65,7 @@ inline std::string hex32ToString(std::uint32_t hex)
 #define TracyZoneText(n, l)       ZoneText(n, l)
 #define TracyZoneScopedC(c)       ZoneScopedC(c)
 #define TracyZoneString(str)      ZoneText(str.c_str(), str.size())
+#define TracyZoneStringView(sv)   ZoneText(sv.data(), sv.size())
 #define TracyZoneCString(cstr)    ZoneText(cstr, std::strlen(cstr))
 #define TracyMessageStr(str)      TracyMessage(str.c_str(), str.size())
 #define TracySetThreadName(str)   tracy::SetThreadName(str)
@@ -104,6 +105,7 @@ inline std::string hex32ToString(std::uint32_t hex)
 #define TracyZoneText(n, l)                std::ignore = n; std::ignore = l
 #define TracyZoneScopedC(c)                std::ignore = c
 #define TracyZoneString(str)               std::ignore = str
+#define TracyZoneStringView(sv)            std::ignore = sv
 #define TracyZoneCString(cstr)             std::ignore = cstr
 #define TracyZoneIString(istr)             std::ignore = istr
 #define TracyZoneHex8(num)                 std::ignore = num

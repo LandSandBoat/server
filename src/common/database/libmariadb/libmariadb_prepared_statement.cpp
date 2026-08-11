@@ -115,13 +115,17 @@ auto db::LibMariaDBPreparedStatement::bind(int index, const BoundValue& value) -
         [&](const auto& v)
         {
             using U = std::remove_cvref_t<decltype(v)>;
-            if constexpr (std::is_same_v<U, std::shared_ptr<BlobWrapper>>)
+            if constexpr (std::is_same_v<U, std::monostate>)
             {
-                auto& buffer = paramBuffers_.emplace_back(v->data.get(), v->data.get() + v->size);
+                b.buffer_type = MYSQL_TYPE_NULL;
+            }
+            else if constexpr (std::is_same_v<U, Blob>)
+            {
+                auto& buffer = paramBuffers_.emplace_back(v.bytes);
                 // Guarantee a non-null data() pointer: libmariadb binds a null buffer as SQL NULL,
                 // so an empty blob must still point at valid (zero-length) storage to bind as ''.
                 buffer.reserve(1);
-                auto& length    = paramLengths_.emplace_back(static_cast<unsigned long>(v->size));
+                auto& length    = paramLengths_.emplace_back(static_cast<unsigned long>(v.bytes.size()));
                 b.buffer_type   = MYSQL_TYPE_BLOB;
                 b.buffer        = buffer.data();
                 b.buffer_length = static_cast<unsigned long>(buffer.size());
@@ -157,6 +161,10 @@ auto db::LibMariaDBPreparedStatement::bind(int index, const BoundValue& value) -
                 {
                     b.buffer_type = MYSQL_TYPE_LONG;
                 }
+                else if constexpr (std::is_same_v<U, int64> || std::is_same_v<U, uint64>)
+                {
+                    b.buffer_type = MYSQL_TYPE_LONGLONG;
+                }
                 else if constexpr (std::is_same_v<U, float>)
                 {
                     b.buffer_type = MYSQL_TYPE_FLOAT;
@@ -166,7 +174,7 @@ auto db::LibMariaDBPreparedStatement::bind(int index, const BoundValue& value) -
                     b.buffer_type = MYSQL_TYPE_DOUBLE;
                 }
 
-                b.is_unsigned = std::is_unsigned_v<U> ? 1 : 0;
+                b.is_unsigned = std::is_unsigned_v<U>;
             }
         },
         value);
@@ -222,7 +230,15 @@ auto db::LibMariaDBPreparedStatement::ensureSchema() -> void
                 case MYSQL_TYPE_INT24:
                 case MYSQL_TYPE_LONGLONG:
                 case MYSQL_TYPE_YEAR:
-                    kinds_.push_back((fields[i].flags & UNSIGNED_FLAG) ? CellKind::UInt64 : CellKind::Int64);
+                    kinds_.push_back([&]
+                                     {
+                                         if (fields[i].flags & UNSIGNED_FLAG)
+                                         {
+                                             return CellKind::UInt64;
+                                         }
+
+                                         return CellKind::Int64;
+                                     }());
                     break;
                 case MYSQL_TYPE_FLOAT:
                 case MYSQL_TYPE_DOUBLE:
@@ -240,7 +256,7 @@ auto db::LibMariaDBPreparedStatement::ensureSchema() -> void
     schemaInitialized_ = true;
 }
 
-auto db::LibMariaDBPreparedStatement::fetchRows() -> std::vector<LibMariaDBResultSet::Row>
+auto db::LibMariaDBPreparedStatement::fetchCells() -> std::vector<LibMariaDBResultSet::Cell>
 {
     const std::size_t ncol = kinds_.size();
     if (ncol == 0)
@@ -267,7 +283,7 @@ auto db::LibMariaDBPreparedStatement::fetchRows() -> std::vector<LibMariaDBResul
             case CellKind::UInt64:
                 buffers[i].resize(sizeof(int64));
                 outBinds[i].buffer_type = MYSQL_TYPE_LONGLONG;
-                outBinds[i].is_unsigned = (kinds_[i] == CellKind::UInt64) ? 1 : 0;
+                outBinds[i].is_unsigned = kinds_[i] == CellKind::UInt64;
                 break;
             case CellKind::Double:
                 buffers[i].resize(sizeof(double));
@@ -293,8 +309,9 @@ auto db::LibMariaDBPreparedStatement::fetchRows() -> std::vector<LibMariaDBResul
         throw detail::libmariadb::Error(mysql_stmt_errno(stmt_), mysql_stmt_error(stmt_));
     }
 
-    std::vector<LibMariaDBResultSet::Row> rows;
-    rows.reserve(static_cast<std::size_t>(mysql_stmt_num_rows(stmt_)));
+    // One flat row-major grid: a whole result set costs one cell allocation, not one per row.
+    std::vector<LibMariaDBResultSet::Cell> cells;
+    cells.reserve(static_cast<std::size_t>(mysql_stmt_num_rows(stmt_)) * ncol);
 
     for (;;)
     {
@@ -309,12 +326,12 @@ auto db::LibMariaDBPreparedStatement::fetchRows() -> std::vector<LibMariaDBResul
         }
 
         // rc == 0 (success) or MYSQL_DATA_TRUNCATED
-        LibMariaDBResultSet::Row row(ncol);
         for (std::size_t i = 0; i < ncol; ++i)
         {
+            auto& cell = cells.emplace_back();
+
             if (nulls[i] != 0)
             {
-                row[i] = std::monostate{};
                 continue;
             }
 
@@ -324,21 +341,21 @@ auto db::LibMariaDBPreparedStatement::fetchRows() -> std::vector<LibMariaDBResul
                 {
                     int64 value = 0;
                     std::memcpy(&value, buffers[i].data(), sizeof(value));
-                    row[i] = value;
+                    cell = value;
                     break;
                 }
                 case CellKind::UInt64:
                 {
                     uint64 value = 0;
                     std::memcpy(&value, buffers[i].data(), sizeof(value));
-                    row[i] = value;
+                    cell = value;
                     break;
                 }
                 case CellKind::Double:
                 {
                     double value = 0.0;
                     std::memcpy(&value, buffers[i].data(), sizeof(value));
-                    row[i] = value;
+                    cell = value;
                     break;
                 }
                 case CellKind::Text:
@@ -365,24 +382,22 @@ auto db::LibMariaDBPreparedStatement::fetchRows() -> std::vector<LibMariaDBResul
                             throw detail::libmariadb::Error(mysql_stmt_errno(stmt_), mysql_stmt_error(stmt_));
                         }
 
-                        row[i] = std::string(big.data(), actualLen);
+                        cell = std::string(big.data(), actualLen);
                     }
                     else
                     {
-                        row[i] = std::string(buffers[i].data(), actualLen);
+                        cell = std::string(buffers[i].data(), actualLen);
                     }
                     break;
                 }
             }
         }
-
-        rows.push_back(std::move(row));
     }
 
-    return rows;
+    return cells;
 }
 
-auto db::LibMariaDBPreparedStatement::executeQuery(const std::string& query) -> std::unique_ptr<ResultSet>
+auto db::LibMariaDBPreparedStatement::executeQuery(std::string_view query) -> std::unique_ptr<ResultSet>
 {
     try
     {
@@ -394,10 +409,10 @@ auto db::LibMariaDBPreparedStatement::executeQuery(const std::string& query) -> 
         }
 
         ensureSchema();
-        auto rows = fetchRows();
+        auto cells = fetchCells();
 
         resetBindings();
-        return std::make_unique<LibMariaDBResultSet>(query, schema_, std::move(rows));
+        return std::make_unique<LibMariaDBResultSet>(query, schema_, std::move(cells));
     }
     catch (...)
     {
@@ -406,7 +421,7 @@ auto db::LibMariaDBPreparedStatement::executeQuery(const std::string& query) -> 
     }
 }
 
-auto db::LibMariaDBPreparedStatement::executeBulkUpdate(const std::string& query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
+auto db::LibMariaDBPreparedStatement::executeBulkUpdate(std::string_view query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
 {
     TracyZoneScoped;
 
@@ -456,10 +471,15 @@ auto db::LibMariaDBPreparedStatement::executeBulkUpdate(const std::string& query
                     binds[column].buffer_type = fieldTypeFor<Cell>();
                     binds[column].is_unsigned = std::is_unsigned_v<Cell>;
                 }
+                else if constexpr (std::is_same_v<U, std::monostate>)
+                {
+                    // Sending NULL would need a per-row is_null array alongside the value array.
+                    throw std::runtime_error(fmt::format("bulk binding cannot send NULL, at column {}", column));
+                }
                 else
                 {
                     // Strings and blobs would need a stride buffer and a length array; nothing bulk-writes them.
-                    throw std::runtime_error("bulk binding supports numeric columns only");
+                    throw std::runtime_error(fmt::format("bulk binding supports numeric columns only, at column {}", column));
                 }
             },
             params[column]);
@@ -494,7 +514,7 @@ auto db::LibMariaDBPreparedStatement::executeBulkUpdate(const std::string& query
     return std::make_unique<LibMariaDBResultSet>(static_cast<std::size_t>(mysql_stmt_affected_rows(stmt_)), query);
 }
 
-auto db::LibMariaDBPreparedStatement::executeUpdate(const std::string& query) -> std::unique_ptr<ResultSet>
+auto db::LibMariaDBPreparedStatement::executeUpdate(std::string_view query) -> std::unique_ptr<ResultSet>
 {
     try
     {

@@ -29,7 +29,9 @@
 
 #include <cstddef>
 #include <memory>
+#include <optional>
 #include <string>
+#include <string_view>
 #include <variant>
 
 namespace db
@@ -45,37 +47,39 @@ class LibMariaDBResultSet final : public ResultSet
 {
 public:
     using Cell = std::variant<std::monostate, int64, uint64, double, std::string>;
-    using Row  = std::vector<Cell>;
 
     // SELECT-like result. The schema is shared (and owned) across all result sets of one statement.
-    LibMariaDBResultSet(const std::string& query, std::shared_ptr<const ColumnSchema> schema, std::vector<Row> rows);
+    // Cells are one flat row-major grid (rows x schema columns), so a whole result set costs one
+    // cell allocation rather than one per row.
+    LibMariaDBResultSet(std::string_view query, std::shared_ptr<const ColumnSchema> schema, std::vector<Cell> cells);
 
     // UPDATE-like result.
-    LibMariaDBResultSet(std::size_t rowsAffected, const std::string& query);
+    LibMariaDBResultSet(std::size_t rowsAffected, std::string_view query);
 
 protected:
     auto rawNext() -> bool override;
     auto rawRowsCount() const -> std::size_t override;
     auto rawColumnCount() const -> std::size_t override;
-    auto rawIsNull(const std::string& key) const -> bool override;
-    auto rawColumnLabel(uint32 index) const -> std::string override;
+    auto rawColumnIndex(std::string_view key) const -> std::optional<std::size_t> override;
+    auto rawColumnLabel(std::size_t index) const -> std::string override;
+    auto rawIsNull(std::size_t index) const -> bool override;
 
-    auto rawGetInt64(const std::string& key) const -> int64 override;
-    auto rawGetUInt64(const std::string& key) const -> uint64 override;
-    auto rawGetInt32(const std::string& key) const -> int32 override;
-    auto rawGetUInt32(const std::string& key) const -> uint32 override;
-    auto rawGetInt16(const std::string& key) const -> int16 override;
-    auto rawGetUInt16(const std::string& key) const -> uint16 override;
-    auto rawGetInt8(const std::string& key) const -> int8 override;
-    auto rawGetUInt8(const std::string& key) const -> uint8 override;
-    auto rawGetBool(const std::string& key) const -> bool override;
-    auto rawGetFloat(const std::string& key) const -> float override;
-    auto rawGetDouble(const std::string& key) const -> double override;
-    auto rawGetString(const std::string& key) const -> std::string override;
-    auto rawGetBlobBytes(const std::string& key) const -> std::string override;
+    auto rawGetInt64(std::size_t index) const -> int64 override;
+    auto rawGetUInt64(std::size_t index) const -> uint64 override;
+    auto rawGetInt32(std::size_t index) const -> int32 override;
+    auto rawGetUInt32(std::size_t index) const -> uint32 override;
+    auto rawGetInt16(std::size_t index) const -> int16 override;
+    auto rawGetUInt16(std::size_t index) const -> uint16 override;
+    auto rawGetInt8(std::size_t index) const -> int8 override;
+    auto rawGetUInt8(std::size_t index) const -> uint8 override;
+    auto rawGetBool(std::size_t index) const -> bool override;
+    auto rawGetFloat(std::size_t index) const -> float override;
+    auto rawGetDouble(std::size_t index) const -> double override;
+    auto rawGetString(std::size_t index) const -> std::string override;
+    auto rawGetBlobBytes(std::size_t index) const -> std::string override;
 
 private:
-    auto cellAt(const std::string& key) const -> const Cell&;
+    auto cellAt(std::size_t index) const -> const Cell&;
 
     static auto toInt64(const Cell& cell) -> int64;
     static auto toUInt64(const Cell& cell) -> uint64;
@@ -83,8 +87,10 @@ private:
     static auto toText(const Cell& cell) -> std::string;
 
     std::shared_ptr<const ColumnSchema> schema_;
-    std::vector<Row>                    rows_;
-    std::ptrdiff_t                      cursor_ = -1;
+    std::vector<Cell>                   cells_;
+    std::size_t                         columnCount_ = 0;
+    std::size_t                         rowCount_    = 0;
+    std::ptrdiff_t                      cursor_      = -1;
 };
 
 } // namespace db

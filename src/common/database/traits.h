@@ -22,7 +22,9 @@
 #pragma once
 
 #include <array>
+#include <optional>
 #include <type_traits>
+#include <vector>
 
 namespace db::detail
 {
@@ -49,6 +51,32 @@ template <typename T>
 inline constexpr bool is_std_array_v = is_std_array<T>::value;
 
 template <typename T>
+struct is_optional : std::false_type
+{
+};
+
+template <typename T>
+struct is_optional<std::optional<T>> : std::true_type
+{
+};
+
+template <typename T>
+inline constexpr bool is_optional_v = is_optional<T>::value;
+
+template <typename T>
+struct is_std_vector : std::false_type
+{
+};
+
+template <typename T, typename Alloc>
+struct is_std_vector<std::vector<T, Alloc>> : std::true_type
+{
+};
+
+template <typename T>
+inline constexpr bool is_std_vector_v = is_std_vector<T>::value;
+
+template <typename T>
 struct is_standard_trivial : std::bool_constant<std::is_standard_layout_v<T> && std::is_trivial_v<T>>
 {
 };
@@ -56,6 +84,8 @@ struct is_standard_trivial : std::bool_constant<std::is_standard_layout_v<T> && 
 template <typename T>
 inline constexpr bool is_standard_trivial_v = is_standard_trivial<T>::value;
 
+// What binds as a blob: an aggregate that can be copied byte for byte. Fundamental types are
+// excluded because they bind as numbers.
 template <typename T>
 inline constexpr bool is_blob = (is_std_array_v<T> || std::is_array_v<T> || is_standard_trivial_v<T>) && !std::is_fundamental_v<T>;
 

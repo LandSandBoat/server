@@ -21,49 +21,28 @@
 
 #pragma once
 
-#include <cstddef>
-#include <istream>
-#include <memory>
-#include <string>
 #include <type_traits>
+#include <vector>
 
 namespace db
 {
 
-// A wrapper to ensure the underlying data, the blobstream, and the istream are all alive
-// and valid as long as they need to be.
-struct BlobWrapper
+// A copy of a trivially-copyable value's bytes, bound as a blob parameter. Owning the bytes keeps
+// them alive independently of the caller's original object.
+struct Blob
 {
-    std::unique_ptr<char[]> data;
-    std::size_t             size;
-
-    // https://stackoverflow.com/a/1449527
-    class blobstream : public std::streambuf
-    {
-    public:
-        blobstream(char* buffer, std::size_t size);
-    };
-
-    blobstream   blobStream;
-    std::istream istream;
-
-    template <typename T>
-    static auto create(T& source) -> std::shared_ptr<BlobWrapper>;
-
-    BlobWrapper(char* data, std::size_t size);
-
-    auto toString() const -> std::string;
+    std::vector<char> bytes;
 };
 
-//
-// Out-of-line template definitions
-//
-
+// Copy `source`'s object representation into a blob parameter.
 template <typename T>
-auto BlobWrapper::create(T& source) -> std::shared_ptr<BlobWrapper>
+[[nodiscard]] auto makeBlob(const T& source) -> Blob
 {
     static_assert(std::is_trivially_copyable_v<T>, "T must be trivially copyable");
-    return std::make_shared<BlobWrapper>(reinterpret_cast<char*>(&source), sizeof(T));
+
+    const auto* first = reinterpret_cast<const char*>(&source);
+
+    return Blob{ std::vector<char>(first, first + sizeof(T)) };
 }
 
 } // namespace db

@@ -28,6 +28,7 @@
 
 #include <common/database/binding.h>
 #include <common/database/bound_value.h>
+#include <common/database/query_string.h>
 #include <common/database/result_set.h>
 
 #include <fmt/format.h>
@@ -40,7 +41,7 @@
 #include <type_traits>
 #include <utility>
 
-// @note Everything in sql:: database-land is 1-indexed, not 0-indexed.
+// @note Bind parameters in database-land are 1-indexed; result-set columns are 0-indexed.
 namespace db
 {
 
@@ -52,12 +53,12 @@ public:
     // Execute a query with the given pre-lowered parameters.
     // Returns a queryable result set for SELECT-like queries, a rows-affected result set for
     // UPDATE-like queries, or nullptr if the query is invalid.
-    virtual auto execute(const std::string& query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> = 0;
+    virtual auto execute(std::string_view query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> = 0;
 
     // As execute, but sends every row of `params` in one round trip.
     //
     // Row width comes from the statement's own placeholder count, so `params` must be a whole number of rows.
-    virtual auto executeBulk(const std::string& query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> = 0;
+    virtual auto executeBulk(std::string_view query, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet> = 0;
 
     // The database name, ie. xidb.
     virtual auto getSchema() -> std::string = 0;
@@ -68,9 +69,15 @@ public:
     // The version of the database driver, ie. MariaDB Connector/C++ 1.0.3.
     virtual auto getDriverVersion() -> std::string = 0;
 
-    // suppresses the reconnect-and-retry path while a transaction is open
+    // Suppress the reconnect-and-retry path while a transaction is open.
     virtual void setInTransaction(bool)
     {
+    }
+
+    // Whether this thread's connection already has a transaction open.
+    [[nodiscard]] virtual auto isInTransaction() -> bool
+    {
+        return false;
     }
 };
 
@@ -81,31 +88,47 @@ auto getDatabase() -> Database&;
 // default backend.
 auto setDatabase(Database* database) -> void;
 
-// @brief Execute a prepared statement with the given query string and arguments.
-// @param query The query string to execute.
-// @param args The arguments to bind to the prepared statement.
-// @return A unique pointer to the result set of the query.
-// @note If the query hasn't been seen before it will generate a prepared statement for it to be used immediately and in the future.
-// @note Everything in database-land is 1-indexed, not 0-indexed.
+// Execute a prepared statement with the given query string and arguments.
+//
+// A string-literal query is validated at compile time: leading keyword, forbidden characters, and
+// '?' count against argument count. Wrap runtime-built text in db::runtime(...).
+//
+// A query seen for the first time is prepared, then cached on the connection and reused.
+//
+// @note Bind parameters are 1-indexed; result-set columns are 0-indexed.
 template <typename... Args>
-auto preparedStmt(const std::string& rawQuery, Args&&... args) -> std::unique_ptr<ResultSet>;
+auto preparedStmt(QueryString<std::type_identity_t<Args>...> query, Args&&... args) -> std::unique_ptr<ResultSet>;
 
 template <typename... Args>
-auto preparedStmt(Scheduler& scheduler, const std::string& rawQuery, Args&&... args) -> Task<std::unique_ptr<ResultSet>>;
+auto preparedStmt(Scheduler& scheduler, QueryString<std::type_identity_t<Args>...> query, Args&&... args) -> Task<std::unique_ptr<ResultSet>>;
 
 // Send every row of `rows` through `query` in one round trip.
 //
 // `project` turns one row into a tuple of values, one per placeholder, and every row must yield the same types.
 // Numeric columns only.
 //
+// A string-literal query is validated against that tuple at compile time, exactly as for
+// preparedStmt.
+//
 // Throws if the statement fails.
 // Call it inside db::transaction, which turns the throw into a rollback.
 template <typename T, typename ProjectFn>
-void executeBulk(const std::string& query, const std::vector<T>& rows, ProjectFn project);
+void executeBulk(detail::BulkQueryString<T, ProjectFn> query, const std::vector<T>& rows, ProjectFn project);
 
-auto escapeString(std::string_view str) -> std::string;
-auto escapeString(const std::string& str) -> std::string;
-auto escapeString(const char* str) -> std::string;
+// Build a "?, ?, ?" list with count placeholders, for IN (...) clauses whose values are bound
+// from a std::vector parameter: preparedStmt binds one parameter per vector element.
+[[nodiscard]] auto placeholders(std::size_t count) -> std::string;
+
+namespace detail
+{
+
+// True while a db::transaction body is running on this thread.
+//
+// A statement that fails in that window throws, so db::transaction rolls the whole thing back.
+// Outside a transaction a failed statement still just returns nullptr, as it always has.
+[[nodiscard]] auto failuresThrow() noexcept -> bool;
+
+} // namespace detail
 
 auto getDatabaseSchema() -> std::string;
 
@@ -115,9 +138,6 @@ auto getDriverVersion() -> std::string;
 
 auto checkCharset() -> void;
 auto checkTriggers() -> void;
-
-auto setAutoCommit(bool value) -> bool;
-auto getAutoCommit() -> bool;
 
 auto transactionStart() -> bool;
 auto transactionCommit() -> bool;
@@ -139,17 +159,27 @@ auto getTableColumnNames(const std::string& tableName) -> std::vector<std::strin
 //
 
 template <typename... Args>
-auto preparedStmt(const std::string& rawQuery, Args&&... args) -> std::unique_ptr<ResultSet>
+auto preparedStmt(QueryString<std::type_identity_t<Args>...> query, Args&&... args) -> std::unique_ptr<ResultSet>
 {
     TracyZoneScoped;
-    TracyZoneString(rawQuery);
+    TracyZoneStringView(query.text());
 
     const auto params = detail::lowerBoundValues(std::forward<Args>(args)...);
-    return getDatabase().execute(rawQuery, params);
+
+    auto rset = getDatabase().execute(query.text(), params);
+
+    // Inside a transaction, carrying on past a failed statement means committing the statements
+    // around it. Throw instead, so db::transaction rolls back.
+    if (rset == nullptr && detail::failuresThrow())
+    {
+        throw std::runtime_error(fmt::format("statement failed inside a transaction: {}", query.text()));
+    }
+
+    return rset;
 }
 
 template <typename T, typename ProjectFn>
-void executeBulk(const std::string& query, const std::vector<T>& rows, ProjectFn project)
+void executeBulk(detail::BulkQueryString<T, ProjectFn> query, const std::vector<T>& rows, ProjectFn project)
 {
     TracyZoneScoped;
 
@@ -158,7 +188,7 @@ void executeBulk(const std::string& query, const std::vector<T>& rows, ProjectFn
         return;
     }
 
-    using Row = std::remove_cvref_t<decltype(project(rows.front()))>;
+    using Row = detail::BulkRow<T, ProjectFn>;
 
     std::vector<BoundValue> params;
     params.reserve(rows.size() * std::tuple_size_v<Row>);
@@ -173,19 +203,19 @@ void executeBulk(const std::string& query, const std::vector<T>& rows, ProjectFn
             project(row));
     }
 
-    if (!getDatabase().executeBulk(query, params))
+    if (!getDatabase().executeBulk(query.text(), params))
     {
-        throw std::runtime_error(fmt::format("bulk statement failed after {} rows: {}", rows.size(), query));
+        throw std::runtime_error(fmt::format("bulk statement failed after {} rows: {}", rows.size(), query.text()));
     }
 }
 
 template <typename... Args>
-auto preparedStmt(Scheduler& scheduler, const std::string& rawQuery, Args&&... args) -> Task<std::unique_ptr<ResultSet>>
+auto preparedStmt(Scheduler& scheduler, QueryString<std::type_identity_t<Args>...> query, Args&&... args) -> Task<std::unique_ptr<ResultSet>>
 {
     co_return scheduler.spawnOnWorkerThread(
-        [rawQuery, ... capturedArgs = std::forward<Args>(args)]() mutable
+        [rawQuery = std::string(query.text()), ... capturedArgs = std::forward<Args>(args)]() mutable
         {
-            return db::preparedStmt(rawQuery, std::forward<Args>(capturedArgs)...);
+            return db::preparedStmt(db::runtime(rawQuery), std::forward<Args>(capturedArgs)...);
         });
 }
 

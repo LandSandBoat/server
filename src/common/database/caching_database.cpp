@@ -32,6 +32,7 @@
 #include <common/types/fn.h>
 #include <common/types/hash_map.h>
 
+#include <atomic>
 #include <chrono>
 #include <thread>
 using namespace std::chrono_literals;
@@ -40,17 +41,20 @@ namespace
 {
 
 // Per-(thread, backend instance) connection state. thread_local keeps each worker thread on its own
-// connection; keying by the backend pointer lets multiple backends coexist in one process.
-thread_local HashMap<const db::CachingDatabase*, db::detail::ConnectionState> tlsStates;
+// connection; keying by the backend's serial id lets multiple backends coexist in one process.
+thread_local HashMap<uint64, db::detail::ConnectionState> tlsStates;
+
+// Handed out one per backend, and never reused.
+std::atomic<uint64> nextBackendId{ 1 };
 
 bool timersEnabled = false;
 
 // Emit a slow-query log line on scope exit if the query exceeded the configured thresholds.
-auto makeQueryTimer(const std::string& query) -> xi::final_action<Fn<void()>>
+auto makeQueryTimer(std::string_view query) -> xi::final_action<Fn<void()>>
 {
     const auto start = timer::now();
     return xi::finally<Fn<void()>>(
-        [query, start]() -> void
+        [query = std::string(query), start]() -> void
         {
             if (!timersEnabled || !settings::get<bool>("logging.SQL_SLOW_QUERY_LOG_ENABLE"))
             {
@@ -71,11 +75,16 @@ auto makeQueryTimer(const std::string& query) -> xi::final_action<Fn<void()>>
 
 } // namespace
 
+db::CachingDatabase::CachingDatabase()
+: id_(nextBackendId++)
+{
+}
+
 auto db::CachingDatabase::getState() -> detail::ConnectionState&
 {
     TracyZoneScoped;
 
-    auto& state = tlsStates[this];
+    auto& state = tlsStates[id_];
     if (state.connection == nullptr)
     {
         state.connection = createConnection();
@@ -86,32 +95,48 @@ auto db::CachingDatabase::getState() -> detail::ConnectionState&
 }
 
 // Find-or-prepare the cached statement for this query on the given connection.
-auto db::CachingDatabase::prepareCached(detail::ConnectionState& connState, const std::string& rawQuery) -> PreparedStatement&
+//
+// The query text is validated and classified the first time it is seen here; cached executions
+// skip straight to binding. Returns nullptr if the query text is rejected.
+//
+// The cache looks up heterogeneously, so a cached execution never materializes the query text; the
+// std::string key is built only on first sight.
+auto db::CachingDatabase::prepareCached(detail::ConnectionState& connState, std::string_view rawQuery) -> detail::CachedStatement*
 {
     auto it = connState.statements.find(rawQuery);
     if (it == connState.statements.end())
     {
-        it = connState.statements.emplace(rawQuery, connState.connection->prepare(rawQuery)).first;
+        const auto queryType = detail::validateQueryLeadingKeyword(rawQuery);
+        if (queryType == ResultSetType::Invalid)
+        {
+            ShowErrorFmt("Invalid query: {}", rawQuery);
+            return nullptr;
+        }
+
+        if (!detail::validateQueryContent(rawQuery))
+        {
+            ShowErrorFmt("Invalid query content: {}", rawQuery);
+            return nullptr;
+        }
+
+        it = connState.statements.emplace(std::string(rawQuery), detail::CachedStatement{ connState.connection->prepare(rawQuery), queryType }).first;
     }
 
-    return *it->second;
+    return &it->second;
 }
 
-auto db::CachingDatabase::runWithRetry(const std::string& rawQuery, const Fn<std::unique_ptr<ResultSet>(detail::ConnectionState&) const>& operation) -> std::unique_ptr<ResultSet>
+auto db::CachingDatabase::runWithRetry(std::string_view rawQuery, const Fn<std::unique_ptr<ResultSet>(detail::ConnectionState&) const>& operation) -> std::unique_ptr<ResultSet>
 {
-    if (detail::validateQueryLeadingKeyword(rawQuery) == ResultSetType::Invalid)
-    {
-        ShowErrorFmt("Invalid query: {}", rawQuery);
-        return nullptr;
-    }
-
-    if (!detail::validateQueryContent(rawQuery))
-    {
-        ShowErrorFmt("Invalid query content: {}", rawQuery);
-        return nullptr;
-    }
-
     auto& state = getState();
+
+    // A transaction on this connection was severed by a reconnect. Refuse the rest of it, up to and
+    // including its COMMIT/ROLLBACK, so none of its statements silently auto-commit on the fresh
+    // connection.
+    if (state.transactionBroken)
+    {
+        ShowErrorFmt("Refusing to run a query from a transaction that was severed by a reconnect: {}", rawQuery);
+        return nullptr;
+    }
 
     const auto queryRetryCount = 1 + settings::get<uint32>("network.SQL_QUERY_RETRY_COUNT");
     for (auto i = 0U; i < queryRetryCount; ++i)
@@ -141,26 +166,38 @@ auto db::CachingDatabase::runWithRetry(const std::string& rawQuery, const Fn<std
             {
                 ShowErrorFmt("Connection lost mid-transaction, not retrying: {}", rawQuery);
                 ShowErrorFmt("{}", e.what());
+
+                // The server has already rolled the transaction back. Drop the dead connection and
+                // poison the transaction, so the statements that follow it fail here rather than
+                // run, one by one, on a fresh auto-committing connection.
+                state.statements.clear();
+                state.connection        = nullptr;
+                state.transactionBroken = true;
+
                 return nullptr;
             }
         }
     }
 
-    ShowCritical("Query Failed after %d retries: %s", queryRetryCount, rawQuery.c_str());
+    ShowCriticalFmt("Query Failed after {} retries: {}", queryRetryCount, rawQuery);
     std::this_thread::sleep_for(1s);
     std::terminate();
 }
 
-auto db::CachingDatabase::execute(const std::string& rawQuery, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
+auto db::CachingDatabase::execute(std::string_view rawQuery, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
 {
     TracyZoneScoped;
-    TracyZoneString(rawQuery);
-
-    const auto queryType = detail::validateQueryLeadingKeyword(rawQuery);
+    TracyZoneStringView(rawQuery);
 
     const auto operation = [&](detail::ConnectionState& connState) -> std::unique_ptr<ResultSet>
     {
-        auto& stmt = prepareCached(connState, rawQuery);
+        const auto* cached = prepareCached(connState, rawQuery);
+        if (cached == nullptr)
+        {
+            return nullptr;
+        }
+
+        const auto& [stmt, queryType] = *cached;
 
         DebugSQLFmt("preparedStmt: {}", rawQuery);
 
@@ -168,34 +205,38 @@ auto db::CachingDatabase::execute(const std::string& rawQuery, const std::vector
         int counter = 0;
         for (const auto& param : params)
         {
-            stmt.bind(++counter, param);
+            stmt->bind(++counter, param);
         }
 
         const auto queryTimer = makeQueryTimer(rawQuery);
 
         if (queryType == ResultSetType::Select)
         {
-            return stmt.executeQuery(rawQuery);
+            return stmt->executeQuery(rawQuery);
         }
 
-        return stmt.executeUpdate(rawQuery);
+        return stmt->executeUpdate(rawQuery);
     };
 
     return runWithRetry(rawQuery, operation);
 }
 
-auto db::CachingDatabase::executeBulk(const std::string& rawQuery, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
+auto db::CachingDatabase::executeBulk(std::string_view rawQuery, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
 {
     TracyZoneScoped;
-    TracyZoneString(rawQuery);
+    TracyZoneStringView(rawQuery);
 
     const auto operation = [&](detail::ConnectionState& connState) -> std::unique_ptr<ResultSet>
     {
-        auto& stmt = prepareCached(connState, rawQuery);
+        const auto* cached = prepareCached(connState, rawQuery);
+        if (cached == nullptr)
+        {
+            return nullptr;
+        }
 
         const auto queryTimer = makeQueryTimer(rawQuery);
 
-        return stmt.executeBulkUpdate(rawQuery, params);
+        return cached->statement->executeBulkUpdate(rawQuery, params);
     };
 
     return runWithRetry(rawQuery, operation);
@@ -203,7 +244,20 @@ auto db::CachingDatabase::executeBulk(const std::string& rawQuery, const std::ve
 
 void db::CachingDatabase::setInTransaction(bool value)
 {
-    getState().inTransaction = value;
+    auto& state = getState();
+
+    state.inTransaction = value;
+
+    // Whether it committed or was severed, the transaction is over; the next one starts clean.
+    if (!value)
+    {
+        state.transactionBroken = false;
+    }
+}
+
+auto db::CachingDatabase::isInTransaction() -> bool
+{
+    return getState().inTransaction;
 }
 
 auto db::CachingDatabase::getSchema() -> std::string

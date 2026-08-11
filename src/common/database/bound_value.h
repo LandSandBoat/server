@@ -25,7 +25,6 @@
 
 #include <common/database/blob.h>
 
-#include <memory>
 #include <string>
 #include <variant>
 
@@ -33,17 +32,21 @@ namespace db
 {
 
 // A single, type-erased prepared-statement parameter.
+// std::monostate binds as SQL NULL.
 using BoundValue = std::variant<
+    std::monostate,
     int8,
     uint8,
     int16,
     uint16,
     int32,
     uint32,
+    int64,
+    uint64,
     bool,
     float,
     double,
     std::string,
-    std::shared_ptr<BlobWrapper>>;
+    Blob>;
 
 } // namespace db

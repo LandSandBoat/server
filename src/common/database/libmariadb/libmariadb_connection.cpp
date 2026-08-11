@@ -46,7 +46,7 @@ db::LibMariaDBConnection::~LibMariaDBConnection()
     }
 }
 
-auto db::LibMariaDBConnection::prepare(const std::string& query) -> std::unique_ptr<PreparedStatement>
+auto db::LibMariaDBConnection::prepare(std::string_view query) -> std::unique_ptr<PreparedStatement>
 {
     MYSQL_STMT* stmt = mysql_stmt_init(connection_);
     if (stmt == nullptr)
@@ -54,7 +54,7 @@ auto db::LibMariaDBConnection::prepare(const std::string& query) -> std::unique_
         throw detail::libmariadb::Error(mysql_errno(connection_), mysql_error(connection_));
     }
 
-    if (mysql_stmt_prepare(stmt, query.c_str(), static_cast<unsigned long>(query.size())) != 0)
+    if (mysql_stmt_prepare(stmt, query.data(), static_cast<unsigned long>(query.size())) != 0)
     {
         const auto        errnum  = mysql_stmt_errno(stmt);
         const std::string message = mysql_stmt_error(stmt);
@@ -90,6 +90,28 @@ auto db::LibMariaDBConnection::isConnectionError(const std::exception& e) const 
     return false;
 }
 
+namespace
+{
+
+// Pairs the per-thread connector init with its cleanup on thread exit.
+struct ThreadInitGuard
+{
+    ThreadInitGuard()
+    {
+        mysql_thread_init();
+    }
+
+    ~ThreadInitGuard()
+    {
+        mysql_thread_end();
+    }
+
+    ThreadInitGuard(const ThreadInitGuard&)            = delete;
+    ThreadInitGuard& operator=(const ThreadInitGuard&) = delete;
+};
+
+} // namespace
+
 auto db::LibMariaDBConnection::connect() -> std::unique_ptr<Connection>
 {
     static std::once_flag libraryInitFlag;
@@ -100,9 +122,9 @@ auto db::LibMariaDBConnection::connect() -> std::unique_ptr<Connection>
             mysql_library_init(0, nullptr, nullptr);
         });
 
-    // Initialize per-thread connector state. Paired thread cleanup is a known TODO; the connection
-    // is thread-local for the life of the worker thread.
-    mysql_thread_init();
+    // Initialize per-thread connector state on the thread's first connection; mysql_thread_end
+    // runs when the thread exits.
+    thread_local const ThreadInitGuard threadInitGuard;
 
     MYSQL* connection = mysql_init(nullptr);
     if (connection == nullptr)
@@ -111,6 +133,10 @@ auto db::LibMariaDBConnection::connect() -> std::unique_ptr<Connection>
         std::this_thread::sleep_for(1s);
         std::terminate();
     }
+
+    // Fail fast when the server is unreachable instead of hanging boot on the OS TCP timeout.
+    constexpr unsigned int connectTimeoutSeconds = 10;
+    mysql_options(connection, MYSQL_OPT_CONNECT_TIMEOUT, &connectTimeoutSeconds);
 
     const auto login  = settings::get<std::string>("network.SQL_LOGIN");
     const auto passwd = settings::get<std::string>("network.SQL_PASSWORD");

@@ -46,7 +46,7 @@ auto db::ResultSet::next() -> bool
 {
     if (type_ != ResultSetType::Select)
     {
-        ShowErrorFmt("ResultSet::next: Invalid type {}", static_cast<int>(type_));
+        ShowErrorFmt("ResultSet::next: Invalid type {}", std::to_underlying(type_));
         ShowErrorFmt("Query: {}", query_);
         return false;
     }
@@ -58,7 +58,7 @@ auto db::ResultSet::rowsCount() const -> uint32
 {
     if (type_ != ResultSetType::Select)
     {
-        ShowErrorFmt("ResultSet::rowsCount: Invalid type {}", static_cast<int>(type_));
+        ShowErrorFmt("ResultSet::rowsCount: Invalid type {}", std::to_underlying(type_));
         ShowErrorFmt("Query: {}", query_);
         return 0;
     }
@@ -71,7 +71,7 @@ auto db::ResultSet::rowsAffected() const -> uint32
 {
     if (type_ != ResultSetType::Update)
     {
-        ShowErrorFmt("ResultSet::rowsAffected: Invalid type {}", static_cast<int>(type_));
+        ShowErrorFmt("ResultSet::rowsAffected: Invalid type {}", std::to_underlying(type_));
         ShowErrorFmt("Query: {}", query_);
         return 0;
     }
@@ -84,7 +84,7 @@ auto db::ResultSet::columnCount() const -> uint32
 {
     if (type_ != ResultSetType::Select)
     {
-        ShowErrorFmt("ResultSet::columnCount: Invalid type {}", static_cast<int>(type_));
+        ShowErrorFmt("ResultSet::columnCount: Invalid type {}", std::to_underlying(type_));
         ShowErrorFmt("Query: {}", query_);
         return 0;
     }
@@ -96,34 +96,52 @@ auto db::ResultSet::columnName(uint32 index) const -> std::string
 {
     if (type_ != ResultSetType::Select)
     {
-        ShowErrorFmt("ResultSet::columnName: Invalid type {}", static_cast<int>(type_));
+        ShowErrorFmt("ResultSet::columnName: Invalid type {}", std::to_underlying(type_));
         ShowErrorFmt("Query: {}", query_);
         return {};
     }
 
-    return rawColumnLabel(index + 1);
+    return rawColumnLabel(index);
 }
 
-auto db::ResultSet::isNull(const std::string& key) const -> bool
+auto db::ResultSet::isNull(std::string_view key) const -> bool
 {
     if (type_ != ResultSetType::Select)
     {
-        ShowErrorFmt("ResultSet::isNull: Invalid type {}", static_cast<int>(type_));
+        ShowErrorFmt("ResultSet::isNull: Invalid type {}", std::to_underlying(type_));
         ShowErrorFmt("Query: {}", query_);
         return false;
     }
 
-    return rawIsNull(key);
+    const auto index = rawColumnIndex(key);
+    if (!index.has_value())
+    {
+        // A column the query never produced is a call-site bug, not a NULL value. Report it,
+        // then read as NULL like before so callers keep their fallback behaviour.
+        ShowErrorFmt("ResultSet::isNull: unknown column {}", key);
+        ShowErrorFmt("Query: {}", query_);
+        return true;
+    }
+
+    return rawIsNull(*index);
 }
 
-auto db::ResultSet::getBlobBytes(const std::string& key) const -> std::string
+auto db::ResultSet::getBlobBytes(std::string_view key) const -> std::string
 {
     if (type_ != ResultSetType::Select)
     {
-        ShowErrorFmt("ResultSet::getBlobBytes: Invalid type {}", static_cast<int>(type_));
+        ShowErrorFmt("ResultSet::getBlobBytes: Invalid type {}", std::to_underlying(type_));
         ShowErrorFmt("Query: {}", query_);
         return {};
     }
 
-    return rawGetBlobBytes(key);
+    const auto index = rawColumnIndex(key);
+    if (!index.has_value())
+    {
+        ShowErrorFmt("ResultSet::getBlobBytes: unknown column {}", key);
+        ShowErrorFmt("Query: {}", query_);
+        return {};
+    }
+
+    return rawGetBlobBytes(*index);
 }

@@ -28,7 +28,9 @@
 #include <common/database/traits.h>
 
 #include <memory>
+#include <optional>
 #include <string>
+#include <string_view>
 #include <type_traits>
 #include <utility>
 #include <vector>
@@ -58,7 +60,32 @@ auto lowerBoundValue(std::vector<BoundValue>& params, T&& value) -> void
 {
     using U = enum_decay_t<std::remove_cvref_t<T>>;
 
-    if constexpr (std::is_same_v<U, int32>)
+    if constexpr (std::is_same_v<U, std::nullopt_t>)
+    {
+        params.emplace_back(std::in_place_type<std::monostate>);
+    }
+    else if constexpr (is_optional_v<U>)
+    {
+        // An engaged optional binds as its contained value; a disengaged one binds as SQL NULL.
+        if (value.has_value())
+        {
+            lowerBoundValue(params, *value);
+        }
+        else
+        {
+            params.emplace_back(std::in_place_type<std::monostate>);
+        }
+    }
+    else if constexpr (is_std_vector_v<U>)
+    {
+        // A vector binds one parameter per element, in order, for IN (...) lists built with
+        // db::placeholders(). The query must carry a matching number of '?' holes.
+        for (const auto& element : value)
+        {
+            lowerBoundValue(params, element);
+        }
+    }
+    else if constexpr (std::is_same_v<U, int32>)
     {
         params.emplace_back(std::in_place_type<int32>, static_cast<int32>(value));
     }
@@ -82,6 +109,14 @@ auto lowerBoundValue(std::vector<BoundValue>& params, T&& value) -> void
     {
         params.emplace_back(std::in_place_type<uint8>, static_cast<uint8>(value));
     }
+    else if constexpr (std::is_same_v<U, int64>)
+    {
+        params.emplace_back(std::in_place_type<int64>, static_cast<int64>(value));
+    }
+    else if constexpr (std::is_same_v<U, uint64>)
+    {
+        params.emplace_back(std::in_place_type<uint64>, static_cast<uint64>(value));
+    }
     else if constexpr (std::is_same_v<U, bool>)
     {
         params.emplace_back(std::in_place_type<bool>, static_cast<bool>(value));
@@ -98,18 +133,22 @@ auto lowerBoundValue(std::vector<BoundValue>& params, T&& value) -> void
     {
         params.emplace_back(std::in_place_type<std::string>, value);
     }
+    else if constexpr (std::is_same_v<U, std::string_view>)
+    {
+        params.emplace_back(std::in_place_type<std::string>, value);
+    }
     else if constexpr (std::is_same_v<U, const char*> || std::is_same_v<U, char*>)
     {
         params.emplace_back(std::in_place_type<std::string>, value);
     }
     else if constexpr (std::is_same_v<U, size_t>)
     {
-        // NOTE: Preserves legacy behaviour of binding size_t via a 32-bit unsigned. TODO: widen.
-        params.emplace_back(std::in_place_type<uint32>, static_cast<uint32>(value));
+        // Only reached on platforms where size_t is a distinct type from uint64.
+        params.emplace_back(std::in_place_type<uint64>, static_cast<uint64>(value));
     }
     else if constexpr (is_blob_v<U>)
     {
-        params.emplace_back(std::in_place_type<std::shared_ptr<BlobWrapper>>, BlobWrapper::create(value));
+        params.emplace_back(std::in_place_type<Blob>, makeBlob(value));
     }
     else
     {

@@ -195,7 +195,7 @@ void GP_CLI_COMMAND_PBX::process(MapSession* PSession, CCharEntity* PChar) const
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Set:
         {
-            const auto receiverName = db::escapeString(asStringFromUntrustedSource(this->TargetName, 15));
+            const auto receiverName = asStringFromUntrustedSource(this->TargetName, 15);
 
             dboxutils::AddItemsToBeSent(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(this->BoxNo), this->PostWorkNo, this->ItemWorkNo, this->ItemStacks, receiverName);
         }
@@ -248,7 +248,7 @@ void GP_CLI_COMMAND_PBX::process(MapSession* PSession, CCharEntity* PChar) const
         break;
         case GP_CLI_COMMAND_PBX_COMMAND::Query:
         {
-            const auto receiverName = db::escapeString(asStringFromUntrustedSource(this->TargetName, 15));
+            const auto receiverName = asStringFromUntrustedSource(this->TargetName, 15);
 
             dboxutils::ConfirmNameBeforeSending(PChar, static_cast<GP_CLI_COMMAND_PBX_BOXNO>(this->BoxNo), receiverName);
         }

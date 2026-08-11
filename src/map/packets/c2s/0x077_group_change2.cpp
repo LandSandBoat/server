@@ -80,7 +80,7 @@ auto GP_CLI_COMMAND_GROUP_CHANGE2::validate(MapSession* PSession, const CCharEnt
 
 void GP_CLI_COMMAND_GROUP_CHANGE2::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    const auto memberName = db::escapeString(asStringFromUntrustedSource(this->sName, sizeof(this->sName)));
+    const auto memberName = asStringFromUntrustedSource(this->sName, sizeof(this->sName));
     switch (static_cast<GP_CLI_COMMAND_GROUP_CHANGE2_KIND>(this->Kind))
     {
         case GP_CLI_COMMAND_GROUP_CHANGE2_KIND::Party:

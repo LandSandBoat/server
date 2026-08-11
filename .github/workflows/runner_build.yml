@@ -234,6 +234,16 @@ jobs:
         if: ${{ env.SKIP_BUILD != 'true' }}
         run: cmake --build build | tee build.log
 
+      # The C++ unit tests need no database and no server, so the job that built them can run them
+      # straight away, on every configuration in the matrix, rather than waiting for the test
+      # workflow to pick up the artifact.
+      #
+      # Skipped for tracy builds: xi_test_lib defines TRACY_NO_EXIT=1, which makes the binary block
+      # at exit until a profiler collects from it.
+      - name: Run xi_unit_test
+        if: ${{ env.SKIP_BUILD != 'true' && !inputs.tracy }}
+        run: ./xi_unit_test
+
       - name: Upload artifact
         if: ${{ inputs.upload_artifact && env.SKIP_BUILD != 'true' }}
         uses: actions/upload-artifact@v7
@@ -250,6 +260,7 @@ jobs:
           rm -f build/src/map/xi_map*
           rm -f build/src/search/xi_search*
           rm -f build/src/test/xi_test*
+          rm -f build/src/test/xi_unit_test*
           rm -f build/src/world/xi_world*
 
       - name: Cache build
