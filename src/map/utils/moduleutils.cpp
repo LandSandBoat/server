@@ -156,7 +156,7 @@ void registerModule(const sol::table& moduleTable, const std::string& filename, 
             continue;
         }
 
-        const auto        name        = nameField.value();
+        const auto&       name        = nameField.value();
         const sol::object func        = overrideTable["func"];
         const auto        caseEnabled = overrideTable.get_or("enabled", true);
         const auto        parts       = split(name, ".");
