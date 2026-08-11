@@ -23,14 +23,14 @@
 
 #include <cstring>
 
-GP_SERV_COMMAND_LINKSHELL_MESSAGE::GP_SERV_COMMAND_LINKSHELL_MESSAGE(const std::string& poster, const std::string& message, const std::string& lsname, uint32_t posttime, LinkshellSlot slot)
+GP_SERV_COMMAND_LINKSHELL_MESSAGE::GP_SERV_COMMAND_LINKSHELL_MESSAGE(const std::string& poster, const std::string& message, const std::string& lsname, uint32_t posttime, LinkshellSlot slot, GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL writeLevel, MessageOp op)
 {
     auto& packet = this->data();
 
     packet.stat            = 0x0;
     packet.attr            = 0x7;
-    packet.readLevel       = 0x1;
-    packet.writeLevel      = 0x1;
+    packet.readLevel       = 0x2;
+    packet.writeLevel      = static_cast<uint8_t>(writeLevel);
     packet.pubEditLevel    = 0x0;
     packet.linkshell_index = (slot == LinkshellSlot::LS2) ? 0x1 : 0x0;
 
@@ -39,5 +39,22 @@ GP_SERV_COMMAND_LINKSHELL_MESSAGE::GP_SERV_COMMAND_LINKSHELL_MESSAGE(const std::
     std::memcpy(packet.encodedLsName, lsname.c_str(), std::min<size_t>(lsname.size(), sizeof(packet.encodedLsName)));
 
     packet.updateTime = posttime;
-    packet.opType     = 0x02;
+    packet.opType     = (op == MessageOp::Post) ? 0x01 : 0x02;
+}
+
+GP_SERV_COMMAND_LINKSHELL_MESSAGE::GP_SERV_COMMAND_LINKSHELL_MESSAGE(const Result result, const std::string& lsname, LinkshellSlot slot, GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL writeLevel)
+{
+    auto& packet = this->data();
+
+    packet.stat            = (result == Result::Denied) ? 0x3 : 0x0;
+    packet.attr            = (result == Result::Denied) ? 0x0 : 0x3;
+    packet.readLevel       = 0x2;
+    packet.writeLevel      = static_cast<uint8_t>(writeLevel);
+    packet.pubEditLevel    = 0x0;
+    packet.linkshell_index = (slot == LinkshellSlot::LS2) ? 0x1 : 0x0;
+
+    std::memcpy(packet.encodedLsName, lsname.c_str(), std::min<size_t>(lsname.size(), sizeof(packet.encodedLsName)));
+
+    packet.updateTime = 0;
+    packet.opType     = 0x03;
 }

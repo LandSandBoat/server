@@ -22,9 +22,9 @@
 #include "0x0e2_set_lsmsg.h"
 
 #include "entities/char_entity.h"
-#include "enums/msg_std.h"
 #include "items/item_linkshell.h"
 #include "linkshell.h"
+#include "packets/s2c/0x0cc_linkshell_message.h"
 
 auto GP_CLI_COMMAND_SET_LSMSG::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -41,10 +41,7 @@ void GP_CLI_COMMAND_SET_LSMSG::process(MapSession* PSession, CCharEntity* PChar)
 {
     auto canEditLsMes = [&](CItemLinkshell* PItemLinkshell) -> bool
     {
-        // TODO: The LSTYPE definition is wrong in item_linkshell.h and values are off by 1 compared to what is actually passed
-        // by the client. We account for this temporarily by doing m_postRights - 1
-        const auto postRights = static_cast<uint8_t>(PChar->PLinkshell1->m_postRights) - 1;
-        switch (static_cast<GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL>(postRights))
+        switch (PChar->PLinkshell1->getPostRights())
         {
             case GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL::Linkshell:
                 // Only the linkshell owner can edit the message
@@ -60,6 +57,14 @@ void GP_CLI_COMMAND_SET_LSMSG::process(MapSession* PSession, CCharEntity* PChar)
         return false;
     };
 
+    auto denied = [&]() -> void
+    {
+        PChar->pushPacket<GP_SERV_COMMAND_LINKSHELL_MESSAGE>(GP_SERV_COMMAND_LINKSHELL_MESSAGE::Result::Denied,
+                                                             PChar->PLinkshell1->getName(),
+                                                             LinkshellSlot::LS1,
+                                                             PChar->PLinkshell1->getPostRights());
+    };
+
     auto* PItemLinkshell = reinterpret_cast<CItemLinkshell*>(PChar->getEquip(SLOT_LINK1));
     if (PItemLinkshell != nullptr && PItemLinkshell->isType(ITEM_LINKSHELL))
     {
@@ -69,10 +74,14 @@ void GP_CLI_COMMAND_SET_LSMSG::process(MapSession* PSession, CCharEntity* PChar)
             if (PItemLinkshell->GetLSType() == LSTYPE_LINKSHELL) // Only Linkshell owner can change the access level
             {
                 PChar->PLinkshell1->setPostRights(static_cast<GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL>(this->writeLevel));
+                PChar->pushPacket<GP_SERV_COMMAND_LINKSHELL_MESSAGE>(GP_SERV_COMMAND_LINKSHELL_MESSAGE::Result::LevelChanged,
+                                                                     PChar->PLinkshell1->getName(),
+                                                                     LinkshellSlot::LS1,
+                                                                     PChar->PLinkshell1->getPostRights());
                 return;
             }
 
-            PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::LinkshellNoAccess);
+            denied();
         }
         else if (this->unknown03)
         {
@@ -84,7 +93,7 @@ void GP_CLI_COMMAND_SET_LSMSG::process(MapSession* PSession, CCharEntity* PChar)
                 return;
             }
 
-            PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::LinkshellNoAccess);
+            denied();
         }
     }
 }
