@@ -1,11 +1,24 @@
+import os
 import re
 import sys
 from collections import defaultdict
 
 
+def third_party_markers():
+    # CPM checks dependencies out under the build tree unless CPM_SOURCE_CACHE points
+    # somewhere else, which CI does so the sources survive between runs.
+    markers = ["_deps/"]
+    source_cache = os.environ.get("CPM_SOURCE_CACHE")
+    if source_cache:
+        markers.append(source_cache.replace(os.sep, "/").rstrip("/") + "/")
+
+    return markers
+
+
 def parse_tidy_log(log_content):
     warning_regex = re.compile(r"^(/.+?):(\d+):(\d+):\s+warning:\s+(.*)$")
     warnings_by_file = defaultdict(list)
+    markers = third_party_markers()
     lines = log_content.splitlines()
 
     i = 0
@@ -19,8 +32,7 @@ def parse_tidy_log(log_content):
 
         file_path, line_num, col_num, message = match.groups()
 
-        # Filter '_deps' output
-        if "_deps/" in file_path:
+        if any(marker in file_path for marker in markers):
             i += 1
             continue
 
