@@ -154,12 +154,15 @@ auto GP_CLI_COMMAND_ITEM_MOVE::validate(MapSession* PSession, const CCharEntity*
         .blockedBy({ BlockedState::InEvent })
         .oneOf("Category1", static_cast<CONTAINER_ID>(this->Category1), validContainersForChar)
         .oneOf("Category2", static_cast<CONTAINER_ID>(this->Category2), validContainersForChar)
-        .mustEqual(isValidMovement(PChar,
-                                   static_cast<CONTAINER_ID>(this->Category1),
-                                   static_cast<CONTAINER_ID>(this->Category2),
-                                   this->ItemIndex1),
-                   true,
-                   "Illegal movement");
+        .custom([&](PacketValidator& v)
+                {
+                    v.mustEqual(isValidMovement(PChar,
+                                                static_cast<CONTAINER_ID>(this->Category1),
+                                                static_cast<CONTAINER_ID>(this->Category2),
+                                                this->ItemIndex1),
+                                true,
+                                "Illegal movement");
+                });
 }
 
 void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar) const

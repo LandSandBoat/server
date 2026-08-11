@@ -63,11 +63,14 @@ namespace ipc
 // Helpers
 //
 
+// Force fixed length integers. Alpaca varint decoders corrupts values above 2^28.
+inline constexpr auto kSerializeOptions = alpaca::options::fixed_length_encoding;
+
 template <typename T>
 auto toBytes(const T& object) -> std::vector<uint8>
 {
     auto bytes = std::vector<uint8>();
-    alpaca::serialize(object, bytes);
+    alpaca::serialize<kSerializeOptions>(object, bytes);
     return bytes;
 }
 
@@ -75,7 +78,7 @@ template <typename T>
 auto toBytesWithHeader(const T& object) -> std::vector<uint8>
 {
     auto       bytes         = std::vector<uint8>();
-    const auto bytes_written = alpaca::serialize(object, bytes);
+    const auto bytes_written = alpaca::serialize<kSerializeOptions>(object, bytes);
 
     const auto type = static_cast<uint8>(EnumTypeV<T>);
 
@@ -95,7 +98,7 @@ auto fromBytes(const std::span<const uint8> message) -> Maybe<T>
     }
 
     auto       ec     = std::error_code{};
-    const auto object = alpaca::deserialize<T>(message, ec);
+    const auto object = alpaca::deserialize<kSerializeOptions, T>(message, ec);
     if (ec)
     {
         return std::nullopt;
@@ -121,7 +124,7 @@ auto fromBytesWithHeader(const std::span<const uint8> message) -> Maybe<T>
     const auto bytes = std::span(message.data() + 1, message.size() - 1);
 
     auto       ec     = std::error_code{};
-    const auto object = alpaca::deserialize<T>(bytes, ec);
+    const auto object = alpaca::deserialize<kSerializeOptions, T>(bytes, ec);
     if (ec)
     {
         return std::nullopt;

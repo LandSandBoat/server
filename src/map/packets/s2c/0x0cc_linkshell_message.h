@@ -48,5 +48,18 @@ public:
         uint8_t  encodedLsName[16];   // PS2: encodedLsName
     };
 
-    GP_SERV_COMMAND_LINKSHELL_MESSAGE(const std::string& poster, const std::string& message, const std::string& lsname, uint32_t posttime, LinkshellSlot slot);
+    enum class Result : uint8_t
+    {
+        LevelChanged,
+        Denied,
+    };
+
+    enum class MessageOp : uint8_t
+    {
+        Load,
+        Post,
+    };
+
+    GP_SERV_COMMAND_LINKSHELL_MESSAGE(const std::string& poster, const std::string& message, const std::string& lsname, uint32_t posttime, LinkshellSlot slot, GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL writeLevel, MessageOp op);
+    GP_SERV_COMMAND_LINKSHELL_MESSAGE(Result result, const std::string& lsname, LinkshellSlot slot, GP_CLI_COMMAND_SET_LSMSG_WRITELEVEL writeLevel);
 };
