@@ -31,3 +31,16 @@ if(ENABLE_CLANG_TIDY)
   #unset(clang_tidy_sha1)
 
 endif(ENABLE_CLANG_TIDY)
+
+# Third-party code pulled in after this file is included inherits CMAKE_CXX_CLANG_TIDY, and
+# clang-tidy then analyses it against the dependency's own .clang-tidy instead of ours.
+# Bracket those CPMAddPackage/add_subdirectory calls with these.
+macro(suspend_clang_tidy)
+  set(SUSPENDED_CXX_CLANG_TIDY "${CMAKE_CXX_CLANG_TIDY}")
+  unset(CMAKE_CXX_CLANG_TIDY)
+endmacro()
+
+macro(resume_clang_tidy)
+  set(CMAKE_CXX_CLANG_TIDY "${SUSPENDED_CXX_CLANG_TIDY}")
+  unset(SUSPENDED_CXX_CLANG_TIDY)
+endmacro()
