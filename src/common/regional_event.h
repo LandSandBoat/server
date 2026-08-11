@@ -56,6 +56,14 @@ enum ConquestMessage : uint8
 
     // Influence point update from any zone to world.
     M2W_AddInfluencePoints,
+
+    // Impacts beastmen influence.
+    // Called when a player with Signet defeats mobs in a region.
+    M2W_AddMobKills,
+
+    // Impacts beastmen influence.
+    // Called when a player homepoints.
+    M2W_AddPlayerHomepoints,
 };
 
 DECLARE_FORMAT_AS_UNDERLYING(ConquestMessage);
@@ -79,6 +87,13 @@ struct ConquestAddInfluencePoints
     int32  points;
     uint32 nation;
     uint8  region;
+};
+
+// M2W_AddMobKills, M2W_AddPlayerHomepoints
+struct ConquestAddCounter
+{
+    int32 count;
+    uint8 region;
 };
 
 //

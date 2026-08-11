@@ -53,7 +53,8 @@ void HandleMessage(ConquestMessage type, const std::span<const uint8> data);
 
 void UpdateConquestGM(ConquestUpdate type);                  // Update conquest system by GM (modify in the DB and use @updateconquest)
 void GainInfluencePoints(CCharEntity* PChar, uint32 points); // Gain influence for player's nation (+1)
-void LoseInfluencePoints(CCharEntity* PChar);                // Lose influence for player's nation and gain for beastmen influence
+void AddMobKills(int32 count, REGION_TYPE region);           // Impacts Beastmen influence. Add to mob kill counter.
+void AddPlayerHomepoints(int32 count, REGION_TYPE region);   // Impacts Beastmen influence. Add to homepoint counter.
 
 uint8 GetInfluenceGraphics(int32 san_inf, int32 bas_inf, int32 win_inf, int32 bst_inf); // Get number for graphics in conquest menu (arrows)
 uint8 GetInfluenceGraphics(REGION_TYPE RegionID);                                       // Get number for graphics in conquest menu (arrows)

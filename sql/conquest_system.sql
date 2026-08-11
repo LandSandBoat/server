@@ -23,7 +23,8 @@ CREATE TABLE `conquest_system` (
   `sandoria_influence` int(10) NOT NULL DEFAULT '0',
   `bastok_influence` int(10) NOT NULL DEFAULT '0',
   `windurst_influence` int(10) NOT NULL DEFAULT '0',
-  `beastmen_influence` int(10) NOT NULL DEFAULT '0',
+  `mob_kills` int(10) NOT NULL DEFAULT '0',
+  `player_homepoints` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`region_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -34,25 +35,25 @@ CREATE TABLE `conquest_system` (
 
 LOCK TABLES `conquest_system` WRITE;
 /*!40000 ALTER TABLE `conquest_system` DISABLE KEYS */;
-INSERT INTO `conquest_system` VALUES (0,5,5,0,0,0,0);
-INSERT INTO `conquest_system` VALUES (1,5,5,0,0,0,0);
-INSERT INTO `conquest_system` VALUES (2,5,5,0,0,0,0);
-INSERT INTO `conquest_system` VALUES (3,5,5,0,0,0,0);
-INSERT INTO `conquest_system` VALUES (4,5,5,0,0,0,0);
-INSERT INTO `conquest_system` VALUES (5,5,5,0,0,0,0);
-INSERT INTO `conquest_system` VALUES (6,5,5,0,0,0,0);
-INSERT INTO `conquest_system` VALUES (7,5,5,0,0,0,0);
-INSERT INTO `conquest_system` VALUES (8,5,5,0,0,0,0);
-INSERT INTO `conquest_system` VALUES (9,5,5,0,0,0,0);
-INSERT INTO `conquest_system` VALUES (10,5,5,0,0,0,0);
-INSERT INTO `conquest_system` VALUES (11,5,5,0,0,0,0);
-INSERT INTO `conquest_system` VALUES (12,5,5,0,0,0,0);
-INSERT INTO `conquest_system` VALUES (13,5,5,0,0,0,0);
-INSERT INTO `conquest_system` VALUES (14,5,5,0,0,0,0);
-INSERT INTO `conquest_system` VALUES (15,5,5,0,0,0,0);
-INSERT INTO `conquest_system` VALUES (16,5,5,0,0,0,0);
-INSERT INTO `conquest_system` VALUES (17,5,5,0,0,0,0);
-INSERT INTO `conquest_system` VALUES (18,5,5,0,0,0,0);
+INSERT INTO `conquest_system` VALUES (0,5,5,0,0,0,0,0);
+INSERT INTO `conquest_system` VALUES (1,5,5,0,0,0,0,0);
+INSERT INTO `conquest_system` VALUES (2,5,5,0,0,0,0,0);
+INSERT INTO `conquest_system` VALUES (3,5,5,0,0,0,0,0);
+INSERT INTO `conquest_system` VALUES (4,5,5,0,0,0,0,0);
+INSERT INTO `conquest_system` VALUES (5,5,5,0,0,0,0,0);
+INSERT INTO `conquest_system` VALUES (6,5,5,0,0,0,0,0);
+INSERT INTO `conquest_system` VALUES (7,5,5,0,0,0,0,0);
+INSERT INTO `conquest_system` VALUES (8,5,5,0,0,0,0,0);
+INSERT INTO `conquest_system` VALUES (9,5,5,0,0,0,0,0);
+INSERT INTO `conquest_system` VALUES (10,5,5,0,0,0,0,0);
+INSERT INTO `conquest_system` VALUES (11,5,5,0,0,0,0,0);
+INSERT INTO `conquest_system` VALUES (12,5,5,0,0,0,0,0);
+INSERT INTO `conquest_system` VALUES (13,5,5,0,0,0,0,0);
+INSERT INTO `conquest_system` VALUES (14,5,5,0,0,0,0,0);
+INSERT INTO `conquest_system` VALUES (15,5,5,0,0,0,0,0);
+INSERT INTO `conquest_system` VALUES (16,5,5,0,0,0,0,0);
+INSERT INTO `conquest_system` VALUES (17,5,5,0,0,0,0,0);
+INSERT INTO `conquest_system` VALUES (18,5,5,0,0,0,0,0);
 /*!40000 ALTER TABLE `conquest_system` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
