@@ -1055,8 +1055,8 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     if (!getMobMod(xi::MobMod::NoDrops) && validZone && charutils::CheckMob(m_HiPCLvl, this) > EMobDifficulty::TooWeak && getMobMod(xi::MobMod::ExpBonus) > -100)
     {
         // Check for seal drops
-        // Only one type of seal can drop per mob
-        if (xirand::GetRandomNumber(100) < 20 && CanAddSpecial(LootRecastID::Seal))
+        // Only one type of seal can drop per mob, and notorious monsters never drop them
+        if ((m_Type & xi::MobType::Notorious) == xi::MobType::Normal && xirand::GetRandomNumber(100) < 20 && CanAddSpecial(LootRecastID::Seal))
         {
             const auto seals = GetEligibleSeals();
             AddItemToPool(seals[xirand::GetRandomNumber(seals.size())]);
