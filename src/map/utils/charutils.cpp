@@ -170,16 +170,6 @@ const std::set skillupIncreaseKeyItems = {
     KeyItem::RHAPSODY_IN_FUCHSIA
 };
 
-// Key items granting an increase to earned experience points
-const std::set experienceBonusKeyItems = {
-    KeyItem::RHAPSODY_IN_WHITE,
-    KeyItem::RHAPSODY_IN_UMBER,
-    KeyItem::RHAPSODY_IN_AZURE,
-    KeyItem::RHAPSODY_IN_CRIMSON,
-    KeyItem::RHAPSODY_IN_EMERALD,
-    KeyItem::RHAPSODY_IN_MAUVE,
-};
-
 // Key items granting an increase to earned capacity points
 const std::set capacityBonusKeyItems = {
     KeyItem::RHAPSODY_IN_FUCHSIA,
@@ -4614,24 +4604,14 @@ void LoadExpTable()
 {
     TracyZoneScoped;
 
-    auto rset = db::preparedStmt("SELECT r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15,r16,r17,r18,r19,r20 "
-                                 "FROM exp_table "
-                                 "ORDER BY level ASC "
-                                 "LIMIT ?",
-                                 ExpTableRowCount);
-
-    uint32 x = 0;
-    FOR_DB_MULTIPLE_RESULTS(rset)
+    // Base experience by level difference, from scripts/globals/experience_points.lua.
+    if (const auto baseTable = luautils::SetupExperiencePoints())
     {
-        for (uint32 y = 0; y < 20; ++y)
-        {
-            g_ExpTable[x][y] = rset->get<uint16>(y);
-        }
-
-        ++x;
+        g_ExpTable = *baseTable;
     }
 
-    rset = db::preparedStmt("SELECT level, exp FROM exp_base LIMIT 100");
+    // Load the TNL (To Next Level) experience values from the database.
+    auto rset = db::preparedStmt("SELECT level, exp FROM exp_base LIMIT 100");
     FOR_DB_MULTIPLE_RESULTS(rset)
     {
         if (const auto level = rset->get<uint8>("level") - 1; level < 100)
@@ -4640,20 +4620,20 @@ void LoadExpTable()
         }
     }
 
-    // run the function to fetch the /check difficulty curve.
+    // Load the /check experience difficulty curve
     auto expDifficultyCurveFunction = lua["xi"]["expDifficultyCurve"]["loadExpDifficultyCurve"];
 
     if (!expDifficultyCurveFunction.valid())
     {
-        ShowCritical("xi.expDifficultyCurve.loadExpDifficultyCurve function is not valid. Terminating.");
-        std::terminate();
+        ShowError("xi.expDifficultyCurve.loadExpDifficultyCurve function is not valid.");
     }
-
-    auto res = expDifficultyCurveFunction();
-    if (!res.valid())
+    else
     {
-        ShowCritical("xi.expDifficultyCurve.loadExpDifficultyCurve function failed to execute. Terminating.");
-        std::terminate();
+        auto res = expDifficultyCurveFunction();
+        if (!res.valid())
+        {
+            ShowError("xi.expDifficultyCurve.loadExpDifficultyCurve function failed to execute.");
+        }
     }
 }
 
@@ -4857,62 +4837,6 @@ void DistributeItem(CCharEntity* PChar, CBaseEntity* PEntity, uint16 itemid, uin
     }
 }
 
-double GetPlayerShareMultiplier(uint16 membersInZone, bool regionBuff)
-{
-    if (settings::get<bool>("main.DISABLE_PARTY_EXP_PENALTY"))
-    {
-        return 1.00;
-    }
-
-    // Alliance share
-    if (membersInZone > 6)
-    {
-        return 1.8f / membersInZone;
-    }
-
-    // Party share
-    if (regionBuff)
-    {
-        switch (membersInZone)
-        {
-            case 1:
-                return 1.00;
-            case 2:
-                return 0.75;
-            case 3:
-                return 0.55;
-            case 4:
-                return 0.45;
-            case 5:
-                return 0.39;
-            case 6:
-                return 0.35;
-            default:
-                return 1.8 / membersInZone;
-        }
-    }
-    else
-    {
-        switch (membersInZone)
-        {
-            case 1:
-                return 1.00;
-            case 2:
-                return 0.60;
-            case 3:
-                return 0.45;
-            case 4:
-                return 0.40;
-            case 5:
-                return 0.37;
-            case 6:
-                return 0.35;
-            default:
-                return 1.8 / membersInZone;
-        }
-    }
-}
-
 /************************************************************************
  *                                                                       *
  *  Allocate experience points                                           *
@@ -4989,333 +4913,56 @@ void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
                 return;
             }
 
-            bool chainactive = false;
-
             const int16 moblevel    = PMob->GetMLevel() + PMob->getMod(xi::Mod::EXP_LVL_MOD);
             const uint8 memberlevel = GetExpLevel(PMember);
 
             EMobDifficulty mobCheck = CheckMob(maxlevel, PMob);
-            float          exp      = static_cast<float>(GetBaseExp(maxlevel, moblevel));
 
-            if (mobCheck > EMobDifficulty::TooWeak)
+            if (mobCheck == EMobDifficulty::TooWeak || PMember->getZone() != PMob->getZone())
             {
-                if (PMember->getZone() == PMob->getZone())
+                return;
+            }
+
+            if (distance(PMember->loc.p, PMob->loc.p) > 100)
+            {
+                PMember->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PMember, PMember, 0, 0, MsgBasic::TooFarForExp);
+                return;
+            }
+
+            const bool chainActive = PMember->expChain.chainTime > timer::now() || PMember->expChain.chainTime == timer::time_point::min();
+
+            luautils::CalcExpInput input{};
+            input.baseExp            = GetBaseExp(maxlevel, moblevel);
+            input.mobDifficulty      = static_cast<uint8>(mobCheck);
+            input.memberLevel        = memberlevel;
+            input.highestMemberLevel = maxlevel;
+            input.partySize          = pcinzone;
+            input.memberTNL          = GetExpNEXTLevel(memberlevel);
+            input.highestMemberTNL   = GetExpNEXTLevel(maxlevel);
+            input.regionId           = static_cast<uint8>(region);
+            input.chainNumber        = PMember->expChain.chainNumber;
+            input.chainActive        = chainActive;
+
+            const auto calcExpResult = luautils::CalculateExperiencePoints(PMember, PMob, input);
+            if (!calcExpResult)
+            {
+                return;
+            }
+
+            const uint32 exp         = calcExpResult->exp;
+            const bool   wasChained  = calcExpResult->wasChained;
+            const uint16 chainWindow = calcExpResult->chainWindow;
+
+            if (chainWindow > 0)
+            {
+                PMember->expChain.chainTime = timer::now() + std::chrono::seconds(chainWindow);
+                if (!wasChained)
                 {
-                    if (settings::get<bool>("map.EXP_PARTY_GAP_PENALTIES"))
-                    {
-                        uint8 partyGapNoExp = settings::get<uint8>("map.EXP_PARTY_GAP_NO_EXP");
-
-                        if (partyGapNoExp > 0 && maxlevel >= (memberlevel + partyGapNoExp))
-                        {
-                            exp = 0;
-                        }
-                        else if (maxlevel > 50 || maxlevel > (memberlevel + 7))
-                        {
-                            exp *= memberlevel / (float)maxlevel;
-                        }
-                        else
-                        {
-                            exp *= GetExpNEXTLevel(memberlevel) / (float)GetExpNEXTLevel(maxlevel);
-                        }
-                    }
-
-                    bool isInSignetZone =
-                        PMember->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Signet) &&
-                        region >= REGION_TYPE::RONFAURE &&
-                        region <= REGION_TYPE::JEUNO;
-
-                    bool isInSanctionZone =
-                        PMember->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Sanction) &&
-                        region >= REGION_TYPE::WEST_AHT_URHGAN &&
-                        region <= REGION_TYPE::ALZADAAL;
-
-                    exp *= GetPlayerShareMultiplier(pcinzone, isInSignetZone || isInSanctionZone);
-
-                    if (PMob->getMobMod(xi::MobMod::ExpBonus))
-                    {
-                        const float monsterbonus = 1.0f + PMob->getMobMod(xi::MobMod::ExpBonus) / 100.0f;
-                        exp *= monsterbonus;
-                    }
-
-                    // Per monster caps pulled from: https://ffxiclopedia.fandom.com/wiki/Experience_Points
-                    if (memberlevel <= 50)
-                    {
-                        exp = std::fmin(exp, 400.0f);
-                    }
-                    else if (memberlevel <= 60)
-                    {
-                        exp = std::fmin(exp, 500.0f);
-                    }
-                    else
-                    {
-                        exp = std::fmin(exp, 600.0f);
-                    }
-
-                    if (mobCheck > EMobDifficulty::DecentChallenge)
-                    {
-                        if (PMember->expChain.chainTime > timer::now() || PMember->expChain.chainTime == timer::time_point::min())
-                        {
-                            chainactive = true;
-                            switch (PMember->expChain.chainNumber)
-                            {
-                                case 0:
-                                    exp *= 1.0f;
-                                    break;
-                                case 1:
-                                    exp *= 1.2f;
-                                    break;
-                                case 2:
-                                    exp *= 1.25f;
-                                    break;
-                                case 3:
-                                    exp *= 1.3f;
-                                    break;
-                                case 4:
-                                    exp *= 1.4f;
-                                    break;
-                                case 5:
-                                    exp *= 1.5f;
-                                    break;
-                                default:
-                                    exp *= 1.55f;
-                                    break;
-                            }
-                        }
-                        else
-                        {
-                            if (memberlevel <= 10)
-                            {
-                                PMember->expChain.chainTime = timer::now() + 50s;
-                            }
-                            else if (memberlevel <= 20)
-                            {
-                                PMember->expChain.chainTime = timer::now() + 100s;
-                            }
-                            else if (memberlevel <= 30)
-                            {
-                                PMember->expChain.chainTime = timer::now() + 150s;
-                            }
-                            else if (memberlevel <= 40)
-                            {
-                                PMember->expChain.chainTime = timer::now() + 200s;
-                            }
-                            else if (memberlevel <= 50)
-                            {
-                                PMember->expChain.chainTime = timer::now() + 250s;
-                            }
-                            else if (memberlevel <= 60)
-                            {
-                                PMember->expChain.chainTime = timer::now() + 300s;
-                            }
-                            else
-                            {
-                                PMember->expChain.chainTime = timer::now() + 360s;
-                            }
-                            PMember->expChain.chainNumber = 1;
-                        }
-
-                        if (chainactive && memberlevel <= 10)
-                        {
-                            switch (PMember->expChain.chainNumber)
-                            {
-                                case 0:
-                                    PMember->expChain.chainTime = timer::now() + 50s;
-                                    break;
-                                case 1:
-                                    PMember->expChain.chainTime = timer::now() + 40s;
-                                    break;
-                                case 2:
-                                    PMember->expChain.chainTime = timer::now() + 30s;
-                                    break;
-                                case 3:
-                                    PMember->expChain.chainTime = timer::now() + 20s;
-                                    break;
-                                case 4:
-                                    PMember->expChain.chainTime = timer::now() + 10s;
-                                    break;
-                                case 5:
-                                    PMember->expChain.chainTime = timer::now() + 6s;
-                                    break;
-                                default:
-                                    PMember->expChain.chainTime = timer::now() + 2s;
-                                    break;
-                            }
-                        }
-                        else if (chainactive && memberlevel <= 20)
-                        {
-                            switch (PMember->expChain.chainNumber)
-                            {
-                                case 0:
-                                    PMember->expChain.chainTime = timer::now() + 100s;
-                                    break;
-                                case 1:
-                                    PMember->expChain.chainTime = timer::now() + 80s;
-                                    break;
-                                case 2:
-                                    PMember->expChain.chainTime = timer::now() + 60s;
-                                    break;
-                                case 3:
-                                    PMember->expChain.chainTime = timer::now() + 40s;
-                                    break;
-                                case 4:
-                                    PMember->expChain.chainTime = timer::now() + 20s;
-                                    break;
-                                case 5:
-                                    PMember->expChain.chainTime = timer::now() + 8s;
-                                    break;
-                                default:
-                                    PMember->expChain.chainTime = timer::now() + 4s;
-                                    break;
-                            }
-                        }
-                        else if (chainactive && memberlevel <= 30)
-                        {
-                            switch (PMember->expChain.chainNumber)
-                            {
-                                case 0:
-                                    PMember->expChain.chainTime = timer::now() + 150s;
-                                    break;
-                                case 1:
-                                    PMember->expChain.chainTime = timer::now() + 120s;
-                                    break;
-                                case 2:
-                                    PMember->expChain.chainTime = timer::now() + 90s;
-                                    break;
-                                case 3:
-                                    PMember->expChain.chainTime = timer::now() + 60s;
-                                    break;
-                                case 4:
-                                    PMember->expChain.chainTime = timer::now() + 30s;
-                                    break;
-                                case 5:
-                                    PMember->expChain.chainTime = timer::now() + 10s;
-                                    break;
-                                default:
-                                    PMember->expChain.chainTime = timer::now() + 5s;
-                                    break;
-                            }
-                        }
-                        else if (chainactive && memberlevel <= 40)
-                        {
-                            switch (PMember->expChain.chainNumber)
-                            {
-                                case 0:
-                                    PMember->expChain.chainTime = timer::now() + 200s;
-                                    break;
-                                case 1:
-                                    PMember->expChain.chainTime = timer::now() + 160s;
-                                    break;
-                                case 2:
-                                    PMember->expChain.chainTime = timer::now() + 120s;
-                                    break;
-                                case 3:
-                                    PMember->expChain.chainTime = timer::now() + 80s;
-                                    break;
-                                case 4:
-                                    PMember->expChain.chainTime = timer::now() + 40s;
-                                    break;
-                                case 5:
-                                    PMember->expChain.chainTime = timer::now() + 40s;
-                                    break;
-                                default:
-                                    PMember->expChain.chainTime = timer::now() + 30s;
-                                    break;
-                            }
-                        }
-                        else if (chainactive && memberlevel <= 50)
-                        {
-                            switch (PMember->expChain.chainNumber)
-                            {
-                                case 0:
-                                    PMember->expChain.chainTime = timer::now() + 250s;
-                                    break;
-                                case 1:
-                                    PMember->expChain.chainTime = timer::now() + 200s;
-                                    break;
-                                case 2:
-                                    PMember->expChain.chainTime = timer::now() + 150s;
-                                    break;
-                                case 3:
-                                    PMember->expChain.chainTime = timer::now() + 100s;
-                                    break;
-                                case 4:
-                                    PMember->expChain.chainTime = timer::now() + 50s;
-                                    break;
-                                case 5:
-                                    PMember->expChain.chainTime = timer::now() + 50s;
-                                    break;
-                                default:
-                                    PMember->expChain.chainTime = timer::now() + 50s;
-                                    break;
-                            }
-                        }
-                        else if (chainactive && memberlevel <= 60)
-                        {
-                            switch (PMember->expChain.chainNumber)
-                            {
-                                case 0:
-                                    PMember->expChain.chainTime = timer::now() + 300s;
-                                    break;
-                                case 1:
-                                    PMember->expChain.chainTime = timer::now() + 240s;
-                                    break;
-                                case 2:
-                                    PMember->expChain.chainTime = timer::now() + 180s;
-                                    break;
-                                case 3:
-                                    PMember->expChain.chainTime = timer::now() + 120s;
-                                    break;
-                                case 4:
-                                    PMember->expChain.chainTime = timer::now() + 90s;
-                                    break;
-                                case 5:
-                                    PMember->expChain.chainTime = timer::now() + 60s;
-                                    break;
-                                default:
-                                    PMember->expChain.chainTime = timer::now() + 60s;
-                                    break;
-                            }
-                        }
-                        else if (chainactive)
-                        {
-                            switch (PMember->expChain.chainNumber)
-                            {
-                                case 0:
-                                    PMember->expChain.chainTime = timer::now() + 360s;
-                                    break;
-                                case 1:
-                                    PMember->expChain.chainTime = timer::now() + 300s;
-                                    break;
-                                case 2:
-                                    PMember->expChain.chainTime = timer::now() + 240s;
-                                    break;
-                                case 3:
-                                    PMember->expChain.chainTime = timer::now() + 165s;
-                                    break;
-                                case 4:
-                                    PMember->expChain.chainTime = timer::now() + 105s;
-                                    break;
-                                case 5:
-                                    PMember->expChain.chainTime = timer::now() + 60s;
-                                    break;
-                                default:
-                                    PMember->expChain.chainTime = timer::now() + 60s;
-                                    break;
-                            }
-                        }
-                    }
-                    // pet or companion exp penalty needs to be added here
-                    if (distance(PMember->loc.p, PMob->loc.p) > 100)
-                    {
-                        PMember->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PMember, PMember, 0, 0, MsgBasic::TooFarForExp);
-                        return;
-                    }
-
-                    exp = charutils::AddExpBonus(PMember, exp);
-
-                    charutils::AddExperiencePoints(false, true, false, PMember, PMob, (uint32)exp, mobCheck, chainactive);
+                    PMember->expChain.chainNumber = 1;
                 }
             }
+
+            charutils::AddExperiencePoints(false, true, false, PMember, PMob, exp, mobCheck, wasChained);
         });
     // clang-format on
 }
@@ -6842,48 +6489,6 @@ void SaveLastLogout(const CCharEntity* PChar)
                      "SET last_logout = CURRENT_TIMESTAMP "
                      "WHERE charid = ?",
                      PChar->id);
-}
-
-float AddExpBonus(CCharEntity* PChar, float exp)
-{
-    TracyZoneScoped;
-
-    int32 bonus = 0;
-    if (PChar->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Dedication) && PChar->loc.zone->GetRegionID() != REGION_TYPE::ABYSSEA)
-    {
-        CStatusEffect* dedication = PChar->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Dedication);
-        int16          percentage = dedication->GetPower();
-        int16          cap        = dedication->GetSubPower();
-        bonus += std::clamp<int32>((int32)((exp * percentage) / 100), 0, cap);
-        dedication->SetSubPower(cap -= bonus);
-
-        if (cap <= 0)
-        {
-            PChar->StatusEffectContainer->DelStatusEffect(xi::StatusEffect::Dedication);
-        }
-    }
-
-    int16 rovBonus = 0;
-    for (const auto experienceBonusKeyItem : experienceBonusKeyItems)
-    {
-        if (hasKeyItem(PChar, experienceBonusKeyItem))
-        {
-            rovBonus += 30;
-        }
-    }
-
-    bonus += (int32)(exp * ((PChar->getMod(xi::Mod::EXP_BONUS) + rovBonus) / 100.0f));
-
-    if (bonus + (int32)exp < 0)
-    {
-        exp = 0;
-    }
-    else
-    {
-        exp = exp + bonus;
-    }
-
-    return exp;
 }
 
 auto hasMogLockerAccess(const CCharEntity* PChar) -> bool
