@@ -209,8 +209,6 @@ jobs:
       - name: Setup sccache
         if: ${{ env.SKIP_BUILD != 'true' }}
         uses: mozilla-actions/sccache-action@v0.0.10
-        with:
-          disable_annotations: ${{ !inputs.save_cache }}
 
       - name: Setup Python
         if: ${{ env.SKIP_BUILD != 'true' }}
@@ -257,16 +255,6 @@ jobs:
       - name: Build
         if: ${{ env.SKIP_BUILD != 'true' }}
         run: cmake --build build | tee build.log
-
-      - name: Compiler cache stats
-        if: ${{ !cancelled() && env.SKIP_BUILD != 'true' }}
-        run: |
-          {
-            echo "### sccache: ${{ inputs.runner }}, ${{ inputs.compiler }}${{ inputs.compiler_version }}, ${{ inputs.build_type }}"
-            echo '```'
-            sccache --show-stats || echo "(sccache unavailable)"
-            echo '```'
-          } >> $GITHUB_STEP_SUMMARY
 
       - name: Upload artifact
         if: ${{ inputs.upload_artifact && env.SKIP_BUILD != 'true' }}
