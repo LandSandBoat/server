@@ -30,21 +30,52 @@
 #include "packets/s2c/0x01d_item_same.h"
 #include "trade_container.h"
 #include "utils/charutils.h"
+#include "utils/zoneutils.h"
 
 namespace
 {
 
-const auto auditSale = [](Scheduler& scheduler, CCharEntity* PChar, uint32_t itemId, uint32_t quantity, uint32_t basePrice)
+const auto auditSale = [](Scheduler& scheduler, CCharEntity* PChar, uint32_t itemId, uint32_t quantity, uint32_t basePrice, int32_t appliedGil)
 {
     if (settings::get<bool>("map.AUDIT_PLAYER_VENDOR"))
     {
-        scheduler.postToWorkerThread(
-            [itemId, quantity, seller = PChar->id, sellerName = PChar->getName(), basePrice]()
-            {
-                auto totalPrice = quantity * basePrice;
+        const auto* PNpc = zoneutils::GetEntity(PChar->Container->getShopVendorId(), TYPE_NPC);
 
-                const auto query = "INSERT INTO audit_vendor(itemid, quantity, seller, seller_name, baseprice, totalprice, date) VALUES (?, ?, ?, ?, ?, ?, UNIX_TIMESTAMP())";
-                if (!db::preparedStmt(query, itemId, quantity, seller, sellerName, basePrice, totalPrice))
+        const auto npcName = [PNpc]() -> std::string
+        {
+            if (PNpc)
+            {
+                return PNpc->getName();
+            }
+
+            return {};
+        }();
+
+        scheduler.postToWorkerThread(
+            [itemId,
+             quantity,
+             seller     = PChar->id,
+             sellerName = PChar->getName(),
+             basePrice,
+             appliedGil,
+             npcId = PChar->Container->getShopVendorId(),
+             npcName,
+             zoneId = static_cast<uint16>(PChar->getZone())]()
+            {
+                const auto totalPrice = quantity * basePrice;
+
+                if (!db::preparedStmt("INSERT INTO audit_vendor(itemid, quantity, seller, seller_name, direction, npcid, npc_name, zoneid, baseprice, totalprice, applied_gil, date) "
+                                      "VALUES (?, ?, ?, ?, 'sell', ?, ?, ?, ?, ?, ?, UNIX_TIMESTAMP())",
+                                      itemId,
+                                      quantity,
+                                      seller,
+                                      sellerName,
+                                      npcId,
+                                      npcName,
+                                      zoneId,
+                                      basePrice,
+                                      totalPrice,
+                                      appliedGil))
                 {
                     ShowErrorFmt("Failed to log vendor sale (item: {}, quantity: {}, seller: {}, totalprice: {})", itemId, quantity, seller, totalPrice);
                 }
@@ -121,9 +152,14 @@ void GP_CLI_COMMAND_SHOP_SELL_SET::process(MapSession* PSession, CCharEntity* PC
         return;
     }
 
+    // Track the gil the player had before the transaction
+    const uint32 gilBefore = PChar->getStorage(LOC_INVENTORY)->GetItem(0)->getQuantity();
     charutils::UpdateItem(PChar, LOC_INVENTORY, 0, cost);
+
+    const auto appliedGil = static_cast<int32>(PChar->getStorage(LOC_INVENTORY)->GetItem(0)->getQuantity()) - static_cast<int32>(gilBefore);
     // TODO: Don't pass around Scheduler& through PSession
-    auditSale(*PSession->scheduler, PChar, itemId, quantity, unitPrice);
+    auditSale(*PSession->scheduler, PChar, itemId, quantity, unitPrice, appliedGil);
+
     ShowInfo("GP_CLI_COMMAND_SHOP_SELL_SET: Player '%s' sold %u of itemID %u (Total: %u gil) [to VENDOR] ", PChar->getName(), quantity, itemId, cost);
     PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(nullptr, itemId, quantity, MsgStd::Sell);
     PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);

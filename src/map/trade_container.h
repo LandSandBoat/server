@@ -51,6 +51,7 @@ public:
 
     uint8  getType() const;
     uint8  getShopFameArea() const;
+    uint32 getShopVendorId() const;
     uint8  getItemsCount() const;
     uint8  getSlotCount();     // Number of occupied cells
     uint32 getTotalQuantity(); // Total number of items (gil counts as 1)
@@ -66,6 +67,7 @@ public:
 
     void setType(uint8 type);
     void setShopFameArea(uint8 fameArea);
+    void setShopVendorId(uint32 vendorId);
     void setItemsCount(uint8 count);
     void setItem(uint8 slotID, CItem* item);
     void setRestriction(uint8 slotID, SlotRestriction restriction);
@@ -81,10 +83,11 @@ public:
     void Clean(); // we clean the container
 
 private:
-    uint8 m_type{};               // Container type (crystal type, store nation, etc.)
-    uint8 m_shopFameArea{ 0xFF }; // Fame area for shop price ranks
-    uint8 m_ItemsCount{};         // The number of items in the container (set by yourself)
-    uint8 m_exSize{};             // Can be used as a custom delineation point inside a container
+    uint8  m_type{};               // Container type (crystal type, store nation, etc.)
+    uint8  m_shopFameArea{ 0xFF }; // Fame area for shop price ranks
+    uint32 m_shopVendorId{};       // NPC the shop was opened from, for vendor auditing; 0 if unresolved
+    uint8  m_ItemsCount{};         // The number of items in the container (set by yourself)
+    uint8  m_exSize{};             // Can be used as a custom delineation point inside a container
 
     std::vector<CItem*>          m_PItem;
     std::vector<uint8>           m_slotID;
