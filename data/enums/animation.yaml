@@ -18,8 +18,16 @@ values:
   close_door:             9
   elevator_up:            10
   elevator_down:          11
+  animation_18:           18
+  animation_19:           19
+  animation_20:           20
+  animation_23:           23
+  animation_25:           25
+  animation_27:           27
+  animation_29:           29
   fishing_npc:            32
   healing:                33
+  animation_34:           34
   fishing_fish:           38
   fishing_caught:         39
   fishing_rod_break:      40
@@ -30,6 +38,8 @@ values:
   sit:                    47
   ranged:                 48
   fishing_start:          50
+  animation_53:           53
+  animation_55:           55
   new_fishing_start:      56
   new_fishing_fish:       57
   new_fishing_caught:     58
