@@ -7135,7 +7135,7 @@ INSERT INTO `mob_pools` VALUES (7055,'Sand_Tarantula_TVR','Sand_Tarantula',464,0
 INSERT INTO `mob_pools` VALUES (7056,'Hundredfaced_clone','Hundredfaced_Hapool_Ja',132,0x0600530600000000000000000000000000000000,13,13,1,480,100,0,1,1,1,2,0,32,0,159,4,0,7,0,0,176,176,3,12); -- Mamook (cont.) - Utsusemi clones of Hundredfaced_Hapool_Ja
 
 -- Grand Palace of Hu'Xzoi - Escort Quest for PM 8-2
-INSERT INTO `mob_pools` VALUES (7057,'Quasilumin','Quasilumin',320,0x0000150400000000000000000000000000000000,1,0,0,240,100,0,0,0,0,64,0,8,0,129,0,0,0,2,0,0,507,0,12);
+INSERT INTO `mob_pools` VALUES (7057,'Quasilumin','Quasilumin',320,0x0000150400000000000000000000000000000000,1,0,0,240,100,0,0,0,0,0,0,8,0,129,0,0,0,2,0,0,507,0,12);
 
 -- King Ranperres Tomb
 INSERT INTO `mob_pools` VALUES (7058,'Locus_Hati','Locus_Hati',409,0x00006C0100000000000000000000000000000000,1,1,3,240,100,0,1,0,0,0,0,0,261,131,0,0,0,0,0,143,143,2,28);
