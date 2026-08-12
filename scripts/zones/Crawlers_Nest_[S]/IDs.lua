@@ -8,16 +8,16 @@ zones[xi.zone.CRAWLERS_NEST_S] =
     text =
     {
         CAMPAIGN_RESULTS_TALLIED      = 437,  -- Campaign results tallied.
-        ITEM_CANNOT_BE_OBTAINED       = 6908, -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED                 = 6916, -- Obtained: <item>.
-        GIL_OBTAINED                  = 6917, -- Obtained <number> gil.
-        KEYITEM_OBTAINED              = 6919, -- Obtained key item: <keyitem>.
-        CARRIED_OVER_POINTS           = 7527, -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY       = 7528, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
-        LOGIN_NUMBER                  = 7529, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        MEMBERS_LEVELS_ARE_RESTRICTED = 7549, -- Your party is unable to participate because certain members' levels are restricted.
-        ITEM_DELIVERY_DIALOG          = 7700, -- Hello! Any packages to sendy-wend?
-        COMMON_SENSE_SURVIVAL         = 8665, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        ITEM_CANNOT_BE_OBTAINED       = 6909, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED                 = 6917, -- Obtained: <item>.
+        GIL_OBTAINED                  = 6918, -- Obtained <number> gil.
+        KEYITEM_OBTAINED              = 6920, -- Obtained key item: <keyitem>.
+        CARRIED_OVER_POINTS           = 7528, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY       = 7529, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
+        LOGIN_NUMBER                  = 7530, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED = 7550, -- Your party is unable to participate because certain members' levels are restricted.
+        ITEM_DELIVERY_DIALOG          = 7701, -- Hello! Any packages to sendy-wend?
+        COMMON_SENSE_SURVIVAL         = 8666, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
