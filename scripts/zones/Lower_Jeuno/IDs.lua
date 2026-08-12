@@ -55,6 +55,7 @@ zones[xi.zone.LOWER_JEUNO] =
         YIN_POCANAKHU_GET_LOST        = 8023,  -- Hey, what are you tryin' to pull? Get lost!
         MERTAIRE_RING                 = 8071,  -- So, what did you do with that ring? Maybe it's valuable. I'd ask a collector if I were you. Of course, he might just say it's worthless...
         CONQUEST                      = 8083,  -- You've earned conquest points!
+        PAY_FAURSEL                   = 9587,  -- You pay Faursel <number> gil!
         NO_KEY                        = 9933,  -- You do not have a usable key in your possession.
         RETRIEVE_DIALOG_ID            = 10213, -- You retrieve <item> from the porter moogle's care.
         WAYPOINT_EXAMINE              = 10374, -- An enigmatic contrivance hovers in silence...
