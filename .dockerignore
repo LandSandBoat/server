@@ -262,6 +262,3 @@ changed-files.txt
 clang_tidy_summary.md
 
 sql/backups/*.sql
-
-navmeshes/
-ximeshes/
