@@ -106,6 +106,57 @@ TEST_CASE("ecosystem tree: every species knows the family it sits under", "[data
     }
 }
 
+TEST_CASE("ecosystem tree: mods merge key by key down the tree", "[data][ecosystem]")
+{
+    const auto  parsed    = EcosystemsDataset::decode(R"(
+ecosystems:
+  amorph:
+    id: 1
+    attributes:
+      mods:
+        eva: 10
+        def: 5
+    families:
+      flan:
+        id: 3
+        attributes:
+          mob_mods:
+            roam_rate: 30
+        species:
+          gold_flan:
+            id: 6
+            attributes:
+              mods:
+                eva: 20
+              mob_mods:
+                roam_cool: 55
+)");
+    const auto& ecosystem = parsed.at(xi::Ecosystem::Amorph);
+    const auto& family    = ecosystem.Families.at(xi::Family::Flan);
+
+    xi::data::MobAttributesData resolved{};
+    xi::data::applyOverrides(resolved, ecosystem.MobAttributes);
+    xi::data::applyOverrides(resolved, family.MobAttributes);
+    xi::data::applyOverrides(resolved, family.Species.at(xi::Species::GoldFlan).MobAttributes);
+
+    CHECK(resolved.Mods.at(xi::Mod::EVA) == 20);            // overridden by the species
+    CHECK(resolved.Mods.at(xi::Mod::DEF) == 5);             // inherited from the ecosystem
+    CHECK(resolved.MobMods.at(xi::MobMod::RoamRate) == 30); // inherited from the family
+    CHECK(resolved.MobMods.at(xi::MobMod::RoamCool) == 55);
+}
+
+TEST_CASE("ecosystem tree: an unknown mod name is rejected", "[data][ecosystem]")
+{
+    CHECK_THROWS(EcosystemsDataset::decode(R"(
+ecosystems:
+  amorph:
+    id: 1
+    attributes:
+      mob_mods:
+        sight_angle: 60
+)"));
+}
+
 TEST_CASE("ecosystem tree: a partial stats block inherits its siblings", "[data][ecosystem]")
 {
     const auto  parsed = EcosystemsDataset::decode(R"(
