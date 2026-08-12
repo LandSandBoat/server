@@ -42,6 +42,7 @@
 #include "zone.h"
 
 #include <algorithm>
+#include <array>
 #include <cmath>
 
 // TODO: This largely overlaps with SYNTHESIS_RESULT and could be simplified.
@@ -888,6 +889,26 @@ void handleSynthFail(CCharEntity* PChar)
     PChar->pushPacket<GP_SERV_COMMAND_COMBINE_ANS>(PChar, SynthesisResult::Failed, CCraftState::Result{ MANGLED_MESS, 0 });
 }
 
+// Percent chance of a +0.1 through +0.5 skill up given one occurred, indexed by floor distance (recipe level - charSkill / 10).
+// Derived from retail skill-up logs. Each row sums to 100.
+static constexpr std::array<std::array<uint8, 5>, 15> skillUpAmountWeights = { {
+    { 85, 15, 0, 0, 0 },   // 0 (and over-cap)
+    { 85, 15, 0, 0, 0 },   // 1
+    { 85, 15, 0, 0, 0 },   // 2
+    { 80, 20, 0, 0, 0 },   // 3
+    { 80, 20, 0, 0, 0 },   // 4
+    { 70, 30, 0, 0, 0 },   // 5
+    { 70, 30, 0, 0, 0 },   // 6
+    { 60, 40, 0, 0, 0 },   // 7
+    { 60, 40, 0, 0, 0 },   // 8
+    { 50, 40, 10, 0, 0 },  // 9
+    { 40, 40, 20, 0, 0 },  // 10
+    { 40, 40, 20, 0, 0 },  // 11
+    { 15, 45, 30, 10, 0 }, // 12
+    { 10, 40, 25, 25, 0 }, // 13
+    { 0, 40, 30, 20, 10 }, // 14+
+} };
+
 // Used in: sendSynthDone
 void doSynthSkillUp(CCharEntity* PChar)
 {
@@ -946,7 +967,18 @@ void doSynthSkillUp(CCharEntity* PChar)
         }
         else
         {
-            skillUpChance = static_cast<double>(baseDiff) * (3.0 - std::log(1.2 + static_cast<double>(charSkill) / 100.0)) / 10.0; // Original skill up equation.
+            // No data supports skill up chance scaling with the recipe level gap, so era rates are flat.
+            // This data has been taken mostly from this: https://www.bluegartr.com/threads/57123-Before-you-ask-a-stupid-crafting-question-read-this!
+            // Took the low of both ranges so 60% skillup below 50 and 25% skillup above 50.
+            // The data is not perfect but it is unfortunately the best we have for old rates.
+            if (charSkill < 500) // 0-49.9
+            {
+                skillUpChance = 0.6;
+            }
+            else // 50.0 and above
+            {
+                skillUpChance = 0.25;
+            }
         }
 
         // Apply synthesis skill gain rate modifier before synthesis fail modifier
@@ -985,51 +1017,22 @@ void doSynthSkillUp(CCharEntity* PChar)
         //------------------------------
         // Section 4: Calculate Skill Up Amount
         //------------------------------
-        uint8 maxAllowedAmount = 1;
+        uint8 skillUpAmount = 1;
         if (charSkill < 600) // No skill ups over 0.1 happen over level 60.
         {
-            if (baseDiff >= 12)
-            {
-                maxAllowedAmount = 4;
-            }
-            else if (baseDiff >= 6)
-            {
-                maxAllowedAmount = 3;
-            }
-            else if (baseDiff >= 3)
-            {
-                maxAllowedAmount = 2;
-            }
-        }
+            const auto& weights          = skillUpAmountWeights[std::clamp<int16>(baseDiff, 0, 14)];
+            const auto  roll             = xirand::GetRandomNumber(100);
+            int32       cumulativeWeight = 0;
 
-        // TODO: More info needed for rates. This is using what was already here since the dark ages.
-        uint8 skillUpAmount = 1;
-        if (maxAllowedAmount > 1)
-        {
-            const uint8 cicles = static_cast<uint8>(maxAllowedAmount - 1);
-            double      chance = 0.0;
-
-            for (uint8 i = 1; i <= cicles; i++) // Cicle up to 3 times until cap (0.4 skill-up value) or break. The lower the maxAllowedAmount, the more likely it will break.
+            for (uint8 amount = 1; amount <= weights.size(); ++amount)
             {
-                chance = static_cast<double>(maxAllowedAmount) * 0.1;
-
-                if (chance < xirand::GetRandomNumber(1.0))
+                cumulativeWeight += weights[amount - 1];
+                if (roll < cumulativeWeight)
                 {
+                    skillUpAmount = amount;
                     break;
                 }
-
-                skillUpAmount++;
-                maxAllowedAmount--;
             }
-        }
-
-        // Settings skill amount multiplier
-        if (settings::get<uint8>("map.CRAFT_AMOUNT_MULTIPLIER") > 1)
-        {
-            // Scaled at int width: at uint8 width a large multiplier setting wraps before the cap below can catch it.
-            const int scaledAmount = skillUpAmount + skillUpAmount * settings::get<uint8>("map.CRAFT_AMOUNT_MULTIPLIER");
-
-            skillUpAmount = static_cast<uint8>(std::min(scaledAmount, 9));
         }
 
         // Cap skill gain amount if character hits the current cap
