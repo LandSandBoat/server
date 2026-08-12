@@ -405,6 +405,17 @@ void CAIContainer::resumeNextState()
     }
 }
 
+void CAIContainer::finishCurrentState(const timer::time_point tick)
+{
+    auto finished = std::move(m_currentState);
+    resumeNextState();
+
+    if (finished)
+    {
+        finished->Cleanup(tick);
+    }
+}
+
 auto CAIContainer::CanChangeState() const -> bool
 {
     return !GetCurrentState() || GetCurrentState()->CanChangeState();
@@ -505,19 +516,16 @@ auto CAIContainer::Tick(const timer::time_point tick) -> Task<void>
 
         CState* running = m_currentState.get();
 
-        if (running->DoUpdate(tick))
-        {
-            // A state can enter a successor during its own update (e.g. petskill
-            // re-engages), which becomes current. Only retire the state we actually ran.
-            if (running == m_currentState.get())
-            {
-                running->Cleanup(tick);
-                resumeNextState();
-            }
-        }
-        else // Not finished: leave it current and stop.
+        if (!running->DoUpdate(tick)) // Not finished: leave it current and stop.
         {
             break;
+        }
+
+        // A state can enter a successor during its own update (e.g. petskill
+        // re-engages), which becomes current. Only retire the state we actually ran.
+        if (running == m_currentState.get())
+        {
+            finishCurrentState(tick);
         }
     }
 
@@ -546,8 +554,7 @@ void CAIContainer::ClearStateStack()
 {
     while (m_currentState)
     {
-        m_currentState->Cleanup(timer::now());
-        resumeNextState();
+        finishCurrentState(timer::now());
     }
 }
 
@@ -555,8 +562,7 @@ void CAIContainer::InterruptStates()
 {
     while (m_currentState && m_currentState->CanInterrupt())
     {
-        m_currentState->Cleanup(timer::now());
-        resumeNextState();
+        finishCurrentState(timer::now());
     }
 }
 
@@ -650,8 +656,7 @@ void CAIContainer::CheckCompletedStates()
 {
     while (m_currentState && m_currentState->IsCompleted())
     {
-        m_currentState->Cleanup(timer::now());
-        resumeNextState();
+        finishCurrentState(timer::now());
     }
 }
 

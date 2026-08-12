@@ -153,6 +153,9 @@ private:
     // Finish with the current state and resume the one suspended beneath it (or go idle).
     void resumeNextState();
 
+    // swap in the state beneath before Cleanup, so anything Cleanup enters stacks on the resumed state instead of being popped right back off.
+    void finishCurrentState(timer::time_point tick);
+
     auto stateCount() const -> size_t;
 
     // The state the entity is currently in (null == idle). It lives here rather than on
