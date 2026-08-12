@@ -4066,6 +4066,9 @@ ecosystems:
                 agi: d
                 int: d
                 mnd: d
+              detects:
+                - hearing
+                - lowhp
               mob_mods:
                 roam_cool:  50
                 roam_turns: 2
