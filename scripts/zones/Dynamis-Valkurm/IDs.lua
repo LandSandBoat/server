@@ -7,22 +7,22 @@ zones[xi.zone.DYNAMIS_VALKURM] =
 {
     text =
     {
-        ITEM_CANNOT_BE_OBTAINED       = 6386, -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED                 = 6394, -- Obtained: <item>.
-        GIL_OBTAINED                  = 6395, -- Obtained <number> gil.
-        KEYITEM_OBTAINED              = 6397, -- Obtained key item: <keyitem>.
-        CARRIED_OVER_POINTS           = 7005, -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY       = 7006, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
-        LOGIN_NUMBER                  = 7007, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        MEMBERS_LEVELS_ARE_RESTRICTED = 7027, -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                 = 7173, -- Tallying conquest results...
-        DYNAMIS_TIME_BEGIN            = 7338, -- The sands of the <item> have begun to fall. You have <number> minutes (Earth time) remaining in Dynamis.
-        DYNAMIS_TIME_EXTEND           = 7339, -- Your stay in Dynamis has been extended by <number> minute[/s].
-        DYNAMIS_TIME_UPDATE_1         = 7340, -- You will be expelled from Dynamis in <number> [second/minute] (Earth time).
-        DYNAMIS_TIME_UPDATE_2         = 7341, -- You will be expelled from Dynamis in <number> [seconds/minutes] (Earth time).
-        DYNAMIS_TIME_EXPIRED          = 7343, -- The sands of the hourglass have emptied...
-        DYNAMIS_SUB_UNLOCKED          = 7348, -- Memories of skills long forgotten come flooding back to you...
-        OMINOUS_PRESENCE              = 7355, -- You feel an ominous presence, as if something might happen if you possessed <item>.
+        ITEM_CANNOT_BE_OBTAINED       = 6387, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED                 = 6395, -- Obtained: <item>.
+        GIL_OBTAINED                  = 6396, -- Obtained <number> gil.
+        KEYITEM_OBTAINED              = 6398, -- Obtained key item: <keyitem>.
+        CARRIED_OVER_POINTS           = 7006, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY       = 7007, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
+        LOGIN_NUMBER                  = 7008, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED = 7028, -- Your party is unable to participate because certain members' levels are restricted.
+        CONQUEST_BASE                 = 7174, -- Tallying conquest results...
+        DYNAMIS_TIME_BEGIN            = 7339, -- The sands of the <item> have begun to fall. You have <number> minutes (Earth time) remaining in Dynamis.
+        DYNAMIS_TIME_EXTEND           = 7340, -- Your stay in Dynamis has been extended by <number> minute[/s].
+        DYNAMIS_TIME_UPDATE_1         = 7341, -- You will be expelled from Dynamis in <number> [second/minute] (Earth time).
+        DYNAMIS_TIME_UPDATE_2         = 7342, -- You will be expelled from Dynamis in <number> [seconds/minutes] (Earth time).
+        DYNAMIS_TIME_EXPIRED          = 7344, -- The sands of the hourglass have emptied...
+        DYNAMIS_SUB_UNLOCKED          = 7349, -- Memories of skills long forgotten come flooding back to you...
+        OMINOUS_PRESENCE              = 7356, -- You feel an ominous presence, as if something might happen if you possessed <item>.
     },
     mob =
     {

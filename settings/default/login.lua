@@ -12,7 +12,7 @@ xi.settings = xi.settings or {}
 xi.settings.login =
 {
     -- Expected Client version (wrong version cannot log in)
-    CLIENT_VER = '30260703_1',
+    CLIENT_VER = '30260805_0',
 
     -- 0 - disabled (every version allowed)
     -- 1 - enabled - strict (only exact CLIENT_VER allowed)

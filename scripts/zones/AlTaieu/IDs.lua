@@ -7,25 +7,25 @@ zones[xi.zone.ALTAIEU] =
 {
     text =
     {
-        ITEM_CANNOT_BE_OBTAINED       = 6386, -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED                 = 6394, -- Obtained: <item>.
-        GIL_OBTAINED                  = 6395, -- Obtained <number> gil.
-        KEYITEM_OBTAINED              = 6397, -- Obtained key item: <keyitem>.
-        NOTHING_OUT_OF_ORDINARY       = 6408, -- There is nothing out of the ordinary here.
-        CARRIED_OVER_POINTS           = 7005, -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY       = 7006, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
-        LOGIN_NUMBER                  = 7007, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        MEMBERS_LEVELS_ARE_RESTRICTED = 7027, -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                 = 7173, -- Tallying conquest results...
-        QUASILUMIN_01                 = 7389, -- This is Al'Taieu. The celestial capital overflowing with the blessings of Altana.
-        IMPERVIOUS_FIELD_BLOCKS       = 7470, -- An impervious field of energy blocks your path...
-        NOTHING_OF_INTEREST           = 7499, -- There is nothing of interest here.
-        OMINOUS_SHADOW                = 7500, -- An ominous shadow falls over you...
-        AMULET_SHATTERED              = 7521, -- The <item> held by <name> has shattered...
-        LIGHT_STOLEN                  = 7522, -- The <item> was stolen by Nag'molada...
-        OBTAIN_BUT_STOLEN             = 7523, -- You obtain the <item>, only to have it stolen by Nag'molada...
-        RETURN_AMULET_TO_PRISHE       = 7547, -- You return the <item> to Prishe.
-        HOMEPOINT_SET                 = 7588, -- Home point set!
+        ITEM_CANNOT_BE_OBTAINED       = 6387, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED                 = 6395, -- Obtained: <item>.
+        GIL_OBTAINED                  = 6396, -- Obtained <number> gil.
+        KEYITEM_OBTAINED              = 6398, -- Obtained key item: <keyitem>.
+        NOTHING_OUT_OF_ORDINARY       = 6409, -- There is nothing out of the ordinary here.
+        CARRIED_OVER_POINTS           = 7006, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY       = 7007, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
+        LOGIN_NUMBER                  = 7008, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED = 7028, -- Your party is unable to participate because certain members' levels are restricted.
+        CONQUEST_BASE                 = 7174, -- Tallying conquest results...
+        QUASILUMIN_01                 = 7390, -- This is Al'Taieu. The celestial capital overflowing with the blessings of Altana.
+        IMPERVIOUS_FIELD_BLOCKS       = 7471, -- An impervious field of energy blocks your path...
+        NOTHING_OF_INTEREST           = 7500, -- There is nothing of interest here.
+        OMINOUS_SHADOW                = 7501, -- An ominous shadow falls over you...
+        AMULET_SHATTERED              = 7522, -- The <item> held by <name> has shattered...
+        LIGHT_STOLEN                  = 7523, -- The <item> was stolen by Nag'molada...
+        OBTAIN_BUT_STOLEN             = 7524, -- You obtain the <item>, only to have it stolen by Nag'molada...
+        RETURN_AMULET_TO_PRISHE       = 7548, -- You return the <item> to Prishe.
+        HOMEPOINT_SET                 = 7589, -- Home point set!
     },
     mob =
     {

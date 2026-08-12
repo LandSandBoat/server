@@ -631,6 +631,7 @@ INSERT INTO `item_equipment` VALUES (10849,'yagudo_belt',1,0,4194303,0,0,0,1024,
 INSERT INTO `item_equipment` VALUES (10850,'leech_belt',1,0,4194303,0,0,0,1024,0,0,0);
 INSERT INTO `item_equipment` VALUES (10851,'slime_belt',1,0,4194303,0,0,0,1024,0,0,0);
 INSERT INTO `item_equipment` VALUES (10852,'hecteyes_belt',1,0,4194303,0,0,0,1024,0,0,0);
+INSERT INTO `item_equipment` VALUES (10863,'abyssal_mask',1,0,4194303,0,0,0,16,0,0,0);  -- TODO: MId
 INSERT INTO `item_equipment` VALUES (10864,'ocelo._headpiece',95,0,2594082,300,0,0,16,0,0,0);
 INSERT INTO `item_equipment` VALUES (10865,'nefer_khat',95,0,1720860,301,0,0,16,0,0,0);
 INSERT INTO `item_equipment` VALUES (10866,'mekira-oto',95,0,10689,302,0,0,16,0,0,0);
@@ -12601,6 +12602,26 @@ INSERT INTO `item_equipment` VALUES (24304,'azimuth_turban',99,119,4194303,0,0,0
 INSERT INTO `item_equipment` VALUES (24305,'reciente_coselete',99,119,10433,0,0,0,32,0,0,0);               -- TODO: MId
 INSERT INTO `item_equipment` VALUES (24306,'mirce_wardecors',99,119,2594082,0,0,0,32,0,0,0);               -- TODO: MId
 INSERT INTO `item_equipment` VALUES (24307,'noble_redingote',99,119,1589788,0,0,0,32,0,0,0);               -- TODO: MId
+INSERT INTO `item_equipment` VALUES (24308,'ruwa_armet',99,119,10433,0,0,0,16,0,0,0);                      -- TODO: MId
+INSERT INTO `item_equipment` VALUES (24309,'ruwa_breastplate',99,119,10433,0,0,0,32,0,0,0);                -- TODO: MId
+INSERT INTO `item_equipment` VALUES (24310,'ruwa_gauntlets',99,119,10433,0,0,0,64,0,0,0);                  -- TODO: MId
+INSERT INTO `item_equipment` VALUES (24311,'ruwa_hose',99,119,10433,0,0,0,128,0,0,0);                      -- TODO: MId
+INSERT INTO `item_equipment` VALUES (24312,'ruwa_leggings',99,119,10433,0,0,0,256,0,0,0);                  -- TODO: MId
+INSERT INTO `item_equipment` VALUES (24318,'olorun_mask',99,119,2494754,0,0,0,16,0,0,0);                   -- TODO: MId
+INSERT INTO `item_equipment` VALUES (24319,'olorun_harness',99,119,2494754,0,0,0,32,0,0,0);                -- TODO: MId
+INSERT INTO `item_equipment` VALUES (24320,'olorun_gloves',99,119,2494754,0,0,0,64,0,0,0);                 -- TODO: MId
+INSERT INTO `item_equipment` VALUES (24321,'olorun_brais',99,119,2494754,0,0,0,128,0,0,0);                 -- TODO: MId
+INSERT INTO `item_equipment` VALUES (24322,'olorun_boots',99,119,2494754,0,0,0,256,0,0,0);                 -- TODO: MId
+INSERT INTO `item_equipment` VALUES (24328,'nzame_visor',99,119,66560,0,0,0,16,0,0,0);                     -- TODO: MId
+INSERT INTO `item_equipment` VALUES (24329,'nzame_jerkin',99,119,66560,0,0,0,32,0,0,0);                    -- TODO: MId
+INSERT INTO `item_equipment` VALUES (24330,'nzame_bracers',99,119,66560,0,0,0,64,0,0,0);                   -- TODO: MId
+INSERT INTO `item_equipment` VALUES (24331,'nzame_braccae',99,119,66560,0,0,0,128,0,0,0);                  -- TODO: MId
+INSERT INTO `item_equipment` VALUES (24332,'nzame_socks',99,119,66560,0,0,0,256,0,0,0);                    -- TODO: MId
+INSERT INTO `item_equipment` VALUES (24338,'egbesu_beret',99,119,1622556,0,0,0,16,0,0,0);                  -- TODO: MId
+INSERT INTO `item_equipment` VALUES (24339,'egbesu_frock',99,119,1622556,0,0,0,32,0,0,0);                  -- TODO: MId
+INSERT INTO `item_equipment` VALUES (24340,'egbesu_mitts',99,119,1622556,0,0,0,64,0,0,0);                  -- TODO: MId
+INSERT INTO `item_equipment` VALUES (24341,'egbesu_slops',99,119,1622556,0,0,0,128,0,0,0);                 -- TODO: MId
+INSERT INTO `item_equipment` VALUES (24342,'egbesu_clogs',99,119,1622556,0,0,0,256,0,0,0);                 -- TODO: MId
 INSERT INTO `item_equipment` VALUES (25414,'elite_royal_collar',99,0,4194303,0,0,0,512,0,0,0);
 INSERT INTO `item_equipment` VALUES (25415,'rep._plat._medal',99,0,4194303,0,0,0,512,0,0,0);
 INSERT INTO `item_equipment` VALUES (25416,'sibyl_scarf',99,0,4194303,0,0,0,512,0,0,0);
