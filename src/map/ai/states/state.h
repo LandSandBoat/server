@@ -86,6 +86,9 @@ public:
 
     auto DoUpdate(timer::time_point tick) -> bool;
 
+    // true while this state's own Update is running. Interrupting it there would free it under its own frame.
+    auto isExecuting() const -> bool;
+
     // try interrupt (on hit)
     virtual void TryInterrupt(CBattleEntity* PAttacker);
 
@@ -119,5 +122,6 @@ protected:
 private:
     EntityId          target_{};
     bool              m_completed{ false };
+    bool              m_executing{ false };
     timer::time_point m_entryTime{ timer::now() };
 };
