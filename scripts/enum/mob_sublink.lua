@@ -1,5 +1,5 @@
 -----------------------------------
--- Mob SUBLINK mobMod values. These are assigned in mob_species_mods.sql or in mob scripts.
+-- Mob SUBLINK mobMod values. These are assigned in data/ecosystems.yaml or in mob scripts.
 -- The SUBLINK mobMod enables mobs from different families to link with one another if they share a SUBLINK value and they have linking enabled.
 -----------------------------------
 xi = xi or {}

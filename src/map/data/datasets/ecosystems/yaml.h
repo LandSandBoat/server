@@ -24,7 +24,10 @@
 #include "common/cbasetypes.h"
 #include "data/enums/detects.h"
 #include "data/enums/element.h"
+#include "data/enums/mob_mod.h"
+#include "data/enums/mod.h"
 #include "data/enums/stat_rank.h"
+#include "data/yaml/enum_keyed_map.h"
 #include "data/yaml/enum_token.h"
 #include "data/yaml/schema_annotations.h"
 
@@ -61,6 +64,8 @@ struct MobAttributes
     std::optional<std::vector<yaml::EnumToken<xi::Detects>>> detects;
     std::optional<uint8>                                     speed;
     std::optional<bool>                                      charmable;
+    std::optional<yaml::EnumKeyedMap<xi::Mod, int16>>        mods;
+    std::optional<yaml::EnumKeyedMap<xi::MobMod, int16>>     mob_mods;
 };
 
 struct Species
@@ -137,6 +142,8 @@ struct glz::json_schema<xi::data::datasets::ecosystems::wire::MobAttributes>
         .maximum     = 255L,
     };
     glz::schema charmable{ .description = "Whether the entity can be charmed. Omitted values inherit; defaults to false." };
+    glz::schema mods{ .description = "Modifiers keyed by mod.yaml name, added on top of the entity's own. Merged key by key with the parent's." };
+    glz::schema mob_mods{ .description = "Mob modifiers keyed by mob_mod.yaml name. Merged key by key with the parent's." };
 };
 
 template <>

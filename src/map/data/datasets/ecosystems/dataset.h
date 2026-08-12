@@ -27,6 +27,8 @@
 #include "data/enums/ecosystem.h"
 #include "data/enums/element.h"
 #include "data/enums/family.h"
+#include "data/enums/mob_mod.h"
+#include "data/enums/mod.h"
 #include "data/enums/species.h"
 #include "data/enums/stat_rank.h"
 
@@ -53,11 +55,13 @@ struct StatRanksData
 
 struct MobAttributesData
 {
-    xi::Element   Element{ xi::Element::None };
-    StatRanksData Stats{};
-    xi::Detects   Detects{};
-    uint8         Speed{ 40 };
-    bool          Charmable{ false };
+    xi::Element                Element{ xi::Element::None };
+    StatRanksData              Stats{};
+    xi::Detects                Detects{};
+    uint8                      Speed{ 40 };
+    bool                       Charmable{ false };
+    HashMap<xi::Mod, int16>    Mods{};
+    HashMap<xi::MobMod, int16> MobMods{};
 };
 
 struct StatRanksOverrides
@@ -82,6 +86,10 @@ struct MobAttributesOverrides
     std::optional<xi::Detects>        Detects;
     std::optional<uint8>              Speed;
     std::optional<bool>               Charmable;
+
+    // Merged key by key, so a child only has to write the mods it changes.
+    HashMap<xi::Mod, int16>    Mods{};
+    HashMap<xi::MobMod, int16> MobMods{};
 };
 
 template <class T>
@@ -108,6 +116,16 @@ inline void applyOverrides(StatRanksData& target, const StatRanksOverrides& over
     applyOverride(target.Acc, overrides.Acc);
 }
 
+// Key-by-key merge: what the child writes wins, the rest of the parent's keys stay.
+template <class Map>
+void mergeKeyedValues(Map& target, const Map& overrides)
+{
+    for (const auto& [id, value] : overrides)
+    {
+        target.insert_or_assign(id, value);
+    }
+}
+
 inline void applyOverrides(MobAttributesData& target, const MobAttributesOverrides& overrides)
 {
     applyOverride(target.Element, overrides.Element);
@@ -118,6 +136,9 @@ inline void applyOverrides(MobAttributesData& target, const MobAttributesOverrid
     {
         applyOverrides(target.Stats, *overrides.Stats);
     }
+
+    mergeKeyedValues(target.Mods, overrides.Mods);
+    mergeKeyedValues(target.MobMods, overrides.MobMods);
 }
 
 struct SpeciesData

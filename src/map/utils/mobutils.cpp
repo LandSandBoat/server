@@ -43,7 +43,6 @@
 namespace mobutils
 {
 
-ModsMap_t mobSpeciesModsList;
 ModsMap_t mobPoolModsList;
 ModsMap_t mobSpawnModsList;
 
@@ -1517,39 +1516,20 @@ void InitializeMob(CMobEntity* PMob)
 }
 
 /*
-Loads up mob mods from mob_pool_mods and mob_species_mods table. This will allow you to change
+Loads up mob mods from the mob_pool_mods table. This will allow you to change
 a mobs regen rate, magic defense, triple attack rate from a table instead of hardcoding it.
 
 Usage:
 
-    Evil weapons have a magic defense boost. So pop that into mob_species_mods table.
     Goblin Diggers have a vermin killer trait, so find its poolid and put it in mod_pool_mods table.
+
+Species-wide mods live in data/ecosystems.yaml instead.
 */
 void LoadSqlModifiers()
 {
-    // load family mods
-    auto rset = db::preparedStmt("SELECT speciesid, modid, value, is_mob_mod "
-                                 "FROM mob_species_mods");
-    FOR_DB_MULTIPLE_RESULTS(rset)
-    {
-        ModsList_t* speciesMods = GetMobSpeciesMods(rset->get<uint16>("speciesid"), true);
-
-        auto* mod = new CModifier(rset->get<xi::Mod>("modid"));
-        mod->setModAmount(rset->get<int16>("value"));
-
-        if (rset->get<bool>("is_mob_mod"))
-        {
-            speciesMods->mobMods.emplace_back(mod);
-        }
-        else
-        {
-            speciesMods->mods.emplace_back(mod);
-        }
-    }
-
     // load pool mods
-    rset = db::preparedStmt("SELECT poolid, modid, value, is_mob_mod "
-                            "FROM mob_pool_mods");
+    auto rset = db::preparedStmt("SELECT poolid, modid, value, is_mob_mod "
+                                 "FROM mob_pool_mods");
     FOR_DB_MULTIPLE_RESULTS(rset)
     {
         const auto  pool     = rset->get<uint16>("poolid");
@@ -1592,25 +1572,6 @@ void Cleanup()
     }
     mobSpawnModsList.clear();
 
-    for (auto mobSpeciesMods : mobSpeciesModsList)
-    {
-        if (mobSpeciesMods.second)
-        {
-            for (auto mobMods : mobSpeciesMods.second->mobMods)
-            {
-                destroy(mobMods);
-            }
-
-            for (auto mods : mobSpeciesMods.second->mods)
-            {
-                destroy(mods);
-            }
-
-            destroy(mobSpeciesMods.second);
-        }
-    }
-    mobSpeciesModsList.clear();
-
     for (auto mobPoolMods : mobPoolModsList)
     {
         if (mobPoolMods.second)
@@ -1628,27 +1589,6 @@ void Cleanup()
         }
     }
     mobPoolModsList.clear();
-}
-
-ModsList_t* GetMobSpeciesMods(uint16 speciesId, bool create)
-{
-    if (mobSpeciesModsList[speciesId])
-    {
-        return mobSpeciesModsList[speciesId];
-    }
-
-    if (create)
-    {
-        // create new one
-        ModsList_t* mods = new ModsList_t;
-        mods->id         = speciesId;
-
-        mobSpeciesModsList[speciesId] = mods;
-
-        return mods;
-    }
-
-    return nullptr;
 }
 
 ModsList_t* GetMobPoolMods(uint32 poolId, bool create)
@@ -1696,20 +1636,16 @@ ModsList_t* GetMobSpawnMods(uint32 mobId, bool create)
 void AddSqlModifiers(CMobEntity* PMob)
 {
     // find my species mods
-    ModsList_t* PSpeciesMods = GetMobSpeciesMods(PMob->m_Species);
+    const auto& speciesAttributes = GetSpeciesData(PMob->m_Species).MobAttributes;
 
-    if (PSpeciesMods != nullptr)
+    for (const auto& [id, value] : speciesAttributes.Mods)
     {
-        // add them
-        for (auto& mod : PSpeciesMods->mods)
-        {
-            PMob->addModifier(mod->getModID(), mod->getModAmount());
-        }
-        // TODO: don't store mobmods in a CModifier
-        for (auto& mobMod : PSpeciesMods->mobMods)
-        {
-            PMob->setMobMod(static_cast<xi::MobMod>(mobMod->getModID()), mobMod->getModAmount());
-        }
+        PMob->addModifier(id, value);
+    }
+
+    for (const auto& [id, value] : speciesAttributes.MobMods)
+    {
+        PMob->setMobMod(id, value);
     }
 
     // find my pools mods

@@ -22,12 +22,15 @@
 #include "data/datasets/ecosystems/dataset.h"
 
 #include "data/datasets/ecosystems/yaml.h"
+#include "data/yaml/enum_keyed_map.h"
 #include "data/yaml/read.h"
 
 #include <fmt/format.h>
 
+#include <map>
 #include <optional>
 #include <stdexcept>
+#include <string>
 #include <utility>
 
 namespace xi::data::datasets::ecosystems
@@ -78,6 +81,8 @@ auto convertAttributes(const wire::MobAttributes& source) -> MobAttributesOverri
 
     attributes.Speed     = source.speed;
     attributes.Charmable = source.charmable;
+    attributes.Mods      = yaml::resolveKeys(source.mods);
+    attributes.MobMods   = yaml::resolveKeys(source.mob_mods);
     return attributes;
 }
 
