@@ -442,6 +442,14 @@ void CAIContainer::Reset()
     {
         m_stateStack.pop();
     }
+
+    // no Cleanup ran, so clear the engaged flags by hand. Internal_Engage skips anything that still looks engaged, leaving it with nothing to swing with.
+    if (auto* battle = dynamic_cast<CBattleEntity*>(PEntity); battle && battle->animation == xi::Animation::Attack)
+    {
+        battle->animation = xi::Animation::None;
+        battle->setBattleTarget(std::nullopt);
+        battle->updatemask |= UPDATE_HP;
+    }
 }
 
 auto CAIContainer::Tick(const timer::time_point tick) -> Task<void>
