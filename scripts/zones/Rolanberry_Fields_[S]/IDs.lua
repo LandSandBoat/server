@@ -72,6 +72,7 @@ zones[xi.zone.ROLANBERRY_FIELDS_S] =
     npc =
     {
         CAMPAIGN_NPC_OFFSET = GetFirstID('Hedioste_RK'), -- San, Bas, Win, Flag +4, CA
+        RAMPART_GATE_OFFSET = GetFirstID('_2j1'),
     },
 }
 

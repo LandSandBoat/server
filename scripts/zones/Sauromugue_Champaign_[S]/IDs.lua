@@ -71,6 +71,7 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S] =
     npc =
     {
         CAMPAIGN_NPC_OFFSET = GetFirstID('Alreage_RK'), -- San, Bas, Win, Flag +4, CA
+        RAMPART_GATE_OFFSET = GetFirstID('_2q2'),
     },
 }
 
