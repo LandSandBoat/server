@@ -398,34 +398,22 @@ void LoadAutomatonStats(CCharEntity* PMaster, CPetEntity* PPet, Pet_t* petStats,
         }
     }
 
-    // Share its magic skills to prevent needing separate spells or checks to see which skill to use
-    uint16 amaSkill            = tempSkills.automaton_magic + PMaster->getMod(xi::Mod::AUTO_MAGIC_SKILL);
-    tempSkills.automaton_magic = amaSkill;
-    tempSkills.healing         = amaSkill;
-    tempSkills.enhancing       = amaSkill;
-    tempSkills.enfeebling      = amaSkill;
-    tempSkills.elemental       = amaSkill;
-    tempSkills.dark            = amaSkill;
+    const auto meritbonus  = PMaster->PMeritPoints->GetMeritValue(xi::Merit::AutomatonSkills, PMaster);
+    const auto magicBonus  = PMaster->getMod(xi::Mod::AUTO_MAGIC_SKILL);
+    const auto meleeBonus  = PMaster->getMod(xi::Mod::AUTO_MELEE_SKILL);
+    const auto rangedBonus = PMaster->getMod(xi::Mod::AUTO_RANGED_SKILL);
 
-    int32 meritbonus = PMaster->PMeritPoints->GetMeritValue(xi::Merit::AutomatonSkills, PMaster);
+    tempSkills.automaton_magic = tempSkills.automaton_magic + magicBonus + meritbonus;
 
-    // If skill rank is 0, merit bonus needs to be added to be displayed like retail does
-    if (puppetutils::getSkillCap(PMaster, xi::SkillType::AutomatonRanged, mlvl) == 0)
-    {
-        tempSkills.automaton_ranged = meritbonus + PMaster->getMod(xi::Mod::AUTO_RANGED_SKILL);
-    }
+    // copy magic skills into generic skills
+    tempSkills.healing    = tempSkills.automaton_magic;
+    tempSkills.enhancing  = tempSkills.automaton_magic;
+    tempSkills.enfeebling = tempSkills.automaton_magic;
+    tempSkills.elemental  = tempSkills.automaton_magic;
+    tempSkills.dark       = tempSkills.automaton_magic;
 
-    if (puppetutils::getSkillCap(PMaster, xi::SkillType::AutomatonMagic, mlvl) == 0)
-    {
-        auto modBonus = PMaster->getMod(xi::Mod::AUTO_MAGIC_SKILL);
-
-        tempSkills.automaton_magic = meritbonus + modBonus;
-        tempSkills.healing         = meritbonus + modBonus;
-        tempSkills.enhancing       = meritbonus + modBonus;
-        tempSkills.enfeebling      = meritbonus + modBonus;
-        tempSkills.elemental       = meritbonus + modBonus;
-        tempSkills.dark            = meritbonus + modBonus;
-    }
+    tempSkills.automaton_ranged = tempSkills.automaton_ranged + meritbonus + rangedBonus;
+    tempSkills.automaton_melee  = tempSkills.automaton_melee + meritbonus + meleeBonus;
 
     const auto frame      = static_cast<uint8>(PMaster->getAutomatonFrame());
     const auto statsLevel = std::min<uint8>(mlvl, 99);
