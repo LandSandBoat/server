@@ -3945,9 +3945,14 @@ void BuildingCharSkillsTable(CCharEntity* PChar)
         {
             if (auto PAutomaton = dynamic_cast<CAutomatonEntity*>(PChar->PPet))
             {
+                // Recalculate skills
+                auto& tempSkills = puppetutils::CalculateAutomatonSkills(PChar, PAutomaton->GetMLevel());
+
                 switch (static_cast<xi::SkillType>(i))
                 {
                     case xi::SkillType::AutomatonMagic:
+                        PChar->WorkingSkills.skill[i] = tempSkills.skill[i];
+
                         PAutomaton->WorkingSkills.skill[i] = PChar->WorkingSkills.skill[i];
 
                         PAutomaton->WorkingSkills.skill[static_cast<uint8>(xi::SkillType::HealingMagic)]    = PChar->WorkingSkills.skill[i];
@@ -3958,6 +3963,8 @@ void BuildingCharSkillsTable(CCharEntity* PChar)
                         break;
 
                     default:
+                        PChar->WorkingSkills.skill[i] = tempSkills.skill[i];
+
                         PAutomaton->WorkingSkills.skill[i] = PChar->WorkingSkills.skill[i];
                         break;
                 }
