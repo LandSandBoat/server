@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Middle Delkfutt's Tower
 --  Mob: Giant Gatekeeper
--- Note: PH for Rhoitos and Polybotes
+-- Note: PH for Rhoitos, Polybotes and Eurytos
 -----------------------------------
 local ID = zones[xi.zone.MIDDLE_DELKFUTTS_TOWER]
 -----------------------------------
@@ -15,6 +15,7 @@ end
 entity.onMobDespawn = function(mob)
     xi.mob.phOnDespawn(mob, ID.mob.RHOITOS, 5, math.randomInt(7200, 14400)) -- 2 to 4 hours (could not find info, so using Ogygos' cooldown)
     xi.mob.phOnDespawn(mob, ID.mob.POLYBOTES, 5, math.randomInt(7200, 14400)) -- 2 to 4 hours (could not find info, so using Ogygos' cooldown)
+    xi.mob.phOnDespawn(mob, ID.mob.EURYTOS, 100, math.randomInt(7200, 14400)) -- 2 to 4 hours (could not find info, so using Ogygos' cooldown)
 end
 
 return entity
