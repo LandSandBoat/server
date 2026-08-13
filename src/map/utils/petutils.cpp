@@ -381,39 +381,9 @@ void LoadJugStats(CPetEntity* PMob, Pet_t* petStats)
 
 void LoadAutomatonStats(CCharEntity* PMaster, CPetEntity* PPet, Pet_t* petStats, uint8 mlvl)
 {
-    auto& tempSkills = PMaster->automatonInfo_.automatonSkills;
+    auto& tempSkills = puppetutils::CalculateAutomatonSkills(PMaster, mlvl);
     auto& tempStats  = PMaster->automatonInfo_.automatonStats;
     auto& tempHealth = PMaster->automatonInfo_.automatonHealth;
-
-    tempSkills.automaton_melee  = std::min(puppetutils::getSkillCap(PMaster, xi::SkillType::AutomatonMelee, mlvl), PMaster->GetSkill(xi::SkillType::AutomatonMelee));
-    tempSkills.automaton_ranged = std::min(puppetutils::getSkillCap(PMaster, xi::SkillType::AutomatonRanged, mlvl), PMaster->GetSkill(xi::SkillType::AutomatonRanged));
-    tempSkills.automaton_magic  = std::min(puppetutils::getSkillCap(PMaster, xi::SkillType::AutomatonMagic, mlvl), PMaster->GetSkill(xi::SkillType::AutomatonMagic));
-
-    // Set capped flags
-    for (int i = 22; i <= 24; ++i)
-    {
-        if ((tempSkills.skill[i] & 0x7FFF) == (puppetutils::getSkillCap(PMaster, (xi::SkillType)i, mlvl)))
-        {
-            tempSkills.skill[i] |= 0x8000;
-        }
-    }
-
-    const auto meritbonus  = PMaster->PMeritPoints->GetMeritValue(xi::Merit::AutomatonSkills, PMaster);
-    const auto magicBonus  = PMaster->getMod(xi::Mod::AUTO_MAGIC_SKILL);
-    const auto meleeBonus  = PMaster->getMod(xi::Mod::AUTO_MELEE_SKILL);
-    const auto rangedBonus = PMaster->getMod(xi::Mod::AUTO_RANGED_SKILL);
-
-    tempSkills.automaton_magic = tempSkills.automaton_magic + magicBonus + meritbonus;
-
-    // copy magic skills into generic skills
-    tempSkills.healing    = tempSkills.automaton_magic;
-    tempSkills.enhancing  = tempSkills.automaton_magic;
-    tempSkills.enfeebling = tempSkills.automaton_magic;
-    tempSkills.elemental  = tempSkills.automaton_magic;
-    tempSkills.dark       = tempSkills.automaton_magic;
-
-    tempSkills.automaton_ranged = tempSkills.automaton_ranged + meritbonus + rangedBonus;
-    tempSkills.automaton_melee  = tempSkills.automaton_melee + meritbonus + meleeBonus;
 
     const auto frame      = static_cast<uint8>(PMaster->getAutomatonFrame());
     const auto statsLevel = std::min<uint8>(mlvl, 99);
