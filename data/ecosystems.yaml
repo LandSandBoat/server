@@ -2026,8 +2026,8 @@ ecosystems:
             id: 195
             attributes:
               mods:
-                mdef:       20
                 silenceres: 20
+                udmgmagic:  -2500
               mob_mods:
                 ga_chance:    60
                 roam_cool:    40
