@@ -462,6 +462,10 @@ void CAIContainer::Reset()
         m_stateStack.pop();
     }
 
+    // drop the queues too, or an action from the previous life fires on the next spawn.
+    ClearActionQueue();
+    ClearTimerQueue();
+
     // no Cleanup ran, so clear the engaged flags by hand. Internal_Engage skips anything that still looks engaged, leaving it with nothing to swing with.
     if (auto* battle = dynamic_cast<CBattleEntity*>(PEntity); battle && battle->animation == xi::Animation::Attack)
     {
