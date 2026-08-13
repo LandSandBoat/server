@@ -52,7 +52,7 @@ public:
     void tradeRequest(CLuaBaseEntity* target) const;
     void tradeAccept() const;
     void tradeOffer(uint8 tradeIndex, uint8 invSlot, uint16 itemId, uint32 quantity) const;
-    void tradeClearSlot(uint8 tradeIndex) const;
+    void tradeClearSlot(uint8 tradeIndex, uint8 invSlot, uint16 itemId) const;
     void tradeMake() const;
     void tradeCancel() const;
     void acceptRaise() const;
@@ -63,6 +63,8 @@ public:
     void guildSell(uint16 itemId, uint8 quantity) const;
     auto guildBuyList() const -> sol::table;
     auto guildSellList() const -> sol::table;
+
+    void shopBuy(uint16 shopSlot, uint32 quantity) const;
 
     void moveItem(uint8 srcContainer, uint8 srcSlot, uint8 dstContainer, uint32 quantity, sol::optional<uint8> dstSlot) const;
     void sortContainer(uint8 container) const;

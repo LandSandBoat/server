@@ -89,7 +89,7 @@ void GP_CLI_COMMAND_SHOP_BUY::process(MapSession* PSession, CCharEntity* PChar) 
 
     const CItem* gil = PChar->getStorage(LOC_INVENTORY)->GetItem(0);
 
-    if (!gil || !gil->isType(ITEM_CURRENCY) || gil->getReserve() != 0)
+    if (!gil || !gil->isType(ITEM_CURRENCY) || gil->getReserve() != 0 || gil->isBusy())
     {
         ShowError("User '%s' has invalid gil", PChar->getName());
         return;

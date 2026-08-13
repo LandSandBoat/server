@@ -100,6 +100,7 @@
 #include "blueutils.h"
 #include "charutils.h"
 #include "enums/item_lockflg.h"
+#include "items/transactions/player_trade.h"
 #include "items/transactions/synth.h"
 #include "itemutils.h"
 #include "job_points.h"
@@ -2027,78 +2028,6 @@ void DropItem(CCharEntity* PChar, uint8 container, uint8 slotID, int32 quantity,
         ShowInfo("Player %s DROPPING itemID: %s (%u) quantity: %u", PChar->getName(), xi::items::lookup(ItemID)->getName(), ItemID, quantity);
         PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(nullptr, ItemID, quantity, MsgStd::ThrowAway);
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
-    }
-}
-
-/************************************************************************
- *                                                                       *
- *  Check the possibility of trade between characters                    *
- *                                                                       *
- ************************************************************************/
-
-bool CanTrade(CCharEntity* PChar, CCharEntity* PTarget)
-{
-    if (PChar->m_PMonstrosity != nullptr || PTarget->m_PMonstrosity != nullptr)
-    {
-        return false;
-    }
-
-    if (PTarget->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() < PChar->UContainer->GetItemsCount())
-    {
-        ShowDebug("Unable to trade, %s doesn't have enough inventory space", PTarget->getName());
-        return false;
-    }
-
-    for (uint8 slotid = 0; slotid <= 8; ++slotid)
-    {
-        CItem* PItem = PChar->UContainer->GetItem(slotid);
-
-        if (PItem != nullptr && PItem->hasFlag(ItemFlag::Rare))
-        {
-            if (HasItem(PTarget, PItem->getID()))
-            {
-                ShowDebug("Unable to trade, %s has the rare item already (%s)", PTarget->getName(), PItem->getName());
-                return false;
-            }
-        }
-    }
-
-    return true;
-}
-
-/************************************************************************
- *                                                                       *
- *  Do the exchange between characters                                   *
- *                                                                       *
- ************************************************************************/
-
-void DoTrade(CCharEntity* PChar, CCharEntity* PTarget)
-{
-    ShowDebug("%s->%s trade item movement started", PChar->getName(), PTarget->getName());
-    for (uint8 slotid = 0; slotid <= 8; ++slotid)
-    {
-        CItem* PItem = PChar->UContainer->GetItem(slotid);
-
-        if (PItem != nullptr)
-        {
-            if (PItem->getStackSize() == 1 && PItem->getReserve() == 1)
-            {
-                auto PNewItem = xi::items::clone(*PItem);
-                ShowDebug("Adding %s to %s inventory stacksize 1", PNewItem->getName(), PTarget->getName());
-                PNewItem->setReserve(0);
-                AddItem(PTarget, LOC_INVENTORY, std::move(PNewItem));
-            }
-            else
-            {
-                ShowDebug("Adding %s to %s inventory", PItem->getName(), PTarget->getName());
-                AddItem(PTarget, LOC_INVENTORY, PItem->getID(), PItem->getReserve());
-            }
-            ShowDebug("Removing %s from %s's inventory", PItem->getName(), PChar->getName());
-            auto amount = PItem->getReserve();
-            PItem->setReserve(0);
-            UpdateItem(PChar, LOC_INVENTORY, PItem->getSlotID(), (int32)(0 - amount));
-            PChar->UContainer->ClearSlot(slotid);
-        }
     }
 }
 
@@ -7754,6 +7683,11 @@ void removeCharFromZone(CCharEntity* PChar)
     if (PChar->PSession)
     {
         PChar->PSession->blowfish.status = BLOWFISH_PENDING_ZONE;
+    }
+
+    if (auto* tradeTransaction = PChar->activePlayerTradeTransaction())
+    {
+        tradeTransaction->abort(PChar);
     }
 
     PChar->TradePending.clean();

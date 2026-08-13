@@ -78,6 +78,7 @@
 #include "items/item_furnishing.h"
 #include "items/item_usable.h"
 #include "items/item_weapon.h"
+#include "items/transactions/player_trade.h"
 #include "items/transactions/synth.h"
 #include "job_points.h"
 #include "latent_effect_container.h"
@@ -562,6 +563,32 @@ bool CCharEntity::hasAutoTargetEnabled() const
 auto CCharEntity::isCrafting() const -> bool
 {
     return animation == xi::Animation::Synth || this->activeTransaction<SynthTransaction>();
+}
+
+auto CCharEntity::tradePartner() const -> CCharEntity*
+{
+    auto* other = TradePending.resolve<CCharEntity>();
+    if (!other || other->TradePending.UniqueNo != id)
+    {
+        return nullptr;
+    }
+
+    return other;
+}
+
+auto CCharEntity::activePlayerTradeTransaction() const -> PlayerTradeTransaction*
+{
+    if (auto* local = this->activeTransaction<PlayerTradeTransaction>())
+    {
+        return local;
+    }
+    auto* other = this->tradePartner();
+    if (!other)
+    {
+        return nullptr;
+    }
+
+    return other->activeTransaction<PlayerTradeTransaction>();
 }
 
 auto CCharEntity::isFishing() const -> bool

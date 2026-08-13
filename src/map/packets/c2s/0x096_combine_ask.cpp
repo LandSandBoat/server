@@ -93,40 +93,12 @@ void GP_CLI_COMMAND_COMBINE_ASK::process(MapSession* PSession, CCharEntity* PCha
         return;
     }
 
-    // NOTE: This section is intended to be temporary to ensure that duping shenanigans aren't possible.
-    // It should be replaced by something more robust or more stateful as soon as is reasonable
-    auto* PTarget = PChar->TradePending.resolve<CCharEntity>();
-
-    // Clear pending trades on synthesis start
-    if (PTarget)
-    {
-        PChar->TradePending.clean();
-        PTarget->TradePending.clean();
-    }
-
-    // Clears out trade session and blocks synthesis at any point in trade process after accepting
-    // trade request.
     if (PChar->UContainer->GetType() != UCONTAINER_EMPTY)
     {
-        if (PTarget)
-        {
-            ShowDebug("%s trade request with %s was canceled because %s tried to craft.",
-                      PChar->getName(),
-                      PTarget->getName(),
-                      PChar->getName());
-
-            PTarget->TradePending.clean();
-            PTarget->UContainer->Clean();
-            PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PChar, GP_ITEM_TRADE_RES_KIND::Cancell);
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PTarget, GP_ITEM_TRADE_RES_KIND::Cancell);
-        }
-
         PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::CannotBeProcessed);
-        PChar->TradePending.clean();
         PChar->UContainer->Clean();
         return;
     }
-    // End temporary additions
 
     const auto* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(this->CrystalIdx);
     if (!PItem ||

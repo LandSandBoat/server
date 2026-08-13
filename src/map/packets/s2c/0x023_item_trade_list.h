@@ -43,5 +43,5 @@ public:
         uint8_t  Attr[24];         // PS2: Attr
     };
 
-    GP_SERV_COMMAND_ITEM_TRADE_LIST(CItem* PItem, uint8 slotId);
+    GP_SERV_COMMAND_ITEM_TRADE_LIST(CItem* PItem, uint8 slotId, uint32 qty);
 };

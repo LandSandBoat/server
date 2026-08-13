@@ -50,6 +50,7 @@
 #include "map/packets/c2s/0x053_lockstyle.h"
 #include "map/packets/c2s/0x06e_group_solicit_req.h"
 #include "map/packets/c2s/0x074_group_solicit_res.h"
+#include "map/packets/c2s/0x083_shop_buy.h"
 #include "map/packets/c2s/0x096_combine_ask.h"
 #include "map/packets/c2s/0x0aa_guild_buy.h"
 #include "map/packets/c2s/0x0ab_guild_buylist.h"
@@ -364,6 +365,24 @@ auto CLuaClientEntityPairActions::guildSellList() const -> sol::table
 }
 
 /************************************************************************
+ *  Function: shopBuy()
+ *  Purpose : Emits packet 0x083 to buy from the currently open shop.
+ *  Example : p1.actions:shopBuy(0, 1)
+ ************************************************************************/
+
+void CLuaClientEntityPairActions::shopBuy(uint16 shopSlot, uint32 quantity) const
+{
+    const auto packet      = parent_->packets().createPacket<GP_CLI_COMMAND_SHOP_BUY>();
+    auto*      buy         = packet->as<GP_CLI_COMMAND_SHOP_BUY>();
+    buy->ItemNum           = quantity;
+    buy->ShopNo            = 0;
+    buy->ShopItemIndex     = shopSlot;
+    buy->PropertyItemIndex = 0;
+
+    parent_->packets().sendBasicPacket(*packet);
+}
+
+/************************************************************************
  *  Function: inviteToParty()
  *  Purpose : Emits packet to invite a PC.
  *  Example : player.actions:inviteToParty(player2)
@@ -568,13 +587,13 @@ void CLuaClientEntityPairActions::tradeOffer(uint8 tradeIndex, uint8 invSlot, ui
  *  Example : p1.actions:tradeClearSlot(0)
  ************************************************************************/
 
-void CLuaClientEntityPairActions::tradeClearSlot(uint8 tradeIndex) const
+void CLuaClientEntityPairActions::tradeClearSlot(uint8 tradeIndex, uint8 invSlot, uint16 itemId) const
 {
     const auto packet = parent_->packets().createPacket<GP_CLI_COMMAND_TRADE_LIST>();
     auto*      data   = packet->as<GP_CLI_COMMAND_TRADE_LIST>();
     data->TradeIndex  = tradeIndex;
-    data->ItemIndex   = 0;
-    data->ItemNo      = 0;
+    data->ItemIndex   = invSlot;
+    data->ItemNo      = itemId;
     data->ItemNum     = 0;
 
     parent_->packets().sendBasicPacket(*packet);
@@ -1018,6 +1037,7 @@ void CLuaClientEntityPairActions::Register()
     SOL_REGISTER("guildSell", CLuaClientEntityPairActions::guildSell);
     SOL_REGISTER("guildBuyList", CLuaClientEntityPairActions::guildBuyList);
     SOL_REGISTER("guildSellList", CLuaClientEntityPairActions::guildSellList);
+    SOL_REGISTER("shopBuy", CLuaClientEntityPairActions::shopBuy);
     SOL_REGISTER("inviteToParty", CLuaClientEntityPairActions::inviteToParty);
     SOL_REGISTER("formAlliance", CLuaClientEntityPairActions::formAlliance);
     SOL_REGISTER("acceptPartyInvite", CLuaClientEntityPairActions::acceptPartyInvite);

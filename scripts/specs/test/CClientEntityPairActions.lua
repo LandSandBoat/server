@@ -116,10 +116,12 @@ end
 function CClientEntityPairActions:tradeOffer(tradeIndex, invSlot, itemId, quantity)
 end
 
----Clear a trade slot.
+---Clear a trade slot. The client repeats the item it is clearing, so pass what was staged.
 ---@param tradeIndex integer Trade slot, 0..8
+---@param invSlot integer Inventory slot of the staged item
+---@param itemId xi.item Item ID
 ---@return nil
-function CClientEntityPairActions:tradeClearSlot(tradeIndex)
+function CClientEntityPairActions:tradeClearSlot(tradeIndex, invSlot, itemId)
 end
 
 ---Lock in this side's offer. Trade goes through once both sides lock.
@@ -179,6 +181,13 @@ end
 ---@nodiscard
 ---@return table<integer, GuildListEntry> list Entries keyed by item ID
 function CClientEntityPairActions:guildSellList()
+end
+
+---Buy from the currently open shop
+---@param shopSlot integer Index into the shop's item list
+---@param quantity integer Amount to buy
+---@return nil
+function CClientEntityPairActions:shopBuy(shopSlot, quantity)
 end
 
 ---Move an item between containers or split a stack
