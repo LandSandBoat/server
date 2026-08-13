@@ -49,7 +49,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         return
     end
 
-    local gate = GetNPCByID(rampartTable[triggerArea])
+    local gate = GetNPCByID(rampartTable[triggerArea:getTriggerAreaID()])
     if gate then
         gate:openDoor(9)
     end

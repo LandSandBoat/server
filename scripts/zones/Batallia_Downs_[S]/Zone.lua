@@ -18,9 +18,9 @@ local rampartTable =
 zoneObject.onInitialize = function(zone)
     zone:registerCylindricalTriggerArea(1, 321.762, -194.744, 15)
     zone:registerCylindricalTriggerArea(2, 327.975, -118.794, 15)
-    zone:registerCylindricalTriggerArea(3,   0.000, -170.000, 15)
-    zone:registerCylindricalTriggerArea(4, 156.000,  100.000, 15)
-    zone:registerCylindricalTriggerArea(5,  -2.059,  225.000, 15)
+    zone:registerCylindricalTriggerArea(3, 156.000,  100.000, 15)
+    zone:registerCylindricalTriggerArea(4,  -2.059,  225.000, 15)
+    zone:registerCylindricalTriggerArea(5,   0.000, -170.000, 15)
 
     xi.voidwalker.zoneOnInit(zone)
     xi.darkixion.zoneOnInit(zone)
@@ -49,7 +49,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         return
     end
 
-    local gate = GetNPCByID(rampartTable[triggerArea])
+    local gate = GetNPCByID(rampartTable[triggerArea:getTriggerAreaID()])
     if gate then
         gate:openDoor(9)
     end
