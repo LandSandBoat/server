@@ -20,6 +20,7 @@
 */
 
 #include "state.h"
+#include "common/xi.h"
 #include "entities/base_entity.h"
 
 void CState::TryInterrupt(CBattleEntity* PAttacker)
@@ -96,7 +97,19 @@ auto CState::GetErrorMsg() const -> std::unique_ptr<CBasicPacket>
 auto CState::DoUpdate(const timer::time_point tick) -> bool
 {
     UpdateTarget(target_);
+
+    m_executing       = true;
+    const auto onExit = xi::finally([this]()
+                                    {
+                                        m_executing = false;
+                                    });
+
     return Update(tick);
+}
+
+auto CState::isExecuting() const -> bool
+{
+    return m_executing;
 }
 
 auto CState::IsCompleted() const -> bool

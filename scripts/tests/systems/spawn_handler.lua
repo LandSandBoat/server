@@ -15,6 +15,20 @@ describe('Spawn Handler', function()
             mob.assert:isSpawned()
         end)
 
+        it('does not inherit queued actions from its previous life', function()
+            local mob = player.entities:moveTo('Forest_Funguar')
+
+            -- deadline well past the despawn, so the only way it can leave the queue is the respawn dropping it
+            mob:queue(60000, function()
+            end)
+
+            assert(not mob:actionQueueEmpty(), 'precondition: the action is queued')
+
+            mob:respawn()
+
+            assert(mob:actionQueueEmpty(), 'a queued action outlived the respawn')
+        end)
+
         it('does not respawn a mob before its timer expires', function()
             local mob = player.entities:moveTo('Forest_Funguar')
             player:claimAndKillMob(mob)

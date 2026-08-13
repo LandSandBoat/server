@@ -394,14 +394,32 @@ auto CAIContainer::enterState(std::unique_ptr<CState> next) -> bool
 void CAIContainer::resumeNextState()
 {
     // The current state is finished; resume the one suspended beneath it, or go idle.
-    if (m_stateStack.empty())
-    {
-        m_currentState.reset();
-    }
-    else
+    retire(std::move(m_currentState));
+
+    if (!m_stateStack.empty())
     {
         m_currentState = std::move(m_stateStack.top());
         m_stateStack.pop();
+    }
+}
+
+void CAIContainer::finishCurrentState(const timer::time_point tick)
+{
+    auto finished = std::move(m_currentState);
+    resumeNextState();
+
+    if (finished)
+    {
+        finished->Cleanup(tick);
+        retire(std::move(finished));
+    }
+}
+
+void CAIContainer::retire(std::unique_ptr<CState> state)
+{
+    if (state)
+    {
+        m_retiredStates.push_back(std::move(state));
     }
 }
 
@@ -437,10 +455,23 @@ void CAIContainer::Reset()
         Controller->Reset();
     }
 
-    m_currentState.reset();
+    retire(std::move(m_currentState));
     while (!m_stateStack.empty())
     {
+        retire(std::move(m_stateStack.top()));
         m_stateStack.pop();
+    }
+
+    // drop the queues too, or an action from the previous life fires on the next spawn.
+    ClearActionQueue();
+    ClearTimerQueue();
+
+    // no Cleanup ran, so clear the engaged flags by hand. Internal_Engage skips anything that still looks engaged, leaving it with nothing to swing with.
+    if (auto* battle = dynamic_cast<CBattleEntity*>(PEntity); battle && battle->animation == xi::Animation::Attack)
+    {
+        battle->animation = xi::Animation::None;
+        battle->setBattleTarget(std::nullopt);
+        battle->updatemask |= UPDATE_HP;
     }
 }
 
@@ -477,9 +508,8 @@ auto CAIContainer::Tick(const timer::time_point tick) -> Task<void>
     }
 
     //
-    // The current state is held in m_currentState (not on the stack) while it runs, so a
-    // re-entrant change can't free the object we're executing in. Entering a state only
-    // suspends the current one beneath it, never frees it.
+    // The current state is held in m_currentState (not on the stack) while it runs, and finished states sit in m_retiredStates until the end of the tick.
+    // A re-entrant change can suspend or retire the state we are executing in, but never free it.
     //
 
     // The guard is a backstop against
@@ -497,19 +527,16 @@ auto CAIContainer::Tick(const timer::time_point tick) -> Task<void>
 
         CState* running = m_currentState.get();
 
-        if (running->DoUpdate(tick))
-        {
-            // A state can enter a successor during its own update (e.g. petskill
-            // re-engages), which becomes current. Only retire the state we actually ran.
-            if (running == m_currentState.get())
-            {
-                running->Cleanup(tick);
-                resumeNextState();
-            }
-        }
-        else // Not finished: leave it current and stop.
+        if (!running->DoUpdate(tick)) // Not finished: leave it current and stop.
         {
             break;
+        }
+
+        // A state can enter a successor during its own update (e.g. petskill
+        // re-engages), which becomes current. Only retire the state we actually ran.
+        if (running == m_currentState.get())
+        {
+            finishCurrentState(tick);
         }
     }
 
@@ -526,6 +553,9 @@ auto CAIContainer::Tick(const timer::time_point tick) -> Task<void>
 
     PEntity->PostTick();
 
+    // nothing is executing now, so the states retired this tick can go.
+    m_retiredStates.clear();
+
     co_return;
 }
 
@@ -538,17 +568,16 @@ void CAIContainer::ClearStateStack()
 {
     while (m_currentState)
     {
-        m_currentState->Cleanup(timer::now());
-        resumeNextState();
+        finishCurrentState(timer::now());
     }
 }
 
 void CAIContainer::InterruptStates()
 {
-    while (m_currentState && m_currentState->CanInterrupt())
+    // a state running its own Update is left alone - tearing it out would free it under its own frame. whatever wanted the interrupt stacks above it instead.
+    while (m_currentState && !m_currentState->isExecuting() && m_currentState->CanInterrupt())
     {
-        m_currentState->Cleanup(timer::now());
-        resumeNextState();
+        finishCurrentState(timer::now());
     }
 }
 
@@ -642,8 +671,7 @@ void CAIContainer::CheckCompletedStates()
 {
     while (m_currentState && m_currentState->IsCompleted())
     {
-        m_currentState->Cleanup(timer::now());
-        resumeNextState();
+        finishCurrentState(timer::now());
     }
 }
 
