@@ -32,6 +32,7 @@
 #include "enums/automaton.h"
 #include "recast_container.h"
 #include "status_effect_container.h"
+#include "utils/battleutils.h"
 #include "utils/mobutils.h"
 #include "utils/puppetutils.h"
 
@@ -217,6 +218,20 @@ void CAutomatonEntity::OnMobSkillFinished(CMobSkillState& state, action_t& actio
     if (PSkill->getID() == 1949 && !PSkill->hasMissMsg())
     {
         puppetutils::TrySkillUP(this, xi::SkillType::AutomatonRanged, PTarget->GetMLevel());
+    }
+
+    // Weaponskill skill up - TODO: This should be able to happen on every hit of the weaponskill, but the fix isn't that simple at the moment.
+    else if (PTarget && !PSkill->hasMissMsg())
+    {
+        for (const auto skillId : battleutils::GetMobSkillList(m_MobSkillList))
+        {
+            if (skillId == PSkill->getID())
+            {
+                const auto skillType = frame() == AutomatonFrame::Sharpshot ? xi::SkillType::AutomatonRanged : xi::SkillType::AutomatonMelee;
+                puppetutils::TrySkillUP(this, skillType, PTarget->GetMLevel());
+                break;
+            }
+        }
     }
 }
 

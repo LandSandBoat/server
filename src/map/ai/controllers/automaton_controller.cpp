@@ -1571,7 +1571,7 @@ auto CAutomatonController::TryTPMove() -> bool
         for (auto skillid : FrameSkills)
         {
             auto* PSkill = battleutils::GetMobSkill(skillid);
-            if (PSkill && PAutomaton->GetSkill(skilltype) > PSkill->getParam() && PSkill->getParam() != -1 &&
+            if (PSkill && PAutomaton->GetSkill(skilltype) >= PSkill->getParam() && PSkill->getParam() != -1 &&
                 distance(PAutomaton->loc.p, PTarget->loc.p) < PSkill->getRadius())
             {
                 validSkills.emplace_back(PSkill);
@@ -1582,12 +1582,28 @@ auto CAutomatonController::TryTPMove() -> bool
         CMobSkill* PWSkill          = nullptr;
         int8       currentManeuvers = -1;
 
+        // Follows most matching maneuvers, then highest skill requirement, then highest skill ID.
+        auto hasSkillPriority = [&](const CMobSkill* PNewSkill, int8 newManeuvers)
+        {
+            if (newManeuvers != currentManeuvers)
+            {
+                return newManeuvers > currentManeuvers;
+            }
+
+            if (PNewSkill->getParam() != currentSkill)
+            {
+                return PNewSkill->getParam() > currentSkill;
+            }
+
+            return PWSkill && PNewSkill->getID() > PWSkill->getID();
+        };
+
         bool attemptChain = (PAutomaton->getMod(xi::Mod::AUTO_TP_EFFICIENCY) != 0);
 
         const CStatusEffect* PSCEffect = PTarget->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Skillchain, 0);
 
-        // Skillchain has been started, wait 4 seconds until skillchain window is open before executing weaponskill.
-        if (attemptChain && PSCEffect && PSCEffect->GetStartTime() + 4s >= timer::now())
+        // Skillchain has been started, wait 3 seconds until skillchain window is open before executing weaponskill.
+        if (attemptChain && PSCEffect && PSCEffect->GetStartTime() + 3s >= timer::now())
         {
             return false;
         }
@@ -1600,14 +1616,21 @@ auto CAutomatonController::TryTPMove() -> bool
 
                 if (const uint16 power = PSCEffect->GetPower())
                 {
-                    resonanceProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>(power & 0xF));
-                    resonanceProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>((power >> 4) & 0xF));
-                    resonanceProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>(power >> 8));
+                    if (PSCEffect->GetTier() == 0)
+                    {
+                        resonanceProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>(power & 0xF));
+                        resonanceProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>((power >> 4) & 0xF));
+                        resonanceProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>(power >> 8));
+                    }
+                    else
+                    {
+                        resonanceProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>(power));
+                    }
                 }
 
                 for (auto* PSkill : validSkills)
                 {
-                    if (PSkill->getParam() > currentSkill)
+                    if (hasSkillPriority(PSkill, 1))
                     {
                         std::list<SKILLCHAIN_ELEMENT> skillProperties;
                         skillProperties.emplace_back(static_cast<SKILLCHAIN_ELEMENT>(PSkill->getPrimarySkillchain()));
@@ -1629,7 +1652,7 @@ auto CAutomatonController::TryTPMove() -> bool
             for (auto* PSkill : validSkills)
             {
                 int8 maneuvers = luautils::OnAutomatonAbilityCheck(PTarget, PAutomaton, PSkill);
-                if (maneuvers > -1 && (maneuvers > currentManeuvers || (maneuvers == currentManeuvers && PSkill->getParam() > currentSkill)))
+                if (maneuvers > -1 && hasSkillPriority(PSkill, maneuvers))
                 {
                     currentManeuvers = maneuvers;
                     currentSkill     = PSkill->getParam();
