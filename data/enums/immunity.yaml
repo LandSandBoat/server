@@ -27,3 +27,4 @@ values:
   dispel:      0x00008000
   petrify:     0x00010000
   plague:      0x00020000
+  curse:       0x00040000
