@@ -26,12 +26,9 @@ mission.sections =
             ['Naja_Salaheem'] =
             {
                 onTrigger = function(player, npc)
-                    local dialog = mission:getVar(player, 'Option')
-                    if dialog == 0 then
-                        mission:setVar(player, 'Option', 1)
-                    else
-                        mission:setVar(player, 'Option', 0)
-                    end
+                    -- Order goes 1 -> 0 -> 1 -> 0 ...
+                    local dialog = mission:getVar(player, 'Option') == 0 and 1 or 0
+                    mission:setVar(player, 'Option', dialog)
 
                     return mission:event(3051, xi.besieged.getMercenaryRank(player), 1, 0, 0, 0, 0, 0, dialog, 0)
                 end,
@@ -43,7 +40,9 @@ mission.sections =
             onTriggerAreaEnter =
             {
                 [23] = function(player, triggerArea)
-                    return mission:progressEvent(1, xi.besieged.getMercenaryRank(player))
+                    local param3 = 0 -- Mentions, "Hey, it's you!" Maybe tied to PUP?
+
+                    return mission:progressEvent(1, xi.besieged.getMercenaryRank(player), param3)
                 end,
             },
 

@@ -24,12 +24,18 @@ mission.sections =
             ['Naja_Salaheem'] =
             {
                 onTrigger = function(player, npc)
+                    -- Option cycles between 2 and either a 1 or a 0.
                     local dialog = mission:getVar(player, 'Option')
-                    if dialog == 0 then
-                        mission:setVar(player, 'Option', 1)
+                    if dialog == 2 then
+                        -- Condition for Naja being friendly is unknown.
+                        -- My character was a BLU with no mercenary rank and got friendly alt dialog.
+                        local altOption = 0 -- 1 -> Friendly. 0 -> Not.
+                        dialog = altOption
                     else
-                        mission:setVar(player, 'Option', 0)
+                        dialog = 2
                     end
+
+                    mission:setVar(player, 'Option', dialog)
 
                     return mission:event(3029, xi.besieged.getMercenaryRank(player), 1, 0, 0, 0, 0, 0, dialog, 0)
                 end,
@@ -50,30 +56,18 @@ mission.sections =
             onTriggerAreaEnter =
             {
                 [3] = function(player, triggerArea)
-                    return mission:progressEvent(3050, 3, 3, 3, 3, 3, 3, 3, 3, 0)
+                    return mission:progressEvent(3050, 0, 1, 0, 0, 0, 0, 0, 0, 0)
                 end,
             },
 
             onEventUpdate =
             {
                 [3050] = function(player, csid, option, npc)
-                    local dialogStatus = mission:getLocalVar(player, 'Dialog')
+                    -- Both topics must be selected before you can advance.
+                    local dialogStatus = utils.mask.setBit(mission:getLocalVar(player, 'Dialog'), option - 1, true)
+                    mission:setLocalVar(player, 'Dialog', dialogStatus)
 
-                    if option == 1 then
-                        if dialogStatus == 0 then
-                            mission:setLocalVar(player, 'Dialog', 1)
-                            player:updateEvent(1, 0, 0, 0, 0, 0, 0, 0)
-                        else
-                            player:updateEvent(3, 0, 0, 0, 0, 0, 0, 0)
-                        end
-                    elseif option == 2 then
-                        if dialogStatus == 0 then
-                            mission:setLocalVar(player, 'Dialog', 1)
-                            player:updateEvent(2, 0, 0, 0, 0, 0, 0, 0)
-                        else
-                            player:updateEvent(3, 0, 0, 0, 0, 0, 0, 0)
-                        end
-                    end
+                    player:updateEvent(dialogStatus, 1, 0, 0, 0, 0, 0, 0)
                 end,
             },
 

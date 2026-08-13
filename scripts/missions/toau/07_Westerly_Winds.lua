@@ -23,10 +23,30 @@ mission.sections =
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
+            ['Cacaroon'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 0 then
+                        return mission:event(3023, { text_table = 0 })
+                    end
+                end,
+            },
+
+            ['Nadeey'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 0 then
+                        return mission:event(3025, { text_table = 0 })
+                    end
+                end,
+            },
+
             ['Naja_Salaheem'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 1 then
+                    if player:getMissionStatus(mission.areaId) == 0 then
+                        return mission:event(3021, xi.besieged.getMercenaryRank(player), 1, 0, 0, 0, 0, 0, 0, 0)
+                    else
                         return mission:progressEvent(3028, xi.besieged.getMercenaryRank(player), 1, 0, 0, 0, 0, 0, 0, 0)
                     end
                 end,
@@ -64,7 +84,7 @@ mission.sections =
                 [3028] = function(player, csid, option, npc)
                     if mission:complete(player) then
                         player:delKeyItem(xi.ki.RAILLEFALS_NOTE)
-                        player:setLocalVar('Mission[4][7]mustZone', 1)
+                        xi.mission.setMustZone(player, xi.mission.log_id.TOAU, xi.mission.id.toau.A_MERCENARY_LIFE)
                     end
                 end,
             },
