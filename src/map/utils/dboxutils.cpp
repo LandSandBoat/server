@@ -132,7 +132,7 @@ void dboxutils::AddItemsToBeSent(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
         return;
     }
 
-    if (PItem->getQuantity() < ItemStacks || PItem->getReserve() > 0 || PItem->isSubType(ITEM_LOCKED))
+    if (PItem->getQuantity() < ItemStacks || PItem->getReserve() > 0 || PItem->isBusy() || PItem->isSubType(ITEM_LOCKED))
     {
         ShowWarningFmt("DBOX: {} attempted to send insufficient/reserved/locked {}: {} ({})", PChar->getName(), ItemStacks, PItem->getName(), PItem->getID());
         return;

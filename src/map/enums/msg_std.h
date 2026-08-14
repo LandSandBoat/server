@@ -50,6 +50,7 @@ enum class MsgStd : uint16_t
     PollProposalParty            = 101, // Player Name's proposal to the party (cast vote with command: "/vote ?"):
     PollProposalLinkshell        = 102, // Player Name's proposal to the linkshell group (cast vote with command: "/vote ?"):
     PollProposalSystem           = 103, // Player Name's proposal to everyone (cast vote with command: "/vote ?"):
+    TradeCanceled                = 107, // Trade canceled. Either your or your target's inventory is full, or an error occurred during the transaction.
     LinkshellEquipBeforeUsing    = 108, // Equip a linkshell, pearlsack, or linkpearl before using that command.
     LinkshellKicked              = 109, // You have been kicked out of the linkshell group.
     LinkshellNoLongerExists      = 110, // That linkshell group no longer exists. This item is unusable.

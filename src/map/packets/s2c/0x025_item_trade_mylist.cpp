@@ -21,16 +21,22 @@
 
 #include "0x025_item_trade_mylist.h"
 
+#include "items/transactions/player_trade.h"
 #include "utils/itemutils.h"
 
-GP_SERV_COMMAND_ITEM_TRADE_MYLIST::GP_SERV_COMMAND_ITEM_TRADE_MYLIST(const CItem* PItem, const uint8 slot)
+GP_SERV_COMMAND_ITEM_TRADE_MYLIST::GP_SERV_COMMAND_ITEM_TRADE_MYLIST(const CItem* PItem, const uint8 slot, const uint32 qty)
 {
     auto& packet = this->data();
 
-    const uint32 amount = PItem->getReserve();
-
-    packet.ItemNum    = amount == 0 ? 0 : amount;
-    packet.ItemNo     = amount == 0 ? 0 : PItem->getID();
     packet.TradeIndex = slot;
-    packet.ItemIndex  = amount == 0 ? 0 : PItem->getSlotID();
+
+    if (PItem == nullptr || qty == 0)
+    {
+        packet.ItemNo = EmptyTradeSlotItemNo;
+        return;
+    }
+
+    packet.ItemNum   = qty;
+    packet.ItemNo    = PItem->getID();
+    packet.ItemIndex = PItem->getSlotID();
 }

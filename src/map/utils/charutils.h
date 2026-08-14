@@ -123,9 +123,6 @@ void  BuildingCharAbilityTable(CCharEntity* PChar);
 void  BuildingCharTraitsTable(CCharEntity* PChar);
 void  BuildingCharPetAbilityTable(CCharEntity* PChar, CPetEntity* PPet, uint32 PetID);
 
-void DoTrade(CCharEntity* PChar, CCharEntity* PTarget);
-bool CanTrade(CCharEntity* PChar, CCharEntity* PTarget);
-
 void   CheckWeaponSkill(CCharEntity* PChar, uint8 skill);
 bool   HasItem(CCharEntity* PChar, uint16 ItemID, IncludeRecycleBin includeRecycleBin = IncludeRecycleBin::Yes);
 uint32 getItemCount(CCharEntity* PChar, uint16 ItemID);

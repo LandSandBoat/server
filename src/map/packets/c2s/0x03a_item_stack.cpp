@@ -56,6 +56,7 @@ void GP_CLI_COMMAND_ITEM_STACK::process(MapSession* PSession, CCharEntity* PChar
         // Skip items that are invalid, locked, reserved or already meeting stack size.
         if (!PItem ||
             PItem->getReserve() > 0 ||
+            PItem->isBusy() ||
             PItem->isSubType(ITEM_LOCKED) ||
             PItem->getQuantity() >= PItem->getStackSize())
         {
@@ -70,6 +71,7 @@ void GP_CLI_COMMAND_ITEM_STACK::process(MapSession* PSession, CCharEntity* PChar
             if (!PItem2 ||
                 PItem2->getID() != PItem->getID() ||
                 PItem2->getReserve() > 0 ||
+                PItem2->isBusy() ||
                 PItem2->isSubType(ITEM_LOCKED) ||
                 PItem2->getQuantity() >= PItem2->getStackSize())
             {

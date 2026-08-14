@@ -41,5 +41,5 @@ public:
         uint8_t  ItemIndex;  // PS2: ItemIndex
     };
 
-    GP_SERV_COMMAND_ITEM_TRADE_MYLIST(const CItem* PItem, uint8 slot);
+    GP_SERV_COMMAND_ITEM_TRADE_MYLIST(const CItem* PItem, uint8 slot, uint32 qty);
 };

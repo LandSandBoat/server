@@ -22,20 +22,8 @@
 #include "0x033_trade_res.h"
 
 #include "entities/char_entity.h"
+#include "items/transactions/player_trade.h"
 #include "packets/s2c/0x022_item_trade_res.h"
-#include "universal_container.h"
-#include "utils/charutils.h"
-
-namespace
-{
-
-const auto cleanTradeTargets = [](CCharEntity* PChar, CCharEntity* PTarget)
-{
-    PChar->TradePending.clean();
-    PTarget->TradePending.clean();
-};
-
-} // namespace
 
 auto GP_CLI_COMMAND_TRADE_RES::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -47,10 +35,8 @@ auto GP_CLI_COMMAND_TRADE_RES::validate(MapSession* PSession, const CCharEntity*
 
 void GP_CLI_COMMAND_TRADE_RES::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    auto* PTarget = PChar->TradePending.resolve<CCharEntity>();
-
-    if (!PTarget ||
-        PTarget->TradePending.UniqueNo != PChar->id)
+    auto* PTarget = PChar->tradePartner();
+    if (!PTarget)
     {
         ShowWarningFmt("GP_CLI_COMMAND_TRADE_RES: Could not find trade targets.");
         return;
@@ -58,91 +44,46 @@ void GP_CLI_COMMAND_TRADE_RES::process(MapSession* PSession, CCharEntity* PChar)
 
     switch (static_cast<GP_CLI_COMMAND_TRADE_RES_KIND>(this->Kind))
     {
-        case GP_CLI_COMMAND_TRADE_RES_KIND::Start: // request accepted
+        case GP_CLI_COMMAND_TRADE_RES_KIND::Start:
         {
-            ShowDebug("GP_CLI_COMMAND_TRADE_RES: %s accepted trade request from %s", PTarget->getName(), PChar->getName());
-
-            // If either player universal container is NOT empty, back out of the trade.
-            if (!PChar->UContainer->IsContainerEmpty() || !PTarget->UContainer->IsContainerEmpty())
+            if (PChar->activePlayerTradeTransaction())
             {
-                ShowDebug("GP_CLI_COMMAND_TRADE_RES: UContainer is not empty");
-                cleanTradeTargets(PChar, PTarget);
-
+                // Trade is already active
                 return;
             }
 
-            // Must be within 6 yalms of each other to trade.
-            if (distance(PChar->loc.p, PTarget->loc.p) > 6 || PChar->m_moghouseID != PTarget->m_moghouseID)
+            if (!PlayerTradeTransaction::start(PChar, PTarget))
             {
-                ShowDebug("GP_CLI_COMMAND_TRADE_RES: Too far to trade");
-                cleanTradeTargets(PChar, PTarget);
-
+                ShowInfoFmt("GP_CLI_COMMAND_TRADE_RES: Start refused ({} -> {})", PChar->getName(), PTarget->getName());
+                PChar->TradePending.clean();
+                PTarget->TradePending.clean();
                 return;
             }
 
-            PChar->UContainer->SetType(UCONTAINER_TRADE);
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PTarget, static_cast<GP_ITEM_TRADE_RES_KIND>(this->Kind));
-
-            PTarget->UContainer->SetType(UCONTAINER_TRADE);
-            PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PChar, static_cast<GP_ITEM_TRADE_RES_KIND>(this->Kind));
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PTarget, GP_ITEM_TRADE_RES_KIND::Start);
+            PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PChar, GP_ITEM_TRADE_RES_KIND::Start);
         }
         break;
-        case GP_CLI_COMMAND_TRADE_RES_KIND::Cancell: // trade cancelled
+        case GP_CLI_COMMAND_TRADE_RES_KIND::Cancell:
         {
-            ShowDebug("GP_CLI_COMMAND_TRADE_RES: %s cancelled trade with %s", PTarget->getName(), PChar->getName());
-
-            if (PTarget->UContainer->GetType() == UCONTAINER_TRADE)
-            {
-                PTarget->UContainer->Clean();
-            }
-
-            if (PChar->UContainer->GetType() == UCONTAINER_TRADE)
-            {
-                PChar->UContainer->Clean();
-            }
-
-            cleanTradeTargets(PChar, PTarget);
-            // TODO: Verify exact sequence of packets sent here.
-            PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PChar, static_cast<GP_ITEM_TRADE_RES_KIND>(this->Kind));
+            PlayerTradeTransaction::cancel(PChar);
         }
         break;
-        case GP_CLI_COMMAND_TRADE_RES_KIND::Make: // trade accepted
+        case GP_CLI_COMMAND_TRADE_RES_KIND::Make:
         {
-            ShowDebug("GP_CLI_COMMAND_TRADE_RES: %s accepted trade with %s", PTarget->getName(), PChar->getName());
-
-            PChar->UContainer->SetLock();
-            PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PChar, static_cast<GP_ITEM_TRADE_RES_KIND>(Kind));
-
-            if (PTarget->UContainer->IsLocked())
+            // Notify the other side we're done trading
+            PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PChar, GP_ITEM_TRADE_RES_KIND::Make);
+            if (auto* transaction = PChar->activePlayerTradeTransaction(); transaction && transaction->accept(PChar))
             {
-                if (charutils::CanTrade(PChar, PTarget) && charutils::CanTrade(PTarget, PChar))
-                {
-                    charutils::DoTrade(PChar, PTarget);
-                    PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PTarget, GP_ITEM_TRADE_RES_KIND::End);
-
-                    charutils::DoTrade(PTarget, PChar);
-                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PChar, GP_ITEM_TRADE_RES_KIND::End);
-                }
-                else
-                {
-                    // Failed to trade
-                    // Either players containers are full or illegal item trade attempted
-                    ShowDebug("GP_CLI_COMMAND_TRADE_RES: %s->%s trade failed (full inventory or illegal items)", PChar->getName(), PTarget->getName());
-                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PTarget, GP_ITEM_TRADE_RES_KIND::Cancell);
-                    PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_RES>(PChar, GP_ITEM_TRADE_RES_KIND::Cancell);
-                }
-
-                PChar->UContainer->Clean();
-                PTarget->UContainer->Clean();
-
-                cleanTradeTargets(PChar, PTarget);
+                // If both sides accepted, perform swaps and close the transaction.
+                transaction->commitAndClose();
             }
         }
         break;
         case GP_CLI_COMMAND_TRADE_RES_KIND::MakeCancell:
         {
             // XiPackets claim this can be sent by the client, but unknown in what conditions.
-            ShowDebug("GP_CLI_COMMAND_TRADE_RES: MakeCancell received from %s", PChar->getName());
+            ShowDebugFmt("GP_CLI_COMMAND_TRADE_RES: MakeCancell received from {}", PChar->getName());
         }
         break;
     }

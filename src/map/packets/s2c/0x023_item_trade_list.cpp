@@ -23,17 +23,23 @@
 
 #include "common/utils.h"
 #include "items/item_linkshell.h"
+#include "items/transactions/player_trade.h"
 #include "utils/itemutils.h"
 
-GP_SERV_COMMAND_ITEM_TRADE_LIST::GP_SERV_COMMAND_ITEM_TRADE_LIST(CItem* PItem, const uint8 slotId)
+GP_SERV_COMMAND_ITEM_TRADE_LIST::GP_SERV_COMMAND_ITEM_TRADE_LIST(CItem* PItem, const uint8 slotId, const uint32 qty)
 {
     auto& packet = this->data();
 
-    const uint32 amount = PItem->getReserve();
-
-    packet.ItemNum    = amount;
-    packet.ItemNo     = amount == 0 ? 0 : PItem->getID();
+    packet.ItemNum    = qty;
     packet.TradeIndex = slotId;
+
+    if (PItem == nullptr || qty == 0)
+    {
+        packet.ItemNo = EmptyTradeSlotItemNo;
+        return;
+    }
+
+    packet.ItemNo = PItem->getID();
 
     if (PItem->isSubType(ITEM_CHARGED))
     {
