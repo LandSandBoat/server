@@ -31,14 +31,6 @@ local magianMoogleInfo =
     ['Magian_Moogle_Green']  = { 10151, 10160, 10152, 10153, 10156, 10158, xi.itemType.ARMOR,  30, xi.ki.MAGIAN_LEARNERS_LOG, xi.ki.MAGIAN_TRIAL_LOG },
 }
 
--- A moogle's own log, entry 9, is the one it hands out.  Entry 10 is a log it also
--- accepts but never gives: the Trial Log lets a player use the Green moogle without
--- being given a Learner's Log.
-local function hasMagianLog(player, moogleData)
-    return player:hasKeyItem(moogleData[9]) or
-        (moogleData[10] ~= nil and player:hasKeyItem(moogleData[10]))
-end
-
 -- Returns a table of data containing the player's currently active trials, and caches this data
 -- keyed by player ID into xi.magian.playerCache.
 local function getPlayerTrialData(player)
@@ -372,7 +364,7 @@ xi.magian.magianOnTrade = function(player, npc, trade)
     local trialData          = xi.magian.trials[trialId]
 
     if
-        hasMagianLog(player, moogleData) and
+        (player:hasKeyItem(moogleData[9]) or (moogleData[10] ~= nil and player:hasKeyItem(moogleData[10]))) and
         trade:getSlotCount() == 1 and
         itemObj:isType(moogleData[7])
     then
@@ -442,7 +434,7 @@ xi.magian.magianOnTrigger = function(player, npc)
         player:getMainLvl() < moogleData[8]
     then
         player:startEvent(moogleData[1])
-    elseif not hasMagianLog(player, moogleData) then
+    elseif not (player:hasKeyItem(moogleData[9]) or (moogleData[10] ~= nil and player:hasKeyItem(moogleData[10]))) then
         player:startEvent(moogleData[2])
     else
         local packedData, numActiveTrials = packActiveTrials(player)
