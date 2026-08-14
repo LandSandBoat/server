@@ -43,6 +43,15 @@ merits:
         warriors_charge:
           value: 150
 
+    mnk_group_1:
+      merits:
+        focus_recast:
+          value: 10
+        dodge_recast:
+          value: 10
+        chakra_recast:
+          value: 10
+
     mnk_group_2:
       max_upgrades: 6
 
@@ -189,6 +198,8 @@ merits:
           value: 10
         holy_circle_recast:
           value: 20
+        rampart_recast:
+          value: 10
 
     pld_group_2:
       max_upgrades: 6
@@ -217,6 +228,8 @@ merits:
 
     bst_group_1:
       merits:
+        reward_recast:
+          value: 6
         sic_recast:
           value: 4
 
@@ -243,7 +256,7 @@ merits:
           spell:        foe_sirvente
         adventurers_dirge:
           id:           0x0A46
-          value:        10
+          value:        3
           upgrade_cost: job_group_2
           spell:        adventurers_dirge
         con_anima:
