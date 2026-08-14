@@ -434,7 +434,9 @@ xi.magian.magianOnTrigger = function(player, npc)
         player:getMainLvl() < moogleData[8]
     then
         player:startEvent(moogleData[1])
-    elseif not (player:hasKeyItem(moogleData[9]) or (moogleData[10] ~= nil and player:hasKeyItem(moogleData[10]))) then
+    elseif
+        not (player:hasKeyItem(moogleData[9]) or (moogleData[10] ~= nil and player:hasKeyItem(moogleData[10])))
+    then
         player:startEvent(moogleData[2])
     else
         local packedData, numActiveTrials = packActiveTrials(player)
