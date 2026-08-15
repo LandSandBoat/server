@@ -56,6 +56,7 @@
 #include "item_container.h"
 #include "items.h"
 #include "items/item_weapon.h"
+#include "items/transactions/item_claim.h"
 #include "job_points.h"
 #include "mobskill.h"
 #include "modifier.h"
@@ -3680,12 +3681,14 @@ bool HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool)
         if (ConsumeTool && hasFutae && useFutae)
         {
             // Futae Takes 2 of Your Tools
-            if (charutils::UpdateItem(PChar, LOC_INVENTORY, SlotID, -2) == 0)
+            if (auto transaction = ItemClaimTransaction::start(PChar); !transaction || !transaction->take(LOC_INVENTORY, SlotID, 2) || !transaction->commit())
             {
                 ShowErrorFmt("battleutils: {} used Futae without spending tools in slot {}", PChar->getName(), SlotID);
             }
-
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
+            else
+            {
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
+            }
         }
         else
         {
@@ -3704,12 +3707,14 @@ bool HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool)
 
                 if (!expertiseProc)
                 {
-                    if (charutils::UpdateItem(PChar, LOC_INVENTORY, SlotID, -1) == 0)
+                    if (auto transaction = ItemClaimTransaction::start(PChar); !transaction || !transaction->take(LOC_INVENTORY, SlotID, 1) || !transaction->commit())
                     {
                         ShowErrorFmt("battleutils: {} did not spend the tool in slot {}", PChar->getName(), SlotID);
                     }
-
-                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
+                    else
+                    {
+                        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
+                    }
                 }
             }
         }
@@ -5974,23 +5979,29 @@ bool RemoveAmmo(CCharEntity* PChar, int quantity)
             uint8 slot = eloc ? eloc->Slot : 0;
             uint8 loc  = eloc ? static_cast<uint8>(eloc->Container) : 0;
             charutils::UnequipItem(PChar, SLOT_AMMO);
-            if (charutils::UpdateItem(PChar, loc, slot, -quantity) == 0)
+            if (auto transaction = ItemClaimTransaction::start(PChar); !transaction || !transaction->take(loc, slot, quantity) || !transaction->commit())
             {
                 ShowErrorFmt("battleutils: {} did not spend {} ammo in slot {}", PChar->getName(), quantity, slot);
             }
+            else
+            {
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
+            }
 
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
             return true;
         }
         else
         {
             auto ammoLoc = PChar->equipLocation(SLOT_AMMO);
-            if (charutils::UpdateItem(PChar, static_cast<uint8>(ammoLoc->Container), ammoLoc->Slot, -quantity) == 0)
+            if (auto transaction = ItemClaimTransaction::start(PChar); !transaction || !transaction->take(static_cast<uint8>(ammoLoc->Container), ammoLoc->Slot, quantity) || !transaction->commit())
             {
                 ShowErrorFmt("battleutils: {} did not spend {} ammo in slot {}", PChar->getName(), quantity, ammoLoc->Slot);
             }
+            else
+            {
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
+            }
 
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
             return false;
         }
     }

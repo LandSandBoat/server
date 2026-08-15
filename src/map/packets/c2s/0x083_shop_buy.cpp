@@ -23,6 +23,7 @@
 
 #include "common/settings.h"
 #include "entities/char_entity.h"
+#include "items/transactions/item_claim.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x03f_shop_buy.h"
 #include "trade_container.h"
@@ -142,36 +143,28 @@ void GP_CLI_COMMAND_SHOP_BUY::process(MapSession* PSession, CCharEntity* PChar) 
         quantity = PItem->getStackSize();
     }
 
-    const CItem* gil = PChar->getStorage(LOC_INVENTORY)->GetItem(0);
-
-    if (!gil || !gil->isType(ITEM_CURRENCY) || gil->getReserve() != 0 || gil->isBusy())
+    auto transaction = ItemClaimTransaction::start(PChar);
+    if (!transaction)
     {
-        ShowError("User '%s' has invalid gil", PChar->getName());
         return;
     }
 
-    if (gil->getQuantity() >= (price * quantity))
+    // Paying claims the gil for the rest of the purchase, and refuses a balance that is short
+    const auto cost = price * quantity;
+
+    // Track the gil the player had before the transaction
+    const uint32 gilBefore = gil->getQuantity();
+
+    if (!transaction->pay(cost) || !transaction->give(LOC_INVENTORY, itemId, quantity) || !transaction->commit())
     {
-        const uint8 boughtSlot = charutils::AddItem(PChar, LOC_INVENTORY, itemId, quantity);
-        if (boughtSlot != ERROR_SLOTID)
-        {
-            // Track the gil the player had before the transaction
-            const uint32 gilBefore = gil->getQuantity();
-
-            if (charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -static_cast<int32>(price * quantity)) == 0)
-            {
-                ShowErrorFmt("GP_CLI_COMMAND_SHOP_BUY: {} could not pay for item {}, taking it back", PChar->getName(), itemId);
-                (void)charutils::UpdateItem(PChar, LOC_INVENTORY, boughtSlot, -static_cast<int32>(quantity));
-                return;
-            }
-
-            // Audit the purchase if enabled
-            const auto appliedGil = static_cast<int32>(PChar->getStorage(LOC_INVENTORY)->GetItem(0)->getQuantity()) - static_cast<int32>(gilBefore);
-            auditPurchase(*PSession->scheduler, PChar, itemId, quantity, price, appliedGil);
-
-            ShowInfo("User '%s' purchased %u of item of ID %u [from VENDOR] ", PChar->getName(), quantity, itemId);
-            PChar->pushPacket<GP_SERV_COMMAND_SHOP_BUY>(this->ShopItemIndex, quantity);
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
-        }
+        return;
     }
+
+    // Audit the purchase if enabled
+    const auto appliedGil = static_cast<int32>(PChar->getStorage(LOC_INVENTORY)->GetItem(0)->getQuantity()) - static_cast<int32>(gilBefore);
+    auditPurchase(*PSession->scheduler, PChar, itemId, quantity, price, appliedGil);
+
+    ShowInfo("User '%s' purchased %u of item of ID %u [from VENDOR] ", PChar->getName(), quantity, itemId);
+    PChar->pushPacket<GP_SERV_COMMAND_SHOP_BUY>(this->ShopItemIndex, quantity);
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 }

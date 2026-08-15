@@ -25,6 +25,7 @@
 #include "enums/msg_std.h"
 #include "items.h"
 #include "items/item_flowerpot.h"
+#include "items/transactions/item_claim.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x020_item_attr.h"
 #include "packets/s2c/0x0fa_myroom_operation.h"
@@ -88,10 +89,22 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
         return;
     }
 
-    // The pot is written before the item is consumed, so anything already claimed has to be refused here
-    if (PItem->isBusy() || PItem->getReserve() > 0)
+    auto transaction = ItemClaimTransaction::start(PChar);
+    if (!transaction)
+    {
+        return;
+    }
+
+    if (!transaction->claim(this->MyroomAddCategory, this->MyroomAddItemIndex))
     {
         ShowWarningFmt("GP_CLI_COMMAND_MYROOM_PLANT_ADD: {} trying to plant a claimed item {}", PChar->getName(), PItem->getID());
+        return;
+    }
+
+    // Spent before the pot is touched, so a pot that refuses the item hands it straight back
+    if (!transaction->take(this->MyroomAddCategory, this->MyroomAddItemIndex, 1))
+    {
+        ShowWarningFmt("GP_CLI_COMMAND_MYROOM_PLANT_ADD: {} could not spend item {}", PChar->getName(), PItem->getID());
         return;
     }
 
@@ -129,23 +142,21 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
         }
     }
 
-    if (updatedPot)
+    // A pot that took nothing leaves through the rollback, which puts the item back
+    if (!updatedPot || !transaction->commit())
     {
-        db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
-                         PPotItem->m_extra,
-                         PChar->id,
-                         PPotItem->getLocationID(),
-                         PPotItem->getSlotID());
-
-        PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PPotItem, static_cast<CONTAINER_ID>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
-
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PPotItem, static_cast<CONTAINER_ID>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
-
-        if (charutils::UpdateItem(PChar, this->MyroomAddCategory, this->MyroomAddItemIndex, -1) == 0)
-        {
-            ShowErrorFmt("GP_CLI_COMMAND_MYROOM_PLANT_ADD: {} planted without losing the item in slot {}", PChar->getName(), this->MyroomAddItemIndex);
-        }
-
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
+        return;
     }
+
+    db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
+                     PPotItem->m_extra,
+                     PChar->id,
+                     PPotItem->getLocationID(),
+                     PPotItem->getSlotID());
+
+    PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PPotItem, static_cast<CONTAINER_ID>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
+
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PPotItem, static_cast<CONTAINER_ID>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
+
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 }

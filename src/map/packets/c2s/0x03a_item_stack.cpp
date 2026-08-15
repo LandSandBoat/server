@@ -22,6 +22,7 @@
 #include "0x03a_item_stack.h"
 
 #include "entities/char_entity.h"
+#include "items/transactions/item_claim.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "utils/charutils.h"
 
@@ -88,13 +89,24 @@ void GP_CLI_COMMAND_ITEM_STACK::process(MapSession* PSession, CCharEntity* PChar
                 moveQty = PItem2->getQuantity();
             }
 
-            if (moveQty > 0 && charutils::UpdateItem(PChar, static_cast<uint8>(PItemContainer->GetID()), slotId, moveQty) != 0)
+            if (moveQty == 0)
             {
-                if (charutils::UpdateItem(PChar, static_cast<uint8>(PItemContainer->GetID()), slotID2, -static_cast<int32>(moveQty)) == 0)
-                {
-                    ShowErrorFmt("GP_CLI_COMMAND_ITEM_STACK: {} merged stacks without losing the source, taking the copy back", PChar->getName());
-                    (void)charutils::UpdateItem(PChar, static_cast<uint8>(PItemContainer->GetID()), slotId, -static_cast<int32>(moveQty));
-                }
+                continue;
+            }
+
+            // A fresh claim per pair, so a stack merged away is released before the next pass sees it
+            auto transaction = ItemClaimTransaction::start(PChar);
+            if (!transaction ||
+                !transaction->claim(static_cast<uint8>(PItemContainer->GetID()), slotId) ||
+                !transaction->claim(static_cast<uint8>(PItemContainer->GetID()), slotID2))
+            {
+                continue;
+            }
+
+            const auto containerId = static_cast<uint8>(PItemContainer->GetID());
+            if (!transaction->moveBetween(containerId, slotID2, containerId, slotId, moveQty) || !transaction->commit())
+            {
+                ShowErrorFmt("GP_CLI_COMMAND_ITEM_STACK: {} could not merge stacks", PChar->getName());
             }
         }
     }

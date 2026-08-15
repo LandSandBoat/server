@@ -54,6 +54,7 @@
 #include "enums/key_items.h"
 #include "enums/msg_std.h"
 #include "item_container.h"
+#include "items/transactions/item_claim.h"
 #include "itemutils.h"
 #include "packets/c2s/0x110_fishing_2.h"
 #include "packets/s2c/0x029_battle_message.h"
@@ -1377,12 +1378,14 @@ bool BaitLoss(CCharEntity* PChar, RemoveFly removeFly, SendUpdate sendUpdate)
                 {
                     charutils::UnequipItem(PChar, SLOT_AMMO);
                 }
-                if (charutils::UpdateItem(PChar, PBait->getLocationID(), PBait->getSlotID(), -1) == 0)
-                {
-                    ShowErrorFmt("fishingutils: {} did not lose bait in slot {}", PChar->getName(), PBait->getSlotID());
-                }
+                const uint8 baitLocation = PBait->getLocationID();
+                const uint8 baitSlot     = PBait->getSlotID();
 
-                if (sendUpdate)
+                if (auto transaction = ItemClaimTransaction::start(PChar); !transaction || !transaction->take(baitLocation, baitSlot, 1) || !transaction->commit())
+                {
+                    ShowErrorFmt("fishingutils: {} did not lose bait in slot {}", PChar->getName(), baitSlot);
+                }
+                else if (sendUpdate)
                 {
                     PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
                 }
@@ -1413,10 +1416,12 @@ void RodBreak(CCharEntity* PChar)
     {
         BaitLoss(PChar, RemoveFly::Yes, SendUpdate::No);
         charutils::UnequipItem(PChar, SLOT_RANGED);
-        uint8 location = PRanged->getLocationID();
-        if (charutils::UpdateItem(PChar, location, PRanged->getSlotID(), -1) == 0)
+        uint8 location    = PRanged->getLocationID();
+        uint8 rodSlot     = PRanged->getSlotID();
+        auto  transaction = ItemClaimTransaction::start(PChar);
+        if (!transaction || !transaction->take(location, rodSlot, 1) || !transaction->commit())
         {
-            ShowErrorFmt("fishingutils: {} kept an unbroken rod in slot {}", PChar->getName(), PRanged->getSlotID());
+            ShowErrorFmt("fishingutils: {} kept an unbroken rod in slot {}", PChar->getName(), rodSlot);
         }
         else
         {

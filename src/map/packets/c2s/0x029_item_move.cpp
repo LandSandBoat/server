@@ -24,6 +24,7 @@
 #include "common/settings.h"
 #include "entities/char_entity.h"
 #include "items.h"
+#include "items/transactions/item_claim.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x020_item_attr.h"
 #include "utils/charutils.h"
@@ -180,15 +181,23 @@ void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar)
         return;
     }
 
+    auto transaction = ItemClaimTransaction::start(PChar);
+    if (!transaction)
+    {
+        return;
+    }
+
     if (const uint32 newQty = PItem->getQuantity() - this->ItemNum; newQty != 0) // split item stack
     {
-        if (const uint8 splitSlot = charutils::AddItem(PChar, this->Category2, PItem->getID(), this->ItemNum); splitSlot != ERROR_SLOTID)
+        // The source is held so the half left behind cannot be spent before the split completes
+        if (!transaction->claim(this->Category1, this->ItemIndex1))
         {
-            if (charutils::UpdateItem(PChar, this->Category1, this->ItemIndex1, -static_cast<int32>(this->ItemNum)) == 0)
-            {
-                ShowErrorFmt("GP_CLI_COMMAND_ITEM_MOVE: {} split item {} without losing the original, taking the copy back", PChar->getName(), PItem->getID());
-                (void)charutils::UpdateItem(PChar, this->Category2, splitSlot, -static_cast<int32>(this->ItemNum));
-            }
+            return;
+        }
+
+        if (!transaction->split(this->Category1, this->ItemIndex1, this->Category2, this->ItemNum) || !transaction->commit())
+        {
+            ShowErrorFmt("GP_CLI_COMMAND_ITEM_MOVE: {} could not split item {}", PChar->getName(), PItem->getID());
         }
     }
     else // move stack / combine items into stack
@@ -222,13 +231,15 @@ void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar)
                 {
                     moveQty = PItem->getQuantity();
                 }
-                if (moveQty > 0 && charutils::UpdateItem(PChar, this->Category2, this->ItemIndex2, moveQty) != 0)
+                // Both ends are held, so neither can be spent between growing one and shrinking the other
+                if (!transaction->claim(this->Category1, this->ItemIndex1) || !transaction->claim(this->Category2, this->ItemIndex2))
                 {
-                    if (charutils::UpdateItem(PChar, this->Category1, this->ItemIndex1, -static_cast<int32>(moveQty)) == 0)
-                    {
-                        ShowErrorFmt("GP_CLI_COMMAND_ITEM_MOVE: {} combined stacks without losing the source, taking the copy back", PChar->getName());
-                        (void)charutils::UpdateItem(PChar, this->Category2, this->ItemIndex2, -static_cast<int32>(moveQty));
-                    }
+                    return;
+                }
+
+                if (moveQty > 0 && (!transaction->moveBetween(this->Category1, this->ItemIndex1, this->Category2, this->ItemIndex2, moveQty) || !transaction->commit()))
+                {
+                    ShowErrorFmt("GP_CLI_COMMAND_ITEM_MOVE: {} could not combine stacks", PChar->getName());
                 }
             }
 

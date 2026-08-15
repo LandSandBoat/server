@@ -27,6 +27,7 @@
 
 #include "entities/char_entity.h"
 
+#include "items/transactions/item_claim.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
 
@@ -125,16 +126,23 @@ void dboxutils::AddItemsToBeSent(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
         return;
     }
 
-    CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(ItemWorkNo);
+    auto transaction = ItemClaimTransaction::start(PChar);
+    if (!transaction)
+    {
+        return;
+    }
+
+    // Held across the insert below so the stack cannot be spent while the row is being written
+    CItem* PItem = transaction->claim(LOC_INVENTORY, ItemWorkNo);
 
     if (ItemStacks == 0 || !PItem)
     {
         return;
     }
 
-    if (PItem->getQuantity() < ItemStacks || PItem->getReserve() > 0 || PItem->isBusy())
+    if (PItem->getQuantity() < ItemStacks)
     {
-        ShowWarningFmt("DBOX: {} attempted to send insufficient/reserved/locked {}: {} ({})", PChar->getName(), ItemStacks, PItem->getName(), PItem->getID());
+        ShowWarningFmt("DBOX: {} attempted to send insufficient {}: {} ({})", PChar->getName(), ItemStacks, PItem->getName(), PItem->getID());
         return;
     }
 
@@ -185,16 +193,29 @@ void dboxutils::AddItemsToBeSent(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
                 recvCharid,
                 receiverName);
 
-            if (rset && rset->rowsAffected() && charutils::UpdateItem(PChar, LOC_INVENTORY, ItemWorkNo, -static_cast<int32>(ItemStacks)))
-            {
-                PChar->UContainer->SetItem(PostWorkNo, PUBoxItem);
-                PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Set, BoxNo, PUBoxItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 1);
-                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
-            }
-            else
+            if (!rset || !rset->rowsAffected())
             {
                 destroy(PUBoxItem);
+                return;
             }
+
+            // The row is already committed, so it has to come out again if the stack does not
+            transaction->undoWith([charid = PChar->id, PostWorkNo]()
+                                  {
+                                      db::preparedStmt("DELETE FROM delivery_box WHERE charid = ? AND box = 2 AND slot = ?", charid, PostWorkNo);
+                                  });
+
+            if (!transaction->take(LOC_INVENTORY, ItemWorkNo, ItemStacks) || !transaction->commit())
+            {
+                ShowErrorFmt("DBOX: {} kept item {} after it was written to the box, taking the row back", PChar->getName(), ItemWorkNo);
+
+                destroy(PUBoxItem);
+                return;
+            }
+
+            PChar->UContainer->SetItem(PostWorkNo, PUBoxItem);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Set, BoxNo, PUBoxItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 1);
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
         }
     }
 }
