@@ -43,6 +43,7 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
         FOUND_ALL_FRAGS               = 7704,  -- You have obtained <keyitem>! You now have all 8 fragments of light!
         ZILART_MONUMENT               = 7705,  -- It is an ancient Zilart monument.
         TOUCHING_RED_JEWEL            = 7707,  -- Touching the red jewel has infuriated the Opo-opos of the forest. It would be wise to leave immediately.
+        MUST_MOVE_CLOSER              = 7719,  -- You will have to move closer to remove the <keyitem>.
         THE_OPO_OPOS_ATTACK           = 7721,  -- The Opo-opos attack!
         LOGGING_IS_POSSIBLE_HERE      = 7722,  -- Logging is possible here if you have <item>.
         HARVESTING_IS_POSSIBLE_HERE   = 7729,  -- Harvesting is possible here if you have <item>.

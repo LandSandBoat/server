@@ -48202,7 +48202,7 @@ INSERT INTO `mob_spawn_points` VALUES (17297446,0,'Picklix_Longindex','Picklix L
 INSERT INTO `mob_spawn_points` VALUES (17297447,0,'Moxnix_Nightgoggle','Moxnix Nightgoggle',12,58,58,204.199,4.025,-78.000,93,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17297448,0,'Doglix_Muttsnout','Doglix Muttsnout',13,58,58,210.899,4.138,-81.648,93,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17297449,0,'Ancient_Weapon','Ancient Weapon',14,66,66,-77.000,-4.000,-92.000,170,NULL,NULL);
-INSERT INTO `mob_spawn_points` VALUES (17297450,0,'Legendary_Weapon','Legendary Weapon',15,65,65,-75.000,-4.000,-92.000,170,NULL,NULL);
+INSERT INTO `mob_spawn_points` VALUES (17297450,0,'Legendary_Weapon','Legendary Weapon',15,66,66,-75.000,-4.000,-92.000,170,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17297451,0,'Gudanna','Gudanna',16,55,60,-279.065,-20.484,-0.456,18,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17297452,0,'Pil','Pil',17,94,95,-210.000,-20.835,70.000,0,NULL,NULL);
 INSERT INTO `mob_spawn_points` VALUES (17297453,0,'Pil','Pil',17,94,95,-4.000,-4.331,-33.299,0,NULL,NULL);
