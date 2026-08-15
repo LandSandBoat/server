@@ -143,8 +143,12 @@ mission.sections =
             ['Kupipi'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 3 then
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    if missionStatus == 3 then
                         return mission:progressEvent(326, 0, xi.ki.ORASTERY_RING)
+                    elseif missionStatus == 4 then
+                        return mission:event(327, 0, xi.ki.ORASTERY_RING)
                     end
                 end,
             },
@@ -171,6 +175,7 @@ mission.sections =
             onEventFinish =
             {
                 [75] = function(player, csid, option, npc)
+                    player:delKeyItem(xi.ki.BOOK_OF_THE_GODS)
                     player:setMissionStatus(mission.areaId, 10)
                 end,
             },
@@ -190,6 +195,8 @@ mission.sections =
                     then
                         SpawnMob(outerHorutotoID.mob.JESTER_WHOD_BE_KING_OFFSET + 0)
                         SpawnMob(outerHorutotoID.mob.JESTER_WHOD_BE_KING_OFFSET + 1)
+
+                        return mission:messageSpecial(outerHorutotoID.text.GUARDIAN_BLOCKING_WAY)
                     elseif missionStatus == 5 then
                         return mission:progressEvent(71)
                     end
@@ -201,7 +208,7 @@ mission.sections =
                 onMobDeath = function(mob, player, optParams)
                     if
                         player:getMissionStatus(mission.areaId) == 4 and
-                        GetMobByID(mob:getID() - 1):isDead()
+                        GetMobByID(outerHorutotoID.mob.JESTER_WHOD_BE_KING_OFFSET):isDead()
                     then
                         player:setMissionStatus(mission.areaId, 5)
                     end
@@ -213,7 +220,7 @@ mission.sections =
                 onMobDeath = function(mob, player, optParams)
                     if
                         player:getMissionStatus(mission.areaId) == 4 and
-                        GetMobByID(mob:getID() + 1):isDead()
+                        GetMobByID(outerHorutotoID.mob.JESTER_WHOD_BE_KING_OFFSET + 1):isDead()
                     then
                         player:setMissionStatus(mission.areaId, 5)
                     end
@@ -229,13 +236,34 @@ mission.sections =
             },
         },
 
+        [xi.zone.PORT_WINDURST] =
+        {
+            ['Janshura-Rashura'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 0 then
+                        return mission:event(484)
+                    end
+                end,
+            },
+        },
+
         [xi.zone.WINDURST_WALLS] =
         {
             ['Shantotto'] =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 7 then
-                        return mission:progressEvent(397, 0, 0, 0, 282)
+                        return mission:progressEvent(397, 0, 0, 0, xi.ki.GLOVE_OF_PERPETUAL_TWILIGHT)
+                    end
+                end,
+            },
+
+            ['Zokima-Rokima'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 0 then
+                        return mission:event(376)
                     end
                 end,
             },
@@ -244,6 +272,11 @@ mission.sections =
             {
                 [397] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.GLOVE_OF_PERPETUAL_TWILIGHT)
+                    player:delKeyItem(xi.ki.MANUSTERY_RING)
+                    player:delKeyItem(xi.ki.OPTISTERY_RING)
+                    player:delKeyItem(xi.ki.AURASTERY_RING)
+                    player:delKeyItem(xi.ki.RHINOSTERY_RING)
+                    player:delKeyItem(xi.ki.ORASTERY_RING)
                     player:setMissionStatus(mission.areaId, 8)
                 end,
             },
@@ -251,14 +284,24 @@ mission.sections =
 
         [xi.zone.WINDURST_WATERS] =
         {
+            ['Mokyokyo'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 0 then
+                        return mission:event(764)
+                    end
+                end,
+            },
+
             ['Tosuka-Porika'] =
             {
                 onTrigger = function(player, npc)
-                    if
-                        player:getMissionStatus(mission.areaId) == 1 and
-                        not player:hasKeyItem(xi.ki.OPTISTERY_RING)
-                    then
-                        return mission:progressEvent(801, 0, xi.ki.OPTISTERY_RING)
+                    if player:getMissionStatus(mission.areaId) == 1 then
+                        if player:hasKeyItem(xi.ki.OPTISTERY_RING) then
+                            return mission:event(802, 0, xi.ki.OPTISTERY_RING)
+                        else
+                            return mission:progressEvent(801, 0, xi.ki.OPTISTERY_RING)
+                        end
                     end
                 end,
             },
@@ -286,16 +329,31 @@ mission.sections =
 
                     if missionStatus == 0 then
                         return mission:progressEvent(588, 0, xi.ki.MANUSTERY_RING)
+                    elseif missionStatus == 1 then
+                        return mission:event(589)
                     elseif missionStatus == 2 then
                         return mission:progressEvent(601, 0, xi.ki.ORASTERY_RING)
+                    elseif missionStatus == 3 then
+                        return mission:event(601, 0, xi.ki.ORASTERY_RING)
                     elseif missionStatus == 6 then
                         return mission:progressEvent(590)
                     elseif missionStatus == 7 then
-                        return mission:progressEvent(589)
+                        return mission:event(591)
                     elseif missionStatus == 8 then
                         return mission:progressEvent(592)
+                    elseif missionStatus == 9 then
+                        return mission:event(593)
                     elseif missionStatus == 10 then
-                        return mission:progressEvent(609)
+                        return mission:progressEvent(609, 0, xi.ki.GLOVE_OF_PERPETUAL_TWILIGHT)
+                    end
+                end,
+            },
+
+            ['Rakoh_Buuma'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 0 then
+                        return mission:event(584)
                     end
                 end,
             },
@@ -312,6 +370,7 @@ mission.sections =
                 end,
 
                 [592] = function(player, csid, option, npc)
+                    player:delKeyItem(xi.ki.GLOVE_OF_PERPETUAL_TWILIGHT)
                     player:setMissionStatus(mission.areaId, 9)
                 end,
 
@@ -345,6 +404,11 @@ mission.sections =
                     mission:setVar(player, 'Option', 0)
                 end,
             },
+        },
+
+        [xi.zone.WINDURST_WOODS] =
+        {
+            ['Apururu'] = mission:event(605),
         },
     },
 }

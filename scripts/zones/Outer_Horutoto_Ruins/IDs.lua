@@ -27,6 +27,7 @@ zones[xi.zone.OUTER_HORUTOTO_RUINS] =
         DOOR_FIRMLY_SHUT              = 7278,  -- The door is firmly shut.
         ALL_G_ORBS_ENERGIZED          = 7281,  -- The six Mana Orbs have been successfully energized with magic!
         CHEST_UNLOCKED                = 7304,  -- You unlock the chest!
+        HIDDEN_DOOR_FIRMLY_SHUT       = 7313,  -- It appears to be a hidden door, but it is firmly shut.
         IF_HAD_ORBS                   = 7362,  -- You sense that if you had <keyitem>, <keyitem>, <keyitem>, or <keyitem>, something might happen.
         CANNOT_ENTER_BATTLEFIELD      = 7365,  -- You cannot enter this battlefield with the key item: <keyitem> in your possession.
         MUST_WAIT_LONGER              = 7366,  -- It appears you must wait longer to commence the battle.
