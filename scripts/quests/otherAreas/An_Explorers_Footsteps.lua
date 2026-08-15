@@ -97,7 +97,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:getMainLvl() >= 10 -- Level requirement added in the March 8, 2007 update: https://www.playonline.com/pcd/update/ff11us/20070308c2bbd1/detail.html
         end,
 
         [xi.zone.SELBINA] =
