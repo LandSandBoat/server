@@ -73,9 +73,6 @@ auto NpcTradeTransaction::stage(const uint8 tradeSlot, CItem* item, const uint8 
     slot.invSlot  = invSlot;
     slot.quantity = quantity;
 
-    // Legacy claim, kept in step with the real one until it is deleted outright
-    item->setReserve(quantity);
-
     return true;
 }
 
@@ -87,6 +84,16 @@ auto NpcTradeTransaction::item(const uint8 tradeSlot) -> CItem*
     }
 
     return this->resolve(this->slots_[tradeSlot]);
+}
+
+auto NpcTradeTransaction::quantity(const uint8 tradeSlot) const -> uint32
+{
+    if (tradeSlot >= this->slots_.size())
+    {
+        return 0;
+    }
+
+    return this->slots_[tradeSlot].quantity;
 }
 
 auto NpcTradeTransaction::confirmedQuantity(const uint8 tradeSlot) const -> uint32
@@ -115,7 +122,6 @@ auto NpcTradeTransaction::confirm(const uint8 tradeSlot, const uint32 quantity) 
     }
 
     slot.confirmed = std::min(quantity, PItem->getQuantity());
-    PItem->setReserve(slot.confirmed);
 
     return true;
 }
@@ -151,7 +157,7 @@ auto NpcTradeTransaction::resolve(Slot& slot) -> CItem*
         return nullptr;
     }
 
-    if (PItem->getReserve() > 0 || !enterTx(PItem))
+    if (!enterTx(PItem))
     {
         return nullptr;
     }
@@ -199,9 +205,6 @@ void NpcTradeTransaction::consumeSlot(Slot& slot, const uint32 quantity)
         return;
     }
 
-    // The reserve is what the stack is holding back, so it has to go before any of it can move
-    slot.item->setReserve(0);
-
     const auto consumed = this->updateItem(this->player_, LOC_INVENTORY, invSlot, -static_cast<int32>(quantity));
 
     if (!consumed.applied)
@@ -225,8 +228,6 @@ void NpcTradeTransaction::releaseClaim(Slot& slot) const
     {
         return;
     }
-
-    slot.item->setReserve(0);
 
     exitTx(slot.item);
     slot.item = nullptr;

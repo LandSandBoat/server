@@ -79,7 +79,7 @@ void CGuild::updateGuildPointsPattern(uint8 pattern)
     }
 }
 
-auto CGuild::addGuildPoints(CCharEntity* PChar, const CItem* PItem) const -> std::pair<uint8, int16>
+auto CGuild::addGuildPoints(CCharEntity* PChar, const CItem* PItem, const uint32 tradedQuantity) const -> std::pair<uint8, int16>
 {
     uint8 rank = PChar->RealSkills.rank[m_id + 48];
 
@@ -102,7 +102,7 @@ auto CGuild::addGuildPoints(CCharEntity* PChar, const CItem* PItem) const -> std
                 // if a player ranks up to a new pattern whose maxpoints are fewer than the player's current daily points
                 // then we'd be trying to push a negative number into quantity. our edit to CGuild::getDailyGPItem should
                 // prevent this, but let's be doubly sure.
-                uint16 quantity    = std::min<uint16>((((GPItem.maxpoints - std::clamp<uint16>(curPoints, 0, GPItem.maxpoints)) / GPItem.points) + 1), PItem->getReserve());
+                uint16 quantity    = std::min<uint16>((((GPItem.maxpoints - std::clamp<uint16>(curPoints, 0, GPItem.maxpoints)) / GPItem.points) + 1), tradedQuantity);
                 uint16 pointsToAdd = GPItem.points * quantity;
 
                 if (curPoints <= GPItem.maxpoints)

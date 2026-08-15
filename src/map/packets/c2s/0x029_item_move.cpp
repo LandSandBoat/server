@@ -175,7 +175,7 @@ void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar)
         return;
     }
 
-    if (PItem->getQuantity() - PItem->getReserve() < this->ItemNum)
+    if (PItem->getQuantity() < this->ItemNum)
     {
         ShowWarning("GP_CLI_COMMAND_ITEM_MOVE: Trying to move too much quantity from location %u slot %u", this->Category1, this->ItemIndex1);
         return;
@@ -209,7 +209,7 @@ void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar)
 
             if (!PItem2 || PItem2->getID() != PItem->getID() ||
                 PItem2->isBusy() ||
-                PItem2->getReserve() > 0)
+                PItem2->isBusy())
             {
                 ShowWarning("GP_CLI_COMMAND_ITEM_MOVE: Trying to unite items with invalid item %i at location %u slot %u",
                             PItem2 ? PItem2->getID() : 0,

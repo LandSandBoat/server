@@ -76,6 +76,11 @@ auto BazaarPurchaseTransaction::claimAll() -> bool
         return false;
     }
 
+    if (!PBuyerGil->isType(ITEM_CURRENCY) || !PSellerGil->isType(ITEM_CURRENCY))
+    {
+        return false;
+    }
+
     // The listing is claimed by the bazaar, so take it off display before the sale claims it
     if (PListing->state() == ItemState::Bazaar && !xi::items::mark(PListing, ItemState::Free))
     {
@@ -168,7 +173,6 @@ auto BazaarPurchaseTransaction::doCommit() -> bool
 
     clone->setCharPrice(0);
     clone->setQuantity(this->quantity_);
-    clone->setReserve(0);
 
     // Failures below leave the claims in place, so the rollback puts the listing back on display
     this->deliveredSlot_ = this->addItem(this->buyer_, LOC_INVENTORY, std::move(clone));

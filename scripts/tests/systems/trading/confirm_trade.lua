@@ -46,12 +46,12 @@ describe('confirmTrade & confirmItem', function()
 
         assert(turbine, 'player still has a barrage turbine in inventory')
         assert(turbine:getQuantity() == 1, 'player still has a single barrage turbine in inventory')
-        assert(turbine:getReservedValue() == 0, 'the barrage turbine item is not reserved')
+        assert(turbine:state() == xi.itemState.FREE, 'the barrage turbine is not claimed')
 
         local barrierModule = player:findItem(xi.item.BARRIER_MODULE_II, xi.inventoryLocation.INVENTORY)
 
         assert(barrierModule, 'player still has a barrier module in inventory')
-        assert(barrierModule:getReservedValue() == 0, 'the barrier module is not reserved')
+        assert(barrierModule:state() == xi.itemState.FREE, 'the barrier module is not claimed')
 
         player.actions:tradeNpc('Tateeya',
             {
@@ -76,7 +76,7 @@ describe('confirmTrade & confirmItem', function()
         turbine = player:findItem(xi.item.BARRAGE_TURBINE, xi.inventoryLocation.INVENTORY)
         assert(turbine, 'player still has a barrage turbine in inventory')
         assert(turbine:getQuantity() == 1, 'player still has a single barrage turbine in inventory')
-        assert(turbine:getReservedValue() == 0, 'the barrage turbine item is not reserved')
+        assert(turbine:state() == xi.itemState.FREE, 'the barrage turbine is not claimed')
 
         -- You already have this unlocked
         player.actions:tradeNpc('Tateeya',
@@ -108,6 +108,6 @@ describe('confirmTrade & confirmItem', function()
 
         assert(turbine, 'player still has a barrage turbine in inventory')
         assert(turbine:getQuantity() == 1, 'only the confirmed turbine was taken')
-        assert(turbine:getReservedValue() == 0, 'the leftover turbine is not reserved')
+        assert(turbine:state() == xi.itemState.FREE, 'the leftover turbine is not claimed')
     end)
 end)

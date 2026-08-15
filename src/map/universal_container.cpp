@@ -47,17 +47,6 @@ void CUContainer::Clean()
         }
     }
 
-    if (m_ContainerType == UCONTAINER_TRADE)
-    {
-        for (auto&& PItem : m_PItem)
-        {
-            if (PItem)
-            {
-                PItem->setReserve(0);
-            }
-        }
-    }
-
     m_ContainerType = UCONTAINER_EMPTY;
 
     m_lock   = false;

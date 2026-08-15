@@ -38,7 +38,6 @@ CItem::CItem(uint16 id)
 , m_type(0)
 , m_subtype(0)
 , m_quantity(0)
-, m_reserve(0)
 , m_stackSize(0)
 , m_BasePrice(0)
 , m_CharPrice(0)
@@ -57,7 +56,6 @@ CItem::CItem(const CItem& other)
 , m_type(other.m_type)
 , m_subtype(other.m_subtype)
 , m_quantity(other.m_quantity)
-, m_reserve(other.m_reserve)
 , m_stackSize(other.m_stackSize)
 , m_BasePrice(other.m_BasePrice)
 , m_CharPrice(other.m_CharPrice)
@@ -191,22 +189,6 @@ void CItem::setSubType(uint8 subtype)
 bool CItem::isSubType(ITEM_SUBTYPE subtype) const
 {
     return (m_subtype & subtype);
-}
-
-/************************************************************************
- *                                                                       *
- * Reserved number of objects in a pack                                  *
- *                                                                       *
- ************************************************************************/
-
-void CItem::setReserve(uint32 reserve)
-{
-    m_reserve = (reserve < m_quantity ? reserve : m_quantity);
-}
-
-uint32 CItem::getReserve() const
-{
-    return m_reserve;
 }
 
 /************************************************************************

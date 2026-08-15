@@ -79,7 +79,7 @@ void GP_CLI_COMMAND_ITEM_DUMP::process(MapSession* PSession, CCharEntity* PChar)
         return;
     }
 
-    if (PItem->getQuantity() - PItem->getReserve() < this->ItemNum)
+    if (PItem->getQuantity() < this->ItemNum)
     {
         ShowWarning("GP_CLI_COMMAND_ITEM_DUMP: Trying to drop too much quantity from location %u slot %u", this->Category, this->ItemIndex);
         return;

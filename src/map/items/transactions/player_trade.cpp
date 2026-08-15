@@ -258,7 +258,7 @@ auto PlayerTradeTransaction::setSlot(CCharEntity* who, const uint8 transactionSl
 
     const bool wrongItem     = !item || item->getID() != expectedItemId;
     const bool exclusiveItem = item && item->hasFlag(ItemFlag::Exclusive);
-    const bool qtyExceeds    = item && qty + item->getReserve() > item->getQuantity();
+    const bool qtyExceeds    = item && qty > item->getQuantity();
     const bool rareOnPartner = item && item->hasFlag(ItemFlag::Rare) && charutils::HasItem(other, item->getID());
 
     if (wrongItem || exclusiveItem || qtyExceeds || rareOnPartner || !enterTx(item))
@@ -424,7 +424,6 @@ auto PlayerTradeTransaction::doCommit() -> bool
             }
 
             clone->setQuantity(slot.qty);
-            clone->setReserve(0);
 
             const uint8 deliveredSlot = this->addItem(receiver, LOC_INVENTORY, std::move(clone));
             if (deliveredSlot == ERROR_SLOTID)

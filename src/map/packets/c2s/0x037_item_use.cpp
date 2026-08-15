@@ -93,11 +93,9 @@ void GP_CLI_COMMAND_ITEM_USE::process(MapSession* PSession, CCharEntity* PChar) 
 
     const bool isEquipment = PItem->isType(ITEM_WEAPON) || PItem->isType(ITEM_EQUIPMENT);
     const bool isLocked    = PItem->isBusy() && !(isEquipment && isEquipped());
-    if (isLocked ||
-        PItem->getReserve() > 0 ||
-        PItem->getCharPrice() > 0)
+    if (isLocked)
     {
-        ShowWarningFmt("GP_CLI_COMMAND_ITEM_USE: {} trying to use invalid item (locked/reserved/bazaared)", PChar->getName());
+        ShowWarningFmt("GP_CLI_COMMAND_ITEM_USE: {} trying to use a claimed item", PChar->getName());
         return;
     }
 

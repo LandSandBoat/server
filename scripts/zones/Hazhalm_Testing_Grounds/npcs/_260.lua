@@ -13,15 +13,6 @@ local function releaseLamp(player)
         return
     end
 
-    local item = tradeContainer:getItem()
-    local itemId = item and item:getID()
-    if
-        itemId == xi.item.GLOWING_LAMP or
-        itemId == xi.item.SMOLDERING_LAMP
-    then
-        item:setReservedValue(0)
-    end
-
     tradeContainer:clean()
 end
 

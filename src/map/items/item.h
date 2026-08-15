@@ -74,7 +74,6 @@ public:
     auto   hasFlag(ItemFlag flag) const -> bool;
     uint8  getAppraisalID() const;
     uint8  getAHCat() const;
-    uint32 getReserve() const;
     uint32 getQuantity() const;
     uint32 getStackSize() const;
     uint32 getBasePrice() const;
@@ -93,7 +92,6 @@ public:
     void setFlag(ItemFlag);
     void setAppraisalID(uint8 appraisailID);
     void setAHCat(uint8);
-    void setReserve(uint32);
     void setQuantity(uint32);
     void setStackSize(uint32);
     void setBasePrice(uint32);
@@ -150,8 +148,7 @@ private:
     uint16   m_subid;
     uint16   m_type;
     uint8    m_subtype;
-    uint32   m_quantity; // Current number of items
-    uint32   m_reserve;
+    uint32   m_quantity;  // Current number of items
     uint32   m_stackSize; // The maximum number of items
     uint32   m_BasePrice;
     uint32   m_CharPrice; // The cost of the subject in Bazaar

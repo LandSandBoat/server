@@ -129,12 +129,6 @@ void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PC
             return;
         }
 
-        if (PItem->getReserve() > 0)
-        {
-            ShowErrorFmt("GP_CLI_COMMAND_ITEM_TRANSFER: {} trying to trade NPC {} with reserved item {} ({})!", PChar->getName(), PNpc->getName(), PItem->getName(), PItem->getID());
-            return;
-        }
-
         if (PItem->isBusy())
         {
             ShowErrorFmt("GP_CLI_COMMAND_ITEM_TRANSFER: {} trying to trade NPC {} with locked item {} ({})!", PChar->getName(), PNpc->getName(), PItem->getName(), PItem->getID());
@@ -168,7 +162,6 @@ void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PC
         // TODO: Don't pass around Scheduler& through PSession
         auditTrade(*PSession->scheduler, PChar, PNpc, PItem->getID(), quantity);
 
-        PItem->setReserve(quantity);
         PChar->TradeContainer->setItem(slotId, PItem->getID(), invSlotId, quantity);
     }
 

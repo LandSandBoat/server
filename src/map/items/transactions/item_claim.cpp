@@ -62,7 +62,7 @@ auto ItemClaimTransaction::claim(const uint8 location, const uint8 slot) -> CIte
         return PItem;
     }
 
-    if (PItem->getReserve() > 0 || !enterTx(PItem))
+    if (!enterTx(PItem))
     {
         return nullptr;
     }
@@ -153,7 +153,6 @@ auto ItemClaimTransaction::take(const uint8 location, const uint8 slot, const ui
     }
 
     restore->setQuantity(quantity);
-    restore->setReserve(0);
 
     this->undoWith([this, location, kept = std::shared_ptr<CItem>(std::move(restore))]()
                    {

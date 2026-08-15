@@ -78,7 +78,7 @@ auto GuildSellTransaction::start(CCharEntity* player, const uint16 itemId, const
         auto* item = container->GetItem(slot);
 
         // Don't claim busy items.
-        if (!item || item->isBusy() || item->getQuantity() <= item->getReserve())
+        if (!item || item->isBusy() || item->getQuantity() == 0)
         {
             continue;
         }
@@ -88,7 +88,7 @@ auto GuildSellTransaction::start(CCharEntity* player, const uint16 itemId, const
             continue;
         }
 
-        const auto take = std::min<uint32>(item->getQuantity() - item->getReserve(), quantity - transaction->claimed_);
+        const auto take = std::min<uint32>(item->getQuantity(), quantity - transaction->claimed_);
 
         transaction->claims_.push_back(Claim{ .item = item, .invSlot = slot, .quantity = static_cast<uint8>(take) });
         transaction->claimed_ += static_cast<uint8>(take);

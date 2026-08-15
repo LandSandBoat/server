@@ -67,7 +67,7 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
     }
 
     CItem* PBazaarItem = PBazaar->GetItem(this->BazaarItemIndex);
-    if (PBazaarItem == nullptr || PBazaarItem->getReserve() > 0)
+    if (PBazaarItem == nullptr)
     {
         return;
     }
@@ -91,9 +91,9 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
         return;
     }
 
-    // Obtain the players gil
+    // Only needed to price the sale, the transaction validates and claims it
     const CItem* PCharGil = PBuyerInventory->GetItem(0);
-    if (PCharGil == nullptr || !PCharGil->isType(ITEM_CURRENCY) || PCharGil->getReserve() > 0 || PCharGil->isBusy())
+    if (PCharGil == nullptr)
     {
         // Player has no gil
         PChar->pushPacket<GP_SERV_COMMAND_BAZAAR_BUY>(PTarget, GP_BAZAAR_BUY_STATE::ERR);

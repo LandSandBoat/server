@@ -56,7 +56,6 @@ void GP_CLI_COMMAND_ITEM_STACK::process(MapSession* PSession, CCharEntity* PChar
         const CItem* PItem = PItemContainer->GetItem(slotId);
         // Skip items that are invalid, claimed, reserved or already meeting stack size.
         if (!PItem ||
-            PItem->getReserve() > 0 ||
             PItem->isBusy() ||
             PItem->getQuantity() >= PItem->getStackSize())
         {
@@ -70,7 +69,6 @@ void GP_CLI_COMMAND_ITEM_STACK::process(MapSession* PSession, CCharEntity* PChar
             // Skip items that are invalid, not matching, claimed, reserved or already meeting stack size.
             if (!PItem2 ||
                 PItem2->getID() != PItem->getID() ||
-                PItem2->getReserve() > 0 ||
                 PItem2->isBusy() ||
                 PItem2->getQuantity() >= PItem2->getStackSize())
             {

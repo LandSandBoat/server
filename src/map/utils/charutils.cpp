@@ -1974,14 +1974,14 @@ uint8 MoveItem(CCharEntity* PChar, uint8 LocationID, uint8 SlotID, uint8 NewSlot
     return NewSlotID;
 }
 
+namespace
+{
+
 /************************************************************************
  *                                                                       *
  *  Update the number of items in the specified container and slot       *
  *                                                                       *
  ************************************************************************/
-
-namespace
-{
 
 auto applyItemUpdate(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quantity, const Transaction* owner) -> ItemMutation
 {
@@ -1996,7 +1996,7 @@ auto applyItemUpdate(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 q
 
     uint16 ItemID = PItem->getID();
 
-    if ((int32)(PItem->getQuantity() - PItem->getReserve() + quantity) < 0)
+    if ((int32)(PItem->getQuantity() + quantity) < 0)
     {
         ShowDebug("UpdateItem: %s trying to move invalid quantity %u of itemID %u", PChar->getName(), quantity, ItemID);
         return {};

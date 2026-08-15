@@ -61,6 +61,9 @@ public:
     [[nodiscard]] auto stage(uint8 tradeSlot, CItem* item, uint8 invSlot, uint32 quantity) -> bool;
 
     auto item(uint8 tradeSlot) -> CItem*;
+
+    // How much of the slot was offered, and how much of that the script asked for
+    auto quantity(uint8 tradeSlot) const -> uint32;
     auto confirmedQuantity(uint8 tradeSlot) const -> uint32;
     auto confirm(uint8 tradeSlot, uint32 quantity) -> bool;
 
