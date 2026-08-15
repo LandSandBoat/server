@@ -25,6 +25,7 @@
 #include "common/types/badge.h"
 
 #include "item_container.h"
+#include "items/item_id.h"
 #include "items/transaction.h"
 #include "trade_container.h"
 
@@ -58,7 +59,7 @@ public:
 
     DISALLOW_COPY_AND_MOVE(NpcTradeTransaction);
 
-    [[nodiscard]] auto stage(uint8 tradeSlot, CItem* item, uint8 invSlot, uint32 quantity) -> bool;
+    [[nodiscard]] auto stage(uint8 tradeSlot, CItem* item, uint32 quantity) -> bool;
 
     auto item(uint8 tradeSlot) -> CItem*;
 
@@ -79,36 +80,21 @@ public:
     // Consumes every staged slot in full, then closes. False if any of it could not be taken
     [[nodiscard]] auto consumeAll() -> bool;
 
-    auto holds(const CItem* item) const -> bool override;
-
 protected:
     auto doCommit() -> bool override;
     void doRollback() override;
 
-    void onItemDestroyed(CItem* item) override;
-
 private:
     struct Slot
     {
-        // Only set while claimed. The offer outlives the claim, so this is re-resolved on demand
-        CItem* item{};
-
-        uint16 itemId{};
-        uint8  invSlot{ 0xFF };
+        // The offer outlives the claim, so the stack is resolved on demand rather than remembered
+        ItemId offered{};
         uint32 quantity{};
         uint32 confirmed{};
     };
 
-    // Drops the claim but keeps the offer, so a script can still confirm it during a later event
-    void releaseClaim(Slot& slot) const;
-
-    // Runs from the destructor too, so it must not touch the character
-    void releaseSlot(Slot& slot) const;
-
     // The stack an offer refers to, re-claimed if it was let go after onTrade
     auto resolve(Slot& slot) -> CItem*;
-
-    void releaseAll();
 
     // Takes `quantity` from the slot's stack and drops the claim on whatever is left
     [[nodiscard]] auto consumeSlot(Slot& slot, uint32 quantity) -> bool;

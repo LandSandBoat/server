@@ -25,6 +25,8 @@
 #include "common/macros.h"
 #include "common/types/flag.h"
 
+#include "items/item_id.h"
+
 #include <functional>
 #include <memory>
 #include <optional>
@@ -52,13 +54,17 @@ enum class TransactionState : uint8
 };
 
 // Open/commit/rollback wrapper for multistep item interactions (item use, NPC trade, synth, dbox).
-// Subclasses override doCommit/doRollback/holds.
+// Subclasses override doCommit/doRollback.
 // Derived must call rollbackIfOpen() in destructor else base aborts.
+//
+// A transaction claims the stacks it means to touch, and only it may mutate them until it closes.
+// The claims are held here rather than by each subclass, so closing always lets go of everything,
+// however the work turned out.
 //
 // Every step that moves an item - give, take, pay, earn - records how to reverse itself, so
 // rolling back undoes the work rather than only letting go of the claims. Committing keeps it.
-// A step that destroys a stack reports it through onItemDestroyed, since whatever was holding a
-// pointer to it needs to let go before anything tries to release it.
+// A claim is an ItemId rather than a pointer, so a stack consumed to nothing simply stops
+// resolving rather than leaving something dangling behind to trip over.
 
 class Transaction
 {
@@ -71,7 +77,8 @@ public:
     auto id() const -> uint64;
     auto isOpen() const -> bool;
 
-    virtual auto holds(const CItem* item) const -> bool = 0;
+    // Whether this transaction is the one allowed to mutate a stack
+    auto holds(const CItem* item) const -> bool;
 
     [[nodiscard]] auto commit() -> bool;
     void               rollback();
@@ -82,9 +89,15 @@ protected:
 
     void rollbackIfOpen();
 
-    // Subclass entry points to the badge-gated InTransaction transitions.
-    [[nodiscard]] static auto enterTx(CItem* item) -> bool;
-    static void               exitTx(CItem* item);
+    // Claims a stack, so nothing else can spend, sell or bazaar it until this closes. False if it
+    // is already spoken for. Claiming the same stack twice is the same claim, not a second one
+    [[nodiscard]] auto claim(const CCharEntity* owner, CItem* item) -> ItemId;
+
+    // Lets one claim go early, for an offer a script may still confirm after the claim is gone
+    void release(const ItemId& claimed);
+
+    // What is still claimed. Everything left is released when the transaction closes
+    auto claims() const -> const std::vector<ItemId>&;
 
     // Mutating an item this transaction holds, which is refused to everyone else
     [[nodiscard]] auto updateItem(CCharEntity* PChar, uint8 locationId, uint8 slotId, int32 quantity) -> ItemMutation;
@@ -106,18 +119,20 @@ protected:
     // For work this cannot reverse on its own, such as a row written outside the item tables
     void undoWith(std::function<void()> undo);
 
-    // A step is consuming this stack to nothing. It is still alive here, but will not be for long,
-    // so anything holding a pointer to it must let go now
-    virtual void onItemDestroyed(CItem* item);
-
     // Whether steps that already landed can be taken back. A transaction that says no keeps its
     // work on rollback, so abandoning it costs the same as finishing it badly
     virtual auto reversible() const -> bool;
 
 private:
     void runUndos();
+    void releaseAll();
+
+    // The badge-gated InTransaction transitions. Only claiming and releasing may reach them
+    [[nodiscard]] static auto enterTx(CItem* item) -> bool;
+    static void               exitTx(CItem* item);
 
     uint64                             id_;
     TransactionState                   state_{ TransactionState::Open };
+    std::vector<ItemId>                claims_;
     std::vector<std::function<void()>> undos_;
 };

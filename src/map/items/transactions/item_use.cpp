@@ -27,7 +27,7 @@
 
 ItemUseTransaction::ItemUseTransaction(xi::Badge<ItemUseTransaction>, CCharEntity* player, CItemUsable* item, TakesCustody takesCustody)
 : player_(player)
-, item_(item)
+, item_(player, item)
 , takesCustody_(takesCustody)
 {
 }
@@ -43,27 +43,19 @@ auto ItemUseTransaction::start(CCharEntity* player, CItemUsable* item) -> std::u
     // tx just carries the state machine and commit/rollback are no-ops.
     const auto takesCustody = item->isType(ITEM_EQUIPMENT) ? TakesCustody::No : TakesCustody::Yes;
 
+    auto transaction = std::unique_ptr<ItemUseTransaction>(new ItemUseTransaction(xi::Badge<ItemUseTransaction>{}, player, item, takesCustody));
+
     // Claimed first, so a refusal never leaves a transaction holding something it does not own
-    if (takesCustody && !enterTx(item))
+    if (takesCustody && !transaction->claim(player, item).isSet())
     {
         return nullptr;
     }
 
-    return std::unique_ptr<ItemUseTransaction>(new ItemUseTransaction(xi::Badge<ItemUseTransaction>{}, player, item, takesCustody));
-}
-
-auto ItemUseTransaction::holds(const CItem* item) const -> bool
-{
-    return this->isOpen() && this->takesCustody_ && item != nullptr && this->item_ == item;
+    return transaction;
 }
 
 void ItemUseTransaction::doRollback()
 {
-    if (this->takesCustody_ && this->item_ != nullptr)
-    {
-        exitTx(this->item_);
-        this->item_ = nullptr;
-    }
 }
 
 auto ItemUseTransaction::doCommit() -> bool
@@ -75,26 +67,17 @@ auto ItemUseTransaction::doCommit() -> bool
         return true;
     }
 
-    if (this->item_ == nullptr)
+    if (!this->item_.resolve())
     {
         return false;
     }
 
-    const uint8 location = this->item_->getLocationID();
-    const uint8 slot     = this->item_->getSlotID();
+    const uint8 slot = this->item_.slot;
 
-    const auto consumed = this->updateItem(this->player_, location, slot, -1);
-    if (!consumed.applied)
+    if (!this->updateItem(this->player_, this->item_.location, slot, -1).applied)
     {
         ShowErrorFmt("ItemUseTransaction: {} kept the item in slot {} after using it", this->player_->getName(), slot);
     }
 
-    // A stack used up is already gone, so only what survived still needs releasing
-    if (!consumed.removed)
-    {
-        exitTx(this->item_);
-    }
-
-    this->item_ = nullptr;
     return true;
 }

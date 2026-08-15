@@ -87,73 +87,18 @@ auto BazaarPurchaseTransaction::claimAll() -> bool
         return false;
     }
 
-    if (!enterTx(PListing))
-    {
-        return false;
-    }
+    this->listing_   = this->claim(this->seller_, PListing);
+    this->buyerGil_  = this->claim(this->buyer_, PBuyerGil);
+    this->sellerGil_ = this->claim(this->seller_, PSellerGil);
 
-    this->listing_ = PListing;
-
-    if (!enterTx(PBuyerGil))
-    {
-        return false;
-    }
-
-    this->buyerGil_ = PBuyerGil;
-
-    if (!enterTx(PSellerGil))
-    {
-        return false;
-    }
-
-    this->sellerGil_ = PSellerGil;
-
-    return true;
-}
-
-// A stack bought out entirely no longer exists, so the claim on it has to go with it
-void BazaarPurchaseTransaction::onItemDestroyed(CItem* item)
-{
-    if (this->listing_ == item)
-    {
-        this->listing_ = nullptr;
-    }
-
-    if (this->buyerGil_ == item)
-    {
-        this->buyerGil_ = nullptr;
-    }
-
-    if (this->sellerGil_ == item)
-    {
-        this->sellerGil_ = nullptr;
-    }
-}
-
-// Clearing each pointer keeps a second release from touching claims this no longer owns
-void BazaarPurchaseTransaction::releaseClaims()
-{
-    if (this->listing_)
-    {
-        exitTx(this->listing_);
-        this->listing_ = nullptr;
-    }
-
-    if (this->buyerGil_)
-    {
-        exitTx(this->buyerGil_);
-        this->buyerGil_ = nullptr;
-    }
-
-    if (this->sellerGil_)
-    {
-        exitTx(this->sellerGil_);
-        this->sellerGil_ = nullptr;
-    }
+    return this->listing_.isSet() && this->buyerGil_.isSet() && this->sellerGil_.isSet();
 }
 
 void BazaarPurchaseTransaction::restoreDisplay()
 {
+    // Nothing can go back on display while this still holds it
+    this->release(this->listing_);
+
     // The stack may have been consumed entirely, so look it up again rather than trusting the pointer
     auto* PRemaining = this->seller_->getStorage(LOC_INVENTORY)->GetItem(this->bazaarSlot_);
     if (!PRemaining || PRemaining->getCharPrice() == 0)
@@ -167,11 +112,6 @@ void BazaarPurchaseTransaction::restoreDisplay()
     }
 }
 
-auto BazaarPurchaseTransaction::holds(const CItem* item) const -> bool
-{
-    return item && (item == this->listing_ || item == this->buyerGil_ || item == this->sellerGil_);
-}
-
 auto BazaarPurchaseTransaction::deliveredSlot() const -> uint8
 {
     return this->deliveredSlot_;
@@ -179,12 +119,13 @@ auto BazaarPurchaseTransaction::deliveredSlot() const -> uint8
 
 auto BazaarPurchaseTransaction::doCommit() -> bool
 {
-    if (!this->listing_)
+    const CItem* PListing = this->listing_.resolve();
+    if (!PListing)
     {
         return false;
     }
 
-    auto clone = xi::items::clone(*this->listing_);
+    auto clone = xi::items::clone(*PListing);
     if (!clone)
     {
         return false;
@@ -226,7 +167,6 @@ auto BazaarPurchaseTransaction::doCommit() -> bool
         return false;
     }
 
-    this->releaseClaims();
     this->restoreDisplay();
 
     return true;
@@ -234,6 +174,5 @@ auto BazaarPurchaseTransaction::doCommit() -> bool
 
 void BazaarPurchaseTransaction::doRollback()
 {
-    this->releaseClaims();
     this->restoreDisplay();
 }

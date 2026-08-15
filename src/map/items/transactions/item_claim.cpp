@@ -51,25 +51,8 @@ auto ItemClaimTransaction::start(CCharEntity* player) -> std::unique_ptr<ItemCla
 auto ItemClaimTransaction::claim(const uint8 location, const uint8 slot) -> CItem*
 {
     CItem* PItem = this->player_->getStorage(location)->GetItem(slot);
-    if (!PItem)
-    {
-        return nullptr;
-    }
 
-    // Claiming the same stack twice would release it on the first exit
-    if (this->holds(PItem))
-    {
-        return PItem;
-    }
-
-    if (!enterTx(PItem))
-    {
-        return nullptr;
-    }
-
-    this->claims_.push_back(PItem);
-
-    return PItem;
+    return Transaction::claim(this->player_, PItem).isSet() ? PItem : nullptr;
 }
 
 auto ItemClaimTransaction::claimGil() -> CItem*
@@ -146,35 +129,11 @@ auto ItemClaimTransaction::moveBetween(const uint8 fromLocation, const uint8 fro
     return true;
 }
 
-// A stack consumed to nothing is freed, so the claim on it has to go before anything releases it
-void ItemClaimTransaction::onItemDestroyed(CItem* item)
-{
-    std::erase(this->claims_, item);
-}
-
-auto ItemClaimTransaction::holds(const CItem* item) const -> bool
-{
-    return item && std::ranges::find(this->claims_, item) != this->claims_.end();
-}
-
 auto ItemClaimTransaction::doCommit() -> bool
 {
-    this->releaseClaims();
-
     return true;
 }
 
 void ItemClaimTransaction::doRollback()
 {
-    this->releaseClaims();
-}
-
-void ItemClaimTransaction::releaseClaims()
-{
-    for (auto* claim : this->claims_)
-    {
-        exitTx(claim);
-    }
-
-    this->claims_.clear();
 }

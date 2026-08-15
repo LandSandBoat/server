@@ -24,6 +24,7 @@
 #include "common/cbasetypes.h"
 #include "common/types/badge.h"
 
+#include "items/item_id.h"
 #include "items/transaction.h"
 
 #include <memory>
@@ -72,17 +73,10 @@ public:
     // For work this cannot reverse on its own, such as a row written outside the item tables
     using Transaction::undoWith;
 
-    auto holds(const CItem* item) const -> bool override;
-
 protected:
     auto doCommit() -> bool override;
     void doRollback() override;
 
-    void onItemDestroyed(CItem* item) override;
-
 private:
-    void releaseClaims();
-
-    CCharEntity*        player_{};
-    std::vector<CItem*> claims_;
+    CCharEntity* player_{};
 };

@@ -23,6 +23,7 @@
 
 #include "common/types/badge.h"
 #include "common/types/flag.h"
+#include "items/item_id.h"
 #include "items/transaction.h"
 
 #include <memory>
@@ -52,14 +53,12 @@ public:
 
     DISALLOW_COPY_AND_MOVE(ItemUseTransaction);
 
-    auto holds(const CItem* item) const -> bool override;
-
 protected:
     auto doCommit() -> bool override;
     void doRollback() override;
 
 private:
     CCharEntity* player_{};
-    CItemUsable* item_{};
+    ItemId       item_{};
     TakesCustody takesCustody_{ TakesCustody::No };
 };

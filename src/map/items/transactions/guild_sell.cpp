@@ -83,32 +83,19 @@ auto GuildSellTransaction::start(CCharEntity* player, const uint16 itemId, const
             continue;
         }
 
-        if (!enterTx(item))
+        const auto claimed = transaction->claim(player, item);
+        if (!claimed.isSet())
         {
             continue;
         }
 
         const auto take = std::min<uint32>(item->getQuantity(), quantity - transaction->claimed_);
 
-        transaction->claims_.push_back(Claim{ .item = item, .invSlot = slot, .quantity = static_cast<uint8>(take) });
+        transaction->claims_.push_back(Claim{ .claimed = claimed, .quantity = static_cast<uint8>(take) });
         transaction->claimed_ += static_cast<uint8>(take);
     }
 
     return transaction;
-}
-
-auto GuildSellTransaction::holds(const CItem* item) const -> bool
-{
-    if (!item)
-    {
-        return false;
-    }
-
-    return std::ranges::any_of(this->claims_,
-                               [item](const Claim& claim)
-                               {
-                                   return claim.item == item;
-                               });
 }
 
 auto GuildSellTransaction::claimed() const -> uint8
@@ -149,14 +136,12 @@ auto GuildSellTransaction::doCommit() -> bool
         const uint8 take = std::min(claim.quantity, remaining);
         remaining -= take;
 
-        if (!Transaction::take(this->player_, LOC_INVENTORY, claim.invSlot, take))
+        if (!Transaction::take(this->player_, LOC_INVENTORY, claim.claimed.slot, take))
         {
-            ShowErrorFmt("GuildSellTransaction: {} kept {} of the goods in slot {}", this->player_->getName(), take, claim.invSlot);
+            ShowErrorFmt("GuildSellTransaction: {} kept {} of the goods in slot {}", this->player_->getName(), take, claim.claimed.slot);
             return false;
         }
     }
-
-    this->releaseAllClaims();
 
     if (!this->earn(this->player_, this->sold_ * this->unitPrice_))
     {
@@ -171,31 +156,4 @@ auto GuildSellTransaction::doCommit() -> bool
 
 void GuildSellTransaction::doRollback()
 {
-    this->releaseAllClaims();
-}
-
-// A stack sold whole is already gone, so the claim must forget it before anything releases it
-void GuildSellTransaction::onItemDestroyed(CItem* item)
-{
-    for (auto& claim : this->claims_)
-    {
-        if (claim.item == item)
-        {
-            claim.item = nullptr;
-        }
-    }
-}
-
-void GuildSellTransaction::releaseAllClaims()
-{
-    for (auto& claim : this->claims_)
-    {
-        if (claim.item)
-        {
-            exitTx(claim.item);
-            claim.item = nullptr;
-        }
-    }
-
-    this->claims_.clear();
 }

@@ -257,11 +257,15 @@ auto Transaction::commit() -> bool
         return false;
     }
 
+    // The work happens while the claims still stand, so each step keeps the right to what it touches.
+    // A refusal keeps them, since the rollback that follows still has to put things back
     if (!this->doCommit())
     {
         ShowWarningFmt("Transaction::commit: doCommit rejected for tx {}", this->id_);
         return false;
     }
+
+    this->releaseAll();
 
     this->undos_.clear();
     this->state_ = TransactionState::Committed;
@@ -289,7 +293,75 @@ void Transaction::rollback()
     }
 
     this->doRollback();
+    this->releaseAll();
     this->state_ = TransactionState::RolledBack;
+}
+
+auto Transaction::claim(const CCharEntity* owner, CItem* item) -> ItemId
+{
+    if (!owner || !item)
+    {
+        return {};
+    }
+
+    // Claiming the same stack twice is the same claim, and letting it go once must be enough
+    if (this->holds(item))
+    {
+        return ItemId(owner, item);
+    }
+
+    if (!enterTx(item))
+    {
+        return {};
+    }
+
+    this->claims_.emplace_back(owner, item);
+
+    return this->claims_.back();
+}
+
+void Transaction::release(const ItemId& claimed)
+{
+    const auto held = std::ranges::find(this->claims_, claimed);
+    if (held == this->claims_.end())
+    {
+        return;
+    }
+
+    // A stack consumed to nothing no longer resolves, so there is nothing left of it to release
+    if (auto* PItem = held->resolve())
+    {
+        exitTx(PItem);
+    }
+
+    this->claims_.erase(held);
+}
+
+void Transaction::releaseAll()
+{
+    for (const auto& claimed : this->claims_)
+    {
+        if (auto* PItem = claimed.resolve())
+        {
+            exitTx(PItem);
+        }
+    }
+
+    this->claims_.clear();
+}
+
+auto Transaction::claims() const -> const std::vector<ItemId>&
+{
+    return this->claims_;
+}
+
+auto Transaction::holds(const CItem* item) const -> bool
+{
+    return std::ranges::any_of(this->claims_,
+                               [item](const ItemId& claimed)
+                               {
+                                   return claimed == item;
+                               });
 }
 
 void Transaction::runUndos()
@@ -305,10 +377,6 @@ void Transaction::runUndos()
 void Transaction::undoWith(std::function<void()> undo)
 {
     this->undos_.push_back(std::move(undo));
-}
-
-void Transaction::onItemDestroyed(CItem*)
-{
 }
 
 auto Transaction::reversible() const -> bool
@@ -380,12 +448,6 @@ auto Transaction::take(CCharEntity* PChar, const uint8 location, const uint8 slo
     if (!mutation.applied)
     {
         return false;
-    }
-
-    // Reported while the stack is still alive, so nobody is handed a pointer that has already gone
-    if (mutation.removed)
-    {
-        this->onItemDestroyed(mutation.removed.get());
     }
 
     if (!restore)

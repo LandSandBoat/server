@@ -49,7 +49,7 @@ auto NpcTradeTransaction::start(CCharEntity* player) -> std::unique_ptr<NpcTrade
     return std::unique_ptr<NpcTradeTransaction>(new NpcTradeTransaction(xi::Badge<NpcTradeTransaction>{}, player));
 }
 
-auto NpcTradeTransaction::stage(const uint8 tradeSlot, CItem* item, const uint8 invSlot, const uint32 quantity) -> bool
+auto NpcTradeTransaction::stage(const uint8 tradeSlot, CItem* item, const uint32 quantity) -> bool
 {
     if (tradeSlot >= this->slots_.size() || !item)
     {
@@ -57,23 +57,16 @@ auto NpcTradeTransaction::stage(const uint8 tradeSlot, CItem* item, const uint8 
     }
 
     auto& slot = this->slots_[tradeSlot];
-    if (slot.item)
+    if (slot.offered.isSet())
     {
         ShowErrorFmt("NpcTradeTransaction: {} staged trade slot {} twice", this->player_->getName(), tradeSlot);
         return false;
     }
 
-    if (!enterTx(item))
-    {
-        return false;
-    }
-
-    slot.item     = item;
-    slot.itemId   = item->getID();
-    slot.invSlot  = invSlot;
+    slot.offered  = this->claim(this->player_, item);
     slot.quantity = quantity;
 
-    return true;
+    return slot.offered.isSet();
 }
 
 auto NpcTradeTransaction::item(const uint8 tradeSlot) -> CItem*
@@ -130,7 +123,7 @@ auto NpcTradeTransaction::confirmById(const uint16 itemId, const uint32 quantity
 {
     for (uint8 tradeSlot = 0; tradeSlot < this->slots_.size(); ++tradeSlot)
     {
-        if (this->slots_[tradeSlot].itemId == itemId)
+        if (this->slots_[tradeSlot].offered.itemId == itemId)
         {
             return this->confirm(tradeSlot, quantity);
         }
@@ -143,9 +136,10 @@ void NpcTradeTransaction::releaseUnconfirmed()
 {
     for (auto& slot : this->slots_)
     {
-        if (slot.item && slot.confirmed == 0)
+        // The offer stays, so a script can still confirm it during a later event
+        if (slot.confirmed == 0)
         {
-            this->releaseClaim(slot);
+            this->release(slot.offered);
         }
     }
 }
@@ -154,30 +148,15 @@ void NpcTradeTransaction::releaseUnconfirmed()
 // claim is gone. The offer still names a slot, so the stack is looked up again and taken back
 auto NpcTradeTransaction::resolve(Slot& slot) -> CItem*
 {
-    if (slot.item)
-    {
-        return slot.item;
-    }
-
-    if (slot.invSlot == 0xFF)
+    // Resolved by identity, so a lookalike sitting in the slot is not the thing that was offered
+    CItem* PItem = slot.offered.resolve();
+    if (!PItem)
     {
         return nullptr;
     }
 
-    CItem* PItem = this->player_->getStorage(LOC_INVENTORY)->GetItem(slot.invSlot);
-    if (!PItem || PItem->getID() != slot.itemId)
-    {
-        return nullptr;
-    }
-
-    if (!enterTx(PItem))
-    {
-        return nullptr;
-    }
-
-    slot.item = PItem;
-
-    return PItem;
+    // Re-claimed if the claim was let go after onTrade, though the offer never stopped naming it
+    return this->claim(this->player_, PItem).isSet() ? PItem : nullptr;
 }
 
 auto NpcTradeTransaction::consumeConfirmed() -> bool
@@ -202,7 +181,7 @@ auto NpcTradeTransaction::consumeAll() -> bool
 
     for (auto& slot : this->slots_)
     {
-        if (slot.invSlot != 0xFF && !this->consumeSlot(slot, slot.quantity))
+        if (slot.offered.isSet() && !this->consumeSlot(slot, slot.quantity))
         {
             tookEverything = false;
         }
@@ -214,7 +193,7 @@ auto NpcTradeTransaction::consumeAll() -> bool
 
 auto NpcTradeTransaction::consumeSlot(Slot& slot, const uint32 quantity) -> bool
 {
-    const auto invSlot = slot.invSlot;
+    const auto invSlot = slot.offered.slot;
 
     if (!this->resolve(slot))
     {
@@ -230,71 +209,16 @@ auto NpcTradeTransaction::consumeSlot(Slot& slot, const uint32 quantity) -> bool
         return false;
     }
 
-    this->releaseSlot(slot);
+    slot = Slot{};
 
     return true;
 }
 
-// A stack traded away whole is already gone, so the slot must forget it before anything releases it
-void NpcTradeTransaction::onItemDestroyed(CItem* item)
-{
-    for (auto& slot : this->slots_)
-    {
-        if (slot.item == item)
-        {
-            slot = Slot{};
-        }
-    }
-}
-
-void NpcTradeTransaction::releaseClaim(Slot& slot) const
-{
-    if (!slot.item)
-    {
-        return;
-    }
-
-    exitTx(slot.item);
-    slot.item = nullptr;
-}
-
-void NpcTradeTransaction::releaseSlot(Slot& slot) const
-{
-    this->releaseClaim(slot);
-
-    slot = Slot{};
-}
-
-void NpcTradeTransaction::releaseAll()
-{
-    for (auto& slot : this->slots_)
-    {
-        this->releaseSlot(slot);
-    }
-}
-
-auto NpcTradeTransaction::holds(const CItem* item) const -> bool
-{
-    if (!item)
-    {
-        return false;
-    }
-
-    return std::ranges::any_of(this->slots_,
-                               [item](const Slot& slot)
-                               {
-                                   return slot.item == item;
-                               });
-}
-
 auto NpcTradeTransaction::doCommit() -> bool
 {
-    this->releaseAll();
-
     return true;
 }
 
 void NpcTradeTransaction::doRollback()
 {
-    this->releaseAll();
 }

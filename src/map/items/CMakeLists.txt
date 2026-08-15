@@ -89,6 +89,8 @@ set(ITEM_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/item.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/item.h
     ${CMAKE_CURRENT_SOURCE_DIR}/item_access.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_id.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_id.h
     ${CMAKE_CURRENT_SOURCE_DIR}/craft_state.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/craft_state.h
     ${CMAKE_CURRENT_SOURCE_DIR}/transaction.cpp

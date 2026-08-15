@@ -146,11 +146,10 @@ void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PC
 
     for (int32 slotId = 0; slotId < this->ItemNum; ++slotId)
     {
-        CItem*         PItem     = tradeItems[slotId];
-        const uint8_t  invSlotId = this->PropertyItemIndexTbl[slotId];
-        const uint32_t quantity  = this->ItemNumTbl[slotId];
+        CItem*         PItem    = tradeItems[slotId];
+        const uint32_t quantity = this->ItemNumTbl[slotId];
 
-        if (!transaction->stage(static_cast<uint8>(slotId), PItem, invSlotId, quantity))
+        if (!transaction->stage(static_cast<uint8>(slotId), PItem, quantity))
         {
             ShowErrorFmt("GP_CLI_COMMAND_ITEM_TRANSFER: {} could not offer item {} ({}) to NPC {}", PChar->getName(), PItem->getName(), PItem->getID(), PNpc->getName());
             PChar->removeTransaction(transaction);
@@ -162,7 +161,7 @@ void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PC
         // TODO: Don't pass around Scheduler& through PSession
         auditTrade(*PSession->scheduler, PChar, PNpc, PItem->getID(), quantity);
 
-        PChar->TradeContainer->setItem(slotId, PItem->getID(), invSlotId, quantity);
+        PChar->TradeContainer->setItem(slotId, PItem->getID(), PItem->getSlotID(), quantity);
     }
 
     luautils::OnTrade(PChar, PNpc);

@@ -24,6 +24,7 @@
 #include "common/cbasetypes.h"
 #include "common/types/badge.h"
 
+#include "items/item_id.h"
 #include "items/transaction.h"
 
 #include <memory>
@@ -49,7 +50,6 @@ public:
 
     DISALLOW_COPY_AND_MOVE(GuildSellTransaction);
 
-    auto holds(const CItem* item) const -> bool override;
     auto claimed() const -> uint8;
     void setPayout(uint8 sold, uint32 unitPrice);
 
@@ -57,17 +57,12 @@ protected:
     auto doCommit() -> bool override;
     void doRollback() override;
 
-    void onItemDestroyed(CItem* item) override;
-
 private:
     struct Claim
     {
-        CItem* item{ nullptr };
-        uint8  invSlot{ 0xFF };
+        ItemId claimed{};
         uint8  quantity{ 0 };
     };
-
-    void releaseAllClaims();
 
     CCharEntity*       player_{};
     uint16             itemId_{};

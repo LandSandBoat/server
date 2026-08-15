@@ -25,6 +25,7 @@
 #include "common/types/badge.h"
 
 #include "item_container.h"
+#include "items/item_id.h"
 #include "items/transaction.h"
 
 #include <memory>
@@ -49,8 +50,6 @@ public:
 
     DISALLOW_COPY_AND_MOVE(BazaarPurchaseTransaction);
 
-    auto holds(const CItem* item) const -> bool override;
-
     // Where the buyer received the goods, only meaningful after a successful commit
     auto deliveredSlot() const -> uint8;
 
@@ -58,18 +57,15 @@ protected:
     auto doCommit() -> bool override;
     void doRollback() override;
 
-    void onItemDestroyed(CItem* item) override;
-
 private:
     auto claimAll() -> bool;
-    void releaseClaims();
     void restoreDisplay();
 
     CCharEntity* buyer_{};
     CCharEntity* seller_{};
-    CItem*       listing_{};
-    CItem*       buyerGil_{};
-    CItem*       sellerGil_{};
+    ItemId       listing_{};
+    ItemId       buyerGil_{};
+    ItemId       sellerGil_{};
     uint8        bazaarSlot_{};
     uint32       quantity_{};
     uint32       price_{};

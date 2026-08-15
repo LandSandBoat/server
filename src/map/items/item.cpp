@@ -26,14 +26,29 @@
 #include "exdata/augment_standard.h"
 #include "item.h"
 
+#include <atomic>
+
 /************************************************************************
  *                                                                       *
  *                                                                       *
  *                                                                       *
  ************************************************************************/
 
+namespace
+{
+
+auto allocItemUid() -> uint64
+{
+    static std::atomic<uint64> nextUid{ 1 };
+
+    return nextUid.fetch_add(1, std::memory_order_relaxed);
+}
+
+} // namespace
+
 CItem::CItem(uint16 id)
 : m_id(id)
+, m_uid(allocItemUid())
 , m_subid(0)
 , m_type(0)
 , m_subtype(0)
@@ -52,6 +67,7 @@ CItem::CItem(uint16 id)
 
 CItem::CItem(const CItem& other)
 : m_id(other.m_id)
+, m_uid(allocItemUid())
 , m_subid(other.m_subid)
 , m_type(other.m_type)
 , m_subtype(other.m_subtype)
@@ -189,6 +205,11 @@ void CItem::setSubType(uint8 subtype)
 bool CItem::isSubType(ITEM_SUBTYPE subtype) const
 {
     return (m_subtype & subtype);
+}
+
+auto CItem::uid() const -> uint64
+{
+    return m_uid;
 }
 
 /************************************************************************
