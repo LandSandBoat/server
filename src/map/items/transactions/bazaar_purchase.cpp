@@ -171,7 +171,7 @@ auto BazaarPurchaseTransaction::doCommit() -> bool
     clone->setReserve(0);
 
     // Failures below leave the claims in place, so the rollback puts the listing back on display
-    this->deliveredSlot_ = charutils::AddItem(this->buyer_, LOC_INVENTORY, std::move(clone));
+    this->deliveredSlot_ = this->addItem(this->buyer_, LOC_INVENTORY, std::move(clone));
     if (this->deliveredSlot_ == ERROR_SLOTID)
     {
         return false;

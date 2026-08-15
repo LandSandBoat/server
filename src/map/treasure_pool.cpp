@@ -27,6 +27,7 @@
 #include "packets/s2c/0x0d3_trophy_solution.h"
 
 #include "item_container.h"
+#include "items/transactions/item_claim.h"
 #include "treasure_pool.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
@@ -518,7 +519,8 @@ void CTreasurePool::checkTreasureItem(timer::time_point tick, uint8 SlotID)
             if (highestInfo.member->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0)
             {
                 // add item as they have room!
-                if (charutils::AddItem(highestInfo.member, LOC_INVENTORY, m_PoolItems[SlotID].ID, 1, true) != ERROR_SLOTID)
+                auto transaction = ItemClaimTransaction::start(highestInfo.member);
+                if (transaction && transaction->give(LOC_INVENTORY, m_PoolItems[SlotID].ID, 1, Silence::Yes) && transaction->commit())
                 {
                     treasureWon(highestInfo.member, SlotID);
                 }
@@ -558,7 +560,9 @@ void CTreasurePool::checkTreasureItem(timer::time_point tick, uint8 SlotID)
             {
                 // select random member from this pool to give item to
                 CCharEntity* PChar = candidates.at(xirand::GetRandomNumber(candidates.size()));
-                if (charutils::AddItem(PChar, LOC_INVENTORY, m_PoolItems[SlotID].ID, 1, true) != ERROR_SLOTID)
+
+                auto transaction = ItemClaimTransaction::start(PChar);
+                if (transaction && transaction->give(LOC_INVENTORY, m_PoolItems[SlotID].ID, 1, Silence::Yes) && transaction->commit())
                 {
                     treasureWon(PChar, SlotID);
                 }

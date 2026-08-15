@@ -23,6 +23,9 @@
 
 #include "common/cbasetypes.h"
 #include "common/macros.h"
+#include "common/types/flag.h"
+
+#include <memory>
 
 class CItem;
 class CCharEntity;
@@ -73,6 +76,10 @@ protected:
 
     // Mutating an item this transaction holds, which is refused to everyone else
     [[nodiscard]] auto updateItem(CCharEntity* PChar, uint8 locationId, uint8 slotId, int32 quantity) const -> charutils::ItemMutation;
+
+    // Handing an item out. ERROR_SLOTID if it could not be placed
+    [[nodiscard]] auto addItem(CCharEntity* PChar, uint8 locationId, std::unique_ptr<CItem> item, Silence silence = Silence::No) const -> uint8;
+    [[nodiscard]] auto addItem(CCharEntity* PChar, uint8 locationId, uint16 itemId, uint32 quantity, Silence silence = Silence::No) const -> uint8;
 
 private:
     uint64           id_;

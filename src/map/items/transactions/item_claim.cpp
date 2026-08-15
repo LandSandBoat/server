@@ -83,12 +83,12 @@ auto ItemClaimTransaction::claimGil() -> CItem*
     return PGil;
 }
 
-auto ItemClaimTransaction::give(const uint8 location, const uint16 itemId, const uint32 quantity) -> bool
+auto ItemClaimTransaction::give(const uint8 location, const uint16 itemId, const uint32 quantity, const Silence silence) -> std::optional<uint8>
 {
-    const uint8 slot = charutils::AddItem(this->player_, location, itemId, quantity);
+    const uint8 slot = this->addItem(this->player_, location, itemId, quantity, silence);
     if (slot == ERROR_SLOTID)
     {
-        return false;
+        return std::nullopt;
     }
 
     this->undoWith([this, location, slot, quantity]()
@@ -96,22 +96,22 @@ auto ItemClaimTransaction::give(const uint8 location, const uint16 itemId, const
                        (void)this->update(location, slot, -static_cast<int32>(quantity));
                    });
 
-    return true;
+    return slot;
 }
 
-auto ItemClaimTransaction::give(const uint8 location, std::unique_ptr<CItem> item) -> bool
+auto ItemClaimTransaction::give(const uint8 location, std::unique_ptr<CItem> item, const Silence silence) -> std::optional<uint8>
 {
     if (!item)
     {
-        return false;
+        return std::nullopt;
     }
 
     const uint32 quantity = item->getQuantity();
 
-    const uint8 slot = charutils::AddItem(this->player_, location, std::move(item));
+    const uint8 slot = this->addItem(this->player_, location, std::move(item), silence);
     if (slot == ERROR_SLOTID)
     {
-        return false;
+        return std::nullopt;
     }
 
     this->undoWith([this, location, slot, quantity]()
@@ -119,7 +119,7 @@ auto ItemClaimTransaction::give(const uint8 location, std::unique_ptr<CItem> ite
                        (void)this->update(location, slot, -static_cast<int32>(quantity));
                    });
 
-    return true;
+    return slot;
 }
 
 auto ItemClaimTransaction::take(const uint8 location, const uint8 slot, const uint32 quantity) -> bool
@@ -164,7 +164,7 @@ auto ItemClaimTransaction::take(const uint8 location, const uint8 slot, const ui
                            return;
                        }
 
-                       (void)charutils::AddItem(this->player_, location, std::move(returned));
+                       (void)this->addItem(this->player_, location, std::move(returned), Silence::Yes);
                    });
 
     return true;
@@ -211,7 +211,7 @@ auto ItemClaimTransaction::split(const uint8 fromLocation, const uint8 fromSlot,
     // Taken before it is handed back out, so a failure halfway can never leave both halves
     const uint16 itemId = PItem->getID();
 
-    return this->take(fromLocation, fromSlot, quantity) && this->give(toLocation, itemId, quantity);
+    return this->take(fromLocation, fromSlot, quantity) && this->give(toLocation, itemId, quantity).has_value();
 }
 
 auto ItemClaimTransaction::moveBetween(const uint8 fromLocation, const uint8 fromSlot, const uint8 toLocation, const uint8 toSlot, const uint32 quantity) -> bool

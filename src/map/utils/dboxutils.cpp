@@ -659,6 +659,12 @@ void dboxutils::TakeItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
             return;
         }
 
+        auto transaction = ItemClaimTransaction::start(PChar);
+        if (!transaction)
+        {
+            return;
+        }
+
         // clang-format off
         const auto success = db::transaction([&]()
         {
@@ -668,7 +674,7 @@ void dboxutils::TakeItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
                                                                    PChar->id, PostWorkNo, BoxNo);
                 if (rset && rset->rowsAffected())
                 {
-                    if (charutils::AddItem(PChar, LOC_INVENTORY, xi::items::clone(*PItem), true) != ERROR_SLOTID)
+                    if (transaction->give(LOC_INVENTORY, xi::items::clone(*PItem), Silence::Yes))
                     {
                         return;
                     }
@@ -680,7 +686,7 @@ void dboxutils::TakeItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
                                                                                    PChar->id, PostWorkNo, BoxNo);
                 if (rset && rset->rowsAffected())
                 {
-                    if (charutils::AddItem(PChar, LOC_INVENTORY, xi::items::clone(*PItem), true) != ERROR_SLOTID)
+                    if (transaction->give(LOC_INVENTORY, xi::items::clone(*PItem), Silence::Yes))
                     {
                         return;
                     }
@@ -691,6 +697,11 @@ void dboxutils::TakeItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
             throw std::runtime_error(fmt::format("DBOX: Could not finalize take item transaction (player: {} ({}), PostWorkNo: {})",
                                                  PChar->getName(), PChar->id, PostWorkNo));
         });
+        if (success && !transaction->commit())
+        {
+            return;
+        }
+
         if (success)
         {
             DebugDeliveryBoxFmt("DBOX: TakeItemFromCell: player: {} ({}) received item: {} ({}) from slot {}",

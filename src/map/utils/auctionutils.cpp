@@ -329,6 +329,12 @@ void auctionutils::CancelSale(CCharEntity* PChar, int8_t AucWorkIndex)
     {
         AuctionHistory_t canceledItem = PChar->m_ah_history[AucWorkIndex];
 
+        auto transaction = ItemClaimTransaction::start(PChar);
+        if (!transaction)
+        {
+            return;
+        }
+
         const auto success = db::transaction(
             [&]()
             {
@@ -341,7 +347,7 @@ void auctionutils::CancelSale(CCharEntity* PChar, int8_t AucWorkIndex)
                 {
                     if (const CItem* PDelItem = xi::items::lookup(canceledItem.itemid))
                     {
-                        if (charutils::AddItem(PChar, LOC_INVENTORY, canceledItem.itemid, (canceledItem.stack != 0 ? PDelItem->getStackSize() : 1), true) != ERROR_SLOTID)
+                        if (transaction->give(LOC_INVENTORY, canceledItem.itemid, (canceledItem.stack != 0 ? PDelItem->getStackSize() : 1), Silence::Yes))
                         {
                             return;
                         }
@@ -351,6 +357,11 @@ void auctionutils::CancelSale(CCharEntity* PChar, int8_t AucWorkIndex)
                 // If we got here, something went wrong.
                 throw std::runtime_error(fmt::format("AH: Failed to return item id {} stack {} to char {} ({})", canceledItem.itemid, canceledItem.stack, PChar->getName(), PChar->id));
             });
+        if (success && !transaction->commit())
+        {
+            return;
+        }
+
         if (success)
         {
             PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotCancel, 0, PChar, static_cast<uint8_t>(AucWorkIndex), false);

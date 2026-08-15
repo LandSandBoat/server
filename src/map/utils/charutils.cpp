@@ -23,6 +23,7 @@
 #include "enums/item_state.h"
 #include "items/item_access.h"
 #include "items/transaction.h"
+#include "items/transactions/item_claim.h"
 
 #include "common/macros.h"
 #include "common/settings.h"
@@ -1725,7 +1726,14 @@ void SendLocalPlayerPackets(CCharEntity* PChar)
  *                                                                       *
  ************************************************************************/
 
-uint8 AddItem(CCharEntity* PChar, uint8 LocationID, uint16 ItemID, uint32 quantity, bool silence)
+namespace
+{
+
+// Both defined further down, with the rest of the item plumbing
+auto applyItemUpdate(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quantity, const Transaction* owner) -> ItemMutation;
+auto applyAddItem(CCharEntity* PChar, uint8 LocationID, std::unique_ptr<CItem> PItem, Silence silence, const Transaction* owner) -> uint8;
+
+auto applyAddItem(CCharEntity* PChar, uint8 LocationID, uint16 ItemID, uint32 quantity, Silence silence, const Transaction* owner) -> uint8
 {
     if (PChar->getStorage(LocationID)->GetFreeSlotsCount() == 0 || quantity == 0)
     {
@@ -1740,8 +1748,11 @@ uint8 AddItem(CCharEntity* PChar, uint8 LocationID, uint16 ItemID, uint32 quanti
     }
 
     PItem->setQuantity(quantity);
-    return AddItem(PChar, LocationID, std::move(PItem), silence);
+
+    return applyAddItem(PChar, LocationID, std::move(PItem), silence, owner);
 }
+
+} // namespace
 
 /************************************************************************
  *                                                                       *
@@ -1749,11 +1760,15 @@ uint8 AddItem(CCharEntity* PChar, uint8 LocationID, uint16 ItemID, uint32 quanti
  *                                                                       *
  ************************************************************************/
 
-auto AddItem(CCharEntity* PChar, uint8 LocationID, std::unique_ptr<CItem> PItem, bool silence) -> uint8
+namespace
+{
+
+auto applyAddItem(CCharEntity* PChar, uint8 LocationID, std::unique_ptr<CItem> PItem, Silence silence, const Transaction* owner) -> uint8
 {
     if (PItem->isType(ITEM_CURRENCY))
     {
-        if (UpdateItem(PChar, LocationID, 0, PItem->getQuantity()) == 0)
+        // Currency lands on the stack the transaction may already hold, so it keeps the owner
+        if (!applyItemUpdate(PChar, LocationID, 0, PItem->getQuantity(), owner).applied)
         {
             ShowErrorFmt("AddItem: could not give {} currency to {}", PItem->getQuantity(), PChar->getName());
             return ERROR_SLOTID;
@@ -1803,6 +1818,18 @@ auto AddItem(CCharEntity* PChar, uint8 LocationID, std::unique_ptr<CItem> PItem,
     PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 
     return SlotID;
+}
+
+} // namespace
+
+auto AddItem(xi::Badge<Transaction>, const Transaction& owner, CCharEntity* PChar, uint8 LocationID, std::unique_ptr<CItem> PItem, Silence silence) -> uint8
+{
+    return applyAddItem(PChar, LocationID, std::move(PItem), silence, &owner);
+}
+
+auto AddItem(xi::Badge<Transaction>, const Transaction& owner, CCharEntity* PChar, uint8 LocationID, uint16 itemID, uint32 quantity, Silence silence) -> uint8
+{
+    return applyAddItem(PChar, LocationID, itemID, quantity, silence, &owner);
 }
 
 /************************************************************************
@@ -2049,25 +2076,22 @@ auto applyItemUpdate(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 q
 
 } // namespace
 
-uint32 UpdateItem(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quantity)
-{
-    return applyItemUpdate(PChar, LocationID, slotID, quantity, nullptr).itemId;
-}
-
 auto UpdateItem(xi::Badge<Transaction>, const Transaction& owner, CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quantity) -> ItemMutation
 {
     return applyItemUpdate(PChar, LocationID, slotID, quantity, &owner);
 }
 
-// A wrapper around UpdateItem, with some packets
 void DropItem(CCharEntity* PChar, uint8 container, uint8 slotID, int32 quantity, uint16 ItemID)
 {
-    if (charutils::UpdateItem(PChar, container, slotID, -quantity) != 0)
+    auto transaction = ItemClaimTransaction::start(PChar);
+    if (!transaction || !transaction->take(container, slotID, static_cast<uint32>(quantity)) || !transaction->commit())
     {
-        ShowInfo("Player %s DROPPING itemID: %s (%u) quantity: %u", PChar->getName(), xi::items::lookup(ItemID)->getName(), ItemID, quantity);
-        PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(nullptr, ItemID, quantity, MsgStd::ThrowAway);
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
+        return;
     }
+
+    ShowInfo("Player %s DROPPING itemID: %s (%u) quantity: %u", PChar->getName(), xi::items::lookup(ItemID)->getName(), ItemID, quantity);
+    PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(nullptr, ItemID, quantity, MsgStd::ThrowAway);
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 }
 
 /************************************************************************
@@ -4762,9 +4786,11 @@ void DistributeGil(CCharEntity* PChar, CMobEntity* PMob)
 
             for (auto PMember : members)
             {
-                if (UpdateItem(PMember, LOC_INVENTORY, 0, gilPerPerson) == 0)
+                auto transaction = ItemClaimTransaction::start(PMember);
+                if (!transaction || !transaction->earn(gilPerPerson) || !transaction->commit())
                 {
                     ShowErrorFmt("DistributeGil: {} did not receive {} gil", PMember->getName(), gilPerPerson);
+                    continue;
                 }
 
                 PMember->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PMember, PMember, gilPerPerson, 0, MsgBasic::Obtains);
@@ -4773,9 +4799,11 @@ void DistributeGil(CCharEntity* PChar, CMobEntity* PMob)
     }
     else if (isWithinDistance(PChar->loc.p, PMob->loc.p, 100.0f))
     {
-        if (UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gil)) == 0)
+        auto transaction = ItemClaimTransaction::start(PChar);
+        if (!transaction || !transaction->earn(gil) || !transaction->commit())
         {
             ShowErrorFmt("DistributeGil: {} did not receive {} gil", PChar->getName(), gil);
+            return;
         }
 
         PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, static_cast<int32>(gil), 0, MsgBasic::Obtains);

@@ -426,7 +426,7 @@ auto PlayerTradeTransaction::doCommit() -> bool
             clone->setQuantity(slot.qty);
             clone->setReserve(0);
 
-            const uint8 deliveredSlot = charutils::AddItem(receiver, LOC_INVENTORY, std::move(clone));
+            const uint8 deliveredSlot = this->addItem(receiver, LOC_INVENTORY, std::move(clone));
             if (deliveredSlot == ERROR_SLOTID)
             {
                 return false;

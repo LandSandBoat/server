@@ -116,6 +116,16 @@ auto Transaction::updateItem(CCharEntity* PChar, const uint8 locationId, const u
     return charutils::UpdateItem(xi::Badge<Transaction>{}, *this, PChar, locationId, slotId, quantity);
 }
 
+auto Transaction::addItem(CCharEntity* PChar, const uint8 locationId, std::unique_ptr<CItem> item, const Silence silence) const -> uint8
+{
+    return charutils::AddItem(xi::Badge<Transaction>{}, *this, PChar, locationId, std::move(item), silence);
+}
+
+auto Transaction::addItem(CCharEntity* PChar, const uint8 locationId, const uint16 itemId, const uint32 quantity, const Silence silence) const -> uint8
+{
+    return charutils::AddItem(xi::Badge<Transaction>{}, *this, PChar, locationId, itemId, quantity, silence);
+}
+
 void Transaction::exitTx(CItem* item)
 {
     xi::items::detail::ItemAccess::exitTransaction(item, xi::Badge<Transaction>{});

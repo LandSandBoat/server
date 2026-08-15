@@ -4578,8 +4578,14 @@ auto CLuaBaseEntity::addItem(sol::variadic_args va) const -> CItem*
                 }
             }
 
-            SlotID = charutils::AddItem(PChar, LOC_INVENTORY, std::move(PItem), silent);
-            if (SlotID == ERROR_SLOTID)
+            auto transaction = ItemClaimTransaction::start(PChar);
+            if (!transaction)
+            {
+                break;
+            }
+
+            SlotID = transaction->give(LOC_INVENTORY, std::move(PItem), Silence(silent)).value_or(ERROR_SLOTID);
+            if (SlotID == ERROR_SLOTID || !transaction->commit())
             {
                 break;
             }
@@ -4625,10 +4631,16 @@ auto CLuaBaseEntity::addItem(sol::variadic_args va) const -> CItem*
             PItem->setQuantity(quantity);
             quantity -= PItem->getStackSize();
 
-            SlotID = charutils::AddItem(PChar, LOC_INVENTORY, std::move(PItem), silence);
+            auto transaction = ItemClaimTransaction::start(PChar);
+            if (!transaction)
+            {
+                break;
+            }
+
+            SlotID = transaction->give(LOC_INVENTORY, std::move(PItem), Silence(silence)).value_or(ERROR_SLOTID);
 
             // Paranoid check
-            if (SlotID == ERROR_SLOTID)
+            if (SlotID == ERROR_SLOTID || !transaction->commit())
             {
                 break;
             }
@@ -4810,7 +4822,16 @@ bool CLuaBaseEntity::addUsedItem(uint16 itemID)
             auto* PUsable = static_cast<CItemUsable*>(PItem.get());
             PUsable->setQuantity(1);
             PUsable->setLastUseTime(timer::now());
-            SlotID = charutils::AddItem(PChar, LOC_INVENTORY, std::move(PItem), false);
+
+            auto transaction = ItemClaimTransaction::start(PChar);
+            if (transaction)
+            {
+                SlotID = transaction->give(LOC_INVENTORY, std::move(PItem)).value_or(ERROR_SLOTID);
+                if (SlotID != ERROR_SLOTID && !transaction->commit())
+                {
+                    SlotID = ERROR_SLOTID;
+                }
+            }
         }
     }
 
@@ -4899,7 +4920,16 @@ bool CLuaBaseEntity::addTempItem(uint16 itemID, const sol::object& arg1)
         else
         {
             PItem->setQuantity(quantity);
-            SlotID = charutils::AddItem(PChar, LOC_TEMPITEMS, std::move(PItem));
+
+            auto transaction = ItemClaimTransaction::start(PChar);
+            if (transaction)
+            {
+                SlotID = transaction->give(LOC_TEMPITEMS, std::move(PItem)).value_or(ERROR_SLOTID);
+                if (SlotID != ERROR_SLOTID && !transaction->commit())
+                {
+                    SlotID = ERROR_SLOTID;
+                }
+            }
         }
     }
 
@@ -5219,8 +5249,14 @@ bool CLuaBaseEntity::addLinkpearl(const std::string& lsname, bool equip)
     PItemLinkPearl->SetLSType(lstype);
     PItemLinkPearl->setQuantity(1);
 
-    const uint8 slotID = charutils::AddItem(PChar, LOC_INVENTORY, std::move(PItem));
-    if (slotID == ERROR_SLOTID)
+    auto transaction = ItemClaimTransaction::start(PChar);
+    if (!transaction)
+    {
+        return false;
+    }
+
+    const uint8 slotID = transaction->give(LOC_INVENTORY, std::move(PItem)).value_or(ERROR_SLOTID);
+    if (slotID == ERROR_SLOTID || !transaction->commit())
     {
         return false;
     }
@@ -5929,6 +5965,23 @@ void CLuaBaseEntity::retrieveItemFromSlip(uint16 slipId, uint16 itemId, uint16 e
         return;
     }
 
+    auto item = xi::items::spawn(itemId);
+    if (!item)
+    {
+        ShowError("Failed to get item from item ID");
+        return;
+    }
+
+    item->setQuantity(1);
+
+    auto transaction = ItemClaimTransaction::start(PChar);
+    if (!transaction || !transaction->give(LOC_INVENTORY, std::move(item)))
+    {
+        ShowErrorFmt("retrieveItemFromSlip: {} could not receive item {}, leaving it on the slip", PChar->getName(), itemId);
+        return;
+    }
+
+    // Cleared only once the item is in hand, so a full inventory cannot lose it
     slip->m_extra[extraId] &= extraData;
 
     const char* Query = "UPDATE char_inventory "
@@ -5938,16 +5991,7 @@ void CLuaBaseEntity::retrieveItemFromSlip(uint16 slipId, uint16 itemId, uint16 e
 
     db::preparedStmt(Query, slip->m_extra, PChar->id, slip->getLocationID(), slip->getSlotID());
 
-    auto item = xi::items::spawn(itemId);
-    if (item)
-    {
-        item->setQuantity(1);
-        charutils::AddItem(PChar, LOC_INVENTORY, std::move(item));
-    }
-    else
-    {
-        ShowError("Failed to get item from item ID");
-    }
+    (void)transaction->commit();
 }
 
 /************************************************************************

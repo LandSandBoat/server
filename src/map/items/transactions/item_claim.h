@@ -29,6 +29,7 @@
 
 #include <functional>
 #include <memory>
+#include <optional>
 #include <vector>
 
 class CCharEntity;
@@ -62,9 +63,10 @@ public:
     // since pay() and earn() claim it themselves. Null if slot 0 does not hold spendable currency
     [[nodiscard]] auto claimGil() -> CItem*;
 
-    // Hands the player a new stack. Reversed by taking it back
-    [[nodiscard]] auto give(uint8 location, uint16 itemId, uint32 quantity) -> bool;
-    [[nodiscard]] auto give(uint8 location, std::unique_ptr<CItem> item) -> bool;
+    // Hands the player a new stack, reporting where it landed. Empty if it did not fit.
+    // Reversed by taking it back
+    [[nodiscard]] auto give(uint8 location, uint16 itemId, uint32 quantity, Silence silence = Silence::No) -> std::optional<uint8>;
+    [[nodiscard]] auto give(uint8 location, std::unique_ptr<CItem> item, Silence silence = Silence::No) -> std::optional<uint8>;
 
     // Takes from a stack. Reversed by putting back what was taken, exdata and all
     [[nodiscard]] auto take(uint8 location, uint8 slot, uint32 quantity) -> bool;

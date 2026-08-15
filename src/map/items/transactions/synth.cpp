@@ -211,7 +211,7 @@ auto SynthTransaction::doCommit() -> bool
 
     if (pendingResult_)
     {
-        const uint8 resultSlot = charutils::AddItem(this->player_, LOC_INVENTORY, pendingResult_->itemId, pendingResult_->qty);
+        const uint8 resultSlot = this->addItem(this->player_, LOC_INVENTORY, pendingResult_->itemId, pendingResult_->qty);
         if (resultSlot != ERROR_SLOTID)
         {
             CItem* PItem = this->player_->getStorage(LOC_INVENTORY)->GetItem(resultSlot);

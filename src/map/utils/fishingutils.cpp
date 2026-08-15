@@ -1419,13 +1419,12 @@ void RodBreak(CCharEntity* PChar)
         uint8 location    = PRanged->getLocationID();
         uint8 rodSlot     = PRanged->getSlotID();
         auto  transaction = ItemClaimTransaction::start(PChar);
-        if (!transaction || !transaction->take(location, rodSlot, 1) || !transaction->commit())
+        if (!transaction ||
+            !transaction->take(location, rodSlot, 1) ||
+            !transaction->give(location, PRod->brokenRodId, 1) ||
+            !transaction->commit())
         {
             ShowErrorFmt("fishingutils: {} kept an unbroken rod in slot {}", PChar->getName(), rodSlot);
-        }
-        else
-        {
-            (void)charutils::AddItem(PChar, location, PRod->brokenRodId, 1);
         }
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
     }
@@ -1539,7 +1538,13 @@ int32 CatchFish(CCharEntity* PChar, uint16 FishID, BigFish bigFish, uint16 lengt
         }
 
         Fish->setQuantity(Count);
-        charutils::AddItem(PChar, LOC_INVENTORY, std::move(Fish));
+
+        auto transaction = ItemClaimTransaction::start(PChar);
+        if (!transaction || !transaction->give(LOC_INVENTORY, std::move(Fish)) || !transaction->commit())
+        {
+            ShowErrorFmt("fishingutils: {} did not receive the fish they caught", PChar->getName());
+            return 0;
+        }
 
         if (Count > 1)
         {
@@ -1577,7 +1582,12 @@ int32 CatchItem(CCharEntity* PChar, uint16 ItemID, uint8 Count = 1)
             return 0;
         }
 
-        charutils::AddItem(PChar, LOC_INVENTORY, ItemID, Count);
+        auto transaction = ItemClaimTransaction::start(PChar);
+        if (!transaction || !transaction->give(LOC_INVENTORY, ItemID, Count) || !transaction->commit())
+        {
+            ShowErrorFmt("fishingutils: {} did not receive item {} they caught", PChar->getName(), ItemID);
+            return 0;
+        }
 
         if (Count > 1)
         {
