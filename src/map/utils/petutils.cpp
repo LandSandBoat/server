@@ -1696,7 +1696,15 @@ void LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
         const auto frameEquipped = static_cast<CCharEntity*>(PMaster)->getAutomatonFrame();
         if (frameEquipped >= AutomatonFrame::Harlequin && frameEquipped <= AutomatonFrame::Stormwaker)
         {
-            PetID = static_cast<uint32>(PETID_HARLEQUINFRAME) + static_cast<uint32>(frameEquipped) - static_cast<uint32>(AutomatonFrame::Harlequin);
+            const uint32 equippedPetID = static_cast<uint32>(PETID_HARLEQUINFRAME) + static_cast<uint32>(frameEquipped) - static_cast<uint32>(AutomatonFrame::Harlequin);
+
+            // Changing frames while the automaton is stowed desummons it - you may however change attachments.
+            if (spawningFromZone && PetID != equippedPetID)
+            {
+                return;
+            }
+
+            PetID = equippedPetID;
         }
     }
 
