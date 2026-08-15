@@ -81,6 +81,46 @@ describe('Gardening', function()
         stockSafe(player, xi.item.EARTHEN_FLOWERPOT)
     end)
 
+    it('refuses to plant a pot into itself', function()
+        local pot      = mogItem(player, xi.item.EARTHEN_FLOWERPOT)
+        local potSlot  = pot:getSlotID()
+        local wasKind  = pot:getExData().kind
+
+        -- a real seed id, but the slot points back at the pot
+        player.actions:plantAdd(xi.inv.MOGSAFE, potSlot, xi.inv.MOGSAFE, potSlot, xi.item.BAG_OF_HERB_SEEDS)
+
+        local stillThere = player:findItem(xi.item.EARTHEN_FLOWERPOT, xi.inv.MOGSAFE)
+        assert(stillThere, 'the pot consumed itself')
+        assert(stillThere:getExData().kind == wasKind, 'the pot planted itself')
+    end)
+
+    it('refuses to plant something that is not in the slot', function()
+        stockSafe(player, xi.item.FIRE_CRYSTAL)
+
+        local pot     = mogItem(player, xi.item.EARTHEN_FLOWERPOT)
+        local crystal = mogItem(player, xi.item.FIRE_CRYSTAL)
+
+        -- names a seed in the packet but points at a crystal slot
+        player.actions:plantAdd(xi.inv.MOGSAFE, pot:getSlotID(), xi.inv.MOGSAFE, crystal:getSlotID(), xi.item.BAG_OF_HERB_SEEDS)
+
+        assert(player:findItem(xi.item.FIRE_CRYSTAL, xi.inv.MOGSAFE), 'the crystal was spent as a seed')
+        assert(mogItem(player, xi.item.EARTHEN_FLOWERPOT):getExData().kind == pot:getExData().kind, 'a seed was planted from a crystal')
+    end)
+
+    it('hands a crystal back when the pot has no use for it', function()
+        stockSafe(player, xi.item.FIRE_CRYSTAL)
+
+        local pot     = mogItem(player, xi.item.EARTHEN_FLOWERPOT)
+        local crystal = mogItem(player, xi.item.FIRE_CRYSTAL)
+
+        -- nothing planted, so there is no sprout to feed
+        player.actions:plantAdd(xi.inv.MOGSAFE, pot:getSlotID(), xi.inv.MOGSAFE, crystal:getSlotID())
+
+        local kept = player:findItem(xi.item.FIRE_CRYSTAL, xi.inv.MOGSAFE)
+        assert(kept, 'the crystal was eaten by a pot that had no use for it')
+        assert(kept:state() == xi.itemState.FREE, 'state: ' .. tostring(kept:state()))
+    end)
+
     it('grows a planted seed to maturity when tended', function()
         local pot = plant(player, xi.item.BAG_OF_HERB_SEEDS)
 

@@ -134,6 +134,23 @@ end
 function CClientEntityPairActions:tradeCancel()
 end
 
+---@param invSlot integer
+---@param price integer
+---@return nil
+function CClientEntityPairActions:bazaarPrice(invSlot, price)
+end
+
+---@param seller CClientEntityPair
+---@return nil
+function CClientEntityPairActions:bazaarOpen(seller)
+end
+
+---@param sellerInvSlot integer
+---@param quantity integer
+---@return nil
+function CClientEntityPairActions:bazaarBuy(sellerInvSlot, quantity)
+end
+
 ---Accept raise prompt
 ---@return nil
 function CClientEntityPairActions:acceptRaise()
@@ -249,7 +266,8 @@ end
 ---@param addContainer xi.inventoryLocation Container holding the seed or crystal
 ---@param addSlot integer Seed or crystal slot index
 ---@return nil
-function CClientEntityPairActions:plantAdd(potContainer, potSlot, addContainer, addSlot)
+---@param addItemNo integer? what the packet claims is being planted, defaults to the slot's item
+function CClientEntityPairActions:plantAdd(potContainer, potSlot, addContainer, addSlot, addItemNo)
 end
 
 ---Examine a plant; resets its wilt timer.
