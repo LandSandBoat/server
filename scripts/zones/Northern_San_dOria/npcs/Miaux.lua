@@ -9,7 +9,6 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     local aCraftsmansWork = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMANS_WORK)
-    local quotasStatus    = player:getCharVar('ChasingQuotas_Progress')
 
     if
         player:getMainJob() == xi.job.DRG and
@@ -28,12 +27,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(69)
     elseif aCraftsmansWork == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(70)
-    elseif quotasStatus == 2 then
-        player:startEvent(67) -- I found this earring.
-    elseif quotasStatus == 3 or quotasStatus == 4 then
-        player:startEvent(68) -- Post-earring, move along.
-    elseif quotasStatus >= 5 then
-        player:startEvent(66) -- The earring was helpful?
     else
         player:startEvent(11)
     end
@@ -53,9 +46,6 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addFame(xi.fameArea.SANDORIA, 20)
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMANS_WORK)
         end
-    elseif csid == 67 then
-        npcUtil.giveKeyItem(player, xi.ki.SHINY_EARRING)
-        player:setCharVar('ChasingQuotas_Progress', 3)
     end
 end
 

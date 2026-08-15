@@ -7,6 +7,7 @@ return {
     ['Chatarre']       = { text = ID.text.CHATARRE_DIALOG },
     ['Colmaie']        = { text = ID.text.ORCISH_SCOUTS },
     ['Diadonour']      = { text = ID.text.DIADONOUR_DIALOG },
+    ['Esca']           = { event = 119 },
     ['Gachemage']      = { text = ID.text.ORCISH_SCOUTS },
     ['Laette']         = { text = ID.text.LAETTE_DIALOG },
     ['Laillera']       = { text = ID.text.LAILLERA_DIALOG },

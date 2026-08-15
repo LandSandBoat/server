@@ -2,7 +2,6 @@
 -- Area: Batallia Downs
 --  Mob: Sturmtiger
 -- Involved in Quest: Chasing Quotas
--- !pos -715.882, -10.75, 65.982 (105)
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
@@ -14,12 +13,6 @@ end
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
     mob:setMod(xi.mod.ATT, 360)
-end
-
-entity.onMobDeath = function(mob, player, optParams)
-    if player:getCharVar('ChasingQuotas_Progress') == 5 then
-        player:setCharVar('SturmtigerKilled', 1)
-    end
 end
 
 return entity
