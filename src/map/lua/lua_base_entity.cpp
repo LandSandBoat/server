@@ -99,6 +99,7 @@
 #include "items/item_linkshell.h"
 #include "items/item_puppet.h"
 #include "items/transactions/item_claim.h"
+#include "items/transactions/npc_trade.h"
 
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
@@ -5364,36 +5365,19 @@ void CLuaBaseEntity::confirmTrade() const
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    for (uint8 slotID = 0; slotID < TRADE_CONTAINER_SIZE; ++slotID)
+    auto* transaction = PChar->activeTransaction<NpcTradeTransaction>();
+    if (!transaction)
     {
-        if (PChar->TradeContainer->getInvSlotID(slotID) != 0xFF)
-        {
-            CItem* PItem = PChar->TradeContainer->getItem(slotID);
-            if (PItem)
-            {
-                uint32 confirmedItems = PChar->TradeContainer->getConfirmedStatus(slotID);
-                auto   quantity       = (int32)std::min<uint32>(PChar->TradeContainer->getQuantity(slotID), confirmedItems);
-
-                PItem->setReserve(0);
-
-                if (confirmedItems > 0)
-                {
-                    uint8 invSlotID = PChar->TradeContainer->getInvSlotID(slotID);
-                    if (static_cast<uint32>(quantity) >= PChar->TradeContainer->getItem(slotID)->getQuantity())
-                    {
-                        // Set the trade slot to nullptr as the underlying item is about to be destroyed by UpdateItem
-                        PChar->TradeContainer->setItem(slotID, nullptr);
-                    }
-
-                    auto transaction = ItemClaimTransaction::start(PChar);
-                    if (!transaction || !transaction->take(LOC_INVENTORY, invSlotID, quantity) || !transaction->commit())
-                    {
-                        ShowErrorFmt("CLuaBaseEntity::confirmTrade: {} kept traded item in slot {}", PChar->getName(), invSlotID);
-                    }
-                }
-            }
-        }
+        ShowWarningFmt("CLuaBaseEntity::confirmTrade: {} has no trade to confirm", PChar->getName());
+        return;
     }
+
+    if (!transaction->consumeConfirmed())
+    {
+        ShowErrorFmt("CLuaBaseEntity::confirmTrade: {} kept the confirmed items", PChar->getName());
+    }
+
+    PChar->removeTransaction(transaction);
     PChar->TradeContainer->Clean();
     PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 }
@@ -5414,30 +5398,19 @@ void CLuaBaseEntity::tradeComplete() const
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    for (uint8 slotID = 0; slotID < TRADE_CONTAINER_SIZE; ++slotID)
+    auto* transaction = PChar->activeTransaction<NpcTradeTransaction>();
+    if (!transaction)
     {
-        if (PChar->TradeContainer->getInvSlotID(slotID) != 0xFF)
-        {
-            uint8  invSlotID = PChar->TradeContainer->getInvSlotID(slotID);
-            int32  quantity  = PChar->TradeContainer->getQuantity(slotID);
-            CItem* PItem     = PChar->TradeContainer->getItem(slotID);
-            if (PItem)
-            {
-                PItem->setReserve(0);
-                if (static_cast<uint32>(quantity) >= PItem->getQuantity())
-                {
-                    // Set the trade slot to nullptr as the underlying item is about to be destroyed by UpdateItem
-                    PChar->TradeContainer->setItem(slotID, nullptr);
-                }
-
-                auto transaction = ItemClaimTransaction::start(PChar);
-                if (!transaction || !transaction->take(LOC_INVENTORY, invSlotID, quantity) || !transaction->commit())
-                {
-                    ShowErrorFmt("CLuaBaseEntity::tradeComplete: {} kept traded item in slot {}", PChar->getName(), invSlotID);
-                }
-            }
-        }
+        ShowWarningFmt("CLuaBaseEntity::tradeComplete: {} has no trade to complete", PChar->getName());
+        return;
     }
+
+    if (!transaction->consumeAll())
+    {
+        ShowErrorFmt("CLuaBaseEntity::tradeComplete: {} kept the traded items", PChar->getName());
+    }
+
+    PChar->removeTransaction(transaction);
     PChar->TradeContainer->Clean();
     PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 }
@@ -10350,8 +10323,14 @@ auto CLuaBaseEntity::addGuildPoints(const uint8 guildId, const uint8 slotId) con
 {
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
+        auto* transaction = PChar->activeTransaction<NpcTradeTransaction>();
+        if (!transaction)
+        {
+            return { 0, 0 };
+        }
+
         const CGuild* PGuild              = guildutils::GetGuild(guildId);
-        auto [itemQuantity, earnedPoints] = PGuild->addGuildPoints(PChar, PChar->TradeContainer->getItem(slotId));
+        auto [itemQuantity, earnedPoints] = PGuild->addGuildPoints(PChar, transaction->item(slotId));
 
         return { itemQuantity, earnedPoints };
     }

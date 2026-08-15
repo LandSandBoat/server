@@ -22,6 +22,8 @@
 #include "common/logging.h"
 #include "items/item.h"
 
+#include "entities/char_entity.h"
+#include "items/transactions/npc_trade.h"
 #include "lua_item.h"
 #include "lua_trade_container.h"
 #include "trade_container.h"
@@ -29,12 +31,42 @@
 //======================================================//
 
 CLuaTradeContainer::CLuaTradeContainer(CTradeContainer* pTrade)
+: CLuaTradeContainer(pTrade, nullptr)
+{
+}
+
+CLuaTradeContainer::CLuaTradeContainer(CTradeContainer* pTrade, CCharEntity* owner)
 : m_pMyTradeContainer(pTrade)
+, m_owner(owner)
 {
     if (pTrade == nullptr)
     {
         ShowError("CLuaTradeContainer created with nullptr instead of valid CTradeContainer*!");
     }
+}
+
+auto CLuaTradeContainer::tradedItem(const uint8 slotID) const -> CItem*
+{
+    if (!m_owner)
+    {
+        return nullptr;
+    }
+
+    auto* transaction = m_owner->activeTransaction<NpcTradeTransaction>();
+
+    return transaction ? transaction->item(slotID) : nullptr;
+}
+
+auto CLuaTradeContainer::confirmQuantity(const uint8 slotID, const uint32 quantity) const -> bool
+{
+    if (!m_owner)
+    {
+        return false;
+    }
+
+    auto* transaction = m_owner->activeTransaction<NpcTradeTransaction>();
+
+    return transaction && transaction->confirm(slotID, quantity);
 }
 
 //======================================================//
@@ -53,7 +85,7 @@ auto CLuaTradeContainer::getItem(const sol::object& SlotIDObj) -> CItem*
         SlotID = SlotIDObj.as<uint8>();
     }
 
-    return m_pMyTradeContainer->getItem(SlotID);
+    return this->tradedItem(SlotID);
 }
 
 //======================================================//
@@ -66,14 +98,7 @@ uint16 CLuaTradeContainer::getItemId(const sol::object& SlotIDObj)
         SlotID = SlotIDObj.as<uint8>();
     }
 
-    uint16 id    = 0;
-    CItem* PItem = m_pMyTradeContainer->getItem(SlotID);
-    if (PItem)
-    {
-        id = PItem->getID();
-    }
-
-    return id;
+    return m_pMyTradeContainer->getItemID(SlotID);
 }
 
 //======================================================//
@@ -87,7 +112,7 @@ uint16 CLuaTradeContainer::getItemSubId(const sol::object& SlotIDObj)
     }
 
     uint16 subID = 0;
-    CItem* PItem = m_pMyTradeContainer->getItem(SlotID);
+    CItem* PItem = this->tradedItem(SlotID);
     if (PItem)
     {
         subID = PItem->getSubID();
@@ -138,19 +163,19 @@ bool CLuaTradeContainer::confirmItem(uint16 itemID, const sol::object& amountObj
 {
     uint32 amount = amountObj.is<uint32>() ? amountObj.as<uint32>() : 1;
 
-    for (uint8 slotID = 0; slotID < TRADE_CONTAINER_SIZE; ++slotID)
+    // Every slot the offer can occupy, matching what the quantity getters already scan
+    for (uint8 slotID = 0; slotID < m_pMyTradeContainer->getSize(); ++slotID)
     {
         if (m_pMyTradeContainer->getItemID(slotID) == itemID)
         {
             if (m_pMyTradeContainer->getQuantity(slotID) < amount)
             {
-                m_pMyTradeContainer->setConfirmedStatus(slotID, m_pMyTradeContainer->getQuantity(slotID));
+                (void)this->confirmQuantity(slotID, m_pMyTradeContainer->getQuantity(slotID));
                 amount -= m_pMyTradeContainer->getQuantity(slotID);
             }
             else
             {
-                m_pMyTradeContainer->setConfirmedStatus(slotID, amount);
-                return true;
+                return this->confirmQuantity(slotID, amount);
             }
         }
     }
@@ -162,7 +187,8 @@ bool CLuaTradeContainer::confirmItem(uint16 itemID, const sol::object& amountObj
 bool CLuaTradeContainer::confirmSlot(uint8 slotID, const sol::object& amountObj)
 {
     uint32 amount = amountObj.is<uint32>() ? amountObj.as<uint32>() : 1;
-    return m_pMyTradeContainer->setConfirmedStatus(slotID, amount);
+
+    return this->confirmQuantity(slotID, amount);
 }
 
 //======================================================//

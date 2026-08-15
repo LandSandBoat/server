@@ -2774,7 +2774,7 @@ void OnTrade(CCharEntity* PChar, CBaseEntity* PNpc)
     auto onTradeFramework = lua["InteractionGlobal"]["onTrade"];
     auto onTrade          = getCachedFileFunction(filename, "onTrade");
 
-    auto result = onTradeFramework(PChar, PNpc, PChar->TradeContainer, onTrade);
+    auto result = onTradeFramework(PChar, PNpc, CLuaTradeContainer(PChar->TradeContainer, PChar), onTrade);
     if (!result.valid())
     {
         sol::error err = result;

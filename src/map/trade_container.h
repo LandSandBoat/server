@@ -25,8 +25,7 @@
 #include "common/cbasetypes.h"
 #include <variant>
 
-#define CONTAINER_SIZE       17
-#define TRADE_CONTAINER_SIZE 8
+#define CONTAINER_SIZE 17
 
 class CItem;
 
@@ -56,11 +55,9 @@ public:
     uint8  getSlotCount();     // Number of occupied cells
     uint32 getTotalQuantity(); // Total number of items (gil counts as 1)
     auto   getRestriction(uint8 slotID) const -> SlotRestriction;
-    CItem* getItem(uint8 slotID);
     uint16 getItemID(uint8 slotID);
     uint8  getInvSlotID(uint8 slotID);
-    uint32 getQuantity(uint8 slotID); // Number of items in the slot
-    uint32 getConfirmedStatus(uint8 slotID);
+    uint32 getQuantity(uint8 slotID);      // Number of items in the slot
     uint32 getItemQuantity(uint16 itemID); // Number of items of one type
     uint8  getSize();
     uint8  getExSize() const;
@@ -69,16 +66,13 @@ public:
     void setShopFameArea(uint8 fameArea);
     void setShopVendorId(uint32 vendorId);
     void setItemsCount(uint8 count);
-    void setItem(uint8 slotID, CItem* item);
     void setRestriction(uint8 slotID, SlotRestriction restriction);
     void setItemID(uint8 slotID, uint16 itemID);
     void setInvSlotID(uint8 slotID, uint8 invSlotID);
     void setQuantity(uint8 slotID, uint32 quantity);
-    bool setConfirmedStatus(uint8 slotID, uint32 amount);
-    void setItem(uint8 slotId, uint16 itemId, uint8 invSlotId, uint32 quantity, CItem* item = nullptr);
+    void setItem(uint8 slotId, uint16 itemId, uint8 invSlotId, uint32 quantity);
     void setSize(uint8 size);
     void setExSize(uint8 size); // Set "extra" size information; purpose changes depending on container's goal
-    void unreserveUnconfirmed();
 
     void Clean(); // we clean the container
 
@@ -89,11 +83,9 @@ private:
     uint8  m_ItemsCount{};         // The number of items in the container (set by yourself)
     uint8  m_exSize{};             // Can be used as a custom delineation point inside a container
 
-    std::vector<CItem*>          m_PItem;
     std::vector<uint8>           m_slotID;
     std::vector<uint16>          m_itemID;
     std::vector<uint32>          m_quantity;
-    std::vector<uint32>          m_confirmed;
     std::vector<SlotRestriction> restrictions_;
 };
 

@@ -101,6 +101,8 @@ set(ITEM_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/transactions/item_claim.h
     ${CMAKE_CURRENT_SOURCE_DIR}/transactions/item_use.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/transactions/item_use.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/transactions/npc_trade.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/transactions/npc_trade.h
     ${CMAKE_CURRENT_SOURCE_DIR}/transactions/player_trade.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/transactions/player_trade.h
     ${CMAKE_CURRENT_SOURCE_DIR}/transactions/synth.cpp
