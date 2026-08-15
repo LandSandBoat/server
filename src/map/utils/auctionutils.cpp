@@ -194,21 +194,35 @@ void auctionutils::ProofOfPurchase(CCharEntity* PChar, GP_AUC_PARAM_LOT param)
             return;
         }
 
+        const auto listedQuantity = static_cast<int32>(param.ItemStacks != 0 ? 1 : PItem->getStackSize());
+        const auto listedItemId   = PItem->getID();
+        const auto listedItemName = PItem->getName();
+
+        if (charutils::UpdateItem(PChar, LOC_INVENTORY, param.ItemWorkIndex, -listedQuantity) == 0)
+        {
+            ShowErrorFmt("AH: Cannot take item {} from {} to list it", listedItemName, PChar->getName());
+            PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 197, 0, 0, 0, 0); // failed to place up
+            return;
+        }
+
         if (!db::preparedStmt("INSERT INTO auction_house(itemid, stack, seller, seller_name, date, price) VALUES(?, ?, ?, ?, ?, ?)",
-                              PItem->getID(),
+                              listedItemId,
                               param.ItemStacks == 0,
                               PChar->id,
                               PChar->getName(),
                               earth_time::timestamp(),
                               param.LimitPrice))
         {
-            ShowErrorFmt("AH: Cannot insert item {} to database", PItem->getName());
+            ShowErrorFmt("AH: Cannot insert item {} to database, returning it", listedItemName);
+            (void)charutils::AddItem(PChar, LOC_INVENTORY, listedItemId, listedQuantity);
             PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 197, 0, 0, 0, 0); // failed to place up
             return;
         }
 
-        charutils::UpdateItem(PChar, LOC_INVENTORY, param.ItemWorkIndex, -static_cast<int32>(param.ItemStacks != 0 ? 1 : PItem->getStackSize()));
-        charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -static_cast<int32>(auctionFee)); // Deduct AH fee
+        if (charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -static_cast<int32>(auctionFee)) == 0)
+        {
+            ShowErrorFmt("AH: {} listed item {} without paying the {} gil fee", PChar->getName(), listedItemName, auctionFee);
+        }
 
         PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 1, 0, 0, 0, 0);                                     // Merchandise put up on auction msg
         PChar->pushPacket<GP_SERV_COMMAND_AUC>(static_cast<GP_CLI_COMMAND_AUC_COMMAND>(0x0C), static_cast<uint8>(ahListings), PChar); // Inform history of slot
@@ -260,9 +274,16 @@ auto auctionutils::PurchasingItems(CCharEntity* PChar, GP_AUC_PARAM_BID param) -
                                                    param.BidPrice);
                 if (rset && rset->rowsAffected())
                 {
-                    if (charutils::AddItem(PChar, LOC_INVENTORY, param.ItemNo, (param.ItemStacks == 0 ? PItem->getStackSize() : 1)) != ERROR_SLOTID)
+                    const auto  boughtQuantity = static_cast<int32>(param.ItemStacks == 0 ? PItem->getStackSize() : 1);
+                    const uint8 boughtSlot     = charutils::AddItem(PChar, LOC_INVENTORY, param.ItemNo, boughtQuantity);
+                    if (boughtSlot != ERROR_SLOTID)
                     {
-                        charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -static_cast<int32>(param.BidPrice));
+                        if (charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -static_cast<int32>(param.BidPrice)) == 0)
+                        {
+                            ShowErrorFmt("AH: {} could not pay {} for item {}, taking it back", PChar->getName(), param.BidPrice, param.ItemNo);
+                            (void)charutils::UpdateItem(PChar, LOC_INVENTORY, boughtSlot, -boughtQuantity);
+                            return false;
+                        }
 
                         PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0x01, param.ItemNo, param.BidPrice, param.ItemStacks, PItem->getStackSize());
                         PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);

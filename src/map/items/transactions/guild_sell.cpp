@@ -137,11 +137,9 @@ auto GuildSellTransaction::doCommit() -> bool
         return false;
     }
 
-    // Snapshot what we're about to consume.
-    std::vector<std::pair<uint8, uint8>> consume;
-    uint8                                remaining = this->sold_;
+    uint8 remaining = this->sold_;
 
-    for (const auto& claim : this->claims_)
+    for (auto& claim : this->claims_)
     {
         if (remaining == 0)
         {
@@ -149,21 +147,29 @@ auto GuildSellTransaction::doCommit() -> bool
         }
 
         const uint8 take = std::min(claim.quantity, remaining);
-
-        consume.emplace_back(claim.invSlot, take);
         remaining -= take;
+
+        const auto consumed = this->updateItem(this->player_, LOC_INVENTORY, claim.invSlot, -static_cast<int32>(take));
+        if (!consumed.applied)
+        {
+            ShowErrorFmt("GuildSellTransaction: {} kept {} of the goods in slot {}", this->player_->getName(), take, claim.invSlot);
+        }
+
+        // A stack sold whole is already gone, so only what survived still needs releasing
+        if (consumed.destroyed)
+        {
+            claim.item = nullptr;
+        }
     }
 
-    // Release before UpdateItem mutates.
     this->releaseAllClaims();
 
-    for (const auto& [slot, take] : consume)
+    // Award gil
+    if (!this->updateItem(this->player_, LOC_INVENTORY, 0, static_cast<int32>(this->sold_ * this->unitPrice_)).applied)
     {
-        charutils::UpdateItem(this->player_, LOC_INVENTORY, slot, -static_cast<int32>(take));
+        ShowErrorFmt("GuildSellTransaction: {} was not paid for the sale", this->player_->getName());
     }
 
-    // Award gil
-    charutils::UpdateItem(this->player_, LOC_INVENTORY, 0, static_cast<int32>(this->sold_ * this->unitPrice_));
     this->player_->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(this->player_);
 
     return true;

@@ -21,6 +21,8 @@
 
 #include "transaction.h"
 
+#include "utils/charutils.h"
+
 #include "common/cbasetypes.h"
 #include "common/logging.h"
 #include "common/types/badge.h"
@@ -107,6 +109,11 @@ void Transaction::rollbackIfOpen()
 auto Transaction::enterTx(CItem* item) -> bool
 {
     return xi::items::detail::ItemAccess::enterTransaction(item, xi::Badge<Transaction>{});
+}
+
+auto Transaction::updateItem(CCharEntity* PChar, const uint8 locationId, const uint8 slotId, const int32 quantity) const -> charutils::ItemMutation
+{
+    return charutils::UpdateItem(xi::Badge<Transaction>{}, *this, PChar, locationId, slotId, quantity);
 }
 
 void Transaction::exitTx(CItem* item)

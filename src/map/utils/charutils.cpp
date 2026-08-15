@@ -22,6 +22,7 @@
 #include "common/logging.h"
 #include "enums/item_state.h"
 #include "items/item_access.h"
+#include "items/transaction.h"
 
 #include "common/macros.h"
 #include "common/settings.h"
@@ -1752,7 +1753,12 @@ auto AddItem(CCharEntity* PChar, uint8 LocationID, std::unique_ptr<CItem> PItem,
 {
     if (PItem->isType(ITEM_CURRENCY))
     {
-        UpdateItem(PChar, LocationID, 0, PItem->getQuantity());
+        if (UpdateItem(PChar, LocationID, 0, PItem->getQuantity()) == 0)
+        {
+            ShowErrorFmt("AddItem: could not give {} currency to {}", PItem->getQuantity(), PChar->getName());
+            return ERROR_SLOTID;
+        }
+
         return 0;
     }
 
@@ -1947,7 +1953,10 @@ uint8 MoveItem(CCharEntity* PChar, uint8 LocationID, uint8 SlotID, uint8 NewSlot
  *                                                                       *
  ************************************************************************/
 
-uint32 UpdateItem(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quantity, bool force)
+namespace
+{
+
+auto applyItemUpdate(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quantity, const Transaction* owner) -> ItemMutation
 {
     CItem* PItem = PChar->getStorage(LocationID)->GetItem(slotID);
 
@@ -1955,7 +1964,7 @@ uint32 UpdateItem(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quan
     {
         ShowDebug("UpdateItem: No item in slot %u", slotID);
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, static_cast<CONTAINER_ID>(LocationID), slotID);
-        return 0;
+        return {};
     }
 
     uint16 ItemID = PItem->getID();
@@ -1963,24 +1972,26 @@ uint32 UpdateItem(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quan
     if ((int32)(PItem->getQuantity() - PItem->getReserve() + quantity) < 0)
     {
         ShowDebug("UpdateItem: %s trying to move invalid quantity %u of itemID %u", PChar->getName(), quantity, ItemID);
-        return 0;
+        return {};
     }
 
+    const bool heldByOwner = owner != nullptr && owner->holds(PItem);
+
     auto* PState = dynamic_cast<CItemState*>(PChar->PAI->GetCurrentState());
-    if (PState)
+    if (PState && !heldByOwner)
     {
         CItem* item = PState->GetItem();
 
-        if (item && item->getSlotID() == PItem->getSlotID() && item->getLocationID() == PItem->getLocationID() && !force)
+        if (item && item->getSlotID() == PItem->getSlotID() && item->getLocationID() == PItem->getLocationID())
         {
-            return 0;
+            return {};
         }
     }
 
     // Equipped ammo decrements its stack on consumption without leaving the slot.
     const bool isEquippedAmmo = PItem->state() == ItemState::Equipped &&
                                 PChar->getEquip(SLOT_AMMO) == PItem;
-    if (PItem->isBusy() && !isEquippedAmmo && !force)
+    if (PItem->isBusy() && !isEquippedAmmo && !heldByOwner)
     {
         ShowWarningFmt("UpdateItem: refusing to mutate busy item {} in state {} (loc={}, slot={}, char={})",
                        ItemID,
@@ -1988,10 +1999,11 @@ uint32 UpdateItem(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quan
                        LocationID,
                        slotID,
                        PChar->getName());
-        return 0;
+        return {};
     }
 
     uint32 newQuantity = PItem->getQuantity() + quantity;
+    bool   destroyed   = false;
 
     if (newQuantity > PItem->getStackSize())
     {
@@ -2012,6 +2024,8 @@ uint32 UpdateItem(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quan
     }
     else if (newQuantity == 0)
     {
+        destroyed = true;
+
         db::preparedStmt("DELETE FROM char_inventory "
                          "WHERE charid = ? AND location = ? AND slot = ?",
                          PChar->id,
@@ -2030,7 +2044,19 @@ uint32 UpdateItem(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quan
             PChar->resyncEquipment();
         }
     }
-    return ItemID;
+    return { .itemId = ItemID, .applied = true, .destroyed = destroyed };
+}
+
+} // namespace
+
+uint32 UpdateItem(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quantity)
+{
+    return applyItemUpdate(PChar, LocationID, slotID, quantity, nullptr).itemId;
+}
+
+auto UpdateItem(xi::Badge<Transaction>, const Transaction& owner, CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quantity) -> ItemMutation
+{
+    return applyItemUpdate(PChar, LocationID, slotID, quantity, &owner);
 }
 
 // A wrapper around UpdateItem, with some packets
@@ -4736,14 +4762,22 @@ void DistributeGil(CCharEntity* PChar, CMobEntity* PMob)
 
             for (auto PMember : members)
             {
-                UpdateItem(PMember, LOC_INVENTORY, 0, gilPerPerson);
+                if (UpdateItem(PMember, LOC_INVENTORY, 0, gilPerPerson) == 0)
+                {
+                    ShowErrorFmt("DistributeGil: {} did not receive {} gil", PMember->getName(), gilPerPerson);
+                }
+
                 PMember->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PMember, PMember, gilPerPerson, 0, MsgBasic::Obtains);
             }
         }
     }
     else if (isWithinDistance(PChar->loc.p, PMob->loc.p, 100.0f))
     {
-        UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gil));
+        if (UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gil)) == 0)
+        {
+            ShowErrorFmt("DistributeGil: {} did not receive {} gil", PChar->getName(), gil);
+        }
+
         PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, static_cast<int32>(gil), 0, MsgBasic::Obtains);
     }
 }

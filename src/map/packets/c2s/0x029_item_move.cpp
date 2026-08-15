@@ -182,9 +182,13 @@ void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar)
 
     if (const uint32 newQty = PItem->getQuantity() - this->ItemNum; newQty != 0) // split item stack
     {
-        if (charutils::AddItem(PChar, this->Category2, PItem->getID(), this->ItemNum) != ERROR_SLOTID)
+        if (const uint8 splitSlot = charutils::AddItem(PChar, this->Category2, PItem->getID(), this->ItemNum); splitSlot != ERROR_SLOTID)
         {
-            charutils::UpdateItem(PChar, this->Category1, this->ItemIndex1, -static_cast<int32>(this->ItemNum));
+            if (charutils::UpdateItem(PChar, this->Category1, this->ItemIndex1, -static_cast<int32>(this->ItemNum)) == 0)
+            {
+                ShowErrorFmt("GP_CLI_COMMAND_ITEM_MOVE: {} split item {} without losing the original, taking the copy back", PChar->getName(), PItem->getID());
+                (void)charutils::UpdateItem(PChar, this->Category2, splitSlot, -static_cast<int32>(this->ItemNum));
+            }
         }
     }
     else // move stack / combine items into stack
@@ -218,10 +222,13 @@ void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar)
                 {
                     moveQty = PItem->getQuantity();
                 }
-                if (moveQty > 0)
+                if (moveQty > 0 && charutils::UpdateItem(PChar, this->Category2, this->ItemIndex2, moveQty) != 0)
                 {
-                    charutils::UpdateItem(PChar, this->Category2, this->ItemIndex2, moveQty);
-                    charutils::UpdateItem(PChar, this->Category1, this->ItemIndex1, -static_cast<int32>(moveQty));
+                    if (charutils::UpdateItem(PChar, this->Category1, this->ItemIndex1, -static_cast<int32>(moveQty)) == 0)
+                    {
+                        ShowErrorFmt("GP_CLI_COMMAND_ITEM_MOVE: {} combined stacks without losing the source, taking the copy back", PChar->getName());
+                        (void)charutils::UpdateItem(PChar, this->Category2, this->ItemIndex2, -static_cast<int32>(moveQty));
+                    }
                 }
             }
 

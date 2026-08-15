@@ -81,13 +81,21 @@ auto ItemUseTransaction::doCommit() -> bool
         return false;
     }
 
-    // exitTx before UpdateItem: UpdateItem may free the CItem.
     const uint8 location = this->item_->getLocationID();
     const uint8 slot     = this->item_->getSlotID();
 
-    exitTx(this->item_);
+    const auto consumed = this->updateItem(this->player_, location, slot, -1);
+    if (!consumed.applied)
+    {
+        ShowErrorFmt("ItemUseTransaction: {} kept the item in slot {} after using it", this->player_->getName(), slot);
+    }
 
-    charutils::UpdateItem(this->player_, location, slot, -1, true);
+    // A stack used up is already gone, so only what survived still needs releasing
+    if (!consumed.destroyed)
+    {
+        exitTx(this->item_);
+    }
+
     this->item_ = nullptr;
     return true;
 }

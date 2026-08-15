@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "common/types/badge.h"
 
 #include <memory>
 #include <string>
@@ -41,6 +42,7 @@ class CPetEntity;
 class CMobEntity;
 class CAbility;
 class CItemWeapon;
+class Transaction;
 
 /**
  * @enum EMobDifficulty
@@ -123,32 +125,43 @@ void  BuildingCharAbilityTable(CCharEntity* PChar);
 void  BuildingCharTraitsTable(CCharEntity* PChar);
 void  BuildingCharPetAbilityTable(CCharEntity* PChar, CPetEntity* PPet, uint32 PetID);
 
-void   CheckWeaponSkill(CCharEntity* PChar, uint8 skill);
-bool   HasItem(CCharEntity* PChar, uint16 ItemID, IncludeRecycleBin includeRecycleBin = IncludeRecycleBin::Yes);
-uint32 getItemCount(CCharEntity* PChar, uint16 ItemID);
-auto   AddItem(CCharEntity* PChar, uint8 LocationID, std::unique_ptr<CItem> PItem, bool silence = false) -> uint8;
-uint8  AddItem(CCharEntity* PChar, uint8 LocationID, uint16 itemID, uint32 quantity = 1, bool silence = false);
-uint8  MoveItem(CCharEntity* PChar, uint8 LocationID, uint8 SlotID, uint8 NewSlotID);
-uint32 UpdateItem(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quantity, bool force = false);
-void   DropItem(CCharEntity* PChar, uint8 container, uint8 slotID, int32 quantity, uint16 ItemID);
-void   CheckValidEquipment(CCharEntity* PChar);
-void   SaveJobChangeGear(CCharEntity* PChar);
-void   LoadJobChangeGear(CCharEntity* PChar);
-void   EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID);
-void   UnequipItem(CCharEntity* PChar, uint8 equipSlotID, xi::Flag<struct RecalculateTag> recalculate = Recalculate::Yes);
-bool   hasSlotEquipped(CCharEntity* PChar, uint8 equipSlotID);
-void   RemoveSub(CCharEntity* PChar);
-bool   EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID);
-void   CheckUnarmedWeapon(CCharEntity* PChar);
-void   SetStyleLock(CCharEntity* PChar, bool isStyleLocked);
-void   UpdateWeaponStyle(CCharEntity* PChar, uint8 equipSlotID, CItemEquipment* PItem);
-void   UpdateArmorStyle(CCharEntity* PChar, uint8 equipSlotID);
-auto   canEquipItemOnAnyJob(CCharEntity* PChar, const CItemEquipment* PItem) -> bool;
-auto   hasValidStyle(CCharEntity* PChar, const CItemEquipment* PItem, const CItemEquipment* AItem) -> bool;
-void   UpdateRemovedSlotsLookForLockStyle(CCharEntity* PChar);
-void   UpdateRemovedSlotsLook(CCharEntity* PChar);
-void   AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uint8 quantity);
-void   EmptyRecycleBin(CCharEntity* PChar);
+void                 CheckWeaponSkill(CCharEntity* PChar, uint8 skill);
+bool                 HasItem(CCharEntity* PChar, uint16 ItemID, IncludeRecycleBin includeRecycleBin = IncludeRecycleBin::Yes);
+uint32               getItemCount(CCharEntity* PChar, uint16 ItemID);
+auto                 AddItem(CCharEntity* PChar, uint8 LocationID, std::unique_ptr<CItem> PItem, bool silence = false) -> uint8;
+uint8                AddItem(CCharEntity* PChar, uint8 LocationID, uint16 itemID, uint32 quantity = 1, bool silence = false);
+uint8                MoveItem(CCharEntity* PChar, uint8 LocationID, uint8 SlotID, uint8 NewSlotID);
+[[nodiscard]] uint32 UpdateItem(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quantity);
+
+// What became of the stack a transaction just mutated
+struct ItemMutation
+{
+    uint16 itemId{ 0 };
+    bool   applied{ false };
+    bool   destroyed{ false }; // consumed to nothing, so the item no longer exists
+};
+
+// A transaction may mutate what it holds. Everyone else is refused while an item is claimed
+[[nodiscard]] auto UpdateItem(xi::Badge<Transaction>, const Transaction& owner, CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quantity) -> ItemMutation;
+void               DropItem(CCharEntity* PChar, uint8 container, uint8 slotID, int32 quantity, uint16 ItemID);
+void               CheckValidEquipment(CCharEntity* PChar);
+void               SaveJobChangeGear(CCharEntity* PChar);
+void               LoadJobChangeGear(CCharEntity* PChar);
+void               EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID);
+void               UnequipItem(CCharEntity* PChar, uint8 equipSlotID, xi::Flag<struct RecalculateTag> recalculate = Recalculate::Yes);
+bool               hasSlotEquipped(CCharEntity* PChar, uint8 equipSlotID);
+void               RemoveSub(CCharEntity* PChar);
+bool               EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID);
+void               CheckUnarmedWeapon(CCharEntity* PChar);
+void               SetStyleLock(CCharEntity* PChar, bool isStyleLocked);
+void               UpdateWeaponStyle(CCharEntity* PChar, uint8 equipSlotID, CItemEquipment* PItem);
+void               UpdateArmorStyle(CCharEntity* PChar, uint8 equipSlotID);
+auto               canEquipItemOnAnyJob(CCharEntity* PChar, const CItemEquipment* PItem) -> bool;
+auto               hasValidStyle(CCharEntity* PChar, const CItemEquipment* PItem, const CItemEquipment* AItem) -> bool;
+void               UpdateRemovedSlotsLookForLockStyle(CCharEntity* PChar);
+void               UpdateRemovedSlotsLook(CCharEntity* PChar);
+void               AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uint8 quantity);
+void               EmptyRecycleBin(CCharEntity* PChar);
 
 auto hasKeyItem(const CCharEntity* PChar, KeyItem keyItemId) -> bool; // checking the presence of a key item
 auto seenKeyItem(CCharEntity* PChar, KeyItem keyItemId) -> bool;      // checking whether the description of the key item has been read

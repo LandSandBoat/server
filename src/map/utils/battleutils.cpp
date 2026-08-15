@@ -3680,7 +3680,11 @@ bool HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool)
         if (ConsumeTool && hasFutae && useFutae)
         {
             // Futae Takes 2 of Your Tools
-            charutils::UpdateItem(PChar, LOC_INVENTORY, SlotID, -2);
+            if (charutils::UpdateItem(PChar, LOC_INVENTORY, SlotID, -2) == 0)
+            {
+                ShowErrorFmt("battleutils: {} used Futae without spending tools in slot {}", PChar->getName(), SlotID);
+            }
+
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
         }
         else
@@ -3700,7 +3704,11 @@ bool HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool)
 
                 if (!expertiseProc)
                 {
-                    charutils::UpdateItem(PChar, LOC_INVENTORY, SlotID, -1);
+                    if (charutils::UpdateItem(PChar, LOC_INVENTORY, SlotID, -1) == 0)
+                    {
+                        ShowErrorFmt("battleutils: {} did not spend the tool in slot {}", PChar->getName(), SlotID);
+                    }
+
                     PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
                 }
             }
@@ -5966,14 +5974,22 @@ bool RemoveAmmo(CCharEntity* PChar, int quantity)
             uint8 slot = eloc ? eloc->Slot : 0;
             uint8 loc  = eloc ? static_cast<uint8>(eloc->Container) : 0;
             charutils::UnequipItem(PChar, SLOT_AMMO);
-            charutils::UpdateItem(PChar, loc, slot, -quantity);
+            if (charutils::UpdateItem(PChar, loc, slot, -quantity) == 0)
+            {
+                ShowErrorFmt("battleutils: {} did not spend {} ammo in slot {}", PChar->getName(), quantity, slot);
+            }
+
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
             return true;
         }
         else
         {
             auto ammoLoc = PChar->equipLocation(SLOT_AMMO);
-            charutils::UpdateItem(PChar, static_cast<uint8>(ammoLoc->Container), ammoLoc->Slot, -quantity);
+            if (charutils::UpdateItem(PChar, static_cast<uint8>(ammoLoc->Container), ammoLoc->Slot, -quantity) == 0)
+            {
+                ShowErrorFmt("battleutils: {} did not spend {} ammo in slot {}", PChar->getName(), quantity, ammoLoc->Slot);
+            }
+
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
             return false;
         }

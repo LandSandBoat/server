@@ -4665,7 +4665,12 @@ bool CLuaBaseEntity::delItem(uint16 itemID, int32 quantity, const sol::object& c
 
     if (SlotID != ERROR_SLOTID)
     {
-        charutils::UpdateItem(PChar, location, SlotID, -quantity);
+        if (charutils::UpdateItem(PChar, location, SlotID, -quantity) == 0)
+        {
+            ShowErrorFmt("CLuaBaseEntity::delItem: {} kept item in slot {}", PChar->getName(), SlotID);
+            return false;
+        }
+
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 
         return true;
@@ -4697,7 +4702,12 @@ bool CLuaBaseEntity::delItemAt(const uint16 itemID, const int32 quantity, uint8 
 
     if (const auto* PItem = PChar->getStorage(containerId)->GetItem(slotId); PItem && PItem->getID() == itemID)
     {
-        charutils::UpdateItem(PChar, containerId, slotId, -quantity);
+        if (charutils::UpdateItem(PChar, containerId, slotId, -quantity) == 0)
+        {
+            ShowErrorFmt("CLuaBaseEntity::delItem: {} kept item in slot {}", PChar->getName(), slotId);
+            return false;
+        }
+
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 
         return true;
@@ -4753,7 +4763,10 @@ bool CLuaBaseEntity::delContainerItems(const sol::object& containerID)
         {
             int32 quantity = PItem->getQuantity();
 
-            charutils::UpdateItem(PChar, location, i, -quantity);
+            if (charutils::UpdateItem(PChar, location, i, -quantity) == 0)
+            {
+                ShowErrorFmt("CLuaBaseEntity::delContainerItems: {} kept item in slot {}", PChar->getName(), i);
+            }
         }
     }
 
@@ -5333,7 +5346,10 @@ void CLuaBaseEntity::confirmTrade() const
                         PChar->TradeContainer->setItem(slotID, nullptr);
                     }
 
-                    charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -quantity);
+                    if (charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -quantity) == 0)
+                    {
+                        ShowErrorFmt("CLuaBaseEntity::confirmTrade: {} kept traded item in slot {}", PChar->getName(), invSlotID);
+                    }
                 }
             }
         }
@@ -5374,7 +5390,10 @@ void CLuaBaseEntity::tradeComplete() const
                     PChar->TradeContainer->setItem(slotID, nullptr);
                 }
 
-                charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -quantity);
+                if (charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -quantity) == 0)
+                {
+                    ShowErrorFmt("CLuaBaseEntity::tradeComplete: {} kept traded item in slot {}", PChar->getName(), invSlotID);
+                }
             }
         }
     }
@@ -9768,7 +9787,10 @@ void CLuaBaseEntity::addGil(int32 gil)
     }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    charutils::UpdateItem(PChar, LOC_INVENTORY, 0, gil);
+    if (charutils::UpdateItem(PChar, LOC_INVENTORY, 0, gil) == 0)
+    {
+        ShowErrorFmt("CLuaBaseEntity: could not adjust gil for {}", PChar->getName());
+    }
 }
 
 /************************************************************************
@@ -9797,7 +9819,10 @@ void CLuaBaseEntity::setGil(int32 amount)
     int32 gil   = amount - item->getQuantity();
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    charutils::UpdateItem(PChar, LOC_INVENTORY, 0, gil);
+    if (charutils::UpdateItem(PChar, LOC_INVENTORY, 0, gil) == 0)
+    {
+        ShowErrorFmt("CLuaBaseEntity: could not adjust gil for {}", PChar->getName());
+    }
 }
 
 /************************************************************************

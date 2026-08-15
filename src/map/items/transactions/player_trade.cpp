@@ -442,7 +442,7 @@ auto PlayerTradeTransaction::doCommit() -> bool
     {
         for (const auto& delivery : delivered)
         {
-            charutils::UpdateItem(delivery.receiver, LOC_INVENTORY, delivery.invSlot, -static_cast<int32>(delivery.qty));
+            (void)this->updateItem(delivery.receiver, LOC_INVENTORY, delivery.invSlot, -static_cast<int32>(delivery.qty));
         }
     };
 
@@ -455,15 +455,22 @@ auto PlayerTradeTransaction::doCommit() -> bool
                 continue;
             }
 
-            const auto invSlot = slot.invSlot;
-            const auto qty     = slot.qty;
-            const auto itemID  = slot.item->getID();
+            const auto itemID = slot.item->getID();
 
-            this->releaseSlot(slot);
-
-            if (charutils::UpdateItem(sender.PChar, LOC_INVENTORY, invSlot, -static_cast<int32>(qty)) == 0)
+            const auto consumed = this->updateItem(sender.PChar, LOC_INVENTORY, slot.invSlot, -static_cast<int32>(slot.qty));
+            if (!consumed.applied)
             {
                 ShowErrorFmt("PlayerTradeTransaction::doCommit: {} kept item {} after it was handed over", sender.PChar->getName(), itemID);
+            }
+
+            // A stack handed over whole is already gone, so only what survived still needs releasing
+            if (consumed.destroyed)
+            {
+                slot = Slot{};
+            }
+            else
+            {
+                this->releaseSlot(slot);
             }
         }
     };

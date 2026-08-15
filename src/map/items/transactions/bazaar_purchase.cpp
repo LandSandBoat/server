@@ -170,34 +170,41 @@ auto BazaarPurchaseTransaction::doCommit() -> bool
     clone->setQuantity(this->quantity_);
     clone->setReserve(0);
 
-    // AddItem and UpdateItem both refuse claimed items, so let go before anything moves
-    this->releaseClaims();
-
+    // Failures below leave the claims in place, so the rollback puts the listing back on display
     this->deliveredSlot_ = charutils::AddItem(this->buyer_, LOC_INVENTORY, std::move(clone));
     if (this->deliveredSlot_ == ERROR_SLOTID)
     {
-        this->restoreDisplay();
         return false;
     }
 
-    if (charutils::UpdateItem(this->buyer_, LOC_INVENTORY, 0, -static_cast<int32>(this->priceWithTax_)) == 0)
+    if (!this->updateItem(this->buyer_, LOC_INVENTORY, 0, -static_cast<int32>(this->priceWithTax_)).applied)
     {
         ShowWarningFmt("BazaarPurchaseTransaction: {} could not pay {}, taking the goods back", this->buyer_->getName(), this->priceWithTax_);
 
-        charutils::UpdateItem(this->buyer_, LOC_INVENTORY, this->deliveredSlot_, -static_cast<int32>(this->quantity_));
+        (void)this->updateItem(this->buyer_, LOC_INVENTORY, this->deliveredSlot_, -static_cast<int32>(this->quantity_));
         this->deliveredSlot_ = ERROR_SLOTID;
 
-        this->restoreDisplay();
         return false;
     }
 
-    charutils::UpdateItem(this->seller_, LOC_INVENTORY, 0, static_cast<int32>(this->price_));
+    if (!this->updateItem(this->seller_, LOC_INVENTORY, 0, static_cast<int32>(this->price_)).applied)
+    {
+        ShowErrorFmt("BazaarPurchaseTransaction: {} was not paid {} for the sale", this->seller_->getName(), this->price_);
+    }
 
-    if (charutils::UpdateItem(this->seller_, LOC_INVENTORY, this->bazaarSlot_, -static_cast<int32>(this->quantity_)) == 0)
+    const auto sold = this->updateItem(this->seller_, LOC_INVENTORY, this->bazaarSlot_, -static_cast<int32>(this->quantity_));
+    if (!sold.applied)
     {
         ShowErrorFmt("BazaarPurchaseTransaction: {} kept item in slot {} after it was sold", this->seller_->getName(), this->bazaarSlot_);
     }
 
+    // A stack bought out entirely no longer exists, so there is nothing left to release
+    if (sold.destroyed)
+    {
+        this->listing_ = nullptr;
+    }
+
+    this->releaseClaims();
     this->restoreDisplay();
 
     return true;

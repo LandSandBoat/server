@@ -152,11 +152,18 @@ void GP_CLI_COMMAND_SHOP_BUY::process(MapSession* PSession, CCharEntity* PChar) 
 
     if (gil->getQuantity() >= (price * quantity))
     {
-        if (charutils::AddItem(PChar, LOC_INVENTORY, itemId, quantity) != ERROR_SLOTID)
+        const uint8 boughtSlot = charutils::AddItem(PChar, LOC_INVENTORY, itemId, quantity);
+        if (boughtSlot != ERROR_SLOTID)
         {
             // Track the gil the player had before the transaction
             const uint32 gilBefore = gil->getQuantity();
-            charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -static_cast<int32>(price * quantity));
+
+            if (charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -static_cast<int32>(price * quantity)) == 0)
+            {
+                ShowErrorFmt("GP_CLI_COMMAND_SHOP_BUY: {} could not pay for item {}, taking it back", PChar->getName(), itemId);
+                (void)charutils::UpdateItem(PChar, LOC_INVENTORY, boughtSlot, -static_cast<int32>(quantity));
+                return;
+            }
 
             // Audit the purchase if enabled
             const auto appliedGil = static_cast<int32>(PChar->getStorage(LOC_INVENTORY)->GetItem(0)->getQuantity()) - static_cast<int32>(gilBefore);

@@ -88,10 +88,13 @@ void GP_CLI_COMMAND_ITEM_STACK::process(MapSession* PSession, CCharEntity* PChar
                 moveQty = PItem2->getQuantity();
             }
 
-            if (moveQty > 0)
+            if (moveQty > 0 && charutils::UpdateItem(PChar, static_cast<uint8>(PItemContainer->GetID()), slotId, moveQty) != 0)
             {
-                charutils::UpdateItem(PChar, static_cast<uint8>(PItemContainer->GetID()), slotId, moveQty);
-                charutils::UpdateItem(PChar, static_cast<uint8>(PItemContainer->GetID()), slotID2, -static_cast<int32>(moveQty));
+                if (charutils::UpdateItem(PChar, static_cast<uint8>(PItemContainer->GetID()), slotID2, -static_cast<int32>(moveQty)) == 0)
+                {
+                    ShowErrorFmt("GP_CLI_COMMAND_ITEM_STACK: {} merged stacks without losing the source, taking the copy back", PChar->getName());
+                    (void)charutils::UpdateItem(PChar, static_cast<uint8>(PItemContainer->GetID()), slotId, -static_cast<int32>(moveQty));
+                }
             }
         }
     }

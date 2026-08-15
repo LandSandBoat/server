@@ -445,7 +445,11 @@ void CAttackRound::ProcFollowUpAttacks()
                                     charutils::UnequipItem(PChar, SLOT_AMMO);
                                 }
 
-                                charutils::UpdateItem(PChar, loc, slot, -1);
+                                if (charutils::UpdateItem(PChar, loc, slot, -1) == 0)
+                                {
+                                    ShowErrorFmt("attackround: {} fired without spending ammo in slot {}", PChar->getName(), slot);
+                                }
+
                                 PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
                             }
                         }

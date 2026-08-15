@@ -141,7 +141,11 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
 
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PPotItem, static_cast<CONTAINER_ID>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
 
-        charutils::UpdateItem(PChar, this->MyroomAddCategory, this->MyroomAddItemIndex, -1);
+        if (charutils::UpdateItem(PChar, this->MyroomAddCategory, this->MyroomAddItemIndex, -1) == 0)
+        {
+            ShowErrorFmt("GP_CLI_COMMAND_MYROOM_PLANT_ADD: {} planted without losing the item in slot {}", PChar->getName(), this->MyroomAddItemIndex);
+        }
+
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
     }
 }

@@ -143,8 +143,18 @@ void SynthTransaction::consumeCrystal()
         return;
     }
 
-    exitTx(slot.item);
-    charutils::UpdateItem(this->player_, LOC_INVENTORY, slot.invSlot, -1);
+    const auto consumed = this->updateItem(this->player_, LOC_INVENTORY, slot.invSlot, -1);
+    if (!consumed.applied)
+    {
+        ShowErrorFmt("SynthTransaction: {} kept the crystal in slot {}", this->player_->getName(), slot.invSlot);
+    }
+
+    // The last crystal of a stack is already gone, so only what survived still needs releasing
+    if (!consumed.destroyed)
+    {
+        exitTx(slot.item);
+    }
+
     slot.item = nullptr;
 }
 
@@ -170,17 +180,34 @@ auto SynthTransaction::doCommit() -> bool
         }
     }
 
-    // Release all items so subsequent UpdateItem can modify them
-    this->releaseAllClaims();
-
     for (size_t s = 0; s < consumePerSlot.size(); ++s)
     {
         const uint8 toConsume = consumePerSlot[s];
-        if (toConsume > 0)
+        if (toConsume == 0)
         {
-            charutils::UpdateItem(this->player_, LOC_INVENTORY, static_cast<uint8>(s), -static_cast<int32>(toConsume));
+            continue;
+        }
+
+        const auto consumed = this->updateItem(this->player_, LOC_INVENTORY, static_cast<uint8>(s), -static_cast<int32>(toConsume));
+        if (!consumed.applied)
+        {
+            ShowErrorFmt("SynthTransaction: {} kept {} of the ingredient in slot {}", this->player_->getName(), toConsume, s);
+        }
+
+        // An ingredient used up is already gone, and several slots can point at the same stack
+        if (consumed.destroyed)
+        {
+            for (auto& slot : this->slots_)
+            {
+                if (slot.invSlot == s)
+                {
+                    slot.item = nullptr;
+                }
+            }
         }
     }
+
+    this->releaseAllClaims();
 
     if (pendingResult_)
     {

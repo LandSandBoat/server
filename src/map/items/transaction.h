@@ -25,6 +25,14 @@
 #include "common/macros.h"
 
 class CItem;
+class CCharEntity;
+
+namespace charutils
+{
+
+struct ItemMutation;
+
+}
 
 enum class TransactionState : uint8
 {
@@ -62,6 +70,9 @@ protected:
     // Subclass entry points to the badge-gated InTransaction transitions.
     [[nodiscard]] static auto enterTx(CItem* item) -> bool;
     static void               exitTx(CItem* item);
+
+    // Mutating an item this transaction holds, which is refused to everyone else
+    [[nodiscard]] auto updateItem(CCharEntity* PChar, uint8 locationId, uint8 slotId, int32 quantity) const -> charutils::ItemMutation;
 
 private:
     uint64           id_;

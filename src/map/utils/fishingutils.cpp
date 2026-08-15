@@ -1377,7 +1377,10 @@ bool BaitLoss(CCharEntity* PChar, RemoveFly removeFly, SendUpdate sendUpdate)
                 {
                     charutils::UnequipItem(PChar, SLOT_AMMO);
                 }
-                charutils::UpdateItem(PChar, PBait->getLocationID(), PBait->getSlotID(), -1);
+                if (charutils::UpdateItem(PChar, PBait->getLocationID(), PBait->getSlotID(), -1) == 0)
+                {
+                    ShowErrorFmt("fishingutils: {} did not lose bait in slot {}", PChar->getName(), PBait->getSlotID());
+                }
 
                 if (sendUpdate)
                 {
@@ -1411,8 +1414,14 @@ void RodBreak(CCharEntity* PChar)
         BaitLoss(PChar, RemoveFly::Yes, SendUpdate::No);
         charutils::UnequipItem(PChar, SLOT_RANGED);
         uint8 location = PRanged->getLocationID();
-        charutils::UpdateItem(PChar, location, PRanged->getSlotID(), -1);
-        charutils::AddItem(PChar, location, PRod->brokenRodId, 1);
+        if (charutils::UpdateItem(PChar, location, PRanged->getSlotID(), -1) == 0)
+        {
+            ShowErrorFmt("fishingutils: {} kept an unbroken rod in slot {}", PChar->getName(), PRanged->getSlotID());
+        }
+        else
+        {
+            (void)charutils::AddItem(PChar, location, PRod->brokenRodId, 1);
+        }
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
     }
 }

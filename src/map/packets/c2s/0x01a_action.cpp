@@ -448,7 +448,11 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
             // Consume Gysahl Green and push animation on dig attempt.
             if (luautils::OnChocoboDig(PChar))
             {
-                charutils::UpdateItem(PChar, LOC_INVENTORY, slotID, -1);
+                if (charutils::UpdateItem(PChar, LOC_INVENTORY, slotID, -1) == 0)
+                {
+                    ShowErrorFmt("GP_CLI_COMMAND_ACTION: {} dug without spending gysahl greens in slot {}", PChar->getName(), slotID);
+                }
+
                 PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
                 PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_DIG>(PChar));
             }
