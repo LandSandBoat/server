@@ -2,6 +2,7 @@ local ID = zones[xi.zone.BATALLIA_DOWNS]
 
 return {
     ['Luck_Rune']            = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
+    ['qm2']                  = { messageSpecial = ID.text.SOMEONE_DUG },
     ['qm3']                  = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['qm4']                  = { messageSpecial = ID.text.NO_GRASS_GROWING_HERE },
     ['qm_chocobotale']       = { messageSpecial = ID.text.YOU_FIND_NOTHING },
