@@ -137,7 +137,10 @@ auto ItemClaimTransaction::moveBetween(const uint8 fromLocation, const uint8 fro
 
     this->undoWith([this, toLocation, toSlot, quantity]()
                    {
-                       (void)this->updateItem(this->player_, toLocation, toSlot, -static_cast<int32>(quantity));
+                       if (!this->updateItem(this->player_, toLocation, toSlot, -static_cast<int32>(quantity)).applied)
+                       {
+                           ShowErrorFmt("ItemClaimTransaction: could not unmerge {} from {} slot {}", quantity, this->player_->getName(), toSlot);
+                       }
                    });
 
     return true;

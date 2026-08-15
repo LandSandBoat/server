@@ -65,6 +65,15 @@ struct ItemAccess
             return;
         }
 
+        // Only a claim can be released. Anything else belongs to somebody who is still using it
+        if (item->state() != ItemState::InTransaction)
+        {
+            ShowErrorFmt("ItemAccess::exitTransaction: item {} is not claimed (current={})",
+                         item->getID(),
+                         magic_enum::enum_name(item->state()));
+            return;
+        }
+
         item->setState(ItemState::Free, xi::Badge<ItemAccess>{});
     }
 

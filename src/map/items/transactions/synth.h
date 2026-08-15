@@ -79,6 +79,8 @@ protected:
 
     void onItemDestroyed(CItem* item) override;
 
+    auto reversible() const -> bool override;
+
 private:
     auto claim(CItem* item) const -> bool;
     void releaseAllClaims();

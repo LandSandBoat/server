@@ -230,6 +230,12 @@ auto SynthTransaction::doCommit() -> bool
 
 // Synth rollbacks LOSE EVERYTHING on purpose.
 // Drop any pending result so an accidental rollback never delivers an item.
+// A synth is spent the moment it starts, so walking away from one keeps nothing back
+auto SynthTransaction::reversible() const -> bool
+{
+    return false;
+}
+
 void SynthTransaction::doRollback()
 {
     this->pendingResult_.reset();

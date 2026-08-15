@@ -277,8 +277,16 @@ void Transaction::rollback()
         return;
     }
 
-    // The work comes undone before the claims go, so each step still owns what it is putting back
-    this->runUndos();
+    // The work comes undone before the claims go, so each step still owns what it is putting back.
+    // One that cannot be taken back keeps what it did, and only forgets how to reverse it
+    if (this->reversible())
+    {
+        this->runUndos();
+    }
+    else
+    {
+        this->undos_.clear();
+    }
 
     this->doRollback();
     this->state_ = TransactionState::RolledBack;
@@ -303,6 +311,11 @@ void Transaction::onItemDestroyed(CItem*)
 {
 }
 
+auto Transaction::reversible() const -> bool
+{
+    return true;
+}
+
 auto Transaction::give(CCharEntity* PChar, const uint8 location, const uint16 itemId, const uint32 quantity, const Silence silence) -> std::optional<uint8>
 {
     const uint8 slot = this->addItem(PChar, location, itemId, quantity, silence);
@@ -313,7 +326,10 @@ auto Transaction::give(CCharEntity* PChar, const uint8 location, const uint16 it
 
     this->undoWith([this, PChar, location, slot, quantity]()
                    {
-                       (void)this->updateItem(PChar, location, slot, -static_cast<int32>(quantity));
+                       if (!this->updateItem(PChar, location, slot, -static_cast<int32>(quantity)).applied)
+                       {
+                           ShowErrorFmt("Transaction: could not take back {} handed to {} in slot {}", quantity, PChar->getName(), slot);
+                       }
                    });
 
     return slot;
@@ -336,7 +352,10 @@ auto Transaction::give(CCharEntity* PChar, const uint8 location, std::unique_ptr
 
     this->undoWith([this, PChar, location, slot, quantity]()
                    {
-                       (void)this->updateItem(PChar, location, slot, -static_cast<int32>(quantity));
+                       if (!this->updateItem(PChar, location, slot, -static_cast<int32>(quantity)).applied)
+                       {
+                           ShowErrorFmt("Transaction: could not take back {} handed to {} in slot {}", quantity, PChar->getName(), slot);
+                       }
                    });
 
     return slot;
@@ -373,7 +392,10 @@ auto Transaction::take(CCharEntity* PChar, const uint8 location, const uint8 slo
     {
         this->undoWith([this, PChar, location, slot, quantity]()
                        {
-                           (void)this->updateItem(PChar, location, slot, static_cast<int32>(quantity));
+                           if (!this->updateItem(PChar, location, slot, static_cast<int32>(quantity)).applied)
+                           {
+                               ShowErrorFmt("Transaction: could not put {} back for {} in slot {}", quantity, PChar->getName(), slot);
+                           }
                        });
 
         return true;
@@ -390,7 +412,10 @@ auto Transaction::take(CCharEntity* PChar, const uint8 location, const uint8 slo
                            return;
                        }
 
-                       (void)this->addItem(PChar, location, std::move(returned));
+                       if (this->addItem(PChar, location, std::move(returned)) == ERROR_SLOTID)
+                       {
+                           ShowErrorFmt("Transaction: {} has nowhere to put {} back", PChar->getName(), kept->getID());
+                       }
                    });
 
     return true;
@@ -410,7 +435,10 @@ auto Transaction::earn(CCharEntity* PChar, const uint32 gil) -> bool
 
     this->undoWith([this, PChar, gil]()
                    {
-                       (void)this->updateItem(PChar, LOC_INVENTORY, 0, -static_cast<int32>(gil));
+                       if (!this->updateItem(PChar, LOC_INVENTORY, 0, -static_cast<int32>(gil)).applied)
+                       {
+                           ShowErrorFmt("Transaction: could not take back {} gil from {}", gil, PChar->getName());
+                       }
                    });
 
     return true;

@@ -238,9 +238,15 @@ void CItemState::Cleanup(timer::time_point tick)
 
     m_PEntity->UContainer->Clean();
 
-    if (tx_ && tx_->isOpen())
+    if (tx_)
     {
-        tx_->rollback();
+        if (tx_->isOpen())
+        {
+            tx_->rollback();
+        }
+
+        m_PEntity->removeTransaction(tx_);
+        tx_ = nullptr;
     }
 
     const auto* PItem = m_PEntity->getStorage(m_location)->GetItem(m_slot);

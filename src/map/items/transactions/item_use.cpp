@@ -43,14 +43,13 @@ auto ItemUseTransaction::start(CCharEntity* player, CItemUsable* item) -> std::u
     // tx just carries the state machine and commit/rollback are no-ops.
     const auto takesCustody = item->isType(ITEM_EQUIPMENT) ? TakesCustody::No : TakesCustody::Yes;
 
-    auto tx = std::unique_ptr<ItemUseTransaction>(new ItemUseTransaction(xi::Badge<ItemUseTransaction>{}, player, item, takesCustody));
+    // Claimed first, so a refusal never leaves a transaction holding something it does not own
     if (takesCustody && !enterTx(item))
     {
-        // Item wasn't Free; refuse to start the tx.
         return nullptr;
     }
 
-    return tx;
+    return std::unique_ptr<ItemUseTransaction>(new ItemUseTransaction(xi::Badge<ItemUseTransaction>{}, player, item, takesCustody));
 }
 
 auto ItemUseTransaction::holds(const CItem* item) const -> bool

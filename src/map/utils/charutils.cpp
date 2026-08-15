@@ -23,6 +23,7 @@
 #include "enums/item_state.h"
 #include "items/item_access.h"
 #include "items/transactions/item_claim.h"
+#include "items/transactions/npc_trade.h"
 
 #include "common/macros.h"
 #include "common/settings.h"
@@ -7547,6 +7548,13 @@ void removeCharFromZone(CCharEntity* PChar)
     if (auto* tradeTransaction = PChar->activePlayerTradeTransaction())
     {
         tradeTransaction->abort(PChar);
+    }
+
+    // An offer left open would keep its claim, and the goods with it
+    if (auto* npcTrade = PChar->activeTransaction<NpcTradeTransaction>())
+    {
+        PChar->removeTransaction(npcTrade);
+        PChar->TradeContainer->Clean();
     }
 
     PChar->TradePending.clean();

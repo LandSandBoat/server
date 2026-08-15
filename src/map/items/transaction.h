@@ -110,6 +110,10 @@ protected:
     // so anything holding a pointer to it must let go now
     virtual void onItemDestroyed(CItem* item);
 
+    // Whether steps that already landed can be taken back. A transaction that says no keeps its
+    // work on rollback, so abandoning it costs the same as finishing it badly
+    virtual auto reversible() const -> bool;
+
 private:
     void runUndos();
 
