@@ -98,6 +98,7 @@
 #include "items/item_furnishing.h"
 #include "items/item_linkshell.h"
 #include "items/item_puppet.h"
+#include "items/transactions/item_claim.h"
 
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
@@ -4665,7 +4666,8 @@ bool CLuaBaseEntity::delItem(uint16 itemID, int32 quantity, const sol::object& c
 
     if (SlotID != ERROR_SLOTID)
     {
-        if (charutils::UpdateItem(PChar, location, SlotID, -quantity) == 0)
+        auto transaction = ItemClaimTransaction::start(PChar);
+        if (!transaction || !transaction->take(location, SlotID, quantity) || !transaction->commit())
         {
             ShowErrorFmt("CLuaBaseEntity::delItem: {} kept item in slot {}", PChar->getName(), SlotID);
             return false;
@@ -4702,7 +4704,8 @@ bool CLuaBaseEntity::delItemAt(const uint16 itemID, const int32 quantity, uint8 
 
     if (const auto* PItem = PChar->getStorage(containerId)->GetItem(slotId); PItem && PItem->getID() == itemID)
     {
-        if (charutils::UpdateItem(PChar, containerId, slotId, -quantity) == 0)
+        auto transaction = ItemClaimTransaction::start(PChar);
+        if (!transaction || !transaction->take(containerId, slotId, quantity) || !transaction->commit())
         {
             ShowErrorFmt("CLuaBaseEntity::delItem: {} kept item in slot {}", PChar->getName(), slotId);
             return false;
@@ -4757,13 +4760,13 @@ bool CLuaBaseEntity::delContainerItems(const sol::object& containerID)
 
     for (uint8 i = 1; i <= containerSize; ++i)
     {
-        auto* PItem = PItemContainer->GetItem(i);
+        const auto* PItem = PItemContainer->GetItem(i);
 
         if (PItem != nullptr)
         {
-            int32 quantity = PItem->getQuantity();
-
-            if (charutils::UpdateItem(PChar, location, i, -quantity) == 0)
+            // One per slot, so a slot that refuses to empty does not strand the rest
+            auto transaction = ItemClaimTransaction::start(PChar);
+            if (!transaction || !transaction->take(location, i, PItem->getQuantity()) || !transaction->commit())
             {
                 ShowErrorFmt("CLuaBaseEntity::delContainerItems: {} kept item in slot {}", PChar->getName(), i);
             }
@@ -5346,7 +5349,8 @@ void CLuaBaseEntity::confirmTrade() const
                         PChar->TradeContainer->setItem(slotID, nullptr);
                     }
 
-                    if (charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -quantity) == 0)
+                    auto transaction = ItemClaimTransaction::start(PChar);
+                    if (!transaction || !transaction->take(LOC_INVENTORY, invSlotID, quantity) || !transaction->commit())
                     {
                         ShowErrorFmt("CLuaBaseEntity::confirmTrade: {} kept traded item in slot {}", PChar->getName(), invSlotID);
                     }
@@ -5390,7 +5394,8 @@ void CLuaBaseEntity::tradeComplete() const
                     PChar->TradeContainer->setItem(slotID, nullptr);
                 }
 
-                if (charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -quantity) == 0)
+                auto transaction = ItemClaimTransaction::start(PChar);
+                if (!transaction || !transaction->take(LOC_INVENTORY, invSlotID, quantity) || !transaction->commit())
                 {
                     ShowErrorFmt("CLuaBaseEntity::tradeComplete: {} kept traded item in slot {}", PChar->getName(), invSlotID);
                 }
@@ -5833,7 +5838,9 @@ uint8 CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, const sol::table& ext
                 if (PItem)
                 {
                     PItem->setReserve(0);
-                    if (charutils::UpdateItem(PChar, LOC_INVENTORY, slotId, -1) == 0)
+
+                    auto transaction = ItemClaimTransaction::start(PChar);
+                    if (!transaction || !transaction->take(LOC_INVENTORY, slotId, 1) || !transaction->commit())
                     {
                         ShowErrorFmt("CLuaBaseEntity::storeWithPorterMoogle: {} kept item {} after it went on the slip", PChar->getName(), itemId);
                     }
@@ -9763,6 +9770,21 @@ uint32 CLuaBaseEntity::getGil()
     return 0;
 }
 
+namespace
+{
+
+auto adjustGil(ItemClaimTransaction& transaction, const int32 gil) -> bool
+{
+    if (gil >= 0)
+    {
+        return transaction.earn(static_cast<uint32>(gil));
+    }
+
+    return transaction.pay(static_cast<uint32>(-gil));
+}
+
+} // namespace
+
 /************************************************************************
  *  Function: addGil()
  *  Purpose : Add a specified amount of gil to the player
@@ -9787,7 +9809,9 @@ void CLuaBaseEntity::addGil(int32 gil)
     }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    if (charutils::UpdateItem(PChar, LOC_INVENTORY, 0, gil) == 0)
+
+    auto transaction = ItemClaimTransaction::start(PChar);
+    if (!transaction || !adjustGil(*transaction, gil) || !transaction->commit())
     {
         ShowErrorFmt("CLuaBaseEntity: could not adjust gil for {}", PChar->getName());
     }
@@ -9819,7 +9843,8 @@ void CLuaBaseEntity::setGil(int32 amount)
     int32 gil   = amount - item->getQuantity();
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    if (charutils::UpdateItem(PChar, LOC_INVENTORY, 0, gil) == 0)
+    auto transaction = ItemClaimTransaction::start(PChar);
+    if (!transaction || !adjustGil(*transaction, gil) || !transaction->commit())
     {
         ShowErrorFmt("CLuaBaseEntity: could not adjust gil for {}", PChar->getName());
     }
@@ -9853,7 +9878,9 @@ bool CLuaBaseEntity::delGil(int32 gil)
     if (PItem != nullptr && PItem->isType(ITEM_CURRENCY) && (int32)PItem->getQuantity() >= gil)
     {
         auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-        result      = charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -gil) == 0xFFFF;
+
+        auto transaction = ItemClaimTransaction::start(PChar);
+        result           = transaction && transaction->pay(gil) && transaction->commit();
     }
     else
     {
