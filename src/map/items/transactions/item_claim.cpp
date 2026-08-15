@@ -24,7 +24,7 @@
 #include "entities/char_entity.h"
 #include "item_container.h"
 #include "items/item.h"
-#include "utils/itemutils.h"
+#include "utils/charutils.h"
 
 #include <algorithm>
 
@@ -85,118 +85,27 @@ auto ItemClaimTransaction::claimGil() -> CItem*
 
 auto ItemClaimTransaction::give(const uint8 location, const uint16 itemId, const uint32 quantity, const Silence silence) -> std::optional<uint8>
 {
-    const uint8 slot = this->addItem(this->player_, location, itemId, quantity, silence);
-    if (slot == ERROR_SLOTID)
-    {
-        return std::nullopt;
-    }
-
-    this->undoWith([this, location, slot, quantity]()
-                   {
-                       (void)this->update(location, slot, -static_cast<int32>(quantity));
-                   });
-
-    return slot;
+    return Transaction::give(this->player_, location, itemId, quantity, silence);
 }
 
 auto ItemClaimTransaction::give(const uint8 location, std::unique_ptr<CItem> item, const Silence silence) -> std::optional<uint8>
 {
-    if (!item)
-    {
-        return std::nullopt;
-    }
-
-    const uint32 quantity = item->getQuantity();
-
-    const uint8 slot = this->addItem(this->player_, location, std::move(item), silence);
-    if (slot == ERROR_SLOTID)
-    {
-        return std::nullopt;
-    }
-
-    this->undoWith([this, location, slot, quantity]()
-                   {
-                       (void)this->update(location, slot, -static_cast<int32>(quantity));
-                   });
-
-    return slot;
+    return Transaction::give(this->player_, location, std::move(item), silence);
 }
 
 auto ItemClaimTransaction::take(const uint8 location, const uint8 slot, const uint32 quantity) -> bool
 {
-    CItem* PItem = this->player_->getStorage(location)->GetItem(slot);
-    if (!PItem || PItem->getQuantity() < quantity)
-    {
-        return false;
-    }
-
-    // A stack about to vanish is copied first, so putting it back keeps exdata, signature and augments
-    std::unique_ptr<CItem> restore;
-    if (PItem->getQuantity() == quantity)
-    {
-        restore = xi::items::clone(*PItem);
-    }
-
-    if (!this->update(location, slot, -static_cast<int32>(quantity)).applied)
-    {
-        return false;
-    }
-
-    if (!restore)
-    {
-        this->undoWith([this, location, slot, quantity]()
-                       {
-                           (void)this->update(location, slot, static_cast<int32>(quantity));
-                       });
-
-        return true;
-    }
-
-    restore->setQuantity(quantity);
-
-    this->undoWith([this, location, kept = std::shared_ptr<CItem>(std::move(restore))]()
-                   {
-                       auto returned = xi::items::clone(*kept);
-                       if (!returned)
-                       {
-                           ShowErrorFmt("ItemClaimTransaction: could not give {} back to {}", kept->getID(), this->player_->getName());
-                           return;
-                       }
-
-                       (void)this->addItem(this->player_, location, std::move(returned), Silence::Yes);
-                   });
-
-    return true;
+    return Transaction::take(this->player_, location, slot, quantity);
 }
 
 auto ItemClaimTransaction::pay(const uint32 gil) -> bool
 {
-    if (!this->claimGil())
-    {
-        return false;
-    }
-
-    return this->take(LOC_INVENTORY, 0, gil);
+    return Transaction::pay(this->player_, gil);
 }
 
 auto ItemClaimTransaction::earn(const uint32 gil) -> bool
 {
-    if (!this->claimGil())
-    {
-        return false;
-    }
-
-    if (!this->update(LOC_INVENTORY, 0, static_cast<int32>(gil)).applied)
-    {
-        return false;
-    }
-
-    this->undoWith([this, gil]()
-                   {
-                       (void)this->update(LOC_INVENTORY, 0, -static_cast<int32>(gil));
-                   });
-
-    return true;
+    return Transaction::earn(this->player_, gil);
 }
 
 auto ItemClaimTransaction::split(const uint8 fromLocation, const uint8 fromSlot, const uint8 toLocation, const uint32 quantity) -> bool
@@ -221,37 +130,23 @@ auto ItemClaimTransaction::moveBetween(const uint8 fromLocation, const uint8 fro
         return false;
     }
 
-    if (!this->update(toLocation, toSlot, static_cast<int32>(quantity)).applied)
+    if (!this->updateItem(this->player_, toLocation, toSlot, static_cast<int32>(quantity)).applied)
     {
         return false;
     }
 
     this->undoWith([this, toLocation, toSlot, quantity]()
                    {
-                       (void)this->update(toLocation, toSlot, -static_cast<int32>(quantity));
+                       (void)this->updateItem(this->player_, toLocation, toSlot, -static_cast<int32>(quantity));
                    });
 
     return true;
 }
 
-void ItemClaimTransaction::undoWith(std::function<void()> undo)
+// A stack consumed to nothing is freed, so the claim on it has to go before anything releases it
+void ItemClaimTransaction::onItemDestroyed(CItem* item)
 {
-    this->undos_.push_back(std::move(undo));
-}
-
-auto ItemClaimTransaction::update(const uint8 location, const uint8 slot, const int32 quantity) -> charutils::ItemMutation
-{
-    CItem* PItem = this->player_->getStorage(location)->GetItem(slot);
-
-    const auto mutation = this->updateItem(this->player_, location, slot, quantity);
-
-    // A stack consumed to nothing is freed, so the claim on it has to go before anything releases it
-    if (mutation.destroyed)
-    {
-        std::erase(this->claims_, PItem);
-    }
-
-    return mutation;
+    std::erase(this->claims_, item);
 }
 
 auto ItemClaimTransaction::holds(const CItem* item) const -> bool
@@ -261,7 +156,6 @@ auto ItemClaimTransaction::holds(const CItem* item) const -> bool
 
 auto ItemClaimTransaction::doCommit() -> bool
 {
-    this->undos_.clear();
     this->releaseClaims();
 
     return true;
@@ -269,13 +163,6 @@ auto ItemClaimTransaction::doCommit() -> bool
 
 void ItemClaimTransaction::doRollback()
 {
-    // Reverse order, and before the claims go, so each undo still owns what it is putting back
-    for (auto undo = this->undos_.rbegin(); undo != this->undos_.rend(); ++undo)
-    {
-        (*undo)();
-    }
-
-    this->undos_.clear();
     this->releaseClaims();
 }
 

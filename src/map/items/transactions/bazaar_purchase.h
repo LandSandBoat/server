@@ -58,6 +58,8 @@ protected:
     auto doCommit() -> bool override;
     void doRollback() override;
 
+    void onItemDestroyed(CItem* item) override;
+
 private:
     auto claimAll() -> bool;
     void releaseClaims();

@@ -67,13 +67,16 @@ public:
     auto confirmedQuantity(uint8 tradeSlot) const -> uint32;
     auto confirm(uint8 tradeSlot, uint32 quantity) -> bool;
 
+    // Confirms an offered stack by what it is rather than where it sits in the window
+    [[nodiscard]] auto confirmById(uint16 itemId, uint32 quantity) -> bool;
+
     // Everything the script passed on goes back to the player as soon as onTrade returns
     void releaseUnconfirmed();
 
-    // Consumes what the script confirmed, then closes
+    // Consumes what the script confirmed, then closes. False if any of it could not be taken
     [[nodiscard]] auto consumeConfirmed() -> bool;
 
-    // Consumes every staged slot in full, then closes
+    // Consumes every staged slot in full, then closes. False if any of it could not be taken
     [[nodiscard]] auto consumeAll() -> bool;
 
     auto holds(const CItem* item) const -> bool override;
@@ -81,6 +84,8 @@ public:
 protected:
     auto doCommit() -> bool override;
     void doRollback() override;
+
+    void onItemDestroyed(CItem* item) override;
 
 private:
     struct Slot
@@ -106,7 +111,7 @@ private:
     void releaseAll();
 
     // Takes `quantity` from the slot's stack and drops the claim on whatever is left
-    void consumeSlot(Slot& slot, uint32 quantity);
+    [[nodiscard]] auto consumeSlot(Slot& slot, uint32 quantity) -> bool;
 
     CCharEntity*                     player_{};
     std::array<Slot, CONTAINER_SIZE> slots_{};

@@ -5355,12 +5355,12 @@ uint8 CLuaBaseEntity::getFreeSlotsCount(const sol::object& locID)
  *  Notes   : Must use trade:confirmItem(slotID) first
  ************************************************************************/
 
-void CLuaBaseEntity::confirmTrade() const
+auto CLuaBaseEntity::confirmTrade() const -> bool
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
         ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-        return;
+        return false;
     }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
@@ -5369,10 +5369,11 @@ void CLuaBaseEntity::confirmTrade() const
     if (!transaction)
     {
         ShowWarningFmt("CLuaBaseEntity::confirmTrade: {} has no trade to confirm", PChar->getName());
-        return;
+        return false;
     }
 
-    if (!transaction->consumeConfirmed())
+    const bool tookEverything = transaction->consumeConfirmed();
+    if (!tookEverything)
     {
         ShowErrorFmt("CLuaBaseEntity::confirmTrade: {} kept the confirmed items", PChar->getName());
     }
@@ -5380,6 +5381,8 @@ void CLuaBaseEntity::confirmTrade() const
     PChar->removeTransaction(transaction);
     PChar->TradeContainer->Clean();
     PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
+
+    return tookEverything;
 }
 
 /************************************************************************
@@ -5388,12 +5391,12 @@ void CLuaBaseEntity::confirmTrade() const
  *  Example : player:tradeComplete()
  ************************************************************************/
 
-void CLuaBaseEntity::tradeComplete() const
+auto CLuaBaseEntity::tradeComplete() const -> bool
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
         ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-        return;
+        return false;
     }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
@@ -5402,10 +5405,11 @@ void CLuaBaseEntity::tradeComplete() const
     if (!transaction)
     {
         ShowWarningFmt("CLuaBaseEntity::tradeComplete: {} has no trade to complete", PChar->getName());
-        return;
+        return false;
     }
 
-    if (!transaction->consumeAll())
+    const bool tookEverything = transaction->consumeAll();
+    if (!tookEverything)
     {
         ShowErrorFmt("CLuaBaseEntity::tradeComplete: {} kept the traded items", PChar->getName());
     }
@@ -5413,18 +5417,20 @@ void CLuaBaseEntity::tradeComplete() const
     PChar->removeTransaction(transaction);
     PChar->TradeContainer->Clean();
     PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
+
+    return tookEverything;
 }
 
-auto CLuaBaseEntity::getTrade() -> CTradeContainer*
+auto CLuaBaseEntity::getTrade() -> CLuaTradeContainer
 {
-    if (m_PBaseEntity->objtype != TYPE_PC)
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (!PChar)
     {
         ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-        return nullptr;
+        return CLuaTradeContainer(nullptr, nullptr);
     }
 
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    return PChar->TradeContainer;
+    return CLuaTradeContainer(PChar->TradeContainer, PChar);
 }
 
 /************************************************************************
@@ -5762,10 +5768,13 @@ auto CLuaBaseEntity::getStorageItem(uint8 container, uint8 slotID, uint8 equipID
 
 uint8 CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, const sol::table& extraTable, const sol::table& storableItemIdsTable)
 {
+    // Anything the script does not recognise leaves the gear alone and plays no cutscene
+    constexpr uint8 storeFailed = 3;
+
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
         ShowWarning("CLuaBaseEntity::storeWithPorterMoogle() - Non_PC passed to function.");
-        return 0;
+        return storeFailed;
     }
 
     auto* PChar      = (CCharEntity*)m_PBaseEntity;
@@ -5773,7 +5782,7 @@ uint8 CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, const sol::table& ext
 
     if (slipSlotId == 255)
     {
-        return 0;
+        return storeFailed;
     }
 
     auto* slip = PChar->getStorage(LOC_INVENTORY)->GetItem(slipSlotId);
@@ -5781,79 +5790,47 @@ uint8 CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, const sol::table& ext
     if (slip == nullptr)
     {
         ShowError("Slip Item was null.");
-        return 0;
+        return storeFailed;
     }
 
-    auto storableItemIdsVec  = storableItemIdsTable.as<std::vector<uint16>>();
-    auto storableItemIdsSize = storableItemIdsVec.size();
+    // The gear is sitting in the trade window, so it is that offer which has to give it up
+    auto* transaction = PChar->activeTransaction<NpcTradeTransaction>();
+    if (!transaction)
+    {
+        ShowErrorFmt("CLuaBaseEntity::storeWithPorterMoogle: {} has no trade to take the gear from", PChar->getName());
+        return storeFailed;
+    }
 
-    // The slip is written before the items are taken, so refuse the lot if any of them is claimed
-    for (const auto itemId : storableItemIdsVec)
+    const auto extraVec        = extraTable.as<std::vector<uint8>>();
+    const auto storableItemIds = storableItemIdsTable.as<std::vector<uint16>>();
+
+    // Refuse the whole lot before anything is written, so a slip never records gear it did not take
+    for (size_t i = 0; i < extraVec.size() && i < CItem::extra_size; ++i)
+    {
+        if ((slip->m_extra[i] & extraVec[i]) != 0)
+        {
+            return extraVec[i];
+        }
+    }
+
+    for (const auto itemId : storableItemIds)
     {
         if (itemId == 0)
         {
             continue;
         }
 
-        const auto slotId = PChar->getStorage(LOC_INVENTORY)->SearchItem(itemId);
-        if (slotId == 255)
+        // TODO: Items need to be checked for an in-progress magian trial before storing.
+        if (!transaction->confirmById(itemId, 1))
         {
-            continue;
-        }
-
-        const auto* PStorable = PChar->getStorage(LOC_INVENTORY)->GetItem(slotId);
-        if (PStorable && PStorable->isBusy())
-        {
-            ShowWarningFmt("CLuaBaseEntity::storeWithPorterMoogle: {} trying to store a claimed item {}", PChar->getName(), itemId);
-            return 0;
+            ShowErrorFmt("CLuaBaseEntity::storeWithPorterMoogle: {} did not offer item {} for the slip", PChar->getName(), itemId);
+            return storeFailed;
         }
     }
 
-    auto extraVec  = extraTable.as<std::vector<uint8>>();
-    auto extraSize = extraVec.size();
-    for (size_t i = 0; i < extraSize; i++)
+    for (size_t i = 0; i < extraVec.size() && i < CItem::extra_size; ++i)
     {
-        auto extra = extraVec[i];
-        if ((slip->m_extra[i] & extra) != 0)
-        {
-            return extra;
-        }
-        slip->m_extra[i] |= extra;
-    }
-    uint16 storedItemIds[7];
-
-    for (size_t i = 0; i < storableItemIdsSize; i++)
-    {
-        auto itemId = storableItemIdsVec[i];
-        if (itemId != 0)
-        {
-            storedItemIds[i] = itemId;
-        }
-        else
-        {
-            storedItemIds[i] = 0;
-        }
-    }
-
-    for (const auto& itemId : storedItemIds)
-    {
-        if (itemId != 0)
-        {
-            auto slotId = PChar->getStorage(LOC_INVENTORY)->SearchItem(itemId);
-            if (slotId != 255)
-            {
-                // TODO: Items need to be checked for an in-progress magian trial before storing.
-                CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slotId);
-                if (PItem)
-                {
-                    auto transaction = ItemClaimTransaction::start(PChar);
-                    if (!transaction || !transaction->take(LOC_INVENTORY, slotId, 1) || !transaction->commit())
-                    {
-                        ShowErrorFmt("CLuaBaseEntity::storeWithPorterMoogle: {} kept item {} after it went on the slip", PChar->getName(), itemId);
-                    }
-                }
-            }
-        }
+        slip->m_extra[i] |= extraVec[i];
     }
 
     const char* Query = "UPDATE char_inventory "

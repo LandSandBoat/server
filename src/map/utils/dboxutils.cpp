@@ -200,10 +200,11 @@ void dboxutils::AddItemsToBeSent(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
             }
 
             // The row is already committed, so it has to come out again if the stack does not
-            transaction->undoWith([charid = PChar->id, PostWorkNo]()
-                                  {
-                                      db::preparedStmt("DELETE FROM delivery_box WHERE charid = ? AND box = 2 AND slot = ?", charid, PostWorkNo);
-                                  });
+            transaction->undoWith(
+                [charid = PChar->id, PostWorkNo]()
+                {
+                    db::preparedStmt("DELETE FROM delivery_box WHERE charid = ? AND box = 2 AND slot = ?", charid, PostWorkNo);
+                });
 
             if (!transaction->take(LOC_INVENTORY, ItemWorkNo, ItemStacks) || !transaction->commit())
             {

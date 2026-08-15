@@ -30,11 +30,6 @@
 
 //======================================================//
 
-CLuaTradeContainer::CLuaTradeContainer(CTradeContainer* pTrade)
-: CLuaTradeContainer(pTrade, nullptr)
-{
-}
-
 CLuaTradeContainer::CLuaTradeContainer(CTradeContainer* pTrade, CCharEntity* owner)
 : m_pMyTradeContainer(pTrade)
 , m_owner(owner)

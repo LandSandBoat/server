@@ -167,6 +167,21 @@ auto PlayerTradeTransaction::accept(const CCharEntity* who) -> bool
 }
 
 // Runs from the destructor too, so it must not touch either character
+// A stack handed over whole is already gone, so the slot must forget it before anything releases it
+void PlayerTradeTransaction::onItemDestroyed(CItem* item)
+{
+    for (auto& side : this->sides_)
+    {
+        for (auto& slot : side.slots)
+        {
+            if (slot.item == item)
+            {
+                slot = Slot{};
+            }
+        }
+    }
+}
+
 void PlayerTradeTransaction::releaseSlot(Slot& slot) const
 {
     if (!slot.item)
@@ -397,16 +412,6 @@ auto PlayerTradeTransaction::doCommit() -> bool
         return false;
     }
 
-    struct Delivery
-    {
-        CCharEntity* receiver{};
-        uint8        invSlot{};
-        uint32       qty{};
-    };
-
-    std::vector<Delivery> delivered;
-    delivered.reserve(MaxSlots * 2);
-
     const auto deliverSide = [&](const Side& sender, CCharEntity* receiver) -> bool
     {
         for (const auto& slot : sender.slots)
@@ -425,27 +430,16 @@ auto PlayerTradeTransaction::doCommit() -> bool
 
             clone->setQuantity(slot.qty);
 
-            const uint8 deliveredSlot = this->addItem(receiver, LOC_INVENTORY, std::move(clone));
-            if (deliveredSlot == ERROR_SLOTID)
+            if (!this->give(receiver, LOC_INVENTORY, std::move(clone)))
             {
                 return false;
             }
-
-            delivered.push_back({ .receiver = receiver, .invSlot = deliveredSlot, .qty = slot.qty });
         }
 
         return true;
     };
 
-    const auto undoDeliveries = [&]()
-    {
-        for (const auto& delivery : delivered)
-        {
-            (void)this->updateItem(delivery.receiver, LOC_INVENTORY, delivery.invSlot, -static_cast<int32>(delivery.qty));
-        }
-    };
-
-    const auto consumeSide = [&](Side& sender)
+    const auto consumeSide = [&](Side& sender) -> bool
     {
         for (auto& slot : sender.slots)
         {
@@ -454,36 +448,23 @@ auto PlayerTradeTransaction::doCommit() -> bool
                 continue;
             }
 
-            const auto itemID = slot.item->getID();
-
-            const auto consumed = this->updateItem(sender.PChar, LOC_INVENTORY, slot.invSlot, -static_cast<int32>(slot.qty));
-            if (!consumed.applied)
+            if (!this->take(sender.PChar, LOC_INVENTORY, slot.invSlot, slot.qty))
             {
-                ShowErrorFmt("PlayerTradeTransaction::doCommit: {} kept item {} after it was handed over", sender.PChar->getName(), itemID);
+                ShowErrorFmt("PlayerTradeTransaction::doCommit: {} kept item {} after it was handed over", sender.PChar->getName(), slot.item->getID());
+                return false;
             }
 
-            // A stack handed over whole is already gone, so only what survived still needs releasing
-            if (consumed.destroyed)
-            {
-                slot = Slot{};
-            }
-            else
-            {
-                this->releaseSlot(slot);
-            }
+            this->releaseSlot(slot);
         }
+
+        return true;
     };
 
-    if (!deliverSide(this->sides_[0], target) || !deliverSide(this->sides_[1], initiator))
-    {
-        undoDeliveries();
-        return false;
-    }
-
-    consumeSide(this->sides_[0]);
-    consumeSide(this->sides_[1]);
-
-    return true;
+    // A failure anywhere rolls the whole exchange back, so neither side can end up short
+    return deliverSide(this->sides_[0], target) &&
+           deliverSide(this->sides_[1], initiator) &&
+           consumeSide(this->sides_[0]) &&
+           consumeSide(this->sides_[1]);
 }
 
 void PlayerTradeTransaction::doRollback()

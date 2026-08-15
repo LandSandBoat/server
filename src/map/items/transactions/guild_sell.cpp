@@ -149,25 +149,19 @@ auto GuildSellTransaction::doCommit() -> bool
         const uint8 take = std::min(claim.quantity, remaining);
         remaining -= take;
 
-        const auto consumed = this->updateItem(this->player_, LOC_INVENTORY, claim.invSlot, -static_cast<int32>(take));
-        if (!consumed.applied)
+        if (!Transaction::take(this->player_, LOC_INVENTORY, claim.invSlot, take))
         {
             ShowErrorFmt("GuildSellTransaction: {} kept {} of the goods in slot {}", this->player_->getName(), take, claim.invSlot);
-        }
-
-        // A stack sold whole is already gone, so only what survived still needs releasing
-        if (consumed.destroyed)
-        {
-            claim.item = nullptr;
+            return false;
         }
     }
 
     this->releaseAllClaims();
 
-    // Award gil
-    if (!this->updateItem(this->player_, LOC_INVENTORY, 0, static_cast<int32>(this->sold_ * this->unitPrice_)).applied)
+    if (!this->earn(this->player_, this->sold_ * this->unitPrice_))
     {
         ShowErrorFmt("GuildSellTransaction: {} was not paid for the sale", this->player_->getName());
+        return false;
     }
 
     this->player_->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(this->player_);
@@ -178,6 +172,18 @@ auto GuildSellTransaction::doCommit() -> bool
 void GuildSellTransaction::doRollback()
 {
     this->releaseAllClaims();
+}
+
+// A stack sold whole is already gone, so the claim must forget it before anything releases it
+void GuildSellTransaction::onItemDestroyed(CItem* item)
+{
+    for (auto& claim : this->claims_)
+    {
+        if (claim.item == item)
+        {
+            claim.item = nullptr;
+        }
+    }
 }
 
 void GuildSellTransaction::releaseAllClaims()

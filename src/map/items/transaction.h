@@ -25,17 +25,24 @@
 #include "common/macros.h"
 #include "common/types/flag.h"
 
+#include <functional>
 #include <memory>
+#include <optional>
+#include <vector>
 
 class CItem;
 class CCharEntity;
 
-namespace charutils
+// What became of the stack a step just mutated
+struct ItemMutation
 {
+    uint16 itemId{ 0 };
+    bool   applied{ false };
 
-struct ItemMutation;
-
-}
+    // Set when the stack was consumed to nothing. It is kept alive only as long as this result is,
+    // so anything still pointing at it must let go while it is here
+    std::unique_ptr<CItem> removed;
+};
 
 enum class TransactionState : uint8
 {
@@ -47,6 +54,11 @@ enum class TransactionState : uint8
 // Open/commit/rollback wrapper for multistep item interactions (item use, NPC trade, synth, dbox).
 // Subclasses override doCommit/doRollback/holds.
 // Derived must call rollbackIfOpen() in destructor else base aborts.
+//
+// Every step that moves an item - give, take, pay, earn - records how to reverse itself, so
+// rolling back undoes the work rather than only letting go of the claims. Committing keeps it.
+// A step that destroys a stack reports it through onItemDestroyed, since whatever was holding a
+// pointer to it needs to let go before anything tries to release it.
 
 class Transaction
 {
@@ -75,13 +87,33 @@ protected:
     static void               exitTx(CItem* item);
 
     // Mutating an item this transaction holds, which is refused to everyone else
-    [[nodiscard]] auto updateItem(CCharEntity* PChar, uint8 locationId, uint8 slotId, int32 quantity) const -> charutils::ItemMutation;
+    [[nodiscard]] auto updateItem(CCharEntity* PChar, uint8 locationId, uint8 slotId, int32 quantity) -> ItemMutation;
 
     // Handing an item out. ERROR_SLOTID if it could not be placed
-    [[nodiscard]] auto addItem(CCharEntity* PChar, uint8 locationId, std::unique_ptr<CItem> item, Silence silence = Silence::No) const -> uint8;
-    [[nodiscard]] auto addItem(CCharEntity* PChar, uint8 locationId, uint16 itemId, uint32 quantity, Silence silence = Silence::No) const -> uint8;
+    [[nodiscard]] auto addItem(CCharEntity* PChar, uint8 locationId, std::unique_ptr<CItem> item, Silence silence = Silence::No) -> uint8;
+    [[nodiscard]] auto addItem(CCharEntity* PChar, uint8 locationId, uint16 itemId, uint32 quantity, Silence silence = Silence::No) -> uint8;
+
+    // Hands a stack over, reporting where it landed. Reversed by taking it back
+    [[nodiscard]] auto give(CCharEntity* PChar, uint8 location, uint16 itemId, uint32 quantity, Silence silence = Silence::No) -> std::optional<uint8>;
+    [[nodiscard]] auto give(CCharEntity* PChar, uint8 location, std::unique_ptr<CItem> item, Silence silence = Silence::No) -> std::optional<uint8>;
+
+    // Takes from a stack. Reversed by putting back what was taken, exdata and all
+    [[nodiscard]] auto take(CCharEntity* PChar, uint8 location, uint8 slot, uint32 quantity) -> bool;
+
+    [[nodiscard]] auto pay(CCharEntity* PChar, uint32 gil) -> bool;
+    [[nodiscard]] auto earn(CCharEntity* PChar, uint32 gil) -> bool;
+
+    // For work this cannot reverse on its own, such as a row written outside the item tables
+    void undoWith(std::function<void()> undo);
+
+    // A step is consuming this stack to nothing. It is still alive here, but will not be for long,
+    // so anything holding a pointer to it must let go now
+    virtual void onItemDestroyed(CItem* item);
 
 private:
-    uint64           id_;
-    TransactionState state_{ TransactionState::Open };
+    void runUndos();
+
+    uint64                             id_;
+    TransactionState                   state_{ TransactionState::Open };
+    std::vector<std::function<void()>> undos_;
 };

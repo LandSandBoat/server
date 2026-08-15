@@ -208,7 +208,6 @@ void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar)
             const CItem* PItem2 = PChar->getStorage(this->Category2)->GetItem(this->ItemIndex2);
 
             if (!PItem2 || PItem2->getID() != PItem->getID() ||
-                PItem2->isBusy() ||
                 PItem2->isBusy())
             {
                 ShowWarning("GP_CLI_COMMAND_ITEM_MOVE: Trying to unite items with invalid item %i at location %u slot %u",

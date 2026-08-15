@@ -89,6 +89,22 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
         return;
     }
 
+    // The pot cannot be its own seed. Spending it would destroy the very item written to below
+    if (this->MyroomAddCategory == this->MyroomPlantCategory &&
+        this->MyroomAddItemIndex == this->MyroomPlantItemIndex)
+    {
+        ShowWarningFmt("GP_CLI_COMMAND_MYROOM_PLANT_ADD: {} trying to plant a pot into itself", PChar->getName());
+        return;
+    }
+
+    // What the client says it is planting has to be what actually sits in the slot
+    const auto* PAddItem = PChar->getStorage(this->MyroomAddCategory)->GetItem(this->MyroomAddItemIndex);
+    if (!PAddItem || PAddItem->getID() != this->MyroomAddItemNo)
+    {
+        ShowWarningFmt("GP_CLI_COMMAND_MYROOM_PLANT_ADD: {} trying to plant item {} that is not in slot {}", PChar->getName(), this->MyroomAddItemNo, this->MyroomAddItemIndex);
+        return;
+    }
+
     auto transaction = ItemClaimTransaction::start(PChar);
     if (!transaction)
     {

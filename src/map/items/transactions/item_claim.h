@@ -25,9 +25,7 @@
 #include "common/types/badge.h"
 
 #include "items/transaction.h"
-#include "utils/charutils.h"
 
-#include <functional>
 #include <memory>
 #include <optional>
 #include <vector>
@@ -35,16 +33,11 @@
 class CCharEntity;
 class CItem;
 
-// A scoped claim over the stacks one operation mutates.
+// One operation's claim over the stacks it touches, for work that needs no bookkeeping of its own.
 //
 // claim() stamps a stack InTransaction so nothing else can spend, sell or bazaar it while the
-// operation runs. Every mutation is a named step - give, take, pay, earn, split, moveBetween -
-// and each one records how to reverse itself, so a caller never writes an undo by hand.
-//
-// Reaching commit() keeps the work and lets go of the claims. Anything else - a failed step, an
-// early return, a throw - rolls back through the destructor, reversing the steps that did land
-// while the claims are still held. A caller that only checks each step for false and returns is
-// therefore already correct.
+// operation runs. The steps themselves - give, take, pay, earn, and their reversal - come from
+// Transaction; these overloads only spare the caller naming the player every time.
 
 class ItemClaimTransaction final : public Transaction
 {
@@ -63,14 +56,10 @@ public:
     // since pay() and earn() claim it themselves. Null if slot 0 does not hold spendable currency
     [[nodiscard]] auto claimGil() -> CItem*;
 
-    // Hands the player a new stack, reporting where it landed. Empty if it did not fit.
-    // Reversed by taking it back
+    // The operation's own player is implied, which is all these ever act on
     [[nodiscard]] auto give(uint8 location, uint16 itemId, uint32 quantity, Silence silence = Silence::No) -> std::optional<uint8>;
     [[nodiscard]] auto give(uint8 location, std::unique_ptr<CItem> item, Silence silence = Silence::No) -> std::optional<uint8>;
-
-    // Takes from a stack. Reversed by putting back what was taken, exdata and all
     [[nodiscard]] auto take(uint8 location, uint8 slot, uint32 quantity) -> bool;
-
     [[nodiscard]] auto pay(uint32 gil) -> bool;
     [[nodiscard]] auto earn(uint32 gil) -> bool;
 
@@ -81,7 +70,7 @@ public:
     [[nodiscard]] auto moveBetween(uint8 fromLocation, uint8 fromSlot, uint8 toLocation, uint8 toSlot, uint32 quantity) -> bool;
 
     // For work this cannot reverse on its own, such as a row written outside the item tables
-    void undoWith(std::function<void()> undo);
+    using Transaction::undoWith;
 
     auto holds(const CItem* item) const -> bool override;
 
@@ -89,12 +78,11 @@ protected:
     auto doCommit() -> bool override;
     void doRollback() override;
 
-private:
-    [[nodiscard]] auto update(uint8 location, uint8 slot, int32 quantity) -> charutils::ItemMutation;
+    void onItemDestroyed(CItem* item) override;
 
+private:
     void releaseClaims();
 
-    CCharEntity*                       player_{};
-    std::vector<CItem*>                claims_;
-    std::vector<std::function<void()>> undos_;
+    CCharEntity*        player_{};
+    std::vector<CItem*> claims_;
 };

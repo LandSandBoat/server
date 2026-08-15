@@ -32,11 +32,10 @@ class CLuaTradeContainer
 {
     CTradeContainer* m_pMyTradeContainer;
 
-    // The offer's owner, needed to reach the items themselves. Null for containers that are not a trade
+    // The offer's owner, which is how the items themselves are reached
     CCharEntity* m_owner{};
 
 public:
-    CLuaTradeContainer(CTradeContainer*);
     CLuaTradeContainer(CTradeContainer*, CCharEntity* owner);
 
     CTradeContainer* GetTradeContainer() const

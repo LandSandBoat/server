@@ -126,6 +126,19 @@ auto NpcTradeTransaction::confirm(const uint8 tradeSlot, const uint32 quantity) 
     return true;
 }
 
+auto NpcTradeTransaction::confirmById(const uint16 itemId, const uint32 quantity) -> bool
+{
+    for (uint8 tradeSlot = 0; tradeSlot < this->slots_.size(); ++tradeSlot)
+    {
+        if (this->slots_[tradeSlot].itemId == itemId)
+        {
+            return this->confirm(tradeSlot, quantity);
+        }
+    }
+
+    return false;
+}
+
 void NpcTradeTransaction::releaseUnconfirmed()
 {
     for (auto& slot : this->slots_)
@@ -169,31 +182,37 @@ auto NpcTradeTransaction::resolve(Slot& slot) -> CItem*
 
 auto NpcTradeTransaction::consumeConfirmed() -> bool
 {
+    bool tookEverything = true;
+
     for (auto& slot : this->slots_)
     {
-        if (slot.confirmed > 0)
+        if (slot.confirmed > 0 && !this->consumeSlot(slot, slot.confirmed))
         {
-            this->consumeSlot(slot, slot.confirmed);
+            tookEverything = false;
         }
     }
 
-    return this->commit();
+    // Committing what did land, while telling the caller the offer was not honoured in full
+    return this->commit() && tookEverything;
 }
 
 auto NpcTradeTransaction::consumeAll() -> bool
 {
+    bool tookEverything = true;
+
     for (auto& slot : this->slots_)
     {
-        if (slot.invSlot != 0xFF)
+        if (slot.invSlot != 0xFF && !this->consumeSlot(slot, slot.quantity))
         {
-            this->consumeSlot(slot, slot.quantity);
+            tookEverything = false;
         }
     }
 
-    return this->commit();
+    // Committing what did land, while telling the caller the offer was not honoured in full
+    return this->commit() && tookEverything;
 }
 
-void NpcTradeTransaction::consumeSlot(Slot& slot, const uint32 quantity)
+auto NpcTradeTransaction::consumeSlot(Slot& slot, const uint32 quantity) -> bool
 {
     const auto invSlot = slot.invSlot;
 
@@ -202,24 +221,30 @@ void NpcTradeTransaction::consumeSlot(Slot& slot, const uint32 quantity)
         ShowErrorFmt("NpcTradeTransaction: {} no longer holds the item offered in slot {}", this->player_->getName(), invSlot);
         slot = Slot{};
 
-        return;
+        return false;
     }
 
-    const auto consumed = this->updateItem(this->player_, LOC_INVENTORY, invSlot, -static_cast<int32>(quantity));
-
-    if (!consumed.applied)
+    if (!this->take(this->player_, LOC_INVENTORY, invSlot, quantity))
     {
         ShowErrorFmt("NpcTradeTransaction: {} kept the item in slot {} after trading it away", this->player_->getName(), invSlot);
-    }
-
-    // A stack traded away whole is already gone, so only what survived still needs releasing
-    if (consumed.destroyed)
-    {
-        slot = Slot{};
-        return;
+        return false;
     }
 
     this->releaseSlot(slot);
+
+    return true;
+}
+
+// A stack traded away whole is already gone, so the slot must forget it before anything releases it
+void NpcTradeTransaction::onItemDestroyed(CItem* item)
+{
+    for (auto& slot : this->slots_)
+    {
+        if (slot.item == item)
+        {
+            slot = Slot{};
+        }
+    }
 }
 
 void NpcTradeTransaction::releaseClaim(Slot& slot) const

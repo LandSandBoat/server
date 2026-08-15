@@ -91,7 +91,7 @@ auto ItemUseTransaction::doCommit() -> bool
     }
 
     // A stack used up is already gone, so only what survived still needs releasing
-    if (!consumed.destroyed)
+    if (!consumed.removed)
     {
         exitTx(this->item_);
     }

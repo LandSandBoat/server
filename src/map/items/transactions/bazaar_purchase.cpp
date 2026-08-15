@@ -111,6 +111,25 @@ auto BazaarPurchaseTransaction::claimAll() -> bool
     return true;
 }
 
+// A stack bought out entirely no longer exists, so the claim on it has to go with it
+void BazaarPurchaseTransaction::onItemDestroyed(CItem* item)
+{
+    if (this->listing_ == item)
+    {
+        this->listing_ = nullptr;
+    }
+
+    if (this->buyerGil_ == item)
+    {
+        this->buyerGil_ = nullptr;
+    }
+
+    if (this->sellerGil_ == item)
+    {
+        this->sellerGil_ = nullptr;
+    }
+}
+
 // Clearing each pointer keeps a second release from touching claims this no longer owns
 void BazaarPurchaseTransaction::releaseClaims()
 {
@@ -174,38 +193,37 @@ auto BazaarPurchaseTransaction::doCommit() -> bool
     clone->setCharPrice(0);
     clone->setQuantity(this->quantity_);
 
-    // Failures below leave the claims in place, so the rollback puts the listing back on display
-    this->deliveredSlot_ = this->addItem(this->buyer_, LOC_INVENTORY, std::move(clone));
-    if (this->deliveredSlot_ == ERROR_SLOTID)
+    // Every step reverses itself, so a failure here rolls the sale back and restores the display
+    const auto delivered = this->give(this->buyer_, LOC_INVENTORY, std::move(clone));
+    if (!delivered)
     {
         return false;
     }
 
-    if (!this->updateItem(this->buyer_, LOC_INVENTORY, 0, -static_cast<int32>(this->priceWithTax_)).applied)
-    {
-        ShowWarningFmt("BazaarPurchaseTransaction: {} could not pay {}, taking the goods back", this->buyer_->getName(), this->priceWithTax_);
+    this->deliveredSlot_ = *delivered;
 
-        (void)this->updateItem(this->buyer_, LOC_INVENTORY, this->deliveredSlot_, -static_cast<int32>(this->quantity_));
+    if (!this->pay(this->buyer_, this->priceWithTax_))
+    {
+        ShowWarningFmt("BazaarPurchaseTransaction: {} could not pay {}", this->buyer_->getName(), this->priceWithTax_);
         this->deliveredSlot_ = ERROR_SLOTID;
 
         return false;
     }
 
-    if (!this->updateItem(this->seller_, LOC_INVENTORY, 0, static_cast<int32>(this->price_)).applied)
+    if (!this->earn(this->seller_, this->price_))
     {
         ShowErrorFmt("BazaarPurchaseTransaction: {} was not paid {} for the sale", this->seller_->getName(), this->price_);
+        this->deliveredSlot_ = ERROR_SLOTID;
+
+        return false;
     }
 
-    const auto sold = this->updateItem(this->seller_, LOC_INVENTORY, this->bazaarSlot_, -static_cast<int32>(this->quantity_));
-    if (!sold.applied)
+    if (!this->take(this->seller_, LOC_INVENTORY, this->bazaarSlot_, this->quantity_))
     {
         ShowErrorFmt("BazaarPurchaseTransaction: {} kept item in slot {} after it was sold", this->seller_->getName(), this->bazaarSlot_);
-    }
+        this->deliveredSlot_ = ERROR_SLOTID;
 
-    // A stack bought out entirely no longer exists, so there is nothing left to release
-    if (sold.destroyed)
-    {
-        this->listing_ = nullptr;
+        return false;
     }
 
     this->releaseClaims();

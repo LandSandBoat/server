@@ -29,6 +29,7 @@
 auto GP_CLI_COMMAND_ITEM_STACK::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
         .isValidContainer("Category", this->Category); // Retail honors _every_ container, even if you don't presently have access.
 }
 
