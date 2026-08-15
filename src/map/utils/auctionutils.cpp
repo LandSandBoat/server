@@ -276,30 +276,37 @@ auto auctionutils::PurchasingItems(CCharEntity* PChar, GP_AUC_PARAM_BID param) -
 
             if (gil != nullptr && gil->getQuantity() >= param.BidPrice)
             {
-                const auto rset = db::preparedStmt("UPDATE auction_house SET buyer_name = ?, sale = ?, sell_date = ? WHERE itemid = ? AND buyer_name IS NULL "
-                                                   "AND stack = ? AND price <= ? ORDER BY price LIMIT 1",
-                                                   PChar->getName(),
-                                                   param.BidPrice,
-                                                   earth_time::timestamp(),
-                                                   param.ItemNo,
-                                                   param.ItemStacks == 0,
-                                                   param.BidPrice);
-                if (rset && rset->rowsAffected())
-                {
-                    const auto boughtQuantity = static_cast<uint32>(param.ItemStacks == 0 ? PItem->getStackSize() : 1);
-                    if (transaction->pay(param.BidPrice))
+                const auto boughtQuantity = static_cast<uint32>(param.ItemStacks == 0 ? PItem->getStackSize() : 1);
+
+                // Marking the row sold pays the seller through a trigger, so it has to unwind with
+                // the rest of the sale rather than on its own
+                const auto success = db::transaction(
+                    [&]()
                     {
-                        if (!transaction->give(LOC_INVENTORY, param.ItemNo, boughtQuantity) || !transaction->commit())
+                        const auto rset = db::preparedStmt("UPDATE auction_house SET buyer_name = ?, sale = ?, sell_date = ? WHERE itemid = ? AND buyer_name IS NULL "
+                                                           "AND stack = ? AND price <= ? ORDER BY price LIMIT 1",
+                                                           PChar->getName(),
+                                                           param.BidPrice,
+                                                           earth_time::timestamp(),
+                                                           param.ItemNo,
+                                                           param.ItemStacks == 0,
+                                                           param.BidPrice);
+                        if (rset && rset->rowsAffected() &&
+                            transaction->pay(param.BidPrice) &&
+                            transaction->give(LOC_INVENTORY, param.ItemNo, boughtQuantity))
                         {
-                            ShowErrorFmt("AH: {} could not receive item {} after paying {}, refunding", PChar->getName(), param.ItemNo, param.BidPrice);
-                            return false;
+                            return;
                         }
 
-                        PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0x01, param.ItemNo, param.BidPrice, param.ItemStacks, PItem->getStackSize());
-                        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
+                        throw std::runtime_error(fmt::format("AH: Failed to sell item {} to char {} ({})", param.ItemNo, PChar->getName(), PChar->id));
+                    });
 
-                        return true;
-                    }
+                if (success && transaction->commit())
+                {
+                    PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0x01, param.ItemNo, param.BidPrice, param.ItemStacks, PItem->getStackSize());
+                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
+
+                    return true;
                 }
             }
         }
