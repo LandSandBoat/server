@@ -20,6 +20,8 @@
 */
 
 #include "0x0fb_myroom_bankin.h"
+#include "enums/item_state.h"
+#include "items/item_access.h"
 
 #include "entities/char_entity.h"
 #include "enums/item_lockflg.h"
@@ -85,13 +87,17 @@ void GP_CLI_COMMAND_MYROOM_BANKIN::process(MapSession* PSession, CCharEntity* PC
         return;
     }
 
+    if (!xi::items::mark(PFurnishing, ItemState::Free))
+    {
+        ShowWarningFmt("GP_CLI_COMMAND_MYROOM_BANKIN: could not release furnishing {}", PFurnishing->getID());
+        return;
+    }
+
     PFurnishing->setInstalled(false);
     PFurnishing->setCol(0);
     PFurnishing->setRow(0);
     PFurnishing->setLevel(0);
     PFurnishing->setRotation(0);
-
-    PFurnishing->setSubType(ITEM_UNLOCKED);
 
     // If this furniture is a mannequin, clear its appearance and unlock all items that were on it!
     if (PFurnishing->isMannequin())

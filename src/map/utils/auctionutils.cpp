@@ -68,7 +68,7 @@ void auctionutils::SellingItems(CCharEntity* PChar, GP_AUC_PARAM_ASKCOMMIT param
         return;
     }
 
-    if (PItem->getID() == param.ItemNo && !PItem->isSubType(ITEM_LOCKED) && !PItem->hasFlag(ItemFlag::NoAuction))
+    if (PItem->getID() == param.ItemNo && !PItem->isBusy() && !PItem->hasFlag(ItemFlag::NoAuction))
     {
         if (isPartiallyUsed(PItem))
         {
@@ -141,7 +141,7 @@ void auctionutils::ProofOfPurchase(CCharEntity* PChar, GP_AUC_PARAM_LOT param)
 
     CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(param.ItemWorkIndex);
 
-    if (PItem && !(PItem->isSubType(ITEM_LOCKED)) && PItem->getReserve() == 0 && !PItem->isBusy() && !PItem->hasFlag(ItemFlag::NoAuction) && PItem->getQuantity() >= param.ItemStacks)
+    if (PItem && PItem->getReserve() == 0 && !PItem->isBusy() && !PItem->hasFlag(ItemFlag::NoAuction) && PItem->getQuantity() >= param.ItemStacks)
     {
         if (isPartiallyUsed(PItem))
         {

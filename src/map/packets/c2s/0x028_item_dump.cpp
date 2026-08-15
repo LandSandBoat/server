@@ -73,7 +73,7 @@ void GP_CLI_COMMAND_ITEM_DUMP::process(MapSession* PSession, CCharEntity* PChar)
 
     CItem* PItem = PChar->getStorage(this->Category)->GetItem(this->ItemIndex);
 
-    if (!PItem || PItem->isSubType(ITEM_LOCKED))
+    if (!PItem || PItem->isBusy())
     {
         ShowWarning("GP_CLI_COMMAND_ITEM_DUMP: Attempt of removal of invalid item from slot %u", this->ItemIndex);
         return;

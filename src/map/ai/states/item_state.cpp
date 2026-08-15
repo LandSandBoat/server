@@ -80,7 +80,7 @@ auto CItemState::init() -> StateErrorOr<void>
                 m_PItem = nullptr;
             }
         }
-        else if (m_PItem->isSubType(ITEM_LOCKED))
+        else if (m_PItem->isBusy())
         {
             m_PItem = nullptr;
         }
@@ -149,8 +149,6 @@ auto CItemState::init() -> StateErrorOr<void>
 
     m_PEntity->PAI->EventHandler.triggerListener("ITEM_START", PTarget, m_PItem, &action);
     m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
-
-    m_PItem->setSubType(ITEM_LOCKED);
 
     m_PEntity->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(m_PItem, ItemLockFlg::NoSelect);
     m_PEntity->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(m_PEntity);
@@ -243,11 +241,6 @@ void CItemState::Cleanup(timer::time_point tick)
     if (tx_ && tx_->isOpen())
     {
         tx_->rollback();
-    }
-
-    if (m_PItem && (m_interrupted || !IsCompleted()) && !m_PItem->isType(ITEM_EQUIPMENT))
-    {
-        m_PItem->setSubType(ITEM_UNLOCKED);
     }
 
     const auto* PItem = m_PEntity->getStorage(m_location)->GetItem(m_slot);

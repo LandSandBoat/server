@@ -5213,11 +5213,9 @@ bool CLuaBaseEntity::addLinkpearl(const std::string& lsname, bool equip)
     {
         auto* PInserted = static_cast<CItemLinkshell*>(PChar->getStorage(LOC_INVENTORY)->GetItem(slotID));
         linkshell::AddOnlineMember(PChar, PInserted, 2);
-        PInserted->setSubType(ITEM_LOCKED);
         if (!PChar->bindEquip(SLOT_LINK2, PInserted))
         {
             linkshell::DelOnlineMember(PChar, PInserted);
-            PInserted->setSubType(ITEM_UNLOCKED);
             return false;
         }
 
@@ -5753,6 +5751,31 @@ uint8 CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, const sol::table& ext
         return 0;
     }
 
+    auto storableItemIdsVec  = storableItemIdsTable.as<std::vector<uint16>>();
+    auto storableItemIdsSize = storableItemIdsVec.size();
+
+    // The slip is written before the items are taken, so refuse the lot if any of them is claimed
+    for (const auto itemId : storableItemIdsVec)
+    {
+        if (itemId == 0)
+        {
+            continue;
+        }
+
+        const auto slotId = PChar->getStorage(LOC_INVENTORY)->SearchItem(itemId);
+        if (slotId == 255)
+        {
+            continue;
+        }
+
+        const auto* PStorable = PChar->getStorage(LOC_INVENTORY)->GetItem(slotId);
+        if (PStorable && (PStorable->isBusy() || PStorable->getReserve() > 0))
+        {
+            ShowWarningFmt("CLuaBaseEntity::storeWithPorterMoogle: {} trying to store a claimed item {}", PChar->getName(), itemId);
+            return 0;
+        }
+    }
+
     auto extraVec  = extraTable.as<std::vector<uint8>>();
     auto extraSize = extraVec.size();
     for (size_t i = 0; i < extraSize; i++)
@@ -5764,9 +5787,6 @@ uint8 CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, const sol::table& ext
         }
         slip->m_extra[i] |= extra;
     }
-
-    auto   storableItemIdsVec  = storableItemIdsTable.as<std::vector<uint16>>();
-    auto   storableItemIdsSize = storableItemIdsVec.size();
     uint16 storedItemIds[7];
 
     for (size_t i = 0; i < storableItemIdsSize; i++)
@@ -5794,7 +5814,10 @@ uint8 CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, const sol::table& ext
                 if (PItem)
                 {
                     PItem->setReserve(0);
-                    charutils::UpdateItem(PChar, LOC_INVENTORY, slotId, -1);
+                    if (charutils::UpdateItem(PChar, LOC_INVENTORY, slotId, -1) == 0)
+                    {
+                        ShowErrorFmt("CLuaBaseEntity::storeWithPorterMoogle: {} kept item {} after it went on the slip", PChar->getName(), itemId);
+                    }
                 }
             }
         }

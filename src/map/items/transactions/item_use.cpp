@@ -63,9 +63,6 @@ void ItemUseTransaction::doRollback()
     if (this->takesCustody_ && this->item_ != nullptr)
     {
         exitTx(this->item_);
-        // Clear ITEM_LOCKED here so dtor-only paths (disconnect that skips
-        // CItemState::Cleanup) don't leave the item wedged.
-        this->item_->setSubType(ITEM_UNLOCKED);
         this->item_ = nullptr;
     }
 }
@@ -89,9 +86,6 @@ auto ItemUseTransaction::doCommit() -> bool
     const uint8 slot     = this->item_->getSlotID();
 
     exitTx(this->item_);
-
-    // Unlock so a partial-consume remainder is reusable.
-    this->item_->setSubType(ITEM_UNLOCKED);
 
     charutils::UpdateItem(this->player_, location, slot, -1, true);
     this->item_ = nullptr;

@@ -20,6 +20,8 @@
 */
 
 #include "common/logging.h"
+#include "enums/item_state.h"
+#include "items/item_access.h"
 
 #include "common/macros.h"
 #include "common/settings.h"
@@ -1115,9 +1117,9 @@ void LoadInventory(CCharEntity* PChar)
 
                 db::extractFromBlob(rset, "extra", PItem->m_extra);
 
-                if (PItem->getCharPrice() != 0)
+                if (PItem->getCharPrice() != 0 && !xi::items::mark(PItem.get(), ItemState::Bazaar))
                 {
-                    PItem->setSubType(ITEM_LOCKED);
+                    ShowWarningFmt("LoadInventory: could not mark bazaar item {} for {}", PItem->getID(), PChar->getName());
                 }
 
                 if (PItem->isType(ITEM_LINKSHELL))
@@ -1237,7 +1239,6 @@ void LoadEquip(CCharEntity* PChar)
 
                 if ((PItem != nullptr) && PItem->isType(ITEM_LINKSHELL))
                 {
-                    PItem->setSubType(ITEM_LOCKED);
                     if (!PChar->bindEquip(equipSlotId, PItem))
                     {
                         continue;
@@ -1268,7 +1269,6 @@ void LoadEquip(CCharEntity* PChar)
             { // if the linkshell has been broken, unequip
                 uint8 SlotID     = PLinkshell1->getSlotID();
                 uint8 LocationID = PLinkshell1->getLocationID();
-                PLinkshell1->setSubType(ITEM_UNLOCKED);
                 PChar->clearEquip(SLOT_LINK1);
                 db::preparedStmt("DELETE FROM char_equip WHERE charid = ? AND slotid = ? AND containerid = ? LIMIT 1",
                                  PChar->id,
@@ -1288,7 +1288,6 @@ void LoadEquip(CCharEntity* PChar)
             { // if the linkshell has been broken, unequip
                 uint8 SlotID     = PLinkshell2->getSlotID();
                 uint8 LocationID = PLinkshell2->getLocationID();
-                PLinkshell2->setSubType(ITEM_UNLOCKED);
                 PChar->clearEquip(SLOT_LINK2);
                 db::preparedStmt("DELETE FROM char_equip WHERE charid = ? AND slotid = ? AND containerid = ? LIMIT 1",
                                  PChar->id,
@@ -1563,7 +1562,6 @@ void SendInventory(CCharEntity* PChar)
         CItem* PItem = PChar->getEquip((SLOTTYPE)i);
         if (PItem != nullptr)
         {
-            PItem->setSubType(ITEM_LOCKED);
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::NoDrop);
         }
     }
@@ -1571,7 +1569,6 @@ void SendInventory(CCharEntity* PChar)
     CItem* PItem = PChar->getEquip(SLOT_LINK1);
     if (PItem != nullptr)
     {
-        PItem->setSubType(ITEM_LOCKED);
         auto eloc1 = PChar->equipLocation(SLOT_LINK1);
 
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, *eloc1);
@@ -1582,7 +1579,6 @@ void SendInventory(CCharEntity* PChar)
     PItem = PChar->getEquip(SLOT_LINK2);
     if (PItem != nullptr)
     {
-        PItem->setSubType(ITEM_LOCKED);
         auto eloc2 = PChar->equipLocation(SLOT_LINK2);
 
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, *eloc2);
@@ -2135,7 +2131,6 @@ void UnequipItem(CCharEntity* PChar, uint8 equipSlotID, Recalculate recalculate)
         {
             PChar->PRecastContainer->Del(RECAST_ITEM, static_cast<Recast>(PItem->getSlotID() << 8 | PItem->getLocationID())); // Also remove item from the Recast List no matter what bag its in
         }
-        PItem->setSubType(ITEM_UNLOCKED);
 
         if (equipSlotID == SLOT_SUB)
         {
@@ -3301,7 +3296,7 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 contai
     {
         if ((PItem != nullptr) && PItem->isType(ITEM_EQUIPMENT))
         {
-            if (!PItem->isSubType(ITEM_LOCKED) && EquipArmor(PChar, slotID, equipSlotID, containerID))
+            if (!PItem->isBusy() && EquipArmor(PChar, slotID, equipSlotID, containerID))
             {
                 equipSucceeded = true;
 
@@ -3320,8 +3315,6 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 contai
 
                     PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(containerID), slotID);
                 }
-
-                PItem->setSubType(ITEM_LOCKED);
 
                 if (equipSlotID == SLOT_SUB)
                 {

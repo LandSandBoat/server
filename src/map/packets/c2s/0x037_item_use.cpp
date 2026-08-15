@@ -92,7 +92,7 @@ void GP_CLI_COMMAND_ITEM_USE::process(MapSession* PSession, CCharEntity* PChar) 
     };
 
     const bool isEquipment = PItem->isType(ITEM_WEAPON) || PItem->isType(ITEM_EQUIPMENT);
-    const bool isLocked    = PItem->isSubType(ITEM_LOCKED) && !(isEquipment && isEquipped());
+    const bool isLocked    = PItem->isBusy() && !(isEquipment && isEquipped());
     if (isLocked ||
         PItem->getReserve() > 0 ||
         PItem->getCharPrice() > 0)

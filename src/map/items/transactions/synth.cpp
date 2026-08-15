@@ -144,7 +144,6 @@ void SynthTransaction::consumeCrystal()
     }
 
     exitTx(slot.item);
-    slot.item->setSubType(ITEM_UNLOCKED);
     charutils::UpdateItem(this->player_, LOC_INVENTORY, slot.invSlot, -1);
     slot.item = nullptr;
 }
@@ -249,7 +248,6 @@ void SynthTransaction::releaseAllClaims()
         if (!seen)
         {
             exitTx(item);
-            item->setSubType(ITEM_UNLOCKED);
             this->player_->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(item, ItemLockFlg::Normal);
         }
 

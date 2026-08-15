@@ -131,7 +131,7 @@ void GP_CLI_COMMAND_SHOP_SELL_SET::process(MapSession* PSession, CCharEntity* PC
         return;
     }
 
-    if (PItem->isSubType(ITEM_LOCKED)) // Possible exploit
+    if (PItem->isBusy()) // Possible exploit
     {
         ShowWarning("GP_CLI_COMMAND_SHOP_SELL_SET: Player %s trying to sell %u of a LOCKED item! ID %i [to VENDOR] ", PChar->getName(), quantity, PItem->getID());
         return;

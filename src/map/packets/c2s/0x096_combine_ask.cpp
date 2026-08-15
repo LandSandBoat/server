@@ -111,7 +111,7 @@ void GP_CLI_COMMAND_COMBINE_ASK::process(MapSession* PSession, CCharEntity* PCha
         return;
     }
 
-    if (PItem->isBusy() || PItem->isSubType(ITEM_LOCKED))
+    if (PItem->isBusy())
     {
         ShowWarningFmt("GP_CLI_COMMAND_COMBINE_ASK: {} trying to use unavailable crystal", PChar->getName());
         PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CannotUseInArea);
@@ -137,7 +137,7 @@ void GP_CLI_COMMAND_COMBINE_ASK::process(MapSession* PSession, CCharEntity* PCha
             continue;
         }
 
-        if (PSlotItem->isBusy() || PSlotItem->isSubType(ITEM_LOCKED) ||
+        if (PSlotItem->isBusy() ||
             slotQty[invSlotId] > PSlotItem->getQuantity())
         {
             ShowWarningFmt("GP_CLI_COMMAND_COMBINE_ASK: {} trying to use unavailable ingredient", PChar->getName());

@@ -88,6 +88,13 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
         return;
     }
 
+    // The pot is written before the item is consumed, so anything already claimed has to be refused here
+    if (PItem->isBusy() || PItem->getReserve() > 0)
+    {
+        ShowWarningFmt("GP_CLI_COMMAND_MYROOM_PLANT_ADD: {} trying to plant a claimed item {}", PChar->getName(), PItem->getID());
+        return;
+    }
+
     bool updatedPot = false;
 
     if (CItemFlowerpot::getPlantFromSeed(this->MyroomAddItemNo) != FLOWERPOT_PLANT_NONE)

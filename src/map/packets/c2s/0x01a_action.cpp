@@ -438,7 +438,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
                 return;
             }
 
-            if (PGysahl->isSubType(ITEM_LOCKED) || PGysahl->getReserve() > 0)
+            if (PGysahl->isBusy() || PGysahl->getReserve() > 0)
             {
                 ShowWarningFmt("GP_CLI_COMMAND_ACTION: {} trying to use invalid gysahl greens (locked/reserved)", PChar->getName());
                 PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(GYSAHL_GREENS, 0, MsgStd::YouDontHaveAny);

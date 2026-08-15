@@ -112,7 +112,7 @@ const auto isValidMovement = [](const CCharEntity* PChar, const CONTAINER_ID fro
 {
     const CItem* PItem = PChar->getStorage(from)->GetItem(itemIndex);
 
-    if (!PItem || PItem->isSubType(ITEM_LOCKED) || PItem->isBusy() || PItem->getID() == ITEMID::GIL)
+    if (!PItem || PItem->isBusy() || PItem->getID() == ITEMID::GIL)
     {
         return false;
     }
@@ -195,7 +195,6 @@ void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar)
             const CItem* PItem2 = PChar->getStorage(this->Category2)->GetItem(this->ItemIndex2);
 
             if (!PItem2 || PItem2->getID() != PItem->getID() ||
-                PItem2->isSubType(ITEM_LOCKED) ||
                 PItem2->isBusy() ||
                 PItem2->getReserve() > 0)
             {

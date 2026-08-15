@@ -55,10 +55,8 @@ enum ITEM_TYPE
 enum ITEM_SUBTYPE
 {
     ITEM_NORMAL    = 0x00,
-    ITEM_LOCKED    = 0x01,
     ITEM_CHARGED   = 0x02,
     ITEM_AUGMENTED = 0x04,
-    ITEM_UNLOCKED  = 0xFE,
 };
 
 class CItem
