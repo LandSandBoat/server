@@ -21,7 +21,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getFameLevel(xi.fameArea.SANDORIA) >= 3 and
-                player:getMainLvl() >= 10
+                player:getMainLvl() >= 5 -- Level requirement added in the March 8, 2007 update: https://www.playonline.com/pcd/update/ff11us/20070308c2bbd1/detail.html
         end,
 
         [xi.zone.BOSTAUNIEUX_OUBLIETTE] =
