@@ -355,6 +355,12 @@ ecosystems:
             id: 33
           orobon:
             id: 34
+            attributes:
+              mods:
+                udmgphys:   -1250
+                udmgrange:  -1250
+                udmgmagic:  -1250
+                udmgbreath: -1250
       pteraketos:
         id: 15
         attributes:
