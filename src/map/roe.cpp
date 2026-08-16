@@ -429,13 +429,17 @@ void UpdateUnityTrust(CCharEntity* PChar, const bool sendUpdate)
     {
         if (curPoints >= 5 || prevPoints >= 5)
         {
-            charutils::addSpell(PChar, unityLeaderTrust);
-            charutils::SaveSpell(PChar, unityLeaderTrust);
+            if (charutils::addSpell(PChar, unityLeaderTrust) != 0)
+            {
+                charutils::SaveSpell(PChar, unityLeaderTrust);
+            }
         }
         else
         {
-            charutils::delSpell(PChar, unityLeaderTrust);
-            charutils::DeleteSpell(PChar, unityLeaderTrust);
+            if (charutils::delSpell(PChar, unityLeaderTrust) != 0)
+            {
+                charutils::DeleteSpell(PChar, unityLeaderTrust);
+            }
         }
     }
 

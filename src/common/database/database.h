@@ -141,7 +141,7 @@ auto getTableColumnNames(const std::string& tableName) -> std::vector<std::strin
 template <typename... Args>
 auto preparedStmt(const std::string& rawQuery, Args&&... args) -> std::unique_ptr<ResultSet>
 {
-    TracyZoneScoped;
+    TracyZoneScopedS(16);
     TracyZoneString(rawQuery);
 
     const auto params = detail::lowerBoundValues(std::forward<Args>(args)...);
@@ -151,7 +151,7 @@ auto preparedStmt(const std::string& rawQuery, Args&&... args) -> std::unique_pt
 template <typename T, typename ProjectFn>
 void executeBulk(const std::string& query, const std::vector<T>& rows, ProjectFn project)
 {
-    TracyZoneScoped;
+    TracyZoneScopedS(16);
 
     if (rows.empty())
     {

@@ -1126,7 +1126,7 @@ void CMobController::Move()
 
         if (PMob->getMobMod(xi::MobMod::AttackSkillList) > 0)
         {
-            const auto skillList = battleutils::GetMobSkillList(PMob->getMobMod(xi::MobMod::AttackSkillList));
+            const auto& skillList = battleutils::GetMobSkillList(PMob->getMobMod(xi::MobMod::AttackSkillList));
             if (!skillList.empty())
             {
                 if (const auto* skill = battleutils::GetMobSkill(skillList.front()))
@@ -1725,25 +1725,33 @@ auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
         {
             // Hiding mobs are now handled via mixin, so xi::RoamFlag::Ambush is no longer special-cased here.
             const bool battlefieldIsOpen = PMob->PBattlefield && PMob->PBattlefield->GetStatus() == BATTLEFIELD_STATUS_OPEN;
-            const bool wantsSummon       = !battlefieldIsOpen &&
-                                           PMob->GetMJob() == xi::Job::SMN &&
-                                           CanCastSpells(IgnoreRecastsAndCosts::No) &&
-                                           PMob->SpellContainer->HasBuffSpells() &&
-                                           m_Tick >= m_nextMagicTime;
-            const bool wantsRandomBuff   = CanCastSpells(IgnoreRecastsAndCosts::No) &&
-                                           xirand::GetRandomNumber(10) < 3 &&
-                                           PMob->SpellContainer->HasBuffSpells();
+
+            const auto wantsSummon = [&]
+            {
+                return !battlefieldIsOpen &&
+                       PMob->GetMJob() == xi::Job::SMN &&
+                       m_Tick >= m_nextMagicTime &&
+                       CanCastSpells(IgnoreRecastsAndCosts::No) &&
+                       PMob->SpellContainer->HasBuffSpells();
+            };
+
+            const auto wantsRandomBuff = [&]
+            {
+                return CanCastSpells(IgnoreRecastsAndCosts::No) &&
+                       xirand::GetRandomNumber(10) < 3 &&
+                       PMob->SpellContainer->HasBuffSpells();
+            };
 
             if (IsSpecialSkillReady(0) && TrySpecialSkill())
             {
                 // (Probably) spawned a pet via special skill.
             }
-            else if (wantsSummon)
+            else if (wantsSummon())
             {
                 // battlefield.lua summons the first pet so the first player sees it; later summons come through here.
                 TryCastSpell();
             }
-            else if (wantsRandomBuff)
+            else if (wantsRandomBuff())
             {
                 TryCastSpell();
             }

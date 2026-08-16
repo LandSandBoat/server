@@ -214,7 +214,9 @@ if(asio_ADDED)
 
     target_include_directories(asio SYSTEM INTERFACE ${asio_SOURCE_DIR}/include)
 
-    target_compile_definitions(asio INTERFACE ASIO_STANDALONE ASIO_NO_DEPRECATED)
+    # The frame free list defaults to 2 and the entity tick nests 5, so most frames miss the cache.
+    # Must stay INTERFACE: it changes sizeof(thread_info_base), so every TU has to agree on it.
+    target_compile_definitions(asio INTERFACE ASIO_STANDALONE ASIO_NO_DEPRECATED ASIO_RECYCLING_ALLOCATOR_CACHE_SIZE=8)
 
     target_link_libraries(asio INTERFACE Threads::Threads)
 

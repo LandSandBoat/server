@@ -605,19 +605,23 @@ void CMobEntity::PostTick()
     TracyZoneScoped;
 
     CBattleEntity::PostTick();
-    timer::time_point now = timer::now();
-    if (loc.zone && updatemask && now > m_nextUpdateTimer)
+
+    if (loc.zone && updatemask)
     {
-        m_nextUpdateTimer = now + 250ms;
-        loc.zone->UpdateEntityPacket(this, ENTITY_UPDATE, updatemask);
-
-        // If this mob is charmed, it should sync with its master
-        if (PMaster && PMaster->PPet == this && PMaster->objtype == TYPE_PC)
+        const auto now = timer::now();
+        if (now > m_nextUpdateTimer)
         {
-            ((CCharEntity*)PMaster)->pushPacket<CPetSyncPacket>((CCharEntity*)PMaster);
-        }
+            m_nextUpdateTimer = now + 250ms;
+            loc.zone->UpdateEntityPacket(this, ENTITY_UPDATE, updatemask);
 
-        updatemask = 0;
+            // If this mob is charmed, it should sync with its master
+            if (PMaster && PMaster->PPet == this && PMaster->objtype == TYPE_PC)
+            {
+                ((CCharEntity*)PMaster)->pushPacket<CPetSyncPacket>((CCharEntity*)PMaster);
+            }
+
+            updatemask = 0;
+        }
     }
 }
 

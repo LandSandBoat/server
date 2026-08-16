@@ -202,7 +202,30 @@ auto CPathFind::ValidPosition(const position_t& pos) const -> bool
     TracyZoneScoped;
     TracyZoneString(owner_->name());
 
-    return navMesh().validPosition(pos);
+    constexpr auto maxEntryAge = 10s;
+
+    const auto now   = timer::now();
+    const auto begin = validPositionCache_.begin();
+
+    for (std::size_t i = 0; i < validPositionCacheCount_; ++i)
+    {
+        const auto& entry = validPositionCache_[i];
+        if (!isWithinDistance(entry.position, pos, 0.05f) || now - entry.checkedAt >= maxEntryAge)
+        {
+            continue;
+        }
+
+        // Promote the hit to the front so one-shot probes evict each other rather than it.
+        std::rotate(begin, begin + i, begin + i + 1);
+
+        return validPositionCache_.front().valid;
+    }
+
+    std::rotate(begin, validPositionCache_.end() - 1, validPositionCache_.end());
+    validPositionCache_.front() = { pos, now, navMesh().validPosition(pos) };
+    validPositionCacheCount_    = std::min(validPositionCacheCount_ + 1, kValidPositionCacheSize);
+
+    return validPositionCache_.front().valid;
 }
 
 auto CPathFind::NearValidPosition(const position_t& pos) const -> bool
@@ -330,7 +353,8 @@ auto CPathFind::StepToInternal(const position_t& pos, bool run, float stopShort)
     const float speed = [&]() -> float
     {
         const auto baseSpeed = owner_->baseSpeed();
-        if (owner_->isMobEntity() && baseSpeed == 0 && ((roamFlags_ & xi::RoamFlag::Worm) != xi::RoamFlag::None))
+        // baseSpeed is an integer compare and isMobEntity() is a dynamic_cast, so test it first.
+        if (baseSpeed == 0 && ((roamFlags_ & xi::RoamFlag::Worm) != xi::RoamFlag::None) && owner_->isMobEntity())
         {
             return 20.0f;
         }
