@@ -12,7 +12,7 @@ quest.reward =
     title = xi.title.MOGS_KIND_MASTER,
 }
 
--- Since there are so many zones with interactions:
+-- Every Mog House zone shares one section table.
 quest.sections = {}
 
 quest.sections[1] =
@@ -23,7 +23,7 @@ quest.sections[1] =
         return status == xi.questStatus.QUEST_AVAILABLE and
             xi.moghouse.inMogHouseInHomeNation(player) and
             player:getFameLevel(player:getNation()) >= 3 and
-            not quest:getMustZone(player) and
+            quest:getLocalVar(player, 'mustZone') == 0 and
             quest:getLocalVar(player, 'questSeen') == 0 and
             bedPlacedTime ~= 0 and
             GetSystemTime() > bedPlacedTime + 60
@@ -65,7 +65,7 @@ local questAccepted =
     ['Moogle'] =
     {
         onTrade = function(player, npc, trade)
-            if npcUtil.tradeHasExactly(trade, { xi.item.POWER_BOW, xi.item.BEETLE_RING }) then
+            if npcUtil.tradeMatches(trade, { { xi.item.POWER_BOW, 1 }, { xi.item.BEETLE_RING, 1 } }) then
                 return quest:progressEvent(30007)
             end
         end,
@@ -96,7 +96,7 @@ local questAccepted =
         end,
 
         [30007] = function(player, csid, option, npc)
-            player:confirmTrade()
+            player:tradeComplete()
             quest:setVar(player, 'Prog', 1)
             quest:setVar(player, 'Timer', GetSystemTime() + 60)
         end,

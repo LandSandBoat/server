@@ -12,7 +12,7 @@ quest.reward =
     title = xi.title.MOGS_EXCEPTIONALLY_KIND_MASTER,
 }
 
--- Since there are so many zones with interactions:
+-- Every Mog House zone shares one section table.
 quest.sections = {}
 
 quest.sections[1] =
@@ -24,7 +24,7 @@ quest.sections[1] =
             player:hasCompletedQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK) and
             xi.moghouse.inMogHouseInHomeNation(player) and
             player:getFameLevel(player:getNation()) >= 5 and
-            not quest:getMustZone(player) and
+            quest:getLocalVar(player, 'mustZone') == 0 and
             quest:getLocalVar(player, 'questSeen') == 0 and
             bedPlacedTime ~= 0 and
             GetSystemTime() > bedPlacedTime + 60
@@ -66,7 +66,7 @@ local questAccepted =
     ['Moogle'] =
     {
         onTrade = function(player, npc, trade)
-            if npcUtil.tradeHasExactly(trade, { xi.item.SHRIMP_LURE, xi.item.STICK_OF_SELBINA_BUTTER }) then
+            if npcUtil.tradeMatches(trade, { { xi.item.SHRIMP_LURE, 1 }, { xi.item.STICK_OF_SELBINA_BUTTER, 1 } }) then
                 return quest:progressEvent(30011)
             end
         end,
@@ -97,7 +97,7 @@ local questAccepted =
         end,
 
         [30011] = function(player, csid, option, npc)
-            player:confirmTrade()
+            player:tradeComplete()
             quest:setVar(player, 'Prog', 1)
             quest:setVar(player, 'Timer', GetSystemTime() + 60)
         end,
