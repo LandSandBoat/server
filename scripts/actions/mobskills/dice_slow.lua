@@ -1,7 +1,6 @@
 -----------------------------------
 -- Goblin Dice
--- Description: Stun
--- Type: Physical (Blunt)
+-- Description: Slow and Silence
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -11,12 +10,12 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    local slowed  = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 1250, 0, 120)
-    local sleeped = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLEEP_I, 1, 0, 30)
+    local slowed   = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 1800, 0, 90)
+    local silenced = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, 90)
 
     skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
-    if sleeped then
-        return xi.effect.SLEEP_I
+    if silenced then
+        return xi.effect.SILENCE
     elseif slowed then
         return xi.effect.SLOW
     else

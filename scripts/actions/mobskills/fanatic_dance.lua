@@ -11,11 +11,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:isInDynamis() and mob:isMobType(xi.mobType.NOTORIOUS) then
-        return 0
-    end
-
-    return 1
+    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
@@ -26,7 +22,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
         return xi.effect.CHARM_I
     end
 
-    local msg = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.CHARM_I, power, 3, 60)
+    local msg = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.CHARM_I, power, 3, 180)
     if msg == xi.msg.basic.SKILL_ENFEEB_IS then
         mob:charm(target)
     end

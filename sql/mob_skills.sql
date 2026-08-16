@@ -1085,72 +1085,72 @@ INSERT INTO `mob_skills` VALUES (1053,432,'super_buff',0,0.0,1.0,2000,0,1,0,0,0,
 -- INSERT INTO `mob_skills` VALUES (1054,798,'sabotender_dustdevil',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1055,799,'sabotender_duststop',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1056,800,'fanatic_dance',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1057,349,'aerial_wheel',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1058,350,'shoulder_attack',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1059,351,'slam_dunk',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1060,352,'arm_block',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1061,353,'battle_dance',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1062,354,'howl',1,0.0,20.0,2000,1500,1,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1057,349,'aerial_wheel',0,0.0,7.0,1600,2000,4,0,0,0,0,0,0); -- Dynamis Orcs
+INSERT INTO `mob_skills` VALUES (1058,350,'shoulder_attack',0,0.0,7.0,1750,2000,4,0,0,0,0,0,0); -- Dynamis Orcs
+INSERT INTO `mob_skills` VALUES (1059,351,'slam_dunk',0,0.0,7.0,2000,2000,4,0,0,0,0,0,0); -- Dynamis Orcs
+INSERT INTO `mob_skills` VALUES (1060,352,'arm_block',0,0.0,7.0,1000,2000,1,0,0,0,0,0,0); -- Dynamis Orcs
+INSERT INTO `mob_skills` VALUES (1061,353,'battle_dance',1,0.0,15.0,2300,2000,4,0,0,0,0,0,0); -- Dynamis Orcs
+INSERT INTO `mob_skills` VALUES (1062,354,'howl',1,0.0,20.0,1500,2000,1,0,0,0,0,0,0); -- Dynamis Orcs
 -- INSERT INTO `mob_skills` VALUES (1063,807,'bow',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1064,351,'jump',0,0.0,9.5,4000,0,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1064,351,'jump',0,0.0,9.5,4000,2000,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1065,21,'eagle_eye_shot',0,0.0,7.0,2000,1500,4,2,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1066,740,'fanatic_dance',1,0.0,10.0,2000,2000,4,0,0,0,0,0,0); -- Only nm's in dynamis and falsespinner bhudbrodd
-INSERT INTO `mob_skills` VALUES (1067,741,'doom',0,0.0,9.0,2000,2000,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1068,361,'feather_storm',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1069,362,'double_kick',0,0.0,7.0,2000,1500,4,0,0,1,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1070,363,'parry',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1071,364,'sweep',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1072,354,'howl',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1073,741,'doom',0,0.0,9.0,2000,2000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1074,742,'the_wrath_of_gudha',1,0.0,15.0,2000,2000,4,0,0,7,0,0,0);
-INSERT INTO `mob_skills` VALUES (1075,355,'ore_toss',0,0.0,7.0,2000,2000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1076,356,'head_butt',0,0.0,7.0,2000,2000,4,0,0,1,0,0,0);
-INSERT INTO `mob_skills` VALUES (1077,357,'shell_bash',0,0.0,7.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1078,358,'shell_guard',0,0.0,7.0,2000,3000,1,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1079,354,'howl',1,0.0,20.0,2000,1500,1,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1080,742,'the_wrath_of_gudha',1,0.0,15.0,2000,2000,4,0,0,7,0,0,0);
-INSERT INTO `mob_skills` VALUES (1081,743,'frypan',1,0.0,10.0,2500,2800,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1066,740,'fanatic_dance',1,0.0,10.0,3800,2000,4,0,0,0,0,0,0); -- Only nm's in dynamis and falsespinner bhudbrodd
+INSERT INTO `mob_skills` VALUES (1067,741,'doom',0,0.0,9.0,1700,200,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1068,361,'feather_storm',0,0.0,7.0,1700,2000,4,0,0,0,0,0,0); -- Dynamis Yagudo
+INSERT INTO `mob_skills` VALUES (1069,362,'double_kick',0,0.0,7.0,2400,2000,4,0,0,1,0,0,0); -- Dynamis Yagudo
+INSERT INTO `mob_skills` VALUES (1070,363,'parry',0,0.0,7.0,2100,2000,1,0,0,0,0,0,0); -- Dynamis Yagudo
+INSERT INTO `mob_skills` VALUES (1071,364,'sweep',1,0.0,10.0,3500,2000,4,0,0,0,0,0,0); -- Dynamis Yagudo
+INSERT INTO `mob_skills` VALUES (1072,354,'howl',1,0.0,20.0,1500,2000,1,0,0,0,0,0,0); -- Dynamis Yagudo
+INSERT INTO `mob_skills` VALUES (1073,741,'doom',0,0.0,9.0,1700,200,4,0,0,0,0,0,0); -- Dynamis Yagudo
+INSERT INTO `mob_skills` VALUES (1074,742,'the_wrath_of_gudha',1,0.0,15.0,1900,1000,4,0,0,7,0,0,0);
+INSERT INTO `mob_skills` VALUES (1075,355,'ore_toss',0,0.0,15.0,2200,3000,4,0,0,0,0,0,0); -- Dynamis Quadav
+INSERT INTO `mob_skills` VALUES (1076,356,'head_butt_quadav',0,0.0,7.0,3000,3000,4,0,0,1,0,0,0); -- Dynamis Quadav
+INSERT INTO `mob_skills` VALUES (1077,357,'shell_bash',0,0.0,7.0,1900,500,4,0,0,0,0,0,0); -- Dynamis Quadav
+INSERT INTO `mob_skills` VALUES (1078,358,'shell_guard',0,0.0,7.0,1700,3000,1,0,0,0,0,0,0); -- Dynamis Quadav
+INSERT INTO `mob_skills` VALUES (1079,354,'howl',1,0.0,20.0,1500,500,1,0,0,0,0,0,0); -- Dynamis Quadav
+INSERT INTO `mob_skills` VALUES (1080,742,'the_wrath_of_gudha',1,0.0,15.0,1900,1000,4,0,0,7,0,0,0); -- Dynamis Quadav
+INSERT INTO `mob_skills` VALUES (1081,743,'frypan',1,0.0,15.0,2500,2800,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1082,744,'smokebomb',4,0.0,10.0,3900,2000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1083,745,'smokebomb',0,0.0,10.0,4200,2000,1,0,0,0,0,0,0); -- fail
 INSERT INTO `mob_skills` VALUES (1084,746,'crispy_candle',4,0.0,10.0,3900,2000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1085,747,'crispy_candle_self',0,0.0,10.0,4200,2000,1,0,0,0,0,0,0); -- fail
 INSERT INTO `mob_skills` VALUES (1086,748,'paralysis_shower',4,0.0,10.0,3900,2000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1087,749,'paralysis_shower',0,0.0,10.0,4200,2000,1,0,0,0,0,0,0); -- fail
-INSERT INTO `mob_skills` VALUES (1088,334,'goblin_rush',0,0.0,7.0,2500,1000,4,0,0,1,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1089,335,'bomb_toss',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1090,834,'bomb_toss',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1091,19,'eagle_eye_shot',0,0.0,7.0,2000,1500,4,2,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1092,743,'frypan',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1093,744,'smokebomb',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1094,838,'smokebomb',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1095,746,'crispy_candle',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1096,747,'crispy_candle',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1097,748,'paralysis_shower',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1098,842,'paralysis_shower',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1099,750,'dice_heal',1,0.0,10.0,3000,1500,1,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1100,751,'dice_curse',1,0.0,10.0,3000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1101,752,'dice_damage',1,0.0,10.0,3000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1102,753,'dice_stun',1,0.0,10.0,3000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1103,754,'dice_poison',1,0.0,10.0,3000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1104,755,'dice_disease',1,0.0,10.0,3000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1105,756,'dice_sleep',1,0.0,10.0,3000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1106,757,'dice_slow',1,0.0,10.0,3000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1107,758,'dice_tp_loss',1,0.0,10.0,3000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1108,759,'dice_dispel',1,0.0,10.0,3000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1109,760,'dice_reset',1,0.0,10.0,3000,1500,1,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1110,761,'seismostomp',1,0.0,15.0,3000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1111,762,'numbing_glare',4,0.0,15.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1112,763,'seismostomp',1,0.0,15.0,3000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1113,764,'tormentful_glare',4,0.0,15.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1114,765,'seismostomp',1,0.0,15.0,3000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1115,766,'torpid_glare',4,0.0,15.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1116,767,'seismostomp',1,0.0,15.0,3000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1117,768,'lead_breath',4,0.0,15.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1118,769,'lead_breath',4,0.0,15.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1088,334,'goblin_rush',0,0.0,7.0,2500,1000,4,0,0,1,0,0,0); -- Dynamis Goblin
+INSERT INTO `mob_skills` VALUES (1089,335,'bomb_toss',2,0.0,13.5,3000,4000,4,0,0,0,0,0,0); -- Dynamis Goblin
+-- INSERT INTO `mob_skills` VALUES (1090,834,'bomb_toss',0,0.0,7.0,2000,4000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1091,19,'eagle_eye_shot',0,0.0,7.0,3000,0,4,2,0,0,0,0,0); -- Dynamis Goblin EES
+INSERT INTO `mob_skills` VALUES (1092,743,'frypan',1,0.0,15.0,2000,2000,4,0,0,0,0,0,0); -- Dynamis Goblin
+INSERT INTO `mob_skills` VALUES (1093,744,'smokebomb',0,0.0,7.0,3900,2000,4,0,0,0,0,0,0); -- Dynamis Goblin
+-- INSERT INTO `mob_skills` VALUES (1094,838,'smokebomb',0,0.0,7.0,4200,2000,4,0,0,0,0,0,0); -- Dynamis Goblin
+INSERT INTO `mob_skills` VALUES (1095,746,'crispy_candle',0,0.0,7.0,3900,2000,4,0,0,0,0,0,0); -- Dynamis Goblin
+-- INSERT INTO `mob_skills` VALUES (1096,747,'crispy_candle',0,0.0,7.0,4200,2000,4,0,0,0,0,0,0); -- Dynamis Goblin
+INSERT INTO `mob_skills` VALUES (1097,748,'paralysis_shower',0,0.0,7.0,3900,2000,4,0,0,0,0,0,0); -- Dynamis Goblin
+-- INSERT INTO `mob_skills` VALUES (1098,842,'paralysis_shower',0,0.0,7.0,4200,2000,4,0,0,0,0,0,0); -- Dynamis Goblin
+INSERT INTO `mob_skills` VALUES (1099,750,'dice_heal',1,0.0,10.0,5400,2000,1,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1100,751,'dice_gravity',0,0.0,10.0,5400,2000,4,0,0,1,0,0,0);
+INSERT INTO `mob_skills` VALUES (1101,752,'dice_damage',1,0.0,10.0,5400,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1102,753,'dice_stun',1,0.0,10.0,5400,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1103,754,'dice_poison',1,0.0,10.0,5400,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1104,755,'dice_disease',1,0.0,10.0,5400,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1105,756,'dice_sleep',1,0.0,10.0,5400,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1106,757,'dice_slow',1,0.0,10.0,5400,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1107,758,'dice_tp_loss',1,0.0,10.0,5400,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1108,759,'dice_dispel',1,0.0,10.0,5400,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1109,760,'dice_reset',1,0.0,10.0,5400,2000,1,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1110,761,'seismostomp',1,0.0,15.0,3000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1111,762,'numbing_glare',4,0.0,15.0,1800,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1112,763,'seismostomp',1,0.0,15.0,3000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1113,764,'tormentful_glare',4,0.0,15.0,1800,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1114,765,'seismostomp',1,0.0,15.0,3000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1115,766,'torpid_glare',4,0.0,15.0,1800,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1116,767,'seismostomp',1,0.0,15.0,3000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1117,768,'lead_breath',4,0.0,15.0,3300,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1118,769,'lead_breath',4,0.0,15.0,3300,2000,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1119,863,'frag_bomb',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1120,69,'10000_needles',1,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1121,771,'eagle_eye_shot',0,0.0,25.0,2000,0,4,2,0,0,0,0,0); -- yagudo move
-INSERT INTO `mob_skills` VALUES (1122,770,'eagle_eye_shot',0,0.0,25.0,2000,0,4,2,0,0,0,0,0); -- quadav move
+INSERT INTO `mob_skills` VALUES (1121,771,'eagle_eye_shot',0,0.0,25.0,3500,0,4,2,0,0,0,0,0); -- yagudo move
+INSERT INTO `mob_skills` VALUES (1122,770,'eagle_eye_shot',0,0.0,25.0,3500,0,4,2,0,0,0,0,0); -- quadav move
 INSERT INTO `mob_skills` VALUES (1123,355,'ore_toss_ranged',0,0.0,25.0,2000,0,4,0,4,0,0,0,0); -- orc ranged attack
 INSERT INTO `mob_skills` VALUES (1124,772,'regain_hp',1,0.0,25.0,2000,0,4,0,0,0,0,0,0); -- Dyna Statues
 INSERT INTO `mob_skills` VALUES (1125,773,'regain_mp',1,0.0,25.0,2000,0,4,0,0,0,0,0,0); -- Dyna Statues

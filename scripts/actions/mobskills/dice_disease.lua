@@ -1,7 +1,6 @@
 -----------------------------------
 -- Goblin Dice
--- Description: Stun
--- Type: Physical (Blunt)
+-- Description: Disease
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -11,7 +10,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DISEASE, 1, 0, 180))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DISEASE, 1, 0, 90))
 
     return xi.effect.DISEASE
 end
