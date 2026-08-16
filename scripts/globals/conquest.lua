@@ -1834,49 +1834,68 @@ end
 -- Helper method for sendConquestTallyUpdateMessage and sendConquestTallyEndMessage
 xi.conquest.sendBalanceOfPowerMessage = function(player, messageBase, ranking, isConquestAlliance)
     local offset = 0
-    if bit.band(ranking, 0x03) == 0x01 then
-        offset = offset + 7 -- 7
-        if bit.band(ranking, 0x30) == 0x10 then
-            offset = offset + 1 -- 8
-            if bit.band(ranking, 0x0C) == 0x0C then
-                offset = offset + 1 -- 9
+
+    -- Get specific nation masks, which translates to the concrete nation ranking.
+    local rankingSandoria = bit.rshift(bit.band(ranking, 0x03), 0) -- Bits 1 and 2.
+    local rankingBastok   = bit.rshift(bit.band(ranking, 0x0C), 2) -- Bits 3 and 4.
+    local rankingWindurst = bit.rshift(bit.band(ranking, 0x30), 4) -- Bits 5 and 6.
+
+    -- Sandoria in first place.
+    if rankingSandoria == 1 then
+        offset = offset + 7         -- Global balance of power: 1st: San d'Oria 2nd: Windurst 3rd: Bastok
+
+        -- Windurst also in 1st place.
+        if rankingWindurst == 1 then
+            offset = offset + 1     -- All three nations are tied for first place.
+            if rankingBastok == 3 then
+                offset = offset + 1 -- Global balance of power: 1st: San d'Oria and Windurst (tie) 3rd: Bastok
             end
-        elseif bit.band(ranking, 0x0C) == 0x08 then
-            offset = offset + 3 -- 10
-            if bit.band(ranking, 0x30) == 0x30 then
-                offset = offset + 1 -- 11
+        -- Bastok in 2nd place.
+        elseif rankingBastok == 2 then
+            offset = offset + 3     -- Global balance of power: 1st: San d'Oria 2nd: Bastok and Windurst (tie)
+            if rankingWindurst == 3 then
+                offset = offset + 1 -- Global balance of power: 1st: San d'Oria 2nd: Bastok 3rd: Windurst
             end
-        elseif bit.band(ranking, 0x0C) == 0x04 then
-            offset = offset + 6 -- 13
+        -- Bastok also in 1st place.
+        elseif rankingBastok == 1 then
+            offset = offset + 6     -- Global balance of power: 1st: San d'Oria and Bastok (tie) 3rd: Windurst
         end
-    elseif bit.band(ranking, 0x0C) == 0x04 then
-        offset = offset + 15 -- 15
-        if bit.band(ranking, 0x30) == 0x02 then
-            offset = offset + 3 -- 18
-            if bit.band(ranking, 0x03) == 0x03 then
-                offset = offset + 1 -- 19
+
+    -- Bastok in first place.
+    elseif rankingBastok == 1 then
+        offset = offset + 15        -- Global balance of power: 1st: Bastok 2nd: San d'Oria 3rd: Windurst
+        -- Windurst in 2nd place.
+        if rankingWindurst == 2 then
+            offset = offset + 3     -- Global balance of power: 1st: Bastok 2nd: San d'Oria and Windurst (tie)
+            if rankingSandoria == 3 then
+                offset = offset + 1 -- Global balance of power: 1st: Bastok 2nd: Windurst 3rd: San d'Oria
             end
-        elseif bit.band(ranking, 0x30) == 0x10 then
-            offset = offset + 6 -- 21
+        -- Windurst also in 1st place.
+        elseif rankingWindurst == 1 then
+            offset = offset + 6     -- Global balance of power: 1st: Bastok and Windurst (tie) 3rd: San d'Oria
         end
-    elseif bit.band(ranking, 0x30) == 0x10 then
-        offset = offset + 23 -- 23
-        if bit.band(ranking, 0x0C) == 0x08 then
-            offset = offset + 3 -- 26
-            if bit.band(ranking, 0x30) == 0x30 then
-                offset = offset + 1 -- 27
+
+    -- Windurst in first place.
+    elseif rankingWindurst == 1 then
+        offset = offset + 23        -- Global balance of power: 1st: Windurst 2nd: San d'Oria 3rd: Bastok
+        -- Bastok in 2nd place.
+        if rankingBastok == 2 then
+            offset = offset + 3     -- Global balance of power: 1st: Windurst 2nd: San d'Oria and Bastok (tie)
+            if rankingSandoria == 3 then
+                offset = offset + 1 -- Global balance of power: 1st: Windurst 2nd: Bastok 3rd: San d'Oria
             end
         end
     end
 
     player:messageText(player, messageBase + offset, 5) -- Global balance of power:
 
+    -- If theres an alliance, it's between the 2 last nations. We use the nation in first place to determine it.
     if isConquestAlliance then
-        if bit.band(ranking, 0x03) == 0x01 then
+        if rankingSandoria == 1 then
             player:messageText(player, messageBase + 50, 5) -- Bastok and Windurst have formed an alliance.
-        elseif bit.band(ranking, 0x0C) == 0x04 then
+        elseif rankingBastok == 1 then
             player:messageText(player, messageBase + 51, 5) -- San d'Oria and Windurst have formed an alliance.
-        elseif bit.band(ranking, 0x30) == 0x10 then
+        elseif rankingWindurst == 1 then
             player:messageText(player, messageBase + 52, 5) -- San d'Oria and Bastok have formed an alliance.
         end
     end
