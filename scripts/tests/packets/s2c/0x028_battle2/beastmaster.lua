@@ -11,6 +11,11 @@ local packets =
             player:spawnPet(xi.petId.COLDBLOOD_COMO)
             local pet = player:getPet()
             assert(pet)
+
+            -- The pet lands a variable number of auto-attack rounds across the skips below, and
+            -- enough of them kill the level 28 Clipper before the Ready move resolves.
+            pet:setAutoAttackEnabled(false)
+
             pet:engage(mob:getTargID())
             xi.test.world:tickEntity(pet)
             xi.test.world:skipTime(5)
