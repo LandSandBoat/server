@@ -113,6 +113,7 @@ protected:
     // Takes from a stack. Reversed by putting back what was taken, exdata and all
     [[nodiscard]] auto take(CCharEntity* PChar, uint8 location, uint8 slot, uint32 quantity) -> bool;
 
+    // Both claim the gil stack before touching it, so it stays this transaction's until it closes
     [[nodiscard]] auto pay(CCharEntity* PChar, uint32 gil) -> bool;
     [[nodiscard]] auto earn(CCharEntity* PChar, uint32 gil) -> bool;
 
@@ -124,6 +125,8 @@ protected:
     virtual auto reversible() const -> bool;
 
 private:
+    [[nodiscard]] auto claimGil(CCharEntity* PChar) -> bool;
+
     void runUndos();
     void releaseAll();
 

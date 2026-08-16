@@ -56,7 +56,7 @@ auto BazaarPurchaseTransaction::start(CCharEntity* buyer, CCharEntity* seller, c
     auto transaction = std::unique_ptr<BazaarPurchaseTransaction>(
         new BazaarPurchaseTransaction(xi::Badge<BazaarPurchaseTransaction>{}, buyer, seller, bazaarSlot, quantity, price, priceWithTax));
 
-    if (!transaction->claimAll())
+    if (!transaction->claimListing())
     {
         return nullptr;
     }
@@ -64,19 +64,11 @@ auto BazaarPurchaseTransaction::start(CCharEntity* buyer, CCharEntity* seller, c
     return transaction;
 }
 
-// Members are only set once the claim succeeds, so a partial failure releases exactly what it took
-auto BazaarPurchaseTransaction::claimAll() -> bool
+// Both sides' gil is claimed by the payment itself, so the sale only has to secure the goods
+auto BazaarPurchaseTransaction::claimListing() -> bool
 {
-    auto* PListing   = this->seller_->getStorage(LOC_INVENTORY)->GetItem(this->bazaarSlot_);
-    auto* PBuyerGil  = this->buyer_->getStorage(LOC_INVENTORY)->GetItem(0);
-    auto* PSellerGil = this->seller_->getStorage(LOC_INVENTORY)->GetItem(0);
-
-    if (!PListing || !PBuyerGil || !PSellerGil)
-    {
-        return false;
-    }
-
-    if (!PBuyerGil->isType(ITEM_CURRENCY) || !PSellerGil->isType(ITEM_CURRENCY))
+    auto* PListing = this->seller_->getStorage(LOC_INVENTORY)->GetItem(this->bazaarSlot_);
+    if (!PListing)
     {
         return false;
     }
@@ -87,11 +79,9 @@ auto BazaarPurchaseTransaction::claimAll() -> bool
         return false;
     }
 
-    this->listing_   = this->claim(this->seller_, PListing);
-    this->buyerGil_  = this->claim(this->buyer_, PBuyerGil);
-    this->sellerGil_ = this->claim(this->seller_, PSellerGil);
+    this->listing_ = this->claim(this->seller_, PListing);
 
-    return this->listing_.isSet() && this->buyerGil_.isSet() && this->sellerGil_.isSet();
+    return this->listing_.isSet();
 }
 
 void BazaarPurchaseTransaction::restoreDisplay()

@@ -58,14 +58,12 @@ protected:
     void doRollback() override;
 
 private:
-    auto claimAll() -> bool;
+    auto claimListing() -> bool;
     void restoreDisplay();
 
     CCharEntity* buyer_{};
     CCharEntity* seller_{};
     ItemId       listing_{};
-    ItemId       buyerGil_{};
-    ItemId       sellerGil_{};
     uint8        bazaarSlot_{};
     uint32       quantity_{};
     uint32       price_{};

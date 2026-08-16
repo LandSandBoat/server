@@ -483,14 +483,27 @@ auto Transaction::take(CCharEntity* PChar, const uint8 location, const uint8 slo
     return true;
 }
 
+// Money moves like anything else, so the stack is claimed for as long as the transaction runs
+auto Transaction::claimGil(CCharEntity* PChar) -> bool
+{
+    if (!PChar)
+    {
+        return false;
+    }
+
+    CItem* PGil = PChar->getStorage(LOC_INVENTORY)->GetItem(0);
+
+    return PGil && PGil->isType(ITEM_CURRENCY) && this->claim(PChar, PGil).isSet();
+}
+
 auto Transaction::pay(CCharEntity* PChar, const uint32 gil) -> bool
 {
-    return this->take(PChar, LOC_INVENTORY, 0, gil);
+    return this->claimGil(PChar) && this->take(PChar, LOC_INVENTORY, 0, gil);
 }
 
 auto Transaction::earn(CCharEntity* PChar, const uint32 gil) -> bool
 {
-    if (!this->updateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gil)).applied)
+    if (!this->claimGil(PChar) || !this->updateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gil)).applied)
     {
         return false;
     }
