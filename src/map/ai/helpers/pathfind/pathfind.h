@@ -30,6 +30,8 @@
 #include <map/ai/helpers/pathfind/path.h>
 #include <map/ai/helpers/pathfind/pathfind_types.h>
 
+#include <array>
+#include <cstddef>
 #include <memory>
 #include <vector>
 
@@ -172,6 +174,22 @@ private:
     uint8 currentTurn_;
 
     float distanceMoved_;
+
+    struct ValidPositionEntry
+    {
+        position_t        position{};
+        timer::time_point checkedAt{ timer::time_point::min() };
+        bool              valid{ false };
+    };
+
+    // Small enough that a linear scan beats hashing, and that repeated own-position queries
+    // survive the one-shot candidate probes that share this cache.
+    static constexpr std::size_t kValidPositionCacheSize = 8;
+
+    // Most recently used first; the max age bounds staleness after a navmesh reload we cannot see.
+    mutable std::array<ValidPositionEntry, kValidPositionCacheSize> validPositionCache_{};
+    mutable std::size_t                                             validPositionCacheCount_{ 0 };
+
     float maxDistance_;
 
     // Legs taken by the current PathTo journey (1 = single query, >1 = chunked).
