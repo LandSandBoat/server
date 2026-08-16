@@ -148,16 +148,21 @@ auto applyItemUpdate(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 q
     return { .itemId = ItemID, .applied = true, .delta = static_cast<int32>(newQuantity) - static_cast<int32>(oldQuantity), .removed = std::move(removed) };
 }
 
-auto applyAddItem(CCharEntity* PChar, uint8 LocationID, std::unique_ptr<CItem> PItem, Silence silence, const Transaction* owner) -> uint8
+auto applyAddItem(CCharEntity* PChar, uint8 LocationID, std::unique_ptr<CItem> PItem, Silence silence, const Transaction* owner, int32& applied) -> uint8
 {
+    applied = 0;
+
     if (PItem->isType(ITEM_CURRENCY))
     {
         // currency merges into slot 0 rather than taking a new slot, so it routes through updateItem
-        if (!applyItemUpdate(PChar, LocationID, 0, PItem->getQuantity(), owner).applied)
+        const auto mutation = applyItemUpdate(PChar, LocationID, 0, PItem->getQuantity(), owner);
+        if (!mutation.applied)
         {
             ShowErrorFmt("AddItem: could not give {} currency to {}", PItem->getQuantity(), PChar->getName());
             return ERROR_SLOTID;
         }
+
+        applied = mutation.delta;
 
         return 0;
     }
@@ -199,14 +204,58 @@ auto applyAddItem(CCharEntity* PChar, uint8 LocationID, std::unique_ptr<CItem> P
         return ERROR_SLOTID;
     }
 
+    applied = static_cast<int32>(PInserted->getQuantity());
+
     PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PInserted, static_cast<CONTAINER_ID>(LocationID), SlotID);
     PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 
     return SlotID;
 }
 
-auto applyAddItem(CCharEntity* PChar, uint8 LocationID, uint16 ItemID, uint32 quantity, Silence silence, const Transaction* owner) -> uint8
+// Puts a stack back where it came from.
+// Undos are recorded against a slot, so a stack that returned to a different one would strand every undo still pointing at the original
+auto restoreItem(CCharEntity* PChar, uint8 LocationID, uint8 SlotID, std::unique_ptr<CItem> PItem, const Transaction* owner) -> uint8
 {
+    auto* PStorage = PChar->getStorage(LocationID);
+
+    if (PStorage == nullptr || PStorage->GetItem(SlotID) != nullptr)
+    {
+        ShowWarningFmt("RestoreItem: slot {} of {} is taken, putting item {} wherever it fits", SlotID, PChar->getName(), PItem->getID());
+
+        int32 applied = 0;
+
+        return applyAddItem(PChar, LocationID, std::move(PItem), Silence::No, owner, applied);
+    }
+
+    const uint32 quantity = PItem->getQuantity();
+
+    if (PStorage->InsertItem(std::move(PItem), SlotID) == ERROR_SLOTID)
+    {
+        return ERROR_SLOTID;
+    }
+
+    auto* PRestored = PStorage->GetItem(SlotID);
+
+    const char* Query = "INSERT INTO char_inventory(charid, location, slot, itemId, quantity, signature, extra) VALUES(?, ?, ?, ?, ?, ?, ?) LIMIT 1";
+
+    if (!db::preparedStmt(Query, PChar->id, LocationID, SlotID, PRestored->getID(), quantity, PRestored->getSignature(), PRestored->m_extra))
+    {
+        ShowError("RestoreItem: Cannot insert item to database");
+        PStorage->RemoveItem(SlotID);
+
+        return ERROR_SLOTID;
+    }
+
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PRestored, static_cast<CONTAINER_ID>(LocationID), SlotID);
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
+
+    return SlotID;
+}
+
+auto applyAddItem(CCharEntity* PChar, uint8 LocationID, uint16 ItemID, uint32 quantity, Silence silence, const Transaction* owner, int32& applied) -> uint8
+{
+    applied = 0;
+
     if (PChar->getStorage(LocationID)->GetFreeSlotsCount() == 0 || quantity == 0)
     {
         return ERROR_SLOTID;
@@ -221,7 +270,7 @@ auto applyAddItem(CCharEntity* PChar, uint8 LocationID, uint16 ItemID, uint32 qu
 
     PItem->setQuantity(quantity);
 
-    return applyAddItem(PChar, LocationID, std::move(PItem), silence, owner);
+    return applyAddItem(PChar, LocationID, std::move(PItem), silence, owner, applied);
 }
 
 auto allocTxId() -> uint64
@@ -264,8 +313,7 @@ auto Transaction::commit() -> bool
         return false;
     }
 
-    // doCommit runs with the claims still held, since its steps mutate what it claimed. A refusal
-    // keeps them for the rollback that follows
+    // doCommit runs with the claims still held, since its steps mutate what it claimed. A refusal keeps them for the rollback that follows
     if (!this->doCommit())
     {
         ShowWarningFmt("Transaction::commit: doCommit rejected for tx {}", this->id_);
@@ -390,23 +438,32 @@ auto Transaction::reversible() const -> bool
     return true;
 }
 
-auto Transaction::give(CCharEntity* PChar, const uint8 location, const uint16 itemId, const uint32 quantity, const Silence silence) -> std::optional<uint8>
+// The undo takes back what landed rather than what was requested; the two differ when a stack hits its size limit
+auto Transaction::recordGive(CCharEntity* PChar, const uint8 location, const uint8 slot, const int32 applied) -> std::optional<uint8>
 {
-    const uint8 slot = this->addItem(PChar, location, itemId, quantity, silence);
     if (slot == ERROR_SLOTID)
     {
         return std::nullopt;
     }
 
-    this->undoWith([this, PChar, location, slot, quantity]()
+    this->undoWith([this, PChar, location, slot, applied]()
                    {
-                       if (!this->updateItem(PChar, location, slot, -static_cast<int32>(quantity)).applied)
+                       if (!this->updateItem(PChar, location, slot, -applied).applied)
                        {
-                           ShowErrorFmt("Transaction: could not take back {} handed to {} in slot {}", quantity, PChar->getName(), slot);
+                           ShowErrorFmt("Transaction: could not take back {} handed to {} in slot {}", applied, PChar->getName(), slot);
                        }
                    });
 
     return slot;
+}
+
+auto Transaction::give(CCharEntity* PChar, const uint8 location, const uint16 itemId, const uint32 quantity, const Silence silence) -> std::optional<uint8>
+{
+    int32 applied = 0;
+
+    const uint8 slot = applyAddItem(PChar, location, itemId, quantity, silence, this, applied);
+
+    return this->recordGive(PChar, location, slot, applied);
 }
 
 auto Transaction::give(CCharEntity* PChar, const uint8 location, std::unique_ptr<CItem> item, const Silence silence) -> std::optional<uint8>
@@ -416,23 +473,11 @@ auto Transaction::give(CCharEntity* PChar, const uint8 location, std::unique_ptr
         return std::nullopt;
     }
 
-    const uint32 quantity = item->getQuantity();
+    int32 applied = 0;
 
-    const uint8 slot = this->addItem(PChar, location, std::move(item), silence);
-    if (slot == ERROR_SLOTID)
-    {
-        return std::nullopt;
-    }
+    const uint8 slot = applyAddItem(PChar, location, std::move(item), silence, this, applied);
 
-    this->undoWith([this, PChar, location, slot, quantity]()
-                   {
-                       if (!this->updateItem(PChar, location, slot, -static_cast<int32>(quantity)).applied)
-                       {
-                           ShowErrorFmt("Transaction: could not take back {} handed to {} in slot {}", quantity, PChar->getName(), slot);
-                       }
-                   });
-
-    return slot;
+    return this->recordGive(PChar, location, slot, applied);
 }
 
 auto Transaction::take(CCharEntity* PChar, const uint8 location, const uint8 slot, const uint32 quantity) -> bool
@@ -471,7 +516,7 @@ auto Transaction::take(CCharEntity* PChar, const uint8 location, const uint8 slo
 
     restore->setQuantity(quantity);
 
-    this->undoWith([this, PChar, location, kept = std::shared_ptr<CItem>(std::move(restore))]()
+    this->undoWith([this, PChar, location, slot, kept = std::shared_ptr<CItem>(std::move(restore))]()
                    {
                        auto returned = xi::items::clone(*kept);
                        if (!returned)
@@ -480,7 +525,7 @@ auto Transaction::take(CCharEntity* PChar, const uint8 location, const uint8 slo
                            return;
                        }
 
-                       if (this->addItem(PChar, location, std::move(returned)) == ERROR_SLOTID)
+                       if (restoreItem(PChar, location, slot, std::move(returned), this) == ERROR_SLOTID)
                        {
                            ShowErrorFmt("Transaction: {} has nowhere to put {} back", PChar->getName(), kept->getID());
                        }
@@ -551,12 +596,16 @@ auto Transaction::updateItem(CCharEntity* PChar, const uint8 locationId, const u
 
 auto Transaction::addItem(CCharEntity* PChar, const uint8 locationId, std::unique_ptr<CItem> item, const Silence silence) -> uint8
 {
-    return applyAddItem(PChar, locationId, std::move(item), silence, this);
+    int32 applied = 0;
+
+    return applyAddItem(PChar, locationId, std::move(item), silence, this, applied);
 }
 
 auto Transaction::addItem(CCharEntity* PChar, const uint8 locationId, const uint16 itemId, const uint32 quantity, const Silence silence) -> uint8
 {
-    return applyAddItem(PChar, locationId, itemId, quantity, silence, this);
+    int32 applied = 0;
+
+    return applyAddItem(PChar, locationId, itemId, quantity, silence, this, applied);
 }
 
 void Transaction::exitTx(CItem* item)

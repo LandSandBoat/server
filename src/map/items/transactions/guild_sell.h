@@ -35,8 +35,8 @@ class CItem;
 
 // Transaction for one guild shop sale.
 //
-// A sale can span several stacks, so start() claims every Free stack of the item up to the
-// requested quantity. Committing consumes them and pays out.
+// A sale can span several stacks, so start() claims every Free stack of the item up to the requested quantity.
+// Committing consumes them and pays out.
 
 class GuildSellTransaction : public Transaction
 {

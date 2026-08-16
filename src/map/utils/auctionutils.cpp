@@ -146,7 +146,7 @@ void auctionutils::ProofOfPurchase(CCharEntity* PChar, GP_AUC_PARAM_LOT param)
         return;
     }
 
-    // held for the whole listing, so the stack cannot be sold or traded while the row goes in
+    // held for the whole listing, so the stack cannot be sold or traded while the row is inserted
     CItem* PItem = transaction->claimSlot(LOC_INVENTORY, param.ItemWorkIndex);
 
     if (PItem && !PItem->hasFlag(ItemFlag::NoAuction) && PItem->getQuantity() >= param.ItemStacks)
@@ -278,8 +278,7 @@ auto auctionutils::PurchasingItems(CCharEntity* PChar, GP_AUC_PARAM_BID param) -
             {
                 const auto boughtQuantity = static_cast<uint32>(param.ItemStacks == 0 ? PItem->getStackSize() : 1);
 
-                // the auction_house_buy trigger pays the seller when the row is marked sold, so it has to unwind with
-                // the rest of the sale rather than on its own
+                // the auction_house_buy trigger pays the seller when the row is marked sold, so it has to unwind with the rest of the sale rather than on its own
                 const auto success = db::transaction(
                     [&]()
                     {

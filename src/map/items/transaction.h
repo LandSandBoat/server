@@ -62,8 +62,8 @@ enum class TransactionState : uint8
 // Claimed stacks are stamped InTransaction and may only be mutated by the transaction holding them.
 // The claim list lives here rather than in each subclass so that commit and rollback both release.
 //
-// give/take/pay/earn each record an undo, so a rollback reverses the work as well as dropping the
-// claims. Claims are held as ItemId rather than CItem*, since a step can free the stack it touched.
+// give/take/pay/earn each record an undo, so a rollback reverses the work as well as dropping the claims.
+// Claims are held as ItemId rather than CItem*, since a step can free the stack it touched.
 
 class Transaction
 {
@@ -105,7 +105,7 @@ protected:
     [[nodiscard]] auto addItem(CCharEntity* PChar, uint8 locationId, std::unique_ptr<CItem> item, Silence silence = Silence::No) -> uint8;
     [[nodiscard]] auto addItem(CCharEntity* PChar, uint8 locationId, uint16 itemId, uint32 quantity, Silence silence = Silence::No) -> uint8;
 
-    // adds to a container and returns the slot. Undo takes it back
+    // adds to a container and returns the slot. Undo takes back what landed
     [[nodiscard]] auto give(CCharEntity* PChar, uint8 location, uint16 itemId, uint32 quantity, Silence silence = Silence::No) -> std::optional<uint8>;
     [[nodiscard]] auto give(CCharEntity* PChar, uint8 location, std::unique_ptr<CItem> item, Silence silence = Silence::No) -> std::optional<uint8>;
 
@@ -119,12 +119,13 @@ protected:
     // undo for work outside the item tables, run in reverse order on rollback
     void undoWith(std::function<void()> undo);
 
-    // false keeps completed work on rollback instead of undoing it. Synth relies on this so that
-    // disconnecting mid-craft costs the same as a failed synth
+    // false keeps completed work on rollback instead of undoing it.
+    // Synth relies on this so that disconnecting mid-craft costs the same as a failed synth
     virtual auto reversible() const -> bool;
 
 private:
     [[nodiscard]] auto claimGil(CCharEntity* PChar) -> bool;
+    [[nodiscard]] auto recordGive(CCharEntity* PChar, uint8 location, uint8 slot, int32 applied) -> std::optional<uint8>;
 
     void runUndos();
     void releaseAll();

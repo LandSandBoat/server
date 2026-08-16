@@ -97,7 +97,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
         return;
     }
 
-    // the client sends the item id, which has to match what is actually in the slot
+    // the client sends the item id, which has to match what is in the slot
     const auto* PAddItem = PChar->getStorage(this->MyroomAddCategory)->GetItem(this->MyroomAddItemIndex);
     if (!PAddItem || PAddItem->getID() != this->MyroomAddItemNo)
     {

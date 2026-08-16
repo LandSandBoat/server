@@ -29,8 +29,7 @@ class CCharEntity;
 class CItem;
 
 // A reference to an item that can outlive the item itself.
-// A CItem* cannot: a stack consumed to nothing is freed, and its slot can be refilled by a
-// different stack of the same item.
+// A CItem* cannot: a stack consumed to nothing is freed, and its slot can be refilled by a different stack of the same item.
 struct ItemId
 {
     ItemId() = default;

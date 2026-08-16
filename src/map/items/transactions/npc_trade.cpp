@@ -144,8 +144,8 @@ void NpcTradeTransaction::releaseUnconfirmed()
     }
 }
 
-// releaseUnconfirmed may already have dropped the claim, so this re-takes it. Needed when a script
-// opens an event from onTrade and confirms only once that event finishes
+// releaseUnconfirmed may already have dropped the claim, so this re-takes it.
+// Needed when a script opens an event from onTrade and confirms only once that event finishes
 auto NpcTradeTransaction::resolve(Slot& slot) -> CItem*
 {
     // by uid, so a different stack that has since taken the slot is not mistaken for the offer
@@ -161,34 +161,33 @@ auto NpcTradeTransaction::resolve(Slot& slot) -> CItem*
 
 auto NpcTradeTransaction::consumeConfirmed() -> bool
 {
-    bool tookEverything = true;
-
     for (auto& slot : this->slots_)
     {
+        // all or nothing: a partial take rolls back rather than leaving the offer half consumed
         if (slot.confirmed > 0 && !this->consumeSlot(slot, slot.confirmed))
         {
-            tookEverything = false;
+            this->rollback();
+
+            return false;
         }
     }
 
-    // commits whatever was taken, but reports that the offer was not taken in full
-    return this->commit() && tookEverything;
+    return this->commit();
 }
 
 auto NpcTradeTransaction::consumeAll() -> bool
 {
-    bool tookEverything = true;
-
     for (auto& slot : this->slots_)
     {
         if (slot.offered.isSet() && !this->consumeSlot(slot, slot.quantity))
         {
-            tookEverything = false;
+            this->rollback();
+
+            return false;
         }
     }
 
-    // commits whatever was taken, but reports that the offer was not taken in full
-    return this->commit() && tookEverything;
+    return this->commit();
 }
 
 auto NpcTradeTransaction::consumeSlot(Slot& slot, const uint32 quantity) -> bool

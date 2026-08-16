@@ -62,8 +62,7 @@ auto SynthTransaction::start(CCharEntity* player, const SynthOffer& offer) -> st
 
     auto transaction = std::unique_ptr<SynthTransaction>(new SynthTransaction(xi::Badge<SynthTransaction>{}, player));
 
-    // clears the slots so the rollback in the destructor consumes nothing. reversible() is false,
-    // so without this a refused start would still charge the ingredients
+    // clears the slots so the rollback in the destructor consumes nothing. reversible() is false, so without this a refused start would still charge the ingredients
     const auto abandon = [&transaction]() -> std::unique_ptr<SynthTransaction>
     {
         transaction->slots_ = {};
@@ -210,8 +209,7 @@ auto SynthTransaction::doCommit() -> bool
     return true;
 }
 
-// Synth rollbacks LOSE EVERYTHING on purpose: the ingredients are spent the moment the synth
-// starts, so disconnecting mid-craft must not hand them back
+// Synth rollbacks LOSE EVERYTHING on purpose: the ingredients are spent the moment the synth starts, so disconnecting mid-craft must not hand them back
 auto SynthTransaction::reversible() const -> bool
 {
     return false;
@@ -226,7 +224,7 @@ void SynthTransaction::doRollback()
 // the client greys out an ingredient for as long as the synth holds it
 auto SynthTransaction::claimAndLock(CItem* item) -> ItemId
 {
-    // a recipe can draw several units from one stack, and the client only needs telling once
+    // a recipe can draw several units from one stack, and the client only needs one lock packet
     const bool alreadyHeld = this->holds(item);
 
     const auto claimed = this->claim(this->player_, item);

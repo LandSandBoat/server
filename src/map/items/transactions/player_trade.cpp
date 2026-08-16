@@ -390,7 +390,7 @@ auto PlayerTradeTransaction::doCommit() -> bool
     auto* initiator = charOf(this->sides_[0]);
     auto* target    = charOf(this->sides_[1]);
 
-    // one side is gone, so there is nothing left to exchange
+    // one side no longer resolves, so there is nothing to exchange
     if (!initiator || !target)
     {
         return false;

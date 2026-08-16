@@ -166,8 +166,7 @@ void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PC
 
     luautils::OnTrade(PChar, PNpc);
 
-    // looked up again rather than reused: a script can finish the trade from onTrade, which
-    // destroys the transaction
+    // looked up again rather than reused: a script can finish the trade from onTrade, which destroys the transaction
     if (auto* offer = PChar->activeTransaction<NpcTradeTransaction>())
     {
         offer->releaseUnconfirmed();

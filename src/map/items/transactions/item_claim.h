@@ -36,8 +36,7 @@ class CItem;
 
 // Transaction for an operation that needs no bookkeeping of its own.
 //
-// give, take, pay, earn and their undos all come from Transaction; the overloads here only save
-// the caller passing the same player to every one of them.
+// give, take, pay, earn and their undos all come from Transaction; the overloads here only save the caller passing the same player to every one of them.
 
 class ItemClaimTransaction final : public Transaction
 {
@@ -52,8 +51,8 @@ public:
     // claims the stack in a slot. Null if the slot is empty or the item is already busy
     [[nodiscard]] auto claimSlot(uint8 location, uint8 slot) -> CItem*;
 
-    // claims and returns the gil stack, for reading the balance before spending it. pay() and
-    // earn() claim it themselves, so this is only needed up front. Null if slot 0 is not currency
+    // claims and returns the gil stack, for reading the balance before spending it. pay() and earn() claim it themselves, so this is only needed up front.
+    // Null if slot 0 is not currency
     [[nodiscard]] auto claimGil() -> CItem*;
 
     // same as Transaction's, with the player implied

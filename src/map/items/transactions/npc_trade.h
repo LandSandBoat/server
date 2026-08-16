@@ -37,15 +37,14 @@ class CItem;
 
 // What a player has put in an NPC's trade window.
 //
-// stage() claims each offered stack. A script marks what it wants with confirm(), and
-// releaseUnconfirmed() gives the rest back as soon as onTrade returns.
+// stage() claims each offered stack.
+// A script confirms the slots it will take, and releaseUnconfirmed() gives the rest back as soon as onTrade returns.
 //
-// A confirmed slot keeps its claim past onTrade, since a script may open an event and consume
-// only when that event finishes, many ticks later. It ends at consumeConfirmed/consumeAll, when
-// the next trade replaces this one, at the end of the event, or when the player leaves the zone.
+// A confirmed slot keeps its claim past onTrade, since a script may open an event and consume only when that event finishes, many ticks later.
+// It ends at consumeConfirmed/consumeAll, when the next trade replaces this one, at the end of the event, or when the player leaves the zone.
 //
-// The claims and confirmed counts live here. CTradeContainer keeps only the offer description -
-// ids, slots and quantities - which is what the script API reads.
+// The claims and confirmed counts live here.
+// CTradeContainer keeps only the offer description - ids, slots and quantities - which is what the script API reads.
 
 class NpcTradeTransaction final : public Transaction
 {
@@ -72,10 +71,10 @@ public:
     // releases the claim on every slot the script did not confirm
     void releaseUnconfirmed();
 
-    // Consumes what the script confirmed, then closes. False if any of it could not be taken
+    // Consumes what the script confirmed, then closes. All or nothing: false rolls everything back
     [[nodiscard]] auto consumeConfirmed() -> bool;
 
-    // Consumes every staged slot in full, then closes. False if any of it could not be taken
+    // Consumes every staged slot in full, then closes. All or nothing: false rolls everything back
     [[nodiscard]] auto consumeAll() -> bool;
 
 protected:

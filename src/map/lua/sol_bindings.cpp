@@ -102,8 +102,7 @@ SOL_BIND_DEF(CLuaSpell, CSpell);
 #include "lua_statuseffect.h"
 SOL_BIND_DEF(CLuaStatusEffect, CStatusEffect);
 
-// No SOL_BIND_DEF for CTradeContainer: a trade reaching lua needs its owner, so it is
-// pushed as a CLuaTradeContainer built explicitly rather than converted from a bare pointer.
+// No SOL_BIND_DEF for CTradeContainer: a trade reaching lua needs its owner, so it is pushed as a CLuaTradeContainer built explicitly rather than converted from a bare pointer.
 #include "lua_trade_container.h"
 
 #include "lua_trait.h"

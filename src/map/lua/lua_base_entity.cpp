@@ -5828,6 +5828,19 @@ uint8 CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, const sol::table& ext
         }
     }
 
+    // gear is consumed before the slip is written, so a failure cannot leave the player with both
+    if (!transaction->consumeConfirmed())
+    {
+        ShowErrorFmt("CLuaBaseEntity::storeWithPorterMoogle: {} kept the gear the slip was to record", PChar->getName());
+        PChar->removeTransaction(transaction);
+        PChar->TradeContainer->Clean();
+
+        return storeFailed;
+    }
+
+    PChar->removeTransaction(transaction);
+    PChar->TradeContainer->Clean();
+
     for (size_t i = 0; i < extraVec.size() && i < CItem::extra_size; ++i)
     {
         slip->m_extra[i] |= extraVec[i];
