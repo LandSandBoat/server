@@ -69,13 +69,17 @@ auto NavPathBuilder::findPath(const position_t& start, const position_t& end) co
     // Close any end-gap on complete paths, since the wider 30f search may beat findPath's 2.5f result.
     if (!result->isPartial && !result->points.empty())
     {
-        if (const auto closestEnd = navMesh_.findClosestValidPoint(end))
+        // A gap this small can never be beaten, and the 30f search costs 13x a normal lookup.
+        const float lastWaypointGap = distance(result->points.back().position, end);
+        if (lastWaypointGap > 0.1f)
         {
-            const float lastWaypointGap = distance(result->points.back().position, end);
-            const float closestGap      = distance(*closestEnd, end);
-            if (closestGap < lastWaypointGap - 0.1f)
+            if (const auto closestEnd = navMesh_.findClosestValidPoint(end))
             {
-                result->points.emplace_back(pathpoint_t{ *closestEnd, 0s, false });
+                const float closestGap = distance(*closestEnd, end);
+                if (closestGap < lastWaypointGap - 0.1f)
+                {
+                    result->points.emplace_back(pathpoint_t{ *closestEnd, 0s, false });
+                }
             }
         }
     }
