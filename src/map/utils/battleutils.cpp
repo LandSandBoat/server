@@ -3100,6 +3100,11 @@ bool IsAbsorbByShadow(CBattleEntity* PDefender, CBattleEntity* PAttacker)
     {
         PDefender->setModifier(modShadow, --Shadow);
 
+        if (PDefender->objtype == TYPE_PC)
+        {
+            static_cast<CCharEntity*>(PDefender)->setPersist(CharPersist::Effects);
+        }
+
         if (Shadow == 0)
         {
             switch (modShadow)

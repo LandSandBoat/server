@@ -21,6 +21,7 @@
 
 #include "status_effect.h"
 #include "entities/battle_entity.h"
+#include "entities/char_entity.h"
 
 #include "status_effect_container.h"
 #include <utility>
@@ -75,6 +76,14 @@ auto CStatusEffect::GetName() const -> const std::string&
 auto CStatusEffect::SetOwner(CBattleEntity* owner) -> void
 {
     owner_ = owner;
+}
+
+auto CStatusEffect::MarkPersistDirty() const -> void
+{
+    if (owner_ != nullptr && owner_->objtype == TYPE_PC)
+    {
+        static_cast<CCharEntity*>(owner_)->setPersist(CharPersist::Effects);
+    }
 }
 
 auto CStatusEffect::GetStatusID() const -> xi::StatusEffect
@@ -170,16 +179,19 @@ auto CStatusEffect::GetStartTime() const -> timer::time_point
 auto CStatusEffect::SetEffectFlags(xi::StatusEffectFlag flags) -> void
 {
     flags_ = flags;
+    MarkPersistDirty();
 }
 
 auto CStatusEffect::AddEffectFlag(xi::StatusEffectFlag flag) -> void
 {
     flags_ |= flag;
+    MarkPersistDirty();
 }
 
 auto CStatusEffect::DelEffectFlag(xi::StatusEffectFlag flag) -> void
 {
     flags_ &= ~flag;
+    MarkPersistDirty();
 }
 
 auto CStatusEffect::HasEffectFlag(xi::StatusEffectFlag flag) const -> bool
@@ -196,6 +208,7 @@ auto CStatusEffect::SetIcon(uint16 icon) -> void
     }
 
     icon_ = icon;
+    MarkPersistDirty();
     owner_->StatusEffectContainer->UpdateStatusIcons();
 }
 
@@ -214,11 +227,13 @@ auto CStatusEffect::SetSource(uint16 sourceType, uint32 sourceTypeParam) -> void
 {
     sourceType_      = sourceType;
     sourceTypeParam_ = sourceTypeParam;
+    MarkPersistDirty();
 }
 
 auto CStatusEffect::SetOriginID(uint32 originID) -> void
 {
     originID_ = originID;
+    MarkPersistDirty();
 }
 
 auto CStatusEffect::SetEffectType(uint16 type) -> void
@@ -234,32 +249,38 @@ auto CStatusEffect::SetEffectSlot(uint8 slot) -> void
 auto CStatusEffect::SetPower(uint16 power) -> void
 {
     power_ = power;
+    MarkPersistDirty();
 }
 
 auto CStatusEffect::SetSubPower(uint16 subPower) -> void
 {
     subPower_ = subPower;
+    MarkPersistDirty();
 }
 
 auto CStatusEffect::SetTier(uint16 tier) -> void
 {
     tier_ = tier;
+    MarkPersistDirty();
 }
 
 auto CStatusEffect::SetDuration(timer::duration duration) -> void
 {
     duration_ = duration;
+    MarkPersistDirty();
 }
 
 auto CStatusEffect::SetStartTime(timer::time_point startTime) -> void
 {
     tickCount_ = 0;
     startTime_ = startTime;
+    MarkPersistDirty();
 }
 
 auto CStatusEffect::SetTickTime(timer::duration tick) -> void
 {
     tickTime_ = tick;
+    MarkPersistDirty();
 }
 
 auto CStatusEffect::IncrementElapsedTickCount() -> void
