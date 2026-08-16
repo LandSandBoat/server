@@ -158,7 +158,7 @@ bool CLuaTradeContainer::confirmItem(uint16 itemID, const sol::object& amountObj
 {
     uint32 amount = amountObj.is<uint32>() ? amountObj.as<uint32>() : 1;
 
-    // Every slot the offer can occupy, matching what the quantity getters already scan
+    // matches the range the quantity getters scan
     for (uint8 slotID = 0; slotID < m_pMyTradeContainer->getSize(); ++slotID)
     {
         if (m_pMyTradeContainer->getItemID(slotID) == itemID)

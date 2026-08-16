@@ -32,7 +32,7 @@ class CLuaTradeContainer
 {
     CTradeContainer* m_pMyTradeContainer;
 
-    // The offer's owner, which is how the items themselves are reached
+    // the owner, used to find the transaction holding the offered items
     CCharEntity* m_owner{};
 
 public:
@@ -59,7 +59,7 @@ public:
     void   clean();
 
 private:
-    // The offer lives in the transaction, so the items come from there rather than the container
+    // the items live in the transaction, the container only describes the offer
     auto tradedItem(uint8 slotID) const -> CItem*;
     auto confirmQuantity(uint8 slotID, uint32 quantity) const -> bool;
 

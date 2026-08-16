@@ -62,8 +62,8 @@ auto SynthTransaction::start(CCharEntity* player, const SynthOffer& offer) -> st
 
     auto transaction = std::unique_ptr<SynthTransaction>(new SynthTransaction(xi::Badge<SynthTransaction>{}, player));
 
-    // A synth that never started charges nothing, so forgetting the slots keeps the rollback that
-    // follows from consuming what was claimed on the way in
+    // clears the slots so the rollback in the destructor consumes nothing. reversible() is false,
+    // so without this a refused start would still charge the ingredients
     const auto abandon = [&transaction]() -> std::unique_ptr<SynthTransaction>
     {
         transaction->slots_ = {};
@@ -142,7 +142,7 @@ void SynthTransaction::consumeCrystal()
     }
     else
     {
-        // What is left of the stack is the player's again, the synth only ever wanted the one
+        // only one crystal is used, so the rest of the stack goes back to the player now
         this->release(slot.claimed);
     }
 
@@ -210,9 +210,8 @@ auto SynthTransaction::doCommit() -> bool
     return true;
 }
 
-// Synth rollbacks LOSE EVERYTHING on purpose.
-// Drop any pending result so an accidental rollback never delivers an item.
-// A synth is spent the moment it starts, so walking away from one keeps nothing back
+// Synth rollbacks LOSE EVERYTHING on purpose: the ingredients are spent the moment the synth
+// starts, so disconnecting mid-craft must not hand them back
 auto SynthTransaction::reversible() const -> bool
 {
     return false;
@@ -224,10 +223,10 @@ void SynthTransaction::doRollback()
     std::ignore = doCommit();
 }
 
-// The client greys a claimed ingredient out for as long as the synth holds it
+// the client greys out an ingredient for as long as the synth holds it
 auto SynthTransaction::claimAndLock(CItem* item) -> ItemId
 {
-    // A recipe can draw several units from one stack, and the client only needs telling once
+    // a recipe can draw several units from one stack, and the client only needs telling once
     const bool alreadyHeld = this->holds(item);
 
     const auto claimed = this->claim(this->player_, item);
@@ -239,7 +238,7 @@ auto SynthTransaction::claimAndLock(CItem* item) -> ItemId
     return claimed;
 }
 
-// Whatever survived the synth is the player's to use again
+// unlocks the ingredients that are still claimed
 void SynthTransaction::unlockAll()
 {
     for (const auto& claimed : this->claims())

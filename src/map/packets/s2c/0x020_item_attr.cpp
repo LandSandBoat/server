@@ -34,7 +34,7 @@
 namespace
 {
 
-// Bazaar price, equipment and furniture each have their own signal, so the client flag is derived
+// derived from ItemState and type rather than read back from the item's subtype
 // rather than read back out of the item's subtype
 auto lockFlagFor(const CItem* PItem) -> ItemLockFlg
 {

@@ -132,7 +132,7 @@ void dboxutils::AddItemsToBeSent(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
         return;
     }
 
-    // Held across the insert below so the stack cannot be spent while the row is being written
+    // held across the insert below, so the stack cannot be spent while the row is written
     CItem* PItem = transaction->claimSlot(LOC_INVENTORY, ItemWorkNo);
 
     if (ItemStacks == 0 || !PItem)
@@ -199,7 +199,7 @@ void dboxutils::AddItemsToBeSent(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
                 return;
             }
 
-            // The row is already committed, so it has to come out again if the stack does not
+            // the row is already committed, so delete it again if the stack cannot be taken
             transaction->undoWith(
                 [charid = PChar->id, PostWorkNo]()
                 {

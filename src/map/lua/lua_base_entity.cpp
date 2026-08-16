@@ -4777,7 +4777,7 @@ bool CLuaBaseEntity::delContainerItems(const sol::object& containerID)
 
         if (PItem != nullptr)
         {
-            // One per slot, so a slot that refuses to empty does not strand the rest
+            // one transaction per slot, so a slot that refuses to empty does not strand the rest
             auto transaction = ItemClaimTransaction::start(PChar);
             if (!transaction || !transaction->take(location, i, PItem->getQuantity()) || !transaction->commit())
             {
@@ -5768,7 +5768,7 @@ auto CLuaBaseEntity::getStorageItem(uint8 container, uint8 slotID, uint8 equipID
 
 uint8 CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, const sol::table& extraTable, const sol::table& storableItemIdsTable)
 {
-    // Anything the script does not recognise leaves the gear alone and plays no cutscene
+    // an unknown slip leaves the gear alone and plays no cutscene
     constexpr uint8 storeFailed = 3;
 
     if (m_PBaseEntity->objtype != TYPE_PC)
@@ -5793,7 +5793,7 @@ uint8 CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, const sol::table& ext
         return storeFailed;
     }
 
-    // The gear is sitting in the trade window, so it is that offer which has to give it up
+    // the gear is in the trade window, so it is consumed through the trade transaction
     auto* transaction = PChar->activeTransaction<NpcTradeTransaction>();
     if (!transaction)
     {
@@ -5804,7 +5804,7 @@ uint8 CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, const sol::table& ext
     const auto extraVec        = extraTable.as<std::vector<uint8>>();
     const auto storableItemIds = storableItemIdsTable.as<std::vector<uint16>>();
 
-    // Refuse the whole lot before anything is written, so a slip never records gear it did not take
+    // confirm every piece before writing the slip, so it never records gear that was not taken
     for (size_t i = 0; i < extraVec.size() && i < CItem::extra_size; ++i)
     {
         if ((slip->m_extra[i] & extraVec[i]) != 0)
@@ -5929,7 +5929,7 @@ void CLuaBaseEntity::retrieveItemFromSlip(uint16 slipId, uint16 itemId, uint16 e
         return;
     }
 
-    // Cleared only once the item is in hand, so a full inventory cannot lose it
+    // cleared only after the item lands, so a full inventory does not lose it
     slip->m_extra[extraId] &= extraData;
 
     const char* Query = "UPDATE char_inventory "

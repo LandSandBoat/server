@@ -303,7 +303,7 @@ void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PC
     // Continue with regular usage
     if (PItem->getID() == this->MyroomItemNo && PItem->isType(ITEM_FURNISHING))
     {
-        // Moving an already placed furnishing keeps its state, and marking only moves between states
+        // already PlacedFurniture, and mark() only moves between states
         if (PItem->state() != ItemState::PlacedFurniture && !xi::items::mark(PItem, ItemState::PlacedFurniture))
         {
             ShowWarningFmt("GP_CLI_COMMAND_MYROOM_LAYOUT: could not mark furnishing {} for {}", PItem->getID(), PChar->getName());

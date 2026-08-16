@@ -150,7 +150,7 @@ auto PlayerTradeTransaction::accept(const CCharEntity* who) -> bool
     return this->sides_[0].accepted && this->sides_[1].accepted;
 }
 
-// Runs from the destructor too, so it must not touch either character
+// also runs from the destructor, so it must not touch either character
 void PlayerTradeTransaction::releaseSlot(Slot& slot)
 {
     this->release(slot.staged);
@@ -259,7 +259,7 @@ void PlayerTradeTransaction::closeAndRemove()
 {
     auto* initiator = charOf(this->sides_[0]);
 
-    // A side that no longer resolves has nothing left to clean up, but the other side still does
+    // a side that no longer resolves has nothing to clean up; the other side still does
     for (const auto& side : this->sides_)
     {
         if (auto* PChar = charOf(side))
@@ -270,7 +270,7 @@ void PlayerTradeTransaction::closeAndRemove()
 
     this->rollbackIfOpen();
 
-    // Owned by the initiator, so if they are gone the transaction went with them
+    // owned by the initiator, so if they are gone the transaction went with them
     if (initiator)
     {
         initiator->removeTransaction(this);
@@ -384,13 +384,13 @@ auto PlayerTradeTransaction::canReceive(const Side& sender, CCharEntity* receive
                                 });
 }
 
-// Deliver to both sides before consuming either, so a failed delivery can be undone
+// deliver to both sides before consuming either, so a failed delivery can still be undone
 auto PlayerTradeTransaction::doCommit() -> bool
 {
     auto* initiator = charOf(this->sides_[0]);
     auto* target    = charOf(this->sides_[1]);
 
-    // Nobody to hand anything to, so there is no trade left to make
+    // one side is gone, so there is nothing left to exchange
     if (!initiator || !target)
     {
         return false;
@@ -415,7 +415,7 @@ auto PlayerTradeTransaction::doCommit() -> bool
                 continue;
             }
 
-            // Cloned rather than spawned by id so exdata, signature and augments survive the trade
+            // cloned rather than spawned by id, so exdata, signature and augments survive the trade
             auto clone = xi::items::clone(*PStaged);
             if (!clone)
             {
@@ -455,7 +455,7 @@ auto PlayerTradeTransaction::doCommit() -> bool
         return true;
     };
 
-    // A failure anywhere rolls the whole exchange back, so neither side can end up short
+    // a failure anywhere rolls the whole exchange back, so neither side ends up short
     return deliverSide(this->sides_[0], target) &&
            deliverSide(this->sides_[1], initiator) &&
            consumeSide(this->sides_[0]) &&

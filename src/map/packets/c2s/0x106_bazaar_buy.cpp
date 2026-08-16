@@ -91,7 +91,7 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
         return;
     }
 
-    // Only needed to price the sale, the transaction validates and claims it
+    // only used to price the sale. The transaction validates and claims it
     const CItem* PCharGil = PBuyerInventory->GetItem(0);
     if (PCharGil == nullptr)
     {

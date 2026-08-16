@@ -37,17 +37,15 @@ class CItem;
 
 // What a player has put in an NPC's trade window.
 //
-// stage() claims each offered stack, so nothing can equip, sell or bazaar it while the script
-// decides what to do. A script marks what it wants with confirm(), and everything it did not
-// want is let go by releaseUnconfirmed() as soon as onTrade returns - matching what the window
-// shows the player.
+// stage() claims each offered stack. A script marks what it wants with confirm(), and
+// releaseUnconfirmed() gives the rest back as soon as onTrade returns.
 //
-// The claim on a confirmed slot outlives onTrade, because a script may open an event and only
-// consume once that event finishes, many ticks later. It ends at consumeConfirmed/consumeAll, or
-// when the next trade replaces this one.
+// A confirmed slot keeps its claim past onTrade, since a script may open an event and consume
+// only when that event finishes, many ticks later. It ends at consumeConfirmed/consumeAll, when
+// the next trade replaces this one, at the end of the event, or when the player leaves the zone.
 //
-// This owns the item pointers and the confirmed counts. CTradeContainer keeps only the
-// description of the offer - ids, slots and quantities - which is what the script API reads.
+// The claims and confirmed counts live here. CTradeContainer keeps only the offer description -
+// ids, slots and quantities - which is what the script API reads.
 
 class NpcTradeTransaction final : public Transaction
 {
@@ -63,15 +61,15 @@ public:
 
     auto item(uint8 tradeSlot) -> CItem*;
 
-    // How much of the slot was offered, and how much of that the script asked for
+    // how much the slot offered, and how much of it the script confirmed
     auto quantity(uint8 tradeSlot) const -> uint32;
     auto confirmedQuantity(uint8 tradeSlot) const -> uint32;
     auto confirm(uint8 tradeSlot, uint32 quantity) -> bool;
 
-    // Confirms an offered stack by what it is rather than where it sits in the window
+    // confirms by item id rather than by trade slot
     [[nodiscard]] auto confirmById(uint16 itemId, uint32 quantity) -> bool;
 
-    // Everything the script passed on goes back to the player as soon as onTrade returns
+    // releases the claim on every slot the script did not confirm
     void releaseUnconfirmed();
 
     // Consumes what the script confirmed, then closes. False if any of it could not be taken
@@ -87,16 +85,16 @@ protected:
 private:
     struct Slot
     {
-        // The offer outlives the claim, so the stack is resolved on demand rather than remembered
+        // the offer outlives the claim, so the stack is resolved on demand
         ItemId offered{};
         uint32 quantity{};
         uint32 confirmed{};
     };
 
-    // The stack an offer refers to, re-claimed if it was let go after onTrade
+    // resolves the offered stack, re-claiming it if the claim was released after onTrade
     auto resolve(Slot& slot) -> CItem*;
 
-    // Takes `quantity` from the slot's stack and drops the claim on whatever is left
+    // takes quantity from the slot and clears it
     [[nodiscard]] auto consumeSlot(Slot& slot, uint32 quantity) -> bool;
 
     CCharEntity*                     player_{};

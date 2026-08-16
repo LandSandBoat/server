@@ -91,7 +91,7 @@ describe('PlayerTradeTransaction', function()
         local item = findItem(p1, gear)
         local slot = item:getSlotID()
 
-        -- Equipping is a claim like any other, so the trade window must refuse it
+        -- equipped items are busy, so the trade window has to refuse them
         p1:equipItem(gear, xi.inventoryLocation.INVENTORY, xi.slot.MAIN)
         assert(item:state() == xi.itemState.EQUIPPED, 'state: ' .. tostring(item:state()))
 

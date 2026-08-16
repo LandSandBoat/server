@@ -65,7 +65,7 @@ struct ItemAccess
             return;
         }
 
-        // Only a claim can be released. Anything else belongs to somebody who is still using it
+        // only InTransaction is released here. Equipped, Bazaar and PlacedFurniture have their own paths
         if (item->state() != ItemState::InTransaction)
         {
             ShowErrorFmt("ItemAccess::exitTransaction: item {} is not claimed (current={})",

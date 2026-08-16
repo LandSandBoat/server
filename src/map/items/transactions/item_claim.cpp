@@ -99,7 +99,7 @@ auto ItemClaimTransaction::split(const uint8 fromLocation, const uint8 fromSlot,
         return false;
     }
 
-    // Taken before it is handed back out, so a failure halfway can never leave both halves
+    // take before give, so a failure halfway cannot leave the player holding both halves
     const uint16 itemId = PItem->getID();
 
     return this->take(fromLocation, fromSlot, quantity) && this->give(toLocation, itemId, quantity).has_value();
@@ -107,7 +107,7 @@ auto ItemClaimTransaction::split(const uint8 fromLocation, const uint8 fromSlot,
 
 auto ItemClaimTransaction::moveBetween(const uint8 fromLocation, const uint8 fromSlot, const uint8 toLocation, const uint8 toSlot, const uint32 quantity) -> bool
 {
-    // The source shrinks first, so a failure halfway can never leave the quantity counted twice
+    // shrink the source first, so a failure halfway cannot leave the quantity counted twice
     if (!this->take(fromLocation, fromSlot, quantity))
     {
         return false;

@@ -89,7 +89,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
         return;
     }
 
-    // The pot cannot be its own seed. Spending it would destroy the very item written to below
+    // the pot cannot be its own seed, since spending it would destroy the item written to below
     if (this->MyroomAddCategory == this->MyroomPlantCategory &&
         this->MyroomAddItemIndex == this->MyroomPlantItemIndex)
     {
@@ -97,7 +97,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
         return;
     }
 
-    // What the client says it is planting has to be what actually sits in the slot
+    // the client sends the item id, which has to match what is actually in the slot
     const auto* PAddItem = PChar->getStorage(this->MyroomAddCategory)->GetItem(this->MyroomAddItemIndex);
     if (!PAddItem || PAddItem->getID() != this->MyroomAddItemNo)
     {
@@ -117,7 +117,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
         return;
     }
 
-    // Spent before the pot is touched, so a pot that refuses the item hands it straight back
+    // take the seed before touching the pot, so a pot that refuses it rolls back
     if (!transaction->take(this->MyroomAddCategory, this->MyroomAddItemIndex, 1))
     {
         ShowWarningFmt("GP_CLI_COMMAND_MYROOM_PLANT_ADD: {} could not spend item {}", PChar->getName(), PItem->getID());
@@ -158,7 +158,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
         }
     }
 
-    // A pot that took nothing leaves through the rollback, which puts the item back
+    // no commit, so the destructor rolls back and the seed goes back to the player
     if (!updatedPot || !transaction->commit())
     {
         return;

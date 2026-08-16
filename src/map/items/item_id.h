@@ -28,10 +28,9 @@
 class CCharEntity;
 class CItem;
 
-// A resolvable reference to an item.
-// Holds enough context to find the stack again at a later time in a safe fashion, which a raw
-// pointer cannot: a stack consumed to nothing is freed, and the slot it occupied can be filled
-// by something that merely looks the same.
+// A reference to an item that can outlive the item itself.
+// A CItem* cannot: a stack consumed to nothing is freed, and its slot can be refilled by a
+// different stack of the same item.
 struct ItemId
 {
     ItemId() = default;
@@ -49,11 +48,6 @@ struct ItemId
     uint8    location{ 0xFF }; // Container it sat in.
     uint8    slot{ 0xFF };     // Slot within that container.
 
-    // Look the stack up again, or nullptr if it is gone or something else now holds its slot
-    //
-    //     if (auto* PItem = offered.resolve())
-    //     {
-    //         PItem->doThing();
-    //     }
+    // Looks the item up again. Null if it is gone, or if another stack now occupies the slot
     [[nodiscard]] auto resolve() const -> CItem*;
 };

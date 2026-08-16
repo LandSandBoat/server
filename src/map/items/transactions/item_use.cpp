@@ -45,7 +45,7 @@ auto ItemUseTransaction::start(CCharEntity* player, CItemUsable* item) -> std::u
 
     auto transaction = std::unique_ptr<ItemUseTransaction>(new ItemUseTransaction(xi::Badge<ItemUseTransaction>{}, player, item, takesCustody));
 
-    // Claimed first, so a refusal never leaves a transaction holding something it does not own
+    // claimed after construction so a refusal drops the transaction with nothing held
     if (takesCustody && !transaction->claim(player, item).isSet())
     {
         return nullptr;

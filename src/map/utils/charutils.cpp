@@ -7550,7 +7550,7 @@ void removeCharFromZone(CCharEntity* PChar)
         tradeTransaction->abort(PChar);
     }
 
-    // An offer left open would keep its claim, and the goods with it
+    // an offer left open would keep its claim on the goods
     if (auto* npcTrade = PChar->activeTransaction<NpcTradeTransaction>())
     {
         PChar->removeTransaction(npcTrade);

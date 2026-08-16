@@ -35,10 +35,9 @@ class CItem;
 
 // Transaction for one bazaar purchase.
 //
-// start() takes the listing off display and claims it along with both gil stacks, so nothing
-// else can spend or sell them while the sale is assembled. Committing hands the item to the
-// buyer, moves gil both ways and consumes the seller's stack, undoing the delivery if the
-// buyer cannot pay. Whatever is left of the listing goes back on display either way.
+// start() takes the listing off display and claims it. Committing delivers a copy to the buyer,
+// moves the gil both ways and consumes the seller's stack; a failure at any step undoes the
+// earlier ones. What is left of the listing goes back on display either way.
 
 class BazaarPurchaseTransaction : public Transaction
 {
@@ -50,7 +49,7 @@ public:
 
     DISALLOW_COPY_AND_MOVE(BazaarPurchaseTransaction);
 
-    // Where the buyer received the goods, only meaningful after a successful commit
+    // slot the buyer received the goods in. Only valid after a successful commit
     auto deliveredSlot() const -> uint8;
 
 protected:

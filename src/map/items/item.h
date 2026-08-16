@@ -85,7 +85,7 @@ public:
     bool isType(ITEM_TYPE) const;
     bool isSubType(ITEM_SUBTYPE) const;
 
-    // Tells this stack apart from any other, including one that merely looks the same
+    // process-unique, never reused. Distinguishes this stack from an identical one
     auto uid() const -> uint64;
     bool isStorageSlip() const;
 

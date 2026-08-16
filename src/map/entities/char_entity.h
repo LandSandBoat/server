@@ -538,7 +538,7 @@ public:
     template <typename T>
     auto addTransaction(std::unique_ptr<T> transaction) -> T*
     {
-        // A transaction that refused to start is a refused operation, not a reason to take the server down
+        // a transaction that refused to start is a refused operation, not a fatal error
         if (!transaction)
         {
             ShowErrorFmt("CCharEntity::addTransaction: null transaction of type {}", typeid(T).name());

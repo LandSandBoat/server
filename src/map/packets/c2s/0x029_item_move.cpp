@@ -189,7 +189,7 @@ void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar)
 
     if (const uint32 newQty = PItem->getQuantity() - this->ItemNum; newQty != 0) // split item stack
     {
-        // The source is held so the half left behind cannot be spent before the split completes
+        // claimed so the remainder cannot be spent before the split completes
         if (!transaction->claimSlot(this->Category1, this->ItemIndex1))
         {
             return;
@@ -230,7 +230,7 @@ void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar)
                 {
                     moveQty = PItem->getQuantity();
                 }
-                // Both ends are held, so neither can be spent between growing one and shrinking the other
+                // both ends claimed, so neither can be spent between the two updates
                 if (!transaction->claimSlot(this->Category1, this->ItemIndex1) || !transaction->claimSlot(this->Category2, this->ItemIndex2))
                 {
                     return;

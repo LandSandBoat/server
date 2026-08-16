@@ -64,7 +64,7 @@ auto BazaarPurchaseTransaction::start(CCharEntity* buyer, CCharEntity* seller, c
     return transaction;
 }
 
-// Both sides' gil is claimed by the payment itself, so the sale only has to secure the goods
+// pay() and earn() claim the gil, so only the listing needs claiming here
 auto BazaarPurchaseTransaction::claimListing() -> bool
 {
     auto* PListing = this->seller_->getStorage(LOC_INVENTORY)->GetItem(this->bazaarSlot_);
@@ -73,7 +73,7 @@ auto BazaarPurchaseTransaction::claimListing() -> bool
         return false;
     }
 
-    // The listing is claimed by the bazaar, so take it off display before the sale claims it
+    // a listed item is ItemState::Bazaar, which has to come off before it can be claimed
     if (PListing->state() == ItemState::Bazaar && !xi::items::mark(PListing, ItemState::Free))
     {
         return false;
@@ -86,10 +86,10 @@ auto BazaarPurchaseTransaction::claimListing() -> bool
 
 void BazaarPurchaseTransaction::restoreDisplay()
 {
-    // Nothing can go back on display while this still holds it
+    // the claim has to go first, since Bazaar can only be set on a Free item
     this->release(this->listing_);
 
-    // The stack may have been consumed entirely, so look it up again rather than trusting the pointer
+    // looked up again because a full buyout leaves nothing to put back
     auto* PRemaining = this->seller_->getStorage(LOC_INVENTORY)->GetItem(this->bazaarSlot_);
     if (!PRemaining || PRemaining->getCharPrice() == 0)
     {
@@ -124,7 +124,7 @@ auto BazaarPurchaseTransaction::doCommit() -> bool
     clone->setCharPrice(0);
     clone->setQuantity(this->quantity_);
 
-    // Every step reverses itself, so a failure here rolls the sale back and restores the display
+    // each step below records an undo, so a later failure unwinds the earlier ones
     const auto delivered = this->give(this->buyer_, LOC_INVENTORY, std::move(clone));
     if (!delivered)
     {

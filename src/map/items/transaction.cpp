@@ -50,7 +50,7 @@
 namespace
 {
 
-// Only a transaction may create or destroy an item, so the whole of it lives here
+// File-local so that nothing outside this TU can create or destroy an item
 
 auto applyItemUpdate(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quantity, const Transaction* owner) -> ItemMutation
 {
@@ -152,7 +152,7 @@ auto applyAddItem(CCharEntity* PChar, uint8 LocationID, std::unique_ptr<CItem> P
 {
     if (PItem->isType(ITEM_CURRENCY))
     {
-        // Currency lands on the stack the transaction may already hold, so it keeps the owner
+        // currency merges into slot 0 rather than taking a new slot, so it routes through updateItem
         if (!applyItemUpdate(PChar, LocationID, 0, PItem->getQuantity(), owner).applied)
         {
             ShowErrorFmt("AddItem: could not give {} currency to {}", PItem->getQuantity(), PChar->getName());
@@ -264,8 +264,8 @@ auto Transaction::commit() -> bool
         return false;
     }
 
-    // The work happens while the claims still stand, so each step keeps the right to what it touches.
-    // A refusal keeps them, since the rollback that follows still has to put things back
+    // doCommit runs with the claims still held, since its steps mutate what it claimed. A refusal
+    // keeps them for the rollback that follows
     if (!this->doCommit())
     {
         ShowWarningFmt("Transaction::commit: doCommit rejected for tx {}", this->id_);
@@ -288,8 +288,7 @@ void Transaction::rollback()
         return;
     }
 
-    // The work comes undone before the claims go, so each step still owns what it is putting back.
-    // One that cannot be taken back keeps what it did, and only forgets how to reverse it
+    // undos run before the claims are dropped, since they mutate the same stacks
     if (this->reversible())
     {
         this->runUndos();
@@ -311,7 +310,7 @@ auto Transaction::claim(const CCharEntity* owner, CItem* item) -> ItemId
         return {};
     }
 
-    // Claiming the same stack twice is the same claim, and letting it go once must be enough
+    // one entry per stack, so a single release is enough
     if (this->holds(item))
     {
         return ItemId(owner, item);
@@ -329,19 +328,19 @@ auto Transaction::claim(const CCharEntity* owner, CItem* item) -> ItemId
 
 void Transaction::release(const ItemId& claimed)
 {
-    const auto held = std::ranges::find(this->claims_, claimed);
-    if (held == this->claims_.end())
+    const auto entry = std::ranges::find(this->claims_, claimed);
+    if (entry == this->claims_.end())
     {
         return;
     }
 
-    // A stack consumed to nothing no longer resolves, so there is nothing left of it to release
-    if (auto* PItem = held->resolve())
+    // a stack consumed to nothing was freed with its container entry, so it no longer resolves
+    if (auto* PItem = entry->resolve())
     {
         exitTx(PItem);
     }
 
-    this->claims_.erase(held);
+    this->claims_.erase(entry);
 }
 
 void Transaction::releaseAll()
@@ -444,7 +443,7 @@ auto Transaction::take(CCharEntity* PChar, const uint8 location, const uint8 slo
         return false;
     }
 
-    // A stack about to vanish is copied first, so putting it back keeps exdata, signature and augments
+    // copied before it is freed so the undo can restore exdata, signature and augments
     std::unique_ptr<CItem> restore;
     if (PItem->getQuantity() == quantity)
     {
@@ -490,7 +489,7 @@ auto Transaction::take(CCharEntity* PChar, const uint8 location, const uint8 slo
     return true;
 }
 
-// Money moves like anything else, so the stack is claimed for as long as the transaction runs
+// Gil is claimed like any other stack, and stays held for the rest of the transaction
 auto Transaction::claimGil(CCharEntity* PChar) -> bool
 {
     if (!PChar)

@@ -51,7 +51,7 @@ auto ItemId::isSet() const -> bool
 
 auto ItemId::operator==(const ItemId& other) const -> bool
 {
-    // Two references to nothing are not a reference to the same thing
+    // an unset reference matches nothing, including another unset one
     return this->isSet() && this->uid == other.uid;
 }
 
@@ -79,7 +79,7 @@ auto ItemId::resolve() const -> CItem*
         return nullptr;
     }
 
-    // The slot is where it was, not proof of what is there now
+    // the slot is where it was, so the uid decides whether this is still the same stack
     CItem* PItem = PContainer->GetItem(this->slot);
 
     return (*this == PItem) ? PItem : nullptr;

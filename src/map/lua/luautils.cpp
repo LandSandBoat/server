@@ -87,6 +87,7 @@
 #include "instance.h"
 #include "ipc_client.h"
 #include "items/item_furnishing.h"
+#include "items/transactions/npc_trade.h"
 #include "map/navmesh/navmesh.h"
 #include "map_engine.h"
 #include "mobskill.h"
@@ -2746,6 +2747,16 @@ int32 OnEventFinish(CCharEntity* PChar, uint16 eventID, uint32 result)
 
     // Restore eventPreparation before potentially bailing out of function due to errors
     PChar->eventPreparation = previousPrep;
+
+    // a script that confirmed goods but never consumed them would keep the claim past the event,
+    // leaving the items stuck InTransaction. Nothing is taken, the player gets them back
+    if (auto* offer = PChar->activeTransaction<NpcTradeTransaction>())
+    {
+        ShowWarningFmt("luautils::OnEventFinish: {} left a trade open at the end of event {}", PChar->getName(), eventID);
+
+        PChar->removeTransaction(offer);
+        PChar->TradeContainer->Clean();
+    }
 
     if (!func_result.valid())
     {

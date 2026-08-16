@@ -136,7 +136,7 @@ void NpcTradeTransaction::releaseUnconfirmed()
 {
     for (auto& slot : this->slots_)
     {
-        // The offer stays, so a script can still confirm it during a later event
+        // the offer is kept, so a script can still confirm it during a later event
         if (slot.confirmed == 0)
         {
             this->release(slot.offered);
@@ -144,18 +144,18 @@ void NpcTradeTransaction::releaseUnconfirmed()
     }
 }
 
-// A script may open an event from onTrade and only confirm once it finishes, by which point the
-// claim is gone. The offer still names a slot, so the stack is looked up again and taken back
+// releaseUnconfirmed may already have dropped the claim, so this re-takes it. Needed when a script
+// opens an event from onTrade and confirms only once that event finishes
 auto NpcTradeTransaction::resolve(Slot& slot) -> CItem*
 {
-    // Resolved by identity, so a lookalike sitting in the slot is not the thing that was offered
+    // by uid, so a different stack that has since taken the slot is not mistaken for the offer
     CItem* PItem = slot.offered.resolve();
     if (!PItem)
     {
         return nullptr;
     }
 
-    // Re-claimed if the claim was let go after onTrade, though the offer never stopped naming it
+    // claim() returns the existing claim if it was never released
     return this->claim(this->player_, PItem).isSet() ? PItem : nullptr;
 }
 
@@ -171,7 +171,7 @@ auto NpcTradeTransaction::consumeConfirmed() -> bool
         }
     }
 
-    // Committing what did land, while telling the caller the offer was not honoured in full
+    // commits whatever was taken, but reports that the offer was not taken in full
     return this->commit() && tookEverything;
 }
 
@@ -187,7 +187,7 @@ auto NpcTradeTransaction::consumeAll() -> bool
         }
     }
 
-    // Committing what did land, while telling the caller the offer was not honoured in full
+    // commits whatever was taken, but reports that the offer was not taken in full
     return this->commit() && tookEverything;
 }
 

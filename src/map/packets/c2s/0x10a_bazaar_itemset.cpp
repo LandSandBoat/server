@@ -73,7 +73,7 @@ void GP_CLI_COMMAND_BAZAAR_ITEMSET::process(MapSession* PSession, CCharEntity* P
             return ItemState::Bazaar;
         }();
 
-        // Re-pricing leaves the item where it already is, and marking only moves between states
+        // already Bazaar, and mark() only moves between states
         if (PItem->state() != bazaarState && !xi::items::mark(PItem, bazaarState))
         {
             ShowWarningFmt("GP_CLI_COMMAND_BAZAAR_ITEMSET: could not mark item {} for {}", PItem->getID(), PChar->getName());

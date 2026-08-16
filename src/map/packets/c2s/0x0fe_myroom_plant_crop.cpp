@@ -113,7 +113,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CROP::process(MapSession* PSession, CCharEntity
                     break;
                 }
 
-                // Overflows into the second safe when the first has no room left
+                // falls through to the second safe when the first is full
                 const bool stored = transaction->give(LOC_MOGSAFE, resultID, quantity).has_value() ||
                                     (safe2Unlocked && transaction->give(LOC_MOGSAFE2, resultID, quantity).has_value());
 

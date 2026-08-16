@@ -34,11 +34,10 @@
 class CCharEntity;
 class CItem;
 
-// One operation's claim over the stacks it touches, for work that needs no bookkeeping of its own.
+// Transaction for an operation that needs no bookkeeping of its own.
 //
-// claimSlot() stamps a stack InTransaction so nothing else can spend, sell or bazaar it while the
-// operation runs. The steps themselves - give, take, pay, earn, and their reversal - come from
-// Transaction; these overloads only spare the caller naming the player every time.
+// give, take, pay, earn and their undos all come from Transaction; the overloads here only save
+// the caller passing the same player to every one of them.
 
 class ItemClaimTransaction final : public Transaction
 {
@@ -50,27 +49,27 @@ public:
 
     DISALLOW_COPY_AND_MOVE(ItemClaimTransaction);
 
-    // Claims the stack in a slot, refusing one that is already spoken for. Null if it cannot be had
+    // claims the stack in a slot. Null if the slot is empty or the item is already busy
     [[nodiscard]] auto claimSlot(uint8 location, uint8 slot) -> CItem*;
 
-    // The player's gil, claimed for the operation. Only needed to read the balance before acting,
-    // since pay() and earn() claim it themselves. Null if slot 0 does not hold spendable currency
+    // claims and returns the gil stack, for reading the balance before spending it. pay() and
+    // earn() claim it themselves, so this is only needed up front. Null if slot 0 is not currency
     [[nodiscard]] auto claimGil() -> CItem*;
 
-    // The operation's own player is implied, which is all these ever act on
+    // same as Transaction's, with the player implied
     [[nodiscard]] auto give(uint8 location, uint16 itemId, uint32 quantity, Silence silence = Silence::No) -> std::optional<uint8>;
     [[nodiscard]] auto give(uint8 location, std::unique_ptr<CItem> item, Silence silence = Silence::No) -> std::optional<uint8>;
     [[nodiscard]] auto take(uint8 location, uint8 slot, uint32 quantity) -> bool;
     [[nodiscard]] auto pay(uint32 gil) -> bool;
     [[nodiscard]] auto earn(uint32 gil) -> bool;
 
-    // Peels quantity off a stack into a new one. Reversed as a whole
+    // splits quantity off a stack into a new one. Undone as a unit
     [[nodiscard]] auto split(uint8 fromLocation, uint8 fromSlot, uint8 toLocation, uint32 quantity) -> bool;
 
-    // Moves quantity between two stacks of the same item. Reversed as a whole
+    // merges quantity between two stacks of the same item. Undone as a unit
     [[nodiscard]] auto moveBetween(uint8 fromLocation, uint8 fromSlot, uint8 toLocation, uint8 toSlot, uint32 quantity) -> bool;
 
-    // For work this cannot reverse on its own, such as a row written outside the item tables
+    // undo for work outside the item tables, run in reverse order on rollback
     using Transaction::undoWith;
 
 protected:
