@@ -6139,6 +6139,13 @@ CBaseEntity* GenerateDynamicEntity(CZone* PZone, CInstance* PInstance, sol::tabl
         const auto respawn = table["respawn"].get_or<uint32>(0);
         if (respawn > 0)
         {
+            if (PMob->m_bReleaseTargIDOnDisappear)
+            {
+                ShowWarning("luautils::GenerateDynamicEntity: %s in zone %s asks for respawn but also releaseIdOnDisappear. It will not respawn.",
+                            PMob->name.c_str(),
+                            PZone->getName().c_str());
+            }
+
             PMob->m_RespawnTime  = std::chrono::seconds(respawn);
             PMob->m_AllowRespawn = true;
         }

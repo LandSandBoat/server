@@ -164,7 +164,14 @@ void LoadWeaponSkillsList()
                                        MAX_WEAPONSKILL_ID);
     FOR_DB_MULTIPLE_RESULTS(rset)
     {
-        auto* PWeaponSkill = new CWeaponSkill(rset->get<uint16>("weaponskillid"));
+        const auto weaponSkillId = rset->get<uint16>("weaponskillid");
+        if (weaponSkillId >= MAX_WEAPONSKILL_ID)
+        {
+            ShowErrorFmt("weaponskillid {} is out of range, MAX_WEAPONSKILL_ID is {}. Skipping.", weaponSkillId, MAX_WEAPONSKILL_ID);
+            continue;
+        }
+
+        auto* PWeaponSkill = new CWeaponSkill(weaponSkillId);
 
         PWeaponSkill->setName(rset->get<std::string>("name"));
 
@@ -207,7 +214,14 @@ void LoadMobSkillsList()
                                  "FROM mob_skills");
     FOR_DB_MULTIPLE_RESULTS(rset)
     {
-        auto* PMobSkill = new CMobSkill(rset->get<uint16>("mob_skill_id"));
+        const auto mobSkillId = rset->get<uint16>("mob_skill_id");
+        if (mobSkillId >= MAX_MOBSKILL_ID)
+        {
+            ShowErrorFmt("mob_skill_id {} is out of range, MAX_MOBSKILL_ID is {}. Skipping.", mobSkillId, MAX_MOBSKILL_ID);
+            continue;
+        }
+
+        auto* PMobSkill = new CMobSkill(mobSkillId);
 
         PMobSkill->setAnimationID(rset->get<uint16>("mob_anim_id"));
         PMobSkill->setName(rset->get<std::string>("mob_skill_name"));

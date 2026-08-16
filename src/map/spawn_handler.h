@@ -34,10 +34,17 @@
 #include <memory>
 
 #include "data/enums/weather.h"
+#include "entities/entity_id.h"
 
 class CMobEntity;
 class CZone;
 class SpawnSlot;
+
+struct PendingRespawn
+{
+    EntityId          entityId;
+    timer::time_point respawnAt;
+};
 
 struct PendingSlotRespawn
 {
@@ -70,7 +77,7 @@ private:
     CZone* zone_;
 
     timer::duration                                spawnWindow_{ kSpawnHandlerWindow };
-    FlatHashMap<uint32, timer::time_point>         pendingRespawns_;     // Non-slotted mobs: mobId -> respawnAt timestamp
+    FlatHashMap<uint64, PendingRespawn>            pendingRespawns_;     // Non-slotted mobs: respawn key -> respawn info
     FlatHashMap<SpawnSlot*, PendingSlotRespawn>    pendingSlotRespawns_; // Slotted mobs: slot pointer -> respawn info
     std::map<uint32_t, std::unique_ptr<SpawnSlot>> spawnSlots_;          // Owns this zone's spawn slots, keyed by slot id
 };
