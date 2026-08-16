@@ -26,6 +26,7 @@
 
 #include <array>
 
+#include <common/types/flat_hash_map.h>
 #include <common/types/hash_map.h>
 #include <common/types/maybe.h>
 
@@ -235,8 +236,8 @@ protected:
 
 private:
     timer::time_point                     m_DespawnTimer{ timer::time_point::min() }; // Despawn Timer to despawn mob after set duration
-    HashMap<xi::MobMod, int16>            m_mobModStat;
-    HashMap<xi::MobMod, int16>            m_mobModStatSave;
+    FlatHashMap<xi::MobMod, int16>        m_mobModStat;
+    FlatHashMap<xi::MobMod, int16>        m_mobModStatSave;
     HashMap<uint16, std::array<float, 3>> m_fTPModifierOverrides;
     static constexpr float                roam_home_distance{ 60.f };
     SpawnSlot*                            spawnSlot = nullptr;
