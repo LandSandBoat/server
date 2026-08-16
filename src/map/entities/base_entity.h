@@ -175,7 +175,7 @@ public:
     void         SendZoneUpdate();
 
     void   ResetLocalVars();
-    uint32 GetLocalVar(const std::string& var);
+    uint32 GetLocalVar(const std::string& var) const;
     void   SetLocalVar(const std::string& var, uint32 val);
     auto   GetLocalVars() -> std::map<std::string, uint32>&;
 

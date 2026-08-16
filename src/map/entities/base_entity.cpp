@@ -254,9 +254,15 @@ void CBaseEntity::ResetLocalVars()
     localVars_.clear();
 }
 
-uint32 CBaseEntity::GetLocalVar(const std::string& var)
+uint32 CBaseEntity::GetLocalVar(const std::string& var) const
 {
-    return localVars_[var];
+    const auto it = localVars_.find(var);
+    if (it != localVars_.end())
+    {
+        return it->second;
+    }
+
+    return 0;
 }
 
 std::map<std::string, uint32>& CBaseEntity::GetLocalVars()
