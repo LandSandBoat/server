@@ -5828,30 +5828,43 @@ uint8 CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, const sol::table& ext
         }
     }
 
-    // gear is consumed before the slip is written, so a failure cannot leave the player with both
-    if (!transaction->consumeConfirmed())
-    {
-        ShowErrorFmt("CLuaBaseEntity::storeWithPorterMoogle: {} kept the gear the slip was to record", PChar->getName());
-        PChar->removeTransaction(transaction);
-        PChar->TradeContainer->Clean();
+    // the gear rows and the slip that records them commit together, so a failed slip write takes the removals with it
+    uint8      slipExtra[CItem::extra_size]{};
+    const bool stored = db::transaction(
+        [&]()
+        {
+            if (!transaction->consumeConfirmed())
+            {
+                throw std::runtime_error(fmt::format("storeWithPorterMoogle: {} kept the gear the slip was to record", PChar->getName()));
+            }
 
-        return storeFailed;
-    }
+            std::memcpy(slipExtra, slip->m_extra, CItem::extra_size);
+
+            for (size_t i = 0; i < extraVec.size() && i < CItem::extra_size; ++i)
+            {
+                slipExtra[i] |= extraVec[i];
+            }
+
+            const char* Query = "UPDATE char_inventory "
+                                "SET extra = ? "
+                                "WHERE charid = ? AND location = ? AND slot = ? "
+                                "LIMIT 1";
+
+            if (!db::preparedStmt(Query, slipExtra, PChar->id, slip->getLocationID(), slip->getSlotID()))
+            {
+                throw std::runtime_error(fmt::format("storeWithPorterMoogle: {} could not record the gear on the slip", PChar->getName()));
+            }
+        });
 
     PChar->removeTransaction(transaction);
     PChar->TradeContainer->Clean();
 
-    for (size_t i = 0; i < extraVec.size() && i < CItem::extra_size; ++i)
+    if (!stored)
     {
-        slip->m_extra[i] |= extraVec[i];
+        return storeFailed;
     }
 
-    const char* Query = "UPDATE char_inventory "
-                        "SET extra = ? "
-                        "WHERE charid = ? AND location = ? AND slot = ? "
-                        "LIMIT 1";
-
-    db::preparedStmt(Query, slip->m_extra, PChar->id, slip->getLocationID(), slip->getSlotID());
+    std::memcpy(slip->m_extra, slipExtra, CItem::extra_size);
 
     return 0;
 }

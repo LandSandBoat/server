@@ -129,11 +129,13 @@ auto ItemClaimTransaction::moveBetween(const uint8 fromLocation, const uint8 fro
     return true;
 }
 
+// the work is the caller's steps, and the base releases the claims
 auto ItemClaimTransaction::doCommit() -> bool
 {
     return true;
 }
 
+// nothing of its own to put back: the base runs the undos and releases the claims
 void ItemClaimTransaction::doRollback()
 {
 }

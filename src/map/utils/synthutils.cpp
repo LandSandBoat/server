@@ -1129,7 +1129,7 @@ void startSynth(CCharEntity* PChar, const SynthOffer& offer)
     auto* transaction = PChar->addTransaction(std::move(synthTransaction));
     if (!transaction)
     {
-        ShowWarningFmt("startSynth: {} already has a synth in flight", PChar->getName());
+        ShowWarningFmt("startSynth: {} could not start a synth", PChar->getName());
         PChar->pushPacket<GP_SERV_COMMAND_COMBINE_ANS>(PChar, SynthesisResult::CancelBadRecipe);
         return;
     }

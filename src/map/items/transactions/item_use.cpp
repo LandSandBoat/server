@@ -54,6 +54,7 @@ auto ItemUseTransaction::start(CCharEntity* player, CItemUsable* item) -> std::u
     return transaction;
 }
 
+// nothing of its own to put back: the base runs the undos and releases the claims
 void ItemUseTransaction::doRollback()
 {
 }

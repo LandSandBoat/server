@@ -1121,7 +1121,10 @@ void LoadInventory(CCharEntity* PChar)
 
                 if (PItem->getCharPrice() != 0 && !xi::items::mark(PItem.get(), ItemState::Bazaar))
                 {
-                    ShowWarningFmt("LoadInventory: could not mark bazaar item {} for {}", PItem->getID(), PChar->getName());
+                    ShowWarningFmt("LoadInventory: could not mark bazaar item {} for {}, taking it off display", PItem->getID(), PChar->getName());
+
+                    // price and state have to agree, or the item is listed with nothing guarding it
+                    PItem->setCharPrice(0);
                 }
 
                 if (PItem->isType(ITEM_LINKSHELL))

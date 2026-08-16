@@ -154,6 +154,7 @@ auto GuildSellTransaction::doCommit() -> bool
     return true;
 }
 
+// nothing of its own to put back: the base runs the undos and releases the claims
 void GuildSellTransaction::doRollback()
 {
 }

@@ -115,23 +115,36 @@ auto applyItemUpdate(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 q
 
     if (newQuantity > 0 || PItem->isType(ITEM_CURRENCY))
     {
-        db::preparedStmt("UPDATE char_inventory "
-                         "SET quantity = ? "
-                         "WHERE charid = ? AND location = ? AND slot = ?",
-                         newQuantity,
-                         PChar->id,
-                         LocationID,
-                         slotID);
+        // the row goes first: reporting applied on a failed write would let the caller hand out a reward for a stack the database still holds
+        if (!db::preparedStmt("UPDATE char_inventory "
+                              "SET quantity = ? "
+                              "WHERE charid = ? AND location = ? AND slot = ?",
+                              newQuantity,
+                              PChar->id,
+                              LocationID,
+                              slotID))
+        {
+            ShowErrorFmt("UpdateItem: could not write quantity {} of item {} for {}", newQuantity, ItemID, PChar->getName());
+
+            return {};
+        }
+
         PItem->setQuantity(newQuantity);
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_NUM>(static_cast<CONTAINER_ID>(LocationID), slotID, newQuantity);
     }
     else if (newQuantity == 0)
     {
-        db::preparedStmt("DELETE FROM char_inventory "
-                         "WHERE charid = ? AND location = ? AND slot = ?",
-                         PChar->id,
-                         LocationID,
-                         slotID);
+        if (!db::preparedStmt("DELETE FROM char_inventory "
+                              "WHERE charid = ? AND location = ? AND slot = ?",
+                              PChar->id,
+                              LocationID,
+                              slotID))
+        {
+            ShowErrorFmt("UpdateItem: could not delete item {} for {}", ItemID, PChar->getName());
+
+            return {};
+        }
+
         removed = PChar->getStorage(LocationID)->RemoveItem(slotID);
 
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, static_cast<CONTAINER_ID>(LocationID), slotID);

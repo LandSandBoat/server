@@ -109,12 +109,13 @@ auto NpcTradeTransaction::confirm(const uint8 tradeSlot, const uint32 quantity) 
     auto& slot  = this->slots_[tradeSlot];
     auto* PItem = this->resolve(slot);
 
-    if (!PItem || PItem->getQuantity() < quantity)
+    // bounded by the offer as well as the stack, so a script cannot reach past what was traded
+    if (!PItem || quantity > slot.quantity || PItem->getQuantity() < quantity)
     {
         return false;
     }
 
-    slot.confirmed = std::min(quantity, PItem->getQuantity());
+    slot.confirmed = quantity;
 
     return true;
 }
@@ -213,11 +214,13 @@ auto NpcTradeTransaction::consumeSlot(Slot& slot, const uint32 quantity) -> bool
     return true;
 }
 
+// the work is the caller's steps, and the base releases the claims
 auto NpcTradeTransaction::doCommit() -> bool
 {
     return true;
 }
 
+// nothing of its own to put back: the base runs the undos and releases the claims
 void NpcTradeTransaction::doRollback()
 {
 }

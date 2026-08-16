@@ -3683,7 +3683,8 @@ bool HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool)
             // Futae Takes 2 of Your Tools
             if (auto transaction = ItemClaimTransaction::start(PChar); !transaction || !transaction->take(LOC_INVENTORY, SlotID, 2) || !transaction->commit())
             {
-                ShowErrorFmt("battleutils: {} used Futae without spending tools in slot {}", PChar->getName(), SlotID);
+                ShowErrorFmt("battleutils: {} could not spend the tools in slot {}", PChar->getName(), SlotID);
+                return false;
             }
             else
             {
@@ -3709,7 +3710,8 @@ bool HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool)
                 {
                     if (auto transaction = ItemClaimTransaction::start(PChar); !transaction || !transaction->take(LOC_INVENTORY, SlotID, 1) || !transaction->commit())
                     {
-                        ShowErrorFmt("battleutils: {} did not spend the tool in slot {}", PChar->getName(), SlotID);
+                        ShowErrorFmt("battleutils: {} could not spend the tool in slot {}", PChar->getName(), SlotID);
+                        return false;
                     }
                     else
                     {
