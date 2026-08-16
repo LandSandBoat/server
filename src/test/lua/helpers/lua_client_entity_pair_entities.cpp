@@ -94,6 +94,14 @@ auto CLuaClientEntityPairEntities::get(const sol::object& entityQuery) const -> 
                 return entityQuery.as<CLuaTestEntity>();
             }
 
+            if (entityQuery.is<CLuaBaseEntity>())
+            {
+                if (auto* entity = entityQuery.as<CLuaBaseEntity>().GetBaseEntity())
+                {
+                    return CLuaTestEntity(parent_->engine()->scheduler(), entity);
+                }
+            }
+
             return std::nullopt;
         }
         default:

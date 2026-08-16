@@ -25,6 +25,7 @@
 #include "common/vana_time.h"
 #include "data/enums/weather.h"
 #include "entities/mob_entity.h"
+#include "instance.h"
 #include "lua/luautils.h"
 #include "spawn_slot.h"
 #include "utils/zoneutils.h"
@@ -32,6 +33,21 @@
 
 namespace
 {
+
+auto respawnKeyOf(const CMobEntity* PMob) -> uint64
+{
+    const auto runId = [&]() -> uint64
+    {
+        if (PMob->PInstance)
+        {
+            return PMob->PInstance->runId();
+        }
+
+        return 0;
+    }();
+
+    return (runId << 32) | PMob->id;
+}
 
 auto hourInWindow(const uint32 hour, const uint8 spawn, const uint8 despawn) -> bool
 {
@@ -93,7 +109,7 @@ auto SpawnHandler::getSpawnSlot(uint32_t slotId) const -> SpawnSlot*
 // Respawn timer can optionally be overriden for deaggro/scripting purposes.
 void SpawnHandler::registerForRespawn(CMobEntity* PMob, const Maybe<timer::duration> respawnTime)
 {
-    if (!PMob || !PMob->m_AllowRespawn || PMob->PInstance != nullptr)
+    if (!PMob || !PMob->m_AllowRespawn)
     {
         return;
     }
@@ -111,7 +127,7 @@ void SpawnHandler::registerForRespawn(CMobEntity* PMob, const Maybe<timer::durat
     }
     else
     {
-        pendingRespawns_[PMob->id] = respawnAt;
+        pendingRespawns_[respawnKeyOf(PMob)] = { EntityId(PMob), respawnAt };
     }
 }
 
@@ -128,7 +144,7 @@ void SpawnHandler::unregister(CMobEntity* PMob)
     }
     else
     {
-        pendingRespawns_.erase(PMob->id);
+        pendingRespawns_.erase(respawnKeyOf(PMob));
     }
 }
 
@@ -144,7 +160,7 @@ auto SpawnHandler::isRegistered(CMobEntity* PMob) const -> bool
         return pendingSlotRespawns_.contains(slot);
     }
 
-    return pendingRespawns_.contains(PMob->id);
+    return pendingRespawns_.contains(respawnKeyOf(PMob));
 }
 
 auto SpawnHandler::getRemainingRespawnTime(CMobEntity* PMob) const -> Maybe<timer::duration>
@@ -166,9 +182,9 @@ auto SpawnHandler::getRemainingRespawnTime(CMobEntity* PMob) const -> Maybe<time
     }
     else
     {
-        if (auto it = pendingRespawns_.find(PMob->id); it != pendingRespawns_.end())
+        if (auto it = pendingRespawns_.find(respawnKeyOf(PMob)); it != pendingRespawns_.end())
         {
-            const auto remaining = it->second - now;
+            const auto remaining = it->second.respawnAt - now;
             return remaining > timer::duration::zero() ? remaining : timer::duration::zero();
         }
     }
@@ -194,13 +210,13 @@ void SpawnHandler::Tick(const timer::time_point now)
         pendingRespawns_,
         [&](const auto& pair)
         {
-            if (pair.second > spawnThreshold)
+            const PendingRespawn& pending = pair.second;
+            if (pending.respawnAt > spawnThreshold)
             {
                 return false;
             }
 
-            const uint16 targid = static_cast<uint16>(pair.first & 0x0FFF);
-            auto*        PMob   = static_cast<CMobEntity*>(zone_->GetEntity(targid, TYPE_MOB));
+            auto* PMob = pending.entityId.resolve<CMobEntity>();
 
             if (!PMob)
             {
