@@ -37,6 +37,7 @@
 #include "map_networking.h"
 #include "mob_spell_list.h"
 #include "mobutils.h"
+#include "roam_region.h"
 #include "spawn_handler.h"
 #include "spawn_slot.h"
 #include "zone_instance.h"
@@ -401,6 +402,136 @@ auto LoadNPCList(Scheduler& scheduler, const std::vector<xi::ZoneId>& zoneIds) -
  *                                                                       *
  ************************************************************************/
 
+// Temporary addition to exercise roam region code until the YAML loader is wired
+void LoadRoamRegions(CZone* PZone)
+{
+    if (PZone->GetID() != xi::ZoneId::WestRonfaure)
+    {
+        return;
+    }
+
+    const RoamRegion::Ring outer{
+        { -299.00f, -43.22f, 177.00f },
+        { -299.00f, -45.26f, 191.00f },
+        { -281.00f, -49.83f, 199.00f },
+        { -257.00f, -49.26f, 225.00f },
+        { -217.00f, -55.12f, 229.00f },
+        { -215.00f, -59.15f, 241.00f },
+        { -207.00f, -59.17f, 241.00f },
+        { -201.00f, -58.53f, 233.00f },
+        { -171.93f, -57.62f, 226.23f },
+        { -145.00f, -55.31f, 213.00f },
+        { -137.00f, -57.16f, 207.00f },
+        { -123.12f, -60.66f, 208.73f },
+        { -123.12f, -60.67f, 206.94f },
+        { -122.37f, -60.64f, 206.94f },
+        { -122.37f, -60.64f, 206.19f },
+        { -122.27f, -60.64f, 206.94f },
+        { -121.52f, -60.64f, 206.94f },
+        { -121.52f, -60.62f, 208.93f },
+        { -121.00f, -60.61f, 209.00f },
+        { -115.00f, -60.78f, 221.00f },
+        { -103.00f, -60.83f, 227.00f },
+        { -89.00f, -60.63f, 215.00f },
+        { -71.00f, -60.66f, 213.00f },
+        { -53.00f, -60.87f, 211.00f },
+        { -49.00f, -60.71f, 205.00f },
+        { -43.00f, -60.26f, 205.00f },
+        { -39.00f, -59.55f, 197.00f },
+        { -37.00f, -50.84f, 115.00f },
+        { -85.00f, -51.92f, 111.00f },
+        { -93.00f, -51.68f, 129.00f },
+        { -101.00f, -51.19f, 147.00f },
+        { -124.95f, -51.31f, 150.55f },
+        { -124.96f, -51.31f, 150.61f },
+        { -124.99f, -51.31f, 150.80f },
+        { -125.00f, -51.33f, 151.00f },
+        { -128.00f, -51.35f, 151.00f },
+        { -141.00f, -52.10f, 152.93f },
+        { -141.00f, -52.10f, 153.00f },
+        { -141.50f, -52.10f, 153.00f },
+        { -155.00f, -51.21f, 155.00f },
+        { -181.00f, -52.23f, 187.00f },
+        { -197.00f, -51.58f, 191.00f },
+        { -211.00f, -51.64f, 189.00f },
+        { -229.00f, -53.22f, 179.00f },
+        { -235.00f, -51.06f, 171.00f },
+        { -235.00f, -50.82f, 155.00f },
+        { -245.00f, -50.66f, 153.00f },
+        { -255.00f, -48.14f, 143.00f },
+        { -273.00f, -42.35f, 143.00f },
+        { -277.00f, -41.74f, 151.00f },
+        { -291.00f, -40.61f, 157.00f },
+        { -293.00f, -42.15f, 171.00f },
+    };
+
+    const std::vector<RoamRegion::Ring> holes{
+        {
+            { -108.75f, -60.56f, 195.14f },
+            { -108.00f, -60.56f, 195.14f },
+            { -108.00f, -60.52f, 194.39f },
+            { -99.80f, -60.77f, 194.39f },
+            { -99.76f, -60.83f, 195.09f },
+            { -99.76f, -60.77f, 194.34f },
+            { -91.56f, -59.54f, 194.34f },
+            { -91.53f, -60.66f, 195.09f },
+            { -91.53f, -59.54f, 194.35f },
+            { -83.33f, -60.19f, 194.35f },
+            { -83.33f, -60.45f, 195.10f },
+            { -82.58f, -60.44f, 195.20f },
+            { -83.33f, -60.45f, 195.20f },
+            { -83.33f, -60.45f, 195.95f },
+            { -91.53f, -60.66f, 195.95f },
+            { -91.56f, -60.66f, 195.20f },
+            { -91.56f, -60.66f, 195.94f },
+            { -99.76f, -60.83f, 195.94f },
+            { -99.80f, -60.83f, 195.24f },
+            { -99.80f, -60.83f, 195.99f },
+            { -108.00f, -60.56f, 195.99f },
+            { -108.00f, -60.56f, 195.24f },
+        },
+        {
+            { -119.81f, -60.57f, 199.16f },
+            { -118.87f, -60.55f, 198.18f },
+            { -114.85f, -60.55f, 199.51f },
+            { -114.55f, -60.55f, 200.77f },
+            { -117.13f, -60.60f, 203.21f },
+            { -117.64f, -60.57f, 202.67f },
+            { -118.34f, -60.57f, 202.94f },
+        },
+        {
+            { -123.39f, -60.00f, 201.45f },
+            { -122.31f, -60.00f, 201.59f },
+            { -122.08f, -60.00f, 197.02f },
+            { -118.17f, -60.00f, 197.27f },
+            { -116.56f, -60.00f, 196.95f },
+            { -115.31f, -59.74f, 195.09f },
+            { -123.27f, -59.74f, 194.98f },
+        },
+    };
+
+    const auto* region = PZone->addRoamRegion("e_46", RoamRegion(outer, holes));
+
+    if (!region->hasWalkableSurface(*PZone->navMesh()))
+    {
+        ShowWarningFmt("LoadRoamRegions: e_46 does not sit on the navmesh of zone {}", static_cast<uint16>(PZone->GetID()));
+    }
+
+    // Assign the 12 mobs to the region
+    for (uint32 mobId = 17186862; mobId <= 17186872; ++mobId)
+    {
+        if (auto* PMob = dynamic_cast<CMobEntity*>(GetEntity(mobId, TYPE_MOB)))
+        {
+            PMob->setRoamRegion(region);
+        }
+    }
+
+    if (auto* PMob = dynamic_cast<CMobEntity*>(GetEntity(17186875, TYPE_MOB)))
+    {
+        PMob->setRoamRegion(region);
+    }
+}
+
 auto LoadMOBList(Scheduler& scheduler, const std::vector<xi::ZoneId>& zoneIds) -> Task<void>
 {
     TracyZoneScoped;
@@ -635,6 +766,8 @@ auto LoadMOBList(Scheduler& scheduler, const std::vector<xi::ZoneId>& zoneIds) -
         zoneIds,
         [](CZone* PZone)
         {
+            LoadRoamRegions(PZone);
+
             PZone->ForEachMob(
                 [](CMobEntity* PMob)
                 {

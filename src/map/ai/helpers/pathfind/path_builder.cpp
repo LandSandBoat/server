@@ -21,6 +21,8 @@
 
 #include <map/ai/helpers/pathfind/path_builder.h>
 
+#include <map/roam_region.h>
+
 #include <common/utils.h>
 #include <common/xirand.h>
 
@@ -87,14 +89,34 @@ auto NavPathBuilder::findPath(const position_t& start, const position_t& end) co
     return result;
 }
 
-auto NavPathBuilder::findRoamTurnPoints(const position_t& start, float maxRadius, uint8 maxTurns) const -> Maybe<std::vector<position_t>>
+auto NavPathBuilder::findRoamTurnPoints(const position_t& start, float maxRadius, uint8 maxTurns, const RoamRegion* region) const -> Maybe<std::vector<position_t>>
 {
     const auto desiredTurnCount = static_cast<uint8_t>(xirand::GetRandomNumber<uint32>(maxTurns) + 1);
 
+    std::vector<position_t> turnPoints;
+
+    // A region samples its own points, already at the requested distance and on the mesh, and retries internally.
+    // Each turn continues from the one before it, so the mob walks across the region instead of circling its starting point.
+    if (region)
+    {
+        auto from = start;
+        for (int i = 0; i < desiredTurnCount; ++i)
+        {
+            const auto candidate = region->randomPointAt(from, maxRadius, &navMesh_);
+            if (!candidate)
+            {
+                break;
+            }
+
+            turnPoints.emplace_back(*candidate);
+            from = *candidate;
+        }
+
+        return turnPoints;
+    }
+
     // Seemingly arbitrary divisor: navmesh polys are dense enough that the query saturates regardless.
     const float maxRadiusForPolyQuery = maxRadius / 10.0f;
-
-    std::vector<position_t> turnPoints;
 
     // Allow up to 2x attempts, since findRandomPosition may return a poly outside `maxRadius`.
     const int maxAttempts = desiredTurnCount * 2;

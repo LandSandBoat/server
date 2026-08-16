@@ -56,6 +56,7 @@ constexpr std::uint16_t WeatherCycle = 2160;
 #include "nominate_manager.h"
 #include "party.h"
 #include "recast_container.h"
+#include "roam_region.h"
 #include "spawn_handler.h"
 #include "status_effect_container.h"
 #include "treasure_pool.h"
@@ -587,6 +588,29 @@ auto CZone::navMesh() const -> NavMesh*
 auto CZone::xiMesh() const -> XiMesh*
 {
     return xiMesh_.get();
+}
+
+auto CZone::roamRegion(const std::string& name) const -> const RoamRegion*
+{
+    const auto region = roamRegions_.find(name);
+    if (region == roamRegions_.end())
+    {
+        return nullptr;
+    }
+
+    return region->second.get();
+}
+
+auto CZone::addRoamRegion(std::string name, RoamRegion region) -> const RoamRegion*
+{
+    // A duplicate name keeps the region already in place: replacing it would dangle every mob pointing at it.
+    const auto [entry, added] = roamRegions_.try_emplace(std::move(name), std::make_unique<RoamRegion>(std::move(region)));
+    if (!added)
+    {
+        ShowWarningFmt("Zone {}: duplicate roam region {}, ignoring it", m_zoneName, entry->first);
+    }
+
+    return entry->second.get();
 }
 
 void CZone::LoadXiMesh()

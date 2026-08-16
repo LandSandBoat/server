@@ -37,6 +37,7 @@
 
 class CBaseEntity;
 class NavMesh;
+class RoamRegion;
 
 namespace pathfind
 {
@@ -56,8 +57,8 @@ public:
 
     ~CPathFind();
 
-    // Walk to a random point around the given point.
-    auto RoamAround(const position_t& point, float maxRadius, uint8 maxTurns, xi::RoamFlag roamFlags = xi::RoamFlag::None) -> bool;
+    // Walk to a random point around the given point, or inside the region when the owner has one.
+    auto RoamAround(const position_t& point, float maxRadius, uint8 maxTurns, xi::RoamFlag roamFlags = xi::RoamFlag::None, const RoamRegion* region = nullptr) -> bool;
 
     // Find and walk to the given point.
     auto PathTo(const position_t& point, uint8 pathFlags = 0) -> bool;
@@ -133,7 +134,7 @@ private:
     auto BuildDirectPath(const position_t& end) -> bool;
 
     // Find a random path around the given point.
-    auto FindRandomPath(const position_t& start, float maxRadius, uint8 maxTurns, xi::RoamFlag roamFlags) -> bool;
+    auto FindRandomPath(const position_t& start, float maxRadius, uint8 maxTurns, xi::RoamFlag roamFlags, const RoamRegion* region) -> bool;
 
     // Core of StepTo, settling `stopShort` yalms short of `pos`.
     auto StepToInternal(const position_t& pos, bool run, float stopShort) -> void;
