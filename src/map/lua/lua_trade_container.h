@@ -32,7 +32,6 @@ class CLuaTradeContainer
 {
     CTradeContainer* m_pMyTradeContainer;
 
-    // the owner, used to find the transaction holding the offered items
     CCharEntity* m_owner{};
 
 public:

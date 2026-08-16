@@ -146,7 +146,6 @@ void auctionutils::ProofOfPurchase(CCharEntity* PChar, GP_AUC_PARAM_LOT param)
         return;
     }
 
-    // held for the whole listing, so the stack cannot be sold or traded while the row is inserted
     CItem* PItem = transaction->claimSlot(LOC_INVENTORY, param.ItemWorkIndex);
 
     if (PItem && !PItem->hasFlag(ItemFlag::NoAuction) && PItem->getQuantity() >= param.ItemStacks)

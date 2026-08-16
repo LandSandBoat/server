@@ -2748,8 +2748,7 @@ int32 OnEventFinish(CCharEntity* PChar, uint16 eventID, uint32 result)
     // Restore eventPreparation before potentially bailing out of function due to errors
     PChar->eventPreparation = previousPrep;
 
-    // a script that confirmed goods but never consumed them would keep the claim past the event, leaving the items stuck InTransaction.
-    // Nothing is taken, the player gets them back
+    // a script that confirmed goods but never consumed them would keep the claim past the event
     if (auto* offer = PChar->activeTransaction<NpcTradeTransaction>())
     {
         ShowWarningFmt("luautils::OnEventFinish: {} left a trade open at the end of event {}", PChar->getName(), eventID);

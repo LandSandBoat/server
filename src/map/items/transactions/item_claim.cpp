@@ -88,15 +88,15 @@ auto ItemClaimTransaction::split(const uint8 fromLocation, const uint8 fromSlot,
         return false;
     }
 
-    // take before give, so a failure halfway cannot leave the player holding both halves
     const uint16 itemId = PItem->getID();
 
+    // take first: giving first would leave both halves in the inventory if the take then failed
     return this->take(fromLocation, fromSlot, quantity) && this->give(toLocation, itemId, quantity).has_value();
 }
 
 auto ItemClaimTransaction::moveBetween(const uint8 fromLocation, const uint8 fromSlot, const uint8 toLocation, const uint8 toSlot, const uint32 quantity) -> bool
 {
-    // shrink the source first, so a failure halfway cannot leave the quantity counted twice
+    // take first: merging first would count the quantity twice if the take then failed
     if (!this->take(fromLocation, fromSlot, quantity))
     {
         return false;

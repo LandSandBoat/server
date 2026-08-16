@@ -102,7 +102,7 @@ void BazaarPurchaseTransaction::restoreDisplay()
     }
 }
 
-auto BazaarPurchaseTransaction::deliveredSlot() const -> uint8
+auto BazaarPurchaseTransaction::deliveredSlot() const -> std::optional<uint8>
 {
     return this->deliveredSlot_;
 }
@@ -131,12 +131,12 @@ auto BazaarPurchaseTransaction::doCommit() -> bool
         return false;
     }
 
-    this->deliveredSlot_ = *delivered;
+    this->deliveredSlot_ = delivered;
 
     if (!this->pay(this->buyer_, this->priceWithTax_))
     {
         ShowWarningFmt("BazaarPurchaseTransaction: {} could not pay {}", this->buyer_->getName(), this->priceWithTax_);
-        this->deliveredSlot_ = ERROR_SLOTID;
+        this->deliveredSlot_.reset();
 
         return false;
     }
@@ -144,7 +144,7 @@ auto BazaarPurchaseTransaction::doCommit() -> bool
     if (!this->earn(this->seller_, this->price_))
     {
         ShowErrorFmt("BazaarPurchaseTransaction: {} was not paid {} for the sale", this->seller_->getName(), this->price_);
-        this->deliveredSlot_ = ERROR_SLOTID;
+        this->deliveredSlot_.reset();
 
         return false;
     }
@@ -152,7 +152,7 @@ auto BazaarPurchaseTransaction::doCommit() -> bool
     if (!this->take(this->seller_, LOC_INVENTORY, this->bazaarSlot_, this->quantity_))
     {
         ShowErrorFmt("BazaarPurchaseTransaction: {} kept item in slot {} after it was sold", this->seller_->getName(), this->bazaarSlot_);
-        this->deliveredSlot_ = ERROR_SLOTID;
+        this->deliveredSlot_.reset();
 
         return false;
     }

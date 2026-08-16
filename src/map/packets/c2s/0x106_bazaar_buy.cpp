@@ -91,7 +91,7 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
         return;
     }
 
-    // only used to price the sale. The transaction validates and claims it
+    // Obtain the players gil
     const CItem* PCharGil = PBuyerInventory->GetItem(0);
     if (PCharGil == nullptr)
     {
@@ -133,7 +133,16 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
             return;
         }
 
-        CItem* PItem = PBuyerInventory->GetItem(transaction->deliveredSlot());
+        const auto deliveredSlot = transaction->deliveredSlot();
+        if (!deliveredSlot)
+        {
+            ShowErrorFmt("GP_CLI_COMMAND_BAZAAR_BUY: {} bought from {} without receiving anything", PChar->getName(), PTarget->getName());
+            PChar->pushPacket<GP_SERV_COMMAND_BAZAAR_BUY>(PTarget, GP_BAZAAR_BUY_STATE::ERR);
+
+            return;
+        }
+
+        CItem* PItem = PBuyerInventory->GetItem(*deliveredSlot);
 
         if (settings::get<bool>("map.AUDIT_PLAYER_BAZAAR"))
         {

@@ -42,10 +42,10 @@ public:
     static constexpr size_t MaxSlots = 9;
     static constexpr uint8  GilSlot  = 0; // Gil is always in slot 0
 
-    // registers on the initiator. Null if refused, in which case the caller clears TradePending
+    // Registers on the initiator. Returns nullptr if refused, caller cleans up TradePending
     static auto start(CCharEntity* initiator, CCharEntity* target) -> PlayerTradeTransaction*;
 
-    // cancels for leaving, whether or not the transaction was ever created
+    // Cancel for `leaving`, whether or not the transaction got as far as being created
     static void cancel(CCharEntity* leaving);
 
     PlayerTradeTransaction(xi::Badge<PlayerTradeTransaction>, CCharEntity* initiator, CCharEntity* target);
@@ -55,10 +55,10 @@ public:
     // stages or clears a slot, qty 0 releases. Clears both acceptances and pushes the packets
     auto setSlot(CCharEntity* who, uint8 transactionSlot, uint8 inventorySlot, uint16 expectedItemId, uint32 qty) -> CItem*;
 
-    // true once both sides have accepted
+    // Returns true once both sides have accepted
     auto accept(const CCharEntity* who) -> bool;
 
-    // both destroy the transaction
+    // Both close the transaction out, leaving it destroyed
     void abort(CCharEntity* leaving);
     void commitAndClose();
 

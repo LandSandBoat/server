@@ -29,6 +29,7 @@
 #include "items/transaction.h"
 
 #include <memory>
+#include <optional>
 
 class CCharEntity;
 class CItem;
@@ -47,8 +48,8 @@ public:
 
     DISALLOW_COPY_AND_MOVE(BazaarPurchaseTransaction);
 
-    // slot the buyer received the goods in. Only valid after a successful commit
-    auto deliveredSlot() const -> uint8;
+    // slot the buyer received the goods in, set once the sale has gone through
+    auto deliveredSlot() const -> std::optional<uint8>;
 
 protected:
     auto doCommit() -> bool override;
@@ -58,12 +59,12 @@ private:
     auto claimListing() -> bool;
     void restoreDisplay();
 
-    CCharEntity* buyer_{};
-    CCharEntity* seller_{};
-    ItemId       listing_{};
-    uint8        bazaarSlot_{};
-    uint32       quantity_{};
-    uint32       price_{};
-    uint32       priceWithTax_{};
-    uint8        deliveredSlot_{ ERROR_SLOTID };
+    CCharEntity*         buyer_{};
+    CCharEntity*         seller_{};
+    ItemId               listing_{};
+    uint8                bazaarSlot_{};
+    uint32               quantity_{};
+    uint32               price_{};
+    uint32               priceWithTax_{};
+    std::optional<uint8> deliveredSlot_{};
 };

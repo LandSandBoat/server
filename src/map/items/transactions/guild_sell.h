@@ -33,8 +33,12 @@
 class CCharEntity;
 class CItem;
 
-// A sale can span several stacks, so start() claims every Free stack of the item up to the requested quantity.
-// Committing consumes them and pays out.
+// Transaction for one guild shop sale.
+//
+// start() claims every Free stack of the item it can, up to the requested quantity.
+// Sales can span several stacks.
+// Shop scripts only touch what has been properly claimed.
+// Committing consumes claimed items and pays out.
 
 class GuildSellTransaction : public Transaction
 {

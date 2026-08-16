@@ -384,7 +384,7 @@ auto PlayerTradeTransaction::canReceive(const Side& sender, CCharEntity* receive
                                 });
 }
 
-// deliver to both sides before consuming either, so a failed delivery can still be undone
+// Deliver to both sides before consuming either, so a failed delivery can be undone
 auto PlayerTradeTransaction::doCommit() -> bool
 {
     auto* initiator = charOf(this->sides_[0]);

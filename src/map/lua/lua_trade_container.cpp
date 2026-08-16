@@ -158,15 +158,20 @@ bool CLuaTradeContainer::confirmItem(uint16 itemID, const sol::object& amountObj
 {
     uint32 amount = amountObj.is<uint32>() ? amountObj.as<uint32>() : 1;
 
-    // matches the range the quantity getters scan
     for (uint8 slotID = 0; slotID < m_pMyTradeContainer->getSize(); ++slotID)
     {
         if (m_pMyTradeContainer->getItemID(slotID) == itemID)
         {
-            if (m_pMyTradeContainer->getQuantity(slotID) < amount)
+            const uint32 available = m_pMyTradeContainer->getQuantity(slotID);
+
+            if (available < amount)
             {
-                (void)this->confirmQuantity(slotID, m_pMyTradeContainer->getQuantity(slotID));
-                amount -= m_pMyTradeContainer->getQuantity(slotID);
+                if (!this->confirmQuantity(slotID, available))
+                {
+                    return false;
+                }
+
+                amount -= available;
             }
             else
             {

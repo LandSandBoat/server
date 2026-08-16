@@ -454,7 +454,8 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
                 return;
             }
 
-            // greens are taken first, so a failed dig rolls them back
+            // greens are taken first, and a dig refused before it starts rolls them back.
+            // Digging and finding nothing returns true, so those greens are spent
             if (!luautils::OnChocoboDig(PChar))
             {
                 return;

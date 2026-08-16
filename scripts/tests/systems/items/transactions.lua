@@ -143,9 +143,7 @@ describe('Item transaction invariants', function()
     end)
 
     describe('claims', function()
-        -- Dropping moves the stack to the recycle bin, which has to leave it usable from there
-        -- Equipped gear is busy, which is what stops it being traded, sold or bazaared out from
-        -- under the character wearing it
+        -- Equipped gear is busy, which is what stops it being traded, sold or bazaared out from under the character wearing it
         it('marks equipped gear busy and frees it again', function()
             player:addItem(xi.item.BRONZE_AXE)
 
@@ -163,6 +161,7 @@ describe('Item transaction invariants', function()
             assert(axe:state() == xi.itemState.FREE, 'state after unequip: ' .. tostring(axe:state()))
         end)
 
+        -- dropping moves the stack to the recycle bin, and it has to arrive there unclaimed
         it('leaves a dropped stack Free in the recycle bin', function()
             player:addItem(stackable, 2)
 

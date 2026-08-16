@@ -132,7 +132,6 @@ void dboxutils::AddItemsToBeSent(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
         return;
     }
 
-    // held across the insert below, so the stack cannot be spent while the row is written
     CItem* PItem = transaction->claimSlot(LOC_INVENTORY, ItemWorkNo);
 
     if (ItemStacks == 0 || !PItem)
