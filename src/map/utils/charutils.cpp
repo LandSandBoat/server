@@ -185,6 +185,23 @@ const std::set traverserStoneReductionKeyItems = {
     KeyItem::IVORY_ABYSSITE_OF_CELERITY
 };
 
+// Callers reach these from Lua, so validate against the schema before formatting into a query.
+// TODO: Extract this into some sort of database metadata system that's populated on startup.
+auto isCharPointsColumn(const char* type) -> bool
+{
+    static std::unordered_set<std::string> charPointsColumnNames;
+    if (charPointsColumnNames.empty())
+    {
+        const auto names = db::getTableColumnNames("char_points");
+        for (const auto& name : names)
+        {
+            charPointsColumnNames.insert(name);
+        }
+    }
+
+    return charPointsColumnNames.find(type) != charPointsColumnNames.end();
+}
+
 } // namespace
 
 namespace charutils
@@ -5909,17 +5926,22 @@ void SaveCharStats(CCharEntity* PChar)
                      PChar->id);
 
     // These two are jug only variables. We should probably move pet char stats into its own table, but in the meantime
-    // we use charvars for jug specific things
-    if (PChar->petZoningInfo.jugSpawnTime > timer::time_point{})
+    // we use charvars for jug specific things.
+    // setPetZoningInfo never populates jugSpawnTime unless the setting is on, and LoadChar clears
+    // the jugpet- vars as it reads them, so there is nothing to write or clear when it is off.
+    if (settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"))
     {
-        const auto jugTimestamp = earth_time::timestamp(timer::to_utc(PChar->petZoningInfo.jugSpawnTime));
-        PChar->setCharVar("jugpet-spawn-time", jugTimestamp);
-        PChar->setCharVar("jugpet-duration-seconds", static_cast<int32>(timer::count_seconds(PChar->petZoningInfo.jugDuration)));
-    }
-    else
-    {
-        PChar->setCharVar("jugpet-spawn-time", 0);
-        PChar->setCharVar("jugpet-duration-seconds", 0);
+        if (PChar->petZoningInfo.jugSpawnTime > timer::time_point{})
+        {
+            const auto jugTimestamp = earth_time::timestamp(timer::to_utc(PChar->petZoningInfo.jugSpawnTime));
+            PChar->setCharVar("jugpet-spawn-time", jugTimestamp);
+            PChar->setCharVar("jugpet-duration-seconds", static_cast<int32>(timer::count_seconds(PChar->petZoningInfo.jugDuration)));
+        }
+        else if (PChar->getCharVar("jugpet-spawn-time") != 0)
+        {
+            PChar->setCharVar("jugpet-spawn-time", 0);
+            PChar->setCharVar("jugpet-duration-seconds", 0);
+        }
     }
 }
 
@@ -6866,19 +6888,7 @@ void SetPoints(CCharEntity* PChar, const char* type, int32 amount)
 {
     TracyZoneScoped;
 
-    // TODO: Extract this into some sort of database metadata system
-    //     : that's populated on startup.
-    static std::unordered_set<std::string> charPointsColumnNames;
-    if (charPointsColumnNames.empty())
-    {
-        const auto names = db::getTableColumnNames("char_points");
-        for (const auto& name : names)
-        {
-            charPointsColumnNames.insert(name);
-        }
-    }
-
-    if (charPointsColumnNames.find(type) == charPointsColumnNames.end())
+    if (!isCharPointsColumn(type))
     {
         ShowErrorFmt("charutils::SetPoints: Invalid type {} for {}", type, PChar->getName());
         return;
@@ -6900,7 +6910,15 @@ int32 GetPoints(CCharEntity* PChar, const char* type)
 {
     TracyZoneScoped;
 
-    const auto rset = db::preparedStmt("SELECT * FROM char_points WHERE charid = ? LIMIT 1", PChar->id);
+    if (!isCharPointsColumn(type))
+    {
+        ShowErrorFmt("charutils::GetPoints: Invalid type {} for {}", type, PChar->getName());
+        return 0;
+    }
+
+    // char_points is 200 columns wide, so SELECT * bound and fetched all of them to read one.
+    const auto query = fmt::format("SELECT {} FROM char_points WHERE charid = ? LIMIT 1", type);
+    const auto rset  = db::preparedStmt(query, PChar->id);
     if (rset && rset->rowsCount() && rset->next())
     {
         return rset->get<int32>(type);
