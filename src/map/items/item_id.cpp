@@ -51,7 +51,6 @@ auto ItemId::isSet() const -> bool
 
 auto ItemId::operator==(const ItemId& other) const -> bool
 {
-    // an unset reference matches nothing, including another unset one
     return this->isSet() && this->uid == other.uid;
 }
 

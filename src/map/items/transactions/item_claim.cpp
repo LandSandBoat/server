@@ -55,17 +55,6 @@ auto ItemClaimTransaction::claimSlot(const uint8 location, const uint8 slot) -> 
     return Transaction::claim(this->player_, PItem).isSet() ? PItem : nullptr;
 }
 
-auto ItemClaimTransaction::claimGil() -> CItem*
-{
-    CItem* PGil = this->claimSlot(LOC_INVENTORY, 0);
-    if (!PGil || !PGil->isType(ITEM_CURRENCY))
-    {
-        return nullptr;
-    }
-
-    return PGil;
-}
-
 auto ItemClaimTransaction::give(const uint8 location, const uint16 itemId, const uint32 quantity, const Silence silence) -> std::optional<uint8>
 {
     return Transaction::give(this->player_, location, itemId, quantity, silence);
@@ -113,20 +102,7 @@ auto ItemClaimTransaction::moveBetween(const uint8 fromLocation, const uint8 fro
         return false;
     }
 
-    if (!this->updateItem(this->player_, toLocation, toSlot, static_cast<int32>(quantity)).applied)
-    {
-        return false;
-    }
-
-    this->undoWith([this, toLocation, toSlot, quantity]()
-                   {
-                       if (!this->updateItem(this->player_, toLocation, toSlot, -static_cast<int32>(quantity)).applied)
-                       {
-                           ShowErrorFmt("ItemClaimTransaction: could not unmerge {} from {} slot {}", quantity, this->player_->getName(), toSlot);
-                       }
-                   });
-
-    return true;
+    return this->mergeInto(this->player_, toLocation, toSlot, quantity);
 }
 
 // the work is the caller's steps, and the base releases the claims

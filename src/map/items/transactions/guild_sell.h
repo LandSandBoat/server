@@ -33,8 +33,6 @@
 class CCharEntity;
 class CItem;
 
-// Transaction for one guild shop sale.
-//
 // A sale can span several stacks, so start() claims every Free stack of the item up to the requested quantity.
 // Committing consumes them and pays out.
 
@@ -56,16 +54,16 @@ protected:
     void doRollback() override;
 
 private:
-    struct Claim
+    struct Lot
     {
-        ItemId claimed{};
+        ItemId stack{};
         uint8  quantity{ 0 };
     };
 
-    CCharEntity*       player_{};
-    uint16             itemId_{};
-    uint8              claimed_{};
-    uint8              sold_{};
-    uint32             unitPrice_{};
-    std::vector<Claim> claims_;
+    CCharEntity*     player_{};
+    uint16           itemId_{};
+    uint8            claimed_{};
+    uint8            sold_{};
+    uint32           unitPrice_{};
+    std::vector<Lot> lots_;
 };

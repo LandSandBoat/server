@@ -75,7 +75,7 @@ auto ItemUseTransaction::doCommit() -> bool
 
     const uint8 slot = this->item_.slot;
 
-    if (!this->updateItem(this->player_, this->item_.location, slot, -1).applied)
+    if (!this->take(this->player_, this->item_.location, slot, 1))
     {
         ShowErrorFmt("ItemUseTransaction: {} kept the item in slot {} after using it", this->player_->getName(), slot);
     }

@@ -79,7 +79,6 @@ protected:
 
 private:
     auto claimAndLock(CItem* item) -> ItemId;
-    void unlockAll();
 
     CCharEntity*               player_{};
     std::array<Slot, MaxSlots> slots_{}; // [0] crystal, [1..8] ingredients

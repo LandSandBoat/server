@@ -35,8 +35,6 @@
 class CCharEntity;
 class CItem;
 
-// What a player has put in an NPC's trade window.
-//
 // stage() claims each offered stack.
 // A script confirms the slots it will take, and releaseUnconfirmed() gives the rest back as soon as onTrade returns.
 //
@@ -60,15 +58,11 @@ public:
 
     auto item(uint8 tradeSlot) -> CItem*;
 
-    // how much the slot offered, and how much of it the script confirmed
     auto quantity(uint8 tradeSlot) const -> uint32;
-    auto confirmedQuantity(uint8 tradeSlot) const -> uint32;
     auto confirm(uint8 tradeSlot, uint32 quantity) -> bool;
 
-    // confirms by item id rather than by trade slot
     [[nodiscard]] auto confirmById(uint16 itemId, uint32 quantity) -> bool;
 
-    // releases the claim on every slot the script did not confirm
     void releaseUnconfirmed();
 
     // Consumes what the script confirmed, then closes. All or nothing: false rolls everything back

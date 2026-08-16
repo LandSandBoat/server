@@ -89,16 +89,6 @@ auto NpcTradeTransaction::quantity(const uint8 tradeSlot) const -> uint32
     return this->slots_[tradeSlot].quantity;
 }
 
-auto NpcTradeTransaction::confirmedQuantity(const uint8 tradeSlot) const -> uint32
-{
-    if (tradeSlot >= this->slots_.size())
-    {
-        return 0;
-    }
-
-    return this->slots_[tradeSlot].confirmed;
-}
-
 auto NpcTradeTransaction::confirm(const uint8 tradeSlot, const uint32 quantity) -> bool
 {
     if (tradeSlot >= this->slots_.size())

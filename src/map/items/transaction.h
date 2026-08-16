@@ -38,14 +38,10 @@ class CCharEntity;
 // Result of a quantity change
 struct ItemMutation
 {
-    uint16 itemId{ 0 };
-    bool   applied{ false };
-
-    // actual change applied, which is less than requested when the stack hits its size limit
-    int32 delta{ 0 };
-
-    // set when the quantity reached 0 and the item left its container. Owns it until this result dies
-    std::unique_ptr<CItem> removed;
+    uint16                 itemId{ 0 };      // Item ID being mutated
+    bool                   applied{ false }; // Set when the mutation did apply
+    int32                  delta{ 0 };       // actual change applied, which may be less than requested when the stack hits its size limit
+    std::unique_ptr<CItem> removed;          // Set if the item was removed as a result of the operation
 };
 
 enum class TransactionState : uint8
@@ -98,21 +94,17 @@ protected:
     // claims not yet released
     auto claims() const -> const std::vector<ItemId>&;
 
-    // quantity change. Refused for a busy item this transaction does not hold
-    [[nodiscard]] auto updateItem(CCharEntity* PChar, uint8 locationId, uint8 slotId, int32 quantity) -> ItemMutation;
-
-    // ERROR_SLOTID if the item could not be placed
-    [[nodiscard]] auto addItem(CCharEntity* PChar, uint8 locationId, std::unique_ptr<CItem> item, Silence silence = Silence::No) -> uint8;
-    [[nodiscard]] auto addItem(CCharEntity* PChar, uint8 locationId, uint16 itemId, uint32 quantity, Silence silence = Silence::No) -> uint8;
-
-    // adds to a container and returns the slot. Undo takes back what landed
+    // Give specified item (new slot index)
     [[nodiscard]] auto give(CCharEntity* PChar, uint8 location, uint16 itemId, uint32 quantity, Silence silence = Silence::No) -> std::optional<uint8>;
     [[nodiscard]] auto give(CCharEntity* PChar, uint8 location, std::unique_ptr<CItem> item, Silence silence = Silence::No) -> std::optional<uint8>;
 
-    // removes from a stack. Undo restores it, exdata and signature included
+    // Like give, but it grows the stack at the given slot index
+    [[nodiscard]] auto mergeInto(CCharEntity* PChar, uint8 location, uint8 slot, uint32 quantity) -> bool;
+
+    // Claim given item object and tentatively substract given quantity
     [[nodiscard]] auto take(CCharEntity* PChar, uint8 location, uint8 slot, uint32 quantity) -> bool;
 
-    // both claim the gil stack first, so it stays held for the rest of the transaction
+    // Claim gil object and tentatively grant/substract given sum
     [[nodiscard]] auto pay(CCharEntity* PChar, uint32 gil) -> bool;
     [[nodiscard]] auto earn(CCharEntity* PChar, uint32 gil) -> bool;
 
@@ -120,11 +112,13 @@ protected:
     void undoWith(std::function<void()> undo);
 
     // false keeps completed work on rollback instead of undoing it.
-    // Synth relies on this so that disconnecting mid-craft costs the same as a failed synth
     virtual auto reversible() const -> bool;
 
 private:
-    [[nodiscard]] auto claimGil(CCharEntity* PChar) -> bool;
+    // quantity change. Refused for a busy item this transaction does not hold
+    [[nodiscard]] auto updateItem(CCharEntity* PChar, uint8 locationId, uint8 slotId, int32 quantity) const -> ItemMutation;
+
+    [[nodiscard]] auto claimGil(const CCharEntity* PChar) -> bool;
     [[nodiscard]] auto recordGive(CCharEntity* PChar, uint8 location, uint8 slot, int32 applied) -> std::optional<uint8>;
 
     void runUndos();
@@ -138,4 +132,7 @@ private:
     TransactionState                   state_{ TransactionState::Open };
     std::vector<ItemId>                claims_;
     std::vector<std::function<void()>> undos_;
+
+    // stacks a take consumed to nothing, kept so their undo can clone them back
+    std::vector<std::unique_ptr<CItem>> snapshots_;
 };

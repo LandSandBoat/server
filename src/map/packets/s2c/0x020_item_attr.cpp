@@ -34,7 +34,7 @@
 namespace
 {
 
-// derived from ItemState and type rather than read back from the item's subtype rather than read back out of the item's subtype
+// derived from ItemState and type rather than read back out of the item's subtype
 auto lockFlagFor(const CItem* PItem) -> ItemLockFlg
 {
     if (PItem->getCharPrice() != 0)

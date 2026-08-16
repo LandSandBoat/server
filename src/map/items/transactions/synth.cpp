@@ -33,6 +33,23 @@
 #include "packets/s2c/0x020_item_attr.h"
 #include "utils/charutils.h"
 
+namespace
+{
+
+// unlocks the ingredients that are still claimed
+void unlockAll(CCharEntity* PChar, const std::vector<ItemId>& claims)
+{
+    for (const auto& claimed : claims)
+    {
+        if (auto* PItem = claimed.resolve())
+        {
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::Normal);
+        }
+    }
+}
+
+} // namespace
+
 SynthTransaction::SynthTransaction(xi::Badge<SynthTransaction>, CCharEntity* player)
 : player_(player)
 {
@@ -184,27 +201,27 @@ auto SynthTransaction::doCommit() -> bool
         }
     }
 
-    this->unlockAll();
+    unlockAll(this->player_, this->claims());
 
     if (pendingResult_)
     {
-        const uint8 resultSlot = this->addItem(this->player_, LOC_INVENTORY, pendingResult_->itemId, pendingResult_->qty);
-        if (resultSlot == ERROR_SLOTID)
+        const auto resultSlot = this->give(this->player_, LOC_INVENTORY, pendingResult_->itemId, pendingResult_->qty);
+        if (!resultSlot)
         {
             ShowErrorFmt("SynthTransaction: {} had no room for result {}, the ingredients are already spent", this->player_->getName(), pendingResult_->itemId);
         }
         else
         {
-            CItem* PItem = this->player_->getStorage(LOC_INVENTORY)->GetItem(resultSlot);
+            CItem* PItem = this->player_->getStorage(LOC_INVENTORY)->GetItem(*resultSlot);
             if (PItem && PItem->hasFlag(ItemFlag::Inscribable) && this->slots_[0].itemId > 0x1080)
             {
                 PItem->setSignature(this->player_->name);
                 db::preparedStmt("UPDATE char_inventory SET signature = ? WHERE charid = ? AND location = 0 AND slot = ? LIMIT 1",
                                  this->player_->name,
                                  this->player_->id,
-                                 resultSlot);
+                                 *resultSlot);
             }
-            this->player_->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, LOC_INVENTORY, resultSlot);
+            this->player_->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, LOC_INVENTORY, *resultSlot);
         }
 
         this->player_->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(this->player_);
@@ -238,16 +255,4 @@ auto SynthTransaction::claimAndLock(CItem* item) -> ItemId
     }
 
     return claimed;
-}
-
-// unlocks the ingredients that are still claimed
-void SynthTransaction::unlockAll()
-{
-    for (const auto& claimed : this->claims())
-    {
-        if (auto* PItem = claimed.resolve())
-        {
-            this->player_->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::Normal);
-        }
-    }
 }

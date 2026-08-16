@@ -34,8 +34,6 @@ class CItemUsable;
 
 using TakesCustody = xi::Flag<struct TakesCustodyTag>;
 
-// Tx for one item-use (potion, scroll, charged equipment).
-//
 // Consumables: stamped InTransaction; doCommit decrements the stack, doRollback releases the stamp.
 // Charged equipment: no stamp; commit/rollback are no-ops (the charge decrement runs in OnItemFinish).
 

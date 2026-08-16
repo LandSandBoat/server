@@ -34,8 +34,6 @@
 class CCharEntity;
 class CItem;
 
-// Transaction for an operation that needs no bookkeeping of its own.
-//
 // give, take, pay, earn and their undos all come from Transaction; the overloads here only save the caller passing the same player to every one of them.
 
 class ItemClaimTransaction final : public Transaction
@@ -48,12 +46,8 @@ public:
 
     DISALLOW_COPY_AND_MOVE(ItemClaimTransaction);
 
-    // claims the stack in a slot. Null if the slot is empty or the item is already busy
+    // Null if the slot is empty or the item is already busy
     [[nodiscard]] auto claimSlot(uint8 location, uint8 slot) -> CItem*;
-
-    // claims and returns the gil stack, for reading the balance before spending it. pay() and earn() claim it themselves, so this is only needed up front.
-    // Null if slot 0 is not currency
-    [[nodiscard]] auto claimGil() -> CItem*;
 
     // same as Transaction's, with the player implied
     [[nodiscard]] auto give(uint8 location, uint16 itemId, uint32 quantity, Silence silence = Silence::No) -> std::optional<uint8>;
@@ -62,10 +56,10 @@ public:
     [[nodiscard]] auto pay(uint32 gil) -> bool;
     [[nodiscard]] auto earn(uint32 gil) -> bool;
 
-    // splits quantity off a stack into a new one. Undone as a unit
+    // undone as a unit
     [[nodiscard]] auto split(uint8 fromLocation, uint8 fromSlot, uint8 toLocation, uint32 quantity) -> bool;
 
-    // merges quantity between two stacks of the same item. Undone as a unit
+    // undone as a unit
     [[nodiscard]] auto moveBetween(uint8 fromLocation, uint8 fromSlot, uint8 toLocation, uint8 toSlot, uint32 quantity) -> bool;
 
     // undo for work outside the item tables, run in reverse order on rollback

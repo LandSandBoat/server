@@ -91,7 +91,7 @@ auto GuildSellTransaction::start(CCharEntity* player, const uint16 itemId, const
 
         const auto take = std::min<uint32>(item->getQuantity(), quantity - transaction->claimed_);
 
-        transaction->claims_.push_back(Claim{ .claimed = claimed, .quantity = static_cast<uint8>(take) });
+        transaction->lots_.push_back(Lot{ .stack = claimed, .quantity = static_cast<uint8>(take) });
         transaction->claimed_ += static_cast<uint8>(take);
     }
 
@@ -126,19 +126,19 @@ auto GuildSellTransaction::doCommit() -> bool
 
     uint8 remaining = this->sold_;
 
-    for (auto& claim : this->claims_)
+    for (auto& lot : this->lots_)
     {
         if (remaining == 0)
         {
             break;
         }
 
-        const uint8 take = std::min(claim.quantity, remaining);
+        const uint8 take = std::min(lot.quantity, remaining);
         remaining -= take;
 
-        if (!claim.claimed.resolve() || !Transaction::take(this->player_, LOC_INVENTORY, claim.claimed.slot, take))
+        if (!lot.stack.resolve() || !Transaction::take(this->player_, LOC_INVENTORY, lot.stack.slot, take))
         {
-            ShowErrorFmt("GuildSellTransaction: {} kept {} of the goods in slot {}", this->player_->getName(), take, claim.claimed.slot);
+            ShowErrorFmt("GuildSellTransaction: {} kept {} of the goods in slot {}", this->player_->getName(), take, lot.stack.slot);
             return false;
         }
     }

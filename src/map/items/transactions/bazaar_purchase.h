@@ -33,8 +33,6 @@
 class CCharEntity;
 class CItem;
 
-// Transaction for one bazaar purchase.
-//
 // start() takes the listing off display and claims it.
 // Committing delivers a copy to the buyer, moves the gil both ways and consumes the seller's stack; a failure at any step undoes the earlier ones.
 // What is left of the listing goes back on display either way.
