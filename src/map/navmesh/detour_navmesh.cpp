@@ -292,7 +292,7 @@ auto DetourNavMesh::save(const std::string& path) const -> bool
 
 auto DetourNavMesh::findPath(const position_t& start, const position_t& end) -> Maybe<PathResult>
 {
-    TracyZoneScoped;
+    TracyZoneScopedS(12);
 
     if (std::isnan(start.x) || std::isnan(start.y) || std::isnan(start.z) ||
         std::isnan(end.x) || std::isnan(end.y) || std::isnan(end.z))
@@ -409,7 +409,7 @@ auto DetourNavMesh::findPath(const position_t& start, const position_t& end) -> 
 
 auto DetourNavMesh::findRandomPosition(const position_t& start, float maxRadius) const -> Maybe<position_t>
 {
-    TracyZoneScoped;
+    TracyZoneScopedS(12);
 
     DebugNavmesh("DetourNavMesh::findRandomPosition (%f, %f, %f) (%u)", start.x, start.y, start.z, zoneID_);
 
@@ -451,7 +451,7 @@ auto DetourNavMesh::validPosition(const position_t& position) const -> bool
 
 auto DetourNavMesh::findClosestValidPoint(const position_t& position) const -> Maybe<position_t>
 {
-    TracyZoneScoped;
+    TracyZoneScopedS(12);
 
     DebugNavmesh("DetourNavMesh::findClosestValidPoint (%f, %f, %f) (%u)", position.x, position.y, position.z, zoneID_);
 

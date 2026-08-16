@@ -153,7 +153,7 @@ auto db::CachingDatabase::runWithRetry(const std::string& rawQuery, const Fn<std
 
 auto db::CachingDatabase::execute(const std::string& rawQuery, const std::vector<BoundValue>& params) -> std::unique_ptr<ResultSet>
 {
-    TracyZoneScoped;
+    TracyZoneScopedS(16);
     TracyZoneString(rawQuery);
 
     const auto queryType = detail::validateQueryLeadingKeyword(rawQuery);
