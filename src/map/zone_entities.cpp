@@ -1658,9 +1658,9 @@ void CZoneEntities::WideScan(CCharEntity* PChar, uint16 radius)
     };
 
     PChar->pushPacket<GP_SERV_COMMAND_TRACKING_STATE>(GP_TRACKING_STATE::ListStart);
-    for (const auto& entityList : { m_npcList, m_mobList })
+    for (const EntityList_t* entityList : { &m_npcList, &m_mobList })
     {
-        for (const auto& [_, PEntity] : entityList)
+        for (const auto& [_, PEntity] : *entityList)
         {
             if (PEntity->isWideScannable() && isWithinDistance(PChar->loc.p, PEntity->loc.p, radius) && isSameFloor(PEntity))
             {

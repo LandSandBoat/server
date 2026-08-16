@@ -1126,7 +1126,7 @@ void CMobController::Move()
 
         if (PMob->getMobMod(xi::MobMod::AttackSkillList) > 0)
         {
-            const auto skillList = battleutils::GetMobSkillList(PMob->getMobMod(xi::MobMod::AttackSkillList));
+            const auto& skillList = battleutils::GetMobSkillList(PMob->getMobMod(xi::MobMod::AttackSkillList));
             if (!skillList.empty())
             {
                 if (const auto* skill = battleutils::GetMobSkill(skillList.front()))
