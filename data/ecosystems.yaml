@@ -2204,6 +2204,9 @@ ecosystems:
             - magic
             - ability
             - scent
+          mods:
+            mdef:      20
+            udmgmagic: -2500
         species:
           black_robe_flayer:
             id: 214
