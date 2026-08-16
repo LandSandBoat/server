@@ -43,7 +43,7 @@ struct ItemId
     auto operator==(const ItemId& other) const -> bool;
     auto operator==(const CItem* PItem) const -> bool;
 
-    EntityId owner{};          // Who held the stack when this reference was taken.
+    EntityId owner{};          // Whose stack it is.
     uint64   uid{ 0 };         // Never-reused per-process counter, telling this stack from a lookalike.
     uint16   itemId{ 0 };      // What it was, so a refusal can say what went missing.
     uint8    location{ 0xFF }; // Container it sat in.

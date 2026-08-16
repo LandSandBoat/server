@@ -96,8 +96,8 @@ void GP_CLI_COMMAND_ITEM_STACK::process(MapSession* PSession, CCharEntity* PChar
             // A fresh claim per pair, so a stack merged away is released before the next pass sees it
             auto transaction = ItemClaimTransaction::start(PChar);
             if (!transaction ||
-                !transaction->claim(static_cast<uint8>(PItemContainer->GetID()), slotId) ||
-                !transaction->claim(static_cast<uint8>(PItemContainer->GetID()), slotID2))
+                !transaction->claimSlot(static_cast<uint8>(PItemContainer->GetID()), slotId) ||
+                !transaction->claimSlot(static_cast<uint8>(PItemContainer->GetID()), slotID2))
             {
                 continue;
             }

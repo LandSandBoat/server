@@ -166,7 +166,12 @@ void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PC
 
     luautils::OnTrade(PChar, PNpc);
 
-    transaction->releaseUnconfirmed();
+    // A script may finish the trade from onTrade, which closes the transaction, so it is looked up
+    // again rather than reused across the callback
+    if (auto* offer = PChar->activeTransaction<NpcTradeTransaction>())
+    {
+        offer->releaseUnconfirmed();
+    }
     if (PChar->isInEvent())
     {
         // Retail accurate: If the trade started an event then any current synth is a crit fail.

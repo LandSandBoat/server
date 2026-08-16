@@ -107,7 +107,7 @@ void GP_CLI_COMMAND_SHOP_SELL_SET::process(MapSession* PSession, CCharEntity* PC
         return;
     }
 
-    const CItem* PItem = transaction->claim(LOC_INVENTORY, slotId);
+    const CItem* PItem = transaction->claimSlot(LOC_INVENTORY, slotId);
     if (!PItem)
     {
         ShowWarning("GP_CLI_COMMAND_SHOP_SELL_SET: Player %s trying to sell an item that is missing or already claimed!", PChar->getName());

@@ -136,7 +136,7 @@ auto GuildSellTransaction::doCommit() -> bool
         const uint8 take = std::min(claim.quantity, remaining);
         remaining -= take;
 
-        if (!Transaction::take(this->player_, LOC_INVENTORY, claim.claimed.slot, take))
+        if (!claim.claimed.resolve() || !Transaction::take(this->player_, LOC_INVENTORY, claim.claimed.slot, take))
         {
             ShowErrorFmt("GuildSellTransaction: {} kept {} of the goods in slot {}", this->player_->getName(), take, claim.claimed.slot);
             return false;

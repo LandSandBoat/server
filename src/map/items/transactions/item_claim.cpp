@@ -48,7 +48,7 @@ auto ItemClaimTransaction::start(CCharEntity* player) -> std::unique_ptr<ItemCla
     return std::unique_ptr<ItemClaimTransaction>(new ItemClaimTransaction(xi::Badge<ItemClaimTransaction>{}, player));
 }
 
-auto ItemClaimTransaction::claim(const uint8 location, const uint8 slot) -> CItem*
+auto ItemClaimTransaction::claimSlot(const uint8 location, const uint8 slot) -> CItem*
 {
     CItem* PItem = this->player_->getStorage(location)->GetItem(slot);
 
@@ -57,7 +57,7 @@ auto ItemClaimTransaction::claim(const uint8 location, const uint8 slot) -> CIte
 
 auto ItemClaimTransaction::claimGil() -> CItem*
 {
-    CItem* PGil = this->claim(LOC_INVENTORY, 0);
+    CItem* PGil = this->claimSlot(LOC_INVENTORY, 0);
     if (!PGil || !PGil->isType(ITEM_CURRENCY))
     {
         return nullptr;

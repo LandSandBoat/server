@@ -23,6 +23,8 @@
 
 #include "common/cbasetypes.h"
 #include "common/types/badge.h"
+
+#include "entities/entity_id.h"
 #include "items/item_id.h"
 #include "items/transaction.h"
 

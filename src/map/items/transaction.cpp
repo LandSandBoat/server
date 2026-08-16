@@ -98,12 +98,19 @@ auto applyItemUpdate(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 q
         return {};
     }
 
-    uint32                 newQuantity = PItem->getQuantity() + quantity;
+    const uint32           oldQuantity = PItem->getQuantity();
+    uint32                 newQuantity = oldQuantity + quantity;
     std::unique_ptr<CItem> removed;
 
     if (newQuantity > PItem->getStackSize())
     {
         newQuantity = PItem->getStackSize();
+
+        ShowWarningFmt("UpdateItem: {} could only take {} of the {} added to item {}, the stack is full",
+                       PChar->getName(),
+                       newQuantity - oldQuantity,
+                       quantity,
+                       ItemID);
     }
 
     if (newQuantity > 0 || PItem->isType(ITEM_CURRENCY))
@@ -138,7 +145,7 @@ auto applyItemUpdate(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 q
             PChar->resyncEquipment();
         }
     }
-    return { .itemId = ItemID, .applied = true, .removed = std::move(removed) };
+    return { .itemId = ItemID, .applied = true, .delta = static_cast<int32>(newQuantity) - static_cast<int32>(oldQuantity), .removed = std::move(removed) };
 }
 
 auto applyAddItem(CCharEntity* PChar, uint8 LocationID, std::unique_ptr<CItem> PItem, Silence silence, const Transaction* owner) -> uint8
@@ -503,16 +510,22 @@ auto Transaction::pay(CCharEntity* PChar, const uint32 gil) -> bool
 
 auto Transaction::earn(CCharEntity* PChar, const uint32 gil) -> bool
 {
-    if (!this->claimGil(PChar) || !this->updateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gil)).applied)
+    if (!this->claimGil(PChar))
     {
         return false;
     }
 
-    this->undoWith([this, PChar, gil]()
+    const auto earned = this->updateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gil));
+    if (!earned.applied)
+    {
+        return false;
+    }
+
+    this->undoWith([this, PChar, granted = earned.delta]()
                    {
-                       if (!this->updateItem(PChar, LOC_INVENTORY, 0, -static_cast<int32>(gil)).applied)
+                       if (!this->updateItem(PChar, LOC_INVENTORY, 0, -granted).applied)
                        {
-                           ShowErrorFmt("Transaction: could not take back {} gil from {}", gil, PChar->getName());
+                           ShowErrorFmt("Transaction: could not take back {} gil from {}", granted, PChar->getName());
                        }
                    });
 

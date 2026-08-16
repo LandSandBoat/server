@@ -136,7 +136,7 @@ void SynthTransaction::consumeCrystal()
 
     const auto crystalSlot = slot.claimed.slot;
 
-    if (!Transaction::take(this->player_, LOC_INVENTORY, crystalSlot, 1))
+    if (!slot.claimed.resolve() || !Transaction::take(this->player_, LOC_INVENTORY, crystalSlot, 1))
     {
         ShowErrorFmt("SynthTransaction: {} kept the crystal in slot {}", this->player_->getName(), crystalSlot);
     }
@@ -165,7 +165,7 @@ auto SynthTransaction::doCommit() -> bool
     std::array<uint8, MAX_CONTAINER_SIZE> consumePerSlot{};
     for (const auto& s : this->slots_)
     {
-        if (s.claimed.isSet() && !s.saved && s.claimed.slot < consumePerSlot.size())
+        if (s.claimed.resolve() && !s.saved && s.claimed.slot < consumePerSlot.size())
         {
             consumePerSlot[s.claimed.slot] += 1;
         }
@@ -227,8 +227,11 @@ void SynthTransaction::doRollback()
 // The client greys a claimed ingredient out for as long as the synth holds it
 auto SynthTransaction::claimAndLock(CItem* item) -> ItemId
 {
+    // A recipe can draw several units from one stack, and the client only needs telling once
+    const bool alreadyHeld = this->holds(item);
+
     const auto claimed = this->claim(this->player_, item);
-    if (claimed.isSet())
+    if (claimed.isSet() && !alreadyHeld)
     {
         this->player_->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(item, ItemLockFlg::NoSelect);
     }

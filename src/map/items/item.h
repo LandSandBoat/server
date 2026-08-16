@@ -148,10 +148,10 @@ protected:
 
 private:
     uint16   m_id;
+    uint64   m_uid;
     uint16   m_subid;
     uint16   m_type;
     uint8    m_subtype;
-    uint64   m_uid;
     uint32   m_quantity;  // Current number of items
     uint32   m_stackSize; // The maximum number of items
     uint32   m_BasePrice;

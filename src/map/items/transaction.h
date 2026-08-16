@@ -41,6 +41,9 @@ struct ItemMutation
     uint16 itemId{ 0 };
     bool   applied{ false };
 
+    // What the stack actually moved by, which is not the amount asked for when it hit its ceiling
+    int32 delta{ 0 };
+
     // Set when the stack was consumed to nothing. It is kept alive only as long as this result is,
     // so anything still pointing at it must let go while it is here
     std::unique_ptr<CItem> removed;

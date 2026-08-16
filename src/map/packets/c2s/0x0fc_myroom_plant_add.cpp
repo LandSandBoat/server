@@ -111,7 +111,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
         return;
     }
 
-    if (!transaction->claim(this->MyroomAddCategory, this->MyroomAddItemIndex))
+    if (!transaction->claimSlot(this->MyroomAddCategory, this->MyroomAddItemIndex))
     {
         ShowWarningFmt("GP_CLI_COMMAND_MYROOM_PLANT_ADD: {} trying to plant a claimed item {}", PChar->getName(), PItem->getID());
         return;

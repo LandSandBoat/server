@@ -258,13 +258,23 @@ auto PlayerTradeTransaction::setSlot(CCharEntity* who, const uint8 transactionSl
 void PlayerTradeTransaction::closeAndRemove()
 {
     auto* initiator = charOf(this->sides_[0]);
-    auto* target    = charOf(this->sides_[1]);
 
-    initiator->TradePending.clean();
-    target->TradePending.clean();
+    // A side that no longer resolves has nothing left to clean up, but the other side still does
+    for (const auto& side : this->sides_)
+    {
+        if (auto* PChar = charOf(side))
+        {
+            PChar->TradePending.clean();
+        }
+    }
 
     this->rollbackIfOpen();
-    initiator->removeTransaction(this);
+
+    // Owned by the initiator, so if they are gone the transaction went with them
+    if (initiator)
+    {
+        initiator->removeTransaction(this);
+    }
 }
 
 void PlayerTradeTransaction::abort(CCharEntity* leaving)
@@ -285,6 +295,14 @@ void PlayerTradeTransaction::commitAndClose()
 {
     auto* initiator = charOf(this->sides_[0]);
     auto* target    = charOf(this->sides_[1]);
+
+    if (!initiator || !target)
+    {
+        ShowWarningFmt("PlayerTradeTransaction::commitAndClose: a side left before the trade closed");
+        this->closeAndRemove();
+
+        return;
+    }
 
     const bool ok = this->commit();
     if (!ok)
@@ -372,6 +390,12 @@ auto PlayerTradeTransaction::doCommit() -> bool
     auto* initiator = charOf(this->sides_[0]);
     auto* target    = charOf(this->sides_[1]);
 
+    // Nobody to hand anything to, so there is no trade left to make
+    if (!initiator || !target)
+    {
+        return false;
+    }
+
     const bool bothAccepted   = this->sides_[0].accepted && this->sides_[1].accepted;
     const bool partnerCanRecv = canReceive(this->sides_[0], target) && canReceive(this->sides_[1], initiator);
     const bool stillInRange   = withinTradeRange(initiator, target);
@@ -419,7 +443,7 @@ auto PlayerTradeTransaction::doCommit() -> bool
             }
 
             auto* PSender = charOf(sender);
-            if (!PSender || !this->take(PSender, LOC_INVENTORY, slot.staged.slot, slot.qty))
+            if (!PSender || !slot.staged.resolve() || !this->take(PSender, LOC_INVENTORY, slot.staged.slot, slot.qty))
             {
                 ShowErrorFmt("PlayerTradeTransaction::doCommit: {} kept item {} after it was handed over", PSender ? PSender->getName() : "?", slot.staged.itemId);
                 return false;

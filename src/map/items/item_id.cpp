@@ -51,7 +51,8 @@ auto ItemId::isSet() const -> bool
 
 auto ItemId::operator==(const ItemId& other) const -> bool
 {
-    return this->uid == other.uid;
+    // Two references to nothing are not a reference to the same thing
+    return this->isSet() && this->uid == other.uid;
 }
 
 auto ItemId::operator==(const CItem* PItem) const -> bool
@@ -72,7 +73,7 @@ auto ItemId::resolve() const -> CItem*
         return nullptr;
     }
 
-    auto* PContainer = POwner->getStorage(this->location);
+    const auto* PContainer = POwner->getStorage(this->location);
     if (!PContainer)
     {
         return nullptr;

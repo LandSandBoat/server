@@ -36,7 +36,7 @@ class CItem;
 
 // One operation's claim over the stacks it touches, for work that needs no bookkeeping of its own.
 //
-// claim() stamps a stack InTransaction so nothing else can spend, sell or bazaar it while the
+// claimSlot() stamps a stack InTransaction so nothing else can spend, sell or bazaar it while the
 // operation runs. The steps themselves - give, take, pay, earn, and their reversal - come from
 // Transaction; these overloads only spare the caller naming the player every time.
 
@@ -51,7 +51,7 @@ public:
     DISALLOW_COPY_AND_MOVE(ItemClaimTransaction);
 
     // Claims the stack in a slot, refusing one that is already spoken for. Null if it cannot be had
-    [[nodiscard]] auto claim(uint8 location, uint8 slot) -> CItem*;
+    [[nodiscard]] auto claimSlot(uint8 location, uint8 slot) -> CItem*;
 
     // The player's gil, claimed for the operation. Only needed to read the balance before acting,
     // since pay() and earn() claim it themselves. Null if slot 0 does not hold spendable currency
