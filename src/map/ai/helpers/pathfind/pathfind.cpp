@@ -353,7 +353,8 @@ auto CPathFind::StepToInternal(const position_t& pos, bool run, float stopShort)
     const float speed = [&]() -> float
     {
         const auto baseSpeed = owner_->baseSpeed();
-        if (owner_->isMobEntity() && baseSpeed == 0 && ((roamFlags_ & xi::RoamFlag::Worm) != xi::RoamFlag::None))
+        // baseSpeed is an integer compare and isMobEntity() is a dynamic_cast, so test it first.
+        if (baseSpeed == 0 && ((roamFlags_ & xi::RoamFlag::Worm) != xi::RoamFlag::None) && owner_->isMobEntity())
         {
             return 20.0f;
         }
