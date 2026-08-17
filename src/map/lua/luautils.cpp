@@ -2751,7 +2751,7 @@ int32 OnEventFinish(CCharEntity* PChar, uint16 eventID, uint32 result)
     // a script that confirmed goods but never consumed them would keep the claim past the event
     if (auto* offer = PChar->activeTransaction<NpcTradeTransaction>())
     {
-        ShowWarningFmt("luautils::OnEventFinish: {} left a trade open at the end of event {}", PChar->getName(), eventID);
+        ShowWarningFmt("luautils::OnEventFinish: {} left a trade open at the end of event {} in {}", PChar->getName(), eventID, PChar->loc.zone->getName());
 
         PChar->removeTransaction(offer);
         PChar->TradeContainer->Clean();
