@@ -207,7 +207,7 @@ INSERT INTO `item_mods_pet` VALUES (12649,370,1,2); -- Wyvern - REGEN: 1
 INSERT INTO `item_mods_pet` VALUES (12650,27,-2,1); -- Avatar - ENMITY: -2
 
 -- Drachen Finger Gauntlets
-INSERT INTO `item_mods_pet` VALUES (13974,25,5,2); -- Wyvern - ACC: 5
+INSERT INTO `item_mods_pet` VALUES (13974,25,10,2); -- Wyvern - ACC: 10
 
 -- Evokers Bracers
 INSERT INTO `item_mods_pet` VALUES (13975,27,-2,1); -- Avatar - ENMITY: -2
