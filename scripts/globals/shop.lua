@@ -74,8 +74,16 @@ end
 ---@param fameArea xi.fameArea
 ---@return integer
 xi.shop.onSellPriceCheck = function(player, itemId, fameArea)
+    local basePrice = GetReadOnlyItem(itemId):getBasePrice()
+
+    -- If the base price is 0 it should always be 0
+    if basePrice == 0 then
+        return 0
+    end
+
+    -- Floored at 1 gil so cheap items never round down to 0
     local priceRank = getPriceRank(player, fameArea)
-    return math.floor(GetReadOnlyItem(itemId):getBasePrice() * (priceRank + 389) / 400)
+    return math.max(1, math.floor(basePrice * (priceRank + 389) / 400))
 end
 
 -- send general shop dialog to player
