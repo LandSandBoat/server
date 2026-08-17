@@ -58,4 +58,18 @@ entity.onMobFight = function(mob, target)
     end
 end
 
+entity.onMobMobskillChoose = function(mob, target, skillId)
+    local tpTable =
+    {
+        xi.mobSkill.TRICLIP_1,
+        xi.mobSkill.BACK_SWISH_1,
+        xi.mobSkill.MOW_1,
+        xi.mobSkill.FRIGHTFUL_ROAR_1,
+        xi.mobSkill.UNBLESSED_ARMOR,
+        xi.mobSkill.MORTAL_RAY_MINOTAUR,
+    }
+
+    return tpTable[math.randomInt(1, #tpTable)]
+end
+
 return entity

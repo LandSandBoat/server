@@ -373,6 +373,8 @@ xi.mobSkill =
 
     BLANK_GAZE                    =  586,
 
+    MORTAL_RAY_MINOTAUR           =  589,
+
     BOMB_TOSS_1                   =  591,
 
     BERSERK_BOMB_BIG              =  593, -- Big Bomb / Friars Lantern
