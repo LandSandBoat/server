@@ -463,11 +463,6 @@ bool CMobEntity::IsFarFromHome()
     return distance(loc.p, m_SpawnPoint) > m_maxRoamDistance;
 }
 
-bool CMobEntity::CanBeNeutral() const
-{
-    return !((m_Type & xi::MobType::Notorious) != xi::MobType::Normal);
-}
-
 bool CMobEntity::shouldUseTPMove(uint16 tpThreshold)
 {
     const auto& MobSkillList = battleutils::GetMobSkillList(getMobMod(xi::MobMod::SkillList));

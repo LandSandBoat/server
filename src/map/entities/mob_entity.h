@@ -70,8 +70,7 @@ public:
     auto getEntityFlags() const -> xi::EntityFlags;   // Returns the current value in m_flags
     void setEntityFlags(xi::EntityFlags EntityFlags); // Change the current value in m_flags
 
-    bool IsFarFromHome();      // check if mob is too far from spawn
-    bool CanBeNeutral() const; // check if mob can have killing pause
+    bool IsFarFromHome(); // check if mob is too far from spawn
 
     bool shouldUseTPMove(uint16 tpThreshold); // return true to use a TP move, checked on on 400ms tick interval
 
