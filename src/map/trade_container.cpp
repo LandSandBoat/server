@@ -238,6 +238,16 @@ void CTradeContainer::setShopFameArea(uint8 fameArea)
     m_shopFameArea = fameArea;
 }
 
+uint32 CTradeContainer::getShopVendorId() const
+{
+    return m_shopVendorId;
+}
+
+void CTradeContainer::setShopVendorId(uint32 vendorId)
+{
+    m_shopVendorId = vendorId;
+}
+
 void CTradeContainer::unreserveUnconfirmed()
 {
     for (uint8 slotID = 0; slotID < CONTAINER_SIZE; ++slotID)
@@ -263,6 +273,7 @@ void CTradeContainer::Clean()
 {
     m_type         = 0;
     m_shopFameArea = 0xFF; // match the lua side default value
+    m_shopVendorId = 0;
     m_ItemsCount   = 0;
     m_exSize       = 0;
 

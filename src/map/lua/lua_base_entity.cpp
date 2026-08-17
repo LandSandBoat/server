@@ -5046,6 +5046,18 @@ void CLuaBaseEntity::createShop(uint8 size, const sol::object& arg1)
     PChar->Container->Clean();
     PChar->Container->setSize(size + 1);
 
+    // Apply the vendor ID to the actual shop container not the tempoary one
+    const auto* PVendor = [&]()
+    {
+        if (PChar->isInEvent())
+        {
+            return PChar->currentEvent->targetEntity;
+        }
+
+        return PChar->eventPreparation->targetEntity;
+    }();
+    PChar->Container->setShopVendorId(PVendor ? PVendor->id : 0);
+
     if (arg1 != sol::lua_nil && arg1.is<double>())
     {
         PChar->Container->setType(arg1.as<uint8>());

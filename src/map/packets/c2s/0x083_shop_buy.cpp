@@ -21,12 +21,67 @@
 
 #include "0x083_shop_buy.h"
 
+#include "common/settings.h"
 #include "entities/char_entity.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x03f_shop_buy.h"
 #include "trade_container.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
+#include "utils/zoneutils.h"
+
+namespace
+{
+
+const auto auditPurchase = [](Scheduler& scheduler, CCharEntity* PChar, uint32_t itemId, uint32_t quantity, uint32_t basePrice, int32_t appliedGil)
+{
+    if (settings::get<bool>("map.AUDIT_PLAYER_VENDOR"))
+    {
+        const auto* PNpc = zoneutils::GetEntity(PChar->Container->getShopVendorId(), TYPE_NPC);
+
+        const auto npcName = [PNpc]() -> std::string
+        {
+            if (PNpc)
+            {
+                return PNpc->getName();
+            }
+
+            return {};
+        }();
+
+        scheduler.postToWorkerThread(
+            [itemId,
+             quantity,
+             buyer     = PChar->id,
+             buyerName = PChar->getName(),
+             basePrice,
+             appliedGil,
+             npcId = PChar->Container->getShopVendorId(),
+             npcName,
+             zoneId = static_cast<uint16>(PChar->getZone())]()
+            {
+                const auto totalPrice = quantity * basePrice;
+
+                if (!db::preparedStmt("INSERT INTO audit_vendor(itemid, quantity, seller, seller_name, direction, npcid, npc_name, zoneid, baseprice, totalprice, applied_gil, date) "
+                                      "VALUES (?, ?, ?, ?, 'buy', ?, ?, ?, ?, ?, ?, UNIX_TIMESTAMP())",
+                                      itemId,
+                                      quantity,
+                                      buyer,
+                                      buyerName,
+                                      npcId,
+                                      npcName,
+                                      zoneId,
+                                      basePrice,
+                                      totalPrice,
+                                      appliedGil))
+                {
+                    ShowErrorFmt("Failed to log vendor purchase (item: {}, quantity: {}, buyer: {}, totalprice: {})", itemId, quantity, buyer, totalPrice);
+                }
+            });
+    }
+};
+
+} // namespace
 
 auto GP_CLI_COMMAND_SHOP_BUY::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
@@ -99,7 +154,14 @@ void GP_CLI_COMMAND_SHOP_BUY::process(MapSession* PSession, CCharEntity* PChar) 
     {
         if (charutils::AddItem(PChar, LOC_INVENTORY, itemId, quantity) != ERROR_SLOTID)
         {
+            // Track the gil the player had before the transaction
+            const uint32 gilBefore = gil->getQuantity();
             charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -static_cast<int32>(price * quantity));
+
+            // Audit the purchase if enabled
+            const auto appliedGil = static_cast<int32>(PChar->getStorage(LOC_INVENTORY)->GetItem(0)->getQuantity()) - static_cast<int32>(gilBefore);
+            auditPurchase(*PSession->scheduler, PChar, itemId, quantity, price, appliedGil);
+
             ShowInfo("User '%s' purchased %u of item of ID %u [from VENDOR] ", PChar->getName(), quantity, itemId);
             PChar->pushPacket<GP_SERV_COMMAND_SHOP_BUY>(this->ShopItemIndex, quantity);
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);

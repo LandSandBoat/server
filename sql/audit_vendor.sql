@@ -15,12 +15,18 @@ CREATE TABLE IF NOT EXISTS `audit_vendor` (
   `quantity` int(10) unsigned NOT NULL DEFAULT '0',
   `seller` int(10) unsigned NOT NULL DEFAULT '0',
   `seller_name` varchar(15) DEFAULT NULL,
+  `direction` enum('sell','buy') NOT NULL DEFAULT 'sell',
+  `npcid` int(10) unsigned NOT NULL DEFAULT '0',
+  `npc_name` varchar(64) DEFAULT NULL,
+  `zoneid` smallint(5) unsigned NOT NULL DEFAULT '0',
   `baseprice` int(10) unsigned NOT NULL DEFAULT '0',
   `totalprice` int(10) unsigned NOT NULL DEFAULT '0',
+  `applied_gil` int(11) NOT NULL DEFAULT '0',
   `date` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `itemid` (`itemid`),
-  KEY `charid` (`seller`)
+  KEY `charid` (`seller`),
+  KEY `npcid` (`npcid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 --
