@@ -118,7 +118,12 @@ auto CItemState::init() -> StateErrorOr<void>
     m_PEntity->UContainer->SetType(UCONTAINER_USEITEM);
     m_PEntity->UContainer->SetItem(0, m_PItem);
 
-    tx_             = m_PEntity->addTransaction(ItemUseTransaction::start(m_PEntity, m_PItem));
+    tx_ = m_PEntity->addTransaction(ItemUseTransaction::start(m_PEntity, m_PItem));
+    if (!tx_)
+    {
+        return Error{ std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, 0, 0, MsgBasic::UnableToUseItem) };
+    }
+
     m_startPos      = m_PEntity->loc.p;
     m_castTime      = m_PItem->getActivationTime();
     m_animationTime = m_PItem->getAnimationTime();

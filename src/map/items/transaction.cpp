@@ -580,7 +580,8 @@ auto Transaction::mergeInto(CCharEntity* PChar, const uint8 location, const uint
                        }
                    });
 
-    return true;
+    // a merge clamped at the stack limit moved less than it was given, which the caller has to hear about
+    return merged.delta == static_cast<int32>(quantity);
 }
 
 auto Transaction::pay(CCharEntity* PChar, const uint32 gil) -> bool

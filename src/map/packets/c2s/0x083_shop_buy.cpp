@@ -153,7 +153,13 @@ void GP_CLI_COMMAND_SHOP_BUY::process(MapSession* PSession, CCharEntity* PChar) 
     const auto cost = price * quantity;
 
     // Track the gil the player had before the transaction
-    const uint32 gilBefore = PChar->getStorage(LOC_INVENTORY)->GetItem(0)->getQuantity();
+    const CItem* PCharGil = PChar->getStorage(LOC_INVENTORY)->GetItem(0);
+    if (!PCharGil)
+    {
+        return;
+    }
+
+    const uint32 gilBefore = PCharGil->getQuantity();
 
     if (!transaction->pay(cost) || !transaction->give(LOC_INVENTORY, itemId, quantity) || !transaction->commit())
     {
