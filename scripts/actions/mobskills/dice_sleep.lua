@@ -1,7 +1,6 @@
 -----------------------------------
 -- Goblin Dice
 -- Description: Sleep
--- Type: Physical (Blunt)
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -11,7 +10,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLEEP_I, 1, 0, 30))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLEEP_I, 1, 0, 90))
 
     return xi.effect.SLEEP_I
 end

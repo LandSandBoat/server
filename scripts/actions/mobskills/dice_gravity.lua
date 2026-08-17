@@ -1,7 +1,7 @@
 -----------------------------------
--- Head Butt
--- Family: Quadav
--- Description: Deals physical damage to a target. Additional Effect: Stun
+-- Goblin Dice
+-- Description: Single target Gravity and knockback
+-- May have some sort of enmity mechanic
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -18,14 +18,14 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     params.fTP            = { 1.5, 1.5, 1.5 }
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.BLUNT
-    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- TODO: Capture shadow behavior
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)
 
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, math.randomInt(5, 10))
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 50, 0, 90)
     end
 
     return info.damage

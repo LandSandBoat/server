@@ -1,7 +1,6 @@
 -----------------------------------
 -- Goblin Dice
--- Description: Stun
--- Type: Physical (Blunt)
+-- Description: Dispels 3 effects
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
