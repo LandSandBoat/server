@@ -50,6 +50,9 @@ namespace
 // Distance walked toward spawn per roam-home tick before re-evaluating.
 constexpr float kRoamHomeStepDistance = 10.0f;
 
+// A mob notices nobody for this long after spawning or losing its target.
+constexpr auto kNeutralDuration = 15s;
+
 } // namespace
 
 CMobController::CMobController(CMobEntity* PEntity)
@@ -1674,8 +1677,8 @@ auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
         co_return;
     }
 
-    // Don't aggro for ~10s after disengaging.
-    PMob->m_neutral = PMob->CanBeNeutral() && m_Tick <= m_NeutralTime + 10s;
+    // Don't aggro for a moment after disengaging.
+    PMob->m_neutral = m_Tick <= m_NeutralTime + kNeutralDuration;
 
     // If we already have a roam path going, just keep walking it.
     if (PMob->PAI->PathFind->IsFollowingPath())

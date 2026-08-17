@@ -71,8 +71,7 @@ public:
     auto getEntityFlags() const -> xi::EntityFlags;   // Returns the current value in m_flags
     void setEntityFlags(xi::EntityFlags EntityFlags); // Change the current value in m_flags
 
-    bool IsFarFromHome();      // check if mob is too far from spawn
-    bool CanBeNeutral() const; // check if mob can have killing pause
+    bool IsFarFromHome(); // check if mob is too far from spawn
 
     auto DistanceFromHome() const -> float;       // how far it strayed: outside its roam region, or from its spawn point when it has none
     auto GetRoamAnchor() const -> position_t;     // the point roaming is measured from

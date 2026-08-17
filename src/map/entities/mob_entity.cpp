@@ -504,11 +504,6 @@ bool CMobEntity::IsFarFromHome()
     return DistanceFromHome() > m_maxRoamDistance;
 }
 
-bool CMobEntity::CanBeNeutral() const
-{
-    return !((m_Type & xi::MobType::Notorious) != xi::MobType::Normal);
-}
-
 bool CMobEntity::shouldUseTPMove(uint16 tpThreshold)
 {
     const auto& MobSkillList = battleutils::GetMobSkillList(getMobMod(xi::MobMod::SkillList));
@@ -800,6 +795,12 @@ void CMobEntity::Spawn()
     if (getMobMod(xi::MobMod::IdleDespawn) > 0)
     {
         SetDespawnTime(std::chrono::seconds(getMobMod(xi::MobMod::IdleDespawn)));
+    }
+
+    // Roam immediately on spawn
+    if (CanRoam() && PAI->PathFind->RoamAround(m_SpawnPoint, GetRoamDistance(), static_cast<uint8>(getMobMod(xi::MobMod::RoamTurns)), m_roamFlags))
+    {
+        PAI->PathFind->FollowPath(timer::now());
     }
 }
 
