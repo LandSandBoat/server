@@ -741,6 +741,12 @@ void CMobEntity::Spawn()
     {
         SetDespawnTime(std::chrono::seconds(getMobMod(xi::MobMod::IdleDespawn)));
     }
+
+    // Roam immediately on spawn
+    if (CanRoam() && PAI->PathFind->RoamAround(m_SpawnPoint, GetRoamDistance(), static_cast<uint8>(getMobMod(xi::MobMod::RoamTurns)), m_roamFlags))
+    {
+        PAI->PathFind->FollowPath(timer::now());
+    }
 }
 
 void CMobEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action)
