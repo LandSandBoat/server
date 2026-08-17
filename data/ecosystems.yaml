@@ -4228,6 +4228,9 @@ ecosystems:
           draugar:
             id: 416
             attributes:
+              mods:
+                mdef:      20
+                udmgmagic: -1250
               stats:
                 vit: d
                 agi: d
@@ -4725,6 +4728,8 @@ ecosystems:
             id: 471
             attributes:
               element: fire
+              mods:
+                dmgphys: -1250
               stats:
                 str: e
                 dex: e

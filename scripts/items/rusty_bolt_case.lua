@@ -1,6 +1,7 @@
 -----------------------------------
 -- ID: 4197
 -- rusty_bolt_case
+-- When used, you will obtain one partial stack of Rusty Bolts
 -----------------------------------
 ---@type TItem
 local itemObject = {}
@@ -10,7 +11,7 @@ itemObject.onItemCheck = function(target, item, caster)
 end
 
 itemObject.onItemUse = function(target)
-    npcUtil.giveItem(target, { { xi.item.RUSTY_BOLT, 99 } })-- 99x rusty_bolt
+    npcUtil.giveItem(target, { { xi.item.RUSTY_BOLT, math.randomInt(10, 20) } })
 end
 
 return itemObject
