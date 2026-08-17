@@ -134,6 +134,8 @@ set(MAP_CORE_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/recast_container.h
     ${CMAKE_CURRENT_SOURCE_DIR}/roe.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/roe.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/roam_region.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/roam_region.h
     ${CMAKE_CURRENT_SOURCE_DIR}/socket.h
     ${CMAKE_CURRENT_SOURCE_DIR}/spatial_grid.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/spatial_grid.h

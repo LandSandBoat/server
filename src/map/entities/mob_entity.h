@@ -44,6 +44,7 @@ enum class MsgBasic : uint16_t;
 class CMobSpellContainer;
 class CMobSpellList;
 class CEnmityContainer;
+class RoamRegion;
 class SpawnSlot;
 
 // Per-mob spawn window in Vana'diel hours; the mob spawns only within [spawnHour, despawnHour) (wraps past midnight).
@@ -72,6 +73,11 @@ public:
 
     bool IsFarFromHome();      // check if mob is too far from spawn
     bool CanBeNeutral() const; // check if mob can have killing pause
+
+    auto DistanceFromHome() const -> float;       // how far it strayed: outside its roam region, or from its spawn point when it has none
+    auto GetRoamAnchor() const -> position_t;     // the point roaming is measured from
+    void setRoamRegion(const RoamRegion* region); // assigning a region drops m_maxRoamDistance to 0: its edge is the limit
+    auto roamRegion() const -> const RoamRegion*;
 
     bool shouldUseTPMove(uint16 tpThreshold); // return true to use a TP move, checked on on 400ms tick interval
 
@@ -242,6 +248,7 @@ private:
     static constexpr float                roam_home_distance{ 60.f };
     SpawnSlot*                            spawnSlot = nullptr;
     Maybe<SpawnWindow>                    spawnWindow_;
+    const RoamRegion*                     roamRegion_{ nullptr }; // area it spawns and roams in, owned by the zone
 };
 
 #endif

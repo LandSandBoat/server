@@ -37,6 +37,7 @@
 #include "mobskill.h"
 #include "party.h"
 #include "recast_container.h"
+#include "roam_region.h"
 #include "spawn_handler.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
@@ -678,7 +679,7 @@ auto CMobController::ShouldCloseToTarget(const float currentDistance) -> bool
     }
 
     // Spawn leash: don't chase past the configured tether distance.
-    if (PMob->getMobMod(xi::MobMod::SpawnLeash) > 0 && distance(PMob->loc.p, PMob->m_SpawnPoint) > PMob->getMobMod(xi::MobMod::SpawnLeash))
+    if (PMob->getMobMod(xi::MobMod::SpawnLeash) > 0 && PMob->DistanceFromHome() > PMob->getMobMod(xi::MobMod::SpawnLeash))
     {
         return false;
     }
@@ -1705,9 +1706,20 @@ auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
             {
                 PMob->m_IsPathingHome = true;
 
-                if (!PMob->PAI->PathFind->IsFollowingPath() && !PMob->PAI->PathFind->PathTo(PMob->m_SpawnPoint))
+                // heading home means the nearest edge of the region, not the spot it happened to spawn on
+                const auto homePoint = [&]
                 {
-                    PMob->PAI->PathFind->PathInRange(PMob->m_SpawnPoint, PMob->m_maxRoamDistance, PATHFLAG_RUN);
+                    if (PMob->roamRegion())
+                    {
+                        return PMob->roamRegion()->closestPoint(PMob->loc.p);
+                    }
+
+                    return PMob->m_SpawnPoint;
+                }();
+
+                if (!PMob->PAI->PathFind->IsFollowingPath() && !PMob->PAI->PathFind->PathTo(homePoint))
+                {
+                    PMob->PAI->PathFind->PathInRange(homePoint, PMob->m_maxRoamDistance, PATHFLAG_RUN);
                 }
 
                 // Cap the path so we re-evaluate every few seconds instead of bee-lining home.
@@ -1802,8 +1814,7 @@ auto CMobController::DoRoamTick(timer::time_point tick) -> Task<void>
                     luautils::OnMobRoamAction(PMob);
                     m_LastActionTime = m_Tick;
                 }
-                else if (!isWormSurfacing &&
-                         PMob->PAI->PathFind->RoamAround(PMob->m_SpawnPoint, PMob->GetRoamDistance(), static_cast<uint8>(PMob->getMobMod(xi::MobMod::RoamTurns)), PMob->m_roamFlags))
+                else if (!isWormSurfacing && PMob->PAI->PathFind->RoamAround(PMob->GetRoamAnchor(), PMob->GetRoamDistance(), static_cast<uint8>(PMob->getMobMod(xi::MobMod::RoamTurns)), PMob->m_roamFlags, PMob->roamRegion()))
                 {
                     if ((PMob->m_roamFlags & xi::RoamFlag::Stealth) != xi::RoamFlag::None)
                     {
@@ -1897,7 +1908,7 @@ void CMobController::FollowRoamPath()
         }
 
         // Snap to spawn rotation after pathing home, for mobs that must face a fixed direction.
-        if (PMob->getMobMod(xi::MobMod::RoamResetFacing) && distance(PMob->loc.p, PMob->m_SpawnPoint) <= PMob->m_maxRoamDistance)
+        if (PMob->getMobMod(xi::MobMod::RoamResetFacing) && PMob->DistanceFromHome() <= PMob->m_maxRoamDistance)
         {
             PMob->loc.p.rotation = PMob->m_SpawnPoint.rotation;
         }

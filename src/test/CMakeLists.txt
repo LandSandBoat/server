@@ -69,6 +69,7 @@ add_executable(xi_test
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/data/merits_dataset_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/entity_list_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/rng_runtime_tests.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/roam_region_tests.cpp
     ${resource})
 add_dependencies(xi_test data_schema_generate)
 

@@ -60,6 +60,7 @@
 #include "data/enums/zone_type.h"
 class XiMesh;
 class NavMesh;
+class RoamRegion;
 class SpawnHandler;
 
 #define MAX_ZONEID 300
@@ -337,6 +338,9 @@ public:
     auto navMesh() const -> NavMesh*;
     auto xiMesh() const -> XiMesh*;
 
+    auto roamRegion(const std::string& name) const -> const RoamRegion*;
+    auto addRoamRegion(std::string name, RoamRegion region) -> const RoamRegion*;
+
     auto LoadNavMesh() -> Task<void>;
     void RebuildNavMesh(const NavMeshConfig& config = {});
 
@@ -364,6 +368,8 @@ private:
 
     std::unique_ptr<NavMesh> navMesh_;
     std::unique_ptr<XiMesh>  xiMesh_;
+
+    FlatHashMap<std::string, std::unique_ptr<RoamRegion>> roamRegions_;
 
     xi::ZoneId     m_zoneID;
     xi::ZoneType   m_zoneType;

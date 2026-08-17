@@ -89,7 +89,7 @@ auto CPathFind::PathToImpl(const position_t& point, uint8 pathFlags) -> bool
     return found;
 }
 
-auto CPathFind::RoamAround(const position_t& point, float maxRadius, uint8 maxTurns, xi::RoamFlag roamFlags) -> bool
+auto CPathFind::RoamAround(const position_t& point, float maxRadius, uint8 maxTurns, xi::RoamFlag roamFlags, const RoamRegion* region) -> bool
 {
     TracyZoneScoped;
     TracyZoneString(owner_->name());
@@ -98,7 +98,7 @@ auto CPathFind::RoamAround(const position_t& point, float maxRadius, uint8 maxTu
 
     roamFlags_ = roamFlags;
 
-    if (FindRandomPath(point, maxRadius, maxTurns, roamFlags))
+    if (FindRandomPath(point, maxRadius, maxTurns, roamFlags, region))
     {
         return true;
     }
@@ -409,14 +409,14 @@ auto CPathFind::BuildDirectPath(const position_t& end) -> bool
     return true;
 }
 
-auto CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 maxTurns, xi::RoamFlag roamFlags) -> bool
+auto CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 maxTurns, xi::RoamFlag roamFlags, const RoamRegion* region) -> bool
 {
     TracyZoneScoped;
     TracyZoneString(owner_->name());
 
     const pathfind::NavPathBuilder builder{ navMesh() };
 
-    auto turnPoints = builder.findRoamTurnPoints(start, maxRadius, maxTurns);
+    auto turnPoints = builder.findRoamTurnPoints(start, maxRadius, maxTurns, region);
     if (!turnPoints)
     {
         // Hard navmesh failure - bail rather than partially populate the turn list.
