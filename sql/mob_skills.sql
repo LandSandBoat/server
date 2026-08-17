@@ -617,7 +617,7 @@ INSERT INTO `mob_skills` VALUES (584,328,'uppercut',0,0.0,7.0,2000,1500,4,0,0,2,
 INSERT INTO `mob_skills` VALUES (586,330,'blank_gaze',4,0.0,7.0,2000,2000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (587,331,'antiphase',1,0.0,15.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (588,398,'death_trap',1,0.0,30.0,2000,2000,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (589,333,'mortal_ray',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (589,855,'mortal_ray_minotaur',0,0.0,15.0,2900,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (590,334,'goblin_rush',0,0.0,6.0,2966,800,4,0,0,1,0,0,0);
 INSERT INTO `mob_skills` VALUES (591,335,'bomb_toss',2,0.0,13.5,2916,4000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (592,336,'bomb_toss_suicide',1,0.0,13.5,4683,4000,4,0,0,0,0,0,0);
