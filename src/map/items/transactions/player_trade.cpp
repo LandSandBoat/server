@@ -262,9 +262,21 @@ void PlayerTradeTransaction::closeAndRemove()
     // a side that no longer resolves has nothing to clean up; the other side still does
     for (const auto& side : this->sides_)
     {
-        if (auto* PChar = charOf(side))
+        auto* PChar = charOf(side);
+        if (!PChar)
         {
-            PChar->TradePending.clean();
+            continue;
+        }
+
+        PChar->TradePending.clean();
+
+        // staging greys the item out on the client, so it has to be told when the trade ends
+        for (const auto& slot : side.slots)
+        {
+            if (auto* PItem = slot.staged.resolve())
+            {
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::Normal);
+            }
         }
     }
 
