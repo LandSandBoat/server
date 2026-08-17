@@ -7,13 +7,13 @@ local itemObject = {}
 
 itemObject.onFurniturePlaced = function(player)
     if player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK) == xi.questStatus.QUEST_AVAILABLE then
-        player:setCharVar('Quest[4][100]bedPlacedTime', GetSystemTime())
-        player:setLocalVar('Quest[4][100]mustZone', 1)
+        xi.quest.setVar(player, xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK, 'bedPlacedTime', GetSystemTime())
+        xi.quest.setLocalVar(player, xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK, 'mustZone', 1)
     end
 end
 
 itemObject.onFurnitureRemoved = function(player)
-    player:setCharVar('Quest[4][100]bedPlacedTime', 0)
+    xi.quest.setVar(player, xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK, 'bedPlacedTime', 0)
 end
 
 return itemObject

@@ -12,7 +12,7 @@ quest.reward =
     title = xi.title.MOGS_LOVING_MASTER,
 }
 
--- Since there are so many zones with interactions:
+-- Every Mog House zone shares one section table.
 quest.sections = {}
 
 quest.sections[1] =
@@ -24,7 +24,7 @@ quest.sections[1] =
             player:hasCompletedQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_MOOGLE_PICNIC) and
             xi.moghouse.inMogHouseInHomeNation(player) and
             player:getFameLevel(player:getNation()) >= 7 and
-            not quest:getMustZone(player) and
+            quest:getLocalVar(player, 'mustZone') == 0 and
             quest:getLocalVar(player, 'questSeen') == 0 and
             bedPlacedTime ~= 0 and
             GetSystemTime() > bedPlacedTime + 60
@@ -66,7 +66,7 @@ local questAccepted =
     ['Moogle'] =
     {
         onTrade = function(player, npc, trade)
-            if npcUtil.tradeHasExactly(trade, { xi.item.RAPTOR_MANTLE, xi.item.WOOL_HAT }) then
+            if npcUtil.tradeMatches(trade, { { xi.item.RAPTOR_MANTLE, 1 }, { xi.item.WOOL_HAT, 1 } }) then
                 return quest:progressEvent(30015)
             end
         end,
@@ -97,7 +97,7 @@ local questAccepted =
         end,
 
         [30015] = function(player, csid, option, npc)
-            player:confirmTrade()
+            player:tradeComplete()
             quest:setVar(player, 'Prog', 1)
             quest:setVar(player, 'Timer', GetSystemTime() + 60)
         end,
