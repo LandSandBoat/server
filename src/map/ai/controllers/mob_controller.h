@@ -49,6 +49,7 @@ public:
     virtual auto MobSkill(EntityId target, uint16 wsid, Maybe<timer::duration> castTimeOverride) -> bool;
     auto         Ability(EntityId target, uint16 abilityid) -> bool override;
     auto         MobSkill(int listId = 0) -> bool;
+    auto         TryMobSkill(uint16 skillId, CBattleEntity* PTarget) -> bool;
     auto         TryCastSpell() -> bool;
     auto         TrySpecialSkill() -> bool;
     auto         CanFollowTarget(CBattleEntity*) const -> bool;

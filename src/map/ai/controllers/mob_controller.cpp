@@ -277,35 +277,47 @@ auto CMobController::MobSkill(int listId) -> bool
     }();
 
     auto skillList = battleutils::GetMobSkillList(resolvedListId);
+    std::erase_if(skillList,
+                  [&](const uint16 skillId)
+                  {
+                      if (battleutils::GetMobSkill(skillId) != nullptr)
+                      {
+                          return false;
+                      }
+                      ShowError("Mobskill with ID (%i) [called from skill-list ID (%i)] isn't properly defined in mob_skills.sql", skillId, resolvedListId);
+                      return true;
+                  });
     if (skillList.empty())
     {
         return false;
     }
     std::shuffle(skillList.begin(), skillList.end(), xirand::rng());
 
-    // Pick the first valid mob skill from the shuffled list.
-    const uint16 firstValidSkillId = [&]() -> uint16
+    // Lua may override the skill
+    // We used that isntead of the shuffled list
+    const auto overrideSkill = luautils::OnMobMobskillChoose(PMob, PTarget, skillList.front());
+    if (overrideSkill > 0)
     {
-        for (const auto skillId : skillList)
+        return TryMobSkill(overrideSkill, PTarget);
+    }
+
+    // Start at the top of the list after the shuffle, first one that returns 0 wins
+    for (const auto skillId : skillList)
+    {
+        if (TryMobSkill(skillId, PTarget))
         {
-            if (battleutils::GetMobSkill(skillId) != nullptr)
-            {
-                return skillId;
-            }
-            ShowError("CMobController::MobSkill -> Mobskill with ID (%i) [called from skill-list ID (%i)] isn't properly defined in mob_skills.sql", skillId, resolvedListId);
+            return true;
         }
-        return 0;
-    }();
+    }
 
-    // Lua may override the chosen skill.
-    const uint16 chosenSkillId = [&]() -> uint16
-    {
-        const auto overrideSkill = luautils::OnMobMobskillChoose(PMob, PTarget, firstValidSkillId);
-        return overrideSkill > 0 ? overrideSkill : firstValidSkillId;
-    }();
+    return false;
+}
 
-    auto* PMobSkill = battleutils::GetMobSkill(chosenSkillId);
-    if (!PMobSkill)
+// Try to use the given skill on the target
+auto CMobController::TryMobSkill(const uint16 skillId, CBattleEntity* PTarget) -> bool
+{
+    auto* PMobSkill = battleutils::GetMobSkill(skillId);
+    if (!PMobSkill || PMobSkill->isAstralFlow())
     {
         return false;
     }
@@ -322,10 +334,7 @@ auto CMobController::MobSkill(int listId) -> bool
     }
     PActionTarget = luautils::OnMobSkillTarget(PActionTarget, PMob, PMobSkill);
 
-    // NOTE: OnMobSkillReadyTime runs unconditionally so its Lua side effects still fire.
-    const auto mobSkillReadyTime = luautils::OnMobSkillReadyTime(PActionTarget, PMob, PMobSkill);
-
-    if (!PActionTarget || PMobSkill->isAstralFlow())
+    if (!PActionTarget)
     {
         return false;
     }
@@ -341,6 +350,8 @@ auto CMobController::MobSkill(int listId) -> bool
     {
         return false;
     }
+
+    const auto mobSkillReadyTime = luautils::OnMobSkillReadyTime(PActionTarget, PMob, PMobSkill);
 
     return MobSkill(PActionTarget->entityId(), PMobSkill->getID(), mobSkillReadyTime);
 }
