@@ -54,6 +54,7 @@ zones[xi.zone.NORG] =
     },
     npc =
     {
+        TALES_BEGINNING = GetFirstID('Tales_Beginning'), -- ZM1 mission script uses this
     },
 }
 
