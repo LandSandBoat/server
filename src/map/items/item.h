@@ -55,10 +55,8 @@ enum ITEM_TYPE
 enum ITEM_SUBTYPE
 {
     ITEM_NORMAL    = 0x00,
-    ITEM_LOCKED    = 0x01,
     ITEM_CHARGED   = 0x02,
     ITEM_AUGMENTED = 0x04,
-    ITEM_UNLOCKED  = 0xFE,
 };
 
 class CItem
@@ -76,7 +74,6 @@ public:
     auto   hasFlag(ItemFlag flag) const -> bool;
     uint8  getAppraisalID() const;
     uint8  getAHCat() const;
-    uint32 getReserve() const;
     uint32 getQuantity() const;
     uint32 getStackSize() const;
     uint32 getBasePrice() const;
@@ -87,6 +84,9 @@ public:
     bool isSent() const;
     bool isType(ITEM_TYPE) const;
     bool isSubType(ITEM_SUBTYPE) const;
+
+    // process-unique, never reused. Distinguishes this stack from an identical one
+    auto uid() const -> uint64;
     bool isStorageSlip() const;
 
     void setID(uint16);
@@ -95,7 +95,6 @@ public:
     void setFlag(ItemFlag);
     void setAppraisalID(uint8 appraisailID);
     void setAHCat(uint8);
-    void setReserve(uint32);
     void setQuantity(uint32);
     void setStackSize(uint32);
     void setBasePrice(uint32);
@@ -149,11 +148,11 @@ protected:
 
 private:
     uint16   m_id;
+    uint64   m_uid;
     uint16   m_subid;
     uint16   m_type;
     uint8    m_subtype;
-    uint32   m_quantity; // Current number of items
-    uint32   m_reserve;
+    uint32   m_quantity;  // Current number of items
     uint32   m_stackSize; // The maximum number of items
     uint32   m_BasePrice;
     uint32   m_CharPrice; // The cost of the subject in Bazaar

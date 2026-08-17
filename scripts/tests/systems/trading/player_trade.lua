@@ -78,19 +78,22 @@ describe('PlayerTradeTransaction', function()
 
         local received = findItem(p2, gear)
         assert(received:state() == xi.itemState.FREE, 'received state: ' .. tostring(received:state()))
-        assert(received:getReservedValue() == 0, 'received reserve: ' .. tostring(received:getReservedValue()))
     end)
 
-    it('an item reserved elsewhere cannot be staged', function()
+    it('an item claimed elsewhere cannot be staged', function()
         local gear = xi.item.BRONZE_DAGGER
 
         p1:addItem(gear)
 
+        p1:changeJob(xi.job.THF)
+        p1:setLevel(10)
+
         local item = findItem(p1, gear)
         local slot = item:getSlotID()
 
-        -- Reproduce a pending NPC trade
-        item:setReservedValue(1)
+        -- equipped items are busy, so the trade window has to refuse them
+        p1:equipItem(gear, xi.inventoryLocation.INVENTORY, xi.slot.MAIN)
+        assert(item:state() == xi.itemState.EQUIPPED, 'state: ' .. tostring(item:state()))
 
         openTrade()
         p1.actions:tradeOffer(1, slot, gear, 1)

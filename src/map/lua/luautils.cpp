@@ -87,6 +87,7 @@
 #include "instance.h"
 #include "ipc_client.h"
 #include "items/item_furnishing.h"
+#include "items/transactions/npc_trade.h"
 #include "map/navmesh/navmesh.h"
 #include "map_engine.h"
 #include "mobskill.h"
@@ -2747,6 +2748,15 @@ int32 OnEventFinish(CCharEntity* PChar, uint16 eventID, uint32 result)
     // Restore eventPreparation before potentially bailing out of function due to errors
     PChar->eventPreparation = previousPrep;
 
+    // a script that confirmed goods but never consumed them would keep the claim past the event
+    if (auto* offer = PChar->activeTransaction<NpcTradeTransaction>())
+    {
+        ShowWarningFmt("luautils::OnEventFinish: {} left a trade open at the end of event {} in {}", PChar->getName(), eventID, PChar->loc.zone->getName());
+
+        PChar->removeTransaction(offer);
+        PChar->TradeContainer->Clean();
+    }
+
     if (!func_result.valid())
     {
         sol::error err = func_result;
@@ -2774,7 +2784,7 @@ void OnTrade(CCharEntity* PChar, CBaseEntity* PNpc)
     auto onTradeFramework = lua["InteractionGlobal"]["onTrade"];
     auto onTrade          = getCachedFileFunction(filename, "onTrade");
 
-    auto result = onTradeFramework(PChar, PNpc, PChar->TradeContainer, onTrade);
+    auto result = onTradeFramework(PChar, PNpc, CLuaTradeContainer(PChar->TradeContainer, PChar), onTrade);
     if (!result.valid())
     {
         sol::error err = result;

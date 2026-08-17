@@ -25,14 +25,17 @@
 #include "common/cbasetypes.h"
 #include "luautils.h"
 
+class CCharEntity;
 class CTradeContainer;
 
 class CLuaTradeContainer
 {
     CTradeContainer* m_pMyTradeContainer;
 
+    CCharEntity* m_owner{};
+
 public:
-    CLuaTradeContainer(CTradeContainer*);
+    CLuaTradeContainer(CTradeContainer*, CCharEntity* owner);
 
     CTradeContainer* GetTradeContainer() const
     {
@@ -54,6 +57,12 @@ public:
     bool   confirmSlot(uint8 slotID, const sol::object& amountObj);
     void   clean();
 
+private:
+    // the items live in the transaction, the container only describes the offer
+    auto tradedItem(uint8 slotID) const -> CItem*;
+    auto confirmQuantity(uint8 slotID, uint32 quantity) const -> bool;
+
+public:
     bool operator==(const CLuaTradeContainer& other) const
     {
         return this->m_pMyTradeContainer == other.m_pMyTradeContainer;

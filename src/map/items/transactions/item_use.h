@@ -23,6 +23,7 @@
 
 #include "common/types/badge.h"
 #include "common/types/flag.h"
+#include "items/item_id.h"
 #include "items/transaction.h"
 
 #include <memory>
@@ -33,8 +34,6 @@ class CItemUsable;
 
 using TakesCustody = xi::Flag<struct TakesCustodyTag>;
 
-// Tx for one item-use (potion, scroll, charged equipment).
-//
 // Consumables: stamped InTransaction; doCommit decrements the stack, doRollback releases the stamp.
 // Charged equipment: no stamp; commit/rollback are no-ops (the charge decrement runs in OnItemFinish).
 
@@ -52,14 +51,12 @@ public:
 
     DISALLOW_COPY_AND_MOVE(ItemUseTransaction);
 
-    auto holds(const CItem* item) const -> bool override;
-
 protected:
     auto doCommit() -> bool override;
     void doRollback() override;
 
 private:
     CCharEntity* player_{};
-    CItemUsable* item_{};
+    ItemId       item_{};
     TakesCustody takesCustody_{ TakesCustody::No };
 };

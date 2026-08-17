@@ -33,6 +33,23 @@
 #include "packets/s2c/0x020_item_attr.h"
 #include "utils/charutils.h"
 
+namespace
+{
+
+// unlocks the ingredients that are still claimed
+void unlockAll(CCharEntity* PChar, const std::vector<ItemId>& claims)
+{
+    for (const auto& claimed : claims)
+    {
+        if (auto* PItem = claimed.resolve())
+        {
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::Normal);
+        }
+    }
+}
+
+} // namespace
+
 SynthTransaction::SynthTransaction(xi::Badge<SynthTransaction>, CCharEntity* player)
 : player_(player)
 {
@@ -62,17 +79,27 @@ auto SynthTransaction::start(CCharEntity* player, const SynthOffer& offer) -> st
 
     auto transaction = std::unique_ptr<SynthTransaction>(new SynthTransaction(xi::Badge<SynthTransaction>{}, player));
 
+    // clears the slots so the rollback in the destructor consumes nothing. reversible() is false, so without this a refused start would still charge the ingredients
+    const auto abandon = [&transaction]() -> std::unique_ptr<SynthTransaction>
+    {
+        transaction->slots_ = {};
+
+        return nullptr;
+    };
+
     auto* crystalItem = container->GetItem(offer.crystal.invSlot);
-    if (!crystalItem || !transaction->claim(crystalItem))
+
+    const auto crystalClaim = transaction->claimAndLock(crystalItem);
+    if (!crystalClaim.isSet())
     {
         ShowWarningFmt("SynthTransaction::start: {} could not claim crystal {} at slot {}",
                        player->getName(),
                        offer.crystal.itemId,
                        offer.crystal.invSlot);
-        return nullptr;
+        return abandon();
     }
 
-    transaction->slots_[0] = Slot{ crystalItem, offer.crystal.itemId, offer.crystal.invSlot, false };
+    transaction->slots_[0] = Slot{ .claimed = crystalClaim, .itemId = offer.crystal.itemId, .saved = false };
 
     for (size_t i = 0; i < offer.ingredients.size(); ++i)
     {
@@ -88,8 +115,7 @@ auto SynthTransaction::start(CCharEntity* player, const SynthOffer& offer) -> st
                            player->getName(),
                            i,
                            ing.invSlot);
-            transaction->releaseAllClaims();
-            return nullptr;
+            return abandon();
         }
 
         auto* item = container->GetItem(ing.invSlot);
@@ -98,55 +124,45 @@ auto SynthTransaction::start(CCharEntity* player, const SynthOffer& offer) -> st
             continue;
         }
 
-        if (!transaction->holds(item) && !transaction->claim(item))
+        const auto claimed = transaction->claimAndLock(item);
+        if (!claimed.isSet())
         {
             ShowWarningFmt("SynthTransaction::start: {} could not claim ingredient {} at slot {} (entry {})",
                            player->getName(),
                            ing.itemId,
                            ing.invSlot,
                            i);
-            // If we can't start the transaction, release all already locked items to owner.
-            transaction->releaseAllClaims();
-            return nullptr;
+            return abandon();
         }
 
-        transaction->slots_[i + 1] = Slot{ .item = item, .itemId = ing.itemId, .invSlot = ing.invSlot, .saved = false };
+        transaction->slots_[i + 1] = Slot{ .claimed = claimed, .itemId = ing.itemId, .saved = false };
     }
 
     return transaction;
-}
-
-auto SynthTransaction::holds(const CItem* item) const -> bool
-{
-    if (!item)
-    {
-        return false;
-    }
-
-    for (const auto& s : this->slots_)
-    {
-        if (s.item == item)
-        {
-            return true;
-        }
-    }
-
-    return false;
 }
 
 // Crystal is always consumed/rendered early
 void SynthTransaction::consumeCrystal()
 {
     auto& slot = this->slots_[0];
-    if (!slot.item)
+    if (!slot.claimed.isSet())
     {
         return;
     }
 
-    exitTx(slot.item);
-    slot.item->setSubType(ITEM_UNLOCKED);
-    charutils::UpdateItem(this->player_, LOC_INVENTORY, slot.invSlot, -1);
-    slot.item = nullptr;
+    const auto crystalSlot = slot.claimed.slot;
+
+    if (!slot.claimed.resolve() || !Transaction::take(this->player_, LOC_INVENTORY, crystalSlot, 1))
+    {
+        ShowErrorFmt("SynthTransaction: {} kept the crystal in slot {}", this->player_->getName(), crystalSlot);
+    }
+    else
+    {
+        // only one crystal is used, so the rest of the stack goes back to the player now
+        this->release(slot.claimed);
+    }
+
+    slot.claimed.clean();
 }
 
 void SynthTransaction::markSaved(const uint8 ingredientIdx)
@@ -165,39 +181,47 @@ auto SynthTransaction::doCommit() -> bool
     std::array<uint8, MAX_CONTAINER_SIZE> consumePerSlot{};
     for (const auto& s : this->slots_)
     {
-        if (s.item && !s.saved && s.invSlot < consumePerSlot.size())
+        if (s.claimed.resolve() && !s.saved && s.claimed.slot < consumePerSlot.size())
         {
-            consumePerSlot[s.invSlot] += 1;
+            consumePerSlot[s.claimed.slot] += 1;
         }
     }
-
-    // Release all items so subsequent UpdateItem can modify them
-    this->releaseAllClaims();
 
     for (size_t s = 0; s < consumePerSlot.size(); ++s)
     {
         const uint8 toConsume = consumePerSlot[s];
-        if (toConsume > 0)
+        if (toConsume == 0)
         {
-            charutils::UpdateItem(this->player_, LOC_INVENTORY, static_cast<uint8>(s), -static_cast<int32>(toConsume));
+            continue;
+        }
+
+        if (!Transaction::take(this->player_, LOC_INVENTORY, static_cast<uint8>(s), toConsume))
+        {
+            ShowErrorFmt("SynthTransaction: {} kept {} of the ingredient in slot {}", this->player_->getName(), toConsume, s);
         }
     }
 
+    unlockAll(this->player_, this->claims());
+
     if (pendingResult_)
     {
-        const uint8 resultSlot = charutils::AddItem(this->player_, LOC_INVENTORY, pendingResult_->itemId, pendingResult_->qty);
-        if (resultSlot != ERROR_SLOTID)
+        const auto resultSlot = this->give(this->player_, LOC_INVENTORY, pendingResult_->itemId, pendingResult_->qty);
+        if (!resultSlot)
         {
-            CItem* PItem = this->player_->getStorage(LOC_INVENTORY)->GetItem(resultSlot);
+            ShowErrorFmt("SynthTransaction: {} had no room for result {}, the ingredients are already spent", this->player_->getName(), pendingResult_->itemId);
+        }
+        else
+        {
+            CItem* PItem = this->player_->getStorage(LOC_INVENTORY)->GetItem(*resultSlot);
             if (PItem && PItem->hasFlag(ItemFlag::Inscribable) && this->slots_[0].itemId > 0x1080)
             {
                 PItem->setSignature(this->player_->name);
                 db::preparedStmt("UPDATE char_inventory SET signature = ? WHERE charid = ? AND location = 0 AND slot = ? LIMIT 1",
                                  this->player_->name,
                                  this->player_->id,
-                                 resultSlot);
+                                 *resultSlot);
             }
-            this->player_->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, LOC_INVENTORY, resultSlot);
+            this->player_->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, LOC_INVENTORY, *resultSlot);
         }
 
         this->player_->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(this->player_);
@@ -206,53 +230,29 @@ auto SynthTransaction::doCommit() -> bool
     return true;
 }
 
-// Synth rollbacks LOSE EVERYTHING on purpose.
-// Drop any pending result so an accidental rollback never delivers an item.
+// Synth rollbacks LOSE EVERYTHING on purpose: the ingredients are spent the moment the synth starts, so disconnecting mid-craft must not hand them back
+auto SynthTransaction::reversible() const -> bool
+{
+    return false;
+}
+
 void SynthTransaction::doRollback()
 {
     this->pendingResult_.reset();
     std::ignore = doCommit();
 }
 
-// Lock the item and notify client
-auto SynthTransaction::claim(CItem* item) const -> bool
+// the client greys out an ingredient for as long as the synth holds it
+auto SynthTransaction::claimAndLock(CItem* item) -> ItemId
 {
-    if (!item || !enterTx(item))
+    // a recipe can draw several units from one stack, and the client only needs one lock packet
+    const bool alreadyHeld = this->holds(item);
+
+    const auto claimed = this->claim(this->player_, item);
+    if (claimed.isSet() && !alreadyHeld)
     {
-        return false;
+        this->player_->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(item, ItemLockFlg::NoSelect);
     }
 
-    this->player_->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(item, ItemLockFlg::NoSelect);
-    return true;
-}
-
-void SynthTransaction::releaseAllClaims()
-{
-    for (size_t i = 0; i < this->slots_.size(); ++i)
-    {
-        auto* item = this->slots_[i].item;
-        if (!item)
-        {
-            continue;
-        }
-
-        bool seen = false;
-        for (size_t j = 0; j < i; ++j)
-        {
-            if (this->slots_[j].item == item)
-            {
-                seen = true;
-                break;
-            }
-        }
-
-        if (!seen)
-        {
-            exitTx(item);
-            item->setSubType(ITEM_UNLOCKED);
-            this->player_->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(item, ItemLockFlg::Normal);
-        }
-
-        this->slots_[i].item = nullptr;
-    }
+    return claimed;
 }

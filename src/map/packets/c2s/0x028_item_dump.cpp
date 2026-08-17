@@ -73,13 +73,13 @@ void GP_CLI_COMMAND_ITEM_DUMP::process(MapSession* PSession, CCharEntity* PChar)
 
     CItem* PItem = PChar->getStorage(this->Category)->GetItem(this->ItemIndex);
 
-    if (!PItem || PItem->isSubType(ITEM_LOCKED))
+    if (!PItem || PItem->isBusy())
     {
         ShowWarning("GP_CLI_COMMAND_ITEM_DUMP: Attempt of removal of invalid item from slot %u", this->ItemIndex);
         return;
     }
 
-    if (PItem->getQuantity() - PItem->getReserve() < this->ItemNum)
+    if (PItem->getQuantity() < this->ItemNum)
     {
         ShowWarning("GP_CLI_COMMAND_ITEM_DUMP: Trying to drop too much quantity from location %u slot %u", this->Category, this->ItemIndex);
         return;

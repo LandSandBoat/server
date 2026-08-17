@@ -24,6 +24,7 @@
 #include "common/settings.h"
 #include "entities/char_entity.h"
 #include "items.h"
+#include "items/transactions/item_claim.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x020_item_attr.h"
 #include "utils/charutils.h"
@@ -112,7 +113,7 @@ const auto isValidMovement = [](const CCharEntity* PChar, const CONTAINER_ID fro
 {
     const CItem* PItem = PChar->getStorage(from)->GetItem(itemIndex);
 
-    if (!PItem || PItem->isSubType(ITEM_LOCKED) || PItem->isBusy() || PItem->getID() == ITEMID::GIL)
+    if (!PItem || PItem->isBusy() || PItem->getID() == ITEMID::GIL)
     {
         return false;
     }
@@ -174,17 +175,28 @@ void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar)
         return;
     }
 
-    if (PItem->getQuantity() - PItem->getReserve() < this->ItemNum)
+    if (PItem->getQuantity() < this->ItemNum)
     {
         ShowWarning("GP_CLI_COMMAND_ITEM_MOVE: Trying to move too much quantity from location %u slot %u", this->Category1, this->ItemIndex1);
         return;
     }
 
+    auto transaction = ItemClaimTransaction::start(PChar);
+    if (!transaction)
+    {
+        return;
+    }
+
     if (const uint32 newQty = PItem->getQuantity() - this->ItemNum; newQty != 0) // split item stack
     {
-        if (charutils::AddItem(PChar, this->Category2, PItem->getID(), this->ItemNum) != ERROR_SLOTID)
+        if (!transaction->claimSlot(this->Category1, this->ItemIndex1))
         {
-            charutils::UpdateItem(PChar, this->Category1, this->ItemIndex1, -static_cast<int32>(this->ItemNum));
+            return;
+        }
+
+        if (!transaction->split(this->Category1, this->ItemIndex1, this->Category2, this->ItemNum) || !transaction->commit())
+        {
+            ShowErrorFmt("GP_CLI_COMMAND_ITEM_MOVE: {} could not split item {}", PChar->getName(), PItem->getID());
         }
     }
     else // move stack / combine items into stack
@@ -195,9 +207,7 @@ void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar)
             const CItem* PItem2 = PChar->getStorage(this->Category2)->GetItem(this->ItemIndex2);
 
             if (!PItem2 || PItem2->getID() != PItem->getID() ||
-                PItem2->isSubType(ITEM_LOCKED) ||
-                PItem2->isBusy() ||
-                PItem2->getReserve() > 0)
+                PItem2->isBusy())
             {
                 ShowWarning("GP_CLI_COMMAND_ITEM_MOVE: Trying to unite items with invalid item %i at location %u slot %u",
                             PItem2 ? PItem2->getID() : 0,
@@ -219,10 +229,14 @@ void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar)
                 {
                     moveQty = PItem->getQuantity();
                 }
-                if (moveQty > 0)
+                if (!transaction->claimSlot(this->Category1, this->ItemIndex1) || !transaction->claimSlot(this->Category2, this->ItemIndex2))
                 {
-                    charutils::UpdateItem(PChar, this->Category2, this->ItemIndex2, moveQty);
-                    charutils::UpdateItem(PChar, this->Category1, this->ItemIndex1, -static_cast<int32>(moveQty));
+                    return;
+                }
+
+                if (moveQty > 0 && (!transaction->moveBetween(this->Category1, this->ItemIndex1, this->Category2, this->ItemIndex2, moveQty) || !transaction->commit()))
+                {
+                    ShowErrorFmt("GP_CLI_COMMAND_ITEM_MOVE: {} could not combine stacks", PChar->getName());
                 }
             }
 

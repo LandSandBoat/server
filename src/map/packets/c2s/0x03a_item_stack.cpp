@@ -22,12 +22,14 @@
 #include "0x03a_item_stack.h"
 
 #include "entities/char_entity.h"
+#include "items/transactions/item_claim.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "utils/charutils.h"
 
 auto GP_CLI_COMMAND_ITEM_STACK::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
     return PacketValidator(PChar)
+        .blockedBy({ BlockedState::InEvent })
         .isValidContainer("Category", this->Category); // Retail honors _every_ container, even if you don't presently have access.
 }
 
@@ -53,11 +55,9 @@ void GP_CLI_COMMAND_ITEM_STACK::process(MapSession* PSession, CCharEntity* PChar
     for (uint8 slotId = 1; slotId <= size; ++slotId)
     {
         const CItem* PItem = PItemContainer->GetItem(slotId);
-        // Skip items that are invalid, locked, reserved or already meeting stack size.
+        // Skip items that are invalid, claimed or already meeting stack size.
         if (!PItem ||
-            PItem->getReserve() > 0 ||
             PItem->isBusy() ||
-            PItem->isSubType(ITEM_LOCKED) ||
             PItem->getQuantity() >= PItem->getStackSize())
         {
             continue;
@@ -67,12 +67,10 @@ void GP_CLI_COMMAND_ITEM_STACK::process(MapSession* PSession, CCharEntity* PChar
         {
             const CItem* PItem2 = PItemContainer->GetItem(slotID2);
 
-            // Skip items that are invalid, not matching, locked, reserved or already meeting stack size.
+            // Skip items that are invalid, not matching, claimed or already meeting stack size.
             if (!PItem2 ||
                 PItem2->getID() != PItem->getID() ||
-                PItem2->getReserve() > 0 ||
                 PItem2->isBusy() ||
-                PItem2->isSubType(ITEM_LOCKED) ||
                 PItem2->getQuantity() >= PItem2->getStackSize())
             {
                 continue;
@@ -90,10 +88,24 @@ void GP_CLI_COMMAND_ITEM_STACK::process(MapSession* PSession, CCharEntity* PChar
                 moveQty = PItem2->getQuantity();
             }
 
-            if (moveQty > 0)
+            if (moveQty == 0)
             {
-                charutils::UpdateItem(PChar, static_cast<uint8>(PItemContainer->GetID()), slotId, moveQty);
-                charutils::UpdateItem(PChar, static_cast<uint8>(PItemContainer->GetID()), slotID2, -static_cast<int32>(moveQty));
+                continue;
+            }
+
+            // one transaction per pair, so a stack merged away is released before the next pass
+            auto transaction = ItemClaimTransaction::start(PChar);
+            if (!transaction ||
+                !transaction->claimSlot(static_cast<uint8>(PItemContainer->GetID()), slotId) ||
+                !transaction->claimSlot(static_cast<uint8>(PItemContainer->GetID()), slotID2))
+            {
+                continue;
+            }
+
+            const auto containerId = static_cast<uint8>(PItemContainer->GetID());
+            if (!transaction->moveBetween(containerId, slotID2, containerId, slotId, moveQty) || !transaction->commit())
+            {
+                ShowErrorFmt("GP_CLI_COMMAND_ITEM_STACK: {} could not merge stacks", PChar->getName());
             }
         }
     }

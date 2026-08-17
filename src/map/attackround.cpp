@@ -22,6 +22,7 @@
 #include "attackround.h"
 #include "data/enums/mob_mod.h"
 #include "items/item_weapon.h"
+#include "items/transactions/item_claim.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "status_effect_container.h"
 
@@ -445,8 +446,14 @@ void CAttackRound::ProcFollowUpAttacks()
                                     charutils::UnequipItem(PChar, SLOT_AMMO);
                                 }
 
-                                charutils::UpdateItem(PChar, loc, slot, -1);
-                                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
+                                if (auto transaction = ItemClaimTransaction::start(PChar); !transaction || !transaction->take(loc, slot, 1) || !transaction->commit())
+                                {
+                                    ShowErrorFmt("attackround: {} fired without spending ammo in slot {}", PChar->getName(), slot);
+                                }
+                                else
+                                {
+                                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
+                                }
                             }
                         }
                     }

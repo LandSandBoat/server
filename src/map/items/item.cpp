@@ -26,19 +26,33 @@
 #include "exdata/augment_standard.h"
 #include "item.h"
 
+#include <atomic>
+
 /************************************************************************
  *                                                                       *
  *                                                                       *
  *                                                                       *
  ************************************************************************/
 
+namespace
+{
+
+auto allocItemUid() -> uint64
+{
+    static std::atomic<uint64> nextUid{ 1 };
+
+    return nextUid.fetch_add(1, std::memory_order_relaxed);
+}
+
+} // namespace
+
 CItem::CItem(uint16 id)
 : m_id(id)
+, m_uid(allocItemUid())
 , m_subid(0)
 , m_type(0)
 , m_subtype(0)
 , m_quantity(0)
-, m_reserve(0)
 , m_stackSize(0)
 , m_BasePrice(0)
 , m_CharPrice(0)
@@ -53,11 +67,11 @@ CItem::CItem(uint16 id)
 
 CItem::CItem(const CItem& other)
 : m_id(other.m_id)
+, m_uid(allocItemUid())
 , m_subid(other.m_subid)
 , m_type(other.m_type)
 , m_subtype(other.m_subtype)
 , m_quantity(other.m_quantity)
-, m_reserve(other.m_reserve)
 , m_stackSize(other.m_stackSize)
 , m_BasePrice(other.m_BasePrice)
 , m_CharPrice(other.m_CharPrice)
@@ -193,20 +207,9 @@ bool CItem::isSubType(ITEM_SUBTYPE subtype) const
     return (m_subtype & subtype);
 }
 
-/************************************************************************
- *                                                                       *
- * Reserved number of objects in a pack                                  *
- *                                                                       *
- ************************************************************************/
-
-void CItem::setReserve(uint32 reserve)
+auto CItem::uid() const -> uint64
 {
-    m_reserve = (reserve < m_quantity ? reserve : m_quantity);
-}
-
-uint32 CItem::getReserve() const
-{
-    return m_reserve;
+    return m_uid;
 }
 
 /************************************************************************

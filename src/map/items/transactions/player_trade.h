@@ -23,6 +23,9 @@
 
 #include "common/cbasetypes.h"
 #include "common/types/badge.h"
+
+#include "entities/entity_id.h"
+#include "items/item_id.h"
 #include "items/transaction.h"
 
 #include <array>
@@ -49,9 +52,7 @@ public:
     ~PlayerTradeTransaction() override;
     DISALLOW_COPY_AND_MOVE(PlayerTradeTransaction);
 
-    auto holds(const CItem* item) const -> bool override;
-
-    // Stage or clear a slot, qty 0 releases. Clears both acceptances and pushes the packets
+    // stages or clears a slot, qty 0 releases. Clears both acceptances and pushes the packets
     auto setSlot(CCharEntity* who, uint8 transactionSlot, uint8 inventorySlot, uint16 expectedItemId, uint32 qty) -> CItem*;
 
     // Returns true once both sides have accepted
@@ -68,14 +69,13 @@ protected:
 private:
     struct Slot
     {
-        CItem* item{ nullptr };
-        uint8  invSlot{ 0xFF };
+        ItemId staged{};
         uint32 qty{ 0 };
     };
 
     struct Side
     {
-        CCharEntity*               PChar{};
+        EntityId                   who{};
         std::array<Slot, MaxSlots> slots{};
         bool                       accepted{};
     };
@@ -83,7 +83,10 @@ private:
     auto sideOf(const CCharEntity* who) -> Side*;
     auto partnerOf(const CCharEntity* who) const -> CCharEntity*;
 
-    void        releaseSlot(Slot& slot) const;
+    // neither side is owned here, so each is resolved on demand
+    static auto charOf(const Side& side) -> CCharEntity*;
+
+    void        releaseSlot(Slot& slot);
     void        closeAndRemove();
     static auto canReceive(const Side& sender, CCharEntity* receiver) -> bool;
 

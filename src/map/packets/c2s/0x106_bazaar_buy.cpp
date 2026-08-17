@@ -20,6 +20,9 @@
 */
 
 #include "0x106_bazaar_buy.h"
+#include "enums/item_state.h"
+#include "items/item_access.h"
+#include "items/transactions/bazaar_purchase.h"
 
 #include <limits>
 
@@ -64,7 +67,7 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
     }
 
     CItem* PBazaarItem = PBazaar->GetItem(this->BazaarItemIndex);
-    if (PBazaarItem == nullptr || PBazaarItem->getReserve() > 0)
+    if (PBazaarItem == nullptr)
     {
         return;
     }
@@ -90,7 +93,7 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
 
     // Obtain the players gil
     const CItem* PCharGil = PBuyerInventory->GetItem(0);
-    if (PCharGil == nullptr || !PCharGil->isType(ITEM_CURRENCY) || PCharGil->getReserve() > 0)
+    if (PCharGil == nullptr)
     {
         // Player has no gil
         PChar->pushPacket<GP_SERV_COMMAND_BAZAAR_BUY>(PTarget, GP_BAZAAR_BUY_STATE::ERR);
@@ -123,17 +126,23 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
             return;
         }
 
-        auto PItemOwn = xi::items::clone(*PBazaarItem);
-        PItemOwn->setCharPrice(0);
-        PItemOwn->setQuantity(this->BuyNum);
-        PItemOwn->setSubType(ITEM_UNLOCKED);
-
-        const uint8 newSlotID = charutils::AddItem(PChar, LOC_INVENTORY, std::move(PItemOwn));
-        if (newSlotID == ERROR_SLOTID)
+        auto transaction = BazaarPurchaseTransaction::start(PChar, PTarget, this->BazaarItemIndex, this->BuyNum, Price, PriceWithTax);
+        if (!transaction || !transaction->commit())
         {
+            PChar->pushPacket<GP_SERV_COMMAND_BAZAAR_BUY>(PTarget, GP_BAZAAR_BUY_STATE::ERR);
             return;
         }
-        CItem* PItem = PBuyerInventory->GetItem(newSlotID);
+
+        const auto deliveredSlot = transaction->deliveredSlot();
+        if (!deliveredSlot)
+        {
+            ShowErrorFmt("GP_CLI_COMMAND_BAZAAR_BUY: {} bought from {} without receiving anything", PChar->getName(), PTarget->getName());
+            PChar->pushPacket<GP_SERV_COMMAND_BAZAAR_BUY>(PTarget, GP_BAZAAR_BUY_STATE::ERR);
+
+            return;
+        }
+
+        CItem* PItem = PBuyerInventory->GetItem(*deliveredSlot);
 
         if (settings::get<bool>("map.AUDIT_PLAYER_BAZAAR"))
         {
@@ -156,14 +165,9 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
                 });
         }
 
-        charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -static_cast<int32>(PriceWithTax));
-        charutils::UpdateItem(PTarget, LOC_INVENTORY, 0, Price);
-
         PChar->pushPacket<GP_SERV_COMMAND_BAZAAR_BUY>(PTarget, GP_BAZAAR_BUY_STATE::OK);
 
         PTarget->pushPacket<GP_SERV_COMMAND_BAZAAR_SALE>(PChar, PItem);
-
-        charutils::UpdateItem(PTarget, LOC_INVENTORY, this->BazaarItemIndex, -static_cast<int32>(this->BuyNum));
 
         PTarget->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PBazaar->GetItem(this->BazaarItemIndex), LOC_INVENTORY, this->BazaarItemIndex);
         PTarget->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PTarget);

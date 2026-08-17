@@ -27,6 +27,7 @@
 
 #include "entities/char_entity.h"
 
+#include "items/transactions/item_claim.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
 
@@ -125,16 +126,22 @@ void dboxutils::AddItemsToBeSent(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
         return;
     }
 
-    CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(ItemWorkNo);
+    auto transaction = ItemClaimTransaction::start(PChar);
+    if (!transaction)
+    {
+        return;
+    }
+
+    CItem* PItem = transaction->claimSlot(LOC_INVENTORY, ItemWorkNo);
 
     if (ItemStacks == 0 || !PItem)
     {
         return;
     }
 
-    if (PItem->getQuantity() < ItemStacks || PItem->getReserve() > 0 || PItem->isBusy() || PItem->isSubType(ITEM_LOCKED))
+    if (PItem->getQuantity() < ItemStacks)
     {
-        ShowWarningFmt("DBOX: {} attempted to send insufficient/reserved/locked {}: {} ({})", PChar->getName(), ItemStacks, PItem->getName(), PItem->getID());
+        ShowWarningFmt("DBOX: {} attempted to send insufficient {}: {} ({})", PChar->getName(), ItemStacks, PItem->getName(), PItem->getID());
         return;
     }
 
@@ -185,16 +192,30 @@ void dboxutils::AddItemsToBeSent(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
                 recvCharid,
                 receiverName);
 
-            if (rset && rset->rowsAffected() && charutils::UpdateItem(PChar, LOC_INVENTORY, ItemWorkNo, -static_cast<int32>(ItemStacks)))
-            {
-                PChar->UContainer->SetItem(PostWorkNo, PUBoxItem);
-                PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Set, BoxNo, PUBoxItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 1);
-                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
-            }
-            else
+            if (!rset || !rset->rowsAffected())
             {
                 destroy(PUBoxItem);
+                return;
             }
+
+            // the row is already committed, so delete it again if the stack cannot be taken
+            transaction->undoWith(
+                [charid = PChar->id, PostWorkNo]()
+                {
+                    db::preparedStmt("DELETE FROM delivery_box WHERE charid = ? AND box = 2 AND slot = ?", charid, PostWorkNo);
+                });
+
+            if (!transaction->take(LOC_INVENTORY, ItemWorkNo, ItemStacks) || !transaction->commit())
+            {
+                ShowErrorFmt("DBOX: {} kept item {} after it was written to the box, taking the row back", PChar->getName(), ItemWorkNo);
+
+                destroy(PUBoxItem);
+                return;
+            }
+
+            PChar->UContainer->SetItem(PostWorkNo, PUBoxItem);
+            PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Set, BoxNo, PUBoxItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 1);
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
         }
     }
 }
@@ -638,6 +659,12 @@ void dboxutils::TakeItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
             return;
         }
 
+        auto transaction = ItemClaimTransaction::start(PChar);
+        if (!transaction)
+        {
+            return;
+        }
+
         // clang-format off
         const auto success = db::transaction([&]()
         {
@@ -647,7 +674,7 @@ void dboxutils::TakeItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
                                                                    PChar->id, PostWorkNo, BoxNo);
                 if (rset && rset->rowsAffected())
                 {
-                    if (charutils::AddItem(PChar, LOC_INVENTORY, xi::items::clone(*PItem), true) != ERROR_SLOTID)
+                    if (transaction->give(LOC_INVENTORY, xi::items::clone(*PItem), Silence::Yes))
                     {
                         return;
                     }
@@ -659,7 +686,7 @@ void dboxutils::TakeItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
                                                                                    PChar->id, PostWorkNo, BoxNo);
                 if (rset && rset->rowsAffected())
                 {
-                    if (charutils::AddItem(PChar, LOC_INVENTORY, xi::items::clone(*PItem), true) != ERROR_SLOTID)
+                    if (transaction->give(LOC_INVENTORY, xi::items::clone(*PItem), Silence::Yes))
                     {
                         return;
                     }
@@ -670,6 +697,11 @@ void dboxutils::TakeItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
             throw std::runtime_error(fmt::format("DBOX: Could not finalize take item transaction (player: {} ({}), PostWorkNo: {})",
                                                  PChar->getName(), PChar->id, PostWorkNo));
         });
+        if (success && !transaction->commit())
+        {
+            return;
+        }
+
         if (success)
         {
             DebugDeliveryBoxFmt("DBOX: TakeItemFromCell: player: {} ({}) received item: {} ({}) from slot {}",

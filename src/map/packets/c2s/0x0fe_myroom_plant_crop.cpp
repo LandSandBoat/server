@@ -25,6 +25,7 @@
 #include "entities/char_entity.h"
 #include "enums/msg_std.h"
 #include "items/item_flowerpot.h"
+#include "items/transactions/item_claim.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x020_item_attr.h"
 #include "packets/s2c/0x0fa_myroom_operation.h"
@@ -105,10 +106,22 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CROP::process(MapSession* PSession, CCharEntity
             for (uint8 slot = 0; slot < requiredSlots; ++slot)
             {
                 uint8 quantity = std::min(remainingQuantity, stackSize);
-                if (charutils::AddItem(PChar, LOC_MOGSAFE, resultID, quantity) == ERROR_SLOTID && safe2Unlocked)
+
+                auto transaction = ItemClaimTransaction::start(PChar);
+                if (!transaction)
                 {
-                    charutils::AddItem(PChar, LOC_MOGSAFE2, resultID, quantity);
+                    break;
                 }
+
+                // falls through to the second safe when the first is full
+                const bool stored = transaction->give(LOC_MOGSAFE, resultID, quantity).has_value() ||
+                                    (safe2Unlocked && transaction->give(LOC_MOGSAFE2, resultID, quantity).has_value());
+
+                if (!stored || !transaction->commit())
+                {
+                    ShowErrorFmt("GP_CLI_COMMAND_MYROOM_PLANT_CROP: {} could not receive {} of crop {}", PChar->getName(), quantity, resultID);
+                }
+
                 remainingQuantity -= quantity;
             }
             PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(resultID, totalQuantity, 134); // Your moogle <quantity> <item> from the plant!

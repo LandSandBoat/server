@@ -65,6 +65,15 @@ struct ItemAccess
             return;
         }
 
+        // only InTransaction is released here. Equipped, Bazaar and PlacedFurniture have their own paths
+        if (item->state() != ItemState::InTransaction)
+        {
+            ShowErrorFmt("ItemAccess::exitTransaction: item {} is not claimed (current={})",
+                         item->getID(),
+                         magic_enum::enum_name(item->state()));
+            return;
+        }
+
         item->setState(ItemState::Free, xi::Badge<ItemAccess>{});
     }
 

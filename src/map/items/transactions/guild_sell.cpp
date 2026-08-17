@@ -78,37 +78,24 @@ auto GuildSellTransaction::start(CCharEntity* player, const uint16 itemId, const
         auto* item = container->GetItem(slot);
 
         // Don't claim busy items.
-        if (!item || item->isBusy() || item->getQuantity() <= item->getReserve())
+        if (!item || item->isBusy() || item->getQuantity() == 0)
         {
             continue;
         }
 
-        if (!enterTx(item))
+        const auto claimed = transaction->claim(player, item);
+        if (!claimed.isSet())
         {
             continue;
         }
 
-        const auto take = std::min<uint32>(item->getQuantity() - item->getReserve(), quantity - transaction->claimed_);
+        const auto take = std::min<uint32>(item->getQuantity(), quantity - transaction->claimed_);
 
-        transaction->claims_.push_back(Claim{ .item = item, .invSlot = slot, .quantity = static_cast<uint8>(take) });
+        transaction->lots_.push_back(Lot{ .stack = claimed, .quantity = static_cast<uint8>(take) });
         transaction->claimed_ += static_cast<uint8>(take);
     }
 
     return transaction;
-}
-
-auto GuildSellTransaction::holds(const CItem* item) const -> bool
-{
-    if (!item)
-    {
-        return false;
-    }
-
-    return std::ranges::any_of(this->claims_,
-                               [item](const Claim& claim)
-                               {
-                                   return claim.item == item;
-                               });
 }
 
 auto GuildSellTransaction::claimed() const -> uint8
@@ -137,53 +124,37 @@ auto GuildSellTransaction::doCommit() -> bool
         return false;
     }
 
-    // Snapshot what we're about to consume.
-    std::vector<std::pair<uint8, uint8>> consume;
-    uint8                                remaining = this->sold_;
+    uint8 remaining = this->sold_;
 
-    for (const auto& claim : this->claims_)
+    for (auto& lot : this->lots_)
     {
         if (remaining == 0)
         {
             break;
         }
 
-        const uint8 take = std::min(claim.quantity, remaining);
-
-        consume.emplace_back(claim.invSlot, take);
+        const uint8 take = std::min(lot.quantity, remaining);
         remaining -= take;
+
+        if (!lot.stack.resolve() || !Transaction::take(this->player_, LOC_INVENTORY, lot.stack.slot, take))
+        {
+            ShowErrorFmt("GuildSellTransaction: {} kept {} of the goods in slot {}", this->player_->getName(), take, lot.stack.slot);
+            return false;
+        }
     }
 
-    // Release before UpdateItem mutates.
-    this->releaseAllClaims();
-
-    for (const auto& [slot, take] : consume)
+    if (!this->earn(this->player_, this->sold_ * this->unitPrice_))
     {
-        charutils::UpdateItem(this->player_, LOC_INVENTORY, slot, -static_cast<int32>(take));
+        ShowErrorFmt("GuildSellTransaction: {} was not paid for the sale", this->player_->getName());
+        return false;
     }
 
-    // Award gil
-    charutils::UpdateItem(this->player_, LOC_INVENTORY, 0, static_cast<int32>(this->sold_ * this->unitPrice_));
     this->player_->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(this->player_);
 
     return true;
 }
 
+// nothing of its own to put back: the base runs the undos and releases the claims
 void GuildSellTransaction::doRollback()
 {
-    this->releaseAllClaims();
-}
-
-void GuildSellTransaction::releaseAllClaims()
-{
-    for (auto& claim : this->claims_)
-    {
-        if (claim.item)
-        {
-            exitTx(claim.item);
-            claim.item = nullptr;
-        }
-    }
-
-    this->claims_.clear();
 }

@@ -20,6 +20,10 @@
 */
 
 #include "common/logging.h"
+#include "enums/item_state.h"
+#include "items/item_access.h"
+#include "items/transactions/item_claim.h"
+#include "items/transactions/npc_trade.h"
 
 #include "common/macros.h"
 #include "common/settings.h"
@@ -1115,9 +1119,12 @@ void LoadInventory(CCharEntity* PChar)
 
                 db::extractFromBlob(rset, "extra", PItem->m_extra);
 
-                if (PItem->getCharPrice() != 0)
+                if (PItem->getCharPrice() != 0 && !xi::items::mark(PItem.get(), ItemState::Bazaar))
                 {
-                    PItem->setSubType(ITEM_LOCKED);
+                    ShowWarningFmt("LoadInventory: could not mark bazaar item {} for {}, taking it off display", PItem->getID(), PChar->getName());
+
+                    // price and state have to agree, or the item is listed with nothing guarding it
+                    PItem->setCharPrice(0);
                 }
 
                 if (PItem->isType(ITEM_LINKSHELL))
@@ -1237,7 +1244,6 @@ void LoadEquip(CCharEntity* PChar)
 
                 if ((PItem != nullptr) && PItem->isType(ITEM_LINKSHELL))
                 {
-                    PItem->setSubType(ITEM_LOCKED);
                     if (!PChar->bindEquip(equipSlotId, PItem))
                     {
                         continue;
@@ -1268,7 +1274,6 @@ void LoadEquip(CCharEntity* PChar)
             { // if the linkshell has been broken, unequip
                 uint8 SlotID     = PLinkshell1->getSlotID();
                 uint8 LocationID = PLinkshell1->getLocationID();
-                PLinkshell1->setSubType(ITEM_UNLOCKED);
                 PChar->clearEquip(SLOT_LINK1);
                 db::preparedStmt("DELETE FROM char_equip WHERE charid = ? AND slotid = ? AND containerid = ? LIMIT 1",
                                  PChar->id,
@@ -1288,7 +1293,6 @@ void LoadEquip(CCharEntity* PChar)
             { // if the linkshell has been broken, unequip
                 uint8 SlotID     = PLinkshell2->getSlotID();
                 uint8 LocationID = PLinkshell2->getLocationID();
-                PLinkshell2->setSubType(ITEM_UNLOCKED);
                 PChar->clearEquip(SLOT_LINK2);
                 db::preparedStmt("DELETE FROM char_equip WHERE charid = ? AND slotid = ? AND containerid = ? LIMIT 1",
                                  PChar->id,
@@ -1563,7 +1567,6 @@ void SendInventory(CCharEntity* PChar)
         CItem* PItem = PChar->getEquip((SLOTTYPE)i);
         if (PItem != nullptr)
         {
-            PItem->setSubType(ITEM_LOCKED);
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::NoDrop);
         }
     }
@@ -1571,7 +1574,6 @@ void SendInventory(CCharEntity* PChar)
     CItem* PItem = PChar->getEquip(SLOT_LINK1);
     if (PItem != nullptr)
     {
-        PItem->setSubType(ITEM_LOCKED);
         auto eloc1 = PChar->equipLocation(SLOT_LINK1);
 
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, *eloc1);
@@ -1582,7 +1584,6 @@ void SendInventory(CCharEntity* PChar)
     PItem = PChar->getEquip(SLOT_LINK2);
     if (PItem != nullptr)
     {
-        PItem->setSubType(ITEM_LOCKED);
         auto eloc2 = PChar->equipLocation(SLOT_LINK2);
 
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, *eloc2);
@@ -1720,87 +1721,6 @@ void SendLocalPlayerPackets(CCharEntity* PChar)
     PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MERITS>(PChar);
     PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY1>(PChar);
     PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::JOB_POINTS>(PChar);
-}
-
-/************************************************************************
- *                                                                       *
- *  Add a new item to the character in the selected container            *
- *                                                                       *
- ************************************************************************/
-
-uint8 AddItem(CCharEntity* PChar, uint8 LocationID, uint16 ItemID, uint32 quantity, bool silence)
-{
-    if (PChar->getStorage(LocationID)->GetFreeSlotsCount() == 0 || quantity == 0)
-    {
-        return ERROR_SLOTID;
-    }
-
-    auto PItem = xi::items::spawn(ItemID);
-    if (PItem == nullptr)
-    {
-        ShowWarning("AddItem: Item <%i> is not found in a database", ItemID);
-        return ERROR_SLOTID;
-    }
-
-    PItem->setQuantity(quantity);
-    return AddItem(PChar, LocationID, std::move(PItem), silence);
-}
-
-/************************************************************************
- *                                                                       *
- *  Add a new item to the character in the selected container            *
- *                                                                       *
- ************************************************************************/
-
-auto AddItem(CCharEntity* PChar, uint8 LocationID, std::unique_ptr<CItem> PItem, bool silence) -> uint8
-{
-    if (PItem->isType(ITEM_CURRENCY))
-    {
-        UpdateItem(PChar, LocationID, 0, PItem->getQuantity());
-        return 0;
-    }
-
-    if (PItem->hasFlag(ItemFlag::Rare) && HasItem(PChar, PItem->getID()))
-    {
-        if (!silence)
-        {
-            PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(PChar, PItem->getID(), 0, MsgStd::ItemEx);
-        }
-        return ERROR_SLOTID;
-    }
-
-    auto* PStorage = PChar->getStorage(LocationID);
-    uint8 SlotID   = PStorage->InsertItem(std::move(PItem));
-    if (SlotID == ERROR_SLOTID)
-    {
-        ShowDebug("AddItem: Location %i is full", LocationID);
-        return SlotID;
-    }
-
-    auto* PInserted = PStorage->GetItem(SlotID);
-
-    const char* Query = "INSERT INTO char_inventory("
-                        "charid, "
-                        "location, "
-                        "slot, "
-                        "itemId, "
-                        "quantity, "
-                        "signature, "
-                        "extra) "
-                        "VALUES(?, ?, ?, ?, ?, ?, ?) "
-                        "LIMIT 1";
-
-    if (!db::preparedStmt(Query, PChar->id, LocationID, SlotID, PInserted->getID(), PInserted->getQuantity(), PInserted->getSignature(), PInserted->m_extra))
-    {
-        ShowError("AddItem: Cannot insert item to database");
-        PStorage->RemoveItem(SlotID);
-        return ERROR_SLOTID;
-    }
-
-    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PInserted, static_cast<CONTAINER_ID>(LocationID), SlotID);
-    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
-
-    return SlotID;
 }
 
 /************************************************************************
@@ -1945,107 +1865,17 @@ uint8 MoveItem(CCharEntity* PChar, uint8 LocationID, uint8 SlotID, uint8 NewSlot
     return NewSlotID;
 }
 
-/************************************************************************
- *                                                                       *
- *  Update the number of items in the specified container and slot       *
- *                                                                       *
- ************************************************************************/
-
-uint32 UpdateItem(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quantity, bool force)
-{
-    CItem* PItem = PChar->getStorage(LocationID)->GetItem(slotID);
-
-    if (PItem == nullptr)
-    {
-        ShowDebug("UpdateItem: No item in slot %u", slotID);
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, static_cast<CONTAINER_ID>(LocationID), slotID);
-        return 0;
-    }
-
-    uint16 ItemID = PItem->getID();
-
-    if ((int32)(PItem->getQuantity() - PItem->getReserve() + quantity) < 0)
-    {
-        ShowDebug("UpdateItem: %s trying to move invalid quantity %u of itemID %u", PChar->getName(), quantity, ItemID);
-        return 0;
-    }
-
-    auto* PState = dynamic_cast<CItemState*>(PChar->PAI->GetCurrentState());
-    if (PState)
-    {
-        CItem* item = PState->GetItem();
-
-        if (item && item->getSlotID() == PItem->getSlotID() && item->getLocationID() == PItem->getLocationID() && !force)
-        {
-            return 0;
-        }
-    }
-
-    // Equipped ammo decrements its stack on consumption without leaving the slot.
-    const bool isEquippedAmmo = PItem->state() == ItemState::Equipped &&
-                                PChar->getEquip(SLOT_AMMO) == PItem;
-    if (PItem->isBusy() && !isEquippedAmmo && !force)
-    {
-        ShowWarningFmt("UpdateItem: refusing to mutate busy item {} in state {} (loc={}, slot={}, char={})",
-                       ItemID,
-                       magic_enum::enum_name(PItem->state()),
-                       LocationID,
-                       slotID,
-                       PChar->getName());
-        return 0;
-    }
-
-    uint32 newQuantity = PItem->getQuantity() + quantity;
-
-    if (newQuantity > PItem->getStackSize())
-    {
-        newQuantity = PItem->getStackSize();
-    }
-
-    if (newQuantity > 0 || PItem->isType(ITEM_CURRENCY))
-    {
-        db::preparedStmt("UPDATE char_inventory "
-                         "SET quantity = ? "
-                         "WHERE charid = ? AND location = ? AND slot = ?",
-                         newQuantity,
-                         PChar->id,
-                         LocationID,
-                         slotID);
-        PItem->setQuantity(newQuantity);
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_NUM>(static_cast<CONTAINER_ID>(LocationID), slotID, newQuantity);
-    }
-    else if (newQuantity == 0)
-    {
-        db::preparedStmt("DELETE FROM char_inventory "
-                         "WHERE charid = ? AND location = ? AND slot = ?",
-                         PChar->id,
-                         LocationID,
-                         slotID);
-        // Hold the extracted item alive until end of scope
-        auto PRemoved = PChar->getStorage(LocationID)->RemoveItem(slotID);
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, static_cast<CONTAINER_ID>(LocationID), slotID);
-
-        luautils::OnItemDrop(PChar, PItem);
-
-        // Equipped item consumed to 0: resync equipment.
-        if (PChar->inventorySyncState().hasEquipChange(PItem))
-        {
-            PChar->inventorySyncState().clearEquipChanges();
-            PChar->resyncEquipment();
-        }
-    }
-    return ItemID;
-}
-
-// A wrapper around UpdateItem, with some packets
 void DropItem(CCharEntity* PChar, uint8 container, uint8 slotID, int32 quantity, uint16 ItemID)
 {
-    if (charutils::UpdateItem(PChar, container, slotID, -quantity) != 0)
+    auto transaction = ItemClaimTransaction::start(PChar);
+    if (!transaction || !transaction->take(container, slotID, static_cast<uint32>(quantity)) || !transaction->commit())
     {
-        ShowInfo("Player %s DROPPING itemID: %s (%u) quantity: %u", PChar->getName(), xi::items::lookup(ItemID)->getName(), ItemID, quantity);
-        PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(nullptr, ItemID, quantity, MsgStd::ThrowAway);
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
+        return;
     }
+
+    ShowInfo("Player %s DROPPING itemID: %s (%u) quantity: %u", PChar->getName(), xi::items::lookup(ItemID)->getName(), ItemID, quantity);
+    PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(nullptr, ItemID, quantity, MsgStd::ThrowAway);
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 }
 
 /************************************************************************
@@ -2135,7 +1965,6 @@ void UnequipItem(CCharEntity* PChar, uint8 equipSlotID, Recalculate recalculate)
         {
             PChar->PRecastContainer->Del(RECAST_ITEM, static_cast<Recast>(PItem->getSlotID() << 8 | PItem->getLocationID())); // Also remove item from the Recast List no matter what bag its in
         }
-        PItem->setSubType(ITEM_UNLOCKED);
 
         if (equipSlotID == SLOT_SUB)
         {
@@ -3301,7 +3130,7 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 contai
     {
         if ((PItem != nullptr) && PItem->isType(ITEM_EQUIPMENT))
         {
-            if (!PItem->isSubType(ITEM_LOCKED) && EquipArmor(PChar, slotID, equipSlotID, containerID))
+            if (!PItem->isBusy() && EquipArmor(PChar, slotID, equipSlotID, containerID))
             {
                 equipSucceeded = true;
 
@@ -3320,8 +3149,6 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 contai
 
                     PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(containerID), slotID);
                 }
-
-                PItem->setSubType(ITEM_LOCKED);
 
                 if (equipSlotID == SLOT_SUB)
                 {
@@ -4743,14 +4570,26 @@ void DistributeGil(CCharEntity* PChar, CMobEntity* PMob)
 
             for (auto PMember : members)
             {
-                UpdateItem(PMember, LOC_INVENTORY, 0, gilPerPerson);
+                auto transaction = ItemClaimTransaction::start(PMember);
+                if (!transaction || !transaction->earn(gilPerPerson) || !transaction->commit())
+                {
+                    ShowErrorFmt("DistributeGil: {} did not receive {} gil", PMember->getName(), gilPerPerson);
+                    continue;
+                }
+
                 PMember->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PMember, PMember, gilPerPerson, 0, MsgBasic::Obtains);
             }
         }
     }
     else if (isWithinDistance(PChar->loc.p, PMob->loc.p, 100.0f))
     {
-        UpdateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gil));
+        auto transaction = ItemClaimTransaction::start(PChar);
+        if (!transaction || !transaction->earn(gil) || !transaction->commit())
+        {
+            ShowErrorFmt("DistributeGil: {} did not receive {} gil", PChar->getName(), gil);
+            return;
+        }
+
         PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, static_cast<int32>(gil), 0, MsgBasic::Obtains);
     }
 }
@@ -7706,6 +7545,13 @@ void removeCharFromZone(CCharEntity* PChar)
     if (auto* tradeTransaction = PChar->activePlayerTradeTransaction())
     {
         tradeTransaction->abort(PChar);
+    }
+
+    // an offer left open would keep its claim on the goods
+    if (auto* npcTrade = PChar->activeTransaction<NpcTradeTransaction>())
+    {
+        PChar->removeTransaction(npcTrade);
+        PChar->TradeContainer->Clean();
     }
 
     PChar->TradePending.clean();

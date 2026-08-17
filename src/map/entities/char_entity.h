@@ -533,21 +533,20 @@ public:
         return nullptr;
     }
 
-    // Only one transaction of each type may be active at a time. Aborts
-    // on null input or duplicate type.
+    // Only one transaction of each type may be active at a time. Null on a refused start or a duplicate.
     template <typename T>
     auto addTransaction(std::unique_ptr<T> transaction) -> T*
     {
         if (!transaction)
         {
             ShowErrorFmt("CCharEntity::addTransaction: null transaction of type {}", typeid(T).name());
-            std::abort();
+            return nullptr;
         }
 
         if (this->activeTransaction<T>())
         {
             ShowErrorFmt("CCharEntity::addTransaction: a transaction of type {} is already active", typeid(T).name());
-            std::abort();
+            return nullptr;
         }
 
         this->transactions_.push_back(std::move(transaction));

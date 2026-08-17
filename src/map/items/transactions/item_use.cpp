@@ -27,7 +27,7 @@
 
 ItemUseTransaction::ItemUseTransaction(xi::Badge<ItemUseTransaction>, CCharEntity* player, CItemUsable* item, TakesCustody takesCustody)
 : player_(player)
-, item_(item)
+, item_(player, item)
 , takesCustody_(takesCustody)
 {
 }
@@ -43,31 +43,20 @@ auto ItemUseTransaction::start(CCharEntity* player, CItemUsable* item) -> std::u
     // tx just carries the state machine and commit/rollback are no-ops.
     const auto takesCustody = item->isType(ITEM_EQUIPMENT) ? TakesCustody::No : TakesCustody::Yes;
 
-    auto tx = std::unique_ptr<ItemUseTransaction>(new ItemUseTransaction(xi::Badge<ItemUseTransaction>{}, player, item, takesCustody));
-    if (takesCustody && !enterTx(item))
+    auto transaction = std::unique_ptr<ItemUseTransaction>(new ItemUseTransaction(xi::Badge<ItemUseTransaction>{}, player, item, takesCustody));
+
+    // claimed after construction so a refusal drops the transaction with nothing held
+    if (takesCustody && !transaction->claim(player, item).isSet())
     {
-        // Item wasn't Free; refuse to start the tx.
         return nullptr;
     }
 
-    return tx;
+    return transaction;
 }
 
-auto ItemUseTransaction::holds(const CItem* item) const -> bool
-{
-    return this->isOpen() && this->takesCustody_ && item != nullptr && this->item_ == item;
-}
-
+// nothing of its own to put back: the base runs the undos and releases the claims
 void ItemUseTransaction::doRollback()
 {
-    if (this->takesCustody_ && this->item_ != nullptr)
-    {
-        exitTx(this->item_);
-        // Clear ITEM_LOCKED here so dtor-only paths (disconnect that skips
-        // CItemState::Cleanup) don't leave the item wedged.
-        this->item_->setSubType(ITEM_UNLOCKED);
-        this->item_ = nullptr;
-    }
 }
 
 auto ItemUseTransaction::doCommit() -> bool
@@ -79,21 +68,17 @@ auto ItemUseTransaction::doCommit() -> bool
         return true;
     }
 
-    if (this->item_ == nullptr)
+    if (!this->item_.resolve())
     {
         return false;
     }
 
-    // exitTx before UpdateItem: UpdateItem may free the CItem.
-    const uint8 location = this->item_->getLocationID();
-    const uint8 slot     = this->item_->getSlotID();
+    const uint8 slot = this->item_.slot;
 
-    exitTx(this->item_);
+    if (!this->take(this->player_, this->item_.location, slot, 1))
+    {
+        ShowErrorFmt("ItemUseTransaction: {} kept the item in slot {} after using it", this->player_->getName(), slot);
+    }
 
-    // Unlock so a partial-consume remainder is reusable.
-    this->item_->setSubType(ITEM_UNLOCKED);
-
-    charutils::UpdateItem(this->player_, location, slot, -1, true);
-    this->item_ = nullptr;
     return true;
 }

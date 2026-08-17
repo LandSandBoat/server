@@ -1126,7 +1126,15 @@ void startSynth(CCharEntity* PChar, const SynthOffer& offer)
 
     const auto effect = crystalProps(offer.crystal.itemId).effect;
 
-    PChar->addTransaction(std::move(synthTransaction))->consumeCrystal();
+    auto* transaction = PChar->addTransaction(std::move(synthTransaction));
+    if (!transaction)
+    {
+        ShowWarningFmt("startSynth: {} could not start a synth", PChar->getName());
+        PChar->pushPacket<GP_SERV_COMMAND_COMBINE_ANS>(PChar, SynthesisResult::CancelBadRecipe);
+        return;
+    }
+
+    transaction->consumeCrystal();
 
     uint8 result = handleSynthResult(PChar);
 

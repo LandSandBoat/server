@@ -2234,7 +2234,7 @@ auto CCharEntity::OnItemFinish(CItemState& state, action_t& action) -> bool
     auto* PTarget = state.target().resolve<CBattleEntity>();
     auto* PItem   = state.GetItem();
 
-    if (!PItem->isType(ITEM_EQUIPMENT) && (PItem->getQuantity() < 1 || PItem->getReserve() > 0))
+    if (!PItem->isType(ITEM_EQUIPMENT) && PItem->getQuantity() < 1)
     {
         ShowWarning("OnItemFinish: %s attempted to use reserved/insufficient %s (%u).", this->getName(), PItem->getName(), PItem->getID());
         this->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, PItem->getID(), 0, MsgBasic::ItemFailsToActivate);
@@ -2271,8 +2271,6 @@ auto CCharEntity::OnItemFinish(CItemState& state, action_t& action) -> bool
         actionResult.resolution       = ActionResolution::Hit;
         actionResult.animation        = PItem->getAnimationID();
 
-        // TODO: guard charutils::UpdateItem against InTransaction items so a
-        // Lua delItem inside OnItemUse can't decrement out-of-tx.
         int32 value = luautils::OnItemUse(this, PTargetFound, PItem, action);
 
         actionResult.param = value;

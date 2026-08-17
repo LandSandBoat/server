@@ -81,3 +81,4 @@ constexpr Flag<Tag> Flag<Tag>::No{ false };
 
 using SendPacket   = xi::Flag<struct SendPacketTag>;
 using IsRecycleBin = xi::Flag<struct IsRecycleBinTag>;
+using Silence      = xi::Flag<struct SilenceTag>;

@@ -25,6 +25,7 @@
 #include "enums/msg_std.h"
 #include "items.h"
 #include "items/item_flowerpot.h"
+#include "items/transactions/item_claim.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x020_item_attr.h"
 #include "packets/s2c/0x0fa_myroom_operation.h"
@@ -88,6 +89,41 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
         return;
     }
 
+    // planting the pot into itself would free it before any of the writes below
+    if (this->MyroomAddCategory == this->MyroomPlantCategory &&
+        this->MyroomAddItemIndex == this->MyroomPlantItemIndex)
+    {
+        ShowWarningFmt("GP_CLI_COMMAND_MYROOM_PLANT_ADD: {} trying to plant a pot into itself", PChar->getName());
+        return;
+    }
+
+    // the item id is client-supplied, so it has to match what is really in the slot
+    const auto* PAddItem = PChar->getStorage(this->MyroomAddCategory)->GetItem(this->MyroomAddItemIndex);
+    if (!PAddItem || PAddItem->getID() != this->MyroomAddItemNo)
+    {
+        ShowWarningFmt("GP_CLI_COMMAND_MYROOM_PLANT_ADD: {} trying to plant item {} that is not in slot {}", PChar->getName(), this->MyroomAddItemNo, this->MyroomAddItemIndex);
+        return;
+    }
+
+    auto transaction = ItemClaimTransaction::start(PChar);
+    if (!transaction)
+    {
+        return;
+    }
+
+    if (!transaction->claimSlot(this->MyroomAddCategory, this->MyroomAddItemIndex))
+    {
+        ShowWarningFmt("GP_CLI_COMMAND_MYROOM_PLANT_ADD: {} trying to plant a claimed item {}", PChar->getName(), PItem->getID());
+        return;
+    }
+
+    // seed first: a pot that turns out to have no use for it rolls the take back
+    if (!transaction->take(this->MyroomAddCategory, this->MyroomAddItemIndex, 1))
+    {
+        ShowWarningFmt("GP_CLI_COMMAND_MYROOM_PLANT_ADD: {} could not spend item {}", PChar->getName(), PItem->getID());
+        return;
+    }
+
     bool updatedPot = false;
 
     if (CItemFlowerpot::getPlantFromSeed(this->MyroomAddItemNo) != FLOWERPOT_PLANT_NONE)
@@ -122,19 +158,21 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
         }
     }
 
-    if (updatedPot)
+    // no commit: the destructor puts the seed back
+    if (!updatedPot || !transaction->commit())
     {
-        db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
-                         PPotItem->m_extra,
-                         PChar->id,
-                         PPotItem->getLocationID(),
-                         PPotItem->getSlotID());
-
-        PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PPotItem, static_cast<CONTAINER_ID>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
-
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PPotItem, static_cast<CONTAINER_ID>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
-
-        charutils::UpdateItem(PChar, this->MyroomAddCategory, this->MyroomAddItemIndex, -1);
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
+        return;
     }
+
+    db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
+                     PPotItem->m_extra,
+                     PChar->id,
+                     PPotItem->getLocationID(),
+                     PPotItem->getSlotID());
+
+    PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PPotItem, static_cast<CONTAINER_ID>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
+
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PPotItem, static_cast<CONTAINER_ID>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
+
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 }

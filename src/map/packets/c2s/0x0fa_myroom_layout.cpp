@@ -20,6 +20,8 @@
 */
 
 #include "0x0fa_myroom_layout.h"
+#include "enums/item_state.h"
+#include "items/item_access.h"
 
 #include "entities/char_entity.h"
 #include "items/item_furnishing.h"
@@ -301,6 +303,13 @@ void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PC
     // Continue with regular usage
     if (PItem->getID() == this->MyroomItemNo && PItem->isType(ITEM_FURNISHING))
     {
+        // already PlacedFurniture, and mark() only moves between states
+        if (PItem->state() != ItemState::PlacedFurniture && !xi::items::mark(PItem, ItemState::PlacedFurniture))
+        {
+            ShowWarningFmt("GP_CLI_COMMAND_MYROOM_LAYOUT: could not mark furnishing {} for {}", PItem->getID(), PChar->getName());
+            return;
+        }
+
         bool wasInstalled = PItem->isInstalled();
         PItem->setInstalled(true);
         PItem->setOn2ndFloor(this->MyroomFloorFlg);
@@ -308,8 +317,6 @@ void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PC
         PItem->setRow(this->z);
         PItem->setLevel(this->y);
         PItem->setRotation(this->v);
-
-        PItem->setSubType(ITEM_LOCKED);
 
         PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PItem, static_cast<CONTAINER_ID>(this->MyroomCategory), this->MyroomItemIndex);
 

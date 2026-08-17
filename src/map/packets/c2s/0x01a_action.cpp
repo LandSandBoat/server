@@ -30,6 +30,7 @@
 #include "entities/trust_entity.h"
 #include "enums/msg_std.h"
 #include "items.h"
+#include "items/transactions/item_claim.h"
 #include "latent_effect_container.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x029_battle_message.h"
@@ -438,20 +439,35 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
                 return;
             }
 
-            if (PGysahl->isSubType(ITEM_LOCKED) || PGysahl->getReserve() > 0)
+            if (PGysahl->isBusy())
             {
                 ShowWarningFmt("GP_CLI_COMMAND_ACTION: {} trying to use invalid gysahl greens (locked/reserved)", PChar->getName());
                 PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(GYSAHL_GREENS, 0, MsgStd::YouDontHaveAny);
                 return;
             }
 
-            // Consume Gysahl Green and push animation on dig attempt.
-            if (luautils::OnChocoboDig(PChar))
+            auto transaction = ItemClaimTransaction::start(PChar);
+            if (!transaction || !transaction->take(LOC_INVENTORY, slotID, 1))
             {
-                charutils::UpdateItem(PChar, LOC_INVENTORY, slotID, -1);
-                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
-                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_DIG>(PChar));
+                ShowWarningFmt("GP_CLI_COMMAND_ACTION: {} could not spend gysahl greens in slot {}", PChar->getName(), slotID);
+                PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(GYSAHL_GREENS, 0, MsgStd::YouDontHaveAny);
+                return;
             }
+
+            // greens are taken first, and a dig refused before it starts rolls them back.
+            // Digging and finding nothing returns true, so those greens are spent
+            if (!luautils::OnChocoboDig(PChar))
+            {
+                return;
+            }
+
+            if (!transaction->commit())
+            {
+                return;
+            }
+
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
+            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_DIG>(PChar));
         }
         break;
         case GP_CLI_COMMAND_ACTION_ACTIONID::Dismount:

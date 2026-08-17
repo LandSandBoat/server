@@ -124,21 +124,6 @@ auto CLuaItem::state() const -> ItemState
     return m_readItem->state();
 }
 
-void CLuaItem::setReservedValue(uint32 reserved)
-{
-    if (!m_writeItem)
-    {
-        return;
-    }
-
-    m_writeItem->setReserve(reserved);
-}
-
-auto CLuaItem::getReservedValue() -> uint32
-{
-    return m_readItem->getReserve();
-}
-
 auto CLuaItem::getName() -> std::string
 {
     // TODO: Fix c-style cast
@@ -494,8 +479,6 @@ void CLuaItem::Register()
     SOL_REGISTER("setSubType", CLuaItem::setSubType);
     SOL_REGISTER("isSubType", CLuaItem::isSubType);
     SOL_REGISTER("state", CLuaItem::state);
-    SOL_REGISTER("setReservedValue", CLuaItem::setReservedValue);
-    SOL_REGISTER("getReservedValue", CLuaItem::getReservedValue);
     SOL_REGISTER("getName", CLuaItem::getName);
     SOL_REGISTER("getILvl", CLuaItem::getILvl);
     SOL_REGISTER("getReqLvl", CLuaItem::getReqLvl);

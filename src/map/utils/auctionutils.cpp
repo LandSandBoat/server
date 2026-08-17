@@ -32,6 +32,7 @@
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x04c_auc.h"
 
+#include "items/transactions/item_claim.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
 
@@ -68,7 +69,7 @@ void auctionutils::SellingItems(CCharEntity* PChar, GP_AUC_PARAM_ASKCOMMIT param
         return;
     }
 
-    if (PItem->getID() == param.ItemNo && !PItem->isSubType(ITEM_LOCKED) && !PItem->hasFlag(ItemFlag::NoAuction))
+    if (PItem->getID() == param.ItemNo && !PItem->isBusy() && !PItem->hasFlag(ItemFlag::NoAuction))
     {
         if (isPartiallyUsed(PItem))
         {
@@ -139,9 +140,15 @@ void auctionutils::ProofOfPurchase(CCharEntity* PChar, GP_AUC_PARAM_LOT param)
                      param.ItemWorkIndex,
                      param.ItemStacks);
 
-    CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(param.ItemWorkIndex);
+    auto transaction = ItemClaimTransaction::start(PChar);
+    if (!transaction)
+    {
+        return;
+    }
 
-    if (PItem && !(PItem->isSubType(ITEM_LOCKED)) && PItem->getReserve() == 0 && !PItem->isBusy() && !PItem->hasFlag(ItemFlag::NoAuction) && PItem->getQuantity() >= param.ItemStacks)
+    CItem* PItem = transaction->claimSlot(LOC_INVENTORY, param.ItemWorkIndex);
+
+    if (PItem && !PItem->hasFlag(ItemFlag::NoAuction) && PItem->getQuantity() >= param.ItemStacks)
     {
         if (isPartiallyUsed(PItem))
         {
@@ -167,8 +174,7 @@ void auctionutils::ProofOfPurchase(CCharEntity* PChar, GP_AUC_PARAM_LOT param)
 
         auctionFee = std::clamp<uint32>(auctionFee, 0, settings::get<uint32>("map.AH_MAX_FEE"));
 
-        const auto PGil = PChar->getStorage(LOC_INVENTORY)->GetItem(0);
-        if (PGil->getQuantity() < auctionFee || PGil->getReserve() > 0 || PGil->isBusy())
+        if (!transaction->pay(auctionFee))
         {
             PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 197, 0, 0, 0, 0); // Not enough gil to pay fee
             return;
@@ -194,21 +200,34 @@ void auctionutils::ProofOfPurchase(CCharEntity* PChar, GP_AUC_PARAM_LOT param)
             return;
         }
 
+        const auto listedQuantity = static_cast<int32>(param.ItemStacks != 0 ? 1 : PItem->getStackSize());
+        const auto listedItemId   = PItem->getID();
+        const auto listedItemName = PItem->getName();
+
+        if (!transaction->take(LOC_INVENTORY, param.ItemWorkIndex, listedQuantity))
+        {
+            ShowErrorFmt("AH: Cannot take item {} from {} to list it", listedItemName, PChar->getName());
+            PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 197, 0, 0, 0, 0); // failed to place up
+            return;
+        }
+
         if (!db::preparedStmt("INSERT INTO auction_house(itemid, stack, seller, seller_name, date, price) VALUES(?, ?, ?, ?, ?, ?)",
-                              PItem->getID(),
+                              listedItemId,
                               param.ItemStacks == 0,
                               PChar->id,
                               PChar->getName(),
                               earth_time::timestamp(),
                               param.LimitPrice))
         {
-            ShowErrorFmt("AH: Cannot insert item {} to database", PItem->getName());
+            ShowErrorFmt("AH: Cannot insert item {} to database, returning it", listedItemName);
             PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 197, 0, 0, 0, 0); // failed to place up
             return;
         }
 
-        charutils::UpdateItem(PChar, LOC_INVENTORY, param.ItemWorkIndex, -static_cast<int32>(param.ItemStacks != 0 ? 1 : PItem->getStackSize()));
-        charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -static_cast<int32>(auctionFee)); // Deduct AH fee
+        if (!transaction->commit())
+        {
+            return;
+        }
 
         PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 1, 0, 0, 0, 0);                                     // Merchandise put up on auction msg
         PChar->pushPacket<GP_SERV_COMMAND_AUC>(static_cast<GP_CLI_COMMAND_AUC_COMMAND>(0x0C), static_cast<uint8>(ahListings), PChar); // Inform history of slot
@@ -246,30 +265,42 @@ auto auctionutils::PurchasingItems(CCharEntity* PChar, GP_AUC_PARAM_BID param) -
                     }
                 }
             }
-            const CItem* gil = PChar->getStorage(LOC_INVENTORY)->GetItem(0);
-
-            if (gil != nullptr && gil->isType(ITEM_CURRENCY) && gil->getQuantity() >= param.BidPrice && gil->getReserve() == 0 && !gil->isBusy())
+            auto transaction = ItemClaimTransaction::start(PChar);
+            if (!transaction)
             {
-                const auto rset = db::preparedStmt("UPDATE auction_house SET buyer_name = ?, sale = ?, sell_date = ? WHERE itemid = ? AND buyer_name IS NULL "
-                                                   "AND stack = ? AND price <= ? ORDER BY price LIMIT 1",
-                                                   PChar->getName(),
-                                                   param.BidPrice,
-                                                   earth_time::timestamp(),
-                                                   param.ItemNo,
-                                                   param.ItemStacks == 0,
-                                                   param.BidPrice);
-                if (rset && rset->rowsAffected())
+                return false;
+            }
+
+            const auto boughtQuantity = static_cast<uint32>(param.ItemStacks == 0 ? PItem->getStackSize() : 1);
+
+            // pay() refuses a balance that is short, and the auction_house_buy trigger pays the seller when the row is marked sold, so the two unwind together
+            const auto success = db::transaction(
+                [&]()
                 {
-                    if (charutils::AddItem(PChar, LOC_INVENTORY, param.ItemNo, (param.ItemStacks == 0 ? PItem->getStackSize() : 1)) != ERROR_SLOTID)
+                    const auto rset = db::preparedStmt("UPDATE auction_house SET buyer_name = ?, sale = ?, sell_date = ? WHERE itemid = ? AND buyer_name IS NULL "
+                                                       "AND stack = ? AND price <= ? ORDER BY price LIMIT 1",
+                                                       PChar->getName(),
+                                                       param.BidPrice,
+                                                       earth_time::timestamp(),
+                                                       param.ItemNo,
+                                                       param.ItemStacks == 0,
+                                                       param.BidPrice);
+                    if (rset && rset->rowsAffected() &&
+                        transaction->pay(param.BidPrice) &&
+                        transaction->give(LOC_INVENTORY, param.ItemNo, boughtQuantity))
                     {
-                        charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -static_cast<int32>(param.BidPrice));
-
-                        PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0x01, param.ItemNo, param.BidPrice, param.ItemStacks, PItem->getStackSize());
-                        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
-
-                        return true;
+                        return;
                     }
-                }
+
+                    throw std::runtime_error(fmt::format("AH: Failed to sell item {} to char {} ({})", param.ItemNo, PChar->getName(), PChar->id));
+                });
+
+            if (success && transaction->commit())
+            {
+                PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0x01, param.ItemNo, param.BidPrice, param.ItemStacks, PItem->getStackSize());
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
+
+                return true;
             }
         }
 
@@ -298,6 +329,12 @@ void auctionutils::CancelSale(CCharEntity* PChar, int8_t AucWorkIndex)
     {
         AuctionHistory_t canceledItem = PChar->m_ah_history[AucWorkIndex];
 
+        auto transaction = ItemClaimTransaction::start(PChar);
+        if (!transaction)
+        {
+            return;
+        }
+
         const auto success = db::transaction(
             [&]()
             {
@@ -310,7 +347,7 @@ void auctionutils::CancelSale(CCharEntity* PChar, int8_t AucWorkIndex)
                 {
                     if (const CItem* PDelItem = xi::items::lookup(canceledItem.itemid))
                     {
-                        if (charutils::AddItem(PChar, LOC_INVENTORY, canceledItem.itemid, (canceledItem.stack != 0 ? PDelItem->getStackSize() : 1), true) != ERROR_SLOTID)
+                        if (transaction->give(LOC_INVENTORY, canceledItem.itemid, (canceledItem.stack != 0 ? PDelItem->getStackSize() : 1), Silence::Yes))
                         {
                             return;
                         }
@@ -320,6 +357,11 @@ void auctionutils::CancelSale(CCharEntity* PChar, int8_t AucWorkIndex)
                 // If we got here, something went wrong.
                 throw std::runtime_error(fmt::format("AH: Failed to return item id {} stack {} to char {} ({})", canceledItem.itemid, canceledItem.stack, PChar->getName(), PChar->id));
             });
+        if (success && !transaction->commit())
+        {
+            return;
+        }
+
         if (success)
         {
             PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotCancel, 0, PChar, static_cast<uint8_t>(AucWorkIndex), false);

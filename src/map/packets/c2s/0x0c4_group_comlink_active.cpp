@@ -134,18 +134,15 @@ const auto equipLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshel
         {
             linkshell::DelOnlineMember(PChar, POldItemLinkshell);
 
-            POldItemLinkshell->setSubType(ITEM_UNLOCKED);
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(POldItemLinkshell, ItemLockFlg::Normal);
         }
     }
 
     // Now equip the new linkshell
     linkshell::AddOnlineMember(PChar, PItemLinkshell, data.LinkshellId);
-    PItemLinkshell->setSubType(ITEM_LOCKED);
     if (!PChar->bindEquip(SLOT_BACK + data.LinkshellId, PItemLinkshell))
     {
         linkshell::DelOnlineMember(PChar, PItemLinkshell);
-        PItemLinkshell->setSubType(ITEM_UNLOCKED);
         return;
     }
 
@@ -165,7 +162,6 @@ const auto equipLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshel
 const auto unequipLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshell, const GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE& data)
 {
     linkshell::DelOnlineMember(PChar, PItemLinkshell);
-    PItemLinkshell->setSubType(ITEM_UNLOCKED);
     PChar->clearEquip(SLOT_BACK + data.LinkshellId);
     if (data.LinkshellId == 1)
     {

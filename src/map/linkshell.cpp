@@ -208,7 +208,6 @@ void CLinkshell::ChangeMemberRank(const std::string& MemberName, const uint8 req
                     newShellItem->setQuantity(1);
                     std::memcpy(newShellItem->m_extra, PItemLinkshell->m_extra, 24);
                     newShellItem->SetLSType(newId == ITEMID::PEARLSACK ? LSTYPE_PEARLSACK : LSTYPE_LINKPEARL);
-                    newShellItem->setSubType(ITEM_LOCKED);
                     uint8 LocationID = PItemLinkshell->getLocationID();
                     uint8 SlotID     = PItemLinkshell->getSlotID();
 
@@ -281,7 +280,6 @@ void CLinkshell::RemoveMemberByName(const std::string& MemberName, uint8 request
             {
                 linkshell::DelOnlineMember(PMember, PItemLinkshell);
 
-                PItemLinkshell->setSubType(ITEM_UNLOCKED);
                 PMember->clearEquip(slot);
                 if (slot == SLOT_LINK1)
                 {

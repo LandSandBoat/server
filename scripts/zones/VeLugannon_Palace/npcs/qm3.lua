@@ -30,7 +30,6 @@ entity.onTrade = function(player, npc, trade)
                     player:getFreeSlotsCount() <= 0 or
                     player:hasItem(xi.item.BARTHOLOMEWS_KNIFE)
                 then
-                    item:setReservedValue(0)
                     trade:clean()
 
                     -- add in 0x8000 "no validation" flag to the ID to remove the QM's name from the message
@@ -45,7 +44,6 @@ entity.onTrade = function(player, npc, trade)
                 end
             end
 
-            item:setReservedValue(0)
             trade:clean()
         end
     end

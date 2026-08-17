@@ -24,10 +24,43 @@
 #include "common/vana_time.h"
 #include "entities/char_entity.h"
 #include "enums/item_lockflg.h"
+#include "enums/item_state.h"
+#include "items/item_furnishing.h"
 #include "items/item_linkshell.h"
 #include "utils/itemutils.h"
 
 #include <cstring>
+
+namespace
+{
+
+// derived from ItemState and type rather than read back out of the item's subtype
+auto lockFlagFor(const CItem* PItem) -> ItemLockFlg
+{
+    if (PItem->getCharPrice() != 0)
+    {
+        return ItemLockFlg::Unknown0;
+    }
+
+    if (PItem->state() == ItemState::Equipped)
+    {
+        if (PItem->isType(ITEM_LINKSHELL))
+        {
+            return ItemLockFlg::Linkshell;
+        }
+
+        return ItemLockFlg::NoDrop;
+    }
+
+    if (PItem->isType(ITEM_FURNISHING) && static_cast<const CItemFurnishing*>(PItem)->isInstalled())
+    {
+        return ItemLockFlg::NoDrop;
+    }
+
+    return ItemLockFlg::Normal;
+}
+
+} // namespace
 
 GP_SERV_COMMAND_ITEM_ATTR::GP_SERV_COMMAND_ITEM_ATTR(CItem* PItem, const CONTAINER_ID locationId, const uint8_t slotId, CItem* staleItem)
 {
@@ -89,25 +122,7 @@ GP_SERV_COMMAND_ITEM_ATTR::GP_SERV_COMMAND_ITEM_ATTR(CItem* PItem, const CONTAIN
             packet.Attr[1] = 0;
         }
 
-        if (PItem->getCharPrice() != 0)
-        {
-            packet.LockFlg = ItemLockFlg::Unknown0;
-        }
-        else if (PItem->isSubType(ITEM_LOCKED))
-        {
-            if (PItem->isType(ITEM_LINKSHELL))
-            {
-                packet.LockFlg = ItemLockFlg::Linkshell;
-            }
-            else
-            {
-                packet.LockFlg = ItemLockFlg::NoDrop;
-            }
-        }
-        else
-        {
-            packet.LockFlg = ItemLockFlg::Normal;
-        }
+        packet.LockFlg = lockFlagFor(PItem);
 
         if (PItem->isType(ITEM_LINKSHELL))
         {

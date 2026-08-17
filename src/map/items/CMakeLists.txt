@@ -89,14 +89,22 @@ set(ITEM_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/item.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/item.h
     ${CMAKE_CURRENT_SOURCE_DIR}/item_access.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_id.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_id.h
     ${CMAKE_CURRENT_SOURCE_DIR}/craft_state.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/craft_state.h
     ${CMAKE_CURRENT_SOURCE_DIR}/transaction.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/transaction.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/transactions/bazaar_purchase.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/transactions/bazaar_purchase.h
     ${CMAKE_CURRENT_SOURCE_DIR}/transactions/guild_sell.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/transactions/guild_sell.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/transactions/item_claim.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/transactions/item_claim.h
     ${CMAKE_CURRENT_SOURCE_DIR}/transactions/item_use.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/transactions/item_use.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/transactions/npc_trade.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/transactions/npc_trade.h
     ${CMAKE_CURRENT_SOURCE_DIR}/transactions/player_trade.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/transactions/player_trade.h
     ${CMAKE_CURRENT_SOURCE_DIR}/transactions/synth.cpp

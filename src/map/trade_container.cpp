@@ -29,18 +29,9 @@ CTradeContainer::CTradeContainer()
     Clean();
 }
 
-CItem* CTradeContainer::getItem(uint8 slotID)
-{
-    if (slotID < m_PItem.size())
-    {
-        return m_PItem[slotID];
-    }
-    return nullptr;
-}
-
 uint16 CTradeContainer::getItemID(uint8 slotID)
 {
-    if (slotID < m_PItem.size())
+    if (slotID < m_itemID.size())
     {
         return m_itemID[slotID];
     }
@@ -49,7 +40,7 @@ uint16 CTradeContainer::getItemID(uint8 slotID)
 
 uint8 CTradeContainer::getInvSlotID(uint8 slotID)
 {
-    if (slotID < m_PItem.size())
+    if (slotID < m_itemID.size())
     {
         return m_slotID[slotID];
     }
@@ -58,18 +49,9 @@ uint8 CTradeContainer::getInvSlotID(uint8 slotID)
 
 uint32 CTradeContainer::getQuantity(uint8 slotID)
 {
-    if (slotID < m_PItem.size())
+    if (slotID < m_itemID.size())
     {
         return m_quantity[slotID];
-    }
-    return 0;
-}
-
-uint32 CTradeContainer::getConfirmedStatus(uint8 slotID)
-{
-    if (slotID < m_PItem.size())
-    {
-        return m_confirmed[slotID];
     }
     return 0;
 }
@@ -77,7 +59,7 @@ uint32 CTradeContainer::getConfirmedStatus(uint8 slotID)
 uint32 CTradeContainer::getItemQuantity(uint16 itemID)
 {
     uint32 quantity = 0;
-    for (std::size_t slotID = 0; slotID < m_PItem.size(); ++slotID)
+    for (std::size_t slotID = 0; slotID < m_itemID.size(); ++slotID)
     {
         if (m_itemID[slotID] == itemID)
         {
@@ -90,7 +72,7 @@ uint32 CTradeContainer::getItemQuantity(uint16 itemID)
 uint32 CTradeContainer::getTotalQuantity()
 {
     uint32 quantity = 0;
-    for (std::size_t slotID = 0; slotID < m_PItem.size(); ++slotID)
+    for (std::size_t slotID = 0; slotID < m_itemID.size(); ++slotID)
     {
         quantity += (m_itemID[slotID] == 0xFFFF ? 1 : m_quantity[slotID]);
     }
@@ -100,7 +82,7 @@ uint32 CTradeContainer::getTotalQuantity()
 uint8 CTradeContainer::getSlotCount()
 {
     uint8 count = 0;
-    for (std::size_t slotID = 0; slotID < m_PItem.size(); ++slotID)
+    for (std::size_t slotID = 0; slotID < m_itemID.size(); ++slotID)
     {
         if (m_itemID[slotID] != 0)
         {
@@ -112,7 +94,7 @@ uint8 CTradeContainer::getSlotCount()
 
 auto CTradeContainer::getRestriction(uint8 slotID) const -> SlotRestriction
 {
-    if (slotID < m_PItem.size())
+    if (slotID < m_itemID.size())
     {
         return restrictions_[slotID];
     }
@@ -120,17 +102,9 @@ auto CTradeContainer::getRestriction(uint8 slotID) const -> SlotRestriction
     return std::monostate{};
 }
 
-void CTradeContainer::setItem(uint8 slotID, CItem* item)
-{
-    if (slotID < m_PItem.size())
-    {
-        m_PItem[slotID] = item;
-    }
-}
-
 void CTradeContainer::setItemID(uint8 slotID, uint16 itemID)
 {
-    if (slotID < m_PItem.size())
+    if (slotID < m_itemID.size())
     {
         m_itemID[slotID] = itemID;
     }
@@ -138,7 +112,7 @@ void CTradeContainer::setItemID(uint8 slotID, uint16 itemID)
 
 void CTradeContainer::setInvSlotID(uint8 slotID, uint8 invSlotID)
 {
-    if (slotID < m_PItem.size())
+    if (slotID < m_itemID.size())
     {
         m_slotID[slotID] = invSlotID;
     }
@@ -146,29 +120,18 @@ void CTradeContainer::setInvSlotID(uint8 slotID, uint8 invSlotID)
 
 void CTradeContainer::setQuantity(uint8 slotID, uint32 quantity)
 {
-    if (slotID < m_PItem.size())
+    if (slotID < m_itemID.size())
     {
         m_quantity[slotID] = quantity;
     }
 }
 
-bool CTradeContainer::setConfirmedStatus(uint8 slotID, uint32 amount)
+void CTradeContainer::setItem(const uint8 slotId, const uint16 itemId, const uint8 invSlotId, const uint32 quantity)
 {
-    if (slotID < m_PItem.size() && m_PItem[slotID] && m_PItem[slotID]->getQuantity() >= amount)
-    {
-        m_confirmed[slotID] = std::min<uint32>(amount, m_PItem[slotID]->getQuantity());
-        return true;
-    }
-    return false;
-}
-
-void CTradeContainer::setItem(const uint8 slotId, const uint16 itemId, const uint8 invSlotId, const uint32 quantity, CItem* item)
-{
-    if (slotId < m_PItem.size())
+    if (slotId < m_itemID.size())
     {
         m_ItemsCount += 1;
 
-        m_PItem[slotId]    = item;
         m_itemID[slotId]   = itemId;
         m_slotID[slotId]   = invSlotId;
         m_quantity[slotId] = quantity;
@@ -177,7 +140,7 @@ void CTradeContainer::setItem(const uint8 slotId, const uint16 itemId, const uin
 
 void CTradeContainer::setRestriction(uint8 slotID, SlotRestriction restriction)
 {
-    if (slotID < m_PItem.size())
+    if (slotID < m_itemID.size())
     {
         restrictions_[slotID] = restriction;
     }
@@ -185,16 +148,14 @@ void CTradeContainer::setRestriction(uint8 slotID, SlotRestriction restriction)
 
 uint8 CTradeContainer::getSize()
 {
-    return (uint8)m_PItem.size();
+    return (uint8)m_itemID.size();
 }
 
 void CTradeContainer::setSize(uint8 size)
 {
-    m_PItem.resize(size, nullptr);
     m_itemID.resize(size, 0);
     m_slotID.resize(size, 0xFF);
     m_quantity.resize(size, 0);
-    m_confirmed.resize(size, 0);
     restrictions_.resize(size);
 }
 
@@ -248,27 +209,6 @@ void CTradeContainer::setShopVendorId(uint32 vendorId)
     m_shopVendorId = vendorId;
 }
 
-void CTradeContainer::unreserveUnconfirmed()
-{
-    for (uint8 slotID = 0; slotID < CONTAINER_SIZE; ++slotID)
-    {
-        CItem* PItem = m_PItem[slotID];
-
-        if (PItem)
-        {
-            uint32 confirmedStatus = getConfirmedStatus(slotID);
-            if (confirmedStatus > 0)
-            {
-                PItem->setReserve(confirmedStatus);
-            }
-            else
-            {
-                PItem->setReserve(0);
-            }
-        }
-    }
-}
-
 void CTradeContainer::Clean()
 {
     m_type         = 0;
@@ -277,16 +217,12 @@ void CTradeContainer::Clean()
     m_ItemsCount   = 0;
     m_exSize       = 0;
 
-    m_PItem.clear();
-    m_PItem.resize(CONTAINER_SIZE, nullptr);
     m_itemID.clear();
     m_itemID.resize(CONTAINER_SIZE, 0);
     m_slotID.clear();
     m_slotID.resize(CONTAINER_SIZE, 0xFF);
     m_quantity.clear();
     m_quantity.resize(CONTAINER_SIZE, 0);
-    m_confirmed.clear();
-    m_confirmed.resize(CONTAINER_SIZE, 0);
     restrictions_.clear();
     restrictions_.resize(CONTAINER_SIZE);
 }
