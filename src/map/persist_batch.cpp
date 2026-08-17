@@ -130,6 +130,9 @@ void persist::flush(CCharEntity* PChar, const IsLogout logout)
 
     PChar->StatusEffectContainer->DropEffectsForTransition(logout);
 
+    // durations tick down without anything flagging the character, so rewrite them on the way out
+    PChar->setPersist(CharPersist::Effects);
+
     PersistBatch batch;
     batch.add(PChar, logout);
 

@@ -111,6 +111,9 @@ public:
     auto isDeleted() const -> bool;
 
 private:
+    // flags the owner for persistence after a change to a column we write to char_effects
+    auto MarkPersistDirty() const -> void;
+
     CBattleEntity* owner_{ nullptr };
 
     std::vector<CModifier> modList_;          // List of modifiers
