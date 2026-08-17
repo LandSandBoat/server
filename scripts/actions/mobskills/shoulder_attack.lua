@@ -1,7 +1,7 @@
 -----------------------------------
 -- Shoulder Attack
 -- Family: Orc
--- Description: Deals damage to a single target. Additional Effect: Knockback & Stun
+-- Description: Deals damage to a single target. Additional Effect: Knockback
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -15,7 +15,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     params.baseDamage     = mob:getWeaponDmg()
     params.numHits        = 1
-    params.fTP            = { 1.5, 1.5, 1.5 }
+    params.fTP            = { 1.0, 2.0, 3.0 }
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.SLASHING
     params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_1
@@ -24,8 +24,6 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
-
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, 4) -- TODO: Capture stun duration
     end
 
     return info.damage
