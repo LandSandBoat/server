@@ -88,11 +88,13 @@ mission.sections =
             onEventUpdate =
             {
                 [3026] = function(player, csid, option, npc)
-                    -- All 3 topics must be selected before you can advance
-                    local topics = utils.mask.setBit(mission:getLocalVar(player, 'Option'), option - 1, true)
+                    -- First option is always 10. Then it's 1, 2, or 3 based on selection.
+                    -- All 3 topics must be selected before you can advance.
+                    local bit    = utils.clamp(option, 1, 4) - 1
+                    local topics = utils.mask.setBit(mission:getLocalVar(player, 'Option'), bit, true)
                     mission:setLocalVar(player, 'Option', topics)
 
-                    player:updateEvent(8 + topics, 1)
+                    player:updateEvent(topics, 1)
                 end,
             },
 
