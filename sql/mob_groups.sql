@@ -7740,7 +7740,7 @@ INSERT INTO `mob_groups` VALUES (4,6766,102,'Giant_Pugil_fished',0,128,147,0,0,0
 INSERT INTO `mob_groups` VALUES (5,3220,102,'Puffer_Pugil',0,128,975,0,0,0,NULL);
 
 INSERT INTO `mob_groups` VALUES (6,3771,102,'Steppe_Hare',300,0,2150,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (7,3792,102,'Strolling_Sapling',300,0,2345,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (7,3895,102,'Strolling_Sapling',300,0,2345,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (8,77,102,'Akbaba',300,0,43,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (9,3013,102,'Orcish_Fodder',300,0,1904,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (10,3022,102,'Orcish_Mesmerizer',300,0,1924,0,0,0,NULL);
@@ -8221,7 +8221,7 @@ INSERT INTO `mob_groups` VALUES (56,6830,107,'Bounding_Belinda',0,128,0,0,0,0,NU
 -- ------------------------------------------------------------
 
 INSERT INTO `mob_groups` VALUES (1,2679,108,'Mist_Lizard',300,0,1701,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (2,3792,108,'Strolling_Sapling',300,0,2346,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (2,3895,108,'Strolling_Sapling',300,0,2346,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (3,3378,108,'Rock_Eater',300,0,428,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (4,1737,108,'Goblin_Thug',300,0,1169,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (5,1635,108,'Goblin_Ambusher',300,0,1017,0,0,0,NULL);
@@ -13571,7 +13571,7 @@ INSERT INTO `mob_groups` VALUES (8,1738,193,'Goblin_Tinkerer',720,0,1035,0,0,0,N
 INSERT INTO `mob_groups` VALUES (9,1643,193,'Goblin_Butcher',720,0,1035,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (10,1635,193,'Goblin_Ambusher',720,0,1018,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (11,1985,193,'Hognosed_Bat',720,0,461,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (12,3754,193,'Stalking_Sapling',720,0,2324,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (12,3758,193,'Stalking_Sapling',720,0,2324,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (13,6343,193,'Fly_Agaric',720,0,853,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (14,5895,193,'Donggu',0,32,3095,3500,0,0,'WOTG');
 INSERT INTO `mob_groups` VALUES (15,1690,193,'Goblin_Mugger',720,0,1119,0,0,0,NULL);
