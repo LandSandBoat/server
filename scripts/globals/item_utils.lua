@@ -277,6 +277,45 @@ xi.itemUtils.removeMultipleEffects = function(target, effects, count, random)
     end
 end
 
+-- Maat's Concoction / Maat's Mix: grant job points to the current job.
+-- Retail cap is 500 total (unspent + spent) for that job.
+-- https://www.bg-wiki.com/ffxi/Maat%27s_Mix
+-- https://www.bg-wiki.com/ffxi/Maat%27s_Concoction
+-- Unverified: fail message IDs and item_usable animation; need retail captures.
+local jobPointsMax = 500
+
+---@nodiscard
+---@param target CBaseEntity
+---@return integer
+xi.itemUtils.jobPointItemOnItemCheck = function(target)
+    if
+        not target:isPC() or
+        target:getMainLvl() < 99
+    then
+        return xi.msg.basic.ITEM_UNABLE_TO_USE_2
+    end
+
+    local job   = target:getMainJob()
+    local total = target:getJobPoints(job) + target:getSpentJobPoints()
+    if total >= jobPointsMax then
+        return xi.msg.basic.ITEM_UNABLE_TO_USE_2
+    end
+
+    return 0
+end
+
+---@param target CBaseEntity
+---@param amount integer
+---@return nil
+xi.itemUtils.jobPointItemOnItemUse = function(target, amount)
+    local job   = target:getMainJob()
+    local total = target:getJobPoints(job) + target:getSpentJobPoints()
+    local grant = math.min(amount, jobPointsMax - total)
+    if grant > 0 then
+        target:addJobPoints(job, grant)
+    end
+end
+
 -- for applying pet mods based on arbitrary conditions
 -- I.E. avatar attack only for a particular pet
 -- example usage in fervor_ring.lua
