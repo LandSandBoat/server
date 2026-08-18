@@ -67,6 +67,12 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CHECK::process(MapSession* PSession, CCharEntit
         return;
     }
 
+    if (!PPotItem->isInstalled())
+    {
+        ShowWarningFmt("GP_CLI_COMMAND_MYROOM_PLANT_CHECK: {} tried to interact with an uninstalled flowerpot", PChar->getName());
+        return;
+    }
+
     if (PPotItem->isPlanted())
     {
         PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, CItemFlowerpot::getSeedID(PPotItem->getPlant()), 0, MsgBasic::GardeningSeedSown);
