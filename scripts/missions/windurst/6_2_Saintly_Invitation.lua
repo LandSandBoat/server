@@ -87,6 +87,55 @@ mission.sections =
                 end,
             },
 
+            ['Foo_Beibo'] = mission:event(304),
+
+            ['Kupipi'] =
+            {
+                onTrigger = function(player, npc)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    if missionStatus == 0 then
+                        return mission:event(300)
+                    elseif missionStatus == 1 or missionStatus == 2 then
+                        return mission:event(311)
+                    else
+                        return mission:event(333)
+                    end
+                end,
+            },
+
+            ['Rhy_Epocan'] =
+            {
+                onTrigger = function(player, npc)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    if missionStatus == 0 or missionStatus == 3 then
+                        return mission:event(302)
+                    else
+                        return mission:event(307)
+                    end
+                end,
+            },
+
+            ['Shaz_Norem'] = mission:event(306),
+
+            ['Ufu_Koromoa'] =
+            {
+                onTrigger = function(player, npc)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    if missionStatus == 0 then
+                        return mission:event(303)
+                    else
+                        return mission:event(308)
+                    end
+                end,
+            },
+
+            ['Vahn_Paineesha'] = mission:event(305),
+
+            ['Zubaba'] = mission:event(301),
+
             onEventFinish =
             {
                 [310] = function(player, csid, option, npc)
@@ -114,10 +163,11 @@ mission.sections =
                     then
                         player:addTitle(xi.title.VICTOR_OF_THE_BALGA_CONTEST)
                         npcUtil.giveKeyItem(player, xi.ki.BALGA_CHAMPION_CERTIFICATE)
+                        player:delKeyItem(xi.ki.HOLY_ONES_INVITATION)
                         player:setMissionStatus(mission.areaId, 2)
                     end
                 end,
-            }
+            },
         },
 
         [xi.zone.CASTLE_OZTROJA] =
@@ -125,8 +175,12 @@ mission.sections =
             ['Kaa_Toru_the_Just'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 2 then
-                        return mission:progressEvent(45, 0, 200)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    if missionStatus == 2 then
+                        return mission:progressCutscene(45, 0, xi.ki.HOLY_ONES_OATH)
+                    elseif missionStatus == 3 then
+                        return mission:event(46)
                     end
                 end,
             },
@@ -135,12 +189,56 @@ mission.sections =
             {
                 [45] = function(player, csid, option, npc)
                     if npcUtil.giveItem(player, xi.item.ASHURA_NECKLACE) then
-                        player:delKeyItem(xi.ki.HOLY_ONES_INVITATION)
                         npcUtil.giveKeyItem(player, xi.ki.HOLY_ONES_OATH)
+                        player:delKeyItem(xi.ki.BALGA_CHAMPION_CERTIFICATE)
                         player:setMissionStatus(mission.areaId, 3)
                     end
                 end,
             },
+        },
+
+        [xi.zone.PORT_WINDURST] =
+        {
+            ['Janshura-Rashura'] = mission:event(464),
+
+            ['Nine_of_Clubs'] = mission:event(465),
+
+            ['Puo_Rhen'] = mission:event(467),
+
+            ['Ten_of_Clubs'] = mission:event(466),
+        },
+
+        [xi.zone.WINDURST_WALLS] =
+        {
+            ['Chawo_Shipeynyo'] = mission:event(359),
+
+            ['Keo-Koruo'] = mission:event(357),
+
+            ['Pakke-Pokke'] = mission:event(358),
+
+            ['Zokima-Rokima'] = mission:event(356),
+        },
+
+        [xi.zone.WINDURST_WATERS] =
+        {
+            ['Dagoza-Beruza'] = mission:event(708),
+
+            ['Mokyokyo'] = mission:event(706),
+
+            ['Panna-Donna'] = mission:event(707),
+
+            ['Ten_of_Hearts'] = mission:event(709),
+        },
+
+        [xi.zone.WINDURST_WOODS] =
+        {
+            ['Miiri-Wohri'] = mission:event(564),
+
+            ['Rakoh_Buuma'] = mission:event(563),
+
+            ['Sola_Jaab'] = mission:event(565),
+
+            ['Tih_Pikeh'] = mission:event(566),
         },
     },
 }

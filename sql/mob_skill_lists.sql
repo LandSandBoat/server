@@ -4403,7 +4403,10 @@ INSERT INTO `mob_skill_lists` VALUES ('DynamisGoblin',2108,1093);
 INSERT INTO `mob_skill_lists` VALUES ('DynamisGoblin',2108,1095);
 INSERT INTO `mob_skill_lists` VALUES ('DynamisGoblin',2108,1097);
 
--- Next ID : 2109
+INSERT INTO `mob_skill_lists` VALUES ('Jack_Cardian',2109,683); -- bludgeon
+INSERT INTO `mob_skill_lists` VALUES ('Jack_Cardian',2109,684); -- deal_out
+
+-- Next ID : 2110
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date
