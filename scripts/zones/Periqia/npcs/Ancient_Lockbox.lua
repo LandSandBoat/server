@@ -5,6 +5,8 @@
 ---@type TNpcEntity
 local entity = {}
 
+-- Legacy code, for reference use only. Remove assault sections as they are migrated to the new system and when none are left, delete this NPC script.
+--[[
 entity.onTrigger = function(player, npc)
     local qItem =
     {
@@ -100,5 +102,6 @@ entity.onTrigger = function(player, npc)
     local area = player:getCurrentAssault()
     xi.appraisal.assaultChestTrigger(player, npc, qItem[area], regItem[area])
 end
+--]]
 
 return entity
