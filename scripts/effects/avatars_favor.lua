@@ -32,8 +32,10 @@ effectObject.onEffectTick = function(target, effect)
         end
     end
 
-    -- Applying gear bonus
-    effect:setPower(effect:getPower() + target:getMaxGearMod(xi.mod.AVATARS_FAVOR_ENHANCE))
+    -- Applying gear bonus (Trusts have no player gear; getMaxGearMod warns on non-PCs)
+    if target:getObjType() == xi.objType.PC then
+        effect:setPower(effect:getPower() + target:getMaxGearMod(xi.mod.AVATARS_FAVOR_ENHANCE))
+    end
 
     -- TODO add Job Point Gift Bonus
     -- if GET PLAYERS JP TOTAL >= 550 then

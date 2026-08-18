@@ -779,8 +779,13 @@ xi.job_utils.corsair.applyRoll = function(caster, target, inAbility, total, isDo
     end
 
     -- Apply Additional Phantom Roll+ Buff
-    local phantomMult = caster:getMaxGearMod(xi.mod.PHANTOM_ROLL)
-    effectpower       = effectpower + rollInfo.phantomBase * phantomMult
+    -- Trusts/NPCs have no player gear; skip getMaxGearMod (e.g. Qultada).
+    local phantomMult = 0
+    if caster:getObjType() == xi.objType.PC then
+        phantomMult = caster:getMaxGearMod(xi.mod.PHANTOM_ROLL)
+    end
+
+    effectpower = effectpower + rollInfo.phantomBase * phantomMult
 
     -- Effect Power varies depending on COR level (Main vs Sub)
     local actorLevel  = utils.getActiveJobLevel(caster, xi.job.COR)

@@ -15,7 +15,12 @@ xi.combat.damage.souleaterAddition = function(actor)
         return 0
     end
 
-    local souleaterEffect        = actor:getMaxGearMod(xi.mod.SOULEATER_EFFECT) / 100
+    -- Trusts (e.g. Zeid II) can use Souleater; they have no player gear.
+    local souleaterEffect = 0
+    if actor:getObjType() == xi.objType.PC then
+        souleaterEffect = actor:getMaxGearMod(xi.mod.SOULEATER_EFFECT) / 100
+    end
+
     local souleaterEffectII      = actor:getMod(xi.mod.SOULEATER_EFFECT_II) / 100
     local stalwartSoulMultiplier = 1 - actor:getMod(xi.mod.STALWART_SOUL) / 100
     local soulEaterResistance    = 1 -- TODO: Add soul eater resistance for AV and others.
