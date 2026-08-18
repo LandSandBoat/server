@@ -259,4 +259,6 @@ void CItemContainer::Clear()
     {
         m_ItemList[SlotID].reset();
     }
+
+    m_count = 0;
 }
