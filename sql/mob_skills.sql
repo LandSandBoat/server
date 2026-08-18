@@ -1086,7 +1086,7 @@ INSERT INTO `mob_skills` VALUES (1053,432,'super_buff',0,0.0,1.0,2000,0,1,0,0,0,
 -- INSERT INTO `mob_skills` VALUES (1055,799,'sabotender_duststop',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1056,800,'fanatic_dance',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1057,349,'aerial_wheel',0,0.0,7.0,1600,2000,4,0,0,0,0,0,0); -- Dynamis Orcs
-INSERT INTO `mob_skills` VALUES (1058,350,'shoulder_attack',0,0.0,7.0,1750,2000,4,0,0,0,0,0,0); -- Dynamis Orcs
+INSERT INTO `mob_skills` VALUES (1058,350,'shoulder_attack',0,0.0,7.0,1750,2000,4,0,0,1,0,0,0); -- Dynamis Orcs
 INSERT INTO `mob_skills` VALUES (1059,351,'slam_dunk',0,0.0,7.0,2000,2000,4,0,0,0,0,0,0); -- Dynamis Orcs
 INSERT INTO `mob_skills` VALUES (1060,352,'arm_block',0,0.0,7.0,1000,2000,1,0,0,0,0,0,0); -- Dynamis Orcs
 INSERT INTO `mob_skills` VALUES (1061,353,'battle_dance',1,0.0,15.0,2300,2000,4,0,0,0,0,0,0); -- Dynamis Orcs
