@@ -2119,9 +2119,7 @@ int16 CBattleEntity::getMaxGearMod(xi::Mod modID)
 
     if (!PChar)
     {
-        ShowWarning("CBattleEntity::getMaxGearMod() - Entity is not a player.");
-
-        return 0;
+        return this->getMod(modID);
     }
 
     for (uint8 i = 0; i < SLOT_BACK; ++i)
@@ -2129,6 +2127,12 @@ int16 CBattleEntity::getMaxGearMod(xi::Mod modID)
         auto* PItem = PChar->getEquip((SLOTTYPE)i);
         if (PItem && (PItem->isType(ITEM_EQUIPMENT) || PItem->isType(ITEM_WEAPON)))
         {
+            // TODO: support gear scaling
+            if (PItem->getReqLvl() > PChar->GetMLevel())
+            {
+                continue;
+            }
+
             uint16 modValue = PItem->getModifier(modID);
 
             if (modValue > maxModValue)

@@ -15013,20 +15013,18 @@ bool CLuaBaseEntity::hasAllLatentsActive(uint8 slot)
 
 int16 CLuaBaseEntity::getMaxGearMod(xi::Mod modId)
 {
-    if (m_PBaseEntity->objtype != TYPE_PC)
+    if (m_PBaseEntity->objtype == TYPE_NPC || m_PBaseEntity->objtype == TYPE_SHIP)
     {
-        ShowWarning("Invalid Entity (Non-PC: %s) calling function.", m_PBaseEntity->getName());
-
         return 0;
     }
 
-    return static_cast<CCharEntity*>(m_PBaseEntity)->getMaxGearMod(static_cast<xi::Mod>(modId));
+    return static_cast<CBattleEntity*>(m_PBaseEntity)->getMaxGearMod(static_cast<xi::Mod>(modId));
 }
 
 /************************************************************************
  *  Function: getGearModFromSlot()
  *  Purpose : Returns mod value from a specific item equipped
- *  Example : local maxValue = player:getMaxGearMod(xi.mod.GEOMANCY_BONUS)
+ *  Example : local maxValue = player:getGearModFromSlot(xi.slot.HEAD, xi.mod.GEOMANCY_BONUS)
  *  Notes   :
  ************************************************************************/
 int16 CLuaBaseEntity::getGearModFromSlot(uint8 slot, xi::Mod modId)
@@ -15041,7 +15039,8 @@ int16 CLuaBaseEntity::getGearModFromSlot(uint8 slot, xi::Mod modId)
     auto*           PChar = static_cast<CCharEntity*>(m_PBaseEntity);
     CItemEquipment* PItem = PChar->getEquip(static_cast<SLOTTYPE>(slot));
 
-    if (PItem)
+    // TODO: support gear scaling
+    if (PItem && PItem->getReqLvl() <= PChar->GetMLevel())
     {
         return PItem->getModifier(modId);
     }
