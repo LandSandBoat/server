@@ -1722,13 +1722,13 @@ xi.conquest.vendorOnTrigger = function(player, vendorRegion, vendorEvent)
         nation = 2
     end
 
-    player:startEvent(vendorEvent, nation, fee, 0, fee, player:getCP(), 0, 0, 0)
+    player:startEvent(vendorEvent, nation, fee, 0, fee / 10, player:getCP(), 0, 0, 0)
 end
 
 xi.conquest.vendorOnEventUpdate = function(player, vendorRegion)
     local fee = xi.conquest.outpostFee(player, vendorRegion)
 
-    player:updateEvent(player:getGil(), fee, 0, fee, player:getCP())
+    player:updateEvent(player:getGil(), fee, 0, fee / 10, player:getCP())
 end
 
 xi.conquest.vendorOnEventFinish = function(player, option, vendorRegion)
@@ -1741,8 +1741,12 @@ xi.conquest.vendorOnEventFinish = function(player, option, vendorRegion)
             player:addStatusEffect(xi.effect.TELEPORT, { power = xi.teleport.id.HOME_NATION, duration = 1, origin = player, icon = 0, subPower = vendorRegion })
         end
     elseif option == 6 then
-        player:delCP(fee)
-        player:addStatusEffect(xi.effect.TELEPORT, { power = xi.teleport.id.HOME_NATION, duration = 1, origin = player, icon = 0, subPower = vendorRegion })
+        local cpFee = fee / 10
+
+        if player:getCP() >= cpFee then
+            player:delCP(cpFee)
+            player:addStatusEffect(xi.effect.TELEPORT, { power = xi.teleport.id.HOME_NATION, duration = 1, origin = player, icon = 0, subPower = vendorRegion })
+        end
     end
 end
 
