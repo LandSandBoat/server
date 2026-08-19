@@ -277,8 +277,9 @@ auto auctionutils::PurchasingItems(CCharEntity* PChar, GP_AUC_PARAM_BID param) -
             const auto success = db::transaction(
                 [&]()
                 {
-                    const auto rset = db::preparedStmt("UPDATE auction_house SET buyer_name = ?, sale = ?, sell_date = ? WHERE itemid = ? AND buyer_name IS NULL "
+                    const auto rset = db::preparedStmt("UPDATE auction_house SET buyer = ?, buyer_name = ?, sale = ?, sell_date = ? WHERE itemid = ? AND buyer_name IS NULL "
                                                        "AND stack = ? AND price <= ? ORDER BY price LIMIT 1",
+                                                       PChar->id,
                                                        PChar->getName(),
                                                        param.BidPrice,
                                                        earth_time::timestamp(),

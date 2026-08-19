@@ -30,28 +30,6 @@
 namespace
 {
 
-const auto auditTrade = [](Scheduler& scheduler, CCharEntity* PChar, CCharEntity* PTarget, const CItem* PItem, uint32_t ItemNum)
-{
-    if (settings::get<bool>("map.AUDIT_PLAYER_TRADES"))
-    {
-        scheduler.postToWorkerThread(
-            [itemID        = PItem->getID(),
-             quantity      = ItemNum,
-             sender        = PChar->id,
-             sender_name   = PChar->getName(),
-             receiver      = PTarget->id,
-             receiver_name = PTarget->getName(),
-             date          = earth_time::timestamp()]()
-            {
-                const auto query = "INSERT INTO audit_trade(itemid, quantity, sender, sender_name, receiver, receiver_name, date) VALUES (?, ?, ?, ?, ?, ?, ?)";
-                if (!db::preparedStmt(query, itemID, quantity, sender, sender_name, receiver, receiver_name, date))
-                {
-                    ShowErrorFmt("Failed to log trade transaction (item: {}, quantity: {}, sender: {}, receiver: {}, date: {})", itemID, quantity, sender, receiver, date);
-                }
-            });
-    }
-};
-
 const auto hasLinkshellEquipped = [](const CCharEntity* PChar, CItemLinkshell* POffered) -> bool
 {
     const auto asLinkshell = [](CItemEquipment* PEquipped) -> CItemLinkshell*
@@ -111,9 +89,5 @@ void GP_CLI_COMMAND_TRADE_LIST::process(MapSession* PSession, CCharEntity* PChar
         return;
     }
 
-    if (const auto* PItem = transaction->setSlot(PChar, this->TradeIndex, this->ItemIndex, this->ItemNo, this->ItemNum))
-    {
-        // TODO: Don't pass around Scheduler& through PSession
-        auditTrade(*PSession->scheduler, PChar, PTarget, PItem, this->ItemNum);
-    }
+    transaction->setSlot(PChar, this->TradeIndex, this->ItemIndex, this->ItemNo, this->ItemNum);
 }

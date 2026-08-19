@@ -21,16 +21,51 @@
 
 #include "npc_trade.h"
 
+#include "common/earth_time.h"
 #include "common/logging.h"
+#include "common/settings.h"
 
+#include "entities/base_entity.h"
 #include "entities/char_entity.h"
 #include "items/item.h"
 #include "utils/charutils.h"
 
 #include <algorithm>
 
-NpcTradeTransaction::NpcTradeTransaction(xi::Badge<NpcTradeTransaction>, CCharEntity* player)
+namespace
+{
+
+const auto auditTrade = [](CCharEntity* PChar, const uint32 npcId, const std::string& npcName, const uint16 itemId, const uint32 quantity)
+{
+    // TODO: Don't pass around Scheduler& through PSession
+    if (!settings::get<bool>("map.AUDIT_PLAYER_TRADES") || !PChar->PSession || !PChar->PSession->scheduler)
+    {
+        return;
+    }
+
+    PChar->PSession->scheduler->postToWorkerThread(
+        [itemId,
+         quantity,
+         sender        = PChar->id,
+         sender_name   = PChar->getName(),
+         receiver      = npcId,
+         receiver_name = npcName,
+         date          = earth_time::timestamp()]()
+        {
+            const auto query = "INSERT INTO audit_trade(itemid, quantity, sender, sender_name, receiver, receiver_name, date) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            if (!db::preparedStmt(query, itemId, quantity, sender, sender_name, receiver, receiver_name, date))
+            {
+                ShowErrorFmt("Failed to log trade transaction (item: {}, quantity: {}, sender: {}, receiver: {}, date: {})", itemId, quantity, sender, receiver, date);
+            }
+        });
+};
+
+} // namespace
+
+NpcTradeTransaction::NpcTradeTransaction(xi::Badge<NpcTradeTransaction>, CCharEntity* player, const CBaseEntity* npc)
 : player_(player)
+, npcId_(npc->id)
+, npcName_(npc->getName())
 {
 }
 
@@ -39,14 +74,14 @@ NpcTradeTransaction::~NpcTradeTransaction()
     this->rollbackIfOpen();
 }
 
-auto NpcTradeTransaction::start(CCharEntity* player) -> std::unique_ptr<NpcTradeTransaction>
+auto NpcTradeTransaction::start(CCharEntity* player, const CBaseEntity* npc) -> std::unique_ptr<NpcTradeTransaction>
 {
-    if (!player)
+    if (!player || !npc)
     {
         return nullptr;
     }
 
-    return std::unique_ptr<NpcTradeTransaction>(new NpcTradeTransaction(xi::Badge<NpcTradeTransaction>{}, player));
+    return std::unique_ptr<NpcTradeTransaction>(new NpcTradeTransaction(xi::Badge<NpcTradeTransaction>{}, player, npc));
 }
 
 auto NpcTradeTransaction::stage(const uint8 tradeSlot, CItem* item, const uint32 quantity) -> bool
@@ -152,6 +187,9 @@ auto NpcTradeTransaction::resolve(Slot& slot) -> CItem*
 
 auto NpcTradeTransaction::consumeConfirmed() -> bool
 {
+    // consumeSlot wipes the slots, so we need a way to save what changed hands now and log it only once the trade is successful
+    const auto traded = this->tradedItems(true);
+
     for (auto& slot : this->slots_)
     {
         // all or nothing: a partial take rolls back rather than leaving the offer half consumed
@@ -163,11 +201,25 @@ auto NpcTradeTransaction::consumeConfirmed() -> bool
         }
     }
 
-    return this->commit();
+    if (!this->commit())
+    {
+        return false;
+    }
+
+    // Log every item if it was successful AFTER the trade has been completed
+    for (const auto& item : traded)
+    {
+        auditTrade(this->player_, this->npcId_, this->npcName_, item.itemId, item.qty);
+    }
+
+    return true;
 }
 
 auto NpcTradeTransaction::consumeAll() -> bool
 {
+    // consumeSlot wipes the slots, so we need a way to save what changed hands now and log it only once the trade is successful
+    const auto traded = this->tradedItems(false);
+
     for (auto& slot : this->slots_)
     {
         if (slot.offered.isSet() && !this->consumeSlot(slot, slot.quantity))
@@ -178,7 +230,44 @@ auto NpcTradeTransaction::consumeAll() -> bool
         }
     }
 
-    return this->commit();
+    if (!this->commit())
+    {
+        return false;
+    }
+
+    // Log every item if it was successful AFTER the trade has been completed
+    for (const auto& item : traded)
+    {
+        auditTrade(this->player_, this->npcId_, this->npcName_, item.itemId, item.qty);
+    }
+
+    return true;
+}
+
+auto NpcTradeTransaction::tradedItems(const bool confirmedOnly) const -> std::vector<TradedItem>
+{
+    std::vector<TradedItem> traded;
+
+    for (const auto& slot : this->slots_)
+    {
+        const auto qty = [&]() -> uint32
+        {
+            if (confirmedOnly)
+            {
+                return slot.confirmed;
+            }
+
+            return slot.quantity;
+        }();
+
+        const CItem* PStaged = slot.offered.resolve();
+        if (qty > 0 && PStaged)
+        {
+            traded.push_back({ .itemId = PStaged->getID(), .qty = qty });
+        }
+    }
+
+    return traded;
 }
 
 auto NpcTradeTransaction::consumeSlot(Slot& slot, const uint32 quantity) -> bool
