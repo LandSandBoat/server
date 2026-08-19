@@ -607,6 +607,7 @@ ecosystems:
                 mnd: d
               detects:
                 - sight
+                - magic
               mob_mods:
                 roam_cool:  40
                 roam_turns: 2
