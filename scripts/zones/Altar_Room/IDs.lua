@@ -17,6 +17,8 @@ zones[xi.zone.ALTAR_ROOM] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7028, -- Your party is unable to participate because certain members' levels are restricted.
         THE_MAGICITE_GLOWS_OMINOUSLY  = 7126, -- The magicite glows ominously.
         CONQUEST_BASE                 = 7127, -- Tallying conquest results...
+        STONE_LID_DEFAULT             = 7370, -- Below the dust you can see an odd spiral indentation carved in a large block of stone. A cool wind can be felt blowing through the cracks around the lid.
+        PLACE_ON_STONE_LID            = 7371, -- You brush away all surrounding dust and place the <keyitem> on the stone lid.
     },
     mob =
     {
