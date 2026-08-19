@@ -50,7 +50,7 @@ public:
     auto isPendingZone() const -> bool;
     auto getSearchMessage() const -> std::string;
     auto getLinkshellId(uint8 lsNum) const -> uint32;
-    auto getItemInvSlot(uint16 itemId, uint8 quantity) const -> Maybe<uint16>;
+    auto getItemInvSlot(uint16 itemId, uint32 quantity) const -> Maybe<uint16>;
     void claimAndKillMob(const sol::object& mobQuery, sol::optional<sol::table> params);
     void claimAndKillMobs(sol::variadic_args mobQueries);
 
