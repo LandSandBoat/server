@@ -7245,6 +7245,7 @@ xi.item =
     ARMORED_RING                        = 15783,
     DOMINION_RING                       = 15784,
     MULTIPLE_RING                       = 15790,
+    ANNIVERSARY_RING                    = 15793,
     IOTA_RING                           = 15799,
     OMEGA_RING                          = 15800,
     FERAL_RING                          = 15802,
