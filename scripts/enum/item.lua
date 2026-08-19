@@ -6875,6 +6875,7 @@ xi.item =
     YAGUDO_HEADGEAR                     = 15202,
     GOBLIN_COIF                         = 15203,
     GADZRADDS_HELM                      = 15214,
+    DAVHUS_BARBUT                       = 15215,
     TSOO_HAJAS_HEADGEAR                 = 15216,
     CHOPLIXS_COIF                       = 15217,
     ENTRANCING_RIBBON                   = 15218,

@@ -197,9 +197,18 @@ xi.crafting.guildMasterOnTrigger = function(player, npc)
 end
 
 xi.crafting.guildMasterOnEventFinish = function(player, csid, option, npc)
-    local ID      = zones[player:getZoneID()]
     local npcName = npc:getName()
     local eventId = npcTable[npcName][1]
+
+    -- Quest events on a guild master finish through this handler too.
+    if
+        csid ~= eventId and
+        csid ~= eventId + 1
+    then
+        return
+    end
+
+    local ID      = zones[player:getZoneID()]
     local guildId = npcTable[npcName][2]
 
     -- Trigger onEventFinish

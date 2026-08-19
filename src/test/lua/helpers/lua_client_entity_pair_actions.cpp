@@ -493,7 +493,7 @@ void CLuaClientEntityPairActions::tradeNpc(const sol::object& npcQuery, const so
         }
 
         uint16 itemId   = 0;
-        uint8  quantity = 1;
+        uint32 quantity = 1;
 
         if (pair.second.is<uint16>())
         {
@@ -503,7 +503,7 @@ void CLuaClientEntityPairActions::tradeNpc(const sol::object& npcQuery, const so
         {
             auto itemInfo = pair.second.as<sol::table>();
             itemId        = itemInfo["itemId"].get_or<uint16>(0);
-            quantity      = itemInfo["quantity"].get_or<uint8>(1);
+            quantity      = itemInfo["quantity"].get_or<uint32>(1);
         }
 
         auto invSlot = parent_->getItemInvSlot(itemId, quantity);
