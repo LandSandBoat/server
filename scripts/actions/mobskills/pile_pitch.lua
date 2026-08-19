@@ -30,7 +30,13 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType, { breakBind = false })
 
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 30)
+        local effectTable =
+        {
+            [1] = { effectId = xi.effect.BIND, power = 1, duration = 15 }, -- TODO: Capture duration.
+        }
+
+        xi.combat.action.executeMobskillStatusEffect(mob, target, skill, effectTable, { messageBypass = true })
+
         mob:resetEnmity(target) -- TODO: Check hate reset type (Aggro pause vs full enmity reset.)
     end
 

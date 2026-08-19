@@ -14,8 +14,8 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.MAGIC_SHIELD, 1, 0, 60))
-    xi.mobskills.mobBuffMove(mob, xi.effect.SHOCK_SPIKES, 25, 0, 60)
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.MAGIC_SHIELD, 1, 0, 60)) -- TODO: Capture duration.
+    xi.mobskills.mobBuffMove(mob, xi.effect.SHOCK_SPIKES, 25, 0, 90)
 
     return xi.effect.MAGIC_SHIELD
 end
