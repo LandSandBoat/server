@@ -9,10 +9,12 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     local offset = npc:getID() - ID.npc.SIGNPOST_OFFSET
-    if offset >= 4 or offset <= 6 then
-        player:messageSpecial(ID.text.SIGN_1)
-    elseif offset >= 0 and offset <= 3 then
-        player:messageSpecial(ID.text.SIGN_5 - offset)
+
+    -- First 3 Signpost all say SIGN_1. The next 4 Signposts increment the ID.
+    if offset <= 2 then
+        player:messageText(npc, ID.text.SIGN_1)
+    else
+        player:messageText(npc, ID.text.SIGN_1 + offset - 2)
     end
 end
 
