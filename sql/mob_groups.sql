@@ -12693,7 +12693,7 @@ INSERT INTO `mob_groups` VALUES (3,6777,176,'Rock_Crab_fished',0,128,2113,0,0,0,
 INSERT INTO `mob_groups` VALUES (4,6768,176,'Stygian_Pugil_fished',0,128,147,0,0,0,NULL);
 
 INSERT INTO `mob_groups` VALUES (5,3406,176,'Royal_Leech',960,0,2127,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (6,4092,176,'Undead_Bats',960,0,386,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (6,4406,176,'Undead_Bats',960,0,386,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (7,3743,176,'Spring_Sahagin',780,0,2312,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (8,3174,176,'Pond_Sahagin',780,0,2013,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (9,2321,176,'Lake_Sahagin',780,0,1480,0,0,0,NULL);
