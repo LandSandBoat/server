@@ -14,11 +14,11 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
     params.baseDamage     = mob:getWeaponDmg()
-    params.numHits        = 3 -- TODO: Confirm numJits
-    params.fTP            = { 2.0, 2.0, 2.0 }
+    params.numHits        = 3
+    params.fTP            = { 1.0, 1.0, 1.0 }
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.SLASHING
-    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3 -- TODO: Capture shadowBehavior
+    params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_3
     -- TODO: Possible accuracy modifier
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, action, params)

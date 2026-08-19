@@ -22,14 +22,20 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
+    -- Observed 14 from Omega, 20 from Proto-Omega
+    local power   = math.floor(mob:getMainLvl() * 0.3) - 5
     local drained = 0
 
     for i = 1, 7 do
-        if math.randomInt(0, 100) < 40 then
-            skill:setMsg(xi.mobskills.mobDrainAttribute(mob, target, attributesDown[i], 10, 3, 60))
+        if
+            math.randomInt(0, 100) < 40 and
+            xi.mobskills.mobDrainAttribute(mob, target, attributesDown[i], power, 3, 60) == xi.msg.basic.ATTR_DRAINED
+        then
             drained = drained + 1
         end
     end
+
+    skill:setMsg(drained > 0 and xi.msg.basic.ATTR_DRAINED or xi.msg.basic.SKILL_MISS)
 
     return drained
 end

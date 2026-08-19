@@ -30,15 +30,15 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     local info = xi.mobskills.mobBreathMove(mob, target, skill, action, params)
 
-    local distance = ((mob:checkDistance(target) * 2) / 20) -- TODO: Verify this skill has a damage adjustment based on range from mob.
-    info.damage = info.damage * distance
-    info.damage = utils.clamp(info.damage, 50, 1600)
-
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
-        -- TODO: Capture effect power/duration
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DEFENSE_DOWN, 25, 0, 60)
+        local effectTable =
+        {
+            [1] = { effectId = xi.effect.DEFENSE_DOWN, power = 50, duration = 90 },
+        }
+
+        xi.combat.action.executeMobskillStatusEffect(mob, target, skill, effectTable, { messageBypass = true })
     end
 
     return info.damage

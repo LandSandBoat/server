@@ -1,7 +1,7 @@
 -----------------------------------
 -- Floodlight
 -- Family: Omega (Proto Omega)
--- Description: Deals Light damage to targets hit. Additional Effect: Blind, Flash, Silence
+-- Description: Deals Light damage to targets hit. Additional Effect: Flash, Silence
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -25,10 +25,13 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     if xi.mobskills.processDamage(mob, target, skill, action, info) then
         target:takeDamage(info.damage, mob, info.attackType, info.damageType)
 
-        -- TODO: Capture power/durations.
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 15, 3, 120)
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.FLASH, 0, 0, 20)  -- Effect handled in hit rate calculation
-        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, 60)
+        local effectTable =
+        {
+            [1] = { effectId = xi.effect.FLASH,   power = 0, duration = 15 }, -- Effect handled in hit rate calculation
+            [2] = { effectId = xi.effect.SILENCE, power = 1, duration = 90 },
+        }
+
+        xi.combat.action.executeMobskillStatusEffect(mob, target, skill, effectTable, { messageBypass = true })
     end
 
     return info.damage

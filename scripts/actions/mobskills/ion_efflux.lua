@@ -12,9 +12,12 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 20, 0, 180))
+    local effectTable =
+    {
+        [1] = { effectId = xi.effect.PARALYSIS, power = 20, duration = 180 }, -- TODO: Capture power.
+    }
 
-    return xi.effect.PARALYSIS
+    return xi.combat.action.executeMobskillStatusEffect(mob, target, skill, effectTable, {})
 end
 
 return mobskillObject
