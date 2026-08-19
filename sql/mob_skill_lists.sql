@@ -1479,7 +1479,10 @@ INSERT INTO `mob_skill_lists` VALUES ('PetSuzaku',333,400);
 INSERT INTO `mob_skill_lists` VALUES ('PetSuzaku',333,401);
 INSERT INTO `mob_skill_lists` VALUES ('PetSuzaku',333,402);
 INSERT INTO `mob_skill_lists` VALUES ('PetSuzaku',333,403);
--- 334 Free (previously Warlord Rojgnoj Orc or Dynamis Orc NMs)
+INSERT INTO `mob_skill_lists` VALUES ('Fly_NM',334,659);
+INSERT INTO `mob_skill_lists` VALUES ('Fly_NM',334,660);
+INSERT INTO `mob_skill_lists` VALUES ('Fly_NM',334,318);
+INSERT INTO `mob_skill_lists` VALUES ('Fly_NM',334,1324);
 INSERT INTO `mob_skill_lists` VALUES ('Maat',335,1028);
 INSERT INTO `mob_skill_lists` VALUES ('Maat',335,1033);
 INSERT INTO `mob_skill_lists` VALUES ('Maat',335,1034);
@@ -3717,9 +3720,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Blobdingnag',1152,1317); -- Mucus_Spread
 INSERT INTO `mob_skill_lists` VALUES ('Blobdingnag',1152,1319); -- Epoxy_Spread
 INSERT INTO `mob_skill_lists` VALUES ('Blobdingnag',1152,2514); -- Cytokinesis
 
-INSERT INTO `mob_skill_lists` VALUES ('FarrucaFly',1153,659);
-INSERT INTO `mob_skill_lists` VALUES ('FarrucaFly',1153,660);
-INSERT INTO `mob_skill_lists` VALUES ('FarrucaFly',1153,318);
+INSERT INTO `mob_skill_lists` VALUES ('Fly_COP',1153,659);
+INSERT INTO `mob_skill_lists` VALUES ('Fly_COP',1153,660);
+INSERT INTO `mob_skill_lists` VALUES ('Fly_COP',1153,318);
 
 INSERT INTO `mob_skill_lists` VALUES ('Orcus',1154,279);
 INSERT INTO `mob_skill_lists` VALUES ('Orcus',1154,2517);
