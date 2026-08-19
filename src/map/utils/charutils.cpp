@@ -4456,9 +4456,12 @@ EMobDifficulty CheckMob(uint8 charlvl, CBattleEntity* PMob)
 
 uint32 GetBaseExp(uint8 charlvl, int16 moblvl)
 {
+    // Pets can surpass level 99, but they do not count against the player for EXP calculations.
+    charlvl = std::min<uint8>(charlvl, 99);
+
     const int32 levelDif = moblvl - charlvl + 44;
 
-    if (charlvl > 0 && charlvl < 100)
+    if (charlvl > 0)
     {
         return g_ExpTable[std::clamp(levelDif, 0, ExpTableRowCount - 1)][(charlvl - 1) / 5];
     }
@@ -4675,7 +4678,7 @@ void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
     // clang-format on
 
     pcinzone            = std::max(pcinzone, PMob->m_HiPartySize);
-    maxlevel            = std::max(maxlevel, PMob->m_HiPCLvl);
+    maxlevel            = std::min<uint8>(std::max(maxlevel, PMob->m_HiPCLvl), 99);
     PMob->m_HiPartySize = pcinzone;
     PMob->m_HiPCLvl     = maxlevel;
 

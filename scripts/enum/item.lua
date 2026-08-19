@@ -9637,6 +9637,7 @@ xi.item =
     GOBBIE_GOODIE_BAG                   = 21370,
     GINSEN                              = 21371,
     DUNNA                               = 21372,
+    MAGNETO                             = 21375,
     VANIR_BATTERY                       = 21380,
     SERAPHICALLER                       = 21381,
     EMINENT_SACHET                      = 21383,
