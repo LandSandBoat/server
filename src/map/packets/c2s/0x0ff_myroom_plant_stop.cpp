@@ -48,6 +48,12 @@ void GP_CLI_COMMAND_MYROOM_PLANT_STOP::process(MapSession* PSession, CCharEntity
     CItemContainer* PItemContainer = PChar->getStorage(this->MyroomPlantCategory);
     CItemFlowerpot* PItem          = dynamic_cast<CItemFlowerpot*>(PItemContainer->GetItem(this->MyroomPlantItemIndex));
 
+    if (PItem != nullptr && !PItem->isInstalled())
+    {
+        ShowWarningFmt("GP_CLI_COMMAND_MYROOM_PLANT_STOP: {} tried to interact with an uninstalled flowerpot", PChar->getName());
+        return;
+    }
+
     if (PItem != nullptr && PItem->isPlanted() && PItem->getStage() > FLOWERPOT_STAGE_INITIAL && PItem->getStage() < FLOWERPOT_STAGE_WILTED && !PItem->isDried())
     {
         PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(this->MyroomPlantItemNo, MsgStd::MoogleDriesPlant);

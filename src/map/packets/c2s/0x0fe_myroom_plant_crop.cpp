@@ -74,6 +74,12 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CROP::process(MapSession* PSession, CCharEntity
         return;
     }
 
+    if (!PPotItem->isInstalled())
+    {
+        ShowWarningFmt("GP_CLI_COMMAND_MYROOM_PLANT_CROP: {} tried to interact with an uninstalled flowerpot", PChar->getName());
+        return;
+    }
+
     // Try to catch packet abuse, leading to gardening pots being placed on 2nd floor.
     if (PPotItem->getOn2ndFloor() && PPotItem->isGardeningPot())
     {

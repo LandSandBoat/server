@@ -84,6 +84,12 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
         return;
     }
 
+    if (!PPotItem->isInstalled())
+    {
+        ShowWarningFmt("GP_CLI_COMMAND_MYROOM_PLANT_ADD: {} tried to interact with an uninstalled flowerpot", PChar->getName());
+        return;
+    }
+
     if (PItem == nullptr || PItem->getQuantity() < 1)
     {
         return;

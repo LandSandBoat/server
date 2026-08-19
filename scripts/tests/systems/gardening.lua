@@ -79,6 +79,10 @@ describe('Gardening', function()
 
         player:gotoMogHouse(xi.zone.WINDURST_WOODS)
         stockSafe(player, xi.item.EARTHEN_FLOWERPOT)
+
+        local pot = mogItem(player, xi.item.EARTHEN_FLOWERPOT)
+        player.actions:placeFurniture(xi.inv.MOGSAFE, pot:getSlotID(), 0, 0)
+        player.actions:finishFurnishing()
     end)
 
     it('refuses to plant a pot into itself', function()
@@ -232,6 +236,9 @@ describe('Gardening', function()
                     -- A full mog safe blocks the next sowing.
                     player:delContainerItems(xi.inv.MOGSAFE)
                     stockSafe(player, xi.item.EARTHEN_FLOWERPOT)
+                    local nextPot = mogItem(player, xi.item.EARTHEN_FLOWERPOT)
+                    player.actions:placeFurniture(xi.inv.MOGSAFE, nextPot:getSlotID(), 0, 0)
+                    player.actions:finishFurnishing()
                 end
 
                 assert(gotOre, string.format('expected %s feed to yield %s ore', feedEntry.element, feedEntry.element))
