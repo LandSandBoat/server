@@ -11,15 +11,20 @@ itemObject.onItemCheck = function(target, item, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target, user)
+itemObject.onItemUse = function(target, user, item, action)
+    local regenEffect = target:getStatusEffect(xi.effect.REGEN)
+
     if
-        target:getMod(xi.mod.DRINK_DISTILLED) == 1 and
-        not target:hasStatusEffect(xi.effect.REGEN)
+        target:getMod(xi.mod.DRINK_DISTILLED) == 1 and -- TODO: Are there other items that need this? Could probably just check if the spear is equipped...
+        (not regenEffect or regenEffect:getTier() == 0)
     then
+        target:delStatusEffectSilent(xi.effect.REGEN) -- All Regen items overwrite freely, and their effect expires silently if overwritten.
+
         target:addStatusEffect(xi.effect.REGEN, { power = 1, duration = 300, origin = user, tick = 3 })
     else
-        -- Retail will consume the item while doing nothing but telling you there was no effect.
-        target:messageBasic(xi.msg.basic.NO_EFFECT)
+        action:messageID(target:getID(), xi.msg.basic.ITEM_NO_EFFECT) -- Displays no effect when Lance is not equipped or attempting to overwrite tier 1, 2, 3, 4 or 5 Regen.
+
+        return 0
     end
 end
 

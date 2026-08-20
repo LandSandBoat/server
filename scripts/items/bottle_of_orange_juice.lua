@@ -10,17 +10,22 @@ itemObject.onItemCheck = function(target, item, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target, user)
-    local power = 1
-    local legs = target:getEquipID(xi.slot.LEGS)
-    if legs == 11966 or legs == 11968 then -- Dream Trousers +1 & Dream Pants +1
-        power = power + 1
-    end
+itemObject.onItemUse = function(target, user, item, action)
+    local refreshEffect = target:getStatusEffect(xi.effect.REFRESH)
+    local legsEquipped  = target:getEquipID(xi.slot.LEGS)
+    local refreshPower  = (legsEquipped == xi.item.DREAM_TROUSERS_P1 or legsEquipped == xi.item.DREAM_PANTS_P1) and 2 or 1
 
-    if not target:hasStatusEffect(xi.effect.REFRESH) then
-        target:addStatusEffect(xi.effect.REFRESH, { power = power, duration = 90, origin = user, tick = 3 })
+    if
+        not refreshEffect or
+        refreshEffect:getTier() == 0
+    then
+        target:delStatusEffectSilent(xi.effect.REFRESH) -- All Refresh items overwrite freely, and their effect expires silently if overwritten.
+
+        target:addStatusEffect(xi.effect.REFRESH, { power = refreshPower, duration = 90, origin = user, tick = 3 })
     else
-        target:messageBasic(xi.msg.basic.NO_EFFECT)
+        action:messageID(target:getID(), xi.msg.basic.ITEM_NO_EFFECT) -- Displays no effect when attempting to overwrite tier 1, 2 or 3 Refresh.
+
+        return 0
     end
 end
 
