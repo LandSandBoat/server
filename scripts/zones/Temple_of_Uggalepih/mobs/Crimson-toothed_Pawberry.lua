@@ -38,11 +38,13 @@ entity.onMobFight = function(mob, target)
     end
 
     local currentTime = GetSystemTime()
-    if mob:getLocalVar('[2hour]Time') == 0 then
+    local twoHourTime = mob:getLocalVar('[2hour]Time')
+    if twoHourTime == 0 then
         mob:setLocalVar('[2hour]Time', currentTime)
+        return
     end
 
-    if currentTime < mob:getLocalVar('[2hour]Time') then
+    if currentTime < twoHourTime then
         return
     end
 
