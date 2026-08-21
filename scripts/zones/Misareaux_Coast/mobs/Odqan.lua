@@ -7,10 +7,24 @@ local ID = zones[xi.zone.MISAREAUX_COAST]
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobRoam = function(mob)
-    local weather = mob:getWeather()
+entity.onMobInitialize = function(mob)
+    mob:addListener('WEATHER_CHANGE', 'ODQAN_WEATHER_CHANGE', function(mobArg, weather, element)
+        if not mobArg:isSpawned() then
+            return
+        end
 
-    if weather ~= xi.weather.FOG then
+        if mobArg:isEngaged() then
+            return
+        end
+
+        if weather ~= xi.weather.FOG then
+            DespawnMob(mobArg:getID())
+        end
+    end)
+end
+
+entity.onMobDisengage = function(mob)
+    if mob:getWeather() ~= xi.weather.FOG then
         DespawnMob(mob:getID())
     end
 end

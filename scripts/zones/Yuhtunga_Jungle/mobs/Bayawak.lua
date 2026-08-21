@@ -23,6 +23,20 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.GRAVITY)
     mob:addImmunity(xi.immunity.BIND)
     mob:addImmunity(xi.immunity.TERROR)
+
+    mob:addListener('WEATHER_CHANGE', 'BAYAWAK_WEATHER_CHANGE', function(mobArg, weather, element)
+        if not mobArg:isSpawned() then
+            return
+        end
+
+        if mobArg:isEngaged() then
+            return
+        end
+
+        if xi.data.element.getWeatherElement(element) ~= xi.element.FIRE then
+            DespawnMob(mobArg:getID())
+        end
+    end)
 end
 
 entity.onMobSpawn = function(mob)
@@ -30,12 +44,8 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
-entity.onMobRoam = function(mob)
-    local weather = mob:getWeather()
-    if
-        weather ~= xi.weather.HOT_SPELL and
-        weather ~= xi.weather.HEAT_WAVE
-    then
+entity.onMobDisengage = function(mob)
+    if xi.data.element.getWeatherElement(mob:getWeather()) ~= xi.element.FIRE then
         DespawnMob(mob:getID())
     end
 end
