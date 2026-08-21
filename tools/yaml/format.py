@@ -15,10 +15,14 @@ Requires ruamel.yaml and pyyaml (tools/requirements.txt); CI runs --check.
 
 import difflib
 import os
+import re
 import sys
 from collections import namedtuple
+from concurrent.futures import ProcessPoolExecutor
 from io import StringIO
 from pathlib import Path
+
+NUMBER = re.compile(r"-?\d+(\.\d+)?$")
 
 REEXEC_GUARD = "LSB_FORMAT_YAML_REEXEC"
 
@@ -144,7 +148,9 @@ def align(text):
             return
         key_width = max(len(entry.key) for entry in run)
         has_comment = any(entry.comment for entry in run)
-        value_width = max(len(entry.value) for entry in run) if has_comment else 0
+        # Align numbers against the right
+        numeric = all(NUMBER.match(entry.value) for entry in run)
+        value_width = max(len(entry.value) for entry in run) if has_comment or numeric else 0
         for entry in run:
             indent = (
                 " " * (entry.keycol - 2) + "- "
@@ -154,7 +160,7 @@ def align(text):
             out_line = (
                     indent
                     + (entry.key + ": ").ljust(key_width + 2)
-                    + entry.value.ljust(value_width)
+                    + (entry.value.rjust(value_width) if numeric else entry.value.ljust(value_width))
             )
             if entry.comment:
                 out_line += " " + entry.comment
@@ -235,37 +241,68 @@ def format_stdin():
     return code
 
 
+Result = namedtuple("Result", "path error diff")
+
+
+def format_one(job):
+    """
+    Format one file in a worker: reading, formatting and writing all happen here.
+    """
+    path_text, check = job
+    path = Path(path_text)
+    try:
+        original = path.read_text(encoding="utf-8")
+        result = format_text(original)
+    except FileNotFoundError:
+        return Result(path_text, None, None)  # deleted/renamed in a changed-files list
+    except (OSError, FormatError) as exc:
+        return Result(path_text, str(exc), None)
+
+    if result == original:
+        return Result(path_text, None, None)
+
+    if check:
+        return Result(path_text, None, "".join(difflib.unified_diff(
+            original.splitlines(keepends=True),
+            result.splitlines(keepends=True),
+            fromfile=path_text,
+            tofile=f"{path_text} (formatted)",
+        )))
+
+    try:
+        path.write_text(result, encoding="utf-8", newline="\n")
+    except OSError as exc:
+        return Result(path_text, str(exc), None)
+
+    return Result(path_text, None, "")
+
+
 def main(argv):
     if "--stdin" in argv:
         return format_stdin()
     check = "--check" in argv
     paths = [a for a in argv if a != "--check"] or ["data"]
+    jobs = [(str(path), check) for path in iter_yaml(paths)]
+    if not jobs:
+        return 0
+
+    # Default to half CPUs as workers.
+    workers = min(len(jobs), max(1, (os.cpu_count() or 2) // 2))
+    with ProcessPoolExecutor(max_workers=workers) as pool:
+        results = list(pool.map(format_one, jobs))
+
     changed, errors = [], []
-    for path in iter_yaml(paths):
-        try:
-            original = path.read_text(encoding="utf-8")
-            result = format_text(original)
-        except FileNotFoundError:
-            continue  # deleted/renamed in a changed-files list; nothing to format
-        except (OSError, FormatError) as exc:
-            print(f"{path}: {exc} -- skipped", file=sys.stderr)
-            errors.append(path)
-            continue
-        if result == original:
-            continue
-        changed.append(path)
-        if check:
-            sys.stdout.writelines(
-                difflib.unified_diff(
-                    original.splitlines(keepends=True),
-                    result.splitlines(keepends=True),
-                    fromfile=str(path),
-                    tofile=f"{path} (formatted)",
-                )
-            )
-        else:
-            path.write_text(result, encoding="utf-8", newline="\n")
-            print(f"formatted {path}")
+    for result in results:
+        if result.error:
+            print(f"{result.path}: {result.error} -- skipped", file=sys.stderr)
+            errors.append(result.path)
+        elif result.diff is not None:
+            changed.append(result.path)
+            if check:
+                sys.stdout.write(result.diff)
+            else:
+                print(f"formatted {result.path}")
+
     if check and changed:
         print(
             f"\n{len(changed)} file(s) need formatting. Run: python tools/yaml/format.py"
