@@ -2414,8 +2414,8 @@ INSERT INTO `item_usable` VALUES (6593,'deep_yellow_curry',1,1,0,0,0,0,0,0);    
 INSERT INTO `item_usable` VALUES (6594,'seafood_curry',1,1,0,0,0,0,0,0);                   -- TODO: Not implemented
 INSERT INTO `item_usable` VALUES (6595,'chicken_curry',1,1,0,0,0,0,0,0);                   -- TODO: Not implemented
 INSERT INTO `item_usable` VALUES (6596,'duck_curry',1,10,0,0,0,0,0,0);                      -- TODO: Not implemented
-INSERT INTO `item_usable` VALUES (6597,'maats_concoction',1,1,0,0,0,0,0,0); -- TODO: animation from retail capture
-INSERT INTO `item_usable` VALUES (6598,'maats_mix',1,1,0,0,0,0,0,0);        -- TODO: animation from retail capture
+INSERT INTO `item_usable` VALUES (6597,'maats_concoction',1,1,34,0,0,0,0,0); -- 0x028 ItemFinish animation (siknoz Raguza 2021-10-13)
+INSERT INTO `item_usable` VALUES (6598,'maats_mix',1,1,34,0,0,0,0,0);        -- 0x028 ItemFinish animation (siknoz Siknawz 2025-07-21 / 2026-05-23)
 INSERT INTO `item_usable` VALUES (6599,'egg_sandwich',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6600,'egg_sandwich_+1',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6601,'omelette_sandwich',1,1,28,0,0,0,0,0);

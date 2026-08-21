@@ -11,8 +11,8 @@ itemObject.onItemCheck = function(target, item, caster)
     return xi.itemUtils.jobPointItemOnItemCheck(target)
 end
 
-itemObject.onItemUse = function(target)
-    xi.itemUtils.jobPointItemOnItemUse(target, 50)
+itemObject.onItemUse = function(target, user, item, action)
+    return xi.itemUtils.jobPointItemOnItemUse(target, 50, action)
 end
 
 return itemObject

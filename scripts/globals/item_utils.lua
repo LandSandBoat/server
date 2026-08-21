@@ -281,7 +281,10 @@ end
 -- Retail cap is 500 total (unspent + spent) for that job.
 -- https://www.bg-wiki.com/ffxi/Maat%27s_Mix
 -- https://www.bg-wiki.com/ffxi/Maat%27s_Concoction
--- Unverified: fail message IDs and item_usable animation; need retail captures.
+-- Animation 34 and 0x028 message 807 from siknoz captures (Concoction Raguza 2021-10-13,
+-- Mix Siknawz 2025-07-21 and 2026-05-23). At 500 JP retail sends no 0x029; capturer
+-- noted "just doesnt use it, no error message". onItemCheck -1 is RefuseSilently.
+-- Under-99 fail message is unverified.
 local jobPointsMax = 500
 
 ---@nodiscard
@@ -298,7 +301,7 @@ xi.itemUtils.jobPointItemOnItemCheck = function(target)
     local job   = target:getMainJob()
     local total = target:getJobPoints(job) + target:getSpentJobPoints()
     if total >= jobPointsMax then
-        return xi.msg.basic.ITEM_UNABLE_TO_USE_2
+        return -1
     end
 
     return 0
@@ -306,14 +309,18 @@ end
 
 ---@param target CBaseEntity
 ---@param amount integer
----@return nil
-xi.itemUtils.jobPointItemOnItemUse = function(target, amount)
+---@param action Action
+---@return integer
+xi.itemUtils.jobPointItemOnItemUse = function(target, amount, action)
     local job   = target:getMainJob()
     local total = target:getJobPoints(job) + target:getSpentJobPoints()
     local grant = math.min(amount, jobPointsMax - total)
     if grant > 0 then
         target:addJobPoints(job, grant)
+        action:messageID(target:getID(), xi.msg.basic.RECEIVES_JOB_POINTS)
     end
+
+    return grant
 end
 
 -- for applying pet mods based on arbitrary conditions
