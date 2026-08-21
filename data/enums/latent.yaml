@@ -7,16 +7,16 @@ meta:
     table: xi.latent
 
 values:
-  hp_under_percent:       0  # hp less than or equal to % - PARAM: HP PERCENT
-  hp_over_percent:        1  # hp more than % - PARAM: HP PERCENT
-  hp_under_tp_under_100:  2  # hp less than or equal to %, tp under 100 - PARAM: HP PERCENT
-  hp_over_tp_under_100:   3  # hp more than %, tp over 100 - PARAM: HP PERCENT
-  mp_under_percent:       4  # mp less than or equal to % - PARAM: MP PERCENT
-  mp_under:               5  # mp less than # - PARAM: MP #
-  tp_under:               6  # tp under # and during WS - PARAM: TP VALUE
-  tp_over:                7  # tp over # - PARAM: TP VALUE
-  subjob:                 8  # subjob - PARAM: JOBTYPE
-  pet_id:                 9  # pettype - PARAM: PETID
+  hp_under_percent:        0 # hp less than or equal to % - PARAM: HP PERCENT
+  hp_over_percent:         1 # hp more than % - PARAM: HP PERCENT
+  hp_under_tp_under_100:   2 # hp less than or equal to %, tp under 100 - PARAM: HP PERCENT
+  hp_over_tp_under_100:    3 # hp more than %, tp over 100 - PARAM: HP PERCENT
+  mp_under_percent:        4 # mp less than or equal to % - PARAM: MP PERCENT
+  mp_under:                5 # mp less than # - PARAM: MP #
+  tp_under:                6 # tp under # and during WS - PARAM: TP VALUE
+  tp_over:                 7 # tp over # - PARAM: TP VALUE
+  subjob:                  8 # subjob - PARAM: JOBTYPE
+  pet_id:                  9 # pettype - PARAM: PETID
   weapon_drawn:           10 # weapon drawn
   weapon_sheathed:        11 # weapon sheathed
   signet_bonus:           12 # While in conquest region and engaged to an even match or less target

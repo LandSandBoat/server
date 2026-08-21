@@ -98,10 +98,10 @@ ecosystems:
                 udmgbreath: 2500
                 udmgmagic:  2500
               mob_mods:
-                roam_turns:   2
+                roam_turns:    2
                 roam_rate:    30
                 hp_standback: -1
-                no_link:      1
+                no_link:       1
           gold_flan:
             id: 6
       hecteyes:
@@ -518,7 +518,7 @@ ecosystems:
               element: fire
               mob_mods:
                 roam_cool:  30
-                roam_turns: 5
+                roam_turns:  5
                 roam_rate:  20
           djinn:
             id: 47
@@ -530,7 +530,7 @@ ecosystems:
               element: ice
               mob_mods:
                 roam_cool:  40
-                roam_turns: 2
+                roam_turns:  2
                 roam_rate:  20
       cardian:
         id: 23
@@ -551,11 +551,11 @@ ecosystems:
             attributes:
               element: earth
               mods:
-                mdef:      25
+                mdef:         25
                 udmgmagic: -2500
               mob_mods:
                 roam_cool:  40
-                roam_turns: 2
+                roam_turns:  2
                 roam_rate:  20
           coins:
             id: 50
@@ -610,7 +610,7 @@ ecosystems:
                 - magic
               mob_mods:
                 roam_cool:  40
-                roam_turns: 2
+                roam_turns:  2
                 roam_rate:  20
       doll:
         id: 26
@@ -628,7 +628,7 @@ ecosystems:
             id: 60
             attributes:
               mob_mods:
-                roam_distance: 5
+                roam_distance:  5
                 roam_cool:     55
                 roam_rate:     30
           gargoyles:
@@ -655,7 +655,7 @@ ecosystems:
               mob_mods:
                 mp_base:    50
                 roam_cool:  45
-                roam_turns: 3
+                roam_turns:  3
                 roam_rate:  30
       golem:
         id: 28
@@ -672,8 +672,8 @@ ecosystems:
             id: 63
             attributes:
               mob_mods:
-                sight_range:   4
-                roam_distance: 5
+                sight_range:    4
+                roam_distance:  5
                 roam_cool:     55
                 roam_rate:     30
           red_golems:
@@ -727,7 +727,7 @@ ecosystems:
               mods:
                 udmgmagic: -5000
               mob_mods:
-                roam_distance: 5
+                roam_distance:  5
                 roam_cool:     55
                 roam_rate:     30
           millstones:
@@ -925,7 +925,7 @@ ecosystems:
               mob_mods:
                 mp_base:    50
                 roam_cool:  50
-                roam_turns: 4
+                roam_turns:  4
                 roam_rate:  30
       cehuetzi:
         id: 41
@@ -986,7 +986,7 @@ ecosystems:
             id: 92
             attributes:
               mob_mods:
-                roam_distance: 5
+                roam_distance:  5
                 roam_cool:     55
                 roam_rate:     30
           collared_lynx:
@@ -1013,7 +1013,7 @@ ecosystems:
               charmable: true
               mob_mods:
                 roam_cool:  30
-                roam_turns: 2
+                roam_turns:  2
                 roam_rate:  30
       gnole:
         id: 45
@@ -1060,7 +1060,7 @@ ecosystems:
               mob_mods:
                 roam_distance: 30
                 roam_cool:     60
-                roam_turns:    4
+                roam_turns:     4
                 roam_rate:     30
       marid:
         id: 47
@@ -1081,7 +1081,7 @@ ecosystems:
                 defp: 20
               mob_mods:
                 roam_cool:  30
-                roam_turns: 2
+                roam_turns:  2
                 roam_rate:  30
       opo_opo:
         id: 48
@@ -1104,7 +1104,7 @@ ecosystems:
               charmable: true
               mob_mods:
                 roam_cool:  35
-                roam_turns: 3
+                roam_turns:  3
                 roam_rate:  20
       raaz:
         id: 49
@@ -1152,7 +1152,7 @@ ecosystems:
               mob_mods:
                 roam_distance: 15
                 roam_cool:     35
-                roam_turns:    3
+                roam_turns:     3
                 roam_rate:     30
       ram:
         id: 51
@@ -1212,7 +1212,7 @@ ecosystems:
               mob_mods:
                 roam_distance: 15
                 roam_cool:     60
-                roam_turns:    5
+                roam_turns:     5
                 roam_rate:     30
       tiger:
         id: 53
@@ -1250,7 +1250,7 @@ ecosystems:
               mob_mods:
                 roam_distance: 15
                 roam_cool:     45
-                roam_turns:    3
+                roam_turns:     3
       yztarg:
         id: 54
         attributes:
@@ -1309,9 +1309,9 @@ ecosystems:
               mods:
                 defp: 20
               mob_mods:
-                sublink:    5
+                sublink:     5
                 roam_cool:  50
-                roam_turns: 2
+                roam_turns:  2
                 roam_rate:  30
       gigas:
         id: 57
@@ -1335,10 +1335,10 @@ ecosystems:
             id: 121
             attributes:
               mob_mods:
-                roam_distance: 5
-                roam_cool:     25
-                roam_turns:    2
-                roam_rate:     30
+                roam_distance:   5
+                roam_cool:      25
+                roam_turns:      2
+                roam_rate:      30
                 gil_bonus:     180
           hecatoncheirs:
             id: 122
@@ -1398,7 +1398,7 @@ ecosystems:
             id: 129
             attributes:
               mods:
-                mdef:      13
+                mdef:         13
                 udmgmagic: -1250
               mob_mods:
                 sublink: 10
@@ -1519,7 +1519,7 @@ ecosystems:
               mods:
                 hpp: 5
               mob_mods:
-                sublink:   2
+                sublink:    2
                 roam_cool: 50
                 roam_rate: 30
       poroggo:
@@ -1690,7 +1690,7 @@ ecosystems:
             attributes:
               mob_mods:
                 roam_cool:  25
-                roam_turns: 5
+                roam_turns:  5
                 roam_rate:  30
           wantonberry:
             id: 160
@@ -1795,7 +1795,7 @@ ecosystems:
             attributes:
               mob_mods:
                 sublink:     14
-                sight_range: 5
+                sight_range:  5
           inguza:
             id: 172
       bat:
@@ -1817,9 +1817,9 @@ ecosystems:
             id: 173
             attributes:
               mob_mods:
-                sublink:    3
+                sublink:     3
                 roam_cool:  35
-                roam_turns: 3
+                roam_turns:  3
                 roam_rate:  30
           vermilion_bat:
             id: 174
@@ -1861,7 +1861,7 @@ ecosystems:
                 chr: d
               mob_mods:
                 roam_cool:  30
-                roam_turns: 3
+                roam_turns:  3
                 roam_rate:  30
           ziz:
             id: 178
@@ -1900,7 +1900,7 @@ ecosystems:
                 eva:  20
               mob_mods:
                 mp_base:    50
-                roam_turns: 2
+                roam_turns:  2
                 roam_rate:  30
           toucalibri:
             id: 180
@@ -1923,9 +1923,9 @@ ecosystems:
             id: 181
             attributes:
               mob_mods:
-                sublink:    3
+                sublink:     3
                 roam_cool:  35
-                roam_turns: 2
+                roam_turns:  2
                 roam_rate:  30
           flock_vermillion_bats:
             id: 182
@@ -1967,7 +1967,7 @@ ecosystems:
               mob_mods:
                 mp_base:    50
                 roam_cool:  55
-                roam_turns: 2
+                roam_turns:  2
       greater_bird:
         id: 84
         attributes:
@@ -1982,7 +1982,7 @@ ecosystems:
             attributes:
               mob_mods:
                 roam_cool:  40
-                roam_turns: 2
+                roam_turns:  2
                 roam_rate:  30
           legendary_roc:
             id: 189
@@ -2033,12 +2033,12 @@ ecosystems:
             id: 195
             attributes:
               mods:
-                silenceres: 20
+                silenceres:    20
                 udmgmagic:  -2500
               mob_mods:
                 ga_chance:    60
                 roam_cool:    40
-                roam_turns:   5
+                roam_turns:    5
                 hp_standback: -1
           akoman:
             id: 196
@@ -2077,14 +2077,14 @@ ecosystems:
                 - sight
                 - scent
               mods:
-                mdef:      25
+                mdef:         25
                 udmgmagic: -2500
               mob_mods:
-                sublink:       1
-                link_radius:   15
-                roam_distance: 15
-                roam_cool:     50
-                roam_turns:    3
+                sublink:         1
+                link_radius:    15
+                roam_distance:  15
+                roam_cool:      50
+                roam_turns:      3
                 gil_bonus:     120
           red_demon:
             id: 202
@@ -2182,10 +2182,10 @@ ecosystems:
               mob_mods:
                 sublink:      13
                 roam_cool:    50
-                roam_turns:   3
+                roam_turns:    3
                 hp_standback: -1
                 sight_range:  10
-                sound_range:  5
+                sound_range:   5
           white_imp:
             id: 213
       soulflayer:
@@ -2206,7 +2206,7 @@ ecosystems:
             - ability
             - scent
           mods:
-            mdef:      20
+            mdef:         20
             udmgmagic: -2500
         species:
           black_robe_flayer:
@@ -2217,7 +2217,7 @@ ecosystems:
               mob_mods:
                 sublink:    11
                 roam_cool:  50
-                roam_turns: 3
+                roam_turns:  3
       taurus:
         id: 94
         attributes:
@@ -2237,9 +2237,9 @@ ecosystems:
             id: 217
             attributes:
               mob_mods:
-                sublink:    1
+                sublink:     1
                 roam_cool:  40
-                roam_turns: 3
+                roam_turns:  3
                 roam_rate:  30
 
   dragon:
@@ -2263,10 +2263,10 @@ ecosystems:
               mods:
                 attp: 20
               mob_mods:
-                mp_base:     10
-                sight_range: 18
-                sound_range: 10
-                roam_cool:   55
+                mp_base:       10
+                sight_range:   18
+                sound_range:   10
+                roam_cool:     55
                 gil_bonus:   1000
           purple_dragon:
             id: 220
@@ -2289,7 +2289,7 @@ ecosystems:
             attributes:
               element: water
               mob_mods:
-                roam_distance: 5
+                roam_distance:  5
                 roam_cool:     55
       puk:
         id: 97
@@ -2479,7 +2479,7 @@ ecosystems:
                 - magic
               mob_mods:
                 mp_base:      100
-                hp_standback: -1
+                hp_standback:  -1
           chaos:
             id: 244
             attributes:
@@ -2591,7 +2591,7 @@ ecosystems:
             attributes:
               element: wind
               mob_mods:
-                roam_turns:   3
+                roam_turns:    3
                 hp_standback: -1
           baelfyr:
             id: 257
@@ -2608,21 +2608,21 @@ ecosystems:
             attributes:
               element: dark
               mob_mods:
-                roam_turns:   3
+                roam_turns:    3
                 hp_standback: -1
           earth_elemental:
             id: 260
             attributes:
               element: earth
               mob_mods:
-                roam_turns:   3
+                roam_turns:    3
                 hp_standback: -1
           fire_elemental:
             id: 261
             attributes:
               element: fire
               mob_mods:
-                roam_turns:   3
+                roam_turns:    3
                 hp_standback: -1
           gefyrst:
             id: 262
@@ -2634,21 +2634,21 @@ ecosystems:
             attributes:
               element: ice
               mob_mods:
-                roam_turns:   3
+                roam_turns:    3
                 hp_standback: -1
           light_elemental:
             id: 264
             attributes:
               element: light
               mob_mods:
-                roam_turns:   3
+                roam_turns:    3
                 hp_standback: -1
           thunder_elemental:
             id: 265
             attributes:
               element: thunder
               mob_mods:
-                roam_turns:   3
+                roam_turns:    3
                 hp_standback: -1
           ungeweder:
             id: 266
@@ -2660,7 +2660,7 @@ ecosystems:
             attributes:
               element: water
               mob_mods:
-                roam_turns:   3
+                roam_turns:    3
                 hp_standback: -1
       heartwing:
         id: 104
@@ -3057,7 +3057,7 @@ ecosystems:
                 defp: 20
               mob_mods:
                 roam_cool:  45
-                roam_turns: 3
+                roam_turns:  3
                 roam_rate:  30
       eft:
         id: 124
@@ -3080,7 +3080,7 @@ ecosystems:
             attributes:
               mob_mods:
                 roam_cool:  50
-                roam_turns: 5
+                roam_turns:  5
                 roam_rate:  30
           tarichuk:
             id: 304
@@ -3121,7 +3121,7 @@ ecosystems:
               element: fire
               mob_mods:
                 roam_cool:  60
-                roam_turns: 4
+                roam_turns:  4
                 roam_rate:  30
           hill_lizard:
             id: 307
@@ -3133,7 +3133,7 @@ ecosystems:
               element: ice
               mob_mods:
                 roam_cool:  60
-                roam_turns: 4
+                roam_turns:  4
                 roam_rate:  30
       matamata:
         id: 127
@@ -3209,7 +3209,7 @@ ecosystems:
               mob_mods:
                 roam_distance: 30
                 roam_cool:     40
-                roam_turns:    3
+                roam_turns:     3
           ruby_raptors:
             id: 316
             attributes:
@@ -3443,7 +3443,7 @@ ecosystems:
             id: 334
             attributes:
               mob_mods:
-                sublink:   7
+                sublink:    7
                 roam_cool: 10
                 roam_rate: 20
           sabotender_florido:
@@ -3514,7 +3514,7 @@ ecosystems:
               mods:
                 attp: 10
               mob_mods:
-                roam_distance: 5
+                roam_distance:  5
                 roam_cool:     60
                 roam_rate:     30
       leafkin:
@@ -3655,7 +3655,7 @@ ecosystems:
                 - hearing
               charmable: true
               mob_mods:
-                sublink:       4
+                sublink:        4
                 roam_distance: 20
       snapweed:
         id: 151
@@ -3703,7 +3703,7 @@ ecosystems:
               mods:
                 defp: 20
               mob_mods:
-                sublink:   4
+                sublink:    4
                 roam_cool: 65
                 roam_rate: 30
           winter_treant:
@@ -3970,12 +3970,12 @@ ecosystems:
             id: 394
             attributes:
               mods:
-                mdef:       25
+                mdef:          25
                 udmgbreath: -5000
                 udmgmagic:  -2500
               mob_mods:
                 roam_cool:  50
-                roam_turns: 2
+                roam_turns:  2
                 roam_rate:  30
           golden_hat_corse:
             id: 395
@@ -4080,9 +4080,9 @@ ecosystems:
                 - hearing
                 - lowhp
               mob_mods:
-                roam_cool:  50
-                roam_turns: 2
-                roam_rate:  30
+                roam_cool:   50
+                roam_turns:   2
+                roam_rate:   30
                 gil_bonus:  100
           hydra_fomor:
             id: 404
@@ -4160,7 +4160,7 @@ ecosystems:
                 - lowhp
               mob_mods:
                 roam_cool:  50
-                roam_turns: 3
+                roam_turns:  3
                 roam_rate:  30
       naraka:
         id: 175
@@ -4197,7 +4197,7 @@ ecosystems:
             attributes:
               mob_mods:
                 roam_cool:  50
-                roam_turns: 3
+                roam_turns:  3
                 roam_rate:  30
       shadow:
         id: 177
@@ -4216,7 +4216,7 @@ ecosystems:
                 - lowhp
               mob_mods:
                 roam_cool:  50
-                roam_turns: 2
+                roam_turns:  2
                 roam_rate:  30
       skeleton:
         id: 178
@@ -4230,7 +4230,7 @@ ecosystems:
             id: 416
             attributes:
               mods:
-                mdef:      20
+                mdef:         20
                 udmgmagic: -1250
               stats:
                 vit: d
@@ -4271,7 +4271,7 @@ ecosystems:
                 chr: d
               mob_mods:
                 roam_cool:  65
-                roam_turns: 5
+                roam_turns:  5
                 roam_rate:  30
       vampyr:
         id: 179
@@ -4296,9 +4296,9 @@ ecosystems:
             id: 421
             attributes:
               mob_mods:
-                sublink:    3
+                sublink:     3
                 roam_cool:  50
-                roam_turns: 2
+                roam_turns:  2
                 roam_rate:  30
 
   vermin:
@@ -4327,7 +4327,7 @@ ecosystems:
                 defp: 20
               mob_mods:
                 roam_cool:  50
-                roam_turns: 2
+                roam_turns:  2
                 roam_rate:  30
           formiceros:
             id: 423
@@ -4354,7 +4354,7 @@ ecosystems:
             attributes:
               mob_mods:
                 roam_cool:  15
-                roam_turns: 2
+                roam_turns:  2
           pephredo:
             id: 426
           red_bee:
@@ -4506,7 +4506,7 @@ ecosystems:
             attributes:
               mob_mods:
                 roam_cool:  50
-                roam_turns: 2
+                roam_turns:  2
       fly:
         id: 188
         attributes:
@@ -4649,8 +4649,8 @@ ecosystems:
                 attp: 20
               mob_mods:
                 immunity:  256
-                roam_cool: 55
-                roam_rate: 30
+                roam_cool:  55
+                roam_rate:  30
       spider:
         id: 195
         attributes:
@@ -4721,7 +4721,7 @@ ecosystems:
             attributes:
               mob_mods:
                 mp_base: 50
-                sublink: 6
+                sublink:  6
       wamouracampa:
         id: 198
         species:
@@ -4893,7 +4893,7 @@ ecosystems:
                 storetp: 100
               mob_mods:
                 immunity:     2047
-                hp_standback: -1
+                hp_standback:   -1
           orc_statue:
             id: 479
             attributes:
@@ -4901,7 +4901,7 @@ ecosystems:
                 storetp: 100
               mob_mods:
                 immunity:     2047
-                hp_standback: -1
+                hp_standback:   -1
           quadav_statue:
             id: 480
             attributes:
@@ -4909,7 +4909,7 @@ ecosystems:
                 storetp: 100
               mob_mods:
                 immunity:     2047
-                hp_standback: -1
+                hp_standback:   -1
           yagudo_statue:
             id: 481
             attributes:
@@ -4917,7 +4917,7 @@ ecosystems:
                 storetp: 100
               mob_mods:
                 immunity:     2047
-                hp_standback: -1
+                hp_standback:   -1
       ultima:
         id: 206
         species:

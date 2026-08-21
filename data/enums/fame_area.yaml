@@ -7,16 +7,16 @@ meta:
     table: xi.fameArea
 
 values:
-  sandoria:           0
-  bastok:             1
-  windurst:           2  # Mhaura, Kazham
-  jeuno:              3  # Derived: (San d'Oria + Bastok + Windurst) / 2
-  selbina_rabao:      4  # Derived: (San d'Oria + Bastok) * 2 / 3
-  norg:               5
-  abyssea_konschtat:  6
-  abyssea_tahrongi:   7
-  abyssea_latheine:   8
-  abyssea_misareaux:  9
+  sandoria:            0
+  bastok:              1
+  windurst:            2 # Mhaura, Kazham
+  jeuno:               3 # Derived: (San d'Oria + Bastok + Windurst) / 2
+  selbina_rabao:       4 # Derived: (San d'Oria + Bastok) * 2 / 3
+  norg:                5
+  abyssea_konschtat:   6
+  abyssea_tahrongi:    7
+  abyssea_latheine:    8
+  abyssea_misareaux:   9
   abyssea_vunkerl:    10
   abyssea_attohwa:    11
   abyssea_altepa:     12

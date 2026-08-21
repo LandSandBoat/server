@@ -20,14 +20,14 @@ meta:
     table: xi.mod
 
 values:
-  none:         0    # Essential, but does nothing :)
-  def:          1    # Target's Defense
-  hp:           2    # Target's HP
-  hpp:          3    # HP Percentage
-  convmptohp:   4    # MP -> HP (Cassie Earring)
-  mp:           5    # MP +/-
-  mpp:          6    # MP Percentage
-  convhptomp:   7    # HP -> MP
+  none:            0 # Essential, but does nothing :)
+  def:             1 # Target's Defense
+  hp:              2 # Target's HP
+  hpp:             3 # HP Percentage
+  convmptohp:      4 # MP -> HP (Cassie Earring)
+  mp:              5 # MP +/-
+  mpp:             6 # MP Percentage
+  convhptomp:      7 # HP -> MP
   weakness_pct: 1093 # Weakness HP/MP reduction term, -1 = - 1% HP/MP
   curse_pct:    1094 # Curse HP/MP reduction term, -1 = - 1% HP/MP
   base_hp:      1095 # Base HP bonus (like merits)
@@ -35,14 +35,14 @@ values:
   food_hp:      1130 # Food HP (this is added after curse)
   food_mp:      1131 # Food MP (this is added after curse)
   exp_lvl_mod:  1196 # Modifies level during /check, exp calculation and certain packets only
-  str:          8    # Strength
-  dex:          9    # Dexterity
-  vit:          10   # Vitality
-  agi:          11   # Agility
-  int:          12   # Intelligence
-  mnd:          13   # Mind
-  chr:          14   # Charisma
-  twohand_str:  218  # Same as STR, but only active when using a two handed weapon (e.g. Hasso)
+  str:             8 # Strength
+  dex:             9 # Dexterity
+  vit:            10 # Vitality
+  agi:            11 # Agility
+  int:            12 # Intelligence
+  mnd:            13 # Mind
+  chr:            14 # Charisma
+  twohand_str:   218 # Same as STR, but only active when using a two handed weapon (e.g. Hasso)
   # Magic Evasion versus elements
   # This has been repeatedly mixed up with SDT - be careful!
   fire_meva:    15 # Fire Magic Evasion
@@ -73,17 +73,17 @@ values:
   blind_res_rank:        1167
   stun_res_rank:         1186
   gravity_res_rank:      1210
-  att:                   23   # Attack
-  ratt:                  24   # Ranged Attack
-  acc:                   25   # Accuracy
-  racc:                  26   # Ranged Accuracy
-  twohand_acc:           219  # Same as ACC, but only active when using a two handed weapon (e.g. Hasso)
-  enmity:                27   # Enmity
-  enmity_loss_reduction: 427  # Reduces Enmity lost when taking damage
-  matt:                  28   # Magic Attack
-  mdef:                  29   # Magic Defense
-  macc:                  30   # Magic Accuracy - note that this is NOT iLvl "magic accuracy skill" which happens in item_weapon.sql
-  meva:                  31   # Magic Evasion
+  att:                     23 # Attack
+  ratt:                    24 # Ranged Attack
+  acc:                     25 # Accuracy
+  racc:                    26 # Ranged Accuracy
+  twohand_acc:            219 # Same as ACC, but only active when using a two handed weapon (e.g. Hasso)
+  enmity:                  27 # Enmity
+  enmity_loss_reduction:  427 # Reduces Enmity lost when taking damage
+  matt:                    28 # Magic Attack
+  mdef:                    29 # Magic Defense
+  macc:                    30 # Magic Accuracy - note that this is NOT iLvl "magic accuracy skill" which happens in item_weapon.sql
+  meva:                    31 # Magic Evasion
   # Magic Accuracy and Elemental Attacks
   fire_mab:     32 # Elemental "Magic Attack Bonus" aka "Affinity"
   ice_mab:      33 # Elemental "Magic Attack Bonus" aka "Affinity"
@@ -102,43 +102,43 @@ values:
   light_macc:   46 # Light Accuracy
   dark_macc:    47 # Dark Accuracy
   # Day/Weather elemental bonuses.
-  force_fire_dwbonus:      531  # Set to above 0 to force fire day/weather elemental bonuses. Penalties are NOT forced.
-  force_ice_dwbonus:       532  # Set to above 0 to force ice day/weather elemental bonuses. Penalties are NOT forced.
-  force_wind_dwbonus:      533  # Set to above 0 to force wind day/weather elemental bonuses. Penalties are NOT forced.
-  force_earth_dwbonus:     534  # Set to above 0 to force earth day/weather elemental bonuses. Penalties are NOT forced.
-  force_lightning_dwbonus: 535  # Set to above 0 to force lightning day/weather elemental bonuses. Penalties are NOT forced.
-  force_water_dwbonus:     536  # Set to above 0 to force water day/weather elemental bonuses. Penalties are NOT forced.
-  force_light_dwbonus:     537  # Set to above 0 to force light day/weather elemental bonuses. Penalties are NOT forced.
-  force_dark_dwbonus:      538  # Set to above 0 to force dark day/weather elemental bonuses. Penalties are NOT forced.
+  force_fire_dwbonus:       531 # Set to above 0 to force fire day/weather elemental bonuses. Penalties are NOT forced.
+  force_ice_dwbonus:        532 # Set to above 0 to force ice day/weather elemental bonuses. Penalties are NOT forced.
+  force_wind_dwbonus:       533 # Set to above 0 to force wind day/weather elemental bonuses. Penalties are NOT forced.
+  force_earth_dwbonus:      534 # Set to above 0 to force earth day/weather elemental bonuses. Penalties are NOT forced.
+  force_lightning_dwbonus:  535 # Set to above 0 to force lightning day/weather elemental bonuses. Penalties are NOT forced.
+  force_water_dwbonus:      536 # Set to above 0 to force water day/weather elemental bonuses. Penalties are NOT forced.
+  force_light_dwbonus:      537 # Set to above 0 to force light day/weather elemental bonuses. Penalties are NOT forced.
+  force_dark_dwbonus:       538 # Set to above 0 to force dark day/weather elemental bonuses. Penalties are NOT forced.
   force_dw_bonus_penalty:  1156 # Set to above 0 to force all day/weather elemental bonus AND penalties. This is used by "Hachirin-no-Obi".
-  wsacc:                   48   # Weaponskill Accuracy
-  attp:                    62   # % Attack
-  defp:                    63   # % Defense
-  combat_skillup_rate:     64   # % increase in skillup combat rate
-  magic_skillup_rate:      65   # % increase in skillup magic rate
-  rattp:                   66   # % Ranged Attack
-  eva:                     68   # Evasion
-  rdef:                    69   # Ranged Defense
-  reva:                    70   # Ranged Evasion
-  mpheal:                  71   # MP Recovered while healing
-  hpheal:                  72   # HP Recovered while healing
-  storetp:                 73   # Increases the rate at which TP is gained
-  tactical_parry:          486  # Tactical Parry Tp Bonus
-  inhibit_tp:              488  # Inhibits TP Gain (percent)
+  wsacc:                     48 # Weaponskill Accuracy
+  attp:                      62 # % Attack
+  defp:                      63 # % Defense
+  combat_skillup_rate:       64 # % increase in skillup combat rate
+  magic_skillup_rate:        65 # % increase in skillup magic rate
+  rattp:                     66 # % Ranged Attack
+  eva:                       68 # Evasion
+  rdef:                      69 # Ranged Defense
+  reva:                      70 # Ranged Evasion
+  mpheal:                    71 # MP Recovered while healing
+  hpheal:                    72 # HP Recovered while healing
+  storetp:                   73 # Increases the rate at which TP is gained
+  tactical_parry:           486 # Tactical Parry Tp Bonus
+  inhibit_tp:               488 # Inhibits TP Gain (percent)
   # Working Skills (weapon combat skills)
   # These are NOT item Level skill, they are skill in your status menu. iLvl "skill" happens in item_weapon.sql
-  hth:               80  # Hand To Hand Skill
-  dagger:            81  # Dagger Skill
-  sword:             82  # Sword Skill
-  gsword:            83  # Great Sword Skill
-  axe:               84  # Axe Skill
-  gaxe:              85  # Great Axe Skill
-  scythe:            86  # Scythe Skill
-  polearm:           87  # Polearm Skill
-  katana:            88  # Katana Skill
-  gkatana:           89  # Great Katana Skill
-  club:              90  # Club Skill
-  staff:             91  # Staff Skill
+  hth:                80 # Hand To Hand Skill
+  dagger:             81 # Dagger Skill
+  sword:              82 # Sword Skill
+  gsword:             83 # Great Sword Skill
+  axe:                84 # Axe Skill
+  gaxe:               85 # Great Axe Skill
+  scythe:             86 # Scythe Skill
+  polearm:            87 # Polearm Skill
+  katana:             88 # Katana Skill
+  gkatana:            89 # Great Katana Skill
+  club:               90 # Club Skill
+  staff:              91 # Staff Skill
   auto_melee_skill:  101 # Automaton Melee Skill -- Do not apply to items in item_mods_pet.sql, apply only to master (it does not work properly on pet mods)
   auto_ranged_skill: 102 # Automaton Range Skill -- Do not apply to items in item_mods_pet.sql, apply only to master (it does not work properly on pet mods)
   auto_magic_skill:  103 # Automaton Magic Skill -- Do not apply to items in item_mods_pet.sql, apply only to master (it does not work properly on pet mods)
@@ -244,52 +244,52 @@ values:
   power_multiplier_job_ability:  1177 # Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
   power_multiplier_mobskill:     1178 # Base 100. Multiplies the power/damage of the action like so: power * (1 + mod / 100)
   # Crit Damage / Delay
-  crithitrate:              165  # Raises chance to crit
-  crithitrate_only_wep:     141  # Raises chance to crit (but only for attacks with the specific weapon that has the mod)
-  crit_dmg_increase:        421  # Raises the damage of critical hit by percent %
-  ranged_crit_dmg_increase: 964  # Increases ranged critical damage by a percent
-  critical_hit_evasion:     166  # Modifies chance enemy will crit
-  crit_def_bonus:           908  # Reduces crit hit damage
-  magic_crithitrate:        562  # Raises chance to magic crit
+  crithitrate:               165 # Raises chance to crit
+  crithitrate_only_wep:      141 # Raises chance to crit (but only for attacks with the specific weapon that has the mod)
+  crit_dmg_increase:         421 # Raises the damage of critical hit by percent %
+  ranged_crit_dmg_increase:  964 # Increases ranged critical damage by a percent
+  critical_hit_evasion:      166 # Modifies chance enemy will crit
+  crit_def_bonus:            908 # Reduces crit hit damage
+  magic_crithitrate:         562 # Raises chance to magic crit
   magic_crithitrate_ii:     1168 # Raises chance to add a critical 1.25 magic damage multiplier.
-  magic_crit_dmg_increase:  563  # Raises damage done when criting with magic
-  fencer_tp_bonus:          903  # TP Bonus to weapon skills from Fencer Trait
-  fencer_crithitrate:       904  # Increased Crit chance from Fencer Trait
-  smite:                    898  # Raises attack when using H2H or 2H weapons (256 scale)
-  tactical_guard:           899  # Tp increase when guarding
-  guard_percent:            976  # Guard Percent
-  haste_magic:              167  # Haste (and Slow) from magic - 10000 base, 375 = 3.75%
-  haste_ability:            383  # Haste (and Slow) from abilities - 10000 base, 375 = 3.75%
-  haste_gear:               384  # Haste (and Slow) from equipment - 10000 base, 375 = 3.75%
-  twohand_haste_ability:    217  # Haste (and Slow) from abilities - 10000 base, 375 = 3.75% - Only applies to auto attacks when using two handed weapons, additive to HASTE_ABILITY
-  spellinterrupt:           168  # % Spell Interruption Rate
+  magic_crit_dmg_increase:   563 # Raises damage done when criting with magic
+  fencer_tp_bonus:           903 # TP Bonus to weapon skills from Fencer Trait
+  fencer_crithitrate:        904 # Increased Crit chance from Fencer Trait
+  smite:                     898 # Raises attack when using H2H or 2H weapons (256 scale)
+  tactical_guard:            899 # Tp increase when guarding
+  guard_percent:             976 # Guard Percent
+  haste_magic:               167 # Haste (and Slow) from magic - 10000 base, 375 = 3.75%
+  haste_ability:             383 # Haste (and Slow) from abilities - 10000 base, 375 = 3.75%
+  haste_gear:                384 # Haste (and Slow) from equipment - 10000 base, 375 = 3.75%
+  twohand_haste_ability:     217 # Haste (and Slow) from abilities - 10000 base, 375 = 3.75% - Only applies to auto attacks when using two handed weapons, additive to HASTE_ABILITY
+  spellinterrupt:            168 # % Spell Interruption Rate
   # Movement speed modifiers in use order.
   # See CBattleEntity::UpdateSpeed
-  mount_move:                972  # % Mount Movement Speed
-  move_speed_stackable:      75   # Additive modifier. Applied before multipliers. Gear movement speed penalties.
-  move_speed_weight_penalty: 77   # Multiplicative modifier. For Gravity and curse.
+  mount_move:                 972 # % Mount Movement Speed
+  move_speed_stackable:        75 # Additive modifier. Applied before multipliers. Gear movement speed penalties.
+  move_speed_weight_penalty:   77 # Multiplicative modifier. For Gravity and curse.
   move_speed_flee:           1085 # Multiplicative modifier.
   move_speed_cheer:          1087 # Multiplicative modifier from "cheer" type KI's.
-  move_speed_gear_bonus:     76   # Multiplicative modifier. Gear movement speed bonuses. DOES NOT STACK with each other, only highest applies.
-  move_speed_quickening:     78   # Additive modifier. Applied after multipliers. Jig, spreinter shoes, etc. Shares cap with Mazurka.
-  move_speed_mazurka:        79   # Additive modifier. Applied after multipliers. Song movement speed. Shares cap with Quickening,
+  move_speed_gear_bonus:       76 # Multiplicative modifier. Gear movement speed bonuses. DOES NOT STACK with each other, only highest applies.
+  move_speed_quickening:       78 # Additive modifier. Applied after multipliers. Jig, spreinter shoes, etc. Shares cap with Mazurka.
+  move_speed_mazurka:          79 # Additive modifier. Applied after multipliers. Song movement speed. Shares cap with Quickening,
   move_speed_bolters_roll:   1086 # Additive modifier. Applied after multipliers.
-  move_speed_override:       169  # Modifier used to overide regular speed caps. (GM speed and Feast of Swords)
-  fastcast:                  170  # Increases Spell Cast Time (TRAIT)
-  ufastcast:                 407  # uncapped fast cast
-  cure_cast_time:            519  # cure cast time reduction
-  elemental_celerity:        901  # Quickens Elemental Magic Casting
+  move_speed_override:        169 # Modifier used to overide regular speed caps. (GM speed and Feast of Swords)
+  fastcast:                   170 # Increases Spell Cast Time (TRAIT)
+  ufastcast:                  407 # uncapped fast cast
+  cure_cast_time:             519 # cure cast time reduction
+  elemental_celerity:         901 # Quickens Elemental Magic Casting
   healing_magic_recast:      1183 # Recast delay (percent, usually negative)
   enfeebling_magic_recast:   1184 # Recast delay (percent, usually negative)
   enhancing_magic_recast:    1185 # Recast delay (percent, usually negative)
-  delay:                     171  # Increase/Decrease Delay
-  ranged_delay:              172  # Increase/Decrease Ranged Delay. This is in-game delay not milliseconds
-  martial_arts:              173  # The integer amount of delay to reduce from H2H weapons' base delay. (TRAIT)
-  skillchainbonus:           174  # Damage bonus applied to skill chain damage.  Modifier from effects/traits
-  skillchaindmg:             175  # Damage bonus applied to skill chain damage.  Modifier from gear (multiplicative after effect/traits)
-  max_swings:                978  # Max swings for "Occasionally attacks X times"
-  additional_swing_chance:   979  # Chance that allows for an additional swing despite of multiple hits, mostly for Amood weapons
-  magic_damage:              311  # Magic damage added directly to the spell's base damage
+  delay:                      171 # Increase/Decrease Delay
+  ranged_delay:               172 # Increase/Decrease Ranged Delay. This is in-game delay not milliseconds
+  martial_arts:               173 # The integer amount of delay to reduce from H2H weapons' base delay. (TRAIT)
+  skillchainbonus:            174 # Damage bonus applied to skill chain damage.  Modifier from effects/traits
+  skillchaindmg:              175 # Damage bonus applied to skill chain damage.  Modifier from gear (multiplicative after effect/traits)
+  max_swings:                 978 # Max swings for "Occasionally attacks X times"
+  additional_swing_chance:    979 # Chance that allows for an additional swing despite of multiple hits, mostly for Amood weapons
+  magic_damage:               311 # Magic damage added directly to the spell's base damage
   mp_cost_reduction:         1197 # Reduces spell MP cost by a percentage.
   # FOOD!
   food_hpp:      176
@@ -306,25 +306,25 @@ values:
   food_ratt_cap: 187
   food_raccp:    188
   food_racc_cap: 189
-  food_maccp:    99  # Macc% see https://www.bg-wiki.com/bg/Category:Magic_Accuracy_Food
+  food_maccp:     99 # Macc% see https://www.bg-wiki.com/bg/Category:Magic_Accuracy_Food
   food_macc_cap: 100 # Sets Upper limit for FOOD_MACCP
   food_duration: 937 # Percentage to increase food duration
   # Killer-Effects - (Most by Traits/JobAbility)
-  vermin_killer:          224  # Enhances "Vermin Killer" effect
-  bird_killer:            225  # Enhances "Bird Killer" effect
-  amorph_killer:          226  # Enhances "Amorph Killer" effect
-  lizard_killer:          227  # Enhances "Lizard Killer" effect
-  aquan_killer:           228  # Enhances "Aquan Killer" effect
-  plantoid_killer:        229  # Enhances "Plantiod Killer" effect
-  beast_killer:           230  # Enhances "Beast Killer" effect
-  undead_killer:          231  # Enhances "Undead Killer" effect
-  arcana_killer:          232  # Enhances "Arcana Killer" effect
-  dragon_killer:          233  # Enhances "Dragon Killer" effect
-  demon_killer:           234  # Enhances "Demon Killer" effect
-  empty_killer:           235  # Enhances "Empty Killer" effect
-  humanoid_killer:        236  # Enhances "Humanoid Killer" effect
-  luminian_killer:        237  # Enhances "Luminian Killer" effect
-  luminion_killer:        238  # Enhances "Luminion Killer" effect
+  vermin_killer:           224 # Enhances "Vermin Killer" effect
+  bird_killer:             225 # Enhances "Bird Killer" effect
+  amorph_killer:           226 # Enhances "Amorph Killer" effect
+  lizard_killer:           227 # Enhances "Lizard Killer" effect
+  aquan_killer:            228 # Enhances "Aquan Killer" effect
+  plantoid_killer:         229 # Enhances "Plantiod Killer" effect
+  beast_killer:            230 # Enhances "Beast Killer" effect
+  undead_killer:           231 # Enhances "Undead Killer" effect
+  arcana_killer:           232 # Enhances "Arcana Killer" effect
+  dragon_killer:           233 # Enhances "Dragon Killer" effect
+  demon_killer:            234 # Enhances "Demon Killer" effect
+  empty_killer:            235 # Enhances "Empty Killer" effect
+  humanoid_killer:         236 # Enhances "Humanoid Killer" effect
+  luminian_killer:         237 # Enhances "Luminian Killer" effect
+  luminion_killer:         238 # Enhances "Luminion Killer" effect
   augment_killer_effects: 1201 # Augments "Killer" effects (Examples: Ferine Gausape +1 and +2)
   # Circle modifiers for damage done.
   arcana_dmg_multiplier: 1202
@@ -387,40 +387,40 @@ values:
   mijin_reraise:        258 # Augments Mijin Gakure
   dual_wield:           259 # Percent reduction in dual wield delay.
   # fTP modifiers
-  fire_ftp_bonus:    544  # Gives bonus fTP when weaponskill has a Fire property. (Elemental beltes and gorgets) /256
-  ice_ftp_bonus:     545  # Gives bonus fTP when weaponskill has a Ice property. (Elemental beltes and gorgets) /256
-  wind_ftp_bonus:    546  # Gives bonus fTP when weaponskill has a Wind property. (Elemental beltes and gorgets) /256
-  earth_ftp_bonus:   547  # Gives bonus fTP when weaponskill has a Earth property. (Elemental beltes and gorgets) /256
-  thunder_ftp_bonus: 548  # Gives bonus fTP when weaponskill has a Thunder property. (Elemental beltes and gorgets) /256
-  water_ftp_bonus:   549  # Gives bonus fTP when weaponskill has a Water property. (Elemental beltes and gorgets) /256
-  light_ftp_bonus:   550  # Gives bonus fTP when weaponskill has a Light property. (Elemental beltes and gorgets) /256
-  dark_ftp_bonus:    551  # Gives bonus fTP when weaponskill has a Dark property. (Elemental beltes and gorgets) /256
+  fire_ftp_bonus:     544 # Gives bonus fTP when weaponskill has a Fire property. (Elemental beltes and gorgets) /256
+  ice_ftp_bonus:      545 # Gives bonus fTP when weaponskill has a Ice property. (Elemental beltes and gorgets) /256
+  wind_ftp_bonus:     546 # Gives bonus fTP when weaponskill has a Wind property. (Elemental beltes and gorgets) /256
+  earth_ftp_bonus:    547 # Gives bonus fTP when weaponskill has a Earth property. (Elemental beltes and gorgets) /256
+  thunder_ftp_bonus:  548 # Gives bonus fTP when weaponskill has a Thunder property. (Elemental beltes and gorgets) /256
+  water_ftp_bonus:    549 # Gives bonus fTP when weaponskill has a Water property. (Elemental beltes and gorgets) /256
+  light_ftp_bonus:    550 # Gives bonus fTP when weaponskill has a Light property. (Elemental beltes and gorgets) /256
+  dark_ftp_bonus:     551 # Gives bonus fTP when weaponskill has a Dark property. (Elemental beltes and gorgets) /256
   any_ftp_bonus:     1144 # Gives bonus fTP when weaponskill has a (any) property. (Fotia Gorget, Fotia Belt) /256
   day_ftp_bonus:     1145 # Gives bonus fTP when weaponskill has a property that matches current day. (Mekira Oto, Gavialis helm, etc...) /256
   # Warrior
-  double_attack:       288  # Percent chance to proc
+  double_attack:        288 # Percent chance to proc
   double_attack_dmg:   1038 # Increases "Double Attack" damage/"Double Attack" damage + (in percents, e.g. +20 = +20% damage)
-  warcry_duration:     483  # Warcy duration bonus from gear
-  berserk_potency:     948  # Augments "Berserk"/Enhances "Berserk" effect (Conqueror)
-  berserk_duration:    954  # Berserk Duration
-  aggressor_duration:  955  # Aggressor Duration
-  defender_duration:   956  # Defender Duration
+  warcry_duration:      483 # Warcy duration bonus from gear
+  berserk_potency:      948 # Augments "Berserk"/Enhances "Berserk" effect (Conqueror)
+  berserk_duration:     954 # Berserk Duration
+  aggressor_duration:   955 # Aggressor Duration
+  defender_duration:    956 # Defender Duration
   enhances_restraint:  1045 # Enhances "Restraint" effect/"Restraint" + (Increases the damage bonus of Restraint by XXX%)
   enhances_blood_rage: 1046 # Enhances "Blood Rage" effect/"Blood Rage" duration +
   # Monk
-  boost_effect:        97   # Boost power in tenths
+  boost_effect:          97 # Boost power in tenths
   chakra_mult:         1026 # Chakra multiplier increase (from gear)
   chakra_removal:      1027 # Extra statuses removed by Chakra
-  subtle_blow:         289  # How much TP to reduce.
-  counter:             291  # Percent chance to counter
-  kick_attack_rate:    292  # Percent chance to kick
-  perfect_counter_att: 428  # TODO: Raises weapon damage by 20 when countering while under the Perfect Counter effect. This also affects Weapon Rank (though
+  subtle_blow:          289 # How much TP to reduce.
+  counter:              291 # Percent chance to counter
+  kick_attack_rate:     292 # Percent chance to kick
+  perfect_counter_att:  428 # TODO: Raises weapon damage by 20 when countering while under the Perfect Counter effect. This also affects Weapon Rank (though
   # not if fighting barehanded).
   counter_damage:       1047 # Increases Damage from Counter Attacks (Percent)
-  footwork_att_bonus:   429  # Raises the attack bonus of Footwork. (Tantra Gaiters +2 raise 25/256 to 38/256)
-  counterstance_effect: 543  # Counterstance effect in percents
-  dodge_effect:         552  # Dodge effect in percents
-  focus_effect:         561  # Focus effect in percents
+  footwork_att_bonus:    429 # Raises the attack bonus of Footwork. (Tantra Gaiters +2 raise 25/256 to 38/256)
+  counterstance_effect:  543 # Counterstance effect in percents
+  dodge_effect:          552 # Dodge effect in percents
+  focus_effect:          561 # Focus effect in percents
   additive_guard:       1092 # Additive % bonus to final Guard rate (adds after clamp)
   augments_impetus:     1097 # see https://www.bg-wiki.com/ffxi/Impetus, adds Crit Hit Damage & Accuracy for Impetus
   # White Mage
@@ -433,45 +433,45 @@ values:
   divine_benison:   910 # Adds fast cast and enmity reduction to -Na spells (includes Erase). Enmity reduction is half of the fast cast amount
   regen_bonus:      989 # Increases the amount of HP restored by Regen
   # Black Mage
-  clear_mind:              295  # Used in conjunction with HEALMP to increase amount between tics
-  conserve_mp:             296  # Percent chance
+  clear_mind:               295 # Used in conjunction with HEALMP to increase amount between tics
+  conserve_mp:              296 # Percent chance
   elemental_magic_recast:  1146 # Recast time for elemental magic spells (percent, usually negative)
   enhances_elemental_seal: 1149 # Bonus magic damage when using Elemental Seal (percent)
   elemental_debuff_effect: 1150 # Increase stat reduction by N, and DoT by N/2 HP per tick
   # Red Mage
-  blink:             299  # Tracks blink shadows
-  phalanx:           301  # Tracks direct damage reduction
-  enf_mag_potency:   290  # Increases Enfeebling magic potency %
+  blink:              299 # Tracks blink shadows
+  phalanx:            301 # Tracks direct damage reduction
+  enf_mag_potency:    290 # Increases Enfeebling magic potency %
   enf_mag_duration:  1151 # Increases enfeebling magic duration %
-  enhances_saboteur: 297  # Increases Saboteur Potency %
+  enhances_saboteur:  297 # Increases Saboteur Potency %
   phalanx_received:  1182 # Phalanx +N when Phalanx is received (cast on self or from other player)
   # Thief
-  flee_duration:        93   # Flee duration in seconds
-  steal:                298  # Increase/Decrease THF Steal chance
-  despoil:              896  # Increases THF Despoil chance
-  perfect_dodge:        883  # Increases Perfect Dodge duration in seconds
-  triple_attack:        302  # Percent chance
+  flee_duration:          93 # Flee duration in seconds
+  steal:                 298 # Increase/Decrease THF Steal chance
+  despoil:               896 # Increases THF Despoil chance
+  perfect_dodge:         883 # Increases Perfect Dodge duration in seconds
+  triple_attack:         302 # Percent chance
   triple_attack_dmg:    1039 # Increases "Triple Attack" damage/"Triple Attack" damage + (in percents, e.g. +20 = +20% damage)
-  treasure_hunter:      303  # Percent chance
+  treasure_hunter:       303 # Percent chance
   treasure_hunter_proc: 1048 # Increases Treasure Hunter proc rate (percent)
   treasure_hunter_cap:  1049 # Increases the Treasure Hunter Cap (e.g. THF JP Gift)
-  sneak_atk_dex:        830  # % DEX boost to Sneak Attack (if gear mod, needs to be equipped on hit)
-  trick_atk_agi:        520  # % AGI boost to Trick Attack (if gear mod, needs to be equipped on hit)
-  mug_effect:           835  # Mug effect as multiplier
-  acc_collab_effect:    884  # Increases amount of enmity transferred for Accomplice/Collaborator
-  hide_duration:        885  # Hide duration increase (percentage based)
-  gilfinder:            897  # Gilfinder, duh
+  sneak_atk_dex:         830 # % DEX boost to Sneak Attack (if gear mod, needs to be equipped on hit)
+  trick_atk_agi:         520 # % AGI boost to Trick Attack (if gear mod, needs to be equipped on hit)
+  mug_effect:            835 # Mug effect as multiplier
+  acc_collab_effect:     884 # Increases amount of enmity transferred for Accomplice/Collaborator
+  hide_duration:         885 # Hide duration increase (percentage based)
+  gilfinder:             897 # Gilfinder, duh
   # Paladin
-  holy_circle_duration:   857  # Holy Circle extended duration in seconds
+  holy_circle_duration:    857 # Holy Circle extended duration in seconds
   holy_circle_potency:    1141 # Increases the potency of the Holy Circle effect (e.g. mod value 2 = +2% Undead Killer)
-  rampart_duration:       92   # Rampart duration in seconds
-  absorb_physdmg_to_mp:   426  # Absorbs a percentage of physical damage taken to MP.
-  shield_mastery_tp:      485  # Shield mastery TP bonus when blocking with a shield
-  sentinel_effect:        837  # Sentinel effect in percents
-  shield_def_bonus:       905  # Shield Defense Bonus
-  cover_to_mp:            965  # Converts a successful cover's phsyical damage to MP
-  cover_magic_and_ranged: 966  # Redirects ranged and single target magic attacks to the cover ability user
-  cover_duration:         967  # Increases Cover Duration
+  rampart_duration:         92 # Rampart duration in seconds
+  absorb_physdmg_to_mp:    426 # Absorbs a percentage of physical damage taken to MP.
+  shield_mastery_tp:       485 # Shield mastery TP bonus when blocking with a shield
+  sentinel_effect:         837 # Sentinel effect in percents
+  shield_def_bonus:        905 # Shield Defense Bonus
+  cover_to_mp:             965 # Converts a successful cover's phsyical damage to MP
+  cover_magic_and_ranged:  966 # Redirects ranged and single target magic attacks to the cover ability user
+  cover_duration:          967 # Increases Cover Duration
   enhances_chivalry:      1061 # Enhances "Chivalry" effect (increases the base TP modifier by the provided value / 100, e.g. mod value 5 = +0.05)
   enhances_divine_emblem: 1062 # Enhances "Divine Emblem" effect/"Divine Emblem" + (increases the ability's special enmity bonus by the provided value)
   enhances_fealty:        1063 # Enhances "Fealty" effect (increases Fealty's duration by 4 seconds per Fealty merit)
@@ -482,18 +482,18 @@ values:
   reprisal_spikes_bonus:  1068 # Increases Reprisal spikes damage by percentage (e.g. mod value 50 = +50% spikes damage)
   shield_barrier:         1082 # Grants a bonus to Protect spells cast by self while a shield is equipped.
   # Dark Knight
-  arcane_circle_duration:  858  # Arcane Circle extended duration in seconds
+  arcane_circle_duration:   858 # Arcane Circle extended duration in seconds
   arcane_circle_potency:   1069 # Increases the potency of the Arcane Circle effect (e.g. mod value 2 = +2% Arcana Killer)
-  souleater_effect:        96   # Souleater power in percents
-  souleater_effect_ii:     53   # Uncapped additive Souleaterbonus in percents, 10 = .1
-  desperate_blows:         906  # Adds ability haste to Last Resort
-  stalwart_soul:           907  # Reduces damage taken from Souleater
-  dread_spikes_effect:     998  # Percent increase to total HP drain for Dread Spikes
+  souleater_effect:          96 # Souleater power in percents
+  souleater_effect_ii:       53 # Uncapped additive Souleaterbonus in percents, 10 = .1
+  desperate_blows:          906 # Adds ability haste to Last Resort
+  stalwart_soul:            907 # Reduces damage taken from Souleater
+  dread_spikes_effect:      998 # Percent increase to total HP drain for Dread Spikes
   dark_magic_cast:         1071 # Reduces Dark Magic Casting Time by percentage (e.g. mod value -10 = -10% cast time)
   dark_magic_duration:     1072 # Increases Dark Magic spell durations by percentage (e.g. mod value 10 = +10% duration)
   enhances_blood_weapon:   1070 # Enhances "Blood Weapon" effect (increases Blood Weapon's duration in seconds)
   enhances_dark_seal:      1073 # Enhances "Dark Seal" effect (Increases Dark Magic spell durations by 10% per Dark Seal merit while Dark Seal active)
-  enhances_diabolic_eye:   275  # Diabolic Eye duration + "modifier-value" seconds per Diabolic Eye merit.
+  enhances_diabolic_eye:    275 # Diabolic Eye duration + "modifier-value" seconds per Diabolic Eye merit.
   enhances_nether_void:    1083 # Enhances "Nether Void" effect (Increases the potency of the next Absorb or Drain Dark Magic by <value>%
   enhances_muted_soul:     1084 # Enhances "Muted Soul" effect (Adds 3% Zanshin rate per MUTED_SOUL merit level)
   enhances_absorb_effects: 1136 # Absorb Spell duration +x seconds (Enhances "Absorb" effects)
@@ -501,72 +501,72 @@ values:
   absorb_effect_duration:  1138 # Absorb Spell duration +% ("Absorb" effect duration +x%)
   augments_absorb_tp:      1153 # Increases absorb-TP potency, stacks with AUGMENTS_ABSORB
   # Beastmaster
-  tame:                         304  # Additional percent chance to charm
-  charm_time:                   360  # extends the charm time only, no effect of charm chance
+  tame:                          304 # Additional percent chance to charm
+  charm_time:                    360 # extends the charm time only, no effect of charm chance
   familiar_bonus:               1169 # Bonus minutes of charm and haste when using familiar
-  reward_hp_bonus:              364  # Percent to add to reward HP healed. (364)
-  charm_chance:                 391  # extra chance to charm (light+apollo staff ect)
-  feral_howl_duration:          503  # +20% duration per merit when wearing augmented Monster Jackcoat +2
-  jug_level_range:              564  # Decreases the level range of spawned jug pets. Maxes out at 2.
-  call_beast_delay:             273  # Lowers Call Beast recast
+  reward_hp_bonus:               364 # Percent to add to reward HP healed. (364)
+  charm_chance:                  391 # extra chance to charm (light+apollo staff ect)
+  feral_howl_duration:           503 # +20% duration per merit when wearing augmented Monster Jackcoat +2
+  jug_level_range:               564 # Decreases the level range of spawned jug pets. Maxes out at 2.
+  call_beast_delay:              273 # Lowers Call Beast recast
   sic_ready_recast:             1052 # SIC/Ready recast reduction (seconds)
-  tandem_strike_power:          271  # Grants a bonus to your and your pet's accuracy and magic accuracy when you and your pet are attacking the same target.
-  tandem_blow_power:            272  # Reduces amount of TP gained by enemies when striking them if you and your pet are attacking the same target.
+  tandem_strike_power:           271 # Grants a bonus to your and your pet's accuracy and magic accuracy when you and your pet are attacking the same target.
+  tandem_blow_power:             272 # Reduces amount of TP gained by enemies when striking them if you and your pet are attacking the same target.
   enhances_monster_correlation: 1155 # Grants your pet acc +X and attp +X% against a weaker opposing ecosystem. Typically applied to pet, not owner (item_mods_pet.sql)
   enhances_spur:                1157 # Increases Store TP bonus by the mod amount when using job ability Spur
   # Bard
-  minne_effect:           433
-  minuet_effect:          434
-  paeon_effect:           435
-  requiem_effect:         436
-  threnody_effect:        437
-  madrigal_effect:        438
-  mambo_effect:           439
-  lullaby_effect:         440
-  etude_effect:           441
-  ballad_effect:          442
-  march_effect:           443
-  finale_effect:          444
-  carol_effect:           445
-  mazurka_effect:         446
-  elegy_effect:           447
-  prelude_effect:         448
-  hymnus_effect:          449
-  virelai_effect:         450
-  scherzo_effect:         451
-  all_songs_effect:       452
-  maximum_songs_bonus:    453
-  song_duration_bonus:    454
-  song_spellcasting_time: 455
-  song_recast_delay:      833  # Reduces song recast time in seconds.
+  minne_effect:            433
+  minuet_effect:           434
+  paeon_effect:            435
+  requiem_effect:          436
+  threnody_effect:         437
+  madrigal_effect:         438
+  mambo_effect:            439
+  lullaby_effect:          440
+  etude_effect:            441
+  ballad_effect:           442
+  march_effect:            443
+  finale_effect:           444
+  carol_effect:            445
+  mazurka_effect:          446
+  elegy_effect:            447
+  prelude_effect:          448
+  hymnus_effect:           449
+  virelai_effect:          450
+  scherzo_effect:          451
+  all_songs_effect:        452
+  maximum_songs_bonus:     453
+  song_duration_bonus:     454
+  song_spellcasting_time:  455
+  song_recast_delay:       833 # Reduces song recast time in seconds.
   augment_song_stat:      1003 # Bonus to Stat of Element of Enhancing Song.
   # Ranger
-  camouflage_duration:     98   # Camouflage duration in percents
-  recycle:                 305  # Percent chance to recycle
-  snapshot:                365  # Percent reduction to range attack delay
-  rapid_shot:              359  # Percent chance to proc rapid shot
-  widescan:                340
-  barrage_acc:             420  # Barrage accuracy
-  barrage_count:           138  # Increases Barrage shots by 1
-  double_shot_rate:        422  # The rate that double shot can proc. Without this, the default is 40%.
-  velocity_snapshot_bonus: 423  # Increases Snapshot whilst Velocity Shot is up.
-  velocity_ratt_bonus:     424  # Increases Ranged Attack whilst Velocity Shot is up.
-  shadow_bind_ext:         425  # Extends the time of shadowbind
-  scavenge_effect:         312
-  sharpshot:               314
+  camouflage_duration:       98 # Camouflage duration in percents
+  recycle:                  305 # Percent chance to recycle
+  snapshot:                 365 # Percent reduction to range attack delay
+  rapid_shot:               359 # Percent chance to proc rapid shot
+  widescan:                 340
+  barrage_acc:              420 # Barrage accuracy
+  barrage_count:            138 # Increases Barrage shots by 1
+  double_shot_rate:         422 # The rate that double shot can proc. Without this, the default is 40%.
+  velocity_snapshot_bonus:  423 # Increases Snapshot whilst Velocity Shot is up.
+  velocity_ratt_bonus:      424 # Increases Ranged Attack whilst Velocity Shot is up.
+  shadow_bind_ext:          425 # Extends the time of shadowbind
+  scavenge_effect:          312
+  sharpshot:                314
   true_shot_effect:        1053 # TODO: True Shot Ranged Damage increase (percent)
   dead_aim_effect:         1054 # TODO: Dead Aim Critical Damage increase (percent)
-  bounty_shot_th_bonus:    826  # Boosts base TH level of bounty shot
+  bounty_shot_th_bonus:     826 # Boosts base TH level of bounty shot
   retain_camouflage:       1189 # Enables retaining Camouflage after using a ranged attack
   retain_unlimited_shot:   1190 # Unlimited Shot is retained if the ranged attack misses
   ra_ignore_lvl_diff:      1191 # Ranged attacks ignore pDIF level correction penalty
   # Samurai
-  warding_circle_duration:  95   # Warding Circle extended duration in seconds
+  warding_circle_duration:    95 # Warding Circle extended duration in seconds
   warding_circle_potency:   1143 # Increases the potency of the Warding Circle effect (e.g. mod value 2 = +2% Demon Killer)
-  meditate_duration:        94   # Meditate duration in seconds
-  zanshin:                  306  # Zanshin percent chance
-  third_eye_counter_rate:   508  # Adds counter to 3rd eye anticipates & if using Seigan counter rate is increased by 15%
-  third_eye_retention_rate: 839  # Increases retention rate of third eye with Seigan. 50 = 50%
+  meditate_duration:          94 # Meditate duration in seconds
+  zanshin:                   306 # Zanshin percent chance
+  third_eye_counter_rate:    508 # Adds counter to 3rd eye anticipates & if using Seigan counter rate is increased by 15%
+  third_eye_retention_rate:  839 # Increases retention rate of third eye with Seigan. 50 = 50%
   third_eye_bonus:          1055 # TODO: Bonus Third Eye Evasion (count)
   sengikori_sc_dmg_debuff:  1088 # % Increase to closing skillchain damage. Applied to defender.
   sengikori_mb_dmg_debuff:  1089 # % Increase to magic burst damage. Applied to defender.
@@ -574,12 +574,12 @@ values:
   hasso_zanshin_bonus:      1187 # Enables Hasso to occasionally trigger Zanshin after landing normal attacks
   seigan_counter_bonus:     1188 # Enables Seigan counter bonus based on Zanshin rate
   # Ninja
-  utsusemi:              307  # Everyone's favorite --tracks shadows.
-  utsusemi_bonus:        900  # Extra shadows from gear
-  ninja_tool:            308  # Percent chance to not use a tool.
-  nin_nuke_bonus_innin:  223  # Ninjutsu damage multiplier from Innin.
-  nin_nuke_bonus_gear:   522  # Ninjutsu damage multiplier from gear.
-  daken:                 911  # chance to throw a shuriken without consuming it
+  utsusemi:               307 # Everyone's favorite --tracks shadows.
+  utsusemi_bonus:         900 # Extra shadows from gear
+  ninja_tool:             308 # Percent chance to not use a tool.
+  nin_nuke_bonus_innin:   223 # Ninjutsu damage multiplier from Innin.
+  nin_nuke_bonus_gear:    522 # Ninjutsu damage multiplier from gear.
+  daken:                  911 # chance to throw a shuriken without consuming it
   ninjutsu_duration:     1000
   enhances_sange:        1091 # 1 = +1 attack for Daken during Sange per Sange merit (i.e. 20 with 5 merits = +100 attack during Sange)
   enhances_futae:        1148 # Adds to the +50% bonus damage to elemental ninjutsu provided by Futae (percent)
@@ -587,120 +587,120 @@ values:
   yonin_utsusemi_enmity: 1192 # Enables extra enmity from Utsusemi spells while under Yonin
   sange_multi_hit:       1193 # Sange uses shadow-based multi-hit ranged attack instead of Daken boost
   # Dragoon
-  ancient_circle_duration:    859  # Ancient Circle extended duration in seconds
+  ancient_circle_duration:     859 # Ancient Circle extended duration in seconds
   ancient_circle_potency:     1142 # Increases the potency of the Ancient Circle effect (e.g. mod value 2 = +2% Dragon Killer)
-  jump_tp_bonus:              361  # bonus tp player receives when using jump
-  jump_spirit_tp_bonus:       285  # bonus tp player receives when using jump for spirit jump only
-  jump_att_bonus:             362  # ATT% bonus for all jumps
-  jump_soul_spirit_att_bonus: 286  # ATT% bonus for Soul & Spirit jump only
-  jump_acc_bonus:             936  # accuracy bonus for all jumps
-  jump_double_attack:         888  # DA% bonus for all jumps
-  high_jump_enmity_reduction: 363  # for gear that reduces more enmity from high jump
-  force_jump_crit:            828  # Force critical hit for all jumps
-  wyvern_effective_breath:    829  # Increases the threshold for triggering healing breath/offensive breath more inclined to pick elemental weakness
-  wyvern_subjob_traits:       974  # Adds subjob traits to wyvern on spawn
-  wyvern_breath_macc:         986  # Increases accuracy of wyvern's breath. adds 10 magic accuracy per merit to the trait Strafe
+  jump_tp_bonus:               361 # bonus tp player receives when using jump
+  jump_spirit_tp_bonus:        285 # bonus tp player receives when using jump for spirit jump only
+  jump_att_bonus:              362 # ATT% bonus for all jumps
+  jump_soul_spirit_att_bonus:  286 # ATT% bonus for Soul & Spirit jump only
+  jump_acc_bonus:              936 # accuracy bonus for all jumps
+  jump_double_attack:          888 # DA% bonus for all jumps
+  high_jump_enmity_reduction:  363 # for gear that reduces more enmity from high jump
+  force_jump_crit:             828 # Force critical hit for all jumps
+  wyvern_effective_breath:     829 # Increases the threshold for triggering healing breath/offensive breath more inclined to pick elemental weakness
+  wyvern_subjob_traits:        974 # Adds subjob traits to wyvern on spawn
+  wyvern_breath_macc:          986 # Increases accuracy of wyvern's breath. adds 10 magic accuracy per merit to the trait Strafe
   wyvern_lvl_bonus:           1043 # Wyvern: Lv.+ (Increases wyvern's base level above 99)
   wyvern_attribute_da:        1056 # Adds an amount of Double Attack to Dragoon each time Wyverns Attributes Increase (percent)
   wyvern_show_readying:       1211 # Pet shows readying animation instead of suppressing it (e.g., wyvern breath)
   dragoon_breath_recast:      1057 # Restoring/Smithing Breath Recast Reduction (seconds)
-  enhance_deep_breathing:     283  # Add 5/256 to deep breathing bonus per merit level when calculating healing breath
-  uncapped_wyvern_breath:     284  # Uncapped wyvern breath boost. Used on retail for augments, normal gear should use WYVERN_BREATH.
-  enhances_strafe:            282  # Strafe merit augment, +50 TP gained per merit level on breath use.
-  enhances_spirit_link:       281  # Adds erase/-na to Spirit Link
+  enhance_deep_breathing:      283 # Add 5/256 to deep breathing bonus per merit level when calculating healing breath
+  uncapped_wyvern_breath:      284 # Uncapped wyvern breath boost. Used on retail for augments, normal gear should use WYVERN_BREATH.
+  enhances_strafe:             282 # Strafe merit augment, +50 TP gained per merit level on breath use.
+  enhances_spirit_link:        281 # Adds erase/-na to Spirit Link
   # Summoner: Perpetuation costs.
-  avatar_perpetuation:         371  # stores base cost of current avatar
-  weather_reduction:           372  # stores perpetuation reduction depending on weather
-  day_reduction:               373  # stores perpetuation reduction depending on day
-  perpetuation_reduction:      346  # stores the MP/tick reduction from gear
-  half_perpetuation_carbuncle: 356  # if > 0, halves perpetuation cost if summon is Carbuncle (Carby Mitts, Asteria Mitts +1)
+  avatar_perpetuation:          371 # stores base cost of current avatar
+  weather_reduction:            372 # stores perpetuation reduction depending on weather
+  day_reduction:                373 # stores perpetuation reduction depending on day
+  perpetuation_reduction:       346 # stores the MP/tick reduction from gear
+  half_perpetuation_carbuncle:  356 # if > 0, halves perpetuation cost if summon is Carbuncle (Carby Mitts, Asteria Mitts +1)
   half_perpetuation_day:       1170 # if > 0, halves perpetuation cost if summon matches day element (Caller's Bracers +1)
   half_perpetuation_weather:   1171 # if > 0, halves perpetuation cost if summon matches weather element (Beckoner's Bracers)
   # Summoner: Others.
-  bp_delay:                  357  # stores blood pact delay reduction
-  enhances_elemental_siphon: 540  # Bonus Base MP added to Elemental Siphon skill.
-  bp_delay_ii:               541  # Blood Pact Delay Reduction II
-  bp_damage:                 126  # Blood Pact: Rage Damage increase percentage
-  blood_boon:                913  # Occasionally cuts down MP cost of Blood Pact abilities. Does not affect abilities that require Astral Flow.
+  bp_delay:                   357 # stores blood pact delay reduction
+  enhances_elemental_siphon:  540 # Bonus Base MP added to Elemental Siphon skill.
+  bp_delay_ii:                541 # Blood Pact Delay Reduction II
+  bp_damage:                  126 # Blood Pact: Rage Damage increase percentage
+  blood_boon:                 913 # Occasionally cuts down MP cost of Blood Pact abilities. Does not affect abilities that require Astral Flow.
   avatars_favor_enhance:     1154 # Enhances Avatars Favor Effect by 1 tier per point
   avatar_lvl_bonus:          1040 # Avatar: Lv.+ (Increases all avatar's base level above 99)
   carbuncle_lvl_bonus:       1041 # Carbuncle: Lv.+ (Increases Carbuncle's base level above 99)
   cait_sith_lvl_bonus:       1042 # Cait Sith: Lv.+ (Increases Cait Sith's base level above 99)
-  enhances_mana_cede:        74   # Bonus % to Mana Cede effect, +1 = 1%
+  enhances_mana_cede:          74 # Bonus % to Mana Cede effect, +1 = 1%
   summoning_magic_cast:      1078 # Summoning magic casting time reduction in seconds
-  spirit_cast_reduction:     140  # Spirit Pact casting time reduction in seconds
+  spirit_cast_reduction:      140 # Spirit Pact casting time reduction in seconds
   # Blue Mage
-  blue_points:             309  # Tracks extra blue points
-  blue_learn_chance:       945  # Additional chance to learn blue magic
+  blue_points:              309 # Tracks extra blue points
+  blue_learn_chance:        945 # Additional chance to learn blue magic
   blue_job_trait_bonus:    1058 # TODO: Increases job traits gained from equipped blue magic (percent)
   blue_magic_effect:       1059 # TODO: Bonus to Attribute Value of spell (percent)
   enhances_burst_affinity: 1139 # Increases WSC bonus on spells cast with Burst Affinity (percent)
   enhances_chain_affinity: 1140 # TODO: Increases WSC bonus on spells cast with Chain Affinity (base damage +)
   blue_magic_recast:       1147 # Recast time for blue magic spells (percent, usually negative)
   # Corsair
-  exp_bonus:              382
-  roll_range:             528  # Additional range for COR roll abilities.
-  job_bonus_chance:       542  # Chance to apply job bonus to COR roll without having the job in the party.
-  random_deal_bonus:      220  # % chance to reset 2 abilities
-  triple_shot_rate:       999  # Percent increase to Triple Shot Rate
+  exp_bonus:               382
+  roll_range:              528 # Additional range for COR roll abilities.
+  job_bonus_chance:        542 # Chance to apply job bonus to COR roll without having the job in the party.
+  random_deal_bonus:       220 # % chance to reset 2 abilities
+  triple_shot_rate:        999 # Percent increase to Triple Shot Rate
   quick_draw_recast:      1060 # Quick Draw Charge Reduction (seconds)
-  dmg_reflect:            316  # Tracks totals
-  roll_rogues:            317  # Tracks totals
-  roll_gallants:          318  # Tracks totals
-  roll_chaos:             319  # Tracks totals
-  roll_beast:             320  # Tracks totals
-  roll_choral:            321  # Tracks totals
-  roll_hunters:           322  # Tracks totals
-  roll_samurai:           323  # Tracks totals
-  roll_ninja:             324  # Tracks totals
-  roll_drachen:           325  # Tracks totals
-  roll_evokers:           326  # Tracks totals
-  roll_magus:             327  # Tracks totals
-  roll_corsairs:          328  # Tracks totals
-  roll_puppet:            329  # Tracks totals
-  roll_dancers:           330  # Tracks totals
-  roll_scholars:          331  # Tracks totals
-  roll_bolters:           869  # Tracks totals
-  roll_casters:           870  # Tracks totals
-  roll_coursers:          871  # Tracks totals
-  roll_blitzers:          872  # Tracks totals
-  roll_tacticians:        873  # Tracks totals
-  roll_allies:            874  # Tracks totals
-  roll_misers:            875  # Tracks totals
-  roll_companions:        876  # Tracks totals
-  roll_avengers:          877  # Tracks totals
-  roll_naturalists:       878  # Tracks totals
-  roll_runeists:          879  # Tracks totals
-  bust:                   332  # # of busts
-  quick_draw_dmg:         411  # Flat damage increase to base QD damage
-  quick_draw_dmg_percent: 834  # Percentage increase to QD damage
-  quick_draw_macc:        191  # Quick draw magic accuracy
-  phantom_roll:           881  # Phantom Roll+ Effect from SOA Rings.
-  phantom_duration:       882  # Phantom Roll Duration +.
+  dmg_reflect:             316 # Tracks totals
+  roll_rogues:             317 # Tracks totals
+  roll_gallants:           318 # Tracks totals
+  roll_chaos:              319 # Tracks totals
+  roll_beast:              320 # Tracks totals
+  roll_choral:             321 # Tracks totals
+  roll_hunters:            322 # Tracks totals
+  roll_samurai:            323 # Tracks totals
+  roll_ninja:              324 # Tracks totals
+  roll_drachen:            325 # Tracks totals
+  roll_evokers:            326 # Tracks totals
+  roll_magus:              327 # Tracks totals
+  roll_corsairs:           328 # Tracks totals
+  roll_puppet:             329 # Tracks totals
+  roll_dancers:            330 # Tracks totals
+  roll_scholars:           331 # Tracks totals
+  roll_bolters:            869 # Tracks totals
+  roll_casters:            870 # Tracks totals
+  roll_coursers:           871 # Tracks totals
+  roll_blitzers:           872 # Tracks totals
+  roll_tacticians:         873 # Tracks totals
+  roll_allies:             874 # Tracks totals
+  roll_misers:             875 # Tracks totals
+  roll_companions:         876 # Tracks totals
+  roll_avengers:           877 # Tracks totals
+  roll_naturalists:        878 # Tracks totals
+  roll_runeists:           879 # Tracks totals
+  bust:                    332 # # of busts
+  quick_draw_dmg:          411 # Flat damage increase to base QD damage
+  quick_draw_dmg_percent:  834 # Percentage increase to QD damage
+  quick_draw_macc:         191 # Quick draw magic accuracy
+  phantom_roll:            881 # Phantom Roll+ Effect from SOA Rings.
+  phantom_duration:        882 # Phantom Roll Duration +.
   phantom_recast:         1076 # Phantom Roll Recast -.
   # Puppetmaster
-  auto_mab_coefficient:        157  # Applies a MAB multiplier to automatons. This value is the bonus %.
-  maneuver_bonus:              504  # Maneuver Stat Bonus
-  overload_thresh:             505  # Overload Threshold Bonus
-  auto_decision_delay:         842  # Reduces the Automaton's global decision delay
-  auto_shield_bash_delay:      843  # Reduces the Automaton's global shield bash delay
-  auto_magic_cooldown:         844  # Adjusts the Automaton's global magic cooldown (negative value reduces cooldown, positive value increases cooldown)
-  auto_healing_delay:          845  # Reduces the Automaton's global healing delay
-  auto_healing_threshold:      846  # Increases the healing trigger threshold
-  burden_decay:                847  # Increases amount of burden removed per tick
-  auto_shield_bash_slow:       848  # Adds a slow effect to Shield Bash
-  auto_tp_efficiency:          849  # Causes the Automaton to wait to form a skillchain when its master is > 90% TP
-  auto_scan_resists:           850  # Causes the Automaton to scan a target's resistances
-  repair_effect:               853  # Removes # of status effects from the Automaton
-  repair_potency:              854  # Note: Only affects amount regenerated by a %, not the instant restore!
-  prevent_overload:            855  # Overloading erases a water maneuver (except on water overloads) instead, if there is one
-  suppress_overload:           125  # Kenkonken "Suppresses Overload" mod. Unclear how this works exactly. Requires testing on retail.
-  auto_steam_jacket_reduction: 939  # Percent damage reduction from Steam Jacket
-  auto_schurzen:               940  # Prevents fatal damage leaving the automaton at 1HP and consumes an Earth manuever
-  auto_equalizer:              941  # Reduces damage received according to damage taken
-  auto_performance_boost:      942  # Increases the performance of other attachments by a percentage
-  auto_analyzer:               943  # Causes the Automaton to mitigate damage from a special attack a number of times
-  auto_elem_capacity:          987  # Increases the automaton's elemental capacity for attachments
+  auto_mab_coefficient:         157 # Applies a MAB multiplier to automatons. This value is the bonus %.
+  maneuver_bonus:               504 # Maneuver Stat Bonus
+  overload_thresh:              505 # Overload Threshold Bonus
+  auto_decision_delay:          842 # Reduces the Automaton's global decision delay
+  auto_shield_bash_delay:       843 # Reduces the Automaton's global shield bash delay
+  auto_magic_cooldown:          844 # Adjusts the Automaton's global magic cooldown (negative value reduces cooldown, positive value increases cooldown)
+  auto_healing_delay:           845 # Reduces the Automaton's global healing delay
+  auto_healing_threshold:       846 # Increases the healing trigger threshold
+  burden_decay:                 847 # Increases amount of burden removed per tick
+  auto_shield_bash_slow:        848 # Adds a slow effect to Shield Bash
+  auto_tp_efficiency:           849 # Causes the Automaton to wait to form a skillchain when its master is > 90% TP
+  auto_scan_resists:            850 # Causes the Automaton to scan a target's resistances
+  repair_effect:                853 # Removes # of status effects from the Automaton
+  repair_potency:               854 # Note: Only affects amount regenerated by a %, not the instant restore!
+  prevent_overload:             855 # Overloading erases a water maneuver (except on water overloads) instead, if there is one
+  suppress_overload:            125 # Kenkonken "Suppresses Overload" mod. Unclear how this works exactly. Requires testing on retail.
+  auto_steam_jacket_reduction:  939 # Percent damage reduction from Steam Jacket
+  auto_schurzen:                940 # Prevents fatal damage leaving the automaton at 1HP and consumes an Earth manuever
+  auto_equalizer:               941 # Reduces damage received according to damage taken
+  auto_performance_boost:       942 # Increases the performance of other attachments by a percentage
+  auto_analyzer:                943 # Causes the Automaton to mitigate damage from a special attack a number of times
+  auto_elem_capacity:           987 # Increases the automaton's elemental capacity for attachments
   auto_ranged_delay:           1001 # Decreases the amount of time between ranged attacks
   auto_ranged_damagep:         1002 # Increase automaton ranged weapon damage by a %
   automaton_lvl_bonus:         1044 # Automaton: Lv. (Increases automaton's base level above 99)
@@ -708,67 +708,67 @@ values:
   tactical_switch_tp_bonus:    1199 # TP bonus granted by Tactical Switch (percent)
   overdrive_bonus_duration:    1200 # Extra seconds added to Overdrive
   # Dancer
-  finishing_moves:          333  # Tracks # of finishing moves
-  samba_duration:           490  # Samba duration bonus
-  waltz_potency:            491  # Waltz Potency Bonus
-  jig_duration:             492  # Jig duration bonus in percents
-  vflourish_macc:           493  # Violent Flourish accuracy bonus
-  step_finish:              494  # Bonus finishing moves from steps
-  step_accuracy:            403  # Bonus accuracy for Dancer's steps
-  waltz_delay:              497  # Waltz Ability Delay modifier (-1 mod is -1 second)
-  samba_pduration:          498  # Samba percent duration bonus
-  reverse_flourish_effect:  836  # Reverse Flourish effect in tenths of squared term multiplier
-  max_finishing_move_bonus: 988  # Increases the maximum number of finishing moves that may be stored
-  waltz_cost:               139  # Reduce Waltz cost by 5tp (50 post 1000tp scale)
+  finishing_moves:           333 # Tracks # of finishing moves
+  samba_duration:            490 # Samba duration bonus
+  waltz_potency:             491 # Waltz Potency Bonus
+  jig_duration:              492 # Jig duration bonus in percents
+  vflourish_macc:            493 # Violent Flourish accuracy bonus
+  step_finish:               494 # Bonus finishing moves from steps
+  step_accuracy:             403 # Bonus accuracy for Dancer's steps
+  waltz_delay:               497 # Waltz Ability Delay modifier (-1 mod is -1 second)
+  samba_pduration:           498 # Samba percent duration bonus
+  reverse_flourish_effect:   836 # Reverse Flourish effect in tenths of squared term multiplier
+  max_finishing_move_bonus:  988 # Increases the maximum number of finishing moves that may be stored
+  waltz_cost:                139 # Reduce Waltz cost by 5tp (50 post 1000tp scale)
   step_tp_consumed:         1077 # Modifies the amount of TP consumed when using steps
   # Scholar
-  black_magic_cost:         393  # MP cost for black magic (light/dark arts)
-  white_magic_cost:         394  # MP cost for white magic (light/dark arts)
-  black_magic_cast:         395  # Cast time for black magic (light/dark arts)
-  white_magic_cast:         396  # Cast time for black magic (light/dark arts)
-  black_magic_recast:       397  # Recast time for black magic (light/dark arts)
-  white_magic_recast:       398  # Recast time for white magic (light/dark arts)
-  alacrity_celerity_effect: 399  # Bonus for celerity/alacrity effect
-  light_arts_effect:        334
-  dark_arts_effect:         335
-  light_arts_skill:         336
-  dark_arts_skill:          337
-  light_arts_regen:         338  # Regen bonus flat HP amount from Light Arts and Tabula Rasa
-  regen_duration:           339
-  helix_effect:             478
-  helix_duration:           477
-  stormsurge_effect:        400
-  sublimation_bonus:        401
-  grimoire_spellcasting:    489  # "Grimoire: Reduces spellcasting time" bonus
+  black_magic_cost:          393 # MP cost for black magic (light/dark arts)
+  white_magic_cost:          394 # MP cost for white magic (light/dark arts)
+  black_magic_cast:          395 # Cast time for black magic (light/dark arts)
+  white_magic_cast:          396 # Cast time for black magic (light/dark arts)
+  black_magic_recast:        397 # Recast time for black magic (light/dark arts)
+  white_magic_recast:        398 # Recast time for white magic (light/dark arts)
+  alacrity_celerity_effect:  399 # Bonus for celerity/alacrity effect
+  light_arts_effect:         334
+  dark_arts_effect:          335
+  light_arts_skill:          336
+  dark_arts_skill:           337
+  light_arts_regen:          338 # Regen bonus flat HP amount from Light Arts and Tabula Rasa
+  regen_duration:            339
+  helix_effect:              478
+  helix_duration:            477
+  stormsurge_effect:         400
+  sublimation_bonus:         401
+  grimoire_spellcasting:     489 # "Grimoire: Reduces spellcasting time" bonus
   stratagem_recast:         1159 # Recast reduction in seconds
   # Geo
-  cardinal_chant:       959
+  cardinal_chant:        959
   cardinal_chant_bonus: 1132 # Geomancy galero
-  indi_duration:        960
-  geomancy_bonus:       961  # Used to increase potency of "Geomancy +" items (only the highest value is counted)
-  widened_compass:      962
-  mending_halation:     968  # This mod should never exceed 1 as the multiplier is the merit, this is basicaly just a bool mod
-  radial_arcana:        969
-  curative_recantation: 970
-  primeval_zeal:        971
+  indi_duration:         960
+  geomancy_bonus:        961 # Used to increase potency of "Geomancy +" items (only the highest value is counted)
+  widened_compass:       962
+  mending_halation:      968 # This mod should never exceed 1 as the multiplier is the merit, this is basicaly just a bool mod
+  radial_arcana:         969
+  curative_recantation:  970
+  primeval_zeal:         971
   full_circle:          1025 # Increases the initial multiplier on MP returned via Full Circle
   bolster_effect:       1028 # Adds bonus duration as +N seconds
   life_cycle_effect:    1029 # Adds bonus HP% returned to the luopan when using Life Cycle
   aura_size:            1030 # Used to extend aura size, the formula is 6.25 + (PEntity->getMod(Mod::AURA_SIZE) / 100) so adding 100 will make this 7.25
-  enspell:              341  # stores the type of enspell active (0 if nothing)
-  enspell_dmg:          343  # stores the base damage of the enspell before reductions
-  enspell_dmg_bonus:    432  # adds X to the base damage of the enspell before bonuses and reductions
-  enspell_chance:       856  # Chance of enspell activating (0 = 100%, 10 = 10%, 30 = 30%, ...)
+  enspell:               341 # stores the type of enspell active (0 if nothing)
+  enspell_dmg:           343 # stores the base damage of the enspell before reductions
+  enspell_dmg_bonus:     432 # adds X to the base damage of the enspell before bonuses and reductions
+  enspell_chance:        856 # Chance of enspell activating (0 = 100%, 10 = 10%, 30 = 30%, ...)
   enspell_dmg_pct:      1195 # adds X% to the multiplier applied to enspell damage after base damage is calculated, before day and weather bonuses and reductions
-  enspell_duration:     938  # Adds a flat bonus to duration in seconds. Examples: Buzzard tuck, Brilliance.
-  spikes:               342  # store the type of spike spell active (0 if nothing)
-  spikes_dmg:           344  # stores the base damage of the spikes before reductions
+  enspell_duration:      938 # Adds a flat bonus to duration in seconds. Examples: Buzzard tuck, Brilliance.
+  spikes:                342 # store the type of spike spell active (0 if nothing)
+  spikes_dmg:            344 # stores the base damage of the spikes before reductions
   spikes_dmg_bonus:     1079 # Increases Blaze/Ice/Shock spikes damage by percentage (e.g. mod value 50 = +50% spikes damage)
-  tp_bonus:             345
-  savetp:               880  # SAVETP Effect for Miser's Roll / ATMA / Hagakure.
-  conserve_tp:          944  # Conserve TP trait, random chance between 10 and 200 TP
+  tp_bonus:              345
+  savetp:                880 # SAVETP Effect for Miser's Roll / ATMA / Hagakure.
+  conserve_tp:           944 # Conserve TP trait, random chance between 10 and 200 TP
   # Rune Fencer
-  inquartata:                  963  # Increases parry rate by a flat %.
+  inquartata:                   963 # Increases parry rate by a flat %.
   enhances_battuta:            1004 # Used by RUN merit point cat 2 to add +N% bonus damage to parry spikes during Battuta effect
   enhances_elemental_sforzo:   1005 # Bonus duration
   enhances_sleight_of_sword:   1006 # Used by RUN merit point cat 2 to add +N Subtle Blow to Swordplay
@@ -790,51 +790,51 @@ values:
   parry_spikes:                1022 # Battuta parry spikes rate
   parry_spikes_dmg:            1023 # Battuta parry spikes damage
   special_attack_evasion:      1024 # Foil "Special Attack" evasion
-  augments_sleight_of_sword:   277  # Enhances bonus "Subtle Blow" per merit.
-  fire_staff_bonus:            347
-  ice_staff_bonus:             348
-  wind_staff_bonus:            349
-  earth_staff_bonus:           350
-  thunder_staff_bonus:         351
-  water_staff_bonus:           352
-  light_staff_bonus:           353
-  dark_staff_bonus:            354
-  fire_affinity_perp:          553
-  ice_affinity_perp:           554
-  wind_affinity_perp:          555
-  earth_affinity_perp:         556
-  thunder_affinity_perp:       557
-  water_affinity_perp:         558
-  light_affinity_perp:         559
-  dark_affinity_perp:          560
+  augments_sleight_of_sword:    277 # Enhances bonus "Subtle Blow" per merit.
+  fire_staff_bonus:             347
+  ice_staff_bonus:              348
+  wind_staff_bonus:             349
+  earth_staff_bonus:            350
+  thunder_staff_bonus:          351
+  water_staff_bonus:            352
+  light_staff_bonus:            353
+  dark_staff_bonus:             354
+  fire_affinity_perp:           553
+  ice_affinity_perp:            554
+  wind_affinity_perp:           555
+  earth_affinity_perp:          556
+  thunder_affinity_perp:        557
+  water_affinity_perp:          558
+  light_affinity_perp:          559
+  dark_affinity_perp:           560
   # Special Modifier+
-  adds_weaponskill:   355
-  stealth:            358
-  sneak_duration:     946  # Additional duration in seconds
-  invisible_duration: 947  # Additional duration in seconds
-  dmg_rating:         287  # adds damage rating to weapon (+DMG augments, maneater/blau dolch etc hidden effects)
-  main_dmg_rating:    366  # adds damage rating to mainhand weapon
-  sub_dmg_rating:     367  # adds damage rating to off hand weapon
-  ranged_dmg_rating:  376  # adds damage rating to ranged weapon
-  main_dmg_rank:      377  # adds weapon rank to main weapon http://wiki.bluegartr.com/bg/Weapon_Rank
-  sub_dmg_rank:       378  # adds weapon rank to sub weapon
-  ranged_dmg_rank:    379  # adds weapon rank to ranged weapon
-  regain:             368  # auto regain TP (from items) | this is multiplied by 10 e.g. 20 is 2% TP
-  regain_down:        406  # plague, reduce tp
-  refresh:            369  # auto refresh from equipment
-  refresh_down:       405  # plague, reduce mp
-  regen:              370  # auto regen from equipment
-  regen_down:         404  # poison
-  cure_potency:       374  # % cure potency | bonus from gear is capped at 50
-  cure_potency_ii:    260  # % cure potency II | bonus from gear is capped at 30
-  cure_potency_rcvd:  375  # % potency of received cure | healer's roll, some items have this
+  adds_weaponskill:    355
+  stealth:             358
+  sneak_duration:      946 # Additional duration in seconds
+  invisible_duration:  947 # Additional duration in seconds
+  dmg_rating:          287 # adds damage rating to weapon (+DMG augments, maneater/blau dolch etc hidden effects)
+  main_dmg_rating:     366 # adds damage rating to mainhand weapon
+  sub_dmg_rating:      367 # adds damage rating to off hand weapon
+  ranged_dmg_rating:   376 # adds damage rating to ranged weapon
+  main_dmg_rank:       377 # adds weapon rank to main weapon http://wiki.bluegartr.com/bg/Weapon_Rank
+  sub_dmg_rank:        378 # adds weapon rank to sub weapon
+  ranged_dmg_rank:     379 # adds weapon rank to ranged weapon
+  regain:              368 # auto regain TP (from items) | this is multiplied by 10 e.g. 20 is 2% TP
+  regain_down:         406 # plague, reduce tp
+  refresh:             369 # auto refresh from equipment
+  refresh_down:        405 # plague, reduce mp
+  regen:               370 # auto regen from equipment
+  regen_down:          404 # poison
+  cure_potency:        374 # % cure potency | bonus from gear is capped at 50
+  cure_potency_ii:     260 # % cure potency II | bonus from gear is capped at 30
+  cure_potency_rcvd:   375 # % potency of received cure | healer's roll, some items have this
   cure_potency_bonus: 1051 # TODO: Increases amount healed by Cure spells (fixed amount)
-  delayp:             380  # delay addition percent (does not affect tp gain)
-  ranged_delayp:      381  # ranged delay addition percent (does not affect tp gain)
-  shield_bash:        385
-  kick_dmg:           386  # increases kick attack damage
-  weapon_bash:        392
-  wyvern_breath:      402
+  delayp:              380 # delay addition percent (does not affect tp gain)
+  ranged_delayp:       381 # ranged delay addition percent (does not affect tp gain)
+  shield_bash:         385
+  kick_dmg:            386 # increases kick attack damage
+  weapon_bash:         392
+  wyvern_breath:       402
   # Gear set modifiers
   da_double_dmg_rate:       408 # Double attack's double damage chance %.
   ta_triple_dmg_rate:       409 # Triple attack's triple damage chance %.
@@ -848,86 +848,86 @@ values:
   grimoire_instant_cast:    419 # Spells that match your current Arts will occasionally cast instantly, without recast.
   quad_attack:              430 # Quadruple attack chance.
   # Reraise (Auto Reraise, used by gear)
-  reraise_i:                    456  # Reraise.
-  reraise_ii:                   457  # Reraise II.
-  reraise_iii:                  458  # Reraise III.
-  absorb_dmg_to_mp:             516  # Unlike PLD gear mod, works on all damage types (Ethereal Earring)
-  item_addeffect_lvadjust:      278  # level correction factor to use, if any
-  item_addeffect_placehld:      279  # placeholder, want to keep these together and 99% sure we'll use this
-  item_addeffect_dstat:         280  # value = attacker modifier to use as bonus dmg (mnd, int, etc)
-  item_addeffect_type:          431  # see procType table in scripts\globals\additional_effects.lua
-  item_subeffect:               499  # Animation ID of Spikes and Additional Effects
-  item_addeffect_dmg:           500  # Damage of an items Additional Effect or Spikes
-  item_addeffect_chance:        501  # Chance of an items Additional Effect or Spikes
-  item_addeffect_element:       950  # Element of the Additional Effect or Spikes, for resist purposes
-  item_addeffect_status:        951  # Status Effect ID to try to apply via Additional Effect or Spikes
-  item_addeffect_power:         952  # Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS. Must be used for debuffs/buffs.
-  item_addeffect_duration:      953  # Base Duration for effect in MOD_ITEM_ADDEFFECT_STATUS
+  reraise_i:                     456 # Reraise.
+  reraise_ii:                    457 # Reraise II.
+  reraise_iii:                   458 # Reraise III.
+  absorb_dmg_to_mp:              516 # Unlike PLD gear mod, works on all damage types (Ethereal Earring)
+  item_addeffect_lvadjust:       278 # level correction factor to use, if any
+  item_addeffect_placehld:       279 # placeholder, want to keep these together and 99% sure we'll use this
+  item_addeffect_dstat:          280 # value = attacker modifier to use as bonus dmg (mnd, int, etc)
+  item_addeffect_type:           431 # see procType table in scripts\globals\additional_effects.lua
+  item_subeffect:                499 # Animation ID of Spikes and Additional Effects
+  item_addeffect_dmg:            500 # Damage of an items Additional Effect or Spikes
+  item_addeffect_chance:         501 # Chance of an items Additional Effect or Spikes
+  item_addeffect_element:        950 # Element of the Additional Effect or Spikes, for resist purposes
+  item_addeffect_status:         951 # Status Effect ID to try to apply via Additional Effect or Spikes
+  item_addeffect_power:          952 # Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS. Must be used for debuffs/buffs.
+  item_addeffect_duration:       953 # Base Duration for effect in MOD_ITEM_ADDEFFECT_STATUS
   item_addeffect_priority:      1180 # Set to 1 to check add effect anyway even if enspells etc have already occured
   item_addeffect_scripted:      1181 # Set to 1 to run item script directly instead of through scripts\globals\additional_effects.lua
-  gov_clears:                   496  # 4% bonus per Grounds of Valor Page clear
-  aftermath:                    256  # Aftermath ID
-  extra_dmg_chance:             506  # Proc rate of OCC_DO_EXTRA_DMG. 111 would be 11.1%
-  occ_do_extra_dmg:             507  # Multiplier for "Occasionally do x times normal damage". 250 would be 2.5 times damage.
-  rem_occ_do_double_dmg:        863  # Proc rate for REM Aftermaths that apply "Occasionally do double damage"
-  rem_occ_do_triple_dmg:        864  # Proc rate for REM Aftermaths that apply "Occasionally do triple damage"
-  rem_occ_do_double_dmg_ranged: 867  # Ranged attack specific
-  rem_occ_do_triple_dmg_ranged: 868  # Ranged attack specific
-  mythic_occ_att_twice:         865  # Proc rate for "Occasionally attacks twice"
-  mythic_occ_att_thrice:        866  # Proc rate for "Occasionally attacks thrice"
-  appreciate_gysahl_greens:     156  # Enhances food effect of Gysahl Greens
-  eat_raw_fish:                 412  # Without this, only Mithra can eat raw fish (item cannot be used)
-  eat_raw_meat:                 413  # Without this, only Galka can eat raw meat (item cannot be used)
-  drink_distilled:              159  # Without this, Distilled Water cannot be consumed (item can still be used)
-  equipment_only_race:          276  # An 8-bit flag that denotes that only a certain race(s) can use this equipment (0 means all races can use)
-  enhances_cursna_rcvd:         67   # Potency of "Cursna" effects received
-  enhances_cursna:              310  # Used by gear with the "Enhances Cursna" or "Cursna+" attribute
-  enhances_holywater:           495  # Used by gear with the "Enhances Holy Water" or "Holy Water+" attribute
-  enhances_prot_shell_rcvd:     977  # Enhances Protect and Shell Effects Received (Binary MOD)
+  gov_clears:                    496 # 4% bonus per Grounds of Valor Page clear
+  aftermath:                     256 # Aftermath ID
+  extra_dmg_chance:              506 # Proc rate of OCC_DO_EXTRA_DMG. 111 would be 11.1%
+  occ_do_extra_dmg:              507 # Multiplier for "Occasionally do x times normal damage". 250 would be 2.5 times damage.
+  rem_occ_do_double_dmg:         863 # Proc rate for REM Aftermaths that apply "Occasionally do double damage"
+  rem_occ_do_triple_dmg:         864 # Proc rate for REM Aftermaths that apply "Occasionally do triple damage"
+  rem_occ_do_double_dmg_ranged:  867 # Ranged attack specific
+  rem_occ_do_triple_dmg_ranged:  868 # Ranged attack specific
+  mythic_occ_att_twice:          865 # Proc rate for "Occasionally attacks twice"
+  mythic_occ_att_thrice:         866 # Proc rate for "Occasionally attacks thrice"
+  appreciate_gysahl_greens:      156 # Enhances food effect of Gysahl Greens
+  eat_raw_fish:                  412 # Without this, only Mithra can eat raw fish (item cannot be used)
+  eat_raw_meat:                  413 # Without this, only Galka can eat raw meat (item cannot be used)
+  drink_distilled:               159 # Without this, Distilled Water cannot be consumed (item can still be used)
+  equipment_only_race:           276 # An 8-bit flag that denotes that only a certain race(s) can use this equipment (0 means all races can use)
+  enhances_cursna_rcvd:           67 # Potency of "Cursna" effects received
+  enhances_cursna:               310 # Used by gear with the "Enhances Cursna" or "Cursna+" attribute
+  enhances_holywater:            495 # Used by gear with the "Enhances Holy Water" or "Holy Water+" attribute
+  enhances_prot_shell_rcvd:      977 # Enhances Protect and Shell Effects Received (Binary MOD)
   enhances_prot_rcvd:           1050 # TODO: Enhances Protect Received (Percent)
-  retaliation:                  414  # Increases damage of Retaliation hits
-  clamming_improved_results:    509
-  clamming_reduced_incidents:   510
-  chocobo_riding_time:          511  # Increases chocobo riding time
-  harvesting_result:            513  # Improves harvesting results
-  logging_result:               514  # Improves logging results
-  mining_result:                515  # Improves mining results
-  egghelm:                      517
-  shieldblockrate:              518  # Affects shield block rate, percent based
-  dia_dot:                      313  # Increases the DoT damage of Dia
-  enh_drain_aspir:              315  # % damage boost to Drain and Aspir
-  augments_absorb_liberator:    521  # Direct Absorb spell increase while Liberator is equipped (percentage based) (Augments "Absorb" spells)
-  ammo_swing:                   523  # Follow-up swing rate w/ virtue stone ammo (Jailer weapons). Does nothing for non-players.
-  augments_convert:             525  # Convert HP to MP Ratio Multiplier. Value = MP multiplier rate.
-  augments_sa:                  526  # Adds Critical Attack Bonus to Sneak Attack, percentage based.
-  augments_ta:                  527  # Adds Critical Attack Bonus to Trick Attack, percentage based.
-  augments_feint:               502  # Feint will give another -10 Evasion per merit level
-  augments_assassins_charge:    886  # Gives Assassin's Charge +1% Critical Hit Rate per merit level
-  augments_ambush:              887  # Gives +1% Triple Attack per merit level when Ambush conditions are met
-  augments_aura_steal:          889  # 20% chance of 2 effects to be dispelled or stolen per merit level
-  augments_conspirator:         912  # Applies Conspirator benefits to player at the top of the hate list
-  enhances_refresh:             529  # "Enhances Refresh" adds +1 per modifier to spell's tick result.
-  no_spell_mp_depletion:        530  # % to not deplete MP on spellcast.
-  stoneskin_bonus_hp:           539  # Bonus "HP" granted to Stoneskin spell.
-  day_nuke_bonus:               565  # Bonus damage from "Elemental magic affected by day" (Sorc. Tonban)
+  retaliation:                   414 # Increases damage of Retaliation hits
+  clamming_improved_results:     509
+  clamming_reduced_incidents:    510
+  chocobo_riding_time:           511 # Increases chocobo riding time
+  harvesting_result:             513 # Improves harvesting results
+  logging_result:                514 # Improves logging results
+  mining_result:                 515 # Improves mining results
+  egghelm:                       517
+  shieldblockrate:               518 # Affects shield block rate, percent based
+  dia_dot:                       313 # Increases the DoT damage of Dia
+  enh_drain_aspir:               315 # % damage boost to Drain and Aspir
+  augments_absorb_liberator:     521 # Direct Absorb spell increase while Liberator is equipped (percentage based) (Augments "Absorb" spells)
+  ammo_swing:                    523 # Follow-up swing rate w/ virtue stone ammo (Jailer weapons). Does nothing for non-players.
+  augments_convert:              525 # Convert HP to MP Ratio Multiplier. Value = MP multiplier rate.
+  augments_sa:                   526 # Adds Critical Attack Bonus to Sneak Attack, percentage based.
+  augments_ta:                   527 # Adds Critical Attack Bonus to Trick Attack, percentage based.
+  augments_feint:                502 # Feint will give another -10 Evasion per merit level
+  augments_assassins_charge:     886 # Gives Assassin's Charge +1% Critical Hit Rate per merit level
+  augments_ambush:               887 # Gives +1% Triple Attack per merit level when Ambush conditions are met
+  augments_aura_steal:           889 # 20% chance of 2 effects to be dispelled or stolen per merit level
+  augments_conspirator:          912 # Applies Conspirator benefits to player at the top of the hate list
+  enhances_refresh:              529 # "Enhances Refresh" adds +1 per modifier to spell's tick result.
+  no_spell_mp_depletion:         530 # % to not deplete MP on spellcast.
+  stoneskin_bonus_hp:            539 # Bonus "HP" granted to Stoneskin spell.
+  day_nuke_bonus:                565 # Bonus damage from "Elemental magic affected by day" (Sorc. Tonban)
   day_weather_proc_bonus:       1194 # Bonus damage from Twilight cape which works with both day OR weather procs.
-  iridescence:                  566  # Iridescence trait (additional weather damage/penalty)
-  barspell_amount:              567  # Additional elemental resistance granted by bar- spells
-  barspell_mdef_bonus:          827  # Extra magic defense bonus granted to the bar- spell effect
-  rapture_amount:               568  # Bonus amount added to Rapture effect
-  ebullience_amount:            569  # Bonus amount added to Ebullience effect
-  aquaveil_count:               832  # Modifies the amount of hits that Aquaveil absorbs before being removed
-  enh_magic_duration:           890  # Enhancing Magic Duration increase %
-  enhances_coursers_roll:       891  # Courser's Roll Bonus % chance
-  enhances_casters_roll:        892  # Caster's Roll Bonus % chance
-  enhances_blitzers_roll:       893  # Blitzer's Roll Bonus % chance
-  enhances_allies_roll:         894  # Allies' Roll Bonus % chance
-  enhances_tacticians_roll:     895  # Tactician's Roll Bonus % chance
-  occult_acumen:                902  # Grants bonus TP when dealing damage with elemental or dark magic
-  quick_magic:                  909  # Percent chance spells cast instantly (also reduces recast to 0, similar to Chainspell)
+  iridescence:                   566 # Iridescence trait (additional weather damage/penalty)
+  barspell_amount:               567 # Additional elemental resistance granted by bar- spells
+  barspell_mdef_bonus:           827 # Extra magic defense bonus granted to the bar- spell effect
+  rapture_amount:                568 # Bonus amount added to Rapture effect
+  ebullience_amount:             569 # Bonus amount added to Ebullience effect
+  aquaveil_count:                832 # Modifies the amount of hits that Aquaveil absorbs before being removed
+  enh_magic_duration:            890 # Enhancing Magic Duration increase %
+  enhances_coursers_roll:        891 # Courser's Roll Bonus % chance
+  enhances_casters_roll:         892 # Caster's Roll Bonus % chance
+  enhances_blitzers_roll:        893 # Blitzer's Roll Bonus % chance
+  enhances_allies_roll:          894 # Allies' Roll Bonus % chance
+  enhances_tacticians_roll:      895 # Tactician's Roll Bonus % chance
+  occult_acumen:                 902 # Grants bonus TP when dealing damage with elemental or dark magic
+  quick_magic:                   909 # Percent chance spells cast instantly (also reduces recast to 0, similar to Chainspell)
   # Crafting food effects
-  synth_success_rate:               851  # Success rate bonus (percent) for all synths except desynths.
-  synth_success_rate_desynthesis:   916  # Success rate bonus (percent) for desynths, specifically.
+  synth_success_rate:                851 # Success rate bonus (percent) for all synths except desynths.
+  synth_success_rate_desynthesis:    916 # Success rate bonus (percent) for desynths, specifically.
   synth_success_rate_woodworking:   1098 # Success rate bonus (percent) for Woodworking, specifically.
   synth_success_rate_smithing:      1099 # Success rate bonus (percent) for Smithing, specifically.
   synth_success_rate_goldsmithing:  1100 # Success rate bonus (percent) for Goldsmithing, specifically.
@@ -936,7 +936,7 @@ values:
   synth_success_rate_bonecraft:     1103 # Success rate bonus (percent) for Bonecraft, specifically.
   synth_success_rate_alchemy:       1104 # Success rate bonus (percent) for Alchemy, specifically.
   synth_success_rate_cooking:       1105 # Success rate bonus (percent) for Cooking, specifically.
-  synth_skill_gain:                 852  # Synthesis skill gain rate
+  synth_skill_gain:                  852 # Synthesis skill gain rate
   synth_speed_woodworking:          1106 # Escutcheon (Phase 3 & 4). Bonus to synth speed (Makes process faster. Assuming miliseconds)
   synth_speed_smithing:             1107 # Escutcheon (Phase 3 & 4). Bonus to synth speed (Makes process faster. Assuming miliseconds)
   synth_speed_goldsmithing:         1108 # Escutcheon (Phase 3 & 4). Bonus to synth speed (Makes process faster. Assuming miliseconds)
@@ -953,15 +953,15 @@ values:
   synth_anti_nq_bonecraft:          1119 # Escutcheon (Phase 4) "Artisanal Knowledge" Enchantment. Prevents NQ results, making them fails.
   synth_anti_nq_alchemy:            1120 # Escutcheon (Phase 4) "Artisanal Knowledge" Enchantment. Prevents NQ results, making them fails.
   synth_anti_nq_cooking:            1121 # Escutcheon (Phase 4) "Artisanal Knowledge" Enchantment. Prevents NQ results, making them fails.
-  synth_anti_hq_woodworking:        144  # Craft Rings. They ONLY prevent their associated skill type HQs, even if item description doesn't state it.
-  synth_anti_hq_smithing:           145  # Craft Rings. They ONLY prevent their associated skill type HQs, even if item description doesn't state it.
-  synth_anti_hq_goldsmithing:       146  # Craft Rings. They ONLY prevent their associated skill type HQs, even if item description doesn't state it.
-  synth_anti_hq_clothcraft:         147  # Craft Rings. They ONLY prevent their associated skill type HQs, even if item description doesn't state it.
-  synth_anti_hq_leathercraft:       148  # Craft Rings. They ONLY prevent their associated skill type HQs, even if item description doesn't state it.
-  synth_anti_hq_bonecraft:          149  # Craft Rings. They ONLY prevent their associated skill type HQs, even if item description doesn't state it.
-  synth_anti_hq_alchemy:            150  # Craft Rings. They ONLY prevent their associated skill type HQs, even if item description doesn't state it.
-  synth_anti_hq_cooking:            151  # Craft Rings. They ONLY prevent their associated skill type HQs, even if item description doesn't state it.
-  synth_hq_rate:                    862  # High-quality success rate (not a percent)
+  synth_anti_hq_woodworking:         144 # Craft Rings. They ONLY prevent their associated skill type HQs, even if item description doesn't state it.
+  synth_anti_hq_smithing:            145 # Craft Rings. They ONLY prevent their associated skill type HQs, even if item description doesn't state it.
+  synth_anti_hq_goldsmithing:        146 # Craft Rings. They ONLY prevent their associated skill type HQs, even if item description doesn't state it.
+  synth_anti_hq_clothcraft:          147 # Craft Rings. They ONLY prevent their associated skill type HQs, even if item description doesn't state it.
+  synth_anti_hq_leathercraft:        148 # Craft Rings. They ONLY prevent their associated skill type HQs, even if item description doesn't state it.
+  synth_anti_hq_bonecraft:           149 # Craft Rings. They ONLY prevent their associated skill type HQs, even if item description doesn't state it.
+  synth_anti_hq_alchemy:             150 # Craft Rings. They ONLY prevent their associated skill type HQs, even if item description doesn't state it.
+  synth_anti_hq_cooking:             151 # Craft Rings. They ONLY prevent their associated skill type HQs, even if item description doesn't state it.
+  synth_hq_rate:                     862 # High-quality success rate (not a percent)
   synth_hq_rate_woodworking:        1122 # High-quality success rate (not a percent) for specific skill. Used by Escutcheon's enchantment.
   synth_hq_rate_smithing:           1123 # High-quality success rate (not a percent) for specific skill. Used by Escutcheon's enchantment.
   synth_hq_rate_goldsmithing:       1124 # High-quality success rate (not a percent) for specific skill. Used by Escutcheon's enchantment.
@@ -970,23 +970,23 @@ values:
   synth_hq_rate_bonecraft:          1127 # High-quality success rate (not a percent) for specific skill. Used by Escutcheon's enchantment.
   synth_hq_rate_alchemy:            1128 # High-quality success rate (not a percent) for specific skill. Used by Escutcheon's enchantment.
   synth_hq_rate_cooking:            1129 # High-quality success rate (not a percent) for specific skill. Used by Escutcheon's enchantment.
-  synth_material_loss:              861  # Material loss rate (percent) for all synths.
-  synth_material_loss_woodworking:  925  # Material loss rate (percent) when doing woodworking
-  synth_material_loss_smithing:     926  # Material loss rate (percent) when doing smithing
-  synth_material_loss_goldsmithing: 927  # Material loss rate (percent) when doing goldsmithing
-  synth_material_loss_clothcraft:   928  # Material loss rate (percent) when doing clothcraft
-  synth_material_loss_leathercraft: 929  # Material loss rate (percent) when doing leathercraft
-  synth_material_loss_bonecraft:    930  # Material loss rate (percent) when doing bonecraft
-  synth_material_loss_alchemy:      931  # Material loss rate (percent) when doing alchemy
-  synth_material_loss_cooking:      932  # Material loss rate (percent) when doing cooking
-  synth_material_loss_fire:         917  # Material loss rate (percent) when using a fire crystal (or HQ version)
-  synth_material_loss_ice:          918  # Material loss rate (percent) when using a ice crystal (or HQ version)
-  synth_material_loss_wind:         919  # Material loss rate (percent) when using a wind crystal (or HQ version)
-  synth_material_loss_earth:        920  # Material loss rate (percent) when using a earth crystal (or HQ version)
-  synth_material_loss_thunder:      921  # Material loss rate (percent) when using a lightning crystal (or HQ version)
-  synth_material_loss_water:        922  # Material loss rate (percent) when using a water crystal (or HQ version)
-  synth_material_loss_light:        923  # Material loss rate (percent) when using a light crystal (or HQ version)
-  synth_material_loss_dark:         924  # Material loss rate (percent) when using a dark crystal (or HQ version)
+  synth_material_loss:               861 # Material loss rate (percent) for all synths.
+  synth_material_loss_woodworking:   925 # Material loss rate (percent) when doing woodworking
+  synth_material_loss_smithing:      926 # Material loss rate (percent) when doing smithing
+  synth_material_loss_goldsmithing:  927 # Material loss rate (percent) when doing goldsmithing
+  synth_material_loss_clothcraft:    928 # Material loss rate (percent) when doing clothcraft
+  synth_material_loss_leathercraft:  929 # Material loss rate (percent) when doing leathercraft
+  synth_material_loss_bonecraft:     930 # Material loss rate (percent) when doing bonecraft
+  synth_material_loss_alchemy:       931 # Material loss rate (percent) when doing alchemy
+  synth_material_loss_cooking:       932 # Material loss rate (percent) when doing cooking
+  synth_material_loss_fire:          917 # Material loss rate (percent) when using a fire crystal (or HQ version)
+  synth_material_loss_ice:           918 # Material loss rate (percent) when using a ice crystal (or HQ version)
+  synth_material_loss_wind:          919 # Material loss rate (percent) when using a wind crystal (or HQ version)
+  synth_material_loss_earth:         920 # Material loss rate (percent) when using a earth crystal (or HQ version)
+  synth_material_loss_thunder:       921 # Material loss rate (percent) when using a lightning crystal (or HQ version)
+  synth_material_loss_water:         922 # Material loss rate (percent) when using a water crystal (or HQ version)
+  synth_material_loss_light:         923 # Material loss rate (percent) when using a light crystal (or HQ version)
+  synth_material_loss_dark:          924 # Material loss rate (percent) when using a dark crystal (or HQ version)
   # Weaponskill %damage modifiers
   # The following modifier should not ever be set, but %damage modifiers to weaponskills use the next 255 IDs (this modifier + the WSID)
   # For example, +10% damage to Chant du Cygne would be ID 570 + 225 (795)
@@ -1031,8 +1031,8 @@ values:
   breath_dmg_dealt:           1075 # Breath damage dealt
   damage_limit:               1080 # Damage Limit increase, found on some traits. It's a flat value added to max pDIF (maxpDIF + DL/100) https://www.bg-wiki.com/ffxi/Damage_Limit%2B
   damage_limitp:              1081 # Damage Limit +% increase, found on some gear. It's a multiplier added after flat Damage Limit ((maxpDIF + DL/100)*(100 + DLP/100)/100) https://www.ffxiah.com/forum/topic/56649/physical-damage-limit/
-  magic_burst_bonus_capped:   487  # Magic Burst Bonus I from gear, Ancient Magic Merits, Innin merits and Atmas. Cap at 40% bonus (1.4 multiplier)
-  magic_burst_bonus_uncapped: 274  # Magic Burst Bonus II from gear, JP Gifts, BLM JPs and Job traits. No known cap.
+  magic_burst_bonus_capped:    487 # Magic Burst Bonus I from gear, Ancient Magic Merits, Innin merits and Atmas. Cap at 40% bonus (1.4 multiplier)
+  magic_burst_bonus_uncapped:  274 # Magic Burst Bonus II from gear, JP Gifts, BLM JPs and Job traits. No known cap.
   despawn_time_reduction:     1134 # Reduction in seconds. 1 = 1 second less to despawn.
   parry_hp_recovery:          1135 # Recover <Mod Value> HP on successful parry.
   # TODO: These mods are not yet implemented.

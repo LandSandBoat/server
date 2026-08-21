@@ -8,16 +8,16 @@ meta:
     table: xi.job
 
 values:
-  none: 0
-  war:  1
-  mnk:  2
-  whm:  3
-  blm:  4
-  rdm:  5
-  thf:  6
-  pld:  7
-  drk:  8
-  bst:  9
+  none:  0
+  war:   1
+  mnk:   2
+  whm:   3
+  blm:   4
+  rdm:   5
+  thf:   6
+  pld:   7
+  drk:   8
+  bst:   9
   brd:  10
   rng:  11
   sam:  12
